@@ -13,15 +13,15 @@ class PersonalDeadlineManager {
     var counter: PersonalDeadlineCounter
     var storageRecordsAPI: StorageRecordsAPI
     var localStorageManager: PersonalDeadlineLocalStorageManager
-    var notificationManager: PersonalDeadlineNotificationsManager
+    var notificationsService: NotificationsService
 
-    static let shared = PersonalDeadlineManager(counter: PersonalDeadlineCounter(), storageRecordsAPI: StorageRecordsAPI(), localStorageManager: PersonalDeadlineLocalStorageManager(), notificationManager: PersonalDeadlineNotificationsManager())
+    static let shared = PersonalDeadlineManager(counter: PersonalDeadlineCounter(), storageRecordsAPI: StorageRecordsAPI(), localStorageManager: PersonalDeadlineLocalStorageManager(), notificationsService: NotificationsService())
 
-    init(counter: PersonalDeadlineCounter, storageRecordsAPI: StorageRecordsAPI, localStorageManager: PersonalDeadlineLocalStorageManager, notificationManager: PersonalDeadlineNotificationsManager) {
+    init(counter: PersonalDeadlineCounter, storageRecordsAPI: StorageRecordsAPI, localStorageManager: PersonalDeadlineLocalStorageManager, notificationsService: NotificationsService) {
         self.counter = counter
         self.storageRecordsAPI = storageRecordsAPI
         self.localStorageManager = localStorageManager
-        self.notificationManager = notificationManager
+        self.notificationsService = notificationsService
     }
 
     func countDeadlines(for course: Course, mode: DeadlineMode) -> Promise<Void> {
@@ -33,7 +33,7 @@ class PersonalDeadlineManager {
                 return self.storageRecordsAPI.create(record: record)
             }.done { createdRecord in
                 self.localStorageManager.set(storageRecord: createdRecord, for: course)
-                self.notificationManager.updateDeadlineNotifications(for: course)
+                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
@@ -46,12 +46,12 @@ class PersonalDeadlineManager {
             storageRecordsAPI.retrieve(kind: StorageKind.deadline(courseID: course.id), user: userID).done { storageRecords, _ in
                 guard let storageRecord = storageRecords.first else {
                     self.localStorageManager.deleteRecord(for: course)
-                    self.notificationManager.updateDeadlineNotifications(for: course)
+                    self.notificationsService.updatePersonalDeadlineNotifications(for: course)
                     seal.fulfill(())
                     return
                 }
                 self.localStorageManager.set(storageRecord: storageRecord, for: course)
-                self.notificationManager.updateDeadlineNotifications(for: course)
+                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
                 seal.fulfill(())
             }.catch {
                 error in
@@ -78,7 +78,7 @@ class PersonalDeadlineManager {
             record.data = dataToChange
             storageRecordsAPI.update(record: record).done { updatedRecord in
                 self.localStorageManager.set(storageRecord: updatedRecord, for: course)
-                self.notificationManager.updateDeadlineNotifications(for: course)
+                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
@@ -94,7 +94,7 @@ class PersonalDeadlineManager {
             }
             storageRecordsAPI.delete(id: record.id).done { _ in
                 self.localStorageManager.deleteRecord(for: course)
-                self.notificationManager.updateDeadlineNotifications(for: course)
+                self.notificationsService.updatePersonalDeadlineNotifications(for: course)
                 seal.fulfill(())
             }.catch {
                 error in
@@ -102,5 +102,4 @@ class PersonalDeadlineManager {
             }
         }
     }
-
 }

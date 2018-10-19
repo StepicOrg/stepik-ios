@@ -7,70 +7,28 @@
 //
 
 import Foundation
-import SwiftyJSON
 
-class NotificationReactionHandler {
-    fileprivate static func deserializeObject(from userInfo: [AnyHashable: Any]) -> JSON? {
-        if let jsonString = userInfo["object"] as? String {
-            return JSON(parseJSON: jsonString)
-        }
-        return nil
-    }
-
-    static func handle(with userInfo: [AnyHashable: Any]) -> ((UIViewController) -> Void)? {
+final class NotificationReactionHandler {
+    func handle(with notification: Notification) {
         if !AuthInfo.shared.isAuthorized {
-            return nil
+            return
         }
 
-        if let json = deserializeObject(from: userInfo) {
-            let notification = Notification(json: json)
-            switch notification.type {
-            case .learn:
-                return handleLearnNotification(notification)
-            case .comments:
-                return handleCommentsNotification(notification)
-            default:
-                break
-            }
+        if notification.action == .issuedCertificate {
+            return TabBarRouter(tab: .certificates).route()
         }
-        return nil
+
+        switch notification.type {
+        case .comments:
+            DeepLinkRoutingService().route(.notifications(section: .comments))
+        case .learn:
+            DeepLinkRoutingService().route(.notifications(section: .learning))
+        case .default:
+            DeepLinkRoutingService().route(.notifications(section: .all))
+        case .review:
+            DeepLinkRoutingService().route(.notifications(section: .reviews))
+        case .teach:
+            DeepLinkRoutingService().route(.notifications(section: .teaching))
+        }
     }
-
-    fileprivate static func handleLearnNotification(_ notification: Notification) -> ((UIViewController) -> Void)? {
-        let extractor = NotificationDataExtractor(text: notification.htmlText ?? "", type: notification.type)
-        if let courseId = extractor.courseId {
-            let course = Course.getCourses([courseId]).first
-
-            let sectionsCOpt = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController
-            if let sectionsController = sectionsCOpt, let course = course {
-                sectionsController.course = course
-
-                let res: ((UIViewController) -> Void) = { controller in
-                    controller.navigationController?.pushViewController(sectionsController, animated: false)
-                }
-
-                return res
-            }
-        }
-        return nil
-    }
-
-    fileprivate static func handleCommentsNotification(_ notification: Notification) -> ((UIViewController) -> Void)? {
-        let extractor = NotificationDataExtractor(text: notification.htmlText ?? "", type: notification.type)
-        if let commentsURL = extractor.commentsURL {
-            let res: ((UIViewController) -> Void) = { controller in
-                delay(1, closure: {
-                    let alert = NotificationAlertConstructor.sharedConstructor.getOpenCommentNotificationViaSafariAlertController({
-                        UIThread.performUI {
-                            WebControllerManager.sharedManager.presentWebControllerWithURL(commentsURL, inController: controller, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close, animated: true)
-                        }
-                    })
-                    controller.present(alert, animated: true, completion: nil)
-                })
-            }
-            return res
-        }
-        return nil
-    }
-
 }

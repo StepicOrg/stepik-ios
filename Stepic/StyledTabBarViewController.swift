@@ -12,18 +12,6 @@ class StyledTabBarViewController: UITabBarController {
 
     let items = StepicApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
-    override open var shouldAutorotate: Bool {
-        return self.selectedViewController?.shouldAutorotate ?? super.shouldAutorotate
-    }
-
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return self.selectedViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
-    }
-
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return self.selectedViewController?.preferredInterfaceOrientationForPresentation ?? super.preferredInterfaceOrientationForPresentation
-    }
-
     var notificationsBadgeNumber: Int {
         get {
             if let tab = tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {

@@ -17,7 +17,6 @@ import VK_ios_sdk
 import FBSDKCoreKit
 import YandexMobileMetrica
 import Presentr
-import SwiftyJSON
 import PromiseKit
 import AppsFlyerLib
 
@@ -26,8 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Initializing the App
+
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+    ) -> Bool {
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
@@ -40,15 +49,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
+
         ConnectionHelper.shared.instantiate()
+
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")
         }
 
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        FBSDKApplicationDelegate.sharedInstance().application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
 
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.didReceiveRegistrationToken(_:)), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didReceiveRegistrationToken(_:)),
+            name: .InstanceIDTokenRefresh,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didBadgeUpdate(_:)),
+            name: .badgeUpdated,
+            object: nil
+        )
 
         ExecutionQueues.sharedQueues.setUpQueueObservers()
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
@@ -60,46 +84,190 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
+            ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }
-        AmplitudeAnalyticsEvents.Launch.sessionStart.send()
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {
-            checkForUpdates()
+            self.checkForUpdates()
         }
 
         if AuthInfo.shared.isAuthorized {
             NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
         }
 
-        if (launchOptions?[UIApplicationLaunchOptionsKey.localNotification]) != nil {
-            handleLocalNotification()
-        }
+        LocalNotificationsMigrator().migrateIfNeeded()
+        NotificationsService().handleLaunchOptions(launchOptions)
+        self.userNotificationsCenterDelegate.attachNotificationDelegate()
 
-        if let notificationDict = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [String: Any] {
-            handleNotification(notificationDict: notificationDict)
-        }
+        self.checkNotificationsCount()
 
-        checkNotificationsCount()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        rotated()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didChangeOrientation),
+            name: .UIDeviceOrientationDidChange,
+            object: nil
+        )
+        self.didChangeOrientation()
 
         return true
     }
 
-    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
-        guard let userInfo = systemNotification.userInfo,
-            let value = userInfo["value"] as? Int else {
-                return
-        }
+    // MARK: - Responding to App State Changes and System Events
 
-        UIApplication.shared.applicationIconBadgeNumber = value
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
+        AppsFlyerTracker.shared().trackAppLaunch()
     }
 
-    //Notification handling
-    func checkNotificationsCount() {
+    // MARK: - Downloading Data in the Background
+
+    func application(
+        _ application: UIApplication,
+        handleEventsForBackgroundURLSession identifier: String,
+        completionHandler: @escaping () -> Void
+    ) {
+        print("completed background task with id: \(identifier)")
+        completionHandler()
+    }
+
+    // MARK: - Handling Notifications -
+
+    func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+        NotificationRegistrator.shared.getGCMRegistrationToken(deviceToken: deviceToken)
+    }
+
+    func application(
+        _ application: UIApplication,
+        didFailToRegisterForRemoteNotificationsWithError error: Error
+    ) {
+        print("error while registering to remote notifications: \(error)")
+    }
+
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any]
+    ) {
+        NotificationsService().handleRemoteNotification(with: userInfo)
+    }
+
+    @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        NotificationsService().handleLocalNotification(with: notification.userInfo)
+    }
+
+    // MARK: Private Helpers
+
+    @objc
+    private func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
+        guard AuthInfo.shared.isAuthorized else {
+            return
+        }
+
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching Firebase remote instanse ID: \(error)")
+            } else if let result = result {
+                NotificationRegistrator.shared.registerDevice(result.token)
+            }
+        }
+    }
+
+    // MARK: - Continuing User Activity and Handling Quick Actions
+
+    func application(
+        _ application: UIApplication,
+        continue userActivity: NSUserActivity,
+        restorationHandler: @escaping ([Any]?) -> Void
+    ) -> Bool {
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            print("\(String(describing: userActivity.webpageURL?.absoluteString))")
+            if let url = userActivity.webpageURL {
+                self.handleOpenedFromDeepLink(url)
+                return true
+            }
+        }
+        return false
+    }
+
+    // MARK: - Opening a URL-Specified Resource -
+
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplicationOpenURLOptionsKey: Any] = [:]
+    ) -> Bool {
+        print("opened app via url \(url.absoluteString)")
+
+        if let sourceApplication = options[.sourceApplication] as? String,
+           VKSdk.processOpen(url, fromApplication: sourceApplication) {
+            return true
+        }
+        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
+            return true
+        }
+        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"
+           || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+            return true
+        }
+
+        if let code = Parser.sharedParser.codeFromURL(url) {
+            // Auth token
+            NotificationCenter.default.post(
+                name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"),
+                object: self,
+                userInfo: ["code": code]
+            )
+        } else if let queryDict = url.getKeyVals(),
+                  let error = queryDict["error"], error == "social_signup_with_existing_email" {
+            // Auth redirect with registered email
+            let email = (queryDict["email"] ?? "").removingPercentEncoding
+            if let topViewController = ControllerHelper.getTopViewController() as? AuthNavigationViewController {
+                topViewController.route(from: .social, to: .email(email: email))
+            }
+        } else {
+            // Other actions
+            self.handleOpenedFromDeepLink(url)
+        }
+
+        return true
+    }
+
+    // MARK: Private Helpers
+
+    private func handleOpenedFromDeepLink(_ url: URL) {
+        let deepLinkRoutingService = DeepLinkRoutingService()
+        DispatchQueue.main.async {
+            deepLinkRoutingService.route(path: url.absoluteString)
+        }
+    }
+
+    // MARK: - Private API -
+
+    private func checkForUpdates() {
+        UpdateChecker.sharedChecker.checkForUpdatesIfNeeded({ [weak self] newVersion in
+            guard let newVersion = newVersion else {
+                return
+            }
+
+            let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(
+                updateUrl: newVersion.url,
+                addNeverAskAction: true
+            )
+
+            UIThread.performUI {
+                self?.window?.rootViewController?.present(alert, animated: true)
+            }
+        }, error: { error in
+            print("error while checking for updates: \(error.code) \(error.localizedDescription)")
+        })
+    }
+
+    private func checkNotificationsCount() {
         guard AuthInfo.shared.isAuthorized else {
             return
         }
@@ -112,225 +280,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func handleLocalNotification() {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notificationOpened, parameters: nil)
-    }
-
-    func handleNotification(notificationDict: [String: Any]) {
-        if let reaction = NotificationReactionHandler.handle(with: notificationDict),
-            let topController = self.currentNavigation?.topViewController {
-            reaction(topController)
-        }
-    }
-
-    var currentNavigation: UINavigationController? {
-        if let tabController = window?.rootViewController as? UITabBarController {
-            let cnt = tabController.viewControllers?.count ?? 0
-            let index = tabController.selectedIndex
-            if index < cnt {
-                return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
-            } else {
-                return tabController.viewControllers?[0] as? UINavigationController
-            }
-        }
-        return nil
-    }
-
-    fileprivate func handleOpenedFromDeepLink(_ url: URL) {
-        let deepLinkRoutingService = DeepLinkRoutingService()
-        DispatchQueue.main.async {
-            deepLinkRoutingService.route(path: url.absoluteString)
-        }
-    }
-
-    func updateNotificationRegistrationStatus(_ notification: Foundation.Notification) {
-        if let info = (notification as NSNotification).userInfo as? [String:String] {
-            if let error = info["error"] {
-                print("Error registering with GCM: \(error)")
-            } else if let _ = info["registrationToken"] {
-                print("Token registration successful!")
-            }
-        }
-    }
-
-    func checkForUpdates() {
-        UpdateChecker.sharedChecker.checkForUpdatesIfNeeded({
-                newVersion in
-                if let version = newVersion {
-                    let alert = VersionUpdateAlertConstructor.sharedConstructor.getUpdateAlertController(updateUrl: version.url, addNeverAskAction: true)
-                    UIThread.performUI {
-                        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }, error: {
-                error in
-                print("error while checking for updates: \(error.code) \(error.localizedDescription)")
-        })
-    }
-
-    @objc func didReceiveRegistrationToken(_ notification: Foundation.Notification) {
-        if AuthInfo.shared.isAuthorized {
-            InstanceID.instanceID().instanceID { (result, error) in
-                if let error = error {
-                    print("Error fetching Firebase remote instanse ID: \(error)")
-                } else if let result = result {
-                    NotificationRegistrator.shared.registerDevice(result.token)
-                }
-            }
-        }
-    }
-
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        NotificationRegistrator.shared.getGCMRegistrationToken(deviceToken: deviceToken)
-    }
-
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("error while registering to remote notifications")
-    }
-
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        print("remote notification received: DEBUG = \(userInfo)")
-
-        guard let notificationDict = userInfo as? [String: Any] else {
-            print("remote notification received: unable to parse userInfo")
+    @objc
+    private func didBadgeUpdate(_ notification: Foundation.Notification) {
+        guard let userInfo = notification.userInfo,
+              let value = userInfo["value"] as? Int else {
             return
         }
 
-        guard let type = notificationDict["type"] as? String else {
-            print("remote notification received: unable to parse notification type")
-            return
-        }
-
-        switch type {
-        case "notifications":
-            if let text = ((notificationDict["aps"] as? [String: Any])?["alert"] as? [String: Any])?["body"] as? String {
-                // FIXME: incapsulate this logic
-                var notification: Notification?
-                guard let object = notificationDict["object"] as? String else {
-                    return
-                }
-                let json = JSON(parseJSON: object)
-                if let notificationId = json["id"].int,
-                   let notification = Notification.fetch(id: notificationId) {
-                    notification.update(json: json)
-                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification.id, "new": false])
-                } else {
-                    notification = Notification(json: json)
-                    NotificationCenter.default.post(name: .notificationAdded, object: nil, userInfo: ["id": notification!.id, "new": true])
-                }
-                CoreDataHelper.instance.save()
-
-                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(text, success: {
-                    self.handleNotification(notificationDict: notificationDict)
-                })
-            }
-        case "notification-statuses":
-            if let badgeCount = (notificationDict["aps"] as? [String: Any])?["badge"] as? Int {
-                NotificationsBadgesManager.shared.set(number: badgeCount)
-            }
-        default:
-            break
-        }
+        UIApplication.shared.applicationIconBadgeNumber = value
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    @objc
+    private func didChangeOrientation() {
+        AnalyticsUserProperties.shared.setScreenOrientation(
+            isPortrait: DeviceInfo.current.orientation.interface.isPortrait
+        )
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
-        AppsFlyerTracker.shared().trackAppLaunch()
-    }
-
-//    @available(iOS 8.0, *)
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
-            print("\(String(describing: userActivity.webpageURL?.absoluteString))")
-            if let url = userActivity.webpageURL {
-                handleOpenedFromDeepLink(url)
-                return true
-            }
-        }
-        return false
-    }
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("opened app via url \(url.absoluteString)")
-
-        if let sourceApplication = options[.sourceApplication] as? String,
-            VKSdk.processOpen(url, fromApplication: sourceApplication) {
-            return true
-        }
-        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
-            return true
-        }
-        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)" || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
-            return true
-        }
-
-        if let code = Parser.sharedParser.codeFromURL(url) {
-            // Auth token
-            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: self, userInfo: ["code": code])
-        } else if let queryDict = url.getKeyVals(), let error = queryDict["error"], error == "social_signup_with_existing_email" {
-            // Auth redirect with registered email
-            let email = (queryDict["email"] ?? "").removingPercentEncoding
-            if let topViewController = ControllerHelper.getTopViewController() as? AuthNavigationViewController {
-                topViewController.route(from: .social, to: .email(email: email))
-            }
-        } else {
-            // Other actions
-            handleOpenedFromDeepLink(url)
-        }
-
-        return true
-    }
-
-    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
-        print("completed background task with id: \(identifier)")
-        completionHandler()
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-//        CoreDataHelper.instance.deleteAllPending()
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-//    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
-//        
-//        
-//        if let c = window?.rootViewController?.presentedViewController?.classForCoder  {
-//            if c != UITabBarController.classForCoder() && c != SignInViewController.classForCoder() && c != UIAlertController.classForCoder() {
-//                print("class -> \(c)")
-//                return UIInterfaceOrientationMask.Landscape
-//            }
-//        }
-//        return UIInterfaceOrientationMask.Portrait
-//    }
-
-    fileprivate func setVideoTestRootController() {
-        let rootController = ControllerHelper.instantiateViewController(identifier: "PlayerTestViewController", storyboardName: "PlayerTestStoryboard")
-        if self.window != nil {
-            self.window!.rootViewController = rootController
-        }
-    }
-
-    @objc func rotated() {
-        AnalyticsUserProperties.shared.setScreenOrientation(isPortrait: DeviceInfo.current.orientation.interface.isPortrait)
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
 }

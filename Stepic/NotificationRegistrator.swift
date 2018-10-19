@@ -74,7 +74,7 @@ class NotificationRegistrator {
 
         let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
-        //TODO: Remove this after refactoring errors 
+        //TODO: Remove this after refactoring errors
         checkToken().then { _ -> Promise<Device> in
             if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
                 print("notification registrator: retrieve device by saved deviceId = \(savedDeviceId)")

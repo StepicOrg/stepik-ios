@@ -1,4 +1,4 @@
-In the new version of Stepik we updated home and explore screens.
+In the new version of Stepik we fixed landscape orientation on iPhones and improved app stability.
 
 Enjoy learning!
 Stepik team

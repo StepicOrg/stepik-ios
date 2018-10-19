@@ -34,9 +34,12 @@ class DeepLinkRoutingService {
     }
 
     func route(path: String, from source: UIViewController? = nil) {
-        let route = Route(path: path)
+        self.route(Route(path: path), fallbackPath: path, from: source)
+    }
+
+    func route(_ route: Route?, fallbackPath: String = "", from source: UIViewController? = nil) {
         self.getModuleStack(route: route).done { moduleStack in
-            let router = self.makeRouter(route: route, from: source, moduleStack: moduleStack, fallbackPath: path)
+            let router = self.makeRouter(route: route, from: source, moduleStack: moduleStack, fallbackPath: fallbackPath)
             router.route()
         }.catch { _ in
             //TODO: Handle this
@@ -60,10 +63,12 @@ class DeepLinkRoutingService {
         }
 
         switch route {
+        case .home:
+            return TabBarRouter(tab: .home)
         case .catalog:
-            return TabBarRouter(tab: 1)
-        case .notifications:
-            return TabBarRouter(tab: 4)
+            return TabBarRouter(tab: .catalog)
+        case .notifications(let section):
+            return TabBarRouter(notificationsSection: section)
         case .course, .discussions, .lesson, .profile, .syllabus:
             return ModalOrPushStackRouter(
                 source: source,
@@ -82,7 +87,7 @@ class DeepLinkRoutingService {
             }
 
             switch route {
-            case .catalog, .notifications:
+            case .catalog, .notifications, .home:
                 seal.fulfill([])
             case .profile(userID: let userID):
                 seal.fulfill([ProfileAssembly(userID: userID).makeModule()])
@@ -124,11 +129,12 @@ extension DeepLinkRoutingService {
 
     enum Route {
         case lesson(lessonID: Int, stepID: Int, unitID: Int?)
-        case notifications
+        case notifications(section: NotificationsSection)
         case discussions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
         case profile(userID: Int)
         case syllabus(courseID: Int)
         case catalog
+        case home
         case course(courseID: Int)
 
         init?(path: String) {
@@ -155,7 +161,7 @@ extension DeepLinkRoutingService {
 
             if let match = Pattern.notifications.regex.firstMatch(in: path),
                match.matchedString == path {
-                self = .notifications
+                self = .notifications(section: .all)
                 return
             }
 

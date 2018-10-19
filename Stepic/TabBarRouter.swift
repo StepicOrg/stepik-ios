@@ -9,13 +9,46 @@
 import Foundation
 
 class TabBarRouter: SourcelessRouter, RouterProtocol {
-    var tab: Int
+    let tab: Tab
+    let notificationsSection: NotificationsSection
 
-    init(tab: Int) {
+    init(tab: Tab) {
         self.tab = tab
+        self.notificationsSection = .all
+    }
+
+    init(notificationsSection: NotificationsSection) {
+        self.tab = .notifications
+        self.notificationsSection = notificationsSection
     }
 
     func route() {
-        currentTabBarController?.selectedIndex = tab
+        self.currentTabBarController?.selectedIndex = self.tab.rawValue
+
+        if self.tab == .notifications {
+            selectNotificationsSection()
+        }
+    }
+
+    private func selectNotificationsSection() {
+        guard let navigationController = self.currentTabBarController?.viewControllers?[self.tab.rawValue] as? UINavigationController,
+              let pager = navigationController.topViewController as? NotificationsPagerViewController else {
+            return
+        }
+
+        if !pager.isViewLoaded,
+           let sectionIndex = pager.sections.index(of: self.notificationsSection) {
+            pager.startTabIndex = sectionIndex
+        } else {
+            pager.selectSection(self.notificationsSection)
+        }
+    }
+
+    enum Tab: Int {
+        case home
+        case catalog
+        case profile
+        case certificates
+        case notifications
     }
 }
