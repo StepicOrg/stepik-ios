@@ -37,7 +37,9 @@ class ApiRequestPerformer {
     static func performAPIRequest(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
 
         let completionWithSemaphore : () -> Void = {
-            print("finished performing API Request")
+            if EnvironmentVariable.isStepikApiDebugLogEnabled {
+                print("finished performing API Request")
+            }
             semaphore.signal()
             DispatchQueue.main.async {
                 completion()
@@ -46,7 +48,9 @@ class ApiRequestPerformer {
 
         let errorHandlerWithSemaphore: (PerformRequestError) -> Void = {
             error in
-            print("finished performing API Request")
+            if EnvironmentVariable.isStepikApiDebugLogEnabled {
+                print("finished performing API Request")
+            }
             semaphore.signal()
             DispatchQueue.main.async {
                 errorHandler?(error)
@@ -55,7 +59,11 @@ class ApiRequestPerformer {
 
         queue.async {
             semaphore.wait()
-            print("performing API request")
+
+            if EnvironmentVariable.isStepikApiDebugLogEnabled {
+                print("performing API request")
+            }
+
             if !AuthInfo.shared.hasUser {
                 print("no user in AuthInfo, retrieving")
                 ApiDataDownloader.stepics.retrieveCurrentUser(success: {
