@@ -66,19 +66,49 @@ final class NotificationsRegistrationService {
         }
 
         if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: [.alert, .badge, .sound],
-                completionHandler: { granted, _ in
-                    if granted {
-                        self.retrieveDeviceToken()
-                    }
+            self.getCurrentPermissionStatus().done { status in
+                if status == .denied {
+                    self.showSettingsAlert()
+                } else {
+                    UNUserNotificationCenter.current().requestAuthorization(
+                        options: [.alert, .badge, .sound],
+                        completionHandler: { granted, _ in
+                            if granted {
+                                self.retrieveDeviceToken()
+                            }
+                        }
+                    )
                 }
-            )
+            }
         } else {
             let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             UIApplication.shared.registerUserNotificationSettings(settings)
             UIApplication.shared.registerForRemoteNotifications()
         }
+    }
+
+    private func showSettingsAlert() {
+        guard let controller = UIApplication.shared.keyWindow?.rootViewController else {
+            return
+        }
+
+        let alert = UIAlertController(
+            title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""),
+            message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Yes", comment: ""),
+                style: .default,
+                handler: { _ in
+                    UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel))
+
+        controller.present(alert, animated: true, completion: nil)
     }
 
     private func retrieveDeviceToken() {

@@ -114,6 +114,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Responding to App State Changes and System Events
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        NotificationsRegistrationService().register()
+    }
+
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
         AppsFlyerTracker.shared().trackAppLaunch()
