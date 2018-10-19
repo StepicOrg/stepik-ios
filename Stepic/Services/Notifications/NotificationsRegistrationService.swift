@@ -1,62 +1,106 @@
 //
-//  NotificationRegistrator.swift
+//  NotificationsRegistrationService.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 21.04.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
+//  Created by Ivan Magda on 19/10/2018.
+//  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import FirebaseMessaging
 import FirebaseCore
 import FirebaseInstanceID
 import PromiseKit
 import UserNotifications
 
-class NotificationRegistrator {
-    static let shared = NotificationRegistrator()
+final class NotificationsRegistrationService {
+    func getCurrentPermissionStatus() -> Guarantee<NotificationPermissionStatus> {
+        return Guarantee<NotificationPermissionStatus> { seal in
+            if #available(iOS 10.0, *) {
+                UNUserNotificationCenter.current().getNotificationSettings { settings in
+                    seal(NotificationPermissionStatus(authorizationStatus: settings.authorizationStatus))
+                }
+            } else {
+                if UIApplication.shared.isRegisteredForRemoteNotifications {
+                    seal(.authorized)
+                } else {
+                    seal(.notDetermined)
+                }
+            }
+        }
+    }
 
-    let notificationPermissionManager = NotificationPermissionManager()
+    // MARK: - Register -
 
-    private init () { }
+    func registerForNotifications(forceToRequestAuthorization: Bool = false) {
+        guard AuthInfo.shared.isAuthorized else {
+            return
+        }
 
-    func registerForRemoteNotificationsIfAlreadyAsked() {
+        if forceToRequestAuthorization {
+            self.register()
+        } else {
+            self.registerIfHasPreviouslyRegistered()
+        }
+    }
+
+    private func registerIfHasPreviouslyRegistered() {
         if #available(iOS 10.0, *) {
-            notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
-                switch status {
-                case .authorized:
-                    self?.registerForRemoteNotifications()
-                default:
-                    return
+            self.getCurrentPermissionStatus().done { status in
+                if status.isRegistered {
+                    self.register()
                 }
             }
         } else {
-            registerForRemoteNotifications()
+            self.register()
         }
     }
 
-    func registerForRemoteNotifications() {
-        return registerForRemoteNotifications(UIApplication.shared)
-    }
-
-    func registerForRemoteNotifications(_ application: UIApplication) {
-        if StepicApplicationsInfo.shouldRegisterNotifications {
-            if #available(iOS 10.0, *) {
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {_, _ in})
-            } else {
-                let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-                application.registerUserNotificationSettings(settings)
-            }
-            application.registerForRemoteNotifications()
+    private func register() {
+        defer {
+            self.fetchFirebaseAppInstanceID()
         }
 
-        if AuthInfo.shared.isAuthorized {
-            InstanceID.instanceID().instanceID { [weak self] (result, error) in
-                if let error = error {
-                    print("Error fetching Firebase remote instanse ID: \(error)")
-                } else if let result = result {
-                    self?.registerDevice(result.token)
+        guard StepicApplicationsInfo.shouldRegisterNotifications else {
+            return
+        }
+
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: [.alert, .badge, .sound],
+                completionHandler: { granted, _ in
+                    if granted {
+                        self.retrieveDeviceToken()
+                    }
                 }
+            )
+        } else {
+            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+
+    private func retrieveDeviceToken() {
+        self.getCurrentPermissionStatus().done { status in
+            guard status.isRegistered else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
+    }
+
+    // MARK: - Firebase -
+
+    private func fetchFirebaseAppInstanceID() {
+        InstanceID.instanceID().instanceID { [weak self] (result, error) in
+            if let error = error {
+                print("Error fetching Firebase remote instanse ID: \(error)")
+            } else if let result = result {
+                self?.registerDevice(result.token)
             }
         }
     }
@@ -64,10 +108,6 @@ class NotificationRegistrator {
     func getGCMRegistrationToken(deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
-
-    var registrationOptions = [String: AnyObject]()
-
-    let registrationKey = "onRegistrationCompleted"
 
     func registerDevice(_ registrationToken: String, forceCreation: Bool = false) {
         print("Registration Token: \(registrationToken)")
@@ -105,6 +145,15 @@ class NotificationRegistrator {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(error.localizedDescription)"])
             }
         }
+    }
+
+    // MARK: - Unregister -
+
+    @available(*, deprecated, message: "Legacy method with callbacks")
+    func unregisterFromNotifications(completion: @escaping (() -> Void)) {
+        self.unregisterFromNotifications().done {
+            completion()
+        }.catch { _ in }
     }
 
     func unregisterFromNotifications() -> Guarantee<Void> {
@@ -146,14 +195,5 @@ class NotificationRegistrator {
                 seal(())
             }
         }
-    }
-}
-
-extension NotificationRegistrator {
-    @available(*, deprecated, message: "Legacy method with callbacks")
-    func unregisterFromNotifications(completion: @escaping (() -> Void)) {
-        unregisterFromNotifications().done {
-            completion()
-        }.catch { _ in }
     }
 }

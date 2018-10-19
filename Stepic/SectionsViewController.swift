@@ -29,7 +29,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     var isFirstLoad: Bool = true
 
     private let notificationSuggestionManager = NotificationSuggestionManager()
-    private let notificationPermissionManager = NotificationPermissionManager()
+    private let notificationsRegistrationService = NotificationsRegistrationService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -251,7 +251,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         if didJustSubscribe {
             if #available(iOS 10.0, *) {
                 if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                    notificationPermissionManager.getCurrentPermissionStatus().done {
+                    notificationsRegistrationService.getCurrentPermissionStatus().done {
                         [weak self]
                         status in
                         guard let strongSelf = self else {
@@ -261,7 +261,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                         case .notDetermined:
                             let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
                             alert.yesAction = {
-                                NotificationRegistrator.shared.registerForRemoteNotifications()
+                                NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
                                 shareTooltipBlock()
                             }
                             Alerts.notificationRequest.present(alert: alert, inController: strongSelf)

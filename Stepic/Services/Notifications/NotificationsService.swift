@@ -15,6 +15,7 @@ final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]
 
     private let localNotificationsService: LocalNotificationsService
+    private let notificationsRegistrationService: NotificationsRegistrationService
     private let deepLinkRoutingService: DeepLinkRoutingService
 
     private var isInForeground: Bool {
@@ -23,9 +24,11 @@ final class NotificationsService {
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
+        notificationsRegistrationService: NotificationsRegistrationService = NotificationsRegistrationService(),
         deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
     ) {
         self.localNotificationsService = localNotificationsService
+        self.notificationsRegistrationService = notificationsRegistrationService
         self.deepLinkRoutingService = deepLinkRoutingService
     }
 
@@ -65,9 +68,9 @@ extension NotificationsService {
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
     ) {
-        NotificationPermissionManager().getCurrentPermissionStatus().then { status -> Promise<Void> in
+        self.notificationsRegistrationService.getCurrentPermissionStatus().then { status -> Promise<Void> in
             if !status.isRegistered {
-                NotificationRegistrator.shared.registerForRemoteNotifications()
+                self.notificationsRegistrationService.registerForNotifications(forceToRequestAuthorization: true)
             }
 
             if removeIdentical {

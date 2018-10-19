@@ -20,16 +20,16 @@ class StreaksAlertPresentationManager {
 
     var source: StreaksAlertPresentationSource?
     private var didTransitionToSettings = false
-    var notificationPermissionManager: NotificationPermissionManager
+    var notificationsRegistrationService: NotificationsRegistrationService
 
     enum StreaksAlertPresentationSource: String {
         case login = "login"
         case submission = "submission"
     }
 
-    init(source: StreaksAlertPresentationSource, notificationPermissionManager: NotificationPermissionManager = NotificationPermissionManager()) {
+    init(source: StreaksAlertPresentationSource, notificationsRegistrationService: NotificationsRegistrationService = NotificationsRegistrationService()) {
         self.source = source
-        self.notificationPermissionManager = notificationPermissionManager
+        self.notificationsRegistrationService = notificationsRegistrationService
         NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
 
@@ -90,10 +90,10 @@ class StreaksAlertPresentationManager {
     }
 
     func notifyPressed() {
-        notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
+        notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
             switch status {
             case .notDetermined:
-                NotificationRegistrator.shared.registerForRemoteNotifications()
+                NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
                 self?.selectStreakNotificationTime()
             case .authorized:
                 self?.selectStreakNotificationTime()
@@ -105,11 +105,11 @@ class StreaksAlertPresentationManager {
     }
 
     func cameFromSettings() {
-        notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
+        notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
             switch status {
             case .notDetermined:
                 // Actually, it should never come here, but just in case
-                NotificationRegistrator.shared.registerForRemoteNotifications()
+                NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
             case .authorized:
                 self?.selectStreakNotificationTime()
             case .denied:

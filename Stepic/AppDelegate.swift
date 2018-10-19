@@ -93,10 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        if AuthInfo.shared.isAuthorized {
-            NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
-        }
-
+        // Init notifications.
+        NotificationsRegistrationService().registerForNotifications()
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
@@ -138,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        NotificationRegistrator.shared.getGCMRegistrationToken(deviceToken: deviceToken)
+        NotificationsRegistrationService().getGCMRegistrationToken(deviceToken: deviceToken)
     }
 
     func application(
@@ -172,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error {
                 print("Error fetching Firebase remote instanse ID: \(error)")
             } else if let result = result {
-                NotificationRegistrator.shared.registerDevice(result.token)
+                NotificationsRegistrationService().registerDevice(result.token)
             }
         }
     }

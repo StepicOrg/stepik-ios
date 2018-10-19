@@ -24,7 +24,7 @@ class NotificationRequestAlertManager: AlertManager {
         let alert = NotificationRequestAlertViewController(nibName: "NotificationRequestAlertViewController", bundle: nil)
         alert.context = context
         alert.yesAction = {
-            NotificationRegistrator.shared.registerForRemoteNotifications()
+            NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
         }
         alert.noAction = {}
         return alert

@@ -71,7 +71,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     internal var ratingsAPI: AdaptiveRatingsAPI
     internal var lastViewedUpdater: LocalProgressLastViewedUpdater
     internal var notificationSuggestionManager: NotificationSuggestionManager
-    internal var notificationPermissionManager: NotificationPermissionManager
+    internal var notificationsRegistrationService: NotificationsRegistrationService
 
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
@@ -119,7 +119,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         return true
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationPermissionManager: NotificationPermissionManager, course: Course?, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationsRegistrationService: NotificationsRegistrationService, course: Course?, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -131,7 +131,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.storageManager = storageManager
         self.lastViewedUpdater = lastViewedUpdater
         self.notificationSuggestionManager = notificationSuggestionManager
-        self.notificationPermissionManager = notificationPermissionManager
+        self.notificationsRegistrationService = notificationsRegistrationService
 
         self.course = course
         self.view = view
@@ -153,7 +153,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     func appearedAfterSubscription() {
         if #available(iOS 10.0, *) {
             if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
+                notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
                     switch status {
                     case .notDetermined:
                         let alert = Alerts.notificationRequest.construct(context: .courseSubscription)

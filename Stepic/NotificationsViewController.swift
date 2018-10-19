@@ -73,7 +73,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
         markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
 
-        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, notificationsStatusAPI: NotificationStatusesAPI(), notificationPermissionManager: NotificationPermissionManager(), notificationSuggestionManager: NotificationSuggestionManager(), view: self)
+        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, notificationsStatusAPI: NotificationStatusesAPI(), notificationsRegistrationService: NotificationsRegistrationService(), notificationSuggestionManager: NotificationSuggestionManager(), view: self)
 
         tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
         tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)

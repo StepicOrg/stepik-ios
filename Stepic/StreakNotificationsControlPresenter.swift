@@ -70,7 +70,7 @@ class StreakNotificationsControlPresenter {
         }
 
         PreferencesContainer.notifications.allowStreaksNotifications = true
-        NotificationRegistrator.shared.registerForRemoteNotifications()
+        NotificationsRegistrationService().registerForNotifications(forceToRequestAuthorization: true)
         NotificationsService().scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
         completion?(true)

@@ -45,7 +45,7 @@ class NotificationsPresenter {
     var notificationsAPI: NotificationsAPI
     var usersAPI: UsersAPI
     var notificationsStatusAPI: NotificationStatusesAPI
-    var notificationPermissionManager: NotificationPermissionManager
+    var notificationsRegistrationService: NotificationsRegistrationService
     var notificationSuggestionManager: NotificationSuggestionManager
     private var page = 1
     var hasNextPage = true
@@ -56,12 +56,12 @@ class NotificationsPresenter {
     // Store unread notifications count to pass it to analytics
     private var badgeUnreadCount = 0
 
-    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, notificationPermissionManager: NotificationPermissionManager, notificationSuggestionManager: NotificationSuggestionManager, view: NotificationsView) {
+    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, notificationsRegistrationService: NotificationsRegistrationService, notificationSuggestionManager: NotificationSuggestionManager, view: NotificationsView) {
         self.section = section
         self.notificationsAPI = notificationsAPI
         self.usersAPI = usersAPI
         self.notificationsStatusAPI = notificationsStatusAPI
-        self.notificationPermissionManager = notificationPermissionManager
+        self.notificationsRegistrationService = notificationsRegistrationService
         self.notificationSuggestionManager = notificationSuggestionManager
         self.view = view
 
@@ -132,7 +132,7 @@ class NotificationsPresenter {
     func didAppear() {
         if #available(iOS 10.0, *) {
             if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {
-                notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
+                notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
                     switch status {
                     case .notDetermined:
                         let alert = Alerts.notificationRequest.construct(context: .notificationsTab)
