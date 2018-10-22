@@ -12,7 +12,6 @@ import FirebaseCore
 import FirebaseInstanceID
 import PromiseKit
 import UserNotifications
-import Presentr
 
 final class NotificationsRegistrationService {
     private var alertProvider: NotificationsRegistrationServiceAlertProvider
@@ -85,7 +84,7 @@ final class NotificationsRegistrationService {
         if #available(iOS 10.0, *) {
             self.getCurrentPermissionStatus().done { status in
                 if status == .denied {
-                    self.showSettingsAlert()
+                    self.presentAlert(for: .settings)
                 } else {
                     self.showPermissionAlertIfNeeded()
                 }
@@ -131,10 +130,6 @@ final class NotificationsRegistrationService {
         }
     }
 
-    private func showSettingsAlert() {
-        self.presentAlert(self.alertProvider.settings)
-    }
-
     private func showPermissionAlertIfNeeded() {
         if didShowPermissionAlert {
             self.requestAuthorization()
@@ -144,26 +139,17 @@ final class NotificationsRegistrationService {
                 self.requestAuthorization()
             }
 
-            self.presentAlert(self.alertProvider.permission)
+            self.presentAlert(for: .permission)
         }
     }
 
-    private func presentAlert(_ viewController: UIViewController) {
+    private func presentAlert(for type: AlertType) {
         guard let rootViewController = SourcelessRouter().window?.rootViewController else {
             return
         }
 
-        if viewController is UIAlertController {
-            rootViewController.present(viewController, animated: true)
-        } else {
-            let presenter = Presentr(presentationType: .dynamic(center: .center))
-            presenter.roundCorners = true
-
-            rootViewController.customPresentViewController(
-                presenter,
-                viewController: viewController,
-                animated: true
-            )
+        DispatchQueue.main.async {
+            self.alertProvider.presentAlert(for: type, inController: rootViewController)
         }
     }
 
@@ -267,6 +253,13 @@ final class NotificationsRegistrationService {
                 seal(())
             }
         }
+    }
+
+    // MARK: - Inner Types
+
+    enum AlertType {
+        case permission
+        case settings
     }
 }
 

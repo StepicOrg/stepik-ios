@@ -7,21 +7,53 @@
 //
 
 import UIKit
+import Presentr
 
 protocol NotificationsRegistrationServiceAlertProvider {
     var onSuccessCallback: (() -> Void)? { get set }
     var onCancelCallback: (() -> Void)? { get set }
 
-    var permission: UIViewController { get }
-    var settings: UIViewController { get }
+    func alert(for alertType: NotificationsRegistrationService.AlertType) -> UIViewController
+
+    func presentAlert(
+        for type: NotificationsRegistrationService.AlertType,
+        inController rootViewController: UIViewController
+    )
 }
 
 struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegistrationServiceAlertProvider {
     var onSuccessCallback: (() -> Void)?
-
     var onCancelCallback: (() -> Void)?
 
-    var permission: UIViewController {
+    func alert(for alertType: NotificationsRegistrationService.AlertType) -> UIViewController {
+        switch alertType {
+        case .permission:
+            return self.makePermissionAlert()
+        case .settings:
+            return self.makeSettingsAlert()
+        }
+    }
+
+    func presentAlert(
+        for type: NotificationsRegistrationService.AlertType,
+        inController rootViewController: UIViewController
+    ) {
+        switch type {
+        case .permission:
+            let presenter = Presentr(presentationType: .dynamic(center: .center))
+            presenter.roundCorners = true
+
+            rootViewController.customPresentViewController(
+                presenter,
+                viewController: self.makePermissionAlert(),
+                animated: true
+            )
+        case .settings:
+            rootViewController.present(self.makeSettingsAlert(), animated: true)
+        }
+    }
+
+    private func makePermissionAlert() -> UIViewController {
         let alertController = NotificationRequestAlertViewController(
             nibName: "NotificationRequestAlertViewController",
             bundle: nil
@@ -37,7 +69,7 @@ struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegist
         return alertController
     }
 
-    var settings: UIViewController {
+    private func makeSettingsAlert() -> UIViewController {
         let alertController = UIAlertController(
             title: NSLocalizedString("DeniedNotificationsDefaultAlertTitle", comment: ""),
             message: NSLocalizedString("DeniedNotificationsDefaultAlertMessage", comment: ""),
