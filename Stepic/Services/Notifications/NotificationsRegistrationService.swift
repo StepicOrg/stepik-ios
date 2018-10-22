@@ -65,6 +65,7 @@ final class NotificationsRegistrationService {
             return
         }
 
+        // FIXME: Check permission status firstly.
         if #available(iOS 10.0, *) {
             self.getCurrentPermissionStatus().done { status in
                 if status == .denied {
@@ -83,11 +84,22 @@ final class NotificationsRegistrationService {
         } else {
             let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             UIApplication.shared.registerUserNotificationSettings(settings)
-            UIApplication.shared.registerForRemoteNotifications()
         }
     }
 
-    private func showSettingsAlert() {
+    func handleRegisteredNotificationSettings(
+        _ notificationSettings: UIUserNotificationSettings,
+        application: UIApplication = .shared
+    ) {
+
+        if notificationSettings.types == [] {
+            print("NotificationsRegistrationService: none notification settings")
+        } else {
+            application.registerForRemoteNotifications()
+        }
+    }
+
+    func showSettingsAlert() {
         guard let controller = UIApplication.shared.keyWindow?.rootViewController else {
             return
         }
@@ -108,7 +120,7 @@ final class NotificationsRegistrationService {
         )
         alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel))
 
-        controller.present(alert, animated: true, completion: nil)
+        controller.present(alert, animated: true)
     }
 
     private func retrieveDeviceToken() {
