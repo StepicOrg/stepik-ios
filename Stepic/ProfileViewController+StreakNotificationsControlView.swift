@@ -24,17 +24,6 @@ extension ProfileViewController: StreakNotificationsControlView {
         customPresentViewController(streakTimePickerPresentr, viewController: vc, animated: true, completion: nil)
     }
 
-    func requestNotificationsPermissions() {
-        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { _ in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
-        }))
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
-
-        self.present(alert, animated: true)
-    }
-
     func updateDisplayedStreakTime(startHour: Int) {
         func getDisplayingStreakTimeInterval(startHour: Int) -> String {
             let startInterval = TimeInterval((startHour % 24) * 60 * 60)

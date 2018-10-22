@@ -66,10 +66,6 @@ class NotificationRequestAlertViewController: UIViewController {
         yesButton.setTitle(NSLocalizedString("Yes", comment: ""), for: .normal)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
     @IBAction func noPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
         AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.rejected(context: context))

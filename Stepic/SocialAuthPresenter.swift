@@ -86,7 +86,6 @@ class SocialAuthPresenter {
             SDKProvider.delegate = viewDelegate
         }
 
-        // TODO: NotificationsRegistrationService
         SDKProvider.getAccessInfo().then { socialToken, email -> Promise<(StepicToken, AuthorizationType)> in
             self.authAPI.signUpWithToken(socialToken: socialToken, email: email, provider: SDKProvider.name)
         }.then { token, authorizationType -> Promise<User> in
@@ -142,7 +141,6 @@ class SocialAuthPresenter {
         auth(with: notification.userInfo?["code"] as? String ?? "")
     }
 
-    // TODO: NotificationsRegistrationService
     private func auth(with code: String) {
         view?.state = .loading
 

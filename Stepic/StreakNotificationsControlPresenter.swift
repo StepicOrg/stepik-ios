@@ -10,7 +10,6 @@ import Foundation
 
 protocol StreakNotificationsControlView: class {
     func showStreakTimeSelection(startHour: Int)
-    func requestNotificationsPermissions()
     func updateDisplayedStreakTime(startHour: Int)
 
     func attachPresenter(_ presenter: StreakNotificationsControlPresenter)
@@ -64,15 +63,17 @@ class StreakNotificationsControlPresenter {
             return
         }
 
-        guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != .none else {
-            view?.requestNotificationsPermissions()
+        guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != [] else {
+            NotificationsRegistrationService().register(forceToRequestAuthorization: true)
             completion?(false)
             return
         }
 
         PreferencesContainer.notifications.allowStreaksNotifications = true
         NotificationsRegistrationService().register(forceToRequestAuthorization: true)
-        NotificationsService().scheduleStreakLocalNotification(UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC)
+        NotificationsService().scheduleStreakLocalNotification(
+            UTCStartHour: PreferencesContainer.notifications.streaksNotificationStartHourUTC
+        )
         AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.preferencesOn, parameters: nil)
         completion?(true)
     }

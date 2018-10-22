@@ -12,11 +12,20 @@ import FirebaseCore
 import FirebaseInstanceID
 import PromiseKit
 import UserNotifications
+import Presentr
 
 final class NotificationsRegistrationService {
-    func getCurrentPermissionStatus() -> Guarantee<NotificationPermissionStatus> {
-        print("NotificationsRegistrationService: \(#function)")
+    private var alertProvider: NotificationsRegistrationServiceAlertProvider
 
+    init(
+        alertProvider: NotificationsRegistrationServiceAlertProvider = DefaultNotificationsRegistrationServiceAlertProvider()
+    ) {
+        self.alertProvider = alertProvider
+    }
+
+    // MARK: - Permission Status
+
+    func getCurrentPermissionStatus() -> Guarantee<NotificationPermissionStatus> {
         return Guarantee<NotificationPermissionStatus> { seal in
             if #available(iOS 10.0, *) {
                 UNUserNotificationCenter.current().getNotificationSettings {
@@ -35,8 +44,6 @@ final class NotificationsRegistrationService {
     // MARK: - Register -
 
     func register(forceToRequestAuthorization: Bool = false, authInfo: AuthInfo = .shared) {
-        print("NotificationsRegistrationService: \(#function)")
-
         guard authInfo.isAuthorized else {
             return
         }
@@ -48,9 +55,13 @@ final class NotificationsRegistrationService {
         }
     }
 
-    private func registerIfHasPreviouslyRegistered() {
-        print("NotificationsRegistrationService: \(#function)")
+    func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
+        if notificationSettings.types != [] {
+            self.retrieveDeviceToken()
+        }
+    }
 
+    private func registerIfHasPreviouslyRegistered() {
         if #available(iOS 10.0, *) {
             self.getCurrentPermissionStatus().done { status in
                 if status.isRegistered {
@@ -63,8 +74,6 @@ final class NotificationsRegistrationService {
     }
 
     private func registerForRemoteNotifications() {
-        print("NotificationsRegistrationService: \(#function)")
-
         defer {
             self.fetchFirebaseAppInstanceID()
         }
@@ -78,27 +87,30 @@ final class NotificationsRegistrationService {
                 if status == .denied {
                     self.showSettingsAlert()
                 } else {
-                    self.requestAuthorization()
+                    self.showPermissionAlertIfNeeded()
                 }
             }
+        } else {
+            self.showPermissionAlertIfNeeded()
+        }
+    }
+
+    private func requestAuthorization() {
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: [.alert, .badge, .sound],
+                completionHandler: { granted, error in
+                    if granted {
+                        self.retrieveDeviceToken()
+                    } else if let error = error {
+                        print("NotificationsRegistrationService: \(#function); error: \(error)")
+                    }
+                }
+            )
         } else {
             let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             UIApplication.shared.registerUserNotificationSettings(settings)
         }
-    }
-
-    @available(iOS 10.0, *)
-    private func requestAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: [.alert, .badge, .sound],
-            completionHandler: { granted, error in
-                if granted {
-                    self.retrieveDeviceToken()
-                } else if let error = error {
-                    print("NotificationsRegistrationService: \(#function); error: \(error)")
-                }
-            }
-        )
     }
 
     private func retrieveDeviceToken() {
@@ -107,8 +119,6 @@ final class NotificationsRegistrationService {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
-
-        print("NotificationsRegistrationService: \(#function)")
 
         if #available(iOS 10.0, *) {
             self.getCurrentPermissionStatus().done { status in
@@ -121,43 +131,45 @@ final class NotificationsRegistrationService {
         }
     }
 
-    func showSettingsAlert() {
-        guard let controller = UIApplication.shared.keyWindow?.rootViewController else {
+    private func showSettingsAlert() {
+        self.presentAlert(self.alertProvider.settings)
+    }
+
+    private func showPermissionAlertIfNeeded() {
+        if didShowPermissionAlert {
+            self.requestAuthorization()
+        } else {
+            self.alertProvider.onSuccessCallback = {
+                self.didShowPermissionAlert = true
+                self.requestAuthorization()
+            }
+
+            self.presentAlert(self.alertProvider.permission)
+        }
+    }
+
+    private func presentAlert(_ viewController: UIViewController) {
+        guard let rootViewController = SourcelessRouter().window?.rootViewController else {
             return
         }
 
-        let alert = UIAlertController(
-            title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""),
-            message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""),
-            preferredStyle: .alert
-        )
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Yes", comment: ""),
-                style: .default,
-                handler: { _ in
-                    UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
-                }
+        if viewController is UIAlertController {
+            rootViewController.present(viewController, animated: true)
+        } else {
+            let presenter = Presentr(presentationType: .dynamic(center: .center))
+            presenter.roundCorners = true
+
+            rootViewController.customPresentViewController(
+                presenter,
+                viewController: viewController,
+                animated: true
             )
-        )
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel))
-
-        controller.present(alert, animated: true)
-    }
-
-    func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
-        print("NotificationsRegistrationService: \(#function), settings: \(notificationSettings)")
-
-        if notificationSettings.types != [] {
-            self.retrieveDeviceToken()
         }
     }
 
     // MARK: - Firebase -
 
     private func fetchFirebaseAppInstanceID() {
-        print("NotificationsRegistrationService: \(#function)")
-
         InstanceID.instanceID().instanceID { [weak self] (result, error) in
             if let error = error {
                 print("Error fetching Firebase remote instanse ID: \(error)")
@@ -168,14 +180,10 @@ final class NotificationsRegistrationService {
     }
 
     func getGCMRegistrationToken(deviceToken: Data) {
-        print("NotificationsRegistrationService: \(#function) 🚀🚀🚀")
-
         Messaging.messaging().apnsToken = deviceToken
     }
 
     func registerDevice(_ registrationToken: String, forceCreation: Bool = false) {
-        print("NotificationsRegistrationService: \(#function); Registration Token: \(registrationToken)")
-
         let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
 
         //TODO: Remove this after refactoring errors
@@ -221,7 +229,6 @@ final class NotificationsRegistrationService {
     }
 
     func unregisterFromNotifications() -> Guarantee<Void> {
-        print("NotificationsRegistrationService: \(#function)")
         return Guarantee { seal in
             UIApplication.shared.unregisterForRemoteNotifications()
 
@@ -259,6 +266,21 @@ final class NotificationsRegistrationService {
                 print("notification registrator: no saved device")
                 seal(())
             }
+        }
+    }
+}
+
+// MARK: - NotificationsRegistrationService (UserDefaults) -
+
+extension NotificationsRegistrationService {
+    private static let didShowPermissionAlertKey = "didShowPermissionAlertKey"
+
+    private var didShowPermissionAlert: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: NotificationsRegistrationService.didShowPermissionAlertKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: NotificationsRegistrationService.didShowPermissionAlertKey)
         }
     }
 }

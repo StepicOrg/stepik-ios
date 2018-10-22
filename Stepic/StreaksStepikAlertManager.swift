@@ -14,8 +14,7 @@ import Presentr
  */
 class StreaksStepikAlertManager: AlertManager, StreaksAlertPresentationDelegate {
     func present(alert: UIViewController, inController controller: UIViewController) {
-        controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
-//        controller.present(alert, animated: true, completion: nil)
+        controller.customPresentViewController(presenter, viewController: alert, animated: true)
     }
 
     //TODO: Add DI here

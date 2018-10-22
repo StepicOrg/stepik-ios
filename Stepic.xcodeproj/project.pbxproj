@@ -979,6 +979,7 @@
 		2C0AF18C203C67EC000EA3B6 /* MigrationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */; };
 		2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
+		2C10AFE7217E045C0019966D /* NotificationsRegistrationServiceAlertProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10AFE6217E045C0019966D /* NotificationsRegistrationServiceAlertProvider.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
 		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
@@ -5532,6 +5533,7 @@
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
+		2C10AFE6217E045C0019966D /* NotificationsRegistrationServiceAlertProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationServiceAlertProvider.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
 		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
@@ -8604,6 +8606,15 @@
 			path = AuthSignInViewController;
 			sourceTree = "<group>";
 		};
+		2C10AFE8217E04780019966D /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */,
+				2C10AFE6217E045C0019966D /* NotificationsRegistrationServiceAlertProvider.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
 		2C130E872125A3E40022E998 /* Assemblies */ = {
 			isa = PBXGroup;
 			children = (
@@ -9914,7 +9925,7 @@
 			isa = PBXGroup;
 			children = (
 				2CA3DA9F2179C38400F43888 /* LocalNotifications */,
-				2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */,
+				2C10AFE8217E04780019966D /* Registration */,
 				2C89089F216F465200083341 /* NotificationsService.swift */,
 				2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */,
 			);
@@ -14828,6 +14839,7 @@
 				08B3B80620F3909400F64D20 /* HTMLProcessor.swift in Sources */,
 				2C5F77BE1F90EE3F00E8E175 /* TapProxyView.swift in Sources */,
 				084490091F5D67E300D01940 /* SettingsViewController.swift in Sources */,
+				2C10AFE7217E045C0019966D /* NotificationsRegistrationServiceAlertProvider.swift in Sources */,
 				08DA79011DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift in Sources */,
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */,

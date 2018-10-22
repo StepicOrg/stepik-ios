@@ -12,7 +12,6 @@ import PromiseKit
 protocol ProfileView: class {
     func set(state: ProfileState)
 
-    func requestNotificationsPermissions()
     func showStreakTimeSelection(startHour: Int)
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)
 
