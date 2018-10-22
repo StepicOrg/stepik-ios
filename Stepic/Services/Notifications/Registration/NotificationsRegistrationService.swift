@@ -153,21 +153,7 @@ final class NotificationsRegistrationService {
         }
     }
 
-    // MARK: - Firebase -
-
-    private func fetchFirebaseAppInstanceID() {
-        InstanceID.instanceID().instanceID { [weak self] (result, error) in
-            if let error = error {
-                print("Error fetching Firebase remote instanse ID: \(error)")
-            } else if let result = result {
-                self?.registerDevice(result.token)
-            }
-        }
-    }
-
-    func getGCMRegistrationToken(deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
-    }
+    // MARK: Device
 
     func registerDevice(_ registrationToken: String, forceCreation: Bool = false) {
         let newDevice = Device(registrationId: registrationToken, deviceDescription: DeviceInfo.current.deviceInfoString)
@@ -201,6 +187,22 @@ final class NotificationsRegistrationService {
             default:
                 print("notification registrator: device registration error, error = \(error)")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(error.localizedDescription)"])
+            }
+        }
+    }
+
+    // MARK: - Firebase -
+
+    func getGCMRegistrationToken(deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
+
+    private func fetchFirebaseAppInstanceID() {
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching Firebase remote instanse ID: \(error)")
+            } else if let result = result {
+                self.registerDevice(result.token)
             }
         }
     }
