@@ -191,9 +191,15 @@ final class NotificationsRegistrationService {
             return
         }
 
-        DispatchQueue.main.async {
-            self.alertProvider.presentAlert(for: type, inController: rootViewController)
-            self.delegate?.notificationsRegistrationService(self, didPresentAlertFor: type)
+        self.getCurrentPermissionStatus().done { status in
+            if status.isRegistered {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.alertProvider.presentAlert(for: type, inController: rootViewController)
+                self.delegate?.notificationsRegistrationService(self, didPresentAlertFor: type)
+            }
         }
     }
 
