@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationSuggestionManager {
+final class NotificationSuggestionManager {
     private let defaults = UserDefaults.standard
 
     private let streakAlertShownCntKey = "streakAlertShownCntKey"
@@ -16,6 +16,7 @@ class NotificationSuggestionManager {
     private let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
     private let lastNotificationsTabNotificationRequestShownTimeKey = "lastNotificationsTabNotificationRequestShownTimeKey"
     private let lastCourseSubscriptionNotificationRequestShownTimeKey = "lastCourseSubscriptionNotificationRequestShownTimeKey"
+    private static let lastDefaultAlertShownTimeKey = "lastDefaultAlertShownTimeKey"
 
     func lastTimeKey(for context: NotificationRequestAlertContext) -> String {
         switch context {
@@ -25,6 +26,8 @@ class NotificationSuggestionManager {
             return lastCourseSubscriptionNotificationRequestShownTimeKey
         case .notificationsTab:
             return lastNotificationsTabNotificationRequestShownTimeKey
+        case .default:
+            return NotificationSuggestionManager.lastDefaultAlertShownTimeKey
         }
     }
 
@@ -93,7 +96,7 @@ class NotificationSuggestionManager {
             case .submission:
                 return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
             }
-        case .notificationsTab, .courseSubscription:
+        case .notificationsTab, .courseSubscription, .default:
             return isAlertAvailableNow(context: context) && AuthInfo.shared.isAuthorized
         }
     }

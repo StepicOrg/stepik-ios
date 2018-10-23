@@ -13,12 +13,27 @@ import FirebaseInstanceID
 import PromiseKit
 import UserNotifications
 
+protocol NotificationsRegistrationServiceDelegate: class {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) -> Bool
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    )
+}
+
 final class NotificationsRegistrationService {
+    weak var delegate: NotificationsRegistrationServiceDelegate?
     private var alertProvider: NotificationsRegistrationServiceAlertProvider
 
     init(
+        delegate: NotificationsRegistrationServiceDelegate? = nil,
         alertProvider: NotificationsRegistrationServiceAlertProvider = DefaultNotificationsRegistrationServiceAlertProvider()
     ) {
+        self.delegate = delegate
         self.alertProvider = alertProvider
     }
 
@@ -42,8 +57,8 @@ final class NotificationsRegistrationService {
 
     // MARK: - Register -
 
-    func register(forceToRequestAuthorization: Bool = false, authInfo: AuthInfo = .shared) {
-        guard authInfo.isAuthorized else {
+    func register(forceToRequestAuthorization: Bool = false) {
+        guard AuthInfo.shared.isAuthorized else {
             return
         }
 
@@ -84,7 +99,7 @@ final class NotificationsRegistrationService {
         if #available(iOS 10.0, *) {
             self.getCurrentPermissionStatus().done { status in
                 if status == .denied {
-                    self.presentAlert(for: .settings)
+                    self.showSettingsAlert()
                 } else {
                     self.showPermissionAlertIfNeeded()
                 }
@@ -130,6 +145,16 @@ final class NotificationsRegistrationService {
         }
     }
 
+    private func showSettingsAlert() {
+        if let delegate = self.delegate {
+            if delegate.notificationsRegistrationService(self, willPresentAlertFor: .settings) {
+                self.presentAlert(for: .settings)
+            }
+        } else {
+            self.presentAlert(for: .settings)
+        }
+    }
+
     private func showPermissionAlertIfNeeded() {
         if didShowPermissionAlert {
             self.requestAuthorization()
@@ -139,7 +164,13 @@ final class NotificationsRegistrationService {
                 self.requestAuthorization()
             }
 
-            self.presentAlert(for: .permission)
+            if let delegate = self.delegate {
+                if delegate.notificationsRegistrationService(self, willPresentAlertFor: .permission) {
+                    self.presentAlert(for: .permission)
+                }
+            } else {
+                self.presentAlert(for: .permission)
+            }
         }
     }
 
@@ -150,6 +181,7 @@ final class NotificationsRegistrationService {
 
         DispatchQueue.main.async {
             self.alertProvider.presentAlert(for: type, inController: rootViewController)
+            self.delegate?.notificationsRegistrationService(self, didPresentAlertFor: type)
         }
     }
 
@@ -277,5 +309,22 @@ extension NotificationsRegistrationService {
         set {
             UserDefaults.standard.set(newValue, forKey: NotificationsRegistrationService.didShowPermissionAlertKey)
         }
+    }
+}
+
+// MARK: - NotificationsRegistrationServiceDelegate (Default) -
+
+extension NotificationsRegistrationServiceDelegate {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) -> Bool {
+        return true
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) {
     }
 }

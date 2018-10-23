@@ -178,7 +178,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             seed = .other(id: userId)
         }
 
-        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), notificationsRegistrationService: NotificationsRegistrationService())
+        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI())
         presenter?.refresh(shouldReload: true)
     }
 

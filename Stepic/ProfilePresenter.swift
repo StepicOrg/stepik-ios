@@ -60,7 +60,6 @@ class ProfilePresenter {
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
-    private var notificationsRegistrationService: NotificationsRegistrationService
 
     private var userSeed: UserSeed
 
@@ -71,11 +70,10 @@ class ProfilePresenter {
                                                            .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .achievements, .description]
 
-    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationsRegistrationService: NotificationsRegistrationService) {
+    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
-        self.notificationsRegistrationService = notificationsRegistrationService
         self.userSeed = userSeed
     }
 

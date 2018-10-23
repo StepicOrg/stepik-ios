@@ -15,7 +15,6 @@ protocol NotificationsView: class {
 
     func set(notifications: NotificationViewDataStruct, withReload: Bool)
     func updateMarkAllAsReadButton(with status: NotificationsMarkAsReadButton.Status)
-    func present(alertManager: AlertManager, alert: UIViewController)
 }
 
 enum NotificationsViewState {
@@ -64,6 +63,8 @@ class NotificationsPresenter {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.notificationSuggestionManager = notificationSuggestionManager
         self.view = view
+
+        self.notificationsRegistrationService.delegate = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
@@ -129,22 +130,8 @@ class NotificationsPresenter {
         self.view?.set(notifications: self.displayedNotifications, withReload: true)
     }
 
-    // TODO: NotificationsRegistrationService
     func didAppear() {
-        if #available(iOS 10.0, *) {
-            if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {
-                notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
-                    switch status {
-                    case .notDetermined:
-                        let alert = Alerts.notificationRequest.construct(context: .notificationsTab)
-                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
-                        self?.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
-                    default:
-                        break
-                    }
-                }
-            }
-        }
+        self.notificationsRegistrationService.register(forceToRequestAuthorization: true)
     }
 
     func refresh() {
@@ -354,6 +341,26 @@ class NotificationsPresenter {
             NotificationsBadgesManager.shared.set(number: statuses.totalCount)
         }.catch { error in
             print("notifications: unable to load statuses, error = \(error)")
+        }
+    }
+}
+
+// MARK: - NotificationsPresenter: NotificationsRegistrationServiceDelegate -
+
+extension NotificationsPresenter: NotificationsRegistrationServiceDelegate {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) -> Bool {
+        return self.notificationSuggestionManager.canShowAlert(context: .notificationsTab)
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) {
+        if alertType == .permission {
+            self.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
         }
     }
 }

@@ -29,7 +29,12 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     var isFirstLoad: Bool = true
 
     private let notificationSuggestionManager = NotificationSuggestionManager()
-    private let notificationsRegistrationService = NotificationsRegistrationService()
+    private lazy var notificationsRegistrationService: NotificationsRegistrationService = {
+        NotificationsRegistrationService(
+            delegate: self,
+            alertProvider: DefaultNotificationsRegistrationServiceAlertProvider(context: .courseSubscription)
+        )
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -238,46 +243,13 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }, error: {})
         }
 
-        let shareTooltipBlock = {
-            [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.shareTooltip = TooltipFactory.sharingCourse
-            strongSelf.shareTooltip?.show(direction: .up, in: nil, from: strongSelf.shareBarButtonItem)
-            strongSelf.didJustSubscribe = false
-        }
-
-        // TODO: NotificationsRegistrationService
         if didJustSubscribe {
-            if #available(iOS 10.0, *) {
-                if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                    notificationsRegistrationService.getCurrentPermissionStatus().done {
-                        [weak self]
-                        status in
-                        guard let strongSelf = self else {
-                            return
-                        }
-                        switch status {
-                        case .notDetermined:
-                            let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
-                            alert.yesAction = {
-                                NotificationsRegistrationService().register(forceToRequestAuthorization: true)
-                                shareTooltipBlock()
-                            }
-                            Alerts.notificationRequest.present(alert: alert, inController: strongSelf)
-                            strongSelf.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
-                            return
-                        default:
-                            shareTooltipBlock()
-                            break
-                        }
-                    }
+            self.notificationsRegistrationService.getCurrentPermissionStatus().done { status in
+                if status == .notDetermined {
+                    self.notificationsRegistrationService.register(forceToRequestAuthorization: true)
                 } else {
-                    shareTooltipBlock()
+                    self.showShareTooltip()
                 }
-            } else {
-                shareTooltipBlock()
             }
         }
     }
@@ -332,11 +304,6 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         })
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCourse" {
             let dvc = segue.destination as! CoursePreviewViewController
@@ -350,15 +317,14 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func showShareTooltip() {
+        self.shareTooltip?.dismiss()
+        self.shareTooltip = TooltipFactory.sharingCourse
+        self.shareTooltip?.show(direction: .up, in: nil, from: self.shareBarButtonItem)
+        self.didJustSubscribe = false
     }
-    */
+
+    // MARK: - Navigation
 
     func showExamAlert(cancel cancelAction: @escaping (() -> Void)) {
         let alert = UIAlertController(title: NSLocalizedString("ExamTitle", comment: ""), message: NSLocalizedString("ShowExamInWeb", comment: ""), preferredStyle: .alert)
@@ -688,5 +654,32 @@ extension SectionsViewController : PKDownloadButtonDelegate {
         case PKDownloadButtonState.pending:
             break
         }
+    }
+}
+
+// MARK: - SectionsViewController: NotificationsRegistrationServiceDelegate -
+
+extension SectionsViewController: NotificationsRegistrationServiceDelegate {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) -> Bool {
+        let canShowAlert = self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
+
+        if !canShowAlert {
+            self.showShareTooltip()
+        }
+
+        return canShowAlert
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) {
+        if alertType == .permission {
+            self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+        }
+        self.showShareTooltip()
     }
 }

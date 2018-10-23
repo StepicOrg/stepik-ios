@@ -27,7 +27,6 @@ protocol CardsStepsView: class {
     func presentDiscussions(stepId: Int, discussionProxyId: String)
     func presentShareDialog(for link: String)
     func refreshCards()
-    func present(alertManager: AlertManager, alert: UIViewController)
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)?)
@@ -135,6 +134,8 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
         self.course = course
         self.view = view
+
+        self.notificationsRegistrationService.delegate = self
     }
 
     func refresh() {
@@ -150,22 +151,8 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
     }
 
-    // TODO: NotificationsRegistrationService
     func appearedAfterSubscription() {
-        if #available(iOS 10.0, *) {
-            if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
-                    switch status {
-                    case .notDetermined:
-                        let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
-                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
-                        self?.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
-                    default:
-                        break
-                    }
-                }
-            }
-        }
+        self.notificationsRegistrationService.register(forceToRequestAuthorization: true)
     }
 
     private func refreshTopCardForOnboarding(stepIndex: Int) {
@@ -513,6 +500,26 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
 
         view?.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
+    }
+}
+
+// MARK: - BaseCardsStepsPresenter: NotificationsRegistrationServiceDelegate -
+
+extension BaseCardsStepsPresenter: NotificationsRegistrationServiceDelegate {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) -> Bool {
+        return self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) {
+        if alertType == .permission {
+            self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+        }
     }
 }
 

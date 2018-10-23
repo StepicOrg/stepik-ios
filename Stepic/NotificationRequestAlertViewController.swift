@@ -10,8 +10,7 @@ import UIKit
 import Lottie
 import SnapKit
 
-class NotificationRequestAlertViewController: UIViewController {
-
+final class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var imageContainerViewHeight: NSLayoutConstraint!
 
@@ -23,10 +22,10 @@ class NotificationRequestAlertViewController: UIViewController {
     var messageLabelWidth: Constraint?
     let animationView: LOTAnimationView = LOTAnimationView(name: "onboardingAnimation4")
 
-    var yesAction : (() -> Void)?
-    var noAction : (() -> Void)?
+    var yesAction: (() -> Void)?
+    var noAction: (() -> Void)?
 
-    var context: NotificationRequestAlertContext!
+    var context = NotificationRequestAlertContext.default
 
     //Streaks Context
     var currentStreak: Int = 0

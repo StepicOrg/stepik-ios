@@ -21,9 +21,27 @@ protocol NotificationsRegistrationServiceAlertProvider {
     )
 }
 
+enum NotificationRequestAlertViewFactory {
+    static func make(for context: NotificationRequestAlertContext) -> NotificationRequestAlertViewController {
+        let alertController = NotificationRequestAlertViewController(
+            nibName: "NotificationRequestAlertViewController",
+            bundle: nil
+        )
+        alertController.context = context
+
+        return alertController
+    }
+}
+
 struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegistrationServiceAlertProvider {
+    private let context: NotificationRequestAlertContext
+
     var onPositiveCallback: (() -> Void)?
     var onCancelCallback: (() -> Void)?
+
+    init(context: NotificationRequestAlertContext = .default) {
+        self.context = context
+    }
 
     func alert(for alertType: NotificationsRegistrationService.AlertType) -> UIViewController {
         switch alertType {
@@ -54,17 +72,9 @@ struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegist
     }
 
     private func makePermissionAlert() -> UIViewController {
-        let alertController = NotificationRequestAlertViewController(
-            nibName: "NotificationRequestAlertViewController",
-            bundle: nil
-        )
-        alertController.context = .streak
+        let alertController = NotificationRequestAlertViewFactory.make(for: self.context)
         alertController.yesAction = self.onPositiveCallback
         alertController.noAction = self.onCancelCallback
-
-        alertController.loadViewIfNeeded()
-        alertController.titleLabel.text = NSLocalizedString("NotificationRequestDefaultAlertTitle", comment: "")
-        alertController.messageLabel.text = NSLocalizedString("NotificationRequestDefaultAlertMessage", comment: "")
 
         return alertController
     }
