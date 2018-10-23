@@ -71,7 +71,7 @@ extension NotificationsService {
     ) {
         self.notificationsRegistrationService.getCurrentPermissionStatus().then { status -> Promise<Void> in
             if !status.isRegistered {
-                self.notificationsRegistrationService.register(forceToRequestAuthorization: true)
+                self.notificationsRegistrationService.register()
             }
 
             if removeIdentical {

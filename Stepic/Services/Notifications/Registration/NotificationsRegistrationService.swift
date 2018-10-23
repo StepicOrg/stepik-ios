@@ -96,16 +96,18 @@ final class NotificationsRegistrationService {
             return
         }
 
-        if #available(iOS 10.0, *) {
+        if self.delegate?.notificationsRegistrationService(self, willPresentAlertFor: .permission) ?? false {
+            self.showPermissionAlert()
+        } else if #available(iOS 10.0, *) {
             self.getCurrentPermissionStatus().done { status in
                 if status == .denied {
                     self.showSettingsAlert()
                 } else {
-                    self.showPermissionAlertIfNeeded()
+                    self.showPermissionAlertIfFirstTime()
                 }
             }
         } else {
-            self.showPermissionAlertIfNeeded()
+            self.showPermissionAlertIfFirstTime()
         }
     }
 
@@ -155,22 +157,32 @@ final class NotificationsRegistrationService {
         }
     }
 
-    private func showPermissionAlertIfNeeded() {
-        if didShowPermissionAlert {
+    private func showPermissionAlertIfFirstTime() {
+        if self.didShowPermissionAlert {
             self.requestAuthorization()
         } else {
-            self.alertProvider.onPositiveCallback = {
-                self.didShowPermissionAlert = true
-                self.requestAuthorization()
-            }
+            self.showPermissionAlert()
+        }
+    }
 
-            if let delegate = self.delegate {
-                if delegate.notificationsRegistrationService(self, willPresentAlertFor: .permission) {
-                    self.presentAlert(for: .permission)
+    private func showPermissionAlert() {
+        self.alertProvider.onPositiveCallback = {
+            self.didShowPermissionAlert = true
+            self.getCurrentPermissionStatus().done { status in
+                if status == .denied {
+                    self.presentAlert(for: .settings)
+                } else {
+                    self.requestAuthorization()
                 }
-            } else {
+            }
+        }
+
+        if let delegate = self.delegate {
+            if delegate.notificationsRegistrationService(self, willPresentAlertFor: .permission) {
                 self.presentAlert(for: .permission)
             }
+        } else {
+            self.presentAlert(for: .permission)
         }
     }
 

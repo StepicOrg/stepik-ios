@@ -384,37 +384,39 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         }
 
         //TODO : Add statuses
-        if let c = course {
+        guard let course = self.course else {
+            return
+        }
 
-            if !c.enrolled {
-                SVProgressHUD.show()
-                sender.isEnabled = false
+        if !course.enrolled {
+            SVProgressHUD.show()
+            sender.isEnabled = false
 
-                subscriber.join(course: c, source: .preview).done { [weak self] course in
-                    SVProgressHUD.showSuccess(withStatus: "")
-                    sender.isEnabled = true
-                    sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
-                    self?.course = course
-                    self?.initBarButtonItems(dropAvailable: course.enrolled)
+            self.subscriber.join(course: course, source: .preview).done { [weak self] course in
+                SVProgressHUD.showSuccess(withStatus: "")
+                sender.isEnabled = true
+                sender.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
+                self?.course = course
+                self?.initBarButtonItems(dropAvailable: course.enrolled)
 
-                    if let navigation = self?.navigationController {
-                        LastStepRouter.continueLearning(for: course, using: navigation)
-                    }
-                }.catch { _ in
-                    SVProgressHUD.showError(withStatus: "")
-                    sender.isEnabled = true
+                if let navigation = self?.navigationController {
+                    LastStepRouter.continueLearning(for: course, didJustSubscribe: true, using: navigation)
                 }
+            }.catch { _ in
+                SVProgressHUD.showError(withStatus: "")
+                sender.isEnabled = true
+            }
+        } else {
+            if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id) {
+                guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
+                    return
+                }
+                cardsViewController.hidesBottomBarWhenPushed = true
+                cardsViewController.course = course
+                cardsViewController.didJustSubscribe = false
+                self.navigationController?.pushViewController(cardsViewController, animated: true)
             } else {
-                if AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: c.id) {
-                    guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
-                        return
-                    }
-                    cardsViewController.hidesBottomBarWhenPushed = true
-                    cardsViewController.course = c
-                    self.navigationController?.pushViewController(cardsViewController, animated: true)
-                } else {
-                    self.performSegue(withIdentifier: "showSections", sender: nil)
-                }
+                self.performSegue(withIdentifier: "showSections", sender: nil)
             }
         }
     }
