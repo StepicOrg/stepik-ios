@@ -134,7 +134,7 @@ final class NotificationsRegistrationService {
         if didShowPermissionAlert {
             self.requestAuthorization()
         } else {
-            self.alertProvider.onSuccessCallback = {
+            self.alertProvider.onPositiveCallback = {
                 self.didShowPermissionAlert = true
                 self.requestAuthorization()
             }

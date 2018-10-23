@@ -10,7 +10,7 @@ import UIKit
 import Presentr
 
 protocol NotificationsRegistrationServiceAlertProvider {
-    var onSuccessCallback: (() -> Void)? { get set }
+    var onPositiveCallback: (() -> Void)? { get set }
     var onCancelCallback: (() -> Void)? { get set }
 
     func alert(for alertType: NotificationsRegistrationService.AlertType) -> UIViewController
@@ -22,7 +22,7 @@ protocol NotificationsRegistrationServiceAlertProvider {
 }
 
 struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegistrationServiceAlertProvider {
-    var onSuccessCallback: (() -> Void)?
+    var onPositiveCallback: (() -> Void)?
     var onCancelCallback: (() -> Void)?
 
     func alert(for alertType: NotificationsRegistrationService.AlertType) -> UIViewController {
@@ -59,7 +59,7 @@ struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegist
             bundle: nil
         )
         alertController.context = .streak
-        alertController.yesAction = self.onSuccessCallback
+        alertController.yesAction = self.onPositiveCallback
         alertController.noAction = self.onCancelCallback
 
         alertController.loadViewIfNeeded()
@@ -77,7 +77,7 @@ struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegist
         )
         alertController.addAction(
             UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default, handler: { _ in
-                self.onSuccessCallback?()
+                self.onPositiveCallback?()
                 if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
                     UIApplication.shared.openURL(settingsURL)
                 }
