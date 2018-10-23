@@ -680,6 +680,5 @@ extension SectionsViewController: NotificationsRegistrationServiceDelegate {
         if alertType == .permission {
             self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
         }
-        self.showShareTooltip()
     }
 }
