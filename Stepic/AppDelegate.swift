@@ -140,14 +140,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        NotificationsRegistrationService().getGCMRegistrationToken(deviceToken: deviceToken)
+        NotificationsRegistrationService().handleDeviceToken(deviceToken)
     }
 
     func application(
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        print("error while registering to remote notifications: \(error)")
+        NotificationsRegistrationService().handleRegistrationError(error)
     }
 
     func application(

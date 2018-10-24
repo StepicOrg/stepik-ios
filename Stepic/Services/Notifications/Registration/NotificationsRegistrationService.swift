@@ -57,21 +57,33 @@ final class NotificationsRegistrationService {
 
     // MARK: - Register -
 
-    func register(forceToRequestAuthorization: Bool = false) {
-        guard AuthInfo.shared.isAuthorized else {
-            return
-        }
+    func handleDeviceToken(_ deviceToken: Data) {
+        self.getGCMRegistrationToken(deviceToken: deviceToken)
+        self.postCurrentPermissionStatus()
+    }
 
-        if forceToRequestAuthorization {
-            self.registerForRemoteNotifications()
-        } else {
-            self.registerIfHasPreviouslyRegistered()
-        }
+    func handleRegistrationError(_ error: Error) {
+        print("NotificationsRegistrationService: did fail register with error: \(error)")
+        self.postCurrentPermissionStatus()
     }
 
     func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
         if notificationSettings.types != [] {
             self.retrieveDeviceToken()
+        }
+    }
+
+    func register(forceToRequestAuthorization: Bool = false) {
+        guard AuthInfo.shared.isAuthorized else {
+            return
+        }
+
+        self.postCurrentPermissionStatus()
+
+        if forceToRequestAuthorization {
+            self.registerForRemoteNotifications()
+        } else {
+            self.registerIfHasPreviouslyRegistered()
         }
     }
 
@@ -326,6 +338,23 @@ extension NotificationsRegistrationService {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: NotificationsRegistrationService.didShowPermissionAlertKey)
+        }
+    }
+}
+
+// MARK: - NotificationsRegistrationService (NotificationCenter) -
+
+extension Foundation.Notification.Name {
+    static let notificationsRegistrationServiceDidUpdatePermissionStatus = Foundation.Notification.Name("notificationsRegistrationServiceDidUpdatePermissionStatus")
+}
+
+extension NotificationsRegistrationService {
+    private func postCurrentPermissionStatus() {
+        self.getCurrentPermissionStatus().done { status in
+            NotificationCenter.default.post(
+                name: .notificationsRegistrationServiceDidUpdatePermissionStatus,
+                object: status
+            )
         }
     }
 }
