@@ -232,19 +232,25 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
         block.onSwitch = { [weak self] isOn in
             self?.presenterNotifications?.setStreakNotifications(on: isOn) { [weak self] status in
+                guard let strongSelf = self else {
+                    return
+                }
+
                 if status {
-                    guard let timeSelectionBlock = self?.buildNotificationsTimeSelectionBlock() else {
-                        self?.presenterNotifications?.setStreakNotifications(on: !isOn)
+                    guard let timeSelectionBlock = strongSelf.buildNotificationsTimeSelectionBlock() else {
+                          strongSelf.presenterNotifications?.setStreakNotifications(on: !isOn)
                         return
                     }
 
                     block.isOn = true
-                    self?.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue)
-                    self?.presenterNotifications?.refreshStreakNotificationTime()
+                    strongSelf.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue)
+                    strongSelf.presenterNotifications?.refreshStreakNotificationTime()
                 } else {
                     block.isOn = false
-                    self?.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
+                    strongSelf.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
                 }
+
+                strongSelf.menu?.update(block: block)
             }
         }
 
