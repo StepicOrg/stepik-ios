@@ -41,4 +41,30 @@ extension ProfileViewController: StreakNotificationsControlView {
             menu?.update(block: block)
         }
     }
+
+    func setNotificationsSwitchIsOn(_ isOn: Bool) {
+        let id = ProfileMenuBlock.notificationsSwitch(isOn: isOn).rawValue
+        guard let block = self.menu?.getBlock(id: id) as? SwitchMenuBlock else {
+            return
+        }
+
+        if isOn {
+            guard let timeSelectionBlock = self.buildNotificationsTimeSelectionBlock() else {
+                self.presenterNotifications?.setStreakNotifications(on: false)
+                return
+            }
+
+            self.menu?.insert(
+                block: timeSelectionBlock,
+                afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: isOn).rawValue
+            )
+
+            self.presenterNotifications?.refreshStreakNotificationTime()
+        } else {
+            self.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
+        }
+
+        block.isOn = isOn
+        self.menu?.update(block: block)
+    }
 }

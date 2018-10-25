@@ -228,29 +228,15 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     }
 
     private func buildNotificationsSwitchBlock(isOn: Bool) -> SwitchMenuBlock {
-        let block: SwitchMenuBlock = SwitchMenuBlock(id: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue, title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""), isOn: isOn)
+        let block = SwitchMenuBlock(
+            id: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue,
+            title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""),
+            isOn: isOn
+        )
 
         block.onSwitch = { [weak self] isOn in
             self?.presenterNotifications?.setStreakNotifications(on: isOn) { [weak self] status in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                if status {
-                    guard let timeSelectionBlock = strongSelf.buildNotificationsTimeSelectionBlock() else {
-                          strongSelf.presenterNotifications?.setStreakNotifications(on: !isOn)
-                        return
-                    }
-
-                    block.isOn = true
-                    strongSelf.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue)
-                    strongSelf.presenterNotifications?.refreshStreakNotificationTime()
-                } else {
-                    block.isOn = false
-                    strongSelf.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
-                }
-
-                strongSelf.menu?.update(block: block)
+                self?.setNotificationsSwitchIsOn(status)
             }
         }
 
@@ -280,7 +266,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         return block
     }
 
-    private func buildNotificationsTimeSelectionBlock() -> TransitionMenuBlock? {
+    func buildNotificationsTimeSelectionBlock() -> TransitionMenuBlock? {
         var currentZone00UTC: String {
             let date = Date(timeIntervalSince1970: 0)
             let dateFormatter = DateFormatter()

@@ -66,6 +66,8 @@ struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegist
                 viewController: self.makePermissionAlert(),
                 animated: true
             )
+
+            NotificationSuggestionManager().didShowAlert(context: self.context)
         case .settings:
             rootViewController.present(self.makeSettingsAlert(), animated: true)
         }
@@ -100,5 +102,29 @@ struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegist
         )
 
         return alertController
+    }
+}
+
+final class DefaultNotificationsRegistrationServiceDelegate: NotificationsRegistrationServiceDelegate {
+    private let context: NotificationRequestAlertContext
+
+    init(context: NotificationRequestAlertContext = .default) {
+        self.context = context
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) -> Bool {
+        return NotificationSuggestionManager().canShowAlert(context: self.context)
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationService,
+        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+    ) {
+        if alertType == .permission {
+            NotificationSuggestionManager().didShowAlert(context: self.context)
+        }
     }
 }

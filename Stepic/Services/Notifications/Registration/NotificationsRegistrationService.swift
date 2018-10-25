@@ -55,9 +55,10 @@ final class NotificationsRegistrationService {
         }
     }
 
-    // MARK: - Register -
+    // MARK: - Handling -
 
     func handleDeviceToken(_ deviceToken: Data) {
+        print("NotificationsRegistrationService: did register for remote notifications 🚀🚀🚀")
         self.getGCMRegistrationToken(deviceToken: deviceToken)
         self.postCurrentPermissionStatus()
     }
@@ -70,8 +71,12 @@ final class NotificationsRegistrationService {
     func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
         if notificationSettings.types != [] {
             self.retrieveDeviceToken()
+        } else {
+            self.postCurrentPermissionStatus()
         }
     }
+
+    // MARK: - Register -
 
     func register(forceToRequestAuthorization: Bool = false) {
         guard AuthInfo.shared.isAuthorized else {
@@ -124,6 +129,8 @@ final class NotificationsRegistrationService {
     }
 
     private func requestAuthorization() {
+        self.didShowPermissionAlert = true
+
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().requestAuthorization(
                 options: [.alert, .badge, .sound],
@@ -179,7 +186,6 @@ final class NotificationsRegistrationService {
 
     private func showPermissionAlert() {
         self.alertProvider.onPositiveCallback = {
-            self.didShowPermissionAlert = true
             self.getCurrentPermissionStatus().done { status in
                 if status == .denied {
                     self.presentAlert(for: .settings)
@@ -356,22 +362,5 @@ extension NotificationsRegistrationService {
                 object: status
             )
         }
-    }
-}
-
-// MARK: - NotificationsRegistrationServiceDelegate (Default) -
-
-extension NotificationsRegistrationServiceDelegate {
-    func notificationsRegistrationService(
-        _ notificationsRegistrationService: NotificationsRegistrationService,
-        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
-    ) -> Bool {
-        return true
-    }
-
-    func notificationsRegistrationService(
-        _ notificationsRegistrationService: NotificationsRegistrationService,
-        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
-    ) {
     }
 }
