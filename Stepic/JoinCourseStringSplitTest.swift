@@ -13,7 +13,7 @@ final class JoinCourseStringSplitTest: SplitTestProtocol {
     typealias GroupType = Group
 
     static var identifier = "join_course_string"
-    static var minParticipatingStartVersion = "1.70"
+    static var minParticipatingStartVersion = "1.71"
 
     var currentGroup: Group
     var analytics: ABAnalyticsServiceProtocol
