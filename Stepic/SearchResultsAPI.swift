@@ -16,7 +16,13 @@ class SearchResultsAPI: APIEndpoint {
 
     @available(*, deprecated, message: "Use searchCourse() -> Promise<([SearchResult], Meta)> instead")
     @discardableResult func search(query: String, type: String?, language: ContentLanguage, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
-        var params: Parameters = [:]
+        var params: Parameters = [
+           "query" : query.lowercased(),
+           "access_token": AuthInfo.shared.token?.accessToken ?? "",
+           "language": language.searchCoursesParameter ?? "",
+           "is_popular": "true",
+           "is_public": "true"
+        ]
 
         params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
         params["query"] = query.lowercased()
