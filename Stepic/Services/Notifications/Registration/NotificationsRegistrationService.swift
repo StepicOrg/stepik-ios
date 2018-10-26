@@ -229,7 +229,7 @@ final class NotificationsRegistrationService {
         //TODO: Remove this after refactoring errors
         checkToken().then { _ -> Promise<Device> in
             if let savedDeviceId = DeviceDefaults.sharedDefaults.deviceId, !forceCreation {
-                print("notification registrator: retrieve device by saved deviceId = \(savedDeviceId)")
+                print("NotificationsRegistrationService: retrieve device by saved deviceId = \(savedDeviceId)")
                 return ApiDataDownloader.devices.retrieve(deviceId: savedDeviceId)
             } else {
                 return ApiDataDownloader.devices.create(newDevice)
@@ -242,18 +242,18 @@ final class NotificationsRegistrationService {
                 return ApiDataDownloader.devices.update(remoteDevice)
             }
         }.done { device -> Void in
-            print("notification registrator: device registered, info = \(device.json)")
+            print("NotificationsRegistrationService: device registered, info = \(device.json)")
             DeviceDefaults.sharedDefaults.deviceId = device.id
         }.catch { error in
             switch error {
             case DeviceError.notFound:
-                print("notification registrator: device not found, create new")
+                print("NotificationsRegistrationService: device not found, create new")
                 self.registerDevice(registrationToken, forceCreation: true)
             case DeviceError.other(_, _, let message):
-                print("notification registrator: device registration error, error = \(String(describing: message))")
+                print("NotificationsRegistrationService: device registration error, error = \(String(describing: message))")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(String(describing: message))"])
             default:
-                print("notification registrator: device registration error, error = \(error)")
+                print("NotificationsRegistrationService: device registration error, error = \(error)")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.registerDevice, parameters: ["message": "\(error.localizedDescription)"])
             }
         }
@@ -290,12 +290,12 @@ final class NotificationsRegistrationService {
 
             if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
                 ApiDataDownloader.devices.delete(deviceId).done { () in
-                    print("notification registrator: successfully delete device, id = \(deviceId)")
+                    print("NotificationsRegistrationService: successfully delete device, id = \(deviceId)")
                     seal(())
                 }.catch { error in
                     switch error {
                     case DeviceError.notFound:
-                        print("notification registrator: device not found on deletion, id = \(deviceId)")
+                        print("NotificationsRegistrationService: device not found on deletion, id = \(deviceId)")
                     default:
                         if let userId = AuthInfo.shared.userId,
                            let token = AuthInfo.shared.token {
@@ -312,14 +312,14 @@ final class NotificationsRegistrationService {
                             let queuePersistencyManager = PersistentQueueRecoveryManager(baseName: "Queues")
                             queuePersistencyManager.writeQueue(ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue, key: ExecutionQueues.sharedQueues.connectionAvailableExecutionQueueKey)
                         } else {
-                            print("notification registrator: could not get current user ID or token to delete device")
+                            print("NotificationsRegistrationService: could not get current user ID or token to delete device")
                             AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unregisterDeviceInvalidCredentials)
                         }
                     }
                     seal(())
                 }
             } else {
-                print("notification registrator: no saved device")
+                print("NotificationsRegistrationService: no saved device")
                 seal(())
             }
         }
