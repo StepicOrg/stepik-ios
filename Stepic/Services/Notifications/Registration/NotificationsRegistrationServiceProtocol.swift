@@ -21,7 +21,7 @@ protocol NotificationsRegistrationServiceProtocol: class {
     /// - settings
     ///
     /// See `NotificationsRegistrationServiceAlertType`.
-    var presenter: NotificationsRegistrationServiceAlertPresenterProtocol? { get set }
+    var presenter: NotificationsRegistrationServicePresenterProtocol? { get set }
 
     /// Register to receive remote notifications via APNs.
     /// Registration process with APNs will start only when user has already granted permissions.
@@ -60,7 +60,7 @@ enum NotificationsRegistrationServiceAlertType {
 
 /// The presentation layer of the notifications registration service.
 /// It's responsible for preparation and presentations of the custom alerts.
-protocol NotificationsRegistrationServiceAlertPresenterProtocol {
+protocol NotificationsRegistrationServicePresenterProtocol {
     var onPositiveCallback: (() -> Void)? { get set }
     var onCancelCallback: (() -> Void)? { get set }
 
