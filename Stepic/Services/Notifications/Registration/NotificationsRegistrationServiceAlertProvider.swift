@@ -34,13 +34,20 @@ enum NotificationRequestAlertViewFactory {
 }
 
 struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegistrationServiceAlertProvider {
+    typealias AlertFactory = (NotificationRequestAlertContext) -> NotificationRequestAlertViewController
+
     private let context: NotificationRequestAlertContext
+    private let alertFactory: AlertFactory
 
     var onPositiveCallback: (() -> Void)?
     var onCancelCallback: (() -> Void)?
 
-    init(context: NotificationRequestAlertContext = .default) {
+    init(
+        context: NotificationRequestAlertContext = .default,
+        alertFactory: @escaping AlertFactory = { NotificationRequestAlertViewFactory.make(for: $0) }
+    ) {
         self.context = context
+        self.alertFactory = alertFactory
     }
 
     func alert(for alertType: NotificationsRegistrationService.AlertType) -> UIViewController {
@@ -74,7 +81,7 @@ struct DefaultNotificationsRegistrationServiceAlertProvider: NotificationsRegist
     }
 
     private func makePermissionAlert() -> UIViewController {
-        let alertController = NotificationRequestAlertViewFactory.make(for: self.context)
+        let alertController = self.alertFactory(self.context)
         alertController.yesAction = self.onPositiveCallback
         alertController.noAction = self.onCancelCallback
 
