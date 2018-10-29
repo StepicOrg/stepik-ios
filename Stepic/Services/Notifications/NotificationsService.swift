@@ -15,7 +15,7 @@ final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]
 
     private let localNotificationsService: LocalNotificationsService
-    private let notificationsRegistrationService: NotificationsRegistrationService
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let deepLinkRoutingService: DeepLinkRoutingService
 
     private var isInForeground: Bool {
@@ -24,7 +24,7 @@ final class NotificationsService {
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
-        notificationsRegistrationService: NotificationsRegistrationService = NotificationsRegistrationService(),
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(),
         deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
     ) {
         self.localNotificationsService = localNotificationsService
