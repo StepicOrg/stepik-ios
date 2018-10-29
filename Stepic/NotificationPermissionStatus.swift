@@ -28,19 +28,7 @@ enum NotificationPermissionStatus {
         }
     }
 
-    @available(iOS 10.0, *)
-    init(authorizationStatus: UNAuthorizationStatus) {
-        switch authorizationStatus {
-        case .authorized:
-            self = .authorized
-        case .denied:
-            self = .denied
-        case .notDetermined:
-            self = .notDetermined
-        }
-    }
-
-    static func current() -> Guarantee<NotificationPermissionStatus> {
+    static var current: Guarantee<NotificationPermissionStatus> {
         return Guarantee<NotificationPermissionStatus> { seal in
             if #available(iOS 10.0, *) {
                 UNUserNotificationCenter.current().getNotificationSettings {
@@ -53,6 +41,18 @@ enum NotificationPermissionStatus {
                     seal(.notDetermined)
                 }
             }
+        }
+    }
+
+    @available(iOS 10.0, *)
+    init(authorizationStatus: UNAuthorizationStatus) {
+        switch authorizationStatus {
+        case .authorized:
+            self = .authorized
+        case .denied:
+            self = .denied
+        case .notDetermined:
+            self = .notDetermined
         }
     }
 }

@@ -82,7 +82,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     private func registerIfAuthorized() {
         if #available(iOS 10.0, *) {
-            NotificationPermissionStatus.current().done { status in
+            NotificationPermissionStatus.current.done { status in
                 if status.isRegistered {
                     self.register()
                 }
@@ -108,7 +108,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         if shouldPresentCustomPermissionAlert {
             self.presentPermissionAlert()
         } else if #available(iOS 10.0, *) {
-            NotificationPermissionStatus.current().done { status in
+            NotificationPermissionStatus.current.done { status in
                 if status == .denied {
                     self.presentSettingsAlert()
                 } else {
@@ -163,7 +163,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         let originalCallback = self.presenter?.onPositiveCallback
         self.presenter?.onPositiveCallback = {
             originalCallback?()
-            NotificationPermissionStatus.current().done { status in
+            NotificationPermissionStatus.current.done { status in
                 if status == .denied {
                     self.presentAlert(for: .settings)
                 } else {

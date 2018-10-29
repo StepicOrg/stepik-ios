@@ -129,7 +129,7 @@ final class StreaksAlertPresentationManager {
     }
 
     private func notifyPressed() {
-        NotificationPermissionStatus.current().done { [weak self] status in
+        NotificationPermissionStatus.current.done { [weak self] status in
             switch status {
             case .notDetermined:
                 NotificationsRegistrationService().registerForRemoteNotifications()
@@ -160,7 +160,7 @@ final class StreaksAlertPresentationManager {
     }
 
     private func cameFromSettings() {
-        NotificationPermissionStatus.current().done { [weak self] status in
+        NotificationPermissionStatus.current.done { [weak self] status in
             switch status {
             case .notDetermined:
                 NotificationsRegistrationService().registerForRemoteNotifications()

@@ -165,7 +165,7 @@ extension Foundation.Notification.Name {
 
 extension NotificationsRegistrationServiceProtocol {
     func postCurrentPermissionStatus() {
-        NotificationPermissionStatus.current().done { status in
+        NotificationPermissionStatus.current.done { status in
             NotificationCenter.default.post(
                 name: .notificationsRegistrationServiceDidUpdatePermissionStatus,
                 object: status

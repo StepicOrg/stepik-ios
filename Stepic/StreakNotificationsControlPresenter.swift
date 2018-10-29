@@ -104,7 +104,7 @@ class StreakNotificationsControlPresenter {
     }
 
     private func checkPermissionStatus() {
-        NotificationPermissionStatus.current().done { [weak self] status in
+        NotificationPermissionStatus.current.done { [weak self] status in
             if PreferencesContainer.notifications.allowStreaksNotifications && !status.isRegistered {
                 self?.turnOffNotifications()
                 self?.view?.setNotificationsSwitchIsOn(false)

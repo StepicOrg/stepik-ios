@@ -40,7 +40,7 @@ final class NotificationsRequestAlertPresenter: NotificationsRegistrationService
         if self.presentAlertIfRegistered {
             self.present(alertType: alertType, controller: controller)
         } else {
-            NotificationPermissionStatus.current().done { [weak self] status in
+            NotificationPermissionStatus.current.done { [weak self] status in
                 if !status.isRegistered {
                     self?.present(alertType: alertType, controller: controller)
                 }

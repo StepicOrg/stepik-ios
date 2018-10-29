@@ -68,7 +68,7 @@ extension NotificationsService {
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
     ) {
-        NotificationPermissionStatus.current().then { status -> Promise<Void> in
+        NotificationPermissionStatus.current.then { status -> Promise<Void> in
             if !status.isRegistered {
                 self.notificationsRegistrationService.renewDeviceToken()
             }
