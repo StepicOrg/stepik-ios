@@ -123,7 +123,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         modesVC.onDeadlineSelected = {
             [weak self] in
             self?.tableView.reloadData()
-            NotificationsRegistrationService().registerForRemoteNotifications()
+            NotificationsRegistrationService(
+                presenter: NotificationsRequestOnlySettingsAlertPresenter()
+            ).registerForRemoteNotifications()
         }
         customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
     }
@@ -245,7 +247,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
 
         if didJustSubscribe {
-            NotificationPermissionStatus.current().done { status in
+            NotificationPermissionStatus.current.done { status in
                 if status == .notDetermined {
                     self.notificationsRegistrationService.registerForRemoteNotifications()
                 } else {

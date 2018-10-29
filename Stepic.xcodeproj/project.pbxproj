@@ -2197,6 +2197,7 @@
 		2C77030E210F2C7B002E250D /* AuthSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34012109F5C900E259FE /* AuthSignInViewController.swift */; };
 		2C77030F210F2CF8002E250D /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
 		2C770310210F2D1D002E250D /* ApiDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */; };
+		2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */; };
 		2C7CCE282138276200A3AEA8 /* LearningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CCE272138276200A3AEA8 /* LearningTableViewController.swift */; };
 		2C7CCE2B213827B400A3AEA8 /* LearningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7CCE29213827B400A3AEA8 /* LearningTableViewCell.swift */; };
 		2C7CCE2C213827B400A3AEA8 /* LearningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7CCE2A213827B400A3AEA8 /* LearningTableViewCell.xib */; };
@@ -5711,6 +5712,7 @@
 		2C770305210F29B0002E250D /* LessonPlainObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonPlainObject.swift; sourceTree = "<group>"; };
 		2C770308210F2AD5002E250D /* RouterDismissable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterDismissable.swift; sourceTree = "<group>"; };
 		2C770309210F2AD5002E250D /* BaseRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestOnlySettingsAlertPresenter.swift; sourceTree = "<group>"; };
 		2C7CCE272138276200A3AEA8 /* LearningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTableViewController.swift; sourceTree = "<group>"; };
 		2C7CCE29213827B400A3AEA8 /* LearningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningTableViewCell.swift; sourceTree = "<group>"; };
 		2C7CCE2A213827B400A3AEA8 /* LearningTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LearningTableViewCell.xib; sourceTree = "<group>"; };
@@ -8894,6 +8896,7 @@
 			children = (
 				2C2F0BEF2186F1B6007DCA0A /* DataSource */,
 				2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */,
+				2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */,
 			);
 			name = NotificationsRequest;
 			sourceTree = "<group>";
@@ -14434,6 +14437,7 @@
 				08CBA2F81F573F6900302154 /* MenuViewController.swift in Sources */,
 				2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */,
 				2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */,
+				2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */,
 				081B7E2A1BAC208200554153 /* StandardsExtensions.swift in Sources */,
 				0860D9151F10EA690087D61B /* InputAccessoryBuilder.swift in Sources */,
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
