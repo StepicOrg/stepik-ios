@@ -102,7 +102,7 @@ protocol NotificationsRegistrationServiceDelegate: class {
     /// Tells the delegate that the app successfully registered with Apple Push Notification service (APNs).
     ///
     /// - Parameter notificationsRegistrationService: The NotificationsRegistrationService object informing the delegate about the registration status.
-    func notificationsRegistrationServiceDidSuccessfullyRegisteredWithAPNs(
+    func notificationsRegistrationServiceDidSuccessfullyRegisterWithAPNs(
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     )
 
@@ -131,7 +131,7 @@ extension NotificationsRegistrationServiceDelegate {
     ) {
     }
 
-    func notificationsRegistrationServiceDidSuccessfullyRegisteredWithAPNs(
+    func notificationsRegistrationServiceDidSuccessfullyRegisterWithAPNs(
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     ) {
     }

@@ -31,7 +31,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         print("NotificationsRegistrationService: did register for remote notifications 🚀🚀🚀")
         self.getGCMRegistrationToken(deviceToken: deviceToken)
         self.postCurrentPermissionStatus()
-        self.delegate?.notificationsRegistrationServiceDidSuccessfullyRegisteredWithAPNs(self)
+        self.delegate?.notificationsRegistrationServiceDidSuccessfullyRegisterWithAPNs(self)
     }
 
     func handleRegistrationError(_ error: Error) {
