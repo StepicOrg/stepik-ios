@@ -78,7 +78,5 @@ extension ContinueCourseView: ProgrammaticallyInitializableViewProtocol {
         self.lastStepView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
     }
 }
