@@ -56,7 +56,6 @@ class ApiRequestPerformer {
         queue.async {
             semaphore.wait()
             print("performing API request")
-
             if !AuthInfo.shared.hasUser {
                 print("no user in AuthInfo, retrieving")
                 ApiDataDownloader.stepics.retrieveCurrentUser(success: {

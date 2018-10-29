@@ -93,7 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        // Init notifications.
         NotificationsRegistrationService().renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
