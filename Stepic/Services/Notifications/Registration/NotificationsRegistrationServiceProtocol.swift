@@ -111,7 +111,7 @@ protocol NotificationsRegistrationServiceDelegate: class {
     /// - Parameters:
     ///   - notificationsRegistrationService: The NotificationsRegistrationService object informing the delegate about the registration status.
     ///   - error: An `Error` object that encapsulates information why registration did not succeed.
-    func notificationsRegistrationServiceDidFailRegisteredWithAPNs(
+    func notificationsRegistrationServiceDidFailRegisterWithAPNs(
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         error: Error
     )
@@ -136,7 +136,7 @@ extension NotificationsRegistrationServiceDelegate {
     ) {
     }
 
-    func notificationsRegistrationServiceDidFailRegisteredWithAPNs(
+    func notificationsRegistrationServiceDidFailRegisterWithAPNs(
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         error: Error
     ) {

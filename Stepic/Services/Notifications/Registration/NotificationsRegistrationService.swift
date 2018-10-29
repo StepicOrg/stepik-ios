@@ -37,7 +37,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     func handleRegistrationError(_ error: Error) {
         print("NotificationsRegistrationService: did fail register 😱😱😱 with error: \(error)")
         self.postCurrentPermissionStatus()
-        self.delegate?.notificationsRegistrationServiceDidFailRegisteredWithAPNs(self, error: error)
+        self.delegate?.notificationsRegistrationServiceDidFailRegisterWithAPNs(self, error: error)
     }
 
     func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
