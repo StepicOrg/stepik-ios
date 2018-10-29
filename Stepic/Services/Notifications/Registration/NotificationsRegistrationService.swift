@@ -28,14 +28,14 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     // MARK: - Handling APNs pipeline events -
 
     func handleDeviceToken(_ deviceToken: Data) {
-        print("NotificationsRegistrationService: did register for remote notifications 🚀🚀🚀")
+        print("NotificationsRegistrationService: did register for remote notifications")
         self.getGCMRegistrationToken(deviceToken: deviceToken)
         self.postCurrentPermissionStatus()
         self.delegate?.notificationsRegistrationServiceDidSuccessfullyRegisterWithAPNs(self)
     }
 
     func handleRegistrationError(_ error: Error) {
-        print("NotificationsRegistrationService: did fail register 😱😱😱 with error: \(error)")
+        print("NotificationsRegistrationService: did fail register with error: \(error)")
         self.postCurrentPermissionStatus()
         self.delegate?.notificationsRegistrationServiceDidFailRegisterWithAPNs(self, error: error)
     }
