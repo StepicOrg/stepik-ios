@@ -31,7 +31,7 @@ enum NotificationPermissionStatus {
     @available(iOS 10.0, *)
     init(authorizationStatus: UNAuthorizationStatus) {
         switch authorizationStatus {
-        case .authorized, .provisional:
+        case .authorized:
             self = .authorized
         case .denied:
             self = .denied
