@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // Init notifications.
-        NotificationsRegistrationService().register()
+        NotificationsRegistrationService().renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
@@ -115,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Responding to App State Changes and System Events
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        NotificationsRegistrationService().register()
+        NotificationsRegistrationService().renewDeviceToken()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
