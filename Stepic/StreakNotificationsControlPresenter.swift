@@ -22,9 +22,7 @@ class StreakNotificationsControlPresenter {
 
     init(
         view: StreakNotificationsControlView,
-        notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
-            presenter: NotificationsRequestAlertPresenter(context: .streak)
-        )
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     ) {
         self.view = view
         self.notificationsRegistrationService = notificationsRegistrationService

@@ -123,9 +123,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         modesVC.onDeadlineSelected = {
             [weak self] in
             self?.tableView.reloadData()
-            NotificationsRegistrationService(
-                presenter: NotificationsRequestAlertPresenter()
-            ).registerForRemoteNotifications()
+            NotificationsRegistrationService().registerForRemoteNotifications()
         }
         customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
     }
