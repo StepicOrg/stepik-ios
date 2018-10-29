@@ -10,18 +10,6 @@ import UIKit
 import Lottie
 import SnapKit
 
-enum NotificationRequestAlertViewFactory {
-    static func make(for context: NotificationRequestAlertContext) -> NotificationRequestAlertViewController {
-        let alertController = NotificationRequestAlertViewController(
-            nibName: "NotificationRequestAlertViewController",
-            bundle: nil
-        )
-        alertController.context = context
-
-        return alertController
-    }
-}
-
 final class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var imageContainerViewHeight: NSLayoutConstraint!
@@ -41,6 +29,15 @@ final class NotificationRequestAlertViewController: UIViewController {
 
     //Streaks Context
     var currentStreak: Int = 0
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    init(context: NotificationRequestAlertContext) {
+        self.context = context
+        super.init(nibName: nil, bundle: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

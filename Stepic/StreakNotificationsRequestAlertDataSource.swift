@@ -24,7 +24,7 @@ final class StreakNotificationsRequestAlertDataSource: NotificationsRequestAlert
     ) -> UIViewController {
         switch alertType {
         case .permission:
-            let alert = NotificationRequestAlertViewFactory.make(for: context)
+            let alert = NotificationRequestAlertViewController(context: context)
             alert.currentStreak = self.streak
             alert.yesAction = self.positiveAction
             alert.noAction = self.negativeAction

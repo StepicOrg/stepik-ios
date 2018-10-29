@@ -18,7 +18,7 @@ final class NotificationsRequestAlertDataSource: NotificationsRequestAlertDataSo
     ) -> UIViewController {
         switch alertType {
         case .permission:
-            let alert = NotificationRequestAlertViewFactory.make(for: context)
+            let alert = NotificationRequestAlertViewController(context: context)
             alert.yesAction = self.positiveAction
             alert.noAction = self.negativeAction
 
