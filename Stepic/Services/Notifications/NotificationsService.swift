@@ -143,13 +143,14 @@ extension NotificationsService {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
+        // FIXME: Use `NotificationType` instead of raw values.
         switch notificationType {
         case NotificationType.notifications.rawValue:
-            resolveRemoteNotificationsNotification(userInfo)
+            self.resolveRemoteNotificationsNotification(userInfo)
         case NotificationType.notificationStatuses.rawValue:
-            resolveRemoteNotificationStatusesNotification(userInfo)
+            self.resolveRemoteNotificationStatusesNotification(userInfo)
         case NotificationType.achievementProgresses.rawValue:
-            resolveRemoteAchievementNotification(userInfo)
+            self.resolveRemoteAchievementNotification(userInfo)
         default:
             print("remote notification received: unsopported notification type: \(notificationType)")
         }

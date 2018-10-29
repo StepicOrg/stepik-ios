@@ -14,6 +14,10 @@ final class NotificationReactionHandler {
             return
         }
 
+        if notification.action == .issuedCertificate {
+            return TabBarRouter(tab: .certificates).route()
+        }
+
         switch notification.type {
         case .comments:
             DeepLinkRoutingService().route(.notifications(section: .comments))
