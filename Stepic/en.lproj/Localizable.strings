@@ -326,6 +326,9 @@ CatalogPlaceholderError = "Could not load catalog. <b>Press</b> to retry.";
 TrendingTopics = "Trending topics";
 
 WidgetButtonJoin = "Join";
+/* a/b */
+WidgetButtonJoinTest = "Learn";
+
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";

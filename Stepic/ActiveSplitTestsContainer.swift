@@ -13,5 +13,6 @@ class ActiveSplitTestsContainer {
 
     static func setActiveTestsGroups() {
         splitTestingService.fetchSplitTest(AuthAfterOnboardingSplitTest.self).setSplitTestGroup()
+        splitTestingService.fetchSplitTest(JoinCourseStringSplitTest.self).setSplitTestGroup()
     }
 }
