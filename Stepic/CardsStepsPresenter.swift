@@ -70,7 +70,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     internal var ratingsAPI: AdaptiveRatingsAPI
     internal var lastViewedUpdater: LocalProgressLastViewedUpdater
     internal var notificationSuggestionManager: NotificationSuggestionManager
-    internal var notificationsRegistrationService: NotificationsRegistrationService
+    internal var notificationsRegistrationService: NotificationsRegistrationServiceProtocol
 
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
@@ -118,7 +118,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         return true
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationsRegistrationService: NotificationsRegistrationService, course: Course?, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationsRegistrationService: NotificationsRegistrationServiceProtocol, course: Course?, view: CardsStepsView) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -152,7 +152,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func appearedAfterSubscription() {
-        self.notificationsRegistrationService.register(forceToRequestAuthorization: true)
+        self.notificationsRegistrationService.registerForRemoteNotifications()
     }
 
     private func refreshTopCardForOnboarding(stepIndex: Int) {
@@ -507,15 +507,15 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
 extension BaseCardsStepsPresenter: NotificationsRegistrationServiceDelegate {
     func notificationsRegistrationService(
-        _ notificationsRegistrationService: NotificationsRegistrationService,
-        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) -> Bool {
         return self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
     }
 
     func notificationsRegistrationService(
-        _ notificationsRegistrationService: NotificationsRegistrationService,
-        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        didPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) {
         if alertType == .permission {
             self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
