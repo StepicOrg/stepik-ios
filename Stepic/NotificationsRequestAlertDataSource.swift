@@ -8,50 +8,12 @@
 
 import UIKit
 
-final class NotificationsRequestAlertDataSource: NotificationsRequestAlertDataSourceProtocol {
-    var positiveAction: (() -> Void)?
-    var negativeAction: (() -> Void)?
+protocol NotificationsRequestAlertDataSource: class {
+    var positiveAction: (() -> Void)? { get set }
+    var negativeAction: (() -> Void)? { get set }
 
     func alert(
         for alertType: NotificationsRegistrationServiceAlertType,
         in context: NotificationRequestAlertContext
-    ) -> UIViewController {
-        switch alertType {
-        case .permission:
-            let alert = NotificationRequestAlertViewController(context: context)
-            alert.yesAction = self.positiveAction
-            alert.noAction = self.negativeAction
-
-            return alert
-        case .settings:
-            let alert = UIAlertController(
-                title: NSLocalizedString("DeniedNotificationsDefaultAlertTitle", comment: ""),
-                message: NSLocalizedString("DeniedNotificationsDefaultAlertMessage", comment: ""),
-                preferredStyle: .alert
-            )
-            alert.addAction(
-                UIAlertAction(
-                    title: NSLocalizedString("Settings", comment: ""),
-                    style: .default,
-                    handler: { _ in
-                        self.positiveAction?()
-                        if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                            UIApplication.shared.openURL(settingsURL)
-                        }
-                    }
-                )
-            )
-            alert.addAction(
-                UIAlertAction(
-                    title: NSLocalizedString("OK", comment: ""),
-                    style: .default,
-                    handler: { _ in
-                        self.negativeAction?()
-                    }
-                )
-            )
-
-            return alert
-        }
-    }
+    ) -> UIViewController
 }

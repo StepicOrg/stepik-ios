@@ -1754,9 +1754,9 @@
 		2C2E2853210B5F6700EB6F47 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
 		2C2EA36B212D5FEF002116C9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA36A212D5FEF002116C9 /* Result.swift */; };
 		2C2F0BE72186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */; };
-		2C2F0BE92186EF87007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* NotificationsRequestAlertDataSource.swift */; };
+		2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */; };
 		2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */; };
-		2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSourceProtocol.swift */; };
+		2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */; };
 		2C2FD77A2107359E00609621 /* LessonsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD7782107359E00609621 /* LessonsTableViewController.swift */; };
 		2C2FD77F210735E000609621 /* LessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2FD77D210735E000609621 /* LessonTableViewCell.swift */; };
 		2C2FD780210735E000609621 /* LessonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2FD77E210735E000609621 /* LessonTableViewCell.xib */; };
@@ -5585,9 +5585,9 @@
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
-		2C2F0BE82186EF87007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
+		2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertPresenter.swift; sourceTree = "<group>"; };
-		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSourceProtocol.swift; sourceTree = "<group>"; };
+		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2FD7782107359E00609621 /* LessonsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsTableViewController.swift; sourceTree = "<group>"; };
 		2C2FD77D210735E000609621 /* LessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTableViewCell.swift; sourceTree = "<group>"; };
 		2C2FD77E210735E000609621 /* LessonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonTableViewCell.xib; sourceTree = "<group>"; };
@@ -8904,8 +8904,8 @@
 		2C2F0BEF2186F1B6007DCA0A /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSourceProtocol.swift */,
-				2C2F0BE82186EF87007DCA0A /* NotificationsRequestAlertDataSource.swift */,
+				2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */,
+				2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */,
 				2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */,
 			);
 			name = DataSource;
@@ -14564,7 +14564,7 @@
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
-				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSourceProtocol.swift in Sources */,
+				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
 				0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */,
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
@@ -14739,7 +14739,7 @@
 				2C97E00F215E482B005684A1 /* SearchResultsViewController.swift in Sources */,
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */,
-				2C2F0BE92186EF87007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,
+				2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */,

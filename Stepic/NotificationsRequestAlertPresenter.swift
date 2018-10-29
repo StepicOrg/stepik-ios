@@ -15,13 +15,13 @@ final class NotificationsRequestAlertPresenter: NotificationsRegistrationService
 
     private let context: NotificationRequestAlertContext
     private let presentationType: PresentationType
-    private let dataSource: NotificationsRequestAlertDataSourceProtocol
+    private let dataSource: NotificationsRequestAlertDataSource
     private let presentAlertIfRegistered: Bool
 
     init(
         context: NotificationRequestAlertContext = .default,
         presentationType: PresentationType = .dynamic(center: .center),
-        dataSource: NotificationsRequestAlertDataSourceProtocol = NotificationsRequestAlertDataSource(),
+        dataSource: NotificationsRequestAlertDataSource = CommonNotificationsRequestAlertDataSource(),
         presentAlertIfRegistered: Bool = false
     ) {
         self.context = context

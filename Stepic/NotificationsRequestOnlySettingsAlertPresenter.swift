@@ -13,10 +13,10 @@ final class NotificationsRequestOnlySettingsAlertPresenter: NotificationsRegistr
     var onCancelCallback: (() -> Void)?
 
     private let context: NotificationRequestAlertContext
-    private let dataSource: NotificationsRequestAlertDataSourceProtocol
+    private let dataSource: NotificationsRequestAlertDataSource
 
     init(context: NotificationRequestAlertContext = .default,
-         dataSource: NotificationsRequestAlertDataSourceProtocol = NotificationsRequestAlertDataSource()
+         dataSource: NotificationsRequestAlertDataSource = CommonNotificationsRequestAlertDataSource()
     ) {
         self.context = context
         self.dataSource = dataSource
