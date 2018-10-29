@@ -24,16 +24,12 @@ class SearchResultsAPI: APIEndpoint {
            "is_public": "true"
         ]
 
-        params["access_token"] = AuthInfo.shared.token?.accessToken as NSObject?
-        params["query"] = query.lowercased()
-
         if let p = page {
             params["page"] = p
         }
         if let t = type {
             params["type"] = t
         }
-        params["language"] = language.searchCoursesParameter
 
         return manager.request("\(StepicApplicationsInfo.apiURL)/search-results", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
             response in
