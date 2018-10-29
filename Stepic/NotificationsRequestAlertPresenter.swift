@@ -16,15 +16,18 @@ final class NotificationsRequestAlertPresenter: NotificationsRegistrationService
     private let context: NotificationRequestAlertContext
     private let presentationType: PresentationType
     private let dataSource: NotificationsRequestAlertDataSourceProtocol
+    private let presentAlertIfRegistered: Bool
 
     init(
         context: NotificationRequestAlertContext = .default,
         presentationType: PresentationType = .dynamic(center: .center),
-        dataSource: NotificationsRequestAlertDataSourceProtocol = NotificationsRequestAlertDataSource()
+        dataSource: NotificationsRequestAlertDataSourceProtocol = NotificationsRequestAlertDataSource(),
+        presentAlertIfRegistered: Bool = false
     ) {
         self.context = context
         self.presentationType = presentationType
         self.dataSource = dataSource
+        self.presentAlertIfRegistered = presentAlertIfRegistered
     }
 
     func presentAlert(
@@ -34,6 +37,21 @@ final class NotificationsRequestAlertPresenter: NotificationsRegistrationService
         self.dataSource.positiveAction = self.onPositiveCallback
         self.dataSource.negativeAction = self.onCancelCallback
 
+        if self.presentAlertIfRegistered {
+            self.present(alertType: alertType, controller: controller)
+        } else {
+            NotificationPermissionStatus.current().done { [weak self] status in
+                if !status.isRegistered {
+                    self?.present(alertType: alertType, controller: controller)
+                }
+            }
+        }
+    }
+
+    private func present(
+        alertType: NotificationsRegistrationServiceAlertType,
+        controller: UIViewController
+    ) {
         switch alertType {
         case .permission:
             let presenter = Presentr(presentationType: self.presentationType)

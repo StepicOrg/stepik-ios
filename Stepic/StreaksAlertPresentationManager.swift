@@ -54,7 +54,8 @@ final class StreaksAlertPresentationManager {
         let presenter = NotificationsRequestAlertPresenter(
             context: .streak,
             presentationType: .dynamic(center: .center),
-            dataSource: StreakNotificationsRequestAlertDataSource(streak: streak)
+            dataSource: StreakNotificationsRequestAlertDataSource(streak: streak),
+            presentAlertIfRegistered: true
         )
         presenter.onPositiveCallback = { [weak self] in
             PreferencesContainer.notifications.allowStreaksNotifications = true
