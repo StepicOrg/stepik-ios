@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
+    private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
+        NotificationsRegistrationService()
+    }()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -93,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        NotificationsRegistrationService().renewDeviceToken()
+        self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
@@ -114,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Responding to App State Changes and System Events
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        NotificationsRegistrationService().renewDeviceToken()
+        self.notificationsRegistrationService.renewDeviceToken()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -139,14 +142,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        NotificationsRegistrationService().handleDeviceToken(deviceToken)
+        self.notificationsRegistrationService.handleDeviceToken(deviceToken)
     }
 
     func application(
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        NotificationsRegistrationService().handleRegistrationError(error)
+        self.notificationsRegistrationService.handleRegistrationError(error)
     }
 
     func application(
@@ -165,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegister notificationSettings: UIUserNotificationSettings
     ) {
-        NotificationsRegistrationService().handleRegisteredNotificationSettings(notificationSettings)
+        self.notificationsRegistrationService.handleRegisteredNotificationSettings(notificationSettings)
     }
 
     // MARK: Private Helpers
@@ -176,11 +179,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        InstanceID.instanceID().instanceID { (result, error) in
+        InstanceID.instanceID().instanceID { [weak self] (result, error) in
             if let error = error {
-                print("Error fetching Firebase remote instanse ID: \(error)")
+                print("Error fetching Firebase remote instance ID: \(error)")
             } else if let result = result {
-                NotificationsRegistrationService().registerDevice(result.token)
+                self?.notificationsRegistrationService.registerDevice(result.token)
             }
         }
     }

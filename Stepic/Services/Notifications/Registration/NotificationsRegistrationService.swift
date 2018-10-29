@@ -198,7 +198,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     // MARK: Device
 
-    func registerDevice(_ registrationToken: String, forceCreation: Bool = false) {
+    func registerDevice(_ registrationToken: String, forceCreation: Bool) {
         let newDevice = Device(
             registrationId: registrationToken,
             deviceDescription: DeviceInfo.current.deviceInfoString
@@ -245,7 +245,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     // MARK: - Firebase -
 
-    func getGCMRegistrationToken(deviceToken: Data) {
+    private func getGCMRegistrationToken(deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
 

@@ -46,6 +46,19 @@ protocol NotificationsRegistrationServiceProtocol: class {
     ///
     /// - Parameter notificationSettings: The user’s specified notification settings.
     func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings)
+
+    /// Register the device with our notification provider server.
+    ///
+    /// - Parameters:
+    ///   - registrationToken: An Firebase Messaging scoped token for the firebase app.
+    ///   - forceCreation: Controls whether to create a new device instance or get cached one.
+    func registerDevice(_ registrationToken: String, forceCreation: Bool)
+}
+
+extension NotificationsRegistrationServiceProtocol {
+    func registerDevice(_ registrationToken: String) {
+        self.registerDevice(registrationToken, forceCreation: false)
+    }
 }
 
 /// Represents types of alerts that may be presented by the presenter.
