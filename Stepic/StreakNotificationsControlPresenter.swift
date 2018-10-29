@@ -18,11 +18,13 @@ protocol StreakNotificationsControlView: class {
 
 class StreakNotificationsControlPresenter {
     weak var view: StreakNotificationsControlView?
-    private let notificationsRegistrationService: NotificationsRegistrationService
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
 
     init(
         view: StreakNotificationsControlView,
-        notificationsRegistrationService: NotificationsRegistrationService = NotificationsRegistrationService(alertProvider: DefaultNotificationsRegistrationServiceAlertProvider(context: .streak))
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
+            presenter: NotificationsRequestAlertPresenter(context: .streak)
+        )
     ) {
         self.view = view
         self.notificationsRegistrationService = notificationsRegistrationService
@@ -80,7 +82,7 @@ class StreakNotificationsControlPresenter {
         }
 
         PreferencesContainer.notifications.allowStreaksNotifications = true
-        self.notificationsRegistrationService.register(forceToRequestAuthorization: true)
+        self.notificationsRegistrationService.registerForRemoteNotifications()
 
         guard let settings = UIApplication.shared.currentUserNotificationSettings, settings.types != [] else {
             completion?(false)
@@ -102,7 +104,7 @@ class StreakNotificationsControlPresenter {
     }
 
     private func checkPermissionStatus() {
-        self.notificationsRegistrationService.getCurrentPermissionStatus().done { [weak self] status in
+        NotificationPermissionStatus.current().done { [weak self] status in
             if PreferencesContainer.notifications.allowStreaksNotifications && !status.isRegistered {
                 self?.turnOffNotifications()
                 self?.view?.setNotificationsSwitchIsOn(false)
