@@ -152,7 +152,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     private func presentPermissionAlertIfNeeded() {
-        if self.didShowPermissionAlert {
+        if self.didShowPermissionAlert || self.presenter == nil {
             self.requestAuthorization()
         } else {
             self.presentPermissionAlert()
