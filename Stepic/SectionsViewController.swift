@@ -29,10 +29,10 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     var isFirstLoad: Bool = true
 
     private let notificationSuggestionManager = NotificationSuggestionManager()
-    private lazy var notificationsRegistrationService: NotificationsRegistrationService = {
+    private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
         NotificationsRegistrationService(
             delegate: self,
-            alertProvider: DefaultNotificationsRegistrationServiceAlertProvider(context: .courseSubscription)
+            presenter: NotificationsRequestAlertPresenter(context: .courseSubscription)
         )
     }()
 
@@ -244,9 +244,9 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
 
         if didJustSubscribe {
-            self.notificationsRegistrationService.getCurrentPermissionStatus().done { status in
+            NotificationPermissionStatus.current().done { status in
                 if status == .notDetermined {
-                    self.notificationsRegistrationService.register(forceToRequestAuthorization: true)
+                    self.notificationsRegistrationService.registerForRemoteNotifications()
                 } else {
                     self.showShareTooltip()
                 }
@@ -661,8 +661,8 @@ extension SectionsViewController : PKDownloadButtonDelegate {
 
 extension SectionsViewController: NotificationsRegistrationServiceDelegate {
     func notificationsRegistrationService(
-        _ notificationsRegistrationService: NotificationsRegistrationService,
-        willPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) -> Bool {
         let canShowAlert = self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
 
@@ -674,8 +674,8 @@ extension SectionsViewController: NotificationsRegistrationServiceDelegate {
     }
 
     func notificationsRegistrationService(
-        _ notificationsRegistrationService: NotificationsRegistrationService,
-        didPresentAlertFor alertType: NotificationsRegistrationService.AlertType
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        didPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) {
         if alertType == .permission {
             self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
