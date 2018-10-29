@@ -79,7 +79,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
             usersAPI: ApiDataDownloader.users,
             notificationsStatusAPI: NotificationStatusesAPI(),
             notificationsRegistrationService: NotificationsRegistrationService(
-                alertProvider: DefaultNotificationsRegistrationServiceAlertProvider(context: .notificationsTab)
+                presenter: NotificationsRequestAlertPresenter(context: .notificationsTab)
             ),
             notificationSuggestionManager: NotificationSuggestionManager(),
             view: self
