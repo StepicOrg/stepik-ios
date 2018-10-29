@@ -63,15 +63,14 @@ final class NotificationsService {
 
 // MARK: - NotificationsService (LocalNotifications) -
 
-// TODO: NotificationsRegistrationService
 extension NotificationsService {
     func scheduleLocalNotification(
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
     ) {
-        self.notificationsRegistrationService.getCurrentPermissionStatus().then { status -> Promise<Void> in
+        NotificationPermissionStatus.current().then { status -> Promise<Void> in
             if !status.isRegistered {
-                self.notificationsRegistrationService.register()
+                self.notificationsRegistrationService.renewDeviceToken()
             }
 
             if removeIdentical {
@@ -166,7 +165,7 @@ extension NotificationsService {
         }
 
         guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
-              let alert = aps[PayloadKey.alert.rawValue]  as? [String: Any],
+              let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
               let body = alert[PayloadKey.body.rawValue] as? String,
               let object = userInfo[PayloadKey.object.rawValue] as? String else {
             return print("remote notification received: unable to parse notification: \(userInfo)")
