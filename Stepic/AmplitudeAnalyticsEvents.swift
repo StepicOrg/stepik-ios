@@ -302,7 +302,7 @@ struct AmplitudeAnalyticsEvents {
 
         static func buttonPressed(id: Int, position: Int) -> AnalyticsEvent {
             return AnalyticsEvent(
-                name: "Button pressed",
+                name: "Story button pressed",
                 parameters: [
                     "id": id,
                     "position": position
