@@ -35,9 +35,6 @@ final class CommonNotificationsRequestAlertDataSource: NotificationsRequestAlert
                     style: .default,
                     handler: { _ in
                         self.positiveAction?()
-                        if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                            UIApplication.shared.openURL(settingsURL)
-                        }
                     }
                 )
             )

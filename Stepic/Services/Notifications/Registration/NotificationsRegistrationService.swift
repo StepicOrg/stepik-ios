@@ -110,7 +110,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         } else if #available(iOS 10.0, *) {
             NotificationPermissionStatus.current.done { status in
                 if status == .denied {
-                    self.presentSettingsAlert()
+                    self.presentSettingsAlertIfNeeded()
                 } else {
                     self.presentPermissionAlertIfNeeded()
                 }
@@ -165,7 +165,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             originalCallback?()
             NotificationPermissionStatus.current.done { status in
                 if status == .denied {
-                    self.presentAlert(for: .settings)
+                    self.presentSettingsAlert()
                 } else {
                     self.requestAuthorization()
                 }
@@ -175,14 +175,27 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         self.presentAlert(for: .permission)
     }
 
-    private func presentSettingsAlert() {
+    private func presentSettingsAlertIfNeeded() {
         if let delegate = self.delegate {
             if delegate.notificationsRegistrationService(self, shouldPresentAlertFor: .settings) {
-                self.presentAlert(for: .settings)
+                self.presentSettingsAlert()
             }
         } else {
-            self.presentAlert(for: .settings)
+            self.presentSettingsAlert()
         }
+    }
+
+    private func presentSettingsAlert() {
+        self.presenter?.onPositiveCallback = {
+
+            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(settingsURL)
+            }
+        }
+        self.presenter?.onCancelCallback = {
+        }
+
+        self.presentAlert(for: .settings)
     }
 
     private func presentAlert(for type: NotificationsRegistrationServiceAlertType) {
