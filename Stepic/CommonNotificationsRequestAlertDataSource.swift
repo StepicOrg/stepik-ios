@@ -43,8 +43,8 @@ final class CommonNotificationsRequestAlertDataSource: NotificationsRequestAlert
             )
             alert.addAction(
                 UIAlertAction(
-                    title: NSLocalizedString("OK", comment: ""),
-                    style: .default,
+                    title: NSLocalizedString("No", comment: ""),
+                    style: .cancel,
                     handler: { _ in
                         self.negativeAction?()
                     }
