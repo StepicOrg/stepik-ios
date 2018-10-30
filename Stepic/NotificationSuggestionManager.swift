@@ -89,15 +89,22 @@ final class NotificationSuggestionManager {
             guard let trigger = trigger else {
                 return false
             }
-            let commonChecks = AuthInfo.shared.isAuthorized && isAlertAvailableNow(context: context) && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
+
+            let commonChecks = AuthInfo.shared.isAuthorized
+                && self.isAlertAvailableNow(context: context)
+                && PreferencesContainer.notifications.allowStreaksNotifications == false
+                && StepicApplicationsInfo.streaksEnabled
+
             switch trigger {
             case .login:
-                return commonChecks && RemoteConfig.shared.showStreaksNotificationTrigger == .loginAndSubmission && streakAlertShownCnt == 0
+                return commonChecks
+                    && RemoteConfig.shared.showStreaksNotificationTrigger == .loginAndSubmission
+                    && self.streakAlertShownCnt == 0
             case .submission:
-                return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
+                return commonChecks && self.streakAlertShownCnt < self.maxStreakAlertShownCnt
             }
         case .notificationsTab, .courseSubscription, .default:
-            return isAlertAvailableNow(context: context) && AuthInfo.shared.isAuthorized
+            return self.isAlertAvailableNow(context: context) && AuthInfo.shared.isAuthorized
         }
     }
 }

@@ -16,13 +16,16 @@ import UserNotifications
 final class NotificationsRegistrationService: NotificationsRegistrationServiceProtocol {
     weak var delegate: NotificationsRegistrationServiceDelegate?
     var presenter: NotificationsRegistrationServicePresenterProtocol?
+    private var analytics: NotificationAlertsAnalytics?
 
     init(
         delegate: NotificationsRegistrationServiceDelegate? = nil,
-        presenter: NotificationsRegistrationServicePresenterProtocol? = nil
+        presenter: NotificationsRegistrationServicePresenterProtocol? = nil,
+        analytics: NotificationAlertsAnalytics? = nil
     ) {
         self.delegate = delegate
         self.presenter = presenter
+        self.analytics = analytics
     }
 
     // MARK: - Handling APNs pipeline events -
@@ -42,7 +45,15 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     func handleRegisteredNotificationSettings(_ notificationSettings: UIUserNotificationSettings) {
         print("NotificationsRegistrationService: registered with settings: \(notificationSettings)")
-        if notificationSettings.types != [] {
+
+        let granted = notificationSettings.types != []
+
+        if self.isFirstRegistrationIsInProgress {
+            self.isFirstRegistrationIsInProgress = false
+            self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
+        }
+
+        if granted {
             self.registerWithAPNs()
         } else {
             self.postCurrentPermissionStatus()
@@ -122,12 +133,22 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     /// Prompts the user to authorize with desired notifications settings.
     private func requestAuthorization() {
-        self.didShowPermissionAlert = true
+        if !self.didShowDefaultPermissionAlert {
+            self.analytics?.reportDefaultAlertShown()
+            self.isFirstRegistrationIsInProgress = true
+        }
+
+        self.didShowDefaultPermissionAlert = true
 
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().requestAuthorization(
                 options: [.alert, .badge, .sound],
                 completionHandler: { granted, error in
+                    if self.isFirstRegistrationIsInProgress {
+                        self.isFirstRegistrationIsInProgress = false
+                        self.analytics?.reportDefaultAlertInteractionResult(granted ? .yes : .no)
+                    }
+
                     if granted {
                         self.registerWithAPNs()
                     } else if let error = error {
@@ -152,7 +173,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     private func presentPermissionAlertIfNeeded() {
-        if self.didShowPermissionAlert || self.presenter == nil {
+        if self.didShowDefaultPermissionAlert || self.presenter == nil {
             self.requestAuthorization()
         } else {
             self.presentPermissionAlert()
@@ -160,9 +181,8 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     private func presentPermissionAlert() {
-        let originalCallback = self.presenter?.onPositiveCallback
         self.presenter?.onPositiveCallback = {
-            originalCallback?()
+            self.analytics?.reportCustomAlertInteractionResult(.yes)
             NotificationPermissionStatus.current.done { status in
                 if status == .denied {
                     self.presentSettingsAlert()
@@ -170,6 +190,9 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                     self.requestAuthorization()
                 }
             }
+        }
+        self.presenter?.onCancelCallback = {
+            self.analytics?.reportCustomAlertInteractionResult(.no)
         }
 
         self.presentAlert(for: .permission)
@@ -187,12 +210,14 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     private func presentSettingsAlert() {
         self.presenter?.onPositiveCallback = {
+            self.analytics?.reportCustomAlertInteractionResult(.yes)
 
             if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
                 UIApplication.shared.openURL(settingsURL)
             }
         }
         self.presenter?.onCancelCallback = {
+            self.analytics?.reportCustomAlertInteractionResult(.no)
         }
 
         self.presentAlert(for: .settings)
@@ -332,14 +357,34 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 // MARK: - NotificationsRegistrationService (UserDefaults) -
 
 extension NotificationsRegistrationService {
-    private static let didShowPermissionAlertKey = "didShowPermissionAlertKey"
+    private static let didShowDefaultPermissionAlertKey = "didShowDefaultPermissionAlertKey"
+    private static let isFirstRegistrationIsInProgressKey = "isFirstRegistrationIsInProgressKey"
 
-    private var didShowPermissionAlert: Bool {
+    private var didShowDefaultPermissionAlert: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: NotificationsRegistrationService.didShowPermissionAlertKey)
+            return UserDefaults.standard.bool(
+                forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
+            )
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: NotificationsRegistrationService.didShowPermissionAlertKey)
+            UserDefaults.standard.set(
+                newValue,
+                forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
+            )
+        }
+    }
+
+    private var isFirstRegistrationIsInProgress: Bool {
+        get {
+            return UserDefaults.standard.bool(
+                forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
+            )
+        }
+        set {
+            UserDefaults.standard.set(
+                newValue,
+                forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
+            )
         }
     }
 }

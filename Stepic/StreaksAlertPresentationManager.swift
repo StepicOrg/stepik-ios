@@ -12,10 +12,14 @@ import PromiseKit
 
 final class StreaksAlertPresentationManager {
     weak var controller: UIViewController?
-    var source: Source?
+    private let source: Source
 
     private var alertPresenter: NotificationsRegistrationServicePresenterProtocol?
     private var didTransitionToSettings = false
+
+    private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
+        NotificationsRegistrationService(analytics: .init(source: self.source.analyticsSource))
+    }()
 
     private let streakTimePickerPresenter: Presentr = {
         let streakTimePickerPresenter = Presentr(presentationType: .popup)
@@ -42,34 +46,36 @@ final class StreaksAlertPresentationManager {
             return
         }
 
-        if let source = source?.rawValue {
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Streaks.notifySuggestionShown(
-                    source: source,
-                    trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
-                )
+        AnalyticsReporter.reportEvent(
+            AnalyticsEvents.Streaks.notifySuggestionShown(
+                source: self.source.rawValue,
+                trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
             )
-        }
+        )
 
         let presenter = NotificationsRequestAlertPresenter(
             context: .streak,
-            presentationType: .dynamic(center: .center),
             dataSource: StreakNotificationsRequestAlertDataSource(streak: streak),
             presentAlertIfRegistered: true
         )
+        let source = self.source.analyticsSource
         presenter.onPositiveCallback = { [weak self] in
             PreferencesContainer.notifications.allowStreaksNotifications = true
 
-            let notificationSuggestionManager = NotificationSuggestionManager()
-            notificationSuggestionManager.didShowAlert(context: .streak)
-
             AnalyticsReporter.reportEvent(
                 AnalyticsEvents.Streaks.Suggestion.success(
-                    notificationSuggestionManager.streakAlertShownCnt
+                    NotificationSuggestionManager().streakAlertShownCnt
                 )
             )
+            NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.yes)
 
-            self?.notifyPressed()
+            if let strongSelf = self {
+                strongSelf.notifyPressed()
+            } else {
+                NotificationsRegistrationService(
+                    analytics: .init(source: source)
+                ).registerForRemoteNotifications()
+            }
         }
         presenter.onCancelCallback = {
             PreferencesContainer.notifications.allowStreaksNotifications = false
@@ -79,10 +85,14 @@ final class StreaksAlertPresentationManager {
                     NotificationSuggestionManager().streakAlertShownCnt
                 )
             )
+            NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.no)
         }
 
         self.alertPresenter = presenter
         self.alertPresenter?.presentAlert(for: .permission, inController: controller)
+
+        NotificationSuggestionManager().didShowAlert(context: .streak)
+        NotificationAlertsAnalytics(source: source).reportCustomAlertShown()
     }
 
     @objc
@@ -111,16 +121,18 @@ final class StreaksAlertPresentationManager {
 
         vc.startHour = PreferencesContainer.notifications.streaksNotificationStartHourLocal
         vc.selectedBlock = { [weak self] in
-            if let source = self?.source?.rawValue {
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Streaks.notifySuggestionApproved(
-                        source: source,
-                        trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
-                    )
-                )
+            guard let strongSelf = self else {
+                return
             }
 
-            self?.didChooseTime()
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Streaks.notifySuggestionApproved(
+                    source: strongSelf.source.rawValue,
+                    trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
+                )
+            )
+
+            strongSelf.didChooseTime()
         }
         vc.cancelAction = {
         }
@@ -132,7 +144,7 @@ final class StreaksAlertPresentationManager {
         NotificationPermissionStatus.current.done { [weak self] status in
             switch status {
             case .notDetermined:
-                NotificationsRegistrationService().registerForRemoteNotifications()
+                self?.notificationsRegistrationService.registerForRemoteNotifications()
                 self?.selectStreakNotificationTime()
             case .authorized:
                 self?.selectStreakNotificationTime()
@@ -163,7 +175,7 @@ final class StreaksAlertPresentationManager {
         NotificationPermissionStatus.current.done { [weak self] status in
             switch status {
             case .notDetermined:
-                NotificationsRegistrationService().registerForRemoteNotifications()
+                self?.notificationsRegistrationService.registerForRemoteNotifications()
             case .authorized:
                 self?.selectStreakNotificationTime()
             case .denied:
@@ -175,5 +187,16 @@ final class StreaksAlertPresentationManager {
     enum Source: String {
         case login = "login"
         case submission = "submission"
+
+        var analyticsSource: NotificationAlertsAnalytics.Source {
+            switch self {
+            case .login:
+                return .streakAfterLogin
+            case .submission:
+                return .streakAfterSubmission(
+                    shownCount: NotificationSuggestionManager().streakAlertShownCnt
+                )
+            }
+        }
     }
 }

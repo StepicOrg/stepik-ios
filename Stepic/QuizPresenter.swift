@@ -420,9 +420,6 @@ class QuizPresenter {
                 return
             }
 
-            #if !os(tvOS)
-                self?.streaksNotificationSuggestionManager?.didShowAlert(context: .streak)
-            #endif
             self?.view?.suggestStreak(streak: activity.currentStreak)
         }, error: {
             _ in

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Presentr
 
 class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()

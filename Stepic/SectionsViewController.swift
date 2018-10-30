@@ -32,7 +32,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
         NotificationsRegistrationService(
             delegate: self,
-            presenter: NotificationsRequestAlertPresenter(context: .courseSubscription)
+            presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
+            analytics: .init(source: .courseSubscription)
         )
     }()
 
@@ -124,7 +125,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             [weak self] in
             self?.tableView.reloadData()
             NotificationsRegistrationService(
-                presenter: NotificationsRequestOnlySettingsAlertPresenter()
+                presenter: NotificationsRequestOnlySettingsAlertPresenter(),
+                analytics: .init(source: .personalDeadline)
             ).registerForRemoteNotifications()
         }
         customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)

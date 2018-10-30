@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Presentr
 import SnapKit
 
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {

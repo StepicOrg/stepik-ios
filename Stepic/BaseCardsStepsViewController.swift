@@ -70,7 +70,8 @@ class BaseCardsStepsViewController: CardsStepsViewController {
                 lastViewedUpdater: LocalProgressLastViewedUpdater(),
                 notificationSuggestionManager: NotificationSuggestionManager(),
                 notificationsRegistrationService: NotificationsRegistrationService(
-                    presenter: NotificationsRequestAlertPresenter(context: .courseSubscription)
+                    presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
+                    analytics: .init(source: .courseSubscription)
                 ),
                 course: course,
                 view: self

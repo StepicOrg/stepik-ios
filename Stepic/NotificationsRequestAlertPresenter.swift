@@ -18,6 +18,12 @@ final class NotificationsRequestAlertPresenter: NotificationsRegistrationService
     private let dataSource: NotificationsRequestAlertDataSource
     private let presentAlertIfRegistered: Bool
 
+    private lazy var presentr: Presentr = {
+        let presentr = Presentr(presentationType: self.presentationType)
+        presentr.roundCorners = true
+        return presentr
+    }()
+
     init(
         context: NotificationRequestAlertContext = .default,
         presentationType: PresentationType = .dynamic(center: .center),
@@ -54,17 +60,12 @@ final class NotificationsRequestAlertPresenter: NotificationsRegistrationService
     ) {
         switch alertType {
         case .permission:
-            let presenter = Presentr(presentationType: self.presentationType)
-            presenter.roundCorners = true
-
             let alert = self.dataSource.alert(for: .permission, in: self.context)
             controller.customPresentViewController(
-                presenter,
+                self.presentr,
                 viewController: alert,
                 animated: true
             )
-
-            NotificationSuggestionManager().didShowAlert(context: self.context)
         case .settings:
             controller.present(
                 self.dataSource.alert(for: .settings, in: self.context),
