@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 class StyledNavigationViewController: UINavigationController {
+    static let backgroundColor = UIColor.mainLight
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +22,8 @@ class StyledNavigationViewController: UINavigationController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setStatusBarStyle()
-        navigationBar.barTintColor = UIColor.mainLight
-        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = false
+        changeNavigationBarAlpha(1.0)
+
         let fontSize: CGFloat = 17.0
         let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark, NSAttributedStringKey.font: titleFont]
@@ -68,6 +67,18 @@ class StyledNavigationViewController: UINavigationController {
             _ in
             self?.navigationBar.layoutSubviews()
             }, completion: nil)
+    }
+
+    func changeNavigationBarAlpha(_ alpha: CGFloat) {
+        let color = StyledNavigationViewController.backgroundColor
+            .withAlphaComponent(alpha)
+
+        navigationBar.isTranslucent = true
+        navigationBar.backgroundColor = color
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+
+        statusBarView?.backgroundColor = color
     }
 
     func changeShadowAlpha(_ alpha: CGFloat) {
@@ -149,6 +160,10 @@ class StyledNavigationViewController: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         lastAction = .push
         super.pushViewController(viewController, animated: animated)
+    }
+
+    private var statusBarView: UIView? {
+        return UIApplication.shared.value(forKey: "statusBar") as? UIView
     }
 }
 
