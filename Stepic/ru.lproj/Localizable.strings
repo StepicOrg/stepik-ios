@@ -327,6 +327,9 @@ CatalogPlaceholderError = "Не удалось загрузить каталог
 TrendingTopics = "Категории";
 
 WidgetButtonJoin = "Поступить";
+/* a/b */
+WidgetButtonJoinTest = "Учиться";
+
 WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";
