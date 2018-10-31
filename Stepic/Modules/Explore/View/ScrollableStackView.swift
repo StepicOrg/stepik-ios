@@ -97,6 +97,25 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    @available(iOS 11.0, *)
+    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+        get {
+            return self.scrollView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.scrollView.contentInsetAdjustmentBehavior = newValue
+        }
+    }
+
+    var scrollDelegate: UIScrollViewDelegate? {
+        get {
+            return self.scrollView.delegate
+        }
+        set {
+            self.scrollView.delegate = newValue
+        }
+    }
+
     // MARK: - Inits
 
     init(frame: CGRect, orientation: Orientation = .vertical) {

@@ -9,28 +9,54 @@
 import UIKit
 
 final class CourseInfoViewController: UIViewController {
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    private static let topBarAlphaStatusBarThreshold = 0.85
+    private var lastTopBarAlpha: CGFloat = 0.0
 
-        if let styledNavigationController = self.navigationController
-            as? StyledNavigationViewController {
-            styledNavigationController.changeNavigationBarAlpha(0.0)
-            styledNavigationController.changeShadowAlpha(0.0)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if #available(iOS 11, *) { } else {
+            self.automaticallyAdjustsScrollViewInsets = false
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        if let styledNavigationController = self.navigationController
-            as? StyledNavigationViewController {
-            styledNavigationController.changeNavigationBarAlpha(1.0)
-            styledNavigationController.changeShadowAlpha(1.0)
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.changeTopBarAlpha(value: self.lastTopBarAlpha)
+    }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        self.changeTopBarAlpha(value: 1.0)
         super.viewWillDisappear(animated)
     }
 
     override func loadView() {
-        let view = CourseInfoView(frame: UIScreen.main.bounds)
+        let view = CourseInfoView(frame: UIScreen.main.bounds, scrollDelegate: self)
         self.view = view
+    }
+
+    private func changeTopBarAlpha(value: CGFloat) {
+        if let styledNavigationController = self.navigationController
+            as? StyledNavigationViewController {
+            styledNavigationController.changeNavigationBarAlpha(value)
+            styledNavigationController.changeShadowAlpha(value)
+            styledNavigationController.changeTintColor(progress: value)
+        }
+
+        UIApplication.shared.statusBarStyle = value > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
+            ? .default
+            : .lightContent
+    }
+}
+
+extension CourseInfoViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = max(0, scrollView.contentOffset.y)
+        let coeff = offset / 130
+
+        UIApplication.shared.statusBarStyle = coeff > 0.85 ? .default : .lightContent
+
+        self.lastTopBarAlpha = coeff
+        self.changeTopBarAlpha(value: coeff)
     }
 }

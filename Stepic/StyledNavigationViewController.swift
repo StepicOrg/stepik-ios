@@ -11,6 +11,8 @@ import SnapKit
 
 class StyledNavigationViewController: UINavigationController {
     static let backgroundColor = UIColor.mainLight
+    static let lightTintColor = UIColor.white
+    static let darkTintColor = UIColor.mainDark
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class StyledNavigationViewController: UINavigationController {
         let fontSize: CGFloat = 17.0
         let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark, NSAttributedStringKey.font: titleFont]
-        navigationBar.tintColor = UIColor.mainDark
+        navigationBar.tintColor = StyledNavigationViewController.darkTintColor
     }
 
     func setStatusBarStyle() {
@@ -79,6 +81,14 @@ class StyledNavigationViewController: UINavigationController {
         navigationBar.shadowImage = UIImage()
 
         statusBarView?.backgroundColor = color
+    }
+
+    func changeTintColor(progress: CGFloat) {
+        navigationBar.tintColor = self.makeTransitionColor(
+            from: StyledNavigationViewController.lightTintColor,
+            to: StyledNavigationViewController.darkTintColor,
+            progress: progress
+        )
     }
 
     func changeShadowAlpha(_ alpha: CGFloat) {
@@ -164,6 +174,31 @@ class StyledNavigationViewController: UINavigationController {
 
     private var statusBarView: UIView? {
         return UIApplication.shared.value(forKey: "statusBar") as? UIView
+    }
+
+    private func makeTransitionColor(from sourceColor: UIColor, to targetColor: UIColor, progress: CGFloat) -> UIColor {
+        var percentage = max(min(progress, 1), 0)
+        percentage = percentage > 1 ?  1 : percentage
+
+        var fRed: CGFloat = 0
+        var fBlue: CGFloat = 0
+        var fGreen: CGFloat = 0
+        var fAlpha: CGFloat = 0
+
+        var tRed: CGFloat = 0
+        var tBlue: CGFloat = 0
+        var tGreen: CGFloat = 0
+        var tAlpha: CGFloat = 0
+
+        sourceColor.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
+        targetColor.getRed(&tRed, green: &tGreen, blue: &tBlue, alpha: &tAlpha)
+
+        let red: CGFloat = (percentage * (tRed - fRed)) + fRed
+        let green: CGFloat = (percentage * (tGreen - fGreen)) + fGreen
+        let blue: CGFloat = (percentage * (tBlue - fBlue)) + fBlue
+        let alpha: CGFloat = (percentage * (tAlpha - fAlpha)) + fAlpha
+
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
 
