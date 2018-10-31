@@ -69,6 +69,8 @@ final class StreaksAlertPresentationManager {
             )
             NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.yes)
 
+            // When we are suggesting streak with the `Source` of .login type - `self` will be deallocated at this point.
+            // In this case we need to register for remote notifications.
             if let strongSelf = self {
                 strongSelf.notifyPressed()
             } else {
