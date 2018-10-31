@@ -57,7 +57,25 @@ class BaseCardsStepsViewController: CardsStepsViewController {
         progressBar.progress = 0
 
         if presenter == nil {
-            presenter = BaseCardsStepsPresenter(stepsAPI: StepsAPI(), lessonsAPI: LessonsAPI(), recommendationsAPI: RecommendationsAPI(), unitsAPI: UnitsAPI(), viewsAPI: ViewsAPI(), ratingsAPI: AdaptiveRatingsAPI(), ratingManager: AdaptiveRatingManager(courseId: course.id), statsManager: AdaptiveStatsManager(courseId: course.id), storageManager: AdaptiveStorageManager(), lastViewedUpdater: LocalProgressLastViewedUpdater(), notificationSuggestionManager: NotificationSuggestionManager(), notificationPermissionManager: NotificationPermissionManager(), course: course, view: self)
+            presenter = BaseCardsStepsPresenter(
+                stepsAPI: StepsAPI(),
+                lessonsAPI: LessonsAPI(),
+                recommendationsAPI: RecommendationsAPI(),
+                unitsAPI: UnitsAPI(),
+                viewsAPI: ViewsAPI(),
+                ratingsAPI: AdaptiveRatingsAPI(),
+                ratingManager: AdaptiveRatingManager(courseId: course.id),
+                statsManager: AdaptiveStatsManager(courseId: course.id),
+                storageManager: AdaptiveStorageManager(),
+                lastViewedUpdater: LocalProgressLastViewedUpdater(),
+                notificationSuggestionManager: NotificationSuggestionManager(),
+                notificationsRegistrationService: NotificationsRegistrationService(
+                    presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
+                    analytics: .init(source: .courseSubscription)
+                ),
+                course: course,
+                view: self
+            )
             presenter?.refresh()
         }
     }

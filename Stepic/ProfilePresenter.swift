@@ -12,7 +12,6 @@ import PromiseKit
 protocol ProfileView: class {
     func set(state: ProfileState)
 
-    func requestNotificationsPermissions()
     func showStreakTimeSelection(startHour: Int)
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)
 
@@ -61,7 +60,6 @@ class ProfilePresenter {
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
-    private var notificationPermissionManager: NotificationPermissionManager
 
     private var userSeed: UserSeed
 
@@ -72,11 +70,10 @@ class ProfilePresenter {
                                                            .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .achievements, .description]
 
-    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, notificationPermissionManager: NotificationPermissionManager) {
+    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
-        self.notificationPermissionManager = notificationPermissionManager
         self.userSeed = userSeed
     }
 

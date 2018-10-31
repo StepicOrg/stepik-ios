@@ -92,7 +92,7 @@ class SocialAuthPresenter {
             AuthInfo.shared.token = token
             AuthInfo.shared.authorizationType = authorizationType
 
-            NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
+            NotificationsRegistrationService().renewDeviceToken()
 
             return self.stepicsAPI.retrieveCurrentUser()
         }.then { user -> Promise<NotificationsStatus> in
@@ -148,7 +148,7 @@ class SocialAuthPresenter {
             AuthInfo.shared.token = token
             AuthInfo.shared.authorizationType = authorizationType
 
-            NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
+            NotificationsRegistrationService().renewDeviceToken()
 
             return self.stepicsAPI.retrieveCurrentUser()
         }.then { user -> Promise<NotificationsStatus> in

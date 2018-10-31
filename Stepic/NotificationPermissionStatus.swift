@@ -1,8 +1,8 @@
 //
-//  NotificationPermissionManager.swift
+//  NotificationPermissionStatus.swift
 //  Stepic
 //
-//  Created by Ostrenkiy on 28.02.2018.
+//  Created by Ivan Magda on 19/10/2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
@@ -28,35 +28,31 @@ enum NotificationPermissionStatus {
         }
     }
 
-    @available(iOS 10.0, *)
-    init(userNotificationAuthStatus: UNAuthorizationStatus) {
-        switch userNotificationAuthStatus {
-        case .authorized:
-            self = .authorized
-        case .denied:
-            self = .denied
-        case .notDetermined:
-            self = .notDetermined
-        }
-    }
-}
-
-class NotificationPermissionManager {
-    func getCurrentPermissionStatus() -> Guarantee<NotificationPermissionStatus> {
+    static var current: Guarantee<NotificationPermissionStatus> {
         return Guarantee<NotificationPermissionStatus> { seal in
             if #available(iOS 10.0, *) {
-                let current = UNUserNotificationCenter.current()
-                current.getNotificationSettings(completionHandler: { (settings) in
-                    seal(NotificationPermissionStatus(userNotificationAuthStatus: settings.authorizationStatus))
-                })
+                UNUserNotificationCenter.current().getNotificationSettings {
+                    seal(NotificationPermissionStatus(authorizationStatus: $0.authorizationStatus))
+                }
             } else {
-                // Fallback on earlier versions, we can not determine if we denied push notifications or not
                 if UIApplication.shared.isRegisteredForRemoteNotifications {
                     seal(.authorized)
                 } else {
                     seal(.notDetermined)
                 }
             }
+        }
+    }
+
+    @available(iOS 10.0, *)
+    init(authorizationStatus: UNAuthorizationStatus) {
+        switch authorizationStatus {
+        case .authorized:
+            self = .authorized
+        case .denied:
+            self = .denied
+        case .notDetermined:
+            self = .notDetermined
         }
     }
 }

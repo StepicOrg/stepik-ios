@@ -8,23 +8,25 @@
 
 import Foundation
 
-class NotificationSuggestionManager {
+final class NotificationSuggestionManager {
     private let defaults = UserDefaults.standard
 
-    private let streakAlertShownCntKey = "streakAlertShownCntKey"
-
-    private let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
-    private let lastNotificationsTabNotificationRequestShownTimeKey = "lastNotificationsTabNotificationRequestShownTimeKey"
-    private let lastCourseSubscriptionNotificationRequestShownTimeKey = "lastCourseSubscriptionNotificationRequestShownTimeKey"
+    private static let streakAlertShownCntKey = "streakAlertShownCntKey"
+    private static let lastStreakAlertShownTimeKey = "lastStreakAlertShownTimeKey"
+    private static let lastNotificationsTabNotificationRequestShownTimeKey = "lastNotificationsTabNotificationRequestShownTimeKey"
+    private static let lastCourseSubscriptionNotificationRequestShownTimeKey = "lastCourseSubscriptionNotificationRequestShownTimeKey"
+    private static let lastDefaultAlertShownTimeKey = "lastDefaultAlertShownTimeKey"
 
     func lastTimeKey(for context: NotificationRequestAlertContext) -> String {
         switch context {
         case .streak:
-            return lastStreakAlertShownTimeKey
+            return NotificationSuggestionManager.lastStreakAlertShownTimeKey
         case .courseSubscription:
-            return lastCourseSubscriptionNotificationRequestShownTimeKey
+            return NotificationSuggestionManager.lastCourseSubscriptionNotificationRequestShownTimeKey
         case .notificationsTab:
-            return lastNotificationsTabNotificationRequestShownTimeKey
+            return NotificationSuggestionManager.lastNotificationsTabNotificationRequestShownTimeKey
+        case .default:
+            return NotificationSuggestionManager.lastDefaultAlertShownTimeKey
         }
     }
 
@@ -53,7 +55,7 @@ class NotificationSuggestionManager {
 
     var streakAlertShownCnt: Int {
         get {
-            if let cnt = defaults.value(forKey: streakAlertShownCntKey) as? Int {
+            if let cnt = defaults.value(forKey: NotificationSuggestionManager.streakAlertShownCntKey) as? Int {
                 return cnt
             } else {
                 self.streakAlertShownCnt = 0
@@ -62,7 +64,7 @@ class NotificationSuggestionManager {
         }
 
         set(value) {
-            defaults.set(value, forKey: streakAlertShownCntKey)
+            defaults.set(value, forKey: NotificationSuggestionManager.streakAlertShownCntKey)
         }
     }
 
@@ -86,15 +88,22 @@ class NotificationSuggestionManager {
             guard let trigger = trigger else {
                 return false
             }
-            let commonChecks = AuthInfo.shared.isAuthorized && isAlertAvailableNow(context: context) && PreferencesContainer.notifications.allowStreaksNotifications == false && StepicApplicationsInfo.streaksEnabled
+
+            let commonChecks = AuthInfo.shared.isAuthorized
+                && self.isAlertAvailableNow(context: context)
+                && PreferencesContainer.notifications.allowStreaksNotifications == false
+                && StepicApplicationsInfo.streaksEnabled
+
             switch trigger {
             case .login:
-                return commonChecks && RemoteConfig.shared.showStreaksNotificationTrigger == .loginAndSubmission && streakAlertShownCnt == 0
+                return commonChecks
+                    && RemoteConfig.shared.showStreaksNotificationTrigger == .loginAndSubmission
+                    && self.streakAlertShownCnt == 0
             case .submission:
-                return commonChecks && streakAlertShownCnt < maxStreakAlertShownCnt
+                return commonChecks && self.streakAlertShownCnt < self.maxStreakAlertShownCnt
             }
-        case .notificationsTab, .courseSubscription:
-            return isAlertAvailableNow(context: context) && AuthInfo.shared.isAuthorized
+        case .notificationsTab, .courseSubscription, .default:
+            return self.isAlertAvailableNow(context: context) && AuthInfo.shared.isAuthorized
         }
     }
 }

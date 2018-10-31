@@ -15,7 +15,6 @@ protocol NotificationsView: class {
 
     func set(notifications: NotificationViewDataStruct, withReload: Bool)
     func updateMarkAllAsReadButton(with status: NotificationsMarkAsReadButton.Status)
-    func present(alertManager: AlertManager, alert: UIViewController)
 }
 
 enum NotificationsViewState {
@@ -39,16 +38,16 @@ extension NSNotification.Name {
     static let notificationAdded = NSNotification.Name("notificationAdded")
 }
 
-class NotificationsPresenter {
+final class NotificationsPresenter {
     weak var view: NotificationsView?
 
-    var notificationsAPI: NotificationsAPI
-    var usersAPI: UsersAPI
-    var notificationsStatusAPI: NotificationStatusesAPI
-    var notificationPermissionManager: NotificationPermissionManager
-    var notificationSuggestionManager: NotificationSuggestionManager
+    private let notificationsAPI: NotificationsAPI
+    private let usersAPI: UsersAPI
+    private let notificationsStatusAPI: NotificationStatusesAPI
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    private let notificationSuggestionManager: NotificationSuggestionManager
     private var page = 1
-    var hasNextPage = true
+    private var hasNextPage = true
     private var displayedNotifications: NotificationViewDataStruct = []
 
     private var section: NotificationsSection = .all
@@ -56,14 +55,24 @@ class NotificationsPresenter {
     // Store unread notifications count to pass it to analytics
     private var badgeUnreadCount = 0
 
-    init(section: NotificationsSection, notificationsAPI: NotificationsAPI, usersAPI: UsersAPI, notificationsStatusAPI: NotificationStatusesAPI, notificationPermissionManager: NotificationPermissionManager, notificationSuggestionManager: NotificationSuggestionManager, view: NotificationsView) {
+    init(
+        section: NotificationsSection,
+        notificationsAPI: NotificationsAPI,
+        usersAPI: UsersAPI,
+        notificationsStatusAPI: NotificationStatusesAPI,
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        notificationSuggestionManager: NotificationSuggestionManager,
+        view: NotificationsView
+    ) {
         self.section = section
         self.notificationsAPI = notificationsAPI
         self.usersAPI = usersAPI
         self.notificationsStatusAPI = notificationsStatusAPI
-        self.notificationPermissionManager = notificationPermissionManager
+        self.notificationsRegistrationService = notificationsRegistrationService
         self.notificationSuggestionManager = notificationSuggestionManager
         self.view = view
+
+        self.notificationsRegistrationService.delegate = self
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didNotificationUpdate(systemNotification:)), name: .notificationUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didAllNotificationsRead(systemNotification:)), name: .allNotificationsMarkedAsRead, object: nil)
@@ -130,20 +139,7 @@ class NotificationsPresenter {
     }
 
     func didAppear() {
-        if #available(iOS 10.0, *) {
-            if notificationSuggestionManager.canShowAlert(context: .notificationsTab) {
-                notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
-                    switch status {
-                    case .notDetermined:
-                        let alert = Alerts.notificationRequest.construct(context: .notificationsTab)
-                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
-                        self?.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
-                    default:
-                        break
-                    }
-                }
-            }
-        }
+        self.notificationsRegistrationService.registerForRemoteNotifications()
     }
 
     func refresh() {
@@ -353,6 +349,26 @@ class NotificationsPresenter {
             NotificationsBadgesManager.shared.set(number: statuses.totalCount)
         }.catch { error in
             print("notifications: unable to load statuses, error = \(error)")
+        }
+    }
+}
+
+// MARK: - NotificationsPresenter: NotificationsRegistrationServiceDelegate -
+
+extension NotificationsPresenter: NotificationsRegistrationServiceDelegate {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
+    ) -> Bool {
+        return self.notificationSuggestionManager.canShowAlert(context: .notificationsTab)
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        didPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
+    ) {
+        if alertType == .permission {
+            self.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
         }
     }
 }

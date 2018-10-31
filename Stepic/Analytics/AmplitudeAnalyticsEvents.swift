@@ -179,6 +179,49 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+
+        static func defaultAlertShown(source: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Default notification alert shown",
+                parameters: [
+                    "source": source
+                ]
+            )
+        }
+
+        static func defaultAlertInteracted(source: String, result: InteractionResult) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Default notification alert interacted",
+                parameters: [
+                    "source": source,
+                    "result": result.rawValue
+                ]
+            )
+        }
+
+        static func customAlertShown(source: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Custom notification alert shown",
+                parameters: [
+                    "source": source
+                ]
+            )
+        }
+
+        static func customAlertInteracted(source: String, result: InteractionResult) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Custom notification alert interacted",
+                parameters: [
+                    "source": source,
+                    "result": result.rawValue
+                ]
+            )
+        }
+
+        enum InteractionResult: String {
+            case yes
+            case no
+        }
     }
 
     struct Home {
