@@ -33,6 +33,10 @@ final class NotificationsService {
     }
 
     func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        NotificationPermissionStatus.current.done { status in
+            AnalyticsUserProperties.shared.setPushPermissionStatus(status)
+        }
+
         if let localNotification = launchOptions?[.localNotification] as? UILocalNotification {
             self.handleLocalNotification(with: localNotification.userInfo)
             AmplitudeAnalyticsEvents.Launch.sessionStart(

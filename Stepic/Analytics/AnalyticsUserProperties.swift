@@ -62,12 +62,6 @@ class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         setProperty(key: "courses_count", value: count)
     }
 
-    static func updatePushPermissionStatus() {
-        NotificationPermissionStatus.current.done { status in
-            self.shared.setPushPermissionStatus(status)
-        }
-    }
-
     func setPushPermissionStatus(_ status: NotificationPermissionStatus) {
         let key = "push_permission"
 

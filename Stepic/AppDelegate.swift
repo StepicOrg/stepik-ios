@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
-        AnalyticsUserProperties.updatePushPermissionStatus()
 
         WatchSessionManager.sharedManager.startSession()
 
