@@ -62,14 +62,28 @@ class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
         setProperty(key: "courses_count", value: count)
     }
 
-    //Not supported yet, commented out
-//    func setPushPermission(isGranted: Bool) {
-//        setProperty(key: "push_permission", value: isGranted ? "granted" : "not_granted")
-//    }
+    static func updatePushPermissionStatus() {
+        NotificationPermissionStatus.current.done { status in
+            self.shared.setPushPermissionStatus(status)
+        }
+    }
 
-//    func setStreaksNotificationsEnabled(isEnabled: Bool) {
-//        setProperty(key: "streaks_notifications_enabled", value: isEnabled ? "enabled" : "disabled")
-//    }
+    func setPushPermissionStatus(_ status: NotificationPermissionStatus) {
+        let key = "push_permission"
+
+        switch status {
+        case .authorized:
+            self.setProperty(key: key, value: "granted")
+        case .denied:
+            self.setProperty(key: key, value: "not_granted")
+        case .notDetermined:
+            self.setProperty(key: key, value: "not_determined")
+        }
+    }
+
+    func setStreaksNotificationsEnabled(_ enabled: Bool) {
+        self.setProperty(key: "streaks_notifications_enabled", value: enabled ? "enabled" : "disabled")
+    }
 
     func setScreenOrientation(isPortrait: Bool) {
         setProperty(key: "screen_orientation", value: isPortrait ? "portrait" : "landscape")

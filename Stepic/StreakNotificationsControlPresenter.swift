@@ -76,6 +76,8 @@ class StreakNotificationsControlPresenter {
     }
 
     func setStreakNotifications(on allowNotifications: Bool, completion: ((Bool) -> Void)? = nil) {
+        AnalyticsUserProperties.shared.setStreaksNotificationsEnabled(allowNotifications)
+
         if !allowNotifications {
             self.turnOffNotifications()
             completion?(false)
