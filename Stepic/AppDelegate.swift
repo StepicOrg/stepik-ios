@@ -26,9 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
-    private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
-        NotificationsRegistrationService()
-    }()
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
