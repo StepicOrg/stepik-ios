@@ -15,12 +15,12 @@ import UserNotifications
 
 final class NotificationsRegistrationService: NotificationsRegistrationServiceProtocol {
     weak var delegate: NotificationsRegistrationServiceDelegate?
-    var presenter: NotificationsRegistrationServicePresenterProtocol?
+    var presenter: NotificationsRegistrationPresentationServiceProtocol?
     private var analytics: NotificationAlertsAnalytics?
 
     init(
         delegate: NotificationsRegistrationServiceDelegate? = nil,
-        presenter: NotificationsRegistrationServicePresenterProtocol? = nil,
+        presenter: NotificationsRegistrationPresentationServiceProtocol? = nil,
         analytics: NotificationAlertsAnalytics? = nil
     ) {
         self.delegate = delegate

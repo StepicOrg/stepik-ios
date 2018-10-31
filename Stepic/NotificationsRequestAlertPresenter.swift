@@ -9,7 +9,7 @@
 import UIKit
 import Presentr
 
-final class NotificationsRequestAlertPresenter: NotificationsRegistrationServicePresenterProtocol {
+final class NotificationsRequestAlertPresenter: NotificationsRegistrationPresentationServiceProtocol {
     var onPositiveCallback: (() -> Void)?
     var onCancelCallback: (() -> Void)?
 

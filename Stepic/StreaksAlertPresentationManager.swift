@@ -14,7 +14,7 @@ final class StreaksAlertPresentationManager {
     weak var controller: UIViewController?
     private let source: Source
 
-    private var alertPresenter: NotificationsRegistrationServicePresenterProtocol?
+    private var alertPresenter: NotificationsRegistrationPresentationServiceProtocol?
     private var didTransitionToSettings = false
 
     private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {

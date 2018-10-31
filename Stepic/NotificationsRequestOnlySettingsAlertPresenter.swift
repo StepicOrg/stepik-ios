@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class NotificationsRequestOnlySettingsAlertPresenter: NotificationsRegistrationServicePresenterProtocol {
+final class NotificationsRequestOnlySettingsAlertPresenter: NotificationsRegistrationPresentationServiceProtocol {
     var onPositiveCallback: (() -> Void)?
     var onCancelCallback: (() -> Void)?
 
