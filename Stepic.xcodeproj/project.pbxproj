@@ -209,7 +209,6 @@
 		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		08421BC921764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08421BC821764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift */; };
 		08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */; };
 		084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
 		084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
@@ -5130,7 +5129,6 @@
 		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataHelper.swift; sourceTree = "<group>"; };
-		08421BC821764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAfterOnboardingSplitTest.swift; sourceTree = "<group>"; };
 		08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsContainer.swift; sourceTree = "<group>"; };
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
@@ -7578,7 +7576,6 @@
 		089877B4214061EC0065DFA2 /* Active Tests */ = {
 			isa = PBXGroup;
 			children = (
-				08421BC821764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift */,
 				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
 				0848BE8A218379A400762DC1 /* JoinCourseStringSplitTest.swift */,
 			);
@@ -14663,7 +14660,6 @@
 				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */,
 				088E73EA2060124B00D458E3 /* ApiRequestRetrier.swift in Sources */,
-				08421BC921764C9600E8A81B /* AuthAfterOnboardingSplitTest.swift in Sources */,
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
 				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
