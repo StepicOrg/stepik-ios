@@ -196,17 +196,8 @@ class OnboardingViewController: UIViewController {
             AmplitudeAnalyticsEvents.Onboarding.completed.send()
             dismiss(animated: true, completion: nil)
 
-            if AuthAfterOnboardingSplitTest.shouldParticipate {
-                let authSplitTest = splitTestingService.fetchSplitTest(AuthAfterOnboardingSplitTest.self)
-                if authSplitTest.currentGroup.shouldShowAuth {
-                    if let authSource = authSource {
-                        RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
-                    }
-                }
-            } else {
-                if let authSource = authSource {
-                    RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
-                }
+            if let authSource = authSource {
+                RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
             }
         }
     }

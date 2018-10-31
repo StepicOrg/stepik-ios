@@ -79,6 +79,7 @@ final class PopularCourseListNetworkService: BaseCourseListNetworkService,
             self.coursesAPI.retrieve(
                 excludeEnded: true,
                 isPublic: true,
+                isPopular: true,
                 order: "-activity",
                 language: self.type.language.popularCoursesParameter,
                 page: page

@@ -40,7 +40,12 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection), for: .connectionError)
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
+                self?.refreshSections()
+            }),
+            for: .connectionError
+        )
 
         LastStepGlobalContext.context.course = course
 
