@@ -12,6 +12,8 @@ final class CourseInfoViewController: UIViewController {
     private static let topBarAlphaStatusBarThreshold = 0.85
     private var lastTopBarAlpha: CGFloat = 0.0
 
+    lazy var courseInfoView = self.view as? CourseInfoView
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,12 +53,31 @@ final class CourseInfoViewController: UIViewController {
 
 extension CourseInfoViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = max(0, scrollView.contentOffset.y)
-        let coeff = offset / 130
+        guard let courseInfoView = self.courseInfoView else {
+            return
+        }
 
-        UIApplication.shared.statusBarStyle = coeff > 0.85 ? .default : .lightContent
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height
+        let statusBarHeight = min(
+            UIApplication.shared.statusBarFrame.size.width,
+            UIApplication.shared.statusBarFrame.size.height
+        )
+        let topPadding = (navigationBarHeight ?? 0) + statusBarHeight
 
+        let offset = scrollView.contentOffset.y
+
+        let offsetWithHeader = offset
+            + courseInfoView.appearance.headerHeight
+            + courseInfoView.appearance.segmentedControlHeight
+        let headerHeight = courseInfoView.appearance.headerHeight - topPadding
+
+        let coeff = max(0, offsetWithHeader / headerHeight)
         self.lastTopBarAlpha = coeff
         self.changeTopBarAlpha(value: coeff)
+
+        // Pin segmented control
+        let scrollViewOffset = min(offsetWithHeader, courseInfoView.appearance.headerHeight - topPadding)
+        print(scrollViewOffset)
+        courseInfoView.updateScroll(offset: scrollViewOffset)
     }
 }

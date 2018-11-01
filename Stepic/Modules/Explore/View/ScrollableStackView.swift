@@ -116,6 +116,24 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    var contentInsets: UIEdgeInsets {
+        get {
+            return self.scrollView.contentInset
+        }
+        set {
+            self.scrollView.contentInset = newValue
+        }
+    }
+
+    var shouldBounce: Bool {
+        get {
+            return self.scrollView.bounces
+        }
+        set {
+            self.scrollView.bounces = newValue
+        }
+    }
+
     // MARK: - Inits
 
     init(frame: CGRect, orientation: Orientation = .vertical) {
