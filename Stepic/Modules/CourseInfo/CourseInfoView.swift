@@ -28,8 +28,8 @@ final class CourseInfoView: UIView {
     }()
 
     private lazy var headerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.mainDark
+        let view = CourseInfoHeaderView(frame: .zero)
+        view.loadImage(url: URL(string: "https://stepik.org/media/cache/images/courses/4350/cover_u2G7dpS/cb095f9a38869dee8371ee5c7d6ada1d.png"))
         return view
     }()
 

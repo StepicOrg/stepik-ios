@@ -3992,6 +3992,8 @@
 		2CF953362062ACA800B9617A /* AdaptiveCardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2E70620233E28001DC410 /* AdaptiveCardsStepsPresenter.swift */; };
 		2CF9ADDB2188880D004F6909 /* CourseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9ADDA2188880D004F6909 /* CourseInfoViewController.swift */; };
 		2CF9ADDD21888AC1004F6909 /* CourseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9ADDC21888AC1004F6909 /* CourseInfoView.swift */; };
+		2CF9ADE1218B26EE004F6909 /* BlurredImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9ADE0218B26EE004F6909 /* BlurredImageView.swift */; };
+		2CF9ADE3218B33B7004F6909 /* CourseInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF9ADE2218B33B7004F6909 /* CourseInfoHeaderView.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
 		2CFE246F20ECD7EC00AF1E3D /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		2CFE247020ECD7F800AF1E3D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
@@ -5990,6 +5992,8 @@
 		2CF425302024C114002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CF9ADDA2188880D004F6909 /* CourseInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoViewController.swift; sourceTree = "<group>"; };
 		2CF9ADDC21888AC1004F6909 /* CourseInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoView.swift; sourceTree = "<group>"; };
+		2CF9ADE0218B26EE004F6909 /* BlurredImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImageView.swift; sourceTree = "<group>"; };
+		2CF9ADE2218B33B7004F6909 /* CourseInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoHeaderView.swift; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
 		2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		2CFE247B20ECF7F700AF1E3D /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
@@ -10502,10 +10506,20 @@
 		2CF9ADD9218887F7004F6909 /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
+				2CF9ADDF218B26DB004F6909 /* Header views */,
 				2CF9ADDA2188880D004F6909 /* CourseInfoViewController.swift */,
 				2CF9ADDC21888AC1004F6909 /* CourseInfoView.swift */,
 			);
 			path = CourseInfo;
+			sourceTree = "<group>";
+		};
+		2CF9ADDF218B26DB004F6909 /* Header views */ = {
+			isa = PBXGroup;
+			children = (
+				2CF9ADE0218B26EE004F6909 /* BlurredImageView.swift */,
+				2CF9ADE2218B33B7004F6909 /* CourseInfoHeaderView.swift */,
+			);
+			path = "Header views";
 			sourceTree = "<group>";
 		};
 		2CFB1C521F14C7EA00CD0A4C /* Supporting Files */ = {
@@ -14783,7 +14797,9 @@
 				086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */,
 				0837492A1DE5AF8A00144C14 /* StreaksAlertManager.swift in Sources */,
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
+				2CF9ADE3218B33B7004F6909 /* CourseInfoHeaderView.swift in Sources */,
 				080CE1491E9562430089A27F /* LessonsAPI.swift in Sources */,
+				2CF9ADE1218B26EE004F6909 /* BlurredImageView.swift in Sources */,
 				2C80C82A201A505E00ABB312 /* CongratulationViewController.swift in Sources */,
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0859AE951E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
