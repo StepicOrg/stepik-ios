@@ -51,6 +51,35 @@ final class HomeViewController: BaseExploreViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.homeInteractor?.loadContent(request: .init())
+
+        // TODO: Remove
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Course Info",
+            style: .plain,
+            target: self,
+            action: #selector(openCourseInfo)
+        )
+    }
+
+    // TODO: Remove
+    @objc
+    private func openCourseInfo() {
+        let controller = UIViewController()
+        controller.title = "Info"
+
+        let viewModel = CourseInfoViewModel(blocks: [
+            CourseInfoTextBlockViewModel(type: .author, message: ""),
+            CourseInfoTextBlockViewModel(type: .about, message: "This course was designed for beginner java developers and people who'd like to learn functional approach to programming. If you are an expert in java or functional programming this course will seem too simple for you. It would be better for you to proceed to a more advanced course."),
+            CourseInfoTextBlockViewModel(type: .requirements, message: "Basic knowledge of Java syntax, collections, OOP and pre-installed JDK 8+."),
+            CourseInfoTextBlockViewModel(type: .targetAudience, message: "People who would like to improve their skills in java programming and to learn functional programming"),
+            CourseInfoTextBlockViewModel(type: .timeToComplete, message: "11 hours"),
+            CourseInfoTextBlockViewModel(type: .language, message: "English"),
+            CourseInfoTextBlockViewModel(type: .certificate, message: "Yes"),
+            CourseInfoTextBlockViewModel(type: .certificateDetails, message: "Certificate condition: 50 points\nWith distinction: 75 points")
+        ])
+        controller.view = CourseInfoView(viewModel: viewModel)
+
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
