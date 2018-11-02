@@ -15,6 +15,7 @@ final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]
 
     private let localNotificationsService: LocalNotificationsService
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let deepLinkRoutingService: DeepLinkRoutingService
 
     private var isInForeground: Bool {
@@ -23,13 +24,19 @@ final class NotificationsService {
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(),
         deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
     ) {
         self.localNotificationsService = localNotificationsService
+        self.notificationsRegistrationService = notificationsRegistrationService
         self.deepLinkRoutingService = deepLinkRoutingService
     }
 
     func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        NotificationPermissionStatus.current.done { status in
+            AnalyticsUserProperties.shared.setPushPermissionStatus(status)
+        }
+
         if let localNotification = launchOptions?[.localNotification] as? UILocalNotification {
             self.handleLocalNotification(with: localNotification.userInfo)
             AmplitudeAnalyticsEvents.Launch.sessionStart(
@@ -65,9 +72,9 @@ extension NotificationsService {
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
     ) {
-        NotificationPermissionManager().getCurrentPermissionStatus().then { status -> Promise<Void> in
+        NotificationPermissionStatus.current.then { status -> Promise<Void> in
             if !status.isRegistered {
-                NotificationRegistrator.shared.registerForRemoteNotifications()
+                self.notificationsRegistrationService.renewDeviceToken()
             }
 
             if removeIdentical {
@@ -163,7 +170,7 @@ extension NotificationsService {
         }
 
         guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
-              let alert = aps[PayloadKey.alert.rawValue]  as? [String: Any],
+              let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
               let body = alert[PayloadKey.body.rawValue] as? String,
               let object = userInfo[PayloadKey.object.rawValue] as? String else {
             return print("remote notification received: unable to parse notification: \(userInfo)")

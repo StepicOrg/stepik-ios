@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Presentr
 import SnapKit
 
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
@@ -344,7 +343,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func suggestStreak(streak: Int) {
-        streaksAlertPresentationManager.suggestStreak(streak: streak)
+        self.streaksAlertPresentationManager.controller = self
+        self.streaksAlertPresentationManager.suggestStreak(streak: streak)
     }
 
     func showRateAlert() {

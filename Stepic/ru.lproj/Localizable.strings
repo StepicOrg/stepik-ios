@@ -168,6 +168,10 @@ NotificationTime = "Время напоминания";
 Notifications = "Уведомления";
 StreakNotificationsAlertTitle = "Уведомления";
 StreakNotificationsAlertMessage = "Похоже, вы запретили приложению присылать уведомления. Разрешить в настройках системы?";
+DeniedNotificationsDefaultAlertTitle = "Уведомления отключены";
+DeniedNotificationsDefaultAlertMessage = "Похоже, вы отключили уведомления. Включить в настройках?";
+NotificationRequestDefaultAlertTitle = "Следи за обновлениями";
+NotificationRequestDefaultAlertMessage = "Мы пытаемся сделать процесс обучения максимально удобным и полезным. Получать уведомления об интересном и актуальном для вас контенте?";
 PassedPercent = "Пройдено";
 AuthorDidntUploadVideo = "Автор еще не загрузил видео.";
 NoVideo = "Нет видео";
@@ -327,6 +331,9 @@ CatalogPlaceholderError = "Не удалось загрузить каталог
 TrendingTopics = "Категории";
 
 WidgetButtonJoin = "Поступить";
+/* a/b */
+WidgetButtonJoinTest = "Учиться";
+
 WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";

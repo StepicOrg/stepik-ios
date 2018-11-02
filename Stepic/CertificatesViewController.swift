@@ -38,7 +38,7 @@ class CertificatesViewController: UIViewController, CertificatesView, Controller
             RoutingManager.auth.routeFrom(controller: strongSelf, success: nil, cancel: nil)
         }), for: .anonymous)
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
-            self?.presenter?.checkStatus()
+            self?.presenter?.refreshCertificates()
         }), for: .connectionError)
 
         title = NSLocalizedString("Certificates", comment: "")
