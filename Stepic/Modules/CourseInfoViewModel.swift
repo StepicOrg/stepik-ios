@@ -100,12 +100,18 @@ struct CourseInfoTextBlockViewModel: CourseInfoBlockViewModelProtocol {
     let message: String
 }
 
+struct CourseInfoInstructorViewModel {
+    let avatar: UIImage?
+    let title: String
+    let description: String
+}
+
 struct CourseInfoInstructorsBlockViewModel: CourseInfoBlockViewModelProtocol {
     var type: CourseInfoBlockType {
         return .instructors
     }
 
-    let instructors: [String]
+    let instructors: [CourseInfoInstructorViewModel]
 }
 
 struct CourseInfoViewModel {
