@@ -15,11 +15,19 @@ class CoursesAPI: APIEndpoint {
     override var name: String { return "courses" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course]) -> Promise<[Course]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
         return getObjectsByIds(ids: ids, updating: existing)
     }
 
     @available(*, deprecated, message: "Legacy: we want to pass existing")
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Course]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
         return getObjectsByIds(ids: ids, updating: Course.getCourses(ids))
     }
 
