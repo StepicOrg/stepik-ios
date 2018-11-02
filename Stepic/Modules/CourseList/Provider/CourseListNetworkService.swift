@@ -156,18 +156,6 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService,
         super.init(coursesAPI: coursesAPI)
     }
 
-    func retrieveCourses(ids: [Int], meta: Meta) -> Promise<([Int], Meta, [Course])> {
-        if ids.isEmpty {
-            return Promise { seal in
-                seal.fulfill(([], meta, []))
-            }
-        } else {
-            return self.coursesAPI.retrieve(
-                ids: ids
-            ).map { (ids, meta, $0) }
-        }
-    }
-
     func fetch(page: Int) -> Promise<([Course], Meta)> {
         return Promise { seal in
             self.searchResultsAPI.searchCourse(
@@ -176,7 +164,9 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService,
                 page: page
             ).then { result, meta -> Promise<([Int], Meta, [Course])> in
                 let ids = result.compactMap { $0.courseId }
-                return self.retrieveCourses(ids: ids, meta: meta)
+                return self.coursesAPI.retrieve(
+                    ids: ids
+                ).map { (ids, meta, $0) }
             }.done { ids, meta, courses in
                 let resultCourses = courses.reordered(order: ids, transform: { $0.id })
                 seal.fulfill((resultCourses, meta))
