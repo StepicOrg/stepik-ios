@@ -87,6 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !DefaultsContainer.launch.didLaunch {
             DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
+            AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }

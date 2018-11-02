@@ -89,18 +89,6 @@
 		081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
 		0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
-		0815661B1F69C3910082B359 /* CustomSearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0815661A1F69C3910082B359 /* CustomSearchBar.xib */; };
-		0815661D1F69C3910082B359 /* CustomSearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0815661A1F69C3910082B359 /* CustomSearchBar.xib */; };
-		0815661F1F69C3910082B359 /* CustomSearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0815661A1F69C3910082B359 /* CustomSearchBar.xib */; };
-		081566201F69C3910082B359 /* CustomSearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0815661A1F69C3910082B359 /* CustomSearchBar.xib */; };
-		081566211F69C3910082B359 /* CustomSearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0815661A1F69C3910082B359 /* CustomSearchBar.xib */; };
-		081566221F69C3910082B359 /* CustomSearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0815661A1F69C3910082B359 /* CustomSearchBar.xib */; };
-		081566251F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
-		081566271F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
-		081566291F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
-		0815662A1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
-		0815662B1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
-		0815662C1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
 		08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */; };
 		0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */; };
 		0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */; };
@@ -3281,7 +3269,6 @@
 		2CA8D15E2088D9C000E105E9 /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560F1E98021000B8FE6A /* RateAppViewController.swift */; };
 		2CA8D15F2088D9C000E105E9 /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
 		2CA8D1602088D9C000E105E9 /* CardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13E1FED26AC003B1177 /* CardStepViewController.swift */; };
-		2CA8D1612088D9C000E105E9 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081566241F69C3AD0082B359 /* CustomSearchBar.swift */; };
 		2CA8D1622088D9C000E105E9 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2CA8D1642088D9C000E105E9 /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089056091E97CD7900B8FE6A /* DefaultsContainer.swift */; };
 		2CA8D1652088D9C000E105E9 /* CoursesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE1421E955D300089A27F /* CoursesAPI.swift */; };
@@ -3728,7 +3715,6 @@
 		2CA8D36E2088D9C000E105E9 /* UnitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */; };
 		2CA8D36F2088D9C000E105E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		2CA8D3702088D9C000E105E9 /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BED2019FDB100B5E336 /* arrow_left.svg */; };
-		2CA8D3722088D9C000E105E9 /* CustomSearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0815661A1F69C3910082B359 /* CustomSearchBar.xib */; };
 		2CA8D3732088D9C000E105E9 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2CA8D3742088D9C000E105E9 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2CA8D3762088D9C000E105E9 /* NotificationRequestAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C6E31B1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib */; };
@@ -4989,8 +4975,6 @@
 		081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTabBarViewController.swift; sourceTree = "<group>"; };
 		0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
-		0815661A1F69C3910082B359 /* CustomSearchBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomSearchBar.xib; sourceTree = "<group>"; };
-		081566241F69C3AD0082B359 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineCounter.swift; sourceTree = "<group>"; };
 		08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_timetocomplete_v22.xcdatamodel; sourceTree = "<group>"; };
 		0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineEditScheduleViewController.swift; sourceTree = "<group>"; };
@@ -6623,15 +6607,6 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
-		081566231F69C39A0082B359 /* Search Bar */ = {
-			isa = PBXGroup;
-			children = (
-				0815661A1F69C3910082B359 /* CustomSearchBar.xib */,
-				081566241F69C3AD0082B359 /* CustomSearchBar.swift */,
-			);
-			name = "Search Bar";
-			sourceTree = "<group>";
-		};
 		08195A041FA00FE300E6D6CD /* Course List */ = {
 			isa = PBXGroup;
 			children = (
@@ -7908,7 +7883,6 @@
 			isa = PBXGroup;
 			children = (
 				2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */,
-				081566231F69C39A0082B359 /* Search Bar */,
 				08DF78D11F64059900AEEA85 /* StepikLabel.swift */,
 				08EDD6291F7C6785005203E4 /* StepikButton.swift */,
 				086D5B4720128398000F7715 /* Tooltip */,
@@ -11933,7 +11907,6 @@
 				08047E6F1BFDC0480071C875 /* TitleTextTableViewCell.xib in Resources */,
 				081A7DF51C56A0DD00583728 /* UnknownTypeQuizViewController.xib in Resources */,
 				08E542011C6A76E100DEC38E /* MathJax in Resources */,
-				0815661B1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				08D2AE481C04F52300BD8C3D /* GoogleService-Info.plist in Resources */,
 				2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */,
 				0859AEAA1E4F26C700A0D206 /* FillBlanksTextTableViewCell.xib in Resources */,
@@ -12131,7 +12104,6 @@
 				86A1C32A2065157F00D0914C /* StepikPlaceholderView.xib in Resources */,
 				08CBA3231F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				2C608AC6204568C5006870BB /* CongratulationViewController.xib in Resources */,
-				081566211F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C1B62861F4C4AEF00236804 /* UnknownTypeQuizViewController.xib in Resources */,
 				2C1B62871F4C4AEF00236804 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				2C608ACC204568D5006870BB /* LeaderboardTableViewCell.xib in Resources */,
@@ -12222,7 +12194,6 @@
 				86A1C3292065157E00D0914C /* StepikPlaceholderView.xib in Resources */,
 				08CBA3241F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				2C608AC5204568C5006870BB /* CongratulationViewController.xib in Resources */,
-				081566221F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C1B64981F4C590700236804 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */,
 				2C608ACD204568D5006870BB /* LeaderboardTableViewCell.xib in Resources */,
@@ -12380,7 +12351,6 @@
 				2C89AB271F4C289900227C3B /* UnitTableViewCell.xib in Resources */,
 				2C89AB281F4C289900227C3B /* Images.xcassets in Resources */,
 				2C6A76442045CECC00C509A6 /* arrow_left.svg in Resources */,
-				0815661F1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C89AB2C1F4C289900227C3B /* AchievementNotificationView.xib in Resources */,
 				2C4BBF1C203DC66F000A4250 /* plyr.css in Resources */,
 				087E8B25204DE2A000C35B66 /* NotificationRequestAlertViewController.xib in Resources */,
@@ -12449,7 +12419,6 @@
 				2C9732C61F4C38F600AC9301 /* step4.html in Resources */,
 				08CBA3221F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				2C608AC7204568C6006870BB /* CongratulationViewController.xib in Resources */,
-				081566201F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				2C9732C81F4C38F600AC9301 /* SearchSuggestionTableViewCell.xib in Resources */,
 				2C97330C1F4C394A00AC9301 /* Icons.xcassets in Resources */,
 				2C608ACB204568D5006870BB /* LeaderboardTableViewCell.xib in Resources */,
@@ -12563,7 +12532,6 @@
 				2CA8D36E2088D9C000E105E9 /* UnitTableViewCell.xib in Resources */,
 				2CA8D36F2088D9C000E105E9 /* Images.xcassets in Resources */,
 				2CA8D3702088D9C000E105E9 /* arrow_left.svg in Resources */,
-				2CA8D3722088D9C000E105E9 /* CustomSearchBar.xib in Resources */,
 				2CA8D3732088D9C000E105E9 /* AchievementNotificationView.xib in Resources */,
 				2CA8D3742088D9C000E105E9 /* plyr.css in Resources */,
 				2CA8D3762088D9C000E105E9 /* NotificationRequestAlertViewController.xib in Resources */,
@@ -12675,7 +12643,6 @@
 				08CBA3561F5A2D9400302154 /* Profile.storyboard in Resources */,
 				08E8F97F1F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib in Resources */,
 				08CBA31F1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
-				0815661D1F69C3910082B359 /* CustomSearchBar.xib in Resources */,
 				86AE947F1E84511A00F67691 /* UnknownTypeQuizViewController.xib in Resources */,
 				0888D1071F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */,
 				08CBA3311F57563C00302154 /* TransitionMenuBlockTableViewCell.xib in Resources */,
@@ -14586,7 +14553,6 @@
 				08484F05211AF4320006266F /* StoryAssembly.swift in Sources */,
 				089587F520A20C5D003BAFB3 /* Enrollment.swift in Sources */,
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,
-				081566251F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
 				089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */,
@@ -15314,7 +15280,6 @@
 				2C1B60DA1F4C4AEF00236804 /* RatingProgressView.swift in Sources */,
 				2C1B60DC1F4C4AEF00236804 /* RateAppViewController.swift in Sources */,
 				08DF78D81F64059900AEEA85 /* StepikLabel.swift in Sources */,
-				0815662B1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C1B60DE1F4C4AEF00236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B60DF1F4C4AEF00236804 /* DefaultsContainer.swift in Sources */,
 				2C1B60E01F4C4AEF00236804 /* CoursesAPI.swift in Sources */,
@@ -15755,7 +15720,6 @@
 				2C1B62EB1F4C590700236804 /* RatingProgressView.swift in Sources */,
 				2C1B62ED1F4C590700236804 /* RateAppViewController.swift in Sources */,
 				08DF78D91F64059900AEEA85 /* StepikLabel.swift in Sources */,
-				0815662C1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C1B62EF1F4C590700236804 /* LaunchDefaultsContainer.swift in Sources */,
 				2C1B62F01F4C590700236804 /* DefaultsContainer.swift in Sources */,
 				2C1B62F11F4C590700236804 /* CoursesAPI.swift in Sources */,
@@ -16736,7 +16700,6 @@
 				2C89A9701F4C289900227C3B /* RateAppViewController.swift in Sources */,
 				08DF78D61F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2C6A76372045CE7B00C509A6 /* CardStepViewController.swift in Sources */,
-				081566291F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C89A9721F4C289900227C3B /* LaunchDefaultsContainer.swift in Sources */,
 				2C89A9731F4C289900227C3B /* DefaultsContainer.swift in Sources */,
 				2C89A9741F4C289900227C3B /* CoursesAPI.swift in Sources */,
@@ -17178,7 +17141,6 @@
 				2C9731221F4C38F600AC9301 /* RatingProgressView.swift in Sources */,
 				2C9731241F4C38F600AC9301 /* RateAppViewController.swift in Sources */,
 				08DF78D71F64059900AEEA85 /* StepikLabel.swift in Sources */,
-				0815662A1F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2C9731261F4C38F600AC9301 /* LaunchDefaultsContainer.swift in Sources */,
 				2C9731271F4C38F600AC9301 /* DefaultsContainer.swift in Sources */,
 				2C9731281F4C38F600AC9301 /* CoursesAPI.swift in Sources */,
@@ -17633,7 +17595,6 @@
 				2CA8D15E2088D9C000E105E9 /* RateAppViewController.swift in Sources */,
 				2CA8D15F2088D9C000E105E9 /* StepikLabel.swift in Sources */,
 				2CA8D1602088D9C000E105E9 /* CardStepViewController.swift in Sources */,
-				2CA8D1612088D9C000E105E9 /* CustomSearchBar.swift in Sources */,
 				2CA8D1622088D9C000E105E9 /* LaunchDefaultsContainer.swift in Sources */,
 				2CA8D1642088D9C000E105E9 /* DefaultsContainer.swift in Sources */,
 				2CA8D1652088D9C000E105E9 /* CoursesAPI.swift in Sources */,
@@ -18142,7 +18103,6 @@
 				2C76ACD11F18E8C10077D9D7 /* RatingProgressView.swift in Sources */,
 				864514E51E9FD4F6007F73BE /* RateAppViewController.swift in Sources */,
 				08DF78D41F64059900AEEA85 /* StepikLabel.swift in Sources */,
-				081566271F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				864514E71E9FD4F6007F73BE /* LaunchDefaultsContainer.swift in Sources */,
 				864514E81E9FD4F6007F73BE /* DefaultsContainer.swift in Sources */,
 				864514E91E9FD4F6007F73BE /* CoursesAPI.swift in Sources */,
