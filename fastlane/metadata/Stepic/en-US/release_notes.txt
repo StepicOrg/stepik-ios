@@ -1,4 +1,4 @@
-In the new version of Stepik we fixed landscape orientation on iPhones and improved app stability.
+In the new version of Stepik we fixed some bugs and updated app icon.
 
 Enjoy learning!
 Stepik team
