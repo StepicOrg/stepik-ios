@@ -16,8 +16,11 @@ extension CourseInfoView {
 }
 
 final class CourseInfoView: UIView {
+    typealias ViewFactory = (CourseInfoBlockViewModelProtocol) -> UIView?
+
     private let appearance: Appearance
     private let viewModel: CourseInfoViewModel
+    private let viewFactory: ViewFactory
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
@@ -30,10 +33,12 @@ final class CourseInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        viewModel: CourseInfoViewModel
+        viewModel: CourseInfoViewModel,
+        viewFactory: @escaping ViewFactory
     ) {
         self.appearance = appearance
         self.viewModel = viewModel
+        self.viewFactory = viewFactory
         super.init(frame: frame)
 
         self.setupView()
@@ -48,19 +53,10 @@ final class CourseInfoView: UIView {
     }
 
     private func addBlocks() {
-        self.viewModel.blocks.forEach { viewModel in
-            switch viewModel.type {
-            case .instructors:
-                break
-            default:
-                guard let textBlockViewModel = viewModel as? CourseInfoTextBlockViewModel else {
-                    return
-                }
-
-                self.scrollableStackView.addArrangedView(
-                    CourseInfoTextBlockView(viewModel: textBlockViewModel)
-                )
-            }
+        self.viewModel.blocks.compactMap { viewModel in
+            self.viewFactory(viewModel)
+        }.forEach { view in
+            self.scrollableStackView.addArrangedView(view)
         }
     }
 }

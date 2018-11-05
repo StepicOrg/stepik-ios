@@ -68,16 +68,54 @@ final class HomeViewController: BaseExploreViewController {
         controller.title = "Info"
 
         let viewModel = CourseInfoViewModel(blocks: [
-            CourseInfoTextBlockViewModel(type: .author, message: ""),
-            CourseInfoTextBlockViewModel(type: .about, message: "This course was designed for beginner java developers and people who'd like to learn functional approach to programming. If you are an expert in java or functional programming this course will seem too simple for you. It would be better for you to proceed to a more advanced course."),
-            CourseInfoTextBlockViewModel(type: .requirements, message: "Basic knowledge of Java syntax, collections, OOP and pre-installed JDK 8+."),
-            CourseInfoTextBlockViewModel(type: .targetAudience, message: "People who would like to improve their skills in java programming and to learn functional programming"),
-            CourseInfoTextBlockViewModel(type: .timeToComplete, message: "11 hours"),
-            CourseInfoTextBlockViewModel(type: .language, message: "English"),
-            CourseInfoTextBlockViewModel(type: .certificate, message: "Yes"),
-            CourseInfoTextBlockViewModel(type: .certificateDetails, message: "Certificate condition: 50 points\nWith distinction: 75 points")
+            CourseInfoTextBlockViewModel(
+                type: .author, message: ""
+            ),
+            CourseInfoTextBlockViewModel(
+                type: .about,
+                message: "This course was designed for beginner java developers and people who'd like to learn functional approach to programming. If you are an expert in java or functional programming this course will seem too simple for you. It would be better for you to proceed to a more advanced course."
+            ),
+            CourseInfoTextBlockViewModel(
+                type: .requirements,
+                message: "Basic knowledge of Java syntax, collections, OOP and pre-installed JDK 8+."
+            ),
+            CourseInfoTextBlockViewModel(
+                type: .targetAudience,
+                message: "People who would like to improve their skills in java programming and to learn functional programming"
+            ),
+            CourseInfoInstructorsBlockViewModel(
+                instructors: [
+                    CourseInfoInstructorViewModel(
+                        avatar: #imageLiteral(resourceName: "placeholder-anonymous-dark-background"),
+                        title: "Artyom Burylov",
+                        description: "Kotlin backend developer, online education enthusiast. I graduated from PNRPU with a BSc in Computer Science (2014) and MSc in Software Engineering (2016). During the learning, I took an active part in scientific conferences and educational events."
+                    ),
+                    CourseInfoInstructorViewModel(
+                        avatar: #imageLiteral(resourceName: "placeholder-anonymous-dark-background"),
+                        title: "Tom Tom",
+                        description: "Kotlin backend developer, online education enthusiast. I graduated from PNRPU with a BSc in Computer Science (2014) and MSc in Software Engineering (2016). During the learning, I took an active part in scientific conferences and educational events."
+                    )
+                ]
+            ),
+            CourseInfoTextBlockViewModel(
+                type: .timeToComplete, message: "11 hours"
+            ),
+            CourseInfoTextBlockViewModel(
+                type: .language, message: "English"
+            ),
+            CourseInfoTextBlockViewModel(
+                type: .certificate,
+                message: "Yes"
+            ),
+            CourseInfoTextBlockViewModel(
+                type: .certificateDetails,
+                message: "Certificate condition: 50 points\nWith distinction: 75 points"
+            )
         ])
-        controller.view = CourseInfoView(viewModel: viewModel)
+        controller.view = CourseInfoView(
+            viewModel: viewModel,
+            viewFactory: CourseInfoViewFactory.make
+        )
 
         self.navigationController?.pushViewController(controller, animated: true)
     }

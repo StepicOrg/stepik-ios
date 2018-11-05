@@ -12,11 +12,11 @@ import SnapKit
 extension CourseInfoInstructorView {
     struct Appearance {
         let imageViewSize = CGSize(width: 32, height: 32)
-        
+
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let titleLabelTextColor = UIColor.black
-        
+
         let descriptionLabelInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         let descriptionLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let descriptionLabelTextColor = UIColor.black
@@ -25,13 +25,13 @@ extension CourseInfoInstructorView {
 
 final class CourseInfoInstructorView: UIView {
     private let appearance: Appearance
-    
+
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 1
@@ -39,7 +39,7 @@ final class CourseInfoInstructorView: UIView {
         label.textColor = self.appearance.titleLabelTextColor
         return label
     }()
-    
+
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 0
@@ -47,7 +47,7 @@ final class CourseInfoInstructorView: UIView {
         label.textColor = self.appearance.descriptionLabelTextColor
         return label
     }()
-    
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
@@ -55,16 +55,18 @@ final class CourseInfoInstructorView: UIView {
     ) {
         self.appearance = appearance
         super.init(frame: frame)
-        
+
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
+
+        self.configure(with: viewModel)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func configure(with viewModel: CourseInfoInstructorViewModel) {
         self.imageView.image = viewModel.avatar
         self.titleLabel.text = viewModel.title
@@ -76,27 +78,27 @@ extension CourseInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
     }
-    
+
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.descriptionLabel)
     }
-    
+
     func makeConstraints() {
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         self.imageView.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.imageViewSize)
             make.leading.top.equalToSuperview()
         }
-        
+
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.imageView.snp.trailing).offset(self.appearance.titleLabelInsets.left)
             make.centerY.equalTo(self.imageView.snp.centerY)
             make.trailing.equalToSuperview()
         }
-        
+
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.imageView.snp.leading)
@@ -105,4 +107,3 @@ extension CourseInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
         }
     }
 }
-

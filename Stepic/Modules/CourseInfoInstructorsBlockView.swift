@@ -12,24 +12,24 @@ import SnapKit
 extension CourseInfoInstructorsBlockView {
     struct Appearance {
         let headerViewInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 36)
-        
+
         let stackViewInsets = UIEdgeInsets(top: 12, left: 36, bottom: 0, right: 36)
     }
 }
 
 final class CourseInfoInstructorsBlockView: UIView {
     private let appearance: Appearance
-    
+
     private lazy var headerView: CourseInfoBlockView = {
         CourseInfoBlockView(frame: .zero)
     }()
-    
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
     }()
-    
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
@@ -41,17 +41,17 @@ final class CourseInfoInstructorsBlockView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-        
+
         self.configure(with: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func configure(with viewModel: CourseInfoInstructorsBlockViewModel) {
         self.headerView.configure(with: viewModel)
-        
+
         viewModel.instructors.forEach { instructor in
             self.stackView.addArrangedSubview(
                 CourseInfoInstructorView(viewModel: instructor)
@@ -75,7 +75,7 @@ extension CourseInfoInstructorsBlockView: ProgrammaticallyInitializableViewProto
         self.headerView.snp.makeConstraints { make in
             make.leading.top.trailing.equalToSuperview().inset(self.appearance.headerViewInsets)
         }
-        
+
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview().inset(self.appearance.stackViewInsets)

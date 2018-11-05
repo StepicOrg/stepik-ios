@@ -78,6 +78,25 @@ enum CourseInfoBlockType {
     }
 }
 
+enum CourseInfoViewFactory {
+    static func make(for viewModel: CourseInfoBlockViewModelProtocol) -> UIView? {
+        switch viewModel.type {
+        case .instructors:
+            guard let instructorsViewModel = viewModel as? CourseInfoInstructorsBlockViewModel else {
+                return nil
+            }
+
+            return CourseInfoInstructorsBlockView(viewModel: instructorsViewModel)
+        default:
+            guard let textBlockViewModel = viewModel as? CourseInfoTextBlockViewModel else {
+                return nil
+            }
+
+            return CourseInfoTextBlockView(viewModel: textBlockViewModel)
+        }
+    }
+}
+
 protocol CourseInfoBlockViewModelProtocol {
     var type: CourseInfoBlockType { get }
 
