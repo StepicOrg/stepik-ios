@@ -12,6 +12,7 @@ import SnapKit
 extension CourseInfoInstructorView {
     struct Appearance {
         let imageViewSize = CGSize(width: 30, height: 30)
+        let imageViewCornerRadius: CGFloat = 5
 
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 0)
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -29,6 +30,8 @@ final class CourseInfoInstructorView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = self.appearance.imageViewCornerRadius
+        imageView.clipsToBounds = true
         return imageView
     }()
 

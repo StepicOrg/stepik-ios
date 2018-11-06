@@ -89,12 +89,12 @@ final class HomeViewController: BaseExploreViewController {
             CourseInfoInstructorsBlockViewModel(
                 instructors: [
                     CourseInfoInstructorViewModel(
-                        avatar: #imageLiteral(resourceName: "placeholder-anonymous-dark-background"),
+                        avatar: UIImage(named: "stepik_logotype_square_black"),
                         title: "Artyom Burylov",
                         description: "Kotlin backend developer, online education enthusiast. I graduated from PNRPU with a BSc in Computer Science (2014) and MSc in Software Engineering (2016). During the learning, I took an active part in scientific conferences and educational events."
                     ),
                     CourseInfoInstructorViewModel(
-                        avatar: #imageLiteral(resourceName: "placeholder-anonymous-dark-background"),
+                        avatar: UIImage(named: "stepik_logotype_square_black"),
                         title: "Tom Tom",
                         description: "Kotlin backend developer, online education enthusiast. I graduated from PNRPU with a BSc in Computer Science (2014) and MSc in Software Engineering (2016). During the learning, I took an active part in scientific conferences and educational events."
                     )
