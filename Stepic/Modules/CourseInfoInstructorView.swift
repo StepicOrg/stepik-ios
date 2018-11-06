@@ -19,7 +19,7 @@ extension CourseInfoInstructorView {
 
         let descriptionLabelInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         let descriptionLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let descriptionLabelTextColor = UIColor.black
+        let descriptionLabelTextColor = UIColor(hex: 0x535366)
     }
 }
 
