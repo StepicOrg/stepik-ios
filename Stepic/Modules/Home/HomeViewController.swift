@@ -69,7 +69,7 @@ final class HomeViewController: BaseExploreViewController {
 
         let viewModel = CourseInfoViewModel(blocks: [
             CourseInfoTextBlockViewModel(
-                type: .author, message: ""
+                type: .author("Yandex"), message: ""
             ),
             CourseInfoTextBlockViewModel(
                 type: .about,
@@ -112,10 +112,7 @@ final class HomeViewController: BaseExploreViewController {
                 message: "Certificate condition: 50 points\nWith distinction: 75 points"
             )
         ])
-        controller.view = CourseInfoView(
-            viewModel: viewModel,
-            viewFactory: CourseInfoViewFactory.make
-        )
+        controller.view = CourseInfoView(viewModel: viewModel)
 
         self.navigationController?.pushViewController(controller, animated: true)
     }

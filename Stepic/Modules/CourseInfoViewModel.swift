@@ -9,7 +9,7 @@
 import Foundation
 
 enum CourseInfoBlockType {
-    case author
+    case author(String)
     case about
     case requirements
     case targetAudience
@@ -29,9 +29,9 @@ enum CourseInfoBlockType {
 
     private func getResources() -> (title: String, imageName: String) {
         switch self {
-        case .author:
+        case .author(let author):
             return (
-                NSLocalizedString("CourseInfoTitleAuthor", comment: ""),
+                "\(NSLocalizedString("CourseInfoTitleAuthor", comment: "")) \(author)",
                 "course-info-instructor"
             )
         case .about:
@@ -74,25 +74,6 @@ enum CourseInfoBlockType {
                 NSLocalizedString("CourseInfoTitleCertificateDetails", comment: ""),
                 "course-info-certificate-details"
             )
-        }
-    }
-}
-
-enum CourseInfoViewFactory {
-    static func make(for viewModel: CourseInfoBlockViewModelProtocol) -> UIView? {
-        switch viewModel.type {
-        case .instructors:
-            guard let instructorsViewModel = viewModel as? CourseInfoInstructorsBlockViewModel else {
-                return nil
-            }
-
-            return CourseInfoInstructorsBlockView(viewModel: instructorsViewModel)
-        default:
-            guard let textBlockViewModel = viewModel as? CourseInfoTextBlockViewModel else {
-                return nil
-            }
-
-            return CourseInfoTextBlockView(viewModel: textBlockViewModel)
         }
     }
 }

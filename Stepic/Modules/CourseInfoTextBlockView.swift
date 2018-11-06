@@ -11,11 +11,11 @@ import SnapKit
 
 extension CourseInfoTextBlockView {
     struct Appearance {
-        let headerViewInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 36)
+        var headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47)
 
-        let messageLabelInsets = UIEdgeInsets(top: 12, left: 36, bottom: 0, right: 0)
+        var messageLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
         let messageLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let messageLabelTextColor = UIColor.black
+        let messageLabelTextColor = UIColor(hex: 0x535366)
     }
 }
 
@@ -72,12 +72,15 @@ extension CourseInfoTextBlockView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.headerView.translatesAutoresizingMaskIntoConstraints = false
         self.headerView.snp.makeConstraints { make in
-            make.leading.top.trailing.equalToSuperview().inset(self.appearance.headerViewInsets)
+            make.leading.equalToSuperview().offset(self.appearance.headerViewInsets.left)
+            make.top.equalToSuperview().offset(self.appearance.headerViewInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.headerViewInsets.right)
         }
 
         self.messageLabel.translatesAutoresizingMaskIntoConstraints = false
         self.messageLabel.snp.makeConstraints { make in
-            make.leading.bottom.equalToSuperview().inset(self.appearance.messageLabelInsets)
+            make.leading.equalToSuperview().offset(self.appearance.messageLabelInsets.left)
+            make.bottom.equalToSuperview().offset(self.appearance.messageLabelInsets.bottom)
             make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.messageLabelInsets.top)
             make.trailing.equalTo(self.headerView)
         }

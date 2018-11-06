@@ -11,13 +11,13 @@ import SnapKit
 
 extension CourseInfoInstructorView {
     struct Appearance {
-        let imageViewSize = CGSize(width: 32, height: 32)
+        let imageViewSize = CGSize(width: 30, height: 30)
 
-        let titleLabelInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        let titleLabelInsets = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 0)
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let titleLabelTextColor = UIColor.black
 
-        let descriptionLabelInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+        let descriptionLabelInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         let descriptionLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let descriptionLabelTextColor = UIColor.black
     }

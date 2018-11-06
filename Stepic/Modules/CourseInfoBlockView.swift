@@ -15,7 +15,7 @@ extension CourseInfoBlockView {
 
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let titleLabelTextColor = UIColor.black
-        let titleLabelLeadingSpace: CGFloat = 12
+        let titleLabelLeadingSpace: CGFloat = 27
     }
 }
 
@@ -83,7 +83,7 @@ extension CourseInfoBlockView: ProgrammaticallyInitializableViewProtocol {
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.imageView.snp.trailing).offset(self.appearance.titleLabelLeadingSpace)
+            make.leading.equalToSuperview().offset(self.appearance.titleLabelLeadingSpace)
             make.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
         }

@@ -11,9 +11,10 @@ import SnapKit
 
 extension CourseInfoInstructorsBlockView {
     struct Appearance {
-        let headerViewInsets = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 36)
+        let headerViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
 
-        let stackViewInsets = UIEdgeInsets(top: 12, left: 36, bottom: 0, right: 36)
+        let stackViewInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
+        let stackViewSpacing: CGFloat = 18
     }
 }
 
@@ -27,6 +28,7 @@ final class CourseInfoInstructorsBlockView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = self.appearance.stackViewSpacing
         return stackView
     }()
 
@@ -73,12 +75,16 @@ extension CourseInfoInstructorsBlockView: ProgrammaticallyInitializableViewProto
     func makeConstraints() {
         self.headerView.translatesAutoresizingMaskIntoConstraints = false
         self.headerView.snp.makeConstraints { make in
-            make.leading.top.trailing.equalToSuperview().inset(self.appearance.headerViewInsets)
+            make.leading.equalToSuperview().offset(self.appearance.headerViewInsets.left)
+            make.top.equalToSuperview().offset(self.appearance.headerViewInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.headerViewInsets.right)
         }
 
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview().inset(self.appearance.stackViewInsets)
+            make.leading.equalToSuperview().offset(self.appearance.stackViewInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.stackViewInsets.right)
+            make.bottom.equalToSuperview().offset(self.appearance.stackViewInsets.bottom)
             make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.stackViewInsets.top)
         }
     }
