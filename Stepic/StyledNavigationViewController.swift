@@ -14,8 +14,16 @@ class StyledNavigationViewController: UINavigationController {
     static let lightTintColor = UIColor.white
     static let darkTintColor = UIColor.mainDark
 
+    private lazy var statusBarView: UIView = {
+        let view = UIView(frame: UIApplication.shared.statusBarFrame)
+        view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.view.addSubview(statusBarView)
 
         setupShadowView()
         // Do any additional setup after loading the view.
@@ -80,7 +88,7 @@ class StyledNavigationViewController: UINavigationController {
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
 
-        statusBarView?.backgroundColor = color
+        statusBarView.backgroundColor = color
     }
 
     func changeTintColor(progress: CGFloat) {
@@ -170,10 +178,6 @@ class StyledNavigationViewController: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         lastAction = .push
         super.pushViewController(viewController, animated: animated)
-    }
-
-    private var statusBarView: UIView? {
-        return UIApplication.shared.value(forKey: "statusBar") as? UIView
     }
 
     private func makeTransitionColor(from sourceColor: UIColor, to targetColor: UIColor, progress: CGFloat) -> UIColor {
