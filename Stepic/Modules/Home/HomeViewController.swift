@@ -71,6 +71,9 @@ final class HomeViewController: BaseExploreViewController {
             CourseInfoTextBlockViewModel(
                 type: .author("Yandex"), message: ""
             ),
+            CourseInfoIntroVideoBlockViewModel(
+                introURL: "https://player.vimeo.com/external/161974070.hd.mp4?s=19ff926134e7cbbc7e8ce161e3af9c3bb87d5c1a&profile_id=174&oauth2_token_id=3605157?playsinline=1"
+            ),
             CourseInfoTextBlockViewModel(
                 type: .about,
                 message: "This course was designed for beginner java developers and people who'd like to learn functional approach to programming. If you are an expert in java or functional programming this course will seem too simple for you. It would be better for you to proceed to a more advanced course."

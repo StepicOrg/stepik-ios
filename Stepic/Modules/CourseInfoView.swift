@@ -13,8 +13,9 @@ extension CourseInfoView {
     struct Appearance {
         let spacing: CGFloat = 0
 
-        let joinButton: JoinButton
+        let introVideoHeight: CGFloat = 203
 
+        let joinButton: JoinButton
         struct JoinButton {
             let insets = UIEdgeInsets(top: 32, left: 47, bottom: 47, right: 47)
             let height: CGFloat = 47
@@ -56,6 +57,13 @@ final class CourseInfoView: UIView {
         return button
     }()
 
+    private lazy var introVideoImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "new-coursepics-python-xl"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(joinButton: .init()),
@@ -87,6 +95,17 @@ final class CourseInfoView: UIView {
                 self.scrollableStackView.addArrangedView(
                     CourseInfoInstructorsBlockView(viewModel: instructorsViewModel)
                 )
+            case .introVideo:
+                guard let introVideoViewModel = viewModel as? CourseInfoIntroVideoBlockViewModel,
+                      let _ = URL(string: introVideoViewModel.introURL) else {
+                    return
+                }
+
+                self.introVideoImageView.translatesAutoresizingMaskIntoConstraints = false
+                self.scrollableStackView.addArrangedView(self.introVideoImageView)
+                self.introVideoImageView.snp.makeConstraints { make in
+                    make.height.equalTo(self.appearance.introVideoHeight)
+                }
             default:
                 guard let textBlockViewModel = viewModel as? CourseInfoTextBlockViewModel else {
                     return
@@ -124,7 +143,7 @@ final class CourseInfoView: UIView {
             )
         case .about:
             return .init(
-                headerViewInsets: UIEdgeInsets(top: 18, left: 20, bottom: 0, right: 47),
+                headerViewInsets: UIEdgeInsets(top: 27, left: 20, bottom: 0, right: 47),
                 messageLabelInsets: UIEdgeInsets(top: 29, left: 47, bottom: 0, right: 47)
             )
         case .requirements:

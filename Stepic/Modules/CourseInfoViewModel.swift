@@ -10,6 +10,7 @@ import Foundation
 
 enum CourseInfoBlockType {
     case author(String)
+    case introVideo
     case about
     case requirements
     case targetAudience
@@ -34,6 +35,8 @@ enum CourseInfoBlockType {
                 "\(NSLocalizedString("CourseInfoTitleAuthor", comment: "")) \(author)",
                 "course-info-instructor"
             )
+        case .introVideo:
+            return ("", "")
         case .about:
             return (
                 NSLocalizedString("CourseInfoTitleAbout", comment: ""),
@@ -93,6 +96,14 @@ extension CourseInfoBlockViewModelProtocol {
     var title: String {
         return self.type.title
     }
+}
+
+struct CourseInfoIntroVideoBlockViewModel: CourseInfoBlockViewModelProtocol {
+    var type: CourseInfoBlockType {
+        return .introVideo
+    }
+
+    let introURL: String
 }
 
 struct CourseInfoTextBlockViewModel: CourseInfoBlockViewModelProtocol {
