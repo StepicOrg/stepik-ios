@@ -52,6 +52,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = []
+
         registerPlaceholder(placeholder: StepikPlaceholder(.login, action: { [weak self] in
             guard let strongSelf = self else {
                 return

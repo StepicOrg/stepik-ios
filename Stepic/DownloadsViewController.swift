@@ -20,6 +20,8 @@ class DownloadsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = []
+
         tableView.register(UINib(nibName: "DownloadTableViewCell", bundle: nil), forCellReuseIdentifier: "DownloadTableViewCell")
 
         tableView.emptySetPlaceholder = StepikPlaceholder(.emptyDownloads) { [weak self] in

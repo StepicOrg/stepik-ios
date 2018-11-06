@@ -46,6 +46,9 @@ class SearchQueriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        edgesForExtendedLayout = []
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 44
@@ -55,9 +58,6 @@ class SearchQueriesViewController: UIViewController {
         tableView.register(UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchSuggestionTableViewCell")
         presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries, persistentManager: SearchQueriesPersistentManager())
         tableView.tableFooterView = UIView()
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
