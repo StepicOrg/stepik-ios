@@ -88,14 +88,6 @@ final class CourseInfoView: UIView {
     private func addBlocks() {
         self.viewModel.blocks.forEach { viewModel in
             switch viewModel.type {
-            case .instructors:
-                guard let instructorsViewModel = viewModel as? CourseInfoInstructorsBlockViewModel else {
-                    return
-                }
-
-                self.scrollableStackView.addArrangedView(
-                    CourseInfoInstructorsBlockView(viewModel: instructorsViewModel)
-                )
             case .introVideo:
                 guard let introVideoViewModel = viewModel as? CourseInfoIntroVideoBlockViewModel,
                       let _ = URL(string: introVideoViewModel.introURL) else {
@@ -107,6 +99,14 @@ final class CourseInfoView: UIView {
                 self.introVideoImageView.snp.makeConstraints { make in
                     make.height.equalTo(self.appearance.introVideoHeight)
                 }
+            case .instructors:
+                guard let instructorsViewModel = viewModel as? CourseInfoInstructorsBlockViewModel else {
+                    return
+                }
+
+                self.scrollableStackView.addArrangedView(
+                    CourseInfoInstructorsBlockView(viewModel: instructorsViewModel)
+                )
             default:
                 guard let textBlockViewModel = viewModel as? CourseInfoTextBlockViewModel else {
                     return
@@ -134,7 +134,7 @@ final class CourseInfoView: UIView {
     }
 
     private func getTextBlockAppearance(
-        for type: CourseInfoBlockType
+        for type: CourseInfoType
     ) -> CourseInfoTextBlockView.Appearance {
         switch type {
         case .author:

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CourseInfoBlockType {
+enum CourseInfoType {
     case author(String)
     case introVideo
     case about
@@ -82,7 +82,7 @@ enum CourseInfoBlockType {
 }
 
 protocol CourseInfoBlockViewModelProtocol {
-    var type: CourseInfoBlockType { get }
+    var type: CourseInfoType { get }
 
     var image: UIImage? { get }
     var title: String { get }
@@ -99,7 +99,7 @@ extension CourseInfoBlockViewModelProtocol {
 }
 
 struct CourseInfoIntroVideoBlockViewModel: CourseInfoBlockViewModelProtocol {
-    var type: CourseInfoBlockType {
+    var type: CourseInfoType {
         return .introVideo
     }
 
@@ -107,7 +107,7 @@ struct CourseInfoIntroVideoBlockViewModel: CourseInfoBlockViewModelProtocol {
 }
 
 struct CourseInfoTextBlockViewModel: CourseInfoBlockViewModelProtocol {
-    let type: CourseInfoBlockType
+    let type: CourseInfoType
     let message: String
 }
 
@@ -118,7 +118,7 @@ struct CourseInfoInstructorViewModel {
 }
 
 struct CourseInfoInstructorsBlockViewModel: CourseInfoBlockViewModelProtocol {
-    var type: CourseInfoBlockType {
+    var type: CourseInfoType {
         return .instructors
     }
 
