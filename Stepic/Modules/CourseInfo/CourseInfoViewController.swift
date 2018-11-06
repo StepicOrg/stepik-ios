@@ -24,7 +24,14 @@ final class CourseInfoViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.changeTopBarAlpha(value: self.lastTopBarAlpha)
+
+        // To update when previous operations completed
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.changeTopBarAlpha(value: strongSelf.lastTopBarAlpha)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,7 +74,7 @@ extension CourseInfoViewController: UIScrollViewDelegate {
         let offset = scrollView.contentOffset.y
 
         let offsetWithHeader = offset
-            + courseInfoView.appearance.headerHeight
+            + courseInfoView.headerHeight
             + courseInfoView.appearance.segmentedControlHeight
         let headerHeight = courseInfoView.appearance.headerHeight - topPadding
 
@@ -76,7 +83,7 @@ extension CourseInfoViewController: UIScrollViewDelegate {
         self.changeTopBarAlpha(value: coeff)
 
         // Pin segmented control
-        let scrollViewOffset = min(offsetWithHeader, courseInfoView.appearance.headerHeight - topPadding)
+        let scrollViewOffset = min(offsetWithHeader, courseInfoView.headerHeight - topPadding)
         courseInfoView.updateScroll(offset: scrollViewOffset)
     }
 }

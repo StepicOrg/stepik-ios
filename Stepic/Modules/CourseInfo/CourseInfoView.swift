@@ -53,7 +53,7 @@ final class CourseInfoView: UIView {
     }()
     private lazy var fakeContentView = UIView()
 
-    private var headerHeight: CGFloat {
+    var headerHeight: CGFloat {
         if DeviceInfo.current.isXSerie {
             return self.appearance.largeHeaderHeight
         }
