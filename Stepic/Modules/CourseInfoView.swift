@@ -16,6 +16,7 @@ extension CourseInfoView {
         let introVideoHeight: CGFloat = 203
 
         let joinButton: JoinButton
+
         struct JoinButton {
             let insets = UIEdgeInsets(top: 32, left: 47, bottom: 47, right: 47)
             let height: CGFloat = 47
@@ -139,37 +140,32 @@ final class CourseInfoView: UIView {
         case .author:
             return .init(
                 headerViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 29, left: 47, bottom: 0, right: 47)
+                messageLabelInsets: UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
             )
         case .about:
             return .init(
-                headerViewInsets: UIEdgeInsets(top: 27, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 29, left: 47, bottom: 0, right: 47)
+                headerViewInsets: UIEdgeInsets(top: 18, left: 20, bottom: 0, right: 47),
+                messageLabelInsets: UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
             )
         case .requirements:
             return .init(
                 headerViewInsets: UIEdgeInsets(top: 32, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 26, left: 47, bottom: 0, right: 47)
+                messageLabelInsets: UIEdgeInsets(top: 17, left: 47, bottom: 0, right: 47)
             )
         case .targetAudience:
             return .init(
                 headerViewInsets: UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 26, left: 47, bottom: 0, right: 47)
+                messageLabelInsets: UIEdgeInsets(top: 17, left: 47, bottom: 0, right: 47)
             )
-        case .timeToComplete:
+        case .timeToComplete, .language, .certificate:
             return .init(
                 headerViewInsets: UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 12, left: 47, bottom: 0, right: 47)
-            )
-        case .language, .certificate:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 12, left: 47, bottom: 0, right: 47)
+                messageLabelInsets: UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
             )
         case .certificateDetails:
             return .init(
                 headerViewInsets: UIEdgeInsets(top: 43, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 12, left: 47, bottom: 0, right: 47)
+                messageLabelInsets: UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
             )
         default:
             return .init(

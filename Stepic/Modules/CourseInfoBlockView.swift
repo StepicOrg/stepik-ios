@@ -84,8 +84,7 @@ extension CourseInfoBlockView: ProgrammaticallyInitializableViewProtocol {
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.titleLabelLeadingSpace)
-            make.trailing.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.top.trailing.bottom.equalToSuperview()
         }
     }
 }
