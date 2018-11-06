@@ -1,5 +1,5 @@
 //
-//  BlurredImageView.swift
+//  CourseInfoBlurredBackgroundView.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 01/11/2018.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Nuke
 
-extension BlurredImageView {
+extension CourseInfoBlurredBackgroundView {
     struct Appearance {
         let imageFadeInDuration: TimeInterval = 0.15
         let placeholderImage: UIImage = #imageLiteral(resourceName: "lesson_cover_50")
@@ -19,7 +19,7 @@ extension BlurredImageView {
     }
 }
 
-final class BlurredImageView: UIView {
+final class CourseInfoBlurredBackgroundView: UIView {
     let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
@@ -71,7 +71,7 @@ final class BlurredImageView: UIView {
     }
 }
 
-extension BlurredImageView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoBlurredBackgroundView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.imageView.image = self.appearance.placeholderImage
     }

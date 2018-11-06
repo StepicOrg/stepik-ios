@@ -56,11 +56,10 @@ final class CourseWidgetStatsView: UIView {
     }
 
     private lazy var learnersView: CourseWidgetStatsItemView = {
-        let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.learnersViewImageViewSize,
-            imageTintColor: self.appearance.itemImageTintColor,
-            textColor: self.appearance.itemTextColor
-        )
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.learnersViewImageViewSize
+        appearance.imageTintColor = self.appearance.itemImageTintColor
+        appearance.textColor = self.appearance.itemTextColor
         let view = CourseWidgetStatsItemView(
             frame: .zero,
             appearance: appearance
@@ -70,11 +69,10 @@ final class CourseWidgetStatsView: UIView {
     }()
 
     private lazy var ratingView: CourseWidgetStatsItemView = {
-        let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.ratingViewImageViewSize,
-            imageTintColor: self.appearance.itemImageTintColor,
-            textColor: self.appearance.itemTextColor
-        )
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.ratingViewImageViewSize
+        appearance.imageTintColor = self.appearance.itemImageTintColor
+        appearance.textColor = self.appearance.itemTextColor
         let view = CourseWidgetStatsItemView(
             frame: .zero,
             appearance: appearance
@@ -84,11 +82,10 @@ final class CourseWidgetStatsView: UIView {
     }()
 
     private lazy var progressView: CourseWidgetStatsItemView = {
-        let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.progressViewImageViewSize,
-            imageTintColor: .clear,
-            textColor: self.appearance.itemTextColor
-        )
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.progressViewImageViewSize
+        appearance.imageTintColor = .clear
+        appearance.textColor = self.appearance.itemTextColor
         let view = CourseWidgetStatsItemView(
             frame: .zero,
             appearance: appearance

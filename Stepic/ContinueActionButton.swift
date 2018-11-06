@@ -10,44 +10,45 @@ import UIKit
 
 extension ContinueActionButton {
     struct Appearance {
-        let cornerRadius: CGFloat = 33.0
-        let titleFont = UIFont.systemFont(ofSize: 16)
-        let titleColor = UIColor.mainDark
+        var cornerRadius: CGFloat = 33.0
+        var titleFont = UIFont.systemFont(ofSize: 16)
+        let titleInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
-        let backgroundColor = UIColor.white
-
-        let shadowColor = UIColor(hex: 0xa0a0a0, alpha: 0.5)
         let shadowOffset = CGSize(width: 0, height: 1.3)
         let shadowOpacity: Float = 1.0
         let shadowRadius: CGFloat = 6.7
 
-        let titleInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        let defaultBackgroundColor = UIColor.white
+        let defaultTitleColor = UIColor.mainDark
+        let defaultShadowColor = UIColor(hex: 0xa0a0a0, alpha: 0.5)
+
+        let callToActionBackgroundColor = UIColor(hex: 0x66cc66)
+        let callToActionTitleColor = UIColor.white
+        let callToActionShadowColor = UIColor(hex: 0xa0a0a0, alpha: 0.5)
     }
 }
 
 final class ContinueActionButton: BounceButton {
     let appearance: Appearance
 
-    private lazy var shadowLayer: CAShapeLayer = {
-        let shadowLayer = CAShapeLayer()
-        shadowLayer.fillColor = self.appearance.backgroundColor.cgColor
+    private var shadowLayer: CAShapeLayer?
 
-        shadowLayer.shadowColor = self.appearance.shadowColor.cgColor
-        shadowLayer.shadowOffset = self.appearance.shadowOffset
-        shadowLayer.shadowOpacity = self.appearance.shadowOpacity
-        shadowLayer.shadowRadius = self.appearance.shadowRadius
+    var mode: Mode {
+        didSet {
+            self.updateAppearance()
+        }
+    }
 
-        return shadowLayer
-    }()
-
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(
+        frame: CGRect,
+        mode: Mode = .default,
+        appearance: Appearance = Appearance()
+    ) {
+        self.mode = mode
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.titleLabel?.font = self.appearance.titleFont
-        self.setTitleColor(self.appearance.titleColor, for: .normal)
-        self.titleEdgeInsets = self.appearance.titleInsets
-        self.layer.insertSublayer(self.shadowLayer, at: 0)
+        self.updateAppearance()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -57,10 +58,46 @@ final class ContinueActionButton: BounceButton {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.shadowLayer.path = UIBezierPath(
+        let path = UIBezierPath(
             roundedRect: self.bounds,
             cornerRadius: self.appearance.cornerRadius
         ).cgPath
-        self.shadowLayer.shadowPath = self.shadowLayer.path
+        self.shadowLayer?.path = path
+        self.shadowLayer?.shadowPath = path
+    }
+
+    private func updateAppearance() {
+        self.titleLabel?.font = self.appearance.titleFont
+        self.titleEdgeInsets = self.appearance.titleInsets
+
+        self.shadowLayer?.removeFromSuperlayer()
+
+        let shadowLayer = CAShapeLayer()
+        shadowLayer.shadowOffset = self.appearance.shadowOffset
+        shadowLayer.shadowOpacity = self.appearance.shadowOpacity
+        shadowLayer.shadowRadius = self.appearance.shadowRadius
+
+        switch self.mode {
+        case .default:
+            self.setTitleColor(self.appearance.defaultTitleColor, for: .normal)
+
+            shadowLayer.fillColor = self.appearance.defaultBackgroundColor.cgColor
+            shadowLayer.shadowColor = self.appearance.defaultShadowColor.cgColor
+        case .callToAction:
+            self.setTitleColor(self.appearance.callToActionTitleColor, for: .normal)
+
+            shadowLayer.fillColor = self.appearance.callToActionBackgroundColor.cgColor
+            shadowLayer.shadowColor = self.appearance.callToActionShadowColor.cgColor
+        }
+
+        self.layer.insertSublayer(shadowLayer, at: 0)
+        self.shadowLayer = shadowLayer
+    }
+
+    enum Mode {
+        /// Classic white button
+        case `default`
+        /// Green button
+        case callToAction
     }
 }

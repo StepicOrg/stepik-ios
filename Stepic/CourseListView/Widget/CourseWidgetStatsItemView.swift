@@ -11,11 +11,11 @@ import SnapKit
 
 extension CourseWidgetStatsItemView {
     struct Appearance {
-        let iconSpacing: CGFloat = 3.0
+        var iconSpacing: CGFloat = 3.0
         var imageViewSize = CGSize(width: 12, height: 12)
         var imageTintColor = UIColor.black
 
-        let font = UIFont.systemFont(ofSize: 16, weight: .light)
+        var font = UIFont.systemFont(ofSize: 16, weight: .light)
         var textColor = UIColor.white
     }
 }

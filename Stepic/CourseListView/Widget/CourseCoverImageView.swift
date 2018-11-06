@@ -12,7 +12,6 @@ import Nuke
 extension CourseCoverImageView {
     class Appearance {
         let placeholderImage: UIImage = #imageLiteral(resourceName: "lesson_cover_50")
-        let cornerRadius: CGFloat = 0
         let imageFadeInDuration: TimeInterval = 0.15
     }
 }
@@ -61,8 +60,5 @@ final class CourseCoverImageView: UIImageView {
 extension CourseCoverImageView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.image = nil
-
-        self.layer.cornerRadius = self.appearance.cornerRadius
-        self.clipsToBounds = true
     }
 }

@@ -11,7 +11,8 @@ import SnapKit
 
 extension CourseInfoView {
     struct Appearance {
-        let headerHeight: CGFloat = 240.0
+        let largeHeaderHeight: CGFloat = 255.0
+        let headerHeight: CGFloat = 245.0
         let segmentedControlHeight: CGFloat = 44.0
     }
 }
@@ -29,7 +30,19 @@ final class CourseInfoView: UIView {
 
     private lazy var headerView: UIView = {
         let view = CourseInfoHeaderView(frame: .zero)
-        view.loadImage(url: URL(string: "https://stepik.org/media/cache/images/courses/4350/cover_u2G7dpS/cb095f9a38869dee8371ee5c7d6ada1d.png"))
+
+        let viewModel = CourseInfoHeaderViewModel(
+            title: "Введение в программирование (C++)",
+            coverImageURL: URL(string: "https://stepik.org/media/cache/images/courses/363/cover/c0e235513f7598d01f96ccc8a27c25a5.jpg"),
+            rating: Int(5.0),
+            learnersLabelText: "106K",
+            progress: CourseInfoProgressViewModel(
+                progress: 0.1,
+                progressLabelText: "10%"
+            ),
+            isVerified: true
+        )
+        view.configure(viewModel: viewModel)
         return view
     }()
 
@@ -39,6 +52,13 @@ final class CourseInfoView: UIView {
         return view
     }()
     private lazy var fakeContentView = UIView()
+
+    private var headerHeight: CGFloat {
+        if DeviceInfo.current.isXSerie {
+            return self.appearance.largeHeaderHeight
+        }
+        return self.appearance.headerHeight
+    }
 
     // Dynamic scrolling constraints
     private var topConstraint: Constraint?
@@ -68,7 +88,7 @@ final class CourseInfoView: UIView {
         // overscroll (parallax effect): offset < 0
         // normal scrolling: offset > 0
         if offset <= 0 {
-            self.headerHeightConstraint?.update(offset: self.appearance.headerHeight + -offset)
+            self.headerHeightConstraint?.update(offset: self.headerHeight + -offset)
         }
 
         if offset >= 0 {
@@ -101,7 +121,7 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
         self.backgroundColor = .white
 
         let headerInset = UIEdgeInsets(
-            top: self.appearance.headerHeight + self.appearance.segmentedControlHeight,
+            top: self.headerHeight + self.appearance.segmentedControlHeight,
             left: 0,
             bottom: 0,
             right: 0
@@ -128,7 +148,7 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
         self.headerView.snp.makeConstraints { make in
             self.topConstraint = make.top.equalToSuperview().constraint
             make.left.right.equalToSuperview()
-            self.headerHeightConstraint = make.height.equalTo(self.appearance.headerHeight).constraint
+            self.headerHeightConstraint = make.height.equalTo(self.headerHeight).constraint
         }
 
         self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
