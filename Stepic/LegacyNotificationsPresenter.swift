@@ -1,5 +1,5 @@
 //
-//  FakeNotificationsPresenter.swift
+//  LegacyNotificationsPresenter.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 02.05.16.
@@ -9,7 +9,7 @@
 import UIKit
 import CRToast
 
-final class FakeNotificationsPresenter {
+final class LegacyNotificationsPresenter {
     static func present(
         text: String,
         subtitle: String,

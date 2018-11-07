@@ -359,7 +359,7 @@
 		086FC6AD1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
 		086FC6AE1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
 		086FC6AF1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
-		087039301CD7413D00B6571B /* FakeNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */; };
+		087039301CD7413D00B6571B /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		087235EE20FE2F2F00B4D5B1 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087235ED20FE2F2F00B4D5B1 /* AnalyticsEvent.swift */; };
 		087296DC20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
 		087296DE20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
@@ -1185,7 +1185,7 @@
 		2C1B61C31F4C4AEF00236804 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		2C1B61C41F4C4AEF00236804 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
 		2C1B61C51F4C4AEF00236804 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
-		2C1B61C71F4C4AEF00236804 /* FakeNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */; };
+		2C1B61C71F4C4AEF00236804 /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		2C1B61C81F4C4AEF00236804 /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
 		2C1B61CB1F4C4AEF00236804 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
 		2C1B61CD1F4C4AEF00236804 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
@@ -1549,7 +1549,7 @@
 		2C1B63D41F4C590700236804 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		2C1B63D51F4C590700236804 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
 		2C1B63D61F4C590700236804 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
-		2C1B63D81F4C590700236804 /* FakeNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */; };
+		2C1B63D81F4C590700236804 /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		2C1B63D91F4C590700236804 /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
 		2C1B63DC1F4C590700236804 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
 		2C1B63DE1F4C590700236804 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
@@ -2435,7 +2435,7 @@
 		2C89AA571F4C289900227C3B /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		2C89AA581F4C289900227C3B /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
 		2C89AA591F4C289900227C3B /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
-		2C89AA5B1F4C289900227C3B /* FakeNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */; };
+		2C89AA5B1F4C289900227C3B /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		2C89AA5C1F4C289900227C3B /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
 		2C89AA5F1F4C289900227C3B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
 		2C89AA611F4C289900227C3B /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
@@ -2996,7 +2996,7 @@
 		2C97320B1F4C38F600AC9301 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		2C97320C1F4C38F600AC9301 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
 		2C97320D1F4C38F600AC9301 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
-		2C97320F1F4C38F600AC9301 /* FakeNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */; };
+		2C97320F1F4C38F600AC9301 /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		2C9732101F4C38F600AC9301 /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
 		2C9732131F4C38F600AC9301 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
 		2C9732151F4C38F600AC9301 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
@@ -3493,7 +3493,7 @@
 		2CA8D2672088D9C000E105E9 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
 		2CA8D2682088D9C000E105E9 /* RoutingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082BE3B11E67686B006BC60F /* RoutingManager.swift */; };
 		2CA8D26A2088D9C000E105E9 /* SQLQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */; };
-		2CA8D26B2088D9C000E105E9 /* FakeNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */; };
+		2CA8D26B2088D9C000E105E9 /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		2CA8D26C2088D9C000E105E9 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */; };
 		2CA8D26D2088D9C000E105E9 /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
 		2CA8D26E2088D9C000E105E9 /* ArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF789D1F5DE64300AEEA85 /* ArtView.swift */; };
@@ -4306,7 +4306,7 @@
 		864D66CA1E83DE03001E8D9E /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
 		864D66CB1E83DE03001E8D9E /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
 		864D66CC1E83DE03001E8D9E /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
-		864D66CE1E83DE03001E8D9E /* FakeNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */; };
+		864D66CE1E83DE03001E8D9E /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		864D66CF1E83DE03001E8D9E /* DeviceDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */; };
 		864D66D21E83DE03001E8D9E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
 		864D66D41E83DE03001E8D9E /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
@@ -5169,7 +5169,7 @@
 		086D5B3E20127A25000F7715 /* Tooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
 		086D5B51201283C2000F7715 /* TooltipFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipFactory.swift; sourceTree = "<group>"; };
 		086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtension.swift; sourceTree = "<group>"; };
-		0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNotificationsPresenter.swift; sourceTree = "<group>"; };
+		0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyNotificationsPresenter.swift; sourceTree = "<group>"; };
 		087235ED20FE2F2F00B4D5B1 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipDefaultsManager.swift; sourceTree = "<group>"; };
 		087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -6768,7 +6768,7 @@
 			isa = PBXGroup;
 			children = (
 				08AC214A1CE0DE9B00FBB9CD /* DeviceDefaults.swift */,
-				0870392F1CD7413D00B6571B /* FakeNotificationsPresenter.swift */,
+				0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */,
 				2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */,
 			);
 			name = Notifications;
@@ -14755,7 +14755,7 @@
 				2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */,
 				081058351E9FDD3B00FAC30A /* CertificatesViewTestMock.swift in Sources */,
 				08DDF91020A9B2E9004ECC11 /* PersonalDeadlinesSuggestionWidgetView.swift in Sources */,
-				087039301CD7413D00B6571B /* FakeNotificationsPresenter.swift in Sources */,
+				087039301CD7413D00B6571B /* LegacyNotificationsPresenter.swift in Sources */,
 				082CB1B61D08971900C79A27 /* DiscussionsViewController.swift in Sources */,
 				08F555541C4F97C100C877E8 /* ChoiceDataset.swift in Sources */,
 				083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
@@ -15513,7 +15513,7 @@
 				087585C61FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				2C1B61C51F4C4AEF00236804 /* RoutingManager.swift in Sources */,
 				2C608AD3204568E2006870BB /* ProgressTableViewCell.swift in Sources */,
-				2C1B61C71F4C4AEF00236804 /* FakeNotificationsPresenter.swift in Sources */,
+				2C1B61C71F4C4AEF00236804 /* LegacyNotificationsPresenter.swift in Sources */,
 				2C1B61C81F4C4AEF00236804 /* DeviceDefaults.swift in Sources */,
 				08DF78A41F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C1B61CB1F4C4AEF00236804 /* Notification.swift in Sources */,
@@ -15953,7 +15953,7 @@
 				087585C71FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				2C1B63D61F4C590700236804 /* RoutingManager.swift in Sources */,
 				2C608AD2204568E2006870BB /* ProgressTableViewCell.swift in Sources */,
-				2C1B63D81F4C590700236804 /* FakeNotificationsPresenter.swift in Sources */,
+				2C1B63D81F4C590700236804 /* LegacyNotificationsPresenter.swift in Sources */,
 				2C1B63D91F4C590700236804 /* DeviceDefaults.swift in Sources */,
 				08DF78A51F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C1B63DC1F4C590700236804 /* Notification.swift in Sources */,
@@ -16929,7 +16929,7 @@
 				2C89AA581F4C289900227C3B /* SearchQueriesPresenter.swift in Sources */,
 				2C89AA591F4C289900227C3B /* RoutingManager.swift in Sources */,
 				08EA89D3200E69CA00BCAF44 /* SQLQuizViewController.swift in Sources */,
-				2C89AA5B1F4C289900227C3B /* FakeNotificationsPresenter.swift in Sources */,
+				2C89AA5B1F4C289900227C3B /* LegacyNotificationsPresenter.swift in Sources */,
 				2C6A76572045CFDD00C509A6 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */,
 				2C89AA5C1F4C289900227C3B /* DeviceDefaults.swift in Sources */,
 				08DF78A21F5DE64300AEEA85 /* ArtView.swift in Sources */,
@@ -17372,7 +17372,7 @@
 				2CBC261721086948004245D6 /* UserRegistrationServiceImpl.swift in Sources */,
 				2C97320D1F4C38F600AC9301 /* RoutingManager.swift in Sources */,
 				2C608AD4204568E2006870BB /* ProgressTableViewCell.swift in Sources */,
-				2C97320F1F4C38F600AC9301 /* FakeNotificationsPresenter.swift in Sources */,
+				2C97320F1F4C38F600AC9301 /* LegacyNotificationsPresenter.swift in Sources */,
 				2C9732101F4C38F600AC9301 /* DeviceDefaults.swift in Sources */,
 				08DF78A31F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2C9732131F4C38F600AC9301 /* Notification.swift in Sources */,
@@ -17822,7 +17822,7 @@
 				2CA8D2672088D9C000E105E9 /* SearchQueriesPresenter.swift in Sources */,
 				2CA8D2682088D9C000E105E9 /* RoutingManager.swift in Sources */,
 				2CA8D26A2088D9C000E105E9 /* SQLQuizViewController.swift in Sources */,
-				2CA8D26B2088D9C000E105E9 /* FakeNotificationsPresenter.swift in Sources */,
+				2CA8D26B2088D9C000E105E9 /* LegacyNotificationsPresenter.swift in Sources */,
 				2CA8D26C2088D9C000E105E9 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */,
 				2CA8D26D2088D9C000E105E9 /* DeviceDefaults.swift in Sources */,
 				2CA8D26E2088D9C000E105E9 /* ArtView.swift in Sources */,
@@ -18335,7 +18335,7 @@
 				087585C21FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				08E8F9691F34DD2C008CF4A1 /* SearchQueriesPresenter.swift in Sources */,
 				08E3A3B71E93C21300E9C2EF /* RoutingManager.swift in Sources */,
-				864D66CE1E83DE03001E8D9E /* FakeNotificationsPresenter.swift in Sources */,
+				864D66CE1E83DE03001E8D9E /* LegacyNotificationsPresenter.swift in Sources */,
 				864D66CF1E83DE03001E8D9E /* DeviceDefaults.swift in Sources */,
 				08DF78A01F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				864D66D21E83DE03001E8D9E /* Notification.swift in Sources */,
