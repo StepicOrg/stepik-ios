@@ -11,7 +11,7 @@ import SnapKit
 
 extension CourseInfoView {
     struct Appearance {
-        let largeHeaderHeight: CGFloat = 255.0
+        let largeHeaderHeight: CGFloat = 265.0
         let headerHeight: CGFloat = 245.0
         let segmentedControlHeight: CGFloat = 44.0
     }
@@ -48,10 +48,19 @@ final class CourseInfoView: UIView {
 
     private lazy var segmentedControl: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.red.withAlphaComponent(0.1)
+        view.backgroundColor = UIColor.black.withAlphaComponent(1.0)
         return view
     }()
-    private lazy var fakeContentView = UIView()
+
+    private lazy var contentView: ScrollableStackView = {
+        let stackView = ScrollableStackView(
+            frame: .zero,
+            orientation: .horizontal
+        )
+        stackView.isPagingEnabled = true
+        stackView.showsHorizontalScrollIndicator = false
+        return stackView
+    }()
 
     var headerHeight: CGFloat {
         if DeviceInfo.current.isXSerie {
@@ -87,13 +96,12 @@ final class CourseInfoView: UIView {
         // default position: offset == 0
         // overscroll (parallax effect): offset < 0
         // normal scrolling: offset > 0
-        if offset <= 0 {
-            self.headerHeightConstraint?.update(offset: self.headerHeight + -offset)
-        }
 
-        if offset >= 0 {
-            self.topConstraint?.update(offset: -offset)
-        }
+        self.headerHeightConstraint?.update(
+            offset: max(self.headerHeight, self.headerHeight + -offset)
+        )
+
+        self.topConstraint?.update(offset: min(0, -offset))
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -131,10 +139,10 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.headerView)
-        self.addSubview(self.segmentedControl)
         self.insertSubview(self.scrollableStackView, aboveSubview: self.headerView)
+        self.addSubview(self.segmentedControl)
 
-        self.scrollableStackView.addArrangedView(self.fakeContentView)
+        self.scrollableStackView.addArrangedView(self.contentView)
     }
 
     func makeConstraints() {
@@ -158,9 +166,16 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
             make.height.equalTo(self.appearance.segmentedControlHeight)
         }
 
-        self.fakeContentView.translatesAutoresizingMaskIntoConstraints = false
-        self.fakeContentView.snp.makeConstraints { make in
-            make.height.equalTo(1200)
+        for i in 0..<5 {
+            let view = UIView()
+            view.backgroundColor = [UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow, UIColor.red][i]
+            self.contentView.addArrangedView(view)
+
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.snp.makeConstraints { make in
+                make.width.equalTo(self.snp.width)
+                make.height.equalTo(1000)
+            }
         }
     }
 }

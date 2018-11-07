@@ -134,6 +134,15 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    var isPagingEnabled: Bool {
+        get {
+            return self.scrollView.isPagingEnabled
+        }
+        set {
+            self.scrollView.isPagingEnabled = newValue
+        }
+    }
+
     // MARK: - Inits
 
     init(frame: CGRect, orientation: Orientation = .vertical) {

@@ -76,14 +76,14 @@ extension CourseInfoViewController: UIScrollViewDelegate {
         let offsetWithHeader = offset
             + courseInfoView.headerHeight
             + courseInfoView.appearance.segmentedControlHeight
-        let headerHeight = courseInfoView.appearance.headerHeight - topPadding
+        let headerHeight = courseInfoView.headerHeight - topPadding
 
         let coeff = max(0, offsetWithHeader / headerHeight)
         self.lastTopBarAlpha = coeff
         self.changeTopBarAlpha(value: coeff)
 
         // Pin segmented control
-        let scrollViewOffset = min(offsetWithHeader, courseInfoView.headerHeight - topPadding)
+        let scrollViewOffset = min(offsetWithHeader, headerHeight)
         courseInfoView.updateScroll(offset: scrollViewOffset)
     }
 }

@@ -37,6 +37,8 @@ enum NotificationPermissionStatus {
             self = .denied
         case .notDetermined:
             self = .notDetermined
+        case .provisional:
+            self = .notDetermined
         }
     }
 }
