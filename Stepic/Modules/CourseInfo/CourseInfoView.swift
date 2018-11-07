@@ -126,6 +126,7 @@ final class CourseInfoView: UIView {
 
 extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
+        self.clipsToBounds = true
         self.backgroundColor = .white
 
         let headerInset = UIEdgeInsets(
