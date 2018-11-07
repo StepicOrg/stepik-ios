@@ -102,7 +102,7 @@ extension NotificationsService {
                 return
             }
 
-            LegacyNotificationsPresenter.present(text: title, subtitle: body, success: {
+            LegacyNotificationsPresenter.present(text: title, subtitle: body, onTap: {
                 self.routeLocalNotification(with: userInfo)
             })
         }
@@ -196,7 +196,7 @@ extension NotificationsService {
             if #available(iOS 10.0, *) {
                 NotificationReactionHandler().handle(with: notification)
             } else if self.isInForeground {
-                LegacyNotificationsPresenter.present(text: body, success: {
+                LegacyNotificationsPresenter.present(text: body, onTap: {
                     NotificationReactionHandler().handle(with: notification)
                 })
             } else {
@@ -225,7 +225,7 @@ extension NotificationsService {
                     return
                 }
 
-                LegacyNotificationsPresenter.present(text: body, success: {
+                LegacyNotificationsPresenter.present(text: body, onTap: {
                     TabBarRouter(tab: .profile).route()
                 })
             } else {

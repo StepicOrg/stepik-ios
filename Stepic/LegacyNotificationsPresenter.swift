@@ -13,13 +13,13 @@ final class LegacyNotificationsPresenter {
     static func present(
         text: String,
         subtitle: String,
-        success: @escaping (() -> Void)
+        onTap: @escaping (() -> Void)
     ) {
         let responder = CRToastInteractionResponder(
             interactionType: .tap,
             automaticallyDismiss: true,
             block: { _ in
-                success()
+                onTap()
             }
         )
 
@@ -39,12 +39,12 @@ final class LegacyNotificationsPresenter {
         }
     }
 
-    static func present(text: String, success: @escaping (() -> Void)) {
+    static func present(text: String, onTap: @escaping (() -> Void)) {
         let responder = CRToastInteractionResponder(
             interactionType: .tap,
             automaticallyDismiss: true,
             block: { _ in
-                success()
+                onTap()
             }
         )
 
