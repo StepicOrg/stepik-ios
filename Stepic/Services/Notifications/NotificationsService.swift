@@ -95,7 +95,17 @@ extension NotificationsService {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
-        self.routeLocalNotification(with: userInfo)
+        if #available(iOS 10.0, *) {
+        } else if self.isInForeground {
+            guard let title = userInfo?[LocalNotificationsService.Key.title.rawValue] as? String,
+                  let body = userInfo?[LocalNotificationsService.Key.body.rawValue] as? String else {
+                return
+            }
+
+            FakeNotificationsPresenter.present(text: title, subtitle: body) {
+                self.routeLocalNotification(with: userInfo)
+            }
+        }
     }
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
@@ -106,7 +116,7 @@ extension NotificationsService {
         }
 
         guard let userInfo = userInfo as? [String: Any],
-              let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
+              let key = userInfo[LocalNotificationsService.Key.notificationName.rawValue] as? String else {
             return route(to: .home)
         }
 
@@ -186,9 +196,9 @@ extension NotificationsService {
             if #available(iOS 10.0, *) {
                 NotificationReactionHandler().handle(with: notification)
             } else if self.isInForeground {
-                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
+                FakeNotificationsPresenter.present(text: body) {
                     NotificationReactionHandler().handle(with: notification)
-                })
+                }
             } else {
                 NotificationReactionHandler().handle(with: notification)
             }
@@ -206,7 +216,21 @@ extension NotificationsService {
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
         DispatchQueue.main.async {
-            TabBarRouter(tab: .profile).route()
+            if #available(iOS 10.0, *) {
+                TabBarRouter(tab: .profile).route()
+            } else if self.isInForeground {
+                guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
+                      let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
+                      let body = alert[PayloadKey.body.rawValue] as? String else {
+                    return
+                }
+
+                FakeNotificationsPresenter.present(text: body) {
+                    TabBarRouter(tab: .profile).route()
+                }
+            } else {
+                TabBarRouter(tab: .profile).route()
+            }
         }
     }
 

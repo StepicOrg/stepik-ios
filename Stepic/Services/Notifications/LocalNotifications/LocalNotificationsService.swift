@@ -11,8 +11,6 @@ import UserNotifications
 import PromiseKit
 
 final class LocalNotificationsService {
-    static let notificationKeyName = "LocalNotificationServiceKey"
-
     // MARK: - Getting Notifications -
 
     /// Returns a list of all currently scheduled local notifications.
@@ -72,7 +70,7 @@ final class LocalNotificationsService {
             let idsSet = Set(identifiers)
             self.getScheduledNotifications().forEach { notification in
                 guard let userInfo = notification.userInfo,
-                      let id = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
+                      let id = userInfo[Key.notificationName.rawValue] as? String else {
                     return
                 }
 
@@ -122,7 +120,7 @@ final class LocalNotificationsService {
             return Guarantee { seal in
                 for notification in self.getScheduledNotifications() {
                     guard let userInfo = notification.userInfo,
-                          let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
+                          let key = userInfo[Key.notificationName.rawValue] as? String else {
                         continue
                     }
 
@@ -140,7 +138,11 @@ final class LocalNotificationsService {
         contentProvider: LocalNotificationContentProvider
     ) -> [AnyHashable: Any] {
         var userInfo = contentProvider.userInfo
-        userInfo.merge([LocalNotificationsService.notificationKeyName: contentProvider.identifier])
+        userInfo.merge([
+            Key.notificationName.rawValue: contentProvider.identifier,
+            Key.title.rawValue: contentProvider.title,
+            Key.body.rawValue: contentProvider.body
+        ])
         return userInfo
     }
 
@@ -201,6 +203,12 @@ final class LocalNotificationsService {
     }
 
     // MARK: - Types -
+
+    enum Key: String {
+        case notificationName = "LocalNotificationServiceKey"
+        case title
+        case body
+    }
 
     enum Error: Swift.Error {
         case badContentProvider
