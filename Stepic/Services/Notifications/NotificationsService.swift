@@ -15,7 +15,6 @@ final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]
 
     private let localNotificationsService: LocalNotificationsService
-    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let deepLinkRoutingService: DeepLinkRoutingService
 
     private var isInForeground: Bool {
@@ -24,11 +23,9 @@ final class NotificationsService {
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
-        notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(),
         deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
     ) {
         self.localNotificationsService = localNotificationsService
-        self.notificationsRegistrationService = notificationsRegistrationService
         self.deepLinkRoutingService = deepLinkRoutingService
     }
 
@@ -72,17 +69,11 @@ extension NotificationsService {
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
     ) {
-        NotificationPermissionStatus.current.then { status -> Promise<Void> in
-            if !status.isRegistered {
-                self.notificationsRegistrationService.renewDeviceToken()
-            }
+        if removeIdentical {
+            self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
+        }
 
-            if removeIdentical {
-                self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
-            }
-
-            return self.localNotificationsService.scheduleNotification(contentProvider: contentProvider)
-        }.catch { error in
+        self.localNotificationsService.scheduleNotification(contentProvider: contentProvider).catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
