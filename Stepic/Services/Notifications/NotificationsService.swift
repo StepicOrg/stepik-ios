@@ -102,9 +102,9 @@ extension NotificationsService {
                 return
             }
 
-            FakeNotificationsPresenter.present(text: title, subtitle: body) {
+            FakeNotificationsPresenter.present(text: title, subtitle: body, success: {
                 self.routeLocalNotification(with: userInfo)
-            }
+            })
         }
     }
 
@@ -196,9 +196,9 @@ extension NotificationsService {
             if #available(iOS 10.0, *) {
                 NotificationReactionHandler().handle(with: notification)
             } else if self.isInForeground {
-                FakeNotificationsPresenter.present(text: body) {
+                FakeNotificationsPresenter.present(text: body, success: {
                     NotificationReactionHandler().handle(with: notification)
-                }
+                })
             } else {
                 NotificationReactionHandler().handle(with: notification)
             }
@@ -225,9 +225,9 @@ extension NotificationsService {
                     return
                 }
 
-                FakeNotificationsPresenter.present(text: body) {
+                FakeNotificationsPresenter.present(text: body, success: {
                     TabBarRouter(tab: .profile).route()
-                }
+                })
             } else {
                 TabBarRouter(tab: .profile).route()
             }
