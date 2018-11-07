@@ -15,7 +15,6 @@ final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]
 
     private let localNotificationsService: LocalNotificationsService
-    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
     private let deepLinkRoutingService: DeepLinkRoutingService
 
     private var isInForeground: Bool {
@@ -24,11 +23,9 @@ final class NotificationsService {
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
-        notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(),
         deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
     ) {
         self.localNotificationsService = localNotificationsService
-        self.notificationsRegistrationService = notificationsRegistrationService
         self.deepLinkRoutingService = deepLinkRoutingService
     }
 
@@ -72,17 +69,11 @@ extension NotificationsService {
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
     ) {
-        NotificationPermissionStatus.current.then { status -> Promise<Void> in
-            if !status.isRegistered {
-                self.notificationsRegistrationService.renewDeviceToken()
-            }
+        if removeIdentical {
+            self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
+        }
 
-            if removeIdentical {
-                self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
-            }
-
-            return self.localNotificationsService.scheduleNotification(contentProvider: contentProvider)
-        }.catch { error in
+        self.localNotificationsService.scheduleNotification(contentProvider: contentProvider).catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
@@ -104,7 +95,17 @@ extension NotificationsService {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
-        self.routeLocalNotification(with: userInfo)
+        if #available(iOS 10.0, *) {
+        } else if self.isInForeground {
+            guard let title = userInfo?[LocalNotificationsService.PayloadKey.title.rawValue] as? String,
+                  let body = userInfo?[LocalNotificationsService.PayloadKey.body.rawValue] as? String else {
+                return
+            }
+
+            LegacyNotificationsPresenter.present(text: title, subtitle: body, onTap: {
+                self.routeLocalNotification(with: userInfo)
+            })
+        }
     }
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
@@ -115,7 +116,7 @@ extension NotificationsService {
         }
 
         guard let userInfo = userInfo as? [String: Any],
-              let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
+              let key = userInfo[LocalNotificationsService.PayloadKey.notificationName.rawValue] as? String else {
             return route(to: .home)
         }
 
@@ -195,7 +196,7 @@ extension NotificationsService {
             if #available(iOS 10.0, *) {
                 NotificationReactionHandler().handle(with: notification)
             } else if self.isInForeground {
-                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
+                LegacyNotificationsPresenter.present(text: body, onTap: {
                     NotificationReactionHandler().handle(with: notification)
                 })
             } else {
@@ -215,7 +216,21 @@ extension NotificationsService {
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
         DispatchQueue.main.async {
-            TabBarRouter(tab: .profile).route()
+            if #available(iOS 10.0, *) {
+                TabBarRouter(tab: .profile).route()
+            } else if self.isInForeground {
+                guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
+                      let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
+                      let body = alert[PayloadKey.body.rawValue] as? String else {
+                    return
+                }
+
+                LegacyNotificationsPresenter.present(text: body, onTap: {
+                    TabBarRouter(tab: .profile).route()
+                })
+            } else {
+                TabBarRouter(tab: .profile).route()
+            }
         }
     }
 
