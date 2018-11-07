@@ -13,7 +13,7 @@ extension CourseInfoView {
     struct Appearance {
         let largeHeaderHeight: CGFloat = 265.0
         let headerHeight: CGFloat = 245.0
-        let segmentedControlHeight: CGFloat = 44.0
+        let segmentedControlHeight: CGFloat = 60.0
     }
 }
 
@@ -46,11 +46,7 @@ final class CourseInfoView: UIView {
         return view
     }()
 
-    private lazy var segmentedControl: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(1.0)
-        return view
-    }()
+    private lazy var segmentedControl = TabSegmentedControlView(frame: .zero, items: ["Инфо", "Модули"])
 
     private lazy var contentView: ScrollableStackView = {
         let stackView = ScrollableStackView(
@@ -135,13 +131,14 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
             bottom: 0,
             right: 0
         )
+        self.scrollableStackView.scrollIndicatorInsets = headerInset
         self.scrollableStackView.contentInsets = headerInset
     }
 
     func addSubviews() {
         self.addSubview(self.headerView)
-        self.insertSubview(self.scrollableStackView, aboveSubview: self.headerView)
         self.addSubview(self.segmentedControl)
+        self.insertSubview(self.scrollableStackView, aboveSubview: self.headerView)
 
         self.scrollableStackView.addArrangedView(self.contentView)
     }
@@ -167,9 +164,9 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
             make.height.equalTo(self.appearance.segmentedControlHeight)
         }
 
-        for i in 0..<5 {
+        for i in 0..<3 {
             let view = UIView()
-            view.backgroundColor = [UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow, UIColor.red][i]
+            view.backgroundColor = [UIColor.white, UIColor.white, UIColor.white][i]
             self.contentView.addArrangedView(view)
 
             view.translatesAutoresizingMaskIntoConstraints = false

@@ -125,6 +125,15 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    var scrollIndicatorInsets: UIEdgeInsets {
+        get {
+            return self.scrollView.scrollIndicatorInsets
+        }
+        set {
+            self.scrollView.scrollIndicatorInsets = newValue
+        }
+    }
+
     var shouldBounce: Bool {
         get {
             return self.scrollView.bounces
