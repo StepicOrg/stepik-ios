@@ -70,7 +70,7 @@ final class LocalNotificationsService {
             let idsSet = Set(identifiers)
             self.getScheduledNotifications().forEach { notification in
                 guard let userInfo = notification.userInfo,
-                      let id = userInfo[Key.notificationName.rawValue] as? String else {
+                      let id = userInfo[PayloadKey.notificationName.rawValue] as? String else {
                     return
                 }
 
@@ -120,7 +120,7 @@ final class LocalNotificationsService {
             return Guarantee { seal in
                 for notification in self.getScheduledNotifications() {
                     guard let userInfo = notification.userInfo,
-                          let key = userInfo[Key.notificationName.rawValue] as? String else {
+                          let key = userInfo[PayloadKey.notificationName.rawValue] as? String else {
                         continue
                     }
 
@@ -139,9 +139,9 @@ final class LocalNotificationsService {
     ) -> [AnyHashable: Any] {
         var userInfo = contentProvider.userInfo
         userInfo.merge([
-            Key.notificationName.rawValue: contentProvider.identifier,
-            Key.title.rawValue: contentProvider.title,
-            Key.body.rawValue: contentProvider.body
+            PayloadKey.notificationName.rawValue: contentProvider.identifier,
+            PayloadKey.title.rawValue: contentProvider.title,
+            PayloadKey.body.rawValue: contentProvider.body
         ])
         return userInfo
     }
@@ -204,7 +204,7 @@ final class LocalNotificationsService {
 
     // MARK: - Types -
 
-    enum Key: String {
+    enum PayloadKey: String {
         case notificationName = "LocalNotificationServiceKey"
         case title
         case body

@@ -97,8 +97,8 @@ extension NotificationsService {
 
         if #available(iOS 10.0, *) {
         } else if self.isInForeground {
-            guard let title = userInfo?[LocalNotificationsService.Key.title.rawValue] as? String,
-                  let body = userInfo?[LocalNotificationsService.Key.body.rawValue] as? String else {
+            guard let title = userInfo?[LocalNotificationsService.PayloadKey.title.rawValue] as? String,
+                  let body = userInfo?[LocalNotificationsService.PayloadKey.body.rawValue] as? String else {
                 return
             }
 
@@ -116,7 +116,7 @@ extension NotificationsService {
         }
 
         guard let userInfo = userInfo as? [String: Any],
-              let key = userInfo[LocalNotificationsService.Key.notificationName.rawValue] as? String else {
+              let key = userInfo[LocalNotificationsService.PayloadKey.notificationName.rawValue] as? String else {
             return route(to: .home)
         }
 
