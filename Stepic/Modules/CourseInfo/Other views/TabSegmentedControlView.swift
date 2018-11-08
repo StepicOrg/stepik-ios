@@ -9,6 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol TabSegmentedControlViewDelegate: class {
+    func tabSegmentedControlView(
+        _ tabSegmentedControlView: TabSegmentedControlView,
+        didSelectTabWithIndex: Int
+    )
+}
+
 extension TabSegmentedControlView {
     struct Appearance {
         let backgroundColor = UIColor(hex: 0xf6f6f6)
@@ -27,6 +34,12 @@ extension TabSegmentedControlView {
 }
 
 final class TabSegmentedControlView: UIView {
+    enum Animation {
+        static let duration: TimeInterval = 0.25
+    }
+
+    weak var delegate: TabSegmentedControlViewDelegate?
+
     let appearance: Appearance
     private let items: [String]
     private var tabButtons: [TabButton] = []
@@ -72,6 +85,24 @@ final class TabSegmentedControlView: UIView {
         self.updateSelectedMarker()
     }
 
+    func selectNextTab() {
+        guard self.selectedItemIndex < self.items.count - 1 else {
+            return
+        }
+
+        self.selectedItemIndex += 1
+        self.updateSelectedMarker(animated: true)
+    }
+
+    func selectPreviousTab() {
+        guard self.selectedItemIndex > 0 else {
+            return
+        }
+
+        self.selectedItemIndex -= 1
+        self.updateSelectedMarker(animated: true)
+    }
+
     private func initItems() {
         for (index, item) in self.items.enumerated() {
             let button = self.makeTabButton(title: item)
@@ -83,15 +114,25 @@ final class TabSegmentedControlView: UIView {
         }
     }
 
-    private func updateSelectedMarker() {
+    private func updateSelectedMarker(animated: Bool = false) {
         guard let selectedButton = self.tabButtons[safe: self.selectedItemIndex] else {
             return
+        }
+
+        if animated {
+            self.layoutIfNeeded()
         }
 
         let selectedFrame = selectedButton.textFrame
         self.bottomSelectedMarkerView.snp.updateConstraints { make in
             make.width.equalTo(selectedFrame.width)
             make.leading.equalTo(selectedButton.frame.origin.x + selectedFrame.origin.x)
+        }
+
+        if animated {
+            UIView.animate(withDuration: Animation.duration) {
+                self.layoutIfNeeded()
+            }
         }
     }
 
@@ -117,7 +158,9 @@ final class TabSegmentedControlView: UIView {
                 button.isSelected = false
             }
         }
-        self.updateSelectedMarker()
+        self.updateSelectedMarker(animated: true)
+
+        self.delegate?.tabSegmentedControlView(self, didSelectTabWithIndex: self.selectedItemIndex)
     }
 }
 
