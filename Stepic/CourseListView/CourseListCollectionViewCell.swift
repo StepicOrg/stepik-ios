@@ -20,7 +20,7 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
     private var configurationViewModel: CourseWidgetViewModel?
 
     private lazy var widgetView: CourseWidgetView = {
-        let widget = CourseWidgetView(frame: .zero, colorMode: self.colorMode)
+        let widget = CourseWidgetView(colorMode: self.colorMode)
         // Pass clicks from widget view to collection view delegate
         widget.onPrimaryButtonClick = { [weak self] in
             guard let strongSelf = self else {

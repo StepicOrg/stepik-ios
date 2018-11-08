@@ -21,7 +21,7 @@ final class CourseInfoView: UIView {
     let appearance: Appearance
 
     private lazy var scrollableStackView: ScrollableStackView = {
-        let view = ScrollableStackView(frame: .zero, orientation: .vertical)
+        let view = ScrollableStackView(orientation: .vertical)
         if #available(iOS 11.0, *) {
             view.contentInsetAdjustmentBehavior = .never
         }
@@ -29,7 +29,7 @@ final class CourseInfoView: UIView {
     }()
 
     private lazy var headerView: UIView = {
-        let view = CourseInfoHeaderView(frame: .zero)
+        let view = CourseInfoHeaderView()
 
         let viewModel = CourseInfoHeaderViewModel(
             title: "Введение в программирование (C++)",
@@ -53,10 +53,7 @@ final class CourseInfoView: UIView {
     }()
 
     private lazy var contentView: ScrollableStackView = {
-        let stackView = ScrollableStackView(
-            frame: .zero,
-            orientation: .horizontal
-        )
+        let stackView = ScrollableStackView(orientation: .horizontal)
         stackView.isPagingEnabled = true
         stackView.showsHorizontalScrollIndicator = false
         return stackView
@@ -73,7 +70,7 @@ final class CourseInfoView: UIView {
     private var headerHeightConstraint: Constraint?
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         scrollDelegate: UIScrollViewDelegate? = nil,
         appearance: Appearance = Appearance()
     ) {

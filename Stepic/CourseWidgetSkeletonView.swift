@@ -38,7 +38,7 @@ final class CourseWidgetSkeletonView: UIView {
     private lazy var titleLabelSkeleton = UIView()
     private lazy var statsViewSkeleton = UIView()
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

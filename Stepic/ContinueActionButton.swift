@@ -40,7 +40,7 @@ final class ContinueActionButton: BounceButton {
     }
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         mode: Mode = .default,
         appearance: Appearance = Appearance()
     ) {

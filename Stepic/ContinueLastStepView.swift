@@ -41,7 +41,7 @@ final class ContinueLastStepView: UIView {
     let appearance: Appearance
 
     lazy var continueButton: UIButton = {
-        let button = ContinueActionButton(frame: .zero, mode: .default)
+        let button = ContinueActionButton(mode: .default)
         button.setTitle(NSLocalizedString("ContinueLearningWidgetButtonTitle", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(self.continueButtonClicked), for: .touchUpInside)
         return button
@@ -88,7 +88,7 @@ final class ContinueLastStepView: UIView {
     }()
 
     private lazy var coverImageView: CourseCoverImageView = {
-        let view = CourseCoverImageView(frame: .zero)
+        let view = CourseCoverImageView()
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.coverCornerRadius
         return view
@@ -147,7 +147,7 @@ final class ContinueLastStepView: UIView {
 
     var onContinueButtonClick: (() -> Void)?
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

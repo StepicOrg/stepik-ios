@@ -30,7 +30,7 @@ final class CourseWidgetStatsItemView: UIView {
         appearance.font = self.appearance.font
         appearance.textColor = self.appearance.textColor
         appearance.maxLinesCount = 1
-        let label = CourseWidgetLabel(frame: .zero, appearance: appearance)
+        let label = CourseWidgetLabel(appearance: appearance)
         return label
     }()
 
@@ -46,7 +46,7 @@ final class CourseWidgetStatsItemView: UIView {
         }
     }
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

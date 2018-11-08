@@ -42,7 +42,7 @@ final class CourseInfoStatsView: UIView {
     }()
 
     private lazy var ratingContainerView = UIView()
-    private lazy var ratingView = CourseRatingView(frame: .zero)
+    private lazy var ratingView = CourseRatingView()
 
     private lazy var learnersView: CourseWidgetStatsItemView = {
         var appearance = CourseWidgetStatsItemView.Appearance()
@@ -51,10 +51,7 @@ final class CourseInfoStatsView: UIView {
         appearance.imageTintColor = self.appearance.learnersImageColor
         appearance.textColor = self.appearance.itemTextColor
         appearance.font = self.appearance.itemTextFont
-        let view = CourseWidgetStatsItemView(
-            frame: .zero,
-            appearance: appearance
-        )
+        let view = CourseWidgetStatsItemView(appearance: appearance)
         view.image = UIImage(named: "course-widget-user")!
             .withRenderingMode(.alwaysTemplate)
         return view
@@ -66,10 +63,7 @@ final class CourseInfoStatsView: UIView {
         appearance.imageTintColor = .clear
         appearance.textColor = self.appearance.itemTextColor
         appearance.font = self.appearance.itemTextFont
-        let view = CourseWidgetStatsItemView(
-            frame: .zero,
-            appearance: appearance
-        )
+        let view = CourseWidgetStatsItemView(appearance: appearance)
         return view
     }()
 
@@ -98,7 +92,7 @@ final class CourseInfoStatsView: UIView {
         }
     }
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

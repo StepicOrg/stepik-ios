@@ -39,27 +39,27 @@ final class CourseInfoHeaderView: UIView {
     let appearance: Appearance
 
     private lazy var backgroundView: CourseInfoBlurredBackgroundView = {
-        let view = CourseInfoBlurredBackgroundView(frame: .zero)
+        let view = CourseInfoBlurredBackgroundView()
         // To prevent tap handling
         view.isUserInteractionEnabled = false
         return view
     }()
 
     private lazy var actionButton: ContinueActionButton = {
-        let button = ContinueActionButton(frame: .zero, mode: .callToAction)
+        let button = ContinueActionButton(mode: .callToAction)
         button.setTitle(NSLocalizedString("WidgetButtonJoin", comment: ""), for: .normal)
         return button
     }()
 
     private lazy var coverImageView: CourseCoverImageView = {
-        let view = CourseCoverImageView(frame: .zero)
+        let view = CourseCoverImageView()
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.coverImageViewCornerRadius
         return view
     }()
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+        let label = UILabel()
         label.font = self.appearance.titleLabelFont
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
@@ -73,10 +73,7 @@ final class CourseInfoHeaderView: UIView {
         appearance.imageViewSize = self.appearance.verifiedImageSize
         appearance.textColor = self.appearance.verifiedTextColor
         appearance.font = self.appearance.verifiedTextFont
-        let view = CourseWidgetStatsItemView(
-            frame: .zero,
-            appearance: appearance
-        )
+        let view = CourseWidgetStatsItemView(appearance: appearance)
         view.image = UIImage(named: "course-info-verified")!
         view.text = NSLocalizedString("CourseMeetsRecommendations", comment: "")
         return view
@@ -91,9 +88,9 @@ final class CourseInfoHeaderView: UIView {
         return stackView
     }()
 
-    private lazy var statsView = CourseInfoStatsView(frame: .zero)
+    private lazy var statsView = CourseInfoStatsView()
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

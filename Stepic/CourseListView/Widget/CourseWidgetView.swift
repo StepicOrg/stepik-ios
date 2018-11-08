@@ -27,7 +27,7 @@ final class CourseWidgetView: UIView {
     let appearance: Appearance
     let colorMode: CourseListColorMode
 
-    private lazy var coverView = CourseWidgetCoverView(frame: .zero)
+    private lazy var coverView = CourseWidgetCoverView()
 
     private lazy var primaryActionButton: CourseWidgetButton = {
         let button = CourseWidgetButton(
@@ -46,11 +46,9 @@ final class CourseWidgetView: UIView {
     }()
 
     private lazy var titleLabel = CourseWidgetLabel(
-        frame: .zero,
         appearance: self.colorMode.courseWidgetLabelAppearance
     )
     private lazy var statsView = CourseWidgetStatsView(
-        frame: .zero,
         appearance: self.colorMode.courseWidgetStatsViewAppearance
     )
 
@@ -58,7 +56,7 @@ final class CourseWidgetView: UIView {
     var onSecondaryButtonClick: (() -> Void)?
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         colorMode: CourseListColorMode = .default,
         appearance: Appearance = Appearance()
     ) {

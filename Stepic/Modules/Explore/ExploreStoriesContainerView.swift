@@ -26,7 +26,7 @@ final class ExploreStoriesContainerView: UIView {
     }
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         contentView: UIView,
         appearance: Appearance = Appearance()
     ) {

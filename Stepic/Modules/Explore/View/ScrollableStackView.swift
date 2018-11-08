@@ -145,7 +145,7 @@ final class ScrollableStackView: UIView {
 
     // MARK: - Inits
 
-    init(frame: CGRect, orientation: Orientation = .vertical) {
+    init(frame: CGRect = .zero, orientation: Orientation) {
         self.orientation = orientation
         super.init(frame: frame)
 
