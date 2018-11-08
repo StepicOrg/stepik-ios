@@ -63,10 +63,9 @@ final class CourseInfoView: UIView {
     }()
 
     var headerHeight: CGFloat {
-        if DeviceInfo.current.isXSerie {
-            return self.appearance.largeHeaderHeight
-        }
-        return self.appearance.headerHeight
+        return DeviceInfo.current.isXSerie
+            ? self.appearance.largeHeaderHeight
+            : self.appearance.headerHeight
     }
 
     // Dynamic scrolling constraints

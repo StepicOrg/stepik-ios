@@ -181,8 +181,7 @@ class StyledNavigationViewController: UINavigationController {
     }
 
     private func makeTransitionColor(from sourceColor: UIColor, to targetColor: UIColor, progress: CGFloat) -> UIColor {
-        var percentage = max(min(progress, 1), 0)
-        percentage = percentage > 1 ?  1 : percentage
+        let percentage = max(min(progress, 1), 0)
 
         var fRed: CGFloat = 0
         var fBlue: CGFloat = 0

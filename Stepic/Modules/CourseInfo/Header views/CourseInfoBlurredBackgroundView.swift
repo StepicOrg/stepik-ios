@@ -13,7 +13,7 @@ import Nuke
 extension CourseInfoBlurredBackgroundView {
     struct Appearance {
         let imageFadeInDuration: TimeInterval = 0.15
-        let placeholderImage: UIImage = #imageLiteral(resourceName: "lesson_cover_50")
+        let placeholderImage = UIImage(named: "lesson_cover_50")!
         let overlayColor = UIColor(hex: 0x9191BC)
         let overlayAlpha: CGFloat = 0.75
     }
@@ -24,6 +24,7 @@ final class CourseInfoBlurredBackgroundView: UIView {
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
