@@ -22,7 +22,7 @@ struct CourseInfoTabInfoIntroVideoBlockViewModel: CourseInfoTabInfoBlockViewMode
         return .introVideo
     }
 
-    let introURL: String
+    let introURL: URL?
 }
 
 struct CourseInfoTabInfoInstructorViewModel {

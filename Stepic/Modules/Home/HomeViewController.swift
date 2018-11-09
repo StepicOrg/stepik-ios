@@ -72,7 +72,7 @@ final class HomeViewController: BaseExploreViewController {
                 blockType: .author("Yandex"), message: ""
             ),
             CourseInfoTabInfoIntroVideoBlockViewModel(
-                introURL: "https://player.vimeo.com/external/161974070.hd.mp4?s=19ff926134e7cbbc7e8ce161e3af9c3bb87d5c1a&profile_id=174&oauth2_token_id=3605157?playsinline=1"
+                introURL: URL(string: "https://player.vimeo.com/external/161974070.hd.mp4?s=19ff926134e7cbbc7e8ce161e3af9c3bb87d5c1a&profile_id=174&oauth2_token_id=3605157?playsinline=1")
             ),
             CourseInfoTabInfoTextBlockViewModel(
                 blockType: .about,

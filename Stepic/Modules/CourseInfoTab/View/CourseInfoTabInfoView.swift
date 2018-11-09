@@ -98,7 +98,7 @@ final class CourseInfoTabInfoView: UIView {
             switch viewModel.blockType {
             case .introVideo:
                 guard let introVideoViewModel = viewModel as? CourseInfoTabInfoIntroVideoBlockViewModel,
-                      let _ = URL(string: introVideoViewModel.introURL) else {
+                      let _ = introVideoViewModel.introURL else {
                     return
                 }
 
