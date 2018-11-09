@@ -21,11 +21,31 @@ extension CourseInfoTabInfoSkeletonView {
 
         let requirementsHeaderViewInsets = UIEdgeInsets(top: 32, left: 20, bottom: 0, right: 47)
         let requirementsMessageLabelInsets = UIEdgeInsets(top: 17, left: 47, bottom: 0, right: 47)
+
+        let targetAudienceHeaderViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
+        let targetAudienceMessageLabelInsets = UIEdgeInsets(top: 17, left: 47, bottom: 0, right: 47)
+
+        let instructorsHeaderViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
+        let instructorViewInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
+        let instructorViewSpacing: CGFloat = 18
+
+        let timeToCompleteHeaderViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
+        let timeToCompleteMessageLabelInsets = UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
+
+        let languageHeaderViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
+        let languageMessageLabelInsets = UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
+
+        let certificateHeaderViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
+        let certificateMessageLabelInsets = UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
+
+        let certificateDetailsHeaderViewInsets = UIEdgeInsets(top: 43, left: 20, bottom: 0, right: 47)
+        let certificateDetailsMessageLabelInsets = UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
     }
 }
 
 final class CourseInfoTabInfoSkeletonView: UIView {
     private let appearance: Appearance
+    private let countInstructors: Int
 
     private lazy var authorViewSkeleton: UIView = {
         CourseInfoTabInfoBlockSkeletonView(
@@ -49,8 +69,52 @@ final class CourseInfoTabInfoSkeletonView: UIView {
     }()
     private lazy var requirementsMessageLabelSkeleton = UIView()
 
-    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
+    private lazy var targetAudienceHeaderViewSkeleton: UIView = {
+        CourseInfoTabInfoBlockSkeletonView(
+            appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
+        )
+    }()
+    private lazy var targetAudienceMessageLabelSkeleton = UIView()
+
+    private lazy var instructorsHeaderViewSkeleton: UIView = {
+        CourseInfoTabInfoBlockSkeletonView(
+            appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
+        )
+    }()
+
+    private lazy var timeToCompleteHeaderViewSkeleton: UIView = {
+        CourseInfoTabInfoBlockSkeletonView(
+            appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
+        )
+    }()
+    private lazy var timeToCompleteMessageLabelSkeleton = UIView()
+
+    private lazy var languageHeaderViewSkeleton: UIView = {
+        CourseInfoTabInfoBlockSkeletonView(
+            appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
+        )
+    }()
+    private lazy var languageMessageLabelSkeleton = UIView()
+
+    private lazy var certificateHeaderViewSkeleton: UIView = {
+        CourseInfoTabInfoBlockSkeletonView(
+            appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
+        )
+    }()
+    private lazy var certificateMessageLabelSkeleton = UIView()
+
+    private lazy var certificateDetailsHeaderViewSkeleton: UIView = {
+        CourseInfoTabInfoBlockSkeletonView(
+            appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
+        )
+    }()
+    private lazy var certificateDetailsMessageLabelSkeleton = UIView()
+
+    // MARK: Init
+
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance(), countInstructors: Int = 2) {
         self.appearance = appearance
+        self.countInstructors = min(countInstructors, 2)
         super.init(frame: frame)
 
         self.setupView()
@@ -78,7 +142,12 @@ extension CourseInfoTabInfoSkeletonView: ProgrammaticallyInitializableViewProtoc
             self.appearance.labelsCornerRadius,
             views: [
                 self.aboutMessageLabelSkeleton,
-                self.requirementsMessageLabelSkeleton
+                self.requirementsMessageLabelSkeleton,
+                self.targetAudienceMessageLabelSkeleton,
+                self.timeToCompleteMessageLabelSkeleton,
+                self.languageMessageLabelSkeleton,
+                self.certificateMessageLabelSkeleton,
+                self.certificateDetailsMessageLabelSkeleton
             ]
         )
     }
@@ -93,6 +162,23 @@ extension CourseInfoTabInfoSkeletonView: ProgrammaticallyInitializableViewProtoc
 
         self.addSubview(self.requirementsHeaderViewSkeleton)
         self.addSubview(self.requirementsMessageLabelSkeleton)
+
+        self.addSubview(self.targetAudienceHeaderViewSkeleton)
+        self.addSubview(self.targetAudienceMessageLabelSkeleton)
+
+        self.addSubview(self.instructorsHeaderViewSkeleton)
+
+        self.addSubview(self.timeToCompleteHeaderViewSkeleton)
+        self.addSubview(self.timeToCompleteMessageLabelSkeleton)
+
+        self.addSubview(self.languageHeaderViewSkeleton)
+        self.addSubview(self.languageMessageLabelSkeleton)
+
+        self.addSubview(self.certificateHeaderViewSkeleton)
+        self.addSubview(self.certificateMessageLabelSkeleton)
+
+        self.addSubview(self.certificateDetailsHeaderViewSkeleton)
+        self.addSubview(self.certificateDetailsMessageLabelSkeleton)
     }
 
     func makeConstraints() {
@@ -127,7 +213,60 @@ extension CourseInfoTabInfoSkeletonView: ProgrammaticallyInitializableViewProtoc
             headerViewInsets: self.appearance.requirementsHeaderViewInsets,
             messageViewInsets: self.appearance.requirementsMessageLabelInsets
         )
+
+        self.makeConstraintsForTextBlockView(
+            headerView: self.targetAudienceHeaderViewSkeleton,
+            messageView: self.targetAudienceMessageLabelSkeleton,
+            headerTopPinView: self.requirementsMessageLabelSkeleton,
+            headerViewInsets: self.appearance.targetAudienceHeaderViewInsets,
+            messageViewInsets: self.appearance.targetAudienceMessageLabelInsets
+        )
+
+        self.instructorsHeaderViewSkeleton.translatesAutoresizingMaskIntoConstraints = false
+        self.instructorsHeaderViewSkeleton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(self.appearance.instructorsHeaderViewInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.instructorsHeaderViewInsets.right)
+            make.top
+                .equalTo(self.targetAudienceMessageLabelSkeleton.snp.bottom)
+                .offset(self.appearance.instructorsHeaderViewInsets.top)
+        }
+
+        let lastInstructorSkeletonView = self.addInstructorSkeletonViews()[self.countInstructors - 1]
+
+        self.makeConstraintsForTextBlockView(
+            headerView: self.timeToCompleteHeaderViewSkeleton,
+            messageView: self.timeToCompleteMessageLabelSkeleton,
+            headerTopPinView: lastInstructorSkeletonView,
+            headerViewInsets: self.appearance.timeToCompleteHeaderViewInsets,
+            messageViewInsets: self.appearance.timeToCompleteMessageLabelInsets
+        )
+
+        self.makeConstraintsForTextBlockView(
+            headerView: self.languageHeaderViewSkeleton,
+            messageView: self.languageMessageLabelSkeleton,
+            headerTopPinView: self.timeToCompleteMessageLabelSkeleton,
+            headerViewInsets: self.appearance.languageHeaderViewInsets,
+            messageViewInsets: self.appearance.languageMessageLabelInsets
+        )
+
+        self.makeConstraintsForTextBlockView(
+            headerView: self.certificateHeaderViewSkeleton,
+            messageView: self.certificateMessageLabelSkeleton,
+            headerTopPinView: self.languageMessageLabelSkeleton,
+            headerViewInsets: self.appearance.certificateHeaderViewInsets,
+            messageViewInsets: self.appearance.certificateMessageLabelInsets
+        )
+
+        self.makeConstraintsForTextBlockView(
+            headerView: self.certificateDetailsHeaderViewSkeleton,
+            messageView: self.certificateDetailsMessageLabelSkeleton,
+            headerTopPinView: self.certificateMessageLabelSkeleton,
+            headerViewInsets: self.appearance.certificateDetailsHeaderViewInsets,
+            messageViewInsets: self.appearance.certificateDetailsMessageLabelInsets
+        )
     }
+
+    // MARK: Private Helpers
 
     private func makeConstraintsForTextBlockView(
         headerView: UIView,
@@ -139,8 +278,10 @@ extension CourseInfoTabInfoSkeletonView: ProgrammaticallyInitializableViewProtoc
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(headerViewInsets.left)
-            make.top.equalTo(headerTopPinView.snp.bottom).offset(headerViewInsets.top)
             make.trailing.equalToSuperview().offset(-headerViewInsets.right)
+            make.top
+                .equalTo(headerTopPinView.snp.bottom)
+                .offset(headerViewInsets.top)
         }
 
         messageView.translatesAutoresizingMaskIntoConstraints = false
@@ -150,5 +291,42 @@ extension CourseInfoTabInfoSkeletonView: ProgrammaticallyInitializableViewProtoc
             make.trailing.equalToSuperview().offset(-messageViewInsets.right)
             make.height.equalTo(self.appearance.messageLabelsHeight)
         }
+    }
+
+    private func addInstructorSkeletonViews() -> [UIView] {
+        var instructors = [UIView]()
+        var previous: UIView?
+
+        for i in 0..<self.countInstructors {
+            let isFirst = i == 0
+
+            let instructorSkeletonView = CourseInfoTabInfoInstructorSkeletonView(
+                appearance: .init(labelsCornerRadius: self.appearance.labelsCornerRadius)
+            )
+            self.addSubview(instructorSkeletonView)
+
+            instructorSkeletonView.translatesAutoresizingMaskIntoConstraints = false
+            instructorSkeletonView.snp.makeConstraints { make in
+                make.leading.equalToSuperview().offset(self.appearance.instructorViewInsets.left)
+                make.trailing.equalToSuperview().offset(-self.appearance.instructorViewInsets.right)
+
+                if isFirst {
+                    make.top
+                        .equalTo(self.instructorsHeaderViewSkeleton.snp.bottom)
+                        .offset(self.appearance.instructorViewInsets.top)
+                }
+
+                if let previous = previous {
+                    make.top
+                        .equalTo(previous.snp.bottom)
+                        .offset(self.appearance.instructorViewSpacing)
+                }
+            }
+
+            previous = instructorSkeletonView
+            instructors.append(instructorSkeletonView)
+        }
+
+        return instructors
     }
 }
