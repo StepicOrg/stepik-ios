@@ -89,12 +89,12 @@ final class HomeViewController: BaseExploreViewController {
             CourseInfoTabInfoInstructorsBlockViewModel(
                 instructors: [
                     CourseInfoTabInfoInstructorViewModel(
-                        avatar: UIImage(named: "stepik_logotype_square_black"),
+                        avatarURL: URL(string: "https://www.w3schools.com/howto/img_avatar.png"),
                         title: "Artyom Burylov",
                         description: "Kotlin backend developer, online education enthusiast. I graduated from PNRPU with a BSc in Computer Science (2014) and MSc in Software Engineering (2016). During the learning, I took an active part in scientific conferences and educational events."
                     ),
                     CourseInfoTabInfoInstructorViewModel(
-                        avatar: UIImage(named: "stepik_logotype_square_black"),
+                        avatarURL: URL(string: "https://www.w3schools.com/w3images/avatar2.png"),
                         title: "Tom Tom",
                         description: "Kotlin backend developer, online education enthusiast. I graduated from PNRPU with a BSc in Computer Science (2014) and MSc in Software Engineering (2016). During the learning, I took an active part in scientific conferences and educational events."
                     )

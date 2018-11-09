@@ -26,7 +26,7 @@ struct CourseInfoTabInfoIntroVideoBlockViewModel: CourseInfoTabInfoBlockViewMode
 }
 
 struct CourseInfoTabInfoInstructorViewModel {
-    let avatar: UIImage?
+    let avatarURL: URL?
     let title: String
     let description: String
 }

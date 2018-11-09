@@ -8,9 +8,11 @@
 
 import UIKit
 import SnapKit
+import Nuke
 
 extension CourseInfoTabInfoInstructorView {
     struct Appearance {
+        let imageFadeInDuration: TimeInterval = 0.15
         let imageViewSize = CGSize(width: 30, height: 30)
         let imageViewCornerRadius: CGFloat = 5
 
@@ -71,9 +73,24 @@ final class CourseInfoTabInfoInstructorView: UIView {
     }
 
     private func configure(with viewModel: CourseInfoTabInfoInstructorViewModel) {
-        self.imageView.image = viewModel.avatar
         self.titleLabel.text = viewModel.title
         self.descriptionLabel.text = viewModel.description
+
+        self.loadImage(url: viewModel.avatarURL)
+    }
+
+    private func loadImage(url: URL?) {
+        if let url = url {
+            Nuke.loadImage(
+                with: url,
+                options: .init(
+                    transition: .fadeIn(duration: self.appearance.imageFadeInDuration)
+                ),
+                into: self.imageView
+            )
+        } else {
+            self.imageView.image = nil
+        }
     }
 }
 
