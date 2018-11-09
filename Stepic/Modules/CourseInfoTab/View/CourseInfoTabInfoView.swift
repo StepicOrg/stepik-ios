@@ -37,7 +37,6 @@ final class CourseInfoTabInfoView: UIView {
     weak var delegate: CourseInfoTabInfoViewDelegate?
 
     private let appearance: Appearance
-    private let viewModel: CourseInfoTabInfoViewModel
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
@@ -78,7 +77,6 @@ final class CourseInfoTabInfoView: UIView {
         delegate: CourseInfoTabInfoViewDelegate? = nil
     ) {
         self.appearance = appearance
-        self.viewModel = viewModel
         self.delegate = delegate
         super.init(frame: frame)
 
@@ -86,15 +84,15 @@ final class CourseInfoTabInfoView: UIView {
         self.addSubviews()
         self.makeConstraints()
 
-        self.addBlocks()
+        self.configure(with: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func addBlocks() {
-        self.viewModel.blocks.forEach { viewModel in
+    private func configure(with viewModel: CourseInfoTabInfoViewModel) {
+        viewModel.blocks.forEach { viewModel in
             switch viewModel.blockType {
             case .introVideo:
                 guard let introVideoViewModel = viewModel as? CourseInfoTabInfoIntroVideoBlockViewModel,
@@ -129,6 +127,10 @@ final class CourseInfoTabInfoView: UIView {
             }
         }
 
+        self.addJoinButton()
+    }
+
+    private func addJoinButton() {
         let buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
         self.joinButton.translatesAutoresizingMaskIntoConstraints = false
