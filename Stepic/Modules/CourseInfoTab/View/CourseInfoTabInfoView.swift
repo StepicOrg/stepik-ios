@@ -87,6 +87,17 @@ final class CourseInfoTabInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func showLoading() {
+        self.skeleton.viewBuilder = {
+            CourseInfoTabInfoSkeletonView()
+        }
+        self.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.skeleton.hide()
+    }
+
     private func configure(with viewModel: CourseInfoTabInfoViewModel) {
         viewModel.blocks.forEach { viewModel in
             if let blockView = self.blockViewBuilder(viewModel) {
