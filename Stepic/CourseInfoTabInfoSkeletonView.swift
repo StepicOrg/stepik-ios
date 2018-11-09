@@ -6,12 +6,12 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoSkeletonView {
+extension CourseInfoTabInfoSkeletonView {
     struct Appearance {
     }
 }
 
-final class CourseInfoSkeletonView: UIView {
+final class CourseInfoTabInfoSkeletonView: UIView {
     private let appearance: Appearance
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -28,7 +28,7 @@ final class CourseInfoSkeletonView: UIView {
     }
 }
 
-extension CourseInfoSkeletonView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoSkeletonView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
     }
 
