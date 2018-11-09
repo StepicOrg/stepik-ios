@@ -143,16 +143,6 @@ final class ScrollableStackView: UIView {
         self.refreshControl?.endRefreshing()
     }
 
-    // TODO: Remove
-    var contentInset: UIEdgeInsets {
-        get {
-            return self.scrollView.contentInset
-        }
-        set {
-            self.scrollView.contentInset = newValue
-        }
-    }
-
     // MARK: - Private methods
 
     @objc

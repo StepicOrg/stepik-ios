@@ -120,9 +120,6 @@ final class CourseInfoTabInfoView: UIView {
 extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
-
-        // TODO: Remove
-        self.scrollableStackView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
 
     func addSubviews() {
