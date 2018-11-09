@@ -20,7 +20,7 @@ extension CourseInfoTabInfoBlockView {
 }
 
 final class CourseInfoTabInfoBlockView: UIView {
-    let appearance: Appearance
+    private let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()

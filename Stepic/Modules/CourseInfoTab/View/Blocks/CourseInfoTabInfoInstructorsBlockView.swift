@@ -83,7 +83,9 @@ extension CourseInfoTabInfoInstructorsBlockView: ProgrammaticallyInitializableVi
             make.leading.equalToSuperview().offset(self.appearance.stackViewInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.stackViewInsets.right)
             make.bottom.equalToSuperview().offset(self.appearance.stackViewInsets.bottom)
-            make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.stackViewInsets.top)
+            make.top
+                .equalTo(self.headerView.snp.bottom)
+                .offset(self.appearance.stackViewInsets.top)
         }
     }
 }

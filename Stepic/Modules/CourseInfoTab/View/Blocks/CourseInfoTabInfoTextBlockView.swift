@@ -79,8 +79,10 @@ extension CourseInfoTabInfoTextBlockView: ProgrammaticallyInitializableViewProto
         self.messageLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.messageLabelInsets.left)
             make.bottom.equalToSuperview().offset(self.appearance.messageLabelInsets.bottom)
-            make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.messageLabelInsets.top)
             make.trailing.equalTo(self.headerView)
+            make.top
+                .equalTo(self.headerView.snp.bottom)
+                .offset(self.appearance.messageLabelInsets.top)
         }
     }
 }

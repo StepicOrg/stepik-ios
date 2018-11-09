@@ -224,19 +224,23 @@ extension CourseInfoTabInfoSkeletonView: ProgrammaticallyInitializableViewProtoc
 
         self.instructorsHeaderViewSkeleton.translatesAutoresizingMaskIntoConstraints = false
         self.instructorsHeaderViewSkeleton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.instructorsHeaderViewInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.instructorsHeaderViewInsets.right)
+            make.leading
+                .equalToSuperview()
+                .offset(self.appearance.instructorsHeaderViewInsets.left)
+            make.trailing
+                .equalToSuperview()
+                .offset(-self.appearance.instructorsHeaderViewInsets.right)
             make.top
                 .equalTo(self.targetAudienceMessageLabelSkeleton.snp.bottom)
                 .offset(self.appearance.instructorsHeaderViewInsets.top)
         }
 
-        let lastInstructorSkeletonView = self.addInstructorSkeletonViews()[self.countInstructors - 1]
+        let lastInstructorView = self.addInstructorSkeletonViews()[self.countInstructors - 1]
 
         self.makeConstraintsForTextBlockView(
             headerView: self.timeToCompleteHeaderViewSkeleton,
             messageView: self.timeToCompleteMessageLabelSkeleton,
-            headerTopPinView: lastInstructorSkeletonView,
+            headerTopPinView: lastInstructorView,
             headerViewInsets: self.appearance.timeToCompleteHeaderViewInsets,
             messageViewInsets: self.appearance.timeToCompleteMessageLabelInsets
         )
