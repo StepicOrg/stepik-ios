@@ -1,5 +1,5 @@
 //
-//  CourseInfoBlockView.swift
+//  CourseInfoTabInfoBlockView.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 11/1/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoBlockView {
+extension CourseInfoTabInfoBlockView {
     struct Appearance {
         let imageViewSize = CGSize(width: 12, height: 12)
 
@@ -19,7 +19,7 @@ extension CourseInfoBlockView {
     }
 }
 
-final class CourseInfoBlockView: UIView {
+final class CourseInfoTabInfoBlockView: UIView {
     let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
@@ -38,7 +38,7 @@ final class CourseInfoBlockView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        viewModel: CourseInfoBlockViewModelProtocol? = nil
+        viewModel: CourseInfoTabInfoBlockViewModelProtocol? = nil
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -56,13 +56,13 @@ final class CourseInfoBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with viewModel: CourseInfoBlockViewModelProtocol) {
+    func configure(with viewModel: CourseInfoTabInfoBlockViewModelProtocol) {
         self.imageView.image = viewModel.image
         self.titleLabel.text = viewModel.title
     }
 }
 
-extension CourseInfoBlockView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
     }

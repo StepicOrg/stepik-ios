@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoInstructorsBlockView {
+extension CourseInfoTabInfoInstructorsBlockView {
     struct Appearance {
         let headerViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
 
@@ -18,11 +18,11 @@ extension CourseInfoInstructorsBlockView {
     }
 }
 
-final class CourseInfoInstructorsBlockView: UIView {
+final class CourseInfoTabInfoInstructorsBlockView: UIView {
     private let appearance: Appearance
 
-    private lazy var headerView: CourseInfoBlockView = {
-        CourseInfoBlockView(frame: .zero)
+    private lazy var headerView: CourseInfoTabInfoBlockView = {
+        CourseInfoTabInfoBlockView(frame: .zero)
     }()
 
     private lazy var stackView: UIStackView = {
@@ -35,7 +35,7 @@ final class CourseInfoInstructorsBlockView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        viewModel: CourseInfoInstructorsBlockViewModel
+        viewModel: CourseInfoTabInfoInstructorsBlockViewModel
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -51,18 +51,18 @@ final class CourseInfoInstructorsBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(with viewModel: CourseInfoInstructorsBlockViewModel) {
+    private func configure(with viewModel: CourseInfoTabInfoInstructorsBlockViewModel) {
         self.headerView.configure(with: viewModel)
 
         viewModel.instructors.forEach { instructor in
             self.stackView.addArrangedSubview(
-                CourseInfoInstructorView(viewModel: instructor)
+                CourseInfoTabInfoInstructorView(viewModel: instructor)
             )
         }
     }
 }
 
-extension CourseInfoInstructorsBlockView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoInstructorsBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
     }

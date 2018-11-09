@@ -1,14 +1,11 @@
 //
-//  CourseInfoViewModel.swift
-//  Stepic
-//
-//  Created by Ivan Magda on 11/2/18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
+// Created by Ivan Magda on 11/9/18.
+// Copyright (c) 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-enum CourseInfoType {
+enum CourseInfoTabInfoBlockType {
     case author(String)
     case introVideo
     case about
@@ -79,52 +76,4 @@ enum CourseInfoType {
             )
         }
     }
-}
-
-protocol CourseInfoBlockViewModelProtocol {
-    var type: CourseInfoType { get }
-
-    var image: UIImage? { get }
-    var title: String { get }
-}
-
-extension CourseInfoBlockViewModelProtocol {
-    var image: UIImage? {
-        return self.type.image
-    }
-
-    var title: String {
-        return self.type.title
-    }
-}
-
-struct CourseInfoIntroVideoBlockViewModel: CourseInfoBlockViewModelProtocol {
-    var type: CourseInfoType {
-        return .introVideo
-    }
-
-    let introURL: String
-}
-
-struct CourseInfoTextBlockViewModel: CourseInfoBlockViewModelProtocol {
-    let type: CourseInfoType
-    let message: String
-}
-
-struct CourseInfoInstructorViewModel {
-    let avatar: UIImage?
-    let title: String
-    let description: String
-}
-
-struct CourseInfoInstructorsBlockViewModel: CourseInfoBlockViewModelProtocol {
-    var type: CourseInfoType {
-        return .instructors
-    }
-
-    let instructors: [CourseInfoInstructorViewModel]
-}
-
-struct CourseInfoViewModel {
-    let blocks: [CourseInfoBlockViewModelProtocol]
 }

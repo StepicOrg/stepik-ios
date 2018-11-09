@@ -1,5 +1,5 @@
 //
-//  CourseInfoView.swift
+//  CourseInfoTabInfoView.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 11/1/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoView {
+extension CourseInfoTabInfoView {
     struct Appearance {
         let spacing: CGFloat = 0
 
@@ -29,9 +29,9 @@ extension CourseInfoView {
     }
 }
 
-final class CourseInfoView: UIView {
+final class CourseInfoTabInfoView: UIView {
     private let appearance: Appearance
-    private let viewModel: CourseInfoViewModel
+    private let viewModel: CourseInfoTabInfoViewModel
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
@@ -68,7 +68,7 @@ final class CourseInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(joinButton: .init()),
-        viewModel: CourseInfoViewModel
+        viewModel: CourseInfoTabInfoViewModel
     ) {
         self.appearance = appearance
         self.viewModel = viewModel
@@ -87,9 +87,9 @@ final class CourseInfoView: UIView {
 
     private func addBlocks() {
         self.viewModel.blocks.forEach { viewModel in
-            switch viewModel.type {
+            switch viewModel.blockType {
             case .introVideo:
-                guard let introVideoViewModel = viewModel as? CourseInfoIntroVideoBlockViewModel,
+                guard let introVideoViewModel = viewModel as? CourseInfoTabInfoIntroVideoBlockViewModel,
                       let _ = URL(string: introVideoViewModel.introURL) else {
                     return
                 }
@@ -100,21 +100,21 @@ final class CourseInfoView: UIView {
                     make.height.equalTo(self.appearance.introVideoHeight)
                 }
             case .instructors:
-                guard let instructorsViewModel = viewModel as? CourseInfoInstructorsBlockViewModel else {
+                guard let instructorsViewModel = viewModel as? CourseInfoTabInfoInstructorsBlockViewModel else {
                     return
                 }
 
                 self.scrollableStackView.addArrangedView(
-                    CourseInfoInstructorsBlockView(viewModel: instructorsViewModel)
+                    CourseInfoTabInfoInstructorsBlockView(viewModel: instructorsViewModel)
                 )
             default:
-                guard let textBlockViewModel = viewModel as? CourseInfoTextBlockViewModel else {
+                guard let textBlockViewModel = viewModel as? CourseInfoTabInfoTextBlockViewModel else {
                     return
                 }
 
                 self.scrollableStackView.addArrangedView(
-                    CourseInfoTextBlockView(
-                        appearance: self.getTextBlockAppearance(for: viewModel.type),
+                    CourseInfoTabInfoTextBlockView(
+                        appearance: self.getTextBlockAppearance(for: viewModel.blockType),
                         viewModel: textBlockViewModel
                     )
                 )
@@ -134,8 +134,8 @@ final class CourseInfoView: UIView {
     }
 
     private func getTextBlockAppearance(
-        for type: CourseInfoType
-    ) -> CourseInfoTextBlockView.Appearance {
+        for type: CourseInfoTabInfoBlockType
+    ) -> CourseInfoTabInfoTextBlockView.Appearance {
         switch type {
         case .author:
             return .init(
@@ -181,7 +181,7 @@ final class CourseInfoView: UIView {
     }
 }
 
-extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
 

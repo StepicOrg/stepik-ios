@@ -1,5 +1,5 @@
 //
-//  CourseInfoTextBlockView.swift
+//  CourseInfoTabInfoTextBlockView.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 11/1/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoTextBlockView {
+extension CourseInfoTabInfoTextBlockView {
     struct Appearance {
         var headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47)
 
@@ -19,11 +19,11 @@ extension CourseInfoTextBlockView {
     }
 }
 
-final class CourseInfoTextBlockView: UIView {
+final class CourseInfoTabInfoTextBlockView: UIView {
     private let appearance: Appearance
 
-    private lazy var headerView: CourseInfoBlockView = {
-        CourseInfoBlockView(frame: .zero)
+    private lazy var headerView: CourseInfoTabInfoBlockView = {
+        CourseInfoTabInfoBlockView(frame: .zero)
     }()
 
     private lazy var messageLabel: UILabel = {
@@ -37,7 +37,7 @@ final class CourseInfoTextBlockView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        viewModel: CourseInfoTextBlockViewModel
+        viewModel: CourseInfoTabInfoTextBlockViewModel
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -53,13 +53,13 @@ final class CourseInfoTextBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(with viewModel: CourseInfoTextBlockViewModel) {
+    private func configure(with viewModel: CourseInfoTabInfoTextBlockViewModel) {
         self.headerView.configure(with: viewModel)
         self.messageLabel.text = viewModel.message
     }
 }
 
-extension CourseInfoTextBlockView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoTextBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
     }

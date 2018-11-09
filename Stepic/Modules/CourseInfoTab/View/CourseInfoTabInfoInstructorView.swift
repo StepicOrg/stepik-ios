@@ -1,5 +1,5 @@
 //
-//  CourseInfoInstructorView.swift
+//  CourseInfoTabInfoInstructorView.swift
 //  Stepic
 //
 //  Created by Ivan Magda on 11/2/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoInstructorView {
+extension CourseInfoTabInfoInstructorView {
     struct Appearance {
         let imageViewSize = CGSize(width: 30, height: 30)
         let imageViewCornerRadius: CGFloat = 5
@@ -24,7 +24,7 @@ extension CourseInfoInstructorView {
     }
 }
 
-final class CourseInfoInstructorView: UIView {
+final class CourseInfoTabInfoInstructorView: UIView {
     private let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
@@ -54,7 +54,7 @@ final class CourseInfoInstructorView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        viewModel: CourseInfoInstructorViewModel
+        viewModel: CourseInfoTabInfoInstructorViewModel
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -70,14 +70,14 @@ final class CourseInfoInstructorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(with viewModel: CourseInfoInstructorViewModel) {
+    private func configure(with viewModel: CourseInfoTabInfoInstructorViewModel) {
         self.imageView.image = viewModel.avatar
         self.titleLabel.text = viewModel.title
         self.descriptionLabel.text = viewModel.description
     }
 }
 
-extension CourseInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
     }
