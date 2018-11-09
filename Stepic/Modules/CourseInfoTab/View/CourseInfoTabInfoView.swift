@@ -59,7 +59,7 @@ final class CourseInfoTabInfoView: UIView {
     }()
 
     private lazy var introVideoImageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "new-coursepics-python-xl"))
+        let imageView = UIImageView(image: UIImage(named: "new-coursepics-python-xl"))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
