@@ -7,33 +7,19 @@ import Foundation
 
 enum CourseInfoTabInfoBlockViewBuilder {
     static func build(viewModel: CourseInfoTabInfoBlockViewModelProtocol) -> UIView? {
-        switch viewModel.blockType {
-        case .introVideo:
-            guard let introVideoViewModel = viewModel as? CourseInfoTabInfoIntroVideoBlockViewModel,
-                  let _ = introVideoViewModel.introURL else {
-                return nil
-            }
-
-            let imageView = UIImageView(image: UIImage(named: "new-coursepics-python-xl"))
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-
-            return imageView
-        case .instructors:
-            guard let instructorsViewModel = viewModel as? CourseInfoTabInfoInstructorsBlockViewModel else {
-                return nil
-            }
-
-            return CourseInfoTabInfoInstructorsBlockView(viewModel: instructorsViewModel)
-        default:
-            guard let textBlockViewModel = viewModel as? CourseInfoTabInfoTextBlockViewModel else {
-                return nil
-            }
-
+        switch viewModel {
+        case let textBlockViewModel as CourseInfoTabInfoTextBlockViewModel:
             return CourseInfoTabInfoTextBlockView(
                 appearance: self.getTextBlockAppearance(for: viewModel.blockType),
                 viewModel: textBlockViewModel
             )
+        case let introVideoViewModel as CourseInfoTabInfoIntroVideoBlockViewModel:
+            return CourseInfoTabInfoIntroVideoBlockView(viewModel: introVideoViewModel)
+        case let instructorsViewModel as CourseInfoTabInfoInstructorsBlockViewModel:
+            return CourseInfoTabInfoInstructorsBlockView(viewModel: instructorsViewModel)
+        default:
+            print("Not supported block view model: \(viewModel)")
+            return nil
         }
     }
 

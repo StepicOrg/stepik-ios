@@ -17,8 +17,6 @@ extension CourseInfoTabInfoView {
     struct Appearance {
         let spacing: CGFloat = 0
 
-        let introVideoHeight: CGFloat = 203
-
         let joinButton: JoinButton
 
         struct JoinButton {
@@ -91,22 +89,10 @@ final class CourseInfoTabInfoView: UIView {
 
     private func configure(with viewModel: CourseInfoTabInfoViewModel) {
         viewModel.blocks.forEach { viewModel in
-            guard let blockView = self.blockViewBuilder(viewModel) else {
-                return
+            if let blockView = self.blockViewBuilder(viewModel) {
+                blockView.translatesAutoresizingMaskIntoConstraints = false
+                self.scrollableStackView.addArrangedView(blockView)
             }
-
-            blockView.translatesAutoresizingMaskIntoConstraints = false
-
-            switch viewModel.blockType {
-            case .introVideo:
-                blockView.snp.makeConstraints { make in
-                    make.height.equalTo(self.appearance.introVideoHeight)
-                }
-            default:
-                break
-            }
-
-            self.scrollableStackView.addArrangedView(blockView)
         }
 
         self.addJoinButton()
@@ -122,48 +108,6 @@ final class CourseInfoTabInfoView: UIView {
         self.joinButton.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.joinButton.height)
             make.leading.top.trailing.bottom.equalToSuperview().inset(self.appearance.joinButton.insets)
-        }
-    }
-
-    private func getTextBlockAppearance(
-        for type: CourseInfoTabInfoBlockType
-    ) -> CourseInfoTabInfoTextBlockView.Appearance {
-        switch type {
-        case .author:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
-            )
-        case .about:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 18, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
-            )
-        case .requirements:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 32, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 17, left: 47, bottom: 0, right: 47)
-            )
-        case .targetAudience:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 17, left: 47, bottom: 0, right: 47)
-            )
-        case .timeToComplete, .language, .certificate:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
-            )
-        case .certificateDetails:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 43, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 3, left: 47, bottom: 0, right: 47)
-            )
-        default:
-            return .init(
-                headerViewInsets: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47),
-                messageLabelInsets: UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
-            )
         }
     }
 
