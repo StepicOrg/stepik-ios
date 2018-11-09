@@ -115,7 +115,10 @@ final class HomeViewController: BaseExploreViewController {
                 message: "Certificate condition: 50 points\nWith distinction: 75 points"
             )
         ])
-        controller.view = CourseInfoTabInfoView(viewModel: viewModel)
+        controller.view = CourseInfoTabInfoView(
+            viewModel: viewModel,
+            blockViewBuilder: CourseInfoTabInfoBlockViewBuilder.build
+        )
 
         self.navigationController?.pushViewController(controller, animated: true)
     }

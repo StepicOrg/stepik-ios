@@ -34,9 +34,12 @@ extension CourseInfoTabInfoView {
 }
 
 final class CourseInfoTabInfoView: UIView {
+    typealias BlockViewBuilder = (CourseInfoTabInfoBlockViewModelProtocol) -> UIView?
+
     weak var delegate: CourseInfoTabInfoViewDelegate?
 
     private let appearance: Appearance
+    private let blockViewBuilder: BlockViewBuilder
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
@@ -63,21 +66,16 @@ final class CourseInfoTabInfoView: UIView {
         return button
     }()
 
-    private lazy var introVideoImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "new-coursepics-python-xl"))
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(joinButton: .init()),
         viewModel: CourseInfoTabInfoViewModel,
-        delegate: CourseInfoTabInfoViewDelegate? = nil
+        delegate: CourseInfoTabInfoViewDelegate? = nil,
+        blockViewBuilder: @escaping BlockViewBuilder
     ) {
         self.appearance = appearance
         self.delegate = delegate
+        self.blockViewBuilder = blockViewBuilder
         super.init(frame: frame)
 
         self.setupView()
@@ -93,38 +91,22 @@ final class CourseInfoTabInfoView: UIView {
 
     private func configure(with viewModel: CourseInfoTabInfoViewModel) {
         viewModel.blocks.forEach { viewModel in
+            guard let blockView = self.blockViewBuilder(viewModel) else {
+                return
+            }
+
+            blockView.translatesAutoresizingMaskIntoConstraints = false
+
             switch viewModel.blockType {
             case .introVideo:
-                guard let introVideoViewModel = viewModel as? CourseInfoTabInfoIntroVideoBlockViewModel,
-                      let _ = introVideoViewModel.introURL else {
-                    return
-                }
-
-                self.introVideoImageView.translatesAutoresizingMaskIntoConstraints = false
-                self.scrollableStackView.addArrangedView(self.introVideoImageView)
-                self.introVideoImageView.snp.makeConstraints { make in
+                blockView.snp.makeConstraints { make in
                     make.height.equalTo(self.appearance.introVideoHeight)
                 }
-            case .instructors:
-                guard let instructorsViewModel = viewModel as? CourseInfoTabInfoInstructorsBlockViewModel else {
-                    return
-                }
-
-                self.scrollableStackView.addArrangedView(
-                    CourseInfoTabInfoInstructorsBlockView(viewModel: instructorsViewModel)
-                )
             default:
-                guard let textBlockViewModel = viewModel as? CourseInfoTabInfoTextBlockViewModel else {
-                    return
-                }
-
-                self.scrollableStackView.addArrangedView(
-                    CourseInfoTabInfoTextBlockView(
-                        appearance: self.getTextBlockAppearance(for: viewModel.blockType),
-                        viewModel: textBlockViewModel
-                    )
-                )
+                break
             }
+
+            self.scrollableStackView.addArrangedView(blockView)
         }
 
         self.addJoinButton()
