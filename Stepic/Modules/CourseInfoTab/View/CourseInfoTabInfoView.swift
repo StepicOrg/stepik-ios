@@ -118,7 +118,9 @@ final class CourseInfoTabInfoView: UIView {
         self.scrollableStackView.addArrangedView(buttonContainer)
         self.joinButton.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.joinButton.height)
-            make.leading.top.trailing.bottom.equalToSuperview().inset(self.appearance.joinButton.insets)
+            make.leading.top.trailing.bottom
+                .equalToSuperview()
+                .inset(self.appearance.joinButton.insets)
         }
     }
 

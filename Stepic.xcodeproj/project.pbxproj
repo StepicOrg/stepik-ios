@@ -8857,6 +8857,7 @@
 		2C22042E20E27E120060117A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				62E988531B4005E22572A8CB /* CourseInfo */,
 				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
 				2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */,
 				2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */,
@@ -8864,7 +8865,6 @@
 				62E98A399A313681138734B4 /* CourseWidgetSkeletonView.swift */,
 				62E9856D3E54568A1415665B /* ContinueCourseSkeletonView.swift */,
 				62E989B9228830C92A91B2DE /* CourseListsCollectionSkeletonView.swift */,
-				62E988531B4005E22572A8CB /* CourseInfo */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -10512,6 +10512,18 @@
 			name = StepikPlaceholderView;
 			sourceTree = "<group>";
 		};
+		2CF39A062195EF1700688A24 /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				62E984497C7DD6033AC0B914 /* CourseInfoTabInfoBlockView.swift */,
+				62E981C3381EF87D844F8E11 /* CourseInfoTabInfoInstructorsBlockView.swift */,
+				62E98114DF11CFD4F5F75E79 /* CourseInfoTabInfoInstructorView.swift */,
+				62E9809AEE7ED05C92852758 /* CourseInfoTabInfoIntroVideoBlockView.swift */,
+				62E98229BCE62A9522A60FF7 /* CourseInfoTabInfoTextBlockView.swift */,
+			);
+			path = Blocks;
+			sourceTree = "<group>";
+		};
 		2CF79D332131A96800DA6953 /* LessonTableHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -10634,9 +10646,9 @@
 		62E9829DC9329C319264FF39 /* CourseInfoTab */ = {
 			isa = PBXGroup;
 			children = (
-				62E9892B3DF419F4C6028AC0 /* CourseInfoTabInfoBlockViewBuilder.swift */,
 				62E98A5F7CD1CD63FB4E169C /* View */,
 				62E98BE667F37BA52271E8E9 /* ViewModel */,
+				62E9892B3DF419F4C6028AC0 /* CourseInfoTabInfoBlockViewBuilder.swift */,
 			);
 			path = CourseInfoTab;
 			sourceTree = "<group>";
@@ -10796,12 +10808,8 @@
 		62E98A5F7CD1CD63FB4E169C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2CF39A062195EF1700688A24 /* Blocks */,
 				62E98B7DBB7C240C8383AF31 /* CourseInfoTabInfoView.swift */,
-				62E984497C7DD6033AC0B914 /* CourseInfoTabInfoBlockView.swift */,
-				62E98229BCE62A9522A60FF7 /* CourseInfoTabInfoTextBlockView.swift */,
-				62E981C3381EF87D844F8E11 /* CourseInfoTabInfoInstructorsBlockView.swift */,
-				62E98114DF11CFD4F5F75E79 /* CourseInfoTabInfoInstructorView.swift */,
-				62E9809AEE7ED05C92852758 /* CourseInfoTabInfoIntroVideoBlockView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -10867,9 +10875,9 @@
 		62E98BE667F37BA52271E8E9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				62E985797A50F6A4FFBEAA91 /* CourseInfoTabInfoViewModel.swift */,
 				62E9823598D12AEC3113E4A1 /* CourseInfoTabInfoBlockViewModelProtocol.swift */,
 				62E98532D64AC53FBC22E1F3 /* CourseInfoTabInfoBlockType.swift */,
+				62E985797A50F6A4FFBEAA91 /* CourseInfoTabInfoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
