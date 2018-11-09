@@ -9,6 +9,10 @@
 import UIKit
 import SnapKit
 
+protocol CourseInfoTabInfoViewDelegate: class {
+    func courseInfoTabInfoViewDidTapOnJoin(_ courseInfoTabInfoView: CourseInfoTabInfoView)
+}
+
 extension CourseInfoTabInfoView {
     struct Appearance {
         let spacing: CGFloat = 0
@@ -30,6 +34,8 @@ extension CourseInfoTabInfoView {
 }
 
 final class CourseInfoTabInfoView: UIView {
+    weak var delegate: CourseInfoTabInfoViewDelegate?
+
     private let appearance: Appearance
     private let viewModel: CourseInfoTabInfoViewModel
 
@@ -68,10 +74,12 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(joinButton: .init()),
-        viewModel: CourseInfoTabInfoViewModel
+        viewModel: CourseInfoTabInfoViewModel,
+        delegate: CourseInfoTabInfoViewDelegate? = nil
     ) {
         self.appearance = appearance
         self.viewModel = viewModel
+        self.delegate = delegate
         super.init(frame: frame)
 
         self.setupView()
@@ -177,7 +185,7 @@ final class CourseInfoTabInfoView: UIView {
 
     @objc
     private func joinButtonClicked(sender: UIButton) {
-        print(#function)
+        self.delegate?.courseInfoTabInfoViewDidTapOnJoin(self)
     }
 }
 
