@@ -67,7 +67,7 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(joinButton: .init()),
-        viewModel: CourseInfoTabInfoViewModel,
+        viewModel: CourseInfoTabInfoViewModel? = nil,
         delegate: CourseInfoTabInfoViewDelegate? = nil,
         blockViewBuilder: @escaping BlockViewBuilder
     ) {
@@ -80,7 +80,9 @@ final class CourseInfoTabInfoView: UIView {
         self.addSubviews()
         self.makeConstraints()
 
-        self.configure(with: viewModel)
+        if let viewModel = viewModel {
+            self.configure(with: viewModel)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -98,7 +100,12 @@ final class CourseInfoTabInfoView: UIView {
         self.skeleton.hide()
     }
 
-    private func configure(with viewModel: CourseInfoTabInfoViewModel) {
+    func configure(with viewModel: CourseInfoTabInfoViewModel) {
+        // TODO: Optimize here
+        if !self.scrollableStackView.arrangedSubviews.isEmpty {
+            self.scrollableStackView.removeAllArrangedViews()
+        }
+
         viewModel.blocks.forEach { viewModel in
             if let blockView = self.blockViewBuilder(viewModel) {
                 blockView.translatesAutoresizingMaskIntoConstraints = false
