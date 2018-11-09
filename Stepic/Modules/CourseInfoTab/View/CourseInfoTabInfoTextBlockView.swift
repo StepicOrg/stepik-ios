@@ -22,12 +22,10 @@ extension CourseInfoTabInfoTextBlockView {
 final class CourseInfoTabInfoTextBlockView: UIView {
     private let appearance: Appearance
 
-    private lazy var headerView: CourseInfoTabInfoBlockView = {
-        CourseInfoTabInfoBlockView(frame: .zero)
-    }()
+    private lazy var headerView = CourseInfoTabInfoBlockView()
 
     private lazy var messageLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+        let label = UILabel()
         label.numberOfLines = 0
         label.font = self.appearance.messageLabelFont
         label.textColor = self.appearance.messageLabelTextColor

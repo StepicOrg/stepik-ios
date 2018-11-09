@@ -23,15 +23,15 @@ final class CourseInfoTabInfoBlockView: UIView {
     let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+        let label = UILabel()
         label.font = self.appearance.titleLabelFont
-        label.textColor = appearance.titleLabelTextColor
+        label.textColor = self.appearance.titleLabelTextColor
         return label
     }()
 

@@ -121,7 +121,7 @@ final class CourseInfoTabInfoView: UIView {
             }
         }
 
-        let buttonContainer = UIView(frame: .zero)
+        let buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
         self.joinButton.translatesAutoresizingMaskIntoConstraints = false
         buttonContainer.addSubview(self.joinButton)

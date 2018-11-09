@@ -30,7 +30,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
     private let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(frame: .zero)
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = self.appearance.imageViewCornerRadius
         imageView.clipsToBounds = true
@@ -38,7 +38,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
     }()
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+        let label = UILabel()
         label.numberOfLines = 1
         label.font = self.appearance.titleLabelFont
         label.textColor = self.appearance.titleLabelTextColor
@@ -46,7 +46,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
     }()
 
     private lazy var descriptionLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+        let label = UILabel()
         label.numberOfLines = 0
         label.font = self.appearance.descriptionLabelFont
         label.textColor = self.appearance.descriptionLabelTextColor

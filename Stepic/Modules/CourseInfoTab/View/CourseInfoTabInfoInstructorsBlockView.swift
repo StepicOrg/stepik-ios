@@ -21,9 +21,7 @@ extension CourseInfoTabInfoInstructorsBlockView {
 final class CourseInfoTabInfoInstructorsBlockView: UIView {
     private let appearance: Appearance
 
-    private lazy var headerView: CourseInfoTabInfoBlockView = {
-        CourseInfoTabInfoBlockView(frame: .zero)
-    }()
+    private lazy var headerView = CourseInfoTabInfoBlockView()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
