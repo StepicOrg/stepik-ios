@@ -58,15 +58,12 @@ extension CourseInfoTabInfoBlockSkeletonView: ProgrammaticallyInitializableViewP
         self.imageViewSkeleton.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.size.equalTo(self.appearance.imageViewSize)
-            make.top
-                .equalToSuperview()
-                .offset(self.appearance.titleLabelHeight / 2.0 - self.appearance.imageViewSize.height / 2.0)
+            make.centerY.equalTo(self.titleLabelSkeleton.snp.centerY)
         }
 
         self.titleLabelSkeleton.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabelSkeleton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
-            make.top.bottom.equalToSuperview()
+            make.top.trailing.bottom.equalToSuperview()
             make.height.equalTo(self.appearance.titleLabelHeight)
             make.leading
                 .equalToSuperview()
