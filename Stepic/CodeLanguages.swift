@@ -19,6 +19,7 @@ enum CodeLanguage: String {
     case java = "java"
     case java8 = "java8"
     case java9 = "java9"
+    case java11 = "java11"
     case octave = "octave"
     case asm32 = "asm32"
     case asm64 = "asm64"
@@ -49,7 +50,7 @@ enum CodeLanguage: String {
             return "cpp"
         case .haskell, .haskell7, .haskell8:
             return "haskell"
-        case .java, .java8, .java9:
+        case .java, .java8, .java9, .java11:
             return "java"
         case .octave:
             return "octave"
@@ -92,7 +93,7 @@ enum CodeLanguage: String {
             return "C++"
         case .haskell, .haskell7, .haskell8:
             return "Haskell"
-        case .java, .java8, .java9:
+        case .java, .java8, .java9, .java11:
             return "Java"
         case .octave:
             return "Octave"
@@ -139,7 +140,7 @@ enum CodeLanguage: String {
             return "// comment\n\n#include <iostream>\n\nint main()\n{\n\tstd::cout << \"Hello World!\" << std::endl;\n}"
         case .haskell, .haskell7, .haskell8:
             return "-- comment\n\nmain = putStrLn \"Hello World\""
-        case .java, .java8, .java9:
+        case .java, .java8, .java9, .java11:
             return "// comment\n\nclass HelloWorld {\n\tstatic public void main(String args[]) {\n\t\tSystem.out.println(\"Hello World!\");\n\t}\n}"
         case .octave:
             return "# comment\nprintf(\"Hello World\\n\");"
