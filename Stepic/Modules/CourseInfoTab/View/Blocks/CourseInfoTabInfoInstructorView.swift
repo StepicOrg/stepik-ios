@@ -65,14 +65,14 @@ final class CourseInfoTabInfoInstructorView: UIView {
         self.addSubviews()
         self.makeConstraints()
 
-        self.configure(with: viewModel)
+        self.configure(viewModel: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(with viewModel: CourseInfoTabInfoInstructorViewModel) {
+    private func configure(viewModel: CourseInfoTabInfoInstructorViewModel) {
         self.titleLabel.text = viewModel.title
         self.descriptionLabel.text = viewModel.description
 

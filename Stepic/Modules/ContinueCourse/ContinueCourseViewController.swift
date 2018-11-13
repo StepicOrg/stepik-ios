@@ -67,7 +67,7 @@ final class ContinueCourseViewController: UIViewController {
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel) {
         if case .result(let result) = viewModel.state {
-            self.continueCourseView?.configure(with: result)
+            self.continueCourseView?.configure(viewModel: result)
             self.interactor.checkForTooltip(request: .init())
         }
 

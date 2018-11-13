@@ -48,7 +48,7 @@ final class CourseInfoTabInfoBlockView: UIView {
         self.makeConstraints()
 
         if let viewModel = viewModel {
-            self.configure(with: viewModel)
+            self.configure(viewModel: viewModel)
         }
     }
 
@@ -56,7 +56,7 @@ final class CourseInfoTabInfoBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with viewModel: CourseInfoTabInfoBlockViewModelProtocol) {
+    func configure(viewModel: CourseInfoTabInfoBlockViewModelProtocol) {
         self.iconImageView.image = viewModel.image
         self.titleLabel.text = viewModel.title
     }

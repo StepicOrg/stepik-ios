@@ -81,7 +81,7 @@ final class CourseInfoTabInfoView: UIView {
         self.makeConstraints()
 
         if let viewModel = viewModel {
-            self.configure(with: viewModel)
+            self.configure(viewModel: viewModel)
         }
     }
 
@@ -100,7 +100,7 @@ final class CourseInfoTabInfoView: UIView {
         self.skeleton.hide()
     }
 
-    func configure(with viewModel: CourseInfoTabInfoViewModel) {
+    func configure(viewModel: CourseInfoTabInfoViewModel) {
         // TODO: Optimize here
         if !self.scrollableStackView.arrangedSubviews.isEmpty {
             self.scrollableStackView.removeAllArrangedViews()

@@ -42,15 +42,15 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
         self.addSubviews()
         self.makeConstraints()
 
-        self.configure(with: viewModel)
+        self.configure(viewModel: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(with viewModel: CourseInfoTabInfoInstructorsBlockViewModel) {
-        self.headerView.configure(with: viewModel)
+    private func configure(viewModel: CourseInfoTabInfoInstructorsBlockViewModel) {
+        self.headerView.configure(viewModel: viewModel)
 
         viewModel.instructors.forEach { instructor in
             self.stackView.addArrangedSubview(

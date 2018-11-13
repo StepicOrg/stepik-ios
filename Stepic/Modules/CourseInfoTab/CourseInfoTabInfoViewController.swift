@@ -21,7 +21,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         self.courseInfoView?.showLoading()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.courseInfoView?.hideLoading()
-            self.courseInfoView?.configure(with: self.getViewModel())
+            self.courseInfoView?.configure(viewModel: self.getViewModel())
         }
     }
 
