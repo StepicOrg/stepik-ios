@@ -55,8 +55,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(),
-        viewModel: CourseInfoTabInfoInstructorViewModel
+        appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -64,15 +63,13 @@ final class CourseInfoTabInfoInstructorView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        self.configure(viewModel: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(viewModel: CourseInfoTabInfoInstructorViewModel) {
+    func configure(viewModel: CourseInfoTabInfoInstructorViewModel) {
         self.titleLabel.text = viewModel.title
         self.descriptionLabel.text = viewModel.description
 

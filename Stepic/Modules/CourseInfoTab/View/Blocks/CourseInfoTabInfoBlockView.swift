@@ -37,8 +37,7 @@ final class CourseInfoTabInfoBlockView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(),
-        viewModel: CourseInfoTabInfoBlockViewModelProtocol? = nil
+        appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -46,10 +45,6 @@ final class CourseInfoTabInfoBlockView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        if let viewModel = viewModel {
-            self.configure(viewModel: viewModel)
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {

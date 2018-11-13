@@ -67,7 +67,6 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(joinButton: .init()),
-        viewModel: CourseInfoTabInfoViewModel? = nil,
         delegate: CourseInfoTabInfoViewDelegate? = nil,
         blockViewBuilder: @escaping BlockViewBuilder
     ) {
@@ -79,10 +78,6 @@ final class CourseInfoTabInfoView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        if let viewModel = viewModel {
-            self.configure(viewModel: viewModel)
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {

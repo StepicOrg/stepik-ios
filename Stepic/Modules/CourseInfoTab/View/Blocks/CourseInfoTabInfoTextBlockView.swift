@@ -34,8 +34,7 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(),
-        viewModel: CourseInfoTabInfoTextBlockViewModel
+        appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -43,15 +42,13 @@ final class CourseInfoTabInfoTextBlockView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        self.configure(viewModel: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(viewModel: CourseInfoTabInfoTextBlockViewModel) {
+    func configure(viewModel: CourseInfoTabInfoTextBlockViewModel) {
         self.headerView.configure(viewModel: viewModel)
         self.messageLabel.text = viewModel.message
     }

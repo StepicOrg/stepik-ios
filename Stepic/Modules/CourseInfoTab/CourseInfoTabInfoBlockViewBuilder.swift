@@ -9,14 +9,19 @@ enum CourseInfoTabInfoBlockViewBuilder {
     static func build(viewModel: CourseInfoTabInfoBlockViewModelProtocol) -> UIView? {
         switch viewModel {
         case let textBlockViewModel as CourseInfoTabInfoTextBlockViewModel:
-            return CourseInfoTabInfoTextBlockView(
-                appearance: self.getTextBlockAppearance(for: viewModel.blockType),
-                viewModel: textBlockViewModel
+            let view = CourseInfoTabInfoTextBlockView(
+                appearance: self.getTextBlockAppearance(for: viewModel.blockType)
             )
+            view.configure(viewModel: textBlockViewModel)
+            return view
         case let introVideoViewModel as CourseInfoTabInfoIntroVideoBlockViewModel:
-            return CourseInfoTabInfoIntroVideoBlockView(viewModel: introVideoViewModel)
+            let view = CourseInfoTabInfoIntroVideoBlockView()
+            view.configure(viewModel: introVideoViewModel)
+            return view
         case let instructorsViewModel as CourseInfoTabInfoInstructorsBlockViewModel:
-            return CourseInfoTabInfoInstructorsBlockView(viewModel: instructorsViewModel)
+            let view = CourseInfoTabInfoInstructorsBlockView()
+            view.configure(viewModel: instructorsViewModel)
+            return view
         default:
             print("Not supported block view model: \(viewModel)")
             return nil

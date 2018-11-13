@@ -32,8 +32,7 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(),
-        viewModel: CourseInfoTabInfoInstructorsBlockViewModel
+        appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -41,21 +40,23 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        self.configure(viewModel: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(viewModel: CourseInfoTabInfoInstructorsBlockViewModel) {
+    func configure(viewModel: CourseInfoTabInfoInstructorsBlockViewModel) {
         self.headerView.configure(viewModel: viewModel)
 
+        if !self.stackView.arrangedSubviews.isEmpty {
+            self.stackView.removeAllArrangedSubviews()
+        }
+
         viewModel.instructors.forEach { instructor in
-            self.stackView.addArrangedSubview(
-                CourseInfoTabInfoInstructorView(viewModel: instructor)
-            )
+            let view = CourseInfoTabInfoInstructorView()
+            view.configure(viewModel: instructor)
+            self.stackView.addArrangedSubview(view)
         }
     }
 }

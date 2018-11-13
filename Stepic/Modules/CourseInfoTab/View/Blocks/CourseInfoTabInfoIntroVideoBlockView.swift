@@ -24,8 +24,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(),
-        viewModel: CourseInfoTabInfoIntroVideoBlockViewModel
+        appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -33,15 +32,13 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        self.configure(viewModel: viewModel)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configure(viewModel: CourseInfoTabInfoIntroVideoBlockViewModel) {
+    func configure(viewModel: CourseInfoTabInfoIntroVideoBlockViewModel) {
     }
 }
 
