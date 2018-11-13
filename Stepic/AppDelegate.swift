@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
+    private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -110,6 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil
         )
         self.didChangeOrientation()
+
+        branchService.setup(launchOptions: launchOptions)
 
         return true
     }

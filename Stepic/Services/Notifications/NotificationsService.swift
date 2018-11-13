@@ -109,7 +109,7 @@ extension NotificationsService {
     }
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
-        func route(to route: DeepLinkRoutingService.Route) {
+        func route(to route: DeepLinkRoute) {
             DispatchQueue.main.async {
                 self.deepLinkRoutingService.route(route)
             }
