@@ -15,7 +15,7 @@ extension CourseInfoTabInfoIntroVideoBlockView {
 final class CourseInfoTabInfoIntroVideoBlockView: UIView {
     private let appearance: Appearance
 
-    private lazy var imageView: UIImageView = {
+    private lazy var previewImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "new-coursepics-python-xl"))
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -48,12 +48,12 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
     }
 
     func addSubviews() {
-        self.addSubview(self.imageView)
+        self.addSubview(self.previewImageView)
     }
 
     func makeConstraints() {
-        self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.imageView.snp.makeConstraints { make in
+        self.previewImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.previewImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(self.appearance.introVideoHeight)
         }
