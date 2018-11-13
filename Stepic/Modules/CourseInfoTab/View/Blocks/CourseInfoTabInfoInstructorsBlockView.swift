@@ -11,10 +11,10 @@ import SnapKit
 
 extension CourseInfoTabInfoInstructorsBlockView {
     struct Appearance {
-        let headerViewInsets = UIEdgeInsets(top: 37, left: 20, bottom: 0, right: 47)
+        let headerViewInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
 
         let stackViewInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
-        let stackViewSpacing: CGFloat = 18
+        let stackViewSpacing: CGFloat = 20
     }
 }
 

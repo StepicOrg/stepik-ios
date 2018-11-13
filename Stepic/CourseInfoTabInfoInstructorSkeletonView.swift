@@ -16,7 +16,7 @@ extension CourseInfoTabInfoInstructorSkeletonView {
         let titleLabelHeight: CGFloat = 17
         let titleLabelOffsetLeading: CGFloat = 17
 
-        let descriptionLabelOffsetTop: CGFloat = 10
+        let descriptionLabelOffsetTop: CGFloat = 20
         let descriptionLabelHeight: CGFloat = 80
     }
 }

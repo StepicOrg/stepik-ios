@@ -11,9 +11,9 @@ import SnapKit
 
 extension CourseInfoTabInfoTextBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47)
+        var headerViewInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
 
-        var messageLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
+        let messageLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
         let messageLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let messageLabelTextColor = UIColor.mainDark
     }

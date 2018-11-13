@@ -17,7 +17,7 @@ extension CourseInfoTabInfoView {
     struct Appearance {
         let spacing: CGFloat = 0
 
-        let joinButtonInsets = UIEdgeInsets(top: 32, left: 47, bottom: 47, right: 47)
+        let joinButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
         let joinButtonHeight: CGFloat = 47
         let joinButtonBackgroundColor = UIColor(hex: 0x66CC66)
         let joinButtonFont = UIFont.systemFont(ofSize: 14)
