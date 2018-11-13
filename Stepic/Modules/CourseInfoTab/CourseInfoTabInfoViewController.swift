@@ -6,9 +6,7 @@
 import UIKit
 
 final class CourseInfoTabInfoViewController: UIViewController {
-    private var courseInfoView: CourseInfoTabInfoView? {
-        return self.view as? CourseInfoTabInfoView
-    }
+    private lazy var courseInfoView = self.view as? CourseInfoTabInfoView
 
     // MARK: - Lifecycle
 
