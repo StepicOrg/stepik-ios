@@ -12,9 +12,10 @@ import SnapKit
 extension CourseInfoTabInfoBlockView {
     struct Appearance {
         let imageViewSize = CGSize(width: 12, height: 12)
+        let imageViewTintColor = UIColor.mainDark
 
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let titleLabelTextColor = UIColor.black
+        let titleLabelTextColor = UIColor.mainDark
         let titleLabelLeadingSpace: CGFloat = 27
     }
 }
@@ -25,6 +26,7 @@ final class CourseInfoTabInfoBlockView: UIView {
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = self.appearance.imageViewTintColor
         return imageView
     }()
 
@@ -52,7 +54,7 @@ final class CourseInfoTabInfoBlockView: UIView {
     }
 
     func configure(viewModel: CourseInfoTabInfoBlockViewModelProtocol) {
-        self.iconImageView.image = viewModel.image
+        self.iconImageView.image = viewModel.image?.withRenderingMode(.alwaysTemplate)
         self.titleLabel.text = viewModel.title
     }
 }
