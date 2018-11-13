@@ -20,7 +20,7 @@ struct CodeSnippetSymbols {
         switch language {
         case .python :
             return python
-        case .java, .java8 :
+        case .java, .java8, .java9:
             return java
         case .sql:
             return sql
