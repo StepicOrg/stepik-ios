@@ -27,6 +27,18 @@ class BranchService {
             }
         }
     }
+
+    func openURL(userActivity: NSUserActivity) {
+        Branch.getInstance()?.continue(userActivity)
+    }
+
+    func openURL(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) {
+        Branch.getInstance().application(app, open: url, options: options)
+    }
+
+    func isBranch(url: URL) -> Bool {
+        return url.host == "stepik.app.link" || url.host == "stepik-alternate.app.link"
+    }
 }
 
 //DeepLinkRoute branch extension
@@ -38,7 +50,8 @@ extension DeepLinkRoute {
 
         switch screen {
         case "course":
-            if let id = data["course"] as? Int {
+            if let idString = data["course"] as? String,
+               let id = Int(idString) {
                 self = .course(courseID: id)
                 return
             }

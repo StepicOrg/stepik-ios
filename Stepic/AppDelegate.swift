@@ -201,7 +201,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
-                self.handleOpenedFromDeepLink(url)
+                if branchService.isBranch(url: url) {
+                    branchService.openURL(userActivity: userActivity)
+                } else {
+                    self.handleOpenedFromDeepLink(url)
+                }
                 return true
             }
         }
@@ -244,8 +248,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topViewController.route(from: .social, to: .email(email: email))
             }
         } else {
+            if branchService.isBranch(url: url) {
+                branchService.openURL(app, open: url, options: options)
+            } else {
             // Other actions
-            self.handleOpenedFromDeepLink(url)
+                self.handleOpenedFromDeepLink(url)
+            }
         }
 
         return true
@@ -255,6 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func handleOpenedFromDeepLink(_ url: URL) {
         let deepLinkRoutingService = DeepLinkRoutingService()
+
         DispatchQueue.main.async {
             deepLinkRoutingService.route(path: url.absoluteString)
         }
