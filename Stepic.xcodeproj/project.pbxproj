@@ -4122,7 +4122,7 @@
 		62E9889B64C038694C9566DE /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E988EA9D5C729ACCE8B386 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
 		62E988EC90FF20DE3926BCE5 /* CourseReviewSummariesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989338C0834107DD43B60 /* CourseReviewSummariesNetworkService.swift */; };
-		62E988EF10CD1428396288A7 /* CourseInfoTabInfoBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98532D64AC53FBC22E1F3 /* CourseInfoTabInfoBlockType.swift */; };
+		62E988EF10CD1428396288A7 /* CourseInfoTabInfoBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98532D64AC53FBC22E1F3 /* CourseInfoTabInfoBlock.swift */; };
 		62E98905245F33B16D020586 /* ContinueActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9807E3506DAF40179593F /* ContinueActionButton.swift */; };
 		62E9893ECE0FA9E7AEC2B6DD /* CourseListCollectionOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986B46F417BDAA7E660CF /* CourseListCollectionOutputProtocol.swift */; };
 		62E989608052E8BA824C9A21 /* CourseInfoTabInfoBlockSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9876C6770A639F8C20BB8 /* CourseInfoTabInfoBlockSkeletonView.swift */; };
@@ -6048,7 +6048,7 @@
 		62E98523A1880164ADD69B1E /* CourseInfoTabInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoViewController.swift; sourceTree = "<group>"; };
 		62E98528BE31E1679ABC7A56 /* ContentLanguageSwitchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchProvider.swift; sourceTree = "<group>"; };
 		62E98531F389566315A3D2EE /* CourseListDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListDataFlow.swift; sourceTree = "<group>"; };
-		62E98532D64AC53FBC22E1F3 /* CourseInfoTabInfoBlockType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoBlockType.swift; sourceTree = "<group>"; };
+		62E98532D64AC53FBC22E1F3 /* CourseInfoTabInfoBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoBlock.swift; sourceTree = "<group>"; };
 		62E9854FAF9EE4F6763E65F8 /* CourseListOutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListOutputProtocol.swift; sourceTree = "<group>"; };
 		62E9855F408D287FF5652C21 /* BaseCourseListFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCourseListFlowLayout.swift; sourceTree = "<group>"; };
 		62E98564B972DA13D0F00047 /* CourseListInputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListInputProtocol.swift; sourceTree = "<group>"; };
@@ -10879,7 +10879,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9823598D12AEC3113E4A1 /* CourseInfoTabInfoBlockViewModelProtocol.swift */,
-				62E98532D64AC53FBC22E1F3 /* CourseInfoTabInfoBlockType.swift */,
+				62E98532D64AC53FBC22E1F3 /* CourseInfoTabInfoBlock.swift */,
 				62E985797A50F6A4FFBEAA91 /* CourseInfoTabInfoViewModel.swift */,
 			);
 			path = ViewModel;
@@ -15125,7 +15125,7 @@
 				62E984095A966E6F531E0ECF /* CourseInfoTabInfoInstructorView.swift in Sources */,
 				62E9877FB66EF5FA8531AFDC /* CourseInfoTabInfoViewModel.swift in Sources */,
 				62E98CB78217731BA4BB87E4 /* CourseInfoTabInfoBlockViewModelProtocol.swift in Sources */,
-				62E988EF10CD1428396288A7 /* CourseInfoTabInfoBlockType.swift in Sources */,
+				62E988EF10CD1428396288A7 /* CourseInfoTabInfoBlock.swift in Sources */,
 				62E98200418D63343022BAA4 /* CourseInfoTabInfoBlockViewBuilder.swift in Sources */,
 				62E98E2254E014AE47F7E4C2 /* CourseInfoTabInfoIntroVideoBlockView.swift in Sources */,
 				62E981F1071760511CFB0A61 /* CourseInfoTabInfoSkeletonView.swift in Sources */,

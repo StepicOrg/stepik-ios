@@ -29,7 +29,7 @@ enum CourseInfoTabInfoBlockViewBuilder {
     }
 
     private static func getTextBlockAppearance(
-        for type: CourseInfoTabInfoBlockType
+        for type: CourseInfoTabInfoBlock
     ) -> CourseInfoTabInfoTextBlockView.Appearance {
         switch type {
         case .author:

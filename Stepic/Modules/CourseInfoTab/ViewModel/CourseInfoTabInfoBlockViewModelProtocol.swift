@@ -6,7 +6,7 @@
 import UIKit
 
 protocol CourseInfoTabInfoBlockViewModelProtocol {
-    var blockType: CourseInfoTabInfoBlockType { get }
+    var blockType: CourseInfoTabInfoBlock { get }
 
     var image: UIImage? { get }
     var title: String { get }

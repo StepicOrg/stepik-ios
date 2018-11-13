@@ -5,7 +5,7 @@
 
 import UIKit
 
-enum CourseInfoTabInfoBlockType {
+enum CourseInfoTabInfoBlock {
     case author(String)
     case introVideo
     case about

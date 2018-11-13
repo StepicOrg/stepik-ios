@@ -13,12 +13,12 @@ struct CourseInfoTabInfoViewModel {
 }
 
 struct CourseInfoTabInfoTextBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    let blockType: CourseInfoTabInfoBlockType
+    let blockType: CourseInfoTabInfoBlock
     let message: String
 }
 
 struct CourseInfoTabInfoIntroVideoBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    var blockType: CourseInfoTabInfoBlockType {
+    var blockType: CourseInfoTabInfoBlock {
         return .introVideo
     }
 
@@ -32,7 +32,7 @@ struct CourseInfoTabInfoInstructorViewModel {
 }
 
 struct CourseInfoTabInfoInstructorsBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    var blockType: CourseInfoTabInfoBlockType {
+    var blockType: CourseInfoTabInfoBlock {
         return .instructors
     }
 
