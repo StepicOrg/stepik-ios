@@ -22,7 +22,7 @@ extension CourseInfoTabInfoBlockView {
 final class CourseInfoTabInfoBlockView: UIView {
     private let appearance: Appearance
 
-    private lazy var imageView: UIImageView = {
+    private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -57,7 +57,7 @@ final class CourseInfoTabInfoBlockView: UIView {
     }
 
     func configure(with viewModel: CourseInfoTabInfoBlockViewModelProtocol) {
-        self.imageView.image = viewModel.image
+        self.iconImageView.image = viewModel.image
         self.titleLabel.text = viewModel.title
     }
 }
@@ -68,13 +68,13 @@ extension CourseInfoTabInfoBlockView: ProgrammaticallyInitializableViewProtocol 
     }
 
     func addSubviews() {
-        self.addSubview(self.imageView)
+        self.addSubview(self.iconImageView)
         self.addSubview(self.titleLabel)
     }
 
     func makeConstraints() {
-        self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.imageView.snp.makeConstraints { make in
+        self.iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.iconImageView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.imageViewSize.height)
             make.width.equalTo(self.appearance.imageViewSize.width)
             make.leading.equalToSuperview()
