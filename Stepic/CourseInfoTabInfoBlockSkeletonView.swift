@@ -20,8 +20,21 @@ extension CourseInfoTabInfoBlockSkeletonView {
 final class CourseInfoTabInfoBlockSkeletonView: UIView {
     let appearance: Appearance
 
-    private lazy var imageViewSkeleton = UIView()
-    private lazy var titleLabelSkeleton = UIView()
+    private lazy var imageViewSkeleton: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = self.appearance.imageViewCornerRadius
+
+        return view
+    }()
+
+    private lazy var titleLabelSkeleton: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = self.appearance.titleLabelCornerRadius
+
+        return view
+    }()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -40,12 +53,6 @@ final class CourseInfoTabInfoBlockSkeletonView: UIView {
 extension CourseInfoTabInfoBlockSkeletonView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .clear
-
-        self.imageViewSkeleton.clipsToBounds = true
-        self.imageViewSkeleton.layer.cornerRadius = self.appearance.imageViewCornerRadius
-
-        self.titleLabelSkeleton.clipsToBounds = true
-        self.titleLabelSkeleton.layer.cornerRadius = self.appearance.titleLabelCornerRadius
     }
 
     func addSubviews() {
