@@ -38,7 +38,7 @@ enum CodeLanguage: String {
     case sql = "sql"
 
     static let allLanguages: [CodeLanguage] = [.python, .cpp11, .cpp, .c, .haskell, .haskell7,
-                               .haskell8, .java, .java8, .java9, .octave, .asm32, .asm64,
+                               .haskell8, .java, .java8, .java9, .java11, .octave, .asm32, .asm64,
                                .shell, .rust, .r, .ruby, .clojure, .cs, .javascript,
                                .scala, .kotlin, .go, .pascal, .perl, .sql]
 
