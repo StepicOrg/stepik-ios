@@ -17,17 +17,12 @@ extension CourseInfoTabInfoView {
     struct Appearance {
         let spacing: CGFloat = 0
 
-        let joinButton: JoinButton
-
-        struct JoinButton {
-            let insets = UIEdgeInsets(top: 32, left: 47, bottom: 47, right: 47)
-            let height: CGFloat = 47
-
-            let backgroundColor = UIColor(hex: 0x66CC66)
-            let font = UIFont.systemFont(ofSize: 14)
-            let textColor = UIColor.white
-            let cornerRadius: CGFloat = 7
-        }
+        let joinButtonInsets = UIEdgeInsets(top: 32, left: 47, bottom: 47, right: 47)
+        let joinButtonHeight: CGFloat = 47
+        let joinButtonBackgroundColor = UIColor(hex: 0x66CC66)
+        let joinButtonFont = UIFont.systemFont(ofSize: 14)
+        let joinButtonTextColor = UIColor.white
+        let joinButtonCornerRadius: CGFloat = 7
     }
 }
 
@@ -49,10 +44,10 @@ final class CourseInfoTabInfoView: UIView {
 
     private lazy var joinButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = self.appearance.joinButton.backgroundColor
-        button.titleLabel?.font = self.appearance.joinButton.font
-        button.tintColor = self.appearance.joinButton.textColor
-        button.layer.cornerRadius = self.appearance.joinButton.cornerRadius
+        button.backgroundColor = self.appearance.joinButtonBackgroundColor
+        button.titleLabel?.font = self.appearance.joinButtonFont
+        button.tintColor = self.appearance.joinButtonTextColor
+        button.layer.cornerRadius = self.appearance.joinButtonCornerRadius
 
         button.setTitle(NSLocalizedString("JoinCourse", comment: ""), for: .normal)
         button.addTarget(
@@ -66,7 +61,7 @@ final class CourseInfoTabInfoView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance(joinButton: .init()),
+        appearance: Appearance = Appearance(),
         delegate: CourseInfoTabInfoViewDelegate? = nil,
         blockViewBuilder: @escaping BlockViewBuilder
     ) {
@@ -119,10 +114,10 @@ final class CourseInfoTabInfoView: UIView {
 
         self.scrollableStackView.addArrangedView(buttonContainer)
         self.joinButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.joinButton.height)
+            make.height.equalTo(self.appearance.joinButtonHeight)
             make.leading.top.trailing.bottom
                 .equalToSuperview()
-                .inset(self.appearance.joinButton.insets)
+                .inset(self.appearance.joinButtonInsets)
         }
     }
 
