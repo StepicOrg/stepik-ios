@@ -70,7 +70,7 @@ class CodePlaygroundManager {
         switch language {
         case .python:
             return symbol == ":" ? (shouldMakeNewLine: true, paired: false) : (shouldMakeNewLine: false, paired: false)
-        case .c, .cpp11, .cpp, .java, .java8, .cs, .kotlin:
+        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin:
             return symbol == "{" ? (shouldMakeNewLine: true, paired: true) : (shouldMakeNewLine: false, paired: false)
         default:
             return (shouldMakeNewLine: false, paired: false)

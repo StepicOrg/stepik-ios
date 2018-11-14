@@ -25,7 +25,7 @@ struct AutocompleteWords {
         case .cs:
             suggestions = cs
             break
-        case .java, .java8:
+        case .java, .java8, .java9, .java11:
             suggestions = java
             break
         case .javascript:
