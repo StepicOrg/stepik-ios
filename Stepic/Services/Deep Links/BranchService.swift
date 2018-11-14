@@ -23,7 +23,7 @@ final class BranchService {
             }
 
             DispatchQueue.main.async { [weak self] in
-                self?.deepLinkRoutingService.route(DeepLinkRoute(data: data))
+                self?.deepLinkRoutingService.route(DeepLinkRoute(branchData: data))
             }
         }
     }
@@ -43,7 +43,7 @@ final class BranchService {
 
 // MARK: - DeepLinkRoute branch extension -
 extension DeepLinkRoute {
-    init?(data: [String: AnyObject]) {
+    init?(branchData data: [String: AnyObject]) {
         guard let screen = data["screen"] as? String else {
             return nil
         }
