@@ -1,4 +1,7 @@
 //
+// CourseInfoTabInfoBlockViewModelProtocol.swift
+// stepik-ios
+//
 // Created by Ivan Magda on 11/9/18.
 // Copyright (c) 2018 Alex Karpov. All rights reserved.
 //

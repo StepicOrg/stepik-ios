@@ -1,4 +1,7 @@
 //
+// CourseInfoTabInfoSkeletonView.swift
+// stepik-ios
+//
 // Created by Ivan Magda on 11/7/18.
 // Copyright (c) 2018 Alex Karpov. All rights reserved.
 //

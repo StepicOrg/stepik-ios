@@ -1,6 +1,6 @@
 //
-//  CourseInfoInstructorBlockView.swift
-//  Stepic
+// CourseInfoTabInfoInstructorsBlockView.swift
+// stepik-ios
 //
 //  Created by Ivan Magda on 11/1/18.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
