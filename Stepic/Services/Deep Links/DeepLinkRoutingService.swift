@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-class DeepLinkRoutingService {
+final class DeepLinkRoutingService {
 
     private var window: UIWindow? {
         return (UIApplication.shared.delegate as? AppDelegate)?.window

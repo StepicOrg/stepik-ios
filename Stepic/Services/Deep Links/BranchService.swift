@@ -9,8 +9,8 @@
 import Foundation
 import Branch
 
-class BranchService {
-    private var deepLinkRoutingService: DeepLinkRoutingService
+final class BranchService {
+    private let deepLinkRoutingService: DeepLinkRoutingService
 
     init(deepLinkRoutingService: DeepLinkRoutingService) {
         self.deepLinkRoutingService = deepLinkRoutingService
@@ -32,16 +32,16 @@ class BranchService {
         Branch.getInstance()?.continue(userActivity)
     }
 
-    func openURL(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) {
+    func openURL(app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) {
         Branch.getInstance().application(app, open: url, options: options)
     }
 
-    func isBranch(url: URL) -> Bool {
+    func canOpenWithBranch(url: URL) -> Bool {
         return url.host == "stepik.app.link" || url.host == "stepik-alternate.app.link"
     }
 }
 
-//DeepLinkRoute branch extension
+// MARK: - DeepLinkRoute branch extension -
 extension DeepLinkRoute {
     init?(data: [String: AnyObject]) {
         guard let screen = data["screen"] as? String else {
