@@ -54,7 +54,7 @@ final class CourseInfoTabInfoBlockView: UIView {
     }
 
     func configure(viewModel: CourseInfoTabInfoBlockViewModelProtocol) {
-        self.iconImageView.image = viewModel.image?.withRenderingMode(.alwaysTemplate)
+        self.iconImageView.image = viewModel.icon?.withRenderingMode(.alwaysTemplate)
         self.titleLabel.text = viewModel.title
     }
 }

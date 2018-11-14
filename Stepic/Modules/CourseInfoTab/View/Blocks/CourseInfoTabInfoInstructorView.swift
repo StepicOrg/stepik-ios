@@ -73,7 +73,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
         self.titleLabel.text = viewModel.title
         self.descriptionLabel.text = viewModel.description
 
-        self.loadImage(url: viewModel.avatarURL)
+        self.loadImage(url: viewModel.avatarImageURL)
     }
 
     private func loadImage(url: URL?) {

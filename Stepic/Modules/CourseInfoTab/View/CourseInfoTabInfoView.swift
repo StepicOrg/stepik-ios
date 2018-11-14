@@ -15,7 +15,10 @@ protocol CourseInfoTabInfoViewDelegate: class {
 
 extension CourseInfoTabInfoView {
     struct Appearance {
-        let spacing: CGFloat = 0
+        let stackViewSpacing: CGFloat = 0
+
+        let blockInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
+        let innerInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47)
 
         let joinButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
         let joinButtonHeight: CGFloat = 47
@@ -27,18 +30,15 @@ extension CourseInfoTabInfoView {
 }
 
 final class CourseInfoTabInfoView: UIView {
-    typealias BlockViewBuilder = (CourseInfoTabInfoBlockViewModelProtocol) -> UIView?
-
     weak var delegate: CourseInfoTabInfoViewDelegate?
 
     private let appearance: Appearance
-    private let blockViewBuilder: BlockViewBuilder
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
         stackView.showsVerticalScrollIndicator = false
         stackView.showsHorizontalScrollIndicator = false
-        stackView.spacing = self.appearance.spacing
+        stackView.spacing = self.appearance.stackViewSpacing
         return stackView
     }()
 
@@ -59,15 +59,15 @@ final class CourseInfoTabInfoView: UIView {
         return button
     }()
 
+    // MARK: Init
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        delegate: CourseInfoTabInfoViewDelegate? = nil,
-        blockViewBuilder: @escaping BlockViewBuilder
+        delegate: CourseInfoTabInfoViewDelegate? = nil
     ) {
         self.appearance = appearance
         self.delegate = delegate
-        self.blockViewBuilder = blockViewBuilder
         super.init(frame: frame)
 
         self.setupView()
@@ -78,6 +78,8 @@ final class CourseInfoTabInfoView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: Public API
 
     func showLoading() {
         self.skeleton.viewBuilder = {
@@ -91,19 +93,83 @@ final class CourseInfoTabInfoView: UIView {
     }
 
     func configure(viewModel: CourseInfoTabInfoViewModel) {
-        // TODO: Optimize here
         if !self.scrollableStackView.arrangedSubviews.isEmpty {
             self.scrollableStackView.removeAllArrangedViews()
         }
 
-        viewModel.blocks.forEach { viewModel in
-            if let blockView = self.blockViewBuilder(viewModel) {
-                blockView.translatesAutoresizingMaskIntoConstraints = false
-                self.scrollableStackView.addArrangedView(blockView)
-            }
-        }
+        let authorView = CourseInfoTabInfoTextBlockView(
+            appearance: .init(headerViewInsets: self.appearance.innerInsets)
+        )
+        authorView.configure(
+            viewModel: .init(
+                icon: self.getBlockIcon(.author),
+                title: "\(self.getBlockTitle(.author)) \(viewModel.author)",
+                message: ""
+            )
+        )
+        self.scrollableStackView.addArrangedView(authorView)
+
+        self.addIntroVideoView(introVideoURL: viewModel.introVideoURL)
+
+        self.addTextBlockView(block: .about, message: viewModel.aboutText)
+        self.addTextBlockView(block: .requirements, message: viewModel.requirementsText)
+        self.addTextBlockView(block: .targetAudience, message: viewModel.targetAudienceText)
+
+        self.addInstructorsView(instructors: viewModel.instructors)
+
+        self.addTextBlockView(block: .timeToComplete, message: viewModel.timeToCompleteText)
+        self.addTextBlockView(block: .language, message: viewModel.languageText)
+        self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
+        self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
 
         self.addJoinButton()
+    }
+
+    // MARK: Actions
+
+    @objc
+    private func joinButtonClicked(sender: UIButton) {
+        self.delegate?.courseInfoTabInfoViewDidTapOnJoin(self)
+    }
+
+    // MARK: Private API
+
+    private func addTextBlockView(
+        block: CourseInfoTabInfoBlock,
+        message: String,
+        headerViewInsets: UIEdgeInsets = Appearance().blockInsets
+    ) {
+        let textBlockView = CourseInfoTabInfoTextBlockView(
+            appearance: .init(headerViewInsets: headerViewInsets)
+        )
+        textBlockView.configure(
+            viewModel: .init(
+                icon: self.getBlockIcon(block),
+                title: self.getBlockTitle(block),
+                message: message
+            )
+        )
+        self.scrollableStackView.addArrangedView(textBlockView)
+    }
+
+    private func addIntroVideoView(introVideoURL: URL?) {
+        let introVideoView = CourseInfoTabInfoIntroVideoBlockView()
+        introVideoView.configure(
+            viewModel: .init(introURL: introVideoURL)
+        )
+        self.scrollableStackView.addArrangedView(introVideoView)
+    }
+
+    private func addInstructorsView(instructors: [CourseInfoTabInfoInstructorViewModel]) {
+        let instructorsView = CourseInfoTabInfoInstructorsBlockView()
+        instructorsView.configure(
+            viewModel: .init(
+                icon: self.getBlockIcon(.instructors),
+                title: self.getBlockTitle(.instructors),
+                instructors: instructors
+            )
+        )
+        self.scrollableStackView.addArrangedView(instructorsView)
     }
 
     private func addJoinButton() {
@@ -121,11 +187,68 @@ final class CourseInfoTabInfoView: UIView {
         }
     }
 
-    @objc
-    private func joinButtonClicked(sender: UIButton) {
-        self.delegate?.courseInfoTabInfoViewDidTapOnJoin(self)
+    private func getBlockIcon(_ block: CourseInfoTabInfoBlock) -> UIImage? {
+        return self.getResources(block: block).icon
+    }
+
+    private func getBlockTitle(_ block: CourseInfoTabInfoBlock) -> String {
+        return self.getResources(block: block).title
+    }
+
+    private func getResources(block: CourseInfoTabInfoBlock) -> (title: String, icon: UIImage?) {
+        switch block {
+        case .author:
+            return (
+                NSLocalizedString("CourseInfoTitleAuthor", comment: ""),
+                UIImage(named: "course-info-instructor")
+            )
+        case .introVideo:
+            return ("", nil)
+        case .about:
+            return (
+                NSLocalizedString("CourseInfoTitleAbout", comment: ""),
+                UIImage(named: "course-info-about")
+            )
+        case .requirements:
+            return (
+                NSLocalizedString("CourseInfoTitleRequirements", comment: ""),
+                UIImage(named: "course-info-requirements")
+            )
+        case .targetAudience:
+            return (
+                NSLocalizedString("CourseInfoTitleTargetAudience", comment: ""),
+                UIImage(named: "course-info-target-audience")
+            )
+        case .instructors:
+            return (
+                NSLocalizedString("CourseInfoTitleInstructors", comment: ""),
+                UIImage(named: "course-info-instructor")
+            )
+        case .timeToComplete:
+            return (
+                NSLocalizedString("CourseInfoTitleTimeToComplete", comment: ""),
+                UIImage(named: "course-info-time-to-complete")
+            )
+        case .language:
+            return (
+                NSLocalizedString("CourseInfoTitleLanguage", comment: ""),
+                UIImage(named: "course-info-language")
+            )
+        case .certificate:
+            return (
+                NSLocalizedString("CourseInfoTitleCertificate", comment: ""),
+                UIImage(named: "course-info-certificate")
+            )
+        case .certificateDetails:
+            return (
+                NSLocalizedString("CourseInfoTitleCertificateDetails", comment: ""),
+                UIImage(named: "course-info-certificate-details")
+            )
+        }
     }
 }
+
+// MARK: - CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol -
 
 extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {

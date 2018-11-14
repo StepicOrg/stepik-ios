@@ -9,32 +9,39 @@
 import UIKit
 
 struct CourseInfoTabInfoViewModel {
-    let blocks: [CourseInfoTabInfoBlockViewModelProtocol]
-}
+    let author: String
+    let introVideoURL: URL?
 
-struct CourseInfoTabInfoTextBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    let blockType: CourseInfoTabInfoBlock
-    let message: String
-}
+    let aboutText: String
+    let requirementsText: String
+    let targetAudienceText: String
 
-struct CourseInfoTabInfoIntroVideoBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    var blockType: CourseInfoTabInfoBlock {
-        return .introVideo
-    }
+    let timeToCompleteText: String
+    let languageText: String
+    let certificateText: String
+    let certificateDetailsText: String
 
-    let introURL: URL?
+    let instructors: [CourseInfoTabInfoInstructorViewModel]
 }
 
 struct CourseInfoTabInfoInstructorViewModel {
-    let avatarURL: URL?
+    let avatarImageURL: URL?
     let title: String
     let description: String
 }
 
 struct CourseInfoTabInfoInstructorsBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    var blockType: CourseInfoTabInfoBlock {
-        return .instructors
-    }
-
+    let icon: UIImage?
+    let title: String
     let instructors: [CourseInfoTabInfoInstructorViewModel]
+}
+
+struct CourseInfoTabInfoTextBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
+    let icon: UIImage?
+    let title: String
+    let message: String
+}
+
+struct CourseInfoTabInfoIntroVideoBlockViewModel {
+    let introURL: URL?
 }
