@@ -28,7 +28,7 @@ final class BranchService {
         }
     }
 
-    func openURL(userActivity: NSUserActivity) {
+    func continueUserActivity(_ userActivity: NSUserActivity) {
         Branch.getInstance()?.continue(userActivity)
     }
 
@@ -43,20 +43,28 @@ final class BranchService {
 
 // MARK: - DeepLinkRoute branch extension -
 extension DeepLinkRoute {
+    enum BranchPayload: String {
+        case screen
+        case course
+    }
+
+    enum BranchDeepLink: String {
+        case course
+    }
+
     init?(branchData data: [String: AnyObject]) {
-        guard let screen = data["screen"] as? String else {
+        guard let screen = data[BranchPayload.screen.rawValue] as? String,
+              let branchDeepLink = BranchDeepLink(rawValue: screen) else {
             return nil
         }
 
-        switch screen {
-        case "course":
-            if let idString = data["course"] as? String,
+        switch branchDeepLink {
+        case .course:
+            if let idString = data[BranchPayload.course.rawValue] as? String,
                let id = Int(idString) {
                 self = .course(courseID: id)
                 return
             }
-        default:
-            return nil
         }
         return nil
     }

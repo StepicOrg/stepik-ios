@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         self.didChangeOrientation()
 
-        branchService.setup(launchOptions: launchOptions)
+        self.branchService.setup(launchOptions: launchOptions)
 
         return true
     }
@@ -202,7 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
                 if branchService.canOpenWithBranch(url: url) {
-                    branchService.openURL(userActivity: userActivity)
+                    branchService.continueUserActivity(userActivity)
                 } else {
                     self.handleOpenedFromDeepLink(url)
                 }
