@@ -1,5 +1,5 @@
 //
-// CourseInfoTabInfoBlockView.swift
+// CourseInfoTabInfoHeaderView.swift
 // stepik-ios
 //
 //  Created by Ivan Magda on 11/1/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoTabInfoBlockView {
+extension CourseInfoTabInfoHeaderView {
     struct Appearance {
         let imageViewSize = CGSize(width: 12, height: 12)
         let imageViewTintColor = UIColor.mainDark
@@ -20,7 +20,19 @@ extension CourseInfoTabInfoBlockView {
     }
 }
 
-final class CourseInfoTabInfoBlockView: UIView {
+final class CourseInfoTabInfoHeaderView: UIView {
+    var icon: UIImage? {
+        didSet {
+            self.iconImageView.image = self.icon?.withRenderingMode(.alwaysTemplate)
+        }
+    }
+
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
+
     private let appearance: Appearance
 
     private lazy var iconImageView: UIImageView = {
@@ -52,14 +64,9 @@ final class CourseInfoTabInfoBlockView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    func configure(viewModel: CourseInfoTabInfoBlockViewModelProtocol) {
-        self.iconImageView.image = viewModel.icon?.withRenderingMode(.alwaysTemplate)
-        self.titleLabel.text = viewModel.title
-    }
 }
 
-extension CourseInfoTabInfoBlockView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
     }

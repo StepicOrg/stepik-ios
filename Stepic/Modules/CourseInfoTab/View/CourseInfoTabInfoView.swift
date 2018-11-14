@@ -100,13 +100,8 @@ final class CourseInfoTabInfoView: UIView {
         let authorView = CourseInfoTabInfoTextBlockView(
             appearance: .init(headerViewInsets: self.appearance.innerInsets)
         )
-        authorView.configure(
-            viewModel: .init(
-                icon: self.getBlockIcon(.author),
-                title: "\(self.getBlockTitle(.author)) \(viewModel.author)",
-                message: ""
-            )
-        )
+        authorView.headerView.icon = Block.author.icon
+        authorView.headerView.title = "\(Block.author.title) \(viewModel.author)"
         self.scrollableStackView.addArrangedView(authorView)
 
         self.addIntroVideoView(introVideoURL: viewModel.introVideoURL)
@@ -135,40 +130,27 @@ final class CourseInfoTabInfoView: UIView {
     // MARK: Private API
 
     private func addTextBlockView(
-        block: CourseInfoTabInfoBlock,
+        block: Block,
         message: String,
         headerViewInsets: UIEdgeInsets = Appearance().blockInsets
     ) {
         let textBlockView = CourseInfoTabInfoTextBlockView(
             appearance: .init(headerViewInsets: headerViewInsets)
         )
-        textBlockView.configure(
-            viewModel: .init(
-                icon: self.getBlockIcon(block),
-                title: self.getBlockTitle(block),
-                message: message
-            )
-        )
+        textBlockView.headerView.icon = block.icon
+        textBlockView.headerView.title = block.title
+        textBlockView.message = message
+
         self.scrollableStackView.addArrangedView(textBlockView)
     }
 
     private func addIntroVideoView(introVideoURL: URL?) {
-        let introVideoView = CourseInfoTabInfoIntroVideoBlockView()
-        introVideoView.configure(
-            viewModel: .init(introURL: introVideoURL)
-        )
-        self.scrollableStackView.addArrangedView(introVideoView)
+        self.scrollableStackView.addArrangedView(CourseInfoTabInfoIntroVideoBlockView())
     }
 
     private func addInstructorsView(instructors: [CourseInfoTabInfoInstructorViewModel]) {
         let instructorsView = CourseInfoTabInfoInstructorsBlockView()
-        instructorsView.configure(
-            viewModel: .init(
-                icon: self.getBlockIcon(.instructors),
-                title: self.getBlockTitle(.instructors),
-                instructors: instructors
-            )
-        )
+        instructorsView.configure(instructors: instructors)
         self.scrollableStackView.addArrangedView(instructorsView)
     }
 
@@ -184,66 +166,6 @@ final class CourseInfoTabInfoView: UIView {
             make.leading.top.trailing.bottom
                 .equalToSuperview()
                 .inset(self.appearance.joinButtonInsets)
-        }
-    }
-
-    private func getBlockIcon(_ block: CourseInfoTabInfoBlock) -> UIImage? {
-        return self.getResources(block: block).icon
-    }
-
-    private func getBlockTitle(_ block: CourseInfoTabInfoBlock) -> String {
-        return self.getResources(block: block).title
-    }
-
-    private func getResources(block: CourseInfoTabInfoBlock) -> (title: String, icon: UIImage?) {
-        switch block {
-        case .author:
-            return (
-                NSLocalizedString("CourseInfoTitleAuthor", comment: ""),
-                UIImage(named: "course-info-instructor")
-            )
-        case .introVideo:
-            return ("", nil)
-        case .about:
-            return (
-                NSLocalizedString("CourseInfoTitleAbout", comment: ""),
-                UIImage(named: "course-info-about")
-            )
-        case .requirements:
-            return (
-                NSLocalizedString("CourseInfoTitleRequirements", comment: ""),
-                UIImage(named: "course-info-requirements")
-            )
-        case .targetAudience:
-            return (
-                NSLocalizedString("CourseInfoTitleTargetAudience", comment: ""),
-                UIImage(named: "course-info-target-audience")
-            )
-        case .instructors:
-            return (
-                NSLocalizedString("CourseInfoTitleInstructors", comment: ""),
-                UIImage(named: "course-info-instructor")
-            )
-        case .timeToComplete:
-            return (
-                NSLocalizedString("CourseInfoTitleTimeToComplete", comment: ""),
-                UIImage(named: "course-info-time-to-complete")
-            )
-        case .language:
-            return (
-                NSLocalizedString("CourseInfoTitleLanguage", comment: ""),
-                UIImage(named: "course-info-language")
-            )
-        case .certificate:
-            return (
-                NSLocalizedString("CourseInfoTitleCertificate", comment: ""),
-                UIImage(named: "course-info-certificate")
-            )
-        case .certificateDetails:
-            return (
-                NSLocalizedString("CourseInfoTitleCertificateDetails", comment: ""),
-                UIImage(named: "course-info-certificate-details")
-            )
         }
     }
 }
@@ -263,6 +185,73 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+}
+
+// MARK: - CourseInfoTabInfoView (Block) -
+
+extension CourseInfoTabInfoView {
+    enum Block {
+        case author
+        case introVideo
+        case about
+        case requirements
+        case targetAudience
+        case instructors
+        case timeToComplete
+        case language
+        case certificate
+        case certificateDetails
+
+        var icon: UIImage? {
+            switch self {
+            case .author:
+                return UIImage(named: "course-info-instructor")
+            case .introVideo:
+                return nil
+            case .about:
+                return UIImage(named: "course-info-about")
+            case .requirements:
+                return UIImage(named: "course-info-requirements")
+            case .targetAudience:
+                return UIImage(named: "course-info-target-audience")
+            case .instructors:
+                return UIImage(named: "course-info-instructor")
+            case .timeToComplete:
+                return UIImage(named: "course-info-time-to-complete")
+            case .language:
+                return UIImage(named: "course-info-language")
+            case .certificate:
+                return UIImage(named: "course-info-certificate")
+            case .certificateDetails:
+                return UIImage(named: "course-info-certificate-details")
+            }
+        }
+
+        var title: String {
+            switch self {
+            case .author:
+                return NSLocalizedString("CourseInfoTitleAuthor", comment: "")
+            case .introVideo:
+                return ""
+            case .about:
+                return NSLocalizedString("CourseInfoTitleAbout", comment: "")
+            case .requirements:
+                return NSLocalizedString("CourseInfoTitleRequirements", comment: "")
+            case .targetAudience:
+                return NSLocalizedString("CourseInfoTitleTargetAudience", comment: "")
+            case .instructors:
+                return NSLocalizedString("CourseInfoTitleInstructors", comment: "")
+            case .timeToComplete:
+                return NSLocalizedString("CourseInfoTitleTimeToComplete", comment: "")
+            case .language:
+                return NSLocalizedString("CourseInfoTitleLanguage", comment: "")
+            case .certificate:
+                return NSLocalizedString("CourseInfoTitleCertificate", comment: "")
+            case .certificateDetails:
+                return NSLocalizedString("CourseInfoTitleCertificateDetails", comment: "")
+            }
         }
     }
 }

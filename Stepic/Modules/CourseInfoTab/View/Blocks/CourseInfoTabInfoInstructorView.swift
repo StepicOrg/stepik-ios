@@ -27,6 +27,24 @@ extension CourseInfoTabInfoInstructorView {
 }
 
 final class CourseInfoTabInfoInstructorView: UIView {
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
+
+    var summary: String? {
+        didSet {
+            self.descriptionLabel.text = self.summary
+        }
+    }
+
+    var avatarImageURL: URL? {
+        didSet {
+            self.loadImage(url: self.avatarImageURL)
+        }
+    }
+
     private let appearance: Appearance
 
     private lazy var imageView: UIImageView = {
@@ -67,13 +85,6 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func configure(viewModel: CourseInfoTabInfoInstructorViewModel) {
-        self.titleLabel.text = viewModel.title
-        self.descriptionLabel.text = viewModel.description
-
-        self.loadImage(url: viewModel.avatarImageURL)
     }
 
     private func loadImage(url: URL?) {

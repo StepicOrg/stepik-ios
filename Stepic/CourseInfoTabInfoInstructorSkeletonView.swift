@@ -27,9 +27,26 @@ extension CourseInfoTabInfoInstructorSkeletonView {
 final class CourseInfoTabInfoInstructorSkeletonView: UIView {
     private let appearance: Appearance
 
-    private lazy var imageViewSkeleton = UIView()
-    private lazy var titleLabelSkeleton = UIView()
-    private lazy var descriptionLabelSkeleton = UIView()
+    private lazy var imageViewSkeleton: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = self.appearance.imageViewCornerRadius
+        return view
+    }()
+
+    private lazy var titleLabelSkeleton: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = self.appearance.labelsCornerRadius
+        return view
+    }()
+
+    private lazy var descriptionLabelSkeleton: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = self.appearance.labelsCornerRadius
+        return view
+    }()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -48,15 +65,6 @@ final class CourseInfoTabInfoInstructorSkeletonView: UIView {
 extension CourseInfoTabInfoInstructorSkeletonView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .clear
-
-        self.imageViewSkeleton.clipsToBounds = true
-        self.imageViewSkeleton.layer.cornerRadius = self.appearance.imageViewCornerRadius
-
-        self.titleLabelSkeleton.clipsToBounds = true
-        self.titleLabelSkeleton.layer.cornerRadius = self.appearance.labelsCornerRadius
-
-        self.descriptionLabelSkeleton.clipsToBounds = true
-        self.descriptionLabelSkeleton.layer.cornerRadius = self.appearance.labelsCornerRadius
     }
 
     func addSubviews() {

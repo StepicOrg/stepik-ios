@@ -29,19 +29,3 @@ struct CourseInfoTabInfoInstructorViewModel {
     let title: String
     let description: String
 }
-
-struct CourseInfoTabInfoInstructorsBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    let icon: UIImage?
-    let title: String
-    let instructors: [CourseInfoTabInfoInstructorViewModel]
-}
-
-struct CourseInfoTabInfoTextBlockViewModel: CourseInfoTabInfoBlockViewModelProtocol {
-    let icon: UIImage?
-    let title: String
-    let message: String
-}
-
-struct CourseInfoTabInfoIntroVideoBlockViewModel {
-    let introURL: URL?
-}

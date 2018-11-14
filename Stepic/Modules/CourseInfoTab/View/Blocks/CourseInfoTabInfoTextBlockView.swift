@@ -20,9 +20,15 @@ extension CourseInfoTabInfoTextBlockView {
 }
 
 final class CourseInfoTabInfoTextBlockView: UIView {
+    var message: String? {
+        didSet {
+            self.messageLabel.text = self.message
+        }
+    }
+
     private let appearance: Appearance
 
-    private lazy var headerView = CourseInfoTabInfoBlockView()
+    private(set) lazy var headerView = CourseInfoTabInfoHeaderView()
 
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
@@ -46,11 +52,6 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func configure(viewModel: CourseInfoTabInfoTextBlockViewModel) {
-        self.headerView.configure(viewModel: viewModel)
-        self.messageLabel.text = viewModel.message
     }
 }
 

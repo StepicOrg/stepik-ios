@@ -40,9 +40,6 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    func configure(viewModel: CourseInfoTabInfoIntroVideoBlockViewModel) {
-    }
 }
 
 extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableViewProtocol {

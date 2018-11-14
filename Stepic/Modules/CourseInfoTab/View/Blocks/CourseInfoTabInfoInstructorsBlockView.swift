@@ -21,7 +21,7 @@ extension CourseInfoTabInfoInstructorsBlockView {
 final class CourseInfoTabInfoInstructorsBlockView: UIView {
     private let appearance: Appearance
 
-    private lazy var headerView = CourseInfoTabInfoBlockView()
+    private lazy var headerView = CourseInfoTabInfoHeaderView()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -46,16 +46,20 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: CourseInfoTabInfoInstructorsBlockViewModel) {
-        self.headerView.configure(viewModel: viewModel)
+    func configure(instructors: [CourseInfoTabInfoInstructorViewModel]) {
+        self.headerView.icon = CourseInfoTabInfoView.Block.instructors.icon
+        self.headerView.title = CourseInfoTabInfoView.Block.instructors.title
 
         if !self.stackView.arrangedSubviews.isEmpty {
             self.stackView.removeAllArrangedSubviews()
         }
 
-        viewModel.instructors.forEach { instructor in
+        instructors.forEach { instructor in
             let view = CourseInfoTabInfoInstructorView()
-            view.configure(viewModel: instructor)
+            view.avatarImageURL = instructor.avatarImageURL
+            view.title = instructor.title
+            view.summary = instructor.description
+
             self.stackView.addArrangedSubview(view)
         }
     }
