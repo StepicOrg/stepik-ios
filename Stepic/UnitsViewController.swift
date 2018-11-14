@@ -38,7 +38,13 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection), for: .connectionError)
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { self.refresh() }
+            ),
+            for: .connectionError
+        )
 
         updateTitle()
         self.navigationItem.backBarButtonItem?.title = " "
@@ -211,6 +217,10 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
 
         if let section = section {
+            if section.units.count > 0 {
+                self.isPlaceholderShown = false
+            }
+
             section.loadProgressesForUnits(units: section.units, completion: {
                 UIThread.performUI({
                     self.tableView.reloadData()
