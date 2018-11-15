@@ -28,7 +28,7 @@ final class CourseInfoTabInfoTextBlockView: UIView {
 
     private let appearance: Appearance
 
-    private(set) lazy var headerView = CourseInfoTabInfoHeaderView()
+    lazy var headerView = CourseInfoTabInfoHeaderView()
 
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
