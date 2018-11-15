@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabInfoInteractorProtocol {
-    func doSomeAction(request: CourseInfoTabInfo.Something.Request)
+    func getCourseInfo(request: CourseInfoTabInfo.ShowInfo.Request)
 }
 
 final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, CourseInfoTabInfoInputProtocol {
@@ -19,7 +19,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
 
     var course: Course? {
         didSet {
-            self.doSomeAction(request: .init())
+            self.getCourseInfo(request: .init())
         }
     }
 
@@ -31,21 +31,11 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
         self.provider = provider
     }
 
-    // MARK: Do some action
+    // MARK: Get course info
 
-    func doSomeAction(request: CourseInfoTabInfo.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: CourseInfoTabInfo.Something.Response(result: .success(items))
-            )
-        }.catch { _ in
-            self.presenter.presentSomething(
-                response: CourseInfoTabInfo.Something.Response(result: .failure(Error.fetchFailed))
-            )
-        }
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
+    func getCourseInfo(request: CourseInfoTabInfo.ShowInfo.Request) {
+        self.presenter.presentCourseInfo(
+            response: .init(course: self.course)
+        )
     }
 }

@@ -9,30 +9,27 @@
 import UIKit
 
 protocol CourseInfoTabInfoPresenterProtocol {
-    func presentSomething(response: CourseInfoTabInfo.Something.Response)
+    func presentCourseInfo(response: CourseInfoTabInfo.ShowInfo.Response)
 }
 
 final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     weak var viewController: CourseInfoTabInfoViewControllerProtocol?
 
-    func presentSomething(response: CourseInfoTabInfo.Something.Response) {
-        var viewModel: CourseInfoTabInfo.Something.ViewModel
+    func presentCourseInfo(response: CourseInfoTabInfo.ShowInfo.Response) {
+        var viewModel: CourseInfoTabInfo.ShowInfo.ViewModel
 
-        switch response.result {
-        case let .failure(error):
-            viewModel = CourseInfoTabInfo.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case let .success(result):
-            if result.isEmpty {
-                viewModel = CourseInfoTabInfo.Something.ViewModel(state: .emptyResult)
-            } else {
-                viewModel = CourseInfoTabInfo.Something.ViewModel(state: .result(data: result))
-            }
+        if let course = response.course {
+            viewModel = .init(state: .result(data: self.courseToViewModel(course: course)))
+        } else {
+            viewModel = .init(state: .loading)
         }
 
-        viewController?.displaySomething(viewModel: viewModel)
+        self.viewController?.displayCourseInfo(viewModel: viewModel)
     }
 
-    private func getViewModel() -> CourseInfoTabInfoViewModel {
+    // MARK: Prepare view data
+
+    private func courseToViewModel(course: Course) -> CourseInfoTabInfoViewModel {
         return CourseInfoTabInfoViewModel(
             author: "Yandex",
             introVideoURL: URL(string: "https://player.vimeo.com/external/161974070.hd.mp4?s=19ff926134e7cbbc7e8ce161e3af9c3bb87d5c1a&profile_id=174&oauth2_token_id=3605157?playsinline=1"),

@@ -82,6 +82,8 @@ final class CourseInfoTabInfoView: UIView {
     // MARK: Public API
 
     func showLoading() {
+        self.hideLoading()
+
         self.skeleton.viewBuilder = {
             CourseInfoTabInfoSkeletonView()
         }

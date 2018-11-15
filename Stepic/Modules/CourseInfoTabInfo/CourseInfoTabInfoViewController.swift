@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CourseInfoTabInfoViewControllerProtocol: class {
-    func displaySomething(viewModel: CourseInfoTabInfo.Something.ViewModel)
+    func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel)
 }
 
 final class CourseInfoTabInfoViewController: UIViewController {
@@ -22,6 +22,8 @@ final class CourseInfoTabInfoViewController: UIViewController {
             self.updateState()
         }
     }
+
+    // MARK: Init
 
     init(
         interactor: CourseInfoTabInfoInteractorProtocol,
@@ -47,14 +49,14 @@ final class CourseInfoTabInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateState()
-        self.someAction()
+        self.showCourseInfo()
     }
 
     // MARK: Requests logic
 
-    private func someAction() {
-        self.interactor.doSomeAction(
-            request: CourseInfoTabInfo.Something.Request()
+    private func showCourseInfo() {
+        self.interactor.getCourseInfo(
+            request: CourseInfoTabInfo.ShowInfo.Request()
         )
     }
 
@@ -69,19 +71,23 @@ final class CourseInfoTabInfoViewController: UIViewController {
     }
 }
 
+// MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtocol -
+
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtocol {
-    func displaySomething(viewModel: CourseInfoTabInfo.Something.ViewModel) {
+    func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel) {
         self.display(newState: viewModel.state)
     }
 
-    func display(newState: CourseInfoTabInfo.ViewControllerState) {
-//        if case .result(let viewModel) = newState {
-//            self.courseInfoTabView?.configure(with: viewModel)
-//        }
+    private func display(newState: CourseInfoTabInfo.ViewControllerState) {
+        if case .result(let viewModel) = newState {
+            self.infoView?.configure(viewModel: viewModel)
+        }
 
         self.state = newState
     }
 }
+
+// MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
     func courseInfoTabInfoViewDidTapOnJoin(_ courseInfoTabInfoView: CourseInfoTabInfoView) {

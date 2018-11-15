@@ -11,12 +11,12 @@ import Foundation
 enum CourseInfoTabInfo {
     // MARK: Use cases
 
-    enum Something {
+    enum ShowInfo {
         struct Request {
         }
 
         struct Response {
-            var result: Result<[Any]>
+            let course: Course?
         }
 
         struct ViewModel {
@@ -28,8 +28,6 @@ enum CourseInfoTabInfo {
 
     enum ViewControllerState {
         case loading
-        case result(data: [Any])
-        case emptyResult
-        case error(message: String)
+        case result(data: CourseInfoTabInfoViewModel)
     }
 }

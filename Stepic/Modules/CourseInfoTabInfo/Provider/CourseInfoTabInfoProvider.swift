@@ -16,7 +16,7 @@ protocol CourseInfoTabInfoProviderProtocol {
 final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
     func fetchSomeItems() -> Promise<[Any]> {
         return Promise<[Any]> { seal in
-            seal.fulfill(["" as Any])
+            seal.fulfill([""])
         }
     }
 }

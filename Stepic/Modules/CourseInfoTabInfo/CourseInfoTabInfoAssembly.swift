@@ -9,6 +9,7 @@
 import UIKit
 
 final class CourseInfoTabInfoAssembly: Assembly {
+    // Input
     var moduleInput: CourseInfoTabInfoInputProtocol?
 
     func makeModule() -> UIViewController {
