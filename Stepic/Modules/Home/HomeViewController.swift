@@ -64,10 +64,15 @@ final class HomeViewController: BaseExploreViewController {
     // TODO: Remove
     @objc
     private func openCourseInfo() {
+        let assembly = CourseInfoTabInfoAssembly()
         self.navigationController?.pushViewController(
-            CourseInfoTabInfoViewController(),
+            assembly.makeModule(),
             animated: true
         )
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            assembly.moduleInput?.course = Course.getAllCourses().first
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

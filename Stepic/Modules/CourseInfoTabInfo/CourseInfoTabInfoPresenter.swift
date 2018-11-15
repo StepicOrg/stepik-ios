@@ -1,34 +1,37 @@
 //
-// CourseInfoTabInfoViewController.swift
-// stepik-ios
+//  CourseInfoTabInfoPresenter.swift
+//  stepik-ios
 //
-// Created by Ivan Magda on 11/9/18.
-// Copyright (c) 2018 Alex Karpov. All rights reserved.
+//  Created by Ivan Magda on 15/11/2018.
+//  Copyright 2018 Stepik. All rights reserved.
 //
 
 import UIKit
 
-final class CourseInfoTabInfoViewController: UIViewController {
-    private lazy var courseInfoView = self.view as? CourseInfoTabInfoView
+protocol CourseInfoTabInfoPresenterProtocol {
+    func presentSomething(response: CourseInfoTabInfo.Something.Response)
+}
 
-    // MARK: - Lifecycle
+final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
+    weak var viewController: CourseInfoTabInfoViewControllerProtocol?
 
-    override func loadView() {
-        self.view = CourseInfoTabInfoView()
-    }
+    func presentSomething(response: CourseInfoTabInfo.Something.Response) {
+        var viewModel: CourseInfoTabInfo.Something.ViewModel
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // TODO: For testing
-        self.courseInfoView?.showLoading()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.courseInfoView?.hideLoading()
-            self.courseInfoView?.configure(viewModel: self.getViewModel())
+        switch response.result {
+        case let .failure(error):
+            viewModel = CourseInfoTabInfo.Something.ViewModel(state: .error(message: error.localizedDescription))
+        case let .success(result):
+            if result.isEmpty {
+                viewModel = CourseInfoTabInfo.Something.ViewModel(state: .emptyResult)
+            } else {
+                viewModel = CourseInfoTabInfo.Something.ViewModel(state: .result(data: result))
+            }
         }
+
+        viewController?.displaySomething(viewModel: viewModel)
     }
 
-    // TODO: For testing
     private func getViewModel() -> CourseInfoTabInfoViewModel {
         return CourseInfoTabInfoViewModel(
             author: "Yandex",
