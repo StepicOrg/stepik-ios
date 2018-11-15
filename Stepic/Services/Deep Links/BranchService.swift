@@ -32,7 +32,11 @@ final class BranchService {
         Branch.getInstance()?.continue(userActivity)
     }
 
-    func openURL(app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) {
+    func openURL(
+        app: UIApplication,
+        open url: URL,
+        options: [UIApplicationOpenURLOptionsKey: Any]
+    ) {
         Branch.getInstance().application(app, open: url, options: options)
     }
 
@@ -43,12 +47,12 @@ final class BranchService {
 
 // MARK: - DeepLinkRoute branch extension -
 extension DeepLinkRoute {
-    enum BranchPayload: String {
+    private enum BranchPayload: String {
         case screen
         case course
     }
 
-    enum BranchDeepLink: String {
+    private enum BranchDeepLink: String {
         case course
     }
 
