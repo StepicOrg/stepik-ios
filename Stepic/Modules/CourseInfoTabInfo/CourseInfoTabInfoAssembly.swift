@@ -13,7 +13,9 @@ final class CourseInfoTabInfoAssembly: Assembly {
     var moduleInput: CourseInfoTabInfoInputProtocol?
 
     func makeModule() -> UIViewController {
-        let provider = CourseInfoTabInfoProvider()
+        let provider = CourseInfoTabInfoProvider(
+            usersAPI: UsersAPI()
+        )
         let presenter = CourseInfoTabInfoPresenter()
         let interactor = CourseInfoTabInfoInteractor(
             presenter: presenter,

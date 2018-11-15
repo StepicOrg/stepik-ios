@@ -10,13 +10,29 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabInfoProviderProtocol {
-    func fetchSomeItems() -> Promise<[Any]>
+    func fetchInstructors(course: Course) -> Promise<[User]>
 }
 
 final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
-    func fetchSomeItems() -> Promise<[Any]> {
-        return Promise<[Any]> { seal in
-            seal.fulfill([""])
+    private let usersAPI: UsersAPI
+
+    init(usersAPI: UsersAPI) {
+        self.usersAPI = usersAPI
+    }
+
+    func fetchInstructors(course: Course) -> Promise<[User]> {
+        return Promise { seal in
+            self.usersAPI.retrieve(
+                ids: course.instructorsArray,
+                existing: course.instructors,
+                refreshMode: .update,
+                success: { users in
+                    seal.fulfill(users)
+                },
+                error: { error in
+                    seal.reject(error)
+                }
+            )
         }
     }
 }

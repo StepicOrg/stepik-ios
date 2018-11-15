@@ -34,8 +34,20 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
     // MARK: Get course info
 
     func getCourseInfo(request: CourseInfoTabInfo.ShowInfo.Request) {
-        self.presenter.presentCourseInfo(
-            response: .init(course: self.course)
-        )
+        self.fetchInstructors().done {
+            self.presenter.presentCourseInfo(
+                response: .init(course: self.course)
+            )
+        }
+    }
+
+    private func fetchInstructors() -> Promise<Void> {
+        if let course = self.course {
+            return self.provider.fetchInstructors(course: course).done { users in
+                course.instructors = Sorter.sort(users, byIds: course.instructorsArray)
+            }
+        } else {
+            return .value(())
+        }
     }
 }

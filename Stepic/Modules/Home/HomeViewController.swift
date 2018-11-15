@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
@@ -62,6 +63,7 @@ final class HomeViewController: BaseExploreViewController {
     }
 
     // TODO: Remove
+    private let coursesAPI = CoursesAPI()
     @objc
     private func openCourseInfo() {
         let assembly = CourseInfoTabInfoAssembly()
@@ -71,7 +73,9 @@ final class HomeViewController: BaseExploreViewController {
         )
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            assembly.moduleInput?.course = Course.getAllCourses().first
+            self.coursesAPI.retrieve(ids: [191]).done { courses in
+                assembly.moduleInput?.course = courses.first
+            }
         }
     }
 
