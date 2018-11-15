@@ -1,5 +1,5 @@
 //
-// CourseInfoTabInfoHeaderSkeletonView.swift
+// CourseInfoTabInfoHeaderBlockSkeletonView.swift
 // stepik-ios
 //
 // Created by Ivan Magda on 11/9/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoTabInfoHeaderSkeletonView {
+extension CourseInfoTabInfoHeaderBlockSkeletonView {
     struct Appearance {
         let imageViewSize = CGSize(width: 12, height: 12)
         let imageViewCornerRadius: CGFloat = 1
@@ -20,7 +20,7 @@ extension CourseInfoTabInfoHeaderSkeletonView {
     }
 }
 
-final class CourseInfoTabInfoHeaderSkeletonView: UIView {
+final class CourseInfoTabInfoHeaderBlockSkeletonView: UIView {
     private let appearance: Appearance
 
     private lazy var imageViewSkeleton: UIView = {
@@ -54,7 +54,7 @@ final class CourseInfoTabInfoHeaderSkeletonView: UIView {
     }
 }
 
-extension CourseInfoTabInfoHeaderSkeletonView: ProgrammaticallyInitializableViewProtocol {
+extension CourseInfoTabInfoHeaderBlockSkeletonView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .clear
     }

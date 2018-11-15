@@ -28,7 +28,7 @@ final class CourseInfoTabInfoSkeletonView: UIView {
     private let countInstructors: Int
 
     private lazy var authorViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
@@ -36,55 +36,55 @@ final class CourseInfoTabInfoSkeletonView: UIView {
     private lazy var introVideoViewSkeleton = UIView()
 
     private lazy var aboutHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
     private lazy var aboutMessageLabelSkeleton = UIView()
 
     private lazy var requirementsHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
     private lazy var requirementsMessageLabelSkeleton = UIView()
 
     private lazy var targetAudienceHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
     private lazy var targetAudienceMessageLabelSkeleton = UIView()
 
     private lazy var instructorsHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
 
     private lazy var timeToCompleteHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
     private lazy var timeToCompleteMessageLabelSkeleton = UIView()
 
     private lazy var languageHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
     private lazy var languageMessageLabelSkeleton = UIView()
 
     private lazy var certificateHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
     private lazy var certificateMessageLabelSkeleton = UIView()
 
     private lazy var certificateDetailsHeaderViewSkeleton: UIView = {
-        CourseInfoTabInfoHeaderSkeletonView(
+        CourseInfoTabInfoHeaderBlockSkeletonView(
             appearance: .init(titleLabelCornerRadius: self.appearance.labelsCornerRadius)
         )
     }()
