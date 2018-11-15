@@ -97,13 +97,7 @@ final class CourseInfoTabInfoView: UIView {
             self.scrollableStackView.removeAllArrangedViews()
         }
 
-        let authorView = CourseInfoTabInfoTextBlockView(
-            appearance: .init(headerViewInsets: self.appearance.innerInsets)
-        )
-        authorView.headerView.icon = Block.author.icon
-        authorView.headerView.title = "\(Block.author.title) \(viewModel.author)"
-        self.scrollableStackView.addArrangedView(authorView)
-
+        self.addAuthorView(author: viewModel.author)
         self.addIntroVideoView(introVideoURL: viewModel.introVideoURL)
 
         self.addTextBlockView(block: .about, message: viewModel.aboutText)
@@ -128,6 +122,16 @@ final class CourseInfoTabInfoView: UIView {
     }
 
     // MARK: Private API
+
+    private func addAuthorView(author: String) {
+        let authorView = CourseInfoTabInfoTextBlockView(
+            appearance: .init(headerViewInsets: self.appearance.innerInsets)
+        )
+        authorView.headerView.icon = Block.author.icon
+        authorView.headerView.title = "\(Block.author.title) \(author)"
+
+        self.scrollableStackView.addArrangedView(authorView)
+    }
 
     private func addTextBlockView(
         block: Block,
