@@ -50,7 +50,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             requirementsText: course.requirements,
             targetAudienceText: course.audience,
             timeToCompleteText: self.formattedTimeToComple(seconds: course.timeToComplete),
-            languageText: "English",
+            languageText: self.localizedLanguage(code: course.languageCode),
             certificateText: course.certificate,
             certificateDetailsText: "Certificate condition: 50 points\nWith distinction: 75 points",
             instructors: instructors
@@ -75,5 +75,9 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         } else {
             return ""
         }
+    }
+
+    private func localizedLanguage(code: String) -> String {
+        return Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? ""
     }
 }
