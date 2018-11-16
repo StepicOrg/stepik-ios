@@ -63,8 +63,7 @@ final class CourseInfoBlurredBackgroundView: UIView {
                         duration: self.appearance.imageFadeInDuration
                     )
                 ),
-                into: self.imageView,
-                completion: nil
+                into: self.imageView
             )
         } else {
             self.imageView.image = nil

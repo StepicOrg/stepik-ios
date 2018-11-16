@@ -22,7 +22,7 @@ extension ContinueActionButton {
         let defaultTitleColor = UIColor.mainDark
         let defaultShadowColor = UIColor(hex: 0xa0a0a0, alpha: 0.5)
 
-        let callToActionBackgroundColor = UIColor(hex: 0x66cc66)
+        let callToActionBackgroundColor = UIColor.stepicGreen
         let callToActionTitleColor = UIColor.white
         let callToActionShadowColor = UIColor(hex: 0xa0a0a0, alpha: 0.5)
     }
