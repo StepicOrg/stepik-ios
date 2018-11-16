@@ -3838,6 +3838,7 @@
 		2CBCBD4B20D1AAFC000B5732 /* AchievementsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */; };
 		2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
 		2CBE46C7215187D90052269A /* AnalyticsUserPropertiesServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */; };
+		2CBEC05121930BB200614786 /* TabSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBEC05021930BB200614786 /* TabSegmentedControlView.swift */; };
 		2CC0754720177A2E004A6005 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
 		2CC0F29C210AF9EC00FDEAB5 /* AuthAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0F29B210AF9EC00FDEAB5 /* AuthAssemblyImpl.swift */; };
 		2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */; };
@@ -5891,6 +5892,7 @@
 		2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementsListTableViewCell.xib; sourceTree = "<group>"; };
 		2CBCD3A7213583EB005D10FF /* Model_CourseListRename_v25.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_CourseListRename_v25.xcdatamodel; sourceTree = "<group>"; };
 		2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsViewController.swift; sourceTree = "<group>"; };
+		2CBEC05021930BB200614786 /* TabSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSegmentedControlView.swift; sourceTree = "<group>"; };
 		2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2CC0F29B210AF9EC00FDEAB5 /* AuthAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAssemblyImpl.swift; sourceTree = "<group>"; };
 		2CC351851F6827BE004255B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
@@ -10033,6 +10035,14 @@
 			name = AdaptiveRatings;
 			sourceTree = "<group>";
 		};
+		2CBEC04F21930B8300614786 /* Other views */ = {
+			isa = PBXGroup;
+			children = (
+				2CBEC05021930BB200614786 /* TabSegmentedControlView.swift */,
+			);
+			path = "Other views";
+			sourceTree = "<group>";
+		};
 		2CC351871F682979004255B6 /* Auth social */ = {
 			isa = PBXGroup;
 			children = (
@@ -10520,6 +10530,7 @@
 		2CF9ADD9218887F7004F6909 /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
+				2CBEC04F21930B8300614786 /* Other views */,
 				2C1C03602191D78200965F80 /* View models */,
 				2CF9ADDF218B26DB004F6909 /* Header views */,
 				2CF9ADDA2188880D004F6909 /* CourseInfoViewController.swift */,
@@ -14531,6 +14542,7 @@
 				08E542091C6CD65500DEC38E /* CourseSubscriptionManager.swift in Sources */,
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
+				2CBEC05121930BB200614786 /* TabSegmentedControlView.swift in Sources */,
 				08FF75301DF9B89000D656C4 /* StreaksStepikAlertManager.swift in Sources */,
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
