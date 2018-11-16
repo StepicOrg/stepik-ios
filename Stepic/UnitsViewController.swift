@@ -217,10 +217,6 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }
 
         if let section = section {
-            if section.units.count > 0 {
-                self.isPlaceholderShown = false
-            }
-
             section.loadProgressesForUnits(units: section.units, completion: {
                 UIThread.performUI({
                     self.tableView.reloadData()
@@ -268,7 +264,9 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }, error: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
-                self.emptyDatasetState = EmptyDatasetState.connectionError
+                if self.section?.units.isEmpty ?? true {
+                    self.emptyDatasetState = .connectionError
+                }
             })
             self.didRefresh = true
         })
