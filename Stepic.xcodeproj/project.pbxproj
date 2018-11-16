@@ -923,6 +923,7 @@
 		2C0159E1213940850043DBFF /* LearningRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E0213940850043DBFF /* LearningRouterProtocol.swift */; };
 		2C0159E3213940910043DBFF /* LearningRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E2213940910043DBFF /* LearningRouter.swift */; };
 		2C0159E621394C9E0043DBFF /* TrainingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */; };
+		2C0236FD21945AC800A325A6 /* DownloadControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0236FC21945AC800A325A6 /* DownloadControlView.swift */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		2C093EF5211B418400162DD0 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
@@ -5553,6 +5554,7 @@
 		2C0159E0213940850043DBFF /* LearningRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRouterProtocol.swift; sourceTree = "<group>"; };
 		2C0159E2213940910043DBFF /* LearningRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRouter.swift; sourceTree = "<group>"; };
 		2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCollectionViewController.swift; sourceTree = "<group>"; };
+		2C0236FC21945AC800A325A6 /* DownloadControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadControlView.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
@@ -10524,6 +10526,7 @@
 				2CF9ADDF218B26DB004F6909 /* Header views */,
 				2CF9ADDA2188880D004F6909 /* CourseInfoViewController.swift */,
 				2CF9ADDC21888AC1004F6909 /* CourseInfoView.swift */,
+				2C0236FC21945AC800A325A6 /* DownloadControlView.swift */,
 			);
 			path = CourseInfo;
 			sourceTree = "<group>";
@@ -14831,6 +14834,7 @@
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				0828FF791BC5E744000AFEA7 /* SectionsViewController.swift in Sources */,
+				2C0236FD21945AC800A325A6 /* DownloadControlView.swift in Sources */,
 				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
 				2CA9D9852010EEA2007AA743 /* AdaptiveRatingsAPI.swift in Sources */,
 				08A1256F1BDE8E460066B2B2 /* Sorter.swift in Sources */,
