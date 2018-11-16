@@ -49,11 +49,31 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             aboutText: course.summary,
             requirementsText: course.requirements,
             targetAudienceText: course.audience,
-            timeToCompleteText: "11 hours",
+            timeToCompleteText: self.formattedTimeToComple(seconds: course.timeToComplete),
             languageText: "English",
             certificateText: course.certificate,
             certificateDetailsText: "Certificate condition: 50 points\nWith distinction: 75 points",
             instructors: instructors
         )
+    }
+
+    private func formattedTimeToComple(seconds: Int?) -> String {
+        if let seconds = seconds {
+            let hour = 3600.0
+            let hours = Int(ceil(Double(seconds) / hour))
+
+            let pluralizedHoursString = StringHelper.pluralize(
+                number: hours,
+                forms: [
+                    NSLocalizedString("hours1", comment: ""),
+                    NSLocalizedString("hours234", comment: ""),
+                    NSLocalizedString("hours567890", comment: "")
+                ]
+            )
+
+            return "\(hours) \(pluralizedHoursString)"
+        } else {
+            return ""
+        }
     }
 }
