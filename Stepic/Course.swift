@@ -52,6 +52,7 @@ final class Course: NSManagedObject, IDFetchable {
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
         timeToComplete = json["time_to_complete"].int
+        languageCode = json["language"].stringValue
 
         if let _ = json["intro_video"].null {
             introVideo = nil

@@ -38,6 +38,7 @@ extension Course {
     @NSManaged var managedProgressId: String?
     @NSManaged var managedLastStepId: String?
     @NSManaged var managedTimeToComplete: NSNumber?
+    @NSManaged var managedLanguageCode: String?
 
     @NSManaged var managedInstructors: NSOrderedSet?
     @NSManaged var managedSections: NSOrderedSet?
@@ -266,6 +267,15 @@ extension Course {
         }
         set {
             self.managedTimeToComplete = newValue as NSNumber?
+        }
+    }
+
+    var languageCode: String {
+        get {
+            return self.managedLanguageCode ?? ""
+        }
+        set {
+            self.managedLanguageCode = newValue
         }
     }
 
