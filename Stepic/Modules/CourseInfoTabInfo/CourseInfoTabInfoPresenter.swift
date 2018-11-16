@@ -30,10 +30,13 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     // MARK: Prepare view data
 
     private func courseToViewModel(course: Course) -> CourseInfoTabInfoViewModel {
-        // authors: [int]
-        // language: String
-        // certificate_regular_threshold: int
-        // certificate_distinction_threshold: int
+        let timeToComplete = self.formattedTimeToComplete(seconds: course.timeToComplete)
+        let language = self.localizedLanguage(code: course.languageCode)
+
+        let certificateDetails = self.formattedCertificateDetails(
+            conditionPoints: course.certificateRegularThreshold,
+            distinctionPoints: course.certificateDistinctionThreshold
+        )
 
         let instructors = course.instructors.map { user in
             CourseInfoTabInfoInstructorViewModel(
@@ -49,15 +52,15 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             aboutText: course.summary,
             requirementsText: course.requirements,
             targetAudienceText: course.audience,
-            timeToCompleteText: self.formattedTimeToComple(seconds: course.timeToComplete),
-            languageText: self.localizedLanguage(code: course.languageCode),
+            timeToCompleteText: timeToComplete,
+            languageText: language,
             certificateText: course.certificate,
-            certificateDetailsText: "Certificate condition: 50 points\nWith distinction: 75 points",
+            certificateDetailsText: certificateDetails,
             instructors: instructors
         )
     }
 
-    private func formattedTimeToComple(seconds: Int?) -> String {
+    private func formattedTimeToComplete(seconds: Int?) -> String {
         if let seconds = seconds {
             let hour = 3600.0
             let hours = Int(ceil(Double(seconds) / hour))
@@ -79,5 +82,39 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
     private func localizedLanguage(code: String) -> String {
         return Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? ""
+    }
+
+    private func formattedCertificateDetails(
+        conditionPoints: Int?,
+        distinctionPoints: Int?
+    ) -> String {
+        let formattedCondition = self.formattedCertificateDetailTitle(
+            NSLocalizedString("CertificateCondition", comment: ""),
+            points: conditionPoints
+        )
+        let formattedDistinction = self.formattedCertificateDetailTitle(
+            NSLocalizedString("WithDistinction", comment: ""),
+            points: distinctionPoints
+        )
+
+        return "\(formattedCondition)\n\(formattedDistinction)".trimmingCharacters(
+            in: .whitespacesAndNewlines
+        )
+    }
+
+    private func formattedCertificateDetailTitle(_ title: String, points: Int?) -> String {
+        if let points = points {
+            let pluralizedPointsString = StringHelper.pluralize(
+                number: points,
+                forms: [
+                    NSLocalizedString("points1", comment: ""),
+                    NSLocalizedString("points234", comment: ""),
+                    NSLocalizedString("points567890", comment: "")
+                ]
+            )
+            return "\(title): \(points) \(pluralizedPointsString)"
+        } else {
+            return ""
+        }
     }
 }
