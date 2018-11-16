@@ -37,6 +37,7 @@ extension Course {
     @NSManaged var managedSlug: String?
     @NSManaged var managedProgressId: String?
     @NSManaged var managedLastStepId: String?
+    @NSManaged var managedTimeToComplete: NSNumber?
 
     @NSManaged var managedInstructors: NSOrderedSet?
     @NSManaged var managedSections: NSOrderedSet?
@@ -256,6 +257,15 @@ extension Course {
         }
         get {
             return managedRequirements ?? ""
+        }
+    }
+
+    var timeToComplete: Int? {
+        get {
+            return self.managedTimeToComplete?.intValue
+        }
+        set {
+            self.managedTimeToComplete = newValue as NSNumber?
         }
     }
 
