@@ -4055,6 +4055,7 @@
 		62E98447CF53F0402668F488 /* ContinueLastStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC21463AD1C43A467BB /* ContinueLastStepView.swift */; };
 		62E984481B3B912B8B397579 /* ContentLanguageSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E984E654267333681BD459 /* ContentLanguageSwitchButton.swift */; };
 		62E98453212412E864EDDDEF /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
+		62E984634F4335C88C7E2411 /* CourseInfoTabInfoBlockResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F62253D0F8C73F19E09 /* CourseInfoTabInfoBlockResourcesTests.swift */; };
 		62E9846C9307D9CE00A8F59A /* CourseWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983AA509C6DE032A9EB1A /* CourseWidgetView.swift */; };
 		62E9846CA267356298D01D67 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E9848BF3984E04C0061D6C /* ProfileViewController+StreakNotificationsControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888C0199CE31C6B4E91D /* ProfileViewController+StreakNotificationsControlView.swift */; };
@@ -6142,6 +6143,7 @@
 		62E98F30729AE1CF9C9E0109 /* FormatterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterHelper.swift; sourceTree = "<group>"; };
 		62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsViewController.swift; sourceTree = "<group>"; };
 		62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsAPI.swift; sourceTree = "<group>"; };
+		62E98F62253D0F8C73F19E09 /* CourseInfoTabInfoBlockResourcesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoBlockResourcesTests.swift; sourceTree = "<group>"; };
 		62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementDescription.swift; sourceTree = "<group>"; };
 		62E98F8B42A28AC17DF11DD3 /* ContentLanguageSwitchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchViewModel.swift; sourceTree = "<group>"; };
 		62E98FC21463AD1C43A467BB /* ContinueLastStepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueLastStepView.swift; sourceTree = "<group>"; };
@@ -7233,6 +7235,7 @@
 				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
 				62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */,
 				2C2485482101EE3E006F8858 /* DownloaderTests.swift */,
+				62E98B00CC04DEE13DEFDE67 /* Modules */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -10631,6 +10634,14 @@
 			name = CodeEditorSettings;
 			sourceTree = "<group>";
 		};
+		62E981E6F6C6EFFA87E8CFF7 /* CourseInfoTabInfo */ = {
+			isa = PBXGroup;
+			children = (
+				62E98F62253D0F8C73F19E09 /* CourseInfoTabInfoBlockResourcesTests.swift */,
+			);
+			path = CourseInfoTabInfo;
+			sourceTree = "<group>";
+		};
 		62E981F905E2F63DA531EE26 /* CourseListsCollection */ = {
 			isa = PBXGroup;
 			children = (
@@ -10828,6 +10839,14 @@
 				62E98AE968B12714D825650A /* AchievementsListPresenter.swift */,
 			);
 			name = List;
+			sourceTree = "<group>";
+		};
+		62E98B00CC04DEE13DEFDE67 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				62E981E6F6C6EFFA87E8CFF7 /* CourseInfoTabInfo */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		62E98B3F933F18DBF291A23C /* AuthGreetingViewController */ = {
@@ -14446,6 +14465,7 @@
 				2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
+				62E984634F4335C88C7E2411 /* CourseInfoTabInfoBlockResourcesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
