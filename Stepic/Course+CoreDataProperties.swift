@@ -33,6 +33,8 @@ extension Course {
     @NSManaged var managedFormat: String?
     @NSManaged var managedAudience: String?
     @NSManaged var managedCertificate: String?
+    @NSManaged var managedCertificateRegularThreshold: NSNumber?
+    @NSManaged var managedCertificateDistinctionThreshold: NSNumber?
     @NSManaged var managedRequirements: String?
     @NSManaged var managedSlug: String?
     @NSManaged var managedProgressId: String?
@@ -249,6 +251,24 @@ extension Course {
         }
         get {
             return managedCertificate ?? ""
+        }
+    }
+
+    var certificateRegularThreshold: Int? {
+        get {
+            return self.managedCertificateRegularThreshold?.intValue
+        }
+        set {
+            self.managedCertificateRegularThreshold = newValue as NSNumber?
+        }
+    }
+
+    var certificateDistinctionThreshold: Int? {
+        get {
+            return self.managedCertificateDistinctionThreshold?.intValue
+        }
+        set {
+            self.managedCertificateDistinctionThreshold = newValue as NSNumber?
         }
     }
 

@@ -42,6 +42,8 @@ final class Course: NSManagedObject, IDFetchable {
         format = json["course_format"].stringValue
         audience = json["target_audience"].stringValue
         certificate = json["certificate"].stringValue
+        certificateRegularThreshold = json["certificate_regular_threshold"].int
+        certificateDistinctionThreshold = json["certificate_distinction_threshold"].int
         requirements = json["requirements"].stringValue
         slug = json["slug"].string
         progressId = json["progress"].string

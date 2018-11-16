@@ -5561,6 +5561,7 @@
 		2C15BC4B212AEED900AB1015 /* AdaptiveStepsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStepsAssembly.swift; sourceTree = "<group>"; };
 		2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewFlowLayout+PlusCrashWorkaround.swift"; sourceTree = "<group>"; };
 		2C1649661F2A0842002C9F99 /* AdaptiveAchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveAchievementsViewController.swift; sourceTree = "<group>"; };
+		2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_certificate_details_v28.xcdatamodel; sourceTree = "<group>"; };
 		2C1B62AE1F4C4AEF00236804 /* Adaptive 3149.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 3149.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1B62B21F4C4B4300236804 /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth.plist; path = Content/3149/Auth.plist; sourceTree = "<group>"; };
 		2C1B62B31F4C4B4300236804 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Content/3149/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -20394,6 +20395,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */,
 				2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */,
 				2CAB3718219EF332007A524A /* Model_course_time_to_complete_v26.xcdatamodel */,
 				2CBCD3A7213583EB005D10FF /* Model_CourseListRename_v25.xcdatamodel */,
@@ -20423,7 +20425,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */;
+			currentVersion = 2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
