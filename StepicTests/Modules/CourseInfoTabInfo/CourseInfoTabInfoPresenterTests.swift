@@ -13,23 +13,25 @@ import XCTest
 
 class CourseInfoTabInfoPresenterTests: XCTestCase {
     var course: Course!
-    var presenter: CourseInfoTabInfoPresenter!
-    var viewController: CourseInfoTabInfoViewControllerSpy!
+    var presenter: CourseInfoTabInfoPresenterProtocol!
+    var viewControllerSpy: CourseInfoTabInfoViewControllerSpy!
 
     override func setUp() {
         super.setUp()
 
         self.course = Course()
-        self.viewController = CourseInfoTabInfoViewControllerSpy()
-        self.presenter = CourseInfoTabInfoPresenter()
-        self.presenter.viewController = self.viewController
+        self.viewControllerSpy = CourseInfoTabInfoViewControllerSpy()
+
+        let concretePresenter = CourseInfoTabInfoPresenter()
+        concretePresenter.viewController = self.viewControllerSpy
+        self.presenter = concretePresenter
     }
 
     override func tearDown() {
         super.tearDown()
 
         self.course = nil
-        self.viewController = nil
+        self.viewControllerSpy = nil
         self.presenter = nil
     }
 
@@ -38,7 +40,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
 
         self.showInfo()
 
-        if case .loading = self.viewController.showInfoViewModel!.state {
+        if case .loading = self.viewControllerSpy.showInfoViewModel!.state {
         } else {
             XCTFail("Expected `.loading` state")
         }
@@ -47,7 +49,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
     func testShowInfoResultState() {
         self.showInfo()
 
-        if let viewModel = self.viewController.showInfoViewModel,
+        if let viewModel = self.viewControllerSpy.showInfoViewModel,
            case .result = viewModel.state {
         } else {
             XCTFail("Expected `.result` state")
@@ -60,7 +62,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
 
         self.showInfo()
 
-        if case .result(let data) = self.viewController.showInfoViewModel!.state {
+        if case .result(let data) = self.viewControllerSpy.showInfoViewModel!.state {
             XCTAssertEqual(data.aboutText, expectedSummary)
         } else {
             XCTFail("Summaries not equal")
@@ -73,7 +75,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
 
         self.showInfo()
 
-        if case .result(let data) = self.viewController.showInfoViewModel!.state {
+        if case .result(let data) = self.viewControllerSpy.showInfoViewModel!.state {
             XCTAssertEqual(data.requirementsText, expectedRequirements)
         } else {
             XCTFail("Requirements not equal")
@@ -86,7 +88,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
 
         self.showInfo()
 
-        if case .result(let data) = self.viewController.showInfoViewModel!.state {
+        if case .result(let data) = self.viewControllerSpy.showInfoViewModel!.state {
             XCTAssertEqual(data.targetAudienceText, expectedTargetAudience)
         } else {
             XCTFail("Target audience texts not equal")
