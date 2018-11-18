@@ -8,6 +8,7 @@
 
 import Foundation
 import XCTest
+import Nimble
 
 @testable import Stepic
 
@@ -15,6 +16,15 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
     var course: Course!
     var presenter: CourseInfoTabInfoPresenterProtocol!
     var viewControllerSpy: CourseInfoTabInfoViewControllerSpy!
+
+    var viewModel: CourseInfoTabInfoViewModel! {
+        if case .result(let viewModel) = self.viewControllerSpy.showInfoViewModel!.state {
+            return viewModel
+        } else {
+            fail("Expected <CourseInfoTabInfoViewModel> got \(self.viewControllerSpy.showInfoViewModel!.state)")
+            return nil
+        }
+    }
 
     override func setUp() {
         super.setUp()
@@ -61,12 +71,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
         self.course.summary = expectedSummary
 
         self.showInfo()
-
-        if case .result(let data) = self.viewControllerSpy.showInfoViewModel!.state {
-            XCTAssertEqual(data.aboutText, expectedSummary)
-        } else {
-            XCTFail("Summaries not equal")
-        }
+        expect(self.viewModel.aboutText) == expectedSummary
     }
 
     func testShowInfoRequirementsText() {
@@ -74,12 +79,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
         self.course.requirements = expectedRequirements
 
         self.showInfo()
-
-        if case .result(let data) = self.viewControllerSpy.showInfoViewModel!.state {
-            XCTAssertEqual(data.requirementsText, expectedRequirements)
-        } else {
-            XCTFail("Requirements not equal")
-        }
+        expect(self.viewModel.requirementsText) == expectedRequirements
     }
 
     func testShowInfoTargetAudienceText() {
@@ -87,12 +87,7 @@ class CourseInfoTabInfoPresenterTests: XCTestCase {
         self.course.audience = expectedTargetAudience
 
         self.showInfo()
-
-        if case .result(let data) = self.viewControllerSpy.showInfoViewModel!.state {
-            XCTAssertEqual(data.targetAudienceText, expectedTargetAudience)
-        } else {
-            XCTFail("Target audience texts not equal")
-        }
+        expect(self.viewModel.targetAudienceText) == expectedTargetAudience
     }
 
     private func showInfo() {
