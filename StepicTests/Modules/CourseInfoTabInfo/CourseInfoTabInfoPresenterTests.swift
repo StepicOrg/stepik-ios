@@ -8,91 +8,94 @@
 
 import Foundation
 import XCTest
+import Quick
 import Nimble
 
 @testable import Stepic
 
-class CourseInfoTabInfoPresenterTests: XCTestCase {
-    var course: Course!
-    var presenter: CourseInfoTabInfoPresenterProtocol!
-    var viewControllerSpy: CourseInfoTabInfoViewControllerSpy!
+class CourseInfoTabInfoPresenterTests: QuickSpec {
+    override func spec() {
+        describe("a presenter") {
+            var course: Course!
+            var presenter: CourseInfoTabInfoPresenterProtocol!
+            var viewControllerSpy: CourseInfoTabInfoViewControllerSpy!
 
-    var viewModel: CourseInfoTabInfoViewModel! {
-        if case .result(let viewModel) = self.viewControllerSpy.showInfoViewModel!.state {
-            return viewModel
-        } else {
-            fail("Expected <CourseInfoTabInfoViewModel> got \(self.viewControllerSpy.showInfoViewModel!.state)")
-            return nil
+            beforeEach {
+                course = Course()
+                viewControllerSpy = CourseInfoTabInfoViewControllerSpy()
+
+                let concretePresenter = CourseInfoTabInfoPresenter()
+                concretePresenter.viewController = viewControllerSpy
+                presenter = concretePresenter
+            }
+
+            describe("its shows info") {
+                var actualViewModel: CourseInfoTabInfoViewModel! {
+                    if case .result(let viewModel) = viewControllerSpy.showInfoViewModel!.state {
+                        return viewModel
+                    } else {
+                        fail("Expected `CourseInfoTabInfoViewModel` got \(viewControllerSpy.showInfoViewModel!.state)")
+                        return nil
+                    }
+                }
+
+                func configureAndShow(_ configure: (Course) -> Void) {
+                    configure(course)
+                    showInfo()
+                }
+
+                func showInfo() {
+                    presenter.presentCourseInfo(response: .init(course: course))
+                }
+
+                it("is in loading state") {
+                    course = nil
+                    showInfo()
+
+                    if case .loading = viewControllerSpy.showInfoViewModel!.state {
+                    } else {
+                        fail("Expected `.loading` state")
+                    }
+                }
+
+                it("has returned actual data") {
+                    configureAndShow { _ in
+                    }
+
+                    if let viewModel = viewControllerSpy.showInfoViewModel,
+                       case .result = viewModel.state {
+                    } else {
+                        fail("Expected `.result` state")
+                    }
+                }
+
+                it("has returned expected about text") {
+                    let expectedSummary = "summary"
+                    configureAndShow { course in
+                        course.summary = expectedSummary
+                    }
+
+                    expect(actualViewModel.aboutText) == expectedSummary
+                }
+
+                it("has returned expected requirements text") {
+                    let expectedRequirements = "requirements"
+                    configureAndShow { course in
+                        course.requirements = expectedRequirements
+                    }
+
+                    expect(actualViewModel.requirementsText) == expectedRequirements
+                }
+
+                it("has returned expected target audience text") {
+                    let expectedTargetAudience = "targetAudience"
+                    configureAndShow { course in
+                        course.audience = expectedTargetAudience
+                    }
+
+                    expect(actualViewModel.targetAudienceText) == expectedTargetAudience
+                }
+            }
         }
-    }
-
-    override func setUp() {
-        super.setUp()
-
-        self.course = Course()
-        self.viewControllerSpy = CourseInfoTabInfoViewControllerSpy()
-
-        let concretePresenter = CourseInfoTabInfoPresenter()
-        concretePresenter.viewController = self.viewControllerSpy
-        self.presenter = concretePresenter
-    }
-
-    override func tearDown() {
-        super.tearDown()
-
-        self.course = nil
-        self.viewControllerSpy = nil
-        self.presenter = nil
-    }
-
-    func testShowInfoLoadingState() {
-        self.course = nil
-
-        self.showInfo()
-
-        if case .loading = self.viewControllerSpy.showInfoViewModel!.state {
-        } else {
-            XCTFail("Expected `.loading` state")
-        }
-    }
-
-    func testShowInfoResultState() {
-        self.showInfo()
-
-        if let viewModel = self.viewControllerSpy.showInfoViewModel,
-           case .result = viewModel.state {
-        } else {
-            XCTFail("Expected `.result` state")
-        }
-    }
-
-    func testShowInfoAboutText() {
-        let expectedSummary = "summary"
-        self.course.summary = expectedSummary
-
-        self.showInfo()
-        expect(self.viewModel.aboutText) == expectedSummary
-    }
-
-    func testShowInfoRequirementsText() {
-        let expectedRequirements = "requirements"
-        self.course.requirements = expectedRequirements
-
-        self.showInfo()
-        expect(self.viewModel.requirementsText) == expectedRequirements
-    }
-
-    func testShowInfoTargetAudienceText() {
-        let expectedTargetAudience = "targetAudience"
-        self.course.audience = expectedTargetAudience
-
-        self.showInfo()
-        expect(self.viewModel.targetAudienceText) == expectedTargetAudience
-    }
-
-    private func showInfo() {
-        self.presenter.presentCourseInfo(
-            response: .init(course: self.course)
-        )
     }
 }
