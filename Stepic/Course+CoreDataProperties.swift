@@ -44,9 +44,11 @@ extension Course {
 
     @NSManaged var managedInstructors: NSOrderedSet?
     @NSManaged var managedSections: NSOrderedSet?
+    @NSManaged var managedAuthors: NSOrderedSet?
 
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
+    @NSManaged var managedAuthorsArray: NSObject?
 
     @NSManaged var managedIntroVideo: Video?
 
@@ -360,6 +362,24 @@ extension Course {
         }
     }
 
+    var authorsArray: [Int] {
+        get {
+            return (self.managedAuthorsArray as? [Int]) ?? []
+        }
+        set {
+            self.managedAuthorsArray = newValue as NSObject?
+        }
+    }
+
+    var authors: [User] {
+        get {
+            return (self.managedAuthors?.array as? [User]) ?? []
+        }
+        set {
+            self.managedAuthors = NSOrderedSet(array: newValue)
+        }
+    }
+
     var introVideo: Video? {
         get {
             return managedIntroVideo
@@ -384,4 +404,9 @@ extension Course {
         managedSections = mutableItems.copy() as? NSOrderedSet
     }
 
+    func addAuthor(_ author: User) {
+        let mutableItems = self.managedAuthors?.mutableCopy() as! NSMutableOrderedSet
+        mutableItems.add(author)
+        self.managedAuthors = mutableItems.copy() as? NSOrderedSet
+    }
 }
