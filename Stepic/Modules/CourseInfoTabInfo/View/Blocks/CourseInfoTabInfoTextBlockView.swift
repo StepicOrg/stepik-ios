@@ -22,7 +22,7 @@ extension CourseInfoTabInfoTextBlockView {
 final class CourseInfoTabInfoTextBlockView: UIView {
     var message: String? {
         didSet {
-            self.messageLabel.text = self.message
+            self.messageLabel.setTextWithHTMLString(self.message ?? "")
         }
     }
 
