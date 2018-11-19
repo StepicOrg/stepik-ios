@@ -50,12 +50,12 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         return CourseInfoTabInfoViewModel(
             author: authorText,
             introVideoURL: URL(string: course.introURL),
-            aboutText: course.summary,
-            requirementsText: course.requirements,
-            targetAudienceText: course.audience,
+            aboutText: course.summary.trimmingCharacters(in: .whitespaces),
+            requirementsText: course.requirements.trimmingCharacters(in: .whitespaces),
+            targetAudienceText: course.audience.trimmingCharacters(in: .whitespaces),
             timeToCompleteText: timeToCompleteText,
             languageText: languageText,
-            certificateText: course.certificate,
+            certificateText: course.certificate.trimmingCharacters(in: .whitespaces),
             certificateDetailsText: certificateDetailsText,
             instructors: instructorsViewModel
         )
@@ -65,12 +65,12 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         if authors.isEmpty {
             return ""
         } else {
-            var resultString = authors.reduce("") { result, user in
+            var authorString = authors.reduce("") { result, user in
                 result + "\(user.firstName) \(user.lastName), "
             }.trimmingCharacters(in: .whitespaces)
-            resultString.removeLast()
+            authorString.removeLast()
 
-            return resultString
+            return authorString
         }
     }
 
