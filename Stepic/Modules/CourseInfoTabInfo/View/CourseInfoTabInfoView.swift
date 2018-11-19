@@ -22,7 +22,7 @@ extension CourseInfoTabInfoView {
 
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
-        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
+        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
 
         let joinButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
@@ -131,6 +131,10 @@ final class CourseInfoTabInfoView: UIView {
     // MARK: Private API
 
     private func addAuthorView(author: String) {
+        if author.isEmpty {
+            return
+        }
+
         let authorView = CourseInfoTabInfoHeaderBlockView(
             appearance: .init(
                 imageViewLeadingSpace: self.appearance.authorIconLeadingSpace,
@@ -149,7 +153,17 @@ final class CourseInfoTabInfoView: UIView {
         self.scrollableStackView.addArrangedView(authorView)
     }
 
+    private func addIntroVideoView(introVideoURL: URL?) {
+        if let introVideoURL = introVideoURL {
+            self.scrollableStackView.addArrangedView(CourseInfoTabInfoIntroVideoBlockView())
+        }
+    }
+
     private func addTextBlockView(block: Block, message: String) {
+        if message.isEmpty {
+            return
+        }
+
         let textBlockView = CourseInfoTabInfoTextBlockView(
             appearance: .init(headerViewInsets: self.appearance.textBlockInsets)
         )
@@ -160,13 +174,14 @@ final class CourseInfoTabInfoView: UIView {
         self.scrollableStackView.addArrangedView(textBlockView)
     }
 
-    private func addIntroVideoView(introVideoURL: URL?) {
-        self.scrollableStackView.addArrangedView(CourseInfoTabInfoIntroVideoBlockView())
-    }
-
     private func addInstructorsView(instructors: [CourseInfoTabInfoInstructorViewModel]) {
+        if instructors.isEmpty {
+            return
+        }
+
         let instructorsView = CourseInfoTabInfoInstructorsBlockView()
         instructorsView.configure(instructors: instructors)
+
         self.scrollableStackView.addArrangedView(instructorsView)
     }
 

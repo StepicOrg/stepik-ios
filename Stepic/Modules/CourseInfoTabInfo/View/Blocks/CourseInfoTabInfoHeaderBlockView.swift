@@ -53,6 +53,7 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
         let label = UILabel()
         label.font = self.appearance.titleLabelFont
         label.textColor = self.appearance.titleLabelTextColor
+        label.numberOfLines = 1
         return label
     }()
 
@@ -89,7 +90,7 @@ extension CourseInfoTabInfoHeaderBlockView: ProgrammaticallyInitializableViewPro
             make.height.equalTo(self.appearance.imageViewSize.height)
             make.width.equalTo(self.appearance.imageViewSize.width)
             make.leading.equalToSuperview().offset(self.appearance.imageViewLeadingSpace)
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(self.titleLabel.snp.centerY)
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false

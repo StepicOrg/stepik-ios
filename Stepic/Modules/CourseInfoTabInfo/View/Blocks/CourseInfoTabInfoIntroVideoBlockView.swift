@@ -12,6 +12,7 @@ import SnapKit
 extension CourseInfoTabInfoIntroVideoBlockView {
     struct Appearance {
         let introVideoHeight: CGFloat = 203
+        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
 }
 
@@ -54,7 +55,7 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
     func makeConstraints() {
         self.previewImageView.translatesAutoresizingMaskIntoConstraints = false
         self.previewImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(self.appearance.insets)
             make.height.equalTo(self.appearance.introVideoHeight)
         }
     }
