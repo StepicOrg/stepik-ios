@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Atributika
 
 protocol CourseInfoTabInfoViewDelegate: class {
     func courseInfoTabInfoViewDidTapOnJoin(_ courseInfoTabInfoView: CourseInfoTabInfoView)
@@ -17,8 +18,12 @@ extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
 
-        let blockInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
-        let innerInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47)
+        let textBlockInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
+
+        let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
+        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
+        let authorIconLeadingSpace: CGFloat = 20
 
         let joinButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
         let joinButtonHeight: CGFloat = 47
@@ -126,22 +131,27 @@ final class CourseInfoTabInfoView: UIView {
     // MARK: Private API
 
     private func addAuthorView(author: String) {
-        let authorView = CourseInfoTabInfoTextBlockView(
-            appearance: .init(headerViewInsets: self.appearance.innerInsets)
+        let authorView = CourseInfoTabInfoHeaderBlockView(
+            appearance: .init(
+                imageViewLeadingSpace: self.appearance.authorIconLeadingSpace,
+                titleLabelFont: self.appearance.authorTitleLabelFont,
+                titleLabelInsets: self.appearance.authorTitleLabelInsets
+            )
         )
-        authorView.headerView.icon = Block.author.icon
-        authorView.headerView.title = "\(Block.author.title) \(author)"
+
+        let attributedTitle = "\(Block.author.title) <a>\(author)</a>".style(tags: [
+            Style("a").foregroundColor(self.appearance.authorTitleHighlightColor)
+        ]).attributedString
+
+        authorView.icon = Block.author.icon
+        authorView.attributedTitle = attributedTitle
 
         self.scrollableStackView.addArrangedView(authorView)
     }
 
-    private func addTextBlockView(
-        block: Block,
-        message: String,
-        headerViewInsets: UIEdgeInsets = Appearance().blockInsets
-    ) {
+    private func addTextBlockView(block: Block, message: String) {
         let textBlockView = CourseInfoTabInfoTextBlockView(
-            appearance: .init(headerViewInsets: headerViewInsets)
+            appearance: .init(headerViewInsets: self.appearance.textBlockInsets)
         )
         textBlockView.headerView.icon = block.icon
         textBlockView.headerView.title = block.title

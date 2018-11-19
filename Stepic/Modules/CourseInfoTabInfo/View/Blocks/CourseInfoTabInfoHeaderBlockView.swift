@@ -13,10 +13,11 @@ extension CourseInfoTabInfoHeaderBlockView {
     struct Appearance {
         let imageViewSize = CGSize(width: 12, height: 12)
         let imageViewTintColor = UIColor.mainDark
+        var imageViewLeadingSpace: CGFloat = 0
 
-        let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
+        var titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let titleLabelTextColor = UIColor.mainDark
-        let titleLabelLeadingSpace: CGFloat = 27
+        var titleLabelInsets = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 0)
     }
 }
 
@@ -30,6 +31,12 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
     var title: String? {
         didSet {
             self.titleLabel.text = self.title
+        }
+    }
+
+    var attributedTitle: NSAttributedString? {
+        didSet {
+            self.titleLabel.attributedText = self.attributedTitle
         }
     }
 
@@ -81,14 +88,13 @@ extension CourseInfoTabInfoHeaderBlockView: ProgrammaticallyInitializableViewPro
         self.iconImageView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.imageViewSize.height)
             make.width.equalTo(self.appearance.imageViewSize.width)
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.imageViewLeadingSpace)
             make.centerY.equalToSuperview()
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.titleLabelLeadingSpace)
-            make.top.trailing.bottom.equalToSuperview()
+            make.edges.equalToSuperview().inset(self.appearance.titleLabelInsets)
         }
     }
 }
