@@ -34,10 +34,14 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
     // MARK: Get course info
 
     func getCourseInfo(request: CourseInfoTabInfo.ShowInfo.Request) {
-        self.fetchInstructors().done {
+        self.fetchInstructors().then {
+            self.fetchAuthors()
+        }.done {
             self.presenter.presentCourseInfo(
                 response: .init(course: self.course)
             )
+        }.catch { error in
+            print("Failed get course info with error: \(error)")
         }
     }
 
@@ -45,6 +49,16 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
         if let course = self.course {
             return self.provider.fetchInstructors(course: course).done { users in
                 course.instructors = Sorter.sort(users, byIds: course.instructorsArray)
+            }
+        } else {
+            return .value(())
+        }
+    }
+
+    private func fetchAuthors() -> Promise<Void> {
+        if let course = self.course {
+            return self.provider.fetchAuthors(course: course).done { users in
+                course.authors = Sorter.sort(users, byIds: course.authorsArray)
             }
         } else {
             return .value(())

@@ -11,6 +11,8 @@ import PromiseKit
 
 protocol CourseInfoTabInfoProviderProtocol {
     func fetchInstructors(course: Course) -> Promise<[User]>
+
+    func fetchAuthors(course: Course) -> Promise<[User]>
 }
 
 final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
@@ -21,10 +23,18 @@ final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
     }
 
     func fetchInstructors(course: Course) -> Promise<[User]> {
+        return self.fetchUsers(ids: course.instructorsArray, existing: course.instructors)
+    }
+
+    func fetchAuthors(course: Course) -> Promise<[User]> {
+        return self.fetchUsers(ids: course.authorsArray, existing: course.authors)
+    }
+
+    private func fetchUsers(ids: [Int], existing: [User]) -> Promise<[User]> {
         return Promise { seal in
             self.usersAPI.retrieve(
-                ids: course.instructorsArray,
-                existing: course.instructors,
+                ids: ids,
+                existing: existing,
                 refreshMode: .update,
                 success: { users in
                     seal.fulfill(users)

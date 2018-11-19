@@ -30,15 +30,16 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     // MARK: Prepare view data
 
     private func courseToViewModel(course: Course) -> CourseInfoTabInfoViewModel {
-        let timeToComplete = self.formattedTimeToComplete(seconds: course.timeToComplete)
-        let language = self.localizedLanguage(code: course.languageCode)
+        let authorText = self.formattedAuthor(authors: course.authors)
+        let timeToCompleteText = self.formattedTimeToComplete(seconds: course.timeToComplete)
+        let languageText = self.localizedLanguage(code: course.languageCode)
 
-        let certificateDetails = self.formattedCertificateDetails(
+        let certificateDetailsText = self.formattedCertificateDetails(
             conditionPoints: course.certificateRegularThreshold,
             distinctionPoints: course.certificateDistinctionThreshold
         )
 
-        let instructors = course.instructors.map { user in
+        let instructorsViewModel = course.instructors.map { user in
             CourseInfoTabInfoInstructorViewModel(
                 avatarImageURL: URL(string: user.avatarURL),
                 title: "\(user.firstName) \(user.lastName)",
@@ -47,17 +48,30 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }
 
         return CourseInfoTabInfoViewModel(
-            author: "Yandex",
+            author: authorText,
             introVideoURL: URL(string: course.introURL),
             aboutText: course.summary,
             requirementsText: course.requirements,
             targetAudienceText: course.audience,
-            timeToCompleteText: timeToComplete,
-            languageText: language,
+            timeToCompleteText: timeToCompleteText,
+            languageText: languageText,
             certificateText: course.certificate,
-            certificateDetailsText: certificateDetails,
-            instructors: instructors
+            certificateDetailsText: certificateDetailsText,
+            instructors: instructorsViewModel
         )
+    }
+
+    private func formattedAuthor(authors: [User]) -> String {
+        if authors.isEmpty {
+            return ""
+        } else {
+            var resultString = authors.reduce("") { result, user in
+                result + "\(user.firstName) \(user.lastName), "
+            }.trimmingCharacters(in: .whitespaces)
+            resultString.removeLast()
+
+            return resultString
+        }
     }
 
     private func formattedTimeToComplete(seconds: Int?) -> String {
