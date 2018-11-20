@@ -3799,6 +3799,10 @@
 		2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */; };
 		2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */; };
 		2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFD212597060046128C /* ProgressServiceMock.swift */; };
+		2CAB7AE2219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE1219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift */; };
+		2CAB7AE4219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE3219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift */; };
+		2CAB7AE7219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */; };
+		2CAB7AE9219F196300EF5BEE /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE8219F196300EF5BEE /* ImageButton.swift */; };
 		2CAD296320FDE4700058481C /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296220FDE4700058481C /* ApplicationAssembly.swift */; };
 		2CAD296520FDE47D0058481C /* ApplicationAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */; };
 		2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */; };
@@ -5856,6 +5860,10 @@
 		2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDFD212597060046128C /* ProgressServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressServiceMock.swift; sourceTree = "<group>"; };
+		2CAB7AE1219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusViewController.swift; sourceTree = "<group>"; };
+		2CAB7AE3219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusView.swift; sourceTree = "<group>"; };
+		2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusHeaderView.swift; sourceTree = "<group>"; };
+		2CAB7AE8219F196300EF5BEE /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		2CAD296220FDE4700058481C /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyImpl.swift; sourceTree = "<group>"; };
 		2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModuleHolder.swift; sourceTree = "<group>"; };
@@ -8305,6 +8313,7 @@
 		100D33CD3AAC03A84EA5B18A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2CAB7AE0219F00E800EF5BEE /* CourseInfoTabSyllabus */,
 				2CF9ADD9218887F7004F6909 /* CourseInfo */,
 				58D4DD2E993574238E9882A7 /* Explore */,
 				DBA8A1094AD2004867D29D96 /* Tags */,
@@ -9928,6 +9937,25 @@
 				2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */,
 			);
 			path = PlainObjects;
+			sourceTree = "<group>";
+		};
+		2CAB7AE0219F00E800EF5BEE /* CourseInfoTabSyllabus */ = {
+			isa = PBXGroup;
+			children = (
+				2CAB7AE5219F09AD00EF5BEE /* Views */,
+				2CAB7AE1219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift */,
+				2CAB7AE3219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift */,
+			);
+			path = CourseInfoTabSyllabus;
+			sourceTree = "<group>";
+		};
+		2CAB7AE5219F09AD00EF5BEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */,
+				2CAB7AE8219F196300EF5BEE /* ImageButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2CAD296120FDE45D0058481C /* Assembly */ = {
@@ -14465,6 +14493,7 @@
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
+				2CAB7AE2219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift in Sources */,
 				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
@@ -14523,6 +14552,7 @@
 				081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
+				2CAB7AE7219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift in Sources */,
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
@@ -14591,6 +14621,7 @@
 				084F7AA71E76EF690088368A /* LastStep.swift in Sources */,
 				0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
+				2CAB7AE4219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift in Sources */,
 				088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */,
 				081A14FF20D963090016364E /* AmplitudeAnalyticsEvents.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
@@ -14646,6 +14677,7 @@
 				081566251F69C3AD0082B359 /* CustomSearchBar.swift in Sources */,
 				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
+				2CAB7AE9219F196300EF5BEE /* ImageButton.swift in Sources */,
 				089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */,
 				2C2365E421078CEF00C99742 /* VideoFileManager.swift in Sources */,
 				081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */,

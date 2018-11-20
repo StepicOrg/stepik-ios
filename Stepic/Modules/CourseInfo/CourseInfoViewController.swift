@@ -41,6 +41,11 @@ final class CourseInfoViewController: UIViewController {
 
     override func loadView() {
         let view = CourseInfoView(frame: UIScreen.main.bounds, scrollDelegate: self)
+
+        let syllabusController = CourseInfoTabSyllabusViewController()
+        self.addChildViewController(syllabusController)
+        view.addPageForTest(syllabusController.view)
+
         self.view = view
     }
 
