@@ -21,11 +21,19 @@ final class CourseInfoTabSyllabusView: UIView {
     private lazy var tableViewHeader = CourseInfoTabSyllabusHeaderView()
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero)
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .white
         tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = self.tableViewHeader
+
+        tableView.estimatedSectionHeaderHeight = 90.0
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+
+        tableView.estimatedRowHeight = 90.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         return tableView
     }()
 
@@ -77,7 +85,7 @@ extension CourseInfoTabSyllabusView: ProgrammaticallyInitializableViewProtocol {
 
 extension CourseInfoTabSyllabusView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,8 +94,16 @@ extension CourseInfoTabSyllabusView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = ""
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return CourseInfoTabSyllabusSectionView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
     }
 }
 

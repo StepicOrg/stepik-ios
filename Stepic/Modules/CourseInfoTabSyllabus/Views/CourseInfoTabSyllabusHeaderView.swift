@@ -14,7 +14,7 @@ extension CourseInfoTabSyllabusHeaderView {
         let buttonSpacing: CGFloat = 14.0
 
         let buttonTintColor = UIColor.mainDark
-        let buttonFont = UIFont.systemFont(ofSize: 13, weight: .light)
+        let buttonFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let buttonImageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 4)
         let buttonTitleInsets = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 0)
         let buttonImageSize = CGSize(width: 15, height: 15)
