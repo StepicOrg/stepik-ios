@@ -36,6 +36,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
     var summary: String? {
         didSet {
             self.descriptionLabel.text = self.summary
+            self.updateDescriptionLabelTopConstraint()
         }
     }
 
@@ -46,6 +47,8 @@ final class CourseInfoTabInfoInstructorView: UIView {
     }
 
     private let appearance: Appearance
+
+    private var descriptionLabelTopConstraint: Constraint?
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -100,6 +103,14 @@ final class CourseInfoTabInfoInstructorView: UIView {
             self.imageView.image = nil
         }
     }
+
+    private func updateDescriptionLabelTopConstraint() {
+        self.descriptionLabelTopConstraint?.update(
+            offset: self.descriptionLabel.text?.isEmpty ?? true
+                ? 0
+                : self.appearance.descriptionLabelInsets.top
+        )
+    }
 }
 
 extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
@@ -133,9 +144,10 @@ extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProt
         self.descriptionLabel.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             make.leading.equalTo(self.imageView.snp.leading)
-            make.top
+            self.descriptionLabelTopConstraint = make.top
                 .equalTo(self.imageView.snp.bottom)
                 .offset(self.appearance.descriptionLabelInsets.top)
+                .constraint
         }
     }
 }
