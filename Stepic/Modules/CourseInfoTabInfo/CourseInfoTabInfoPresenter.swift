@@ -129,7 +129,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     private func formattedCertificate(course: Course) -> String {
         let certificateText = course.certificate.trimmingCharacters(in: .whitespaces)
         if certificateText.isEmpty {
-            return course.certificateRegularThreshold != nil && course.certificateDistinctionThreshold != nil
+            return course.certificateRegularThreshold ?? 0 > 0 && course.certificateDistinctionThreshold ?? 0 > 0
                 ? NSLocalizedString("Yes", comment: "")
                 : NSLocalizedString("No", comment: "")
         } else {
@@ -156,7 +156,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func formattedCertificateDetailTitle(_ title: String, points: Int?) -> String {
-        if let points = points {
+        if let points = points, points > 0 {
             let pluralizedPointsString = StringHelper.pluralize(
                 number: points,
                 forms: [
