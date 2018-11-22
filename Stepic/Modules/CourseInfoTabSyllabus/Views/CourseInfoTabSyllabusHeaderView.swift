@@ -20,6 +20,9 @@ extension CourseInfoTabSyllabusHeaderView {
         let buttonImageSize = CGSize(width: 15, height: 15)
 
         let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+
+        let separatorColor = UIColor(hex: 0xcccccc)
+        let separatorHeight: CGFloat = 1
     }
 }
 
@@ -70,6 +73,12 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         return button
     }()
 
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        return view
+    }()
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -85,12 +94,9 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
 }
 
 extension CourseInfoTabSyllabusHeaderView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-
-    }
-
     func addSubviews() {
         self.addSubview(self.stackView)
+        self.addSubview(self.separatorView)
 
         self.stackView.addArrangedSubview(self.calendarButton)
         self.stackView.addArrangedSubview(self.downloadAllButton)
@@ -103,7 +109,13 @@ extension CourseInfoTabSyllabusHeaderView: ProgrammaticallyInitializableViewProt
             make.top.equalToSuperview().offset(self.appearance.insets.top)
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
-            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
+        }
+
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.snp.makeConstraints { make in
+            make.top.equalTo(self.stackView.snp.bottom).offset(self.appearance.insets.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(self.appearance.separatorHeight)
         }
     }
 }

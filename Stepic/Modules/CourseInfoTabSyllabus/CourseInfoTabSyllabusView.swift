@@ -11,28 +11,31 @@ import SnapKit
 
 extension CourseInfoTabSyllabusView {
     struct Appearance {
-        let tableViewHeaderHeight: CGFloat = 60
+        let headerViewHeight: CGFloat = 60
     }
 }
 
 final class CourseInfoTabSyllabusView: UIView {
     let appearance: Appearance
 
-    private lazy var tableViewHeader = CourseInfoTabSyllabusHeaderView()
+    private lazy var headerView = CourseInfoTabSyllabusHeaderView()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.isScrollEnabled = false
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableHeaderView = self.tableViewHeader
+        tableView.separatorStyle = .none
 
         tableView.estimatedSectionHeaderHeight = 90.0
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionFooterHeight = .leastNonzeroMagnitude
 
-        tableView.estimatedRowHeight = 90.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100.0
+
+        tableView.register(cellClass: CourseInfoTabSyllabusTableViewCell.self)
+        tableView.delegate = self
+        tableView.dataSource = self
 
         return tableView
     }()
@@ -40,7 +43,7 @@ final class CourseInfoTabSyllabusView: UIView {
     override var intrinsicContentSize: CGSize {
         return CGSize(
             width: UIViewNoIntrinsicMetric,
-            height: self.tableView.contentSize.height
+            height: self.tableView.contentSize.height + self.appearance.headerViewHeight
         )
     }
 
@@ -59,26 +62,27 @@ final class CourseInfoTabSyllabusView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
         self.invalidateIntrinsicContentSize()
-        self.tableView.layoutTableHeaderView()
     }
 }
 
 extension CourseInfoTabSyllabusView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
+        self.addSubview(self.headerView)
         self.addSubview(self.tableView)
     }
 
     func makeConstraints() {
-        self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+        self.headerView.translatesAutoresizingMaskIntoConstraints = false
+        self.headerView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(self.appearance.headerViewHeight)
         }
 
-        self.tableViewHeader.translatesAutoresizingMaskIntoConstraints = false
-        self.tableViewHeader.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.tableViewHeaderHeight)
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(self.headerView.snp.bottom)
         }
     }
 }
@@ -89,12 +93,12 @@ extension CourseInfoTabSyllabusView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return 10
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = ""
+        let cell: CourseInfoTabSyllabusTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.updateConstraintsIfNeeded()
         return cell
     }
 

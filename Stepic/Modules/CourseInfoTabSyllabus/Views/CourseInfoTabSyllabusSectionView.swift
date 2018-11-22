@@ -15,16 +15,16 @@ extension CourseInfoTabSyllabusSectionView {
 
         let indexTextColor = UIColor.mainDark
         let indexFont = UIFont.systemFont(ofSize: 16)
-        let indexLabelInsets = UIEdgeInsets(top: 14, left: 18, bottom: 0, right: 15)
+        let indexLabelInsets = UIEdgeInsets(top: 18, left: 18, bottom: 0, right: 15)
 
         let titleTextColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 14)
-        let titleLabelInsets = UIEdgeInsets(top: 15, left: 15, bottom: 0, right: 15)
+        let titleLabelInsets = UIEdgeInsets(top: 19, left: 15, bottom: 0, right: 15)
 
-        let downloadButtonInsets = UIEdgeInsets(top: 14, left: 0, bottom: 0, right: 16)
+        let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 24, height: 24)
 
-        let deadlinesInsets = UIEdgeInsets(top: 10, left: 0, bottom: 8, right: 0)
+        let deadlinesInsets = UIEdgeInsets(top: 14, left: 0, bottom: 16, right: 0)
 
         let progressViewHeight: CGFloat = 3
         let progressViewMainColor = UIColor.stepicGreen
