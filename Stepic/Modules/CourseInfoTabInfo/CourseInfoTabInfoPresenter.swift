@@ -56,6 +56,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         let timeToCompleteText = self.formattedTimeToComplete(seconds: course.timeToComplete)
         let languageText = self.localizedLanguage(code: course.languageCode)
 
+        let certificateText = self.formattedCertificate(course: course)
         let certificateDetailsText = self.formattedCertificateDetails(
             conditionPoints: course.certificateRegularThreshold,
             distinctionPoints: course.certificateDistinctionThreshold
@@ -81,7 +82,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             targetAudienceText: course.audience.trimmingCharacters(in: .whitespaces),
             timeToCompleteText: timeToCompleteText,
             languageText: languageText,
-            certificateText: course.certificate.trimmingCharacters(in: .whitespaces),
+            certificateText: certificateText,
             certificateDetailsText: certificateDetailsText,
             instructors: instructorsViewModel,
             actionButtonTitle: actionButtonTitle
@@ -123,6 +124,17 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
     private func localizedLanguage(code: String) -> String {
         return Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? ""
+    }
+
+    private func formattedCertificate(course: Course) -> String {
+        let certificateText = course.certificate.trimmingCharacters(in: .whitespaces)
+        if certificateText.isEmpty {
+            return course.certificateRegularThreshold != nil && course.certificateDistinctionThreshold != nil
+                ? NSLocalizedString("Yes", comment: "")
+                : NSLocalizedString("No", comment: "")
+        } else {
+            return certificateText
+        }
     }
 
     private func formattedCertificateDetails(
