@@ -35,7 +35,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     var summary: String? {
         didSet {
-            self.descriptionLabel.text = self.summary
+            self.descriptionLabel.setTextWithHTMLString(self.summary ?? "")
             self.updateDescriptionLabelTopConstraint()
         }
     }
