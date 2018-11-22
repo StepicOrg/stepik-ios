@@ -22,6 +22,8 @@ struct CourseInfoTabInfoViewModel {
     let certificateDetailsText: String
 
     let instructors: [CourseInfoTabInfoInstructorViewModel]
+
+    let actionButtonTitle: String
 }
 
 struct CourseInfoTabInfoInstructorViewModel {

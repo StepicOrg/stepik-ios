@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 protocol CourseInfoTabInfoViewControllerProtocol: class {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel)
+
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
+    func showErrorIndicator(message: String?)
 }
 
 final class CourseInfoTabInfoViewController: UIViewController {
@@ -49,15 +54,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateState()
-        self.showCourseInfo()
-    }
-
-    // MARK: Requests logic
-
-    private func showCourseInfo() {
-        self.interactor.getCourseInfo(
-            request: CourseInfoTabInfo.ShowInfo.Request()
-        )
+        self.interactor.getCourseInfo(request: .init())
     }
 
     // MARK: Private helpers
@@ -78,6 +75,18 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtoc
         self.display(newState: viewModel.state)
     }
 
+    func showLoadingIndicator() {
+        SVProgressHUD.show()
+    }
+
+    func hideLoadingIndicator() {
+        SVProgressHUD.dismiss()
+    }
+
+    func showErrorIndicator(message: String?) {
+        SVProgressHUD.showError(withStatus: message)
+    }
+
     private func display(newState: CourseInfoTabInfo.ViewControllerState) {
         if case .result(let viewModel) = newState {
             self.infoView?.configure(viewModel: viewModel)
@@ -90,7 +99,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtoc
 // MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
-    func courseInfoTabInfoViewDidTapOnJoin(_ courseInfoTabInfoView: CourseInfoTabInfoView) {
-        print(#function)
+    func courseInfoTabInfoViewDidTapOnActionButton(_ courseInfoTabInfoView: CourseInfoTabInfoView) {
+        self.interactor.doCourseAction(request: .init())
     }
 }

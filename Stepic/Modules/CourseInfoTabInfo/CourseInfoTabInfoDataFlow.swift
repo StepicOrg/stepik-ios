@@ -24,6 +24,12 @@ enum CourseInfoTabInfo {
         }
     }
 
+    /// Click on action button
+    enum CourseAction {
+        struct Request {
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

@@ -11,7 +11,7 @@ import SnapKit
 import Atributika
 
 protocol CourseInfoTabInfoViewDelegate: class {
-    func courseInfoTabInfoViewDidTapOnJoin(_ courseInfoTabInfoView: CourseInfoTabInfoView)
+    func courseInfoTabInfoViewDidTapOnActionButton(_ courseInfoTabInfoView: CourseInfoTabInfoView)
 }
 
 extension CourseInfoTabInfoView {
@@ -53,8 +53,6 @@ final class CourseInfoTabInfoView: UIView {
         button.titleLabel?.font = self.appearance.joinButtonFont
         button.tintColor = self.appearance.joinButtonTextColor
         button.layer.cornerRadius = self.appearance.joinButtonCornerRadius
-
-        button.setTitle(NSLocalizedString("JoinCourse", comment: ""), for: .normal)
         button.addTarget(
             self,
             action: #selector(self.joinButtonClicked(sender:)),
@@ -118,14 +116,14 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
         self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
 
-        self.addJoinButton()
+        self.addJoinButton(title: viewModel.actionButtonTitle)
     }
 
     // MARK: Actions
 
     @objc
     private func joinButtonClicked(sender: UIButton) {
-        self.delegate?.courseInfoTabInfoViewDidTapOnJoin(self)
+        self.delegate?.courseInfoTabInfoViewDidTapOnActionButton(self)
     }
 
     // MARK: Private API
@@ -185,7 +183,9 @@ final class CourseInfoTabInfoView: UIView {
         self.scrollableStackView.addArrangedView(instructorsView)
     }
 
-    private func addJoinButton() {
+    private func addJoinButton(title: String) {
+        self.joinButton.setTitle(title, for: .normal)
+
         let buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
         self.joinButton.translatesAutoresizingMaskIntoConstraints = false

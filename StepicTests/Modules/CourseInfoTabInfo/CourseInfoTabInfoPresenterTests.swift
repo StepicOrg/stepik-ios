@@ -31,10 +31,10 @@ class CourseInfoTabInfoPresenterTests: QuickSpec {
 
             describe("its shows info") {
                 var actualViewModel: CourseInfoTabInfoViewModel! {
-                    if case .result(let viewModel) = viewControllerSpy.showInfoViewModel!.state {
+                    if case .result(let viewModel) = viewControllerSpy.invokedShowInfoViewModel!.state {
                         return viewModel
                     } else {
-                        fail("Expected `CourseInfoTabInfoViewModel` got \(viewControllerSpy.showInfoViewModel!.state)")
+                        fail("Expected `CourseInfoTabInfoViewModel` got \(viewControllerSpy.invokedShowInfoViewModel!.state)")
                         return nil
                     }
                 }
@@ -52,7 +52,10 @@ class CourseInfoTabInfoPresenterTests: QuickSpec {
                     course = nil
                     showInfo()
 
-                    if case .loading = viewControllerSpy.showInfoViewModel!.state {
+                    expect(viewControllerSpy.invokedDisplayCourseInfo).to(beTrue())
+                    expect(viewControllerSpy.invokedDisplayCourseInfoCount) == 1
+
+                    if case .loading = viewControllerSpy.invokedShowInfoViewModel!.state {
                     } else {
                         fail("Expected `.loading` state")
                     }
@@ -62,7 +65,10 @@ class CourseInfoTabInfoPresenterTests: QuickSpec {
                     configureAndShow { _ in
                     }
 
-                    if let viewModel = viewControllerSpy.showInfoViewModel,
+                    expect(viewControllerSpy.invokedDisplayCourseInfo).to(beTrue())
+                    expect(viewControllerSpy.invokedDisplayCourseInfoCount) == 1
+
+                    if let viewModel = viewControllerSpy.invokedShowInfoViewModel,
                        case .result = viewModel.state {
                     } else {
                         fail("Expected `.result` state")
@@ -75,6 +81,8 @@ class CourseInfoTabInfoPresenterTests: QuickSpec {
                         course.summary = expectedSummary
                     }
 
+                    expect(viewControllerSpy.invokedDisplayCourseInfo).to(beTrue())
+                    expect(viewControllerSpy.invokedDisplayCourseInfoCount) == 1
                     expect(actualViewModel.aboutText) == expectedSummary
                 }
 
@@ -84,6 +92,8 @@ class CourseInfoTabInfoPresenterTests: QuickSpec {
                         course.requirements = expectedRequirements
                     }
 
+                    expect(viewControllerSpy.invokedDisplayCourseInfo).to(beTrue())
+                    expect(viewControllerSpy.invokedDisplayCourseInfoCount) == 1
                     expect(actualViewModel.requirementsText) == expectedRequirements
                 }
 
@@ -93,6 +103,8 @@ class CourseInfoTabInfoPresenterTests: QuickSpec {
                         course.audience = expectedTargetAudience
                     }
 
+                    expect(viewControllerSpy.invokedDisplayCourseInfo).to(beTrue())
+                    expect(viewControllerSpy.invokedDisplayCourseInfoCount) == 1
                     expect(actualViewModel.targetAudienceText) == expectedTargetAudience
                 }
             }

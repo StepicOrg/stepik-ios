@@ -10,6 +10,16 @@ import UIKit
 
 protocol CourseInfoTabInfoPresenterProtocol {
     func presentCourseInfo(response: CourseInfoTabInfo.ShowInfo.Response)
+
+    func presentWaitingState()
+    func dismissWaitingState()
+    func presentErrorState(message: String?)
+}
+
+extension CourseInfoTabInfoPresenterProtocol {
+    func presentErrorState() {
+        self.presentErrorState(message: NSLocalizedString("Error", comment: ""))
+    }
 }
 
 final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
@@ -25,6 +35,18 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }
 
         self.viewController?.displayCourseInfo(viewModel: viewModel)
+    }
+
+    func presentWaitingState() {
+        self.viewController?.showLoadingIndicator()
+    }
+
+    func dismissWaitingState() {
+        self.viewController?.hideLoadingIndicator()
+    }
+
+    func presentErrorState(message: String?) {
+        self.viewController?.showErrorIndicator(message: message)
     }
 
     // MARK: Prepare view data
@@ -47,6 +69,10 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             )
         }
 
+        let actionButtonTitle = course.enrolled
+            ? NSLocalizedString("ContinueLearning", comment: "")
+            : NSLocalizedString("JoinCourse", comment: "")
+
         return CourseInfoTabInfoViewModel(
             author: authorText,
             introVideoURL: URL(string: course.introURL),
@@ -57,7 +83,8 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             languageText: languageText,
             certificateText: course.certificate.trimmingCharacters(in: .whitespaces),
             certificateDetailsText: certificateDetailsText,
-            instructors: instructorsViewModel
+            instructors: instructorsViewModel,
+            actionButtonTitle: actionButtonTitle
         )
     }
 

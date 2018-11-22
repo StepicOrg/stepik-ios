@@ -11,6 +11,12 @@ import UIKit
 final class CourseInfoTabInfoAssembly: Assembly {
     // Input
     var moduleInput: CourseInfoTabInfoInputProtocol?
+    // Output
+    private weak var moduleOutput: CourseInfoTabInfoOutputProtocol?
+
+    init(output: CourseInfoTabInfoOutputProtocol? = nil) {
+        self.moduleOutput = output
+    }
 
     func makeModule() -> UIViewController {
         let provider = CourseInfoTabInfoProvider(
@@ -19,15 +25,19 @@ final class CourseInfoTabInfoAssembly: Assembly {
         let presenter = CourseInfoTabInfoPresenter()
         let interactor = CourseInfoTabInfoInteractor(
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            analytics: CourseInfoTabInfoAnalytics(),
+            userAccountService: UserAccountService(),
+            courseSubscriber: CourseSubscriber(),
+            adaptiveStorageManager: AdaptiveStorageManager()
         )
-        self.moduleInput = interactor
-
         let viewController = CourseInfoTabInfoViewController(
             interactor: interactor
         )
 
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
+        self.moduleInput = interactor
 
         return viewController
     }
