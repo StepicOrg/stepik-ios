@@ -100,6 +100,12 @@ class DeepLinkRouter {
                 guard let source = presentationSource ?? navigation?.topViewController else {
                     return
                 }
+
+                var url = url
+                if let fromMobileUrl = URL(string: url.absoluteString + "?from_mobile_app=true") {
+                    url = fromMobileUrl
+                }
+
                 WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: source, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
             }
         })
