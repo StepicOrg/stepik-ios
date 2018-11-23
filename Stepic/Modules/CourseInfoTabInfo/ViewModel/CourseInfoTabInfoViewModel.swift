@@ -10,7 +10,9 @@ import UIKit
 
 struct CourseInfoTabInfoViewModel {
     let author: String
+
     let introVideoURL: URL?
+    let introVideoThumbnailURL: URL?
 
     let aboutText: String
     let requirementsText: String

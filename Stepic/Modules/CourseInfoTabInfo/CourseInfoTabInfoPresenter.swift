@@ -76,7 +76,8 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
         return CourseInfoTabInfoViewModel(
             author: authorText,
-            introVideoURL: URL(string: course.introURL),
+            introVideoURL: self.getIntroVideoURL(course: course),
+            introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
             aboutText: course.summary.trimmingCharacters(in: .whitespaces),
             requirementsText: course.requirements.trimmingCharacters(in: .whitespaces),
             targetAudienceText: course.audience.trimmingCharacters(in: .whitespaces),
@@ -87,6 +88,14 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             instructors: instructorsViewModel,
             actionButtonTitle: actionButtonTitle
         )
+    }
+
+    private func getIntroVideoURL(course: Course) -> URL? {
+        if let introVideo = course.introVideo, !introVideo.urls.isEmpty {
+            return introVideo.getUrlForQuality(VideosInfo.watchingVideoQuality)
+        } else {
+            return URL(string: course.introURL)
+        }
     }
 
     private func formattedAuthor(authors: [User]) -> String {

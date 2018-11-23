@@ -103,7 +103,10 @@ final class CourseInfoTabInfoView: UIView {
         }
 
         self.addAuthorView(author: viewModel.author)
-        self.addIntroVideoView(introVideoURL: viewModel.introVideoURL)
+        self.addIntroVideoView(
+            introVideoURL: viewModel.introVideoURL,
+            introVideoThumbnailURL: viewModel.introVideoThumbnailURL
+        )
 
         self.addTextBlockView(block: .about, message: viewModel.aboutText)
         self.addTextBlockView(block: .requirements, message: viewModel.requirementsText)
@@ -151,9 +154,12 @@ final class CourseInfoTabInfoView: UIView {
         self.scrollableStackView.addArrangedView(authorView)
     }
 
-    private func addIntroVideoView(introVideoURL: URL?) {
+    private func addIntroVideoView(introVideoURL: URL?, introVideoThumbnailURL: URL?) {
         if let introVideoURL = introVideoURL {
-            self.scrollableStackView.addArrangedView(CourseInfoTabInfoIntroVideoBlockView())
+            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView()
+            introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
+            introVideoBlockView.videoURL = introVideoURL
+            self.scrollableStackView.addArrangedView(introVideoBlockView)
         }
     }
 
