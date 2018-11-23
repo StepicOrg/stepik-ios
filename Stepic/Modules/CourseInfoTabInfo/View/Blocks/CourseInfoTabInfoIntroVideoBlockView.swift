@@ -83,6 +83,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
             Nuke.loadImage(
                 with: thumbnailImageURL,
                 options: .init(
+                    placeholder: Images.videoPlaceholder,
                     transition: .fadeIn(duration: self.appearance.thumbnailImageFadeInDuration)
                 ),
                 into: self.thumbnailImageView
