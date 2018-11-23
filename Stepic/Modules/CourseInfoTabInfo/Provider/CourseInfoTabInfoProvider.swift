@@ -10,9 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabInfoProviderProtocol {
-    func fetchInstructors(course: Course) -> Promise<[User]>
-
-    func fetchAuthors(course: Course) -> Promise<[User]>
+    func fetchUsers(ids: [Int], existing: [User]) -> Promise<[User]>
 }
 
 final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
@@ -22,15 +20,7 @@ final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
         self.usersAPI = usersAPI
     }
 
-    func fetchInstructors(course: Course) -> Promise<[User]> {
-        return self.fetchUsers(ids: course.instructorsArray, existing: course.instructors)
-    }
-
-    func fetchAuthors(course: Course) -> Promise<[User]> {
-        return self.fetchUsers(ids: course.authorsArray, existing: course.authors)
-    }
-
-    private func fetchUsers(ids: [Int], existing: [User]) -> Promise<[User]> {
+    func fetchUsers(ids: [Int], existing: [User]) -> Promise<[User]> {
         return Promise { seal in
             self.usersAPI.retrieve(
                 ids: ids,

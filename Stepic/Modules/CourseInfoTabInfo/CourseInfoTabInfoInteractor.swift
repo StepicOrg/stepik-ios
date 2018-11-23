@@ -51,34 +51,34 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
     // MARK: Get course info
 
     func getCourseInfo(request: CourseInfoTabInfo.ShowInfo.Request) {
-        self.fetchInstructors().then {
-            self.fetchAuthors()
-        }.done {
+        self.fetchUsers().done {
             self.presenter.presentCourseInfo(
                 response: .init(course: self.course)
             )
         }.catch { error in
             print("Failed get course info with error: \(error)")
+            self.presenter.presentErrorState()
         }
     }
 
-    private func fetchInstructors() -> Promise<Void> {
-        if let course = self.course {
-            return self.provider.fetchInstructors(course: course).done { users in
-                course.instructors = Sorter.sort(users, byIds: course.instructorsArray)
-            }
-        } else {
+    private func fetchUsers() -> Promise<Void> {
+        guard let course = self.course else {
             return .value(())
         }
-    }
 
-    private func fetchAuthors() -> Promise<Void> {
-        if let course = self.course {
-            return self.provider.fetchAuthors(course: course).done { users in
-                course.authors = Sorter.sort(users, byIds: course.authorsArray)
+        let ids = Array(Set(course.instructorsArray + course.authorsArray))
+        let existingUsers = Array(Set(course.instructors + course.authors))
+
+        return self.provider.fetchUsers(ids: ids, existing: existingUsers).done { users in
+            let instructors = users.filter {
+                course.instructorsArray.contains($0.id)
             }
-        } else {
-            return .value(())
+            let authors = users.filter {
+                course.authorsArray.contains($0.id)
+            }
+
+            course.instructors = Sorter.sort(instructors, byIds: course.instructorsArray)
+            course.authors = Sorter.sort(authors, byIds: course.authorsArray)
         }
     }
 
