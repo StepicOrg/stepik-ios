@@ -40,22 +40,18 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        self.addPlayVideoGestureRecognizer(imageView: imageView)
         return imageView
     }()
 
     private lazy var playImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "play_dark"))
         imageView.contentMode = .scaleAspectFit
-
-        let tapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.playViewClicked(sender:))
-        )
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
-
+        self.addPlayVideoGestureRecognizer(imageView: imageView)
         return imageView
     }()
+
+    // MARK: Init
 
     init(
         frame: CGRect = .zero,
@@ -73,6 +69,15 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: Actions
+
+    @objc
+    private func playClicked() {
+        print(#function)
+    }
+
+    // MARK: Private API
+
     private func loadThumbnail() {
         if let thumbnailImageURL = self.thumbnailImageURL {
             Nuke.loadImage(
@@ -87,9 +92,13 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         }
     }
 
-    @objc
-    private func playViewClicked(sender: Any) {
-        print(#function)
+    private func addPlayVideoGestureRecognizer(imageView: UIImageView) {
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.playClicked)
+        )
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 
