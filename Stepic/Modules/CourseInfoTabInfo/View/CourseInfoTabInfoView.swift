@@ -82,6 +82,11 @@ final class CourseInfoTabInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        self.scrollableStackView.removeAllArrangedViews()
+    }
+
     // MARK: Public API
 
     func showLoading() {

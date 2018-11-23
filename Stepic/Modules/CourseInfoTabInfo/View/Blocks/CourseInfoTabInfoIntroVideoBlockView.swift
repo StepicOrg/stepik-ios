@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 import SnapKit
 import Nuke
 
@@ -26,7 +28,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
     var videoURL: URL? {
         didSet {
-            print(self.videoURL)
+            self.initPlayerIfNeeded()
         }
     }
 
@@ -51,6 +53,13 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         return imageView
     }()
 
+    private lazy var playerViewController: AVPlayerViewController = {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.videoGravity = AVLayerVideoGravity.resizeAspectFill.rawValue
+        playerViewController.view.isHidden = true
+        return playerViewController
+    }()
+
     // MARK: Init
 
     init(
@@ -69,11 +78,19 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: UIView lifecycle
+
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        self.playerViewController.player?.pause()
+    }
+
     // MARK: Actions
 
     @objc
     private func playClicked() {
-        print(#function)
+        self.playerViewController.view.isHidden = false
+        self.playerViewController.player?.play()
     }
 
     // MARK: Private API
@@ -101,6 +118,12 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
     }
+
+    private func initPlayerIfNeeded() {
+        if let videoURL = self.videoURL, self.playerViewController.player == nil {
+            self.playerViewController.player = AVPlayer(url: videoURL)
+        }
+    }
 }
 
 extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableViewProtocol {
@@ -111,6 +134,7 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
     func addSubviews() {
         self.addSubview(self.thumbnailImageView)
         self.addSubview(self.playImageView)
+        self.addSubview(self.playerViewController.view)
     }
 
     func makeConstraints() {
@@ -124,6 +148,10 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
         self.playImageView.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.playImageViewSize)
             make.centerY.centerX.equalTo(self.thumbnailImageView.snp.center)
+        }
+
+        self.playerViewController.view.snp.makeConstraints { make in
+            make.edges.equalTo(self.thumbnailImageView)
         }
     }
 }
