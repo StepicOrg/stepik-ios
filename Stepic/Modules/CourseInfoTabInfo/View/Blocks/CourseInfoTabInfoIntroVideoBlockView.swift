@@ -123,7 +123,7 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
         self.playImageView.translatesAutoresizingMaskIntoConstraints = false
         self.playImageView.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.playImageViewSize)
-            make.centerY.centerX.equalToSuperview()
+            make.centerY.centerX.equalTo(self.thumbnailImageView.snp.center)
         }
     }
 }
