@@ -78,7 +78,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
             notificationsAPI: ApiDataDownloader.notifications,
             usersAPI: ApiDataDownloader.users,
             notificationsStatusAPI: NotificationStatusesAPI(),
-            notificationsRegistrationService: NotificationsRegistrationService(
+            notificationsRegistrationService: SplitTestNotificationsRegistrationService(
                 presenter: NotificationsRequestAlertPresenter(context: .notificationsTab),
                 analytics: .init(source: .notificationsTab)
             ),

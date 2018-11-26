@@ -97,7 +97,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        self.notificationsRegistrationService.renewDeviceToken()
+        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            SplitTestNotificationsRegistrationService(
+                source: .launch
+            ).registerForRemoteNotifications()
+        } else {
+            self.notificationsRegistrationService.renewDeviceToken()
+        }
+
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()

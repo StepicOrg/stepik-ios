@@ -343,8 +343,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func suggestStreak(streak: Int) {
-        self.streaksAlertPresentationManager.controller = self
-        self.streaksAlertPresentationManager.suggestStreak(streak: streak)
+        if !SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            self.streaksAlertPresentationManager.controller = self
+            self.streaksAlertPresentationManager.suggestStreak(streak: streak)
+        }
     }
 
     func showRateAlert() {

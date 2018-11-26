@@ -30,7 +30,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     private let notificationSuggestionManager = NotificationSuggestionManager()
     private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
-        NotificationsRegistrationService(
+        SplitTestNotificationsRegistrationService(
             delegate: self,
             presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
             analytics: .init(source: .courseSubscription)
