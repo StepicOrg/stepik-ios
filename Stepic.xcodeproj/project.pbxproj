@@ -7107,17 +7107,6 @@
 			name = Explore;
 			sourceTree = "<group>";
 		};
-		0853A3DE213D8F6100931F72 /* Split tests */ = {
-			isa = PBXGroup;
-			children = (
-				089877B4214061EC0065DFA2 /* Active Tests */,
-				0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */,
-				0898779F214047650065DFA2 /* SplitTestingService.swift */,
-				0898779E214047640065DFA2 /* SplitTestProtocol.swift */,
-			);
-			name = "Split tests";
-			sourceTree = "<group>";
-		};
 		085514E91CFB09170080CB88 /* WebViewHelpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -7514,15 +7503,6 @@
 			path = "Deep Links";
 			sourceTree = "<group>";
 		};
-		089877B4214061EC0065DFA2 /* Active Tests */ = {
-			isa = PBXGroup;
-			children = (
-				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
-				0848BE8A218379A400762DC1 /* JoinCourseStringSplitTest.swift */,
-			);
-			name = "Active Tests";
-			sourceTree = "<group>";
-		};
 		089F58871D22BD44000CD540 /* DiscussionCountView */ = {
 			isa = PBXGroup;
 			children = (
@@ -7803,7 +7783,7 @@
 				62E986DB2768602666465180 /* AppDelegate.swift */,
 				08E43E95214C277600E3CB50 /* Transition Routers */,
 				2C89089E216F460F00083341 /* Services */,
-				0853A3DE213D8F6100931F72 /* Split tests */,
+				62E98F39D7A7B4486E71DF3E /* SplitTests */,
 				08484EDF211AF41A0006266F /* Stories */,
 				2CE664DE20F5204D0082F3FE /* Downloader */,
 				088E73E92060124B00D458E3 /* ApiRequestRetrier.swift */,
@@ -9082,6 +9062,15 @@
 				2C6819FF210B00C600C3DDCA /* AuthSignInView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2C37968421ABED9500BC7E62 /* ActiveTests */ = {
+			isa = PBXGroup;
+			children = (
+				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
+				0848BE8A218379A400762DC1 /* JoinCourseStringSplitTest.swift */,
+			);
+			path = ActiveTests;
 			sourceTree = "<group>";
 		};
 		2C3E42B92101DE34009D76DF /* KnowledgeGraph */ = {
@@ -10865,6 +10854,17 @@
 				62E98778AE17D820A3E7A98B /* StepsPagerPresenterImpl.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		62E98F39D7A7B4486E71DF3E /* SplitTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C37968421ABED9500BC7E62 /* ActiveTests */,
+				0898779D214047640065DFA2 /* SplitTestGroupProtocol.swift */,
+				0898779F214047650065DFA2 /* SplitTestingService.swift */,
+				0898779E214047640065DFA2 /* SplitTestProtocol.swift */,
+			);
+			path = SplitTests;
 			sourceTree = "<group>";
 		};
 		62E98F6778240E9688E5282D /* StreakActivityView */ = {
