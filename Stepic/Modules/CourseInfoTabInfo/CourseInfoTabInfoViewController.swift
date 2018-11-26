@@ -28,6 +28,10 @@ final class CourseInfoTabInfoViewController: UIViewController {
         }
     }
 
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+
     // MARK: Init
 
     init(
@@ -47,7 +51,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        self.view = CourseInfoTabInfoView(delegate: self)
+        self.view = CourseInfoTabInfoView(delegate: self, videoViewDelegate: self)
     }
 
     override func viewDidLoad() {
@@ -101,5 +105,19 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtoc
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
     func courseInfoTabInfoViewDidTapOnActionButton(_ courseInfoTabInfoView: CourseInfoTabInfoView) {
         self.interactor.doCourseAction(request: .init())
+    }
+}
+
+// MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewDelegate -
+
+extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewDelegate {
+    var playerParentViewController: UIViewController? {
+        return self
+    }
+
+    func courseInfoTabInfoIntroVideoBlockViewDidDismissFullscreen(
+        _ CourseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
+    ) {
+        self.setNeedsStatusBarAppearanceUpdate()
     }
 }

@@ -11,7 +11,9 @@ import SnapKit
 import Atributika
 
 protocol CourseInfoTabInfoViewDelegate: class {
-    func courseInfoTabInfoViewDidTapOnActionButton(_ courseInfoTabInfoView: CourseInfoTabInfoView)
+    func courseInfoTabInfoViewDidTapOnActionButton(
+        _ courseInfoTabInfoView: CourseInfoTabInfoView
+    )
 }
 
 extension CourseInfoTabInfoView {
@@ -36,6 +38,7 @@ extension CourseInfoTabInfoView {
 
 final class CourseInfoTabInfoView: UIView {
     weak var delegate: CourseInfoTabInfoViewDelegate?
+    weak var videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate?
 
     private let appearance: Appearance
 
@@ -67,10 +70,12 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        delegate: CourseInfoTabInfoViewDelegate? = nil
+        delegate: CourseInfoTabInfoViewDelegate? = nil,
+        videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate? = nil
     ) {
         self.appearance = appearance
         self.delegate = delegate
+        self.videoViewDelegate = videoViewDelegate
         super.init(frame: frame)
 
         self.setupView()
@@ -161,7 +166,9 @@ final class CourseInfoTabInfoView: UIView {
 
     private func addIntroVideoView(introVideoURL: URL?, introVideoThumbnailURL: URL?) {
         if let introVideoURL = introVideoURL {
-            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView()
+            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(
+                delegate: self.videoViewDelegate
+            )
             introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
             introVideoBlockView.videoURL = introVideoURL
             self.scrollableStackView.addArrangedView(introVideoBlockView)

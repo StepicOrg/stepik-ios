@@ -12,19 +12,27 @@ import AVKit
 import SnapKit
 import Nuke
 
+protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
+    var playerParentViewController: UIViewController? { get }
+
+    func courseInfoTabInfoIntroVideoBlockViewDidDismissFullscreen(
+        _ CourseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
+    )
+}
+
 extension CourseInfoTabInfoIntroVideoBlockView {
     struct Appearance {
         let introVideoHeight: CGFloat = 203
         let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-
         let thumbnailImageFadeInDuration: TimeInterval = 0.15
-
         let playImageViewSize = CGSize(width: 50, height: 50)
     }
 }
 
 final class CourseInfoTabInfoIntroVideoBlockView: UIView {
     private let appearance: Appearance
+
+    weak var delegate: CourseInfoTabInfoIntroVideoBlockViewDelegate?
 
     var videoURL: URL? {
         didSet {
@@ -37,6 +45,8 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
             self.loadThumbnail()
         }
     }
+
+    private var playerVideoBoundsObservation: NSKeyValueObservation?
 
     private lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
@@ -53,10 +63,26 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         return imageView
     }()
 
-    private lazy var playerViewController: AVPlayerViewController = {
+    @objc
+    private dynamic lazy var playerViewController: AVPlayerViewController = {
         let playerViewController = AVPlayerViewController()
         playerViewController.videoGravity = AVLayerVideoGravity.resizeAspectFill.rawValue
         playerViewController.view.isHidden = true
+
+        self.playerVideoBoundsObservation = playerViewController.observe(
+            \.videoBounds,
+            options: [.old, .new]
+        ) { (_, change) in
+            guard let oldValue = change.oldValue,
+                  let newValue = change.newValue else {
+                return
+            }
+            if oldValue.size.height > self.appearance.introVideoHeight
+                   && newValue.size.height == self.appearance.introVideoHeight {
+                self.delegate?.courseInfoTabInfoIntroVideoBlockViewDidDismissFullscreen(self)
+            }
+        }
+
         return playerViewController
     }()
 
@@ -64,9 +90,11 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
     init(
         frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
+        appearance: Appearance = Appearance(),
+        delegate: CourseInfoTabInfoIntroVideoBlockViewDelegate? = nil
     ) {
         self.appearance = appearance
+        self.delegate = delegate
         super.init(frame: frame)
 
         self.setupView()
@@ -78,7 +106,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: UIView lifecycle
+    // MARK: Lifecycle
 
     override func removeFromSuperview() {
         super.removeFromSuperview()
@@ -106,7 +134,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
                 into: self.thumbnailImageView
             )
         } else {
-            self.thumbnailImageView.image = nil
+            self.thumbnailImageView.image = Images.videoPlaceholder
         }
     }
 
@@ -134,7 +162,10 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
     func addSubviews() {
         self.addSubview(self.thumbnailImageView)
         self.addSubview(self.playImageView)
+
+        self.delegate?.playerParentViewController?.addChildViewController(self.playerViewController)
         self.addSubview(self.playerViewController.view)
+        self.playerViewController.didMove(toParentViewController: self.delegate?.playerParentViewController)
     }
 
     func makeConstraints() {
