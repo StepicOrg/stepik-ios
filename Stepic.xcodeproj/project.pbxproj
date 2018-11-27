@@ -1729,6 +1729,7 @@
 		2C2365E02107806800C99742 /* VideoDownloaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365DF2107806800C99742 /* VideoDownloaderManager.swift */; };
 		2C2365E421078CEF00C99742 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
 		2C2365E621086F6600C99742 /* VideoDownloaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E521086F6600C99742 /* VideoDownloaderTask.swift */; };
+		2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12621AD8907001DCF89 /* NextLessonService.swift */; };
 		2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */; };
 		2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */; };
 		2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
@@ -5558,6 +5559,7 @@
 		2C2365DF2107806800C99742 /* VideoDownloaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloaderManager.swift; sourceTree = "<group>"; };
 		2C2365E321078CEF00C99742 /* VideoFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFileManager.swift; sourceTree = "<group>"; };
 		2C2365E521086F6600C99742 /* VideoDownloaderTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloaderTask.swift; sourceTree = "<group>"; };
+		2C23C12621AD8907001DCF89 /* NextLessonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonService.swift; sourceTree = "<group>"; };
 		2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthPresenter.swift; sourceTree = "<group>"; };
 		2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthProviders.swift; sourceTree = "<group>"; };
 		2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
@@ -9639,6 +9641,7 @@
 				2CAD8B9E2170CDF7003F420B /* Notifications */,
 				08E43E9321495FD500E3CB50 /* DeepLinkRoutingService.swift */,
 				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
+				2C23C12621AD8907001DCF89 /* NextLessonService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -14809,6 +14812,7 @@
 				2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */,
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
+				2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */,
 				089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */,
 				083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
