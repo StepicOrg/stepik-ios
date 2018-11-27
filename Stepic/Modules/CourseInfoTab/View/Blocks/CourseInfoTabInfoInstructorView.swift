@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import Nuke
 
 extension CourseInfoTabInfoInstructorView {
     struct Appearance {
@@ -41,17 +40,21 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     var avatarImageURL: URL? {
         didSet {
-            self.loadImage(url: self.avatarImageURL)
+            self.imageView.loadImage(url: self.avatarImageURL)
         }
     }
 
     private let appearance: Appearance
 
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
+    private lazy var imageView: CourseCoverImageView = {
+        let imageView = CourseCoverImageView(
+            appearance: .init(
+                placeholderImage: UIImage(),
+                cornerRadius: self.appearance.imageViewCornerRadius,
+                imageFadeInDuration: self.appearance.imageFadeInDuration
+            )
+        )
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = self.appearance.imageViewCornerRadius
-        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -85,20 +88,6 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    private func loadImage(url: URL?) {
-        if let url = url {
-            Nuke.loadImage(
-                with: url,
-                options: .init(
-                    transition: .fadeIn(duration: self.appearance.imageFadeInDuration)
-                ),
-                into: self.imageView
-            )
-        } else {
-            self.imageView.image = nil
-        }
     }
 }
 
