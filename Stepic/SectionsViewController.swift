@@ -30,7 +30,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
 
     private let notificationSuggestionManager = NotificationSuggestionManager()
     private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
-        SplitTestNotificationsRegistrationService(
+        NotificationsRegistrationService(
             delegate: self,
             presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
             analytics: .init(source: .courseSubscription)
@@ -253,7 +253,8 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }, error: {})
         }
 
-        if didJustSubscribe {
+        if didJustSubscribe
+               && !SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
             NotificationPermissionStatus.current.done { status in
                 if status == .notDetermined {
                     self.notificationsRegistrationService.registerForRemoteNotifications()

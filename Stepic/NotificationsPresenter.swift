@@ -139,7 +139,9 @@ final class NotificationsPresenter {
     }
 
     func didAppear() {
-        self.notificationsRegistrationService.registerForRemoteNotifications()
+        if !SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            self.notificationsRegistrationService.registerForRemoteNotifications()
+        }
     }
 
     func refresh() {

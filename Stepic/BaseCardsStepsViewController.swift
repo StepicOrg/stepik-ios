@@ -69,7 +69,7 @@ class BaseCardsStepsViewController: CardsStepsViewController {
                 storageManager: AdaptiveStorageManager(),
                 lastViewedUpdater: LocalProgressLastViewedUpdater(),
                 notificationSuggestionManager: NotificationSuggestionManager(),
-                notificationsRegistrationService: SplitTestNotificationsRegistrationService(
+                notificationsRegistrationService: NotificationsRegistrationService(
                     presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
                     analytics: .init(source: .courseSubscription)
                 ),

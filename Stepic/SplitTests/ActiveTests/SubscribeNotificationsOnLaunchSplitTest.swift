@@ -27,14 +27,5 @@ final class SubscribeNotificationsOnLaunchSplitTest: SplitTestProtocol {
         case test = "test"
 
         static var groups: [Group] = [.control, .test]
-
-        var shouldSubscribe: Bool {
-            switch self {
-            case .control:
-                return false
-            case .test:
-                return true
-            }
-        }
     }
 }

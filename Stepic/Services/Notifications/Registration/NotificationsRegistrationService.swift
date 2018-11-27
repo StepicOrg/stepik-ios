@@ -13,47 +13,7 @@ import FirebaseInstanceID
 import PromiseKit
 import UserNotifications
 
-final class SplitTestNotificationsRegistrationService: NotificationsRegistrationService {
-    private let splitTestingService: SplitTestingServiceProtocol
-    private let source: Source
-
-    init(
-        delegate: NotificationsRegistrationServiceDelegate? = nil,
-        presenter: NotificationsRegistrationPresentationServiceProtocol? = nil,
-        analytics: NotificationAlertsAnalytics? = nil,
-        splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
-            analyticsService: AnalyticsUserProperties(),
-            storage: UserDefaults.standard
-        ),
-        source: Source = .other
-    ) {
-        self.splitTestingService = splitTestingService
-        self.source = source
-        super.init(delegate: delegate, presenter: presenter, analytics: analytics)
-    }
-
-    override func registerForRemoteNotifications() {
-        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
-            let splitTest = self.splitTestingService.fetchSplitTest(
-                SubscribeNotificationsOnLaunchSplitTest.self
-            )
-            if splitTest.currentGroup.shouldSubscribe && self.source == .launch {
-                super.registerForRemoteNotifications()
-            } else {
-                super.renewDeviceToken()
-            }
-        } else {
-            super.registerForRemoteNotifications()
-        }
-    }
-
-    enum Source {
-        case launch
-        case other
-    }
-}
-
-class NotificationsRegistrationService: NotificationsRegistrationServiceProtocol {
+final class NotificationsRegistrationService: NotificationsRegistrationServiceProtocol {
     weak var delegate: NotificationsRegistrationServiceDelegate?
     var presenter: NotificationsRegistrationPresentationServiceProtocol?
     private var analytics: NotificationAlertsAnalytics?

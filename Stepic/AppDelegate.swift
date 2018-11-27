@@ -26,7 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
-    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
+        analytics: .init(source: .abAppLaunch)
+    )
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
 
     deinit {
@@ -98,9 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
-            SplitTestNotificationsRegistrationService(
-                source: .launch
-            ).registerForRemoteNotifications()
+            self.notificationsRegistrationService.registerForRemoteNotifications()
         } else {
             self.notificationsRegistrationService.renewDeviceToken()
         }
@@ -236,7 +236,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"
-           || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+               || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 
@@ -258,7 +258,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if branchService.canOpenWithBranch(url: url) {
                 branchService.openURL(app: app, open: url, options: options)
             } else {
-            // Other actions
+                // Other actions
                 self.handleOpenedFromDeepLink(url)
             }
         }

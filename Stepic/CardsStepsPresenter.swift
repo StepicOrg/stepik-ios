@@ -152,7 +152,9 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func appearedAfterSubscription() {
-        self.notificationsRegistrationService.registerForRemoteNotifications()
+        if !SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            self.notificationsRegistrationService.registerForRemoteNotifications()
+        }
     }
 
     private func refreshTopCardForOnboarding(stepIndex: Int) {
