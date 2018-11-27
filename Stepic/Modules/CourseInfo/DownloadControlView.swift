@@ -157,7 +157,7 @@ final class DownloadControlView: UIControl {
 
     private func updateVisibility() {
         switch self.actionState {
-        case .downloading(_):
+        case .downloading:
             self.downloadingBackgroundCircleLayer.isHidden = false
             self.downloadingCircleLayer.isHidden = false
             self.pendingCircleLayer.isHidden = true
