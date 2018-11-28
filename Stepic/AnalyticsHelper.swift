@@ -12,7 +12,6 @@ import FirebaseCore
 import YandexMobileMetrica
 import Crashlytics
 import Amplitude_iOS
-import AppsFlyerLib
 
 class AnalyticsHelper {
     static var sharedHelper = AnalyticsHelper()
@@ -27,8 +26,5 @@ class AnalyticsHelper {
         }
 
         Amplitude.instance().initializeApiKey(Tokens.shared.amplitudeToken)
-
-        AppsFlyerTracker.shared().appsFlyerDevKey = Tokens.shared.appsFlyerDevKey
-        AppsFlyerTracker.shared().appleAppID = "\(Tokens.shared.firebaseId)"
     }
 }
