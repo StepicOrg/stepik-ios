@@ -52,7 +52,7 @@ final class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
 
     private func openWeb(path: String, from source: UIViewController) {
         if var url = URL(string: path) {
-            url.appendFromMobileQueryParameter()
+            url.appendQueryParameters(["from_mobile_app": "true"])
             source.present(SFSafariViewController(url: url), animated: true)
         }
     }

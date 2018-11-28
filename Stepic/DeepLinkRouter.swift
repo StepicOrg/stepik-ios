@@ -100,7 +100,7 @@ final class DeepLinkRouter {
                 }
 
                 var url = url
-                url.appendFromMobileQueryParameter()
+                url.appendQueryParameters(["from_mobile_app": "true"])
 
                 WebControllerManager.sharedManager.presentWebControllerWithURL(
                     url,

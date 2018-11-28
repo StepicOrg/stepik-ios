@@ -9,8 +9,6 @@
 import Foundation
 
 extension URL {
-    private static let fromMobileQueryParameterName = "from_mobile_app"
-
     /// URL with appending query parameters.
     ///
     /// - Parameter parameters: parameters dictionary.
@@ -21,7 +19,7 @@ extension URL {
             items += parameters.map {
                 URLQueryItem(name: $0, value: $1)
             }
-            urlComponents.queryItems = items
+            urlComponents.queryItems = Array(Set(items))
             return urlComponents.url
         } else {
             return nil
@@ -35,23 +33,5 @@ extension URL {
         if let url = self.appendingQueryParameters(parameters) {
             self = url
         }
-    }
-
-    /// Append `from_mobile_app` query parameter to URL.
-    mutating func appendFromMobileQueryParameter() {
-        if self.queryValue(for: URL.fromMobileQueryParameterName) == nil {
-            self.appendQueryParameters([
-                URL.fromMobileQueryParameterName: "true"
-            ])
-        }
-    }
-
-    /// Get value of a query key.
-    ///
-    /// - Parameter key: The key of a query value.
-    func queryValue(for key: String) -> String? {
-        return URLComponents(string: self.absoluteString)?.queryItems?.first { item in
-            item.name == key
-        }?.value
     }
 }
