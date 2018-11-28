@@ -79,8 +79,9 @@ final class WebControllerManager: NSObject {
             return
         }
 
-        var url = url
-        url.appendQueryParameters(["from_mobile_app": "true"])
+        guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
+            return
+        }
 
         if forceCustom {
             self.currentWebControllerKey = key
