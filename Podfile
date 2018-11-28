@@ -34,9 +34,7 @@ def all_pods
     pod 'FirebaseRemoteConfig', '3.0.1'
 
     pod 'Amplitude-iOS', '4.3.0'
-    
-    pod 'AppsFlyerFramework', '4.8.8'
-    
+        
     pod 'BEMCheckBox', '1.4.1'
 
     # actual version - 6.x, we should test it before update
