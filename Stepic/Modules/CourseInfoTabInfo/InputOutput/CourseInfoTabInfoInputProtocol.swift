@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CourseInfoTabInfoInputProtocol: class {
-    var course: Course? { get set }
+    func update(with course: Course)
 }

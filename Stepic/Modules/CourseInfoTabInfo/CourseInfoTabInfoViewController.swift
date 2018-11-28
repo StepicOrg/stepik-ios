@@ -58,7 +58,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateState()
-        self.interactor.getCourseInfo(request: .init())
+        self.interactor.getCourseInfo()
     }
 
     // MARK: Private helpers
@@ -104,7 +104,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtoc
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
     func courseInfoTabInfoViewDidTapOnActionButton(_ courseInfoTabInfoView: CourseInfoTabInfoView) {
-        self.interactor.doCourseAction(request: .init())
+        self.interactor.doCourseAction()
     }
 }
 

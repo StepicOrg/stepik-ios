@@ -25,11 +25,7 @@ final class CourseInfoTabInfoAssembly: Assembly {
         let presenter = CourseInfoTabInfoPresenter()
         let interactor = CourseInfoTabInfoInteractor(
             presenter: presenter,
-            provider: provider,
-            analytics: CourseInfoTabInfoAnalytics(),
-            userAccountService: UserAccountService(),
-            courseSubscriber: CourseSubscriber(),
-            adaptiveStorageManager: AdaptiveStorageManager()
+            provider: provider
         )
         let viewController = CourseInfoTabInfoViewController(
             interactor: interactor

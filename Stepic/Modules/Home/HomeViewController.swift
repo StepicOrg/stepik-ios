@@ -74,7 +74,7 @@ final class HomeViewController: BaseExploreViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             self.coursesAPI.retrieve(ids: [191]).done { courses in
-                assembly.moduleInput?.course = courses.first
+                assembly.moduleInput?.update(with: courses.first!)
             }
         }
     }

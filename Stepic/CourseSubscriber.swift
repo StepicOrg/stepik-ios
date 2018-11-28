@@ -10,9 +10,7 @@ import Foundation
 import PromiseKit
 
 enum CourseSubscriptionSource: String {
-    case widget
-    case preview
-    case courseInfoTab
+    case widget, preview
 }
 
 protocol CourseSubscriberProtocol {

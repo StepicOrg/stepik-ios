@@ -9,6 +9,5 @@
 import Foundation
 
 protocol CourseInfoTabInfoOutputProtocol: class {
-    func presentLastStep(course: Course, isAdaptive: Bool)
-    func presentAuthorization()
+    func doCourseAction(course: Course)
 }

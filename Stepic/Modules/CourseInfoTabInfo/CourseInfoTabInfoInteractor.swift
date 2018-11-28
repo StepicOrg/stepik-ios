@@ -10,9 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabInfoInteractorProtocol {
-    func getCourseInfo(request: CourseInfoTabInfo.ShowInfo.Request)
-
-    func doCourseAction(request: CourseInfoTabInfo.CourseAction.Request)
+    func getCourseInfo()
+    func doCourseAction()
 }
 
 final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, CourseInfoTabInfoInputProtocol {
@@ -21,37 +20,34 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
     let presenter: CourseInfoTabInfoPresenterProtocol
     let provider: CourseInfoTabInfoProviderProtocol
 
-    let analytics: CourseInfoTabInfoAnalyticsProtocol
-    let userAccountService: UserAccountServiceProtocol
-    let courseSubscriber: CourseSubscriberProtocol
-    let adaptiveStorageManager: AdaptiveStorageManagerProtocol
-
-    var course: Course? {
+    private var course: Course? {
         didSet {
-            self.getCourseInfo(request: .init())
+            self.getCourseInfo()
         }
     }
 
     init(
         presenter: CourseInfoTabInfoPresenterProtocol,
-        provider: CourseInfoTabInfoProviderProtocol,
-        analytics: CourseInfoTabInfoAnalyticsProtocol,
-        userAccountService: UserAccountServiceProtocol,
-        courseSubscriber: CourseSubscriberProtocol,
-        adaptiveStorageManager: AdaptiveStorageManagerProtocol
+        provider: CourseInfoTabInfoProviderProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
-        self.analytics = analytics
-        self.userAccountService = userAccountService
-        self.courseSubscriber = courseSubscriber
-        self.adaptiveStorageManager = adaptiveStorageManager
+    }
+
+    // MARK: CourseInfoTabInfoInputProtocol
+
+    func update(with course: Course) {
+        self.course = course
     }
 
     // MARK: Get course info
 
-    func getCourseInfo(request: CourseInfoTabInfo.ShowInfo.Request) {
-        self.fetchUsers().done {
+    func getCourseInfo() {
+        guard let course = self.course else {
+            return
+        }
+
+        self.provider.fetchCourseUsers(course).done { course in
             self.presenter.presentCourseInfo(
                 response: .init(course: self.course)
             )
@@ -61,63 +57,14 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
         }
     }
 
-    private func fetchUsers() -> Promise<Void> {
-        guard let course = self.course else {
-            return .value(())
-        }
-
-        let ids = Array(Set(course.instructorsArray + course.authorsArray))
-        let existingUsers = Array(Set(course.instructors + course.authors))
-
-        return self.provider.fetchUsers(ids: ids, existing: existingUsers).done { users in
-            let instructors = users.filter {
-                course.instructorsArray.contains($0.id)
-            }
-            let authors = users.filter {
-                course.authorsArray.contains($0.id)
-            }
-
-            course.instructors = Sorter.sort(instructors, byIds: course.instructorsArray)
-            course.authors = Sorter.sort(authors, byIds: course.authorsArray)
-        }
-    }
-
     // MARK: Course action
 
-    func doCourseAction(request: CourseInfoTabInfo.CourseAction.Request) {
-        guard let course = self.course else {
-            return self.presenter.presentErrorState()
-        }
-
-        self.presenter.presentWaitingState()
-
-        if !self.userAccountService.isAuthorized {
-            self.presenter.dismissWaitingState()
-            self.moduleOutput?.presentAuthorization()
-            return
-        }
-
-        if course.enrolled {
-            self.openLastStep(course: course)
+    func doCourseAction() {
+        if let course = self.course {
+            self.presenter.presentWaitingState()
+            self.moduleOutput?.doCourseAction(course: course)
         } else {
-            self.courseSubscriber.join(course: course, source: .courseInfoTab).done { course in
-                self.analytics.reportContinuePressedForCourseWithId(course.id, title: course.title)
-                self.openLastStep(course: course)
-                self.course = course
-            }.catch { error in
-                print("CourseInfoTabInfo: failed join course with error: \(error)")
-                self.presenter.presentErrorState()
-            }
+            self.presenter.presentErrorState()
         }
-    }
-
-    private func openLastStep(course: Course) {
-        self.presenter.dismissWaitingState()
-        self.moduleOutput?.presentLastStep(
-            course: course,
-            isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
-                courseId: course.id
-            )
-        )
     }
 }

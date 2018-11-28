@@ -12,21 +12,12 @@ enum CourseInfoTabInfo {
     // MARK: Use cases
 
     enum ShowInfo {
-        struct Request {
-        }
-
         struct Response {
             let course: Course?
         }
 
         struct ViewModel {
             var state: ViewControllerState
-        }
-    }
-
-    /// Click on action button
-    enum CourseAction {
-        struct Request {
         }
     }
 
