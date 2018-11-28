@@ -17,6 +17,8 @@ final class NotificationsService {
     private let localNotificationsService: LocalNotificationsService
     private let deepLinkRoutingService: DeepLinkRoutingService
 
+    private var achievementsRetriever: AchievementsRetriever?
+
     private var isInForeground: Bool {
         return UIApplication.shared.applicationState == .active
     }
@@ -217,28 +219,46 @@ extension NotificationsService {
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
         let shouldParticipate: Bool? = true
 
+        // TODO: Remove
         if shouldParticipate! {
-            guard let currentNavigation = SourcelessRouter().currentNavigation,
+            guard let userId = AuthInfo.shared.userId,
+                  let currentNavigation = SourcelessRouter().currentNavigation,
                   let object = userInfo[PayloadKey.object.rawValue] as? String,
                   let kind = JSON(parseJSON: object)["kind"].string,
                   let kindDescription = AchievementKind(rawValue: kind) else {
                 return print("remote notification received: unable to parse notification: \(userInfo)")
             }
 
-            let popupViewController = ABAchievementPopupViewController(
-                nibName: "AchievementPopupViewController",
-                bundle: nil
+            self.achievementsRetriever = AchievementsRetriever(
+                userId: userId,
+                achievementsAPI: AchievementsAPI(),
+                achievementProgressesAPI: AchievementProgressesAPI()
             )
-            popupViewController.loadViewIfNeeded()
-            popupViewController.titleText = kindDescription.getName()
-            popupViewController.descriptionText = NSLocalizedString("AchievementsNew", comment: "")
-            popupViewController.badgeImage = kindDescription.getBadge(for: 1)
 
-            DispatchQueue.main.async {
-                AchievementPopupAlertManager().present(
-                    alert: popupViewController,
-                    inController: currentNavigation
+            self.achievementsRetriever?.loadAchievementProgress(for: kind).done { progress in
+                let viewData = AchievementViewData(
+                    title: kindDescription.getName(),
+                    description: kindDescription.getDescription(for: progress.maxScore),
+                    badge: kindDescription.getBadge(for: progress.currentLevel),
+                    completedLevel: progress.currentLevel,
+                    maxLevel: progress.maxLevel,
+                    score: progress.currentScore,
+                    maxScore: progress.maxScore
                 )
+                self.presentAchievementPopup(
+                    AchievementPopupAlertManager().construct(with: viewData, canShare: true),
+                    in: currentNavigation
+                )
+            }.catch { _ in
+                let popup = ABAchievementPopupViewController(
+                    nibName: "AchievementPopupViewController",
+                    bundle: nil
+                )
+                popup.loadViewIfNeeded()
+                popup.titleText = kindDescription.getName()
+                popup.descriptionText = NSLocalizedString("AchievementsNew", comment: "")
+                popup.badgeImage = kindDescription.getBadge(for: 1)
+                self.presentAchievementPopup(popup, in: currentNavigation)
             }
         } else {
             DispatchQueue.main.async {
@@ -258,6 +278,15 @@ extension NotificationsService {
                     TabBarRouter(tab: .profile).route()
                 }
             }
+        }
+    }
+
+    private func presentAchievementPopup(_ popup: UIViewController, in controller: UIViewController) {
+        DispatchQueue.main.async {
+            AchievementPopupAlertManager().present(
+                alert: popup,
+                inController: controller
+            )
         }
     }
 
