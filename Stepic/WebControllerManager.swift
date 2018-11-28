@@ -10,10 +10,10 @@ import UIKit
 import SafariServices
 import WebKit
 
-class WebControllerManager: NSObject {
-    fileprivate override init() { super.init() }
+final class WebControllerManager: NSObject {
     static var sharedManager = WebControllerManager()
 
+    var currentWebControllerKey: String?
     var currentWebController: UIViewController? {
         willSet(newValue) {
             guard newValue != nil else {
@@ -25,11 +25,14 @@ class WebControllerManager: NSObject {
             }
         }
     }
-    var currentWebControllerKey: String?
+
+    private override init() {
+        super.init()
+    }
 
     func dismissWebControllerWithKey(_ key: String, animated: Bool, completion: (() -> Void)?, error: ((String) -> Void)?) {
         if let c = currentWebController,
-            let k = currentWebControllerKey {
+           let k = currentWebControllerKey {
             if k == key {
                 c.dismiss(animated: animated, completion: completion)
                 currentWebController = nil
@@ -58,7 +61,15 @@ class WebControllerManager: NSObject {
         c.present(nav, animated: animated, completion: nil)
     }
 
-    func presentWebControllerWithURL(_ url: URL, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle, animated: Bool = true, forceCustom: Bool = false) {
+    func presentWebControllerWithURL(
+        _ url: URL,
+        inController controller: UIViewController,
+        withKey key: String,
+        allowsSafari: Bool,
+        backButtonStyle: BackButtonStyle,
+        animated: Bool = true,
+        forceCustom: Bool = false
+    ) {
         guard ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -68,32 +79,51 @@ class WebControllerManager: NSObject {
             return
         }
 
-        if !forceCustom {
-            let svc = SFSafariViewController(url: url)
-            c.present(svc, animated: true, completion: nil)
+        guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
+            return
+        }
+
+        if forceCustom {
             self.currentWebControllerKey = key
-            self.currentWebController = svc
+            self.presentCustomWebController(
+                url,
+                inController: controller,
+                allowsSafari: allowsSafari,
+                backButtonStyle: backButtonStyle,
+                animated: animated
+            )
         } else {
+            let safariViewController = SFSafariViewController(url: url)
+            controller.present(safariViewController, animated: true)
             self.currentWebControllerKey = key
-            presentCustomWebController(url, inController: c, allowsSafari: allowsSafari, backButtonStyle: backButtonStyle, animated: animated)
+            self.currentWebController = safariViewController
         }
     }
 
-    func presentWebControllerWithURLString(_ urlString: String, inController c: UIViewController, withKey key: String, allowsSafari: Bool, backButtonStyle: BackButtonStyle) {
-        print(urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed) ?? "")
-        if let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!) {
-            presentWebControllerWithURL(url,
-                                        inController: c,
-                                        withKey: key,
-                                        allowsSafari: allowsSafari,
-                                        backButtonStyle: backButtonStyle)
-
+    func presentWebControllerWithURLString(
+        _ urlString: String,
+        inController controller: UIViewController,
+        withKey key: String,
+        allowsSafari: Bool,
+        backButtonStyle: BackButtonStyle
+    ) {
+        print(urlString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) ?? "")
+        if let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!) {
+            self.presentWebControllerWithURL(
+                url,
+                inController: controller,
+                withKey: key,
+                allowsSafari: allowsSafari,
+                backButtonStyle: backButtonStyle
+            )
         } else {
             print("Invalid url")
         }
     }
 
-    @objc func defaultSelector() {}
+    @objc
+    func defaultSelector() {
+    }
 }
 
 enum BackButtonStyle {
@@ -118,7 +148,7 @@ enum BackButtonStyle {
     }
 }
 
-extension WebControllerManager : WKNavigationDelegate {
+extension WebControllerManager: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.targetFrame != nil {
             let rurl = navigationAction.request.url
@@ -139,8 +169,7 @@ extension WebControllerManager : WKNavigationDelegate {
     }
 }
 
-extension WebControllerManager : WKUIDelegate {
-
+extension WebControllerManager: WKUIDelegate {
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         if let currentVC = currentWebController {
             WKWebViewPanelManager.presentAlert(on: currentVC, title: NSLocalizedString("Alert", comment: ""), message: message, handler: completionHandler)

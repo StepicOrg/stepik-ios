@@ -4077,6 +4077,7 @@
 		62E98741E700A4CEB1B6FA0B /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E987459D5C971C022BE7A5 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E9874BC64111A2CBDB7DE6 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98480E472319CCB60BE83 /* UITableViewExtensions.swift */; };
+		62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */; };
 		62E98756CDAA7BEBB48B53EA /* UICollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981D7FD7BD900738BB677 /* UICollectionViewExtensions.swift */; };
 		62E98760B61DB08132C71EE9 /* ContentLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C116ED420A46A8D2642 /* ContentLanguageService.swift */; };
 		62E987790F995FE9E728A308 /* CourseListOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9854FAF9EE4F6763E65F8 /* CourseListOutputProtocol.swift */; };
@@ -6103,6 +6104,7 @@
 		62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsViewController.swift; sourceTree = "<group>"; };
 		62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsAPI.swift; sourceTree = "<group>"; };
 		62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementDescription.swift; sourceTree = "<group>"; };
+		62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+AppendQueryParameters.swift"; sourceTree = "<group>"; };
 		62E98F8B42A28AC17DF11DD3 /* ContentLanguageSwitchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchViewModel.swift; sourceTree = "<group>"; };
 		62E98FC21463AD1C43A467BB /* ContinueLastStepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueLastStepView.swift; sourceTree = "<group>"; };
 		62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderInfoView.swift; sourceTree = "<group>"; };
@@ -7816,7 +7818,7 @@
 				0808A30A1BC84FBB00A95C29 /* Helpers */,
 				2CA3DAA52179DF5900F43888 /* Utils */,
 				0885F8491BA8374000F2A188 /* Model */,
-				08F204931BB0157F00D080C0 /* Extensions */,
+				2C6B2F6121AE659600DEB6AC /* Extensions */,
 				08E542041C6C760C00DEC38E /* Enums */,
 				08DE941A1B8C58AC00D278AB /* Main.storyboard */,
 				08DE941D1B8C58AC00D278AB /* Images.xcassets */,
@@ -8003,34 +8005,6 @@
 				085DF8D71C99C49E006809D9 /* VideoRate.swift */,
 			);
 			name = "Video Player";
-			sourceTree = "<group>";
-		};
-		08F204931BB0157F00D080C0 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */,
-				089877A8214047EC0065DFA2 /* Numbers+Random.swift */,
-				08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */,
-				861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */,
-				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
-				08CA59E91BBD3D55008DC44D /* LabelExtension.swift */,
-				08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */,
-				08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */,
-				08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */,
-				08DF1D911BDAB93900BA35EA /* StringExtensions.swift */,
-				089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */,
-				086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */,
-				08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */,
-				2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */,
-				086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */,
-				62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */,
-				62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */,
-				62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */,
-				62E980371A0458D70C61D357 /* UIStackView+removeAllArrangedSubviews.swift */,
-				62E98BC02EC89CF78E0FC7A6 /* Array+reordering.swift */,
-				08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */,
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 		08F485901C56C5E7000165AA /* UnknownTypeQuizViewController */ = {
@@ -9458,6 +9432,35 @@
 				2C21624120F901DD0063DD57 /* AppRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		2C6B2F6121AE659600DEB6AC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */,
+				62E98BC02EC89CF78E0FC7A6 /* Array+reordering.swift */,
+				08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */,
+				861B96361FE1DF7F00773EDA /* CAGradientLayer+Init.swift */,
+				62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */,
+				08CA59E91BBD3D55008DC44D /* LabelExtension.swift */,
+				086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */,
+				08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */,
+				089877A8214047EC0065DFA2 /* Numbers+Random.swift */,
+				086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */,
+				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
+				08DF1D911BDAB93900BA35EA /* StringExtensions.swift */,
+				08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */,
+				2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */,
+				08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */,
+				08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */,
+				62E980371A0458D70C61D357 /* UIStackView+removeAllArrangedSubviews.swift */,
+				62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */,
+				62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */,
+				089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */,
+				62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */,
+				089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		2C6B2F9520D7F1C000F7C976 /* AchievementAlert */ = {
@@ -15036,6 +15039,7 @@
 				62E982769C19C7852BCD59C4 /* TooltipStorageManager.swift in Sources */,
 				62E985DD90444821A835C02F /* CourseListsCollectionSkeletonView.swift in Sources */,
 				62E98A53567525055BCCA089 /* AppDelegate.swift in Sources */,
+				62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
