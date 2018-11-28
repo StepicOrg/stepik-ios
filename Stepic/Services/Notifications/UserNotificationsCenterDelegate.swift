@@ -24,6 +24,10 @@ extension UserNotificationsCenterDelegate: UNUserNotificationCenterDelegate {
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-        completionHandler([.alert, .sound])
+        completionHandler(
+            AchievementPopupSplitTest.shouldParticipate
+                ? [.sound]
+                : [.alert, .sound]
+        )
     }
 }

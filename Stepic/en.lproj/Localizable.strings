@@ -546,6 +546,7 @@ AchievementsLevelNotObtained = "Not obtained yet";
 AchievementsUnknownKindTitle = "Unknown achievement";
 AchievementsUnknownKindDescription = "Complete more challenges to unlock";
 AchievementsShareText = "I've unlocked achievement «%@» at Stepik.org. Join and beat my record!";
+AchievementsNew = "New achievement!";
 
 /* Personal deadlines */
 CourseInfo = "Course Info";

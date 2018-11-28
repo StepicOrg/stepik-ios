@@ -9,6 +9,45 @@
 import UIKit
 import SnapKit
 
+final class ABAchievementPopupViewController: AchievementPopupViewController {
+    var titleText: String? {
+        didSet {
+            self.achievementNameLabel.text = self.titleText
+        }
+    }
+
+    var descriptionText: String? {
+        didSet {
+            self.achievementDescriptionLabel.text = self.descriptionText
+        }
+    }
+
+    var badgeImage: UIImage? {
+        didSet {
+            self.achievementBadgeImageView.image = self.badgeImage
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.shareButton.alpha = 1
+        self.levelLabel.text = ""
+        self.progressLabel.text = ""
+    }
+
+    override func onShareButtonClick(_ sender: Any) {
+        let activityVC = UIActivityViewController(
+            activityItems: [
+                String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(self.titleText ?? "")")
+            ],
+            applicationActivities: nil
+        )
+        activityVC.excludedActivityTypes = [UIActivityType.airDrop]
+        activityVC.popoverPresentationController?.sourceView = shareButton
+        self.present(activityVC, animated: true)
+    }
+}
+
 class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var achievementNameLabel: UILabel!
     @IBOutlet weak var achievementDescriptionLabel: UILabel!

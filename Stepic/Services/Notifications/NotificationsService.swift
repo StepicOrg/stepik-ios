@@ -215,21 +215,48 @@ extension NotificationsService {
     }
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
-        DispatchQueue.main.async {
-            if #available(iOS 10.0, *) {
-                TabBarRouter(tab: .profile).route()
-            } else if self.isInForeground {
-                guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
-                      let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
-                      let body = alert[PayloadKey.body.rawValue] as? String else {
-                    return
-                }
+        let shouldParticipate: Bool? = true
 
-                LegacyNotificationsPresenter.present(text: body, onTap: {
+        if shouldParticipate! {
+            guard let currentNavigation = SourcelessRouter().currentNavigation,
+                  let object = userInfo[PayloadKey.object.rawValue] as? String,
+                  let kind = JSON(parseJSON: object)["kind"].string,
+                  let kindDescription = AchievementKind(rawValue: kind) else {
+                return print("remote notification received: unable to parse notification: \(userInfo)")
+            }
+
+            let popupViewController = ABAchievementPopupViewController(
+                nibName: "AchievementPopupViewController",
+                bundle: nil
+            )
+            popupViewController.loadViewIfNeeded()
+            popupViewController.titleText = kindDescription.getName()
+            popupViewController.descriptionText = NSLocalizedString("AchievementsNew", comment: "")
+            popupViewController.badgeImage = kindDescription.getBadge(for: 1)
+
+            DispatchQueue.main.async {
+                AchievementPopupAlertManager().present(
+                    alert: popupViewController,
+                    inController: currentNavigation
+                )
+            }
+        } else {
+            DispatchQueue.main.async {
+                if #available(iOS 10.0, *) {
                     TabBarRouter(tab: .profile).route()
-                })
-            } else {
-                TabBarRouter(tab: .profile).route()
+                } else if self.isInForeground {
+                    guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
+                          let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
+                          let body = alert[PayloadKey.body.rawValue] as? String else {
+                        return
+                    }
+
+                    LegacyNotificationsPresenter.present(text: body, onTap: {
+                        TabBarRouter(tab: .profile).route()
+                    })
+                } else {
+                    TabBarRouter(tab: .profile).route()
+                }
             }
         }
     }

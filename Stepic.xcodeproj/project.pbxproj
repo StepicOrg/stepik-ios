@@ -898,6 +898,7 @@
 		2C0159E621394C9E0043DBFF /* TrainingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */; };
 		2C0176C12188953700DDB9D0 /* NotificationAlertsAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */; };
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
+		2C072EB921AEEB7800EA171D /* AchievementPopupSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C072EB821AEEB7800EA171D /* AchievementPopupSplitTest.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		2C093EF5211B418400162DD0 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		2C093EF6211B419300162DD0 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
@@ -5498,6 +5499,7 @@
 		2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCollectionViewController.swift; sourceTree = "<group>"; };
 		2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertsAnalytics.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		2C072EB821AEEB7800EA171D /* AchievementPopupSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPopupSplitTest.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
@@ -7519,6 +7521,7 @@
 			children = (
 				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
 				0848BE8A218379A400762DC1 /* JoinCourseStringSplitTest.swift */,
+				2C072EB821AEEB7800EA171D /* AchievementPopupSplitTest.swift */,
 			);
 			name = "Active Tests";
 			sourceTree = "<group>";
@@ -14860,6 +14863,7 @@
 				2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */,
 				080217831F55B1B200186245 /* Menu.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
+				2C072EB921AEEB7800EA171D /* AchievementPopupSplitTest.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
 				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
