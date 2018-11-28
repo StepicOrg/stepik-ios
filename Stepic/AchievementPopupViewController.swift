@@ -40,7 +40,7 @@ final class ABAchievementPopupViewController: AchievementPopupViewController {
     override func onShareButtonClick(_ sender: Any) {
         if let kind = self.kind {
             AmplitudeAnalyticsEvents.Achievements.popupSharePressed(
-                source: self.source, kind: kind
+                source: self.source.rawValue, kind: kind
             ).send()
         }
 
@@ -70,7 +70,7 @@ class AchievementPopupViewController: UIViewController {
 
     var data: AchievementViewData?
     var canShare: Bool = true
-    var source: AmplitudeAnalyticsEvents.Achievements.Source = .notification
+    var source: Source = .notification
 
     @IBAction func onShareButtonClick(_ sender: Any) {
         guard let data = data else {
@@ -78,7 +78,7 @@ class AchievementPopupViewController: UIViewController {
         }
 
         AmplitudeAnalyticsEvents.Achievements.popupSharePressed(
-            source: self.source, kind: data.kind, level: data.completedLevel
+            source: self.source.rawValue, kind: data.kind, level: data.completedLevel
         ).send()
 
         let activityVC = UIActivityViewController(activityItems: [String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(data.title)")], applicationActivities: nil)
@@ -124,5 +124,11 @@ class AchievementPopupViewController: UIViewController {
         } else {
             levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.completedLevel)", "\(data.maxLevel)")
         }
+    }
+
+    enum Source: String {
+        case profile
+        case achievementList = "achievement-list"
+        case notification
     }
 }

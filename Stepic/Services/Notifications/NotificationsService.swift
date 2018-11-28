@@ -245,7 +245,7 @@ extension NotificationsService {
                 )
 
                 AmplitudeAnalyticsEvents.Achievements.popupOpened(
-                    source: .notification,
+                    source: AchievementPopupViewController.Source.notification.rawValue,
                     kind: kindDescription
                 ).send()
 
@@ -265,7 +265,7 @@ extension NotificationsService {
                 popup.kind = kindDescription
 
                 AmplitudeAnalyticsEvents.Achievements.popupOpened(
-                    source: .notification,
+                    source: AchievementPopupViewController.Source.notification.rawValue,
                     kind: kindDescription
                 ).send()
 

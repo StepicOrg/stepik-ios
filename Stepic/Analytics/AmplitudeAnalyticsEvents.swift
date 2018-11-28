@@ -279,34 +279,28 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
-        static func popupOpened(source: Source, kind: AchievementKind, level: Int? = nil) -> AnalyticsEvent {
+        static func popupOpened(source: String, kind: AchievementKind, level: Int? = nil) -> AnalyticsEvent {
             return popupEvent(name: "Achievement popup opened", source: source, kind: kind, level: level)
         }
 
-        static func popupSharePressed(source: Source, kind: AchievementKind, level: Int? = nil) -> AnalyticsEvent {
+        static func popupSharePressed(source: String, kind: AchievementKind, level: Int? = nil) -> AnalyticsEvent {
             return popupEvent(name: "Achievement share pressed", source: source, kind: kind, level: level)
         }
 
         private static func popupEvent(
             name: String,
-            source: Source,
+            source: String,
             kind: AchievementKind,
             level: Int? = nil
         ) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: name,
                 parameters: [
-                    "source": source.rawValue,
+                    "source": source,
                     "achievement_kind": kind.rawValue,
                     "achievement_level": level as Any
                 ]
             )
-        }
-
-        enum Source: String {
-            case profile
-            case achievementList = "achievement-list"
-            case notification
         }
     }
 

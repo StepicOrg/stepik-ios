@@ -10,16 +10,16 @@ import Foundation
 import Presentr
 
 class AchievementPopupAlertManager: AlertManager {
-    private let source: AmplitudeAnalyticsEvents.Achievements.Source
+    private let source: AchievementPopupViewController.Source
 
-    init(source: AmplitudeAnalyticsEvents.Achievements.Source) {
+    init(source: AchievementPopupViewController.Source) {
         self.source = source
     }
 
     func present(alert: UIViewController, inController controller: UIViewController) {
         if let alert = alert as? AchievementPopupViewController, let data = alert.data {
             AmplitudeAnalyticsEvents.Achievements.popupOpened(
-                source: self.source,
+                source: self.source.rawValue,
                 kind: data.kind,
                 level: data.completedLevel
             ).send()
