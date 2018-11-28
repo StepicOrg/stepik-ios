@@ -19,6 +19,8 @@ struct AchievementViewData {
     let score: Int
     let maxScore: Int
 
+    let kind: AchievementKind
+
     var isLocked: Bool {
         return completedLevel == 0
     }

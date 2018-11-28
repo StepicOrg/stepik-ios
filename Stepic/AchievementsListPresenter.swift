@@ -50,7 +50,9 @@ class AchievementsListPresenter {
                     completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
                     score: data.currentScore,
-                    maxScore: data.maxScore)
+                    maxScore: data.maxScore,
+                    kind: kindDescription
+                )
             }
 
             self?.view?.set(achievements: viewData.sorted(by: { a, b in

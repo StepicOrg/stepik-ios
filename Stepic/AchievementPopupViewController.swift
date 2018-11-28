@@ -28,6 +28,8 @@ final class ABAchievementPopupViewController: AchievementPopupViewController {
         }
     }
 
+    var kind: AchievementKind?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.shareButton.alpha = 1
@@ -36,6 +38,12 @@ final class ABAchievementPopupViewController: AchievementPopupViewController {
     }
 
     override func onShareButtonClick(_ sender: Any) {
+        if let kind = self.kind {
+            AmplitudeAnalyticsEvents.Achievements.popupSharePressed(
+                source: self.source, kind: kind
+            ).send()
+        }
+
         let activityVC = UIActivityViewController(
             activityItems: [
                 String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(self.titleText ?? "")")
@@ -44,6 +52,7 @@ final class ABAchievementPopupViewController: AchievementPopupViewController {
         )
         activityVC.excludedActivityTypes = [UIActivityType.airDrop]
         activityVC.popoverPresentationController?.sourceView = shareButton
+
         self.present(activityVC, animated: true)
     }
 }
@@ -61,11 +70,16 @@ class AchievementPopupViewController: UIViewController {
 
     var data: AchievementViewData?
     var canShare: Bool = true
+    var source: AmplitudeAnalyticsEvents.Achievements.Source = .notification
 
     @IBAction func onShareButtonClick(_ sender: Any) {
         guard let data = data else {
             return
         }
+
+        AmplitudeAnalyticsEvents.Achievements.popupSharePressed(
+            source: self.source, kind: data.kind, level: data.completedLevel
+        ).send()
 
         let activityVC = UIActivityViewController(activityItems: [String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(data.title)")], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityType.airDrop]

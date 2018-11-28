@@ -217,10 +217,7 @@ extension NotificationsService {
     }
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
-        let shouldParticipate: Bool? = true
-
-        // TODO: Remove
-        if shouldParticipate! {
+        if AchievementPopupSplitTest.shouldParticipate {
             guard let userId = AuthInfo.shared.userId,
                   let currentNavigation = SourcelessRouter().currentNavigation,
                   let object = userInfo[PayloadKey.object.rawValue] as? String,
@@ -243,10 +240,17 @@ extension NotificationsService {
                     completedLevel: progress.currentLevel,
                     maxLevel: progress.maxLevel,
                     score: progress.currentScore,
-                    maxScore: progress.maxScore
+                    maxScore: progress.maxScore,
+                    kind: kindDescription
                 )
+
+                AmplitudeAnalyticsEvents.Achievements.popupOpened(
+                    source: .notification,
+                    kind: kindDescription
+                ).send()
+
                 self.presentAchievementPopup(
-                    AchievementPopupAlertManager().construct(with: viewData, canShare: true),
+                    AchievementPopupAlertManager(source: .notification).construct(with: viewData, canShare: true),
                     in: currentNavigation
                 )
             }.catch { _ in
@@ -258,6 +262,13 @@ extension NotificationsService {
                 popup.titleText = kindDescription.getName()
                 popup.descriptionText = NSLocalizedString("AchievementsNew", comment: "")
                 popup.badgeImage = kindDescription.getBadge(for: 1)
+                popup.kind = kindDescription
+
+                AmplitudeAnalyticsEvents.Achievements.popupOpened(
+                    source: .notification,
+                    kind: kindDescription
+                ).send()
+
                 self.presentAchievementPopup(popup, in: currentNavigation)
             }
         } else {
@@ -283,7 +294,7 @@ extension NotificationsService {
 
     private func presentAchievementPopup(_ popup: UIViewController, in controller: UIViewController) {
         DispatchQueue.main.async {
-            AchievementPopupAlertManager().present(
+            AchievementPopupAlertManager(source: .notification).present(
                 alert: popup,
                 inController: controller
             )

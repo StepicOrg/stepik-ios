@@ -115,7 +115,9 @@ class ProfileAchievementsPresenter {
                     completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
                     score: data.currentScore,
-                    maxScore: data.maxScore)
+                    maxScore: data.maxScore,
+                    kind: kindDescription
+                )
             }
             self?.view?.set(achievements: viewData)
         }.catch { [weak self] error in
