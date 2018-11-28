@@ -283,7 +283,7 @@ struct AmplitudeAnalyticsEvents {
             return popupEvent(name: "Achievement popup opened", source: source, kind: kind, level: level)
         }
 
-        static func popupSharePressed(source: String, kind: AchievementKind, level: Int? = nil) -> AnalyticsEvent {
+        static func popupShared(source: String, kind: AchievementKind, level: Int? = nil) -> AnalyticsEvent {
             return popupEvent(name: "Achievement share pressed", source: source, kind: kind, level: level)
         }
 

@@ -39,7 +39,7 @@ final class ABAchievementPopupViewController: AchievementPopupViewController {
 
     override func onShareButtonClick(_ sender: Any) {
         if let kind = self.kind {
-            AmplitudeAnalyticsEvents.Achievements.popupSharePressed(
+            AmplitudeAnalyticsEvents.Achievements.popupShared(
                 source: self.source.rawValue, kind: kind
             ).send()
         }
@@ -77,7 +77,7 @@ class AchievementPopupViewController: UIViewController {
             return
         }
 
-        AmplitudeAnalyticsEvents.Achievements.popupSharePressed(
+        AmplitudeAnalyticsEvents.Achievements.popupShared(
             source: self.source.rawValue, kind: data.kind, level: data.completedLevel
         ).send()
 
