@@ -16,7 +16,7 @@ extension CourseInfoTabInfoIntroVideoBlockView {
 }
 
 final class CourseInfoTabInfoIntroVideoBlockView: UIView {
-    private let appearance: Appearance
+    let appearance: Appearance
 
     private lazy var previewImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "new-coursepics-python-xl"))

@@ -26,6 +26,8 @@ extension CourseInfoTabInfoInstructorView {
 }
 
 final class CourseInfoTabInfoInstructorView: UIView {
+    let appearance: Appearance
+
     var title: String? {
         didSet {
             self.titleLabel.text = self.title
@@ -43,8 +45,6 @@ final class CourseInfoTabInfoInstructorView: UIView {
             self.imageView.loadImage(url: self.avatarImageURL)
         }
     }
-
-    private let appearance: Appearance
 
     private lazy var imageView: CourseCoverImageView = {
         let imageView = CourseCoverImageView(
