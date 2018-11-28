@@ -230,7 +230,6 @@
 		08484F18211AF4320006266F /* TextStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EFD211AF4320006266F /* TextStoryView.swift */; };
 		08484F1A211B5B750006266F /* Skeletonable+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */; };
 		08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */; };
-		0848BE8B218379A400762DC1 /* JoinCourseStringSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848BE8A218379A400762DC1 /* JoinCourseStringSplitTest.swift */; };
 		084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
 		084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
 		084C658F1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
@@ -5110,7 +5109,6 @@
 		08484EFD211AF4320006266F /* TextStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextStoryView.swift; sourceTree = "<group>"; };
 		08484F19211B5B750006266F /* Skeletonable+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Skeletonable+UICollectionView.swift"; sourceTree = "<group>"; };
 		08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StorySkeletonPlaceholderView.xib; sourceTree = "<group>"; };
-		0848BE8A218379A400762DC1 /* JoinCourseStringSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCourseStringSplitTest.swift; sourceTree = "<group>"; };
 		084A2E5B1D80A83800C6702B /* Model_v8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v8.xcdatamodel; sourceTree = "<group>"; };
 		084BD9BA1E5368B600B1901E /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
@@ -7518,7 +7516,6 @@
 			isa = PBXGroup;
 			children = (
 				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
-				0848BE8A218379A400762DC1 /* JoinCourseStringSplitTest.swift */,
 			);
 			name = "Active Tests";
 			sourceTree = "<group>";
@@ -14477,7 +14474,6 @@
 				2CA9D9812010A0CD007AA743 /* ProgressTableViewCell.swift in Sources */,
 				084070801D64847000308FC1 /* SharingHelper.swift in Sources */,
 				2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */,
-				0848BE8B218379A400762DC1 /* JoinCourseStringSplitTest.swift in Sources */,
 				0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */,
 				084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */,
 				080E80F51F0070C900DC0EA5 /* CodeLanguages.swift in Sources */,
