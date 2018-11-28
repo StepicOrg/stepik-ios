@@ -76,7 +76,7 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
 
     var learnersLabelText: String? {
         didSet {
-            self.learnersView.isHidden = self.learnersLabelText == nil
+            self.learnersView.isHidden = self.learnersLabelText?.isEmpty ?? true
             self.learnersView.text = self.learnersLabelText
         }
     }
