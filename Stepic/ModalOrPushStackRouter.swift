@@ -44,7 +44,9 @@ class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
 
     func route() {
         guard let router = router else {
-            if let source = source, let fallbackPath = fallbackPath {
+            if let source = source,
+               let fallbackPath = fallbackPath,
+               !fallbackPath.isEmpty {
                 openWeb(path: fallbackPath, from: source)
             }
             return
