@@ -15,11 +15,7 @@ struct ButtonDescriptionFactory {
     private let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
 
     func makePrimary() -> CourseWidgetViewModel.ButtonDescription {
-        var joinTitle = NSLocalizedString("WidgetButtonJoin", comment: "")
-        if JoinCourseStringSplitTest.shouldParticipate {
-            let joinSplitTest = splitTestingService.fetchSplitTest(JoinCourseStringSplitTest.self)
-            joinTitle = joinSplitTest.currentGroup.joinText
-        }
+        let joinTitle = NSLocalizedString("WidgetButtonJoin", comment: "")
 
         let title = self.course.enrolled && isAuthorized
             ? NSLocalizedString("WidgetButtonLearn", comment: "")
