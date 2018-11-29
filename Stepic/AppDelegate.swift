@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         analytics: .init(source: .abAppLaunch)
     )
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -98,7 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+        let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
+        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
+               && subscribeSplitTest.currentGroup.isParticipant {
             self.notificationsRegistrationService.registerForRemoteNotifications()
         } else {
             self.notificationsRegistrationService.renewDeviceToken()
