@@ -9,6 +9,8 @@
 import UIKit
 
 struct AchievementViewData {
+    let id: String
+
     let title: String
     let description: String
 
@@ -18,8 +20,6 @@ struct AchievementViewData {
     let maxLevel: Int
     let score: Int
     let maxScore: Int
-
-    let kind: AchievementKind
 
     var isLocked: Bool {
         return completedLevel == 0

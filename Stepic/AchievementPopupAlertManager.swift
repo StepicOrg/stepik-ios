@@ -9,7 +9,7 @@
 import Foundation
 import Presentr
 
-class AchievementPopupAlertManager: AlertManager {
+final class AchievementPopupAlertManager: AlertManager {
     private let source: AchievementPopupViewController.Source
 
     init(source: AchievementPopupViewController.Source) {
@@ -20,10 +20,11 @@ class AchievementPopupAlertManager: AlertManager {
         if let alert = alert as? AchievementPopupViewController, let data = alert.data {
             AmplitudeAnalyticsEvents.Achievements.popupOpened(
                 source: self.source.rawValue,
-                kind: data.kind,
+                kind: data.id,
                 level: data.completedLevel
             ).send()
         }
+
         controller.customPresentViewController(
             self.presentr,
             viewController: alert,

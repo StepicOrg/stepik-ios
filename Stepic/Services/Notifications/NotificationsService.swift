@@ -218,59 +218,7 @@ extension NotificationsService {
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
         if AchievementPopupSplitTest.shouldParticipate {
-            guard let userId = AuthInfo.shared.userId,
-                  let currentNavigation = SourcelessRouter().currentNavigation,
-                  let object = userInfo[PayloadKey.object.rawValue] as? String,
-                  let kind = JSON(parseJSON: object)["kind"].string,
-                  let kindDescription = AchievementKind(rawValue: kind) else {
-                return print("remote notification received: unable to parse notification: \(userInfo)")
-            }
-
-            self.achievementsRetriever = AchievementsRetriever(
-                userId: userId,
-                achievementsAPI: AchievementsAPI(),
-                achievementProgressesAPI: AchievementProgressesAPI()
-            )
-
-            self.achievementsRetriever?.loadAchievementProgress(for: kind).done { progress in
-                let viewData = AchievementViewData(
-                    title: kindDescription.getName(),
-                    description: kindDescription.getDescription(for: progress.maxScore),
-                    badge: kindDescription.getBadge(for: progress.currentLevel),
-                    completedLevel: progress.currentLevel,
-                    maxLevel: progress.maxLevel,
-                    score: progress.currentScore,
-                    maxScore: progress.maxScore,
-                    kind: kindDescription
-                )
-
-                AmplitudeAnalyticsEvents.Achievements.popupOpened(
-                    source: AchievementPopupViewController.Source.notification.rawValue,
-                    kind: kindDescription
-                ).send()
-
-                self.presentAchievementPopup(
-                    AchievementPopupAlertManager(source: .notification).construct(with: viewData, canShare: true),
-                    in: currentNavigation
-                )
-            }.catch { _ in
-                let popup = ABAchievementPopupViewController(
-                    nibName: "AchievementPopupViewController",
-                    bundle: nil
-                )
-                popup.loadViewIfNeeded()
-                popup.titleText = kindDescription.getName()
-                popup.descriptionText = NSLocalizedString("AchievementsNew", comment: "")
-                popup.badgeImage = kindDescription.getBadge(for: 1)
-                popup.kind = kindDescription
-
-                AmplitudeAnalyticsEvents.Achievements.popupOpened(
-                    source: AchievementPopupViewController.Source.notification.rawValue,
-                    kind: kindDescription
-                ).send()
-
-                self.presentAchievementPopup(popup, in: currentNavigation)
-            }
+            self.showAchievementPopup(userInfo: userInfo)
         } else {
             DispatchQueue.main.async {
                 if #available(iOS 10.0, *) {
@@ -292,12 +240,71 @@ extension NotificationsService {
         }
     }
 
-    private func presentAchievementPopup(_ popup: UIViewController, in controller: UIViewController) {
-        DispatchQueue.main.async {
-            AchievementPopupAlertManager(source: .notification).present(
-                alert: popup,
-                inController: controller
+    private func showAchievementPopup(userInfo: NotificationUserInfo) {
+        guard let userId = AuthInfo.shared.userId,
+              let currentNavigation = SourcelessRouter().currentNavigation,
+              let object = userInfo[PayloadKey.object.rawValue] as? String,
+              let kind = JSON(parseJSON: object)["kind"].string,
+              let achievementKind = AchievementKind(rawValue: kind) else {
+            return print("remote notification received: unable to parse notification: \(userInfo)")
+        }
+
+        self.achievementsRetriever = AchievementsRetriever(
+            userId: userId,
+            achievementsAPI: AchievementsAPI(),
+            achievementProgressesAPI: AchievementProgressesAPI()
+        )
+
+        self.achievementsRetriever?.loadAchievementProgress(for: kind).done { progress in
+            let viewData = AchievementViewData(
+                id: achievementKind.rawValue,
+                title: achievementKind.getName(),
+                description: achievementKind.getDescription(for: progress.maxScore),
+                badge: achievementKind.getBadge(for: progress.currentLevel),
+                completedLevel: progress.currentLevel,
+                maxLevel: progress.maxLevel,
+                score: progress.currentScore,
+                maxScore: progress.maxScore
             )
+            self.presentAchievementPopup(viewData: viewData, presentingController: currentNavigation)
+        }.catch { _ in
+            let viewData = AchievementViewData(
+                id: achievementKind.rawValue,
+                title: achievementKind.getName(),
+                description: NSLocalizedString("AchievementsNew", comment: ""),
+                badge: achievementKind.getBadge(for: 1),
+                completedLevel: 0,
+                maxLevel: 0,
+                score: 0,
+                maxScore: 0
+            )
+            self.presentAchievementPopup(
+                viewData: viewData,
+                presentingController: currentNavigation,
+                configure: { popup in
+                    popup.levelLabel.text = nil
+                    popup.progressLabel.text = nil
+                    popup.shareButton.alpha = 1
+                }
+            )
+        }
+    }
+
+    private func presentAchievementPopup(
+        viewData: AchievementViewData,
+        presentingController: UIViewController,
+        configure: ((AchievementPopupViewController) -> Void)? = nil
+    ) {
+        let alertManager = AchievementPopupAlertManager(source: .notification)
+        let achievementPopup = alertManager.construct(with: viewData, canShare: true)
+
+        if let configure = configure {
+            achievementPopup.loadViewIfNeeded()
+            configure(achievementPopup)
+        }
+
+        DispatchQueue.main.async {
+            alertManager.present(alert: achievementPopup, inController: presentingController)
         }
     }
 

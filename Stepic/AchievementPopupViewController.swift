@@ -9,55 +9,7 @@
 import UIKit
 import SnapKit
 
-final class ABAchievementPopupViewController: AchievementPopupViewController {
-    var titleText: String? {
-        didSet {
-            self.achievementNameLabel.text = self.titleText
-        }
-    }
-
-    var descriptionText: String? {
-        didSet {
-            self.achievementDescriptionLabel.text = self.descriptionText
-        }
-    }
-
-    var badgeImage: UIImage? {
-        didSet {
-            self.achievementBadgeImageView.image = self.badgeImage
-        }
-    }
-
-    var kind: AchievementKind?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.shareButton.alpha = 1
-        self.levelLabel.text = ""
-        self.progressLabel.text = ""
-    }
-
-    override func onShareButtonClick(_ sender: Any) {
-        if let kind = self.kind {
-            AmplitudeAnalyticsEvents.Achievements.popupShared(
-                source: self.source.rawValue, kind: kind
-            ).send()
-        }
-
-        let activityVC = UIActivityViewController(
-            activityItems: [
-                String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(self.titleText ?? "")")
-            ],
-            applicationActivities: nil
-        )
-        activityVC.excludedActivityTypes = [UIActivityType.airDrop]
-        activityVC.popoverPresentationController?.sourceView = shareButton
-
-        self.present(activityVC, animated: true)
-    }
-}
-
-class AchievementPopupViewController: UIViewController {
+final class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var achievementNameLabel: UILabel!
     @IBOutlet weak var achievementDescriptionLabel: UILabel!
     @IBOutlet weak var achievementBadgeImageView: UIImageView!
@@ -78,7 +30,7 @@ class AchievementPopupViewController: UIViewController {
         }
 
         AmplitudeAnalyticsEvents.Achievements.popupShared(
-            source: self.source.rawValue, kind: data.kind, level: data.completedLevel
+            source: self.source.rawValue, kind: data.id, level: data.completedLevel
         ).send()
 
         let activityVC = UIActivityViewController(activityItems: [String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(data.title)")], applicationActivities: nil)
