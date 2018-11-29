@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
+        presenter: NotificationsRequestOnlySettingsAlertPresenter(),
         analytics: .init(source: .abAppLaunch)
     )
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
@@ -33,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         analyticsService: AnalyticsUserProperties(),
         storage: UserDefaults.standard
     )
+    private var didShowOnboarding = true
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -91,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
+            self.didShowOnboarding = false
             DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
@@ -103,8 +106,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
-        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
-               && subscribeSplitTest.currentGroup.isParticipant {
+        let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
+            && subscribeSplitTest.currentGroup.isParticipant
+        if shouldParticipate && self.didShowOnboarding {
             self.notificationsRegistrationService.registerForRemoteNotifications()
         } else {
             self.notificationsRegistrationService.renewDeviceToken()
