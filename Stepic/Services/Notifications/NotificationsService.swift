@@ -17,6 +17,7 @@ final class NotificationsService {
     private let localNotificationsService: LocalNotificationsService
     private let deepLinkRoutingService: DeepLinkRoutingService
 
+    private let splitTestingService: SplitTestingServiceProtocol
     private var achievementsRetriever: AchievementsRetriever?
 
     private var isInForeground: Bool {
@@ -25,10 +26,15 @@ final class NotificationsService {
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
-        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
+        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService(),
+        splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
+            analyticsService: AnalyticsUserProperties(),
+            storage: UserDefaults.standard
+        )
     ) {
         self.localNotificationsService = localNotificationsService
         self.deepLinkRoutingService = deepLinkRoutingService
+        self.splitTestingService = splitTestingService
     }
 
     func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
@@ -218,24 +224,33 @@ extension NotificationsService {
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
         if AchievementPopupSplitTest.shouldParticipate {
-            self.showAchievementPopup(userInfo: userInfo)
+            let popupSplitTest = self.splitTestingService.fetchSplitTest(AchievementPopupSplitTest.self)
+            if popupSplitTest.currentGroup.isParticipant {
+                self.showAchievementPopup(userInfo: userInfo)
+            } else {
+                self.routeToProfile(userInfo: userInfo)
+            }
         } else {
-            DispatchQueue.main.async {
-                if #available(iOS 10.0, *) {
-                    TabBarRouter(tab: .profile).route()
-                } else if self.isInForeground {
-                    guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
-                          let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
-                          let body = alert[PayloadKey.body.rawValue] as? String else {
-                        return
-                    }
+            self.routeToProfile(userInfo: userInfo)
+        }
+    }
 
-                    LegacyNotificationsPresenter.present(text: body, onTap: {
-                        TabBarRouter(tab: .profile).route()
-                    })
-                } else {
-                    TabBarRouter(tab: .profile).route()
+    private func routeToProfile(userInfo: NotificationUserInfo) {
+        DispatchQueue.main.async {
+            if #available(iOS 10.0, *) {
+                TabBarRouter(tab: .profile).route()
+            } else if self.isInForeground {
+                guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
+                      let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
+                      let body = alert[PayloadKey.body.rawValue] as? String else {
+                    return
                 }
+
+                LegacyNotificationsPresenter.present(text: body, onTap: {
+                    TabBarRouter(tab: .profile).route()
+                })
+            } else {
+                TabBarRouter(tab: .profile).route()
             }
         }
     }

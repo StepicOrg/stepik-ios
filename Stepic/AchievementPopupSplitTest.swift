@@ -27,5 +27,14 @@ final class AchievementPopupSplitTest: SplitTestProtocol {
         case test = "test"
 
         static var groups: [Group] = [.control, .test]
+
+        var isParticipant: Bool {
+            switch self {
+            case .control:
+                return false
+            case .test:
+                return true
+            }
+        }
     }
 }
