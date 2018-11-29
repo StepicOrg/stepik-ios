@@ -51,6 +51,23 @@ final class HomeViewController: BaseExploreViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.homeInteractor?.loadContent(request: .init())
+
+        // TODO: Remove
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Course Info",
+            style: .plain,
+            target: self,
+            action: #selector(openCourseInfo)
+        )
+    }
+
+    // TODO: Remove
+    @objc
+    private func openCourseInfo() {
+        self.navigationController?.pushViewController(
+            CourseInfoTabInfoViewController(),
+            animated: true
+        )
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -431,6 +431,17 @@ NotificationTabNotificationRequestAlertMessage = "Мы пытаемся сдел
 CourseSubscriptionNotificationRequestAlertTitle = "Следи за обновлениями";
 CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сделать процесс обучения максимально удобным и полезным. Разрешить уведомления, чтобы следить за дедлайнами и оперативно получать обновления по курсу?";
 
+/* Course info */
+CourseInfoTitleAuthor = "от";
+CourseInfoTitleAbout = "О курсе";
+CourseInfoTitleRequirements = "Требования";
+CourseInfoTitleTargetAudience = "Целевая аудитория";
+CourseInfoTitleInstructors = "Преподаватели";
+CourseInfoTitleTimeToComplete = "Время прохождения курса";
+CourseInfoTitleLanguage = "Язык";
+CourseInfoTitleCertificate = "Сертификат";
+CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
 

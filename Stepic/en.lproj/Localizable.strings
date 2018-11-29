@@ -429,6 +429,17 @@ NotificationTabNotificationRequestAlertMessage = "We are trying to make learning
 CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
 CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
 
+/* Course info */
+CourseInfoTitleAuthor = "by";
+CourseInfoTitleAbout = "About";
+CourseInfoTitleRequirements = "Requirements";
+CourseInfoTitleTargetAudience = "Target audience";
+CourseInfoTitleInstructors = "Instructors";
+CourseInfoTitleTimeToComplete = "Expected time to complete";
+CourseInfoTitleLanguage = "Language";
+CourseInfoTitleCertificate = "Certificate";
+CourseInfoTitleCertificateDetails = "Certificate details";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
 
