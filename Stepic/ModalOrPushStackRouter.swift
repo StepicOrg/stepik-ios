@@ -9,8 +9,7 @@
 import Foundation
 import SafariServices
 
-class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
-
+final class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
     var router: RouterProtocol?
     var fallbackPath: String?
     var source: UIViewController?
@@ -43,20 +42,17 @@ class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
     }
 
     func route() {
-        guard let router = router else {
-            if let source = source, let fallbackPath = fallbackPath {
-                openWeb(path: fallbackPath, from: source)
-            }
-            return
+        if let router = self.router {
+            router.route()
+        } else if let source = self.source,
+                  let fallbackPath = self.fallbackPath {
+            self.openWeb(path: fallbackPath, from: source)
         }
-        router.route()
     }
 
     private func openWeb(path: String, from source: UIViewController) {
-        guard let url = URL(string: path) else {
-            return
+        if let url = URL(string: path)?.appendingQueryParameters(["from_mobile_app": "true"]) {
+            source.present(SFSafariViewController(url: url), animated: true)
         }
-        let vc = SFSafariViewController(url: url)
-        source.present(vc, animated: true, completion: nil)
     }
 }

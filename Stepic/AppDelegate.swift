@@ -18,7 +18,6 @@ import FBSDKCoreKit
 import YandexMobileMetrica
 import Presentr
 import PromiseKit
-import AppsFlyerLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -132,7 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
-        AppsFlyerTracker.shared().trackAppLaunch()
     }
 
     // MARK: - Downloading Data in the Background
