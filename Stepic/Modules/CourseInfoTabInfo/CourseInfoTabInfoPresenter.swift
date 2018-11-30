@@ -10,16 +10,6 @@ import UIKit
 
 protocol CourseInfoTabInfoPresenterProtocol {
     func presentCourseInfo(response: CourseInfoTabInfo.ShowInfo.Response)
-
-    func presentWaitingState()
-    func dismissWaitingState()
-    func presentErrorState(message: String?)
-}
-
-extension CourseInfoTabInfoPresenterProtocol {
-    func presentErrorState() {
-        self.presentErrorState(message: NSLocalizedString("Error", comment: ""))
-    }
 }
 
 final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
@@ -35,18 +25,6 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }
 
         self.viewController?.displayCourseInfo(viewModel: viewModel)
-    }
-
-    func presentWaitingState() {
-        self.viewController?.showLoadingIndicator()
-    }
-
-    func dismissWaitingState() {
-        self.viewController?.hideLoadingIndicator()
-    }
-
-    func presentErrorState(message: String?) {
-        self.viewController?.showErrorIndicator(message: message)
     }
 
     // MARK: Prepare view data

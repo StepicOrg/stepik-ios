@@ -7,14 +7,9 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 protocol CourseInfoTabInfoViewControllerProtocol: class {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel)
-
-    func showLoadingIndicator()
-    func hideLoadingIndicator()
-    func showErrorIndicator(message: String?)
 }
 
 final class CourseInfoTabInfoViewController: UIViewController {
@@ -77,18 +72,6 @@ final class CourseInfoTabInfoViewController: UIViewController {
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtocol {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel) {
         self.display(newState: viewModel.state)
-    }
-
-    func showLoadingIndicator() {
-        SVProgressHUD.show()
-    }
-
-    func hideLoadingIndicator() {
-        SVProgressHUD.dismiss()
-    }
-
-    func showErrorIndicator(message: String?) {
-        SVProgressHUD.showError(withStatus: message)
     }
 
     private func display(newState: CourseInfoTabInfo.ViewControllerState) {

@@ -47,7 +47,6 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
             )
         }.catch { error in
             print("Failed get course info with error: \(error)")
-            self.presenter.presentErrorState()
         }
     }
 
@@ -55,10 +54,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
     func doCourseAction() {
         if let course = self.course {
-            self.presenter.presentWaitingState()
             self.moduleOutput?.doCourseAction(course: course)
-        } else {
-            self.presenter.presentErrorState()
         }
     }
 }
