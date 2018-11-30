@@ -8989,6 +8989,34 @@
 			name = AchievementNotificationView;
 			sourceTree = "<group>";
 		};
+		2C2B626921B17A9D00E22E88 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				2CAB7AE8219F196300EF5BEE /* ImageButton.swift */,
+				2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		2C2B626A21B17AD400E22E88 /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				2C4474D021A4576000240C0B /* CourseInfoTabSyllabusSectionView.swift */,
+				2C4474D221A461AB00240C0B /* CourseInfoTabSyllabusSectionDeadlinesView.swift */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
+		2C2B626B21B17ADB00E22E88 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2C4474D421A5A89F00240C0B /* CourseInfoTabSyllabusCellView.swift */,
+				2C4474D821A5B6D500240C0B /* CourseInfoTabSyllabusTableViewCell.swift */,
+				2C4474D621A5B04800240C0B /* CourseInfoTabSyllabusCellStatsView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		2C2FD7762107355D00609621 /* Lessons */ = {
 			isa = PBXGroup;
 			children = (
@@ -9962,13 +9990,9 @@
 		2CAB7AE5219F09AD00EF5BEE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */,
-				2CAB7AE8219F196300EF5BEE /* ImageButton.swift */,
-				2C4474D021A4576000240C0B /* CourseInfoTabSyllabusSectionView.swift */,
-				2C4474D221A461AB00240C0B /* CourseInfoTabSyllabusSectionDeadlinesView.swift */,
-				2C4474D421A5A89F00240C0B /* CourseInfoTabSyllabusCellView.swift */,
-				2C4474D621A5B04800240C0B /* CourseInfoTabSyllabusCellStatsView.swift */,
-				2C4474D821A5B6D500240C0B /* CourseInfoTabSyllabusTableViewCell.swift */,
+				2C2B626B21B17ADB00E22E88 /* Cell */,
+				2C2B626A21B17AD400E22E88 /* Section */,
+				2C2B626921B17A9D00E22E88 /* Header */,
 			);
 			path = Views;
 			sourceTree = "<group>";

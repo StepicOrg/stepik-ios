@@ -28,7 +28,7 @@ final class CourseInfoTabSyllabusView: UIView {
 
         tableView.estimatedSectionHeaderHeight = 90.0
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
-        tableView.estimatedSectionFooterHeight = .leastNonzeroMagnitude
+        tableView.estimatedSectionFooterHeight = 1.1
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0

@@ -10,6 +10,6 @@ import UIKit
 
 final class CourseInfoTabSyllabusViewController: UIViewController {
     override func loadView() {
-        self.view = CourseInfoTabSyllabusView(frame: UIScreen.main.bounds)
+        self.view = CourseInfoTabSyllabusView()
     }
 }
