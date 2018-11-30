@@ -14,7 +14,7 @@ protocol CourseInfoTabInfoInteractorProtocol {
     func doCourseAction()
 }
 
-final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, CourseInfoTabInfoInputProtocol {
+final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
     weak var moduleOutput: CourseInfoTabInfoOutputProtocol?
 
     let presenter: CourseInfoTabInfoPresenterProtocol
@@ -32,12 +32,6 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
     ) {
         self.presenter = presenter
         self.provider = provider
-    }
-
-    // MARK: CourseInfoTabInfoInputProtocol
-
-    func update(with course: Course) {
-        self.course = course
     }
 
     // MARK: Get course info
@@ -66,5 +60,13 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol, Co
         } else {
             self.presenter.presentErrorState()
         }
+    }
+}
+
+// MARK: - CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol -
+
+extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
+    func update(with course: Course) {
+        self.course = course
     }
 }
