@@ -23,10 +23,6 @@ final class CourseInfoTabInfoViewController: UIViewController {
         }
     }
 
-    override var prefersStatusBarHidden: Bool {
-        return false
-    }
-
     // MARK: Init
 
     init(
@@ -101,6 +97,6 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
     func courseInfoTabInfoIntroVideoBlockViewDidDismissFullscreen(
         _ CourseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
-        self.setNeedsStatusBarAppearanceUpdate()
+        UIApplication.shared.isStatusBarHidden = false
     }
 }
