@@ -359,7 +359,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
                 SubscribeNotificationsOnLaunchSplitTest.self
             )
-            return !subscribeSplitTest.currentGroup.isParticipant
+            return !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
         } else {
             return true
         }

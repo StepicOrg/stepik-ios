@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
         let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
-            && subscribeSplitTest.currentGroup.isParticipant
+            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
         if shouldParticipate && self.didShowOnboarding {
             self.notificationsRegistrationService.registerForRemoteNotifications()
         } else {

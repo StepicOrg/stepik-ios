@@ -87,7 +87,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     private func register(forceToRequestAuthorization: Bool) {
         let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
         let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
-            && subscribeSplitTest.currentGroup.isParticipant
+            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
         guard AuthInfo.shared.isAuthorized || shouldParticipate else {
             return
         }

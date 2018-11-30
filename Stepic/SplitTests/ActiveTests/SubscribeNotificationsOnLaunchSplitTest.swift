@@ -28,7 +28,7 @@ final class SubscribeNotificationsOnLaunchSplitTest: SplitTestProtocol {
 
         static var groups: [Group] = [.control, .test]
 
-        var isParticipant: Bool {
+        var shouldShowOnFirstLaunch: Bool {
             switch self {
             case .control:
                 return false

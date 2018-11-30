@@ -261,7 +261,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
                 SubscribeNotificationsOnLaunchSplitTest.self
             )
-            if self.didJustSubscribe && !subscribeSplitTest.currentGroup.isParticipant {
+            if self.didJustSubscribe && !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch {
                 self.doJustSubscribeAction()
             }
         } else if self.didJustSubscribe {

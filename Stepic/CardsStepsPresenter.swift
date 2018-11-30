@@ -158,7 +158,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
                 SubscribeNotificationsOnLaunchSplitTest.self
             )
-            if !subscribeSplitTest.currentGroup.isParticipant {
+            if !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch {
                 self.notificationsRegistrationService.registerForRemoteNotifications()
             }
         } else {
