@@ -112,13 +112,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             return
         }
 
-        let isDelegateAllow = self.delegate?.notificationsRegistrationService(self,
-            shouldPresentAlertFor: .permission) ?? false
-        let shouldPresentCustomPermissionAlert = self.presenter != nil && isDelegateAllow
-
-        if shouldPresentCustomPermissionAlert {
-            self.presentPermissionAlert()
-        } else if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *) {
             NotificationPermissionStatus.current.done { status in
                 if status == .denied {
                     self.presentSettingsAlertIfNeeded()
@@ -173,10 +167,12 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     private func presentPermissionAlertIfNeeded() {
-        if self.didShowDefaultPermissionAlert || self.presenter == nil {
-            self.requestAuthorization()
+        if let delegate = self.delegate {
+            if delegate.notificationsRegistrationService(self, shouldPresentAlertFor: .permission) {
+                self.presentPermissionAlert()
+            }
         } else {
-            self.presentPermissionAlert()
+            self.requestAuthorization()
         }
     }
 
