@@ -27,12 +27,12 @@ extension CourseInfoTabInfoView {
         let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
 
-        let joinButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
-        let joinButtonHeight: CGFloat = 47
-        let joinButtonBackgroundColor = UIColor.stepicGreen
-        let joinButtonFont = UIFont.systemFont(ofSize: 14)
-        let joinButtonTextColor = UIColor.white
-        let joinButtonCornerRadius: CGFloat = 7
+        let actionButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
+        let actionButtonHeight: CGFloat = 47
+        let actionButtonBackgroundColor = UIColor.stepicGreen
+        let actionButtonFont = UIFont.systemFont(ofSize: 14)
+        let actionButtonTextColor = UIColor.white
+        let actionButtonCornerRadius: CGFloat = 7
     }
 }
 
@@ -50,18 +50,17 @@ final class CourseInfoTabInfoView: UIView {
         return stackView
     }()
 
-    private lazy var joinButton: UIButton = {
+    private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = self.appearance.joinButtonBackgroundColor
-        button.titleLabel?.font = self.appearance.joinButtonFont
-        button.tintColor = self.appearance.joinButtonTextColor
-        button.layer.cornerRadius = self.appearance.joinButtonCornerRadius
+        button.backgroundColor = self.appearance.actionButtonBackgroundColor
+        button.titleLabel?.font = self.appearance.actionButtonFont
+        button.tintColor = self.appearance.actionButtonTextColor
+        button.layer.cornerRadius = self.appearance.actionButtonCornerRadius
         button.addTarget(
             self,
-            action: #selector(self.joinButtonClicked(sender:)),
+            action: #selector(self.actionButtonClicked(sender:)),
             for: .touchUpInside
         )
-
         return button
     }()
 
@@ -129,13 +128,13 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
         self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
 
-        self.addJoinButton(title: viewModel.actionButtonTitle)
+        self.addActionButton(title: viewModel.actionButtonTitle)
     }
 
     // MARK: Actions
 
     @objc
-    private func joinButtonClicked(sender: UIButton) {
+    private func actionButtonClicked(sender: UIButton) {
         self.delegate?.courseInfoTabInfoViewDidTapOnActionButton(self)
     }
 
@@ -201,20 +200,20 @@ final class CourseInfoTabInfoView: UIView {
         self.scrollableStackView.addArrangedView(instructorsView)
     }
 
-    private func addJoinButton(title: String) {
-        self.joinButton.setTitle(title, for: .normal)
+    private func addActionButton(title: String) {
+        self.actionButton.setTitle(title, for: .normal)
 
         let buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
-        self.joinButton.translatesAutoresizingMaskIntoConstraints = false
-        buttonContainer.addSubview(self.joinButton)
+        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonContainer.addSubview(self.actionButton)
 
         self.scrollableStackView.addArrangedView(buttonContainer)
-        self.joinButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.joinButtonHeight)
+        self.actionButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.actionButtonHeight)
             make.leading.top.trailing.bottom
                 .equalToSuperview()
-                .inset(self.appearance.joinButtonInsets)
+                .inset(self.appearance.actionButtonInsets)
         }
     }
 }
