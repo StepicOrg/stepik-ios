@@ -24,17 +24,6 @@ extension ProfileViewController: StreakNotificationsControlView {
         customPresentViewController(streakTimePickerPresentr, viewController: vc, animated: true, completion: nil)
     }
 
-    func requestNotificationsPermissions() {
-        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: { _ in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
-        }))
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
-
-        self.present(alert, animated: true)
-    }
-
     func updateDisplayedStreakTime(startHour: Int) {
         func getDisplayingStreakTimeInterval(startHour: Int) -> String {
             let startInterval = TimeInterval((startHour % 24) * 60 * 60)
@@ -51,5 +40,31 @@ extension ProfileViewController: StreakNotificationsControlView {
             block.title = "\(NSLocalizedString("NotificationTime", comment: "")): \(getDisplayingStreakTimeInterval(startHour: startHour))"
             menu?.update(block: block)
         }
+    }
+
+    func setNotificationsSwitchIsOn(_ isOn: Bool) {
+        let id = ProfileMenuBlock.notificationsSwitch(isOn: isOn).rawValue
+        guard let block = self.menu?.getBlock(id: id) as? SwitchMenuBlock else {
+            return
+        }
+
+        if isOn {
+            guard let timeSelectionBlock = self.buildNotificationsTimeSelectionBlock() else {
+                self.presenterNotifications?.setStreakNotifications(on: false)
+                return
+            }
+
+            self.menu?.insert(
+                block: timeSelectionBlock,
+                afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: isOn).rawValue
+            )
+
+            self.presenterNotifications?.refreshStreakNotificationTime()
+        } else {
+            self.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
+        }
+
+        block.isOn = isOn
+        self.menu?.update(block: block)
     }
 }

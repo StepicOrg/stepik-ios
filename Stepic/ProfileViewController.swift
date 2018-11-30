@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Presentr
 
 class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
@@ -180,7 +179,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             seed = .other(id: userId)
         }
 
-        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), notificationPermissionManager: NotificationPermissionManager())
+        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI())
         presenter?.refresh(shouldReload: true)
     }
 
@@ -230,23 +229,15 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     }
 
     private func buildNotificationsSwitchBlock(isOn: Bool) -> SwitchMenuBlock {
-        let block: SwitchMenuBlock = SwitchMenuBlock(id: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue, title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""), isOn: isOn)
+        let block = SwitchMenuBlock(
+            id: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue,
+            title: NSLocalizedString("NotifyAboutStreaksPreference", comment: ""),
+            isOn: isOn
+        )
 
         block.onSwitch = { [weak self] isOn in
             self?.presenterNotifications?.setStreakNotifications(on: isOn) { [weak self] status in
-                if status {
-                    guard let timeSelectionBlock = self?.buildNotificationsTimeSelectionBlock() else {
-                        self?.presenterNotifications?.setStreakNotifications(on: !isOn)
-                        return
-                    }
-
-                    block.isOn = true
-                    self?.menu?.insert(block: timeSelectionBlock, afterBlockWithId: ProfileMenuBlock.notificationsSwitch(isOn: false).rawValue)
-                    self?.presenterNotifications?.refreshStreakNotificationTime()
-                } else {
-                    block.isOn = false
-                    self?.menu?.remove(id: ProfileMenuBlock.notificationsTimeSelection.rawValue)
-                }
+                self?.setNotificationsSwitchIsOn(status)
             }
         }
 
@@ -276,7 +267,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         return block
     }
 
-    private func buildNotificationsTimeSelectionBlock() -> TransitionMenuBlock? {
+    func buildNotificationsTimeSelectionBlock() -> TransitionMenuBlock? {
         var currentZone00UTC: String {
             let date = Date(timeIntervalSince1970: 0)
             let dateFormatter = DateFormatter()

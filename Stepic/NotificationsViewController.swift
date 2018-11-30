@@ -73,7 +73,18 @@ class NotificationsViewController: UIViewController, NotificationsView {
         }
         markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
 
-        presenter = NotificationsPresenter(section: section, notificationsAPI: ApiDataDownloader.notifications, usersAPI: ApiDataDownloader.users, notificationsStatusAPI: NotificationStatusesAPI(), notificationPermissionManager: NotificationPermissionManager(), notificationSuggestionManager: NotificationSuggestionManager(), view: self)
+        presenter = NotificationsPresenter(
+            section: section,
+            notificationsAPI: ApiDataDownloader.notifications,
+            usersAPI: ApiDataDownloader.users,
+            notificationsStatusAPI: NotificationStatusesAPI(),
+            notificationsRegistrationService: NotificationsRegistrationService(
+                presenter: NotificationsRequestAlertPresenter(context: .notificationsTab),
+                analytics: .init(source: .notificationsTab)
+            ),
+            notificationSuggestionManager: NotificationSuggestionManager(),
+            view: self
+        )
 
         tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
         tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)
@@ -108,10 +119,6 @@ class NotificationsViewController: UIViewController, NotificationsView {
         if data.isEmpty {
             presenter?.loadInitial()
         }
-    }
-
-    func present(alertManager: AlertManager, alert: UIViewController) {
-        alertManager.present(alert: alert, inController: self)
     }
 
     @objc func refreshNotifications() {

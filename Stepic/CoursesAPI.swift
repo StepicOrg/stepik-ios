@@ -15,15 +15,23 @@ class CoursesAPI: APIEndpoint {
     override var name: String { return "courses" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course]) -> Promise<[Course]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
         return getObjectsByIds(ids: ids, updating: existing)
     }
 
     @available(*, deprecated, message: "Legacy: we want to pass existing")
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Course]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
         return getObjectsByIds(ids: ids, updating: Course.getCourses(ids))
     }
 
-    func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: String? = nil, page: Int = 1) -> Promise<([Course], Meta)> {
+    func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, isPopular: Bool? = nil, order: String? = nil, language: String? = nil, page: Int = 1) -> Promise<([Course], Meta)> {
         var params = Parameters()
 
         if let isFeatured = featured {
@@ -40,6 +48,10 @@ class CoursesAPI: APIEndpoint {
 
         if let isPublic = isPublic {
             params["is_public"] = isPublic ? "true" : "false"
+        }
+
+        if let isPopular = isPopular {
+            params["is_popular"] = isPopular ? "true" : "false"
         }
 
         if let order = order {

@@ -34,7 +34,7 @@ final class ContinueCourseView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with viewModel: ContinueCourseViewModel) {
+    func configure(viewModel: ContinueCourseViewModel) {
         self.lastStepView.courseTitle = viewModel.title
 
         if let progressDescription = viewModel.progress?.description,

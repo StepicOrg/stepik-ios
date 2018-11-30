@@ -134,10 +134,6 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
         state = .congratulation
         Alerts.congratulation.present(alert: controller, inController: ControllerHelper.getTopViewController() ?? self)
     }
-
-    func present(alertManager: AlertManager, alert: UIViewController) {
-        alertManager.present(alert: alert, inController: self)
-    }
 }
 
 extension CardsStepsViewController: KolodaViewDelegate {

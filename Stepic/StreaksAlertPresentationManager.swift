@@ -10,40 +10,100 @@ import Foundation
 import Presentr
 import PromiseKit
 
-protocol StreaksAlertPresentationDelegate: class {
-    func didDismiss()
-}
-
-class StreaksAlertPresentationManager {
+final class StreaksAlertPresentationManager {
     weak var controller: UIViewController?
-    weak var delegate: StreaksAlertPresentationDelegate?
+    private let source: Source
 
-    var source: StreaksAlertPresentationSource?
+    private var alertPresenter: NotificationsRegistrationPresentationServiceProtocol?
     private var didTransitionToSettings = false
-    var notificationPermissionManager: NotificationPermissionManager
 
-    enum StreaksAlertPresentationSource: String {
-        case login = "login"
-        case submission = "submission"
-    }
-
-    init(source: StreaksAlertPresentationSource, notificationPermissionManager: NotificationPermissionManager = NotificationPermissionManager()) {
-        self.source = source
-        self.notificationPermissionManager = notificationPermissionManager
-        NotificationCenter.default.addObserver(self, selector: #selector(StreaksAlertPresentationManager.becameActive), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-    }
-
-    @objc func becameActive() {
-        if didTransitionToSettings {
-            didTransitionToSettings = false
-            cameFromSettings()
-        }
-    }
+    private lazy var notificationsRegistrationService: NotificationsRegistrationServiceProtocol = {
+        NotificationsRegistrationService(analytics: .init(source: self.source.analyticsSource))
+    }()
 
     private let streakTimePickerPresenter: Presentr = {
         let streakTimePickerPresenter = Presentr(presentationType: .popup)
         return streakTimePickerPresenter
     }()
+
+    init(source: Source) {
+        self.source = source
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(StreaksAlertPresentationManager.becameActive),
+            name: .UIApplicationWillEnterForeground,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func suggestStreak(streak: Int) {
+        guard let controller = self.controller else {
+            return
+        }
+
+        AnalyticsReporter.reportEvent(
+            AnalyticsEvents.Streaks.notifySuggestionShown(
+                source: self.source.rawValue,
+                trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
+            )
+        )
+
+        let presenter = NotificationsRequestAlertPresenter(
+            context: .streak,
+            dataSource: StreakNotificationsRequestAlertDataSource(streak: streak),
+            presentAlertIfRegistered: true
+        )
+        let source = self.source.analyticsSource
+        presenter.onPositiveCallback = { [weak self] in
+            PreferencesContainer.notifications.allowStreaksNotifications = true
+
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Streaks.Suggestion.success(
+                    NotificationSuggestionManager().streakAlertShownCnt
+                )
+            )
+            NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.yes)
+
+            // When we are suggesting streak with the `Source` of .login type - `self` will be deallocated at this point.
+            // In this case we need to register for remote notifications.
+            if let strongSelf = self {
+                strongSelf.notifyPressed()
+            } else {
+                NotificationsRegistrationService(
+                    analytics: .init(source: source)
+                ).registerForRemoteNotifications()
+            }
+        }
+        presenter.onCancelCallback = {
+            PreferencesContainer.notifications.allowStreaksNotifications = false
+
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Streaks.Suggestion.fail(
+                    NotificationSuggestionManager().streakAlertShownCnt
+                )
+            )
+            NotificationAlertsAnalytics(source: source).reportCustomAlertInteractionResult(.no)
+        }
+
+        self.alertPresenter = presenter
+        self.alertPresenter?.presentAlert(for: .permission, inController: controller)
+
+        NotificationSuggestionManager().didShowAlert(context: .streak)
+        NotificationAlertsAnalytics(source: source).reportCustomAlertShown()
+    }
+
+    @objc
+    private func becameActive() {
+        if self.didTransitionToSettings {
+            self.didTransitionToSettings = false
+            self.cameFromSettings()
+        }
+    }
 
     private func didChooseTime() {
         if let controller = controller as? ProfileViewController {
@@ -55,87 +115,90 @@ class StreaksAlertPresentationManager {
         guard let controller = controller else {
             return
         }
-        let vc = NotificationTimePickerViewController(nibName: "PickerViewController", bundle: nil) as NotificationTimePickerViewController
+
+        let vc = NotificationTimePickerViewController(
+            nibName: "PickerViewController",
+            bundle: nil
+        ) as NotificationTimePickerViewController
+
         vc.startHour = PreferencesContainer.notifications.streaksNotificationStartHourLocal
-        vc.selectedBlock = {
-            [weak self] in
-            if let source = self?.source?.rawValue {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionApproved(source: source, trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue))
+        vc.selectedBlock = { [weak self] in
+            guard let strongSelf = self else {
+                return
             }
-            self?.didChooseTime()
-            self?.delegate?.didDismiss()
+
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Streaks.notifySuggestionApproved(
+                    source: strongSelf.source.rawValue,
+                    trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue
+                )
+            )
+
+            strongSelf.didChooseTime()
         }
         vc.cancelAction = {
-            [weak self] in
-            self?.delegate?.didDismiss()
         }
-        controller.customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true, completion: nil)
+
+        controller.customPresentViewController(streakTimePickerPresenter, viewController: vc, animated: true)
     }
 
-    private func showStreaksSettingsNotificationAlert() {
-        guard let controller = controller else {
-            return
-        }
-        let alert = UIAlertController(title: NSLocalizedString("StreakNotificationsAlertTitle", comment: ""), message: NSLocalizedString("StreakNotificationsAlertMessage", comment: ""), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
-            [weak self]
-            _ in
-            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
-            self?.didTransitionToSettings = true
-        }))
-
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel, handler: nil))
-
-        controller.present(alert, animated: true, completion: nil)
-    }
-
-    func notifyPressed() {
-        notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
+    private func notifyPressed() {
+        NotificationPermissionStatus.current.done { [weak self] status in
             switch status {
             case .notDetermined:
-                NotificationRegistrator.shared.registerForRemoteNotifications()
+                self?.notificationsRegistrationService.registerForRemoteNotifications()
                 self?.selectStreakNotificationTime()
             case .authorized:
                 self?.selectStreakNotificationTime()
             case .denied:
-                self?.showStreaksSettingsNotificationAlert()
+                self?.showSettingsAlert()
             }
             return
         }
     }
 
-    func cameFromSettings() {
-        notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
+    private func showSettingsAlert() {
+        guard let controller = self.controller,
+              var alertPresenter = self.alertPresenter else {
+            return
+        }
+
+        alertPresenter.onPositiveCallback = { [weak self] in
+            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                self?.didTransitionToSettings = true
+                UIApplication.shared.openURL(settingsURL)
+            }
+        }
+
+        alertPresenter.presentAlert(for: .settings, inController: controller)
+    }
+
+    private func cameFromSettings() {
+        NotificationPermissionStatus.current.done { [weak self] status in
             switch status {
             case .notDetermined:
-                // Actually, it should never come here, but just in case
-                NotificationRegistrator.shared.registerForRemoteNotifications()
+                self?.notificationsRegistrationService.registerForRemoteNotifications()
             case .authorized:
                 self?.selectStreakNotificationTime()
             case .denied:
-                //TODO: Add dialog to tell user he should have permitteed the notifications
-                self?.delegate?.didDismiss()
+                break
             }
-            return
         }
-
     }
 
-    func suggestStreak(streak: Int) {
-        guard let controller = controller else {
-            return
+    enum Source: String {
+        case login = "login"
+        case submission = "submission"
+
+        var analyticsSource: NotificationAlertsAnalytics.Source {
+            switch self {
+            case .login:
+                return .streakAfterLogin
+            case .submission:
+                return .streakAfterSubmission(
+                    shownCount: NotificationSuggestionManager().streakAlertShownCnt
+                )
+            }
         }
-        let alert = Alerts.streaks.construct(presentationManager: self)
-
-        alert.currentStreak = streak
-
-        if let source = source?.rawValue {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Streaks.notifySuggestionShown(source: source, trigger: RemoteConfig.shared.showStreaksNotificationTrigger.rawValue))
-        }
-        Alerts.streaks.present(alert: alert, inController: controller)
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 }
