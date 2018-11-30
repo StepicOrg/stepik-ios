@@ -12,10 +12,6 @@ final class AuthNavigationViewController: UINavigationController {
     private let streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
     private let notificationSuggestionManager = NotificationSuggestionManager()
     private let userActivitiesAPI = UserActivitiesAPI()
-    private let splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
-        analyticsService: AnalyticsUserProperties(),
-        storage: UserDefaults.standard
-    )
 
     enum Controller {
         case social
@@ -45,19 +41,6 @@ final class AuthNavigationViewController: UINavigationController {
             return
         }
 
-        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
-            let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
-                SubscribeNotificationsOnLaunchSplitTest.self
-            )
-            if !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch {
-                self.suggestStreakForUserWithId(userId)
-            }
-        } else {
-            self.suggestStreakForUserWithId(userId)
-        }
-    }
-
-    private func suggestStreakForUserWithId(_ userId: Int) {
         self.userActivitiesAPI.retrieve(user: userId).done { userActivity in
             let canShowAlert = self.notificationSuggestionManager.canShowAlert(
                 context: .streak,
