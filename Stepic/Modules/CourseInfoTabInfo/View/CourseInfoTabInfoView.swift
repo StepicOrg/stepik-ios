@@ -112,7 +112,7 @@ final class CourseInfoTabInfoView: UIView {
             self.scrollableStackView.removeAllArrangedViews()
         }
 
-        self.addAuthorView(author: viewModel.author)
+        self.addAuthorView(authorName: viewModel.author)
         self.addIntroVideoView(
             introVideoURL: viewModel.introVideoURL,
             introVideoThumbnailURL: viewModel.introVideoThumbnailURL
@@ -141,8 +141,8 @@ final class CourseInfoTabInfoView: UIView {
 
     // MARK: Private API
 
-    private func addAuthorView(author: String) {
-        if author.isEmpty {
+    private func addAuthorView(authorName: String) {
+        if authorName.isEmpty {
             return
         }
 
@@ -154,7 +154,7 @@ final class CourseInfoTabInfoView: UIView {
             )
         )
 
-        let attributedTitle = "\(Block.author.title) <a>\(author)</a>".style(tags: [
+        let attributedTitle = "\(Block.author.title) <a>\(authorName)</a>".style(tags: [
             Style("a").foregroundColor(self.appearance.authorTitleHighlightColor)
         ]).attributedString
 
