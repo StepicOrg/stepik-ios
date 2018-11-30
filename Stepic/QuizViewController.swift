@@ -100,6 +100,11 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }
     }
 
+    private let splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+
     private func submissionsLeftLocalizable(count: Int) -> String {
         func triesLocalizableFor(count: Int) -> String {
             switch (abs(count) % 10) {
@@ -343,8 +348,21 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func suggestStreak(streak: Int) {
-        self.streaksAlertPresentationManager.controller = self
-        self.streaksAlertPresentationManager.suggestStreak(streak: streak)
+        if self.shouldSuggestStreak() {
+            self.streaksAlertPresentationManager.controller = self
+            self.streaksAlertPresentationManager.suggestStreak(streak: streak)
+        }
+    }
+
+    private func shouldSuggestStreak() -> Bool {
+        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
+                SubscribeNotificationsOnLaunchSplitTest.self
+            )
+            return !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
+        } else {
+            return true
+        }
     }
 
     func showRateAlert() {

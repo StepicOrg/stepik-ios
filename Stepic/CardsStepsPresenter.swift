@@ -71,6 +71,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     internal var lastViewedUpdater: LocalProgressLastViewedUpdater
     internal var notificationSuggestionManager: NotificationSuggestionManager
     internal var notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    var splitTestingService: SplitTestingServiceProtocol
 
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
@@ -118,7 +119,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         return true
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationsRegistrationService: NotificationsRegistrationServiceProtocol, course: Course?, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationsRegistrationService: NotificationsRegistrationServiceProtocol, course: Course?, view: CardsStepsView, splitTestingService: SplitTestingServiceProtocol) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -131,6 +132,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.lastViewedUpdater = lastViewedUpdater
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
+        self.splitTestingService = splitTestingService
 
         self.course = course
         self.view = view
@@ -152,7 +154,16 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func appearedAfterSubscription() {
-        self.notificationsRegistrationService.registerForRemoteNotifications()
+        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
+                SubscribeNotificationsOnLaunchSplitTest.self
+            )
+            if !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch {
+                self.notificationsRegistrationService.registerForRemoteNotifications()
+            }
+        } else {
+            self.notificationsRegistrationService.registerForRemoteNotifications()
+        }
     }
 
     private func refreshTopCardForOnboarding(stepIndex: Int) {

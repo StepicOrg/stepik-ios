@@ -48,6 +48,7 @@ struct NotificationAlertsAnalytics {
         case streakAfterLogin
         case streakAfterSubmission(shownCount: Int)
         case personalDeadline
+        case abAppLaunch
 
         var description: String {
             switch self {
@@ -63,6 +64,8 @@ struct NotificationAlertsAnalytics {
                 return "streak after submission - \(shownCount)"
             case .personalDeadline:
                 return "create personal deadline"
+            case .abAppLaunch:
+                return "ab subscribe on app launch"
             }
         }
     }
