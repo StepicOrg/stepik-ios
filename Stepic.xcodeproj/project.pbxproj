@@ -4132,6 +4132,7 @@
 		62E9893ECE0FA9E7AEC2B6DD /* CourseListCollectionOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986B46F417BDAA7E660CF /* CourseListCollectionOutputProtocol.swift */; };
 		62E989608052E8BA824C9A21 /* CourseInfoTabInfoHeaderBlockSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9876C6770A639F8C20BB8 /* CourseInfoTabInfoHeaderBlockSkeletonView.swift */; };
 		62E98967D33DB824B8BF27E0 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
+		62E989731D1BE53C78117978 /* CourseInfoTabInfoViewModelAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DB69E1EB90B62EC13DA /* CourseInfoTabInfoViewModelAdapter.swift */; };
 		62E98975B396C752B07036D8 /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E9897FBB60991C568BFDBE /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E98997447430EA3F2459EE /* StepWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9863AAABC06CDEE98110E /* StepWebView.swift */; };
@@ -6139,6 +6140,7 @@
 		62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+TableHeaderLayout.swift"; sourceTree = "<group>"; };
 		62E98DAF4A2F53B7051705A9 /* CourseListsCollectionPersistenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionPersistenceService.swift; sourceTree = "<group>"; };
 		62E98DB59E7919BCBEF2E0A0 /* CourseListsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionViewController.swift; sourceTree = "<group>"; };
+		62E98DB69E1EB90B62EC13DA /* CourseInfoTabInfoViewModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoViewModelAdapter.swift; sourceTree = "<group>"; };
 		62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikURLSessionConfiguration.swift; sourceTree = "<group>"; };
 		62E98DCC38D9285A8734B0BB /* CourseListsCollectionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionPresenter.swift; sourceTree = "<group>"; };
 		62E98DD43356F9ABC3A351B8 /* ProgressServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressServiceImpl.swift; sourceTree = "<group>"; };
@@ -10723,6 +10725,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9851EF4317F324D42CDE2 /* CourseInfoTabInfoViewModel.swift */,
+				62E98DB69E1EB90B62EC13DA /* CourseInfoTabInfoViewModelAdapter.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -15196,6 +15199,7 @@
 				62E9870E58BB3AA90E482FD9 /* CourseInfoTabInfoTextBlockView.swift in Sources */,
 				62E98F8C257344BACC99F2D7 /* CourseInfoTabInfoViewModel.swift in Sources */,
 				62E980DEC1E0F62F097A950D /* CourseInfoTabInfoOutputProtocol.swift in Sources */,
+				62E989731D1BE53C78117978 /* CourseInfoTabInfoViewModelAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
