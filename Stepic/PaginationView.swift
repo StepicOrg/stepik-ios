@@ -37,7 +37,7 @@ final class PaginationView: UIView {
 
     var onRefreshButtonClick: (() -> Void)?
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

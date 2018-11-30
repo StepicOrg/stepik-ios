@@ -51,7 +51,7 @@ final class ExploreBlockContainerView: UIView {
     }
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         headerView: UIView & ExploreBlockHeaderViewProtocol,
         contentView: UIView,
         shouldShowSeparator: Bool = false,

@@ -27,7 +27,7 @@ extension CourseWidgetCoverView {
 final class CourseWidgetCoverView: UIView {
     let appearance: Appearance
 
-    private lazy var coverImageView: CourseCoverImageView = CourseCoverImageView(frame: .zero)
+    private lazy var coverImageView = CourseCoverImageView()
 
     private lazy var adaptiveMarkLabel: UILabel = {
         let label = PaddingLabel(padding: self.appearance.adaptiveMarkLabelInsets)
@@ -56,7 +56,7 @@ final class CourseWidgetCoverView: UIView {
         }
     }
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

@@ -16,6 +16,8 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = []
+
         previewView = CodeEditorPreviewView()
         previewView.delegate = self
         tableView.tableHeaderView = previewView

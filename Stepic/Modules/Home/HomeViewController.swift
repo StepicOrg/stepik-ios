@@ -30,7 +30,7 @@ final class HomeViewController: BaseExploreViewController {
     private var lastContentLanguage: ContentLanguage?
     private var lastIsAuthorizedFlag: Bool = false
 
-    private lazy var streakView = StreakActivityView(frame: .zero)
+    private lazy var streakView = StreakActivityView()
     lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
     init(interactor: HomeInteractorProtocol) {
@@ -52,22 +52,19 @@ final class HomeViewController: BaseExploreViewController {
         super.viewDidLoad()
         self.homeInteractor?.loadContent(request: .init())
 
-        // TODO: Remove
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Course Info",
-            style: .plain,
+        // For debug
+        let testBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .fastForward,
             target: self,
-            action: #selector(openCourseInfo)
+            action: #selector(self.presentTest)
         )
+        self.navigationItem.rightBarButtonItem = testBarButtonItem
     }
 
-    // TODO: Remove
     @objc
-    private func openCourseInfo() {
-        self.navigationController?.pushViewController(
-            CourseInfoTabInfoViewController(),
-            animated: true
-        )
+    private func presentTest() {
+        let vc = CourseInfoViewController()
+        self.push(module: vc)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -229,7 +226,7 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = self.makeEnrolledCourseListSubmodule()
         } else {
             // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(frame: .zero, message: state.message)
+            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
             switch state {
             case .anonymous:
                 placeholderView.onPlaceholderClick = { [weak self] in
@@ -328,7 +325,7 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = self.makePopularCourseListSubmodule(contentLanguage: language)
         } else {
             // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(frame: .zero, message: state.message)
+            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
             placeholderView.onPlaceholderClick = { [weak self] in
                 self?.refreshStateForPopularCourses(state: .normal)
             }

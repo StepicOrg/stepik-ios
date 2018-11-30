@@ -56,43 +56,31 @@ final class CourseWidgetStatsView: UIView {
     }
 
     private lazy var learnersView: CourseWidgetStatsItemView = {
-        let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.learnersViewImageViewSize,
-            imageTintColor: self.appearance.itemImageTintColor,
-            textColor: self.appearance.itemTextColor
-        )
-        let view = CourseWidgetStatsItemView(
-            frame: .zero,
-            appearance: appearance
-        )
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.learnersViewImageViewSize
+        appearance.imageTintColor = self.appearance.itemImageTintColor
+        appearance.textColor = self.appearance.itemTextColor
+        let view = CourseWidgetStatsItemView(appearance: appearance)
         view.image = UIImage(named: "course-widget-user")!.withRenderingMode(.alwaysTemplate)
         return view
     }()
 
     private lazy var ratingView: CourseWidgetStatsItemView = {
-        let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.ratingViewImageViewSize,
-            imageTintColor: self.appearance.itemImageTintColor,
-            textColor: self.appearance.itemTextColor
-        )
-        let view = CourseWidgetStatsItemView(
-            frame: .zero,
-            appearance: appearance
-        )
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.ratingViewImageViewSize
+        appearance.imageTintColor = self.appearance.itemImageTintColor
+        appearance.textColor = self.appearance.itemTextColor
+        let view = CourseWidgetStatsItemView(appearance: appearance)
         view.image = UIImage(named: "course-widget-rating")!.withRenderingMode(.alwaysTemplate)
         return view
     }()
 
     private lazy var progressView: CourseWidgetStatsItemView = {
-        let appearance = CourseWidgetStatsItemView.Appearance(
-            imageViewSize: self.appearance.progressViewImageViewSize,
-            imageTintColor: .clear,
-            textColor: self.appearance.itemTextColor
-        )
-        let view = CourseWidgetStatsItemView(
-            frame: .zero,
-            appearance: appearance
-        )
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        appearance.imageViewSize = self.appearance.progressViewImageViewSize
+        appearance.imageTintColor = .clear
+        appearance.textColor = self.appearance.itemTextColor
+        let view = CourseWidgetStatsItemView(appearance: appearance)
         return view
     }()
 
@@ -103,7 +91,7 @@ final class CourseWidgetStatsView: UIView {
         return stackView
     }()
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
