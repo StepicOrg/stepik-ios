@@ -17,6 +17,7 @@ final class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var shareButton: StepikButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var separatorView: UIView!
 
     var widthConstraint: NSLayoutConstraint?
 
@@ -61,21 +62,26 @@ final class AchievementPopupViewController: UIViewController {
     }
 
     private func update(with data: AchievementViewData) {
-        achievementNameLabel.text = data.title
-        achievementDescriptionLabel.text = data.description
-        achievementBadgeImageView.image = data.badge
+        self.achievementNameLabel.text = data.title
+        self.achievementDescriptionLabel.text = data.description
+        self.achievementBadgeImageView.image = data.badge
 
         if data.completedLevel == data.maxLevel {
-            progressLabel.alpha = 0.0
-        } else {
-            progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.maxScore - data.score)")
+            self.progressLabel.alpha = 0.0
+        } else if let maxScore = data.maxScore, let score = data.score {
+            self.progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(maxScore - score)")
         }
 
         if data.isLocked {
-            levelLabel.text = NSLocalizedString("AchievementsLevelNotObtained", comment: "")
+            self.levelLabel.text = NSLocalizedString("AchievementsLevelNotObtained", comment: "")
+        } else if let completedLevel = data.completedLevel, let maxLevel = data.maxLevel {
+            self.levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(completedLevel)", "\(maxLevel)")
         } else {
-            levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.completedLevel)", "\(data.maxLevel)")
+            self.levelLabel.alpha = 0.0
         }
+
+        self.separatorView.alpha = self.progressLabel.alpha == 0
+            && self.levelLabel.alpha == 0 ? 0 : 1
     }
 
     enum Source: String {

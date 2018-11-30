@@ -281,43 +281,34 @@ extension NotificationsService {
                 score: progress.currentScore,
                 maxScore: progress.maxScore
             )
-            self.presentAchievementPopup(viewData: viewData, presentingController: currentNavigation)
+            self.presentAchievementPopup(
+                viewData: viewData,
+                presentingController: currentNavigation
+            )
         }.catch { _ in
             let viewData = AchievementViewData(
                 id: achievementKind.rawValue,
                 title: achievementKind.getName(),
                 description: NSLocalizedString("AchievementsNew", comment: ""),
                 badge: achievementKind.getBadge(for: 1),
-                completedLevel: 0,
-                maxLevel: 0,
-                score: 0,
-                maxScore: 0
+                completedLevel: nil,
+                maxLevel: nil,
+                score: nil,
+                maxScore: nil
             )
             self.presentAchievementPopup(
                 viewData: viewData,
-                presentingController: currentNavigation,
-                configure: { popup in
-                    popup.levelLabel.text = nil
-                    popup.progressLabel.text = nil
-                    popup.shareButton.alpha = 1
-                }
+                presentingController: currentNavigation
             )
         }
     }
 
     private func presentAchievementPopup(
         viewData: AchievementViewData,
-        presentingController: UIViewController,
-        configure: ((AchievementPopupViewController) -> Void)? = nil
+        presentingController: UIViewController
     ) {
         let alertManager = AchievementPopupAlertManager(source: .notification)
         let achievementPopup = alertManager.construct(with: viewData, canShare: true)
-
-        if let configure = configure {
-            achievementPopup.loadViewIfNeeded()
-            configure(achievementPopup)
-        }
-
         DispatchQueue.main.async {
             alertManager.present(alert: achievementPopup, inController: presentingController)
         }
