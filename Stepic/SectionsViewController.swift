@@ -36,6 +36,10 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             analytics: .init(source: .courseSubscription)
         )
     }()
+    private let splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -253,20 +257,31 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }, error: {})
         }
 
-        if didJustSubscribe {
-            NotificationPermissionStatus.current.done { status in
-                if status == .notDetermined {
-                    self.notificationsRegistrationService.registerForRemoteNotifications()
-                } else {
-                    self.showShareTooltip()
-                }
+        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
+                SubscribeNotificationsOnLaunchSplitTest.self
+            )
+            if self.didJustSubscribe && !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch {
+                self.doJustSubscribeAction()
             }
+        } else if self.didJustSubscribe {
+            self.doJustSubscribeAction()
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         shareTooltip?.dismiss()
+    }
+
+    private func doJustSubscribeAction() {
+        NotificationPermissionStatus.current.done { status in
+            if status == .notDetermined {
+                self.notificationsRegistrationService.registerForRemoteNotifications()
+            } else {
+                self.showShareTooltip()
+            }
+        }
     }
 
     var emptyDatasetState: EmptyDatasetState = .refreshing {
