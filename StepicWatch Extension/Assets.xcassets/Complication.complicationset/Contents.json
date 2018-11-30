@@ -12,6 +12,26 @@
     },
     {
       "idiom" : "watch",
+      "filename" : "Graphic Bezel-4.imageset",
+      "role" : "graphic-bezel"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "Graphic Circular-4.imageset",
+      "role" : "graphic-circular"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "Graphic Corner-4.imageset",
+      "role" : "graphic-corner"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "Graphic Large Rectangular-4.imageset",
+      "role" : "graphic-large-rectangular"
+    },
+    {
+      "idiom" : "watch",
       "filename" : "Modular.imageset",
       "role" : "modular"
     },

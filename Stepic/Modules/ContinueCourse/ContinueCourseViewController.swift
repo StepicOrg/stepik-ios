@@ -67,7 +67,7 @@ final class ContinueCourseViewController: UIViewController {
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
     func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel) {
         if case .result(let result) = viewModel.state {
-            self.continueCourseView?.configure(with: result)
+            self.continueCourseView?.configure(viewModel: result)
             self.interactor.checkForTooltip(request: .init())
         }
 
@@ -82,6 +82,8 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
         if viewModel.shouldShowTooltip {
             // Cause anchor should be in true position
             DispatchQueue.main.async { [weak self] in
+                self?.continueCourseView?.setNeedsLayout()
+                self?.continueCourseView?.layoutIfNeeded()
                 self?.continueLearningTooltip.show(
                     direction: .up,
                     in: continueCourseView,

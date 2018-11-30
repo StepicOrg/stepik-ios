@@ -10,9 +10,10 @@ import UIKit
 import Nuke
 
 extension CourseCoverImageView {
-    class Appearance {
-        let placeholderImage: UIImage = #imageLiteral(resourceName: "lesson_cover_50")
-        let imageFadeInDuration: TimeInterval = 0.15
+    struct Appearance {
+        var placeholderImage: UIImage = #imageLiteral(resourceName: "lesson_cover_50")
+        var cornerRadius: CGFloat = 0
+        var imageFadeInDuration: TimeInterval = 0.15
     }
 }
 

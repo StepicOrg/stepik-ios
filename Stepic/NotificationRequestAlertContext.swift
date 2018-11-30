@@ -12,6 +12,7 @@ enum NotificationRequestAlertContext: String {
     case streak = "streak"
     case notificationsTab = "notifications_tab"
     case courseSubscription = "course_subscription"
+    case `default`
 
     var title: String {
         switch self {
@@ -21,6 +22,8 @@ enum NotificationRequestAlertContext: String {
             return NSLocalizedString("NotificationTabNotificationRequestAlertTitle", comment: "")
         case .courseSubscription:
             return NSLocalizedString("CourseSubscriptionNotificationRequestAlertTitle", comment: "")
+        case .default:
+            return NSLocalizedString("NotificationRequestDefaultAlertTitle", comment: "")
         }
     }
 
@@ -40,6 +43,8 @@ enum NotificationRequestAlertContext: String {
             return NSLocalizedString("NotificationTabNotificationRequestAlertMessage", comment: "")
         case .courseSubscription:
             return NSLocalizedString("CourseSubscriptionNotificationRequestAlertMessage", comment: "")
+        case .default:
+            return NSLocalizedString("NotificationRequestDefaultAlertMessage", comment: "")
         }
     }
 
