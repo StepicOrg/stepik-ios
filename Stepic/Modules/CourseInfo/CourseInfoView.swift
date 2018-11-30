@@ -96,6 +96,14 @@ final class CourseInfoView: UIView {
         self.topConstraint?.update(offset: min(0, -offset))
     }
 
+    func addPageForTest(_ view: UIView) {
+        self.contentView.addArrangedView(view)
+
+        view.snp.makeConstraints { make in
+            make.width.equalTo(self.snp.width)
+        }
+    }
+
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         // Dispatch hits to correct views
 
@@ -158,18 +166,6 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
             make.top.equalTo(self.headerView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.segmentedControlHeight)
-        }
-
-        for i in 0..<3 {
-            let view = UIView()
-            view.backgroundColor = [UIColor.white, UIColor.white, UIColor.white][i]
-            self.contentView.addArrangedView(view)
-
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.snp.makeConstraints { make in
-                make.width.equalTo(self.snp.width)
-                make.height.equalTo(1000)
-            }
         }
     }
 }

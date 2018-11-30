@@ -1852,6 +1852,11 @@
 		2C3A22562121DF2100927BD7 /* AdaptiveCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107B4210F743C009A53DF /* AdaptiveCourseTableViewCell.swift */; };
 		2C3E42B52101D05C009D76DF /* KnowledgeGraphLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E42B42101D05C009D76DF /* KnowledgeGraphLesson.swift */; };
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
+		2C4474D121A4576000240C0B /* CourseInfoTabSyllabusSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4474D021A4576000240C0B /* CourseInfoTabSyllabusSectionView.swift */; };
+		2C4474D321A461AB00240C0B /* CourseInfoTabSyllabusSectionDeadlinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4474D221A461AB00240C0B /* CourseInfoTabSyllabusSectionDeadlinesView.swift */; };
+		2C4474D521A5A8A000240C0B /* CourseInfoTabSyllabusCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4474D421A5A89F00240C0B /* CourseInfoTabSyllabusCellView.swift */; };
+		2C4474D721A5B04800240C0B /* CourseInfoTabSyllabusCellStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4474D621A5B04800240C0B /* CourseInfoTabSyllabusCellStatsView.swift */; };
+		2C4474D921A5B6D500240C0B /* CourseInfoTabSyllabusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4474D821A5B6D500240C0B /* CourseInfoTabSyllabusTableViewCell.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
 		2C47A16120628420003E87EC /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A16020628420003E87EC /* AnalyticsReporter.swift */; };
@@ -3757,6 +3762,10 @@
 		2CA9FDFA212596020046128C /* EnrollmentServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */; };
 		2CA9FDFC2125968A0046128C /* StepsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */; };
 		2CA9FDFE212597060046128C /* ProgressServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9FDFD212597060046128C /* ProgressServiceMock.swift */; };
+		2CAB7AE2219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE1219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift */; };
+		2CAB7AE4219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE3219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift */; };
+		2CAB7AE7219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */; };
+		2CAB7AE9219F196300EF5BEE /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB7AE8219F196300EF5BEE /* ImageButton.swift */; };
 		2CAD296320FDE4700058481C /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296220FDE4700058481C /* ApplicationAssembly.swift */; };
 		2CAD296520FDE47D0058481C /* ApplicationAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */; };
 		2CAD296920FDE7680058481C /* ApplicationModuleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */; };
@@ -5634,6 +5643,11 @@
 		2C35C4FA1F4DB8D0002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/3150/en.lproj/step0.html; sourceTree = "<group>"; };
 		2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementNotificationView.xib; sourceTree = "<group>"; };
 		2C3E42B42101D05C009D76DF /* KnowledgeGraphLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphLesson.swift; sourceTree = "<group>"; };
+		2C4474D021A4576000240C0B /* CourseInfoTabSyllabusSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusSectionView.swift; sourceTree = "<group>"; };
+		2C4474D221A461AB00240C0B /* CourseInfoTabSyllabusSectionDeadlinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusSectionDeadlinesView.swift; sourceTree = "<group>"; };
+		2C4474D421A5A89F00240C0B /* CourseInfoTabSyllabusCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusCellView.swift; sourceTree = "<group>"; };
+		2C4474D621A5B04800240C0B /* CourseInfoTabSyllabusCellStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusCellStatsView.swift; sourceTree = "<group>"; };
+		2C4474D821A5B6D500240C0B /* CourseInfoTabSyllabusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusTableViewCell.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C47A16020628420003E87EC /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
@@ -5824,6 +5838,10 @@
 		2CA9FDF9212596020046128C /* EnrollmentServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDFB2125968A0046128C /* StepsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsServiceMock.swift; sourceTree = "<group>"; };
 		2CA9FDFD212597060046128C /* ProgressServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressServiceMock.swift; sourceTree = "<group>"; };
+		2CAB7AE1219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusViewController.swift; sourceTree = "<group>"; };
+		2CAB7AE3219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusView.swift; sourceTree = "<group>"; };
+		2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusHeaderView.swift; sourceTree = "<group>"; };
+		2CAB7AE8219F196300EF5BEE /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		2CAD296220FDE4700058481C /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		2CAD296420FDE47D0058481C /* ApplicationAssemblyImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyImpl.swift; sourceTree = "<group>"; };
 		2CAD296820FDE7680058481C /* ApplicationModuleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModuleHolder.swift; sourceTree = "<group>"; };
@@ -8229,6 +8247,7 @@
 		100D33CD3AAC03A84EA5B18A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2CAB7AE0219F00E800EF5BEE /* CourseInfoTabSyllabus */,
 				2CF9ADD9218887F7004F6909 /* CourseInfo */,
 				62E9829DC9329C319264FF39 /* CourseInfoTab */,
 				58D4DD2E993574238E9882A7 /* Explore */,
@@ -8919,6 +8938,34 @@
 			name = AchievementNotificationView;
 			sourceTree = "<group>";
 		};
+		2C2B626921B17A9D00E22E88 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				2CAB7AE8219F196300EF5BEE /* ImageButton.swift */,
+				2CAB7AE6219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		2C2B626A21B17AD400E22E88 /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				2C4474D021A4576000240C0B /* CourseInfoTabSyllabusSectionView.swift */,
+				2C4474D221A461AB00240C0B /* CourseInfoTabSyllabusSectionDeadlinesView.swift */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
+		2C2B626B21B17ADB00E22E88 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2C4474D421A5A89F00240C0B /* CourseInfoTabSyllabusCellView.swift */,
+				2C4474D821A5B6D500240C0B /* CourseInfoTabSyllabusTableViewCell.swift */,
+				2C4474D621A5B04800240C0B /* CourseInfoTabSyllabusCellStatsView.swift */,
+			);
+			path = Cell;
+            sourceTree = "<group>";
+        };
 		2C2F0BEA2186EFA0007DCA0A /* NotificationsRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -9928,6 +9975,26 @@
 				2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */,
 			);
 			path = PlainObjects;
+			sourceTree = "<group>";
+		};
+		2CAB7AE0219F00E800EF5BEE /* CourseInfoTabSyllabus */ = {
+			isa = PBXGroup;
+			children = (
+				2CAB7AE5219F09AD00EF5BEE /* Views */,
+				2CAB7AE1219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift */,
+				2CAB7AE3219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift */,
+			);
+			path = CourseInfoTabSyllabus;
+			sourceTree = "<group>";
+		};
+		2CAB7AE5219F09AD00EF5BEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C2B626B21B17ADB00E22E88 /* Cell */,
+				2C2B626A21B17AD400E22E88 /* Section */,
+				2C2B626921B17A9D00E22E88 /* Header */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2CAD296120FDE45D0058481C /* Assembly */ = {
@@ -14477,7 +14544,9 @@
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
 				086FC6A81FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
+				2C4474D121A4576000240C0B /* CourseInfoTabSyllabusSectionView.swift in Sources */,
 				2C97E00A215E47EC005684A1 /* SearchQueriesPresenter.swift in Sources */,
+				2C4474D321A461AB00240C0B /* CourseInfoTabSyllabusSectionDeadlinesView.swift in Sources */,
 				08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
 				089142501BCFFB7F0000BCB0 /* WebStepViewController.swift in Sources */,
 				08CA59EA1BBD3D55008DC44D /* LabelExtension.swift in Sources */,
@@ -14498,6 +14567,7 @@
 				08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
+				2C4474D521A5A8A000240C0B /* CourseInfoTabSyllabusCellView.swift in Sources */,
 				2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C22042D20E277F70060117A /* Skeletonable+UITableView.swift in Sources */,
 				08E43E9421495FD500E3CB50 /* DeepLinkRoutingService.swift in Sources */,
@@ -14508,6 +14578,7 @@
 				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
+				2CAB7AE2219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift in Sources */,
 				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */,
@@ -14516,6 +14587,7 @@
 				08484F18211AF4320006266F /* TextStoryView.swift in Sources */,
 				86BB7C07201953AF00063538 /* CongratulationAlertManager.swift in Sources */,
 				08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */,
+				2C4474D921A5B6D500240C0B /* CourseInfoTabSyllabusTableViewCell.swift in Sources */,
 				2CB9E8C91F8397290004E17F /* NotificationsSectionHeaderView.swift in Sources */,
 				2CA9D9882011FB4E007AA743 /* LeaderboardTableViewCell.swift in Sources */,
 				2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */,
@@ -14568,6 +14640,7 @@
 				081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */,
 				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
+				2CAB7AE7219F09C800EF5BEE /* CourseInfoTabSyllabusHeaderView.swift in Sources */,
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
@@ -14636,6 +14709,7 @@
 				084F7AA71E76EF690088368A /* LastStep.swift in Sources */,
 				0829B83C1E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift in Sources */,
 				083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */,
+				2CAB7AE4219F014D00EF5BEE /* CourseInfoTabSyllabusView.swift in Sources */,
 				088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */,
 				081A14FF20D963090016364E /* AmplitudeAnalyticsEvents.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
@@ -14676,6 +14750,7 @@
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				0828FF761BC5E6B0000AFEA7 /* SectionTableViewCell.swift in Sources */,
 				2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */,
+				2C4474D721A5B04800240C0B /* CourseInfoTabSyllabusCellStatsView.swift in Sources */,
 				08F485A01C579319000165AA /* NumberReply.swift in Sources */,
 				2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */,
 				087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */,
@@ -14690,6 +14765,7 @@
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,
 				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
 				08CBA3011F57459800302154 /* MenuUIManager.swift in Sources */,
+				2CAB7AE9219F196300EF5BEE /* ImageButton.swift in Sources */,
 				089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */,
 				2C2365E421078CEF00C99742 /* VideoFileManager.swift in Sources */,
 				081D7418211DB4720086F6F8 /* OpenedStoriesPageViewController.swift in Sources */,
