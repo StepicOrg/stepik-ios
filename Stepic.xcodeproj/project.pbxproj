@@ -5499,7 +5499,6 @@
 		2C0159E521394C9E0043DBFF /* TrainingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCollectionViewController.swift; sourceTree = "<group>"; };
 		2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertsAnalytics.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
-		2C072EB821AEEB7800EA171D /* AchievementPopupSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPopupSplitTest.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
@@ -7751,7 +7750,6 @@
 				08DE94121B8C58AC00D278AB /* Products */,
 				1BAD14BA674336E6C1C0716C /* Frameworks */,
 				8C6F728D140E739798E090B8 /* Pods */,
-				2C5A790C21B19A7500909C04 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -9267,14 +9265,6 @@
 				2CBC261321086936004245D6 /* UserRegistrationServiceImpl.swift */,
 			);
 			path = UserRegistrationService;
-			sourceTree = "<group>";
-		};
-		2C5A790C21B19A7500909C04 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				2C072EB821AEEB7800EA171D /* AchievementPopupSplitTest.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		2C5DF1371FEBDC50003B1177 /* Adaptive steps */ = {
