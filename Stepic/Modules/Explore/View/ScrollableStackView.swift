@@ -152,6 +152,15 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    var isScrollEnabled: Bool {
+        get {
+            return self.scrollView.isScrollEnabled
+        }
+        set {
+            self.scrollView.isScrollEnabled = newValue
+        }
+    }
+
     // MARK: - Inits
 
     init(frame: CGRect = .zero, orientation: Orientation) {

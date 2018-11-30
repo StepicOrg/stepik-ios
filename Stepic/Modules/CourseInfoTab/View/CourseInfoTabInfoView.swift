@@ -39,6 +39,7 @@ final class CourseInfoTabInfoView: UIView {
         stackView.showsVerticalScrollIndicator = false
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.stackViewSpacing
+        stackView.isScrollEnabled = false
         return stackView
     }()
 
@@ -59,7 +60,12 @@ final class CourseInfoTabInfoView: UIView {
         return button
     }()
 
-    // MARK: Init
+    override var intrinsicContentSize: CGSize {
+        return CGSize(
+            width: UIViewNoIntrinsicMetric,
+            height: scrollableStackView.intrinsicContentSize.height
+        )
+    }
 
     init(
         frame: CGRect = .zero,
@@ -79,7 +85,10 @@ final class CourseInfoTabInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: Public API
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
+    }
 
     func showLoading() {
         self.skeleton.viewBuilder = {
@@ -114,14 +123,10 @@ final class CourseInfoTabInfoView: UIView {
         self.addJoinButton()
     }
 
-    // MARK: Actions
-
     @objc
     private func joinButtonClicked(sender: UIButton) {
         self.delegate?.courseInfoTabInfoViewDidTapOnJoin(self)
     }
-
-    // MARK: Private API
 
     private func addAuthorView(author: String) {
         let authorView = CourseInfoTabInfoTextBlockView(

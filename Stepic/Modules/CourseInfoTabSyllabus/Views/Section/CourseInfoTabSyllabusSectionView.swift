@@ -56,9 +56,8 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return label
     }()
 
-    private lazy var downloadButton: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
+    private lazy var downloadButton: DownloadControlView = {
+        let view = DownloadControlView(initialState: .readyToDownloading)
         return view
     }()
 

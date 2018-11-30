@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CourseInfoViewControllerProtocol: class {
+
+}
+
 final class CourseInfoViewController: UIViewController {
     private static let topBarAlphaStatusBarThreshold = 0.85
     private var lastTopBarAlpha: CGFloat = 0.0
@@ -42,6 +46,10 @@ final class CourseInfoViewController: UIViewController {
     override func loadView() {
         let view = CourseInfoView(frame: UIScreen.main.bounds, scrollDelegate: self)
 
+        let infoController = CourseInfoTabInfoViewController()
+        self.addChildViewController(infoController)
+        view.addPageForTest(infoController.view)
+
         let syllabusController = CourseInfoTabSyllabusViewController()
         self.addChildViewController(syllabusController)
         view.addPageForTest(syllabusController.view)
@@ -61,6 +69,10 @@ final class CourseInfoViewController: UIViewController {
             ? .default
             : .lightContent
     }
+}
+
+extension CourseInfoViewController: CourseInfoViewControllerProtocol {
+
 }
 
 extension CourseInfoViewController: UIScrollViewDelegate {
