@@ -10,8 +10,8 @@ import Foundation
 
 /// Service for determining next & previous lessons for given lesson in given course
 protocol NextLessonServiceProtocol {
-    func isPreviousUnitAvailable(for unit: NextLessonServiceUnitSourceProtocol) -> Bool
-    func isNextUnitAvailable(for unit: NextLessonServiceUnitSourceProtocol) -> Bool
+    func findPreviousUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol?
+    func findNextUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol?
 }
 
 protocol NextLessonServiceSectionSourceProtocol: UniqueIdentifiable {
@@ -30,18 +30,18 @@ final class NextLessonService: NextLessonServiceProtocol {
         self.sections = contents
     }
 
-    func isNextUnitAvailable(for unit: NextLessonServiceUnitSourceProtocol) -> Bool {
-        return self.isAdjacentUnitAvailable(for: unit, offset: .next)
+    func findPreviousUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol? {
+        return self.findAdjacentUnit(for: unit, offset: .previous)
     }
 
-    func isPreviousUnitAvailable(for unit: NextLessonServiceUnitSourceProtocol) -> Bool {
-        return self.isAdjacentUnitAvailable(for: unit, offset: .previous)
+    func findNextUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol? {
+        return self.findAdjacentUnit(for: unit, offset: .next)
     }
 
-    private func isAdjacentUnitAvailable(
+    private func findAdjacentUnit(
         for unit: NextLessonServiceUnitSourceProtocol,
         offset: Offset
-    ) -> Bool {
+    ) -> NextLessonServiceUnitSourceProtocol? {
         // offset == -1 => previous unit
         // offset == 1 => next unit
         guard abs(offset.rawValue) == 1 else {
@@ -72,26 +72,42 @@ final class NextLessonService: NextLessonServiceProtocol {
             fatalError("Section not found")
         }
 
-        let isUnitLastInSection = unitIndex == section.units.count - 1
-        let isUnitFirstInSection = unitIndex == 0
+        // Unit has adjacent unit in section
+        if unitIndex < section.units.count - 1 && offset == .next {
+            return self.sections[sectionIndex].units[unitIndex + offset.rawValue]
+        }
 
-        // Looking for next section
-        var firstNonEmptySectionIndex = sectionIndex + offset.rawValue
-        var firstNonEmptySection = self.sections[safe: firstNonEmptySectionIndex]
-        while firstNonEmptySection != nil && firstNonEmptySection?.units.isEmpty ?? false {
-            firstNonEmptySection = self.sections[safe: sectionIndex + offset.rawValue]
+        if unitIndex > 0 && offset == .previous {
+            return self.sections[sectionIndex].units[unitIndex + offset.rawValue]
+        }
+
+        // Find section
+        var firstNonEmptySectionIndex = sectionIndex
+        var firstNonEmptySection = self.sections[safe: sectionIndex]
+        while firstNonEmptySection != nil {
             firstNonEmptySectionIndex += offset.rawValue
+            firstNonEmptySection = self.sections[safe: firstNonEmptySectionIndex]
+
+            guard let firstNonEmptySection = firstNonEmptySection else {
+                break
+            }
+
+            if !firstNonEmptySection.units.isEmpty && firstNonEmptySection.isReachable {
+                break
+            }
         }
 
-        let isAdjacentSectionEmpty = firstNonEmptySection?.units.isEmpty ?? true
-        let isAdjacentSectionReachable = firstNonEmptySection?.isReachable ?? false
-
-        switch offset {
-        case .next:
-            return (!isAdjacentSectionEmpty && !isAdjacentSectionReachable) || !isUnitLastInSection
-        case .previous:
-            return (!isAdjacentSectionEmpty && !isAdjacentSectionReachable) || !isUnitFirstInSection
+        // Target section
+        guard let adjacentSection = firstNonEmptySection else {
+            return nil
         }
+
+        // Availability of target section
+        guard !adjacentSection.units.isEmpty && adjacentSection.isReachable else {
+            return nil
+        }
+
+        return offset == .next ? adjacentSection.units.first : adjacentSection.units.last
     }
 
     enum Offset: Int {

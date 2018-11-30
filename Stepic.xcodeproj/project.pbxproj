@@ -1730,6 +1730,7 @@
 		2C2365E421078CEF00C99742 /* VideoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E321078CEF00C99742 /* VideoFileManager.swift */; };
 		2C2365E621086F6600C99742 /* VideoDownloaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2365E521086F6600C99742 /* VideoDownloaderTask.swift */; };
 		2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12621AD8907001DCF89 /* NextLessonService.swift */; };
+		2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C12821AED421001DCF89 /* NextLessonServiceTests.swift */; };
 		2C23C5DE1F6AB10800FC2B7C /* SocialAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */; };
 		2C23C5E01F6AB2AD00FC2B7C /* SocialAuthProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */; };
 		2C23C5E21F6BD43300FC2B7C /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */; };
@@ -5560,6 +5561,7 @@
 		2C2365E321078CEF00C99742 /* VideoFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFileManager.swift; sourceTree = "<group>"; };
 		2C2365E521086F6600C99742 /* VideoDownloaderTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloaderTask.swift; sourceTree = "<group>"; };
 		2C23C12621AD8907001DCF89 /* NextLessonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonService.swift; sourceTree = "<group>"; };
+		2C23C12821AED421001DCF89 /* NextLessonServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonServiceTests.swift; sourceTree = "<group>"; };
 		2C23C5DD1F6AB10800FC2B7C /* SocialAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthPresenter.swift; sourceTree = "<group>"; };
 		2C23C5DF1F6AB2AD00FC2B7C /* SocialAuthProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthProviders.swift; sourceTree = "<group>"; };
 		2C23C5E11F6BD43300FC2B7C /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
@@ -7176,6 +7178,7 @@
 				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
 				62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */,
 				2C2485482101EE3E006F8858 /* DownloaderTests.swift */,
+				2C23C12821AED421001DCF89 /* NextLessonServiceTests.swift */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -14310,6 +14313,7 @@
 			files = (
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
+				2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */,
 				080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
 				0805FE481F0E584B001226B4 /* CodePlaygroundTest.swift in Sources */,
