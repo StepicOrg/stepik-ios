@@ -28,7 +28,7 @@ final class AchievementPopupSplitTest: SplitTestProtocol {
 
         static var groups: [Group] = [.control, .test]
 
-        var isParticipant: Bool {
+        var shouldShowAchievementPopup: Bool {
             switch self {
             case .control:
                 return false

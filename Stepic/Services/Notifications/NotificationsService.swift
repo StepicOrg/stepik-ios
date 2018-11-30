@@ -225,7 +225,7 @@ extension NotificationsService {
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
         if AchievementPopupSplitTest.shouldParticipate {
             let popupSplitTest = self.splitTestingService.fetchSplitTest(AchievementPopupSplitTest.self)
-            if popupSplitTest.currentGroup.isParticipant {
+            if popupSplitTest.currentGroup.shouldShowAchievementPopup {
                 self.showAchievementPopup(userInfo: userInfo)
             } else {
                 self.routeToProfile(userInfo: userInfo)
