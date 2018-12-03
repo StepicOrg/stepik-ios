@@ -331,9 +331,6 @@ CatalogPlaceholderError = "Не удалось загрузить каталог
 TrendingTopics = "Категории";
 
 WidgetButtonJoin = "Поступить";
-/* a/b */
-WidgetButtonJoinTest = "Учиться";
-
 WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";
@@ -547,6 +544,7 @@ AchievementsLevelNotObtained = "Ещё не получено";
 AchievementsUnknownKindTitle = "Неизвестное достижение";
 AchievementsUnknownKindDescription = "Решайте больше заданий, чтобы открыть";
 AchievementsShareText = "Я получил достижение «%@» на Stepik.org. Попробуй обогнать!";
+AchievementsNew = "Новое достижение!";
 
 /* Personal deadlines */
 CourseInfo = "Инфо о курсе";

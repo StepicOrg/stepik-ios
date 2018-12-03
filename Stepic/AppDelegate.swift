@@ -18,7 +18,6 @@ import FBSDKCoreKit
 import YandexMobileMetrica
 import Presentr
 import PromiseKit
-import AppsFlyerLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,8 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
-    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
+        presenter: NotificationsRequestOnlySettingsAlertPresenter(),
+        analytics: .init(source: .abAppLaunch)
+    )
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+    private var didShowOnboarding = true
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -86,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
+            self.didShowOnboarding = false
             DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
@@ -97,7 +105,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        self.notificationsRegistrationService.renewDeviceToken()
+        let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
+        let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
+            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
+        if shouldParticipate && self.didShowOnboarding {
+            self.notificationsRegistrationService.registerForRemoteNotifications()
+        } else {
+            self.notificationsRegistrationService.renewDeviceToken()
+        }
+
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
@@ -125,7 +141,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
-        AppsFlyerTracker.shared().trackAppLaunch()
     }
 
     // MARK: - Downloading Data in the Background
@@ -229,7 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"
-           || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+               || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 
@@ -251,7 +266,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if branchService.canOpenWithBranch(url: url) {
                 branchService.openURL(app: app, open: url, options: options)
             } else {
-            // Other actions
+                // Other actions
                 self.handleOpenedFromDeepLink(url)
             }
         }

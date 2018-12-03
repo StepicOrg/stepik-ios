@@ -1,19 +1,18 @@
 //
-//  JoinCourseStringSplitTest.swift
+//  AchievementPopupSplitTest.swift
 //  Stepic
 //
-//  Created by Ostrenkiy on 26/10/2018.
+//  Created by Ivan Magda on 11/28/18.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-final class JoinCourseStringSplitTest: SplitTestProtocol {
+final class AchievementPopupSplitTest: SplitTestProtocol {
     typealias GroupType = Group
 
-    static let identifier = "join_course_string"
-    static let minParticipatingStartVersion = "1.71"
+    static let identifier = "achievement_popup"
+    static let minParticipatingStartVersion = "1.73"
 
     var currentGroup: Group
     var analytics: ABAnalyticsServiceProtocol
@@ -29,12 +28,12 @@ final class JoinCourseStringSplitTest: SplitTestProtocol {
 
         static var groups: [Group] = [.control, .test]
 
-        var joinText: String {
+        var shouldShowAchievementPopup: Bool {
             switch self {
             case .control:
-                return NSLocalizedString("WidgetButtonJoin", comment: "")
+                return false
             case .test:
-                return NSLocalizedString("WidgetButtonJoinTest", comment: "")
+                return true
             }
         }
     }

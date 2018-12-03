@@ -1,4 +1,4 @@
-In the new version of Stepik we added Java 11 support and fixed syllabus offline viewing.
+In the new version of Stepik we fixed some bugs.
 
 Enjoy learning!
 Stepik team

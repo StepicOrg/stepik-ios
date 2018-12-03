@@ -18,14 +18,21 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     var presenter: NotificationsRegistrationPresentationServiceProtocol?
     private var analytics: NotificationAlertsAnalytics?
 
+    private let splitTestingService: SplitTestingServiceProtocol
+
     init(
         delegate: NotificationsRegistrationServiceDelegate? = nil,
         presenter: NotificationsRegistrationPresentationServiceProtocol? = nil,
-        analytics: NotificationAlertsAnalytics? = nil
+        analytics: NotificationAlertsAnalytics? = nil,
+        splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
+            analyticsService: AnalyticsUserProperties(),
+            storage: UserDefaults.standard
+        )
     ) {
         self.delegate = delegate
         self.presenter = presenter
         self.analytics = analytics
+        self.splitTestingService = splitTestingService
     }
 
     // MARK: - Handling APNs pipeline events -
@@ -78,7 +85,10 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     /// If the `forceToRequestAuthorization` parameter is `true` then the user will be prompted for
     /// notifications permissions directly otherwise firstly will check if has granted permissions.
     private func register(forceToRequestAuthorization: Bool) {
-        guard AuthInfo.shared.isAuthorized else {
+        let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
+        let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
+            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
+        guard AuthInfo.shared.isAuthorized || shouldParticipate else {
             return
         }
 
@@ -112,13 +122,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             return
         }
 
-        let isDelegateAllow = self.delegate?.notificationsRegistrationService(self,
-            shouldPresentAlertFor: .permission) ?? false
-        let shouldPresentCustomPermissionAlert = self.presenter != nil && isDelegateAllow
-
-        if shouldPresentCustomPermissionAlert {
-            self.presentPermissionAlert()
-        } else if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *) {
             NotificationPermissionStatus.current.done { status in
                 if status == .denied {
                     self.presentSettingsAlertIfNeeded()
@@ -173,10 +177,12 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     private func presentPermissionAlertIfNeeded() {
-        if self.didShowDefaultPermissionAlert || self.presenter == nil {
-            self.requestAuthorization()
+        if let delegate = self.delegate {
+            if delegate.notificationsRegistrationService(self, shouldPresentAlertFor: .permission) {
+                self.presentPermissionAlert()
+            }
         } else {
-            self.presentPermissionAlert()
+            self.requestAuthorization()
         }
     }
 
