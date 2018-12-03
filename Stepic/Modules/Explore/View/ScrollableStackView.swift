@@ -216,6 +216,14 @@ final class ScrollableStackView: UIView {
         self.refreshControl?.endRefreshing()
     }
 
+    func scrollTo(arrangedViewIndex: Int) {
+        guard let targetFrame = self.arrangedSubviews[safe: arrangedViewIndex]?.frame else {
+            return
+        }
+
+        self.scrollView.scrollRectToVisible(targetFrame, animated: true)
+    }
+
     // MARK: - Private methods
 
     @objc

@@ -46,7 +46,11 @@ final class CourseInfoView: UIView {
         return view
     }()
 
-    private lazy var segmentedControl = TabSegmentedControlView(frame: .zero, items: ["Инфо", "Модули"])
+    private lazy var segmentedControl: TabSegmentedControlView = {
+        let control = TabSegmentedControlView(frame: .zero, items: ["Инфо", "Модули"])
+        control.delegate = self
+        return control
+    }()
 
     private lazy var contentView: ScrollableStackView = {
         let stackView = ScrollableStackView(orientation: .horizontal)
@@ -172,6 +176,20 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
+extension CourseInfoView: TabSegmentedControlViewDelegate {
+    func tabSegmentedControlView(
+        _ tabSegmentedControlView: TabSegmentedControlView,
+        didSelectTabWithIndex: Int
+    ) {
+        guard didSelectTabWithIndex >= 0,
+              didSelectTabWithIndex < self.contentView.arrangedSubviews.count else {
+            return
+        }
+
+        self.contentView.scrollTo(arrangedViewIndex: didSelectTabWithIndex)
+    }
+}
+
 // Delegate for horizontal content-stackview, not for parent vertical scrollview
 extension CourseInfoView: UIScrollViewDelegate {
     private func updatePageHeight(byPageWithIndex index: Int) {
@@ -183,15 +201,21 @@ extension CourseInfoView: UIScrollViewDelegate {
         )
     }
 
+    private func updateSegmentedControl(newPageIndex: Int) {
+        self.segmentedControl.selectTab(index: newPageIndex)
+    }
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
             self.updatePageHeight(byPageWithIndex: pageIndex)
+            self.updateSegmentedControl(newPageIndex: pageIndex)
         }
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
         self.updatePageHeight(byPageWithIndex: pageIndex)
+        self.updateSegmentedControl(newPageIndex: pageIndex)
     }
 }

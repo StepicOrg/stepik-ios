@@ -85,21 +85,13 @@ final class TabSegmentedControlView: UIView {
         self.updateSelectedMarker()
     }
 
-    func selectNextTab() {
-        guard self.selectedItemIndex < self.items.count - 1 else {
+    func selectTab(index: Int) {
+        guard index >= 0,
+              index < self.items.count else {
             return
         }
 
-        self.selectedItemIndex += 1
-        self.updateSelectedMarker(animated: true)
-    }
-
-    func selectPreviousTab() {
-        guard self.selectedItemIndex > 0 else {
-            return
-        }
-
-        self.selectedItemIndex -= 1
+        self.selectedItemIndex = index
         self.updateSelectedMarker(animated: true)
     }
 
