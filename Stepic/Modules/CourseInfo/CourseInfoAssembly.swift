@@ -9,6 +9,12 @@
 import UIKit
 
 final class CourseInfoAssembly: Assembly {
+    private var courseID: Course.IdType
+
+    init(courseID: Course.IdType) {
+        self.courseID = courseID
+    }
+
     func makeModule() -> UIViewController {
         let provider = CourseInfoProvider()
         let presenter = CourseInfoPresenter()
@@ -16,7 +22,9 @@ final class CourseInfoAssembly: Assembly {
             presenter: presenter,
             provider: provider
         )
-        let viewController = CourseInfoViewController()
+        let viewController = CourseInfoViewController(
+            interactor: interactor
+        )
         presenter.viewController = viewController
         return viewController
     }

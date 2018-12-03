@@ -28,7 +28,7 @@ final class CourseInfoView: UIView {
         return view
     }()
 
-    private lazy var headerView: UIView = {
+    private lazy var headerView: CourseInfoHeaderView = {
         let view = CourseInfoHeaderView()
 
         let viewModel = CourseInfoHeaderViewModel(
@@ -203,6 +203,7 @@ extension CourseInfoView: UIScrollViewDelegate {
 
     private func updateSegmentedControl(newPageIndex: Int) {
         self.segmentedControl.selectTab(index: newPageIndex)
+        self.headerView.showLoading()
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

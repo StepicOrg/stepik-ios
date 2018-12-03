@@ -905,6 +905,7 @@
 		2C08CD5021B1836B0035142B /* CourseInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C08CD4521B1836A0035142B /* CourseInfoHeaderView.swift */; };
 		2C08CD5121B1836B0035142B /* CourseInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C08CD4721B1836B0035142B /* CourseInfoView.swift */; };
 		2C08CD5221B1836B0035142B /* CourseInfoHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C08CD4921B1836B0035142B /* CourseInfoHeaderViewModel.swift */; };
+		2C08CD5421B5805A0035142B /* CourseInfoHeaderSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C08CD5321B5805A0035142B /* CourseInfoHeaderSkeletonView.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
 		2C093EF5211B418400162DD0 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1FC321F41E74500E14B46 /* QuizPresenter.swift */; };
 		2C093EF6211B419300162DD0 /* QuizControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */; };
@@ -5539,6 +5540,7 @@
 		2C08CD4521B1836A0035142B /* CourseInfoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoHeaderView.swift; sourceTree = "<group>"; };
 		2C08CD4721B1836B0035142B /* CourseInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoView.swift; sourceTree = "<group>"; };
 		2C08CD4921B1836B0035142B /* CourseInfoHeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoHeaderViewModel.swift; sourceTree = "<group>"; };
+		2C08CD5321B5805A0035142B /* CourseInfoHeaderSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoHeaderSkeletonView.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
@@ -10881,6 +10883,7 @@
 				62E98454B9A6D4DB423DB94F /* CourseInfoTabInfoSkeletonView.swift */,
 				62E9876C6770A639F8C20BB8 /* CourseInfoTabInfoHeaderBlockSkeletonView.swift */,
 				62E9877223D790EAA5F8A291 /* CourseInfoTabInfoInstructorSkeletonView.swift */,
+				2C08CD5321B5805A0035142B /* CourseInfoHeaderSkeletonView.swift */,
 			);
 			name = CourseInfo;
 			sourceTree = "<group>";
@@ -14788,6 +14791,7 @@
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
 				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
+				2C08CD5421B5805A0035142B /* CourseInfoHeaderSkeletonView.swift in Sources */,
 				0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */,
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,

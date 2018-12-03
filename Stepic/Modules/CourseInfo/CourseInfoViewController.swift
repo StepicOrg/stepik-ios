@@ -16,12 +16,23 @@ final class CourseInfoViewController: UIViewController {
     private static let topBarAlphaStatusBarThreshold = 0.85
     private var lastTopBarAlpha: CGFloat = 0.0
 
+    let interactor: CourseInfoInteractorProtocol
+
     lazy var courseInfoView = self.view as? CourseInfoView
+
+    init(interactor: CourseInfoInteractorProtocol) {
+        self.interactor = interactor
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(iOS 11, *) { } else {
+        if #available(iOS 11.0, *) { } else {
             self.automaticallyAdjustsScrollViewInsets = false
         }
     }
