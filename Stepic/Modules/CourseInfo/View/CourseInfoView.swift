@@ -52,6 +52,7 @@ final class CourseInfoView: UIView {
         let stackView = ScrollableStackView(orientation: .horizontal)
         stackView.isPagingEnabled = true
         stackView.showsHorizontalScrollIndicator = false
+        stackView.scrollDelegate = self
         return stackView
     }()
 
@@ -98,6 +99,7 @@ final class CourseInfoView: UIView {
 
     func addPageForTest(_ view: UIView) {
         self.contentView.addArrangedView(view)
+        self.updatePageHeight(byPageWithIndex: 0)
 
         view.snp.makeConstraints { make in
             make.width.equalTo(self.snp.width)
@@ -167,5 +169,29 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.segmentedControlHeight)
         }
+    }
+}
+
+// Delegate for horizontal content-stackview, not for parent vertical scrollview
+extension CourseInfoView: UIScrollViewDelegate {
+    private func updatePageHeight(byPageWithIndex index: Int) {
+        let height = self.contentView.arrangedSubviews[index].intrinsicContentSize.height
+
+        self.scrollableStackView.contentSize = CGSize(
+            width: self.scrollableStackView.contentSize.width,
+            height: height
+        )
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+            self.updatePageHeight(byPageWithIndex: pageIndex)
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+        self.updatePageHeight(byPageWithIndex: pageIndex)
     }
 }

@@ -63,7 +63,7 @@ final class CourseInfoTabInfoView: UIView {
     override var intrinsicContentSize: CGSize {
         return CGSize(
             width: UIViewNoIntrinsicMetric,
-            height: scrollableStackView.intrinsicContentSize.height
+            height: self.scrollableStackView.arrangedSubviews.last?.frame.maxY ?? 0
         )
     }
 

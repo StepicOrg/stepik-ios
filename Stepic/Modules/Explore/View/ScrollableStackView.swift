@@ -161,6 +161,15 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    var contentSize: CGSize {
+        get {
+            return self.scrollView.contentSize
+        }
+        set {
+            self.scrollView.contentSize = newValue
+        }
+    }
+
     // MARK: - Inits
 
     init(frame: CGRect = .zero, orientation: Orientation) {
