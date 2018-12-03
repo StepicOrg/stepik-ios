@@ -1912,6 +1912,7 @@
 		2C4F3407210A177100E259FE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
 		2C570A63212FD61B00B56AD9 /* TopologicalSortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C570A62212FD61B00B56AD9 /* TopologicalSortTests.swift */; };
+		2C5A791021B19B6400909C04 /* AchievementPopupSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A790F21B19B6400909C04 /* AchievementPopupSplitTest.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D515A202468CE00B9D932 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C5D515B202468D100B9D932 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
@@ -5651,6 +5652,7 @@
 		2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamEGERussianTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C59F04020EB8ACA00666EE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C59F06620EBA2EE00666EE0 /* UserRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationService.swift; sourceTree = "<group>"; };
+		2C5A790F21B19B6400909C04 /* AchievementPopupSplitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementPopupSplitTest.swift; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
@@ -9043,6 +9045,7 @@
 			children = (
 				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
 				62E988F198B6ED19738CB0B5 /* SubscribeNotificationsOnLaunchSplitTest.swift */,
+				2C5A790F21B19B6400909C04 /* AchievementPopupSplitTest.swift */,
 			);
 			path = ActiveTests;
 			sourceTree = "<group>";
@@ -15038,6 +15041,7 @@
 				62E982769C19C7852BCD59C4 /* TooltipStorageManager.swift in Sources */,
 				62E985DD90444821A835C02F /* CourseListsCollectionSkeletonView.swift in Sources */,
 				62E98A53567525055BCCA089 /* AppDelegate.swift in Sources */,
+				2C5A791021B19B6400909C04 /* AchievementPopupSplitTest.swift in Sources */,
 				62E982C316E409B90DC3AA21 /* SubscribeNotificationsOnLaunchSplitTest.swift in Sources */,
 				62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */,
 			);

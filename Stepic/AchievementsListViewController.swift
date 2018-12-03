@@ -46,7 +46,7 @@ class AchievementsListViewController: UIViewController, AchievementsListView, Co
     }
 
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool) {
-        let alertManager = AchievementPopupAlertManager()
+        let alertManager = AchievementPopupAlertManager(source: .achievementList)
         let vc = alertManager.construct(with: viewData, canShare: canShare)
         alertManager.present(alert: vc, inController: self)
     }
