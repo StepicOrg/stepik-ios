@@ -21,7 +21,8 @@ final class BranchService {
             guard let data = params as? [String: AnyObject] else {
                 return
             }
-
+            let campaign = data["~campaign"] as? String
+            AmplitudeAnalyticsEvents.Branch.linkOpened(isFirstSession: DefaultsContainer.launch.isFirstSession, campaign: campaign).send()
             DispatchQueue.main.async { [weak self] in
                 self?.deepLinkRoutingService.route(DeepLinkRoute(branchData: data))
             }

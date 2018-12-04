@@ -94,11 +94,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if !DefaultsContainer.launch.didLaunch {
             self.didShowOnboarding = false
+            DefaultsContainer.launch.didLaunch = true
             DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
+            DefaultsContainer.launch.isFirstSession = true
+        } else {
+            DefaultsContainer.launch.isFirstSession = false
         }
 
         if StepicApplicationsInfo.inAppUpdatesAvailable {

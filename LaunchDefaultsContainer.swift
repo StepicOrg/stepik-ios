@@ -44,6 +44,22 @@ class LaunchDefaultsContainer {
         }
     }
 
+    fileprivate let isFirstSessionKey: String = "isFirstSessionKey"
+
+    var isFirstSession: Bool {
+        get {
+            if let isFirstSession = defaults.value(forKey: isFirstSessionKey) as? Bool {
+                return isFirstSession
+            } else {
+                return true
+            }
+        }
+
+        set(value) {
+            defaults.set(value, forKey: isFirstSessionKey)
+        }
+    }
+
     @discardableResult func initStartVersion() -> String {
         let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
         self.startVersion = version

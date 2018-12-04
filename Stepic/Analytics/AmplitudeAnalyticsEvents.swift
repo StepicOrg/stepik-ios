@@ -20,6 +20,18 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    struct Branch {
+        static func linkOpened(isFirstSession: Bool, campaign: String?) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Branch link opened",
+                parameters: [
+                    "is_first_session": isFirstSession,
+                    "campaign": campaign as Any
+                ]
+            )
+        }
+    }
+
     struct Onboarding {
         static func screenOpened(screen: Int) -> AnalyticsEvent {
             return AnalyticsEvent(

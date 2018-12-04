@@ -11,6 +11,7 @@ import UIKit
 class StyledTabBarViewController: UITabBarController {
 
     let items = StepicApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
+    var didShowOnboardingThisSession = false
 
     var notificationsBadgeNumber: Int {
         get {
@@ -56,10 +57,9 @@ class StyledTabBarViewController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if !DefaultsContainer.launch.didLaunch {
-            DefaultsContainer.launch.didLaunch = true
-
+        if DefaultsContainer.launch.isFirstSession && !didShowOnboardingThisSession {
             let onboardingVC = ControllerHelper.instantiateViewController(identifier: "Onboarding", storyboardName: "Onboarding")
+            didShowOnboardingThisSession = true
             present(onboardingVC, animated: true, completion: nil)
         }
     }
