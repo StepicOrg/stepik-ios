@@ -35,10 +35,10 @@ final class CourseInfoTabInfoViewController: UIViewController {
         self.playerVideoBoundsObservation = playerViewController.observe(
             \.videoBounds,
             options: [.old, .new]
-        ) { (_, change) in
+        ) { [weak self] (_, change) in
             guard let oldValue = change.oldValue,
                   let newValue = change.newValue,
-                  let introVideoHeight = self.introVideoHeight else {
+                  let introVideoHeight = self?.introVideoHeight else {
                 return
             }
             if oldValue.size.height > introVideoHeight && newValue.size.height == introVideoHeight {
