@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 
 protocol CourseInfoTabInfoViewControllerProtocol: class {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel)
@@ -23,6 +25,29 @@ final class CourseInfoTabInfoViewController: UIViewController {
         }
     }
 
+    private var playerVideoBoundsObservation: NSKeyValueObservation?
+    private var introVideoHeight: CGFloat?
+
+    @objc
+    private dynamic lazy var playerViewController: AVPlayerViewController = {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.videoGravity = AVLayerVideoGravity.resizeAspectFill.rawValue
+        self.playerVideoBoundsObservation = playerViewController.observe(
+            \.videoBounds,
+            options: [.old, .new]
+        ) { (_, change) in
+            guard let oldValue = change.oldValue,
+                  let newValue = change.newValue,
+                  let introVideoHeight = self.introVideoHeight else {
+                return
+            }
+            if oldValue.size.height > introVideoHeight && newValue.size.height == introVideoHeight {
+                UIApplication.shared.isStatusBarHidden = false
+            }
+        }
+        return playerViewController
+    }()
+
     // MARK: Init
 
     init(
@@ -37,6 +62,12 @@ final class CourseInfoTabInfoViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        self.playerViewController.willMove(toParentViewController: nil)
+        self.playerViewController.view.removeFromSuperview()
+        self.playerViewController.removeFromParentViewController()
     }
 
     // MARK: ViewController lifecycle
@@ -90,13 +121,32 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
 // MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewDelegate -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewDelegate {
-    var playerParentViewController: UIViewController? {
-        return self
+    func courseInfoTabInfoIntroVideoBlockViewRequestsVideoView(
+        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
+    ) -> UIView {
+        self.introVideoHeight = courseInfoTabInfoIntroVideoBlockView.appearance.introVideoHeight
+        self.addChildViewController(self.playerViewController)
+        return self.playerViewController.view
     }
 
-    func courseInfoTabInfoIntroVideoBlockViewDidDismissFullscreen(
-        _ CourseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
+    func courseInfoTabInfoIntroVideoBlockViewDidAddVideoView(
+        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
-        UIApplication.shared.isStatusBarHidden = false
+        self.playerViewController.didMove(toParentViewController: self)
+    }
+
+    func courseInfoTabInfoIntroVideoBlockViewDidCreatePlayer(
+        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView,
+        player: AVPlayer
+    ) {
+        if self.playerViewController.player == nil {
+            self.playerViewController.player = player
+        }
+    }
+
+    func courseInfoTabInfoIntroVideoBlockViewPlayClicked(
+        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
+    ) {
+        self.playerViewController.player?.play()
     }
 }
