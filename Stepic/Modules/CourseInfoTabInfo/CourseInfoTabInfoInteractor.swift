@@ -20,11 +20,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
     let presenter: CourseInfoTabInfoPresenterProtocol
     let provider: CourseInfoTabInfoProviderProtocol
 
-    private var course: Course? {
-        didSet {
-            self.getCourseInfo()
-        }
-    }
+    private var course: Course?
 
     init(
         presenter: CourseInfoTabInfoPresenterProtocol,
@@ -42,6 +38,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
         }
 
         self.provider.fetchCourseUsers(course).done { course in
+            self.course = course
             self.presenter.presentCourseInfo(
                 response: .init(course: self.course)
             )
@@ -64,5 +61,6 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
     func update(with course: Course) {
         self.course = course
+        self.getCourseInfo()
     }
 }
