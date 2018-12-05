@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
-import AVKit
 import SnapKit
 import Nuke
 
@@ -21,9 +19,9 @@ protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     )
 
-    func courseInfoTabInfoIntroVideoBlockViewDidCreatePlayer(
+    func courseInfoTabInfoIntroVideoBlockViewDidReceiveVideoURL(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView,
-        player: AVPlayer
+        url: URL
     )
 
     func courseInfoTabInfoIntroVideoBlockViewPlayClicked(
@@ -47,7 +45,9 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
     var videoURL: URL? {
         didSet {
-            self.initPlayerIfNeeded()
+            if let videoURL = self.videoURL {
+                self.delegate?.courseInfoTabInfoIntroVideoBlockViewDidReceiveVideoURL(self, url: videoURL)
+            }
         }
     }
 
@@ -126,15 +126,6 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         )
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
-    }
-
-    private func initPlayerIfNeeded() {
-        if let videoURL = self.videoURL {
-            self.delegate?.courseInfoTabInfoIntroVideoBlockViewDidCreatePlayer(
-                self,
-                player: AVPlayer(url: videoURL)
-            )
-        }
     }
 }
 

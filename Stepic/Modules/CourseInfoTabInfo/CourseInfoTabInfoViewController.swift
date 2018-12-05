@@ -135,12 +135,12 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
         self.playerViewController.didMove(toParentViewController: self)
     }
 
-    func courseInfoTabInfoIntroVideoBlockViewDidCreatePlayer(
+    func courseInfoTabInfoIntroVideoBlockViewDidReceiveVideoURL(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView,
-        player: AVPlayer
+        url: URL
     ) {
         if self.playerViewController.player == nil {
-            self.playerViewController.player = player
+            self.playerViewController.player = AVPlayer(url: url)
         }
     }
 
