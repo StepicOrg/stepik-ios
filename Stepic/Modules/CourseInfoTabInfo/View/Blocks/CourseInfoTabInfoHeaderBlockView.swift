@@ -22,6 +22,8 @@ extension CourseInfoTabInfoHeaderBlockView {
 }
 
 final class CourseInfoTabInfoHeaderBlockView: UIView {
+    let appearance: Appearance
+
     var icon: UIImage? {
         didSet {
             self.iconImageView.image = self.icon?.withRenderingMode(.alwaysTemplate)
@@ -39,8 +41,6 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
             self.titleLabel.attributedText = self.attributedTitle
         }
     }
-
-    private let appearance: Appearance
 
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()

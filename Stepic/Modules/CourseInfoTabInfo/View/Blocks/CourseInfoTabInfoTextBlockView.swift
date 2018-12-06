@@ -20,14 +20,15 @@ extension CourseInfoTabInfoTextBlockView {
 }
 
 final class CourseInfoTabInfoTextBlockView: UIView {
+    let appearance: Appearance
+
     var message: String? {
         didSet {
             self.messageLabel.setTextWithHTMLString(self.message ?? "")
         }
     }
 
-    private let appearance: Appearance
-
+    // TODO: Make private
     lazy var headerView = CourseInfoTabInfoHeaderBlockView()
 
     private lazy var messageLabel: UILabel = {

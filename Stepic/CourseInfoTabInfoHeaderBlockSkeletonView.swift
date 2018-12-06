@@ -21,7 +21,7 @@ extension CourseInfoTabInfoHeaderBlockSkeletonView {
 }
 
 final class CourseInfoTabInfoHeaderBlockSkeletonView: UIView {
-    private let appearance: Appearance
+    let appearance: Appearance
 
     private lazy var imageViewSkeleton: UIView = {
         let view = UIView()

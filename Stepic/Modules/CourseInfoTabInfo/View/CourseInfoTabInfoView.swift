@@ -40,7 +40,7 @@ final class CourseInfoTabInfoView: UIView {
     weak var delegate: CourseInfoTabInfoViewDelegate?
     weak var videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate?
 
-    private let appearance: Appearance
+    let appearance: Appearance
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
