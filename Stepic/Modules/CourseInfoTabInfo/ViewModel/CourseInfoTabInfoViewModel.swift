@@ -10,7 +10,9 @@ import UIKit
 
 struct CourseInfoTabInfoViewModel {
     let author: String
+
     let introVideoURL: URL?
+    let introVideoThumbnailURL: URL?
 
     let aboutText: String
     let requirementsText: String
@@ -22,6 +24,8 @@ struct CourseInfoTabInfoViewModel {
     let certificateDetailsText: String
 
     let instructors: [CourseInfoTabInfoInstructorViewModel]
+
+    let actionButtonTitle: String
 }
 
 struct CourseInfoTabInfoInstructorViewModel {

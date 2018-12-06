@@ -36,7 +36,8 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     var summary: String? {
         didSet {
-            self.descriptionLabel.text = self.summary
+            self.descriptionLabel.setTextWithHTMLString(self.summary ?? "")
+            self.updateDescriptionLabelTopConstraint()
         }
     }
 
@@ -88,6 +89,18 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func updateDescriptionLabelTopConstraint() {
+        self.descriptionLabel.snp.updateConstraints { make in
+            make.top
+                .equalTo(self.imageView.snp.bottom)
+                .offset(
+                    self.descriptionLabel.text?.isEmpty ?? true
+                        ? 0
+                        : self.appearance.descriptionLabelInsets.top
+                )
+        }
     }
 }
 

@@ -33,16 +33,22 @@ extension Course {
     @NSManaged var managedFormat: String?
     @NSManaged var managedAudience: String?
     @NSManaged var managedCertificate: String?
+    @NSManaged var managedCertificateRegularThreshold: NSNumber?
+    @NSManaged var managedCertificateDistinctionThreshold: NSNumber?
     @NSManaged var managedRequirements: String?
     @NSManaged var managedSlug: String?
     @NSManaged var managedProgressId: String?
     @NSManaged var managedLastStepId: String?
+    @NSManaged var managedTimeToComplete: NSNumber?
+    @NSManaged var managedLanguageCode: String?
 
     @NSManaged var managedInstructors: NSOrderedSet?
     @NSManaged var managedSections: NSOrderedSet?
+    @NSManaged var managedAuthors: NSOrderedSet?
 
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
+    @NSManaged var managedAuthorsArray: NSObject?
 
     @NSManaged var managedIntroVideo: Video?
 
@@ -250,12 +256,48 @@ extension Course {
         }
     }
 
+    var certificateRegularThreshold: Int? {
+        get {
+            return self.managedCertificateRegularThreshold?.intValue
+        }
+        set {
+            self.managedCertificateRegularThreshold = newValue as NSNumber?
+        }
+    }
+
+    var certificateDistinctionThreshold: Int? {
+        get {
+            return self.managedCertificateDistinctionThreshold?.intValue
+        }
+        set {
+            self.managedCertificateDistinctionThreshold = newValue as NSNumber?
+        }
+    }
+
     var requirements: String {
         set(value) {
             self.managedRequirements = value
         }
         get {
             return managedRequirements ?? ""
+        }
+    }
+
+    var timeToComplete: Int? {
+        get {
+            return self.managedTimeToComplete?.intValue
+        }
+        set {
+            self.managedTimeToComplete = newValue as NSNumber?
+        }
+    }
+
+    var languageCode: String {
+        get {
+            return self.managedLanguageCode ?? ""
+        }
+        set {
+            self.managedLanguageCode = newValue
         }
     }
 
@@ -320,6 +362,24 @@ extension Course {
         }
     }
 
+    var authorsArray: [Int] {
+        get {
+            return (self.managedAuthorsArray as? [Int]) ?? []
+        }
+        set {
+            self.managedAuthorsArray = newValue as NSObject?
+        }
+    }
+
+    var authors: [User] {
+        get {
+            return (self.managedAuthors?.array as? [User]) ?? []
+        }
+        set {
+            self.managedAuthors = NSOrderedSet(array: newValue)
+        }
+    }
+
     var introVideo: Video? {
         get {
             return managedIntroVideo
@@ -344,4 +404,9 @@ extension Course {
         managedSections = mutableItems.copy() as? NSOrderedSet
     }
 
+    func addAuthor(_ author: User) {
+        let mutableItems = self.managedAuthors?.mutableCopy() as! NSMutableOrderedSet
+        mutableItems.add(author)
+        self.managedAuthors = mutableItems.copy() as? NSOrderedSet
+    }
 }
