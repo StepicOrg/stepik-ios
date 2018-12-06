@@ -35,9 +35,7 @@ class LaunchDefaultsContainer {
             if let startVersion = defaults.value(forKey: startVersionKey) as? String {
                 return startVersion
             } else {
-                let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
-                self.startVersion = version
-                return version
+                return initStartVersion()
             }
         }
 
@@ -46,4 +44,9 @@ class LaunchDefaultsContainer {
         }
     }
 
+    @discardableResult func initStartVersion() -> String {
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0"
+        self.startVersion = version
+        return version
+    }
 }

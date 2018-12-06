@@ -30,7 +30,7 @@ final class StreakActivityView: UIView {
     let appearance: Appearance
 
     private lazy var backgroundView: UIView = {
-        let view = UIView(frame: .zero)
+        let view = UIView()
         view.backgroundColor = self.appearance.backgroundColor
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.cornerRadius
@@ -90,7 +90,7 @@ final class StreakActivityView: UIView {
         )
     }
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

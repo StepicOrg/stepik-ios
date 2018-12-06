@@ -61,8 +61,5 @@ final class CourseCoverImageView: UIImageView {
 extension CourseCoverImageView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.image = nil
-
-        self.layer.cornerRadius = self.appearance.cornerRadius
-        self.clipsToBounds = true
     }
 }

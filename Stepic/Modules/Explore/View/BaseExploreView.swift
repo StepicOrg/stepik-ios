@@ -14,7 +14,7 @@ protocol BaseExploreViewDelegate: class {
 }
 
 final class BaseExploreView: UIView {
-    private lazy var scrollableStackView = ScrollableStackView(frame: .zero)
+    private lazy var scrollableStackView = ScrollableStackView(orientation: .vertical)
     weak var delegate: BaseExploreViewDelegate?
 
     override init(frame: CGRect) {

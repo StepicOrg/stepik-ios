@@ -81,7 +81,6 @@ final class GradientCoursesPlaceholderViewFactory {
         appearance: GradientCoursesPlaceholderView.Appearance
     ) -> GradientCoursesPlaceholderView {
         let view = GradientCoursesPlaceholderView(
-            frame: .zero,
             color: color,
             appearance: appearance
         )

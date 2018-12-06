@@ -26,7 +26,7 @@ PODS:
   - Crashlytics (3.10.7):
     - Fabric (~> 1.7.11)
   - CRToast (0.0.9)
-  - DeviceKit (1.7.0)
+  - DeviceKit (1.10.0)
   - DownloadButton (0.1.0)
   - EasyTipView (1.1.0)
   - Fabric (1.7.11)
@@ -163,7 +163,7 @@ DEPENDENCIES:
   - Charts (= 3.1.1)
   - Crashlytics (= 3.10.7)
   - CRToast (= 0.0.9)
-  - DeviceKit (= 1.7.0)
+  - DeviceKit (= 1.10.0)
   - DownloadButton (= 0.1.0)
   - EasyTipView (from `https://github.com/igorkislyuk/EasyTipView.git`)
   - Fabric (= 1.7.11)
@@ -301,7 +301,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
-  DeviceKit: 6a5bdeb103c03757bb94aef1ccb01e08bc8ef4ee
+  DeviceKit: 2a6cf0d1ec05e2ac7f9b24cdfdb3cb358900a247
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: 236dda1a58f9a15bd39f11d84347e6b8643a744c
   Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
@@ -349,6 +349,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: a97928fdf81fc88b600ec1549a07164cd218bf9a
+PODFILE CHECKSUM: 3f20d9376b4c62a872b087e27e6847796587ddf3
 
 COCOAPODS: 1.5.3

@@ -584,6 +584,9 @@ PersonalDeadline = "Персональный дедлайн";
 DeadlineModeQuestion = "Сколько времени вы готовы тратить на изучение этого курса?";
 PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - путь к успеху. Мы можем создать для вас персональное умное расписание - так вы никогда не забудете получить порцию новых знаний!";
 
+/* Course info */
+CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
 "Ok" = "Ok";

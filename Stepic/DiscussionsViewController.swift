@@ -70,6 +70,8 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = []
+
         print("did load")
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in

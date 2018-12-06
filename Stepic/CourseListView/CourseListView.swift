@@ -38,7 +38,7 @@ class CourseListView: UIView {
     }
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         colorMode: CourseListColorMode = .default,
         viewDelegate: CourseListViewDelegate,
         appearance: Appearance = Appearance()
@@ -111,7 +111,7 @@ class CourseListView: UIView {
 
     func showLoading() {
         self.collectionView.skeleton.viewBuilder = {
-            CourseWidgetSkeletonView(frame: .zero)
+            CourseWidgetSkeletonView()
         }
         self.collectionView.skeleton.show()
     }

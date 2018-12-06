@@ -11,11 +11,11 @@ import SnapKit
 
 extension CourseWidgetStatsItemView {
     struct Appearance {
-        let iconSpacing: CGFloat = 3.0
+        var iconSpacing: CGFloat = 3.0
         var imageViewSize = CGSize(width: 12, height: 12)
         var imageTintColor = UIColor.black
 
-        let font = UIFont.systemFont(ofSize: 16, weight: .light)
+        var font = UIFont.systemFont(ofSize: 16, weight: .light)
         var textColor = UIColor.white
     }
 }
@@ -30,7 +30,7 @@ final class CourseWidgetStatsItemView: UIView {
         appearance.font = self.appearance.font
         appearance.textColor = self.appearance.textColor
         appearance.maxLinesCount = 1
-        let label = CourseWidgetLabel(frame: .zero, appearance: appearance)
+        let label = CourseWidgetLabel(appearance: appearance)
         return label
     }()
 
@@ -46,7 +46,7 @@ final class CourseWidgetStatsItemView: UIView {
         }
     }
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

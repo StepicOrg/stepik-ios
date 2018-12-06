@@ -25,6 +25,11 @@ class DeviceInfo {
                    currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
     }
 
+    var isXSerie: Bool {
+        return currentDevice.isOneOf(DeviceKit.Device.allXSeriesDevices) ||
+               currentDevice.isOneOf(DeviceKit.Device.allSimulatorXSeriesDevices)
+    }
+
     var OSVersion: (major: Int, minor: Int, patch: Int) {
         return (major: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
                 minor: ProcessInfo.processInfo.operatingSystemVersion.minorVersion,

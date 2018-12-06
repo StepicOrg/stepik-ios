@@ -50,7 +50,7 @@ final class ExploreBlockPlaceholderView: UIView {
     }
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         message: GradientCoursesPlaceholderViewFactory.InfoPlaceholderMessage,
         appearance: Appearance = Appearance()
     ) {

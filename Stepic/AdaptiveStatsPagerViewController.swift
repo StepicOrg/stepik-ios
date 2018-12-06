@@ -20,6 +20,8 @@ class AdaptiveStatsPagerViewController: PagerController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = []
+
         title = NSLocalizedString("AdaptiveStats", comment: "")
 
         self.dataSource = self
