@@ -12,6 +12,8 @@ import PromiseKit
 protocol CourseInfoInteractorProtocol {
     func refreshCourse()
     func tryToSetOnlineMode()
+
+    func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request)
 }
 
 final class CourseInfoInteractor: CourseInfoInteractorProtocol {
@@ -22,7 +24,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     let userAccountService: UserAccountServiceProtocol
 
     private let courseID: Course.IdType
-    private var currentCourse: Course?
+    private var currentCourse: Course? {
+        didSet {
+            if let course = self.currentCourse {
+                self.pushCurrentCourseToSubmodules(submodules: self.submodules)
+            }
+        }
+    }
+
+    private var submodules: [CourseInfoSubmoduleProtocol] = []
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -73,6 +83,11 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
+    func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request) {
+        self.submodules = request.submodules
+        self.pushCurrentCourseToSubmodules(submodules: self.submodules)
+    }
+
     // MARK: Private methods
 
     private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.ShowCourse.Response> {
@@ -106,6 +121,12 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     // TODO: error
                 }
             }
+        }
+    }
+
+    private func pushCurrentCourseToSubmodules(submodules: [CourseInfoSubmoduleProtocol]) {
+        if let course = self.currentCourse {
+            submodules.forEach { $0.update(with: course) }
         }
     }
 

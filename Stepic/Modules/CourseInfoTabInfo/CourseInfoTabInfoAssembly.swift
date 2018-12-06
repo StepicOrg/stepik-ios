@@ -11,6 +11,7 @@ import UIKit
 final class CourseInfoTabInfoAssembly: Assembly {
     // Input
     var moduleInput: CourseInfoTabInfoInputProtocol?
+
     // Output
     private weak var moduleOutput: CourseInfoTabInfoOutputProtocol?
 

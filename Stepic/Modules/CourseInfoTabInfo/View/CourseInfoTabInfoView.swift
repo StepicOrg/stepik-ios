@@ -135,6 +135,10 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
 
         self.addActionButton(title: viewModel.actionButtonTitle)
+
+        // Redraw self cause geometry & sizes can be changed
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
 
     @objc

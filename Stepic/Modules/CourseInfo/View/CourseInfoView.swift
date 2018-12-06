@@ -34,7 +34,7 @@ final class CourseInfoView: UIView {
     }()
 
     private lazy var segmentedControl: TabSegmentedControlView = {
-        let control = TabSegmentedControlView(frame: .zero, items: ["Инфо", "Модули"])
+        let control = TabSegmentedControlView(frame: .zero, items: ["Инфо"])
         control.delegate = self
         return control
     }()
@@ -92,12 +92,17 @@ final class CourseInfoView: UIView {
         self.topConstraint?.update(offset: min(0, -offset))
     }
 
-    func addPageForTest(_ view: UIView) {
+    func addPageView(_ view: UIView) {
         self.contentView.addArrangedView(view)
-        self.updatePageHeight(byPageWithIndex: 0)
-
         view.snp.makeConstraints { make in
             make.width.equalTo(self.snp.width)
+        }
+
+        if self.contentView.arrangedSubviews.count == 1 {
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+
+            self.updatePageHeight(byPageWithIndex: 0)
         }
     }
 

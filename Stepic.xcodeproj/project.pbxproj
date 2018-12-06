@@ -1932,10 +1932,6 @@
 		2C4F3407210A177100E259FE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F3406210A177100E259FE /* NotificationsBadgesManager.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
 		2C570A63212FD61B00B56AD9 /* TopologicalSortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C570A62212FD61B00B56AD9 /* TopologicalSortTests.swift */; };
-		2C5A67E7218CA1260048A2D0 /* CourseInfoStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5A67E6218CA1260048A2D0 /* CourseInfoStatsView.swift */; };
-		2C5CD2C121B96370008C82AC /* CourseInfoTabInfoHeaderBlockSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CD2BE21B9636F008C82AC /* CourseInfoTabInfoHeaderBlockSkeletonView.swift */; };
-		2C5CD2C221B96370008C82AC /* CourseInfoTabInfoSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CD2BF21B9636F008C82AC /* CourseInfoTabInfoSkeletonView.swift */; };
-		2C5CD2C321B96370008C82AC /* CourseInfoTabInfoInstructorSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CD2C021B9636F008C82AC /* CourseInfoTabInfoInstructorSkeletonView.swift */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5D515A202468CE00B9D932 /* AchievementNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3DA0031F3C68B700D74968 /* AchievementNotificationView.xib */; };
 		2C5D515B202468D100B9D932 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
@@ -3198,6 +3194,7 @@
 		2C97E00E215E480F005684A1 /* SearchSuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */; };
 		2C97E00F215E482B005684A1 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* SearchResultsViewController.swift */; };
 		2C97E010215E5246005684A1 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
+		2C9860BA21B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9860B921B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift */; };
 		2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */; };
 		2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */; };
 		2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
@@ -5843,6 +5840,7 @@
 		2C9732F61F4C391900AC9301 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3150/icon.png; sourceTree = "<group>"; };
 		2C9732F71F4C391900AC9301 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3150/Icons.xcassets; sourceTree = "<group>"; };
 		2C9732F91F4C391900AC9301 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/3150/Tokens.plist; sourceTree = "<group>"; };
+		2C9860B921B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
@@ -10729,6 +10727,7 @@
 				18ADF30F5450A5269144A5E4 /* CourseInfoPresenter.swift */,
 				5F0B0AF3CACBDD209070AFF9 /* CourseInfoDataFlow.swift */,
 				14A9BF8DB880376FADB0DD98 /* Provider */,
+				2C9860B921B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift */,
 			);
 			path = CourseInfo;
 			sourceTree = "<group>";
@@ -14704,7 +14703,6 @@
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
 				2CAB7AE2219F012700EF5BEE /* CourseInfoTabSyllabusViewController.swift in Sources */,
 				2C08CD4A21B1836B0035142B /* TabSegmentedControlView.swift in Sources */,
-				2C5CD2C321B96370008C82AC /* CourseInfoTabInfoInstructorSkeletonView.swift in Sources */,
 				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */,
@@ -14901,8 +14899,6 @@
 				08AC21451CDD493A00FBB9CD /* PersistentRecoveryManager.swift in Sources */,
 				08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */,
 				087296DC20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */,
-				2C5CD2C221B96370008C82AC /* CourseInfoTabInfoSkeletonView.swift in Sources */,
-				2C5A67E7218CA1260048A2D0 /* CourseInfoStatsView.swift in Sources */,
 				2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */,
 				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
@@ -15071,6 +15067,7 @@
 				0885F8581BAAD43300F2A188 /* AuthInfo.swift in Sources */,
 				2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */,
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
+				2C9860BA21B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
 				080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */,
@@ -15296,7 +15293,6 @@
 				62E98C55E38F9010869F670F /* ButtonDescriptionFactory.swift in Sources */,
 				FFBFAE30ACA3B872A992183A /* FullscreenCourseListAssembly.swift in Sources */,
 				2993EC106FBC621C11DD8AC8 /* FullscreenCourseListViewController.swift in Sources */,
-				2C5CD2C121B96370008C82AC /* CourseInfoTabInfoHeaderBlockSkeletonView.swift in Sources */,
 				88BAAF6865A44CF6A1496D6A /* FullscreenCourseListInteractor.swift in Sources */,
 				98F0485D3E0F3AB82948E086 /* FullscreenCourseListPresenter.swift in Sources */,
 				26853117DCED6F1EE4406779 /* FullscreenCourseListDataFlow.swift in Sources */,

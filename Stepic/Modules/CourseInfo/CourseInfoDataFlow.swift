@@ -22,6 +22,13 @@ enum CourseInfo {
         }
     }
 
+    /// Register submodules
+    enum RegisterSubmodule {
+        struct Request {
+            var submodules: [CourseInfoSubmoduleProtocol]
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

@@ -8,6 +8,4 @@
 
 import Foundation
 
-protocol CourseInfoTabInfoInputProtocol: class {
-    func update(with course: Course)
-}
+protocol CourseInfoTabInfoInputProtocol: CourseInfoSubmoduleProtocol { }

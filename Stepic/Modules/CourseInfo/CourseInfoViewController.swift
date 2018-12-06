@@ -59,17 +59,8 @@ final class CourseInfoViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = CourseInfoView(frame: UIScreen.main.bounds, scrollDelegate: self)
-
-        let infoController = CourseInfoTabInfoViewController()
-        self.addChildViewController(infoController)
-        view.addPageForTest(infoController.view)
-
-        let syllabusController = CourseInfoTabSyllabusViewController()
-        self.addChildViewController(syllabusController)
-        view.addPageForTest(syllabusController.view)
-
-        self.view = view
+        self.view = CourseInfoView(frame: UIScreen.main.bounds, scrollDelegate: self)
+        self.initSubmodules()
     }
 
     private func changeTopBarAlpha(value: CGFloat) {
@@ -83,6 +74,23 @@ final class CourseInfoViewController: UIViewController {
         UIApplication.shared.statusBarStyle = value > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
             ? .default
             : .lightContent
+    }
+
+    private func initSubmodules() {
+        // Info submodule
+        let infoAssembly = CourseInfoTabInfoAssembly(output: nil)
+        let viewController = infoAssembly.makeModule()
+        self.addChildViewController(viewController)
+        self.courseInfoView?.addPageView(viewController.view)
+
+        // Syllabus submodule
+
+        // Register on interactor level
+        self.interactor.registerSubmodules(
+            request: .init(
+                submodules: [infoAssembly.moduleInput].compactMap { $0 }
+            )
+        )
     }
 }
 
