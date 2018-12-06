@@ -38,4 +38,20 @@ enum FormatterHelper {
         )
         return "\(count) \(pluralizedCountString)"
     }
+
+    static func hoursInSeconds(_ seconds: TimeInterval) -> String {
+        let hour = 3600.0
+        let hours = Int(ceil(seconds / hour))
+
+        let pluralizedHoursString = StringHelper.pluralize(
+            number: hours,
+            forms: [
+                NSLocalizedString("hours1", comment: ""),
+                NSLocalizedString("hours234", comment: ""),
+                NSLocalizedString("hours567890", comment: "")
+            ]
+        )
+
+        return "\(hours) \(pluralizedHoursString)"
+    }
 }

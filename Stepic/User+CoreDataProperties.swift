@@ -26,6 +26,7 @@ extension User {
     @NSManaged var managedJoinDate: Date?
 
     @NSManaged var managedInstructedCourses: NSSet?
+    @NSManaged var managedAuthoredCourses: NSSet?
 
     @NSManaged var managedProfileEntity: Profile?
 
@@ -142,10 +143,21 @@ extension User {
         }
     }
 
+    var authoredCourses: [Course] {
+        get {
+            return self.managedAuthoredCourses?.allObjects as! [Course]
+        }
+    }
+
     func addInstructedCourse(_ course: Course) {
         var mutableItems = managedInstructedCourses?.allObjects as! [Course]
         mutableItems += [course]
         managedInstructedCourses = NSSet(array: mutableItems)
     }
 
+    func addAuthoredCourse(_ course: Course) {
+        var mutableItems = self.managedAuthoredCourses?.allObjects as! [Course]
+        mutableItems += [course]
+        self.managedAuthoredCourses = NSSet(array: mutableItems)
+    }
 }

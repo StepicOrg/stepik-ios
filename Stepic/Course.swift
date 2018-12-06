@@ -42,6 +42,8 @@ final class Course: NSManagedObject, IDFetchable {
         format = json["course_format"].stringValue
         audience = json["target_audience"].stringValue
         certificate = json["certificate"].stringValue
+        certificateRegularThreshold = json["certificate_regular_threshold"].int
+        certificateDistinctionThreshold = json["certificate_distinction_threshold"].int
         requirements = json["requirements"].stringValue
         slug = json["slug"].string
         progressId = json["progress"].string
@@ -51,6 +53,10 @@ final class Course: NSManagedObject, IDFetchable {
         reviewSummaryId = json["review_summary"].int
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
+        authorsArray = json["authors"].arrayObject as? [Int] ?? []
+        timeToComplete = json["time_to_complete"].int
+        languageCode = json["language"].stringValue
+
         if let _ = json["intro_video"].null {
             introVideo = nil
         } else {

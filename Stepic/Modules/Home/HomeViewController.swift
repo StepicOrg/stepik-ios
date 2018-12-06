@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)

@@ -8,29 +8,37 @@
 
 import UIKit
 import SnapKit
+import Atributika
 
 protocol CourseInfoTabInfoViewDelegate: class {
-    func courseInfoTabInfoViewDidTapOnJoin(_ courseInfoTabInfoView: CourseInfoTabInfoView)
+    func courseInfoTabInfoViewDidTapOnActionButton(
+        _ courseInfoTabInfoView: CourseInfoTabInfoView
+    )
 }
 
 extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
 
-        let blockInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
-        let innerInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 47)
+        let textBlockInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
 
-        let joinButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
-        let joinButtonHeight: CGFloat = 47
-        let joinButtonBackgroundColor = UIColor.stepicGreen
-        let joinButtonFont = UIFont.systemFont(ofSize: 14)
-        let joinButtonTextColor = UIColor.white
-        let joinButtonCornerRadius: CGFloat = 7
+        let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
+        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
+        let authorIconLeadingSpace: CGFloat = 20
+
+        let actionButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
+        let actionButtonHeight: CGFloat = 47
+        let actionButtonBackgroundColor = UIColor.stepicGreen
+        let actionButtonFont = UIFont.systemFont(ofSize: 14)
+        let actionButtonTextColor = UIColor.white
+        let actionButtonCornerRadius: CGFloat = 7
     }
 }
 
 final class CourseInfoTabInfoView: UIView {
     weak var delegate: CourseInfoTabInfoViewDelegate?
+    weak var videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate?
 
     let appearance: Appearance
 
@@ -43,20 +51,17 @@ final class CourseInfoTabInfoView: UIView {
         return stackView
     }()
 
-    private lazy var joinButton: UIButton = {
+    private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = self.appearance.joinButtonBackgroundColor
-        button.titleLabel?.font = self.appearance.joinButtonFont
-        button.tintColor = self.appearance.joinButtonTextColor
-        button.layer.cornerRadius = self.appearance.joinButtonCornerRadius
-
-        button.setTitle(NSLocalizedString("JoinCourse", comment: ""), for: .normal)
+        button.backgroundColor = self.appearance.actionButtonBackgroundColor
+        button.titleLabel?.font = self.appearance.actionButtonFont
+        button.tintColor = self.appearance.actionButtonTextColor
+        button.layer.cornerRadius = self.appearance.actionButtonCornerRadius
         button.addTarget(
             self,
-            action: #selector(self.joinButtonClicked(sender:)),
+            action: #selector(self.actionButtonClicked(sender:)),
             for: .touchUpInside
         )
-
         return button
     }()
 
@@ -70,10 +75,12 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        delegate: CourseInfoTabInfoViewDelegate? = nil
+        delegate: CourseInfoTabInfoViewDelegate? = nil,
+        videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate? = nil
     ) {
         self.appearance = appearance
         self.delegate = delegate
+        self.videoViewDelegate = videoViewDelegate
         super.init(frame: frame)
 
         self.setupView()
@@ -90,7 +97,11 @@ final class CourseInfoTabInfoView: UIView {
         self.invalidateIntrinsicContentSize()
     }
 
+    // MARK: Public API
+
     func showLoading() {
+        self.hideLoading()
+
         self.skeleton.viewBuilder = {
             CourseInfoTabInfoSkeletonView()
         }
@@ -106,8 +117,11 @@ final class CourseInfoTabInfoView: UIView {
             self.scrollableStackView.removeAllArrangedViews()
         }
 
-        self.addAuthorView(author: viewModel.author)
-        self.addIntroVideoView(introVideoURL: viewModel.introVideoURL)
+        self.addAuthorView(authorName: viewModel.author)
+        self.addIntroVideoView(
+            introVideoURL: viewModel.introVideoURL,
+            introVideoThumbnailURL: viewModel.introVideoThumbnailURL
+        )
 
         self.addTextBlockView(block: .about, message: viewModel.aboutText)
         self.addTextBlockView(block: .requirements, message: viewModel.requirementsText)
@@ -120,31 +134,57 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
         self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
 
-        self.addJoinButton()
+        self.addActionButton(title: viewModel.actionButtonTitle)
     }
 
     @objc
-    private func joinButtonClicked(sender: UIButton) {
-        self.delegate?.courseInfoTabInfoViewDidTapOnJoin(self)
+    private func actionButtonClicked(sender: UIButton) {
+        self.delegate?.courseInfoTabInfoViewDidTapOnActionButton(self)
     }
 
-    private func addAuthorView(author: String) {
-        let authorView = CourseInfoTabInfoTextBlockView(
-            appearance: .init(headerViewInsets: self.appearance.innerInsets)
+    // MARK: Private API
+
+    private func addAuthorView(authorName: String) {
+        if authorName.isEmpty {
+            return
+        }
+
+        let authorView = CourseInfoTabInfoHeaderBlockView(
+            appearance: .init(
+                imageViewLeadingSpace: self.appearance.authorIconLeadingSpace,
+                titleLabelFont: self.appearance.authorTitleLabelFont,
+                titleLabelInsets: self.appearance.authorTitleLabelInsets
+            )
         )
-        authorView.headerView.icon = Block.author.icon
-        authorView.headerView.title = "\(Block.author.title) \(author)"
+
+        let attributedTitle = "\(Block.author.title) <a>\(authorName)</a>".style(tags: [
+            Style("a").foregroundColor(self.appearance.authorTitleHighlightColor)
+        ]).attributedString
+
+        authorView.icon = Block.author.icon
+        authorView.attributedTitle = attributedTitle
 
         self.scrollableStackView.addArrangedView(authorView)
     }
 
-    private func addTextBlockView(
-        block: Block,
-        message: String,
-        headerViewInsets: UIEdgeInsets = Appearance().blockInsets
-    ) {
+    private func addIntroVideoView(introVideoURL: URL?, introVideoThumbnailURL: URL?) {
+        if let introVideoURL = introVideoURL {
+            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(
+                delegate: self.videoViewDelegate
+            )
+            introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
+            introVideoBlockView.videoURL = introVideoURL
+            self.scrollableStackView.addArrangedView(introVideoBlockView)
+        }
+    }
+
+    private func addTextBlockView(block: Block, message: String) {
+        if message.isEmpty {
+            return
+        }
+
         let textBlockView = CourseInfoTabInfoTextBlockView(
-            appearance: .init(headerViewInsets: headerViewInsets)
+            appearance: .init(headerViewInsets: self.appearance.textBlockInsets)
         )
         textBlockView.headerView.icon = block.icon
         textBlockView.headerView.title = block.title
@@ -153,28 +193,31 @@ final class CourseInfoTabInfoView: UIView {
         self.scrollableStackView.addArrangedView(textBlockView)
     }
 
-    private func addIntroVideoView(introVideoURL: URL?) {
-        self.scrollableStackView.addArrangedView(CourseInfoTabInfoIntroVideoBlockView())
-    }
-
     private func addInstructorsView(instructors: [CourseInfoTabInfoInstructorViewModel]) {
+        if instructors.isEmpty {
+            return
+        }
+
         let instructorsView = CourseInfoTabInfoInstructorsBlockView()
         instructorsView.configure(instructors: instructors)
+
         self.scrollableStackView.addArrangedView(instructorsView)
     }
 
-    private func addJoinButton() {
+    private func addActionButton(title: String) {
+        self.actionButton.setTitle(title, for: .normal)
+
         let buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
-        self.joinButton.translatesAutoresizingMaskIntoConstraints = false
-        buttonContainer.addSubview(self.joinButton)
+        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonContainer.addSubview(self.actionButton)
 
         self.scrollableStackView.addArrangedView(buttonContainer)
-        self.joinButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.joinButtonHeight)
+        self.actionButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.actionButtonHeight)
             make.leading.top.trailing.bottom
                 .equalToSuperview()
-                .inset(self.appearance.joinButtonInsets)
+                .inset(self.appearance.actionButtonInsets)
         }
     }
 }
