@@ -30,19 +30,6 @@ final class CourseInfoView: UIView {
 
     private lazy var headerView: CourseInfoHeaderView = {
         let view = CourseInfoHeaderView()
-
-        let viewModel = CourseInfoHeaderViewModel(
-            title: "Введение в программирование (C++)",
-            coverImageURL: URL(string: "https://stepik.org/media/cache/images/courses/363/cover/c0e235513f7598d01f96ccc8a27c25a5.jpg"),
-            rating: Int(5.0),
-            learnersLabelText: "106K",
-            progress: CourseInfoProgressViewModel(
-                progress: 0.1,
-                progressLabelText: "10%"
-            ),
-            isVerified: true
-        )
-        view.configure(viewModel: viewModel)
         return view
     }()
 
@@ -87,6 +74,10 @@ final class CourseInfoView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(viewModel: CourseInfoHeaderViewModel) {
+        self.headerView.configure(viewModel: viewModel)
     }
 
     func updateScroll(offset: CGFloat) {
@@ -203,7 +194,6 @@ extension CourseInfoView: UIScrollViewDelegate {
 
     private func updateSegmentedControl(newPageIndex: Int) {
         self.segmentedControl.selectTab(index: newPageIndex)
-        self.headerView.showLoading()
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

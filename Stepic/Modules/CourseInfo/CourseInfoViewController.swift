@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CourseInfoViewControllerProtocol: class {
-
+    func displayCourse(viewModel: CourseInfo.ShowCourse.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -35,6 +35,8 @@ final class CourseInfoViewController: UIViewController {
         if #available(iOS 11.0, *) { } else {
             self.automaticallyAdjustsScrollViewInsets = false
         }
+
+        self.interactor.refreshCourse()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +49,8 @@ final class CourseInfoViewController: UIViewController {
             }
             strongSelf.changeTopBarAlpha(value: strongSelf.lastTopBarAlpha)
         }
+
+        self.interactor.tryToSetOnlineMode()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,7 +87,14 @@ final class CourseInfoViewController: UIViewController {
 }
 
 extension CourseInfoViewController: CourseInfoViewControllerProtocol {
-
+    func displayCourse(viewModel: CourseInfo.ShowCourse.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            self.courseInfoView?.configure(viewModel: data)
+        case .loading:
+            break
+        }
+    }
 }
 
 extension CourseInfoViewController: UIScrollViewDelegate {

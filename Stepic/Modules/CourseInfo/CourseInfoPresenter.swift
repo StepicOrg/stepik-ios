@@ -9,26 +9,25 @@
 import UIKit
 
 protocol CourseInfoPresenterProtocol {
-    func presentSomething(response: CourseInfo.Something.Response)
+    func presentCourse(response: CourseInfo.ShowCourse.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     weak var viewController: CourseInfoViewControllerProtocol?
 
-    func presentSomething(response: CourseInfo.Something.Response) {
-        var viewModel: CourseInfo.Something.ViewModel
+    func presentCourse(response: CourseInfo.ShowCourse.Response) {
+        var viewModel: CourseInfo.ShowCourse.ViewModel
 
         switch response.result {
-        case let .failure(error):
-            viewModel = CourseInfo.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case let .success(result):
-            if result.isEmpty {
-                viewModel = CourseInfo.Something.ViewModel(state: .emptyResult)
-            } else {
-                viewModel = CourseInfo.Something.ViewModel(state: .result(data: result))
-            }
+        case .failure(let error):
+            viewModel = CourseInfo.ShowCourse.ViewModel(state: .loading)
+        case .success(let result):
+            viewModel = CourseInfo.ShowCourse.ViewModel(
+                state: .result(data: CourseInfoHeaderViewModel(course: result))
+            )
         }
 
-        //viewController?.displaySomething(viewModel: viewModel)
+        self.viewController?.displayCourse(viewModel: viewModel)
     }
+
 }

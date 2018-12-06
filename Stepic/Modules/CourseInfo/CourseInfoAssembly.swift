@@ -16,11 +16,25 @@ final class CourseInfoAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = CourseInfoProvider()
+        let provider = CourseInfoProvider(
+            courseID: self.courseID,
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesPersistenceService: ProgressesPersistenceService(),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
+            reviewSummariesPersistenceService: CourseReviewSummariesPersistenceService(),
+            reviewSummariesNetworkService: CourseReviewSummariesNetworkService(
+                courseReviewSummariesAPI: CourseReviewSummariesAPI()
+            )
+        )
         let presenter = CourseInfoPresenter()
         let interactor = CourseInfoInteractor(
+            courseID: self.courseID,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            networkReachabilityService: NetworkReachabilityService(),
+            courseSubscriber: CourseSubscriber(),
+            userAccountService: UserAccountService()
         )
         let viewController = CourseInfoViewController(
             interactor: interactor

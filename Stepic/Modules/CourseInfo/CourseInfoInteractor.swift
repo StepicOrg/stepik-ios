@@ -10,32 +10,102 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoInteractorProtocol {
-    func doSomeAction(request: CourseInfo.Something.Request)
+    func refreshCourse()
+    func tryToSetOnlineMode()
 }
 
 final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     let presenter: CourseInfoPresenterProtocol
     let provider: CourseInfoProviderProtocol
+    let networkReachabilityService: NetworkReachabilityServiceProtocol
+    let courseSubscriber: CourseSubscriberProtocol
+    let userAccountService: UserAccountServiceProtocol
+
+    private let courseID: Course.IdType
+    private var currentCourse: Course?
+
+    private var isOnline = false
+    private var didLoadFromCache = false
+
+    private let fetchLock = NSLock()
 
     init(
+        courseID: Course.IdType,
         presenter: CourseInfoPresenterProtocol,
-        provider: CourseInfoProviderProtocol
+        provider: CourseInfoProviderProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
+        courseSubscriber: CourseSubscriberProtocol,
+        userAccountService: UserAccountServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.networkReachabilityService = networkReachabilityService
+        self.courseSubscriber = courseSubscriber
+        self.userAccountService = userAccountService
+        self.courseID = courseID
     }
 
-    // MARK: Do some action
+    func refreshCourse() {
+        let queue = DispatchQueue(label: String(describing: self))
 
-    func doSomeAction(request: CourseInfo.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: CourseInfo.Something.Response(result: .success(items))
-            )
-        }.catch { _ in
-            self.presenter.presentSomething(
-                response: CourseInfo.Something.Response(result: .failure(Error.fetchFailed))
-            )
+        queue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchLock.lock()
+            strongSelf.fetchCourseInAppropriateMode().done { response in
+                DispatchQueue.main.async { [weak self] in
+                    self?.presenter.presentCourse(response: response)
+                }
+            }.catch { _ in
+                // TODO: handle
+            }.finally {
+                strongSelf.fetchLock.unlock()
+            }
+        }
+    }
+
+    func tryToSetOnlineMode() {
+        if self.networkReachabilityService.isReachable {
+            self.isOnline = true
+            self.refreshCourse()
+        }
+    }
+
+    // MARK: Private methods
+
+    private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.ShowCourse.Response> {
+        return Promise { seal in
+            firstly {
+                self.isOnline && !self.didLoadFromCache
+                    ? self.provider.fetchRemote()
+                    : self.provider.fetchCached()
+            }.done { course in
+                self.currentCourse = course
+
+                if let targetCourse = self.currentCourse {
+                    seal.fulfill(.init(result: .success(targetCourse)))
+                } else {
+                    // Offline mode: present empty state only if get nil from network
+                    if self.isOnline && self.didLoadFromCache {
+                        // TODO: unable to load error
+                    }
+                }
+
+                if !self.didLoadFromCache {
+                    self.didLoadFromCache = true
+                }
+            }.catch { error in
+                if case CourseInfoProvider.Error.networkFetchFailed = error,
+                   self.didLoadFromCache,
+                   self.currentCourse != nil {
+                    // Offline mode: we already presented cached course, but network request failed
+                    // so let's ignore it and show only cached
+                } else {
+                    // TODO: error
+                }
+            }
         }
     }
 

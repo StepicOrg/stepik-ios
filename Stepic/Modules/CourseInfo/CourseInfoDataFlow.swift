@@ -9,17 +9,12 @@
 import Foundation
 
 enum CourseInfo {
-    // MARK: Common structs
-    // Place here structs used in Requests/Responses
-
     // MARK: Use cases
 
-    /// Sample use case
-    enum Something {
-        struct Request { }
-
+    /// Load & show info about course
+    enum ShowCourse {
         struct Response {
-            var result: Result<[Any]>
+            var result: Result<Course>
         }
 
         struct ViewModel {
@@ -31,8 +26,6 @@ enum CourseInfo {
 
     enum ViewControllerState {
         case loading
-        case result(data: [Any])
-        case emptyResult
-        case error(message: String)
+        case result(data: CourseInfoHeaderViewModel)
     }
 }
