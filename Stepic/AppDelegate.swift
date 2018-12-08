@@ -18,7 +18,6 @@ import FBSDKCoreKit
 import YandexMobileMetrica
 import Presentr
 import PromiseKit
-import AppsFlyerLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
+        presenter: NotificationsRequestOnlySettingsAlertPresenter(),
+        analytics: .init(source: .abAppLaunch)
+    )
+    private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+    private var didShowOnboarding = true
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -84,7 +93,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
+            self.didShowOnboarding = false
+            DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
+            AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
             AnalyticsReporter.reportEvent(AnalyticsEvents.App.firstLaunch, parameters: nil)
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }
@@ -93,8 +105,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        if AuthInfo.shared.isAuthorized {
-            NotificationRegistrator.shared.registerForRemoteNotificationsIfAlreadyAsked()
+        let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
+        let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
+            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
+        if shouldParticipate && self.didShowOnboarding {
+            self.notificationsRegistrationService.registerForRemoteNotifications()
+        } else {
+            self.notificationsRegistrationService.renewDeviceToken()
         }
 
         LocalNotificationsMigrator().migrateIfNeeded()
@@ -111,14 +128,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         self.didChangeOrientation()
 
+        self.branchService.setup(launchOptions: launchOptions)
+
         return true
     }
 
     // MARK: - Responding to App State Changes and System Events
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        self.notificationsRegistrationService.renewDeviceToken()
+    }
+
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
-        AppsFlyerTracker.shared().trackAppLaunch()
     }
 
     // MARK: - Downloading Data in the Background
@@ -138,14 +160,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        NotificationRegistrator.shared.getGCMRegistrationToken(deviceToken: deviceToken)
+        self.notificationsRegistrationService.handleDeviceToken(deviceToken)
     }
 
     func application(
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        print("error while registering to remote notifications: \(error)")
+        self.notificationsRegistrationService.handleRegistrationError(error)
     }
 
     func application(
@@ -160,6 +182,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationsService().handleLocalNotification(with: notification.userInfo)
     }
 
+    func application(
+        _ application: UIApplication,
+        didRegister notificationSettings: UIUserNotificationSettings
+    ) {
+        self.notificationsRegistrationService.handleRegisteredNotificationSettings(notificationSettings)
+    }
+
     // MARK: Private Helpers
 
     @objc
@@ -168,11 +197,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        InstanceID.instanceID().instanceID { (result, error) in
+        InstanceID.instanceID().instanceID { [weak self] (result, error) in
             if let error = error {
-                print("Error fetching Firebase remote instanse ID: \(error)")
+                print("Error fetching Firebase remote instance ID: \(error)")
             } else if let result = result {
-                NotificationRegistrator.shared.registerDevice(result.token)
+                self?.notificationsRegistrationService.registerDevice(result.token)
             }
         }
     }
@@ -187,7 +216,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
-                self.handleOpenedFromDeepLink(url)
+                if branchService.canOpenWithBranch(url: url) {
+                    branchService.continueUserActivity(userActivity)
+                } else {
+                    self.handleOpenedFromDeepLink(url)
+                }
                 return true
             }
         }
@@ -211,7 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"
-           || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+               || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 
@@ -230,8 +263,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topViewController.route(from: .social, to: .email(email: email))
             }
         } else {
-            // Other actions
-            self.handleOpenedFromDeepLink(url)
+            if branchService.canOpenWithBranch(url: url) {
+                branchService.openURL(app: app, open: url, options: options)
+            } else {
+                // Other actions
+                self.handleOpenedFromDeepLink(url)
+            }
         }
 
         return true
@@ -241,6 +278,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func handleOpenedFromDeepLink(_ url: URL) {
         let deepLinkRoutingService = DeepLinkRoutingService()
+
         DispatchQueue.main.async {
             deepLinkRoutingService.route(path: url.absoluteString)
         }

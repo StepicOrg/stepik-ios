@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AuthNavigationViewController: UINavigationController {
-
-    var streaksAlertPresentationManager: StreaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
-    var streaksNotificationSuggestionManager: NotificationSuggestionManager = NotificationSuggestionManager()
+final class AuthNavigationViewController: UINavigationController {
+    private let streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .login)
+    private let notificationSuggestionManager = NotificationSuggestionManager()
+    private let userActivitiesAPI = UserActivitiesAPI()
 
     enum Controller {
         case social
@@ -40,13 +40,16 @@ class AuthNavigationViewController: UINavigationController {
         guard let userId = AuthInfo.shared.userId else {
             return
         }
-        let userActivitiesAPI = UserActivitiesAPI()
-        checkToken().then {
-            userActivitiesAPI.retrieve(user: userId)
-        }.done { userActivity in
-            if userActivity.didSolveThisWeek && self.streaksNotificationSuggestionManager.canShowAlert(context: .streak, after: .login) {
-                self.streaksNotificationSuggestionManager.didShowAlert(context: .streak)
-                self.streaksAlertPresentationManager.suggestStreak(streak: userActivity.currentStreak)
+
+        self.userActivitiesAPI.retrieve(user: userId).done { userActivity in
+            let canShowAlert = self.notificationSuggestionManager.canShowAlert(
+                context: .streak,
+                after: .login
+            )
+            if canShowAlert && userActivity.didSolveThisWeek {
+                self.streaksAlertPresentationManager.suggestStreak(
+                    streak: userActivity.currentStreak
+                )
             }
         }.catch { error in
             print("\(#file) \(#function) \(error)")

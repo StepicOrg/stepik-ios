@@ -168,6 +168,10 @@ NotificationTime = "Время напоминания";
 Notifications = "Уведомления";
 StreakNotificationsAlertTitle = "Уведомления";
 StreakNotificationsAlertMessage = "Похоже, вы запретили приложению присылать уведомления. Разрешить в настройках системы?";
+DeniedNotificationsDefaultAlertTitle = "Уведомления отключены";
+DeniedNotificationsDefaultAlertMessage = "Похоже, вы отключили уведомления. Включить в настройках?";
+NotificationRequestDefaultAlertTitle = "Следи за обновлениями";
+NotificationRequestDefaultAlertMessage = "Мы пытаемся сделать процесс обучения максимально удобным и полезным. Получать уведомления об интересном и актуальном для вас контенте?";
 PassedPercent = "Пройдено";
 AuthorDidntUploadVideo = "Автор еще не загрузил видео.";
 NoVideo = "Нет видео";
@@ -540,6 +544,7 @@ AchievementsLevelNotObtained = "Ещё не получено";
 AchievementsUnknownKindTitle = "Неизвестное достижение";
 AchievementsUnknownKindDescription = "Решайте больше заданий, чтобы открыть";
 AchievementsShareText = "Я получил достижение «%@» на Stepik.org. Попробуй обогнать!";
+AchievementsNew = "Новое достижение!";
 
 /* Personal deadlines */
 CourseInfo = "Инфо о курсе";

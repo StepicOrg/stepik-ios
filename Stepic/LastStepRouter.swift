@@ -19,6 +19,7 @@ class LastStepRouter {
     static func continueLearning(
         for course: Course,
         isAdaptive: Bool? = nil,
+        didJustSubscribe: Bool = false,
         using navigationController: UINavigationController
     ) {
         guard let lastStepId = course.lastStepId else {
@@ -34,7 +35,7 @@ class LastStepRouter {
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
         }.ensure {
-            navigate(for: course, isAdaptive: isAdaptive, using: navigationController)
+            self.navigate(for: course, isAdaptive: isAdaptive, didJustSubscribe: didJustSubscribe, using: navigationController)
         }.catch {
             _ in
             print("error while updating lastStep")
@@ -43,16 +44,18 @@ class LastStepRouter {
 
     private static func navigate(
         for course: Course,
-        isAdaptive: Bool? = nil,
+        isAdaptive: Bool?,
+        didJustSubscribe: Bool,
         using navigationController: UINavigationController
     ) {
-        let shouldOpenInAdaptiveOMode = isAdaptive ?? AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
-        if shouldOpenInAdaptiveOMode {
+        let shouldOpenInAdaptiveMode = isAdaptive ?? AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
+        if shouldOpenInAdaptiveMode {
             guard let cardsViewController = ControllerHelper.instantiateViewController(identifier: "CardsSteps", storyboardName: "Adaptive") as? BaseCardsStepsViewController else {
                 return
             }
             cardsViewController.hidesBottomBarWhenPushed = true
             cardsViewController.course = course
+            cardsViewController.didJustSubscribe = didJustSubscribe
             navigationController.pushViewController(cardsViewController, animated: true)
             SVProgressHUD.showSuccess(withStatus: "")
             return

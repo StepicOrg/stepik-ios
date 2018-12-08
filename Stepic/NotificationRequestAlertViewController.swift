@@ -10,8 +10,7 @@ import UIKit
 import Lottie
 import SnapKit
 
-class NotificationRequestAlertViewController: UIViewController {
-
+final class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var imageContainerViewHeight: NSLayoutConstraint!
 
@@ -23,13 +22,22 @@ class NotificationRequestAlertViewController: UIViewController {
     var messageLabelWidth: Constraint?
     let animationView: LOTAnimationView = LOTAnimationView(name: "onboardingAnimation4")
 
-    var yesAction : (() -> Void)?
-    var noAction : (() -> Void)?
+    var yesAction: (() -> Void)?
+    var noAction: (() -> Void)?
 
-    var context: NotificationRequestAlertContext!
+    var context = NotificationRequestAlertContext.default
 
     //Streaks Context
     var currentStreak: Int = 0
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    init(context: NotificationRequestAlertContext) {
+        self.context = context
+        super.init(nibName: nil, bundle: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,10 +72,6 @@ class NotificationRequestAlertViewController: UIViewController {
 
         noButton.setTitle(NSLocalizedString("No", comment: ""), for: .normal)
         yesButton.setTitle(NSLocalizedString("Yes", comment: ""), for: .normal)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 
     @IBAction func noPressed(_ sender: UIButton) {

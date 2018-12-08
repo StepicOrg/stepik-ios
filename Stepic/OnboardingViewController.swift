@@ -41,10 +41,16 @@ class OnboardingViewController: UIViewController {
         return DeviceInfo.current.orientation.interface.isLandscape
     }
 
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
+        presenter: NotificationsRequestOnlySettingsAlertPresenter(),
+        analytics: .init(source: .abAppLaunch)
+    )
+
     @IBAction func onCloseButtonClick(_ sender: Any) {
         dismiss(animated: true) {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": self.currentPageIndex + 1])
             AmplitudeAnalyticsEvents.Onboarding.closed(screen: self.currentPageIndex + 1).send()
+            self.notificationsRegistrationService.registerForRemoteNotifications()
         }
     }
 
@@ -194,19 +200,12 @@ class OnboardingViewController: UIViewController {
         } else {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingComplete, parameters: ["screen": currentPageIndex + 1])
             AmplitudeAnalyticsEvents.Onboarding.completed.send()
-            dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: {
+                self.notificationsRegistrationService.registerForRemoteNotifications()
+            })
 
-            if AuthAfterOnboardingSplitTest.shouldParticipate {
-                let authSplitTest = splitTestingService.fetchSplitTest(AuthAfterOnboardingSplitTest.self)
-                if authSplitTest.currentGroup.shouldShowAuth {
-                    if let authSource = authSource {
-                        RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
-                    }
-                }
-            } else {
-                if let authSource = authSource {
-                    RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
-                }
+            if let authSource = authSource {
+                RoutingManager.auth.routeFrom(controller: authSource, success: nil, cancel: nil)
             }
         }
     }

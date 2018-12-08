@@ -84,7 +84,7 @@ class AuthInfo: NSObject {
                     performLogoutActions()
                 #else
                     //Unregister from notifications
-                    NotificationRegistrator.shared.unregisterFromNotifications(completion: {
+                    NotificationsRegistrationService().unregisterFromNotifications(completion: {
                         performLogoutActions()
                     })
                 #endif

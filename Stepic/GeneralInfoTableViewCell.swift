@@ -19,6 +19,8 @@ class GeneralInfoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var joinButton: UIButton!
 
+    private let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
+
     class func heightForCellWith(_ course: Course) -> CGFloat {
         let constrainHeight: CGFloat = 108
         let width = UIScreen.main.bounds.width - 16
@@ -56,7 +58,9 @@ class GeneralInfoTableViewCell: UITableViewCell {
             joinButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
         } else {
             joinButton.setStepicGreenStyle()
-            joinButton.setTitle(Constants.joinCourseButtonText, for: .normal)
+
+            let joinTitle = NSLocalizedString("WidgetButtonJoin", comment: "")
+            joinButton.setTitle(joinTitle, for: .normal)
         }
     }
 

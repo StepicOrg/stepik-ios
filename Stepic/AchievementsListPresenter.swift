@@ -44,18 +44,21 @@ class AchievementsListPresenter {
                     return nil
                 }
 
-                return AchievementViewData(title: kindDescription.getName(),
+                return AchievementViewData(
+                    id: kindDescription.rawValue,
+                    title: kindDescription.getName(),
                     description: kindDescription.getDescription(for: data.maxScore),
                     badge: kindDescription.getBadge(for: data.currentLevel),
                     completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
                     score: data.currentScore,
-                    maxScore: data.maxScore)
+                    maxScore: data.maxScore
+                )
             }
 
             self?.view?.set(achievements: viewData.sorted(by: { a, b in
-                let aScore = !a.isLocked ? 1 : (a.score > 0 ? 2 : 3)
-                let bScore = !b.isLocked ? 1 : (b.score > 0 ? 2 : 3)
+                let aScore = !a.isLocked ? 1 : (a.score ?? 0 > 0 ? 2 : 3)
+                let bScore = !b.isLocked ? 1 : (b.score ?? 0 > 0 ? 2 : 3)
                 return aScore < bScore
             }))
         }.catch { [weak self] error in

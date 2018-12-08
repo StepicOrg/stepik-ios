@@ -27,7 +27,6 @@ protocol CardsStepsView: class {
     func presentDiscussions(stepId: Int, discussionProxyId: String)
     func presentShareDialog(for link: String)
     func refreshCards()
-    func present(alertManager: AlertManager, alert: UIViewController)
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int)
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)?)
@@ -71,7 +70,8 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     internal var ratingsAPI: AdaptiveRatingsAPI
     internal var lastViewedUpdater: LocalProgressLastViewedUpdater
     internal var notificationSuggestionManager: NotificationSuggestionManager
-    internal var notificationPermissionManager: NotificationPermissionManager
+    internal var notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    var splitTestingService: SplitTestingServiceProtocol
 
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
@@ -119,7 +119,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         return true
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationPermissionManager: NotificationPermissionManager, course: Course?, view: CardsStepsView) {
+    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationsRegistrationService: NotificationsRegistrationServiceProtocol, course: Course?, view: CardsStepsView, splitTestingService: SplitTestingServiceProtocol) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI
@@ -131,10 +131,13 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.storageManager = storageManager
         self.lastViewedUpdater = lastViewedUpdater
         self.notificationSuggestionManager = notificationSuggestionManager
-        self.notificationPermissionManager = notificationPermissionManager
+        self.notificationsRegistrationService = notificationsRegistrationService
+        self.splitTestingService = splitTestingService
 
         self.course = course
         self.view = view
+
+        self.notificationsRegistrationService.delegate = self
     }
 
     func refresh() {
@@ -151,19 +154,15 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func appearedAfterSubscription() {
-        if #available(iOS 10.0, *) {
-            if notificationSuggestionManager.canShowAlert(context: .courseSubscription) {
-                notificationPermissionManager.getCurrentPermissionStatus().done { [weak self] status in
-                    switch status {
-                    case .notDetermined:
-                        let alert = Alerts.notificationRequest.construct(context: .courseSubscription)
-                        self?.view?.present(alertManager: Alerts.notificationRequest, alert: alert)
-                        self?.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
-                    default:
-                        break
-                    }
-                }
+        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
+            let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
+                SubscribeNotificationsOnLaunchSplitTest.self
+            )
+            if !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch {
+                self.notificationsRegistrationService.registerForRemoteNotifications()
             }
+        } else {
+            self.notificationsRegistrationService.registerForRemoteNotifications()
         }
     }
 
@@ -512,6 +511,26 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
 
         view?.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
+    }
+}
+
+// MARK: - BaseCardsStepsPresenter: NotificationsRegistrationServiceDelegate -
+
+extension BaseCardsStepsPresenter: NotificationsRegistrationServiceDelegate {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
+    ) -> Bool {
+        return self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        didPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
+    ) {
+        if alertType == .permission {
+            self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+        }
     }
 }
 

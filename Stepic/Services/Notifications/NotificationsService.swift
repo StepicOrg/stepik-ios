@@ -17,19 +17,31 @@ final class NotificationsService {
     private let localNotificationsService: LocalNotificationsService
     private let deepLinkRoutingService: DeepLinkRoutingService
 
+    private let splitTestingService: SplitTestingServiceProtocol
+    private var achievementsRetriever: AchievementsRetriever?
+
     private var isInForeground: Bool {
         return UIApplication.shared.applicationState == .active
     }
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
-        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
+        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService(),
+        splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
+            analyticsService: AnalyticsUserProperties(),
+            storage: UserDefaults.standard
+        )
     ) {
         self.localNotificationsService = localNotificationsService
         self.deepLinkRoutingService = deepLinkRoutingService
+        self.splitTestingService = splitTestingService
     }
 
     func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+        NotificationPermissionStatus.current.done { status in
+            AnalyticsUserProperties.shared.setPushPermissionStatus(status)
+        }
+
         if let localNotification = launchOptions?[.localNotification] as? UILocalNotification {
             self.handleLocalNotification(with: localNotification.userInfo)
             AmplitudeAnalyticsEvents.Launch.sessionStart(
@@ -65,17 +77,11 @@ extension NotificationsService {
         with contentProvider: LocalNotificationContentProvider,
         removeIdentical: Bool = true
     ) {
-        NotificationPermissionManager().getCurrentPermissionStatus().then { status -> Promise<Void> in
-            if !status.isRegistered {
-                NotificationRegistrator.shared.registerForRemoteNotifications()
-            }
+        if removeIdentical {
+            self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
+        }
 
-            if removeIdentical {
-                self.removeLocalNotifications(withIdentifiers: [contentProvider.identifier])
-            }
-
-            return self.localNotificationsService.scheduleNotification(contentProvider: contentProvider)
-        }.catch { error in
+        self.localNotificationsService.scheduleNotification(contentProvider: contentProvider).catch { error in
             print("Failed schedule local notification with error: \(error)")
         }
     }
@@ -97,18 +103,28 @@ extension NotificationsService {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
-        self.routeLocalNotification(with: userInfo)
+        if #available(iOS 10.0, *) {
+        } else if self.isInForeground {
+            guard let title = userInfo?[LocalNotificationsService.PayloadKey.title.rawValue] as? String,
+                  let body = userInfo?[LocalNotificationsService.PayloadKey.body.rawValue] as? String else {
+                return
+            }
+
+            LegacyNotificationsPresenter.present(text: title, subtitle: body, onTap: {
+                self.routeLocalNotification(with: userInfo)
+            })
+        }
     }
 
     private func routeLocalNotification(with userInfo: NotificationUserInfo?) {
-        func route(to route: DeepLinkRoutingService.Route) {
+        func route(to route: DeepLinkRoute) {
             DispatchQueue.main.async {
                 self.deepLinkRoutingService.route(route)
             }
         }
 
         guard let userInfo = userInfo as? [String: Any],
-              let key = userInfo[LocalNotificationsService.notificationKeyName] as? String else {
+              let key = userInfo[LocalNotificationsService.PayloadKey.notificationName.rawValue] as? String else {
             return route(to: .home)
         }
 
@@ -140,13 +156,14 @@ extension NotificationsService {
             AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
         }
 
+        // FIXME: Use `NotificationType` instead of raw values.
         switch notificationType {
         case NotificationType.notifications.rawValue:
-            resolveRemoteNotificationsNotification(userInfo)
+            self.resolveRemoteNotificationsNotification(userInfo)
         case NotificationType.notificationStatuses.rawValue:
-            resolveRemoteNotificationStatusesNotification(userInfo)
+            self.resolveRemoteNotificationStatusesNotification(userInfo)
         case NotificationType.achievementProgresses.rawValue:
-            resolveRemoteAchievementNotification(userInfo)
+            self.resolveRemoteAchievementNotification(userInfo)
         default:
             print("remote notification received: unsopported notification type: \(notificationType)")
         }
@@ -162,7 +179,7 @@ extension NotificationsService {
         }
 
         guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
-              let alert = aps[PayloadKey.alert.rawValue]  as? [String: Any],
+              let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
               let body = alert[PayloadKey.body.rawValue] as? String,
               let object = userInfo[PayloadKey.object.rawValue] as? String else {
             return print("remote notification received: unable to parse notification: \(userInfo)")
@@ -187,7 +204,7 @@ extension NotificationsService {
             if #available(iOS 10.0, *) {
                 NotificationReactionHandler().handle(with: notification)
             } else if self.isInForeground {
-                NotificationAlertConstructor.sharedConstructor.presentNotificationFake(body, success: {
+                LegacyNotificationsPresenter.present(text: body, onTap: {
                     NotificationReactionHandler().handle(with: notification)
                 })
             } else {
@@ -206,8 +223,94 @@ extension NotificationsService {
     }
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
+        if AchievementPopupSplitTest.shouldParticipate {
+            let popupSplitTest = self.splitTestingService.fetchSplitTest(AchievementPopupSplitTest.self)
+            if popupSplitTest.currentGroup.shouldShowAchievementPopup {
+                self.showAchievementPopup(userInfo: userInfo)
+            } else {
+                self.routeToProfile(userInfo: userInfo)
+            }
+        } else {
+            self.routeToProfile(userInfo: userInfo)
+        }
+    }
+
+    private func routeToProfile(userInfo: NotificationUserInfo) {
         DispatchQueue.main.async {
-            TabBarRouter(tab: .profile).route()
+            if #available(iOS 10.0, *) {
+                TabBarRouter(tab: .profile).route()
+            } else if self.isInForeground {
+                guard let aps = userInfo[PayloadKey.aps.rawValue] as? [String: Any],
+                      let alert = aps[PayloadKey.alert.rawValue] as? [String: Any],
+                      let body = alert[PayloadKey.body.rawValue] as? String else {
+                    return
+                }
+
+                LegacyNotificationsPresenter.present(text: body, onTap: {
+                    TabBarRouter(tab: .profile).route()
+                })
+            } else {
+                TabBarRouter(tab: .profile).route()
+            }
+        }
+    }
+
+    private func showAchievementPopup(userInfo: NotificationUserInfo) {
+        guard let userId = AuthInfo.shared.userId,
+              let currentNavigation = SourcelessRouter().currentNavigation,
+              let object = userInfo[PayloadKey.object.rawValue] as? String,
+              let kind = JSON(parseJSON: object)["kind"].string,
+              let achievementKind = AchievementKind(rawValue: kind) else {
+            return print("remote notification received: unable to parse notification: \(userInfo)")
+        }
+
+        self.achievementsRetriever = AchievementsRetriever(
+            userId: userId,
+            achievementsAPI: AchievementsAPI(),
+            achievementProgressesAPI: AchievementProgressesAPI()
+        )
+
+        self.achievementsRetriever?.loadAchievementProgress(for: kind).done { progress in
+            let viewData = AchievementViewData(
+                id: achievementKind.rawValue,
+                title: achievementKind.getName(),
+                description: achievementKind.getDescription(for: progress.maxScore),
+                badge: achievementKind.getBadge(for: progress.currentLevel),
+                completedLevel: progress.currentLevel,
+                maxLevel: progress.maxLevel,
+                score: progress.currentScore,
+                maxScore: progress.maxScore
+            )
+            self.presentAchievementPopup(
+                viewData: viewData,
+                presentingController: currentNavigation
+            )
+        }.catch { _ in
+            let viewData = AchievementViewData(
+                id: achievementKind.rawValue,
+                title: achievementKind.getName(),
+                description: NSLocalizedString("AchievementsNew", comment: ""),
+                badge: achievementKind.getBadge(for: 1),
+                completedLevel: nil,
+                maxLevel: nil,
+                score: nil,
+                maxScore: nil
+            )
+            self.presentAchievementPopup(
+                viewData: viewData,
+                presentingController: currentNavigation
+            )
+        }
+    }
+
+    private func presentAchievementPopup(
+        viewData: AchievementViewData,
+        presentingController: UIViewController
+    ) {
+        let alertManager = AchievementPopupAlertManager(source: .notification)
+        let achievementPopup = alertManager.construct(with: viewData, canShare: true)
+        DispatchQueue.main.async {
+            alertManager.present(alert: achievementPopup, inController: presentingController)
         }
     }
 

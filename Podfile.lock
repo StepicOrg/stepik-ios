@@ -5,7 +5,6 @@ PODS:
   - AlamofireNetworkActivityIndicator (2.2.1):
     - Alamofire (~> 4.7)
   - Amplitude-iOS (4.3.0)
-  - AppsFlyerFramework (4.8.8)
   - Atributika (4.6.1)
   - BEMCheckBox (1.4.1)
   - Bolts (1.9.0):
@@ -14,6 +13,9 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - Branch (0.25.5):
+    - Branch/Core (= 0.25.5)
+  - Branch/Core (0.25.5)
   - Charts (3.1.1):
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
@@ -157,9 +159,9 @@ DEPENDENCIES:
   - Alamofire (= 4.7.3)
   - AlamofireNetworkActivityIndicator (= 2.2.1)
   - Amplitude-iOS (= 4.3.0)
-  - AppsFlyerFramework (= 4.8.8)
   - Atributika (= 4.6.1)
   - BEMCheckBox (= 1.4.1)
+  - Branch (= 0.25.5)
   - Charts (= 3.1.1)
   - Crashlytics (= 3.10.7)
   - CRToast (= 0.0.9)
@@ -208,10 +210,10 @@ SPEC REPOS:
     - Alamofire
     - AlamofireNetworkActivityIndicator
     - Amplitude-iOS
-    - AppsFlyerFramework
     - Atributika
     - BEMCheckBox
     - Bolts
+    - Branch
     - Charts
     - CocoaLumberjack
     - Crashlytics
@@ -293,10 +295,10 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireNetworkActivityIndicator: aeac50e6ecb78ec71a5f1f29098bcf4ec2962910
   Amplitude-iOS: 05f25e5bc08ecf3b42b0ae1d4f1fe6d3c6476e49
-  AppsFlyerFramework: 323b1467c23dc6d6c397ecb39b96b72b909ed436
   Atributika: d6c90b52527e9dae478819fb21d872aa6208ee6e
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Branch: 848e8e908182a97678d9f5a854d10e59a40af2aa
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
@@ -349,6 +351,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: a97928fdf81fc88b600ec1549a07164cd218bf9a
+PODFILE CHECKSUM: 52cd710984518307922104224651ebbb14d720b1
 
 COCOAPODS: 1.5.3

@@ -9,6 +9,8 @@
 		<string>applinks:ostrenkiy.github.io</string>
 		<string>applinks:stepic.org</string>
 		<string>applinks:stepik.org</string>
+		<string>applinks:stepik.app.link</string>
+		<string>applinks:stepik-alternate.app.link</string>
 	</array>
 </dict>
 </plist>

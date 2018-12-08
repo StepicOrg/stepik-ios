@@ -12,10 +12,14 @@ struct ButtonDescriptionFactory {
     let course: Course
     let isAuthorized: Bool
 
+    private let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
+
     func makePrimary() -> CourseWidgetViewModel.ButtonDescription {
+        let joinTitle = NSLocalizedString("WidgetButtonJoin", comment: "")
+
         let title = self.course.enrolled && isAuthorized
             ? NSLocalizedString("WidgetButtonLearn", comment: "")
-            : NSLocalizedString("WidgetButtonJoin", comment: "")
+            : joinTitle
         return CourseWidgetViewModel.ButtonDescription(
             title: title,
             isCallToAction: !self.course.enrolled || !isAuthorized
