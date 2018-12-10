@@ -43,20 +43,16 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
     var avatarImageURL: URL? {
         didSet {
-            self.imageView.loadImage(url: self.avatarImageURL)
+            if let url = self.avatarImageURL {
+                self.imageView.set(with: url)
+            }
         }
     }
 
-    private lazy var imageView: CourseCoverImageView = {
-        let imageView = CourseCoverImageView(
-            appearance: .init(
-                placeholderImage: UIImage(),
-                cornerRadius: self.appearance.imageViewCornerRadius,
-                imageFadeInDuration: self.appearance.imageFadeInDuration
-            )
-        )
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    private lazy var imageView: AvatarImageView = {
+        let view = AvatarImageView(frame: .zero)
+        view.shape = .rectangle(cornerRadius: self.appearance.imageViewCornerRadius)
+        return view
     }()
 
     private lazy var titleLabel: UILabel = {
