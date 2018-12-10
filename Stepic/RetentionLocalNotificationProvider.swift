@@ -95,8 +95,10 @@ extension NotificationsService {
     }
 
     func scheduleRetentionNotifications() {
-        self.retentionNotificationProviders.forEach { provider in
-            self.scheduleLocalNotification(with: provider)
+        if !PreferencesContainer.notifications.allowStreaksNotifications {
+            self.retentionNotificationProviders.forEach { provider in
+                self.scheduleLocalNotification(with: provider)
+            }
         }
     }
 
