@@ -124,7 +124,6 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
     func courseInfoTabInfoIntroVideoBlockViewRequestsVideoView(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) -> UIView {
-        self.introVideoHeight = courseInfoTabInfoIntroVideoBlockView.appearance.introVideoHeight
         self.addChildViewController(self.playerViewController)
         return self.playerViewController.view
     }
@@ -148,5 +147,12 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
         self.playerViewController.player?.play()
+    }
+
+    func courseInfoTabInfoIntroVideoBlockViewDidReportNewHeight(
+        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView,
+        height: CGFloat
+    ) {
+        self.introVideoHeight = height
     }
 }

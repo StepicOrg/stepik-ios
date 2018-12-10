@@ -15,6 +15,11 @@ protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) -> UIView
 
+    func courseInfoTabInfoIntroVideoBlockViewDidReportNewHeight(
+        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView,
+        height: CGFloat
+    )
+
     func courseInfoTabInfoIntroVideoBlockViewDidAddVideoView(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     )
@@ -31,7 +36,7 @@ protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
 
 extension CourseInfoTabInfoIntroVideoBlockView {
     struct Appearance {
-        let introVideoHeight: CGFloat = 203
+        let introVideoHeightRatio: CGFloat = 9 / 16
         let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         let thumbnailImageFadeInDuration: TimeInterval = 0.15
 
@@ -111,6 +116,14 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.delegate?.courseInfoTabInfoIntroVideoBlockViewDidReportNewHeight(
+            self,
+            height: self.introVideoView?.frame.height ?? 0
+        )
+    }
+
     // MARK: Actions
 
     @objc
@@ -169,13 +182,13 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
         self.thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         self.thumbnailImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(self.appearance.insets)
-            make.height.equalTo(self.appearance.introVideoHeight)
+            make.height.equalTo(self.snp.width).multipliedBy(self.appearance.introVideoHeightRatio)
         }
 
         self.overlayView.translatesAutoresizingMaskIntoConstraints = false
         self.overlayView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(self.appearance.insets)
-            make.height.equalTo(self.appearance.introVideoHeight)
+            make.center.equalTo(self.thumbnailImageView)
+            make.size.equalTo(self.thumbnailImageView)
         }
 
         self.playImageView.translatesAutoresizingMaskIntoConstraints = false
