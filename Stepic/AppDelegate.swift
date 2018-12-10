@@ -141,6 +141,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
+        NotificationsService().removeRetentionNotifications()
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        NotificationsService().scheduleRetentionNotifications()
     }
 
     // MARK: - Downloading Data in the Background
