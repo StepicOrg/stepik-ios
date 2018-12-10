@@ -15,11 +15,6 @@ protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) -> UIView
 
-    func courseInfoTabInfoIntroVideoBlockViewDidReportNewHeight(
-        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView,
-        height: CGFloat
-    )
-
     func courseInfoTabInfoIntroVideoBlockViewDidAddVideoView(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     )
@@ -114,14 +109,6 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.delegate?.courseInfoTabInfoIntroVideoBlockViewDidReportNewHeight(
-            self,
-            height: self.introVideoView?.frame.height ?? 0
-        )
     }
 
     // MARK: Actions

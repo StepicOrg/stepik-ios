@@ -26,7 +26,6 @@ final class CourseInfoTabInfoViewController: UIViewController {
     }
 
     private var playerVideoBoundsObservation: NSKeyValueObservation?
-    private var introVideoHeight: CGFloat?
 
     @objc
     private dynamic lazy var playerViewController: AVPlayerViewController = {
@@ -36,12 +35,11 @@ final class CourseInfoTabInfoViewController: UIViewController {
             options: [.old, .new]
         ) { [weak self] (_, change) in
             guard let oldValue = change.oldValue,
-                  let newValue = change.newValue,
-                  let introVideoHeight = self?.introVideoHeight else {
+                  let newValue = change.newValue else {
                 return
             }
 
-            if oldValue.size.height > introVideoHeight && newValue.size.height == introVideoHeight {
+            if newValue.size.height != oldValue.size.height {
                 UIApplication.shared.isStatusBarHidden = false
             }
         }
@@ -147,12 +145,5 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
         self.playerViewController.player?.play()
-    }
-
-    func courseInfoTabInfoIntroVideoBlockViewDidReportNewHeight(
-        _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView,
-        height: CGFloat
-    ) {
-        self.introVideoHeight = height
     }
 }
