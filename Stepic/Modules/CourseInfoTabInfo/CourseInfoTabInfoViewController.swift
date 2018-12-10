@@ -31,7 +31,6 @@ final class CourseInfoTabInfoViewController: UIViewController {
     @objc
     private dynamic lazy var playerViewController: AVPlayerViewController = {
         let playerViewController = AVPlayerViewController()
-        playerViewController.videoGravity = AVLayerVideoGravity.resizeAspectFill.rawValue
         self.playerVideoBoundsObservation = playerViewController.observe(
             \.videoBounds,
             options: [.old, .new]
@@ -41,6 +40,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
                   let introVideoHeight = self?.introVideoHeight else {
                 return
             }
+
             if oldValue.size.height > introVideoHeight && newValue.size.height == introVideoHeight {
                 UIApplication.shared.isStatusBarHidden = false
             }
