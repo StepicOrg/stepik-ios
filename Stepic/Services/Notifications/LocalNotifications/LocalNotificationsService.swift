@@ -155,6 +155,19 @@ final class LocalNotificationsService {
                 throw Error.badContentProvider
             }
 
+            let nextTriggerDate: Date?
+            if let timeIntervalTrigger = notificationTrigger as? UNTimeIntervalNotificationTrigger {
+                nextTriggerDate = timeIntervalTrigger.nextTriggerDate()
+            } else if let calendarTrigger = notificationTrigger as? UNCalendarNotificationTrigger {
+                nextTriggerDate = calendarTrigger.nextTriggerDate()
+            } else {
+                nextTriggerDate = nil
+            }
+
+            if !self.isFireDateValid(nextTriggerDate) {
+                throw Error.badFireDate
+            }
+
             let request = UNNotificationRequest(
                 identifier: contentProvider.identifier,
                 content: self.makeNotificationContent(for: contentProvider),
@@ -186,6 +199,10 @@ final class LocalNotificationsService {
     private func localNotificationScheduleNotification(
         contentProvider: LocalNotificationContentProvider
     ) -> Promise<Void> {
+        if !self.isFireDateValid(contentProvider.fireDate) {
+            return Promise(error: Error.badFireDate)
+        }
+
         let notification = UILocalNotification()
         notification.alertTitle = contentProvider.title
         notification.alertBody = contentProvider.body
@@ -202,6 +219,19 @@ final class LocalNotificationsService {
         return .value(())
     }
 
+    /// Checks that `fireDate` is valid.
+    ///
+    /// - Parameters:
+    ///   - fireDate: The Date object to be checked.
+    /// - Returns: `true` if the `fireDate` exists and it in the future, otherwise false.
+    private func isFireDateValid(_ fireDate: Date?) -> Bool {
+        if let fireDate = fireDate {
+            return fireDate.compare(Date()) == .orderedDescending
+        } else {
+            return false
+        }
+    }
+
     // MARK: - Types -
 
     enum PayloadKey: String {
@@ -212,5 +242,6 @@ final class LocalNotificationsService {
 
     enum Error: Swift.Error {
         case badContentProvider
+        case badFireDate
     }
 }
