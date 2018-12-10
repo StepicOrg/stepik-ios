@@ -59,7 +59,17 @@ final class CourseInfoViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = CourseInfoView(frame: UIScreen.main.bounds, scrollDelegate: self)
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+
+        let appearance = CourseInfoView.Appearance(
+            headerTopOffset: statusBarHeight + navigationBarHeight
+        )
+        self.view = CourseInfoView(
+            frame: UIScreen.main.bounds,
+            scrollDelegate: self,
+            appearance: appearance
+        )
         self.initSubmodules()
     }
 

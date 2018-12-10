@@ -11,7 +11,7 @@ import SnapKit
 
 extension CourseInfoHeaderView {
     struct Appearance {
-        let actionButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+        let actionButtonInsets = UIEdgeInsets(top: 8, left: 0, bottom: 15, right: 0)
         let actionButtonHeight: CGFloat = 42.0
         let actionButtonWidthRatio: CGFloat = 0.55
 
@@ -109,6 +109,20 @@ final class CourseInfoHeaderView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // All elements have fixed height except verified view
+    func calculateHeight(hasVerifiedMark: Bool) -> CGFloat {
+        let verifiedMarkHeight = self.verifiedSignView.appearance.imageViewSize.height
+            + self.appearance.marksStackViewSpacing
+        return self.appearance.titleStackViewInsets.bottom
+            + self.appearance.coverImageViewSize.height
+            + self.appearance.marksStackViewInsets.bottom
+            + self.appearance.statsViewHeight
+            + self.appearance.actionButtonInsets.bottom
+            + self.appearance.actionButtonHeight
+            + self.appearance.actionButtonInsets.top
+            + (hasVerifiedMark ? verifiedMarkHeight : 0)
     }
 
     // MARK: View model

@@ -11,14 +11,16 @@ import SnapKit
 
 extension CourseInfoView {
     struct Appearance {
-        let largeHeaderHeight: CGFloat = 265.0
-        let headerHeight: CGFloat = 245.0
+        // Status bar + navbar + other offsets
+        var headerTopOffset: CGFloat = 0.0
         let segmentedControlHeight: CGFloat = 60.0
     }
 }
 
 final class CourseInfoView: UIView {
     let appearance: Appearance
+
+    private var lastHeaderHeight: CGFloat = 0
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView(orientation: .vertical)
@@ -48,9 +50,7 @@ final class CourseInfoView: UIView {
     }()
 
     var headerHeight: CGFloat {
-        return DeviceInfo.current.isXSerie
-            ? self.appearance.largeHeaderHeight
-            : self.appearance.headerHeight
+        return self.lastHeaderHeight + self.appearance.headerTopOffset
     }
 
     // Dynamic scrolling constraints
@@ -77,6 +77,21 @@ final class CourseInfoView: UIView {
     }
 
     func configure(viewModel: CourseInfoHeaderViewModel) {
+        // Update header height
+        self.lastHeaderHeight = self.headerView.calculateHeight(
+            hasVerifiedMark: viewModel.isVerified
+        )
+
+        let headerInset = UIEdgeInsets(
+            top: self.headerHeight + self.appearance.segmentedControlHeight,
+            left: 0,
+            bottom: 0,
+            right: 0
+        )
+        self.scrollableStackView.scrollIndicatorInsets = headerInset
+        self.scrollableStackView.contentInsets = headerInset
+
+        // Update data in header
         self.headerView.configure(viewModel: viewModel)
     }
 
@@ -130,15 +145,6 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.clipsToBounds = true
         self.backgroundColor = .white
-
-        let headerInset = UIEdgeInsets(
-            top: self.headerHeight + self.appearance.segmentedControlHeight,
-            left: 0,
-            bottom: 0,
-            right: 0
-        )
-        self.scrollableStackView.scrollIndicatorInsets = headerInset
-        self.scrollableStackView.contentInsets = headerInset
     }
 
     func addSubviews() {
