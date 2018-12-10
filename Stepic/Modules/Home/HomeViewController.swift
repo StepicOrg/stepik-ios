@@ -64,7 +64,7 @@ final class HomeViewController: BaseExploreViewController {
 
     @objc
     private func presentTest() {
-        let vc = CourseInfoAssembly(courseID: 4350).makeModule()
+        let vc = CourseInfoAssembly(courseID: 67).makeModule()
         self.push(module: vc)
     }
 

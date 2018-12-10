@@ -37,7 +37,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
             return
         }
 
-        self.provider.fetchCourseUsers(course).done { course in
+        self.provider.fetchUsersForCourse(course).done { course in
             self.course = course
             self.presenter.presentCourseInfo(
                 response: .init(course: self.course)
