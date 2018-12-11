@@ -13,7 +13,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
     private let recurrence: Recurrence
 
     private var dateComponents: DateComponents? {
-        var offset: Int
+        let offset: Int
         switch self.recurrence {
         case .nextDay:
             offset = 1
@@ -115,7 +115,7 @@ extension NotificationsService {
     }
 
     func removeRetentionNotifications() {
-        let ids = self.retentionNotificationProviders.map { provider -> String in
+        let ids = self.retentionNotificationProviders.map { provider in
             provider.identifier
         }
         self.removeLocalNotifications(withIdentifiers: ids)
