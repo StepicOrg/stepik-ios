@@ -73,10 +73,21 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
 
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
-        if let dateComponents = self.dateComponents {
-            return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        } else {
+        guard let dateComponents = self.dateComponents else {
             return nil
+        }
+
+        switch self.recurrence {
+        case .nextDay:
+            return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        case .thirdDay:
+            let timeInterval: TimeInterval
+            if let date = Calendar.current.date(from: dateComponents) {
+                timeInterval = date.timeIntervalSince(Date())
+            } else {
+                timeInterval = 3 * 24 * 60 * 60
+            }
+            return UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: true)
         }
     }
 
