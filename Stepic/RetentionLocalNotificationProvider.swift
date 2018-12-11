@@ -12,6 +12,23 @@ import UserNotifications
 final class RetentionLocalNotificationProvider: LocalNotificationContentProvider {
     private let recurrence: Recurrence
 
+    private var dateComponents: DateComponents? {
+        var offset: Int
+        switch self.recurrence {
+        case .nextDay:
+            offset = 1
+        case .thirdDay:
+            offset = 3
+        }
+
+        let components: Set<Calendar.Component> = [.hour, .day, .month, .year]
+        if let date = Calendar.current.date(byAdding: .day, value: offset, to: Date()) {
+            return Calendar.current.dateComponents(components, from: date)
+        } else {
+            return nil
+        }
+    }
+
     var title: String {
         let key: String
         switch self.recurrence {
@@ -47,35 +64,19 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
     }
 
     var fireDate: Date? {
-        switch self.recurrence {
-        case .nextDay:
-            return Calendar.current.date(byAdding: .day, value: 1, to: Date())
-        case .thirdDay:
-            return Calendar.current.date(byAdding: .day, value: 3, to: Date())
-        }
-    }
-
-    var repeatInterval: NSCalendar.Unit? {
-        switch self.recurrence {
-        case .nextDay:
+        if let dateComponents = self.dateComponents {
+            return Calendar.current.date(from: dateComponents)
+        } else {
             return nil
-        case .thirdDay:
-            return .day
         }
     }
 
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
-        switch self.recurrence {
-        case .nextDay:
-            if let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {
-                let components = Calendar.current.dateComponents([.hour, .day, .month, .year], from: tomorrow)
-                return UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-            } else {
-                return nil
-            }
-        case .thirdDay:
-            return UNTimeIntervalNotificationTrigger(timeInterval: 3 * 24 * 60 * 60, repeats: true)
+        if let dateComponents = self.dateComponents {
+            return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        } else {
+            return nil
         }
     }
 
