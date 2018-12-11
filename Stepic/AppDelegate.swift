@@ -145,7 +145,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        NotificationsService().scheduleRetentionNotifications()
+        let retentionSplitTest = self.splitTestingService.fetchSplitTest(RetentionLocalNotificationsSplitTest.self)
+        if RetentionLocalNotificationsSplitTest.shouldParticipate
+               && retentionSplitTest.currentGroup.shouldReceiveNotifications {
+            NotificationsService().scheduleRetentionNotifications()
+        }
     }
 
     // MARK: - Downloading Data in the Background

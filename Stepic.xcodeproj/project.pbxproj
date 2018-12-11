@@ -4068,6 +4068,7 @@
 		62E9868BAC8E63E53A9BD0AE /* PinsMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */; };
 		62E986991E9352C3266CAE49 /* AchievementProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C688DF80BD29740D967 /* AchievementProgress.swift */; };
 		62E986B9852E979D92D45A41 /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
+		62E986CCAAEADFC7B783A7DD /* RetentionLocalNotificationsSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98460843705C1038203E5 /* RetentionLocalNotificationsSplitTest.swift */; };
 		62E986E3352543F9ED07093F /* NotificationBannerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C84F59654D91C200A81 /* NotificationBannerType.swift */; };
 		62E986FEE32E9FF1028FBC2B /* ExploreBlockContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9827B52EA42AD5A939265 /* ExploreBlockContainerView.swift */; };
 		62E9870883D5C6A1DCB15E4B /* TagsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981EDE8C762C38B5DA237 /* TagsOutputProtocol.swift */; };
@@ -6008,6 +6009,7 @@
 		62E983ECB91B2F753DC02E22 /* AchievementsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsListViewController.swift; sourceTree = "<group>"; };
 		62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakNotificationsControlPresenter.swift; sourceTree = "<group>"; };
 		62E9842C04E29BCAAE9FAB20 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		62E98460843705C1038203E5 /* RetentionLocalNotificationsSplitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetentionLocalNotificationsSplitTest.swift; sourceTree = "<group>"; };
 		62E9846DC5987C75FCD9D69E /* CourseListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListInteractor.swift; sourceTree = "<group>"; };
 		62E98480E472319CCB60BE83 /* UITableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
 		62E9848BCD3343E626596F54 /* HeaderEmptyAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderEmptyAuthView.swift; sourceTree = "<group>"; };
@@ -9049,6 +9051,7 @@
 				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
 				62E988F198B6ED19738CB0B5 /* SubscribeNotificationsOnLaunchSplitTest.swift */,
 				2C5A790F21B19B6400909C04 /* AchievementPopupSplitTest.swift */,
+				62E98460843705C1038203E5 /* RetentionLocalNotificationsSplitTest.swift */,
 			);
 			path = ActiveTests;
 			sourceTree = "<group>";
@@ -15048,6 +15051,7 @@
 				62E982C316E409B90DC3AA21 /* SubscribeNotificationsOnLaunchSplitTest.swift in Sources */,
 				62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */,
 				62E987560B7A0EFE8D4753CB /* RetentionLocalNotificationProvider.swift in Sources */,
+				62E986CCAAEADFC7B783A7DD /* RetentionLocalNotificationsSplitTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
