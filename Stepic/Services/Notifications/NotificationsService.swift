@@ -17,24 +17,16 @@ final class NotificationsService {
     private let localNotificationsService: LocalNotificationsService
     private let deepLinkRoutingService: DeepLinkRoutingService
 
-    private let splitTestingService: SplitTestingServiceProtocol
-    private var achievementsRetriever: AchievementsRetriever?
-
     private var isInForeground: Bool {
         return UIApplication.shared.applicationState == .active
     }
 
     init(
         localNotificationsService: LocalNotificationsService = LocalNotificationsService(),
-        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService(),
-        splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
-            analyticsService: AnalyticsUserProperties(),
-            storage: UserDefaults.standard
-        )
+        deepLinkRoutingService: DeepLinkRoutingService = DeepLinkRoutingService()
     ) {
         self.localNotificationsService = localNotificationsService
         self.deepLinkRoutingService = deepLinkRoutingService
-        self.splitTestingService = splitTestingService
     }
 
     func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
@@ -223,16 +215,7 @@ extension NotificationsService {
     }
 
     private func resolveRemoteAchievementNotification(_ userInfo: NotificationUserInfo) {
-        if AchievementPopupSplitTest.shouldParticipate {
-            let popupSplitTest = self.splitTestingService.fetchSplitTest(AchievementPopupSplitTest.self)
-            if popupSplitTest.currentGroup.shouldShowAchievementPopup {
-                self.showAchievementPopup(userInfo: userInfo)
-            } else {
-                self.routeToProfile(userInfo: userInfo)
-            }
-        } else {
-            self.routeToProfile(userInfo: userInfo)
-        }
+        self.routeToProfile(userInfo: userInfo)
     }
 
     private func routeToProfile(userInfo: NotificationUserInfo) {
@@ -252,65 +235,6 @@ extension NotificationsService {
             } else {
                 TabBarRouter(tab: .profile).route()
             }
-        }
-    }
-
-    private func showAchievementPopup(userInfo: NotificationUserInfo) {
-        guard let userId = AuthInfo.shared.userId,
-              let currentNavigation = SourcelessRouter().currentNavigation,
-              let object = userInfo[PayloadKey.object.rawValue] as? String,
-              let kind = JSON(parseJSON: object)["kind"].string,
-              let achievementKind = AchievementKind(rawValue: kind) else {
-            return print("remote notification received: unable to parse notification: \(userInfo)")
-        }
-
-        self.achievementsRetriever = AchievementsRetriever(
-            userId: userId,
-            achievementsAPI: AchievementsAPI(),
-            achievementProgressesAPI: AchievementProgressesAPI()
-        )
-
-        self.achievementsRetriever?.loadAchievementProgress(for: kind).done { progress in
-            let viewData = AchievementViewData(
-                id: achievementKind.rawValue,
-                title: achievementKind.getName(),
-                description: achievementKind.getDescription(for: progress.maxScore),
-                badge: achievementKind.getBadge(for: progress.currentLevel),
-                completedLevel: progress.currentLevel,
-                maxLevel: progress.maxLevel,
-                score: progress.currentScore,
-                maxScore: progress.maxScore
-            )
-            self.presentAchievementPopup(
-                viewData: viewData,
-                presentingController: currentNavigation
-            )
-        }.catch { _ in
-            let viewData = AchievementViewData(
-                id: achievementKind.rawValue,
-                title: achievementKind.getName(),
-                description: NSLocalizedString("AchievementsNew", comment: ""),
-                badge: achievementKind.getBadge(for: 1),
-                completedLevel: nil,
-                maxLevel: nil,
-                score: nil,
-                maxScore: nil
-            )
-            self.presentAchievementPopup(
-                viewData: viewData,
-                presentingController: currentNavigation
-            )
-        }
-    }
-
-    private func presentAchievementPopup(
-        viewData: AchievementViewData,
-        presentingController: UIViewController
-    ) {
-        let alertManager = AchievementPopupAlertManager(source: .notification)
-        let achievementPopup = alertManager.construct(with: viewData, canShare: true)
-        DispatchQueue.main.async {
-            alertManager.present(alert: achievementPopup, inController: presentingController)
         }
     }
 
