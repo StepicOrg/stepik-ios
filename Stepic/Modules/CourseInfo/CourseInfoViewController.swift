@@ -25,7 +25,7 @@ final class CourseInfoViewController: UIViewController {
         image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
         style: .plain,
         target: self,
-        action: #selector(self.shareButtonPressed)
+        action: #selector(self.actionButtonPressed)
     )
 
     init(interactor: CourseInfoInteractorProtocol) {
@@ -40,7 +40,7 @@ final class CourseInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "О курсе"
+        self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
         self.navigationItem.rightBarButtonItem = self.moreBarButton
 
@@ -121,7 +121,7 @@ final class CourseInfoViewController: UIViewController {
     }
 
     @objc
-    private func shareButtonPressed() {
+    private func actionButtonPressed() {
 
     }
 }

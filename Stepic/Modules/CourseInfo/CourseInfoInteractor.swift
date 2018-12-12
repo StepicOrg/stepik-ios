@@ -26,9 +26,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let courseID: Course.IdType
     private var currentCourse: Course? {
         didSet {
-            if let course = self.currentCourse {
-                self.pushCurrentCourseToSubmodules(submodules: self.submodules)
-            }
+            self.pushCurrentCourseToSubmodules(submodules: self.submodules)
         }
     }
 
@@ -37,7 +35,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private var isOnline = false
     private var didLoadFromCache = false
 
-    private let fetchLock = NSLock()
+    private let fetchSemaphore = DispatchSemaphore(value: 1)
 
     init(
         courseID: Course.IdType,
@@ -63,7 +61,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 return
             }
 
-            strongSelf.fetchLock.lock()
+            strongSelf.fetchSemaphore.wait()
             strongSelf.fetchCourseInAppropriateMode().done { response in
                 DispatchQueue.main.async { [weak self] in
                     self?.presenter.presentCourse(response: response)
@@ -71,7 +69,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             }.catch { _ in
                 // TODO: handle
             }.finally {
-                strongSelf.fetchLock.unlock()
+                strongSelf.fetchSemaphore.signal()
             }
         }
     }

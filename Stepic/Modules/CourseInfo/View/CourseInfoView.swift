@@ -36,7 +36,13 @@ final class CourseInfoView: UIView {
     }()
 
     private lazy var segmentedControl: TabSegmentedControlView = {
-        let control = TabSegmentedControlView(frame: .zero, items: ["Инфо", "Модули"])
+        let control = TabSegmentedControlView(
+            frame: .zero,
+            items: [
+                NSLocalizedString("CourseInfoTabInfo", comment: ""),
+                NSLocalizedString("CourseInfoTabSyllabus", comment: "")
+            ]
+        )
         control.delegate = self
         return control
     }()
