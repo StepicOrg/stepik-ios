@@ -65,6 +65,8 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         } else {
             self.postCurrentPermissionStatus()
         }
+
+        self.updatePushPermissionStatusUserProperty()
     }
 
     // MARK: - Register -
@@ -158,6 +160,8 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                     } else if let error = error {
                         print("NotificationsRegistrationService: did fail request authorization with error: \(error)")
                     }
+
+                    self.updatePushPermissionStatusUserProperty()
                 }
             )
         } else {
@@ -173,6 +177,12 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     private func registerWithAPNs() {
         DispatchQueue.main.async {
             UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+
+    private func updatePushPermissionStatusUserProperty() {
+        NotificationPermissionStatus.current.done { permissionStatus in
+            AnalyticsUserProperties.shared.setPushPermissionStatus(permissionStatus)
         }
     }
 
