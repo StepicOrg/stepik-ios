@@ -380,8 +380,6 @@ extension NotificationsPresenter: NotificationsRegistrationServiceDelegate {
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         didPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) {
-        if alertType == .permission {
-            self.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
-        }
+        self.notificationSuggestionManager.didShowAlert(context: .notificationsTab)
     }
 }
