@@ -30,33 +30,11 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
     }
 
     var title: String {
-        let key: String
-        switch self.repetition {
-        case .nextDay:
-            key = "RetentionNotificationOnNextDayTitle"
-        case .thirdDay:
-            key = "RetentionNotificationOnThirdDayTitle"
-        }
-        if #available(iOS 10.0, *) {
-            return NSString.localizedUserNotificationString(forKey: key, arguments: nil)
-        } else {
-            return NSLocalizedString(key, comment: "")
-        }
+        return self.repetition.notificationTitle
     }
 
     var body: String {
-        let key: String
-        switch self.repetition {
-        case .nextDay:
-            key = "RetentionNotificationOnNextDayText"
-        case .thirdDay:
-            key = "RetentionNotificationOnThirdDayText"
-        }
-        if #available(iOS 10.0, *) {
-            return NSString.localizedUserNotificationString(forKey: key, arguments: nil)
-        } else {
-            return NSLocalizedString(key, comment: "")
-        }
+        return self.repetition.notificationText
     }
 
     var identifier: String {
@@ -98,6 +76,32 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
     enum Repetition: String {
         case nextDay
         case thirdDay
+
+        var notificationTitle: String {
+            switch self {
+            case .nextDay:
+                return self.localized(for: "RetentionNotificationOnNextDayTitle")
+            case .thirdDay:
+                return self.localized(for: "RetentionNotificationOnThirdDayTitle")
+            }
+        }
+
+        var notificationText: String {
+            switch self {
+            case .nextDay:
+                return self.localized(for: "RetentionNotificationOnNextDayText")
+            case .thirdDay:
+                return self.localized(for: "RetentionNotificationOnThirdDayText")
+            }
+        }
+
+        private func localized(for key: String) -> String {
+            if #available(iOS 10.0, *) {
+                return NSString.localizedUserNotificationString(forKey: key, arguments: nil)
+            } else {
+                return NSLocalizedString(key, comment: "")
+            }
+        }
     }
 }
 
