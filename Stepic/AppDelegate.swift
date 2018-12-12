@@ -145,9 +145,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        let retentionSplitTest = self.splitTestingService.fetchSplitTest(RetentionLocalNotificationsSplitTest.self)
-        if RetentionLocalNotificationsSplitTest.shouldParticipate
-               && retentionSplitTest.currentGroup.shouldReceiveNotifications {
+        let retentionSplitTest = self.splitTestingService.fetchSplitTest(
+            RetentionLocalNotificationsSplitTest.self
+        )
+        let shouldParticipate = RetentionLocalNotificationsSplitTest.shouldParticipate
+        let shouldReceiveNotifications = retentionSplitTest.currentGroup.shouldReceiveNotifications
+
+        if shouldParticipate && shouldReceiveNotifications {
             NotificationsService().scheduleRetentionNotifications()
         }
     }
