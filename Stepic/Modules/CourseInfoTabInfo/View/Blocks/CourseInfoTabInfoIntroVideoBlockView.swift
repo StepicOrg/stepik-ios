@@ -40,8 +40,6 @@ extension CourseInfoTabInfoIntroVideoBlockView {
 
         let overlayColor = UIColor.mainDark
         let overlayOpacity: CGFloat = 0.4
-
-        let videoBackgroundColor = UIColor.white
     }
 }
 
@@ -158,7 +156,6 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
 
         if let videoView = self.delegate?.courseInfoTabInfoIntroVideoBlockViewRequestsVideoView(self) {
             self.introVideoView = videoView
-            self.introVideoView?.backgroundColor = self.appearance.videoBackgroundColor
             self.introVideoView?.isHidden = true
             self.addSubview(videoView)
             self.delegate?.courseInfoTabInfoIntroVideoBlockViewDidAddVideoView(self)
