@@ -20,14 +20,12 @@ extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
 
-        let textBlockInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
-
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
         let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
 
-        let actionButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
+        let actionButtonInsets = UIEdgeInsets(top: 32, left: 47, bottom: 32, right: 47)
         let actionButtonHeight: CGFloat = 47
         let actionButtonBackgroundColor = UIColor.stepicGreen
         let actionButtonFont = UIFont.systemFont(ofSize: 14)
@@ -187,11 +185,9 @@ final class CourseInfoTabInfoView: UIView {
             return
         }
 
-        let textBlockView = CourseInfoTabInfoTextBlockView(
-            appearance: .init(headerViewInsets: self.appearance.textBlockInsets)
-        )
-        textBlockView.headerView.icon = block.icon
-        textBlockView.headerView.title = block.title
+        let textBlockView = CourseInfoTabInfoTextBlockView()
+        textBlockView.icon = block.icon
+        textBlockView.title = block.title
         textBlockView.message = message
 
         self.scrollableStackView.addArrangedView(textBlockView)

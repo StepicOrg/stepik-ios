@@ -36,7 +36,7 @@ final class CourseInfoView: UIView {
     }()
 
     private lazy var segmentedControl: TabSegmentedControlView = {
-        let control = TabSegmentedControlView(frame: .zero, items: ["Инфо"])
+        let control = TabSegmentedControlView(frame: .zero, items: ["Инфо", "Модули"])
         control.delegate = self
         return control
     }()

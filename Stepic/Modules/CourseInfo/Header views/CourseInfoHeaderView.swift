@@ -11,7 +11,7 @@ import SnapKit
 
 extension CourseInfoHeaderView {
     struct Appearance {
-        let actionButtonInsets = UIEdgeInsets(top: 8, left: 0, bottom: 15, right: 0)
+        let actionButtonInsets = UIEdgeInsets(top: 10, left: 0, bottom: 15, right: 0)
         let actionButtonHeight: CGFloat = 42.0
         let actionButtonWidthRatio: CGFloat = 0.55
 

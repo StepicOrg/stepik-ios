@@ -11,25 +11,20 @@ import SnapKit
 
 extension CourseInfoTabInfoTextBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
+        var headerViewInsets = UIEdgeInsets(top: 30, left: 20, bottom: 0, right: 47)
 
-        let messageLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
-        let messageLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 0, right: 47)
+        let messageLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let messageLabelTextColor = UIColor.mainDark
+
+        let messageLabelLineSpacing: CGFloat = 2.6
     }
 }
 
 final class CourseInfoTabInfoTextBlockView: UIView {
     let appearance: Appearance
 
-    var message: String? {
-        didSet {
-            self.messageLabel.setTextWithHTMLString(self.message ?? "")
-        }
-    }
-
-    // TODO: Make private
-    lazy var headerView = CourseInfoTabInfoHeaderBlockView()
+    private lazy var headerView = CourseInfoTabInfoHeaderBlockView()
 
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
@@ -38,6 +33,27 @@ final class CourseInfoTabInfoTextBlockView: UIView {
         label.textColor = self.appearance.messageLabelTextColor
         return label
     }()
+
+    var icon: UIImage? {
+        didSet {
+            self.headerView.icon = self.icon
+        }
+    }
+
+    var title: String? {
+        didSet {
+            self.headerView.title = self.title
+        }
+    }
+
+    var message: String? {
+        didSet {
+            self.messageLabel.setTextWithHTMLString(
+                self.message ?? "",
+                lineSpacing: self.appearance.messageLabelLineSpacing
+            )
+        }
+    }
 
     init(
         frame: CGRect = .zero,

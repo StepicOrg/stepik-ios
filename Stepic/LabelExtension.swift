@@ -10,7 +10,7 @@ import UIKit
 import Atributika
 
 extension UILabel {
-    func setTextWithHTMLString(_ htmlText: String) {
+    func setTextWithHTMLString(_ htmlText: String, lineSpacing: CGFloat? = nil) {
         let currentFontSize = self.font.pointSize
 
         let attributedString = htmlText.style(tags: [
@@ -21,7 +21,19 @@ extension UILabel {
             Style("strike").strikethroughStyle(.styleSingle)
         ]).attributedString
 
-        self.attributedText = attributedString
+        if let lineSpacing = lineSpacing {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineSpacing
+            let mutableString = NSMutableAttributedString(attributedString: attributedString)
+            mutableString.addAttribute(
+                .paragraphStyle,
+                value: paragraphStyle,
+                range: NSRange(location: 0, length: attributedString.length)
+            )
+            self.attributedText = mutableString.attributedString
+        } else {
+            self.attributedText = attributedString
+        }
     }
 
     func getHeightWithText(_ text: String, html: Bool = false) -> CGFloat {

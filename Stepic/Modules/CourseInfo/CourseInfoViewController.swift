@@ -20,6 +20,19 @@ final class CourseInfoViewController: UIViewController {
 
     lazy var courseInfoView = self.view as? CourseInfoView
 
+    private lazy var shareBarButton = UIBarButtonItem(
+        barButtonSystemItem: .action,
+        target: self,
+        action: #selector(self.shareButtonPressed)
+    )
+
+    private lazy var moreBarButton = UIBarButtonItem(
+        image: UIImage(named: "navigationitem-dots-icon")?.withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: #selector(self.shareButtonPressed)
+    )
+
     init(interactor: CourseInfoInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
@@ -32,6 +45,19 @@ final class CourseInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "О курсе"
+
+        self.navigationItem.rightBarButtonItems = [
+            self.moreBarButton,
+            self.shareBarButton
+        ]
+
+        self.updateTopBar(alpha: 0.0)
+        if let styledNavigationController = self.navigationController
+            as? StyledNavigationViewController {
+            styledNavigationController.hideBackButtonTitle()
+        }
+
         if #available(iOS 11.0, *) { } else {
             self.automaticallyAdjustsScrollViewInsets = false
         }
@@ -39,22 +65,22 @@ final class CourseInfoViewController: UIViewController {
         self.interactor.refreshCourse()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         // To update when previous operations completed
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.changeTopBarAlpha(value: strongSelf.lastTopBarAlpha)
+            strongSelf.updateTopBar(alpha: strongSelf.lastTopBarAlpha)
         }
 
         self.interactor.tryToSetOnlineMode()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        self.changeTopBarAlpha(value: 1.0)
+        self.updateTopBar(alpha: 1.0)
         super.viewWillDisappear(animated)
     }
 
@@ -73,15 +99,16 @@ final class CourseInfoViewController: UIViewController {
         self.initSubmodules()
     }
 
-    private func changeTopBarAlpha(value: CGFloat) {
+    private func updateTopBar(alpha: CGFloat) {
         if let styledNavigationController = self.navigationController
             as? StyledNavigationViewController {
-            styledNavigationController.changeNavigationBarAlpha(value)
-            styledNavigationController.changeShadowAlpha(value)
-            styledNavigationController.changeTintColor(progress: value)
+            styledNavigationController.changeNavigationBarAlpha(alpha)
+            styledNavigationController.changeShadowAlpha(alpha)
+            styledNavigationController.changeTintColor(progress: alpha)
+            styledNavigationController.changeTitleAlpha(alpha)
         }
 
-        UIApplication.shared.statusBarStyle = value > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
+        UIApplication.shared.statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
             ? .default
             : .lightContent
     }
@@ -101,6 +128,11 @@ final class CourseInfoViewController: UIViewController {
                 submodules: [infoAssembly.moduleInput].compactMap { $0 }
             )
         )
+    }
+
+    @objc
+    private func shareButtonPressed() {
+
     }
 }
 
@@ -135,9 +167,9 @@ extension CourseInfoViewController: UIScrollViewDelegate {
             + courseInfoView.appearance.segmentedControlHeight
         let headerHeight = courseInfoView.headerHeight - topPadding
 
-        let coeff = max(0, offsetWithHeader / headerHeight)
-        self.lastTopBarAlpha = coeff
-        self.changeTopBarAlpha(value: coeff)
+        let scrollingProgress = max(0, min(1, offsetWithHeader / headerHeight))
+        self.lastTopBarAlpha = scrollingProgress
+        self.updateTopBar(alpha: scrollingProgress)
 
         // Pin segmented control
         let scrollViewOffset = min(offsetWithHeader, headerHeight)

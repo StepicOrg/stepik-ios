@@ -15,11 +15,11 @@ extension CourseInfoTabInfoInstructorView {
         let imageViewSize = CGSize(width: 30, height: 30)
         let imageViewCornerRadius: CGFloat = 5
 
-        let titleLabelInsets = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 0)
+        let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let titleLabelTextColor = UIColor.mainDark
 
-        let descriptionLabelInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        let descriptionLabelInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         let descriptionLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let descriptionLabelTextColor = UIColor.mainDark
     }

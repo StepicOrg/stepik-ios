@@ -11,7 +11,7 @@ import SnapKit
 
 extension CourseInfoTabInfoInstructorsBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
+        var headerViewInsets = UIEdgeInsets(top: 30, left: 20, bottom: 0, right: 47)
 
         let stackViewInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
         let stackViewSpacing: CGFloat = 20

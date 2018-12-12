@@ -20,6 +20,12 @@ class StyledNavigationViewController: UINavigationController {
         return view
     }()
 
+    private lazy var titleFont: UIFont = {
+        let fontSize: CGFloat = 17.0
+        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
+        return titleFont
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,14 +35,24 @@ class StyledNavigationViewController: UINavigationController {
         // Do any additional setup after loading the view.
     }
 
+    func hideBackButtonTitle() {
+        // Search for controller before last in stack
+        if let parentViewController = self.viewControllers.dropLast().last {
+            parentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: "",
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setStatusBarStyle()
         changeNavigationBarAlpha(1.0)
+        changeTitleAlpha(1.0)
 
-        let fontSize: CGFloat = 17.0
-        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark, NSAttributedStringKey.font: titleFont]
         navigationBar.tintColor = StyledNavigationViewController.darkTintColor
     }
 
@@ -102,6 +118,13 @@ class StyledNavigationViewController: UINavigationController {
     func changeShadowAlpha(_ alpha: CGFloat) {
         navigationBar.layoutSubviews()
         customShadowView?.alpha = alpha
+    }
+
+    func changeTitleAlpha(_ alpha: CGFloat) {
+        self.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: self.titleFont,
+            NSAttributedStringKey.foregroundColor: UIColor.mainDark.withAlphaComponent(alpha)
+        ]
     }
 
     func animateShadowChange(for presentedController: UIViewController) {
