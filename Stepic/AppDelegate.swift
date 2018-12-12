@@ -25,16 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
-    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
-        presenter: NotificationsRequestOnlySettingsAlertPresenter(),
-        analytics: .init(source: .abAppLaunch)
-    )
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
     private let splitTestingService = SplitTestingService(
         analyticsService: AnalyticsUserProperties(),
         storage: UserDefaults.standard
     )
-    private var didShowOnboarding = true
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -93,7 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
-            self.didShowOnboarding = false
             DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
@@ -105,15 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
-        let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
-            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
-        if shouldParticipate && self.didShowOnboarding {
-            self.notificationsRegistrationService.registerForRemoteNotifications()
-        } else {
-            self.notificationsRegistrationService.renewDeviceToken()
-        }
-
+        self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
