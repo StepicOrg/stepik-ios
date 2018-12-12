@@ -68,20 +68,19 @@ final class AchievementPopupViewController: UIViewController {
 
         if data.completedLevel == data.maxLevel {
             self.progressLabel.alpha = 0.0
-        } else if let maxScore = data.maxScore, let score = data.score {
-            self.progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(maxScore - score)")
+        } else {
+            self.progressLabel.text = String(
+                format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.maxScore - data.score)"
+            )
         }
 
         if data.isLocked {
             self.levelLabel.text = NSLocalizedString("AchievementsLevelNotObtained", comment: "")
-        } else if let completedLevel = data.completedLevel, let maxLevel = data.maxLevel {
-            self.levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(completedLevel)", "\(maxLevel)")
         } else {
-            self.levelLabel.alpha = 0.0
+            self.levelLabel.text = String(
+                format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.completedLevel)", "\(data.maxLevel)"
+            )
         }
-
-        self.separatorView.alpha = self.progressLabel.alpha == 0
-            && self.levelLabel.alpha == 0 ? 0 : 1
     }
 
     enum Source: String {

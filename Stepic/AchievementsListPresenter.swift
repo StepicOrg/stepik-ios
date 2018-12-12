@@ -57,8 +57,8 @@ class AchievementsListPresenter {
             }
 
             self?.view?.set(achievements: viewData.sorted(by: { a, b in
-                let aScore = !a.isLocked ? 1 : (a.score ?? 0 > 0 ? 2 : 3)
-                let bScore = !b.isLocked ? 1 : (b.score ?? 0 > 0 ? 2 : 3)
+                let aScore = !a.isLocked ? 1 : (a.score > 0 ? 2 : 3)
+                let bScore = !b.isLocked ? 1 : (b.score > 0 ? 2 : 3)
                 return aScore < bScore
             }))
         }.catch { [weak self] error in
