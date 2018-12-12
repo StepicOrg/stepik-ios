@@ -12,6 +12,8 @@ class LaunchDefaultsContainer {
     fileprivate let defaults = UserDefaults.standard
 
     fileprivate let didLaunchKey = "didLaunchKey"
+    fileprivate let startVersionKey = "startVersionKey"
+    fileprivate let isFirstSessionKey: String = "isFirstSessionKey"
 
     var didLaunch: Bool {
         get {
@@ -28,8 +30,6 @@ class LaunchDefaultsContainer {
         }
     }
 
-    fileprivate let startVersionKey = "startVersionKey"
-
     var startVersion: String {
         get {
             if let startVersion = defaults.value(forKey: startVersionKey) as? String {
@@ -43,8 +43,6 @@ class LaunchDefaultsContainer {
             defaults.set(value, forKey: startVersionKey)
         }
     }
-
-    fileprivate let isFirstSessionKey: String = "isFirstSessionKey"
 
     var isFirstSession: Bool {
         get {
