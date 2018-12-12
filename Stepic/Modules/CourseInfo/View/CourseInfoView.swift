@@ -13,7 +13,7 @@ extension CourseInfoView {
     struct Appearance {
         // Status bar + navbar + other offsets
         var headerTopOffset: CGFloat = 0.0
-        let segmentedControlHeight: CGFloat = 60.0
+        let segmentedControlHeight: CGFloat = 48.0
     }
 }
 

@@ -11,9 +11,9 @@ import SnapKit
 
 extension CourseInfoTabInfoInstructorsBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 30, left: 20, bottom: 0, right: 47)
+        var headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 47)
 
-        let stackViewInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
+        let stackViewInsets = UIEdgeInsets(top: 20, left: 47, bottom: 30, right: 47)
         let stackViewSpacing: CGFloat = 20
     }
 }
@@ -87,7 +87,7 @@ extension CourseInfoTabInfoInstructorsBlockView: ProgrammaticallyInitializableVi
         self.stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.stackViewInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.stackViewInsets.right)
-            make.bottom.equalToSuperview().offset(self.appearance.stackViewInsets.bottom)
+            make.bottom.equalToSuperview().offset(-self.appearance.stackViewInsets.bottom)
             make.top
                 .equalTo(self.headerView.snp.bottom)
                 .offset(self.appearance.stackViewInsets.top)

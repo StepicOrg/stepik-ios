@@ -33,7 +33,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         self.playerVideoBoundsObservation = playerViewController.observe(
             \.videoBounds,
             options: [.old, .new]
-        ) { [weak self] (_, change) in
+        ) { _, change in
             guard let oldValue = change.oldValue,
                   let newValue = change.newValue else {
                 return
@@ -63,6 +63,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
     }
 
     deinit {
+        self.playerVideoBoundsObservation = nil
         self.playerViewController.willMove(toParentViewController: nil)
         self.playerViewController.view.removeFromSuperview()
         self.playerViewController.removeFromParentViewController()

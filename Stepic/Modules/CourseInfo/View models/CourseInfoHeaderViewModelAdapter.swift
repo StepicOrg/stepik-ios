@@ -30,7 +30,7 @@ extension CourseInfoHeaderViewModel {
         }()
 
         self.learnersLabelText = FormatterHelper.longNumber(course.learnersCount ?? 0)
-        self.isVerified = false
+        self.isVerified = (course.readiness ?? 0) > 0.9
     }
 }
 

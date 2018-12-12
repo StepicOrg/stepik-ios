@@ -24,6 +24,7 @@ extension Course {
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
     @NSManaged var managedLearnersCount: NSNumber?
+    @NSManaged var managedReadiness: NSNumber?
 
     @NSManaged var managedScheduleType: String?
     @NSManaged var managedSummary: String?
@@ -197,6 +198,15 @@ extension Course {
         }
         get {
             return managedPublic?.boolValue ?? false
+        }
+    }
+
+    var readiness: Float? {
+        set {
+            self.managedReadiness = newValue as NSNumber?
+        }
+        get {
+            return self.managedReadiness?.floatValue
         }
     }
 

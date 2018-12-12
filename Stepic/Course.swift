@@ -35,6 +35,7 @@ final class Course: NSManagedObject, IDFetchable {
         enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
         isPublic = json["is_public"].boolValue
+        readiness = json["readiness"].float
 
         summary = json["summary"].stringValue
         workload = json["workload"].stringValue

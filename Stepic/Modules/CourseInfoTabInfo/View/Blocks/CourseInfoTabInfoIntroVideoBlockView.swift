@@ -32,7 +32,7 @@ protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
 extension CourseInfoTabInfoIntroVideoBlockView {
     struct Appearance {
         let introVideoHeightRatio: CGFloat = 9 / 16
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         let thumbnailImageFadeInDuration: TimeInterval = 0.15
 
         let playImageTintColor = UIColor.white

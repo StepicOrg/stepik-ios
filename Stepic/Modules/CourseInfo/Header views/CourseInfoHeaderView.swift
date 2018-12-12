@@ -22,7 +22,7 @@ extension CourseInfoHeaderView {
         let titleLabelColor = UIColor.white
 
         let titleStackViewSpacing: CGFloat = 10
-        let titleStackViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 14, right: 30)
+        let titleStackViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 16, right: 30)
 
         let marksStackViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 18, right: 0)
         let marksStackViewSpacing: CGFloat = 10.0

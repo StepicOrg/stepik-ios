@@ -5811,6 +5811,7 @@
 		2C8652691F4B2FAA00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/1838/en.lproj/step0.html; sourceTree = "<group>"; };
 		2C88C11A21BEB180004BDF21 /* UsersPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersPersistenceService.swift; sourceTree = "<group>"; };
 		2C88C11C21BEB18D004BDF21 /* UsersNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersNetworkService.swift; sourceTree = "<group>"; };
+		2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_readiness_v30.xcdatamodel; sourceTree = "<group>"; };
 		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		2C89A93E1F4C285B00227C3B /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/GMAT/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2C89A93F1F4C285B00227C3B /* Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth.plist; path = Content/GMAT/Auth.plist; sourceTree = "<group>"; };
@@ -20584,6 +20585,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */,
 				2C8E882B21A2E70F00A27789 /* Model_course_authors_v29.xcdatamodel */,
 				2C19023B219F24B100FAD9AF /* Model_course_certificate_details_v28.xcdatamodel */,
 				2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */,
@@ -20615,7 +20617,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C8E882B21A2E70F00A27789 /* Model_course_authors_v29.xcdatamodel */;
+			currentVersion = 2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

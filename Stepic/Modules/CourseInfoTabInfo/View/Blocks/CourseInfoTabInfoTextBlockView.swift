@@ -11,9 +11,9 @@ import SnapKit
 
 extension CourseInfoTabInfoTextBlockView {
     struct Appearance {
-        var headerViewInsets = UIEdgeInsets(top: 30, left: 20, bottom: 0, right: 47)
+        var headerViewInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 47)
 
-        let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 0, right: 47)
+        let messageLabelInsets = UIEdgeInsets(top: 16, left: 47, bottom: 30, right: 47)
         let messageLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let messageLabelTextColor = UIColor.mainDark
 
@@ -93,7 +93,7 @@ extension CourseInfoTabInfoTextBlockView: ProgrammaticallyInitializableViewProto
         self.messageLabel.translatesAutoresizingMaskIntoConstraints = false
         self.messageLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.messageLabelInsets.left)
-            make.bottom.equalToSuperview().offset(self.appearance.messageLabelInsets.bottom)
+            make.bottom.equalToSuperview().offset(-self.appearance.messageLabelInsets.bottom)
             make.trailing.equalTo(self.headerView)
             make.top
                 .equalTo(self.headerView.snp.bottom)

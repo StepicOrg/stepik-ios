@@ -19,15 +19,10 @@ final class CourseInfoViewController: UIViewController {
     let interactor: CourseInfoInteractorProtocol
 
     lazy var courseInfoView = self.view as? CourseInfoView
-
-    private lazy var shareBarButton = UIBarButtonItem(
-        barButtonSystemItem: .action,
-        target: self,
-        action: #selector(self.shareButtonPressed)
-    )
+    lazy var styledNavigationController = self.navigationController as? StyledNavigationViewController
 
     private lazy var moreBarButton = UIBarButtonItem(
-        image: UIImage(named: "navigationitem-dots-icon")?.withRenderingMode(.alwaysTemplate),
+        image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
         style: .plain,
         target: self,
         action: #selector(self.shareButtonPressed)
@@ -47,22 +42,21 @@ final class CourseInfoViewController: UIViewController {
 
         self.title = "О курсе"
 
-        self.navigationItem.rightBarButtonItems = [
-            self.moreBarButton,
-            self.shareBarButton
-        ]
+        self.navigationItem.rightBarButtonItem = self.moreBarButton
 
         self.updateTopBar(alpha: 0.0)
-        if let styledNavigationController = self.navigationController
-            as? StyledNavigationViewController {
-            styledNavigationController.hideBackButtonTitle()
-        }
+        self.styledNavigationController?.hideBackButtonTitle()
 
         if #available(iOS 11.0, *) { } else {
             self.automaticallyAdjustsScrollViewInsets = false
         }
 
         self.interactor.refreshCourse()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.styledNavigationController?.changeShadowAlpha(0.0)
+        super.viewWillAppear(animated)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -80,7 +74,7 @@ final class CourseInfoViewController: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        self.updateTopBar(alpha: 1.0)
+        UIApplication.shared.statusBarStyle = .default
         super.viewWillDisappear(animated)
     }
 
@@ -100,13 +94,9 @@ final class CourseInfoViewController: UIViewController {
     }
 
     private func updateTopBar(alpha: CGFloat) {
-        if let styledNavigationController = self.navigationController
-            as? StyledNavigationViewController {
-            styledNavigationController.changeNavigationBarAlpha(alpha)
-            styledNavigationController.changeShadowAlpha(alpha)
-            styledNavigationController.changeTintColor(progress: alpha)
-            styledNavigationController.changeTitleAlpha(alpha)
-        }
+        self.styledNavigationController?.changeNavigationBarAlpha(alpha)
+        self.styledNavigationController?.changeTintColor(progress: alpha)
+        self.styledNavigationController?.changeTitleAlpha(alpha)
 
         UIApplication.shared.statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
             ? .default

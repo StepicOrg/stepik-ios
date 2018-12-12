@@ -22,10 +22,10 @@ extension CourseInfoTabInfoView {
 
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
-        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
+        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
 
-        let actionButtonInsets = UIEdgeInsets(top: 32, left: 47, bottom: 32, right: 47)
+        let actionButtonInsets = UIEdgeInsets(top: 0, left: 47, bottom: 32, right: 47)
         let actionButtonHeight: CGFloat = 47
         let actionButtonBackgroundColor = UIColor.stepicGreen
         let actionButtonFont = UIFont.systemFont(ofSize: 14)

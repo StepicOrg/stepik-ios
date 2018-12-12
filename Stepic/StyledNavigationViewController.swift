@@ -195,12 +195,27 @@ class StyledNavigationViewController: UINavigationController {
 
     override func popViewController(animated: Bool) -> UIViewController? {
         lastAction = .pop
-        return super.popViewController(animated: animated)
+        let poppedViewController = super.popViewController(animated: animated)
+        self.resetAlphaAppearance(viewController: poppedViewController, animated: animated)
+        return poppedViewController
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         lastAction = .push
+        self.resetAlphaAppearance(viewController: viewController, animated: animated)
         super.pushViewController(viewController, animated: animated)
+    }
+
+    private func resetAlphaAppearance(viewController: UIViewController?, animated: Bool) {
+        self.changeTitleAlpha(1.0)
+        self.changeNavigationBarAlpha(1.0)
+        self.changeTintColor(progress: 1.0)
+
+        if let viewController = viewController, animated {
+            self.animateShadowChange(for: viewController)
+        } else {
+            self.changeShadowAlpha(1.0)
+        }
     }
 
     private func makeTransitionColor(from sourceColor: UIColor, to targetColor: UIColor, progress: CGFloat) -> UIColor {
