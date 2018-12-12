@@ -18,10 +18,13 @@ protocol LocalNotificationContentProvider {
 
     var identifier: String { get }
 
+    @available(iOS, obsoleted: 10.0)
     var soundName: String { get }
 
+    @available(iOS, obsoleted: 10.0)
     var fireDate: Date? { get }
 
+    @available(iOS, obsoleted: 10.0)
     var repeatInterval: NSCalendar.Unit? { get }
 
     @available(iOS 10.0, *)
