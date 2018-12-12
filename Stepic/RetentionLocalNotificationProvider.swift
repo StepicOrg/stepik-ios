@@ -39,7 +39,6 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         return "RetentionLocalNotification_\(self.repetition.rawValue)"
     }
 
-    @available(iOS, obsoleted: 10.0)
     var fireDate: Date? {
         if let dateComponents = self.dateComponents {
             return Calendar.current.date(from: dateComponents)
