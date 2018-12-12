@@ -10,6 +10,23 @@ import Foundation
 import UserNotifications
 
 final class StreakLocalNotificationContentProvider: LocalNotificationContentProvider {
+    private let UTCStartHour: Int
+    private let calendar: Calendar
+
+    private var dateComponents: DateComponents {
+        let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
+        var localStartHour = self.UTCStartHour + timeZoneDiff
+
+        if localStartHour < 0 {
+            localStartHour = 24 + localStartHour
+        }
+        if localStartHour > 23 {
+            localStartHour = localStartHour - 24
+        }
+
+        return DateComponents(hour: localStartHour)
+    }
+
     var title = ""
 
     var body: String {
@@ -50,33 +67,6 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
     @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
         return UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: true)
-    }
-
-    private let UTCStartHour: Int
-    private let calendar: Calendar
-
-    private var dateComponents: DateComponents {
-        let timeZoneDiff = NSTimeZone.system.secondsFromGMT() / 3600
-        var localStartHour = self.UTCStartHour + timeZoneDiff
-
-        if localStartHour < 0 {
-            localStartHour = 24 + localStartHour
-        }
-        if localStartHour > 23 {
-            localStartHour = localStartHour - 24
-        }
-
-        let currentDate = Date()
-
-        var components = DateComponents()
-        components.year = self.calendar.component(.year, from: currentDate)
-        components.month = self.calendar.component(.month, from: currentDate)
-        components.day = self.calendar.component(.day, from: currentDate)
-        components.hour = localStartHour
-        components.minute = 0
-        components.second = 0
-
-        return components
     }
 
     init(UTCStartHour: Int, calendar: Calendar = Calendar(identifier: .gregorian)) {
