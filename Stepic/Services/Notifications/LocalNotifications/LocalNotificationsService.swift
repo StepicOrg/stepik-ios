@@ -155,6 +155,21 @@ final class LocalNotificationsService {
                 throw Error.badContentProvider
             }
 
+            let nextTriggerDate: Date? = {
+                switch notificationTrigger {
+                case let timeIntervalTrigger as UNTimeIntervalNotificationTrigger:
+                    return timeIntervalTrigger.nextTriggerDate()
+                case let calendarTrigger as UNCalendarNotificationTrigger:
+                    return calendarTrigger.nextTriggerDate()
+                default:
+                    return nil
+                }
+            }()
+
+            guard self.isFireDateValid(nextTriggerDate) else {
+                throw Error.badFireDate
+            }
+
             let request = UNNotificationRequest(
                 identifier: contentProvider.identifier,
                 content: self.makeNotificationContent(for: contentProvider),
@@ -186,20 +201,39 @@ final class LocalNotificationsService {
     private func localNotificationScheduleNotification(
         contentProvider: LocalNotificationContentProvider
     ) -> Promise<Void> {
-        let notification = UILocalNotification()
-        notification.alertTitle = contentProvider.title
-        notification.alertBody = contentProvider.body
-        notification.fireDate = contentProvider.fireDate
-        notification.soundName = contentProvider.soundName
-        notification.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
+        return Promise { seal in
+            guard self.isFireDateValid(contentProvider.fireDate) else {
+                throw Error.badFireDate
+            }
 
-        if let repeatInterval = contentProvider.repeatInterval {
-            notification.repeatInterval = repeatInterval
+            let notification = UILocalNotification()
+            notification.alertTitle = contentProvider.title
+            notification.alertBody = contentProvider.body
+            notification.fireDate = contentProvider.fireDate
+            notification.soundName = contentProvider.soundName
+            notification.userInfo = self.getMergedUserInfo(contentProvider: contentProvider)
+
+            if let repeatInterval = contentProvider.repeatInterval {
+                notification.repeatInterval = repeatInterval
+            }
+
+            UIApplication.shared.scheduleLocalNotification(notification)
+
+            seal.fulfill(())
         }
+    }
 
-        UIApplication.shared.scheduleLocalNotification(notification)
-
-        return .value(())
+    /// Checks that `fireDate` is valid.
+    ///
+    /// - Parameters:
+    ///   - fireDate: The Date object to be checked.
+    /// - Returns: `true` if the `fireDate` exists and it in the future, otherwise false.
+    private func isFireDateValid(_ fireDate: Date?) -> Bool {
+        if let fireDate = fireDate {
+            return fireDate.compare(Date()) == .orderedDescending
+        } else {
+            return false
+        }
     }
 
     // MARK: - Types -
@@ -212,5 +246,6 @@ final class LocalNotificationsService {
 
     enum Error: Swift.Error {
         case badContentProvider
+        case badFireDate
     }
 }
