@@ -83,11 +83,7 @@ class NotificationsViewController: UIViewController, NotificationsView {
                 analytics: .init(source: .notificationsTab)
             ),
             notificationSuggestionManager: NotificationSuggestionManager(),
-            view: self,
-            splitTestingService: SplitTestingService(
-                analyticsService: AnalyticsUserProperties(),
-                storage: UserDefaults.standard
-            )
+            view: self
         )
 
         tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)

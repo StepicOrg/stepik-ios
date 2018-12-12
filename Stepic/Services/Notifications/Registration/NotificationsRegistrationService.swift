@@ -18,21 +18,14 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     var presenter: NotificationsRegistrationPresentationServiceProtocol?
     private var analytics: NotificationAlertsAnalytics?
 
-    private let splitTestingService: SplitTestingServiceProtocol
-
     init(
         delegate: NotificationsRegistrationServiceDelegate? = nil,
         presenter: NotificationsRegistrationPresentationServiceProtocol? = nil,
-        analytics: NotificationAlertsAnalytics? = nil,
-        splitTestingService: SplitTestingServiceProtocol = SplitTestingService(
-            analyticsService: AnalyticsUserProperties(),
-            storage: UserDefaults.standard
-        )
+        analytics: NotificationAlertsAnalytics? = nil
     ) {
         self.delegate = delegate
         self.presenter = presenter
         self.analytics = analytics
-        self.splitTestingService = splitTestingService
     }
 
     // MARK: - Handling APNs pipeline events -
@@ -85,13 +78,6 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     /// If the `forceToRequestAuthorization` parameter is `true` then the user will be prompted for
     /// notifications permissions directly otherwise firstly will check if has granted permissions.
     private func register(forceToRequestAuthorization: Bool) {
-        let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
-        let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
-            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
-        guard AuthInfo.shared.isAuthorized || shouldParticipate else {
-            return
-        }
-
         self.postCurrentPermissionStatus()
 
         if forceToRequestAuthorization {
@@ -102,14 +88,10 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     private func registerIfAuthorized() {
-        if #available(iOS 10.0, *) {
-            NotificationPermissionStatus.current.done { status in
-                if status.isRegistered {
-                    self.register()
-                }
+        NotificationPermissionStatus.current.done { status in
+            if status.isRegistered {
+                self.register()
             }
-        } else {
-            self.register()
         }
     }
 

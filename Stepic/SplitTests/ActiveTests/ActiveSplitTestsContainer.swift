@@ -13,6 +13,5 @@ class ActiveSplitTestsContainer {
 
     static func setActiveTestsGroups() {
         self.splitTestingService.fetchSplitTest(AchievementPopupSplitTest.self).setSplitTestGroup()
-        self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self).setSplitTestGroup()
     }
 }
