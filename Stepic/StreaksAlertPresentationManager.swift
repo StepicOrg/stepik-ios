@@ -167,9 +167,17 @@ final class StreaksAlertPresentationManager {
 
         alertPresenter.onPositiveCallback = { [weak self] in
             analytics.reportPreferencesAlertInteractionResult(.yes)
-            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsURL)
+                } else {
+                    UIApplication.shared.openURL(settingsURL)
+                }
                 self?.didTransitionToSettings = true
-                UIApplication.shared.openURL(settingsURL)
             }
         }
         alertPresenter.onCancelCallback = {

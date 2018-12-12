@@ -219,8 +219,16 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         self.presenter?.onPositiveCallback = {
             self.analytics?.reportPreferencesAlertInteractionResult(.yes)
 
-            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared.openURL(settingsURL)
+            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsURL)
+                } else {
+                    UIApplication.shared.openURL(settingsURL)
+                }
             }
         }
         self.presenter?.onCancelCallback = {
