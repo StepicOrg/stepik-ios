@@ -55,8 +55,6 @@ final class NotificationsPresenter {
     // Store unread notifications count to pass it to analytics
     private var badgeUnreadCount = 0
 
-    private let splitTestingService: SplitTestingServiceProtocol
-
     init(
         section: NotificationsSection,
         notificationsAPI: NotificationsAPI,
@@ -64,8 +62,7 @@ final class NotificationsPresenter {
         notificationsStatusAPI: NotificationStatusesAPI,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
-        view: NotificationsView,
-        splitTestingService: SplitTestingServiceProtocol
+        view: NotificationsView
     ) {
         self.section = section
         self.notificationsAPI = notificationsAPI
@@ -74,7 +71,6 @@ final class NotificationsPresenter {
         self.notificationsRegistrationService = notificationsRegistrationService
         self.notificationSuggestionManager = notificationSuggestionManager
         self.view = view
-        self.splitTestingService = splitTestingService
 
         self.notificationsRegistrationService.delegate = self
 
@@ -143,16 +139,7 @@ final class NotificationsPresenter {
     }
 
     func didAppear() {
-        if SubscribeNotificationsOnLaunchSplitTest.shouldParticipate {
-            let subscribeSplitTest = self.splitTestingService.fetchSplitTest(
-                SubscribeNotificationsOnLaunchSplitTest.self
-            )
-            if !subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch {
-                self.notificationsRegistrationService.registerForRemoteNotifications()
-            }
-        } else {
-            self.notificationsRegistrationService.registerForRemoteNotifications()
-        }
+        self.notificationsRegistrationService.registerForRemoteNotifications()
     }
 
     func refresh() {

@@ -74,11 +74,7 @@ class BaseCardsStepsViewController: CardsStepsViewController {
                     analytics: .init(source: .courseSubscription)
                 ),
                 course: course,
-                view: self,
-                splitTestingService: SplitTestingService(
-                    analyticsService: AnalyticsUserProperties(),
-                    storage: UserDefaults.standard
-                )
+                view: self
             )
             presenter?.refresh()
         }
