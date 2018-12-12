@@ -218,6 +218,25 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
+        static func preferencesAlertShown(source: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences notification alert shown",
+                parameters: [
+                    "source": source
+                ]
+            )
+        }
+
+        static func preferencesAlertInteracted(source: String, result: InteractionResult) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences notification alert interacted",
+                parameters: [
+                    "source": source,
+                    "result": result.rawValue
+                ]
+            )
+        }
+
         enum InteractionResult: String {
             case yes
             case no

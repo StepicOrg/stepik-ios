@@ -201,6 +201,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             self.analytics?.reportCustomAlertInteractionResult(.no)
         }
 
+        self.analytics?.reportCustomAlertShown()
         self.presentAlert(for: .permission)
     }
 
@@ -216,16 +217,17 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     private func presentSettingsAlert() {
         self.presenter?.onPositiveCallback = {
-            self.analytics?.reportCustomAlertInteractionResult(.yes)
+            self.analytics?.reportPreferencesAlertInteractionResult(.yes)
 
             if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
                 UIApplication.shared.openURL(settingsURL)
             }
         }
         self.presenter?.onCancelCallback = {
-            self.analytics?.reportCustomAlertInteractionResult(.no)
+            self.analytics?.reportPreferencesAlertInteractionResult(.no)
         }
 
+        self.analytics?.reportPreferencesAlertShown()
         self.presentAlert(for: .settings)
     }
 

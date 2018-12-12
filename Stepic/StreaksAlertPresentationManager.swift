@@ -163,13 +163,20 @@ final class StreaksAlertPresentationManager {
             return
         }
 
+        let analytics = NotificationAlertsAnalytics(source: self.source.analyticsSource)
+
         alertPresenter.onPositiveCallback = { [weak self] in
+            analytics.reportPreferencesAlertInteractionResult(.yes)
             if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
                 self?.didTransitionToSettings = true
                 UIApplication.shared.openURL(settingsURL)
             }
         }
+        alertPresenter.onCancelCallback = {
+            analytics.reportPreferencesAlertInteractionResult(.no)
+        }
 
+        analytics.reportPreferencesAlertShown()
         alertPresenter.presentAlert(for: .settings, inController: controller)
     }
 
