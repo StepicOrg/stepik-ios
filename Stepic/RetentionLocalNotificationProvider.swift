@@ -10,11 +10,11 @@ import Foundation
 import UserNotifications
 
 final class RetentionLocalNotificationProvider: LocalNotificationContentProvider {
-    private let recurrence: Recurrence
+    private let repetition: Repetition
 
     private var dateComponents: DateComponents? {
         let offset: Int
-        switch self.recurrence {
+        switch self.repetition {
         case .nextDay:
             offset = 1
         case .thirdDay:
@@ -31,7 +31,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
 
     var title: String {
         let key: String
-        switch self.recurrence {
+        switch self.repetition {
         case .nextDay:
             key = "RetentionNotificationOnNextDayTitle"
         case .thirdDay:
@@ -46,7 +46,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
 
     var body: String {
         let key: String
-        switch self.recurrence {
+        switch self.repetition {
         case .nextDay:
             key = "RetentionNotificationOnNextDayText"
         case .thirdDay:
@@ -60,7 +60,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
     }
 
     var identifier: String {
-        return "RetentionLocalNotification_\(self.recurrence.rawValue)"
+        return "RetentionLocalNotification_\(self.repetition.rawValue)"
     }
 
     var fireDate: Date? {
@@ -77,7 +77,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
             return nil
         }
 
-        switch self.recurrence {
+        switch self.repetition {
         case .nextDay:
             return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         case .thirdDay:
@@ -91,11 +91,11 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         }
     }
 
-    init(recurrence: Recurrence) {
-        self.recurrence = recurrence
+    init(repetition: Repetition) {
+        self.repetition = repetition
     }
 
-    enum Recurrence: String {
+    enum Repetition: String {
         case nextDay
         case thirdDay
     }
@@ -103,7 +103,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
 
 extension NotificationsService {
     private var retentionNotificationProviders: [RetentionLocalNotificationProvider] {
-        return [.init(recurrence: .nextDay), .init(recurrence: .thirdDay)]
+        return [.init(repetition: .nextDay), .init(repetition: .thirdDay)]
     }
 
     func scheduleRetentionNotifications() {
