@@ -22,19 +22,6 @@ final class NotificationPermissionStatusDaemon {
         self.addObservers()
     }
 
-    @objc
-    private func handleWillEnterForeground() {
-        if self.didTransitionToSettings {
-            self.didTransitionToSettings = false
-            self.handleTransitionFromSettings()
-        }
-    }
-
-    @objc
-    private func handleTransitionToSettings() {
-        self.didTransitionToSettings = true
-    }
-
     private func handleTransitionFromSettings() {
         NotificationPermissionStatus.current.done { permissionStatus in
             AnalyticsUserProperties.shared.setPushPermissionStatus(permissionStatus)
@@ -47,17 +34,47 @@ final class NotificationPermissionStatusDaemon {
         }
     }
 
+    // MARK: Actions
+
+    @objc
+    private func onWillEnterForeground() {
+        if self.didTransitionToSettings {
+            self.didTransitionToSettings = false
+            self.handleTransitionFromSettings()
+        }
+    }
+
+    @objc
+    private func onTransitionToSettings() {
+        self.didTransitionToSettings = true
+    }
+
+    @objc
+    private func onPermissionStatusUpdate(_ notification: Foundation.Notification) {
+        if let permissionStatus = notification.object as? NotificationPermissionStatus {
+            self.permissionStatus = permissionStatus
+        }
+    }
+
+    // MARK: Setup
+
     private func addObservers() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.handleWillEnterForeground),
+            selector: #selector(self.onWillEnterForeground),
             name: .UIApplicationWillEnterForeground,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.handleTransitionToSettings),
+            selector: #selector(self.onTransitionToSettings),
             name: .notificationsRegistrationServiceWillOpenSettings,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.onPermissionStatusUpdate(_:)),
+            name: .notificationsRegistrationServiceDidUpdatePermissionStatus,
             object: nil
         )
     }
