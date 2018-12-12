@@ -1,5 +1,5 @@
 //
-// NotificationPermissionStatusDaemon.swift
+// NotificationPermissionStatusSettingsObserver.swift
 // stepik-ios
 //
 // Created by Ivan Magda on 2018-12-12.
@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-final class NotificationPermissionStatusDaemon {
+final class NotificationPermissionStatusSettingsObserver {
     private var didTransitionToSettings = false
     private var permissionStatus: NotificationPermissionStatus = .notDetermined
 
@@ -17,7 +17,7 @@ final class NotificationPermissionStatusDaemon {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func setup() {
+    func observe() {
         self.initPermissionStatus()
         self.addObservers()
     }
@@ -33,8 +33,6 @@ final class NotificationPermissionStatusDaemon {
             self.permissionStatus = permissionStatus
         }
     }
-
-    // MARK: Actions
 
     @objc
     private func onWillEnterForeground() {
@@ -55,8 +53,6 @@ final class NotificationPermissionStatusDaemon {
             self.permissionStatus = permissionStatus
         }
     }
-
-    // MARK: Setup
 
     private func addObservers() {
         NotificationCenter.default.addObserver(
