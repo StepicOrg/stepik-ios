@@ -224,6 +224,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             }
 
             if UIApplication.shared.canOpenURL(settingsURL) {
+                NotificationCenter.default.post(name: .notificationsRegistrationServiceWillOpenSettings, object: nil)
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(settingsURL)
                 } else {
@@ -403,4 +404,11 @@ extension NotificationsRegistrationService {
             )
         }
     }
+}
+
+// MARK: - NotificationsRegistrationService (NotificationCenter) -
+
+extension Foundation.Notification.Name {
+    static let notificationsRegistrationServiceWillOpenSettings = Foundation.Notification
+        .Name("notificationsRegistrationServiceWillOpenSettings")
 }

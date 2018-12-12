@@ -171,6 +171,8 @@ struct AmplitudeAnalyticsEvents {
     struct Notifications {
         static var screenOpened = AnalyticsEvent(name: "Notifications screen opened")
 
+        static var preferencesPushPermissionGranted = AnalyticsEvent(name: "Preferences push permission granted")
+
         static func received(notificationType: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Foreground notification received",
@@ -249,6 +251,7 @@ struct AmplitudeAnalyticsEvents {
 
     struct Catalog {
         static var opened = AnalyticsEvent(name: "Catalog screen opened")
+
         struct Category {
             static func opened(categoryID: Int, categoryNameEn: String) -> AnalyticsEvent {
                 return AnalyticsEvent(

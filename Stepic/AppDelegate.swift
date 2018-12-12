@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         storage: UserDefaults.standard
     )
     private var didShowOnboarding = true
+    private let notificationPermissionStatusDaemon = NotificationPermissionStatusDaemon()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -117,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
+        self.notificationPermissionStatusDaemon.setup()
 
         self.checkNotificationsCount()
 
