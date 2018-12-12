@@ -12,17 +12,15 @@ import UserNotifications
 final class RetentionLocalNotificationProvider: LocalNotificationContentProvider {
     private let repetition: Repetition
 
+    /// Represents retention date `DateComponents`.
+    /// - Based on `repetition` may contain:
+    ///     - next day date
+    ///     - third day date
+    /// See `Repetition` for existing recurrences.
     private var dateComponents: DateComponents? {
-        let offset: Int
-        switch self.repetition {
-        case .nextDay:
-            offset = 1
-        case .thirdDay:
-            offset = 3
-        }
-
         let components: Set<Calendar.Component> = [.hour, .day, .month, .year]
-        if let date = Calendar.current.date(byAdding: .day, value: offset, to: Date()) {
+        let dayOffset = self.repetition.notificationDayOffset
+        if let date = Calendar.current.date(byAdding: .day, value: dayOffset, to: Date()) {
             return Calendar.current.dateComponents(components, from: date)
         } else {
             return nil
@@ -93,6 +91,15 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
                 return self.localized(for: "RetentionNotificationOnNextDayText")
             case .thirdDay:
                 return self.localized(for: "RetentionNotificationOnThirdDayText")
+            }
+        }
+
+        var notificationDayOffset: Int {
+            switch self {
+            case .nextDay:
+                return 1
+            case .thirdDay:
+                return 3
             }
         }
 
