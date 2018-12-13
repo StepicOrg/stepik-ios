@@ -8,9 +8,13 @@
 
 import Foundation
 
-class ActiveSplitTestsContainer {
-    private static let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
+final class ActiveSplitTestsContainer {
+    private static let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
 
     static func setActiveTestsGroups() {
+        self.splitTestingService.fetchSplitTest(RetentionLocalNotificationsSplitTest.self).setSplitTestGroup()
     }
 }

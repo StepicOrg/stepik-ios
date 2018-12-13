@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -124,6 +128,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
+        NotificationsService().removeRetentionNotifications()
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        let retentionSplitTest = self.splitTestingService.fetchSplitTest(
+            RetentionLocalNotificationsSplitTest.self
+        )
+        let shouldParticipate = RetentionLocalNotificationsSplitTest.shouldParticipate
+        let shouldReceiveNotifications = retentionSplitTest.currentGroup.shouldReceiveNotifications
+
+        if shouldParticipate && shouldReceiveNotifications {
+            NotificationsService().scheduleRetentionNotifications()
+        }
     }
 
     // MARK: - Downloading Data in the Background

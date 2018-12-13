@@ -426,6 +426,11 @@ NotificationTabNotificationRequestAlertMessage = "We are trying to make learning
 CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
 CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
 
+RetentionNotificationOnNextDayTitle = "Don't slow down";
+RetentionNotificationOnNextDayText = "You've done a great job learning yesterday, come back today and become smarter! 🚀";
+RetentionNotificationOnThirdDayTitle = "Lost your thirst to knowledge? 🤔";
+RetentionNotificationOnThirdDayText = "You haven't been here for a suspiciously long time. Come back and become smarter! 💡";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";
 
