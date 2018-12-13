@@ -27,7 +27,7 @@ final class NotificationPermissionStatusSettingsObserver {
             AnalyticsUserProperties.shared.setPushPermissionStatus(permissionStatus)
 
             if !self.permissionStatus.isRegistered && permissionStatus.isRegistered {
-                AmplitudeAnalyticsEvents.Notifications.preferencesPushPermissionGranted.send()
+                AmplitudeAnalyticsEvents.Notifications.preferencesPushPermissionChanged(result: .yes).send()
             }
 
             self.permissionStatus = permissionStatus
