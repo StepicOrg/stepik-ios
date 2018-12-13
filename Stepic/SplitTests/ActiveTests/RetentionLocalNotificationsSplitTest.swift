@@ -1,23 +1,23 @@
 //
-// SubscribeNotificationsOnLaunchSplitTest.swift
+// RetentionLocalNotificationsSplitTest.swift
 // stepik-ios
 //
-// Created by Ivan Magda on 2018-11-26.
+// Created by Ivan Magda on 2018-12-11.
 // Copyright 2018 Stepik. All rights reserved.
 //
 
 import Foundation
 
-final class SubscribeNotificationsOnLaunchSplitTest: SplitTestProtocol {
+final class RetentionLocalNotificationsSplitTest: SplitTestProtocol {
     typealias GroupType = Group
 
-    static var identifier = "subscribe_notifications_on_launch"
-    static var minParticipatingStartVersion = "1.73"
+    static let identifier = "retention_local_notification"
+    static let minParticipatingStartVersion = "1.74"
 
-    var currentGroup: SubscribeNotificationsOnLaunchSplitTest.Group
+    var currentGroup: Group
     var analytics: ABAnalyticsServiceProtocol
 
-    init(currentGroup: GroupType, analytics: ABAnalyticsServiceProtocol) {
+    init(currentGroup: Group, analytics: ABAnalyticsServiceProtocol) {
         self.currentGroup = currentGroup
         self.analytics = analytics
     }
@@ -28,7 +28,7 @@ final class SubscribeNotificationsOnLaunchSplitTest: SplitTestProtocol {
 
         static var groups: [Group] = [.control, .test]
 
-        var shouldShowOnFirstLaunch: Bool {
+        var shouldReceiveNotifications: Bool {
             switch self {
             case .control:
                 return false
