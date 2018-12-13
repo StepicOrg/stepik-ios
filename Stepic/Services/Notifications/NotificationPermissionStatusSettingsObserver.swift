@@ -10,47 +10,70 @@ import Foundation
 import PromiseKit
 
 final class NotificationPermissionStatusSettingsObserver {
-    private var didTransitionToSettings = false
-    private var permissionStatus: NotificationPermissionStatus = .notDetermined
+    private var didTransitionToBackground = false
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     func observe() {
-        self.initPermissionStatus()
-        self.addObservers()
-    }
-
-    private func handleTransitionFromSettings() {
         NotificationPermissionStatus.current.done { permissionStatus in
-            AnalyticsUserProperties.shared.setPushPermissionStatus(permissionStatus)
+            let isFirstPermissionAccess = UserDefaults.standard.string(
+                forKey: NotificationPermissionStatusSettingsObserver.notificationPermissionStatusKey
+            ) == nil
+            let isPermissionStatusChanged = self.notificationPermissionStatus != permissionStatus
 
-            if !self.permissionStatus.isRegistered && permissionStatus.isRegistered {
-                AmplitudeAnalyticsEvents.Notifications.preferencesPushPermissionChanged(result: .yes).send()
+            if !isFirstPermissionAccess && isPermissionStatusChanged {
+                self.reportPreferencesPushPermissionStatusChange(permissionStatus)
             }
 
-            self.permissionStatus = permissionStatus
+            self.notificationPermissionStatus = permissionStatus
+            self.addObservers()
         }
     }
 
     @objc
     private func onWillEnterForeground() {
-        if self.didTransitionToSettings {
-            self.didTransitionToSettings = false
-            self.handleTransitionFromSettings()
+        NotificationPermissionStatus.current.done { permissionStatus in
+            self.updateUserPushPermissionStatusIfNeeded(permissionStatus)
+
+            if self.notificationPermissionStatus != permissionStatus {
+                self.reportPreferencesPushPermissionStatusChange(permissionStatus)
+            }
+
+            self.didTransitionToBackground = false
+            self.notificationPermissionStatus = permissionStatus
         }
     }
 
     @objc
-    private func onTransitionToSettings() {
-        self.didTransitionToSettings = true
+    private func onDidEnterBackground() {
+        self.didTransitionToBackground = true
+        NotificationPermissionStatus.current.done { permissionStatus in
+            self.notificationPermissionStatus = permissionStatus
+        }
     }
 
     @objc
     private func onPermissionStatusUpdate(_ notification: Foundation.Notification) {
         if let permissionStatus = notification.object as? NotificationPermissionStatus {
-            self.permissionStatus = permissionStatus
+            // Wait for `UIApplicationWillEnterForeground` event and after that allow status updates.
+            if !self.didTransitionToBackground {
+                self.updateUserPushPermissionStatusIfNeeded(permissionStatus)
+                self.notificationPermissionStatus = permissionStatus
+            }
+        }
+    }
+
+    private func reportPreferencesPushPermissionStatusChange(_ permissionStatus: NotificationPermissionStatus) {
+        AmplitudeAnalyticsEvents.Notifications.preferencesPushPermissionChanged(
+            result: permissionStatus.isRegistered ? .yes : .no
+        ).send()
+    }
+
+    private func updateUserPushPermissionStatusIfNeeded(_ permissionStatus: NotificationPermissionStatus) {
+        if self.notificationPermissionStatus != permissionStatus {
+            AnalyticsUserProperties.shared.setPushPermissionStatus(permissionStatus)
         }
     }
 
@@ -63,8 +86,8 @@ final class NotificationPermissionStatusSettingsObserver {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.onTransitionToSettings),
-            name: .notificationsRegistrationServiceWillOpenSettings,
+            selector: #selector(self.onDidEnterBackground),
+            name: .UIApplicationDidEnterBackground,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -74,10 +97,28 @@ final class NotificationPermissionStatusSettingsObserver {
             object: nil
         )
     }
+}
 
-    private func initPermissionStatus() {
-        NotificationPermissionStatus.current.done { permissionStatus in
-            self.permissionStatus = permissionStatus
+// MARK: - NotificationPermissionStatusSettingsObserver (UserDefaults) -
+
+extension NotificationPermissionStatusSettingsObserver {
+    private static let notificationPermissionStatusKey = "notificationPermissionStatusKey"
+
+    private var notificationPermissionStatus: NotificationPermissionStatus {
+        get {
+            if let stringValue = UserDefaults.standard.string(
+                forKey: NotificationPermissionStatusSettingsObserver.notificationPermissionStatusKey
+            ) {
+                return NotificationPermissionStatus(rawValue: stringValue) ?? .notDetermined
+            } else {
+                return .notDetermined
+            }
+        }
+        set {
+            UserDefaults.standard.set(
+                newValue.rawValue,
+                forKey: NotificationPermissionStatusSettingsObserver.notificationPermissionStatusKey
+            )
         }
     }
 }
