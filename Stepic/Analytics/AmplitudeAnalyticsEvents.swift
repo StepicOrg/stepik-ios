@@ -218,6 +218,34 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
+        static func preferencesAlertShown(source: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences notification alert shown",
+                parameters: [
+                    "source": source
+                ]
+            )
+        }
+
+        static func preferencesAlertInteracted(source: String, result: InteractionResult) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences notification alert interacted",
+                parameters: [
+                    "source": source,
+                    "result": result.rawValue
+                ]
+            )
+        }
+
+        static func preferencesPushPermissionChanged(result: InteractionResult) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences push permission changed",
+                parameters: [
+                    "result": result.rawValue
+                ]
+            )
+        }
+
         enum InteractionResult: String {
             case yes
             case no
@@ -230,6 +258,7 @@ struct AmplitudeAnalyticsEvents {
 
     struct Catalog {
         static var opened = AnalyticsEvent(name: "Catalog screen opened")
+
         struct Category {
             static func opened(categoryID: Int, categoryNameEn: String) -> AnalyticsEvent {
                 return AnalyticsEvent(

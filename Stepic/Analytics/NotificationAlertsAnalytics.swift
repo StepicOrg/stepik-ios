@@ -41,6 +41,21 @@ struct NotificationAlertsAnalytics {
         ).send()
     }
 
+    func reportPreferencesAlertShown() {
+        AmplitudeAnalyticsEvents.Notifications.preferencesAlertShown(
+            source: self.source.description
+        ).send()
+    }
+
+    func reportPreferencesAlertInteractionResult(
+        _ result: AmplitudeAnalyticsEvents.Notifications.InteractionResult
+    ) {
+        AmplitudeAnalyticsEvents.Notifications.preferencesAlertInteracted(
+            source: self.source.description,
+            result: result
+        ).send()
+    }
+
     enum Source {
         case streakControl
         case notificationsTab

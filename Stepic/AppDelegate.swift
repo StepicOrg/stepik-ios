@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         analyticsService: AnalyticsUserProperties(),
         storage: UserDefaults.standard
     )
+    private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -104,6 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
+        self.notificationPermissionStatusSettingsObserver.observe()
 
         self.checkNotificationsCount()
 

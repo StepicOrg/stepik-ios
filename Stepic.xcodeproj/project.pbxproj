@@ -4014,6 +4014,7 @@
 		62E9829488F863D10CF5544C /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
 		62E982CD54C2C86F14DF84EB /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
 		62E982F7B4EDC6C94D1283FE /* ProgressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982F6B023E2C827407B1B /* ProgressesNetworkService.swift */; };
+		62E982F9CF826D3E99B7EE08 /* NotificationPermissionStatusSettingsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F44D1201CE83EAE3D49 /* NotificationPermissionStatusSettingsObserver.swift */; };
 		62E983397736699787D8DD35 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E9834EF86EA5676FD4686E /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E983594B255BB6BE92AD8A /* UniqueIdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E01E2DDDEEEB0CDFE47 /* UniqueIdentifierType.swift */; };
@@ -6104,6 +6105,7 @@
 		62E98F2E4C0915BDB749A255 /* CourseListsCollectionNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionNetworkService.swift; sourceTree = "<group>"; };
 		62E98F30729AE1CF9C9E0109 /* FormatterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterHelper.swift; sourceTree = "<group>"; };
 		62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsViewController.swift; sourceTree = "<group>"; };
+		62E98F44D1201CE83EAE3D49 /* NotificationPermissionStatusSettingsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPermissionStatusSettingsObserver.swift; sourceTree = "<group>"; };
 		62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsAPI.swift; sourceTree = "<group>"; };
 		62E98F62D7F739C8E411BB98 /* AchievementDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementDescription.swift; sourceTree = "<group>"; };
 		62E98F7C1643A576801B8D47 /* URL+AppendQueryParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+AppendQueryParameters.swift"; sourceTree = "<group>"; };
@@ -9905,6 +9907,7 @@
 				2C10AFE8217E04780019966D /* Registration */,
 				2C89089F216F465200083341 /* NotificationsService.swift */,
 				2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */,
+				62E98F44D1201CE83EAE3D49 /* NotificationPermissionStatusSettingsObserver.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -15042,6 +15045,7 @@
 				62E985DD90444821A835C02F /* CourseListsCollectionSkeletonView.swift in Sources */,
 				62E98A53567525055BCCA089 /* AppDelegate.swift in Sources */,
 				62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */,
+				62E982F9CF826D3E99B7EE08 /* NotificationPermissionStatusSettingsObserver.swift in Sources */,
 				62E987560B7A0EFE8D4753CB /* RetentionLocalNotificationProvider.swift in Sources */,
 				62E986CCAAEADFC7B783A7DD /* RetentionLocalNotificationsSplitTest.swift in Sources */,
 			);

@@ -11,7 +11,7 @@ import UserNotifications
 import PromiseKit
 
 /// Defines whether the app is allowed to schedule notifications.
-enum NotificationPermissionStatus {
+enum NotificationPermissionStatus: String {
     /// The user hasn't yet made a choice about whether is allowed the app to schedule notifications.
     case notDetermined
     /// The user not allowed the app to schedule or receive notifications.

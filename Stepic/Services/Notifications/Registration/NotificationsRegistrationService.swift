@@ -58,6 +58,8 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         } else {
             self.postCurrentPermissionStatus()
         }
+
+        self.updatePushPermissionStatusUserProperty()
     }
 
     // MARK: - Register -
@@ -140,6 +142,8 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                     } else if let error = error {
                         print("NotificationsRegistrationService: did fail request authorization with error: \(error)")
                     }
+
+                    self.updatePushPermissionStatusUserProperty()
                 }
             )
         } else {
@@ -155,6 +159,12 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     private func registerWithAPNs() {
         DispatchQueue.main.async {
             UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+
+    private func updatePushPermissionStatusUserProperty() {
+        NotificationPermissionStatus.current.done { permissionStatus in
+            AnalyticsUserProperties.shared.setPushPermissionStatus(permissionStatus)
         }
     }
 
@@ -183,6 +193,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             self.analytics?.reportCustomAlertInteractionResult(.no)
         }
 
+        self.analytics?.reportCustomAlertShown()
         self.presentAlert(for: .permission)
     }
 
@@ -198,16 +209,26 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     private func presentSettingsAlert() {
         self.presenter?.onPositiveCallback = {
-            self.analytics?.reportCustomAlertInteractionResult(.yes)
+            self.analytics?.reportPreferencesAlertInteractionResult(.yes)
 
-            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared.openURL(settingsURL)
+            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                NotificationCenter.default.post(name: .notificationsRegistrationServiceWillOpenSettings, object: nil)
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsURL)
+                } else {
+                    UIApplication.shared.openURL(settingsURL)
+                }
             }
         }
         self.presenter?.onCancelCallback = {
-            self.analytics?.reportCustomAlertInteractionResult(.no)
+            self.analytics?.reportPreferencesAlertInteractionResult(.no)
         }
 
+        self.analytics?.reportPreferencesAlertShown()
         self.presentAlert(for: .settings)
     }
 
@@ -375,4 +396,11 @@ extension NotificationsRegistrationService {
             )
         }
     }
+}
+
+// MARK: - NotificationsRegistrationService (NotificationCenter) -
+
+extension Foundation.Notification.Name {
+    static let notificationsRegistrationServiceWillOpenSettings = Foundation.Notification
+        .Name("notificationsRegistrationServiceWillOpenSettings")
 }
