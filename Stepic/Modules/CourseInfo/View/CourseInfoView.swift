@@ -21,6 +21,7 @@ final class CourseInfoView: UIView {
     let appearance: Appearance
 
     private var lastHeaderHeight: CGFloat = 0
+    private var currentPageIndex = 0
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView(orientation: .vertical)
@@ -82,6 +83,17 @@ final class CourseInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.updatePageHeight(byPageWithIndex: strongSelf.currentPageIndex)
+        }
+    }
+
     func configure(viewModel: CourseInfoHeaderViewModel) {
         // Update header height
         self.lastHeaderHeight = self.headerView.calculateHeight(
@@ -119,12 +131,8 @@ final class CourseInfoView: UIView {
             make.width.equalTo(self.snp.width)
         }
 
-        if self.contentView.arrangedSubviews.count == 1 {
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-
-            self.updatePageHeight(byPageWithIndex: 0)
-        }
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -195,6 +203,9 @@ extension CourseInfoView: TabSegmentedControlViewDelegate {
         }
 
         self.contentView.scrollTo(arrangedViewIndex: didSelectTabWithIndex)
+
+        self.currentPageIndex = didSelectTabWithIndex
+        self.updatePageHeight(byPageWithIndex: didSelectTabWithIndex)
     }
 }
 
@@ -216,6 +227,8 @@ extension CourseInfoView: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+
+            self.currentPageIndex = pageIndex
             self.updatePageHeight(byPageWithIndex: pageIndex)
             self.updateSegmentedControl(newPageIndex: pageIndex)
         }
@@ -223,6 +236,8 @@ extension CourseInfoView: UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+
+        self.currentPageIndex = pageIndex
         self.updatePageHeight(byPageWithIndex: pageIndex)
         self.updateSegmentedControl(newPageIndex: pageIndex)
     }

@@ -23,7 +23,7 @@ final class CourseInfoTabSyllabusView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
-        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = true
         tableView.separatorStyle = .none
 
         tableView.estimatedSectionHeaderHeight = 90.0
@@ -63,6 +63,12 @@ final class CourseInfoTabSyllabusView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
+        self.frame = CGRect(
+            x: self.frame.origin.x,
+            y: self.frame.origin.y,
+            width: self.frame.width,
+            height: 200
+        )
     }
 }
 
@@ -98,6 +104,7 @@ extension CourseInfoTabSyllabusView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CourseInfoTabSyllabusTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        print(indexPath)
         cell.updateConstraintsIfNeeded()
         return cell
     }
@@ -108,6 +115,10 @@ extension CourseInfoTabSyllabusView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
+    }
+
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        print("display \(section)")
     }
 }
 

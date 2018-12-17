@@ -106,16 +106,24 @@ final class CourseInfoViewController: UIViewController {
     private func initSubmodules() {
         // Info submodule
         let infoAssembly = CourseInfoTabInfoAssembly(output: nil)
-        let viewController = infoAssembly.makeModule()
-        self.addChildViewController(viewController)
-        self.courseInfoView?.addPageView(viewController.view)
+        let infoViewController = infoAssembly.makeModule()
+        self.addChildViewController(infoViewController)
+        self.courseInfoView?.addPageView(infoViewController.view)
 
         // Syllabus submodule
+        let syllabusAssembly = CourseInfoTabSyllabusAssembly()
+        let syllabusViewController = syllabusAssembly.makeModule()
+        self.addChildViewController(syllabusViewController)
+        self.courseInfoView?.addPageView(syllabusViewController.view)
 
         // Register on interactor level
+        let submodules: [CourseInfoSubmoduleProtocol?] = [
+            infoAssembly.moduleInput,
+            syllabusAssembly.moduleInput
+        ]
         self.interactor.registerSubmodules(
             request: .init(
-                submodules: [infoAssembly.moduleInput].compactMap { $0 }
+                submodules: submodules.compactMap { $0 }
             )
         )
     }

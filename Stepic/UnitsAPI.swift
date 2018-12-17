@@ -44,6 +44,15 @@ class UnitsAPI: APIEndpoint {
         }
     }
 
+    @available(*, deprecated, message: "Legacy: we want to pass existing")
+    @discardableResult func retrieve(ids: [Int]) -> Promise<[Unit]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return getObjectsByIds(ids: ids, updating: Unit.fetch(ids))
+    }
+
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Unit], refreshMode: RefreshMode, success: @escaping (([Unit]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
     }

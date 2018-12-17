@@ -124,7 +124,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     private func pushCurrentCourseToSubmodules(submodules: [CourseInfoSubmoduleProtocol]) {
         if let course = self.currentCourse {
-            submodules.forEach { $0.update(with: course) }
+            submodules.forEach { $0.update(with: course, isOnline: self.isOnline) }
         }
     }
 
