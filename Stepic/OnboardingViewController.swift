@@ -43,7 +43,7 @@ class OnboardingViewController: UIViewController {
 
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
         presenter: NotificationsRequestOnlySettingsAlertPresenter(),
-        analytics: .init(source: .abAppLaunch)
+        analytics: .init(source: .onboarding)
     )
 
     @IBAction func onCloseButtonClick(_ sender: Any) {

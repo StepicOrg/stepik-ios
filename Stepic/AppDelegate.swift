@@ -25,16 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
-    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
-        presenter: NotificationsRequestOnlySettingsAlertPresenter(),
-        analytics: .init(source: .abAppLaunch)
-    )
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
     private let splitTestingService = SplitTestingService(
         analyticsService: AnalyticsUserProperties(),
         storage: UserDefaults.standard
     )
-    private var didShowOnboarding = true
+    private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -93,7 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
-            self.didShowOnboarding = false
             DefaultsContainer.launch.initStartVersion()
             ActiveSplitTestsContainer.setActiveTestsGroups()
             AnalyticsUserProperties.shared.setPushPermissionStatus(.notDetermined)
@@ -105,18 +101,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.checkForUpdates()
         }
 
-        let subscribeSplitTest = self.splitTestingService.fetchSplitTest(SubscribeNotificationsOnLaunchSplitTest.self)
-        let shouldParticipate = SubscribeNotificationsOnLaunchSplitTest.shouldParticipate
-            && subscribeSplitTest.currentGroup.shouldShowOnFirstLaunch
-        if shouldParticipate && self.didShowOnboarding {
-            self.notificationsRegistrationService.registerForRemoteNotifications()
-        } else {
-            self.notificationsRegistrationService.renewDeviceToken()
-        }
-
+        self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
         NotificationsService().handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
+        self.notificationPermissionStatusSettingsObserver.observe()
 
         self.checkNotificationsCount()
 
@@ -141,6 +130,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
+        NotificationsService().removeRetentionNotifications()
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        let retentionSplitTest = self.splitTestingService.fetchSplitTest(
+            RetentionLocalNotificationsSplitTest.self
+        )
+        let shouldParticipate = RetentionLocalNotificationsSplitTest.shouldParticipate
+        let shouldReceiveNotifications = retentionSplitTest.currentGroup.shouldReceiveNotifications
+
+        if shouldParticipate && shouldReceiveNotifications {
+            NotificationsService().scheduleRetentionNotifications()
+        }
     }
 
     // MARK: - Downloading Data in the Background

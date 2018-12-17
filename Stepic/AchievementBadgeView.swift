@@ -16,10 +16,10 @@ struct AchievementViewData {
 
     let badge: UIImage
 
-    let completedLevel: Int?
-    let maxLevel: Int?
-    let score: Int?
-    let maxScore: Int?
+    let completedLevel: Int
+    let maxLevel: Int
+    let score: Int
+    let maxScore: Int
 
     var isLocked: Bool {
         return completedLevel == 0
@@ -188,26 +188,19 @@ class AchievementBadgeView: UIView {
     }
 
     private func updateProgress() {
-        guard let data = self.data,
-              let score = data.score,
-              let maxScore = data.maxScore,
-              let completedLevel = data.completedLevel,
-              let maxLevel = data.maxLevel else {
-            return
+        if let data = self.data {
+            if data.isLocked {
+                self.circleView.alpha = 0.3
+                self.circleViewGradientLayer?.isHidden = true
+            } else {
+                self.circleView.alpha = 1.0
+                self.circleViewGradientLayer?.isHidden = false
+            }
+
+            self.initStageProgress(value: Float(data.score) / Float(data.maxScore))
+            self.badgeImageView.image = data.badge
+            self.initLevelProgress(completedLevel: data.completedLevel, maxLevel: data.maxLevel)
         }
-
-        if data.isLocked {
-            circleView.alpha = 0.3
-            circleViewGradientLayer?.isHidden = true
-        } else {
-            circleView.alpha = 1.0
-            circleViewGradientLayer?.isHidden = false
-        }
-
-        self.initStageProgress(value: Float(score) / Float(maxScore))
-        self.badgeImageView.image = data.badge
-        self.initLevelProgress(completedLevel: completedLevel, maxLevel: maxLevel)
-
     }
 
     override func layoutSubviews() {
