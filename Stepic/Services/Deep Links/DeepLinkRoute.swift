@@ -78,10 +78,10 @@ enum DeepLinkRoute {
 
     enum Pattern: String {
         case catalog = "https:\\/\\/stepik.org\\/catalog\\/?"
-        case course = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?"
+        case course = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?(?:((?=[?])[a-zа-я0-9=?&_-]*)|)"
         case profile = "https:\\/\\/stepik.org\\/users\\/(\\d+)\\/?"
         case notifications = "https:\\/\\/stepik.org\\/notifications\\/?"
-        case syllabus = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+)(\\d+)\\/syllabus\\/?[a-zа-я0-9=?&]*"
+        case syllabus = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+)(\\d+)\\/syllabus\\/?[a-zа-я0-9=?&_-]*"
         case lesson = "https:\\/\\/stepik.org\\/(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/step\\/(\\d+)(?:\\?unit=(\\d+))?\\/?"
         case discussions = "https:\\/\\/stepik.org\\/(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/step\\/(\\d+)(?:\\?discussion=(\\d+))(?:\\&unit=(\\d+))?\\/?"
 
