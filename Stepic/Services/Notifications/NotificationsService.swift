@@ -27,6 +27,15 @@ final class NotificationsService {
     ) {
         self.localNotificationsService = localNotificationsService
         self.deepLinkRoutingService = deepLinkRoutingService
+        self.addObservers()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    private func addObservers() {
+        self.addOnWillResignActiveObserver()
     }
 
     func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
@@ -36,21 +45,24 @@ final class NotificationsService {
 
         if let localNotification = launchOptions?[.localNotification] as? UILocalNotification {
             self.handleLocalNotification(with: localNotification.userInfo)
-            AmplitudeAnalyticsEvents.Launch.sessionStart(
-                notificationType: self.extractNotificationType(from: localNotification.userInfo)
-            ).send()
+            self.reportSessionStart(userInfo: localNotification.userInfo)
         } else if let userInfo = launchOptions?[.remoteNotification] as? NotificationUserInfo {
             self.handleRemoteNotification(with: userInfo)
-            AmplitudeAnalyticsEvents.Launch.sessionStart(
-                notificationType: self.extractNotificationType(from: userInfo)
-            ).send()
+            self.reportSessionStart(userInfo: userInfo)
         } else {
-            AmplitudeAnalyticsEvents.Launch.sessionStart().send()
+            self.reportSessionStart(userInfo: nil)
         }
     }
 
     private func extractNotificationType(from userInfo: NotificationUserInfo?) -> String? {
         return userInfo?[PayloadKey.type.rawValue] as? String
+    }
+
+    private func reportSessionStart(userInfo: NotificationUserInfo?) {
+        AmplitudeAnalyticsEvents.Launch.sessionStart(
+            notificationType: self.extractNotificationType(from: userInfo),
+            sinceLastSession: self.timeIntervalSinceLastActive
+        ).send()
     }
 
     enum NotificationType: String {
@@ -262,5 +274,45 @@ extension NotificationsService {
         case id
         case new
         case badge
+    }
+}
+
+// MARK: - NotificationsService (LastActiveSession) -
+
+extension NotificationsService {
+    private static let lastActiveTimeIntervalKey = "lastActiveTimeIntervalKey"
+
+    private var lastActiveTimeInterval: TimeInterval {
+        get {
+            return UserDefaults.standard.value(
+                forKey: NotificationsService.lastActiveTimeIntervalKey
+            ) as? TimeInterval ?? Date().timeIntervalSince1970
+        }
+        set {
+            UserDefaults.standard.set(
+                newValue,
+                forKey: NotificationsService.lastActiveTimeIntervalKey
+            )
+        }
+    }
+
+    private var timeIntervalSinceLastActive: TimeInterval {
+        let now = Date()
+        let lastActive = Date(timeIntervalSince1970: self.lastActiveTimeInterval)
+        return now.timeIntervalSince(lastActive).rounded()
+    }
+
+    private func addOnWillResignActiveObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.onWillResignActive),
+            name: .UIApplicationWillResignActive,
+            object: nil
+        )
+    }
+
+    @objc
+    private func onWillResignActive() {
+        self.lastActiveTimeInterval = Date().timeIntervalSince1970
     }
 }
