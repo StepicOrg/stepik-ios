@@ -20,7 +20,7 @@ struct AmplitudeAnalyticsEvents {
                 name: "Session start",
                 parameters: [
                     "notification_type": notificationType as Any,
-                    "seconds_since_last_session": sinceLastSession as Any
+                    "seconds_since_last_session": sinceLastSession
                 ]
             )
         }
