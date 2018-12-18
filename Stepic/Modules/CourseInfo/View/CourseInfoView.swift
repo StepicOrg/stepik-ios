@@ -9,6 +9,12 @@
 import UIKit
 import SnapKit
 
+protocol CourseInfoViewDelegate: class {
+    func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat)
+    func courseInfoView(_ courseInfoView: CourseInfoView, requestScrollToPage index: Int)
+    func numberOfPages(in courseInfoView: CourseInfoView) -> Int
+}
+
 extension CourseInfoView {
     struct Appearance {
         // Status bar + navbar + other offsets
@@ -22,14 +28,6 @@ final class CourseInfoView: UIView {
 
     private var lastHeaderHeight: CGFloat = 0
     private var currentPageIndex = 0
-
-    private lazy var scrollableStackView: ScrollableStackView = {
-        let view = ScrollableStackView(orientation: .vertical)
-        if #available(iOS 11.0, *) {
-            view.contentInsetAdjustmentBehavior = .never
-        }
-        return view
-    }()
 
     private lazy var headerView: CourseInfoHeaderView = {
         let view = CourseInfoHeaderView()
@@ -48,31 +46,28 @@ final class CourseInfoView: UIView {
         return control
     }()
 
-    private lazy var contentView: ScrollableStackView = {
-        let stackView = ScrollableStackView(orientation: .horizontal)
-        stackView.isPagingEnabled = true
-        stackView.showsHorizontalScrollIndicator = false
-        stackView.scrollDelegate = self
-        return stackView
-    }()
-
-    var headerHeight: CGFloat {
-        return self.lastHeaderHeight + self.appearance.headerTopOffset
-    }
+    private let pageControllerView: UIView
 
     // Dynamic scrolling constraints
     private var topConstraint: Constraint?
     private var headerHeightConstraint: Constraint?
 
+    /// Real height for header
+    var headerHeight: CGFloat {
+        return self.lastHeaderHeight + self.appearance.headerTopOffset
+    }
+
+    weak var delegate: CourseInfoViewDelegate?
+
     init(
         frame: CGRect = .zero,
+        pageControllerView: UIView,
         scrollDelegate: UIScrollViewDelegate? = nil,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
+        self.pageControllerView = pageControllerView
         super.init(frame: frame)
-
-        self.scrollableStackView.scrollDelegate = scrollDelegate
 
         self.setupView()
         self.addSubviews()
@@ -83,31 +78,16 @@ final class CourseInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.updatePageHeight(byPageWithIndex: strongSelf.currentPageIndex)
-        }
-    }
-
     func configure(viewModel: CourseInfoHeaderViewModel) {
         // Update header height
         self.lastHeaderHeight = self.headerView.calculateHeight(
             hasVerifiedMark: viewModel.isVerified
         )
 
-        let headerInset = UIEdgeInsets(
-            top: self.headerHeight + self.appearance.segmentedControlHeight,
-            left: 0,
-            bottom: 0,
-            right: 0
+        self.delegate?.courseInfoView(
+            self,
+            reportNewHeaderHeight: self.headerHeight + self.appearance.segmentedControlHeight
         )
-        self.scrollableStackView.scrollIndicatorInsets = headerInset
-        self.scrollableStackView.contentInsets = headerInset
 
         // Update data in header
         self.headerView.configure(viewModel: viewModel)
@@ -125,14 +105,9 @@ final class CourseInfoView: UIView {
         self.topConstraint?.update(offset: min(0, -offset))
     }
 
-    func addPageView(_ view: UIView) {
-        self.contentView.addArrangedView(view)
-        view.snp.makeConstraints { make in
-            make.width.equalTo(self.snp.width)
-        }
-
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
+    func updateCurrentPageIndex(_ index: Int) {
+        self.currentPageIndex = index
+        self.segmentedControl.selectTab(index: index)
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -164,14 +139,12 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.headerView)
         self.addSubview(self.segmentedControl)
-        self.insertSubview(self.scrollableStackView, aboveSubview: self.headerView)
-
-        self.scrollableStackView.addArrangedView(self.contentView)
+        self.insertSubview(self.pageControllerView, aboveSubview: self.headerView)
     }
 
     func makeConstraints() {
-        self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollableStackView.snp.makeConstraints { make in
+        self.pageControllerView.translatesAutoresizingMaskIntoConstraints = false
+        self.pageControllerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
         }
@@ -197,48 +170,13 @@ extension CourseInfoView: TabSegmentedControlViewDelegate {
         _ tabSegmentedControlView: TabSegmentedControlView,
         didSelectTabWithIndex: Int
     ) {
+        let tabsCount = self.delegate?.numberOfPages(in: self) ?? 0
         guard didSelectTabWithIndex >= 0,
-              didSelectTabWithIndex < self.contentView.arrangedSubviews.count else {
+              didSelectTabWithIndex < tabsCount else {
             return
         }
 
-        self.contentView.scrollTo(arrangedViewIndex: didSelectTabWithIndex)
-
+        self.delegate?.courseInfoView(self, requestScrollToPage: didSelectTabWithIndex)
         self.currentPageIndex = didSelectTabWithIndex
-        self.updatePageHeight(byPageWithIndex: didSelectTabWithIndex)
-    }
-}
-
-// Delegate for horizontal content-stackview, not for parent vertical scrollview
-extension CourseInfoView: UIScrollViewDelegate {
-    private func updatePageHeight(byPageWithIndex index: Int) {
-        let height = self.contentView.arrangedSubviews[index].intrinsicContentSize.height
-
-        self.scrollableStackView.contentSize = CGSize(
-            width: self.scrollableStackView.contentSize.width,
-            height: height
-        )
-    }
-
-    private func updateSegmentedControl(newPageIndex: Int) {
-        self.segmentedControl.selectTab(index: newPageIndex)
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
-
-            self.currentPageIndex = pageIndex
-            self.updatePageHeight(byPageWithIndex: pageIndex)
-            self.updateSegmentedControl(newPageIndex: pageIndex)
-        }
-    }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let pageIndex = Int(scrollView.contentOffset.x / scrollView.bounds.width)
-
-        self.currentPageIndex = pageIndex
-        self.updatePageHeight(byPageWithIndex: pageIndex)
-        self.updateSegmentedControl(newPageIndex: pageIndex)
     }
 }

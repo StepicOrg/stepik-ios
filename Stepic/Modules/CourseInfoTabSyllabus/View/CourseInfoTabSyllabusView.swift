@@ -20,10 +20,11 @@ final class CourseInfoTabSyllabusView: UIView {
 
     private lazy var headerView = CourseInfoTabSyllabusHeaderView()
 
+    private weak var pageScrollViewDelegate: UIScrollViewDelegate?
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.backgroundColor = .white
-        tableView.isScrollEnabled = true
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
 
         tableView.estimatedSectionHeaderHeight = 90.0
@@ -40,13 +41,6 @@ final class CourseInfoTabSyllabusView: UIView {
         return tableView
     }()
 
-    override var intrinsicContentSize: CGSize {
-        return CGSize(
-            width: UIViewNoIntrinsicMetric,
-            height: self.tableView.contentSize.height + self.appearance.headerViewHeight
-        )
-    }
-
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -59,36 +53,26 @@ final class CourseInfoTabSyllabusView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.invalidateIntrinsicContentSize()
-        self.frame = CGRect(
-            x: self.frame.origin.x,
-            y: self.frame.origin.y,
-            width: self.frame.width,
-            height: 200
-        )
-    }
 }
 
 extension CourseInfoTabSyllabusView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.addSubview(self.headerView)
+//        self.addSubview(self.headerView)
         self.addSubview(self.tableView)
     }
 
     func makeConstraints() {
-        self.headerView.translatesAutoresizingMaskIntoConstraints = false
-        self.headerView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(self.appearance.headerViewHeight)
-        }
+//        self.headerView.translatesAutoresizingMaskIntoConstraints = false
+//        self.headerView.snp.makeConstraints { make in
+//            make.top.leading.trailing.equalToSuperview()
+//            make.height.equalTo(self.appearance.headerViewHeight)
+//        }
 
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(self.headerView.snp.bottom)
+            make.top.equalToSuperview()
+//            make.top.equalTo(self.headerView.snp.bottom)
         }
     }
 }
@@ -123,5 +107,48 @@ extension CourseInfoTabSyllabusView: UITableViewDataSource {
 }
 
 extension CourseInfoTabSyllabusView: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let delegateMethod = self.pageScrollViewDelegate?.scrollViewDidScroll {
+            delegateMethod(scrollView)
+        }
+    }
+}
 
+extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
+    var scrollViewDelegate: UIScrollViewDelegate? {
+        get {
+            return self.pageScrollViewDelegate
+        }
+        set {
+            self.pageScrollViewDelegate = newValue
+        }
+    }
+
+    var contentInsets: UIEdgeInsets {
+        get {
+            return self.tableView.contentInset
+        }
+        set {
+            self.tableView.contentInset = newValue
+        }
+    }
+
+    var contentOffset: CGPoint {
+        get {
+            return self.tableView.contentOffset
+        }
+        set {
+            self.tableView.contentOffset = newValue
+        }
+    }
+
+    @available(iOS 11.0, *)
+    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+        get {
+            return self.tableView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.tableView.contentInsetAdjustmentBehavior = newValue
+        }
+    }
 }
