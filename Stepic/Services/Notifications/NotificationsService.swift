@@ -59,6 +59,8 @@ final class NotificationsService {
         case notifications
         case notificationStatuses = "notification-statuses"
         case achievementProgresses = "achievement-progresses"
+        case retentionNextDay = "retention-next-day"
+        case retentionThirdDay = "retention-third-day"
     }
 }
 

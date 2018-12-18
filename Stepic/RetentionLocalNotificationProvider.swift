@@ -35,6 +35,12 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         return self.repetition.notificationText
     }
 
+    var userInfo: [AnyHashable: Any] {
+        return [
+            NotificationsService.PayloadKey.type.rawValue: self.repetition.notificationType
+        ]
+    }
+
     var identifier: String {
         return "RetentionLocalNotification_\(self.repetition.rawValue)"
     }
@@ -74,6 +80,15 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
     enum Repetition: String {
         case nextDay
         case thirdDay
+
+        var notificationType: String {
+            switch self {
+            case .nextDay:
+                return NotificationsService.NotificationType.retentionNextDay.rawValue
+            case .thirdDay:
+                return NotificationsService.NotificationType.retentionThirdDay.rawValue
+            }
+        }
 
         var notificationTitle: String {
             switch self {
