@@ -93,9 +93,7 @@ extension NotificationsService {
     func handleLocalNotification(with userInfo: NotificationUserInfo?) {
         print("Did receive local notification with info: \(userInfo ?? [:])")
 
-        if self.isInForeground, let notificationType = self.extractNotificationType(from: userInfo) {
-            AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
-        }
+        self.reportReceivedNotificationWithType(self.extractNotificationType(from: userInfo))
 
         if #available(iOS 10.0, *) {
         } else if self.isInForeground {
@@ -134,6 +132,23 @@ extension NotificationsService {
             route(to: .home)
         }
     }
+
+    private func reportReceivedNotificationWithType(_ notificationType: String?) {
+        if let notificationType = notificationType {
+            switch UIApplication.shared.applicationState {
+            case .active:
+                AmplitudeAnalyticsEvents.Notifications.receivedForeground(
+                    notificationType: notificationType
+                ).send()
+            case .inactive:
+                AmplitudeAnalyticsEvents.Notifications.receivedInactive(
+                    notificationType: notificationType
+                ).send()
+            case .background:
+                break
+            }
+        }
+    }
 }
 
 // MARK: - NotificationsService (RemoteNotifications) -
@@ -146,9 +161,7 @@ extension NotificationsService {
             return print("remote notification received: unable to parse notification type")
         }
 
-        if self.isInForeground {
-            AmplitudeAnalyticsEvents.Notifications.received(notificationType: notificationType).send()
-        }
+        self.reportReceivedNotificationWithType(notificationType)
 
         // FIXME: Use `NotificationType` instead of raw values.
         switch notificationType {
