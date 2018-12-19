@@ -22,6 +22,12 @@ class SplitTestingService: SplitTestingServiceProtocol {
         self.storage = storage
     }
 
+    /// Tries to return the current split test group from the persistent store,
+    /// but if current split test group doesn't saved — it will generate a new one and save it,
+    /// before returning back.
+    ///
+    /// - Parameter splitTestType: A split test for fetch current group.
+    /// - Returns: Current split test group from the storage if can, otherwise a random one.
     func fetchSplitTest<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value {
         if let value = self.getGroup(splitTestType) {
             return Value(currentGroup: value, analytics: self.analyticsService)
@@ -32,10 +38,20 @@ class SplitTestingService: SplitTestingServiceProtocol {
         return Value(currentGroup: randomGroup, analytics: self.analyticsService)
     }
 
+    /// Saves split test to persistent storage for future usage for the current user.
+    ///
+    /// - Parameters:
+    ///   - splitTestType: A split test type to save group.
+    ///   - group: A split test group to save to the storage.
     private func saveGroup<Value: SplitTestProtocol>(_ splitTestType: Value.Type, group: Value.GroupType) {
         self.storage.save(string: group.rawValue, for: Value.dataBaseKey)
     }
 
+    /// Loads split test instance with the specific group for the current user.
+    ///
+    /// - Parameter splitTestType: A split test type to get group.
+    /// - Returns: Split test group for the given split test type if it contains in the storage,
+    ///   otherwise returns nil.
     private func getGroup<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value.GroupType? {
         guard let stringValue = self.storage.getString(for: Value.dataBaseKey) else {
             return nil
@@ -43,6 +59,10 @@ class SplitTestingService: SplitTestingServiceProtocol {
         return Value.GroupType(rawValue: stringValue)
     }
 
+    /// Generates random split test group for the current split test class.
+    ///
+    /// - Parameter splitTestType: A split test type to generate group.
+    /// - Returns: Random split test group for the given split test type.
     private func randomGroup<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value.GroupType {
         let count = Value.GroupType.groups.count
         let random = Int.random(lower: 0, count - 1)

@@ -8,13 +8,21 @@
 
 import Foundation
 
+/// Represents specific instance of the split test.
+///
+/// Every split test may contain multiple groups that represented by `SplitTestGroupProtocol`.
+/// Split test has the ability to set (send to analytics) the current group.
 protocol SplitTestProtocol {
     associatedtype GroupType: SplitTestGroupProtocol
+    /// A string identifier for analytics and storage keys.
     static var identifier: String { get }
 
+    /// A boolean value that determines whether the split test may be using.
+    /// - Returns: true if current app version is not smaller than `minParticipatingStartVersion`, otherwise false.
     static var shouldParticipate: Bool { get }
     static var minParticipatingStartVersion: String { get }
 
+    /// Represents current assigned group for the split test instance.
     var currentGroup: GroupType { get }
 
     var analytics: ABAnalyticsServiceProtocol { get }
@@ -30,6 +38,7 @@ extension SplitTestProtocol {
         ) != .orderedAscending
     }
 
+    /// Sends current group to the analytics.
     func setSplitTestGroup() {
         self.analytics.setGroup(test: Self.analyticsKey, group: self.currentGroup.rawValue)
     }
