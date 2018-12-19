@@ -12,10 +12,16 @@ struct AmplitudeAnalyticsEvents {
     struct Launch {
         static var firstTime = AnalyticsEvent(name: "Launch first time")
 
-        static func sessionStart(notificationType: String? = nil) -> AnalyticsEvent {
+        static func sessionStart(
+            notificationType: String? = nil,
+            sinceLastSession: TimeInterval
+        ) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Session start",
-                parameters: notificationType == nil ? nil : ["notification_type": notificationType!]
+                parameters: [
+                    "notification_type": notificationType as Any,
+                    "seconds_since_last_session": sinceLastSession
+                ]
             )
         }
     }
@@ -171,9 +177,18 @@ struct AmplitudeAnalyticsEvents {
     struct Notifications {
         static var screenOpened = AnalyticsEvent(name: "Notifications screen opened")
 
-        static func received(notificationType: String) -> AnalyticsEvent {
+        static func receivedForeground(notificationType: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Foreground notification received",
+                parameters: [
+                    "notification_type": notificationType
+                ]
+            )
+        }
+
+        static func receivedInactive(notificationType: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Inactive notification received",
                 parameters: [
                     "notification_type": notificationType
                 ]
