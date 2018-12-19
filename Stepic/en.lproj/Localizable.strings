@@ -516,6 +516,10 @@ CodeEditorCurrentTheme = "Current: %@";
 CodeEditorCurrentFontSize = "Current: %@pt";
 CodeEditorSettingsTooltip = "You can customize code editor";
 
+/* Staff settings */
+StaffSettingsTitle = "Staff";
+StaffActiveSplitTestGroupPreference = "Active split test group";
+
 /* Achievements */
 Achievements = "Achievements";
 AchievementsStepsSolvedKindTitle = "Quantity matters";

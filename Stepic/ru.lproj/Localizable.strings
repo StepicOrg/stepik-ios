@@ -517,6 +517,10 @@ CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
 
+/* Staff settings */
+StaffSettingsTitle = "Персонал";
+StaffActiveSplitTestGroupPreference = "Активная тестовая группа";
+
 /* Achievements */
 Achievements = "Достижения";
 AchievementsStepsSolvedKindTitle = "Главное – количество";
