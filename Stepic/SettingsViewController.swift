@@ -106,7 +106,8 @@ final class SettingsViewController: MenuViewController, SettingsView {
             id: SettingsMenuBlock.splitTestGroup.rawValue,
             title: NSLocalizedString("StaffActiveSplitTestGroupPreference", comment: "")
         )
-        block.onTouch = { [weak self] in
+        // TODO: Show list of active split tests.
+        block.onTouch = {
             print("Test")
         }
         return block
