@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SettingsViewController: MenuViewController, SettingsView {
+final class SettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?
 
     override func viewDidLoad() {
@@ -45,6 +45,10 @@ class SettingsViewController: MenuViewController, SettingsView {
 
     private func constructMenuBlock(from menuBlockID: SettingsMenuBlock) -> MenuBlock {
         switch menuBlockID {
+        case .staffHeader:
+            return self.buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("StaffSettingsTitle", comment: ""))
+        case .splitTestGroup:
+            return self.buildSplitTestGroupBlock()
         case .videoHeader:
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("Video", comment: ""))
         case .onlyWifiSwitch:
@@ -94,6 +98,17 @@ class SettingsViewController: MenuViewController, SettingsView {
             self?.changeContentLanguageSettings()
         }
 
+        return block
+    }
+
+    private func buildSplitTestGroupBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(
+            id: SettingsMenuBlock.splitTestGroup.rawValue,
+            title: NSLocalizedString("StaffActiveSplitTestGroupPreference", comment: "")
+        )
+        block.onTouch = { [weak self] in
+            print("Test")
+        }
         return block
     }
 

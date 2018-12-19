@@ -14,10 +14,10 @@ protocol SettingsView: class {
     func presentAuth()
 }
 
-class SettingsPresenter {
+final class SettingsPresenter {
     weak var view: SettingsView?
 
-    var menu: [SettingsMenuBlock] = [
+    private var menu: [SettingsMenuBlock] = [
         .videoHeader,
         .onlyWifiSwitch,
         .loadedVideoQuality,
@@ -33,12 +33,19 @@ class SettingsPresenter {
         .logout
     ]
 
+    private var staffMenu: [SettingsMenuBlock] = [
+        .staffHeader,
+        .splitTestGroup
+    ]
+
     init(view: SettingsView) {
         self.view = view
+        self.addStaffMenuIfAllowed()
         view.setMenu(menuIDs: self.menu)
     }
 
     // MARK: - Menu blocks
+
     func logout() {
         AuthInfo.shared.token = nil
         view?.presentAuth()
@@ -50,5 +57,13 @@ class SettingsPresenter {
 
     func changeAdaptiveModeEnabled(to isEnabled: Bool) {
         AdaptiveStorageManager.shared.isAdaptiveModeEnabled = isEnabled
+    }
+
+    private func addStaffMenuIfAllowed() {
+        let isStaff = true
+        // TODO: AuthInfo.shared.user?.profileEntity?.isStaff
+        if isStaff {
+            self.menu.insert(contentsOf: self.staffMenu, at: 0)
+        }
     }
 }

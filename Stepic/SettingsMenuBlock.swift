@@ -9,6 +9,8 @@
 import Foundation
 
 enum SettingsMenuBlock: String {
+    case staffHeader
+    case splitTestGroup
     case videoHeader
     case onlyWifiSwitch
     case loadedVideoQuality
