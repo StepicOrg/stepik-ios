@@ -59,17 +59,6 @@ final class ActiveSplitTestsListViewController: UITableViewController {
         self.interactor.getSplitTests(request: .init())
     }
 
-    private func updateState() {
-        switch self.state {
-        case .emptyResult:
-            self.tableView.backgroundView = self.emptyResultLabel
-        case .result(let data):
-            self.tableView.backgroundView = nil
-            self.splitTests = data
-        }
-        self.tableView.reloadData()
-    }
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         if case .emptyResult = self.state {
             return 0
@@ -82,7 +71,10 @@ final class ActiveSplitTestsListViewController: UITableViewController {
         return self.splitTests.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: ActiveSplitTestsListViewController.cellReuseIdentifier,
             for: indexPath
@@ -96,11 +88,23 @@ final class ActiveSplitTestsListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.presentSplitTestGroups(viewModel: self.splitTests[indexPath.row])
+    }
 
-        let selectedSplitTestId = self.splitTests[indexPath.row].uniqueIdentifier
-        self.interactor.presentSplitTestGroups(
-            request: .init(uniqueIdentifier: selectedSplitTestId)
-        )
+    private func updateState() {
+        switch self.state {
+        case .emptyResult:
+            self.tableView.backgroundView = self.emptyResultLabel
+        case .result(let data):
+            self.tableView.backgroundView = nil
+            self.splitTests = data
+        }
+        self.tableView.reloadData()
+    }
+
+    private func presentSplitTestGroups(viewModel: SplitTestViewModel) {
+        let uniqueIdentifier = viewModel.uniqueIdentifier
+        print(uniqueIdentifier)
     }
 }
 

@@ -25,13 +25,6 @@ enum ActiveSplitTestsList {
         }
     }
 
-    /// Presents split test groups
-    enum PresentGroups {
-        struct Request {
-            let uniqueIdentifier: UniqueIdentifierType
-        }
-    }
-
     // MARK: States
 
     enum ViewControllerState {

@@ -6,7 +6,7 @@
 //  Copyright 2018 Stepik. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol ActiveSplitTestsListPresenterProtocol {
     func presentSplitTests(response: ActiveSplitTestsList.ShowSplitTests.Response)

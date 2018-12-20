@@ -7,18 +7,14 @@
 //
 
 import Foundation
-import PromiseKit
 
 protocol ActiveSplitTestsListInteractorProtocol {
     func getSplitTests(request: ActiveSplitTestsList.ShowSplitTests.Request)
-    func presentSplitTestGroups(request: ActiveSplitTestsList.PresentGroups.Request)
 }
 
 final class ActiveSplitTestsListInteractor: ActiveSplitTestsListInteractorProtocol {
     let presenter: ActiveSplitTestsListPresenterProtocol
     let provider: ActiveSplitTestsListProviderProtocol
-
-    private var currentSplitTests = [String]()
 
     init(
         presenter: ActiveSplitTestsListPresenterProtocol,
@@ -29,16 +25,7 @@ final class ActiveSplitTestsListInteractor: ActiveSplitTestsListInteractorProtoc
     }
 
     func getSplitTests(request: ActiveSplitTestsList.ShowSplitTests.Request) {
-        self.currentSplitTests = self.provider.getActiveSplitTests()
-        self.presenter.presentSplitTests(response: .init(splitTests: self.currentSplitTests))
-    }
-
-    func presentSplitTestGroups(request: ActiveSplitTestsList.PresentGroups.Request) {
-        guard let splitTest = self.currentSplitTests
-            .first(where: { $0 == request.uniqueIdentifier }) else {
-            return
-        }
-
-        print(splitTest)
+        let splitTests = self.provider.getActiveSplitTests()
+        self.presenter.presentSplitTests(response: .init(splitTests: splitTests))
     }
 }
