@@ -7,39 +7,29 @@
 //
 
 import Foundation
-import PromiseKit
 
 protocol SplitTestGroupsListInteractorProtocol {
-    func doSomeAction(request: SplitTestGroupsList.Something.Request)
+    func getGroups(request: SplitTestGroupsList.ShowGroups.Request)
 }
 
 final class SplitTestGroupsListInteractor: SplitTestGroupsListInteractorProtocol {
     let presenter: SplitTestGroupsListPresenterProtocol
     let provider: SplitTestGroupsListProviderProtocol
 
+    private let splitTestUniqueIdentifier: UniqueIdentifierType
+
     init(
         presenter: SplitTestGroupsListPresenterProtocol,
-        provider: SplitTestGroupsListProviderProtocol
+        provider: SplitTestGroupsListProviderProtocol,
+        splitTestUniqueIdentifier: UniqueIdentifierType
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.splitTestUniqueIdentifier = splitTestUniqueIdentifier
     }
 
-    // MARK: Do some action
-
-    func doSomeAction(request: SplitTestGroupsList.Something.Request) {
-        self.provider.fetchSomeItems().done { items in
-            self.presenter.presentSomething(
-                response: SplitTestGroupsList.Something.Response(result: .success(items))
-            )
-        }.catch { _ in
-            self.presenter.presentSomething(
-                response: SplitTestGroupsList.Something.Response(result: .failure(Error.fetchFailed))
-            )
-        }
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
+    func getGroups(request: SplitTestGroupsList.ShowGroups.Request) {
+        let splitTestGroups = self.provider.getSplitTestGroups(id: self.splitTestUniqueIdentifier)
+        self.presenter.presentGroups(response: .init(groups: splitTestGroups))
     }
 }

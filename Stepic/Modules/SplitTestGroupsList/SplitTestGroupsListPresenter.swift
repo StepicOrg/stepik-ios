@@ -9,26 +9,26 @@
 import UIKit
 
 protocol SplitTestGroupsListPresenterProtocol {
-    func presentSomething(response: SplitTestGroupsList.Something.Response)
+    func presentGroups(response: SplitTestGroupsList.ShowGroups.Response)
 }
 
 final class SplitTestGroupsListPresenter: SplitTestGroupsListPresenterProtocol {
     weak var viewController: SplitTestGroupsListViewControllerProtocol?
 
-    func presentSomething(response: SplitTestGroupsList.Something.Response) {
-        var viewModel: SplitTestGroupsList.Something.ViewModel
-
-        switch response.result {
-        case let .failure(error):
-            viewModel = SplitTestGroupsList.Something.ViewModel(state: .error(message: error.localizedDescription))
-        case let .success(result):
-            if result.isEmpty {
-                viewModel = SplitTestGroupsList.Something.ViewModel(state: .emptyResult)
+    func presentGroups(response: SplitTestGroupsList.ShowGroups.Response) {
+        let viewModel: SplitTestGroupsList.ShowGroups.ViewModel = {
+            if response.groups.isEmpty {
+                return .init(state: .emptyResult)
             } else {
-                viewModel = SplitTestGroupsList.Something.ViewModel(state: .result(data: result))
+                let groups = self.formattedGroups(response.groups)
+                return .init(state: .result(data: groups))
             }
-        }
+        }()
 
-        viewController?.displaySomething(viewModel: viewModel)
+        self.viewController?.displayGroups(viewModel: viewModel)
+    }
+
+    private func formattedGroups(_ groups: [String]) -> [SplitTestGroupViewModel] {
+        return []
     }
 }

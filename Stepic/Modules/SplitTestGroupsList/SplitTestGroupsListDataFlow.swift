@@ -9,17 +9,15 @@
 import Foundation
 
 enum SplitTestGroupsList {
-    // MARK: Common structs
-    // Place here structs used in Requests/Responses
-
     // MARK: Use cases
 
-    /// Sample use case
-    enum Something {
-        struct Request { }
+    /// Show split test groups list
+    enum ShowGroups {
+        struct Request {
+        }
 
         struct Response {
-            var result: Result<[Any]>
+            let groups: [String]
         }
 
         struct ViewModel {
@@ -30,9 +28,7 @@ enum SplitTestGroupsList {
     // MARK: States
 
     enum ViewControllerState {
-        case loading
-        case result(data: [Any])
+        case result(data: [SplitTestGroupViewModel])
         case emptyResult
-        case error(message: String)
     }
 }

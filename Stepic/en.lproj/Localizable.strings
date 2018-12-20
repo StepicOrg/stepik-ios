@@ -521,6 +521,7 @@ StaffSettingsTitle = "Staff";
 StaffActiveSplitTestGroupPreference = "Active split test group";
 StaffActiveSplitTestsListTitle = "Split tests";
 StaffEmptySplitTestsTitle = "No split tests";
+StaffEmptySplitTestGroupsTitle = "No groups";
 
 /* Achievements */
 Achievements = "Achievements";

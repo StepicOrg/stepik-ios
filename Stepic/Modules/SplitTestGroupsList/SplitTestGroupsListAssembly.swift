@@ -9,7 +9,6 @@
 import UIKit
 
 final class SplitTestGroupsListAssembly: Assembly {
-
     private let splitTestUniqueIdentifier: UniqueIdentifierType
 
     init(splitTestUniqueIdentifier: UniqueIdentifierType) {
@@ -21,7 +20,8 @@ final class SplitTestGroupsListAssembly: Assembly {
         let presenter = SplitTestGroupsListPresenter()
         let interactor = SplitTestGroupsListInteractor(
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            splitTestUniqueIdentifier: self.splitTestUniqueIdentifier
         )
         let viewController = SplitTestGroupsListViewController(
             interactor: interactor

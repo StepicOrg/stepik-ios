@@ -7,16 +7,13 @@
 //
 
 import Foundation
-import PromiseKit
 
 protocol SplitTestGroupsListProviderProtocol {
-    func fetchSomeItems() -> Promise<[Any]>
+    func getSplitTestGroups(id: UniqueIdentifierType) -> [String]
 }
 
 final class SplitTestGroupsListProvider: SplitTestGroupsListProviderProtocol {
-    func fetchSomeItems() -> Promise<[Any]> {
-        return Promise<[Any]> { seal in
-            seal.fulfill(["" as! Any])
-        }
+    func getSplitTestGroups(id: UniqueIdentifierType) -> [String] {
+        return []
     }
 }

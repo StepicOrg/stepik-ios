@@ -20,15 +20,15 @@ final class ActiveSplitTestsListPresenter: ActiveSplitTestsListPresenterProtocol
             if response.splitTests.isEmpty {
                 return .init(state: .emptyResult)
             } else {
-                let formattedSplitTests = self.formatSplitTests(response.splitTests)
-                return .init(state: .result(data: formattedSplitTests))
+                let splitTests = self.formattedSplitTests(response.splitTests)
+                return .init(state: .result(data: splitTests))
             }
         }()
 
-        viewController?.displaySplitTests(viewModel: viewModel)
+        self.viewController?.displaySplitTests(viewModel: viewModel)
     }
 
-    private func formatSplitTests(_ splitTests: [String]) -> [SplitTestViewModel] {
+    private func formattedSplitTests(_ splitTests: [String]) -> [SplitTestViewModel] {
         return splitTests.map { splitTest in
             SplitTestViewModel(
                 uniqueIdentifier: splitTest,

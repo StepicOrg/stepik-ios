@@ -522,6 +522,7 @@ StaffSettingsTitle = "Персонал";
 StaffActiveSplitTestGroupPreference = "Активная тестовая группа";
 StaffActiveSplitTestsListTitle = "Тесты";
 StaffEmptySplitTestsTitle = "Нет тестов";
+StaffEmptySplitTestGroupsTitle = "Нет групп";
 
 /* Achievements */
 Achievements = "Достижения";
