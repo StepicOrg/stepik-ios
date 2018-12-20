@@ -811,6 +811,7 @@
 		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		0DD38F1F2CF8385C6D270649 /* ContentLanguageSwitchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606EBF103D5682D5B26FF35 /* ContentLanguageSwitchInteractor.swift */; };
 		164D9DD4DC279527C17BDCF7 /* ContentLanguageSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024D65DCBD4F8631B97D461D /* ContentLanguageSwitchView.swift */; };
+		19ACAB21E17208C77ACC5B88 /* SplitTestGroupsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAF2445C2983E8A83756B6B /* SplitTestGroupsListInteractor.swift */; };
 		1B3BB05B1FE6DE48002DDD9A /* CourseInfoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0501FE6DE46002DDD9A /* CourseInfoCollectionViewController.swift */; };
 		1B3BB05C1FE6DE48002DDD9A /* MenuSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0511FE6DE47002DDD9A /* MenuSplitViewController.swift */; };
 		1B3BB05D1FE6DE48002DDD9A /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3BB0521FE6DE47002DDD9A /* MenuTableViewController.swift */; };
@@ -850,6 +851,7 @@
 		1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F11F93F67700482251 /* AppDelegate.swift */; };
 		1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BAE12FA1F93F67700482251 /* Assets.xcassets */; };
 		1BAE13061F93F67700482251 /* StepikTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE13051F93F67700482251 /* StepikTVTests.swift */; };
+		1FE812E547A76B42D0A68E75 /* SplitTestGroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235FDED3A188A5922F5E821D /* SplitTestGroupsListView.swift */; };
 		21EAE6C1E2EDABCF3B30AD45 /* ActiveSplitTestsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38AE31CB9EB8BF31A746FAF /* ActiveSplitTestsListPresenter.swift */; };
 		22A02A8007394DAD60A672A3 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10B2DE8DE743C9583B4C823 /* Pods_Adaptive_3124_Screenshots.framework */; };
 		2398E535CD753B47E1725377 /* Pods_Adaptive_3124.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E146D482B086D90DF14260 /* Pods_Adaptive_3124.framework */; };
@@ -4536,6 +4538,7 @@
 		8BAFF69A3ADF967ACA86619A /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE80CE7D8D8381143890852B /* TagsViewController.swift */; };
 		8D923C63FD0C095D6C8B5EB7 /* BaseExploreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC0B4BF5CCE4834F539CFA1 /* BaseExploreInteractor.swift */; };
 		8E8C0B0773E8434A4B8B64BE /* TagsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14A9B5E75EAE724BF0A0A1 /* TagsAssembly.swift */; };
+		8F2FE14453745BF4354A24A4 /* SplitTestGroupsListDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B005C745949CB270490FC5A /* SplitTestGroupsListDataFlow.swift */; };
 		9300843E201663C100DBFC0E /* TVQuizViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9300843D201663C100DBFC0E /* TVQuizViewController.xib */; };
 		930084402016717500DBFC0E /* BlurredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9300843F2016717500DBFC0E /* BlurredViewController.swift */; };
 		933437DD1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933437DC1FE6F29F00140AD2 /* CourseInfoSectionViewProtocol.swift */; };
@@ -4796,12 +4799,16 @@
 		D5F199710572EB0038ABCCFF /* Pods_Adaptive_8290.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9853971214EBFBD197335F20 /* Pods_Adaptive_8290.framework */; };
 		D61088397B59DE7B20E38535 /* TagsDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2302B140B77859617D9943 /* TagsDataFlow.swift */; };
 		D90A4F4D6941BD8D4E84C6CE /* ContinueCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A1329A66FB24F4B453053C /* ContinueCourseView.swift */; };
+		DC18F839B9B4ECFE48F5161C /* SplitTestGroupsListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506DD80F3E91C2D777A9E093 /* SplitTestGroupsListProvider.swift */; };
+		DCC32CECE3EE5D462760E75C /* SplitTestGroupsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA82C81DE985730FAFC90635 /* SplitTestGroupsListAssembly.swift */; };
+		DE1324EF4FDAEC6F2AE3656A /* SplitTestGroupsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B591BF482AE0AB266EFA6 /* SplitTestGroupsListViewController.swift */; };
 		DE18F80AE3677E4BCEE33397 /* ExplorePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED926AC5637608789BFE0B5 /* ExplorePresenter.swift */; };
 		E22CCE84244F4754FA6D9420 /* ActiveSplitTestsListDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62222B48202EE215FEA26F1 /* ActiveSplitTestsListDataFlow.swift */; };
 		E57F192E3533B882F37591FF /* Pods_Adaptive_3149.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBA99AFA8C051B1B62AFDF9 /* Pods_Adaptive_3149.framework */; };
 		E629AD8BDE7FC5038D2F2868 /* ActiveSplitTestsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304A56EA220000F572F28821 /* ActiveSplitTestsListViewController.swift */; };
 		F8B193067FC69DF75F4528F1 /* Pods_StepikTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661331E21F3A239060AC8217 /* Pods_StepikTV.framework */; };
 		FB27A51C90A745DA179B4BFA /* TagsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3496B9C5CAEB923B5744CA7 /* TagsInteractor.swift */; };
+		FC0982BDDEDAC347424C14C9 /* SplitTestGroupsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A969C764BCDD6F7CFB1E987E /* SplitTestGroupsListPresenter.swift */; };
 		FE0A777F6C6897CF9CCD0B98 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAB4B76E9610CAEE92FBA2B /* HomeViewController.swift */; };
 		FFBFAE30ACA3B872A992183A /* FullscreenCourseListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2983524A5D7B073640D52ACD /* FullscreenCourseListAssembly.swift */; };
 /* End PBXBuildFile section */
@@ -5437,6 +5444,7 @@
 		08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionTableViewCell.swift; sourceTree = "<group>"; };
 		08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeSuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		08FEFC201F127470005CA0FB /* AutocompleteWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteWords.swift; sourceTree = "<group>"; };
+		0A9B591BF482AE0AB266EFA6 /* SplitTestGroupsListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplitTestGroupsListViewController.swift; sourceTree = "<group>"; };
 		0C05D9DC092E240ED7A0BD28 /* Pods_Adaptive_1838_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DB2BD32605F5F5C7BC0A455 /* Pods_Adaptive_3150.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3150.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117C1F44418AFCD5B64EA0C5 /* ActiveSplitTestsListInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsListInteractor.swift; sourceTree = "<group>"; };
@@ -5489,6 +5497,7 @@
 		21A1329A66FB24F4B453053C /* ContinueCourseView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseView.swift; sourceTree = "<group>"; };
 		21C1E58134D6F7CABDA84B89 /* BaseExploreDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseExploreDataFlow.swift; sourceTree = "<group>"; };
 		2291302940E77D75D4FBC553 /* BaseExploreViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseExploreViewController.swift; sourceTree = "<group>"; };
+		235FDED3A188A5922F5E821D /* SplitTestGroupsListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplitTestGroupsListView.swift; sourceTree = "<group>"; };
 		295E8541C577EB030FEB0630 /* ActiveSplitTestsListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsListAssembly.swift; sourceTree = "<group>"; };
 		2983524A5D7B073640D52ACD /* FullscreenCourseListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FullscreenCourseListAssembly.swift; sourceTree = "<group>"; };
 		2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyProtocol.swift; sourceTree = "<group>"; };
@@ -5967,12 +5976,15 @@
 		3036440FB2A87AB97603A3A6 /* ContentLanguageSwitchDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchDataFlow.swift; sourceTree = "<group>"; };
 		304A56EA220000F572F28821 /* ActiveSplitTestsListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsListViewController.swift; sourceTree = "<group>"; };
 		347B44B3EA8F3B9AD1859A05 /* ContinueCourseAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseAssembly.swift; sourceTree = "<group>"; };
+		3B005C745949CB270490FC5A /* SplitTestGroupsListDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplitTestGroupsListDataFlow.swift; sourceTree = "<group>"; };
 		3B2302B140B77859617D9943 /* TagsDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsDataFlow.swift; sourceTree = "<group>"; };
 		3B6DA13C3A228F187179860C /* Pods-Adaptive GMAT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.debug.xcconfig"; sourceTree = "<group>"; };
 		3E30DBDBF10341A4D7E4F749 /* Pods-ExamEGERussianTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussianTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExamEGERussianTests/Pods-ExamEGERussianTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FED9C5F9EAAFA30BFC53BEA /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		407989D72DD14FA5374199C4 /* Pods-Adaptive 3150.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150.release.xcconfig"; sourceTree = "<group>"; };
 		456E2B8485587FC753E081E8 /* Pods_ExamEGERussian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExamEGERussian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AAF2445C2983E8A83756B6B /* SplitTestGroupsListInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplitTestGroupsListInteractor.swift; sourceTree = "<group>"; };
+		506DD80F3E91C2D777A9E093 /* SplitTestGroupsListProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplitTestGroupsListProvider.swift; sourceTree = "<group>"; };
 		50A455FB56179C3ED39ED8DD /* ContinueCourseDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseDataFlow.swift; sourceTree = "<group>"; };
 		5274061ADC67684669E78297 /* Pods-StepicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		573CFE338FB08142BEC048FE /* HomeDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeDataFlow.swift; sourceTree = "<group>"; };
@@ -6262,6 +6274,7 @@
 		A3496B9C5CAEB923B5744CA7 /* TagsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TagsInteractor.swift; sourceTree = "<group>"; };
 		A3CB9141CF1231B4687D4284 /* Pods-Adaptive 1838.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838.release.xcconfig"; sourceTree = "<group>"; };
 		A62222B48202EE215FEA26F1 /* ActiveSplitTestsListDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsListDataFlow.swift; sourceTree = "<group>"; };
+		A969C764BCDD6F7CFB1E987E /* SplitTestGroupsListPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplitTestGroupsListPresenter.swift; sourceTree = "<group>"; };
 		A9932C630D37B6219A65C3D7 /* Pods_Adaptive_1838.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_1838.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9BA72DE297649678489B71C /* HomePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		AEA39F819134D2A29D619A1A /* Pods-Adaptive 3149.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.debug.xcconfig"; sourceTree = "<group>"; };
@@ -6271,6 +6284,7 @@
 		B8580965E28EE48743974433 /* ContentLanguageSwitchViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchViewController.swift; sourceTree = "<group>"; };
 		B9CE7CB9EE0B49693CC87B92 /* ExploreAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreAssembly.swift; sourceTree = "<group>"; };
 		BA3A8FA9D474D13EEA8CEEB8 /* Pods-Adaptive GMAT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.release.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.release.xcconfig"; sourceTree = "<group>"; };
+		BA82C81DE985730FAFC90635 /* SplitTestGroupsListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplitTestGroupsListAssembly.swift; sourceTree = "<group>"; };
 		BA90350120544A5D00191D0A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BEAB4B76E9610CAEE92FBA2B /* HomeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C0873EF2F06EC2C27A7C9255 /* ExploreViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -8187,6 +8201,7 @@
 				62E98B7A4296E04D057D679A /* SearchResultsLegacy.swift */,
 				24AFD764029A4489583D88DF /* BaseExplore */,
 				E9195BFE6E2085FE9BA9462B /* ActiveSplitTestsList */,
+				A05987529C36FC69E492EB0D /* SplitTestGroupsList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -11256,6 +11271,30 @@
 			path = StepicWatch;
 			sourceTree = "<group>";
 		};
+		A05987529C36FC69E492EB0D /* SplitTestGroupsList */ = {
+			isa = PBXGroup;
+			children = (
+				BA82C81DE985730FAFC90635 /* SplitTestGroupsListAssembly.swift */,
+				0A9B591BF482AE0AB266EFA6 /* SplitTestGroupsListViewController.swift */,
+				4AAF2445C2983E8A83756B6B /* SplitTestGroupsListInteractor.swift */,
+				A969C764BCDD6F7CFB1E987E /* SplitTestGroupsListPresenter.swift */,
+				3B005C745949CB270490FC5A /* SplitTestGroupsListDataFlow.swift */,
+				D6664ACD5FD20BB080652434 /* Provider */,
+				A27847E04C5B0CC2A6AC3F7E /* View */,
+			);
+			name = SplitTestGroupsList;
+			path = SplitTestGroupsList;
+			sourceTree = "<group>";
+		};
+		A27847E04C5B0CC2A6AC3F7E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				235FDED3A188A5922F5E821D /* SplitTestGroupsListView.swift */,
+			);
+			name = View;
+			path = View;
+			sourceTree = "<group>";
+		};
 		B4A0D8AF2F230818DD166DB8 /* ContentLanguageSwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -11278,6 +11317,15 @@
 				62E98614E194A5CFD78CFF63 /* ExploreSearchBar.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D6664ACD5FD20BB080652434 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				506DD80F3E91C2D777A9E093 /* SplitTestGroupsListProvider.swift */,
+			);
+			name = Provider;
+			path = Provider;
 			sourceTree = "<group>";
 		};
 		DA24A706D651B083DF81EB3E /* Provider */ = {
@@ -15094,6 +15142,13 @@
 				E22CCE84244F4754FA6D9420 /* ActiveSplitTestsListDataFlow.swift in Sources */,
 				4D4E54128DB7442A4167B3A0 /* ActiveSplitTestsListProvider.swift in Sources */,
 				62E98CDF64C9870B0CC22DA0 /* SplitTestViewModel.swift in Sources */,
+				DCC32CECE3EE5D462760E75C /* SplitTestGroupsListAssembly.swift in Sources */,
+				DE1324EF4FDAEC6F2AE3656A /* SplitTestGroupsListViewController.swift in Sources */,
+				19ACAB21E17208C77ACC5B88 /* SplitTestGroupsListInteractor.swift in Sources */,
+				FC0982BDDEDAC347424C14C9 /* SplitTestGroupsListPresenter.swift in Sources */,
+				8F2FE14453745BF4354A24A4 /* SplitTestGroupsListDataFlow.swift in Sources */,
+				DC18F839B9B4ECFE48F5161C /* SplitTestGroupsListProvider.swift in Sources */,
+				1FE812E547A76B42D0A68E75 /* SplitTestGroupsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
