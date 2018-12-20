@@ -519,6 +519,8 @@ CodeEditorSettingsTooltip = "You can customize code editor";
 /* Staff settings */
 StaffSettingsTitle = "Staff";
 StaffActiveSplitTestGroupPreference = "Active split test group";
+StaffActiveSplitTestsListTitle = "Split tests";
+StaffEmptySplitTestsTitle = "No split tests";
 
 /* Achievements */
 Achievements = "Achievements";

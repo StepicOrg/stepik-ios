@@ -19,3 +19,12 @@ protocol SplitTestGroupProtocol: RawRepresentable where RawValue == String {
     /// Primary this is using for random group generation. See `SplitTestingService.randomGroup(_:)`.
     static var groups: [Self] { get }
 }
+
+extension SplitTestGroupProtocol {
+    /// An array of mapped `RawValue`'s over `groups`.
+    static var groupValues: [RawValue] {
+        return self.groups.map {
+            $0.rawValue
+        }
+    }
+}

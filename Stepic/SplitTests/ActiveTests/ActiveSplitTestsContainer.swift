@@ -14,6 +14,10 @@ final class ActiveSplitTestsContainer {
         storage: UserDefaults.standard
     )
 
+    static let activeSplitTests = [
+        RetentionLocalNotificationsSplitTest.dataBaseKey: RetentionLocalNotificationsSplitTest.GroupType.groupValues
+    ]
+
     static func setActiveTestsGroups() {
         self.splitTestingService.fetchSplitTest(RetentionLocalNotificationsSplitTest.self).setSplitTestGroup()
     }

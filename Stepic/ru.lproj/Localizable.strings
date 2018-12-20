@@ -520,6 +520,8 @@ CodeEditorSettingsTooltip = "Вы можете настроить редакто
 /* Staff settings */
 StaffSettingsTitle = "Персонал";
 StaffActiveSplitTestGroupPreference = "Активная тестовая группа";
+StaffActiveSplitTestsListTitle = "Тесты";
+StaffEmptySplitTestsTitle = "Нет тестов";
 
 /* Achievements */
 Achievements = "Достижения";
