@@ -104,7 +104,11 @@ final class ActiveSplitTestsListViewController: UITableViewController {
 
     private func presentSplitTestGroups(viewModel: SplitTestViewModel) {
         let uniqueIdentifier = viewModel.uniqueIdentifier
-        print(uniqueIdentifier)
+        let assembly = SplitTestGroupsListAssembly(splitTestUniqueIdentifier: uniqueIdentifier)
+        let viewController = assembly.makeModule()
+        viewController.title = viewModel.title
+
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
