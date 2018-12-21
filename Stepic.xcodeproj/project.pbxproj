@@ -3973,7 +3973,6 @@
 		378925B23ABDD7215B756770 /* ExploreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE7CB9EE0B49693CC87B92 /* ExploreAssembly.swift */; };
 		3CF03F2244520AA001EEAE25 /* ExploreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABF61DBC2C4F10361EEDB38 /* ExploreInteractor.swift */; };
 		49D6076E2005508697B53738 /* Pods_Adaptive_3150.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB2BD32605F5F5C7BC0A455 /* Pods_Adaptive_3150.framework */; };
-		4D4E54128DB7442A4167B3A0 /* ActiveSplitTestsListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D62E7DA8A09C5F9B65758D0 /* ActiveSplitTestsListProvider.swift */; };
 		5114A9A546EE4DD425FF3E7B /* TagsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A135A38950824EE30E77014 /* TagsPresenter.swift */; };
 		5A12DCBB0D5F9C3D74485E69 /* Pods_Adaptive_GMAT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DFFE48D51FD72919B52184A /* Pods_Adaptive_GMAT.framework */; };
 		62E98002F8F247D1CAC54767 /* ProfileHeaderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 62E98801330B94B34FA0D7B9 /* ProfileHeaderInfoView.xib */; };
@@ -4153,6 +4152,7 @@
 		62E98BDDD7DAB7AF32414179 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		62E98BEF4DA87C1A4AAAFD15 /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E98BF91A059ADA5C64526D /* ExploreCoursesCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BDB8017C32090769B72 /* ExploreCoursesCollectionHeaderView.swift */; };
+		62E98BFEC4C5D2F4CDB6D795 /* ActiveSplitTestsListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F1D032CD74CF3131259 /* ActiveSplitTestsListProvider.swift */; };
 		62E98C0BC0F2F1C04047799F /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
 		62E98C1F76B23AFDE100CF6B /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
@@ -6125,6 +6125,7 @@
 		62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+SafeSubscript.swift"; sourceTree = "<group>"; };
 		62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappingNavigationViewController.swift; sourceTree = "<group>"; };
 		62E98EE2B1C586BDFCF9DAA6 /* StepsPagerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsPagerPresenter.swift; sourceTree = "<group>"; };
+		62E98F1D032CD74CF3131259 /* ActiveSplitTestsListProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsListProvider.swift; sourceTree = "<group>"; };
 		62E98F2E4C0915BDB749A255 /* CourseListsCollectionNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionNetworkService.swift; sourceTree = "<group>"; };
 		62E98F30729AE1CF9C9E0109 /* FormatterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterHelper.swift; sourceTree = "<group>"; };
 		62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorSettingsViewController.swift; sourceTree = "<group>"; };
@@ -6186,7 +6187,6 @@
 		8CC0B4BF5CCE4834F539CFA1 /* BaseExploreInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseExploreInteractor.swift; sourceTree = "<group>"; };
 		8CE057CE11E5647EB02F0357 /* ContinueCourseInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseInteractor.swift; sourceTree = "<group>"; };
 		8D3C9C39B2DB5BA7F396F7E5 /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
-		8D62E7DA8A09C5F9B65758D0 /* ActiveSplitTestsListProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsListProvider.swift; sourceTree = "<group>"; };
 		9267085458068FABF794819D /* ContinueCourseProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContinueCourseProvider.swift; sourceTree = "<group>"; };
 		9300843D201663C100DBFC0E /* TVQuizViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVQuizViewController.xib; sourceTree = "<group>"; };
 		9300843F2016717500DBFC0E /* BlurredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredViewController.swift; sourceTree = "<group>"; };
@@ -8387,14 +8387,6 @@
 				DA24A706D651B083DF81EB3E /* Provider */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		22138EBD3034366D4F34BE5B /* Provider */ = {
-			isa = PBXGroup;
-			children = (
-				8D62E7DA8A09C5F9B65758D0 /* ActiveSplitTestsListProvider.swift */,
-			);
-			path = Provider;
 			sourceTree = "<group>";
 		};
 		22C0E28EEB334B03ECA98145 /* View */ = {
@@ -11337,11 +11329,11 @@
 			isa = PBXGroup;
 			children = (
 				295E8541C577EB030FEB0630 /* ActiveSplitTestsListAssembly.swift */,
-				304A56EA220000F572F28821 /* ActiveSplitTestsListViewController.swift */,
+				A62222B48202EE215FEA26F1 /* ActiveSplitTestsListDataFlow.swift */,
 				117C1F44418AFCD5B64EA0C5 /* ActiveSplitTestsListInteractor.swift */,
 				E38AE31CB9EB8BF31A746FAF /* ActiveSplitTestsListPresenter.swift */,
-				A62222B48202EE215FEA26F1 /* ActiveSplitTestsListDataFlow.swift */,
-				22138EBD3034366D4F34BE5B /* Provider */,
+				62E98F1D032CD74CF3131259 /* ActiveSplitTestsListProvider.swift */,
+				304A56EA220000F572F28821 /* ActiveSplitTestsListViewController.swift */,
 				62E984B45E54A31EAEAFF36F /* SplitTestViewModel.swift */,
 			);
 			path = ActiveSplitTestsList;
@@ -15119,7 +15111,6 @@
 				C5B0C7A5E129CC6ADF3ACF70 /* ActiveSplitTestsListInteractor.swift in Sources */,
 				21EAE6C1E2EDABCF3B30AD45 /* ActiveSplitTestsListPresenter.swift in Sources */,
 				E22CCE84244F4754FA6D9420 /* ActiveSplitTestsListDataFlow.swift in Sources */,
-				4D4E54128DB7442A4167B3A0 /* ActiveSplitTestsListProvider.swift in Sources */,
 				62E98CDF64C9870B0CC22DA0 /* SplitTestViewModel.swift in Sources */,
 				DCC32CECE3EE5D462760E75C /* SplitTestGroupsListAssembly.swift in Sources */,
 				DE1324EF4FDAEC6F2AE3656A /* SplitTestGroupsListViewController.swift in Sources */,
@@ -15128,6 +15119,7 @@
 				8F2FE14453745BF4354A24A4 /* SplitTestGroupsListDataFlow.swift in Sources */,
 				62E980C6E3288A18B0CAE4B0 /* SplitTestGroupViewModel.swift in Sources */,
 				62E988DCF83D1E7F81885848 /* SplitTestGroupsListProvider.swift in Sources */,
+				62E98BFEC4C5D2F4CDB6D795 /* ActiveSplitTestsListProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

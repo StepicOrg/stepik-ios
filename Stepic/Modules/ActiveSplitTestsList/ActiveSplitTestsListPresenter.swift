@@ -20,21 +20,17 @@ final class ActiveSplitTestsListPresenter: ActiveSplitTestsListPresenterProtocol
             if response.splitTests.isEmpty {
                 return .init(state: .emptyResult)
             } else {
-                let splitTests = self.formattedSplitTests(response.splitTests)
-                return .init(state: .result(data: splitTests))
+                let viewModels = response.splitTests.map { splitTest in
+                    SplitTestViewModel(
+                        uniqueIdentifier: splitTest,
+                        title: splitTest.components(separatedBy: "-").last?
+                            .replacingOccurrences(of: "_", with: " ").capitalized ?? splitTest
+                    )
+                }
+                return .init(state: .result(data: viewModels))
             }
         }()
 
         self.viewController?.displaySplitTests(viewModel: viewModel)
-    }
-
-    private func formattedSplitTests(_ splitTests: [String]) -> [SplitTestViewModel] {
-        return splitTests.map { splitTest in
-            SplitTestViewModel(
-                uniqueIdentifier: splitTest,
-                title: splitTest.components(separatedBy: "-").last?
-                    .replacingOccurrences(of: "_", with: " ").capitalized ?? splitTest
-            )
-        }
     }
 }

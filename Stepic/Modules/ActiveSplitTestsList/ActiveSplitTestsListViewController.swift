@@ -21,7 +21,7 @@ final class ActiveSplitTestsListViewController: UITableViewController {
             self.updateState()
         }
     }
-    private var splitTests = [SplitTestViewModel]()
+    private var viewModels = [SplitTestViewModel]()
 
     private lazy var emptyResultLabel: UILabel = {
         let label = UILabel(frame: CGRect(origin: .zero, size: self.tableView.bounds.size))
@@ -68,7 +68,7 @@ final class ActiveSplitTestsListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.splitTests.count
+        return self.viewModels.count
     }
 
     override func tableView(
@@ -80,7 +80,7 @@ final class ActiveSplitTestsListViewController: UITableViewController {
             for: indexPath
         )
 
-        cell.textLabel?.text = self.splitTests[indexPath.row].title
+        cell.textLabel?.text = self.viewModels[indexPath.row].title
         cell.accessoryType = .disclosureIndicator
 
         return cell
@@ -88,7 +88,7 @@ final class ActiveSplitTestsListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.presentSplitTestGroups(viewModel: self.splitTests[indexPath.row])
+        self.presentSplitTestGroups(viewModel: self.viewModels[indexPath.row])
     }
 
     private func updateState() {
@@ -97,7 +97,7 @@ final class ActiveSplitTestsListViewController: UITableViewController {
             self.tableView.backgroundView = self.emptyResultLabel
         case .result(let data):
             self.tableView.backgroundView = nil
-            self.splitTests = data
+            self.viewModels = data
         }
         self.tableView.reloadData()
     }

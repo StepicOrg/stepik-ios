@@ -17,7 +17,7 @@ enum ActiveSplitTestsList {
         }
 
         struct Response {
-            let splitTests: [String]
+            let splitTests: [UniqueIdentifierType]
         }
 
         struct ViewModel {
