@@ -25,7 +25,10 @@ final class ActiveSplitTestsListPresenter: ActiveSplitTestsListPresenterProtocol
                         uniqueIdentifier: splitTest.uniqueIdentifier,
                         title: splitTest.title
                     )
+                }.sorted { lhs, rhs in
+                    lhs.title.localizedCaseInsensitiveCompare(rhs.title) == .orderedAscending
                 }
+
                 return .init(state: .result(data: viewModels))
             }
         }()
