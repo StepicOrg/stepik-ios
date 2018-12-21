@@ -92,7 +92,9 @@ final class TabSegmentedControlView: UIView {
         }
 
         self.selectedItemIndex = index
-        self.updateSelectedMarker(animated: true)
+        if let selectedButton = self.tabButtons[safe: self.selectedItemIndex] {
+            self.tabButtonClicked(selectedButton)
+        }
     }
 
     private func initItems() {

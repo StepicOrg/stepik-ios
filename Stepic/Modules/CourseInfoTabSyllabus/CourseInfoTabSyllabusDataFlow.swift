@@ -12,6 +12,11 @@ enum CourseInfoTabSyllabus {
     // MARK: Common structs
     // Place here structs used in Requests/Responses
 
+    struct SyllabusData {
+        let sections: [(UniqueIdentifierType, Section)]
+        let units: [(UniqueIdentifierType, Unit?)]
+    }
+
     // MARK: Use cases
 
     /// Course syllabus
@@ -19,11 +24,18 @@ enum CourseInfoTabSyllabus {
         struct Request { }
 
         struct Response {
-            var result: Result<Course>
+            var result: Result<SyllabusData>
         }
 
         struct ViewModel {
             var state: ViewControllerState
+        }
+    }
+
+    /// Load syllabus section
+    enum ShowSyllabusSection {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
         }
     }
 

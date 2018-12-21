@@ -15,7 +15,13 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
     func makeModule() -> UIViewController {
         let provider = CourseInfoTabSyllabusProvider(
             sectionsPersistenceService: SectionsPersistenceService(),
-            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI())
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            progressesPersistenceService: ProgressesPersistenceService(),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
+            unitsPersistenceService: UnitsPersistenceService(),
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            lessonsPersistenceService: LessonsPersistenceService(),
+            lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI())
         )
         let presenter = CourseInfoTabSyllabusPresenter()
         let interactor = CourseInfoTabSyllabusInteractor(

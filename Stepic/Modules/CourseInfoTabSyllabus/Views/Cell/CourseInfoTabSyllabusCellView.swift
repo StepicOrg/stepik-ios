@@ -46,25 +46,12 @@ final class CourseInfoTabSyllabusCellView: UIView {
         label.font = self.appearance.titleFont
         label.textColor = self.appearance.titleTextColor
         label.numberOfLines = 2
-
-        label.text = "1.2 Second Lesson More Detailed and Interesting Name"
-
         return label
     }()
 
-    private lazy var downloadButton: DownloadControlView = {
-        let view = DownloadControlView(initialState: .readyToDownloading)
-        return view
-    }()
+    private lazy var downloadButton = DownloadControlView(initialState: .readyToDownloading)
 
-    private lazy var statsView: CourseInfoTabSyllabusCellStatsView = {
-        // For test
-        let view = CourseInfoTabSyllabusCellStatsView()
-        view.learnersLabelText = "655"
-        view.progressLabelText = "8/10"
-        view.likesCount = -1
-        return view
-    }()
+    private lazy var statsView = CourseInfoTabSyllabusCellStatsView()
 
     private lazy var progressIndicatorView: UIProgressView = {
         let view = UIProgressView()
@@ -72,9 +59,6 @@ final class CourseInfoTabSyllabusCellView: UIView {
         view.trackTintColor = self.appearance.progressViewSecondaryColor
         view.progressTintColor = self.appearance.progressViewMainColor
         view.transform = CGAffineTransform(rotationAngle: .pi / -2)
-
-        view.progress = 0.7
-
         return view
     }()
 
@@ -88,6 +72,16 @@ final class CourseInfoTabSyllabusCellView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
+    }
+
+    func configure(viewModel: CourseInfoTabSyllabusUnitViewModel) {
+        self.titleLabel.text = viewModel.title
+        self.progressIndicatorView.progress = viewModel.progress
+        self.coverImageView.loadImage(url: viewModel.coverImageURL)
+
+        self.statsView.progressLabelText = viewModel.progressLabelText
+        self.statsView.learnersLabelText = viewModel.learnersLabelText
+        self.statsView.likesCount = viewModel.likesCount
     }
 
     required init?(coder aDecoder: NSCoder) {

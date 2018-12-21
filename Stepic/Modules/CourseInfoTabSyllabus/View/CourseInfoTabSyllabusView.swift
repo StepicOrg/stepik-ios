@@ -21,6 +21,7 @@ final class CourseInfoTabSyllabusView: UIView {
     private lazy var headerView = CourseInfoTabSyllabusHeaderView()
 
     private weak var pageScrollViewDelegate: UIScrollViewDelegate?
+    private weak var tableViewDelegate: (UITableViewDelegate & UITableViewDataSource)?
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -35,14 +36,21 @@ final class CourseInfoTabSyllabusView: UIView {
         tableView.estimatedRowHeight = 100.0
 
         tableView.register(cellClass: CourseInfoTabSyllabusTableViewCell.self)
+
+        // Should use `self` as delegate to proxify some delegate methods
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = self.tableViewDelegate
 
         return tableView
     }()
 
-    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
+    init(
+        frame: CGRect = .zero,
+        tableViewDelegate: (UITableViewDelegate & UITableViewDataSource),
+        appearance: Appearance = Appearance()
+    ) {
         self.appearance = appearance
+        self.tableViewDelegate = tableViewDelegate
         super.init(frame: frame)
 
         self.setupView()
@@ -52,6 +60,13 @@ final class CourseInfoTabSyllabusView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
+        self.tableViewDelegate = delegate
+
+        self.tableView.dataSource = self.tableViewDelegate
+        self.tableView.reloadData()
     }
 }
 
@@ -77,40 +92,29 @@ extension CourseInfoTabSyllabusView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension CourseInfoTabSyllabusView: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+extension CourseInfoTabSyllabusView: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CourseInfoTabSyllabusTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        print(indexPath)
-        cell.updateConstraintsIfNeeded()
-        return cell
+    func tableView(
+        _ tableView: UITableView,
+        willDisplayHeaderView view: UIView,
+        forSection section: Int
+    ) {
+        self.tableViewDelegate?.tableView?(
+            tableView,
+            willDisplayHeaderView: view,
+            forSection: section
+        )
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return CourseInfoTabSyllabusSectionView()
+        return self.tableViewDelegate?.tableView?(tableView, viewForHeaderInSection: section)
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
-    }
-
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        print("display \(section)")
-    }
-}
-
-extension CourseInfoTabSyllabusView: UITableViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let delegateMethod = self.pageScrollViewDelegate?.scrollViewDidScroll {
-            delegateMethod(scrollView)
-        }
     }
 }
 

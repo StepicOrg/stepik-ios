@@ -30,6 +30,10 @@ final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
         }
     }
 
+    func configure(viewModel: CourseInfoTabSyllabusUnitViewModel) {
+        self.cellView.configure(viewModel: viewModel)
+    }
+
     private func setupSubview() {
         self.contentView.addSubview(self.cellView)
         self.contentView.addSubview(self.separatorView)

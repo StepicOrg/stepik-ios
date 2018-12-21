@@ -8,12 +8,22 @@
 
 import Foundation
 
-struct CourseInfoTabSyllabusSectionViewModel {
+struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
+    let uniqueIdentifier: UniqueIdentifierType
+
+    let index: String
     let title: String
+    let progress: Float
+
     let units: [CourseInfoTabSyllabusUnitViewModel]
 }
 
 struct CourseInfoTabSyllabusUnitViewModel {
     let title: String
     let coverImageURL: URL?
+    let progress: Float
+
+    let likesCount: Int?
+    let learnersLabelText: String
+    let progressLabelText: String?
 }

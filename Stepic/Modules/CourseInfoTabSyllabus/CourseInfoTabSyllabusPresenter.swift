@@ -20,12 +20,63 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
         switch response.result {
         case let .success(result):
-            let viewModels: [CourseInfoTabSyllabusSectionViewModel] = []
-            viewModel = CourseInfoTabSyllabus.ShowSyllabus.ViewModel(state: .result(data: viewModels))
+            let sectionViewModels = result.sections.enumerated().map {
+                sectionData -> CourseInfoTabSyllabusSectionViewModel in
+
+                var currentSectionUnitViewModels: [CourseInfoTabSyllabusUnitViewModel] = []
+                let (uid, section) = sectionData.element
+
+                for unitID in section.unitsArray {
+                    let unit = result.units.first(where: { $0.1?.id == unitID })?.1
+                    currentSectionUnitViewModels.append(self.makeUnitViewModel(uid: "", unit: unit))
+                }
+
+                return self.makeSectionViewModel(
+                    index: sectionData.offset,
+                    uid: uid,
+                    section: section,
+                    units: currentSectionUnitViewModels
+                )
+            }
+
+            viewModel = CourseInfoTabSyllabus.ShowSyllabus.ViewModel(state: .result(data: sectionViewModels))
         default:
-            break
+            viewModel = CourseInfoTabSyllabus.ShowSyllabus.ViewModel(state: .loading)
         }
 
-        // viewController?.displaySomething(viewModel: viewModel)
+        viewController?.displaySyllabus(viewModel: viewModel)
+    }
+
+    private func makeSectionViewModel(
+        index: Int,
+        uid: UniqueIdentifierType,
+        section: Section,
+        units: [CourseInfoTabSyllabusUnitViewModel]
+    ) -> CourseInfoTabSyllabusSectionViewModel {
+        let viewModel = CourseInfoTabSyllabusSectionViewModel(
+            uniqueIdentifier: uid,
+            index: "\(index + 1)",
+            title: section.title,
+            progress: (section.progress?.percentPassed ?? 0) / 100.0,
+            units: units
+        )
+        return viewModel
+    }
+
+    private func makeUnitViewModel(
+        uid: UniqueIdentifierType,
+        unit: Unit?
+    ) -> CourseInfoTabSyllabusUnitViewModel {
+        let likesCount = unit?.lesson?.voteDelta ?? 0
+
+        let viewModel = CourseInfoTabSyllabusUnitViewModel(
+            title: unit?.lesson?.title ?? "LOADING",
+            coverImageURL: URL(string: unit?.lesson?.coverURL ?? ""),
+            progress: (unit?.progress?.percentPassed ?? 0) / 100,
+            likesCount: likesCount == 0 ? nil : likesCount,
+            learnersLabelText: "\(unit?.lesson?.passedBy ?? 0)",
+            progressLabelText: "\(unit?.progress?.numberOfStepsPassed ?? 0)/\(unit?.progress?.numberOfSteps)"
+        )
+        return viewModel
     }
 }
