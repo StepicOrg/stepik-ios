@@ -31,6 +31,21 @@ enum SplitTestGroupsList {
         }
     }
 
+    /// Change split test group
+    enum SelectGroup {
+        struct Request {
+            let viewModelUniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let groups: [Group]
+        }
+
+        struct ViewModel {
+            var state: ViewControllerState
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

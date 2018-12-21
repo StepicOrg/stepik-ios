@@ -10,27 +10,38 @@ import Foundation
 
 protocol SplitTestGroupsListPresenterProtocol {
     func presentGroups(response: SplitTestGroupsList.ShowGroups.Response)
+    func presentGroupChange(response: SplitTestGroupsList.SelectGroup.Response)
 }
 
 final class SplitTestGroupsListPresenter: SplitTestGroupsListPresenterProtocol {
     weak var viewController: SplitTestGroupsListViewControllerProtocol?
 
     func presentGroups(response: SplitTestGroupsList.ShowGroups.Response) {
-        let viewModel: SplitTestGroupsList.ShowGroups.ViewModel = {
-            if response.groups.isEmpty {
-                return .init(state: .emptyResult)
-            } else {
-                let viewModels = response.groups.map { group in
-                    SplitTestGroupViewModel(
-                        uniqueIdentifier: group.uniqueIdentifier,
-                        title: group.uniqueIdentifier.capitalized,
-                        isChecked: group.isCurrent
-                    )
-                }
-                return .init(state: .result(data: viewModels))
-            }
-        }()
+        self.viewController?.displayGroups(
+            viewModel: .init(state: self.getNewState(groups: response.groups))
+        )
+    }
 
-        self.viewController?.displayGroups(viewModel: viewModel)
+    func presentGroupChange(response: SplitTestGroupsList.SelectGroup.Response) {
+        self.viewController?.displayGroupChange(
+            viewModel: .init(state: self.getNewState(groups: response.groups))
+        )
+    }
+
+    private func getNewState(
+        groups: [SplitTestGroupsList.Group]
+    ) -> SplitTestGroupsList.ViewControllerState {
+        if groups.isEmpty {
+            return .emptyResult
+        } else {
+            let viewModels = groups.map { group in
+                SplitTestGroupViewModel(
+                    uniqueIdentifier: group.uniqueIdentifier,
+                    title: group.uniqueIdentifier.capitalized,
+                    isChecked: group.isCurrent
+                )
+            }
+            return .result(data: viewModels)
+        }
     }
 }

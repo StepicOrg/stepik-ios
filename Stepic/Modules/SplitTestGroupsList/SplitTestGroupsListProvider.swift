@@ -11,6 +11,11 @@ import Foundation
 protocol SplitTestGroupsListProviderProtocol {
     func getGroups(splitTestUniqueIdentifier: UniqueIdentifierType) -> [UniqueIdentifierType]
     func getCurrentGroup(splitTestUniqueIdentifier: UniqueIdentifierType) -> UniqueIdentifierType?
+
+    func setGroup(
+        _ groupUniqueIdentifier: UniqueIdentifierType,
+        splitTestUniqueIdentifier: UniqueIdentifierType
+    )
 }
 
 final class SplitTestGroupsListProvider: SplitTestGroupsListProviderProtocol {
@@ -26,5 +31,12 @@ final class SplitTestGroupsListProvider: SplitTestGroupsListProviderProtocol {
 
     func getCurrentGroup(splitTestUniqueIdentifier: UniqueIdentifierType) -> UniqueIdentifierType? {
         return self.storage.getString(for: splitTestUniqueIdentifier)
+    }
+
+    func setGroup(
+        _ groupUniqueIdentifier: UniqueIdentifierType,
+        splitTestUniqueIdentifier: UniqueIdentifierType
+    ) {
+        self.storage.save(string: groupUniqueIdentifier, for: splitTestUniqueIdentifier)
     }
 }

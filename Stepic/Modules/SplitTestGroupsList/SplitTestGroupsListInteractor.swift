@@ -10,6 +10,7 @@ import Foundation
 
 protocol SplitTestGroupsListInteractorProtocol {
     func getGroups(request: SplitTestGroupsList.ShowGroups.Request)
+    func selectGroup(request: SplitTestGroupsList.SelectGroup.Request)
 }
 
 final class SplitTestGroupsListInteractor: SplitTestGroupsListInteractorProtocol {
@@ -29,6 +30,21 @@ final class SplitTestGroupsListInteractor: SplitTestGroupsListInteractorProtocol
     }
 
     func getGroups(request: SplitTestGroupsList.ShowGroups.Request) {
+        let groups = self.getGroups()
+        self.presenter.presentGroups(response: .init(groups: groups))
+    }
+
+    func selectGroup(request: SplitTestGroupsList.SelectGroup.Request) {
+        self.provider.setGroup(
+            request.viewModelUniqueIdentifier,
+            splitTestUniqueIdentifier: self.splitTestUniqueIdentifier
+        )
+
+        let groups = self.getGroups()
+        self.presenter.presentGroupChange(response: .init(groups: groups))
+    }
+
+    private func getGroups() -> [SplitTestGroupsList.Group] {
         let currentGroup = self.provider.getCurrentGroup(
             splitTestUniqueIdentifier: self.splitTestUniqueIdentifier
         )
@@ -41,6 +57,6 @@ final class SplitTestGroupsListInteractor: SplitTestGroupsListInteractorProtocol
             )
         }
 
-        self.presenter.presentGroups(response: .init(groups: groups))
+        return groups
     }
 }

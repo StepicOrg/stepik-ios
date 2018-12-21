@@ -10,6 +10,7 @@ import UIKit
 
 protocol SplitTestGroupsListViewControllerProtocol: class {
     func displayGroups(viewModel: SplitTestGroupsList.ShowGroups.ViewModel)
+    func displayGroupChange(viewModel: SplitTestGroupsList.SelectGroup.ViewModel)
 }
 
 final class SplitTestGroupsListViewController: UITableViewController {
@@ -86,6 +87,11 @@ final class SplitTestGroupsListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let selectedUniqueIdentifier = self.viewModels[indexPath.row].uniqueIdentifier
+        self.interactor.selectGroup(
+            request: .init(viewModelUniqueIdentifier: selectedUniqueIdentifier)
+        )
     }
 
     private func updateState() {
@@ -102,6 +108,14 @@ final class SplitTestGroupsListViewController: UITableViewController {
 
 extension SplitTestGroupsListViewController: SplitTestGroupsListViewControllerProtocol {
     func displayGroups(viewModel: SplitTestGroupsList.ShowGroups.ViewModel) {
-        self.state = viewModel.state
+        self.display(newState: viewModel.state)
+    }
+
+    func displayGroupChange(viewModel: SplitTestGroupsList.SelectGroup.ViewModel) {
+        self.display(newState: viewModel.state)
+    }
+
+    private func display(newState: SplitTestGroupsList.ViewControllerState) {
+        self.state = newState
     }
 }
