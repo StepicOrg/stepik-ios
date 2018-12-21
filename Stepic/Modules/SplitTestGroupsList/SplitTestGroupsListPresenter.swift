@@ -6,7 +6,7 @@
 //  Copyright 2018 Stepik. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol SplitTestGroupsListPresenterProtocol {
     func presentGroups(response: SplitTestGroupsList.ShowGroups.Response)
@@ -20,15 +20,17 @@ final class SplitTestGroupsListPresenter: SplitTestGroupsListPresenterProtocol {
             if response.groups.isEmpty {
                 return .init(state: .emptyResult)
             } else {
-                let groups = self.formattedGroups(response.groups)
-                return .init(state: .result(data: groups))
+                let viewModels = response.groups.map { group in
+                    SplitTestGroupViewModel(
+                        uniqueIdentifier: group.uniqueIdentifier,
+                        title: group.uniqueIdentifier.capitalized,
+                        isChecked: group.isCurrent
+                    )
+                }
+                return .init(state: .result(data: viewModels))
             }
         }()
 
         self.viewController?.displayGroups(viewModel: viewModel)
-    }
-
-    private func formattedGroups(_ groups: [String]) -> [SplitTestGroupViewModel] {
-        return []
     }
 }

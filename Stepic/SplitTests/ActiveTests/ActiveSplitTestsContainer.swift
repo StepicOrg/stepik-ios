@@ -14,7 +14,8 @@ final class ActiveSplitTestsContainer {
         storage: UserDefaults.standard
     )
 
-    static let activeSplitTests = [
+    /// A Dictionary where `key` is the split test database key and an array of groups associated with it.
+    static let activeSplitTestsInfo = [
         RetentionLocalNotificationsSplitTest.dataBaseKey: RetentionLocalNotificationsSplitTest.GroupType.groupValues
     ]
 

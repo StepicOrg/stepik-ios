@@ -11,5 +11,5 @@ import Foundation
 struct SplitTestGroupViewModel: UniqueIdentifiable {
     let uniqueIdentifier: UniqueIdentifierType
     let title: String
-    let isSelected: Bool
+    let isChecked: Bool
 }

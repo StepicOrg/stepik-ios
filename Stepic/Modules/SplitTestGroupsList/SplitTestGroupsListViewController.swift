@@ -21,7 +21,7 @@ final class SplitTestGroupsListViewController: UITableViewController {
             self.updateState()
         }
     }
-    private var groups = [SplitTestGroupViewModel]()
+    private var viewModels = [SplitTestGroupViewModel]()
 
     private lazy var emptyResultLabel: UILabel = {
         let label = UILabel(frame: CGRect(origin: .zero, size: self.tableView.bounds.size))
@@ -65,7 +65,7 @@ final class SplitTestGroupsListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.groups.count
+        return self.viewModels.count
     }
 
     override func tableView(
@@ -77,9 +77,9 @@ final class SplitTestGroupsListViewController: UITableViewController {
             for: indexPath
         )
 
-        let group = self.groups[indexPath.row]
-        cell.textLabel?.text = group.title
-        cell.accessoryType = group.isSelected ? .checkmark : .none
+        let viewModel = self.viewModels[indexPath.row]
+        cell.textLabel?.text = viewModel.title
+        cell.accessoryType = viewModel.isChecked ? .checkmark : .none
 
         return cell
     }
@@ -94,7 +94,7 @@ final class SplitTestGroupsListViewController: UITableViewController {
             self.tableView.backgroundView = self.emptyResultLabel
         case .result(let data):
             self.tableView.backgroundView = nil
-            self.groups = data
+            self.viewModels = data
         }
         self.tableView.reloadData()
     }

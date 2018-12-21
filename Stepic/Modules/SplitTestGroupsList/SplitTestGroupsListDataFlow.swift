@@ -9,6 +9,12 @@
 import Foundation
 
 enum SplitTestGroupsList {
+    // MARK: Common structs
+    struct Group {
+        let uniqueIdentifier: UniqueIdentifierType
+        let isCurrent: Bool
+    }
+
     // MARK: Use cases
 
     /// Show split test groups list
@@ -17,7 +23,7 @@ enum SplitTestGroupsList {
         }
 
         struct Response {
-            let groups: [String]
+            let groups: [Group]
         }
 
         struct ViewModel {

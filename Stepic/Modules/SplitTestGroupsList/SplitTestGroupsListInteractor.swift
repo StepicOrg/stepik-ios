@@ -29,7 +29,18 @@ final class SplitTestGroupsListInteractor: SplitTestGroupsListInteractorProtocol
     }
 
     func getGroups(request: SplitTestGroupsList.ShowGroups.Request) {
-        let splitTestGroups = self.provider.getSplitTestGroups(id: self.splitTestUniqueIdentifier)
-        self.presenter.presentGroups(response: .init(groups: splitTestGroups))
+        let currentGroup = self.provider.getCurrentGroup(
+            splitTestUniqueIdentifier: self.splitTestUniqueIdentifier
+        )
+        let groups = self.provider.getGroups(
+            splitTestUniqueIdentifier: self.splitTestUniqueIdentifier
+        ).map { group in
+            SplitTestGroupsList.Group(
+                uniqueIdentifier: group,
+                isCurrent: group == currentGroup
+            )
+        }
+
+        self.presenter.presentGroups(response: .init(groups: groups))
     }
 }

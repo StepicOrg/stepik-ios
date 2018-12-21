@@ -14,6 +14,6 @@ protocol ActiveSplitTestsListProviderProtocol {
 
 final class ActiveSplitTestsListProvider: ActiveSplitTestsListProviderProtocol {
     func getActiveSplitTests() -> [String] {
-        return Array(ActiveSplitTestsContainer.activeSplitTests.keys)
+        return Array(ActiveSplitTestsContainer.activeSplitTestsInfo.keys)
     }
 }
