@@ -26,17 +26,29 @@ final class SplitTestGroupsListProvider: SplitTestGroupsListProviderProtocol {
     }
 
     func getGroups(splitTestUniqueIdentifier: UniqueIdentifierType) -> [UniqueIdentifierType] {
-        return ActiveSplitTestsContainer.activeSplitTestsInfo[splitTestUniqueIdentifier] ?? []
+        return self.getSplitTestInfo(splitTestUniqueIdentifier)?.groups ?? []
     }
 
     func getCurrentGroup(splitTestUniqueIdentifier: UniqueIdentifierType) -> UniqueIdentifierType? {
-        return self.storage.getString(for: splitTestUniqueIdentifier)
+        if let splitTestInfo = self.getSplitTestInfo(splitTestUniqueIdentifier) {
+            return self.storage.getString(for: splitTestInfo.databaseKey)
+        } else {
+            return nil
+        }
     }
 
     func setGroup(
         _ groupUniqueIdentifier: UniqueIdentifierType,
         splitTestUniqueIdentifier: UniqueIdentifierType
     ) {
-        self.storage.save(string: groupUniqueIdentifier, for: splitTestUniqueIdentifier)
+        if let splitTestInfo = self.getSplitTestInfo(splitTestUniqueIdentifier) {
+            self.storage.save(string: groupUniqueIdentifier, for: splitTestInfo.databaseKey)
+        }
+    }
+
+    private func getSplitTestInfo(
+        _ splitTestUniqueIdentifier: UniqueIdentifierType
+    ) -> ActiveSplitTestsContainer.SplitTestInfo? {
+        return ActiveSplitTestsContainer.activeSplitTestsInfo[splitTestUniqueIdentifier]
     }
 }

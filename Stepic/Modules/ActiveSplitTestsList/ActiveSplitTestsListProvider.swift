@@ -9,11 +9,16 @@
 import Foundation
 
 protocol ActiveSplitTestsListProviderProtocol {
-    func getActiveSplitTests() -> [UniqueIdentifierType]
+    func getActiveSplitTests() -> [ActiveSplitTestsList.SplitTest]
 }
 
 final class ActiveSplitTestsListProvider: ActiveSplitTestsListProviderProtocol {
-    func getActiveSplitTests() -> [UniqueIdentifierType] {
-        return Array(ActiveSplitTestsContainer.activeSplitTestsInfo.keys)
+    func getActiveSplitTests() -> [ActiveSplitTestsList.SplitTest] {
+        return ActiveSplitTestsContainer.activeSplitTestsInfo.map { key, splitTestInfo in
+            .init(
+                uniqueIdentifier: key,
+                title: splitTestInfo.title
+            )
+        }
     }
 }

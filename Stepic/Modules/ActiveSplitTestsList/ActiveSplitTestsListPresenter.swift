@@ -22,9 +22,8 @@ final class ActiveSplitTestsListPresenter: ActiveSplitTestsListPresenterProtocol
             } else {
                 let viewModels = response.splitTests.map { splitTest in
                     SplitTestViewModel(
-                        uniqueIdentifier: splitTest,
-                        title: splitTest.components(separatedBy: "-").last?
-                            .replacingOccurrences(of: "_", with: " ").capitalized ?? splitTest
+                        uniqueIdentifier: splitTest.uniqueIdentifier,
+                        title: splitTest.title
                     )
                 }
                 return .init(state: .result(data: viewModels))

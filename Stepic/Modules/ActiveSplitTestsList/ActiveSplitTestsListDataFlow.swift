@@ -10,6 +10,10 @@ import Foundation
 
 enum ActiveSplitTestsList {
     // MARK: Use cases
+    struct SplitTest {
+        let uniqueIdentifier: UniqueIdentifierType
+        let title: String
+    }
 
     /// Show split tests list
     enum ShowSplitTests {
@@ -17,7 +21,7 @@ enum ActiveSplitTestsList {
         }
 
         struct Response {
-            let splitTests: [UniqueIdentifierType]
+            let splitTests: [SplitTest]
         }
 
         struct ViewModel {

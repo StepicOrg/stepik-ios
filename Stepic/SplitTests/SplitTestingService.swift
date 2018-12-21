@@ -44,7 +44,7 @@ class SplitTestingService: SplitTestingServiceProtocol {
     ///   - splitTestType: A split test type to save group.
     ///   - group: A split test group to save to the storage.
     private func saveGroup<Value: SplitTestProtocol>(_ splitTestType: Value.Type, group: Value.GroupType) {
-        self.storage.save(string: group.rawValue, for: Value.dataBaseKey)
+        self.storage.save(string: group.rawValue, for: Value.databaseKey)
     }
 
     /// Loads split test instance with the specific group for the current user.
@@ -53,7 +53,7 @@ class SplitTestingService: SplitTestingServiceProtocol {
     /// - Returns: Split test group for the given split test type if it contains in the storage,
     ///   otherwise returns nil.
     private func getGroup<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value.GroupType? {
-        guard let stringValue = self.storage.getString(for: Value.dataBaseKey) else {
+        guard let stringValue = self.storage.getString(for: Value.databaseKey) else {
             return nil
         }
         return Value.GroupType(rawValue: stringValue)
