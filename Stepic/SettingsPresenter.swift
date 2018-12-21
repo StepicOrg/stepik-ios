@@ -9,15 +9,12 @@
 import Foundation
 
 protocol SettingsView: class {
-    func setMenu(menuIDs: [SettingsMenuBlock])
-
+    func setMenu(ids: [SettingsMenuBlock])
     func presentAuth()
 }
 
 final class SettingsPresenter {
-    weak var view: SettingsView?
-
-    private var menu: [SettingsMenuBlock] = [
+    private static let userMenu: [SettingsMenuBlock] = [
         .videoHeader,
         .onlyWifiSwitch,
         .loadedVideoQuality,
@@ -32,19 +29,19 @@ final class SettingsPresenter {
         .downloads,
         .logout
     ]
-
-    private var staffMenu: [SettingsMenuBlock] = [
+    private static let staffMenu: [SettingsMenuBlock] = [
         .staffHeader,
         .splitTestGroup
     ]
 
+    weak var view: SettingsView?
+
     init(view: SettingsView) {
         self.view = view
-        self.addStaffMenuIfAllowed()
-        view.setMenu(menuIDs: self.menu)
+        self.setup()
     }
 
-    // MARK: - Menu blocks
+    // MARK: Public API
 
     func logout() {
         AuthInfo.shared.token = nil
@@ -59,11 +56,14 @@ final class SettingsPresenter {
         AdaptiveStorageManager.shared.isAdaptiveModeEnabled = isEnabled
     }
 
-    private func addStaffMenuIfAllowed() {
-        let isStaff = true
-        // TODO: AuthInfo.shared.user?.profileEntity?.isStaff
-        if isStaff {
-            self.menu.insert(contentsOf: self.staffMenu, at: 0)
-        }
+    // MARK: Private API
+
+    private func setup() {
+        let isStaff = AuthInfo.shared.user?.profileEntity?.isStaff ?? false
+        let menuIds = isStaff
+            ? SettingsPresenter.staffMenu + SettingsPresenter.userMenu
+            : SettingsPresenter.userMenu
+
+        self.view?.setMenu(ids: menuIds)
     }
 }

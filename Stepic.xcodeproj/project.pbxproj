@@ -4055,6 +4055,7 @@
 		62E98544284A70FAA434FD51 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
 		62E98550E592C61C86FBE7FD /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
 		62E98580ED2041F1BA80D3FB /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
+		62E98582240D00EBA4EA9653 /* SettingsMenuBlockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986E6FE648781A460A881 /* SettingsMenuBlockFactory.swift */; };
 		62E9859D4294692EF044E3E9 /* CourseWidgetStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98CC9203E93814694E4B4 /* CourseWidgetStatsView.swift */; };
 		62E985A6228659D32EDE2231 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
 		62E985ADEBDAF615935638E1 /* CourseListsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DB59E7919BCBEF2E0A0 /* CourseListsCollectionViewController.swift */; };
@@ -6057,6 +6058,7 @@
 		62E986D38DE1E4890415F9F7 /* StreakActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreakActivityView.swift; sourceTree = "<group>"; };
 		62E986DB2768602666465180 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62E986DE702390E83FF2AB52 /* CourseListViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewDelegate.swift; sourceTree = "<group>"; };
+		62E986E6FE648781A460A881 /* SettingsMenuBlockFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuBlockFactory.swift; sourceTree = "<group>"; };
 		62E98708CFECD3F1D0AD4120 /* Achievement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		62E98719354649AAFC238BDA /* StepsServiceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsServiceImpl.swift; sourceTree = "<group>"; };
 		62E98750EE80BFD97E4C7072 /* PinsMapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinsMapPresenter.swift; sourceTree = "<group>"; };
@@ -6919,6 +6921,7 @@
 				08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */,
 				084490081F5D67E300D01940 /* SettingsViewController.swift */,
 				080DD21F20CFC7CE00A86B2A /* SettingsMenuBlock.swift */,
+				62E986E6FE648781A460A881 /* SettingsMenuBlockFactory.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -15120,6 +15123,7 @@
 				62E980C6E3288A18B0CAE4B0 /* SplitTestGroupViewModel.swift in Sources */,
 				62E988DCF83D1E7F81885848 /* SplitTestGroupsListProvider.swift in Sources */,
 				62E98BFEC4C5D2F4CDB6D795 /* ActiveSplitTestsListProvider.swift in Sources */,
+				62E98582240D00EBA4EA9653 /* SettingsMenuBlockFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

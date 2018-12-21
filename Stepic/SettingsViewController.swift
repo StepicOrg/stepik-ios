@@ -8,17 +8,45 @@
 
 import Foundation
 
-final class SettingsViewController: MenuViewController, SettingsView {
+final class SettingsViewController: MenuViewController {
     var presenter: SettingsPresenter?
+
+    private lazy var artView: ArtView = {
+        let artView = ArtView()
+        artView.art = Images.arts.customizeLearningProcess
+
+        if #available(iOS 11.0, *) {
+            let insets = view.safeAreaInsets.left + view.safeAreaInsets.right
+            artView.width = UIScreen.main.bounds.width - insets
+        } else {
+            artView.width = UIScreen.main.bounds.width
+        }
+
+        let size = CGSize(
+            width: artView.width,
+            height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        )
+        artView.frame.size = artView.systemLayoutSizeFitting(size)
+
+        artView.onTap = {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
+        }
+
+        return artView
+    }()
+
+    // MARK: ViewController lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = SettingsPresenter(view: self)
-        tableView.tableHeaderView = artView
+
+        self.presenter = SettingsPresenter(view: self)
+
+        self.tableView.tableHeaderView = self.artView
         self.title = NSLocalizedString("Settings", comment: "")
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            self.tableView.contentInsetAdjustmentBehavior = .never
         }
     }
 
@@ -27,217 +55,95 @@ final class SettingsViewController: MenuViewController, SettingsView {
         AmplitudeAnalyticsEvents.Settings.opened.send()
     }
 
-    lazy var artView: ArtView = {
-        let artView = ArtView(frame: CGRect.zero)
-        artView.art = Images.arts.customizeLearningProcess
+    override func viewWillTransition(
+        to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator
+    ) {
+        super.viewWillTransition(to: size, with: coordinator)
+
         if #available(iOS 11.0, *) {
-            artView.width = UIScreen.main.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+            let insets = self.view.safeAreaInsets.top + self.view.safeAreaInsets.bottom
+            self.artView.width = size.width - insets
         } else {
-            artView.width = UIScreen.main.bounds.width
+            self.artView.width = size.width
         }
 
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
-        artView.onTap = {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
-        }
-        return artView
-    }()
-
-    private func constructMenuBlock(from menuBlockID: SettingsMenuBlock) -> MenuBlock {
-        switch menuBlockID {
-        case .staffHeader:
-            return self.buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("StaffSettingsTitle", comment: ""))
-        case .splitTestGroup:
-            return self.buildSplitTestGroupBlock()
-        case .videoHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("Video", comment: ""))
-        case .onlyWifiSwitch:
-            return buildOnlyWifiSwitchBlock()
-        case .loadedVideoQuality:
-            return buildLoadedVideoQualityBlock()
-        case .onlineVideoQuality:
-            return buildOnlineVideoQualityBlock()
-        case .codeEditorSettingsHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("CodeEditorTitle", comment: ""))
-        case .codeEditorSettings:
-            return buildCodeEditorSettingsBlock()
-        case .languageSettingsHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("LanguageSettingsTitle", comment: ""))
-        case .contentLanguage:
-            return buildContentLanguageSettingsBlock()
-        case .adaptiveHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("AdaptivePreferencesTitle", comment: ""))
-        case .adaptiveModeSwitch:
-            return buildAdaptiveModeSwitchBlock()
-        case .emptyHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: "")
-        case .downloads:
-            return buildDownloadsTransitionBlock()
-        case .logout:
-            return buildLogoutBlock()
-        }
+        let size = CGSize(
+            width: self.artView.width,
+            height: self.artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        )
+        self.artView.frame.size = self.artView.systemLayoutSizeFitting(size)
     }
 
-    func setMenu(menuIDs: [SettingsMenuBlock]) {
-        var blocks: [MenuBlock] = []
-        for menuBlockID in menuIDs {
-            blocks += [constructMenuBlock(from: menuBlockID)]
+    // MARK: Menu blocks managing
+
+    private func makeMenuBlock(for id: SettingsMenuBlock) -> MenuBlock {
+        let onTouch = { [weak self] in
+            switch id {
+            case .splitTestGroup:
+                let viewController = ActiveSplitTestsListAssembly().makeModule()
+                self?.navigationController?.pushViewController(viewController, animated: true)
+            case .loadedVideoQuality:
+                self?.changeVideoQuality(action: .downloading)
+            case .onlineVideoQuality:
+                self?.changeVideoQuality(action: .watching)
+            case .codeEditorSettings:
+                self?.pushViewController(identifier: "CodeEditorSettings", storyboardName: "Profile")
+            case .contentLanguage:
+                self?.pushViewController(identifier: "LanguageSettingsViewController", storyboardName: "Profile")
+            case .downloads:
+                self?.pushViewController(identifier: "DownloadsViewController", storyboardName: "Main")
+            case .logout:
+                self?.presenter?.logout()
+            default:
+                return
+            }
+        }
+        let onSwitch: (Bool) -> Void = { [weak self] isOn in
+            switch id {
+            case .onlyWifiSwitch:
+                self?.presenter?.changeVideoWifiReachability(to: !isOn)
+            case .adaptiveModeSwitch:
+                self?.presenter?.changeAdaptiveModeEnabled(to: isOn)
+            default:
+                return
+            }
+        }
+        let factory = SettingsMenuBlockFactory(onTouch: onTouch, onSwitch: onSwitch)
+
+        return factory.makeMenuBlock(for: id)
+    }
+
+    private func pushViewController(identifier: String, storyboardName: String) {
+        let viewController = ControllerHelper.instantiateViewController(
+            identifier: identifier,
+            storyboardName: storyboardName
+        )
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    private func changeVideoQuality(action: VideoQualityChoiceAction) {
+        guard let viewController = ControllerHelper.instantiateViewController(
+            identifier: "VideoQualityTableViewController",
+            storyboardName: "Profile"
+        ) as? VideoQualityTableViewController else {
+            return
+        }
+        viewController.action = action
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+extension SettingsViewController: SettingsView {
+    func setMenu(ids: [SettingsMenuBlock]) {
+        let blocks = ids.map { id in
+            self.makeMenuBlock(for: id)
         }
         self.menu = Menu(blocks: blocks)
     }
 
-    private func buildTitleMenuBlock(id: SettingsMenuBlock, title: String) -> HeaderMenuBlock {
-        return HeaderMenuBlock(id: id.rawValue, title: title)
-    }
-
-    private func buildContentLanguageSettingsBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: SettingsMenuBlock.contentLanguage.rawValue, title: NSLocalizedString("ContentLanguagePreference", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.changeContentLanguageSettings()
-        }
-
-        return block
-    }
-
-    private func buildSplitTestGroupBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(
-            id: SettingsMenuBlock.splitTestGroup.rawValue,
-            title: NSLocalizedString("StaffActiveSplitTestGroupPreference", comment: "")
-        )
-        block.onTouch = { [weak self] in
-            self?.navigationController?.pushViewController(
-                ActiveSplitTestsListAssembly().makeModule(),
-                animated: true
-            )
-        }
-        return block
-    }
-
-    private func buildLoadedVideoQualityBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: SettingsMenuBlock.loadedVideoQuality.rawValue, title: NSLocalizedString("LoadingVideoQualityPreference", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.changeVideoQuality(action: .downloading)
-        }
-
-        return block
-    }
-
-    private func buildOnlineVideoQualityBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: SettingsMenuBlock.onlineVideoQuality.rawValue, title: NSLocalizedString("WatchingVideoQualityPreference", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.changeVideoQuality(action: .watching)
-        }
-
-        return block
-    }
-
-    private func buildOnlyWifiSwitchBlock() -> SwitchMenuBlock {
-        let block = SwitchMenuBlock(id: SettingsMenuBlock.onlyWifiSwitch.rawValue, title: NSLocalizedString("WiFiLoadPreference", comment: ""), isOn: !ConnectionHelper.shared.reachableOnWWAN)
-
-        block.onSwitch = {
-            [weak self]
-            isOn in
-            self?.presenter?.changeVideoWifiReachability(to: !isOn)
-        }
-
-        return block
-    }
-
-    private func buildAdaptiveModeSwitchBlock() -> SwitchMenuBlock {
-        let block = SwitchMenuBlock(id: SettingsMenuBlock.adaptiveModeSwitch.rawValue, title: NSLocalizedString("UseAdaptiveModePreference", comment: ""), isOn: AdaptiveStorageManager.shared.isAdaptiveModeEnabled)
-
-        block.onSwitch = {
-            [weak self]
-            isOn in
-            self?.presenter?.changeAdaptiveModeEnabled(to: isOn)
-        }
-
-        return block
-    }
-
-    private func buildCodeEditorSettingsBlock() -> TransitionMenuBlock {
-        let block = TransitionMenuBlock(id: SettingsMenuBlock.codeEditorSettings.rawValue, title: NSLocalizedString("CodeEditorSettingsTitle", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.changeCodeEditorSettings()
-        }
-
-        return block
-    }
-
-    private func buildDownloadsTransitionBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: SettingsMenuBlock.downloads.rawValue, title: NSLocalizedString("Downloads", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.navigateToDownloads()
-        }
-
-        return block
-    }
-
-    private func buildLogoutBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: SettingsMenuBlock.logout.rawValue, title: NSLocalizedString("Logout", comment: ""))
-
-        block.titleColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
-        block.onTouch = {
-            [weak self] in
-            self?.presenter?.logout()
-        }
-
-        return block
-    }
-
-    func changeVideoQuality(action: VideoQualityChoiceAction) {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "VideoQualityTableViewController", storyboardName: "Profile") as? VideoQualityTableViewController else {
-            return
-        }
-
-        vc.action = action
-
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func changeContentLanguageSettings() {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "LanguageSettingsViewController", storyboardName: "Profile") as? LanguageSettingsViewController else {
-            return
-        }
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-
-    func changeCodeEditorSettings() {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
-            return
-        }
-
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        if #available(iOS 11.0, *) {
-            artView.width = size.width - view.safeAreaInsets.top - view.safeAreaInsets.bottom
-        } else {
-            artView.width = size.width
-        }
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
-    }
-
-    func navigateToDownloads() {
-        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
     func presentAuth() {
-        if let navigationController = navigationController {
+        if let navigationController = self.navigationController {
             navigationController.popViewController(animated: false)
             RoutingManager.auth.routeFrom(controller: navigationController, success: nil, cancel: nil)
         }
