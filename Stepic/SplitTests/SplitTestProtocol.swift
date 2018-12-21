@@ -22,6 +22,9 @@ protocol SplitTestProtocol {
     static var shouldParticipate: Bool { get }
     static var minParticipatingStartVersion: String { get }
 
+    /// A title for staff split tests settings.
+    static var displayName: String { get }
+
     /// Represents current assigned group for the split test instance.
     var currentGroup: GroupType { get }
 
@@ -38,16 +41,20 @@ extension SplitTestProtocol {
         ) != .orderedAscending
     }
 
-    /// Sends current group to the analytics.
-    func setSplitTestGroup() {
-        self.analytics.setGroup(test: Self.analyticsKey, group: self.currentGroup.rawValue)
-    }
-
     static var analyticsKey: String {
         return "split_test-\(self.identifier)"
     }
 
     static var databaseKey: String {
         return "split_test_database-\(self.identifier)"
+    }
+
+    static var displayName: String {
+        return String(describing: self)
+    }
+
+    /// Sends current group to the analytics.
+    func setSplitTestGroup() {
+        self.analytics.setGroup(test: Self.analyticsKey, group: self.currentGroup.rawValue)
     }
 }

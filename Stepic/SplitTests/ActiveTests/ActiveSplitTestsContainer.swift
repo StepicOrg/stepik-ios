@@ -27,7 +27,7 @@ final class ActiveSplitTestsContainer {
         _ splitTestType: Value.Type
     ) -> SplitTestInfo {
         return SplitTestInfo(
-            title: String(describing: splitTestType),
+            title: splitTestType.displayName,
             databaseKey: splitTestType.databaseKey,
             groups: splitTestType.GroupType.groups.map({ $0.rawValue })
         )

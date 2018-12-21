@@ -14,6 +14,8 @@ final class RetentionLocalNotificationsSplitTest: SplitTestProtocol {
     static let identifier = "retention_local_notification"
     static let minParticipatingStartVersion = "1.74"
 
+    static let displayName = "Retention notifications"
+
     var currentGroup: Group
     var analytics: ABAnalyticsServiceProtocol
 
