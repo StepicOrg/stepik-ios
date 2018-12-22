@@ -14,24 +14,9 @@ final class SettingsViewController: MenuViewController {
     private lazy var artView: ArtView = {
         let artView = ArtView()
         artView.art = Images.arts.customizeLearningProcess
-
-        if #available(iOS 11.0, *) {
-            let insets = view.safeAreaInsets.left + view.safeAreaInsets.right
-            artView.width = UIScreen.main.bounds.width - insets
-        } else {
-            artView.width = UIScreen.main.bounds.width
-        }
-
-        let size = CGSize(
-            width: artView.width,
-            height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-        )
-        artView.frame.size = artView.systemLayoutSizeFitting(size)
-
         artView.onTap = {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
         }
-
         return artView
     }()
 
@@ -40,10 +25,11 @@ final class SettingsViewController: MenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = NSLocalizedString("Settings", comment: "")
         self.presenter = SettingsPresenter(view: self)
 
         self.tableView.tableHeaderView = self.artView
-        self.title = NSLocalizedString("Settings", comment: "")
+        self.sizeArtView()
 
         if #available(iOS 11.0, *) {
             self.tableView.contentInsetAdjustmentBehavior = .never
@@ -60,14 +46,11 @@ final class SettingsViewController: MenuViewController {
         with coordinator: UIViewControllerTransitionCoordinator
     ) {
         super.viewWillTransition(to: size, with: coordinator)
+        self.sizeArtView(size: size)
+    }
 
-        if #available(iOS 11.0, *) {
-            let insets = self.view.safeAreaInsets.top + self.view.safeAreaInsets.bottom
-            self.artView.width = size.width - insets
-        } else {
-            self.artView.width = size.width
-        }
-
+    private func sizeArtView(size: CGSize = UIScreen.main.bounds.size) {
+        self.artView.width = size.width
         let size = CGSize(
             width: self.artView.width,
             height: self.artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
