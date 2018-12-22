@@ -13,8 +13,6 @@ protocol ActiveSplitTestsListViewControllerProtocol: class {
 }
 
 final class ActiveSplitTestsListViewController: UITableViewController {
-    private static let cellReuseIdentifier = "ActiveSplitTestTableViewCellIdentifier"
-
     let interactor: ActiveSplitTestsListInteractorProtocol
     private var state: ActiveSplitTestsList.ViewControllerState {
         didSet {
@@ -49,10 +47,7 @@ final class ActiveSplitTestsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.register(
-            UITableViewCell.self,
-            forCellReuseIdentifier: ActiveSplitTestsListViewController.cellReuseIdentifier
-        )
+        self.tableView.register(cellClass: SplitTestTableViewCell.self)
         self.tableView.tableFooterView = UIView()
 
         self.updateState()
@@ -75,12 +70,8 @@ final class ActiveSplitTestsListViewController: UITableViewController {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: ActiveSplitTestsListViewController.cellReuseIdentifier,
-            for: indexPath
-        )
-
-        cell.textLabel?.text = self.viewModels[indexPath.row].title
+        let cell: SplitTestTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.title = self.viewModels[indexPath.row].title
         cell.accessoryType = .disclosureIndicator
 
         return cell

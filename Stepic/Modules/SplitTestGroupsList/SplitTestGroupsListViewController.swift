@@ -14,8 +14,6 @@ protocol SplitTestGroupsListViewControllerProtocol: class {
 }
 
 final class SplitTestGroupsListViewController: UITableViewController {
-    private static let cellReuseIdentifier = "SplitTestGroupsTableViewCellIdentifier"
-
     let interactor: SplitTestGroupsListInteractorProtocol
     private var state: SplitTestGroupsList.ViewControllerState {
         didSet {
@@ -48,10 +46,7 @@ final class SplitTestGroupsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.register(
-            UITableViewCell.self,
-            forCellReuseIdentifier: SplitTestGroupsListViewController.cellReuseIdentifier
-        )
+        self.tableView.register(cellClass: SplitTestTableViewCell.self)
         self.tableView.tableFooterView = UIView()
 
         self.interactor.getGroups(request: .init())
@@ -73,13 +68,10 @@ final class SplitTestGroupsListViewController: UITableViewController {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: SplitTestGroupsListViewController.cellReuseIdentifier,
-            for: indexPath
-        )
+        let cell: SplitTestTableViewCell = tableView.dequeueReusableCell(for: indexPath)
 
         let viewModel = self.viewModels[indexPath.row]
-        cell.textLabel?.text = viewModel.title
+        cell.title = viewModel.title
         cell.accessoryType = viewModel.isChecked ? .checkmark : .none
 
         return cell

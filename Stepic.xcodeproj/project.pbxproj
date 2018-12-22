@@ -3232,6 +3232,7 @@
 		2CA5568C212323E800A3B1AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
 		2CA5568E2123397400A3B1AB /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5568D2123397400A3B1AB /* ImageAsset.swift */; };
 		2CA5568F212339E200A3B1AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885F8511BA9D64300F2A188 /* Constants.swift */; };
+		2CA5C78421CE73CB00D5841C /* SplitTestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5C78321CE73CB00D5841C /* SplitTestTableViewCell.swift */; };
 		2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
@@ -5806,6 +5807,7 @@
 		2CA3F56020FF7C030041E893 /* GraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphService.swift; sourceTree = "<group>"; };
 		2CA5568A2123204B00A3B1AB /* StepPlainObject+Make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StepPlainObject+Make.swift"; sourceTree = "<group>"; };
 		2CA5568D2123397400A3B1AB /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
+		2CA5C78321CE73CB00D5841C /* SplitTestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTestTableViewCell.swift; sourceTree = "<group>"; };
 		2CA6F5ED21219A6500EE337E /* ServiceFactoryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactoryBuilder.swift; sourceTree = "<group>"; };
 		2CA6F5EF21219ABB00EE337E /* AssemblyFactoryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryBuilder.swift; sourceTree = "<group>"; };
 		2CA8D3872088D9C000E105E9 /* Adaptive 8290.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive 8290.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7847,8 +7849,8 @@
 				62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */,
 				62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */,
 				2C2EA36A212D5FEF002116C9 /* Result.swift */,
-				100D33CD3AAC03A84EA5B18A /* Modules */,
 				62E98E01E2DDDEEEB0CDFE47 /* UniqueIdentifierType.swift */,
+				100D33CD3AAC03A84EA5B18A /* Modules */,
 			);
 			path = Stepic;
 			sourceTree = "<group>";
@@ -9818,6 +9820,14 @@
 			path = Discussions;
 			sourceTree = "<group>";
 		};
+		2CA5C78221CE739300D5841C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2CA5C78321CE73CB00D5841C /* SplitTestTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		2CA5E5A4200E1EC200CE77B0 /* Rating & Stats */ = {
 			isa = PBXGroup;
 			children = (
@@ -11338,6 +11348,7 @@
 				62E98F1D032CD74CF3131259 /* ActiveSplitTestsListProvider.swift */,
 				304A56EA220000F572F28821 /* ActiveSplitTestsListViewController.swift */,
 				62E984B45E54A31EAEAFF36F /* SplitTestViewModel.swift */,
+				2CA5C78221CE739300D5841C /* View */,
 			);
 			path = ActiveSplitTestsList;
 			sourceTree = "<group>";
@@ -15081,6 +15092,7 @@
 				62E983C5A1F92CD833F5C3C9 /* CourseCoverImageView.swift in Sources */,
 				62E986245D0FB0F3E685A828 /* CourseWidgetButton.swift in Sources */,
 				62E98360ADC6381F5FB17C70 /* CourseWidgetCoverView.swift in Sources */,
+				2CA5C78421CE73CB00D5841C /* SplitTestTableViewCell.swift in Sources */,
 				62E98CFDEA2545C13316C50E /* CourseWidgetLabel.swift in Sources */,
 				62E98FFAEB8D7BC0F7F316E2 /* CourseWidgetStatsItemView.swift in Sources */,
 				62E9859D4294692EF044E3E9 /* CourseWidgetStatsView.swift in Sources */,
