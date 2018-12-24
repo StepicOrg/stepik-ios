@@ -10,7 +10,9 @@ import UIKit
 
 final class ActiveSplitTestsListAssembly: Assembly {
     func makeModule() -> UIViewController {
-        let provider = ActiveSplitTestsListProvider()
+        let provider = ActiveSplitTestsListProvider(
+            activeSplitTestInfoProvider: ActiveSplitTestsContainer()
+        )
         let presenter = ActiveSplitTestsListPresenter()
         let interactor = ActiveSplitTestsListInteractor(
             presenter: presenter,

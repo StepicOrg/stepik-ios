@@ -16,7 +16,10 @@ final class SplitTestGroupsListAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = SplitTestGroupsListProvider(storage: UserDefaults.standard)
+        let provider = SplitTestGroupsListProvider(
+            splitTestInfoProvider: ActiveSplitTestsContainer(),
+            storage: UserDefaults.standard
+        )
         let presenter = SplitTestGroupsListPresenter()
         let interactor = SplitTestGroupsListInteractor(
             presenter: presenter,

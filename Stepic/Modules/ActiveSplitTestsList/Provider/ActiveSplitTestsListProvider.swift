@@ -13,12 +13,15 @@ protocol ActiveSplitTestsListProviderProtocol {
 }
 
 final class ActiveSplitTestsListProvider: ActiveSplitTestsListProviderProtocol {
+    private let activeSplitTestInfoProvider: ActiveSplitTestInfoProvider
+
+    init(activeSplitTestInfoProvider: ActiveSplitTestInfoProvider) {
+        self.activeSplitTestInfoProvider = activeSplitTestInfoProvider
+    }
+
     func getActiveSplitTests() -> [ActiveSplitTestsList.SplitTest] {
-        return ActiveSplitTestsContainer.activeSplitTestsInfo.map { key, splitTestInfo in
-            .init(
-                uniqueIdentifier: key,
-                title: splitTestInfo.title
-            )
+        return self.activeSplitTestInfoProvider.activeSplitTestInfos.map { key, splitTestInfo in
+            .init(uniqueIdentifier: key, title: splitTestInfo.title)
         }
     }
 }

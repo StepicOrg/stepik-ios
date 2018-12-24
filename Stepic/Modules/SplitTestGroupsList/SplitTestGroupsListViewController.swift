@@ -15,7 +15,7 @@ protocol SplitTestGroupsListViewControllerProtocol: class {
 
 final class SplitTestGroupsListViewController: UITableViewController {
     let interactor: SplitTestGroupsListInteractorProtocol
-    private var state: SplitTestGroupsList.ViewControllerState {
+    private(set) var state: SplitTestGroupsList.ViewControllerState {
         didSet {
             self.updateState()
         }

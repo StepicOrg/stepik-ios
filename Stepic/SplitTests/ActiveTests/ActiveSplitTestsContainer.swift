@@ -14,28 +14,15 @@ final class ActiveSplitTestsContainer {
         storage: UserDefaults.standard
     )
 
-    /// A Dictionary where `key` is the split test identifier and `SplitTestInfo` associated with it.
-    static let activeSplitTestsInfo = [
-        RetentionLocalNotificationsSplitTest.identifier: getSplitTestInfo(RetentionLocalNotificationsSplitTest.self)
-    ]
-
     static func setActiveTestsGroups() {
         self.splitTestingService.fetchSplitTest(RetentionLocalNotificationsSplitTest.self).setSplitTestGroup()
     }
+}
 
-    private static func getSplitTestInfo<Value: SplitTestProtocol>(
-        _ splitTestType: Value.Type
-    ) -> SplitTestInfo {
-        return SplitTestInfo(
-            title: splitTestType.displayName,
-            databaseKey: splitTestType.databaseKey,
-            groups: splitTestType.GroupType.groups.map({ $0.rawValue })
-        )
-    }
-
-    struct SplitTestInfo {
-        let title: String
-        let databaseKey: String
-        let groups: [String]
+extension ActiveSplitTestsContainer: ActiveSplitTestInfoProvider {
+    var activeSplitTestInfos: [UniqueIdentifierType : SplitTestInfo] {
+        return [
+            RetentionLocalNotificationsSplitTest.identifier: SplitTestInfo(RetentionLocalNotificationsSplitTest.self)
+        ]
     }
 }

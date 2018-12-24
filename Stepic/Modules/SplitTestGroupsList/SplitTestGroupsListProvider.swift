@@ -19,18 +19,23 @@ protocol SplitTestGroupsListProviderProtocol {
 }
 
 final class SplitTestGroupsListProvider: SplitTestGroupsListProviderProtocol {
+    private let activeSplitTestInfoProvider: ActiveSplitTestInfoProvider
     private let storage: StringStorageServiceProtocol
 
-    init(storage: StringStorageServiceProtocol) {
+    init(
+        splitTestInfoProvider: ActiveSplitTestInfoProvider,
+        storage: StringStorageServiceProtocol
+    ) {
+        self.activeSplitTestInfoProvider = splitTestInfoProvider
         self.storage = storage
     }
 
     func getGroups(splitTestUniqueIdentifier: UniqueIdentifierType) -> [UniqueIdentifierType] {
-        return self.getSplitTestInfo(splitTestUniqueIdentifier)?.groups ?? []
+        return self.activeSplitTestInfoProvider.getSplitTestInfo(for: splitTestUniqueIdentifier)?.groups ?? []
     }
 
     func getCurrentGroup(splitTestUniqueIdentifier: UniqueIdentifierType) -> UniqueIdentifierType? {
-        if let splitTestInfo = self.getSplitTestInfo(splitTestUniqueIdentifier) {
+        if let splitTestInfo = self.activeSplitTestInfoProvider.getSplitTestInfo(for: splitTestUniqueIdentifier) {
             return self.storage.getString(for: splitTestInfo.databaseKey)
         } else {
             return nil
@@ -41,14 +46,8 @@ final class SplitTestGroupsListProvider: SplitTestGroupsListProviderProtocol {
         _ groupUniqueIdentifier: UniqueIdentifierType,
         splitTestUniqueIdentifier: UniqueIdentifierType
     ) {
-        if let splitTestInfo = self.getSplitTestInfo(splitTestUniqueIdentifier) {
+        if let splitTestInfo = self.activeSplitTestInfoProvider.getSplitTestInfo(for: splitTestUniqueIdentifier) {
             self.storage.save(string: groupUniqueIdentifier, for: splitTestInfo.databaseKey)
         }
-    }
-
-    private func getSplitTestInfo(
-        _ splitTestUniqueIdentifier: UniqueIdentifierType
-    ) -> ActiveSplitTestsContainer.SplitTestInfo? {
-        return ActiveSplitTestsContainer.activeSplitTestsInfo[splitTestUniqueIdentifier]
     }
 }
