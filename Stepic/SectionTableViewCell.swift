@@ -66,7 +66,7 @@ class SectionTableViewCell: UITableViewCell {
                 videos.append(contentsOf: lesson.stepVideos)
             }
             let tasks = videos.compactMap { video in
-                VideoDownloaderManager.shared.get(by: video.id)
+                // VideoDownloaderManager.shared.get(by: video.id)
             }
 
             let progress = tasks.map({ $0.progress }).reduce(0.0, +) / Float(tasks.count)

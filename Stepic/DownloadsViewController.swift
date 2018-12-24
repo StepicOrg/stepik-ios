@@ -51,26 +51,26 @@ class DownloadsViewController: UIViewController {
         let videos = Video.getAllVideos()
 
         for video in videos {
-            let isVideoLoading = VideoDownloaderManager.shared.get(by: video.id)?.state == .active
-            if isVideoLoading {
-                guard let task = VideoDownloaderManager.shared.get(by: video.id) else {
-                    return
-                }
-
-                downloading += [video]
-                task.completionReporter = { [weak self] _ in
-                    DispatchQueue.main.async {
-                        self?.removeFromDownloading(video)
-                        self?.addToStored(video)
-                    }
-                }
-
-                task.failureReporter = { [weak self] _ in
-                    DispatchQueue.main.async {
-                        self?.removeFromDownloading(video)
-                    }
-                }
-            }
+//            let isVideoLoading = VideoDownloaderManager.shared.get(by: video.id)?.state == .active
+//            if isVideoLoading {
+//                guard let task = VideoDownloaderManager.shared.get(by: video.id) else {
+//                    return
+//                }
+//
+//                downloading += [video]
+//                task.completionReporter = { [weak self] _ in
+//                    DispatchQueue.main.async {
+//                        self?.removeFromDownloading(video)
+//                        self?.addToStored(video)
+//                    }
+//                }
+//
+//                task.failureReporter = { [weak self] _ in
+//                    DispatchQueue.main.async {
+//                        self?.removeFromDownloading(video)
+//                    }
+//                }
+//            }
             if video.state == VideoState.cached {
                 stored += [video]
             }
@@ -140,7 +140,7 @@ class DownloadsViewController: UIViewController {
             var shouldBeRemovedCount = videos.count
             for video in videos {
                 do {
-                    try VideoFileManager().removeVideo(videoId: video.id)
+                    // try VideoFileManager().removeVideo(videoId: video.id)
                     video.cachedQuality = nil
                     CoreDataHelper.instance.save()
 
@@ -359,7 +359,7 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
         case .downloaded:
             if let vid = getVideoById(stored, id: downloadButton.tag) {
                 do {
-                    try VideoFileManager().removeVideo(videoId: vid.id)
+                    // try VideoFileManager().removeVideo(videoId: vid.id)
                     removeFromStored(vid)
                 } catch {
                     print("error while deleting from the store")
@@ -368,12 +368,12 @@ extension DownloadsViewController : PKDownloadButtonDelegate {
             break
         case .downloading:
             if let vid = getVideoById(downloading, id: downloadButton.tag) {
-                guard let task = VideoDownloaderManager.shared.get(by: vid.id) else {
-                    return
-                }
+//                guard let task = VideoDownloaderManager.shared.get(by: vid.id) else {
+//                    return
+//                }
 
-                task.cancel()
-                VideoDownloaderManager.shared.remove(by: vid.id)
+                // task.cancel()
+                // VideoDownloaderManager.shared.remove(by: vid.id)
                 removeFromDownloading(vid)
             }
             break
