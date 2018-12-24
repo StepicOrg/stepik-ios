@@ -46,7 +46,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
 
     private let downloader: RestorableBackgroundDownloaderProtocol
     private let fileManager: VideoStoredFileManagerProtocol
-    
+
     private var handlers: [VideoDownloadingServiceEventHandler] = []
     private var observedTasks: [DownloaderTaskProtocol.IDType: DownloaderTaskProtocol] = [:]
 

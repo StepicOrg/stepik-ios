@@ -26,6 +26,8 @@ extension CourseInfoView {
 final class CourseInfoView: UIView {
     let appearance: Appearance
 
+    private let tabsTitles: [String]
+
     private var lastHeaderHeight: CGFloat = 0
     private var currentPageIndex = 0
 
@@ -37,10 +39,7 @@ final class CourseInfoView: UIView {
     private lazy var segmentedControl: TabSegmentedControlView = {
         let control = TabSegmentedControlView(
             frame: .zero,
-            items: [
-                NSLocalizedString("CourseInfoTabInfo", comment: ""),
-                NSLocalizedString("CourseInfoTabSyllabus", comment: "")
-            ]
+            items: self.tabsTitles
         )
         control.delegate = self
         return control
@@ -63,10 +62,12 @@ final class CourseInfoView: UIView {
         frame: CGRect = .zero,
         pageControllerView: UIView,
         scrollDelegate: UIScrollViewDelegate? = nil,
+        tabsTitles: [String] = [],
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
         self.pageControllerView = pageControllerView
+        self.tabsTitles = tabsTitles
         super.init(frame: frame)
 
         self.setupView()

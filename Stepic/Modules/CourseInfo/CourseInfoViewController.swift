@@ -26,6 +26,9 @@ final class CourseInfoViewController: UIViewController {
     private static let topBarAlphaStatusBarThreshold = 0.85
     private var lastTopBarAlpha: CGFloat = 0.0
 
+    private let tabs: [CourseInfo.Tab] = [.info, .syllabus]
+    private let initialTabIndex: Int
+
     let interactor: CourseInfoInteractorProtocol
 
     private lazy var pageViewController: PageboyViewController = {
@@ -47,8 +50,15 @@ final class CourseInfoViewController: UIViewController {
 
     private var submodulesControllers: [UIViewController] = []
 
-    init(interactor: CourseInfoInteractorProtocol) {
+    init(interactor: CourseInfoInteractorProtocol, initialTab: CourseInfo.Tab) {
         self.interactor = interactor
+
+        if let initialTabIndex = self.tabs.firstIndex(of: initialTab) {
+            self.initialTabIndex = initialTabIndex
+        } else {
+            fatalError("View controller not supported given initial tab")
+        }
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -112,6 +122,7 @@ final class CourseInfoViewController: UIViewController {
             frame: UIScreen.main.bounds,
             pageControllerView: self.pageViewController.view,
             scrollDelegate: self,
+            tabsTitles: self.tabs.map { $0.title },
             appearance: appearance
         )
         view.delegate = self
@@ -181,7 +192,8 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
     func defaultPage(
         for pageboyViewController: PageboyViewController
     ) -> PageboyViewController.Page? {
-        return nil
+//        self.courseInfoView?.updateCurrentPageIndex(self.initialTabIndex)
+        return .at(index: self.initialTabIndex)
     }
 
     func pageboyViewController(

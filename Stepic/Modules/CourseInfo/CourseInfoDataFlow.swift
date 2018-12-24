@@ -9,6 +9,20 @@
 import Foundation
 
 enum CourseInfo {
+    enum Tab {
+        case info
+        case syllabus
+
+        var title: String {
+            switch self {
+            case .info:
+                return NSLocalizedString("CourseInfoTabInfo", comment: "")
+            case .syllabus:
+                return NSLocalizedString("CourseInfoTabSyllabus", comment: "")
+            }
+        }
+    }
+
     // MARK: Use cases
 
     /// Load & show info about course

@@ -9,10 +9,12 @@
 import UIKit
 
 final class CourseInfoAssembly: Assembly {
-    private var courseID: Course.IdType
+    private let courseID: Course.IdType
+    private let initialTab: CourseInfo.Tab
 
-    init(courseID: Course.IdType) {
+    init(courseID: Course.IdType, initialTab: CourseInfo.Tab = .info) {
         self.courseID = courseID
+        self.initialTab = initialTab
     }
 
     func makeModule() -> UIViewController {
@@ -36,10 +38,13 @@ final class CourseInfoAssembly: Assembly {
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService()
         )
+
         let viewController = CourseInfoViewController(
-            interactor: interactor
+            interactor: interactor,
+            initialTab: self.initialTab
         )
         presenter.viewController = viewController
+
         return viewController
     }
 }

@@ -65,7 +65,7 @@ class SectionTableViewCell: UITableViewCell {
             for lesson in section.units.compactMap({ $0.lesson }) {
                 videos.append(contentsOf: lesson.stepVideos)
             }
-            let tasks = videos.compactMap { video in
+            let tasks = videos.compactMap { _ in
                 // VideoDownloaderManager.shared.get(by: video.id)
             }
 
