@@ -70,10 +70,14 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
     }
 
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusUnitViewModel) {
-        print(cell.title)
+        self.interactor.doDownloadButtonAction(
+            request: .init(type: .unit(uniqueIdentifier: cell.uniqueIdentifier))
+        )
     }
 
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusSectionViewModel) {
-        print(cell.title)
+        self.interactor.doDownloadButtonAction(
+            request: .init(type: .section(uniqueIdentifier: cell.uniqueIdentifier))
+        )
     }
 }

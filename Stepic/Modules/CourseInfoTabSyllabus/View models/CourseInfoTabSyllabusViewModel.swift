@@ -20,7 +20,9 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let downloadState: CourseInfoTabSyllabus.DownloadState
 }
 
-struct CourseInfoTabSyllabusUnitViewModel {
+struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
+    let uniqueIdentifier: UniqueIdentifierType
+
     let title: String
     let coverImageURL: URL?
     let progress: Float

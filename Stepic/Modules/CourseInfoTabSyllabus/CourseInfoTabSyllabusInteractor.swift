@@ -12,6 +12,7 @@ import PromiseKit
 protocol CourseInfoTabSyllabusInteractorProtocol {
     func getCourseSyllabus()
     func fetchSyllabusSection(request: CourseInfoTabSyllabus.ShowSyllabusSection.Request)
+    func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request)
 }
 
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
@@ -46,7 +47,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     // Online mode: fetch section only when offline fetching completed
     private let sectionFetchSemaphore = DispatchSemaphore(value: 0)
 
-    private lazy var backgroundQueue = DispatchQueue(label: String(describing: self))
+    private lazy var backgroundQueue = DispatchQueue(label: "course_info_interactor.syllabus")
 
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
@@ -126,7 +127,45 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
+    func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request) {
+        func handleUnit(id: UniqueIdentifierType) {
+            guard let unit = self.currentUnits[id] as? Unit else {
+                print("course info tab syllabus interactor: unit doesn't exist in current units, id = \(id)")
+                return
+            }
+
+            let currentState = self.getDownloadingState(for: unit)
+            switch currentState {
+            case .available(let isCached):
+                return isCached ? self.removeCached(unit: unit) : self.startDownloading(unit: unit)
+            default:
+                break
+            }
+        }
+
+        func handleSection(id: UniqueIdentifierType) {
+
+        }
+
+        func handleAll() { }
+
+        switch request.type {
+        case .all:
+            return handleAll()
+        case .section(let uniqueIdentifier):
+            return handleSection(id: uniqueIdentifier)
+        case .unit(let uniqueIdentifier):
+            return handleUnit(id: uniqueIdentifier)
+        }
+    }
+
     // MARK: Private methods
+
+    func startDownloading(unit: Unit) {
+        fatalError()
+    }
+
+    func removeCached(unit: Unit) { }
 
     private func fetchSyllabusSection(
         section: Section

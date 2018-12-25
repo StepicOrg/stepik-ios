@@ -79,6 +79,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         let likesCount = unit?.lesson?.voteDelta ?? 0
 
         let viewModel = CourseInfoTabSyllabusUnitViewModel(
+            uniqueIdentifier: uid,
             title: unit?.lesson?.title ?? "LOADING",
             coverImageURL: URL(string: unit?.lesson?.coverURL ?? ""),
             progress: (unit?.progress?.percentPassed ?? 0) / 100,

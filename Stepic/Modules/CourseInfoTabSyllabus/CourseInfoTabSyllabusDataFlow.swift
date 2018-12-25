@@ -51,6 +51,19 @@ enum CourseInfoTabSyllabus {
         }
     }
 
+    /// Click on download button
+    enum DownloadButtonAction {
+        enum `Type` {
+            case section(uniqueIdentifier: UniqueIdentifierType)
+            case unit(uniqueIdentifier: UniqueIdentifierType)
+            case all
+        }
+
+        struct Request {
+            let type: Type
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

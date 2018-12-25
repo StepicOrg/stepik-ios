@@ -94,11 +94,11 @@ final class CourseInfoTabSyllabusCellView: UIView {
         self.statsView.learnersLabelText = viewModel.learnersLabelText
         self.statsView.likesCount = viewModel.likesCount
 
-        self.updateDownloadButton(state: viewModel.downloadState)
+        self.updateDownloadState(newState: viewModel.downloadState)
     }
 
-    func updateDownloadButton(state: CourseInfoTabSyllabus.DownloadState) {
-        switch state {
+    func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
+        switch newState {
         case .notAvailable:
             self.downloadButton.isHidden = true
         case .available(let isCached):
