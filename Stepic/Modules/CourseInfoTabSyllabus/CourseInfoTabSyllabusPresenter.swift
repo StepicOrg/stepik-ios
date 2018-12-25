@@ -24,18 +24,24 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 sectionData -> CourseInfoTabSyllabusSectionViewModel in
 
                 var currentSectionUnitViewModels: [CourseInfoTabSyllabusUnitViewModel] = []
-                let (uid, section) = sectionData.element
 
-                for unitID in section.unitsArray {
-                    let unit = result.units.first(where: { $0.1?.id == unitID })?.1
-                    currentSectionUnitViewModels.append(self.makeUnitViewModel(uid: "", unit: unit))
+                for unitID in sectionData.element.entity.unitsArray {
+                    let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID })
+                    currentSectionUnitViewModels.append(
+                        self.makeUnitViewModel(
+                            uid: matchedUnitRecord?.uniqueIdentifier ?? "",
+                            unit: matchedUnitRecord?.entity,
+                            downloadState: matchedUnitRecord?.downloadState ?? .notAvailable
+                        )
+                    )
                 }
 
                 return self.makeSectionViewModel(
                     index: sectionData.offset,
-                    uid: uid,
-                    section: section,
-                    units: currentSectionUnitViewModels
+                    uid: sectionData.element.uniqueIdentifier,
+                    section: sectionData.element.entity,
+                    units: currentSectionUnitViewModels,
+                    downloadState: sectionData.element.downloadState
                 )
             }
 
@@ -51,21 +57,24 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         index: Int,
         uid: UniqueIdentifierType,
         section: Section,
-        units: [CourseInfoTabSyllabusUnitViewModel]
+        units: [CourseInfoTabSyllabusUnitViewModel],
+        downloadState: CourseInfoTabSyllabus.DownloadState
     ) -> CourseInfoTabSyllabusSectionViewModel {
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
             index: "\(index + 1)",
             title: section.title,
             progress: (section.progress?.percentPassed ?? 0) / 100.0,
-            units: units
+            units: units,
+            downloadState: downloadState
         )
         return viewModel
     }
 
     private func makeUnitViewModel(
         uid: UniqueIdentifierType,
-        unit: Unit?
+        unit: Unit?,
+        downloadState: CourseInfoTabSyllabus.DownloadState
     ) -> CourseInfoTabSyllabusUnitViewModel {
         let likesCount = unit?.lesson?.voteDelta ?? 0
 
@@ -75,7 +84,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             progress: (unit?.progress?.percentPassed ?? 0) / 100,
             likesCount: likesCount == 0 ? nil : likesCount,
             learnersLabelText: "\(unit?.lesson?.passedBy ?? 0)",
-            progressLabelText: "\(unit?.progress?.numberOfStepsPassed ?? 0)/\(unit?.progress?.numberOfSteps)"
+            progressLabelText: "\(unit?.progress?.numberOfStepsPassed ?? 0)/\(unit?.progress?.numberOfSteps)",
+            downloadState: downloadState
         )
         return viewModel
     }

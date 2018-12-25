@@ -26,7 +26,9 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
         let presenter = CourseInfoTabSyllabusPresenter()
         let interactor = CourseInfoTabSyllabusInteractor(
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+            videoDownloadingService: VideoDownloadingService.shared
         )
         let viewController = CourseInfoTabSyllabusViewController(
             interactor: interactor

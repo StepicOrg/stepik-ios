@@ -31,6 +31,9 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
 
         if let viewModel = self.viewModels[safe: indexPath.section]?.units[safe: indexPath.row] {
             cell.configure(viewModel: viewModel)
+            cell.onDownloadButtonClick = { [weak self] in
+                self?.delegate?.downloadButtonDidClick(viewModel)
+            }
         }
 
         cell.updateConstraintsIfNeeded()
@@ -42,6 +45,9 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
 
         if let viewModel = self.viewModels[safe: section] {
             sectionView.configure(viewModel: viewModel)
+            sectionView.onDownloadButtonClick = { [weak self] in
+                self?.delegate?.downloadButtonDidClick(viewModel)
+            }
         }
         return sectionView
     }

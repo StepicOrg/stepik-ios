@@ -49,7 +49,12 @@ final class CourseInfoTabSyllabusCellView: UIView {
         return label
     }()
 
-    private lazy var downloadButton = DownloadControlView(initialState: .readyToDownloading)
+    private lazy var downloadButton: DownloadControlView = {
+        let view = DownloadControlView(initialState: .readyToDownloading)
+        view.isHidden = true
+        view.addTarget(self, action: #selector(self.downloadButtonClicked), for: .touchUpInside)
+        return view
+    }()
 
     private lazy var statsView = CourseInfoTabSyllabusCellStatsView()
 
@@ -65,6 +70,8 @@ final class CourseInfoTabSyllabusCellView: UIView {
     // To use rotated view w/ auto-layout
     private lazy var progressIndicatorViewContainerView = UIView()
 
+    var onDownloadButtonClick: (() -> Void)?
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -72,6 +79,10 @@ final class CourseInfoTabSyllabusCellView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     func configure(viewModel: CourseInfoTabSyllabusUnitViewModel) {
@@ -82,10 +93,29 @@ final class CourseInfoTabSyllabusCellView: UIView {
         self.statsView.progressLabelText = viewModel.progressLabelText
         self.statsView.learnersLabelText = viewModel.learnersLabelText
         self.statsView.likesCount = viewModel.likesCount
+
+        self.updateDownloadButton(state: viewModel.downloadState)
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func updateDownloadButton(state: CourseInfoTabSyllabus.DownloadState) {
+        switch state {
+        case .notAvailable:
+            self.downloadButton.isHidden = true
+        case .available(let isCached):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = isCached ? .readyToRemoving : .readyToDownloading
+        case .waiting:
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .pending
+        case .downloading(let progress):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .downloading(progress: progress)
+        }
+    }
+
+    @objc
+    private func downloadButtonClicked() {
+        self.onDownloadButtonClick?()
     }
 }
 

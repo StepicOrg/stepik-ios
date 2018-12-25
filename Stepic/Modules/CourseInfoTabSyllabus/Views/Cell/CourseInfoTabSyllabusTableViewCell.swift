@@ -22,6 +22,15 @@ final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
         return view
     }()
 
+    var onDownloadButtonClick: (() -> Void)? {
+        get {
+            return self.cellView.onDownloadButtonClick
+        }
+        set {
+            self.cellView.onDownloadButtonClick = newValue
+        }
+    }
+
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
 

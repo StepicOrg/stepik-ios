@@ -17,6 +17,8 @@ protocol CourseInfoTabSyllabusInteractorProtocol {
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
     let presenter: CourseInfoTabSyllabusPresenterProtocol
     let provider: CourseInfoTabSyllabusProviderProtocol
+    let videoFileManager: VideoStoredFileManagerProtocol
+    let videoDownloadingService: VideoDownloadingServiceProtocol
 
     private var currentCourse: Course?
     private var currentSections: [UniqueIdentifierType: Section] = [:]
@@ -48,11 +50,17 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
-        provider: CourseInfoTabSyllabusProviderProtocol
+        provider: CourseInfoTabSyllabusProviderProtocol,
+        videoFileManager: VideoStoredFileManagerProtocol,
+        videoDownloadingService: VideoDownloadingServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.videoFileManager = videoFileManager
+        self.videoDownloadingService = videoDownloadingService
     }
+
+    // MARK: Public methods
 
     func getCourseSyllabus() {
         guard let course = self.currentCourse else {
@@ -118,6 +126,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
+    // MARK: Private methods
+
     private func fetchSyllabusSection(
         section: Section
     ) -> Promise<CourseInfoTabSyllabus.ShowSyllabus.Response> {
@@ -128,10 +138,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             ).done { units in
                 self.updateCurrentData(units: units, shouldRemoveAll: false)
 
-                let data = CourseInfoTabSyllabus.SyllabusData(
-                    sections: self.currentSections.map { ($0.key, $0.value) },
-                    units: self.currentUnits.map { ($0.key, $0.value) }
-                )
+                let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
             }.catch { _ in
                 // TODO: error
@@ -165,10 +172,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                 self.updateCurrentData(sections: sections, units: units, shouldRemoveAll: true)
 
-                let data = CourseInfoTabSyllabus.SyllabusData(
-                    sections: self.currentSections.map { ($0.key, $0.value) },
-                    units: self.currentUnits.map { ($0.key, $0.value) }
-                )
+                let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
             }.catch { _ in
                 // TODO: error
@@ -194,12 +198,125 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
+    private func makeSyllabusDataFromCurrentData() -> CourseInfoTabSyllabus.SyllabusData {
+        return CourseInfoTabSyllabus.SyllabusData(
+            sections: self.currentSections
+                .map { uid, entity in
+                    .init(
+                        uniqueIdentifier: uid,
+                        entity: entity,
+                        downloadState: self.getDownloadingState(for: entity)
+                    )
+                }
+                .sorted(by: { $0.entity.position < $1.entity.position }),
+            units: self.currentUnits
+                .map { uid, entity in
+                    var state: CourseInfoTabSyllabus.DownloadState
+                    if let unit = entity {
+                        state = self.getDownloadingState(for: unit)
+                    } else {
+                        state = .notAvailable
+                    }
+
+                    return .init(
+                        uniqueIdentifier: uid,
+                        entity: entity,
+                        downloadState: state
+                    )
+                }
+                .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) })
+        )
+    }
+
     private func getUniqueIdentifierBySectionID(_ sectionID: Section.IdType) -> UniqueIdentifierType {
         return "\(sectionID)"
     }
 
     private func getUniqueIdentifierByUnitID(_ unitID: Unit.IdType) -> UniqueIdentifierType {
         return "\(unitID)"
+    }
+
+    private func getDownloadingState(for unit: Unit) -> CourseInfoTabSyllabus.DownloadState {
+        guard let lesson = unit.lesson else {
+            // We should call this method only with completely load units
+            // But return "not cached" in this case
+            return .available(isCached: false)
+        }
+
+        let steps = lesson.steps
+
+        // If have unloaded steps for lesson then show "not cached" state
+        let hasUncachedSteps = steps
+            .filter { lesson.stepsArray.contains($0.id) }
+            .count != lesson.stepsArray.count
+        if hasUncachedSteps {
+            return .available(isCached: false)
+        }
+
+        // Iterate through steps and determine final state
+        let stepsWithVideoCount = steps
+            .filter { $0.block.name == "video" }
+            .count
+        let stepsWithCachedVideoCount = steps
+            .filter { $0.block.name == "video" }
+            .compactMap { $0.block.video?.id }
+            .filter { self.videoFileManager.getVideoStoredFile(videoID: $0) != nil }
+            .count
+
+        // Lesson has no steps with video
+        if stepsWithVideoCount == 0 {
+            return .notAvailable
+        }
+
+        // Some videos aren't cached
+        if stepsWithCachedVideoCount != stepsWithVideoCount {
+            return .available(isCached: false)
+        }
+
+        // TODO: check current downloads
+
+        // All videos are cached
+        return .available(isCached: true)
+    }
+
+    private func getDownloadingState(for section: Section) -> CourseInfoTabSyllabus.DownloadState {
+        let units = section.units
+
+        // If have unloaded units for lesson then show "not available" state
+        let hasUncachedUnits = units
+            .filter { section.unitsArray.contains($0.id) }
+            .count != section.unitsArray.count
+        if hasUncachedUnits {
+            return .notAvailable
+        }
+
+        let unitStates = units.map { self.getDownloadingState(for: $0) }
+        var shouldBeCachedUnitsCount = 0
+        var notAvailableUnitsCount = 0
+
+        for state in unitStates {
+            switch state {
+            case .notAvailable:
+                notAvailableUnitsCount += 1
+            case .available(let isCached):
+                shouldBeCachedUnitsCount += isCached ? 0 : 1
+            default:
+                break
+            }
+        }
+
+        // If all units are not available to downloading then section is not available to
+        if notAvailableUnitsCount == units.count {
+            return .notAvailable
+        }
+
+        // If some units are not cached then section is available to downloading
+        if shouldBeCachedUnitsCount > 0 {
+            return .available(isCached: false)
+        }
+
+        // All units are cached, section too
+        return .available(isCached: true)
     }
 
     enum Error: Swift.Error {

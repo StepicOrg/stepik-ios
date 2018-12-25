@@ -10,11 +10,23 @@ import Foundation
 
 enum CourseInfoTabSyllabus {
     // MARK: Common structs
-    // Place here structs used in Requests/Responses
 
     struct SyllabusData {
-        let sections: [(UniqueIdentifierType, Section)]
-        let units: [(UniqueIdentifierType, Unit?)]
+        struct Record<T>: UniqueIdentifiable {
+            let uniqueIdentifier: UniqueIdentifierType
+            let entity: T
+            let downloadState: DownloadState
+        }
+
+        let sections: [Record<Section>]
+        let units: [Record<Unit?>]
+    }
+
+    enum DownloadState {
+        case notAvailable
+        case waiting
+        case available(isCached: Bool)
+        case downloading(progress: Float)
     }
 
     // MARK: Use cases

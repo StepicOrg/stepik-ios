@@ -52,6 +52,8 @@ final class CourseInfoTabSyllabusSectionView: UIView {
 
     private lazy var downloadButton: DownloadControlView = {
         let view = DownloadControlView(initialState: .readyToDownloading)
+        view.isHidden = true
+        view.addTarget(self, action: #selector(self.downloadButtonClicked), for: .touchUpInside)
         return view
     }()
 
@@ -76,6 +78,8 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         ]
     )
 
+    var onDownloadButtonClick: (() -> Void)?
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -93,9 +97,28 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         self.titleLabel.text = viewModel.title
         self.indexLabel.text = viewModel.index
         self.progressIndicatorView.progress = viewModel.progress
+        self.updateDownloadButton(state: viewModel.downloadState)
+    }
 
-        //self.setNeedsLayout()
-        //self.layoutIfNeeded()
+    func updateDownloadButton(state: CourseInfoTabSyllabus.DownloadState) {
+        switch state {
+        case .notAvailable:
+            self.downloadButton.isHidden = true
+        case .available(let isCached):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = isCached ? .readyToRemoving : .readyToDownloading
+        case .waiting:
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .pending
+        case .downloading(let progress):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .downloading(progress: progress)
+        }
+    }
+
+    @objc
+    private func downloadButtonClicked() {
+        self.onDownloadButtonClick?()
     }
 }
 
