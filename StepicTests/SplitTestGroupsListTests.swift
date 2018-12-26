@@ -67,6 +67,7 @@ class SplitTestGroupsListSpec: QuickSpec {
         describe("SplitTestGroupsList") {
             var splitTestingService: SplitTestingService!
             var viewController: SplitTestGroupsListViewController!
+            var splitTest: SplitTestMock!
 
             beforeEach {
                 splitTestingService = SplitTestingService(
@@ -74,12 +75,14 @@ class SplitTestGroupsListSpec: QuickSpec {
                     storage: UserDefaults.standard
                 )
 
+                splitTest = splitTestingService.fetchSplitTest(SplitTestMock.self)
+
                 viewController = self.makeModule()
                 viewController.loadViewIfNeeded()
             }
 
             it("Displays correct current selected group") {
-                let splitTest = splitTestingService.fetchSplitTest(SplitTestMock.self)
+                viewController.interactor.getGroups(request: .init())
 
                 switch viewController.state {
                 case .emptyResult:
@@ -93,8 +96,6 @@ class SplitTestGroupsListSpec: QuickSpec {
             }
 
             it("Correctly changes split test group") {
-                let splitTest = splitTestingService.fetchSplitTest(SplitTestMock.self)
-
                 let currentGroup = splitTest.currentGroup
                 let newGroup = SplitTestMock.Group.groups
                     .first(where: { $0.rawValue != currentGroup.rawValue })!
