@@ -29,10 +29,12 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
                 var currentSectionUnitViewModels: [CourseInfoTabSyllabusUnitViewModel] = []
 
-                for unitID in sectionData.element.entity.unitsArray {
+                for (unitIndex, unitID) in sectionData.element.entity.unitsArray.enumerated() {
                     let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID })
                     currentSectionUnitViewModels.append(
                         self.makeUnitViewModel(
+                            sectionIndex: sectionData.offset,
+                            unitIndex: unitIndex,
                             uid: matchedUnitRecord?.uniqueIdentifier ?? "",
                             unit: matchedUnitRecord?.entity,
                             downloadState: matchedUnitRecord?.downloadState ?? .notAvailable
@@ -102,26 +104,57 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     }
 
     private func makeUnitViewModel(
+        sectionIndex: Int,
+        unitIndex: Int,
         uid: UniqueIdentifierType,
         unit: Unit?,
         downloadState: CourseInfoTabSyllabus.DownloadState
     ) -> CourseInfoTabSyllabusUnitViewModel {
-        let likesCount = unit?.lesson?.voteDelta ?? 0
+        guard let unit = unit,
+              let lesson = unit.lesson else {
+            // TODO: temporary view model with "LOADING" instead of placeholder
+            let viewModel = CourseInfoTabSyllabusUnitViewModel(
+                uniqueIdentifier: uid,
+                title: "LOADING",
+                coverImageURL: nil,
+                progress: 0,
+                likesCount: 0,
+                learnersLabelText: "",
+                progressLabelText: "",
+                downloadState: downloadState
+            )
+            return viewModel
+        }
+
+        let likesCount = lesson.voteDelta
+        let coverImageURL: URL? = {
+            if let url = lesson.coverURL {
+                return URL(string: url)
+            } else {
+                return nil
+            }
+        }()
+
+        let progressLabelText: String? = {
+            guard let progress = unit.progress else {
+                return nil
+            }
+
+            return "\(progress.numberOfStepsPassed)/\(progress.numberOfSteps)"
+        }()
 
         let viewModel = CourseInfoTabSyllabusUnitViewModel(
             uniqueIdentifier: uid,
-            title: unit?.lesson?.title ?? "LOADING",
-            coverImageURL: URL(string: unit?.lesson?.coverURL ?? ""),
-            progress: (unit?.progress?.percentPassed ?? 0) / 100,
+            title: "\(sectionIndex + 1).\(unitIndex + 1) \(lesson.title)",
+            coverImageURL: coverImageURL,
+            progress: (unit.progress?.percentPassed ?? 0) / 100,
             likesCount: likesCount == 0 ? nil : likesCount,
-            learnersLabelText: "\(unit?.lesson?.passedBy ?? 0)",
-            progressLabelText: "\(unit?.progress?.numberOfStepsPassed ?? 0)/\(unit?.progress?.numberOfSteps)",
+            learnersLabelText: FormatterHelper.longNumber(lesson.passedBy),
+            progressLabelText: progressLabelText,
             downloadState: downloadState
         )
 
-        if let unit = unit {
-            self.cachedUnitViewModels[unit.id] = viewModel
-        }
+        self.cachedUnitViewModels[unit.id] = viewModel
 
         return viewModel
     }

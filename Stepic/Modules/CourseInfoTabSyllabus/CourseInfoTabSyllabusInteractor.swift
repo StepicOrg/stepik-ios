@@ -139,7 +139,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             let currentState = self.getDownloadingState(for: unit)
             switch currentState {
             case .available(let isCached):
-                return isCached ? self.removeCached(unit: unit) : self.startDownloading(unit: unit)
+                return isCached
+                    ? self.removeCached(unit: unit)
+                    : self.startDownloading(unit: unit)
+            case .downloading(_):
+                self.cancelDownloading(unit: unit)
             default:
                 break
             }
@@ -157,11 +161,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return isCached
                     ? self.removeCached(section: section)
                     : self.startDownloading(section: section)
+            case .downloading(_):
+                self.cancelDownloading(section: section)
             default:
                 break
             }
         }
 
+        // TODO: Handle all
         func handleAll() { }
 
         switch request.type {
@@ -176,24 +183,61 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     // MARK: Private methods
 
-    func removeCached(unit: Unit) { }
+    private func cancelDownloading(unit: Unit) {
+        // TODO: implement
+    }
 
-    func removeCached(section: Section) { }
+    private func cancelDownloading(section: Section) {
+        // TODO: implement
+    }
 
-    func startDownloading(unit: Unit) {
+    private func removeCached(unit: Unit) {
         guard let lesson = unit.lesson else {
             print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
             return
         }
 
+        for step in lesson.steps {
+            guard let video = step.block.video else {
+                return
+            }
+
+            try? self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+        }
+    }
+
+    private func removeCached(section: Section) {
+        section.units.forEach { self.removeCached(unit: $0) }
+    }
+
+    private func startDownloading(unit: Unit) {
+        guard let lesson = unit.lesson else {
+            print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
+            return
+        }
+
+        guard let section = self.currentSections.values.first(
+            where: { $0.id == unit.sectionId }
+        ) else {
+            print("course info tab syllabus interactor: unit doesn't have stored section, unit id = \(unit.id)")
+            return
+        }
+
         self.provider.fetchSteps(for: lesson).done { steps in
-            self.syllabusDownloadsInteractionService.startDownloading(cut: .init(steps: steps, unit: unit, section: unit.section!, observationLevel: .unit))
+            self.syllabusDownloadsInteractionService.startDownloading(
+                cut: .init(
+                    steps: steps,
+                    unit: unit,
+                    section: section,
+                    observationLevel: .unit
+                )
+            )
         }.catch { _ in
             // TODO: error
         }
     }
 
-    func startDownloading(section: Section) {
+    private func startDownloading(section: Section) {
         let hasUncachedUnits = section.units
             .filter { section.unitsArray.contains($0.id) }
             .count != section.unitsArray.count
@@ -208,7 +252,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
 
             self.provider.fetchSteps(for: lesson).done { steps in
-                self.syllabusDownloadsInteractionService.startDownloading(cut: .init(steps: steps, unit: unit, section: section, observationLevel: .section))
+                self.syllabusDownloadsInteractionService.startDownloading(
+                    cut: .init(
+                        steps: steps,
+                        unit: unit,
+                        section: section,
+                        observationLevel: .section
+                    )
+                )
             }.catch { _ in
                 // TODO: error
             }
@@ -392,7 +443,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
         }
 
-        // If all units are not available to downloading then section is not available to
+        // If all units are not available to downloading then section is not available too
         if notAvailableUnitsCount == units.count {
             return .notAvailable
         }
@@ -420,7 +471,11 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
 }
 
 extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDelegate {
-    func downloadsInteractionService(_ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol, didReceiveProgress progress: Float, source: DownloadSource) {
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didReceiveProgress progress: Float,
+        source: DownloadSource
+    ) {
         let sourceType: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Source? = {
             switch source {
             case .unit(let unit):
