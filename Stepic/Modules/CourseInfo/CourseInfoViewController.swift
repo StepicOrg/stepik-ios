@@ -192,7 +192,6 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
     func defaultPage(
         for pageboyViewController: PageboyViewController
     ) -> PageboyViewController.Page? {
-//        self.courseInfoView?.updateCurrentPageIndex(self.initialTabIndex)
         return .at(index: self.initialTabIndex)
     }
 
