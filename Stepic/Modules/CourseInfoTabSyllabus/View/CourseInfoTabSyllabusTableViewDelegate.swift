@@ -56,8 +56,6 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
     // MARK: Private methods
 
     private func reloadVisibleSectionHeader(affectedIndex: Int) {
-        print(self.visibleSectionHeaders)
-
         guard let view = self.visibleSectionHeaders[affectedIndex],
               let headerView = view as? CourseInfoTabSyllabusSectionView else {
             return

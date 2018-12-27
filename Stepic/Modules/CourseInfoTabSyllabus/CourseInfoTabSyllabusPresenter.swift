@@ -60,7 +60,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     func presentDownloadButtonUpdate(
         response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response
     ) {
-        switch response.type {
+        switch response.source {
         case .section(let section):
             self.cachedSectionViewModels[section.id]?.downloadState = response.downloadState
             if let cachedViewModel = self.cachedSectionViewModels[section.id] {

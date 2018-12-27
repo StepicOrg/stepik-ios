@@ -66,7 +66,7 @@ enum CourseInfoTabSyllabus {
 
     /// Update download state
     enum DownloadButtonStateUpdate {
-        enum `Type` {
+        enum Source {
             case unit(entity: Unit)
             case section(entity: Section)
         }
@@ -77,7 +77,7 @@ enum CourseInfoTabSyllabus {
         }
 
         struct Response {
-            let type: Type
+            let source: Source
             let downloadState: DownloadState
         }
 
