@@ -15,9 +15,9 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let title: String
     let progress: Float
 
-    let units: [CourseInfoTabSyllabusUnitViewModel]
+    var units: [CourseInfoTabSyllabusUnitViewModel]
 
-    let downloadState: CourseInfoTabSyllabus.DownloadState
+    var downloadState: CourseInfoTabSyllabus.DownloadState
 }
 
 struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
@@ -31,5 +31,5 @@ struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
     let learnersLabelText: String
     let progressLabelText: String?
 
-    let downloadState: CourseInfoTabSyllabus.DownloadState
+    var downloadState: CourseInfoTabSyllabus.DownloadState
 }

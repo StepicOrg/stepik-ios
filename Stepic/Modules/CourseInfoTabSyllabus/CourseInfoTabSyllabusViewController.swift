@@ -10,6 +10,7 @@ import UIKit
 
 protocol CourseInfoTabSyllabusViewControllerProtocol: class {
     func displaySyllabus(viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel)
+    func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: class {
@@ -56,8 +57,19 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         case .loading:
             break
         case .result(let data):
-            self.syllabusTableDelegate.viewModels = data
+            self.syllabusTableDelegate.update(viewModels: data)
             self.courseInfoTabSyllabusView?.updateTableViewData(delegate: self.syllabusTableDelegate)
+        }
+    }
+
+    func displayDownloadButtonStateUpdate(
+        viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel
+    ) {
+        switch viewModel.data {
+        case .section(let viewModel):
+            self.syllabusTableDelegate.mergeViewModel(section: viewModel)
+        case .unit(let viewModel):
+            self.syllabusTableDelegate.mergeViewModel(unit: viewModel)
         }
     }
 }

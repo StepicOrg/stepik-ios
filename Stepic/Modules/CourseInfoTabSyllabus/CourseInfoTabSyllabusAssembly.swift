@@ -21,14 +21,14 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             unitsPersistenceService: UnitsPersistenceService(),
             unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
             lessonsPersistenceService: LessonsPersistenceService(),
-            lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI())
+            lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
         )
         let presenter = CourseInfoTabSyllabusPresenter()
         let interactor = CourseInfoTabSyllabusInteractor(
             presenter: presenter,
             provider: provider,
-            videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
-            videoDownloadingService: VideoDownloadingService.shared
+            videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
         )
         let viewController = CourseInfoTabSyllabusViewController(
             interactor: interactor

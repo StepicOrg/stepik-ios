@@ -110,7 +110,34 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.tableViewDelegate?.tableView?(tableView, viewForHeaderInSection: section)
+        return self.tableViewDelegate?.tableView?(
+            tableView,
+            viewForHeaderInSection: section
+        )
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.tableViewDelegate?.tableView?(
+            tableView,
+            willDisplay: cell,
+            forRowAt: indexPath
+        )
+    }
+
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.tableViewDelegate?.tableView?(
+            tableView,
+            didEndDisplaying: cell,
+            forRowAt: indexPath
+        )
+    }
+
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        self.tableViewDelegate?.tableView?(
+            tableView,
+            didEndDisplayingHeaderView: view,
+            forSection: section
+        )
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

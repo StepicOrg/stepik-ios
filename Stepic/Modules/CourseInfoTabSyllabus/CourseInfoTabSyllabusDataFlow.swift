@@ -64,6 +64,28 @@ enum CourseInfoTabSyllabus {
         }
     }
 
+    /// Update download state
+    enum DownloadButtonStateUpdate {
+        enum `Type` {
+            case unit(entity: Unit)
+            case section(entity: Section)
+        }
+
+        enum Result {
+            case section(viewModel: CourseInfoTabSyllabusSectionViewModel)
+            case unit(viewModel: CourseInfoTabSyllabusUnitViewModel)
+        }
+
+        struct Response {
+            let type: Type
+            let downloadState: DownloadState
+        }
+
+        struct ViewModel {
+            let data: Result
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

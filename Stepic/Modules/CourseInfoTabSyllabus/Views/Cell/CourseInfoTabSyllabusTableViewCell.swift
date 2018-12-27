@@ -43,6 +43,10 @@ final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
         self.cellView.configure(viewModel: viewModel)
     }
 
+    func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
+        self.cellView.updateDownloadState(newState: newState)
+    }
+
     private func setupSubview() {
         self.contentView.addSubview(self.cellView)
         self.contentView.addSubview(self.separatorView)

@@ -50,7 +50,9 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     private var handlers: [VideoDownloadingServiceEventHandler] = []
     private var observedTasks: [DownloaderTaskProtocol.IDType: DownloaderTaskProtocol] = [:]
 
+    private var videosForTasks: [DownloaderTaskProtocol.IDType: Video.IdType] = [:]
     private var tasksForVideos: [Video.IdType: DownloaderTaskProtocol.IDType] = [:]
+
     private var tasksLastProgress: [DownloaderTaskProtocol.IDType: Float] = [:]
 
     init(
@@ -64,7 +66,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
 //        self.downloader.restoredTasks.forEach { task in
 //
 //        }
-//        self.downloader.resumeRestoredTasks()
+        self.downloader.resumeRestoredTasks()
     }
 
     // MARK: Public methods
@@ -78,6 +80,9 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         self.setupReporters(for: task)
 
         task.start(with: self.downloader)
+
+        self.tasksForVideos[videoID] = task.id
+        self.videosForTasks[task.id] = videoID
 
         self.observedTasks[task.id] = task
         return task.id
@@ -127,7 +132,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         // Report completion
         task.completionReporter = { [weak self] temporaryFileURL in
             guard let strongSelf = self,
-                  let videoID = self?.tasksForVideos[task.id] else {
+                  let videoID = self?.videosForTasks[task.id] else {
                 return
             }
 
@@ -150,6 +155,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             )
 
             self?.reportToSubscribers(event: event)
+            self?.removeObservedTask(id: task.id)
         }
 
         // Failure reporter
@@ -160,6 +166,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
                     state: .error
                 )
             )
+            self?.removeObservedTask(id: task.id)
         }
 
         // State changed
@@ -173,5 +180,15 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
                 )
             }
         }
+    }
+
+    private func removeObservedTask(id: DownloaderTaskProtocol.IDType) {
+        self.observedTasks.removeValue(forKey: id)
+        self.tasksLastProgress.removeValue(forKey: id)
+
+        if let videoID = self.videosForTasks[id] {
+            self.tasksForVideos.removeValue(forKey: videoID)
+        }
+        self.videosForTasks.removeValue(forKey: id)
     }
 }

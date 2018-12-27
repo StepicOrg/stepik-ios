@@ -3203,6 +3203,8 @@
 		2C97E010215E5246005684A1 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
 		2C9860BA21B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9860B921B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift */; };
 		2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */; };
+		2C9A54F421D2947F00EC359A /* StepsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A54F321D2947F00EC359A /* StepsNetworkService.swift */; };
+		2C9A54F621D295B100EC359A /* StepsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A54F521D295B100EC359A /* StepsPersistenceService.swift */; };
 		2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */; };
 		2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
 		2C9E3F3E1F7A930100DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
@@ -5864,6 +5866,8 @@
 		2C9732F91F4C391900AC9301 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/3150/Tokens.plist; sourceTree = "<group>"; };
 		2C9860B921B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		2C9A54F321D2947F00EC359A /* StepsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsNetworkService.swift; sourceTree = "<group>"; };
+		2C9A54F521D295B100EC359A /* StepsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsPersistenceService.swift; sourceTree = "<group>"; };
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
 		2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -11561,6 +11565,8 @@
 				2C88C14121C2880C004BDF21 /* SectionsNetworkService.swift */,
 				2C09312B21CA5B88002B605D /* LessonsNetworkService.swift */,
 				2C09312D21CA5B96002B605D /* LessonsPersistenceService.swift */,
+				2C9A54F321D2947F00EC359A /* StepsNetworkService.swift */,
+				2C9A54F521D295B100EC359A /* StepsPersistenceService.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -14806,6 +14812,7 @@
 				0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */,
 				089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */,
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
+				2C9A54F621D295B100EC359A /* StepsPersistenceService.swift in Sources */,
 				08E43EA5214C2D1A00E3CB50 /* PushStackRouter.swift in Sources */,
 				2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
@@ -15323,6 +15330,7 @@
 				2C09313021CBB210002B605D /* CourseInfoTabSyllabusTableViewDelegate.swift in Sources */,
 				A7EA75E023F7C7E67C22587F /* ContinueCourseAssembly.swift in Sources */,
 				79E683BEBAAD85873A38E144 /* ContinueCourseViewController.swift in Sources */,
+				2C9A54F421D2947F00EC359A /* StepsNetworkService.swift in Sources */,
 				2CE6E2A521B96F9800DDC67A /* CourseInfoTabInfoInstructorSkeletonView.swift in Sources */,
 				BA02C8D13CE96D409F5D2178 /* ContinueCourseInteractor.swift in Sources */,
 				A605F2786A13ABCCA9EE53DC /* ContinueCoursePresenter.swift in Sources */,

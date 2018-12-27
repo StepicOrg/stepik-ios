@@ -10,10 +10,14 @@ import UIKit
 
 protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.ShowSyllabus.Response)
+    func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
     weak var viewController: CourseInfoTabSyllabusViewControllerProtocol?
+
+    private var cachedSectionViewModels: [Section.IdType: CourseInfoTabSyllabusSectionViewModel] = [:]
+    private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
 
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.ShowSyllabus.Response) {
         var viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel
@@ -50,7 +54,30 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             viewModel = CourseInfoTabSyllabus.ShowSyllabus.ViewModel(state: .loading)
         }
 
-        viewController?.displaySyllabus(viewModel: viewModel)
+        self.viewController?.displaySyllabus(viewModel: viewModel)
+    }
+
+    func presentDownloadButtonUpdate(
+        response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response
+    ) {
+        switch response.type {
+        case .section(let section):
+            self.cachedSectionViewModels[section.id]?.downloadState = response.downloadState
+            if let cachedViewModel = self.cachedSectionViewModels[section.id] {
+                let viewModel = CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel(
+                    data: .section(viewModel: cachedViewModel)
+                )
+                self.viewController?.displayDownloadButtonStateUpdate(viewModel: viewModel)
+            }
+        case .unit(let unit):
+            self.cachedUnitViewModels[unit.id]?.downloadState = response.downloadState
+            if let cachedViewModel = self.cachedUnitViewModels[unit.id] {
+                let viewModel = CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel(
+                    data: .unit(viewModel: cachedViewModel)
+                )
+                self.viewController?.displayDownloadButtonStateUpdate(viewModel: viewModel)
+            }
+        }
     }
 
     private func makeSectionViewModel(
@@ -68,6 +95,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             units: units,
             downloadState: downloadState
         )
+
+        self.cachedSectionViewModels[section.id] = viewModel
+
         return viewModel
     }
 
@@ -88,6 +118,11 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             progressLabelText: "\(unit?.progress?.numberOfStepsPassed ?? 0)/\(unit?.progress?.numberOfSteps)",
             downloadState: downloadState
         )
+
+        if let unit = unit {
+            self.cachedUnitViewModels[unit.id] = viewModel
+        }
+
         return viewModel
     }
 }

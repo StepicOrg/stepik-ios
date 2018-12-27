@@ -19,7 +19,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     let presenter: CourseInfoTabSyllabusPresenterProtocol
     let provider: CourseInfoTabSyllabusProviderProtocol
     let videoFileManager: VideoStoredFileManagerProtocol
-    let videoDownloadingService: VideoDownloadingServiceProtocol
+    let downloadingService: SyllabusStructureDownloadingService = SyllabusStructureDownloadingService(
+        videoDownloadingService: VideoDownloadingService.shared
+    )
 
     private var currentCourse: Course?
     private var currentSections: [UniqueIdentifierType: Section] = [:]
@@ -52,13 +54,13 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
         provider: CourseInfoTabSyllabusProviderProtocol,
-        videoFileManager: VideoStoredFileManagerProtocol,
-        videoDownloadingService: VideoDownloadingServiceProtocol
+        videoFileManager: VideoStoredFileManagerProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.videoFileManager = videoFileManager
-        self.videoDownloadingService = videoDownloadingService
+
+        self.downloadingService.delegate = self
     }
 
     // MARK: Public methods
@@ -144,7 +146,20 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
 
         func handleSection(id: UniqueIdentifierType) {
+            guard let section = self.currentSections[id] else {
+                print("course info tab syllabus interactor: section doesn't exist in current sections, id = \(id)")
+                return
+            }
 
+            let currentState = self.getDownloadingState(for: section)
+            switch currentState {
+            case .available(let isCached):
+                return isCached
+                    ? self.removeCached(section: section)
+                    : self.startDownloading(section: section)
+            default:
+                break
+            }
         }
 
         func handleAll() { }
@@ -161,11 +176,44 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     // MARK: Private methods
 
+    func removeCached(unit: Unit) { }
+
+    func removeCached(section: Section) { }
+
     func startDownloading(unit: Unit) {
-        fatalError()
+        guard let lesson = unit.lesson else {
+            print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
+            return
+        }
+
+        self.provider.fetchSteps(for: lesson).done { steps in
+            self.downloadingService.startDownloading(cut: .init(steps: steps, unit: unit, section: unit.section!, observationLevel: .unit))
+        }.catch { _ in
+            // TODO: error
+        }
     }
 
-    func removeCached(unit: Unit) { }
+    func startDownloading(section: Section) {
+        let hasUncachedUnits = section.units
+            .filter { section.unitsArray.contains($0.id) }
+            .count != section.unitsArray.count
+        if hasUncachedUnits {
+            print("course info tab syllabus interactor: section doesn't have some units = \(section.id)")
+            return
+        }
+
+        for unit in section.units {
+            guard let lesson = unit.lesson else {
+                continue
+            }
+
+            self.provider.fetchSteps(for: lesson).done { steps in
+                self.downloadingService.startDownloading(cut: .init(steps: steps, unit: unit, section: section, observationLevel: .section))
+            }.catch { _ in
+                // TODO: error
+            }
+        }
+    }
 
     private func fetchSyllabusSection(
         section: Section
@@ -368,5 +416,325 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
         self.currentCourse = course
         self.isOnline = isOnline
         self.getCourseSyllabus()
+    }
+}
+
+extension CourseInfoTabSyllabusInteractor: SyllabusStructureDownloadingServiceDelegate {
+    func downloadingService(_ downloadingService: SyllabusStructureDownloadingService, didReceiveProgress progress: Float, source: DownloadSource) {
+        print(source.description, progress)
+        DispatchQueue.main.async {
+            switch source {
+            case .unit(let unit):
+                self.presenter.presentDownloadButtonUpdate(
+                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                        type: .unit(entity: unit),
+                        downloadState: .downloading(progress: progress)
+                    )
+                )
+            case .section(let section):
+                self.presenter.presentDownloadButtonUpdate(
+                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                        type: .section(entity: section),
+                        downloadState: .downloading(progress: progress)
+                    )
+                )
+            default:
+                break
+            }
+        }
+    }
+}
+
+struct SyllabusCut {
+    enum ObservationLevel: Int, Comparable {
+        case unit = 0
+        case section = 1
+        case all = 2
+
+        static func < (lhs: SyllabusCut.ObservationLevel, rhs: SyllabusCut.ObservationLevel) -> Bool {
+            return lhs.rawValue < rhs.rawValue
+        }
+    }
+
+    let steps: [Step]
+    let unit: Unit
+    let section: Section
+    let observationLevel: ObservationLevel
+}
+
+protocol SyllabusStructureDownloadingServiceDelegate: class {
+    func downloadingService(
+        _ downloadingService: SyllabusStructureDownloadingService,
+        didReceiveProgress progress: Float,
+        source: DownloadSource
+    )
+}
+
+enum DownloadSource: Equatable, CustomStringConvertible {
+    case step(entity: Step)
+    case unit(entity: Unit)
+    case section(entity: Section)
+    case course
+
+    static func == (lhs: DownloadSource, rhs: DownloadSource) -> Bool {
+        switch (lhs, rhs) {
+        case (.step(let a), .step(let b)):
+            return a.id == b.id
+        case (.unit(let a), .unit(let b)):
+            return a.id == b.id
+        case (.section(let a), .section(let b)):
+            return a.id == b.id
+        case (.course, .course):
+            return true
+        default:
+            return false
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .step(let step):
+            return ".step(id = \(step.id))"
+        case .unit(let unit):
+            return ".unit(id = \(unit.id))"
+        case .section(let section):
+            return ".section(id = \(section.id))"
+        case .course:
+            return ".course"
+        }
+    }
+}
+
+final class SyllabusStructureDownloadingService {
+    let videoDownloadingService: VideoDownloadingServiceProtocol
+
+    private var currentDownloads: [DownloaderTaskProtocol.IDType: DownloadRecord] = [:]
+    private var currentRecords: [DownloadRecord] = []
+
+    weak var delegate: SyllabusStructureDownloadingServiceDelegate?
+
+    init(
+        videoDownloadingService: VideoDownloadingServiceProtocol,
+        delegate: SyllabusStructureDownloadingServiceDelegate? = nil
+    ) {
+        self.videoDownloadingService = videoDownloadingService
+        self.delegate = delegate
+
+        self.videoDownloadingService.subscribeOnEvents { event in
+            self.handleUpdate(event: event)
+        }
+    }
+
+    func startDownloading(cut: SyllabusCut) {
+        let observer: DownloadRecord.Observer = { [weak self] record in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.downloadingService(
+                strongSelf,
+                didReceiveProgress: record.progress,
+                source: record.source
+            )
+        }
+
+        // TODO: handle case when lesson doesn't have steps with video
+        let stepsWithVideo = cut.steps.filter { $0.block.name == "video" }
+
+        var stepsRecords: [DownloadRecord] = []
+        var videosForDownloading: [(DownloadRecord, Video)] = []
+        for step in stepsWithVideo {
+            guard let video = step.block.video else {
+                continue
+            }
+
+            let record = DownloadRecord(
+                source: .step(entity: step),
+                childrens: [],
+                observer: observer
+            )
+
+            stepsRecords.append(record)
+            videosForDownloading.append((record, video))
+        }
+
+        // Build tree: create new or merge
+        // Unit
+
+        let unitSource = DownloadSource.unit(entity: cut.unit)
+        let shouldUnitReportProgress = cut.observationLevel >= .unit
+        var newUnitRecord: DownloadRecord?
+
+        if let unitWithGivenSourceInTree = self.currentRecords.first(
+            where: { $0.source == unitSource }
+        ) {
+            // Unit exists in the tree, assign steps
+            unitWithGivenSourceInTree.childrens.append(contentsOf: stepsRecords)
+            unitWithGivenSourceInTree.shouldReportProgress = shouldUnitReportProgress
+            stepsRecords.forEach { $0.parent = unitWithGivenSourceInTree }
+        } else {
+            // Insert unit to the tree
+            let record = DownloadRecord(
+                source: unitSource,
+                childrens: stepsRecords,
+                shouldReportProgress: shouldUnitReportProgress,
+                observer: observer
+            )
+            self.currentRecords.append(record)
+            stepsRecords.forEach { $0.parent = record }
+            newUnitRecord = record
+        }
+
+        // Section
+
+        let sectionSource = DownloadSource.section(entity: cut.section)
+        let sectionChildrens = [newUnitRecord].compactMap { $0 }
+        let shouldSectionReportProgress = cut.observationLevel >= .section
+        var newSectionRecord: DownloadRecord?
+
+        if let sectionWithGivenSourceInTree = self.currentRecords.first(
+            where: { $0.source == sectionSource }
+        ) {
+            // Section exists in the tree, assign unit
+            sectionWithGivenSourceInTree.childrens.append(contentsOf: sectionChildrens)
+            sectionWithGivenSourceInTree.shouldReportProgress = shouldSectionReportProgress
+            sectionChildrens.forEach { $0.parent = sectionWithGivenSourceInTree }
+        } else {
+            // Insert unit to the tree
+            let record = DownloadRecord(
+                source: sectionSource,
+                childrens: sectionChildrens,
+                shouldReportProgress: shouldSectionReportProgress,
+                observer: observer
+            )
+            self.currentRecords.append(record)
+            sectionChildrens.forEach { $0.parent = record }
+            newSectionRecord = record
+        }
+
+        // Course
+
+        let courseSource = DownloadSource.course
+        let courseChildrens = [newSectionRecord].compactMap { $0 }
+        let shouldCourseReportProgress = cut.observationLevel >= .all
+
+        if let courseWithGivenSourceInTree = self.currentRecords.first(
+            where: { $0.source == courseSource }
+        ) {
+            // Course exists in the tree, assign section
+            courseWithGivenSourceInTree.childrens.append(contentsOf: courseChildrens)
+            courseWithGivenSourceInTree.shouldReportProgress = shouldCourseReportProgress
+            courseChildrens.forEach { $0.parent = courseWithGivenSourceInTree }
+        } else {
+            // Insert unit to the tree
+            let record = DownloadRecord(
+                source: courseSource,
+                childrens: courseChildrens,
+                shouldReportProgress: shouldCourseReportProgress
+            )
+            self.currentRecords.append(record)
+            courseChildrens.forEach { $0.parent = record }
+        }
+
+        // Start downloading
+
+        for (record, video) in videosForDownloading {
+            // FIXME: VideosInfo
+            let url = video.getUrlForQuality(VideosInfo.watchingVideoQuality)
+            let taskID = self.videoDownloadingService.download(
+                videoID: video.id,
+                url: url
+            )
+
+            self.currentDownloads[taskID] = record
+        }
+    }
+
+    private func markAsDirtyAllTree(record: DownloadRecord) {
+        if let parent = record.parent {
+            record.isDirty = true
+            self.markAsDirtyAllTree(record: parent)
+        }
+    }
+
+    private func handleUpdate(event: VideoDownloadingServiceEvent) {
+        guard let downloadRecord = self.currentDownloads[event.taskID] else {
+            return
+        }
+
+        switch event.state {
+        case .error:
+            // Downloading failed, remove task and detach from parent
+            downloadRecord.parent?.childrens.removeAll(where: { $0 === downloadRecord })
+            self.markAsDirtyAllTree(record: downloadRecord)
+            self.currentDownloads.removeValue(forKey: event.taskID)
+        case .active(let progress):
+            downloadRecord.progress = progress
+            self.markAsDirtyAllTree(record: downloadRecord)
+        case .completed(_):
+            downloadRecord.progress = 1.0
+            self.markAsDirtyAllTree(record: downloadRecord)
+            self.currentDownloads.removeValue(forKey: event.taskID)
+        }
+    }
+
+    private final class DownloadRecord {
+        typealias Observer = (DownloadRecord) -> Void
+
+        let source: DownloadSource
+        var parent: DownloadRecord?
+        var childrens: [DownloadRecord]
+
+        private var observer: Observer?
+
+        /// Set true if should report progress
+        var shouldReportProgress: Bool {
+            didSet {
+                if self.shouldReportProgress {
+                    self.observer?(self)
+                }
+            }
+        }
+
+        /// Set true if some childrens were updated
+        var isDirty = false {
+            didSet {
+                if self.isDirty && self.shouldReportProgress {
+                    self.observer?(self)
+                }
+            }
+        }
+        private var currentProgress: Float = 0
+
+        var progress: Float {
+            get {
+                if case .step(_) = self.source {
+                    return self.currentProgress
+                } else {
+                    if self.isDirty {
+                        self.currentProgress = self.childrens.map { $0.progress }.reduce(0, +)
+                            / Float(self.childrens.count)
+                        self.isDirty = false
+                    }
+                    return self.currentProgress
+                }
+            }
+            set {
+                if case .step(_) = self.source {
+                    self.currentProgress = max(self.currentProgress, newValue)
+                }
+            }
+        }
+
+        init(
+            source: DownloadSource,
+            childrens: [DownloadRecord],
+            shouldReportProgress: Bool = false,
+            observer: Observer? = nil
+        ) {
+            self.source = source
+            self.childrens = childrens
+            self.shouldReportProgress = shouldReportProgress
+            self.observer = observer
+        }
     }
 }
