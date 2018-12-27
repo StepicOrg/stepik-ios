@@ -182,12 +182,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
     }
 
     @objc func settingsButtonPressed() {
-        // Bad route injection :(
-        if let vc = ControllerHelper.instantiateViewController(identifier: "SettingsViewController", storyboardName:  "Profile") as? SettingsViewController {
-            let presenter = SettingsPresenter(view: vc)
-            vc.presenter = presenter
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        let viewController = SettingsLegacyAssembly().makeModule()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     @objc func shareButtonPressed() {

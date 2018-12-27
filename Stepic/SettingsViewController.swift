@@ -26,7 +26,6 @@ final class SettingsViewController: MenuViewController {
         super.viewDidLoad()
 
         self.title = NSLocalizedString("Settings", comment: "")
-        self.presenter = SettingsPresenter(view: self)
 
         self.tableView.tableHeaderView = self.artView
         self.sizeArtView()

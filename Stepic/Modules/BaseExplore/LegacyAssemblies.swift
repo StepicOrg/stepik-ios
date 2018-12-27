@@ -43,3 +43,16 @@ final class CourseInfoLegacyAssembly: Assembly {
         return viewController
     }
 }
+
+@available(*, deprecated, message: "Class for backward compatibility")
+final class SettingsLegacyAssembly: Assembly {
+    func makeModule() -> UIViewController {
+        let viewController = ControllerHelper.instantiateViewController(
+            identifier: "SettingsViewController",
+            storyboardName: "Profile"
+        ) as! SettingsViewController
+        let presenter = SettingsPresenter(view: viewController)
+        viewController.presenter = presenter
+        return viewController
+    }
+}
