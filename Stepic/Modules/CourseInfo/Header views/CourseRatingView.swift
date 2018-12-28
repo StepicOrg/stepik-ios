@@ -64,7 +64,7 @@ final class CourseRatingView: UIView {
     }
 
     private func makeStar(isFilled: Bool) -> UIView {
-        var image = isFilled
+        let image = isFilled
             ? UIImage(named: "rating-star-filled")!
             : UIImage(named: "rating-star-clear")!
         let imageView = UIImageView(

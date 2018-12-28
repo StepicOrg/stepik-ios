@@ -52,20 +52,6 @@ final class HomeViewController: BaseExploreViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.homeInteractor?.loadContent(request: .init())
-
-        // For debug
-        let testBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .fastForward,
-            target: self,
-            action: #selector(self.presentTest)
-        )
-        self.navigationItem.rightBarButtonItem = testBarButtonItem
-    }
-
-    @objc
-    private func presentTest() {
-        let vc = CourseInfoViewController()
-        self.push(module: vc)
     }
 
     override func viewDidAppear(_ animated: Bool) {

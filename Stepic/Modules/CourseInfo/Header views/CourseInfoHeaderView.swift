@@ -11,17 +11,18 @@ import SnapKit
 
 extension CourseInfoHeaderView {
     struct Appearance {
-        let actionButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+        let actionButtonInsets = UIEdgeInsets(top: 10, left: 0, bottom: 15, right: 0)
         let actionButtonHeight: CGFloat = 42.0
         let actionButtonWidthRatio: CGFloat = 0.55
 
         let coverImageViewSize = CGSize(width: 36, height: 36)
         let coverImageViewCornerRadius: CGFloat = 3
-        let coverImageViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 14, right: 10)
 
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .regular)
         let titleLabelColor = UIColor.white
-        let titleLabelInsets = UIEdgeInsets(top: 18, left: 10, bottom: 14, right: 30)
+
+        let titleStackViewSpacing: CGFloat = 10
+        let titleStackViewInsets = UIEdgeInsets(top: 18, left: 30, bottom: 16, right: 30)
 
         let marksStackViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 18, right: 0)
         let marksStackViewSpacing: CGFloat = 10.0
@@ -88,6 +89,14 @@ final class CourseInfoHeaderView: UIView {
         return stackView
     }()
 
+    // Stack view for title and cover
+    private lazy var titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = self.appearance.titleStackViewSpacing
+        stackView.axis = .horizontal
+        return stackView
+    }()
+
     private lazy var statsView = CourseInfoStatsView()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -102,6 +111,22 @@ final class CourseInfoHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // All elements have fixed height except verified view
+    func calculateHeight(hasVerifiedMark: Bool) -> CGFloat {
+        let verifiedMarkHeight = self.verifiedSignView.appearance.imageViewSize.height
+            + self.appearance.marksStackViewSpacing
+        return self.appearance.titleStackViewInsets.bottom
+            + self.appearance.coverImageViewSize.height
+            + self.appearance.marksStackViewInsets.bottom
+            + self.appearance.statsViewHeight
+            + self.appearance.actionButtonInsets.bottom
+            + self.appearance.actionButtonHeight
+            + self.appearance.actionButtonInsets.top
+            + (hasVerifiedMark ? verifiedMarkHeight : 0)
+    }
+
+    // MARK: View model
+
     func configure(viewModel: CourseInfoHeaderViewModel) {
         self.loadImage(url: viewModel.coverImageURL)
 
@@ -114,6 +139,31 @@ final class CourseInfoHeaderView: UIView {
         self.verifiedSignView.isHidden = !viewModel.isVerified
     }
 
+    // MARK: Loading state
+
+    func showLoading() {
+        self.skeleton.viewBuilder = {
+            CourseInfoHeaderSkeletonView()
+        }
+
+        self.actionButton.isHidden = true
+        self.marksStackView.isHidden = true
+        self.titleLabel.isHidden = true
+        self.loadImage(url: nil)
+
+        self.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.actionButton.isHidden = false
+        self.marksStackView.isHidden = false
+        self.titleLabel.isHidden = false
+
+        self.skeleton.hide()
+    }
+
+    // MARK: Private methods
+
     private func loadImage(url: URL?) {
         self.backgroundView.loadImage(url: url)
         self.coverImageView.loadImage(url: url)
@@ -122,13 +172,15 @@ final class CourseInfoHeaderView: UIView {
 
 extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
+        self.titleStackView.addArrangedSubview(self.coverImageView)
+        self.titleStackView.addArrangedSubview(self.titleLabel)
+
         self.marksStackView.addArrangedSubview(self.statsView)
         self.marksStackView.addArrangedSubview(self.verifiedSignView)
 
         self.addSubview(self.backgroundView)
         self.addSubview(self.actionButton)
-        self.addSubview(self.coverImageView)
-        self.addSubview(self.titleLabel)
+        self.addSubview(self.titleStackView)
         self.addSubview(self.marksStackView)
     }
 
@@ -138,22 +190,20 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
             make.edges.equalToSuperview()
         }
 
+        self.titleStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.titleStackView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.leading.greaterThanOrEqualToSuperview().offset(self.appearance.titleStackViewInsets.left)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.titleStackViewInsets.right)
+            make.bottom.equalToSuperview().offset(-self.appearance.titleStackViewInsets.bottom)
+        }
+
         self.coverImageView.translatesAutoresizingMaskIntoConstraints = false
         self.coverImageView.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.coverImageViewSize)
-            make.bottom.equalToSuperview().offset(-self.appearance.titleLabelInsets.bottom)
-            make.leading.equalToSuperview().offset(self.appearance.coverImageViewInsets.left)
         }
 
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.snp.makeConstraints { make in
-            make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.titleLabelInsets.bottom)
-            make.trailing.equalToSuperview().offset(-self.appearance.titleLabelInsets.right)
-            make.leading
-                .equalTo(self.coverImageView.snp.trailing)
-                .offset(self.appearance.titleLabelInsets.left)
-            make.top.equalTo(self.coverImageView.snp.top)
-        }
+        self.titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
         self.statsView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.statsViewHeight)
@@ -163,7 +213,7 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.marksStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom
-                .equalTo(self.coverImageView.snp.top)
+                .equalTo(self.titleStackView.snp.top)
                 .offset(-self.appearance.marksStackViewInsets.bottom)
         }
 

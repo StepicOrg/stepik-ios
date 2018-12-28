@@ -125,6 +125,15 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    var contentOffset: CGPoint {
+        get {
+            return self.scrollView.contentOffset
+        }
+        set {
+            self.scrollView.contentOffset = newValue
+        }
+    }
+
     var scrollIndicatorInsets: UIEdgeInsets {
         get {
             return self.scrollView.scrollIndicatorInsets
@@ -149,6 +158,24 @@ final class ScrollableStackView: UIView {
         }
         set {
             self.scrollView.isPagingEnabled = newValue
+        }
+    }
+
+    var isScrollEnabled: Bool {
+        get {
+            return self.scrollView.isScrollEnabled
+        }
+        set {
+            self.scrollView.isScrollEnabled = newValue
+        }
+    }
+
+    var contentSize: CGSize {
+        get {
+            return self.scrollView.contentSize
+        }
+        set {
+            self.scrollView.contentSize = newValue
         }
     }
 
@@ -196,6 +223,14 @@ final class ScrollableStackView: UIView {
 
     func endRefreshing() {
         self.refreshControl?.endRefreshing()
+    }
+
+    func scrollTo(arrangedViewIndex: Int) {
+        guard let targetFrame = self.arrangedSubviews[safe: arrangedViewIndex]?.frame else {
+            return
+        }
+
+        self.scrollView.scrollRectToVisible(targetFrame, animated: true)
     }
 
     // MARK: - Private methods

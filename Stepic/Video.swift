@@ -87,7 +87,7 @@ class Video: NSManagedObject, JSONSerializable {
 
     var state: VideoState {
         if self.cachedQuality != nil && self.cachedQuality != "0" {
-            return VideoFileManager().fileExists(videoId: self.id) ? .cached : .online
+            return VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: id) != nil ? .cached : .online
         } else {
             return .online
         }

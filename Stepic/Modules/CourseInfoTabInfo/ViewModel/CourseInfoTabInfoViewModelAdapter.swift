@@ -19,7 +19,7 @@ extension CourseInfoTabInfoViewModel {
         }
 
         self.introVideoThumbnailURL = URL(string: course.introVideo?.thumbnailURL ?? "")
-        self.aboutText = course.summary.trimmingCharacters(in: .whitespaces)
+        self.aboutText = course.courseDescription.trimmingCharacters(in: .whitespaces)
         self.requirementsText = course.requirements.trimmingCharacters(in: .whitespaces)
         self.targetAudienceText = course.audience.trimmingCharacters(in: .whitespaces)
         self.instructors = instructorsViewModel
@@ -41,6 +41,7 @@ extension CourseInfoTabInfoViewModel {
 
     private static func getIntroVideoURL(course: Course) -> URL? {
         if let introVideo = course.introVideo, !introVideo.urls.isEmpty {
+            // FIXME: VideosInfo dependency
             return introVideo.getUrlForQuality(VideosInfo.watchingVideoQuality)
         } else {
             return URL(string: course.introURL)

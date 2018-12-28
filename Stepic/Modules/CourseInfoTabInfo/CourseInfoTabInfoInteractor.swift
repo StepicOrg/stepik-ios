@@ -37,7 +37,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
             return
         }
 
-        self.provider.fetchCourseUsers(course).done { course in
+        self.provider.fetchUsersForCourse(course).done { course in
             self.course = course
             self.presenter.presentCourseInfo(
                 response: .init(course: self.course)
@@ -59,7 +59,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 // MARK: - CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol -
 
 extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
-    func update(with course: Course) {
+    func update(with course: Course, isOnline: Bool) {
         self.course = course
         self.getCourseInfo()
     }

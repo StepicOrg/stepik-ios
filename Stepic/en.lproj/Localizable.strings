@@ -438,6 +438,9 @@ CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
 CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
 
 /* Course info */
+CourseInfoTitle = "About course";
+CourseInfoTabInfo = "Info";
+CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTitleAuthor = "by";
 CourseInfoTitleAbout = "About";
 CourseInfoTitleRequirements = "Requirements";

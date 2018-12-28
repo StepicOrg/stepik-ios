@@ -58,7 +58,7 @@ class DownloadTableViewCell: UITableViewCell {
         downloadButton.delegate = buttonDelegate
 //        self.downloadDelegate = downloadDelegate
 
-        let size = VideoFileManager().fileSize(videoId: video.id) ?? 0
+        let size = 0//VideoFileManager().fileSize(videoId: video.id) ?? 0
         self.sizeLabel.text = "\(size / 1024 / 1024) \(NSLocalizedString("Mb", comment: ""))"
         UICustomizer.sharedCustomizer.setCustomDownloadButton(downloadButton, white: false)
         updateButton()
@@ -71,33 +71,33 @@ class DownloadTableViewCell: UITableViewCell {
             self.quality = self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality
             return
         }
-
-        let isVideoLoading = VideoDownloaderManager.shared.get(by: video.id)?.state == .active
-
-        if isVideoLoading {
-            guard let task = VideoDownloaderManager.shared.get(by: video.id) else {
-                return
-            }
-
-            downloadButton.state = .downloading
-
-            self.quality = VideosInfo.downloadingVideoQuality
-
-            UIThread.performUI({
-                self.downloadButton.stopDownloadButton?.progress = CGFloat(task.progress)
-            })
-
-            task.progressReporter = { [weak self] progress in
-                UIThread.performUI({self?.downloadButton.stopDownloadButton?.progress = CGFloat(progress ?? 0)})
-            }
-
-            task.completionReporter = { [weak self] _ in
-                UIThread.performUI {
-                    self?.downloadButton.state = .downloaded
-                }
-            }
-            return
-        }
+//
+//        let isVideoLoading = VideoDownloaderManager.shared.get(by: video.id)?.state == .active
+//
+//        if isVideoLoading {
+//            guard let task = VideoDownloaderManager.shared.get(by: video.id) else {
+//                return
+//            }
+//
+//            downloadButton.state = .downloading
+//
+//            self.quality = VideosInfo.downloadingVideoQuality
+//
+//            UIThread.performUI({
+//                self.downloadButton.stopDownloadButton?.progress = CGFloat(task.progress)
+//            })
+//
+//            task.progressReporter = { [weak self] progress in
+//                UIThread.performUI({self?.downloadButton.stopDownloadButton?.progress = CGFloat(progress ?? 0)})
+//            }
+//
+//            task.completionReporter = { [weak self] _ in
+//                UIThread.performUI {
+//                    self?.downloadButton.state = .downloaded
+//                }
+//            }
+//            return
+//        }
 
         if video.state == .online {
             print("this video should not be here, it can't have the .Online state! ")

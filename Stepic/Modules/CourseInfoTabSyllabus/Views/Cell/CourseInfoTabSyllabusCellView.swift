@@ -46,26 +46,17 @@ final class CourseInfoTabSyllabusCellView: UIView {
         label.font = self.appearance.titleFont
         label.textColor = self.appearance.titleTextColor
         label.numberOfLines = 2
-
-        label.text = "1.2 Second Lesson More Detailed and Interesting Name"
-
         return label
     }()
 
-    private lazy var downloadButton: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
+    private lazy var downloadButton: DownloadControlView = {
+        let view = DownloadControlView(initialState: .readyToDownloading)
+        view.isHidden = true
+        view.addTarget(self, action: #selector(self.downloadButtonClicked), for: .touchUpInside)
         return view
     }()
 
-    private lazy var statsView: CourseInfoTabSyllabusCellStatsView = {
-        // For test
-        let view = CourseInfoTabSyllabusCellStatsView()
-        view.learnersLabelText = "655"
-        view.progressLabelText = "8/10"
-        view.likesCount = -1
-        return view
-    }()
+    private lazy var statsView = CourseInfoTabSyllabusCellStatsView()
 
     private lazy var progressIndicatorView: UIProgressView = {
         let view = UIProgressView()
@@ -73,14 +64,13 @@ final class CourseInfoTabSyllabusCellView: UIView {
         view.trackTintColor = self.appearance.progressViewSecondaryColor
         view.progressTintColor = self.appearance.progressViewMainColor
         view.transform = CGAffineTransform(rotationAngle: .pi / -2)
-
-        view.progress = 0.7
-
         return view
     }()
 
     // To use rotated view w/ auto-layout
     private lazy var progressIndicatorViewContainerView = UIView()
+
+    var onDownloadButtonClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -93,6 +83,65 @@ final class CourseInfoTabSyllabusCellView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(viewModel: CourseInfoTabSyllabusUnitViewModel) {
+        self.titleLabel.text = viewModel.title
+        self.progressIndicatorView.progress = viewModel.progress
+        self.coverImageView.loadImage(url: viewModel.coverImageURL)
+
+        self.statsView.progressLabelText = viewModel.progressLabelText
+        self.statsView.learnersLabelText = viewModel.learnersLabelText
+        self.statsView.likesCount = viewModel.likesCount
+
+        self.updateDownloadState(newState: viewModel.downloadState)
+    }
+
+    func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
+        switch newState {
+        case .notAvailable:
+            self.downloadButton.isHidden = true
+        case .available(let isCached):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = isCached ? .readyToRemoving : .readyToDownloading
+        case .waiting:
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .pending
+        case .downloading(let progress):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .downloading(progress: progress)
+        }
+    }
+
+    func showLoading() {
+        self.skeleton.viewBuilder = {
+            CourseInfoTabSyllabusCellSkeletonView()
+        }
+
+        [self.coverImageView,
+         self.titleLabel,
+         self.downloadButton,
+         self.progressIndicatorView,
+         self.statsView
+        ].forEach { $0.alpha = 0.0 }
+
+        self.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.skeleton.hide()
+
+        [self.coverImageView,
+         self.titleLabel,
+         self.downloadButton,
+         self.progressIndicatorView,
+         self.statsView
+        ].forEach { $0.alpha = 1.0 }
+    }
+
+    @objc
+    private func downloadButtonClicked() {
+        self.onDownloadButtonClick?()
     }
 }
 

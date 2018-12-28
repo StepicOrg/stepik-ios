@@ -21,8 +21,8 @@ extension TabSegmentedControlView {
         let backgroundColor = UIColor(hex: 0xf6f6f6)
 
         let buttonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        let buttonTitleFontNormal = UIFont.systemFont(ofSize: 16, weight: .light)
-        let buttonTitleFontSelected = UIFont.systemFont(ofSize: 16)
+        let buttonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
+        let buttonTitleFontSelected = UIFont.systemFont(ofSize: 15)
         let buttonTitleColor = UIColor.mainDark
 
         let bottomBorderColor = UIColor(hex: 0x9b9b9b)
@@ -85,22 +85,16 @@ final class TabSegmentedControlView: UIView {
         self.updateSelectedMarker()
     }
 
-    func selectNextTab() {
-        guard self.selectedItemIndex < self.items.count - 1 else {
+    func selectTab(index: Int) {
+        guard index >= 0,
+              index < self.items.count else {
             return
         }
 
-        self.selectedItemIndex += 1
-        self.updateSelectedMarker(animated: true)
-    }
-
-    func selectPreviousTab() {
-        guard self.selectedItemIndex > 0 else {
-            return
+        self.selectedItemIndex = index
+        if let selectedButton = self.tabButtons[safe: self.selectedItemIndex] {
+            self.tabButtonClicked(selectedButton)
         }
-
-        self.selectedItemIndex -= 1
-        self.updateSelectedMarker(animated: true)
     }
 
     private func initItems() {

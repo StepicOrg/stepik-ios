@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Step: NSManagedObject, JSONSerializable {
+final class Step: NSManagedObject, IDFetchable {
 
     typealias IdType = Int
 
@@ -87,5 +87,22 @@ class Step: NSManagedObject, JSONSerializable {
             return nil
         }
 //        return Step.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
+    }
+
+    static func fetch(_ ids: [Int]) -> [Step] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        do {
+            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Step] else {
+                return []
+            }
+            return results
+        } catch {
+            return []
+        }
     }
 }

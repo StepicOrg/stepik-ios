@@ -20,14 +20,12 @@ extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
 
-        let textBlockInsets = UIEdgeInsets(top: 40, left: 20, bottom: 0, right: 47)
-
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
-        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 0, right: 47)
+        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
 
-        let actionButtonInsets = UIEdgeInsets(top: 40, left: 47, bottom: 40, right: 47)
+        let actionButtonInsets = UIEdgeInsets(top: 0, left: 47, bottom: 32, right: 47)
         let actionButtonHeight: CGFloat = 47
         let actionButtonBackgroundColor = UIColor.stepicGreen
         let actionButtonFont = UIFont.systemFont(ofSize: 14)
@@ -64,8 +62,6 @@ final class CourseInfoTabInfoView: UIView {
         return button
     }()
 
-    // MARK: Init
-
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
@@ -77,18 +73,12 @@ final class CourseInfoTabInfoView: UIView {
         self.videoViewDelegate = videoViewDelegate
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func removeFromSuperview() {
-        super.removeFromSuperview()
-        self.scrollableStackView.removeAllArrangedViews()
     }
 
     // MARK: Public API
@@ -129,9 +119,11 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
 
         self.addActionButton(title: viewModel.actionButtonTitle)
-    }
 
-    // MARK: Actions
+        // Redraw self cause geometry & sizes can be changed
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
 
     @objc
     private func actionButtonClicked(sender: UIButton) {
@@ -179,11 +171,9 @@ final class CourseInfoTabInfoView: UIView {
             return
         }
 
-        let textBlockView = CourseInfoTabInfoTextBlockView(
-            appearance: .init(headerViewInsets: self.appearance.textBlockInsets)
-        )
-        textBlockView.headerView.icon = block.icon
-        textBlockView.headerView.title = block.title
+        let textBlockView = CourseInfoTabInfoTextBlockView()
+        textBlockView.icon = block.icon
+        textBlockView.title = block.title
         textBlockView.message = message
 
         self.scrollableStackView.addArrangedView(textBlockView)
@@ -221,10 +211,6 @@ final class CourseInfoTabInfoView: UIView {
 // MARK: - CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol -
 
 extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.backgroundColor = .white
-    }
-
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
     }
@@ -233,6 +219,47 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+}
+
+// MARK: - CourseInfoTabInfoView: CourseInfoPageViewProtocol -
+
+extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
+    var scrollViewDelegate: UIScrollViewDelegate? {
+        get {
+            return self.scrollableStackView.scrollDelegate
+        }
+        set {
+            self.scrollableStackView.scrollDelegate = newValue
+        }
+    }
+
+    var contentInsets: UIEdgeInsets {
+        get {
+            return self.scrollableStackView.contentInsets
+        }
+        set {
+            self.scrollableStackView.contentInsets = newValue
+        }
+    }
+
+    var contentOffset: CGPoint {
+        get {
+            return self.scrollableStackView.contentOffset
+        }
+        set {
+            self.scrollableStackView.contentOffset = newValue
+        }
+    }
+
+    @available(iOS 11.0, *)
+    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+        get {
+            return self.scrollableStackView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.scrollableStackView.contentInsetAdjustmentBehavior = newValue
         }
     }
 }

@@ -9,71 +9,66 @@
 import UIKit
 import SnapKit
 
+protocol CourseInfoViewDelegate: class {
+    func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat)
+    func courseInfoView(_ courseInfoView: CourseInfoView, requestScrollToPage index: Int)
+    func numberOfPages(in courseInfoView: CourseInfoView) -> Int
+}
+
 extension CourseInfoView {
     struct Appearance {
-        let largeHeaderHeight: CGFloat = 265.0
-        let headerHeight: CGFloat = 245.0
-        let segmentedControlHeight: CGFloat = 60.0
+        // Status bar + navbar + other offsets
+        var headerTopOffset: CGFloat = 0.0
+        let segmentedControlHeight: CGFloat = 48.0
     }
 }
 
 final class CourseInfoView: UIView {
     let appearance: Appearance
 
-    private lazy var scrollableStackView: ScrollableStackView = {
-        let view = ScrollableStackView(orientation: .vertical)
-        if #available(iOS 11.0, *) {
-            view.contentInsetAdjustmentBehavior = .never
-        }
-        return view
-    }()
+    private let tabsTitles: [String]
 
-    private lazy var headerView: UIView = {
+    private var lastHeaderHeight: CGFloat = 0
+    private var currentPageIndex = 0
+
+    private lazy var headerView: CourseInfoHeaderView = {
         let view = CourseInfoHeaderView()
-
-        let viewModel = CourseInfoHeaderViewModel(
-            title: "Введение в программирование (C++)",
-            coverImageURL: URL(string: "https://stepik.org/media/cache/images/courses/363/cover/c0e235513f7598d01f96ccc8a27c25a5.jpg"),
-            rating: Int(5.0),
-            learnersLabelText: "106K",
-            progress: CourseInfoProgressViewModel(
-                progress: 0.1,
-                progressLabelText: "10%"
-            ),
-            isVerified: true
-        )
-        view.configure(viewModel: viewModel)
         return view
     }()
 
-    private lazy var segmentedControl = TabSegmentedControlView(frame: .zero, items: ["Инфо", "Модули"])
-
-    private lazy var contentView: ScrollableStackView = {
-        let stackView = ScrollableStackView(orientation: .horizontal)
-        stackView.isPagingEnabled = true
-        stackView.showsHorizontalScrollIndicator = false
-        return stackView
+    private lazy var segmentedControl: TabSegmentedControlView = {
+        let control = TabSegmentedControlView(
+            frame: .zero,
+            items: self.tabsTitles
+        )
+        control.delegate = self
+        return control
     }()
 
-    var headerHeight: CGFloat {
-        return DeviceInfo.current.isXSerie
-            ? self.appearance.largeHeaderHeight
-            : self.appearance.headerHeight
-    }
+    private let pageControllerView: UIView
 
     // Dynamic scrolling constraints
     private var topConstraint: Constraint?
     private var headerHeightConstraint: Constraint?
 
+    /// Real height for header
+    var headerHeight: CGFloat {
+        return self.lastHeaderHeight + self.appearance.headerTopOffset
+    }
+
+    weak var delegate: CourseInfoViewDelegate?
+
     init(
         frame: CGRect = .zero,
+        pageControllerView: UIView,
         scrollDelegate: UIScrollViewDelegate? = nil,
+        tabsTitles: [String] = [],
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
+        self.pageControllerView = pageControllerView
+        self.tabsTitles = tabsTitles
         super.init(frame: frame)
-
-        self.scrollableStackView.scrollDelegate = scrollDelegate
 
         self.setupView()
         self.addSubviews()
@@ -82,6 +77,21 @@ final class CourseInfoView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(viewModel: CourseInfoHeaderViewModel) {
+        // Update header height
+        self.lastHeaderHeight = self.headerView.calculateHeight(
+            hasVerifiedMark: viewModel.isVerified
+        )
+
+        self.delegate?.courseInfoView(
+            self,
+            reportNewHeaderHeight: self.headerHeight + self.appearance.segmentedControlHeight
+        )
+
+        // Update data in header
+        self.headerView.configure(viewModel: viewModel)
     }
 
     func updateScroll(offset: CGFloat) {
@@ -96,12 +106,9 @@ final class CourseInfoView: UIView {
         self.topConstraint?.update(offset: min(0, -offset))
     }
 
-    func addPageForTest(_ view: UIView) {
-        self.contentView.addArrangedView(view)
-
-        view.snp.makeConstraints { make in
-            make.width.equalTo(self.snp.width)
-        }
+    func updateCurrentPageIndex(_ index: Int) {
+        self.currentPageIndex = index
+        self.segmentedControl.selectTab(index: index)
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -128,28 +135,17 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.clipsToBounds = true
         self.backgroundColor = .white
-
-        let headerInset = UIEdgeInsets(
-            top: self.headerHeight + self.appearance.segmentedControlHeight,
-            left: 0,
-            bottom: 0,
-            right: 0
-        )
-        self.scrollableStackView.scrollIndicatorInsets = headerInset
-        self.scrollableStackView.contentInsets = headerInset
     }
 
     func addSubviews() {
         self.addSubview(self.headerView)
         self.addSubview(self.segmentedControl)
-        self.insertSubview(self.scrollableStackView, aboveSubview: self.headerView)
-
-        self.scrollableStackView.addArrangedView(self.contentView)
+        self.insertSubview(self.pageControllerView, aboveSubview: self.headerView)
     }
 
     func makeConstraints() {
-        self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollableStackView.snp.makeConstraints { make in
+        self.pageControllerView.translatesAutoresizingMaskIntoConstraints = false
+        self.pageControllerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
         }
@@ -167,5 +163,21 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.segmentedControlHeight)
         }
+    }
+}
+
+extension CourseInfoView: TabSegmentedControlViewDelegate {
+    func tabSegmentedControlView(
+        _ tabSegmentedControlView: TabSegmentedControlView,
+        didSelectTabWithIndex: Int
+    ) {
+        let tabsCount = self.delegate?.numberOfPages(in: self) ?? 0
+        guard didSelectTabWithIndex >= 0,
+              didSelectTabWithIndex < tabsCount else {
+            return
+        }
+
+        self.delegate?.courseInfoView(self, requestScrollToPage: didSelectTabWithIndex)
+        self.currentPageIndex = didSelectTabWithIndex
     }
 }

@@ -22,12 +22,37 @@ final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
         return view
     }()
 
+    var onDownloadButtonClick: (() -> Void)? {
+        get {
+            return self.cellView.onDownloadButtonClick
+        }
+        set {
+            self.cellView.onDownloadButtonClick = newValue
+        }
+    }
+
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
 
         if self.cellView.superview == nil {
             self.setupSubview()
         }
+    }
+
+    func configure(viewModel: CourseInfoTabSyllabusUnitViewModel) {
+        self.cellView.configure(viewModel: viewModel)
+    }
+
+    func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
+        self.cellView.updateDownloadState(newState: newState)
+    }
+
+    func showLoading() {
+        self.cellView.showLoading()
+    }
+
+    func hideLoading() {
+        self.cellView.hideLoading()
     }
 
     private func setupSubview() {

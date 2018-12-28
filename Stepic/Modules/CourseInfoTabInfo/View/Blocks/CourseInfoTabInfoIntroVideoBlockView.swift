@@ -31,10 +31,15 @@ protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
 
 extension CourseInfoTabInfoIntroVideoBlockView {
     struct Appearance {
-        let introVideoHeight: CGFloat = 203
-        let insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        let introVideoHeightRatio: CGFloat = 9 / 16
+        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         let thumbnailImageFadeInDuration: TimeInterval = 0.15
-        let playImageViewSize = CGSize(width: 50, height: 50)
+
+        let playImageTintColor = UIColor.white
+        let playImageViewSize = CGSize(width: 25, height: 31)
+
+        let overlayColor = UIColor.mainDark
+        let overlayOpacity: CGFloat = 0.4
     }
 }
 
@@ -59,18 +64,28 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
     private weak var introVideoView: UIView?
 
+    private lazy var overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.overlayColor
+        view.alpha = self.appearance.overlayOpacity
+        self.addPlayVideoGestureRecognizer(view: view)
+        return view
+    }()
+
     private lazy var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        self.addPlayVideoGestureRecognizer(imageView: imageView)
         return imageView
     }()
 
     private lazy var playImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "play_dark"))
+        let imageView = UIImageView(
+            image: UIImage(named: "video-preview-play-overlay")?.withRenderingMode(.alwaysTemplate)
+        )
+        imageView.tintColor = self.appearance.playImageTintColor
         imageView.contentMode = .scaleAspectFit
-        self.addPlayVideoGestureRecognizer(imageView: imageView)
+        self.addPlayVideoGestureRecognizer(view: imageView)
         return imageView
     }()
 
@@ -119,13 +134,13 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         }
     }
 
-    private func addPlayVideoGestureRecognizer(imageView: UIImageView) {
+    private func addPlayVideoGestureRecognizer(view: UIView) {
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(self.playClicked)
         )
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 
@@ -136,6 +151,7 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
 
     func addSubviews() {
         self.addSubview(self.thumbnailImageView)
+        self.addSubview(self.overlayView)
         self.addSubview(self.playImageView)
 
         if let videoView = self.delegate?.courseInfoTabInfoIntroVideoBlockViewRequestsVideoView(self) {
@@ -150,7 +166,13 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
         self.thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         self.thumbnailImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(self.appearance.insets)
-            make.height.equalTo(self.appearance.introVideoHeight)
+            make.height.equalTo(self.snp.width).multipliedBy(self.appearance.introVideoHeightRatio)
+        }
+
+        self.overlayView.translatesAutoresizingMaskIntoConstraints = false
+        self.overlayView.snp.makeConstraints { make in
+            make.center.equalTo(self.thumbnailImageView)
+            make.size.equalTo(self.thumbnailImageView)
         }
 
         self.playImageView.translatesAutoresizingMaskIntoConstraints = false
