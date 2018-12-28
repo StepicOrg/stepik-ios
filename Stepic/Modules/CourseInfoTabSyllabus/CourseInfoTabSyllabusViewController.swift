@@ -23,7 +23,7 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
     let interactor: CourseInfoTabSyllabusInteractorProtocol
     private var state: CourseInfoTabSyllabus.ViewControllerState
 
-    private let syllabusTableDelegate: CourseInfoTabSyllabusTableViewDelegate
+    private let syllabusTableDelegate: CourseInfoTabSyllabusTableViewDataSource
 
     lazy var courseInfoTabSyllabusView = self.view as? CourseInfoTabSyllabusView
 
@@ -33,7 +33,7 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
     ) {
         self.interactor = interactor
         self.state = initialState
-        self.syllabusTableDelegate = CourseInfoTabSyllabusTableViewDelegate()
+        self.syllabusTableDelegate = CourseInfoTabSyllabusTableViewDataSource()
 
         super.init(nibName: nil, bundle: nil)
         self.syllabusTableDelegate.delegate = self

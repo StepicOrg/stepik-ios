@@ -47,6 +47,14 @@ final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
         self.cellView.updateDownloadState(newState: newState)
     }
 
+    func showLoading() {
+        self.cellView.showLoading()
+    }
+
+    func hideLoading() {
+        self.cellView.hideLoading()
+    }
+
     private func setupSubview() {
         self.contentView.addSubview(self.cellView)
         self.contentView.addSubview(self.separatorView)

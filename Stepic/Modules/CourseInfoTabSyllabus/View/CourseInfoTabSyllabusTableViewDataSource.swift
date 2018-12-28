@@ -1,5 +1,5 @@
 //
-//  CourseInfoTabSyllabusTableViewDelegate.swift
+//  CourseInfoTabSyllabusTableViewDataSource.swift
 //  Stepic
 //
 //  Created by Vladislav Kiryukhin on 20/12/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
+final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
                                                     UITableViewDelegate,
                                                     UITableViewDataSource {
     weak var delegate: CourseInfoTabSyllabusViewControllerDelegate?
@@ -49,7 +49,7 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
             return
         }
 
-        self.viewModels[indexPath.section].units[indexPath.row] = unit
+        self.viewModels[indexPath.section].units[indexPath.row] = .normal(viewModel: unit)
         self.reloadVisibleCell(affectedIndexPath: indexPath)
     }
 
@@ -75,7 +75,11 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
         }
 
         guard let sectionViewModel = self.viewModels[safe: affectedIndexPath.section],
-              let unitViewModel = sectionViewModel.units[safe: affectedIndexPath.row] else {
+              let unitWrappedViewModel = sectionViewModel.units[safe: affectedIndexPath.row] else {
+            return
+        }
+
+        guard case .normal(let unitViewModel) = unitWrappedViewModel else {
             return
         }
 
@@ -89,8 +93,12 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
         for (index, viewModel) in self.viewModels.enumerated() {
             self.sectionsIndexCache[viewModel.uniqueIdentifier] = index
 
-            for (row, subViewModel) in viewModel.units.enumerated() {
-                self.unitsIndexCache[subViewModel.uniqueIdentifier] = IndexPath(
+            for (row, wrappedViewModel) in viewModel.units.enumerated() {
+                guard case .normal(let viewModel) = wrappedViewModel else {
+                    continue
+                }
+
+                self.unitsIndexCache[viewModel.uniqueIdentifier] = IndexPath(
                     row: row,
                     section: index
                 )
@@ -110,14 +118,6 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CourseInfoTabSyllabusTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-
-        if let viewModel = self.viewModels[safe: indexPath.section]?.units[safe: indexPath.row] {
-            cell.configure(viewModel: viewModel)
-            cell.onDownloadButtonClick = { [weak self] in
-                self?.delegate?.downloadButtonDidClick(viewModel)
-            }
-        }
-
         cell.updateConstraintsIfNeeded()
         return cell
     }
@@ -141,23 +141,57 @@ final class CourseInfoTabSyllabusTableViewDelegate: NSObject,
     ) {
         self.visibleSectionHeaders[section] = view
 
-        let titles = self.viewModels[section].units.map { $0.title }
-        if !titles.contains(where: { $0 == "LOADING" }) {
+        // If section has no unit-placeholders then skip request
+        let hasUnitPlaceholders = self.viewModels[section].units.contains(
+            where: { unit in
+                if case .placeholder = unit {
+                    return true
+                }
+                return false
+            }
+        )
+        if hasUnitPlaceholders {
+            self.delegate?.sectionWillDisplay(self.viewModels[section])
+        }
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        guard let cell = cell as? CourseInfoTabSyllabusTableViewCell else {
             return
         }
 
-        self.delegate?.sectionWillDisplay(self.viewModels[section])
-    }
+        if let wrappedUnitViewModel = self.viewModels[safe: indexPath.section]?.units[safe: indexPath.row] {
+            if case .normal(let unitViewModel) = wrappedUnitViewModel {
+                cell.configure(viewModel: unitViewModel)
+                cell.onDownloadButtonClick = { [weak self] in
+                    self?.delegate?.downloadButtonDidClick(unitViewModel)
+                }
+                cell.hideLoading()
+            } else {
+                cell.showLoading()
+            }
+        }
 
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.visibleCells[indexPath] = cell
     }
 
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        didEndDisplaying cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
         self.visibleCells.removeValue(forKey: indexPath)
     }
 
-    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+    func tableView(
+        _ tableView: UITableView,
+        didEndDisplayingHeaderView view: UIView,
+        forSection section: Int
+    ) {
         self.visibleSectionHeaders.removeValue(forKey: section)
     }
 }

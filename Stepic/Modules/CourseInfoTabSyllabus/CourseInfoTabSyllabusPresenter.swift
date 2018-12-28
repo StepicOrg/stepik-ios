@@ -27,27 +27,42 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             let sectionViewModels = result.sections.enumerated().map {
                 sectionData -> CourseInfoTabSyllabusSectionViewModel in
 
-                var currentSectionUnitViewModels: [CourseInfoTabSyllabusUnitViewModel] = []
+                var currentSectionUnitViewModels: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper] = []
 
                 for (unitIndex, unitID) in sectionData.element.entity.unitsArray.enumerated() {
-                    let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID })
-                    currentSectionUnitViewModels.append(
-                        self.makeUnitViewModel(
-                            sectionIndex: sectionData.offset,
-                            unitIndex: unitIndex,
-                            uid: matchedUnitRecord?.uniqueIdentifier ?? "",
-                            unit: matchedUnitRecord?.entity,
-                            downloadState: matchedUnitRecord?.downloadState ?? .notAvailable
+                    if let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID }),
+                       let unit = matchedUnitRecord.entity {
+                        currentSectionUnitViewModels.append(
+                            self.makeUnitViewModel(
+                                sectionIndex: sectionData.offset,
+                                unitIndex: unitIndex,
+                                uid: matchedUnitRecord.uniqueIdentifier,
+                                unit: unit,
+                                downloadState: matchedUnitRecord.downloadState
+                            )
                         )
-                    )
+                    } else {
+                        currentSectionUnitViewModels.append(.placeholder)
+                    }
                 }
+
+                let hasPlaceholderUnits = currentSectionUnitViewModels.contains(
+                    where: { unit in
+                        if case .normal(_) = unit {
+                            return false
+                        }
+                        return true
+                    }
+                )
 
                 return self.makeSectionViewModel(
                     index: sectionData.offset,
                     uid: sectionData.element.uniqueIdentifier,
                     section: sectionData.element.entity,
                     units: currentSectionUnitViewModels,
-                    downloadState: sectionData.element.downloadState
+                    downloadState: hasPlaceholderUnits
+                        ? .notAvailable
+                        : sectionData.element.downloadState
                 )
             }
 
@@ -86,7 +101,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         index: Int,
         uid: UniqueIdentifierType,
         section: Section,
-        units: [CourseInfoTabSyllabusUnitViewModel],
+        units: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper],
         downloadState: CourseInfoTabSyllabus.DownloadState
     ) -> CourseInfoTabSyllabusSectionViewModel {
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
@@ -107,23 +122,11 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         sectionIndex: Int,
         unitIndex: Int,
         uid: UniqueIdentifierType,
-        unit: Unit?,
+        unit: Unit,
         downloadState: CourseInfoTabSyllabus.DownloadState
-    ) -> CourseInfoTabSyllabusUnitViewModel {
-        guard let unit = unit,
-              let lesson = unit.lesson else {
-            // TODO: temporary view model with "LOADING" instead of placeholder
-            let viewModel = CourseInfoTabSyllabusUnitViewModel(
-                uniqueIdentifier: uid,
-                title: "LOADING",
-                coverImageURL: nil,
-                progress: 0,
-                likesCount: 0,
-                learnersLabelText: "",
-                progressLabelText: "",
-                downloadState: downloadState
-            )
-            return viewModel
+    ) -> CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper {
+        guard let lesson = unit.lesson else {
+            return .placeholder
         }
 
         let likesCount = lesson.voteDelta
@@ -156,6 +159,6 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
         self.cachedUnitViewModels[unit.id] = viewModel
 
-        return viewModel
+        return .normal(viewModel: viewModel)
     }
 }

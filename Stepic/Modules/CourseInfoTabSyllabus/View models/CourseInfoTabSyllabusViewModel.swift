@@ -15,9 +15,14 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let title: String
     let progress: Float
 
-    var units: [CourseInfoTabSyllabusUnitViewModel]
+    var units: [UnitViewModelWrapper]
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
+
+    enum UnitViewModelWrapper {
+        case placeholder
+        case normal(viewModel: CourseInfoTabSyllabusUnitViewModel)
+    }
 }
 
 struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {

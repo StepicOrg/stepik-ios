@@ -113,6 +113,32 @@ final class CourseInfoTabSyllabusCellView: UIView {
         }
     }
 
+    func showLoading() {
+        self.skeleton.viewBuilder = {
+            CourseInfoTabSyllabusCellSkeletonView()
+        }
+
+        [self.coverImageView,
+         self.titleLabel,
+         self.downloadButton,
+         self.progressIndicatorView,
+         self.statsView
+        ].forEach { $0.alpha = 0.0 }
+
+        self.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.skeleton.hide()
+
+        [self.coverImageView,
+         self.titleLabel,
+         self.downloadButton,
+         self.progressIndicatorView,
+         self.statsView
+        ].forEach { $0.alpha = 1.0 }
+    }
+
     @objc
     private func downloadButtonClicked() {
         self.onDownloadButtonClick?()
