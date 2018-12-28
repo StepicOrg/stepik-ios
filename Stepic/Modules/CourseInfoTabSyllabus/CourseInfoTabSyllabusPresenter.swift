@@ -104,12 +104,15 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         units: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper],
         downloadState: CourseInfoTabSyllabus.DownloadState
     ) -> CourseInfoTabSyllabusSectionViewModel {
+        let deadlines = self.makeDeadlinesViewModel(section: section)
+
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
             index: "\(index + 1)",
             title: section.title,
             progress: (section.progress?.percentPassed ?? 0) / 100.0,
             units: units,
+            deadlines: deadlines,
             downloadState: downloadState
         )
 
@@ -160,5 +163,62 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         self.cachedUnitViewModels[unit.id] = viewModel
 
         return .normal(viewModel: viewModel)
+    }
+
+    private func makeDeadlinesViewModel(
+        section: Section
+    ) -> CourseInfoTabSyllabusSectionDeadlinesViewModel? {
+        let dates: [(title: String, date: Date)] = [
+            (title: NSLocalizedString("BeginDate", comment: ""), date: section.beginDate),
+            (title: NSLocalizedString("SoftDeadline", comment: ""), date: section.softDeadline),
+            (title: NSLocalizedString("HardDeadline", comment: ""), date: section.hardDeadline),
+            (title: NSLocalizedString("EndDate", comment: ""), date: section.endDate)
+        ].filter { $0.date != nil }.compactMap { ($0.title, $0.date!) }
+
+        if dates.isEmpty {
+            return nil
+        }
+
+        var previousDate: Date?
+        let items: [CourseInfoTabSyllabusSectionDeadlinesViewModel.TimelineItem] = dates.map { item in
+            defer {
+                previousDate = item.date
+            }
+
+            let formattedDate = FormatterHelper.dateStringWithFullMonthAndYear(item.date)
+
+            let nowDate = Date()
+            var lineFillingProgress: Float = 0.0
+            var isPointFilled = false
+
+            switch nowDate.compare(item.date) {
+            case .orderedDescending, .orderedSame:
+                // Today >= date
+                lineFillingProgress = 1.0
+                isPointFilled = true
+            case .orderedAscending:
+                // Today < date
+                isPointFilled = false
+
+                if let previousDate = previousDate {
+                    let timeBetweenDates = item.date.timeIntervalSinceReferenceDate
+                        - previousDate.timeIntervalSinceReferenceDate
+                    let timeAfterPreviousDate = nowDate.timeIntervalSinceReferenceDate
+                        - previousDate.timeIntervalSinceReferenceDate
+
+                    lineFillingProgress = Float(max(0, timeAfterPreviousDate) / timeBetweenDates)
+                } else {
+                    lineFillingProgress = 0
+                }
+            }
+
+            return .init(
+                title: "\(item.title)\n\(formattedDate)",
+                lineFillingProgress: lineFillingProgress,
+                isPointFilled: isPointFilled
+            )
+        }
+
+        return .init(timelineItems: items)
     }
 }

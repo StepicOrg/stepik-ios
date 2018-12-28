@@ -69,14 +69,7 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     // To use rotated view w/ auto-layout
     private lazy var progressIndicatorViewContainerView = UIView()
 
-    private lazy var deadlinesView = CourseInfoTabSyllabusSectionDeadlinesView(
-        items: [
-            CourseInfoTabSyllabusSectionDeadlinesView.Item(text: "Start date\n18 October 2018 00:00 ", progressBefore: 1.0, isCompleted: true),
-            CourseInfoTabSyllabusSectionDeadlinesView.Item(text: "Soft deadline\n18 October 2018 00:00 ", progressBefore: 1.0, isCompleted: true),
-            CourseInfoTabSyllabusSectionDeadlinesView.Item(text: "Hard deadline\n18 October 2018 00:00 ", progressBefore: 0.7, isCompleted: false),
-            CourseInfoTabSyllabusSectionDeadlinesView.Item(text: "End date\n18 October 2018 00:00 ", progressBefore: 0.0, isCompleted: false)
-        ]
-    )
+    private lazy var deadlinesView = CourseInfoTabSyllabusSectionDeadlinesView()
 
     var onDownloadButtonClick: (() -> Void)?
 
@@ -99,6 +92,21 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         self.progressIndicatorView.progress = viewModel.progress
 
         self.updateDownloadState(newState: viewModel.downloadState)
+
+        if let deadlines = viewModel.deadlines {
+            self.deadlinesView.isHidden = false
+            self.deadlinesView.configure(
+                items: deadlines.timelineItems.map { item in
+                    .init(
+                        text: item.title,
+                        progressBefore: item.lineFillingProgress,
+                        isCompleted: item.isPointFilled
+                    )
+                }
+            )
+        } else {
+            self.deadlinesView.isHidden = true
+        }
     }
 
     func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {

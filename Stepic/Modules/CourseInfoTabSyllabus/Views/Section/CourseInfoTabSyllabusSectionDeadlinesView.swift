@@ -30,7 +30,7 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
     private static let pagingVelocityThreshold: CGFloat = 0.6
     let appearance: Appearance
 
-    private let items: [Item]
+    private var items: [Item] = []
 
     private var circleIndicators: [CAShapeLayer] = []
     private var progressIndicators: [UIProgressView] = []
@@ -52,16 +52,13 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
         return CGSize(width: UIViewNoIntrinsicMetric, height: self.scrollView.frame.height)
     }
 
-    init(frame: CGRect = .zero, items: [Item] = [], appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
-        self.items = items
         super.init(frame: frame)
 
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        self.initItems()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -70,8 +67,30 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        if self.items.isEmpty {
+            return
+        }
+
         self.updateLayout()
         self.invalidateIntrinsicContentSize()
+    }
+
+    func configure(items: [Item]) {
+        self.removeItems()
+        self.items = items
+        self.initItems()
+    }
+
+    private func removeItems() {
+        self.labelsInPageCount = 0
+
+        self.scrollView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        self.scrollView.subviews.forEach { $0.removeFromSuperview() }
+
+        self.textLabels.removeAll()
+        self.circleIndicators.removeAll()
+        self.progressIndicators.removeAll()
     }
 
     private func initItems() {

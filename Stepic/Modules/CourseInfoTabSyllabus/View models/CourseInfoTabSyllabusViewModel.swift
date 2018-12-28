@@ -16,6 +16,7 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let progress: Float
 
     var units: [UnitViewModelWrapper]
+    var deadlines: CourseInfoTabSyllabusSectionDeadlinesViewModel?
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
 
@@ -37,4 +38,14 @@ struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
     let progressLabelText: String?
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
+}
+
+struct CourseInfoTabSyllabusSectionDeadlinesViewModel {
+    struct TimelineItem {
+        let title: String
+        let lineFillingProgress: Float
+        let isPointFilled: Bool
+    }
+
+    let timelineItems: [TimelineItem]
 }
