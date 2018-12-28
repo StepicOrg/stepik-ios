@@ -112,6 +112,7 @@ PODS:
     - MarqueeLabel/Swift
     - SnapKit (~> 4.0)
   - Nuke (7.3.2)
+  - Pageboy (3.0.1)
   - pop (1.0.10)
   - Presentr (1.3.2)
   - PromiseKit (6.3.4):
@@ -128,6 +129,7 @@ PODS:
     - PromiseKit/CorePromise
   - Protobuf (3.6.1)
   - Quick (1.3.1)
+  - Reveal-SDK (20)
   - RFKeyboardToolbar (1.3)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -182,10 +184,12 @@ DEPENDENCIES:
   - Nimble (= 7.1.3)
   - NotificationBannerSwift (= 1.6.3)
   - Nuke (= 7.3.2)
+  - Pageboy (= 3.0.1)
   - Presentr (= 1.3.2)
   - PromiseKit (= 6.3.4)
   - PromiseKit/Alamofire (= 6.3.4)
   - Quick (= 1.3.1)
+  - Reveal-SDK
   - RFKeyboardToolbar (= 1.3)
   - SDWebImage (= 4.4.2)
   - SDWebImage/GIF (= 4.4.2)
@@ -242,11 +246,13 @@ SPEC REPOS:
     - Nimble
     - NotificationBannerSwift
     - Nuke
+    - Pageboy
     - pop
     - Presentr
     - PromiseKit
     - Protobuf
     - Quick
+    - Reveal-SDK
     - RFKeyboardToolbar
     - SDWebImage
     - SimulatorStatusMagic
@@ -328,11 +334,13 @@ SPEC CHECKSUMS:
   Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   NotificationBannerSwift: b231e4c3244848ef300e1c53ce027b9756b9b06f
   Nuke: a9a31bbd6c6723753ab024ef22057dcaaf046c1b
+  Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
   PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
+  Reveal-SDK: 43206a57f575632fd304e85385cc259b5d359e32
   RFKeyboardToolbar: c96a7d9458564d1fedc8ef6844b6c467934aade2
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SimulatorStatusMagic: 0389a805fa8bd001e2977c4046730bdbd6642861
@@ -349,6 +357,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: 3f20d9376b4c62a872b087e27e6847796587ddf3
+PODFILE CHECKSUM: d55ce87b12281e9e8ae2e54e4ac3df90d1277da2
 
 COCOAPODS: 1.5.3

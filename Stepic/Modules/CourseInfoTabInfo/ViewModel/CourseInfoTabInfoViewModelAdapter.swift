@@ -41,6 +41,7 @@ extension CourseInfoTabInfoViewModel {
 
     private static func getIntroVideoURL(course: Course) -> URL? {
         if let introVideo = course.introVideo, !introVideo.urls.isEmpty {
+            // FIXME: VideosInfo dependency
             return introVideo.getUrlForQuality(VideosInfo.watchingVideoQuality)
         } else {
             return URL(string: course.introURL)

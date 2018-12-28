@@ -125,6 +125,15 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    var contentOffset: CGPoint {
+        get {
+            return self.scrollView.contentOffset
+        }
+        set {
+            self.scrollView.contentOffset = newValue
+        }
+    }
+
     var scrollIndicatorInsets: UIEdgeInsets {
         get {
             return self.scrollView.scrollIndicatorInsets

@@ -22,15 +22,21 @@ final class ProgressesPersistenceService: ProgressesPersistenceServiceProtocol {
         ids: [Progress.IdType],
         page: Int = 1
     ) -> Promise<([Progress], Meta)> {
-        fatalError("Not implemented yet")
+        return Promise { seal in
+            Progress.fetchAsync(ids: ids).done { progresses in
+                seal.fulfill((progresses, Meta.oneAndOnlyPage))
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
     }
 
     func fetch(id: Progress.IdType) -> Promise<Progress?> {
         return Promise { seal in
-            Progress.fetchAsync(ids: [id]).done { progresses in
+            self.fetch(ids: [id]).done { progresses, _ in
                 seal.fulfill(progresses.first)
-            }.catch { _ in
-                seal.reject(Error.fetchFailed)
+            }.catch { error in
+                seal.reject(error)
             }
         }
     }

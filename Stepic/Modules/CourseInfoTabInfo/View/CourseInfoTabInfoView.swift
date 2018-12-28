@@ -45,7 +45,6 @@ final class CourseInfoTabInfoView: UIView {
         stackView.showsVerticalScrollIndicator = false
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.stackViewSpacing
-        stackView.isScrollEnabled = false
         return stackView
     }()
 
@@ -63,13 +62,6 @@ final class CourseInfoTabInfoView: UIView {
         return button
     }()
 
-    override var intrinsicContentSize: CGSize {
-        return CGSize(
-            width: UIViewNoIntrinsicMetric,
-            height: self.scrollableStackView.arrangedSubviews.last?.frame.maxY ?? 0
-        )
-    }
-
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
@@ -81,18 +73,12 @@ final class CourseInfoTabInfoView: UIView {
         self.videoViewDelegate = videoViewDelegate
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.invalidateIntrinsicContentSize()
     }
 
     // MARK: Public API
@@ -225,10 +211,6 @@ final class CourseInfoTabInfoView: UIView {
 // MARK: - CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol -
 
 extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.backgroundColor = .white
-    }
-
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
     }
@@ -237,6 +219,47 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+}
+
+// MARK: - CourseInfoTabInfoView: CourseInfoPageViewProtocol -
+
+extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
+    var scrollViewDelegate: UIScrollViewDelegate? {
+        get {
+            return self.scrollableStackView.scrollDelegate
+        }
+        set {
+            self.scrollableStackView.scrollDelegate = newValue
+        }
+    }
+
+    var contentInsets: UIEdgeInsets {
+        get {
+            return self.scrollableStackView.contentInsets
+        }
+        set {
+            self.scrollableStackView.contentInsets = newValue
+        }
+    }
+
+    var contentOffset: CGPoint {
+        get {
+            return self.scrollableStackView.contentOffset
+        }
+        set {
+            self.scrollableStackView.contentOffset = newValue
+        }
+    }
+
+    @available(iOS 11.0, *)
+    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+        get {
+            return self.scrollableStackView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.scrollableStackView.contentInsetAdjustmentBehavior = newValue
         }
     }
 }

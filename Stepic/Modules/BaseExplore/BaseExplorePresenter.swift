@@ -29,11 +29,11 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
     }
 
     func presentCourseInfo(response: BaseExplore.PresentCourseInfo.Response) {
-        self.viewController?.displayCourseInfo(viewModel: .init(course: response.course))
+        self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.course.id))
     }
 
     func presentCourseSyllabus(response: BaseExplore.PresentCourseSyllabus.Response) {
-        self.viewController?.displayCourseSyllabus(viewModel: .init(course: response.course))
+        self.viewController?.displayCourseSyllabus(viewModel: .init(courseID: response.course.id))
     }
 
     func presentLastStep(response: BaseExplore.PresentLastStep.Response) {

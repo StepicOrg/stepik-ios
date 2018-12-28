@@ -39,9 +39,6 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         let label = UILabel()
         label.font = self.appearance.indexFont
         label.textColor = self.appearance.indexTextColor
-
-        label.text = "1"
-
         return label
     }()
 
@@ -50,14 +47,13 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         label.font = self.appearance.titleFont
         label.textColor = self.appearance.titleTextColor
         label.numberOfLines = 2
-
-        label.text = "Introduction to JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript"
-
         return label
     }()
 
     private lazy var downloadButton: DownloadControlView = {
         let view = DownloadControlView(initialState: .readyToDownloading)
+        view.isHidden = true
+        view.addTarget(self, action: #selector(self.downloadButtonClicked), for: .touchUpInside)
         return view
     }()
 
@@ -67,9 +63,6 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         view.trackTintColor = self.appearance.progressViewSecondaryColor
         view.progressTintColor = self.appearance.progressViewMainColor
         view.transform = CGAffineTransform(rotationAngle: .pi / -2)
-
-        view.progress = 0.7
-
         return view
     }()
 
@@ -85,6 +78,8 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         ]
     )
 
+    var onDownloadButtonClick: (() -> Void)?
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -98,8 +93,33 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func configure(viewModel: CourseInfoTabSyllabusSectionViewModel) {
+        self.titleLabel.text = viewModel.title
+        self.indexLabel.text = viewModel.index
+        self.progressIndicatorView.progress = viewModel.progress
+
+        self.updateDownloadState(newState: viewModel.downloadState)
+    }
+
+    func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
+        switch newState {
+        case .notAvailable:
+            self.downloadButton.isHidden = true
+        case .available(let isCached):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = isCached ? .readyToRemoving : .readyToDownloading
+        case .waiting:
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .pending
+        case .downloading(let progress):
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .downloading(progress: progress)
+        }
+    }
+
+    @objc
+    private func downloadButtonClicked() {
+        self.onDownloadButtonClick?()
     }
 }
 

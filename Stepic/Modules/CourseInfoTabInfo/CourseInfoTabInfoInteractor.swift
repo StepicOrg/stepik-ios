@@ -59,7 +59,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 // MARK: - CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol -
 
 extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
-    func update(with course: Course) {
+    func update(with course: Course, isOnline: Bool) {
         self.course = course
         self.getCourseInfo()
     }
