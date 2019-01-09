@@ -478,28 +478,49 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
 }
 
 extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDelegate {
+    private func getStateUpdateByDownloadSource(
+        _ source: DownloadSource
+    ) -> CourseInfoTabSyllabus.DownloadButtonStateUpdate.Source? {
+        switch source {
+        case .unit(let unit):
+            return .unit(entity: unit)
+        case .section(let section):
+            return .section(entity: section)
+        default:
+            return nil
+        }
+    }
+
     func downloadsInteractionService(
         _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         didReceiveProgress progress: Float,
         source: DownloadSource
     ) {
-        let sourceType: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Source? = {
-            switch source {
-            case .unit(let unit):
-                return .unit(entity: unit)
-            case .section(let section):
-                return .section(entity: section)
-            default:
-                return nil
-            }
-        }()
-
-        DispatchQueue.main.async {
+        let sourceType = self.getStateUpdateByDownloadSource(source)
+        DispatchQueue.main.async { [weak self] in
             if let sourceType = sourceType {
-                self.presenter.presentDownloadButtonUpdate(
+                self?.presenter.presentDownloadButtonUpdate(
                     response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                         source: sourceType,
                         downloadState: .downloading(progress: progress)
+                    )
+                )
+            }
+        }
+    }
+
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didReceiveCompletion completed: Bool,
+        source: DownloadSource
+    ) {
+        let sourceType = self.getStateUpdateByDownloadSource(source)
+        DispatchQueue.main.async { [weak self] in
+            if let sourceType = sourceType {
+                self?.presenter.presentDownloadButtonUpdate(
+                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                        source: sourceType,
+                        downloadState: .available(isCached: completed)
                     )
                 )
             }

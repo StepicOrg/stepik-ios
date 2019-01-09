@@ -118,7 +118,8 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         // Report progress
         task.progressReporter = { [weak self] progress in
             // Replace unknown progress by 0
-            let progress = progress ?? 0
+            let lastProgress = self?.tasksLastProgress[task.id] ?? 0
+            let progress = max(lastProgress, progress ?? 0)
 
             let event = VideoDownloadingServiceEvent(
                 taskID: task.id,

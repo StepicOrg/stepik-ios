@@ -177,10 +177,12 @@ final class DownloadControlView: UIControl {
         switch self.actionState {
         case .readyToRemoving:
             icon = UIImage(named: "download-button-remove")
-        case .downloading(_), .pending:
+        case .downloading(_):
             icon = UIImage(named: "download-button-cancel")
         case .readyToDownloading:
             icon = UIImage(named: "download-button-start")
+        case .pending:
+            icon = nil
         }
         self.iconImageView.image = icon?.withRenderingMode(.alwaysTemplate)
     }

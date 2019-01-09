@@ -71,6 +71,11 @@ protocol SyllabusDownloadsInteractionServiceDelegate: class {
         didReceiveProgress progress: Float,
         source: DownloadSource
     )
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didReceiveCompletion completed: Bool,
+        source: DownloadSource
+    )
 }
 
 protocol SyllabusDownloadsInteractionServiceProtocol: class {
@@ -113,11 +118,21 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.downloadsInteractionService(
-                strongSelf,
-                didReceiveProgress: record.progress,
-                source: record.source
-            )
+
+            switch record.state {
+            case .downloading(let progress):
+                strongSelf.delegate?.downloadsInteractionService(
+                    strongSelf,
+                    didReceiveProgress: progress,
+                    source: record.source
+                )
+            case .finished(let completed):
+                strongSelf.delegate?.downloadsInteractionService(
+                    strongSelf,
+                    didReceiveCompletion: completed,
+                    source: record.source
+                )
+            }
         }
 
         // TODO: handle case when lesson doesn't have steps with video
@@ -221,7 +236,7 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         return nil
     }
 
-    /// Traverse tree from leaf to the root and mark all records as dirty (= needs to recalculate progress)
+    /// Traverse tree from leaf to the root and mark all records as dirty (= needs to recalculate progress and completion status)
     private func markAsDirtyAllTree(record: DownloadRecord) {
         if let parent = record.parent {
             record.isDirty = true
@@ -239,13 +254,14 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         case .error:
             // Downloading failed, remove task and detach from parent
             downloadRecord.parent?.childrens.removeAll(where: { $0 === downloadRecord })
+            downloadRecord.state = .finished(completed: false)
             self.markAsDirtyAllTree(record: downloadRecord)
             self.currentDownloads.removeValue(forKey: event.taskID)
         case .active(let progress):
-            downloadRecord.progress = progress
+            downloadRecord.state = .downloading(progress: progress)
             self.markAsDirtyAllTree(record: downloadRecord)
         case .completed(_):
-            downloadRecord.progress = 1.0
+            downloadRecord.state = .finished(completed: true)
             self.markAsDirtyAllTree(record: downloadRecord)
             self.currentDownloads.removeValue(forKey: event.taskID)
         }
@@ -255,6 +271,11 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
     private final class DownloadRecord {
         typealias Observer = (DownloadRecord) -> Void
 
+        enum State {
+            case finished(completed: Bool)
+            case downloading(progress: Float)
+        }
+
         /// Node type (e.g. step, unit, ...)
         let source: DownloadSource
         /// Node parent
@@ -263,6 +284,8 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         var childrens: [DownloadRecord]
 
         private var observer: Observer?
+
+        private var currentState: State = .downloading(progress: 0)
 
         /// Set true if should report progress
         var shouldReportProgress: Bool {
@@ -281,26 +304,24 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
                 }
             }
         }
-        private var currentProgress: Float = 0
 
         /// Computed property of current node downloading progress;
         /// If node is marked as "dirty" then progress will be calculated recursive based on progresses of its child-nodes
-        var progress: Float {
+        var state: State {
             get {
                 if case .step(_) = self.source {
-                    return self.currentProgress
+                    return self.currentState
                 } else {
                     if self.isDirty {
-                        self.currentProgress = self.childrens.map { $0.progress }.reduce(0, +)
-                            / Float(self.childrens.count)
+                        self.updateProgressRecursive()
                         self.isDirty = false
                     }
-                    return self.currentProgress
+                    return self.currentState
                 }
             }
             set {
                 if case .step(_) = self.source {
-                    self.currentProgress = max(self.currentProgress, newValue)
+                    self.currentState = newValue
                 }
             }
         }
@@ -315,6 +336,51 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
             self.childrens = childrens
             self.shouldReportProgress = shouldReportProgress
             self.observer = observer
+        }
+
+        private func updateProgressRecursive() {
+            // If any children failed -> current node failed
+            // If all childrens succeed -> current node succeed
+            // Otherwise current node downloading
+
+            let childrensDownloadingPercentage = self.childrens.map { children -> Float in
+                switch children.state {
+                case .downloading(let progress):
+                    return progress
+                case .finished(let completed):
+                    return completed ? 1.0 : 0.0
+                }
+            }.reduce(0, +) / Float(self.childrens.count)
+
+            let failedChildrensCount = self.childrens.map { children -> Int in
+                switch children.state {
+                case .downloading(_):
+                    return 0
+                case .finished(let completed):
+                    return completed ? 0 : 1
+                }
+            }.reduce(0, +)
+
+            let succeedChildrensCount = self.childrens.map { children -> Int in
+                switch children.state {
+                case .downloading(_):
+                    return 0
+                case .finished(let completed):
+                    return completed ? 1 : 0
+                }
+            }.reduce(0, +)
+
+            if failedChildrensCount > 0 {
+                self.currentState = .finished(completed: false)
+                return
+            }
+
+            if succeedChildrensCount == self.childrens.count {
+                self.currentState = .finished(completed: true)
+                return
+            }
+
+            self.currentState = .downloading(progress: childrensDownloadingPercentage)
         }
     }
 }
