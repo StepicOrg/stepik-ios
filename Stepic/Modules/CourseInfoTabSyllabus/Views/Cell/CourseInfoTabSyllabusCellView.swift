@@ -12,17 +12,17 @@ import SnapKit
 extension CourseInfoTabSyllabusCellView {
     struct Appearance {
         let coverImageViewCornerRadius: CGFloat = 4
-        let coverImageViewInsets = UIEdgeInsets(top: 20, left: 23, bottom: 0, right: 0)
+        let coverImageViewInsets = UIEdgeInsets(top: 20, left: 23, bottom: 20, right: 0)
         let coverImageViewSize = CGSize(width: 30, height: 30)
 
         let titleTextColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 14)
-        let titleLabelInsets = UIEdgeInsets(top: 18, left: 12, bottom: 7, right: 8)
+        let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 8)
 
         let downloadButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
-        let downloadButtonSize = CGSize(width: 24, height: 24)
+        let downloadButtonSize = CGSize(width: 22, height: 22)
 
-        let statsInsets = UIEdgeInsets(top: 11, left: 0, bottom: 16, right: 0)
+        let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
         let statsViewHeight: CGFloat = 17.0
 
         let progressViewHeight: CGFloat = 3
@@ -85,7 +85,13 @@ final class CourseInfoTabSyllabusCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: CourseInfoTabSyllabusUnitViewModel) {
+    func configure(viewModel: CourseInfoTabSyllabusUnitViewModel?) {
+        guard let viewModel = viewModel else {
+            // Reset data (now it's only title)
+            self.titleLabel.text = nil
+            return
+        }
+
         self.titleLabel.text = viewModel.title
         self.progressIndicatorView.progress = viewModel.progress
         self.coverImageView.loadImage(url: viewModel.coverImageURL)
@@ -172,9 +178,13 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
             make.size.equalTo(self.appearance.coverImageViewSize)
             make.leading.equalToSuperview().offset(self.appearance.coverImageViewInsets.left)
             make.top.equalToSuperview().offset(self.appearance.coverImageViewInsets.top)
+            make.bottom
+                .lessThanOrEqualToSuperview()
+                .offset(-self.appearance.coverImageViewInsets.bottom)
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         self.titleLabel.snp.makeConstraints { make in
             make.leading
                 .equalTo(self.coverImageView.snp.trailing)
@@ -182,8 +192,7 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
             make.trailing
                 .equalTo(self.downloadButton.snp.leading)
                 .offset(-self.appearance.titleLabelInsets.left)
-            make.top.equalToSuperview().offset(self.appearance.titleLabelInsets.top)
-            make.bottom.greaterThanOrEqualTo(self.coverImageView.snp.bottom)
+            make.top.equalTo(self.coverImageView.snp.top)
         }
 
         self.statsView.translatesAutoresizingMaskIntoConstraints = false
@@ -193,7 +202,7 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
             make.leading.equalTo(self.titleLabel.snp.leading)
             make.trailing.lessThanOrEqualTo(self.titleLabel.snp.trailing)
             make.top
-                .equalTo(self.coverImageView.snp.bottom)
+                .equalTo(self.titleLabel.snp.bottom)
                 .offset(self.appearance.statsInsets.top)
             make.bottom
                 .equalToSuperview()

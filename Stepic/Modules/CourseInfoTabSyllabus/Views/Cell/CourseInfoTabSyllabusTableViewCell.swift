@@ -39,6 +39,15 @@ final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
         }
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        // Configure with nil to reset title and preserve correct dynamical cell height
+        self.cellView.configure(viewModel: nil)
+
+        self.cellView.hideLoading()
+    }
+
     func configure(viewModel: CourseInfoTabSyllabusUnitViewModel) {
         self.cellView.configure(viewModel: viewModel)
     }

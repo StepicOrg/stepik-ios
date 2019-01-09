@@ -119,6 +119,20 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CourseInfoTabSyllabusTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.updateConstraintsIfNeeded()
+
+        if let wrappedUnitViewModel = self.viewModels[safe: indexPath.section]?.units[safe: indexPath.row] {
+            if case .normal(let unitViewModel) = wrappedUnitViewModel {
+                cell.configure(viewModel: unitViewModel)
+                cell.onDownloadButtonClick = { [weak self] in
+                    self?.delegate?.downloadButtonDidClick(unitViewModel)
+                }
+                cell.hideLoading()
+            } else {
+                cell.showLoading()
+            }
+        }
+
+        cell.layoutIfNeeded()
         return cell
     }
 
@@ -160,22 +174,6 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
-        guard let cell = cell as? CourseInfoTabSyllabusTableViewCell else {
-            return
-        }
-
-        if let wrappedUnitViewModel = self.viewModels[safe: indexPath.section]?.units[safe: indexPath.row] {
-            if case .normal(let unitViewModel) = wrappedUnitViewModel {
-                cell.configure(viewModel: unitViewModel)
-                cell.onDownloadButtonClick = { [weak self] in
-                    self?.delegate?.downloadButtonDidClick(unitViewModel)
-                }
-                cell.hideLoading()
-            } else {
-                cell.showLoading()
-            }
-        }
-
         self.visibleCells[indexPath] = cell
     }
 

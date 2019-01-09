@@ -223,6 +223,13 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
+        self.presenter.presentDownloadButtonUpdate(
+            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                source: .unit(entity: unit),
+                downloadState: .waiting
+            )
+        )
+
         self.provider.fetchSteps(for: lesson).done { steps in
             self.syllabusDownloadsInteractionService.startDownloading(
                 cut: .init(

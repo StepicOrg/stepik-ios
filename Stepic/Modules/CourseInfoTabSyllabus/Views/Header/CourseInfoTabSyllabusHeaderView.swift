@@ -33,7 +33,6 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = self.appearance.buttonSpacing
-        stackView.distribution = .fillProportionally
         return stackView
     }()
 
@@ -54,18 +53,6 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         button.image = UIImage(named: "course-info-syllabus-download-all")?.withRenderingMode(.alwaysTemplate)
         button.tintColor = self.appearance.buttonTintColor
         button.title = "Загрузить всё"
-        button.font = self.appearance.buttonFont
-        button.imageInsets = self.appearance.buttonImageInsets
-        button.titleInsets = self.appearance.buttonTitleInsets
-        button.imageSize = self.appearance.buttonImageSize
-        return button
-    }()
-
-    private lazy var filterButton: UIControl = {
-        let button = ImageButton()
-        button.image = UIImage(named: "course-info-syllabus-filter")?.withRenderingMode(.alwaysTemplate)
-        button.tintColor = self.appearance.buttonTintColor
-        button.title = "Фильтр"
         button.font = self.appearance.buttonFont
         button.imageInsets = self.appearance.buttonImageInsets
         button.titleInsets = self.appearance.buttonTitleInsets
@@ -100,7 +87,6 @@ extension CourseInfoTabSyllabusHeaderView: ProgrammaticallyInitializableViewProt
 
         self.stackView.addArrangedSubview(self.calendarButton)
         self.stackView.addArrangedSubview(self.downloadAllButton)
-        self.stackView.addArrangedSubview(self.filterButton)
     }
 
     func makeConstraints() {
@@ -108,7 +94,7 @@ extension CourseInfoTabSyllabusHeaderView: ProgrammaticallyInitializableViewProt
         self.stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.insets.top)
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.insets.right).priority(999)
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false

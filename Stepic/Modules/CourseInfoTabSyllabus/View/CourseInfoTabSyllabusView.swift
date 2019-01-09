@@ -18,8 +18,19 @@ extension CourseInfoTabSyllabusView {
 final class CourseInfoTabSyllabusView: UIView {
     let appearance: Appearance
 
-    private lazy var headerView = CourseInfoTabSyllabusHeaderView()
+    private lazy var headerView: CourseInfoTabSyllabusHeaderView = {
+        let headerView = CourseInfoTabSyllabusHeaderView()
 
+        // Disable masks to prevent constraints breaking
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.headerViewHeight)
+        }
+
+        return headerView
+    }()
+
+    // Proxify scroll view delegate
     private weak var pageScrollViewDelegate: UIScrollViewDelegate?
     private weak var tableViewDelegate: (UITableViewDelegate & UITableViewDataSource)?
 
@@ -34,6 +45,8 @@ final class CourseInfoTabSyllabusView: UIView {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
+
+        tableView.tableHeaderView = self.headerView
 
         tableView.register(cellClass: CourseInfoTabSyllabusTableViewCell.self)
 
@@ -62,6 +75,11 @@ final class CourseInfoTabSyllabusView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.tableView.layoutTableHeaderView()
+    }
+
     func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
         self.tableViewDelegate = delegate
 
@@ -72,22 +90,13 @@ final class CourseInfoTabSyllabusView: UIView {
 
 extension CourseInfoTabSyllabusView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-//        self.addSubview(self.headerView)
         self.addSubview(self.tableView)
     }
 
     func makeConstraints() {
-//        self.headerView.translatesAutoresizingMaskIntoConstraints = false
-//        self.headerView.snp.makeConstraints { make in
-//            make.top.leading.trailing.equalToSuperview()
-//            make.height.equalTo(self.appearance.headerViewHeight)
-//        }
-
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalToSuperview()
-//            make.top.equalTo(self.headerView.snp.bottom)
+            make.edges.equalToSuperview()
         }
     }
 }

@@ -14,17 +14,19 @@ extension CourseInfoTabSyllabusSectionView {
         let backgroundColor = UIColor(hex: 0xf6f6f6)
 
         let indexTextColor = UIColor.mainDark
-        let indexFont = UIFont.systemFont(ofSize: 16)
-        let indexLabelInsets = UIEdgeInsets(top: 18, left: 18, bottom: 0, right: 15)
+        let indexFont = UIFont.systemFont(ofSize: 15)
+        let indexLabelInsets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 12)
+        // Width for two-digit indexes
+        let indexLabelWidth: CGFloat = 16
 
         let titleTextColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 14)
-        let titleLabelInsets = UIEdgeInsets(top: 19, left: 15, bottom: 0, right: 15)
+        let titleLabelInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
 
         let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
-        let downloadButtonSize = CGSize(width: 24, height: 24)
+        let downloadButtonSize = CGSize(width: 22, height: 22)
 
-        let deadlinesInsets = UIEdgeInsets(top: 14, left: 0, bottom: 16, right: 0)
+        let deadlinesInsets = UIEdgeInsets(top: 16, left: 0, bottom: 19, right: 0)
 
         let progressViewHeight: CGFloat = 3
         let progressViewMainColor = UIColor.stepicGreen
@@ -38,6 +40,7 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     private lazy var indexLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.indexFont
+        label.textAlignment = .center
         label.textColor = self.appearance.indexTextColor
         return label
     }()
@@ -69,7 +72,15 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     // To use rotated view w/ auto-layout
     private lazy var progressIndicatorViewContainerView = UIView()
 
-    private lazy var deadlinesView = CourseInfoTabSyllabusSectionDeadlinesView()
+    private lazy var deadlinesView: CourseInfoTabSyllabusSectionDeadlinesView = {
+        let appearance = CourseInfoTabSyllabusSectionDeadlinesView.Appearance(
+            verticalHorizontalOffset: self.appearance.indexLabelInsets.left
+                + self.appearance.indexLabelWidth
+                + self.appearance.titleLabelInsets.left
+        )
+        let view = CourseInfoTabSyllabusSectionDeadlinesView(appearance: appearance)
+        return view
+    }()
 
     var onDownloadButtonClick: (() -> Void)?
 
@@ -95,6 +106,15 @@ final class CourseInfoTabSyllabusSectionView: UIView {
 
         if let deadlines = viewModel.deadlines {
             self.deadlinesView.isHidden = false
+            self.deadlinesView.snp.makeConstraints { make in
+                make.top
+                    .greaterThanOrEqualTo(self.downloadButton.snp.bottom)
+                    .offset(self.appearance.deadlinesInsets.top)
+                make.top
+                    .greaterThanOrEqualTo(self.titleLabel.snp.bottom)
+                    .offset(self.appearance.deadlinesInsets.top)
+            }
+
             self.deadlinesView.configure(
                 items: deadlines.timelineItems.map { item in
                     .init(
@@ -106,6 +126,10 @@ final class CourseInfoTabSyllabusSectionView: UIView {
             )
         } else {
             self.deadlinesView.isHidden = true
+            self.deadlinesView.snp.makeConstraints { make in
+                make.top.equalTo(self.downloadButton.snp.bottom)
+                make.top.equalTo(self.titleLabel.snp.bottom)
+            }
         }
     }
 
@@ -160,19 +184,20 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
             make.width.equalTo(self.progressIndicatorView.snp.height)
         }
 
+        self.indexLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.indexLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        self.indexLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.titleLabel.snp.centerY)
+            make.leading.equalToSuperview().offset(self.appearance.indexLabelInsets.left)
+            make.width.equalTo(self.appearance.indexLabelWidth)
+        }
+
         self.downloadButton.translatesAutoresizingMaskIntoConstraints = false
         self.downloadButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.downloadButton.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.downloadButtonSize)
-            make.top.equalToSuperview().offset(self.appearance.downloadButtonInsets.top)
             make.trailing.equalToSuperview().offset(-self.appearance.downloadButtonInsets.right)
-        }
-
-        self.indexLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.indexLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-        self.indexLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.indexLabelInsets.top)
-            make.leading.equalToSuperview().offset(self.appearance.indexLabelInsets.left)
+            make.centerY.equalTo(self.titleLabel.snp.centerY)
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -189,12 +214,6 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.deadlinesView.translatesAutoresizingMaskIntoConstraints = false
         self.deadlinesView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top
-                .greaterThanOrEqualTo(self.downloadButton.snp.bottom)
-                .offset(self.appearance.deadlinesInsets.top)
-            make.top
-                .greaterThanOrEqualTo(self.titleLabel.snp.bottom)
-                .offset(self.appearance.deadlinesInsets.top)
             make.bottom
                 .equalToSuperview()
                 .offset(-self.appearance.deadlinesInsets.bottom)

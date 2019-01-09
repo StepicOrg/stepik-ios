@@ -11,8 +11,8 @@ import SnapKit
 
 extension CourseInfoTabSyllabusSectionDeadlinesView {
     struct Appearance {
-        let verticalHorizontalOffset: CGFloat = 40
-        let labelTopOffset: CGFloat = 6
+        var verticalHorizontalOffset: CGFloat = 40
+        let labelTopOffset: CGFloat = 8
         let labelsSpacing: CGFloat = 20
 
         let secondaryProgressColor = UIColor(hex: 0xb4b4bd)
