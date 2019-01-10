@@ -26,8 +26,8 @@ protocol NextLessonServiceUnitSourceProtocol: UniqueIdentifiable { }
 final class NextLessonService: NextLessonServiceProtocol {
     private let sections: [NextLessonServiceSectionSourceProtocol]
 
-    init(contents: [NextLessonServiceSectionSourceProtocol]) {
-        self.sections = contents
+    init(sections: [NextLessonServiceSectionSourceProtocol]) {
+        self.sections = sections
     }
 
     func findPreviousUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol? {

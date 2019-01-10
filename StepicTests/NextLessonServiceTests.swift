@@ -57,7 +57,7 @@ final class NextLessonServiceSpec: QuickSpec {
                     SectionMock(unitsCount: 5, isReachable: true),
                     SectionMock(unitsCount: 5, isReachable: true)
                 ]
-                let service: NextLessonServiceProtocol = NextLessonService(contents: sections)
+                let service: NextLessonServiceProtocol = NextLessonService(sections: sections)
 
                 it("returns correct next and previous units for unit in the middle of section") {
                     let sourceUnit = sections.first!.units[2]
@@ -83,7 +83,7 @@ final class NextLessonServiceSpec: QuickSpec {
                     SectionMock(unitsCount: 0, isReachable: true),
                     SectionMock(unitsCount: 5, isReachable: true)
                 ]
-                let service: NextLessonServiceProtocol = NextLessonService(contents: sections)
+                let service: NextLessonServiceProtocol = NextLessonService(sections: sections)
 
                 it("returns correct next unit for last unit of first section") {
                     let sourceUnit = sections.first!.units.last!
@@ -105,27 +105,7 @@ final class NextLessonServiceSpec: QuickSpec {
                     SectionMock(unitsCount: 5, isReachable: true),
                     SectionMock(unitsCount: 0, isReachable: true)
                 ]
-                let service: NextLessonServiceProtocol = NextLessonService(contents: sections)
-
-                it("returns nil next unit for last unit in non-empty section") {
-                    let sourceUnit = sections[1].units.last!
-                    expect(service.findNextUnit(for: sourceUnit)).to(beNil())
-                }
-
-                it("returns nil prev unit for first unit in non-empty section") {
-                    let sourceUnit = sections[1].units.first!
-                    expect(service.findPreviousUnit(for: sourceUnit)).to(beNil())
-                }
-            }
-
-            // APPS-1647
-            context("when created with non-empty section among empty sections") {
-                let sections: [NextLessonServiceSectionSourceProtocol] = [
-                    SectionMock(unitsCount: 0, isReachable: true),
-                    SectionMock(unitsCount: 5, isReachable: true),
-                    SectionMock(unitsCount: 0, isReachable: true)
-                ]
-                let service: NextLessonServiceProtocol = NextLessonService(contents: sections)
+                let service: NextLessonServiceProtocol = NextLessonService(sections: sections)
 
                 it("returns nil next unit for last unit in non-empty section") {
                     let sourceUnit = sections[1].units.last!
@@ -145,7 +125,7 @@ final class NextLessonServiceSpec: QuickSpec {
                     SectionMock(unitsCount: 5, isReachable: true),
                     SectionMock(unitsCount: 0, isReachable: false)
                 ]
-                let service: NextLessonServiceProtocol = NextLessonService(contents: sections)
+                let service: NextLessonServiceProtocol = NextLessonService(sections: sections)
 
                 it("returns nil next unit for last unit in reachable section") {
                     let sourceUnit = sections[1].units.last!
