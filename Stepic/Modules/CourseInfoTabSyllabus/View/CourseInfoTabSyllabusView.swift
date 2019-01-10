@@ -149,6 +149,10 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
         )
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableViewDelegate?.tableView?(tableView, didSelectRowAt: indexPath)
+    }
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
     }

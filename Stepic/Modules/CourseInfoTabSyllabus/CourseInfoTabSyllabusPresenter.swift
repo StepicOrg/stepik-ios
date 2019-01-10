@@ -38,7 +38,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                                 unitIndex: unitIndex,
                                 uid: matchedUnitRecord.uniqueIdentifier,
                                 unit: unit,
-                                downloadState: matchedUnitRecord.downloadState
+                                downloadState: matchedUnitRecord.downloadState,
+                                isAvailable: result.isEnrolled
                             )
                         )
                     } else {
@@ -60,7 +61,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     uid: sectionData.element.uniqueIdentifier,
                     section: sectionData.element.entity,
                     units: currentSectionUnitViewModels,
-                    downloadState: hasPlaceholderUnits
+                    downloadState: hasPlaceholderUnits || !result.isEnrolled
                         ? .notAvailable
                         : sectionData.element.downloadState
                 )
@@ -113,7 +114,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             progress: (section.progress?.percentPassed ?? 0) / 100.0,
             units: units,
             deadlines: deadlines,
-            downloadState: downloadState
+            downloadState: downloadState,
+            isDisabled: !section.isReachable
         )
 
         self.cachedSectionViewModels[section.id] = viewModel
@@ -126,7 +128,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         unitIndex: Int,
         uid: UniqueIdentifierType,
         unit: Unit,
-        downloadState: CourseInfoTabSyllabus.DownloadState
+        downloadState: CourseInfoTabSyllabus.DownloadState,
+        isAvailable: Bool
     ) -> CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper {
         guard let lesson = unit.lesson else {
             return .placeholder
@@ -157,7 +160,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             likesCount: likesCount == 0 ? nil : likesCount,
             learnersLabelText: FormatterHelper.longNumber(lesson.passedBy),
             progressLabelText: progressLabelText,
-            downloadState: downloadState
+            downloadState: isAvailable ? downloadState : .notAvailable,
+            isSelectable: isAvailable
         )
 
         self.cachedUnitViewModels[unit.id] = viewModel

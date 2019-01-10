@@ -369,7 +369,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                         downloadState: state
                     )
                 }
-                .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) })
+                .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
+            isEnrolled: self.currentCourse?.enrolled ?? false
         )
     }
 

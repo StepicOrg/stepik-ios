@@ -15,6 +15,7 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: class {
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: class {
     func sectionWillDisplay(_ section: CourseInfoTabSyllabusSectionViewModel)
+    func cellDidSelect(_ cell: CourseInfoTabSyllabusUnitViewModel)
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusUnitViewModel)
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusSectionViewModel)
 }
@@ -91,5 +92,9 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         self.interactor.doDownloadButtonAction(
             request: .init(type: .section(uniqueIdentifier: cell.uniqueIdentifier))
         )
+    }
+
+    func cellDidSelect(_ cell: CourseInfoTabSyllabusUnitViewModel) {
+
     }
 }

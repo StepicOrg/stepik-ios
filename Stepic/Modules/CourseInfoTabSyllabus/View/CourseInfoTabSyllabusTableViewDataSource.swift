@@ -126,8 +126,13 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
                 cell.onDownloadButtonClick = { [weak self] in
                     self?.delegate?.downloadButtonDidClick(unitViewModel)
                 }
+
+                cell.selectionStyle = .gray
+                cell.isUserInteractionEnabled = unitViewModel.isSelectable
                 cell.hideLoading()
             } else {
+                cell.selectionStyle = .none
+                cell.isUserInteractionEnabled = false
                 cell.showLoading()
             }
         }
@@ -191,5 +196,14 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
         forSection section: Int
     ) {
         self.visibleSectionHeaders.removeValue(forKey: section)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        if let wrappedUnitViewModel = self.viewModels[safe: indexPath.section]?.units[safe: indexPath.row],
+           case .normal(let unitViewModel) = wrappedUnitViewModel {
+            self.delegate?.cellDidSelect(unitViewModel)
+        }
     }
 }

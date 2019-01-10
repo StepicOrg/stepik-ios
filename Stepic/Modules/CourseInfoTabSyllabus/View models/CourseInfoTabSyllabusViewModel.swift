@@ -19,6 +19,7 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     var deadlines: CourseInfoTabSyllabusSectionDeadlinesViewModel?
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
+    let isDisabled: Bool
 
     enum UnitViewModelWrapper {
         case placeholder
@@ -38,6 +39,7 @@ struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
     let progressLabelText: String?
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
+    let isSelectable: Bool
 }
 
 struct CourseInfoTabSyllabusSectionDeadlinesViewModel {
