@@ -31,6 +31,7 @@ extension CourseInfoHeaderViewModel {
 
         self.learnersLabelText = FormatterHelper.longNumber(course.learnersCount ?? 0)
         self.isVerified = (course.readiness ?? 0) > 0.9
+        self.isEnrolled = course.enrolled
     }
 }
 

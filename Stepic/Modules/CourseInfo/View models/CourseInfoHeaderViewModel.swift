@@ -9,16 +9,17 @@
 import Foundation
 
 struct CourseInfoProgressViewModel {
-    var progress: Float
-    var progressLabelText: String
+    let progress: Float
+    let progressLabelText: String
 }
 
 struct CourseInfoHeaderViewModel {
-    var title: String
-    var coverImageURL: URL?
+    let title: String
+    let coverImageURL: URL?
 
-    var rating: Int
-    var learnersLabelText: String
-    var progress: CourseInfoProgressViewModel?
-    var isVerified: Bool
+    let rating: Int
+    let learnersLabelText: String
+    let progress: CourseInfoProgressViewModel?
+    let isVerified: Bool
+    let isEnrolled: Bool
 }

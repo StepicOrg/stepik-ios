@@ -46,11 +46,7 @@ final class CourseInfoHeaderView: UIView {
         return view
     }()
 
-    private lazy var actionButton: ContinueActionButton = {
-        let button = ContinueActionButton(mode: .callToAction)
-        button.setTitle(NSLocalizedString("WidgetButtonJoin", comment: ""), for: .normal)
-        return button
-    }()
+    private lazy var actionButton = ContinueActionButton(mode: .callToAction)
 
     private lazy var coverImageView: CourseCoverImageView = {
         let view = CourseCoverImageView()
@@ -137,6 +133,14 @@ final class CourseInfoHeaderView: UIView {
         self.statsView.progress = viewModel.progress
 
         self.verifiedSignView.isHidden = !viewModel.isVerified
+
+        if viewModel.isEnrolled {
+            self.actionButton.mode = .default
+            self.actionButton.setTitle(NSLocalizedString("WidgetButtonLearn", comment: ""), for: .normal)
+        } else {
+            self.actionButton.mode = .callToAction
+            self.actionButton.setTitle(NSLocalizedString("WidgetButtonJoin", comment: ""), for: .normal)
+        }
     }
 
     // MARK: Loading state
