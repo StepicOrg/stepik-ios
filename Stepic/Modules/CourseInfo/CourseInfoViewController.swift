@@ -71,7 +71,7 @@ final class CourseInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.addChildViewController(self.pageViewController)
-        self.pageViewController.reloadData()
+        self.pageViewController.reloadPages()
 
         self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
