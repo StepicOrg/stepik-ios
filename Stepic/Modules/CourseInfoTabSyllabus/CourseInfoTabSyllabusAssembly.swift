@@ -12,6 +12,13 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
     // Input
     var moduleInput: CourseInfoTabSyllabusInputProtocol?
 
+    // Output
+    private weak var moduleOutput: CourseInfoTabSyllabusOutputProtocol?
+
+    init(output: CourseInfoTabSyllabusOutputProtocol? = nil) {
+        self.moduleOutput = output
+    }
+
     func makeModule() -> UIViewController {
         let provider = CourseInfoTabSyllabusProvider(
             sectionsPersistenceService: SectionsPersistenceService(),
@@ -38,6 +45,7 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
         )
 
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
         self.moduleInput = interactor
 
         return viewController

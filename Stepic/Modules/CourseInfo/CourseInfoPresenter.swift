@@ -10,6 +10,7 @@ import UIKit
 
 protocol CourseInfoPresenterProtocol {
     func presentCourse(response: CourseInfo.ShowCourse.Response)
+    func presentLesson(response: CourseInfo.ShowLesson.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -30,4 +31,23 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayCourse(viewModel: viewModel)
     }
 
+    func presentLesson(response: CourseInfo.ShowLesson.Response) {
+        let initObjects: LessonInitObjects = (
+            lesson: response.lesson,
+            startStepId: 0,
+            context: .unit
+        )
+
+        let initIDs: LessonInitIds = (
+            stepId: nil,
+            unitId: response.unitID
+        )
+
+        let viewModel = CourseInfo.ShowLesson.ViewModel(
+            initObjects: initObjects,
+            initIDs: initIDs
+        )
+
+        self.viewController?.displayLesson(viewModel: viewModel)
+    }
 }

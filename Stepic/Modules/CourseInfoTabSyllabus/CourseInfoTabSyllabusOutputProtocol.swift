@@ -8,4 +8,6 @@
 
 import Foundation
 
-protocol CourseInfoTabSyllabusInputProtocol: CourseInfoSubmoduleProtocol { }
+protocol CourseInfoTabSyllabusOutputProtocol: class {
+    func presentLesson(in unit: Unit)
+}

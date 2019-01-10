@@ -132,3 +132,18 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         case fetchFailed
     }
 }
+
+extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
+    func presentLesson(in unit: Unit) {
+        guard let lesson = unit.lesson else {
+            return
+        }
+
+        self.presenter.presentLesson(
+            response: .init(
+                lesson: lesson,
+                unitID: unit.id
+            )
+        )
+    }
+}

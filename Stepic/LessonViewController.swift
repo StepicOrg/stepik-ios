@@ -9,6 +9,29 @@
 import Foundation
 import SnapKit
 
+@available(*, deprecated, message: "Class to initialize lesson w/o storyboards logic")
+final class LessonLegacyAssembly: Assembly {
+    private let initObjects: LessonInitObjects?
+    private let initIDs: LessonInitIds?
+
+    init(initObjects: LessonInitObjects?, initIDs: LessonInitIds?) {
+        self.initObjects = initObjects
+        self.initIDs = initIDs
+    }
+
+    func makeModule() -> UIViewController {
+        guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
+            fatalError()
+        }
+
+        lessonVC.hidesBottomBarWhenPushed = true
+        lessonVC.initObjects = self.initObjects
+        lessonVC.initIds = initIDs
+
+        return lessonVC
+    }
+}
+
 class LessonViewController: PagerController, ShareableController, LessonView {
 
     var parentShareBlock: ((UIActivityViewController) -> Void)?

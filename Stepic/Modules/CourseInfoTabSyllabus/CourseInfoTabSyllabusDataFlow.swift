@@ -87,6 +87,13 @@ enum CourseInfoTabSyllabus {
         }
     }
 
+    /// Click on unit
+    enum UnitSelect {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

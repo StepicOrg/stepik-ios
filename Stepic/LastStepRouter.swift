@@ -63,7 +63,7 @@ class LastStepRouter {
 
         let sectionsVC = CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule()
         guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
-                return
+            return
         }
 
         func openSyllabus() {

@@ -13,9 +13,12 @@ protocol CourseInfoTabSyllabusInteractorProtocol {
     func getCourseSyllabus()
     func fetchSyllabusSection(request: CourseInfoTabSyllabus.ShowSyllabusSection.Request)
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request)
+    func selectUnit(request: CourseInfoTabSyllabus.UnitSelect.Request)
 }
 
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
+    weak var moduleOutput: CourseInfoTabSyllabusOutputProtocol?
+
     let presenter: CourseInfoTabSyllabusPresenterProtocol
     let provider: CourseInfoTabSyllabusProviderProtocol
     let videoFileManager: VideoStoredFileManagerProtocol
@@ -179,6 +182,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         case .unit(let uniqueIdentifier):
             return handleUnit(id: uniqueIdentifier)
         }
+    }
+
+    func selectUnit(request: CourseInfoTabSyllabus.UnitSelect.Request) {
+        guard let unit = self.currentUnits[request.uniqueIdentifier] as? Unit else {
+            return
+        }
+
+        self.moduleOutput?.presentLesson(in: unit)
     }
 
     // MARK: Private methods

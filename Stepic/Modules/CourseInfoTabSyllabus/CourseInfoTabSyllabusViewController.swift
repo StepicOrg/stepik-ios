@@ -95,6 +95,8 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
     }
 
     func cellDidSelect(_ cell: CourseInfoTabSyllabusUnitViewModel) {
-
+        self.interactor.selectUnit(
+            request: .init(uniqueIdentifier: cell.uniqueIdentifier)
+        )
     }
 }

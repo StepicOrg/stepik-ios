@@ -43,6 +43,20 @@ enum CourseInfo {
         }
     }
 
+    /// Show lesson
+    enum ShowLesson {
+        struct Response {
+            let lesson: Lesson
+            let unitID: Unit.IdType
+        }
+
+        @available(*, deprecated, message: "Old ugly Lesson controller initialization")
+        struct ViewModel {
+            let initObjects: LessonInitObjects
+            let initIDs: LessonInitIds
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

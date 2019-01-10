@@ -20,6 +20,7 @@ protocol CourseInfoScrollablePageViewProtocol: class {
 
 protocol CourseInfoViewControllerProtocol: class {
     func displayCourse(viewModel: CourseInfo.ShowCourse.ViewModel)
+    func displayLesson(viewModel: CourseInfo.ShowLesson.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -147,7 +148,9 @@ final class CourseInfoViewController: UIViewController {
         let infoAssembly = CourseInfoTabInfoAssembly(output: nil)
 
         // Syllabus submodule
-        let syllabusAssembly = CourseInfoTabSyllabusAssembly()
+        let syllabusAssembly = CourseInfoTabSyllabusAssembly(
+            output: self.interactor as? CourseInfoTabSyllabusOutputProtocol
+        )
 
         // Prepare for page controller
         let viewControllers: [UIViewController] = [
@@ -234,6 +237,16 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             break
         }
     }
+
+    func displayLesson(viewModel: CourseInfo.ShowLesson.ViewModel) {
+        let assembly = LessonLegacyAssembly(
+            initObjects: viewModel.initObjects,
+            initIDs: viewModel.initIDs
+        )
+
+        self.push(module: assembly.makeModule())
+    }
+
 }
 
 extension CourseInfoViewController: UIScrollViewDelegate {
