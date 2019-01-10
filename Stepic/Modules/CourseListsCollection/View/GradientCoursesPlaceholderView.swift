@@ -77,7 +77,7 @@ final class GradientCoursesPlaceholderView: UIView {
         }
     }
 
-    init(frame: CGRect, color: Color, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, color: Color, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         self.color = color
         super.init(frame: frame)

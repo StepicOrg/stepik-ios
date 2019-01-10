@@ -34,7 +34,7 @@ final class ExploreViewController: BaseExploreViewController {
 
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
-    private lazy var searchBar = ExploreSearchBar(frame: .zero)
+    private lazy var searchBar = ExploreSearchBar()
 
     private var isStoriesHidden: Bool = false
 
@@ -117,7 +117,6 @@ final class ExploreViewController: BaseExploreViewController {
             )
             let storiesViewController = storiesAssembly.makeModule()
             let storiesContainerView = ExploreStoriesContainerView(
-                frame: .zero,
                 contentView: storiesViewController.view
             )
             self.registerSubmodule(

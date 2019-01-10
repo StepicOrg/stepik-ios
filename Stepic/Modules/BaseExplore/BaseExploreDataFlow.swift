@@ -36,8 +36,7 @@ enum BaseExplore {
         }
 
         struct ViewModel {
-            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
-            let course: Course
+            let courseID: Course.IdType
         }
     }
 
@@ -48,8 +47,7 @@ enum BaseExplore {
         }
 
         struct ViewModel {
-            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
-            let course: Course
+            let courseID: Course.IdType
         }
     }
 

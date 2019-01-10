@@ -53,7 +53,6 @@ final class CourseListContainerViewFactory {
         headerDescription: HorizontalHeaderDescription
     ) -> ExploreBlockContainerView {
         let headerView = ExploreBlockHeaderView(
-            frame: .zero,
             appearance: self.colorMode.exploreBlockHeaderViewAppearance
         )
         headerView.shouldShowShowAllButton = headerDescription.shouldShowShowAllButton
@@ -68,7 +67,6 @@ final class CourseListContainerViewFactory {
         headerDescription: HorizontalCoursesCollectionHeaderDescription
     ) -> ExploreBlockContainerView {
         let headerView = ExploreCoursesCollectionHeaderView(
-            frame: .zero,
             description: headerDescription.description,
             color: headerDescription.color
         )
@@ -87,7 +85,6 @@ final class CourseListContainerViewFactory {
         appearance.contentViewInsets.bottom = Appearance.horizontalContentInsets.bottom
 
         return ExploreBlockContainerView(
-            frame: .zero,
             headerView: headerView,
             contentView: contentView,
             shouldShowSeparator: false,

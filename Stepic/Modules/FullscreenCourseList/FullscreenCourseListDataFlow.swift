@@ -19,8 +19,7 @@ enum FullscreenCourseList {
         }
 
         struct ViewModel {
-            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
-            let course: Course
+            let courseID: Course.IdType
         }
     }
     /// Present course info
@@ -30,8 +29,7 @@ enum FullscreenCourseList {
         }
 
         struct ViewModel {
-            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
-            let course: Course
+            let courseID: Course.IdType
         }
     }
     /// Present last step in course

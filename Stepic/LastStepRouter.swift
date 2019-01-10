@@ -61,15 +61,10 @@ class LastStepRouter {
             return
         }
 
-        guard
-            let sectionsVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController,
-            let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController,
-            let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
+        let sectionsVC = CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule()
+        guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
                 return
         }
-
-        sectionsVC.course = course
-        sectionsVC.hidesBottomBarWhenPushed = true
 
         func openSyllabus() {
             SVProgressHUD.showSuccess(withStatus: "")
@@ -98,8 +93,6 @@ class LastStepRouter {
 
         func navigateToStep(in unit: Unit) {
             // If last step does not exist then take first step in unit
-            unitsVC.unitId = course.lastStep?.unitId ?? unit.id
-
             let stepIdPromise = Promise<Int> { seal in
                 if let stepId = course.lastStep?.stepId {
                     seal.fulfill(stepId)
@@ -123,11 +116,11 @@ class LastStepRouter {
 
             stepIdPromise.done { targetStepId in
                 lessonVC.initIds = (stepId: targetStepId, unitId: unit.id)
-                lessonVC.sectionNavigationDelegate = unitsVC
+                // FIXME: delegate
+                // lessonVC.sectionNavigationDelegate = unitsVC
 
                 SVProgressHUD.showSuccess(withStatus: "")
                 navigationController.pushViewController(sectionsVC, animated: false)
-                navigationController.pushViewController(unitsVC, animated: false)
                 navigationController.pushViewController(lessonVC, animated: true)
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
@@ -161,7 +154,7 @@ class LastStepRouter {
             }, error: { err in
                 print("last step router: error while loading section, error = \(err)")
 
-                // Fallback: use cached section 
+                // Fallback: use cached section
                 guard let section = sectionForUpdate else {
                     openSyllabus()
                     return

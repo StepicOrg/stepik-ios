@@ -17,7 +17,6 @@ final class CourseListsCollectionView: UIView {
 
     private lazy var headerView: ExploreBlockHeaderView = {
         let view = ExploreBlockHeaderView(
-            frame: .zero,
             appearance: CourseListColorMode.light.exploreBlockHeaderViewAppearance
         )
 
@@ -80,7 +79,7 @@ final class CourseListsCollectionView: UIView {
         self.contentStackView.addArrangedSubview(fakeView)
 
         fakeView.skeleton.viewBuilder = {
-            CourseListsCollectionSkeletonView(frame: .zero)
+            CourseListsCollectionSkeletonView()
         }
         fakeView.skeleton.show()
     }

@@ -10,25 +10,50 @@ import UIKit
 import SnapKit
 
 class StyledNavigationViewController: UINavigationController {
+    static let backgroundColor = UIColor.mainLight
+    static let lightTintColor = UIColor.white
+    static let darkTintColor = UIColor.mainDark
+
+    private lazy var statusBarView: UIView = {
+        let view = UIView(frame: UIApplication.shared.statusBarFrame)
+        view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        return view
+    }()
+
+    private lazy var titleFont: UIFont = {
+        let fontSize: CGFloat = 17.0
+        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
+        return titleFont
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.view.addSubview(statusBarView)
 
         setupShadowView()
         // Do any additional setup after loading the view.
     }
 
+    func hideBackButtonTitle() {
+        // Search for controller before last in stack
+        if let parentViewController = self.viewControllers.dropLast().last {
+            parentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: "",
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setStatusBarStyle()
-        navigationBar.barTintColor = UIColor.mainLight
-        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = false
-        let fontSize: CGFloat = 17.0
-        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.mainDark, NSAttributedStringKey.font: titleFont]
-        navigationBar.tintColor = UIColor.mainDark
+        changeNavigationBarAlpha(1.0)
+        changeTitleAlpha(1.0)
+
+        navigationBar.tintColor = StyledNavigationViewController.darkTintColor
     }
 
     func setStatusBarStyle() {
@@ -70,9 +95,36 @@ class StyledNavigationViewController: UINavigationController {
             }, completion: nil)
     }
 
+    func changeNavigationBarAlpha(_ alpha: CGFloat) {
+        let color = StyledNavigationViewController.backgroundColor
+            .withAlphaComponent(alpha)
+
+        navigationBar.isTranslucent = true
+        navigationBar.backgroundColor = color
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+
+        statusBarView.backgroundColor = color
+    }
+
+    func changeTintColor(progress: CGFloat) {
+        navigationBar.tintColor = self.makeTransitionColor(
+            from: StyledNavigationViewController.lightTintColor,
+            to: StyledNavigationViewController.darkTintColor,
+            progress: progress
+        )
+    }
+
     func changeShadowAlpha(_ alpha: CGFloat) {
         navigationBar.layoutSubviews()
         customShadowView?.alpha = alpha
+    }
+
+    func changeTitleAlpha(_ alpha: CGFloat) {
+        self.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font: self.titleFont,
+            NSAttributedStringKey.foregroundColor: UIColor.mainDark.withAlphaComponent(alpha)
+        ]
     }
 
     func animateShadowChange(for presentedController: UIViewController) {
@@ -143,12 +195,51 @@ class StyledNavigationViewController: UINavigationController {
 
     override func popViewController(animated: Bool) -> UIViewController? {
         lastAction = .pop
-        return super.popViewController(animated: animated)
+        let poppedViewController = super.popViewController(animated: animated)
+        self.resetAlphaAppearance(viewController: poppedViewController, animated: animated)
+        return poppedViewController
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         lastAction = .push
+        self.resetAlphaAppearance(viewController: viewController, animated: animated)
         super.pushViewController(viewController, animated: animated)
+    }
+
+    private func resetAlphaAppearance(viewController: UIViewController?, animated: Bool) {
+        self.changeTitleAlpha(1.0)
+        self.changeNavigationBarAlpha(1.0)
+        self.changeTintColor(progress: 1.0)
+
+        if let viewController = viewController, animated {
+            self.animateShadowChange(for: viewController)
+        } else {
+            self.changeShadowAlpha(1.0)
+        }
+    }
+
+    private func makeTransitionColor(from sourceColor: UIColor, to targetColor: UIColor, progress: CGFloat) -> UIColor {
+        let percentage = max(min(progress, 1), 0)
+
+        var fRed: CGFloat = 0
+        var fBlue: CGFloat = 0
+        var fGreen: CGFloat = 0
+        var fAlpha: CGFloat = 0
+
+        var tRed: CGFloat = 0
+        var tBlue: CGFloat = 0
+        var tGreen: CGFloat = 0
+        var tAlpha: CGFloat = 0
+
+        sourceColor.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
+        targetColor.getRed(&tRed, green: &tGreen, blue: &tBlue, alpha: &tAlpha)
+
+        let red: CGFloat = (percentage * (tRed - fRed)) + fRed
+        let green: CGFloat = (percentage * (tGreen - fGreen)) + fGreen
+        let blue: CGFloat = (percentage * (tBlue - fBlue)) + fBlue
+        let alpha: CGFloat = (percentage * (tAlpha - fAlpha)) + fAlpha
+
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
 

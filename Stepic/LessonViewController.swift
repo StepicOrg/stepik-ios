@@ -100,6 +100,8 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         dataSource = self
         initTabs()
 
+        edgesForExtendedLayout = []
+
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
 //        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.backBarButtonItem?.title = " "

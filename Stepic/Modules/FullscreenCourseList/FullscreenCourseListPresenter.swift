@@ -21,11 +21,11 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
     weak var viewController: FullscreenCourseListViewControllerProtocol?
 
     func presentCourseInfo(response: FullscreenCourseList.PresentCourseInfo.Response) {
-        self.viewController?.displayCourseInfo(viewModel: .init(course: response.course))
+        self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.course.id))
     }
 
     func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response) {
-        self.viewController?.displayCourseSyllabus(viewModel: .init(course: response.course))
+        self.viewController?.displayCourseSyllabus(viewModel: .init(courseID: response.course.id))
     }
 
     func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response) {

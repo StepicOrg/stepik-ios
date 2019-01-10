@@ -22,7 +22,7 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
     private let color: GradientCoursesPlaceholderView.Color
 
     private lazy var headerView: ExploreBlockHeaderView = {
-        let view = ExploreBlockHeaderView(frame: .zero)
+        let view = ExploreBlockHeaderView()
         view.onShowAllButtonClick = self.onShowAllButtonClick
         return view
     }()
@@ -58,7 +58,7 @@ final class ExploreCoursesCollectionHeaderView: UIView, ExploreBlockHeaderViewPr
     }
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         description: String,
         color: GradientCoursesPlaceholderView.Color,
         appearance: Appearance = Appearance()

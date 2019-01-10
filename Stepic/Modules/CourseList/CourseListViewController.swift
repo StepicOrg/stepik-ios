@@ -224,7 +224,7 @@ final class VerticalCourseListViewController: CourseListViewController {
             view.headerView = headerView
         }
 
-        let paginationView = PaginationView(frame: .zero)
+        let paginationView = PaginationView()
         paginationView.onRefreshButtonClick = { [weak self] in
             self?.interactor.fetchNextCourses(request: .init())
         }

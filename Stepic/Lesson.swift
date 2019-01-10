@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Lesson: NSManagedObject, JSONSerializable {
+final class Lesson: NSManagedObject, IDFetchable {
 
     // Insert code here to add functionality to your managed object subclass
     typealias IdType = Int
@@ -29,6 +29,8 @@ class Lesson: NSManagedObject, JSONSerializable {
         coverURL = json["cover_url"].string
         timeToComplete = json["time_to_complete"].doubleValue
         stepsArray = json["steps"].arrayObject as! [Int]
+        passedBy = json["passed_by"].intValue
+        voteDelta = json["vote_delta"].intValue
     }
 
     static func getLesson(_ id: Int) -> Lesson? {
@@ -148,5 +150,22 @@ class Lesson: NSManagedObject, JSONSerializable {
             }
         }
         return true
+    }
+
+    static func fetch(_ ids: [Int]) -> [Lesson] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        do {
+            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Lesson] else {
+                return []
+            }
+            return results
+        } catch {
+            return []
+        }
     }
 }

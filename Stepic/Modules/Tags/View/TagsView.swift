@@ -40,7 +40,6 @@ final class TagsView: UIView {
         appearance.contentViewInsets = self.appearance.tagsViewInsets
 
         return ExploreBlockContainerView(
-            frame: .zero,
             headerView: self.headerView,
             contentView: self.tagsStackView,
             appearance: appearance
@@ -51,7 +50,7 @@ final class TagsView: UIView {
         var appearance = ExploreBlockHeaderView.Appearance()
         appearance.titleLabelColor = self.appearance.headerTitleColor
 
-        let headerView = ExploreBlockHeaderView(frame: .zero, appearance: appearance)
+        let headerView = ExploreBlockHeaderView(appearance: appearance)
         headerView.titleText = NSLocalizedString("TrendingTopics", comment: "")
         headerView.summaryText = nil
         headerView.shouldShowShowAllButton = false
@@ -59,13 +58,13 @@ final class TagsView: UIView {
     }()
 
     private lazy var tagsStackView: ScrollableStackView = {
-        let stackView = ScrollableStackView(frame: .zero, orientation: .horizontal)
+        let stackView = ScrollableStackView(orientation: .horizontal)
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.tagsSpacing
         return stackView
     }()
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

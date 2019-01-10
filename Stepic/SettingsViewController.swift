@@ -12,6 +12,8 @@ class SettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?
 
     override func viewDidLoad() {
+        edgesForExtendedLayout = []
+
         super.viewDidLoad()
         presenter = SettingsPresenter(view: self)
         tableView.tableHeaderView = artView

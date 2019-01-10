@@ -229,111 +229,11 @@ class DeepLinkRouter {
     }
 
     static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {
-        if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-            do {
-                let courses = Course.getCourses([courseId])
-                if courses.count == 0 {
-                    performRequest({
-                        _ = ApiDataDownloader.courses.retrieve(ids: [courseId], existing: Course.getAllCourses(), refreshMode: .update, success: {
-                            loadedCourses in
-                            if loadedCourses.count == 1 {
-                                UIThread.performUI {
-                                    vc.course = loadedCourses[0]
-                                    completion([vc])
-                                }
-                            } else {
-                                print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                                completion([])
-                                return
-                            }
-                            }, error: {
-                                _ in
-                                print("error while downloading course with id \(courseId)")
-                                completion([])
-                                return
-                        })
-                    })
-                    return
-                }
-                if courses.count >= 1 {
-                    vc.course = courses[0]
-                    completion([vc])
-                    return
-                }
-                completion([])
-                return
-            } catch {
-                print("something bad happened")
-                completion([])
-                return
-            }
-        }
-
-        completion([])
+        completion([CourseInfoAssembly(courseID: courseId).makeModule()])
     }
 
     static func routeToSyllabusWithId(_ courseId: Int, moduleId: Int? = nil, completion: @escaping ([UIViewController]) -> Void) {
-        do {
-            let courses = Course.getCourses([courseId])
-            if courses.count == 0 {
-                performRequest({
-                    _ = ApiDataDownloader.courses.retrieve(ids: [courseId], existing: Course.getAllCourses(), refreshMode: .update, success: {
-                        loadedCourses in
-                        if loadedCourses.count == 1 {
-                            UIThread.performUI {
-                                let course = loadedCourses[0]
-                                if course.enrolled {
-                                    if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
-                                        vc.course = course
-                                        vc.moduleId = moduleId
-                                        completion([vc])
-                                    }
-                                } else {
-                                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                                        vc.course = course
-                                        vc.displayingInfoType = DisplayingInfoType.syllabus
-                                        completion([vc])
-                                    }
-                                }
-                            }
-                        } else {
-                            print("error while downloading course with id \(courseId) - no courses or more than 1 returned")
-                            completion([])
-                            return
-                        }
-                        }, error: {
-                            _ in
-                            print("error while downloading course with id \(courseId)")
-                            completion([])
-                            return
-                    })
-                })
-                return
-            }
-            if courses.count >= 1 {
-                let course = courses[0]
-                if course.enrolled {
-                    if let vc = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as?  SectionsViewController {
-                        vc.course = course
-                        vc.moduleId = moduleId
-                        completion([vc])
-                    }
-                } else {
-                    if let vc = ControllerHelper.instantiateViewController(identifier: "CoursePreviewViewController") as?  CoursePreviewViewController {
-                        vc.course = course
-                        vc.displayingInfoType = DisplayingInfoType.syllabus
-                        completion([vc])
-                    }
-                }
-                return
-            }
-            completion([])
-            return
-        } catch {
-            print("something bad happened")
-            completion([])
-            return
-        }
+        completion([CourseInfoAssembly(courseID: courseId, initialTab: .syllabus).makeModule()])
     }
 
     static func routeToStepWithId(_ stepId: Int, lessonId: Int, completion: @escaping ([UIViewController]) -> Void) {

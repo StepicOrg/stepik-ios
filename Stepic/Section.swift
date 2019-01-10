@@ -11,7 +11,7 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class Section: NSManagedObject, JSONSerializable {
+final class Section: NSManagedObject, IDFetchable {
 
     // Insert code here to add functionality to your managed object subclass
     typealias IdType = Int
@@ -41,6 +41,23 @@ class Section: NSManagedObject, JSONSerializable {
 
     func update(json: JSON) {
         initialize(json)
+    }
+
+    static func fetch(_ ids: [Int]) -> [Section] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        do {
+            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Section] else {
+                return []
+            }
+            return results
+        } catch {
+            return []
+        }
     }
 
     class func getSections(_ id: Int) throws -> [Section] {

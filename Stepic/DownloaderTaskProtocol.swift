@@ -23,8 +23,10 @@ enum DownloaderTaskState {
 }
 
 protocol DownloaderTaskProtocol: class {
+    typealias IDType = Int
+
     /// Task unique id
-    var id: Int { get }
+    var id: IDType { get }
     /// Download URL
     var url: URL { get }
     /// Download priority

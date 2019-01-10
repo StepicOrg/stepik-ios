@@ -152,6 +152,12 @@ Activity = "Активность";
 days1 = "день";
 days234 = "дня";
 days567890 = "дней";
+hours1 = "час";
+hours234 = "часа";
+hours567890 = "часов";
+points1 = "балл";
+points234 = "балла";
+points567890 = "баллов";
 VideoRate = "Скорость воспроизведения";
 VideoQuality = "Качество видео";
 Downloaded = "Загруженное";
@@ -207,6 +213,8 @@ PleaseLeaveFeedbackAppstore = "Пожалуйста, оставьте отзыв
 PleaseLeaveFeedbackEmail = "Пожалуйста, отправьте отзыв по электронной почте";
 ThankYou = "Спасибо!";
 Share = "Поделиться";
+WithDistinction = "С отличием";
+CertificateCondition = "Условие получения сертификата";
 CertificateWithDistinction = "Сертификат с отличием";
 Certificate = "Сертификат";
 CertificateDescriptionBody = "за прохождение курса";
@@ -431,6 +439,20 @@ NotificationTabNotificationRequestAlertMessage = "Мы пытаемся сдел
 CourseSubscriptionNotificationRequestAlertTitle = "Следи за обновлениями";
 CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сделать процесс обучения максимально удобным и полезным. Разрешить уведомления, чтобы следить за дедлайнами и оперативно получать обновления по курсу?";
 
+/* Course info */
+CourseInfoTitle = "О курсе";
+CourseInfoTabInfo = "Инфо";
+CourseInfoTabSyllabus = "Модули";
+CourseInfoTitleAuthor = "от";
+CourseInfoTitleAbout = "О курсе";
+CourseInfoTitleRequirements = "Требования";
+CourseInfoTitleTargetAudience = "Целевая аудитория";
+CourseInfoTitleInstructors = "Преподаватели";
+CourseInfoTitleTimeToComplete = "Время прохождения курса";
+CourseInfoTitleLanguage = "Язык";
+CourseInfoTitleCertificate = "Сертификат";
+CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
+
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";
 
@@ -564,6 +586,9 @@ Save = "Сохранить";
 PersonalDeadline = "Персональный дедлайн";
 DeadlineModeQuestion = "Сколько времени вы готовы тратить на изучение этого курса?";
 PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - путь к успеху. Мы можем создать для вас персональное умное расписание - так вы никогда не забудете получить порцию новых знаний!";
+
+/* Course info */
+CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";

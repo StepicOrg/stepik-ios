@@ -140,13 +140,13 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
     }
 
     func displayCourseInfo(viewModel: BaseExplore.PresentCourseInfo.ViewModel) {
-        let assembly = CourseInfoLegacyAssembly(course: viewModel.course)
+        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .info)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     func displayCourseSyllabus(viewModel: BaseExplore.PresentCourseSyllabus.ViewModel) {
-        let assembly = SyllabusLegacyAssembly(course: viewModel.course)
+        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .syllabus)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }

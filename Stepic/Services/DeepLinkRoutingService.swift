@@ -92,13 +92,9 @@ class DeepLinkRoutingService {
             case .profile(userID: let userID):
                 seal.fulfill([ProfileAssembly(userID: userID).makeModule()])
             case .course(courseID: let courseID):
-                DeepLinkRouter.routeToCourseWithId(courseID, completion: { moduleStack in
-                    seal.fulfill(moduleStack)
-                })
+                seal.fulfill([CourseInfoAssembly(courseID: courseID, initialTab: .info).makeModule()])
             case .syllabus(courseID: let courseID):
-                DeepLinkRouter.routeToSyllabusWithId(courseID, completion: { moduleStack in
-                    seal.fulfill(moduleStack)
-                })
+                seal.fulfill([CourseInfoAssembly(courseID: courseID, initialTab: .syllabus).makeModule()])
             case .lesson(lessonID: let lessonID, stepID: let stepID, unitID: _):
                 DeepLinkRouter.routeToStepWithId(stepID, lessonId: lessonID, completion: { moduleStack in
                     seal.fulfill(moduleStack)

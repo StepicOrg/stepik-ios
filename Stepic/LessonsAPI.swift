@@ -17,6 +17,15 @@ class LessonsAPI: APIEndpoint {
     func retrieve(ids: [Int], existing: [Lesson], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Lesson]> {
         return getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
+
+    @available(*, deprecated, message: "Legacy: we want to pass existing")
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Lesson]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return getObjectsByIds(ids: ids, updating: Lesson.fetch(ids))
+    }
 }
 
 extension LessonsAPI {
