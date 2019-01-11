@@ -71,7 +71,7 @@ final class CourseInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.addChildViewController(self.pageViewController)
-        self.pageViewController.reloadPages()
+        self.pageViewController.reloadData()
 
         self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
@@ -100,6 +100,11 @@ final class CourseInfoViewController: UIViewController {
             guard let strongSelf = self else {
                 return
             }
+
+            // Reset shadow again (first call in viewWillAppear)
+            // Cause some controllers can use UINavigationViewControllerDelegate and animate shadow there)
+            strongSelf.styledNavigationController?.changeShadowAlpha(0.0)
+
             strongSelf.updateTopBar(alpha: strongSelf.lastTopBarAlpha)
         }
 
@@ -109,6 +114,11 @@ final class CourseInfoViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .default
         super.viewWillDisappear(animated)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.updateTopBar(alpha: 1.0)
     }
 
     override func loadView() {

@@ -122,6 +122,7 @@ class LastStepRouter {
                 SVProgressHUD.showSuccess(withStatus: "")
                 navigationController.pushViewController(sectionsVC, animated: false)
                 navigationController.pushViewController(lessonVC, animated: true)
+
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
             }.catch { _ in

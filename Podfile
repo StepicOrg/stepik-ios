@@ -65,9 +65,7 @@ def all_pods
     pod 'NotificationBannerSwift', '1.6.3'
     pod 'Nuke', '7.3.2'
     pod 'STRegex', '1.1.0'
-
-    # version for 12 sdk - 3.0.1
-    pod 'Pageboy', '2.5.4' 
+    pod 'Pageboy', '3.0.1' 
 end
 
 def testing_pods

@@ -14,6 +14,10 @@ class StyledNavigationViewController: UINavigationController {
     static let lightTintColor = UIColor.white
     static let darkTintColor = UIColor.mainDark
 
+    private var currentShadowAlpha: CGFloat {
+        return self.customShadowView?.alpha ?? 0
+    }
+
     private lazy var statusBarView: UIView = {
         let view = UIView(frame: UIApplication.shared.statusBarFrame)
         view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
@@ -139,6 +143,10 @@ class StyledNavigationViewController: UINavigationController {
         var targetAlpha: CGFloat = 1
         if inside {
             targetAlpha = 0
+        }
+
+        guard targetAlpha != self.currentShadowAlpha else {
+            return
         }
 
         //Saving previous values in case animation is not completed
