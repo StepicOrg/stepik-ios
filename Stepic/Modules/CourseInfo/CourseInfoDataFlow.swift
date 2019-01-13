@@ -90,6 +90,17 @@ enum CourseInfo {
         }
     }
 
+    /// Share course
+    enum ShareCourse {
+        struct Response {
+            let urlPath: String
+        }
+
+        struct ViewModel {
+            let urlPath: String
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

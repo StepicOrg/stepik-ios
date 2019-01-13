@@ -11,6 +11,7 @@ import PromiseKit
 
 protocol CourseInfoInteractorProtocol {
     func refreshCourse()
+    func shareCourse()
     func tryToSetOnlineMode()
 
     func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request)
@@ -103,6 +104,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request) {
         self.submodules = request.submodules
         self.pushCurrentCourseToSubmodules(submodules: self.submodules)
+    }
+
+    func shareCourse() {
+        guard let urlPath = self.courseWebURLPath else {
+            return
+        }
+        self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
     }
 
     // MARK: Private methods

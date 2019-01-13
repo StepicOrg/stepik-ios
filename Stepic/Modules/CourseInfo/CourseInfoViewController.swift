@@ -24,6 +24,7 @@ protocol CourseInfoViewControllerProtocol: class {
     func displayLesson(viewModel: CourseInfo.ShowLesson.ViewModel)
     func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettings.ViewModel)
     func displayExamLesson(viewModel: CourseInfo.ShowExamLesson.ViewModel)
+    func displayCourseSharing(viewModel: CourseInfo.ShareCourse.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -49,7 +50,7 @@ final class CourseInfoViewController: UIViewController {
         image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
         style: .plain,
         target: self,
-        action: #selector(self.actionButtonPressed)
+        action: #selector(self.actionButtonClicked)
     )
 
     private var submodulesControllers: [UIViewController] = []
@@ -186,8 +187,34 @@ final class CourseInfoViewController: UIViewController {
     }
 
     @objc
-    private func actionButtonPressed() {
+    private func actionButtonClicked() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Share", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.shareCourse()
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("DropCourse", comment: ""),
+                style: .destructive,
+                handler: { [weak self] _ in
 
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+        self.present(module: alert)
     }
 }
 
@@ -273,7 +300,14 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                 handler: nil
             )
         )
+        alert.popoverPresentationController?.barButtonItem = self.moreBarButton
         self.present(module: alert)
+    }
+
+    func displayCourseSharing(viewModel: CourseInfo.ShareCourse.ViewModel) {
+        let sharingViewController = SharingHelper.getSharingController(viewModel.urlPath)
+        sharingViewController.popoverPresentationController?.barButtonItem = self.moreBarButton
+        self.present(module: sharingViewController)
     }
 
     func displayCourse(viewModel: CourseInfo.ShowCourse.ViewModel) {
