@@ -12,18 +12,18 @@ final class LocalNotificationsMigrator {
     private let notificationsService: NotificationsService
     private let authInfo: AuthInfo
     private let notificationPreferencesContainer: NotificationPreferencesContainer
-    private let personalDeadlineManager: PersonalDeadlineManager
+    private let personalDeadlinesService: PersonalDeadlinesServiceProtocol
 
     init(
         notificationsService: NotificationsService = NotificationsService(),
         authInfo: AuthInfo = .shared,
         notificationPreferencesContainer: NotificationPreferencesContainer = NotificationPreferencesContainer(),
-        personalDeadlineManager: PersonalDeadlineManager = .shared
+        personalDeadlinesService: PersonalDeadlinesServiceProtocol = PersonalDeadlinesService()
     ) {
         self.notificationsService = notificationsService
         self.authInfo = authInfo
         self.notificationPreferencesContainer = notificationPreferencesContainer
-        self.personalDeadlineManager = personalDeadlineManager
+        self.personalDeadlinesService = personalDeadlinesService
     }
 
     func migrateIfNeeded() {
@@ -54,7 +54,7 @@ final class LocalNotificationsMigrator {
         }
 
         for course in Course.getAllCourses(enrolled: true) {
-            _ = self.personalDeadlineManager.syncDeadline(for: course, userID: userID)
+            _ = self.personalDeadlinesService.syncDeadline(for: course, userID: userID)
         }
     }
 }
