@@ -57,6 +57,28 @@ enum CourseInfo {
         }
     }
 
+    /// Show personal deadlines create / edit & delete action
+    enum PersonalDeadlinesSettings {
+        enum Action {
+            case create
+            case edit
+        }
+
+        struct Response {
+            let action: Action
+
+            @available(*, deprecated, message: "Should containts only course ID")
+            let course: Course
+        }
+
+        struct ViewModel {
+            let action: Action
+
+            @available(*, deprecated, message: "Should containts only course ID")
+            let course: Course
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

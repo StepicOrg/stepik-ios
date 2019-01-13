@@ -146,4 +146,16 @@ extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
             )
         )
     }
+
+    func presentPersonalDeadlinesCreation(for course: Course) {
+        self.presenter.presentPersonalDeadlinesSettings(
+            response: .init(action: .create, course: course)
+        )
+    }
+
+    func presentPersonalDeadlinesSettings(for course: Course) {
+        self.presenter.presentPersonalDeadlinesSettings(
+            response: .init(action: .edit, course: course)
+        )
+    }
 }

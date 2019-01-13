@@ -38,7 +38,8 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
             syllabusDownloadsInteractionService: SyllabusDownloadsInteractionService(
                 videoDownloadingService: VideoDownloadingService.shared
-            )
+            ),
+            personalDeadlinesService: PersonalDeadlinesService()
         )
         let viewController = CourseInfoTabSyllabusViewController(
             interactor: interactor

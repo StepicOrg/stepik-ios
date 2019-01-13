@@ -41,6 +41,7 @@ BeginDate = "Дата начала";
 EndDate = "Дата закрытия";
 SoftDeadline = "Мягкий дедлайн";
 HardDeadline = "Жесткий дедлайн";
+PersonalDeadline = "Персональный дедлайн";
 Certificate = "Сертификат";
 Summary = "О курсе";
 Description = "Описание";
@@ -589,6 +590,8 @@ PersonalDeadlineWidgetSuggestionText = "Постоянное обучение - 
 
 /* Course info */
 CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
+SyllabusDeadlinesButton = "Расписание";
+SyllabusDownloadAll = "Загрузить всё";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";

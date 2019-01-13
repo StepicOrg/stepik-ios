@@ -1,5 +1,5 @@
 //
-//  PersonalDeadlineCounter.swift
+//  PersonalDeadlinesTimeService.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 25.05.2018.
@@ -9,10 +9,11 @@
 import Foundation
 import PromiseKit
 
-class PersonalDeadlineCounter {
+protocol PersonalDeadlinesTimeServiceProtocol: class {
+    func countDeadlines(mode: DeadlineMode, for course: Course) -> Promise<[SectionDeadline]>
+}
 
-    static let shared = PersonalDeadlineCounter()
-
+final class PersonalDeadlinesTimeService: PersonalDeadlinesTimeServiceProtocol {
     enum DeadlineCountError: Error {
         case noSectionInfo, unitsLoadError
     }

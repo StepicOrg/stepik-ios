@@ -20,6 +20,7 @@ enum CourseInfoTabSyllabus {
 
         let sections: [Record<Section>]
         let units: [Record<Unit?>]
+        let sectionsDeadlines: [SectionDeadline]
         let isEnrolled: Bool
     }
 
@@ -91,6 +92,18 @@ enum CourseInfoTabSyllabus {
     enum UnitSelect {
         struct Request {
             let uniqueIdentifier: UniqueIdentifierType
+        }
+    }
+
+    /// Update syllabus header (deadlines, download all)
+    enum UpdateSyllabusHeader {
+        struct Response {
+            let isPersonalDeadlinesAvailable: Bool
+            let isDownloadAllAvailable: Bool
+        }
+
+        struct ViewModel {
+            let data: CourseInfoTabSyllabusHeaderViewModel
         }
     }
 

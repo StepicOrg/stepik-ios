@@ -41,6 +41,7 @@ BeginDate = "Begin date";
 EndDate = "End date";
 SoftDeadline = "Soft deadline";
 HardDeadline = "Hard deadline";
+PersonalDeadline = "Personal deadline";
 Certificate = "Certificate";
 Summary = "Summary";
 Description = "Description";
@@ -588,6 +589,8 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 
 /* Course info */
 CourseMeetsRecommendations = "Meets the recommendations of Stepik";
+SyllabusDeadlinesButton = "Schedule";
+SyllabusDownloadAll = "Download all";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";

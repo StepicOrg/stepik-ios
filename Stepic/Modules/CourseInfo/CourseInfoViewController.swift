@@ -8,6 +8,7 @@
 
 import UIKit
 import Pageboy
+import Presentr
 
 protocol CourseInfoScrollablePageViewProtocol: class {
     var scrollViewDelegate: UIScrollViewDelegate? { get set }
@@ -21,6 +22,7 @@ protocol CourseInfoScrollablePageViewProtocol: class {
 protocol CourseInfoViewControllerProtocol: class {
     func displayCourse(viewModel: CourseInfo.ShowCourse.ViewModel)
     func displayLesson(viewModel: CourseInfo.ShowLesson.ViewModel)
+    func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettings.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -257,6 +259,38 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         self.push(module: assembly.makeModule())
     }
 
+    func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettings.ViewModel) {
+        if viewModel.action == .create {
+            // Show popup
+            let presentr: Presentr = {
+                let presenter = Presentr(presentationType: .dynamic(center: .center))
+                presenter.roundCorners = true
+                return presenter
+            }()
+
+            let viewController = PersonalDeadlinesModeSelectionLegacyAssembly(
+                course: viewModel.course,
+                updateCompletion: { [weak self] in
+                    self?.interactor.refreshCourse()
+                }
+            ).makeModule()
+            self.customPresentViewController(
+                presentr,
+                viewController: viewController,
+                animated: true
+            )
+        } else {
+            // Show action sheet
+            let viewController = PersonalDeadlineEditDeleteAlertLegacyAssembly(
+                course: viewModel.course,
+                presentingViewController: self,
+                updateCompletion: { [weak self] in
+                    self?.interactor.refreshCourse()
+                }
+            ).makeModule()
+            self.present(module: viewController)
+        }
+    }
 }
 
 extension CourseInfoViewController: UIScrollViewDelegate {

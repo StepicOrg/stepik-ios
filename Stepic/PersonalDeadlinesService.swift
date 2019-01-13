@@ -1,5 +1,5 @@
 //
-//  PersonalDeadlineManager.swift
+//  PersonalDeadlinesService.swift
 //  Stepic
 //
 //  Created by Ostrenkiy on 29.05.2018.
@@ -9,19 +9,39 @@
 import Foundation
 import PromiseKit
 
-class PersonalDeadlineManager {
-    var counter: PersonalDeadlineCounter
+protocol PersonalDeadlinesServiceProtocol: class {
+    func canAddDeadlines(in course: Course) -> Bool
+    func countDeadlines(for course: Course, mode: DeadlineMode) -> Promise<Void>
+    func syncDeadline(for course: Course, userID: Int) -> Promise<Void>
+    func changeDeadline(for course: Course, newDeadlines: [SectionDeadline]) -> Promise<Void>
+    func deleteDeadline(for course: Course) -> Promise<Void>
+    func hasDeadlines(in course: Course) -> Bool
+}
+
+final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
+    var counter: PersonalDeadlinesTimeServiceProtocol
     var storageRecordsAPI: StorageRecordsAPI
     var localStorageManager: PersonalDeadlineLocalStorageManager
     var notificationsService: NotificationsService
 
-    static let shared = PersonalDeadlineManager(counter: PersonalDeadlineCounter(), storageRecordsAPI: StorageRecordsAPI(), localStorageManager: PersonalDeadlineLocalStorageManager(), notificationsService: NotificationsService())
-
-    init(counter: PersonalDeadlineCounter, storageRecordsAPI: StorageRecordsAPI, localStorageManager: PersonalDeadlineLocalStorageManager, notificationsService: NotificationsService) {
+    init(
+        counter: PersonalDeadlinesTimeServiceProtocol = PersonalDeadlinesTimeService(),
+        storageRecordsAPI: StorageRecordsAPI = StorageRecordsAPI(),
+        localStorageManager: PersonalDeadlineLocalStorageManager = PersonalDeadlineLocalStorageManager(),
+        notificationsService: NotificationsService = NotificationsService()
+    ) {
         self.counter = counter
         self.storageRecordsAPI = storageRecordsAPI
         self.localStorageManager = localStorageManager
         self.notificationsService = notificationsService
+    }
+
+    func canAddDeadlines(in course: Course) -> Bool {
+        return course.sectionDeadlines == nil && course.scheduleType == "self_paced"
+    }
+
+    func hasDeadlines(in course: Course) -> Bool {
+        return course.sectionDeadlines != nil
     }
 
     func countDeadlines(for course: Course, mode: DeadlineMode) -> Promise<Void> {

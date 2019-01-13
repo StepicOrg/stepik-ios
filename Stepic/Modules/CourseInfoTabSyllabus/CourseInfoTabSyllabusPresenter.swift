@@ -11,6 +11,7 @@ import UIKit
 protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.ShowSyllabus.Response)
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
+    func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.UpdateSyllabusHeader.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -56,6 +57,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     }
                 )
 
+                let sectionDeadline = result.sectionsDeadlines.first(where: {
+                    $0.section == sectionData.element.entity.id
+                })?.deadlineDate
+
                 return self.makeSectionViewModel(
                     index: sectionData.offset,
                     uid: sectionData.element.uniqueIdentifier,
@@ -63,7 +68,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     units: currentSectionUnitViewModels,
                     downloadState: hasPlaceholderUnits || !result.isEnrolled
                         ? .notAvailable
-                        : sectionData.element.downloadState
+                        : sectionData.element.downloadState,
+                    personalDeadlineDate: sectionDeadline
                 )
             }
 
@@ -72,6 +78,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             viewModel = CourseInfoTabSyllabus.ShowSyllabus.ViewModel(state: .loading)
         }
 
+        // TODO: Refactor
         self.viewController?.displaySyllabus(viewModel: viewModel)
     }
 
@@ -98,14 +105,28 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
     }
 
+    func presentCourseSyllabusHeader(
+        response: CourseInfoTabSyllabus.UpdateSyllabusHeader.Response
+    ) {
+        let viewModel = CourseInfoTabSyllabusHeaderViewModel(
+            isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
+            isDownloadAllButtonEnabled: response.isDownloadAllAvailable
+        )
+        self.viewController?.displaySyllabusHeader(viewModel: .init(data: viewModel))
+    }
+
     private func makeSectionViewModel(
         index: Int,
         uid: UniqueIdentifierType,
         section: Section,
         units: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper],
-        downloadState: CourseInfoTabSyllabus.DownloadState
+        downloadState: CourseInfoTabSyllabus.DownloadState,
+        personalDeadlineDate: Date? = nil
     ) -> CourseInfoTabSyllabusSectionViewModel {
-        let deadlines = self.makeDeadlinesViewModel(section: section)
+        let deadlines = self.makeDeadlinesViewModel(
+            section: section,
+            personalDeadlineDate: personalDeadlineDate
+        )
 
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
@@ -170,14 +191,23 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     }
 
     private func makeDeadlinesViewModel(
-        section: Section
+        section: Section,
+        personalDeadlineDate: Date?
     ) -> CourseInfoTabSyllabusSectionDeadlinesViewModel? {
-        let dates: [(title: String, date: Date)] = [
-            (title: NSLocalizedString("BeginDate", comment: ""), date: section.beginDate),
-            (title: NSLocalizedString("SoftDeadline", comment: ""), date: section.softDeadline),
-            (title: NSLocalizedString("HardDeadline", comment: ""), date: section.hardDeadline),
-            (title: NSLocalizedString("EndDate", comment: ""), date: section.endDate)
-        ].filter { $0.date != nil }.compactMap { ($0.title, $0.date!) }
+        let dates: [(title: String, date: Date)] = {
+            if let personalDeadlineDate = personalDeadlineDate {
+                return [
+                    (title: NSLocalizedString("PersonalDeadline", comment: ""), date: personalDeadlineDate)
+                ]
+            } else {
+                return [
+                    (title: NSLocalizedString("BeginDate", comment: ""), date: section.beginDate),
+                    (title: NSLocalizedString("SoftDeadline", comment: ""), date: section.softDeadline),
+                    (title: NSLocalizedString("HardDeadline", comment: ""), date: section.hardDeadline),
+                    (title: NSLocalizedString("EndDate", comment: ""), date: section.endDate)
+                ].filter { $0.date != nil }.compactMap { ($0.title, $0.date!) }
+            }
+        }()
 
         if dates.isEmpty {
             return nil

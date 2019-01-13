@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct CourseInfoTabSyllabusHeaderViewModel {
+    let isDeadlineButtonVisible: Bool
+    let isDownloadAllButtonEnabled: Bool
+}
+
 struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let uniqueIdentifier: UniqueIdentifierType
 

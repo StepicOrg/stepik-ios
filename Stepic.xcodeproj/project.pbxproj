@@ -91,7 +91,6 @@
 		081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
 		0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
-		08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */; };
 		0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */; };
 		0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */; };
 		0819856D20BF273800897BBA /* PersonalDeadlineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */; };
@@ -158,7 +157,7 @@
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */; };
-		083AE48320BD72CA00102FE4 /* PersonalDeadlineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */; };
+		083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48220BD72CA00102FE4 /* PersonalDeadlinesService.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
 		083C9CAD2056717D00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		083C9CAF2056717E00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
@@ -3847,6 +3846,7 @@
 		2CCB5A662100B7FA0091A605 /* KnowledgeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A652100B7FA0091A605 /* KnowledgeGraph.swift */; };
 		2CCB5A682100B8E50091A605 /* KnowledgeGraphVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB5A672100B8E50091A605 /* KnowledgeGraphVertex.swift */; };
 		2CCC505921E775B0004D9FC1 /* CourseInfoTabSyllabusOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC505821E775B0004D9FC1 /* CourseInfoTabSyllabusOutputProtocol.swift */; };
+		2CCC505E21E8EA88004D9FC1 /* PersonalDeadlinesTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194EB920B813AC00B34327 /* PersonalDeadlinesTimeService.swift */; };
 		2CCC59F12109B3A200564D45 /* CourseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59F02109B3A200564D45 /* CourseService.swift */; };
 		2CCC59FC2109BB4800564D45 /* EnrollmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59FB2109BB4800564D45 /* EnrollmentService.swift */; };
 		2CCC59FE2109BB9800564D45 /* EnrollmentServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC59FD2109BB9800564D45 /* EnrollmentServiceImpl.swift */; };
@@ -5038,7 +5038,7 @@
 		081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTabBarViewController.swift; sourceTree = "<group>"; };
 		0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
-		08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineCounter.swift; sourceTree = "<group>"; };
+		08194EB920B813AC00B34327 /* PersonalDeadlinesTimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesTimeService.swift; sourceTree = "<group>"; };
 		08194EBB20B89B0900B34327 /* Model_timetocomplete_v22.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_timetocomplete_v22.xcdatamodel; sourceTree = "<group>"; };
 		0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineEditScheduleViewController.swift; sourceTree = "<group>"; };
 		0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineTableViewCell.swift; sourceTree = "<group>"; };
@@ -5117,7 +5117,7 @@
 		083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		083AABE71BE8D63C005E1E96 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineLocalStorageManager.swift; sourceTree = "<group>"; };
-		083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlineManager.swift; sourceTree = "<group>"; };
+		083AE48220BD72CA00102FE4 /* PersonalDeadlinesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesService.swift; sourceTree = "<group>"; };
 		083B164C1C2AF27700250B37 /* JSQWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQWebViewController.swift; sourceTree = "<group>"; };
 		083C20BC1CB2998900C9966E /* Model_v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v3.xcdatamodel; sourceTree = "<group>"; };
 		083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicApplicationsInfo.swift; sourceTree = "<group>"; };
@@ -6850,9 +6850,9 @@
 				082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */,
 				082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */,
 				082B54DA20AA445C00144817 /* DeadlineMode.swift */,
-				08194EB920B813AC00B34327 /* PersonalDeadlineCounter.swift */,
+				08194EB920B813AC00B34327 /* PersonalDeadlinesTimeService.swift */,
 				083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */,
-				083AE48220BD72CA00102FE4 /* PersonalDeadlineManager.swift */,
+				083AE48220BD72CA00102FE4 /* PersonalDeadlinesService.swift */,
 				2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */,
 				2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */,
 				0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */,
@@ -14899,7 +14899,7 @@
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
 				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
-				083AE48320BD72CA00102FE4 /* PersonalDeadlineManager.swift in Sources */,
+				083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */,
 				0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
 				2CC3518F1F682B6C004255B6 /* SocialAuthHeaderView.swift in Sources */,
@@ -14918,7 +14918,6 @@
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
 				08FA62222121BEF900F00275 /* GrowPresentAnimationController.swift in Sources */,
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
-				08194EBA20B813AC00B34327 /* PersonalDeadlineCounter.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */,
 				2C88C14021C287FA004BDF21 /* SectionsPersistenceService.swift in Sources */,
@@ -15471,6 +15470,7 @@
 				62E982769C19C7852BCD59C4 /* TooltipStorageManager.swift in Sources */,
 				62E985DD90444821A835C02F /* CourseListsCollectionSkeletonView.swift in Sources */,
 				62E98A53567525055BCCA089 /* AppDelegate.swift in Sources */,
+				2CCC505E21E8EA88004D9FC1 /* PersonalDeadlinesTimeService.swift in Sources */,
 				7B41BE4F5E344256036587AB /* CourseInfoAssembly.swift in Sources */,
 				25BC7970366D90C7CA5F1627 /* CourseInfoViewController.swift in Sources */,
 				ADA994350163571259AA9E99 /* CourseInfoInteractor.swift in Sources */,

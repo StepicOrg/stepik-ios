@@ -11,6 +11,7 @@ import UIKit
 protocol CourseInfoPresenterProtocol {
     func presentCourse(response: CourseInfo.ShowCourse.Response)
     func presentLesson(response: CourseInfo.ShowLesson.Response)
+    func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettings.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -49,5 +50,12 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
 
         self.viewController?.displayLesson(viewModel: viewModel)
+    }
+
+    func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettings.Response) {
+        let viewModel = CourseInfo.PersonalDeadlinesSettings.ViewModel(
+            action: response.action, course: response.course
+        )
+        self.viewController?.displayPersonalDeadlinesSettings(viewModel: viewModel)
     }
 }

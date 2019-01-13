@@ -40,11 +40,17 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         let button = ImageButton()
         button.image = UIImage(named: "course-info-syllabus-calendar")?.withRenderingMode(.alwaysTemplate)
         button.tintColor = self.appearance.buttonTintColor
-        button.title = "Расписание"
+        button.title = NSLocalizedString("SyllabusDeadlinesButton", comment: "")
         button.font = self.appearance.buttonFont
         button.imageInsets = self.appearance.buttonImageInsets
         button.titleInsets = self.appearance.buttonTitleInsets
         button.imageSize = self.appearance.buttonImageSize
+        button.isHidden = true
+        button.addTarget(
+            self,
+            action: #selector(self.onCalendarButtonClicked),
+            for: .touchUpInside
+        )
         return button
     }()
 
@@ -52,11 +58,16 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         let button = ImageButton()
         button.image = UIImage(named: "course-info-syllabus-download-all")?.withRenderingMode(.alwaysTemplate)
         button.tintColor = self.appearance.buttonTintColor
-        button.title = "Загрузить всё"
+        button.title = NSLocalizedString("SyllabusDownloadAll", comment: "")
         button.font = self.appearance.buttonFont
         button.imageInsets = self.appearance.buttonImageInsets
         button.titleInsets = self.appearance.buttonTitleInsets
         button.imageSize = self.appearance.buttonImageSize
+        button.addTarget(
+            self,
+            action: #selector(self.onDownloadAllButtonClicked),
+            for: .touchUpInside
+        )
         return button
     }()
 
@@ -65,6 +76,21 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         view.backgroundColor = self.appearance.separatorColor
         return view
     }()
+
+    var shouldShowCalendarButton: Bool = false {
+        didSet {
+            self.calendarButton.isHidden = !self.shouldShowCalendarButton
+        }
+    }
+
+    var isDownloadAllButtonEnabled: Bool = true {
+        didSet {
+            self.downloadAllButton.isEnabled = self.isDownloadAllButtonEnabled
+        }
+    }
+
+    var onCalendarButtonClick: (() -> Void)?
+    var onDownloadAllButtonClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -77,6 +103,16 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc
+    private func onCalendarButtonClicked() {
+        self.onCalendarButtonClick?()
+    }
+
+    @objc
+    private func onDownloadAllButtonClicked() {
+        self.onDownloadAllButtonClick?()
     }
 }
 
@@ -94,7 +130,10 @@ extension CourseInfoTabSyllabusHeaderView: ProgrammaticallyInitializableViewProt
         self.stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.insets.top)
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.insets.right).priority(999)
+            make.trailing
+                .lessThanOrEqualToSuperview()
+                .offset(-self.appearance.insets.right)
+                .priority(999)
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false

@@ -14,6 +14,7 @@ protocol CourseInfoTabSyllabusInteractorProtocol {
     func fetchSyllabusSection(request: CourseInfoTabSyllabus.ShowSyllabusSection.Request)
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request)
     func selectUnit(request: CourseInfoTabSyllabus.UnitSelect.Request)
+    func handlePersonalDeadlinesAction()
 }
 
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
@@ -23,6 +24,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     let provider: CourseInfoTabSyllabusProviderProtocol
     let videoFileManager: VideoStoredFileManagerProtocol
     let syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol
+    let personalDeadlinesService: PersonalDeadlinesServiceProtocol
 
     private var currentCourse: Course?
     private var currentSections: [UniqueIdentifierType: Section] = [:]
@@ -56,11 +58,13 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         presenter: CourseInfoTabSyllabusPresenterProtocol,
         provider: CourseInfoTabSyllabusProviderProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
-        syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol
+        syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        personalDeadlinesService: PersonalDeadlinesServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.videoFileManager = videoFileManager
+        self.personalDeadlinesService = personalDeadlinesService
 
         self.syllabusDownloadsInteractionService = syllabusDownloadsInteractionService
         self.syllabusDownloadsInteractionService.delegate = self
@@ -89,10 +93,23 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             ).done { response in
                 DispatchQueue.main.async {
                     print("course info tab syllabus interactor: finish fetching syllabus, isOnline = \(isOnline)")
+
                     strongSelf.presenter.presentCourseSyllabus(response: response)
 
                     if isOnline && !strongSelf.didLoadFromNetwork {
                         strongSelf.didLoadFromNetwork = true
+
+                        // Update syllabus header
+                        let isPersonalDeadlinesAvailable = strongSelf.personalDeadlinesService.canAddDeadlines(
+                            in: course
+                        ) || strongSelf.personalDeadlinesService.hasDeadlines(in: course)
+                        strongSelf.presenter.presentCourseSyllabusHeader(
+                            response: .init(
+                                isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
+                                isDownloadAllAvailable: false
+                            )
+                        )
+
                         strongSelf.sectionFetchSemaphore.signal()
                     }
                 }
@@ -190,6 +207,18 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
 
         self.moduleOutput?.presentLesson(in: unit)
+    }
+
+    func handlePersonalDeadlinesAction() {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        if self.personalDeadlinesService.hasDeadlines(in: course) {
+            self.moduleOutput?.presentPersonalDeadlinesSettings(for: course)
+        } else {
+            self.moduleOutput?.presentPersonalDeadlinesCreation(for: course)
+        }
     }
 
     // MARK: Private methods
@@ -381,6 +410,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     )
                 }
                 .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
+            sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
             isEnrolled: self.currentCourse?.enrolled ?? false
         )
     }

@@ -9,6 +9,15 @@
 import UIKit
 import SnapKit
 
+protocol CourseInfoTabSyllabusViewDelegate: class {
+    func courseInfoTabSyllabusViewDidClickDeadlines(
+        _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
+    )
+    func courseInfoTabSyllabusViewDidClickDownloadAll(
+        _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
+    )
+}
+
 extension CourseInfoTabSyllabusView {
     struct Appearance {
         let headerViewHeight: CGFloat = 60
@@ -16,6 +25,8 @@ extension CourseInfoTabSyllabusView {
 }
 
 final class CourseInfoTabSyllabusView: UIView {
+    weak var delegate: CourseInfoTabSyllabusViewDelegate?
+
     let appearance: Appearance
 
     private lazy var headerView: CourseInfoTabSyllabusHeaderView = {
@@ -25,6 +36,18 @@ final class CourseInfoTabSyllabusView: UIView {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.headerViewHeight)
+        }
+
+        headerView.onDownloadAllButtonClick = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.courseInfoTabSyllabusViewDidClickDownloadAll(strongSelf)
+            }
+        }
+
+        headerView.onCalendarButtonClick = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.courseInfoTabSyllabusViewDidClickDeadlines(strongSelf)
+            }
         }
 
         return headerView
@@ -85,6 +108,11 @@ final class CourseInfoTabSyllabusView: UIView {
 
         self.tableView.dataSource = self.tableViewDelegate
         self.tableView.reloadData()
+    }
+
+    func configure(headerViewModel: CourseInfoTabSyllabusHeaderViewModel) {
+        self.headerView.isDownloadAllButtonEnabled = headerViewModel.isDownloadAllButtonEnabled
+        self.headerView.shouldShowCalendarButton = headerViewModel.isDeadlineButtonVisible
     }
 }
 

@@ -11,6 +11,7 @@ import UIKit
 protocol CourseInfoTabSyllabusViewControllerProtocol: class {
     func displaySyllabus(viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel)
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
+    func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.UpdateSyllabusHeader.ViewModel)
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: class {
@@ -45,14 +46,20 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = CourseInfoTabSyllabusView(
+        let view = CourseInfoTabSyllabusView(
             frame: UIScreen.main.bounds,
             tableViewDelegate: self.syllabusTableDelegate
         )
+        view.delegate = self
+        self.view = view
     }
 }
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerProtocol {
+    func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.UpdateSyllabusHeader.ViewModel) {
+        self.courseInfoTabSyllabusView?.configure(headerViewModel: viewModel.data)
+    }
+
     func displaySyllabus(viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel) {
         switch viewModel.state {
         case .loading:
@@ -98,5 +105,15 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         self.interactor.selectUnit(
             request: .init(uniqueIdentifier: cell.uniqueIdentifier)
         )
+    }
+}
+
+extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate {
+    func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {
+        self.interactor.handlePersonalDeadlinesAction()
+    }
+
+    func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {
+
     }
 }

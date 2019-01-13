@@ -101,6 +101,12 @@ final class ImageButton: UIControl {
         }
     }
 
+    override var isEnabled: Bool {
+        didSet {
+            self.alpha = self.isEnabled ? 1.0 : 0.5
+        }
+    }
+
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         self.setupView()

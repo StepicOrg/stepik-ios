@@ -67,6 +67,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
                     : self.progressesPersistenceService.fetch(ids: progressesIDs, page: 1)
                 return progressPromise.map { (sections, $0.0) }
             }.done { sections, progresses in
+                course.sections = sections
                 let progressesMap: [Progress.IdType: Progress] = progresses
                     .reduce(into: [:]) { $0[$1.id] = $1 }
 
