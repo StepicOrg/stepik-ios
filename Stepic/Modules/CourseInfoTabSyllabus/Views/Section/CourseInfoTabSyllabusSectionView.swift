@@ -19,9 +19,14 @@ extension CourseInfoTabSyllabusSectionView {
         // Width for two-digit indexes
         let indexLabelWidth: CGFloat = 16
 
+        let examTextColor = UIColor.mainDark
+        let examFont = UIFont.systemFont(ofSize: 14, weight: .light)
+
+        let textStackViewSpacing: CGFloat = 10
+        let textStackViewInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
+
         let titleTextColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 14)
-        let titleLabelInsets = UIEdgeInsets(top: 19, left: 12, bottom: 0, right: 15)
 
         let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
@@ -60,6 +65,22 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return view
     }()
 
+    private lazy var textStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.textStackViewSpacing
+        return stackView
+    }()
+
+    private lazy var examLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.examFont
+        label.textColor = self.appearance.examTextColor
+        label.numberOfLines = 1
+        label.text = NSLocalizedString("ExamTitle", comment: "")
+        return label
+    }()
+
     private lazy var progressIndicatorView: UIProgressView = {
         let view = UIProgressView()
         view.progressViewStyle = .bar
@@ -76,7 +97,7 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         let appearance = CourseInfoTabSyllabusSectionDeadlinesView.Appearance(
             verticalHorizontalOffset: self.appearance.indexLabelInsets.left
                 + self.appearance.indexLabelWidth
-                + self.appearance.titleLabelInsets.left
+                + self.appearance.textStackViewInsets.left
         )
         let view = CourseInfoTabSyllabusSectionDeadlinesView(appearance: appearance)
         return view
@@ -102,6 +123,8 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         self.indexLabel.text = viewModel.index
         self.progressIndicatorView.progress = viewModel.progress
 
+        self.examLabel.isHidden = !viewModel.isExam
+
         self.updateDownloadState(newState: viewModel.downloadState)
 
         if let deadlines = viewModel.deadlines {
@@ -111,7 +134,7 @@ final class CourseInfoTabSyllabusSectionView: UIView {
                     .greaterThanOrEqualTo(self.downloadButton.snp.bottom)
                     .offset(self.appearance.deadlinesInsets.top)
                 make.top
-                    .greaterThanOrEqualTo(self.titleLabel.snp.bottom)
+                    .greaterThanOrEqualTo(self.textStackView.snp.bottom)
                     .offset(self.appearance.deadlinesInsets.top)
             }
 
@@ -126,9 +149,11 @@ final class CourseInfoTabSyllabusSectionView: UIView {
             )
         } else {
             self.deadlinesView.isHidden = true
-            self.deadlinesView.snp.makeConstraints { make in
-                make.top.equalTo(self.downloadButton.snp.bottom)
-                make.top.equalTo(self.titleLabel.snp.bottom)
+            self.textStackView.snp.makeConstraints { make in
+                make.bottom
+                    .equalToSuperview()
+                    .offset(-self.appearance.deadlinesInsets.bottom)
+                    .priority(.medium)
             }
         }
     }
@@ -162,7 +187,11 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
 
     func addSubviews() {
         self.addSubview(self.indexLabel)
-        self.addSubview(self.titleLabel)
+
+        self.textStackView.addArrangedSubview(self.titleLabel)
+        self.textStackView.addArrangedSubview(self.examLabel)
+        self.addSubview(self.textStackView)
+
         self.addSubview(self.downloadButton)
         self.addSubview(self.deadlinesView)
 
@@ -197,18 +226,19 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.downloadButton.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.downloadButtonSize)
             make.trailing.equalToSuperview().offset(-self.appearance.downloadButtonInsets.right)
-            make.centerY.equalTo(self.titleLabel.snp.centerY)
+            make.centerY.equalTo(self.textStackView.snp.centerY)
         }
 
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.titleLabelInsets.top)
+        self.textStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.textStackView.setContentCompressionResistancePriority(.required, for: .vertical)
+        self.textStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.textStackViewInsets.top)
             make.leading
                 .equalTo(self.indexLabel.snp.trailing)
-                .offset(self.appearance.titleLabelInsets.left)
+                .offset(self.appearance.textStackViewInsets.left)
             make.trailing
                 .equalTo(self.downloadButton.snp.leading)
-                .offset(-self.appearance.titleLabelInsets.right)
+                .offset(-self.appearance.textStackViewInsets.right)
         }
 
         self.deadlinesView.translatesAutoresizingMaskIntoConstraints = false

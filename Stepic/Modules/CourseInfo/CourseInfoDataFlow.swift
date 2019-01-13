@@ -79,6 +79,17 @@ enum CourseInfo {
         }
     }
 
+    /// Present exam in web
+    enum ShowExamLesson {
+        struct Response {
+            let urlPath: String
+        }
+
+        struct ViewModel {
+            let urlPath: String
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

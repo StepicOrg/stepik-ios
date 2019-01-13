@@ -12,6 +12,7 @@ protocol CourseInfoPresenterProtocol {
     func presentCourse(response: CourseInfo.ShowCourse.Response)
     func presentLesson(response: CourseInfo.ShowLesson.Response)
     func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettings.Response)
+    func presentExamLesson(response: CourseInfo.ShowExamLesson.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -54,8 +55,16 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettings.Response) {
         let viewModel = CourseInfo.PersonalDeadlinesSettings.ViewModel(
-            action: response.action, course: response.course
+            action: response.action,
+            course: response.course
         )
         self.viewController?.displayPersonalDeadlinesSettings(viewModel: viewModel)
+    }
+
+    func presentExamLesson(response: CourseInfo.ShowExamLesson.Response) {
+        let viewModel = CourseInfo.ShowExamLesson.ViewModel(
+            urlPath: response.urlPath
+        )
+        self.viewController?.displayExamLesson(viewModel: viewModel)
     }
 }

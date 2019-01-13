@@ -136,7 +136,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             units: units,
             deadlines: deadlines,
             downloadState: downloadState,
-            isDisabled: !section.isReachable
+            isDisabled: !section.isReachable,
+            isExam: section.isExam
         )
 
         self.cachedSectionViewModels[section.id] = viewModel

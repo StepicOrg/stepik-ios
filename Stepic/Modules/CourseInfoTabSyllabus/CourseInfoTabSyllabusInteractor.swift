@@ -206,6 +206,13 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
+        // Check whether unit is in exam section
+        if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
+           section.isExam, section.isReachable {
+            self.moduleOutput?.presentExamLesson()
+            return
+        }
+
         self.moduleOutput?.presentLesson(in: unit)
     }
 
@@ -424,8 +431,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func getDownloadingState(for unit: Unit) -> CourseInfoTabSyllabus.DownloadState {
+        // If section is unreachable or exam then all units are not available
+        guard let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
+              !section.isExam, section.isReachable else {
+            return .notAvailable
+        }
+
         guard let lesson = unit.lesson else {
-            // We should call this method only with completely load units
+            // We should call this method only with completely loaded units
             // But return "not cached" in this case
             return .available(isCached: false)
         }
@@ -468,6 +481,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private func getDownloadingState(for section: Section) -> CourseInfoTabSyllabus.DownloadState {
         let units = section.units
+
+        // Unreachable and exam not available
+        if section.isExam || !section.isReachable {
+            return .notAvailable
+        }
 
         // If have unloaded units for lesson then show "not available" state
         let hasUncachedUnits = units

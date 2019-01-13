@@ -23,6 +23,7 @@ protocol CourseInfoViewControllerProtocol: class {
     func displayCourse(viewModel: CourseInfo.ShowCourse.ViewModel)
     func displayLesson(viewModel: CourseInfo.ShowLesson.ViewModel)
     func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettings.ViewModel)
+    func displayExamLesson(viewModel: CourseInfo.ShowExamLesson.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -241,6 +242,40 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
 }
 
 extension CourseInfoViewController: CourseInfoViewControllerProtocol {
+    func displayExamLesson(viewModel: CourseInfo.ShowExamLesson.ViewModel) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("ExamTitle", comment: ""),
+            message: NSLocalizedString("ShowExamInWeb", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Open", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    WebControllerManager.sharedManager.presentWebControllerWithURLString(
+                        "\(viewModel.urlPath)?from_mobile_app=true",
+                        inController: strongSelf,
+                        withKey: "exam",
+                        allowsSafari: true,
+                        backButtonStyle: .close
+                    )
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+        self.present(module: alert)
+    }
+
     func displayCourse(viewModel: CourseInfo.ShowCourse.ViewModel) {
         switch viewModel.state {
         case .result(let data):

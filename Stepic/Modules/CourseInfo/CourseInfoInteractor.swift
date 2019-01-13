@@ -30,6 +30,25 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
+    private var courseWebURLPath: String? {
+        guard let course = self.currentCourse else {
+            return nil
+        }
+
+        if let slug = course.slug {
+            return "\(StepicApplicationsInfo.stepicURL)/course/\(slug)"
+        } else {
+            return "\(StepicApplicationsInfo.stepicURL)/\(course.id)"
+        }
+    }
+
+    private var courseWebSyllabusURLPath: String? {
+        guard let path = self.courseWebURLPath else {
+            return nil
+        }
+        return "\(path)/syllabus"
+    }
+
     private var submodules: [CourseInfoSubmoduleProtocol] = []
 
     private var isOnline = false
@@ -156,6 +175,16 @@ extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     func presentPersonalDeadlinesSettings(for course: Course) {
         self.presenter.presentPersonalDeadlinesSettings(
             response: .init(action: .edit, course: course)
+        )
+    }
+
+    func presentExamLesson() {
+        guard let urlPath = self.courseWebSyllabusURLPath else {
+            return
+        }
+
+        self.presenter.presentExamLesson(
+            response: .init(urlPath: urlPath)
         )
     }
 }

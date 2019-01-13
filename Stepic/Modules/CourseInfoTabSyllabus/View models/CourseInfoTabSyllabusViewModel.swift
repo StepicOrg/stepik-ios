@@ -25,6 +25,7 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
     let isDisabled: Bool
+    let isExam: Bool
 
     enum UnitViewModelWrapper {
         case placeholder
