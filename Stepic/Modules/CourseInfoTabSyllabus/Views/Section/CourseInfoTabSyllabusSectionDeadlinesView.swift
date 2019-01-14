@@ -83,8 +83,6 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
     }
 
     private func removeItems() {
-        self.labelsInPageCount = 0
-
         self.scrollView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         self.scrollView.subviews.forEach { $0.removeFromSuperview() }
 
@@ -162,10 +160,6 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
             )
 
             xOffset += label.frame.width + self.appearance.labelsSpacing
-
-            if xOffset < self.frame.width {
-                self.labelsInPageCount += 1
-            }
         }
 
         xOffset += self.appearance.verticalHorizontalOffset
@@ -194,8 +188,21 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
             origin: self.scrollView.frame.origin,
             size: CGSize(width: self.scrollView.frame.width, height: scrollViewHeight)
         )
+
+        self.labelsInPageCount = 0
+        for label in self.textLabels {
+            if label.frame.maxX <= self.scrollView.frame.width {
+                self.labelsInPageCount += 1
+            } else {
+                break
+            }
+        }
+
+        let pagesCount = self.labelsInPageCount == 0
+            ? 0
+            : Int(ceil(Double(self.textLabels.count) / Double(self.labelsInPageCount)))
         self.scrollView.contentSize = CGSize(
-            width: ceil(xOffset / self.scrollView.frame.width) * self.scrollView.frame.width,
+            width: CGFloat(pagesCount) * self.scrollView.frame.width,
             height: self.scrollView.frame.height
         )
     }
@@ -226,7 +233,7 @@ extension CourseInfoTabSyllabusSectionDeadlinesView: UIScrollViewDelegate {
         withVelocity velocity: CGPoint,
         targetContentOffset: UnsafeMutablePointer<CGPoint>
     ) {
-        let currentPage = targetContentOffset.pointee.x / self.frame.width
+        let currentPage = targetContentOffset.pointee.x / self.scrollView.frame.width
         let nearestPage = round(currentPage)
 
         var pageDiff: CGFloat = 0
@@ -240,8 +247,14 @@ extension CourseInfoTabSyllabusSectionDeadlinesView: UIScrollViewDelegate {
             }
         }
 
-        let index = max(0, min(self.textLabels.count - 1, Int(nearestPage + pageDiff)))
-        guard let x = self.textLabels[safe: index * self.labelsInPageCount]?.frame.origin.x else {
+        let index = max(
+            0,
+            min(
+                Int(ceil(Double(self.textLabels.count) / Double(self.labelsInPageCount))),
+                Int(nearestPage + pageDiff)
+            )
+        )
+        guard let x = self.textLabels[safe: index * self.labelsInPageCount]?.frame.minX else {
             return
         }
         targetContentOffset.pointee.x = x - self.appearance.verticalHorizontalOffset
