@@ -20,7 +20,8 @@ class LastStepRouter {
         for course: Course,
         isAdaptive: Bool? = nil,
         didJustSubscribe: Bool = false,
-        using navigationController: UINavigationController
+        using navigationController: UINavigationController,
+        skipSyllabus: Bool = false
     ) {
         guard let lastStepId = course.lastStepId else {
             return
@@ -35,7 +36,7 @@ class LastStepRouter {
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
         }.ensure {
-            self.navigate(for: course, isAdaptive: isAdaptive, didJustSubscribe: didJustSubscribe, using: navigationController)
+            self.navigate(for: course, isAdaptive: isAdaptive, didJustSubscribe: didJustSubscribe, using: navigationController, skipSyllabus: skipSyllabus)
         }.catch {
             _ in
             print("error while updating lastStep")
@@ -46,7 +47,8 @@ class LastStepRouter {
         for course: Course,
         isAdaptive: Bool?,
         didJustSubscribe: Bool,
-        using navigationController: UINavigationController
+        using navigationController: UINavigationController,
+        skipSyllabus: Bool = false
     ) {
         let shouldOpenInAdaptiveMode = isAdaptive ?? AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
         if shouldOpenInAdaptiveMode {
@@ -120,7 +122,10 @@ class LastStepRouter {
                 // lessonVC.sectionNavigationDelegate = unitsVC
 
                 SVProgressHUD.showSuccess(withStatus: "")
-                navigationController.pushViewController(sectionsVC, animated: false)
+
+                if !skipSyllabus {
+                    navigationController.pushViewController(sectionsVC, animated: false)
+                }
                 navigationController.pushViewController(lessonVC, animated: true)
 
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)

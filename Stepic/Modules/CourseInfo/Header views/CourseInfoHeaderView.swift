@@ -46,7 +46,11 @@ final class CourseInfoHeaderView: UIView {
         return view
     }()
 
-    private lazy var actionButton = ContinueActionButton(mode: .callToAction)
+    private lazy var actionButton: ContinueActionButton = {
+        let button = ContinueActionButton(mode: .callToAction)
+        button.addTarget(self, action: #selector(self.actionButtonClicked), for: .touchUpInside)
+        return button
+    }()
 
     private lazy var coverImageView: CourseCoverImageView = {
         let view = CourseCoverImageView()
@@ -94,6 +98,8 @@ final class CourseInfoHeaderView: UIView {
     }()
 
     private lazy var statsView = CourseInfoStatsView()
+
+    var onActionButtonClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -171,6 +177,11 @@ final class CourseInfoHeaderView: UIView {
     private func loadImage(url: URL?) {
         self.backgroundView.loadImage(url: url)
         self.coverImageView.loadImage(url: url)
+    }
+
+    @objc
+    private func actionButtonClicked() {
+        self.onActionButtonClick?()
     }
 }
 

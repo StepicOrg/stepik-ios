@@ -101,6 +101,21 @@ enum CourseInfo {
         }
     }
 
+    /// Present last step in course
+    enum PresentLastStep {
+        struct Response {
+            let course: Course
+            let isAdaptive: Bool
+        }
+
+        struct ViewModel {
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let course: Course
+            @available(*, deprecated, message: "Target modules can't be initialized w/o model")
+            let isAdaptive: Bool
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

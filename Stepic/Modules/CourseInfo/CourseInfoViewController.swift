@@ -9,6 +9,7 @@
 import UIKit
 import Pageboy
 import Presentr
+import SVProgressHUD
 
 protocol CourseInfoScrollablePageViewProtocol: class {
     var scrollViewDelegate: UIScrollViewDelegate? { get set }
@@ -25,6 +26,11 @@ protocol CourseInfoViewControllerProtocol: class {
     func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettings.ViewModel)
     func displayExamLesson(viewModel: CourseInfo.ShowExamLesson.ViewModel)
     func displayCourseSharing(viewModel: CourseInfo.ShareCourse.ViewModel)
+    func displayLastStep(viewModel: CourseInfo.PresentLastStep.ViewModel)
+    func displayAuthorization()
+
+    func hideBlockingLoadingIndicator()
+    func showBlockingLoadingIndicator()
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -54,6 +60,8 @@ final class CourseInfoViewController: UIViewController {
     )
 
     private var submodulesControllers: [UIViewController] = []
+
+    private var shouldShowDropCourseAction = false
 
     init(interactor: CourseInfoInteractorProtocol, initialTab: CourseInfo.Tab) {
         self.interactor = interactor
@@ -198,15 +206,19 @@ final class CourseInfoViewController: UIViewController {
                 }
             )
         )
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("DropCourse", comment: ""),
-                style: .destructive,
-                handler: { [weak self] _ in
 
-                }
+        if self.shouldShowDropCourseAction {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DropCourse", comment: ""),
+                    style: .destructive,
+                    handler: { [weak self] _ in
+                        self?.interactor.dropCourse()
+                    }
+                )
             )
-        )
+        }
+
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Cancel", comment: ""),
@@ -314,6 +326,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         switch viewModel.state {
         case .result(let data):
             self.courseInfoView?.configure(viewModel: data)
+            self.shouldShowDropCourseAction = data.isEnrolled
         case .loading:
             break
         }
@@ -359,6 +372,31 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             ).makeModule()
             self.present(module: viewController)
         }
+    }
+
+    func hideBlockingLoadingIndicator() {
+        SVProgressHUD.dismiss()
+    }
+
+    func showBlockingLoadingIndicator() {
+        SVProgressHUD.show()
+    }
+
+    func displayLastStep(viewModel: CourseInfo.PresentLastStep.ViewModel) {
+        guard let navigationController = self.navigationController else {
+            return
+        }
+
+        LastStepRouter.continueLearning(
+            for: viewModel.course,
+            isAdaptive: viewModel.isAdaptive,
+            using: navigationController,
+            skipSyllabus: true
+        )
+    }
+
+    func displayAuthorization() {
+        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }
 
@@ -457,5 +495,9 @@ extension CourseInfoViewController: CourseInfoViewDelegate {
 
     func courseInfoView(_ courseInfoView: CourseInfoView, requestScrollToPage index: Int) {
         self.pageViewController.scrollToPage(.at(index: index), animated: true)
+    }
+
+    func courseInfoViewDidMainAction(_ courseInfoView: CourseInfoView) {
+        self.interactor.doMainCourseAction()
     }
 }

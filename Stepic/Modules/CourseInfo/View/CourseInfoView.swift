@@ -13,6 +13,7 @@ protocol CourseInfoViewDelegate: class {
     func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat)
     func courseInfoView(_ courseInfoView: CourseInfoView, requestScrollToPage index: Int)
     func numberOfPages(in courseInfoView: CourseInfoView) -> Int
+    func courseInfoViewDidMainAction(_ courseInfoView: CourseInfoView)
 }
 
 extension CourseInfoView {
@@ -33,6 +34,12 @@ final class CourseInfoView: UIView {
 
     private lazy var headerView: CourseInfoHeaderView = {
         let view = CourseInfoHeaderView()
+        view.onActionButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.courseInfoViewDidMainAction(strongSelf)
+        }
         return view
     }()
 

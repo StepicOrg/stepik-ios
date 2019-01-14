@@ -14,6 +14,11 @@ protocol CourseInfoPresenterProtocol {
     func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettings.Response)
     func presentExamLesson(response: CourseInfo.ShowExamLesson.Response)
     func presentCourseSharing(response: CourseInfo.ShareCourse.Response)
+    func presentLastStep(response: CourseInfo.PresentLastStep.Response)
+    func presentAuthorization()
+
+    func presentWaitingState()
+    func dismissWaitingState()
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -74,5 +79,26 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             urlPath: response.urlPath
         )
         self.viewController?.displayCourseSharing(viewModel: viewModel)
+    }
+
+    func presentWaitingState() {
+        self.viewController?.showBlockingLoadingIndicator()
+    }
+
+    func dismissWaitingState() {
+        self.viewController?.hideBlockingLoadingIndicator()
+    }
+
+    func presentLastStep(response: CourseInfo.PresentLastStep.Response) {
+        self.viewController?.displayLastStep(
+            viewModel: .init(
+                course: response.course,
+                isAdaptive: response.isAdaptive
+            )
+        )
+    }
+
+    func presentAuthorization() {
+        self.viewController?.displayAuthorization()
     }
 }

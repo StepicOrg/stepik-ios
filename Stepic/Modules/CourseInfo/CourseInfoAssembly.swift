@@ -36,7 +36,8 @@ final class CourseInfoAssembly: Assembly {
             provider: provider,
             networkReachabilityService: NetworkReachabilityService(),
             courseSubscriber: CourseSubscriber(),
-            userAccountService: UserAccountService()
+            userAccountService: UserAccountService(),
+            adaptiveStorageManager: AdaptiveStorageManager()
         )
 
         let viewController = CourseInfoViewController(

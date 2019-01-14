@@ -12,6 +12,8 @@ import PromiseKit
 protocol CourseInfoInteractorProtocol {
     func refreshCourse()
     func shareCourse()
+    func dropCourse()
+    func doMainCourseAction()
     func tryToSetOnlineMode()
 
     func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request)
@@ -23,6 +25,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     let networkReachabilityService: NetworkReachabilityServiceProtocol
     let courseSubscriber: CourseSubscriberProtocol
     let userAccountService: UserAccountServiceProtocol
+    let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
     private let courseID: Course.IdType
     private var currentCourse: Course? {
@@ -63,13 +66,15 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         provider: CourseInfoProviderProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
         courseSubscriber: CourseSubscriberProtocol,
-        userAccountService: UserAccountServiceProtocol
+        userAccountService: UserAccountServiceProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.networkReachabilityService = networkReachabilityService
         self.courseSubscriber = courseSubscriber
         self.userAccountService = userAccountService
+        self.adaptiveStorageManager = adaptiveStorageManager
         self.courseID = courseID
     }
 
@@ -111,6 +116,71 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             return
         }
         self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
+    }
+
+    func dropCourse() {
+        guard let course = self.currentCourse, course.enrolled else {
+            return
+        }
+
+        self.presenter.presentWaitingState()
+        self.courseSubscriber.leave(course: course, source: .preview).done { course in
+            // Refresh course
+            self.currentCourse = course
+            self.presenter.presentCourse(response: .init(result: .success(course)))
+        }.ensure {
+            self.presenter.dismissWaitingState()
+        }.catch { error in
+            print("course info interactor: drop course error = \(error)")
+        }
+    }
+
+    func doMainCourseAction() {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        self.presenter.presentWaitingState()
+
+        if !self.userAccountService.isAuthorized {
+            self.presenter.dismissWaitingState()
+            self.presenter.presentAuthorization()
+            return
+        }
+
+        if course.enrolled {
+            // Enrolled course -> open last step
+            self.presenter.dismissWaitingState()
+            self.presenter.presentLastStep(
+                response: .init(
+                    course: course,
+                    isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
+                        courseId: course.id
+                    )
+                )
+            )
+        } else {
+            // Unenrolled course -> join, open last step
+            self.courseSubscriber.join(course: course, source: .preview).done { course in
+                // Refresh course
+                self.currentCourse = course
+                self.presenter.presentCourse(response: .init(result: .success(course)))
+
+                // Present step
+                self.presenter.presentLastStep(
+                    response: .init(
+                        course: course,
+                        isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
+                            courseId: course.id
+                        )
+                    )
+                )
+            }.ensure {
+                self.presenter.dismissWaitingState()
+            }.catch { error in
+                print("course info interactor: join course error = \(error)")
+            }
+        }
     }
 
     // MARK: Private methods
