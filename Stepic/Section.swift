@@ -243,3 +243,13 @@ final class Section: NSManagedObject, IDFetchable {
     //        }
     //    }
 }
+
+extension Section: NextLessonServiceSectionSourceProtocol {
+    var unitsList: [NextLessonServiceUnitSourceProtocol] {
+        return self.units
+    }
+
+    var uniqueIdentifier: UniqueIdentifierType {
+        return "\(id)"
+    }
+}

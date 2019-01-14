@@ -10,23 +10,26 @@ import Foundation
 
 /// Service for determining next & previous lessons for given lesson in given course
 protocol NextLessonServiceProtocol {
+    func configure(with sections: [NextLessonServiceSectionSourceProtocol])
     func findPreviousUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol?
     func findNextUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol?
 }
 
+@available(*, deprecated, message: "Should use Section model")
 protocol NextLessonServiceSectionSourceProtocol: UniqueIdentifiable {
     /// Check if section can be reached
     var isReachable: Bool { get }
     /// List of units
-    var units: [NextLessonServiceUnitSourceProtocol] { get }
+    var unitsList: [NextLessonServiceUnitSourceProtocol] { get }
 }
 
+@available(*, deprecated, message: "Should use Unit model")
 protocol NextLessonServiceUnitSourceProtocol: UniqueIdentifiable { }
 
 final class NextLessonService: NextLessonServiceProtocol {
-    private let sections: [NextLessonServiceSectionSourceProtocol]
+    private var sections: [NextLessonServiceSectionSourceProtocol] = []
 
-    init(sections: [NextLessonServiceSectionSourceProtocol]) {
+    func configure(with sections: [NextLessonServiceSectionSourceProtocol]) {
         self.sections = sections
     }
 
@@ -51,7 +54,7 @@ final class NextLessonService: NextLessonServiceProtocol {
         // Determine section for unit
         let sectionIndex: Int = {
             for (index, section) in self.sections.enumerated() {
-                if section.units.contains(where: { $0.uniqueIdentifier == unit.uniqueIdentifier }) {
+                if section.unitsList.contains(where: { $0.uniqueIdentifier == unit.uniqueIdentifier }) {
                     return index
                 }
             }
@@ -59,7 +62,7 @@ final class NextLessonService: NextLessonServiceProtocol {
         }()
 
         let unitIndex: Int = {
-            guard let index = self.sections[safe: sectionIndex]?.units.firstIndex(
+            guard let index = self.sections[safe: sectionIndex]?.unitsList.firstIndex(
                 where: { $0.uniqueIdentifier == unit.uniqueIdentifier }
             ) else {
                 fatalError("Section doesn't contain unit")
@@ -73,12 +76,12 @@ final class NextLessonService: NextLessonServiceProtocol {
         }
 
         // Unit has adjacent unit in section
-        if unitIndex < section.units.count - 1 && offset == .next {
-            return self.sections[sectionIndex].units[unitIndex + offset.rawValue]
+        if unitIndex < section.unitsList.count - 1 && offset == .next {
+            return self.sections[sectionIndex].unitsList[unitIndex + offset.rawValue]
         }
 
         if unitIndex > 0 && offset == .previous {
-            return self.sections[sectionIndex].units[unitIndex + offset.rawValue]
+            return self.sections[sectionIndex].unitsList[unitIndex + offset.rawValue]
         }
 
         // Find section
@@ -92,7 +95,7 @@ final class NextLessonService: NextLessonServiceProtocol {
                 break
             }
 
-            if !firstNonEmptySection.units.isEmpty && firstNonEmptySection.isReachable {
+            if !firstNonEmptySection.unitsList.isEmpty && firstNonEmptySection.isReachable {
                 break
             }
         }
@@ -103,11 +106,11 @@ final class NextLessonService: NextLessonServiceProtocol {
         }
 
         // Availability of target section
-        guard !adjacentSection.units.isEmpty && adjacentSection.isReachable else {
+        guard !adjacentSection.unitsList.isEmpty && adjacentSection.isReachable else {
             return nil
         }
 
-        return offset == .next ? adjacentSection.units.first : adjacentSection.units.last
+        return offset == .next ? adjacentSection.unitsList.first : adjacentSection.unitsList.last
     }
 
     enum Offset: Int {

@@ -48,12 +48,16 @@ enum CourseInfo {
         struct Response {
             let lesson: Lesson
             let unitID: Unit.IdType
+            let navigationRules: LessonNavigationRules
+            let navigationDelegate: SectionNavigationDelegate
         }
 
         @available(*, deprecated, message: "Old ugly Lesson controller initialization")
         struct ViewModel {
             let initObjects: LessonInitObjects
             let initIDs: LessonInitIds
+            let navigationRules: LessonNavigationRules
+            let navigationDelegate: SectionNavigationDelegate
         }
     }
 

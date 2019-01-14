@@ -231,7 +231,11 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 }
 
 extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
-    func presentLesson(in unit: Unit) {
+    func presentLesson(
+        in unit: Unit,
+        navigationDelegate: SectionNavigationDelegate,
+        navigationRules: LessonNavigationRules
+    ) {
         guard let lesson = unit.lesson else {
             return
         }
@@ -239,7 +243,9 @@ extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
         self.presenter.presentLesson(
             response: .init(
                 lesson: lesson,
-                unitID: unit.id
+                unitID: unit.id,
+                navigationRules: navigationRules,
+                navigationDelegate: navigationDelegate
             )
         )
     }

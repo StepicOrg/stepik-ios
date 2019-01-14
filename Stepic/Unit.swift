@@ -85,3 +85,9 @@ final class Unit: NSManagedObject, IDFetchable {
         }
     }
 }
+
+extension Unit: NextLessonServiceUnitSourceProtocol {
+    var uniqueIdentifier: UniqueIdentifierType {
+        return "\(id)"
+    }
+}

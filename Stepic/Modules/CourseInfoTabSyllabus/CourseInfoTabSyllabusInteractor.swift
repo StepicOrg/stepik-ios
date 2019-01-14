@@ -25,9 +25,15 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     let videoFileManager: VideoStoredFileManagerProtocol
     let syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol
     let personalDeadlinesService: PersonalDeadlinesServiceProtocol
+    let nextLessonService: NextLessonServiceProtocol
 
     private var currentCourse: Course?
-    private var currentSections: [UniqueIdentifierType: Section] = [:]
+    private var currentSections: [UniqueIdentifierType: Section] = [:] {
+        didSet {
+            self.refreshNextLessonService()
+        }
+    }
+
     private var currentUnits: [UniqueIdentifierType: Unit?] = [:]
 
     private var isOnline = false {
@@ -59,12 +65,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         provider: CourseInfoTabSyllabusProviderProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
         syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        personalDeadlinesService: PersonalDeadlinesServiceProtocol
+        personalDeadlinesService: PersonalDeadlinesServiceProtocol,
+        nextLessonService: NextLessonServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.videoFileManager = videoFileManager
         self.personalDeadlinesService = personalDeadlinesService
+        self.nextLessonService = nextLessonService
 
         self.syllabusDownloadsInteractionService = syllabusDownloadsInteractionService
         self.syllabusDownloadsInteractionService.delegate = self
@@ -206,14 +214,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        // Check whether unit is in exam section
-        if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
-           section.isExam, section.isReachable {
-            self.moduleOutput?.presentExamLesson()
-            return
-        }
-
-        self.moduleOutput?.presentLesson(in: unit)
+        self.askForUnitPresentation(unit)
     }
 
     func handlePersonalDeadlinesAction() {
@@ -524,6 +525,29 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         return .available(isCached: true)
     }
 
+    private func refreshNextLessonService() {
+        let orderedSections = self.currentSections.values.sorted(by: { $0.position < $1.position })
+        self.nextLessonService.configure(with: orderedSections)
+    }
+
+    private func askForUnitPresentation(_ unit: Unit) {
+        // Check whether unit is in exam section
+        if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
+            section.isExam, section.isReachable {
+            self.moduleOutput?.presentExamLesson()
+            return
+        }
+
+        self.moduleOutput?.presentLesson(
+            in: unit,
+            navigationDelegate: self,
+            navigationRules: (
+                prev: self.nextLessonService.findPreviousUnit(for: unit) != nil,
+                next: self.nextLessonService.findNextUnit(for: unit) != nil
+            )
+        )
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
     }
@@ -585,5 +609,25 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
                 )
             }
         }
+    }
+}
+
+extension CourseInfoTabSyllabusInteractor: SectionNavigationDelegate {
+    func didRequestPreviousUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
+        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
+              let previousUnit = self.nextLessonService.findPreviousUnit(for: unit) as? Unit else {
+            return
+        }
+
+        self.askForUnitPresentation(previousUnit)
+    }
+
+    func didRequestNextUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
+        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
+              let nextUnit = self.nextLessonService.findNextUnit(for: unit) as? Unit else {
+            return
+        }
+
+        self.askForUnitPresentation(nextUnit)
     }
 }

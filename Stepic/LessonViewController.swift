@@ -13,10 +13,19 @@ import SnapKit
 final class LessonLegacyAssembly: Assembly {
     private let initObjects: LessonInitObjects?
     private let initIDs: LessonInitIds?
+    private let navigationRules: LessonNavigationRules
+    private let navigationDelegate: SectionNavigationDelegate
 
-    init(initObjects: LessonInitObjects?, initIDs: LessonInitIds?) {
+    init(
+        initObjects: LessonInitObjects?,
+        initIDs: LessonInitIds?,
+        navigationRules: LessonNavigationRules,
+        navigationDelegate: SectionNavigationDelegate
+    ) {
         self.initObjects = initObjects
         self.initIDs = initIDs
+        self.navigationRules = navigationRules
+        self.navigationDelegate = navigationDelegate
     }
 
     func makeModule() -> UIViewController {
@@ -26,11 +35,16 @@ final class LessonLegacyAssembly: Assembly {
 
         lessonVC.hidesBottomBarWhenPushed = true
         lessonVC.initObjects = self.initObjects
-        lessonVC.initIds = initIDs
+        lessonVC.initIds = self.initIDs
+
+        lessonVC.navigationRules = self.navigationRules
+        lessonVC.sectionNavigationDelegate = self.navigationDelegate
 
         return lessonVC
     }
 }
+
+typealias LessonNavigationRules = (prev: Bool, next: Bool)
 
 class LessonViewController: PagerController, ShareableController, LessonView {
 
@@ -38,7 +52,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
 
     weak var sectionNavigationDelegate: SectionNavigationDelegate?
 
-    var navigationRules : (prev: Bool, next: Bool)?
+    var navigationRules : LessonNavigationRules?
 
     fileprivate var presenter: LessonPresenter?
 

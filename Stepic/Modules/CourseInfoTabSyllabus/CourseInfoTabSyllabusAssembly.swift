@@ -39,7 +39,8 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             syllabusDownloadsInteractionService: SyllabusDownloadsInteractionService(
                 videoDownloadingService: VideoDownloadingService.shared
             ),
-            personalDeadlinesService: PersonalDeadlinesService()
+            personalDeadlinesService: PersonalDeadlinesService(),
+            nextLessonService: NextLessonService()
         )
         let viewController = CourseInfoTabSyllabusViewController(
             interactor: interactor

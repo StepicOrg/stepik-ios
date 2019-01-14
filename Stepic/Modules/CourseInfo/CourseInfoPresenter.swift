@@ -53,7 +53,9 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
         let viewModel = CourseInfo.ShowLesson.ViewModel(
             initObjects: initObjects,
-            initIDs: initIDs
+            initIDs: initIDs,
+            navigationRules: response.navigationRules,
+            navigationDelegate: response.navigationDelegate
         )
 
         self.viewController?.displayLesson(viewModel: viewModel)

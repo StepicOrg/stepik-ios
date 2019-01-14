@@ -118,8 +118,6 @@ class LastStepRouter {
 
             stepIdPromise.done { targetStepId in
                 lessonVC.initIds = (stepId: targetStepId, unitId: unit.id)
-                // FIXME: delegate
-                // lessonVC.sectionNavigationDelegate = unitsVC
 
                 SVProgressHUD.showSuccess(withStatus: "")
 
