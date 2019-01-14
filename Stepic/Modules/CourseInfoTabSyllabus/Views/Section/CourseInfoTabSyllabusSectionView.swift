@@ -36,6 +36,8 @@ extension CourseInfoTabSyllabusSectionView {
         let progressViewHeight: CGFloat = 3
         let progressViewMainColor = UIColor.stepicGreen
         let progressViewSecondaryColor = UIColor.clear
+
+        let tapProxyViewSize = CGSize(width: 60, height: 60)
     }
 }
 
@@ -57,6 +59,8 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         label.numberOfLines = 2
         return label
     }()
+
+    private lazy var downloadButtonTapProxyView = TapProxyView(targetView: self.downloadButton)
 
     private lazy var downloadButton: DownloadControlView = {
         let view = DownloadControlView(initialState: .readyToDownloading)
@@ -192,6 +196,7 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.textStackView.addArrangedSubview(self.examLabel)
         self.addSubview(self.textStackView)
 
+        self.addSubview(self.downloadButtonTapProxyView)
         self.addSubview(self.downloadButton)
         self.addSubview(self.deadlinesView)
 
@@ -227,6 +232,12 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
             make.size.equalTo(self.appearance.downloadButtonSize)
             make.trailing.equalToSuperview().offset(-self.appearance.downloadButtonInsets.right)
             make.centerY.equalTo(self.textStackView.snp.centerY)
+        }
+
+        self.downloadButtonTapProxyView.translatesAutoresizingMaskIntoConstraints = false
+        self.downloadButtonTapProxyView.snp.makeConstraints { make in
+            make.size.equalTo(self.appearance.tapProxyViewSize)
+            make.center.equalTo(self.downloadButton.snp.center)
         }
 
         self.textStackView.translatesAutoresizingMaskIntoConstraints = false
