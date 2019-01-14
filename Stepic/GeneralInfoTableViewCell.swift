@@ -59,11 +59,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
         } else {
             joinButton.setStepicGreenStyle()
 
-            var joinTitle = NSLocalizedString("WidgetButtonJoin", comment: "")
-            if JoinCourseStringSplitTest.shouldParticipate {
-                let joinSplitTest = splitTestingService.fetchSplitTest(JoinCourseStringSplitTest.self)
-                joinTitle = joinSplitTest.currentGroup.joinText
-            }
+            let joinTitle = NSLocalizedString("WidgetButtonJoin", comment: "")
             joinButton.setTitle(joinTitle, for: .normal)
         }
     }

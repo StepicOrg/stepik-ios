@@ -1,19 +1,18 @@
 //
-//  JoinCourseStringSplitTest.swift
-//  Stepic
+// RetentionLocalNotificationsSplitTest.swift
+// stepik-ios
 //
-//  Created by Ostrenkiy on 26/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
+// Created by Ivan Magda on 2018-12-11.
+// Copyright 2018 Stepik. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-final class JoinCourseStringSplitTest: SplitTestProtocol {
+final class RetentionLocalNotificationsSplitTest: SplitTestProtocol {
     typealias GroupType = Group
 
-    static let identifier = "join_course_string"
-    static let minParticipatingStartVersion = "1.71"
+    static let identifier = "retention_local_notification"
+    static let minParticipatingStartVersion = "1.74"
 
     var currentGroup: Group
     var analytics: ABAnalyticsServiceProtocol
@@ -29,12 +28,12 @@ final class JoinCourseStringSplitTest: SplitTestProtocol {
 
         static var groups: [Group] = [.control, .test]
 
-        var joinText: String {
+        var shouldReceiveNotifications: Bool {
             switch self {
             case .control:
-                return NSLocalizedString("WidgetButtonJoin", comment: "")
+                return false
             case .test:
-                return NSLocalizedString("WidgetButtonJoinTest", comment: "")
+                return true
             }
         }
     }

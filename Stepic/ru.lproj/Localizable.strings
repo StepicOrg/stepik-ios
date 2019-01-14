@@ -340,9 +340,6 @@ CatalogPlaceholderError = "Не удалось загрузить каталог
 TrendingTopics = "Категории";
 
 WidgetButtonJoin = "Поступить";
-/* a/b */
-WidgetButtonJoinTest = "Учиться";
-
 WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";
@@ -453,6 +450,11 @@ CourseInfoTitleTimeToComplete = "Время прохождения курса";
 CourseInfoTitleLanguage = "Язык";
 CourseInfoTitleCertificate = "Сертификат";
 CourseInfoTitleCertificateDetails = "Подробнее о сертификате";
+
+RetentionNotificationOnNextDayTitle = "Не сбавляем темп";
+RetentionNotificationOnNextDayText = "Удалось поучиться вчера - это хороший повод зайти сегодня и стать еще умнее! 🚀";
+RetentionNotificationOnThirdDayTitle = "Иссякла тяга к знаниям? 🤔";
+RetentionNotificationOnThirdDayText = "Тебя подозрительно давно не было. Заходи и становись умнее! 💡";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_ru";

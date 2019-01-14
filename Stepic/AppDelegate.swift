@@ -18,7 +18,6 @@ import FBSDKCoreKit
 import YandexMobileMetrica
 import Presentr
 import PromiseKit
-import AppsFlyerLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
+    private let notificationsService = NotificationsService()
+    private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+    private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -98,8 +104,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
-        NotificationsService().handleLaunchOptions(launchOptions)
+        self.notificationsService.handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
+        self.notificationPermissionStatusSettingsObserver.observe()
 
         self.checkNotificationsCount()
 
@@ -110,6 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil
         )
         self.didChangeOrientation()
+
+        self.branchService.setup(launchOptions: launchOptions)
 
         return true
     }
@@ -122,7 +131,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
-        AppsFlyerTracker.shared().trackAppLaunch()
+        self.notificationsService.removeRetentionNotifications()
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        let retentionSplitTest = self.splitTestingService.fetchSplitTest(
+            RetentionLocalNotificationsSplitTest.self
+        )
+        let shouldParticipate = RetentionLocalNotificationsSplitTest.shouldParticipate
+        let shouldReceiveNotifications = retentionSplitTest.currentGroup.shouldReceiveNotifications
+
+        if shouldParticipate && shouldReceiveNotifications {
+            self.notificationsService.scheduleRetentionNotifications()
+        }
     }
 
     // MARK: - Downloading Data in the Background
@@ -156,12 +177,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any]
     ) {
-        NotificationsService().handleRemoteNotification(with: userInfo)
+        self.notificationsService.handleRemoteNotification(with: userInfo)
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        NotificationsService().handleLocalNotification(with: notification.userInfo)
+        self.notificationsService.handleLocalNotification(with: notification.userInfo)
     }
 
     func application(
@@ -198,7 +219,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
-                self.handleOpenedFromDeepLink(url)
+                if branchService.canOpenWithBranch(url: url) {
+                    branchService.continueUserActivity(userActivity)
+                } else {
+                    self.handleOpenedFromDeepLink(url)
+                }
                 return true
             }
         }
@@ -222,7 +247,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"
-           || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+               || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 
@@ -241,8 +266,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topViewController.route(from: .social, to: .email(email: email))
             }
         } else {
-            // Other actions
-            self.handleOpenedFromDeepLink(url)
+            if branchService.canOpenWithBranch(url: url) {
+                branchService.openURL(app: app, open: url, options: options)
+            } else {
+                // Other actions
+                self.handleOpenedFromDeepLink(url)
+            }
         }
 
         return true
@@ -252,6 +281,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func handleOpenedFromDeepLink(_ url: URL) {
         let deepLinkRoutingService = DeepLinkRoutingService()
+
         DispatchQueue.main.async {
             deepLinkRoutingService.route(path: url.absoluteString)
         }

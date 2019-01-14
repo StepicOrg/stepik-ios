@@ -213,7 +213,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }, error: {})
         }
 
-        if didJustSubscribe {
+        if self.didJustSubscribe {
             NotificationPermissionStatus.current.done { status in
                 if status == .notDetermined {
                     self.notificationsRegistrationService.registerForRemoteNotifications()
@@ -262,7 +262,11 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
             //TODO: Handle error type in section downloading
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
-                self.emptyDatasetState = EmptyDatasetState.connectionError
+
+                if self.course.sections.isEmpty {
+                    self.emptyDatasetState = .connectionError
+                }
+
                 self.tableView.reloadData()
                 if let m = self.moduleId {
                     if (1...self.course.sectionsArray.count ~= m) && self.isReachable(section: m - 1) {

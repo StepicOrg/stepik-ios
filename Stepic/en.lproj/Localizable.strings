@@ -339,9 +339,6 @@ CatalogPlaceholderError = "Could not load catalog. <b>Press</b> to retry.";
 TrendingTopics = "Trending topics";
 
 WidgetButtonJoin = "Join";
-/* a/b */
-WidgetButtonJoinTest = "Learn";
-
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
@@ -451,6 +448,11 @@ CourseInfoTitleTimeToComplete = "Expected time to complete";
 CourseInfoTitleLanguage = "Language";
 CourseInfoTitleCertificate = "Certificate";
 CourseInfoTitleCertificateDetails = "Certificate details";
+
+RetentionNotificationOnNextDayTitle = "Don't slow down";
+RetentionNotificationOnNextDayText = "You've done a great job learning yesterday, come back today and become smarter! 🚀";
+RetentionNotificationOnThirdDayTitle = "Lost your thirst to knowledge? 🤔";
+RetentionNotificationOnThirdDayText = "You haven't been here for a suspiciously long time. Come back and become smarter! 💡";
 
 /* Arts */
 ArtCustomizeLearningProcess = "art_customize_learning_process_en";

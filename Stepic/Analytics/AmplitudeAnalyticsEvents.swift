@@ -12,10 +12,16 @@ struct AmplitudeAnalyticsEvents {
     struct Launch {
         static var firstTime = AnalyticsEvent(name: "Launch first time")
 
-        static func sessionStart(notificationType: String? = nil) -> AnalyticsEvent {
+        static func sessionStart(
+            notificationType: String? = nil,
+            sinceLastSession: TimeInterval
+        ) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Session start",
-                parameters: notificationType == nil ? nil : ["notification_type": notificationType!]
+                parameters: [
+                    "notification_type": notificationType as Any,
+                    "seconds_since_last_session": sinceLastSession
+                ]
             )
         }
     }
@@ -171,9 +177,18 @@ struct AmplitudeAnalyticsEvents {
     struct Notifications {
         static var screenOpened = AnalyticsEvent(name: "Notifications screen opened")
 
-        static func received(notificationType: String) -> AnalyticsEvent {
+        static func receivedForeground(notificationType: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Foreground notification received",
+                parameters: [
+                    "notification_type": notificationType
+                ]
+            )
+        }
+
+        static func receivedInactive(notificationType: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Inactive notification received",
                 parameters: [
                     "notification_type": notificationType
                 ]
@@ -218,6 +233,34 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
+        static func preferencesAlertShown(source: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences notification alert shown",
+                parameters: [
+                    "source": source
+                ]
+            )
+        }
+
+        static func preferencesAlertInteracted(source: String, result: InteractionResult) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences notification alert interacted",
+                parameters: [
+                    "source": source,
+                    "result": result.rawValue
+                ]
+            )
+        }
+
+        static func preferencesPushPermissionChanged(result: InteractionResult) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Preferences push permission changed",
+                parameters: [
+                    "result": result.rawValue
+                ]
+            )
+        }
+
         enum InteractionResult: String {
             case yes
             case no
@@ -230,6 +273,7 @@ struct AmplitudeAnalyticsEvents {
 
     struct Catalog {
         static var opened = AnalyticsEvent(name: "Catalog screen opened")
+
         struct Category {
             static func opened(categoryID: Int, categoryNameEn: String) -> AnalyticsEvent {
                 return AnalyticsEvent(
@@ -275,6 +319,30 @@ struct AmplitudeAnalyticsEvents {
                 name: "Achievements screen opened",
                 parameters: [
                     "is_personal": isPersonal
+                ]
+            )
+        }
+
+        static func popupOpened(source: String, kind: String, level: Int? = nil) -> AnalyticsEvent {
+            return popupEvent(name: "Achievement popup opened", source: source, kind: kind, level: level)
+        }
+
+        static func popupShared(source: String, kind: String, level: Int? = nil) -> AnalyticsEvent {
+            return popupEvent(name: "Achievement share pressed", source: source, kind: kind, level: level)
+        }
+
+        private static func popupEvent(
+            name: String,
+            source: String,
+            kind: String,
+            level: Int? = nil
+        ) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: name,
+                parameters: [
+                    "source": source,
+                    "achievement_kind": kind,
+                    "achievement_level": level as Any
                 ]
             )
         }

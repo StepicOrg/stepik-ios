@@ -8,8 +8,7 @@
 
 import Foundation
 
-class DeepLinkRouter {
-
+final class DeepLinkRouter {
     static var window: UIWindow? {
         return (UIApplication.shared.delegate as? AppDelegate)?.window
     }
@@ -77,8 +76,7 @@ class DeepLinkRouter {
     }
 
     static func routeFromDeepLink(url: URL, presentFrom presentationSource: UIViewController? = nil, isModal: Bool = false, withDelay: Bool = true) {
-        DeepLinkRouter.routeFromDeepLink(url, completion: {
-            controllers in
+        DeepLinkRouter.routeFromDeepLink(url, completion: { controllers in
             let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
             if controllers.count > 0 {
                 let openBlock = {
@@ -100,13 +98,23 @@ class DeepLinkRouter {
                 guard let source = presentationSource ?? navigation?.topViewController else {
                     return
                 }
-                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: source, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+
+                guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
+                    return
+                }
+
+                WebControllerManager.sharedManager.presentWebControllerWithURL(
+                    url,
+                    inController: source,
+                    withKey: "external link",
+                    allowsSafari: true,
+                    backButtonStyle: .close
+                )
             }
         })
     }
 
     static func routeFromDeepLink(_ link: URL, completion: @escaping ([UIViewController]) -> Void) {
-
         func getID(_ stringId: String, reversed: Bool) -> Int? {
             var slugString = ""
             let string = reversed ? String(stringId.reversed()) : stringId
@@ -161,7 +169,6 @@ class DeepLinkRouter {
             }
 
             if components.count == 4 && components[3].lowercased().contains("syllabus") {
-
                 if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false), let queryItems = urlComponents.queryItems {
                     if let module = queryItems.filter({ item in item.name == "module" }).first?.value! {
                         if let moduleInt = Int(module) {
@@ -238,16 +245,17 @@ class DeepLinkRouter {
 
     static func routeToStepWithId(_ stepId: Int, lessonId: Int, completion: @escaping ([UIViewController]) -> Void) {
         let router = StepsControllerDeepLinkRouter()
-        router.getStepsViewControllerFor(step: stepId, inLesson: lessonId, success: {
-                vc in
+        router.getStepsViewControllerFor(
+            step: stepId,
+            inLesson: lessonId,
+            success: { vc in
                 completion([vc])
-            }, error: {
-                errorMsg in
+            },
+            error: { errorMsg in
                 print(errorMsg)
                 completion([])
             }
         )
-
     }
 
     static func routeToDiscussionWithId(_ lessonId: Int, stepId: Int, discussionId: Int, completion: @escaping ([UIViewController]) -> Void) {

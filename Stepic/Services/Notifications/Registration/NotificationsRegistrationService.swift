@@ -58,6 +58,8 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         } else {
             self.postCurrentPermissionStatus()
         }
+
+        self.updatePushPermissionStatusUserProperty()
     }
 
     // MARK: - Register -
@@ -78,10 +80,6 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     /// If the `forceToRequestAuthorization` parameter is `true` then the user will be prompted for
     /// notifications permissions directly otherwise firstly will check if has granted permissions.
     private func register(forceToRequestAuthorization: Bool) {
-        guard AuthInfo.shared.isAuthorized else {
-            return
-        }
-
         self.postCurrentPermissionStatus()
 
         if forceToRequestAuthorization {
@@ -92,14 +90,10 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     private func registerIfAuthorized() {
-        if #available(iOS 10.0, *) {
-            NotificationPermissionStatus.current.done { status in
-                if status.isRegistered {
-                    self.register()
-                }
+        NotificationPermissionStatus.current.done { status in
+            if status.isRegistered {
+                self.register()
             }
-        } else {
-            self.register()
         }
     }
 
@@ -112,13 +106,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             return
         }
 
-        let isDelegateAllow = self.delegate?.notificationsRegistrationService(self,
-            shouldPresentAlertFor: .permission) ?? false
-        let shouldPresentCustomPermissionAlert = self.presenter != nil && isDelegateAllow
-
-        if shouldPresentCustomPermissionAlert {
-            self.presentPermissionAlert()
-        } else if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, *) {
             NotificationPermissionStatus.current.done { status in
                 if status == .denied {
                     self.presentSettingsAlertIfNeeded()
@@ -154,6 +142,8 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                     } else if let error = error {
                         print("NotificationsRegistrationService: did fail request authorization with error: \(error)")
                     }
+
+                    self.updatePushPermissionStatusUserProperty()
                 }
             )
         } else {
@@ -172,11 +162,19 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         }
     }
 
+    private func updatePushPermissionStatusUserProperty() {
+        NotificationPermissionStatus.current.done { permissionStatus in
+            AnalyticsUserProperties.shared.setPushPermissionStatus(permissionStatus)
+        }
+    }
+
     private func presentPermissionAlertIfNeeded() {
-        if self.didShowDefaultPermissionAlert || self.presenter == nil {
-            self.requestAuthorization()
+        if let delegate = self.delegate {
+            if delegate.notificationsRegistrationService(self, shouldPresentAlertFor: .permission) {
+                self.presentPermissionAlert()
+            }
         } else {
-            self.presentPermissionAlert()
+            self.requestAuthorization()
         }
     }
 
@@ -195,6 +193,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             self.analytics?.reportCustomAlertInteractionResult(.no)
         }
 
+        self.analytics?.reportCustomAlertShown()
         self.presentAlert(for: .permission)
     }
 
@@ -210,16 +209,26 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
 
     private func presentSettingsAlert() {
         self.presenter?.onPositiveCallback = {
-            self.analytics?.reportCustomAlertInteractionResult(.yes)
+            self.analytics?.reportPreferencesAlertInteractionResult(.yes)
 
-            if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
-                UIApplication.shared.openURL(settingsURL)
+            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                NotificationCenter.default.post(name: .notificationsRegistrationServiceWillOpenSettings, object: nil)
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsURL)
+                } else {
+                    UIApplication.shared.openURL(settingsURL)
+                }
             }
         }
         self.presenter?.onCancelCallback = {
-            self.analytics?.reportCustomAlertInteractionResult(.no)
+            self.analytics?.reportPreferencesAlertInteractionResult(.no)
         }
 
+        self.analytics?.reportPreferencesAlertShown()
         self.presentAlert(for: .settings)
     }
 
@@ -387,4 +396,11 @@ extension NotificationsRegistrationService {
             )
         }
     }
+}
+
+// MARK: - NotificationsRegistrationService (NotificationCenter) -
+
+extension Foundation.Notification.Name {
+    static let notificationsRegistrationServiceWillOpenSettings = Foundation.Notification
+        .Name("notificationsRegistrationServiceWillOpenSettings")
 }

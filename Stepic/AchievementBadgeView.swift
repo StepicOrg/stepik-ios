@@ -9,6 +9,8 @@
 import UIKit
 
 struct AchievementViewData {
+    let id: String
+
     let title: String
     let description: String
 
@@ -186,18 +188,18 @@ class AchievementBadgeView: UIView {
     }
 
     private func updateProgress() {
-        if let data = data {
+        if let data = self.data {
             if data.isLocked {
-                circleView.alpha = 0.3
-                circleViewGradientLayer?.isHidden = true
+                self.circleView.alpha = 0.3
+                self.circleViewGradientLayer?.isHidden = true
             } else {
-                circleView.alpha = 1.0
-                circleViewGradientLayer?.isHidden = false
+                self.circleView.alpha = 1.0
+                self.circleViewGradientLayer?.isHidden = false
             }
 
-            initStageProgress(value: Float(data.score) / Float(data.maxScore))
-            badgeImageView.image = data.badge
-            initLevelProgress(completedLevel: data.completedLevel, maxLevel: data.maxLevel)
+            self.initStageProgress(value: Float(data.score) / Float(data.maxScore))
+            self.badgeImageView.image = data.badge
+            self.initLevelProgress(completedLevel: data.completedLevel, maxLevel: data.maxLevel)
         }
     }
 

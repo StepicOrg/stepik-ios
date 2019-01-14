@@ -1,4 +1,4 @@
-In the new version of Stepik we fixed some bugs and updated app icon.
+In the new version of Stepik we fixed some bugs with notifications.
 
 Enjoy learning!
 Stepik team

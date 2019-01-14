@@ -35,9 +35,7 @@ def all_pods
     pod 'FirebaseRemoteConfig', '3.0.1'
 
     pod 'Amplitude-iOS', '4.3.0'
-    
-    pod 'AppsFlyerFramework', '4.8.8'
-    
+        
     pod 'BEMCheckBox', '1.4.1'
 
     # actual version - 6.x, we should test it before update
@@ -60,12 +58,13 @@ def all_pods
     pod 'lottie-ios', '2.5.0'
     pod 'Koloda', '4.3.1'
     pod 'Charts', '3.1.1'
-    pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
+    pod 'EasyTipView', '2.0.1'
     pod 'ActionSheetPicker-3.0', '2.3.0'
     pod 'NotificationBannerSwift', '1.6.3'
     pod 'Nuke', '7.3.2'
     pod 'STRegex', '1.1.0'
     pod 'Pageboy', '3.0.1' 
+    pod 'Branch', '0.25.5'
 end
 
 def testing_pods

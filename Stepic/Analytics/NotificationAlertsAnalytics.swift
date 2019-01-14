@@ -41,6 +41,21 @@ struct NotificationAlertsAnalytics {
         ).send()
     }
 
+    func reportPreferencesAlertShown() {
+        AmplitudeAnalyticsEvents.Notifications.preferencesAlertShown(
+            source: self.source.description
+        ).send()
+    }
+
+    func reportPreferencesAlertInteractionResult(
+        _ result: AmplitudeAnalyticsEvents.Notifications.InteractionResult
+    ) {
+        AmplitudeAnalyticsEvents.Notifications.preferencesAlertInteracted(
+            source: self.source.description,
+            result: result
+        ).send()
+    }
+
     enum Source {
         case streakControl
         case notificationsTab
@@ -48,6 +63,7 @@ struct NotificationAlertsAnalytics {
         case streakAfterLogin
         case streakAfterSubmission(shownCount: Int)
         case personalDeadline
+        case onboarding
 
         var description: String {
             switch self {
@@ -63,6 +79,8 @@ struct NotificationAlertsAnalytics {
                 return "streak after submission - \(shownCount)"
             case .personalDeadline:
                 return "create personal deadline"
+            case .onboarding:
+                return "onboarding"
             }
         }
     }

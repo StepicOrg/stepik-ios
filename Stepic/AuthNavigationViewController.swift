@@ -42,9 +42,14 @@ final class AuthNavigationViewController: UINavigationController {
         }
 
         self.userActivitiesAPI.retrieve(user: userId).done { userActivity in
-            if userActivity.didSolveThisWeek
-                   && self.notificationSuggestionManager.canShowAlert(context: .streak, after: .login) {
-                self.streaksAlertPresentationManager.suggestStreak(streak: userActivity.currentStreak)
+            let canShowAlert = self.notificationSuggestionManager.canShowAlert(
+                context: .streak,
+                after: .login
+            )
+            if canShowAlert && userActivity.didSolveThisWeek {
+                self.streaksAlertPresentationManager.suggestStreak(
+                    streak: userActivity.currentStreak
+                )
             }
         }.catch { error in
             print("\(#file) \(#function) \(error)")

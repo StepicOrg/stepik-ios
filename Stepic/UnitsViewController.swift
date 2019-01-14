@@ -38,7 +38,13 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection), for: .connectionError)
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { self.refresh() }
+            ),
+            for: .connectionError
+        )
 
         updateTitle()
         self.navigationItem.backBarButtonItem?.title = " "
@@ -258,7 +264,9 @@ class UnitsViewController: UIViewController, ShareableController, UIViewControll
         }, error: {
             UIThread.performUI({
                 self.refreshControl.endRefreshing()
-                self.emptyDatasetState = EmptyDatasetState.connectionError
+                if self.section?.units.isEmpty ?? true {
+                    self.emptyDatasetState = .connectionError
+                }
             })
             self.didRefresh = true
         })

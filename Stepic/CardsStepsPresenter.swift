@@ -118,7 +118,22 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         return true
     }
 
-    init(stepsAPI: StepsAPI, lessonsAPI: LessonsAPI, recommendationsAPI: RecommendationsAPI, unitsAPI: UnitsAPI, viewsAPI: ViewsAPI, ratingsAPI: AdaptiveRatingsAPI, ratingManager: AdaptiveRatingManager, statsManager: AdaptiveStatsManager, storageManager: AdaptiveStorageManager, lastViewedUpdater: LocalProgressLastViewedUpdater, notificationSuggestionManager: NotificationSuggestionManager, notificationsRegistrationService: NotificationsRegistrationServiceProtocol, course: Course?, view: CardsStepsView) {
+    init(
+        stepsAPI: StepsAPI,
+        lessonsAPI: LessonsAPI,
+        recommendationsAPI: RecommendationsAPI,
+        unitsAPI: UnitsAPI,
+        viewsAPI: ViewsAPI,
+        ratingsAPI: AdaptiveRatingsAPI,
+        ratingManager: AdaptiveRatingManager,
+        statsManager: AdaptiveStatsManager,
+        storageManager: AdaptiveStorageManager,
+        lastViewedUpdater: LocalProgressLastViewedUpdater,
+        notificationSuggestionManager: NotificationSuggestionManager,
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        course: Course?,
+        view: CardsStepsView
+    ) {
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
         self.recommendationsAPI = recommendationsAPI

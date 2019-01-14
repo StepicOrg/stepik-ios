@@ -44,13 +44,16 @@ class AchievementsListPresenter {
                     return nil
                 }
 
-                return AchievementViewData(title: kindDescription.getName(),
+                return AchievementViewData(
+                    id: kindDescription.rawValue,
+                    title: kindDescription.getName(),
                     description: kindDescription.getDescription(for: data.maxScore),
                     badge: kindDescription.getBadge(for: data.currentLevel),
                     completedLevel: data.currentLevel,
                     maxLevel: data.maxLevel,
                     score: data.currentScore,
-                    maxScore: data.maxScore)
+                    maxScore: data.maxScore
+                )
             }
 
             self?.view?.set(achievements: viewData.sorted(by: { a, b in

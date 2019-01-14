@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class AchievementPopupViewController: UIViewController {
+final class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var achievementNameLabel: UILabel!
     @IBOutlet weak var achievementDescriptionLabel: UILabel!
     @IBOutlet weak var achievementBadgeImageView: UIImageView!
@@ -17,16 +17,22 @@ class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var shareButton: StepikButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var separatorView: UIView!
 
     var widthConstraint: NSLayoutConstraint?
 
     var data: AchievementViewData?
     var canShare: Bool = true
+    var source: Source = .notification
 
     @IBAction func onShareButtonClick(_ sender: Any) {
         guard let data = data else {
             return
         }
+
+        AmplitudeAnalyticsEvents.Achievements.popupShared(
+            source: self.source.rawValue, kind: data.id, level: data.completedLevel
+        ).send()
 
         let activityVC = UIActivityViewController(activityItems: [String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(data.title)")], applicationActivities: nil)
         activityVC.excludedActivityTypes = [UIActivityType.airDrop]
@@ -56,20 +62,30 @@ class AchievementPopupViewController: UIViewController {
     }
 
     private func update(with data: AchievementViewData) {
-        achievementNameLabel.text = data.title
-        achievementDescriptionLabel.text = data.description
-        achievementBadgeImageView.image = data.badge
+        self.achievementNameLabel.text = data.title
+        self.achievementDescriptionLabel.text = data.description
+        self.achievementBadgeImageView.image = data.badge
 
         if data.completedLevel == data.maxLevel {
-            progressLabel.alpha = 0.0
+            self.progressLabel.alpha = 0.0
         } else {
-            progressLabel.text = String(format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.maxScore - data.score)")
+            self.progressLabel.text = String(
+                format: NSLocalizedString("AchievementsNextLevel", comment: ""), "\(data.maxScore - data.score)"
+            )
         }
 
         if data.isLocked {
-            levelLabel.text = NSLocalizedString("AchievementsLevelNotObtained", comment: "")
+            self.levelLabel.text = NSLocalizedString("AchievementsLevelNotObtained", comment: "")
         } else {
-            levelLabel.text = String(format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.completedLevel)", "\(data.maxLevel)")
+            self.levelLabel.text = String(
+                format: NSLocalizedString("AchievementsLevel", comment: ""), "\(data.completedLevel)", "\(data.maxLevel)"
+            )
         }
+    }
+
+    enum Source: String {
+        case profile
+        case achievementList = "achievement-list"
+        case notification
     }
 }
