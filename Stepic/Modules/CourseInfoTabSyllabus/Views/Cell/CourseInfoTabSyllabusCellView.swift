@@ -30,6 +30,9 @@ extension CourseInfoTabSyllabusCellView {
         let progressViewSecondaryColor = UIColor.clear
 
         let tapProxyViewSize = CGSize(width: 60, height: 60)
+
+        let enabledStateAlpha: CGFloat = 1.0
+        let disabledStateAlpha: CGFloat = 0.5
     }
 }
 
@@ -93,6 +96,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
         guard let viewModel = viewModel else {
             // Reset data (now it's only title)
             self.titleLabel.text = nil
+            self.updateEnabledAppearance(isEnabled: true)
             return
         }
 
@@ -105,6 +109,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
         self.statsView.likesCount = viewModel.likesCount
 
         self.updateDownloadState(newState: viewModel.downloadState)
+        self.updateEnabledAppearance(isEnabled: viewModel.isSelectable)
     }
 
     func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
@@ -121,6 +126,12 @@ final class CourseInfoTabSyllabusCellView: UIView {
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .downloading(progress: progress)
         }
+    }
+
+    func updateEnabledAppearance(isEnabled: Bool) {
+        self.alpha = isEnabled
+            ? self.appearance.enabledStateAlpha
+            : self.appearance.disabledStateAlpha
     }
 
     func showLoading() {
