@@ -40,7 +40,8 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
                 videoDownloadingService: VideoDownloadingService.shared
             ),
             personalDeadlinesService: PersonalDeadlinesService(),
-            nextLessonService: NextLessonService()
+            nextLessonService: NextLessonService(),
+            tooltipStorageManager: TooltipStorageManager()
         )
         let viewController = CourseInfoTabSyllabusViewController(
             interactor: interactor

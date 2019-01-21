@@ -26,6 +26,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     let syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol
     let personalDeadlinesService: PersonalDeadlinesServiceProtocol
     let nextLessonService: NextLessonServiceProtocol
+    let tooltipStorageManager: TooltipStorageManagerProtocol
 
     private var currentCourse: Course?
     private var currentSections: [UniqueIdentifierType: Section] = [:] {
@@ -66,13 +67,15 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         videoFileManager: VideoStoredFileManagerProtocol,
         syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
-        nextLessonService: NextLessonServiceProtocol
+        nextLessonService: NextLessonServiceProtocol,
+        tooltipStorageManager: TooltipStorageManagerProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.videoFileManager = videoFileManager
         self.personalDeadlinesService = personalDeadlinesService
         self.nextLessonService = nextLessonService
+        self.tooltipStorageManager = tooltipStorageManager
 
         self.syllabusDownloadsInteractionService = syllabusDownloadsInteractionService
         self.syllabusDownloadsInteractionService.delegate = self
@@ -106,18 +109,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                     if isOnline && !strongSelf.didLoadFromNetwork {
                         strongSelf.didLoadFromNetwork = true
-
-                        // Update syllabus header
-                        let isPersonalDeadlinesAvailable = strongSelf.personalDeadlinesService.canAddDeadlines(
-                            in: course
-                        ) || strongSelf.personalDeadlinesService.hasDeadlines(in: course)
-                        strongSelf.presenter.presentCourseSyllabusHeader(
-                            response: .init(
-                                isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
-                                isDownloadAllAvailable: false
-                            )
-                        )
-
+                        strongSelf.updateSyllabusHeader()
                         strongSelf.sectionFetchSemaphore.signal()
                     }
                 }
@@ -230,6 +222,26 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     // MARK: Private methods
+
+    private func updateSyllabusHeader() {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(
+            in: course
+        ) || self.personalDeadlinesService.hasDeadlines(in: course)
+
+        self.presenter.presentCourseSyllabusHeader(
+            response: .init(
+                isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
+                isDownloadAllAvailable: false,
+                isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton
+            )
+        )
+
+        self.tooltipStorageManager.didShowOnPersonalDeadlinesButton = true
+    }
 
     private func cancelDownloading(unit: Unit) {
         // TODO: implement

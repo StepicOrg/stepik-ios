@@ -100,6 +100,7 @@ enum CourseInfoTabSyllabus {
         struct Response {
             let isPersonalDeadlinesAvailable: Bool
             let isDownloadAllAvailable: Bool
+            let isPersonalDeadlinesTooltipVisible: Bool
         }
 
         struct ViewModel {

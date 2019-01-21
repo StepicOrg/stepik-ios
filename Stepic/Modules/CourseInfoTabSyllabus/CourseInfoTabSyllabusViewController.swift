@@ -29,6 +29,8 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
 
     lazy var courseInfoTabSyllabusView = self.view as? CourseInfoTabSyllabusView
 
+    private lazy var personalDeadlinesTooltip = TooltipFactory.personalDeadlinesButton
+
     init(
         interactor: CourseInfoTabSyllabusInteractorProtocol,
         initialState: CourseInfoTabSyllabus.ViewControllerState = .loading
@@ -57,6 +59,23 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerProtocol {
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.UpdateSyllabusHeader.ViewModel) {
+        guard let courseInfoTabSyllabusView = self.courseInfoTabSyllabusView else {
+            return
+        }
+
+        if viewModel.data.isDeadlineButtonVisible && viewModel.data.isDeadlineTooltipVisible {
+            // Cause anchor parent should have correct layout
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) { [weak self] in
+                courseInfoTabSyllabusView.setNeedsLayout()
+                courseInfoTabSyllabusView.layoutIfNeeded()
+                self?.personalDeadlinesTooltip.show(
+                    direction: .up,
+                    in: courseInfoTabSyllabusView,
+                    from: courseInfoTabSyllabusView.deadlinesButtonTooltipAnchorView
+                )
+            }
+        }
+
         self.courseInfoTabSyllabusView?.configure(headerViewModel: viewModel.data)
     }
 

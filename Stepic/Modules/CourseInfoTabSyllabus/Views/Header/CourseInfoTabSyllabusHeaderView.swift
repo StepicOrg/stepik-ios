@@ -36,7 +36,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         return stackView
     }()
 
-    private lazy var calendarButton: UIControl = {
+    private lazy var calendarButton: ImageButton = {
         let button = ImageButton()
         button.image = UIImage(named: "course-info-syllabus-calendar")?.withRenderingMode(.alwaysTemplate)
         button.tintColor = self.appearance.buttonTintColor
@@ -87,6 +87,11 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         didSet {
             self.downloadAllButton.isEnabled = self.isDownloadAllButtonEnabled
         }
+    }
+
+    // Reference to tooltip-anchor view
+    var deadlinesButtonTooltipAnchorView: UIView {
+        return self.calendarButton.titleContentView
     }
 
     var onCalendarButtonClick: (() -> Void)?

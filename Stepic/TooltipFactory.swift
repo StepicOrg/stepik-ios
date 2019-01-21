@@ -32,4 +32,8 @@ struct TooltipFactory {
     static var codeEditorSettings: Tooltip {
         return EasyTipTooltip(text: NSLocalizedString("CodeEditorSettingsTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
     }
+
+    static var personalDeadlinesButton: Tooltip {
+        return EasyTipTooltip(text: NSLocalizedString("PersonalDeadlinesButtonTooltip", comment: ""), shouldDismissAfterTime: true, color: .standard)
+    }
 }

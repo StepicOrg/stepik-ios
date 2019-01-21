@@ -11,6 +11,7 @@ import Foundation
 struct CourseInfoTabSyllabusHeaderViewModel {
     let isDeadlineButtonVisible: Bool
     let isDownloadAllButtonEnabled: Bool
+    let isDeadlineTooltipVisible: Bool
 }
 
 struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {

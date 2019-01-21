@@ -82,8 +82,8 @@ extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
         if viewModel.shouldShowTooltip {
             // Cause anchor should be in true position
             DispatchQueue.main.async { [weak self] in
-                self?.continueCourseView?.setNeedsLayout()
-                self?.continueCourseView?.layoutIfNeeded()
+                continueCourseView.setNeedsLayout()
+                continueCourseView.layoutIfNeeded()
                 self?.continueLearningTooltip.show(
                     direction: .up,
                     in: continueCourseView,

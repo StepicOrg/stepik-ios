@@ -9,6 +9,20 @@
 import UIKit
 
 final class ImageButton: UIControl {
+    private lazy var iconImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.font
+        return label
+    }()
+
+    private var additionalVerticalOffset: CGFloat = 0.0
+
     var imageSize = CGSize(width: 15, height: 15) {
         didSet {
             self.setNeedsLayout()
@@ -63,19 +77,11 @@ final class ImageButton: UIControl {
         }
     }
 
-    private lazy var iconImageView: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.font
-        return label
-    }()
-
-    private var additionalVerticalOffset: CGFloat = 0.0
+    // To store private titleLabel
+    // but sometimes we want to get direct reference to title view
+    var titleContentView: UIView {
+        return self.titleLabel
+    }
 
     override var intrinsicContentSize: CGSize {
         let width = self.titleLabel.frame.maxX + self.titleInsets.right

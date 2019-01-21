@@ -80,6 +80,11 @@ final class CourseInfoTabSyllabusView: UIView {
         return tableView
     }()
 
+    // Reference to tooltip-anchor view
+    var deadlinesButtonTooltipAnchorView: UIView {
+        return self.headerView.deadlinesButtonTooltipAnchorView
+    }
+
     init(
         frame: CGRect = .zero,
         tableViewDelegate: (UITableViewDelegate & UITableViewDataSource),
