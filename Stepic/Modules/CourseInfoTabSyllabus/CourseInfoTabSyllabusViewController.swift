@@ -133,6 +133,8 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate
     }
 
     func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {
-
+        self.interactor.doDownloadButtonAction(
+            request: .init(type: .all)
+        )
     }
 }

@@ -63,6 +63,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         button.imageInsets = self.appearance.buttonImageInsets
         button.titleInsets = self.appearance.buttonTitleInsets
         button.imageSize = self.appearance.buttonImageSize
+        button.isEnabled = false
         button.addTarget(
             self,
             action: #selector(self.onDownloadAllButtonClicked),

@@ -188,8 +188,15 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
         }
 
-        // TODO: Handle all
-        func handleAll() { }
+        func handleAll() {
+            for (uid, section) in self.currentSections {
+                let sectionState = self.getDownloadingState(for: section)
+                if case .available(let isCached) = sectionState, !isCached {
+                    handleSection(id: uid)
+                }
+            }
+            self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
+        }
 
         switch request.type {
         case .all:
@@ -223,7 +230,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     // MARK: Private methods
 
-    private func updateSyllabusHeader() {
+    private func updateSyllabusHeader(shouldForceDisableDownloadAll: Bool = false) {
         guard let course = self.currentCourse else {
             return
         }
@@ -232,10 +239,17 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             in: course
         ) || self.personalDeadlinesService.hasDeadlines(in: course)
 
+        let isDownloadAllAvailable: Bool = {
+            if case .available(_) = self.getDownloadingStateForCourse() {
+                return true
+            }
+            return false
+        }() && !shouldForceDisableDownloadAll
+
         self.presenter.presentCourseSyllabusHeader(
             response: .init(
                 isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
-                isDownloadAllAvailable: false,
+                isDownloadAllAvailable: isDownloadAllAvailable,
                 isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton
             )
         )
@@ -490,6 +504,19 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
         // All videos are cached
         return .available(isCached: true)
+    }
+
+    private func getDownloadingStateForCourse() -> CourseInfoTabSyllabus.DownloadState {
+        let sectionStates = self.currentSections.values.map { self.getDownloadingState(for: $0) }
+
+        let containsUncachedSection = sectionStates.contains(where: { state in
+            if case .available(let isCached) = state {
+                return !isCached
+            }
+            return false
+        })
+
+        return containsUncachedSection ? .available(isCached: false) : .notAvailable
     }
 
     private func getDownloadingState(for section: Section) -> CourseInfoTabSyllabus.DownloadState {

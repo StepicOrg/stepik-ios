@@ -101,7 +101,7 @@ final class ImageButton: UIControl {
                 self.alpha = 0.3
             } else {
                 UIView.animate(withDuration: 0.25) {
-                    self.alpha = 1.0
+                    self.alpha = self.isEnabled ? 1.0 : 0.5
                 }
             }
         }
