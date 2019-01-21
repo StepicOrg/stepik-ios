@@ -42,10 +42,18 @@ final class CourseInfoAssembly: Assembly {
 
         let viewController = CourseInfoViewController(
             interactor: interactor,
+            availableTabs: self.getAvailableTabs(),
             initialTab: self.initialTab
         )
         presenter.viewController = viewController
 
         return viewController
+    }
+
+    private func getAvailableTabs() -> [CourseInfo.Tab] {
+        let adaptiveManager = AdaptiveStorageManager()
+        return adaptiveManager.canOpenInAdaptiveMode(courseId: self.courseID)
+            ? [.info]
+            : [.info, .syllabus]
     }
 }

@@ -37,7 +37,7 @@ final class CourseInfoViewController: UIViewController {
     private static let topBarAlphaStatusBarThreshold = 0.85
     private var lastTopBarAlpha: CGFloat = 0.0
 
-    private let tabs: [CourseInfo.Tab] = [.info, .syllabus]
+    private let availableTabs: [CourseInfo.Tab]
     private let initialTabIndex: Int
 
     let interactor: CourseInfoInteractorProtocol
@@ -63,10 +63,15 @@ final class CourseInfoViewController: UIViewController {
 
     private var shouldShowDropCourseAction = false
 
-    init(interactor: CourseInfoInteractorProtocol, initialTab: CourseInfo.Tab) {
+    init(
+        interactor: CourseInfoInteractorProtocol,
+        availableTabs: [CourseInfo.Tab] = [.info, .syllabus],
+        initialTab: CourseInfo.Tab
+    ) {
         self.interactor = interactor
+        self.availableTabs = availableTabs
 
-        if let initialTabIndex = self.tabs.firstIndex(of: initialTab) {
+        if let initialTabIndex = self.availableTabs.firstIndex(of: initialTab) {
             self.initialTabIndex = initialTabIndex
         } else {
             fatalError("View controller not supported given initial tab")
@@ -145,7 +150,7 @@ final class CourseInfoViewController: UIViewController {
             frame: UIScreen.main.bounds,
             pageControllerView: self.pageViewController.view,
             scrollDelegate: self,
-            tabsTitles: self.tabs.map { $0.title },
+            tabsTitles: self.availableTabs.map { $0.title },
             appearance: appearance
         )
         view.delegate = self
