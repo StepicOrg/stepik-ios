@@ -28,8 +28,6 @@ class SettingsPresenter {
         .contentLanguage,
         .adaptiveHeader,
         .adaptiveModeSwitch,
-        .emptyHeader,
-        .downloads,
         .logout
     ]
 

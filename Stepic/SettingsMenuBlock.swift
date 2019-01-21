@@ -17,9 +17,7 @@ enum SettingsMenuBlock: String {
     case adaptiveModeSwitch
     case codeEditorSettingsHeader
     case codeEditorSettings
-    case downloads
     case logout
-    case emptyHeader
     case languageSettingsHeader
     case contentLanguage
 }

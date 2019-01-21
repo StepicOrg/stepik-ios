@@ -67,10 +67,6 @@ class SettingsViewController: MenuViewController, SettingsView {
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("AdaptivePreferencesTitle", comment: ""))
         case .adaptiveModeSwitch:
             return buildAdaptiveModeSwitchBlock()
-        case .emptyHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: "")
-        case .downloads:
-            return buildDownloadsTransitionBlock()
         case .logout:
             return buildLogoutBlock()
         }
@@ -156,17 +152,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         return block
     }
 
-    private func buildDownloadsTransitionBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: SettingsMenuBlock.downloads.rawValue, title: NSLocalizedString("Downloads", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.navigateToDownloads()
-        }
-
-        return block
-    }
-
     private func buildLogoutBlock() -> TransitionMenuBlock {
         let block: TransitionMenuBlock = TransitionMenuBlock(id: SettingsMenuBlock.logout.rawValue, title: NSLocalizedString("Logout", comment: ""))
 
@@ -213,11 +198,6 @@ class SettingsViewController: MenuViewController, SettingsView {
             artView.width = size.width
         }
         artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
-    }
-
-    func navigateToDownloads() {
-        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
-        navigationController?.pushViewController(vc, animated: true)
     }
 
     func presentAuth() {
