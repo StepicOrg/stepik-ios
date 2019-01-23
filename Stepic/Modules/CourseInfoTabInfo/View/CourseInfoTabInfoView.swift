@@ -24,13 +24,6 @@ extension CourseInfoTabInfoView {
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
         let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
-
-        let actionButtonInsets = UIEdgeInsets(top: 0, left: 47, bottom: 32, right: 47)
-        let actionButtonHeight: CGFloat = 47
-        let actionButtonBackgroundColor = UIColor.stepicGreen
-        let actionButtonFont = UIFont.systemFont(ofSize: 14)
-        let actionButtonTextColor = UIColor.white
-        let actionButtonCornerRadius: CGFloat = 7
     }
 }
 
@@ -46,20 +39,6 @@ final class CourseInfoTabInfoView: UIView {
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.stackViewSpacing
         return stackView
-    }()
-
-    private lazy var actionButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = self.appearance.actionButtonBackgroundColor
-        button.titleLabel?.font = self.appearance.actionButtonFont
-        button.tintColor = self.appearance.actionButtonTextColor
-        button.layer.cornerRadius = self.appearance.actionButtonCornerRadius
-        button.addTarget(
-            self,
-            action: #selector(self.actionButtonClicked(sender:)),
-            for: .touchUpInside
-        )
-        return button
     }()
 
     init(
@@ -117,8 +96,6 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .language, message: viewModel.languageText)
         self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
         self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
-
-        self.addActionButton(title: viewModel.actionButtonTitle)
 
         // Redraw self cause geometry & sizes can be changed
         self.setNeedsLayout()
@@ -188,23 +165,6 @@ final class CourseInfoTabInfoView: UIView {
         instructorsView.configure(instructors: instructors)
 
         self.scrollableStackView.addArrangedView(instructorsView)
-    }
-
-    private func addActionButton(title: String) {
-        self.actionButton.setTitle(title, for: .normal)
-
-        let buttonContainer = UIView()
-        buttonContainer.translatesAutoresizingMaskIntoConstraints = false
-        self.actionButton.translatesAutoresizingMaskIntoConstraints = false
-        buttonContainer.addSubview(self.actionButton)
-
-        self.scrollableStackView.addArrangedView(buttonContainer)
-        self.actionButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.actionButtonHeight)
-            make.leading.top.trailing.bottom
-                .equalToSuperview()
-                .inset(self.appearance.actionButtonInsets)
-        }
     }
 }
 
