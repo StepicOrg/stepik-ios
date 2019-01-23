@@ -138,10 +138,10 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             print("course info tab syllabus interactor: start fetching section from network, id = \(section.id)")
             strongSelf.fetchSyllabusSection(section: section).done { response in
                 _ = strongSelf.sectionPresentSemaphore.wait(timeout: .now() + 0.5)
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async {
                     print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
-                    self?.presenter.presentCourseSyllabus(response: response)
-                    self?.sectionPresentSemaphore.signal()
+                    strongSelf.presenter.presentCourseSyllabus(response: response)
+                    strongSelf.sectionPresentSemaphore.signal()
                 }
             }.catch { _ in
                 // TODO: handle
