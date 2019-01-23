@@ -277,11 +277,25 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
 
             try? self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+
+            self.presenter.presentDownloadButtonUpdate(
+                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                    source: .unit(entity: unit),
+                    downloadState: self.getDownloadingState(for: unit)
+                )
+            )
         }
     }
 
     private func removeCached(section: Section) {
         section.units.forEach { self.removeCached(unit: $0) }
+
+        self.presenter.presentDownloadButtonUpdate(
+            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                source: .section(entity: section),
+                downloadState: self.getDownloadingState(for: section)
+            )
+        )
     }
 
     private func startDownloading(unit: Unit) {

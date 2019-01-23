@@ -83,6 +83,8 @@ protocol SyllabusDownloadsInteractionServiceProtocol: class {
 
     /// Download unit/section/course
     func startDownloading(cut: SyllabusCut)
+    /// Stop downloading for unit/section/course
+    func stopDownloading(cut: SyllabusCut)
 }
 
 /// Service stores tree-like structure of syllabus and manages all downloading operation
@@ -92,9 +94,9 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
     private var shouldSubscribeOnEvents = true
 
     /// Current downloads observed by service
-    private var currentDownloads: [DownloaderTaskProtocol.IDType: DownloadRecord] = [:]
-    /// List of created records
-    private var currentRecords: [DownloadRecord] = []
+    private var currentDownloads: [DownloaderTaskProtocol.IDType: DownloadTreeNode] = [:]
+    /// List of created nodes
+    private var currentTreeNodes: [DownloadTreeNode] = []
 
     weak var delegate: SyllabusDownloadsInteractionServiceDelegate? {
         didSet {
@@ -114,23 +116,23 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
 
     /// Download unit/section/course; target entity can be determined by observation level
     func startDownloading(cut: SyllabusCut) {
-        let observer: DownloadRecord.Observer = { [weak self] record in
+        let observer: DownloadTreeNode.Observer = { [weak self] node in
             guard let strongSelf = self else {
                 return
             }
 
-            switch record.state {
+            switch node.state {
             case .downloading(let progress):
                 strongSelf.delegate?.downloadsInteractionService(
                     strongSelf,
                     didReceiveProgress: progress,
-                    source: record.source
+                    source: node.source
                 )
             case .finished(let completed):
                 strongSelf.delegate?.downloadsInteractionService(
                     strongSelf,
                     didReceiveCompletion: completed,
-                    source: record.source
+                    source: node.source
                 )
             }
         }
@@ -138,41 +140,41 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         // TODO: handle case when lesson doesn't have steps with video
         let stepsWithVideo = cut.steps.filter { $0.block.name == "video" }
 
-        var stepsRecords: [DownloadRecord] = []
-        var videosForDownloading: [(DownloadRecord, Video)] = []
+        var stepsTreeNodes: [DownloadTreeNode] = []
+        var videosForDownloading: [(DownloadTreeNode, Video)] = []
         for step in stepsWithVideo {
             guard let video = step.block.video else {
                 continue
             }
 
-            let record = DownloadRecord(
+            let node = DownloadTreeNode(
                 source: .step(entity: step),
                 childrens: [],
                 observer: observer
             )
 
-            stepsRecords.append(record)
-            videosForDownloading.append((record, video))
+            stepsTreeNodes.append(node)
+            videosForDownloading.append((node, video))
         }
 
         // Build tree: create new or merge
         // Unit
         let unitSource = DownloadSource.unit(entity: cut.unit)
-        let existingUnitRecordIndex = self.currentRecords.firstIndex(where: { $0.source == unitSource })
-        let newUnitRecord = self.createRecordInTree(
-            existingRecordIndex: existingUnitRecordIndex,
+        let existingUnitTreeNodeIndex = self.currentTreeNodes.firstIndex(where: { $0.source == unitSource })
+        let newUnitTreeNode = self.createTreeNodeInTree(
+            existingTreeNodeIndex: existingUnitTreeNodeIndex,
             source: unitSource,
-            childrens: &stepsRecords,
+            childrens: &stepsTreeNodes,
             shouldReportProgress: cut.observationLevel >= .unit,
             observer: observer
         )
 
         // Section
         let sectionSource = DownloadSource.section(entity: cut.section)
-        let existingSectionRecordIndex = self.currentRecords.firstIndex(where: { $0.source == sectionSource })
-        var sectionChildrens = [newUnitRecord].compactMap { $0 }
-        let newSectionRecord = self.createRecordInTree(
-            existingRecordIndex: existingSectionRecordIndex,
+        let existingSectionTreeNodeIndex = self.currentTreeNodes.firstIndex(where: { $0.source == sectionSource })
+        var sectionChildrens = [newUnitTreeNode].compactMap { $0 }
+        let newSectionTreeNode = self.createTreeNodeInTree(
+            existingTreeNodeIndex: existingSectionTreeNodeIndex,
             source: sectionSource,
             childrens: &sectionChildrens,
             shouldReportProgress: cut.observationLevel >= .section,
@@ -181,10 +183,10 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
 
         // Course
         let courseSource = DownloadSource.course
-        let existingCourseRecordIndex = self.currentRecords.firstIndex(where: { $0.source == courseSource })
-        var courseChildrens = [newSectionRecord].compactMap { $0 }
-        _ = self.createRecordInTree(
-            existingRecordIndex: existingCourseRecordIndex,
+        let existingCourseTreeNodeIndex = self.currentTreeNodes.firstIndex(where: { $0.source == courseSource })
+        var courseChildrens = [newSectionTreeNode].compactMap { $0 }
+        _ = self.createTreeNodeInTree(
+            existingTreeNodeIndex: existingCourseTreeNodeIndex,
             source: courseSource,
             childrens: &courseChildrens,
             shouldReportProgress: cut.observationLevel >= .all,
@@ -193,7 +195,7 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
 
         // Start downloading
 
-        for (record, video) in videosForDownloading {
+        for (node, video) in videosForDownloading {
             // FIXME: VideosInfo
             let url = video.getUrlForQuality(VideosInfo.watchingVideoQuality)
             let taskID = self.videoDownloadingService.download(
@@ -201,75 +203,80 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
                 url: url
             )
 
-            self.currentDownloads[taskID] = record
+            self.currentDownloads[taskID] = node
         }
     }
 
-    /// Create new record in the tree and return reference to it;
-    /// if record with given source already exists then return nil
-    private func createRecordInTree(
-        existingRecordIndex: Int?,
+    /// Cancel unit/section/course downloading; target entity can be determined by observation level
+    func stopDownloading(cut: SyllabusCut) {
+
+    }
+
+    /// Create new node in the tree and return reference to it;
+    /// if node with given source already exists then return nil
+    private func createTreeNodeInTree(
+        existingTreeNodeIndex: Int?,
         source: DownloadSource,
-        childrens: inout [DownloadRecord],
+        childrens: inout [DownloadTreeNode],
         shouldReportProgress: Bool,
-        observer: @escaping DownloadRecord.Observer
-    ) -> DownloadRecord? {
-        if let index = existingRecordIndex {
-            // Record exists in the tree, assign childrens
-            self.currentRecords[index].childrens.append(contentsOf: childrens)
-            self.currentRecords[index].shouldReportProgress = shouldReportProgress
-            childrens.forEach { $0.parent = self.currentRecords[index] }
+        observer: @escaping DownloadTreeNode.Observer
+    ) -> DownloadTreeNode? {
+        if let index = existingTreeNodeIndex {
+            // TreeNode exists in the tree, assign childrens
+            self.currentTreeNodes[index].childrens.append(contentsOf: childrens)
+            self.currentTreeNodes[index].shouldReportProgress = shouldReportProgress
+            childrens.forEach { $0.parent = self.currentTreeNodes[index] }
         } else {
-            // Insert record to the tree
-            let record = DownloadRecord(
+            // Insert node to the tree
+            let node = DownloadTreeNode(
                 source: source,
                 childrens: childrens,
                 shouldReportProgress: shouldReportProgress,
                 observer: observer
             )
 
-            self.currentRecords.append(record)
-            childrens.forEach { $0.parent = record }
-            return record
+            self.currentTreeNodes.append(node)
+            childrens.forEach { $0.parent = node }
+            return node
         }
 
         return nil
     }
 
-    /// Traverse tree from leaf to the root and mark all records as dirty (= needs to recalculate progress and completion status)
-    private func markAsDirtyAllTree(record: DownloadRecord) {
-        if let parent = record.parent {
-            record.isDirty = true
-            self.markAsDirtyAllTree(record: parent)
+    /// Traverse tree from leaf to the root and mark all nodes as dirty (= needs to recalculate progress and completion status)
+    private func markAsDirtyAllTree(node: DownloadTreeNode) {
+        if let parent = node.parent {
+            node.isDirty = true
+            self.markAsDirtyAllTree(node: parent)
         }
     }
 
     /// Handle events from downloading service
     private func handleUpdate(event: VideoDownloadingServiceEvent) {
-        guard let downloadRecord = self.currentDownloads[event.taskID] else {
+        guard let downloadTreeNode = self.currentDownloads[event.taskID] else {
             return
         }
 
         switch event.state {
         case .error:
             // Downloading failed, remove task and detach from parent
-            downloadRecord.parent?.childrens.removeAll(where: { $0 === downloadRecord })
-            downloadRecord.state = .finished(completed: false)
-            self.markAsDirtyAllTree(record: downloadRecord)
+            downloadTreeNode.parent?.childrens.removeAll(where: { $0 === downloadTreeNode })
+            downloadTreeNode.state = .finished(completed: false)
+            self.markAsDirtyAllTree(node: downloadTreeNode)
             self.currentDownloads.removeValue(forKey: event.taskID)
         case .active(let progress):
-            downloadRecord.state = .downloading(progress: progress)
-            self.markAsDirtyAllTree(record: downloadRecord)
+            downloadTreeNode.state = .downloading(progress: progress)
+            self.markAsDirtyAllTree(node: downloadTreeNode)
         case .completed(_):
-            downloadRecord.state = .finished(completed: true)
-            self.markAsDirtyAllTree(record: downloadRecord)
+            downloadTreeNode.state = .finished(completed: true)
+            self.markAsDirtyAllTree(node: downloadTreeNode)
             self.currentDownloads.removeValue(forKey: event.taskID)
         }
     }
 
     /// Node representation in the syllabus tree
-    private final class DownloadRecord {
-        typealias Observer = (DownloadRecord) -> Void
+    private final class DownloadTreeNode {
+        typealias Observer = (DownloadTreeNode) -> Void
 
         enum State {
             case finished(completed: Bool)
@@ -279,9 +286,9 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         /// Node type (e.g. step, unit, ...)
         let source: DownloadSource
         /// Node parent
-        var parent: DownloadRecord?
+        var parent: DownloadTreeNode?
         /// Node childrens
-        var childrens: [DownloadRecord]
+        var childrens: [DownloadTreeNode]
 
         private var observer: Observer?
 
@@ -328,7 +335,7 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
 
         init(
             source: DownloadSource,
-            childrens: [DownloadRecord],
+            childrens: [DownloadTreeNode],
             shouldReportProgress: Bool = false,
             observer: Observer? = nil
         ) {

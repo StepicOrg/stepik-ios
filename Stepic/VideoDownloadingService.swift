@@ -32,6 +32,8 @@ protocol VideoDownloadingServiceProtocol: class {
     func getTaskProgressAndState(
         taskID: DownloaderTaskProtocol.IDType
     ) -> (DownloaderTaskState, Float)?
+    /// Cancel active download
+    func cancelTask(taskID: DownloaderTaskProtocol.IDType)
 }
 
 final class VideoDownloadingService: VideoDownloadingServiceProtocol {
@@ -104,6 +106,14 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         }
 
         return (taskInfo.state, progress)
+    }
+
+    func cancelTask(taskID: Int) {
+        guard let task = self.observedTasks[taskID] else {
+            return
+        }
+
+        task.cancel()
     }
 
     // MARK: Private methods
