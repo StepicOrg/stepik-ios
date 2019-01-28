@@ -133,13 +133,13 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return
             }
 
-            guard let section = strongSelf.currentSections[request.uniqueIdentifier] else {
-                return
-            }
-
             // Check whether section fetching completed
             strongSelf.sectionFetchSemaphore.wait()
             strongSelf.sectionFetchSemaphore.signal()
+
+            guard let section = strongSelf.currentSections[request.uniqueIdentifier] else {
+                return
+            }
 
             print("course info tab syllabus interactor: start fetching section from network, id = \(section.id)")
             strongSelf.fetchSyllabusSection(section: section).done { response in
@@ -300,6 +300,252 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.tooltipStorageManager.didShowOnPersonalDeadlinesButton = true
     }
 
+    private func fetchSyllabusSection(
+        section: Section
+    ) -> Promise<CourseInfoTabSyllabus.ShowSyllabus.Response> {
+        return Promise { seal in
+            self.provider.fetchUnitsWithLessons(
+                for: section,
+                shouldUseNetwork: true
+            ).done { units in
+                self.updateCurrentData(units: units, shouldRemoveAll: false)
+
+                let data = self.makeSyllabusDataFromCurrentData()
+                seal.fulfill(.init(result: .success(data)))
+            }.catch { _ in
+                // TODO: error
+            }
+        }
+    }
+
+    private func fetchSyllabusInAppropriateMode(
+        course: Course,
+        isOnline: Bool
+    ) -> Promise<CourseInfoTabSyllabus.ShowSyllabus.Response> {
+        return Promise { seal in
+            // Load sections & progresses
+            self.provider.fetchSections(for: course, shouldUseNetwork: isOnline).then {
+                sections -> Promise<([Section], [[Unit]])> in
+                // In offline mode load units & lessons just now
+                // In online mode load units & lessons on demand
+
+                let offlineUnitsPromise = when(
+                    fulfilled: sections.map { section in
+                        self.provider.fetchUnitsWithLessons(for: section, shouldUseNetwork: false)
+                    }
+                )
+                let onlineUnitsPromise = Promise.value([[Unit]]())
+
+                let unitsPromise = isOnline ? onlineUnitsPromise : offlineUnitsPromise
+                return unitsPromise.map { (sections, $0) }
+            }.done { result in
+                let sections = result.0
+                let units = Array(result.1.joined())
+
+                self.updateCurrentData(sections: sections, units: units, shouldRemoveAll: true)
+
+                let data = self.makeSyllabusDataFromCurrentData()
+                seal.fulfill(.init(result: .success(data)))
+            }.catch { _ in
+                // TODO: error
+            }
+        }
+    }
+
+    private func updateCurrentData(sections: [Section]? = nil, units: [Unit], shouldRemoveAll: Bool) {
+        if shouldRemoveAll {
+            self.currentSections.removeAll(keepingCapacity: true)
+            self.currentUnits.removeAll(keepingCapacity: true)
+        }
+
+        for section in sections ?? [] {
+            self.currentSections[self.getUniqueIdentifierBySectionID(section.id)] = section
+            for unitID in section.unitsArray {
+                self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] = nil
+            }
+        }
+
+        for unit in units {
+            self.currentUnits[self.getUniqueIdentifierByUnitID(unit.id)] = unit
+        }
+    }
+
+    private func makeSyllabusDataFromCurrentData() -> CourseInfoTabSyllabus.SyllabusData {
+        return CourseInfoTabSyllabus.SyllabusData(
+            sections: self.currentSections
+                .map { uid, entity in
+                    .init(
+                        uniqueIdentifier: uid,
+                        entity: entity,
+                        downloadState: self.getDownloadingState(for: entity)
+                    )
+                }
+                .sorted(by: { $0.entity.position < $1.entity.position }),
+            units: self.currentUnits
+                .map { uid, entity in
+                    var state: CourseInfoTabSyllabus.DownloadState
+                    if let unit = entity {
+                        state = self.getDownloadingState(for: unit)
+                    } else {
+                        state = .notAvailable
+                    }
+
+                    return .init(
+                        uniqueIdentifier: uid,
+                        entity: entity,
+                        downloadState: state
+                    )
+                }
+                .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
+            sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
+            isEnrolled: self.currentCourse?.enrolled ?? false
+        )
+    }
+
+    private func getUniqueIdentifierBySectionID(_ sectionID: Section.IdType) -> UniqueIdentifierType {
+        return "\(sectionID)"
+    }
+
+    private func getUniqueIdentifierByUnitID(_ unitID: Unit.IdType) -> UniqueIdentifierType {
+        return "\(unitID)"
+    }
+
+    private func refreshNextLessonService() {
+        let orderedSections = self.currentSections.values.sorted(by: { $0.position < $1.position })
+        self.nextLessonService.configure(with: orderedSections)
+    }
+
+    private func requestUnitPresentation(_ unit: Unit) {
+        // Check whether unit is in exam section
+        if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
+            section.isExam, section.isReachable {
+            self.moduleOutput?.presentExamLesson()
+            return
+        }
+
+        self.moduleOutput?.presentLesson(
+            in: unit,
+            navigationDelegate: self,
+            navigationRules: (
+                prev: self.nextLessonService.findPreviousUnit(for: unit) != nil,
+                next: self.nextLessonService.findNextUnit(for: unit) != nil
+            )
+        )
+    }
+
+    enum Error: Swift.Error {
+        case fetchFailed
+    }
+}
+
+extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
+    func handleControllerAppearance() {
+        if let course = self.currentCourse {
+            AmplitudeAnalyticsEvents.Sections.opened(
+                courseID: course.id,
+                courseTitle: course.title
+            ).send()
+            self.shouldOpenedAnalyticsEventSend = false
+        } else {
+            self.shouldOpenedAnalyticsEventSend = true
+        }
+    }
+
+    func update(with course: Course, isOnline: Bool) {
+        self.currentCourse = course
+        self.isOnline = isOnline
+        self.getCourseSyllabus()
+
+        if self.shouldOpenedAnalyticsEventSend {
+            AmplitudeAnalyticsEvents.Sections.opened(
+                courseID: course.id,
+                courseTitle: course.title
+            ).send()
+            self.shouldOpenedAnalyticsEventSend = false
+        }
+    }
+}
+
+extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDelegate {
+    private func getStateUpdateByDownloadSource(
+        _ source: SyllabusTreeNode.Source
+    ) -> CourseInfoTabSyllabus.DownloadButtonStateUpdate.Source? {
+        switch source {
+        case .unit(let id):
+            if let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(id)] as? Unit {
+                return .unit(entity: unit)
+            }
+            return nil
+        case .section(let id):
+            if let section = self.currentSections[self.getUniqueIdentifierBySectionID(id)] {
+                return .section(entity: section)
+            }
+            return nil
+        default:
+            return nil
+        }
+    }
+
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didReceiveProgress progress: Float,
+        source: SyllabusTreeNode.Source
+    ) {
+        let sourceType = self.getStateUpdateByDownloadSource(source)
+        DispatchQueue.main.async { [weak self] in
+            if let sourceType = sourceType {
+                self?.presenter.presentDownloadButtonUpdate(
+                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                        source: sourceType,
+                        downloadState: .downloading(progress: progress)
+                    )
+                )
+            }
+        }
+    }
+
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didReceiveCompletion completed: Bool,
+        source: SyllabusTreeNode.Source
+    ) {
+        let sourceType = self.getStateUpdateByDownloadSource(source)
+        DispatchQueue.main.async { [weak self] in
+            if let sourceType = sourceType {
+                self?.presenter.presentDownloadButtonUpdate(
+                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                        source: sourceType,
+                        downloadState: .available(isCached: completed)
+                    )
+                )
+            }
+        }
+    }
+}
+
+extension CourseInfoTabSyllabusInteractor: SectionNavigationDelegate {
+    func didRequestPreviousUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
+        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
+              let previousUnit = self.nextLessonService.findPreviousUnit(for: unit) as? Unit else {
+            return
+        }
+
+        self.requestUnitPresentation(previousUnit)
+    }
+
+    func didRequestNextUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
+        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
+              let nextUnit = self.nextLessonService.findNextUnit(for: unit) as? Unit else {
+            return
+        }
+
+        self.requestUnitPresentation(nextUnit)
+    }
+}
+
+// MARK: Private methods for file managing & downloading
+
+extension CourseInfoTabSyllabusInteractor {
     private func cancelDownloading(unit: Unit) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
         AmplitudeAnalyticsEvents.Downloads.cancelled(content: "lesson").send()
@@ -421,116 +667,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
-    private func fetchSyllabusSection(
-        section: Section
-    ) -> Promise<CourseInfoTabSyllabus.ShowSyllabus.Response> {
-        return Promise { seal in
-            self.provider.fetchUnitsWithLessons(
-                for: section,
-                shouldUseNetwork: true
-            ).done { units in
-                self.updateCurrentData(units: units, shouldRemoveAll: false)
-
-                let data = self.makeSyllabusDataFromCurrentData()
-                seal.fulfill(.init(result: .success(data)))
-            }.catch { _ in
-                // TODO: error
-            }
-        }
-    }
-
-    private func fetchSyllabusInAppropriateMode(
-        course: Course,
-        isOnline: Bool
-    ) -> Promise<CourseInfoTabSyllabus.ShowSyllabus.Response> {
-        return Promise { seal in
-            // Load sections & progresses
-            self.provider.fetchSections(for: course, shouldUseNetwork: isOnline).then {
-                sections -> Promise<([Section], [[Unit]])> in
-                // In offline mode load units & lessons just now
-                // In online mode load units & lessons on demand
-
-                let offlineUnitsPromise = when(
-                    fulfilled: sections.map { section in
-                        self.provider.fetchUnitsWithLessons(for: section, shouldUseNetwork: false)
-                    }
-                )
-                let onlineUnitsPromise = Promise.value([[Unit]]())
-
-                let unitsPromise = isOnline ? onlineUnitsPromise : offlineUnitsPromise
-                return unitsPromise.map { (sections, $0) }
-            }.done { result in
-                let sections = result.0
-                let units = Array(result.1.joined())
-
-                self.updateCurrentData(sections: sections, units: units, shouldRemoveAll: true)
-
-                let data = self.makeSyllabusDataFromCurrentData()
-                seal.fulfill(.init(result: .success(data)))
-            }.catch { _ in
-                // TODO: error
-            }
-        }
-    }
-
-    private func updateCurrentData(sections: [Section]? = nil, units: [Unit], shouldRemoveAll: Bool) {
-        if shouldRemoveAll {
-            self.currentSections.removeAll(keepingCapacity: true)
-            self.currentUnits.removeAll(keepingCapacity: true)
-        }
-
-        for section in sections ?? [] {
-            self.currentSections[self.getUniqueIdentifierBySectionID(section.id)] = section
-            for unitID in section.unitsArray {
-                self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] = nil
-            }
-        }
-
-        for unit in units {
-            self.currentUnits[self.getUniqueIdentifierByUnitID(unit.id)] = unit
-        }
-    }
-
-    private func makeSyllabusDataFromCurrentData() -> CourseInfoTabSyllabus.SyllabusData {
-        return CourseInfoTabSyllabus.SyllabusData(
-            sections: self.currentSections
-                .map { uid, entity in
-                    .init(
-                        uniqueIdentifier: uid,
-                        entity: entity,
-                        downloadState: self.getDownloadingState(for: entity)
-                    )
-                }
-                .sorted(by: { $0.entity.position < $1.entity.position }),
-            units: self.currentUnits
-                .map { uid, entity in
-                    var state: CourseInfoTabSyllabus.DownloadState
-                    if let unit = entity {
-                        state = self.getDownloadingState(for: unit)
-                    } else {
-                        state = .notAvailable
-                    }
-
-                    return .init(
-                        uniqueIdentifier: uid,
-                        entity: entity,
-                        downloadState: state
-                    )
-                }
-                .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
-            sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
-            isEnrolled: self.currentCourse?.enrolled ?? false
-        )
-    }
-
-    private func getUniqueIdentifierBySectionID(_ sectionID: Section.IdType) -> UniqueIdentifierType {
-        return "\(sectionID)"
-    }
-
-    private func getUniqueIdentifierByUnitID(_ unitID: Unit.IdType) -> UniqueIdentifierType {
-        return "\(unitID)"
-    }
-
     private func makeSyllabusTree(
         section: Section? = nil,
         unit: Unit,
@@ -539,8 +675,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         var stepsTrees: [SyllabusTreeNode] = []
         for step in steps {
             guard step.block.name == "video",
-                  let video = step.block.video else {
-                continue
+                let video = step.block.video else {
+                    continue
             }
 
             if self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil {
@@ -700,137 +836,5 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
         // All units are cached, section too
         return .available(isCached: true)
-    }
-
-    private func refreshNextLessonService() {
-        let orderedSections = self.currentSections.values.sorted(by: { $0.position < $1.position })
-        self.nextLessonService.configure(with: orderedSections)
-    }
-
-    private func requestUnitPresentation(_ unit: Unit) {
-        // Check whether unit is in exam section
-        if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
-            section.isExam, section.isReachable {
-            self.moduleOutput?.presentExamLesson()
-            return
-        }
-
-        self.moduleOutput?.presentLesson(
-            in: unit,
-            navigationDelegate: self,
-            navigationRules: (
-                prev: self.nextLessonService.findPreviousUnit(for: unit) != nil,
-                next: self.nextLessonService.findNextUnit(for: unit) != nil
-            )
-        )
-    }
-
-    enum Error: Swift.Error {
-        case fetchFailed
-    }
-}
-
-extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
-    func handleControllerAppearance() {
-        if let course = self.currentCourse {
-            AmplitudeAnalyticsEvents.Sections.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
-            self.shouldOpenedAnalyticsEventSend = false
-        } else {
-            self.shouldOpenedAnalyticsEventSend = true
-        }
-    }
-
-    func update(with course: Course, isOnline: Bool) {
-        self.currentCourse = course
-        self.isOnline = isOnline
-        self.getCourseSyllabus()
-
-        if self.shouldOpenedAnalyticsEventSend {
-            AmplitudeAnalyticsEvents.Sections.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
-            self.shouldOpenedAnalyticsEventSend = false
-        }
-    }
-}
-
-extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDelegate {
-    private func getStateUpdateByDownloadSource(
-        _ source: SyllabusTreeNode.Source
-    ) -> CourseInfoTabSyllabus.DownloadButtonStateUpdate.Source? {
-        switch source {
-        case .unit(let id):
-            if let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(id)] as? Unit {
-                return .unit(entity: unit)
-            }
-            return nil
-        case .section(let id):
-            if let section = self.currentSections[self.getUniqueIdentifierBySectionID(id)] {
-                return .section(entity: section)
-            }
-            return nil
-        default:
-            return nil
-        }
-    }
-
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didReceiveProgress progress: Float,
-        source: SyllabusTreeNode.Source
-    ) {
-        let sourceType = self.getStateUpdateByDownloadSource(source)
-        DispatchQueue.main.async { [weak self] in
-            if let sourceType = sourceType {
-                self?.presenter.presentDownloadButtonUpdate(
-                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
-                        source: sourceType,
-                        downloadState: .downloading(progress: progress)
-                    )
-                )
-            }
-        }
-    }
-
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didReceiveCompletion completed: Bool,
-        source: SyllabusTreeNode.Source
-    ) {
-        let sourceType = self.getStateUpdateByDownloadSource(source)
-        DispatchQueue.main.async { [weak self] in
-            if let sourceType = sourceType {
-                self?.presenter.presentDownloadButtonUpdate(
-                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
-                        source: sourceType,
-                        downloadState: .available(isCached: completed)
-                    )
-                )
-            }
-        }
-    }
-}
-
-extension CourseInfoTabSyllabusInteractor: SectionNavigationDelegate {
-    func didRequestPreviousUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
-        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
-              let previousUnit = self.nextLessonService.findPreviousUnit(for: unit) as? Unit else {
-            return
-        }
-
-        self.requestUnitPresentation(previousUnit)
-    }
-
-    func didRequestNextUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
-        guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit,
-              let nextUnit = self.nextLessonService.findNextUnit(for: unit) as? Unit else {
-            return
-        }
-
-        self.requestUnitPresentation(nextUnit)
     }
 }

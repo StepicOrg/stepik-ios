@@ -21,6 +21,8 @@ extension CourseInfoView {
         // Status bar + navbar + other offsets
         var headerTopOffset: CGFloat = 0.0
         let segmentedControlHeight: CGFloat = 48.0
+
+        let minimalHeaderHeight: CGFloat = 240
     }
 }
 
@@ -60,7 +62,10 @@ final class CourseInfoView: UIView {
 
     /// Real height for header
     var headerHeight: CGFloat {
-        return self.lastHeaderHeight + self.appearance.headerTopOffset
+        return max(
+            0,
+            self.lastHeaderHeight + self.appearance.headerTopOffset
+        )
     }
 
     weak var delegate: CourseInfoViewDelegate?
@@ -92,13 +97,14 @@ final class CourseInfoView: UIView {
             hasVerifiedMark: viewModel.isVerified
         )
 
+        // Update data in header
+        self.headerView.configure(viewModel: viewModel)
+
         self.delegate?.courseInfoView(
             self,
             reportNewHeaderHeight: self.headerHeight + self.appearance.segmentedControlHeight
         )
-
-        // Update data in header
-        self.headerView.configure(viewModel: viewModel)
+        self.headerHeightConstraint?.update(offset: self.headerHeight)
     }
 
     func updateScroll(offset: CGFloat) {
