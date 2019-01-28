@@ -662,7 +662,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
 
         // Downloading state
-        if downloadingUnitProgresses.count == units.count {
+        if downloadingUnitProgresses.count == units.count && units.count > 0 {
             return .downloading(
                 progress: downloadingUnitProgresses.reduce(0, +) / Float(downloadingUnitProgresses.count)
             )
