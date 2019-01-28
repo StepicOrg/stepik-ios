@@ -100,6 +100,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func tryToSetOnlineMode() {
+        if self.isOnline {
+            return
+        }
+
         if self.networkReachabilityService.isReachable {
             self.isOnline = true
             self.refreshCourse()

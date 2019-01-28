@@ -12,6 +12,9 @@ protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.ShowSyllabus.Response)
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.UpdateSyllabusHeader.Response)
+
+    func presentWaitingState()
+    func dismissWaitingState()
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -114,6 +117,14 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             isDeadlineTooltipVisible: response.isPersonalDeadlinesTooltipVisible
         )
         self.viewController?.displaySyllabusHeader(viewModel: .init(data: viewModel))
+    }
+
+    func presentWaitingState() {
+        self.viewController?.showBlockingLoadingIndicator()
+    }
+
+    func dismissWaitingState() {
+        self.viewController?.hideBlockingLoadingIndicator()
     }
 
     private func makeSectionViewModel(

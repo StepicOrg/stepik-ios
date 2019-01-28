@@ -35,7 +35,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
-    private var currentUnits: [UniqueIdentifierType: Unit?] = [:]
+    private var currentUnits: [UniqueIdentifierType: Unit?] = [:] {
+        didSet {
+            self.refreshNextLessonService()
+        }
+    }
 
     private var isOnline = false {
         willSet {
@@ -189,13 +193,20 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
 
         func handleAll() {
-            for (uid, section) in self.currentSections {
-                let sectionState = self.getDownloadingState(for: section)
-                if case .available(let isCached) = sectionState, !isCached {
-                    handleSection(id: uid)
+            self.presenter.presentWaitingState()
+            self.forceLoadAllSectionsIfNeeded().done {
+                for (uid, section) in self.currentSections {
+                    let sectionState = self.getDownloadingState(for: section)
+                    if case .available(let isCached) = sectionState, !isCached {
+                        handleSection(id: uid)
+                    }
                 }
+                self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
+            }.ensure {
+                self.presenter.dismissWaitingState()
+            }.catch { _ in
+                // TODO: handle error
             }
-            self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
         }
 
         switch request.type {
@@ -213,7 +224,17 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        self.requestUnitPresentation(unit)
+        // If all units already loaded then just present unit
+        // otherwise fetch all sections
+        // TODO: remove after APPS-2206
+        self.presenter.presentWaitingState()
+        self.forceLoadAllSectionsIfNeeded().done { _ in
+            self.requestUnitPresentation(unit)
+        }.ensure {
+            self.presenter.dismissWaitingState()
+        }.catch { _ in
+            // TODO: handle error
+        }
     }
 
     func handlePersonalDeadlinesAction() {
@@ -229,6 +250,26 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     // MARK: Private methods
+
+    private func forceLoadAllSectionsIfNeeded() -> Promise<Void> {
+        let allSections = Array(self.currentSections.values)
+        let allUnits = allSections.map { $0.unitsArray }.reduce([], +)
+        let availableUnits = self.currentUnits.values.compactMap { $0?.id }
+
+        return Promise { seal in
+            if availableUnits.sorted() == allUnits.sorted() {
+                seal.fulfill(())
+            } else {
+                // Load all units in each section
+                let unitsPromises = self.currentSections.values.map { self.fetchSyllabusSection(section: $0) }
+                when(fulfilled: unitsPromises).done { _ in
+                    seal.fulfill(())
+                }.catch { _ in
+                    // TODO: handle error
+                }
+            }
+        }
+    }
 
     private func updateSyllabusHeader(shouldForceDisableDownloadAll: Bool = false) {
         guard let course = self.currentCourse else {

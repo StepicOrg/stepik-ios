@@ -12,6 +12,9 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: class {
     func displaySyllabus(viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel)
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.UpdateSyllabusHeader.ViewModel)
+
+    func hideBlockingLoadingIndicator()
+    func showBlockingLoadingIndicator()
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: class {
@@ -98,6 +101,14 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         case .unit(let viewModel):
             self.syllabusTableDelegate.mergeViewModel(unit: viewModel)
         }
+    }
+
+    func hideBlockingLoadingIndicator() {
+        SVProgressHUD.dismiss()
+    }
+
+    func showBlockingLoadingIndicator() {
+        SVProgressHUD.show()
     }
 }
 
