@@ -96,7 +96,8 @@ class StyledNavigationViewController: UINavigationController {
             [weak self]
             _ in
             self?.navigationBar.layoutSubviews()
-            }, completion: nil)
+            self?.statusBarView.frame = UIApplication.shared.statusBarFrame
+        }, completion: nil)
     }
 
     func changeNavigationBarAlpha(_ alpha: CGFloat) {

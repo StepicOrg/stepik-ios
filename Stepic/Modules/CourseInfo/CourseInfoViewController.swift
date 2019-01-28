@@ -242,6 +242,7 @@ final class CourseInfoViewController: UIViewController {
                 handler: nil
             )
         )
+        alert.popoverPresentationController?.barButtonItem = self.moreBarButton
         self.present(module: alert)
     }
 }
@@ -329,7 +330,6 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                 handler: nil
             )
         )
-        alert.popoverPresentationController?.barButtonItem = self.moreBarButton
         self.present(module: alert)
     }
 
@@ -395,6 +395,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                     self?.interactor.refreshCourse()
                 }
             ).makeModule()
+            viewController.popoverPresentationController?.barButtonItem = self.moreBarButton
             self.present(module: viewController)
         }
     }

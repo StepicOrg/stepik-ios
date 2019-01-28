@@ -153,8 +153,13 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.pageControllerView.translatesAutoresizingMaskIntoConstraints = false
         self.pageControllerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-            make.width.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+
+            if #available(iOS 11.0, *) {
+                make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            } else {
+                make.leading.trailing.equalToSuperview()
+            }
         }
 
         self.headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +172,13 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
         self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         self.segmentedControl.snp.makeConstraints { make in
             make.top.equalTo(self.headerView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
+
+            if #available(iOS 11.0, *) {
+                make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            } else {
+                make.leading.trailing.equalToSuperview()
+            }
+
             make.height.equalTo(self.appearance.segmentedControlHeight)
         }
     }
