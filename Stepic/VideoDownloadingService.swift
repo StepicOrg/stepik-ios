@@ -82,7 +82,8 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             throw Error.alreadyDownloading
         }
 
-        let url = video.getUrlForQuality(VideosInfo.downloadingVideoQuality)
+        let nearestQuality = video.getNearestQualityToDefault(VideosInfo.downloadingVideoQuality)
+        let url = video.getUrlForQuality(nearestQuality)
         let task = DownloaderTask(url: url)
 
         self.setupReporters(for: task)

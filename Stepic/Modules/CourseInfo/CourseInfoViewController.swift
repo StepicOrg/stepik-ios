@@ -62,14 +62,17 @@ final class CourseInfoViewController: UIViewController {
     private var submodulesControllers: [UIViewController] = []
 
     private var shouldShowDropCourseAction = false
+    private let didJustSubscribe: Bool
 
     init(
         interactor: CourseInfoInteractorProtocol,
         availableTabs: [CourseInfo.Tab] = [.info, .syllabus],
-        initialTab: CourseInfo.Tab
+        initialTab: CourseInfo.Tab,
+        didJustSubscribe: Bool = false
     ) {
         self.interactor = interactor
         self.availableTabs = availableTabs
+        self.didJustSubscribe = didJustSubscribe
 
         if let initialTabIndex = self.availableTabs.firstIndex(of: initialTab) {
             self.initialTabIndex = initialTabIndex
@@ -126,6 +129,14 @@ final class CourseInfoViewController: UIViewController {
         }
 
         self.interactor.tryToSetOnlineMode()
+
+        if self.didJustSubscribe {
+            NotificationPermissionStatus.current.done { status in
+                if status == .notDetermined {
+                    self.interactor.registerForRemoteNotifications()
+                }
+            }
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -262,6 +273,7 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
         animated: Bool
     ) {
         self.courseInfoView?.updateCurrentPageIndex(index)
+        self.interactor.handleControllerAppearance(request: .init(submoduleIndex: index))
     }
 
     func pageboyViewController(

@@ -22,6 +22,8 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
     private var course: Course?
 
+    private var shouldOpenedAnalyticsEventSend = false
+
     init(
         presenter: CourseInfoTabInfoPresenterProtocol,
         provider: CourseInfoTabInfoProviderProtocol
@@ -59,8 +61,28 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 // MARK: - CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol -
 
 extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
+    func handleControllerAppearance() {
+        if let course = self.course {
+            AmplitudeAnalyticsEvents.CoursePreview.opened(
+                courseID: course.id,
+                courseTitle: course.title
+            ).send()
+            self.shouldOpenedAnalyticsEventSend = false
+        } else {
+            self.shouldOpenedAnalyticsEventSend = true
+        }
+    }
+
     func update(with course: Course, isOnline: Bool) {
         self.course = course
         self.getCourseInfo()
+
+        if self.shouldOpenedAnalyticsEventSend {
+            AmplitudeAnalyticsEvents.CoursePreview.opened(
+                courseID: course.id,
+                courseTitle: course.title
+            ).send()
+            self.shouldOpenedAnalyticsEventSend = false
+        }
     }
 }

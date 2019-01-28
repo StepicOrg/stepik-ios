@@ -120,6 +120,13 @@ enum CourseInfo {
         }
     }
 
+    /// Handle submodule controller appearance
+    enum SubmoduleAppearanceHandling {
+        struct Request {
+            let submoduleIndex: Int
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

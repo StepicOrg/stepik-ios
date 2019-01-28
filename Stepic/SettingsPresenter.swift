@@ -19,7 +19,6 @@ class SettingsPresenter {
 
     var menu: [SettingsMenuBlock] = [
         .videoHeader,
-        .onlyWifiSwitch,
         .loadedVideoQuality,
         .onlineVideoQuality,
         .codeEditorSettingsHeader,
@@ -40,10 +39,6 @@ class SettingsPresenter {
     func logout() {
         AuthInfo.shared.token = nil
         view?.presentAuth()
-    }
-
-    func changeVideoWifiReachability(to isReachable: Bool) {
-        ConnectionHelper.shared.reachableOnWWAN = isReachable
     }
 
     func changeAdaptiveModeEnabled(to isEnabled: Bool) {

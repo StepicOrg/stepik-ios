@@ -15,6 +15,8 @@ protocol CourseInfoInteractorProtocol {
     func dropCourse()
     func doMainCourseAction()
     func tryToSetOnlineMode()
+    func registerForRemoteNotifications()
+    func handleControllerAppearance(request: CourseInfo.SubmoduleAppearanceHandling.Request)
 
     func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request)
 }
@@ -26,10 +28,16 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     let courseSubscriber: CourseSubscriberProtocol
     let userAccountService: UserAccountServiceProtocol
     let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+    let notificationSuggestionManager: NotificationSuggestionManager
+    let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
 
     private let courseID: Course.IdType
     private var currentCourse: Course? {
         didSet {
+            if let course = self.currentCourse {
+                LastStepGlobalContext.context.course = course
+            }
+
             self.pushCurrentCourseToSubmodules(submodules: self.submodules)
         }
     }
@@ -67,7 +75,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         networkReachabilityService: NetworkReachabilityServiceProtocol,
         courseSubscriber: CourseSubscriberProtocol,
         userAccountService: UserAccountServiceProtocol,
-        adaptiveStorageManager: AdaptiveStorageManagerProtocol
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol,
+        notificationSuggestionManager: NotificationSuggestionManager,
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -75,6 +86,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.courseSubscriber = courseSubscriber
         self.userAccountService = userAccountService
         self.adaptiveStorageManager = adaptiveStorageManager
+        self.notificationSuggestionManager = notificationSuggestionManager
+        self.notificationsRegistrationService = notificationsRegistrationService
+
         self.courseID = courseID
     }
 
@@ -108,6 +122,14 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
             self.isOnline = true
             self.refreshCourse()
         }
+    }
+
+    func handleControllerAppearance(request: CourseInfo.SubmoduleAppearanceHandling.Request) {
+        self.submodules[safe: request.submoduleIndex]?.handleControllerAppearance()
+    }
+
+    func registerForRemoteNotifications() {
+        self.notificationsRegistrationService.registerForRemoteNotifications()
     }
 
     func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request) {
@@ -276,5 +298,23 @@ extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
         self.presenter.presentExamLesson(
             response: .init(urlPath: urlPath)
         )
+    }
+}
+
+extension CourseInfoInteractor: NotificationsRegistrationServiceDelegate {
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
+    ) -> Bool {
+        return self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
+    }
+
+    func notificationsRegistrationService(
+        _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        didPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
+    ) {
+        if alertType == .permission {
+            self.notificationSuggestionManager.didShowAlert(context: .courseSubscription)
+        }
     }
 }

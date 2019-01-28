@@ -49,8 +49,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         switch menuBlockID {
         case .videoHeader:
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("Video", comment: ""))
-        case .onlyWifiSwitch:
-            return buildOnlyWifiSwitchBlock()
         case .loadedVideoQuality:
             return buildLoadedVideoQualityBlock()
         case .onlineVideoQuality:
@@ -112,18 +110,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         block.onTouch = {
             [weak self] in
             self?.changeVideoQuality(action: .watching)
-        }
-
-        return block
-    }
-
-    private func buildOnlyWifiSwitchBlock() -> SwitchMenuBlock {
-        let block = SwitchMenuBlock(id: SettingsMenuBlock.onlyWifiSwitch.rawValue, title: NSLocalizedString("WiFiLoadPreference", comment: ""), isOn: !ConnectionHelper.shared.reachableOnWWAN)
-
-        block.onSwitch = {
-            [weak self]
-            isOn in
-            self?.presenter?.changeVideoWifiReachability(to: !isOn)
         }
 
         return block

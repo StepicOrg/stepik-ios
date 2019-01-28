@@ -31,6 +31,11 @@ final class PersonalDeadlinesModeSelectionLegacyAssembly: Assembly {
         modesVC.course = self.course
         modesVC.onDeadlineSelected = {
             self.updateCompletion?()
+
+            NotificationsRegistrationService(
+                presenter: NotificationsRequestOnlySettingsAlertPresenter(),
+                analytics: .init(source: .personalDeadline)
+            ).registerForRemoteNotifications()
         }
 
         return modesVC

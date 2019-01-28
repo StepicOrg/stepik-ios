@@ -11,10 +11,16 @@ import UIKit
 final class CourseInfoAssembly: Assembly {
     private let courseID: Course.IdType
     private let initialTab: CourseInfo.Tab
+    private let didJustSubscribe: Bool
 
-    init(courseID: Course.IdType, initialTab: CourseInfo.Tab = .info) {
+    init(
+        courseID: Course.IdType,
+        initialTab: CourseInfo.Tab = .info,
+        didJustSubscribe: Bool = false
+    ) {
         self.courseID = courseID
         self.initialTab = initialTab
+        self.didJustSubscribe = false
     }
 
     func makeModule() -> UIViewController {
@@ -30,6 +36,11 @@ final class CourseInfoAssembly: Assembly {
             )
         )
         let presenter = CourseInfoPresenter()
+
+        let notificationsRegistrationService = NotificationsRegistrationService(
+            presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
+            analytics: .init(source: .courseSubscription)
+        )
         let interactor = CourseInfoInteractor(
             courseID: self.courseID,
             presenter: presenter,
@@ -37,13 +48,17 @@ final class CourseInfoAssembly: Assembly {
             networkReachabilityService: NetworkReachabilityService(),
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService(),
-            adaptiveStorageManager: AdaptiveStorageManager()
+            adaptiveStorageManager: AdaptiveStorageManager(),
+            notificationSuggestionManager: NotificationSuggestionManager(),
+            notificationsRegistrationService: notificationsRegistrationService
         )
+        notificationsRegistrationService.delegate = interactor
 
         let viewController = CourseInfoViewController(
             interactor: interactor,
             availableTabs: self.getAvailableTabs(),
-            initialTab: self.initialTab
+            initialTab: self.initialTab,
+            didJustSubscribe: self.didJustSubscribe
         )
         presenter.viewController = viewController
 

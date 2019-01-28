@@ -56,6 +56,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
+    private var shouldOpenedAnalyticsEventSend = false
+
     // Fetch syllabus only after previous fetch completed
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     // Online mode: present section only previous presentation completed
@@ -299,6 +301,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func cancelDownloading(unit: Unit) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.cancelled(content: "lesson").send()
+
         guard let lesson = unit.lesson else {
             print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
             return
@@ -310,6 +315,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func cancelDownloading(section: Section) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.cancelled(content: "section").send()
+
         for unit in section.units {
             guard let lesson = unit.lesson else {
                 print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
@@ -323,6 +331,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func removeCached(unit: Unit) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: "lesson").send()
+
         guard let lesson = unit.lesson else {
             print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
             return
@@ -345,6 +356,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func removeCached(section: Section) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: "section").send()
+
         section.units.forEach { self.removeCached(unit: $0) }
 
         self.presenter.presentDownloadButtonUpdate(
@@ -356,6 +370,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func startDownloading(unit: Unit) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.started(content: "lesson").send()
+
         guard let lesson = unit.lesson else {
             print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
             return
@@ -378,6 +395,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func startDownloading(section: Section) {
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.started(content: "section").send()
+
         let hasUncachedUnits = section.units
             .filter { section.unitsArray.contains($0.id) }
             .count != section.unitsArray.count
@@ -711,10 +731,30 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 }
 
 extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
+    func handleControllerAppearance() {
+        if let course = self.currentCourse {
+            AmplitudeAnalyticsEvents.Sections.opened(
+                courseID: course.id,
+                courseTitle: course.title
+            ).send()
+            self.shouldOpenedAnalyticsEventSend = false
+        } else {
+            self.shouldOpenedAnalyticsEventSend = true
+        }
+    }
+
     func update(with course: Course, isOnline: Bool) {
         self.currentCourse = course
         self.isOnline = isOnline
         self.getCourseSyllabus()
+
+        if self.shouldOpenedAnalyticsEventSend {
+            AmplitudeAnalyticsEvents.Sections.opened(
+                courseID: course.id,
+                courseTitle: course.title
+            ).send()
+            self.shouldOpenedAnalyticsEventSend = false
+        }
     }
 }
 

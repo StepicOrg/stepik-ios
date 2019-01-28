@@ -10,7 +10,6 @@ import Foundation
 
 enum SettingsMenuBlock: String {
     case videoHeader
-    case onlyWifiSwitch
     case loadedVideoQuality
     case onlineVideoQuality
     case adaptiveHeader
