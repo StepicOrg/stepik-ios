@@ -53,7 +53,7 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
         let label = UILabel()
         label.font = self.appearance.titleLabelFont
         label.textColor = self.appearance.titleLabelTextColor
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         return label
     }()
 

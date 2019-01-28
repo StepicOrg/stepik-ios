@@ -19,7 +19,7 @@ extension CourseInfoTabInfoViewModel {
         }
 
         self.introVideoThumbnailURL = URL(string: course.introVideo?.thumbnailURL ?? "")
-        self.aboutText = course.courseDescription.trimmingCharacters(in: .whitespaces)
+        self.aboutText = course.summary.trimmingCharacters(in: .whitespaces)
         self.requirementsText = course.requirements.trimmingCharacters(in: .whitespaces)
         self.targetAudienceText = course.audience.trimmingCharacters(in: .whitespaces)
         self.instructors = instructorsViewModel

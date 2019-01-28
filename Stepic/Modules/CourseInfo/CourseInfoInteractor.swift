@@ -91,10 +91,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 DispatchQueue.main.async { [weak self] in
                     self?.presenter.presentCourse(response: response)
                 }
+            }.ensure {
+                strongSelf.fetchSemaphore.signal()
             }.catch { _ in
                 // TODO: handle
-            }.finally {
-                strongSelf.fetchSemaphore.signal()
             }
         }
     }
@@ -188,7 +188,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.ShowCourse.Response> {
         return Promise { seal in
             firstly {
-                self.isOnline && !self.didLoadFromCache
+                self.isOnline && self.didLoadFromCache
                     ? self.provider.fetchRemote()
                     : self.provider.fetchCached()
             }.done { course in
@@ -200,6 +200,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     // Offline mode: present empty state only if get nil from network
                     if self.isOnline && self.didLoadFromCache {
                         // TODO: unable to load error
+                    } else {
+                        seal.fulfill(.init(result: .failure(Error.cachedFetchFailed)))
                     }
                 }
 
@@ -226,7 +228,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     enum Error: Swift.Error {
-        case fetchFailed
+        case cachedFetchFailed
     }
 }
 

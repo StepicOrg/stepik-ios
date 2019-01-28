@@ -8,60 +8,93 @@
 
 import Foundation
 
-/// Representation of one syllabus path (course -> section -> unit (lesson) -> steps)
-struct SyllabusCut {
-    enum ObservationLevel: Int, Comparable {
-        case unit = 0
-        case section = 1
-        case all = 2
+/// Representation of subtree in syllabus tree
+final class SyllabusTreeNode {
+    enum Source: Equatable, Hashable {
+        case course(id: Course.IdType)
+        case section(id: Section.IdType)
+        case unit(id: Unit.IdType)
+        case step(id: Step.IdType)
+        case video(entity: Video)
 
-        static func < (lhs: SyllabusCut.ObservationLevel, rhs: SyllabusCut.ObservationLevel) -> Bool {
-            return lhs.rawValue < rhs.rawValue
+        static func > (lhs: SyllabusTreeNode.Source, rhs: SyllabusTreeNode.Source) -> Bool {
+            return lhs.observationLevel > rhs.observationLevel
+        }
+
+        var observationLevel: Int {
+            switch self {
+            case .course(_):
+                return 0
+            case .section(_):
+                return 1
+            case .unit(_):
+                return 2
+            case .step(_):
+                return 3
+            case .video(_):
+                return 4
+            }
+        }
+
+        static func == (lhs: Source, rhs: Source) -> Bool {
+            switch (lhs, rhs) {
+            case (.video(let a), .video(let b)):
+                return a.id == b.id
+            case (.step(let a), .step(let b)):
+                return a == b
+            case (.unit(let a), .unit(let b)):
+                return a == b
+            case (.section(let a), .section(let b)):
+                return a == b
+            case (.course(_), .course(_)):
+                return true
+            default:
+                return false
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .video(let entity):
+                return ".video(id = \(entity.id))"
+            case .step(let id):
+                return ".step(id = \(id))"
+            case .unit(let id):
+                return ".unit(id = \(id))"
+            case .section(let id):
+                return ".section(id = \(id))"
+            case .course(_):
+                return ".course"
+            }
         }
     }
 
-    @available(*, deprecated, message: "Plain object should be used")
-    let steps: [Step]
-    @available(*, deprecated, message: "Plain object should be used")
-    let unit: Unit
-    @available(*, deprecated, message: "Plain object should be used")
-    let section: Section
-    let observationLevel: ObservationLevel
-}
+    let value: Source
+    let children: [SyllabusTreeNode]
 
-/// Source that reports about download
-enum DownloadSource: Equatable, CustomStringConvertible {
-    case step(entity: Step)
-    case unit(entity: Unit)
-    case section(entity: Section)
-    case course
+    init(value: Source, children: [SyllabusTreeNode] = []) {
+        self.value = value
+        self.children = children
+    }
 
-    static func == (lhs: DownloadSource, rhs: DownloadSource) -> Bool {
-        switch (lhs, rhs) {
-        case (.step(let a), .step(let b)):
-            return a.id == b.id
-        case (.unit(let a), .unit(let b)):
-            return a.id == b.id
-        case (.section(let a), .section(let b)):
-            return a.id == b.id
-        case (.course, .course):
-            return true
-        default:
+    var isLeaf: Bool {
+        return self.children.isEmpty
+    }
+
+    /// Recursive validate node (correct order, correct root, etc)
+    var isValid: Bool {
+        // Check whether leaf-node represents Video
+        if self.isLeaf {
+            if case .video(_) = self.value {
+                return true
+            }
             return false
         }
-    }
 
-    var description: String {
-        switch self {
-        case .step(let step):
-            return ".step(id = \(step.id))"
-        case .unit(let unit):
-            return ".unit(id = \(unit.id))"
-        case .section(let section):
-            return ".section(id = \(section.id))"
-        case .course:
-            return ".course"
-        }
+        // All children should have correct order (course < section < unit < step)
+        let childrenHaveCorrectLevel = !self.children.map { $0.value > self.value }.contains(false)
+        let childrenAreValid = !self.children.map { $0.isValid }.contains(false)
+        return childrenHaveCorrectLevel && childrenAreValid
     }
 }
 
@@ -69,35 +102,30 @@ protocol SyllabusDownloadsInteractionServiceDelegate: class {
     func downloadsInteractionService(
         _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         didReceiveProgress progress: Float,
-        source: DownloadSource
+        source: SyllabusTreeNode.Source
     )
     func downloadsInteractionService(
         _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         didReceiveCompletion completed: Bool,
-        source: DownloadSource
+        source: SyllabusTreeNode.Source
     )
 }
 
 protocol SyllabusDownloadsInteractionServiceProtocol: class {
     var delegate: SyllabusDownloadsInteractionServiceDelegate? { get set }
 
-    /// Download unit/section/course
-    func startDownloading(cut: SyllabusCut)
-    /// Stop downloading for unit/section/course
-    func stopDownloading(cut: SyllabusCut)
+    /// Download part of syllabus
+    func startDownloading(syllabusTree: SyllabusTreeNode) throws
+    /// Stop downloading for part of syllabus
+    func cancelDownloading(syllabusTree: SyllabusTreeNode) throws
+    /// Try to restore active downloads for part of syllabus
+    func restoreDownloading(syllabusTree: SyllabusTreeNode) throws
+    /// Progress for video
+    func getDownloadProgress(for video: Video) -> Float?
 }
 
 /// Service stores tree-like structure of syllabus and manages all downloading operation
 final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol {
-    private let videoDownloadingService: VideoDownloadingServiceProtocol
-
-    private var shouldSubscribeOnEvents = true
-
-    /// Current downloads observed by service
-    private var currentDownloads: [DownloaderTaskProtocol.IDType: DownloadTreeNode] = [:]
-    /// List of created nodes
-    private var currentTreeNodes: [DownloadTreeNode] = []
-
     weak var delegate: SyllabusDownloadsInteractionServiceDelegate? {
         didSet {
             // Subscribe on events
@@ -110,284 +138,455 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         }
     }
 
+    private let videoDownloadingService: VideoDownloadingServiceProtocol
+
+    private var trees: [DownloadsTreeNode] = []
+    private var activeVideoDownloads: [Video.IdType: DownloadsTreeNode] = [:]
+    private var shouldSubscribeOnEvents = true
+
     init(videoDownloadingService: VideoDownloadingServiceProtocol) {
         self.videoDownloadingService = videoDownloadingService
     }
 
-    /// Download unit/section/course; target entity can be determined by observation level
-    func startDownloading(cut: SyllabusCut) {
-        let observer: DownloadTreeNode.Observer = { [weak self] node in
-            guard let strongSelf = self else {
-                return
-            }
+    // MARK: Public methods
 
-            switch node.state {
-            case .downloading(let progress):
-                strongSelf.delegate?.downloadsInteractionService(
-                    strongSelf,
-                    didReceiveProgress: progress,
-                    source: node.source
-                )
-            case .finished(let completed):
-                strongSelf.delegate?.downloadsInteractionService(
-                    strongSelf,
-                    didReceiveCompletion: completed,
-                    source: node.source
-                )
-            }
+    func startDownloading(syllabusTree: SyllabusTreeNode) throws {
+        guard syllabusTree.isValid else {
+            throw Error.invalidNode
         }
 
-        // TODO: handle case when lesson doesn't have steps with video
-        let stepsWithVideo = cut.steps.filter { $0.block.name == "video" }
+        let targetTree = DownloadsTreeNode.makeDownloadsTreeNodeRecursive(syllabusSubtree: syllabusTree)
+        self.merge(with: targetTree)
 
-        var stepsTreeNodes: [DownloadTreeNode] = []
-        var videosForDownloading: [(DownloadTreeNode, Video)] = []
-        for step in stepsWithVideo {
-            guard let video = step.block.video else {
+        let allNodes = self.trees.map { $0.flatten() }.reduce([], +)
+
+        for node in allNodes {
+            if node.delegate == nil {
+                node.delegate = self
+            }
+
+            guard case .video(let video) = node.source else {
                 continue
             }
 
-            let node = DownloadTreeNode(
-                source: .step(entity: step),
-                childrens: [],
-                observer: observer
-            )
-
-            stepsTreeNodes.append(node)
-            videosForDownloading.append((node, video))
-        }
-
-        // Build tree: create new or merge
-        // Unit
-        let unitSource = DownloadSource.unit(entity: cut.unit)
-        let existingUnitTreeNodeIndex = self.currentTreeNodes.firstIndex(where: { $0.source == unitSource })
-        let newUnitTreeNode = self.createTreeNodeInTree(
-            existingTreeNodeIndex: existingUnitTreeNodeIndex,
-            source: unitSource,
-            childrens: &stepsTreeNodes,
-            shouldReportProgress: cut.observationLevel >= .unit,
-            observer: observer
-        )
-
-        // Section
-        let sectionSource = DownloadSource.section(entity: cut.section)
-        let existingSectionTreeNodeIndex = self.currentTreeNodes.firstIndex(where: { $0.source == sectionSource })
-        var sectionChildrens = [newUnitTreeNode].compactMap { $0 }
-        let newSectionTreeNode = self.createTreeNodeInTree(
-            existingTreeNodeIndex: existingSectionTreeNodeIndex,
-            source: sectionSource,
-            childrens: &sectionChildrens,
-            shouldReportProgress: cut.observationLevel >= .section,
-            observer: observer
-        )
-
-        // Course
-        let courseSource = DownloadSource.course
-        let existingCourseTreeNodeIndex = self.currentTreeNodes.firstIndex(where: { $0.source == courseSource })
-        var courseChildrens = [newSectionTreeNode].compactMap { $0 }
-        _ = self.createTreeNodeInTree(
-            existingTreeNodeIndex: existingCourseTreeNodeIndex,
-            source: courseSource,
-            childrens: &courseChildrens,
-            shouldReportProgress: cut.observationLevel >= .all,
-            observer: observer
-        )
-
-        // Start downloading
-
-        for (node, video) in videosForDownloading {
-            // FIXME: VideosInfo
-            let url = video.getUrlForQuality(VideosInfo.watchingVideoQuality)
-            let taskID = self.videoDownloadingService.download(
-                videoID: video.id,
-                url: url
-            )
-
-            self.currentDownloads[taskID] = node
+            if !self.activeVideoDownloads.keys.contains(video.id) {
+                try? self.videoDownloadingService.download(video: video)
+                self.activeVideoDownloads[video.id] = node
+            }
         }
     }
 
-    /// Cancel unit/section/course downloading; target entity can be determined by observation level
-    func stopDownloading(cut: SyllabusCut) {
-
-    }
-
-    /// Create new node in the tree and return reference to it;
-    /// if node with given source already exists then return nil
-    private func createTreeNodeInTree(
-        existingTreeNodeIndex: Int?,
-        source: DownloadSource,
-        childrens: inout [DownloadTreeNode],
-        shouldReportProgress: Bool,
-        observer: @escaping DownloadTreeNode.Observer
-    ) -> DownloadTreeNode? {
-        if let index = existingTreeNodeIndex {
-            // TreeNode exists in the tree, assign childrens
-            self.currentTreeNodes[index].childrens.append(contentsOf: childrens)
-            self.currentTreeNodes[index].shouldReportProgress = shouldReportProgress
-            childrens.forEach { $0.parent = self.currentTreeNodes[index] }
-        } else {
-            // Insert node to the tree
-            let node = DownloadTreeNode(
-                source: source,
-                childrens: childrens,
-                shouldReportProgress: shouldReportProgress,
-                observer: observer
-            )
-
-            self.currentTreeNodes.append(node)
-            childrens.forEach { $0.parent = node }
-            return node
+    func cancelDownloading(syllabusTree: SyllabusTreeNode) throws {
+        guard syllabusTree.isValid else {
+            throw Error.invalidNode
         }
 
+        let targetTree = DownloadsTreeNode.makeDownloadsTreeNodeRecursive(syllabusSubtree: syllabusTree)
+
+        for case .video(let video) in targetTree.flatten().map({ $0.source }) {
+            if self.activeVideoDownloads.keys.contains(video.id) {
+                try? self.videoDownloadingService.cancelDownload(videoID: video.id)
+            }
+        }
+    }
+
+    // Before downloading try to restore active download
+    // If videoDownloadingService reports that download exists then add node to tree
+    // otherwise skip
+    func restoreDownloading(syllabusTree: SyllabusTreeNode) throws {
+        guard syllabusTree.isValid else {
+            throw Error.invalidNode
+        }
+
+        let targetTree = DownloadsTreeNode.makeDownloadsTreeNodeRecursive(syllabusSubtree: syllabusTree)
+        self.merge(with: targetTree)
+
+        let allNodes = self.trees.map { $0.flatten() }.reduce([], +)
+
+        for node in allNodes {
+            guard case .video(let video) = node.source else {
+                continue
+            }
+
+            if !self.activeVideoDownloads.keys.contains(video.id) {
+                if self.videoDownloadingService.isTaskActive(videoID: video.id) {
+                    node.delegate = self
+                    self.activeVideoDownloads[video.id] = node
+                } else {
+                    node.detachFromParent()
+                }
+            }
+        }
+        self.cleanDeadNodes()
+    }
+
+    func getDownloadProgress(for video: Video) -> Float? {
+        if let node = self.activeVideoDownloads[video.id],
+           case .downloading(let progress) = node.state {
+            return progress
+        }
         return nil
     }
 
-    /// Traverse tree from leaf to the root and mark all nodes as dirty (= needs to recalculate progress and completion status)
-    private func markAsDirtyAllTree(node: DownloadTreeNode) {
-        if let parent = node.parent {
-            node.isDirty = true
-            self.markAsDirtyAllTree(node: parent)
+    // MARK: Private methods
+
+    private func merge(with tree: DownloadsTreeNode) {
+        // Trying to replace node from `tree` by `targetTree`
+        for index in 0..<self.trees.count {
+            let mergedTrees = DownloadsTreeNode.tryToMerge(firstTree: self.trees[index], secondTree: tree)
+            if mergedTrees.count > 1 {
+                continue
+            }
+
+            self.trees[index] = mergedTrees[0]
+            return
         }
+
+        self.trees.append(tree)
+    }
+
+    private func cleanDeadNodes() {
+        // Try to shrink
+        self.trees = self.trees.filter { $0.shrink() }
     }
 
     /// Handle events from downloading service
     private func handleUpdate(event: VideoDownloadingServiceEvent) {
-        guard let downloadTreeNode = self.currentDownloads[event.taskID] else {
+        guard let node = self.activeVideoDownloads[event.videoID] else {
             return
         }
 
         switch event.state {
         case .error:
             // Downloading failed, remove task and detach from parent
-            downloadTreeNode.parent?.childrens.removeAll(where: { $0 === downloadTreeNode })
-            downloadTreeNode.state = .finished(completed: false)
-            self.markAsDirtyAllTree(node: downloadTreeNode)
-            self.currentDownloads.removeValue(forKey: event.taskID)
+            node.updateState(with: .finished(completed: false))
+            node.invalidateNodesUpTheTree()
+            node.detachFromParent()
+            self.activeVideoDownloads.removeValue(forKey: event.videoID)
+            self.cleanDeadNodes()
         case .active(let progress):
-            downloadTreeNode.state = .downloading(progress: progress)
-            self.markAsDirtyAllTree(node: downloadTreeNode)
+            node.updateState(with: .downloading(progress: progress))
+            node.invalidateNodesUpTheTree()
         case .completed(_):
-            downloadTreeNode.state = .finished(completed: true)
-            self.markAsDirtyAllTree(node: downloadTreeNode)
-            self.currentDownloads.removeValue(forKey: event.taskID)
+            node.updateState(with: .finished(completed: true))
+            node.invalidateNodesUpTheTree()
+            self.activeVideoDownloads.removeValue(forKey: event.videoID)
+            self.cleanDeadNodes()
         }
     }
 
-    /// Node representation in the syllabus tree
-    private final class DownloadTreeNode {
-        typealias Observer = (DownloadTreeNode) -> Void
+    enum Error: Swift.Error {
+        case invalidNode
+    }
+}
 
-        enum State {
-            case finished(completed: Bool)
-            case downloading(progress: Float)
+extension SyllabusDownloadsInteractionService: DownloadsTreeNodeDelegate {
+    func downloadsTreeNodeDidUpdateState(_ downloadsTreeNode: DownloadsTreeNode) {
+        print("syllabus downloads interaction service: reports new state for node: "
+            + "source = \(downloadsTreeNode.source.description), state = \(downloadsTreeNode.state)")
+        switch downloadsTreeNode.state {
+        case .downloading(let progress):
+            self.delegate?.downloadsInteractionService(
+                self,
+                didReceiveProgress: progress,
+                source: downloadsTreeNode.source
+            )
+        case .finished(let completed):
+            self.delegate?.downloadsInteractionService(
+                self,
+                didReceiveCompletion: completed,
+                source: downloadsTreeNode.source
+            )
+        }
+    }
+}
+
+// MARK: - DownloadsTreeNode classes
+
+protocol DownloadsTreeNodeDelegate: class {
+    func downloadsTreeNodeDidUpdateState(_ downloadsTreeNode: DownloadsTreeNode)
+}
+
+/// Representation of SyllabusTreeNode in SyllabusDownloadsInteractionService
+final class DownloadsTreeNode {
+    private(set) var source: SyllabusTreeNode.Source
+
+    private(set) var parent: DownloadsTreeNode?
+    private(set) var children: [DownloadsTreeNode] = []
+
+    private var currentState: State?
+
+    weak var delegate: DownloadsTreeNodeDelegate?
+
+    var state: State {
+        return self.currentState ?? self.updateAndReturnState()
+    }
+
+    var isLeaf: Bool {
+        if case .video(_) = self.source {
+            if !self.children.isEmpty {
+                assertionFailure("Only node with source == .video can be leaf")
+            }
+            return true
         }
 
-        /// Node type (e.g. step, unit, ...)
-        let source: DownloadSource
-        /// Node parent
-        var parent: DownloadTreeNode?
-        /// Node childrens
-        var childrens: [DownloadTreeNode]
+        return false
+    }
 
-        private var observer: Observer?
+    private init(
+        source: SyllabusTreeNode.Source,
+        parentNode: DownloadsTreeNode?,
+        children: [DownloadsTreeNode]
+    ) {
+        self.source = source
+        self.parent = parentNode
+        self.children = children
+    }
 
-        private var currentState: State = .downloading(progress: 0)
+    static func makeDownloadsTreeNodeRecursive(syllabusSubtree: SyllabusTreeNode) -> DownloadsTreeNode {
+        func makeDownloadsTreeNodeRecursive(
+            syllabusSubtree: SyllabusTreeNode,
+            parentNode: DownloadsTreeNode? = nil
+        ) -> DownloadsTreeNode {
+            let rootNode = DownloadsTreeNode(
+                source: syllabusSubtree.value,
+                parentNode: parentNode,
+                children: []
+            )
+            let childrenNodes: [DownloadsTreeNode] = syllabusSubtree.children.map { node in
+                makeDownloadsTreeNodeRecursive(syllabusSubtree: node, parentNode: rootNode)
+            }
+            rootNode.children = childrenNodes
+            return rootNode
+        }
 
-        /// Set true if should report progress
-        var shouldReportProgress: Bool {
-            didSet {
-                if self.shouldReportProgress {
-                    self.observer?(self)
-                }
+        return makeDownloadsTreeNodeRecursive(syllabusSubtree: syllabusSubtree)
+    }
+
+    /// Detach from parent
+    func detachFromParent() {
+        self.parent?.children.removeAll(where: { $0 === self })
+        self.parent = nil
+    }
+
+    /// Update node state; available only for nodes with source == .video
+    func updateState(with newState: State) {
+        guard self.isLeaf else {
+            return
+        }
+
+        self.currentState = newState
+    }
+
+    /// After invalidating, nodes up the tree should recalculate own state
+    func invalidateNodesUpTheTree() {
+        func invalidate(node: DownloadsTreeNode?) {
+            if let currentNode = node {
+                currentNode.currentState = nil
+                invalidate(node: currentNode.parent)
+                currentNode.updateAndReturnState()
             }
         }
+        invalidate(node: self.parent)
+    }
 
-        /// Set true if some childrens were updated
-        var isDirty = false {
-            didSet {
-                if self.isDirty && self.shouldReportProgress {
-                    self.observer?(self)
-                }
+    /// Return list of nodes in NLR traverse order (from root to leafs)
+    // see: https://en.wikipedia.org/wiki/Tree_traversal#Pre-order_(NLR)
+    func flatten() -> [DownloadsTreeNode] {
+        return [self] + self.children.map { node -> [DownloadsTreeNode] in node.flatten() }.reduce([], +)
+    }
+
+    /// Remove dead child nodes and return true if node is dead after shrink operation
+    func shrink() -> Bool {
+        if self.children.isEmpty {
+            if case .finished(_) = self.state {
+                return true
             }
+            return false
         }
 
-        /// Computed property of current node downloading progress;
-        /// If node is marked as "dirty" then progress will be calculated recursive based on progresses of its child-nodes
-        var state: State {
-            get {
-                if case .step(_) = self.source {
-                    return self.currentState
-                } else {
-                    if self.isDirty {
-                        self.updateProgressRecursive()
-                        self.isDirty = false
+        self.children = self.children.filter { !$0.shrink() }
+        return self.children.isEmpty
+    }
+
+    /// Try to merge given tree with source tree and return result (common tree or both trees)
+    static func tryToMerge(firstTree: DownloadsTreeNode, secondTree: DownloadsTreeNode) -> [DownloadsTreeNode] {
+        // To update root
+        var firstTree = firstTree
+
+        // Add fake node `nil` node
+        // TopologyEdge – edge in tree that contains sources
+        typealias TopologyEdge = (from: SyllabusTreeNode.Source?, to: SyllabusTreeNode.Source)
+        func getAllEdges(in tree: DownloadsTreeNode, parent: DownloadsTreeNode? = nil) -> [TopologyEdge] {
+            return [(from: parent?.source, to: tree.source)]
+                + tree.children.map { getAllEdges(in: $0, parent: tree) }.reduce([], +)
+        }
+
+        let sourceEdges: [TopologyEdge] = getAllEdges(in: firstTree)
+        let targetEdges: [TopologyEdge] = getAllEdges(in: secondTree)
+
+        // Get edges
+        let targetFilteredEdges = targetEdges.filter { edge in
+            !sourceEdges.contains(where: { sourceEdge in
+                edge.from == sourceEdge.from && edge.to == sourceEdge.to
+            })
+        }
+
+        // Get topsort on distinct edges subset
+        func getTopologicalSortOrder(edges: [TopologyEdge]) -> [SyllabusTreeNode.Source] {
+            var graph: [SyllabusTreeNode.Source: SyllabusTreeNode.Source] = [:]
+            var visited: [SyllabusTreeNode.Source: Bool] = [:]
+
+            for edge in edges {
+                if let from = edge.from {
+                    let to = edge.to
+                    graph[to] = from
+                    visited[to] = false
+                    visited[from] = false
+                }
+            }
+
+            func dfs(sourceNode: SyllabusTreeNode.Source) -> [SyllabusTreeNode.Source] {
+                if visited[sourceNode] ?? true {
+                    return []
+                }
+
+                visited[sourceNode] = true
+                // There is only one node cause we have reversed tree
+                if let adjacentNode = graph[sourceNode] {
+                    return dfs(sourceNode: adjacentNode) + [sourceNode]
+                }
+                return [sourceNode]
+            }
+
+            return visited.keys.map { dfs(sourceNode: $0) }.reduce([], +)
+        }
+
+        let topologicalSortOrder = getTopologicalSortOrder(edges: targetEdges)
+        for node in topologicalSortOrder {
+            for edgeToNode in targetFilteredEdges where edgeToNode.to == node {
+                let currentTreeNodes = firstTree.flatten()
+                if let existingNode = currentTreeNodes.first(where: { $0.source == node }) {
+                    // Find node & set new parent for it
+                    guard let fromNodeSource = edgeToNode.from else {
+                        if node.observationLevel > firstTree.source.observationLevel {
+                            continue
+                        } else {
+                            fatalError("Invalid state: same node in different trees has different observationLevel")
+                        }
                     }
-                    return self.currentState
-                }
-            }
-            set {
-                if case .step(_) = self.source {
-                    self.currentState = newValue
+
+                    guard let parentNode = currentTreeNodes.first(where: { $0.source == fromNodeSource }) else {
+                        fatalError("Invalid state: current tree should contain parent node due to topsort order")
+                    }
+
+                    existingNode.parent = parentNode
+                    if !parentNode.children.contains(where: { $0.source == existingNode.source }) {
+                        parentNode.children.append(existingNode)
+                    }
+                } else {
+                    // Insert new node
+                    guard let newDownloadNodeInSecondTree = secondTree.flatten().first(where: { $0.source == node }) else {
+                        fatalError("Invalid state: target tree should contain node from source-tree")
+                    }
+
+                    let newDownloadNode = DownloadsTreeNode(
+                        source: newDownloadNodeInSecondTree.source,
+                        parentNode: nil,
+                        children: []
+                    )
+
+                    if let fromNodeSource = edgeToNode.from {
+                        // Find parent
+                        guard let parentNode = currentTreeNodes.first(where: { $0.source == fromNodeSource }) else {
+                            fatalError("Invalid state: current tree should contain parent node due to topsort order")
+                        }
+
+                        parentNode.children.append(newDownloadNode)
+                        newDownloadNode.parent = parentNode
+                        newDownloadNode.children = []
+                    } else {
+                        // New root?
+                        if firstTree.source.observationLevel > newDownloadNode.source.observationLevel {
+                            // New root
+                            newDownloadNode.children = [firstTree]
+                            newDownloadNode.parent = nil
+                            firstTree = newDownloadNode
+                        } else {
+                            // Another tree
+                            // Can return here: if root node belongs to another tree then all nodes belong to another tree
+                            return [firstTree, secondTree]
+                        }
+                    }
                 }
             }
         }
+        return [firstTree]
+    }
 
-        init(
-            source: DownloadSource,
-            childrens: [DownloadTreeNode],
-            shouldReportProgress: Bool = false,
-            observer: Observer? = nil
-        ) {
-            self.source = source
-            self.childrens = childrens
-            self.shouldReportProgress = shouldReportProgress
-            self.observer = observer
+    @discardableResult
+    private func updateAndReturnState() -> State {
+        // For leafs: if state is nil then node in waiting for download state
+        // Is this call possible?
+        if self.isLeaf {
+            return self.currentState ?? .downloading(progress: 0)
         }
 
-        private func updateProgressRecursive() {
-            // If any children failed -> current node failed
-            // If all childrens succeed -> current node succeed
-            // Otherwise current node downloading
-
-            let childrensDownloadingPercentage = self.childrens.map { children -> Float in
-                switch children.state {
-                case .downloading(let progress):
-                    return progress
-                case .finished(let completed):
-                    return completed ? 1.0 : 0.0
-                }
-            }.reduce(0, +) / Float(self.childrens.count)
-
-            let failedChildrensCount = self.childrens.map { children -> Int in
-                switch children.state {
-                case .downloading(_):
-                    return 0
-                case .finished(let completed):
-                    return completed ? 0 : 1
-                }
-            }.reduce(0, +)
-
-            let succeedChildrensCount = self.childrens.map { children -> Int in
-                switch children.state {
-                case .downloading(_):
-                    return 0
-                case .finished(let completed):
-                    return completed ? 1 : 0
-                }
-            }.reduce(0, +)
-
-            if failedChildrensCount > 0 {
-                self.currentState = .finished(completed: false)
-                return
+        // If any children failed -> current node failed
+        // If all childrens succeed -> current node succeed
+        // Otherwise current node downloading
+        let childrensDownloadingPercentage = self.children.map { child -> Float in
+            switch child.state {
+            case .downloading(let progress):
+                return progress
+            case .finished(let completed):
+                return completed ? 1.0 : 0.0
             }
+        }.reduce(0, +) / Float(self.children.count)
 
-            if succeedChildrensCount == self.childrens.count {
-                self.currentState = .finished(completed: true)
-                return
+        let failedChildrensCount = self.children.map { child -> Int in
+            switch child.state {
+            case .downloading(_):
+                return 0
+            case .finished(let completed):
+                return completed ? 0 : 1
             }
+        }.reduce(0, +)
 
-            self.currentState = .downloading(progress: childrensDownloadingPercentage)
+        let downloadingChildrensCount = self.children.map { child -> Int in
+            switch child.state {
+            case .downloading(_):
+                return 1
+            default:
+                return 0
+            }
+        }.reduce(0, +)
+
+        let succeedChildrensCount = self.children.map { child -> Int in
+            switch child.state {
+            case .downloading(_):
+                return 0
+            case .finished(let completed):
+                return completed ? 1 : 0
+            }
+        }.reduce(0, +)
+
+        let state: State
+        if failedChildrensCount > 0 && downloadingChildrensCount == 0 {
+            state = .finished(completed: false)
+        } else if succeedChildrensCount == self.children.count && downloadingChildrensCount == 0 {
+            state = .finished(completed: true)
+        } else {
+            state = .downloading(progress: childrensDownloadingPercentage)
         }
+
+        self.currentState = state
+        self.delegate?.downloadsTreeNodeDidUpdateState(self)
+        return state
+    }
+
+    enum State {
+        case finished(completed: Bool)
+        case downloading(progress: Float)
     }
 }

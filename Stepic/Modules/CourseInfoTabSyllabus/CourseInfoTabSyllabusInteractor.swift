@@ -213,7 +213,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        self.askForUnitPresentation(unit)
+        self.requestUnitPresentation(unit)
     }
 
     func handlePersonalDeadlinesAction() {
@@ -258,11 +258,27 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func cancelDownloading(unit: Unit) {
-        // TODO: implement
+        guard let lesson = unit.lesson else {
+            print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
+            return
+        }
+
+        try? self.syllabusDownloadsInteractionService.cancelDownloading(
+            syllabusTree: self.makeSyllabusTree(unit: unit, steps: lesson.steps)
+        )
     }
 
     private func cancelDownloading(section: Section) {
-        // TODO: implement
+        for unit in section.units {
+            guard let lesson = unit.lesson else {
+                print("course info tab syllabus interactor: unit doesn't have lesson, unit id = \(unit.id)")
+                return
+            }
+
+            try? self.syllabusDownloadsInteractionService.cancelDownloading(
+                syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: lesson.steps)
+            )
+        }
     }
 
     private func removeCached(unit: Unit) {
@@ -304,13 +320,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        guard let section = self.currentSections.values.first(
-            where: { $0.id == unit.sectionId }
-        ) else {
-            print("course info tab syllabus interactor: unit doesn't have stored section, unit id = \(unit.id)")
-            return
-        }
-
         self.presenter.presentDownloadButtonUpdate(
             response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                 source: .unit(entity: unit),
@@ -319,13 +328,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         )
 
         self.provider.fetchSteps(for: lesson).done { steps in
-            self.syllabusDownloadsInteractionService.startDownloading(
-                cut: .init(
-                    steps: steps,
-                    unit: unit,
-                    section: section,
-                    observationLevel: .unit
-                )
+            try? self.syllabusDownloadsInteractionService.startDownloading(
+                syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
             )
         }.catch { _ in
             // TODO: error
@@ -347,13 +351,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
 
             self.provider.fetchSteps(for: lesson).done { steps in
-                self.syllabusDownloadsInteractionService.startDownloading(
-                    cut: .init(
-                        steps: steps,
-                        unit: unit,
-                        section: section,
-                        observationLevel: .section
-                    )
+                try? self.syllabusDownloadsInteractionService.startDownloading(
+                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
                 )
             }.catch { _ in
                 // TODO: error
@@ -471,6 +470,42 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         return "\(unitID)"
     }
 
+    private func makeSyllabusTree(
+        section: Section? = nil,
+        unit: Unit,
+        steps: [Step]
+    ) -> SyllabusTreeNode {
+        var stepsTrees: [SyllabusTreeNode] = []
+        for step in steps {
+            guard step.block.name == "video",
+                  let video = step.block.video else {
+                continue
+            }
+
+            if self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil {
+                stepsTrees.append(
+                    SyllabusTreeNode(
+                        value: .step(id: step.id),
+                        children: [SyllabusTreeNode(value: .video(entity: video))]
+                    )
+                )
+            }
+        }
+
+        let unitTree = SyllabusTreeNode(
+            value: .unit(id: unit.id),
+            children: stepsTrees
+        )
+
+        if let section = section {
+            return SyllabusTreeNode(
+                value: .section(id: section.id),
+                children: [unitTree]
+            )
+        }
+        return unitTree
+    }
+
     private func getDownloadingState(for unit: Unit) -> CourseInfoTabSyllabus.DownloadState {
         // If section is unreachable or exam then all units are not available
         guard let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
@@ -509,12 +544,30 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return .notAvailable
         }
 
+        // Check if video is downloading
+        let stepsWithVideo = steps
+            .filter { $0.block.name == "video" }
+            .compactMap { $0.block.video }
+        let downloadingVideosProgresses = stepsWithVideo.compactMap {
+            self.syllabusDownloadsInteractionService.getDownloadProgress(for: $0)
+        }
+
+        // TODO: remove calculation, get progress for unit from service
+        if downloadingVideosProgresses.count > 0 {
+            return .downloading(
+                progress: downloadingVideosProgresses.reduce(0, +) / Float(downloadingVideosProgresses.count)
+            )
+        }
+
+        // Try to restore downloads
+        try? self.syllabusDownloadsInteractionService.restoreDownloading(
+            syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
+        )
+
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
             return .available(isCached: false)
         }
-
-        // TODO: check current downloads
 
         // All videos are cached
         return .available(isCached: true)
@@ -552,6 +605,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         let unitStates = units.map { self.getDownloadingState(for: $0) }
         var shouldBeCachedUnitsCount = 0
         var notAvailableUnitsCount = 0
+        var downloadingUnitProgresses: [Float] = []
 
         for state in unitStates {
             switch state {
@@ -559,9 +613,18 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 notAvailableUnitsCount += 1
             case .available(let isCached):
                 shouldBeCachedUnitsCount += isCached ? 0 : 1
+            case .downloading(let progress):
+                downloadingUnitProgresses.append(progress)
             default:
                 break
             }
+        }
+
+        // Downloading state
+        if downloadingUnitProgresses.count == units.count {
+            return .downloading(
+                progress: downloadingUnitProgresses.reduce(0, +) / Float(downloadingUnitProgresses.count)
+            )
         }
 
         // If all units are not available to downloading then section is not available too
@@ -583,7 +646,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.nextLessonService.configure(with: orderedSections)
     }
 
-    private func askForUnitPresentation(_ unit: Unit) {
+    private func requestUnitPresentation(_ unit: Unit) {
         // Check whether unit is in exam section
         if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)],
             section.isExam, section.isReachable {
@@ -616,13 +679,19 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
 
 extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDelegate {
     private func getStateUpdateByDownloadSource(
-        _ source: DownloadSource
+        _ source: SyllabusTreeNode.Source
     ) -> CourseInfoTabSyllabus.DownloadButtonStateUpdate.Source? {
         switch source {
-        case .unit(let unit):
-            return .unit(entity: unit)
-        case .section(let section):
-            return .section(entity: section)
+        case .unit(let id):
+            if let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(id)] as? Unit {
+                return .unit(entity: unit)
+            }
+            return nil
+        case .section(let id):
+            if let section = self.currentSections[self.getUniqueIdentifierBySectionID(id)] {
+                return .section(entity: section)
+            }
+            return nil
         default:
             return nil
         }
@@ -631,7 +700,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
     func downloadsInteractionService(
         _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         didReceiveProgress progress: Float,
-        source: DownloadSource
+        source: SyllabusTreeNode.Source
     ) {
         let sourceType = self.getStateUpdateByDownloadSource(source)
         DispatchQueue.main.async { [weak self] in
@@ -649,7 +718,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
     func downloadsInteractionService(
         _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         didReceiveCompletion completed: Bool,
-        source: DownloadSource
+        source: SyllabusTreeNode.Source
     ) {
         let sourceType = self.getStateUpdateByDownloadSource(source)
         DispatchQueue.main.async { [weak self] in
@@ -672,7 +741,7 @@ extension CourseInfoTabSyllabusInteractor: SectionNavigationDelegate {
             return
         }
 
-        self.askForUnitPresentation(previousUnit)
+        self.requestUnitPresentation(previousUnit)
     }
 
     func didRequestNextUnitPresentationForLessonInUnit(unitID: Unit.IdType) {
@@ -681,6 +750,6 @@ extension CourseInfoTabSyllabusInteractor: SectionNavigationDelegate {
             return
         }
 
-        self.askForUnitPresentation(nextUnit)
+        self.requestUnitPresentation(nextUnit)
     }
 }

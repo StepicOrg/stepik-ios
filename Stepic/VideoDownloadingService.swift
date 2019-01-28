@@ -11,7 +11,7 @@ import Foundation
 typealias VideoDownloadingServiceEventHandler = (VideoDownloadingServiceEvent) -> Void
 
 struct VideoDownloadingServiceEvent {
-    var taskID: Int
+    var videoID: Video.IdType
     var state: State
 
     enum State {
@@ -24,16 +24,16 @@ struct VideoDownloadingServiceEvent {
 protocol VideoDownloadingServiceProtocol: class {
     /// Subscribe on events about downloads
     func subscribeOnEvents(handler: @escaping VideoDownloadingServiceEventHandler)
-    /// Download video; returns downloader task ID to use it for download control
-    func download(videoID: Video.IdType, url: URL) -> DownloaderTaskProtocol.IDType
-    /// Get downloader task by video id
-    func getTaskID(by videoID: Video.IdType) -> DownloaderTaskProtocol.IDType?
-    /// Get task progress and state
-    func getTaskProgressAndState(
-        taskID: DownloaderTaskProtocol.IDType
-    ) -> (DownloaderTaskState, Float)?
+    /// Download video
+    func download(video: Video) throws
     /// Cancel active download
-    func cancelTask(taskID: DownloaderTaskProtocol.IDType)
+    func cancelDownload(videoID: Video.IdType) throws
+    /// Get task progress
+    func getTaskProgress(videoID: Video.IdType) throws -> Float?
+    /// Get task state
+    func getTaskState(videoID: Video.IdType) throws -> DownloaderTaskState?
+    /// Check whether task exists
+    func isTaskActive(videoID: Video.IdType) -> Bool
 }
 
 final class VideoDownloadingService: VideoDownloadingServiceProtocol {
@@ -54,7 +54,6 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
 
     private var videosForTasks: [DownloaderTaskProtocol.IDType: Video.IdType] = [:]
     private var tasksForVideos: [Video.IdType: DownloaderTaskProtocol.IDType] = [:]
-
     private var tasksLastProgress: [DownloaderTaskProtocol.IDType: Float] = [:]
 
     init(
@@ -64,10 +63,11 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         self.downloader = downloader
         self.fileManager = fileManager
 
-        // TODO: resume downloads
-//        self.downloader.restoredTasks.forEach { task in
-//
-//        }
+        // FIXME: handle background downloads
+        self.downloader.restoredTasks.forEach { task in
+            print("video downloading service: cancel restored background task, id = \(task.id)")
+            task.cancel()
+        }
         self.downloader.resumeRestoredTasks()
     }
 
@@ -77,24 +77,57 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         self.handlers.append(handler)
     }
 
-    func download(videoID: Video.IdType, url: URL) -> DownloaderTaskProtocol.IDType {
+    func download(video: Video) throws {
+        if tasksForVideos[video.id] != nil {
+            throw Error.alreadyDownloading
+        }
+
+        let url = video.getUrlForQuality(VideosInfo.downloadingVideoQuality)
         let task = DownloaderTask(url: url)
+
         self.setupReporters(for: task)
 
         task.start(with: self.downloader)
 
-        self.tasksForVideos[videoID] = task.id
-        self.videosForTasks[task.id] = videoID
+        self.tasksForVideos[video.id] = task.id
+        self.videosForTasks[task.id] = video.id
 
         self.observedTasks[task.id] = task
-        return task.id
     }
 
-    func getTaskID(by videoID: Video.IdType) -> DownloaderTaskProtocol.IDType? {
-        return self.tasksForVideos[videoID]
+    func getTaskProgress(videoID: Video.IdType) throws -> Float? {
+        guard let taskID = self.tasksForVideos[videoID] else {
+            throw Error.videoNotFound
+        }
+        return self.getTaskProgressAndState(taskID: taskID)?.1
     }
 
-    func getTaskProgressAndState(
+    func getTaskState(videoID: Video.IdType) throws -> DownloaderTaskState? {
+        guard let taskID = self.tasksForVideos[videoID] else {
+            throw Error.videoNotFound
+        }
+        return self.getTaskProgressAndState(taskID: taskID)?.0
+    }
+
+    func cancelDownload(videoID: Video.IdType) throws {
+        guard let taskID = self.tasksForVideos[videoID] else {
+            throw Error.videoNotFound
+        }
+
+        guard let task = self.observedTasks[taskID] else {
+            return
+        }
+
+        task.cancel()
+    }
+
+    func isTaskActive(videoID: Video.IdType) -> Bool {
+        return self.tasksForVideos.keys.contains(videoID)
+    }
+
+    // MARK: Private methods
+
+    private func getTaskProgressAndState(
         taskID: DownloaderTaskProtocol.IDType
     ) -> (DownloaderTaskState, Float)? {
         guard let progress = self.tasksLastProgress[taskID] else {
@@ -108,16 +141,6 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         return (taskInfo.state, progress)
     }
 
-    func cancelTask(taskID: Int) {
-        guard let task = self.observedTasks[taskID] else {
-            return
-        }
-
-        task.cancel()
-    }
-
-    // MARK: Private methods
-
     private func reportToSubscribers(event: VideoDownloadingServiceEvent) {
         self.handlers.forEach { handler in
             handler(event)
@@ -127,12 +150,16 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     private func setupReporters(for task: DownloaderTaskProtocol) {
         // Report progress
         task.progressReporter = { [weak self] progress in
+            guard let videoID = self?.videosForTasks[task.id] else {
+                return
+            }
+
             // Replace unknown progress by 0
             let lastProgress = self?.tasksLastProgress[task.id] ?? 0
             let progress = max(lastProgress, progress ?? 0)
 
             let event = VideoDownloadingServiceEvent(
-                taskID: task.id,
+                videoID: videoID,
                 state: .active(progress: progress)
             )
 
@@ -161,31 +188,40 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             }()
 
             let event = VideoDownloadingServiceEvent(
-                taskID: task.id,
+                videoID: videoID,
                 state: state
             )
 
-            self?.reportToSubscribers(event: event)
-            self?.removeObservedTask(id: task.id)
+            strongSelf.reportToSubscribers(event: event)
+            strongSelf.removeObservedTask(id: task.id)
         }
 
         // Failure reporter
         task.failureReporter = { [weak self] error in
-            self?.reportToSubscribers(
+            guard let strongSelf = self,
+                  let videoID = self?.videosForTasks[task.id] else {
+                return
+            }
+
+            strongSelf.reportToSubscribers(
                 event: VideoDownloadingServiceEvent(
-                    taskID: task.id,
+                    videoID: videoID,
                     state: .error
                 )
             )
-            self?.removeObservedTask(id: task.id)
+            strongSelf.removeObservedTask(id: task.id)
         }
 
         // State changed
         task.stateReporter = { [weak self] newState in
             if case .stopped = newState {
+                guard let videoID = self?.videosForTasks[task.id] else {
+                    return
+                }
+
                 self?.reportToSubscribers(
                     event: VideoDownloadingServiceEvent(
-                        taskID: task.id,
+                        videoID: videoID,
                         state: .error
                     )
                 )
@@ -201,5 +237,10 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             self.tasksForVideos.removeValue(forKey: videoID)
         }
         self.videosForTasks.removeValue(forKey: id)
+    }
+
+    enum Error: Swift.Error {
+        case videoNotFound
+        case alreadyDownloading
     }
 }
