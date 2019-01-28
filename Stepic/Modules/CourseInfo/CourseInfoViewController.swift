@@ -183,7 +183,7 @@ final class CourseInfoViewController: UIViewController {
 
     private func makeSubmodules() -> [UIViewController] {
         // Info submodule
-        let infoAssembly = CourseInfoTabInfoAssembly(output: nil)
+        let infoAssembly = CourseInfoTabInfoAssembly()
 
         // Syllabus submodule
         let syllabusAssembly = CourseInfoTabSyllabusAssembly(

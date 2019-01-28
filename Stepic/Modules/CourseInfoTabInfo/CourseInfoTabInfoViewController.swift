@@ -72,7 +72,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        self.view = CourseInfoTabInfoView(delegate: self, videoViewDelegate: self)
+        self.view = CourseInfoTabInfoView(videoViewDelegate: self)
     }
 
     override func viewDidLoad() {
@@ -106,14 +106,6 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtoc
         }
 
         self.state = newState
-    }
-}
-
-// MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
-
-extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
-    func courseInfoTabInfoViewDidTapOnActionButton(_ courseInfoTabInfoView: CourseInfoTabInfoView) {
-        self.interactor.doCourseAction()
     }
 }
 

@@ -11,12 +11,9 @@ import PromiseKit
 
 protocol CourseInfoTabInfoInteractorProtocol {
     func getCourseInfo()
-    func doCourseAction()
 }
 
 final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
-    weak var moduleOutput: CourseInfoTabInfoOutputProtocol?
-
     let presenter: CourseInfoTabInfoPresenterProtocol
     let provider: CourseInfoTabInfoProviderProtocol
 
@@ -46,14 +43,6 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
             )
         }.catch { error in
             print("Failed get course info with error: \(error)")
-        }
-    }
-
-    // MARK: Course action
-
-    func doCourseAction() {
-        if let course = self.course {
-            self.moduleOutput?.doCourseAction(course: course)
         }
     }
 }

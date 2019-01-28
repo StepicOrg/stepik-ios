@@ -12,13 +12,6 @@ final class CourseInfoTabInfoAssembly: Assembly {
     // Input
     var moduleInput: CourseInfoTabInfoInputProtocol?
 
-    // Output
-    private weak var moduleOutput: CourseInfoTabInfoOutputProtocol?
-
-    init(output: CourseInfoTabInfoOutputProtocol? = nil) {
-        self.moduleOutput = output
-    }
-
     func makeModule() -> UIViewController {
         let provider = CourseInfoTabInfoProvider(
             usersNetworkService: UsersNetworkService(usersAPI: UsersAPI())
@@ -33,7 +26,6 @@ final class CourseInfoTabInfoAssembly: Assembly {
         )
 
         presenter.viewController = viewController
-        interactor.moduleOutput = self.moduleOutput
         self.moduleInput = interactor
 
         return viewController

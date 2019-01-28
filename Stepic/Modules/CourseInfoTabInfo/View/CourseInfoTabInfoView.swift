@@ -10,12 +10,6 @@ import UIKit
 import SnapKit
 import Atributika
 
-protocol CourseInfoTabInfoViewDelegate: class {
-    func courseInfoTabInfoViewDidTapOnActionButton(
-        _ courseInfoTabInfoView: CourseInfoTabInfoView
-    )
-}
-
 extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
@@ -28,7 +22,6 @@ extension CourseInfoTabInfoView {
 }
 
 final class CourseInfoTabInfoView: UIView {
-    weak var delegate: CourseInfoTabInfoViewDelegate?
     weak var videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate?
 
     let appearance: Appearance
@@ -44,11 +37,9 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        delegate: CourseInfoTabInfoViewDelegate? = nil,
         videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate? = nil
     ) {
         self.appearance = appearance
-        self.delegate = delegate
         self.videoViewDelegate = videoViewDelegate
         super.init(frame: frame)
 
@@ -100,11 +91,6 @@ final class CourseInfoTabInfoView: UIView {
         // Redraw self cause geometry & sizes can be changed
         self.setNeedsLayout()
         self.layoutIfNeeded()
-    }
-
-    @objc
-    private func actionButtonClicked(sender: UIButton) {
-        self.delegate?.courseInfoTabInfoViewDidTapOnActionButton(self)
     }
 
     // MARK: Private API
