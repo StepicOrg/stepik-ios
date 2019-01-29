@@ -17,6 +17,15 @@ class StepsAPI: APIEndpoint {
     func retrieve(ids: [Int], existing: [Step], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Step]> {
         return getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
+
+    @available(*, deprecated, message: "Legacy: we want to pass existing")
+    func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Step]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return getObjectsByIds(ids: ids, updating: Step.fetch(ids))
+    }
 }
 
 extension StepsAPI {

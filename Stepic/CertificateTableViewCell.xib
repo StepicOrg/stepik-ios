@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,27 +20,30 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zUU-df-7sN">
-                        <rect key="frame" x="214" y="19" width="90" height="90"/>
+                        <rect key="frame" x="206" y="19" width="90" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="AmA-J9-4fT"/>
                             <constraint firstAttribute="height" constant="90" id="JrS-rv-0Tp"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3sx-Bh-D4h">
-                        <rect key="frame" x="217" y="117" width="85" height="27"/>
+                        <rect key="frame" x="208.5" y="117" width="85" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="cAn-ml-tfa"/>
+                        </constraints>
                         <state key="normal" title="Поделиться"/>
                         <connections>
                             <action selector="sharePressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7DU-9p-zik"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Какой-то любой курс с длинным названием" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ed-hd-TGJ" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="24" y="19" width="174" height="36"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Какой-то любой курс с длинным названием" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ed-hd-TGJ" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                        <rect key="frame" x="24" y="19" width="166" height="36"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сертификат с отличием за курс Какой-то любой курс с длинным названием" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-d9-iaV" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="24" y="63" width="174" height="43"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Сертификат с отличием за курс Какой-то любой курс с длинным названием" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-d9-iaV" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                        <rect key="frame" x="24" y="63" width="166" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -49,10 +52,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результат: 100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGI-vZ-HOK" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="24" y="115.5" width="116" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="eCU-f1-K4b"/>
-                        </constraints>
+                        <rect key="frame" x="24" y="121.5" width="117" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -64,14 +64,14 @@
                     <constraint firstItem="unJ-Qa-uSr" firstAttribute="leading" secondItem="kGI-vZ-HOK" secondAttribute="leading" constant="-24" id="1je-5i-3gv"/>
                     <constraint firstItem="unJ-Qa-uSr" firstAttribute="leading" secondItem="3Ed-hd-TGJ" secondAttribute="leading" constant="-24" id="7hH-ug-SF9"/>
                     <constraint firstItem="zUU-df-7sN" firstAttribute="trailing" secondItem="unJ-Qa-uSr" secondAttribute="trailing" constant="-24" id="FXo-IE-gI5"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="3sx-Bh-D4h" secondAttribute="bottom" id="Hqx-OT-avt"/>
-                    <constraint firstItem="kGI-vZ-HOK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0WE-d9-iaV" secondAttribute="bottom" constant="2" id="QTM-uh-IF4"/>
+                    <constraint firstItem="kGI-vZ-HOK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0WE-d9-iaV" secondAttribute="bottom" priority="999" constant="8" id="QTM-uh-IF4"/>
+                    <constraint firstItem="unJ-Qa-uSr" firstAttribute="bottom" secondItem="3sx-Bh-D4h" secondAttribute="bottom" priority="999" constant="10.5" id="ZrD-VD-Y9f"/>
                     <constraint firstItem="3Ed-hd-TGJ" firstAttribute="top" secondItem="unJ-Qa-uSr" secondAttribute="top" constant="19" id="f8c-3x-uMe"/>
                     <constraint firstItem="0WE-d9-iaV" firstAttribute="top" secondItem="3Ed-hd-TGJ" secondAttribute="bottom" constant="8" id="nvW-M9-7rm"/>
                     <constraint firstItem="3sx-Bh-D4h" firstAttribute="centerX" secondItem="zUU-df-7sN" secondAttribute="centerX" id="oTg-Bl-bdJ"/>
-                    <constraint firstItem="kGI-vZ-HOK" firstAttribute="centerY" secondItem="3sx-Bh-D4h" secondAttribute="centerY" priority="999" id="sKj-tl-JyT"/>
+                    <constraint firstItem="kGI-vZ-HOK" firstAttribute="centerY" secondItem="3sx-Bh-D4h" secondAttribute="centerY" id="sKj-tl-JyT"/>
                     <constraint firstItem="zUU-df-7sN" firstAttribute="leading" secondItem="3Ed-hd-TGJ" secondAttribute="trailing" constant="16" id="uZQ-68-Wet"/>
-                    <constraint firstItem="3sx-Bh-D4h" firstAttribute="top" secondItem="zUU-df-7sN" secondAttribute="bottom" constant="8" id="uvu-7n-WZL"/>
+                    <constraint firstItem="3sx-Bh-D4h" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zUU-df-7sN" secondAttribute="bottom" constant="8" id="uvu-7n-WZL"/>
                     <constraint firstItem="zUU-df-7sN" firstAttribute="top" secondItem="unJ-Qa-uSr" secondAttribute="top" constant="19" id="z22-mn-gY9"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="unJ-Qa-uSr"/>

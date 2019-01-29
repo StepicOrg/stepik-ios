@@ -97,9 +97,91 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    @available(iOS 11.0, *)
+    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+        get {
+            return self.scrollView.contentInsetAdjustmentBehavior
+        }
+        set {
+            self.scrollView.contentInsetAdjustmentBehavior = newValue
+        }
+    }
+
+    var scrollDelegate: UIScrollViewDelegate? {
+        get {
+            return self.scrollView.delegate
+        }
+        set {
+            self.scrollView.delegate = newValue
+        }
+    }
+
+    var contentInsets: UIEdgeInsets {
+        get {
+            return self.scrollView.contentInset
+        }
+        set {
+            self.scrollView.contentInset = newValue
+        }
+    }
+
+    var contentOffset: CGPoint {
+        get {
+            return self.scrollView.contentOffset
+        }
+        set {
+            self.scrollView.contentOffset = newValue
+        }
+    }
+
+    var scrollIndicatorInsets: UIEdgeInsets {
+        get {
+            return self.scrollView.scrollIndicatorInsets
+        }
+        set {
+            self.scrollView.scrollIndicatorInsets = newValue
+        }
+    }
+
+    var shouldBounce: Bool {
+        get {
+            return self.scrollView.bounces
+        }
+        set {
+            self.scrollView.bounces = newValue
+        }
+    }
+
+    var isPagingEnabled: Bool {
+        get {
+            return self.scrollView.isPagingEnabled
+        }
+        set {
+            self.scrollView.isPagingEnabled = newValue
+        }
+    }
+
+    var isScrollEnabled: Bool {
+        get {
+            return self.scrollView.isScrollEnabled
+        }
+        set {
+            self.scrollView.isScrollEnabled = newValue
+        }
+    }
+
+    var contentSize: CGSize {
+        get {
+            return self.scrollView.contentSize
+        }
+        set {
+            self.scrollView.contentSize = newValue
+        }
+    }
+
     // MARK: - Inits
 
-    init(frame: CGRect, orientation: Orientation = .vertical) {
+    init(frame: CGRect = .zero, orientation: Orientation) {
         self.orientation = orientation
         super.init(frame: frame)
 
@@ -141,6 +223,14 @@ final class ScrollableStackView: UIView {
 
     func endRefreshing() {
         self.refreshControl?.endRefreshing()
+    }
+
+    func scrollTo(arrangedViewIndex: Int) {
+        guard let targetFrame = self.arrangedSubviews[safe: arrangedViewIndex]?.frame else {
+            return
+        }
+
+        self.scrollView.scrollRectToVisible(targetFrame, animated: true)
     }
 
     // MARK: - Private methods

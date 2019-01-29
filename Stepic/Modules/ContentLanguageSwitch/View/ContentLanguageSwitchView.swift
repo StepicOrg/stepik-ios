@@ -39,7 +39,6 @@ final class ContentLanguageSwitchView: UIView {
         var appearance = ExploreBlockContainerView.Appearance()
         appearance.contentViewInsets = self.appearance.buttonsInsets
         return ExploreBlockContainerView(
-            frame: .zero,
             headerView: self.headerView,
             contentView: self.contentView,
             shouldShowSeparator: true,
@@ -51,7 +50,7 @@ final class ContentLanguageSwitchView: UIView {
         var appearance = ExploreBlockHeaderView.Appearance()
         appearance.titleLabelColor = self.appearance.headerTitleColor
 
-        let headerView = ExploreBlockHeaderView(frame: .zero, appearance: appearance)
+        let headerView = ExploreBlockHeaderView(appearance: appearance)
         headerView.titleText = NSLocalizedString("ChooseSearchLanguage", comment: "")
         headerView.summaryText = nil
         headerView.shouldShowShowAllButton = false
@@ -83,7 +82,7 @@ final class ContentLanguageSwitchView: UIView {
     private var viewModels: [ContentLanguageSwitchViewModel] = []
 
     init(
-        frame: CGRect,
+        frame: CGRect = .zero,
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance

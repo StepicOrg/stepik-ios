@@ -14,7 +14,7 @@ protocol ContinueCourseViewDelegate: class {
 }
 
 final class ContinueCourseView: UIView {
-    private lazy var lastStepView = ContinueLastStepView(frame: .zero)
+    private lazy var lastStepView = ContinueLastStepView()
     weak var delegate: ContinueCourseViewDelegate?
 
     // View for tooltip
@@ -34,7 +34,7 @@ final class ContinueCourseView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with viewModel: ContinueCourseViewModel) {
+    func configure(viewModel: ContinueCourseViewModel) {
         self.lastStepView.courseTitle = viewModel.title
 
         if let progressDescription = viewModel.progress?.description,
@@ -49,7 +49,7 @@ final class ContinueCourseView: UIView {
 
     func showLoading() {
         self.skeleton.viewBuilder = {
-            ContinueCourseSkeletonView(frame: .zero)
+            ContinueCourseSkeletonView()
         }
         self.skeleton.show()
     }

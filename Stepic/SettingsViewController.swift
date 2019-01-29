@@ -12,6 +12,8 @@ class SettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?
 
     override func viewDidLoad() {
+        edgesForExtendedLayout = []
+
         super.viewDidLoad()
         presenter = SettingsPresenter(view: self)
         tableView.tableHeaderView = artView
@@ -47,8 +49,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         switch menuBlockID {
         case .videoHeader:
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("Video", comment: ""))
-        case .onlyWifiSwitch:
-            return buildOnlyWifiSwitchBlock()
         case .loadedVideoQuality:
             return buildLoadedVideoQualityBlock()
         case .onlineVideoQuality:
@@ -65,10 +65,6 @@ class SettingsViewController: MenuViewController, SettingsView {
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("AdaptivePreferencesTitle", comment: ""))
         case .adaptiveModeSwitch:
             return buildAdaptiveModeSwitchBlock()
-        case .emptyHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: "")
-        case .downloads:
-            return buildDownloadsTransitionBlock()
         case .logout:
             return buildLogoutBlock()
         }
@@ -119,18 +115,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         return block
     }
 
-    private func buildOnlyWifiSwitchBlock() -> SwitchMenuBlock {
-        let block = SwitchMenuBlock(id: SettingsMenuBlock.onlyWifiSwitch.rawValue, title: NSLocalizedString("WiFiLoadPreference", comment: ""), isOn: !ConnectionHelper.shared.reachableOnWWAN)
-
-        block.onSwitch = {
-            [weak self]
-            isOn in
-            self?.presenter?.changeVideoWifiReachability(to: !isOn)
-        }
-
-        return block
-    }
-
     private func buildAdaptiveModeSwitchBlock() -> SwitchMenuBlock {
         let block = SwitchMenuBlock(id: SettingsMenuBlock.adaptiveModeSwitch.rawValue, title: NSLocalizedString("UseAdaptiveModePreference", comment: ""), isOn: AdaptiveStorageManager.shared.isAdaptiveModeEnabled)
 
@@ -149,17 +133,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         block.onTouch = {
             [weak self] in
             self?.changeCodeEditorSettings()
-        }
-
-        return block
-    }
-
-    private func buildDownloadsTransitionBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: SettingsMenuBlock.downloads.rawValue, title: NSLocalizedString("Downloads", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.navigateToDownloads()
         }
 
         return block
@@ -211,11 +184,6 @@ class SettingsViewController: MenuViewController, SettingsView {
             artView.width = size.width
         }
         artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
-    }
-
-    func navigateToDownloads() {
-        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
-        navigationController?.pushViewController(vc, animated: true)
     }
 
     func presentAuth() {

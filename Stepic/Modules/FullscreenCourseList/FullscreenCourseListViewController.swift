@@ -115,13 +115,13 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     }
 
     func displayCourseInfo(viewModel: FullscreenCourseList.PresentCourseInfo.ViewModel) {
-        let assembly = CourseInfoLegacyAssembly(course: viewModel.course)
+        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .info)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     func displayCourseSyllabus(viewModel: FullscreenCourseList.PresentCourseSyllabus.ViewModel) {
-        let assembly = SyllabusLegacyAssembly(course: viewModel.course)
+        let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .syllabus)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }

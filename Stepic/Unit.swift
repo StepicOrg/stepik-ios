@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 
-class Unit: NSManagedObject, JSONSerializable {
+final class Unit: NSManagedObject, IDFetchable {
 
     typealias IdType = Int
 
@@ -66,5 +66,28 @@ class Unit: NSManagedObject, JSONSerializable {
         } catch {
             return nil
         }
+    }
+
+    static func fetch(_ ids: [Int]) -> [Unit] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
+
+        let idPredicates = ids.map {
+            NSPredicate(format: "managedId == %@", $0 as NSNumber)
+        }
+        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+        do {
+            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Unit] else {
+                return []
+            }
+            return results
+        } catch {
+            return []
+        }
+    }
+}
+
+extension Unit: NextLessonServiceUnitSourceProtocol {
+    var uniqueIdentifier: UniqueIdentifierType {
+        return "\(id)"
     }
 }

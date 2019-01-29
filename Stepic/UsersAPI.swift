@@ -17,6 +17,15 @@ class UsersAPI: APIEndpoint {
     func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [User]) -> Promise<[User]> {
         return getObjectsByIds(ids: ids, updating: existing)
     }
+
+    @available(*, deprecated, message: "Legacy: we want to pass existing")
+    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[User]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
+        return getObjectsByIds(ids: ids, updating: User.fetch(ids))
+    }
 }
 
 extension UsersAPI {

@@ -41,6 +41,7 @@ BeginDate = "Begin date";
 EndDate = "End date";
 SoftDeadline = "Soft deadline";
 HardDeadline = "Hard deadline";
+PersonalDeadline = "Personal deadline";
 Certificate = "Certificate";
 Summary = "Summary";
 Description = "Description";
@@ -152,6 +153,12 @@ Activity = "Activity";
 days1 = "day";
 days234 = "days";
 days567890 = "days";
+hours1 = "hour";
+hours234 = "hours";
+hours567890 = "hours";
+points1 = "point";
+points234 = "points";
+points567890 = "points";
 VideoRate = "Video rate";
 VideoQuality = "Video quality";
 Downloaded = "Downloaded";
@@ -207,6 +214,8 @@ PleaseLeaveFeedbackAppstore = "Please, leave your feedback in the AppStore";
 PleaseLeaveFeedbackEmail = "Please, send your feedback by email";
 ThankYou = "Thank you!";
 Share = "Share";
+WithDistinction = "With distinction";
+CertificateCondition = "Certificate condition";
 CertificateWithDistinction = "Certificate with distinction";
 Certificate = "Certificate";
 CertificateDescriptionBody = "for the course";
@@ -418,6 +427,7 @@ LessonDownloadTooltip = "Download lesson to watch lectures offline";
 ContinueLearningWidgetTooltip = "Tap to continue from where you finished last time";
 StreaksSwitchTooltip = "Turn on to get new portion of knowledge every day";
 VideoInBackgroundTooltip = "You can play video in background";
+PersonalDeadlinesButtonTooltip = "We can smartly create personal learning schedule for you, so you'll never forget to study";
 
 /* Notification alerts */
 NotificationTabNotificationRequestAlertTitle = "Stay tuned";
@@ -425,6 +435,20 @@ NotificationTabNotificationRequestAlertMessage = "We are trying to make learning
 
 CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
 CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
+
+/* Course info */
+CourseInfoTitle = "About course";
+CourseInfoTabInfo = "Info";
+CourseInfoTabSyllabus = "Syllabus";
+CourseInfoTitleAuthor = "by";
+CourseInfoTitleAbout = "About";
+CourseInfoTitleRequirements = "Requirements";
+CourseInfoTitleTargetAudience = "Target audience";
+CourseInfoTitleInstructors = "Instructors";
+CourseInfoTitleTimeToComplete = "Expected time to complete";
+CourseInfoTitleLanguage = "Language";
+CourseInfoTitleCertificate = "Certificate";
+CourseInfoTitleCertificateDetails = "Certificate details";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning yesterday, come back today and become smarter! 🚀";
@@ -564,7 +588,11 @@ PersonalDeadlineNotificationBody = "Deadline for module %@ is in %@ hours. Don't
 Save = "Save";
 PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
-PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so you'll never forget to study!";
+
+/* Course info */
+CourseMeetsRecommendations = "Meets the recommendations of Stepik";
+SyllabusDeadlinesButton = "Schedule";
+SyllabusDownloadAll = "Download all";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";

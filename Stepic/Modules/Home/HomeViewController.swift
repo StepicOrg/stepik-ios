@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
@@ -30,7 +31,7 @@ final class HomeViewController: BaseExploreViewController {
     private var lastContentLanguage: ContentLanguage?
     private var lastIsAuthorizedFlag: Bool = false
 
-    private lazy var streakView = StreakActivityView(frame: .zero)
+    private lazy var streakView = StreakActivityView()
     lazy var homeInteractor = self.interactor as? HomeInteractorProtocol
 
     init(interactor: HomeInteractorProtocol) {
@@ -212,7 +213,7 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = self.makeEnrolledCourseListSubmodule()
         } else {
             // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(frame: .zero, message: state.message)
+            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
             switch state {
             case .anonymous:
                 placeholderView.onPlaceholderClick = { [weak self] in
@@ -311,7 +312,7 @@ final class HomeViewController: BaseExploreViewController {
             (view, viewController) = self.makePopularCourseListSubmodule(contentLanguage: language)
         } else {
             // Build placeholder
-            let placeholderView = ExploreBlockPlaceholderView(frame: .zero, message: state.message)
+            let placeholderView = ExploreBlockPlaceholderView(message: state.message)
             placeholderView.onPlaceholderClick = { [weak self] in
                 self?.refreshStateForPopularCourses(state: .normal)
             }

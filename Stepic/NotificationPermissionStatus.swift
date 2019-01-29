@@ -53,7 +53,7 @@ enum NotificationPermissionStatus: String {
             self = .denied
         case .notDetermined:
             self = .notDetermined
-        default:
+	case .provisional:
             self = .authorized
         }
     }

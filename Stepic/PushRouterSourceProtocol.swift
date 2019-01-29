@@ -11,6 +11,7 @@ import UIKit
 
 protocol PushRouterSourceProtocol {
     func push(module: UIViewController)
+    func replace(by module: UIViewController)
 }
 
 protocol PushStackRouterSourceProtocol {
@@ -21,6 +22,12 @@ extension UIViewController: PushRouterSourceProtocol, PushStackRouterSourceProto
     @objc
     func push(module: UIViewController) {
         navigationController?.pushViewController(module, animated: true)
+    }
+
+    @objc
+    func replace(by module: UIViewController) {
+        navigationController?.popViewController(animated: false)
+        self.push(module: module)
     }
 
     @objc
