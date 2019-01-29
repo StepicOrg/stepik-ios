@@ -54,6 +54,9 @@ class SearchResultsViewController: UIViewController, SearchResultsView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        edgesForExtendedLayout = []
+
         updateUIForCurrentState()
     }
 

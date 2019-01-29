@@ -9,13 +9,50 @@
 import Foundation
 import SnapKit
 
+@available(*, deprecated, message: "Class to initialize lesson w/o storyboards logic")
+final class LessonLegacyAssembly: Assembly {
+    private let initObjects: LessonInitObjects?
+    private let initIDs: LessonInitIds?
+    private let navigationRules: LessonNavigationRules
+    private let navigationDelegate: SectionNavigationDelegate
+
+    init(
+        initObjects: LessonInitObjects?,
+        initIDs: LessonInitIds?,
+        navigationRules: LessonNavigationRules,
+        navigationDelegate: SectionNavigationDelegate
+    ) {
+        self.initObjects = initObjects
+        self.initIDs = initIDs
+        self.navigationRules = navigationRules
+        self.navigationDelegate = navigationDelegate
+    }
+
+    func makeModule() -> UIViewController {
+        guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
+            fatalError()
+        }
+
+        lessonVC.hidesBottomBarWhenPushed = true
+        lessonVC.initObjects = self.initObjects
+        lessonVC.initIds = self.initIDs
+
+        lessonVC.navigationRules = self.navigationRules
+        lessonVC.sectionNavigationDelegate = self.navigationDelegate
+
+        return lessonVC
+    }
+}
+
+typealias LessonNavigationRules = (prev: Bool, next: Bool)
+
 class LessonViewController: PagerController, ShareableController, LessonView {
 
     var parentShareBlock: ((UIActivityViewController) -> Void)?
 
     weak var sectionNavigationDelegate: SectionNavigationDelegate?
 
-    var navigationRules : (prev: Bool, next: Bool)?
+    var navigationRules : LessonNavigationRules?
 
     fileprivate var presenter: LessonPresenter?
 
@@ -99,6 +136,8 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         super.viewDidLoad()
         dataSource = self
         initTabs()
+
+        edgesForExtendedLayout = []
 
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
 //        navigationController?.navigationBar.shadowImage = UIImage()

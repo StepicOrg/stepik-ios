@@ -97,46 +97,6 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
         }
     }
 
-    func editSchedule() {
-        let presentr: Presentr = {
-            let presenter = Presentr(presentationType: PresentationType.popup)
-            presenter.roundCorners = true
-            return presenter
-        }()
-
-        guard let editVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlineEditScheduleViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlineEditScheduleViewController else {
-            return
-        }
-        editVC.course = course
-        editVC.onSavePressed = {
-            [weak self] in
-            self?.tableView.reloadData()
-        }
-        customPresentViewController(presentr, viewController: editVC, animated: true, completion: nil)
-    }
-
-    func requestDeadlines() {
-        let presentr: Presentr = {
-            let presenter = Presentr(presentationType: .dynamic(center: .center))
-            presenter.roundCorners = true
-            return presenter
-        }()
-
-        guard let modesVC = ControllerHelper.instantiateViewController(identifier: "PersonalDeadlinesModeSelectionViewController", storyboardName: "PersonalDeadlines") as? PersonalDeadlinesModeSelectionViewController else {
-            return
-        }
-        modesVC.course = course
-        modesVC.onDeadlineSelected = {
-            [weak self] in
-            self?.tableView.reloadData()
-            NotificationsRegistrationService(
-                presenter: NotificationsRequestOnlySettingsAlertPresenter(),
-                analytics: .init(source: .personalDeadline)
-            ).registerForRemoteNotifications()
-        }
-        customPresentViewController(presentr, viewController: modesVC, animated: true, completion: nil)
-    }
-
     //Widget here
     lazy var personalDeadlinesWidgetView: UIView = {
         let widget = PersonalDeadlinesSuggestionWidgetView(frame: CGRect.zero)
@@ -196,7 +156,7 @@ class SectionsViewController: UIViewController, ShareableController, UIViewContr
                 }
                 AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.deleted)
                 SVProgressHUD.show()
-                PersonalDeadlineManager.shared.deleteDeadline(for: strongSelf.course).done { [weak self] _ in
+                PersonalDeadlinesService().deleteDeadline(for: strongSelf.course).done { [weak self] _ in
                     SVProgressHUD.dismiss()
                     self?.tableView.reloadData()
                     }.catch {

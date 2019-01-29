@@ -13,9 +13,10 @@ def shared_pods
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric', '1.7.11'
     pod 'Crashlytics', '3.10.7'
-    pod 'DeviceKit', '1.7.0'
+    pod 'DeviceKit', '1.10.0'
     pod 'PromiseKit', '6.3.4'
     pod 'SwiftLint', '0.27.0'
+    pod 'Reveal-SDK', :configurations => ['Debug']
 end
 
 def all_pods
@@ -57,11 +58,12 @@ def all_pods
     pod 'lottie-ios', '2.5.0'
     pod 'Koloda', '4.3.1'
     pod 'Charts', '3.1.1'
-    pod 'EasyTipView', :git => 'https://github.com/igorkislyuk/EasyTipView.git'
+    pod 'EasyTipView', '2.0.1'
     pod 'ActionSheetPicker-3.0', '2.3.0'
     pod 'NotificationBannerSwift', '1.6.3'
     pod 'Nuke', '7.3.2'
     pod 'STRegex', '1.1.0'
+    pod 'Pageboy', '3.0.1' 
     pod 'Branch', '0.25.5'
 end
 

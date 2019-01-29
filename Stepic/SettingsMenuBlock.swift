@@ -10,16 +10,13 @@ import Foundation
 
 enum SettingsMenuBlock: String {
     case videoHeader
-    case onlyWifiSwitch
     case loadedVideoQuality
     case onlineVideoQuality
     case adaptiveHeader
     case adaptiveModeSwitch
     case codeEditorSettingsHeader
     case codeEditorSettings
-    case downloads
     case logout
-    case emptyHeader
     case languageSettingsHeader
     case contentLanguage
 }

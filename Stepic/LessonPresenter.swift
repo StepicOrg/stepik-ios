@@ -272,14 +272,18 @@ class LessonPresenter {
                 if index == 0 && shouldNavigateToPrev {
                     stepController.prevLessonHandler = {
                         [weak self] in
-                        self?.sectionNavigationDelegate?.displayPrev()
+                        if let unitID = self?.unitId {
+                            self?.sectionNavigationDelegate?.didRequestPreviousUnitPresentationForLessonInUnit(unitID: unitID)
+                        }
                     }
                 }
 
                 if index == lesson.steps.count - 1 && shouldNavigateToNext {
                     stepController.nextLessonHandler = {
                         [weak self] in
-                        self?.sectionNavigationDelegate?.displayNext()
+                        if let unitID = self?.unitId {
+                            self?.sectionNavigationDelegate?.didRequestNextUnitPresentationForLessonInUnit(unitID: unitID)
+                        }
                     }
                 }
             }
@@ -315,14 +319,18 @@ class LessonPresenter {
                 if index == 0 && shouldNavigateToPrev {
                     stepController.prevLessonHandler = {
                         [weak self] in
-                        self?.sectionNavigationDelegate?.displayPrev()
+                        if let unitID = self?.unitId {
+                            self?.sectionNavigationDelegate?.didRequestPreviousUnitPresentationForLessonInUnit(unitID: unitID)
+                        }
                     }
                 }
 
                 if index == lesson.steps.count - 1 && shouldNavigateToNext {
                     stepController.nextLessonHandler = {
                         [weak self] in
-                        self?.sectionNavigationDelegate?.displayNext()
+                        if let unitID = self?.unitId {
+                            self?.sectionNavigationDelegate?.didRequestNextUnitPresentationForLessonInUnit(unitID: unitID)
+                        }
                     }
                 }
             }

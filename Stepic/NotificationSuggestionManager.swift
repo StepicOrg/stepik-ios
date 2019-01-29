@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Legacy -Manager class, class should be protocol implementation")
 final class NotificationSuggestionManager {
     private let defaults = UserDefaults.standard
 

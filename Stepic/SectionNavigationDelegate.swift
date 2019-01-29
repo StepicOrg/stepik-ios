@@ -9,6 +9,6 @@
 import Foundation
 
 protocol SectionNavigationDelegate: class {
-    func displayPrev()
-    func displayNext()
+    func didRequestPreviousUnitPresentationForLessonInUnit(unitID: Unit.IdType)
+    func didRequestNextUnitPresentationForLessonInUnit(unitID: Unit.IdType)
 }

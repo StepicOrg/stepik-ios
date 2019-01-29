@@ -9,6 +9,104 @@
 import Foundation
 import UIKit
 import ActionSheetPicker_3_0
+import Presentr
+
+@available(*, deprecated, message: "Class to incapsulate edit & delete logic")
+final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
+    private let course: Course
+    private let presentingViewController: UIViewController
+    private let updateCompletion: (() -> Void)?
+
+    init(
+        course: Course,
+        presentingViewController: UIViewController,
+        updateCompletion: (() -> Void)? = nil
+    ) {
+        self.course = course
+        self.presentingViewController = presentingViewController
+        self.updateCompletion = updateCompletion
+    }
+
+    func makeModule() -> UIViewController {
+        let presentr: Presentr = {
+            let presenter = Presentr(presentationType: .popup)
+            presenter.roundCorners = true
+            return presenter
+        }()
+
+        let alert = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("EditSchedule", comment: ""),
+                style: .default,
+                handler: { _ in
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.changePressed)
+                    let viewController = PersonalDeadlineEditScheduleLegacyAssembly(
+                        course: self.course
+                    ).makeModule()
+                    (viewController as? PersonalDeadlineEditScheduleViewController)?.onSavePressed = {
+                        self.updateCompletion?()
+                    }
+                    self.presentingViewController.customPresentViewController(
+                        presentr,
+                        viewController: viewController,
+                        animated: true
+                    )
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("DeleteSchedule", comment: ""),
+                style: .destructive,
+                handler: { _ in
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.deleted)
+                    SVProgressHUD.show()
+                    PersonalDeadlinesService().deleteDeadline(for: self.course).done { _ in
+                        SVProgressHUD.dismiss()
+                    }.ensure {
+                        self.updateCompletion?()
+                    }.catch { _ in
+                        SVProgressHUD.showError(withStatus: nil)
+                    }
+                }
+            )
+        )
+        return alert
+    }
+}
+
+@available(*, deprecated, message: "Class to initialize personal deadlines settings w/o storyboards logic")
+final class PersonalDeadlineEditScheduleLegacyAssembly: Assembly {
+    private let course: Course
+
+    init(course: Course) {
+        self.course = course
+    }
+
+    func makeModule() -> UIViewController {
+        guard let modesVC = ControllerHelper.instantiateViewController(
+            identifier: "PersonalDeadlineEditScheduleViewController",
+            storyboardName: "PersonalDeadlines"
+        ) as? PersonalDeadlineEditScheduleViewController else {
+                fatalError()
+        }
+        modesVC.course = self.course
+
+        return modesVC
+    }
+}
 
 class PersonalDeadlineEditScheduleViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
@@ -59,7 +157,7 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.EditSchedule.Time.saved)
         let newDeadlines = sectionDeadlinesData.map { $0.sectionDeadline }
         SVProgressHUD.show()
-        PersonalDeadlineManager.shared.changeDeadline(for: course, newDeadlines: newDeadlines).done { [weak self] _ in
+        PersonalDeadlinesService().changeDeadline(for: course, newDeadlines: newDeadlines).done { [weak self] _ in
             SVProgressHUD.dismiss()
             self?.onSavePressed?()
             self?.dismiss(animated: true, completion: nil)

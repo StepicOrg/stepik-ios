@@ -21,6 +21,8 @@ extension Lesson {
     @NSManaged var managedSlug: String?
     @NSManaged var managedCoverURL: String?
     @NSManaged var managedTimeToComplete: NSNumber?
+    @NSManaged var managedVoteDelta: NSNumber?
+    @NSManaged var managedPassedBy: NSNumber?
 
     @NSManaged var managedStepsArray: NSObject?
 
@@ -117,6 +119,24 @@ extension Lesson {
         }
         set(value) {
             managedTimeToComplete = value as NSNumber?
+        }
+    }
+
+    var voteDelta: Int {
+        get {
+            return managedVoteDelta?.intValue ?? 0
+        }
+        set {
+            self.managedVoteDelta = newValue as NSNumber?
+        }
+    }
+
+    var passedBy: Int {
+        get {
+            return managedPassedBy?.intValue ?? 0
+        }
+        set {
+            self.managedPassedBy = newValue as NSNumber?
         }
     }
 

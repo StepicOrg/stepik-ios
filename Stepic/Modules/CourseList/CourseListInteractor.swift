@@ -32,6 +32,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     let courseSubscriber: CourseSubscriberProtocol
     let userAccountService: UserAccountServiceProtocol
+    let personalDeadlinesService: PersonalDeadlinesServiceProtocol
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -43,13 +44,15 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         provider: CourseListProviderProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         courseSubscriber: CourseSubscriberProtocol,
-        userAccountService: UserAccountServiceProtocol
+        userAccountService: UserAccountServiceProtocol,
+        personalDeadlinesService: PersonalDeadlinesServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.adaptiveStorageManager = adaptiveStorageManager
         self.courseSubscriber = courseSubscriber
         self.userAccountService = userAccountService
+        self.personalDeadlinesService = personalDeadlinesService
 
         self.registerForNotifications()
     }
@@ -77,6 +80,17 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
 
             self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
+
+            // Fetch personal deadlines
+            if let userID = self.userAccountService.currentUser?.id, self.isOnline {
+                courses.forEach { course in
+                    self.personalDeadlinesService.syncDeadline(
+                        for: course,
+                        userID: userID
+                    ).cauterize()
+                }
+            }
+
             if self.currentCourses.isEmpty {
                 // Offline mode: present empty state only if get empty courses from network
                 if self.isOnline && self.didLoadFromCache {
@@ -90,6 +104,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     ),
                     availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
                 )
+
                 let response = CourseList.ShowCourses.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
                     result: courses
