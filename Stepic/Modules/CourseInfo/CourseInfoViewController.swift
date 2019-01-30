@@ -182,25 +182,24 @@ final class CourseInfoViewController: UIViewController {
     }
 
     private func makeSubmodules() -> [UIViewController] {
-        // Info submodule
-        let infoAssembly = CourseInfoTabInfoAssembly()
+        var viewControllers: [UIViewController] = []
+        var submodules: [CourseInfoSubmoduleProtocol?] = []
 
-        // Syllabus submodule
-        let syllabusAssembly = CourseInfoTabSyllabusAssembly(
-            output: self.interactor as? CourseInfoTabSyllabusOutputProtocol
-        )
+        for tab in self.availableTabs {
+            switch tab {
+            case .info:
+                let infoAssembly = CourseInfoTabInfoAssembly()
+                viewControllers.append(infoAssembly.makeModule())
+                submodules.append(infoAssembly.moduleInput)
+            case .syllabus:
+                let syllabusAssembly = CourseInfoTabSyllabusAssembly(
+                    output: self.interactor as? CourseInfoTabSyllabusOutputProtocol
+                )
+                viewControllers.append(syllabusAssembly.makeModule())
+                submodules.append(syllabusAssembly.moduleInput)
+            }
+        }
 
-        // Prepare for page controller
-        let viewControllers: [UIViewController] = [
-            infoAssembly.makeModule(),
-            syllabusAssembly.makeModule()
-        ]
-
-        // Register on interactor level
-        let submodules: [CourseInfoSubmoduleProtocol?] = [
-            infoAssembly.moduleInput,
-            syllabusAssembly.moduleInput
-        ]
         self.interactor.registerSubmodules(
             request: .init(
                 submodules: submodules.compactMap { $0 }
