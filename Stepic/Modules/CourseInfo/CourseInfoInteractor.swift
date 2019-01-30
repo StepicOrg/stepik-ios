@@ -66,7 +66,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private var isOnline = false
     private var didLoadFromCache = false
 
+    // To fetch only one course concurrently
     private let fetchSemaphore = DispatchSemaphore(value: 1)
+    private lazy var fetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoInteractor.CourseFetch")
 
     init(
         courseID: Course.IdType,
@@ -93,9 +95,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func refreshCourse() {
-        let queue = DispatchQueue(label: String(describing: self))
-
-        queue.async { [weak self] in
+        self.fetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -107,8 +107,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 }
             }.ensure {
                 strongSelf.fetchSemaphore.signal()
-            }.catch { _ in
-                // TODO: handle
+            }.catch { error in
+                print("course info interactor: course refresh error = \(error)")
             }
         }
     }
@@ -241,7 +241,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     // Offline mode: we already presented cached course, but network request failed
                     // so let's ignore it and show only cached
                 } else {
-                    // TODO: error
+                    seal.reject(error)
                 }
             }
         }

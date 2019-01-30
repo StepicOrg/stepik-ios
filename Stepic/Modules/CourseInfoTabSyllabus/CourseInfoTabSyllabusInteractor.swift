@@ -65,8 +65,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     // Online mode: fetch section only when offline fetching completed
     private let sectionFetchSemaphore = DispatchSemaphore(value: 0)
 
-    private lazy var sectionsFetchBackgroundQueue = DispatchQueue(label: "course_info_interactor.sections")
-    private lazy var unitsFetchBackgroundQueue = DispatchQueue(label: "course_info_interactor.units")
+    private lazy var sectionsFetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.SectionsFetch")
+    private lazy var unitsFetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.UnitsFetch")
 
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
