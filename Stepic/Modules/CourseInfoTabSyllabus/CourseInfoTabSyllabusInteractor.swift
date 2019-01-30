@@ -65,7 +65,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     // Online mode: fetch section only when offline fetching completed
     private let sectionFetchSemaphore = DispatchSemaphore(value: 0)
 
-    private lazy var backgroundQueue = DispatchQueue(label: "course_info_interactor.syllabus")
+    private lazy var sectionsFetchBackgroundQueue = DispatchQueue(label: "course_info_interactor.sections")
+    private lazy var unitsFetchBackgroundQueue = DispatchQueue(label: "course_info_interactor.units")
 
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
@@ -94,7 +95,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        self.backgroundQueue.async { [weak self] in
+        self.sectionsFetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -128,7 +129,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     func fetchSyllabusSection(request: CourseInfoTabSyllabus.ShowSyllabusSection.Request) {
-        self.backgroundQueue.async { [weak self] in
+        self.unitsFetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -143,14 +144,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
             print("course info tab syllabus interactor: start fetching section from network, id = \(section.id)")
             strongSelf.fetchSyllabusSection(section: section).done { response in
-                _ = strongSelf.sectionPresentSemaphore.wait(timeout: .now() + 0.5)
+                strongSelf.sectionPresentSemaphore.wait()
                 DispatchQueue.main.async {
                     print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
                     strongSelf.presenter.presentCourseSyllabus(response: response)
                     strongSelf.sectionPresentSemaphore.signal()
                 }
-            }.catch { _ in
-                // TODO: handle
+            }.catch { error in
+                print("course info tab syllabus interactor: error while fetching section from network, error = \(error)")
             }
         }
     }
@@ -452,6 +453,7 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
     }
 
     func update(with course: Course, isOnline: Bool) {
+        print("course info tab syllabus interactor: updated from parent module, isOnline = \(isOnline)")
         self.currentCourse = course
         self.isOnline = isOnline
         self.getCourseSyllabus()
