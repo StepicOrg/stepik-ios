@@ -2634,6 +2634,7 @@
 		2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		2C8A0F3320FCCE230009F67E /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
+		2C8AD758220311F000C9C089 /* DataBackUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8AD757220311F000C9C089 /* DataBackUpdateService.swift */; };
 		2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */; };
@@ -5848,6 +5849,7 @@
 		2C89A9441F4C285B00227C3B /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/GMAT/Icons.xcassets; sourceTree = "<group>"; };
 		2C89A9461F4C285B00227C3B /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/GMAT/Tokens.plist; sourceTree = "<group>"; };
 		2C89AB3A1F4C289900227C3B /* Adaptive GMAT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adaptive GMAT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C8AD757220311F000C9C089 /* DataBackUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBackUpdateService.swift; sourceTree = "<group>"; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
 		2C8E882B21A2E70F00A27789 /* Model_course_authors_v29.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_authors_v29.xcdatamodel; sourceTree = "<group>"; };
 		2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObjectTests.swift; sourceTree = "<group>"; };
@@ -9917,6 +9919,7 @@
 				089200722199DFF000083627 /* Deep Links */,
 				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
 				2C23C12621AD8907001DCF89 /* NextLessonService.swift */,
+				2C8AD757220311F000C9C089 /* DataBackUpdateService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -15391,6 +15394,7 @@
 				A7EA75E023F7C7E67C22587F /* ContinueCourseAssembly.swift in Sources */,
 				79E683BEBAAD85873A38E144 /* ContinueCourseViewController.swift in Sources */,
 				2C9A54F421D2947F00EC359A /* StepsNetworkService.swift in Sources */,
+				2C8AD758220311F000C9C089 /* DataBackUpdateService.swift in Sources */,
 				2CE6E2A521B96F9800DDC67A /* CourseInfoTabInfoInstructorSkeletonView.swift in Sources */,
 				BA02C8D13CE96D409F5D2178 /* ContinueCourseInteractor.swift in Sources */,
 				A605F2786A13ABCCA9EE53DC /* ContinueCoursePresenter.swift in Sources */,
