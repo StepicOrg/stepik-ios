@@ -233,10 +233,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.presenter.presentWaitingState()
         self.forceLoadAllSectionsIfNeeded().done { _ in
             self.requestUnitPresentation(unit)
-        }.ensure {
-            self.presenter.dismissWaitingState()
         }.catch { _ in
-            // TODO: handle error
+            print("course info tab syllabus interactor: unable to load all sections, request unit presentation w/o completed syllabus structure")
+            self.requestUnitPresentation(unit)
+        }.finally {
+            self.presenter.dismissWaitingState()
         }
     }
 
@@ -267,8 +268,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 let unitsPromises = self.currentSections.values.map { self.fetchSyllabusSection(section: $0) }
                 when(fulfilled: unitsPromises).done { _ in
                     seal.fulfill(())
-                }.catch { _ in
-                    // TODO: handle error
+                }.catch { error in
+                    seal.reject(error)
                 }
             }
         }
@@ -313,8 +314,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
-            }.catch { _ in
-                // TODO: error
+            }.catch { error in
+                print("course info tab syllabus interactor: unable to fetch section, error = \(error)")
+                seal.reject(Error.fetchFailed)
             }
         }
     }
@@ -347,8 +349,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
-            }.catch { _ in
-                // TODO: error
+            }.catch { error in
+                print("course info tab syllabus interactor: unable to fetch syllabus, error = \(error)")
+                seal.reject(Error.fetchFailed)
             }
         }
     }
@@ -592,15 +595,21 @@ extension CourseInfoTabSyllabusInteractor {
                 return
             }
 
-            try? self.videoFileManager.removeVideoStoredFile(videoID: video.id)
-
-            self.presenter.presentDownloadButtonUpdate(
-                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
-                    source: .unit(entity: unit),
-                    downloadState: self.getDownloadingState(for: unit)
-                )
-            )
+            do {
+                try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+                video.cachedQuality = nil
+                CoreDataHelper.instance.save()
+            } catch {
+                print("course info tab syllabus interactor: error while file removing = \(error)")
+            }
         }
+
+        self.presenter.presentDownloadButtonUpdate(
+            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                source: .unit(entity: unit),
+                downloadState: self.getDownloadingState(for: unit)
+            )
+        )
     }
 
     private func removeCached(section: Section) {

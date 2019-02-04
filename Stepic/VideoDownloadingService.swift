@@ -52,8 +52,9 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     private var handlers: [VideoDownloadingServiceEventHandler] = []
     private var observedTasks: [DownloaderTaskProtocol.IDType: DownloaderTaskProtocol] = [:]
 
-    private var videosForTasks: [DownloaderTaskProtocol.IDType: Video.IdType] = [:]
+    private var videosForTasks: [DownloaderTaskProtocol.IDType: Video] = [:]
     private var tasksForVideos: [Video.IdType: DownloaderTaskProtocol.IDType] = [:]
+    private var videoQuality: [Video.IdType: String] = [:]
     private var tasksLastProgress: [DownloaderTaskProtocol.IDType: Float] = [:]
 
     init(
@@ -78,7 +79,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     }
 
     func download(video: Video) throws {
-        if tasksForVideos[video.id] != nil {
+        if self.tasksForVideos[video.id] != nil {
             throw Error.alreadyDownloading
         }
 
@@ -91,7 +92,8 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         task.start(with: self.downloader)
 
         self.tasksForVideos[video.id] = task.id
-        self.videosForTasks[task.id] = video.id
+        self.videosForTasks[task.id] = video
+        self.videoQuality[video.id] = nearestQuality
 
         self.observedTasks[task.id] = task
     }
@@ -151,7 +153,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     private func setupReporters(for task: DownloaderTaskProtocol) {
         // Report progress
         task.progressReporter = { [weak self] progress in
-            guard let videoID = self?.videosForTasks[task.id] else {
+            guard let video = self?.videosForTasks[task.id] else {
                 return
             }
 
@@ -160,7 +162,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             let progress = max(lastProgress, progress ?? 0)
 
             let event = VideoDownloadingServiceEvent(
-                videoID: videoID,
+                videoID: video.id,
                 state: .active(progress: progress)
             )
 
@@ -171,13 +173,13 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         // Report completion
         task.completionReporter = { [weak self] temporaryFileURL in
             guard let strongSelf = self,
-                  let videoID = self?.videosForTasks[task.id] else {
+                  let video = self?.videosForTasks[task.id] else {
                 return
             }
 
             let info = try? strongSelf.fileManager.saveTemporaryFileAsVideoFile(
                 temporaryFileURL: temporaryFileURL,
-                videoID: videoID
+                videoID: video.id
             )
 
             let state: VideoDownloadingServiceEvent.State = {
@@ -189,9 +191,14 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             }()
 
             let event = VideoDownloadingServiceEvent(
-                videoID: videoID,
+                videoID: video.id,
                 state: state
             )
+
+            if let videoQuality = self?.videoQuality[video.id] {
+                video.cachedQuality = videoQuality
+                CoreDataHelper.instance.save()
+            }
 
             strongSelf.reportToSubscribers(event: event)
             strongSelf.removeObservedTask(id: task.id)
@@ -200,13 +207,13 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         // Failure reporter
         task.failureReporter = { [weak self] error in
             guard let strongSelf = self,
-                  let videoID = self?.videosForTasks[task.id] else {
+                  let video = self?.videosForTasks[task.id] else {
                 return
             }
 
             strongSelf.reportToSubscribers(
                 event: VideoDownloadingServiceEvent(
-                    videoID: videoID,
+                    videoID: video.id,
                     state: .error
                 )
             )
@@ -216,13 +223,13 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         // State changed
         task.stateReporter = { [weak self] newState in
             if case .stopped = newState {
-                guard let videoID = self?.videosForTasks[task.id] else {
+                guard let video = self?.videosForTasks[task.id] else {
                     return
                 }
 
                 self?.reportToSubscribers(
                     event: VideoDownloadingServiceEvent(
-                        videoID: videoID,
+                        videoID: video.id,
                         state: .error
                     )
                 )
@@ -234,8 +241,9 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         self.observedTasks.removeValue(forKey: id)
         self.tasksLastProgress.removeValue(forKey: id)
 
-        if let videoID = self.videosForTasks[id] {
-            self.tasksForVideos.removeValue(forKey: videoID)
+        if let video = self.videosForTasks[id] {
+            self.tasksForVideos.removeValue(forKey: video.id)
+            self.videoQuality.removeValue(forKey: video.id)
         }
         self.videosForTasks.removeValue(forKey: id)
     }
