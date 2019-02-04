@@ -65,7 +65,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     // Online mode: fetch section only when offline fetching completed
     private let sectionFetchSemaphore = DispatchSemaphore(value: 0)
 
-    private lazy var backgroundQueue = DispatchQueue(label: "course_info_interactor.syllabus")
+    private lazy var sectionsFetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.SectionsFetch")
+    private lazy var unitsFetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.UnitsFetch")
 
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
@@ -94,7 +95,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        self.backgroundQueue.async { [weak self] in
+        self.sectionsFetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -128,7 +129,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     func fetchSyllabusSection(request: CourseInfoTabSyllabus.ShowSyllabusSection.Request) {
-        self.backgroundQueue.async { [weak self] in
+        self.unitsFetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -143,14 +144,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
             print("course info tab syllabus interactor: start fetching section from network, id = \(section.id)")
             strongSelf.fetchSyllabusSection(section: section).done { response in
-                _ = strongSelf.sectionPresentSemaphore.wait(timeout: .now() + 0.5)
+                strongSelf.sectionPresentSemaphore.wait()
                 DispatchQueue.main.async {
                     print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
                     strongSelf.presenter.presentCourseSyllabus(response: response)
                     strongSelf.sectionPresentSemaphore.signal()
                 }
-            }.catch { _ in
-                // TODO: handle
+            }.catch { error in
+                print("course info tab syllabus interactor: error while fetching section from network, error = \(error)")
             }
         }
     }
@@ -232,10 +233,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.presenter.presentWaitingState()
         self.forceLoadAllSectionsIfNeeded().done { _ in
             self.requestUnitPresentation(unit)
-        }.ensure {
-            self.presenter.dismissWaitingState()
         }.catch { _ in
-            // TODO: handle error
+            print("course info tab syllabus interactor: unable to load all sections, request unit presentation w/o completed syllabus structure")
+            self.requestUnitPresentation(unit)
+        }.finally {
+            self.presenter.dismissWaitingState()
         }
     }
 
@@ -266,8 +268,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 let unitsPromises = self.currentSections.values.map { self.fetchSyllabusSection(section: $0) }
                 when(fulfilled: unitsPromises).done { _ in
                     seal.fulfill(())
-                }.catch { _ in
-                    // TODO: handle error
+                }.catch { error in
+                    seal.reject(error)
                 }
             }
         }
@@ -312,8 +314,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
-            }.catch { _ in
-                // TODO: error
+            }.catch { error in
+                print("course info tab syllabus interactor: unable to fetch section, error = \(error)")
+                seal.reject(Error.fetchFailed)
             }
         }
     }
@@ -346,8 +349,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
-            }.catch { _ in
-                // TODO: error
+            }.catch { error in
+                print("course info tab syllabus interactor: unable to fetch syllabus, error = \(error)")
+                seal.reject(Error.fetchFailed)
             }
         }
     }
@@ -452,6 +456,7 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
     }
 
     func update(with course: Course, isOnline: Bool) {
+        print("course info tab syllabus interactor: updated from parent module, isOnline = \(isOnline)")
         self.currentCourse = course
         self.isOnline = isOnline
         self.getCourseSyllabus()
@@ -590,15 +595,21 @@ extension CourseInfoTabSyllabusInteractor {
                 return
             }
 
-            try? self.videoFileManager.removeVideoStoredFile(videoID: video.id)
-
-            self.presenter.presentDownloadButtonUpdate(
-                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
-                    source: .unit(entity: unit),
-                    downloadState: self.getDownloadingState(for: unit)
-                )
-            )
+            do {
+                try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+                video.cachedQuality = nil
+                CoreDataHelper.instance.save()
+            } catch {
+                print("course info tab syllabus interactor: error while file removing = \(error)")
+            }
         }
+
+        self.presenter.presentDownloadButtonUpdate(
+            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                source: .unit(entity: unit),
+                downloadState: self.getDownloadingState(for: unit)
+            )
+        )
     }
 
     private func removeCached(section: Section) {
