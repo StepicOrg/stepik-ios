@@ -45,6 +45,16 @@ class LessonPresenter {
 
     fileprivate var canSendViews: Bool = false
 
+    private lazy var dataBackService: DataBackUpdateServiceProtocol = {
+        let service = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+        return service
+    }()
+
     init(objects: LessonInitObjects?, ids: LessonInitIds?, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI) {
         if let objects = objects {
             self.lesson = objects.lesson
@@ -59,6 +69,26 @@ class LessonPresenter {
         LastStepGlobalContext.context.unitId = unitId
         self.stepsAPI = stepsAPI
         self.lessonsAPI = lessonsAPI
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.stepDoneAction),
+            name: .stepDone,
+            object: nil
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc
+    private func stepDoneAction() {
+        guard let unitID = self.unitId else {
+            return
+        }
+
+        self.dataBackService.triggerProgressUpdate(unit: unitID, triggerRecursive: true)
     }
 
     var url: String {
