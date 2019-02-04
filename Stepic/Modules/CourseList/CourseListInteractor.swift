@@ -33,6 +33,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     let courseSubscriber: CourseSubscriberProtocol
     let userAccountService: UserAccountServiceProtocol
     let personalDeadlinesService: PersonalDeadlinesServiceProtocol
+    let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -45,7 +46,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         courseSubscriber: CourseSubscriberProtocol,
         userAccountService: UserAccountServiceProtocol,
-        personalDeadlinesService: PersonalDeadlinesServiceProtocol
+        personalDeadlinesService: PersonalDeadlinesServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -54,11 +56,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         self.userAccountService = userAccountService
         self.personalDeadlinesService = personalDeadlinesService
 
-        self.registerForNotifications()
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        self.dataBackUpdateService = dataBackUpdateService
+        self.dataBackUpdateService.delegate = self
     }
 
     // MARK: - Public methods
@@ -280,42 +279,6 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         return "\(course.id)"
     }
 
-    // MARK: - Notifications
-
-    private func registerForNotifications() {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: .courseSubscribedNotification,
-            object: nil
-        )
-        NotificationCenter.default.removeObserver(
-            self,
-            name: .courseUnsubscribedNotification,
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.handleCourseUpdate(_:)),
-            name: .courseSubscribedNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.handleCourseUpdate(_:)),
-            name: .courseUnsubscribedNotification,
-            object: nil
-        )
-    }
-
-    @objc
-    private func handleCourseUpdate(_ notification: Foundation.Notification) {
-        if let course = notification.userInfo?["course"] as? Course {
-            self.updateCourseInCurrentCourses(course)
-            self.refreshCourseList()
-        }
-    }
-
     private func updateCourseInCurrentCourses(_ course: Course) {
         guard let targetIndex = self.currentCourses.index(where: { $0.1 == course }) else {
             return
@@ -360,6 +323,24 @@ extension CourseListInteractor: CourseListInputProtocol {
         if self.didLoadFromCache {
             let fakeRequest = CourseList.ShowCourses.Request()
             self.fetchCourses(request: fakeRequest)
+        }
+    }
+}
+
+extension CourseListInteractor: DataBackUpdateServiceDelegate {
+    func dataBackUpdateService(
+        _ dataBackUpdateService: DataBackUpdateService,
+        reportUpdate update: DataBackUpdateDescription,
+        for target: DataBackUpdateTarget
+    ) {
+        guard case .course(let course) = target else {
+            return
+        }
+
+        // If progress or enrollment state was updated then refresh course with data
+        if update.contains(.progress) || update.contains(.enrollment) {
+            self.updateCourseInCurrentCourses(course)
+            self.refreshCourseList()
         }
     }
 }

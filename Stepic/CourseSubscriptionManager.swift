@@ -13,9 +13,20 @@ extension Foundation.Notification.Name {
     static let courseUnsubscribedNotification = Foundation.Notification.Name("CourseUnsubscribedNotification")
 }
 
+@available(*, deprecated, message: "Legacy class; watchOS code depends on it")
 class CourseSubscriptionManager: NSObject {
 
     static let sharedManager = CourseSubscriptionManager()
+
+    private lazy var dataBackUpdateService: DataBackUpdateServiceProtocol = {
+        let service = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+        return service
+    }()
 
     var handleUpdatesBlock: (() -> Void)?
     override init() {}
@@ -65,6 +76,9 @@ class CourseSubscriptionManager: NSObject {
     }
 
     func unsubscribedFrom(course: Course, notifyOthers: Bool = true) {
+        // New service call
+        self.dataBackUpdateService.triggerEnrollmentUpdate(retrievedCourse: course)
+
         deletedCourses += [course]
         handleUpdatesBlock?()
         if notifyOthers {
@@ -77,6 +91,9 @@ class CourseSubscriptionManager: NSObject {
     }
 
     func subscribedTo(course: Course, notifyOthers: Bool = true) {
+        // New service call
+        self.dataBackUpdateService.triggerEnrollmentUpdate(retrievedCourse: course)
+
         addedCourses += [course]
         handleUpdatesBlock?()
         if notifyOthers {

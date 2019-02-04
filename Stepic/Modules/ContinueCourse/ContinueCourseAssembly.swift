@@ -24,11 +24,20 @@ final class ContinueCourseAssembly: Assembly {
             )
         )
         let presenter = ContinueCoursePresenter()
+
+        let dataBackUpdateService = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+
         let interactor = ContinueCourseInteractor(
             presenter: presenter,
             provider: provider,
             adaptiveStorageManager: AdaptiveStorageManager(),
-            tooltipStorageManager: TooltipStorageManager()
+            tooltipStorageManager: TooltipStorageManager(),
+            dataBackUpdateService: dataBackUpdateService
         )
         let viewController = ContinueCourseViewController(
             interactor: interactor
