@@ -65,6 +65,8 @@ class SettingsViewController: MenuViewController, SettingsView {
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("AdaptivePreferencesTitle", comment: ""))
         case .adaptiveModeSwitch:
             return buildAdaptiveModeSwitchBlock()
+        case .downloads:
+            return buildDownloadsBlock()
         case .logout:
             return buildLogoutBlock()
         }
@@ -110,6 +112,16 @@ class SettingsViewController: MenuViewController, SettingsView {
         block.onTouch = {
             [weak self] in
             self?.changeVideoQuality(action: .watching)
+        }
+
+        return block
+    }
+
+    private func buildDownloadsBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(id: SettingsMenuBlock.downloads.rawValue, title: NSLocalizedString("Downloads", comment: ""))
+
+        block.onTouch = { [weak self] in
+            self?.openDownloads()
         }
 
         return block
@@ -172,6 +184,13 @@ class SettingsViewController: MenuViewController, SettingsView {
             return
         }
 
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func openDownloads() {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main") as? DownloadsViewController else {
+            return
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
