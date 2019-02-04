@@ -225,7 +225,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 } else {
                     // Offline mode: present empty state only if get nil from network
                     if self.isOnline && self.didLoadFromCache {
-                        // TODO: unable to load error
+                        seal.reject(Error.networkFetchFailed)
                     } else {
                         seal.fulfill(.init(result: .failure(Error.cachedFetchFailed)))
                     }
@@ -240,6 +240,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                    self.currentCourse != nil {
                     // Offline mode: we already presented cached course, but network request failed
                     // so let's ignore it and show only cached
+                    seal.fulfill(.init(result: .failure(Error.networkFetchFailed)))
                 } else {
                     seal.reject(error)
                 }
@@ -255,6 +256,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     enum Error: Swift.Error {
         case cachedFetchFailed
+        case networkFetchFailed
     }
 }
 
