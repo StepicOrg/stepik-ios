@@ -19,4 +19,5 @@ enum SettingsMenuBlock: String {
     case logout
     case languageSettingsHeader
     case contentLanguage
+    case downloads
 }

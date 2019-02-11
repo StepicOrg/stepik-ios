@@ -55,13 +55,21 @@ class CourseListAssembly: Assembly {
             )
         )
 
+        let dataBackUpdateService = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+
         let interactor = CourseListInteractor(
             presenter: presenter,
             provider: provider,
             adaptiveStorageManager: AdaptiveStorageManager(),
             courseSubscriber: CourseSubscriber(),
             userAccountService: UserAccountService(),
-            personalDeadlinesService: PersonalDeadlinesService()
+            personalDeadlinesService: PersonalDeadlinesService(),
+            dataBackUpdateService: dataBackUpdateService
         )
         self.moduleInput = interactor
 
