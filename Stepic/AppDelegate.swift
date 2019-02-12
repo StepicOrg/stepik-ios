@@ -28,10 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private let notificationsService = NotificationsService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
-    private let splitTestingService = SplitTestingService(
-        analyticsService: AnalyticsUserProperties(),
-        storage: UserDefaults.standard
-    )
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
 
     deinit {
@@ -135,15 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        let retentionSplitTest = self.splitTestingService.fetchSplitTest(
-            RetentionLocalNotificationsSplitTest.self
-        )
-        let shouldParticipate = RetentionLocalNotificationsSplitTest.shouldParticipate
-        let shouldReceiveNotifications = retentionSplitTest.currentGroup.shouldReceiveNotifications
-
-        if shouldParticipate && shouldReceiveNotifications {
-            self.notificationsService.scheduleRetentionNotifications()
-        }
+        self.notificationsService.scheduleRetentionNotifications()
     }
 
     // MARK: - Downloading Data in the Background
