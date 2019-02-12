@@ -618,12 +618,6 @@
 		08D5F5721F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
 		08D5F5731F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
 		08D5F5741F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
-		08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
-		08D5F5791F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
-		08D5F57B1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
-		08D5F57C1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
-		08D5F57D1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
-		08D5F57E1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
 		08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
 		08D5F5821F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
 		08D5F5841F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
@@ -1901,6 +1895,9 @@
 		2C4BBF23203DC66F000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4BBF25203DC670000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BBF26203DC670000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
+		2C4BE7DE221325FB00AEAC34 /* CourseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DD221325F400AEAC34 /* CourseReview.swift */; };
+		2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */; };
+		2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */; };
 		2C4DA9E91F38729500E392FA /* LocalNotificationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */; };
 		2C4EB2CC212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */; };
 		2C4EB2D121241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */; };
@@ -2630,9 +2627,9 @@
 		2C8A0F2220FC7CD80009F67E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08A1257B1BDEBCC90066B2B2 /* Localizable.strings */; };
 		2C8A0F3320FCCE230009F67E /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
 		2C8A0F3620FCCE650009F67E /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
-		2C8AD7662208646100C9C089 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		2C8AD758220311F000C9C089 /* DataBackUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8AD757220311F000C9C089 /* DataBackUpdateService.swift */; };
 		2C8AD7622204932300C9C089 /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8AD7612204932200C9C089 /* CourseSubscriptionManager.swift */; };
+		2C8AD7662208646100C9C089 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
 		2C8C96EA211DE34700A9FB99 /* RateAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089056101E98021000B8FE6A /* RateAppViewController.xib */; };
 		2C8CB0E31FB48F39008CB1AC /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C905230212E9C9300354DFB /* CoursePlainObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C90522F212E9C9300354DFB /* CoursePlainObjectTests.swift */; };
@@ -2683,7 +2680,6 @@
 		2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
 		2C9499A820ECB9FB0049E9A8 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
 		2C9499A920ECBA100049E9A8 /* CourseReviewSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */; };
-		2C9499AA20ECBA170049E9A8 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
 		2C9499AC20ECBA2D0049E9A8 /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089142441BCEE4EE0000BCB0 /* Video+CoreDataProperties.swift */; };
 		2C9499AD20ECBA3E0049E9A8 /* Lesson+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */; };
 		2C9499AE20ECBA670049E9A8 /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
@@ -3392,7 +3388,6 @@
 		2CA8D1D62088D9C000E105E9 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CA8D1D72088D9C000E105E9 /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		2CA8D1D92088D9C000E105E9 /* RateAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */; };
-		2CA8D1DA2088D9C000E105E9 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
 		2CA8D1DB2088D9C000E105E9 /* FullHeightWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A5004F1F2B73C000140D25 /* FullHeightWebView.swift */; };
 		2CA8D1DC2088D9C000E105E9 /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
 		2CA8D1DD2088D9C000E105E9 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
@@ -4693,7 +4688,6 @@
 		938861282037E0A500DFEA3A /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
 		938861292037E0B200DFEA3A /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
 		9388612A2037E0DA00DFEA3A /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
-		9388612B2037E0EF00DFEA3A /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */; };
 		9388612C2037E12900DFEA3A /* Certificate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B8391E9D05AE009B4A84 /* Certificate+CoreDataProperties.swift */; };
 		9388612D2037E19800DFEA3A /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC3A41CCA69F300FFF29E /* Device.swift */; };
 		9388612E2037E1B100DFEA3A /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
@@ -5377,7 +5371,6 @@
 		08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryNavigationDelegate.swift; sourceTree = "<group>"; };
 		08D3F3001EDDDE4400E973F2 /* Model_code_quiz_v17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_code_quiz_v17.xcdatamodel; sourceTree = "<group>"; };
 		08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummary.swift; sourceTree = "<group>"; };
-		08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewSummariesAPI.swift; sourceTree = "<group>"; };
 		08D674921D78B46900B60963 /* AuthNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewController.swift; sourceTree = "<group>"; };
 		08D9E98B206C243D002F41D3 /* DatabaseFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseFetchService.swift; sourceTree = "<group>"; };
@@ -5701,6 +5694,10 @@
 		2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePlainObject.swift; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
+		2C4BE7DB221325C000AEAC34 /* Model_course_review_v32.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_review_v32.xcdatamodel; sourceTree = "<group>"; };
+		2C4BE7DD221325F400AEAC34 /* CourseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReview.swift; sourceTree = "<group>"; };
+		2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReview+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C4DA9E81F38729500E392FA /* LocalNotificationsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationsHelper.swift; sourceTree = "<group>"; };
 		2C4EB2CB212416FB00AF2331 /* KnowledgeGraphTopicPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphTopicPlainObjectTests.swift; sourceTree = "<group>"; };
 		2C4EB2D021241F8E00AF2331 /* KnowledgeGraphGoalPlainObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphGoalPlainObjectTests.swift; sourceTree = "<group>"; };
@@ -6772,6 +6769,7 @@
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				2C4BE7DC221325E800AEAC34 /* CourseReview */,
 				087585AC1FB51D590047A269 /* CourseList */,
 				2C9E3F381F7A7B2D00DDF1AA /* Notification */,
 				2CD8463D1F25F7AF00E8153C /* Profile */,
@@ -7856,8 +7854,8 @@
 		08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */ = {
 			isa = PBXGroup;
 			children = (
+				2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */,
 				08D5F56C1F7DA6BB007C1634 /* CourseReviewSummary.swift */,
-				08D5F5761F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift */,
 			);
 			name = CourseReviewSummary;
 			sourceTree = "<group>";
@@ -9285,6 +9283,15 @@
 				2C4BBF10203DC668000A4250 /* plyr.js */,
 			);
 			path = Plyr;
+			sourceTree = "<group>";
+		};
+		2C4BE7DC221325E800AEAC34 /* CourseReview */ = {
+			isa = PBXGroup;
+			children = (
+				2C4BE7DD221325F400AEAC34 /* CourseReview.swift */,
+				2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */,
+			);
+			name = CourseReview;
 			sourceTree = "<group>";
 		};
 		2C4EB2CA212416B500AF2331 /* KnowledgeGraphTests */ = {
@@ -15153,6 +15160,7 @@
 				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
 				08FEFC1C1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */,
 				2CCC505921E775B0004D9FC1 /* CourseInfoTabSyllabusOutputProtocol.swift in Sources */,
+				2C4BE7DE221325FB00AEAC34 /* CourseReview.swift in Sources */,
 				083F2B211E9E645000714173 /* CertificateTableViewCell.swift in Sources */,
 				08CA59F21BBFD65E008DC44D /* User.swift in Sources */,
 				2C22042520E277B40060117A /* Skeletonable.swift in Sources */,
@@ -15210,7 +15218,6 @@
 				2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */,
 				2CC0754720177A2E004A6005 /* AdaptiveStatsViewController.swift in Sources */,
 				2C80C829201A504700ABB312 /* StepCardView.swift in Sources */,
-				08D5F5771F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				084156961BCBFFBD006B8C73 /* Step.swift in Sources */,
 				08D2F72D2122E4B5009BA052 /* StoryNavigationDelegate.swift in Sources */,
 				08F555581C4FAF5300C877E8 /* Submission.swift in Sources */,
@@ -15222,6 +15229,7 @@
 				2C9860BA21B97C8300D053E0 /* CourseInfoSubmoduleProtocol.swift in Sources */,
 				089B370D1BFA07AF003DC593 /* VideoDownloadDelegate.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
+				2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */,
 				080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONSerializable.swift in Sources */,
 				08CA59F41BC020E3008DC44D /* UIImageViewExtension.swift in Sources */,
@@ -15467,6 +15475,7 @@
 				62E98B3BF3BDF17C9D1CFC5B /* UserAccountService.swift in Sources */,
 				62E98BCBB685BB34FACFD342 /* ExploreSearchBar.swift in Sources */,
 				62E981C1517ADB4D7AC29788 /* SearchResultsLegacy.swift in Sources */,
+				2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				62E98144B8A52511F4EEB63F /* CourseWidgetSkeletonView.swift in Sources */,
 				62E985BDC04859D98A28A2F4 /* ContinueCourseSkeletonView.swift in Sources */,
 				62E98F241A3B282A1F0D4587 /* CourseListCollectionViewCell.swift in Sources */,
@@ -15694,7 +15703,6 @@
 				93A6A4C12018CC2F004C0797 /* UIViewLoadExtension.swift in Sources */,
 				936E90B32024C900009578C2 /* CatalogDetailViewController.swift in Sources */,
 				938861452037E43200DFEA3A /* Comment.swift in Sources */,
-				9388612B2037E0EF00DFEA3A /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				938861332037E22200DFEA3A /* Lesson+CoreDataProperties.swift in Sources */,
 				938861392037E2E800DFEA3A /* Notification.swift in Sources */,
 				9388610A20379D7300DFEA3A /* DataConvertable.swift in Sources */,
@@ -15928,7 +15936,6 @@
 				2C1B61481F4C4AEF00236804 /* VideoQualityTableViewController.swift in Sources */,
 				2C1B614A1F4C4AEF00236804 /* RateAppManager.swift in Sources */,
 				2C608B0A20456960006870BB /* BaseCardsStepsViewController.swift in Sources */,
-				08D5F57D1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C1B614C1F4C4AEF00236804 /* FullHeightWebView.swift in Sources */,
 				2C1B614E1F4C4AEF00236804 /* NotificationTimePickerViewController.swift in Sources */,
 				2C1B614F1F4C4AEF00236804 /* RefreshTableViewCell.swift in Sources */,
@@ -16366,7 +16373,6 @@
 				2C1B63591F4C590700236804 /* VideoQualityTableViewController.swift in Sources */,
 				2C1B635B1F4C590700236804 /* RateAppManager.swift in Sources */,
 				2C608B0B20456960006870BB /* BaseCardsStepsViewController.swift in Sources */,
-				08D5F57E1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C1B635D1F4C590700236804 /* FullHeightWebView.swift in Sources */,
 				2C1B635F1F4C590700236804 /* NotificationTimePickerViewController.swift in Sources */,
 				2C1B63601F4C590700236804 /* RefreshTableViewCell.swift in Sources */,
@@ -17002,7 +17008,6 @@
 				2C9499CE20ECBCC40049E9A8 /* TextReply.swift in Sources */,
 				2CCA14C12111A6050068081A /* StepView.swift in Sources */,
 				2C33CBE320EC3127009956B0 /* Session.swift in Sources */,
-				2C9499AA20ECBA170049E9A8 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C15BC47212AEC8200AB1015 /* AdaptiveStepsPresenter.swift in Sources */,
 				2C9499B820ECBB100049E9A8 /* Certificate.swift in Sources */,
 				2CD7996421077CBA0054D098 /* RandomCredentialsGenerator.swift in Sources */,
@@ -17331,7 +17336,6 @@
 				2C89A9DA1F4C289900227C3B /* Profile.swift in Sources */,
 				2C89A9DC1F4C289900227C3B /* VideoQualityTableViewController.swift in Sources */,
 				2C89A9DE1F4C289900227C3B /* RateAppManager.swift in Sources */,
-				08D5F57B1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C89A9E01F4C289900227C3B /* FullHeightWebView.swift in Sources */,
 				2C89A9E21F4C289900227C3B /* NotificationTimePickerViewController.swift in Sources */,
 				2C89A9E31F4C289900227C3B /* RefreshTableViewCell.swift in Sources */,
@@ -17780,7 +17784,6 @@
 				2C9731901F4C38F600AC9301 /* VideoQualityTableViewController.swift in Sources */,
 				2C9731921F4C38F600AC9301 /* RateAppManager.swift in Sources */,
 				2C608B092045695F006870BB /* BaseCardsStepsViewController.swift in Sources */,
-				08D5F57C1F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2C9731941F4C38F600AC9301 /* FullHeightWebView.swift in Sources */,
 				2C9731961F4C38F600AC9301 /* NotificationTimePickerViewController.swift in Sources */,
 				2C9731971F4C38F600AC9301 /* RefreshTableViewCell.swift in Sources */,
@@ -18220,7 +18223,6 @@
 				2CA8D1D62088D9C000E105E9 /* Profile.swift in Sources */,
 				2CA8D1D72088D9C000E105E9 /* VideoQualityTableViewController.swift in Sources */,
 				2CA8D1D92088D9C000E105E9 /* RateAppManager.swift in Sources */,
-				2CA8D1DA2088D9C000E105E9 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				2CA8D1DB2088D9C000E105E9 /* FullHeightWebView.swift in Sources */,
 				2CA8D1DC2088D9C000E105E9 /* NotificationTimePickerViewController.swift in Sources */,
 				2CA8D1DD2088D9C000E105E9 /* RefreshTableViewCell.swift in Sources */,
@@ -18737,7 +18739,6 @@
 				2CD846411F25F7F300E8153C /* Profile.swift in Sources */,
 				864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */,
 				864514E31E9FD47F007F73BE /* RateAppManager.swift in Sources */,
-				08D5F5791F7DA8CB007C1634 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				08A500521F2B73C000140D25 /* FullHeightWebView.swift in Sources */,
 				864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */,
 				864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */,
@@ -20745,6 +20746,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C4BE7DB221325C000AEAC34 /* Model_course_review_v32.xcdatamodel */,
 				2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */,
 				2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */,
 				2C8E882B21A2E70F00A27789 /* Model_course_authors_v29.xcdatamodel */,
@@ -20778,7 +20780,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */;
+			currentVersion = 2C4BE7DB221325C000AEAC34 /* Model_course_review_v32.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
