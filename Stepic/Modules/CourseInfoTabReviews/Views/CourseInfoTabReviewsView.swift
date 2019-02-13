@@ -23,6 +23,12 @@ final class CourseInfoTabReviewsView: UIView {
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+
+        tableView.delegate = self
+        tableView.register(cellClass: CourseInfoTabReviewsTableViewCell.self)
+
         return tableView
     }()
 
@@ -41,13 +47,14 @@ final class CourseInfoTabReviewsView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func updateTableViewData(dataSource: UITableViewDataSource) {
+        self.tableView.dataSource = dataSource
+        self.tableView.reloadData()
+    }
 }
 
 extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-
-    }
-
     func addSubviews() {
         self.addSubview(self.tableView)
     }

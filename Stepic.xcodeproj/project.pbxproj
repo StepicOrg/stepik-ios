@@ -958,6 +958,7 @@
 		2C0AF18C203C67EC000EA3B6 /* MigrationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */; };
 		2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
+		2C10C4562214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C4552214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
 		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
@@ -5572,6 +5573,7 @@
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
+		2C10C4552214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsTableViewCell.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
 		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
@@ -9311,8 +9313,8 @@
 				2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */,
 			);
 			name = CourseReview;
-                        sourceTree = "<group>";
-                };
+			sourceTree = "<group>";
+		};
 		2C4BE7E32214272C00AEAC34 /* CourseInfoTabReviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -9333,6 +9335,7 @@
 				2C4BE7EE221427EB00AEAC34 /* CourseInfoTabReviewsView.swift */,
 				2C4BE7F12214387300AEAC34 /* CourseInfoTabReviewsTableViewDataSource.swift */,
 				2C4BE7F52214441700AEAC34 /* CourseInfoTabReviewsCellView.swift */,
+				2C10C4552214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -15511,6 +15514,7 @@
 				62E98D1629E9346DF0D1E29D /* CourseListsCollectionNetworkService.swift in Sources */,
 				62E98EF2FB4F1B0045383840 /* CourseListsCollectionViewModel.swift in Sources */,
 				62E98C55E38F9010869F670F /* ButtonDescriptionFactory.swift in Sources */,
+				2C10C4562214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift in Sources */,
 				FFBFAE30ACA3B872A992183A /* FullscreenCourseListAssembly.swift in Sources */,
 				2993EC106FBC621C11DD8AC8 /* FullscreenCourseListViewController.swift in Sources */,
 				88BAAF6865A44CF6A1496D6A /* FullscreenCourseListInteractor.swift in Sources */,
