@@ -442,6 +442,7 @@ CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сд�
 CourseInfoTitle = "О курсе";
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
+CourseInfoTabReviews = "Отзывы";
 CourseInfoTitleAuthor = "от";
 CourseInfoTitleAbout = "О курсе";
 CourseInfoTitleRequirements = "Требования";

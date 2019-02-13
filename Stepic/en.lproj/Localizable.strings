@@ -440,6 +440,7 @@ CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learn
 CourseInfoTitle = "About course";
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
+CourseInfoTabReviews = "Reviews";
 CourseInfoTitleAuthor = "by";
 CourseInfoTitleAbout = "About";
 CourseInfoTitleRequirements = "Requirements";

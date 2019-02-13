@@ -197,6 +197,10 @@ final class CourseInfoViewController: UIViewController {
                 )
                 viewControllers.append(syllabusAssembly.makeModule())
                 submodules.append(syllabusAssembly.moduleInput)
+            case .reviews:
+                let reviewsAssembly = CourseInfoTabReviewsAssembly()
+                viewControllers.append(reviewsAssembly.makeModule())
+                // submodules.append(reviewsAssembly.moduleInput)
             }
         }
 

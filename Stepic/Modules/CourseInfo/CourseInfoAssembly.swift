@@ -68,7 +68,7 @@ final class CourseInfoAssembly: Assembly {
     private func getAvailableTabs() -> [CourseInfo.Tab] {
         let adaptiveManager = AdaptiveStorageManager()
         return adaptiveManager.canOpenInAdaptiveMode(courseId: self.courseID)
-            ? [.info]
-            : [.info, .syllabus]
+            ? [.info, .reviews]
+            : [.info, .syllabus, .reviews]
     }
 }
