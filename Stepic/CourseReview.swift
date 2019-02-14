@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftyJSON
+import PromiseKit
 
 final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
@@ -29,5 +30,27 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
 
     func update(json: JSON) {
         initialize(json)
+    }
+
+    static func fetch(courseID: Course.IdType) -> Guarantee<[CourseReview]> {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseReview")
+        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
+
+        let predicate = NSPredicate(format: "managedCourseId == %@", courseID)
+
+        request.predicate = predicate
+        request.sortDescriptors = [descriptor]
+
+        return Guarantee { seal in
+            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: {
+                results in
+                guard let results = results.finalResult as? [CourseReview] else {
+                    seal([])
+                    return
+                }
+                seal(results)
+            })
+            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+        }
     }
 }

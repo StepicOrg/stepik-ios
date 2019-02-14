@@ -959,6 +959,9 @@
 		2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C10C4562214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C4552214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift */; };
+		2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */; };
+		2C10C45C2215A5FD00FA3E13 /* CourseReviewsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C45B2215A5F900FA3E13 /* CourseReviewsPersistenceService.swift */; };
+		2C10C45D2215A61100FA3E13 /* CourseReviewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C45A2215A5F900FA3E13 /* CourseReviewsNetworkService.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
 		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
@@ -5574,6 +5577,9 @@
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C10C4552214574A00FA3E13 /* CourseInfoTabReviewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsTableViewCell.swift; sourceTree = "<group>"; };
+		2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsAPI.swift; sourceTree = "<group>"; };
+		2C10C45A2215A5F900FA3E13 /* CourseReviewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsNetworkService.swift; sourceTree = "<group>"; };
+		2C10C45B2215A5F900FA3E13 /* CourseReviewsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsPersistenceService.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
 		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
@@ -7254,6 +7260,7 @@
 				62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */,
 				080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */,
 				62E98FD3186BA23C6E8B4DB5 /* UserCoursesAPI.swift */,
+				2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -8754,6 +8761,15 @@
 			path = Registration;
 			sourceTree = "<group>";
 		};
+		2C10C4592215A5DE00FA3E13 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2C10C45B2215A5F900FA3E13 /* CourseReviewsPersistenceService.swift */,
+				2C10C45A2215A5F900FA3E13 /* CourseReviewsNetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		2C130E872125A3E40022E998 /* Assemblies */ = {
 			isa = PBXGroup;
 			children = (
@@ -9318,6 +9334,7 @@
 		2C4BE7E32214272C00AEAC34 /* CourseInfoTabReviews */ = {
 			isa = PBXGroup;
 			children = (
+				2C10C4592215A5DE00FA3E13 /* Services */,
 				2C4BE7F02214385B00AEAC34 /* Views */,
 				2C4BE7E42214274E00AEAC34 /* CourseInfoTabReviewsAssembly.swift */,
 				2C4BE7E62214275D00AEAC34 /* CourseInfoTabReviewsViewController.swift */,
@@ -15003,6 +15020,7 @@
 				2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
 				089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */,
+				2C10C45C2215A5FD00FA3E13 /* CourseReviewsPersistenceService.swift in Sources */,
 				2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */,
 				080C5E671EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
 				2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */,
@@ -15012,6 +15030,7 @@
 				083F2B2A1E9EC17F00714173 /* LoadingPaginationView.swift in Sources */,
 				084070871D64DC7500308FC1 /* CyrillicURLActivityItemSource.swift in Sources */,
 				0819856920BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift in Sources */,
+				2C10C45D2215A61100FA3E13 /* CourseReviewsNetworkService.swift in Sources */,
 				2C88C14021C287FA004BDF21 /* SectionsPersistenceService.swift in Sources */,
 				080CE1521E9563170089A27F /* AssignmentsAPI.swift in Sources */,
 				08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */,
@@ -15139,6 +15158,7 @@
 				2CA255371F8CD62C00C58048 /* NotificationStatusButton.swift in Sources */,
 				08E6BB681DC8DF59006622EC /* UserActivitiesAPI.swift in Sources */,
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,
+				2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */,
 				080C5E801EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				2CE664E320F5207A0082F3FE /* Downloader.swift in Sources */,
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
