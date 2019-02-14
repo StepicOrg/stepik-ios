@@ -63,6 +63,15 @@ extension CourseReview {
         }
     }
 
+    var course: Course? {
+        get {
+            return managedCourse
+        }
+        set {
+            managedCourse = newValue
+        }
+    }
+
     var creationDate: Date {
         get {
             return managedCreateDate ?? Date()

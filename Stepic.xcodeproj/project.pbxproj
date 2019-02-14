@@ -962,6 +962,7 @@
 		2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */; };
 		2C10C45C2215A5FD00FA3E13 /* CourseReviewsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C45B2215A5F900FA3E13 /* CourseReviewsPersistenceService.swift */; };
 		2C10C45D2215A61100FA3E13 /* CourseReviewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C45A2215A5F900FA3E13 /* CourseReviewsNetworkService.swift */; };
+		2C10C45F2215AB7200FA3E13 /* CourseInfoTabReviewsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C45E2215AB7200FA3E13 /* CourseInfoTabReviewsProvider.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
 		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
@@ -5580,6 +5581,7 @@
 		2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsAPI.swift; sourceTree = "<group>"; };
 		2C10C45A2215A5F900FA3E13 /* CourseReviewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsNetworkService.swift; sourceTree = "<group>"; };
 		2C10C45B2215A5F900FA3E13 /* CourseReviewsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsPersistenceService.swift; sourceTree = "<group>"; };
+		2C10C45E2215AB7200FA3E13 /* CourseInfoTabReviewsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsProvider.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
 		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
@@ -9342,6 +9344,7 @@
 				2C4BE7EA2214278000AEAC34 /* CourseInfoTabReviewsPresenter.swift */,
 				2C4BE7EC2214278D00AEAC34 /* CourseInfoTabReviewsDataFlow.swift */,
 				2C4BE7F3221439F400AEAC34 /* CourseInfoTabReviewsViewModel.swift */,
+				2C10C45E2215AB7200FA3E13 /* CourseInfoTabReviewsProvider.swift */,
 			);
 			path = CourseInfoTabReviews;
 			sourceTree = "<group>";
@@ -15176,6 +15179,7 @@
 				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
+				2C10C45F2215AB7200FA3E13 /* CourseInfoTabReviewsProvider.swift in Sources */,
 				088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */,
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				2C8908A0216F465200083341 /* NotificationsService.swift in Sources */,
