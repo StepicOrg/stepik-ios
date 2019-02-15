@@ -60,8 +60,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     // Fetch syllabus only after previous fetch completed
     private let fetchSemaphore = DispatchSemaphore(value: 1)
-    // Online mode: present section only previous presentation completed
-    private let sectionPresentSemaphore = DispatchSemaphore(value: 1)
     // Online mode: fetch section only when offline fetching completed
     private let sectionFetchSemaphore = DispatchSemaphore(value: 0)
 
@@ -144,11 +142,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
             print("course info tab syllabus interactor: start fetching section from network, id = \(section.id)")
             strongSelf.fetchSyllabusSection(section: section).done { response in
-                strongSelf.sectionPresentSemaphore.wait()
                 DispatchQueue.main.async {
                     print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
                     strongSelf.presenter.presentCourseSyllabus(response: response)
-                    strongSelf.sectionPresentSemaphore.signal()
                 }
             }.catch { error in
                 print("course info tab syllabus interactor: error while fetching section from network, error = \(error)")
