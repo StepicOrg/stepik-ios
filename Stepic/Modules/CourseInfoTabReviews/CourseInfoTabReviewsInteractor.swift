@@ -87,6 +87,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             print("course info tab reviews interactor: load next page, page = \(nextPageIndex)")
 
             strongSelf.provider.fetchRemote(course: course, page: nextPageIndex).done { reviews, meta in
+                strongSelf.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
                 let response = CourseInfoTabReviews.LoadNextReviews.Response(
                     reviews: sortedReviews,
@@ -114,8 +115,8 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         return Promise { seal in
             firstly {
                 isOnline
-                    ? self.provider.fetchCached(course: course)
-                    : self.provider.fetchRemote(course: course, page: 1)
+                    ? self.provider.fetchRemote(course: course, page: 1)
+                    : self.provider.fetchCached(course: course)
             }.done { reviews, meta in
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
                 let response = CourseInfoTabReviews.ShowReviews.Response(

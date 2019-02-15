@@ -18,6 +18,8 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 
     lazy var courseInfoTabReviewsView = self.view as? CourseInfoTabReviewsView
 
+    private lazy var paginationView = PaginationView()
+
     private var state: CourseInfoTabReviews.ViewControllerState
     private var canTriggerPagination = true
 
@@ -43,11 +45,21 @@ final class CourseInfoTabReviewsViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = CourseInfoTabReviewsView()
+        let view = CourseInfoTabReviewsView()
+        view.paginationView = self.paginationView
+        view.delegate = self
+
+        self.view = view
     }
 
     private func updatePagination(hasNextPage: Bool, hasError: Bool) {
         self.canTriggerPagination = hasNextPage
+        if hasNextPage {
+            self.paginationView.setLoading()
+            self.courseInfoTabReviewsView?.showPaginationView()
+        } else {
+            self.courseInfoTabReviewsView?.hidePaginationView()
+        }
     }
 
     private func updateState(newState: CourseInfoTabReviews.ViewControllerState) {
@@ -82,5 +94,18 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
             self.updatePagination(hasNextPage: false, hasError: true)
         }
         self.updateState(newState: self.state)
+    }
+}
+
+extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
+    func courseInfoTabReviewsViewDidPaginationRequesting(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView
+    ) {
+        guard self.canTriggerPagination else {
+            return
+        }
+
+        self.canTriggerPagination = false
+        self.interactor.fetchNextReviews(request: .init())
     }
 }

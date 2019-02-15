@@ -9,7 +9,20 @@
 import UIKit
 import SnapKit
 
+protocol CourseInfoTabReviewsViewDelegate: class {
+    func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+}
+
+extension CourseInfoTabReviewsView {
+    struct Appearance {
+        let paginationViewHeight: CGFloat = 52
+    }
+}
+
 final class CourseInfoTabReviewsView: UIView {
+    let appearance: Appearance
+    weak var delegate: CourseInfoTabReviewsViewDelegate?
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
@@ -21,20 +34,17 @@ final class CourseInfoTabReviewsView: UIView {
         tableView.delegate = self
         tableView.register(cellClass: CourseInfoTabReviewsTableViewCell.self)
 
-        let footerView = PaginationView(frame: .zero)
-        footerView.translatesAutoresizingMaskIntoConstraints = false
-        footerView.snp.makeConstraints { make in
-            make.height.equalTo(100)
-        }
-        tableView.tableFooterView = footerView
-
         return tableView
     }()
 
     // Proxify delegates
     private weak var pageScrollViewDelegate: UIScrollViewDelegate?
 
-    override init(frame: CGRect = .zero) {
+    private var shouldShowPaginationView = false
+    var paginationView: UIView?
+
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
+        self.appearance = appearance
         super.init(frame: frame)
 
         self.setupView()
@@ -49,6 +59,23 @@ final class CourseInfoTabReviewsView: UIView {
     func updateTableViewData(dataSource: UITableViewDataSource) {
         self.tableView.dataSource = dataSource
         self.tableView.reloadData()
+    }
+
+    func showPaginationView() {
+        self.shouldShowPaginationView = true
+        self.tableView.tableFooterView = self.paginationView
+        self.tableView.tableFooterView?.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.frame.width,
+            height: self.appearance.paginationViewHeight
+        )
+    }
+
+    func hidePaginationView() {
+        self.shouldShowPaginationView = false
+        self.tableView.tableFooterView?.frame = .zero
+        self.tableView.tableFooterView = nil
     }
 }
 
@@ -68,6 +95,18 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
 extension CourseInfoTabReviewsView: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1,
+           tableView.numberOfSections == 1,
+           self.shouldShowPaginationView {
+            self.delegate?.courseInfoTabReviewsViewDidPaginationRequesting(self)
+        }
     }
 }
 
