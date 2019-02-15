@@ -15,9 +15,9 @@ extension CourseInfoTabReviewsCellView {
         let avatarImageViewSize = CGSize(width: 30, height: 30)
         let avatarImageViewCornerRadius: CGFloat = 4.0
 
-        let starsViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 20)
+        let starsViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
 
-        let dateLabelInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        let dateLabelInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let dateLabelTextColor = UIColor.mainDark
 
@@ -80,12 +80,6 @@ final class CourseInfoTabReviewsCellView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
-
-        self.nameLabel.text = "Stepan Integrator"
-        self.starsRatingView.starsCount = 4
-        self.dateLabel.text = "01.01.1970"
-        self.avatarImageView.set(with: URL(string: "https://stepik.org/users/38651314/251c06002a701e6d6991dac7ff9dc90b83d1e7b6/avatar.svg")!)
-        self.textLabel.text = "Text text text text text text text text text text Text text text text text text text text text text b la bla"
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -105,8 +99,11 @@ final class CourseInfoTabReviewsCellView: UIView {
         self.nameLabel.text = viewModel.userName
         self.dateLabel.text = viewModel.dateRepresentation
         self.textLabel.text = viewModel.text
-        self.avatarImageView.set(with: viewModel.avatarImageURL)
         self.starsRatingView.starsCount = viewModel.score
+
+        if let url = viewModel.avatarImageURL {
+            self.avatarImageView.set(with: url)
+        }
     }
 }
 
@@ -129,13 +126,13 @@ extension CourseInfoTabReviewsCellView: ProgrammaticallyInitializableViewProtoco
 
         self.starsRatingView.translatesAutoresizingMaskIntoConstraints = false
         self.starsRatingView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.starsViewInsets.top)
+            make.centerY.equalTo(self.dateLabel.snp.centerY)
             make.trailing.equalToSuperview().offset(-self.appearance.starsViewInsets.right)
         }
 
         self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.dateLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.starsRatingView.snp.centerY)
+            make.top.equalToSuperview().offset(self.appearance.dateLabelInsets.top)
             make.leading
                 .equalTo(self.avatarImageView.snp.trailing)
                 .offset(self.appearance.dateLabelInsets.left)

@@ -36,7 +36,7 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseReview")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
-        let predicate = NSPredicate(format: "managedCourseId == %@", courseID)
+        let predicate = NSPredicate(format: "managedCourseId == %@", courseID.fetchValue)
 
         request.predicate = predicate
         request.sortDescriptors = [descriptor]

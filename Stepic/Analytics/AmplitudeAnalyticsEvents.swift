@@ -387,6 +387,18 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    struct CourseReviews {
+        static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course reviews screen opened",
+                parameters: [
+                    "course": courseID,
+                    "title": courseTitle
+                ]
+            )
+        }
+    }
+
     struct Discussions {
         static var opened: AnalyticsEvent = AnalyticsEvent(name: "Discussions screen opened")
     }

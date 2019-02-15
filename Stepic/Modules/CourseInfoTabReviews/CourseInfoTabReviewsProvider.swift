@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabReviewsProviderProtocol: class {
-    func fetchCached(course: Course) -> Promise<[CourseReview]>
+    func fetchCached(course: Course) -> Promise<([CourseReview], Meta)>
     func fetchRemote(course: Course, page: Int) -> Promise<([CourseReview], Meta)>
 }
 
@@ -26,10 +26,10 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
         self.courseReviewsNetworkService = courseReviewsNetworkService
     }
 
-    func fetchCached(course: Course) -> Promise<[CourseReview]> {
+    func fetchCached(course: Course) -> Promise<([CourseReview], Meta)> {
         return Promise { seal in
             self.courseReviewsPersistenceService.fetch(by: course.id).done {
-                seal.fulfill($0)
+                seal.fulfill(($0, Meta.oneAndOnlyPage))
             }.catch { _ in
                 seal.reject(Error.persistenceFetchFailed)
             }

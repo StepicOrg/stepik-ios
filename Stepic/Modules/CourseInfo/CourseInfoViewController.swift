@@ -200,7 +200,7 @@ final class CourseInfoViewController: UIViewController {
             case .reviews:
                 let reviewsAssembly = CourseInfoTabReviewsAssembly()
                 viewControllers.append(reviewsAssembly.makeModule())
-                // submodules.append(reviewsAssembly.moduleInput)
+                submodules.append(reviewsAssembly.moduleInput)
             }
         }
 
