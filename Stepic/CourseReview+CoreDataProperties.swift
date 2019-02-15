@@ -18,6 +18,7 @@ extension CourseReview {
     @NSManaged var managedCreateDate: Date?
 
     @NSManaged var managedCourse: Course?
+    @NSManaged var managedUser: User?
 
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CourseReview", in: CoreDataHelper.instance.context)!
@@ -69,6 +70,15 @@ extension CourseReview {
         }
         set {
             managedCourse = newValue
+        }
+    }
+
+    var user: User? {
+        get {
+            return managedUser
+        }
+        set {
+            managedUser = newValue
         }
     }
 

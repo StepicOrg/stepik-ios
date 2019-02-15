@@ -10,6 +10,7 @@ import Foundation
 
 protocol CourseInfoTabReviewsPresenterProtocol: class {
     func presentCourseReviews(response: CourseInfoTabReviews.ShowReviews.Response)
+    func presentNextCourseReviews(response: CourseInfoTabReviews.LoadNextReviews.Response)
 }
 
 final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol {
@@ -19,7 +20,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         let viewModel: CourseInfoTabReviews.ShowReviews.ViewModel = .init(
             state: CourseInfoTabReviews.ViewControllerState.result(
                 data: .init(
-                    reviews: response.reviews.map { self.makeViewModel(courseReview: $0) },
+                    reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
                     hasNextPage: response.hasNextPage
                 )
             )
@@ -27,12 +28,28 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         self.viewController?.displayReviews(viewModel: viewModel)
     }
 
-    private func makeViewModel(courseReview: CourseReview) -> CourseInfoTabReviewsViewModel {
+    func presentNextCourseReviews(response: CourseInfoTabReviews.LoadNextReviews.Response) {
+        let viewModel: CourseInfoTabReviews.LoadNextReviews.ViewModel = .init(
+            state: CourseInfoTabReviews.PaginationState.result(
+                data: .init(
+                    reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
+                    hasNextPage: response.hasNextPage
+                )
+            )
+        )
+        self.viewController?.displayNextReviews(viewModel: viewModel)
+    }
+
+    private func makeViewModel(courseReview: CourseReview) -> CourseInfoTabReviewsViewModel? {
+        guard let reviewAuthor = courseReview.user else {
+            return nil
+        }
+
         return CourseInfoTabReviewsViewModel(
-            userName: "Anonymous",
+            userName: reviewAuthor.fullName,
             dateRepresentation: FormatterHelper.dateStringWithFullMonthAndYear(courseReview.creationDate),
-            text: courseReview.text,
-            avatarImageURL: URL(string: "https://stepik.org/users/38651314/251c06002a701e6d6991dac7ff9dc90b83d1e7b6/avatar.svg"),
+            text: courseReview.text.trimmingCharacters(in: .whitespacesAndNewlines),
+            avatarImageURL: URL(string: reviewAuthor.avatarURL),
             score: courseReview.score
         )
     }

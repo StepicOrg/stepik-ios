@@ -98,6 +98,7 @@
         <attribute name="managedText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedUserId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedCourse" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Course" syncable="YES"/>
+        <relationship name="managedUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
     </entity>
     <entity name="CourseReviewSummary" representedClassName=".CourseReviewSummary" syncable="YES">
         <attribute name="managedAverage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
@@ -254,6 +255,7 @@
         <element name="CodeTemplate" positionX="-492.8984375" positionY="-359.9921875" width="128" height="105"/>
         <element name="Course" positionX="-594.50390625" positionY="49.8359375" width="128" height="615"/>
         <element name="CourseList" positionX="-14.1953125" positionY="793.859375" width="128" height="135"/>
+        <element name="CourseReview" positionX="-441" positionY="-234" width="128" height="165"/>
         <element name="CourseReviewSummary" positionX="-389.45703125" positionY="795.01171875" width="128" height="120"/>
         <element name="LastStep" positionX="-361.27734375" positionY="646.40625" width="128" height="105"/>
         <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="225"/>
@@ -267,6 +269,5 @@
         <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="240"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
-        <element name="CourseReview" positionX="-441" positionY="-234" width="128" height="150"/>
     </elements>
 </model>

@@ -15,11 +15,14 @@ protocol CourseInfoTabReviewsInteractorProtocol: class {
 }
 
 final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtocol {
+    typealias PaginationState = (page: Int, hasNext: Bool)
+
     let presenter: CourseInfoTabReviewsPresenterProtocol
     let provider: CourseInfoTabReviewsProviderProtocol
 
     private var currentCourse: Course?
     private var isOnline = false
+    private var paginationState = PaginationState(page: 1, hasNext: true)
     private var shouldOpenedAnalyticsEventSend = false
 
     // Semaphore to prevent concurrent fetching
@@ -53,6 +56,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 course: course,
                 isOnline: isOnline
             ).done { response in
+                strongSelf.paginationState = PaginationState(page: 1, hasNext: response.hasNextPage)
                 DispatchQueue.main.async {
                     print("course info tab reviews interactor: finish fetching reviews, isOnline = \(isOnline)")
                     strongSelf.presenter.presentCourseReviews(response: response)
@@ -66,7 +70,37 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     }
 
     func fetchNextReviews(request: CourseInfoTabReviews.LoadNextReviews.Request) {
+        guard self.isOnline,
+              self.paginationState.hasNext,
+              let course = self.currentCourse else {
+            return
+        }
 
+        self.fetchBackgroundQueue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchSemaphore.wait()
+
+            let nextPageIndex = strongSelf.paginationState.page + 1
+            print("course info tab reviews interactor: load next page, page = \(nextPageIndex)")
+
+            strongSelf.provider.fetchRemote(course: course, page: nextPageIndex).done { reviews, meta in
+                let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
+                let response = CourseInfoTabReviews.LoadNextReviews.Response(
+                    reviews: sortedReviews,
+                    hasNextPage: meta.hasNext
+                )
+                DispatchQueue.main.async {
+                    strongSelf.presenter.presentNextCourseReviews(response: response)
+                }
+            }.catch { _ in
+                // TODO: handle error
+            }.finally {
+                strongSelf.fetchSemaphore.signal()
+            }
+        }
     }
 
     private func fetchReviewsInAppropriateMode(

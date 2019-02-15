@@ -9,15 +9,7 @@
 import UIKit
 import SnapKit
 
-extension CourseInfoTabReviewsView {
-    struct Appearance {
-
-    }
-}
-
 final class CourseInfoTabReviewsView: UIView {
-    let appearance: Appearance
-
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
@@ -29,14 +21,20 @@ final class CourseInfoTabReviewsView: UIView {
         tableView.delegate = self
         tableView.register(cellClass: CourseInfoTabReviewsTableViewCell.self)
 
+        let footerView = PaginationView(frame: .zero)
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.snp.makeConstraints { make in
+            make.height.equalTo(100)
+        }
+        tableView.tableFooterView = footerView
+
         return tableView
     }()
 
     // Proxify delegates
     private weak var pageScrollViewDelegate: UIScrollViewDelegate?
 
-    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
-        self.appearance = appearance
+    override init(frame: CGRect = .zero) {
         super.init(frame: frame)
 
         self.setupView()
