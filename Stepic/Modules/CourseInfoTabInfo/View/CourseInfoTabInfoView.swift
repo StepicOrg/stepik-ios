@@ -10,6 +10,13 @@ import UIKit
 import SnapKit
 import Atributika
 
+protocol CourseInfoTabInfoViewDelegate: class {
+    func courseInfoTabInfoViewDidClickInstructor(
+        _ courseInfoTabInfoView: CourseInfoTabInfoView,
+        instructor: CourseInfoTabInfoInstructorViewModel
+    )
+}
+
 extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
@@ -22,6 +29,7 @@ extension CourseInfoTabInfoView {
 }
 
 final class CourseInfoTabInfoView: UIView {
+    weak var delegate: CourseInfoTabInfoViewDelegate?
     weak var videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate?
 
     let appearance: Appearance
@@ -37,9 +45,11 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
+        delegate: CourseInfoTabInfoViewDelegate? = nil,
         videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate? = nil
     ) {
         self.appearance = appearance
+        self.delegate = delegate
         self.videoViewDelegate = videoViewDelegate
         super.init(frame: frame)
 
@@ -149,6 +159,13 @@ final class CourseInfoTabInfoView: UIView {
 
         let instructorsView = CourseInfoTabInfoInstructorsBlockView()
         instructorsView.configure(instructors: instructors)
+        instructorsView.onInstructorClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabInfoViewDidClickInstructor(strongSelf, instructor: $0)
+        }
 
         self.scrollableStackView.addArrangedView(instructorsView)
     }

@@ -12,6 +12,7 @@ extension CourseInfoTabInfoViewModel {
     init(course: Course) {
         let instructorsViewModel = course.instructors.map { user in
             CourseInfoTabInfoInstructorViewModel(
+                id: user.id,
                 avatarImageURL: URL(string: user.avatarURL),
                 title: "\(user.firstName) \(user.lastName)",
                 description: user.bio

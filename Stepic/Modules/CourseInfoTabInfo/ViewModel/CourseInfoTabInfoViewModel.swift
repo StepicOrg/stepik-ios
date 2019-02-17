@@ -29,6 +29,7 @@ struct CourseInfoTabInfoViewModel {
 }
 
 struct CourseInfoTabInfoInstructorViewModel {
+    let id: User.IdType
     let avatarImageURL: URL?
     let title: String
     let description: String

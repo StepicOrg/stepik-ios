@@ -21,6 +21,8 @@ extension CourseInfoTabInfoInstructorsBlockView {
 final class CourseInfoTabInfoInstructorsBlockView: UIView {
     let appearance: Appearance
 
+    var onInstructorClick: ((CourseInfoTabInfoInstructorViewModel) -> Void)?
+
     private lazy var headerView = CourseInfoTabInfoHeaderBlockView()
 
     private lazy var stackView: UIStackView = {
@@ -59,6 +61,9 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
             view.avatarImageURL = instructor.avatarImageURL
             view.title = instructor.title
             view.summary = instructor.description
+            view.onClick = { [weak self] in
+                self?.onInstructorClick?(instructor)
+            }
 
             self.stackView.addArrangedSubview(view)
         }

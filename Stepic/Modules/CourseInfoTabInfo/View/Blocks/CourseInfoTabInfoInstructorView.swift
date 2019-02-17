@@ -28,6 +28,8 @@ extension CourseInfoTabInfoInstructorView {
 final class CourseInfoTabInfoInstructorView: UIView {
     let appearance: Appearance
 
+    var onClick: (() -> Void)?
+
     var title: String? {
         didSet {
             self.titleLabel.text = self.title
@@ -98,11 +100,22 @@ final class CourseInfoTabInfoInstructorView: UIView {
                 )
         }
     }
+
+    @objc
+    private func onViewClicked(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            self.onClick?()
+        }
+    }
 }
 
 extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
+        self.addGestureRecognizer(UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.onViewClicked)
+        ))
     }
 
     func addSubviews() {
