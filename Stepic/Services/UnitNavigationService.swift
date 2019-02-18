@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol UnitNavigationServiceProtocol: class {
-    func findNextUnit(for unit: Unit) -> Promise<Unit?>
-    func findPreviousUnit(for unit: Unit) -> Promise<Unit?>
+    func findNextUnit(for unit: Unit.IdType) -> Promise<Unit?>
+    func findPreviousUnit(for unit: Unit.IdType) -> Promise<Unit?>
 }
 
 final class UnitNavigationService: UnitNavigationServiceProtocol {
@@ -38,39 +38,12 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         self.coursesNetworkService = coursesNetworkService
     }
 
-    func findNextUnit(for unit: Unit) -> Promise<Unit?> {
-        // We should fetch section from network to handle case
-        // when section will be opened only after current module completed
-        return self.getSectionFromCacheOrNetwork(id: unit.sectionId).then {
-            section -> Promise<Unit?> in
-
-            guard let section = section else {
-                return Promise.value(nil)
-            }
-
-            unit.section = section
-            CoreDataHelper.instance.save()
-
-            if unit.position < section.unitsArray.count - 1 {
-                // Desired unit in the same section
-                return self.findUnitInCurrentSection(
-                    section,
-                    unitPosition: unit.position,
-                    direction: .next
-                )
-            } else {
-                // Should find in another sections
-                return self.findUnitInAnotherSections(
-                    courseID: section.courseId,
-                    sectionPosition: section.position,
-                    direction: .next
-                )
-            }
-        }
+    func findNextUnit(for unit: Unit.IdType) -> Promise<Unit?> {
+        return self.findAdjacentUnit(for: unit, direction: .next)
     }
 
-    func findPreviousUnit(for unit: Unit) -> Promise<Unit?> {
-        fatalError()
+    func findPreviousUnit(for unit: Unit.IdType) -> Promise<Unit?> {
+        return self.findAdjacentUnit(for: unit, direction: .previous)
     }
 
     private func findUnitInCurrentSection(
@@ -160,11 +133,11 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
                     case .next:
                         return sectionPosition == course.sectionsArray.count - 1
                             ? []
-                            : Array(course.authorsArray[(sectionPosition + 1)...])
+                            : Array(course.sectionsArray[(sectionPosition + 1)...])
                     case .previous:
                         return sectionPosition == 0
                             ? []
-                            : Array(course.authorsArray[...(sectionPosition - 1)])
+                            : Array(course.sectionsArray[...(sectionPosition - 1)])
                     }
                 }()
 
@@ -177,33 +150,38 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         }
     }
 
-    private func findAdjacentUnit(for unit: Unit, direction: Direction) -> Promise<Unit?> {
-        // We should fetch section from network to handle case
-        // when section will be opened only after current module completed
-        return self.getSectionFromCacheOrNetwork(id: unit.sectionId).then {
-            section -> Promise<Unit?> in
+    private func findAdjacentUnit(for unit: Unit.IdType, direction: Direction) -> Promise<Unit?> {
+        return self.getUnitFromCacheOrNetwork(id: unit).then { unit -> Promise<(Unit?, Section?)> in
+            guard let unit = unit else {
+                return Promise.value((nil, nil))
+            }
 
-            guard let section = section else {
+            return self.getSectionFromCacheOrNetwork(id: unit.sectionId).map { (unit, $0) }
+        }.then { unit, section -> Promise<Unit?> in
+            guard let section = section, let unit = unit else {
                 return Promise.value(nil)
             }
 
             unit.section = section
             CoreDataHelper.instance.save()
 
-            let shouldLookUpInPreviousSection = unit.position == 0
+            let unitPosition = unit.position - 1
+            let sectionPosition = section.position - 1
+
+            let shouldLookUpInPreviousSection = unitPosition == 0
                 && direction == .previous
-            let shouldLookUpInNextSection = unit.position == (section.unitsArray.count - 1)
+            let shouldLookUpInNextSection = unitPosition == (section.unitsArray.count - 1)
                 && direction == .next
             if shouldLookUpInPreviousSection || shouldLookUpInNextSection {
                 return self.findUnitInAnotherSections(
                     courseID: section.courseId,
-                    sectionPosition: section.position,
+                    sectionPosition: sectionPosition,
                     direction: direction
                 )
             } else {
                 return self.findUnitInCurrentSection(
                     section,
-                    unitPosition: unit.position,
+                    unitPosition: unitPosition,
                     direction: direction
                 )
             }

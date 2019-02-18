@@ -427,14 +427,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        self.moduleOutput?.presentLesson(
-            in: unit,
-            navigationDelegate: self,
-            navigationRules: (
-                prev: self.nextLessonService.findPreviousUnit(for: unit) != nil,
-                next: self.nextLessonService.findNextUnit(for: unit) != nil
-            )
-        )
+        self.moduleOutput?.presentLesson(in: unit)
     }
 
     enum Error: Swift.Error {

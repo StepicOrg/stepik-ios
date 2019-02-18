@@ -37,9 +37,6 @@ class LessonPresenter {
     var stepsAPI: StepsAPI
     var lessonsAPI: LessonsAPI
 
-    var shouldNavigateToPrev: Bool = false
-    var shouldNavigateToNext: Bool = false
-
     fileprivate var didInitSteps: Bool = false
     fileprivate var didSelectTab: Bool = false
 
@@ -54,6 +51,21 @@ class LessonPresenter {
         )
         return service
     }()
+
+    private lazy var unitNavigationService: UnitNavigationServiceProtocol = {
+        let service = UnitNavigationService(
+            sectionsPersistenceService: SectionsPersistenceService(),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            unitsPersistenceService: UnitsPersistenceService(),
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI())
+        )
+        return service
+    }()
+
+    private var nextUnit: Unit?
+    private var previousUnit: Unit?
 
     init(objects: LessonInitObjects?, ids: LessonInitIds?, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI) {
         if let objects = objects {
@@ -76,6 +88,22 @@ class LessonPresenter {
             name: .stepDone,
             object: nil
         )
+
+        if let unitID = self.unitId {
+            DispatchQueue.global().async { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.unitNavigationService.findNextUnit(for: unitID).done { unit in
+                    strongSelf.nextUnit = unit
+                }.cauterize()
+
+                strongSelf.unitNavigationService.findPreviousUnit(for: unitID).done { unit in
+                    strongSelf.previousUnit = unit
+                }.cauterize()
+            }
+        }
     }
 
     deinit {
@@ -163,14 +191,6 @@ class LessonPresenter {
         guard lesson != nil else {
             loadLesson()
             return
-        }
-
-        if let section = lesson?.unit?.section,
-            let unitId = unitId {
-            if let index = section.unitsArray.index(of: unitId) {
-                shouldNavigateToPrev = shouldNavigateToPrev || (index != 0)
-                shouldNavigateToNext = shouldNavigateToNext || (index < section.unitsArray.count - 1)
-            }
         }
 
         view?.updateTitle(title: lesson?.title ?? NSLocalizedString("Lesson", comment: ""))
@@ -299,22 +319,9 @@ class LessonPresenter {
             }
 
             if context == .unit {
-                if index == 0 && shouldNavigateToPrev {
-                    stepController.prevLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestPreviousUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
-                    }
-                }
-
-                if index == lesson.steps.count - 1 && shouldNavigateToNext {
-                    stepController.nextLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestNextUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
-                    }
+                stepController.prevLessonHandler = {
+                    [weak self] in
+                    print("lalala")
                 }
             }
 
@@ -345,23 +352,11 @@ class LessonPresenter {
                 self?.canSendViews ?? false
             }
             stepController.lessonSlug = lesson.slug
-            if context == .unit {
-                if index == 0 && shouldNavigateToPrev {
-                    stepController.prevLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestPreviousUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
-                    }
-                }
 
-                if index == lesson.steps.count - 1 && shouldNavigateToNext {
-                    stepController.nextLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestNextUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
-                    }
+            if context == .unit {
+                stepController.prevLessonHandler = {
+                    [weak self] in
+                    print(self?.previousUnit?.id, self?.nextUnit?.id)
                 }
             }
 
