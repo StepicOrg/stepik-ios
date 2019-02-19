@@ -9,9 +9,16 @@
 import Foundation
 import PromiseKit
 
+enum UnitNavigationDirection {
+    case next
+    case previous
+}
+
 protocol UnitNavigationServiceProtocol: class {
-    func findNextUnit(for unit: Unit.IdType) -> Promise<Unit?>
-    func findPreviousUnit(for unit: Unit.IdType) -> Promise<Unit?>
+    func findUnitForNavigation(
+        from unit: Unit.IdType,
+        direction: UnitNavigationDirection
+    ) -> Promise<Unit?>
 }
 
 final class UnitNavigationService: UnitNavigationServiceProtocol {
@@ -38,18 +45,51 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         self.coursesNetworkService = coursesNetworkService
     }
 
-    func findNextUnit(for unit: Unit.IdType) -> Promise<Unit?> {
-        return self.findAdjacentUnit(for: unit, direction: .next)
-    }
+    func findUnitForNavigation(
+        from unit: Unit.IdType,
+        direction: UnitNavigationDirection
+    ) -> Promise<Unit?> {
+        return self.getUnitFromCacheOrNetwork(id: unit).then { unit -> Promise<(Unit?, Section?)> in
+            guard let unit = unit else {
+                return Promise.value((nil, nil))
+            }
 
-    func findPreviousUnit(for unit: Unit.IdType) -> Promise<Unit?> {
-        return self.findAdjacentUnit(for: unit, direction: .previous)
+            return self.getSectionFromCacheOrNetwork(id: unit.sectionId).map { (unit, $0) }
+        }.then { unit, section -> Promise<Unit?> in
+            guard let section = section, let unit = unit else {
+                return Promise.value(nil)
+            }
+
+            unit.section = section
+            CoreDataHelper.instance.save()
+
+            let unitPosition = unit.position - 1
+            let sectionPosition = section.position - 1
+
+            let shouldLookUpInPreviousSection = unitPosition == 0
+                && direction == .previous
+            let shouldLookUpInNextSection = unitPosition == (section.unitsArray.count - 1)
+                && direction == .next
+            if shouldLookUpInPreviousSection || shouldLookUpInNextSection {
+                return self.findUnitInAnotherSections(
+                    courseID: section.courseId,
+                    sectionPosition: sectionPosition,
+                    direction: direction
+                )
+            } else {
+                return self.findUnitInCurrentSection(
+                    section,
+                    unitPosition: unitPosition,
+                    direction: direction
+                )
+            }
+        }
     }
 
     private func findUnitInCurrentSection(
         _ section: Section,
         unitPosition: Int,
-        direction: Direction
+        direction: UnitNavigationDirection
     ) -> Promise<Unit?> {
         let unitID: Unit.IdType? = {
             switch direction {
@@ -70,7 +110,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     private func findUnitInAnotherSections(
         courseID: Course.IdType,
         sectionPosition: Int,
-        direction: Direction
+        direction: UnitNavigationDirection
     ) -> Promise<Unit?> {
         return self.getSlicedSections(
             courseID: courseID,
@@ -120,7 +160,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     private func getSlicedSections(
         courseID: Course.IdType,
         sectionPosition: Int,
-        direction: Direction
+        direction: UnitNavigationDirection
     ) -> Promise<[Section]> {
         return Promise { seal in
             self.getCourseFromCacheOrNetwork(id: courseID).then { course -> Promise<[Section]> in
@@ -146,44 +186,6 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
                 seal.fulfill(sections)
             }.catch { error in
                 seal.reject(error)
-            }
-        }
-    }
-
-    private func findAdjacentUnit(for unit: Unit.IdType, direction: Direction) -> Promise<Unit?> {
-        return self.getUnitFromCacheOrNetwork(id: unit).then { unit -> Promise<(Unit?, Section?)> in
-            guard let unit = unit else {
-                return Promise.value((nil, nil))
-            }
-
-            return self.getSectionFromCacheOrNetwork(id: unit.sectionId).map { (unit, $0) }
-        }.then { unit, section -> Promise<Unit?> in
-            guard let section = section, let unit = unit else {
-                return Promise.value(nil)
-            }
-
-            unit.section = section
-            CoreDataHelper.instance.save()
-
-            let unitPosition = unit.position - 1
-            let sectionPosition = section.position - 1
-
-            let shouldLookUpInPreviousSection = unitPosition == 0
-                && direction == .previous
-            let shouldLookUpInNextSection = unitPosition == (section.unitsArray.count - 1)
-                && direction == .next
-            if shouldLookUpInPreviousSection || shouldLookUpInNextSection {
-                return self.findUnitInAnotherSections(
-                    courseID: section.courseId,
-                    sectionPosition: sectionPosition,
-                    direction: direction
-                )
-            } else {
-                return self.findUnitInCurrentSection(
-                    section,
-                    unitPosition: unitPosition,
-                    direction: direction
-                )
             }
         }
     }
@@ -222,11 +224,6 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     }
 
     // MARK: Enums
-
-    enum Direction {
-        case next
-        case previous
-    }
 
     enum Error: Swift.Error {
         case unknownCourse

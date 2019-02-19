@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 enum LessonViewState {
     case displayingSteps, placeholder, refreshing
@@ -27,6 +28,8 @@ class LessonPresenter {
 
     static let stepUpdatedNotification = "StepUpdatedNotification"
     fileprivate var tabViewsForStepId = [Int: UIView]()
+
+    private var controllerForIndex: [Int: UIViewController] = [:]
 
     fileprivate var lesson: Lesson?
     fileprivate var startStepId: Int = 0
@@ -64,7 +67,10 @@ class LessonPresenter {
         return service
     }()
 
+    private var didNextUnitLoad = false
     private var nextUnit: Unit?
+
+    private var didPreviousUnitLoad = false
     private var previousUnit: Unit?
 
     init(objects: LessonInitObjects?, ids: LessonInitIds?, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI) {
@@ -95,12 +101,42 @@ class LessonPresenter {
                     return
                 }
 
-                strongSelf.unitNavigationService.findNextUnit(for: unitID).done { unit in
-                    strongSelf.nextUnit = unit
+                strongSelf.unitNavigationService.findUnitForNavigation(
+                    from: unitID,
+                    direction: .next
+                ).done { unit in
+                    print("next unit loaded, unit = \(unit?.id)")
+                    if let unit = unit {
+                        if let stepsCount = strongSelf.lesson?.stepsArray.count {
+                            (strongSelf.controllerForIndex[stepsCount - 1] as? VideoStepViewController)?.nextLessonHandler = {
+                                strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                            }
+                            (strongSelf.controllerForIndex[stepsCount - 1] as? WebStepViewController)?.nextLessonHandler = {
+                                strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                            }
+                        }
+
+                        strongSelf.didNextUnitLoad = true
+                        strongSelf.nextUnit = unit
+                    }
                 }.cauterize()
 
-                strongSelf.unitNavigationService.findPreviousUnit(for: unitID).done { unit in
-                    strongSelf.previousUnit = unit
+                strongSelf.unitNavigationService.findUnitForNavigation(
+                    from: unitID,
+                    direction: .previous
+                ).done { unit in
+                    print("previous unit loaded, unit = \(unit?.id)")
+                    if let unit = unit {
+                        (strongSelf.controllerForIndex[0] as? VideoStepViewController)?.prevLessonHandler = {
+                            strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
+                        }
+                        (strongSelf.controllerForIndex[0] as? WebStepViewController)?.prevLessonHandler = {
+                            strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
+                        }
+
+                        strongSelf.didPreviousUnitLoad = true
+                        strongSelf.previousUnit = unit
+                    }
                 }.cauterize()
             }
         }
@@ -318,13 +354,25 @@ class LessonPresenter {
                 self?.canSendViews ?? false
             }
 
-            if context == .unit {
-                stepController.prevLessonHandler = {
-                    [weak self] in
-                    print("lalala")
+            if context == .unit && index == 0 && didPreviousUnitLoad {
+                stepController.prevLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
                 }
             }
 
+            if context == .unit && index == lesson.stepsArray.count - 1 && didNextUnitLoad {
+                stepController.nextLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                }
+            }
+
+            controllerForIndex[index] = stepController
             return stepController
         } else {
             let stepController = ControllerHelper.instantiateViewController(identifier: "WebStepViewController") as! WebStepViewController
@@ -353,15 +401,80 @@ class LessonPresenter {
             }
             stepController.lessonSlug = lesson.slug
 
-            if context == .unit {
-                stepController.prevLessonHandler = {
-                    [weak self] in
-                    print(self?.previousUnit?.id, self?.nextUnit?.id)
+            if context == .unit && index == 0 && didPreviousUnitLoad {
+                stepController.prevLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
                 }
             }
 
+            if context == .unit && index == lesson.stepsArray.count - 1 && didNextUnitLoad {
+                stepController.nextLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                }
+            }
+
+            controllerForIndex[index] = stepController
             return stepController
         }
+    }
+
+    private func navigateToNextOrPreviousUnit(direction: UnitNavigationDirection) {
+        guard let targetUnit = direction == .next ? self.nextUnit : self.previousUnit else {
+            return
+        }
+
+        SVProgressHUD.show()
+        let cachedLesson = Lesson.fetch([targetUnit.lessonId]).first
+        if let lesson = cachedLesson {
+            self.replaceByNewLesson(
+                lesson: lesson,
+                unit: targetUnit,
+                stepArrayFunction: { direction == .next ? $0.first : $0.last }
+            )
+        } else {
+            self.lessonsAPI.retrieve(ids: [targetUnit.lessonId]).done { lessons in
+                guard let lesson = lessons.first else {
+                    SVProgressHUD.showError(withStatus: nil)
+                    return
+                }
+
+                self.replaceByNewLesson(
+                    lesson: lesson,
+                    unit: targetUnit,
+                    stepArrayFunction: { direction == .next ? $0.first : $0.last }
+                )
+                SVProgressHUD.dismiss()
+            }.catch { _ in
+                print("error while fetching lesson for next/prev unit")
+                SVProgressHUD.showError(withStatus: nil)
+            }
+        }
+    }
+
+    private func replaceByNewLesson(lesson: Lesson, unit: Unit, stepArrayFunction: ([Int]) -> Int?) {
+        guard let viewControllers = self.view?.nController?.viewControllers,
+              let presentingViewController = self.view?.nController?.viewControllers[safe: viewControllers.count - 2] else {
+            return
+        }
+
+        guard let stepID = stepArrayFunction(lesson.stepsArray) else {
+            SVProgressHUD.showError(withStatus: nil)
+            return
+        }
+
+        let newLessonController = LessonLegacyAssembly(
+            initObjects: nil,
+            initIDs: (stepId: stepID, unitId: unit.id)
+        ).makeModule()
+
+        SVProgressHUD.dismiss()
+        presentingViewController.replace(by: newLessonController)
     }
 
     func tabView(index: Int) -> UIView {

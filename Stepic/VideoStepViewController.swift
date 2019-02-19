@@ -24,8 +24,16 @@ class VideoStepViewController: UIViewController {
 
     var assignment: Assignment?
 
-    var nextLessonHandler: (() -> Void)?
-    var prevLessonHandler: (() -> Void)?
+    var nextLessonHandler: (() -> Void)? {
+        didSet {
+            refreshNextPrevButtons()
+        }
+    }
+    var prevLessonHandler: (() -> Void)? {
+        didSet {
+            refreshNextPrevButtons()
+        }
+    }
 
     var nController: UINavigationController?
     var nItem: UINavigationItem!
@@ -63,6 +71,7 @@ class VideoStepViewController: UIViewController {
         prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
 
         initialize()
+        refreshNextPrevButtons()
         navigationController?.navigationBar.sizeToFit()
     }
 
@@ -96,22 +105,16 @@ class VideoStepViewController: UIViewController {
             discussionCountViewHeight.constant = 0
         }
 
-        if nextLessonHandler == nil {
-            nextLessonButton.isHidden = true
-        } else {
-            nextLessonButton.setStepicWhiteStyle()
-        }
+        nextLessonButton.setStepicWhiteStyle()
+        prevLessonButton.setStepicWhiteStyle()
+    }
 
-        if prevLessonHandler == nil {
-            prevLessonButton.isHidden = true
-        } else {
-            prevLessonButton.setStepicWhiteStyle()
+    func refreshNextPrevButtons() {
+        if nextLessonButton != nil {
+            nextLessonButton.isHidden = nextLessonHandler == nil
         }
-
-        if nextLessonHandler == nil && prevLessonHandler == nil {
-            nextLessonButtonHeight.constant = 0
-            prevLessonButtonHeight.constant = 0
-            prevNextLessonButtonsContainerViewHeight.constant = 0
+        if prevLessonButton != nil {
+            prevLessonButton.isHidden = prevLessonHandler == nil
         }
     }
 
