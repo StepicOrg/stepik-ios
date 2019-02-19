@@ -10,12 +10,18 @@ import UIKit
 import SnapKit
 
 protocol CourseInfoTabReviewsViewDelegate: class {
-    func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidPaginationRequesting(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView
+    )
 }
 
 extension CourseInfoTabReviewsView {
     struct Appearance {
         let paginationViewHeight: CGFloat = 52
+
+        let emptyStateLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
+        let emptyStateLabelColor = UIColor(hex: 0x535366, alpha: 0.4)
+        let emptyStateLabelInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
     }
 }
 
@@ -35,6 +41,17 @@ final class CourseInfoTabReviewsView: UIView {
         tableView.register(cellClass: CourseInfoTabReviewsTableViewCell.self)
 
         return tableView
+    }()
+
+    private lazy var emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("NoReviews", comment: "")
+        label.numberOfLines = 0
+        label.textColor = self.appearance.emptyStateLabelColor
+        label.font = self.appearance.emptyStateLabelFont
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
     }()
 
     // Proxify delegates
@@ -57,6 +74,10 @@ final class CourseInfoTabReviewsView: UIView {
     }
 
     func updateTableViewData(dataSource: UITableViewDataSource) {
+        let numberOfRows = dataSource.tableView(self.tableView, numberOfRowsInSection: 1)
+        self.tableView.isHidden = numberOfRows == 0
+        self.emptyStateLabel.isHidden = numberOfRows != 0
+
         self.tableView.dataSource = dataSource
         self.tableView.reloadData()
     }
@@ -77,17 +98,42 @@ final class CourseInfoTabReviewsView: UIView {
         self.tableView.tableFooterView?.frame = .zero
         self.tableView.tableFooterView = nil
     }
+
+    func showLoading() {
+        self.tableView.skeleton.viewBuilder = {
+            CourseInfoTabReviewsSkeletonView()
+        }
+        self.tableView.skeleton.show()
+    }
+
+    func hideLoading() {
+        self.tableView.skeleton.hide()
+    }
 }
 
 extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
+        self.addSubview(self.emptyStateLabel)
     }
 
     func makeConstraints() {
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.emptyStateLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.emptyStateLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.leading
+                .greaterThanOrEqualToSuperview()
+                .offset(self.appearance.emptyStateLabelInsets.left)
+            make.trailing
+                .lessThanOrEqualToSuperview()
+                .offset(-self.appearance.emptyStateLabelInsets.right)
+            make.width.lessThanOrEqualTo(600)
         }
     }
 }
@@ -125,6 +171,9 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
             return self.tableView.contentInset
         }
         set {
+            self.emptyStateLabel.snp.updateConstraints { make in
+                make.centerY.equalToSuperview().offset(newValue.top / 2)
+            }
             self.tableView.contentInset = newValue
         }
     }

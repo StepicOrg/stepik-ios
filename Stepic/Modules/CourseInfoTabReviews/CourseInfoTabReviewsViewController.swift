@@ -36,7 +36,6 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.updateState(newState: self.state)
     }
 
@@ -63,37 +62,47 @@ final class CourseInfoTabReviewsViewController: UIViewController {
     }
 
     private func updateState(newState: CourseInfoTabReviews.ViewControllerState) {
-        if case .result(_) = newState {
-            // self.courseInfoTabReviewsView?.hideLoading()
-            self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
-        } else {
-            // self.courseInfoTabReviewsView?.showLoading()
+        // Due to skeleton implementation we should
+        // prevent hideLoading() call every time when state updated
+
+        defer {
+            self.state = newState
         }
-        self.state = newState
+
+        if case .loading = newState {
+            self.courseInfoTabReviewsView?.showLoading()
+            return
+        }
+
+        if case .loading = self.state {
+            self.courseInfoTabReviewsView?.hideLoading()
+        }
+
+        if case .result(_) = newState {
+            self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
+        }
     }
 }
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol {
     func displayReviews(viewModel: CourseInfoTabReviews.ShowReviews.ViewModel) {
-        switch viewModel.state {
-        case .loading:
-            break
-        case .result(let data):
+        if case .result(let data) = viewModel.state {
             self.tableDataSource.viewModels = data.reviews
+            self.updateState(newState: viewModel.state)
             self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
         }
-        self.updateState(newState: viewModel.state)
     }
 
     func displayNextReviews(viewModel: CourseInfoTabReviews.LoadNextReviews.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             self.tableDataSource.viewModels.append(contentsOf: data.reviews)
+            self.updateState(newState: self.state)
             self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
         case .error:
+            self.updateState(newState: self.state)
             self.updatePagination(hasNextPage: false, hasError: true)
         }
-        self.updateState(newState: self.state)
     }
 }
 

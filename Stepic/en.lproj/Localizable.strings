@@ -594,6 +594,7 @@ DeadlineModeQuestion = "How much time would you like to spend studying on this c
 CourseMeetsRecommendations = "Meets the recommendations of Stepik";
 SyllabusDeadlinesButton = "Schedule";
 SyllabusDownloadAll = "Download all";
+NoReviews = "Unfortunately, there are no reviews sent for this course";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
