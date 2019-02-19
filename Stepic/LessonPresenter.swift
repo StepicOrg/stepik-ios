@@ -106,19 +106,21 @@ class LessonPresenter {
                     direction: .next
                 ).done { unit in
                     print("next unit loaded, unit = \(unit?.id)")
-                    if let unit = unit {
-                        if let stepsCount = strongSelf.lesson?.stepsArray.count {
-                            (strongSelf.controllerForIndex[stepsCount - 1] as? VideoStepViewController)?.nextLessonHandler = {
-                                strongSelf.navigateToNextOrPreviousUnit(direction: .next)
-                            }
-                            (strongSelf.controllerForIndex[stepsCount - 1] as? WebStepViewController)?.nextLessonHandler = {
-                                strongSelf.navigateToNextOrPreviousUnit(direction: .next)
-                            }
-                        }
-
-                        strongSelf.didNextUnitLoad = true
-                        strongSelf.nextUnit = unit
+                    guard let unit = unit else {
+                        return
                     }
+
+                    if let stepsCount = strongSelf.lesson?.stepsArray.count {
+                        (strongSelf.controllerForIndex[stepsCount - 1] as? VideoStepViewController)?.nextLessonHandler = {
+                            strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                        }
+                        (strongSelf.controllerForIndex[stepsCount - 1] as? WebStepViewController)?.nextLessonHandler = {
+                            strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                        }
+                    }
+
+                    strongSelf.didNextUnitLoad = true
+                    strongSelf.nextUnit = unit
                 }.cauterize()
 
                 strongSelf.unitNavigationService.findUnitForNavigation(
@@ -126,17 +128,19 @@ class LessonPresenter {
                     direction: .previous
                 ).done { unit in
                     print("previous unit loaded, unit = \(unit?.id)")
-                    if let unit = unit {
-                        (strongSelf.controllerForIndex[0] as? VideoStepViewController)?.prevLessonHandler = {
-                            strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
-                        }
-                        (strongSelf.controllerForIndex[0] as? WebStepViewController)?.prevLessonHandler = {
-                            strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
-                        }
-
-                        strongSelf.didPreviousUnitLoad = true
-                        strongSelf.previousUnit = unit
+                    guard let unit = unit else {
+                        return
                     }
+
+                    (strongSelf.controllerForIndex[0] as? VideoStepViewController)?.prevLessonHandler = {
+                        strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
+                    }
+                    (strongSelf.controllerForIndex[0] as? WebStepViewController)?.prevLessonHandler = {
+                        strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
+                    }
+
+                    strongSelf.didPreviousUnitLoad = true
+                    strongSelf.previousUnit = unit
                 }.cauterize()
             }
         }
