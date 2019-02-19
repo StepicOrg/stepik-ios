@@ -62,9 +62,6 @@ final class CourseInfoTabReviewsViewController: UIViewController {
     }
 
     private func updateState(newState: CourseInfoTabReviews.ViewControllerState) {
-        // Due to skeleton implementation we should
-        // prevent hideLoading() call every time when state updated
-
         defer {
             self.state = newState
         }
