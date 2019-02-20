@@ -3901,6 +3901,7 @@
 		2CDE2ADD216B3F61008AF0D1 /* ProgressPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */; };
 		2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */; };
 		2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B5212472AA00898A70 /* LogoutableMock.swift */; };
+		2CDE82E2221D5CCB00C41887 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE82E1221D5CCB00C41887 /* highlight.js */; };
 		2CDF46352126AE2800A803C5 /* RecommendationsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */; };
 		2CDF46372126B0A100A803C5 /* RecommendationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46362126B0A100A803C5 /* RecommendationsService.swift */; };
 		2CDF46392126B98200A803C5 /* RecommendationsAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */; };
@@ -6032,6 +6033,7 @@
 		2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPlainObject.swift; sourceTree = "<group>"; };
 		2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderTests.swift; sourceTree = "<group>"; };
 		2CDE34B5212472AA00898A70 /* LogoutableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutableMock.swift; sourceTree = "<group>"; };
+		2CDE82E1221D5CCB00C41887 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		2CDF46342126AE2800A803C5 /* RecommendationsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsServiceProtocol.swift; sourceTree = "<group>"; };
 		2CDF46362126B0A100A803C5 /* RecommendationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsService.swift; sourceTree = "<group>"; };
 		2CDF46382126B98200A803C5 /* RecommendationsAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsAPIMock.swift; sourceTree = "<group>"; };
@@ -8008,6 +8010,7 @@
 				087D96BA1EBB7F5500059408 /* Tokens.swift */,
 				2CBC4C051F1E4A1300FE96C4 /* Config.plist */,
 				2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */,
+				2CDE82E1221D5CCB00C41887 /* highlight.js */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -12402,6 +12405,7 @@
 				08CBA31D1F57562A00302154 /* SwitchMenuBlockTableViewCell.xib in Resources */,
 				08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */,
 				08484EFE211AF4320006266F /* StoriesViewController.xib in Resources */,
+				2CDE82E2221D5CCB00C41887 /* highlight.js in Resources */,
 				2CA9D98E20123349007AA743 /* nouns_f.plist in Resources */,
 				081A7DF31C56A09300583728 /* QuizViewController.xib in Resources */,
 				2C97E00E215E480F005684A1 /* SearchSuggestionTableViewCell.xib in Resources */,

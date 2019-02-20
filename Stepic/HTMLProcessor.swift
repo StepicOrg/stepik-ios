@@ -27,6 +27,7 @@ class HTMLProcessor {
         case audio
         case textColor(color: UIColor)
         case mathJaxCompletion
+        case highlightJS
         case customHead(head: String)
         case customBody(body: String)
 
@@ -46,6 +47,8 @@ class HTMLProcessor {
                 return Scripts.audioTagWrapper
             case .mathJaxCompletion:
                 return Scripts.mathJaxFinished
+            case .highlightJS:
+                return Scripts.highlightJS
             case .customHead(let customHead):
                 return customHead
             default:
@@ -79,6 +82,7 @@ class HTMLProcessor {
             .inject(script: .styles)
             .inject(script: .metaViewport)
             .inject(script: .kotlinRunnableSamples)
+            .inject(script: .highlightJS)
             .inject(script: .textColor(color: UIColor.mainText))
     }
 
@@ -95,6 +99,10 @@ class HTMLProcessor {
             }
         case .audio:
             if htmlString.contains("<audio") {
+                injectInHTML(script: script)
+            }
+        case .highlightJS:
+            if htmlString.contains("<code") {
                 injectInHTML(script: script)
             }
         default:
