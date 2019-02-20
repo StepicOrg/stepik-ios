@@ -11,6 +11,7 @@ import PromiseKit
 
 protocol UnitsNetworkServiceProtocol: class {
     func fetch(ids: [Unit.IdType]) -> Promise<[Unit]>
+    func fetch(id: Unit.IdType) -> Promise<Unit?>
 }
 
 final class UnitsNetworkService: UnitsNetworkServiceProtocol {
@@ -28,6 +29,12 @@ final class UnitsNetworkService: UnitsNetworkServiceProtocol {
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
+        }
+    }
+
+    func fetch(id: Unit.IdType) -> Promise<Unit?> {
+        return self.fetch(ids: [id]).then { result -> Promise<Unit?> in
+            Promise.value(result.first)
         }
     }
 
