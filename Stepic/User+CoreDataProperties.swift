@@ -110,6 +110,10 @@ extension User {
         }
     }
 
+    var fullName: String {
+        return "\(firstName) \(lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     var avatarURL: String {
         set(value) {
             managedAvatarURL = value

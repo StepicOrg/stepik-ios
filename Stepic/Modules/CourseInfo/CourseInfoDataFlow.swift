@@ -12,6 +12,7 @@ enum CourseInfo {
     enum Tab {
         case info
         case syllabus
+        case reviews
 
         var title: String {
             switch self {
@@ -19,6 +20,8 @@ enum CourseInfo {
                 return NSLocalizedString("CourseInfoTabInfo", comment: "")
             case .syllabus:
                 return NSLocalizedString("CourseInfoTabSyllabus", comment: "")
+            case .reviews:
+                return NSLocalizedString("CourseInfoTabReviews", comment: "")
             }
         }
     }
