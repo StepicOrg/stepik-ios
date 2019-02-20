@@ -45,6 +45,7 @@ class StoryPresenter: StoryPresenterProtocol {
 
     private var partToAnimate: Int = 0
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
+    private var shouldRestartSegment = false
 
     var storyID: Int {
         return story.id
@@ -103,16 +104,27 @@ class StoryPresenter: StoryPresenterProtocol {
     func didAppear() {
         AmplitudeAnalyticsEvents.Stories.storyOpened(id: storyID).send()
         NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": storyID])
+
+        if shouldRestartSegment {
+            shouldRestartSegment = false
+            animate()
+        }
     }
 
     private func showPreviousStory() {
         AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .automatic).send()
         navigationDelegate?.didFinishBack()
+
+        partToAnimate = 0
+        shouldRestartSegment = true
     }
 
     private func showNextStory() {
         AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .automatic).send()
         navigationDelegate?.didFinishForward()
+
+        partToAnimate = story.parts.count - 1
+        shouldRestartSegment = true
     }
 
     func skip() {
