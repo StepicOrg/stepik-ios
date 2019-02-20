@@ -964,6 +964,7 @@
 		2C0AF18C203C67EC000EA3B6 /* MigrationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */; };
 		2C1000802029BA7F00E55597 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
+		2C10C477221AB8CC00FA3E13 /* UnitNavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C476221AB8CC00FA3E13 /* UnitNavigationService.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
 		2C130E892125A3F50022E998 /* AssemblyFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */; };
 		2C130E8B2125A4410022E998 /* ApplicationAssemblyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */; };
@@ -5569,6 +5570,7 @@
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
 		2C0AF18B203C67EC000EA3B6 /* MigrationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationExtensions.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
+		2C10C476221AB8CC00FA3E13 /* UnitNavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitNavigationService.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
 		2C130E882125A3F50022E998 /* AssemblyFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFactoryMock.swift; sourceTree = "<group>"; };
 		2C130E8A2125A4410022E998 /* ApplicationAssemblyMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssemblyMock.swift; sourceTree = "<group>"; };
@@ -9911,6 +9913,7 @@
 				089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */,
 				2C23C12621AD8907001DCF89 /* NextLessonService.swift */,
 				2C8AD757220311F000C9C089 /* DataBackUpdateService.swift */,
+				2C10C476221AB8CC00FA3E13 /* UnitNavigationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -15456,6 +15459,7 @@
 				73DB05040F3345F6568DCCBB /* FullscreenCourseListView.swift in Sources */,
 				62E983594B255BB6BE92AD8A /* UniqueIdentifierType.swift in Sources */,
 				62E9850F9C459CC122A416F3 /* ContentLanguageSwitchAvailabilityService.swift in Sources */,
+				2C10C477221AB8CC00FA3E13 /* UnitNavigationService.swift in Sources */,
 				62E9870883D5C6A1DCB15E4B /* TagsOutputProtocol.swift in Sources */,
 				62E9893ECE0FA9E7AEC2B6DD /* CourseListCollectionOutputProtocol.swift in Sources */,
 				62E98236342BF7C367FB6F36 /* Array+reordering.swift in Sources */,

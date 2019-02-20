@@ -13,19 +13,13 @@ import SnapKit
 final class LessonLegacyAssembly: Assembly {
     private let initObjects: LessonInitObjects?
     private let initIDs: LessonInitIds?
-    private let navigationRules: LessonNavigationRules
-    private let navigationDelegate: SectionNavigationDelegate
 
     init(
         initObjects: LessonInitObjects?,
-        initIDs: LessonInitIds?,
-        navigationRules: LessonNavigationRules,
-        navigationDelegate: SectionNavigationDelegate
+        initIDs: LessonInitIds?
     ) {
         self.initObjects = initObjects
         self.initIDs = initIDs
-        self.navigationRules = navigationRules
-        self.navigationDelegate = navigationDelegate
     }
 
     func makeModule() -> UIViewController {
@@ -37,9 +31,6 @@ final class LessonLegacyAssembly: Assembly {
         lessonVC.initObjects = self.initObjects
         lessonVC.initIds = self.initIDs
 
-        lessonVC.navigationRules = self.navigationRules
-        lessonVC.sectionNavigationDelegate = self.navigationDelegate
-
         return lessonVC
     }
 }
@@ -49,10 +40,6 @@ typealias LessonNavigationRules = (prev: Bool, next: Bool)
 class LessonViewController: PagerController, ShareableController, LessonView {
 
     var parentShareBlock: ((UIActivityViewController) -> Void)?
-
-    weak var sectionNavigationDelegate: SectionNavigationDelegate?
-
-    var navigationRules : LessonNavigationRules?
 
     fileprivate var presenter: LessonPresenter?
 
@@ -145,11 +132,6 @@ class LessonViewController: PagerController, ShareableController, LessonView {
 
         presenter = LessonPresenter(objects: initObjects, ids: initIds, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons)
         presenter?.view = self
-        presenter?.sectionNavigationDelegate = sectionNavigationDelegate
-        if let rules = navigationRules {
-            presenter?.shouldNavigateToPrev = rules.prev
-            presenter?.shouldNavigateToNext = rules.next
-        }
         presenter?.refreshSteps()
     }
 
