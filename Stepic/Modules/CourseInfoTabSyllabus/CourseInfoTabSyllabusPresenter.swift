@@ -36,6 +36,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 for (unitIndex, unitID) in sectionData.element.entity.unitsArray.enumerated() {
                     if let matchedUnitRecord = result.units.first(where: { $0.entity?.id == unitID }),
                        let unit = matchedUnitRecord.entity {
+                        let isSectionReachable = sectionData.element.entity.isReachable
                         currentSectionUnitViewModels.append(
                             self.makeUnitViewModel(
                                 sectionIndex: sectionData.offset,
@@ -43,7 +44,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                                 uid: matchedUnitRecord.uniqueIdentifier,
                                 unit: unit,
                                 downloadState: matchedUnitRecord.downloadState,
-                                isAvailable: result.isEnrolled
+                                isAvailable: result.isEnrolled && isSectionReachable
                             )
                         )
                     } else {
