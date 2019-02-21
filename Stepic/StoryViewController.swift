@@ -11,17 +11,28 @@ import SnapKit
 
 class StoryViewController: UIViewController {
 
+    @IBOutlet weak var closeButtonTapProxyView: TapProxyView!
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var progressView: SegmentedProgressView!
     @IBOutlet weak var partsContainerView: UIView!
-    @IBOutlet weak var closeView: UIView!
 
-    private var gradientLayer: CAGradientLayer?
+    private lazy var topGradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer(
+            colors: [UIColor.black.withAlphaComponent(0.5), UIColor.clear],
+            rotationAngle: 0
+        )
+        return layer
+    }()
 
     var presenter: StoryPresenterProtocol?
 
     private var didAppear: Bool = false
     private var didLayout: Bool = false
     private var onAppearBlock: (() -> Void)?
+
+    @IBAction func onCloseButtonClick(_ sender: Any) {
+        presenter?.onClosePressed()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +53,9 @@ class StoryViewController: UIViewController {
             view.layer.masksToBounds = true
         }
 
+        closeButtonTapProxyView.targetView = closeButton
+
+        self.view.layer.insertSublayer(self.topGradientLayer, below: self.progressView.layer)
         presenter?.animate()
     }
 
@@ -58,6 +72,14 @@ class StoryViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
+        self.topGradientLayer.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.view.frame.width,
+            height: 2 * self.closeButton.frame.maxY
+        )
+
         didLayout = true
 
         if didAppear && didLayout {
@@ -87,9 +109,8 @@ class StoryViewController: UIViewController {
 
     @objc
     func didTap(recognizer: UITapGestureRecognizer) {
-        let closeLocation = recognizer.location(in: closeView)
-        if closeView.bounds.contains(closeLocation) {
-            presenter?.onClosePressed()
+        let closeLocation = recognizer.location(in: closeButtonTapProxyView)
+        if closeButtonTapProxyView.bounds.contains(closeLocation) {
             return
         }
 
