@@ -28,8 +28,6 @@ extension CourseInfoTabInfoInstructorView {
 final class CourseInfoTabInfoInstructorView: UIView {
     let appearance: Appearance
 
-    var onClick: (() -> Void)?
-
     var title: String? {
         didSet {
             self.titleLabel.text = self.title
@@ -48,6 +46,12 @@ final class CourseInfoTabInfoInstructorView: UIView {
             if let url = self.avatarImageURL {
                 self.imageView.set(with: url)
             }
+        }
+    }
+
+    var onClick: (() -> Void)? {
+        didSet {
+            self.overlayButton.isEnabled = self.onClick != nil
         }
     }
 
@@ -71,6 +75,13 @@ final class CourseInfoTabInfoInstructorView: UIView {
         label.font = self.appearance.descriptionLabelFont
         label.textColor = self.appearance.descriptionLabelTextColor
         return label
+    }()
+
+    private lazy var overlayButton: UIButton = {
+        let button = HighlightFakeButton()
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(self.overlayButtonClicked), for: .touchUpInside)
+        return button
     }()
 
     init(
@@ -102,26 +113,21 @@ final class CourseInfoTabInfoInstructorView: UIView {
     }
 
     @objc
-    private func onViewClicked(sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            self.onClick?()
-        }
+    private func overlayButtonClicked() {
+        self.onClick?()
     }
 }
 
 extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .white
-        self.addGestureRecognizer(UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.onViewClicked)
-        ))
     }
 
     func addSubviews() {
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.descriptionLabel)
+        self.addSubview(self.overlayButton)
     }
 
     func makeConstraints() {
@@ -147,6 +153,11 @@ extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProt
             make.top
                 .equalTo(self.imageView.snp.bottom)
                 .offset(self.appearance.descriptionLabelInsets.top)
+        }
+
+        self.overlayButton.translatesAutoresizingMaskIntoConstraints = false
+        self.overlayButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
