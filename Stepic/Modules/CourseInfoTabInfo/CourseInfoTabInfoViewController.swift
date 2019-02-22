@@ -72,7 +72,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        self.view = CourseInfoTabInfoView(delegate: self, videoViewDelegate: self)
+        self.view = CourseInfoTabInfoView(delegate: self)
     }
 
     override func viewDidLoad() {
