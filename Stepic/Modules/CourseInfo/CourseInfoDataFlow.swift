@@ -12,6 +12,7 @@ enum CourseInfo {
     enum Tab {
         case info
         case syllabus
+        case reviews
 
         var title: String {
             switch self {
@@ -19,6 +20,8 @@ enum CourseInfo {
                 return NSLocalizedString("CourseInfoTabInfo", comment: "")
             case .syllabus:
                 return NSLocalizedString("CourseInfoTabSyllabus", comment: "")
+            case .reviews:
+                return NSLocalizedString("CourseInfoTabReviews", comment: "")
             }
         }
     }
@@ -48,16 +51,12 @@ enum CourseInfo {
         struct Response {
             let lesson: Lesson
             let unitID: Unit.IdType
-            let navigationRules: LessonNavigationRules
-            let navigationDelegate: SectionNavigationDelegate
         }
 
         @available(*, deprecated, message: "Old ugly Lesson controller initialization")
         struct ViewModel {
             let initObjects: LessonInitObjects
             let initIDs: LessonInitIds
-            let navigationRules: LessonNavigationRules
-            let navigationDelegate: SectionNavigationDelegate
         }
     }
 

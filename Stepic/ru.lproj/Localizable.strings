@@ -442,6 +442,7 @@ CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сд�
 CourseInfoTitle = "О курсе";
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
+CourseInfoTabReviews = "Отзывы";
 CourseInfoTitleAuthor = "от";
 CourseInfoTitleAbout = "О курсе";
 CourseInfoTitleRequirements = "Требования";
@@ -594,6 +595,7 @@ DeadlineModeQuestion = "Сколько времени вы готовы трат
 CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
 SyllabusDeadlinesButton = "Расписание";
 SyllabusDownloadAll = "Загрузить всё";
+NoReviews = "К сожалению, ни одного отзыва об этом курсе пока нет";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";

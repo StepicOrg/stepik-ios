@@ -197,6 +197,10 @@ final class CourseInfoViewController: UIViewController {
                 )
                 viewControllers.append(syllabusAssembly.makeModule())
                 submodules.append(syllabusAssembly.moduleInput)
+            case .reviews:
+                let reviewsAssembly = CourseInfoTabReviewsAssembly()
+                viewControllers.append(reviewsAssembly.makeModule())
+                submodules.append(reviewsAssembly.moduleInput)
             }
         }
 
@@ -351,18 +355,10 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     func displayLesson(viewModel: CourseInfo.ShowLesson.ViewModel) {
         let assembly = LessonLegacyAssembly(
             initObjects: viewModel.initObjects,
-            initIDs: viewModel.initIDs,
-            navigationRules: viewModel.navigationRules,
-            navigationDelegate: viewModel.navigationDelegate
+            initIDs: viewModel.initIDs
         )
 
-        // If already present lesson then replace top controller
-        let shouldReplaceLesson = self.navigationController?.topViewController !== self
-        if shouldReplaceLesson {
-            self.replace(by: assembly.makeModule())
-        } else {
-            self.push(module: assembly.makeModule())
-        }
+        self.push(module: assembly.makeModule())
     }
 
     func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettings.ViewModel) {

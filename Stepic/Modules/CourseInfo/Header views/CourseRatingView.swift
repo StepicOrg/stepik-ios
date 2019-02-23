@@ -12,8 +12,8 @@ import Nuke
 
 extension CourseRatingView {
     struct Appearance {
-        let starFilledColor = UIColor(hex: 0x66cc66)
-        let statClearColor = UIColor.white
+        var starFilledColor = UIColor(hex: 0x66cc66)
+        var statClearColor = UIColor.white
 
         let starsSpacing: CGFloat = 5.0
         let starsSize = CGSize(width: 10.5, height: 10.5)

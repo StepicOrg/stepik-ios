@@ -145,6 +145,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 DispatchQueue.main.async {
                     print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
                     strongSelf.presenter.presentCourseSyllabus(response: response)
+                    strongSelf.updateSyllabusHeader()
                 }
             }.catch { error in
                 print("course info tab syllabus interactor: error while fetching section from network, error = \(error)")
@@ -286,7 +287,6 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
             return false
         }() && !shouldForceDisableDownloadAll
-
         self.presenter.presentCourseSyllabusHeader(
             response: .init(
                 isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
@@ -423,14 +423,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        self.moduleOutput?.presentLesson(
-            in: unit,
-            navigationDelegate: self,
-            navigationRules: (
-                prev: self.nextLessonService.findPreviousUnit(for: unit) != nil,
-                next: self.nextLessonService.findNextUnit(for: unit) != nil
-            )
-        )
+        self.moduleOutput?.presentLesson(in: unit)
     }
 
     enum Error: Swift.Error {
