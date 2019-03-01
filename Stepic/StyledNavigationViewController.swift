@@ -347,7 +347,6 @@ extension StyledNavigationController: UINavigationControllerDelegate {
         let targetControllerAppearance = self.getNavigationBarAppearance(for: viewController)
 
         guard animated else {
-            print("animate \(targetControllerAppearance.backgroundColor)")
             self.changeBackgroundColor(targetControllerAppearance.backgroundColor)
             self.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
             self.changeTextColor(targetControllerAppearance.textColor)
@@ -373,7 +372,6 @@ extension StyledNavigationController: UINavigationControllerDelegate {
                 guard let strongSelf = self else {
                     return
                 }
-                print("animate \(targetControllerAppearance.backgroundColor)")
                 strongSelf.changeBackgroundColor(targetControllerAppearance.backgroundColor)
                 strongSelf.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
                 strongSelf.changeTextColor(targetControllerAppearance.textColor)
