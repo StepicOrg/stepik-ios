@@ -1,234 +1,470 @@
 //
-//  StyledNavigationViewController.swift
+//  StyledNavigationController.swift
 //  Stepic
 //
-//  Created by Alexander Karpov on 03.09.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
+//  Created by Vladislav Kiryukhin on 28/02/2019.
+//  Copyright © 2019 Vladislav Kiryukhin. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-class StyledNavigationViewController: UINavigationController {
-    static let backgroundColor = UIColor.mainLight
-    static let lightTintColor = UIColor.white
-    static let darkTintColor = UIColor.mainDark
+class StyledNavigationController: UINavigationController {
+    enum Appearance {
+        static let backgroundColor = UIColor.mainLight
+        static let tintColor = UIColor.mainDark
 
-    private var currentShadowAlpha: CGFloat {
-        return self.customShadowView?.alpha ?? 0
+        static let titleFont = UIFont.systemFont(ofSize: 17, weight: .regular)
+
+        static let shadowViewColor = UIColor.lightGray
+        static let shadowViewHeight: CGFloat = 0.5
     }
 
-    private lazy var statusBarView: UIView = {
-        let view = UIView(frame: UIApplication.shared.statusBarFrame)
-        view.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        return view
-    }()
+    struct NavigationBarAppearanceState {
+        var shadowViewAlpha: CGFloat
+        var backgroundColor: UIColor
+        var textColor: UIColor
+        var tintColor: UIColor
 
-    private lazy var titleFont: UIFont = {
-        let fontSize: CGFloat = 17.0
-        let titleFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
-        return titleFont
-    }()
+        init(
+            shadowViewAlpha: CGFloat = 1.0,
+            backgroundColor: UIColor = StyledNavigationController.Appearance.backgroundColor,
+            textColor: UIColor = StyledNavigationController.Appearance.tintColor,
+            tintColor: UIColor = StyledNavigationController.Appearance.tintColor
+        ) {
+            self.shadowViewAlpha = shadowViewAlpha
+            self.backgroundColor = backgroundColor
+            self.textColor = textColor
+            self.tintColor = tintColor
+        }
+    }
+
+    private let delegateRepeater = NavigationControllerDelegateRepeater()
+    override var delegate: UINavigationControllerDelegate? {
+        set {
+            self.delegateRepeater.secondaryDelegate = newValue
+        }
+        get {
+            return self.delegateRepeater
+        }
+    }
+
+    private lazy var statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+
+    private lazy var shadowView = UIView()
+    private var shadowViewLeadingConstraint: Constraint?
+    private var shadowViewTrailingConstraint: Constraint?
+
+    private var lastAction = UINavigationController.Operation.none
+
+    private var navigationBarAppearanceForController:
+        [UIViewController: NavigationBarAppearanceState] = [:]
+
+    // MARK: ViewController lifecycle & base methods
 
     override func viewDidLoad() {
+        self.delegateRepeater.mainDelegate = self
         super.viewDidLoad()
-
-        self.view.addSubview(statusBarView)
-
-        setupShadowView()
-        // Do any additional setup after loading the view.
-    }
-
-    func hideBackButtonTitle() {
-        // Search for controller before last in stack
-        if let parentViewController = self.viewControllers.dropLast().last {
-            parentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(
-                title: "",
-                style: .plain,
-                target: nil,
-                action: nil
-            )
-        }
+        self.setupAppearance()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setStatusBarStyle()
-        changeNavigationBarAlpha(1.0)
-        changeTitleAlpha(1.0)
-
-        navigationBar.tintColor = StyledNavigationViewController.darkTintColor
+        self.resetNavigationBarAppearance()
     }
 
-    func setStatusBarStyle() {
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.statusBarView.frame = UIApplication.shared.statusBarFrame
     }
 
-    var customShadowView: UIView?
-    var customShadowTrailing: Constraint?
-    var customShadowLeading: Constraint?
-
-    func setupShadowView() {
-        let v = UIView()
-        navigationBar.addSubview(v)
-        v.backgroundColor = UIColor.lightGray
-
-        v.snp.makeConstraints { make -> Void in
-            make.height.equalTo(0.5)
-            make.bottom.equalTo(navigationBar).offset(0.5)
-
-            self.customShadowLeading = make.leading.equalTo(navigationBar).constraint
-            self.customShadowTrailing = make.trailing.equalTo(navigationBar).constraint
-        }
-
-        customShadowView = v
-        customShadowView?.alpha = 1
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(
+        to size: CGSize,
+        with coordinator: UIViewControllerTransitionCoordinator
+    ) {
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: {
-            [weak self]
-            _ in
-            self?.navigationBar.layoutSubviews()
-            self?.statusBarView.frame = UIApplication.shared.statusBarFrame
-        }, completion: nil)
-    }
 
-    func changeNavigationBarAlpha(_ alpha: CGFloat) {
-        let color = StyledNavigationViewController.backgroundColor
-            .withAlphaComponent(alpha)
-
-        navigationBar.isTranslucent = true
-        navigationBar.backgroundColor = color
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-
-        statusBarView.backgroundColor = color
-    }
-
-    func changeTintColor(progress: CGFloat) {
-        navigationBar.tintColor = self.makeTransitionColor(
-            from: StyledNavigationViewController.lightTintColor,
-            to: StyledNavigationViewController.darkTintColor,
-            progress: progress
+        coordinator.animate(
+            alongsideTransition: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.navigationBar.layoutIfNeeded()
+                strongSelf.statusBarView.frame = UIApplication.shared.statusBarFrame
+            },
+            completion: nil
         )
     }
 
-    func changeShadowAlpha(_ alpha: CGFloat) {
-        navigationBar.layoutSubviews()
-        customShadowView?.alpha = alpha
-    }
-
-    func changeTitleAlpha(_ alpha: CGFloat) {
-        self.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font: self.titleFont,
-            NSAttributedStringKey.foregroundColor: UIColor.mainDark.withAlphaComponent(alpha)
-        ]
-    }
-
-    func animateShadowChange(for presentedController: UIViewController) {
-        guard let coordinator = topViewController?.transitionCoordinator else {
-            return
-        }
-
-        //Detect, if animation moves inside our controller
-        let inside: Bool = topViewController == presentedController
-
-        //Hide shadow view, if we are moving inside
-        var targetAlpha: CGFloat = 1
-        if inside {
-            targetAlpha = 0
-        }
-
-        guard targetAlpha != self.currentShadowAlpha else {
-            return
-        }
-
-        //Saving previous values in case animation is not completed
-        let prevTrailing: CGFloat = customShadowTrailing?.layoutConstraints.first?.constant ?? 0
-        let prevLeading: CGFloat = customShadowLeading?.layoutConstraints.first?.constant ?? 0
-
-        //Initializing animation values
-        if lastAction == .push && inside {
-            //leading: 0, <- trailing
-            customShadowLeading?.update(offset: 0)
-            customShadowTrailing?.update(offset: 0)
-            navigationBar.layoutSubviews()
-            customShadowTrailing?.update(offset: -navigationBar.frame.width)
-        }
-        if lastAction == .push && !inside {
-            // 0 <- leading, trailing: 0
-            customShadowLeading?.update(offset: navigationBar.frame.width)
-            customShadowTrailing?.update(offset: 0)
-            navigationBar.layoutSubviews()
-            customShadowLeading?.update(offset: 0)
-        }
-        if lastAction == .pop && inside {
-            //leading -> trailing: 0
-            customShadowLeading?.update(offset: 0)
-            customShadowTrailing?.update(offset: 0)
-            navigationBar.layoutSubviews()
-            customShadowLeading?.update(offset: navigationBar.frame.width)
-        }
-        if lastAction == .pop && !inside {
-            //leading: 0, trailing -> 0
-            customShadowLeading?.update(offset: 0)
-            customShadowTrailing?.update(offset: -navigationBar.frame.width)
-            navigationBar.layoutSubviews()
-            customShadowTrailing?.update(offset: 0)
-        }
-
-        //Animate alongside push/pop transition
-        coordinator.animate(alongsideTransition: {
-            [weak self]
-            _ in
-            self?.changeShadowAlpha(targetAlpha)
-        }, completion: {
-            [weak self]
-            coordinator in
-            if coordinator.isCancelled {
-                self?.customShadowTrailing?.update(offset: prevTrailing)
-                self?.customShadowLeading?.update(offset: prevLeading)
-                self?.navigationBar.layoutSubviews()
-            }
-        })
-    }
-
-    var lastAction: NavigationAction = .push
-
     override func popViewController(animated: Bool) -> UIViewController? {
-        lastAction = .pop
-        let poppedViewController = super.popViewController(animated: animated)
-        self.resetAlphaAppearance(viewController: poppedViewController, animated: animated)
-        return poppedViewController
+        self.lastAction = .pop
+        return super.popViewController(animated: animated)
+    }
+
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        self.lastAction = .pop
+        return super.popToRootViewController(animated: animated)
+    }
+
+    override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+        self.lastAction = .pop
+        return super.popToViewController(viewController, animated: animated)
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        lastAction = .push
-        self.resetAlphaAppearance(viewController: viewController, animated: animated)
+        self.lastAction = .push
         super.pushViewController(viewController, animated: animated)
     }
 
-    private func resetAlphaAppearance(viewController: UIViewController?, animated: Bool) {
-        self.changeTitleAlpha(1.0)
-        self.changeNavigationBarAlpha(1.0)
-        self.changeTintColor(progress: 1.0)
+    // MARK: Public API
 
-        if let viewController = viewController, animated {
-            self.animateShadowChange(for: viewController)
-        } else {
-            self.changeShadowAlpha(1.0)
+    /// Remove title for "Back" button on top controller
+    func removeBackButtonTitleForTopController() {
+        // View controller before last in stack
+        guard let parentViewController = self.viewControllers.dropLast().last else {
+            return
+        }
+
+        parentViewController.navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+    }
+
+    /// Change color of navigation bar & status bar background
+    func changeBackgroundColor(_ color: UIColor, sender: UIViewController) {
+        guard sender === self.topViewController else {
+            return
+        }
+        return self.changeBackgroundColor(color)
+    }
+
+    /// Change alpha of shadow view
+    func changeShadowViewAlpha(_ alpha: CGFloat, sender: UIViewController) {
+        guard sender === self.topViewController else {
+            return
+        }
+        return self.changeShadowViewAlpha(alpha)
+    }
+
+    /// Change navigation bar text color
+    func changeTextColor(_ color: UIColor, sender: UIViewController) {
+        guard sender === self.topViewController else {
+            return
+        }
+        return self.changeTextColor(color)
+    }
+
+    /// Change navigation bar tint color
+    func changeTintColor(_ color: UIColor, sender: UIViewController) {
+        guard sender === self.topViewController else {
+            return
+        }
+        return self.changeTintColor(color)
+    }
+
+    // MARK: Private API
+
+    private func changeBackgroundColor(_ color: UIColor) {
+        self.navigationBar.isTranslucent = true
+        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+
+        self.navigationBar.backgroundColor = color
+        self.statusBarView.backgroundColor = color
+
+        if let topViewController = self.topViewController {
+            self.navigationBarAppearanceForController[topViewController]?.backgroundColor = color
         }
     }
 
-    private func makeTransitionColor(from sourceColor: UIColor, to targetColor: UIColor, progress: CGFloat) -> UIColor {
-        let percentage = max(min(progress, 1), 0)
+    private func changeShadowViewAlpha(_ alpha: CGFloat) {
+        let alpha = self.normalizeAlphaValue(alpha)
+        self.navigationBar.shadowImage = UIImage()
+        self.shadowView.backgroundColor = Appearance.shadowViewColor.withAlphaComponent(alpha)
+
+        if let topViewController = self.topViewController {
+            self.navigationBarAppearanceForController[topViewController]?.shadowViewAlpha = alpha
+        }
+    }
+
+    private func changeTextColor(_ color: UIColor) {
+        self.navigationBar.titleTextAttributes = [
+            .font: Appearance.titleFont,
+            .foregroundColor: color
+        ]
+
+        if let topViewController = self.topViewController {
+            self.navigationBarAppearanceForController[topViewController]?.textColor = color
+        }
+    }
+
+    private func changeTintColor(_ color: UIColor) {
+        self.navigationBar.tintColor = color
+
+        if let topViewController = self.topViewController {
+            self.navigationBarAppearanceForController[topViewController]?.tintColor = color
+        }
+    }
+
+    private func setupAppearance() {
+        self.view.addSubview(self.statusBarView)
+
+        self.navigationBar.addSubview(self.shadowView)
+        self.shadowView.translatesAutoresizingMaskIntoConstraints = false
+        self.shadowView.snp.makeConstraints { make in
+            make.bottom.equalTo(self.navigationBar.snp.bottom)
+            make.height.equalTo(Appearance.shadowViewHeight)
+
+            self.shadowViewLeadingConstraint = make.leading.equalToSuperview().constraint
+            self.shadowViewTrailingConstraint = make.trailing.equalToSuperview().constraint
+        }
+    }
+
+    private func resetNavigationBarAppearance() {
+        self.changeBackgroundColor(StyledNavigationController.Appearance.backgroundColor)
+        self.changeTextColor(StyledNavigationController.Appearance.tintColor)
+        self.changeTintColor(StyledNavigationController.Appearance.tintColor)
+        self.changeShadowViewAlpha(1.0)
+
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+    }
+
+    private func normalizeAlphaValue(_ alpha: CGFloat) -> CGFloat {
+        return max(0.0, min(1.0, alpha))
+    }
+
+    private func getNavigationBarAppearance(
+        for viewController: UIViewController
+    ) -> StyledNavigationController.NavigationBarAppearanceState {
+        let appearance: StyledNavigationController.NavigationBarAppearanceState = {
+            let defaultAppearance: StyledNavigationController.NavigationBarAppearanceState
+            if let presentableViewController = viewController as? StyledNavigationControllerPresentable {
+                defaultAppearance = presentableViewController.navigationBarAppearanceOnFirstPresentation
+            } else {
+                defaultAppearance = StyledNavigationController.NavigationBarAppearanceState()
+            }
+            return self.navigationBarAppearanceForController[viewController] ?? defaultAppearance
+        }()
+
+        self.navigationBarAppearanceForController[viewController] = appearance
+        return appearance
+    }
+
+    private func removeNavigationBarAppearance(for viewController: UIViewController) {
+        self.navigationBarAppearanceForController.removeValue(forKey: viewController)
+    }
+
+    private func animateShadowView(
+        transitionCoordinator: UIViewControllerTransitionCoordinator
+    ) {
+        guard let fromViewController = self.transitionCoordinator?.viewController(forKey: .from),
+              let toViewController = self.transitionCoordinator?.viewController(forKey: .to) else {
+            return
+        }
+
+        let targetControllerAppearance = self.getNavigationBarAppearance(for: toViewController)
+        let sourceControllerAppearance = self.getNavigationBarAppearance(for: fromViewController)
+
+        let shouldShadowViewAppear = sourceControllerAppearance.shadowViewAlpha
+            < targetControllerAppearance.shadowViewAlpha && sourceControllerAppearance.shadowViewAlpha.isEqual(to: 0.0)
+        let shouldShadowViewDisappear = sourceControllerAppearance.shadowViewAlpha
+            > targetControllerAppearance.shadowViewAlpha && targetControllerAppearance.shadowViewAlpha.isEqual(to: 0.0)
+
+        let previousLeadingConstraintOffset = self.shadowViewLeadingConstraint?.layoutConstraints.first?.constant ?? 0
+        let previousTrailingConstraintOffset = self.shadowViewTrailingConstraint?.layoutConstraints.first?.constant ?? 0
+
+        if self.lastAction == .push {
+            if shouldShadowViewAppear {
+                self.shadowViewLeadingConstraint?.update(offset: self.navigationBar.frame.width)
+                self.shadowViewTrailingConstraint?.update(offset: 0)
+            } else if shouldShadowViewDisappear {
+                self.shadowViewLeadingConstraint?.update(offset: 0)
+                self.shadowViewTrailingConstraint?.update(offset: 0)
+            }
+        } else if self.lastAction == .pop {
+            if shouldShadowViewAppear {
+                self.shadowViewLeadingConstraint?.update(offset: 0)
+                self.shadowViewTrailingConstraint?.update(offset: -self.navigationBar.frame.width)
+            } else if shouldShadowViewDisappear {
+                self.shadowViewLeadingConstraint?.update(offset: 0)
+                self.shadowViewTrailingConstraint?.update(offset: 0)
+            }
+        }
+
+        self.navigationBar.setNeedsLayout()
+        self.navigationBar.layoutIfNeeded()
+
+        transitionCoordinator.animate(
+            alongsideTransition: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                if strongSelf.lastAction == .push {
+                    if shouldShadowViewAppear {
+                        strongSelf.shadowViewLeadingConstraint?.update(offset: 0)
+                    } else if shouldShadowViewDisappear {
+                        strongSelf.shadowViewTrailingConstraint?.update(offset: -strongSelf.navigationBar.frame.width)
+                    }
+                } else if strongSelf.lastAction == .pop {
+                    if shouldShadowViewAppear {
+                        strongSelf.shadowViewTrailingConstraint?.update(offset: 0)
+                    } else if shouldShadowViewDisappear {
+                        strongSelf.shadowViewLeadingConstraint?.update(offset: strongSelf.navigationBar.frame.width)
+                    }
+                }
+            },
+            completion: { [weak self] context in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                if !context.isCancelled {
+                    if shouldShadowViewDisappear {
+                        // Restore hidden to make possible change alpha
+                        strongSelf.shadowViewLeadingConstraint?.update(offset: 0)
+                        strongSelf.shadowViewTrailingConstraint?.update(offset: 0)
+                    }
+                } else {
+                    // Reset constraints if cancelled
+                    strongSelf.shadowViewLeadingConstraint?.update(offset: previousLeadingConstraintOffset)
+                    strongSelf.shadowViewTrailingConstraint?.update(offset: previousTrailingConstraintOffset)
+                }
+                strongSelf.navigationBar.layoutIfNeeded()
+            }
+        )
+    }
+}
+
+extension StyledNavigationController: UINavigationControllerDelegate {
+    func navigationController(
+        _ navigationController: UINavigationController,
+        willShow viewController: UIViewController,
+        animated: Bool
+    ) {
+        let targetControllerAppearance = self.getNavigationBarAppearance(for: viewController)
+
+        guard animated else {
+            print("animate \(targetControllerAppearance.backgroundColor)")
+            self.changeBackgroundColor(targetControllerAppearance.backgroundColor)
+            self.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
+            self.changeTextColor(targetControllerAppearance.textColor)
+            self.changeTintColor(targetControllerAppearance.tintColor)
+
+            self.navigationBar.setNeedsLayout()
+            self.navigationBar.layoutIfNeeded()
+
+            if self.lastAction == .pop && !self.viewControllers.contains(viewController) {
+                self.removeNavigationBarAppearance(for: viewController)
+            }
+            return
+        }
+
+        guard let coordinator = self.transitionCoordinator else {
+            return
+        }
+
+        self.animateShadowView(transitionCoordinator: coordinator)
+
+        self.transitionCoordinator?.animate(
+            alongsideTransition: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                print("animate \(targetControllerAppearance.backgroundColor)")
+                strongSelf.changeBackgroundColor(targetControllerAppearance.backgroundColor)
+                strongSelf.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
+                strongSelf.changeTextColor(targetControllerAppearance.textColor)
+                strongSelf.changeTintColor(targetControllerAppearance.tintColor)
+            },
+            completion: { [weak self] context in
+                if !context.isCancelled {
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    // Workaround for strange bug with titleTextAttributes & non-interactive pop
+                    // rdar://37567828
+                    strongSelf.changeTextColor(targetControllerAppearance.textColor)
+                    strongSelf.navigationBar.setNeedsLayout()
+                    strongSelf.navigationBar.layoutIfNeeded()
+
+                    if strongSelf.lastAction == .pop && !strongSelf.viewControllers.contains(viewController) {
+                        strongSelf.removeNavigationBarAppearance(for: viewController)
+                    }
+                }
+            }
+        )
+    }
+}
+
+// MARK: - Default appearance protocol
+
+protocol StyledNavigationControllerPresentable: class {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState { get }
+}
+
+// MARK: - Delegate Repeater
+
+private class NavigationControllerDelegateRepeater: NSObject, UINavigationControllerDelegate {
+    weak var mainDelegate: UINavigationControllerDelegate?
+    weak var secondaryDelegate: UINavigationControllerDelegate?
+
+    private var delegates: [UINavigationControllerDelegate] {
+        return [self.mainDelegate, self.secondaryDelegate].compactMap { $0 }
+    }
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        willShow viewController: UIViewController,
+        animated: Bool
+    ) {
+        for delegate in self.delegates {
+            delegate.navigationController?(navigationController, willShow: viewController, animated: animated)
+        }
+    }
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        didShow viewController: UIViewController,
+        animated: Bool
+    ) {
+        for delegate in self.delegates {
+            delegate.navigationController?(navigationController, didShow: viewController, animated: animated)
+        }
+    }
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        for delegate in self.delegates {
+            if let transitioning = delegate.navigationController?(
+                navigationController,
+                animationControllerFor: operation,
+                from: fromVC,
+                to: toVC
+            ) {
+                return transitioning
+            }
+        }
+        return nil
+    }
+}
+
+// MARK: - Color transition helper
+
+final class ColorTransitionHelper {
+    static func makeTransitionColor(
+        from sourceColor: UIColor,
+        to targetColor: UIColor,
+        transitionProgress: CGFloat
+    ) -> UIColor {
+        let progress = max(0, min(1, transitionProgress))
 
         var fRed: CGFloat = 0
         var fBlue: CGFloat = 0
@@ -243,15 +479,11 @@ class StyledNavigationViewController: UINavigationController {
         sourceColor.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
         targetColor.getRed(&tRed, green: &tGreen, blue: &tBlue, alpha: &tAlpha)
 
-        let red: CGFloat = (percentage * (tRed - fRed)) + fRed
-        let green: CGFloat = (percentage * (tGreen - fGreen)) + fGreen
-        let blue: CGFloat = (percentage * (tBlue - fBlue)) + fBlue
-        let alpha: CGFloat = (percentage * (tAlpha - fAlpha)) + fAlpha
+        let red: CGFloat = (progress * (tRed - fRed)) + fRed
+        let green: CGFloat = (progress * (tGreen - fGreen)) + fGreen
+        let blue: CGFloat = (progress * (tBlue - fBlue)) + fBlue
+        let alpha: CGFloat = (progress * (tAlpha - fAlpha)) + fAlpha
 
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
-}
-
-enum NavigationAction {
-    case push, pop
 }
