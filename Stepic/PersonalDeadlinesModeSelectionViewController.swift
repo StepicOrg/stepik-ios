@@ -114,6 +114,7 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         }
 
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.chosen, parameters: ["hours": mode.getModeInfo().weeklyLoadHours])
+        AmplitudeAnalyticsEvents.PersonalDeadlines.created(weeklyLoadHours: mode.getModeInfo().weeklyLoadHours).send()
         SVProgressHUD.show()
         PersonalDeadlinesService().countDeadlines(for: course, mode: mode).done {
             SVProgressHUD.dismiss()

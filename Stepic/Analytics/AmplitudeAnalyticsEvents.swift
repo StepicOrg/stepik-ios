@@ -447,4 +447,15 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    struct PersonalDeadlines {
+        static func created(weeklyLoadHours: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Personal deadline created",
+                parameters: [
+                    "hours": weeklyLoadHours
+                ]
+            )
+        }
+    }
 }
