@@ -108,8 +108,6 @@ final class CourseInfoViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.updateStatusBar(alpha: 0.0)
-
         self.interactor.tryToSetOnlineMode()
 
         if self.didJustSubscribe {
@@ -119,11 +117,6 @@ final class CourseInfoViewController: UIViewController {
                 }
             }
         }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .default
-        super.viewWillDisappear(animated)
     }
 
     override func loadView() {
@@ -165,13 +158,10 @@ final class CourseInfoViewController: UIViewController {
             sender: self
         )
 
-        self.updateStatusBar(alpha: alpha)
-    }
-
-    private func updateStatusBar(alpha: CGFloat) {
-        UIApplication.shared.statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
-            ? .default
-            : .lightContent
+        let statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
+            ? UIStatusBarStyle.default
+            : UIStatusBarStyle.lightContent
+        self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
     }
 
     private func makeSubmodules() -> [UIViewController] {
@@ -482,7 +472,8 @@ extension CourseInfoViewController: StyledNavigationControllerPresentable {
             shadowViewAlpha: 0.0,
             backgroundColor: StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(0.0),
             textColor: StyledNavigationController.Appearance.tintColor.withAlphaComponent(0.0),
-            tintColor: .white
+            tintColor: .white,
+            statusBarStyle: .lightContent
         )
     }
 }

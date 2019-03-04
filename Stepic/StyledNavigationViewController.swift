@@ -25,17 +25,20 @@ class StyledNavigationController: UINavigationController {
         var backgroundColor: UIColor
         var textColor: UIColor
         var tintColor: UIColor
+        var statusBarStyle: UIStatusBarStyle
 
         init(
             shadowViewAlpha: CGFloat = 1.0,
             backgroundColor: UIColor = StyledNavigationController.Appearance.backgroundColor,
             textColor: UIColor = StyledNavigationController.Appearance.tintColor,
-            tintColor: UIColor = StyledNavigationController.Appearance.tintColor
+            tintColor: UIColor = StyledNavigationController.Appearance.tintColor,
+            statusBarStyle: UIStatusBarStyle = .default
         ) {
             self.shadowViewAlpha = shadowViewAlpha
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.tintColor = tintColor
+            self.statusBarStyle = statusBarStyle
         }
     }
 
@@ -165,6 +168,15 @@ class StyledNavigationController: UINavigationController {
         return self.changeTintColor(color)
     }
 
+    /// Change status bar style
+    @available(*, deprecated, message: "Obsolete method; we must migrate to preferredStatusBarStyle usage")
+    func changeStatusBarStyle(_ style: UIStatusBarStyle, sender: UIViewController) {
+        guard sender === self.topViewController else {
+            return
+        }
+        return self.changeStatusBarStyle(style)
+    }
+
     // MARK: Private API
 
     private func changeBackgroundColor(_ color: UIColor) {
@@ -208,6 +220,14 @@ class StyledNavigationController: UINavigationController {
         }
     }
 
+    private func changeStatusBarStyle(_ style: UIStatusBarStyle) {
+        UIApplication.shared.statusBarStyle = style
+
+        if let topViewController = self.topViewController {
+            self.navigationBarAppearanceForController[topViewController]?.statusBarStyle = style
+        }
+    }
+
     private func setupAppearance() {
         self.view.addSubview(self.statusBarView)
 
@@ -227,8 +247,7 @@ class StyledNavigationController: UINavigationController {
         self.changeTextColor(StyledNavigationController.Appearance.tintColor)
         self.changeTintColor(StyledNavigationController.Appearance.tintColor)
         self.changeShadowViewAlpha(1.0)
-
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+        self.changeStatusBarStyle(.default)
     }
 
     private func normalizeAlphaValue(_ alpha: CGFloat) -> CGFloat {
@@ -238,6 +257,11 @@ class StyledNavigationController: UINavigationController {
     private func getNavigationBarAppearance(
         for viewController: UIViewController
     ) -> StyledNavigationController.NavigationBarAppearanceState {
+        if let presentableViewController = viewController as? StyledNavigationControllerPresentable,
+           !presentableViewController.shouldSaveAppearanceState {
+            return StyledNavigationController.NavigationBarAppearanceState()
+        }
+
         let appearance: StyledNavigationController.NavigationBarAppearanceState = {
             let defaultAppearance: StyledNavigationController.NavigationBarAppearanceState
             if let presentableViewController = viewController as? StyledNavigationControllerPresentable {
@@ -344,13 +368,19 @@ extension StyledNavigationController: UINavigationControllerDelegate {
         willShow viewController: UIViewController,
         animated: Bool
     ) {
+        guard let fromViewController = self.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+
         let targetControllerAppearance = self.getNavigationBarAppearance(for: viewController)
+        let sourceControllerAppearance = self.getNavigationBarAppearance(for: fromViewController)
 
         guard animated else {
             self.changeBackgroundColor(targetControllerAppearance.backgroundColor)
             self.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
             self.changeTextColor(targetControllerAppearance.textColor)
             self.changeTintColor(targetControllerAppearance.tintColor)
+            self.changeStatusBarStyle(targetControllerAppearance.statusBarStyle)
 
             self.navigationBar.setNeedsLayout()
             self.navigationBar.layoutIfNeeded()
@@ -366,6 +396,7 @@ extension StyledNavigationController: UINavigationControllerDelegate {
         }
 
         self.animateShadowView(transitionCoordinator: coordinator)
+        self.changeStatusBarStyle(targetControllerAppearance.statusBarStyle)
 
         self.transitionCoordinator?.animate(
             alongsideTransition: { [weak self] _ in
@@ -378,11 +409,11 @@ extension StyledNavigationController: UINavigationControllerDelegate {
                 strongSelf.changeTintColor(targetControllerAppearance.tintColor)
             },
             completion: { [weak self] context in
-                if !context.isCancelled {
-                    guard let strongSelf = self else {
-                        return
-                    }
+                guard let strongSelf = self else {
+                    return
+                }
 
+                if !context.isCancelled {
                     // Workaround for strange bug with titleTextAttributes & non-interactive pop
                     // rdar://37567828
                     strongSelf.changeTextColor(targetControllerAppearance.textColor)
@@ -392,6 +423,13 @@ extension StyledNavigationController: UINavigationControllerDelegate {
                     if strongSelf.lastAction == .pop && !strongSelf.viewControllers.contains(viewController) {
                         strongSelf.removeNavigationBarAppearance(for: viewController)
                     }
+                } else {
+                    // Rollback appearance
+                    strongSelf.changeBackgroundColor(sourceControllerAppearance.backgroundColor)
+                    strongSelf.changeShadowViewAlpha(sourceControllerAppearance.shadowViewAlpha)
+                    strongSelf.changeTextColor(sourceControllerAppearance.textColor)
+                    strongSelf.changeTintColor(sourceControllerAppearance.tintColor)
+                    strongSelf.changeStatusBarStyle(sourceControllerAppearance.statusBarStyle)
                 }
             }
         )
@@ -401,7 +439,20 @@ extension StyledNavigationController: UINavigationControllerDelegate {
 // MARK: - Default appearance protocol
 
 protocol StyledNavigationControllerPresentable: class {
+    /// Appearance for navigation bar, status bar, etc when controller first time presented
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState { get }
+    /// Determine whether controller should store appearance state and restore it when return back
+    var shouldSaveAppearanceState: Bool { get }
+}
+
+extension StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return StyledNavigationController.NavigationBarAppearanceState()
+    }
+
+    var shouldSaveAppearanceState: Bool {
+        return true
+    }
 }
 
 // MARK: - Delegate Repeater
