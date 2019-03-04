@@ -1105,12 +1105,8 @@
 		2C1B61571F4C4AEF00236804 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C1B615D1F4C4AEF00236804 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C1B61621F4C4AEF00236804 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
-		2C1B61641F4C4AEF00236804 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
-		2C1B61651F4C4AEF00236804 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
-		2C1B61661F4C4AEF00236804 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		2C1B61671F4C4AEF00236804 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
 		2C1B61681F4C4AEF00236804 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
-		2C1B61691F4C4AEF00236804 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		2C1B616A1F4C4AEF00236804 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C1B616B1F4C4AEF00236804 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		2C1B616C1F4C4AEF00236804 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
@@ -1467,12 +1463,8 @@
 		2C1B63681F4C590700236804 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C1B636E1F4C590700236804 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C1B63731F4C590700236804 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
-		2C1B63751F4C590700236804 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
-		2C1B63761F4C590700236804 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
-		2C1B63771F4C590700236804 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		2C1B63781F4C590700236804 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
 		2C1B63791F4C590700236804 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
-		2C1B637A1F4C590700236804 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		2C1B637B1F4C590700236804 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C1B637C1F4C590700236804 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		2C1B637D1F4C590700236804 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
@@ -2387,12 +2379,8 @@
 		2C89A9EB1F4C289900227C3B /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C89A9F11F4C289900227C3B /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C89A9F61F4C289900227C3B /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
-		2C89A9F81F4C289900227C3B /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
-		2C89A9F91F4C289900227C3B /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
-		2C89A9FA1F4C289900227C3B /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		2C89A9FB1F4C289900227C3B /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
 		2C89A9FC1F4C289900227C3B /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
-		2C89A9FD1F4C289900227C3B /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		2C89A9FE1F4C289900227C3B /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C89A9FF1F4C289900227C3B /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		2C89AA001F4C289900227C3B /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
@@ -2948,12 +2936,8 @@
 		2C97319F1F4C38F600AC9301 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
 		2C9731A51F4C38F600AC9301 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6640C91F2F35E60033A274 /* Achievement.swift */; };
 		2C9731AA1F4C38F600AC9301 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
-		2C9731AC1F4C38F600AC9301 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
-		2C9731AD1F4C38F600AC9301 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
-		2C9731AE1F4C38F600AC9301 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		2C9731AF1F4C38F600AC9301 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
 		2C9731B01F4C38F600AC9301 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
-		2C9731B11F4C38F600AC9301 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		2C9731B21F4C38F600AC9301 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C9731B31F4C38F600AC9301 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		2C9731B41F4C38F600AC9301 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
@@ -3414,14 +3398,10 @@
 		2CA8D1E22088D9C000E105E9 /* EmailAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351961F683140004255B6 /* EmailAuthViewController.swift */; };
 		2CA8D1E32088D9C000E105E9 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* SearchResultsViewController.swift */; };
 		2CA8D1E52088D9C000E105E9 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
-		2CA8D1E62088D9C000E105E9 /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
-		2CA8D1E72088D9C000E105E9 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
-		2CA8D1E82088D9C000E105E9 /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
 		2CA8D1E92088D9C000E105E9 /* AchievementNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */; };
 		2CA8D1EA2088D9C000E105E9 /* CardOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF14E1FED2E84003B1177 /* CardOverlayView.swift */; };
 		2CA8D1EB2088D9C000E105E9 /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2CA8D1EC2088D9C000E105E9 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
-		2CA8D1ED2088D9C000E105E9 /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		2CA8D1EE2088D9C000E105E9 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2CA8D1EF2088D9C000E105E9 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
 		2CA8D1F02088D9C000E105E9 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
@@ -4517,10 +4497,6 @@
 		864D67A71E83E08E001E8D9E /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
 		864D67AC1E83E08E001E8D9E /* NotificationTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08263D6E1DE5F230002E5B7F /* NotificationTimePickerViewController.swift */; };
 		864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
-		864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */; };
-		864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */; };
-		864D67C21E83E08F001E8D9E /* UnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */; };
-		864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */; };
 		864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
 		864D67C71E83E08F001E8D9E /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
@@ -5067,16 +5043,12 @@
 		082799471E9B81AF008A3786 /* RateAppAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppAlertManager.swift; sourceTree = "<group>"; };
 		0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Section+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0828FF6D1BC5D177000AFEA7 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionTableViewCell.xib; sourceTree = "<group>"; };
-		0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsViewController.swift; sourceTree = "<group>"; };
 		0828FF7A1BC7F9D6000AFEA7 /* Unit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0828FF7B1BC7F9D6000AFEA7 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		0828FF7E1BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lesson+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0828FF7F1BC7FD24000AFEA7 /* Lesson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		0828FF821BC800C0000AFEA7 /* JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerializable.swift; sourceTree = "<group>"; };
-		0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsViewController.swift; sourceTree = "<group>"; };
-		0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTableViewCell.swift; sourceTree = "<group>"; };
 		0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnitTableViewCell.xib; sourceTree = "<group>"; };
 		0829B8311E9C4CB5009B4A84 /* RateAppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppManager.swift; sourceTree = "<group>"; };
 		0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesAPI.swift; sourceTree = "<group>"; };
@@ -6832,8 +6804,6 @@
 		0828FF731BC5E314000AFEA7 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				0828FF781BC5E744000AFEA7 /* SectionsViewController.swift */,
-				0828FF741BC5E6B0000AFEA7 /* SectionTableViewCell.swift */,
 				0828FF751BC5E6B0000AFEA7 /* SectionTableViewCell.xib */,
 				082E5E0D1F46379100F41426 /* ReplyCache.swift */,
 			);
@@ -6856,8 +6826,6 @@
 		0828FF871BC81EF2000AFEA7 /* Units */ = {
 			isa = PBXGroup;
 			children = (
-				0828FF851BC81EEC000AFEA7 /* UnitsViewController.swift */,
-				0828FF8A1BC81F41000AFEA7 /* UnitTableViewCell.swift */,
 				0828FF8B1BC81F41000AFEA7 /* UnitTableViewCell.xib */,
 				08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */,
 				082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */,
@@ -13198,7 +13166,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -13297,7 +13265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		08343B1A1BF5EC7F00370FC1 /* Fabric Script */ = {
@@ -13376,7 +13344,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -13475,7 +13443,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1B10D3C8BC6641277204231B /* [CP] Check Pods Manifest.lock */ = {
@@ -13640,7 +13608,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -13649,7 +13617,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C47A16C206297D0003E87EC /* ShellScript */ = {
@@ -13755,7 +13723,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -13764,7 +13732,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2DE58747A03671B80004153B /* [CP] Embed Pods Frameworks */ = {
@@ -13773,7 +13741,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -13872,7 +13840,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		32F71C1E639A5AE1C0374017 /* [CP] Check Pods Manifest.lock */ = {
@@ -13917,7 +13885,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -14022,7 +13990,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4176DADA77B42756938563BD /* [CP] Check Pods Manifest.lock */ = {
@@ -14049,7 +14017,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -14148,7 +14116,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		57CDB6B9F3285C80B4DBD46A /* [CP] Check Pods Manifest.lock */ = {
@@ -14175,7 +14143,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -14272,7 +14240,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		68BAE7F7F96E1C8C836F0450 /* [CP] Check Pods Manifest.lock */ = {
@@ -14299,7 +14267,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -14398,7 +14366,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		93C9A7104A80962ECB72356B /* [CP] Embed Pods Frameworks */ = {
@@ -14407,7 +14375,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -14506,7 +14474,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9457D26917926B2514BC5CC4 /* [CP] Embed Pods Frameworks */ = {
@@ -14515,7 +14483,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -14524,7 +14492,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		967CE66699F3B14FBB2168E8 /* [CP] Embed Pods Frameworks */ = {
@@ -14533,7 +14501,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
@@ -14632,7 +14600,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A1F8276276F760357204DB4E /* [CP] Check Pods Manifest.lock */ = {
@@ -14677,7 +14645,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-tvOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
@@ -14702,7 +14670,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StepikTV/Pods-StepikTV-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BBFC1DF96E210F89438E7F55 /* [CP] Embed Pods Frameworks */ = {
@@ -14711,7 +14679,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SimulatorStatusMagic/SimulatorStatusMagic.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -14720,7 +14688,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BEDD3907C76EEBC35D4559AE /* [CP] Check Pods Manifest.lock */ = {
@@ -14747,7 +14715,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Atributika-tvOS/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
@@ -14776,7 +14744,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C84E0CA8F60F185E8F00FBC6 /* [CP] Check Pods Manifest.lock */ = {
@@ -16038,12 +16006,8 @@
 				2C1B61571F4C4AEF00236804 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C1B615D1F4C4AEF00236804 /* Achievement.swift in Sources */,
 				2C1B61621F4C4AEF00236804 /* SearchQueriesViewController.swift in Sources */,
-				2C1B61641F4C4AEF00236804 /* SectionsViewController.swift in Sources */,
-				2C1B61651F4C4AEF00236804 /* SectionTableViewCell.swift in Sources */,
-				2C1B61661F4C4AEF00236804 /* UnitsViewController.swift in Sources */,
 				2C1B61671F4C4AEF00236804 /* AchievementNotificationView.swift in Sources */,
 				2C1B61681F4C4AEF00236804 /* FullscreenCodeQuizViewController.swift in Sources */,
-				2C1B61691F4C4AEF00236804 /* UnitTableViewCell.swift in Sources */,
 				2C1B616A1F4C4AEF00236804 /* SectionNavigationDelegate.swift in Sources */,
 				2C1B616B1F4C4AEF00236804 /* ReplaceLastSegue.swift in Sources */,
 				2C1B616C1F4C4AEF00236804 /* StyledNavigationViewController.swift in Sources */,
@@ -16475,12 +16439,8 @@
 				2C1B63681F4C590700236804 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C1B636E1F4C590700236804 /* Achievement.swift in Sources */,
 				2C1B63731F4C590700236804 /* SearchQueriesViewController.swift in Sources */,
-				2C1B63751F4C590700236804 /* SectionsViewController.swift in Sources */,
-				2C1B63761F4C590700236804 /* SectionTableViewCell.swift in Sources */,
-				2C1B63771F4C590700236804 /* UnitsViewController.swift in Sources */,
 				2C1B63781F4C590700236804 /* AchievementNotificationView.swift in Sources */,
 				2C1B63791F4C590700236804 /* FullscreenCodeQuizViewController.swift in Sources */,
-				2C1B637A1F4C590700236804 /* UnitTableViewCell.swift in Sources */,
 				2C1B637B1F4C590700236804 /* SectionNavigationDelegate.swift in Sources */,
 				2C1B637C1F4C590700236804 /* ReplaceLastSegue.swift in Sources */,
 				2C1B637D1F4C590700236804 /* StyledNavigationViewController.swift in Sources */,
@@ -17438,15 +17398,11 @@
 				086442BF1F764F92000CC53D /* EmailAuthViewController.swift in Sources */,
 				08C1BF351FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C89A9F61F4C289900227C3B /* SearchQueriesViewController.swift in Sources */,
-				2C89A9F81F4C289900227C3B /* SectionsViewController.swift in Sources */,
-				2C89A9F91F4C289900227C3B /* SectionTableViewCell.swift in Sources */,
-				2C89A9FA1F4C289900227C3B /* UnitsViewController.swift in Sources */,
 				2C89A9FB1F4C289900227C3B /* AchievementNotificationView.swift in Sources */,
 				2C6A76362045CE7500C509A6 /* CardOverlayView.swift in Sources */,
 				2C3A22562121DF2100927BD7 /* AdaptiveCourseTableViewCell.swift in Sources */,
 				088FD81B1FB242B3008A2953 /* CourseSubscriber.swift in Sources */,
 				2C89A9FC1F4C289900227C3B /* FullscreenCodeQuizViewController.swift in Sources */,
-				2C89A9FD1F4C289900227C3B /* UnitTableViewCell.swift in Sources */,
 				2C89A9FE1F4C289900227C3B /* SectionNavigationDelegate.swift in Sources */,
 				08C1BF2C1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C89A9FF1F4C289900227C3B /* ReplaceLastSegue.swift in Sources */,
@@ -17886,12 +17842,8 @@
 				2C97319F1F4C38F600AC9301 /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C9731A51F4C38F600AC9301 /* Achievement.swift in Sources */,
 				2C9731AA1F4C38F600AC9301 /* SearchQueriesViewController.swift in Sources */,
-				2C9731AC1F4C38F600AC9301 /* SectionsViewController.swift in Sources */,
-				2C9731AD1F4C38F600AC9301 /* SectionTableViewCell.swift in Sources */,
-				2C9731AE1F4C38F600AC9301 /* UnitsViewController.swift in Sources */,
 				2C9731AF1F4C38F600AC9301 /* AchievementNotificationView.swift in Sources */,
 				2C9731B01F4C38F600AC9301 /* FullscreenCodeQuizViewController.swift in Sources */,
-				2C9731B11F4C38F600AC9301 /* UnitTableViewCell.swift in Sources */,
 				2C9731B21F4C38F600AC9301 /* SectionNavigationDelegate.swift in Sources */,
 				2C9731B31F4C38F600AC9301 /* ReplaceLastSegue.swift in Sources */,
 				2C9731B41F4C38F600AC9301 /* StyledNavigationViewController.swift in Sources */,
@@ -18325,14 +18277,10 @@
 				2CA8D1E22088D9C000E105E9 /* EmailAuthViewController.swift in Sources */,
 				2CA8D1E32088D9C000E105E9 /* SearchResultsViewController.swift in Sources */,
 				2CA8D1E52088D9C000E105E9 /* SearchQueriesViewController.swift in Sources */,
-				2CA8D1E62088D9C000E105E9 /* SectionsViewController.swift in Sources */,
-				2CA8D1E72088D9C000E105E9 /* SectionTableViewCell.swift in Sources */,
-				2CA8D1E82088D9C000E105E9 /* UnitsViewController.swift in Sources */,
 				2CA8D1E92088D9C000E105E9 /* AchievementNotificationView.swift in Sources */,
 				2CA8D1EA2088D9C000E105E9 /* CardOverlayView.swift in Sources */,
 				2CA8D1EB2088D9C000E105E9 /* CourseSubscriber.swift in Sources */,
 				2CA8D1EC2088D9C000E105E9 /* FullscreenCodeQuizViewController.swift in Sources */,
-				2CA8D1ED2088D9C000E105E9 /* UnitTableViewCell.swift in Sources */,
 				2CA8D1EE2088D9C000E105E9 /* SectionNavigationDelegate.swift in Sources */,
 				2CA8D1EF2088D9C000E105E9 /* SearchResultsPresenter.swift in Sources */,
 				2CA8D1F02088D9C000E105E9 /* ReplaceLastSegue.swift in Sources */,
@@ -18839,12 +18787,8 @@
 				080C5E821EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				2C6640CA1F2F35E60033A274 /* Achievement.swift in Sources */,
 				08E8F9761F34E3D5008CF4A1 /* SearchQueriesViewController.swift in Sources */,
-				864D67BF1E83E08F001E8D9E /* SectionsViewController.swift in Sources */,
 				2CA2E70B20237463001DC410 /* AdaptiveCardsStepsPresenter.swift in Sources */,
-				864D67C01E83E08F001E8D9E /* SectionTableViewCell.swift in Sources */,
-				864D67C21E83E08F001E8D9E /* UnitsViewController.swift in Sources */,
 				080E81001F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift in Sources */,
-				864D67C31E83E08F001E8D9E /* UnitTableViewCell.swift in Sources */,
 				864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */,
 				2C604E22207E460E001588FB /* CodeEditorPreviewView.swift in Sources */,
 				864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */,
