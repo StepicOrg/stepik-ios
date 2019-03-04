@@ -11,28 +11,28 @@ import PromiseKit
 
 //Tip: Inherited from NSObject in order to be able to find a selector
 class StepsControllerDeepLinkRouter: NSObject {
-    func getStepsViewControllerFor(step stepId: Int, inLesson lessonId: Int, success successHandler : @escaping ((UIViewController) -> Void), error errorHandler : @escaping ((String) -> Void)) {
+    func getStepsViewControllerFor(step stepId: Int, inLesson lessonId: Int, withUnit unitID: Int?, success successHandler : @escaping (([UIViewController]) -> Void), error errorHandler : @escaping ((String) -> Void)) {
         //Download lesson and pass stepId to StepsViewController
 
         if let lesson = Lesson.getLesson(lessonId) {
             ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [lesson], refreshMode: .update, success: {
                     lessons in
                     if let lesson = lessons.first {
-                        self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
+                        self.getVCForLesson(lesson, stepId: stepId, includeUnit: unitID != nil, success: successHandler, error: errorHandler)
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
 
                 }, error: {
                     error in
-                    self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
+                    self.getVCForLesson(lesson, stepId: stepId, includeUnit: unitID != nil, success: successHandler, error: errorHandler)
                 }
             )
         } else {
             ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [], refreshMode: .update, success: {
                     lessons in
                     if let lesson = lessons.first {
-                        self.getVCForLesson(lesson, stepId: stepId, success: successHandler, error: errorHandler)
+                        self.getVCForLesson(lesson, stepId: stepId, includeUnit: unitID != nil, success: successHandler, error: errorHandler)
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
@@ -45,7 +45,9 @@ class StepsControllerDeepLinkRouter: NSObject {
         }
     }
 
-    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, success successHandler: @escaping ((UIViewController) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, includeUnit: Bool = false, success successHandler: @escaping (([UIViewController]) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+        var currentUnit: Unit?
+
         func fetchOrLoadUnit(for lesson: Lesson) -> Promise<Unit> {
             return Promise { seal in
                 if let unit = lesson.unit {
@@ -110,19 +112,36 @@ class StepsControllerDeepLinkRouter: NSObject {
         }
 
         fetchOrLoadUnit(for: lesson).then { unit -> Promise<Section> in
-            fetchOrLoadSection(for: unit)
+            currentUnit = unit
+            return fetchOrLoadSection(for: unit)
         }.then { section -> Promise<Course> in
             fetchOrLoadCourse(for: section)
         }.done { course in
             if lesson.isPublic || course.enrolled {
-                guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
-                    errorHandler("Could not instantiate controller")
-                    return
-                }
-                lessonVC.initObjects = (lesson: lesson, startStepId: stepId - 1, context: .lesson)
-                lessonVC.hidesBottomBarWhenPushed = true
+                let lessonAssemblyWithoutUnit = LessonLegacyAssembly(
+                    initObjects: (lesson: lesson, startStepId: stepId - 1, context: .lesson),
+                    initIDs: nil
+                )
 
-                successHandler(lessonVC)
+                var controllersStack: [UIViewController] = []
+                if includeUnit {
+                    controllersStack.append(CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule())
+
+                    if let unit = currentUnit {
+                        controllersStack.append(
+                            LessonLegacyAssembly(
+                                initObjects: nil,
+                                initIDs: (stepId: lesson.stepsArray[stepId - 1], unitId: unit.id)
+                            ).makeModule()
+                        )
+                    } else {
+                        controllersStack.append(lessonAssemblyWithoutUnit.makeModule())
+                    }
+                } else {
+                    controllersStack.append(lessonAssemblyWithoutUnit.makeModule())
+                }
+
+                successHandler(controllersStack)
             } else {
                 errorHandler("No access")
             }
