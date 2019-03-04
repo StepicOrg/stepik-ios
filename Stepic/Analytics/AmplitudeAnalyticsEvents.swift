@@ -458,4 +458,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    struct Video {
+        static var continuedInBackground = AnalyticsEvent(name: "Video played in background")
+    }
 }
