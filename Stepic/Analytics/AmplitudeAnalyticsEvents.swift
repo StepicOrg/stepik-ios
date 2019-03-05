@@ -457,9 +457,21 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+
+        static var buttonClicked = AnalyticsEvent(name: "Personal deadline schedule button pressed")
     }
 
     struct Video {
         static var continuedInBackground = AnalyticsEvent(name: "Video played in background")
+
+        static func changedSpeed(source: String, target: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Video rate changed",
+                parameters: [
+                    "source": source,
+                    "target": target
+                ]
+            )
+        }
     }
 }

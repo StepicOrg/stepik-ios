@@ -194,6 +194,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
         func handleAll() {
             self.presenter.presentWaitingState()
+
+            AmplitudeAnalyticsEvents.Downloads.started(content: "course").send()
             self.forceLoadAllSectionsIfNeeded().done {
                 for (uid, section) in self.currentSections {
                     let sectionState = self.getDownloadingState(for: section)
@@ -246,6 +248,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         if self.personalDeadlinesService.hasDeadlines(in: course) {
             self.moduleOutput?.presentPersonalDeadlinesSettings(for: course)
         } else {
+            AmplitudeAnalyticsEvents.PersonalDeadlines.buttonClicked.send()
             self.moduleOutput?.presentPersonalDeadlinesCreation(for: course)
         }
     }
