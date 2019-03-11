@@ -17,6 +17,10 @@ class EnrollmentsAPI: APIEndpoint {
     func delete(courseId: Int) -> Promise<Void> {
         return delete.request(requestEndpoint: "enrollments", deletingId: courseId, withManager: manager)
     }
+
+    func create(enrollment: Enrollment) -> Promise<Void> {
+        return create.request(requestEndpoint: "enrollments", paramName: "enrollment", creatingObject: enrollment, withManager: manager)
+    }
 }
 
 extension EnrollmentsAPI {
