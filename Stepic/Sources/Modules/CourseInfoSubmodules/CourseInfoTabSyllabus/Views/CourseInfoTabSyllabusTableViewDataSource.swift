@@ -1,8 +1,6 @@
 import UIKit
 
-final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
-                                                    UITableViewDelegate,
-                                                    UITableViewDataSource {
+final class CourseInfoTabSyllabusTableViewDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
     weak var delegate: CourseInfoTabSyllabusViewControllerDelegate?
 
     private var viewModels: [CourseInfoTabSyllabusSectionViewModel]
@@ -90,10 +88,7 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
                     continue
                 }
 
-                self.unitsIndexCache[viewModel.uniqueIdentifier] = IndexPath(
-                    row: row,
-                    section: index
-                )
+                self.unitsIndexCache[viewModel.uniqueIdentifier] = IndexPath(row: row, section: index)
             }
         }
     }
@@ -145,11 +140,7 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
         return sectionView
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        willDisplayHeaderView view: UIView,
-        forSection section: Int
-    ) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         self.visibleSectionHeaders[section] = view
 
         // If section has no unit-placeholders then skip request
@@ -166,27 +157,15 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject,
         }
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        willDisplay cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.visibleCells[indexPath] = cell
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        didEndDisplaying cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.visibleCells.removeValue(forKey: indexPath)
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        didEndDisplayingHeaderView view: UIView,
-        forSection section: Int
-    ) {
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         self.visibleSectionHeaders.removeValue(forKey: section)
     }
 

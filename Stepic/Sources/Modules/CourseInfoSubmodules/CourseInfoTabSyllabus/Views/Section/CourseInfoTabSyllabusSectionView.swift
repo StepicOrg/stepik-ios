@@ -137,20 +137,13 @@ final class CourseInfoTabSyllabusSectionView: UIView {
 
             self.deadlinesView.configure(
                 items: deadlines.timelineItems.map { item in
-                    .init(
-                        text: item.title,
-                        progressBefore: item.lineFillingProgress,
-                        isCompleted: item.isPointFilled
-                    )
+                    .init(text: item.title, progressBefore: item.lineFillingProgress, isCompleted: item.isPointFilled)
                 }
             )
         } else {
             self.deadlinesView.isHidden = true
             self.textStackView.snp.makeConstraints { make in
-                make.bottom
-                    .equalToSuperview()
-                    .offset(-self.appearance.deadlinesInsets.bottom)
-                    .priority(.medium)
+                make.bottom.equalToSuperview().offset(-self.appearance.deadlinesInsets.bottom).priority(.medium)
             }
         }
     }
@@ -237,21 +230,14 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.textStackView.setContentCompressionResistancePriority(.required, for: .vertical)
         self.textStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.textStackViewInsets.top)
-            make.leading
-                .equalTo(self.indexLabel.snp.trailing)
-                .offset(self.appearance.textStackViewInsets.left)
-            make.trailing
-                .equalTo(self.downloadButton.snp.leading)
-                .offset(-self.appearance.textStackViewInsets.right)
+            make.leading.equalTo(self.indexLabel.snp.trailing).offset(self.appearance.textStackViewInsets.left)
+            make.trailing.equalTo(self.downloadButton.snp.leading).offset(-self.appearance.textStackViewInsets.right)
         }
 
         self.deadlinesView.translatesAutoresizingMaskIntoConstraints = false
         self.deadlinesView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom
-                .equalToSuperview()
-                .offset(-self.appearance.deadlinesInsets.bottom)
-                .priority(.medium)
+            make.bottom.equalToSuperview().offset(-self.appearance.deadlinesInsets.bottom).priority(.medium)
         }
     }
 }

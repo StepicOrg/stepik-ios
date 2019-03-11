@@ -35,9 +35,7 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             nextLessonService: NextLessonService(),
             tooltipStorageManager: TooltipStorageManager()
         )
-        let viewController = CourseInfoTabSyllabusViewController(
-            interactor: interactor
-        )
+        let viewController = CourseInfoTabSyllabusViewController(interactor: interactor)
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput

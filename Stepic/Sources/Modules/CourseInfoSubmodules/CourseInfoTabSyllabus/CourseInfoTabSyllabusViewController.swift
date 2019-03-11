@@ -84,9 +84,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         }
     }
 
-    func displayDownloadButtonStateUpdate(
-        viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel
-    ) {
+    func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel) {
         switch viewModel.data {
         case .section(let viewModel):
             self.syllabusTableDelegate.mergeViewModel(section: viewModel)

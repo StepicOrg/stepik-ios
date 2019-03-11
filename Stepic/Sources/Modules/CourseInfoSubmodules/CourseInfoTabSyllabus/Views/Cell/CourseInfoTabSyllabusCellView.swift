@@ -195,20 +195,14 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
             make.size.equalTo(self.appearance.coverImageViewSize)
             make.leading.equalToSuperview().offset(self.appearance.coverImageViewInsets.left)
             make.top.equalToSuperview().offset(self.appearance.coverImageViewInsets.top)
-            make.bottom
-                .lessThanOrEqualToSuperview()
-                .offset(-self.appearance.coverImageViewInsets.bottom)
+            make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.coverImageViewInsets.bottom)
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         self.titleLabel.snp.makeConstraints { make in
-            make.leading
-                .equalTo(self.coverImageView.snp.trailing)
-                .offset(self.appearance.titleLabelInsets.left)
-            make.trailing
-                .equalTo(self.downloadButton.snp.leading)
-                .offset(-self.appearance.titleLabelInsets.left)
+            make.leading.equalTo(self.coverImageView.snp.trailing).offset(self.appearance.titleLabelInsets.left)
+            make.trailing.equalTo(self.downloadButton.snp.leading).offset(-self.appearance.titleLabelInsets.left)
             make.top.equalTo(self.coverImageView.snp.top)
         }
 
@@ -218,12 +212,8 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
             make.height.equalTo(self.appearance.statsViewHeight)
             make.leading.equalTo(self.titleLabel.snp.leading)
             make.trailing.lessThanOrEqualTo(self.titleLabel.snp.trailing)
-            make.top
-                .equalTo(self.titleLabel.snp.bottom)
-                .offset(self.appearance.statsInsets.top)
-            make.bottom
-                .equalToSuperview()
-                .offset(-self.appearance.statsInsets.bottom)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.statsInsets.top)
+            make.bottom.equalToSuperview().offset(-self.appearance.statsInsets.bottom)
         }
 
         self.progressIndicatorView.translatesAutoresizingMaskIntoConstraints = false

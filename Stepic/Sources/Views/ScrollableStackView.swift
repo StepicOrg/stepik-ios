@@ -49,9 +49,7 @@ final class ScrollableStackView: UIView {
     }
 
     private var refreshControl: UIRefreshControl? {
-        return self.scrollView
-            .subviews
-            .first(where: { $0 is UIRefreshControl }) as? UIRefreshControl
+        return self.scrollView.subviews.first(where: { $0 is UIRefreshControl }) as? UIRefreshControl
     }
 
     // MARK: - Blocks

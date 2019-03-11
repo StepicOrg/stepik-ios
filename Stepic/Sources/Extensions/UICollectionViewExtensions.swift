@@ -5,9 +5,7 @@ extension UICollectionView {
         self.register(T.self, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
     }
 
-    func register<T: UICollectionViewCell>(
-        cellClass: T.Type
-    ) where T: Reusable, T: NibLoadable {
+    func register<T: UICollectionViewCell>(cellClass: T.Type) where T: Reusable, T: NibLoadable {
         let bundle = Bundle(for: T.self)
         let nib = UINib(nibName: T.nibName, bundle: bundle)
 
@@ -18,11 +16,7 @@ extension UICollectionView {
         viewClass: T.Type,
         forSupplementaryViewOfKind kind: String
     ) where T: Reusable {
-        self.register(
-            T.self,
-            forSupplementaryViewOfKind: kind,
-            withReuseIdentifier: T.defaultReuseIdentifier
-        )
+        self.register(T.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.defaultReuseIdentifier)
     }
 
     func register<T: UICollectionReusableView>(
@@ -32,16 +26,10 @@ extension UICollectionView {
         let bundle = Bundle(for: T.self)
         let nib = UINib(nibName: T.nibName, bundle: bundle)
 
-        self.register(
-            nib,
-            forSupplementaryViewOfKind: kind,
-            withReuseIdentifier: T.defaultReuseIdentifier
-        )
+        self.register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.defaultReuseIdentifier)
     }
 
-    func dequeueReusableCell<T: UICollectionViewCell>(
-        for indexPath: IndexPath
-    ) -> T where T: Reusable {
+    func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T where T: Reusable {
         guard let cell = self.dequeueReusableCell(
             withReuseIdentifier: T.defaultReuseIdentifier,
             for: indexPath

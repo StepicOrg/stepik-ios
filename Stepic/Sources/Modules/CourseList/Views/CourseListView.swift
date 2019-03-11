@@ -77,10 +77,7 @@ class CourseListView: UIView {
         }
     }
 
-    func updateCollectionViewData(
-        delegate: UICollectionViewDelegate,
-        dataSource: UICollectionViewDataSource
-    ) {
+    func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         self.collectionView.delegate = delegate
         self.collectionView.dataSource = dataSource
         self.collectionView.reloadData()
@@ -232,22 +229,15 @@ final class VerticalCourseListView: CourseListView,
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func updateCollectionViewData(
-        delegate: UICollectionViewDelegate,
-        dataSource: UICollectionViewDataSource
-    ) {
+    override func updateCollectionViewData(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
         self.storedCollectionViewDelegate = delegate
         self.storedCollectionViewDataSource = dataSource
         super.updateCollectionViewData(delegate: self, dataSource: self)
     }
 
     override func calculateItemSize() -> CGSize {
-        let width = self.bounds.width
-            - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
-        return CGSize(
-            width: width / CGFloat(self.columnsCount),
-            height: self.appearance.layoutItemHeight
-        )
+        let width = self.bounds.width - self.appearance.layoutMinimumInteritemSpacing * CGFloat(self.columnsCount + 1)
+        return CGSize(width: width / CGFloat(self.columnsCount), height: self.appearance.layoutItemHeight)
     }
 
     private func updatePagination() {
@@ -265,10 +255,7 @@ final class VerticalCourseListView: CourseListView,
     // MARK: UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.storedCollectionViewDelegate.collectionView?(
-            collectionView,
-            didSelectItemAt: indexPath
-        )
+        self.storedCollectionViewDelegate.collectionView?(collectionView, didSelectItemAt: indexPath)
     }
 
     func collectionView(
@@ -276,11 +263,7 @@ final class VerticalCourseListView: CourseListView,
         willDisplay cell: UICollectionViewCell,
         forItemAt indexPath: IndexPath
     ) {
-        self.storedCollectionViewDelegate.collectionView?(
-            collectionView,
-            willDisplay: cell,
-            forItemAt: indexPath
-        )
+        self.storedCollectionViewDelegate.collectionView?(collectionView, willDisplay: cell, forItemAt: indexPath)
 
         // Pagination working only when collection has one section
         guard indexPath.section == 0 else {
@@ -296,10 +279,7 @@ final class VerticalCourseListView: CourseListView,
 
     // MARK: UICollectionViewDataSource
 
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.storedCollectionViewDataSource.collectionView(
             collectionView,
             numberOfItemsInSection: section

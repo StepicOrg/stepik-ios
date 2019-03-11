@@ -191,10 +191,8 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
         lessons: [Lesson]
     ) -> Guarantee<[Unit]> {
         return Guarantee { seal in
-            let progressesMap: [Progress.IdType: Progress] = progresses
-                .reduce(into: [:]) { $0[$1.id] = $1 }
-            let lessonsMap: [Lesson.IdType: Lesson] = lessons
-                .reduce(into: [:]) { $0[$1.id] = $1 }
+            let progressesMap: [Progress.IdType: Progress] = progresses.reduce(into: [:]) { $0[$1.id] = $1 }
+            let lessonsMap: [Lesson.IdType: Lesson] = lessons.reduce(into: [:]) { $0[$1.id] = $1 }
 
             for i in 0..<units.count {
                 if let progressID = units[i].progressId {

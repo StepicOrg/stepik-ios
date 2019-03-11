@@ -92,10 +92,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         }
     }
 
-    private func makeFormattedCertificateDetailsText(
-        conditionPoints: Int?,
-        distinctionPoints: Int?
-    ) -> String {
+    private func makeFormattedCertificateDetailsText(conditionPoints: Int?, distinctionPoints: Int?) -> String {
         let formattedCondition = self.makeFormattedCertificateDetailTitle(
             NSLocalizedString("CertificateCondition", comment: ""),
             points: conditionPoints
@@ -110,10 +107,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         )
     }
 
-    private func makeFormattedCertificateDetailTitle(
-        _ title: String,
-        points: Int?
-    ) -> String {
+    private func makeFormattedCertificateDetailTitle(_ title: String, points: Int?) -> String {
         if let points = points, points > 0 {
             let pluralizedPointsString = StringHelper.pluralize(
                 number: points,

@@ -49,10 +49,7 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
         return label
     }()
 
-    init(
-        frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
-    ) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

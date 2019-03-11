@@ -2,12 +2,8 @@ import SnapKit
 import UIKit
 
 protocol CourseInfoTabSyllabusViewDelegate: class {
-    func courseInfoTabSyllabusViewDidClickDeadlines(
-        _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
-    )
-    func courseInfoTabSyllabusViewDidClickDownloadAll(
-        _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
-    )
+    func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
+    func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
 }
 
 extension CourseInfoTabSyllabusView {
@@ -132,11 +128,7 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
         self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        willDisplayHeaderView view: UIView,
-        forSection section: Int
-    ) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         self.tableViewDelegate?.tableView?(
             tableView,
             willDisplayHeaderView: view,

@@ -220,21 +220,15 @@ extension CourseInfoHeaderView: ProgrammaticallyInitializableViewProtocol {
         self.marksStackView.translatesAutoresizingMaskIntoConstraints = false
         self.marksStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom
-                .equalTo(self.titleStackView.snp.top)
-                .offset(-self.appearance.marksStackViewInsets.bottom)
+            make.bottom.equalTo(self.titleStackView.snp.top).offset(-self.appearance.marksStackViewInsets.bottom)
         }
 
         self.actionButton.translatesAutoresizingMaskIntoConstraints = false
         self.actionButton.snp.makeConstraints { make in
-            make.bottom
-                .equalTo(self.statsView.snp.top)
-                .offset(-self.appearance.actionButtonInsets.bottom)
+            make.bottom.equalTo(self.statsView.snp.top).offset(-self.appearance.actionButtonInsets.bottom)
             make.centerX.equalToSuperview()
             make.height.equalTo(self.appearance.actionButtonHeight)
-            make.width
-                .equalTo(self.snp.width)
-                .multipliedBy(self.appearance.actionButtonWidthRatio)
+            make.width.equalTo(self.snp.width).multipliedBy(self.appearance.actionButtonWidthRatio)
         }
     }
 }

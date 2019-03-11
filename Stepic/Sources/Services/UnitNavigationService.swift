@@ -7,10 +7,7 @@ enum UnitNavigationDirection {
 }
 
 protocol UnitNavigationServiceProtocol: class {
-    func findUnitForNavigation(
-        from unit: Unit.IdType,
-        direction: UnitNavigationDirection
-    ) -> Promise<Unit?>
+    func findUnitForNavigation(from unit: Unit.IdType, direction: UnitNavigationDirection) -> Promise<Unit?>
 }
 
 final class UnitNavigationService: UnitNavigationServiceProtocol {
@@ -37,10 +34,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         self.coursesNetworkService = coursesNetworkService
     }
 
-    func findUnitForNavigation(
-        from unit: Unit.IdType,
-        direction: UnitNavigationDirection
-    ) -> Promise<Unit?> {
+    func findUnitForNavigation(from unit: Unit.IdType, direction: UnitNavigationDirection) -> Promise<Unit?> {
         return self.getUnitFromCacheOrNetwork(id: unit).then { unit -> Promise<(Unit?, Section?)> in
             guard let unit = unit else {
                 return Promise.value((nil, nil))

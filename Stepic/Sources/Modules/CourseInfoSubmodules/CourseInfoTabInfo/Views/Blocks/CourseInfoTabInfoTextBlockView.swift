@@ -47,10 +47,7 @@ final class CourseInfoTabInfoTextBlockView: UIView {
         }
     }
 
-    init(
-        frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
-    ) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
@@ -88,9 +85,7 @@ extension CourseInfoTabInfoTextBlockView: ProgrammaticallyInitializableViewProto
             make.leading.equalToSuperview().offset(self.appearance.messageLabelInsets.left)
             make.bottom.equalToSuperview().offset(-self.appearance.messageLabelInsets.bottom)
             make.trailing.equalTo(self.headerView)
-            make.top
-                .equalTo(self.headerView.snp.bottom)
-                .offset(self.appearance.messageLabelInsets.top)
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.messageLabelInsets.top)
         }
     }
 }

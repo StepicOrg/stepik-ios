@@ -100,10 +100,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             let isOnline = strongSelf.isOnline
             print("course info tab syllabus interactor: start fetching syllabus, isOnline = \(isOnline)")
 
-            strongSelf.fetchSyllabusInAppropriateMode(
-                course: course,
-                isOnline: isOnline
-            ).done { response in
+            strongSelf.fetchSyllabusInAppropriateMode(course: course, isOnline: isOnline).done { response in
                 DispatchQueue.main.async {
                     print("course info tab syllabus interactor: finish fetching syllabus, isOnline = \(isOnline)")
 
@@ -220,22 +217,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         guard let unit = self.currentUnits[request.uniqueIdentifier] as? Unit else {
             return
         }
-
-        // If all units already loaded then just present unit
-        // otherwise fetch all sections
-        // TODO: remove after APPS-2206
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.forceLoadAllSectionsIfNeeded().done { _ in
-            self.requestUnitPresentation(unit)
-        }.catch { _ in
-            print(
-                "course info tab syllabus interactor: unable to load all sections"
-                + "request unit presentation w/o completed syllabus structure"
-            )
-            self.requestUnitPresentation(unit)
-        }.finally {
-            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-        }
+        self.requestUnitPresentation(unit)
     }
 
     func doPersonalDeadlinesAction(request: CourseInfoTabSyllabus.PersonalDeadlinesButtonAction.Request) {
@@ -277,9 +259,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
-        let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(
-            in: course
-        ) || self.personalDeadlinesService.hasDeadlines(in: course)
+        let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(in: course)
+            || self.personalDeadlinesService.hasDeadlines(in: course)
 
         let isDownloadAllAvailable: Bool = {
             if case .available(_) = self.getDownloadingStateForCourse() {
@@ -374,11 +355,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         return CourseInfoTabSyllabus.SyllabusData(
             sections: self.currentSections
                 .map { uid, entity in
-                    .init(
-                        uniqueIdentifier: uid,
-                        entity: entity,
-                        downloadState: self.getDownloadingState(for: entity)
-                    )
+                    .init(uniqueIdentifier: uid, entity: entity, downloadState: self.getDownloadingState(for: entity))
                 }
                 .sorted(by: { $0.entity.position < $1.entity.position }),
             units: self.currentUnits
@@ -390,11 +367,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                         state = .notAvailable
                     }
 
-                    return .init(
-                        uniqueIdentifier: uid,
-                        entity: entity,
-                        downloadState: state
-                    )
+                    return .init(uniqueIdentifier: uid, entity: entity, downloadState: state)
                 }
                 .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
             sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
@@ -434,10 +407,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
     func handleControllerAppearance() {
         if let course = self.currentCourse {
-            AmplitudeAnalyticsEvents.Sections.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
+            AmplitudeAnalyticsEvents.Sections.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         } else {
             self.shouldOpenedAnalyticsEventSend = true
@@ -451,10 +421,7 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
         self.doSectionsFetch(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
-            AmplitudeAnalyticsEvents.Sections.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
+            AmplitudeAnalyticsEvents.Sections.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         }
     }
@@ -667,11 +634,7 @@ extension CourseInfoTabSyllabusInteractor {
         }
     }
 
-    private func makeSyllabusTree(
-        section: Section? = nil,
-        unit: Unit,
-        steps: [Step]
-    ) -> SyllabusTreeNode {
+    private func makeSyllabusTree(section: Section? = nil, unit: Unit, steps: [Step]) -> SyllabusTreeNode {
         var stepsTrees: [SyllabusTreeNode] = []
         for step in steps {
             guard step.block.name == "video",

@@ -76,9 +76,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         self.viewController?.displaySyllabus(viewModel: viewModel)
     }
 
-    func presentDownloadButtonUpdate(
-        response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response
-    ) {
+    func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response) {
         switch response.source {
         case .section(let section):
             self.cachedSectionViewModels[section.id]?.downloadState = response.downloadState
@@ -99,9 +97,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
     }
 
-    func presentCourseSyllabusHeader(
-        response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response
-    ) {
+    func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response) {
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
             isDownloadAllButtonEnabled: response.isDownloadAllAvailable,
