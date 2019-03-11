@@ -197,7 +197,7 @@ enum TabController: String {
             return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
         case .home:
             let viewController = HomeAssembly().makeModule()
-            let navigationViewController = StyledNavigationViewController(
+            let navigationViewController = StyledNavigationController(
                 rootViewController: viewController
             )
             return TabBarItemInfo(
@@ -211,7 +211,7 @@ enum TabController: String {
             return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
         case .explore:
             let viewController = ExploreAssembly().makeModule()
-            let navigationViewController = StyledNavigationViewController(
+            let navigationViewController = StyledNavigationController(
                 rootViewController: viewController
             )
             return TabBarItemInfo(

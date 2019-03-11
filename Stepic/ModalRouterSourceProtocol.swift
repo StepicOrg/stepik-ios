@@ -33,7 +33,7 @@ extension UIViewController: ModalRouterSourceProtocol, ModalStackRouterSourcePro
     }
 
     private func getEmbedded(moduleStack: [UIViewController]) -> UIViewController {
-        let navigation = StyledNavigationViewController()
+        let navigation = StyledNavigationController()
         navigation.setViewControllers(moduleStack, animated: false)
         let closeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: nil)
         closeItem.actionClosure = {

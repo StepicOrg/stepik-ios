@@ -29,7 +29,7 @@ class AdaptiveCardsStepsViewController: CardsStepsViewController {
     var isBackActionAllowed = true
 
     @IBAction func onTrophyButtonClick(_ sender: Any) {
-        guard let navVC = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "AdaptiveMain") as? StyledNavigationViewController else {
+        guard let navVC = ControllerHelper.instantiateViewController(identifier: "Stats", storyboardName: "AdaptiveMain") as? StyledNavigationController else {
             return
         }
 

@@ -145,18 +145,6 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         tabsViewBackgroundColor = UIColor.mainLight
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.delegate = self
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if navigationController?.delegate === self {
-            navigationController?.delegate = nil
-        }
-    }
-
     func setRefreshing(refreshing: Bool) {
         if refreshing {
             self.view.isUserInteractionEnabled = false
@@ -253,14 +241,8 @@ extension LessonViewController: WarningViewDelegate {
     }
 }
 
-extension LessonViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard let navigation = self.navigationController as? StyledNavigationViewController else {
-            return
-        }
-        if navigation.topViewController != viewController {
-            print("wow")
-        }
-        navigation.animateShadowChange(for: self)
+extension LessonViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return .init(shadowViewAlpha: 0.0)
     }
 }
