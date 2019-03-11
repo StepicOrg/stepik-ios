@@ -118,6 +118,10 @@ class StepicVideoPlayerViewController: UIViewController {
                 _ in
                 AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.rateChanged, parameters:
                     ["rate": rate.description as NSObject])
+                AmplitudeAnalyticsEvents.Video.changedSpeed(
+                    source: self.currentRate.description,
+                    target: rate.description
+                ).send()
                 self.currentRate = rate
             })
             alertController.addAction(action)

@@ -187,6 +187,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
 
         func handleAll() {
+            AmplitudeAnalyticsEvents.Downloads.started(content: "course").send()
             self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
             self.forceLoadAllSectionsIfNeeded().done {
                 for (uid, section) in self.currentSections {
@@ -228,6 +229,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         if self.personalDeadlinesService.hasDeadlines(in: course) {
             self.moduleOutput?.presentPersonalDeadlinesSettings(for: course)
         } else {
+            AmplitudeAnalyticsEvents.PersonalDeadlines.buttonClicked.send()
             self.moduleOutput?.presentPersonalDeadlinesCreation(for: course)
         }
     }
