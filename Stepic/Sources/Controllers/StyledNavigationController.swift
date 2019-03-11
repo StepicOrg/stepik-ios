@@ -1,13 +1,5 @@
-//
-//  StyledNavigationController.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 28/02/2019.
-//  Copyright © 2019 Vladislav Kiryukhin. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 class StyledNavigationController: UINavigationController {
     enum Appearance {
@@ -60,8 +52,7 @@ class StyledNavigationController: UINavigationController {
 
     private var lastAction = UINavigationController.Operation.none
 
-    private var navigationBarAppearanceForController:
-        [UIViewController: NavigationBarAppearanceState] = [:]
+    private var navigationBarAppearanceForController: [UIViewController: NavigationBarAppearanceState] = [:]
 
     // MARK: ViewController lifecycle & base methods
 
@@ -81,10 +72,7 @@ class StyledNavigationController: UINavigationController {
         self.statusBarView.frame = UIApplication.shared.statusBarFrame
     }
 
-    override func viewWillTransition(
-        to size: CGSize,
-        with coordinator: UIViewControllerTransitionCoordinator
-    ) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
         coordinator.animate(
@@ -104,11 +92,13 @@ class StyledNavigationController: UINavigationController {
         return super.popViewController(animated: animated)
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
         self.lastAction = .pop
         return super.popToRootViewController(animated: animated)
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
     override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         self.lastAction = .pop
         return super.popToViewController(viewController, animated: animated)
@@ -280,9 +270,7 @@ class StyledNavigationController: UINavigationController {
         self.navigationBarAppearanceForController.removeValue(forKey: viewController)
     }
 
-    private func animateShadowView(
-        transitionCoordinator: UIViewControllerTransitionCoordinator
-    ) {
+    private func animateShadowView(transitionCoordinator: UIViewControllerTransitionCoordinator) {
         guard let fromViewController = self.transitionCoordinator?.viewController(forKey: .from),
               let toViewController = self.transitionCoordinator?.viewController(forKey: .to) else {
             return

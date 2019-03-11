@@ -81,7 +81,6 @@
 		080F74611BD8159F0064AAEA /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		080F74641BD9213D0064AAEA /* VideosInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74631BD9213D0064AAEA /* VideosInfo.swift */; };
 		080F74661BD924B80064AAEA /* VideoQualityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */; };
-		081387DF1D7AF5C30092E05D /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
 		0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
@@ -1074,7 +1073,6 @@
 		2C1B61681F4C4AEF00236804 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
 		2C1B616A1F4C4AEF00236804 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C1B616B1F4C4AEF00236804 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
-		2C1B616C1F4C4AEF00236804 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		2C1B616D1F4C4AEF00236804 /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		2C1B616E1F4C4AEF00236804 /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C1B61711F4C4AEF00236804 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -1427,7 +1425,6 @@
 		2C1B63791F4C590700236804 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
 		2C1B637B1F4C590700236804 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C1B637C1F4C590700236804 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
-		2C1B637D1F4C590700236804 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		2C1B637E1F4C590700236804 /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		2C1B637F1F4C590700236804 /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C1B63821F4C590700236804 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -2302,7 +2299,6 @@
 		2C89A9FC1F4C289900227C3B /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
 		2C89A9FE1F4C289900227C3B /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C89A9FF1F4C289900227C3B /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
-		2C89AA001F4C289900227C3B /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		2C89AA011F4C289900227C3B /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		2C89AA021F4C289900227C3B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C89AA051F4C289900227C3B /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -2719,7 +2715,6 @@
 		2C949A5320ECCE010049E9A8 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
 		2C949A5420ECCE070049E9A8 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		2C949A5520ECCE270049E9A8 /* UITableView+TableHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D9D45E6DA6099AF1C0B /* UITableView+TableHeaderLayout.swift */; };
-		2C949A5620ECCE3F0049E9A8 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		2C949A5720ECCE4F0049E9A8 /* AchievementPopupAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9851360F1490A8311EC41 /* AchievementPopupAlertManager.swift */; };
 		2C949A5820ECCE570049E9A8 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
 		2C949A5A20ECCE840049E9A8 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08448FFF1F5CE15200D01940 /* SettingsPresenter.swift */; };
@@ -2851,7 +2846,6 @@
 		2C9731B01F4C38F600AC9301 /* FullscreenCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080E80FC1F0146EF00DC0EA5 /* FullscreenCodeQuizViewController.swift */; };
 		2C9731B21F4C38F600AC9301 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2C9731B31F4C38F600AC9301 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
-		2C9731B41F4C38F600AC9301 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		2C9731B51F4C38F600AC9301 /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		2C9731B61F4C38F600AC9301 /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C9731B91F4C38F600AC9301 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
@@ -3307,7 +3301,6 @@
 		2CA8D1EE2088D9C000E105E9 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		2CA8D1EF2088D9C000E105E9 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
 		2CA8D1F02088D9C000E105E9 /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
-		2CA8D1F12088D9C000E105E9 /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		2CA8D1F22088D9C000E105E9 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
 		2CA8D1F32088D9C000E105E9 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
 		2CA8D1F42088D9C000E105E9 /* TransitionMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CBA3251F57563C00302154 /* TransitionMenuBlockTableViewCell.swift */; };
@@ -3908,7 +3901,9 @@
 		62E9803FE1DC89AD052A1B34 /* CourseInfoAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98694D39D242F1DDBA5FD /* CourseInfoAssembly.swift */; };
 		62E9805746CCF14D91FF516D /* CodeEditorSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989579A70D89D559F7520 /* CodeEditorSettingsPresenter.swift */; };
 		62E9808AB6290CFEA48D8471 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
+		62E980935E478C68999EAB14 /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E9809B1FBA824D7477B88F /* ProfileMenuBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */; };
+		62E980AAD0866BA3152F0BED /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E980CB3EB9E38E716EB433 /* TabSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E988C4DC97F14EAC09BC41 /* TabSegmentedControlView.swift */; };
 		62E980D0F888E54AD170754E /* CourseInfoTabInfoDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98943064DE13C96951EB3 /* CourseInfoTabInfoDataFlow.swift */; };
 		62E980D43988846193D72AB7 /* FullscreenCourseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9819721AE70E0BCAD1375 /* FullscreenCourseListViewController.swift */; };
@@ -3921,6 +3916,7 @@
 		62E98116576B12451E5418F4 /* CourseCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9888DC7DFE8CFE5C220B6 /* CourseCoverImageView.swift */; };
 		62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986B6284822FB1A8E1FCC /* AuthGreetingViewController.swift */; };
 		62E98121031477DEACF5CF28 /* CourseInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A86AF422B9248692C03 /* CourseInfoViewController.swift */; };
+		62E9813015A0D1D890D7137B /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E9813EA4EF290CAD112E87 /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
 		62E98144B8A52511F4EEB63F /* CourseWidgetSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A399A313681138734B4 /* CourseWidgetSkeletonView.swift */; };
 		62E981544EDEBEB2E69B7CC3 /* CourseListOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E42354E7C07E4355066 /* CourseListOutputProtocol.swift */; };
@@ -4005,6 +4001,7 @@
 		62E98492D8EBF185C01AA125 /* ExploreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98084AC5ED9D4F6F429D9 /* ExploreInteractor.swift */; };
 		62E9849D9108AE7405DBFD4C /* CourseListContainerViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98CCD8D3A65826FD76F26 /* CourseListContainerViewFactory.swift */; };
 		62E984A30B7A381A8D25E7D1 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
+		62E984BCD7EC9D4A8DECBA47 /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E984DBF0005C3EA5BAFDFD /* CourseInfoTabSyllabusInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FB0FB1D292E786D3B0D /* CourseInfoTabSyllabusInteractor.swift */; };
 		62E984DD2249530A7BAC3048 /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E984E5780A91D07E2D8D60 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
@@ -4086,12 +4083,14 @@
 		62E9889721C1768A4AF6D5AC /* ExploreDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A07EBE3FE55ABFF330F /* ExploreDataFlow.swift */; };
 		62E9889B64C038694C9566DE /* UIView+fromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BB5246C2BBC5E88D06 /* UIView+fromNib.swift */; };
 		62E988B531F6567528603111 /* CourseInfoTabInfoInstructorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DD794BD2702F8059AE9 /* CourseInfoTabInfoInstructorView.swift */; };
+		62E988BFE591986D31B0692E /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E988C7BC696512830AB928 /* CourseListsCollectionPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98298A41D6042259064E7 /* CourseListsCollectionPersistenceService.swift */; };
 		62E988D73F25D62AAD7DB3B5 /* ContentLanguageSwitchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981805E34DA181141071B /* ContentLanguageSwitchInteractor.swift */; };
 		62E988EA9D5C729ACCE8B386 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
 		62E988F1582D22B8EAAB6E55 /* CourseInfoTabReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98320617E2301C47D7E47 /* CourseInfoTabReviewsView.swift */; };
 		62E988FBC9F2DE1E4B9C82E2 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F9F759D04EFACC2579D /* NibLoadable.swift */; };
 		62E98905245F33B16D020586 /* ContinueActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9807E3506DAF40179593F /* ContinueActionButton.swift */; };
+		62E9893BFCFDBBFB30EC47E0 /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E989403A2025381E5B308B /* BounceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98EDC02AF16EA5BAA748A /* BounceButton.swift */; };
 		62E9894F62C1C3044EADDB1A /* BaseExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C4D6C3DA666F573529F /* BaseExploreView.swift */; };
 		62E989573C3CF3E493E7A123 /* CourseListTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986B618D4274BD837ECB7 /* CourseListTypes.swift */; };
@@ -4209,8 +4208,10 @@
 		62E98E72EB42F2A772BF9760 /* AchievementProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */; };
 		62E98E788CD3D0116562BF69 /* BaseExploreDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BFC874A67BEB0019DA /* BaseExploreDataFlow.swift */; };
 		62E98E7E9187BE3A6599AB09 /* ContentLanguageSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9806A771FEF01F91F6F5D /* ContentLanguageSwitchButton.swift */; };
+		62E98E84D463830F99207B3F /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E98E8C35AE5A7F3A2508E4 /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
 		62E98E916518CC0446F2DCDF /* ProgrammaticallyInitializableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E980F9CFE23B23B5720F5E /* ProgrammaticallyInitializableViewProtocol.swift */; };
+		62E98E92833D3A0649EBA590 /* StyledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */; };
 		62E98E946258DC65BF161DF4 /* CourseWidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DA10600D9009297CFBA /* CourseWidgetViewModel.swift */; };
 		62E98E97DA6D4B40D7545F7D /* CourseInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C48C0EF20E670405D77 /* CourseInfoInteractor.swift */; };
 		62E98EB2034914D78C4A5F14 /* StreakNotificationsControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840661E3EE43A4552946 /* StreakNotificationsControlPresenter.swift */; };
@@ -4488,7 +4489,6 @@
 		864D67AD1E83E08E001E8D9E /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
 		864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082FD64B1D6C849C007F3E07 /* ReplaceLastSegue.swift */; };
-		864D67C71E83E08F001E8D9E /* StyledNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */; };
 		864D67C81E83E08F001E8D9E /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		864D67D51E83E23B001E8D9E /* ControllerHelperLaunchExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA79001DB6BB36003491C4 /* ControllerHelperLaunchExtension.swift */; };
 		864D67D61E83E394001E8D9E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F221BDBA4AF004822E1 /* Reachability.m */; };
@@ -4964,7 +4964,6 @@
 		080F74601BD8159F0064AAEA /* TabsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabsInfo.swift; sourceTree = "<group>"; };
 		080F74631BD9213D0064AAEA /* VideosInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInfo.swift; sourceTree = "<group>"; };
 		080F74651BD924B80064AAEA /* VideoQualityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoQualityTableViewController.swift; sourceTree = "<group>"; };
-		081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledNavigationViewController.swift; sourceTree = "<group>"; };
 		081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTabBarViewController.swift; sourceTree = "<group>"; };
 		0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
@@ -6157,6 +6156,7 @@
 		62E98BE02DDD45341BA76AC6 /* BaseExploreInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseExploreInteractor.swift; sourceTree = "<group>"; };
 		62E98BED17F6F15334BE26B8 /* CourseListsCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListsCollectionView.swift; sourceTree = "<group>"; };
 		62E98BEFF76B93DDAF02BD09 /* CourseListCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledNavigationController.swift; sourceTree = "<group>"; };
 		62E98C1B35D7FBAC0ABCEAFD /* SyllabusDownloadsInteractionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllabusDownloadsInteractionService.swift; sourceTree = "<group>"; };
 		62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseReviewsNetworkService.swift; sourceTree = "<group>"; };
 		62E98C48C0EF20E670405D77 /* CourseInfoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoInteractor.swift; sourceTree = "<group>"; };
@@ -7433,7 +7433,6 @@
 				0885F84C1BA8378B00F2A188 /* Courses */,
 				0828FF731BC5E314000AFEA7 /* Sections */,
 				0828FF871BC81EF2000AFEA7 /* Units */,
-				081387DE1D7AF5C30092E05D /* StyledNavigationViewController.swift */,
 				08368C061F6FFF7D00173F8C /* Tab Bar */,
 				082348381ECA264000D2CB40 /* ShareableController.swift */,
 				089504821F27C5C600EEC939 /* FullHeightTableView.swift */,
@@ -10664,6 +10663,7 @@
 				62E982AE7C8995C2C6F1A430 /* Protocols */,
 				62E986D974D797A3BDF8DA59 /* Extensions */,
 				62E9869C94289A9B485281FD /* Helpers */,
+				62E98438A4F73FAEFB2D581B /* Controllers */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -10682,6 +10682,14 @@
 				62E98407592112A22E967DE1 /* UsersNetworkService.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		62E98438A4F73FAEFB2D581B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		62E984604AE4F1CF6E9A71EB /* ProgressService */ = {
@@ -15194,7 +15202,6 @@
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				8622056B2055561F00F14255 /* PinsMapView.swift in Sources */,
 				08E43EA9214C2F7F00E3CB50 /* TabBarRouter.swift in Sources */,
-				081387DF1D7AF5C30092E05D /* StyledNavigationViewController.swift in Sources */,
 				2C2EA36B212D5FEF002116C9 /* Result.swift in Sources */,
 				080CE14C1E9562BF0089A27F /* UsersAPI.swift in Sources */,
 				2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */,
@@ -15456,6 +15463,7 @@
 				62E9856F1F3C7092AB299CC2 /* CourseInfoSubmoduleProtocol.swift in Sources */,
 				62E98C69112F273700EE6F53 /* CourseInfoProvider.swift in Sources */,
 				62E9851367C7F37D5986E077 /* CourseInfoHeaderViewModel.swift in Sources */,
+				62E98E92833D3A0649EBA590 /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -15849,7 +15857,6 @@
 				2C1B61681F4C4AEF00236804 /* FullscreenCodeQuizViewController.swift in Sources */,
 				2C1B616A1F4C4AEF00236804 /* SectionNavigationDelegate.swift in Sources */,
 				2C1B616B1F4C4AEF00236804 /* ReplaceLastSegue.swift in Sources */,
-				2C1B616C1F4C4AEF00236804 /* StyledNavigationViewController.swift in Sources */,
 				08CBA32D1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C1B616D1F4C4AEF00236804 /* StyledTabBarViewController.swift in Sources */,
 				2C1B616E1F4C4AEF00236804 /* CodeReply.swift in Sources */,
@@ -16120,6 +16127,7 @@
 				62E981B26AD9DC231C5414D1 /* PinsMapBlockContentView.swift in Sources */,
 				62E98FAFFA3F5A6BBA5AA68F /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E987A1CC2316014302E314 /* ProfileMenuBlock.swift in Sources */,
+				62E984BCD7EC9D4A8DECBA47 /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -16277,7 +16285,6 @@
 				2C1B63791F4C590700236804 /* FullscreenCodeQuizViewController.swift in Sources */,
 				2C1B637B1F4C590700236804 /* SectionNavigationDelegate.swift in Sources */,
 				2C1B637C1F4C590700236804 /* ReplaceLastSegue.swift in Sources */,
-				2C1B637D1F4C590700236804 /* StyledNavigationViewController.swift in Sources */,
 				08CBA32E1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C1B637E1F4C590700236804 /* StyledTabBarViewController.swift in Sources */,
 				2C1B637F1F4C590700236804 /* CodeReply.swift in Sources */,
@@ -16548,6 +16555,7 @@
 				62E986B9852E979D92D45A41 /* PinsMapBlockContentView.swift in Sources */,
 				62E98D9D4008CA06FC1E5446 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E98AF3317A502192C7F571 /* ProfileMenuBlock.swift in Sources */,
+				62E9813015A0D1D890D7137B /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -16763,7 +16771,6 @@
 				2C9499C020ECBB750049E9A8 /* Progress+CoreDataProperties.swift in Sources */,
 				2C33CBF720EC328E009956B0 /* SearchResultsAPI.swift in Sources */,
 				2C9499CF20ECBCCA0049E9A8 /* NumberReply.swift in Sources */,
-				2C949A5620ECCE3F0049E9A8 /* StyledNavigationViewController.swift in Sources */,
 				2CE22D9E211C7624004D9D10 /* QuizViewControllerBuilder.swift in Sources */,
 				2C949A1620ECC5100049E9A8 /* RemoteConfig.swift in Sources */,
 				2C9499F520ECC0DC0049E9A8 /* ExecutionQueues.swift in Sources */,
@@ -17023,6 +17030,7 @@
 				62E988FBC9F2DE1E4B9C82E2 /* NibLoadable.swift in Sources */,
 				62E98754D7ABA727558CA0D2 /* UITableViewExtensions.swift in Sources */,
 				62E98ACED9DCAC731148C677 /* UICollectionViewExtensions.swift in Sources */,
+				62E988BFE591986D31B0692E /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -17234,7 +17242,6 @@
 				2C89A9FE1F4C289900227C3B /* SectionNavigationDelegate.swift in Sources */,
 				08C1BF2C1FB9ED01008F342F /* SearchResultsPresenter.swift in Sources */,
 				2C89A9FF1F4C289900227C3B /* ReplaceLastSegue.swift in Sources */,
-				2C89AA001F4C289900227C3B /* StyledNavigationViewController.swift in Sources */,
 				2C4919102062A1EB003E733D /* StepikPlaceholder.swift in Sources */,
 				2C6A76402045CEA100C509A6 /* NotificationsMarkAsReadButton.swift in Sources */,
 				08CBA32B1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
@@ -17513,6 +17520,7 @@
 				62E98AB201BD9C1AFEAFA88E /* PinsMapBlockContentView.swift in Sources */,
 				62E981DDEADDC9E1E7E21CB3 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E9809B1FBA824D7477B88F /* ProfileMenuBlock.swift in Sources */,
+				62E980AAD0866BA3152F0BED /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -17669,7 +17677,6 @@
 				2C9731B01F4C38F600AC9301 /* FullscreenCodeQuizViewController.swift in Sources */,
 				2C9731B21F4C38F600AC9301 /* SectionNavigationDelegate.swift in Sources */,
 				2C9731B31F4C38F600AC9301 /* ReplaceLastSegue.swift in Sources */,
-				2C9731B41F4C38F600AC9301 /* StyledNavigationViewController.swift in Sources */,
 				08CBA32C1F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				2C9731B51F4C38F600AC9301 /* StyledTabBarViewController.swift in Sources */,
 				2C9731B61F4C38F600AC9301 /* CodeReply.swift in Sources */,
@@ -17944,6 +17951,7 @@
 				62E98453212412E864EDDDEF /* PinsMapBlockContentView.swift in Sources */,
 				62E98A020CCA8FBA72EAE811 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E98550E592C61C86FBE7FD /* ProfileMenuBlock.swift in Sources */,
+				62E98E84D463830F99207B3F /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18102,7 +18110,6 @@
 				2CA8D1EE2088D9C000E105E9 /* SectionNavigationDelegate.swift in Sources */,
 				2CA8D1EF2088D9C000E105E9 /* SearchResultsPresenter.swift in Sources */,
 				2CA8D1F02088D9C000E105E9 /* ReplaceLastSegue.swift in Sources */,
-				2CA8D1F12088D9C000E105E9 /* StyledNavigationViewController.swift in Sources */,
 				2CA8D1F22088D9C000E105E9 /* StepikPlaceholder.swift in Sources */,
 				2CA8D1F32088D9C000E105E9 /* NotificationsMarkAsReadButton.swift in Sources */,
 				2CA8D1F42088D9C000E105E9 /* TransitionMenuBlockTableViewCell.swift in Sources */,
@@ -18382,6 +18389,7 @@
 				62E98EF17158E1A4CE6593BC /* PinsMapBlockContentView.swift in Sources */,
 				62E9877EE8A8612EDBD7A6BE /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E98401FDC2476D5205E32D /* ProfileMenuBlock.swift in Sources */,
+				62E9893BFCFDBBFB30EC47E0 /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18605,7 +18613,6 @@
 				864D67C51E83E08F001E8D9E /* SectionNavigationDelegate.swift in Sources */,
 				2C604E22207E460E001588FB /* CodeEditorPreviewView.swift in Sources */,
 				864D67C61E83E08F001E8D9E /* ReplaceLastSegue.swift in Sources */,
-				864D67C71E83E08F001E8D9E /* StyledNavigationViewController.swift in Sources */,
 				08CBA3291F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				864D67C81E83E08F001E8D9E /* StyledTabBarViewController.swift in Sources */,
 				08E3B9691EEA16DC0072995B /* CodeReply.swift in Sources */,
@@ -18873,6 +18880,7 @@
 				62E987E79C773F8C291F49F3 /* PinsMapBlockContentView.swift in Sources */,
 				62E98F9A851DD9F2A2FC4297 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				62E9872D206BC9D2C355B11A /* ProfileMenuBlock.swift in Sources */,
+				62E980935E478C68999EAB14 /* StyledNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

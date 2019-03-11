@@ -1,5 +1,5 @@
 //
-//  StyledNavigationViewController.swift
+//  StyledNavigationController.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 03.09.16.
