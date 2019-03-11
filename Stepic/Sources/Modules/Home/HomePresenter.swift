@@ -9,16 +9,16 @@
 import UIKit
 
 protocol HomePresenterProtocol: BaseExplorePresenterProtocol {
-    func presentStreakActivity(response: Home.LoadStreak.Response)
-    func presentContent(response: Home.LoadContent.Response)
-    func presentCourseListState(response: Home.SetErrorStateForCourseList.Response)
+    func presentStreakActivity(response: Home.StreakLoad.Response)
+    func presentContent(response: Home.ContentLoad.Response)
+    func presentCourseListState(response: Home.CourseListStateUpdate.Response)
 }
 
 final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
     lazy var homeViewController = self.viewController as? HomeViewControllerProtocol
 
-    func presentStreakActivity(response: Home.LoadStreak.Response) {
-        var viewModel: Home.LoadStreak.ViewModel
+    func presentStreakActivity(response: Home.StreakLoad.Response) {
+        var viewModel: Home.StreakLoad.ViewModel
 
         switch response.result {
         case .hidden:
@@ -42,7 +42,7 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
         self.homeViewController?.displayStreakInfo(viewModel: viewModel)
     }
 
-    func presentContent(response: Home.LoadContent.Response) {
+    func presentContent(response: Home.ContentLoad.Response) {
         self.homeViewController?.displayContent(
             viewModel: .init(
                 isAuthorized: response.isAuthorized,
@@ -51,7 +51,7 @@ final class HomePresenter: BaseExplorePresenter, HomePresenterProtocol {
         )
     }
 
-    func presentCourseListState(response: Home.SetErrorStateForCourseList.Response) {
+    func presentCourseListState(response: Home.CourseListStateUpdate.Response) {
         self.homeViewController?.displayModuleErrorState(
             viewModel: .init(
                 module: response.module,

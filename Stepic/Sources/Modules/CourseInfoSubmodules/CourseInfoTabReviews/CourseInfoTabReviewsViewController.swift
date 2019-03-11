@@ -9,8 +9,8 @@
 import UIKit
 
 protocol CourseInfoTabReviewsViewControllerProtocol: class {
-    func displayCourseReviews(viewModel: CourseInfoTabReviews.ShowReviews.ViewModel)
-    func displayNextCourseReviews(viewModel: CourseInfoTabReviews.LoadNextReviews.ViewModel)
+    func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel)
+    func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel)
 }
 
 final class CourseInfoTabReviewsViewController: UIViewController {
@@ -82,7 +82,7 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 }
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol {
-    func displayCourseReviews(viewModel: CourseInfoTabReviews.ShowReviews.ViewModel) {
+    func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel) {
         if case .result(let data) = viewModel.state {
             self.tableDataSource.viewModels = data.reviews
             self.updateState(newState: viewModel.state)
@@ -90,7 +90,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
         }
     }
 
-    func displayNextCourseReviews(viewModel: CourseInfoTabReviews.LoadNextReviews.ViewModel) {
+    func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             self.tableDataSource.viewModels.append(contentsOf: data.reviews)
@@ -110,6 +110,6 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
         }
 
         self.canTriggerPagination = false
-        self.interactor.doNextCourseReviewsFetching(request: .init())
+        self.interactor.doNextCourseReviewsFetch(request: .init())
     }
 }

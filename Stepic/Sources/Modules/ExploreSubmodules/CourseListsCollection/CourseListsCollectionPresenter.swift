@@ -9,13 +9,13 @@
 import Foundation
 
 protocol CourseListsCollectionPresenterProtocol: class {
-    func presentCourses(response: CourseListsCollection.ShowCourseLists.Response)
+    func presentCourses(response: CourseListsCollection.CourseListsLoad.Response)
 }
 
 final class CourseListsCollectionPresenter: CourseListsCollectionPresenterProtocol {
     weak var viewController: CourseListsCollectionViewControllerProtocol?
 
-    func presentCourses(response: CourseListsCollection.ShowCourseLists.Response) {
+    func presentCourses(response: CourseListsCollection.CourseListsLoad.Response) {
         switch response.result {
         case .success(let result):
             let courses = result.map { courseList in
@@ -27,7 +27,7 @@ final class CourseListsCollectionPresenter: CourseListsCollectionPresenterProtoc
                     color: self.getColorForCourseList(courseList)
                 )
             }
-            let viewModel = CourseListsCollection.ShowCourseLists.ViewModel(state: .result(data: courses))
+            let viewModel = CourseListsCollection.CourseListsLoad.ViewModel(state: .result(data: courses))
             self.viewController?.displayCourseLists(viewModel: viewModel)
         default:
             break

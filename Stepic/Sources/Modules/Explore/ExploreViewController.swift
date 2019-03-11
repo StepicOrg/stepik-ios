@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 
 protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
-    func displayContent(viewModel: Explore.LoadContent.ViewModel)
-    func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel)
-    func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel)
+    func displayContent(viewModel: Explore.ContentLoad.ViewModel)
+    func displayLanguageSwitchBlock(viewModel: Explore.LanguageSwitchAvailabilityCheck.ViewModel)
+    func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
@@ -61,12 +61,12 @@ final class ExploreViewController: BaseExploreViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.exploreInteractor?.doLanguageSwitchBlockLoading(request: .init())
+        self.exploreInteractor?.doLanguageSwitchBlockLoad(request: .init())
 
         self.initSearchResults()
 
         self.updateState(newState: self.state)
-        self.exploreInteractor?.doContentLoading(request: .init())
+        self.exploreInteractor?.doContentLoad(request: .init())
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -102,11 +102,11 @@ final class ExploreViewController: BaseExploreViewController {
     }
 
     override func refreshContentAfterLanguageChange() {
-        self.exploreInteractor?.doContentLoading(request: .init())
+        self.exploreInteractor?.doContentLoad(request: .init())
     }
 
     override func refreshContentAfterLoginAndLogout() {
-        self.exploreInteractor?.doContentLoading(request: .init())
+        self.exploreInteractor?.doContentLoad(request: .init())
     }
 
     func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
@@ -177,7 +177,7 @@ final class ExploreViewController: BaseExploreViewController {
                 )
             )
         containerView.onShowAllButtonClick = { [weak self] in
-            self?.interactor.doFullscreenCourseListLoading(
+            self?.interactor.doFullscreenCourseListPresentation(
                 request: .init(presentationDescription: nil, courseListType: courseListType)
             )
         }
@@ -239,11 +239,11 @@ extension Explore.Submodule: SubmoduleType {
 }
 
 extension ExploreViewController: ExploreViewControllerProtocol {
-    func displayContent(viewModel: Explore.LoadContent.ViewModel) {
+    func displayContent(viewModel: Explore.ContentLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
 
-    func displayLanguageSwitchBlock(viewModel: Explore.CheckLanguageSwitchAvailability.ViewModel) {
+    func displayLanguageSwitchBlock(viewModel: Explore.LanguageSwitchAvailabilityCheck.ViewModel) {
         if viewModel.isHidden {
             return
         }
@@ -260,7 +260,7 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         )
     }
 
-    func displayStoriesBlock(viewModel: Explore.UpdateStoriesVisibility.ViewModel) {
+    func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel) {
         self.isStoriesHidden = true
         if let storiesBlock = self.getSubmodule(type: Explore.Submodule.stories) {
             self.removeSubmodule(storiesBlock)
@@ -303,7 +303,7 @@ extension ExploreViewController: BaseExploreViewDelegate {
     func refreshControlDidRefresh() {
         // Small delay for pretty refresh
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
-            self?.exploreInteractor?.doContentLoading(request: .init())
+            self?.exploreInteractor?.doContentLoad(request: .init())
         }
     }
 }

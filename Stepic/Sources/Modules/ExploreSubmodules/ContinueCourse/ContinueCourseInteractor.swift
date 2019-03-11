@@ -10,9 +10,9 @@ import Foundation
 import PromiseKit
 
 protocol ContinueCourseInteractorProtocol {
-    func doLastCourseRefreshing(request: ContinueCourse.LoadLastCourse.Request)
-    func doContinueLastCourseAction(request: ContinueCourse.ContinueCourse.Request)
-    func doTooltipChecking(request: ContinueCourse.CheckTooltipAvailability.Request)
+    func doLastCourseRefresh(request: ContinueCourse.LastCourseLoad.Request)
+    func doContinueLastCourseAction(request: ContinueCourse.ContinueCourseAction.Request)
+    func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request)
 }
 
 final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
@@ -42,7 +42,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         self.dataBackUpdateService.delegate = self
     }
 
-    func doLastCourseRefreshing(request: ContinueCourse.LoadLastCourse.Request) {
+    func doLastCourseRefresh(request: ContinueCourse.LastCourseLoad.Request) {
         self.provider.fetchLastCourse().done { course in
             if let course = course {
                 self.currentCourse = course
@@ -55,7 +55,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         }
     }
 
-    func doContinueLastCourseAction(request: ContinueCourse.ContinueCourse.Request) {
+    func doContinueLastCourseAction(request: ContinueCourse.ContinueCourseAction.Request) {
         guard let currentCourse = self.currentCourse else {
             return
         }
@@ -77,7 +77,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         )
     }
 
-    func doTooltipChecking(request: ContinueCourse.CheckTooltipAvailability.Request) {
+    func doTooltipAvailabilityCheck(request: ContinueCourse.TooltipAvailabilityCheck.Request) {
         self.presenter.presentTooltip(
             response: .init(
                 shouldShowTooltip: !self.tooltipStorageManager.didShowOnHomeContinueLearning

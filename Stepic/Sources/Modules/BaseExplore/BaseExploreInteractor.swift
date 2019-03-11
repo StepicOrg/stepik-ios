@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol BaseExploreInteractorProtocol {
-    func doFullscreenCourseListLoading(request: BaseExplore.PresentFullscreenCourseListModule.Request)
-    func doOnlineModeSetting(request: BaseExplore.TryToSetOnline.Request)
+    func doFullscreenCourseListPresentation(request: BaseExplore.FullscreenCourseListModulePresentation.Request)
+    func doOnlineModeReset(request: BaseExplore.TryToSetOnline.Request)
 }
 
 class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProtocol {
@@ -29,7 +29,7 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
         self.networkReachabilityService = networkReachabilityService
     }
 
-    func doFullscreenCourseListLoading(request: BaseExplore.PresentFullscreenCourseListModule.Request) {
+    func doFullscreenCourseListPresentation(request: BaseExplore.FullscreenCourseListModulePresentation.Request) {
         self.presenter.presentFullscreenCourseList(
             response: .init(
                 presentationDescription: request.presentationDescription,
@@ -38,7 +38,7 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
         )
     }
 
-    func doOnlineModeSetting(request: BaseExplore.TryToSetOnline.Request) {
+    func doOnlineModeReset(request: BaseExplore.TryToSetOnline.Request) {
         if self.networkReachabilityService.isReachable {
             for module in request.modules {
                 module.setOnlineStatus()

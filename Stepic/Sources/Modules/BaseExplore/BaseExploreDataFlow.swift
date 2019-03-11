@@ -12,7 +12,7 @@ enum BaseExplore {
     // MARK: Use cases
 
     /// Present fullscreen module
-    enum PresentFullscreenCourseListModule {
+    enum FullscreenCourseListModulePresentation {
         struct Request {
             let presentationDescription: CourseList.PresentationDescription?
             let courseListType: CourseListType
@@ -30,7 +30,7 @@ enum BaseExplore {
     }
 
     /// Present course syllabus
-    enum PresentCourseSyllabus {
+    enum CourseSyllabusPresentation {
         struct Response {
             let course: Course
         }
@@ -41,7 +41,7 @@ enum BaseExplore {
     }
 
     /// Present course info
-    enum PresentCourseInfo {
+    enum CourseInfoPresentation {
         struct Response {
             let course: Course
         }
@@ -52,7 +52,7 @@ enum BaseExplore {
     }
 
     /// Present last step in course
-    enum PresentLastStep {
+    enum LastStepPresentation {
         struct Response {
             let course: Course
             let isAdaptive: Bool
@@ -66,7 +66,7 @@ enum BaseExplore {
         }
     }
 
-    enum PresentAuthorization {
+    enum AuthorizationPresentation {
         struct Response { }
 
         struct ViewModel { }

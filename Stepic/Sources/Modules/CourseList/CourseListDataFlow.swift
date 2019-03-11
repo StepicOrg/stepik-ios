@@ -31,7 +31,7 @@ enum CourseList {
     // MARK: Use cases
 
     /// Load and show courses for given course list
-    enum ShowCourses {
+    enum CoursesLoad {
         struct Request { }
 
         struct Response {
@@ -44,7 +44,7 @@ enum CourseList {
         }
     }
     /// Load and show next course page for given course list
-    enum LoadNextCourses {
+    enum NextCoursesLoad {
         struct Request { }
 
         struct Response {
@@ -56,18 +56,21 @@ enum CourseList {
             let state: PaginationState
         }
     }
+
     /// Click on primary button
     enum PrimaryCourseAction {
         struct Request {
             let viewModelUniqueIdentifier: UniqueIdentifierType
         }
     }
+
     /// Click on secondary button
     enum SecondaryCourseAction {
         struct Request {
             let viewModelUniqueIdentifier: UniqueIdentifierType
         }
     }
+
     /// Click on course
     enum MainCourseAction {
         struct Request {
@@ -76,7 +79,7 @@ enum CourseList {
     }
 
     /// Handle HUD
-    enum HandleWaitingState {
+    enum BlockingWaitingIndicatorUpdate {
         struct Response {
             let shouldDismiss: Bool
         }

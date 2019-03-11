@@ -9,10 +9,10 @@
 import UIKit
 
 protocol CourseInfoTabSyllabusViewControllerProtocol: class {
-    func displaySyllabus(viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel)
+    func displaySyllabus(viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel)
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
-    func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.UpdateSyllabusHeader.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.HandleWaitingState.ViewModel)
+    func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: class {
@@ -59,7 +59,7 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
 }
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerProtocol {
-    func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.UpdateSyllabusHeader.ViewModel) {
+    func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel) {
         guard let courseInfoTabSyllabusView = self.courseInfoTabSyllabusView else {
             return
         }
@@ -80,7 +80,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         self.courseInfoTabSyllabusView?.configure(headerViewModel: viewModel.data)
     }
 
-    func displaySyllabus(viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel) {
+    func displaySyllabus(viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel) {
         switch viewModel.state {
         case .loading:
             break
@@ -101,7 +101,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         }
     }
 
-    func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.HandleWaitingState.ViewModel) {
+    func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
@@ -112,7 +112,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerDelegate {
     func sectionWillDisplay(_ section: CourseInfoTabSyllabusSectionViewModel) {
-        self.interactor.doSectionFetching(
+        self.interactor.doSectionFetch(
             request: .init(uniqueIdentifier: section.uniqueIdentifier)
         )
     }

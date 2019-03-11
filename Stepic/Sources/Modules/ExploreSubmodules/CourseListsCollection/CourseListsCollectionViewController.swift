@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CourseListsCollectionViewControllerProtocol: class {
-    func displayCourseLists(viewModel: CourseListsCollection.ShowCourseLists.ViewModel)
+    func displayCourseLists(viewModel: CourseListsCollection.CourseListsLoad.ViewModel)
 }
 
 final class CourseListsCollectionViewController: UIViewController {
@@ -36,7 +36,7 @@ final class CourseListsCollectionViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateState(newState: self.state)
-        self.interactor.doCourseListsFetching(request: CourseListsCollection.ShowCourseLists.Request())
+        self.interactor.doCourseListsFetch(request: CourseListsCollection.CourseListsLoad.Request())
     }
 
     override func loadView() {
@@ -74,7 +74,7 @@ final class CourseListsCollectionViewController: UIViewController {
                         )
                     )
                 containerView.onShowAllButtonClick = { [weak self] in
-                    self?.interactor.doFullscreenCourseListLoading(
+                    self?.interactor.doFullscreenCourseListPresentation(
                         request: .init(
                             presentationDescription: .init(
                                 title: courseListViewModel.title,
@@ -92,7 +92,7 @@ final class CourseListsCollectionViewController: UIViewController {
 }
 
 extension CourseListsCollectionViewController: CourseListsCollectionViewControllerProtocol {
-    func displayCourseLists(viewModel: CourseListsCollection.ShowCourseLists.ViewModel) {
+    func displayCourseLists(viewModel: CourseListsCollection.CourseListsLoad.ViewModel) {
         self.childViewControllers.forEach { $0.removeFromParentViewController() }
         self.courseListsCollectionView?.removeAllBlocks()
         self.updateState(newState: viewModel.state)

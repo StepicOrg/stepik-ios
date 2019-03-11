@@ -10,12 +10,12 @@ import UIKit
 
 protocol BaseExploreViewControllerProtocol: class {
     func displayFullscreenCourseList(
-        viewModel: BaseExplore.PresentFullscreenCourseListModule.ViewModel
+        viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel
     )
-    func displayCourseInfo(viewModel: BaseExplore.PresentCourseInfo.ViewModel)
-    func displayCourseSyllabus(viewModel: BaseExplore.PresentCourseSyllabus.ViewModel)
-    func displayLastStep(viewModel: BaseExplore.PresentLastStep.ViewModel)
-    func displayAuthorization(viewModel: BaseExplore.PresentAuthorization.ViewModel)
+    func displayCourseInfo(viewModel: BaseExplore.CourseInfoPresentation.ViewModel)
+    func displayCourseSyllabus(viewModel: BaseExplore.CourseSyllabusPresentation.ViewModel)
+    func displayLastStep(viewModel: BaseExplore.LastStepPresentation.ViewModel)
+    func displayAuthorization(viewModel: BaseExplore.AuthorizationPresentation.ViewModel)
 }
 
 protocol SubmoduleType: UniqueIdentifiable {
@@ -88,7 +88,7 @@ class BaseExploreViewController: UIViewController {
     }
 
     final func tryToSetOnlineState(moduleInput: CourseListInputProtocol) {
-        self.interactor.doOnlineModeSetting(request: .init(modules: [moduleInput]))
+        self.interactor.doOnlineModeReset(request: .init(modules: [moduleInput]))
     }
 
     private func registerForNotifications() {
@@ -129,7 +129,7 @@ class BaseExploreViewController: UIViewController {
 
 extension BaseExploreViewController: BaseExploreViewControllerProtocol {
     func displayFullscreenCourseList(
-        viewModel: BaseExplore.PresentFullscreenCourseListModule.ViewModel
+        viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel
     ) {
         let assembly = FullscreenCourseListAssembly(
             presentationDescription: viewModel.presentationDescription,
@@ -139,19 +139,19 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayCourseInfo(viewModel: BaseExplore.PresentCourseInfo.ViewModel) {
+    func displayCourseInfo(viewModel: BaseExplore.CourseInfoPresentation.ViewModel) {
         let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .info)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayCourseSyllabus(viewModel: BaseExplore.PresentCourseSyllabus.ViewModel) {
+    func displayCourseSyllabus(viewModel: BaseExplore.CourseSyllabusPresentation.ViewModel) {
         let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .syllabus)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayLastStep(viewModel: BaseExplore.PresentLastStep.ViewModel) {
+    func displayLastStep(viewModel: BaseExplore.LastStepPresentation.ViewModel) {
         guard let navigationController = self.navigationController else {
             return
         }
@@ -163,7 +163,7 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
         )
     }
 
-    func displayAuthorization(viewModel: BaseExplore.PresentAuthorization.ViewModel) {
+    func displayAuthorization(viewModel: BaseExplore.AuthorizationPresentation.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }

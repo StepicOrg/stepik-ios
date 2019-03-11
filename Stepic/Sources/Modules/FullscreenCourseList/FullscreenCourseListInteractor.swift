@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol FullscreenCourseListInteractorProtocol: CourseListOutputProtocol {
-    func doOnlineModeSetting(request: FullscreenCourseList.TryToSetOnline.Request)
+    func doOnlineModeReset(request: FullscreenCourseList.OnlineModeReset.Request)
 }
 
 final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtocol {
@@ -25,7 +25,7 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
         self.networkReachabilityService = networkReachabilityService
     }
 
-    func doOnlineModeSetting(request: FullscreenCourseList.TryToSetOnline.Request) {
+    func doOnlineModeReset(request: FullscreenCourseList.OnlineModeReset.Request) {
         if self.networkReachabilityService.isReachable {
             request.module.setOnlineStatus()
         }

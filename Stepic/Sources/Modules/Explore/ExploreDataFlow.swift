@@ -26,7 +26,7 @@ enum Explore {
     // MARK: Use cases
 
     /// Content refresh
-    enum LoadContent {
+    enum ContentLoad {
         struct Request {
         }
 
@@ -38,8 +38,9 @@ enum Explore {
             let state: ViewControllerState
         }
     }
+
     /// Check for language switch visibility
-    enum CheckLanguageSwitchAvailability {
+    enum LanguageSwitchAvailabilityCheck {
         struct Request { }
 
         struct Response {
@@ -50,8 +51,9 @@ enum Explore {
             let isHidden: Bool
         }
     }
+
     /// Update stories visibility
-    enum UpdateStoriesVisibility {
+    enum StoriesVisibilityUpdate {
         @available(*, deprecated, message: "Should be refactored with VIP cycle as CheckLanguageSwitchAvailability")
         struct Response {
             let isHidden: Bool

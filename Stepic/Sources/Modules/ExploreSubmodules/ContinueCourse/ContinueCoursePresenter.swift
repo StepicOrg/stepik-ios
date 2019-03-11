@@ -9,24 +9,24 @@
 import UIKit
 
 protocol ContinueCoursePresenterProtocol {
-    func presentLastCourse(response: ContinueCourse.LoadLastCourse.Response)
-    func presentTooltip(response: ContinueCourse.CheckTooltipAvailability.Response)
+    func presentLastCourse(response: ContinueCourse.LastCourseLoad.Response)
+    func presentTooltip(response: ContinueCourse.TooltipAvailabilityCheck.Response)
 }
 
 final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
     weak var viewController: ContinueCourseViewControllerProtocol?
 
-    func presentLastCourse(response: ContinueCourse.LoadLastCourse.Response) {
-        var viewModel: ContinueCourse.LoadLastCourse.ViewModel
+    func presentLastCourse(response: ContinueCourse.LastCourseLoad.Response) {
+        var viewModel: ContinueCourse.LastCourseLoad.ViewModel
 
-        viewModel = ContinueCourse.LoadLastCourse.ViewModel(
+        viewModel = ContinueCourse.LastCourseLoad.ViewModel(
             state: .result(data: self.makeViewModel(course: response.result))
         )
 
         self.viewController?.displayLastCourse(viewModel: viewModel)
     }
 
-    func presentTooltip(response: ContinueCourse.CheckTooltipAvailability.Response) {
+    func presentTooltip(response: ContinueCourse.TooltipAvailabilityCheck.Response) {
         self.viewController?.displayTooltip(
             viewModel: .init(shouldShowTooltip: response.shouldShowTooltip)
         )

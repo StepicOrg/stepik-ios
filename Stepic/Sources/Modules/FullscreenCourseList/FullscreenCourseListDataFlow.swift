@@ -13,7 +13,7 @@ enum FullscreenCourseList {
     // MARK: Use cases
 
     /// Present course syllabus
-    enum PresentCourseSyllabus {
+    enum CourseSyllabusPresentation {
         struct Response {
             let course: Course
         }
@@ -22,8 +22,9 @@ enum FullscreenCourseList {
             let courseID: Course.IdType
         }
     }
+
     /// Present course info
-    enum PresentCourseInfo {
+    enum CourseInfoPresentation {
         struct Response {
             let course: Course
         }
@@ -32,8 +33,9 @@ enum FullscreenCourseList {
             let courseID: Course.IdType
         }
     }
+
     /// Present last step in course
-    enum PresentLastStep {
+    enum LastStepPresentation {
         struct Response {
             let course: Course
             let isAdaptive: Bool
@@ -46,8 +48,9 @@ enum FullscreenCourseList {
             let isAdaptive: Bool
         }
     }
+
     /// Try to set online status
-    enum TryToSetOnline {
+    enum OnlineModeReset {
         struct Request {
             let module: CourseListInputProtocol
         }

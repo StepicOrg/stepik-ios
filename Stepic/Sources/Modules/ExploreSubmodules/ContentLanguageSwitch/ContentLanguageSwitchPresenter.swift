@@ -9,14 +9,14 @@
 import UIKit
 
 protocol ContentLanguageSwitchPresenterProtocol {
-    func presentLanguages(response: ContentLanguageSwitch.ShowLanguages.Response)
-    func presentLanguageChange(response: ContentLanguageSwitch.SelectLanguage.Response)
+    func presentLanguages(response: ContentLanguageSwitch.LanguagesLoad.Response)
+    func presentLanguageChange(response: ContentLanguageSwitch.LanguageSelection.Response)
 }
 
 final class ContentLanguageSwitchPresenter: ContentLanguageSwitchPresenterProtocol {
     weak var viewController: ContentLanguageSwitchViewControllerProtocol?
 
-    func presentLanguages(response: ContentLanguageSwitch.ShowLanguages.Response) {
+    func presentLanguages(response: ContentLanguageSwitch.LanguagesLoad.Response) {
         var viewModels: [ContentLanguageSwitchViewModel] = []
         for (uid, language) in response.result.availableContentLanguages {
             let viewModel = ContentLanguageSwitchViewModel(
@@ -27,13 +27,13 @@ final class ContentLanguageSwitchPresenter: ContentLanguageSwitchPresenterProtoc
             viewModels.append(viewModel)
         }
 
-        let viewModel = ContentLanguageSwitch.ShowLanguages.ViewModel(
+        let viewModel = ContentLanguageSwitch.LanguagesLoad.ViewModel(
             state: ContentLanguageSwitch.ViewControllerState.result(data: viewModels)
         )
         viewController?.displayLanguages(viewModel: viewModel)
     }
 
-    func presentLanguageChange(response: ContentLanguageSwitch.SelectLanguage.Response) {
+    func presentLanguageChange(response: ContentLanguageSwitch.LanguageSelection.Response) {
         var viewModels: [ContentLanguageSwitchViewModel] = []
         for (uid, language) in response.result.availableContentLanguages {
             let viewModel = ContentLanguageSwitchViewModel(
@@ -44,7 +44,7 @@ final class ContentLanguageSwitchPresenter: ContentLanguageSwitchPresenterProtoc
             viewModels.append(viewModel)
         }
 
-        let viewModel = ContentLanguageSwitch.SelectLanguage.ViewModel(
+        let viewModel = ContentLanguageSwitch.LanguageSelection.ViewModel(
             state: ContentLanguageSwitch.ViewControllerState.result(data: viewModels)
         )
         viewController?.displayLanguageChange(viewModel: viewModel)

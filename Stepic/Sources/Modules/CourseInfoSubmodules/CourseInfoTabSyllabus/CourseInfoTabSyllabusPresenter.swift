@@ -9,10 +9,10 @@
 import UIKit
 
 protocol CourseInfoTabSyllabusPresenterProtocol {
-    func presentCourseSyllabus(response: CourseInfoTabSyllabus.ShowSyllabus.Response)
+    func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response)
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
-    func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.UpdateSyllabusHeader.Response)
-    func presentWaitingState(response: CourseInfoTabSyllabus.HandleWaitingState.Response)
+    func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
+    func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -21,8 +21,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     private var cachedSectionViewModels: [Section.IdType: CourseInfoTabSyllabusSectionViewModel] = [:]
     private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
 
-    func presentCourseSyllabus(response: CourseInfoTabSyllabus.ShowSyllabus.Response) {
-        var viewModel: CourseInfoTabSyllabus.ShowSyllabus.ViewModel
+    func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response) {
+        var viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel
 
         switch response.result {
         case let .success(result):
@@ -75,9 +75,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 )
             }
 
-            viewModel = CourseInfoTabSyllabus.ShowSyllabus.ViewModel(state: .result(data: sectionViewModels))
+            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .result(data: sectionViewModels))
         default:
-            viewModel = CourseInfoTabSyllabus.ShowSyllabus.ViewModel(state: .loading)
+            viewModel = CourseInfoTabSyllabus.SyllabusLoad.ViewModel(state: .loading)
         }
 
         // TODO: Refactor
@@ -108,7 +108,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     }
 
     func presentCourseSyllabusHeader(
-        response: CourseInfoTabSyllabus.UpdateSyllabusHeader.Response
+        response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response
     ) {
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
@@ -118,7 +118,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         self.viewController?.displaySyllabusHeader(viewModel: .init(data: viewModel))
     }
 
-    func presentWaitingState(response: CourseInfoTabSyllabus.HandleWaitingState.Response) {
+    func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 

@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol ExploreInteractorProtocol: BaseExploreInteractorProtocol {
-    func doContentLoading(request: Explore.LoadContent.Request)
-    func doLanguageSwitchBlockLoading(request: Explore.CheckLanguageSwitchAvailability.Request)
+    func doContentLoad(request: Explore.ContentLoad.Request)
+    func doLanguageSwitchBlockLoad(request: Explore.LanguageSwitchAvailabilityCheck.Request)
 }
 
 final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol {
@@ -32,13 +32,13 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         )
     }
 
-    func doContentLoading(request: Explore.LoadContent.Request) {
+    func doContentLoad(request: Explore.ContentLoad.Request) {
         self.explorePresenter?.presentContent(
             response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
         )
     }
 
-    func doLanguageSwitchBlockLoading(request: Explore.CheckLanguageSwitchAvailability.Request) {
+    func doLanguageSwitchBlockLoad(request: Explore.LanguageSwitchAvailabilityCheck.Request) {
         self.explorePresenter?.presentLanguageSwitchBlock(
             response: .init(
                 isHidden: !self.contentLanguageSwitchAvailabilityService
@@ -57,7 +57,7 @@ extension ExploreInteractor: StoriesOutputProtocol {
 
 extension ExploreInteractor: TagsOutputProtocol {
     func presentCourseList(type: TagCourseListType) {
-        self.doFullscreenCourseListLoading(
+        self.doFullscreenCourseListPresentation(
             request: .init(
                 presentationDescription: nil,
                 courseListType: type
@@ -71,7 +71,7 @@ extension ExploreInteractor: CourseListCollectionOutputProtocol {
         presentationDescription: CourseList.PresentationDescription,
         type: CollectionCourseListType
     ) {
-        self.doFullscreenCourseListLoading(
+        self.doFullscreenCourseListPresentation(
             request: .init(
                 presentationDescription: presentationDescription,
                 courseListType: type

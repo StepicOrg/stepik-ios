@@ -9,9 +9,9 @@
 import UIKit
 
 protocol FullscreenCourseListPresenterProtocol {
-    func presentCourseInfo(response: FullscreenCourseList.PresentCourseInfo.Response)
-    func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response)
-    func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response)
+    func presentCourseInfo(response: FullscreenCourseList.CourseInfoPresentation.Response)
+    func presentCourseSyllabus(response: FullscreenCourseList.CourseSyllabusPresentation.Response)
+    func presentLastStep(response: FullscreenCourseList.LastStepPresentation.Response)
     func presentAuthorization(response: FullscreenCourseList.PresentAuthorization.Response)
     func presentPlaceholder(response: FullscreenCourseList.PresentPlaceholder.Response)
 }
@@ -19,15 +19,15 @@ protocol FullscreenCourseListPresenterProtocol {
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
     weak var viewController: FullscreenCourseListViewControllerProtocol?
 
-    func presentCourseInfo(response: FullscreenCourseList.PresentCourseInfo.Response) {
+    func presentCourseInfo(response: FullscreenCourseList.CourseInfoPresentation.Response) {
         self.viewController?.displayCourseInfo(viewModel: .init(courseID: response.course.id))
     }
 
-    func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response) {
+    func presentCourseSyllabus(response: FullscreenCourseList.CourseSyllabusPresentation.Response) {
         self.viewController?.displayCourseSyllabus(viewModel: .init(courseID: response.course.id))
     }
 
-    func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response) {
+    func presentLastStep(response: FullscreenCourseList.LastStepPresentation.Response) {
         self.viewController?.displayLastStep(
             viewModel: .init(
                 course: response.course,

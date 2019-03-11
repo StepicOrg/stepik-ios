@@ -10,11 +10,11 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabSyllabusInteractorProtocol {
-    func doSectionsFetching(request: CourseInfoTabSyllabus.ShowSyllabus.Request)
-    func doSectionFetching(request: CourseInfoTabSyllabus.ShowSyllabusSection.Request)
+    func doSectionsFetch(request: CourseInfoTabSyllabus.SyllabusLoad.Request)
+    func doSectionFetch(request: CourseInfoTabSyllabus.SyllabusSectionLoad.Request)
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request)
-    func doUnitSelection(request: CourseInfoTabSyllabus.UnitSelect.Request)
-    func doPersonalDeadlinesAction(request: CourseInfoTabSyllabus.PersonalDeadlinesButtonInteraction.Request)
+    func doUnitSelection(request: CourseInfoTabSyllabus.UnitSelection.Request)
+    func doPersonalDeadlinesAction(request: CourseInfoTabSyllabus.PersonalDeadlinesButtonAction.Request)
 }
 
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
@@ -88,7 +88,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     // MARK: Public methods
 
-    func doSectionsFetching(request: CourseInfoTabSyllabus.ShowSyllabus.Request) {
+    func doSectionsFetch(request: CourseInfoTabSyllabus.SyllabusLoad.Request) {
         guard let course = self.currentCourse else {
             return
         }
@@ -126,7 +126,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
-    func doSectionFetching(request: CourseInfoTabSyllabus.ShowSyllabusSection.Request) {
+    func doSectionFetch(request: CourseInfoTabSyllabus.SyllabusSectionLoad.Request) {
         self.unitsFetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -219,7 +219,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
-    func doUnitSelection(request: CourseInfoTabSyllabus.UnitSelect.Request) {
+    func doUnitSelection(request: CourseInfoTabSyllabus.UnitSelection.Request) {
         guard let unit = self.currentUnits[request.uniqueIdentifier] as? Unit else {
             return
         }
@@ -238,7 +238,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
-    func doPersonalDeadlinesAction(request: CourseInfoTabSyllabus.PersonalDeadlinesButtonInteraction.Request) {
+    func doPersonalDeadlinesAction(request: CourseInfoTabSyllabus.PersonalDeadlinesButtonAction.Request) {
         guard let course = self.currentCourse else {
             return
         }
@@ -300,7 +300,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private func fetchSyllabusSection(
         section: Section
-    ) -> Promise<CourseInfoTabSyllabus.ShowSyllabus.Response> {
+    ) -> Promise<CourseInfoTabSyllabus.SyllabusLoad.Response> {
         return Promise { seal in
             self.provider.fetchUnitsWithLessons(
                 for: section,
@@ -320,7 +320,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     private func fetchSyllabusInAppropriateMode(
         course: Course,
         isOnline: Bool
-    ) -> Promise<CourseInfoTabSyllabus.ShowSyllabus.Response> {
+    ) -> Promise<CourseInfoTabSyllabus.SyllabusLoad.Response> {
         return Promise { seal in
             // Load sections & progresses
             self.provider.fetchSections(for: course, shouldUseNetwork: isOnline).then {
@@ -448,7 +448,7 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
         print("course info tab syllabus interactor: updated from parent module, isOnline = \(isOnline)")
         self.currentCourse = course
         self.isOnline = isOnline
-        self.doSectionsFetching(request: .init())
+        self.doSectionsFetch(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
             AmplitudeAnalyticsEvents.Sections.opened(

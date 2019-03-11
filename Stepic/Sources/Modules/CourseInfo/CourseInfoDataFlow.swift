@@ -29,7 +29,7 @@ enum CourseInfo {
     // MARK: Use cases
 
     /// Load & show info about course
-    enum ShowCourse {
+    enum CourseLoad {
         struct Request { }
 
         struct Response {
@@ -42,14 +42,14 @@ enum CourseInfo {
     }
 
     /// Register submodules
-    enum RegisterSubmodule {
+    enum SubmoduleRegistration {
         struct Request {
             var submodules: [CourseInfoSubmoduleProtocol]
         }
     }
 
     /// Show lesson
-    enum ShowLesson {
+    enum LessonPresentation {
         struct Response {
             let lesson: Lesson
             let unitID: Unit.IdType
@@ -63,7 +63,7 @@ enum CourseInfo {
     }
 
     /// Show personal deadlines create / edit & delete action
-    enum PersonalDeadlinesSettings {
+    enum PersonalDeadlinesSettingsPresentation {
         enum Action {
             case create
             case edit
@@ -85,7 +85,7 @@ enum CourseInfo {
     }
 
     /// Present exam in web
-    enum ShowExamLesson {
+    enum ExamLessonPresentation {
         struct Response {
             let urlPath: String
         }
@@ -96,7 +96,7 @@ enum CourseInfo {
     }
 
     /// Share course
-    enum ShareCourse {
+    enum CourseShareAction {
         struct Request { }
 
         struct Response {
@@ -109,7 +109,7 @@ enum CourseInfo {
     }
 
     /// Present last step in course
-    enum PresentLastStep {
+    enum LastStepPresentation {
         struct Response {
             let course: Course
             let isAdaptive: Bool
@@ -124,14 +124,14 @@ enum CourseInfo {
     }
 
     /// Handle submodule controller appearance
-    enum SubmoduleAppearanceHandling {
+    enum SubmoduleAppearanceUpdate {
         struct Request {
             let submoduleIndex: Int
         }
     }
 
     /// Handle HUD
-    enum HandleWaitingState {
+    enum BlockingWaitingIndicatorUpdate {
         struct Response {
             let shouldDismiss: Bool
         }
@@ -142,7 +142,7 @@ enum CourseInfo {
     }
 
     /// Drop course
-    enum UnenrollCourse {
+    enum CourseUnenrollmentAction {
         struct Request { }
     }
 
@@ -162,7 +162,7 @@ enum CourseInfo {
     }
 
     /// Present authorization controller
-    enum PresentAuthorization {
+    enum AuthorizationPresentation {
         struct Response { }
 
         struct ViewModel { }

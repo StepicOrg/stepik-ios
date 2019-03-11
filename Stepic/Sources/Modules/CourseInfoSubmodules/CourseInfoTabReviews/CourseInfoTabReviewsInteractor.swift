@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabReviewsInteractorProtocol: class {
-    func doCourseReviewsFetching(request: CourseInfoTabReviews.ShowReviews.Request)
-    func doNextCourseReviewsFetching(request: CourseInfoTabReviews.LoadNextReviews.Request)
+    func doCourseReviewsFetch(request: CourseInfoTabReviews.ReviewsLoad.Request)
+    func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request)
 }
 
 final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtocol {
@@ -37,7 +37,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         self.provider = provider
     }
 
-    func doCourseReviewsFetching(request: CourseInfoTabReviews.ShowReviews.Request) {
+    func doCourseReviewsFetch(request: CourseInfoTabReviews.ReviewsLoad.Request) {
         guard let course = self.currentCourse else {
             return
         }
@@ -69,7 +69,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         }
     }
 
-    func doNextCourseReviewsFetching(request: CourseInfoTabReviews.LoadNextReviews.Request) {
+    func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request) {
         guard self.isOnline,
               self.paginationState.hasNext,
               let course = self.currentCourse else {
@@ -89,7 +89,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             strongSelf.provider.fetchRemote(course: course, page: nextPageIndex).done { reviews, meta in
                 strongSelf.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
-                let response = CourseInfoTabReviews.LoadNextReviews.Response(
+                let response = CourseInfoTabReviews.NextReviewsLoad.Response(
                     reviews: sortedReviews,
                     hasNextPage: meta.hasNext
                 )
@@ -107,7 +107,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     private func fetchReviewsInAppropriateMode(
         course: Course,
         isOnline: Bool
-    ) -> Promise<CourseInfoTabReviews.ShowReviews.Response> {
+    ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Response> {
         guard let course = self.currentCourse else {
             return Promise(error: Error.undefinedCourse)
         }
@@ -119,7 +119,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                     : self.provider.fetchCached(course: course)
             }.done { reviews, meta in
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
-                let response = CourseInfoTabReviews.ShowReviews.Response(
+                let response = CourseInfoTabReviews.ReviewsLoad.Response(
                     reviews: sortedReviews,
                     hasNextPage: meta.hasNext
                 )
@@ -153,7 +153,7 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
         self.currentCourse = course
         self.isOnline = isOnline
 
-        self.doCourseReviewsFetching(request: .init())
+        self.doCourseReviewsFetch(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
             AmplitudeAnalyticsEvents.CourseReviews.opened(

@@ -10,9 +10,9 @@ import UIKit
 import PromiseKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
-    func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel)
-    func displayContent(viewModel: Home.LoadContent.ViewModel)
-    func displayModuleErrorState(viewModel: Home.SetErrorStateForCourseList.ViewModel)
+    func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel)
+    func displayContent(viewModel: Home.ContentLoad.ViewModel)
+    func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel)
 }
 
 final class HomeViewController: BaseExploreViewController {
@@ -51,12 +51,12 @@ final class HomeViewController: BaseExploreViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.homeInteractor?.doContentLoading(request: .init())
+        self.homeInteractor?.doContentLoad(request: .init())
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.homeInteractor?.doStreakActivityLoading(request: .init())
+        self.homeInteractor?.doStreakActivityLoad(request: .init())
 
         // FIXME: analytics dependency
         AmplitudeAnalyticsEvents.Home.opened.send()
@@ -65,11 +65,11 @@ final class HomeViewController: BaseExploreViewController {
     // MARK: - Display submodules
 
     override func refreshContentAfterLanguageChange() {
-        self.homeInteractor?.doContentLoading(request: .init())
+        self.homeInteractor?.doContentLoad(request: .init())
     }
 
     override func refreshContentAfterLoginAndLogout() {
-        self.homeInteractor?.doContentLoading(request: .init())
+        self.homeInteractor?.doContentLoad(request: .init())
     }
 
     // MARK: - Streak activity
@@ -135,7 +135,7 @@ final class HomeViewController: BaseExploreViewController {
     // MARK: - Fullscreen displaying
 
     private func displayFullscreenEnrolledCourseList() {
-        self.interactor.doFullscreenCourseListLoading(
+        self.interactor.doFullscreenCourseListPresentation(
             request: .init(
                 presentationDescription: nil,
                 courseListType: EnrolledCourseListType()
@@ -144,7 +144,7 @@ final class HomeViewController: BaseExploreViewController {
     }
 
     private func displayFullscreenPopularCourseList(contentLanguage: ContentLanguage) {
-        self.interactor.doFullscreenCourseListLoading(
+        self.interactor.doFullscreenCourseListPresentation(
             request: .init(
                 presentationDescription: nil,
                 courseListType: PopularCourseListType(language: contentLanguage)
@@ -342,7 +342,7 @@ final class HomeViewController: BaseExploreViewController {
 }
 
 extension HomeViewController: HomeViewControllerProtocol {
-    func displayModuleErrorState(viewModel: Home.SetErrorStateForCourseList.ViewModel) {
+    func displayModuleErrorState(viewModel: Home.CourseListStateUpdate.ViewModel) {
         switch viewModel.module {
         case .enrolledCourses:
             switch viewModel.result {
@@ -368,7 +368,7 @@ extension HomeViewController: HomeViewControllerProtocol {
         }
     }
 
-    func displayStreakInfo(viewModel: Home.LoadStreak.ViewModel) {
+    func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel) {
         switch viewModel.result {
         case .hidden:
             self.refreshStreakActivity(state: .hidden)
@@ -377,7 +377,7 @@ extension HomeViewController: HomeViewControllerProtocol {
         }
     }
 
-    func displayContent(viewModel: Home.LoadContent.ViewModel) {
+    func displayContent(viewModel: Home.ContentLoad.ViewModel) {
         self.exploreView?.endRefreshing()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
@@ -404,7 +404,7 @@ extension HomeViewController: BaseExploreViewDelegate {
     func refreshControlDidRefresh() {
         // Small delay for pretty refresh
         DispatchQueue.main.asyncAfter(deadline: .now() + Animation.startRefreshDelay) { [weak self] in
-            self?.homeInteractor?.doContentLoading(request: .init())
+            self?.homeInteractor?.doContentLoad(request: .init())
         }
     }
 }

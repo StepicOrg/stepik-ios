@@ -19,7 +19,7 @@ enum CourseInfoTabReviews {
     // MARK: Use cases
 
     /// Show reviews
-    enum ShowReviews {
+    enum ReviewsLoad {
         struct Request { }
 
         struct Response {
@@ -33,7 +33,7 @@ enum CourseInfoTabReviews {
     }
 
     /// Load next part reviews
-    enum LoadNextReviews {
+    enum NextReviewsLoad {
         struct Request { }
 
         struct Response {

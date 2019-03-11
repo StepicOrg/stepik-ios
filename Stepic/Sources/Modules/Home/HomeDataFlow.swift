@@ -25,7 +25,7 @@ enum Home {
     // MARK: Use cases
 
     /// Content refresh (we should get language and authorization state)
-    enum LoadContent {
+    enum ContentLoad {
         struct Request { }
 
         struct Response {
@@ -38,8 +38,9 @@ enum Home {
             let contentLanguage: ContentLanguage
         }
     }
+
     /// Show streak activity
-    enum LoadStreak {
+    enum StreakLoad {
         struct Request { }
 
         struct Response {
@@ -60,8 +61,9 @@ enum Home {
             let result: Result
         }
     }
+
     // Refresh course block
-    enum SetErrorStateForCourseList {
+    enum CourseListStateUpdate {
         enum State {
             case empty
             case error

@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol HomeInteractorProtocol: BaseExploreInteractorProtocol {
-    func doStreakActivityLoading(request: Home.LoadStreak.Request)
-    func doContentLoading(request: Home.LoadContent.Request)
+    func doStreakActivityLoad(request: Home.StreakLoad.Request)
+    func doContentLoad(request: Home.ContentLoad.Request)
 }
 
 final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
@@ -36,7 +36,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         )
     }
 
-    func doStreakActivityLoading(request: Home.LoadStreak.Request) {
+    func doStreakActivityLoad(request: Home.StreakLoad.Request) {
         guard let user = self.userAccountService.currentUser else {
             self.homePresenter?.presentStreakActivity(response: .init(result: .hidden))
             return
@@ -56,7 +56,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         }
     }
 
-    func doContentLoading(request: Home.LoadContent.Request) {
+    func doContentLoad(request: Home.ContentLoad.Request) {
         self.homePresenter?.presentContent(
             response: .init(
                 isAuthorized: self.userAccountService.isAuthorized,

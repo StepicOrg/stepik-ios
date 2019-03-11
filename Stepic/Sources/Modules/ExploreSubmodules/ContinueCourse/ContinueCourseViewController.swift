@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ContinueCourseViewControllerProtocol: class {
-    func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel)
-    func displayTooltip(viewModel: ContinueCourse.CheckTooltipAvailability.ViewModel)
+    func displayLastCourse(viewModel: ContinueCourse.LastCourseLoad.ViewModel)
+    func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel)
 }
 
 final class ContinueCourseViewController: UIViewController {
@@ -52,7 +52,7 @@ final class ContinueCourseViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateState()
-        self.interactor.doLastCourseRefreshing(request: .init())
+        self.interactor.doLastCourseRefresh(request: .init())
     }
 
     private func updateState() {
@@ -65,16 +65,16 @@ final class ContinueCourseViewController: UIViewController {
 }
 
 extension ContinueCourseViewController: ContinueCourseViewControllerProtocol {
-    func displayLastCourse(viewModel: ContinueCourse.LoadLastCourse.ViewModel) {
+    func displayLastCourse(viewModel: ContinueCourse.LastCourseLoad.ViewModel) {
         if case .result(let result) = viewModel.state {
             self.continueCourseView?.configure(viewModel: result)
-            self.interactor.doTooltipChecking(request: .init())
+            self.interactor.doTooltipAvailabilityCheck(request: .init())
         }
 
         self.state = viewModel.state
     }
 
-    func displayTooltip(viewModel: ContinueCourse.CheckTooltipAvailability.ViewModel) {
+    func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel) {
         guard let continueCourseView = self.continueCourseView else {
             return
         }

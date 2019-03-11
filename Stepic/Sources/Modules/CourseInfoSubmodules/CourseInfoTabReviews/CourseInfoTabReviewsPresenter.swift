@@ -9,15 +9,15 @@
 import Foundation
 
 protocol CourseInfoTabReviewsPresenterProtocol: class {
-    func presentCourseReviews(response: CourseInfoTabReviews.ShowReviews.Response)
-    func presentNextCourseReviews(response: CourseInfoTabReviews.LoadNextReviews.Response)
+    func presentCourseReviews(response: CourseInfoTabReviews.ReviewsLoad.Response)
+    func presentNextCourseReviews(response: CourseInfoTabReviews.NextReviewsLoad.Response)
 }
 
 final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol {
     weak var viewController: CourseInfoTabReviewsViewControllerProtocol?
 
-    func presentCourseReviews(response: CourseInfoTabReviews.ShowReviews.Response) {
-        let viewModel: CourseInfoTabReviews.ShowReviews.ViewModel = .init(
+    func presentCourseReviews(response: CourseInfoTabReviews.ReviewsLoad.Response) {
+        let viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel = .init(
             state: CourseInfoTabReviews.ViewControllerState.result(
                 data: .init(
                     reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
@@ -28,8 +28,8 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         self.viewController?.displayCourseReviews(viewModel: viewModel)
     }
 
-    func presentNextCourseReviews(response: CourseInfoTabReviews.LoadNextReviews.Response) {
-        let viewModel: CourseInfoTabReviews.LoadNextReviews.ViewModel = .init(
+    func presentNextCourseReviews(response: CourseInfoTabReviews.NextReviewsLoad.Response) {
+        let viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel = .init(
             state: CourseInfoTabReviews.PaginationState.result(
                 data: .init(
                     reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },

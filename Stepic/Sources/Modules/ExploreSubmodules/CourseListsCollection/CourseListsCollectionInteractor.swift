@@ -10,9 +10,9 @@ import Foundation
 import PromiseKit
 
 protocol CourseListsCollectionInteractorProtocol: class {
-    func doCourseListsFetching(request: CourseListsCollection.ShowCourseLists.Request)
-    func doFullscreenCourseListLoading(
-        request: CourseListsCollection.PresentFullscreenCourseListModule.Request
+    func doCourseListsFetch(request: CourseListsCollection.CourseListsLoad.Request)
+    func doFullscreenCourseListPresentation(
+        request: CourseListsCollection.FullscreenCourseListModulePresentation.Request
     )
 }
 
@@ -30,32 +30,32 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
         self.provider = provider
     }
 
-    func doCourseListsFetching(request: CourseListsCollection.ShowCourseLists.Request) {
+    func doCourseListsFetch(request: CourseListsCollection.CourseListsLoad.Request) {
         self.provider.fetchCachedCourseLists().then {
             cachedCourseLists -> Promise<[CourseListModel]> in
             // Pass cached data to presenter and start fetching from remote
             let response = Result<[CourseListModel]>.success(cachedCourseLists)
             self.presenter.presentCourses(
-                response: CourseListsCollection.ShowCourseLists.Response(result: response)
+                response: CourseListsCollection.CourseListsLoad.Response(result: response)
             )
 
             return self.provider.fetchRemoteCourseLists()
         }.done { remoteCourseLists in
             let response = Result<[CourseListModel]>.success(remoteCourseLists)
             self.presenter.presentCourses(
-                response: CourseListsCollection.ShowCourseLists.Response(result: response)
+                response: CourseListsCollection.CourseListsLoad.Response(result: response)
             )
 
             self.presenter.presentCourses(
-                response: CourseListsCollection.ShowCourseLists.Response(result: response)
+                response: CourseListsCollection.CourseListsLoad.Response(result: response)
             )
         }.catch { _ in
 
         }
     }
 
-    func doFullscreenCourseListLoading(
-        request: CourseListsCollection.PresentFullscreenCourseListModule.Request
+    func doFullscreenCourseListPresentation(
+        request: CourseListsCollection.FullscreenCourseListModulePresentation.Request
     ) {
         guard let collectionCourseListType = request.courseListType
             as? CollectionCourseListType else {

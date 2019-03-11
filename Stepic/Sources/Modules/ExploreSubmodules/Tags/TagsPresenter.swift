@@ -9,13 +9,13 @@
 import UIKit
 
 protocol TagsPresenterProtocol {
-    func presentTags(response: Tags.ShowTags.Response)
+    func presentTags(response: Tags.TagsLoad.Response)
 }
 
 final class TagsPresenter: TagsPresenterProtocol {
     weak var viewController: TagsViewControllerProtocol?
 
-    func presentTags(response: Tags.ShowTags.Response) {
+    func presentTags(response: Tags.TagsLoad.Response) {
         let state: Tags.ViewControllerState = {
             switch response.result {
             case .success(let tags):
@@ -33,7 +33,7 @@ final class TagsPresenter: TagsPresenterProtocol {
             }
         }()
 
-        let viewModel = Tags.ShowTags.ViewModel(state: state)
+        let viewModel = Tags.TagsLoad.ViewModel(state: state)
 
         viewController?.displayTags(viewModel: viewModel)
     }

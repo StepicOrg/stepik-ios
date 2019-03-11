@@ -11,7 +11,7 @@ import AVFoundation
 import AVKit
 
 protocol CourseInfoTabInfoViewControllerProtocol: class {
-    func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel)
+    func displayCourseInfo(viewModel: CourseInfoTabInfo.InfoLoad.ViewModel)
 }
 
 final class CourseInfoTabInfoViewController: UIViewController {
@@ -79,7 +79,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateState()
-        self.interactor.doCourseInfoRefreshing(request: .init())
+        self.interactor.doCourseInfoRefresh(request: .init())
     }
 
     // MARK: Private helpers
@@ -96,7 +96,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
 // MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtocol -
 
 extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewControllerProtocol {
-    func displayCourseInfo(viewModel: CourseInfoTabInfo.ShowInfo.ViewModel) {
+    func displayCourseInfo(viewModel: CourseInfoTabInfo.InfoLoad.ViewModel) {
         self.display(newState: viewModel.state)
     }
 

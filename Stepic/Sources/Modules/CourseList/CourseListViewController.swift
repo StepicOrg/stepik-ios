@@ -10,9 +10,9 @@ import UIKit
 import SVProgressHUD
 
 protocol CourseListViewControllerProtocol: class {
-    func displayCourses(viewModel: CourseList.ShowCourses.ViewModel)
-    func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: CourseList.HandleWaitingState.ViewModel)
+    func displayCourses(viewModel: CourseList.CoursesLoad.ViewModel)
+    func displayNextCourses(viewModel: CourseList.NextCoursesLoad.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: CourseList.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 protocol CourseListViewControllerDelegate: class {
@@ -62,7 +62,7 @@ class CourseListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateState(newState: self.state)
-        self.interactor.doCoursesFetching(request: .init())
+        self.interactor.doCoursesFetch(request: .init())
     }
 
     func updatePagination(hasNextPage: Bool, hasError: Bool) {
@@ -84,7 +84,7 @@ class CourseListViewController: UIViewController {
 }
 
 extension CourseListViewController: CourseListViewControllerProtocol {
-    func displayCourses(viewModel: CourseList.ShowCourses.ViewModel) {
+    func displayCourses(viewModel: CourseList.CoursesLoad.ViewModel) {
         if case .result(let data) = viewModel.state {
             self.listDataSource.viewModels = data.courses
             self.listDelegate.viewModels = data.courses
@@ -93,7 +93,7 @@ extension CourseListViewController: CourseListViewControllerProtocol {
         }
     }
 
-    func displayNextCourses(viewModel: CourseList.LoadNextCourses.ViewModel) {
+    func displayNextCourses(viewModel: CourseList.NextCoursesLoad.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             self.listDataSource.viewModels.append(contentsOf: data.courses)
@@ -106,7 +106,7 @@ extension CourseListViewController: CourseListViewControllerProtocol {
         }
     }
 
-    func displayBlockingLoadingIndicator(viewModel: CourseList.HandleWaitingState.ViewModel) {
+    func displayBlockingLoadingIndicator(viewModel: CourseList.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
@@ -122,7 +122,7 @@ extension CourseListViewController: CourseListViewDelegate {
         }
 
         self.canTriggerPagination = false
-        self.interactor.doNextCoursesFetching(request: CourseList.LoadNextCourses.Request())
+        self.interactor.doNextCoursesFetch(request: CourseList.NextCoursesLoad.Request())
     }
 }
 
@@ -224,7 +224,7 @@ final class VerticalCourseListViewController: CourseListViewController {
 
         let paginationView = PaginationView()
         paginationView.onRefreshButtonClick = { [weak self] in
-            self?.interactor.doNextCoursesFetching(request: .init())
+            self?.interactor.doNextCoursesFetch(request: .init())
         }
         view.paginationView = paginationView
 

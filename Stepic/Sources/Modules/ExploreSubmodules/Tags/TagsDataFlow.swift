@@ -21,7 +21,7 @@ enum Tags {
     // MARK: Use cases
 
     /// Show tag list
-    enum ShowTags {
+    enum TagsLoad {
         struct Request { }
 
         struct Response {
@@ -32,8 +32,9 @@ enum Tags {
             let state: ViewControllerState
         }
     }
-    /// Present collection of tag
-    enum PresentCollection {
+
+    /// Present collection of tag (after click)
+    enum TagCollectionPresentation {
         struct Request {
             let viewModelUniqueIdentifier: UniqueIdentifierType
         }

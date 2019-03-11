@@ -9,14 +9,14 @@
 import UIKit
 
 protocol CourseInfoTabInfoPresenterProtocol {
-    func presentCourseInfo(response: CourseInfoTabInfo.ShowInfo.Response)
+    func presentCourseInfo(response: CourseInfoTabInfo.InfoLoad.Response)
 }
 
 final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     weak var viewController: CourseInfoTabInfoViewControllerProtocol?
 
-    func presentCourseInfo(response: CourseInfoTabInfo.ShowInfo.Response) {
-        var viewModel: CourseInfoTabInfo.ShowInfo.ViewModel
+    func presentCourseInfo(response: CourseInfoTabInfo.InfoLoad.Response) {
+        var viewModel: CourseInfoTabInfo.InfoLoad.ViewModel
 
         if let course = response.course {
             viewModel = .init(state: .result(data: self.makeViewModel(course: course)))

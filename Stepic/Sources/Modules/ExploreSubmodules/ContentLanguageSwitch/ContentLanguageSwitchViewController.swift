@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ContentLanguageSwitchViewControllerProtocol: class {
-    func displayLanguages(viewModel: ContentLanguageSwitch.ShowLanguages.ViewModel)
-    func displayLanguageChange(viewModel: ContentLanguageSwitch.SelectLanguage.ViewModel)
+    func displayLanguages(viewModel: ContentLanguageSwitch.LanguagesLoad.ViewModel)
+    func displayLanguageChange(viewModel: ContentLanguageSwitch.LanguageSelection.ViewModel)
 }
 
 final class ContentLanguageSwitchViewController: UIViewController {
@@ -50,13 +50,13 @@ final class ContentLanguageSwitchViewController: UIViewController {
 }
 
 extension ContentLanguageSwitchViewController: ContentLanguageSwitchViewControllerProtocol {
-    func displayLanguages(viewModel: ContentLanguageSwitch.ShowLanguages.ViewModel) {
+    func displayLanguages(viewModel: ContentLanguageSwitch.LanguagesLoad.ViewModel) {
         if case let ContentLanguageSwitch.ViewControllerState.result(data) = viewModel.state {
             self.contentLanguageSwitchView?.configure(viewModels: data)
         }
     }
 
-    func displayLanguageChange(viewModel: ContentLanguageSwitch.SelectLanguage.ViewModel) {
+    func displayLanguageChange(viewModel: ContentLanguageSwitch.LanguageSelection.ViewModel) {
         // We shouldn't do anything
     }
 }

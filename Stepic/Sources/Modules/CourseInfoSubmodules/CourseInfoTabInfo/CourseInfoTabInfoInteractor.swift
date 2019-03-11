@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabInfoInteractorProtocol {
-    func doCourseInfoRefreshing(request: CourseInfoTabInfo.ShowInfo.Request)
+    func doCourseInfoRefresh(request: CourseInfoTabInfo.InfoLoad.Request)
 }
 
 final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
@@ -31,7 +31,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
     // MARK: Get course info
 
-    func doCourseInfoRefreshing(request: CourseInfoTabInfo.ShowInfo.Request) {
+    func doCourseInfoRefresh(request: CourseInfoTabInfo.InfoLoad.Request) {
         guard let course = self.course else {
             return
         }
@@ -64,7 +64,7 @@ extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
 
     func update(with course: Course, isOnline: Bool) {
         self.course = course
-        self.doCourseInfoRefreshing(request: .init())
+        self.doCourseInfoRefresh(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
             AmplitudeAnalyticsEvents.CoursePreview.opened(

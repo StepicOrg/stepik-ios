@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TagsViewControllerProtocol: class {
-    func displayTags(viewModel: Tags.ShowTags.ViewModel)
+    func displayTags(viewModel: Tags.TagsLoad.ViewModel)
 }
 
 final class TagsViewController: UIViewController {
@@ -48,12 +48,12 @@ final class TagsViewController: UIViewController {
     // MARK: Requests logic
 
     private func refreshTags() {
-        self.interactor.doTagsFetching(request: Tags.ShowTags.Request())
+        self.interactor.doTagsFetch(request: Tags.TagsLoad.Request())
     }
 }
 
 extension TagsViewController: TagsViewControllerProtocol {
-    func displayTags(viewModel: Tags.ShowTags.ViewModel) {
+    func displayTags(viewModel: Tags.TagsLoad.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             self.tagsView?.updateData(viewModels: data)
@@ -65,7 +65,7 @@ extension TagsViewController: TagsViewControllerProtocol {
 
 extension TagsViewController: TagsViewDelegate {
     func tagsViewDidTagSelect(_ tagsView: TagsView, viewModel: TagViewModel) {
-        self.interactor.doTagsCollectionPresentation(
+        self.interactor.doTagCollectionPresentation(
             request: .init(viewModelUniqueIdentifier: viewModel.uniqueIdentifier)
         )
     }

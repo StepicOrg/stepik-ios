@@ -9,9 +9,9 @@
 import UIKit
 
 protocol FullscreenCourseListViewControllerProtocol: class {
-    func displayCourseInfo(viewModel: FullscreenCourseList.PresentCourseInfo.ViewModel)
-    func displayCourseSyllabus(viewModel: FullscreenCourseList.PresentCourseSyllabus.ViewModel)
-    func displayLastStep(viewModel: FullscreenCourseList.PresentLastStep.ViewModel)
+    func displayCourseInfo(viewModel: FullscreenCourseList.CourseInfoPresentation.ViewModel)
+    func displayCourseSyllabus(viewModel: FullscreenCourseList.CourseSyllabusPresentation.ViewModel)
+    func displayLastStep(viewModel: FullscreenCourseList.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: FullscreenCourseList.PresentAuthorization.ViewModel)
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel)
 }
@@ -99,7 +99,7 @@ final class FullscreenCourseListViewController: UIViewController,
         )
 
         if let moduleInput = courseListAssembly.moduleInput {
-            self.interactor.doOnlineModeSetting(request: .init(module: moduleInput))
+            self.interactor.doOnlineModeReset(request: .init(module: moduleInput))
         }
     }
 }
@@ -114,19 +114,19 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
         }
     }
 
-    func displayCourseInfo(viewModel: FullscreenCourseList.PresentCourseInfo.ViewModel) {
+    func displayCourseInfo(viewModel: FullscreenCourseList.CourseInfoPresentation.ViewModel) {
         let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .info)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayCourseSyllabus(viewModel: FullscreenCourseList.PresentCourseSyllabus.ViewModel) {
+    func displayCourseSyllabus(viewModel: FullscreenCourseList.CourseSyllabusPresentation.ViewModel) {
         let assembly = CourseInfoAssembly(courseID: viewModel.courseID, initialTab: .syllabus)
         let viewController = assembly.makeModule()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func displayLastStep(viewModel: FullscreenCourseList.PresentLastStep.ViewModel) {
+    func displayLastStep(viewModel: FullscreenCourseList.LastStepPresentation.ViewModel) {
         guard let navigationController = self.navigationController else {
             return
         }

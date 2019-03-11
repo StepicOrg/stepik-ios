@@ -20,7 +20,7 @@ enum ContentLanguageSwitch {
     // MARK: Use cases
 
     /// Show languages
-    enum ShowLanguages {
+    enum LanguagesLoad {
         struct Request { }
 
         struct Response {
@@ -31,8 +31,9 @@ enum ContentLanguageSwitch {
             let state: ViewControllerState
         }
     }
+
     /// Change languages
-    enum SelectLanguage {
+    enum LanguageSelection {
         struct Request {
             let viewModelUniqueIdentifier: UniqueIdentifierType
         }

@@ -11,7 +11,7 @@ import Foundation
 enum CourseInfoTabInfo {
     // MARK: Use cases
 
-    enum ShowInfo {
+    enum InfoLoad {
         struct Request { }
 
         struct Response {

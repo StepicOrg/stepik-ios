@@ -34,7 +34,7 @@ enum CourseInfoTabSyllabus {
     // MARK: Use cases
 
     /// Course syllabus
-    enum ShowSyllabus {
+    enum SyllabusLoad {
         struct Request { }
 
         struct Response {
@@ -47,7 +47,7 @@ enum CourseInfoTabSyllabus {
     }
 
     /// Load syllabus section
-    enum ShowSyllabusSection {
+    enum SyllabusSectionLoad {
         struct Request {
             let uniqueIdentifier: UniqueIdentifierType
         }
@@ -89,14 +89,14 @@ enum CourseInfoTabSyllabus {
     }
 
     /// Click on unit
-    enum UnitSelect {
+    enum UnitSelection {
         struct Request {
             let uniqueIdentifier: UniqueIdentifierType
         }
     }
 
     /// Update syllabus header (deadlines, download all)
-    enum UpdateSyllabusHeader {
+    enum SyllabusHeaderUpdate {
         struct Request { }
 
         struct Response {
@@ -111,12 +111,12 @@ enum CourseInfoTabSyllabus {
     }
 
     /// Click on personal deadlines button
-    enum PersonalDeadlinesButtonInteraction {
+    enum PersonalDeadlinesButtonAction {
         struct Request { }
     }
 
     /// Handle HUD
-    enum HandleWaitingState {
+    enum BlockingWaitingIndicatorUpdate {
         struct Response {
             let shouldDismiss: Bool
         }

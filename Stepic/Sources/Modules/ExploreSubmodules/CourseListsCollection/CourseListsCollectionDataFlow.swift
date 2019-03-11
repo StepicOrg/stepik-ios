@@ -12,7 +12,7 @@ enum CourseListsCollection {
     // MARK: Use cases
 
     /// Show course lists
-    enum ShowCourseLists {
+    enum CourseListsLoad {
         struct Request { }
 
         struct Response {
@@ -24,7 +24,7 @@ enum CourseListsCollection {
         }
     }
     /// Present collection in fullscreen
-    enum PresentFullscreenCourseListModule {
+    enum FullscreenCourseListModulePresentation {
         struct Request {
             let presentationDescription: CourseList.PresentationDescription
             let courseListType: CourseListType

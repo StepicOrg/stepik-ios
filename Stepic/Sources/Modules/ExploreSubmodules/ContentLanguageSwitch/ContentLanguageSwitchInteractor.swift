@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol ContentLanguageSwitchInteractorProtocol {
-    func doLanguagesListPresentation(request: ContentLanguageSwitch.ShowLanguages.Request)
-    func doLanguageSelection(request: ContentLanguageSwitch.SelectLanguage.Request)
+    func doLanguagesListPresentation(request: ContentLanguageSwitch.LanguagesLoad.Request)
+    func doLanguageSelection(request: ContentLanguageSwitch.LanguageSelection.Request)
 }
 
 final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProtocol {
@@ -28,7 +28,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
         self.provider = provider
     }
 
-    func doLanguagesListPresentation(request: ContentLanguageSwitch.ShowLanguages.Request) {
+    func doLanguagesListPresentation(request: ContentLanguageSwitch.LanguagesLoad.Request) {
         when(
             fulfilled: self.provider.fetchAvailableLanguages(),
             self.provider.fetchCurrentLanguage()
@@ -40,7 +40,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
 
             self.currentAvailableContentLanguages = languages
             self.presenter.presentLanguages(
-                response: ContentLanguageSwitch.ShowLanguages.Response(
+                response: ContentLanguageSwitch.LanguagesLoad.Response(
                     result: ContentLanguageSwitch.ContentLanguageInfo(
                         availableContentLanguages: languages,
                         activeContentLanguage: currentContentLanguage
@@ -52,7 +52,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
         }
     }
 
-    func doLanguageSelection(request: ContentLanguageSwitch.SelectLanguage.Request) {
+    func doLanguageSelection(request: ContentLanguageSwitch.LanguageSelection.Request) {
         guard let selectedLanguage = self.currentAvailableContentLanguages
             .first(where: { $0.0 == request.viewModelUniqueIdentifier })?.1 else {
             fatalError("Request contains invalid data")
@@ -60,7 +60,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
 
         self.provider.setGlobalContentLanguage(selectedLanguage)
         self.presenter.presentLanguageChange(
-            response: ContentLanguageSwitch.SelectLanguage.Response(
+            response: ContentLanguageSwitch.LanguageSelection.Response(
                 result: ContentLanguageSwitch.ContentLanguageInfo(
                     availableContentLanguages: self.currentAvailableContentLanguages,
                     activeContentLanguage: selectedLanguage

@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol TagsInteractorProtocol {
-    func doTagsFetching(request: Tags.ShowTags.Request)
-    func doTagsCollectionPresentation(request: Tags.PresentCollection.Request)
+    func doTagsFetch(request: Tags.TagsLoad.Request)
+    func doTagCollectionPresentation(request: Tags.TagCollectionPresentation.Request)
 }
 
 final class TagsInteractor: TagsInteractorProtocol {
@@ -35,7 +35,7 @@ final class TagsInteractor: TagsInteractorProtocol {
 
     // MARK: Actions
 
-    func doTagsFetching(request: Tags.ShowTags.Request) {
+    func doTagsFetch(request: Tags.TagsLoad.Request) {
         self.provider.fetchTags().done { tags in
             let newTags = tags.map { tag in
                 Tags.Tag(
@@ -47,12 +47,12 @@ final class TagsInteractor: TagsInteractorProtocol {
             }
             self.currentTags = newTags.map { ("\($0.id)", $0) }
             self.presenter.presentTags(
-                response: Tags.ShowTags.Response(result: .success(self.currentTags))
+                response: Tags.TagsLoad.Response(result: .success(self.currentTags))
             )
         }
     }
 
-    func doTagsCollectionPresentation(request: Tags.PresentCollection.Request) {
+    func doTagCollectionPresentation(request: Tags.TagCollectionPresentation.Request) {
         guard let tag = self.currentTags
             .first(where: { $0.0 == request.viewModelUniqueIdentifier})?.1 else {
             return

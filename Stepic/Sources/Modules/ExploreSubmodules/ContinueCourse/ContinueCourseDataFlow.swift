@@ -12,7 +12,7 @@ enum ContinueCourse {
     // MARK: Use cases
 
     /// Load last course
-    enum LoadLastCourse {
+    enum LastCourseLoad {
         struct Request { }
 
         struct Response {
@@ -23,12 +23,14 @@ enum ContinueCourse {
             let state: ViewControllerState
         }
     }
+
     /// Go to last step
-    enum ContinueCourse {
+    enum ContinueCourseAction {
         struct Request { }
     }
+
     /// Check for tooltip
-    enum CheckTooltipAvailability {
+    enum TooltipAvailabilityCheck {
         struct Request { }
 
         struct Response {

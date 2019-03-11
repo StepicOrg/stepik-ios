@@ -10,14 +10,14 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoInteractorProtocol {
-    func doCourseRefreshing(request: CourseInfo.ShowCourse.Request)
-    func doCourseSharing(request: CourseInfo.ShareCourse.Request)
-    func doCourseUnenrollment(request: CourseInfo.UnenrollCourse.Request)
+    func doCourseRefresh(request: CourseInfo.CourseLoad.Request)
+    func doCourseShareAction(request: CourseInfo.CourseShareAction.Request)
+    func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request)
     func doMainCourseAction(request: CourseInfo.MainCourseAction.Request)
-    func doOnlineModeSetting(request: CourseInfo.OnlineModeReset.Request)
+    func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request)
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request)
-    func doSubmoduleControllerAppearanceHandling(request: CourseInfo.SubmoduleAppearanceHandling.Request)
-    func doSubmodulesRegistration(request: CourseInfo.RegisterSubmodule.Request)
+    func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request)
+    func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request)
 }
 
 final class CourseInfoInteractor: CourseInfoInteractorProtocol {
@@ -93,7 +93,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.courseID = courseID
     }
 
-    func doCourseRefreshing(request: CourseInfo.ShowCourse.Request) {
+    func doCourseRefresh(request: CourseInfo.CourseLoad.Request) {
         self.fetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -112,18 +112,18 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
-    func doOnlineModeSetting(request: CourseInfo.OnlineModeReset.Request) {
+    func doOnlineModeReset(request: CourseInfo.OnlineModeReset.Request) {
         if self.isOnline {
             return
         }
 
         if self.networkReachabilityService.isReachable {
             self.isOnline = true
-            self.doCourseRefreshing(request: .init())
+            self.doCourseRefresh(request: .init())
         }
     }
 
-    func doSubmoduleControllerAppearanceHandling(request: CourseInfo.SubmoduleAppearanceHandling.Request) {
+    func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request) {
         self.submodules[safe: request.submoduleIndex]?.handleControllerAppearance()
     }
 
@@ -131,19 +131,19 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.notificationsRegistrationService.registerForRemoteNotifications()
     }
 
-    func doSubmodulesRegistration(request: CourseInfo.RegisterSubmodule.Request) {
+    func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request) {
         self.submodules = request.submodules
         self.pushCurrentCourseToSubmodules(submodules: self.submodules)
     }
 
-    func doCourseSharing(request: CourseInfo.ShareCourse.Request) {
+    func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {
         guard let urlPath = self.courseWebURLPath else {
             return
         }
         self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
     }
 
-    func doCourseUnenrollment(request: CourseInfo.UnenrollCourse.Request) {
+    func doCourseUnenrollmentAction(request: CourseInfo.CourseUnenrollmentAction.Request) {
         guard let course = self.currentCourse, course.enrolled else {
             return
         }
@@ -210,7 +210,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     // MARK: Private methods
 
-    private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.ShowCourse.Response> {
+    private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.CourseLoad.Response> {
         return Promise { seal in
             firstly {
                 self.isOnline && self.didLoadFromCache

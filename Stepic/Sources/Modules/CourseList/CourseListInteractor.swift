@@ -10,8 +10,8 @@ import Foundation
 import PromiseKit
 
 protocol CourseListInteractorProtocol: class {
-    func doCoursesFetching(request: CourseList.ShowCourses.Request)
-    func doNextCoursesFetching(request: CourseList.LoadNextCourses.Request)
+    func doCoursesFetch(request: CourseList.CoursesLoad.Request)
+    func doNextCoursesFetch(request: CourseList.NextCoursesLoad.Request)
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request)
     func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request)
     func doMainAction(request: CourseList.MainCourseAction.Request)
@@ -61,7 +61,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
     // MARK: - Public methods
 
-    func doCoursesFetching(request: CourseList.ShowCourses.Request) {
+    func doCoursesFetch(request: CourseList.CoursesLoad.Request) {
         // Check for state and
         // - isOnline && didLoadFromCache: we loaded cached courses (and not only cached courses), load from remote
         // - !isOnline && didLoadFromCache: we loaded cached courses, but can't load from network (it's just refresh from cache)
@@ -103,7 +103,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
                 )
 
-                let response = CourseList.ShowCourses.Response(
+                let response = CourseList.CoursesLoad.Response(
                     isAuthorized: self.userAccountService.isAuthorized,
                     result: courses
                 )
@@ -115,7 +115,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             if shouldRetryAfterFetching {
                 // End of recursion cause shouldRetryAfterFetching will be false on next call
                 self.didLoadFromCache = true
-                self.doCoursesFetching(request: request)
+                self.doCoursesFetch(request: request)
             }
         }.catch { error in
             if case CourseListProvider.Error.networkFetchFailed = error,
@@ -129,7 +129,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
     }
 
-    func doNextCoursesFetching(request: CourseList.LoadNextCourses.Request) {
+    func doNextCoursesFetch(request: CourseList.NextCoursesLoad.Request) {
         // If we are
         // - in offline mode
         // - have no more courses
@@ -139,7 +139,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 fetchedCourses: CourseList.ListData(courses: [], hasNextPage: false),
                 availableAdaptiveCourses: Set<Course>()
             )
-            let response = CourseList.LoadNextCourses.Response(
+            let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
                 result: result
             )
@@ -163,7 +163,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 ),
                 availableAdaptiveCourses: self.getAvailableAdaptiveCourses(from: courses)
             )
-            let response = CourseList.LoadNextCourses.Response(
+            let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
                 result: courses
             )
@@ -296,7 +296,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 from: self.currentCourses.map { $0.1 }
             )
         )
-        let response = CourseList.ShowCourses.Response(
+        let response = CourseList.CoursesLoad.Response(
             isAuthorized: self.userAccountService.isAuthorized,
             result: courses
         )
@@ -320,8 +320,8 @@ extension CourseListInteractor: CourseListInputProtocol {
 
         // Cached courses already loaded, now refresh with new state
         if self.didLoadFromCache {
-            let fakeRequest = CourseList.ShowCourses.Request()
-            self.doCoursesFetching(request: fakeRequest)
+            let fakeRequest = CourseList.CoursesLoad.Request()
+            self.doCoursesFetch(request: fakeRequest)
         }
     }
 }

@@ -9,16 +9,16 @@
 import UIKit
 
 protocol CourseListPresenterProtocol: class {
-    func presentCourses(response: CourseList.ShowCourses.Response)
-    func presentNextCourses(response: CourseList.LoadNextCourses.Response)
-    func presentWaitingState(response: CourseList.HandleWaitingState.Response)
+    func presentCourses(response: CourseList.CoursesLoad.Response)
+    func presentNextCourses(response: CourseList.NextCoursesLoad.Response)
+    func presentWaitingState(response: CourseList.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class CourseListPresenter: CourseListPresenterProtocol {
     weak var viewController: CourseListViewControllerProtocol?
 
-    func presentCourses(response: CourseList.ShowCourses.Response) {
-        var viewModel: CourseList.ShowCourses.ViewModel
+    func presentCourses(response: CourseList.CoursesLoad.Response) {
+        var viewModel: CourseList.CoursesLoad.ViewModel
 
         let courses = self.makeWidgetViewModels(
             courses: response.result.fetchedCourses.courses,
@@ -30,13 +30,13 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             courses: courses,
             hasNextPage: response.result.fetchedCourses.hasNextPage
         )
-        viewModel = CourseList.ShowCourses.ViewModel(state: .result(data: data))
+        viewModel = CourseList.CoursesLoad.ViewModel(state: .result(data: data))
 
         self.viewController?.displayCourses(viewModel: viewModel)
     }
 
-    func presentNextCourses(response: CourseList.LoadNextCourses.Response) {
-        var viewModel: CourseList.LoadNextCourses.ViewModel
+    func presentNextCourses(response: CourseList.NextCoursesLoad.Response) {
+        var viewModel: CourseList.NextCoursesLoad.ViewModel
 
         let courses = self.makeWidgetViewModels(
             courses: response.result.fetchedCourses.courses,
@@ -47,12 +47,12 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             courses: courses,
             hasNextPage: response.result.fetchedCourses.hasNextPage
         )
-        viewModel = CourseList.LoadNextCourses.ViewModel(state: .result(data: data))
+        viewModel = CourseList.NextCoursesLoad.ViewModel(state: .result(data: data))
 
         self.viewController?.displayNextCourses(viewModel: viewModel)
     }
 
-    func presentWaitingState(response: CourseList.HandleWaitingState.Response) {
+    func presentWaitingState(response: CourseList.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 

@@ -9,23 +9,23 @@
 import UIKit
 
 protocol CourseInfoPresenterProtocol {
-    func presentCourse(response: CourseInfo.ShowCourse.Response)
-    func presentLesson(response: CourseInfo.ShowLesson.Response)
-    func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettings.Response)
-    func presentExamLesson(response: CourseInfo.ShowExamLesson.Response)
-    func presentCourseSharing(response: CourseInfo.ShareCourse.Response)
-    func presentLastStep(response: CourseInfo.PresentLastStep.Response)
-    func presentAuthorization(response: CourseInfo.PresentAuthorization.Response)
-    func presentWaitingState(response: CourseInfo.HandleWaitingState.Response)
+    func presentCourse(response: CourseInfo.CourseLoad.Response)
+    func presentLesson(response: CourseInfo.LessonPresentation.Response)
+    func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettingsPresentation.Response)
+    func presentExamLesson(response: CourseInfo.ExamLessonPresentation.Response)
+    func presentCourseSharing(response: CourseInfo.CourseShareAction.Response)
+    func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
+    func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
+    func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     weak var viewController: CourseInfoViewControllerProtocol?
 
-    func presentCourse(response: CourseInfo.ShowCourse.Response) {
+    func presentCourse(response: CourseInfo.CourseLoad.Response) {
         switch response.result {
         case .success(let result):
-            let viewModel = CourseInfo.ShowCourse.ViewModel(
+            let viewModel = CourseInfo.CourseLoad.ViewModel(
                 state: .result(data: self.makeHeaderViewModel(course: result))
             )
             self.viewController?.displayCourse(viewModel: viewModel)
@@ -34,7 +34,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         }
     }
 
-    func presentLesson(response: CourseInfo.ShowLesson.Response) {
+    func presentLesson(response: CourseInfo.LessonPresentation.Response) {
         let initObjects: LessonInitObjects = (
             lesson: response.lesson,
             startStepId: 0,
@@ -46,7 +46,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             unitId: response.unitID
         )
 
-        let viewModel = CourseInfo.ShowLesson.ViewModel(
+        let viewModel = CourseInfo.LessonPresentation.ViewModel(
             initObjects: initObjects,
             initIDs: initIDs
         )
@@ -54,33 +54,33 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayLesson(viewModel: viewModel)
     }
 
-    func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettings.Response) {
-        let viewModel = CourseInfo.PersonalDeadlinesSettings.ViewModel(
+    func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettingsPresentation.Response) {
+        let viewModel = CourseInfo.PersonalDeadlinesSettingsPresentation.ViewModel(
             action: response.action,
             course: response.course
         )
         self.viewController?.displayPersonalDeadlinesSettings(viewModel: viewModel)
     }
 
-    func presentExamLesson(response: CourseInfo.ShowExamLesson.Response) {
-        let viewModel = CourseInfo.ShowExamLesson.ViewModel(
+    func presentExamLesson(response: CourseInfo.ExamLessonPresentation.Response) {
+        let viewModel = CourseInfo.ExamLessonPresentation.ViewModel(
             urlPath: response.urlPath
         )
         self.viewController?.displayExamLesson(viewModel: viewModel)
     }
 
-    func presentCourseSharing(response: CourseInfo.ShareCourse.Response) {
-        let viewModel = CourseInfo.ShareCourse.ViewModel(
+    func presentCourseSharing(response: CourseInfo.CourseShareAction.Response) {
+        let viewModel = CourseInfo.CourseShareAction.ViewModel(
             urlPath: response.urlPath
         )
         self.viewController?.displayCourseSharing(viewModel: viewModel)
     }
 
-    func presentWaitingState(response: CourseInfo.HandleWaitingState.Response) {
+    func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
-    func presentLastStep(response: CourseInfo.PresentLastStep.Response) {
+    func presentLastStep(response: CourseInfo.LastStepPresentation.Response) {
         self.viewController?.displayLastStep(
             viewModel: .init(
                 course: response.course,
@@ -89,7 +89,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
-    func presentAuthorization(response: CourseInfo.PresentAuthorization.Response) {
+    func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response) {
         self.viewController?.displayAuthorization(viewModel: .init())
     }
 
