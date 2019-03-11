@@ -200,6 +200,7 @@ closure_spacing:
 identifier_name:
   severity: error
   excluded: ["i", "j", "x", "y", "z", "id", "to"]
+  max_length: 64
 
 type_name:
   severity: error

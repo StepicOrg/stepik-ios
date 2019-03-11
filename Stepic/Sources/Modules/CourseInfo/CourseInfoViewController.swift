@@ -40,7 +40,7 @@ final class CourseInfoViewController: UIViewController {
     }()
 
     lazy var courseInfoView = self.view as? CourseInfoView
-    lazy var styledNavigationController = self.navigationController as? StyledNavigationViewController
+    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     private lazy var moreBarButton = UIBarButtonItem(
         image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
@@ -87,9 +87,7 @@ final class CourseInfoViewController: UIViewController {
         self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
         self.navigationItem.rightBarButtonItem = self.moreBarButton
-
-        self.updateTopBar(alpha: 0.0)
-        self.styledNavigationController?.hideBackButtonTitle()
+        self.styledNavigationController?.removeBackButtonTitleForTopController()
 
         if #available(iOS 11.0, *) { } else {
             self.automaticallyAdjustsScrollViewInsets = false
@@ -98,26 +96,8 @@ final class CourseInfoViewController: UIViewController {
         self.interactor.doCourseRefresh(request: .init())
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        self.styledNavigationController?.changeShadowAlpha(0.0)
-        super.viewWillAppear(animated)
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // To update when previous operations completed
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-
-            // Reset shadow again (first call in viewWillAppear)
-            // Cause some controllers can use UINavigationViewControllerDelegate and animate shadow there)
-            strongSelf.styledNavigationController?.changeShadowAlpha(0.0)
-
-            strongSelf.updateTopBar(alpha: strongSelf.lastTopBarAlpha)
-        }
 
         self.interactor.doOnlineModeReset(request: .init())
 
@@ -128,16 +108,6 @@ final class CourseInfoViewController: UIViewController {
                 }
             }
         }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .default
-        super.viewWillDisappear(animated)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.updateTopBar(alpha: 1.0)
     }
 
     override func loadView() {
@@ -161,13 +131,26 @@ final class CourseInfoViewController: UIViewController {
     }
 
     private func updateTopBar(alpha: CGFloat) {
-        self.styledNavigationController?.changeNavigationBarAlpha(alpha)
-        self.styledNavigationController?.changeTintColor(progress: alpha)
-        self.styledNavigationController?.changeTitleAlpha(alpha)
+        self.styledNavigationController?.changeBackgroundColor(
+            StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(alpha),
+            sender: self
+        )
 
-        UIApplication.shared.statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
-            ? .default
-            : .lightContent
+        let transitionColor = ColorTransitionHelper.makeTransitionColor(
+            from: .white,
+            to: StyledNavigationController.Appearance.tintColor,
+            transitionProgress: alpha
+        )
+        self.styledNavigationController?.changeTintColor(transitionColor, sender: self)
+        self.styledNavigationController?.changeTextColor(
+            StyledNavigationController.Appearance.tintColor.withAlphaComponent(alpha),
+            sender: self
+        )
+
+        let statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
+            ? UIStatusBarStyle.default
+            : UIStatusBarStyle.lightContent
+        self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
     }
 
     private func makeSubmodules() -> [UIViewController] {
@@ -457,6 +440,18 @@ extension CourseInfoViewController: UIScrollViewDelegate {
                 y: topOffset
             )
         }
+    }
+}
+
+extension CourseInfoViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return .init(
+            shadowViewAlpha: 0.0,
+            backgroundColor: StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(0.0),
+            textColor: StyledNavigationController.Appearance.tintColor.withAlphaComponent(0.0),
+            tintColor: .white,
+            statusBarStyle: .lightContent
+        )
     }
 }
 

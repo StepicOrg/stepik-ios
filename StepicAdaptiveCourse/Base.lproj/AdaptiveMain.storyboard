@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hCR-Ee-wKH">
-                                        <rect key="frame" x="121" y="16" width="20" height="20"/>
+                                        <rect key="frame" x="121" y="16.5" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bt4-JM-9U1" customClass="RatingProgressView" customModule="Adaptive_1838" customModuleProvider="target">
-                                <rect key="frame" x="30" y="30" width="246" height="25"/>
+                                <rect key="frame" x="30" y="30" width="246" height="24.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="WGD-AT-6Tw"/>
@@ -235,10 +235,10 @@
             </objects>
             <point key="canvasLocation" x="5193.75" y="35.91549295774648"/>
         </scene>
-        <!--Styled Navigation View Controller-->
+        <!--Styled Navigation Controller-->
         <scene sceneID="Agg-9T-EZ9">
             <objects>
-                <navigationController storyboardIdentifier="Stats" automaticallyAdjustsScrollViewInsets="NO" id="5x0-om-dOJ" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Stats" automaticallyAdjustsScrollViewInsets="NO" id="5x0-om-dOJ" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="17P-bd-Sml">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
