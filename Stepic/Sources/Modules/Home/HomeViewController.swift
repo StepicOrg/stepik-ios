@@ -1,13 +1,5 @@
-//
-//  HomeHomeViewController.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 17/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
-import UIKit
 import PromiseKit
+import UIKit
 
 protocol HomeViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayStreakInfo(viewModel: Home.StreakLoad.ViewModel)
@@ -40,17 +32,14 @@ final class HomeViewController: BaseExploreViewController {
         self.title = NSLocalizedString("Home", comment: "")
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func loadView() {
-        super.loadView()
-        self.exploreView?.delegate = self
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.exploreView?.delegate = self
         self.homeInteractor?.doContentLoad(request: .init())
     }
 
@@ -97,8 +86,8 @@ final class HomeViewController: BaseExploreViewController {
                 )
             }
 
-            streakView.message = message
-            streakView.streak = streak
+            self.streakView.message = message
+            self.streakView.streak = streak
         }
     }
 

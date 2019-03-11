@@ -1,11 +1,3 @@
-//
-//  ContentLanguageService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 24.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 protocol ContentLanguageServiceProtocol: class {
@@ -21,9 +13,10 @@ final class ContentLanguageService: ContentLanguageServiceProtocol {
             let oldValue = self.globalContentLanguage
             self.setInDefaults(newLanguage: newValue)
             if newValue != oldValue {
-                NotificationCenter.default.post(name: .contentLanguageDidChange, object: [
-                    "newContentLanguage": newValue
-                ])
+                NotificationCenter.default.post(
+                    name: .contentLanguageDidChange,
+                    object: ["newContentLanguage": newValue]
+                )
             }
         }
         get {

@@ -1,11 +1,3 @@
-//
-//  TagsTagsPresenter.swift
-//  stepik-ios
-//
-//  Created by Stepik on 11/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol TagsPresenterProtocol {
@@ -35,6 +27,6 @@ final class TagsPresenter: TagsPresenterProtocol {
 
         let viewModel = Tags.TagsLoad.ViewModel(state: state)
 
-        viewController?.displayTags(viewModel: viewModel)
+        self.viewController?.displayTags(viewModel: viewModel)
     }
 }

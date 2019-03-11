@@ -1,14 +1,6 @@
-//
-// CourseInfoTabInfoView.swift
-// stepik-ios
-//
-//  Created by Ivan Magda on 11/1/18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
-import SnapKit
 import Atributika
+import SnapKit
+import UIKit
 
 extension CourseInfoTabInfoView {
     struct Appearance {
@@ -47,6 +39,7 @@ final class CourseInfoTabInfoView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -108,9 +101,9 @@ final class CourseInfoTabInfoView: UIView {
             )
         )
 
-        let attributedTitle = "\(Block.author.title) <a>\(authorName)</a>".style(tags: [
-            Style("a").foregroundColor(self.appearance.authorTitleHighlightColor)
-        ]).attributedString
+        let attributedTitle = "\(Block.author.title) <a>\(authorName)</a>".style(
+            tags: [Style("a").foregroundColor(self.appearance.authorTitleHighlightColor)]
+        ).attributedString
 
         authorView.icon = Block.author.icon
         authorView.attributedTitle = attributedTitle

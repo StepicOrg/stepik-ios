@@ -1,11 +1,3 @@
-//
-//  BaseExploreBaseExplorePresenter.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 02/10/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol BaseExplorePresenterProtocol {

@@ -1,13 +1,5 @@
-//
-//  ExploreSearchBar.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 28.09.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 final class ExploreSearchBar: UISearchBar {
     enum Appearance {
@@ -19,8 +11,6 @@ final class ExploreSearchBar: UISearchBar {
 
         static let placeholderText = NSLocalizedString("SearchCourses", comment: "")
     }
-
-    private var isInitialized = false
 
     weak var searchBarDelegate: UISearchBarDelegate?
 
@@ -50,6 +40,7 @@ final class ExploreSearchBar: UISearchBar {
         self.applySystemFixes()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

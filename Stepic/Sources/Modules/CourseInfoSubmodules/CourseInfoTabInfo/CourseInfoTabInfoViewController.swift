@@ -1,14 +1,6 @@
-//
-//  CourseInfoTabInfoViewController.swift
-//  stepik-ios
-//
-//  Created by Ivan Magda on 15/11/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
-import UIKit
 import AVFoundation
 import AVKit
+import UIKit
 
 protocol CourseInfoTabInfoViewControllerProtocol: class {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.InfoLoad.ViewModel)
@@ -27,8 +19,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
 
     private var playerVideoBoundsObservation: NSKeyValueObservation?
 
-    @objc
-    private dynamic lazy var playerViewController: AVPlayerViewController = {
+    @objc private dynamic lazy var playerViewController: AVPlayerViewController = {
         let playerViewController = AVPlayerViewController()
         self.playerVideoBoundsObservation = playerViewController.observe(
             \.videoBounds,
@@ -58,6 +49,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

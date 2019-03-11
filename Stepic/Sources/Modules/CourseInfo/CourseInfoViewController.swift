@@ -1,15 +1,7 @@
-//
-//  CourseInfoViewController.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import Pageboy
 import Presentr
 import SVProgressHUD
+import UIKit
 
 protocol CourseInfoScrollablePageViewProtocol: class {
     var scrollViewDelegate: UIScrollViewDelegate? { get set }
@@ -81,6 +73,7 @@ final class CourseInfoViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -121,9 +114,7 @@ final class CourseInfoViewController: UIViewController {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
 
-        let appearance = CourseInfoView.Appearance(
-            headerTopOffset: statusBarHeight + navigationBarHeight
-        )
+        let appearance = CourseInfoView.Appearance(headerTopOffset: statusBarHeight + navigationBarHeight)
 
         let view = CourseInfoView(
             frame: UIScreen.main.bounds,
@@ -185,11 +176,7 @@ final class CourseInfoViewController: UIViewController {
             }
         }
 
-        self.interactor.doSubmodulesRegistration(
-            request: .init(
-                submodules: submodules.compactMap { $0 }
-            )
-        )
+        self.interactor.doSubmodulesRegistration(request: .init(submodules: submodules.compactMap { $0 }))
 
         return viewControllers
     }
@@ -220,11 +207,7 @@ final class CourseInfoViewController: UIViewController {
         }
 
         alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Cancel", comment: ""),
-                style: .cancel,
-                handler: nil
-            )
+            UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         )
         alert.popoverPresentationController?.barButtonItem = self.moreBarButton
         self.present(module: alert)
@@ -232,9 +215,7 @@ final class CourseInfoViewController: UIViewController {
 }
 
 extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyViewControllerDelegate {
-    func numberOfViewControllers(
-        in pageboyViewController: PageboyViewController
-    ) -> Int {
+    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return self.submodulesControllers.count
     }
 
@@ -245,9 +226,7 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
         return self.submodulesControllers[safe: index]
     }
 
-    func defaultPage(
-        for pageboyViewController: PageboyViewController
-    ) -> PageboyViewController.Page? {
+    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return .at(index: self.initialTabIndex)
     }
 

@@ -1,13 +1,5 @@
-//
-//  DownloadControlView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 08/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension DownloadControlView {
     struct Appearance {
@@ -101,6 +93,7 @@ final class DownloadControlView: UIControl {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -177,7 +170,7 @@ final class DownloadControlView: UIControl {
         switch self.actionState {
         case .readyToRemoving:
             icon = UIImage(named: "download-button-remove")
-        case .downloading(_):
+        case .downloading:
             icon = UIImage(named: "download-button-cancel")
         case .readyToDownloading:
             icon = UIImage(named: "download-button-start")

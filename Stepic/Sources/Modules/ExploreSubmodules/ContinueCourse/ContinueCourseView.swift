@@ -1,13 +1,5 @@
-//
-//  ContinueCourseContinueCourseView.swift
-//  stepik-ios
-//
-//  Created by Stepik on 11/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol ContinueCourseViewDelegate: class {
     func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView)
@@ -30,6 +22,7 @@ final class ContinueCourseView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -44,7 +37,6 @@ final class ContinueCourseView: UIView {
             self.lastStepView.progress = progressValue
         }
         self.lastStepView.coverImageURL = viewModel.coverImageURL
-
     }
 
     func showLoading() {

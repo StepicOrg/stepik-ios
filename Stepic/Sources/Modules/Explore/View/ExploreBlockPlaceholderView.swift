@@ -1,13 +1,5 @@
-//
-//  ExploreBlockPlaceholderView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 04.10.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension ExploreBlockPlaceholderView {
     struct Appearance {
@@ -62,6 +54,7 @@ final class ExploreBlockPlaceholderView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

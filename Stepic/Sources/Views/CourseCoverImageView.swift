@@ -1,13 +1,5 @@
-//
-//  CourseCoverImageView.swift
-//  NewCourseLists
-//
-//  Created by Vladislav Kiryukhin on 14.08.2018.
-//  Copyright © 2018 Vladislav Kiryukhin. All rights reserved.
-//
-
-import UIKit
 import Nuke
+import UIKit
 
 extension CourseCoverImageView {
     struct Appearance {
@@ -34,6 +26,7 @@ final class CourseCoverImageView: UIImageView {
         self.setupView()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,7 +43,6 @@ final class CourseCoverImageView: UIImageView {
                 into: self,
                 completion: nil
             )
-
         } else {
             self.image = nil
         }

@@ -1,13 +1,5 @@
-//
-//  CourseWidgetView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseWidgetView {
     struct Appearance {
@@ -19,7 +11,7 @@ extension CourseWidgetView {
         let mainActionButtonHeight: CGFloat = 48.0
 
         let statsViewHeight: CGFloat = 17
-        let statsViewInsets: UIEdgeInsets = UIEdgeInsets(top: 8, left: 9, bottom: 12, right: 0)
+        let statsViewInsets = UIEdgeInsets(top: 8, left: 9, bottom: 12, right: 0)
     }
 }
 
@@ -68,6 +60,7 @@ final class CourseWidgetView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

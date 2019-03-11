@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabSyllabusCourseInfoTabSyllabusPresenter.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 13/12/2018.
-//  Copyright 2018 stepik-ios. All rights reserved.
-//
-
 import UIKit
 
 protocol CourseInfoTabSyllabusPresenterProtocol {
@@ -59,9 +51,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     }
                 )
 
-                let sectionDeadline = result.sectionsDeadlines.first(where: {
-                    $0.section == sectionData.element.entity.id
-                })?.deadlineDate
+                let sectionDeadline = result.sectionsDeadlines
+                    .first { $0.section == sectionData.element.entity.id }?
+                    .deadlineDate
 
                 return self.makeSectionViewModel(
                     index: sectionData.offset,
@@ -84,9 +76,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         self.viewController?.displaySyllabus(viewModel: viewModel)
     }
 
-    func presentDownloadButtonUpdate(
-        response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response
-    ) {
+    func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response) {
         switch response.source {
         case .section(let section):
             self.cachedSectionViewModels[section.id]?.downloadState = response.downloadState
@@ -107,9 +97,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
     }
 
-    func presentCourseSyllabusHeader(
-        response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response
-    ) {
+    func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response) {
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
             isDownloadAllButtonEnabled: response.isDownloadAllAvailable,
@@ -213,7 +201,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     (title: NSLocalizedString("SoftDeadline", comment: ""), date: section.softDeadline),
                     (title: NSLocalizedString("HardDeadline", comment: ""), date: section.hardDeadline),
                     (title: NSLocalizedString("EndDate", comment: ""), date: section.endDate)
-                ].filter { $0.date != nil }.compactMap { ($0.title, $0.date!) }
+                ].filter { $0.date != nil }.compactMap { ($0.title, $0.date ?? Date()) }
             }
         }()
 

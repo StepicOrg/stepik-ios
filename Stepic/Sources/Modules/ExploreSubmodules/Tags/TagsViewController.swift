@@ -1,11 +1,3 @@
-//
-//  TagsTagsViewController.swift
-//  stepik-ios
-//
-//  Created by Stepik on 11/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol TagsViewControllerProtocol: class {
@@ -28,6 +20,7 @@ final class TagsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

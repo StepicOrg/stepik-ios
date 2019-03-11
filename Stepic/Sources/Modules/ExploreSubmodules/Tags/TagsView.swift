@@ -1,13 +1,5 @@
-//
-//  TagsTagsView.swift
-//  stepik-ios
-//
-//  Created by Stepik on 11/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol TagsViewDelegate: class {
     func tagsViewDidTagSelect(_ tagsView: TagsView, viewModel: TagViewModel)
@@ -73,6 +65,7 @@ final class TagsView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

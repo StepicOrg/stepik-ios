@@ -1,13 +1,5 @@
-//
-//  CourseInfoView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol CourseInfoViewDelegate: class {
     func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat)
@@ -46,10 +38,7 @@ final class CourseInfoView: UIView {
     }()
 
     private lazy var segmentedControl: TabSegmentedControlView = {
-        let control = TabSegmentedControlView(
-            frame: .zero,
-            items: self.tabsTitles
-        )
+        let control = TabSegmentedControlView(frame: .zero, items: self.tabsTitles)
         control.delegate = self
         return control
     }()
@@ -62,10 +51,7 @@ final class CourseInfoView: UIView {
 
     /// Real height for header
     var headerHeight: CGFloat {
-        return max(
-            0,
-            self.lastHeaderHeight + self.appearance.headerTopOffset
-        )
+        return max(0, self.lastHeaderHeight + self.appearance.headerTopOffset)
     }
 
     weak var delegate: CourseInfoViewDelegate?
@@ -87,6 +73,7 @@ final class CourseInfoView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -112,9 +99,7 @@ final class CourseInfoView: UIView {
         // overscroll (parallax effect): offset < 0
         // normal scrolling: offset > 0
 
-        self.headerHeightConstraint?.update(
-            offset: max(self.headerHeight, self.headerHeight + -offset)
-        )
+        self.headerHeightConstraint?.update(offset: max(self.headerHeight, self.headerHeight + -offset))
 
         self.topConstraint?.update(offset: min(0, -offset))
     }
@@ -191,10 +176,7 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
 }
 
 extension CourseInfoView: TabSegmentedControlViewDelegate {
-    func tabSegmentedControlView(
-        _ tabSegmentedControlView: TabSegmentedControlView,
-        didSelectTabWithIndex: Int
-    ) {
+    func tabSegmentedControlView(_ tabSegmentedControlView: TabSegmentedControlView, didSelectTabWithIndex: Int) {
         let tabsCount = self.delegate?.numberOfPages(in: self) ?? 0
         guard didSelectTabWithIndex >= 0,
               didSelectTabWithIndex < tabsCount else {

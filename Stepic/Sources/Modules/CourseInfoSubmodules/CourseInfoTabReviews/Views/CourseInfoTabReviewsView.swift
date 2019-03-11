@@ -1,18 +1,8 @@
-//
-//  CourseInfoTabReviewsView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 13/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol CourseInfoTabReviewsViewDelegate: class {
-    func courseInfoTabReviewsViewDidPaginationRequesting(
-        _ courseInfoTabReviewsView: CourseInfoTabReviewsView
-    )
+    func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
 }
 
 extension CourseInfoTabReviewsView {
@@ -69,6 +59,7 @@ final class CourseInfoTabReviewsView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -127,12 +118,8 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
         self.emptyStateLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.leading
-                .greaterThanOrEqualToSuperview()
-                .offset(self.appearance.emptyStateLabelInsets.left)
-            make.trailing
-                .lessThanOrEqualToSuperview()
-                .offset(-self.appearance.emptyStateLabelInsets.right)
+            make.leading.greaterThanOrEqualToSuperview().offset(self.appearance.emptyStateLabelInsets.left)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.emptyStateLabelInsets.right)
             make.width.lessThanOrEqualTo(600)
         }
     }
@@ -143,11 +130,7 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
         self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        willDisplay cell: UITableViewCell,
-        forRowAt indexPath: IndexPath
-    ) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1,
            tableView.numberOfSections == 1,
            self.shouldShowPaginationView {

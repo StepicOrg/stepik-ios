@@ -1,11 +1,3 @@
-//
-//  PaddingLabel.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 final class PaddingLabel: UILabel {
@@ -35,16 +27,16 @@ final class PaddingLabel: UILabel {
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
         return CGSize(
-            width: size.width + padding.left + padding.right,
-            height: size.height + padding.top + padding.bottom
+            width: size.width + self.padding.left + self.padding.right,
+            height: size.height + self.padding.top + self.padding.bottom
         )
     }
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let size = super.sizeThatFits(size)
         return CGSize(
-            width: size.width + padding.left + padding.right,
-            height: size.height + padding.top + padding.bottom
+            width: size.width + self.padding.left + self.padding.right,
+            height: size.height + self.padding.top + self.padding.bottom
         )
     }
 }

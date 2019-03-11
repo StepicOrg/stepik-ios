@@ -1,13 +1,5 @@
-//
-// CourseInfoTabInfoInstructorsBlockView.swift
-// stepik-ios
-//
-//  Created by Ivan Magda on 11/1/18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabInfoInstructorsBlockView {
     struct Appearance {
@@ -42,6 +34,7 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -88,9 +81,7 @@ extension CourseInfoTabInfoInstructorsBlockView: ProgrammaticallyInitializableVi
             make.leading.equalToSuperview().offset(self.appearance.stackViewInsets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.stackViewInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.stackViewInsets.bottom)
-            make.top
-                .equalTo(self.headerView.snp.bottom)
-                .offset(self.appearance.stackViewInsets.top)
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.stackViewInsets.top)
         }
     }
 }

@@ -1,11 +1,3 @@
-//
-//  FullscreenCourseListFullscreenCourseListViewController.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 19/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol FullscreenCourseListViewControllerProtocol: class {
@@ -45,6 +37,7 @@ final class FullscreenCourseListViewController: UIViewController,
         }
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

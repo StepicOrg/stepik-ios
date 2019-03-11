@@ -1,11 +1,3 @@
-//
-//  CourseInfoCourseInfoProvider.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 30/11/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -80,7 +72,6 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         return Promise { seal in
             courseFetchMethod(self.courseID).then {
                 course -> Promise<(Course?, Progress?, CourseReviewSummary?)> in
-
                 let progressFetch: Promise<Progress?> = {
                     if let result = course?.progressId {
                         return progressFetchMethod(result)

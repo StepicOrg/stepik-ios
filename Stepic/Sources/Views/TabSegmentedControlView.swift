@@ -1,13 +1,5 @@
-//
-//  TabSegmentedControlView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 07.11.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol TabSegmentedControlViewDelegate: class {
     func tabSegmentedControlView(
@@ -76,6 +68,7 @@ final class TabSegmentedControlView: UIView {
         self.initItems()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -215,6 +208,7 @@ private final class TabButton: UIButton {
         super.init(frame: frame)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

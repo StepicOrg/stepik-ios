@@ -1,11 +1,3 @@
-//
-//  CourseListCollectionViewDelegate.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 20.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 final class CourseListCollectionViewDelegate: NSObject, UICollectionViewDelegate {
@@ -26,6 +18,6 @@ final class CourseListCollectionViewDelegate: NSObject, UICollectionViewDelegate
             return
         }
 
-        delegate?.itemDidSelected(viewModel: viewModel)
+        self.delegate?.itemDidSelected(viewModel: viewModel)
     }
 }

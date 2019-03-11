@@ -10590,14 +10590,6 @@
 			path = Pager;
 			sourceTree = "<group>";
 		};
-		62E98176EB647405A6FD0B82 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				62E98E12DFEC7C30C4EC32BA /* ContinueCourseView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		62E981C98BDA0C5DD5100480 /* ProfileInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -10868,7 +10860,7 @@
 				62E9802ED57E0E267BEE3526 /* ContinueCourseInteractor.swift */,
 				62E982ADA81596DDED794721 /* ContinueCoursePresenter.swift */,
 				62E983C0D92833ECC836D369 /* ContinueCourseDataFlow.swift */,
-				62E98176EB647405A6FD0B82 /* Views */,
+				62E98E12DFEC7C30C4EC32BA /* ContinueCourseView.swift */,
 				62E988CA1679C4856F1FB074 /* ContinueCourseProvider.swift */,
 				62E9838EA380A6661505EEFF /* ContinueCourseViewModel.swift */,
 				62E982A16F209817B2EDF2A5 /* ContinueCourseOutputProtocol.swift */,
@@ -11195,7 +11187,7 @@
 				62E98F11087660208A282328 /* FullscreenCourseListInteractor.swift */,
 				62E98180244B0ED6E9EDA581 /* FullscreenCourseListPresenter.swift */,
 				62E989C22FA2D21C300C7CDF /* FullscreenCourseListDataFlow.swift */,
-				62E98F5B47C9EC348695D2AB /* Views */,
+				62E981A02A8E071C5BA610E7 /* FullscreenCourseListView.swift */,
 			);
 			path = FullscreenCourseList;
 			sourceTree = "<group>";
@@ -11242,14 +11234,6 @@
 				0898779E214047640065DFA2 /* SplitTestProtocol.swift */,
 			);
 			path = SplitTests;
-			sourceTree = "<group>";
-		};
-		62E98F5B47C9EC348695D2AB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				62E981A02A8E071C5BA610E7 /* FullscreenCourseListView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		62E98F631F62327314F62817 /* Views */ = {

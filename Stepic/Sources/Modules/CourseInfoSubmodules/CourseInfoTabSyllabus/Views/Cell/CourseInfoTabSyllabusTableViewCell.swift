@@ -1,13 +1,5 @@
-//
-//  CourseInfoTabSyllabusTableViewCell.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 21/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 final class CourseInfoTabSyllabusTableViewCell: UITableViewCell, Reusable {
     enum Appearance {

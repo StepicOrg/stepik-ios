@@ -1,13 +1,5 @@
-//
-// CourseInfoTabInfoInstructorView.swift
-// stepik-ios
-//
-//  Created by Ivan Magda on 11/2/18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabInfoInstructorView {
     struct Appearance {
@@ -83,6 +75,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -122,18 +115,14 @@ extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProt
         self.titleLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
             make.centerY.equalTo(self.imageView.snp.centerY)
-            make.leading
-                .equalTo(self.imageView.snp.trailing)
-                .offset(self.appearance.titleLabelInsets.left)
+            make.leading.equalTo(self.imageView.snp.trailing).offset(self.appearance.titleLabelInsets.left)
         }
 
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             make.leading.equalTo(self.imageView.snp.leading)
-            make.top
-                .equalTo(self.imageView.snp.bottom)
-                .offset(self.appearance.descriptionLabelInsets.top)
+            make.top.equalTo(self.imageView.snp.bottom).offset(self.appearance.descriptionLabelInsets.top)
         }
     }
 }

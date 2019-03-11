@@ -1,13 +1,5 @@
-//
-// CourseInfoTabInfoTextBlockView.swift
-// stepik-ios
-//
-//  Created by Ivan Magda on 11/1/18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabInfoTextBlockView {
     struct Appearance {
@@ -55,10 +47,7 @@ final class CourseInfoTabInfoTextBlockView: UIView {
         }
     }
 
-    init(
-        frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
-    ) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
@@ -67,6 +56,7 @@ final class CourseInfoTabInfoTextBlockView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -95,9 +85,7 @@ extension CourseInfoTabInfoTextBlockView: ProgrammaticallyInitializableViewProto
             make.leading.equalToSuperview().offset(self.appearance.messageLabelInsets.left)
             make.bottom.equalToSuperview().offset(-self.appearance.messageLabelInsets.bottom)
             make.trailing.equalTo(self.headerView)
-            make.top
-                .equalTo(self.headerView.snp.bottom)
-                .offset(self.appearance.messageLabelInsets.top)
+            make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.messageLabelInsets.top)
         }
     }
 }

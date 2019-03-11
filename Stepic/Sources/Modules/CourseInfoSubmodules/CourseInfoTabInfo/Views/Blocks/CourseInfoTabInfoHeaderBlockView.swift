@@ -1,13 +1,5 @@
-//
-// CourseInfoTabInfoHeaderBlockView.swift
-// stepik-ios
-//
-//  Created by Ivan Magda on 11/1/18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabInfoHeaderBlockView {
     struct Appearance {
@@ -57,10 +49,7 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
         return label
     }()
 
-    init(
-        frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
-    ) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
@@ -69,6 +58,7 @@ final class CourseInfoTabInfoHeaderBlockView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

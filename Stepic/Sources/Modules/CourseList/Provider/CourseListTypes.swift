@@ -1,11 +1,3 @@
-//
-//  CourseListTypes.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 24.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 // MARK: - Course types
@@ -19,7 +11,6 @@ struct PopularCourseListType: CourseListType {
 }
 
 struct EnrolledCourseListType: CourseListType {
-
 }
 
 struct TagCourseListType: CourseListType {
@@ -57,7 +48,7 @@ final class CourseListServicesFactory {
     }
 
     func makePersistenceService() -> CourseListPersistenceServiceProtocol? {
-        if let _ = self.type as? EnrolledCourseListType {
+        if self.type is EnrolledCourseListType {
             return CourseListPersistenceService(
                 storage: DefaultsCourseListPersistenceStorage(
                     cacheID: "MyCoursesInfo"
@@ -69,7 +60,7 @@ final class CourseListServicesFactory {
                     cacheID: "PopularCoursesInfo_\(type.language.languageString)"
                 )
             )
-        } else if let _ = self.type as? TagCourseListType {
+        } else if self.type is TagCourseListType {
             return nil
         } else if let type = self.type as? CollectionCourseListType {
             return CourseListPersistenceService(
@@ -77,7 +68,7 @@ final class CourseListServicesFactory {
                     cachedList: type.ids
                 )
             )
-        } else if let _ = self.type as? SearchResultCourseListType {
+        } else if self.type is SearchResultCourseListType {
             return nil
         } else {
             fatalError("Unsupported course list type")

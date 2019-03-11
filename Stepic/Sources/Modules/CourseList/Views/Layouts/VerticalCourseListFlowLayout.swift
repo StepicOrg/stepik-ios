@@ -1,11 +1,3 @@
-//
-//  VerticalCourseListFlowLayout.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 extension VerticalCourseListFlowLayout {
@@ -27,7 +19,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
 
     private var _contentHeight: CGFloat = 0
     override var contentHeight: CGFloat {
-        return _contentHeight
+        return self._contentHeight
     }
 
     var isPaginationHidden = true {
@@ -69,6 +61,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
         self.scrollDirection = .vertical
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -80,7 +73,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
             return
         }
 
-        guard let collectionView = collectionView else {
+        guard let collectionView = self.collectionView else {
             return
         }
 

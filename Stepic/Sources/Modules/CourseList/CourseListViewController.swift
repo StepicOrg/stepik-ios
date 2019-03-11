@@ -1,13 +1,5 @@
-//
-//  CourseListViewController.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 22.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SVProgressHUD
+import UIKit
 
 protocol CourseListViewControllerProtocol: class {
     func displayCourses(viewModel: CourseList.CoursesLoad.ViewModel)
@@ -26,8 +18,10 @@ class CourseListViewController: UIViewController {
 
     private var state: CourseList.ViewControllerState
 
+    // swiftlint:disable weak_delegate
     let listDelegate: CourseListCollectionViewDelegate
     let listDataSource: CourseListCollectionViewDataSource
+    // swiftlint:enable weak_delegate
 
     lazy var courseListView = self.view as? CourseListView
 
@@ -55,6 +49,7 @@ class CourseListViewController: UIViewController {
         self.listDataSource.delegate = self
     }
 
+    // swiftlint:disable:next unavailable_function
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -161,6 +156,7 @@ final class HorizontalCourseListViewController: CourseListViewController {
         )
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -198,6 +194,7 @@ final class VerticalCourseListViewController: CourseListViewController {
         )
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -234,9 +231,9 @@ final class VerticalCourseListViewController: CourseListViewController {
     override func updatePagination(hasNextPage: Bool, hasError: Bool) {
         super.updatePagination(hasNextPage: hasNextPage, hasError: hasError)
 
-        verticalCourseListView?.isPaginationViewHidden = !hasNextPage
+        self.verticalCourseListView?.isPaginationViewHidden = !hasNextPage
 
-        guard let paginationView = verticalCourseListView?.paginationView as? PaginationView else {
+        guard let paginationView = self.verticalCourseListView?.paginationView as? PaginationView else {
             return
         }
 

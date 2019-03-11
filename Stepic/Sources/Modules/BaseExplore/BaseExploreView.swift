@@ -1,13 +1,5 @@
-//
-//  ExploreExploreView.swift
-//  stepik-ios
-//
-//  Created by Stepik on 10/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol BaseExploreViewDelegate: class {
     func refreshControlDidRefresh()
@@ -25,6 +17,7 @@ final class BaseExploreView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

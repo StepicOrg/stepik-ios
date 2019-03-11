@@ -1,11 +1,3 @@
-//
-//  ContentLanguageSwitchContentLanguageSwitchPresenter.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 12/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol ContentLanguageSwitchPresenterProtocol {
@@ -30,7 +22,7 @@ final class ContentLanguageSwitchPresenter: ContentLanguageSwitchPresenterProtoc
         let viewModel = ContentLanguageSwitch.LanguagesLoad.ViewModel(
             state: ContentLanguageSwitch.ViewControllerState.result(data: viewModels)
         )
-        viewController?.displayLanguages(viewModel: viewModel)
+        self.viewController?.displayLanguages(viewModel: viewModel)
     }
 
     func presentLanguageChange(response: ContentLanguageSwitch.LanguageSelection.Response) {
@@ -47,6 +39,6 @@ final class ContentLanguageSwitchPresenter: ContentLanguageSwitchPresenterProtoc
         let viewModel = ContentLanguageSwitch.LanguageSelection.ViewModel(
             state: ContentLanguageSwitch.ViewControllerState.result(data: viewModels)
         )
-        viewController?.displayLanguageChange(viewModel: viewModel)
+        self.viewController?.displayLanguageChange(viewModel: viewModel)
     }
 }

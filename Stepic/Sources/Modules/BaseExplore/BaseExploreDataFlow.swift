@@ -1,11 +1,3 @@
-//
-//  BaseExploreBaseExploreDataFlow.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 02/10/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import Foundation
 
 enum BaseExplore {

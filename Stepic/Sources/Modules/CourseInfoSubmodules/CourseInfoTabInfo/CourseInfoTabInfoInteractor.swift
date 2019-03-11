@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabInfoInteractor.swift
-//  stepik-ios
-//
-//  Created by Ivan Magda on 15/11/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -21,10 +13,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
     private var shouldOpenedAnalyticsEventSend = false
 
-    init(
-        presenter: CourseInfoTabInfoPresenterProtocol,
-        provider: CourseInfoTabInfoProviderProtocol
-    ) {
+    init(presenter: CourseInfoTabInfoPresenterProtocol, provider: CourseInfoTabInfoProviderProtocol) {
         self.presenter = presenter
         self.provider = provider
     }
@@ -38,9 +27,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
         self.provider.fetchUsersForCourse(course).done { course in
             self.course = course
-            self.presenter.presentCourseInfo(
-                response: .init(course: self.course)
-            )
+            self.presenter.presentCourseInfo(response: .init(course: self.course))
         }.catch { error in
             print("Failed get course info with error: \(error)")
         }
@@ -52,10 +39,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
     func handleControllerAppearance() {
         if let course = self.course {
-            AmplitudeAnalyticsEvents.CoursePreview.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
+            AmplitudeAnalyticsEvents.CoursePreview.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         } else {
             self.shouldOpenedAnalyticsEventSend = true
@@ -67,10 +51,7 @@ extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
         self.doCourseInfoRefresh(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
-            AmplitudeAnalyticsEvents.CoursePreview.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
+            AmplitudeAnalyticsEvents.CoursePreview.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         }
     }

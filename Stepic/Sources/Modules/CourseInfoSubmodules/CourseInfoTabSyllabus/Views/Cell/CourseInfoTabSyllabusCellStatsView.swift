@@ -1,14 +1,6 @@
-//
-//  CourseInfoTabSyllabusCellStatsView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 21.11.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
-import SnapKit
 import Nuke
+import SnapKit
+import UIKit
 
 extension CourseInfoTabSyllabusCellStatsView {
     struct Appearance {
@@ -45,8 +37,7 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
         appearance.textColor = self.appearance.itemTextColor
         appearance.font = self.appearance.itemTextFont
         let view = CourseWidgetStatsItemView(appearance: appearance)
-        view.image = UIImage(named: "course-widget-user")!
-            .withRenderingMode(.alwaysTemplate)
+        view.image = UIImage(named: "course-widget-user")?.withRenderingMode(.alwaysTemplate)
         return view
     }()
 
@@ -58,8 +49,7 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
         appearance.textColor = self.appearance.itemTextColor
         appearance.font = self.appearance.itemTextFont
         let view = CourseWidgetStatsItemView(appearance: appearance)
-        view.image = UIImage(named: "course-info-lesson-like")!
-            .withRenderingMode(.alwaysTemplate)
+        view.image = UIImage(named: "course-info-lesson-like")?.withRenderingMode(.alwaysTemplate)
         return view
     }()
 
@@ -87,8 +77,8 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
 
             if let likesCount = self.likesCount {
                 self.likesView.image = likesCount >= 0
-                    ? UIImage(named: "course-info-lesson-like")!.withRenderingMode(.alwaysTemplate)
-                    : UIImage(named: "course-info-lesson-dislike")!.withRenderingMode(.alwaysTemplate)
+                    ? UIImage(named: "course-info-lesson-like")?.withRenderingMode(.alwaysTemplate)
+                    : UIImage(named: "course-info-lesson-dislike")?.withRenderingMode(.alwaysTemplate)
                 self.likesView.text = "\(likesCount)"
             }
         }
@@ -110,6 +100,7 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
         self.setupView()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

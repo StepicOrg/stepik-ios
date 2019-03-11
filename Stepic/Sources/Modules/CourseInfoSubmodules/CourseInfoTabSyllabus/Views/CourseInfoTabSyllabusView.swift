@@ -1,21 +1,9 @@
-//
-//  CourseInfoTabSyllabusView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol CourseInfoTabSyllabusViewDelegate: class {
-    func courseInfoTabSyllabusViewDidClickDeadlines(
-        _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
-    )
-    func courseInfoTabSyllabusViewDidClickDownloadAll(
-        _ courseInfoTabSyllabusView: CourseInfoTabSyllabusView
-    )
+    func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
+    func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
 }
 
 extension CourseInfoTabSyllabusView {
@@ -99,6 +87,7 @@ final class CourseInfoTabSyllabusView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -139,11 +128,7 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
         self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        willDisplayHeaderView view: UIView,
-        forSection section: Int
-    ) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         self.tableViewDelegate?.tableView?(
             tableView,
             willDisplayHeaderView: view,

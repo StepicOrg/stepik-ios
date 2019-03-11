@@ -1,13 +1,5 @@
-//
-//  CourseInfoTabSyllabusHeaderView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 15/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabSyllabusHeaderView {
     struct Appearance {
@@ -46,11 +38,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         button.titleInsets = self.appearance.buttonTitleInsets
         button.imageSize = self.appearance.buttonImageSize
         button.isHidden = true
-        button.addTarget(
-            self,
-            action: #selector(self.onCalendarButtonClicked),
-            for: .touchUpInside
-        )
+        button.addTarget(self, action: #selector(self.onCalendarButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -64,11 +52,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         button.titleInsets = self.appearance.buttonTitleInsets
         button.imageSize = self.appearance.buttonImageSize
         button.isEnabled = false
-        button.addTarget(
-            self,
-            action: #selector(self.onDownloadAllButtonClicked),
-            for: .touchUpInside
-        )
+        button.addTarget(self, action: #selector(self.onDownloadAllButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -107,6 +91,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -136,10 +121,7 @@ extension CourseInfoTabSyllabusHeaderView: ProgrammaticallyInitializableViewProt
         self.stackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.insets.top)
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.trailing
-                .lessThanOrEqualToSuperview()
-                .offset(-self.appearance.insets.right)
-                .priority(999)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.insets.right).priority(999)
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false

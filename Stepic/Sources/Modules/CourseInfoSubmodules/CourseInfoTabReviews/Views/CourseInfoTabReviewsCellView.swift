@@ -1,13 +1,5 @@
-//
-//  CourseInfoTabReviewsCellView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 13/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabReviewsCellView {
     struct Appearance {
@@ -82,6 +74,7 @@ final class CourseInfoTabReviewsCellView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -133,9 +126,7 @@ extension CourseInfoTabReviewsCellView: ProgrammaticallyInitializableViewProtoco
         self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.dateLabelInsets.top)
-            make.leading
-                .equalTo(self.avatarImageView.snp.trailing)
-                .offset(self.appearance.dateLabelInsets.left)
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.dateLabelInsets.left)
             make.trailing
                 .lessThanOrEqualTo(self.starsRatingView.snp.leading)
                 .offset(-self.appearance.dateLabelInsets.right)
@@ -143,12 +134,8 @@ extension CourseInfoTabReviewsCellView: ProgrammaticallyInitializableViewProtoco
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.nameLabel.snp.makeConstraints { make in
-            make.leading
-                .equalTo(self.avatarImageView.snp.trailing)
-                .offset(self.appearance.nameLabelInsets.left)
-            make.top
-                .equalTo(self.starsRatingView.snp.bottom)
-                .offset(self.appearance.nameLabelInsets.top)
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
+            make.top.equalTo(self.starsRatingView.snp.bottom).offset(self.appearance.nameLabelInsets.top)
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
         }
 

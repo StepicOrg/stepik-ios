@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabReviewsInteractor.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 13/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -27,12 +19,11 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
 
     // Semaphore to prevent concurrent fetching
     private let fetchSemaphore = DispatchSemaphore(value: 1)
-    private lazy var fetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabReviewsInteractor.ReviewsFetch")
+    private lazy var fetchBackgroundQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.CourseInfoTabReviewsInteractor.ReviewsFetch"
+    )
 
-    init(
-        presenter: CourseInfoTabReviewsPresenterProtocol,
-        provider: CourseInfoTabReviewsProviderProtocol
-    ) {
+    init(presenter: CourseInfoTabReviewsPresenterProtocol, provider: CourseInfoTabReviewsProviderProtocol) {
         self.presenter = presenter
         self.provider = provider
     }
@@ -52,10 +43,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             let isOnline = strongSelf.isOnline
             print("course info tab reviews interactor: start fetching reviews, isOnline = \(isOnline)")
 
-            strongSelf.fetchReviewsInAppropriateMode(
-                course: course,
-                isOnline: isOnline
-            ).done { response in
+            strongSelf.fetchReviewsInAppropriateMode(course: course, isOnline: isOnline).done { response in
                 strongSelf.paginationState = PaginationState(page: 1, hasNext: response.hasNextPage)
                 DispatchQueue.main.async {
                     print("course info tab reviews interactor: finish fetching reviews, isOnline = \(isOnline)")
@@ -70,9 +58,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     }
 
     func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request) {
-        guard self.isOnline,
-              self.paginationState.hasNext,
-              let course = self.currentCourse else {
+        guard self.isOnline, self.paginationState.hasNext, let course = self.currentCourse else {
             return
         }
 
@@ -139,10 +125,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
 extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
     func handleControllerAppearance() {
         if let course = self.currentCourse {
-            AmplitudeAnalyticsEvents.CourseReviews.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
+            AmplitudeAnalyticsEvents.CourseReviews.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         } else {
             self.shouldOpenedAnalyticsEventSend = true
@@ -156,10 +139,7 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
         self.doCourseReviewsFetch(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
-            AmplitudeAnalyticsEvents.CourseReviews.opened(
-                courseID: course.id,
-                courseTitle: course.title
-            ).send()
+            AmplitudeAnalyticsEvents.CourseReviews.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         }
     }

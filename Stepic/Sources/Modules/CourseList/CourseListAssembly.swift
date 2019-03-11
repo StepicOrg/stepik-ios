@@ -1,11 +1,3 @@
-//
-//  CourseListPresenter.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 22.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 class CourseListAssembly: Assembly {
@@ -18,17 +10,14 @@ class CourseListAssembly: Assembly {
     // Output
     private weak var moduleOutput: CourseListOutputProtocol?
 
+    // swiftlint:disable:next unavailable_function
     fileprivate func makeViewController(
         interactor: CourseListInteractorProtocol
     ) -> (UIViewController & CourseListViewControllerProtocol) {
         fatalError("Property should be overridden in subclass")
     }
 
-    fileprivate init(
-        type: CourseListType,
-        colorMode: CourseListColorMode,
-        output: CourseListOutputProtocol? = nil
-    ) {
+    fileprivate init(type: CourseListType, colorMode: CourseListColorMode, output: CourseListOutputProtocol? = nil) {
         self.type = type
         self.colorMode = colorMode
         self.moduleOutput = output
@@ -85,7 +74,7 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
 
     private let maxNumberOfDisplayedCourses: Int?
 
-    fileprivate override func makeViewController(
+    override fileprivate func makeViewController(
         interactor: CourseListInteractorProtocol
     ) -> (UIViewController & CourseListViewControllerProtocol) {
         return HorizontalCourseListViewController(
@@ -113,7 +102,7 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
 final class VerticalCourseListAssembly: CourseListAssembly {
     private let presentationDescription: CourseList.PresentationDescription?
 
-    fileprivate override func makeViewController(
+    override fileprivate func makeViewController(
         interactor: CourseListInteractorProtocol
     ) -> (UIViewController & CourseListViewControllerProtocol) {
         return VerticalCourseListViewController(

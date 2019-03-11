@@ -1,11 +1,3 @@
-//
-//  CourseListPersistenceService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 23.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 

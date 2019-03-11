@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabSyllabusAssembly.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 13/12/2018.
-//  Copyright 2018 stepik-ios. All rights reserved.
-//
-
 import UIKit
 
 final class CourseInfoTabSyllabusAssembly: Assembly {
@@ -43,9 +35,7 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             nextLessonService: NextLessonService(),
             tooltipStorageManager: TooltipStorageManager()
         )
-        let viewController = CourseInfoTabSyllabusViewController(
-            interactor: interactor
-        )
+        let viewController = CourseInfoTabSyllabusViewController(interactor: interactor)
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput
