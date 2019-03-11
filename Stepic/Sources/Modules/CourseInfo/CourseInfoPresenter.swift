@@ -89,8 +89,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
     }
 
-    func presentAuthorization() {
-        self.viewController?.displayAuthorization()
+    func presentAuthorization(response: CourseInfo.PresentAuthorization.Response) {
+        self.viewController?.displayAuthorization(viewModel: .init())
     }
 
     private func makeProgressViewModel(progress: Progress) -> CourseInfoProgressViewModel {
@@ -104,7 +104,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     private func makeHeaderViewModel(course: Course) -> CourseInfoHeaderViewModel {
-        let rating: Float = {
+        let rating: Int = {
             if let reviewsCount = course.reviewSummary?.count,
                let averageRating = course.reviewSummary?.average,
                reviewsCount > 0 {
@@ -115,7 +115,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
         let progress: CourseInfoProgressViewModel? = {
             if let progress = course.progress {
-                return CourseInfoProgressViewModel(progress: progress)
+                return self.makeProgressViewModel(progress: progress)
             }
             return nil
         }()

@@ -93,7 +93,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.courseID = courseID
     }
 
-    func refreshCourse() {
+    func doCourseRefreshing(request: CourseInfo.ShowCourse.Request) {
         self.fetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -112,70 +112,70 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
     }
 
-    func tryToSetOnlineMode() {
+    func doOnlineModeSetting(request: CourseInfo.OnlineModeReset.Request) {
         if self.isOnline {
             return
         }
 
         if self.networkReachabilityService.isReachable {
             self.isOnline = true
-            self.doCourseRefreshing()
+            self.doCourseRefreshing(request: .init())
         }
     }
 
-    func handleControllerAppearance(request: CourseInfo.SubmoduleAppearanceHandling.Request) {
+    func doSubmoduleControllerAppearanceHandling(request: CourseInfo.SubmoduleAppearanceHandling.Request) {
         self.submodules[safe: request.submoduleIndex]?.handleControllerAppearance()
     }
 
-    func registerForRemoteNotifications() {
+    func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request) {
         self.notificationsRegistrationService.registerForRemoteNotifications()
     }
 
-    func registerSubmodules(request: CourseInfo.RegisterSubmodule.Request) {
+    func doSubmodulesRegistration(request: CourseInfo.RegisterSubmodule.Request) {
         self.submodules = request.submodules
         self.pushCurrentCourseToSubmodules(submodules: self.submodules)
     }
 
-    func shareCourse() {
+    func doCourseSharing(request: CourseInfo.ShareCourse.Request) {
         guard let urlPath = self.courseWebURLPath else {
             return
         }
         self.presenter.presentCourseSharing(response: .init(urlPath: urlPath))
     }
 
-    func dropCourse() {
+    func doCourseUnenrollment(request: CourseInfo.UnenrollCourse.Request) {
         guard let course = self.currentCourse, course.enrolled else {
             return
         }
 
-        self.presenter.presentWaitingState()
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
         self.courseSubscriber.leave(course: course, source: .preview).done { course in
             // Refresh course
             self.currentCourse = course
             self.presenter.presentCourse(response: .init(result: .success(course)))
         }.ensure {
-            self.presenter.dismissWaitingState()
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }.catch { error in
             print("course info interactor: drop course error = \(error)")
         }
     }
 
-    func doMainCourseAction() {
+    func doMainCourseAction(request: CourseInfo.MainCourseAction.Request) {
         guard let course = self.currentCourse else {
             return
         }
 
-        self.presenter.presentWaitingState()
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         if !self.userAccountService.isAuthorized {
-            self.presenter.dismissWaitingState()
-            self.presenter.presentAuthorization()
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            self.presenter.presentAuthorization(response: .init())
             return
         }
 
         if course.enrolled {
             // Enrolled course -> open last step
-            self.presenter.dismissWaitingState()
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             self.presenter.presentLastStep(
                 response: .init(
                     course: course,
@@ -201,7 +201,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                     )
                 )
             }.ensure {
-                self.presenter.dismissWaitingState()
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             }.catch { error in
                 print("course info interactor: join course error = \(error)")
             }

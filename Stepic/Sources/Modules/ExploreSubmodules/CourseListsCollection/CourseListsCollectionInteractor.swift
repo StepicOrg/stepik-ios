@@ -30,7 +30,7 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
         self.provider = provider
     }
 
-    func fetchCourseLists(request: CourseListsCollection.ShowCourseLists.Request) {
+    func doCourseListsFetching(request: CourseListsCollection.ShowCourseLists.Request) {
         self.provider.fetchCachedCourseLists().then {
             cachedCourseLists -> Promise<[CourseListModel]> in
             // Pass cached data to presenter and start fetching from remote
@@ -54,7 +54,7 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
         }
     }
 
-    func loadFullscreenCourseList(
+    func doFullscreenCourseListLoading(
         request: CourseListsCollection.PresentFullscreenCourseListModule.Request
     ) {
         guard let collectionCourseListType = request.courseListType

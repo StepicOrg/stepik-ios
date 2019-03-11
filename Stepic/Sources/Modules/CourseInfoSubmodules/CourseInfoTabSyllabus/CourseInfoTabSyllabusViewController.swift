@@ -138,7 +138,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate {
     func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {
-        self.interactor.doPersonalDeadlinesAction()
+        self.interactor.doPersonalDeadlinesAction(request: .init())
     }
 
     func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {

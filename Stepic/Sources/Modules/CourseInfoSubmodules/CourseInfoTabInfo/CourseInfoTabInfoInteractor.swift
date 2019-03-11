@@ -31,7 +31,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
 
     // MARK: Get course info
 
-    func getCourseInfo() {
+    func doCourseInfoRefreshing(request: CourseInfoTabInfo.ShowInfo.Request) {
         guard let course = self.course else {
             return
         }
@@ -64,7 +64,7 @@ extension CourseInfoTabInfoInteractor: CourseInfoTabInfoInputProtocol {
 
     func update(with course: Course, isOnline: Bool) {
         self.course = course
-        self.doCourseInfoRefreshing()
+        self.doCourseInfoRefreshing(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
             AmplitudeAnalyticsEvents.CoursePreview.opened(

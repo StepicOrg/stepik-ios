@@ -163,7 +163,7 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
         )
     }
 
-    func displayAuthorization() {
+    func displayAuthorization(viewModel: BaseExplore.PresentAuthorization.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }

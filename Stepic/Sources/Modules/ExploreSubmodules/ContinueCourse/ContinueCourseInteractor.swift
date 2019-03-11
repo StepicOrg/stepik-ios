@@ -42,7 +42,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         self.dataBackUpdateService.delegate = self
     }
 
-    func loadLastCourse(request: ContinueCourse.LoadLastCourse.Request) {
+    func doLastCourseRefreshing(request: ContinueCourse.LoadLastCourse.Request) {
         self.provider.fetchLastCourse().done { course in
             if let course = course {
                 self.currentCourse = course
@@ -55,7 +55,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         }
     }
 
-    func continueLastCourse(request: ContinueCourse.ContinueCourse.Request) {
+    func doContinueLastCourseAction(request: ContinueCourse.ContinueCourse.Request) {
         guard let currentCourse = self.currentCourse else {
             return
         }
@@ -77,7 +77,7 @@ final class ContinueCourseInteractor: ContinueCourseInteractorProtocol {
         )
     }
 
-    func checkForTooltip(request: ContinueCourse.CheckTooltipAvailability.Request) {
+    func doTooltipChecking(request: ContinueCourse.CheckTooltipAvailability.Request) {
         self.presenter.presentTooltip(
             response: .init(
                 shouldShowTooltip: !self.tooltipStorageManager.didShowOnHomeContinueLearning

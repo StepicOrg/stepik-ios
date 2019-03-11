@@ -29,7 +29,7 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
         self.networkReachabilityService = networkReachabilityService
     }
 
-    func loadFullscreenCourseList(request: BaseExplore.PresentFullscreenCourseListModule.Request) {
+    func doFullscreenCourseListLoading(request: BaseExplore.PresentFullscreenCourseListModule.Request) {
         self.presenter.presentFullscreenCourseList(
             response: .init(
                 presentationDescription: request.presentationDescription,
@@ -38,7 +38,7 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
         )
     }
 
-    func tryToSetOnlineMode(request: BaseExplore.TryToSetOnline.Request) {
+    func doOnlineModeSetting(request: BaseExplore.TryToSetOnline.Request) {
         if self.networkReachabilityService.isReachable {
             for module in request.modules {
                 module.setOnlineStatus()
@@ -61,7 +61,7 @@ class BaseExploreInteractor: BaseExploreInteractorProtocol, CourseListOutputProt
     }
 
     func presentAuthorization() {
-        self.presenter.presentAuthorization()
+        self.presenter.presentAuthorization(response: .init())
     }
 
     func presentError(sourceModule: CourseListInputProtocol) { }

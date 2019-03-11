@@ -25,7 +25,7 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
         self.networkReachabilityService = networkReachabilityService
     }
 
-    func tryToSetOnlineMode(request: FullscreenCourseList.TryToSetOnline.Request) {
+    func doOnlineModeSetting(request: FullscreenCourseList.TryToSetOnline.Request) {
         if self.networkReachabilityService.isReachable {
             request.module.setOnlineStatus()
         }
@@ -46,14 +46,14 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
     }
 
     func presentAuthorization() {
-        self.presenter.presentAuthorization()
+        self.presenter.presentAuthorization(response: .init())
     }
 
     func presentEmptyState(sourceModule: CourseListInputProtocol) {
-        self.presenter.presentEmptyState()
+        self.presenter.presentPlaceholder(response: .init(state: .empty))
     }
 
     func presentError(sourceModule: CourseListInputProtocol) {
-        self.presenter.presentErrorState()
+        self.presenter.presentPlaceholder(response: .init(state: .error))
     }
 }

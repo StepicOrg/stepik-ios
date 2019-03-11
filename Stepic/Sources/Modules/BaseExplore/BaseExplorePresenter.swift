@@ -45,7 +45,7 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
         )
     }
 
-    func presentAuthorization() {
-        self.viewController?.displayAuthorization()
+    func presentAuthorization(response: BaseExplore.PresentAuthorization.Response) {
+        self.viewController?.displayAuthorization(viewModel: .init())
     }
 }

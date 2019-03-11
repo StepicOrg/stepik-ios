@@ -13,7 +13,7 @@ protocol FullscreenCourseListPresenterProtocol {
     func presentCourseSyllabus(response: FullscreenCourseList.PresentCourseSyllabus.Response)
     func presentLastStep(response: FullscreenCourseList.PresentLastStep.Response)
     func presentAuthorization(response: FullscreenCourseList.PresentAuthorization.Response)
-    func presentPlaceholder(response: FullscreenCourseList.UpdatePlaceholderState.Response)
+    func presentPlaceholder(response: FullscreenCourseList.PresentPlaceholder.Response)
 }
 
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
@@ -36,11 +36,11 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
         )
     }
 
-    func presentAuthorization() {
-        self.viewController?.displayAuthorization()
+    func presentAuthorization(response: FullscreenCourseList.PresentAuthorization.Response) {
+        self.viewController?.displayAuthorization(viewModel: .init())
     }
 
-    func presentPlaceholder(response: FullscreenCourseList.UpdatePlaceholderState.Response) {
+    func presentPlaceholder(response: FullscreenCourseList.PresentPlaceholder.Response) {
         self.viewController?.displayPlaceholder(viewModel: .init(state: response.state))
     }
 }

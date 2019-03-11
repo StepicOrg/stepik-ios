@@ -102,7 +102,7 @@ final class CourseInfoViewController: UIViewController {
             self.automaticallyAdjustsScrollViewInsets = false
         }
 
-        self.interactor.doCourseRefreshing()
+        self.interactor.doCourseRefreshing(request: .init())
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -126,12 +126,12 @@ final class CourseInfoViewController: UIViewController {
             strongSelf.updateTopBar(alpha: strongSelf.lastTopBarAlpha)
         }
 
-        self.interactor.doOnlineModeSetting()
+        self.interactor.doOnlineModeSetting(request: .init())
 
         if self.didJustSubscribe {
             NotificationPermissionStatus.current.done { status in
                 if status == .notDetermined {
-                    self.interactor.doRegistrationForRemoteNotifications()
+                    self.interactor.doRegistrationForRemoteNotifications(request: .init())
                 }
             }
         }
@@ -219,7 +219,7 @@ final class CourseInfoViewController: UIViewController {
                 title: NSLocalizedString("Share", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-                    self?.interactor.doCourseSharing()
+                    self?.interactor.doCourseSharing(request: .init())
                 }
             )
         )
@@ -230,7 +230,7 @@ final class CourseInfoViewController: UIViewController {
                     title: NSLocalizedString("DropCourse", comment: ""),
                     style: .destructive,
                     handler: { [weak self] _ in
-                        self?.interactor.doCourseUnenrollment()
+                        self?.interactor.doCourseUnenrollment(request: .init())
                     }
                 )
             )
@@ -371,7 +371,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
             let viewController = PersonalDeadlinesModeSelectionLegacyAssembly(
                 course: viewModel.course,
                 updateCompletion: { [weak self] in
-                    self?.interactor.doCourseRefreshing()
+                    self?.interactor.doCourseRefreshing(request: .init())
                 }
             ).makeModule()
             self.customPresentViewController(
@@ -385,7 +385,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
                 course: viewModel.course,
                 presentingViewController: self,
                 updateCompletion: { [weak self] in
-                    self?.interactor.doCourseRefreshing()
+                    self?.interactor.doCourseRefreshing(request: .init())
                 }
             ).makeModule()
             viewController.popoverPresentationController?.barButtonItem = self.moreBarButton
@@ -414,7 +414,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
         )
     }
 
-    func displayAuthorization() {
+    func displayAuthorization(viewModel: CourseInfo.PresentAuthorization.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }
@@ -517,6 +517,6 @@ extension CourseInfoViewController: CourseInfoViewDelegate {
     }
 
     func courseInfoViewDidMainAction(_ courseInfoView: CourseInfoView) {
-        self.interactor.doMainCourseAction()
+        self.interactor.doMainCourseAction(request: .init())
     }
 }

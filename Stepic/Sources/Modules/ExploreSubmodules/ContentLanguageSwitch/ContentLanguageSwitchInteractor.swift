@@ -28,7 +28,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
         self.provider = provider
     }
 
-    func showLanguages(request: ContentLanguageSwitch.ShowLanguages.Request) {
+    func doLanguagesListPresentation(request: ContentLanguageSwitch.ShowLanguages.Request) {
         when(
             fulfilled: self.provider.fetchAvailableLanguages(),
             self.provider.fetchCurrentLanguage()
@@ -52,7 +52,7 @@ final class ContentLanguageSwitchInteractor: ContentLanguageSwitchInteractorProt
         }
     }
 
-    func selectLanguage(request: ContentLanguageSwitch.SelectLanguage.Request) {
+    func doLanguageSelection(request: ContentLanguageSwitch.SelectLanguage.Request) {
         guard let selectedLanguage = self.currentAvailableContentLanguages
             .first(where: { $0.0 == request.viewModelUniqueIdentifier })?.1 else {
             fatalError("Request contains invalid data")

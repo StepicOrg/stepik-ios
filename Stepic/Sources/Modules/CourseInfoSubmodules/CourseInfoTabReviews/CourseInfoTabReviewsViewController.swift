@@ -82,7 +82,7 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 }
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol {
-    func displayReviews(viewModel: CourseInfoTabReviews.ShowReviews.ViewModel) {
+    func displayCourseReviews(viewModel: CourseInfoTabReviews.ShowReviews.ViewModel) {
         if case .result(let data) = viewModel.state {
             self.tableDataSource.viewModels = data.reviews
             self.updateState(newState: viewModel.state)
@@ -90,7 +90,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
         }
     }
 
-    func displayNextReviews(viewModel: CourseInfoTabReviews.LoadNextReviews.ViewModel) {
+    func displayNextCourseReviews(viewModel: CourseInfoTabReviews.LoadNextReviews.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             self.tableDataSource.viewModels.append(contentsOf: data.reviews)

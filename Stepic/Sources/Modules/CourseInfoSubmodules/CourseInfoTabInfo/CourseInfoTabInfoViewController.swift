@@ -79,7 +79,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateState()
-        self.interactor.doCourseInfoRefreshing()
+        self.interactor.doCourseInfoRefreshing(request: .init())
     }
 
     // MARK: Private helpers

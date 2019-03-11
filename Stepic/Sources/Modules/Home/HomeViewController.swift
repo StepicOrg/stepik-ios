@@ -217,7 +217,7 @@ final class HomeViewController: BaseExploreViewController {
             switch state {
             case .anonymous:
                 placeholderView.onPlaceholderClick = { [weak self] in
-                    self?.displayAuthorization()
+                    self?.displayAuthorization(viewModel: .init())
                 }
             case .error:
                 placeholderView.onPlaceholderClick = { [weak self] in

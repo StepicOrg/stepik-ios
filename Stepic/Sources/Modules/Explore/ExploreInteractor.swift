@@ -32,13 +32,13 @@ final class ExploreInteractor: BaseExploreInteractor, ExploreInteractorProtocol 
         )
     }
 
-    func loadContent(request: Explore.LoadContent.Request) {
+    func doContentLoading(request: Explore.LoadContent.Request) {
         self.explorePresenter?.presentContent(
             response: .init(contentLanguage: self.contentLanguageService.globalContentLanguage)
         )
     }
 
-    func loadLanguageSwitchBlock(request: Explore.CheckLanguageSwitchAvailability.Request) {
+    func doLanguageSwitchBlockLoading(request: Explore.CheckLanguageSwitchAvailability.Request) {
         self.explorePresenter?.presentLanguageSwitchBlock(
             response: .init(
                 isHidden: !self.contentLanguageSwitchAvailabilityService

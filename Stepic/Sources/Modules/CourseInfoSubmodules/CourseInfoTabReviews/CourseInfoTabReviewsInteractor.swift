@@ -153,7 +153,7 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
         self.currentCourse = course
         self.isOnline = isOnline
 
-        self.fetchCourseReviews()
+        self.doCourseReviewsFetching(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
             AmplitudeAnalyticsEvents.CourseReviews.opened(

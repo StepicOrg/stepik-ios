@@ -448,7 +448,7 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
         print("course info tab syllabus interactor: updated from parent module, isOnline = \(isOnline)")
         self.currentCourse = course
         self.isOnline = isOnline
-        self.getCourseSyllabus()
+        self.doSectionsFetching(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
             AmplitudeAnalyticsEvents.Sections.opened(

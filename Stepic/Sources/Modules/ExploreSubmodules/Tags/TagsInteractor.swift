@@ -35,7 +35,7 @@ final class TagsInteractor: TagsInteractorProtocol {
 
     // MARK: Actions
 
-    func fetchTags(request: Tags.ShowTags.Request) {
+    func doTagsFetching(request: Tags.ShowTags.Request) {
         self.provider.fetchTags().done { tags in
             let newTags = tags.map { tag in
                 Tags.Tag(
@@ -52,7 +52,7 @@ final class TagsInteractor: TagsInteractorProtocol {
         }
     }
 
-    func presentTagCollection(request: Tags.PresentCollection.Request) {
+    func doTagsCollectionPresentation(request: Tags.PresentCollection.Request) {
         guard let tag = self.currentTags
             .first(where: { $0.0 == request.viewModelUniqueIdentifier})?.1 else {
             return

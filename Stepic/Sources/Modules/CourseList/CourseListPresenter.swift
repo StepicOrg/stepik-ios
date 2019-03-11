@@ -52,7 +52,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         self.viewController?.displayNextCourses(viewModel: viewModel)
     }
 
-    func presentWaitingState(response: CourseInfoTabSyllabus.HandleWaitingState.Response) {
+    func presentWaitingState(response: CourseList.HandleWaitingState.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
@@ -64,12 +64,13 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         var viewModels: [CourseWidgetViewModel] = []
         for (uid, course) in courses {
             let isAdaptive = availableInAdaptive.contains(course)
-            let viewModel = CourseWidgetViewModel(
+            let viewModel = self.makeWidgetViewModel(
                 uniqueIdentifier: uid,
                 course: course,
                 isAdaptive: isAdaptive,
                 isAuthorized: isAuthorized
             )
+
             viewModels.append(viewModel)
         }
         return viewModels
@@ -93,7 +94,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     ) -> CourseWidgetViewModel {
         var progressViewModel: CourseWidgetProgressViewModel?
         if let progress = course.progress {
-            progressViewModel = CourseWidgetProgressViewModel(progress: progress)
+            progressViewModel = self.makeProgressViewModel(progress: progress)
         }
 
         var ratingLabelText: String?

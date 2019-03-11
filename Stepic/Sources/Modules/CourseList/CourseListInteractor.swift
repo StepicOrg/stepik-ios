@@ -61,7 +61,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
     // MARK: - Public methods
 
-    func fetchCourses(request: CourseList.ShowCourses.Request) {
+    func doCoursesFetching(request: CourseList.ShowCourses.Request) {
         // Check for state and
         // - isOnline && didLoadFromCache: we loaded cached courses (and not only cached courses), load from remote
         // - !isOnline && didLoadFromCache: we loaded cached courses, but can't load from network (it's just refresh from cache)
@@ -129,7 +129,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
     }
 
-    func fetchNextCourses(request: CourseList.LoadNextCourses.Request) {
+    func doNextCoursesFetching(request: CourseList.LoadNextCourses.Request) {
         // If we are
         // - in offline mode
         // - have no more courses
@@ -174,7 +174,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     }
 
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request) {
-        self.presenter.presentWaitingState()
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
@@ -182,14 +182,14 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         }
 
         if !self.userAccountService.isAuthorized {
-            self.presenter.dismissWaitingState()
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             self.moduleOutput?.presentAuthorization()
             return
         }
 
         if targetCourse.enrolled {
             // Enrolled course -> open last step
-            self.presenter.dismissWaitingState()
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             self.moduleOutput?.presentLastStep(
                 course: targetCourse,
                 isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
@@ -208,7 +208,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                     courseTitle: course.title
                 ).send()
 
-                self.presenter.dismissWaitingState()
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 self.moduleOutput?.presentLastStep(
                     course: targetCourse,
                     isAdaptive: self.adaptiveStorageManager.canOpenInAdaptiveMode(
@@ -217,7 +217,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
             }.catch { _ in
                 // FIXME: use dismiss with error
-                self.presenter.dismissWaitingState()
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             }
         }
     }
@@ -232,7 +232,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             // Enrolled course
             // - adaptive -> info
             // - normal -> syllabus
-            self.presenter.dismissWaitingState()
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
             if self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: targetCourse.id) {
                 self.moduleOutput?.presentCourseInfo(course: targetCourse)
             } else {

@@ -19,7 +19,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         var viewModel: CourseInfoTabInfo.ShowInfo.ViewModel
 
         if let course = response.course {
-            viewModel = .init(state: .result(data: .init(course: course)))
+            viewModel = .init(state: .result(data: self.makeViewModel(course: course)))
         } else {
             viewModel = .init(state: .loading)
         }
@@ -104,11 +104,11 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         conditionPoints: Int?,
         distinctionPoints: Int?
     ) -> String {
-        let formattedCondition = self.formattedCertificateDetailTitle(
+        let formattedCondition = self.makeFormattedCertificateDetailTitle(
             NSLocalizedString("CertificateCondition", comment: ""),
             points: conditionPoints
         )
-        let formattedDistinction = self.formattedCertificateDetailTitle(
+        let formattedDistinction = self.makeFormattedCertificateDetailTitle(
             NSLocalizedString("WithDistinction", comment: ""),
             points: distinctionPoints
         )

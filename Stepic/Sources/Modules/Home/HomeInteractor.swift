@@ -36,7 +36,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         )
     }
 
-    func loadStreakActivity(request: Home.LoadStreak.Request) {
+    func doStreakActivityLoading(request: Home.LoadStreak.Request) {
         guard let user = self.userAccountService.currentUser else {
             self.homePresenter?.presentStreakActivity(response: .init(result: .hidden))
             return
@@ -56,7 +56,7 @@ final class HomeInteractor: BaseExploreInteractor, HomeInteractorProtocol {
         }
     }
 
-    func loadContent(request: Home.LoadContent.Request) {
+    func doContentLoading(request: Home.LoadContent.Request) {
         self.homePresenter?.presentContent(
             response: .init(
                 isAuthorized: self.userAccountService.isAuthorized,

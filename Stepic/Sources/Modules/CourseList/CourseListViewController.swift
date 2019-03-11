@@ -22,12 +22,12 @@ protocol CourseListViewControllerDelegate: class {
 }
 
 class CourseListViewController: UIViewController {
-    private let interactor: CourseListInteractorProtocol
+    let interactor: CourseListInteractorProtocol
 
     private var state: CourseList.ViewControllerState
 
-    private let listDelegate: CourseListCollectionViewDelegate
-    private let listDataSource: CourseListCollectionViewDataSource
+    let listDelegate: CourseListCollectionViewDelegate
+    let listDataSource: CourseListCollectionViewDataSource
 
     lazy var courseListView = self.view as? CourseListView
 
@@ -106,7 +106,7 @@ extension CourseListViewController: CourseListViewControllerProtocol {
         }
     }
 
-    func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.HandleWaitingState.ViewModel) {
+    func displayBlockingLoadingIndicator(viewModel: CourseList.HandleWaitingState.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {

@@ -138,7 +138,7 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
         )
     }
 
-    func displayAuthorization() {
+    func displayAuthorization(viewModel: FullscreenCourseList.PresentAuthorization.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
     }
 }
