@@ -56,7 +56,7 @@ final class CourseInfoViewController: UIViewController {
 
     init(
         interactor: CourseInfoInteractorProtocol,
-        availableTabs: [CourseInfo.Tab] = [.info, .syllabus],
+        availableTabs: [CourseInfo.Tab],
         initialTab: CourseInfo.Tab,
         didJustSubscribe: Bool = false
     ) {
@@ -67,7 +67,7 @@ final class CourseInfoViewController: UIViewController {
         if let initialTabIndex = self.availableTabs.firstIndex(of: initialTab) {
             self.initialTabIndex = initialTabIndex
         } else {
-            fatalError("View controller not supported given initial tab")
+            self.initialTabIndex = 0
         }
 
         super.init(nibName: nil, bundle: nil)
