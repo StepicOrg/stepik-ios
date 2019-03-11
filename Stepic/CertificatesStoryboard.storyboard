@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Styled Navigation View Controller-->
+        <!--Styled Navigation Controller-->
         <scene sceneID="K0I-oE-pFa">
             <objects>
-                <navigationController storyboardIdentifier="CertificatesNavigation" id="LHK-cu-T61" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CertificatesNavigation" id="LHK-cu-T61" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BwG-ab-5HL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

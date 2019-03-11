@@ -100,13 +100,11 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     func onAppear() {
         presenter?.refresh()
-        (self.navigationController as? StyledNavigationViewController)?.setStatusBarStyle()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter?.sendAppearanceEvent()
-        (self.navigationController as? StyledNavigationViewController)?.changeShadowAlpha(1.0)
     }
 
     func set(state: ProfileState) {

@@ -39,18 +39,6 @@ class AdaptiveStatsPagerViewController: PagerController {
         tabsViewBackgroundColor = UIColor.mainLight
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.delegate = self
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if navigationController?.delegate === self {
-            navigationController?.delegate = nil
-        }
-    }
-
     internal func controllerForSection(_ section: AdaptiveStatsSection) -> UIViewController {
         guard let statsManager = self.statsManager, let ratingsManager = self.ratingsManager else {
             return UIViewController()
@@ -90,12 +78,8 @@ extension AdaptiveStatsPagerViewController: PagerDataSource {
     }
 }
 
-extension AdaptiveStatsPagerViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard let navController = navigationController as? StyledNavigationViewController else {
-            return
-        }
-
-        navController.animateShadowChange(for: self)
+extension AdaptiveStatsPagerViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return .init(shadowViewAlpha: 0.0)
     }
 }

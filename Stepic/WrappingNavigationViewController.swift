@@ -1,5 +1,5 @@
 //
-//  StyledNavigationViewController.swift
+//  StyledNavigationController.swift
 //  Stepic
 //
 //  Created by Alexander Karpov on 03.09.16.
@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class WrappingNavigationViewController: StyledNavigationViewController {
+class WrappingNavigationViewController: StyledNavigationController {
     private var onDismissAction: (() -> Void)?
 
     convenience init(wrappedViewController: UIViewController, title: String? = nil, onDismiss: (() -> Void)? = nil) {

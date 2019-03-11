@@ -62,7 +62,7 @@ final class DeepLinkRouter {
             return
         }
         if isModal {
-            let navigation = StyledNavigationViewController()
+            let navigation = StyledNavigationController()
             navigation.setViewControllers(modules, animated: false)
             let closeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(DeepLinkRouter.close))
             navigationToClose = navigation
