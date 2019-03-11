@@ -1,13 +1,5 @@
-//
-//  Gra?dientCoursesPlaceholderViewFactory.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 02.10.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import Atributika
+import UIKit
 
 final class GradientCoursesPlaceholderViewFactory {
     enum Appearance {
@@ -117,10 +109,10 @@ final class GradientCoursesPlaceholderViewFactory {
         text: String,
         fontSize: CGFloat
     ) -> NSAttributedString {
-        let b = Style("b").font(.systemFont(ofSize: fontSize, weight: .medium))
+        let bold = Style("b").font(.systemFont(ofSize: fontSize, weight: .medium))
         let all = Style.font(.systemFont(ofSize: fontSize, weight: .light))
         return text
-            .style(tags: b)
+            .style(tags: bold)
             .styleAll(all)
             .attributedString
     }

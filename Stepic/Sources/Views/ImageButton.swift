@@ -1,11 +1,3 @@
-//
-//  ImageButton.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 16/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 final class ImageButton: UIControl {
@@ -53,7 +45,7 @@ final class ImageButton: UIControl {
 
     var font = UIFont.systemFont(ofSize: 16) {
         didSet {
-            self.titleLabel.font = font
+            self.titleLabel.font = self.font
             self.titleLabel.sizeToFit()
 
             self.setNeedsLayout()
@@ -118,6 +110,7 @@ final class ImageButton: UIControl {
         self.setupView()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

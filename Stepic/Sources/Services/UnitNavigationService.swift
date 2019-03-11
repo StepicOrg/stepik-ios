@@ -1,11 +1,3 @@
-//
-//  UnitNavigationService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 18/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -119,12 +111,8 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
             direction: direction
         ).then { sections -> Promise<Section?> in
             let sections = direction == .previous ? sections.reversed() : sections
-            for section in sections {
-                if section.isReachable,
-                   !section.isExam,
-                   section.unitsArray.count > 0 {
-                    return Promise.value(section)
-                }
+            for section in sections where section.isReachable && !section.isExam && !section.unitsArray.isEmpty {
+                return Promise.value(section)
             }
 
             return Promise.value(nil)
@@ -147,8 +135,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
             return Promise { seal in
                 when(fulfilled: allUnitsFromCacheOrNetwork).done { units in
                     let targetUnit = units.compactMap { $0 }
-                        .filter { $0.id == targetUnitID }
-                        .first
+                        .first { $0.id == targetUnitID }
                     seal.fulfill(targetUnit)
                 }.catch { error in
                     seal.reject(error)

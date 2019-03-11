@@ -1,13 +1,5 @@
-//
-//  CourseInfoTabSyllabusHeaderView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 15/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabSyllabusHeaderView {
     struct Appearance {
@@ -107,6 +99,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

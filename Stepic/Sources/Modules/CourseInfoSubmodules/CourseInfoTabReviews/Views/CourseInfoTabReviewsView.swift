@@ -1,13 +1,5 @@
-//
-//  CourseInfoTabReviewsView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 13/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol CourseInfoTabReviewsViewDelegate: class {
     func courseInfoTabReviewsViewDidPaginationRequesting(
@@ -69,6 +61,7 @@ final class CourseInfoTabReviewsView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

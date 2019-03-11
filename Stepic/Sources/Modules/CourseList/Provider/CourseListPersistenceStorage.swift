@@ -1,11 +1,3 @@
-//
-//  CourseListPersistenceStorage.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 28.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 protocol CourseListPersistenceStorage: class {
@@ -37,10 +29,9 @@ final class PassiveCourseListPersistenceStorage: CourseListPersistenceStorage {
     }
 
     func update(newCachedList: [Course.IdType]) {
-
     }
 
     func getCoursesList() -> [Course.IdType] {
-        return list
+        return self.list
     }
 }

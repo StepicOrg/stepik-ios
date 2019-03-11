@@ -1,13 +1,5 @@
-//
-//  CourseInfoTabSyllabusView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol CourseInfoTabSyllabusViewDelegate: class {
     func courseInfoTabSyllabusViewDidClickDeadlines(
@@ -99,6 +91,7 @@ final class CourseInfoTabSyllabusView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -1,11 +1,3 @@
-//
-//  HighlightFakeButton.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 04.10.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 /// Class to implement highlight (button feedback) by color changing for any UIView
@@ -16,7 +8,7 @@ final class HighlightFakeButton: UIButton {
 
     override var isHighlighted: Bool {
         didSet {
-            if isHighlighted {
+            if self.isHighlighted {
                 self.backgroundColor = self.highlightedBackgroundColor
             } else {
                 self.backgroundColor = self.defaultBackgroundColor

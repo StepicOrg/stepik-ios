@@ -1,13 +1,5 @@
-//
-//  CourseWidgetStatsItemView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseWidgetStatsItemView {
     struct Appearance {
@@ -23,7 +15,7 @@ extension CourseWidgetStatsItemView {
 final class CourseWidgetStatsItemView: UIView {
     let appearance: Appearance
 
-    lazy var imageView: UIImageView = UIImageView()
+    lazy var imageView = UIImageView()
 
     private lazy var textLabel: CourseWidgetLabel = {
         var appearance = CourseWidgetLabel.Appearance()
@@ -55,6 +47,7 @@ final class CourseWidgetStatsItemView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

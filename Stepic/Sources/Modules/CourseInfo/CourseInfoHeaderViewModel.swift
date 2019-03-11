@@ -1,11 +1,3 @@
-//
-//  CourseInfoHeaderViewModel.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 06.11.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 struct CourseInfoProgressViewModel {

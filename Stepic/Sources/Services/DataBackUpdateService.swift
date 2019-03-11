@@ -1,11 +1,3 @@
-//
-//  DataBackUpdateService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 31/01/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -214,7 +206,8 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
             return
         }
 
-        guard let updateDescription = notification.userInfo?[NotificationKey.description] as? DataBackUpdateDescription else {
+        let descriptionFromUserInfo = notification.userInfo?[NotificationKey.description]
+        guard let updateDescription = descriptionFromUserInfo as? DataBackUpdateDescription else {
             print("data back update service: received malformed notification")
             return
         }

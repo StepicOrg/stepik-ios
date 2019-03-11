@@ -1,11 +1,3 @@
-//
-//  CourseListProvider.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 23.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -45,8 +37,7 @@ final class CourseListProvider: CourseListProviderProtocol {
             persistenceService.fetch().done { courses in
                 seal.fulfill((courses, Meta.oneAndOnlyPage))
             }.catch { error in
-                print("course list provider: unable to fetch courses from cache, " +
-                    "error = \(error)")
+                print("course list provider: unable to fetch courses from cache, error = \(error)")
                 seal.reject(Error.persistenceFetchFailed)
             }
         }
@@ -56,8 +47,7 @@ final class CourseListProvider: CourseListProviderProtocol {
         var meta = Meta.oneAndOnlyPage
         return Promise { seal in
             self.networkService.fetch(page: page).then {
-                (courses, _meta) -> Promise<([Course], [Progress], [CourseReviewSummary])> in
-                meta = _meta
+                (courses, _) -> Promise<([Course], [Progress], [CourseReviewSummary])> in
                 let progressIDs = courses.compactMap { $0.progressId }
                 let summariesIDs = courses.compactMap { $0.reviewSummaryId }
 
@@ -76,8 +66,7 @@ final class CourseListProvider: CourseListProviderProtocol {
 
                 seal.fulfill((courses, meta))
             }.catch { error in
-                print("course list provider: unable to fetch courses from api, " +
-                    "error = \(error)")
+                print("course list provider: unable to fetch courses from api, error = \(error)")
                 seal.reject(Error.networkFetchFailed)
             }
         }

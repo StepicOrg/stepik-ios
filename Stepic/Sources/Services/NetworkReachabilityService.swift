@@ -1,13 +1,5 @@
-//
-//  NetworkReachabilityService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 09.10.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import Foundation
 import Alamofire
+import Foundation
 
 protocol NetworkReachabilityServiceProtocol: class {
     var networkStatus: NetworkReachabilityStatus { get }

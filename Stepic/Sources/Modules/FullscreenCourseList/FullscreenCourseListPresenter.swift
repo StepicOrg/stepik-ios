@@ -1,11 +1,3 @@
-//
-//  FullscreenCourseListFullscreenCourseListPresenter.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 19/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol FullscreenCourseListPresenterProtocol {

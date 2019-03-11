@@ -1,11 +1,3 @@
-//
-//  CourseInfoCourseInfoInteractor.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 30/11/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -67,7 +59,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
     // To fetch only one course concurrently
     private let fetchSemaphore = DispatchSemaphore(value: 1)
-    private lazy var fetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoInteractor.CourseFetch")
+    private lazy var fetchBackgroundQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.CourseInfoInteractor.CourseFetch"
+    )
 
     init(
         courseID: Course.IdType,
@@ -79,7 +73,6 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol
-
     ) {
         self.presenter = presenter
         self.provider = provider

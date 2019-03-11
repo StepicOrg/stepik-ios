@@ -1,13 +1,5 @@
-//
-//  CourseInfoTabSyllabusCellView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 21/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabSyllabusCellView {
     struct Appearance {
@@ -88,6 +80,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -139,11 +132,12 @@ final class CourseInfoTabSyllabusCellView: UIView {
             CourseInfoTabSyllabusCellSkeletonView()
         }
 
-        [self.coverImageView,
-         self.titleLabel,
-         self.downloadButton,
-         self.progressIndicatorView,
-         self.statsView
+        [
+            self.coverImageView,
+            self.titleLabel,
+            self.downloadButton,
+            self.progressIndicatorView,
+            self.statsView
         ].forEach { $0.alpha = 0.0 }
 
         self.skeleton.show()
@@ -152,11 +146,12 @@ final class CourseInfoTabSyllabusCellView: UIView {
     func hideLoading() {
         self.skeleton.hide()
 
-        [self.coverImageView,
-         self.titleLabel,
-         self.downloadButton,
-         self.progressIndicatorView,
-         self.statsView
+        [
+            self.coverImageView,
+            self.titleLabel,
+            self.downloadButton,
+            self.progressIndicatorView,
+            self.statsView
         ].forEach { $0.alpha = 1.0 }
     }
 

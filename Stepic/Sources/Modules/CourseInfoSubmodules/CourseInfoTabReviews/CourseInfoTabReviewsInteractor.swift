@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabReviewsInteractor.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 13/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -27,7 +19,9 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
 
     // Semaphore to prevent concurrent fetching
     private let fetchSemaphore = DispatchSemaphore(value: 1)
-    private lazy var fetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabReviewsInteractor.ReviewsFetch")
+    private lazy var fetchBackgroundQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.CourseInfoTabReviewsInteractor.ReviewsFetch"
+    )
 
     init(
         presenter: CourseInfoTabReviewsPresenterProtocol,

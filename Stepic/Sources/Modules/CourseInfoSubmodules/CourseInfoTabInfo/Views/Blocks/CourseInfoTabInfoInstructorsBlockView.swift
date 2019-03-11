@@ -1,13 +1,5 @@
-//
-// CourseInfoTabInfoInstructorsBlockView.swift
-// stepik-ios
-//
-//  Created by Ivan Magda on 11/1/18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabInfoInstructorsBlockView {
     struct Appearance {
@@ -42,6 +34,7 @@ final class CourseInfoTabInfoInstructorsBlockView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

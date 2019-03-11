@@ -1,11 +1,3 @@
-//
-//  BaseCourseListFlowLayout.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 16.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 class BaseListFlowLayout: UICollectionViewFlowLayout {
@@ -14,7 +6,7 @@ class BaseListFlowLayout: UICollectionViewFlowLayout {
     var cache: [UICollectionViewLayoutAttributes] = []
 
     var shouldInvalidateAttributesCache: Bool {
-        guard let collectionView = collectionView else {
+        guard let collectionView = self.collectionView else {
             return true
         }
 
@@ -53,6 +45,7 @@ class BaseListFlowLayout: UICollectionViewFlowLayout {
         }
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
     override func layoutAttributesForElements(
         in rect: CGRect
     ) -> [UICollectionViewLayoutAttributes]? {

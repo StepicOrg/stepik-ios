@@ -1,11 +1,3 @@
-//
-//  TagsTagsInterac?tor.swift
-//  stepik-ios
-//
-//  Created by Stepik on 11/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -54,7 +46,7 @@ final class TagsInteractor: TagsInteractorProtocol {
 
     func doTagCollectionPresentation(request: Tags.TagCollectionPresentation.Request) {
         guard let tag = self.currentTags
-            .first(where: { $0.0 == request.viewModelUniqueIdentifier})?.1 else {
+            .first(where: { $0.0 == request.viewModelUniqueIdentifier })?.1 else {
             return
         }
 

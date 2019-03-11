@@ -1,14 +1,7 @@
-//
-//  CourseInfoTabSyllabusCourseInfoTabSyllabusInteractor.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 13/12/2018.
-//  Copyright 2018 stepik-ios. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
+// swiftlint:disable file_length
 protocol CourseInfoTabSyllabusInteractorProtocol {
     func doSectionsFetch(request: CourseInfoTabSyllabus.SyllabusLoad.Request)
     func doSectionFetch(request: CourseInfoTabSyllabus.SyllabusSectionLoad.Request)
@@ -63,8 +56,12 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     // Online mode: fetch section only when offline fetching completed
     private let sectionFetchSemaphore = DispatchSemaphore(value: 0)
 
-    private lazy var sectionsFetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.SectionsFetch")
-    private lazy var unitsFetchBackgroundQueue = DispatchQueue(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.UnitsFetch")
+    private lazy var sectionsFetchBackgroundQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.SectionsFetch"
+    )
+    private lazy var unitsFetchBackgroundQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor.UnitsFetch"
+    )
 
     init(
         presenter: CourseInfoTabSyllabusPresenterProtocol,
@@ -166,7 +163,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return isCached
                     ? self.removeCached(unit: unit)
                     : self.startDownloading(unit: unit)
-            case .downloading(_):
+            case .downloading:
                 self.cancelDownloading(unit: unit)
             default:
                 break
@@ -185,7 +182,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return isCached
                     ? self.removeCached(section: section)
                     : self.startDownloading(section: section)
-            case .downloading(_):
+            case .downloading:
                 self.cancelDownloading(section: section)
             default:
                 break
@@ -231,7 +228,10 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.forceLoadAllSectionsIfNeeded().done { _ in
             self.requestUnitPresentation(unit)
         }.catch { _ in
-            print("course info tab syllabus interactor: unable to load all sections, request unit presentation w/o completed syllabus structure")
+            print(
+                "course info tab syllabus interactor: unable to load all sections"
+                + "request unit presentation w/o completed syllabus structure"
+            )
             self.requestUnitPresentation(unit)
         }.finally {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
@@ -750,7 +750,7 @@ extension CourseInfoTabSyllabusInteractor {
         }
 
         // TODO: remove calculation, get progress for unit from service
-        if downloadingVideosProgresses.count > 0 {
+        if !downloadingVideosProgresses.isEmpty {
             return .downloading(
                 progress: downloadingVideosProgresses.reduce(0, +) / Float(downloadingVideosProgresses.count)
             )
@@ -773,12 +773,12 @@ extension CourseInfoTabSyllabusInteractor {
     private func getDownloadingStateForCourse() -> CourseInfoTabSyllabus.DownloadState {
         let sectionStates = self.currentSections.values.map { self.getDownloadingState(for: $0) }
 
-        let containsUncachedSection = sectionStates.contains(where: { state in
+        let containsUncachedSection = sectionStates.contains { state in
             if case .available(let isCached) = state {
                 return !isCached
             }
             return false
-        })
+        }
 
         return containsUncachedSection ? .available(isCached: false) : .notAvailable
     }
@@ -818,7 +818,7 @@ extension CourseInfoTabSyllabusInteractor {
         }
 
         // Downloading state
-        if downloadingUnitProgresses.count == units.count && units.count > 0 {
+        if downloadingUnitProgresses.count == units.count && !units.isEmpty {
             return .downloading(
                 progress: downloadingUnitProgresses.reduce(0, +) / Float(downloadingUnitProgresses.count)
             )

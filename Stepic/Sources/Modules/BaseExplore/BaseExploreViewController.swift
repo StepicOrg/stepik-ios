@@ -1,11 +1,3 @@
-//
-//  BaseExploreBas?eExploreViewController.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 02/10/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol BaseExploreViewControllerProtocol: class {
@@ -34,12 +26,13 @@ class BaseExploreViewController: UIViewController {
         self.registerForNotifications()
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
+    // swiftlint:disable:next unavailable_function
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: ViewController lifecycle
@@ -60,14 +53,12 @@ class BaseExploreViewController: UIViewController {
 
         // We have contract here:
         // - subviews in exploreView have same position as in corresponding Submodule object
-        for module in self.submodules {
-            if module.type.position >= submodule.type.position {
-                self.exploreView?.insertBlockView(
-                    submodule.view,
-                    before: module.view
-                )
-                return
-            }
+        for module in self.submodules where module.type.position >= submodule.type.position {
+            self.exploreView?.insertBlockView(
+                submodule.view,
+                before: module.view
+            )
+            return
         }
     }
 
@@ -93,28 +84,39 @@ class BaseExploreViewController: UIViewController {
 
     private func registerForNotifications() {
         NotificationCenter.default.addObserver(
-            forName: .contentLanguageDidChange,
-            object: nil,
-            queue: nil
-        ) { [weak self] _ in
-            self?.refreshContentAfterLanguageChange()
-        }
-        NotificationCenter.default.addObserver(forName: .didLogin, object: nil, queue: nil) {
-            [weak self] _ in
-            self?.refreshContentAfterLoginAndLogout()
-        }
-        NotificationCenter.default.addObserver(forName: .didLogout, object: nil, queue: nil) {
-            [weak self] _ in
-            self?.refreshContentAfterLoginAndLogout()
-        }
+            self,
+            selector: #selector(self.handleRefreshContentAfterLanguageChange),
+            name: .contentLanguageDidChange,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleRefreshContentAfterLoginAndLogout),
+            name: .didLogin,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.handleRefreshContentAfterLoginAndLogout),
+            name: .didLogout,
+            object: nil
+        )
     }
 
     func refreshContentAfterLanguageChange() {
-
     }
 
     func refreshContentAfterLoginAndLogout() {
+    }
 
+    @objc
+    private func handleRefreshContentAfterLoginAndLogout() {
+        self.refreshContentAfterLoginAndLogout()
+    }
+
+    @objc
+    private func handleRefreshContentAfterLanguageChange() {
+        self.refreshContentAfterLoginAndLogout()
     }
 
     // MARK: - Structs

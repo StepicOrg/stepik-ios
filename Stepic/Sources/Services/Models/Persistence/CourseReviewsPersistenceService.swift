@@ -1,11 +1,3 @@
-//
-//  CourseReviewsPersistenceService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 

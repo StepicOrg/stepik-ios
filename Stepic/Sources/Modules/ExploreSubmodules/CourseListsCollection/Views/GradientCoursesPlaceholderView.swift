@@ -1,13 +1,5 @@
-//
-//  GradientCoursesPlaceholderView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 04.09.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension GradientCoursesPlaceholderView {
     struct Appearance {
@@ -86,6 +78,7 @@ final class GradientCoursesPlaceholderView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -95,14 +88,14 @@ final class GradientCoursesPlaceholderView: UIView {
         case blue
         case pink
 
-        var backgroundImage: UIImage {
+        var backgroundImage: UIImage? {
             switch self {
             case .purple:
-                return UIImage(named: "placeholder_gradient_purple")!
+                return UIImage(named: "placeholder_gradient_purple")
             case .blue:
-                return UIImage(named: "placeholder_gradient_blue")!
+                return UIImage(named: "placeholder_gradient_blue")
             case .pink:
-                return UIImage(named: "placeholder_gradient_pink")!
+                return UIImage(named: "placeholder_gradient_pink")
             }
         }
 

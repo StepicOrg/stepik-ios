@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabSyllabusCourseInfoTabSyllabusViewController.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 13/12/2018.
-//  Copyright 2018 stepik-ios. All rights reserved.
-//
-
 import UIKit
 
 protocol CourseInfoTabSyllabusViewControllerProtocol: class {
@@ -26,6 +18,7 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
     private let interactor: CourseInfoTabSyllabusInteractorProtocol
     private var state: CourseInfoTabSyllabus.ViewControllerState
 
+    // swiftlint:disable:next weak_delegate
     private let syllabusTableDelegate: CourseInfoTabSyllabusTableViewDataSource
 
     lazy var courseInfoTabSyllabusView = self.view as? CourseInfoTabSyllabusView
@@ -44,6 +37,7 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
         self.syllabusTableDelegate.delegate = self
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

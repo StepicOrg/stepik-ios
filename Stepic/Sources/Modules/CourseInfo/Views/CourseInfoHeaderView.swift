@@ -1,13 +1,5 @@
-//
-//  CourseInfoHeaderView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 01/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoHeaderView {
     struct Appearance {
@@ -75,7 +67,7 @@ final class CourseInfoHeaderView: UIView {
         appearance.textColor = self.appearance.verifiedTextColor
         appearance.font = self.appearance.verifiedTextFont
         let view = CourseWidgetStatsItemView(appearance: appearance)
-        view.image = UIImage(named: "course-info-verified")!
+        view.image = UIImage(named: "course-info-verified")
         view.text = NSLocalizedString("CourseMeetsRecommendations", comment: "")
         return view
     }()
@@ -109,6 +101,7 @@ final class CourseInfoHeaderView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -1,11 +1,3 @@
-//
-//  ContinueCourseContinueCourseViewController.swift
-//  stepik-ios
-//
-//  Created by Stepik on 11/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol ContinueCourseViewControllerProtocol: class {
@@ -34,6 +26,7 @@ final class ContinueCourseViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

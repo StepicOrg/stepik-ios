@@ -1,14 +1,6 @@
-//
-//  CourseInfoStatsView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 02.11.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
-import SnapKit
 import Nuke
+import SnapKit
+import UIKit
 
 extension CourseInfoStatsView {
     struct Appearance {
@@ -32,7 +24,6 @@ extension CourseInfoStatsView {
 
 final class CourseInfoStatsView: UIView {
     let appearance: Appearance
-    private static let maxStarsCount = 5
 
     private lazy var itemsStackView: UIStackView = {
         let stackView = UIStackView()
@@ -52,8 +43,7 @@ final class CourseInfoStatsView: UIView {
         appearance.textColor = self.appearance.itemTextColor
         appearance.font = self.appearance.itemTextFont
         let view = CourseWidgetStatsItemView(appearance: appearance)
-        view.image = UIImage(named: "course-widget-user")!
-            .withRenderingMode(.alwaysTemplate)
+        view.image = UIImage(named: "course-widget-user")?.withRenderingMode(.alwaysTemplate)
         return view
     }()
 
@@ -83,8 +73,8 @@ final class CourseInfoStatsView: UIView {
 
     var progress: CourseInfoProgressViewModel? {
         didSet {
-            guard let progress = progress else {
-                progressView.isHidden = true
+            guard let progress = self.progress else {
+                self.progressView.isHidden = true
                 return
             }
 
@@ -101,6 +91,7 @@ final class CourseInfoStatsView: UIView {
         self.setupView()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -115,9 +106,9 @@ final class CourseInfoStatsView: UIView {
         )
 
         if let pieImage = progressPie.uiImage {
-            progressView.image = pieImage
-            progressView.text = viewModel.progressLabelText
-            progressView.isHidden = false
+            self.progressView.image = pieImage
+            self.progressView.text = viewModel.progressLabelText
+            self.progressView.isHidden = false
         }
     }
 }

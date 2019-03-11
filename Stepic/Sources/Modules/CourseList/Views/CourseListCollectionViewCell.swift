@@ -1,11 +1,3 @@
-//
-//  CourseListCollectionViewCell.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 20.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 protocol CourseListCollectionViewCellDelegate: class {
@@ -54,6 +46,7 @@ class CourseListCollectionViewCell: UICollectionViewCell, Reusable {
         self.makeConstraints()
     }
 
+    // swiftlint:disable:next unavailable_function
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

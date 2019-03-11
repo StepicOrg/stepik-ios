@@ -1,13 +1,5 @@
-//
-//  CourseListView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 16.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseListView {
     struct Appearance {
@@ -26,6 +18,7 @@ class CourseListView: UIView {
     let appearance: Appearance
     let colorMode: CourseListColorMode
 
+    // swiftlint:disable:next implicitly_unwrapped_optional
     fileprivate var collectionView: UICollectionView!
     fileprivate weak var delegate: CourseListViewDelegate?
 
@@ -60,6 +53,7 @@ class CourseListView: UIView {
         self.makeConstraints()
     }
 
+    // swiftlint:disable:next unavailable_function
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -70,6 +64,7 @@ class CourseListView: UIView {
         self.invalidateIntrinsicContentSize()
     }
 
+    // swiftlint:disable:next unavailable_function
     func calculateItemSize() -> CGSize {
         fatalError("Use subclass of CourseListView with concrete layout")
     }
@@ -179,8 +174,10 @@ final class VerticalCourseListView: CourseListView,
     private let columnsCount: Int
     // We should use proxy cause we are using willDisplay method in delegate for pagination
     // and some methods to show footer/header in data source
+    // swiftlint:disable weak_delegate
     private var storedCollectionViewDelegate: UICollectionViewDelegate
     private var storedCollectionViewDataSource: UICollectionViewDataSource
+    // swiftlint:enable weak_delegate
 
     private lazy var verticalCourseFlowLayout: VerticalCourseListFlowLayout = {
         let layout = VerticalCourseListFlowLayout(
@@ -230,6 +227,7 @@ final class VerticalCourseListView: CourseListView,
         self.collectionView.dataSource = self
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -253,14 +251,15 @@ final class VerticalCourseListView: CourseListView,
     }
 
     private func updatePagination() {
-        self.collectionView.performBatchUpdates({ [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
+        self.collectionView.performBatchUpdates(
+            _: { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
 
-            strongSelf.verticalCourseFlowLayout.isPaginationHidden = strongSelf
-                .isPaginationViewHidden
-        })
+                strongSelf.verticalCourseFlowLayout.isPaginationHidden = strongSelf.isPaginationViewHidden
+            }
+        )
     }
 
     // MARK: UICollectionViewDelegate
@@ -392,6 +391,7 @@ final class HorizontalCourseListView: CourseListView {
         self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -435,6 +435,7 @@ private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
         super.init(frame: frame, colorMode: .light)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -449,6 +450,7 @@ private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
         super.init(frame: frame, colorMode: .dark)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

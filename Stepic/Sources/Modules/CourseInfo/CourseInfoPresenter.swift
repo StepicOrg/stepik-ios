@@ -1,11 +1,3 @@
-//
-//  CourseInfoCourseInfoPresenter.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 30/11/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
 import UIKit
 
 protocol CourseInfoPresenterProtocol {

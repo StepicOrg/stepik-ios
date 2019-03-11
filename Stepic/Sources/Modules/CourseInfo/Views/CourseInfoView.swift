@@ -1,13 +1,5 @@
-//
-//  CourseInfoView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17/10/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol CourseInfoViewDelegate: class {
     func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat)
@@ -87,6 +79,7 @@ final class CourseInfoView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

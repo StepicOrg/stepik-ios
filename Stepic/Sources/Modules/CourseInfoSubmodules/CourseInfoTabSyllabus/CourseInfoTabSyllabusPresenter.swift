@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabSyllabusCourseInfoTabSyllabusPresenter.swift
-//  stepik-ios
-//
-//  Created by Vladislav Kiryukhin on 13/12/2018.
-//  Copyright 2018 stepik-ios. All rights reserved.
-//
-
 import UIKit
 
 protocol CourseInfoTabSyllabusPresenterProtocol {
@@ -59,9 +51,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     }
                 )
 
-                let sectionDeadline = result.sectionsDeadlines.first(where: {
-                    $0.section == sectionData.element.entity.id
-                })?.deadlineDate
+                let sectionDeadline = result.sectionsDeadlines
+                    .first { $0.section == sectionData.element.entity.id }?
+                    .deadlineDate
 
                 return self.makeSectionViewModel(
                     index: sectionData.offset,
@@ -213,7 +205,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     (title: NSLocalizedString("SoftDeadline", comment: ""), date: section.softDeadline),
                     (title: NSLocalizedString("HardDeadline", comment: ""), date: section.hardDeadline),
                     (title: NSLocalizedString("EndDate", comment: ""), date: section.endDate)
-                ].filter { $0.date != nil }.compactMap { ($0.title, $0.date!) }
+                ].filter { $0.date != nil }.compactMap { ($0.title, $0.date ?? Date()) }
             }
         }()
 

@@ -1,11 +1,3 @@
-//
-//  CourseWidgetButton.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 extension CourseWidgetButton {
@@ -41,16 +33,17 @@ final class CourseWidgetButton: BounceButton {
         self.setupView()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     private func updateColors() {
-        self.backgroundColor = isCallToAction
+        self.backgroundColor = self.isCallToAction
             ? self.appearance.callToActionBackgroundColor
             : self.appearance.backgroundColor
         self.setTitleColor(
-            isCallToAction ? self.appearance.callToActionTextColor : self.appearance.textColor,
+            self.isCallToAction ? self.appearance.callToActionTextColor : self.appearance.textColor,
             for: .normal
         )
     }

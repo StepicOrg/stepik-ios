@@ -1,11 +1,3 @@
-//
-//  CourseListsCollectionPersistenceService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 03.09.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -14,8 +6,7 @@ protocol CourseListsCollectionPersistenceServiceProtocol: class {
     func update(courseLists: [CourseListModel], forLanguage language: ContentLanguage)
 }
 
-final class CourseListsCollectionPersistenceService:
-    CourseListsCollectionPersistenceServiceProtocol {
+final class CourseListsCollectionPersistenceService: CourseListsCollectionPersistenceServiceProtocol {
     func fetch(forLanguage language: ContentLanguage) -> Promise<[CourseListModel]> {
         let ids = UserDefaults.standard.value(
             forKey: self.getKey(forLanguage: language)

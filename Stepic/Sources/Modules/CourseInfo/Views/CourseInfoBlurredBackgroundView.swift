@@ -1,19 +1,11 @@
-//
-//  CourseInfoBlurredBackgroundView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 01/11/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
-import SnapKit
 import Nuke
+import SnapKit
+import UIKit
 
 extension CourseInfoBlurredBackgroundView {
     struct Appearance {
         let imageFadeInDuration: TimeInterval = 0.15
-        let placeholderImage = UIImage(named: "lesson_cover_50")!
+        let placeholderImage = UIImage(named: "lesson_cover_50")
         let overlayColor = UIColor(hex: 0x9191BC)
         let overlayAlpha: CGFloat = 0.75
     }
@@ -51,6 +43,7 @@ final class CourseInfoBlurredBackgroundView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

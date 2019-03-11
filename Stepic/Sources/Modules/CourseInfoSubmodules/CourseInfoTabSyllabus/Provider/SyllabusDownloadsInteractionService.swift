@@ -1,11 +1,3 @@
-//
-//  SyllabusDownloadsInteractionService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 27/12/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 /// Representation of subtree in syllabus tree
@@ -23,30 +15,30 @@ final class SyllabusTreeNode {
 
         var observationLevel: Int {
             switch self {
-            case .course(_):
+            case .course:
                 return 0
-            case .section(_):
+            case .section:
                 return 1
-            case .unit(_):
+            case .unit:
                 return 2
-            case .step(_):
+            case .step:
                 return 3
-            case .video(_):
+            case .video:
                 return 4
             }
         }
 
         static func == (lhs: Source, rhs: Source) -> Bool {
             switch (lhs, rhs) {
-            case (.video(let a), .video(let b)):
-                return a.id == b.id
-            case (.step(let a), .step(let b)):
-                return a == b
-            case (.unit(let a), .unit(let b)):
-                return a == b
-            case (.section(let a), .section(let b)):
-                return a == b
-            case (.course(_), .course(_)):
+            case (.video(let first), .video(let second)):
+                return first.id == second.id
+            case (.step(let first), .step(let second)):
+                return first == second
+            case (.unit(let first), .unit(let second)):
+                return first == second
+            case (.section(let first), .section(let second)):
+                return first == second
+            case (.course, .course):
                 return true
             default:
                 return false
@@ -63,7 +55,7 @@ final class SyllabusTreeNode {
                 return ".unit(id = \(id))"
             case .section(let id):
                 return ".section(id = \(id))"
-            case .course(_):
+            case .course:
                 return ".course"
             }
         }
@@ -267,7 +259,7 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         case .active(let progress):
             node.updateState(with: .downloading(progress: progress))
             node.invalidateNodesUpTheTree()
-        case .completed(_):
+        case .completed:
             node.updateState(with: .finished(completed: true))
             node.invalidateNodesUpTheTree()
             self.activeVideoDownloads.removeValue(forKey: event.videoID)
@@ -282,8 +274,10 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
 
 extension SyllabusDownloadsInteractionService: DownloadsTreeNodeDelegate {
     func downloadsTreeNodeDidUpdateState(_ downloadsTreeNode: DownloadsTreeNode) {
-        print("syllabus downloads interaction service: reports new state for node: "
-            + "source = \(downloadsTreeNode.source.description), state = \(downloadsTreeNode.state)")
+        print(
+            "syllabus downloads interaction service: reports new state for node: "
+            + "source = \(downloadsTreeNode.source.description), state = \(downloadsTreeNode.state)"
+        )
         switch downloadsTreeNode.state {
         case .downloading(let progress):
             self.delegate?.downloadsInteractionService(
@@ -427,9 +421,9 @@ final class DownloadsTreeNode {
 
         // Get edges
         let targetFilteredEdges = targetEdges.filter { edge in
-            !sourceEdges.contains(where: { sourceEdge in
+            !sourceEdges.contains { sourceEdge in
                 edge.from == sourceEdge.from && edge.to == sourceEdge.to
-            })
+            }
         }
 
         // Get topsort on distinct edges subset
@@ -486,7 +480,9 @@ final class DownloadsTreeNode {
                     }
                 } else {
                     // Insert new node
-                    guard let newDownloadNodeInSecondTree = secondTree.flatten().first(where: { $0.source == node }) else {
+                    guard let newDownloadNodeInSecondTree = secondTree.flatten().first(
+                        where: { $0.source == node }
+                    ) else {
                         fatalError("Invalid state: target tree should contain node from source-tree")
                     }
 
@@ -546,7 +542,7 @@ final class DownloadsTreeNode {
 
         let failedChildrensCount = self.children.map { child -> Int in
             switch child.state {
-            case .downloading(_):
+            case .downloading:
                 return 0
             case .finished(let completed):
                 return completed ? 0 : 1
@@ -555,7 +551,7 @@ final class DownloadsTreeNode {
 
         let downloadingChildrensCount = self.children.map { child -> Int in
             switch child.state {
-            case .downloading(_):
+            case .downloading:
                 return 1
             default:
                 return 0
@@ -564,7 +560,7 @@ final class DownloadsTreeNode {
 
         let succeedChildrensCount = self.children.map { child -> Int in
             switch child.state {
-            case .downloading(_):
+            case .downloading:
                 return 0
             case .finished(let completed):
                 return completed ? 1 : 0

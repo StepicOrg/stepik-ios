@@ -1,14 +1,6 @@
-//
-//  CourseRatingView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 02.11.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
-import SnapKit
 import Nuke
+import SnapKit
+import UIKit
 
 extension CourseRatingView {
     struct Appearance {
@@ -33,7 +25,7 @@ final class CourseRatingView: UIView {
 
     var starsCount: Int = 0 {
         didSet {
-            self.updateStars(count: starsCount)
+            self.updateStars(count: self.starsCount)
         }
     }
 
@@ -46,6 +38,7 @@ final class CourseRatingView: UIView {
         self.setupView()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -65,11 +58,9 @@ final class CourseRatingView: UIView {
 
     private func makeStar(isFilled: Bool) -> UIView {
         let image = isFilled
-            ? UIImage(named: "rating-star-filled")!
-            : UIImage(named: "rating-star-clear")!
-        let imageView = UIImageView(
-            image: image.withRenderingMode(.alwaysTemplate)
-        )
+            ? UIImage(named: "rating-star-filled")
+            : UIImage(named: "rating-star-clear")
+        let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.tintColor = isFilled ? self.appearance.starFilledColor : self.appearance.statClearColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.snp.makeConstraints { make in

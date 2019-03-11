@@ -1,13 +1,5 @@
-//
-//  ExploreExploreViewController.swift
-//  stepik-ios
-//
-//  Created by Stepik on 10/09/2018.
-//  Copyright 2018 Stepik. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayContent(viewModel: Explore.ContentLoad.ViewModel)
@@ -47,20 +39,17 @@ final class ExploreViewController: BaseExploreViewController {
         self.searchBar.searchBarDelegate = self
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: ViewController lifecycle
 
-    override func loadView() {
-        super.loadView()
-        self.exploreView?.delegate = self
-        self.navigationItem.titleView = self.searchBar
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.exploreView?.delegate = self
+        self.navigationItem.titleView = self.searchBar
         self.exploreInteractor?.doLanguageSwitchBlockLoad(request: .init())
 
         self.initSearchResults()
@@ -111,7 +100,7 @@ final class ExploreViewController: BaseExploreViewController {
 
     func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Stories
-        if !isStoriesHidden {
+        if !self.isStoriesHidden {
             let storiesAssembly = StoriesAssembly(
                 output: self.exploreInteractor as? StoriesOutputProtocol
             )

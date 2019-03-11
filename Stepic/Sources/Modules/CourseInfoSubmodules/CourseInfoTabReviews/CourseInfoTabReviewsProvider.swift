@@ -1,11 +1,3 @@
-//
-//  CourseInfoTabReviewsProvider.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14/02/2019.
-//  Copyright © 2019 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import PromiseKit
 
@@ -43,13 +35,12 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
         return Promise { seal in
             self.courseReviewsNetworkService.fetch(by: course.id, page: page).then {
                 reviews, meta -> Promise<([User], [CourseReview], Meta)> in
-
                 let userIDsToFetch = reviews.map { $0.userID }
                 return self.usersNetworkService.fetch(ids: userIDsToFetch).map { ($0, reviews, meta) }
             }.done { users, reviews, meta in
                 for review in reviews {
                     review.course = course
-                    review.user = users.filter { $0.id == review.userID }.first
+                    review.user = users.first { $0.id == review.userID }
                 }
 
                 seal.fulfill((reviews, meta))

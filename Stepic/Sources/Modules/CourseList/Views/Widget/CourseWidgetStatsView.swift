@@ -1,13 +1,5 @@
-//
-//  CourseWidgetStatsView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 14.08.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseWidgetStatsView {
     struct Appearance {
@@ -46,8 +38,8 @@ final class CourseWidgetStatsView: UIView {
 
     var progress: CourseWidgetProgressViewModel? {
         didSet {
-            guard let progress = progress else {
-                progressView.isHidden = true
+            guard let progress = self.progress else {
+                self.progressView.isHidden = true
                 return
             }
 
@@ -61,7 +53,7 @@ final class CourseWidgetStatsView: UIView {
         appearance.imageTintColor = self.appearance.itemImageTintColor
         appearance.textColor = self.appearance.itemTextColor
         let view = CourseWidgetStatsItemView(appearance: appearance)
-        view.image = UIImage(named: "course-widget-user")!.withRenderingMode(.alwaysTemplate)
+        view.image = UIImage(named: "course-widget-user")?.withRenderingMode(.alwaysTemplate)
         return view
     }()
 
@@ -71,7 +63,7 @@ final class CourseWidgetStatsView: UIView {
         appearance.imageTintColor = self.appearance.itemImageTintColor
         appearance.textColor = self.appearance.itemTextColor
         let view = CourseWidgetStatsItemView(appearance: appearance)
-        view.image = UIImage(named: "course-widget-rating")!.withRenderingMode(.alwaysTemplate)
+        view.image = UIImage(named: "course-widget-rating")?.withRenderingMode(.alwaysTemplate)
         return view
     }()
 
@@ -100,6 +92,7 @@ final class CourseWidgetStatsView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -114,9 +107,9 @@ final class CourseWidgetStatsView: UIView {
         )
 
         if let pieImage = progressPie.uiImage {
-            progressView.image = pieImage
-            progressView.text = viewModel.progressLabelText
-            progressView.isHidden = false
+            self.progressView.image = pieImage
+            self.progressView.text = viewModel.progressLabelText
+            self.progressView.isHidden = false
         }
     }
 }
