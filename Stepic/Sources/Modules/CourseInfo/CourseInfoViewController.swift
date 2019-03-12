@@ -25,7 +25,6 @@ protocol CourseInfoViewControllerProtocol: class {
 
 final class CourseInfoViewController: UIViewController {
     private static let topBarAlphaStatusBarThreshold = 0.85
-    private var lastTopBarAlpha: CGFloat = 0.0
 
     private let availableTabs: [CourseInfo.Tab]
     private let initialTabIndex: Int
@@ -402,7 +401,6 @@ extension CourseInfoViewController: UIScrollViewDelegate {
         let headerHeight = courseInfoView.headerHeight - topPadding
 
         let scrollingProgress = max(0, min(1, offsetWithHeader / headerHeight))
-        self.lastTopBarAlpha = scrollingProgress
         self.updateTopBar(alpha: scrollingProgress)
 
         // Pin segmented control
