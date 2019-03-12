@@ -62,11 +62,6 @@ class StyledNavigationController: UINavigationController {
         self.setupAppearance()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.resetNavigationBarAppearance()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.statusBarView.frame = UIApplication.shared.statusBarFrame
@@ -230,9 +225,7 @@ class StyledNavigationController: UINavigationController {
             self.shadowViewLeadingConstraint = make.leading.equalToSuperview().constraint
             self.shadowViewTrailingConstraint = make.trailing.equalToSuperview().constraint
         }
-    }
 
-    private func resetNavigationBarAppearance() {
         self.changeBackgroundColor(StyledNavigationController.Appearance.backgroundColor)
         self.changeTextColor(StyledNavigationController.Appearance.tintColor)
         self.changeTintColor(StyledNavigationController.Appearance.tintColor)
@@ -244,20 +237,18 @@ class StyledNavigationController: UINavigationController {
         return max(0.0, min(1.0, alpha))
     }
 
-    private func getNavigationBarAppearance(
-        for viewController: UIViewController
-    ) -> StyledNavigationController.NavigationBarAppearanceState {
+    private func getNavigationBarAppearance(for viewController: UIViewController) -> NavigationBarAppearanceState {
         if let presentableViewController = viewController as? StyledNavigationControllerPresentable,
            !presentableViewController.shouldSaveAppearanceState {
-            return StyledNavigationController.NavigationBarAppearanceState()
+            return NavigationBarAppearanceState()
         }
 
-        let appearance: StyledNavigationController.NavigationBarAppearanceState = {
-            let defaultAppearance: StyledNavigationController.NavigationBarAppearanceState
+        let appearance: NavigationBarAppearanceState = {
+            let defaultAppearance: NavigationBarAppearanceState
             if let presentableViewController = viewController as? StyledNavigationControllerPresentable {
                 defaultAppearance = presentableViewController.navigationBarAppearanceOnFirstPresentation
             } else {
-                defaultAppearance = StyledNavigationController.NavigationBarAppearanceState()
+                defaultAppearance = NavigationBarAppearanceState()
             }
             return self.navigationBarAppearanceForController[viewController] ?? defaultAppearance
         }()
@@ -356,14 +347,9 @@ extension StyledNavigationController: UINavigationControllerDelegate {
         willShow viewController: UIViewController,
         animated: Bool
     ) {
-        guard let fromViewController = self.transitionCoordinator?.viewController(forKey: .from) else {
-            return
-        }
-
         let targetControllerAppearance = self.getNavigationBarAppearance(for: viewController)
-        let sourceControllerAppearance = self.getNavigationBarAppearance(for: fromViewController)
 
-        guard animated else {
+        guard animated, let fromViewController = self.transitionCoordinator?.viewController(forKey: .from) else {
             self.changeBackgroundColor(targetControllerAppearance.backgroundColor)
             self.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
             self.changeTextColor(targetControllerAppearance.textColor)
@@ -386,11 +372,13 @@ extension StyledNavigationController: UINavigationControllerDelegate {
         self.animateShadowView(transitionCoordinator: coordinator)
         self.changeStatusBarStyle(targetControllerAppearance.statusBarStyle)
 
-        self.transitionCoordinator?.animate(
+        coordinator.animate(
             alongsideTransition: { [weak self] _ in
                 guard let strongSelf = self else {
                     return
                 }
+
+                // change appearance w/o status bar style
                 strongSelf.changeBackgroundColor(targetControllerAppearance.backgroundColor)
                 strongSelf.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
                 strongSelf.changeTextColor(targetControllerAppearance.textColor)
@@ -413,6 +401,8 @@ extension StyledNavigationController: UINavigationControllerDelegate {
                     }
                 } else {
                     // Rollback appearance
+                    let sourceControllerAppearance = strongSelf.getNavigationBarAppearance(for: fromViewController)
+
                     strongSelf.changeBackgroundColor(sourceControllerAppearance.backgroundColor)
                     strongSelf.changeShadowViewAlpha(sourceControllerAppearance.shadowViewAlpha)
                     strongSelf.changeTextColor(sourceControllerAppearance.textColor)
