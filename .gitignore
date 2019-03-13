@@ -42,3 +42,6 @@ Carthage/Build
 
 # AppCode
 .idea/
+
+# Generamba
+Templates/
