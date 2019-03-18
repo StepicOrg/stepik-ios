@@ -8,6 +8,8 @@ extension ProfileEditView {
 final class ProfileEditView: UIView {
     let appearance: Appearance
 
+    private lazy var tableView = SettingsTableView()
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -15,7 +17,6 @@ final class ProfileEditView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
-        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -24,12 +25,21 @@ final class ProfileEditView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func update(viewModel: SettingsTableViewModel) {
+        self.tableView.update(viewModel: viewModel)
+    }
 }
 
 extension ProfileEditView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
+    func addSubviews() {
+        self.addSubview(self.tableView)
+    }
 
-    func addSubviews() { }
-
-    func makeConstraints() { }
+    func makeConstraints() {
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 }
