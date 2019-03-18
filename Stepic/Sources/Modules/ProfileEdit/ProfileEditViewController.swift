@@ -1,7 +1,9 @@
+import SVProgressHUD
 import UIKit
 
 protocol ProfileEditViewControllerProtocol: class {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel)
+    func displayProfileEditResult(viewModel: ProfileEdit.RemoteProfileUpdate.ViewModel)
 }
 
 final class ProfileEditViewController: UIViewController {
@@ -17,6 +19,8 @@ final class ProfileEditViewController: UIViewController {
         )
         return button
     }()
+
+    private var formState: FormState?
 
     init(interactor: ProfileEditInteractorProtocol) {
         self.interactor = interactor
@@ -48,15 +52,42 @@ final class ProfileEditViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
-    enum SettingsField: String {
+    private func updateSaveButtonState() {
+        guard let state = self.formState else {
+            return
+        }
+
+        // Validate state here
+        let isFirstNameValid = !state.firstName.isEmpty
+        let isLastNameValid = !state.lastName.isEmpty
+
+        let isFormValid = isFirstNameValid && isLastNameValid
+        self.profileEditView?.isSaveButtonEnabled = isFormValid
+    }
+
+    private enum FormField: String {
         case firstName
         case lastName
+
+        init?(uniqueIdentifier: UniqueIdentifierType) {
+            if let value = FormField(rawValue: uniqueIdentifier) {
+                self = value
+            } else {
+                return nil
+            }
+        }
+    }
+
+    private struct FormState {
+        var firstName: String
+        var lastName: String
     }
 }
 
 extension ProfileEditViewController: ProfileEditViewControllerProtocol {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel) {
         let profileEditViewModel = viewModel.viewModel
+        let state = FormState(firstName: profileEditViewModel.firstName, lastName: profileEditViewModel.lastName)
 
         let viewModel = SettingsTableViewModel(
             sections: [
@@ -64,23 +95,23 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                     header: .init(title: "Общие данные"),
                     cells: [
                         .init(
-                            uniqueIdentifier: SettingsField.firstName.rawValue,
+                            uniqueIdentifier: FormField.firstName.rawValue,
                             type: .input(
                                 options: .init(
                                     shouldAlwaysShowPlaceholder: true,
                                     placeholderText: "Имя",
-                                    valueText: profileEditViewModel.firstName
+                                    valueText: state.firstName
                                 )
                             ),
                             options: .init()
                         ),
                         .init(
-                            uniqueIdentifier: "lastname",
+                            uniqueIdentifier: FormField.lastName.rawValue,
                             type: .input(
                                 options: .init(
                                     shouldAlwaysShowPlaceholder: true,
                                     placeholderText: "Фамилия",
-                                    valueText: profileEditViewModel.lastName
+                                    valueText: state.lastName
                                 )
                             ),
                             options: .init()
@@ -90,12 +121,40 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                 )
             ]
         )
+
+        self.formState = state
         self.profileEditView?.update(viewModel: viewModel)
+
+        self.updateSaveButtonState()
+    }
+
+    func displayProfileEditResult(viewModel: ProfileEdit.RemoteProfileUpdate.ViewModel) {
+        if viewModel.isSuccessful {
+            SVProgressHUD.dismiss()
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            SVProgressHUD.showError(withStatus: nil)
+        }
     }
 }
 
 extension ProfileEditViewController: ProfileEditViewDelegate {
     // MARK: ProfileEditViewDelegate
+
+    func profileEditViewDidReportSaveButtonClick(_ profileEditView: ProfileEditView) {
+        guard let state = self.formState else {
+            return
+        }
+
+        let request = ProfileEdit.RemoteProfileUpdate.Request(
+            firstName: state.firstName,
+            lastName: state.lastName
+        )
+
+        // Show HUD here, hide in displayProfileEditResult(viewModel:)
+        SVProgressHUD.show()
+        self.interactor.doRemoteProfileUpdate(request: request)
+    }
 
     // MARK: SettingsTableViewDelegate
 
@@ -104,6 +163,17 @@ extension ProfileEditViewController: ProfileEditViewDelegate {
         didReportTextChange text: String?,
         identifiedBy uniqueIdentifier: UniqueIdentifierType?
     ) {
+        guard let id = uniqueIdentifier, let field = FormField(uniqueIdentifier: id) else {
+            return
+        }
 
+        switch field {
+        case .firstName:
+            self.formState?.firstName = text ?? ""
+        case .lastName:
+            self.formState?.lastName = text ?? ""
+        }
+
+        self.updateSaveButtonState()
     }
 }

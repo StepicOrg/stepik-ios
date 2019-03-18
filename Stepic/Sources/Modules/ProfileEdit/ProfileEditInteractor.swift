@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol ProfileEditInteractorProtocol {
     func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request)
+    func doRemoteProfileUpdate(request: ProfileEdit.RemoteProfileUpdate.Request)
 }
 
 final class ProfileEditInteractor: ProfileEditInteractorProtocol {
@@ -23,5 +24,18 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
 
     func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request) {
         self.presenter.presentProfileEditForm(response: .init(profile: self.currentProfile))
+    }
+
+    func doRemoteProfileUpdate(request: ProfileEdit.RemoteProfileUpdate.Request) {
+        self.currentProfile.firstName = request.firstName
+        self.currentProfile.lastName = request.lastName
+
+        self.provider.update(profile: self.currentProfile).done { updatedProfile in
+            self.currentProfile = updatedProfile
+            self.presenter.presentProfileEditResult(response: .init(isSuccessful: true))
+        }.catch { error in
+            print("profile edit interactor: unable to update profile, error = \(error)")
+            self.presenter.presentProfileEditResult(response: .init(isSuccessful: false))
+        }
     }
 }

@@ -2,6 +2,7 @@ import UIKit
 
 protocol ProfileEditPresenterProtocol {
     func presentProfileEditForm(response: ProfileEdit.ProfileEditLoad.Response)
+    func presentProfileEditResult(response: ProfileEdit.RemoteProfileUpdate.Response)
 }
 
 final class ProfileEditPresenter: ProfileEditPresenterProtocol {
@@ -14,5 +15,9 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
         )
 
         self.viewController?.displayProfileEditForm(viewModel: .init(viewModel: viewModel))
+    }
+
+    func presentProfileEditResult(response: ProfileEdit.RemoteProfileUpdate.Response) {
+        self.viewController?.displayProfileEditResult(viewModel: .init(isSuccessful: response.isSuccessful))
     }
 }

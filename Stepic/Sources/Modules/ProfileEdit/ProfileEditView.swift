@@ -1,7 +1,9 @@
 import SnapKit
 import UIKit
 
-protocol ProfileEditViewDelegate: SettingsTableViewDelegate { }
+protocol ProfileEditViewDelegate: SettingsTableViewDelegate {
+    func profileEditViewDidReportSaveButtonClick(_ profileEditView: ProfileEditView)
+}
 
 extension ProfileEditView {
     struct Appearance {
@@ -30,11 +32,22 @@ final class ProfileEditView: UIView {
         button.titleLabel?.font = self.appearance.saveButtonTitleFont
         button.layer.masksToBounds = true
         button.layer.cornerRadius = self.appearance.saveButtonCornerRadius
+        button.addTarget(self, action: #selector(self.saveButtonDidClick), for: .touchUpInside)
 
         return button
     }()
 
     private lazy var tableView = SettingsTableView()
+
+    var isSaveButtonEnabled: Bool {
+        get {
+            return self.saveButton.isEnabled
+        }
+        set {
+            self.saveButton.isEnabled = newValue
+            self.saveButton.alpha = newValue ? 1.0 : 0.5
+        }
+    }
 
     init(
         frame: CGRect = .zero,
@@ -54,6 +67,11 @@ final class ProfileEditView: UIView {
 
     func update(viewModel: SettingsTableViewModel) {
         self.tableView.update(viewModel: viewModel)
+    }
+
+    @objc
+    private func saveButtonDidClick() {
+        self.delegate?.profileEditViewDidReportSaveButtonClick(self)
     }
 }
 

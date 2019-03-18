@@ -9,7 +9,9 @@ final class ProfileEditAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = ProfileEditProvider()
+        let provider = ProfileEditProvider(
+            profilesNetworkService: ProfilesNetworkService(profilesAPI: ProfilesAPI())
+        )
         let presenter = ProfileEditPresenter()
         let interactor = ProfileEditInteractor(
             presenter: presenter,
