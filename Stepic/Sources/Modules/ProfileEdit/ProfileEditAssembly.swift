@@ -19,6 +19,8 @@ final class ProfileEditAssembly: Assembly {
         self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
+        viewController.hidesBottomBarWhenPushed = true
+
         return viewController
     }
 }
