@@ -50,7 +50,8 @@ class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable, SettingsTable
         self.contentView.addSubview(self.topSeparatorView)
         self.topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         self.topSeparatorView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.topSeparatorType.leftOffset)
         }
 
         self.contentView.addSubview(self.elementView)
@@ -63,7 +64,8 @@ class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable, SettingsTable
         self.contentView.addSubview(self.bottomSeparatorView)
         self.bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomSeparatorView.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalToSuperview()
+            make.trailing.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.bottomSeparatorType.leftOffset)
         }
     }
 

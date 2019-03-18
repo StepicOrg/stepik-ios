@@ -2,28 +2,26 @@ import Foundation
 import PromiseKit
 
 protocol ProfileEditInteractorProtocol {
-    func doSomeAction(request: ProfileEdit.SomeAction.Request)
+    func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request)
 }
 
 final class ProfileEditInteractor: ProfileEditInteractorProtocol {
-    weak var moduleOutput: ProfileEditOutputProtocol?
-
     private let presenter: ProfileEditPresenterProtocol
     private let provider: ProfileEditProviderProtocol
 
+    private var currentProfile: Profile
+
     init(
         presenter: ProfileEditPresenterProtocol,
-        provider: ProfileEditProviderProtocol
+        provider: ProfileEditProviderProtocol,
+        initialProfile: Profile
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.currentProfile = initialProfile
     }
 
-    func doSomeAction(request: ProfileEdit.SomeAction.Request) { }
-
-    enum Error: Swift.Error {
-        case something
+    func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request) {
+        self.presenter.presentProfileEditForm(response: .init(profile: self.currentProfile))
     }
 }
-
-extension ProfileEditInteractor: ProfileEditInputProtocol { }

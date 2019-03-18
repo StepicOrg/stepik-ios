@@ -1,11 +1,15 @@
 import Foundation
 
 enum ProfileEdit {
-    enum SomeAction {
+    enum ProfileEditLoad {
         struct Request { }
 
-        struct Response { }
+        struct Response {
+            let profile: Profile
+        }
 
-        struct ViewModel { }
+        struct ViewModel {
+            let viewModel: ProfileEditViewModel
+        }
     }
 }

@@ -38,4 +38,16 @@ class Profile: NSManagedObject, JSONSerializable {
             "subscribed_for_mail": subscribedForMail as AnyObject
         ]
     }
+
+    static func fetchById(_ id: Int) -> [Profile]? {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Profile")
+        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
+        request.predicate = predicate
+        do {
+            let results = try CoreDataHelper.instance.context.fetch(request)
+            return results as? [Profile]
+        } catch {
+            return nil
+        }
+    }
 }

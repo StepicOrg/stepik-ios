@@ -1,24 +1,24 @@
 import UIKit
 
 final class ProfileEditAssembly: Assembly {
-    var moduleInput: ProfileEditInputProtocol?
+    // We should init assembly with profile to open
+    private let profile: Profile
 
-    private weak var moduleOutput: ProfileEditOutputProtocol?
-
-    init(output: ProfileEditOutputProtocol? = nil) {
-        self.moduleOutput = output
+    init(profile: Profile) {
+        self.profile = profile
     }
 
     func makeModule() -> UIViewController {
         let provider = ProfileEditProvider()
         let presenter = ProfileEditPresenter()
-        let interactor = ProfileEditInteractor(presenter: presenter, provider: provider)
+        let interactor = ProfileEditInteractor(
+            presenter: presenter,
+            provider: provider,
+            initialProfile: self.profile
+        )
         let viewController = ProfileEditViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
-
         viewController.hidesBottomBarWhenPushed = true
 
         return viewController

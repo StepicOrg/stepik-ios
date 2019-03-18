@@ -47,10 +47,6 @@ final class HomeViewController: BaseExploreViewController {
         super.viewDidAppear(animated)
         self.homeInteractor?.doStreakActivityLoad(request: .init())
 
-        DispatchQueue.main.async {
-            self.push(module: ProfileEditAssembly().makeModule())
-        }
-
         // FIXME: analytics dependency
         AmplitudeAnalyticsEvents.Home.opened.send()
     }

@@ -1,13 +1,22 @@
 import UIKit
 
 protocol ProfileEditViewControllerProtocol: class {
-    func displaySomeActionResult(viewModel: ProfileEdit.SomeAction.ViewModel)
+    func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel)
 }
 
 final class ProfileEditViewController: UIViewController {
     private let interactor: ProfileEditInteractorProtocol
 
     lazy var profileEditView = self.view as? ProfileEditView
+
+    private lazy var cancelBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(self.cancelButtonDidClick)
+        )
+        return button
+    }()
 
     init(interactor: ProfileEditInteractorProtocol) {
         self.interactor = interactor
@@ -28,18 +37,39 @@ final class ProfileEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.leftBarButtonItem = self.cancelBarButton
+        self.title = "Редактирование"
+
+        self.interactor.doProfileEditLoad(request: .init())
+    }
+
+    @objc
+    private func cancelButtonDidClick(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    enum SettingsField: String {
+        case firstName
+        case lastName
+    }
+}
+
+extension ProfileEditViewController: ProfileEditViewControllerProtocol {
+    func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel) {
+        let profileEditViewModel = viewModel.viewModel
+
         let viewModel = SettingsTableViewModel(
             sections: [
                 .init(
                     header: .init(title: "Общие данные"),
                     cells: [
                         .init(
-                            uniqueIdentifier: "firstname",
+                            uniqueIdentifier: SettingsField.firstName.rawValue,
                             type: .input(
                                 options: .init(
                                     shouldAlwaysShowPlaceholder: true,
                                     placeholderText: "Имя",
-                                    valueText: ""
+                                    valueText: profileEditViewModel.firstName
                                 )
                             ),
                             options: .init()
@@ -50,27 +80,18 @@ final class ProfileEditViewController: UIViewController {
                                 options: .init(
                                     shouldAlwaysShowPlaceholder: true,
                                     placeholderText: "Фамилия",
-                                    valueText: ""
+                                    valueText: profileEditViewModel.lastName
                                 )
                             ),
                             options: .init()
                         )
                     ],
                     footer: .init(description: "Ваше официальное имя, используемое в сертификатах")
-                ),
-                .init(
-                    header: .init(title: "О себе"),
-                    cells: [],
-                    footer: nil
                 )
             ]
         )
         self.profileEditView?.update(viewModel: viewModel)
     }
-}
-
-extension ProfileEditViewController: ProfileEditViewControllerProtocol {
-    func displaySomeActionResult(viewModel: ProfileEdit.SomeAction.ViewModel) { }
 }
 
 extension ProfileEditViewController: ProfileEditViewDelegate {
