@@ -1,12 +1,15 @@
 import SnapKit
 import UIKit
 
+protocol SettingsTableViewDelegate: SettingsInputCellDelegate { }
+
 extension SettingsTableView {
     struct Appearance { }
 }
 
 final class SettingsTableView: UIView {
     let appearance: Appearance
+    weak var delegate: SettingsTableViewDelegate?
 
     private var viewModel: SettingsTableViewModel?
 
@@ -72,19 +75,31 @@ extension SettingsTableView: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        guard let sectionViewModel = self.viewModel?.sections[safe: indexPath.section] else {
-            fatalError("View model is undefined")
+        guard let sectionViewModel = self.viewModel?.sections[safe: indexPath.section],
+            let cellViewModel = sectionViewModel.cells[safe: indexPath.item] else {
+                fatalError("View model is undefined")
         }
 
-        let cell: SettingsInputTableViewCell<TableInputTextField> = tableView.dequeueReusableCell(
-            for: indexPath
-        )
+        func setSeparatorsStyle(cell: SettingsTableViewSeparatableCellProtocol) {
+            let cellsCount = sectionViewModel.cells.count
+            cell.topSeparatorType = indexPath.item == 0 && cellsCount > 1 ? .full : .left
+            cell.bottomSeparatorType = indexPath.item == cellsCount - 1 ? .full : .none
+        }
 
-        let cellsCount = sectionViewModel.cells.count
-        cell.topSeparatorType = indexPath.item == 0 && cellsCount > 1 ? .full : .left
-        cell.bottomSeparatorType = indexPath.item == cellsCount - 1 ? .full : .none
-
-        return cell
+        switch cellViewModel.type {
+        case .input(let options):
+            let cell: SettingsInputTableViewCell<TableInputTextField> = tableView.dequeueReusableCell(
+                for: indexPath
+            )
+            cell.uniqueIdentifier = cellViewModel.uniqueIdentifier
+            cell.elementView.placeholder = options.placeholderText
+            cell.elementView.text = options.valueText
+            cell.delegate = self.delegate
+            setSeparatorsStyle(cell: cell)
+            return cell
+        default:
+            fatalError("Unsupported cell type")
+        }
     }
 }
 

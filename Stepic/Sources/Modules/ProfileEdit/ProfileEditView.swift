@@ -1,6 +1,8 @@
 import SnapKit
 import UIKit
 
+protocol ProfileEditViewDelegate: SettingsTableViewDelegate { }
+
 extension ProfileEditView {
     struct Appearance {
         let saveButtonHeight: CGFloat = 50
@@ -14,6 +16,11 @@ extension ProfileEditView {
 
 final class ProfileEditView: UIView {
     let appearance: Appearance
+    weak var delegate: ProfileEditViewDelegate? {
+        didSet {
+            self.tableView.delegate = self.delegate
+        }
+    }
 
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)

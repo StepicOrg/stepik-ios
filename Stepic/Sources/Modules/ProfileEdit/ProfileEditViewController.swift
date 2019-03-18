@@ -21,6 +21,7 @@ final class ProfileEditViewController: UIViewController {
 
     override func loadView() {
         let view = ProfileEditView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 
@@ -33,14 +34,24 @@ final class ProfileEditViewController: UIViewController {
                     header: .init(title: "Общие данные"),
                     cells: [
                         .init(
+                            uniqueIdentifier: "firstname",
                             type: .input(
-                                options: .init(shouldAlwaysShowPlaceholder: false, placeholderText: "", valueText: "")
+                                options: .init(
+                                    shouldAlwaysShowPlaceholder: true,
+                                    placeholderText: "Имя",
+                                    valueText: ""
+                                )
                             ),
                             options: .init()
                         ),
                         .init(
+                            uniqueIdentifier: "lastname",
                             type: .input(
-                                options: .init(shouldAlwaysShowPlaceholder: false, placeholderText: "", valueText: "")
+                                options: .init(
+                                    shouldAlwaysShowPlaceholder: true,
+                                    placeholderText: "Фамилия",
+                                    valueText: ""
+                                )
                             ),
                             options: .init()
                         )
@@ -60,4 +71,18 @@ final class ProfileEditViewController: UIViewController {
 
 extension ProfileEditViewController: ProfileEditViewControllerProtocol {
     func displaySomeActionResult(viewModel: ProfileEdit.SomeAction.ViewModel) { }
+}
+
+extension ProfileEditViewController: ProfileEditViewDelegate {
+    // MARK: ProfileEditViewDelegate
+
+    // MARK: SettingsTableViewDelegate
+
+    func settingsCell(
+        elementView: UITextField,
+        didReportTextChange text: String?,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) {
+
+    }
 }

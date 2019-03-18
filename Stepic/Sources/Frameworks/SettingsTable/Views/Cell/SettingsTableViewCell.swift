@@ -1,7 +1,30 @@
 import SnapKit
 import UIKit
 
-class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable {
+enum SettingsTableViewCellSeparatorType {
+    /// Separator without padding
+    case full
+    /// Separator with left padding
+    case left
+    /// Without separator
+    case none
+
+    var leftOffset: CGFloat {
+        switch self {
+        case .left:
+            return 16
+        default:
+            return 0
+        }
+    }
+}
+
+protocol SettingsTableViewSeparatableCellProtocol: class {
+    var topSeparatorType: SettingsTableViewCellSeparatorType { get set }
+    var bottomSeparatorType: SettingsTableViewCellSeparatorType { get set }
+}
+
+class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable, SettingsTableViewSeparatableCellProtocol {
     private let elementViewLeftInset: CGFloat = 16
 
     lazy var elementView = T()
@@ -9,13 +32,13 @@ class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable {
     private lazy var topSeparatorView = SeparatorView()
     private lazy var bottomSeparatorView = SeparatorView()
 
-    var topSeparatorType: SeparatorType = .full {
+    var topSeparatorType: SettingsTableViewCellSeparatorType = .full {
         didSet {
             self.updateSeparators()
         }
     }
 
-    var bottomSeparatorType: SeparatorType = .full {
+    var bottomSeparatorType: SettingsTableViewCellSeparatorType = .full {
         didSet {
             self.updateSeparators()
         }
@@ -53,24 +76,6 @@ class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable {
         self.bottomSeparatorView.isHidden = self.bottomSeparatorType == .none
         self.bottomSeparatorView.snp.updateConstraints { make in
             make.leading.equalToSuperview().offset(self.bottomSeparatorType.leftOffset)
-        }
-    }
-
-    enum SeparatorType {
-        /// Separator without padding
-        case full
-        /// Separator with left padding
-        case left
-        /// Without separator
-        case none
-
-        var leftOffset: CGFloat {
-            switch self {
-            case .left:
-                return 16
-            default:
-                return 0
-            }
         }
     }
 }

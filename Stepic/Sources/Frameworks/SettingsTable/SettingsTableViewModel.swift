@@ -9,12 +9,13 @@ struct SettingsTableSectionViewModel {
         let title: String
     }
 
-    struct Cell {
+    struct Cell: UniqueIdentifiable {
         struct Options {
             let topPadding: CGFloat = 0
             let bottomPadding: CGFloat = 0
         }
 
+        let uniqueIdentifier: UniqueIdentifierType
         let type: SettingsTableSectionCellType
         let options: Options
     }
