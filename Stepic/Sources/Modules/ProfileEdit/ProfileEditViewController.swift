@@ -74,9 +74,30 @@ final class ProfileEditViewController: UIViewController {
         self.profileEditView?.isSaveButtonEnabled = isFormValid
     }
 
+    private func handleTextField(uniqueIdentifier: UniqueIdentifierType?, text: String?) {
+        guard let id = uniqueIdentifier, let field = FormField(uniqueIdentifier: id) else {
+            return
+        }
+
+        switch field {
+        case .firstName:
+            self.formState?.firstName = text ?? ""
+        case .lastName:
+            self.formState?.lastName = text ?? ""
+        case .shortBio:
+            self.formState?.shortBio = text ?? ""
+        case .details:
+            self.formState?.details = text ?? ""
+        }
+
+        self.updateSaveButtonState()
+    }
+
     private enum FormField: String {
         case firstName
         case lastName
+        case shortBio
+        case details
 
         init?(uniqueIdentifier: UniqueIdentifierType) {
             if let value = FormField(rawValue: uniqueIdentifier) {
@@ -90,13 +111,20 @@ final class ProfileEditViewController: UIViewController {
     private struct FormState {
         var firstName: String
         var lastName: String
+        var shortBio: String
+        var details: String
     }
 }
 
 extension ProfileEditViewController: ProfileEditViewControllerProtocol {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel) {
         let profileEditViewModel = viewModel.viewModel
-        let state = FormState(firstName: profileEditViewModel.firstName, lastName: profileEditViewModel.lastName)
+        let state = FormState(
+            firstName: profileEditViewModel.firstName,
+            lastName: profileEditViewModel.lastName,
+            shortBio: profileEditViewModel.shortBio,
+            details: profileEditViewModel.details
+        )
 
         let viewModel = SettingsTableViewModel(
             sections: [
@@ -132,23 +160,23 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                     header: .init(title: "О себе"),
                     cells: [
                         .init(
-                            uniqueIdentifier: "",
+                            uniqueIdentifier: FormField.shortBio.rawValue,
                             type: .largeInput(
                                 options: .init(
                                     placeholderText: "Краткая биография (до 255 символов)",
-                                    valueText: "text",
+                                    valueText: state.shortBio,
                                     maxLength: 255
                                 )
                             ),
                             options: .init()
                         ),
                         .init(
-                            uniqueIdentifier: "",
+                            uniqueIdentifier: FormField.details.rawValue,
                             type: .largeInput(
                                 options: .init(
                                     placeholderText: "Обо мне",
-                                    valueText: "text",
-                                    maxLength: 255
+                                    valueText: state.details,
+                                    maxLength: nil
                                 )
                             ),
                             options: .init()
@@ -185,7 +213,9 @@ extension ProfileEditViewController: ProfileEditViewDelegate {
 
         let request = ProfileEdit.RemoteProfileUpdate.Request(
             firstName: state.firstName,
-            lastName: state.lastName
+            lastName: state.lastName,
+            shortBio: state.shortBio,
+            details: state.details
         )
 
         // Show HUD here, hide in displayProfileEditResult(viewModel:)
@@ -200,17 +230,14 @@ extension ProfileEditViewController: ProfileEditViewDelegate {
         didReportTextChange text: String?,
         identifiedBy uniqueIdentifier: UniqueIdentifierType?
     ) {
-        guard let id = uniqueIdentifier, let field = FormField(uniqueIdentifier: id) else {
-            return
-        }
+       self.handleTextField(uniqueIdentifier: uniqueIdentifier, text: text)
+    }
 
-        switch field {
-        case .firstName:
-            self.formState?.firstName = text ?? ""
-        case .lastName:
-            self.formState?.lastName = text ?? ""
-        }
-
-        self.updateSaveButtonState()
+    func settingsCell(
+        elementView: UITextView,
+        didReportTextChange text: String,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) {
+        self.handleTextField(uniqueIdentifier: uniqueIdentifier, text: text)
     }
 }

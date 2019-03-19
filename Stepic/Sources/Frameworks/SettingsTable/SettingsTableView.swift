@@ -104,7 +104,8 @@ extension SettingsTableView: UITableViewDataSource {
             cell.elementView.placeholder = options.placeholderText
             cell.elementView.text = options.valueText
             cell.elementView.maxTextLength = options.maxLength
-            cell.delegate = self
+            cell.delegate = self.delegate
+            cell.uniqueIdentifier = cellViewModel.uniqueIdentifier
             cell.onHeightUpdate = { [weak self] in
                 DispatchQueue.main.async {
                     UIView.performWithoutAnimation {

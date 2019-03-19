@@ -11,7 +11,9 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
     func presentProfileEditForm(response: ProfileEdit.ProfileEditLoad.Response) {
         let viewModel = ProfileEditViewModel(
             firstName: response.profile.firstName,
-            lastName: response.profile.lastName
+            lastName: response.profile.lastName,
+            shortBio: response.profile.shortBio,
+            details: response.profile.details
         )
 
         self.viewController?.displayProfileEditForm(viewModel: .init(viewModel: viewModel))

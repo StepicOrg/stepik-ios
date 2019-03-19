@@ -29,6 +29,8 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
     func doRemoteProfileUpdate(request: ProfileEdit.RemoteProfileUpdate.Request) {
         self.currentProfile.firstName = request.firstName
         self.currentProfile.lastName = request.lastName
+        self.currentProfile.shortBio = request.shortBio
+        self.currentProfile.details = request.details
 
         self.provider.update(profile: self.currentProfile).done { updatedProfile in
             self.currentProfile = updatedProfile

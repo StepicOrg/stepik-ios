@@ -19,6 +19,8 @@ enum ProfileEdit {
         struct Request {
             let firstName: String
             let lastName: String
+            let shortBio: String
+            let details: String
         }
 
         struct Response {
