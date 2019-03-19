@@ -94,6 +94,7 @@ extension SettingsTableView: UITableViewDataSource {
             cell.uniqueIdentifier = cellViewModel.uniqueIdentifier
             cell.elementView.placeholder = options.placeholderText
             cell.elementView.text = options.valueText
+            cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
             cell.delegate = self.delegate
             setSeparatorsStyle(cell: cell)
             return cell

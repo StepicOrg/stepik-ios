@@ -15,7 +15,7 @@ class TableInputTextField: UITextField {
 
     var placeholderColor = UIColor.black.withAlphaComponent(0.4)
 
-    var shouldAlwaysShowPlaceholder = true {
+    var shouldAlwaysShowPlaceholder = false {
         didSet {
             self.updateLeftViewMode()
         }
