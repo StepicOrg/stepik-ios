@@ -20,8 +20,16 @@ class ProfileDescriptionPresenter {
     }
 
     func update(with user: User) {
-        let bio = user.bio.count > 0 ? user.bio : nil
-        let info = user.details.count > 0 ? user.details : nil
+        update(shortBio: user.bio, details: user.details)
+    }
+
+    func update(with profile: Profile) {
+        update(shortBio: profile.shortBio, details: profile.details)
+    }
+
+    private func update(shortBio: String, details: String) {
+        let bio = shortBio.count > 0 ? shortBio : nil
+        let info = details.count > 0 ? details : nil
         view?.set(shortBio: bio, info: info)
     }
 }

@@ -63,6 +63,8 @@ class ProfilePresenter {
     private var usersAPI: UsersAPI
     private var profilesAPI: ProfilesAPI
 
+    private var dataBackUpdateService: DataBackUpdateServiceProtocol
+
     private var userSeed: UserSeed
 
     private var didProfileAttach = false
@@ -74,12 +76,15 @@ class ProfilePresenter {
                                                            .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .achievements, .description]
 
-    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, profilesAPI: ProfilesAPI) {
+    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, profilesAPI: ProfilesAPI, dataBackUpdateService: DataBackUpdateServiceProtocol) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
         self.userSeed = userSeed
         self.profilesAPI = profilesAPI
+
+        self.dataBackUpdateService = dataBackUpdateService
+        self.dataBackUpdateService.delegate = self
     }
 
     private func initChildModules(user: User, activity: UserActivity) {
@@ -255,5 +260,14 @@ class ProfilePresenter {
 extension ProfilePresenter: ProfileAchievementsPresenterDelegate {
     func achievementInfoShouldPresent(viewData: AchievementViewData) {
         view?.showAchievementInfo(viewData: viewData, canShare: userSeed.isMe)
+    }
+}
+
+extension ProfilePresenter: DataBackUpdateServiceDelegate {
+    func dataBackUpdateService(_ dataBackUpdateService: DataBackUpdateService, didReport refreshedTarget: DataBackUpdateTarget) {
+        if case .profile(let profile) = refreshedTarget {
+            self.headerInfoPresenter?.update(with: profile)
+            self.descriptionPresenter?.update(with: profile)
+        }
     }
 }

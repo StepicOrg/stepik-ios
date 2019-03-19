@@ -9,17 +9,20 @@ protocol ProfileEditInteractorProtocol {
 final class ProfileEditInteractor: ProfileEditInteractorProtocol {
     private let presenter: ProfileEditPresenterProtocol
     private let provider: ProfileEditProviderProtocol
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var currentProfile: Profile
 
     init(
+        initialProfile: Profile,
         presenter: ProfileEditPresenterProtocol,
         provider: ProfileEditProviderProtocol,
-        initialProfile: Profile
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.currentProfile = initialProfile
+        self.dataBackUpdateService = dataBackUpdateService
     }
 
     func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request) {
@@ -34,6 +37,7 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
 
         self.provider.update(profile: self.currentProfile).done { updatedProfile in
             self.currentProfile = updatedProfile
+            self.dataBackUpdateService.triggerProfileUpdate(updatedProfile: updatedProfile)
             self.presenter.presentProfileEditResult(response: .init(isSuccessful: true))
         }.catch { error in
             print("profile edit interactor: unable to update profile, error = \(error)")

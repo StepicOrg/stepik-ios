@@ -14,9 +14,15 @@ final class ProfileEditAssembly: Assembly {
         )
         let presenter = ProfileEditPresenter()
         let interactor = ProfileEditInteractor(
+            initialProfile: self.profile,
             presenter: presenter,
             provider: provider,
-            initialProfile: self.profile
+            dataBackUpdateService: DataBackUpdateService(
+                unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+                sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+                coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+                progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+            )
         )
         let viewController = ProfileEditViewController(interactor: interactor)
 

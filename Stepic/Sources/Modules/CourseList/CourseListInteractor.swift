@@ -321,7 +321,7 @@ extension CourseListInteractor: CourseListInputProtocol {
 extension CourseListInteractor: DataBackUpdateServiceDelegate {
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
-        reportUpdate update: DataBackUpdateDescription,
+        reportsUpdate update: DataBackUpdateDescription,
         for target: DataBackUpdateTarget
     ) {
         guard case .course(let course) = target else {

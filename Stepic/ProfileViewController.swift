@@ -193,7 +193,13 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             seed = .other(id: userId)
         }
 
-        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), profilesAPI: ProfilesAPI())
+        let dataBackUpdateService = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), profilesAPI: ProfilesAPI(), dataBackUpdateService: dataBackUpdateService)
         presenter?.refresh(shouldReload: true)
     }
 
