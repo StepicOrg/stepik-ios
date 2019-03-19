@@ -53,10 +53,6 @@ class TableInputTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         if self.shouldAlwaysShowPlaceholder {
             return .zero

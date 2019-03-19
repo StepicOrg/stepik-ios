@@ -873,6 +873,8 @@
 		2C03B2A41F0CD87600005383 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2C06E093223FF0D000AF4DA2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */; };
 		2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */; };
+		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
+		2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */; };
 		2C09313521CD4BDD002B605D /* VideoStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */; };
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
@@ -5490,6 +5492,8 @@
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesNetworkService.swift; sourceTree = "<group>"; };
+		2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInputTextView.swift; sourceTree = "<group>"; };
+		2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLargeInputTableViewCell.swift; sourceTree = "<group>"; };
 		2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_lesson_fields_v31.xcdatamodel; sourceTree = "<group>"; };
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
@@ -10778,6 +10782,7 @@
 				62E988152D37F6F6884F2977 /* ScrollableStackView.swift */,
 				62E98315DDA05307C326E27C /* SeparatorView.swift */,
 				62E986AC65867C28C93D475E /* TableInputTextField.swift */,
+				2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -10987,6 +10992,7 @@
 			isa = PBXGroup;
 			children = (
 				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
+				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
 				62E98E991593286E1C15B7E3 /* SettingsInputTableViewCell.swift */,
 			);
 			path = Cell;
@@ -14905,6 +14911,7 @@
 				2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */,
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				08F485981C5752D0000165AA /* UIViewLoadExtension.swift in Sources */,
+				2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */,
 				2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
 				081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */,
@@ -15313,6 +15320,7 @@
 				2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */,
 				62E9851FBB1D8E51D5577726 /* StreakNotificationsControlPresenter.swift in Sources */,
 				62E9829488F863D10CF5544C /* UITableView+TableHeaderLayout.swift in Sources */,
+				2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */,
 				62E9870AFED7781931340685 /* ProfileDescriptionPresenter.swift in Sources */,
 				62E98B4E497E13CB040A5C2A /* PinsMapPresenter.swift in Sources */,
 				08484F01211AF4320006266F /* CachedValue.swift in Sources */,

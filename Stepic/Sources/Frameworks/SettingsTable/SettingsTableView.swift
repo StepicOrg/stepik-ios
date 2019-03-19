@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol SettingsTableViewDelegate: SettingsInputCellDelegate { }
+protocol SettingsTableViewDelegate: SettingsInputCellDelegate, SettingsLargeInputCellDelegate { }
 
 extension SettingsTableView {
     struct Appearance { }
@@ -23,6 +23,7 @@ final class SettingsTableView: UIView {
         tableView.estimatedSectionFooterHeight = 50.0
 
         tableView.register(cellClass: SettingsInputTableViewCell<TableInputTextField>.self)
+        tableView.register(cellClass: SettingsLargeInputTableViewCell<TableInputTextView>.self)
 
         tableView.register(headerFooterViewClass: SettingsTableSectionHeaderView.self)
         tableView.register(headerFooterViewClass: SettingsTableSectionFooterView.self)
@@ -88,14 +89,30 @@ extension SettingsTableView: UITableViewDataSource {
 
         switch cellViewModel.type {
         case .input(let options):
-            let cell: SettingsInputTableViewCell<TableInputTextField> = tableView.dequeueReusableCell(
-                for: indexPath
-            )
+            let cell: SettingsInputTableViewCell<TableInputTextField> = tableView.dequeueReusableCell(for: indexPath)
             cell.uniqueIdentifier = cellViewModel.uniqueIdentifier
             cell.elementView.placeholder = options.placeholderText
             cell.elementView.text = options.valueText
             cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
             cell.delegate = self.delegate
+            setSeparatorsStyle(cell: cell)
+            return cell
+        case .largeInput(let options):
+            let cell: SettingsLargeInputTableViewCell<TableInputTextView> = tableView.dequeueReusableCell(
+                for: indexPath
+            )
+            cell.elementView.placeholder = options.placeholderText
+            cell.elementView.text = options.valueText
+            cell.elementView.maxTextLength = options.maxLength
+            cell.delegate = self
+            cell.onHeightUpdate = { [weak self] in
+                DispatchQueue.main.async {
+                    UIView.performWithoutAnimation {
+                        self?.tableView.beginUpdates()
+                        self?.tableView.endUpdates()
+                    }
+                }
+            }
             setSeparatorsStyle(cell: cell)
             return cell
         default:
@@ -126,7 +143,17 @@ extension SettingsTableView: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        guard let sectionViewModel = self.viewModel?.sections[safe: indexPath.section],
+              let cellViewModel = sectionViewModel.cells[safe: indexPath.item] else {
+            fatalError("View model is undefined")
+        }
+
+        switch cellViewModel.type {
+        case .largeInput:
+            return UITableViewAutomaticDimension
+        default:
+            return 44.0
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

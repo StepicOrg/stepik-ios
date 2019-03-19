@@ -47,21 +47,22 @@ class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable, SettingsTable
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
 
+        self.contentView.addSubview(self.elementView)
         self.contentView.addSubview(self.topSeparatorView)
+        self.contentView.addSubview(self.bottomSeparatorView)
+
         self.topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         self.topSeparatorView.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview()
             make.leading.equalToSuperview().offset(self.topSeparatorType.leftOffset)
         }
 
-        self.contentView.addSubview(self.elementView)
         self.elementView.translatesAutoresizingMaskIntoConstraints = false
         self.elementView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.elementViewLeftInset)
             make.top.bottom.trailing.equalToSuperview()
         }
 
-        self.contentView.addSubview(self.bottomSeparatorView)
         self.bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomSeparatorView.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
@@ -71,13 +72,17 @@ class SettingsTableViewCell<T: UIView>: UITableViewCell, Reusable, SettingsTable
 
     private func updateSeparators() {
         self.topSeparatorView.isHidden = self.topSeparatorType == .none
-        self.topSeparatorView.snp.updateConstraints { make in
-            make.leading.equalToSuperview().offset(self.topSeparatorType.leftOffset)
+        if self.topSeparatorView.superview != nil {
+            self.topSeparatorView.snp.updateConstraints { make in
+                make.leading.equalToSuperview().offset(self.topSeparatorType.leftOffset)
+            }
         }
 
         self.bottomSeparatorView.isHidden = self.bottomSeparatorType == .none
-        self.bottomSeparatorView.snp.updateConstraints { make in
-            make.leading.equalToSuperview().offset(self.bottomSeparatorType.leftOffset)
+        if self.bottomSeparatorView.superview != nil {
+            self.bottomSeparatorView.snp.updateConstraints { make in
+                make.leading.equalToSuperview().offset(self.bottomSeparatorType.leftOffset)
+            }
         }
     }
 }

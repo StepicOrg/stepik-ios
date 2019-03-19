@@ -34,7 +34,7 @@ class StyledNavigationController: UINavigationController {
         }
     }
 
-    private let delegateRepeater = NavigationControllerDelegateRepeater()
+    private let delegateRepeater = UINavigationControllerDelegateRepeater()
     override var delegate: UINavigationControllerDelegate? {
         set {
             self.delegateRepeater.secondaryDelegate = newValue
@@ -435,7 +435,7 @@ extension StyledNavigationControllerPresentable {
 
 // MARK: - Delegate Repeater
 
-private class NavigationControllerDelegateRepeater: NSObject, UINavigationControllerDelegate {
+private class UINavigationControllerDelegateRepeater: NSObject, UINavigationControllerDelegate {
     weak var mainDelegate: UINavigationControllerDelegate?
     weak var secondaryDelegate: UINavigationControllerDelegate?
 

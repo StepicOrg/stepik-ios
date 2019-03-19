@@ -1,5 +1,6 @@
 import SVProgressHUD
 import UIKit
+import IQKeyboardManagerSwift
 
 protocol ProfileEditViewControllerProtocol: class {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel)
@@ -45,6 +46,14 @@ final class ProfileEditViewController: UIViewController {
         self.title = "Редактирование"
 
         self.interactor.doProfileEditLoad(request: .init())
+
+        // Cause IQKeyboardManager is buggy
+        IQKeyboardManager.sharedManager().enable = false
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = true
     }
 
     @objc
@@ -118,6 +127,34 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                         )
                     ],
                     footer: .init(description: "Ваше официальное имя, используемое в сертификатах")
+                ),
+                .init(
+                    header: .init(title: "О себе"),
+                    cells: [
+                        .init(
+                            uniqueIdentifier: "",
+                            type: .largeInput(
+                                options: .init(
+                                    placeholderText: "Краткая биография (до 255 символов)",
+                                    valueText: "text",
+                                    maxLength: 255
+                                )
+                            ),
+                            options: .init()
+                        ),
+                        .init(
+                            uniqueIdentifier: "",
+                            type: .largeInput(
+                                options: .init(
+                                    placeholderText: "Обо мне",
+                                    valueText: "text",
+                                    maxLength: 255
+                                )
+                            ),
+                            options: .init()
+                        )
+                    ],
+                    footer: nil
                 )
             ]
         )

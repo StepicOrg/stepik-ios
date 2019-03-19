@@ -14,6 +14,7 @@ final class SettingsInputTableViewCell<T: UITextField>: SettingsTableViewCell<T>
 
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        self.selectionStyle = .none
         self.elementView.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
 
