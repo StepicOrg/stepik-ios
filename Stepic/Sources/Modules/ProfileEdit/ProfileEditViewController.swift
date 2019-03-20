@@ -209,6 +209,7 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
     func displayProfileEditResult(viewModel: ProfileEdit.RemoteProfileUpdate.ViewModel) {
         if viewModel.isSuccessful {
             SVProgressHUD.dismiss()
+            self.view.endEditing(true)
             self.dismiss(animated: true, completion: nil)
         } else {
             SVProgressHUD.showError(withStatus: nil)

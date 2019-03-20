@@ -32,7 +32,7 @@ func performRequest(_ request: @escaping (() -> Void), error: ((PerformRequestEr
 class ApiRequestPerformer {
 
     static let semaphore = DispatchSemaphore(value: 1)
-    static let queue = DispatchQueue(label: "perform_request_queue", qos: DispatchQoS.background)
+    static let queue = DispatchQueue(label: "perform_request_queue", qos: DispatchQoS.userInitiated)
 
     static func performAPIRequest(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
 

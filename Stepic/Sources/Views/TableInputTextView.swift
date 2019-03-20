@@ -10,6 +10,7 @@ final class TableInputTextView: UITextView {
 
     private lazy var placeholderLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.textColor = self.placeholderColor
         label.font = Appearance.defaultFont
         return label
@@ -26,7 +27,7 @@ final class TableInputTextView: UITextView {
     // swiftlint:disable:next implicitly_unwrapped_optional
     override var text: String! {
         didSet {
-            self.placeholderLabel.isHidden = true
+            self.placeholderLabel.isHidden = !self.text.isEmpty
         }
     }
 
@@ -70,6 +71,17 @@ final class TableInputTextView: UITextView {
         NotificationCenter.default.removeObserver(self)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let preferredSize = self.placeholderLabel.sizeThatFits(
+            CGSize(width: self.textContainer.size.width, height: CGFloat.greatestFiniteMagnitude)
+        )
+        self.placeholderLabel.frame = CGRect(
+            origin: self.placeholderLabel.frame.origin,
+            size: preferredSize
+        )
+    }
+
     private func setupView() {
         // To make paddings like in UILabel
         self.textContainer.lineFragmentPadding = 0
@@ -84,7 +96,6 @@ final class TableInputTextView: UITextView {
         self.placeholderLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(Appearance.textInsets.top)
             make.leading.equalToSuperview().offset(Appearance.textInsets.left)
-            make.trailing.equalToSuperview().offset(-Appearance.textInsets.right)
         }
 
         self.snp.makeConstraints { make in
@@ -109,7 +120,6 @@ final class TableInputTextView: UITextView {
 
     @objc
     private func textViewDidChange() {
-        self.placeholderLabel.isHidden = !self.text.isEmpty
         if let maxTextLength = self.maxTextLength {
             self.text = String(self.text.prefix(maxTextLength))
         }
@@ -118,6 +128,5 @@ final class TableInputTextView: UITextView {
     @objc
     private func textViewDidEndEditing() {
         self.text = self.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.placeholderLabel.isHidden = !self.text.isEmpty
     }
 }

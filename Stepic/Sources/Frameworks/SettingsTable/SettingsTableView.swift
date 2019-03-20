@@ -143,7 +143,7 @@ extension SettingsTableView: UITableViewDelegate {
         return view
     }
 
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let sectionViewModel = self.viewModel?.sections[safe: indexPath.section],
               let cellViewModel = sectionViewModel.cells[safe: indexPath.item] else {
             fatalError("View model is undefined")
@@ -155,6 +155,10 @@ extension SettingsTableView: UITableViewDelegate {
         default:
             return 44.0
         }
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
