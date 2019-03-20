@@ -1,6 +1,5 @@
 import SVProgressHUD
 import UIKit
-import IQKeyboardManagerSwift
 
 protocol ProfileEditViewControllerProtocol: class {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel)
@@ -12,14 +11,17 @@ final class ProfileEditViewController: UIViewController {
 
     lazy var profileEditView = self.view as? ProfileEditView
 
-    private lazy var cancelBarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
-            target: self,
-            action: #selector(self.cancelButtonDidClick)
-        )
-        return button
-    }()
+    private lazy var cancelBarButton = UIBarButtonItem(
+        barButtonSystemItem: .cancel,
+        target: self,
+        action: #selector(self.cancelButtonDidClick)
+    )
+
+    private lazy var doneBarButton = UIBarButtonItem(
+        barButtonSystemItem: .done,
+        target: self,
+        action: #selector(self.doneButtonDidClick)
+    )
 
     private var formState: FormState?
 
@@ -43,22 +45,33 @@ final class ProfileEditViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.leftBarButtonItem = self.cancelBarButton
+        self.navigationItem.rightBarButtonItem = self.doneBarButton
         self.title = "Редактирование"
 
         self.interactor.doProfileEditLoad(request: .init())
-
-        // Cause IQKeyboardManager is buggy
-        IQKeyboardManager.sharedManager().enable = false
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        IQKeyboardManager.sharedManager().enable = true
     }
 
     @objc
     private func cancelButtonDidClick(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc
+    private func doneButtonDidClick(_ sender: UIBarButtonItem) {
+        guard let state = self.formState else {
+            return
+        }
+
+        let request = ProfileEdit.RemoteProfileUpdate.Request(
+            firstName: state.firstName,
+            lastName: state.lastName,
+            shortBio: state.shortBio,
+            details: state.details
+        )
+
+        // Show HUD here, hide in displayProfileEditResult(viewModel:)
+        SVProgressHUD.show()
+        self.interactor.doRemoteProfileUpdate(request: request)
     }
 
     private func updateSaveButtonState() {
@@ -71,7 +84,7 @@ final class ProfileEditViewController: UIViewController {
         let isLastNameValid = !state.lastName.isEmpty
 
         let isFormValid = isFirstNameValid && isLastNameValid
-        self.profileEditView?.isSaveButtonEnabled = isFormValid
+        self.doneBarButton.isEnabled = isFormValid
     }
 
     private func handleTextField(uniqueIdentifier: UniqueIdentifierType?, text: String?) {
@@ -204,25 +217,6 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
 }
 
 extension ProfileEditViewController: ProfileEditViewDelegate {
-    // MARK: ProfileEditViewDelegate
-
-    func profileEditViewDidReportSaveButtonClick(_ profileEditView: ProfileEditView) {
-        guard let state = self.formState else {
-            return
-        }
-
-        let request = ProfileEdit.RemoteProfileUpdate.Request(
-            firstName: state.firstName,
-            lastName: state.lastName,
-            shortBio: state.shortBio,
-            details: state.details
-        )
-
-        // Show HUD here, hide in displayProfileEditResult(viewModel:)
-        SVProgressHUD.show()
-        self.interactor.doRemoteProfileUpdate(request: request)
-    }
-
     // MARK: SettingsTableViewDelegate
 
     func settingsCell(
