@@ -46,7 +46,7 @@ final class ProfileEditViewController: UIViewController {
 
         self.navigationItem.leftBarButtonItem = self.cancelBarButton
         self.navigationItem.rightBarButtonItem = self.doneBarButton
-        self.title = "Редактирование"
+        self.title = NSLocalizedString("ProfileEditTitle", comment: "")
 
         self.interactor.doProfileEditLoad(request: .init())
     }
@@ -139,64 +139,67 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
             details: profileEditViewModel.details
         )
 
+        // Construct view
+        let firstNameField = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: FormField.firstName.rawValue,
+            type: .input(
+                options: .init(
+                    valueText: state.firstName,
+                    placeholderText: NSLocalizedString("ProfileEditFirstNamePlaceholder", comment: ""),
+                    shouldAlwaysShowPlaceholder: true,
+                    inputGroup: "general"
+                )
+            ),
+            options: .init()
+        )
+
+        let lastNameField = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: FormField.lastName.rawValue,
+            type: .input(
+                options: .init(
+                    valueText: state.lastName,
+                    placeholderText: NSLocalizedString("ProfileEditLastNamePlaceholder", comment: ""),
+                    shouldAlwaysShowPlaceholder: true,
+                    inputGroup: "general"
+                )
+            ),
+            options: .init()
+        )
+
+        let shortBioField = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: FormField.shortBio.rawValue,
+            type: .largeInput(
+                options: .init(
+                    valueText: state.shortBio,
+                    placeholderText: NSLocalizedString("ProfileEditShortBioPlaceholder", comment: ""),
+                    maxLength: 255
+                )
+            ),
+            options: .init()
+        )
+
+        let detailsField = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: FormField.details.rawValue,
+            type: .largeInput(
+                options: .init(
+                    valueText: state.details,
+                    placeholderText: NSLocalizedString("ProfileEditDetailsPlaceholder", comment: ""),
+                    maxLength: nil
+                )
+            ),
+            options: .init()
+        )
+
         let viewModel = SettingsTableViewModel(
             sections: [
                 .init(
-                    header: .init(title: "Общие данные"),
-                    cells: [
-                        .init(
-                            uniqueIdentifier: FormField.firstName.rawValue,
-                            type: .input(
-                                options: .init(
-                                    valueText: state.firstName,
-                                    placeholderText: "Имя",
-                                    shouldAlwaysShowPlaceholder: true,
-                                    inputGroup: "general"
-                                )
-                            ),
-                            options: .init()
-                        ),
-                        .init(
-                            uniqueIdentifier: FormField.lastName.rawValue,
-                            type: .input(
-                                options: .init(
-                                    valueText: state.lastName,
-                                    placeholderText: "Фамилия",
-                                    shouldAlwaysShowPlaceholder: true,
-                                    inputGroup: "general"
-                                )
-                            ),
-                            options: .init()
-                        )
-                    ],
-                    footer: .init(description: "Ваше официальное имя, используемое в сертификатах")
+                    header: .init(title: NSLocalizedString("ProfileEditGeneralTitle", comment: "")),
+                    cells: [firstNameField, lastNameField],
+                    footer: .init(description: NSLocalizedString("ProfileEditGeneralDescription", comment: ""))
                 ),
                 .init(
-                    header: .init(title: "О себе"),
-                    cells: [
-                        .init(
-                            uniqueIdentifier: FormField.shortBio.rawValue,
-                            type: .largeInput(
-                                options: .init(
-                                    valueText: state.shortBio,
-                                    placeholderText: "Краткая биография (до 255 символов)",
-                                    maxLength: 255
-                                )
-                            ),
-                            options: .init()
-                        ),
-                        .init(
-                            uniqueIdentifier: FormField.details.rawValue,
-                            type: .largeInput(
-                                options: .init(
-                                    valueText: state.details,
-                                    placeholderText: "Обо мне",
-                                    maxLength: nil
-                                )
-                            ),
-                            options: .init()
-                        )
-                    ],
+                    header: .init(title: NSLocalizedString("ProfileEditAboutMeTitle", comment: "")),
+                    cells: [shortBioField, detailsField],
                     footer: nil
                 )
             ]

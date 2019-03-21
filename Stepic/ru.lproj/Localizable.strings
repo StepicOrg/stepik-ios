@@ -597,6 +597,16 @@ SyllabusDeadlinesButton = "Расписание";
 SyllabusDownloadAll = "Загрузить всё";
 NoReviews = "К сожалению, ни одного отзыва об этом курсе пока нет";
 
+/* Profile edit */
+ProfileEditTitle = "Редактирование";
+ProfileEditFirstNamePlaceholder = "Имя";
+ProfileEditLastNamePlaceholder = "Фамилия";
+ProfileEditShortBioPlaceholder = "Краткая биография (до 255 символов)";
+ProfileEditDetailsPlaceholder = "Обо мне";
+ProfileEditGeneralTitle = "Общие данные";
+ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах";
+ProfileEditAboutMeTitle = "О себе";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
 "Ok" = "Ok";

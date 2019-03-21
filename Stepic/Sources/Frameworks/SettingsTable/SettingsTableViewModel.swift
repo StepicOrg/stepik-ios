@@ -18,6 +18,12 @@ struct SettingsTableSectionViewModel {
         let uniqueIdentifier: UniqueIdentifierType
         let type: SettingsTableSectionCellType
         let options: Options
+
+        init(uniqueIdentifier: UniqueIdentifierType, type: SettingsTableSectionCellType, options: Options = .init()) {
+            self.uniqueIdentifier = uniqueIdentifier
+            self.type = type
+            self.options = options
+        }
     }
 
     struct Footer {

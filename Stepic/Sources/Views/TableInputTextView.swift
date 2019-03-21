@@ -122,6 +122,8 @@ final class TableInputTextView: UITextView {
     private func textViewDidChange() {
         if let maxTextLength = self.maxTextLength {
             self.text = String(self.text.prefix(maxTextLength))
+        } else {
+            self.placeholderLabel.isHidden = !self.text.isEmpty
         }
     }
 
