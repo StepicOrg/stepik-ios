@@ -158,8 +158,8 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
     func makeConstraints() {
         self.thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         self.thumbnailImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(self.appearance.insets)
-            make.height.equalTo(self.snp.width).multipliedBy(self.appearance.introVideoHeightRatio)
+            make.edges.equalToSuperview().inset(self.appearance.insets).priority(999)
+            make.height.equalTo(self.snp.width).multipliedBy(self.appearance.introVideoHeightRatio).priority(999)
         }
 
         self.overlayView.translatesAutoresizingMaskIntoConstraints = false
@@ -175,7 +175,7 @@ extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableVie
         }
 
         self.introVideoView?.snp.makeConstraints { make in
-            make.edges.equalTo(self.thumbnailImageView)
+            make.edges.equalTo(self.thumbnailImageView).priority(999)
         }
     }
 }
