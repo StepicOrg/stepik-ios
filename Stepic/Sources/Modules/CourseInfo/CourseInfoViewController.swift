@@ -48,7 +48,8 @@ final class CourseInfoViewController: UIViewController {
         action: #selector(self.actionButtonClicked)
     )
 
-    private var submodulesControllers: [UIViewController] = []
+    // Element is nil when view controller was not initialized yet
+    private var submodulesControllers: [UIViewController?] = []
 
     private var shouldShowDropCourseAction = false
     private let didJustSubscribe: Bool
@@ -60,8 +61,10 @@ final class CourseInfoViewController: UIViewController {
         didJustSubscribe: Bool = false
     ) {
         self.interactor = interactor
-        self.availableTabs = availableTabs
         self.didJustSubscribe = didJustSubscribe
+
+        self.availableTabs = availableTabs
+        self.submodulesControllers = Array(repeating: nil, count: availableTabs.count)
 
         if let initialTabIndex = self.availableTabs.firstIndex(of: initialTab) {
             self.initialTabIndex = initialTabIndex
@@ -125,8 +128,6 @@ final class CourseInfoViewController: UIViewController {
         view.delegate = self
 
         self.view = view
-
-        self.submodulesControllers = self.makeSubmodules()
     }
 
     private func updateTopBar(alpha: CGFloat) {
@@ -152,32 +153,39 @@ final class CourseInfoViewController: UIViewController {
         self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
     }
 
-    private func makeSubmodules() -> [UIViewController] {
-        var viewControllers: [UIViewController] = []
-        var submodules: [CourseInfoSubmoduleProtocol?] = []
-
-        for tab in self.availableTabs {
-            switch tab {
-            case .info:
-                let infoAssembly = CourseInfoTabInfoAssembly()
-                viewControllers.append(infoAssembly.makeModule())
-                submodules.append(infoAssembly.moduleInput)
-            case .syllabus:
-                let syllabusAssembly = CourseInfoTabSyllabusAssembly(
-                    output: self.interactor as? CourseInfoTabSyllabusOutputProtocol
-                )
-                viewControllers.append(syllabusAssembly.makeModule())
-                submodules.append(syllabusAssembly.moduleInput)
-            case .reviews:
-                let reviewsAssembly = CourseInfoTabReviewsAssembly()
-                viewControllers.append(reviewsAssembly.makeModule())
-                submodules.append(reviewsAssembly.moduleInput)
-            }
+    private func loadSubmoduleIfNeeded(at index: Int) {
+        guard self.submodulesControllers[index] == nil else {
+            return
         }
 
-        self.interactor.doSubmodulesRegistration(request: .init(submodules: submodules.compactMap { $0 }))
+        guard let tab = self.availableTabs[safe: index] else {
+            return
+        }
 
-        return viewControllers
+        let moduleInput: CourseInfoSubmoduleProtocol?
+        let controller: UIViewController
+        switch tab {
+        case .info:
+            let assembly = CourseInfoTabInfoAssembly()
+            controller = assembly.makeModule()
+            moduleInput = assembly.moduleInput
+        case .syllabus:
+            let assembly = CourseInfoTabSyllabusAssembly(
+                output: self.interactor as? CourseInfoTabSyllabusOutputProtocol
+            )
+            controller = assembly.makeModule()
+            moduleInput = assembly.moduleInput
+        case .reviews:
+            let assembly = CourseInfoTabReviewsAssembly()
+            controller = assembly.makeModule()
+            moduleInput = assembly.moduleInput
+        }
+
+        self.submodulesControllers[index] = controller
+
+        if let submodule = moduleInput {
+            self.interactor.doSubmodulesRegistration(request: .init(submodules: [submodule]))
+        }
     }
 
     @objc
@@ -215,14 +223,18 @@ final class CourseInfoViewController: UIViewController {
 
 extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyViewControllerDelegate {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return self.submodulesControllers.count
+        return self.availableTabs.count
     }
 
     func viewController(
         for pageboyViewController: PageboyViewController,
         at index: PageboyViewController.PageIndex
     ) -> UIViewController? {
-        return self.submodulesControllers[safe: index]
+        self.loadSubmoduleIfNeeded(at: index)
+        defer {
+            (self.submodulesControllers[index]?.view as? CourseInfoScrollablePageViewProtocol)?.contentOffset = .zero
+        }
+        return self.submodulesControllers[index]
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
@@ -417,8 +429,8 @@ extension CourseInfoViewController: UIScrollViewDelegate {
 
     private func arrangePagesScrollOffset(topOffsetOfCurrentTab: CGFloat, maxTopOffset: CGFloat) {
         for viewController in self.submodulesControllers {
-            guard let view = viewController.view as? CourseInfoScrollablePageViewProtocol else {
-                return
+            guard let view = viewController?.view as? CourseInfoScrollablePageViewProtocol else {
+                continue
             }
 
             var topOffset = view.contentOffset.y
@@ -461,6 +473,10 @@ extension CourseInfoViewController: CourseInfoViewDelegate {
     func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat) {
         // Update contentInset for each page
         for viewController in self.submodulesControllers {
+            guard let viewController = viewController else {
+                continue
+            }
+
             let view = viewController.view as? CourseInfoScrollablePageViewProtocol
 
             if let view = view {
