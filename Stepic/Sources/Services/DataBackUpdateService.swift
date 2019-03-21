@@ -1,43 +1,52 @@
 import Foundation
 import PromiseKit
 
+/// Which object was updated
 enum DataBackUpdateTarget {
     case course(_: Course)
     case section(_: Section)
     case unit(_: Unit)
     case progress(_: Progress)
+    case profile(_: Profile)
 }
 
+/// Affected fields in updated object
 struct DataBackUpdateDescription: OptionSet {
     let rawValue: Int
 
     static let progress = DataBackUpdateDescription(rawValue: 1)
     static let enrollment = DataBackUpdateDescription(rawValue: 2)
+    static let profileFirstName = DataBackUpdateDescription(rawValue: 3)
+    static let profileLastName = DataBackUpdateDescription(rawValue: 4)
+    static let profileShortBio = DataBackUpdateDescription(rawValue: 5)
+    static let profileDetails = DataBackUpdateDescription(rawValue: 6)
 }
 
 protocol DataBackUpdateServiceDelegate: class {
+    /// Reported changes in specific fields of target
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
-        reportUpdate update: DataBackUpdateDescription,
+        didReport update: DataBackUpdateDescription,
         for target: DataBackUpdateTarget
     )
 
+    /// Reported changes in whole target
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
-        reportRefreshedTarget: DataBackUpdateTarget
+        didReport refreshedTarget: DataBackUpdateTarget
     )
 }
 
 extension DataBackUpdateServiceDelegate {
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
-        reportUpdate update: DataBackUpdateDescription,
+        didReport update: DataBackUpdateDescription,
         for target: DataBackUpdateTarget
     ) { }
 
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
-        reportRefreshedTarget: DataBackUpdateTarget
+        didReport refreshedTarget: DataBackUpdateTarget
     ) { }
 }
 
@@ -52,6 +61,8 @@ protocol DataBackUpdateServiceProtocol: class {
     func triggerProgressUpdate(course: Course.IdType)
     /// Report about enrollment with already retrieved course
     func triggerEnrollmentUpdate(retrievedCourse: Course)
+    /// Report about profile update
+    func triggerProfileUpdate(updatedProfile: Profile)
 }
 
 final class DataBackUpdateService: DataBackUpdateServiceProtocol {
@@ -173,6 +184,14 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
         self.postNotification(target: .course(retrievedCourse))
     }
 
+    func triggerProfileUpdate(updatedProfile: Profile) {
+        self.postNotification(
+            description: [.profileFirstName, .profileLastName, .profileShortBio, .profileDetails],
+            target: .profile(updatedProfile)
+        )
+        self.postNotification(target: .profile(updatedProfile))
+    }
+
     // MARK: Private methods
 
     private func postNotification(description: DataBackUpdateDescription? = nil, target: DataBackUpdateTarget) {
@@ -202,7 +221,7 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
         }
 
         if notification.name == .dataBackUpdated {
-            self.delegate?.dataBackUpdateService(self, reportRefreshedTarget: updateTarget)
+            self.delegate?.dataBackUpdateService(self, didReport: updateTarget)
             return
         }
 
@@ -212,7 +231,7 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
             return
         }
 
-        self.delegate?.dataBackUpdateService(self, reportUpdate: updateDescription, for: updateTarget)
+        self.delegate?.dataBackUpdateService(self, didReport: updateDescription, for: updateTarget)
     }
 
     private enum NotificationKey: String {

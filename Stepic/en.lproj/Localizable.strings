@@ -596,6 +596,16 @@ SyllabusDeadlinesButton = "Schedule";
 SyllabusDownloadAll = "Download all";
 NoReviews = "Unfortunately, there are no reviews sent for this course";
 
+/* Profile edit */
+ProfileEditTitle = "Profile edit";
+ProfileEditFirstNamePlaceholder = "First name";
+ProfileEditLastNamePlaceholder = "Last name";
+ProfileEditShortBioPlaceholder = "Short bio (255 chars max)";
+ProfileEditDetailsPlaceholder = "About";
+ProfileEditGeneralTitle = "General";
+ProfileEditGeneralDescription = "Your legal names, used for any certificates";
+ProfileEditAboutMeTitle = "About me";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
 "Ok" = "Ok";
