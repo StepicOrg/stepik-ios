@@ -61,7 +61,7 @@ final class SettingsTableView: UIView {
                 return nil
             }
         for group in Array(Set(flattenInputCellGroups)) {
-            inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
+            self.inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
         }
     }
 
