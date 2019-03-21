@@ -3,7 +3,7 @@ import UIKit
 class TableInputTextField: UITextField {
     private enum Appearance {
         static let defaultFont = UIFont.systemFont(ofSize: 17)
-        static let textAreaInsets = UIEdgeInsets(top: 1, left: 8, bottom: 0, right: 0)
+        static let textAreaInsets = UIEdgeInsets(top: 1, left: 12, bottom: 0, right: 0)
     }
 
     private lazy var pinnedPlaceholderLabel: UILabel = {
@@ -13,12 +13,32 @@ class TableInputTextField: UITextField {
         return label
     }()
 
+    private var additionalPlaceholderRightPadding: CGFloat {
+        if let width = self.placeholderMinimalWidth {
+            return max(0, width - self.placeholderWidth)
+        }
+        return 0
+    }
+
     var placeholderColor = UIColor.black.withAlphaComponent(0.4)
 
     var shouldAlwaysShowPlaceholder = false {
         didSet {
             self.updateLeftViewMode()
         }
+    }
+
+    var placeholderMinimalWidth: CGFloat? {
+        didSet {
+            if self.placeholderMinimalWidth != nil {
+                self.setNeedsLayout()
+                self.layoutIfNeeded()
+            }
+        }
+    }
+
+    var placeholderWidth: CGFloat {
+        return self.pinnedPlaceholderLabel.frame.width
     }
 
     override var font: UIFont? {
@@ -65,7 +85,10 @@ class TableInputTextField: UITextField {
         let rect = super.textRect(forBounds: bounds)
         if self.shouldAlwaysShowPlaceholder {
             return CGRect(
-                origin: CGPoint(x: rect.origin.x + Appearance.textAreaInsets.left, y: Appearance.textAreaInsets.top),
+                origin: CGPoint(
+                    x: rect.origin.x + self.additionalPlaceholderRightPadding + Appearance.textAreaInsets.left,
+                    y: Appearance.textAreaInsets.top
+                ),
                 size: CGSize(width: rect.size.width, height: bounds.height)
             )
         } else {
@@ -77,7 +100,10 @@ class TableInputTextField: UITextField {
         let rect = super.editingRect(forBounds: bounds)
         if self.shouldAlwaysShowPlaceholder {
             return CGRect(
-                origin: CGPoint(x: rect.origin.x + Appearance.textAreaInsets.left, y: Appearance.textAreaInsets.top),
+                origin: CGPoint(
+                    x: rect.origin.x + self.additionalPlaceholderRightPadding + Appearance.textAreaInsets.left,
+                    y: Appearance.textAreaInsets.top
+                ),
                 size: CGSize(width: rect.size.width, height: bounds.height)
             )
         } else {

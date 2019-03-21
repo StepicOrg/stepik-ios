@@ -148,9 +148,10 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                             uniqueIdentifier: FormField.firstName.rawValue,
                             type: .input(
                                 options: .init(
-                                    shouldAlwaysShowPlaceholder: true,
+                                    valueText: state.firstName,
                                     placeholderText: "Имя",
-                                    valueText: state.firstName
+                                    shouldAlwaysShowPlaceholder: true,
+                                    inputGroup: "general"
                                 )
                             ),
                             options: .init()
@@ -159,9 +160,10 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                             uniqueIdentifier: FormField.lastName.rawValue,
                             type: .input(
                                 options: .init(
-                                    shouldAlwaysShowPlaceholder: true,
+                                    valueText: state.lastName,
                                     placeholderText: "Фамилия",
-                                    valueText: state.lastName
+                                    shouldAlwaysShowPlaceholder: true,
+                                    inputGroup: "general"
                                 )
                             ),
                             options: .init()
@@ -176,8 +178,8 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                             uniqueIdentifier: FormField.shortBio.rawValue,
                             type: .largeInput(
                                 options: .init(
-                                    placeholderText: "Краткая биография (до 255 символов)",
                                     valueText: state.shortBio,
+                                    placeholderText: "Краткая биография (до 255 символов)",
                                     maxLength: 255
                                 )
                             ),
@@ -187,8 +189,8 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                             uniqueIdentifier: FormField.details.rawValue,
                             type: .largeInput(
                                 options: .init(
-                                    placeholderText: "Обо мне",
                                     valueText: state.details,
+                                    placeholderText: "Обо мне",
                                     maxLength: nil
                                 )
                             ),

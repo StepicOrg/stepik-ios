@@ -31,6 +31,8 @@ final class SettingsTableView: UIView {
         return tableView
     }()
 
+    private lazy var inputCellGroups: [SettingsInputCellGroup] = []
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -47,6 +49,21 @@ final class SettingsTableView: UIView {
     func update(viewModel: SettingsTableViewModel) {
         self.viewModel = viewModel
         self.tableView.reloadData()
+
+        // Create input groups for each input type
+        self.inputCellGroups.removeAll()
+        let flattenInputCellGroups: [String] = viewModel.sections
+            .map { $0.cells }
+            .reduce([], +)
+            .compactMap { cell in
+                if case .input(let options) = cell.type {
+                    return options.inputGroup
+                }
+                return nil
+            }
+        for group in Array(Set(flattenInputCellGroups)) {
+            inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
+        }
     }
 }
 
@@ -96,6 +113,7 @@ extension SettingsTableView: UITableViewDataSource {
             cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
             cell.delegate = self.delegate
             setSeparatorsStyle(cell: cell)
+            self.inputCellGroups.first { $0.uniqueIdentifier == options.inputGroup }?.addInputCell(cell)
             return cell
         case .largeInput(let options):
             let cell: SettingsLargeInputTableViewCell<TableInputTextView> = tableView.dequeueReusableCell(
@@ -116,8 +134,6 @@ extension SettingsTableView: UITableViewDataSource {
             }
             setSeparatorsStyle(cell: cell)
             return cell
-        default:
-            fatalError("Unsupported cell type")
         }
     }
 }

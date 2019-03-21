@@ -32,21 +32,39 @@ struct SettingsTableSectionViewModel {
 enum SettingsTableSectionCellType {
     case input(options: InputCellOptions)
     case largeInput(options: LargeInputCellOptions)
-    case customView(options: CustomViewCellOptions)
 }
 
 struct InputCellOptions {
     let shouldAlwaysShowPlaceholder: Bool
     let placeholderText: String?
     let valueText: String?
+    let inputGroup: UniqueIdentifierType?
+
+    init(
+        valueText: String? = nil,
+        placeholderText: String? = nil,
+        shouldAlwaysShowPlaceholder: Bool = false,
+        inputGroup: UniqueIdentifierType? = nil
+    ) {
+        self.valueText = valueText
+        self.placeholderText = placeholderText
+        self.shouldAlwaysShowPlaceholder = shouldAlwaysShowPlaceholder
+        self.inputGroup = inputGroup
+    }
 }
 
 struct LargeInputCellOptions {
     let placeholderText: String?
     let valueText: String?
     let maxLength: Int?
-}
 
-struct CustomViewCellOptions {
-    let view: UIView
+    init(
+        valueText: String? = nil,
+        placeholderText: String? = nil,
+        maxLength: Int? = nil
+    ) {
+        self.valueText = valueText
+        self.placeholderText = placeholderText
+        self.maxLength = maxLength
+    }
 }
