@@ -17,7 +17,6 @@ final class SettingsTableView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = .none
 
         tableView.sectionFooterHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionFooterHeight = 50.0
@@ -133,23 +132,15 @@ extension SettingsTableView: UITableViewDataSource {
                 fatalError("View model is undefined")
         }
 
-        func setSeparatorsStyle(cell: SettingsTableViewSeparatableCellProtocol) {
-            let cellsCount = sectionViewModel.cells.count
-            cell.topSeparatorType = indexPath.item == 0 && cellsCount > 1 ? .full : .left
-            cell.bottomSeparatorType = indexPath.item == cellsCount - 1 ? .full : .none
-        }
-
         switch cellViewModel.type {
         case .input(let options):
             let cell: SettingsInputTableViewCell<TableInputTextField> = tableView.dequeueReusableCell(for: indexPath)
-            setSeparatorsStyle(cell: cell)
             self.updateInputCell(cell, viewModel: cellViewModel, options: options)
             return cell
         case .largeInput(let options):
             let cell: SettingsLargeInputTableViewCell<TableInputTextView> = tableView.dequeueReusableCell(
                 for: indexPath
             )
-            setSeparatorsStyle(cell: cell)
             self.updateLargeInputCell(cell, viewModel: cellViewModel, options: options)
             return cell
         }

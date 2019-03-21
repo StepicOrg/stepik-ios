@@ -149,8 +149,7 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                     shouldAlwaysShowPlaceholder: true,
                     inputGroup: "general"
                 )
-            ),
-            options: .init()
+            )
         )
 
         let lastNameField = SettingsTableSectionViewModel.Cell(
@@ -162,8 +161,7 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                     shouldAlwaysShowPlaceholder: true,
                     inputGroup: "general"
                 )
-            ),
-            options: .init()
+            )
         )
 
         let shortBioField = SettingsTableSectionViewModel.Cell(
@@ -174,8 +172,7 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                     placeholderText: NSLocalizedString("ProfileEditShortBioPlaceholder", comment: ""),
                     maxLength: 255
                 )
-            ),
-            options: .init()
+            )
         )
 
         let detailsField = SettingsTableSectionViewModel.Cell(
@@ -186,8 +183,7 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
                     placeholderText: NSLocalizedString("ProfileEditDetailsPlaceholder", comment: ""),
                     maxLength: nil
                 )
-            ),
-            options: .init()
+            )
         )
 
         let viewModel = SettingsTableViewModel(

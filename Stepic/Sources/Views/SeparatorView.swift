@@ -13,7 +13,7 @@ final class SeparatorView: UIView {
     let appearance: Appearance
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: self.appearance.height)
+        return CGSize(width: UIViewNoIntrinsicMetric, height: 1 / UIScreen.main.scale)
     }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
