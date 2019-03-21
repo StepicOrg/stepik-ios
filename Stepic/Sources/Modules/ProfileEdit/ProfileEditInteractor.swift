@@ -26,6 +26,7 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
     }
 
     func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request) {
+        AmplitudeAnalyticsEvents.Profile.editOpened.send()
         self.presenter.presentProfileEditForm(response: .init(profile: self.currentProfile))
     }
 
@@ -39,6 +40,8 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
             self.currentProfile = updatedProfile
             self.dataBackUpdateService.triggerProfileUpdate(updatedProfile: updatedProfile)
             self.presenter.presentProfileEditResult(response: .init(isSuccessful: true))
+
+            AmplitudeAnalyticsEvents.Profile.editSaved.send()
         }.catch { error in
             print("profile edit interactor: unable to update profile, error = \(error)")
             self.presenter.presentProfileEditResult(response: .init(isSuccessful: false))
