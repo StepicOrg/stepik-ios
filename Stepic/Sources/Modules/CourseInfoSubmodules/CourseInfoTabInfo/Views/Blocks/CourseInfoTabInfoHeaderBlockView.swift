@@ -77,15 +77,17 @@ extension CourseInfoTabInfoHeaderBlockView: ProgrammaticallyInitializableViewPro
     func makeConstraints() {
         self.iconImageView.translatesAutoresizingMaskIntoConstraints = false
         self.iconImageView.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.imageViewSize.height)
-            make.width.equalTo(self.appearance.imageViewSize.width)
+            make.size.equalTo(self.appearance.imageViewSize).priority(999)
             make.leading.equalToSuperview().offset(self.appearance.imageViewLeadingSpace)
             make.centerY.equalTo(self.titleLabel.snp.centerY)
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(self.appearance.titleLabelInsets)
+            make.top.equalToSuperview().offset(self.appearance.titleLabelInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.titleLabelInsets.left).priority(999)
+            make.bottom.equalToSuperview().offset(-self.appearance.titleLabelInsets.bottom)
+            make.trailing.equalToSuperview().offset(-self.appearance.titleLabelInsets.right).priority(999)
         }
     }
 }
