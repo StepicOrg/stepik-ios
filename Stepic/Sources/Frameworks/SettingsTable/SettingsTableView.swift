@@ -65,6 +65,41 @@ final class SettingsTableView: UIView {
             inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
         }
     }
+
+    // MARK: Cells initialization
+
+    func updateInputCell(
+        _ cell: SettingsInputTableViewCell<TableInputTextField>,
+        viewModel: SettingsTableSectionViewModel.Cell,
+        options: InputCellOptions
+    ) {
+        cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.elementView.placeholder = options.placeholderText
+        cell.elementView.text = options.valueText
+        cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
+        cell.delegate = self.delegate
+        self.inputCellGroups.first { $0.uniqueIdentifier == options.inputGroup }?.addInputCell(cell)
+    }
+
+    func updateLargeInputCell(
+        _ cell: SettingsLargeInputTableViewCell<TableInputTextView>,
+        viewModel: SettingsTableSectionViewModel.Cell,
+        options: LargeInputCellOptions
+    ) {
+        cell.elementView.placeholder = options.placeholderText
+        cell.elementView.text = options.valueText
+        cell.elementView.maxTextLength = options.maxLength
+        cell.delegate = self.delegate
+        cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.onHeightUpdate = { [weak self] in
+            DispatchQueue.main.async {
+                UIView.performWithoutAnimation {
+                    self?.tableView.beginUpdates()
+                    self?.tableView.endUpdates()
+                }
+            }
+        }
+    }
 }
 
 extension SettingsTableView: ProgrammaticallyInitializableViewProtocol {
@@ -107,32 +142,15 @@ extension SettingsTableView: UITableViewDataSource {
         switch cellViewModel.type {
         case .input(let options):
             let cell: SettingsInputTableViewCell<TableInputTextField> = tableView.dequeueReusableCell(for: indexPath)
-            cell.uniqueIdentifier = cellViewModel.uniqueIdentifier
-            cell.elementView.placeholder = options.placeholderText
-            cell.elementView.text = options.valueText
-            cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
-            cell.delegate = self.delegate
             setSeparatorsStyle(cell: cell)
-            self.inputCellGroups.first { $0.uniqueIdentifier == options.inputGroup }?.addInputCell(cell)
+            self.updateInputCell(cell, viewModel: cellViewModel, options: options)
             return cell
         case .largeInput(let options):
             let cell: SettingsLargeInputTableViewCell<TableInputTextView> = tableView.dequeueReusableCell(
                 for: indexPath
             )
-            cell.elementView.placeholder = options.placeholderText
-            cell.elementView.text = options.valueText
-            cell.elementView.maxTextLength = options.maxLength
-            cell.delegate = self.delegate
-            cell.uniqueIdentifier = cellViewModel.uniqueIdentifier
-            cell.onHeightUpdate = { [weak self] in
-                DispatchQueue.main.async {
-                    UIView.performWithoutAnimation {
-                        self?.tableView.beginUpdates()
-                        self?.tableView.endUpdates()
-                    }
-                }
-            }
             setSeparatorsStyle(cell: cell)
+            self.updateLargeInputCell(cell, viewModel: cellViewModel, options: options)
             return cell
         }
     }
