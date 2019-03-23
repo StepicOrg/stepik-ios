@@ -29,7 +29,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 LastStepGlobalContext.context.course = course
             }
 
-            self.pushCurrentCourseToSubmodules(submodules: self.submodules)
+            self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
         }
     }
 
@@ -52,7 +52,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         return "\(path)/syllabus"
     }
 
-    private var submodules: [CourseInfoSubmoduleProtocol] = []
+    // Tab index -> Submodule
+    private var submodules: [Int: CourseInfoSubmoduleProtocol] = [:]
 
     private var isOnline = false
     private var didLoadFromCache = false
@@ -117,7 +118,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doSubmoduleControllerAppearanceUpdate(request: CourseInfo.SubmoduleAppearanceUpdate.Request) {
-        self.submodules[safe: request.submoduleIndex]?.handleControllerAppearance()
+        self.submodules[request.submoduleIndex]?.handleControllerAppearance()
     }
 
     func doRegistrationForRemoteNotifications(request: CourseInfo.RemoteNotificationsRegistration.Request) {
@@ -125,8 +126,10 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     }
 
     func doSubmodulesRegistration(request: CourseInfo.SubmoduleRegistration.Request) {
-        self.submodules = request.submodules
-        self.pushCurrentCourseToSubmodules(submodules: self.submodules)
+        for (key, value) in request.submodules {
+            self.submodules[key] = value
+        }
+        self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
     }
 
     func doCourseShareAction(request: CourseInfo.CourseShareAction.Request) {

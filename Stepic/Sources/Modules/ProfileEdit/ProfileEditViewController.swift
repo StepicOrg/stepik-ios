@@ -202,7 +202,7 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
         )
 
         self.formState = state
-        self.profileEditView?.update(viewModel: viewModel)
+        self.profileEditView?.configure(viewModel: viewModel)
 
         self.updateSaveButtonState()
     }

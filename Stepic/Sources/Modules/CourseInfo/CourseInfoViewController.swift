@@ -31,12 +31,11 @@ final class CourseInfoViewController: UIViewController {
 
     private let interactor: CourseInfoInteractorProtocol
 
-    private lazy var pageViewController: PageboyViewController = {
-        let viewController = PageboyViewController()
-        viewController.dataSource = self
-        viewController.delegate = self
-        return viewController
-    }()
+    // Due to lazy initializing we should know actual values to update inset/offset of new scrollview
+    private var lastKnownScrollOffset: CGFloat = 0
+    private var lastKnownHeaderHeight: CGFloat = 0
+
+    private lazy var pageViewController = PageboyViewController()
 
     lazy var courseInfoView = self.view as? CourseInfoView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
@@ -84,7 +83,10 @@ final class CourseInfoViewController: UIViewController {
         super.viewDidLoad()
 
         self.addChildViewController(self.pageViewController)
-        self.pageViewController.reloadData()
+        self.pageViewController.dataSource = self
+        self.pageViewController.delegate = self
+
+        self.courseInfoView?.updateCurrentPageIndex(self.initialTabIndex)
 
         self.title = NSLocalizedString("CourseInfoTitle", comment: "")
 
@@ -184,7 +186,7 @@ final class CourseInfoViewController: UIViewController {
         self.submodulesControllers[index] = controller
 
         if let submodule = moduleInput {
-            self.interactor.doSubmodulesRegistration(request: .init(submodules: [submodule]))
+            self.interactor.doSubmodulesRegistration(request: .init(submodules: [index: submodule]))
         }
     }
 
@@ -219,6 +221,95 @@ final class CourseInfoViewController: UIViewController {
         alert.popoverPresentationController?.barButtonItem = self.moreBarButton
         self.present(module: alert)
     }
+
+    // Update content inset (to make header visible)
+    private func updateContentInset(headerHeight: CGFloat) {
+        // Update contentInset for each page
+        for viewController in self.submodulesControllers {
+            guard let viewController = viewController else {
+                continue
+            }
+
+            let view = viewController.view as? CourseInfoScrollablePageViewProtocol
+
+            if let view = view {
+                view.contentInsets = UIEdgeInsets(
+                    top: headerHeight,
+                    left: view.contentInsets.left,
+                    bottom: view.contentInsets.bottom,
+                    right: view.contentInsets.right
+                )
+                view.scrollViewDelegate = self
+            }
+
+            viewController.view.setNeedsLayout()
+            viewController.view.layoutIfNeeded()
+
+            if #available(iOS 11.0, *) {
+                view?.contentInsetAdjustmentBehavior = .never
+            } else {
+                viewController.automaticallyAdjustsScrollViewInsets = false
+            }
+        }
+    }
+
+    // Update content offset (to update appearance and offset on each tab)
+    private func updateContentOffset(scrollOffset: CGFloat) {
+        guard let courseInfoView = self.courseInfoView else {
+            return
+        }
+
+        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height
+        let statusBarHeight = min(
+            UIApplication.shared.statusBarFrame.size.width,
+            UIApplication.shared.statusBarFrame.size.height
+        )
+        let topPadding = (navigationBarHeight ?? 0) + statusBarHeight
+
+        let offsetWithHeader = scrollOffset
+            + courseInfoView.headerHeight
+            + courseInfoView.appearance.segmentedControlHeight
+        let headerHeight = courseInfoView.headerHeight - topPadding
+
+        let scrollingProgress = max(0, min(1, offsetWithHeader / headerHeight))
+        self.updateTopBar(alpha: scrollingProgress)
+
+        // Pin segmented control
+        let scrollViewOffset = min(offsetWithHeader, headerHeight)
+        courseInfoView.updateScroll(offset: scrollViewOffset)
+
+        // Arrange page views contentOffset
+        let offsetWithHiddenHeader = -(topPadding + courseInfoView.appearance.segmentedControlHeight)
+        self.arrangePagesScrollOffset(
+            topOffsetOfCurrentTab: scrollOffset,
+            maxTopOffset: offsetWithHiddenHeader
+        )
+    }
+
+    private func arrangePagesScrollOffset(topOffsetOfCurrentTab: CGFloat, maxTopOffset: CGFloat) {
+        for viewController in self.submodulesControllers {
+            guard let view = viewController?.view as? CourseInfoScrollablePageViewProtocol else {
+                continue
+            }
+
+            var topOffset = view.contentOffset.y
+
+            // Scrolling down
+            if topOffset != topOffsetOfCurrentTab && topOffset <= maxTopOffset {
+                topOffset = min(topOffsetOfCurrentTab, maxTopOffset)
+            }
+
+            // Scrolling up
+            if topOffset > maxTopOffset && topOffsetOfCurrentTab <= maxTopOffset {
+                topOffset = min(topOffsetOfCurrentTab, maxTopOffset)
+            }
+
+            view.contentOffset = CGPoint(
+                x: view.contentOffset.x,
+                y: topOffset
+            )
+        }
+    }
 }
 
 extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyViewControllerDelegate {
@@ -231,9 +322,8 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
         at index: PageboyViewController.PageIndex
     ) -> UIViewController? {
         self.loadSubmoduleIfNeeded(at: index)
-        defer {
-            (self.submodulesControllers[index]?.view as? CourseInfoScrollablePageViewProtocol)?.contentOffset = .zero
-        }
+        self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
+        self.updateContentInset(headerHeight: self.lastKnownHeaderHeight)
         return self.submodulesControllers[index]
     }
 
@@ -394,62 +484,8 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
 
 extension CourseInfoViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let courseInfoView = self.courseInfoView else {
-            return
-        }
-
-        let navigationBarHeight = self.navigationController?.navigationBar.bounds.height
-        let statusBarHeight = min(
-            UIApplication.shared.statusBarFrame.size.width,
-            UIApplication.shared.statusBarFrame.size.height
-        )
-        let topPadding = (navigationBarHeight ?? 0) + statusBarHeight
-
-        let offset = scrollView.contentOffset.y
-
-        let offsetWithHeader = offset
-            + courseInfoView.headerHeight
-            + courseInfoView.appearance.segmentedControlHeight
-        let headerHeight = courseInfoView.headerHeight - topPadding
-
-        let scrollingProgress = max(0, min(1, offsetWithHeader / headerHeight))
-        self.updateTopBar(alpha: scrollingProgress)
-
-        // Pin segmented control
-        let scrollViewOffset = min(offsetWithHeader, headerHeight)
-        courseInfoView.updateScroll(offset: scrollViewOffset)
-
-        // Arrange page views contentOffset
-        let offsetWithHiddenHeader = -(topPadding + courseInfoView.appearance.segmentedControlHeight)
-        self.arrangePagesScrollOffset(
-            topOffsetOfCurrentTab: offset,
-            maxTopOffset: offsetWithHiddenHeader
-        )
-    }
-
-    private func arrangePagesScrollOffset(topOffsetOfCurrentTab: CGFloat, maxTopOffset: CGFloat) {
-        for viewController in self.submodulesControllers {
-            guard let view = viewController?.view as? CourseInfoScrollablePageViewProtocol else {
-                continue
-            }
-
-            var topOffset = view.contentOffset.y
-
-            // Scrolling down
-            if topOffset != topOffsetOfCurrentTab && topOffset <= maxTopOffset {
-                topOffset = min(topOffsetOfCurrentTab, maxTopOffset)
-            }
-
-            // Scrolling up
-            if topOffset > maxTopOffset && topOffsetOfCurrentTab <= maxTopOffset {
-                topOffset = min(topOffsetOfCurrentTab, maxTopOffset)
-            }
-
-            view.contentOffset = CGPoint(
-                x: view.contentOffset.x,
-                y: topOffset
-            )
-        }
+        self.lastKnownScrollOffset = scrollView.contentOffset.y
+        self.updateContentOffset(scrollOffset: self.lastKnownScrollOffset)
     }
 }
 
@@ -470,37 +506,12 @@ extension CourseInfoViewController: CourseInfoViewDelegate {
         return self.submodulesControllers.count
     }
 
-    func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat) {
-        // Update contentInset for each page
-        for viewController in self.submodulesControllers {
-            guard let viewController = viewController else {
-                continue
-            }
-
-            let view = viewController.view as? CourseInfoScrollablePageViewProtocol
-
-            if let view = view {
-                view.contentInsets = UIEdgeInsets(
-                    top: height,
-                    left: view.contentInsets.left,
-                    bottom: view.contentInsets.bottom,
-                    right: view.contentInsets.right
-                )
-                view.scrollViewDelegate = self
-            }
-
-            viewController.view.setNeedsLayout()
-            viewController.view.layoutIfNeeded()
-
-            if #available(iOS 11.0, *) {
-                view?.contentInsetAdjustmentBehavior = .never
-            } else {
-                viewController.automaticallyAdjustsScrollViewInsets = false
-            }
-        }
+    func courseInfoView(_ courseInfoView: CourseInfoView, didReportNewHeaderHeight height: CGFloat) {
+        self.lastKnownHeaderHeight = height
+        self.updateContentInset(headerHeight: self.lastKnownHeaderHeight)
     }
 
-    func courseInfoView(_ courseInfoView: CourseInfoView, requestScrollToPage index: Int) {
+    func courseInfoView(_ courseInfoView: CourseInfoView, didRequestScrollToPage index: Int) {
         self.pageViewController.scrollToPage(.at(index: index), animated: true)
     }
 
