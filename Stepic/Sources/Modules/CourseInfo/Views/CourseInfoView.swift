@@ -55,7 +55,7 @@ final class CourseInfoView: UIView {
     var headerHeight: CGFloat {
         return max(
             0,
-            min(self.appearance.minimalHeaderHeight, self.calculatedHeaderHeight + self.appearance.headerTopOffset)
+            min(self.appearance.minimalHeaderHeight, self.calculatedHeaderHeight) + self.appearance.headerTopOffset
         )
     }
 
