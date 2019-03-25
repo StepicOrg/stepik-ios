@@ -2,8 +2,8 @@ import SnapKit
 import UIKit
 
 protocol CourseInfoViewDelegate: class {
-    func courseInfoView(_ courseInfoView: CourseInfoView, reportNewHeaderHeight height: CGFloat)
-    func courseInfoView(_ courseInfoView: CourseInfoView, requestScrollToPage index: Int)
+    func courseInfoView(_ courseInfoView: CourseInfoView, didReportNewHeaderHeight height: CGFloat)
+    func courseInfoView(_ courseInfoView: CourseInfoView, didRequestScrollToPage index: Int)
     func numberOfPages(in courseInfoView: CourseInfoView) -> Int
     func courseInfoViewDidMainAction(_ courseInfoView: CourseInfoView)
 }
@@ -23,7 +23,9 @@ final class CourseInfoView: UIView {
 
     private let tabsTitles: [String]
 
-    private var lastHeaderHeight: CGFloat = 0
+    // Height values reported by header view
+    private var calculatedHeaderHeight: CGFloat = 0
+
     private var currentPageIndex = 0
 
     private lazy var headerView: CourseInfoHeaderView = {
@@ -51,7 +53,10 @@ final class CourseInfoView: UIView {
 
     /// Real height for header
     var headerHeight: CGFloat {
-        return max(0, self.lastHeaderHeight + self.appearance.headerTopOffset)
+        return max(
+            0,
+            min(self.appearance.minimalHeaderHeight, self.calculatedHeaderHeight) + self.appearance.headerTopOffset
+        )
     }
 
     weak var delegate: CourseInfoViewDelegate?
@@ -80,7 +85,7 @@ final class CourseInfoView: UIView {
 
     func configure(viewModel: CourseInfoHeaderViewModel) {
         // Update header height
-        self.lastHeaderHeight = self.headerView.calculateHeight(
+        self.calculatedHeaderHeight = self.headerView.calculateHeight(
             hasVerifiedMark: viewModel.isVerified
         )
 
@@ -89,7 +94,7 @@ final class CourseInfoView: UIView {
 
         self.delegate?.courseInfoView(
             self,
-            reportNewHeaderHeight: self.headerHeight + self.appearance.segmentedControlHeight
+            didReportNewHeaderHeight: self.headerHeight + self.appearance.segmentedControlHeight
         )
         self.headerHeightConstraint?.update(offset: self.headerHeight)
     }
@@ -156,7 +161,7 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
         self.headerView.translatesAutoresizingMaskIntoConstraints = false
         self.headerView.snp.makeConstraints { make in
             self.topConstraint = make.top.equalToSuperview().constraint
-            make.left.right.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
             self.headerHeightConstraint = make.height.equalTo(self.headerHeight).constraint
         }
 
@@ -176,14 +181,13 @@ extension CourseInfoView: ProgrammaticallyInitializableViewProtocol {
 }
 
 extension CourseInfoView: TabSegmentedControlViewDelegate {
-    func tabSegmentedControlView(_ tabSegmentedControlView: TabSegmentedControlView, didSelectTabWithIndex: Int) {
+    func tabSegmentedControlView(_ tabSegmentedControlView: TabSegmentedControlView, didSelectTabWithIndex index: Int) {
         let tabsCount = self.delegate?.numberOfPages(in: self) ?? 0
-        guard didSelectTabWithIndex >= 0,
-              didSelectTabWithIndex < tabsCount else {
+        guard index >= 0, index < tabsCount else {
             return
         }
 
-        self.delegate?.courseInfoView(self, requestScrollToPage: didSelectTabWithIndex)
-        self.currentPageIndex = didSelectTabWithIndex
+        self.delegate?.courseInfoView(self, didRequestScrollToPage: index)
+        self.currentPageIndex = index
     }
 }

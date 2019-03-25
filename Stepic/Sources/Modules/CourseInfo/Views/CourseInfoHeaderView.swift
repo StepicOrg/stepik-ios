@@ -142,29 +142,6 @@ final class CourseInfoHeaderView: UIView {
         }
     }
 
-    // MARK: Loading state
-
-    func showLoading() {
-        self.skeleton.viewBuilder = {
-            CourseInfoHeaderSkeletonView()
-        }
-
-        self.actionButton.isHidden = true
-        self.marksStackView.isHidden = true
-        self.titleLabel.isHidden = true
-        self.loadImage(url: nil)
-
-        self.skeleton.show()
-    }
-
-    func hideLoading() {
-        self.actionButton.isHidden = false
-        self.marksStackView.isHidden = false
-        self.titleLabel.isHidden = false
-
-        self.skeleton.hide()
-    }
-
     // MARK: Private methods
 
     private func loadImage(url: URL?) {

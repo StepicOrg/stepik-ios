@@ -118,8 +118,14 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
         self.emptyStateLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview().offset(self.appearance.emptyStateLabelInsets.left)
-            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.emptyStateLabelInsets.right)
+            make.leading
+                .greaterThanOrEqualToSuperview()
+                .offset(self.appearance.emptyStateLabelInsets.left)
+                .priority(999)
+            make.trailing
+                .lessThanOrEqualToSuperview()
+                .offset(-self.appearance.emptyStateLabelInsets.right)
+                .priority(999)
             make.width.lessThanOrEqualTo(600)
         }
     }

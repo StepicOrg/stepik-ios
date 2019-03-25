@@ -4,7 +4,7 @@ import UIKit
 protocol TabSegmentedControlViewDelegate: class {
     func tabSegmentedControlView(
         _ tabSegmentedControlView: TabSegmentedControlView,
-        didSelectTabWithIndex: Int
+        didSelectTabWithIndex index: Int
     )
 }
 

@@ -65,7 +65,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
                 courseInfoTabSyllabusView.layoutIfNeeded()
                 self?.personalDeadlinesTooltip.show(
                     direction: .up,
-                    in: courseInfoTabSyllabusView,
+                    in: courseInfoTabSyllabusView.deadlinesButtonTooltipContainerView,
                     from: courseInfoTabSyllabusView.deadlinesButtonTooltipAnchorView
                 )
             }

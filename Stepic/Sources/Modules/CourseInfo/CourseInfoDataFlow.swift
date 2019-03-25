@@ -36,7 +36,7 @@ enum CourseInfo {
     /// Register submodules
     enum SubmoduleRegistration {
         struct Request {
-            var submodules: [CourseInfoSubmoduleProtocol]
+            var submodules: [Int: CourseInfoSubmoduleProtocol]
         }
     }
 

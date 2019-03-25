@@ -107,21 +107,24 @@ extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProt
     func makeConstraints() {
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         self.imageView.snp.makeConstraints { make in
-            make.size.equalTo(self.appearance.imageViewSize)
+            make.size.equalTo(self.appearance.imageViewSize).priority(999)
             make.leading.top.equalToSuperview()
         }
 
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().priority(999)
             make.centerY.equalTo(self.imageView.snp.centerY)
-            make.leading.equalTo(self.imageView.snp.trailing).offset(self.appearance.titleLabelInsets.left)
+            make.leading
+                .equalTo(self.imageView.snp.trailing)
+                .offset(self.appearance.titleLabelInsets.left)
+                .priority(999)
         }
 
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.snp.makeConstraints { make in
-            make.trailing.bottom.equalToSuperview()
-            make.leading.equalTo(self.imageView.snp.leading)
+            make.trailing.bottom.equalToSuperview().priority(999)
+            make.leading.equalTo(self.imageView.snp.leading).priority(999)
             make.top.equalTo(self.imageView.snp.bottom).offset(self.appearance.descriptionLabelInsets.top)
         }
     }

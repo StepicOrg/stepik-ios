@@ -10,6 +10,8 @@ extension CourseInfoTabInfoView {
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
         let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
+
+        let loadingIndicatorTopInset: CGFloat = 20
     }
 }
 
@@ -24,6 +26,12 @@ final class CourseInfoTabInfoView: UIView {
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.stackViewSpacing
         return stackView
+    }()
+
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        view.hidesWhenStopped = true
+        return view
     }()
 
     init(
@@ -47,16 +55,13 @@ final class CourseInfoTabInfoView: UIView {
     // MARK: Public API
 
     func showLoading() {
-        self.hideLoading()
-
-        self.skeleton.viewBuilder = {
-            CourseInfoTabInfoSkeletonView()
-        }
-        self.skeleton.show()
+        self.scrollableStackView.isHidden = true
+        self.loadingIndicator.startAnimating()
     }
 
     func hideLoading() {
-        self.skeleton.hide()
+        self.scrollableStackView.isHidden = false
+        self.loadingIndicator.stopAnimating()
     }
 
     func configure(viewModel: CourseInfoTabInfoViewModel) {
@@ -152,12 +157,19 @@ final class CourseInfoTabInfoView: UIView {
 extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
+        self.addSubview(self.loadingIndicator)
     }
 
     func makeConstraints() {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.loadingIndicatorTopInset)
+            make.centerX.equalToSuperview()
         }
     }
 }
@@ -179,6 +191,10 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
             return self.scrollableStackView.contentInsets
         }
         set {
+            self.loadingIndicator.snp.updateConstraints { make in
+                make.top.equalToSuperview().offset(newValue.top + self.appearance.loadingIndicatorTopInset)
+            }
+
             self.scrollableStackView.contentInsets = newValue
         }
     }

@@ -45,7 +45,7 @@ final class SettingsTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func update(viewModel: SettingsTableViewModel) {
+    func configure(viewModel: SettingsTableViewModel) {
         self.viewModel = viewModel
         self.tableView.reloadData()
 

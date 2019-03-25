@@ -875,6 +875,7 @@
 		2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */; };
 		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
 		2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */; };
+		2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */; };
 		2C09313521CD4BDD002B605D /* VideoStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */; };
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
 		2C093EF4211B3E3600162DD0 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081A7DA81C56625F00583728 /* QuizViewController.swift */; };
@@ -3815,9 +3816,6 @@
 		2CE664E520F5207A0082F3FE /* DownloaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E120F520790082F3FE /* DownloaderTask.swift */; };
 		2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */; };
 		2CE6E2A421B96F9800DDC67A /* CourseInfoHeaderSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6E2A021B96F9700DDC67A /* CourseInfoHeaderSkeletonView.swift */; };
-		2CE6E2A521B96F9800DDC67A /* CourseInfoTabInfoInstructorSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6E2A121B96F9800DDC67A /* CourseInfoTabInfoInstructorSkeletonView.swift */; };
-		2CE6E2A621B96F9800DDC67A /* CourseInfoTabInfoHeaderBlockSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6E2A221B96F9800DDC67A /* CourseInfoTabInfoHeaderBlockSkeletonView.swift */; };
-		2CE6E2A721B96F9800DDC67A /* CourseInfoTabInfoSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE6E2A321B96F9800DDC67A /* CourseInfoTabInfoSkeletonView.swift */; };
 		2CE8390820C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */; };
 		2CE8390920C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */; };
 		2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */; };
@@ -4241,7 +4239,6 @@
 		62E98F228E56EE4309650433 /* FullscreenCourseListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F11087660208A282328 /* FullscreenCourseListInteractor.swift */; };
 		62E98F3154D80ED0E2A9D546 /* CourseInfoTabInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E988B17EB5A32530118DB7 /* CourseInfoTabInfoPresenter.swift */; };
 		62E98F431204AD9A46EBBC18 /* CodeEditorSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F34F48CF83CC3A6939B /* CodeEditorSettingsViewController.swift */; };
-		62E98F475299A17BA443BBDB /* CourseInfoTabReviewsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98A2F4E7FE121987C4ED1 /* CourseInfoTabReviewsSkeletonView.swift */; };
 		62E98F49F6018A67DEB616C5 /* CourseReviewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */; };
 		62E98F4D37C6148E7756C103 /* CourseInfoTabSyllabusCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983435E92496A3D77C76D /* CourseInfoTabSyllabusCellView.swift */; };
 		62E98F5E955545F7A75F77BC /* ProgressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */; };
@@ -5495,6 +5492,7 @@
 		2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInputTextView.swift; sourceTree = "<group>"; };
 		2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLargeInputTableViewCell.swift; sourceTree = "<group>"; };
 		2C06E09E2241434100AF4DA2 /* Model_profile_fields_v33.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_profile_fields_v33.xcdatamodel; sourceTree = "<group>"; };
+		2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSkeletonView.swift; sourceTree = "<group>"; };
 		2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_lesson_fields_v31.xcdatamodel; sourceTree = "<group>"; };
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
@@ -5940,9 +5938,6 @@
 		2CE664E120F520790082F3FE /* DownloaderTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderTask.swift; sourceTree = "<group>"; };
 		2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderProtocol.swift; sourceTree = "<group>"; };
 		2CE6E2A021B96F9700DDC67A /* CourseInfoHeaderSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoHeaderSkeletonView.swift; sourceTree = "<group>"; };
-		2CE6E2A121B96F9800DDC67A /* CourseInfoTabInfoInstructorSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoInstructorSkeletonView.swift; sourceTree = "<group>"; };
-		2CE6E2A221B96F9800DDC67A /* CourseInfoTabInfoHeaderBlockSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoHeaderBlockSkeletonView.swift; sourceTree = "<group>"; };
-		2CE6E2A321B96F9800DDC67A /* CourseInfoTabInfoSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoSkeletonView.swift; sourceTree = "<group>"; };
 		2CE8390620C7F16700FE3672 /* ContentMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2CE8390720C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2CE8390B20C8094000FE3672 /* ProfileAchievementsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAchievementsContentView.swift; sourceTree = "<group>"; };
@@ -6149,7 +6144,6 @@
 		62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressesNetworkService.swift; sourceTree = "<group>"; };
 		62E98A07EBE3FE55ABFF330F /* ExploreDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreDataFlow.swift; sourceTree = "<group>"; };
 		62E98A09818C53FE2E86D6EA /* CourseInfoTabReviewsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsProvider.swift; sourceTree = "<group>"; };
-		62E98A2F4E7FE121987C4ED1 /* CourseInfoTabReviewsSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsSkeletonView.swift; sourceTree = "<group>"; };
 		62E98A35FCB795B26C083C91 /* RouterPoppable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterPoppable.swift; sourceTree = "<group>"; };
 		62E98A393279C14FFA24364C /* CourseWidgetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetLabel.swift; sourceTree = "<group>"; };
 		62E98A399A313681138734B4 /* CourseWidgetSkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetSkeletonView.swift; sourceTree = "<group>"; };
@@ -10939,11 +10933,8 @@
 		62E988531B4005E22572A8CB /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
+				2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */,
 				2CE6E2A021B96F9700DDC67A /* CourseInfoHeaderSkeletonView.swift */,
-				2CE6E2A221B96F9800DDC67A /* CourseInfoTabInfoHeaderBlockSkeletonView.swift */,
-				2CE6E2A121B96F9800DDC67A /* CourseInfoTabInfoInstructorSkeletonView.swift */,
-				2CE6E2A321B96F9800DDC67A /* CourseInfoTabInfoSkeletonView.swift */,
-				62E98A2F4E7FE121987C4ED1 /* CourseInfoTabReviewsSkeletonView.swift */,
 			);
 			name = CourseInfo;
 			sourceTree = "<group>";
@@ -14921,7 +14912,6 @@
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
 				0828FF6F1BC5D177000AFEA7 /* Section.swift in Sources */,
-				2CE6E2A721B96F9800DDC67A /* CourseInfoTabInfoSkeletonView.swift in Sources */,
 				0802177A1F54E91300186245 /* MenuBlocks.swift in Sources */,
 				082B54CF20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift in Sources */,
 				2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */,
@@ -14949,6 +14939,7 @@
 				0800B8181D06D961006C987E /* DiscussionProxy.swift in Sources */,
 				2CE664E620F5207A0082F3FE /* DownloaderProtocol.swift in Sources */,
 				0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */,
+				2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */,
 				089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */,
 				2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */,
 				080C5E671EFC07C10036EB3D /* CodeQuizViewController.swift in Sources */,
@@ -15278,7 +15269,6 @@
 				083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */,
 				2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */,
 				086A8B281D21796800F45C45 /* VotesAPI.swift in Sources */,
-				2CE6E2A621B96F9800DDC67A /* CourseInfoTabInfoHeaderBlockSkeletonView.swift in Sources */,
 				2CBCBD4A20D1AAFC000B5732 /* AchievementsListTableViewCell.swift in Sources */,
 				2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */,
 				2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */,
@@ -15342,7 +15332,6 @@
 				2CCE6CCC215153D600DC4419 /* LanguageSettingsViewController.swift in Sources */,
 				2CE6E2A421B96F9800DDC67A /* CourseInfoHeaderSkeletonView.swift in Sources */,
 				2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */,
-				2CE6E2A521B96F9800DDC67A /* CourseInfoTabInfoInstructorSkeletonView.swift in Sources */,
 				62E98F602ED9E5CEA4E02D0A /* UIStackView+removeAllArrangedSubviews.swift in Sources */,
 				62E98447CF53F0402668F488 /* ContinueLastStepView.swift in Sources */,
 				62E9886837CEF83D626D9536 /* StreakActivityView.swift in Sources */,
@@ -15363,7 +15352,6 @@
 				62E9874D1EAE49639F81C916 /* URL+AppendQueryParameters.swift in Sources */,
 				62E982F9CF826D3E99B7EE08 /* NotificationPermissionStatusSettingsObserver.swift in Sources */,
 				62E987560B7A0EFE8D4753CB /* RetentionLocalNotificationProvider.swift in Sources */,
-				62E98F475299A17BA443BBDB /* CourseInfoTabReviewsSkeletonView.swift in Sources */,
 				62E985181538017E088C38D9 /* DataBackUpdateService.swift in Sources */,
 				62E980E2B82515489059C986 /* UnitNavigationService.swift in Sources */,
 				62E98F49F6018A67DEB616C5 /* CourseReviewsNetworkService.swift in Sources */,

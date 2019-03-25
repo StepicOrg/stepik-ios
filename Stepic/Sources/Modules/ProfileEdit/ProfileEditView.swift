@@ -33,8 +33,8 @@ final class ProfileEditView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func update(viewModel: SettingsTableViewModel) {
-        self.tableView.update(viewModel: viewModel)
+    func configure(viewModel: SettingsTableViewModel) {
+        self.tableView.configure(viewModel: viewModel)
     }
 }
 
