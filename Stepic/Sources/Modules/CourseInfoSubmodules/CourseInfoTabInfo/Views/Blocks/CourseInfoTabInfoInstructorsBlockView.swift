@@ -73,13 +73,13 @@ extension CourseInfoTabInfoInstructorsBlockView: ProgrammaticallyInitializableVi
         self.headerView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.headerViewInsets.left)
             make.top.equalToSuperview().offset(self.appearance.headerViewInsets.top)
-            make.trailing.equalToSuperview().offset(-self.appearance.headerViewInsets.right)
+            make.trailing.equalToSuperview().offset(-self.appearance.headerViewInsets.right).priority(999)
         }
 
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.stackViewInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.stackViewInsets.right)
+            make.trailing.equalToSuperview().offset(-self.appearance.stackViewInsets.right).priority(999)
             make.bottom.equalToSuperview().offset(-self.appearance.stackViewInsets.bottom)
             make.top.equalTo(self.headerView.snp.bottom).offset(self.appearance.stackViewInsets.top)
         }

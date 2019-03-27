@@ -307,6 +307,9 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+        static var editOpened = AnalyticsEvent(name: "Profile edit screen opened")
+
+        static var editSaved = AnalyticsEvent(name: "Profile edit saved")
     }
 
     struct Certificates {

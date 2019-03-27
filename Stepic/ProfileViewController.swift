@@ -24,8 +24,12 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     var settingsButton: UIBarButtonItem?
     var shareButton: UIBarButtonItem?
+    var profileEditButton: UIBarButtonItem?
 
     var otherUserId: Int?
+
+    // Attached profile to present profile edit
+    private var profile: Profile?
 
     private var sharingURL: String?
 
@@ -67,6 +71,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
         settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon-settings-profile"), style: .plain, target: self, action: #selector(ProfileViewController.settingsButtonPressed))
         shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
+        profileEditButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(ProfileViewController.profileEditButtonPressed))
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
@@ -132,15 +137,22 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         menu = Menu(blocks: menuBlocks.compactMap { $0 })
     }
 
-    func manageBarItemControls(settingsIsHidden: Bool, shareId: Int?) {
+    func manageBarItemControls(settingsIsHidden: Bool, profileEditIsAvailable: Bool, shareId: Int?) {
         var items: [UIBarButtonItem] = []
         if let settingsButton = settingsButton, !settingsIsHidden {
-            items += [settingsButton]
+            items.append(settingsButton)
+        }
+        if let profileEditButton = profileEditButton, profileEditIsAvailable, !settingsIsHidden {
+            items.append(profileEditButton)
         }
 
         if let shareButton = shareButton, let id = shareId {
             sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(id)"
-            items += [shareButton]
+            if settingsIsHidden {
+                navigationItem.rightBarButtonItem = shareButton
+            } else {
+                navigationItem.leftBarButtonItem = shareButton
+            }
         } else {
             sharingURL = nil
         }
@@ -169,6 +181,10 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         alertManager.present(alert: vc, inController: self)
     }
 
+    func attachProfile(_ profile: Profile) {
+        self.profile = profile
+    }
+
     private func initPresenter() {
         // Init only with other/anonymous seed
         // Presenter check anonymous seed and load self profile if we have logged user
@@ -177,7 +193,13 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             seed = .other(id: userId)
         }
 
-        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI())
+        let dataBackUpdateService = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), profilesAPI: ProfilesAPI(), dataBackUpdateService: dataBackUpdateService)
         presenter?.refresh(shouldReload: true)
     }
 
@@ -188,6 +210,16 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             vc.presenter = presenter
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+
+    @objc func profileEditButtonPressed() {
+        guard let profile = self.profile else {
+            return
+        }
+
+        let assembly = ProfileEditAssembly(profile: profile)
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+        self.present(module: controller)
     }
 
     @objc func shareButtonPressed() {

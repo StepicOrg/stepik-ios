@@ -103,7 +103,7 @@ extension CourseInfoTabReviewsSkeletonView: ProgrammaticallyInitializableViewPro
         self.avatarView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.avatarImageViewInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.avatarImageViewInsets.left)
-            make.size.equalTo(self.appearance.avatarImageViewSize)
+            make.size.equalTo(self.appearance.avatarImageViewSize).priority(999)
         }
 
         self.starsView.translatesAutoresizingMaskIntoConstraints = false
