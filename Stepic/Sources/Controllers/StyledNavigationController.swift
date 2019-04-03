@@ -34,7 +34,10 @@ class StyledNavigationController: UINavigationController {
         }
     }
 
-    private let delegateRepeater = UINavigationControllerDelegateRepeater()
+    // To fix memory leak, cause constructor for UINavigationControllerDelegateRepeater called 2 times
+    // first - from init(rootViewController:), second - from init(nibName:bundle:)
+    // swiftlint:disable:next implicitly_unwrapped_optional
+    private var delegateRepeater: UINavigationControllerDelegateRepeater!
     override var delegate: UINavigationControllerDelegate? {
         set {
             self.delegateRepeater.secondaryDelegate = newValue
@@ -57,6 +60,7 @@ class StyledNavigationController: UINavigationController {
     // MARK: ViewController lifecycle & base methods
 
     override func viewDidLoad() {
+        self.delegateRepeater = UINavigationControllerDelegateRepeater()
         self.delegateRepeater.mainDelegate = self
         super.viewDidLoad()
         self.setupAppearance()
