@@ -55,7 +55,7 @@ class StyledNavigationController: UINavigationController {
 
     private var lastAction = UINavigationController.Operation.none
 
-    private var navigationBarAppearanceForController: [UIViewController: NavigationBarAppearanceState] = [:]
+    private var navigationBarAppearanceForController: [Int: NavigationBarAppearanceState] = [:]
 
     // MARK: ViewController lifecycle & base methods
 
@@ -176,7 +176,7 @@ class StyledNavigationController: UINavigationController {
         self.statusBarView.backgroundColor = color
 
         if let topViewController = self.topViewController {
-            self.navigationBarAppearanceForController[topViewController]?.backgroundColor = color
+            self.navigationBarAppearanceForController[topViewController.hashValue]?.backgroundColor = color
         }
     }
 
@@ -186,7 +186,7 @@ class StyledNavigationController: UINavigationController {
         self.shadowView.backgroundColor = Appearance.shadowViewColor.withAlphaComponent(alpha)
 
         if let topViewController = self.topViewController {
-            self.navigationBarAppearanceForController[topViewController]?.shadowViewAlpha = alpha
+            self.navigationBarAppearanceForController[topViewController.hashValue]?.shadowViewAlpha = alpha
         }
     }
 
@@ -197,7 +197,7 @@ class StyledNavigationController: UINavigationController {
         ]
 
         if let topViewController = self.topViewController {
-            self.navigationBarAppearanceForController[topViewController]?.textColor = color
+            self.navigationBarAppearanceForController[topViewController.hashValue]?.textColor = color
         }
     }
 
@@ -205,7 +205,7 @@ class StyledNavigationController: UINavigationController {
         self.navigationBar.tintColor = color
 
         if let topViewController = self.topViewController {
-            self.navigationBarAppearanceForController[topViewController]?.tintColor = color
+            self.navigationBarAppearanceForController[topViewController.hashValue]?.tintColor = color
         }
     }
 
@@ -213,7 +213,7 @@ class StyledNavigationController: UINavigationController {
         UIApplication.shared.statusBarStyle = style
 
         if let topViewController = self.topViewController {
-            self.navigationBarAppearanceForController[topViewController]?.statusBarStyle = style
+            self.navigationBarAppearanceForController[topViewController.hashValue]?.statusBarStyle = style
         }
     }
 
@@ -254,15 +254,15 @@ class StyledNavigationController: UINavigationController {
             } else {
                 defaultAppearance = NavigationBarAppearanceState()
             }
-            return self.navigationBarAppearanceForController[viewController] ?? defaultAppearance
+            return self.navigationBarAppearanceForController[viewController.hashValue] ?? defaultAppearance
         }()
 
-        self.navigationBarAppearanceForController[viewController] = appearance
+        self.navigationBarAppearanceForController[viewController.hashValue] = appearance
         return appearance
     }
 
     private func removeNavigationBarAppearance(for viewController: UIViewController) {
-        self.navigationBarAppearanceForController.removeValue(forKey: viewController)
+        self.navigationBarAppearanceForController.removeValue(forKey: viewController.hashValue)
     }
 
     private func animateShadowView(transitionCoordinator: UIViewControllerTransitionCoordinator) {
