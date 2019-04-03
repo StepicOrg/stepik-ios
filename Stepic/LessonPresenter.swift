@@ -111,11 +111,11 @@ class LessonPresenter {
                     }
 
                     if let stepsCount = strongSelf.lesson?.stepsArray.count {
-                        (strongSelf.controllerForIndex[stepsCount - 1] as? VideoStepViewController)?.nextLessonHandler = {
-                            strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                        (strongSelf.controllerForIndex[stepsCount - 1] as? VideoStepViewController)?.nextLessonHandler = { [weak self] in
+                            self?.navigateToNextOrPreviousUnit(direction: .next)
                         }
-                        (strongSelf.controllerForIndex[stepsCount - 1] as? WebStepViewController)?.nextLessonHandler = {
-                            strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                        (strongSelf.controllerForIndex[stepsCount - 1] as? WebStepViewController)?.nextLessonHandler = { [weak self] in
+                            self?.navigateToNextOrPreviousUnit(direction: .next)
                         }
                     }
 
@@ -132,11 +132,11 @@ class LessonPresenter {
                         return
                     }
 
-                    (strongSelf.controllerForIndex[0] as? VideoStepViewController)?.prevLessonHandler = {
-                        strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
+                    (strongSelf.controllerForIndex[0] as? VideoStepViewController)?.prevLessonHandler = { [weak self] in
+                        self?.navigateToNextOrPreviousUnit(direction: .previous)
                     }
-                    (strongSelf.controllerForIndex[0] as? WebStepViewController)?.prevLessonHandler = {
-                        strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
+                    (strongSelf.controllerForIndex[0] as? WebStepViewController)?.prevLessonHandler = { [weak self] in
+                        self?.navigateToNextOrPreviousUnit(direction: .previous)
                     }
 
                     strongSelf.didPreviousUnitLoad = true
@@ -147,6 +147,7 @@ class LessonPresenter {
     }
 
     deinit {
+        print("deinit LessonPresenter")
         NotificationCenter.default.removeObserver(self)
     }
 
