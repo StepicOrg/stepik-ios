@@ -73,6 +73,8 @@ class AdaptiveRatingsViewController: UIViewController {
         presenter?.reloadData(days: daysCount, force: true)
 
         state = .loading
+
+        presenter?.sendOpenedAnalytics()
     }
 
     fileprivate func colorize() {
