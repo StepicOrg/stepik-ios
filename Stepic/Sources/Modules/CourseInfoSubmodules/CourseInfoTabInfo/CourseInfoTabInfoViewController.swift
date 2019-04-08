@@ -56,6 +56,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
 
     deinit {
         self.playerVideoBoundsObservation = nil
+        self.playerViewController.player?.pause()
         self.playerViewController.willMove(toParentViewController: nil)
         self.playerViewController.view.removeFromSuperview()
         self.playerViewController.removeFromParentViewController()
@@ -72,6 +73,11 @@ final class CourseInfoTabInfoViewController: UIViewController {
 
         self.updateState()
         self.interactor.doCourseInfoRefresh(request: .init())
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.playerViewController.player?.pause()
     }
 
     // MARK: Private helpers

@@ -477,4 +477,13 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    struct AdaptiveRating {
+        static func opened(course: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Adaptive rating opened",
+                parameters: ["course": course]
+            )
+        }
+    }
 }
