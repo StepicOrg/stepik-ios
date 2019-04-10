@@ -17,7 +17,6 @@ class SearchResultsPresenter: SearchResultsModuleInputProtocol {
     weak var view: SearchResultsView?
 
     var updateQueryBlock: ((String) -> Void)?
-    var hideKeyboardBlock: (() -> Void)?
 
     //TODO: Somehow refactor this
     private var suggestionsVC: SearchQueriesViewController?
@@ -31,16 +30,10 @@ class SearchResultsPresenter: SearchResultsModuleInputProtocol {
 
     func queryChanged(to query: String) {
         self.query = query
-        guard query != "" else {
-            view?.set(state: .waiting)
-            resultsVC = nil
-            suggestionsVC = nil
-            return
-        }
+
         if suggestionsVC == nil {
             suggestionsVC = SearchQueriesViewController()
             suggestionsVC?.delegate = self
-            suggestionsVC?.hideKeyboardBlock = self.hideKeyboardBlock
             self.view?.set(controller: suggestionsVC!, forState: .suggestions)
         }
         suggestionsVC?.query = query

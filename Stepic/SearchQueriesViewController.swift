@@ -18,8 +18,6 @@ class SearchQueriesViewController: UIViewController {
 
     var presenter: SearchQueriesPresenter?
 
-    var hideKeyboardBlock: (() -> Void)?
-
     weak var delegate: SearchQueriesViewControllerDelegate?
 
     var suggestions: [String] = []
@@ -58,15 +56,12 @@ class SearchQueriesViewController: UIViewController {
         tableView.register(UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchSuggestionTableViewCell")
         presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries, persistentManager: SearchQueriesPersistentManager())
         tableView.tableFooterView = UIView()
+        tableView.keyboardDismissMode = .onDrag
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         suggestions = []
-    }
-
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        hideKeyboardBlock?()
     }
 }
 
