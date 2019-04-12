@@ -161,10 +161,10 @@ class CodeQuizViewController: QuizViewController {
 
     fileprivate func setLimits(time: Double, memory: Double) {
 
-        let attTimeLimit = NSAttributedString(string: "Time limit: ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15)])
-        let attMemoryLimit = NSAttributedString(string: "Memory limit: ", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15)])
-        let attTime = NSAttributedString(string: "\(time) seconds\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)])
-        let attMemory = NSAttributedString(string: "\(memory) MB", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)])
+        let attTimeLimit = NSAttributedString(string: "Time limit: ", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
+        let attMemoryLimit = NSAttributedString(string: "Memory limit: ", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)])
+        let attTime = NSAttributedString(string: "\(time) seconds\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)])
+        let attMemory = NSAttributedString(string: "\(memory) MB", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)])
 
         let result = NSMutableAttributedString(attributedString: attTimeLimit)
         result.append(attTime)
@@ -215,14 +215,14 @@ class CodeQuizViewController: QuizViewController {
     }
 
     func hidePicker() {
-        languagePicker.removeFromParentViewController()
+        languagePicker.removeFromParent()
         languagePicker.view.removeFromSuperview()
         isSubmitButtonHidden = false
     }
 
     func showPicker() {
         isSubmitButtonHidden = true
-        addChildViewController(languagePicker)
+        addChild(languagePicker)
         view.addSubview(languagePicker.view)
         languagePicker.view.snp.makeConstraints { $0.edges.equalTo(containerView) }
         languagePicker.backButton.isHidden = true

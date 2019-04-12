@@ -29,7 +29,7 @@ final class CourseInfoTabInfoView: UIView {
     }()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let view = UIActivityIndicatorView(style: .gray)
         view.hidesWhenStopped = true
         return view
     }()
@@ -209,7 +209,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
     }
 
     @available(iOS 11.0, *)
-    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.scrollableStackView.contentInsetAdjustmentBehavior
         }

@@ -75,8 +75,8 @@ class DiscussionWebTableViewCell: UITableViewCell {
         commentWebView?.scrollView.isScrollEnabled = false
         commentWebView?.backgroundColor = UIColor.clear
         commentWebView?.scrollView.backgroundColor = UIColor.clear
-        self.webContainerView.autoresizingMask = UIViewAutoresizing.flexibleHeight
-        self.commentWebView?.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        self.webContainerView.autoresizingMask = UIView.AutoresizingMask.flexibleHeight
+        self.commentWebView?.autoresizingMask = UIView.AutoresizingMask.flexibleHeight
         commentWebView?.translatesAutoresizingMaskIntoConstraints = true
         contentView.translatesAutoresizingMaskIntoConstraints = true
 
@@ -120,7 +120,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        self.contentView.autoresizingMask = UIView.AutoresizingMask.flexibleHeight
         contentView.bounds = CGRect(x: 0.0, y: 0.0, width: 999999.0, height: 999999.0)
         constructWebView()
     }

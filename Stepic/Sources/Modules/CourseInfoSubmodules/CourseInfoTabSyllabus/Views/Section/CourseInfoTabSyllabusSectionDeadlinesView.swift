@@ -35,13 +35,13 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.isPagingEnabled = false
-        scrollView.decelerationRate = UIScrollViewDecelerationRateFast
+        scrollView.decelerationRate = .fast
         scrollView.delegate = self
         return scrollView
     }()
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: self.scrollView.frame.height)
+        return CGSize(width: UIView.noIntrinsicMetric, height: self.scrollView.frame.height)
     }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {

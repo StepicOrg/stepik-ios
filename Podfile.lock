@@ -1,11 +1,12 @@
 PODS:
   - ActionSheetPicker-3.0 (2.3.0)
-  - Agrume (3.2.1)
-  - Alamofire (4.7.3)
+  - Agrume (5.3.1):
+    - SwiftyGif
+  - Alamofire (4.8.0)
   - AlamofireNetworkActivityIndicator (2.2.1):
     - Alamofire (~> 4.7)
   - Amplitude-iOS (4.3.0)
-  - Atributika (4.6.1)
+  - Atributika (4.8.1)
   - BEMCheckBox (1.4.1)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
@@ -16,9 +17,9 @@ PODS:
   - Branch (0.25.5):
     - Branch/Core (= 0.25.5)
   - Branch/Core (0.25.5)
-  - Charts (3.1.1):
-    - Charts/Core (= 3.1.1)
-  - Charts/Core (3.1.1)
+  - Charts (3.2.2):
+    - Charts/Core (= 3.2.2)
+  - Charts/Core (3.2.2)
   - CocoaLumberjack (3.4.2):
     - CocoaLumberjack/Default (= 3.4.2)
     - CocoaLumberjack/Extensions (= 3.4.2)
@@ -90,13 +91,13 @@ PODS:
   - GoogleUtilities/Reachability (5.2.3):
     - GoogleUtilities/Logger
   - HexColors (2.3.0)
-  - Highlightr (2.0.1)
-  - IQKeyboardManagerSwift (5.0.8)
+  - Highlightr (2.1.0)
+  - IQKeyboardManagerSwift (6.2.1)
   - Kanna (4.0.1)
-  - Koloda (4.3.1):
+  - Koloda (4.7):
     - pop (~> 1.0)
   - lottie-ios (2.5.0)
-  - MarqueeLabel/Swift (3.2.0)
+  - MarqueeLabel/Swift (3.2.1)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
@@ -109,10 +110,10 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Nimble (7.1.3)
-  - NotificationBannerSwift (1.6.3):
-    - MarqueeLabel/Swift
-    - SnapKit (~> 4.0)
+  - Nimble (8.0.1)
+  - NotificationBannerSwift (2.0.1):
+    - MarqueeLabel/Swift (~> 3.2.0)
+    - SnapKit (~> 4.2.0)
   - Nuke (7.3.2)
   - Pageboy (3.0.1)
   - pop (1.0.12)
@@ -140,12 +141,13 @@ PODS:
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
   - SimulatorStatusMagic (2.4.1)
-  - SnapKit (4.0.0)
-  - STRegex (1.1.0)
+  - SnapKit (4.2.0)
+  - STRegex (2.0.0)
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.31.0)
+  - SwiftyGif (5.0.0)
   - SwiftyJSON (4.1.0)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
@@ -157,14 +159,14 @@ PODS:
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3.0)
-  - Agrume (from `https://github.com/Ostrenkiy/Agrume.git`, branch `feature/single-horizontal-dismiss`)
-  - Alamofire (= 4.7.3)
+  - Agrume (from `https://github.com/JanGorman/Agrume.git`)
+  - Alamofire (= 4.8.0)
   - AlamofireNetworkActivityIndicator (= 2.2.1)
   - Amplitude-iOS (= 4.3.0)
-  - Atributika (= 4.6.1)
+  - Atributika (= 4.8.1)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 0.25.5)
-  - Charts (= 3.1.1)
+  - Charts (= 3.2.2)
   - Crashlytics (= 3.10.7)
   - CRToast (= 0.0.9)
   - DeviceKit (= 1.10.0)
@@ -177,14 +179,14 @@ DEPENDENCIES:
   - FirebaseCore (= 5.1.0)
   - FirebaseMessaging (= 3.1.0)
   - FirebaseRemoteConfig (= 3.0.1)
-  - Highlightr (= 2.0.1)
-  - IQKeyboardManagerSwift (= 5.0.8)
+  - Highlightr (= 2.1.0)
+  - IQKeyboardManagerSwift (= 6.2.1)
   - Kanna (= 4.0.1)
-  - Koloda (= 4.3.1)
+  - Koloda (= 4.7)
   - lottie-ios (= 2.5.0)
   - Mockingjay (= 2.0.1)
-  - Nimble (= 7.1.3)
-  - NotificationBannerSwift (= 1.6.3)
+  - Nimble (= 8.0.1)
+  - NotificationBannerSwift (= 2.0.1)
   - Nuke (= 7.3.2)
   - Pageboy (= 3.0.1)
   - Presentr (= 1.3.2)
@@ -196,8 +198,8 @@ DEPENDENCIES:
   - SDWebImage (= 4.4.2)
   - SDWebImage/GIF (= 4.4.2)
   - SimulatorStatusMagic
-  - SnapKit (= 4.0.0)
-  - STRegex (= 1.1.0)
+  - SnapKit (= 4.2.0)
+  - STRegex (= 2.0.0)
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - SVProgressHUD (= 2.2.5)
   - SwiftLint (= 0.31.0)
@@ -263,6 +265,7 @@ SPEC REPOS:
     - STRegex
     - SVProgressHUD
     - SwiftLint
+    - SwiftyGif
     - SwiftyJSON
     - TTTAttributedLabel
     - TUSafariActivity
@@ -272,8 +275,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Agrume:
-    :branch: feature/single-horizontal-dismiss
-    :git: https://github.com/Ostrenkiy/Agrume.git
+    :git: https://github.com/JanGorman/Agrume.git
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -282,8 +284,8 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Agrume:
-    :commit: a1dad047cfc1fc88670a3960a975213622145b0b
-    :git: https://github.com/Ostrenkiy/Agrume.git
+    :commit: c589479d7e4d7eb76fb95902549ff0728c90b711
+    :git: https://github.com/JanGorman/Agrume.git
   SVGKit:
     :commit: bfe62f6d45f55c9fe39619d9e91fed1844c59da6
     :git: https://github.com/SVGKit/SVGKit.git
@@ -293,15 +295,15 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
-  Agrume: abf26210c3371bc6c74bbf2ced7a19d937bf8f0a
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Agrume: a78d1183008fe20886422bbfef845081eb6f64dd
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   AlamofireNetworkActivityIndicator: aeac50e6ecb78ec71a5f1f29098bcf4ec2962910
   Amplitude-iOS: 05f25e5bc08ecf3b42b0ae1d4f1fe6d3c6476e49
-  Atributika: d6c90b52527e9dae478819fb21d872aa6208ee6e
+  Atributika: 80766fd6f1dacadc0e3cedd82782f7dc8dc203dc
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Branch: 848e8e908182a97678d9f5a854d10e59a40af2aa
-  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
@@ -321,16 +323,16 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
   GoogleUtilities: 6f681e27050c5e130325e89fa0316dfca826f954
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
-  Highlightr: 65655134dd0d5e1320afdd8a9d880c9e9dc0b437
-  IQKeyboardManagerSwift: 2e7dc7f98c111458c1ea2b373f893e8cf95e2b97
+  Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
+  IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
   Kanna: 15569a2331b79782a1753cf280c8e69e2a033654
-  Koloda: 0d39b2aa188ccd1fac48d752acaf9802e683c625
+  Koloda: f456d003d2ce15ef9f10c2874a444f1f570b490c
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
-  MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
+  MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
-  NotificationBannerSwift: b231e4c3244848ef300e1c53ce027b9756b9b06f
+  Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
+  NotificationBannerSwift: 007774aa590cc9680647b92b2f217bef5c00c32c
   Nuke: a9a31bbd6c6723753ab024ef22057dcaaf046c1b
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
@@ -342,11 +344,12 @@ SPEC CHECKSUMS:
   RFKeyboardToolbar: c96a7d9458564d1fedc8ef6844b6c467934aade2
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SimulatorStatusMagic: 28d4a9d1a500ac7cea0b2b5a43c1c6ddb40ba56c
-  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  STRegex: eb1f4c2fe9e2f0265b8df8634774cd8cd8914018
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  STRegex: dc7c8082a77c521315a6339f86abf125b8c3feb8
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+  SwiftyGif: 67490485c3b1fa19013d9613fab31de4629450fb
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TSMessages: eb3cf27b6900684a21bad4fe9ea426e287b8c839
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
@@ -355,6 +358,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: 9900279524e934ee02e0cd2b29118f6e5ec348aa
+PODFILE CHECKSUM: 7f22adb3ec25b775d7f135d1b2c65c106fd6b08b
 
 COCOAPODS: 1.6.1

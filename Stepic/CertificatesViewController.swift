@@ -49,7 +49,7 @@ class CertificatesViewController: UIViewController, CertificatesView, Controller
         tableView.register(UINib(nibName: "CertificateTableViewCell", bundle: nil), forCellReuseIdentifier: "CertificateTableViewCell")
 
         self.tableView.estimatedRowHeight = 161
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
 
         refreshControl.addTarget(self, action: #selector(CertificatesViewController.refreshCertificates), for: .valueChanged)
         if #available(iOS 10.0, *) {
@@ -66,7 +66,7 @@ class CertificatesViewController: UIViewController, CertificatesView, Controller
         initPaginationView()
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
     }
 

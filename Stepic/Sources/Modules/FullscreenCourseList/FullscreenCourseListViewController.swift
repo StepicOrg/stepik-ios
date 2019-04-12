@@ -74,7 +74,7 @@ final class FullscreenCourseListViewController: UIViewController,
     }
 
     private func refreshSubmodule() {
-        self.submoduleViewController?.removeFromParentViewController()
+        self.submoduleViewController?.removeFromParent()
 
         let courseListAssembly = VerticalCourseListAssembly(
             type: self.courseListType,
@@ -83,7 +83,7 @@ final class FullscreenCourseListViewController: UIViewController,
             output: self.interactor
         )
         let courseListViewController = courseListAssembly.makeModule()
-        self.addChildViewController(courseListViewController)
+        self.addChild(courseListViewController)
 
         self.submoduleViewController = courseListViewController
 

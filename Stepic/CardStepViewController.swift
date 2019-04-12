@@ -37,7 +37,7 @@ class CardStepViewController: UIViewController, CardStepView {
 
         setupWebView()
         presenter?.refreshStep()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
 
         if #available(iOS 11.0, *) {
             scrollView.contentInsetAdjustmentBehavior = .never
@@ -112,7 +112,7 @@ class CardStepViewController: UIViewController, CardStepView {
     func updateQuiz(with controller: UIViewController) {
         quizView = controller.view
 
-        self.addChildViewController(controller)
+        self.addChild(controller)
         quizPlaceholderView.addSubview(quizView!)
         quizView!.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
 
@@ -227,8 +227,8 @@ extension CardStepViewController: WKNavigationDelegate {
             if let offset = urlString.indexOf("//") {
                 urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
                 if let newUrl = URL(string: urlString) {
-                    let agrume = Agrume(imageUrl: newUrl)
-                    agrume.showFrom(self)
+                    let agrume = Agrume(url: newUrl)
+                    agrume.show(from: self)
                 }
             }
             return decisionHandler(.cancel)

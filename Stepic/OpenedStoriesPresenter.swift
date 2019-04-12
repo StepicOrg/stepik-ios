@@ -9,7 +9,7 @@
 import Foundation
 
 protocol OpenedStoriesViewProtocol: class {
-    func set(module: UIViewController, direction: UIPageViewControllerNavigationDirection, animated: Bool)
+    func set(module: UIViewController, direction: UIPageViewController.NavigationDirection, animated: Bool)
     func close()
 }
 

@@ -20,7 +20,7 @@ class SettingsViewController: MenuViewController, SettingsView {
         self.title = NSLocalizedString("Settings", comment: "")
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
     }
 
@@ -38,7 +38,7 @@ class SettingsViewController: MenuViewController, SettingsView {
             artView.width = UIScreen.main.bounds.width
         }
 
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height))
         artView.onTap = {
             AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
         }
@@ -202,7 +202,7 @@ class SettingsViewController: MenuViewController, SettingsView {
         } else {
             artView.width = size.width
         }
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height))
     }
 
     func presentAuth() {

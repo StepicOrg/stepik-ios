@@ -73,7 +73,7 @@ class SearchResultsViewController: UIViewController, SearchResultsView {
         default:
             return
         }
-        self.addChildViewController(controller)
+        self.addChild(controller)
         self.view.addSubview(controller.view)
         controller.view.isHidden = true
         controller.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
@@ -82,11 +82,11 @@ class SearchResultsViewController: UIViewController, SearchResultsView {
     func removeController(forState: CoursesSearchResultsState) {
         switch forState {
         case .courses:
-            coursesVC?.removeFromParentViewController()
+            coursesVC?.removeFromParent()
             coursesVC?.view.removeFromSuperview()
             coursesVC = nil
         case .suggestions:
-            suggestionsVC?.removeFromParentViewController()
+            suggestionsVC?.removeFromParent()
             suggestionsVC?.view.removeFromSuperview()
             suggestionsVC = nil
         case .waiting:

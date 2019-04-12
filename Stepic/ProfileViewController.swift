@@ -74,7 +74,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         profileEditButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(ProfileViewController.profileEditButtonPressed))
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
 
         self.title = NSLocalizedString("Profile", comment: "")

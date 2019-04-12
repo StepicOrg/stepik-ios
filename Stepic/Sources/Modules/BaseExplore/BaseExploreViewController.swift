@@ -48,7 +48,7 @@ class BaseExploreViewController: UIViewController {
         self.submodules.append(submodule)
 
         if let viewController = submodule.viewController {
-            self.addChildViewController(viewController)
+            self.addChild(viewController)
         }
 
         // We have contract here:
@@ -70,7 +70,7 @@ class BaseExploreViewController: UIViewController {
 
     func removeSubmodule(_ submodule: Submodule) {
         self.exploreView?.removeBlockView(submodule.view)
-        submodule.viewController?.removeFromParentViewController()
+        submodule.viewController?.removeFromParent()
         self.submodules = self.submodules.filter { submodule.view != $0.view }
     }
 

@@ -61,7 +61,7 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
 
     @available(iOS 10.0, *)
     var sound: UNNotificationSound {
-        return UNNotificationSound(named: self.soundName)
+        return UNNotificationSound(named: convertToUNNotificationSoundName(self.soundName))
     }
 
     @available(iOS 10.0, *)
@@ -73,4 +73,9 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         self.UTCStartHour = UTCStartHour
         self.calendar = calendar
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUNNotificationSoundName(_ input: String) -> UNNotificationSoundName {
+	return UNNotificationSoundName(rawValue: input)
 }

@@ -111,7 +111,7 @@ class StepicVideoPlayerViewController: UIViewController {
     }
 
     fileprivate func displayRateChangeAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("VideoRate", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alertController = UIAlertController(title: NSLocalizedString("VideoRate", comment: ""), message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         for rate in VideoRate.allValues {
             let action = UIAlertAction(title: rate.description, style: .default, handler: {
                 [unowned self]
@@ -145,7 +145,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
     fileprivate func adjustToCurrentRate() {
         self.player.rate = currentRate.rawValue
-        rateButton.setTitle("\(currentRate.rawValue)x", for: UIControlState())
+        rateButton.setTitle("\(currentRate.rawValue)x", for: UIControl.State())
     }
 
     //Controlling the quality
@@ -163,13 +163,13 @@ class StepicVideoPlayerViewController: UIViewController {
     var currentQuality: String! {
         didSet {
             VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: currentQuality)
-            qualityButton.setTitle("\(currentQuality ?? "0")p", for: UIControlState())
+            qualityButton.setTitle("\(currentQuality ?? "0")p", for: UIControl.State())
 
         }
     }
 
     fileprivate func displayQualityChangeAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("VideoQuality", comment: ""), message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        let alertController = UIAlertController(title: NSLocalizedString("VideoQuality", comment: ""), message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         for url in video.urls {
             if url.quality != video.cachedQuality {
                 let action = UIAlertAction(title: url.quality, style: .default, handler: {
@@ -219,12 +219,12 @@ class StepicVideoPlayerViewController: UIViewController {
 
     fileprivate func setButtonPlaying(_ isPlaying: Bool) {
 		self.isPlaying = isPlaying
-        fullscreenPlayButton.setImage(isPlaying ? Images.playerControls.play : Images.playerControls.pause, for: UIControlState())
+        fullscreenPlayButton.setImage(isPlaying ? Images.playerControls.play : Images.playerControls.pause, for: UIControl.State())
     }
 
     @objc func audioRouteChanged(_ notification: Foundation.Notification) {
         if let routeChangeReason = ((notification as NSNotification).userInfo?[AVAudioSessionRouteChangeReasonKey] as? NSNumber)?.intValue {
-            if (UInt(routeChangeReason) == AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue) {
+            if (UInt(routeChangeReason) == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue) {
                 self.player.pause()
             }
         }
@@ -242,11 +242,11 @@ class StepicVideoPlayerViewController: UIViewController {
         WatchSessionManager.sharedManager.addObserver(self)
         WatchSessionSender.sendPlaybackStatus(.available)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: NSNotification.Name.AVAudioSessionRouteChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: AVAudioSession.routeChangeNotification, object: nil)
 
-        topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: UIControlState())
+        topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: UIControl.State())
 
-        backButton.setTitle(NSLocalizedString("Done", comment: ""), for: UIControlState())
+        backButton.setTitle(NSLocalizedString("Done", comment: ""), for: UIControl.State())
 
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
@@ -254,15 +254,15 @@ class StepicVideoPlayerViewController: UIViewController {
         topContainerView.setRoundedCorners(cornerRadius: 8.0)
         bottomFullscreenControlsView.setRoundedCorners(cornerRadius: 8.0)
 
-        rateButton.setTitle("\(currentRate.rawValue)x", for: UIControlState())
+        rateButton.setTitle("\(currentRate.rawValue)x", for: UIControl.State())
 
         self.player = Player()
         self.player.delegate = self
 
-        self.addChildViewController(self.player)
+        self.addChild(self.player)
         self.view.insertSubview(self.player.view, at: 0)
         self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
-        self.player.didMove(toParentViewController: self)
+        self.player.didMove(toParent: self)
 
         //Player Start Time should be set AFTER the currentQualityURL
         //TODO: Change this in the future
@@ -276,9 +276,9 @@ class StepicVideoPlayerViewController: UIViewController {
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.player.view.addGestureRecognizer(tapGestureRecognizer)
 
-        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpOutside)
-        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControlEvents.touchUpInside)
-        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), for: UIControlEvents.touchDown)
+        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControl.Event.touchUpOutside)
+        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControl.Event.touchUpInside)
+        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), for: UIControl.Event.touchDown)
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(StepicVideoPlayerViewController.togglePlayPause))
     }
 

@@ -91,9 +91,9 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
 
     override var intrinsicContentSize: CGSize {
         let labelsStackViewIntrinsicContentSize = self.labelsStackView
-            .systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         return CGSize(
-            width: UIViewNoIntrinsicMetric,
+            width: UIView.noIntrinsicMetric,
             height: labelsStackViewIntrinsicContentSize.height
         )
     }
