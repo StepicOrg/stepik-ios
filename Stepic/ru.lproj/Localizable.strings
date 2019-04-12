@@ -520,7 +520,7 @@ PlaceholderLoginText = "Мы встречались раньше?\nВойдит�
 PlaceholderLoginButton = "Войти";
 PlaceholderEmptyNotificationsText = "Нет уведомлений";
 PlaceholderEmptyNotificationsButton = "Перейти в каталог";
-PlaceholderEmptySearchText = "Немного свободного места чтобы подумать";
+PlaceholderEmptySearchText = "Ничего не найдено";
 PlaceholderEmptySearchButton = "Перейти в каталог";
 LoadStories = "Загрузить истории";
 

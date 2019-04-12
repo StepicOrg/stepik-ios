@@ -36,7 +36,7 @@ extension StepikPlaceholder.Style {
     static let emptySearch = StepikPlaceholderStyle(id: "emptySearch",
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-search"), scale: 0.49),
                                           text: NSLocalizedString("PlaceholderEmptySearchText", comment: ""),
-                                          buttonTitle: NSLocalizedString("PlaceholderEmptySearchButton", comment: ""))
+                                          buttonTitle: nil)
     static let emptyCertificates = StepikPlaceholderStyle(id: "emptyCertificates",
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
                                           text: NSLocalizedString("EmptyCertificatesTitle", comment: ""),

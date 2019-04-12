@@ -101,9 +101,9 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel) {
         switch viewModel.state {
         case .error:
-            self.showPlaceholder(for: .empty)
-        case .empty:
             self.showPlaceholder(for: .connectionError)
+        case .empty:
+            self.showPlaceholder(for: .empty)
         }
     }
 
