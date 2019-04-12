@@ -41,13 +41,13 @@ class MathQuizViewController: QuizViewController {
             }
         }
 
-        textField.borderStyle = UITextBorderStyle.roundedRect
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textColor = UIColor.mainText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(MathQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
 
-        textField.addTarget(self, action: #selector(MathQuizViewController.textFieldTextDidChange(textField:)), for: UIControlEvents.editingChanged)
+        textField.addTarget(self, action: #selector(MathQuizViewController.textFieldTextDidChange(textField:)), for: UIControl.Event.editingChanged)
     }
 
     @objc func textFieldTextDidChange(textField: UITextField) {

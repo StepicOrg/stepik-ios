@@ -165,7 +165,7 @@ class EmailAuthViewController: UIViewController {
         super.viewDidDisappear(animated)
 
         // Reset to default value (see AppDelegate)
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 24
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -226,7 +226,7 @@ extension EmailAuthViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.tap, parameters: nil)
         // 24 - default value in app (see AppDelegate), 60 - offset with button
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = textField == passwordTextField ? 60 : 24
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

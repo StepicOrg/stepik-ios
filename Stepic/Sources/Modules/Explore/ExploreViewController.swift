@@ -198,7 +198,7 @@ final class ExploreViewController: BaseExploreViewController {
         )
 
         let viewController = searchResultAssembly.makeModule()
-        self.addChildViewController(viewController)
+        self.addChild(viewController)
         self.view.addSubview(viewController.view)
         viewController.view.snp.makeConstraints { make -> Void in
             make.edges.equalToSuperview()

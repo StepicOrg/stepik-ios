@@ -67,8 +67,8 @@ class VideoStepViewController: UIViewController {
             self?.playVideo()
         })
 
-        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
-        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControl.State())
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControl.State())
 
         initialize()
         refreshNextPrevButtons()
@@ -159,7 +159,7 @@ class VideoStepViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(VideoStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem]
 
         if let discussionCount = step.discussionsCount {

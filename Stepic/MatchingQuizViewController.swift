@@ -14,8 +14,8 @@ class MatchingQuizViewController: QuizViewController {
     var dataset: MatchingDataset?
     var reply: MatchingReply?
 
-    var firstTableView = FullHeightTableView(frame: CGRect.zero, style: UITableViewStyle.plain)
-    var secondTableView = FullHeightTableView(frame: CGRect.zero, style: UITableViewStyle.plain)
+    var firstTableView = FullHeightTableView(frame: CGRect.zero, style: UITableView.Style.plain)
+    var secondTableView = FullHeightTableView(frame: CGRect.zero, style: UITableView.Style.plain)
 
     var firstUpdateFinished: Bool = false
     var secondUpdateFinished: Bool = false
@@ -210,8 +210,8 @@ extension MatchingQuizViewController : UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.none
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle.none
     }
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {

@@ -26,7 +26,7 @@ class TeachersTableViewCell: UITableViewCell {
         teachersTitleLabel.text = NSLocalizedString("Teachers", comment: "")
 
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TeachersTableViewCell.didRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

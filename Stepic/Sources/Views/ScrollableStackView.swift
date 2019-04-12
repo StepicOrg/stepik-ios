@@ -88,7 +88,7 @@ final class ScrollableStackView: UIView {
     }
 
     @available(iOS 11.0, *)
-    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.scrollView.contentInsetAdjustmentBehavior
         }
@@ -235,12 +235,12 @@ final class ScrollableStackView: UIView {
         case vertical
         case horizontal
 
-        var stackViewOrientation: UILayoutConstraintAxis {
+        var stackViewOrientation: NSLayoutConstraint.Axis {
             switch self {
             case .vertical:
-                return UILayoutConstraintAxis.vertical
+                return NSLayoutConstraint.Axis.vertical
             case .horizontal:
-                return UILayoutConstraintAxis.horizontal
+                return NSLayoutConstraint.Axis.horizontal
             }
         }
     }

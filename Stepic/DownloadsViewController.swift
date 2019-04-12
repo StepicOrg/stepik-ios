@@ -29,7 +29,7 @@ class DownloadsViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
         // Do any additional setup after loading the view.
     }
@@ -80,14 +80,14 @@ class DownloadsViewController: UIViewController {
     }
 
     func askForClearCache(remove: @escaping (() -> Void)) {
-        let alert = UIAlertController(title: NSLocalizedString("ClearCacheTitle", comment: ""), message: NSLocalizedString("ClearCacheMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString("ClearCacheTitle", comment: ""), message: NSLocalizedString("ClearCacheMessage", comment: ""), preferredStyle: UIAlertController.Style.alert)
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.destructive, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertAction.Style.destructive, handler: {
             _ in
             remove()
         }))
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: {
             _ in
         }))
 

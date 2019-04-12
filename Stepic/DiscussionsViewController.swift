@@ -85,7 +85,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
         emptyDatasetState = .none
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44.0
 
         tableView.tableFooterView = UIView()
@@ -96,7 +96,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
         self.title = NSLocalizedString("Discussions", comment: "")
 
-        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
+        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
         self.navigationItem.rightBarButtonItem = writeCommentItem
 
         refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), for: .valueChanged)
@@ -105,7 +105,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
         reloadDiscussions()
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
     }
 

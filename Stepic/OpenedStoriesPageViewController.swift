@@ -59,11 +59,11 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         dismiss(animated: true, completion: nil)
     }
 
-    func set(module: UIViewController, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
-        currentStoryController?.removeFromParentViewController()
+    func set(module: UIViewController, direction: UIPageViewController.NavigationDirection, animated: Bool) {
+        currentStoryController?.removeFromParent()
         currentStoryController = module
 
-        addChildViewController(module)
+        addChild(module)
         setViewControllers([module], direction: direction, animated: animated, completion: nil)
     }
 }

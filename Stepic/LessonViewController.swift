@@ -50,7 +50,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
     fileprivate let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
 
     fileprivate func initWarningView() -> UIView {
-        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.current.isPad ? UIViewContentMode.bottom : UIViewContentMode.scaleAspectFit)
+        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.current.isPad ? UIView.ContentMode.bottom : UIView.ContentMode.scaleAspectFit)
         self.view.insertSubview(v, aboveSubview: self.view)
         v.snp.makeConstraints { make -> Void in
             make.top.equalTo(self.view).offset(50)
@@ -62,7 +62,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
     fileprivate func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
-        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        ai.style = UIActivityIndicatorView.Style.whiteLarge
         ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)

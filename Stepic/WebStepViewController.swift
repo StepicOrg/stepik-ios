@@ -82,8 +82,8 @@ class WebStepViewController: UIViewController {
             print(self.view.gestureRecognizers ?? "")
         }
 
-        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
-        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControl.State())
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControl.State())
 
         initialize()
         refreshNextPrevButtons()
@@ -134,7 +134,7 @@ class WebStepViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(WebStepViewController.sharePressed(_:)))
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(WebStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem]
 
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
@@ -176,7 +176,7 @@ class WebStepViewController: UIViewController {
     func initQuizController(_ quizController: QuizViewController?) {
         guard let quizController = quizController else {
             self.quizViewController?.view.removeFromSuperview()
-            self.quizViewController?.removeFromParentViewController()
+            self.quizViewController?.removeFromParent()
             self.view.layoutIfNeeded()
             return
         }
@@ -184,8 +184,8 @@ class WebStepViewController: UIViewController {
         quizPlaceholderView.addSubview(quizController.view)
         quizController.view.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
         self.quizViewController?.view.removeFromSuperview()
-        self.quizViewController?.removeFromParentViewController()
-        self.addChildViewController(quizController)
+        self.quizViewController?.removeFromParent()
+        self.addChild(quizController)
         quizViewController = quizController
 //        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -231,7 +231,7 @@ class WebStepViewController: UIViewController {
             print("unknown type \(step.block.name)")
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             quizController.stepUrl = self.stepUrl
-            self.addChildViewController(quizController)
+            self.addChild(quizController)
             quizPlaceholderView.addSubview(quizController.view)
 
             quizController.view.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
@@ -433,7 +433,7 @@ extension WebStepViewController : UIWebViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
 
         guard let url = request.url else {
             return false
@@ -467,8 +467,8 @@ extension WebStepViewController : UIWebViewDelegate {
             if let offset = urlString.indexOf("//") {
                 urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
                 if let newUrl = URL(string: urlString) {
-                    let agrume = Agrume(imageUrl: newUrl)
-                    agrume.showFrom(self)
+                    let agrume = Agrume(url: newUrl)
+                    agrume.show(from: self)
                 }
             }
             return false

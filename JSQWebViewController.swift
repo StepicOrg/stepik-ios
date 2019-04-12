@@ -157,7 +157,7 @@ class WebViewController: UIViewController {
         if allowsToOpenInSafari {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: Images.safariBarButtonItemImage,
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(WebViewController.didTapSafariButton(_:)))
             navigationItem.rightBarButtonItem?.tintColor = UIColor.mainDark
@@ -190,7 +190,7 @@ class WebViewController: UIViewController {
         webView.scrollView.contentInset = insets
         webView.scrollView.scrollIndicatorInsets = insets
 
-        view.bringSubview(toFront: progressBar)
+        view.bringSubviewToFront(progressBar)
         progressBar.frame = CGRect(
             x: view.frame.minX,
             y: topLayoutGuide.length,

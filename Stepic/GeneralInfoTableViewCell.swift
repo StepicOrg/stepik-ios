@@ -36,7 +36,7 @@ class GeneralInfoTableViewCell: UITableViewCell {
         typeSegmentedControl.setTitle(NSLocalizedString("Syllabus", comment: ""), forSegmentAt: 2)
         typeSegmentedControl.tintColor = UIColor.mainDark
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GeneralInfoTableViewCell.didRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -143,13 +143,13 @@ class FullscreenCodeQuizViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.shared.enable = false
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enable = true
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
 
@@ -160,13 +160,13 @@ class FullscreenCodeQuizViewController: UIViewController {
     }
 
     fileprivate func configureKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(aNotification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(aNotification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(aNotification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(aNotification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     @objc fileprivate func keyboardWasShown(aNotification: NSNotification) {
         let info = aNotification.userInfo
-        let infoNSValue = info![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let infoNSValue = info![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         let kbSize = infoNSValue.cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
         codeTextView.contentInset = contentInsets

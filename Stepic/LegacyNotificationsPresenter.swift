@@ -71,7 +71,7 @@ final class LegacyNotificationsPresenter {
             kCRToastTimeIntervalKey: 5.0,
             kCRToastAnimationOutTimeIntervalKey: 0.3,
             kCRToastTextMaxNumberOfLinesKey: 2,
-            kCRToastImageContentModeKey: NSNumber(value: UIViewContentMode.scaleAspectFit.rawValue),
+            kCRToastImageContentModeKey: NSNumber(value: UIView.ContentMode.scaleAspectFit.rawValue),
             kCRToastBackgroundColorKey: UIColor.black
         ]
     }

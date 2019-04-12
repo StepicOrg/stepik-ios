@@ -56,7 +56,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     func initActivityView(color: UIColor = .mainDark) -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
-        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        ai.style = UIActivityIndicatorView.Style.whiteLarge
         ai.snp.makeConstraints { $0.width.height.equalTo(50) }
         ai.color = color
         v.backgroundColor = UIColor.white
@@ -132,7 +132,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         self.hintTextView.dataDetectorTypes = .all
         self.hideHintView()
 
-        self.peerReviewButton.setTitle(peerReviewText, for: UIControlState())
+        self.peerReviewButton.setTitle(peerReviewText, for: UIControl.State())
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellow
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -453,7 +453,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 }
 
 extension QuizViewController : UIWebViewDelegate {
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         if let url = request.url {
             if url.isFileURL {
                 return true

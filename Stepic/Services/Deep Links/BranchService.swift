@@ -16,7 +16,7 @@ final class BranchService {
         self.deepLinkRoutingService = deepLinkRoutingService
     }
 
-    func setup(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    func setup(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         Branch.getInstance().initSession(launchOptions: launchOptions) { params, _ in
             guard let data = params as? [String: AnyObject] else {
                 return
@@ -35,7 +35,7 @@ final class BranchService {
     func openURL(
         app: UIApplication,
         open url: URL,
-        options: [UIApplicationOpenURLOptionsKey: Any]
+        options: [UIApplication.OpenURLOptionsKey: Any]
     ) {
         Branch.getInstance().application(app, open: url, options: options)
     }

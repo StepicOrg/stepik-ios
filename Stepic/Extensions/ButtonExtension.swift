@@ -34,18 +34,18 @@ extension UIButton {
 
     func setStepicGreenStyle() {
         self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.0, borderColor: UIColor.mainDark)
-        self.setTitleColor(UIColor.white, for: UIControlState())
+        self.setTitleColor(UIColor.white, for: UIControl.State())
         self.backgroundColor = UIColor.mainDark
     }
 
     func setStepicWhiteStyle() {
         self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1.0, borderColor: UIColor.mainDark)
-        self.setTitleColor(UIColor.mainDark, for: UIControlState())
+        self.setTitleColor(UIColor.mainDark, for: UIControl.State())
         self.backgroundColor = UIColor.white
     }
 
     var isEnabledToJoin: Bool {
-        return self.attributedTitle(for: UIControlState())?.string != Constants.alreadyJoinedCourseButtonText
+        return self.attributedTitle(for: UIControl.State())?.string != Constants.alreadyJoinedCourseButtonText
     }
 
 }

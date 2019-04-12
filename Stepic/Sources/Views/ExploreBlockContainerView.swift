@@ -37,7 +37,7 @@ final class ExploreBlockContainerView: UIView {
             + (self.shouldShowSeparator ? 1.0 : 0.0)
         let contentViewHeight = self.contentView.intrinsicContentSize.height
         return CGSize(
-            width: UIViewNoIntrinsicMetric,
+            width: UIView.noIntrinsicMetric,
             height: headerViewHeight + paddingHeight + contentViewHeight
         )
     }

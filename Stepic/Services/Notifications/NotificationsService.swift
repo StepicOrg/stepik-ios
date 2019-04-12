@@ -38,7 +38,7 @@ final class NotificationsService {
         self.addOnWillResignActiveObserver()
     }
 
-    func handleLaunchOptions(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    func handleLaunchOptions(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         NotificationPermissionStatus.current.done { status in
             AnalyticsUserProperties.shared.setPushPermissionStatus(status)
         }
@@ -306,7 +306,7 @@ extension NotificationsService {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.onWillResignActive),
-            name: .UIApplicationWillResignActive,
+            name: UIApplication.willResignActiveNotification,
             object: nil
         )
     }

@@ -247,7 +247,7 @@ class CodePlaygroundManager {
     fileprivate func hideSuggestions() {
         //TODO: hide suggestions view here
         suggestionsController?.view.removeFromSuperview()
-        suggestionsController?.removeFromParentViewController()
+        suggestionsController?.removeFromParent()
         suggestionsController = nil
     }
 
@@ -255,7 +255,7 @@ class CodePlaygroundManager {
         //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if suggestionsController == nil {
             suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)
-            vc.addChildViewController(suggestionsController!)
+            vc.addChild(suggestionsController!)
             textView.addSubview(suggestionsController!.view)
             suggestionsController?.delegate = suggestionsDelegate
         }

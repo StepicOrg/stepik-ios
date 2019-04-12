@@ -81,13 +81,13 @@ final class NotificationPermissionStatusSettingsObserver {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.onWillEnterForeground),
-            name: .UIApplicationWillEnterForeground,
+            name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.onDidEnterBackground),
-            name: .UIApplicationDidEnterBackground,
+            name: UIApplication.didEnterBackgroundNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
