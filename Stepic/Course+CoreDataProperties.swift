@@ -58,6 +58,8 @@ extension Course {
     @NSManaged var managedCertificateEntity: Certificate?
     @NSManaged var managedReviewSummary: CourseReviewSummary?
 
+    @NSManaged var managedIsCertificateAutoIssued: NSNumber?
+
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
     }
@@ -198,6 +200,15 @@ extension Course {
         }
         get {
             return managedPublic?.boolValue ?? false
+        }
+    }
+
+    var isCertificatesAutoIssued: Bool {
+        set {
+            self.managedIsCertificateAutoIssued = newValue as NSNumber?
+        }
+        get {
+            return managedIsCertificateAutoIssued?.boolValue ?? false
         }
     }
 
