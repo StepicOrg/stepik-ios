@@ -6,7 +6,7 @@ PODS:
   - AlamofireNetworkActivityIndicator (2.2.1):
     - Alamofire (~> 4.7)
   - Amplitude-iOS (4.3.0)
-  - Atributika (4.8.1)
+  - Atributika (4.8.2)
   - BEMCheckBox (1.4.1)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
@@ -163,7 +163,7 @@ DEPENDENCIES:
   - Alamofire (= 4.8.0)
   - AlamofireNetworkActivityIndicator (= 2.2.1)
   - Amplitude-iOS (= 4.3.0)
-  - Atributika (= 4.8.1)
+  - Atributika (= 4.8.2)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 0.25.5)
   - Charts (= 3.2.2)
@@ -299,7 +299,7 @@ SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   AlamofireNetworkActivityIndicator: aeac50e6ecb78ec71a5f1f29098bcf4ec2962910
   Amplitude-iOS: 05f25e5bc08ecf3b42b0ae1d4f1fe6d3c6476e49
-  Atributika: 80766fd6f1dacadc0e3cedd82782f7dc8dc203dc
+  Atributika: 7b3631032cf11f2197b352343e0bd1b783d8ca88
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Branch: 848e8e908182a97678d9f5a854d10e59a40af2aa
@@ -358,6 +358,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: 7f22adb3ec25b775d7f135d1b2c65c106fd6b08b
+PODFILE CHECKSUM: 8f633992faf13bdffeb4fd2726924e111f2fd252
 
 COCOAPODS: 1.6.1

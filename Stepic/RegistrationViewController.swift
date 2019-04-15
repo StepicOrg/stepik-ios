@@ -204,7 +204,7 @@ class RegistrationViewController: UIViewController {
             switch detection.type {
             case .tag(let tag):
                 if tag.name == "a", let href = tag.attributes["href"] {
-                    tosLabel.addLink(to: URL(string: href), with: detection.range.nsRange)
+                    tosLabel.addLink(to: URL(string: href), with: NSRange(detection.range, in: styledText.string))
                 }
             default: break
             }
