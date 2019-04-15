@@ -341,12 +341,6 @@
 		086FC6A41FE046C400C7DFF4 /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
 		086FC6A51FE046C500C7DFF4 /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
 		086FC6A61FE046C500C7DFF4 /* NotificationStatusesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */; };
-		086FC6A81FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
-		086FC6AA1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
-		086FC6AC1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
-		086FC6AD1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
-		086FC6AE1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
-		086FC6AF1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
 		087039301CD7413D00B6571B /* LegacyNotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */; };
 		087235EE20FE2F2F00B4D5B1 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087235ED20FE2F2F00B4D5B1 /* AnalyticsEvent.swift */; };
 		087296DC20168FF2009F9256 /* TooltipDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */; };
@@ -3565,7 +3559,6 @@
 		2CA8D30E2088D9C000E105E9 /* CodeTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1141EDDF63200D64D77 /* CodeTemplate.swift */; };
 		2CA8D30F2088D9C000E105E9 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C03B2A31F0CD87600005383 /* StringHelper.swift */; };
 		2CA8D3102088D9C000E105E9 /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
-		2CA8D3112088D9C000E105E9 /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
 		2CA8D3122088D9C000E105E9 /* AdaptiveAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF29361E83CEA900F8D214 /* AdaptiveAppDelegate.swift */; };
 		2CA8D3132088D9C000E105E9 /* StepikURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */; };
 		2CA8D3142088D9C000E105E9 /* AlamofireDefaultSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */; };
@@ -3876,7 +3869,6 @@
 		2CFE246F20ECD7EC00AF1E3D /* StandardsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081B7E291BAC208200554153 /* StandardsExtensions.swift */; };
 		2CFE247020ECD7F800AF1E3D /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59ED1BBFC962008DC44D /* ButtonExtension.swift */; };
 		2CFE247120ECD80D00AF1E3D /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */; };
-		2CFE247220ECD81600AF1E3D /* RangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */; };
 		2CFE247320ECD81F00AF1E3D /* Collection+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E4C4AECA5B066006DE7 /* Collection+SafeSubscript.swift */; };
 		2CFE247420ECD87A00AF1E3D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA59F31BC020E2008DC44D /* UIImageViewExtension.swift */; };
 		2CFE247520ECD88200AF1E3D /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */; };
@@ -5170,7 +5162,6 @@
 		086BE2841F901CCF00B4BE56 /* LastStepRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastStepRouter.swift; sourceTree = "<group>"; };
 		086D5B3E20127A25000F7715 /* Tooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tooltip.swift; sourceTree = "<group>"; };
 		086D5B51201283C2000F7715 /* TooltipFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipFactory.swift; sourceTree = "<group>"; };
-		086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeExtension.swift; sourceTree = "<group>"; };
 		0870392F1CD7413D00B6571B /* LegacyNotificationsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyNotificationsPresenter.swift; sourceTree = "<group>"; };
 		087235ED20FE2F2F00B4D5B1 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		087296DB20168FF2009F9256 /* TooltipDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipDefaultsManager.swift; sourceTree = "<group>"; };
@@ -9478,7 +9469,6 @@
 				086B7F061D194D4B00055B4E /* NSAttributedStringExtensions.swift */,
 				08A3A9CD1BD5A14D0032C36E /* NSDateExtensions.swift */,
 				089877A8214047EC0065DFA2 /* Numbers+Random.swift */,
-				086FC6A71FE04DBD00C7DFF4 /* RangeExtension.swift */,
 				081B7E291BAC208200554153 /* StandardsExtensions.swift */,
 				08DF1D911BDAB93900BA35EA /* StringExtensions.swift */,
 				08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */,
@@ -14832,7 +14822,6 @@
 				08E43E9E214C27B200E3CB50 /* ModalRouter.swift in Sources */,
 				083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */,
 				082FD64C1D6C849C007F3E07 /* ReplaceLastSegue.swift in Sources */,
-				086FC6A81FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				08F555501C4F93B700C877E8 /* Dataset.swift in Sources */,
 				2C97E00A215E47EC005684A1 /* SearchQueriesPresenter.swift in Sources */,
 				08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */,
@@ -15893,7 +15882,6 @@
 				2C1B61001F4C4AEF00236804 /* PickerViewController.swift in Sources */,
 				2C1B61041F4C4AEF00236804 /* StepicVideoPlayerViewController.swift in Sources */,
 				2C1B61051F4C4AEF00236804 /* PlayerTestViewController.swift in Sources */,
-				086FC6AE1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				2C47A168206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				86A1C3392065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C1B61061F4C4AEF00236804 /* Player.swift in Sources */,
@@ -16321,7 +16309,6 @@
 				2C1B63111F4C590700236804 /* PickerViewController.swift in Sources */,
 				2C1B63151F4C590700236804 /* StepicVideoPlayerViewController.swift in Sources */,
 				2C1B63161F4C590700236804 /* PlayerTestViewController.swift in Sources */,
-				086FC6AF1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				2C47A169206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				86A1C33A2065173900D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C1B63171F4C590700236804 /* Player.swift in Sources */,
@@ -16928,7 +16915,6 @@
 				2C093F06211B432C00162DD0 /* MenuViewController.swift in Sources */,
 				2C9499D020ECBCCE0049E9A8 /* FreeAnswerReply.swift in Sources */,
 				2C9499A920ECBA100049E9A8 /* CourseReviewSummary.swift in Sources */,
-				2CFE247220ECD81600AF1E3D /* RangeExtension.swift in Sources */,
 				2C093F21211B452400162DD0 /* CodeEditorSettingsPresenter.swift in Sources */,
 				2C8530F321512A0B001E6B55 /* AnalyticsUserProperties.swift in Sources */,
 				2C9499CA20ECBC8F0049E9A8 /* PersonalDeadlineLocalStorageManager.swift in Sources */,
@@ -17617,7 +17603,6 @@
 				2C89AADB1F4C289900227C3B /* CodeTemplate.swift in Sources */,
 				2C89AADD1F4C289900227C3B /* StringHelper.swift in Sources */,
 				2C89AADE1F4C289900227C3B /* EmptyDatasetState.swift in Sources */,
-				086FC6AC1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				2C89AADF1F4C289900227C3B /* AdaptiveAppDelegate.swift in Sources */,
 				62E9879A89A2EFFA5CCAED86 /* StepikURLSessionConfiguration.swift in Sources */,
 				62E98C975482E46A95E173AB /* AlamofireDefaultSessionManager.swift in Sources */,
@@ -17714,7 +17699,6 @@
 				2C9731481F4C38F600AC9301 /* PickerViewController.swift in Sources */,
 				2C97314C1F4C38F600AC9301 /* StepicVideoPlayerViewController.swift in Sources */,
 				2C97314D1F4C38F600AC9301 /* PlayerTestViewController.swift in Sources */,
-				086FC6AD1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				2C47A167206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				86A1C3382065173800D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				2C97314E1F4C38F600AC9301 /* Player.swift in Sources */,
@@ -18488,7 +18472,6 @@
 				2CA8D30E2088D9C000E105E9 /* CodeTemplate.swift in Sources */,
 				2CA8D30F2088D9C000E105E9 /* StringHelper.swift in Sources */,
 				2CA8D3102088D9C000E105E9 /* EmptyDatasetState.swift in Sources */,
-				2CA8D3112088D9C000E105E9 /* RangeExtension.swift in Sources */,
 				2CA8D3122088D9C000E105E9 /* AdaptiveAppDelegate.swift in Sources */,
 				2CA8D3132088D9C000E105E9 /* StepikURLSessionConfiguration.swift in Sources */,
 				2CA8D3142088D9C000E105E9 /* AlamofireDefaultSessionManager.swift in Sources */,
@@ -18656,7 +18639,6 @@
 				864D67511E83E08E001E8D9E /* PickerViewController.swift in Sources */,
 				864D67571E83E08E001E8D9E /* StepicVideoPlayerViewController.swift in Sources */,
 				864D675A1E83E08E001E8D9E /* PlayerTestViewController.swift in Sources */,
-				086FC6AA1FE04DBD00C7DFF4 /* RangeExtension.swift in Sources */,
 				864D675B1E83E08E001E8D9E /* Player.swift in Sources */,
 				2CA2E72320237E4A001DC410 /* AdaptiveStatsPresenter.swift in Sources */,
 				864D675C1E83E08E001E8D9E /* VideoRate.swift in Sources */,

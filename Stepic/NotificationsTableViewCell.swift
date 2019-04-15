@@ -82,7 +82,7 @@ class NotificationsTableViewCell: UITableViewCell {
             switch detection.type {
             case .tag(let tag):
                 if tag.name == "a", let href = tag.attributes["href"] {
-                    notificationTextLabel.addLink(to: URL(string: href), with: detection.range.nsRange)
+                    notificationTextLabel.addLink(to: URL(string: href), with: NSRange(detection.range, in: styledText.string))
                 }
             default: break
             }
