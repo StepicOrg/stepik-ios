@@ -118,17 +118,14 @@ PODS:
   - Pageboy (3.0.1)
   - pop (1.0.12)
   - Presentr (1.3.2)
-  - PromiseKit (6.3.4):
-    - PromiseKit/CorePromise (= 6.3.4)
-    - PromiseKit/Foundation (= 6.3.4)
-    - PromiseKit/UIKit (= 6.3.4)
-  - PromiseKit/Alamofire (6.3.4):
-    - Alamofire (~> 4.0)
+  - PromiseKit (6.8.4):
+    - PromiseKit/CorePromise (= 6.8.4)
+    - PromiseKit/Foundation (= 6.8.4)
+    - PromiseKit/UIKit (= 6.8.4)
+  - PromiseKit/CorePromise (6.8.4)
+  - PromiseKit/Foundation (6.8.4):
     - PromiseKit/CorePromise
-  - PromiseKit/CorePromise (6.3.4)
-  - PromiseKit/Foundation (6.3.4):
-    - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.3.4):
+  - PromiseKit/UIKit (6.8.4):
     - PromiseKit/CorePromise
   - Protobuf (3.6.1)
   - Quick (1.3.1)
@@ -190,8 +187,7 @@ DEPENDENCIES:
   - Nuke (= 7.3.2)
   - Pageboy (= 3.0.1)
   - Presentr (= 1.3.2)
-  - PromiseKit (= 6.3.4)
-  - PromiseKit/Alamofire (= 6.3.4)
+  - PromiseKit (= 6.8.4)
   - Quick (= 1.3.1)
   - Reveal-SDK
   - RFKeyboardToolbar (= 1.3)
@@ -337,7 +333,7 @@ SPEC CHECKSUMS:
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
-  PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
+  PromiseKit: 51794a832647e7b819336dc2279039ce9f1cc49b
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
   Reveal-SDK: 43206a57f575632fd304e85385cc259b5d359e32
@@ -358,6 +354,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: 8f633992faf13bdffeb4fd2726924e111f2fd252
+PODFILE CHECKSUM: 336796e723e793b67ff1a4f99cb5f9fcde20c3c5
 
 COCOAPODS: 1.6.1
