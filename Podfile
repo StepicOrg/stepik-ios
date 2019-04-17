@@ -14,7 +14,7 @@ def shared_pods
     pod 'Fabric', '1.7.11'
     pod 'Crashlytics', '3.10.7'
     pod 'DeviceKit', '1.10.0'
-    pod 'PromiseKit', '6.3.4'
+    pod 'PromiseKit', '6.8.4'
     pod 'SwiftLint', '0.31.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
@@ -153,7 +153,6 @@ target 'ExamEGERussian' do
     
     all_pods
     pod 'AlamofireNetworkActivityIndicator', '2.2.1'
-    pod 'PromiseKit/Alamofire', '6.3.4'
 
     target 'ExamEGERussianTests' do
         inherit! :search_paths
