@@ -18,7 +18,7 @@ final class SettingsTableView: UIView {
         tableView.dataSource = self
         tableView.delegate = self
 
-        tableView.sectionFooterHeight = UITableViewAutomaticDimension
+        tableView.sectionFooterHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 50.0
 
         tableView.register(cellClass: SettingsInputTableViewCell<TableInputTextField>.self)
@@ -176,7 +176,7 @@ extension SettingsTableView: UITableViewDelegate {
 
         switch cellViewModel.type {
         case .largeInput:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         default:
             return 44.0
         }

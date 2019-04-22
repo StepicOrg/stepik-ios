@@ -224,7 +224,7 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SocialAuthHeaderView.reuseId, for: indexPath) as? SocialAuthHeaderView {
                 header.setup(title: presenter?.socialAuthHeaderString ?? "")
                 return header

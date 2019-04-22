@@ -79,7 +79,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
 
         // Header
         let headerSupplementaryViewAttributes = UICollectionViewLayoutAttributes(
-            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             with: IndexPath(
                 item: 0,
                 section: collectionView.numberOfSections - 1
@@ -136,7 +136,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
 
         // Footer
         let paginationSupplementaryViewAttributes = UICollectionViewLayoutAttributes(
-            forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
             with: IndexPath(
                 item: 0,
                 section: collectionView.numberOfSections - 1

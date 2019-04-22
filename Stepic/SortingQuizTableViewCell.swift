@@ -20,7 +20,7 @@ class SortingQuizTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
 
         contentView.backgroundColor = UIColor.clear
     }

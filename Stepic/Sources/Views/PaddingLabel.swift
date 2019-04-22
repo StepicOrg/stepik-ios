@@ -21,7 +21,7 @@ final class PaddingLabel: UILabel {
     }
 
     override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, self.padding))
+        super.drawText(in: rect.inset(by: self.padding))
     }
 
     override var intrinsicContentSize: CGSize {

@@ -27,10 +27,16 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
                 description: user.bio
             )
         }
-        let certificateDetailsText = self.makeFormattedCertificateDetailsText(
-            conditionPoints: course.certificateRegularThreshold,
-            distinctionPoints: course.certificateDistinctionThreshold
-        )
+
+        let certificateText = course.isCertificatesAutoIssued
+            ? self.makeFormattedCertificateText(course: course)
+            : nil
+        let certificateDetailsText = course.isCertificatesAutoIssued
+            ? self.makeFormattedCertificateDetailsText(
+                conditionPoints: course.certificateRegularThreshold,
+                distinctionPoints: course.certificateDistinctionThreshold
+            )
+            : nil
 
         return CourseInfoTabInfoViewModel(
             author: self.makeFormattedAuthorText(authors: course.authors),
@@ -41,7 +47,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             targetAudienceText: course.audience.trimmingCharacters(in: .whitespaces),
             timeToCompleteText: self.makeFormattedTimeToCompleteText(timeToComplete: course.timeToComplete),
             languageText: self.makeLocalizedLanguageText(code: course.languageCode),
-            certificateText: self.makeFormattedCertificateText(course: course),
+            certificateText: certificateText,
             certificateDetailsText: certificateDetailsText,
             instructors: instructorsViewModel
         )

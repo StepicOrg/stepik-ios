@@ -29,10 +29,10 @@ final class CourseListsCollectionView: UIView {
         let headerViewPadding = Appearance.headerViewInsets.top
             + Appearance.headerViewInsets.bottom
         let contentStackViewHeight = self.contentStackView
-            .systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+            .systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
             .height
         return CGSize(
-            width: UIViewNoIntrinsicMetric,
+            width: UIView.noIntrinsicMetric,
             height: headerViewHeight + headerViewPadding + contentStackViewHeight
         )
     }

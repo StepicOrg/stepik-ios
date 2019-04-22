@@ -189,16 +189,13 @@ final class ExploreViewController: BaseExploreViewController {
     private func initSearchResults() {
         // Search result controller
         let searchResultAssembly = SearchResultsAssembly(
-            hideKeyboardBlock: { [weak self] in
-                self?.searchBar.resignFirstResponder()
-            },
             updateQueryBlock: { [weak self] newQuery in
                 self?.searchBar.text = newQuery
             }
         )
 
         let viewController = searchResultAssembly.makeModule()
-        self.addChildViewController(viewController)
+        self.addChild(viewController)
         self.view.addSubview(viewController.view)
         viewController.view.snp.makeConstraints { make -> Void in
             make.edges.equalToSuperview()
@@ -261,14 +258,15 @@ extension ExploreViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.showSearchResults()
         // Strange hack to hide search results (courses)
-        self.searchResultsModuleInput?.queryChanged(to: "")
+        self.searchResultsModuleInput?.searchStarted()
 
         // FIXME: analytics dependency
         AmplitudeAnalyticsEvents.Search.started.send()
     }
 
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.hideSearchResults()
+        self.searchResultsModuleInput?.searchCancelled()
 
         // FIXME: analytics dependency
         AnalyticsReporter.reportEvent(AnalyticsEvents.Search.cancelled)

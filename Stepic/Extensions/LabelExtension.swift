@@ -18,7 +18,7 @@ extension UILabel {
             Style("strong").font(.boldSystemFont(ofSize: currentFontSize)),
             Style("i").font(.italicSystemFont(ofSize: currentFontSize)),
             Style("em").font(.italicSystemFont(ofSize: currentFontSize)),
-            Style("strike").strikethroughStyle(.styleSingle)
+            Style("strike").strikethroughStyle(NSUnderlineStyle.single)
         ]).attributedString
 
         if let lineSpacing = lineSpacing {

@@ -165,7 +165,7 @@ public class Player: UIViewController {
             if let playerItem = self.playerItem {
                 return CMTimeGetSeconds(playerItem.duration)
             } else {
-                return CMTimeGetSeconds(kCMTimeIndefinite)
+                return CMTimeGetSeconds(CMTime.indefinite)
             }
         }
     }
@@ -175,7 +175,7 @@ public class Player: UIViewController {
             if let playerItem = self.playerItem {
                 return CMTimeGetSeconds(playerItem.currentTime())
             } else {
-                return CMTimeGetSeconds(kCMTimeIndefinite)
+                return CMTimeGetSeconds(CMTime.indefinite)
             }
         }
     }
@@ -209,7 +209,7 @@ public class Player: UIViewController {
 
     //block's parameters are current current time + current buffered value 
     open func setPeriodicTimeObserver(_ block: @escaping (TimeInterval, TimeInterval?) -> Void) {
-        let interval = CMTimeMakeWithSeconds(1, 10)
+        let interval = CMTimeMakeWithSeconds(1, preferredTimescale: 10)
         //        let interval = CMTimeMakeWithSeconds(period, Int32(NSEC_PER_SEC))
         periodicTimeObserver = self.avplayer.addPeriodicTimeObserver(forInterval: interval, queue: nil, using: {
             [weak self]
@@ -294,14 +294,18 @@ public class Player: UIViewController {
         super.viewDidLoad()
 
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
+            } else {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: [])
+            }
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("failed to set up background playing: \(error)")
         }
 
         self.playerView.layer.addObserver(self, forKeyPath: PlayerReadyForDisplayKey, options: ([.new, .old]), context: &PlayerLayerObserverContext)
-        self.timeObserver = self.avplayer.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 100), queue: DispatchQueue.main, using: { [weak self] _ in
+        self.timeObserver = self.avplayer.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 100), queue: DispatchQueue.main, using: { [weak self] _ in
             guard let strongSelf = self else { return }
             strongSelf.delegate?.playerCurrentTimeDidChange?(strongSelf)
             })
@@ -323,7 +327,7 @@ public class Player: UIViewController {
 
     public func playFromBeginning() {
         self.delegate?.playerPlaybackWillStartFromBeginning?(self)
-        self.avplayer.seek(to: kCMTimeZero)
+        self.avplayer.seek(to: CMTime.zero)
         self.playFromCurrentTime()
     }
 
@@ -456,12 +460,12 @@ extension Player {
     @objc internal func playerItemDidPlayToEndTime(_ aNotification: NSNotification) {
         if self.playbackLoops == true {
             self.delegate?.playerWillComeThroughLoop?(self)
-            self.avplayer.seek(to: kCMTimeZero)
+            self.avplayer.seek(to: CMTime.zero)
         } else {
             if self.playbackFreezesAtEnd == true {
                 self.stop()
             } else {
-                self.avplayer.seek(to: kCMTimeZero, completionHandler: { _ in
+                self.avplayer.seek(to: CMTime.zero, completionHandler: { _ in
                     self.stop()
                 })
             }
@@ -475,8 +479,8 @@ extension Player {
     // UIApplication
 
     internal func addApplicationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidBecomeActive(_:)), name: .UIApplicationDidBecomeActive, object: UIApplication.shared)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: .UIApplicationDidEnterBackground, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleApplicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: UIApplication.shared)
     }
 
     internal func removeApplicationObservers() {
@@ -540,13 +544,13 @@ extension Player {
                     }
                 }
 
-                let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayerStatus.RawValue
+                let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayer.Status.RawValue
 
                 switch (status) {
-                case AVPlayerStatus.readyToPlay.rawValue:
+                case AVPlayer.Status.readyToPlay.rawValue:
                     self.playerView.playerLayer.player = self.avplayer
                     self.playerView.playerLayer.isHidden = false
-                case AVPlayerStatus.failed.rawValue:
+                case AVPlayer.Status.failed.rawValue:
                     self.playbackState = PlaybackState.failed
                 default:
                     break
@@ -560,13 +564,13 @@ extension Player {
                     }
                 }
 
-                let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayerStatus.RawValue
+                let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayer.Status.RawValue
 
                 switch (status) {
-                case AVPlayerStatus.readyToPlay.rawValue:
+                case AVPlayer.Status.readyToPlay.rawValue:
                     self.playerView.playerLayer.player = self.avplayer
                     self.playerView.playerLayer.isHidden = false
-                case AVPlayerStatus.failed.rawValue:
+                case AVPlayer.Status.failed.rawValue:
                     self.playbackState = PlaybackState.failed
                 default:
                     break
@@ -660,4 +664,9 @@ internal class PlayerView: UIView {
         self.playerLayer.backgroundColor = UIColor.black.cgColor
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }

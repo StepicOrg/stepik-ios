@@ -74,7 +74,7 @@ final class FullscreenCourseListViewController: UIViewController,
     }
 
     private func refreshSubmodule() {
-        self.submoduleViewController?.removeFromParentViewController()
+        self.submoduleViewController?.removeFromParent()
 
         let courseListAssembly = VerticalCourseListAssembly(
             type: self.courseListType,
@@ -83,7 +83,7 @@ final class FullscreenCourseListViewController: UIViewController,
             output: self.interactor
         )
         let courseListViewController = courseListAssembly.makeModule()
-        self.addChildViewController(courseListViewController)
+        self.addChild(courseListViewController)
 
         self.submoduleViewController = courseListViewController
 
@@ -101,9 +101,9 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel) {
         switch viewModel.state {
         case .error:
-            self.showPlaceholder(for: .empty)
-        case .empty:
             self.showPlaceholder(for: .connectionError)
+        case .empty:
+            self.showPlaceholder(for: .empty)
         }
     }
 

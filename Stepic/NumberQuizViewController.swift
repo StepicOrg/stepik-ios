@@ -44,14 +44,14 @@ class NumberQuizViewController: QuizViewController {
             }
         }
 
-        textField.borderStyle = UITextBorderStyle.roundedRect
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.keyboardType = UIKeyboardType.numbersAndPunctuation
         textField.textColor = UIColor.mainText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(NumberQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)
 
-        textField.addTarget(self, action: #selector(NumberQuizViewController.textFieldTextDidChange(textField:)), for: UIControlEvents.editingChanged)
+        textField.addTarget(self, action: #selector(NumberQuizViewController.textFieldTextDidChange(textField:)), for: UIControl.Event.editingChanged)
     }
 
     @objc func textFieldTextDidChange(textField: UITextField) {
@@ -112,7 +112,7 @@ class NumberQuizViewController: QuizViewController {
     }
 
     fileprivate func presentWrongFormatAlert() {
-        let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertController.Style.alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
             _ in

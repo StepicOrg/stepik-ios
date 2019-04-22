@@ -22,7 +22,7 @@ final class CourseInfoTabReviewsView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
@@ -177,7 +177,7 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
     }
 
     @available(iOS 11.0, *)
-    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.tableView.contentInsetAdjustmentBehavior
         }

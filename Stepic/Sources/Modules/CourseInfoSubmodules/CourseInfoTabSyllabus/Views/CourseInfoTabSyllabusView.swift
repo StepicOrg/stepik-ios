@@ -51,10 +51,10 @@ final class CourseInfoTabSyllabusView: UIView {
         tableView.separatorStyle = .none
 
         tableView.estimatedSectionHeaderHeight = 90.0
-        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionFooterHeight = 1.1
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
 
         tableView.tableHeaderView = self.headerView
@@ -210,7 +210,7 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
     }
 
     @available(iOS 11.0, *)
-    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.tableView.contentInsetAdjustmentBehavior
         }

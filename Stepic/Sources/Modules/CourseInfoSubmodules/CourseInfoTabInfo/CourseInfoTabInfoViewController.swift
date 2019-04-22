@@ -57,9 +57,9 @@ final class CourseInfoTabInfoViewController: UIViewController {
     deinit {
         self.playerVideoBoundsObservation = nil
         self.playerViewController.player?.pause()
-        self.playerViewController.willMove(toParentViewController: nil)
+        self.playerViewController.willMove(toParent: nil)
         self.playerViewController.view.removeFromSuperview()
-        self.playerViewController.removeFromParentViewController()
+        self.playerViewController.removeFromParent()
     }
 
     // MARK: ViewController lifecycle
@@ -113,14 +113,14 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
     func courseInfoTabInfoIntroVideoBlockViewRequestsVideoView(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) -> UIView {
-        self.addChildViewController(self.playerViewController)
+        self.addChild(self.playerViewController)
         return self.playerViewController.view
     }
 
     func courseInfoTabInfoIntroVideoBlockViewDidAddVideoView(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
-        self.playerViewController.didMove(toParentViewController: self)
+        self.playerViewController.didMove(toParent: self)
     }
 
     func courseInfoTabInfoIntroVideoBlockViewDidReceiveVideoURL(

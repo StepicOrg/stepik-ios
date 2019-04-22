@@ -35,7 +35,7 @@ final class ProgressCircleImage {
         circle.strokeColor = color.cgColor
         circle.lineWidth = lineWidth
         circle.strokeEnd = CGFloat(sectorPart)
-        circle.lineJoin = kCALineJoinRound
+        circle.lineJoin = .round
 
         circle.path = UIBezierPath(
             arcCenter: CGPoint(

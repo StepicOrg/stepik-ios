@@ -85,7 +85,7 @@ final class StreakActivityView: UIView {
             + self.appearance.descriptionInsets.top
             + self.appearance.descriptionInsets.bottom
         return CGSize(
-            width: UIViewNoIntrinsicMetric,
+            width: UIView.noIntrinsicMetric,
             height: padding + self.streakDescriptionLabel.intrinsicContentSize.height
         )
     }

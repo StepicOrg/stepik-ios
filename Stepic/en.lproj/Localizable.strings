@@ -519,7 +519,7 @@ PlaceholderLoginText = "Sorry, have we met before?\nTry to Sign In";
 PlaceholderLoginButton = "Sign In";
 PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
 PlaceholderEmptyNotificationsButton = "Go to Catalog";
-PlaceholderEmptySearchText = "Some free space to think";
+PlaceholderEmptySearchText = "There are no courses";
 PlaceholderEmptySearchButton = "Go to Catalog";
 LoadStories = "Load stories";
 

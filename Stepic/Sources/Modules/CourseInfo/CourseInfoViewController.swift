@@ -9,7 +9,7 @@ protocol CourseInfoScrollablePageViewProtocol: class {
     var contentOffset: CGPoint { get set }
 
     @available(iOS 11.0, *)
-    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior { get set }
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior { get set }
 }
 
 protocol CourseInfoViewControllerProtocol: class {
@@ -82,7 +82,7 @@ final class CourseInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.addChildViewController(self.pageViewController)
+        self.addChild(self.pageViewController)
         self.pageViewController.dataSource = self
         self.pageViewController.delegate = self
 

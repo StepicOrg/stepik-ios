@@ -49,6 +49,6 @@ extension LocalNotificationContentProvider {
 
     @available(iOS 10.0, *)
     var sound: UNNotificationSound {
-        return .default()
+        return .default
     }
 }

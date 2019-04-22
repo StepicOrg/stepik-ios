@@ -149,11 +149,11 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
 
         self.collectionView.register(
             viewClass: CollectionViewReusableView.self,
-            forSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter
         )
         self.collectionView.register(
             viewClass: CollectionViewReusableView.self,
-            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader
         )
 
         self.collectionView.isPagingEnabled = false
@@ -302,20 +302,20 @@ final class VerticalCourseListView: CourseListView,
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionFooter {
+        if kind == UICollectionView.elementKindSectionFooter {
             let view: CollectionViewReusableView = collectionView
                 .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionElementKindSectionFooter,
+                    ofKind: UICollectionView.elementKindSectionFooter,
                     for: indexPath
                 )
             if let footerView = self.paginationView {
                 view.attachView(footerView)
             }
             return view
-        } else if kind == UICollectionElementKindSectionHeader {
+        } else if kind == UICollectionView.elementKindSectionHeader {
             let view: CollectionViewReusableView = collectionView
                 .dequeueReusableSupplementaryView(
-                    ofKind: UICollectionElementKindSectionHeader,
+                    ofKind: UICollectionView.elementKindSectionHeader,
                     for: indexPath
                 )
             if let headerView = self.headerView {
@@ -368,7 +368,7 @@ final class HorizontalCourseListView: CourseListView {
         self.collectionView.dataSource = dataSource
 
         // Make scroll faster
-        self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        self.collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
 
     @available(*, unavailable)

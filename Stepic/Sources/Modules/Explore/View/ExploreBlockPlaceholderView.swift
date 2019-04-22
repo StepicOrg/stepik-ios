@@ -36,7 +36,7 @@ final class ExploreBlockPlaceholderView: UIView {
     override var intrinsicContentSize: CGSize {
         let insets = self.appearance.insets.top + self.appearance.insets.bottom
         return CGSize(
-            width: UIViewNoIntrinsicMetric,
+            width: UIView.noIntrinsicMetric,
             height: self.appearance.height + insets
         )
     }

@@ -107,13 +107,13 @@ final class TableInputTextView: UITextView {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.textViewDidEndEditing),
-            name: Foundation.Notification.Name.UITextViewTextDidEndEditing,
+            name: UITextView.textDidEndEditingNotification,
             object: self
         )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.textViewDidChange),
-            name: Foundation.Notification.Name.UITextViewTextDidChange,
+            name: UITextView.textDidChangeNotification,
             object: self
         )
     }

@@ -29,7 +29,7 @@ final class CourseInfoTabInfoView: UIView {
     }()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let view = UIActivityIndicatorView(style: .gray)
         view.hidesWhenStopped = true
         return view
     }()
@@ -83,8 +83,14 @@ final class CourseInfoTabInfoView: UIView {
 
         self.addTextBlockView(block: .timeToComplete, message: viewModel.timeToCompleteText)
         self.addTextBlockView(block: .language, message: viewModel.languageText)
-        self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
-        self.addTextBlockView(block: .certificateDetails, message: viewModel.certificateDetailsText)
+
+        if let certificateText = viewModel.certificateText {
+            self.addTextBlockView(block: .certificate, message: certificateText)
+        }
+
+        if let certificateDetailsText = viewModel.certificateDetailsText {
+            self.addTextBlockView(block: .certificateDetails, message: certificateDetailsText)
+        }
 
         // Redraw self cause geometry & sizes can be changed
         self.setNeedsLayout()
@@ -209,7 +215,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
     }
 
     @available(iOS 11.0, *)
-    var contentInsetAdjustmentBehavior: UIScrollViewContentInsetAdjustmentBehavior {
+    var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.scrollableStackView.contentInsetAdjustmentBehavior
         }

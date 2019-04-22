@@ -54,7 +54,7 @@ final class CourseListsCollectionViewController: UIViewController {
                 )
                 let viewController = assembly.makeModule()
                 assembly.moduleInput?.setOnlineStatus()
-                self.addChildViewController(viewController)
+                self.addChild(viewController)
 
                 let containerView = CourseListContainerViewFactory()
                     .makeHorizontalCoursesCollectionContainerView(
@@ -86,7 +86,7 @@ final class CourseListsCollectionViewController: UIViewController {
 
 extension CourseListsCollectionViewController: CourseListsCollectionViewControllerProtocol {
     func displayCourseLists(viewModel: CourseListsCollection.CourseListsLoad.ViewModel) {
-        self.childViewControllers.forEach { $0.removeFromParentViewController() }
+        self.children.forEach { $0.removeFromParent() }
         self.courseListsCollectionView?.removeAllBlocks()
         self.updateState(newState: viewModel.state)
     }

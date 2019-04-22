@@ -50,7 +50,7 @@ class StyledTabBarViewController: UITabBarController {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -25,7 +25,8 @@ class SearchQueriesPresenter {
     }
 
     func getSuggestions(query: String) {
-        let localSuggestions = [query.lowercased()] + persistentManager.getTop(for: query, count: localSuggestionsMaxCount)
+        let currentQuery = query.isEmpty ? [] : [query.lowercased()]
+        let localSuggestions = currentQuery + persistentManager.getTop(for: query, count: localSuggestionsMaxCount)
         self.view?.updateSuggestions(suggestions: localSuggestions)
         currentRequest?.cancel()
         self.view?.setState(state: .updating)

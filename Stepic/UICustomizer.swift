@@ -15,7 +15,7 @@ class UICustomizer: NSObject {
 
     func setCustomDownloadButton(_ button: PKDownloadButton, white: Bool = false) {
         button.startDownloadButton?.cleanDefaultAppearance()
-        button.startDownloadButton?.setBackgroundImage(white ? Images.downloadFromCloudWhite : Images.downloadFromCloud, for: UIControlState())
+        button.startDownloadButton?.setBackgroundImage(white ? Images.downloadFromCloudWhite : Images.downloadFromCloud, for: UIControl.State())
 
         if white {
             button.stopDownloadButton?.tintColor = UIColor.white
@@ -25,6 +25,6 @@ class UICustomizer: NSObject {
             button.pendingView.circleView.tintColor = UIColor.mainDark
         }
         button.downloadedButton?.cleanDefaultAppearance()
-        button.downloadedButton?.setBackgroundImage(white ? Images.deleteWhite : Images.delete, for: UIControlState())
+        button.downloadedButton?.setBackgroundImage(white ? Images.deleteWhite : Images.delete, for: UIControl.State())
     }
 }

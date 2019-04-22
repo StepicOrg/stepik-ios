@@ -137,7 +137,7 @@ class RegistrationViewController: UIViewController {
         super.viewDidDisappear(animated)
 
         // Reset to default value (see AppDelegate)
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 24
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -204,7 +204,7 @@ class RegistrationViewController: UIViewController {
             switch detection.type {
             case .tag(let tag):
                 if tag.name == "a", let href = tag.attributes["href"] {
-                    tosLabel.addLink(to: URL(string: href), with: detection.range.nsRange)
+                    tosLabel.addLink(to: URL(string: href), with: NSRange(detection.range, in: styledText.string))
                 }
             default: break
             }
@@ -227,7 +227,7 @@ extension RegistrationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.tap, parameters: nil)
         // 24 - default value in app (see AppDelegate), 64 - offset with button
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = textField == passwordTextField ? 64 : 24
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = textField == passwordTextField ? 64 : 24
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

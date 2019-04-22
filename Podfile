@@ -6,15 +6,15 @@ inhibit_all_warnings!
 use_frameworks!
 
 def shared_pods
-    pod 'Alamofire', '4.7.3'
-    pod 'Atributika', '4.6.1'
+    pod 'Alamofire', '4.8.0'
+    pod 'Atributika', '4.8.2'
     pod 'SwiftyJSON', '4.1.0'
     pod 'SDWebImage', '4.4.2'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Fabric', '1.7.11'
     pod 'Crashlytics', '3.10.7'
     pod 'DeviceKit', '1.10.0'
-    pod 'PromiseKit', '6.3.4'
+    pod 'PromiseKit', '6.8.4'
     pod 'SwiftLint', '0.31.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
@@ -27,7 +27,7 @@ def all_pods
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
     pod 'YandexMobileMetrica/Dynamic', '3.2.0'
 
-    pod 'SnapKit', '4.0.0'
+    pod 'SnapKit', '4.2.0'
     
     pod 'FirebaseCore', '5.1.0'
     pod 'FirebaseMessaging' , '3.1.0'
@@ -38,8 +38,7 @@ def all_pods
         
     pod 'BEMCheckBox', '1.4.1'
 
-    # actual version - 6.x, we should test it before update
-    pod 'IQKeyboardManagerSwift', '5.0.8'
+    pod 'IQKeyboardManagerSwift', '6.2.1'
 
     pod 'Kanna', '4.0.1'
     pod 'CRToast', '0.0.9'
@@ -51,25 +50,25 @@ def all_pods
     
     pod 'Presentr', '1.3.2'
     
-    pod 'Agrume', :git => 'https://github.com/Ostrenkiy/Agrume.git', :branch => 'feature/single-horizontal-dismiss'
-    pod 'Highlightr', '2.0.1'
+    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
+    pod 'Highlightr', '2.1.0'
     pod 'RFKeyboardToolbar', '1.3'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.0'
-    pod 'Koloda', '4.3.1'
-    pod 'Charts', '3.1.1'
+    pod 'Koloda', '4.7'
+    pod 'Charts', '3.2.2'
     pod 'EasyTipView', '2.0.1'
     pod 'ActionSheetPicker-3.0', '2.3.0'
-    pod 'NotificationBannerSwift', '1.6.3'
+    pod 'NotificationBannerSwift', '2.0.1'
     pod 'Nuke', '7.3.2'
-    pod 'STRegex', '1.1.0'
+    pod 'STRegex', '2.0.0'
     pod 'Pageboy', '3.0.1' 
     pod 'Branch', '0.25.5'
 end
 
 def testing_pods
     pod 'Quick', '1.3.1'
-    pod 'Nimble', '7.1.3'
+    pod 'Nimble', '8.0.1'
 end
 
 def adaptive_pods
@@ -154,7 +153,6 @@ target 'ExamEGERussian' do
     
     all_pods
     pod 'AlamofireNetworkActivityIndicator', '2.2.1'
-    pod 'PromiseKit/Alamofire', '6.3.4'
 
     target 'ExamEGERussianTests' do
         inherit! :search_paths

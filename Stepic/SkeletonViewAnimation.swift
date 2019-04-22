@@ -27,7 +27,7 @@ enum SkeletonViewAnimation {
             let animationGroup = CAAnimationGroup()
             animationGroup.animations = [startPoint, endPoint]
             animationGroup.duration = 1.5
-            animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+            animationGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
             animationGroup.repeatCount = .infinity
             animationGroup.isRemovedOnCompletion = false
 
