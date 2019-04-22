@@ -15,6 +15,7 @@ enum CourseListsCollection {
             var state: ViewControllerState
         }
     }
+
     /// Present collection in fullscreen
     enum FullscreenCourseListModulePresentation {
         struct Request {

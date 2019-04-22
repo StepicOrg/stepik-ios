@@ -8,6 +8,7 @@ protocol BaseExploreViewControllerProtocol: class {
     func displayCourseSyllabus(viewModel: BaseExplore.CourseSyllabusPresentation.ViewModel)
     func displayLastStep(viewModel: BaseExplore.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: BaseExplore.AuthorizationPresentation.ViewModel)
+    func displayPaidCourseBuying(viewModel: BaseExplore.PaidCourseBuyingPresentation.ViewModel)
 }
 
 protocol SubmoduleType: UniqueIdentifiable {
@@ -167,5 +168,15 @@ extension BaseExploreViewController: BaseExploreViewControllerProtocol {
 
     func displayAuthorization(viewModel: BaseExplore.AuthorizationPresentation.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+    }
+
+    func displayPaidCourseBuying(viewModel: BaseExplore.PaidCourseBuyingPresentation.ViewModel) {
+        WebControllerManager.sharedManager.presentWebControllerWithURLString(
+            viewModel.urlPath,
+            inController: self,
+            withKey: "paid_course",
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }

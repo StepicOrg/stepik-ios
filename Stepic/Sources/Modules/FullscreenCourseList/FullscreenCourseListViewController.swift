@@ -6,6 +6,7 @@ protocol FullscreenCourseListViewControllerProtocol: class {
     func displayLastStep(viewModel: FullscreenCourseList.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: FullscreenCourseList.PresentAuthorization.ViewModel)
     func displayPlaceholder(viewModel: FullscreenCourseList.PresentPlaceholder.ViewModel)
+    func displayPaidCourseBuying(viewModel: FullscreenCourseList.PaidCourseBuyingPresentation.ViewModel)
 }
 
 final class FullscreenCourseListViewController: UIViewController,
@@ -133,6 +134,16 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
 
     func displayAuthorization(viewModel: FullscreenCourseList.PresentAuthorization.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+    }
+
+    func displayPaidCourseBuying(viewModel: FullscreenCourseList.PaidCourseBuyingPresentation.ViewModel) {
+        WebControllerManager.sharedManager.presentWebControllerWithURLString(
+            viewModel.urlPath,
+            inController: self,
+            withKey: "paid_course",
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }
 

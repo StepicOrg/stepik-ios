@@ -48,4 +48,8 @@ final class FullscreenCourseListInteractor: FullscreenCourseListInteractorProtoc
     func presentError(sourceModule: CourseListInputProtocol) {
         self.presenter.presentPlaceholder(response: .init(state: .error))
     }
+
+    func presentPaidCourseInfo(course: Course) {
+        self.presenter.presentPaidCourseBuying(response: .init(course: course))
+    }
 }

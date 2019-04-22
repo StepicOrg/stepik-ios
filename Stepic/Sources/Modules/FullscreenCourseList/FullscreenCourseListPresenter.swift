@@ -6,6 +6,7 @@ protocol FullscreenCourseListPresenterProtocol {
     func presentLastStep(response: FullscreenCourseList.LastStepPresentation.Response)
     func presentAuthorization(response: FullscreenCourseList.PresentAuthorization.Response)
     func presentPlaceholder(response: FullscreenCourseList.PresentPlaceholder.Response)
+    func presentPaidCourseBuying(response: FullscreenCourseList.PaidCourseBuyingPresentation.Response)
 }
 
 final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol {
@@ -34,5 +35,10 @@ final class FullscreenCourseListPresenter: FullscreenCourseListPresenterProtocol
 
     func presentPlaceholder(response: FullscreenCourseList.PresentPlaceholder.Response) {
         self.viewController?.displayPlaceholder(viewModel: .init(state: response.state))
+    }
+
+    func presentPaidCourseBuying(response: FullscreenCourseList.PaidCourseBuyingPresentation.Response) {
+        let path = "https://stepik.org/course/\(response.course.id)"
+        self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
     }
 }

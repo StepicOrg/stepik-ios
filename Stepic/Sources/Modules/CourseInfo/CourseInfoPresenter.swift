@@ -9,6 +9,7 @@ protocol CourseInfoPresenterProtocol {
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
+    func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -83,6 +84,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response) {
         self.viewController?.displayAuthorization(viewModel: .init())
+    }
+
+    func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response) {
+        let path = "https://stepik.org/course/\(response.course.id)"
+        self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
     }
 
     private func makeProgressViewModel(progress: Progress) -> CourseInfoProgressViewModel {
