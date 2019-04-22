@@ -133,13 +133,10 @@ final class CourseInfoHeaderView: UIView {
 
         self.verifiedSignView.isHidden = !viewModel.isVerified
 
-        if viewModel.isEnrolled {
-            self.actionButton.mode = .default
-            self.actionButton.setTitle(NSLocalizedString("WidgetButtonLearn", comment: ""), for: .normal)
-        } else {
-            self.actionButton.mode = .callToAction
-            self.actionButton.setTitle(NSLocalizedString("WidgetButtonJoin", comment: ""), for: .normal)
-        }
+        self.actionButton.mode = viewModel.buttonDescription.isCallToAction
+            ? .callToAction
+            : .default
+        self.actionButton.setTitle(viewModel.buttonDescription.title, for: .normal)
     }
 
     // MARK: Private methods

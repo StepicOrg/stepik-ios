@@ -119,7 +119,28 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
             progress: progress,
             isVerified: (course.readiness ?? 0) > 0.9,
-            isEnrolled: course.enrolled
+            isEnrolled: course.enrolled,
+            buttonDescription: self.makeButtonDescription(course: course)
+        )
+    }
+
+    private func makeButtonDescription(course: Course) -> CourseInfoHeaderViewModel.ButtonDescription {
+        let isEnrolled = course.enrolled
+        let title: String = {
+            if isEnrolled {
+                return NSLocalizedString("WidgetButtonLearn", comment: "")
+            }
+
+            if course.isPaid, let displayPrice = course.displayPrice {
+                return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+            }
+
+            return NSLocalizedString("WidgetButtonJoin", comment: "")
+        }()
+
+        return CourseInfoHeaderViewModel.ButtonDescription(
+            title: title,
+            isCallToAction: !isEnrolled
         )
     }
 }

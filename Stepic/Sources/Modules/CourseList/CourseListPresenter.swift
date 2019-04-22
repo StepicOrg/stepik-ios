@@ -96,10 +96,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
             ratingLabelText = FormatterHelper.averageRating(averageRating)
         }
 
-        let primaryButtonText = self.makePrimaryButtonDescription(
-            isEnrolled: course.enrolled,
-            isAuthorized: isAuthorized
-        )
+        let primaryButtonText = self.makePrimaryButtonDescription(course: course)
         let secondaryButtonText = self.makeSecondaryButtonDescription(
             isEnrolled: course.enrolled,
             isAdaptive: isAdaptive
@@ -118,15 +115,23 @@ final class CourseListPresenter: CourseListPresenterProtocol {
         )
     }
 
-    func makePrimaryButtonDescription(isEnrolled: Bool, isAuthorized: Bool) -> CourseWidgetViewModel.ButtonDescription {
-        let joinTitle = NSLocalizedString("WidgetButtonJoin", comment: "")
+    func makePrimaryButtonDescription(course: Course) -> CourseWidgetViewModel.ButtonDescription {
+        let isEnrolled = course.enrolled
+        let title: String = {
+            if isEnrolled {
+                return NSLocalizedString("WidgetButtonLearn", comment: "")
+            }
 
-        let title = isEnrolled && isAuthorized
-            ? NSLocalizedString("WidgetButtonLearn", comment: "")
-            : joinTitle
+            if course.isPaid, let displayPrice = course.displayPrice {
+                return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+            }
+
+            return NSLocalizedString("WidgetButtonJoin", comment: "")
+        }()
+
         return CourseWidgetViewModel.ButtonDescription(
             title: title,
-            isCallToAction: !isEnrolled || !isAuthorized
+            isCallToAction: !isEnrolled
         )
     }
 

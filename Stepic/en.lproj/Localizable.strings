@@ -342,6 +342,7 @@ WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
+WidgetButtonBuy = "Buy with %@";
 WidgetAdaptiveLabel = "ADAPTIVE";
 
 CanBeChangedInSettings = "It can be changed in settings.";
