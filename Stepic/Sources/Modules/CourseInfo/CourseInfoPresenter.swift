@@ -39,6 +39,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         )
 
         let viewModel = CourseInfo.LessonPresentation.ViewModel(
+            unitID: response.unitID,
             initObjects: initObjects,
             initIDs: initIDs
         )

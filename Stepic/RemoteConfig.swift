@@ -14,6 +14,7 @@ enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
     case adaptiveBackendUrl = "adaptive_backend_url"
     case supportedInAdaptiveModeCourses = "supported_adaptive_courses_ios"
+    case newLessonAvailable = "new_lesson_available_ios"
 }
 
 class RemoteConfig {
@@ -28,7 +29,8 @@ class RemoteConfig {
     lazy var appDefaults: [String: NSObject] = [
         RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
         RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
-        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject
+        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject,
+        RemoteConfigKeys.newLessonAvailable.rawValue: true as NSObject
     ]
 
     enum ShowStreaksNotificationTrigger: String {
@@ -49,6 +51,10 @@ class RemoteConfig {
         }
 
         return configValue
+    }
+
+    var newLessonAvailable: Bool {
+        return FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.newLessonAvailable.rawValue).boolValue
     }
 
     var supportedInAdaptiveModeCourses: [Int] {

@@ -118,22 +118,35 @@ class StepsControllerDeepLinkRouter: NSObject {
             fetchOrLoadCourse(for: section)
         }.done { course in
             if lesson.isPublic || course.enrolled {
-                let lessonAssemblyWithoutUnit = LessonLegacyAssembly(
-                    initObjects: (lesson: lesson, startStepId: stepId - 1, context: .lesson),
-                    initIDs: nil
-                )
+                let lessonAssemblyWithoutUnit: Assembly = {
+                    if RemoteConfig.shared.newLessonAvailable {
+                        return NewLessonAssembly(initialContext: .lesson(id: lesson.id))
+                    } else {
+                        return LessonLegacyAssembly(
+                            initObjects: (lesson: lesson, startStepId: stepId - 1, context: .lesson),
+                            initIDs: nil
+                        )
+                    }
+                }()
 
                 var controllersStack: [UIViewController] = []
                 if includeUnit {
                     controllersStack.append(CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule())
 
                     if let unit = currentUnit {
-                        controllersStack.append(
-                            LessonLegacyAssembly(
-                                initObjects: nil,
-                                initIDs: (stepId: lesson.stepsArray[stepId - 1], unitId: unit.id)
-                            ).makeModule()
-                        )
+                        let lessonAssembly: Assembly = {
+                            if RemoteConfig.shared.newLessonAvailable {
+                                // TODO: Pass step
+                                return NewLessonAssembly(initialContext: .unit(id: unit.id))
+                            } else {
+                                return LessonLegacyAssembly(
+                                    initObjects: nil,
+                                    initIDs: (stepId: lesson.stepsArray[stepId - 1], unitId: unit.id)
+                                )
+                            }
+                        }()
+
+                        controllersStack.append(lessonAssembly.makeModule())
                     } else {
                         controllersStack.append(lessonAssemblyWithoutUnit.makeModule())
                     }

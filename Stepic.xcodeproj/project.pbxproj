@@ -3754,6 +3754,7 @@
 		2CD1E35B2114B0D0007AA7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C59F03020EB8AC900666EE0 /* Assets.xcassets */; };
 		2CD4358A21245A13005A5B19 /* AuthGreetingPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4358921245A13005A5B19 /* AuthGreetingPresenterProtocol.swift */; };
 		2CD4358C21245A26005A5B19 /* AuthGreetingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4358B21245A26005A5B19 /* AuthGreetingPresenter.swift */; };
+		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
 		2CD7995821077CBA0054D098 /* KnowledgeGraphBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7993E21077CB90054D098 /* KnowledgeGraphBuilder.swift */; };
 		2CD7995921077CBA0054D098 /* AbstractGraphBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7993F21077CB90054D098 /* AbstractGraphBuilder.swift */; };
 		2CD7995A21077CBA0054D098 /* BaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7994121077CB90054D098 /* BaseAssembly.swift */; };
@@ -5894,6 +5895,7 @@
 		2CD1CAA121FD1B2100B9E2DD /* DownloadTreeNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTreeNodeTests.swift; sourceTree = "<group>"; };
 		2CD4358921245A13005A5B19 /* AuthGreetingPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingPresenterProtocol.swift; sourceTree = "<group>"; };
 		2CD4358B21245A26005A5B19 /* AuthGreetingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGreetingPresenter.swift; sourceTree = "<group>"; };
+		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
 		2CD7993E21077CB90054D098 /* KnowledgeGraphBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnowledgeGraphBuilder.swift; sourceTree = "<group>"; };
 		2CD7993F21077CB90054D098 /* AbstractGraphBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractGraphBuilder.swift; sourceTree = "<group>"; };
 		2CD7994121077CB90054D098 /* BaseAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAssembly.swift; sourceTree = "<group>"; };
@@ -6581,7 +6583,6 @@
 				9E9AE8EC89958246F2E1DB67 /* NewLessonView.swift */,
 				8A79613CB13738DA1A5BA184 /* InputOutput */,
 			);
-			name = NewLesson;
 			path = NewLesson;
 			sourceTree = "<group>";
 		};
@@ -10239,6 +10240,14 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		2CD462E8226F424A004E4725 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2CD462E9226F4279004E4725 /* FetchResult.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		2CD7993B21077CB90054D098 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -10723,6 +10732,7 @@
 				62E982AE7C8995C2C6F1A430 /* Protocols */,
 				62E986D974D797A3BDF8DA59 /* Extensions */,
 				62E9869C94289A9B485281FD /* Helpers */,
+				2CD462E8226F424A004E4725 /* Common */,
 				62E98438A4F73FAEFB2D581B /* Controllers */,
 			);
 			path = Sources;
@@ -11466,7 +11476,6 @@
 				43CAED799AE9C40EBDD1A823 /* NewLessonInputProtocol.swift */,
 				1333DD65F19C3B1C3B026FCD /* NewLessonOutputProtocol.swift */,
 			);
-			name = InputOutput;
 			path = InputOutput;
 			sourceTree = "<group>";
 		};
@@ -15072,6 +15081,7 @@
 				087585C01FB524C20047A269 /* ContentLanguage.swift in Sources */,
 				08901E631CD0EDB300D94613 /* RemoteVersionManager.swift in Sources */,
 				0828FF7C1BC7F9D7000AFEA7 /* Unit+CoreDataProperties.swift in Sources */,
+				2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */,
 				0800B81B1D06DC1B006C987E /* Comment.swift in Sources */,
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				2CA1001F2174BE49003775CB /* StreakLocalNotificationContentProvider.swift in Sources */,
