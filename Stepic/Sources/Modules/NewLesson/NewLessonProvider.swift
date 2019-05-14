@@ -4,6 +4,7 @@ import PromiseKit
 protocol NewLessonProviderProtocol {
     func fetchLesson(id: Lesson.IdType) -> Promise<FetchResult<Lesson?>>
     func fetchLessonAndUnit(unitID: Unit.IdType) -> Promise<(FetchResult<Unit?>, FetchResult<Lesson?>)>
+    func fetchSteps(ids: [Step.IdType]) -> Promise<FetchResult<[Step]?>>
 }
 
 final class NewLessonProvider: NewLessonProviderProtocol {
@@ -11,17 +12,23 @@ final class NewLessonProvider: NewLessonProviderProtocol {
     private let lessonsNetworkService: LessonsNetworkServiceProtocol
     private let unitsPersistenceService: UnitsPersistenceServiceProtocol
     private let unitsNetworkService: UnitsNetworkServiceProtocol
+    private let stepsPersistenceService: StepsPersistenceServiceProtocol
+    private let stepsNetworkService: StepsNetworkServiceProtocol
 
     init(
         lessonsPersistenceService: LessonsPersistenceServiceProtocol,
         lessonsNetworkService: LessonsNetworkServiceProtocol,
         unitsPersistenceService: UnitsPersistenceServiceProtocol,
-        unitsNetworkService: UnitsNetworkServiceProtocol
+        unitsNetworkService: UnitsNetworkServiceProtocol,
+        stepsPersistenceService: StepsPersistenceServiceProtocol,
+        stepsNetworkService: StepsNetworkServiceProtocol
     ) {
         self.lessonsPersistenceService = lessonsPersistenceService
         self.lessonsNetworkService = lessonsNetworkService
         self.unitsPersistenceService = unitsPersistenceService
         self.unitsNetworkService = unitsNetworkService
+        self.stepsPersistenceService = stepsPersistenceService
+        self.stepsNetworkService = stepsNetworkService
     }
 
     // MARK: Public API
@@ -29,11 +36,11 @@ final class NewLessonProvider: NewLessonProviderProtocol {
     func fetchLesson(id: Lesson.IdType) -> Promise<FetchResult<Lesson?>> {
         let persistenceServicePromise = self.guaranteeWithFallback(
             self.lessonsPersistenceService.fetch(ids: [id]),
-            fallback: []
+            fallback: nil
         )
         let networkServicePromise = self.guaranteeWithFallback(
             self.lessonsPersistenceService.fetch(ids: [id]),
-            fallback: []
+            fallback: nil
         )
 
         return Promise { seal in
@@ -41,12 +48,12 @@ final class NewLessonProvider: NewLessonProviderProtocol {
                 fulfilled: persistenceServicePromise,
                 networkServicePromise
             ).then { cachedLessons, remoteLessons -> Promise<FetchResult<Lesson?>> in
-                if let remoteLesson = remoteLessons.first {
+                if let remoteLesson = remoteLessons?.first {
                     let result = FetchResult<Lesson?>(value: remoteLesson, source: .remote)
                     return Promise.value(result)
                 }
 
-                let result = FetchResult<Lesson?>(value: cachedLessons.first, source: .cache)
+                let result = FetchResult<Lesson?>(value: cachedLessons?.first, source: .cache)
                 return Promise.value(result)
             }.done { result in
                 seal.fulfill(result)
@@ -57,12 +64,21 @@ final class NewLessonProvider: NewLessonProviderProtocol {
     }
 
     func fetchLessonAndUnit(unitID: Unit.IdType) -> Promise<(FetchResult<Unit?>, FetchResult<Lesson?>)> {
+        let persistenceServicePromise = self.guaranteeWithFallback(
+            self.unitsPersistenceService.fetch(ids: [unitID]),
+            fallback: nil
+        )
+        let networkServicePromise = self.guaranteeWithFallback(
+            self.unitsNetworkService.fetch(ids: [unitID]),
+            fallback: nil
+        )
+
         return Promise { seal in
             when(
-                fulfilled: self.unitsPersistenceService.fetch(id: unitID),
-                self.unitsNetworkService.fetch(id: unitID)
-            ).then { cachedUnit, remoteUnit -> Promise<(FetchResult<Unit?>, FetchResult<Lesson?>)> in
-                if let remoteUnit = remoteUnit {
+                fulfilled: persistenceServicePromise,
+                networkServicePromise
+            ).then { cachedUnits, remoteUnits -> Promise<(FetchResult<Unit?>, FetchResult<Lesson?>)> in
+                if let remoteUnit = remoteUnits?.first {
                     let result = FetchResult<Unit?>(value: remoteUnit, source: .remote)
                     return when(
                         fulfilled: Promise.value(result),
@@ -70,7 +86,7 @@ final class NewLessonProvider: NewLessonProviderProtocol {
                     )
                 }
 
-                if let cachedUnit = cachedUnit {
+                if let cachedUnit = cachedUnits?.first {
                     let result = FetchResult<Unit?>(value: cachedUnit, source: .cache)
                     return when(
                         fulfilled: Promise.value(result),
@@ -89,12 +105,43 @@ final class NewLessonProvider: NewLessonProviderProtocol {
         }
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
+    func fetchSteps(ids: [Step.IdType]) -> Promise<FetchResult<[Step]?>> {
+        let persistenceServicePromise = self.guaranteeWithFallback(
+            self.stepsPersistenceService.fetch(ids: ids),
+            fallback: nil
+        )
+        let networkServicePromise = self.guaranteeWithFallback(
+            self.stepsNetworkService.fetch(ids: ids),
+            fallback: nil
+        )
+
+        return Promise { seal in
+            when(
+                fulfilled: persistenceServicePromise,
+                networkServicePromise
+            ).then { cachedSteps, remoteSteps -> Promise<FetchResult<[Step]?>> in
+                if let remoteSteps = remoteSteps {
+                    let result = FetchResult<[Step]?>(value: remoteSteps, source: .remote)
+                    return Promise.value(result)
+                }
+
+                let result = FetchResult<[Step]?>(value: cachedSteps, source: .cache)
+                return Promise.value(result)
+            }.done { result in
+                seal.fulfill(result)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
     // MARK: Private API
 
     private func guaranteeWithFallback<U: Thenable>(
         _ thenable: U,
-        fallback: U.T
-    ) -> Guarantee<U.T> {
+        fallback: U.T?
+    ) -> Guarantee<U.T?> {
         return Guarantee { seal in
             thenable.done { result in
                 seal(result)

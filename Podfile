@@ -57,12 +57,12 @@ def all_pods
     pod 'lottie-ios', '2.5.0'
     pod 'Koloda', '4.7'
     pod 'Charts', '3.2.2'
-    pod 'EasyTipView', '2.0.1'
+    pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.3.0'
     pod 'NotificationBannerSwift', '2.0.1'
     pod 'Nuke', '7.3.2'
     pod 'STRegex', '2.0.0'
-    pod 'Pageboy', '3.0.1' 
+    pod 'Tabman', '2.4.1' 
     pod 'Branch', '0.25.5'
 end
 

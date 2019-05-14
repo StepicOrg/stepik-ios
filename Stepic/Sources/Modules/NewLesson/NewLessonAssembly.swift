@@ -16,7 +16,9 @@ final class NewLessonAssembly: Assembly {
             lessonsPersistenceService: LessonsPersistenceService(),
             lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
             unitsPersistenceService: UnitsPersistenceService(),
-            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI())
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            stepsPersistenceService: StepsPersistenceService(),
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
         )
         let presenter = NewLessonPresenter()
         let interactor = NewLessonInteractor(

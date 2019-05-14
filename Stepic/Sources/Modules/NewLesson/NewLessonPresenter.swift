@@ -1,11 +1,44 @@
 import UIKit
 
 protocol NewLessonPresenterProtocol {
-    func presentSomeActionResult(response: NewLesson.SomeAction.Response)
+    func presentLesson(response: NewLesson.LessonLoad.Response)
 }
 
 final class NewLessonPresenter: NewLessonPresenterProtocol {
     weak var viewController: NewLessonViewControllerProtocol?
 
-    func presentSomeActionResult(response: NewLesson.SomeAction.Response) { }
+    func presentLesson(response: NewLesson.LessonLoad.Response) {
+        let viewModel: NewLesson.LessonLoad.ViewModel
+
+        switch response.data {
+        case .failure:
+            viewModel = .init(state: .error)
+        case .success(let result):
+            viewModel = .init(state: .result(data: self.makeViewModel(lesson: result.0, steps: result.1)))
+        }
+
+        self.viewController?.displayLesson(viewModel: viewModel)
+    }
+
+    // MAKE: Private API
+
+    private func makeViewModel(lesson: Lesson, steps: [Step]) -> NewLessonViewModel {
+        let lessonTitle = lesson.title
+        let steps: [NewLessonViewModel.StepDescription] = steps.map { step in
+            let iconImage: UIImage? = {
+                switch step.block.name {
+                case "video":
+                    return UIImage(named: "video_step_icon")
+                case "text":
+                    return UIImage(named: "theory_step_icon")
+                case "code", "dataset", "admin", "sql":
+                    return UIImage(named: "code_step_icon")
+                default:
+                    return UIImage(named: "quiz_step_icon")
+                }
+            }()
+            return (id: step.id, iconImage: iconImage ?? UIImage())
+        }
+        return NewLessonViewModel(lessonTitle: lessonTitle, steps: steps)
+    }
 }
