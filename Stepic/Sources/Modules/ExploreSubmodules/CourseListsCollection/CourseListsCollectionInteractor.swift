@@ -86,4 +86,8 @@ extension CourseListsCollectionInteractor: CourseListOutputProtocol {
 
     func presentError(sourceModule: CourseListInputProtocol) {
     }
+
+    func presentPaidCourseInfo(course: Course) {
+        self.moduleOutput?.presentPaidCourseInfo(course: course)
+    }
 }

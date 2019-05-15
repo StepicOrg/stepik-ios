@@ -189,6 +189,13 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 )
             )
         } else {
+            // Paid course -> open web view
+            if targetCourse.isPaid {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                self.moduleOutput?.presentPaidCourseInfo(course: targetCourse)
+                return
+            }
+
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: targetCourse, source: .widget).done { course in
                 self.currentCourses[targetIndex].1 = course

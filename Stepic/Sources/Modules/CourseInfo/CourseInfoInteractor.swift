@@ -181,6 +181,13 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
                 )
             )
         } else {
+            // Paid course -> open web page
+            if course.isPaid {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                self.presenter.presentPaidCourseBuying(response: .init(course: course))
+                return
+            }
+
             // Unenrolled course -> join, open last step
             self.courseSubscriber.join(course: course, source: .preview).done { course in
                 // Refresh course
