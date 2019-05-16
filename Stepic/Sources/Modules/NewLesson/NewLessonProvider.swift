@@ -39,7 +39,7 @@ final class NewLessonProvider: NewLessonProviderProtocol {
             fallback: nil
         )
         let networkServicePromise = self.guaranteeWithFallback(
-            self.lessonsPersistenceService.fetch(ids: [id]),
+            self.lessonsNetworkService.fetch(ids: [id]),
             fallback: nil
         )
 

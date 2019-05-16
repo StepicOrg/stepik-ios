@@ -8,17 +8,27 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
     private let presenter: NewLessonPresenterProtocol
     private let provider: NewLessonProviderProtocol
+    private let unitNavigationService: UnitNavigationServiceProtocol
 
     private var currentLesson: Lesson?
-    private var currentUnit: Unit?
+
+    private var previousUnit: Unit?
+    private var currentUnit: Unit? {
+        didSet {
+            self.refreshAdjacentUnits()
+        }
+    }
+    private var nextUnit: Unit?
 
     init(
         initialContext: NewLesson.Context,
         presenter: NewLessonPresenterProtocol,
-        provider: NewLessonProviderProtocol
+        provider: NewLessonProviderProtocol,
+        unitNavigationService: UnitNavigationServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.unitNavigationService = unitNavigationService
 
         self.refresh(context: initialContext)
     }
@@ -55,6 +65,40 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
             DispatchQueue.main.async {
                 self.presenter.presentLesson(response: .init(data: .success((lesson, steps))))
+            }
+        }.cauterize()
+    }
+
+    private func refreshAdjacentUnits() {
+        guard let unit = self.currentUnit else {
+            return
+        }
+
+        self.unitNavigationService.findUnitForNavigation(
+            from: unit.id,
+            direction: .next
+        ).done(on: DispatchQueue.global(qos: .userInitiated)) { [weak self] nextUnit in
+            guard let nextUnit = nextUnit, let strongSelf = self else {
+                return
+            }
+
+            if unit.id == strongSelf.currentUnit?.id {
+                strongSelf.nextUnit = nextUnit
+                print(nextUnit, "next")
+            }
+        }.cauterize()
+
+        self.unitNavigationService.findUnitForNavigation(
+            from: unit.id,
+            direction: .previous
+        ).done(on: DispatchQueue.global(qos: .userInitiated)) { [weak self] previousUnit in
+            guard let previousUnit = previousUnit, let strongSelf = self else {
+                return
+            }
+
+            if unit.id == strongSelf.currentUnit?.id {
+                strongSelf.previousUnit = previousUnit
+                print(previousUnit, "previous")
             }
         }.cauterize()
     }

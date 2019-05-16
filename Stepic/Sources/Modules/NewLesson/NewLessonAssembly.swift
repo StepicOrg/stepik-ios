@@ -12,6 +12,15 @@ final class NewLessonAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
+        let unitNavigationService = UnitNavigationService(
+            sectionsPersistenceService: SectionsPersistenceService(),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            unitsPersistenceService: UnitsPersistenceService(),
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI())
+        )
+
         let provider = NewLessonProvider(
             lessonsPersistenceService: LessonsPersistenceService(),
             lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
@@ -24,7 +33,8 @@ final class NewLessonAssembly: Assembly {
         let interactor = NewLessonInteractor(
             initialContext: self.initialContext,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            unitNavigationService: unitNavigationService
         )
         let viewController = NewLessonViewController(interactor: interactor)
 
