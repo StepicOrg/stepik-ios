@@ -37,6 +37,7 @@ final class NewLessonAssembly: Assembly {
             unitNavigationService: unitNavigationService
         )
         let viewController = NewLessonViewController(interactor: interactor)
+        viewController.hidesBottomBarWhenPushed = true
 
         presenter.viewController = viewController
         self.moduleInput = interactor

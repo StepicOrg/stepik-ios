@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use ContentProcessor instead")
 struct Scripts {
 
     fileprivate static func loadScriptWithKey(_ key: String) -> String {

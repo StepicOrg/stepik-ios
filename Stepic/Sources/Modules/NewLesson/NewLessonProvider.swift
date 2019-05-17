@@ -34,14 +34,8 @@ final class NewLessonProvider: NewLessonProviderProtocol {
     // MARK: Public API
 
     func fetchLesson(id: Lesson.IdType) -> Promise<FetchResult<Lesson?>> {
-        let persistenceServicePromise = self.guaranteeWithFallback(
-            self.lessonsPersistenceService.fetch(ids: [id]),
-            fallback: nil
-        )
-        let networkServicePromise = self.guaranteeWithFallback(
-            self.lessonsNetworkService.fetch(ids: [id]),
-            fallback: nil
-        )
+        let persistenceServicePromise = Guarantee(self.lessonsPersistenceService.fetch(ids: [id]), fallback: nil)
+        let networkServicePromise = Guarantee(self.lessonsNetworkService.fetch(ids: [id]), fallback: nil)
 
         return Promise { seal in
             when(
@@ -64,14 +58,8 @@ final class NewLessonProvider: NewLessonProviderProtocol {
     }
 
     func fetchLessonAndUnit(unitID: Unit.IdType) -> Promise<(FetchResult<Unit?>, FetchResult<Lesson?>)> {
-        let persistenceServicePromise = self.guaranteeWithFallback(
-            self.unitsPersistenceService.fetch(ids: [unitID]),
-            fallback: nil
-        )
-        let networkServicePromise = self.guaranteeWithFallback(
-            self.unitsNetworkService.fetch(ids: [unitID]),
-            fallback: nil
-        )
+        let persistenceServicePromise = Guarantee(self.unitsPersistenceService.fetch(ids: [unitID]), fallback: nil)
+        let networkServicePromise = Guarantee(self.unitsNetworkService.fetch(ids: [unitID]), fallback: nil)
 
         return Promise { seal in
             when(
@@ -107,14 +95,8 @@ final class NewLessonProvider: NewLessonProviderProtocol {
 
     // swiftlint:disable:next discouraged_optional_collection
     func fetchSteps(ids: [Step.IdType]) -> Promise<FetchResult<[Step]?>> {
-        let persistenceServicePromise = self.guaranteeWithFallback(
-            self.stepsPersistenceService.fetch(ids: ids),
-            fallback: nil
-        )
-        let networkServicePromise = self.guaranteeWithFallback(
-            self.stepsNetworkService.fetch(ids: ids),
-            fallback: nil
-        )
+        let persistenceServicePromise = Guarantee(self.stepsPersistenceService.fetch(ids: ids), fallback: nil)
+        let networkServicePromise = Guarantee(self.stepsNetworkService.fetch(ids: ids), fallback: nil)
 
         return Promise { seal in
             when(
@@ -132,21 +114,6 @@ final class NewLessonProvider: NewLessonProviderProtocol {
                 seal.fulfill(result)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
-            }
-        }
-    }
-
-    // MARK: Private API
-
-    private func guaranteeWithFallback<U: Thenable>(
-        _ thenable: U,
-        fallback: U.T?
-    ) -> Guarantee<U.T?> {
-        return Guarantee { seal in
-            thenable.done { result in
-                seal(result)
-            }.catch { _ in
-                seal(fallback)
             }
         }
     }

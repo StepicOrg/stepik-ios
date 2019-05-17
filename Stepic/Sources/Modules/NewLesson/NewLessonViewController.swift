@@ -31,6 +31,8 @@ final class NewLessonViewController: TabmanViewController {
 
     private lazy var tooltipView = LessonInfoTooltipView()
 
+    private var stepControllers: [UIViewController?] = []
+
     private lazy var tabBarView: TMBar = {
         let bar = TMBarView<TMHorizontalBarLayout, StepTabBarButton, TMLineBarIndicator>()
         bar.layout.transitionStyle = .snap
@@ -52,12 +54,12 @@ final class NewLessonViewController: TabmanViewController {
         return bar
     }()
 
-    private var currentState: NewLesson.ViewControllerState {
+    private var state: NewLesson.ViewControllerState {
         didSet {
-            switch self.currentState {
+            switch self.state {
             case .loading:
                 self.hideSteps()
-            case .result(let data):
+            case .result:
                 self.showSteps()
             default:
                 break
@@ -67,7 +69,7 @@ final class NewLessonViewController: TabmanViewController {
 
     init(interactor: NewLessonInteractorProtocol) {
         self.interactor = interactor
-        self.currentState = .loading
+        self.state = .loading
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -76,31 +78,28 @@ final class NewLessonViewController: TabmanViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func loadView() {
-        self.view = NewLessonView(frame: UIScreen.main.bounds)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.view.backgroundColor = .white
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.removeBackButtonTitleForTopController()
             styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
         }
 
-        self.edgesForExtendedLayout = []
         self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem]
     }
 
     // MARK: Private API
 
     private func showSteps() {
-        guard case .result(let data) = self.currentState else {
+        guard case .result(let data) = self.state else {
             return
         }
 
         self.title = data.lessonTitle
-        self.newLessonView?.hideLoading()
+        self.stepControllers = Array(repeating: nil, count: data.steps.count)
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
@@ -114,14 +113,31 @@ final class NewLessonViewController: TabmanViewController {
         self.title = nil
         self.dataSource = nil
         self.reloadData()
+    }
 
-        self.newLessonView?.showLoading()
+    private func loadStepIfNeeded(index: Int) -> UIViewController {
+        guard self.stepControllers.count > index else {
+            fatalError("Invalid controllers initialization")
+        }
+
+        guard case .result(let data) = self.state, let step = data.steps[safe: index] else {
+            fatalError("Invalid state")
+        }
+
+        if let controller = self.stepControllers[index] {
+            return controller
+        }
+
+        let assembly = NewStepAssembly(stepID: step.id)
+        let controller = assembly.makeModule()
+        self.stepControllers[index] = controller
+        return controller
     }
 }
 
 extension NewLessonViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        if case .result(let data) = self.currentState {
+        if case .result(let data) = self.state {
             return data.steps.count
         }
         return 0
@@ -131,9 +147,8 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
         for pageboyViewController: PageboyViewController,
         at index: PageboyViewController.PageIndex
     ) -> UIViewController? {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .white
-        return vc
+        let controller = self.loadStepIfNeeded(index: index)
+        return controller
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
@@ -143,7 +158,7 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
 
 extension NewLessonViewController: TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        guard case .result(let data) = self.currentState, let stepDescription = data.steps[safe: index] else {
+        guard case .result(let data) = self.state, let stepDescription = data.steps[safe: index] else {
             fatalError("Step not found")
         }
 
@@ -153,6 +168,6 @@ extension NewLessonViewController: TMBarDataSource {
 
 extension NewLessonViewController: NewLessonViewControllerProtocol {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel) {
-        self.currentState = viewModel.state
+        self.state = viewModel.state
     }
 }
