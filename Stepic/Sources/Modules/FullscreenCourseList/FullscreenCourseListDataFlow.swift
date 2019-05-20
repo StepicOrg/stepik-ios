@@ -40,6 +40,17 @@ enum FullscreenCourseList {
         }
     }
 
+    /// Present web view for paid course
+    enum PaidCourseBuyingPresentation {
+        struct Response {
+            let course: Course
+        }
+
+        struct ViewModel {
+            let urlPath: String
+        }
+    }
+
     /// Try to set online status
     enum OnlineModeReset {
         struct Request {
