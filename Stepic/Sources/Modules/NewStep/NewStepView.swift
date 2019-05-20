@@ -18,6 +18,11 @@ final class NewStepView: UIView {
         return view
     }()
 
+    private lazy var stepControlsView: StepControlsView = {
+        let view = StepControlsView()
+        return view
+    }()
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -54,20 +59,30 @@ extension NewStepView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
         self.scrollableStackView.addArrangedView(self.stepTextView)
-    }
-
-    func makeConstraints() {
-        self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollableStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
 
         // Test
         let stubView1 = UIView()
         stubView1.backgroundColor = UIColor.lightBlue.withAlphaComponent(0.2)
         self.scrollableStackView.addArrangedView(stubView1)
         stubView1.snp.makeConstraints { make in
-            make.height.equalTo(600)
+            make.height.equalTo(300)
+        }
+
+        // Test
+        let stubView2 = UIView()
+        stubView2.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+        self.scrollableStackView.addArrangedView(stubView2)
+        stubView2.snp.makeConstraints { make in
+            make.height.equalTo(300)
+        }
+
+        self.scrollableStackView.addArrangedView(self.stepControlsView)
+    }
+
+    func makeConstraints() {
+        self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollableStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
