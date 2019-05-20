@@ -7,6 +7,22 @@ protocol ContentProcessorProtocol {
 }
 
 final class ContentProcessor: ContentProcessorProtocol {
+    static let defaultInjections: [ContentProcessingInjection] = [
+        CustomAudioControlInjection(),
+        ClickableImagesInjection(),
+        KotlinRunnableSamplesInjection(),
+        MathJaxInjection(),
+        CommonStylesInjection(),
+        MetaViewportInjection(),
+        HightlightJSInjection(),
+        WebkitImagesCalloutDisableInjection()
+    ]
+
+    static let defaultRules: [ContentProcessingRule] = [
+        FixRelativeProtocolURLsRule(),
+        AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)
+    ]
+
     private let content: String
     private let rules: [ContentProcessingRule]
     private let injections: [ContentProcessingInjection]

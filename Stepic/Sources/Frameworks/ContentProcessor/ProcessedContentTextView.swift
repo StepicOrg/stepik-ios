@@ -5,6 +5,8 @@ import WebKit
 
 protocol ProcessedContentTextViewDelegate: class {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView)
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL)
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL)
 }
 
 extension ProcessedContentTextView {
@@ -34,6 +36,8 @@ final class ProcessedContentTextView: UIView {
         }
         return webView
     }()
+
+    private var isFirstNavigationAction = true
 
     override var intrinsicContentSize: CGSize {
         return webView.scrollView.contentSize
@@ -100,6 +104,33 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             self.invalidateIntrinsicContentSize()
             self.delegate?.processedContentTextViewDidLoadContent(self)
         }
+    }
+
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        guard let url = navigationAction.request.url else {
+            return decisionHandler(.cancel)
+        }
+
+        let imageLinkPrefix = "openimg://"
+        if url.absoluteString.starts(with: imageLinkPrefix) {
+            let validPath = String(url.absoluteString.dropFirst(imageLinkPrefix.count))
+            if let imageURL = URL(string: validPath) {
+                self.delegate?.processedContentTextView(self, didOpenImage: imageURL)
+            }
+            return decisionHandler(.cancel)
+        }
+
+        if self.isFirstNavigationAction && navigationAction.navigationType == .other {
+            self.isFirstNavigationAction = false
+            return decisionHandler(.allow)
+        }
+
+        self.delegate?.processedContentTextView(self, didOpenLink: url)
+        return decisionHandler(.cancel)
     }
 }
 

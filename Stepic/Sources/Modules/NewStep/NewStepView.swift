@@ -36,8 +36,8 @@ final class NewStepView: UIView {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let contentProcessor = ContentProcessor(
                 content: viewModel.text,
-                rules: [],
-                injections: [CommonStylesInjection()]
+                rules: ContentProcessor.defaultRules,
+                injections: ContentProcessor.defaultInjections
             )
             let content = contentProcessor.processContent()
 

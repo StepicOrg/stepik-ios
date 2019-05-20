@@ -36,3 +36,68 @@ final class CommonStylesInjection: ContentProcessingInjection {
         return Scripts.styles
     }
 }
+
+/// Injects meta-viewport
+final class MetaViewportInjection: ContentProcessingInjection {
+    var headScript: String {
+        return Scripts.metaViewport
+    }
+}
+
+/// Clickable images
+final class ClickableImagesInjection: ContentProcessingInjection {
+    var headScript: String {
+        return Scripts.clickableImages
+    }
+}
+
+/// Disable images callout on long tap
+final class WebkitImagesCalloutDisableInjection: ContentProcessingInjection {
+    var headScript: String {
+        return Scripts.webkitCalloutDisable
+    }
+}
+
+/// MathJax init script
+final class MathJaxInjection: ContentProcessingInjection {
+    var headScript: String {
+        return Scripts.localTex
+    }
+}
+
+/// Kotlin runnable code playground
+final class KotlinRunnableSamplesInjection: ContentProcessingInjection {
+    var headScript: String {
+        return Scripts.kotlinRunnableSamples
+    }
+
+    func shouldInject(to code: String) -> Bool {
+        return code.contains("<kotlin-runnable")
+    }
+}
+
+/// Code syntax highlight with highlight.js
+final class HightlightJSInjection: ContentProcessingInjection {
+    var headScript: String {
+        return Scripts.highlightJS
+    }
+
+    func shouldInject(to code: String) -> Bool {
+        return code.contains("<code")
+    }
+}
+
+/// Code syntax highlight with highlight.js
+final class CustomAudioControlInjection: ContentProcessingInjection {
+    var headScript: String {
+        return Scripts.audioTagWrapper
+    }
+
+    var bodyTailScript: String {
+        return Scripts.audioTagWrapperInit
+    }
+
+    func shouldInject(to code: String) -> Bool {
+        return code.contains("<audio")
+    }
+}
