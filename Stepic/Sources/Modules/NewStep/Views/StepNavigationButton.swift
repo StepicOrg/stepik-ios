@@ -80,6 +80,12 @@ final class StepNavigationButton: UIControl {
         }
     }
 
+    var isTitleHidden = false {
+        didSet {
+            self.textLabel.isHidden = self.isTitleHidden
+        }
+    }
+
     init(frame: CGRect = .zero, type: Type, isCentered: Bool, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         self.type = type

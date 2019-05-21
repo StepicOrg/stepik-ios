@@ -19,7 +19,7 @@ final class NewStepView: UIView {
     }()
 
     private lazy var stepControlsView: StepControlsView = {
-        let view = StepControlsView()
+        let view = StepControlsView(navigationState: .both)
         return view
     }()
 
@@ -65,14 +65,6 @@ extension NewStepView: ProgrammaticallyInitializableViewProtocol {
         stubView1.backgroundColor = UIColor.lightBlue.withAlphaComponent(0.2)
         self.scrollableStackView.addArrangedView(stubView1)
         stubView1.snp.makeConstraints { make in
-            make.height.equalTo(300)
-        }
-
-        // Test
-        let stubView2 = UIView()
-        stubView2.backgroundColor = UIColor.red.withAlphaComponent(0.2)
-        self.scrollableStackView.addArrangedView(stubView2)
-        stubView2.snp.makeConstraints { make in
             make.height.equalTo(300)
         }
 
