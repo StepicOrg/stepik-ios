@@ -12,6 +12,9 @@ import SnapKit
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
+    @IBOutlet weak var sendButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
 
@@ -284,6 +287,18 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         default:
             break
         }
+
+        if RemoteConfig.shared.newLessonAvailable {
+            self.sendButton.backgroundColor = UIColor.stepicGreen
+            self.sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+            self.sendButton.layer.cornerRadius = 6
+            self.sendButtonLeadingConstraint.constant = -16
+            self.sendButtonTrailingConstraint.constant = 16
+            self.sendButtonHeight.constant = 44
+            self.sendButtonBottomConstraint.constant = 0
+            self.sendButton.layer.borderWidth = 0
+            self.sendButton.setTitleColor(.white, for: .normal)
+        }
     }
 
     private func disableSendButton() {
@@ -439,7 +454,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     var isSubmitButtonHidden: Bool = false {
         didSet {
             self.sendButton.isHidden = isSubmitButtonHidden
-            self.sendButtonHeight.constant = isSubmitButtonHidden ? 0 : 40
+            self.sendButtonHeight.constant = isSubmitButtonHidden ? 0 : 44
         }
     }
 

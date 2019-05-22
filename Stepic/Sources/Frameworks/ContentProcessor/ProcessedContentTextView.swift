@@ -10,7 +10,9 @@ protocol ProcessedContentTextViewDelegate: class {
 }
 
 extension ProcessedContentTextView {
-    struct Appearance { }
+    struct Appearance {
+        var insets = LayoutInsets(top: 10, left: 16, bottom: 4, right: 16)
+    }
 }
 
 final class ProcessedContentTextView: UIView {
@@ -19,6 +21,17 @@ final class ProcessedContentTextView: UIView {
 
     private lazy var webViewConfiguration: WKWebViewConfiguration = {
         let userContentController = WKUserContentController()
+        // Remove paddings and margins
+        let userScript = WKUserScript(
+            source: """
+            var style = document.createElement('style');
+            style.innerHTML = 'body { padding: 0 !important; margin: 0 !important; }';
+            document.head.appendChild(style);
+            """,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        )
+        userContentController.addUserScript(userScript)
         let webViewConfig = WKWebViewConfiguration()
         webViewConfig.userContentController = userContentController
         return webViewConfig
@@ -31,6 +44,7 @@ final class ProcessedContentTextView: UIView {
         webView.scrollView.delegate = self
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
+        webView.scrollView.contentInset = .zero
         if #available(iOS 11.0, *) {
             webView.scrollView.contentInsetAdjustmentBehavior = .never
         }
@@ -40,7 +54,10 @@ final class ProcessedContentTextView: UIView {
     private var isFirstNavigationAction = true
 
     override var intrinsicContentSize: CGSize {
-        return webView.scrollView.contentSize
+        return CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: webView.scrollView.contentSize.height + self.appearance.insets.top + self.appearance.insets.bottom
+        )
     }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -92,7 +109,10 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.webView.translatesAutoresizingMaskIntoConstraints = false
         self.webView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
         }
     }
 }

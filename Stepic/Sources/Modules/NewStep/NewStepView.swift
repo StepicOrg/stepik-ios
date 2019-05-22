@@ -23,6 +23,8 @@ final class NewStepView: UIView {
         return view
     }()
 
+    private lazy var quizContainerView = UIView()
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -37,37 +39,26 @@ final class NewStepView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: NewStepViewModel) {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let contentProcessor = ContentProcessor(
-                content: viewModel.text,
-                rules: ContentProcessor.defaultRules,
-                injections: ContentProcessor.defaultInjections
-            )
-            let content = contentProcessor.processContent()
+    func configure(viewModel: NewStepViewModel, quizView: UIView?) {
+        self.stepTextView.loadHTMLText(viewModel.htmlString)
 
-            DispatchQueue.main.async { [weak self] in
-                self?.stepTextView.loadHTMLText(content)
-            }
+        guard let quizView = quizView else {
+            return
+        }
+
+        self.quizContainerView.addSubview(quizView)
+        quizView.translatesAutoresizingMaskIntoConstraints = false
+        quizView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }
 
 extension NewStepView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
-
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
         self.scrollableStackView.addArrangedView(self.stepTextView)
-
-        // Test
-        let stubView1 = UIView()
-        stubView1.backgroundColor = UIColor.lightBlue.withAlphaComponent(0.2)
-        self.scrollableStackView.addArrangedView(stubView1)
-        stubView1.snp.makeConstraints { make in
-            make.height.equalTo(300)
-        }
-
+        self.scrollableStackView.addArrangedView(self.quizContainerView)
         self.scrollableStackView.addArrangedView(self.stepControlsView)
     }
 

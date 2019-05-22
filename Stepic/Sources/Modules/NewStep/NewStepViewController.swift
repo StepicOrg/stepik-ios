@@ -50,7 +50,20 @@ final class NewStepViewController: UIViewController {
             return
         }
 
-        self.newStepView?.configure(viewModel: viewModel)
+        guard let quizType = viewModel.quizType else {
+            self.newStepView?.configure(viewModel: viewModel, quizView: nil)
+            return
+        }
+
+        switch quizType {
+        case .choice:
+            let quizController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+            quizController.step = viewModel.step
+            self.addChild(quizController)
+            self.newStepView?.configure(viewModel: viewModel, quizView: quizController.view)
+        default:
+            self.newStepView?.configure(viewModel: viewModel, quizView: nil)
+        }
     }
 }
 

@@ -67,7 +67,7 @@ final class StepControlsView: UIView {
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
-            arrangedSubviews: [self.submitButton, self.navigationStackView]
+            arrangedSubviews: [self.navigationStackView]
         )
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
