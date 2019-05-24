@@ -30,12 +30,28 @@ final class NewStepPresenter: NewStepPresenterProtocol {
 
     private func makeViewModel(step: Step) -> Guarantee<NewStepViewModel> {
         return Guarantee { seal in
-            let contentProcessor = ContentProcessor(
-                content: step.block.text ?? "",
-                rules: ContentProcessor.defaultRules,
-                injections: ContentProcessor.defaultInjections
-            )
-            let content = contentProcessor.processContent()
+            let contentType: NewStepViewModel.ContentType = {
+                switch step.block.name {
+                case "video":
+                    if let video = step.block.video {
+                        let viewModel = NewStepVideoViewModel(
+                            video: video,
+                            videoThumbnailImageURL: URL(string: video.thumbnailURL)
+                        )
+                        return .video(viewModel: viewModel)
+                    }
+                    return .video(viewModel: nil)
+                default:
+                    let contentProcessor = ContentProcessor(
+                        content: step.block.text ?? "",
+                        rules: ContentProcessor.defaultRules,
+                        injections: ContentProcessor.defaultInjections
+                    )
+                    let content = contentProcessor.processContent()
+
+                    return .text(htmlString: content)
+                }
+            }()
 
             let quizType: NewStep.QuizType?
             switch step.block.name {
@@ -45,7 +61,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 quizType = NewStep.QuizType(blockName: step.block.name)
             }
 
-            let viewModel = NewStepViewModel(htmlString: content, quizType: quizType, step: step)
+            let viewModel = NewStepViewModel(content: contentType, quizType: quizType, step: step)
             seal(viewModel)
         }
     }

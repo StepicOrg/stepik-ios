@@ -39,6 +39,7 @@ final class NewStepViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.newStepView?.delegate = self
         self.interactor.doStepLoad(request: .init())
     }
 
@@ -70,5 +71,29 @@ final class NewStepViewController: UIViewController {
 extension NewStepViewController: NewStepViewControllerProtocol {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel) {
         self.state = viewModel.state
+    }
+}
+
+extension NewStepViewController: NewStepViewDelegate {
+    func newStepViewDidRequestVideo(_ view: NewStepView) {
+        guard case .result(let viewModel) = self.state,
+              case .video(let videoViewModel) = viewModel.content,
+              let video = videoViewModel?.video else {
+            return
+        }
+
+        // Should show alert
+        if video.urls.isEmpty {
+            // presentNoVideoAlert()
+            return
+        }
+
+        let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
+            || ConnectionHelper.shared.reachability.isReachableViaWWAN()
+        if video.state == VideoState.cached || isVideoPlayingReachable {
+            let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
+            player.video = video
+            self.present(player, animated: true)
+        }
     }
 }

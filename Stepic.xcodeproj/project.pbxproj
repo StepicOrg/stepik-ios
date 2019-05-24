@@ -3690,6 +3690,7 @@
 		2CB5B1592292E0D700D7F706 /* StepControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B1582292E0D700D7F706 /* StepControlsView.swift */; };
 		2CB5B15B2292E65400D7F706 /* StepNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */; };
 		2CB5B15D22941D7000D7F706 /* StepCommentsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B15C22941D7000D7F706 /* StepCommentsButton.swift */; };
+		2CB5B1612297F2FB00D7F706 /* StepVideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B1602297F2FA00D7F706 /* StepVideoPreviewView.swift */; };
 		2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */; };
 		2CB62BE42019FD8500B5E336 /* step3.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDC2019FD8400B5E336 /* step3.html */; };
 		2CB62BE52019FD8500B5E336 /* step1.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BDE2019FD8400B5E336 /* step1.html */; };
@@ -5881,6 +5882,7 @@
 		2CB5B1582292E0D700D7F706 /* StepControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControlsView.swift; sourceTree = "<group>"; };
 		2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepNavigationButton.swift; sourceTree = "<group>"; };
 		2CB5B15C22941D7000D7F706 /* StepCommentsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCommentsButton.swift; sourceTree = "<group>"; };
+		2CB5B1602297F2FA00D7F706 /* StepVideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepVideoPreviewView.swift; sourceTree = "<group>"; };
 		2CB62BDA2019ECB800B5E336 /* OnboardingCardStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCardStepViewController.swift; sourceTree = "<group>"; };
 		2CB62BDD2019FD8400B5E336 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step3.html; sourceTree = "<group>"; };
 		2CB62BDF2019FD8400B5E336 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = OnboardingContent/ru.lproj/step1.html; sourceTree = "<group>"; };
@@ -10073,6 +10075,7 @@
 			children = (
 				2CB5B1582292E0D700D7F706 /* StepControlsView.swift */,
 				2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */,
+				2CB5B1602297F2FA00D7F706 /* StepVideoPreviewView.swift */,
 				2CB5B15C22941D7000D7F706 /* StepCommentsButton.swift */,
 			);
 			path = Views;
@@ -11835,12 +11838,12 @@
 				8D1AB142BF62815DF8939656 /* NewStepAssembly.swift */,
 				88372B078904014335CC5A4F /* NewStepViewController.swift */,
 				84763D78E2F327874DA51576 /* NewStepInteractor.swift */,
+				2C48D5FD228ECF3D00739477 /* NewStepViewModel.swift */,
 				DA4737058E519D801DAB2131 /* NewStepPresenter.swift */,
 				49034C40838BCF58896D0118 /* NewStepDataFlow.swift */,
 				362684BA69196E87B5919671 /* NewStepProvider.swift */,
 				E3FE676A699B1C33D4D0F5CC /* NewStepView.swift */,
 				C029726DE3288A13E774C8C3 /* InputOutput */,
-				2C48D5FD228ECF3D00739477 /* NewStepViewModel.swift */,
 			);
 			path = NewStep;
 			sourceTree = "<group>";
@@ -15872,6 +15875,7 @@
 				62E9836BABB817788805073E /* CourseInfoTabReviewsInputProtocol.swift in Sources */,
 				62E981FCD3F080DDF310562B /* CourseInfoTabReviewsProvider.swift in Sources */,
 				62E9803EAF8716CC4673DDE6 /* CourseInfoTabReviewsViewModel.swift in Sources */,
+				2CB5B1612297F2FB00D7F706 /* StepVideoPreviewView.swift in Sources */,
 				62E98B88931268A63B55CFFD /* CourseInfoTabSyllabusViewModel.swift in Sources */,
 				62E98B337D0BA97FB0796C2C /* CoursesNetworkService.swift in Sources */,
 				62E98793982B530188C654BE /* UsersNetworkService.swift in Sources */,
