@@ -78,6 +78,8 @@ final class NewStepView: UIView {
             self.stepTextView.loadHTMLText(htmlString)
         }
 
+        self.stepControlsView.commentsTitle = viewModel.commentsLabelTitle
+
         guard let quizView = quizView else {
             return
         }

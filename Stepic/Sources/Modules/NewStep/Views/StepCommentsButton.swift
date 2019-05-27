@@ -38,7 +38,6 @@ final class StepCommentsButton: UIControl {
         let label = UILabel()
         label.font = self.appearance.textFont
         label.textColor = self.appearance.mainColor
-        label.text = "Написать первый комментарий"
         return label
     }()
 
@@ -49,9 +48,9 @@ final class StepCommentsButton: UIControl {
         }
     }
 
-    var isTitleHidden = false {
+    var title: String? {
         didSet {
-            self.textLabel.isHidden = self.isTitleHidden
+            self.textLabel.text = self.title
         }
     }
 

@@ -30,6 +30,13 @@ final class NewStepPresenter: NewStepPresenterProtocol {
 
     private func makeViewModel(step: Step) -> Guarantee<NewStepViewModel> {
         return Guarantee { seal in
+            let commentsLabelTitle: String = {
+                if let discussionsCount = step.discussionsCount, discussionsCount > 0 {
+                    return "Комментарии (\(discussionsCount))"
+                }
+                return "Напишите первый комментарий"
+            }()
+
             let contentType: NewStepViewModel.ContentType = {
                 switch step.block.name {
                 case "video":
@@ -61,7 +68,12 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 quizType = NewStep.QuizType(blockName: step.block.name)
             }
 
-            let viewModel = NewStepViewModel(content: contentType, quizType: quizType, step: step)
+            let viewModel = NewStepViewModel(
+                content: contentType,
+                quizType: quizType,
+                commentsLabelTitle: commentsLabelTitle,
+                step: step
+            )
             seal(viewModel)
         }
     }

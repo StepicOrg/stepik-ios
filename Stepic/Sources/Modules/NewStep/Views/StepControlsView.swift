@@ -85,6 +85,12 @@ final class StepControlsView: UIView {
         )
     }
 
+    var commentsTitle: String? {
+        didSet {
+            self.commentsButton.title = self.commentsTitle
+        }
+    }
+
     init(frame: CGRect = .zero, navigationState: NavigationState, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         self.navigationState = navigationState
