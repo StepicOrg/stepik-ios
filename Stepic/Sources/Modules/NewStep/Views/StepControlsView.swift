@@ -21,7 +21,6 @@ extension StepControlsView {
 
 final class StepControlsView: UIView {
     let appearance: Appearance
-    let navigationState: NavigationState
 
     private lazy var submitButton: UIButton = {
         let submitButton = UIButton(type: .system)
@@ -34,32 +33,14 @@ final class StepControlsView: UIView {
         return submitButton
     }()
 
-    private lazy var navigationPreviousButton: StepNavigationButton = {
-        var button = StepNavigationButton(type: .previous, isCentered: self.navigationState == .previous)
-        if self.navigationState == .both {
-            button.isTitleHidden = true
-        }
+    private lazy var commentsButton: StepCommentsButton = {
+        let button = StepCommentsButton()
+        button.addTarget(self, action: #selector(self.commentsButtonClicked), for: .touchUpInside)
         return button
     }()
-
-    private lazy var navigationNextButton: StepNavigationButton = {
-        var button = StepNavigationButton(type: .next, isCentered: self.navigationState == .next)
-        return button
-    }()
-
-    private lazy var commentsButton = StepCommentsButton()
 
     private lazy var navigationStackView: UIStackView = {
         let stackView = UIStackView()
-
-        if self.navigationState == .previous || self.navigationState == .both {
-            stackView.addArrangedSubview(self.navigationPreviousButton)
-        }
-
-        if self.navigationState == .next || self.navigationState == .both {
-            stackView.addArrangedSubview(self.navigationNextButton)
-        }
-
         stackView.axis = .horizontal
         stackView.spacing = self.appearance.navigationButtonsSpacing
         return stackView
@@ -73,6 +54,9 @@ final class StepControlsView: UIView {
         stackView.spacing = self.appearance.spacing
         return stackView
     }()
+
+    private var navigationBottomConstraint: Constraint?
+    private var navigationBottomCommentsConstraint: Constraint?
 
     override var intrinsicContentSize: CGSize {
         let stackViewSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -91,9 +75,24 @@ final class StepControlsView: UIView {
         }
     }
 
-    init(frame: CGRect = .zero, navigationState: NavigationState, appearance: Appearance = Appearance()) {
+    var navigationState: NavigationState? {
+        didSet {
+            self.updateNavigationState()
+        }
+    }
+
+    var isCommentsButtonHidden: Bool = false {
+        didSet {
+            self.updateCommentsButton()
+        }
+    }
+
+    var onCommentsButtonClick: (() -> Void)?
+    var onPreviousButtonClick: (() -> Void)?
+    var onNextButtonClick: (() -> Void)?
+
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
-        self.navigationState = navigationState
         super.init(frame: frame)
 
         self.setupView()
@@ -111,6 +110,62 @@ final class StepControlsView: UIView {
         self.invalidateIntrinsicContentSize()
     }
 
+    // MARK: Private API
+
+    @objc
+    private func previousButtonClicked() {
+        self.onPreviousButtonClick?()
+    }
+
+    @objc
+    private func nextButtonClicked() {
+        self.onNextButtonClick?()
+    }
+
+    @objc
+    private func commentsButtonClicked() {
+        self.onCommentsButtonClick?()
+    }
+
+    private func updateNavigationState() {
+        self.navigationStackView.removeAllArrangedSubviews()
+
+        if self.navigationState == .none {
+            return
+        }
+
+        let previousButton = StepNavigationButton(type: .previous, isCentered: self.navigationState == .previous)
+        previousButton.addTarget(self, action: #selector(self.previousButtonClicked), for: .touchUpInside)
+        if self.navigationState == .both {
+            previousButton.isTitleHidden = true
+        }
+
+        let nextButton = StepNavigationButton(type: .next, isCentered: self.navigationState == .next)
+        nextButton.addTarget(self, action: #selector(self.nextButtonClicked), for: .touchUpInside)
+
+        if self.navigationState == .previous || self.navigationState == .both {
+            self.navigationStackView.addArrangedSubview(previousButton)
+        }
+
+        if self.navigationState == .next || self.navigationState == .both {
+            self.navigationStackView.addArrangedSubview(nextButton)
+        }
+    }
+
+    private func updateCommentsButton() {
+        if self.isCommentsButtonHidden {
+            self.commentsButton.isHidden = true
+        }
+
+        if self.isCommentsButtonHidden {
+            self.navigationBottomCommentsConstraint?.deactivate()
+            self.navigationBottomConstraint?.activate()
+        } else {
+            self.navigationBottomCommentsConstraint?.activate()
+            self.navigationBottomConstraint?.deactivate()
+        }
+    }
+
     // MARK: Enum
 
     enum NavigationState {
@@ -121,17 +176,19 @@ final class StepControlsView: UIView {
 }
 
 extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.updateNavigationState()
+    }
+
     func addSubviews() {
         self.addSubview(self.stackView)
         self.addSubview(self.commentsButton)
     }
 
     func makeConstraints() {
-        self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.insets.top)
-            make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        self.commentsButton.snp.makeConstraints { make in
+            make.leading.bottom.trailing.equalToSuperview()
+            make.height.equalTo(self.appearance.commentsButtonHeight)
         }
 
         self.submitButton.snp.makeConstraints { make in
@@ -142,10 +199,24 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
             make.height.equalTo(self.appearance.navigationButtonsHeight)
         }
 
-        self.commentsButton.snp.makeConstraints { make in
-            make.top.equalTo(self.stackView.snp.bottom).offset(self.appearance.spacing)
-            make.leading.bottom.trailing.equalToSuperview()
-            make.height.equalTo(self.appearance.commentsButtonHeight)
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+
+            self.navigationBottomCommentsConstraint = make.bottom
+                .equalTo(self.commentsButton.snp.top)
+                .offset(-self.appearance.spacing)
+                .constraint
+
+            self.navigationBottomConstraint = make.bottom
+                .equalToSuperview()
+                .offset(-self.appearance.spacing)
+                .constraint
         }
+
+        // Should be executed when all constraints set up
+        self.updateCommentsButton()
     }
 }

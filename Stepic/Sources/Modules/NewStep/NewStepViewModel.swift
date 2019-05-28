@@ -4,6 +4,7 @@ struct NewStepViewModel {
     let content: ContentType
     let quizType: NewStep.QuizType?
     let commentsLabelTitle: String
+    let discussionProxyID: DiscussionProxy.IdType?
 
     @available(*, deprecated, message: "Deprecated initialization")
     let step: Step

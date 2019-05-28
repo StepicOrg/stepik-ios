@@ -36,6 +36,11 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     // MARK: Public API
 
     private func refresh(context: NewLesson.Context) {
+        self.previousUnit = nil
+        self.nextUnit = nil
+        self.currentLesson = nil
+        self.currentUnit = nil
+
         self.loadData(context: context)
     }
 
@@ -49,7 +54,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             case .unit(let unitID):
                 return self.provider.fetchLessonAndUnit(unitID: unitID).map { ($0.1.value, $0.0.value) }
             }
-        }.then(on: DispatchQueue.global(qos: .userInitiated)) { lesson, unit -> Promise<([Step]?, Lesson)> in
+        }.then(on: .global(qos: .userInitiated)) { lesson, unit -> Promise<([Step]?, Lesson)> in
             self.currentUnit = unit
             self.currentLesson = lesson
 
@@ -58,7 +63,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             }
 
             return self.provider.fetchSteps(ids: lesson.stepsArray).map { ($0.value, lesson) }
-        }.done(on: DispatchQueue.global(qos: .userInitiated)) { steps, lesson in
+        }.done(on: .global(qos: .userInitiated)) { steps, lesson in
             guard let steps = steps else {
                 throw Error.fetchFailed
             }
@@ -74,31 +79,27 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             return
         }
 
-        self.unitNavigationService.findUnitForNavigation(
-            from: unit.id,
-            direction: .next
-        ).done(on: DispatchQueue.global(qos: .userInitiated)) { [weak self] nextUnit in
-            guard let nextUnit = nextUnit, let strongSelf = self else {
+        let previousUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unit.id, direction: .previous)
+        let nextUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unit.id, direction: .next)
+
+        when(
+            fulfilled: previousUnitPromise, nextUnitPromise
+        ).done(on: .global(qos: .userInitiated)) {[weak self] previousUnit, nextUnit in
+            guard let strongSelf = self else {
                 return
             }
 
             if unit.id == strongSelf.currentUnit?.id {
                 strongSelf.nextUnit = nextUnit
-                print(nextUnit, "next")
-            }
-        }.cauterize()
-
-        self.unitNavigationService.findUnitForNavigation(
-            from: unit.id,
-            direction: .previous
-        ).done(on: DispatchQueue.global(qos: .userInitiated)) { [weak self] previousUnit in
-            guard let previousUnit = previousUnit, let strongSelf = self else {
-                return
-            }
-
-            if unit.id == strongSelf.currentUnit?.id {
                 strongSelf.previousUnit = previousUnit
-                print(previousUnit, "previous")
+
+                print("new lesson interactor: next & previous units did load")
+
+                DispatchQueue.main.async {
+                    strongSelf.presenter.presentLessonNavigation(
+                        response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: nextUnit != nil)
+                    )
+                }
             }
         }.cauterize()
     }
@@ -107,6 +108,24 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+    }
+}
+
+extension NewLessonInteractor: NewStepOutputProtocol {
+    func handlePreviousUnitNavigation() {
+        guard let unit = self.nextUnit else {
+            return
+        }
+
+        self.refresh(context: .unit(id: unit.id))
+    }
+
+    func handleNextUnitNavigation() {
+        guard let unit = self.nextUnit else {
+            return
+        }
+
+        self.refresh(context: .unit(id: unit.id))
     }
 }
 

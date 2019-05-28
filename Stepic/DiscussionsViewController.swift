@@ -9,6 +9,24 @@
 import UIKit
 import SDWebImage
 
+@available(*, deprecated, message: "Legacy assembly")
+final class DiscussionsLegacyAssembly: Assembly {
+    private let discussionProxyID: String
+    private let stepID: Step.IdType
+
+    init(discussionProxyID: String, stepID: Step.IdType) {
+        self.discussionProxyID = discussionProxyID
+        self.stepID = stepID
+    }
+
+    func makeModule() -> UIViewController {
+        let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
+        vc.discussionProxyId = self.discussionProxyID
+        vc.target = self.stepID
+        return vc
+    }
+}
+
 enum DiscussionsEmptyDataSetState {
     case error, empty, none
 }

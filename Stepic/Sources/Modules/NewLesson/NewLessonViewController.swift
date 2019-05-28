@@ -5,6 +5,7 @@ import UIKit
 
 protocol NewLessonViewControllerProtocol: class {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
+    func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
 }
 
 final class NewLessonViewController: TabmanViewController {
@@ -32,6 +33,10 @@ final class NewLessonViewController: TabmanViewController {
     private lazy var tooltipView = LessonInfoTooltipView()
 
     private var stepControllers: [UIViewController?] = []
+    private var stepModulesInputs: [NewStepInputProtocol?] = []
+
+    private var hasNavigationToPreviousUnit = false
+    private var hasNavigationToNextUnit = false
 
     private lazy var tabBarView: TMBar = {
         let bar = TMBarView<TMHorizontalBarLayout, StepTabBarButton, TMLineBarIndicator>()
@@ -100,6 +105,7 @@ final class NewLessonViewController: TabmanViewController {
 
         self.title = data.lessonTitle
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
+        self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
@@ -128,10 +134,49 @@ final class NewLessonViewController: TabmanViewController {
             return controller
         }
 
-        let assembly = NewStepAssembly(stepID: step.id)
+        let assembly = NewStepAssembly(stepID: step.id, output: self.interactor as? NewStepOutputProtocol)
         let controller = assembly.makeModule()
         self.stepControllers[index] = controller
+        self.stepModulesInputs[index] = assembly.moduleInput
         return controller
+    }
+
+    private func updateLessonNavigationInStep(
+        index: Int,
+        hasNavigationToPreviousUnit: Bool,
+        hasNavigationToNextUnit: Bool
+    ) {
+        // Can navigate to previous unit from current step
+        let canNavigateToPreviousUnit = index == 0 && hasNavigationToPreviousUnit
+        let canNavigateToNextUnit = (index == self.stepModulesInputs.count - 1) && hasNavigationToNextUnit
+
+        guard let input = self.stepModulesInputs[safe: index].flatMap({ $0 }) else {
+            return
+        }
+
+        input.updateStepNavigation(
+            canNavigateToPreviousUnit: canNavigateToPreviousUnit,
+            canNavigateNextUnit: canNavigateToNextUnit
+        )
+    }
+
+    private func updateLessonNavigationInSteps(hasNavigationToPreviousUnit: Bool, hasNavigationToNextUnit: Bool) {
+        for index in 0..<self.stepModulesInputs.count {
+            self.updateLessonNavigationInStep(
+                index: index,
+                hasNavigationToPreviousUnit: hasNavigationToPreviousUnit,
+                hasNavigationToNextUnit: hasNavigationToNextUnit
+            )
+        }
+    }
+
+    private func resetState() {
+        self.title = nil
+        self.stepControllers.removeAll()
+        self.stepModulesInputs.removeAll()
+
+        self.hasNavigationToPreviousUnit = false
+        self.hasNavigationToNextUnit = false
     }
 }
 
@@ -148,6 +193,11 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
         at index: PageboyViewController.PageIndex
     ) -> UIViewController? {
         let controller = self.loadStepIfNeeded(index: index)
+        self.updateLessonNavigationInStep(
+            index: index,
+            hasNavigationToPreviousUnit: self.hasNavigationToPreviousUnit,
+            hasNavigationToNextUnit: self.hasNavigationToNextUnit
+        )
         return controller
     }
 
@@ -169,5 +219,15 @@ extension NewLessonViewController: TMBarDataSource {
 extension NewLessonViewController: NewLessonViewControllerProtocol {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel) {
         self.state = viewModel.state
+    }
+
+    func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel) {
+        self.hasNavigationToNextUnit = viewModel.hasNextUnit
+        self.hasNavigationToPreviousUnit = viewModel.hasPreviousUnit
+
+        self.updateLessonNavigationInSteps(
+            hasNavigationToPreviousUnit: self.hasNavigationToPreviousUnit,
+            hasNavigationToNextUnit: self.hasNavigationToNextUnit
+        )
     }
 }

@@ -3,6 +3,9 @@ import UIKit
 
 protocol NewStepViewDelegate: class {
     func newStepViewDidRequestVideo(_ view: NewStepView)
+    func newStepViewDidRequestPrevious(_ view: NewStepView)
+    func newStepViewDidRequestNext(_ view: NewStepView)
+    func newStepViewDidRequestComments(_ view: NewStepView)
 }
 
 extension NewStepView {
@@ -38,7 +41,16 @@ final class NewStepView: UIView {
     private lazy var stepVideoPreviewContainerView = UIView()
 
     private lazy var stepControlsView: StepControlsView = {
-        let view = StepControlsView(navigationState: .both)
+        let view = StepControlsView()
+        view.onPreviousButtonClick = {
+            self.delegate?.newStepViewDidRequestPrevious(self)
+        }
+        view.onNextButtonClick = {
+            self.delegate?.newStepViewDidRequestNext(self)
+        }
+        view.onCommentsButtonClick = {
+            self.delegate?.newStepViewDidRequestComments(self)
+        }
         return view
     }()
 
@@ -78,6 +90,7 @@ final class NewStepView: UIView {
             self.stepTextView.loadHTMLText(htmlString)
         }
 
+        self.stepControlsView.isCommentsButtonHidden = viewModel.discussionProxyID == nil
         self.stepControlsView.commentsTitle = viewModel.commentsLabelTitle
 
         guard let quizView = quizView else {
@@ -88,6 +101,19 @@ final class NewStepView: UIView {
         quizView.translatesAutoresizingMaskIntoConstraints = false
         quizView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+
+    func updateNavigationButtons(hasPreviousButton: Bool, hasNextButton: Bool) {
+        switch (hasPreviousButton, hasNextButton) {
+        case (true, true):
+            self.stepControlsView.navigationState = .both
+        case (true, _):
+            self.stepControlsView.navigationState = .previous
+        case (_, true):
+            self.stepControlsView.navigationState = .next
+        default:
+            self.stepControlsView.navigationState = nil
         }
     }
 

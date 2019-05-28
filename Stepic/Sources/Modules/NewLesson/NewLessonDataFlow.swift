@@ -13,6 +13,18 @@ enum NewLesson {
         }
     }
 
+    enum LessonNavigationLoad {
+        struct Response {
+            let hasPreviousUnit: Bool
+            let hasNextUnit: Bool
+        }
+
+        struct ViewModel {
+            let hasPreviousUnit: Bool
+            let hasNextUnit: Bool
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

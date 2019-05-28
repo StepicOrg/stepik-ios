@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol NewStepInteractorProtocol {
     func doStepLoad(request: NewStep.StepLoad.Request)
+    func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request)
 }
 
 final class NewStepInteractor: NewStepInteractorProtocol {
@@ -36,9 +37,27 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         }.cauterize()
     }
 
+    func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request) {
+        switch request.direction {
+        case .previous:
+            self.moduleOutput?.handlePreviousUnitNavigation()
+        case .next:
+            self.moduleOutput?.handleNextUnitNavigation()
+        }
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
     }
 }
 
-extension NewStepInteractor: NewStepInputProtocol { }
+extension NewStepInteractor: NewStepInputProtocol {
+    func updateStepNavigation(canNavigateToPreviousUnit: Bool, canNavigateNextUnit: Bool) {
+        self.presenter.presentControlsUpdate(
+            response: .init(
+                canNavigateToPreviousUnit: canNavigateToPreviousUnit,
+                canNavigateToNextUnit: canNavigateNextUnit
+            )
+        )
+    }
+}

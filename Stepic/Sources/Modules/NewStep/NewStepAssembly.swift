@@ -23,6 +23,7 @@ final class NewStepAssembly: Assembly {
         presenter.viewController = viewController
         self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
+        self.moduleInput = interactor
 
         return viewController
     }

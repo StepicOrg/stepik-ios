@@ -1,3 +1,6 @@
 import Foundation
 
-protocol NewStepOutputProtocol: class { }
+protocol NewStepOutputProtocol: class {
+    func handlePreviousUnitNavigation()
+    func handleNextUnitNavigation()
+}

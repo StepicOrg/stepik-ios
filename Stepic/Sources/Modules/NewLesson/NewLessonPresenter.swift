@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewLessonPresenterProtocol {
     func presentLesson(response: NewLesson.LessonLoad.Response)
+    func presentLessonNavigation(response: NewLesson.LessonNavigationLoad.Response)
 }
 
 final class NewLessonPresenter: NewLessonPresenterProtocol {
@@ -18,6 +19,15 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         }
 
         self.viewController?.displayLesson(viewModel: viewModel)
+    }
+
+    func presentLessonNavigation(response: NewLesson.LessonNavigationLoad.Response) {
+        let viewModel = NewLesson.LessonNavigationLoad.ViewModel(
+            hasPreviousUnit: response.hasPreviousUnit,
+            hasNextUnit: response.hasNextUnit
+        )
+
+        self.viewController?.displayLessonNavigation(viewModel: viewModel)
     }
 
     // MAKE: Private API

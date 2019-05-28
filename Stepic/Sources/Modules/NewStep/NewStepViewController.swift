@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewStepViewControllerProtocol: class {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
+    func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
 }
 
 final class NewStepViewController: UIViewController {
@@ -72,6 +73,13 @@ extension NewStepViewController: NewStepViewControllerProtocol {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel) {
         self.state = viewModel.state
     }
+
+    func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel) {
+        self.newStepView?.updateNavigationButtons(
+            hasPreviousButton: viewModel.canNavigateToPreviousUnit,
+            hasNextButton: viewModel.canNavigateToNextUnit
+        )
+    }
 }
 
 extension NewStepViewController: NewStepViewDelegate {
@@ -95,5 +103,26 @@ extension NewStepViewController: NewStepViewDelegate {
             player.video = video
             self.present(player, animated: true)
         }
+    }
+
+    func newStepViewDidRequestPrevious(_ view: NewStepView) {
+        self.interactor.doLessonNavigationRequest(request: .init(direction: .previous))
+    }
+
+    func newStepViewDidRequestNext(_ view: NewStepView) {
+        self.interactor.doLessonNavigationRequest(request: .init(direction: .next))
+    }
+
+    func newStepViewDidRequestComments(_ view: NewStepView) {
+        guard case .result(let viewModel) = self.state,
+              let discussionProxyID = viewModel.discussionProxyID else {
+            return
+        }
+
+        let assembly = DiscussionsLegacyAssembly(
+            discussionProxyID: discussionProxyID,
+            stepID: viewModel.step.id
+        )
+        self.push(module: assembly.makeModule())
     }
 }

@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewStepPresenterProtocol {
     func presentStep(response: NewStep.StepLoad.Response)
+    func presentControlsUpdate(response: NewStep.ControlsUpdate.Response)
 }
 
 final class NewStepPresenter: NewStepPresenterProtocol {
@@ -24,6 +25,15 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         if case .failure = response.result {
             self.viewController?.displayStep(viewModel: NewStep.StepLoad.ViewModel(state: .error))
         }
+    }
+
+    func presentControlsUpdate(response: NewStep.ControlsUpdate.Response) {
+        let viewModel = NewStep.ControlsUpdate.ViewModel(
+            canNavigateToPreviousUnit: response.canNavigateToPreviousUnit,
+            canNavigateToNextUnit: response.canNavigateToNextUnit
+        )
+
+        self.viewController?.displayControlsUpdate(viewModel: viewModel)
     }
 
     // MARK: Private API
@@ -72,6 +82,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 content: contentType,
                 quizType: quizType,
                 commentsLabelTitle: commentsLabelTitle,
+                discussionProxyID: step.discussionProxyId,
                 step: step
             )
             seal(viewModel)

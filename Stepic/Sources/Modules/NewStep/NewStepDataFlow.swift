@@ -13,6 +13,29 @@ enum NewStep {
         }
     }
 
+    enum ControlsUpdate {
+        struct Response {
+            let canNavigateToPreviousUnit: Bool
+            let canNavigateToNextUnit: Bool
+        }
+
+        struct ViewModel {
+            let canNavigateToPreviousUnit: Bool
+            let canNavigateToNextUnit: Bool
+        }
+    }
+
+    enum LessonNavigationRequest {
+        enum Direction {
+            case previous
+            case next
+        }
+
+        struct Request {
+            let direction: Direction
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {
