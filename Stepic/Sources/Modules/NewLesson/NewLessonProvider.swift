@@ -5,6 +5,10 @@ protocol NewLessonProviderProtocol {
     func fetchLesson(id: Lesson.IdType) -> Promise<FetchResult<Lesson?>>
     func fetchLessonAndUnit(unitID: Unit.IdType) -> Promise<(FetchResult<Unit?>, FetchResult<Lesson?>)>
     func fetchSteps(ids: [Step.IdType]) -> Promise<FetchResult<[Step]?>>
+    func fetchAssignments(ids: [Assignment.IdType]) -> Promise<FetchResult<[Assignment]?>>
+    func fetchProgresses(ids: [Progress.IdType]) -> Promise<FetchResult<[Progress]?>>
+
+    func createView(stepID: Step.IdType, assignmentID: Assignment.IdType?) -> Promise<Void>
 }
 
 final class NewLessonProvider: NewLessonProviderProtocol {
@@ -14,6 +18,11 @@ final class NewLessonProvider: NewLessonProviderProtocol {
     private let unitsNetworkService: UnitsNetworkServiceProtocol
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
+    private let assignmentsPersistenceService: AssignmentsPersistenceServiceProtocol
+    private let assignmentsNetworkService: AssignmentsNetworkServiceProtocol
+    private let progressesPersistenceService: ProgressesPersistenceServiceProtocol
+    private let progressesNetworkService: ProgressesNetworkServiceProtocol
+    private let viewsNetworkService: ViewsNetworkServiceProtocol
 
     init(
         lessonsPersistenceService: LessonsPersistenceServiceProtocol,
@@ -21,7 +30,12 @@ final class NewLessonProvider: NewLessonProviderProtocol {
         unitsPersistenceService: UnitsPersistenceServiceProtocol,
         unitsNetworkService: UnitsNetworkServiceProtocol,
         stepsPersistenceService: StepsPersistenceServiceProtocol,
-        stepsNetworkService: StepsNetworkServiceProtocol
+        stepsNetworkService: StepsNetworkServiceProtocol,
+        assignmentsNetworkService: AssignmentsNetworkServiceProtocol,
+        assignmentsPersistenceService: AssignmentsPersistenceServiceProtocol,
+        progressesPersistenceService: ProgressesPersistenceServiceProtocol,
+        progressesNetworkService: ProgressesNetworkServiceProtocol,
+        viewsNetworkService: ViewsNetworkServiceProtocol
     ) {
         self.lessonsPersistenceService = lessonsPersistenceService
         self.lessonsNetworkService = lessonsNetworkService
@@ -29,6 +43,11 @@ final class NewLessonProvider: NewLessonProviderProtocol {
         self.unitsNetworkService = unitsNetworkService
         self.stepsPersistenceService = stepsPersistenceService
         self.stepsNetworkService = stepsNetworkService
+        self.assignmentsNetworkService = assignmentsNetworkService
+        self.assignmentsPersistenceService = assignmentsPersistenceService
+        self.progressesPersistenceService = progressesPersistenceService
+        self.progressesNetworkService = progressesNetworkService
+        self.viewsNetworkService = viewsNetworkService
     }
 
     // MARK: Public API
@@ -112,6 +131,70 @@ final class NewLessonProvider: NewLessonProviderProtocol {
                 return Promise.value(result)
             }.done { result in
                 seal.fulfill(result)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchAssignments(ids: [Assignment.IdType]) -> Promise<FetchResult<[Assignment]?>> {
+        let persistenceServicePromise = Guarantee(self.assignmentsPersistenceService.fetch(ids: ids), fallback: nil)
+        let networkServicePromise = Guarantee(self.assignmentsNetworkService.fetch(ids: ids), fallback: nil)
+
+        return Promise { seal in
+            when(
+                fulfilled: persistenceServicePromise,
+                networkServicePromise
+            ).then { cachedAssignments, remoteAssignments -> Promise<FetchResult<[Assignment]?>> in
+                if let remoteAssignments = remoteAssignments {
+                    let result = FetchResult<[Assignment]?>(value: remoteAssignments, source: .remote)
+                    return Promise.value(result)
+                }
+
+                let result = FetchResult<[Assignment]?>(value: cachedAssignments, source: .cache)
+                return Promise.value(result)
+            }.done { result in
+                seal.fulfill(result)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchProgresses(ids: [Progress.IdType]) -> Promise<FetchResult<[Progress]?>> {
+        let persistenceServicePromise = Guarantee(
+            self.progressesPersistenceService.fetch(ids: ids, page: 1),
+            fallback: nil
+        )
+        let networkServicePromise = Guarantee(
+            self.progressesNetworkService.fetch(ids: ids, page: 1),
+            fallback: nil
+        )
+
+        return Promise { seal in
+            when(
+                fulfilled: persistenceServicePromise,
+                networkServicePromise
+            ).then { cachedProgresses, remoteProgresses -> Promise<FetchResult<[Progress]?>> in
+                if let remoteProgresses = remoteProgresses?.0 {
+                    let result = FetchResult<[Progress]?>(value: remoteProgresses, source: .remote)
+                    return Promise.value(result)
+                }
+
+                let result = FetchResult<[Progress]?>(value: cachedProgresses?.0, source: .cache)
+                return Promise.value(result)
+            }.done { result in
+                seal.fulfill(result)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func createView(stepID: Step.IdType, assignmentID: Assignment.IdType?) -> Promise<Void> {
+        return Promise { seal in
+            self.viewsNetworkService.create(step: stepID, assignment: assignmentID).done {
+                seal.fulfill(())
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

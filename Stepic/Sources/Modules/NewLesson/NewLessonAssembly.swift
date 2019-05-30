@@ -27,14 +27,20 @@ final class NewLessonAssembly: Assembly {
             unitsPersistenceService: UnitsPersistenceService(),
             unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
             stepsPersistenceService: StepsPersistenceService(),
-            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
+            assignmentsNetworkService: AssignmentsNetworkService(assignmentsAPI: AssignmentsAPI()),
+            assignmentsPersistenceService: AssignmentsPersistenceService(),
+            progressesPersistenceService: ProgressesPersistenceService(),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
+            viewsNetworkService: ViewsNetworkService(viewsAPI: ViewsAPI())
         )
         let presenter = NewLessonPresenter()
         let interactor = NewLessonInteractor(
             initialContext: self.initialContext,
             presenter: presenter,
             provider: provider,
-            unitNavigationService: unitNavigationService
+            unitNavigationService: unitNavigationService,
+            persistenceQueuesService: PersistenceQueuesService()
         )
         let viewController = NewLessonViewController(interactor: interactor)
         viewController.hidesBottomBarWhenPushed = true

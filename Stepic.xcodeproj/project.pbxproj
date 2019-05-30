@@ -3697,6 +3697,8 @@
 		2CB62BE72019FD8500B5E336 /* step2.html in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BE22019FD8400B5E336 /* step2.html */; };
 		2CB62BEE2019FDB100B5E336 /* arrow_right.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BEC2019FDB000B5E336 /* arrow_right.svg */; };
 		2CB62BEF2019FDB100B5E336 /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BED2019FDB100B5E336 /* arrow_left.svg */; };
+		2CB9529C229F29F000A6117A /* ViewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */; };
+		2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */; };
 		2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
 		2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */; };
 		2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */; };
@@ -3786,6 +3788,8 @@
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
+		2CDAD308229EB3F700AA9EF5 /* AssignmentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */; };
+		2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */; };
 		2CDE2ADD216B3F61008AF0D1 /* ProgressPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */; };
 		2CDE34B42124710E00898A70 /* QuizViewControllerBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */; };
 		2CDE34B6212472AA00898A70 /* LogoutableMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE34B5212472AA00898A70 /* LogoutableMock.swift */; };
@@ -5892,6 +5896,8 @@
 		2CB62BEA2019FD9300B5E336 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = OnboardingContent/en.lproj/step3.html; sourceTree = "<group>"; };
 		2CB62BEC2019FDB000B5E336 /* arrow_right.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = arrow_right.svg; sourceTree = "<group>"; };
 		2CB62BED2019FDB100B5E336 /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = arrow_left.svg; sourceTree = "<group>"; };
+		2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsNetworkService.swift; sourceTree = "<group>"; };
+		2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsPersistenceService.swift; sourceTree = "<group>"; };
 		2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPresenter.swift; sourceTree = "<group>"; };
@@ -5961,6 +5967,8 @@
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
+		2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsNetworkService.swift; sourceTree = "<group>"; };
+		2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceQueuesService.swift; sourceTree = "<group>"; };
 		2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPlainObject.swift; sourceTree = "<group>"; };
 		2CDE34B32124710E00898A70 /* QuizViewControllerBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewControllerBuilderTests.swift; sourceTree = "<group>"; };
 		2CDE34B5212472AA00898A70 /* LogoutableMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutableMock.swift; sourceTree = "<group>"; };
@@ -10711,6 +10719,7 @@
 		62E9806BB6A2F9AAB1D7D9F1 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */,
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
 				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
 				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
@@ -10840,6 +10849,8 @@
 			isa = PBXGroup;
 			children = (
 				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
+				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
+				2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */,
 				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
 				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
@@ -11392,6 +11403,7 @@
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				62E986D1988A3445F3416404 /* Managers */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
+				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -15434,6 +15446,7 @@
 				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,
 				08C5E4FD1C315272004AA626 /* AudioManager.swift in Sources */,
 				2C7FEE7F1FDFCEF200B2B4F1 /* OnboardingAnimatedView.swift in Sources */,
+				2CB9529C229F29F000A6117A /* ViewsNetworkService.swift in Sources */,
 				088E73F42061BDAA00D458E3 /* StepikModelView.swift in Sources */,
 				2CC3519A1F68339A004255B6 /* AuthTextField.swift in Sources */,
 				2C8908A0216F465200083341 /* NotificationsService.swift in Sources */,
@@ -15566,6 +15579,7 @@
 				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
 				0859AE951E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
+				2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */,
 				08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,
@@ -15892,6 +15906,7 @@
 				62E98020191EC2437E768FCC /* CourseListsCollectionViewModel.swift in Sources */,
 				62E9881CB604CB84623EFF03 /* TagsView.swift in Sources */,
 				62E989B1F2BADB27893CA9DE /* TagsProvider.swift in Sources */,
+				2CDAD308229EB3F700AA9EF5 /* AssignmentsNetworkService.swift in Sources */,
 				2C48D5FA228D7D2C00739477 /* ProcessedContentTextView.swift in Sources */,
 				62E985EF5058E00F1E9CA342 /* TagViewModel.swift in Sources */,
 				62E98CE2F6D449A134D98EB6 /* TagsOutputProtocol.swift in Sources */,
@@ -15934,6 +15949,7 @@
 				4AC49732BD397C516D132297 /* NewLessonPresenter.swift in Sources */,
 				F5EB81E67462BA3FD6B6CCCB /* NewLessonDataFlow.swift in Sources */,
 				5DABE0AA5285D92AE83E5C3A /* NewLessonProvider.swift in Sources */,
+				2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */,
 				2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */,
 				B65A65710ADB3F8B0D20CFBC /* NewLessonInputProtocol.swift in Sources */,
 				DA8E64EAD462389EB97396C4 /* NewLessonOutputProtocol.swift in Sources */,

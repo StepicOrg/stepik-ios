@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 import Alamofire
 import SwiftyJSON
 
@@ -15,5 +16,17 @@ class AssignmentsAPI: APIEndpoint {
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Assignment], refreshMode: RefreshMode, success: @escaping (([Assignment]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
         return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    }
+
+    func retrieve(ids: [Assignment.IdType]) -> Promise<[Assignment]> {
+        return Promise { seal in
+            Assignment.fetchAsync(ids: ids).done { assignments in
+                self.retrieve(ids: ids, existing: assignments, refreshMode: .update, success: { newAssignments in
+                    seal.fulfill(newAssignments)
+                }, error: { error in
+                    seal.reject(error)
+                })
+            }
+        }
     }
 }

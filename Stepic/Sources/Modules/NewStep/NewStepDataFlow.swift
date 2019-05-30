@@ -1,6 +1,7 @@
 import Foundation
 
 enum NewStep {
+    /// Load step content
     enum StepLoad {
         struct Request { }
 
@@ -13,6 +14,7 @@ enum NewStep {
         }
     }
 
+    /// Update bottom step controls – navigation buttons
     enum ControlsUpdate {
         struct Response {
             let canNavigateToPreviousUnit: Bool
@@ -25,6 +27,7 @@ enum NewStep {
         }
     }
 
+    /// Handle navigation button click - request lesson container for presenting new lesson
     enum LessonNavigationRequest {
         enum Direction {
             case previous
@@ -34,6 +37,11 @@ enum NewStep {
         struct Request {
             let direction: Direction
         }
+    }
+
+    /// Handle information about step was presented
+    enum StepViewRequest {
+        struct Request { }
     }
 
     // MARK: Enums

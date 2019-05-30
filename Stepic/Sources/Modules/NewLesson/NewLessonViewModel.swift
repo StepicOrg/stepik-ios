@@ -1,7 +1,11 @@
 import Foundation
 
 struct NewLessonViewModel {
-    typealias StepDescription = (id: Step.IdType, iconImage: UIImage)
+    struct StepDescription {
+        let id: Step.IdType
+        let iconImage: UIImage
+        let isPassed: Bool
+    }
 
     let lessonTitle: String
     let steps: [StepDescription]

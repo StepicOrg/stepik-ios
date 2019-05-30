@@ -9,6 +9,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     private let presenter: NewLessonPresenterProtocol
     private let provider: NewLessonProviderProtocol
     private let unitNavigationService: UnitNavigationServiceProtocol
+    private let persistenceQueuesService: PersistenceQueuesServiceProtocol
 
     private var currentLesson: Lesson?
 
@@ -19,16 +20,21 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         }
     }
     private var nextUnit: Unit?
+    private var assignmentsForCurrentSteps: [Step.IdType: Assignment.IdType] = [:]
+
+    private var sendViewSemaphore = DispatchSemaphore(value: 0)
 
     init(
         initialContext: NewLesson.Context,
         presenter: NewLessonPresenterProtocol,
         provider: NewLessonProviderProtocol,
-        unitNavigationService: UnitNavigationServiceProtocol
+        unitNavigationService: UnitNavigationServiceProtocol,
+        persistenceQueuesService: PersistenceQueuesServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.unitNavigationService = unitNavigationService
+        self.persistenceQueuesService = persistenceQueuesService
 
         self.refresh(context: initialContext)
     }
@@ -40,6 +46,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         self.nextUnit = nil
         self.currentLesson = nil
         self.currentUnit = nil
+        self.assignmentsForCurrentSteps.removeAll()
 
         self.loadData(context: context)
     }
@@ -54,7 +61,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             case .unit(let unitID):
                 return self.provider.fetchLessonAndUnit(unitID: unitID).map { ($0.1.value, $0.0.value) }
             }
-        }.then(on: .global(qos: .userInitiated)) { lesson, unit -> Promise<([Step]?, Lesson)> in
+        }.then(on: .global(qos: .userInitiated)) { lesson, unit -> Promise<([Assignment], Lesson)> in
             self.currentUnit = unit
             self.currentLesson = lesson
 
@@ -62,34 +69,53 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 throw Error.fetchFailed
             }
 
+            // If unit exists then load assignments
+            let assignmentsPromise: Promise<[Assignment]>
+            if let unit = unit {
+                assignmentsPromise = self.provider.fetchAssignments(ids: unit.assignmentsArray).map { $0.value ?? [] }
+            } else {
+                assignmentsPromise = .value([])
+            }
+
+            return assignmentsPromise.map { ($0, lesson) }
+        }.then(on: .global(qos: .userInitiated)) { assignments, lesson -> Promise<([Step]?, Lesson)> in
+            let assignments = assignments.reordered(order: lesson.stepsArray, transform: { $0.stepId })
+
+            for (index, stepID) in lesson.stepsArray.enumerated() where index < assignments.count {
+                self.assignmentsForCurrentSteps[stepID] = assignments[index].id
+            }
+
             return self.provider.fetchSteps(ids: lesson.stepsArray).map { ($0.value, lesson) }
-        }.done(on: .global(qos: .userInitiated)) { steps, lesson in
+        }.then(on: .global(qos: .userInitiated)) { steps, lesson -> Promise<([Step], Lesson, [Progress])> in
             guard let steps = steps else {
                 throw Error.fetchFailed
             }
 
+            return self.provider.fetchProgresses(ids: steps.compactMap { $0.progressId })
+                .map { (steps, lesson, $0.value ?? []) }
+        }.done(on: .global(qos: .userInitiated)) { steps, lesson, progresses in
             DispatchQueue.main.async {
-                self.presenter.presentLesson(response: .init(data: .success((lesson, steps))))
+                self.presenter.presentLesson(response: .init(data: .success((lesson, steps, progresses))))
             }
         }.cauterize()
     }
 
     private func refreshAdjacentUnits() {
-        guard let unit = self.currentUnit else {
+        guard let unitID = self.currentUnit?.id else {
             return
         }
 
-        let previousUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unit.id, direction: .previous)
-        let nextUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unit.id, direction: .next)
+        let previousUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unitID, direction: .previous)
+        let nextUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unitID, direction: .next)
 
         when(
             fulfilled: previousUnitPromise, nextUnitPromise
-        ).done(on: .global(qos: .userInitiated)) {[weak self] previousUnit, nextUnit in
+        ).done(on: .global(qos: .userInitiated)) { [weak self] previousUnit, nextUnit in
             guard let strongSelf = self else {
                 return
             }
 
-            if unit.id == strongSelf.currentUnit?.id {
+            if strongSelf.currentUnit?.id == unitID {
                 strongSelf.nextUnit = nextUnit
                 strongSelf.previousUnit = previousUnit
 
@@ -126,6 +152,20 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         }
 
         self.refresh(context: .unit(id: unit.id))
+    }
+
+    func handleStepView(id: Step.IdType) {
+        let assignmentID = self.assignmentsForCurrentSteps[id]
+
+        guard self.currentLesson?.stepsArray.contains(id) ?? false else {
+            return
+        }
+
+        self.provider.createView(stepID: id, assignmentID: assignmentID).done {
+            print("new lesson interactor: view for step \(id) & assignment = \(assignmentID ?? -1) did sent")
+        }.catch { _ in
+            self.persistenceQueuesService.addSendViewTask(stepID: id, assignmentID: assignmentID)
+        }
     }
 }
 

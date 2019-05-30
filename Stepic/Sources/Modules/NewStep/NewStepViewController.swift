@@ -44,6 +44,11 @@ final class NewStepViewController: UIViewController {
         self.interactor.doStepLoad(request: .init())
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.interactor.doStepViewRequest(request: .init())
+    }
+
     // MARK: Private API
 
     @objc

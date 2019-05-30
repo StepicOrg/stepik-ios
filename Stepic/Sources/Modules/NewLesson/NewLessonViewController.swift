@@ -212,7 +212,10 @@ extension NewLessonViewController: TMBarDataSource {
             fatalError("Step not found")
         }
 
-        return TMBarItem(image: stepDescription.iconImage)
+        let stepStringID = "\(stepDescription.id)"
+        // Pass random badgeValue to mark step as passed
+        let badgeValue = stepDescription.isPassed ? "+" : nil
+        return TMBarItem(title: stepStringID, image: stepDescription.iconImage, badgeValue: badgeValue)
     }
 }
 

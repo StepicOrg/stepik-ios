@@ -5,7 +5,7 @@ enum NewLesson {
 
     enum LessonLoad {
         struct Response {
-            let data: Result<(Lesson, [Step])>
+            let data: Result<(Lesson, [Step], [Progress])>
         }
 
         struct ViewModel {

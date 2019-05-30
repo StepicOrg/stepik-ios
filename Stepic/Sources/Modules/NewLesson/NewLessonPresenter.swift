@@ -15,7 +15,9 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         case .failure:
             viewModel = .init(state: .error)
         case .success(let result):
-            viewModel = .init(state: .result(data: self.makeViewModel(lesson: result.0, steps: result.1)))
+            viewModel = .init(
+                state: .result(data: self.makeViewModel(lesson: result.0, steps: result.1, progresses: result.2))
+            )
         }
 
         self.viewController?.displayLesson(viewModel: viewModel)
@@ -32,9 +34,9 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
 
     // MAKE: Private API
 
-    private func makeViewModel(lesson: Lesson, steps: [Step]) -> NewLessonViewModel {
+    private func makeViewModel(lesson: Lesson, steps: [Step], progresses: [Progress]) -> NewLessonViewModel {
         let lessonTitle = lesson.title
-        let steps: [NewLessonViewModel.StepDescription] = steps.map { step in
+        let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
                 switch step.block.name {
                 case "video":
@@ -47,7 +49,11 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
                     return UIImage(named: "quiz_step_icon")
                 }
             }()
-            return (id: step.id, iconImage: iconImage ?? UIImage())
+            return .init(
+                id: step.id,
+                iconImage: iconImage ?? UIImage(),
+                isPassed: progresses[safe: index]?.isPassed ?? false
+            )
         }
         return NewLessonViewModel(lessonTitle: lessonTitle, steps: steps)
     }
