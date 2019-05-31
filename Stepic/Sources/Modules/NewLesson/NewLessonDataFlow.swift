@@ -3,6 +3,7 @@ import Foundation
 enum NewLesson {
     // MARK: Data flow
 
+    /// Load lesson content
     enum LessonLoad {
         struct Response {
             let data: Result<(Lesson, [Step], [Progress])>
@@ -13,6 +14,7 @@ enum NewLesson {
         }
     }
 
+    /// Load lesson navigation (next / previous lessons)
     enum LessonNavigationLoad {
         struct Response {
             let hasPreviousUnit: Bool
@@ -22,6 +24,18 @@ enum NewLesson {
         struct ViewModel {
             let hasPreviousUnit: Bool
             let hasNextUnit: Bool
+        }
+    }
+
+    /// Mark step as passed
+    enum StepPassedStatusUpdate {
+        struct Response {
+            let stepID: Step.IdType
+        }
+
+        struct ViewModel {
+            // Can't use index here cause lesson can be updated
+            let stepID: Step.IdType
         }
     }
 

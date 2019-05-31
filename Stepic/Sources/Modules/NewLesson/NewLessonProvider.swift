@@ -137,6 +137,7 @@ final class NewLessonProvider: NewLessonProviderProtocol {
         }
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
     func fetchAssignments(ids: [Assignment.IdType]) -> Promise<FetchResult<[Assignment]?>> {
         let persistenceServicePromise = Guarantee(self.assignmentsPersistenceService.fetch(ids: ids), fallback: nil)
         let networkServicePromise = Guarantee(self.assignmentsNetworkService.fetch(ids: ids), fallback: nil)
@@ -161,6 +162,7 @@ final class NewLessonProvider: NewLessonProviderProtocol {
         }
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
     func fetchProgresses(ids: [Progress.IdType]) -> Promise<FetchResult<[Progress]?>> {
         let persistenceServicePromise = Guarantee(
             self.progressesPersistenceService.fetch(ids: ids, page: 1),

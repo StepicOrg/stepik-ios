@@ -5,6 +5,7 @@ protocol NewStepInteractorProtocol {
     func doStepLoad(request: NewStep.StepLoad.Request)
     func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request)
     func doStepViewRequest(request: NewStep.StepViewRequest.Request)
+    func doStepDoneRequest(request: NewStep.StepDoneRequest.Request)
 }
 
 final class NewStepInteractor: NewStepInteractorProtocol {
@@ -49,6 +50,10 @@ final class NewStepInteractor: NewStepInteractorProtocol {
 
     func doStepViewRequest(request: NewStep.StepViewRequest.Request) {
         self.moduleOutput?.handleStepView(id: self.stepID)
+    }
+
+    func doStepDoneRequest(request: NewStep.StepDoneRequest.Request) {
+        self.moduleOutput?.handleStepDone(id: self.stepID)
     }
 
     enum Error: Swift.Error {

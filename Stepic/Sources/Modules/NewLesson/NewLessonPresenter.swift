@@ -3,6 +3,7 @@ import UIKit
 protocol NewLessonPresenterProtocol {
     func presentLesson(response: NewLesson.LessonLoad.Response)
     func presentLessonNavigation(response: NewLesson.LessonNavigationLoad.Response)
+    func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
 }
 
 final class NewLessonPresenter: NewLessonPresenterProtocol {
@@ -30,6 +31,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         )
 
         self.viewController?.displayLessonNavigation(viewModel: viewModel)
+    }
+
+    func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response) {
+        self.viewController?.displayStepPassedStatusUpdate(viewModel: .init(stepID: response.stepID))
     }
 
     // MAKE: Private API

@@ -44,6 +44,11 @@ enum NewStep {
         struct Request { }
     }
 
+    /// Handle information about step was passed
+    enum StepDoneRequest {
+        struct Request { }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

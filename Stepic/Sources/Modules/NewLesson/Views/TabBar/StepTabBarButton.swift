@@ -4,6 +4,7 @@ import UIKit
 
 final class StepTabBarButton: TMBarButton {
     static let didMarkAsDone = Foundation.Notification.Name("StepTabBarButton.didMarkAsDone")
+    static let userInfoIDKey = "stepID"
     static let animationDuration: TimeInterval = 0.25
 
     enum Appearance {
@@ -35,7 +36,7 @@ final class StepTabBarButton: TMBarButton {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.markedAsDone),
+            selector: #selector(self.markedAsDone(_:)),
             name: StepTabBarButton.didMarkAsDone,
             object: nil
         )
@@ -85,7 +86,15 @@ final class StepTabBarButton: TMBarButton {
     }
 
     @objc
-    private func markedAsDone() {
+    private func markedAsDone(_ notification: Foundation.Notification) {
+        guard let stepID = notification.userInfo?[StepTabBarButton.userInfoIDKey] as? String else {
+            return
+        }
 
+        guard stepID == self.identifier else {
+            return
+        }
+
+        self.animatePassedMark()
     }
 }

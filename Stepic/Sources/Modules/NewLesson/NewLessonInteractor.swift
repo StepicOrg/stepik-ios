@@ -139,7 +139,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
 extension NewLessonInteractor: NewStepOutputProtocol {
     func handlePreviousUnitNavigation() {
-        guard let unit = self.nextUnit else {
+        guard let unit = self.previousUnit else {
             return
         }
 
@@ -166,6 +166,11 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         }.catch { _ in
             self.persistenceQueuesService.addSendViewTask(stepID: id, assignmentID: assignmentID)
         }
+    }
+
+    func handleStepDone(id: Step.IdType) {
+        print("step done", id)
+        self.presenter.presentStepPassedStatusUpdate(response: .init(stepID: id))
     }
 }
 

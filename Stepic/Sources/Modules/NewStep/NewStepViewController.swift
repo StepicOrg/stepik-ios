@@ -22,6 +22,9 @@ final class NewStepViewController: UIViewController {
         }
     }
 
+    private var didInitRequestsSend = false
+    private var sendStepDidPassedGroup = DispatchGroup()
+
     init(interactor: NewStepInteractorProtocol) {
         self.interactor = interactor
         self.state = .loading
@@ -43,14 +46,41 @@ final class NewStepViewController: UIViewController {
 
         self.newStepView?.delegate = self
         self.interactor.doStepLoad(request: .init())
+
+        // Enter group, leave when content did load & in view did appear
+        self.sendStepDidPassedGroup.enter()
+        self.sendStepDidPassedGroup.enter()
+
+        self.sendStepDidPassedGroup.notify(queue: .main) { [weak self] in
+            self?.sendInitStepStatusRequests()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.interactor.doStepViewRequest(request: .init())
+
+        if !self.didInitRequestsSend {
+            self.sendStepDidPassedGroup.leave()
+        }
     }
 
     // MARK: Private API
+
+    private func sendInitStepStatusRequests() {
+        defer {
+            self.didInitRequestsSend = true
+        }
+
+        self.interactor.doStepViewRequest(request: .init())
+
+        guard case .result(let viewModel) = self.state, viewModel.quizType == nil else {
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.interactor.doStepDoneRequest(request: .init())
+        }
+    }
 
     @objc
     // swiftlint:disable:next cyclomatic_complexity
@@ -59,7 +89,12 @@ final class NewStepViewController: UIViewController {
             return
         }
 
+        if !self.didInitRequestsSend {
+            self.sendStepDidPassedGroup.leave()
+        }
+
         guard let quizType = viewModel.quizType else {
+            // Video & text steps
             self.newStepView?.configure(viewModel: viewModel, quizView: nil)
             return
         }
@@ -93,6 +128,7 @@ final class NewStepViewController: UIViewController {
 
         if let controller = quizController {
             controller.step = viewModel.step
+            controller.delegate = self
             self.addChild(controller)
             self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         } else {
@@ -179,5 +215,11 @@ extension NewStepViewController: NewStepViewDelegate {
 
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         
+    }
+}
+
+extension NewStepViewController: QuizControllerDelegate {
+    func submissionDidCorrect() {
+        self.interactor.doStepDoneRequest(request: .init())
     }
 }

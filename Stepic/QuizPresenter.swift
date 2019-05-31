@@ -103,11 +103,11 @@ class QuizPresenter {
                         self?.step.progress?.isPassed = true
                         CoreDataHelper.instance.save()
                     }
+
+                    delegate?.submissionDidCorrect()
                 } else {
                     view?.showPeerReviewWarning()
                 }
-
-                delegate?.submissionDidCorrect()
                 break
 
             case "wrong":

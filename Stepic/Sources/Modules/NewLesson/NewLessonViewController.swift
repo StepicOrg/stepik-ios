@@ -6,6 +6,7 @@ import UIKit
 protocol NewLessonViewControllerProtocol: class {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
+    func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
 }
 
 final class NewLessonViewController: TabmanViewController {
@@ -231,6 +232,16 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         self.updateLessonNavigationInSteps(
             hasNavigationToPreviousUnit: self.hasNavigationToPreviousUnit,
             hasNavigationToNextUnit: self.hasNavigationToNextUnit
+        )
+    }
+
+    func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel) {
+        let tabIdentifier = "\(viewModel.stepID)"
+
+        NotificationCenter.default.post(
+            name: StepTabBarButton.didMarkAsDone,
+            object: nil,
+            userInfo: [StepTabBarButton.userInfoIDKey: tabIdentifier]
         )
     }
 }
