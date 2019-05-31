@@ -14,7 +14,9 @@
             <connections>
                 <outlet property="containerView" destination="HO0-Wd-0kw" id="BZi-zt-KtT"/>
                 <outlet property="hintHeight" destination="AhP-8s-ofa" id="2bJ-6X-Sgt"/>
+                <outlet property="hintLeadingConstraint" destination="oDA-3f-YMY" id="FNF-0V-pnH"/>
                 <outlet property="hintTextView" destination="veh-sk-UzR" id="xRb-0L-ijn"/>
+                <outlet property="hintTrailingConstraint" destination="NR7-N6-Zku" id="hYW-FM-b7E"/>
                 <outlet property="hintView" destination="GmL-q5-y6Z" id="mEf-oh-hyb"/>
                 <outlet property="hintWebView" destination="Ke4-HJ-ctM" id="OjG-Wo-RAE"/>
                 <outlet property="peerReviewButton" destination="Qdk-og-oWI" id="q2L-Qo-FIv"/>

@@ -16,7 +16,7 @@ final class ViewsNetworkService: ViewsNetworkServiceProtocol {
         return Promise { seal in
             self.viewsAPI.create(step: step, assignment: assignment).done {
                 seal.fulfill(())
-            }.catch { error in
+            }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
         }

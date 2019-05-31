@@ -17,7 +17,9 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     @IBOutlet weak var sendButtonTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
-
+    @IBOutlet weak var hintTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hintLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var statusLabel: StepikLabel!
     @IBOutlet weak var statusImageView: UIImageView!
@@ -294,6 +296,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             self.sendButton.layer.cornerRadius = 6
             self.sendButtonLeadingConstraint.constant = -16
             self.sendButtonTrailingConstraint.constant = 16
+            self.hintLeadingConstraint.constant = 16
+            self.hintTrailingConstraint.constant = 16
             self.sendButtonHeight.constant = 44
             self.sendButtonBottomConstraint.constant = 0
             self.sendButton.layer.borderWidth = 0

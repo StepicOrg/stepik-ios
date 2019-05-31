@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewStepViewDelegate: class {
+protocol NewStepViewDelegate: ProcessedContentTextViewDelegate {
     func newStepViewDidRequestVideo(_ view: NewStepView)
     func newStepViewDidRequestPrevious(_ view: NewStepView)
     func newStepViewDidRequestNext(_ view: NewStepView)
@@ -23,6 +23,7 @@ final class NewStepView: UIView {
 
     private lazy var stepTextView: ProcessedContentTextView = {
         let view = ProcessedContentTextView()
+        view.delegate = self.delegate
         return view
     }()
 

@@ -1,3 +1,4 @@
+import Agrume
 import UIKit
 
 protocol NewStepViewControllerProtocol: class {
@@ -52,6 +53,7 @@ final class NewStepViewController: UIViewController {
     // MARK: Private API
 
     @objc
+    // swiftlint:disable:next cyclomatic_complexity
     private func showContent() {
         guard case .result(let viewModel) = self.state else {
             return
@@ -62,14 +64,43 @@ final class NewStepViewController: UIViewController {
             return
         }
 
-        switch quizType {
-        case .choice:
-            let quizController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-            quizController.step = viewModel.step
-            self.addChild(quizController)
-            self.newStepView?.configure(viewModel: viewModel, quizView: quizController.view)
-        default:
-            self.newStepView?.configure(viewModel: viewModel, quizView: nil)
+        let quizController: QuizViewController? = {
+            switch quizType {
+            case .choice:
+                return ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .string:
+                return StringQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .number:
+                return NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .freeAnswer:
+                return FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .math:
+                return MathQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .sorting:
+                return SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .matching:
+                return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .fillBlanks:
+                return FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .code:
+                return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .sql:
+                return SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
+            default:
+                return nil
+            }
+        }()
+
+        if let controller = quizController {
+            controller.step = viewModel.step
+            self.addChild(controller)
+            self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
+        } else {
+            let controller = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
+            // TODO: make url
+            // quizController.stepUrl = self.stepUrl
+            self.addChild(controller)
+            self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         }
     }
 }
@@ -129,5 +160,24 @@ extension NewStepViewController: NewStepViewDelegate {
             stepID: viewModel.step.id
         )
         self.push(module: assembly.makeModule())
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+        let agrume = Agrume(url: url)
+        agrume.show(from: self)
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+        WebControllerManager.sharedManager.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: "external link",
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
+    }
+
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+        
     }
 }
