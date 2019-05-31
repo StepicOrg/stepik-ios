@@ -10,6 +10,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     private let provider: NewLessonProviderProtocol
     private let unitNavigationService: UnitNavigationServiceProtocol
     private let persistenceQueuesService: PersistenceQueuesServiceProtocol
+    private let dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var currentLesson: Lesson?
 
@@ -29,12 +30,14 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         presenter: NewLessonPresenterProtocol,
         provider: NewLessonProviderProtocol,
         unitNavigationService: UnitNavigationServiceProtocol,
-        persistenceQueuesService: PersistenceQueuesServiceProtocol
+        persistenceQueuesService: PersistenceQueuesServiceProtocol,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.unitNavigationService = unitNavigationService
         self.persistenceQueuesService = persistenceQueuesService
+        self.dataBackUpdateService = dataBackUpdateService
 
         self.refresh(context: initialContext)
     }
@@ -169,8 +172,11 @@ extension NewLessonInteractor: NewStepOutputProtocol {
     }
 
     func handleStepDone(id: Step.IdType) {
-        print("step done", id)
         self.presenter.presentStepPassedStatusUpdate(response: .init(stepID: id))
+
+        if let unit = self.currentUnit {
+            self.dataBackUpdateService.triggerProgressUpdate(unit: unit.id, triggerRecursive: true)
+        }
     }
 }
 
