@@ -123,15 +123,18 @@ final class NewStepView: UIView {
     private func positionVideoPreview() {
         let fullHeight = self.bounds.height
         let previewHeight = self.stepVideoPreviewView.bounds.height
-        let controlsHeight = self.stepControlsView.bounds.height
         let topInset = self.scrollableStackView.contentInsets.top
+
+        let controlsRealHeight = self.stepControlsView.bounds.height
+        let controlsHeight = self.stepControlsView.sizeWithAllControls.height
+        let controlsDiffHeight = max(0, controlsHeight - controlsRealHeight)
 
         self.scrollableStackView.isScrollEnabled = previewHeight + controlsHeight + topInset >= fullHeight
 
         let previewContainerHeight = max(0, fullHeight - topInset - previewHeight - controlsHeight)
         self.stepVideoPreviewView.snp.updateConstraints { make in
             make.top.equalToSuperview().offset(previewContainerHeight * 0.5)
-            make.bottom.equalToSuperview().offset(-previewContainerHeight * 0.5)
+            make.bottom.equalToSuperview().offset(-previewContainerHeight * 0.5 - controlsDiffHeight)
         }
     }
 }

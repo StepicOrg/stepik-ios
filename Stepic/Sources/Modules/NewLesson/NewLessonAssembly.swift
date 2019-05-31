@@ -21,6 +21,13 @@ final class NewLessonAssembly: Assembly {
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI())
         )
 
+        let dataBackUpdateService = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+
         let provider = NewLessonProvider(
             lessonsPersistenceService: LessonsPersistenceService(),
             lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
@@ -40,7 +47,8 @@ final class NewLessonAssembly: Assembly {
             presenter: presenter,
             provider: provider,
             unitNavigationService: unitNavigationService,
-            persistenceQueuesService: PersistenceQueuesService()
+            persistenceQueuesService: PersistenceQueuesService(),
+            dataBackUpdateService: dataBackUpdateService
         )
         let viewController = NewLessonViewController(interactor: interactor)
         viewController.hidesBottomBarWhenPushed = true

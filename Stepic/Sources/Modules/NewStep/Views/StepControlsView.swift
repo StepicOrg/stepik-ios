@@ -47,9 +47,7 @@ final class StepControlsView: UIView {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(
-            arrangedSubviews: [self.navigationStackView]
-        )
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
         return stackView
@@ -64,6 +62,17 @@ final class StepControlsView: UIView {
             width: UIView.noIntrinsicMetric,
             height: self.appearance.insets.top
                 + stackViewSize.height
+                + (self.navigationState == .none ? 0 : self.appearance.spacing)
+                + (self.isCommentsButtonHidden ? 0 : self.appearance.commentsButtonHeight)
+        )
+    }
+
+    var sizeWithAllControls: CGSize {
+        let size = self.bounds.size
+        return CGSize(
+            width: size.width,
+            height: self.appearance.insets.top
+                + self.appearance.submitButtonHeight
                 + self.appearance.spacing
                 + self.appearance.commentsButtonHeight
         )
@@ -78,6 +87,7 @@ final class StepControlsView: UIView {
     var navigationState: NavigationState? {
         didSet {
             self.updateNavigationState()
+            self.updateNavigationButtons()
         }
     }
 
@@ -130,6 +140,11 @@ final class StepControlsView: UIView {
     private func updateNavigationState() {
         self.navigationStackView.removeAllArrangedSubviews()
 
+        if self.navigationStackView.superview != nil {
+            self.stackView.removeArrangedSubview(self.navigationStackView)
+            self.navigationStackView.removeFromSuperview()
+        }
+
         if self.navigationState == .none {
             return
         }
@@ -150,6 +165,8 @@ final class StepControlsView: UIView {
         if self.navigationState == .next || self.navigationState == .both {
             self.navigationStackView.addArrangedSubview(nextButton)
         }
+
+        self.stackView.addArrangedSubview(self.navigationStackView)
     }
 
     private func updateCommentsButton() {
@@ -163,6 +180,16 @@ final class StepControlsView: UIView {
         } else {
             self.navigationBottomCommentsConstraint?.activate()
             self.navigationBottomConstraint?.deactivate()
+        }
+    }
+
+    private func updateNavigationButtons() {
+        if self.navigationState == .none {
+            self.navigationBottomCommentsConstraint?.update(offset: 0)
+            self.navigationBottomConstraint?.update(offset: 0)
+        } else {
+            self.navigationBottomCommentsConstraint?.update(offset: -self.appearance.spacing)
+            self.navigationBottomConstraint?.update(offset: -self.appearance.spacing)
         }
     }
 
@@ -218,5 +245,6 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
 
         // Should be executed when all constraints set up
         self.updateCommentsButton()
+        self.updateNavigationButtons()
     }
 }
