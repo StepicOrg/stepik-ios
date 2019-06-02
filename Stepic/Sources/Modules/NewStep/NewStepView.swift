@@ -170,7 +170,9 @@ final class NewStepView: UIView {
 
         self.scrollableStackView.isScrollEnabled = previewHeight + controlsHeight + bottomInset + topInset >= fullHeight
 
-        let previewContainerHeight = max(0, fullHeight - topInset - previewHeight - controlsHeight - bottomInset)
+        let previewContainerHeight = CGFloat(
+            max(0, Int(fullHeight - topInset - previewHeight - controlsHeight - bottomInset))
+        )
         self.stepVideoPreviewView.snp.updateConstraints { make in
             make.top.equalToSuperview().offset(previewContainerHeight * 0.5)
             make.bottom.equalToSuperview().offset(-previewContainerHeight * 0.5 - controlsDiffHeight)
