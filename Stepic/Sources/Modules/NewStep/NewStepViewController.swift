@@ -139,8 +139,7 @@ final class NewStepViewController: UIViewController {
             self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         } else {
             let controller = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
-            // TODO: make url
-            // quizController.stepUrl = self.stepUrl
+            controller.stepUrl = viewModel.stepURLPath
             self.addChild(controller)
             self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         }

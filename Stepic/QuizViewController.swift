@@ -12,6 +12,8 @@ import SnapKit
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
+    @IBOutlet weak var peerReviewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var peerReviewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonTrailingConstraint: NSLayoutConstraint!
@@ -296,6 +298,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             self.sendButton.layer.cornerRadius = 6
             self.sendButtonLeadingConstraint.constant = -16
             self.sendButtonTrailingConstraint.constant = 16
+            self.peerReviewLeadingConstraint.constant = 16
+            self.peerReviewTrailingConstraint.constant = 16
             self.hintLeadingConstraint.constant = 16
             self.hintTrailingConstraint.constant = 16
             self.sendButtonHeight.constant = 44

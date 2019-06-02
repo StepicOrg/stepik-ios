@@ -78,11 +78,14 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 quizType = NewStep.QuizType(blockName: step.block.name)
             }
 
+            let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonId)/step/\(step.position)?from_mobile_app=true"
+
             let viewModel = NewStepViewModel(
                 content: contentType,
                 quizType: quizType,
                 commentsLabelTitle: commentsLabelTitle,
                 discussionProxyID: step.discussionProxyId,
+                stepURLPath: urlPath,
                 step: step
             )
             seal(viewModel)

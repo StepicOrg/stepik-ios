@@ -21,6 +21,8 @@
                 <outlet property="hintWebView" destination="Ke4-HJ-ctM" id="OjG-Wo-RAE"/>
                 <outlet property="peerReviewButton" destination="Qdk-og-oWI" id="q2L-Qo-FIv"/>
                 <outlet property="peerReviewHeight" destination="Zdy-99-nI7" id="5bp-kl-J3t"/>
+                <outlet property="peerReviewLeadingConstraint" destination="HOo-0z-cVH" id="Jqx-2b-WXy"/>
+                <outlet property="peerReviewTrailingConstraint" destination="Zdy-99-nI7" id="gHP-ki-SUQ"/>
                 <outlet property="sendButton" destination="yPX-01-eq5" id="V3v-9d-GUi"/>
                 <outlet property="sendButtonBottomConstraint" destination="xye-9J-7EX" id="dJM-4k-gNj"/>
                 <outlet property="sendButtonHeight" destination="Pts-9U-YKn" id="x9H-cL-4wg"/>
@@ -111,7 +113,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdk-og-oWI">
-                    <rect key="frame" x="0.0" y="598" width="372" height="0.0"/>
+                    <rect key="frame" x="8" y="598" width="356" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" id="Zdy-99-nI7"/>
                     </constraints>
@@ -132,13 +134,13 @@
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="I3R-Pc-iTV" secondAttribute="trailing" id="91e-vo-OtM"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="top" secondItem="Qdk-og-oWI" secondAttribute="bottom" constant="8" id="DyQ-jv-O81"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" id="Gli-iz-mgq"/>
-                <constraint firstItem="Qdk-og-oWI" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" id="HOo-0z-cVH"/>
+                <constraint firstItem="Qdk-og-oWI" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" constant="8" id="HOo-0z-cVH"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="GmL-q5-y6Z" secondAttribute="trailing" constant="8" id="NR7-N6-Zku"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="yPX-01-eq5" secondAttribute="trailing" constant="8" id="SyG-E5-BxU"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="leading" secondItem="yPX-01-eq5" secondAttribute="leading" constant="-8" id="YbC-Ag-TK4"/>
                 <constraint firstItem="GmL-q5-y6Z" firstAttribute="top" secondItem="I3R-Pc-iTV" secondAttribute="bottom" constant="8" id="Z66-S5-1VR"/>
                 <constraint firstAttribute="trailing" secondItem="HO0-Wd-0kw" secondAttribute="trailing" id="dgt-gf-5BW"/>
-                <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="Qdk-og-oWI" secondAttribute="trailing" id="eHr-N6-lnF"/>
+                <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="Qdk-og-oWI" secondAttribute="trailing" constant="8" id="eHr-N6-lnF"/>
                 <constraint firstItem="yPX-01-eq5" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="bottom" constant="8" id="lRJ-4a-dUb"/>
                 <constraint firstItem="GmL-q5-y6Z" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" constant="8" id="oDA-3f-YMY"/>
                 <constraint firstAttribute="bottom" secondItem="yPX-01-eq5" secondAttribute="bottom" constant="8" id="xye-9J-7EX"/>
@@ -148,7 +150,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fbG-7B-MVp"/>
-            <point key="canvasLocation" x="283.5" y="-103.5"/>
+            <point key="canvasLocation" x="283.19999999999999" y="-104.34782608695653"/>
         </view>
     </objects>
 </document>

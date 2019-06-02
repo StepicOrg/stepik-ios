@@ -65,7 +65,7 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         return NewLessonViewModel(
             lessonTitle: lessonTitle,
             steps: steps,
-            stepLinkMaker: { "https://stepik.org/lesson/\(lesson.id)/step/\($0)" }
+            stepLinkMaker: { "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true" }
         )
     }
 }

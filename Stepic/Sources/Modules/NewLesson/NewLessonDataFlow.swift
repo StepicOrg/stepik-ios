@@ -44,7 +44,7 @@ enum NewLesson {
             let stepID: Step.IdType
         }
     }
-    
+
     // MARK: Enums
 
     enum ViewControllerState {
