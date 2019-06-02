@@ -49,7 +49,6 @@ final class NewStepViewController: UIViewController {
         self.newStepView?.startLoading()
 
         self.newStepView?.delegate = self
-        self.interactor.doStepLoad(request: .init())
 
         // Enter group, leave when content did load & in view did appear
         self.sendStepDidPassedGroup.enter()
@@ -62,6 +61,9 @@ final class NewStepViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        // TODO: Move this request to viewDidLoad, but we should deal with WKWebView behavior before
+        self.interactor.doStepLoad(request: .init())
 
         if !self.didInitRequestsSend {
             self.sendStepDidPassedGroup.leave()

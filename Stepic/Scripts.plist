@@ -33,7 +33,7 @@ $(document).ready(function() {
 });
 &lt;/script&gt;</string>
 	<key>MetaViewport</key>
-	<string>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0 maximum-scale=1.0, user-scalable=0&quot; /&gt;</string>
+	<string>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1&quot; /&gt;</string>
 	<key>MathJaxFinishScript</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;
 MathJax.Hub.Queue(function () {

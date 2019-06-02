@@ -16,6 +16,10 @@ extension ProcessedContentTextView {
 }
 
 final class ProcessedContentTextView: UIView {
+    private static let reloadTimeStandardInterval: TimeInterval = 0.5
+    private static let reloadTimeout: TimeInterval = 10.0
+    private static let defaultWebviewHeight: CGFloat = 5
+
     let appearance: Appearance
     weak var delegate: ProcessedContentTextViewDelegate?
 
@@ -31,7 +35,20 @@ final class ProcessedContentTextView: UIView {
             injectionTime: .atDocumentEnd,
             forMainFrameOnly: true
         )
+
+        let userScriptViewport = WKUserScript(
+            source: """
+            var meta = document.createElement('meta');
+            meta.setAttribute('name', 'viewport');
+            meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0');
+            document.getElementsByTagName('head')[0].appendChild(meta);
+            """,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        )
+
         userContentController.addUserScript(userScript)
+        userContentController.addUserScript(userScriptViewport)
         let webViewConfig = WKWebViewConfiguration()
         webViewConfig.userContentController = userContentController
         return webViewConfig
@@ -56,7 +73,9 @@ final class ProcessedContentTextView: UIView {
     override var intrinsicContentSize: CGSize {
         return CGSize(
             width: UIView.noIntrinsicMetric,
-            height: webView.scrollView.contentSize.height + self.appearance.insets.top + self.appearance.insets.bottom
+            height: self.webView.intrinsicContentSize.height
+                + self.appearance.insets.top
+                + self.appearance.insets.bottom
         )
     }
 
@@ -80,6 +99,11 @@ final class ProcessedContentTextView: UIView {
         self.webView.scrollView.delegate = nil
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
+    }
+
     // MARK: Public API
 
     func loadHTMLText(_ text: String) {
@@ -91,12 +115,36 @@ final class ProcessedContentTextView: UIView {
 
     private func refreshContentHeight() -> Guarantee<Void> {
         return Guarantee { seal in
-            self.webView.evaluateJavaScript(
-                "document.readyState;",
-                completionHandler: { _, _ in
-                    seal(())
+            self.webView.evaluateJavaScript("document.readyState;") { _, _ in
+                seal(())
+            }
+        }
+    }
+
+    private func getContentHeight() -> Guarantee<Int> {
+        return Guarantee { seal in
+            self.webView.evaluateJavaScript("document.body.scrollHeight;") { res, _ in
+                if let height = res as? Int {
+                    seal(height)
+                    return
                 }
-            )
+
+                seal(0)
+            }
+        }
+    }
+
+    private func fetchHeightWithInterval(_ count: Int = 0) {
+        let currentTime = TimeInterval(count) * ProcessedContentTextView.reloadTimeStandardInterval
+        guard currentTime <= ProcessedContentTextView.reloadTimeout else {
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + currentTime) { [weak self] in
+            self?.getContentHeight().done { [weak self] height in
+                self?.webView.snp.updateConstraints { $0.height.equalTo(height) }
+            }
+            self?.fetchHeightWithInterval(count + 1)
         }
     }
 }
@@ -113,6 +161,7 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
+            make.height.equalTo(ProcessedContentTextView.defaultWebviewHeight)
         }
     }
 }
@@ -120,9 +169,13 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
 extension ProcessedContentTextView: WKNavigationDelegate {
     // swiftlint:disable:next implicitly_unwrapped_optional
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.refreshContentHeight().done { _ in
-            self.invalidateIntrinsicContentSize()
+        self.refreshContentHeight().then {
+            self.getContentHeight()
+        }.done { height in
+            self.webView.snp.updateConstraints { $0.height.equalTo(height) }
             self.delegate?.processedContentTextViewDidLoadContent(self)
+
+            self.fetchHeightWithInterval()
         }
     }
 
