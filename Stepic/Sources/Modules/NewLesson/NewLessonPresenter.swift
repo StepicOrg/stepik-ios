@@ -62,6 +62,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
                 isPassed: progresses[safe: index]?.isPassed ?? false
             )
         }
-        return NewLessonViewModel(lessonTitle: lessonTitle, steps: steps)
+        return NewLessonViewModel(
+            lessonTitle: lessonTitle,
+            steps: steps,
+            stepLinkMaker: { "https://stepik.org/lesson/\(lesson.id)/step/\($0)" }
+        )
     }
 }

@@ -28,7 +28,12 @@ final class NewLessonViewController: TabmanViewController {
     }()
 
     private lazy var shareBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: nil)
+        let item = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(self.shareButtonClicked)
+        )
+        item.isEnabled = false
         return item
     }()
 
@@ -138,6 +143,7 @@ final class NewLessonViewController: TabmanViewController {
         }
 
         self.title = data.lessonTitle
+        self.shareBarButtonItem.isEnabled = true
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
@@ -215,12 +221,29 @@ final class NewLessonViewController: TabmanViewController {
         self.title = nil
         self.stepControllers.removeAll()
         self.stepModulesInputs.removeAll()
+        self.shareBarButtonItem.isEnabled = false
 
         self.hasNavigationToPreviousUnit = false
         self.hasNavigationToNextUnit = false
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
+        }
+    }
+
+    @objc
+    private func shareButtonClicked() {
+        guard case .result(let data) = self.state else {
+            fatalError("Invalid state")
+        }
+
+        DispatchQueue.global().async {
+            let link = data.stepLinkMaker("\((self.currentIndex ?? 0) + 1)")
+            let sharingViewController = SharingHelper.getSharingController(link)
+            sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
+            DispatchQueue.main.async {
+                self.present(sharingViewController, animated: true, completion: nil)
+            }
         }
     }
 }
