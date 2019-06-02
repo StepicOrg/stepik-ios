@@ -3,11 +3,17 @@ import UIKit
 final class NewLessonAssembly: Assembly {
     var moduleInput: NewLessonInputProtocol?
     private var initialContext: NewLesson.Context
+    private var startStep: NewLesson.StartStep?
 
     private weak var moduleOutput: NewLessonOutputProtocol?
 
-    init(initialContext: NewLesson.Context, output: NewLessonOutputProtocol? = nil) {
+    init(
+        initialContext: NewLesson.Context,
+        startStep: NewLesson.StartStep? = nil,
+        output: NewLessonOutputProtocol? = nil
+    ) {
         self.initialContext = initialContext
+        self.startStep = startStep
         self.moduleOutput = output
     }
 
@@ -44,6 +50,7 @@ final class NewLessonAssembly: Assembly {
         let presenter = NewLessonPresenter()
         let interactor = NewLessonInteractor(
             initialContext: self.initialContext,
+            startStep: self.startStep,
             presenter: presenter,
             provider: provider,
             unitNavigationService: unitNavigationService,

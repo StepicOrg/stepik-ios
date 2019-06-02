@@ -19,7 +19,14 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             viewModel = .init(state: .loading)
         case .success(let result):
             viewModel = .init(
-                state: .result(data: self.makeViewModel(lesson: result.0, steps: result.1, progresses: result.2))
+                state: .result(
+                    data: self.makeViewModel(
+                        lesson: result.lesson,
+                        steps: result.steps,
+                        progresses: result.progresses,
+                        startStepIndex: result.startStepIndex
+                    )
+                )
             )
         }
 
@@ -41,7 +48,12 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
 
     // MAKE: Private API
 
-    private func makeViewModel(lesson: Lesson, steps: [Step], progresses: [Progress]) -> NewLessonViewModel {
+    private func makeViewModel(
+        lesson: Lesson,
+        steps: [Step],
+        progresses: [Progress],
+        startStepIndex: Int
+    ) -> NewLessonViewModel {
         let lessonTitle = lesson.title
         let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
@@ -65,7 +77,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         return NewLessonViewModel(
             lessonTitle: lessonTitle,
             steps: steps,
-            stepLinkMaker: { "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true" }
+            stepLinkMaker: {
+                "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
+            },
+            startStepIndex: startStepIndex
         )
     }
 }

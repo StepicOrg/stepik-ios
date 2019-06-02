@@ -27,6 +27,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
     init(
         initialContext: NewLesson.Context,
+        startStep: NewLesson.StartStep?,
         presenter: NewLessonPresenterProtocol,
         provider: NewLessonProviderProtocol,
         unitNavigationService: UnitNavigationServiceProtocol,
@@ -39,12 +40,12 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         self.persistenceQueuesService = persistenceQueuesService
         self.dataBackUpdateService = dataBackUpdateService
 
-        self.refresh(context: initialContext)
+        self.refresh(context: initialContext, startStep: startStep)
     }
 
     // MARK: Public API
 
-    private func refresh(context: NewLesson.Context) {
+    private func refresh(context: NewLesson.Context, startStep: NewLesson.StartStep? = nil) {
         self.previousUnit = nil
         self.nextUnit = nil
         self.currentLesson = nil
@@ -52,12 +53,19 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         self.assignmentsForCurrentSteps.removeAll()
 
         self.presenter.presentLesson(response: .init(state: .loading))
-        self.loadData(context: context)
+
+        // FIXME: singleton
+        if case .unit(let unitID) = context {
+            LastStepGlobalContext.context.unitId = unitID
+        }
+
+        let startStep = startStep ?? .index(0)
+        self.loadData(context: context, startStep: startStep)
     }
 
     // MARK: Private API
 
-    private func loadData(context: NewLesson.Context) {
+    private func loadData(context: NewLesson.Context, startStep: NewLesson.StartStep) {
         firstly { () -> Promise<(Lesson?, Unit?)> in
             switch context {
             case .lesson(let lessonID):
@@ -98,8 +106,24 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             return self.provider.fetchProgresses(ids: steps.compactMap { $0.progressId })
                 .map { (steps, lesson, $0.value ?? []) }
         }.done(on: .global(qos: .userInitiated)) { steps, lesson, progresses in
+            let startStepIndex: Int = {
+                switch startStep {
+                case .index(let value):
+                    return value
+                case .id(let value):
+                    return lesson.stepsArray.index(of: value) ?? 0
+                }
+            }()
+
             DispatchQueue.main.async {
-                self.presenter.presentLesson(response: .init(state: .success(result: (lesson, steps, progresses))))
+                let data = NewLesson.LessonLoad.ResponseData(
+                    lesson: lesson,
+                    steps: steps,
+                    progresses: progresses,
+                    startStepIndex: startStepIndex
+                )
+
+                self.presenter.presentLesson(response: .init(state: .success(result: data)))
             }
         }.cauterize()
     }

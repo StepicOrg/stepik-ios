@@ -10,4 +10,5 @@ struct NewLessonViewModel {
     let lessonTitle: String
     let steps: [StepDescription]
     let stepLinkMaker: (String) -> String
+    let startStepIndex: Int
 }

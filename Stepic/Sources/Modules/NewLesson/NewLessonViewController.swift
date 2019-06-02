@@ -270,6 +270,9 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
+        if case .result(let data) = self.state {
+            return .at(index: data.startStepIndex)
+        }
         return nil
     }
 }

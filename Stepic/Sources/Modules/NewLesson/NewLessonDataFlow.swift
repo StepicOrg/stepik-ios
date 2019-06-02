@@ -5,10 +5,17 @@ enum NewLesson {
 
     /// Load lesson content
     enum LessonLoad {
+        struct ResponseData {
+            let lesson: Lesson
+            let steps: [Step]
+            let progresses: [Progress]
+            let startStepIndex: Int
+        }
+
         enum ResponseState {
             case loading
             case error
-            case success(result: (Lesson, [Step], [Progress]))
+            case success(result: ResponseData)
         }
 
         struct Response {
@@ -57,5 +64,11 @@ enum NewLesson {
     enum Context {
         case unit(id: Unit.IdType)
         case lesson(id: Lesson.IdType)
+    }
+
+    /// Start step can be presented by index or by step ID
+    enum StartStep {
+        case index(_: Int)
+        case id(_: Step.IdType)
     }
 }

@@ -47,6 +47,14 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 return "Напишите первый комментарий"
             }()
 
+            var stepText = step.block.text ?? ""
+            if step.block.name == "code" {
+                for (index, sample) in (step.options?.samples ?? []).enumerated() {
+                    stepText += "<h4>Sample input \(index + 1)</h4>\(sample.input)"
+                        + "<h4>Sample output \(index + 1)</h4>\(sample.output)"
+                }
+            }
+
             let contentType: NewStepViewModel.ContentType = {
                 switch step.block.name {
                 case "video":
@@ -60,7 +68,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                     return .video(viewModel: nil)
                 default:
                     let contentProcessor = ContentProcessor(
-                        content: step.block.text ?? "",
+                        content: stepText,
                         rules: ContentProcessor.defaultRules,
                         injections: ContentProcessor.defaultInjections
                     )
