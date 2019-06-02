@@ -137,7 +137,8 @@ extension ProcessedContentTextView: WKNavigationDelegate {
 
         let imageLinkPrefix = "openimg://"
         if url.absoluteString.starts(with: imageLinkPrefix) {
-            let validPath = String(url.absoluteString.dropFirst(imageLinkPrefix.count))
+            var validPath = String(url.absoluteString.dropFirst(imageLinkPrefix.count))
+            validPath.replaceFirst(matching: "//", with: "://")
             if let imageURL = URL(string: validPath) {
                 self.delegate?.processedContentTextView(self, didOpenImage: imageURL)
             }

@@ -166,12 +166,6 @@ extension NewStepViewController: NewStepViewDelegate {
             return
         }
 
-        // Should show alert
-        if video.urls.isEmpty {
-            // presentNoVideoAlert()
-            return
-        }
-
         let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
             || ConnectionHelper.shared.reachability.isReachableViaWWAN()
         if video.state == VideoState.cached || isVideoPlayingReachable {

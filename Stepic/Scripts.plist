@@ -25,7 +25,7 @@
 $(document).ready(function() {
     $(&quot;img&quot;).each(function() {
         var $this = $(this);
-        var src = &quot;openimg://&quot; + $this.attr(&apos;src&apos;);
+        var src = "openimg://" + $this.attr(&apos;src&apos;);
         $this.addClass(&apos;image&apos;);
         var a = $(&apos;&lt;a/&gt;&apos;).attr(&apos;href&apos;, src);
         $this.wrap(a);

@@ -148,7 +148,9 @@ final class NewLessonViewController: TabmanViewController {
         self.reloadData()
         self.addBar(self.tabBarView, dataSource: self, at: .top)
 
-        self.overlayView.alpha = 0.0
+        UIView.animate(withDuration: NewLessonViewController.animationDuration) {
+            self.overlayView.alpha = 0.0
+        }
     }
 
     private func showError() {
@@ -157,10 +159,7 @@ final class NewLessonViewController: TabmanViewController {
 
     private func showLoading() {
         self.clearAll()
-
-        UIView.animate(withDuration: NewLessonViewController.animationDuration) {
-            self.overlayView.alpha = 1.0
-        }
+        self.overlayView.alpha = 1.0
     }
 
     private func loadStepIfNeeded(index: Int) -> UIViewController {
