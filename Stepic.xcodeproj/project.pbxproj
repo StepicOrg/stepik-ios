@@ -2197,7 +2197,6 @@
 		2C8652641F4B2F7D00D51654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525E1F4B2F7D00D51654 /* GoogleService-Info.plist */; };
 		2C8652651F4B2F7D00D51654 /* Tokens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525F1F4B2F7D00D51654 /* Tokens.plist */; };
 		2C88A51F2289C18200BD9949 /* StepControllerSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88A51E2289C18200BD9949 /* StepControllerSkeletonView.swift */; };
-		2C88A5212289C82C00BD9949 /* NewLessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88A5202289C82C00BD9949 /* NewLessonView.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
 		2C89A9541F4C289900227C3B /* CodeLanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */; };
 		2C89A9551F4C289900227C3B /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089984281ECDE188005C0B27 /* LessonViewController.swift */; };
@@ -5797,7 +5796,6 @@
 		2C8652671F4B2FA500D51654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ru; path = Content/1838/ru.lproj/step0.html; sourceTree = "<group>"; };
 		2C8652691F4B2FAA00D51654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = Content/1838/en.lproj/step0.html; sourceTree = "<group>"; };
 		2C88A51E2289C18200BD9949 /* StepControllerSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControllerSkeletonView.swift; sourceTree = "<group>"; };
-		2C88A5202289C82C00BD9949 /* NewLessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLessonView.swift; sourceTree = "<group>"; };
 		2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_readiness_v30.xcdatamodel; sourceTree = "<group>"; };
 		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		2C89A93E1F4C285B00227C3B /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/GMAT/AdaptiveInfo.plist; sourceTree = "<group>"; };
@@ -6642,7 +6640,6 @@
 				AC5B5698955B5FF2B7EFB6F4 /* NewLessonDataFlow.swift */,
 				80E8045E8645E07DAAA62D82 /* NewLessonProvider.swift */,
 				8A79613CB13738DA1A5BA184 /* InputOutput */,
-				2C88A5202289C82C00BD9949 /* NewLessonView.swift */,
 				2CFC5ABD228AF0B400B5248A /* NewLessonViewModel.swift */,
 			);
 			path = NewLesson;
@@ -15654,7 +15651,6 @@
 				2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */,
 				2CB5B15B2292E65400D7F706 /* StepNavigationButton.swift in Sources */,
 				081BF3471EFEF630002F84AA /* CodeLanguagePickerViewController.swift in Sources */,
-				2C88A5212289C82C00BD9949 /* NewLessonView.swift in Sources */,
 				0858B7091CFF271200459A6A /* TagDetectionUtil.swift in Sources */,
 				083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */,
 				8622056B2055561F00F14255 /* PinsMapView.swift in Sources */,

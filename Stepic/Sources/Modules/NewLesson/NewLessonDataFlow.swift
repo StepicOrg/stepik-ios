@@ -5,8 +5,14 @@ enum NewLesson {
 
     /// Load lesson content
     enum LessonLoad {
+        enum ResponseState {
+            case loading
+            case error
+            case success(result: (Lesson, [Step], [Progress]))
+        }
+
         struct Response {
-            let data: Result<(Lesson, [Step], [Progress])>
+            let state: ResponseState
         }
 
         struct ViewModel {
@@ -38,7 +44,7 @@ enum NewLesson {
             let stepID: Step.IdType
         }
     }
-
+    
     // MARK: Enums
 
     enum ViewControllerState {

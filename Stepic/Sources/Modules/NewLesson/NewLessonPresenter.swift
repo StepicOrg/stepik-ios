@@ -12,9 +12,11 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
     func presentLesson(response: NewLesson.LessonLoad.Response) {
         let viewModel: NewLesson.LessonLoad.ViewModel
 
-        switch response.data {
-        case .failure:
+        switch response.state {
+        case .error:
             viewModel = .init(state: .error)
+        case .loading:
+            viewModel = .init(state: .loading)
         case .success(let result):
             viewModel = .init(
                 state: .result(data: self.makeViewModel(lesson: result.0, steps: result.1, progresses: result.2))

@@ -51,6 +51,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         self.currentUnit = nil
         self.assignmentsForCurrentSteps.removeAll()
 
+        self.presenter.presentLesson(response: .init(state: .loading))
         self.loadData(context: context)
     }
 
@@ -98,7 +99,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 .map { (steps, lesson, $0.value ?? []) }
         }.done(on: .global(qos: .userInitiated)) { steps, lesson, progresses in
             DispatchQueue.main.async {
-                self.presenter.presentLesson(response: .init(data: .success((lesson, steps, progresses))))
+                self.presenter.presentLesson(response: .init(state: .success(result: (lesson, steps, progresses))))
             }
         }.cauterize()
     }

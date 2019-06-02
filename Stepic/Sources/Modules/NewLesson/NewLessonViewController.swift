@@ -10,14 +10,15 @@ protocol NewLessonViewControllerProtocol: class {
 }
 
 final class NewLessonViewController: TabmanViewController {
+    private static let animationDuration: TimeInterval = 0.25
+
     enum Appearance {
         static let barTintColor = UIColor.mainDark
         static let backgroundColor = UIColor.mainLight
         static let indicatorHeight: CGFloat = 2
         static let separatorColor = UIColor.gray
+        static let loadingIndicatorColor = UIColor.mainDark
     }
-
-    lazy var newLessonView = self.view as? NewLessonView
 
     private let interactor: NewLessonInteractorProtocol
 
@@ -29,6 +30,21 @@ final class NewLessonViewController: TabmanViewController {
     private lazy var shareBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: nil)
         return item
+    }()
+
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        loadingIndicatorView.color = Appearance.loadingIndicatorColor
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.startAnimating()
+        return loadingIndicatorView
+    }()
+
+    // Cause Tabman doesn't support controllers removing
+    private lazy var overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
     }()
 
     private lazy var tooltipView = LessonInfoTooltipView()
@@ -64,11 +80,11 @@ final class NewLessonViewController: TabmanViewController {
         didSet {
             switch self.state {
             case .loading:
-                self.hideSteps()
+                self.showLoading()
             case .result:
                 self.showSteps()
-            default:
-                break
+            case .error:
+                self.showError()
             }
         }
     }
@@ -94,10 +110,27 @@ final class NewLessonViewController: TabmanViewController {
             styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
         }
 
+        self.addSubviews()
+
         self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem]
+        self.dataSource = self
     }
 
     // MARK: Private API
+
+    private func addSubviews() {
+        self.overlayView.addSubview(self.loadingIndicator)
+        self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+        self.view.insertSubview(self.overlayView, at: Int.max)
+        self.overlayView.translatesAutoresizingMaskIntoConstraints = false
+        self.overlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 
     private func showSteps() {
         guard case .result(let data) = self.state else {
@@ -112,14 +145,22 @@ final class NewLessonViewController: TabmanViewController {
             styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
         }
 
-        self.dataSource = self
+        self.reloadData()
         self.addBar(self.tabBarView, dataSource: self, at: .top)
+
+        self.overlayView.alpha = 0.0
     }
 
-    private func hideSteps() {
-        self.title = nil
-        self.dataSource = nil
-        self.reloadData()
+    private func showError() {
+        self.clearAll()
+    }
+
+    private func showLoading() {
+        self.clearAll()
+
+        UIView.animate(withDuration: NewLessonViewController.animationDuration) {
+            self.overlayView.alpha = 1.0
+        }
     }
 
     private func loadStepIfNeeded(index: Int) -> UIViewController {
@@ -171,13 +212,17 @@ final class NewLessonViewController: TabmanViewController {
         }
     }
 
-    private func resetState() {
+    private func clearAll() {
         self.title = nil
         self.stepControllers.removeAll()
         self.stepModulesInputs.removeAll()
 
         self.hasNavigationToPreviousUnit = false
         self.hasNavigationToNextUnit = false
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
+        }
     }
 }
 
