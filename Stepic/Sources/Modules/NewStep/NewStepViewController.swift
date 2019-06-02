@@ -16,6 +16,8 @@ final class NewStepViewController: UIViewController {
             switch state {
             case .result:
                 self.showContent()
+            case .loading:
+                self.newStepView?.startLoading()
             default:
                 break
             }
@@ -43,6 +45,8 @@ final class NewStepViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.newStepView?.startLoading()
 
         self.newStepView?.delegate = self
         self.interactor.doStepLoad(request: .init())
@@ -198,12 +202,7 @@ extension NewStepViewController: NewStepViewDelegate {
         self.push(module: assembly.makeModule())
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
-        let agrume = Agrume(url: url)
-        agrume.show(from: self)
-    }
-
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+    func newStepView(_ view: NewStepView, didRequestOpenURL url: URL) {
         WebControllerManager.sharedManager.presentWebControllerWithURL(
             url,
             inController: self,
@@ -213,8 +212,13 @@ extension NewStepViewController: NewStepViewDelegate {
         )
     }
 
-    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
-        
+    func newStepView(_ view: NewStepView, didRequestFullscreenImage url: URL) {
+        let agrume = Agrume(url: url)
+        agrume.show(from: self)
+    }
+
+    func newStepViewDidLoadContent(_ view: NewStepView) {
+        self.newStepView?.endLoading()
     }
 }
 
