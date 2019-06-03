@@ -49,6 +49,7 @@ enum CourseInfo {
 
         @available(*, deprecated, message: "Old ugly Lesson controller initialization")
         struct ViewModel {
+            let unitID: Unit.IdType
             let initObjects: LessonInitObjects
             let initIDs: LessonInitIds
         }

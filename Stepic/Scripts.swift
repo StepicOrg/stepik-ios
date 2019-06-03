@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use ContentProcessor instead")
 struct Scripts {
 
     fileprivate static func loadScriptWithKey(_ key: String) -> String {
@@ -39,6 +40,7 @@ struct Scripts {
     fileprivate static let commonStylesKey = "contentCSSWrapper"
     fileprivate static let textColorScriptKey = "textColorScript"
     fileprivate static let highlightJSKey = "highlightJS"
+    fileprivate static let webkitCalloutDisableKey = "WebkitTouchCalloutDisable"
 
     static var localJQuery: String {
         return loadScriptWithKey(localJQueryScriptKey)
@@ -83,6 +85,10 @@ struct Scripts {
 
     static var highlightJS: String {
         return "\(loadScriptWithKey(highlightJSKey))"
+    }
+
+    static var webkitCalloutDisable: String {
+        return "\(loadScriptWithKey(webkitCalloutDisableKey))"
     }
 
     fileprivate static var mathJaxLocalPathScript: String {

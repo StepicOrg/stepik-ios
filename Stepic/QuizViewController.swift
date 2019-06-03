@@ -12,9 +12,16 @@ import SnapKit
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
+    @IBOutlet weak var peerReviewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var peerReviewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
-
+    @IBOutlet weak var hintTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hintLeadingConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var statusLabel: StepikLabel!
     @IBOutlet weak var statusImageView: UIImageView!
@@ -132,7 +139,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         self.hintTextView.dataDetectorTypes = .all
         self.hideHintView()
 
-        self.peerReviewButton.setTitle(peerReviewText, for: UIControl.State())
+        self.peerReviewButton.setTitle(peerReviewText, for: .normal)
         self.peerReviewButton.backgroundColor = UIColor.peerReviewYellow
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -283,6 +290,22 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             self.sendButton.isEnabled = true
         default:
             break
+        }
+
+        if RemoteConfig.shared.newLessonAvailable {
+            self.sendButton.backgroundColor = UIColor.stepicGreen
+            self.sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+            self.sendButton.layer.cornerRadius = 6
+            self.sendButtonLeadingConstraint.constant = -16
+            self.sendButtonTrailingConstraint.constant = 16
+            self.peerReviewLeadingConstraint.constant = 16
+            self.peerReviewTrailingConstraint.constant = 16
+            self.hintLeadingConstraint.constant = 16
+            self.hintTrailingConstraint.constant = 16
+            self.sendButtonHeight.constant = 44
+            self.sendButtonBottomConstraint.constant = 0
+            self.sendButton.layer.borderWidth = 0
+            self.sendButton.setTitleColor(.white, for: .normal)
         }
     }
 
@@ -439,7 +462,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     var isSubmitButtonHidden: Bool = false {
         didSet {
             self.sendButton.isHidden = isSubmitButtonHidden
-            self.sendButtonHeight.constant = isSubmitButtonHidden ? 0 : 40
+            self.sendButtonHeight.constant = isSubmitButtonHidden ? 0 : 44
         }
     }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use ContentProcessor instead")
 class HTMLProcessor {
 
     private var htmlString: String

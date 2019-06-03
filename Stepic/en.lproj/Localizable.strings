@@ -659,3 +659,9 @@ ProfileEditAboutMeTitle = "About me";
 "TopicTimeToCompleteText1" = "%@ minute to complete";
 "TopicTimeToCompleteText234" = "%@ minutes to complete";
 "TopicTimeToComplete567890" = "%@ minutes to complete";
+
+/* New lesson & step */
+NextLessonNavigation = "Next lesson";
+PreviousLessonNavigation = "Previous lesson";
+DiscussionsButtonTitle = "Show discussions (%@)";
+NoDiscussionsButtonTitle = "Leave a comment";

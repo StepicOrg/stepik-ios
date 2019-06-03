@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>WebkitTouchCalloutDisable</key>
+	<string>&lt;script type=&quot;text/javascript&quot;&gt;document.documentElement.style.webkitTouchCallout=&apos;none&apos;;&lt;/script&gt;</string>
 	<key>highlightJS</key>
 	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;highlight.js&quot;&gt;&lt;/script&gt;&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;</string>
 	<key>textColorScript</key>
@@ -23,7 +25,7 @@
 $(document).ready(function() {
     $(&quot;img&quot;).each(function() {
         var $this = $(this);
-        var src = &quot;openimg://&quot; + $this.attr(&apos;src&apos;);
+        var src = "openimg://" + $this.attr(&apos;src&apos;);
         $this.addClass(&apos;image&apos;);
         var a = $(&apos;&lt;a/&gt;&apos;).attr(&apos;href&apos;, src);
         $this.wrap(a);
@@ -31,7 +33,7 @@ $(document).ready(function() {
 });
 &lt;/script&gt;</string>
 	<key>MetaViewport</key>
-	<string>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0&quot; /&gt;</string>
+	<string>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1&quot; /&gt;</string>
 	<key>MathJaxFinishScript</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;
 MathJax.Hub.Queue(function () {
