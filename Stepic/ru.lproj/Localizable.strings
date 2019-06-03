@@ -344,6 +344,7 @@ WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";
 WidgetAdaptiveLabel = "АДАПТИВНЫЙ";
+WidgetButtonBuy = "Купить за %@";
 
 EnterSQLQuery = "Введите SQL запрос:";
 

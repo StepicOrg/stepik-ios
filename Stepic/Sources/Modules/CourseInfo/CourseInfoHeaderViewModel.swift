@@ -6,6 +6,8 @@ struct CourseInfoProgressViewModel {
 }
 
 struct CourseInfoHeaderViewModel {
+    typealias ButtonDescription = (title: String, isCallToAction: Bool)
+
     let title: String
     let coverImageURL: URL?
 
@@ -14,4 +16,5 @@ struct CourseInfoHeaderViewModel {
     let progress: CourseInfoProgressViewModel?
     let isVerified: Bool
     let isEnrolled: Bool
+    let buttonDescription: ButtonDescription
 }

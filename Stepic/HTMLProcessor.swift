@@ -12,11 +12,12 @@ import Foundation
 class HTMLProcessor {
 
     private var htmlString: String
-    private var headInjections: String = ""
-    private var bodyInjections: String = ""
+    private var headInjections = ""
+    private var bodyInjectionsHead = ""
+    private var bodyInjectionsTail = ""
 
     var html: String {
-        return "<html><head>\(headInjections)</head><body>\(bodyInjections)\(addStepikURLWhereNeeded(body: htmlString))</body></html>"
+        return "<html><head>\(headInjections)</head><body>\(bodyInjectionsHead)\(addStepikURLWhereNeeded(body: htmlString))\(bodyInjectionsTail)</body></html>"
     }
 
     enum SupportedScripts {
@@ -69,6 +70,20 @@ class HTMLProcessor {
                 return ""
             }
         }
+
+        var bodyInjectPosition: BodyInjectPosition {
+            switch self {
+            case .audio:
+                return .tail
+            default:
+                return .head
+            }
+        }
+
+        enum BodyInjectPosition {
+            case head
+            case tail
+        }
     }
 
     init(html: String) {
@@ -87,10 +102,15 @@ class HTMLProcessor {
             .inject(script: .textColor(color: UIColor.mainText))
     }
 
-    func inject(script: SupportedScripts) -> HTMLProcessor {
+    func inject(script: SupportedScripts, inTail: Bool = false) -> HTMLProcessor {
         func injectInHTML(script: SupportedScripts) {
             self.headInjections += script.headInjectionString
-            self.bodyInjections += script.bodyInjectionString
+
+            if script.bodyInjectPosition == .head {
+                self.bodyInjectionsHead += script.bodyInjectionString
+            } else {
+                self.bodyInjectionsTail = script.bodyInjectionString + self.bodyInjectionsTail
+            }
         }
 
         switch script {

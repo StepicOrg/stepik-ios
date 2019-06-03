@@ -21,6 +21,7 @@ protocol CourseInfoViewControllerProtocol: class {
     func displayLastStep(viewModel: CourseInfo.LastStepPresentation.ViewModel)
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfo.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel)
 }
 
 final class CourseInfoViewController: UIViewController {
@@ -485,6 +486,16 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
 
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel) {
         RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+    }
+
+    func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel) {
+        WebControllerManager.sharedManager.presentWebControllerWithURLString(
+            viewModel.urlPath,
+            inController: self,
+            withKey: "paid_course",
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }
 

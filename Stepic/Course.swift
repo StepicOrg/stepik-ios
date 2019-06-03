@@ -58,6 +58,8 @@ final class Course: NSManagedObject, IDFetchable {
         timeToComplete = json["time_to_complete"].int
         languageCode = json["language"].stringValue
         isCertificatesAutoIssued = json["is_certificate_auto_issued"].boolValue
+        isPaid = json["is_paid"].boolValue
+        displayPrice = json["display_price"].string
 
         if let _ = json["intro_video"].null {
             introVideo = nil

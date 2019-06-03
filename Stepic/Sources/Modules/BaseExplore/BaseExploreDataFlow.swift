@@ -58,6 +58,17 @@ enum BaseExplore {
         }
     }
 
+    /// Present web view for paid course
+    enum PaidCourseBuyingPresentation {
+        struct Response {
+            let course: Course
+        }
+
+        struct ViewModel {
+            let urlPath: String
+        }
+    }
+
     enum AuthorizationPresentation {
         struct Response { }
 

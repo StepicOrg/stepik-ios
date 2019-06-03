@@ -9,6 +9,7 @@ protocol CourseInfoPresenterProtocol {
     func presentLastStep(response: CourseInfo.LastStepPresentation.Response)
     func presentAuthorization(response: CourseInfo.AuthorizationPresentation.Response)
     func presentWaitingState(response: CourseInfo.BlockingWaitingIndicatorUpdate.Response)
+    func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response)
 }
 
 final class CourseInfoPresenter: CourseInfoPresenterProtocol {
@@ -86,6 +87,11 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
         self.viewController?.displayAuthorization(viewModel: .init())
     }
 
+    func presentPaidCourseBuying(response: CourseInfo.PaidCourseBuyingPresentation.Response) {
+        let path = "https://stepik.org/course/\(response.course.id)"
+        self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
+    }
+
     private func makeProgressViewModel(progress: Progress) -> CourseInfoProgressViewModel {
         var normalizedPercent = progress.percentPassed
         normalizedPercent.round(.up)
@@ -120,7 +126,28 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
             learnersLabelText: FormatterHelper.longNumber(course.learnersCount ?? 0),
             progress: progress,
             isVerified: (course.readiness ?? 0) > 0.9,
-            isEnrolled: course.enrolled
+            isEnrolled: course.enrolled,
+            buttonDescription: self.makeButtonDescription(course: course)
+        )
+    }
+
+    private func makeButtonDescription(course: Course) -> CourseInfoHeaderViewModel.ButtonDescription {
+        let isEnrolled = course.enrolled
+        let title: String = {
+            if isEnrolled {
+                return NSLocalizedString("WidgetButtonLearn", comment: "")
+            }
+
+            if course.isPaid, let displayPrice = course.displayPrice {
+                return String(format: NSLocalizedString("WidgetButtonBuy", comment: ""), displayPrice)
+            }
+
+            return NSLocalizedString("WidgetButtonJoin", comment: "")
+        }()
+
+        return CourseInfoHeaderViewModel.ButtonDescription(
+            title: title,
+            isCallToAction: !isEnrolled
         )
     }
 }

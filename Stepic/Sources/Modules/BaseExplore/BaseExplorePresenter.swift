@@ -6,6 +6,7 @@ protocol BaseExplorePresenterProtocol {
     func presentCourseSyllabus(response: BaseExplore.CourseSyllabusPresentation.Response)
     func presentLastStep(response: BaseExplore.LastStepPresentation.Response)
     func presentAuthorization(response: BaseExplore.AuthorizationPresentation.Response)
+    func presentPaidCourseBuying(response: BaseExplore.PaidCourseBuyingPresentation.Response)
 }
 
 class BaseExplorePresenter: BaseExplorePresenterProtocol {
@@ -39,5 +40,10 @@ class BaseExplorePresenter: BaseExplorePresenterProtocol {
 
     func presentAuthorization(response: BaseExplore.AuthorizationPresentation.Response) {
         self.viewController?.displayAuthorization(viewModel: .init())
+    }
+
+    func presentPaidCourseBuying(response: BaseExplore.PaidCourseBuyingPresentation.Response) {
+        let path = "https://stepik.org/course/\(response.course.id)"
+        self.viewController?.displayPaidCourseBuying(viewModel: .init(urlPath: path))
     }
 }

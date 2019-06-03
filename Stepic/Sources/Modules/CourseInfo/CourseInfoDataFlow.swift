@@ -161,6 +161,17 @@ enum CourseInfo {
         struct ViewModel { }
     }
 
+    /// Present web view for paid course
+    enum PaidCourseBuyingPresentation {
+        struct Response {
+            let course: Course
+        }
+
+        struct ViewModel {
+            let urlPath: String
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
