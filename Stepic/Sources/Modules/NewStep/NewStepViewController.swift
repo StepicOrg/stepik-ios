@@ -27,6 +27,8 @@ final class NewStepViewController: UIViewController {
     private var didInitRequestsSend = false
     private var sendStepDidPassedGroup = DispatchGroup()
 
+    private var isFirstAppearance = true
+
     init(interactor: NewStepInteractorProtocol) {
         self.interactor = interactor
         self.state = .loading
@@ -62,8 +64,14 @@ final class NewStepViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        defer {
+            self.isFirstAppearance = false
+        }
+
         // TODO: Move this request to viewDidLoad, but we should deal with WKWebView behavior before
-        self.interactor.doStepLoad(request: .init())
+        if self.isFirstAppearance {
+            self.interactor.doStepLoad(request: .init())
+        }
 
         if !self.didInitRequestsSend {
             self.sendStepDidPassedGroup.leave()
@@ -172,6 +180,7 @@ extension NewStepViewController: NewStepViewDelegate {
         if video.state == VideoState.cached || isVideoPlayingReachable {
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = video
+            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
             self.present(player, animated: true)
         }
     }

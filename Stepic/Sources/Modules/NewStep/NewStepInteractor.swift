@@ -37,6 +37,21 @@ final class NewStepInteractor: NewStepInteractorProtocol {
                 self?.presenter.presentStep(response: .init(result: .success(step)))
             }
 
+            // Analytics
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Step.opened,
+                parameters: ["item_name": step.block.name as NSObject, "stepId": step.id]
+            )
+            AmplitudeAnalyticsEvents.Steps.stepOpened(
+                step: step.id,
+                type: step.block.name,
+                number: step.position - 1
+            ).send()
+
+            if step.hasSubmissionRestrictions {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
+            }
+
             // FIXME: Legacy
             LastStepGlobalContext.context.stepId = self.stepID
             LocalProgressLastViewedUpdater.shared.updateView(for: step)
