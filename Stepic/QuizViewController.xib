@@ -22,7 +22,7 @@
                 <outlet property="peerReviewButton" destination="Qdk-og-oWI" id="q2L-Qo-FIv"/>
                 <outlet property="peerReviewHeight" destination="Zdy-99-nI7" id="5bp-kl-J3t"/>
                 <outlet property="peerReviewLeadingConstraint" destination="HOo-0z-cVH" id="Jqx-2b-WXy"/>
-                <outlet property="peerReviewTrailingConstraint" destination="Zdy-99-nI7" id="gHP-ki-SUQ"/>
+                <outlet property="peerReviewTrailingConstraint" destination="eHr-N6-lnF" id="Of4-bS-Ghb"/>
                 <outlet property="sendButton" destination="yPX-01-eq5" id="V3v-9d-GUi"/>
                 <outlet property="sendButtonBottomConstraint" destination="xye-9J-7EX" id="dJM-4k-gNj"/>
                 <outlet property="sendButtonHeight" destination="Pts-9U-YKn" id="x9H-cL-4wg"/>
@@ -68,7 +68,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO0-Wd-0kw" userLabel="container view">
-                    <rect key="frame" x="0.0" y="0.0" width="372" height="598"/>
+                    <rect key="frame" x="0.0" y="0.0" width="372" height="590"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-q5-y6Z" userLabel="hint view">
@@ -129,7 +129,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="HO0-Wd-0kw" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leading" id="12n-C3-YYg"/>
-                <constraint firstItem="Qdk-og-oWI" firstAttribute="top" secondItem="HO0-Wd-0kw" secondAttribute="bottom" id="4mc-GW-2t9"/>
+                <constraint firstItem="Qdk-og-oWI" firstAttribute="top" secondItem="HO0-Wd-0kw" secondAttribute="bottom" constant="8" id="4mc-GW-2t9"/>
                 <constraint firstItem="HO0-Wd-0kw" firstAttribute="top" secondItem="637-LV-Ael" secondAttribute="top" id="60n-bJ-YYh"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="I3R-Pc-iTV" secondAttribute="trailing" id="91e-vo-OtM"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="top" secondItem="Qdk-og-oWI" secondAttribute="bottom" constant="8" id="DyQ-jv-O81"/>
