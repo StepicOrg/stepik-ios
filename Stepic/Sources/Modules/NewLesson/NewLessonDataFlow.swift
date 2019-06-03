@@ -5,6 +5,8 @@ enum NewLesson {
 
     /// Load lesson content
     enum LessonLoad {
+        struct Request { }
+
         struct ResponseData {
             let lesson: Lesson
             let steps: [Step]

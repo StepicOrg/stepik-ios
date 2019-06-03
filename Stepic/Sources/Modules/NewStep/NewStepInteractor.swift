@@ -16,6 +16,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     private let provider: NewStepProviderProtocol
 
     private let stepID: Step.IdType
+    private var didAnalyticsSend = false
 
     init(
         stepID: Step.IdType,
@@ -38,19 +39,23 @@ final class NewStepInteractor: NewStepInteractorProtocol {
                 self?.presenter.presentStep(response: .init(result: .success(step)))
             }
 
-            // Analytics
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.Step.opened,
-                parameters: ["item_name": step.block.name as NSObject, "stepId": step.id]
-            )
-            AmplitudeAnalyticsEvents.Steps.stepOpened(
-                step: step.id,
-                type: step.block.name,
-                number: step.position - 1
-            ).send()
+            if !self.didAnalyticsSend {
+                // Analytics
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.Step.opened,
+                    parameters: ["item_name": step.block.name as NSObject, "stepId": step.id]
+                )
+                AmplitudeAnalyticsEvents.Steps.stepOpened(
+                    step: step.id,
+                    type: step.block.name,
+                    number: step.position - 1
+                ).send()
 
-            if step.hasSubmissionRestrictions {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
+                if step.hasSubmissionRestrictions {
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Step.hasRestrictions, parameters: nil)
+                }
+
+                self.didAnalyticsSend = true
             }
 
             // FIXME: Legacy
@@ -67,7 +72,10 @@ final class NewStepInteractor: NewStepInteractorProtocol {
                     course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
                 }
             }
-        }.cauterize()
+        }.catch { error in
+            print("new step interactor: error while loading step = \(error)")
+            self.presenter.presentStep(response: .init(result: .failure(Error.fetchFailed)))
+        }
     }
 
     func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request) {

@@ -1,20 +1,12 @@
 import UIKit
 
 final class NewLessonAssembly: Assembly {
-    var moduleInput: NewLessonInputProtocol?
     private var initialContext: NewLesson.Context
     private var startStep: NewLesson.StartStep?
 
-    private weak var moduleOutput: NewLessonOutputProtocol?
-
-    init(
-        initialContext: NewLesson.Context,
-        startStep: NewLesson.StartStep? = nil,
-        output: NewLessonOutputProtocol? = nil
-    ) {
+    init(initialContext: NewLesson.Context, startStep: NewLesson.StartStep? = nil) {
         self.initialContext = initialContext
         self.startStep = startStep
-        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
@@ -61,8 +53,6 @@ final class NewLessonAssembly: Assembly {
         viewController.hidesBottomBarWhenPushed = true
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

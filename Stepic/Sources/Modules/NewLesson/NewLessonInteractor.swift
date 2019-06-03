@@ -1,11 +1,11 @@
 import Foundation
 import PromiseKit
 
-protocol NewLessonInteractorProtocol { }
+protocol NewLessonInteractorProtocol {
+    func doLessonLoad(request: NewLesson.LessonLoad.Request)
+}
 
 final class NewLessonInteractor: NewLessonInteractorProtocol {
-    weak var moduleOutput: NewLessonOutputProtocol?
-
     private let presenter: NewLessonPresenterProtocol
     private let provider: NewLessonProviderProtocol
     private let unitNavigationService: UnitNavigationServiceProtocol
@@ -23,7 +23,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     private var nextUnit: Unit?
     private var assignmentsForCurrentSteps: [Step.IdType: Assignment.IdType] = [:]
 
-    private var sendViewSemaphore = DispatchSemaphore(value: 0)
+    private var lastLoadState: (context: NewLesson.Context, startStep: NewLesson.StartStep?)
 
     init(
         initialContext: NewLesson.Context,
@@ -39,11 +39,16 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         self.unitNavigationService = unitNavigationService
         self.persistenceQueuesService = persistenceQueuesService
         self.dataBackUpdateService = dataBackUpdateService
-
-        self.refresh(context: initialContext, startStep: startStep)
+        self.lastLoadState = (initialContext, startStep)
     }
 
     // MARK: Public API
+
+    func doLessonLoad(request: NewLesson.LessonLoad.Request) {
+        self.refresh(context: lastLoadState.context, startStep: lastLoadState.startStep)
+    }
+
+    // MARK: Private API
 
     private func refresh(context: NewLesson.Context, startStep: NewLesson.StartStep? = nil) {
         self.previousUnit = nil
@@ -60,10 +65,10 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         }
 
         let startStep = startStep ?? .index(0)
+
+        self.lastLoadState = (context, startStep)
         self.loadData(context: context, startStep: startStep)
     }
-
-    // MARK: Private API
 
     private func loadData(context: NewLesson.Context, startStep: NewLesson.StartStep) {
         firstly { () -> Promise<(Lesson?, Unit?)> in
@@ -125,7 +130,10 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
                 self.presenter.presentLesson(response: .init(state: .success(result: data)))
             }
-        }.cauterize()
+        }.catch { error in
+            print("new lesson interactor: error while loading lesson = \(error)")
+            self.presenter.presentLesson(response: .init(state: .error))
+        }
     }
 
     private func refreshAdjacentUnits() {
@@ -212,5 +220,3 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         self.presenter.presentCurrentStepUpdate(response: .init(index: index))
     }
 }
-
-extension NewLessonInteractor: NewLessonInputProtocol { }

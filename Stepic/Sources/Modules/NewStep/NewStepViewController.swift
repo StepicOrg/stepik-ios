@@ -6,8 +6,12 @@ protocol NewStepViewControllerProtocol: class {
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
 }
 
-final class NewStepViewController: UIViewController {
+final class NewStepViewController: UIViewController, ControllerWithStepikPlaceholder {
+    private static let stepPassedDelay: TimeInterval = 1.0
+
     lazy var newStepView = self.view as? NewStepView
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private let interactor: NewStepInteractorProtocol
 
@@ -15,11 +19,13 @@ final class NewStepViewController: UIViewController {
         didSet {
             switch state {
             case .result:
+                self.isPlaceholderShown = false
                 self.showContent()
             case .loading:
+                self.isPlaceholderShown = false
                 self.newStepView?.startLoading()
-            default:
-                break
+            case .error:
+                self.showPlaceholder(for: .connectionError)
             }
         }
     }
@@ -47,6 +53,16 @@ final class NewStepViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnectionQuiz,
+                action: { [weak self] in
+                    self?.interactor.doStepLoad(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
 
         self.newStepView?.startLoading()
 
@@ -91,7 +107,7 @@ final class NewStepViewController: UIViewController {
             return
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + NewStepViewController.stepPassedDelay) { [weak self] in
             self?.interactor.doStepDoneRequest(request: .init())
         }
     }

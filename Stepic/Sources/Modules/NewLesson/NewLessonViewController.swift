@@ -10,7 +10,7 @@ protocol NewLessonViewControllerProtocol: class {
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
 }
 
-final class NewLessonViewController: TabmanViewController {
+final class NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder {
     private static let animationDuration: TimeInterval = 0.25
 
     enum Appearance {
@@ -95,6 +95,8 @@ final class NewLessonViewController: TabmanViewController {
         }
     }
 
+    var placeholderContainer = StepikPlaceholderControllerContainer()
+
     init(interactor: NewLessonInteractorProtocol) {
         self.interactor = interactor
         self.state = .loading
@@ -109,6 +111,16 @@ final class NewLessonViewController: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnectionQuiz,
+                action: { [weak self] in
+                    self?.interactor.doLessonLoad(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
+
         self.view.backgroundColor = .white
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
@@ -120,6 +132,8 @@ final class NewLessonViewController: TabmanViewController {
 
         self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem]
         self.dataSource = self
+
+        self.interactor.doLessonLoad(request: .init())
     }
 
     // MARK: Private API
@@ -143,6 +157,8 @@ final class NewLessonViewController: TabmanViewController {
             return
         }
 
+        self.isPlaceholderShown = false
+
         self.title = data.lessonTitle
         self.shareBarButtonItem.isEnabled = true
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
@@ -162,10 +178,12 @@ final class NewLessonViewController: TabmanViewController {
 
     private func showError() {
         self.clearAll()
+        self.showPlaceholder(for: .connectionError)
     }
 
     private func showLoading() {
         self.clearAll()
+        self.isPlaceholderShown = false
         self.overlayView.alpha = 1.0
     }
 
