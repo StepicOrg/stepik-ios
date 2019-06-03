@@ -15,7 +15,7 @@ extension StepControlsView {
         let submitButtonCornerRadius: CGFloat = 6
         let submitButtonFont = UIFont.systemFont(ofSize: 16)
 
-        let commentsButtonHeight: CGFloat = 44
+        let discussionsButtonHeight: CGFloat = 44
     }
 }
 
@@ -33,9 +33,9 @@ final class StepControlsView: UIView {
         return submitButton
     }()
 
-    private lazy var commentsButton: StepCommentsButton = {
-        let button = StepCommentsButton()
-        button.addTarget(self, action: #selector(self.commentsButtonClicked), for: .touchUpInside)
+    private lazy var discussionsButton: StepDiscussionsButton = {
+        let button = StepDiscussionsButton()
+        button.addTarget(self, action: #selector(self.discussionsButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -54,7 +54,7 @@ final class StepControlsView: UIView {
     }()
 
     private var navigationBottomConstraint: Constraint?
-    private var navigationBottomCommentsConstraint: Constraint?
+    private var navigationBottomDiscussionsConstraint: Constraint?
 
     override var intrinsicContentSize: CGSize {
         let stackViewSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -63,7 +63,7 @@ final class StepControlsView: UIView {
             height: self.appearance.insets.top
                 + stackViewSize.height
                 + (self.navigationState == .none ? 0 : self.appearance.spacing)
-                + (self.isCommentsButtonHidden ? 0 : self.appearance.commentsButtonHeight)
+                + (self.isDiscussionsButtonHidden ? 0 : self.appearance.discussionsButtonHeight)
         )
     }
 
@@ -74,13 +74,13 @@ final class StepControlsView: UIView {
             height: self.appearance.insets.top
                 + self.appearance.submitButtonHeight
                 + self.appearance.spacing
-                + self.appearance.commentsButtonHeight
+                + self.appearance.discussionsButtonHeight
         )
     }
 
-    var commentsTitle: String? {
+    var discussionsTitle: String? {
         didSet {
-            self.commentsButton.title = self.commentsTitle
+            self.discussionsButton.title = self.discussionsTitle
         }
     }
 
@@ -91,13 +91,13 @@ final class StepControlsView: UIView {
         }
     }
 
-    var isCommentsButtonHidden: Bool = false {
+    var isDiscussionsButtonHidden: Bool = false {
         didSet {
-            self.updateCommentsButton()
+            self.updateDiscussionsButton()
         }
     }
 
-    var onCommentsButtonClick: (() -> Void)?
+    var onDiscussionsButtonClick: (() -> Void)?
     var onPreviousButtonClick: (() -> Void)?
     var onNextButtonClick: (() -> Void)?
 
@@ -133,8 +133,8 @@ final class StepControlsView: UIView {
     }
 
     @objc
-    private func commentsButtonClicked() {
-        self.onCommentsButtonClick?()
+    private func discussionsButtonClicked() {
+        self.onDiscussionsButtonClick?()
     }
 
     private func updateNavigationState() {
@@ -169,26 +169,23 @@ final class StepControlsView: UIView {
         self.stackView.addArrangedSubview(self.navigationStackView)
     }
 
-    private func updateCommentsButton() {
-        if self.isCommentsButtonHidden {
-            self.commentsButton.isHidden = true
-        }
-
-        if self.isCommentsButtonHidden {
-            self.navigationBottomCommentsConstraint?.deactivate()
+    private func updateDiscussionsButton() {
+        if self.isDiscussionsButtonHidden {
+            self.discussionsButton.isHidden = true
+            self.navigationBottomDiscussionsConstraint?.deactivate()
             self.navigationBottomConstraint?.activate()
         } else {
-            self.navigationBottomCommentsConstraint?.activate()
+            self.navigationBottomDiscussionsConstraint?.activate()
             self.navigationBottomConstraint?.deactivate()
         }
     }
 
     private func updateNavigationButtons() {
         if self.navigationState == .none {
-            self.navigationBottomCommentsConstraint?.update(offset: 0)
+            self.navigationBottomDiscussionsConstraint?.update(offset: 0)
             self.navigationBottomConstraint?.update(offset: 0)
         } else {
-            self.navigationBottomCommentsConstraint?.update(offset: -self.appearance.spacing)
+            self.navigationBottomDiscussionsConstraint?.update(offset: -self.appearance.spacing)
             self.navigationBottomConstraint?.update(offset: -self.appearance.spacing)
         }
     }
@@ -209,13 +206,13 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.stackView)
-        self.addSubview(self.commentsButton)
+        self.addSubview(self.discussionsButton)
     }
 
     func makeConstraints() {
-        self.commentsButton.snp.makeConstraints { make in
+        self.discussionsButton.snp.makeConstraints { make in
             make.leading.bottom.trailing.equalToSuperview()
-            make.height.equalTo(self.appearance.commentsButtonHeight)
+            make.height.equalTo(self.appearance.discussionsButtonHeight)
         }
 
         self.submitButton.snp.makeConstraints { make in
@@ -232,8 +229,8 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
 
-            self.navigationBottomCommentsConstraint = make.bottom
-                .equalTo(self.commentsButton.snp.top)
+            self.navigationBottomDiscussionsConstraint = make.bottom
+                .equalTo(self.discussionsButton.snp.top)
                 .offset(-self.appearance.spacing)
                 .constraint
 
@@ -244,7 +241,7 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
         }
 
         // Should be executed when all constraints set up
-        self.updateCommentsButton()
+        self.updateDiscussionsButton()
         self.updateNavigationButtons()
     }
 }

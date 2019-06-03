@@ -659,3 +659,9 @@ ProfileEditAboutMeTitle = "О себе";
 "TopicTimeToCompleteText1" = "%@ минута на выполнение";
 "TopicTimeToCompleteText234" = "%@ минуты на выполнение";
 "TopicTimeToComplete567890" = "%@ минут на выполнение";
+
+/* New lesson & step */
+NextLessonNavigation = "Следующий урок";
+PreviousLessonNavigation = "Предыдущий урок";
+DiscussionsButtonTitle = "Показать комментарии (%@)";
+NoDiscussionsButtonTitle = "Напишите комментарий";

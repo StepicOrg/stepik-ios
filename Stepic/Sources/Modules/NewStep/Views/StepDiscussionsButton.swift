@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension StepCommentsButton {
+extension StepDiscussionsButton {
     struct Appearance {
         let iconSize = CGSize(width: 16, height: 17)
         let insets = LayoutInsets(left: 16, right: 16)
@@ -13,7 +13,7 @@ extension StepCommentsButton {
     }
 }
 
-final class StepCommentsButton: UIControl {
+final class StepDiscussionsButton: UIControl {
     let appearance: Appearance
 
     private lazy var contentStackView: UIStackView = {
@@ -69,7 +69,7 @@ final class StepCommentsButton: UIControl {
     }
 }
 
-extension StepCommentsButton: ProgrammaticallyInitializableViewProtocol {
+extension StepDiscussionsButton: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }

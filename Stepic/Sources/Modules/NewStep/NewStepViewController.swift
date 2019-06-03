@@ -184,7 +184,7 @@ extension NewStepViewController: NewStepViewDelegate {
         self.interactor.doLessonNavigationRequest(request: .init(direction: .next))
     }
 
-    func newStepViewDidRequestComments(_ view: NewStepView) {
+    func newStepViewDidRequestDiscussions(_ view: NewStepView) {
         guard case .result(let viewModel) = self.state,
               let discussionProxyID = viewModel.discussionProxyID else {
             return

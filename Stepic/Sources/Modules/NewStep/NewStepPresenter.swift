@@ -40,11 +40,14 @@ final class NewStepPresenter: NewStepPresenterProtocol {
 
     private func makeViewModel(step: Step) -> Guarantee<NewStepViewModel> {
         return Guarantee { seal in
-            let commentsLabelTitle: String = {
+            let discussionsLabelTitle: String = {
                 if let discussionsCount = step.discussionsCount, discussionsCount > 0 {
-                    return "Комментарии (\(discussionsCount))"
+                    return String(
+                        format: NSLocalizedString("DiscussionsButtonTitle", comment: ""),
+                        FormatterHelper.longNumber(discussionsCount)
+                    )
                 }
-                return "Напишите первый комментарий"
+                return NSLocalizedString("NoDiscussionsButtonTitle", comment: "")
             }()
 
             var stepText = step.block.text ?? ""
@@ -91,7 +94,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             let viewModel = NewStepViewModel(
                 content: contentType,
                 quizType: quizType,
-                commentsLabelTitle: commentsLabelTitle,
+                discussionsLabelTitle: discussionsLabelTitle,
                 discussionProxyID: step.discussionProxyId,
                 stepURLPath: urlPath,
                 step: step

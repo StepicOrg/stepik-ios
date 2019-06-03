@@ -57,9 +57,9 @@ final class StepNavigationButton: UIControl {
         label.textColor = self.appearance.mainColor
         switch self.type {
         case .previous:
-            label.text = "Предыдущий урок"
+            label.text = NSLocalizedString("PreviousLessonNavigation", comment: "")
         case .next:
-            label.text = "Следующий урок"
+            label.text = NSLocalizedString("NextLessonNavigation", comment: "")
         }
 
         switch (self.type, self.isCentered) {

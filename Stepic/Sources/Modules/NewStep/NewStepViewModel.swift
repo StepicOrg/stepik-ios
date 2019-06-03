@@ -3,7 +3,7 @@ import Foundation
 struct NewStepViewModel {
     let content: ContentType
     let quizType: NewStep.QuizType?
-    let commentsLabelTitle: String
+    let discussionsLabelTitle: String
     let discussionProxyID: DiscussionProxy.IdType?
     let stepURLPath: String
 

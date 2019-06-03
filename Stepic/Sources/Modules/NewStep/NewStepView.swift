@@ -5,7 +5,7 @@ protocol NewStepViewDelegate: class {
     func newStepViewDidRequestVideo(_ view: NewStepView)
     func newStepViewDidRequestPrevious(_ view: NewStepView)
     func newStepViewDidRequestNext(_ view: NewStepView)
-    func newStepViewDidRequestComments(_ view: NewStepView)
+    func newStepViewDidRequestDiscussions(_ view: NewStepView)
     func newStepViewDidLoadContent(_ view: NewStepView)
 
     func newStepView(_ view: NewStepView, didRequestFullscreenImage url: URL)
@@ -68,8 +68,8 @@ final class NewStepView: UIView {
         view.onNextButtonClick = {
             self.delegate?.newStepViewDidRequestNext(self)
         }
-        view.onCommentsButtonClick = {
-            self.delegate?.newStepViewDidRequestComments(self)
+        view.onDiscussionsButtonClick = {
+            self.delegate?.newStepViewDidRequestDiscussions(self)
         }
         return view
     }()
@@ -129,8 +129,8 @@ final class NewStepView: UIView {
             self.stepTextView.loadHTMLText(htmlString)
         }
 
-        self.stepControlsView.isCommentsButtonHidden = viewModel.discussionProxyID == nil
-        self.stepControlsView.commentsTitle = viewModel.commentsLabelTitle
+        self.stepControlsView.isDiscussionsButtonHidden = viewModel.discussionProxyID == nil
+        self.stepControlsView.discussionsTitle = viewModel.discussionsLabelTitle
 
         guard let quizView = quizView else {
             return
