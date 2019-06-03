@@ -49,6 +49,13 @@ enum NewStep {
         struct Request { }
     }
 
+    /// Handle navigation inside lesson
+    enum StepNavigationRequest {
+        struct Request {
+            let index: Int
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

@@ -7,6 +7,7 @@ protocol NewLessonViewControllerProtocol: class {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
+    func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
 }
 
 final class NewLessonViewController: TabmanViewController {
@@ -313,5 +314,9 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
             object: nil,
             userInfo: [StepTabBarButton.userInfoIDKey: tabIdentifier]
         )
+    }
+
+    func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel) {
+        self.scrollToPage(.at(index: viewModel.index), animated: true)
     }
 }

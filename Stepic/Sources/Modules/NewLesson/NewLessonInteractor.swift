@@ -203,6 +203,14 @@ extension NewLessonInteractor: NewStepOutputProtocol {
             self.dataBackUpdateService.triggerProgressUpdate(unit: unit.id, triggerRecursive: true)
         }
     }
+
+    func handleStepNavigation(to index: Int) {
+        guard let lesson = self.currentLesson, index > 0 && index < lesson.stepsArray.count else {
+            return
+        }
+
+        self.presenter.presentCurrentStepUpdate(response: .init(index: index))
+    }
 }
 
 extension NewLessonInteractor: NewLessonInputProtocol { }

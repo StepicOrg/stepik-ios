@@ -207,6 +207,24 @@ extension NewStepViewController: NewStepViewDelegate {
     }
 
     func newStepView(_ view: NewStepView, didRequestOpenURL url: URL) {
+        guard case .result(let viewModel) = self.state else {
+            return
+        }
+
+        // Check if the request is a navigation inside a lesson
+        if url.absoluteString.range(of: "\(viewModel.lessonID)/step/") != nil {
+            let components = url.pathComponents
+            if let index = components.index(of: "step") {
+                if index + 1 < components.count {
+                    let urlStepIndexString = components[index + 1]
+                    if let urlStepIndex = Int(urlStepIndexString) {
+                        self.interactor.doStepNavigationRequest(request: .init(index: urlStepIndex))
+                        return
+                    }
+                }
+            }
+        }
+
         WebControllerManager.sharedManager.presentWebControllerWithURL(
             url,
             inController: self,

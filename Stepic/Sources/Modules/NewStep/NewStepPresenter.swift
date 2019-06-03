@@ -97,6 +97,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 discussionsLabelTitle: discussionsLabelTitle,
                 discussionProxyID: step.discussionProxyId,
                 stepURLPath: urlPath,
+                lessonID: step.lessonId,
                 step: step
             )
             seal(viewModel)

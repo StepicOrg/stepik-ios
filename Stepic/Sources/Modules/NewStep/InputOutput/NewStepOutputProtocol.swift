@@ -5,4 +5,5 @@ protocol NewStepOutputProtocol: class {
     func handleStepDone(id: Step.IdType)
     func handlePreviousUnitNavigation()
     func handleNextUnitNavigation()
+    func handleStepNavigation(to index: Int)
 }

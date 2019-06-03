@@ -6,6 +6,7 @@ struct NewStepViewModel {
     let discussionsLabelTitle: String
     let discussionProxyID: DiscussionProxy.IdType?
     let stepURLPath: String
+    let lessonID: Lesson.IdType
 
     @available(*, deprecated, message: "Deprecated initialization")
     let step: Step

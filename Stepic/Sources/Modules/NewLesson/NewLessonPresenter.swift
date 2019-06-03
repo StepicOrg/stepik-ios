@@ -4,6 +4,7 @@ protocol NewLessonPresenterProtocol {
     func presentLesson(response: NewLesson.LessonLoad.Response)
     func presentLessonNavigation(response: NewLesson.LessonNavigationLoad.Response)
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
+    func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response)
 }
 
 final class NewLessonPresenter: NewLessonPresenterProtocol {
@@ -44,6 +45,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
 
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response) {
         self.viewController?.displayStepPassedStatusUpdate(viewModel: .init(stepID: response.stepID))
+    }
+
+    func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response) {
+        self.viewController?.displayCurrentStepUpdate(viewModel: .init(index: response.index))
     }
 
     // MAKE: Private API

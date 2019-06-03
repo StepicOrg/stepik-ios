@@ -4,6 +4,7 @@ import PromiseKit
 protocol NewStepInteractorProtocol {
     func doStepLoad(request: NewStep.StepLoad.Request)
     func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request)
+    func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request)
     func doStepViewRequest(request: NewStep.StepViewRequest.Request)
     func doStepDoneRequest(request: NewStep.StepDoneRequest.Request)
 }
@@ -67,6 +68,10 @@ final class NewStepInteractor: NewStepInteractorProtocol {
                 }
             }
         }.cauterize()
+    }
+
+    func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request) {
+        self.moduleOutput?.handleStepNavigation(to: request.index - 1)
     }
 
     func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request) {

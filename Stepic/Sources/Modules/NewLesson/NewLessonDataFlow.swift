@@ -52,6 +52,17 @@ enum NewLesson {
         }
     }
 
+    /// Current step index update
+    enum CurrentStepUpdate {
+        struct Response {
+            let index: Int
+        }
+
+        struct ViewModel {
+            let index: Int
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {
