@@ -17,7 +17,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
     private var state: NewStep.ViewControllerState {
         didSet {
-            switch state {
+            switch self.state {
             case .result:
                 self.isPlaceholderShown = false
                 self.showContent()

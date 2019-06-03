@@ -45,7 +45,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     // MARK: Public API
 
     func doLessonLoad(request: NewLesson.LessonLoad.Request) {
-        self.refresh(context: lastLoadState.context, startStep: lastLoadState.startStep)
+        self.refresh(context: self.lastLoadState.context, startStep: self.lastLoadState.startStep)
     }
 
     // MARK: Private API
