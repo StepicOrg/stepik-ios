@@ -27,8 +27,12 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
     private func makeViewModel(course: Course) -> ContinueCourseViewModel {
         let progress: ContinueCourseViewModel.ProgressDescription = {
             if let progress = course.progress {
-                let normalizedPercent = progress.percentPassed / 100.0
-                return (description: FormatterHelper.integerPercent(normalizedPercent), value: normalizedPercent)
+                var normalizedPercent = progress.percentPassed
+                normalizedPercent.round(.up)
+                return (
+                    description: FormatterHelper.integerPercent(Int(normalizedPercent)),
+                    value: normalizedPercent / 100
+                )
             }
             return nil
         }()
