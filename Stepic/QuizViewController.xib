@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,13 +14,20 @@
             <connections>
                 <outlet property="containerView" destination="HO0-Wd-0kw" id="BZi-zt-KtT"/>
                 <outlet property="hintHeight" destination="AhP-8s-ofa" id="2bJ-6X-Sgt"/>
+                <outlet property="hintLeadingConstraint" destination="oDA-3f-YMY" id="FNF-0V-pnH"/>
                 <outlet property="hintTextView" destination="veh-sk-UzR" id="xRb-0L-ijn"/>
+                <outlet property="hintTrailingConstraint" destination="NR7-N6-Zku" id="hYW-FM-b7E"/>
                 <outlet property="hintView" destination="GmL-q5-y6Z" id="mEf-oh-hyb"/>
                 <outlet property="hintWebView" destination="Ke4-HJ-ctM" id="OjG-Wo-RAE"/>
                 <outlet property="peerReviewButton" destination="Qdk-og-oWI" id="q2L-Qo-FIv"/>
                 <outlet property="peerReviewHeight" destination="Zdy-99-nI7" id="5bp-kl-J3t"/>
+                <outlet property="peerReviewLeadingConstraint" destination="HOo-0z-cVH" id="Jqx-2b-WXy"/>
+                <outlet property="peerReviewTrailingConstraint" destination="eHr-N6-lnF" id="Of4-bS-Ghb"/>
                 <outlet property="sendButton" destination="yPX-01-eq5" id="V3v-9d-GUi"/>
+                <outlet property="sendButtonBottomConstraint" destination="xye-9J-7EX" id="dJM-4k-gNj"/>
                 <outlet property="sendButtonHeight" destination="Pts-9U-YKn" id="x9H-cL-4wg"/>
+                <outlet property="sendButtonLeadingConstraint" destination="YbC-Ag-TK4" id="13S-U4-JME"/>
+                <outlet property="sendButtonTrailingConstraint" destination="SyG-E5-BxU" id="pIO-V8-3bi"/>
                 <outlet property="statusImageView" destination="kBi-W4-vlY" id="TNt-3y-ooZ"/>
                 <outlet property="statusLabel" destination="hqL-ha-NG2" id="MJb-Y4-DeC"/>
                 <outlet property="statusViewHeight" destination="A6M-Cf-bMG" id="HUz-2F-ZAV"/>
@@ -60,7 +68,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HO0-Wd-0kw" userLabel="container view">
-                    <rect key="frame" x="0.0" y="0.0" width="372" height="598"/>
+                    <rect key="frame" x="0.0" y="0.0" width="372" height="590"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-q5-y6Z" userLabel="hint view">
@@ -105,7 +113,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qdk-og-oWI">
-                    <rect key="frame" x="0.0" y="598" width="372" height="0.0"/>
+                    <rect key="frame" x="8" y="598" width="356" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" id="Zdy-99-nI7"/>
                     </constraints>
@@ -121,18 +129,18 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="HO0-Wd-0kw" firstAttribute="leading" secondItem="637-LV-Ael" secondAttribute="leading" id="12n-C3-YYg"/>
-                <constraint firstItem="Qdk-og-oWI" firstAttribute="top" secondItem="HO0-Wd-0kw" secondAttribute="bottom" id="4mc-GW-2t9"/>
+                <constraint firstItem="Qdk-og-oWI" firstAttribute="top" secondItem="HO0-Wd-0kw" secondAttribute="bottom" constant="8" id="4mc-GW-2t9"/>
                 <constraint firstItem="HO0-Wd-0kw" firstAttribute="top" secondItem="637-LV-Ael" secondAttribute="top" id="60n-bJ-YYh"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="I3R-Pc-iTV" secondAttribute="trailing" id="91e-vo-OtM"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="top" secondItem="Qdk-og-oWI" secondAttribute="bottom" constant="8" id="DyQ-jv-O81"/>
                 <constraint firstItem="I3R-Pc-iTV" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" id="Gli-iz-mgq"/>
-                <constraint firstItem="Qdk-og-oWI" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" id="HOo-0z-cVH"/>
+                <constraint firstItem="Qdk-og-oWI" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" constant="8" id="HOo-0z-cVH"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="GmL-q5-y6Z" secondAttribute="trailing" constant="8" id="NR7-N6-Zku"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="yPX-01-eq5" secondAttribute="trailing" constant="8" id="SyG-E5-BxU"/>
                 <constraint firstItem="fbG-7B-MVp" firstAttribute="leading" secondItem="yPX-01-eq5" secondAttribute="leading" constant="-8" id="YbC-Ag-TK4"/>
                 <constraint firstItem="GmL-q5-y6Z" firstAttribute="top" secondItem="I3R-Pc-iTV" secondAttribute="bottom" constant="8" id="Z66-S5-1VR"/>
                 <constraint firstAttribute="trailing" secondItem="HO0-Wd-0kw" secondAttribute="trailing" id="dgt-gf-5BW"/>
-                <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="Qdk-og-oWI" secondAttribute="trailing" id="eHr-N6-lnF"/>
+                <constraint firstItem="fbG-7B-MVp" firstAttribute="trailing" secondItem="Qdk-og-oWI" secondAttribute="trailing" constant="8" id="eHr-N6-lnF"/>
                 <constraint firstItem="yPX-01-eq5" firstAttribute="top" secondItem="GmL-q5-y6Z" secondAttribute="bottom" constant="8" id="lRJ-4a-dUb"/>
                 <constraint firstItem="GmL-q5-y6Z" firstAttribute="leading" secondItem="fbG-7B-MVp" secondAttribute="leading" constant="8" id="oDA-3f-YMY"/>
                 <constraint firstAttribute="bottom" secondItem="yPX-01-eq5" secondAttribute="bottom" constant="8" id="xye-9J-7EX"/>
@@ -142,7 +150,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fbG-7B-MVp"/>
-            <point key="canvasLocation" x="283.5" y="-103.5"/>
+            <point key="canvasLocation" x="283.19999999999999" y="-104.34782608695653"/>
         </view>
     </objects>
 </document>

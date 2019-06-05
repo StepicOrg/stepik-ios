@@ -38,7 +38,7 @@ enum SocialProvider: Int {
 
     static var all: [SocialProvider] {
         var res: [SocialProvider] = []
-        for i in 0..<6 {
+        for i in 0..<5 {
             res += [SocialProvider(rawValue: i)!]
         }
         return res

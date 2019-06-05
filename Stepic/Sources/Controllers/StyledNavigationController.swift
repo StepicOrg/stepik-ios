@@ -128,6 +128,7 @@ class StyledNavigationController: UINavigationController {
     /// Change color of navigation bar & status bar background
     func changeBackgroundColor(_ color: UIColor, sender: UIViewController) {
         guard sender === self.topViewController else {
+            self.navigationBarAppearanceForController[sender.hashValue]?.backgroundColor = color
             return
         }
         return self.changeBackgroundColor(color)
@@ -136,6 +137,7 @@ class StyledNavigationController: UINavigationController {
     /// Change alpha of shadow view
     func changeShadowViewAlpha(_ alpha: CGFloat, sender: UIViewController) {
         guard sender === self.topViewController else {
+            self.navigationBarAppearanceForController[sender.hashValue]?.shadowViewAlpha = alpha
             return
         }
         return self.changeShadowViewAlpha(alpha)
@@ -144,6 +146,7 @@ class StyledNavigationController: UINavigationController {
     /// Change navigation bar text color
     func changeTextColor(_ color: UIColor, sender: UIViewController) {
         guard sender === self.topViewController else {
+            self.navigationBarAppearanceForController[sender.hashValue]?.textColor = color
             return
         }
         return self.changeTextColor(color)
@@ -152,6 +155,7 @@ class StyledNavigationController: UINavigationController {
     /// Change navigation bar tint color
     func changeTintColor(_ color: UIColor, sender: UIViewController) {
         guard sender === self.topViewController else {
+            self.navigationBarAppearanceForController[sender.hashValue]?.tintColor = color
             return
         }
         return self.changeTintColor(color)

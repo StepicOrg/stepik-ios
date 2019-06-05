@@ -165,7 +165,7 @@ class SocialAuthViewController: UIViewController {
 
 extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfColumns
+        return section == 0 ? numberOfColumns : numberOfColumns - 1
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

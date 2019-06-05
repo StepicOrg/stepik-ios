@@ -12,6 +12,7 @@ import Kanna
 /*
  Parses an HTML, allowing to get all the needed information from HTML string
  */
+@available(*, deprecated, message: "Use ContentProcessor instead")
 class HTMLParsingUtil {
     fileprivate init() {}
 

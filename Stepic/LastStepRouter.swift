@@ -64,9 +64,6 @@ class LastStepRouter {
         }
 
         let sectionsVC = CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule()
-        guard let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
-            return
-        }
 
         func openSyllabus() {
             SVProgressHUD.showSuccess(withStatus: "")
@@ -117,14 +114,20 @@ class LastStepRouter {
             }
 
             stepIdPromise.done { targetStepId in
-                lessonVC.initIds = (stepId: targetStepId, unitId: unit.id)
+                let lessonAssembly: Assembly = {
+                    if RemoteConfig.shared.newLessonAvailable {
+                        return NewLessonAssembly(initialContext: .unit(id: unit.id), startStep: .id(targetStepId))
+                    } else {
+                        return LessonLegacyAssembly(initObjects: nil, initIDs: (stepId: targetStepId, unitId: unit.id))
+                    }
+                }()
 
                 SVProgressHUD.showSuccess(withStatus: "")
 
                 if !skipSyllabus {
                     navigationController.pushViewController(sectionsVC, animated: false)
                 }
-                navigationController.pushViewController(lessonVC, animated: true)
+                navigationController.pushViewController(lessonAssembly.makeModule(), animated: true)
 
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
