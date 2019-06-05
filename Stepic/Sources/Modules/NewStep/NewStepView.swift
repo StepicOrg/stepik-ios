@@ -62,14 +62,23 @@ final class NewStepView: UIView {
 
     private lazy var stepControlsView: StepControlsView = {
         let view = StepControlsView()
-        view.onPreviousButtonClick = {
-            self.delegate?.newStepViewDidRequestPrevious(self)
+        view.onPreviousButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.newStepViewDidRequestPrevious(strongSelf)
         }
-        view.onNextButtonClick = {
-            self.delegate?.newStepViewDidRequestNext(self)
+        view.onNextButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.newStepViewDidRequestNext(strongSelf)
         }
-        view.onDiscussionsButtonClick = {
-            self.delegate?.newStepViewDidRequestDiscussions(self)
+        view.onDiscussionsButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.newStepViewDidRequestDiscussions(strongSelf)
         }
         return view
     }()
