@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseRemoteConfig
 import FirebaseInstanceID
+import DeviceKit
 
 enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
@@ -54,6 +55,10 @@ class RemoteConfig {
     }
 
     var newLessonAvailable: Bool {
+        if DeviceInfo.current.isPad || DeviceInfo.current.OSVersion.major < 11 {
+            return false
+        }
+
         return FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.newLessonAvailable.rawValue).boolValue
     }
 
