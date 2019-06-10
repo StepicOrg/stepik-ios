@@ -38,14 +38,26 @@ class SettingsViewController: MenuViewController, SettingsView {
     lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
         artView.onVKClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "vk"]
+            )
             UIApplication.shared.openURL(SocialNetworks.vk)
         }
 
         artView.onFacebookClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "facebook"]
+            )
             UIApplication.shared.openURL(SocialNetworks.facebook)
         }
 
         artView.onInstagramClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "instagram"]
+            )
             UIApplication.shared.openURL(SocialNetworks.instagram)
         }
         return artView
