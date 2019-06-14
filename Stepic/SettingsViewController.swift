@@ -11,6 +11,12 @@ import Foundation
 class SettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?
 
+    private enum SocialNetworks {
+        static let vk = URL(string: "https://vk.com/rustepik")!
+        static let facebook = URL(string: "https://facebook.com/stepikorg")!
+        static let instagram = URL(string: "https://instagram.com/stepik.education/")!
+    }
+
     override func viewDidLoad() {
         edgesForExtendedLayout = []
 
@@ -31,16 +37,28 @@ class SettingsViewController: MenuViewController, SettingsView {
 
     lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
-        artView.art = Images.arts.customizeLearningProcess
-        if #available(iOS 11.0, *) {
-            artView.width = UIScreen.main.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
-        } else {
-            artView.width = UIScreen.main.bounds.width
+        artView.onVKClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "vk"]
+            )
+            UIApplication.shared.openURL(SocialNetworks.vk)
         }
 
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height))
-        artView.onTap = {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
+        artView.onFacebookClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "facebook"]
+            )
+            UIApplication.shared.openURL(SocialNetworks.facebook)
+        }
+
+        artView.onInstagramClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "instagram"]
+            )
+            UIApplication.shared.openURL(SocialNetworks.instagram)
         }
         return artView
     }()
@@ -194,15 +212,14 @@ class SettingsViewController: MenuViewController, SettingsView {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.layoutTableHeaderView()
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-
-        if #available(iOS 11.0, *) {
-            artView.width = size.width - view.safeAreaInsets.top - view.safeAreaInsets.bottom
-        } else {
-            artView.width = size.width
-        }
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height))
+        self.tableView.layoutTableHeaderView()
     }
 
     func presentAuth() {

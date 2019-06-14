@@ -665,3 +665,5 @@ NextLessonNavigation = "Next lesson";
 PreviousLessonNavigation = "Previous lesson";
 DiscussionsButtonTitle = "Show discussions (%@)";
 NoDiscussionsButtonTitle = "Leave a comment";
+
+OurSocialNetworks = "Our social networks";

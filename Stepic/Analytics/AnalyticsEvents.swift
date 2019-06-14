@@ -234,7 +234,7 @@ struct AnalyticsEvents {
         static let clickSettings = "main_choice_settings"
         static let interactionWithPinsMap = "pins_map_interaction"
         struct Settings {
-            static let clickBanner = "settings_click_banner"
+            static let socialNetworkClick = "settings_click_social_network"
         }
     }
 
