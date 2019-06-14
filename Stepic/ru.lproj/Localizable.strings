@@ -666,3 +666,5 @@ NextLessonNavigation = "Следующий урок";
 PreviousLessonNavigation = "Предыдущий урок";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
+
+OurSocialNetworks = "Наши аккаунты в соцсетях";
