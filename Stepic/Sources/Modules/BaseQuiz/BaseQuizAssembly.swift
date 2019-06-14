@@ -4,15 +4,20 @@ final class BaseQuizAssembly: Assembly {
     var moduleInput: BaseQuizInputProtocol?
 
     private weak var moduleOutput: BaseQuizOutputProtocol?
+    private let step: Step
 
-    init(output: BaseQuizOutputProtocol? = nil) {
+    init(step: Step, output: BaseQuizOutputProtocol? = nil) {
         self.moduleOutput = output
+        self.step = step
     }
 
     func makeModule() -> UIViewController {
-        let provider = BaseQuizProvider()
+        let provider = BaseQuizProvider(
+            submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
+            attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI())
+        )
         let presenter = BaseQuizPresenter()
-        let interactor = BaseQuizInteractor(presenter: presenter, provider: provider)
+        let interactor = BaseQuizInteractor(step: self.step, presenter: presenter, provider: provider)
         let viewController = BaseQuizViewController(interactor: interactor)
 
         presenter.viewController = viewController

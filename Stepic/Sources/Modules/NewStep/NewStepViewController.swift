@@ -115,6 +115,42 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     @objc
     // swiftlint:disable:next cyclomatic_complexity
     private func showContent() {
+        func initQuizController(type: NewStep.QuizType, step: Step) -> QuizViewController? {
+            let quizController: QuizViewController? = {
+                switch type {
+                case .choice:
+                    return ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .string:
+                    return StringQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .number:
+                    return NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .freeAnswer:
+                    return FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .math:
+                    return MathQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .sorting:
+                    return SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .matching:
+                    return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .fillBlanks:
+                    return FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .code:
+                    return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .sql:
+                    return SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
+                default:
+                    return nil
+                }
+            }()
+
+            if let controller = quizController {
+                controller.step = step
+                controller.delegate = self
+                return controller
+            }
+            return nil
+        }
+
         guard case .result(let viewModel) = self.state else {
             return
         }
@@ -129,36 +165,17 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             return
         }
 
-        let quizController: QuizViewController? = {
+        let quizController: UIViewController? = {
             switch quizType {
-            case .choice:
-                return ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
             case .string:
-                return StringQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .number:
-                return NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .freeAnswer:
-                return FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .math:
-                return MathQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .sorting:
-                return SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .matching:
-                return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .fillBlanks:
-                return FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .code:
-                return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .sql:
-                return SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
+                let assembly = BaseQuizAssembly(step: viewModel.step)
+                return assembly.makeModule()
             default:
-                return nil
+                return initQuizController(type: quizType, step: viewModel.step)
             }
         }()
 
         if let controller = quizController {
-            controller.step = viewModel.step
-            controller.delegate = self
             self.addChild(controller)
             self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         } else {

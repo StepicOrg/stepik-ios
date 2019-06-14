@@ -8,10 +8,9 @@ extension BaseQuizView {
 final class BaseQuizView: UIView {
     let appearance: Appearance
 
-    init(
-        frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
-    ) {
+    private lazy var feedbackView = QuizFeedbackView(state: .wrong)
+
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
@@ -29,7 +28,18 @@ final class BaseQuizView: UIView {
 extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     func setupView() { }
 
-    func addSubviews() { }
+    func addSubviews() {
+        self.addSubview(self.feedbackView)
+    }
 
-    func makeConstraints() { }
+    func makeConstraints() {
+        self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
+        self.feedbackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16))
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.feedbackView.update(state: .correct, feedback: "abacaba")
+        }
+    }
 }

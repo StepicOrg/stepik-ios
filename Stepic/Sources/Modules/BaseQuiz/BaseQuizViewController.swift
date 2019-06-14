@@ -18,8 +18,12 @@ final class BaseQuizViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = BaseQuizView(frame: UIScreen.main.bounds)
-        self.view = view
+        self.view = BaseQuizView(frame: UIScreen.main.bounds)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.interactor.doSubmissionLoad(request: .init())
     }
 }
 
