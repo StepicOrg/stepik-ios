@@ -2,13 +2,45 @@ import SnapKit
 import UIKit
 
 extension BaseQuizView {
-    struct Appearance { }
+    struct Appearance {
+        let submitButtonBackgroundColor = UIColor.stepicGreen
+        let submitButtonHeight: CGFloat = 44
+        let submitButtonTextColor = UIColor.white
+        let submitButtonCornerRadius: CGFloat = 6
+        let submitButtonFont = UIFont.systemFont(ofSize: 16)
+
+        let spacing: CGFloat = 16
+
+        let insets = LayoutInsets(left: 16, right: 16)
+    }
 }
 
 final class BaseQuizView: UIView {
     let appearance: Appearance
 
-    private lazy var feedbackView = QuizFeedbackView(state: .wrong)
+    lazy var submitButton: UIButton = {
+        let submitButton = UIButton(type: .system)
+        submitButton.setTitleColor(self.appearance.submitButtonTextColor, for: .normal)
+        submitButton.titleLabel?.font = self.appearance.submitButtonFont
+        submitButton.setTitle("Отправить", for: .normal)
+        submitButton.layer.cornerRadius = self.appearance.submitButtonCornerRadius
+        submitButton.clipsToBounds = true
+        submitButton.backgroundColor = self.appearance.submitButtonBackgroundColor
+        return submitButton
+    }()
+
+    lazy var feedbackView: QuizFeedbackView = {
+        let feedbackView = QuizFeedbackView(state: .evaluation)
+        feedbackView.isHidden = true
+        return feedbackView
+    }()
+
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.feedbackView, self.submitButton])
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.spacing
+        return stackView
+    }()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -29,17 +61,20 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     func setupView() { }
 
     func addSubviews() {
-        self.addSubview(self.feedbackView)
+        self.addSubview(self.stackView)
     }
 
     func makeConstraints() {
-        self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
-        self.feedbackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16))
+        self.submitButton.translatesAutoresizingMaskIntoConstraints = false
+        self.submitButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.submitButtonHeight)
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.feedbackView.update(state: .correct, feedback: "abacaba")
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
         }
     }
 }
