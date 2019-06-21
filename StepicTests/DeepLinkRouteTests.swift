@@ -50,7 +50,11 @@ class DeepLinkRouteSpec: QuickSpec {
                         "https://stepik.org/course/8092",
                         "https://stepik.org/course/8092/",
                         "https://stepik.org/course/8092/?",
-                        "https://stepik.org/course/8092/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course"
+                        "https://stepik.org/course/8092/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course",
+                        "https://stepik.org/course/8092/promo",
+                        "https://stepik.org/course/8092/promo/",
+                        "https://stepik.org/course/8092/promo/?",
+                        "https://stepik.org/course/8092/promo/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course"
                     ]
                     self.checkPaths(paths) { route in
                         guard case let .course(id) = route else {
