@@ -87,7 +87,7 @@ final class QuizFeedbackView: UIView {
 
     // MARK: Public API
 
-    func update(state: State, feedback: String? = nil) {
+    func update(state: State, hint: String? = nil) {
         self.state = state
 
         self.titleLabel.text = state.title
@@ -103,7 +103,7 @@ final class QuizFeedbackView: UIView {
             make.edges.equalToSuperview()
         }
 
-        self.animateFeedbackAppearance(showFeedback: feedback != nil)
+        self.animateFeedbackAppearance(showFeedback: hint != nil)
     }
 
     // MARK: Private API

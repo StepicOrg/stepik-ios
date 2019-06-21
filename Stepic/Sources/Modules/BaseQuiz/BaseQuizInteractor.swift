@@ -26,18 +26,42 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request) {
-        countSubmissions().done { count in
-            print(count)
+        let queue = DispatchQueue.global(qos: .userInitiated)
+
+        queue.promise {
+            self.loadAttempt(forceRefreshAttempt: false)
+        }.then(on: queue) { attempt -> Promise<(Attempt, Submission?)> in
+            guard let attempt = attempt else {
+                throw Error.unknownAttempt
+            }
+
+            return self.provider.fetchSubmissions(for: self.step, attempt: attempt).map { (attempt, $0.0.first) }
+        }.then(on: queue) { attempt, submission -> Guarantee<(Attempt, Submission?, Reply?, Int)> in
+            let cachedReply = ReplyCache.shared.getReply(forStepId: self.step.id, attemptId: attempt.id)
+            return (self.step.hasSubmissionRestrictions ? self.countSubmissions() : Guarantee.value(0))
+                .map { (attempt, submission, cachedReply, $0) }
+        }.done { attempt, submission, cachedReply, submissionLimit in
+            let response = BaseQuiz.SubmissionLoad.Response(
+                step: self.step,
+                attempt: attempt,
+                submission: submission,
+                cachedReply: cachedReply,
+                submissionsCount: submissionLimit
+            )
+
+            self.presenter.presentSubmission(response: response)
         }.cauterize()
     }
 
-    func refreshAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
+    // MARK: - Private API
+
+    private func loadAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
         return firstly { () -> Promise<Attempt?> in
             if forceRefreshAttempt {
                 return self.provider.createAttempt(for: self.step)
             }
             return self.provider.fetchAttempts(for: self.step).map { $0.0.first }
-        }.then(on: .global(qos: .userInitiated)) { attempt -> Promise<Attempt?> in
+        }.then { attempt -> Promise<Attempt?> in
             guard let attempt = attempt, attempt.status == "active" else {
                 return self.provider.createAttempt(for: self.step)
             }
@@ -46,7 +70,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
-    func countSubmissions() -> Guarantee<Int> {
+    private func countSubmissions() -> Guarantee<Int> {
         return Guarantee { seal in
             var count = 0
             func loadSubmissions(page: Int) {
@@ -66,14 +90,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
-    func pollSubmission(_ submission: Submission) -> Promise<Submission> {
+    private func pollSubmission(_ submission: Submission) -> Promise<Submission> {
         return Promise { seal in
             func poll(retryCount: Int) {
                 after(seconds: Double(retryCount) * BaseQuizInteractor.pollInterval).then {
                     _ -> Promise<Submission?> in
 
-                    return self.provider.fetchSubmission(id: submission.id, step: self.step)
-                }.done(on: .global(qos: .userInitiated)) { submission in
+                    self.provider.fetchSubmission(id: submission.id, step: self.step)
+                }.done { submission in
                     guard let submission = submission else {
                         throw Error.submissionFetchFailed
                     }
@@ -94,9 +118,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     enum Error: Swift.Error {
+        case unknownAttempt
         case attemptFetchFailed
         case submissionFetchFailed
     }
 }
-
-extension BaseQuizInteractor: BaseQuizInputProtocol { }

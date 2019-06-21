@@ -5,9 +5,17 @@ enum BaseQuiz {
     enum SubmissionLoad {
         struct Request { }
 
-        struct Response { }
+        struct Response {
+            let step: Step
+            let attempt: Attempt
+            let submission: Submission?
+            let cachedReply: Reply?
+            let submissionsCount: Int
+        }
 
-        struct ViewModel { }
+        struct ViewModel {
+            let state: ViewControllerState
+        }
     }
 
     enum SomeAction {
@@ -16,5 +24,11 @@ enum BaseQuiz {
         struct Response { }
 
         struct ViewModel { }
+    }
+
+    enum ViewControllerState {
+        case loading
+        case result(data: BaseQuizViewModel)
+        case error
     }
 }

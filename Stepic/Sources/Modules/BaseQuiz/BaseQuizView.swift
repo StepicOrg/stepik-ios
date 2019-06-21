@@ -18,29 +18,43 @@ extension BaseQuizView {
 final class BaseQuizView: UIView {
     let appearance: Appearance
 
-    lazy var submitButton: UIButton = {
+    private lazy var submitButton: UIButton = {
         let submitButton = UIButton(type: .system)
         submitButton.setTitleColor(self.appearance.submitButtonTextColor, for: .normal)
         submitButton.titleLabel?.font = self.appearance.submitButtonFont
-        submitButton.setTitle("Отправить", for: .normal)
         submitButton.layer.cornerRadius = self.appearance.submitButtonCornerRadius
         submitButton.clipsToBounds = true
         submitButton.backgroundColor = self.appearance.submitButtonBackgroundColor
         return submitButton
     }()
 
-    lazy var feedbackView: QuizFeedbackView = {
-        let feedbackView = QuizFeedbackView(state: .evaluation)
-        feedbackView.isHidden = true
-        return feedbackView
+    private lazy var feedbackView: QuizFeedbackView = {
+        let view = QuizFeedbackView(state: .evaluation)
+        view.isHidden = true
+        return view
     }()
 
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.feedbackView, self.submitButton])
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.feedbackContainerView, self.submitContainerView])
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
         return stackView
     }()
+
+    private lazy var submitContainerView = UIView()
+    private lazy var feedbackContainerView = UIView()
+
+    var submitButtonTitle: String? {
+        didSet {
+            self.submitButton.setTitle(self.submitButtonTitle, for: .normal)
+        }
+    }
+
+    var isSubmitButtonEnabled = true {
+        didSet {
+            self.submitButton.isEnabled = self.isSubmitButtonEnabled
+        }
+    }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -55,6 +69,20 @@ final class BaseQuizView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func addQuiz(view: UIView) {
+        self.stackView.insertArrangedSubview(view, at: 0)
+    }
+
+    func updateFeedback(state: QuizFeedbackView.State?, hint: String? = nil) {
+        guard let state = state else {
+            self.feedbackView.isHidden = true
+            return
+        }
+
+        self.feedbackView.isHidden = false
+        self.feedbackView.update(state: state, hint: hint)
+    }
 }
 
 extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
@@ -62,6 +90,9 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.stackView)
+
+        self.submitContainerView.addSubview(self.submitButton)
+        self.feedbackContainerView.addSubview(self.feedbackView)
     }
 
     func makeConstraints() {
@@ -70,11 +101,26 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
             make.height.equalTo(self.appearance.submitButtonHeight)
         }
 
-        self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView.snp.makeConstraints { make in
+        self.submitButton.translatesAutoresizingMaskIntoConstraints = false
+        self.submitButton.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
+        self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
+        self.feedbackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
+
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
     }
 }

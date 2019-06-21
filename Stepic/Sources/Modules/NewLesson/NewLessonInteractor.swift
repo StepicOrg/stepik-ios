@@ -110,7 +110,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
             return self.provider.fetchProgresses(ids: steps.compactMap { $0.progressId })
                 .map { (steps, lesson, $0.value ?? []) }
-        }.done(on: .global(qos: .userInitiated)) { steps, lesson, progresses in
+        }.done { steps, lesson, progresses in
             let startStepIndex: Int = {
                 switch startStep {
                 case .index(let value):
@@ -120,16 +120,14 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 }
             }()
 
-            DispatchQueue.main.async {
-                let data = NewLesson.LessonLoad.ResponseData(
-                    lesson: lesson,
-                    steps: steps,
-                    progresses: progresses,
-                    startStepIndex: startStepIndex
-                )
+            let data = NewLesson.LessonLoad.ResponseData(
+                lesson: lesson,
+                steps: steps,
+                progresses: progresses,
+                startStepIndex: startStepIndex
+            )
 
-                self.presenter.presentLesson(response: .init(state: .success(result: data)))
-            }
+            self.presenter.presentLesson(response: .init(state: .success(result: data)))
         }.catch { error in
             print("new lesson interactor: error while loading lesson = \(error)")
             self.presenter.presentLesson(response: .init(state: .error))
@@ -144,9 +142,9 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         let previousUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unitID, direction: .previous)
         let nextUnitPromise = self.unitNavigationService.findUnitForNavigation(from: unitID, direction: .next)
 
-        when(
-            fulfilled: previousUnitPromise, nextUnitPromise
-        ).done(on: .global(qos: .userInitiated)) { [weak self] previousUnit, nextUnit in
+        DispatchQueue.global(qos: .userInitiated).promise {
+            when(fulfilled: previousUnitPromise, nextUnitPromise)
+        }.done { [weak self] previousUnit, nextUnit in
             guard let strongSelf = self else {
                 return
             }
@@ -157,11 +155,9 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
                 print("new lesson interactor: next & previous units did load")
 
-                DispatchQueue.main.async {
-                    strongSelf.presenter.presentLessonNavigation(
-                        response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: nextUnit != nil)
-                    )
-                }
+                strongSelf.presenter.presentLessonNavigation(
+                    response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: nextUnit != nil)
+                )
             }
         }.cauterize()
     }

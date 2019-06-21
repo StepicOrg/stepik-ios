@@ -113,8 +113,8 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     @objc
-    // swiftlint:disable:next cyclomatic_complexity
     private func showContent() {
+        // swiftlint:disable:next cyclomatic_complexity
         func initQuizController(type: NewStep.QuizType, step: Step) -> QuizViewController? {
             let quizController: QuizViewController? = {
                 switch type {
