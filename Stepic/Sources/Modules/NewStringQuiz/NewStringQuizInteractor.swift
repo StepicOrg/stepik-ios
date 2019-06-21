@@ -6,7 +6,7 @@ protocol NewStringQuizInteractorProtocol {
 }
 
 final class NewStringQuizInteractor: NewStringQuizInteractorProtocol {
-    weak var moduleOutput: NewStringQuizOutputProtocol?
+    weak var moduleOutput: QuizOutputProtocol?
 
     private let presenter: NewStringQuizPresenterProtocol
     private let provider: NewStringQuizProviderProtocol
@@ -47,7 +47,7 @@ final class NewStringQuizInteractor: NewStringQuizInteractorProtocol {
     }
 }
 
-extension NewStringQuizInteractor: NewStringQuizInputProtocol {
+extension NewStringQuizInteractor: QuizInputProtocol {
     func update(reply: Reply?) {
         defer {
             self.presentNewData()

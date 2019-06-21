@@ -1,13 +1,12 @@
 import UIKit
 
-final class NewStringQuizAssembly: Assembly {
-    var moduleInput: NewStringQuizInputProtocol?
+final class NewStringQuizAssembly: QuizAssembly {
+    var moduleInput: QuizInputProtocol?
+    weak var moduleOutput: QuizOutputProtocol?
 
-    private weak var moduleOutput: NewStringQuizOutputProtocol?
     private let type: NewStringQuiz.DataType
 
-    init(type: NewStringQuiz.DataType, output: NewStringQuizOutputProtocol? = nil) {
-        self.moduleOutput = output
+    init(type: NewStringQuiz.DataType) {
         self.type = type
     }
 

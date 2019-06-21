@@ -9,17 +9,19 @@ final class BaseQuizViewController: UIViewController {
 
     lazy var baseQuizView = self.view as? BaseQuizView
 
-    private lazy var assembly = NewStringQuizAssembly(type: .string, output: self)
+    private var quizAssembly: QuizAssembly
 
     private var childQuizModuleInput: QuizInputProtocol? {
-        return self.assembly.moduleInput
+        return self.quizAssembly.moduleInput
     }
 
     private var currentReply: Reply?
     private var shouldRetryWithNewAttempt = true
 
-    init(interactor: BaseQuizInteractorProtocol) {
+    init(interactor: BaseQuizInteractorProtocol, quizAssembly: QuizAssembly) {
         self.interactor = interactor
+        self.quizAssembly = quizAssembly
+
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -34,13 +36,15 @@ final class BaseQuizViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.quizAssembly.moduleOutput = self
         self.baseQuizView?.delegate = self
 
         self.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: false))
 
-        let controller = self.assembly.makeModule()
-        self.addChild(controller)
-        self.baseQuizView?.addQuiz(view: controller.view)
+        let quizController = self.quizAssembly.makeModule()
+        self.addChild(quizController)
+        self.baseQuizView?.addQuiz(view: quizController.view)
     }
 }
 
@@ -92,5 +96,3 @@ extension BaseQuizViewController: QuizOutputProtocol {
         self.currentReply = reply
     }
 }
-
-extension BaseQuizViewController: NewStringQuizOutputProtocol { }
