@@ -1,7 +1,9 @@
 import Foundation
 import PromiseKit
 
-protocol NewStringQuizInteractorProtocol { }
+protocol NewStringQuizInteractorProtocol {
+    func doReplyUpdate(request: NewStringQuiz.ReplyConvert.Request)
+}
 
 final class NewStringQuizInteractor: NewStringQuizInteractorProtocol {
     weak var moduleOutput: NewStringQuizOutputProtocol?
@@ -10,17 +12,8 @@ final class NewStringQuizInteractor: NewStringQuizInteractorProtocol {
     private let provider: NewStringQuizProviderProtocol
     private let type: NewStringQuiz.DataType
 
-    private var currentStatus: QuizStatus? {
-        didSet {
-            self.presentNewData()
-        }
-    }
-
-    private var currentText: String? {
-        didSet {
-            self.presentNewData()
-        }
-    }
+    private var currentStatus: QuizStatus?
+    private var currentText: String?
 
     init(
         type: NewStringQuiz.DataType,
@@ -32,6 +25,23 @@ final class NewStringQuizInteractor: NewStringQuizInteractorProtocol {
         self.provider = provider
     }
 
+    func doReplyUpdate(request: NewStringQuiz.ReplyConvert.Request) {
+        self.currentText = request.text
+
+        let reply: Reply = {
+            switch self.type {
+            case .number:
+                return NumberReply(number: request.text)
+            case .string:
+                return TextReply(text: request.text)
+            case .math:
+                return MathReply(formula: request.text)
+            }
+        }()
+
+        self.moduleOutput?.update(reply: reply)
+    }
+
     private func presentNewData() {
         self.presenter.presentReply(response: .init(text: self.currentText, status: self.currentStatus))
     }
@@ -39,10 +49,16 @@ final class NewStringQuizInteractor: NewStringQuizInteractorProtocol {
 
 extension NewStringQuizInteractor: NewStringQuizInputProtocol {
     func update(reply: Reply?) {
+        defer {
+            self.presentNewData()
+        }
+
         guard let reply = reply else {
             self.currentText = nil
             return
         }
+
+        self.moduleOutput?.update(reply: reply)
 
         if let reply = reply as? TextReply {
             self.currentText = reply.text
@@ -64,5 +80,6 @@ extension NewStringQuizInteractor: NewStringQuizInputProtocol {
 
     func update(status: QuizStatus?) {
         self.currentStatus = status
+        self.presentNewData()
     }
 }

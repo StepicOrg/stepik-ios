@@ -18,12 +18,18 @@ enum BaseQuiz {
         }
     }
 
-    enum SomeAction {
-        struct Request { }
+    /// Submit quiz
+    enum SubmissionSubmit {
+        struct Request {
+            let reply: Reply
+        }
+    }
 
-        struct Response { }
-
-        struct ViewModel { }
+    /// Cache reply
+    enum ReplyCache {
+        struct Request {
+            let reply: Reply
+        }
     }
 
     enum ViewControllerState {

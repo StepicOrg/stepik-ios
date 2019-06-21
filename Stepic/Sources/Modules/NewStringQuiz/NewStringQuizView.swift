@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol NewStringQuizViewDelegate: class {
+    func newStringQuizView(_ view: NewStringQuizView, didUpdate text: String)
+}
+
 extension NewStringQuizView {
     struct Appearance {
         let separatorColor = UIColor(hex: 0xEAECF0)
@@ -32,6 +36,7 @@ extension NewStringQuizView {
 
 final class NewStringQuizView: UIView {
     let appearance: Appearance
+    weak var delegate: NewStringQuizViewDelegate?
 
     private lazy var separatorView: UIView = {
         let view = UIView()
@@ -77,6 +82,18 @@ final class NewStringQuizView: UIView {
             borderWidth: self.appearance.textFieldBorderWidth,
             borderColor: self.appearance.textFieldBorderColor
         )
+        field.addTarget(self, action: #selector(self.textFieldTextChanged), for: .editingChanged)
+
+        // Disable features
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.spellCheckingType = .no
+
+        if #available(iOS 11.0, *) {
+            field.smartDashesType = .no
+            field.smartQuotesType = .no
+            field.smartInsertDeleteType = .no
+        }
         return field
     }()
 
@@ -152,6 +169,11 @@ final class NewStringQuizView: UIView {
             bottom: self.appearance.textFieldInsets.bottom,
             right: self.state == nil ? self.appearance.textFieldDefaultOffset : self.appearance.textFieldMarkOffset
         )
+    }
+
+    @objc
+    private func textFieldTextChanged() {
+        self.delegate?.newStringQuizView(self, didUpdate: self.textField.text ?? "")
     }
 }
 

@@ -19,6 +19,11 @@ final class NewStringQuizViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.newStringQuizView?.delegate = self
+    }
+
     override func loadView() {
         self.view = NewStringQuizView(frame: UIScreen.main.bounds)
     }
@@ -31,5 +36,11 @@ extension NewStringQuizViewController: NewStringQuizViewControllerProtocol {
         self.newStringQuizView?.text = viewModel.data.text
         self.newStringQuizView?.state = viewModel.data.finalState
         self.newStringQuizView?.isTextFieldEnabled = viewModel.data.isEnabled
+    }
+}
+
+extension NewStringQuizViewController: NewStringQuizViewDelegate {
+    func newStringQuizView(_ view: NewStringQuizView, didUpdate text: String) {
+        self.interactor.doReplyUpdate(request: .init(text: text))
     }
 }

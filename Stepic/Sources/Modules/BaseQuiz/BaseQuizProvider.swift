@@ -7,6 +7,8 @@ protocol BaseQuizProviderProtocol {
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)>
     func fetchSubmissions(for step: Step, page: Int) -> Promise<([Submission], Meta)>
     func fetchSubmission(id: Submission.IdType, step: Step) -> Promise<Submission?>
+
+    func createSubmission(for step: Step, attempt: Attempt, reply: Reply) -> Promise<Submission?>
 }
 
 final class BaseQuizProvider: BaseQuizProviderProtocol {
@@ -39,5 +41,9 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
 
     func fetchSubmission(id: Submission.IdType, step: Step) -> Promise<Submission?> {
         return self.submissionsNetworkService.fetch(submissionID: id, blockName: step.block.name)
+    }
+
+    func createSubmission(for step: Step, attempt: Attempt, reply: Reply) -> Promise<Submission?> {
+        return self.submissionsNetworkService.create(attemptID: attempt.id, blockName: step.block.name, reply: reply)
     }
 }

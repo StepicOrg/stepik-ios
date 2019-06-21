@@ -13,6 +13,13 @@ enum NewStringQuiz {
         }
     }
 
+    /// Convert text data to reply
+    enum ReplyConvert {
+        struct Request {
+            let text: String
+        }
+    }
+
     // MARK: - Enums
 
     enum DataType {

@@ -1,7 +1,6 @@
 import UIKit
 
 protocol BaseQuizViewControllerProtocol: class {
-    func displaySomeActionResult(viewModel: BaseQuiz.SomeAction.ViewModel)
     func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel)
 }
 
@@ -10,11 +9,13 @@ final class BaseQuizViewController: UIViewController {
 
     lazy var baseQuizView = self.view as? BaseQuizView
 
-    private lazy var assembly = NewStringQuizAssembly(type: .string)
+    private lazy var assembly = NewStringQuizAssembly(type: .string, output: self)
 
     private var childQuizModuleInput: QuizInputProtocol? {
         return self.assembly.moduleInput
     }
+
+    private var currentReply: Reply?
 
     init(interactor: BaseQuizInteractorProtocol) {
         self.interactor = interactor
@@ -32,6 +33,8 @@ final class BaseQuizViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.baseQuizView?.delegate = self
+
         self.interactor.doSubmissionLoad(request: .init())
 
         let controller = self.assembly.makeModule()
@@ -41,8 +44,6 @@ final class BaseQuizViewController: UIViewController {
 }
 
 extension BaseQuizViewController: BaseQuizViewControllerProtocol {
-    func displaySomeActionResult(viewModel: BaseQuiz.SomeAction.ViewModel) { }
-
     func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel) {
         guard case .result(let data) = viewModel.state else {
             return
@@ -68,3 +69,21 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
         self.childQuizModuleInput?.update(status: data.quizStatus)
     }
 }
+
+extension BaseQuizViewController: BaseQuizViewDelegate {
+    func baseQuizViewDidRequestSubmit(_ view: BaseQuizView) {
+        guard let reply = self.currentReply else {
+            return
+        }
+
+        self.interactor.doSubmissionSubmit(request: .init(reply: reply))
+    }
+}
+
+extension BaseQuizViewController: QuizOutputProtocol {
+    func update(reply: Reply) {
+        self.currentReply = reply
+    }
+}
+
+extension BaseQuizViewController: NewStringQuizOutputProtocol { }

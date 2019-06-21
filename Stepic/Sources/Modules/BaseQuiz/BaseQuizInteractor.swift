@@ -3,6 +3,8 @@ import PromiseKit
 
 protocol BaseQuizInteractorProtocol {
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request)
+    func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request)
+    func doReplyCache(request: BaseQuiz.ReplyCache.Request)
 }
 
 final class BaseQuizInteractor: BaseQuizInteractorProtocol {
@@ -15,6 +17,9 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     let step: Step
 
+    private var submissionsCount = 0
+    private var currentAttempt: Attempt?
+
     init(
         step: Step,
         presenter: BaseQuizPresenterProtocol,
@@ -23,6 +28,15 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.step = step
         self.presenter = presenter
         self.provider = provider
+    }
+
+    func doReplyCache(request: BaseQuiz.ReplyCache.Request) {
+        guard let attempt = self.currentAttempt else {
+            return
+        }
+
+        // FIXME: DI
+        ReplyCache.shared.set(reply: request.reply, forStepId: self.step.id, attemptId: attempt.id)
     }
 
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request) {
@@ -41,19 +55,56 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             return (self.step.hasSubmissionRestrictions ? self.countSubmissions() : Guarantee.value(0))
                 .map { (attempt, submission, cachedReply, $0) }
         }.done { attempt, submission, cachedReply, submissionLimit in
-            let response = BaseQuiz.SubmissionLoad.Response(
-                step: self.step,
-                attempt: attempt,
-                submission: submission,
-                cachedReply: cachedReply,
-                submissionsCount: submissionLimit
-            )
+            self.submissionsCount = submissionLimit
+            self.currentAttempt = attempt
 
-            self.presenter.presentSubmission(response: response)
+            self.presentSubmission(attempt: attempt, submission: submission, cachedReply: cachedReply)
+        }.cauterize()
+    }
+
+    func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request) {
+        guard let attempt = self.currentAttempt else {
+            // TODO: send analytics for this case
+            return
+        }
+
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        let reply = request.reply
+
+        print("base quiz interactor: creating submission for attempt = \(attempt.id)...")
+        queue.promise {
+            self.provider.createSubmission(for: self.step, attempt: attempt, reply: reply)
+        }.then { submission -> Promise<Submission> in
+            guard let submission = submission else {
+                throw Error.submissionFetchFailed
+            }
+
+            print("base quiz interactor: submission created = \(submission.id), status = \(submission.status)")
+
+            self.submissionsCount += 1
+            self.presentSubmission(attempt: attempt, submission: submission, cachedReply: reply)
+
+            print("base quiz interactor: polling submission \(submission.id)...")
+            return queue.promise { self.pollSubmission(submission) }
+        }.done { submission in
+            print("base quiz interactor: submission \(submission.id) completely evaluated")
+            self.presentSubmission(attempt: attempt, submission: submission, cachedReply: reply)
         }.cauterize()
     }
 
     // MARK: - Private API
+
+    private func presentSubmission(attempt: Attempt, submission: Submission?, cachedReply: Reply?) {
+        let response = BaseQuiz.SubmissionLoad.Response(
+            step: self.step,
+            attempt: attempt,
+            submission: submission,
+            cachedReply: cachedReply,
+            submissionsCount: self.submissionsCount
+        )
+
+        self.presenter.presentSubmission(response: response)
+    }
 
     private func loadAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
         return firstly { () -> Promise<Attempt?> in

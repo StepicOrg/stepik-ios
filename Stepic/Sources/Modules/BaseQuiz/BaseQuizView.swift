@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol BaseQuizViewDelegate: class {
+    func baseQuizViewDidRequestSubmit(_ view: BaseQuizView)
+}
+
 extension BaseQuizView {
     struct Appearance {
         let submitButtonBackgroundColor = UIColor.stepicGreen
@@ -17,6 +21,7 @@ extension BaseQuizView {
 
 final class BaseQuizView: UIView {
     let appearance: Appearance
+    weak var delegate: BaseQuizViewDelegate?
 
     private lazy var submitButton: UIButton = {
         let submitButton = UIButton(type: .system)
@@ -25,6 +30,7 @@ final class BaseQuizView: UIView {
         submitButton.layer.cornerRadius = self.appearance.submitButtonCornerRadius
         submitButton.clipsToBounds = true
         submitButton.backgroundColor = self.appearance.submitButtonBackgroundColor
+        submitButton.addTarget(self, action: #selector(self.submitClicked), for: .touchUpInside)
         return submitButton
     }()
 
@@ -82,6 +88,13 @@ final class BaseQuizView: UIView {
 
         self.feedbackView.isHidden = false
         self.feedbackView.update(state: state, hint: hint)
+    }
+
+    // MARK: - Private API
+
+    @objc
+    private func submitClicked() {
+        self.delegate?.baseQuizViewDidRequestSubmit(self)
     }
 }
 

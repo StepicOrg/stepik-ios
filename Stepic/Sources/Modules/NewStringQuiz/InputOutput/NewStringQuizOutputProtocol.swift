@@ -1,3 +1,3 @@
 import Foundation
 
-protocol NewStringQuizOutputProtocol: class { }
+protocol NewStringQuizOutputProtocol: QuizOutputProtocol { }
