@@ -35,7 +35,7 @@ final class BaseQuizView: UIView {
     }()
 
     private lazy var feedbackView: QuizFeedbackView = {
-        let view = QuizFeedbackView(state: .evaluation)
+        let view = QuizFeedbackView()
         view.isHidden = true
         return view
     }()
@@ -80,14 +80,13 @@ final class BaseQuizView: UIView {
         self.stackView.insertArrangedSubview(view, at: 0)
     }
 
-    func updateFeedback(state: QuizFeedbackView.State?, hint: String? = nil) {
-        guard let state = state else {
-            self.feedbackView.isHidden = true
-            return
-        }
-
+    func showFeedback(state: QuizFeedbackView.State, title: String, hint: String? = nil) {
+        self.feedbackView.update(state: state, title: title, hint: hint)
         self.feedbackView.isHidden = false
-        self.feedbackView.update(state: state, hint: hint)
+    }
+
+    func hideFeedback() {
+        self.feedbackView.isHidden = true
     }
 
     // MARK: - Private API

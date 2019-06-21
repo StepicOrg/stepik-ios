@@ -12,17 +12,15 @@ final class NewStringQuizPresenter: NewStringQuizPresenterProtocol {
     private lazy var quizTitle: String = {
         switch self.type {
         case .string:
-            return "Напишите текст (строку)"
+            return NSLocalizedString("StringQuizTitle", comment: "")
         case .number:
-            return "Введите численный ответ"
+            return NSLocalizedString("NumberQuizTitle", comment: "")
         case .math:
-            return "Введите математическую формулу"
+            return NSLocalizedString("MathQuizTitle", comment: "")
         }
     }()
 
-    private lazy var quizPlaceholder: String = {
-        "Введите ответ"
-    }()
+    private lazy var quizPlaceholder = NSLocalizedString("StringQuizPlaceholder", comment: "")
 
     init(type: NewStringQuiz.DataType) {
         self.type = type

@@ -16,6 +16,7 @@ final class BaseQuizViewController: UIViewController {
     }
 
     private var currentReply: Reply?
+    private var shouldRetryWithNewAttempt = true
 
     init(interactor: BaseQuizInteractorProtocol) {
         self.interactor = interactor
@@ -35,7 +36,7 @@ final class BaseQuizViewController: UIViewController {
         super.viewDidLoad()
         self.baseQuizView?.delegate = self
 
-        self.interactor.doSubmissionLoad(request: .init())
+        self.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: false))
 
         let controller = self.assembly.makeModule()
         self.addChild(controller)
@@ -49,24 +50,26 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
             return
         }
 
-        self.baseQuizView?.isSubmitButtonEnabled = (data.submissionsLeft ?? Int.max) > 0
+        self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
 
         if let status = data.quizStatus {
             switch status {
             case .correct:
-                self.baseQuizView?.updateFeedback(state: .correct)
+                self.baseQuizView?.showFeedback(state: .correct, title: data.feedbackTitle)
             case .wrong:
-                self.baseQuizView?.updateFeedback(state: .wrong)
+                self.baseQuizView?.showFeedback(state: .wrong, title: data.feedbackTitle)
             case .evaluation:
-                self.baseQuizView?.updateFeedback(state: .evaluation)
+                self.baseQuizView?.showFeedback(state: .evaluation, title: data.feedbackTitle)
             }
         } else {
-            self.baseQuizView?.updateFeedback(state: nil)
+            self.baseQuizView?.hideFeedback()
         }
 
         self.childQuizModuleInput?.update(reply: data.reply)
         self.childQuizModuleInput?.update(status: data.quizStatus)
+
+        self.shouldRetryWithNewAttempt = data.retryWithNewAttempt
     }
 }
 
@@ -76,7 +79,11 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
             return
         }
 
-        self.interactor.doSubmissionSubmit(request: .init(reply: reply))
+        if self.shouldRetryWithNewAttempt {
+            self.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: true))
+        } else {
+            self.interactor.doSubmissionSubmit(request: .init(reply: reply))
+        }
     }
 }
 

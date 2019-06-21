@@ -64,7 +64,7 @@ enum NewStep {
         case result(data: NewStepViewModel)
     }
 
-    enum QuizType {
+    enum QuizType: Equatable {
         case choice
         case string
         case number
@@ -129,6 +129,18 @@ enum NewStep {
                 return "sql"
             case .unknown(let blockName):
                 return blockName
+            }
+        }
+
+        static func == (lhs: QuizType, rhs: QuizType) -> Bool {
+            switch (lhs, rhs) {
+            case (.choice, .choice), (.string, .string), (.number, .number), (.math, .math), (.freeAnswer, .freeAnswer),
+                 (.sorting, .sorting), (.matching, .matching), (.fillBlanks, .fillBlanks), (.code, .code), (.sql, .sql):
+                return true
+            case (.unknown(let lhsName), .unknown(let rhsName)):
+                return lhsName == rhsName
+            default:
+                return false
             }
         }
     }

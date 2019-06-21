@@ -3,7 +3,9 @@ import Foundation
 enum BaseQuiz {
     /// Load latest submission for existing attempt or load new one
     enum SubmissionLoad {
-        struct Request { }
+        struct Request {
+            let shouldRefreshAttempt: Bool
+        }
 
         struct Response {
             let step: Step

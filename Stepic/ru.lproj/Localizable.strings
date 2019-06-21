@@ -668,3 +668,28 @@ DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
 
 OurSocialNetworks = "Наши аккаунты в соцсетях";
+
+/* Quiz */
+CorrectFeedbackTitle1 = "Правильно.";
+CorrectFeedbackTitle2 = "Правильно, молодец!";
+CorrectFeedbackTitle3 = "Всё правильно.";
+CorrectFeedbackTitle4 = "Верно.";
+CorrectFeedbackTitle5 = "Верно. Так держать!";
+CorrectFeedbackTitle6 = "Здорово, всё верно.";
+CorrectFeedbackTitle7 = "Хорошая работа.";
+CorrectFeedbackTitle8 = "Отличное решение!";
+CorrectFeedbackTitle9 = "Абсолютно точно.";
+CorrectFeedbackTitle10 = "Хорошие новости, верно!";
+CorrectFeedbackTitle11 = "Прекрасный ответ.";
+CorrectFeedbackTitle12 = "Так точно!";
+CorrectFeedbackTitle13 = "Отлично!";
+CorrectFeedbackTitle14 = "Всё получилось!";
+CorrectFeedbackTitleFreeAnswer = "Любой ответ будет оценен как правильный.";
+WrongFeedbackTitleNotLastTry = "Пока неправильно, попробуйте еще раз!";
+WrongFeedbackTitleLastTry = "Неверно!";
+EvaluationFeedbackTitle = "Проверка...";
+
+StringQuizTitle = "Напишите текст (строку)";
+NumberQuizTitle = "Введите численный ответ";
+MathQuizTitle = "Введите математическую формулу";
+StringQuizPlaceholder = "Введите ответ";

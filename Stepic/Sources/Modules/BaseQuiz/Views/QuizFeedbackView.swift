@@ -17,8 +17,6 @@ extension QuizFeedbackView {
 final class QuizFeedbackView: UIView {
     let appearance: Appearance
 
-    private var state: State
-
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.titleFont
@@ -60,9 +58,8 @@ final class QuizFeedbackView: UIView {
         )
     }
 
-    init(frame: CGRect = .zero, state: State, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
-        self.state = state
         super.init(frame: frame)
 
         self.setupView()
@@ -87,10 +84,8 @@ final class QuizFeedbackView: UIView {
 
     // MARK: Public API
 
-    func update(state: State, hint: String? = nil) {
-        self.state = state
-
-        self.titleLabel.text = state.title
+    func update(state: State, title: String, hint: String? = nil) {
+        self.titleLabel.text = title
         self.titleLabel.textColor = state.titleColor
         self.titleContainerView.backgroundColor = state.mainColor
 
@@ -144,7 +139,7 @@ final class QuizFeedbackView: UIView {
         case correct
         case wrong
         case evaluation
-        case validation(message: String)
+        case validation
 
         var mainColor: UIColor {
             switch self {
@@ -195,27 +190,10 @@ final class QuizFeedbackView: UIView {
                 return view
             }
         }
-
-        var title: String {
-            switch self {
-            case .correct:
-                return "Correct!"
-            case .wrong:
-                return "Sorry, it's incorrect!"
-            case .evaluation:
-                return "Evaluation in progress"
-            case .validation(let message):
-                return message
-            }
-        }
     }
 }
 
 extension QuizFeedbackView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.update(state: self.state)
-    }
-
     func addSubviews() {
         self.addSubview(self.stackView)
 

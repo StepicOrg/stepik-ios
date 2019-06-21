@@ -41,6 +41,7 @@ extension NewStringQuizViewController: NewStringQuizViewControllerProtocol {
 
 extension NewStringQuizViewController: NewStringQuizViewDelegate {
     func newStringQuizView(_ view: NewStringQuizView, didUpdate text: String) {
+        self.newStringQuizView?.state = nil
         self.interactor.doReplyUpdate(request: .init(text: text))
     }
 }

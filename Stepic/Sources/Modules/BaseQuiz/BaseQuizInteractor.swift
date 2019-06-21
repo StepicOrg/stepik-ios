@@ -43,7 +43,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         let queue = DispatchQueue.global(qos: .userInitiated)
 
         queue.promise {
-            self.loadAttempt(forceRefreshAttempt: false)
+            self.loadAttempt(forceRefreshAttempt: request.shouldRefreshAttempt)
         }.then(on: queue) { attempt -> Promise<(Attempt, Submission?)> in
             guard let attempt = attempt else {
                 throw Error.unknownAttempt
