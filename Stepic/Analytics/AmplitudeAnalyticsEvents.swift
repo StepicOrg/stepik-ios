@@ -12,10 +12,16 @@ struct AmplitudeAnalyticsEvents {
     struct Launch {
         static var firstTime = AnalyticsEvent(name: "Launch first time")
 
-        static func sessionStart(notificationType: String? = nil) -> AnalyticsEvent {
+        static func sessionStart(
+            notificationType: String? = nil,
+            sinceLastSession: TimeInterval
+        ) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Session start",
-                parameters: notificationType == nil ? nil : ["notification_type": notificationType!]
+                parameters: [
+                    "notification_type": notificationType as Any,
+                    "seconds_since_last_session": sinceLastSession
+                ]
             )
         }
     }
@@ -171,9 +177,18 @@ struct AmplitudeAnalyticsEvents {
     struct Notifications {
         static var screenOpened = AnalyticsEvent(name: "Notifications screen opened")
 
-        static func received(notificationType: String) -> AnalyticsEvent {
+        static func receivedForeground(notificationType: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Foreground notification received",
+                parameters: [
+                    "notification_type": notificationType
+                ]
+            )
+        }
+
+        static func receivedInactive(notificationType: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Inactive notification received",
                 parameters: [
                     "notification_type": notificationType
                 ]
@@ -292,6 +307,9 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+        static var editOpened = AnalyticsEvent(name: "Profile edit screen opened")
+
+        static var editSaved = AnalyticsEvent(name: "Profile edit saved")
     }
 
     struct Certificates {
@@ -372,6 +390,18 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    struct CourseReviews {
+        static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course reviews screen opened",
+                parameters: [
+                    "course": courseID,
+                    "title": courseTitle
+                ]
+            )
+        }
+    }
+
     struct Discussions {
         static var opened: AnalyticsEvent = AnalyticsEvent(name: "Discussions screen opened")
     }
@@ -417,6 +447,42 @@ struct AmplitudeAnalyticsEvents {
                     "id": id,
                     "type": type.rawValue
                 ]
+            )
+        }
+    }
+
+    struct PersonalDeadlines {
+        static func created(weeklyLoadHours: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Personal deadline created",
+                parameters: [
+                    "hours": weeklyLoadHours
+                ]
+            )
+        }
+
+        static var buttonClicked = AnalyticsEvent(name: "Personal deadline schedule button pressed")
+    }
+
+    struct Video {
+        static var continuedInBackground = AnalyticsEvent(name: "Video played in background")
+
+        static func changedSpeed(source: String, target: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Video rate changed",
+                parameters: [
+                    "source": source,
+                    "target": target
+                ]
+            )
+        }
+    }
+
+    struct AdaptiveRating {
+        static func opened(course: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Adaptive rating opened",
+                parameters: ["course": course]
             )
         }
     }

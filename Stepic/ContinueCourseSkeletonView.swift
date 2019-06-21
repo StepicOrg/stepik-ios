@@ -21,7 +21,7 @@ final class ContinueCourseSkeletonView: UIView {
 
     private lazy var largeView = UIView()
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

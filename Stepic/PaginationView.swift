@@ -19,7 +19,7 @@ extension PaginationView {
 final class PaginationView: UIView {
     let appearance: Appearance
 
-    private lazy var activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    private lazy var activityIndicatorView = UIActivityIndicatorView(style: .gray)
     private lazy var errorRefreshButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(
@@ -37,7 +37,7 @@ final class PaginationView: UIView {
 
     var onRefreshButtonClick: (() -> Void)?
 
-    init(frame: CGRect, appearance: Appearance = Appearance()) {
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 

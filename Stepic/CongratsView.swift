@@ -68,8 +68,8 @@ class CongratsView: UIView {
         animation.duration = AnimationDuration.backgroundRotate
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        animation.fillMode = kCAFillModeForwards
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.fillMode = CAMediaTimingFillMode.forwards
         shapeLayer?.add(animation, forKey: animation.keyPath)
 
         padView?.alpha = padOpacity

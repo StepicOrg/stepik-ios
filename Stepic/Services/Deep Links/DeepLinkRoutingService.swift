@@ -88,22 +88,18 @@ final class DeepLinkRoutingService {
             switch route {
             case .catalog, .notifications, .home:
                 seal.fulfill([])
-            case .profile(userID: let userID):
+            case .profile(let userID):
                 seal.fulfill([ProfileAssembly(userID: userID).makeModule()])
-            case .course(courseID: let courseID):
-                DeepLinkRouter.routeToCourseWithId(courseID, completion: { moduleStack in
+            case .course(let courseID):
+                seal.fulfill([CourseInfoAssembly(courseID: courseID, initialTab: .info).makeModule()])
+            case .syllabus(let courseID):
+                seal.fulfill([CourseInfoAssembly(courseID: courseID, initialTab: .syllabus).makeModule()])
+            case .lesson(let lessonID, let stepID, let unitID):
+                DeepLinkRouter.routeToStepWithId(stepID, lessonId: lessonID, unitID: unitID, completion: { moduleStack in
                     seal.fulfill(moduleStack)
                 })
-            case .syllabus(courseID: let courseID):
-                DeepLinkRouter.routeToSyllabusWithId(courseID, completion: { moduleStack in
-                    seal.fulfill(moduleStack)
-                })
-            case .lesson(lessonID: let lessonID, stepID: let stepID, unitID: _):
-                DeepLinkRouter.routeToStepWithId(stepID, lessonId: lessonID, completion: { moduleStack in
-                    seal.fulfill(moduleStack)
-                })
-            case .discussions(lessonID: let lessonID, stepID: let stepID, discussionID: let discussionID, unitID: _):
-                DeepLinkRouter.routeToDiscussionWithId(lessonID, stepId: stepID, discussionId: discussionID, completion: { moduleStack in
+            case .discussions(let lessonID, let stepID, let discussionID, let unitID):
+                DeepLinkRouter.routeToDiscussionWithId(lessonID, stepId: stepID, unitID: unitID, discussionId: discussionID, completion: { moduleStack in
                     seal.fulfill(moduleStack)
                 })
             }

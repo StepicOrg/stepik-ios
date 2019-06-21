@@ -52,7 +52,7 @@ class CellWebViewHelper: NSObject {
 }
 
 extension CellWebViewHelper : UIWebViewDelegate {
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         if request.url?.scheme == "mathjaxfinish" {
             finishedMathJax()
             return false

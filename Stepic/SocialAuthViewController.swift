@@ -165,7 +165,7 @@ class SocialAuthViewController: UIViewController {
 
 extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfColumns
+        return section == 0 ? numberOfColumns : numberOfColumns - 1
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -224,7 +224,7 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SocialAuthHeaderView.reuseId, for: indexPath) as? SocialAuthHeaderView {
                 header.setup(title: presenter?.socialAuthHeaderString ?? "")
                 return header

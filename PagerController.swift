@@ -46,7 +46,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
     open var tabsViewBackgroundColor: UIColor = UIColor.gray
     open var tabsTextColor: UIColor = UIColor.white
     open var selectedTabTextColor = UIColor.white
-    open var tabsImageViewContentMode = UIViewContentMode.scaleAspectFit
+    open var tabsImageViewContentMode = UIView.ContentMode.scaleAspectFit
     open weak var dataSource: PagerDataSource?
     open weak var delegate: PagerDelegate?
     open var tabHeight: CGFloat = 44.0
@@ -265,7 +265,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
 
         self.tabsView?.contentSize = CGSize(width: contentSizeWidth, height: self.tabHeight)
 
-        self.addChildViewController(self.pageViewController)
+        self.addChild(self.pageViewController)
         self.view.insertSubview(self.contentView, at: 0)
         // Select starting tab
         self.selectTabAtIndex(self.startTabIndex, swipe: true)
@@ -514,7 +514,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
 
             if let vc = viewController {
                 self.contents[index] = vc
-                self.pageViewController.addChildViewController(vc)
+                self.pageViewController.addChild(vc)
             }
         }
         return self.contents[index]
@@ -576,7 +576,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
             }
         } else if !(activeContentIndex + 1 == self.activeContentIndex || activeContentIndex - 1 == self.activeContentIndex) {
 
-            let direction: UIPageViewControllerNavigationDirection = (activeContentIndex < self.activeContentIndex) ? .reverse : .forward
+            let direction: UIPageViewController.NavigationDirection = (activeContentIndex < self.activeContentIndex) ? .reverse : .forward
             DispatchQueue.main.async {
                 self.pageViewController.setViewControllers([vc], direction: direction, animated: true, completion: {
                     completed in
@@ -592,7 +592,7 @@ open class PagerController: UIViewController, UIPageViewControllerDataSource, UI
                 })
             }
         } else {
-            let direction: UIPageViewControllerNavigationDirection = (activeContentIndex < self.activeContentIndex) ? .reverse : .forward
+            let direction: UIPageViewController.NavigationDirection = (activeContentIndex < self.activeContentIndex) ? .reverse : .forward
             DispatchQueue.main.async {
                 self.pageViewController.setViewControllers([vc], direction: direction, animated: true, completion: {
                     (_: Bool) -> Void in

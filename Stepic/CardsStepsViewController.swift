@@ -80,10 +80,10 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
             return
         }
 
-        currentStepViewController?.removeFromParentViewController()
+        currentStepViewController?.removeFromParent()
         currentStepViewController = stepViewController
 
-        self.addChildViewController(stepViewController)
+        self.addChild(stepViewController)
 
         card.addContentSubview(stepViewController.view)
     }

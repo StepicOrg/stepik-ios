@@ -33,7 +33,7 @@ class AvatarImageView: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        image = Constants.placeholderImage
+        reset()
     }
 
     private func updateShape() {
@@ -43,6 +43,10 @@ class AvatarImageView: UIImageView {
         case .rectangle(let radius):
             self.setRoundedCorners(cornerRadius: radius, borderWidth: 0)
         }
+    }
+
+    func reset() {
+        image = Constants.placeholderImage
     }
 
     func set(with url: URL) {

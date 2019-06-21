@@ -20,7 +20,8 @@ class LastStepRouter {
         for course: Course,
         isAdaptive: Bool? = nil,
         didJustSubscribe: Bool = false,
-        using navigationController: UINavigationController
+        using navigationController: UINavigationController,
+        skipSyllabus: Bool = false
     ) {
         guard let lastStepId = course.lastStepId else {
             return
@@ -35,7 +36,7 @@ class LastStepRouter {
             course.lastStep = newLastStep
             CoreDataHelper.instance.save()
         }.ensure {
-            self.navigate(for: course, isAdaptive: isAdaptive, didJustSubscribe: didJustSubscribe, using: navigationController)
+            self.navigate(for: course, isAdaptive: isAdaptive, didJustSubscribe: didJustSubscribe, using: navigationController, skipSyllabus: skipSyllabus)
         }.catch {
             _ in
             print("error while updating lastStep")
@@ -46,7 +47,8 @@ class LastStepRouter {
         for course: Course,
         isAdaptive: Bool?,
         didJustSubscribe: Bool,
-        using navigationController: UINavigationController
+        using navigationController: UINavigationController,
+        skipSyllabus: Bool = false
     ) {
         let shouldOpenInAdaptiveMode = isAdaptive ?? AdaptiveStorageManager.shared.canOpenInAdaptiveMode(courseId: course.id)
         if shouldOpenInAdaptiveMode {
@@ -61,15 +63,7 @@ class LastStepRouter {
             return
         }
 
-        guard
-            let sectionsVC = ControllerHelper.instantiateViewController(identifier: "SectionsViewController") as? SectionsViewController,
-            let unitsVC = ControllerHelper.instantiateViewController(identifier: "UnitsViewController") as? UnitsViewController,
-            let lessonVC = ControllerHelper.instantiateViewController(identifier: "LessonViewController") as? LessonViewController else {
-                return
-        }
-
-        sectionsVC.course = course
-        sectionsVC.hidesBottomBarWhenPushed = true
+        let sectionsVC = CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule()
 
         func openSyllabus() {
             SVProgressHUD.showSuccess(withStatus: "")
@@ -98,8 +92,6 @@ class LastStepRouter {
 
         func navigateToStep(in unit: Unit) {
             // If last step does not exist then take first step in unit
-            unitsVC.unitId = course.lastStep?.unitId ?? unit.id
-
             let stepIdPromise = Promise<Int> { seal in
                 if let stepId = course.lastStep?.stepId {
                     seal.fulfill(stepId)
@@ -122,13 +114,21 @@ class LastStepRouter {
             }
 
             stepIdPromise.done { targetStepId in
-                lessonVC.initIds = (stepId: targetStepId, unitId: unit.id)
-                lessonVC.sectionNavigationDelegate = unitsVC
+                let lessonAssembly: Assembly = {
+                    if RemoteConfig.shared.newLessonAvailable {
+                        return NewLessonAssembly(initialContext: .unit(id: unit.id), startStep: .id(targetStepId))
+                    } else {
+                        return LessonLegacyAssembly(initObjects: nil, initIDs: (stepId: targetStepId, unitId: unit.id))
+                    }
+                }()
 
                 SVProgressHUD.showSuccess(withStatus: "")
-                navigationController.pushViewController(sectionsVC, animated: false)
-                navigationController.pushViewController(unitsVC, animated: false)
-                navigationController.pushViewController(lessonVC, animated: true)
+
+                if !skipSyllabus {
+                    navigationController.pushViewController(sectionsVC, animated: false)
+                }
+                navigationController.pushViewController(lessonAssembly.makeModule(), animated: true)
+
                 LocalProgressLastViewedUpdater.shared.updateView(for: course)
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Continue.stepOpened, parameters: nil)
             }.catch { _ in
@@ -161,7 +161,7 @@ class LastStepRouter {
             }, error: { err in
                 print("last step router: error while loading section, error = \(err)")
 
-                // Fallback: use cached section 
+                // Fallback: use cached section
                 guard let section = sectionForUpdate else {
                     openSyllabus()
                     return

@@ -44,7 +44,10 @@ class NotificationsPagerViewController: PagerController, ControllerWithStepikPla
         } else {
             showPlaceholder(for: .anonymous)
         }
-        updateNavigationControllerShadow(show: !AuthInfo.shared.isAuthorized)
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeShadowViewAlpha(AuthInfo.shared.isAuthorized ? 0.0 : 1.0, sender: self)
+        }
     }
 
     fileprivate func setUpTabs() {
@@ -56,18 +59,6 @@ class NotificationsPagerViewController: PagerController, ControllerWithStepikPla
         tabsTextColor = UIColor.mainDark
         tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
         tabsViewBackgroundColor = UIColor.mainLight
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.delegate = self
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if navigationController?.delegate === self {
-            navigationController?.delegate = nil
-        }
     }
 
     func selectSection(_ notificationSection: NotificationsSection) {
@@ -98,19 +89,8 @@ extension NotificationsPagerViewController: PagerDataSource {
     }
 }
 
-extension NotificationsPagerViewController: UINavigationControllerDelegate {
-    fileprivate func updateNavigationControllerShadow(show: Bool) {
-        guard let navigation = self.navigationController as? StyledNavigationViewController else {
-            return
-        }
-
-        navigation.changeShadowAlpha(!show ? 0 : 1)
-    }
-
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        if AuthInfo.shared.isAuthorized {
-            // When user is not authorized we will use placeholder
-            updateNavigationControllerShadow(show: false)
-        }
+extension NotificationsPagerViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return .init(shadowViewAlpha: AuthInfo.shared.isAuthorized ? 0.0 : 1.0)
     }
 }

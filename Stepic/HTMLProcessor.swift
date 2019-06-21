@@ -8,14 +8,16 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use ContentProcessor instead")
 class HTMLProcessor {
 
     private var htmlString: String
-    private var headInjections: String = ""
-    private var bodyInjections: String = ""
+    private var headInjections = ""
+    private var bodyInjectionsHead = ""
+    private var bodyInjectionsTail = ""
 
     var html: String {
-        return "<html><head>\(headInjections)</head><body>\(bodyInjections)\(addStepikURLWhereNeeded(body: htmlString))</body></html>"
+        return "<html><head>\(headInjections)</head><body>\(bodyInjectionsHead)\(addStepikURLWhereNeeded(body: htmlString))\(bodyInjectionsTail)</body></html>"
     }
 
     enum SupportedScripts {
@@ -27,6 +29,7 @@ class HTMLProcessor {
         case audio
         case textColor(color: UIColor)
         case mathJaxCompletion
+        case highlightJS
         case customHead(head: String)
         case customBody(body: String)
 
@@ -46,6 +49,8 @@ class HTMLProcessor {
                 return Scripts.audioTagWrapper
             case .mathJaxCompletion:
                 return Scripts.mathJaxFinished
+            case .highlightJS:
+                return Scripts.highlightJS
             case .customHead(let customHead):
                 return customHead
             default:
@@ -65,6 +70,20 @@ class HTMLProcessor {
                 return ""
             }
         }
+
+        var bodyInjectPosition: BodyInjectPosition {
+            switch self {
+            case .audio:
+                return .tail
+            default:
+                return .head
+            }
+        }
+
+        enum BodyInjectPosition {
+            case head
+            case tail
+        }
     }
 
     init(html: String) {
@@ -79,13 +98,19 @@ class HTMLProcessor {
             .inject(script: .styles)
             .inject(script: .metaViewport)
             .inject(script: .kotlinRunnableSamples)
+            .inject(script: .highlightJS)
             .inject(script: .textColor(color: UIColor.mainText))
     }
 
-    func inject(script: SupportedScripts) -> HTMLProcessor {
+    func inject(script: SupportedScripts, inTail: Bool = false) -> HTMLProcessor {
         func injectInHTML(script: SupportedScripts) {
             self.headInjections += script.headInjectionString
-            self.bodyInjections += script.bodyInjectionString
+
+            if script.bodyInjectPosition == .head {
+                self.bodyInjectionsHead += script.bodyInjectionString
+            } else {
+                self.bodyInjectionsTail = script.bodyInjectionString + self.bodyInjectionsTail
+            }
         }
 
         switch script {
@@ -95,6 +120,10 @@ class HTMLProcessor {
             }
         case .audio:
             if htmlString.contains("<audio") {
+                injectInHTML(script: script)
+            }
+        case .highlightJS:
+            if htmlString.contains("<code") {
                 injectInHTML(script: script)
             }
         default:

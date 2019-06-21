@@ -47,7 +47,7 @@ class WebViewHorizontalScrollHelper: NSObject {
     //Magically counts all the offsets and decides whether the gesture should be translated to the pageview 
     @objc func didPan(_ sender: UIPanGestureRecognizer) {
 
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == UIGestureRecognizer.State.began {
             offsetChange = 0
             startOffset = webView.scrollView.contentOffset.x
         }

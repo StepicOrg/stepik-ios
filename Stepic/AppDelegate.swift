@@ -26,11 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
+    private let notificationsService = NotificationsService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
-    private let splitTestingService = SplitTestingService(
-        analyticsService: AnalyticsUserProperties(),
-        storage: UserDefaults.standard
-    )
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
 
     deinit {
@@ -41,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(
         _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
@@ -84,10 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ExecutionQueues.sharedQueues.recoverQueuesFromPersistentStore()
         ExecutionQueues.sharedQueues.executeConnectionAvailableQueue()
 
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 24
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 24
+        IQKeyboardManager.shared.enableAutoToolbar = false
 
         if !DefaultsContainer.launch.didLaunch {
             DefaultsContainer.launch.initStartVersion()
@@ -103,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.notificationsRegistrationService.renewDeviceToken()
         LocalNotificationsMigrator().migrateIfNeeded()
-        NotificationsService().handleLaunchOptions(launchOptions)
+        self.notificationsService.handleLaunchOptions(launchOptions)
         self.userNotificationsCenterDelegate.attachNotificationDelegate()
         self.notificationPermissionStatusSettingsObserver.observe()
 
@@ -112,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.didChangeOrientation),
-            name: .UIDeviceOrientationDidChange,
+            name: UIDevice.orientationDidChangeNotification,
             object: nil
         )
         self.didChangeOrientation()
@@ -130,19 +127,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         NotificationsBadgesManager.shared.set(number: application.applicationIconBadgeNumber)
-        NotificationsService().removeRetentionNotifications()
+        self.notificationsService.removeRetentionNotifications()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        let retentionSplitTest = self.splitTestingService.fetchSplitTest(
-            RetentionLocalNotificationsSplitTest.self
-        )
-        let shouldParticipate = RetentionLocalNotificationsSplitTest.shouldParticipate
-        let shouldReceiveNotifications = retentionSplitTest.currentGroup.shouldReceiveNotifications
-
-        if shouldParticipate && shouldReceiveNotifications {
-            NotificationsService().scheduleRetentionNotifications()
-        }
+        self.notificationsService.scheduleRetentionNotifications()
     }
 
     // MARK: - Downloading Data in the Background
@@ -176,12 +165,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didReceiveRemoteNotification userInfo: [AnyHashable: Any]
     ) {
-        NotificationsService().handleRemoteNotification(with: userInfo)
+        self.notificationsService.handleRemoteNotification(with: userInfo)
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework")
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        NotificationsService().handleLocalNotification(with: notification.userInfo)
+        self.notificationsService.handleLocalNotification(with: notification.userInfo)
     }
 
     func application(
@@ -213,7 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
         continue userActivity: NSUserActivity,
-        restorationHandler: @escaping ([Any]?) -> Void
+        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
     ) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(String(describing: userActivity.webpageURL?.absoluteString))")
@@ -234,7 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(
         _ app: UIApplication,
         open url: URL,
-        options: [UIApplicationOpenURLOptionsKey: Any] = [:]
+        options: [UIApplication.OpenURLOptionsKey: Any] = [:]
     ) -> Bool {
         print("opened app via url \(url.absoluteString)")
 

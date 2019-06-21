@@ -16,6 +16,8 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = []
+
         previewView = CodeEditorPreviewView()
         previewView.delegate = self
         tableView.tableHeaderView = previewView
@@ -97,7 +99,7 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
         headerView.layoutIfNeeded()
 
         var frame = headerView.frame
-        frame.size.height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        frame.size.height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         headerView.frame = frame
 
         headerView.removeConstraint(widthConstraint)

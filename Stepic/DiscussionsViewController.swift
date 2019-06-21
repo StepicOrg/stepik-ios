@@ -9,6 +9,24 @@
 import UIKit
 import SDWebImage
 
+@available(*, deprecated, message: "Legacy assembly")
+final class DiscussionsLegacyAssembly: Assembly {
+    private let discussionProxyID: String
+    private let stepID: Step.IdType
+
+    init(discussionProxyID: String, stepID: Step.IdType) {
+        self.discussionProxyID = discussionProxyID
+        self.stepID = stepID
+    }
+
+    func makeModule() -> UIViewController {
+        let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
+        vc.discussionProxyId = self.discussionProxyID
+        vc.target = self.stepID
+        return vc
+    }
+}
+
 enum DiscussionsEmptyDataSetState {
     case error, empty, none
 }
@@ -70,6 +88,8 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = []
+
         print("did load")
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
@@ -83,7 +103,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
         emptyDatasetState = .none
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 44.0
 
         tableView.tableFooterView = UIView()
@@ -94,7 +114,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
         self.title = NSLocalizedString("Discussions", comment: "")
 
-        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
+        let writeCommentItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.compose, target: self, action: #selector(DiscussionsViewController.writeCommentPressed))
         self.navigationItem.rightBarButtonItem = writeCommentItem
 
         refreshControl?.addTarget(self, action: #selector(DiscussionsViewController.reloadDiscussions), for: .valueChanged)
@@ -103,7 +123,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
         reloadDiscussions()
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
     }
 

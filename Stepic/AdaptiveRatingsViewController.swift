@@ -73,6 +73,8 @@ class AdaptiveRatingsViewController: UIViewController {
         presenter?.reloadData(days: daysCount, force: true)
 
         state = .loading
+
+        presenter?.sendOpenedAnalytics()
     }
 
     fileprivate func colorize() {
@@ -93,7 +95,7 @@ class AdaptiveRatingsViewController: UIViewController {
             return
         }
 
-        let size = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         if headerView.frame.size.height != size.height {
             headerView.frame.size.height = size.height
             tableView.tableHeaderView = headerView
@@ -118,14 +120,14 @@ class AdaptiveRatingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 112
 
         tableView.register(UINib(nibName: "LeaderboardTableViewCell", bundle: nil), forCellReuseIdentifier: LeaderboardTableViewCell.reuseId)
 
         #if swift(>=3.2)
             if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+                tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
             }
         #endif
     }

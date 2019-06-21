@@ -18,7 +18,7 @@ class TagDetectionUtil {
     // POSSIBLY detects LaTeX in html string
     static func detectLaTeX(_ htmlString: String) -> Bool {
         let filtered = htmlString.filter({$0 == "$"})
-        return filtered.count >= 2 || (htmlString.range(of: "\\[") != nil && htmlString.range(of: "\\]") != nil)
+        return filtered.count >= 2 || (htmlString.range(of: "\\[") != nil && htmlString.range(of: "\\]") != nil) || (htmlString.contains("math-tex"))
     }
 
     static func detectImage(_ htmlString: String) -> Bool {

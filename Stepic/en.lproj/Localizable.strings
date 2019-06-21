@@ -41,6 +41,7 @@ BeginDate = "Begin date";
 EndDate = "End date";
 SoftDeadline = "Soft deadline";
 HardDeadline = "Hard deadline";
+PersonalDeadline = "Personal deadline";
 Certificate = "Certificate";
 Summary = "Summary";
 Description = "Description";
@@ -152,6 +153,12 @@ Activity = "Activity";
 days1 = "day";
 days234 = "days";
 days567890 = "days";
+hours1 = "hour";
+hours234 = "hours";
+hours567890 = "hours";
+points1 = "point";
+points234 = "points";
+points567890 = "points";
 VideoRate = "Video rate";
 VideoQuality = "Video quality";
 Downloaded = "Downloaded";
@@ -207,6 +214,8 @@ PleaseLeaveFeedbackAppstore = "Please, leave your feedback in the AppStore";
 PleaseLeaveFeedbackEmail = "Please, send your feedback by email";
 ThankYou = "Thank you!";
 Share = "Share";
+WithDistinction = "With distinction";
+CertificateCondition = "Certificate condition";
 CertificateWithDistinction = "Certificate with distinction";
 Certificate = "Certificate";
 CertificateDescriptionBody = "for the course";
@@ -333,6 +342,7 @@ WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
+WidgetButtonBuy = "Buy with %@";
 WidgetAdaptiveLabel = "ADAPTIVE";
 
 CanBeChangedInSettings = "It can be changed in settings.";
@@ -418,6 +428,7 @@ LessonDownloadTooltip = "Download lesson to watch lectures offline";
 ContinueLearningWidgetTooltip = "Tap to continue from where you finished last time";
 StreaksSwitchTooltip = "Turn on to get new portion of knowledge every day";
 VideoInBackgroundTooltip = "You can play video in background";
+PersonalDeadlinesButtonTooltip = "We can smartly create personal learning schedule for you, so you'll never forget to study";
 
 /* Notification alerts */
 NotificationTabNotificationRequestAlertTitle = "Stay tuned";
@@ -425,6 +436,21 @@ NotificationTabNotificationRequestAlertMessage = "We are trying to make learning
 
 CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
 CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
+
+/* Course info */
+CourseInfoTitle = "About course";
+CourseInfoTabInfo = "Info";
+CourseInfoTabSyllabus = "Syllabus";
+CourseInfoTabReviews = "Reviews";
+CourseInfoTitleAuthor = "by";
+CourseInfoTitleAbout = "About";
+CourseInfoTitleRequirements = "Requirements";
+CourseInfoTitleTargetAudience = "Target audience";
+CourseInfoTitleInstructors = "Instructors";
+CourseInfoTitleTimeToComplete = "Expected time to complete";
+CourseInfoTitleLanguage = "Language";
+CourseInfoTitleCertificate = "Certificate";
+CourseInfoTitleCertificateDetails = "Certificate details";
 
 RetentionNotificationOnNextDayTitle = "Don't slow down";
 RetentionNotificationOnNextDayText = "You've done a great job learning yesterday, come back today and become smarter! 🚀";
@@ -494,7 +520,7 @@ PlaceholderLoginText = "Sorry, have we met before?\nTry to Sign In";
 PlaceholderLoginButton = "Sign In";
 PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
 PlaceholderEmptyNotificationsButton = "Go to Catalog";
-PlaceholderEmptySearchText = "Some free space to think";
+PlaceholderEmptySearchText = "There are no courses";
 PlaceholderEmptySearchButton = "Go to Catalog";
 LoadStories = "Load stories";
 
@@ -564,7 +590,22 @@ PersonalDeadlineNotificationBody = "Deadline for module %@ is in %@ hours. Don't
 Save = "Save";
 PersonalDeadline = "Personal deadline";
 DeadlineModeQuestion = "How much time would you like to spend studying on this course?";
-PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. We can smartly create personal learning schedule for you, so you'll never forget to study!";
+
+/* Course info */
+CourseMeetsRecommendations = "Meets the recommendations of Stepik";
+SyllabusDeadlinesButton = "Schedule";
+SyllabusDownloadAll = "Download all";
+NoReviews = "Unfortunately, there are no reviews sent for this course";
+
+/* Profile edit */
+ProfileEditTitle = "Profile edit";
+ProfileEditFirstNamePlaceholder = "First name";
+ProfileEditLastNamePlaceholder = "Last name";
+ProfileEditShortBioPlaceholder = "Short bio (255 chars max)";
+ProfileEditDetailsPlaceholder = "About";
+ProfileEditGeneralTitle = "General";
+ProfileEditGeneralDescription = "Your legal names, used for any certificates";
+ProfileEditAboutMeTitle = "About me";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
@@ -618,3 +659,11 @@ PersonalDeadlineWidgetSuggestionText = "Constant learning is a key to success. W
 "TopicTimeToCompleteText1" = "%@ minute to complete";
 "TopicTimeToCompleteText234" = "%@ minutes to complete";
 "TopicTimeToComplete567890" = "%@ minutes to complete";
+
+/* New lesson & step */
+NextLessonNavigation = "Next lesson";
+PreviousLessonNavigation = "Previous lesson";
+DiscussionsButtonTitle = "Show discussions (%@)";
+NoDiscussionsButtonTitle = "Leave a comment";
+
+OurSocialNetworks = "Our social networks";

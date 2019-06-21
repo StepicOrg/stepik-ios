@@ -208,8 +208,8 @@ class BaseCardsStepsViewController: CardsStepsViewController {
     }
 
     private func bringElementsToFront() {
-        backButton.superview?.bringSubview(toFront: backButton)
-        trophyButton.superview?.bringSubview(toFront: trophyButton)
+        backButton.superview?.bringSubviewToFront(backButton)
+        trophyButton.superview?.bringSubviewToFront(trophyButton)
 
         changeZPositionForElements(change: 1.0, relativeTo: placeholderContainer.placeholderView.layer)
     }

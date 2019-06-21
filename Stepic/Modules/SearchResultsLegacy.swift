@@ -18,11 +18,9 @@ protocol SearchResultsModuleInputProtocol: class {
 @available(*, deprecated, message: "Class for backward compatibility")
 final class SearchResultsAssembly: Assembly {
     var moduleInput: SearchResultsModuleInputProtocol?
-    private let hideKeyboardBlock: (() -> Void)?
     private let updateQueryBlock: ((String) -> Void)?
 
-    init(hideKeyboardBlock: (() -> Void)?, updateQueryBlock: ((String) -> Void)?) {
-        self.hideKeyboardBlock = hideKeyboardBlock
+    init(updateQueryBlock: ((String) -> Void)?) {
         self.updateQueryBlock = updateQueryBlock
     }
 
@@ -34,7 +32,6 @@ final class SearchResultsAssembly: Assembly {
             fatalError("Failed to init module from storyboard")
         }
         controller.presenter = SearchResultsPresenter(view: controller)
-        controller.presenter?.hideKeyboardBlock = hideKeyboardBlock
         controller.presenter?.updateQueryBlock = updateQueryBlock
         self.moduleInput = controller.presenter
         return controller

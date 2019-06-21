@@ -14,11 +14,12 @@ class DownloadsViewController: UIViewController {
 
     @IBOutlet weak var tableView: StepikTableView!
 
-    var downloading: [Video] = []
     var stored: [Video] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        edgesForExtendedLayout = []
 
         tableView.register(UINib(nibName: "DownloadTableViewCell", bundle: nil), forCellReuseIdentifier: "DownloadTableViewCell")
 
@@ -28,7 +29,7 @@ class DownloadsViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
         // Do any additional setup after loading the view.
     }
@@ -45,41 +46,15 @@ class DownloadsViewController: UIViewController {
 
     func fetchVideos() {
         stored = []
-        downloading = []
         let videos = Video.getAllVideos()
 
         for video in videos {
-            let isVideoLoading = VideoDownloaderManager.shared.get(by: video.id)?.state == .active
-            if isVideoLoading {
-                guard let task = VideoDownloaderManager.shared.get(by: video.id) else {
-                    return
-                }
-
-                downloading += [video]
-                task.completionReporter = { [weak self] _ in
-                    DispatchQueue.main.async {
-                        self?.removeFromDownloading(video)
-                        self?.addToStored(video)
-                    }
-                }
-
-                task.failureReporter = { [weak self] _ in
-                    DispatchQueue.main.async {
-                        self?.removeFromDownloading(video)
-                    }
-                }
-            }
             if video.state == VideoState.cached {
                 stored += [video]
             }
         }
-//        print("downloading \(downloading.count), stored \(stored.count)")
-        tableView.reloadData()
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        tableView.reloadData()
     }
 
     // MARK: - Navigation
@@ -99,28 +74,20 @@ class DownloadsViewController: UIViewController {
 
             let step = sender as! Step
             if let lesson = step.managedLesson {
-                //TODO : pass unit here!
                 dvc.initObjects = (lesson: lesson, startStepId: lesson.steps.index(of: step) ?? 0, context: .lesson)
             }
         }
     }
 
-    func isSectionDownloading(_ section: Int) -> Bool {
-        if downloading != [] && stored != [] {
-            return section == 0
-        }
-        return downloading != []
-    }
-
     func askForClearCache(remove: @escaping (() -> Void)) {
-        let alert = UIAlertController(title: NSLocalizedString("ClearCacheTitle", comment: ""), message: NSLocalizedString("ClearCacheMessage", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString("ClearCacheTitle", comment: ""), message: NSLocalizedString("ClearCacheMessage", comment: ""), preferredStyle: UIAlertController.Style.alert)
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertActionStyle.destructive, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Remove", comment: ""), style: UIAlertAction.Style.destructive, handler: {
             _ in
             remove()
         }))
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: {
             _ in
         }))
 
@@ -138,7 +105,7 @@ class DownloadsViewController: UIViewController {
             var shouldBeRemovedCount = videos.count
             for video in videos {
                 do {
-                    try VideoFileManager().removeVideo(videoId: video.id)
+                    try VideoStoredFileManager(fileManager: FileManager.default).removeVideoStoredFile(videoID: video.id)
                     video.cachedQuality = nil
                     CoreDataHelper.instance.save()
 
@@ -177,12 +144,7 @@ extension DownloadsViewController : UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedVideo: Video!
-        if isSectionDownloading((indexPath as NSIndexPath).section) {
-            selectedVideo = downloading[(indexPath as NSIndexPath).row]
-        } else {
-            selectedVideo = stored[(indexPath as NSIndexPath).row]
-        }
+        let selectedVideo: Video! = stored[(indexPath as NSIndexPath).row]
 
         if let course = selectedVideo.managedBlock?.managedStep?.managedLesson?.managedUnit?.managedSection?.managedCourse {
             let enterDownloadBlock = {
@@ -227,25 +189,6 @@ extension DownloadsViewController : UITableViewDelegate {
 
             }
             enterDownloadBlock()
-//            if let user = AuthInfo.shared.user {
-//                if user.isGuest {
-//                    if let authVC = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-//                        authVC.success = {
-//                            performRequest ({
-//                                ApiDataDownloader.courses.retrieve([course.id], deleteCourses: [course], refreshMode: .Update, success: {
-//                                    course in 
-//                                    enterDownloadBlock()
-//                                    }, failure: {
-//                                        _ in
-//                                })
-//                            })
-//                        }
-//                        self.presentViewController(authVC, animated: true, completion: nil)
-//                    }
-//                } else {
-//                    enterDownloadBlock()
-//                }
-//            }
         } else {
             print("Something bad happened")
         }
@@ -256,128 +199,18 @@ extension DownloadsViewController : UITableViewDelegate {
 
 extension DownloadsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSectionDownloading(section) {
-            return downloading.count
-        } else {
-            return stored.count
-        }
+        return stored.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        if downloading == [] && stored == [] {
-            self.navigationItem.rightBarButtonItem?.isEnabled = false
-            return 0
-        }
-
-        self.navigationItem.rightBarButtonItem?.isEnabled = true
-        if downloading != [] && stored != [] {
-            return 2
-        }
         return 1
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if isSectionDownloading(section) {
-            return NSLocalizedString("Downloading", comment: "")
-        } else {
-            return NSLocalizedString("Completed", comment: "")
-        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadTableViewCell", for: indexPath) as! DownloadTableViewCell
 
-        if isSectionDownloading((indexPath as NSIndexPath).section) {
-            cell.initWith(downloading[(indexPath as NSIndexPath).row], buttonDelegate: self)
-            cell.downloadButton.tag = downloading[(indexPath as NSIndexPath).row].id
-        } else {
-            cell.initWith(stored[(indexPath as NSIndexPath).row], buttonDelegate: self)
-            cell.downloadButton.tag = stored[(indexPath as NSIndexPath).row].id
-        }
+        cell.initWith(stored[(indexPath as NSIndexPath).row])
 
         return cell
-    }
-}
-
-extension DownloadsViewController {
-
-    func removeFromDownloading(_ video: Video) {
-        if let index = downloading.index(of: video) {
-            downloading.remove(at: index)
-            self.tableView.beginUpdates()
-            tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-            if downloading.count == 0 {
-//                tableView.reloadData()
-                tableView.deleteSections(IndexSet(integer: 0), with: .automatic)
-            }
-            self.tableView.endUpdates()
-        }
-    }
-
-    func addToStored(_ video: Video) {
-        stored += [video]
-        self.tableView.beginUpdates()
-        if tableView.numberOfSections == 1 && isSectionDownloading(0) {
-            tableView.insertSections(IndexSet(integer: 1), with: .automatic)
-        }
-
-        tableView.insertRows(at: [IndexPath(row: stored.count - 1, section: (isSectionDownloading(0) ? 1 : 0))], with: .automatic)
-        self.tableView.endUpdates()
-
-    }
-
-    func removeFromStored(_ video: Video) {
-        if let index = stored.index(of: video) {
-            stored.remove(at: index)
-            self.tableView.beginUpdates()
-            tableView.deleteRows(at: [IndexPath(row: index, section: (isSectionDownloading(0) ? 1 : 0))], with: .automatic)
-            if stored.count == 0 {
-//                tableView.reloadData()
-                tableView.deleteSections(IndexSet(integer: (isSectionDownloading(0) ? 1 : 0)), with: .automatic)
-            }
-            self.tableView.endUpdates()
-        }
-    }
-}
-
-extension DownloadsViewController : PKDownloadButtonDelegate {
-
-    func getVideoById(_ array: [Video], id: Int) -> Video? {
-        let filtered = array.filter({return $0.id == id})
-        if filtered.count != 1 {
-            print("strange error occured, filtered count -> \(filtered.count) for video with id -> \(id)")
-        } else {
-            return filtered[0]
-        }
-        return nil
-    }
-
-    func downloadButtonTapped(_ downloadButton: PKDownloadButton!, currentState state: PKDownloadButtonState) {
-        switch downloadButton.state {
-        case .downloaded:
-            if let vid = getVideoById(stored, id: downloadButton.tag) {
-                do {
-                    try VideoFileManager().removeVideo(videoId: vid.id)
-                    removeFromStored(vid)
-                } catch {
-                    print("error while deleting from the store")
-                }
-            }
-            break
-        case .downloading:
-            if let vid = getVideoById(downloading, id: downloadButton.tag) {
-                guard let task = VideoDownloaderManager.shared.get(by: vid.id) else {
-                    return
-                }
-
-                task.cancel()
-                VideoDownloaderManager.shared.remove(by: vid.id)
-                removeFromDownloading(vid)
-            }
-            break
-        case .startDownload, .pending:
-            print("Unsupported states")
-            break
-        }
     }
 }

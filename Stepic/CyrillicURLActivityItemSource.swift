@@ -28,7 +28,7 @@ class CyrillicURLActivityItemSource: NSObject, UIActivityItemSource {
         }
     }
 
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         print("Activity type is \(activityType ??? "unknown")")
         switch activityType?.rawValue {
         case "TUSafariActivity"? :

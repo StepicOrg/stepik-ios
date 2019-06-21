@@ -32,8 +32,16 @@ class WebStepViewController: UIViewController {
     @IBOutlet weak var prevToBottomDistance: NSLayoutConstraint!
     @IBOutlet weak var nextToBottomDistance: NSLayoutConstraint!
 
-    var nextLessonHandler: (() -> Void)?
-    var prevLessonHandler: (() -> Void)?
+    var nextLessonHandler: (() -> Void)? {
+        didSet {
+            refreshNextPrevButtons()
+        }
+    }
+    var prevLessonHandler: (() -> Void)? {
+        didSet {
+            refreshNextPrevButtons()
+        }
+    }
 
     weak var lessonView: LessonView?
 
@@ -74,10 +82,11 @@ class WebStepViewController: UIViewController {
             print(self.view.gestureRecognizers ?? "")
         }
 
-        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControlState())
-        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControlState())
+        nextLessonButton.setTitle("  \(NSLocalizedString("NextLesson", comment: ""))  ", for: UIControl.State())
+        prevLessonButton.setTitle("  \(NSLocalizedString("PrevLesson", comment: ""))  ", for: UIControl.State())
 
         initialize()
+        refreshNextPrevButtons()
     }
 
     @objc func sharePressed(_ item: UIBarButtonItem) {
@@ -109,32 +118,23 @@ class WebStepViewController: UIViewController {
             discussionCountViewHeight.constant = 0
         }
 
-        if nextLessonHandler == nil {
-            nextLessonButton.isHidden = true
-        } else {
-            nextLessonButton.setStepicWhiteStyle()
-        }
+        nextLessonButton.setStepicWhiteStyle()
+        prevLessonButton.setStepicWhiteStyle()
+    }
 
-        if prevLessonHandler == nil {
-            prevLessonButton.isHidden = true
-        } else {
-            prevLessonButton.setStepicWhiteStyle()
+    func refreshNextPrevButtons() {
+        if nextLessonButton != nil {
+            nextLessonButton.isHidden = nextLessonHandler == nil
         }
-
-        if nextLessonHandler == nil && prevLessonHandler == nil {
-            nextLessonButtonHeight.constant = 0
-            prevLessonButtonHeight.constant = 0
-            discussionToNextDistance.constant = 0
-            discussionToPrevDistance.constant = 0
-            prevToBottomDistance.constant = 0
-            nextToBottomDistance.constant = 0
+        if prevLessonButton != nil {
+            prevLessonButton.isHidden = prevLessonHandler == nil
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(WebStepViewController.sharePressed(_:)))
+        let shareBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(WebStepViewController.sharePressed(_:)))
         nItem.rightBarButtonItems = [shareBarButtonItem]
 
         resetWebViewHeight(Float(getContentHeight(stepWebView)))
@@ -176,7 +176,7 @@ class WebStepViewController: UIViewController {
     func initQuizController(_ quizController: QuizViewController?) {
         guard let quizController = quizController else {
             self.quizViewController?.view.removeFromSuperview()
-            self.quizViewController?.removeFromParentViewController()
+            self.quizViewController?.removeFromParent()
             self.view.layoutIfNeeded()
             return
         }
@@ -184,8 +184,8 @@ class WebStepViewController: UIViewController {
         quizPlaceholderView.addSubview(quizController.view)
         quizController.view.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
         self.quizViewController?.view.removeFromSuperview()
-        self.quizViewController?.removeFromParentViewController()
-        self.addChildViewController(quizController)
+        self.quizViewController?.removeFromParent()
+        self.addChild(quizController)
         quizViewController = quizController
 //        self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -231,7 +231,7 @@ class WebStepViewController: UIViewController {
             print("unknown type \(step.block.name)")
             let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
             quizController.stepUrl = self.stepUrl
-            self.addChildViewController(quizController)
+            self.addChild(quizController)
             quizPlaceholderView.addSubview(quizController.view)
 
             quizController.view.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
@@ -433,7 +433,7 @@ extension WebStepViewController : UIWebViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
 
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
 
         guard let url = request.url else {
             return false
@@ -467,8 +467,8 @@ extension WebStepViewController : UIWebViewDelegate {
             if let offset = urlString.indexOf("//") {
                 urlString.insert(":", at: urlString.index(urlString.startIndex, offsetBy: offset))
                 if let newUrl = URL(string: urlString) {
-                    let agrume = Agrume(imageUrl: newUrl)
-                    agrume.showFrom(self)
+                    let agrume = Agrume(url: newUrl)
+                    agrume.show(from: self)
                 }
             }
             return false

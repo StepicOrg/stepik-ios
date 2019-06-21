@@ -9,6 +9,38 @@
 import UIKit
 import SVProgressHUD
 import SnapKit
+import Presentr
+
+@available(*, deprecated, message: "Class to initialize personal deadlines selection w/o storyboards logic")
+final class PersonalDeadlinesModeSelectionLegacyAssembly: Assembly {
+    private let course: Course
+    private let updateCompletion: (() -> Void)?
+
+    init(course: Course, updateCompletion: (() -> Void)?) {
+        self.course = course
+        self.updateCompletion = updateCompletion
+    }
+
+    func makeModule() -> UIViewController {
+        guard let modesVC = ControllerHelper.instantiateViewController(
+            identifier: "PersonalDeadlinesModeSelectionViewController",
+            storyboardName: "PersonalDeadlines"
+        ) as? PersonalDeadlinesModeSelectionViewController else {
+            fatalError()
+        }
+        modesVC.course = self.course
+        modesVC.onDeadlineSelected = {
+            self.updateCompletion?()
+
+            NotificationsRegistrationService(
+                presenter: NotificationsRequestOnlySettingsAlertPresenter(),
+                analytics: .init(source: .personalDeadline)
+            ).registerForRemoteNotifications()
+        }
+
+        return modesVC
+    }
+}
 
 class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
@@ -82,12 +114,20 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
         }
 
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.chosen, parameters: ["hours": mode.getModeInfo().weeklyLoadHours])
+        AmplitudeAnalyticsEvents.PersonalDeadlines.created(weeklyLoadHours: mode.getModeInfo().weeklyLoadHours).send()
         SVProgressHUD.show()
-        PersonalDeadlineManager.shared.countDeadlines(for: course, mode: mode).done {
+        PersonalDeadlinesService().countDeadlines(for: course, mode: mode).done {
             SVProgressHUD.dismiss()
             self.onDeadlineSelected?()
+
+            NotificationsRegistrationService(
+                presenter: NotificationsRequestOnlySettingsAlertPresenter(),
+                analytics: .init(source: .personalDeadline)
+            ).registerForRemoteNotifications()
+
             self.dismiss(animated: true, completion: nil)
         }.catch { error in
+            SVProgressHUD.showError(withStatus: "")
             print("\(#file) \(#function) \(error)")
         }
     }

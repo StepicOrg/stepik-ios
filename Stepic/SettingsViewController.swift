@@ -11,14 +11,22 @@ import Foundation
 class SettingsViewController: MenuViewController, SettingsView {
     var presenter: SettingsPresenter?
 
+    private enum SocialNetworks {
+        static let vk = URL(string: "https://vk.com/rustepik")!
+        static let facebook = URL(string: "https://facebook.com/stepikorg")!
+        static let instagram = URL(string: "https://instagram.com/stepik.education/")!
+    }
+
     override func viewDidLoad() {
+        edgesForExtendedLayout = []
+
         super.viewDidLoad()
         presenter = SettingsPresenter(view: self)
         tableView.tableHeaderView = artView
         self.title = NSLocalizedString("Settings", comment: "")
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
         }
     }
 
@@ -29,16 +37,28 @@ class SettingsViewController: MenuViewController, SettingsView {
 
     lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
-        artView.art = Images.arts.customizeLearningProcess
-        if #available(iOS 11.0, *) {
-            artView.width = UIScreen.main.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
-        } else {
-            artView.width = UIScreen.main.bounds.width
+        artView.onVKClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "vk"]
+            )
+            UIApplication.shared.openURL(SocialNetworks.vk)
         }
 
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
-        artView.onTap = {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Profile.Settings.clickBanner)
+        artView.onFacebookClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "facebook"]
+            )
+            UIApplication.shared.openURL(SocialNetworks.facebook)
+        }
+
+        artView.onInstagramClick = {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Profile.Settings.socialNetworkClick,
+                parameters: ["social": "instagram"]
+            )
+            UIApplication.shared.openURL(SocialNetworks.instagram)
         }
         return artView
     }()
@@ -47,8 +67,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         switch menuBlockID {
         case .videoHeader:
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("Video", comment: ""))
-        case .onlyWifiSwitch:
-            return buildOnlyWifiSwitchBlock()
         case .loadedVideoQuality:
             return buildLoadedVideoQualityBlock()
         case .onlineVideoQuality:
@@ -65,10 +83,8 @@ class SettingsViewController: MenuViewController, SettingsView {
             return buildTitleMenuBlock(id: menuBlockID, title: NSLocalizedString("AdaptivePreferencesTitle", comment: ""))
         case .adaptiveModeSwitch:
             return buildAdaptiveModeSwitchBlock()
-        case .emptyHeader:
-            return buildTitleMenuBlock(id: menuBlockID, title: "")
         case .downloads:
-            return buildDownloadsTransitionBlock()
+            return buildDownloadsBlock()
         case .logout:
             return buildLogoutBlock()
         }
@@ -119,13 +135,11 @@ class SettingsViewController: MenuViewController, SettingsView {
         return block
     }
 
-    private func buildOnlyWifiSwitchBlock() -> SwitchMenuBlock {
-        let block = SwitchMenuBlock(id: SettingsMenuBlock.onlyWifiSwitch.rawValue, title: NSLocalizedString("WiFiLoadPreference", comment: ""), isOn: !ConnectionHelper.shared.reachableOnWWAN)
+    private func buildDownloadsBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(id: SettingsMenuBlock.downloads.rawValue, title: NSLocalizedString("Downloads", comment: ""))
 
-        block.onSwitch = {
-            [weak self]
-            isOn in
-            self?.presenter?.changeVideoWifiReachability(to: !isOn)
+        block.onTouch = { [weak self] in
+            self?.openDownloads()
         }
 
         return block
@@ -149,17 +163,6 @@ class SettingsViewController: MenuViewController, SettingsView {
         block.onTouch = {
             [weak self] in
             self?.changeCodeEditorSettings()
-        }
-
-        return block
-    }
-
-    private func buildDownloadsTransitionBlock() -> TransitionMenuBlock {
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: SettingsMenuBlock.downloads.rawValue, title: NSLocalizedString("Downloads", comment: ""))
-
-        block.onTouch = {
-            [weak self] in
-            self?.navigateToDownloads()
         }
 
         return block
@@ -202,20 +205,21 @@ class SettingsViewController: MenuViewController, SettingsView {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        if #available(iOS 11.0, *) {
-            artView.width = size.width - view.safeAreaInsets.top - view.safeAreaInsets.bottom
-        } else {
-            artView.width = size.width
+    func openDownloads() {
+        guard let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main") as? DownloadsViewController else {
+            return
         }
-        artView.frame.size = artView.systemLayoutSizeFitting(CGSize(width: artView.width, height: artView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height))
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    func navigateToDownloads() {
-        let vc = ControllerHelper.instantiateViewController(identifier: "DownloadsViewController", storyboardName: "Main")
-        navigationController?.pushViewController(vc, animated: true)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.layoutTableHeaderView()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.tableView.layoutTableHeaderView()
     }
 
     func presentAuth() {
