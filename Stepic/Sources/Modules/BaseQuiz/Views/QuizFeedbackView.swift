@@ -27,7 +27,11 @@ final class QuizFeedbackView: UIView {
     private lazy var leftView = UIView()
 
     private lazy var feedbackView: ProcessedContentTextView = {
-        let view = ProcessedContentTextView()
+        var appearance = ProcessedContentTextView.Appearance()
+        appearance.insets = LayoutInsets(insets: .zero)
+        appearance.backgroundColor = .clear
+
+        let view = ProcessedContentTextView(appearance: appearance)
         return view
     }()
 
@@ -93,6 +97,10 @@ final class QuizFeedbackView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        if let hint = hint {
+            self.feedbackView.loadHTMLText(hint)
         }
 
         self.animateFeedbackAppearance(showFeedback: hint != nil)

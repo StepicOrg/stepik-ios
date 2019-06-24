@@ -80,6 +80,13 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         let isSubmitButtonDisabled = quizStatus == .evaluation || submissionsLeft == 0
         let shouldPassPeerReview = quizStatus == .correct && step.hasReview
 
+        let hintContent: String? = {
+            if let text = submission?.hint, !text.isEmpty {
+                return self.makeHintContent(text: text)
+            }
+            return nil
+        }()
+
         return BaseQuizViewModel(
             quizStatus: quizStatus,
             reply: submission?.reply ?? cachedReply,
@@ -89,8 +96,24 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             feedbackTitle: feedbackTitle,
             retryWithNewAttempt: retryWithNewAttempt,
             shouldPassPeerReview: shouldPassPeerReview,
-            stepURL: self.makeURL(for: step)
+            stepURL: self.makeURL(for: step),
+            hintContent: hintContent
         )
+    }
+
+    private func makeHintContent(text: String) -> String {
+        let processor = ContentProcessor(
+            content: text,
+            rules: [FixRelativeProtocolURLsRule(), AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)],
+            injections: [
+                MathJaxInjection(),
+                CommonStylesInjection(),
+                MetaViewportInjection(),
+                WebkitImagesCalloutDisableInjection()
+            ]
+        )
+
+        return processor.processContent()
     }
 
     private func makeSubmitButtonTitle(step: Step, submissionsLeft: Int?, needNewAttempt: Bool) -> String {

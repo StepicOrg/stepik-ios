@@ -10,4 +10,5 @@ struct BaseQuizViewModel {
     let retryWithNewAttempt: Bool
     let shouldPassPeerReview: Bool
     let stepURL: URL
+    let hintContent: String?
 }

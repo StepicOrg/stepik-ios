@@ -66,11 +66,11 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
         if let status = data.quizStatus {
             switch status {
             case .correct:
-                self.baseQuizView?.showFeedback(state: .correct, title: data.feedbackTitle)
+                self.baseQuizView?.showFeedback(state: .correct, title: data.feedbackTitle, hint: data.hintContent)
             case .wrong:
-                self.baseQuizView?.showFeedback(state: .wrong, title: data.feedbackTitle)
+                self.baseQuizView?.showFeedback(state: .wrong, title: data.feedbackTitle, hint: data.hintContent)
             case .evaluation:
-                self.baseQuizView?.showFeedback(state: .evaluation, title: data.feedbackTitle)
+                self.baseQuizView?.showFeedback(state: .evaluation, title: data.feedbackTitle, hint: data.hintContent)
             }
         } else {
             self.baseQuizView?.hideFeedback()

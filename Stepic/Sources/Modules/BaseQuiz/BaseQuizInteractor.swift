@@ -110,7 +110,6 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
                 self.suggestStreakIfNeeded()
             }
-
         }.cauterize()
     }
 
