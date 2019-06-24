@@ -12,10 +12,18 @@ final class BaseQuizAssembly: Assembly {
     func makeModule() -> UIViewController {
         let provider = BaseQuizProvider(
             submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
-            attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI())
+            attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
+            userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
         let presenter = BaseQuizPresenter()
-        let interactor = BaseQuizInteractor(step: self.step, presenter: presenter, provider: provider)
+        let interactor = BaseQuizInteractor(
+            step: self.step,
+            presenter: presenter,
+            provider: provider,
+            notificationSuggestionManager: NotificationSuggestionManager(),
+            rateAppManager: RateAppManager(),
+            userService: UserAccountService()
+        )
         let viewController = BaseQuizViewController(
             interactor: interactor,
             quizAssembly: QuizAssemblyFactory().make(for: NewStep.QuizType(blockName: self.step.block.name))

@@ -7,6 +7,7 @@ protocol BaseQuizProviderProtocol {
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)>
     func fetchSubmissions(for step: Step, page: Int) -> Promise<([Submission], Meta)>
     func fetchSubmission(id: Submission.IdType, step: Step) -> Promise<Submission?>
+    func fetchActivity(for user: User.IdType) -> Promise<UserActivity>
 
     func createSubmission(for step: Step, attempt: Attempt, reply: Reply) -> Promise<Submission?>
 }
@@ -14,13 +15,16 @@ protocol BaseQuizProviderProtocol {
 final class BaseQuizProvider: BaseQuizProviderProtocol {
     private let submissionsNetworkService: SubmissionsNetworkServiceProtocol
     private let attemptsNetworkService: AttemptsNetworkServiceProtocol
+    private let userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
 
     init(
         submissionsNetworkService: SubmissionsNetworkServiceProtocol,
-        attemptsNetworkService: AttemptsNetworkServiceProtocol
+        attemptsNetworkService: AttemptsNetworkServiceProtocol,
+        userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
     ) {
         self.submissionsNetworkService = submissionsNetworkService
         self.attemptsNetworkService = attemptsNetworkService
+        self.userActivitiesNetworkService = userActivitiesNetworkService
     }
 
     func createAttempt(for step: Step) -> Promise<Attempt?> {
@@ -45,5 +49,9 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
 
     func createSubmission(for step: Step, attempt: Attempt, reply: Reply) -> Promise<Submission?> {
         return self.submissionsNetworkService.create(attemptID: attempt.id, blockName: step.block.name, reply: reply)
+    }
+
+    func fetchActivity(for user: User.IdType) -> Promise<UserActivity> {
+        return self.userActivitiesNetworkService.retrieve(for: user)
     }
 }

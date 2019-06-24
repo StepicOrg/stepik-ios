@@ -9,7 +9,7 @@ final class NewFreeAnswerQuizInteractor: NewFreeAnswerQuizInteractorProtocol {
     weak var moduleOutput: QuizOutputProtocol?
 
     private let presenter: NewFreeAnswerQuizPresenterProtocol
-    
+
     private var currentText: String?
     private var currentStatus: QuizStatus?
 

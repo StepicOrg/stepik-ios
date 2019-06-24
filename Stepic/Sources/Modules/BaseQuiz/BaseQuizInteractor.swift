@@ -12,8 +12,13 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     weak var moduleOutput: BaseQuizOutputProtocol?
 
+    private let userService: UserAccountServiceProtocol
     private let presenter: BaseQuizPresenterProtocol
     private let provider: BaseQuizProviderProtocol
+
+    // Lagacy dependencies
+    private let notificationSuggestionManager: NotificationSuggestionManager
+    private let rateAppManager: RateAppManager
 
     let step: Step
 
@@ -23,11 +28,18 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     init(
         step: Step,
         presenter: BaseQuizPresenterProtocol,
-        provider: BaseQuizProviderProtocol
+        provider: BaseQuizProviderProtocol,
+        notificationSuggestionManager: NotificationSuggestionManager,
+        rateAppManager: RateAppManager,
+        userService: UserAccountServiceProtocol
     ) {
         self.step = step
         self.presenter = presenter
         self.provider = provider
+        self.userService = userService
+
+        self.notificationSuggestionManager = notificationSuggestionManager
+        self.rateAppManager = rateAppManager
     }
 
     func doReplyCache(request: BaseQuiz.ReplyCache.Request) {
@@ -88,11 +100,52 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             return queue.promise { self.pollSubmission(submission) }
         }.done { submission in
             print("base quiz interactor: submission \(submission.id) completely evaluated")
+
             self.presentSubmission(attempt: attempt, submission: submission, cachedReply: reply)
+
+            if submission.status == "correct" {
+                if self.suggestRateAppIfNeeded() {
+                    return
+                }
+
+                self.suggestStreakIfNeeded()
+            }
+
         }.cauterize()
     }
 
     // MARK: - Private API
+
+    @discardableResult
+    private func suggestStreakIfNeeded() -> Bool {
+        guard self.notificationSuggestionManager.canShowAlert(context: .streak, after: .submission) else {
+            return false
+        }
+
+        guard let userID = self.userService.currentUser?.id else {
+            return false
+        }
+
+        DispatchQueue.global(qos: .userInitiated).promise {
+            self.provider.fetchActivity(for: userID)
+        }.done { userActivity in
+            if userActivity.currentStreak > 0 {
+                self.presenter.presentStreakAlert(response: .init(streak: userActivity.currentStreak))
+            }
+        }.cauterize()
+
+        return true
+    }
+
+    @discardableResult
+    private func suggestRateAppIfNeeded() -> Bool {
+        if self.rateAppManager.submittedCorrect() {
+            self.presenter.presentRateAppAlert(response: .init())
+            return true
+        }
+
+        return false
+    }
 
     private func presentSubmission(attempt: Attempt, submission: Submission?, cachedReply: Reply?) {
         let response = BaseQuiz.SubmissionLoad.Response(

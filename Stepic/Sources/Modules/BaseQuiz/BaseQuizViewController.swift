@@ -2,6 +2,8 @@ import UIKit
 
 protocol BaseQuizViewControllerProtocol: class {
     func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel)
+    func displayRateAppAlert(viewModel: BaseQuiz.RateAppAlertPresentation.ViewModel)
+    func displayStreakAlert(viewModel: BaseQuiz.StreakAlertPresentation.ViewModel)
 }
 
 final class BaseQuizViewController: UIViewController {
@@ -78,6 +80,16 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
         self.childQuizModuleInput?.update(status: data.quizStatus)
 
         self.shouldRetryWithNewAttempt = data.retryWithNewAttempt
+    }
+
+    func displayRateAppAlert(viewModel: BaseQuiz.RateAppAlertPresentation.ViewModel) {
+        Alerts.rate.present(alert: Alerts.rate.construct(lessonProgress: nil), inController: self)
+    }
+
+    func displayStreakAlert(viewModel: BaseQuiz.StreakAlertPresentation.ViewModel) {
+        let streaksAlertPresentationManager = StreaksAlertPresentationManager(source: .submission)
+        streaksAlertPresentationManager.controller = self
+        streaksAlertPresentationManager.suggestStreak(streak: viewModel.streak)
     }
 }
 

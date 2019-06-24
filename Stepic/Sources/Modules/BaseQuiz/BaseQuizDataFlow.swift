@@ -34,6 +34,24 @@ enum BaseQuiz {
         }
     }
 
+    /// Present rate app alert
+    enum RateAppAlertPresentation {
+        struct Response { }
+
+        struct ViewModel { }
+    }
+
+    /// Present streak alert
+    enum StreakAlertPresentation {
+        struct Response {
+            let streak: Int
+        }
+
+        struct ViewModel {
+            let streak: Int
+        }
+    }
+
     enum ViewControllerState {
         case loading
         case result(data: BaseQuizViewModel)

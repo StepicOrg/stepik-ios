@@ -2,6 +2,8 @@ import UIKit
 
 protocol BaseQuizPresenterProtocol {
     func presentSubmission(response: BaseQuiz.SubmissionLoad.Response)
+    func presentStreakAlert(response: BaseQuiz.StreakAlertPresentation.Response)
+    func presentRateAppAlert(response: BaseQuiz.RateAppAlertPresentation.Response)
 }
 
 final class BaseQuizPresenter: BaseQuizPresenterProtocol {
@@ -15,6 +17,14 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             submissionsCount: response.submissionsCount
         )
         self.viewController?.displaySubmission(viewModel: .init(state: .result(data: viewModel)))
+    }
+
+    func presentStreakAlert(response: BaseQuiz.StreakAlertPresentation.Response) {
+        self.viewController?.displayStreakAlert(viewModel: .init(streak: response.streak))
+    }
+
+    func presentRateAppAlert(response: BaseQuiz.RateAppAlertPresentation.Response) {
+        self.viewController?.displayRateAppAlert(viewModel: .init())
     }
 
     private func makeViewModel(
