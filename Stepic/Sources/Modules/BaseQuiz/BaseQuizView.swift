@@ -100,7 +100,7 @@ final class BaseQuizView: UIView {
 
     func hideFeedback() {
         self.feedbackView.isHidden = true
-        self.feedbackContainerView.invalidateIntrinsicContentSize()
+        self.feedbackView.update(state: .evaluation, title: "")
     }
 
     // MARK: - Private API
