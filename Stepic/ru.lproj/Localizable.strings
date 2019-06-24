@@ -688,6 +688,7 @@ CorrectFeedbackTitleFreeAnswer = "Любой ответ будет оценен 
 WrongFeedbackTitleNotLastTry = "Пока неправильно, попробуйте еще раз!";
 WrongFeedbackTitleLastTry = "Неверно!";
 EvaluationFeedbackTitle = "Проверка...";
+PeerReviewFeedbackTitle = "Это задание с рецензией. Нажмите, чтобы закончить задание в веб-версии и получить баллы.";
 
 StringQuizTitle = "Напишите текст (строку)";
 NumberQuizTitle = "Введите численный ответ";

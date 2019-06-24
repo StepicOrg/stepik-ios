@@ -24,10 +24,7 @@ final class QuizFeedbackView: UIView {
         return label
     }()
 
-    private lazy var leftView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private lazy var leftView = UIView()
 
     private lazy var feedbackView: ProcessedContentTextView = {
         let view = ProcessedContentTextView()

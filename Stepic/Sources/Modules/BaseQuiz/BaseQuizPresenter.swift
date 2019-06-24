@@ -68,6 +68,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         )
 
         let isSubmitButtonDisabled = quizStatus == .evaluation || submissionsLeft == 0
+        let shouldPassPeerReview = quizStatus == .correct && step.hasReview
 
         return BaseQuizViewModel(
             quizStatus: quizStatus,
@@ -76,7 +77,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             isSubmitButtonEnabled: !isSubmitButtonDisabled,
             submissionsLeft: submissionsLeft,
             feedbackTitle: feedbackTitle,
-            retryWithNewAttempt: retryWithNewAttempt
+            retryWithNewAttempt: retryWithNewAttempt,
+            shouldPassPeerReview: shouldPassPeerReview,
+            stepURL: self.makeURL(for: step)
         )
     }
 
@@ -108,6 +111,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
 
         switch status {
         case .correct:
+            if step.hasReview {
+                return NSLocalizedString("PeerReviewFeedbackTitle", comment: "")
+            }
             if case .freeAnswer = NewStep.QuizType(blockName: step.block.name) {
                 return NSLocalizedString("CorrectFeedbackTitleFreeAnswer", comment: "")
             }
@@ -120,5 +126,14 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         case .evaluation:
             return NSLocalizedString("EvaluationFeedbackTitle", comment: "")
         }
+    }
+
+    private func makeURL(for step: Step) -> URL {
+        let link = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonId)/step/\(step.position)?from_mobile_app=true"
+        guard let url = URL(string: link) else {
+            fatalError("Invalid step link")
+        }
+
+        return url
     }
 }

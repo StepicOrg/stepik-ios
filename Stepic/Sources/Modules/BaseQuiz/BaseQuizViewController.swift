@@ -17,6 +17,7 @@ final class BaseQuizViewController: UIViewController {
 
     private var currentReply: Reply?
     private var shouldRetryWithNewAttempt = true
+    private var stepURL: URL?
 
     init(interactor: BaseQuizInteractorProtocol, quizAssembly: QuizAssembly) {
         self.interactor = interactor
@@ -54,8 +55,11 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
             return
         }
 
+        self.stepURL = data.stepURL
+
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
+        self.baseQuizView?.isPeerReviewAvailable = data.shouldPassPeerReview
 
         if let status = data.quizStatus {
             switch status {
@@ -88,6 +92,20 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
         } else {
             self.interactor.doSubmissionSubmit(request: .init(reply: reply))
         }
+    }
+
+    func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView) {
+        guard let url = self.stepURL else {
+            return
+        }
+
+        WebControllerManager.sharedManager.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: "peer review",
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
     }
 }
 

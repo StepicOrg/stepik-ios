@@ -8,4 +8,6 @@ struct BaseQuizViewModel {
     let submissionsLeft: Int?
     let feedbackTitle: String
     let retryWithNewAttempt: Bool
+    let shouldPassPeerReview: Bool
+    let stepURL: URL
 }
