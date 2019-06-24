@@ -167,7 +167,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
         let quizController: UIViewController? = {
             switch quizType {
-            case .string:
+            case .string, .number, .math:
                 let assembly = BaseQuizAssembly(step: viewModel.step)
                 return assembly.makeModule()
             default:
