@@ -51,21 +51,6 @@ final class NewStringQuizView: UIView {
         return label
     }()
 
-//    private lazy var textView: TableInputTextView = {
-//        let textView = TableInputTextView()
-//        textView.placeholder = "Введите свой ответ"
-//        textView.textInsets = UIEdgeInsets(top: 12, left: 12, bottom: 40, right: 12)
-//        textView.setRoundedCorners(
-//            cornerRadius: self.appearance.textFieldBorderCornerRadius,
-//            borderWidth: self.appearance.textFieldBorderWidth,
-//            borderColor: self.appearance.textFieldBorderColor
-//        )
-//        textView.textColor = self.appearance.textFieldTextColor
-//        textView.placeholderColor = self.appearance.textFieldPlaceholderColor
-//        textView.font = self.appearance.textFieldPlaceholderFont
-//        return textView
-//    }()
-
     private lazy var textField: TableInputTextField = {
         let field = TableInputTextField()
         field.placeholderColor = self.appearance.textFieldPlaceholderColor

@@ -9,20 +9,14 @@ final class NewStringQuizInteractor: NewStringQuizInteractorProtocol {
     weak var moduleOutput: QuizOutputProtocol?
 
     private let presenter: NewStringQuizPresenterProtocol
-    private let provider: NewStringQuizProviderProtocol
     private let type: NewStringQuiz.DataType
 
     private var currentStatus: QuizStatus?
     private var currentText: String?
 
-    init(
-        type: NewStringQuiz.DataType,
-        presenter: NewStringQuizPresenterProtocol,
-        provider: NewStringQuizProviderProtocol
-    ) {
+    init(type: NewStringQuiz.DataType, presenter: NewStringQuizPresenterProtocol) {
         self.type = type
         self.presenter = presenter
-        self.provider = provider
     }
 
     func doReplyUpdate(request: NewStringQuiz.ReplyConvert.Request) {

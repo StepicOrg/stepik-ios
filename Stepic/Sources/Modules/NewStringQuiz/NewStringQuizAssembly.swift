@@ -11,9 +11,8 @@ final class NewStringQuizAssembly: QuizAssembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = NewStringQuizProvider()
         let presenter = NewStringQuizPresenter(type: self.type)
-        let interactor = NewStringQuizInteractor(type: self.type, presenter: presenter, provider: provider)
+        let interactor = NewStringQuizInteractor(type: self.type, presenter: presenter)
         let viewController = NewStringQuizViewController(interactor: interactor)
 
         presenter.viewController = viewController
