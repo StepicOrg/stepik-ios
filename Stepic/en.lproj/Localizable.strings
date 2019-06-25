@@ -667,3 +667,29 @@ DiscussionsButtonTitle = "Show discussions (%@)";
 NoDiscussionsButtonTitle = "Leave a comment";
 
 OurSocialNetworks = "Our social networks";
+
+/* Quiz */
+CorrectFeedbackTitle1 = "Correct.";
+CorrectFeedbackTitle2 = "You are right, well done!";
+CorrectFeedbackTitle3 = "All is correct.";
+CorrectFeedbackTitle4 = "Right.";
+CorrectFeedbackTitle5 = "You're right!";
+CorrectFeedbackTitle6 = "Totally right.";
+CorrectFeedbackTitle7 = "Good job.";
+CorrectFeedbackTitle8 = "Great work!";
+CorrectFeedbackTitle9 = "Absolutely right.";
+CorrectFeedbackTitle10 = "Good news for you, correct!";
+CorrectFeedbackTitle11 = "Fabulous answer.";
+CorrectFeedbackTitle12 = "Yes!";
+CorrectFeedbackTitle13 = "Great!";
+CorrectFeedbackTitle14 = "Well done!";
+CorrectFeedbackTitleFreeAnswer = "Any text response will be graded as correct.";
+WrongFeedbackTitleNotLastTry = "Wrong. Let's try again.";
+WrongFeedbackTitleLastTry = "Incorrect.";
+EvaluationFeedbackTitle = "Evaluation...";
+PeerReviewFeedbackTitle = "This is a task with peer review. Tap to open in web to get points.";
+
+StringQuizTitle = "Write an answer in form of a text (string)";
+NumberQuizTitle = "Enter a number";
+MathQuizTitle = "Enter a math formula";
+StringQuizPlaceholder = "Type your answer";

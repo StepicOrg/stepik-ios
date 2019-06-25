@@ -410,6 +410,8 @@ class QuizPresenter {
             return
         }
 
+
+
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
             [weak self]
             activity in

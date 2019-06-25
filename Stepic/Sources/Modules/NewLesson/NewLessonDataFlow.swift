@@ -7,21 +7,15 @@ enum NewLesson {
     enum LessonLoad {
         struct Request { }
 
-        struct ResponseData {
+        struct Data {
             let lesson: Lesson
             let steps: [Step]
             let progresses: [Progress]
             let startStepIndex: Int
         }
 
-        enum ResponseState {
-            case loading
-            case error
-            case success(result: ResponseData)
-        }
-
         struct Response {
-            let state: ResponseState
+            let state: Result<Data>
         }
 
         struct ViewModel {

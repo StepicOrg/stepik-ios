@@ -3,7 +3,7 @@ import UIKit
 class TableInputTextField: UITextField {
     private enum Appearance {
         static let defaultFont = UIFont.systemFont(ofSize: 17)
-        static let textAreaInsets = UIEdgeInsets(top: 1, left: 12, bottom: 0, right: 0)
+        static let textAreaInsets = UIEdgeInsets(top: 1, left: 12, bottom: 0, right: 12)
     }
 
     private lazy var pinnedPlaceholderLabel: UILabel = {
@@ -21,6 +21,12 @@ class TableInputTextField: UITextField {
     }
 
     var placeholderColor = UIColor.black.withAlphaComponent(0.4)
+
+    var textInsets = Appearance.textAreaInsets {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
 
     var shouldAlwaysShowPlaceholder = false {
         didSet {
@@ -83,32 +89,35 @@ class TableInputTextField: UITextField {
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.textRect(forBounds: bounds)
-        if self.shouldAlwaysShowPlaceholder {
-            return CGRect(
-                origin: CGPoint(
-                    x: rect.origin.x + self.additionalPlaceholderRightPadding + Appearance.textAreaInsets.left,
-                    y: Appearance.textAreaInsets.top
-                ),
-                size: CGSize(width: rect.size.width, height: bounds.height)
+
+        return CGRect(
+            origin: CGPoint(
+                x: rect.origin.x
+                    + (self.shouldAlwaysShowPlaceholder ? self.additionalPlaceholderRightPadding : 0)
+                    + self.textInsets.left,
+                y: self.textInsets.top
+            ),
+            size: CGSize(
+                width: rect.size.width - self.textInsets.right - self.additionalPlaceholderRightPadding,
+                height: bounds.height
             )
-        } else {
-            return rect
-        }
+        )
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.editingRect(forBounds: bounds)
-        if self.shouldAlwaysShowPlaceholder {
-            return CGRect(
-                origin: CGPoint(
-                    x: rect.origin.x + self.additionalPlaceholderRightPadding + Appearance.textAreaInsets.left,
-                    y: Appearance.textAreaInsets.top
-                ),
-                size: CGSize(width: rect.size.width, height: bounds.height)
+        return CGRect(
+            origin: CGPoint(
+                x: rect.origin.x
+                    + (self.shouldAlwaysShowPlaceholder ? self.additionalPlaceholderRightPadding : 0)
+                    + self.textInsets.left,
+                y: self.textInsets.top
+            ),
+            size: CGSize(
+                width: rect.size.width - self.textInsets.right - self.additionalPlaceholderRightPadding,
+                height: bounds.height
             )
-        } else {
-            return rect
-        }
+        )
     }
 
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {

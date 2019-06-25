@@ -17,16 +17,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
     private var state: NewStep.ViewControllerState {
         didSet {
-            switch self.state {
-            case .result:
-                self.isPlaceholderShown = false
-                self.showContent()
-            case .loading:
-                self.isPlaceholderShown = false
-                self.newStepView?.startLoading()
-            case .error:
-                self.showPlaceholder(for: .connectionError)
-            }
+            self.updateState()
         }
     }
 
@@ -47,8 +38,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     override func loadView() {
-        let view = NewStepView(frame: UIScreen.main.bounds)
-        self.view = view
+        self.view = NewStepView(frame: UIScreen.main.bounds)
     }
 
     override func viewDidLoad() {
@@ -64,14 +54,13 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             for: .connectionError
         )
 
-        self.newStepView?.startLoading()
-
         self.newStepView?.delegate = self
 
         // Enter group, leave when content did load & in view did appear
         self.sendStepDidPassedGroup.enter()
         self.sendStepDidPassedGroup.enter()
 
+        self.updateState()
         self.sendStepDidPassedGroup.notify(queue: .main) { [weak self] in
             self?.sendInitStepStatusRequests()
         }
@@ -96,6 +85,19 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
     // MARK: Private API
 
+    private func updateState() {
+        switch self.state {
+        case .result:
+            self.isPlaceholderShown = false
+            self.showContent()
+        case .loading:
+            self.isPlaceholderShown = false
+            self.newStepView?.startLoading()
+        case .error:
+            self.showPlaceholder(for: .connectionError)
+        }
+    }
+
     private func sendInitStepStatusRequests() {
         defer {
             self.didInitRequestsSend = true
@@ -113,8 +115,44 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     @objc
-    // swiftlint:disable:next cyclomatic_complexity
     private func showContent() {
+        // swiftlint:disable:next cyclomatic_complexity
+        func initQuizController(type: NewStep.QuizType, step: Step) -> QuizViewController? {
+            let quizController: QuizViewController? = {
+                switch type {
+                case .choice:
+                    return ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .string:
+                    return StringQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .number:
+                    return NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .freeAnswer:
+                    return FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .math:
+                    return MathQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .sorting:
+                    return SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .matching:
+                    return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .fillBlanks:
+                    return FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .code:
+                    return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
+                case .sql:
+                    return SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
+                default:
+                    return nil
+                }
+            }()
+
+            if let controller = quizController {
+                controller.step = step
+                controller.delegate = self
+                return controller
+            }
+            return nil
+        }
+
         guard case .result(let viewModel) = self.state else {
             return
         }
@@ -129,36 +167,17 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             return
         }
 
-        let quizController: QuizViewController? = {
+        let quizController: UIViewController? = {
             switch quizType {
-            case .choice:
-                return ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .string:
-                return StringQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .number:
-                return NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .freeAnswer:
-                return FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .math:
-                return MathQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .sorting:
-                return SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .matching:
-                return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .fillBlanks:
-                return FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .code:
-                return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
-            case .sql:
-                return SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
+            case .string, .number, .math, .freeAnswer:
+                let assembly = BaseQuizAssembly(step: viewModel.step)
+                return assembly.makeModule()
             default:
-                return nil
+                return initQuizController(type: quizType, step: viewModel.step)
             }
         }()
 
         if let controller = quizController {
-            controller.step = viewModel.step
-            controller.delegate = self
             self.addChild(controller)
             self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         } else {

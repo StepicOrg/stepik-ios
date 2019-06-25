@@ -12,6 +12,7 @@ protocol ProcessedContentTextViewDelegate: class {
 extension ProcessedContentTextView {
     struct Appearance {
         var insets = LayoutInsets(top: 10, left: 16, bottom: 4, right: 16)
+        var backgroundColor = UIColor.white
     }
 }
 
@@ -56,6 +57,10 @@ final class ProcessedContentTextView: UIView {
 
     private lazy var webView: WKWebView = {
         let webView = WKWebView(frame: .zero, configuration: self.webViewConfiguration)
+        webView.isOpaque = false
+        webView.backgroundColor = self.appearance.backgroundColor
+        webView.scrollView.backgroundColor = self.appearance.backgroundColor
+
         webView.navigationDelegate = self
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.delegate = self
