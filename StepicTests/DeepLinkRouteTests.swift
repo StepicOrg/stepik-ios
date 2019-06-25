@@ -50,14 +50,27 @@ class DeepLinkRouteSpec: QuickSpec {
                         "https://stepik.org/course/8092",
                         "https://stepik.org/course/8092/",
                         "https://stepik.org/course/8092/?",
-                        "https://stepik.org/course/8092/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course",
+                        "https://stepik.org/course/8092/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course"
+                    ]
+                    self.checkPaths(paths) { route in
+                        guard case let .course(id) = route else {
+                            return .failed(reason: "wrong enum case, expected `course`, got \(route)")
+                        }
+                        return id == 8092 ? .succeeded : .failed(reason: "wrong course id")
+                    }
+                }
+            }
+            
+            context("coursePromo") {
+                it("matches course promo deep link with given paths") {
+                    let paths = [
                         "https://stepik.org/course/8092/promo",
                         "https://stepik.org/course/8092/promo/",
                         "https://stepik.org/course/8092/promo/?",
                         "https://stepik.org/course/8092/promo/?utm_source=newsletter&utm_medium=email&utm_campaign=monthly&utm_term=user-group4&utm_content=course"
                     ]
                     self.checkPaths(paths) { route in
-                        guard case let .course(id) = route else {
+                        guard case let .coursePromo(id) = route else {
                             return .failed(reason: "wrong enum case, expected `course`, got \(route)")
                         }
                         return id == 8092 ? .succeeded : .failed(reason: "wrong course id")
