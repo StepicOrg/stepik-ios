@@ -19,7 +19,9 @@ final class DiscussionAlertConstructor {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         let links = HTMLParsingUtil.getAllLinksWithText(comment.text).compactMap { item -> (url: URL, text: String)? in
-            if let url = URL(stringToEncode: item.link) {
+            if let decodedLink = item.link.removingPercentEncoding,
+               let encodedLink = decodedLink.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+               let url = URL(string: encodedLink) {
                 return (url: url, text: item.text)
             } else {
                 return nil
