@@ -80,6 +80,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             return
         }
 
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
+
         let queue = DispatchQueue.global(qos: .userInitiated)
         let reply = request.reply
 
@@ -92,6 +94,29 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             }
 
             print("base quiz interactor: submission created = \(submission.id), status = \(submission.status)")
+
+            // Analytics
+            AnalyticsUserProperties.shared.incrementSubmissionsCount()
+            if let codeReply = reply as? CodeReply {
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.Step.Submission.created,
+                    parameters: ["type": self.step.block.name, "language": codeReply.languageName]
+                )
+                AmplitudeAnalyticsEvents.Steps.submissionMade(
+                    step: self.step.id,
+                    type: self.step.block.name,
+                    language: codeReply.languageName
+                ).send()
+            } else {
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.Step.Submission.created,
+                    parameters: ["type": self.step.block.name]
+                )
+                AmplitudeAnalyticsEvents.Steps.submissionMade(
+                    step: self.step.id,
+                    type: self.step.block.name
+                ).send()
+            }
 
             self.submissionsCount += 1
             self.presentSubmission(attempt: attempt, submission: submission, cachedReply: reply)
@@ -161,6 +186,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     private func loadAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
         return firstly { () -> Promise<Attempt?> in
             if forceRefreshAttempt {
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
+
                 return self.provider.createAttempt(for: self.step)
             }
             return self.provider.fetchAttempts(for: self.step).map { $0.0.first }
