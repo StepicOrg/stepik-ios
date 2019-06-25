@@ -9,19 +9,6 @@
 import Foundation
 
 extension URL {
-    /// Check for existing percent escapes first to prevent double-escaping of % character and initialize with encoded string.
-    ///
-    /// Returns `nil` if a `URL` cannot be formed with the string.
-    init?(stringToEncode: String) {
-        if stringToEncode.range(of: "%[0-9A-Fa-f]{2}", options: .regularExpression) != nil {
-            self.init(string: stringToEncode)
-        } else if let encodedString = stringToEncode.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            self.init(string: encodedString)
-        } else {
-            return nil
-        }
-    }
-
     /// URL with appending query parameters.
     ///
     /// - Parameter parameters: parameters dictionary.
