@@ -10,13 +10,18 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     weak var viewController: BaseQuizViewControllerProtocol?
 
     func presentSubmission(response: BaseQuiz.SubmissionLoad.Response) {
-        let viewModel = self.makeViewModel(
-            step: response.step,
-            submission: response.submission,
-            cachedReply: response.cachedReply,
-            submissionsCount: response.submissionsCount
-        )
-        self.viewController?.displaySubmission(viewModel: .init(state: .result(data: viewModel)))
+        switch response.result {
+        case .failure:
+            self.viewController?.displaySubmission(viewModel: .init(state: .error))
+        case .success(let data):
+            let viewModel = self.makeViewModel(
+                step: data.step,
+                submission: data.submission,
+                cachedReply: data.cachedReply,
+                submissionsCount: data.submissionsCount
+            )
+            self.viewController?.displaySubmission(viewModel: .init(state: .result(data: viewModel)))
+        }
     }
 
     func presentStreakAlert(response: BaseQuiz.StreakAlertPresentation.Response) {

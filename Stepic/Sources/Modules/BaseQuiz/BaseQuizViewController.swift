@@ -6,8 +6,10 @@ protocol BaseQuizViewControllerProtocol: class {
     func displayStreakAlert(viewModel: BaseQuiz.StreakAlertPresentation.ViewModel)
 }
 
-final class BaseQuizViewController: UIViewController {
+final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceholder {
     private let interactor: BaseQuizInteractorProtocol
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     lazy var baseQuizView = self.view as? BaseQuizView
 
@@ -21,9 +23,16 @@ final class BaseQuizViewController: UIViewController {
     private var shouldRetryWithNewAttempt = true
     private var stepURL: URL?
 
+    private var state: BaseQuiz.ViewControllerState {
+        didSet {
+            self.updateState()
+        }
+    }
+
     init(interactor: BaseQuizInteractorProtocol, quizAssembly: QuizAssembly) {
         self.interactor = interactor
         self.quizAssembly = quizAssembly
+        self.state = .loading
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,6 +49,18 @@ final class BaseQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnectionQuiz,
+                action: { [weak self] in
+                    self?.state = .loading
+                    self?.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: false))
+                }
+            ),
+            for: .connectionError
+        )
+        self.updateState()
+
         self.quizAssembly.moduleOutput = self
         self.baseQuizView?.delegate = self
 
@@ -49,11 +70,24 @@ final class BaseQuizViewController: UIViewController {
         self.addChild(quizController)
         self.baseQuizView?.addQuiz(view: quizController.view)
     }
-}
 
-extension BaseQuizViewController: BaseQuizViewControllerProtocol {
-    func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel) {
-        guard case .result(let data) = viewModel.state else {
+    // MARK: - Private API
+
+    private func updateState() {
+        switch self.state {
+        case .result:
+            self.isPlaceholderShown = false
+            self.showContent()
+        case .loading:
+            self.isPlaceholderShown = false
+            self.baseQuizView?.startLoading()
+        case .error:
+            self.showPlaceholder(for: .connectionError)
+        }
+    }
+
+    private func showContent() {
+        guard case .result(let data) = self.state else {
             return
         }
 
@@ -80,6 +114,14 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
         self.childQuizModuleInput?.update(status: data.quizStatus)
 
         self.shouldRetryWithNewAttempt = data.retryWithNewAttempt
+
+        self.baseQuizView?.endLoading()
+    }
+}
+
+extension BaseQuizViewController: BaseQuizViewControllerProtocol {
+    func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel) {
+        self.state = viewModel.state
     }
 
     func displayRateAppAlert(viewModel: BaseQuiz.RateAppAlertPresentation.ViewModel) {

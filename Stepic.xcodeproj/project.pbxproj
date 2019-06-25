@@ -12414,20 +12414,20 @@
 				TargetAttributes = {
 					085D5CD81D007F2100092060 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = E9KER42773;
+						DevelopmentTeam = UJ4KC2QN7B;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 						TestTargetID = 08DE94101B8C58AC00D278AB;
 					};
 					086538341EB02715003A8415 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = E9KER42773;
+						DevelopmentTeam = UJ4KC2QN7B;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					08DE94101B8C58AC00D278AB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = E9KER42773;
+						DevelopmentTeam = UJ4KC2QN7B;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -12531,13 +12531,13 @@
 					};
 					9F9C71161E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = E9KER42773;
+						DevelopmentTeam = UJ4KC2QN7B;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					9F9C71221E076AE000EC8DA3 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = E9KER42773;
+						DevelopmentTeam = UJ4KC2QN7B;
 						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
@@ -19853,7 +19853,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = StepicTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -19874,7 +19874,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = StepicTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -19898,7 +19898,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
@@ -19921,7 +19921,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = StickerPackExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.StickerPackExtension;
@@ -20062,7 +20062,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 133;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -20093,7 +20093,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 133;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -20939,7 +20939,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
@@ -20967,7 +20967,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				IBSC_MODULE = StepicWatch_Extension;
 				INFOPLIST_FILE = StepicWatch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
@@ -20994,7 +20994,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
@@ -21020,7 +21020,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E9KER42773;
+				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;

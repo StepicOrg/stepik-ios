@@ -14,10 +14,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         let viewModel: NewLesson.LessonLoad.ViewModel
 
         switch response.state {
-        case .error:
+        case .failure:
             viewModel = .init(state: .error)
-        case .loading:
-            viewModel = .init(state: .loading)
         case .success(let result):
             viewModel = .init(
                 state: .result(

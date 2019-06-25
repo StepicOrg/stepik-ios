@@ -57,8 +57,6 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         self.currentUnit = nil
         self.assignmentsForCurrentSteps.removeAll()
 
-        self.presenter.presentLesson(response: .init(state: .loading))
-
         // FIXME: singleton
         if case .unit(let unitID) = context {
             LastStepGlobalContext.context.unitId = unitID
@@ -120,17 +118,17 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 }
             }()
 
-            let data = NewLesson.LessonLoad.ResponseData(
+            let data = NewLesson.LessonLoad.Data(
                 lesson: lesson,
                 steps: steps,
                 progresses: progresses,
                 startStepIndex: startStepIndex
             )
 
-            self.presenter.presentLesson(response: .init(state: .success(result: data)))
+            self.presenter.presentLesson(response: .init(state: .success(data)))
         }.catch { error in
             print("new lesson interactor: error while loading lesson = \(error)")
-            self.presenter.presentLesson(response: .init(state: .error))
+            self.presenter.presentLesson(response: .init(state: .failure(error)))
         }
     }
 

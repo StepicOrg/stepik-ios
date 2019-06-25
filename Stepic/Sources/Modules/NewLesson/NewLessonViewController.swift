@@ -84,14 +84,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
     private var state: NewLesson.ViewControllerState {
         didSet {
-            switch self.state {
-            case .loading:
-                self.showLoading()
-            case .result:
-                self.showSteps()
-            case .error:
-                self.showError()
-            }
+            self.updateState()
         }
     }
 
@@ -115,6 +108,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             placeholder: StepikPlaceholder(
                 .noConnectionQuiz,
                 action: { [weak self] in
+                    self?.state = .loading
                     self?.interactor.doLessonLoad(request: .init())
                 }
             ),
@@ -133,10 +127,22 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem]
         self.dataSource = self
 
+        self.updateState()
         self.interactor.doLessonLoad(request: .init())
     }
 
     // MARK: Private API
+
+    private func updateState() {
+        switch self.state {
+        case .loading:
+            self.showLoading()
+        case .result:
+            self.showSteps()
+        case .error:
+            self.showError()
+        }
+    }
 
     private func addSubviews() {
         self.overlayView.addSubview(self.loadingIndicator)

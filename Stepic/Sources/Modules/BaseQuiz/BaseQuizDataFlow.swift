@@ -3,16 +3,20 @@ import Foundation
 enum BaseQuiz {
     /// Load latest submission for existing attempt or load new one
     enum SubmissionLoad {
-        struct Request {
-            let shouldRefreshAttempt: Bool
-        }
-
-        struct Response {
+        struct Data {
             let step: Step
             let attempt: Attempt
             let submission: Submission?
             let cachedReply: Reply?
             let submissionsCount: Int
+        }
+
+        struct Request {
+            let shouldRefreshAttempt: Bool
+        }
+
+        struct Response {
+            let result: Result<Data>
         }
 
         struct ViewModel {

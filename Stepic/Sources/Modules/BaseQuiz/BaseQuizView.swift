@@ -17,12 +17,26 @@ extension BaseQuizView {
         let spacing: CGFloat = 16
 
         let insets = LayoutInsets(left: 16, right: 16)
+        let loadingIndicatorColor = UIColor.mainDark
+    }
+
+    enum Animation {
+        static let appearanceAnimationDuration: TimeInterval = 0.2
+        static let appearanceAnimationDelay: TimeInterval = 0.25
     }
 }
 
 final class BaseQuizView: UIView {
     let appearance: Appearance
     weak var delegate: BaseQuizViewDelegate?
+
+    private lazy var loadingIndicatorView: UIActivityIndicatorView = {
+        let loadingIndicatorView = UIActivityIndicatorView(style: .white)
+        loadingIndicatorView.color = self.appearance.loadingIndicatorColor
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.startAnimating()
+        return loadingIndicatorView
+    }()
 
     private lazy var submitButton: UIButton = {
         let submitButton = UIButton(type: .system)
@@ -103,6 +117,24 @@ final class BaseQuizView: UIView {
         self.feedbackView.update(state: .evaluation, title: "")
     }
 
+    func startLoading() {
+        self.stackView.alpha = 0.0
+        self.loadingIndicatorView.startAnimating()
+    }
+
+    func endLoading() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.appearanceAnimationDelay) {
+            self.loadingIndicatorView.stopAnimating()
+
+            UIView.animate(
+                withDuration: Animation.appearanceAnimationDuration,
+                animations: {
+                    self.stackView.alpha = 1.0
+                }
+            )
+        }
+    }
+
     // MARK: - Private API
 
     @objc
@@ -124,6 +156,8 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
         self.feedbackContainerView.addSubview(self.feedbackView)
 
         self.feedbackView.addGestureRecognizer(self.peerReviewTapGestureRecognizer)
+
+        self.addSubview(self.loadingIndicatorView)
     }
 
     func makeConstraints() {
@@ -152,6 +186,11 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
             make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
+        }
+
+        self.loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicatorView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 }

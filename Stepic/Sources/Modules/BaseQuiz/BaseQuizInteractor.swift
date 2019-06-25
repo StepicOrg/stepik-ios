@@ -71,7 +71,10 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             self.currentAttempt = attempt
 
             self.presentSubmission(attempt: attempt, submission: submission, cachedReply: cachedReply)
-        }.cauterize()
+        }.catch { error in
+            print("base quiz interactor: error while load submission = \(error.localizedDescription)")
+            self.presenter.presentSubmission(response: .init(result: .failure(error)))
+        }
     }
 
     func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request) {
@@ -135,7 +138,10 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
                 self.suggestStreakIfNeeded()
             }
-        }.cauterize()
+        }.catch { error in
+            print("base quiz interactor: error while submission = \(error.localizedDescription)")
+            self.presenter.presentSubmission(response: .init(result: .failure(error)))
+        }
     }
 
     // MARK: - Private API
@@ -172,7 +178,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     private func presentSubmission(attempt: Attempt, submission: Submission?, cachedReply: Reply?) {
-        let response = BaseQuiz.SubmissionLoad.Response(
+        let response = BaseQuiz.SubmissionLoad.Data(
             step: self.step,
             attempt: attempt,
             submission: submission,
@@ -180,7 +186,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             submissionsCount: self.submissionsCount
         )
 
-        self.presenter.presentSubmission(response: response)
+        self.presenter.presentSubmission(response: .init(result: .success(response)))
     }
 
     private func loadAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {

@@ -17,16 +17,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
     private var state: NewStep.ViewControllerState {
         didSet {
-            switch self.state {
-            case .result:
-                self.isPlaceholderShown = false
-                self.showContent()
-            case .loading:
-                self.isPlaceholderShown = false
-                self.newStepView?.startLoading()
-            case .error:
-                self.showPlaceholder(for: .connectionError)
-            }
+            self.updateState()
         }
     }
 
@@ -47,8 +38,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     override func loadView() {
-        let view = NewStepView(frame: UIScreen.main.bounds)
-        self.view = view
+        self.view = NewStepView(frame: UIScreen.main.bounds)
     }
 
     override func viewDidLoad() {
@@ -64,14 +54,13 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             for: .connectionError
         )
 
-        self.newStepView?.startLoading()
-
         self.newStepView?.delegate = self
 
         // Enter group, leave when content did load & in view did appear
         self.sendStepDidPassedGroup.enter()
         self.sendStepDidPassedGroup.enter()
 
+        self.updateState()
         self.sendStepDidPassedGroup.notify(queue: .main) { [weak self] in
             self?.sendInitStepStatusRequests()
         }
@@ -95,6 +84,19 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     // MARK: Private API
+
+    private func updateState() {
+        switch self.state {
+        case .result:
+            self.isPlaceholderShown = false
+            self.showContent()
+        case .loading:
+            self.isPlaceholderShown = false
+            self.newStepView?.startLoading()
+        case .error:
+            self.showPlaceholder(for: .connectionError)
+        }
+    }
 
     private func sendInitStepStatusRequests() {
         defer {

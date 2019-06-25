@@ -90,6 +90,9 @@ final class QuizFeedbackView: UIView {
         self.titleLabel.textColor = state.titleColor
         self.titleContainerView.backgroundColor = state.mainColor
 
+        self.titleLabel.sizeToFit()
+        self.titleLabel.setNeedsLayout()
+
         self.leftView.subviews.forEach { $0.removeFromSuperview() }
 
         let view = state.leftView
