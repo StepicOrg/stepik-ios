@@ -80,6 +80,7 @@ final class BaseQuizView: UIView {
     var isSubmitButtonEnabled = true {
         didSet {
             self.submitButton.isEnabled = self.isSubmitButtonEnabled
+            self.submitButton.alpha = self.isSubmitButtonEnabled ? 1.0 : 0.5
         }
     }
 
