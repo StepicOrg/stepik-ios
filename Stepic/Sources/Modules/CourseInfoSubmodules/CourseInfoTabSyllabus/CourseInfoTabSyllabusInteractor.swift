@@ -515,6 +515,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
                 parameters: parameters
             )
         } else {
+            // TODO: Find constant for error code.
             if err.domain == NSPOSIXErrorDomain && err.code == 100 {
                 AnalyticsReporter.reportEvent(
                     AnalyticsEvents.VideoDownload.failed(reason: .protocolError),
