@@ -342,6 +342,7 @@ WidgetButtonJoin = "Join";
 WidgetButtonInfo = "Info";
 WidgetButtonSyllabus = "Syllabus";
 WidgetButtonLearn = "Learn";
+WidgetButtonBuy = "Buy with %@";
 WidgetAdaptiveLabel = "ADAPTIVE";
 
 CanBeChangedInSettings = "It can be changed in settings.";
@@ -440,6 +441,7 @@ CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learn
 CourseInfoTitle = "About course";
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
+CourseInfoTabReviews = "Reviews";
 CourseInfoTitleAuthor = "by";
 CourseInfoTitleAbout = "About";
 CourseInfoTitleRequirements = "Requirements";
@@ -518,7 +520,7 @@ PlaceholderLoginText = "Sorry, have we met before?\nTry to Sign In";
 PlaceholderLoginButton = "Sign In";
 PlaceholderEmptyNotificationsText = "You don't have any notifications yet";
 PlaceholderEmptyNotificationsButton = "Go to Catalog";
-PlaceholderEmptySearchText = "Some free space to think";
+PlaceholderEmptySearchText = "There are no courses";
 PlaceholderEmptySearchButton = "Go to Catalog";
 LoadStories = "Load stories";
 
@@ -593,6 +595,17 @@ DeadlineModeQuestion = "How much time would you like to spend studying on this c
 CourseMeetsRecommendations = "Meets the recommendations of Stepik";
 SyllabusDeadlinesButton = "Schedule";
 SyllabusDownloadAll = "Download all";
+NoReviews = "Unfortunately, there are no reviews sent for this course";
+
+/* Profile edit */
+ProfileEditTitle = "Profile edit";
+ProfileEditFirstNamePlaceholder = "First name";
+ProfileEditLastNamePlaceholder = "Last name";
+ProfileEditShortBioPlaceholder = "Short bio (255 chars max)";
+ProfileEditDetailsPlaceholder = "About";
+ProfileEditGeneralTitle = "General";
+ProfileEditGeneralDescription = "Your legal names, used for any certificates";
+ProfileEditAboutMeTitle = "About me";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
@@ -646,3 +659,37 @@ SyllabusDownloadAll = "Download all";
 "TopicTimeToCompleteText1" = "%@ minute to complete";
 "TopicTimeToCompleteText234" = "%@ minutes to complete";
 "TopicTimeToComplete567890" = "%@ minutes to complete";
+
+/* New lesson & step */
+NextLessonNavigation = "Next lesson";
+PreviousLessonNavigation = "Previous lesson";
+DiscussionsButtonTitle = "Show discussions (%@)";
+NoDiscussionsButtonTitle = "Leave a comment";
+
+OurSocialNetworks = "Our social networks";
+
+/* Quiz */
+CorrectFeedbackTitle1 = "Correct.";
+CorrectFeedbackTitle2 = "You are right, well done!";
+CorrectFeedbackTitle3 = "All is correct.";
+CorrectFeedbackTitle4 = "Right.";
+CorrectFeedbackTitle5 = "You're right!";
+CorrectFeedbackTitle6 = "Totally right.";
+CorrectFeedbackTitle7 = "Good job.";
+CorrectFeedbackTitle8 = "Great work!";
+CorrectFeedbackTitle9 = "Absolutely right.";
+CorrectFeedbackTitle10 = "Good news for you, correct!";
+CorrectFeedbackTitle11 = "Fabulous answer.";
+CorrectFeedbackTitle12 = "Yes!";
+CorrectFeedbackTitle13 = "Great!";
+CorrectFeedbackTitle14 = "Well done!";
+CorrectFeedbackTitleFreeAnswer = "Any text response will be graded as correct.";
+WrongFeedbackTitleNotLastTry = "Wrong. Let's try again.";
+WrongFeedbackTitleLastTry = "Incorrect.";
+EvaluationFeedbackTitle = "Evaluation...";
+PeerReviewFeedbackTitle = "This is a task with peer review. Tap to open in web to get points.";
+
+StringQuizTitle = "Write an answer in form of a text (string)";
+NumberQuizTitle = "Enter a number";
+MathQuizTitle = "Enter a math formula";
+StringQuizPlaceholder = "Type your answer";

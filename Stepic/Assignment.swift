@@ -11,7 +11,7 @@ import CoreData
 import SwiftyJSON
 
 @objc
-class Assignment: NSManagedObject, JSONSerializable {
+final class Assignment: NSManagedObject, IDFetchable {
 
     typealias IdType = Int
 

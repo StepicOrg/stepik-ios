@@ -58,6 +58,10 @@ extension Course {
     @NSManaged var managedCertificateEntity: Certificate?
     @NSManaged var managedReviewSummary: CourseReviewSummary?
 
+    @NSManaged var managedIsCertificateAutoIssued: NSNumber?
+    @NSManaged var managedIsPaid: NSNumber?
+    @NSManaged var managedDisplayPrice: String?
+
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
     }
@@ -198,6 +202,33 @@ extension Course {
         }
         get {
             return managedPublic?.boolValue ?? false
+        }
+    }
+
+    var isCertificatesAutoIssued: Bool {
+        set {
+            self.managedIsCertificateAutoIssued = newValue as NSNumber?
+        }
+        get {
+            return managedIsCertificateAutoIssued?.boolValue ?? false
+        }
+    }
+
+    var isPaid: Bool {
+        set {
+            self.managedIsPaid = newValue as NSNumber?
+        }
+        get {
+            return managedIsPaid?.boolValue ?? false
+        }
+    }
+
+    var displayPrice: String? {
+        set {
+            self.managedDisplayPrice = newValue
+        }
+        get {
+            return managedDisplayPrice
         }
     }
 

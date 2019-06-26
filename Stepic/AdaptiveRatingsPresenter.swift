@@ -77,6 +77,10 @@ class AdaptiveRatingsPresenter {
         }
     }
 
+    func sendOpenedAnalytics() {
+        AmplitudeAnalyticsEvents.AdaptiveRating.opened(course: ratingManager.courseId).send()
+    }
+
     fileprivate func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
         return Promise { seal in
             let currentUser = AuthInfo.shared.userId

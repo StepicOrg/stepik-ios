@@ -307,6 +307,9 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+        static var editOpened = AnalyticsEvent(name: "Profile edit screen opened")
+
+        static var editSaved = AnalyticsEvent(name: "Profile edit saved")
     }
 
     struct Certificates {
@@ -387,6 +390,18 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    struct CourseReviews {
+        static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course reviews screen opened",
+                parameters: [
+                    "course": courseID,
+                    "title": courseTitle
+                ]
+            )
+        }
+    }
+
     struct Discussions {
         static var opened: AnalyticsEvent = AnalyticsEvent(name: "Discussions screen opened")
     }
@@ -432,6 +447,42 @@ struct AmplitudeAnalyticsEvents {
                     "id": id,
                     "type": type.rawValue
                 ]
+            )
+        }
+    }
+
+    struct PersonalDeadlines {
+        static func created(weeklyLoadHours: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Personal deadline created",
+                parameters: [
+                    "hours": weeklyLoadHours
+                ]
+            )
+        }
+
+        static var buttonClicked = AnalyticsEvent(name: "Personal deadline schedule button pressed")
+    }
+
+    struct Video {
+        static var continuedInBackground = AnalyticsEvent(name: "Video played in background")
+
+        static func changedSpeed(source: String, target: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Video rate changed",
+                parameters: [
+                    "source": source,
+                    "target": target
+                ]
+            )
+        }
+    }
+
+    struct AdaptiveRating {
+        static func opened(course: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Adaptive rating opened",
+                parameters: ["course": course]
             )
         }
     }

@@ -316,7 +316,7 @@
         <!--Downloads-->
         <scene sceneID="Laj-7g-BZD">
             <objects>
-                <navigationController storyboardIdentifier="DownloadsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DownloadsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Downloads" image="tab-downloads" selectedImage="tab-downloads" id="Wmp-3r-xny"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">
@@ -332,10 +332,10 @@
             </objects>
             <point key="canvasLocation" x="1255.2" y="2162.9685157421291"/>
         </scene>
-        <!--Styled Navigation View Controller-->
+        <!--Styled Navigation Controller-->
         <scene sceneID="dHl-Iz-Z0Q">
             <objects>
-                <navigationController storyboardIdentifier="ProfileNavigation" id="usg-zh-puE" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNavigation" id="usg-zh-puE" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Hg-Ye-byR">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -348,10 +348,10 @@
             </objects>
             <point key="canvasLocation" x="901" y="3575"/>
         </scene>
-        <!--Styled Navigation View Controller-->
+        <!--Styled Navigation Controller-->
         <scene sceneID="tUu-h6-Dfw">
             <objects>
-                <navigationController storyboardIdentifier="HomeNavigation" id="l1A-DI-noi" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigation" id="l1A-DI-noi" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aYP-ew-qV1">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -390,10 +390,10 @@
             </objects>
             <point key="canvasLocation" x="1443" y="3314"/>
         </scene>
-        <!--Styled Navigation View Controller-->
+        <!--Styled Navigation Controller-->
         <scene sceneID="r2H-fY-2yw">
             <objects>
-                <navigationController storyboardIdentifier="NotificationsNavigation" id="v16-1y-UuB" customClass="StyledNavigationViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NotificationsNavigation" id="v16-1y-UuB" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UK7-tx-bfD">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

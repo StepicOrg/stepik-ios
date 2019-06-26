@@ -18,6 +18,7 @@ enum DeepLinkRoute {
     case catalog
     case home
     case course(courseID: Int)
+    case coursePromo(courseID: Int)
 
     init?(path: String) {
         if let match = Pattern.catalog.regex.firstMatch(in: path),
@@ -31,6 +32,14 @@ enum DeepLinkRoute {
             let courseID = Int(courseIDString),
             match.matchedString == path {
             self = .course(courseID: courseID)
+            return
+        }
+
+        if let match = Pattern.coursePromo.regex.firstMatch(in: path),
+           let courseIDString = match.captures[0],
+           let courseID = Int(courseIDString),
+           match.matchedString == path {
+            self = .coursePromo(courseID: courseID)
             return
         }
 
@@ -76,17 +85,44 @@ enum DeepLinkRoute {
         return nil
     }
 
-    enum Pattern: String {
-        case catalog = "https:\\/\\/stepik.org\\/catalog\\/?"
-        case course = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?"
-        case profile = "https:\\/\\/stepik.org\\/users\\/(\\d+)\\/?"
-        case notifications = "https:\\/\\/stepik.org\\/notifications\\/?"
-        case syllabus = "https:\\/\\/stepik.org\\/(?:course\\/|course\\/[a-zа-я-]+)(\\d+)\\/syllabus\\/?[a-zа-я0-9=?&]*"
-        case lesson = "https:\\/\\/stepik.org\\/(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/step\\/(\\d+)(?:\\?unit=(\\d+))?\\/?"
-        case discussions = "https:\\/\\/stepik.org\\/(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/step\\/(\\d+)(?:\\?discussion=(\\d+))(?:\\&unit=(\\d+))?\\/?"
+    enum Pattern {
+        case catalog
+        case course
+        case coursePromo
+        case profile
+        case notifications
+        case syllabus
+        case lesson
+        case discussions
 
         var regex: Regex {
-            return try! Regex(string: self.rawValue, options: [.ignoreCase])
+            return try! Regex(string: self.pattern, options: [.ignoreCase])
+        }
+
+        private var pattern: String {
+            let stepik = "https:\\/\\/stepik.org\\/"
+            let course = "(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?"
+            let lesson = "(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/?"
+            let queryComponents = "(?:(?=[?])[a-zа-я0-9=?&_-]+)?"
+
+            switch self {
+            case .catalog:
+                return "\(stepik)catalog\\/?\(queryComponents)"
+            case .course:
+                return "\(stepik)\(course)\(queryComponents)"
+            case .coursePromo:
+                return "\(stepik)\(course)(?:promo\\/?)\(queryComponents)"
+            case .profile:
+                return "\(stepik)users\\/(\\d+)\\/?\(queryComponents)"
+            case .notifications:
+                return "\(stepik)notifications\\/?\(queryComponents)"
+            case .syllabus:
+                return "\(stepik)\(course)syllabus\\/?\(queryComponents)"
+            case .lesson:
+                return "\(stepik)\(lesson)step\\/(\\d+)(?:\\?unit=(\\d+))?\\/?"
+            case .discussions:
+                return "\(stepik)\(lesson)step\\/(\\d+)(?:\\?discussion=(\\d+))(?:\\&unit=(\\d+))?\\/?\(queryComponents)"
+            }
         }
     }
 }

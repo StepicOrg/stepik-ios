@@ -17,6 +17,8 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
     private var isDragging: Bool = false
     private var prevStatusBarStyle: UIStatusBarStyle?
 
+    private weak var currentStoryController: UIViewController?
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
@@ -57,8 +59,11 @@ class OpenedStoriesPageViewController: UIPageViewController, OpenedStoriesViewPr
         dismiss(animated: true, completion: nil)
     }
 
-    func set(module: UIViewController, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
-        addChildViewController(module)
+    func set(module: UIViewController, direction: UIPageViewController.NavigationDirection, animated: Bool) {
+        currentStoryController?.removeFromParent()
+        currentStoryController = module
+
+        addChild(module)
         setViewControllers([module], direction: direction, animated: animated, completion: nil)
     }
 }

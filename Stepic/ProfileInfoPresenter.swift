@@ -30,6 +30,8 @@ protocol ProfileInfoView: class {
 class ProfileInfoPresenter {
     weak var view: ProfileInfoView?
 
+    private var lastAvatarURL: URL?
+
     init(view: ProfileInfoView) {
         self.view = view
 
@@ -39,6 +41,12 @@ class ProfileInfoPresenter {
     func update(with user: User) {
         let avatarUrl = URL(string: user.avatarURL)
         let profileData = ProfileViewData(firstName: user.firstName, lastName: user.lastName, avatarUrl: avatarUrl)
+        view?.set(profile: profileData)
+        lastAvatarURL = avatarUrl
+    }
+
+    func update(with profile: Profile) {
+        let profileData = ProfileViewData(firstName: profile.firstName, lastName: profile.lastName, avatarUrl: lastAvatarURL)
         view?.set(profile: profileData)
     }
 

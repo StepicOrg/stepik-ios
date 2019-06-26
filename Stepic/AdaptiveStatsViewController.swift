@@ -102,7 +102,7 @@ class AdaptiveStatsViewController: UIViewController {
             return
         }
 
-        let size = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         if headerView.frame.size.height != size.height {
             headerView.frame.size.height = size.height
             tableView.tableHeaderView = headerView
@@ -138,7 +138,7 @@ class AdaptiveStatsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 112
 
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)

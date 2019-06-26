@@ -84,7 +84,7 @@ extension StepikTableView {
             placeholderView.setNeedsLayout()
             placeholderView.layoutIfNeeded()
         }
-        bringSubview(toFront: placeholderView)
+        bringSubviewToFront(placeholderView)
     }
 
     override func reloadData() {

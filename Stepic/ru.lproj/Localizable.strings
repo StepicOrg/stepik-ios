@@ -344,6 +344,7 @@ WidgetButtonInfo = "Инфо";
 WidgetButtonSyllabus = "План";
 WidgetButtonLearn = "Учиться";
 WidgetAdaptiveLabel = "АДАПТИВНЫЙ";
+WidgetButtonBuy = "Купить за %@";
 
 EnterSQLQuery = "Введите SQL запрос:";
 
@@ -442,6 +443,7 @@ CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сд�
 CourseInfoTitle = "О курсе";
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
+CourseInfoTabReviews = "Отзывы";
 CourseInfoTitleAuthor = "от";
 CourseInfoTitleAbout = "О курсе";
 CourseInfoTitleRequirements = "Требования";
@@ -519,7 +521,7 @@ PlaceholderLoginText = "Мы встречались раньше?\nВойдит�
 PlaceholderLoginButton = "Войти";
 PlaceholderEmptyNotificationsText = "Нет уведомлений";
 PlaceholderEmptyNotificationsButton = "Перейти в каталог";
-PlaceholderEmptySearchText = "Немного свободного места чтобы подумать";
+PlaceholderEmptySearchText = "Ничего не найдено";
 PlaceholderEmptySearchButton = "Перейти в каталог";
 LoadStories = "Загрузить истории";
 
@@ -594,6 +596,17 @@ DeadlineModeQuestion = "Сколько времени вы готовы трат
 CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
 SyllabusDeadlinesButton = "Расписание";
 SyllabusDownloadAll = "Загрузить всё";
+NoReviews = "К сожалению, ни одного отзыва об этом курсе пока нет";
+
+/* Profile edit */
+ProfileEditTitle = "Редактирование";
+ProfileEditFirstNamePlaceholder = "Имя";
+ProfileEditLastNamePlaceholder = "Фамилия";
+ProfileEditShortBioPlaceholder = "Краткая биография (до 255 символов)";
+ProfileEditDetailsPlaceholder = "Обо мне";
+ProfileEditGeneralTitle = "Общие данные";
+ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах";
+ProfileEditAboutMeTitle = "О себе";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
@@ -647,3 +660,37 @@ SyllabusDownloadAll = "Загрузить всё";
 "TopicTimeToCompleteText1" = "%@ минута на выполнение";
 "TopicTimeToCompleteText234" = "%@ минуты на выполнение";
 "TopicTimeToComplete567890" = "%@ минут на выполнение";
+
+/* New lesson & step */
+NextLessonNavigation = "Следующий урок";
+PreviousLessonNavigation = "Предыдущий урок";
+DiscussionsButtonTitle = "Показать комментарии (%@)";
+NoDiscussionsButtonTitle = "Напишите комментарий";
+
+OurSocialNetworks = "Наши аккаунты в соцсетях";
+
+/* Quiz */
+CorrectFeedbackTitle1 = "Правильно.";
+CorrectFeedbackTitle2 = "Правильно, молодец!";
+CorrectFeedbackTitle3 = "Всё правильно.";
+CorrectFeedbackTitle4 = "Верно.";
+CorrectFeedbackTitle5 = "Верно. Так держать!";
+CorrectFeedbackTitle6 = "Здорово, всё верно.";
+CorrectFeedbackTitle7 = "Хорошая работа.";
+CorrectFeedbackTitle8 = "Отличное решение!";
+CorrectFeedbackTitle9 = "Абсолютно точно.";
+CorrectFeedbackTitle10 = "Хорошие новости, верно!";
+CorrectFeedbackTitle11 = "Прекрасный ответ.";
+CorrectFeedbackTitle12 = "Так точно!";
+CorrectFeedbackTitle13 = "Отлично!";
+CorrectFeedbackTitle14 = "Всё получилось!";
+CorrectFeedbackTitleFreeAnswer = "Любой ответ будет оценен как правильный.";
+WrongFeedbackTitleNotLastTry = "Пока неправильно, попробуйте еще раз!";
+WrongFeedbackTitleLastTry = "Неверно!";
+EvaluationFeedbackTitle = "Проверка...";
+PeerReviewFeedbackTitle = "Это задание с рецензией. Нажмите, чтобы закончить задание в веб-версии и получить баллы.";
+
+StringQuizTitle = "Напишите текст (строку)";
+NumberQuizTitle = "Введите численный ответ";
+MathQuizTitle = "Введите математическую формулу";
+StringQuizPlaceholder = "Введите ответ";

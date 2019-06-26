@@ -31,10 +31,7 @@ class QuizPresenter {
     }
 
     var stepUrl: String {
-        guard let lesson = step.lesson else {
-            return ""
-        }
-        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.slug)/step/\(step.position)?from_mobile_app=true"
+        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonId)/step/\(step.position)?from_mobile_app=true"
     }
 
     init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
@@ -103,11 +100,11 @@ class QuizPresenter {
                         self?.step.progress?.isPassed = true
                         CoreDataHelper.instance.save()
                     }
+
+                    delegate?.submissionDidCorrect()
                 } else {
                     view?.showPeerReviewWarning()
                 }
-
-                delegate?.submissionDidCorrect()
                 break
 
             case "wrong":
@@ -412,6 +409,8 @@ class QuizPresenter {
         guard let user = AuthInfo.shared.user else {
             return
         }
+
+
 
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
             [weak self]

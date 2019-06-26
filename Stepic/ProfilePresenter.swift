@@ -18,7 +18,8 @@ protocol ProfileView: class {
     func getView(for block: ProfileMenuBlock) -> Any?
     func setMenu(blocks: [ProfileMenuBlock])
 
-    func manageBarItemControls(settingsIsHidden: Bool, shareId: Int?)
+    func manageBarItemControls(settingsIsHidden: Bool, profileEditIsAvailable: Bool, shareId: Int?)
+    func attachProfile(_ profile: Profile)
 }
 
 class ProfilePresenter {
@@ -60,8 +61,13 @@ class ProfilePresenter {
 
     private var userActivitiesAPI: UserActivitiesAPI
     private var usersAPI: UsersAPI
+    private var profilesAPI: ProfilesAPI
+
+    private var dataBackUpdateService: DataBackUpdateServiceProtocol
 
     private var userSeed: UserSeed
+
+    private var didProfileAttach = false
 
     private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
                                                            .notificationsSwitch(isOn: false),
@@ -70,11 +76,15 @@ class ProfilePresenter {
                                                            .description]
     private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .achievements, .description]
 
-    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI) {
+    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, profilesAPI: ProfilesAPI, dataBackUpdateService: DataBackUpdateServiceProtocol) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
         self.userSeed = userSeed
+        self.profilesAPI = profilesAPI
+
+        self.dataBackUpdateService = dataBackUpdateService
+        self.dataBackUpdateService.delegate = self
     }
 
     private func initChildModules(user: User, activity: UserActivity) {
@@ -161,7 +171,7 @@ class ProfilePresenter {
                 userSeed = UserSeed.`self`(id: userId)
                 return refresh(shouldReload: true)
             } else {
-                view?.manageBarItemControls(settingsIsHidden: true, shareId: nil)
+                view?.manageBarItemControls(settingsIsHidden: true, profileEditIsAvailable: false, shareId: nil)
                 view?.set(state: .anonymous)
                 return
             }
@@ -177,7 +187,7 @@ class ProfilePresenter {
             return refresh()
         }
 
-        view?.manageBarItemControls(settingsIsHidden: !isMe, shareId: userId)
+        view?.manageBarItemControls(settingsIsHidden: !isMe, profileEditIsAvailable: didProfileAttach, shareId: userId)
 
         guard shouldReload else {
             return
@@ -185,15 +195,19 @@ class ProfilePresenter {
         view?.set(state: .loading)
 
         var user: User?
-        loadProfile(userId: userId).then { [weak self] loadedUser -> Promise<UserActivity> in
+        loadProfile(userId: userId).then { [weak self] loadedUser -> Promise<(UserActivity, Profile?)> in
             user = loadedUser
 
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
             }
 
-            return strongSelf.userActivitiesAPI.retrieve(user: userId)
-        }.done { [weak self] activity in
+            // return strongSelf.userActivitiesAPI.retrieve(user: userId)
+            return when(
+                fulfilled: strongSelf.userActivitiesAPI.retrieve(user: userId),
+                isMe ? strongSelf.profilesAPI.retrieve(id: loadedUser.profile).map { $0.first } : Promise.value(nil)
+            )
+        }.done { [weak self] activity, profile in
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
             }
@@ -205,6 +219,12 @@ class ProfilePresenter {
                 strongSelf.view?.set(state: .normal)
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
+                strongSelf.view?.manageBarItemControls(settingsIsHidden: !isMe, profileEditIsAvailable: profile != nil, shareId: userId)
+
+                if let profile = profile {
+                    strongSelf.didProfileAttach = true
+                    strongSelf.view?.attachProfile(profile)
+                }
             }
         }.catch { error in
             print("profile presenter: error while streaks refreshing = \(error)")
@@ -240,5 +260,14 @@ class ProfilePresenter {
 extension ProfilePresenter: ProfileAchievementsPresenterDelegate {
     func achievementInfoShouldPresent(viewData: AchievementViewData) {
         view?.showAchievementInfo(viewData: viewData, canShare: userSeed.isMe)
+    }
+}
+
+extension ProfilePresenter: DataBackUpdateServiceDelegate {
+    func dataBackUpdateService(_ dataBackUpdateService: DataBackUpdateService, didReport refreshedTarget: DataBackUpdateTarget) {
+        if case .profile(let profile) = refreshedTarget {
+            self.headerInfoPresenter?.update(with: profile)
+            self.descriptionPresenter?.update(with: profile)
+        }
     }
 }

@@ -13,19 +13,13 @@ import SnapKit
 final class LessonLegacyAssembly: Assembly {
     private let initObjects: LessonInitObjects?
     private let initIDs: LessonInitIds?
-    private let navigationRules: LessonNavigationRules
-    private let navigationDelegate: SectionNavigationDelegate
 
     init(
         initObjects: LessonInitObjects?,
-        initIDs: LessonInitIds?,
-        navigationRules: LessonNavigationRules,
-        navigationDelegate: SectionNavigationDelegate
+        initIDs: LessonInitIds?
     ) {
         self.initObjects = initObjects
         self.initIDs = initIDs
-        self.navigationRules = navigationRules
-        self.navigationDelegate = navigationDelegate
     }
 
     func makeModule() -> UIViewController {
@@ -37,9 +31,6 @@ final class LessonLegacyAssembly: Assembly {
         lessonVC.initObjects = self.initObjects
         lessonVC.initIds = self.initIDs
 
-        lessonVC.navigationRules = self.navigationRules
-        lessonVC.sectionNavigationDelegate = self.navigationDelegate
-
         return lessonVC
     }
 }
@@ -50,10 +41,6 @@ class LessonViewController: PagerController, ShareableController, LessonView {
 
     var parentShareBlock: ((UIActivityViewController) -> Void)?
 
-    weak var sectionNavigationDelegate: SectionNavigationDelegate?
-
-    var navigationRules : LessonNavigationRules?
-
     fileprivate var presenter: LessonPresenter?
 
     lazy var activityView: UIView = self.initActivityView()
@@ -63,7 +50,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
     fileprivate let warningViewTitle = NSLocalizedString("ConnectionErrorText", comment: "")
 
     fileprivate func initWarningView() -> UIView {
-        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.current.isPad ? UIViewContentMode.bottom : UIViewContentMode.scaleAspectFit)
+        let v = WarningView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), delegate: self, text: warningViewTitle, image: Images.noWifiImage.size250x250, width: UIScreen.main.bounds.width - 16, contentMode: DeviceInfo.current.isPad ? UIView.ContentMode.bottom : UIView.ContentMode.scaleAspectFit)
         self.view.insertSubview(v, aboveSubview: self.view)
         v.snp.makeConstraints { make -> Void in
             make.top.equalTo(self.view).offset(50)
@@ -75,7 +62,7 @@ class LessonViewController: PagerController, ShareableController, LessonView {
     fileprivate func initActivityView() -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
-        ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        ai.style = UIActivityIndicatorView.Style.whiteLarge
         ai.color = UIColor.mainDark
         v.backgroundColor = UIColor.white
         v.addSubview(ai)
@@ -145,11 +132,6 @@ class LessonViewController: PagerController, ShareableController, LessonView {
 
         presenter = LessonPresenter(objects: initObjects, ids: initIds, stepsAPI: ApiDataDownloader.steps, lessonsAPI: ApiDataDownloader.lessons)
         presenter?.view = self
-        presenter?.sectionNavigationDelegate = sectionNavigationDelegate
-        if let rules = navigationRules {
-            presenter?.shouldNavigateToPrev = rules.prev
-            presenter?.shouldNavigateToNext = rules.next
-        }
         presenter?.refreshSteps()
     }
 
@@ -161,18 +143,6 @@ class LessonViewController: PagerController, ShareableController, LessonView {
         centerCurrentTab = true
         indicatorColor = UIColor.mainDark
         tabsViewBackgroundColor = UIColor.mainLight
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.delegate = self
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if navigationController?.delegate === self {
-            navigationController?.delegate = nil
-        }
     }
 
     func setRefreshing(refreshing: Bool) {
@@ -271,14 +241,8 @@ extension LessonViewController: WarningViewDelegate {
     }
 }
 
-extension LessonViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        guard let navigation = self.navigationController as? StyledNavigationViewController else {
-            return
-        }
-        if navigation.topViewController != viewController {
-            print("wow")
-        }
-        navigation.animateShadowChange(for: self)
+extension LessonViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return .init(shadowViewAlpha: 0.0)
     }
 }

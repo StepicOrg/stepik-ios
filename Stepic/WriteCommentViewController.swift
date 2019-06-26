@@ -49,14 +49,14 @@ class WriteCommentViewController: UIViewController {
     var okItem: UIBarButtonItem?
 
     func setupItems() {
-        editingItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItemStyle.done, target: self, action: #selector(WriteCommentViewController.sendPressed))
+        editingItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItem.Style.done, target: self, action: #selector(WriteCommentViewController.sendPressed))
 
         let v = UIActivityIndicatorView()
         v.color = UIColor.mainDark
         v.startAnimating()
         sendingItem = UIBarButtonItem(customView: v)
 
-        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItemStyle.done, target: self, action: #selector(WriteCommentViewController.okPressed))
+        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItem.Style.done, target: self, action: #selector(WriteCommentViewController.okPressed))
     }
 
     @objc func okPressed() {

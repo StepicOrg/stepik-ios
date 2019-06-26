@@ -58,7 +58,7 @@ class CongratulationViewController: UIViewController {
         }
 
         let activityVC = UIActivityViewController(activityItems: [congratulationType.shareText, url], applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivityType.airDrop]
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
         activityVC.popoverPresentationController?.sourceView = shareButton
         present(activityVC, animated: true)
     }

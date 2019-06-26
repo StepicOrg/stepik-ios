@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 enum LessonViewState {
     case displayingSteps, placeholder, refreshing
@@ -28,6 +29,8 @@ class LessonPresenter {
     static let stepUpdatedNotification = "StepUpdatedNotification"
     fileprivate var tabViewsForStepId = [Int: UIView]()
 
+    private var controllerForIndex: [Int: UIViewController] = [:]
+
     fileprivate var lesson: Lesson?
     fileprivate var startStepId: Int = 0
     fileprivate var stepId: Int?
@@ -36,9 +39,6 @@ class LessonPresenter {
 
     var stepsAPI: StepsAPI
     var lessonsAPI: LessonsAPI
-
-    var shouldNavigateToPrev: Bool = false
-    var shouldNavigateToNext: Bool = false
 
     fileprivate var didInitSteps: Bool = false
     fileprivate var didSelectTab: Bool = false
@@ -54,6 +54,24 @@ class LessonPresenter {
         )
         return service
     }()
+
+    private lazy var unitNavigationService: UnitNavigationServiceProtocol = {
+        let service = UnitNavigationService(
+            sectionsPersistenceService: SectionsPersistenceService(),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            unitsPersistenceService: UnitsPersistenceService(),
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            coursesPersistenceService: CoursesPersistenceService(),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI())
+        )
+        return service
+    }()
+
+    private var didNextUnitLoad = false
+    private var nextUnit: Unit?
+
+    private var didPreviousUnitLoad = false
+    private var previousUnit: Unit?
 
     init(objects: LessonInitObjects?, ids: LessonInitIds?, stepsAPI: StepsAPI, lessonsAPI: LessonsAPI) {
         if let objects = objects {
@@ -76,9 +94,60 @@ class LessonPresenter {
             name: .stepDone,
             object: nil
         )
+
+        if let unitID = self.unitId {
+            DispatchQueue.global().async { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.unitNavigationService.findUnitForNavigation(
+                    from: unitID,
+                    direction: .next
+                ).done { unit in
+                    print("next unit loaded, unit = \(unit?.id)")
+                    guard let unit = unit else {
+                        return
+                    }
+
+                    if let stepsCount = strongSelf.lesson?.stepsArray.count {
+                        (strongSelf.controllerForIndex[stepsCount - 1] as? VideoStepViewController)?.nextLessonHandler = { [weak self] in
+                            self?.navigateToNextOrPreviousUnit(direction: .next)
+                        }
+                        (strongSelf.controllerForIndex[stepsCount - 1] as? WebStepViewController)?.nextLessonHandler = { [weak self] in
+                            self?.navigateToNextOrPreviousUnit(direction: .next)
+                        }
+                    }
+
+                    strongSelf.didNextUnitLoad = true
+                    strongSelf.nextUnit = unit
+                }.cauterize()
+
+                strongSelf.unitNavigationService.findUnitForNavigation(
+                    from: unitID,
+                    direction: .previous
+                ).done { unit in
+                    print("previous unit loaded, unit = \(unit?.id)")
+                    guard let unit = unit else {
+                        return
+                    }
+
+                    (strongSelf.controllerForIndex[0] as? VideoStepViewController)?.prevLessonHandler = { [weak self] in
+                        self?.navigateToNextOrPreviousUnit(direction: .previous)
+                    }
+                    (strongSelf.controllerForIndex[0] as? WebStepViewController)?.prevLessonHandler = { [weak self] in
+                        self?.navigateToNextOrPreviousUnit(direction: .previous)
+                    }
+
+                    strongSelf.didPreviousUnitLoad = true
+                    strongSelf.previousUnit = unit
+                }.cauterize()
+            }
+        }
     }
 
     deinit {
+        print("deinit LessonPresenter")
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -163,14 +232,6 @@ class LessonPresenter {
         guard lesson != nil else {
             loadLesson()
             return
-        }
-
-        if let section = lesson?.unit?.section,
-            let unitId = unitId {
-            if let index = section.unitsArray.index(of: unitId) {
-                shouldNavigateToPrev = shouldNavigateToPrev || (index != 0)
-                shouldNavigateToNext = shouldNavigateToNext || (index < section.unitsArray.count - 1)
-            }
         }
 
         view?.updateTitle(title: lesson?.title ?? NSLocalizedString("Lesson", comment: ""))
@@ -298,26 +359,25 @@ class LessonPresenter {
                 self?.canSendViews ?? false
             }
 
-            if context == .unit {
-                if index == 0 && shouldNavigateToPrev {
-                    stepController.prevLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestPreviousUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
+            if context == .unit && index == 0 && didPreviousUnitLoad {
+                stepController.prevLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
                     }
-                }
-
-                if index == lesson.steps.count - 1 && shouldNavigateToNext {
-                    stepController.nextLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestNextUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
-                    }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
                 }
             }
 
+            if context == .unit && index == lesson.stepsArray.count - 1 && didNextUnitLoad {
+                stepController.nextLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                }
+            }
+
+            controllerForIndex[index] = stepController
             return stepController
         } else {
             let stepController = ControllerHelper.instantiateViewController(identifier: "WebStepViewController") as! WebStepViewController
@@ -345,28 +405,81 @@ class LessonPresenter {
                 self?.canSendViews ?? false
             }
             stepController.lessonSlug = lesson.slug
-            if context == .unit {
-                if index == 0 && shouldNavigateToPrev {
-                    stepController.prevLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestPreviousUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
-                    }
-                }
 
-                if index == lesson.steps.count - 1 && shouldNavigateToNext {
-                    stepController.nextLessonHandler = {
-                        [weak self] in
-                        if let unitID = self?.unitId {
-                            self?.sectionNavigationDelegate?.didRequestNextUnitPresentationForLessonInUnit(unitID: unitID)
-                        }
+            if context == .unit && index == 0 && didPreviousUnitLoad {
+                stepController.prevLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
                     }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .previous)
                 }
             }
 
+            if context == .unit && index == lesson.stepsArray.count - 1 && didNextUnitLoad {
+                stepController.nextLessonHandler = { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    strongSelf.navigateToNextOrPreviousUnit(direction: .next)
+                }
+            }
+
+            controllerForIndex[index] = stepController
             return stepController
         }
+    }
+
+    private func navigateToNextOrPreviousUnit(direction: UnitNavigationDirection) {
+        guard let targetUnit = direction == .next ? self.nextUnit : self.previousUnit else {
+            return
+        }
+
+        SVProgressHUD.show()
+        let cachedLesson = Lesson.fetch([targetUnit.lessonId]).first
+        if let lesson = cachedLesson {
+            self.replaceByNewLesson(
+                lesson: lesson,
+                unit: targetUnit,
+                stepArrayFunction: { direction == .next ? $0.first : $0.last }
+            )
+        } else {
+            self.lessonsAPI.retrieve(ids: [targetUnit.lessonId]).done { lessons in
+                guard let lesson = lessons.first else {
+                    SVProgressHUD.showError(withStatus: nil)
+                    return
+                }
+
+                self.replaceByNewLesson(
+                    lesson: lesson,
+                    unit: targetUnit,
+                    stepArrayFunction: { direction == .next ? $0.first : $0.last }
+                )
+                SVProgressHUD.dismiss()
+            }.catch { _ in
+                print("error while fetching lesson for next/prev unit")
+                SVProgressHUD.showError(withStatus: nil)
+            }
+        }
+    }
+
+    private func replaceByNewLesson(lesson: Lesson, unit: Unit, stepArrayFunction: ([Int]) -> Int?) {
+        guard let viewControllers = self.view?.nController?.viewControllers,
+              let presentingViewController = self.view?.nController?.viewControllers[safe: viewControllers.count - 2] else {
+            return
+        }
+
+        guard let stepID = stepArrayFunction(lesson.stepsArray) else {
+            SVProgressHUD.showError(withStatus: nil)
+            return
+        }
+
+        let newLessonController = LessonLegacyAssembly(
+            initObjects: nil,
+            initIDs: (stepId: stepID, unitId: unit.id)
+        ).makeModule()
+
+        SVProgressHUD.dismiss()
+        presentingViewController.replace(by: newLessonController)
     }
 
     func tabView(index: Int) -> UIView {

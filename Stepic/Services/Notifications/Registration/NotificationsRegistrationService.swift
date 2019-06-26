@@ -211,7 +211,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
         self.presenter?.onPositiveCallback = {
             self.analytics?.reportPreferencesAlertInteractionResult(.yes)
 
-            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
 

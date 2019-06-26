@@ -13,7 +13,7 @@ import SnapKit
 extension SegmentedProgressView {
     struct Appearance {
         var spacing: CGFloat = 5
-        var barColor = UIColor.white.withAlphaComponent(0.3)
+        var barColor = UIColor.white.withAlphaComponent(0.5)
         var progressColor = UIColor.white.withAlphaComponent(1)
     }
 }

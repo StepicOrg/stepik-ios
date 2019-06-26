@@ -15,6 +15,6 @@ final class ActiveSplitTestsContainer {
     )
 
     static func setActiveTestsGroups() {
-        self.splitTestingService.fetchSplitTest(RetentionLocalNotificationsSplitTest.self).setSplitTestGroup()
+        // There are no A/B tests now
     }
 }

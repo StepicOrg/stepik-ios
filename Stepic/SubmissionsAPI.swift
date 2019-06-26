@@ -70,6 +70,36 @@ class SubmissionsAPI: APIEndpoint {
         return retrieve(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, headers: headers, success: success, error: errorHandler)
     }
 
+    func retrieve(stepName: String, submissionId: Int) -> Promise<Submission> {
+        return Promise { seal in
+            self.retrieve(stepName: stepName, submissionId: submissionId, success: { submission in
+                seal.fulfill(submission)
+            }, error: { error in
+                seal.reject(NSError(domain: error, code: -1, userInfo: nil))
+            })
+        }
+    }
+
+    func retrieve(stepName: String, attemptID: Int) -> Promise<([Submission], Meta)> {
+        return Promise { seal in
+            self.retrieve(stepName: stepName, attemptId: attemptID, success: { submissions, meta in
+                seal.fulfill((submissions, meta))
+            }, error: { error in
+                seal.reject(NSError(domain: error, code: -1, userInfo: nil))
+            })
+        }
+    }
+
+    func retrieve(stepName: String, stepID: Int, page: Int = 1) -> Promise<([Submission], Meta)> {
+        return Promise { seal in
+            self.retrieve(stepName: stepName, stepId: stepID, page: page, success: { submissions, meta in
+                seal.fulfill((submissions, meta))
+            }, error: { error in
+                seal.reject(NSError(domain: error, code: -1, userInfo: nil))
+            })
+        }
+    }
+
     @discardableResult func retrieve(stepName: String, submissionId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
         let params: Parameters = [:]

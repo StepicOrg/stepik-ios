@@ -32,7 +32,7 @@ final class StreaksAlertPresentationManager {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(StreaksAlertPresentationManager.becameActive),
-            name: .UIApplicationWillEnterForeground,
+            name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
     }
@@ -167,7 +167,7 @@ final class StreaksAlertPresentationManager {
 
         alertPresenter.onPositiveCallback = { [weak self] in
             analytics.reportPreferencesAlertInteractionResult(.yes)
-            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
 

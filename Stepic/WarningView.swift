@@ -23,7 +23,7 @@ class WarningView: NibInitializableView {
     }
 
     fileprivate func localize() {
-        tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: UIControlState())
+        tryAgainButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: UIControl.State())
     }
 
     fileprivate func getAttributedDescription(_ text: String) -> NSAttributedString {
@@ -33,14 +33,14 @@ class WarningView: NibInitializableView {
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
 
-        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0),
-            NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-            NSAttributedStringKey.paragraphStyle: paragraph]
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0),
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+            NSAttributedString.Key.paragraphStyle: paragraph]
 
         return NSAttributedString(string: text, attributes: attributes)
     }
 
-    convenience init(frame: CGRect, delegate: WarningViewDelegate, text: String, image: UIImage, width: CGFloat, fontSize: CGFloat = 14, contentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit) {
+    convenience init(frame: CGRect, delegate: WarningViewDelegate, text: String, image: UIImage, width: CGFloat, fontSize: CGFloat = 14, contentMode: UIView.ContentMode = UIView.ContentMode.scaleAspectFit) {
         self.init(frame: frame)
         localize()
         self.delegate = delegate

@@ -102,6 +102,6 @@ extension ControllerWithStepikPlaceholder where Self: UIViewController {
             placeholderContainer.placeholderView.setNeedsLayout()
             placeholderContainer.placeholderView.layoutIfNeeded()
         }
-        view.bringSubview(toFront: placeholderContainer.placeholderView)
+        view.bringSubviewToFront(placeholderContainer.placeholderView)
     }
 }

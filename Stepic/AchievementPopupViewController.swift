@@ -35,7 +35,7 @@ final class AchievementPopupViewController: UIViewController {
         ).send()
 
         let activityVC = UIActivityViewController(activityItems: [String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(data.title)")], applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivityType.airDrop]
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
         activityVC.popoverPresentationController?.sourceView = shareButton
         present(activityVC, animated: true)
     }

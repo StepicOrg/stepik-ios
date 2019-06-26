@@ -14,6 +14,8 @@ extension Profile {
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedFirstName: String?
     @NSManaged var managedLastName: String?
+    @NSManaged var managedShortBio: String?
+    @NSManaged var managedDetails: String?
     @NSManaged var managedSubscribedForMail: NSNumber?
     @NSManaged var managedIsStaff: NSNumber?
 
@@ -51,6 +53,24 @@ extension Profile {
         }
         get {
             return managedLastName ?? "No last name"
+        }
+    }
+
+    var shortBio: String {
+        set {
+            managedShortBio = newValue
+        }
+        get {
+            return managedShortBio ?? ""
+        }
+    }
+
+    var details: String {
+        set {
+            managedDetails = newValue
+        }
+        get {
+            return managedDetails ?? ""
         }
     }
 

@@ -10,20 +10,20 @@ xcodeproj_path: Stepic.xcodeproj
 project_target: Stepic
 
 # The file path for new modules
-project_file_path: Stepic/Modules/
+project_file_path: Stepic/Sources/Modules/
 
 # The Xcode group path to new modules
-project_group_path: Stepic/Modules/
+project_group_path: Stepic/Sources/Modules/
 
 ### Tests generation settings section
 # The tests target name
 test_target: StepicTests
 
 # The file path for new tests
-test_file_path: Stepic/Modules/
+test_file_path: Stepic/Sources/Modules/
 
 # The Xcode group path to new tests
-test_group_path: Stepic/Modules/
+test_group_path: Stepic/Sources/Modules/
 
 ### Dependencies settings section
 podfile_path: Podfile

@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use ContentProcessor instead")
 struct Scripts {
 
     fileprivate static func loadScriptWithKey(_ key: String) -> String {
@@ -25,19 +26,21 @@ struct Scripts {
         return loadScriptWithKey(sizeReportScriptKey)
     }
 
-    fileprivate static let sizeReportScriptKey: String = "SizeReportScript"
-    fileprivate static let texScriptKey: String = "TexScript"
-    fileprivate static let localTexScriptKey: String = "LocalTexScript"
-    fileprivate static let metaViewportKey: String = "MetaViewport"
-    fileprivate static let mathJaxFinishedScriptKey: String = "MathJaxFinishScript"
-    fileprivate static let clickableImagesScriptKey: String = "ClickableImages"
-    fileprivate static let localJQueryScriptKey: String = "localJQueryScript"
-    fileprivate static let audioTagWrapperKey: String = "AudioTagWrapper"
-    fileprivate static let audioTagWrapperInitKey: String = "AudioTagWrapperInit"
-    fileprivate static let kotlinRunnableSamplesKey: String = "KotlinRunnableSamples"
-    fileprivate static let wysiwygStylesKey: String = "wysiwygCSSWrapper"
-    fileprivate static let commonStylesKey: String = "contentCSSWrapper"
-    fileprivate static let textColorScriptKey: String = "textColorScript"
+    fileprivate static let sizeReportScriptKey = "SizeReportScript"
+    fileprivate static let texScriptKey = "TexScript"
+    fileprivate static let localTexScriptKey = "LocalTexScript"
+    fileprivate static let metaViewportKey = "MetaViewport"
+    fileprivate static let mathJaxFinishedScriptKey = "MathJaxFinishScript"
+    fileprivate static let clickableImagesScriptKey = "ClickableImages"
+    fileprivate static let localJQueryScriptKey = "localJQueryScript"
+    fileprivate static let audioTagWrapperKey = "AudioTagWrapper"
+    fileprivate static let audioTagWrapperInitKey = "AudioTagWrapperInit"
+    fileprivate static let kotlinRunnableSamplesKey = "KotlinRunnableSamples"
+    fileprivate static let wysiwygStylesKey = "wysiwygCSSWrapper"
+    fileprivate static let commonStylesKey = "contentCSSWrapper"
+    fileprivate static let textColorScriptKey = "textColorScript"
+    fileprivate static let highlightJSKey = "highlightJS"
+    fileprivate static let webkitCalloutDisableKey = "WebkitTouchCalloutDisable"
 
     static var localJQuery: String {
         return loadScriptWithKey(localJQueryScriptKey)
@@ -78,6 +81,14 @@ struct Scripts {
     static func textColor(color: UIColor) -> String {
         let script = loadScriptWithKey(textColorScriptKey)
         return script.replacingOccurrences(of: "######", with: "#\(color.hexString)")
+    }
+
+    static var highlightJS: String {
+        return "\(loadScriptWithKey(highlightJSKey))"
+    }
+
+    static var webkitCalloutDisable: String {
+        return "\(loadScriptWithKey(webkitCalloutDisableKey))"
     }
 
     fileprivate static var mathJaxLocalPathScript: String {
