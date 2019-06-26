@@ -51,7 +51,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private var shouldOpenedAnalyticsEventSend = false
 
-    private var reportedStartVideoDownloadIds = Set<Video.IdType>()
+    private var reportedToAnalyticsVideoDownloadIds = Set<Video.IdType>()
+    private var lastDateFailedVideoAlertShown: Date?
+    private var shouldPresentFailedVideoAlert: Bool {
+        return Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
+    }
 
     // Fetch syllabus only after previous fetch completed
     private let fetchSemaphore = DispatchSemaphore(value: 1)
@@ -457,8 +461,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
         source: SyllabusTreeNode.Source
     ) {
         if case .video(let video) = source,
-           !self.reportedStartVideoDownloadIds.contains(video.id) {
-            self.reportedStartVideoDownloadIds.insert(video.id)
+           !self.reportedToAnalyticsVideoDownloadIds.contains(video.id) {
+            self.reportedToAnalyticsVideoDownloadIds.insert(video.id)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.started)
         }
 
@@ -532,8 +536,12 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
                     parameters: parameters
                 )
             }
-            DispatchQueue.main.async { [weak self] in
-                self?.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
+
+            if self.shouldPresentFailedVideoAlert {
+                self.lastDateFailedVideoAlertShown = Date()
+                DispatchQueue.main.async { [weak self] in
+                    self?.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
+                }
             }
         }
     }
