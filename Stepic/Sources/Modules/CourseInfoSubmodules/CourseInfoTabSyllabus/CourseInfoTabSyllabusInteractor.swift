@@ -484,7 +484,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
         didReceiveCompletion completed: Bool,
         source: SyllabusTreeNode.Source
     ) {
-        if case .video = source {
+        if case .video(let video) = source {
+            self.reportedToAnalyticsVideoDownloadIds.remove(video.id)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.succeeded)
         }
 
