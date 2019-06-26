@@ -505,36 +505,31 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
         _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         didFailLoadVideo error: Swift.Error
     ) {
-        let err = error as NSError
-        let parameters: [String: Any] = [
-            "description": err.localizedDescription,
-            "name": String(describing: error),
-            "code": err.code,
-            "domain": err.domain
-        ]
+        func report(_ error: Swift.Error, reason: AnalyticsEvents.VideoDownload.Reason) {
+            let nsError = error as NSError
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.VideoDownload.failed,
+                parameters: [
+                    "description": nsError.localizedDescription,
+                    "name": String(describing: error),
+                    "code": nsError.code,
+                    "domain": nsError.domain,
+                    "reason": reason.rawValue
+                ]
+            )
+        }
 
         if case VideoDownloadingService.Error.videoDownloadingStopped = error {
-            AnalyticsReporter.reportEvent(
-                AnalyticsEvents.VideoDownload.failed(reason: .cancelled),
-                parameters: parameters
-            )
+            report(error, reason: .cancelled)
         } else {
+            let nsError = error as NSError
             // TODO: Find constant for error code.
-            if err.domain == NSPOSIXErrorDomain && err.code == 100 {
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.VideoDownload.failed(reason: .protocolError),
-                    parameters: parameters
-                )
+            if nsError.domain == NSPOSIXErrorDomain && nsError.code == 100 {
+                report(error, reason: .protocolError)
             } else if !self.isOnline {
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.VideoDownload.failed(reason: .offline),
-                    parameters: parameters
-                )
+                report(error, reason: .offline)
             } else {
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.VideoDownload.failed(reason: .other),
-                    parameters: parameters
-                )
+                report(error, reason: .other)
             }
 
             if self.shouldPresentFailedVideoAlert {
