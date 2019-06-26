@@ -5,6 +5,7 @@ protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
+    func presentFailedVideoDownloadAlert(response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -12,6 +13,11 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
     private var cachedSectionViewModels: [Section.IdType: CourseInfoTabSyllabusSectionViewModel] = [:]
     private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
+    
+    private var lastDateFailedVideoAlertShown: Date?
+    private var shouldPresentFailedVideoAlert: Bool {
+        return Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
+    }
 
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response) {
         var viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel
@@ -108,6 +114,20 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentFailedVideoDownloadAlert(
+        response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response
+    ) {
+        if self.shouldPresentFailedVideoAlert {
+            self.lastDateFailedVideoAlertShown = Date()
+            self.viewController?.displayFailedVideoDownloadAlert(
+                viewModel: .init(
+                    title: NSLocalizedString("Error", comment: ""),
+                    message: NSLocalizedString("CourseInfoTabSyllabusFailedLoadVideoAlertMessage", comment: "")
+                )
+            )
+        }
     }
 
     private func makeSectionViewModel(

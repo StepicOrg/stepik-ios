@@ -118,6 +118,18 @@ enum CourseInfoTabSyllabus {
         }
     }
 
+    /// Present alert when video download failed
+    enum FailedVideoDownloadAlertPresentation {
+        struct Response {
+            let error: Error
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
