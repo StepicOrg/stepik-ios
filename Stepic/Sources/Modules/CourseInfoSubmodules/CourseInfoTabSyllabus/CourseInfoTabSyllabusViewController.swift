@@ -108,7 +108,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         viewModel: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.ViewModel
     ) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         self.present(alert, animated: true)
     }
 }
