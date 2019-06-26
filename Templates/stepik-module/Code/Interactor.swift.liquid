@@ -1,0 +1,29 @@
+import Foundation
+import PromiseKit
+
+protocol {{ module_info.name }}InteractorProtocol {
+    func doSomeAction(request: {{ module_info.name }}.SomeAction.Request)
+}
+
+final class {{ module_info.name }}Interactor: {{ module_info.name }}InteractorProtocol {
+    weak var moduleOutput: {{ module_info.name }}OutputProtocol?
+
+    private let presenter: {{ module_info.name }}PresenterProtocol
+    private let provider: {{ module_info.name }}ProviderProtocol
+
+    init(
+        presenter: {{ module_info.name }}PresenterProtocol,
+        provider: {{ module_info.name }}ProviderProtocol
+    ) {
+        self.presenter = presenter
+        self.provider = provider
+    }
+
+    func doSomeAction(request: {{ module_info.name }}.SomeAction.Request) { }
+
+    enum Error: Swift.Error {
+        case something
+    }
+}
+
+extension {{ module_info.name }}Interactor: {{ module_info.name }}InputProtocol { }
