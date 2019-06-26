@@ -5,7 +5,9 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: class {
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel)
-    func displayAlert()
+    func displayFailedVideoDownloadAlert(
+        viewModel: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.ViewModel
+    )
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: class {
@@ -102,12 +104,10 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         }
     }
 
-    func displayAlert() {
-        let alert = UIAlertController(
-            title: nil,
-            message: "Sorry, but something went wrong, please retry the download",
-            preferredStyle: .alert
-        )
+    func displayFailedVideoDownloadAlert(
+        viewModel: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.ViewModel
+    ) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         self.present(alert, animated: true)
     }

@@ -532,9 +532,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
                     parameters: parameters
                 )
             }
-
             DispatchQueue.main.async { [weak self] in
-                self?.presenter.presentAlert()
+                self?.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
             }
         }
     }

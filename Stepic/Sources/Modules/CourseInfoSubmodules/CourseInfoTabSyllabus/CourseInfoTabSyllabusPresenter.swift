@@ -5,7 +5,7 @@ protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
-    func presentAlert()
+    func presentFailedVideoDownloadAlert(response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -111,8 +111,15 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
-    func presentAlert() {
-        self.viewController?.displayAlert()
+    func presentFailedVideoDownloadAlert(
+        response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response
+    ) {
+        self.viewController?.displayFailedVideoDownloadAlert(
+            viewModel: .init(
+                title: NSLocalizedString("Error", comment: ""), 
+                message: NSLocalizedString("CourseInfoTabSyllabusFailedLoadVideoAlertMessage", comment: "")
+            )
+        )
     }
 
     private func makeSectionViewModel(
