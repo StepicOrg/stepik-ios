@@ -13,6 +13,11 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
     private var cachedSectionViewModels: [Section.IdType: CourseInfoTabSyllabusSectionViewModel] = [:]
     private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
+    
+    private var lastDateFailedVideoAlertShown: Date?
+    private var shouldPresentFailedVideoAlert: Bool {
+        return Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
+    }
 
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response) {
         var viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel
@@ -114,12 +119,15 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     func presentFailedVideoDownloadAlert(
         response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response
     ) {
-        self.viewController?.displayFailedVideoDownloadAlert(
-            viewModel: .init(
-                title: NSLocalizedString("Error", comment: ""), 
-                message: NSLocalizedString("CourseInfoTabSyllabusFailedLoadVideoAlertMessage", comment: "")
+        if self.shouldPresentFailedVideoAlert {
+            self.lastDateFailedVideoAlertShown = Date()
+            self.viewController?.displayFailedVideoDownloadAlert(
+                viewModel: .init(
+                    title: NSLocalizedString("Error", comment: ""),
+                    message: NSLocalizedString("CourseInfoTabSyllabusFailedLoadVideoAlertMessage", comment: "")
+                )
             )
-        )
+        }
     }
 
     private func makeSectionViewModel(
