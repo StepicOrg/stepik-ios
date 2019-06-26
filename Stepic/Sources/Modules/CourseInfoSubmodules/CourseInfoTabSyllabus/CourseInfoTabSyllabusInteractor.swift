@@ -528,7 +528,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
             } else {
                 report(error, reason: .other)
             }
-            
+
             DispatchQueue.main.async { [weak self] in
                 self?.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
             }
