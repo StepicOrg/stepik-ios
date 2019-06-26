@@ -443,6 +443,7 @@ CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сд�
 CourseInfoTitle = "О курсе";
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
+CourseInfoTabSyllabusFailedLoadVideoAlertMessage = "Извините, что-то пошло не так, повторите загрузку видео позже.";
 CourseInfoTabReviews = "Отзывы";
 CourseInfoTitleAuthor = "от";
 CourseInfoTitleAbout = "О курсе";
