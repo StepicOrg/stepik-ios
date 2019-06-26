@@ -101,6 +101,10 @@ protocol SyllabusDownloadsInteractionServiceDelegate: class {
         didReceiveCompletion completed: Bool,
         source: SyllabusTreeNode.Source
     )
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didFailLoadVideo error: Swift.Error
+    )
 }
 
 protocol SyllabusDownloadsInteractionServiceProtocol: class {
@@ -249,18 +253,21 @@ final class SyllabusDownloadsInteractionService: SyllabusDownloadsInteractionSer
         }
 
         switch event.state {
-        case .error:
+        case .error(let error):
             // Downloading failed, remove task and detach from parent
             node.updateState(with: .finished(completed: false))
+            self.delegate?.downloadsInteractionService(self, didFailLoadVideo: error)
             node.invalidateNodesUpTheTree()
             node.detachFromParent()
             self.activeVideoDownloads.removeValue(forKey: event.videoID)
             self.cleanDeadNodes()
         case .active(let progress):
             node.updateState(with: .downloading(progress: progress))
+            node.delegate?.downloadsTreeNodeDidUpdateState(node)
             node.invalidateNodesUpTheTree()
         case .completed:
             node.updateState(with: .finished(completed: true))
+            node.delegate?.downloadsTreeNodeDidUpdateState(node)
             node.invalidateNodesUpTheTree()
             self.activeVideoDownloads.removeValue(forKey: event.videoID)
             self.cleanDeadNodes()

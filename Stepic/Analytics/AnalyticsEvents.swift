@@ -104,6 +104,22 @@ struct AnalyticsEvents {
         static let qualityChanged = "video_quality_changed"
     }
 
+    struct VideoDownload {
+        static let started = "video_download_started"
+        static let succeeded = "video_download_succeeded"
+
+        enum Reason: String {
+            case cancelled
+            case offline
+            case protocolError = "protocol_error"
+            case other
+        }
+
+        static func failed(reason: Reason) -> String {
+            return "video_download_failed_\(reason.rawValue)"
+        }
+    }
+
     struct Discussion {
         static let liked = "discussion_liked"
         static let unliked = "discussion_unliked"

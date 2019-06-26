@@ -5,6 +5,7 @@ protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
+    func presentAlert()
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -108,6 +109,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
+    }
+
+    func presentAlert() {
+        self.viewController?.displayAlert()
     }
 
     private func makeSectionViewModel(

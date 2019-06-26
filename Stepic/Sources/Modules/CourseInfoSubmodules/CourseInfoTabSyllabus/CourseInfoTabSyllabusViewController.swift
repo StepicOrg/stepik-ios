@@ -5,6 +5,7 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: class {
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayAlert()
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: class {
@@ -99,6 +100,16 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         } else {
             SVProgressHUD.show()
         }
+    }
+
+    func displayAlert() {
+        let alert = UIAlertController(
+            title: nil,
+            message: "Sorry, but something went wrong, please retry the download",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        self.present(alert, animated: true)
     }
 }
 

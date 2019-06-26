@@ -51,6 +51,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private var shouldOpenedAnalyticsEventSend = false
 
+    private var reportedStartVideoDownloadIds = Set<Video.IdType>()
+
     // Fetch syllabus only after previous fetch completed
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     // Online mode: fetch section only when offline fetching completed
@@ -454,6 +456,12 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
         didReceiveProgress progress: Float,
         source: SyllabusTreeNode.Source
     ) {
+        if case .video(let video) = source,
+           !self.reportedStartVideoDownloadIds.contains(video.id) {
+            self.reportedStartVideoDownloadIds.insert(video.id)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.started)
+        }
+
         let sourceType = self.getStateUpdateByDownloadSource(source)
         DispatchQueue.main.async { [weak self] in
             if let sourceType = sourceType {
@@ -472,6 +480,10 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
         didReceiveCompletion completed: Bool,
         source: SyllabusTreeNode.Source
     ) {
+        if case .video = source {
+            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.succeeded)
+        }
+
         let sourceType = self.getStateUpdateByDownloadSource(source)
         DispatchQueue.main.async { [weak self] in
             if let sourceType = sourceType {
@@ -481,6 +493,47 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
                         downloadState: .available(isCached: completed)
                     )
                 )
+            }
+        }
+    }
+
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didFailLoadVideo error: Swift.Error
+    ) {
+        let err = error as NSError
+        let parameters: [String: Any] = [
+            "description": err.localizedDescription,
+            "name": String(describing: error),
+            "code": err.code,
+            "domain": err.domain
+        ]
+
+        if case VideoDownloadingService.Error.videoDownloadingStopped = error {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.VideoDownload.failed(reason: .cancelled),
+                parameters: parameters
+            )
+        } else {
+            if err.domain == NSPOSIXErrorDomain && err.code == 100 {
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.VideoDownload.failed(reason: .protocolError),
+                    parameters: parameters
+                )
+            } else if !self.isOnline {
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.VideoDownload.failed(reason: .offline),
+                    parameters: parameters
+                )
+            } else {
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.VideoDownload.failed(reason: .other),
+                    parameters: parameters
+                )
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                self?.presenter.presentAlert()
             }
         }
     }
