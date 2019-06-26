@@ -65,7 +65,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
     // MARK: ViewController lifecycle
 
     override func loadView() {
-        self.view = CourseInfoTabInfoView(videoViewDelegate: self)
+        self.view = CourseInfoTabInfoView(delegate: self)
     }
 
     override func viewDidLoad() {
@@ -136,5 +136,19 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoIntroVideoBlockViewD
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) {
         self.playerViewController.player?.play()
+    }
+}
+
+// MARK: - CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate -
+
+extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
+    func courseInfoTabInfoViewDidClickInstructor(
+        _ courseInfoTabInfoView: CourseInfoTabInfoView,
+        instructor: CourseInfoTabInfoInstructorViewModel
+    ) {
+        let module = ProfileAssembly(userID: instructor.id).makeModule()
+        if let module = module as? ProfileViewController {
+            self.navigationController?.pushViewController(module, animated: true)
+        }
     }
 }
