@@ -17,6 +17,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             let viewModel = self.makeViewModel(
                 step: data.step,
                 submission: data.submission,
+                attempt: data.attempt,
                 cachedReply: data.cachedReply,
                 submissionsCount: data.submissionsCount
             )
@@ -35,6 +36,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     private func makeViewModel(
         step: Step,
         submission: Submission?,
+        attempt: Attempt,
         cachedReply: Reply?,
         submissionsCount: Int
     ) -> BaseQuizViewModel {
@@ -95,6 +97,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         return BaseQuizViewModel(
             quizStatus: quizStatus,
             reply: submission?.reply ?? cachedReply,
+            dataset: attempt.dataset,
             submitButtonTitle: submitButtonTitle,
             isSubmitButtonEnabled: !isSubmitButtonDisabled,
             submissionsLeft: submissionsLeft,

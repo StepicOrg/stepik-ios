@@ -110,6 +110,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
             self.baseQuizView?.hideFeedback()
         }
 
+        self.childQuizModuleInput?.update(dataset: data.dataset)
         self.childQuizModuleInput?.update(reply: data.reply)
         self.childQuizModuleInput?.update(status: data.quizStatus)
 

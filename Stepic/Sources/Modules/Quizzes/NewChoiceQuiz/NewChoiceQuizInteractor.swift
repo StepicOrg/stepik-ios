@@ -30,4 +30,10 @@ extension NewChoiceQuizInteractor: QuizInputProtocol {
     func update(status: QuizStatus?) {
         
     }
+
+    func update(dataset: Dataset?) {
+        if let dataset = dataset as? ChoiceDataset {
+            
+        }
+    }
 }

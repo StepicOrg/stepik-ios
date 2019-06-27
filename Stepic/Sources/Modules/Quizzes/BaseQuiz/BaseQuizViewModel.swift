@@ -3,6 +3,7 @@ import Foundation
 struct BaseQuizViewModel {
     let quizStatus: QuizStatus?
     let reply: Reply?
+    let dataset: Dataset?
     let submitButtonTitle: String
     let isSubmitButtonEnabled: Bool
     let submissionsLeft: Int?
