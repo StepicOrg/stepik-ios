@@ -16,6 +16,8 @@ final class QuizAssemblyFactory {
             return NewStringQuizAssembly(type: .math)
         case .freeAnswer:
             return NewFreeAnswerQuizAssembly()
+        case .choice:
+            return NewChoiceQuizAssembly()
         default:
             fatalError("Unsupported quiz")
         }
