@@ -1701,6 +1701,7 @@
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C2972052147F5FD001502BD /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
+		2C29B63022C664C500730C16 /* ChoiceElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C29B62F22C664C500730C16 /* ChoiceElementView.swift */; };
 		2C2B626821B1660600E22E88 /* NotificationAlertsAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */; };
 		2C2EA36B212D5FEF002116C9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EA36A212D5FEF002116C9 /* Result.swift */; };
 		2C2F0BE72186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */; };
@@ -3708,6 +3709,7 @@
 		2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2394020BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib */; };
 		2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2394220BB53B200F0FE3B /* ProfileDescriptionContentView.swift */; };
 		2CB2740022C4E9870078CA2F /* NewChoiceQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB273FF22C4E9870078CA2F /* NewChoiceQuizViewModel.swift */; };
+		2CB2740422C515050078CA2F /* QuizElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2740322C515050078CA2F /* QuizElementView.swift */; };
 		2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F6A204FC6220008431C /* UserActivitySpec.swift */; };
 		2CB5B1592292E0D700D7F706 /* StepControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B1582292E0D700D7F706 /* StepControlsView.swift */; };
 		2CB5B15B2292E65400D7F706 /* StepNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */; };
@@ -5667,6 +5669,7 @@
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C2544081F3480BE004DB3D9 /* AchievementNotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementNotificationView.swift; sourceTree = "<group>"; };
+		2C29B62F22C664C500730C16 /* ChoiceElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceElementView.swift; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		2C2F0BE62186EEB8007DCA0A /* StreakNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C2F0BE82186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
@@ -5943,6 +5946,7 @@
 		2CB2394020BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDescriptionContentView.xib; sourceTree = "<group>"; };
 		2CB2394220BB53B200F0FE3B /* ProfileDescriptionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionContentView.swift; sourceTree = "<group>"; };
 		2CB273FF22C4E9870078CA2F /* NewChoiceQuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizViewModel.swift; sourceTree = "<group>"; };
+		2CB2740322C515050078CA2F /* QuizElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizElementView.swift; sourceTree = "<group>"; };
 		2CB51F6A204FC6220008431C /* UserActivitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitySpec.swift; sourceTree = "<group>"; };
 		2CB5B1582292E0D700D7F706 /* StepControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControlsView.swift; sourceTree = "<group>"; };
 		2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepNavigationButton.swift; sourceTree = "<group>"; };
@@ -9032,6 +9036,14 @@
 			name = AchievementNotificationView;
 			sourceTree = "<group>";
 		};
+		2C29B62E22C6649100730C16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C29B62F22C664C500730C16 /* ChoiceElementView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2C2F0BEA2186EFA0007DCA0A /* NotificationsRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -10196,6 +10208,14 @@
 			path = Quizzes;
 			sourceTree = "<group>";
 		};
+		2CB2740222C514F50078CA2F /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				2CB2740322C515050078CA2F /* QuizElementView.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
 		2CB5B1572292E0C200D7F706 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -11035,6 +11055,7 @@
 		62E9859F66798EAC445B916C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CB2740222C514F50078CA2F /* Quiz */,
 				62E9869C9474DB9208F1E5FC /* ImageButton.swift */,
 				62E983C44270B73F5F3508F2 /* DownloadControlView.swift */,
 				62E9856B0B8FB44A5492EF67 /* CourseRatingView.swift */,
@@ -11925,6 +11946,7 @@
 		CB9D99278A64D07995DD1C68 /* NewChoiceQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				2C29B62E22C6649100730C16 /* Views */,
 				3AD36917F532D0F83798B2F2 /* NewChoiceQuizAssembly.swift */,
 				36E041388C85D190467E74A5 /* NewChoiceQuizViewController.swift */,
 				077CA2A02D61A314B281C7C3 /* NewChoiceQuizInteractor.swift */,
@@ -15336,6 +15358,7 @@
 				08D2AE4A1C05127500BD8C3D /* AnalyticsHelper.swift in Sources */,
 				0860D9121F10C5480087D61B /* CodeSnippetSymbols.swift in Sources */,
 				083E49DD2072B684004896C0 /* IDFetchable.swift in Sources */,
+				2C29B63022C664C500730C16 /* ChoiceElementView.swift in Sources */,
 				08CBA3271F57563C00302154 /* TransitionMenuBlockTableViewCell.swift in Sources */,
 				081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
@@ -15532,6 +15555,7 @@
 				08D9E98C206C243D002F41D3 /* DatabaseFetchService.swift in Sources */,
 				2C48D606228F114400739477 /* HTMLExtractor.swift in Sources */,
 				082BE3AE1E676373006BC60F /* AuthRoutingManager.swift in Sources */,
+				2CB2740422C515050078CA2F /* QuizElementView.swift in Sources */,
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				080F211B2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,

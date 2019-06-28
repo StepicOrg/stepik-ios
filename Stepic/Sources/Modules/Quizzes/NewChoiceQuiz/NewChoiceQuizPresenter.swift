@@ -7,7 +7,5 @@ protocol NewChoiceQuizPresenterProtocol {
 final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
     weak var viewController: NewChoiceQuizViewControllerProtocol?
 
-    func presentReply(response: NewChoiceQuiz.ReplyLoad.Response) {
-        
-    }
+    func presentReply(response: NewChoiceQuiz.ReplyLoad.Response) { }
 }

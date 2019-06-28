@@ -50,10 +50,9 @@ final class NewChoiceQuizView: UIView {
     private lazy var choicesContainerView = UIView()
     private lazy var titleLabelContainerView = UIView()
 
-    init(
-        frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
-    ) {
+    var isSingleChoice = true
+
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
@@ -70,14 +69,33 @@ final class NewChoiceQuizView: UIView {
     // MARK: - Private API
 
     private func makeChoiceView() -> UIView {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.snp.makeConstraints { make in
-            make.height.equalTo(48)
-        }
+        let view = ChoiceElementView()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.choiceSelected(_:)))
+        view.addGestureRecognizer(tapGestureRecognizer)
         return view
+    }
+
+    @objc
+    private func choiceSelected(_ sender: UITapGestureRecognizer) {
+        guard let choiceViewTag = sender.view?.tag else {
+            return
+        }
+
+        guard let choiceView = self.choicesStackView.arrangedSubviews[safe: choiceViewTag] as? ChoiceElementView else {
+            return
+        }
+
+        if choiceView.state == .default {
+            choiceView.state = .selected
+        } else if choiceView.state == .selected {
+            choiceView.state = .default
+        }
+
+        if self.isSingleChoice {
+            for view in self.choicesStackView.arrangedSubviews where view !== choiceView {
+                (view as? ChoiceElementView)?.state = .default
+            }
+        }
     }
 }
 
@@ -92,7 +110,9 @@ extension NewChoiceQuizView: ProgrammaticallyInitializableViewProtocol {
 
         // Mock
         for i in 0..<4 {
-            self.choicesStackView.addArrangedSubview(self.makeChoiceView())
+            let choiceView = self.makeChoiceView()
+            self.choicesStackView.addArrangedSubview(choiceView)
+            choiceView.tag = i
         }
     }
 
