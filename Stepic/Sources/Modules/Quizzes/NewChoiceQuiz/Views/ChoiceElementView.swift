@@ -63,6 +63,8 @@ final class ChoiceElementView: UIView {
         }
     }
 
+    var onContentLoad: (() -> Void)?
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -151,6 +153,7 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
 extension ChoiceElementView: ProcessedContentTextViewDelegate {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         self.invalidateIntrinsicContentSize()
+        self.onContentLoad?()
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) { }

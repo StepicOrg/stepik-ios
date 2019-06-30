@@ -15,12 +15,27 @@ extension NewChoiceQuizView {
 
         let titleColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+
+        let loadingIndicatorColor = UIColor.mainDark
+    }
+
+    enum Animation {
+        static let appearanceAnimationDuration: TimeInterval = 0.2
+        static let appearanceAnimationDelay: TimeInterval = 1.0
     }
 }
 
 final class NewChoiceQuizView: UIView {
     let appearance: Appearance
     weak var delegate: NewChoiceQuizViewDelegate?
+
+    private lazy var loadingIndicatorView: UIActivityIndicatorView = {
+        let loadingIndicatorView = UIActivityIndicatorView(style: .white)
+        loadingIndicatorView.color = self.appearance.loadingIndicatorColor
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.startAnimating()
+        return loadingIndicatorView
+    }()
 
     private lazy var separatorView: UIView = {
         let view = UIView()
@@ -54,6 +69,8 @@ final class NewChoiceQuizView: UIView {
     private lazy var choicesContainerView = UIView()
     private lazy var titleLabelContainerView = UIView()
 
+    private var loadGroup: DispatchGroup?
+
     var title: String? {
         didSet {
             self.titleLabel.text = self.title
@@ -62,7 +79,7 @@ final class NewChoiceQuizView: UIView {
 
     var isSingleChoice = true
     private var isSelectionEnabled = true
-    
+
     // swiftlint:disable:next discouraged_optional_collection
     private var selectionMask: [Bool]?
 
@@ -106,6 +123,13 @@ final class NewChoiceQuizView: UIView {
     }
 
     func set(choices: [(text: String, isSelected: Bool)]) {
+        self.startLoading()
+
+        self.loadGroup = DispatchGroup()
+        self.loadGroup?.notify(queue: .main) { [weak self] in
+            self?.endLoading()
+        }
+
         if !self.choicesStackView.arrangedSubviews.isEmpty {
             self.choicesStackView.removeAllArrangedSubviews()
         }
@@ -113,6 +137,12 @@ final class NewChoiceQuizView: UIView {
         for (index, choice) in choices.enumerated() {
             let view = self.makeChoiceView(text: choice.text)
             view.tag = index
+
+            self.loadGroup?.enter()
+            view.onContentLoad = { [weak self] in
+                self?.loadGroup?.leave()
+            }
+
             self.choicesStackView.addArrangedSubview(view)
         }
 
@@ -121,6 +151,24 @@ final class NewChoiceQuizView: UIView {
     }
 
     // MARK: - Private API
+
+    func startLoading() {
+        self.choicesStackView.alpha = 0.0
+        self.loadingIndicatorView.startAnimating()
+    }
+
+    func endLoading() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.appearanceAnimationDelay) {
+            self.loadingIndicatorView.stopAnimating()
+
+            UIView.animate(
+                withDuration: Animation.appearanceAnimationDuration,
+                animations: {
+                    self.choicesStackView.alpha = 1.0
+                }
+            )
+        }
+    }
 
     private func updateEnabled(_ isEnabled: Bool) {
         for view in self.choicesStackView.arrangedSubviews {
@@ -199,6 +247,8 @@ extension NewChoiceQuizView: ProgrammaticallyInitializableViewProtocol {
 
         self.choicesContainerView.addSubview(self.choicesStackView)
         self.titleLabelContainerView.addSubview(self.titleLabel)
+
+        self.addSubview(self.loadingIndicatorView)
     }
 
     func makeConstraints() {
@@ -224,6 +274,11 @@ extension NewChoiceQuizView: ProgrammaticallyInitializableViewProtocol {
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicatorView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 }

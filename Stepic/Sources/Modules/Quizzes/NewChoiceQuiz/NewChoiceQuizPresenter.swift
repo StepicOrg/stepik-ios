@@ -20,8 +20,6 @@ final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
                 return .wrong
             case .evaluation:
                 return .evaluation
-            default:
-                return nil
             }
         }()
 

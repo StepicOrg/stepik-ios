@@ -52,7 +52,7 @@ extension NewChoiceQuizInteractor: QuizInputProtocol {
         defer {
             self.presentNewData()
         }
-        
+
         guard let reply = reply else {
             self.currentChoices = Array(repeating: false, count: self.currentDataset?.options.count ?? 0)
             return
