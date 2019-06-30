@@ -196,6 +196,7 @@ final class NewChoiceQuizView: UIView {
         let view = ChoiceElementView()
         view.text = text
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.choiceSelected(_:)))
+        tapGestureRecognizer.delegate = self
         view.addGestureRecognizer(tapGestureRecognizer)
         return view
     }
@@ -240,8 +241,6 @@ final class NewChoiceQuizView: UIView {
 }
 
 extension NewChoiceQuizView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
-
     func addSubviews() {
         self.addSubview(self.stackView)
 
@@ -280,5 +279,14 @@ extension NewChoiceQuizView: ProgrammaticallyInitializableViewProtocol {
         self.loadingIndicatorView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+    }
+}
+
+extension NewChoiceQuizView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
+        return true
     }
 }

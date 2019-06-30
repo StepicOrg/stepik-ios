@@ -21,6 +21,7 @@ final class ChoiceElementView: UIView {
             backgroundColor: .clear
         )
         let view = ProcessedContentTextView(appearance: appearance)
+        view.isScrollEnabled = true
         view.delegate = self
         return view
     }()
