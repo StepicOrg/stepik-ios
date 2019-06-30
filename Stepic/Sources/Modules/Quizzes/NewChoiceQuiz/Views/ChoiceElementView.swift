@@ -21,6 +21,7 @@ final class ChoiceElementView: UIView {
             backgroundColor: .clear
         )
         let view = ProcessedContentTextView(appearance: appearance)
+        view.delegate = self
         return view
     }()
 
@@ -44,7 +45,19 @@ final class ChoiceElementView: UIView {
         )
     }
 
+    var text: String? {
+        didSet {
+            self.contentView.loadHTMLText(self.text ?? "")
+        }
+    }
+
     var state = State.default {
+        didSet {
+            self.updateState()
+        }
+    }
+
+    var isEnabled = true {
         didSet {
             self.updateState()
         }
@@ -66,6 +79,7 @@ final class ChoiceElementView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.invalidateIntrinsicContentSize()
         self.shadowView.layer.shadowPath = UIBezierPath(
             roundedRect: self.shadowView.bounds,
             cornerRadius: self.quizElementView.appearance.cornerRadius
@@ -86,7 +100,7 @@ final class ChoiceElementView: UIView {
             self.quizElementView.state = .selected
         }
 
-        self.shadowView.isHidden = self.state != .selected && self.state != .default
+        self.shadowView.isHidden = !self.isEnabled
     }
 
     // MARK: - Enums
@@ -103,8 +117,6 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.clipsToBounds = false
         self.updateState()
-
-        self.contentView.loadHTMLText("test")
     }
 
     func addSubviews() {
@@ -134,4 +146,14 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.contentInsets.right)
         }
     }
+}
+
+extension ChoiceElementView: ProcessedContentTextViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+        self.invalidateIntrinsicContentSize()
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) { }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) { }
 }

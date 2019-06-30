@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol NewChoiceQuizViewDelegate: class {
+    func newChoiceQuizView(_ view: NewChoiceQuizView, didReport selectionMask: [Bool])
+}
+
 extension NewChoiceQuizView {
     struct Appearance {
         let spacing: CGFloat = 16
@@ -16,6 +20,7 @@ extension NewChoiceQuizView {
 
 final class NewChoiceQuizView: UIView {
     let appearance: Appearance
+    weak var delegate: NewChoiceQuizViewDelegate?
 
     private lazy var separatorView: UIView = {
         let view = UIView()
@@ -27,7 +32,6 @@ final class NewChoiceQuizView: UIView {
         let label = UILabel()
         label.textColor = self.appearance.titleColor
         label.font = self.appearance.titleFont
-        label.text = "Выберите один или несколько элементов"
         return label
     }()
 
@@ -50,7 +54,17 @@ final class NewChoiceQuizView: UIView {
     private lazy var choicesContainerView = UIView()
     private lazy var titleLabelContainerView = UIView()
 
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
+
     var isSingleChoice = true
+    private var isSelectionEnabled = true
+    
+    // swiftlint:disable:next discouraged_optional_collection
+    private var selectionMask: [Bool]?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -66,10 +80,73 @@ final class NewChoiceQuizView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public API
+
+    func markSelectedAsCorrect() {
+        self.isSelectionEnabled = false
+        self.updateSelected(state: .correct)
+        self.updateEnabled(false)
+    }
+
+    func markSelectedAsWrong() {
+        self.isSelectionEnabled = false
+        self.updateSelected(state: .wrong)
+        self.updateEnabled(false)
+    }
+
+    func reset() {
+        // Reset if only view is in correct / wrong state
+        if self.isSelectionEnabled {
+            return
+        }
+
+        self.isSelectionEnabled = true
+        self.updateSelected(state: .default)
+        self.updateEnabled(true)
+    }
+
+    func set(choices: [(text: String, isSelected: Bool)]) {
+        if !self.choicesStackView.arrangedSubviews.isEmpty {
+            self.choicesStackView.removeAllArrangedSubviews()
+        }
+
+        for (index, choice) in choices.enumerated() {
+            let view = self.makeChoiceView(text: choice.text)
+            view.tag = index
+            self.choicesStackView.addArrangedSubview(view)
+        }
+
+        self.selectionMask = choices.map { $0.isSelected }
+        self.updateSelected(state: .selected)
+    }
+
     // MARK: - Private API
 
-    private func makeChoiceView() -> UIView {
+    private func updateEnabled(_ isEnabled: Bool) {
+        for view in self.choicesStackView.arrangedSubviews {
+            if let elementView = view as? ChoiceElementView {
+                elementView.isEnabled = isEnabled
+            }
+        }
+    }
+
+    private func updateSelected(state: ChoiceElementView.State) {
+        guard let selectionMask = self.selectionMask else {
+            return
+        }
+
+        assert(self.choicesStackView.arrangedSubviews.count == selectionMask.count)
+
+        for (isSelected, view) in zip(selectionMask, self.choicesStackView.arrangedSubviews) {
+            if let elementView = view as? ChoiceElementView, isSelected {
+                elementView.state = state
+            }
+        }
+    }
+
+    private func makeChoiceView(text: String) -> ChoiceElementView {
         let view = ChoiceElementView()
+        view.text = text
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.choiceSelected(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
         return view
@@ -77,6 +154,10 @@ final class NewChoiceQuizView: UIView {
 
     @objc
     private func choiceSelected(_ sender: UITapGestureRecognizer) {
+        guard self.isSelectionEnabled else {
+            return
+        }
+
         guard let choiceViewTag = sender.view?.tag else {
             return
         }
@@ -96,6 +177,17 @@ final class NewChoiceQuizView: UIView {
                 (view as? ChoiceElementView)?.state = .default
             }
         }
+
+        let selectionMask = self.choicesStackView.arrangedSubviews
+            .map { $0 as? ChoiceElementView }
+            .map { view -> Bool in
+                if let view = view {
+                    return view.state == .selected
+                }
+                return false
+            }
+        self.delegate?.newChoiceQuizView(self, didReport: selectionMask)
+        self.selectionMask = selectionMask
     }
 }
 
@@ -107,13 +199,6 @@ extension NewChoiceQuizView: ProgrammaticallyInitializableViewProtocol {
 
         self.choicesContainerView.addSubview(self.choicesStackView)
         self.titleLabelContainerView.addSubview(self.titleLabel)
-
-        // Mock
-        for i in 0..<4 {
-            let choiceView = self.makeChoiceView()
-            self.choicesStackView.addArrangedSubview(choiceView)
-            choiceView.tag = i
-        }
     }
 
     func makeConstraints() {

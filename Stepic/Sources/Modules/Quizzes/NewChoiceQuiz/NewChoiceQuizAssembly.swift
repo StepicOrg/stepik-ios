@@ -5,9 +5,8 @@ final class NewChoiceQuizAssembly: QuizAssembly {
     weak var moduleOutput: QuizOutputProtocol?
 
     func makeModule() -> UIViewController {
-        let provider = NewChoiceQuizProvider()
         let presenter = NewChoiceQuizPresenter()
-        let interactor = NewChoiceQuizInteractor(presenter: presenter, provider: provider)
+        let interactor = NewChoiceQuizInteractor(presenter: presenter)
         let viewController = NewChoiceQuizViewController(interactor: interactor)
 
         presenter.viewController = viewController

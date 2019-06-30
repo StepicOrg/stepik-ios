@@ -695,3 +695,5 @@ StringQuizTitle = "Напишите текст (строку)";
 NumberQuizTitle = "Введите численный ответ";
 MathQuizTitle = "Введите математическую формулу";
 StringQuizPlaceholder = "Введите ответ";
+MultipleChoiceQuizTitle = "Выберите один или несколько вариантов";
+SingleChoiceQuizTitle = "Выберите один вариант";
