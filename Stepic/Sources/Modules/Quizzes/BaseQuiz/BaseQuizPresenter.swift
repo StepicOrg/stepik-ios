@@ -110,6 +110,13 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     }
 
     private func makeHintContent(text: String) -> String {
+        var text = text
+
+        /// Use <pre> tag with text wrapping for feedback
+        if text.contains("\n") {
+            text = "<div style=\"white-space: pre-wrap;\">\(text)</div>"
+        }
+
         let processor = ContentProcessor(
             content: text,
             rules: [FixRelativeProtocolURLsRule(), AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)],
