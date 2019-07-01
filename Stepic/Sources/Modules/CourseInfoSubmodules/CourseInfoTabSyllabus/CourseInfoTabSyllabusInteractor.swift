@@ -654,8 +654,14 @@ extension CourseInfoTabSyllabusInteractor {
             try? self.syllabusDownloadsInteractionService.startDownloading(
                 syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
             )
-        }.catch { _ in
-            // TODO: error
+        }.catch { error in
+            self.presenter.presentDownloadButtonUpdate(
+                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                    source: .unit(entity: unit),
+                    downloadState: .available(isCached: false)
+                )
+            )
+            self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }
 
@@ -680,8 +686,14 @@ extension CourseInfoTabSyllabusInteractor {
                 try? self.syllabusDownloadsInteractionService.startDownloading(
                     syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
                 )
-            }.catch { _ in
-                // TODO: error
+            }.catch { error in
+                self.presenter.presentDownloadButtonUpdate(
+                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                        source: .unit(entity: unit),
+                        downloadState: .available(isCached: false)
+                    )
+                )
+                self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
             }
         }
     }
