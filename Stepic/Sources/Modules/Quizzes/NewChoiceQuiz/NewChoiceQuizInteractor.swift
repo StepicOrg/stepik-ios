@@ -12,8 +12,11 @@ final class NewChoiceQuizInteractor: NewChoiceQuizInteractorProtocol {
 
     private var currentStatus: QuizStatus?
     private var currentDataset: ChoiceDataset?
-    // swiftlint:disable:next discouraged_optional_collection
+
+    // swiftlint:disable discouraged_optional_collection
     private var currentChoices: [Bool]?
+    private var currentChoicesFeedback: [String?]?
+    // swiftlint:enable discouraged_optional_collection
 
     init(presenter: NewChoiceQuizPresenterProtocol) {
         self.presenter = presenter
@@ -35,11 +38,14 @@ final class NewChoiceQuizInteractor: NewChoiceQuizInteractorProtocol {
             return
         }
 
+        let feedbackOptions = self.currentChoicesFeedback ?? Array(repeating: nil, count: dataset.options.count)
+
         self.presenter.presentReply(
             response: .init(
                 isMultipleChoice: dataset.isMultipleChoice,
-                choices: zip(dataset.options, choices).map {
-                    NewChoiceQuiz.Choice(text: $0, isSelected: $1, hint: nil)
+                choices: zip(dataset.options, zip(choices, feedbackOptions)).map { result in
+                    let (text, (isSelected, hint)) = result
+                    return NewChoiceQuiz.Choice(text: text, isSelected: isSelected, hint: hint)
                 },
                 status: self.currentStatus
             )
@@ -80,5 +86,11 @@ extension NewChoiceQuizInteractor: QuizInputProtocol {
 
         self.currentDataset = dataset
         self.currentChoices = Array(repeating: false, count: dataset.options.count)
+    }
+
+    func update(feedback: SubmissionFeedback?) {
+        if let feedback = feedback, case .options(let choices) = feedback {
+            self.currentChoicesFeedback = choices
+        }
     }
 }

@@ -18,6 +18,7 @@ class Submission: JSONSerializable {
     var reply: Reply?
     var attempt: Int = 0
     var hint: String?
+    var feedback: SubmissionFeedback?
 
     init(json: JSON, stepName: String) {
         id = json["id"].intValue
@@ -26,6 +27,7 @@ class Submission: JSONSerializable {
         hint = json["hint"].string
         reply = nil
         reply = getReplyFromJSON(json["reply"], stepName: stepName)
+        feedback = SubmissionFeedback(json: json["feedback"])
     }
 
     init(attempt: Int, reply: Reply) {
@@ -42,6 +44,7 @@ class Submission: JSONSerializable {
         status = json["status"].string
         attempt = json["attempt"].intValue
         hint = json["hint"].string
+        feedback = SubmissionFeedback(json: json["feedback"])
     }
 
     func initReply(json: JSON, stepName: String) {
@@ -74,5 +77,16 @@ class Submission: JSONSerializable {
         default: return nil
         }
     }
+}
 
+enum SubmissionFeedback {
+    case options(_ choices: [String])
+
+    init?(json: JSON) {
+        if let options = json["options_feedback"].arrayObject as? [String] {
+            self = .options(options)
+            return
+        }
+        return nil
+    }
 }

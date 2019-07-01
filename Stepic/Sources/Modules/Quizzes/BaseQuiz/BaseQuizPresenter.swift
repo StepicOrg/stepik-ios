@@ -98,6 +98,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             quizStatus: quizStatus,
             reply: submission?.reply ?? cachedReply,
             dataset: attempt.dataset,
+            feedback: submission?.feedback,
             submitButtonTitle: submitButtonTitle,
             isSubmitButtonEnabled: !isSubmitButtonDisabled,
             submissionsLeft: submissionsLeft,

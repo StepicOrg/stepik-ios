@@ -8,6 +8,9 @@ extension ChoiceElementView {
         let shadowColor = UIColor(hex: 0xEAECF0)
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
+
+        let feedbackBackgroundColor = UIColor(hex: 0xF6F6F6)
+        let feedbackContentInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }
 
@@ -37,12 +40,38 @@ final class ChoiceElementView: UIView {
         return view
     }()
 
+    private lazy var feedbackView: ProcessedContentTextView = {
+        var appearance = ProcessedContentTextView.Appearance()
+        appearance.insets = LayoutInsets(insets: .zero)
+        appearance.backgroundColor = .clear
+
+        let view = ProcessedContentTextView(appearance: appearance)
+        return view
+    }()
+
+    private lazy var feedbackContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        view.backgroundColor = self.appearance.feedbackBackgroundColor
+        return view
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.quizElementView, self.feedbackContainerView])
+        stackView.axis = .vertical
+        return stackView
+    }()
+
     override var intrinsicContentSize: CGSize {
+        let feedbackHeight = self.feedbackView.intrinsicContentSize.height
+            + self.appearance.feedbackContentInsets.top
+            + self.appearance.feedbackContentInsets.bottom
         return CGSize(
             width: UIView.noIntrinsicMetric,
             height: self.contentView.intrinsicContentSize.height
                 + self.appearance.contentInsets.top
                 + self.appearance.contentInsets.bottom
+                + (self.hint != nil ? feedbackHeight : 0)
         )
     }
 
@@ -61,6 +90,16 @@ final class ChoiceElementView: UIView {
     var isEnabled = true {
         didSet {
             self.updateState()
+        }
+    }
+
+    var hint: String? {
+        didSet {
+            self.feedbackView.isHidden = false
+            self.feedbackContainerView.isHidden = self.hint == nil
+            self.quizElementView.useCornersOnlyOnTop = self.hint != nil
+
+            self.feedbackView.loadHTMLText(self.hint ?? "")
         }
     }
 
@@ -83,13 +122,31 @@ final class ChoiceElementView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
-        self.shadowView.layer.shadowPath = UIBezierPath(
-            roundedRect: self.shadowView.bounds,
-            cornerRadius: self.quizElementView.appearance.cornerRadius
-        ).cgPath
+
+        DispatchQueue.main.async {
+            self.shadowView.layer.shadowPath = UIBezierPath(
+                roundedRect: self.shadowView.bounds,
+                cornerRadius: self.quizElementView.appearance.cornerRadius
+            ).cgPath
+            self.updateCornersForFeedback()
+        }
     }
 
     // MARK: - Private API
+
+    private func updateCornersForFeedback() {
+        let path = UIBezierPath(
+            roundedRect: self.feedbackContainerView.bounds,
+            byRoundingCorners: [.bottomLeft, .bottomRight],
+            cornerRadii: CGSize(
+                width: self.quizElementView.appearance.cornerRadius,
+                height: self.quizElementView.appearance.cornerRadius
+            )
+        )
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.feedbackContainerView.layer.mask = mask
+    }
 
     private func updateState() {
         switch self.state {
@@ -123,10 +180,12 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
-        self.addSubview(self.quizElementView)
-        self.addSubview(self.contentView)
+        self.addSubview(self.stackView)
 
-        self.insertSubview(self.shadowView, belowSubview: self.quizElementView)
+        self.feedbackContainerView.addSubview(self.feedbackView)
+        self.quizElementView.addSubview(self.contentView)
+
+        self.insertSubview(self.shadowView, belowSubview: self.stackView)
     }
 
     func makeConstraints() {
@@ -136,9 +195,16 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
             make.size.equalTo(self.quizElementView)
         }
 
-        self.quizElementView.translatesAutoresizingMaskIntoConstraints = false
-        self.quizElementView.snp.makeConstraints { make in
+        self.stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
+        self.feedbackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.feedbackContentInsets.top)
+            make.leading.equalToSuperview().offset(self.appearance.feedbackContentInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.feedbackContentInsets.right)
+            make.bottom.equalToSuperview().offset(-self.appearance.feedbackContentInsets.bottom)
         }
 
         self.contentView.translatesAutoresizingMaskIntoConstraints = false

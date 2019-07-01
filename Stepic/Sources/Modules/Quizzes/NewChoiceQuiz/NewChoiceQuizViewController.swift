@@ -11,6 +11,7 @@ final class NewChoiceQuizViewController: UIViewController {
 
     // Store options to smart reset quiz
     private var lastChoiceDataset: [String] = []
+    private var lastFeedback: [String?] = []
 
     init(interactor: NewChoiceQuizInteractorProtocol) {
         self.interactor = interactor
@@ -44,6 +45,11 @@ extension NewChoiceQuizViewController: NewChoiceQuizViewControllerProtocol {
 
         self.newChoiceQuizView?.title = viewModel.data.title
         self.newChoiceQuizView?.isSingleChoice = !viewModel.data.isMultipleChoice
+
+        if self.lastFeedback != viewModel.data.choices.map { $0.hint } {
+            self.lastFeedback = viewModel.data.choices.map { $0.hint }
+            self.newChoiceQuizView?.updateFeedback(text: viewModel.data.choices.map { $0.hint })
+        }
 
         if let state = viewModel.data.finalState {
             switch state {

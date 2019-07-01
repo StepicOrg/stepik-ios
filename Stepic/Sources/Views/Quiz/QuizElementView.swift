@@ -11,7 +11,21 @@ extension QuizElementView {
 final class QuizElementView: UIView {
     let appearance: Appearance
 
+    private lazy var borderLayer: CAShapeLayer = {
+        let borderLayer = CAShapeLayer()
+        borderLayer.lineWidth = self.appearance.borderWidth * UIScreen.main.scale
+        borderLayer.fillColor = UIColor.clear.cgColor
+        return borderLayer
+    }()
+
     var state = State.default {
+        didSet {
+            self.updateState()
+        }
+    }
+
+    /// Disable rounded corners on bottom
+    var useCornersOnlyOnTop = false {
         didSet {
             self.updateState()
         }
@@ -31,13 +45,37 @@ final class QuizElementView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        DispatchQueue.main.async {
+            self.updateState()
+        }
+    }
+
     private func updateState() {
         self.backgroundColor = self.state.backgroundColor
-        self.setRoundedCorners(
-            cornerRadius: self.appearance.cornerRadius,
-            borderWidth: self.appearance.borderWidth,
-            borderColor: self.state.borderColor
+        self.borderLayer.strokeColor = self.state.borderColor.cgColor
+        self.updateCorners()
+    }
+
+    private func updateCorners() {
+        let path = UIBezierPath(
+            roundedRect: self.bounds,
+            byRoundingCorners: self.useCornersOnlyOnTop ? [.topLeft, .topRight] : .allCorners,
+            cornerRadii: CGSize(width: self.appearance.cornerRadius, height: self.appearance.cornerRadius)
         )
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+
+        let borderPath = UIBezierPath(
+            roundedRect: self.bounds,
+            byRoundingCorners: self.useCornersOnlyOnTop ? [.topLeft, .topRight] : .allCorners,
+            cornerRadii: CGSize(width: self.appearance.cornerRadius, height: self.appearance.cornerRadius)
+        )
+        self.borderLayer.path = borderPath.cgPath
+        self.borderLayer.frame = self.bounds
     }
 
     enum State {
@@ -76,6 +114,8 @@ final class QuizElementView: UIView {
 
 extension QuizElementView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
+        self.layer.addSublayer(self.borderLayer)
+
         self.updateState()
     }
 }

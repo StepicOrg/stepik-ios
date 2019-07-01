@@ -38,21 +38,27 @@ final class NewChoiceQuizPresenter: NewChoiceQuizPresenterProtocol {
     }
 
     private func processChoice(_ choice: NewChoiceQuiz.Choice) -> NewChoiceQuiz.Choice {
-        let processor = ContentProcessor(
-            content: choice.text,
-            rules: [FixRelativeProtocolURLsRule(), AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)],
-            injections: [
-                MathJaxInjection(),
-                CommonStylesInjection(),
-                MetaViewportInjection(),
-                WebkitImagesCalloutDisableInjection()
-            ]
-        )
+        func processText(_ text: String) -> String {
+            let processor = ContentProcessor(
+                content: text,
+                rules: [
+                    FixRelativeProtocolURLsRule(),
+                    AddStepikSiteForRelativeURLsRule(extractorType: HTMLExtractor.self)
+                ],
+                injections: [
+                    MathJaxInjection(),
+                    CommonStylesInjection(),
+                    MetaViewportInjection(),
+                    WebkitImagesCalloutDisableInjection()
+                ]
+            )
+            return processor.processContent()
+        }
 
         return NewChoiceQuiz.Choice(
-            text: processor.processContent(),
+            text: processText(choice.text),
             isSelected: choice.isSelected,
-            hint: choice.hint
+            hint: (choice.hint?.isEmpty ?? true) ? nil : processText(choice.hint ?? "")
         )
     }
 }

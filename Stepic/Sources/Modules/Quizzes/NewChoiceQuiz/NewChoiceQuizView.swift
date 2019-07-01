@@ -99,6 +99,18 @@ final class NewChoiceQuizView: UIView {
 
     // MARK: - Public API
 
+    func updateFeedback(text: [String?]) {
+        assert(self.choicesStackView.arrangedSubviews.count == text.count)
+
+        for (index, hint) in text.enumerated() {
+            guard let choiceView = self.choicesStackView.arrangedSubviews[safe: index] as? ChoiceElementView else {
+                continue
+            }
+
+            choiceView.hint = hint
+        }
+    }
+
     func markSelectedAsCorrect() {
         self.isSelectionEnabled = false
         self.updateSelected(state: .correct)
