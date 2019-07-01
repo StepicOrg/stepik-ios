@@ -13,7 +13,7 @@ final class QuizElementView: UIView {
 
     private lazy var borderLayer: CAShapeLayer = {
         let borderLayer = CAShapeLayer()
-        borderLayer.lineWidth = self.appearance.borderWidth * UIScreen.main.scale
+        borderLayer.lineWidth = self.appearance.borderWidth
         borderLayer.fillColor = UIColor.clear.cgColor
         return borderLayer
     }()
