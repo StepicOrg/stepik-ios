@@ -84,6 +84,15 @@ final class ProcessedContentTextView: UIView {
         )
     }
 
+    var isScrollEnabled: Bool {
+        get {
+            return self.webView.scrollView.isScrollEnabled
+        }
+        set {
+            self.webView.scrollView.isScrollEnabled = newValue
+        }
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)

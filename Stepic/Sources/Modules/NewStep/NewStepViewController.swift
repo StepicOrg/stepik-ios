@@ -169,8 +169,8 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
         let quizController: UIViewController? = {
             switch quizType {
-            case .string, .number, .math, .freeAnswer:
-                let assembly = BaseQuizAssembly(step: viewModel.step)
+            case .string, .number, .math, .freeAnswer, .choice:
+                let assembly = BaseQuizAssembly(step: viewModel.step, output: self)
                 return assembly.makeModule()
             default:
                 return initQuizController(type: quizType, step: viewModel.step)
@@ -281,6 +281,12 @@ extension NewStepViewController: NewStepViewDelegate {
 
 extension NewStepViewController: QuizControllerDelegate {
     func submissionDidCorrect() {
+        self.interactor.doStepDoneRequest(request: .init())
+    }
+}
+
+extension NewStepViewController: BaseQuizOutputProtocol {
+    func handleCorrectSubmission() {
         self.interactor.doStepDoneRequest(request: .init())
     }
 }
