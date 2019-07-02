@@ -46,6 +46,12 @@ final class TableInputTextView: UITextView {
         }
     }
 
+    var textInsets = Appearance.textInsets {
+        didSet {
+            self.setupView()
+        }
+    }
+
     override var font: UIFont? {
         didSet {
             self.placeholderLabel.font = self.font
@@ -85,21 +91,32 @@ final class TableInputTextView: UITextView {
     private func setupView() {
         // To make paddings like in UILabel
         self.textContainer.lineFragmentPadding = 0
-        self.textContainerInset = Appearance.textInsets
+        self.textContainerInset = self.textInsets
 
         self.isScrollEnabled = false
 
         self.font = Appearance.defaultFont
 
-        self.addSubview(self.placeholderLabel)
-        self.placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.placeholderLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(Appearance.textInsets.top)
-            make.leading.equalToSuperview().offset(Appearance.textInsets.left)
-        }
+        if self.placeholderLabel.superview == nil {
+            self.addSubview(self.placeholderLabel)
+            self.placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+            self.placeholderLabel.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(self.textInsets.top)
+                make.leading.equalToSuperview().offset(self.textInsets.left)
+            }
 
-        self.snp.makeConstraints { make in
-            make.height.greaterThanOrEqualTo(self.minHeight)
+            self.snp.makeConstraints { make in
+                make.height.greaterThanOrEqualTo(self.minHeight)
+            }
+        } else {
+            self.placeholderLabel.snp.updateConstraints { make in
+                make.top.equalToSuperview().offset(self.textInsets.top)
+                make.leading.equalToSuperview().offset(self.textInsets.left)
+            }
+
+            self.snp.updateConstraints { make in
+                make.height.greaterThanOrEqualTo(self.minHeight)
+            }
         }
     }
 

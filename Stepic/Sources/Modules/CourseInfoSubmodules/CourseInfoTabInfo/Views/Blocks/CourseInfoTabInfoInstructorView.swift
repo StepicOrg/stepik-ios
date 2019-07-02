@@ -41,6 +41,12 @@ final class CourseInfoTabInfoInstructorView: UIView {
         }
     }
 
+    var onClick: (() -> Void)? {
+        didSet {
+            self.overlayButton.isEnabled = self.onClick != nil
+        }
+    }
+
     private lazy var imageView: AvatarImageView = {
         let view = AvatarImageView(frame: .zero)
         view.shape = .rectangle(cornerRadius: self.appearance.imageViewCornerRadius)
@@ -61,6 +67,13 @@ final class CourseInfoTabInfoInstructorView: UIView {
         label.font = self.appearance.descriptionLabelFont
         label.textColor = self.appearance.descriptionLabelTextColor
         return label
+    }()
+
+    private lazy var overlayButton: UIButton = {
+        let button = HighlightFakeButton()
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(self.overlayButtonClicked), for: .touchUpInside)
+        return button
     }()
 
     init(
@@ -91,6 +104,11 @@ final class CourseInfoTabInfoInstructorView: UIView {
                 )
         }
     }
+
+    @objc
+    private func overlayButtonClicked() {
+        self.onClick?()
+    }
 }
 
 extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
@@ -102,6 +120,7 @@ extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProt
         self.addSubview(self.imageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.descriptionLabel)
+        self.addSubview(self.overlayButton)
     }
 
     func makeConstraints() {
@@ -126,6 +145,11 @@ extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProt
             make.trailing.bottom.equalToSuperview().priority(999)
             make.leading.equalTo(self.imageView.snp.leading).priority(999)
             make.top.equalTo(self.imageView.snp.bottom).offset(self.appearance.descriptionLabelInsets.top)
+        }
+
+        self.overlayButton.translatesAutoresizingMaskIntoConstraints = false
+        self.overlayButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

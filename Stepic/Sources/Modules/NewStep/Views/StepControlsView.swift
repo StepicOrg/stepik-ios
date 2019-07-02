@@ -9,29 +9,12 @@ extension StepControlsView {
         let navigationButtonsSpacing: CGFloat = 16
         let navigationButtonsHeight: CGFloat = 44
 
-        let submitButtonBackgroundColor = UIColor.stepicGreen
-        let submitButtonHeight: CGFloat = 44
-        let submitButtonTextColor = UIColor.white
-        let submitButtonCornerRadius: CGFloat = 6
-        let submitButtonFont = UIFont.systemFont(ofSize: 16)
-
         let discussionsButtonHeight: CGFloat = 44
     }
 }
 
 final class StepControlsView: UIView {
     let appearance: Appearance
-
-    private lazy var submitButton: UIButton = {
-        let submitButton = UIButton(type: .system)
-        submitButton.setTitleColor(self.appearance.submitButtonTextColor, for: .normal)
-        submitButton.titleLabel?.font = self.appearance.submitButtonFont
-        submitButton.setTitle("Отправить", for: .normal)
-        submitButton.layer.cornerRadius = self.appearance.submitButtonCornerRadius
-        submitButton.clipsToBounds = true
-        submitButton.backgroundColor = self.appearance.submitButtonBackgroundColor
-        return submitButton
-    }()
 
     private lazy var discussionsButton: StepDiscussionsButton = {
         let button = StepDiscussionsButton()
@@ -72,7 +55,7 @@ final class StepControlsView: UIView {
         return CGSize(
             width: size.width,
             height: self.appearance.insets.top
-                + self.appearance.submitButtonHeight
+                + self.appearance.navigationButtonsHeight
                 + self.appearance.spacing
                 + self.appearance.discussionsButtonHeight
         )
@@ -213,10 +196,6 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
         self.discussionsButton.snp.makeConstraints { make in
             make.leading.bottom.trailing.equalToSuperview()
             make.height.equalTo(self.appearance.discussionsButtonHeight)
-        }
-
-        self.submitButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.submitButtonHeight)
         }
 
         self.navigationStackView.snp.makeConstraints { make in

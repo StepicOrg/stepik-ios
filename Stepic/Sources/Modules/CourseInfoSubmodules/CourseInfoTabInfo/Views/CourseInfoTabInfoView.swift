@@ -2,6 +2,13 @@ import Atributika
 import SnapKit
 import UIKit
 
+protocol CourseInfoTabInfoViewDelegate: class {
+    func courseInfoTabInfoViewDidClickInstructor(
+        _ courseInfoTabInfoView: CourseInfoTabInfoView,
+        instructor: CourseInfoTabInfoInstructorViewModel
+    )
+}
+
 extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
@@ -16,7 +23,7 @@ extension CourseInfoTabInfoView {
 }
 
 final class CourseInfoTabInfoView: UIView {
-    weak var videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate?
+    weak var delegate: (CourseInfoTabInfoViewDelegate & CourseInfoTabInfoIntroVideoBlockViewDelegate)?
 
     let appearance: Appearance
 
@@ -37,10 +44,10 @@ final class CourseInfoTabInfoView: UIView {
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance(),
-        videoViewDelegate: CourseInfoTabInfoIntroVideoBlockViewDelegate? = nil
+        delegate: (CourseInfoTabInfoViewDelegate & CourseInfoTabInfoIntroVideoBlockViewDelegate)? = nil
     ) {
         self.appearance = appearance
-        self.videoViewDelegate = videoViewDelegate
+        self.delegate = delegate
         super.init(frame: frame)
 
         self.addSubviews()
@@ -124,9 +131,7 @@ final class CourseInfoTabInfoView: UIView {
 
     private func addIntroVideoView(introVideoURL: URL?, introVideoThumbnailURL: URL?) {
         if let introVideoURL = introVideoURL {
-            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(
-                delegate: self.videoViewDelegate
-            )
+            let introVideoBlockView = CourseInfoTabInfoIntroVideoBlockView(delegate: self.delegate)
             introVideoBlockView.thumbnailImageURL = introVideoThumbnailURL
             introVideoBlockView.videoURL = introVideoURL
             self.scrollableStackView.addArrangedView(introVideoBlockView)
@@ -153,6 +158,13 @@ final class CourseInfoTabInfoView: UIView {
 
         let instructorsView = CourseInfoTabInfoInstructorsBlockView()
         instructorsView.configure(instructors: instructors)
+        instructorsView.onInstructorClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabInfoViewDidClickInstructor(strongSelf, instructor: $0)
+        }
 
         self.scrollableStackView.addArrangedView(instructorsView)
     }

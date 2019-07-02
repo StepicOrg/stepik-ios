@@ -1,0 +1,24 @@
+import UIKit
+
+final class {{ module_info.name }}Assembly: Assembly {
+    var moduleInput: {{ module_info.name }}InputProtocol?
+
+    private weak var moduleOutput: {{ module_info.name }}OutputProtocol?
+
+    init(output: {{ module_info.name }}OutputProtocol? = nil) {
+        self.moduleOutput = output
+    }
+
+    func makeModule() -> UIViewController {
+        let provider = {{ module_info.name }}Provider()
+        let presenter = {{ module_info.name }}Presenter()
+        let interactor = {{ module_info.name }}Interactor(presenter: presenter, provider: provider)
+        let viewController = {{ module_info.name }}ViewController(interactor: interactor)
+
+        presenter.viewController = viewController
+        self.moduleInput = interactor
+        interactor.moduleOutput = self.moduleOutput
+
+        return viewController
+    }
+}

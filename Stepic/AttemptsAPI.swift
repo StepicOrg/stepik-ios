@@ -30,6 +30,21 @@ class AttemptsAPI: APIEndpoint {
         }
     }
 
+    func retrieve(stepName: String, stepID: Int) -> Promise<([Attempt], Meta)> {
+        return Promise { seal in
+            self.retrieve(
+                stepName: stepName,
+                stepId: stepID,
+                success: { attempts, meta in
+                    seal.fulfill((attempts, meta))
+                },
+                error: {
+                    seal.reject(NSError(domain: $0, code: -1, userInfo: nil))
+                }
+            )
+        }
+    }
+
     @discardableResult func retrieve(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Attempt], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
 
         let headers = AuthInfo.shared.initialHTTPHeaders

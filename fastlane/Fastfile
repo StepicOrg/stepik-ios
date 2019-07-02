@@ -1,5 +1,5 @@
 # This is the minimum version number required.
-fastlane_version "2.93.1"
+fastlane_version "2.116"
 
 default_platform :ios
 
@@ -7,14 +7,12 @@ platform :ios do
     # Config variables
 
     team_id = ENV["FASTLANE_TEAM_ID"]
-    keychain_password = ENV["KEYCHAIN_PASSWORD"]
 
     # Constants
 
     slack_mentions_beta = ['<!channel>']
-    slack_mentions_release = ['@vladislav.kiryukhin', '@akarpov', '@ivan.magda']
+    slack_mentions_release = ['<!channel>']
     project_metapath = "./fastlane/metadata"
-    project_screenpath = "./fastlane/screenshots"
 
     schemes = {
         "Stepic" => [
@@ -231,7 +229,6 @@ platform :ios do
         )
 
         dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
-        upload_symbols_to_crashlytics(dsym_path: dsym_path)
 
         vs = version_string(
             version_number: get_version_number(target: scheme),
@@ -354,7 +351,6 @@ platform :ios do
 
         app_identifier = get_bundle_id(scheme: scheme)
         metapath = "#{project_metapath}/#{scheme}"
-        screenpath = "#{project_screenpath}/#{scheme}"
         should_submit = options.key?(:should_submit) ? options[:should_submit] : false
 
         clear_derived_data
@@ -393,7 +389,6 @@ platform :ios do
         deliver(
             force: true,
             metadata_path: metapath,
-            screenshots_path: screenpath,
             app_identifier: app_identifier,
 
             # submit options 
@@ -410,7 +405,6 @@ platform :ios do
         )
 
         dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
-        upload_symbols_to_crashlytics(dsym_path: dsym_path)
 
         vs = version_string(
             version_number: get_version_number(target: scheme),

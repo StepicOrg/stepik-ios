@@ -51,6 +51,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private var shouldOpenedAnalyticsEventSend = false
 
+    private var reportedToAnalyticsVideoDownloadIds = Set<Video.IdType>()
+
     // Fetch syllabus only after previous fetch completed
     private let fetchSemaphore = DispatchSemaphore(value: 1)
     // Online mode: fetch section only when offline fetching completed
@@ -454,6 +456,12 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
         didReceiveProgress progress: Float,
         source: SyllabusTreeNode.Source
     ) {
+        if case .video(let video) = source,
+           !self.reportedToAnalyticsVideoDownloadIds.contains(video.id) {
+            self.reportedToAnalyticsVideoDownloadIds.insert(video.id)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.started)
+        }
+
         let sourceType = self.getStateUpdateByDownloadSource(source)
         DispatchQueue.main.async { [weak self] in
             if let sourceType = sourceType {
@@ -472,6 +480,11 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
         didReceiveCompletion completed: Bool,
         source: SyllabusTreeNode.Source
     ) {
+        if case .video(let video) = source {
+            self.reportedToAnalyticsVideoDownloadIds.remove(video.id)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.succeeded)
+        }
+
         let sourceType = self.getStateUpdateByDownloadSource(source)
         DispatchQueue.main.async { [weak self] in
             if let sourceType = sourceType {
@@ -481,6 +494,43 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsInteractionServiceDe
                         downloadState: .available(isCached: completed)
                     )
                 )
+            }
+        }
+    }
+
+    func downloadsInteractionService(
+        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
+        didFailLoadVideo error: Swift.Error
+    ) {
+        func report(_ error: Swift.Error, reason: AnalyticsEvents.VideoDownload.Reason) {
+            let nsError = error as NSError
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.VideoDownload.failed,
+                parameters: [
+                    "description": nsError.localizedDescription,
+                    "name": String(describing: error),
+                    "code": nsError.code,
+                    "domain": nsError.domain,
+                    "reason": reason.rawValue
+                ]
+            )
+        }
+
+        if case VideoDownloadingService.Error.videoDownloadingStopped = error {
+            report(error, reason: .cancelled)
+        } else {
+            let nsError = error as NSError
+            // TODO: Find constant for error code.
+            if nsError.domain == NSPOSIXErrorDomain && nsError.code == 100 {
+                report(error, reason: .protocolError)
+            } else if !self.isOnline {
+                report(error, reason: .offline)
+            } else {
+                report(error, reason: .other)
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                self?.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
             }
         }
     }
@@ -604,8 +654,14 @@ extension CourseInfoTabSyllabusInteractor {
             try? self.syllabusDownloadsInteractionService.startDownloading(
                 syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
             )
-        }.catch { _ in
-            // TODO: error
+        }.catch { error in
+            self.presenter.presentDownloadButtonUpdate(
+                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                    source: .unit(entity: unit),
+                    downloadState: .available(isCached: false)
+                )
+            )
+            self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }
 
@@ -630,8 +686,14 @@ extension CourseInfoTabSyllabusInteractor {
                 try? self.syllabusDownloadsInteractionService.startDownloading(
                     syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
                 )
-            }.catch { _ in
-                // TODO: error
+            }.catch { error in
+                self.presenter.presentDownloadButtonUpdate(
+                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                        source: .unit(entity: unit),
+                        downloadState: .available(isCached: false)
+                    )
+                )
+                self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
             }
         }
     }

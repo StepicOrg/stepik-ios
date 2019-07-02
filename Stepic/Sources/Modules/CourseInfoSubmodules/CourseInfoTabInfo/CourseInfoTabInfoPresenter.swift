@@ -22,6 +22,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     private func makeViewModel(course: Course) -> CourseInfoTabInfoViewModel {
         let instructorsViewModel = course.instructors.map { user in
             CourseInfoTabInfoInstructorViewModel(
+                id: user.id,
                 avatarImageURL: URL(string: user.avatarURL),
                 title: "\(user.firstName) \(user.lastName)",
                 description: user.bio

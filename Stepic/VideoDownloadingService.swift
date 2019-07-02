@@ -17,7 +17,7 @@ struct VideoDownloadingServiceEvent {
     enum State {
         case active(progress: Float)
         case completed(storedURL: URL)
-        case error
+        case error(_ error: Error)
     }
 }
 
@@ -186,7 +186,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
                 if let url = info?.localURL {
                     return .completed(storedURL: url)
                 } else {
-                    return .error
+                    return .error(Error.videoTemporaryFileNotSavedAsVideoFile)
                 }
             }()
 
@@ -214,7 +214,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             strongSelf.reportToSubscribers(
                 event: VideoDownloadingServiceEvent(
                     videoID: video.id,
-                    state: .error
+                    state: .error(error)
                 )
             )
             strongSelf.removeObservedTask(id: task.id)
@@ -230,7 +230,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
                 self?.reportToSubscribers(
                     event: VideoDownloadingServiceEvent(
                         videoID: video.id,
-                        state: .error
+                        state: .error(Error.videoDownloadingStopped)
                     )
                 )
             }
@@ -250,6 +250,8 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
 
     enum Error: Swift.Error {
         case videoNotFound
+        case videoTemporaryFileNotSavedAsVideoFile
+        case videoDownloadingStopped
         case alreadyDownloading
     }
 }
