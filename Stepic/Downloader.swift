@@ -459,8 +459,8 @@ extension Downloader.Delegate: URLSessionDownloadDelegate {
         }
 
         NSLog("Downloader: received downloader delegate error method for downloadTask = \(task.taskIdentifier)")
-        downloader.invalidateTask(urlSessionTaskId: task.taskIdentifier)
         if err.code == NSURLErrorCancelled {
+            downloader.invalidateTask(urlSessionTaskId: task.taskIdentifier)
             downloader.removeTask(urlSessionTaskId: task.taskIdentifier)
         } else {
             let resumeData = err.userInfo[NSURLSessionDownloadTaskResumeData] as? Data

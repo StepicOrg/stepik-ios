@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>Stepik</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -15,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.85</string>
+	<string>1.86</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -52,7 +54,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>133</string>
+	<string>135</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -117,12 +119,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>branch_key</key>
-    <dict>
-        <key>live</key>
-        <string>key_live_ekt7qHLldFSKQyO2DT3NYellwFfko55Q</string>
-        <key>test</key>
-        <string>key_test_gjtWCOSjnAMKMtV9qJ4YyeelFzced092</string>
-    </dict>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_ekt7qHLldFSKQyO2DT3NYellwFfko55Q</string>
+		<key>test</key>
+		<string>key_test_gjtWCOSjnAMKMtV9qJ4YyeelFzced092</string>
+	</dict>
 </dict>
 </plist>
