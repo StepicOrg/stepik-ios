@@ -233,11 +233,9 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
                 }
 
                 // Get superDiscussions (those who have no parents)
-                let superDiscussions = Sorter.sort(
-                    retrievedDiscussions.filter({ $0.parentId == nil }),
-                    byIds: ids,
-                    canMissElements: true
-                )
+                let superDiscussions = retrievedDiscussions
+                    .filter({ $0.parentId == nil })
+                    .reordered(order: ids, transform: { $0.id })
 
                 strongSelf.discussionIds.loaded += ids
                 strongSelf.discussions += superDiscussions
@@ -245,24 +243,20 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
                 var changedDiscussionIds = Set<Int>()
                 // Get all replies
-                for reply in retrievedDiscussions.filter({ $0.parentId != nil }) {
-                    if let parentId = reply.parentId {
-                        if strongSelf.replies.loaded[parentId] == nil {
-                            strongSelf.replies.loaded[parentId] = []
+                retrievedDiscussions
+                    .filter { $0.parentId != nil }
+                    .forEach { reply in
+                        if let parentId = reply.parentId {
+                            strongSelf.replies.loaded[parentId, default: []] += [reply]
+                            changedDiscussionIds.insert(parentId)
                         }
-                        strongSelf.replies.loaded[parentId]? += [reply]
-                        changedDiscussionIds.insert(parentId)
                     }
-                }
 
-                // TODO: Possibly should sort all changed reply values
                 for discussionId in changedDiscussionIds {
-                    if let index = strongSelf.discussions.index(where: { $0.id == discussionId }) {
-                        strongSelf.replies.loaded[discussionId]! = Sorter.sort(
-                            strongSelf.replies.loaded[discussionId]!,
-                            byIds: strongSelf.discussions[index].repliesIds,
-                            canMissElements: true
-                        ).sorted { $0.time.compare($1.time) == .orderedAscending }
+                    if let discussionIndex = strongSelf.discussions.firstIndex(where: { $0.id == discussionId }) {
+                        strongSelf.replies.loaded[discussionId] = strongSelf.replies.loaded[discussionId, default: []]
+                            .reordered(order: strongSelf.discussions[discussionIndex].repliesIds, transform: { $0.id })
+                            .sorted { $0.time.compare($1.time) == .orderedAscending }
                     }
                 }
 
