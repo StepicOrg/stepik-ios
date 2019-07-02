@@ -227,57 +227,62 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
         //TODO: Check if token should be refreshed before that request
         performRequest({
-            _ = ApiDataDownloader.comments.retrieve(ids, success: {
-                [weak self]
-                retrievedDiscussions in
-
-                if let s = self {
-                    //get superDiscussions (those who have no parents)
-                    let superDiscussions = Sorter.sort(retrievedDiscussions.filter({$0.parentId == nil}), byIds: ids, canMissElements: true)
-
-                    s.discussionIds.loaded += ids
-                    s.discussions += superDiscussions
-
-                    var changedDiscussionIds = Set<Int>()
-                    //get all replies
-                    for reply in retrievedDiscussions.filter({$0.parentId != nil}) {
-                        if let parentId = reply.parentId {
-                            if s.replies.loaded[parentId] == nil {
-                                s.replies.loaded[parentId] = []
-                            }
-                            s.replies.loaded[parentId]? += [reply]
-                            changedDiscussionIds.insert(parentId)
-                        }
-                    }
-
-                    //TODO: Possibly should sort all changed reply values 
-                    for discussionId in changedDiscussionIds {
-                        if let index = s.discussions.index(where: {$0.id == discussionId}) {
-                            s.replies.loaded[discussionId]! = Sorter.sort(s.replies.loaded[discussionId]!, byIds: s.discussions[index].repliesIds, canMissElements: true)
-                        }
-                    }
-
-                    success?()
+            _ = ApiDataDownloader.comments.retrieve(ids, success: { [weak self] retrievedDiscussions in
+                guard let strongSelf = self else {
+                    return
                 }
-            }, error: {
-                [weak self]
-                errorString in
+
+                // Get superDiscussions (those who have no parents)
+                let superDiscussions = Sorter.sort(
+                    retrievedDiscussions.filter({ $0.parentId == nil }),
+                    byIds: ids,
+                    canMissElements: true
+                )
+
+                strongSelf.discussionIds.loaded += ids
+                strongSelf.discussions += superDiscussions
+                strongSelf.discussions.sort { $0.time.compare($1.time) == .orderedDescending }
+
+                var changedDiscussionIds = Set<Int>()
+                // Get all replies
+                for reply in retrievedDiscussions.filter({ $0.parentId != nil }) {
+                    if let parentId = reply.parentId {
+                        if strongSelf.replies.loaded[parentId] == nil {
+                            strongSelf.replies.loaded[parentId] = []
+                        }
+                        strongSelf.replies.loaded[parentId]? += [reply]
+                        changedDiscussionIds.insert(parentId)
+                    }
+                }
+
+                // TODO: Possibly should sort all changed reply values
+                for discussionId in changedDiscussionIds {
+                    if let index = strongSelf.discussions.index(where: { $0.id == discussionId }) {
+                        strongSelf.replies.loaded[discussionId]! = Sorter.sort(
+                            strongSelf.replies.loaded[discussionId]!,
+                            byIds: strongSelf.discussions[index].repliesIds,
+                            canMissElements: true
+                        ).sorted { $0.time.compare($1.time) == .orderedAscending }
+                    }
+                }
+
+                success?()
+            }, error: { [weak self] errorString in
                 print(errorString)
                 self?.emptyDatasetState = .error
                 UIThread.performUI {
                     [weak self] in
                     self?.refreshControl?.endRefreshing()
                 }
+            })
+        }, error: { [weak self] error in
+            guard let strongSelf = self else {
+                return
             }
-            )
-        }, error: {
-            [weak self]
-            error in
-            guard let s = self else { return }
+
             if error == PerformRequestError.noAccessToRefreshToken {
                 AuthInfo.shared.token = nil
-                RoutingManager.auth.routeFrom(controller: s, success: {
-                    [weak self] in
+                RoutingManager.auth.routeFrom(controller: strongSelf, success: { [weak self] in
                     self?.reloadDiscussions()
                 }, cancel: nil)
             }
