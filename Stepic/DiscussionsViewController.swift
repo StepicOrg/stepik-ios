@@ -108,9 +108,9 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
         tableView.tableFooterView = UIView()
 
-        tableView.register(UINib(nibName: "DiscussionTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionTableViewCell")
-        tableView.register(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
-        tableView.register(UINib(nibName: "DiscussionWebTableViewCell", bundle: nil), forCellReuseIdentifier: "DiscussionWebTableViewCell")
+        tableView.register(cellClass: DiscussionTableViewCell.self)
+        tableView.register(cellClass: LoadMoreTableViewCell.self)
+        tableView.register(cellClass: DiscussionWebTableViewCell.self)
 
         self.title = NSLocalizedString("Discussions", comment: "")
 
@@ -646,25 +646,21 @@ extension DiscussionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cell for row \((indexPath as NSIndexPath).row)")
-
-        if let comment = cellsInfo[(indexPath as NSIndexPath).row].comment {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DiscussionTableViewCell", for: indexPath) as! DiscussionTableViewCell
-            cell.initWithComment(comment, separatorType: cellsInfo[(indexPath as NSIndexPath).row].separatorType)
+        if let comment = cellsInfo[indexPath.row].comment {
+            let cell: DiscussionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.initWithComment(comment, separatorType: cellsInfo[indexPath.row].separatorType)
             cell.delegate = self
             return cell
         }
 
-        if let loadRepliesFor = cellsInfo[(indexPath as NSIndexPath).row].loadRepliesFor {
-            print("load replies cell")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
+        if let loadRepliesFor = cellsInfo[indexPath.row].loadRepliesFor {
+            let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreReplies", comment: "")) (\(replies.leftToLoad(loadRepliesFor)))"
             return cell
         }
 
-        if cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions != nil {
-            print("load discussions cell")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreTableViewCell", for: indexPath) as! LoadMoreTableViewCell
+        if cellsInfo[indexPath.row].loadDiscussions != nil {
+            let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(discussionIds.leftToLoad))"
             return cell
         }
