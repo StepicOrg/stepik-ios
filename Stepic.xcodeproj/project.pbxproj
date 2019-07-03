@@ -6973,13 +6973,13 @@
 		082CB1AD1D088B6900C79A27 /* Discussions */ = {
 			isa = PBXGroup;
 			children = (
-				2CD2605322CCD0C40054F01B /* Views */,
+				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
+				08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */,
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
-				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
+				2CD2605322CCD0C40054F01B /* Views */,
 				08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */,
-				08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */,
-				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
+				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
 			);
 			name = Discussions;
 			sourceTree = "<group>";
