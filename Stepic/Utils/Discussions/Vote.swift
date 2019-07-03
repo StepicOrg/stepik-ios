@@ -43,5 +43,6 @@ class Vote: JSONSerializable {
 }
 
 enum VoteValue: String {
-    case Epic = "epic", Abuse = "abuse"
+    case epic
+    case abuse
 }

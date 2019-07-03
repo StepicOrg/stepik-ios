@@ -11,155 +11,149 @@ import SDWebImage
 import SnapKit
 
 protocol DiscussionTableViewCellDelegate: class {
-    func didOpenProfile(for userWithId: Int)
+    func discussionTableViewCellDidRequestOpenProfile(
+        _ cell: DiscussionTableViewCell,
+        forUserWithId userID: Int
+    )
 }
 
 final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
-    weak var delegate: DiscussionTableViewCellDelegate?
-
     @IBOutlet weak var userAvatarImageView: AvatarImageView!
-    @IBOutlet weak var nameLabel: StepikLabel!
+    @IBOutlet weak var userAvatarImageViewLeadingConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var badgeLabel: WiderLabel!
+    @IBOutlet weak var commentLabel: StepikLabel!
+    @IBOutlet weak var commentLabelLeadingConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var separatorView: UIView!
+    @IBOutlet weak var separatorViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var separatorViewLeadingConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var nameLabel: StepikLabel!
+    @IBOutlet weak var badgeLabel: WiderLabel!
     @IBOutlet weak var timeLabel: StepikLabel!
-
-    @IBOutlet weak var labelLeadingConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var ImageLeadingConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var separatorHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var separatorLeadingConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var likesLabel: StepikLabel!
     @IBOutlet weak var likesImageView: UIImageView!
 
-    @IBOutlet weak var commentLabel: StepikLabel!
+    weak var delegate: DiscussionTableViewCellDelegate?
 
-    var hasSeparator: Bool = false {
+    private var comment: Comment?
+
+    private var hasSeparator: Bool = false {
         didSet {
-            separatorView?.isHidden = !hasSeparator
+            self.separatorView.isHidden = !self.hasSeparator
         }
     }
 
-    var separatorType: SeparatorType = .none {
+    private var separatorType: SeparatorType = .none {
         didSet {
-            switch separatorType {
+            switch self.separatorType {
             case .none:
-                hasSeparator = false
-                separatorHeightConstraint.constant = 0
-                break
+                self.hasSeparator = false
+                self.separatorViewHeightConstraint.constant = 0
             case .small:
-                hasSeparator = true
-                separatorHeightConstraint.constant = 0.5
-                separatorLeadingConstraint.constant = 8
-                break
+                self.hasSeparator = true
+                self.separatorViewHeightConstraint.constant = 0.5
+                self.separatorViewLeadingConstraint.constant = 8
             case .big:
-                hasSeparator = true
-                separatorHeightConstraint.constant = 10
-                separatorLeadingConstraint.constant = -8
-                break
+                self.hasSeparator = true
+                self.separatorViewHeightConstraint.constant = 10
+                self.separatorViewLeadingConstraint.constant = -8
             }
-            updateConstraints()
-        }
-    }
-
-    var comment: Comment?
-    var heightUpdateBlock: (() -> Void)?
-
-    func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
-        if let url = URL(string: comment.userInfo.avatarURL) {
-            userAvatarImageView.set(with: url)
-        }
-
-        nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
-        self.comment = comment
-        self.separatorType = separatorType
-        timeLabel.text = comment.time.getStepicFormatString(withTime: true)
-        setLiked(comment.vote.value == .Epic, likesCount: comment.epicCount)
-        loadLabel(comment.text)
-        if comment.isDeleted {
-            self.contentView.backgroundColor = UIColor.wrongQuizBackground
-            if comment.text == "" {
-                loadLabel(NSLocalizedString("DeletedComment", comment: ""))
-            }
-        } else {
-            self.contentView.backgroundColor = UIColor.white
-        }
-
-        switch comment.userRole {
-        case .Student:
-            badgeLabel.text = ""
-            badgeLabel.backgroundColor = UIColor.clear
-        case .Teacher:
-            badgeLabel.text = NSLocalizedString("CourseStaff", comment: "")
-            badgeLabel.backgroundColor = UIColor.lightGray
-        case .Staff:
-            badgeLabel.text = NSLocalizedString("Staff", comment: "")
-            badgeLabel.backgroundColor = UIColor.lightGray
-        }
-    }
-
-    private func loadLabel(_ htmlString: String) {
-        commentLabel.setTextWithHTMLString(htmlString)
-    }
-
-    private func setLeadingConstraints(_ constant: CGFloat) {
-        ImageLeadingConstraint.constant = constant
-        labelLeadingConstraint.constant = -constant
-        switch self.separatorType {
-        case .small:
-            separatorLeadingConstraint.constant = -constant
-            break
-        default:
-            break
-        }
-    }
-
-    func setLiked(_ liked: Bool, likesCount: Int) {
-        likesLabel.text = "\(likesCount)"
-        if liked {
-            likesImageView.image = Images.thumbsUp.filled
-        } else {
-            likesImageView.image = Images.thumbsUp.normal
+            self.updateConstraints()
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        badgeLabel.setRoundedCorners(cornerRadius: 10)
 
-        let tapActionNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.actionUserTapped))
-        nameLabel?.isUserInteractionEnabled = true
-        nameLabel?.addGestureRecognizer(tapActionNameLabel)
+        self.badgeLabel.setRoundedCorners(cornerRadius: 10)
 
-        let tapActionAvatarView = UITapGestureRecognizer(target: self, action: #selector(self.actionUserTapped))
-        userAvatarImageView?.isUserInteractionEnabled = true
-        userAvatarImageView?.addGestureRecognizer(tapActionAvatarView)
-    }
+        self.nameLabel?.isUserInteractionEnabled = true
+        self.nameLabel?.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(self.actionUserTapped))
+        )
 
-    @objc
-    func actionUserTapped() {
-        guard let userId = comment?.userInfo.id else {
-            return
-        }
-
-        delegate?.didOpenProfile(for: userId)
+        self.userAvatarImageView?.isUserInteractionEnabled = true
+        self.userAvatarImageView?.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(self.actionUserTapped))
+        )
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        comment = nil
-        updateConstraints()
+
+        self.comment = nil
+        self.updateConstraints()
     }
 
     override func updateConstraints() {
         super.updateConstraints()
-        setLeadingConstraints(comment?.parentId == nil ? 0 : -40)
+        self.setLeadingConstraints(self.comment?.parentId == nil ? 0 : -40)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
+        if let url = URL(string: comment.userInfo.avatarURL) {
+            self.userAvatarImageView.set(with: url)
+        }
+
+        self.nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
+        self.comment = comment
+        self.separatorType = separatorType
+        self.timeLabel.text = comment.time.getStepicFormatString(withTime: true)
+        self.setLiked(comment.vote.value == .epic, likesCount: comment.epicCount)
+        self.loadLabel(comment.text)
+
+        if comment.isDeleted {
+            self.contentView.backgroundColor = .wrongQuizBackground
+            if comment.text == "" {
+                self.loadLabel(NSLocalizedString("DeletedComment", comment: ""))
+            }
+        } else {
+            self.contentView.backgroundColor = .white
+        }
+
+        switch comment.userRole {
+        case .student:
+            self.badgeLabel.text = ""
+            self.badgeLabel.backgroundColor = .clear
+        case .teacher:
+            self.badgeLabel.text = NSLocalizedString("CourseStaff", comment: "")
+            self.badgeLabel.backgroundColor = .lightGray
+        case .staff:
+            self.badgeLabel.text = NSLocalizedString("Staff", comment: "")
+            self.badgeLabel.backgroundColor = .lightGray
+        }
+    }
+
+    func setLiked(_ liked: Bool, likesCount: Int) {
+        self.likesLabel.text = "\(likesCount)"
+        if liked {
+            self.likesImageView.image = Images.thumbsUp.filled
+        } else {
+            self.likesImageView.image = Images.thumbsUp.normal
+        }
+    }
+
+    private func loadLabel(_ htmlString: String) {
+        self.commentLabel.setTextWithHTMLString(htmlString)
+    }
+
+    private func setLeadingConstraints(_ constant: CGFloat) {
+        self.userAvatarImageViewLeadingConstraint.constant = constant
+        self.commentLabelLeadingConstraint.constant = -constant
+
+        switch self.separatorType {
+        case .small:
+            self.separatorViewLeadingConstraint.constant = -constant
+        default:
+            break
+        }
+    }
+
+    @objc
+    private func actionUserTapped() {
+        if let userId = self.comment?.userInfo.id {
+            self.delegate?.discussionTableViewCellDidRequestOpenProfile(self, forUserWithId: userId)
+        }
     }
 }

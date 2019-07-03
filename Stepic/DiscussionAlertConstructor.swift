@@ -39,7 +39,7 @@ final class DiscussionAlertConstructor {
         }))
 
         if comment.userId != AuthInfo.shared.userId {
-            let likeTitle: String = (comment.vote.value == VoteValue.Epic)
+            let likeTitle: String = (comment.vote.value == VoteValue.epic)
                 ? NSLocalizedString("Unlike", comment: "")
                 : NSLocalizedString("Like", comment: "")
             alert.addAction(UIAlertAction(title: likeTitle, style: .default, handler: {
@@ -47,7 +47,7 @@ final class DiscussionAlertConstructor {
                 likeBlock()
             }))
 
-            let abuseTitle: String = (comment.vote.value == VoteValue.Abuse)
+            let abuseTitle: String = (comment.vote.value == VoteValue.abuse)
                 ? NSLocalizedString("Unabuse", comment: "")
                 : NSLocalizedString("Abuse", comment: "")
             alert.addAction(UIAlertAction(title: abuseTitle, style: .destructive, handler: {

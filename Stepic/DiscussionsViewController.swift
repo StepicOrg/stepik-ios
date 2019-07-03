@@ -381,18 +381,18 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     func setLiked(_ comment: Comment, cell: UITableViewCell) {
         if let c = cell as? DiscussionTableViewCell {
             if let value = comment.vote.value {
-                let vToSet: VoteValue? = (value == VoteValue.Epic) ? nil : .Epic
+                let vToSet: VoteValue? = (value == VoteValue.epic) ? nil : .epic
                 let v = Vote(id: comment.vote.id, value: vToSet)
                 performRequest({
                     _ = ApiDataDownloader.votes.update(v, success: { vote in
                         comment.vote = vote
                         switch value {
-                        case .Abuse:
+                        case .abuse:
                             comment.abuseCount -= 1
                             comment.epicCount += 1
                             c.setLiked(true, likesCount: comment.epicCount)
                             AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked, parameters: nil)
-                        case .Epic:
+                        case .epic:
                             comment.epicCount -= 1
                             c.setLiked(false, likesCount: comment.epicCount)
                             AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unliked, parameters: nil)
@@ -412,7 +412,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
                     }
                 })
             } else {
-                let v = Vote(id: comment.vote.id, value: .Epic)
+                let v = Vote(id: comment.vote.id, value: .epic)
                 performRequest({
                     _ = ApiDataDownloader.votes.update(v, success: { vote in
                         comment.vote = vote
@@ -440,14 +440,14 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     func setAbused(_ comment: Comment, cell: UITableViewCell) {
         if let c = cell as? DiscussionTableViewCell {
             if let value = comment.vote.value {
-                let v = Vote(id: comment.vote.id, value: .Abuse)
+                let v = Vote(id: comment.vote.id, value: .abuse)
                 performRequest({
                     _ = ApiDataDownloader.votes.update(v, success: { vote in
                         comment.vote = vote
                         switch value {
-                        case .Abuse:
+                        case .abuse:
                             break
-                        case .Epic:
+                        case .epic:
                             comment.epicCount -= 1
                             comment.abuseCount += 1
                             c.setLiked(false, likesCount: comment.epicCount)
@@ -468,7 +468,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
                     }
                 })
             } else {
-                let v = Vote(id: comment.vote.id, value: .Abuse)
+                let v = Vote(id: comment.vote.id, value: .abuse)
                 performRequest({
                     _ = ApiDataDownloader.votes.update(v, success: {
                         vote in
@@ -692,9 +692,9 @@ extension DiscussionsViewController: WriteCommentDelegate {
 }
 
 extension DiscussionsViewController: DiscussionTableViewCellDelegate {
-    func didOpenProfile(for userWithId: Int) {
-        //TODO: Add Assembly and remove DeepLinks from here. It is not a correct DeepLink use case.
-        DeepLinkRouter.routeToProfileWithId(userWithId) { [weak self] viewControllers in
+    func discussionTableViewCellDidRequestOpenProfile(_ cell: DiscussionTableViewCell, forUserWithId userID: Int) {
+        // TODO: Add Assembly and remove DeepLinks from here. It is not a correct DeepLink use case.
+        DeepLinkRouter.routeToProfileWithId(userID) { [weak self] viewControllers in
             if var stack = self?.navigationController?.viewControllers {
                 stack.append(contentsOf: viewControllers)
                 self?.navigationController?.setViewControllers(stack, animated: true)
