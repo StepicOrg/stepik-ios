@@ -6981,11 +6981,9 @@
 		082CB1AD1D088B6900C79A27 /* Discussions */ = {
 			isa = PBXGroup;
 			children = (
-				08B977061D19D29A00FFC52C /* DiscussionTableViewCell */,
+				2CD2605322CCD0C40054F01B /* Views */,
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
-				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
-				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
 				08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */,
 				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
 				08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */,
@@ -10425,6 +10423,24 @@
 				2CD12B941F4F3374001D3C82 /* Info.plist */,
 			);
 			name = Screenshots;
+			sourceTree = "<group>";
+		};
+		2CD2605322CCD0C40054F01B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08B977061D19D29A00FFC52C /* DiscussionTableViewCell */,
+				2CD2605422CCD0DE0054F01B /* LoadMoreTableViewCell */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2CD2605422CCD0DE0054F01B /* LoadMoreTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
+				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
+			);
+			name = LoadMoreTableViewCell;
 			sourceTree = "<group>";
 		};
 		2CD43588212459E7005A5B19 /* Presenter */ = {
