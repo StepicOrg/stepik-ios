@@ -545,15 +545,8 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     }
 
     func presentWriteCommentController(parent: Int?) {
-        if let writeController = ControllerHelper.instantiateViewController(
-            identifier: "WriteCommentViewController", 
-            storyboardName: "DiscussionsStoryboard"
-        ) as? WriteCommentViewController {
-            writeController.parentId = parent
-            writeController.target = target
-            writeController.delegate = self
-            navigationController?.pushViewController(writeController, animated: true)
-        }
+        let assembly = WriteCommentLegacyAssembly(target: self.target, parentId: parent, delegate: self)
+        self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -668,8 +661,8 @@ extension DiscussionsViewController: UITableViewDataSource {
     }
 }
 
-extension DiscussionsViewController: WriteCommentDelegate {
-    func didWriteComment(_ comment: Comment) {
+extension DiscussionsViewController: WriteCommentViewControllerDelegate {
+    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
         if let parentId = comment.parentId {
             // Insert row in an existing section.
             if let section = discussions.index(where: { $0.id == parentId }) {

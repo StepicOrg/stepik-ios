@@ -8,117 +8,134 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import Alamofire
 
-enum WriteCommentViewControllerState {
-    case editing, sending, ok
+@available(*, deprecated, message: "Legacy assembly")
+final class WriteCommentLegacyAssembly: Assembly {
+    private let target: Int
+    private let parentId: Int?
+
+    private weak var delegate: WriteCommentViewControllerDelegate?
+
+    init(target: Int, parentId: Int?, delegate: WriteCommentViewControllerDelegate? = nil) {
+        self.target = target
+        self.parentId = parentId
+        self.delegate = delegate
+    }
+
+    func makeModule() -> UIViewController {
+        guard let vc = ControllerHelper.instantiateViewController(
+            identifier: "WriteCommentViewController",
+            storyboardName: "DiscussionsStoryboard"
+        ) as? WriteCommentViewController else {
+            fatalError()
+        }
+
+        vc.parentId = self.parentId
+        vc.target = self.target
+        vc.delegate = self.delegate
+
+        return vc
+    }
+}
+
+protocol WriteCommentViewControllerDelegate: class {
+    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment)
 }
 
 final class WriteCommentViewController: UIViewController {
+    enum State {
+        case editing
+        case sending
+        case ok
+    }
+
     @IBOutlet weak var commentTextView: IQTextView!
 
-    weak var delegate: WriteCommentDelegate?
-
-    var state: WriteCommentViewControllerState = .editing {
-        didSet {
-            UIThread.performUI { [weak self] in
-                if let s = self {
-                    switch s.state {
-                    case .sending:
-                        s.navigationItem.rightBarButtonItem = s.sendingItem
-                        break
-                    case .ok:
-                        s.navigationItem.rightBarButtonItem = s.okItem
-                        break
-                    case .editing:
-                        s.navigationItem.rightBarButtonItem = s.editingItem
-                        break
-                    }
-                }
-            }
-        }
-    }
+    weak var delegate: WriteCommentViewControllerDelegate?
 
     var target: Int!
     var parentId: Int?
 
-    var editingItem: UIBarButtonItem?
-    var sendingItem: UIBarButtonItem?
-    var okItem: UIBarButtonItem?
+    private let commentsAPI = CommentsAPI()
 
-    func setupItems() {
-        editingItem = UIBarButtonItem(
+    private lazy var editBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(
             image: Images.sendImage,
             style: .done,
             target: self,
             action: #selector(WriteCommentViewController.sendPressed)
         )
+    }()
 
-        let v = UIActivityIndicatorView()
-        v.color = UIColor.mainDark
-        v.startAnimating()
-        sendingItem = UIBarButtonItem(customView: v)
+    private lazy var sendBarButtonItem: UIBarButtonItem = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.color = .mainDark
+        activityIndicatorView.startAnimating()
+        return UIBarButtonItem(customView: activityIndicatorView)
+    }()
 
-        okItem = UIBarButtonItem(
+    private lazy var okBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(
             image: Images.checkMarkImage,
             style: .done,
             target: self,
             action: #selector(WriteCommentViewController.okPressed)
         )
+    }()
+
+    private var state: State = .editing {
+        didSet {
+            switch self.state {
+            case .sending:
+                self.view.endEditing(true)
+                self.navigationItem.rightBarButtonItem = self.sendBarButtonItem
+            case .ok:
+                self.navigationItem.rightBarButtonItem = self.okBarButtonItem
+            case .editing:
+                self.commentTextView.becomeFirstResponder()
+                self.navigationItem.rightBarButtonItem = self.editBarButtonItem
+            }
+        }
     }
 
-    @objc
-    func okPressed() {
-        print("should have never been pressed")
+    private var htmlText: String {
+        let text = self.commentTextView.text ?? ""
+        return text.replacingOccurrences(of: "\n", with: "<br>")
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        commentTextView.becomeFirstResponder()
+        self.title = NSLocalizedString("Comment", comment: "")
 
-        title = NSLocalizedString("Comment", comment: "")
-        commentTextView.placeholder = NSLocalizedString("WriteComment", comment: "")
-        setupItems()
+        self.commentTextView.placeholder = NSLocalizedString("WriteComment", comment: "")
+        self.commentTextView.tintColor = .mainDark
+        self.commentTextView.textColor = .mainText
 
-        commentTextView.tintColor = UIColor.mainDark
-        commentTextView.textColor = UIColor.mainText
-
-        state = .editing
+        self.state = .editing
     }
-
-    var request: Request?
 
     @objc
-    func sendPressed() {
-        print("send pressed")
-        state = .sending
-        sendComment()
+    private func okPressed() {
+        print("should have never been pressed")
     }
 
-    var htmlText: String {
-        let t = commentTextView.text ?? ""
-        return t.replacingOccurrences(of: "\n", with: "<br>")
-    }
+    @objc
+    private func sendPressed() {
+        self.state = .sending
+        let comment = Comment(parent: self.parentId, target: self.target, text: self.htmlText)
 
-    func sendComment() {
-        let comment = Comment(parent: parentId, target: target, text: htmlText)
-
-        request = ApiDataDownloader.comments.create(comment, success: { [weak self] comment in
-            self?.state = .ok
-            self?.request = nil
-            UIThread.performUI {
-                self?.delegate?.didWriteComment(comment)
-                self?.navigationController?.popViewController(animated: true)
+        self.commentsAPI.create(comment).done { [weak self] comment in
+            guard let strongSelf = self else {
+                return
             }
-        }, error: { [weak self] _ in
-            self?.state = .editing
-            self?.request = nil
-        })
-    }
 
-    deinit {
-        print("is deiniting")
-        request?.cancel()
+            strongSelf.state = .ok
+
+            strongSelf.delegate?.writeCommentViewControllerDidWriteComment(strongSelf, comment: comment)
+            strongSelf.navigationController?.popViewController(animated: true)
+        }.catch { [weak self] _ in
+            self?.state = .editing
+        }
     }
 }

@@ -724,7 +724,6 @@
 		08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
 		08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
@@ -1022,7 +1021,6 @@
 		2C1B61101F4C4AEF00236804 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		2C1B61161F4C4AEF00236804 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C1B61171F4C4AEF00236804 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C1B61181F4C4AEF00236804 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C1B61191F4C4AEF00236804 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C1B611A1F4C4AEF00236804 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -1370,7 +1368,6 @@
 		2C1B63211F4C590700236804 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		2C1B63271F4C590700236804 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C1B63281F4C590700236804 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C1B63291F4C590700236804 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C1B632A1F4C590700236804 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C1B632B1F4C590700236804 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -2270,7 +2267,6 @@
 		2C89A9A41F4C289900227C3B /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C89A9A51F4C289900227C3B /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		2C89A9AA1F4C289900227C3B /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C89A9AB1F4C289900227C3B /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C89A9AC1F4C289900227C3B /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C89A9AD1F4C289900227C3B /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C89A9AE1F4C289900227C3B /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -2813,7 +2809,6 @@
 		2C9731581F4C38F600AC9301 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		2C97315E1F4C38F600AC9301 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C97315F1F4C38F600AC9301 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C9731601F4C38F600AC9301 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C9731611F4C38F600AC9301 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C9731621F4C38F600AC9301 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -3248,7 +3243,6 @@
 		2CA8D1962088D9C000E105E9 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
 		2CA8D1992088D9C000E105E9 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
 		2CA8D19A2088D9C000E105E9 /* AdaptiveRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9295032035D83F0058D18C /* AdaptiveRemoteConfig.swift */; };
-		2CA8D19B2088D9C000E105E9 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2CA8D19C2088D9C000E105E9 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2CA8D19D2088D9C000E105E9 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2CA8D19E2088D9C000E105E9 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -4497,7 +4491,6 @@
 		864D67671E83E08E001E8D9E /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		864D676E1E83E08E001E8D9E /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		864D676F1E83E08E001E8D9E /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		864D67711E83E08E001E8D9E /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		864D67721E83E08E001E8D9E /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		864D67731E83E08E001E8D9E /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -5421,7 +5414,6 @@
 		08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
 		08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
-		08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentDelegate.swift; sourceTree = "<group>"; };
 		08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscussionsStoryboard.storyboard; sourceTree = "<group>"; };
 		08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DiscussionAlertConstructor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08EDD6291F7C6785005203E4 /* StepikButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikButton.swift; sourceTree = "<group>"; };
@@ -6978,7 +6970,6 @@
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
 				2CD2605322CCD0C40054F01B /* Views */,
-				08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */,
 				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
 			);
 			name = Discussions;
@@ -15320,7 +15311,6 @@
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
-				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
 				0834C46C1E2CE66B002F8516 /* MatchingReply.swift in Sources */,
@@ -16390,7 +16380,6 @@
 				08C1BF371FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C608B0420456958006870BB /* CardsStepsPresenter.swift in Sources */,
 				2C1B61161F4C4AEF00236804 /* WriteCommentViewController.swift in Sources */,
-				2C1B61171F4C4AEF00236804 /* WriteCommentDelegate.swift in Sources */,
 				2C1B61181F4C4AEF00236804 /* DiscussionAlertConstructor.swift in Sources */,
 				2C1B61191F4C4AEF00236804 /* VideoStepViewController.swift in Sources */,
 				2C1B611A1F4C4AEF00236804 /* WebStepViewController.swift in Sources */,
@@ -16814,7 +16803,6 @@
 				08C1BF381FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C608B0520456959006870BB /* CardsStepsPresenter.swift in Sources */,
 				2C1B63271F4C590700236804 /* WriteCommentViewController.swift in Sources */,
-				2C1B63281F4C590700236804 /* WriteCommentDelegate.swift in Sources */,
 				2C1B63291F4C590700236804 /* DiscussionAlertConstructor.swift in Sources */,
 				2C1B632A1F4C590700236804 /* VideoStepViewController.swift in Sources */,
 				2C1B632B1F4C590700236804 /* WebStepViewController.swift in Sources */,
@@ -17760,7 +17748,6 @@
 				2C6A76342045CE7000C509A6 /* StepCardView.swift in Sources */,
 				2C89A9AA1F4C289900227C3B /* WriteCommentViewController.swift in Sources */,
 				2C6A76472045CEF300C509A6 /* AdaptiveRemoteConfig.swift in Sources */,
-				2C89A9AB1F4C289900227C3B /* WriteCommentDelegate.swift in Sources */,
 				2C89A9AC1F4C289900227C3B /* DiscussionAlertConstructor.swift in Sources */,
 				2C89A9AD1F4C289900227C3B /* VideoStepViewController.swift in Sources */,
 				2CBC261621086947004245D6 /* UserRegistrationServiceImpl.swift in Sources */,
@@ -18196,7 +18183,6 @@
 				08C1BF361FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C608B0320456958006870BB /* CardsStepsPresenter.swift in Sources */,
 				2C97315E1F4C38F600AC9301 /* WriteCommentViewController.swift in Sources */,
-				2C97315F1F4C38F600AC9301 /* WriteCommentDelegate.swift in Sources */,
 				2C9731601F4C38F600AC9301 /* DiscussionAlertConstructor.swift in Sources */,
 				2C9731611F4C38F600AC9301 /* VideoStepViewController.swift in Sources */,
 				2C9731621F4C38F600AC9301 /* WebStepViewController.swift in Sources */,
@@ -18623,7 +18609,6 @@
 				2CA8D1962088D9C000E105E9 /* StepCardView.swift in Sources */,
 				2CA8D1992088D9C000E105E9 /* WriteCommentViewController.swift in Sources */,
 				2CA8D19A2088D9C000E105E9 /* AdaptiveRemoteConfig.swift in Sources */,
-				2CA8D19B2088D9C000E105E9 /* WriteCommentDelegate.swift in Sources */,
 				2CA8D19C2088D9C000E105E9 /* DiscussionAlertConstructor.swift in Sources */,
 				2CA8D19D2088D9C000E105E9 /* VideoStepViewController.swift in Sources */,
 				2CF2248620EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
@@ -19129,7 +19114,6 @@
 				864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */,
 				08C1BF331FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				864D676E1E83E08E001E8D9E /* WriteCommentViewController.swift in Sources */,
-				864D676F1E83E08E001E8D9E /* WriteCommentDelegate.swift in Sources */,
 				864D67711E83E08E001E8D9E /* DiscussionAlertConstructor.swift in Sources */,
 				864D67721E83E08E001E8D9E /* VideoStepViewController.swift in Sources */,
 				864D67731E83E08E001E8D9E /* WebStepViewController.swift in Sources */,
