@@ -110,7 +110,6 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
         tableView.register(cellClass: DiscussionTableViewCell.self)
         tableView.register(cellClass: LoadMoreTableViewCell.self)
-        tableView.register(cellClass: DiscussionWebTableViewCell.self)
 
         self.title = NSLocalizedString("Discussions", comment: "")
 

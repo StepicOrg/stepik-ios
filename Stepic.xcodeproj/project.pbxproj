@@ -494,8 +494,6 @@
 		08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
 		08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */; };
-		08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
-		08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
@@ -1022,7 +1020,6 @@
 		2C1B61061F4C4AEF00236804 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C1B61071F4C4AEF00236804 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C1B61091F4C4AEF00236804 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C1B610A1F4C4AEF00236804 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C1B610B1F4C4AEF00236804 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C1B61101F4C4AEF00236804 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
@@ -1283,7 +1280,6 @@
 		2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C1B62771F4C4AEF00236804 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C1B627A1F4C4AEF00236804 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C1B627D1F4C4AEF00236804 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C1B627E1F4C4AEF00236804 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C1B627F1F4C4AEF00236804 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -1374,7 +1370,6 @@
 		2C1B63171F4C590700236804 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C1B63181F4C590700236804 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C1B631A1F4C590700236804 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C1B631B1F4C590700236804 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C1B631C1F4C590700236804 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C1B63211F4C590700236804 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
@@ -1635,7 +1630,6 @@
 		2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C1B648A1F4C590700236804 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C1B648D1F4C590700236804 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C1B64901F4C590700236804 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C1B64911F4C590700236804 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C1B64921F4C590700236804 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -2278,7 +2272,6 @@
 		2C89A99A1F4C289900227C3B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C89A9A41F4C289900227C3B /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C89A9A51F4C289900227C3B /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
@@ -2542,7 +2535,6 @@
 		2C89AB041F4C289900227C3B /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C89AB0D1F4C289900227C3B /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C89AB0E1F4C289900227C3B /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C89AB0F1F4C289900227C3B /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -2825,7 +2817,6 @@
 		2C97314E1F4C38F600AC9301 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C97314F1F4C38F600AC9301 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C9731511F4C38F600AC9301 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C9731521F4C38F600AC9301 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C9731531F4C38F600AC9301 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C9731581F4C38F600AC9301 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
@@ -3088,7 +3079,6 @@
 		2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C9732BC1F4C38F600AC9301 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C9732BE1F4C38F600AC9301 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C9732C11F4C38F600AC9301 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -3262,7 +3252,6 @@
 		2CA8D1892088D9C000E105E9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2CA8D18A2088D9C000E105E9 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2CA8D18B2088D9C000E105E9 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2CA8D18C2088D9C000E105E9 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2CA8D18D2088D9C000E105E9 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2CA8D1932088D9C000E105E9 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2CA8D1942088D9C000E105E9 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
@@ -3628,7 +3617,6 @@
 		2CA8D3452088D9C000E105E9 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2CA8D3462088D9C000E105E9 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
 		2CA8D3472088D9C000E105E9 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
-		2CA8D3482088D9C000E105E9 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2CA8D3492088D9C000E105E9 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2CA8D34A2088D9C000E105E9 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2CA8D34B2088D9C000E105E9 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
@@ -4517,7 +4505,6 @@
 		864D675B1E83E08E001E8D9E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		864D675C1E83E08E001E8D9E /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		864D675E1E83E08E001E8D9E /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		864D67611E83E08E001E8D9E /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		864D67621E83E08E001E8D9E /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		864D67671E83E08E001E8D9E /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
@@ -4589,7 +4576,6 @@
 		86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -5346,8 +5332,6 @@
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTapHelper.swift; sourceTree = "<group>"; };
 		08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireExtensions.swift; sourceTree = "<group>"; };
-		08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionWebTableViewCell.xib; sourceTree = "<group>"; };
-		08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionWebTableViewCell.swift; sourceTree = "<group>"; };
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
@@ -7839,7 +7823,6 @@
 		08B977061D19D29A00FFC52C /* DiscussionTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				08B977081D19D55100FFC52C /* WebView */,
 				08B977071D19D54B00FFC52C /* Label */,
 			);
 			name = DiscussionTableViewCells;
@@ -7852,15 +7835,6 @@
 				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
 			);
 			name = Label;
-			sourceTree = "<group>";
-		};
-		08B977081D19D55100FFC52C /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */,
-				08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */,
-			);
-			name = WebView;
 			sourceTree = "<group>";
 		};
 		08BC47111CDA3BFF009A1D25 /* Task Managers */ = {
@@ -12716,7 +12690,6 @@
 				2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */,
-				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				08CBA3541F5A2D9400302154 /* Profile.storyboard in Resources */,
 				0860D91B1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
@@ -12846,7 +12819,6 @@
 				2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C1B62771F4C4AEF00236804 /* DownloadTableViewCell.xib in Resources */,
-				2C1B627A1F4C4AEF00236804 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C1B627D1F4C4AEF00236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B627E1F4C4AEF00236804 /* DiscussionsViewController.xib in Resources */,
 				2C1B627F1F4C4AEF00236804 /* LoadMoreTableViewCell.xib in Resources */,
@@ -12937,7 +12909,6 @@
 				2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C1B648A1F4C590700236804 /* DownloadTableViewCell.xib in Resources */,
-				2C1B648D1F4C590700236804 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C1B64901F4C590700236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B64911F4C590700236804 /* DiscussionsViewController.xib in Resources */,
 				2C4BBF26203DC670000A4250 /* plyr.js in Resources */,
@@ -13071,7 +13042,6 @@
 				2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */,
 				2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */,
 				08DF78991F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
-				2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */,
 				2C35C4E91F4DA48E002F3BF4 /* nouns_m.plist in Resources */,
 				2C89AB0D1F4C289900227C3B /* DiscussionTableViewCell.xib in Resources */,
 				08CB0D3E1FB5FB28001A1E02 /* Explore.storyboard in Resources */,
@@ -13163,7 +13133,6 @@
 				2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */,
 				2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C9732BC1F4C38F600AC9301 /* DownloadTableViewCell.xib in Resources */,
-				2C9732BE1F4C38F600AC9301 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C9732C11F4C38F600AC9301 /* DiscussionTableViewCell.xib in Resources */,
 				2C4BBF20203DC66F000A4250 /* plyr.js in Resources */,
 				2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */,
@@ -13250,7 +13219,6 @@
 				2CA8D3452088D9C000E105E9 /* PlayerTestStoryboard.storyboard in Resources */,
 				2CA8D3462088D9C000E105E9 /* DownloadTableViewCell.xib in Resources */,
 				2CA8D3472088D9C000E105E9 /* HeaderMenuBlockTableViewCell.xib in Resources */,
-				2CA8D3482088D9C000E105E9 /* DiscussionWebTableViewCell.xib in Resources */,
 				2CA8D3492088D9C000E105E9 /* nouns_m.plist in Resources */,
 				2CE11348208E103400293EAE /* Icons.xcassets in Resources */,
 				2CA8D34A2088D9C000E105E9 /* DiscussionTableViewCell.xib in Resources */,
@@ -13383,7 +13351,6 @@
 				08DF78971F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
-				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
 				2CF425282024A5F3002D7305 /* step3.html in Resources */,
 				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
@@ -15451,7 +15418,6 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
-				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */,
@@ -16425,7 +16391,6 @@
 				2C1B61061F4C4AEF00236804 /* Player.swift in Sources */,
 				2C1B61071F4C4AEF00236804 /* VideoRate.swift in Sources */,
 				2C1B61091F4C4AEF00236804 /* DownloadTableViewCell.swift in Sources */,
-				2C1B610A1F4C4AEF00236804 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28B1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B610B1F4C4AEF00236804 /* DiscussionTableViewCell.swift in Sources */,
 				2C0107C7210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
@@ -16852,7 +16817,6 @@
 				2C1B63171F4C590700236804 /* Player.swift in Sources */,
 				2C1B63181F4C590700236804 /* VideoRate.swift in Sources */,
 				2C1B631A1F4C590700236804 /* DownloadTableViewCell.swift in Sources */,
-				2C1B631B1F4C590700236804 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28C1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B631C1F4C590700236804 /* DiscussionTableViewCell.swift in Sources */,
 				2C0107C8210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
@@ -17806,7 +17770,6 @@
 				2C89A99A1F4C289900227C3B /* Player.swift in Sources */,
 				2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */,
 				2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */,
-				2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */,
 				2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */,
 				2C89A9A41F4C289900227C3B /* DiscussionsViewController.swift in Sources */,
 				2C89A9A51F4C289900227C3B /* LoadMoreTableViewCell.swift in Sources */,
@@ -18242,7 +18205,6 @@
 				2C97314E1F4C38F600AC9301 /* Player.swift in Sources */,
 				2C97314F1F4C38F600AC9301 /* VideoRate.swift in Sources */,
 				2C9731511F4C38F600AC9301 /* DownloadTableViewCell.swift in Sources */,
-				2C9731521F4C38F600AC9301 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28A1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C9731531F4C38F600AC9301 /* DiscussionTableViewCell.swift in Sources */,
 				2C608AC8204568CD006870BB /* CongratsView.swift in Sources */,
@@ -18675,7 +18637,6 @@
 				2CA8D1892088D9C000E105E9 /* Player.swift in Sources */,
 				2CA8D18A2088D9C000E105E9 /* VideoRate.swift in Sources */,
 				2CA8D18B2088D9C000E105E9 /* DownloadTableViewCell.swift in Sources */,
-				2CA8D18C2088D9C000E105E9 /* DiscussionWebTableViewCell.swift in Sources */,
 				2CA8D18D2088D9C000E105E9 /* DiscussionTableViewCell.swift in Sources */,
 				2CA8D1932088D9C000E105E9 /* DiscussionsViewController.swift in Sources */,
 				2CA8D1942088D9C000E105E9 /* LoadMoreTableViewCell.swift in Sources */,
@@ -19183,7 +19144,6 @@
 				86A1C3362065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				864D675E1E83E08E001E8D9E /* DownloadTableViewCell.swift in Sources */,
 				2CF2248120EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
-				864D67611E83E08E001E8D9E /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE2871F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2CA2E71920237E14001DC410 /* StepCardView.swift in Sources */,
 				864D67621E83E08E001E8D9E /* DiscussionTableViewCell.swift in Sources */,
