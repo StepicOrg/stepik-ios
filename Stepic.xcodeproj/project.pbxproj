@@ -7823,18 +7823,10 @@
 		08B977061D19D29A00FFC52C /* DiscussionTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				08B977071D19D54B00FFC52C /* Label */,
-			);
-			name = DiscussionTableViewCells;
-			sourceTree = "<group>";
-		};
-		08B977071D19D54B00FFC52C /* Label */ = {
-			isa = PBXGroup;
-			children = (
 				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
 				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
 			);
-			name = Label;
+			name = DiscussionTableViewCells;
 			sourceTree = "<group>";
 		};
 		08BC47111CDA3BFF009A1D25 /* Task Managers */ = {
