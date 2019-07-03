@@ -6989,7 +6989,7 @@
 		082CB1AD1D088B6900C79A27 /* Discussions */ = {
 			isa = PBXGroup;
 			children = (
-				08B977061D19D29A00FFC52C /* DiscussionTableViewCells */,
+				08B977061D19D29A00FFC52C /* DiscussionTableViewCell */,
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
 				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
@@ -7820,13 +7820,13 @@
 			name = "Controller Helper";
 			sourceTree = "<group>";
 		};
-		08B977061D19D29A00FFC52C /* DiscussionTableViewCells */ = {
+		08B977061D19D29A00FFC52C /* DiscussionTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
 				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
 			);
-			name = DiscussionTableViewCells;
+			name = DiscussionTableViewCell;
 			sourceTree = "<group>";
 		};
 		08BC47111CDA3BFF009A1D25 /* Task Managers */ = {
