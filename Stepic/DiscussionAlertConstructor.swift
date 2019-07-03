@@ -10,7 +10,7 @@ import Foundation
 
 final class DiscussionAlertConstructor {
     static func getCommentAlert(
-        _ comment: Comment,
+        comment: Comment,
         replyBlock: @escaping (() -> Void),
         likeBlock: @escaping (() -> Void),
         abuseBlock: @escaping (() -> Void),
