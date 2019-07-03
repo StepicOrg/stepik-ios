@@ -14,7 +14,7 @@ protocol DiscussionTableViewCellDelegate: class {
     func didOpenProfile(for userWithId: Int)
 }
 
-class DiscussionTableViewCell: UITableViewCell {
+final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
     weak var delegate: DiscussionTableViewCellDelegate?
 
     @IBOutlet weak var userAvatarImageView: AvatarImageView!
@@ -66,7 +66,7 @@ class DiscussionTableViewCell: UITableViewCell {
     }
 
     var comment: Comment?
-    var heightUpdateBlock : (() -> Void)?
+    var heightUpdateBlock: (() -> Void)?
 
     func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
         if let url = URL(string: comment.userInfo.avatarURL) {
@@ -101,11 +101,11 @@ class DiscussionTableViewCell: UITableViewCell {
         }
     }
 
-    fileprivate func loadLabel(_ htmlString: String) {
+    private func loadLabel(_ htmlString: String) {
         commentLabel.setTextWithHTMLString(htmlString)
     }
 
-    fileprivate func setLeadingConstraints(_ constant: CGFloat) {
+    private func setLeadingConstraints(_ constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
         labelLeadingConstraint.constant = -constant
         switch self.separatorType {
@@ -139,7 +139,8 @@ class DiscussionTableViewCell: UITableViewCell {
         userAvatarImageView?.addGestureRecognizer(tapActionAvatarView)
     }
 
-    @objc func actionUserTapped() {
+    @objc
+    func actionUserTapped() {
         guard let userId = comment?.userInfo.id else {
             return
         }
@@ -161,5 +162,4 @@ class DiscussionTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }

@@ -14,19 +14,17 @@ enum WriteCommentViewControllerState {
     case editing, sending, ok
 }
 
-class WriteCommentViewController: UIViewController {
-
+final class WriteCommentViewController: UIViewController {
     @IBOutlet weak var commentTextView: IQTextView!
 
     weak var delegate: WriteCommentDelegate?
 
     var state: WriteCommentViewControllerState = .editing {
         didSet {
-            UIThread.performUI {
-                [weak self] in
+            UIThread.performUI { [weak self] in
                 if let s = self {
                     switch s.state {
-                    case .sending :
+                    case .sending:
                         s.navigationItem.rightBarButtonItem = s.sendingItem
                         break
                     case .ok:
@@ -49,17 +47,28 @@ class WriteCommentViewController: UIViewController {
     var okItem: UIBarButtonItem?
 
     func setupItems() {
-        editingItem = UIBarButtonItem(image: Images.sendImage, style: UIBarButtonItem.Style.done, target: self, action: #selector(WriteCommentViewController.sendPressed))
+        editingItem = UIBarButtonItem(
+            image: Images.sendImage,
+            style: .done,
+            target: self,
+            action: #selector(WriteCommentViewController.sendPressed)
+        )
 
         let v = UIActivityIndicatorView()
         v.color = UIColor.mainDark
         v.startAnimating()
         sendingItem = UIBarButtonItem(customView: v)
 
-        okItem = UIBarButtonItem(image: Images.checkMarkImage, style: UIBarButtonItem.Style.done, target: self, action: #selector(WriteCommentViewController.okPressed))
+        okItem = UIBarButtonItem(
+            image: Images.checkMarkImage,
+            style: .done,
+            target: self,
+            action: #selector(WriteCommentViewController.okPressed)
+        )
     }
 
-    @objc func okPressed() {
+    @objc
+    func okPressed() {
         print("should have never been pressed")
     }
 
@@ -78,14 +87,10 @@ class WriteCommentViewController: UIViewController {
         state = .editing
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     var request: Request?
 
-    @objc func sendPressed() {
+    @objc
+    func sendPressed() {
         print("send pressed")
         state = .sending
         sendComment()
@@ -99,22 +104,17 @@ class WriteCommentViewController: UIViewController {
     func sendComment() {
         let comment = Comment(parent: parentId, target: target, text: htmlText)
 
-        request = ApiDataDownloader.comments.create(comment, success: {
-                [weak self]
-                comment in
-                self?.state = .ok
-                self?.request = nil
-                UIThread.performUI {
-                    self?.delegate?.didWriteComment(comment)
-                    self?.navigationController?.popViewController(animated: true)
-                }
-            }, error: {
-                [weak self]
-                _ in
-                self?.state = .editing
-                self?.request = nil
+        request = ApiDataDownloader.comments.create(comment, success: { [weak self] comment in
+            self?.state = .ok
+            self?.request = nil
+            UIThread.performUI {
+                self?.delegate?.didWriteComment(comment)
+                self?.navigationController?.popViewController(animated: true)
             }
-        )
+        }, error: { [weak self] _ in
+            self?.state = .editing
+            self?.request = nil
+        })
     }
 
     deinit {

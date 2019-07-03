@@ -8,8 +8,7 @@
 
 import UIKit
 
-class LoadMoreTableViewCell: UITableViewCell {
-
+final class LoadMoreTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var showMoreLabel: StepikLabel!
     @IBOutlet weak var showMoreActivityIndicator: UIActivityIndicatorView!
 
@@ -18,8 +17,6 @@ class LoadMoreTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-
         showMoreActivityIndicator.isHidden = true
     }
 
@@ -39,12 +36,9 @@ class LoadMoreTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
 
     override func prepareForReuse() {
-//        showMoreActivityIndicator.hidden = true
         showMoreLabel.isHidden = false
     }
-
 }

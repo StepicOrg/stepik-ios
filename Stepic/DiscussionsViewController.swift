@@ -158,15 +158,10 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     var discussions = [Comment]()
     var votes = [String: Vote]()
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @objc func writeCommentPressed() {
+    @objc
+    func writeCommentPressed() {
         if !AuthInfo.shared.isAuthorized {
-            RoutingManager.auth.routeFrom(controller: self, success: {
-                [weak self] in
+            RoutingManager.auth.routeFrom(controller: self, success: { [weak self] in
                 if let s = self {
                     s.presentWriteCommentController(parent: nil)
                 }
@@ -175,7 +170,6 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
         } else {
             presentWriteCommentController(parent: nil)
         }
-
     }
 
     func resetData(_ withReload: Bool) {
@@ -194,7 +188,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
     func getNextDiscussionIdsToLoad() -> [Int] {
         let startIndex = discussionIds.loaded.count
-        return Array(discussionIds.all[startIndex ..< startIndex + min(discussionLoadingInterval, discussionIds.leftToLoad)])
+        return Array(discussionIds.all[startIndex..<startIndex + min(discussionLoadingInterval, discussionIds.leftToLoad)])
     }
 
     func getNextReplyIdsToLoad(_ section: Int) -> [Int] {
@@ -207,7 +201,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     }
 
     func getNextReplyIdsToLoad(_ discussion: Comment) -> [Int] {
-        let loadedIds: [Int] = replies.loaded[discussion.id]?.map({return $0.id}) ?? []
+        let loadedIds: [Int] = replies.loaded[discussion.id]?.map({ return $0.id }) ?? []
         let loadedReplies = Set<Int>(loadedIds)
         var res: [Int] = []
 
@@ -264,8 +258,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
             }, error: { [weak self] errorString in
                 print(errorString)
                 self?.emptyDatasetState = .error
-                UIThread.performUI {
-                    [weak self] in
+                UIThread.performUI { [weak self] in
                     self?.refreshControl?.endRefreshing()
                 }
             })
@@ -309,8 +302,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
             cellsInfo.append(DiscussionsCellInfo(loadDiscussions: true))
         }
 
-        UIThread.performUI({
-            [weak self] in
+        UIThread.performUI({ [weak self] in
             if self?.cellsInfo.count == 0 {
                 self?.emptyDatasetState = emptyState
             }
@@ -320,7 +312,8 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
     var isReloading: Bool = false
 
-    @objc func reloadDiscussions() {
+    @objc
+    func reloadDiscussions() {
         emptyDatasetState = .none
         if isReloading {
             return
@@ -328,57 +321,48 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
         resetData(false)
         isReloading = true
 
-        performRequest({
-            [weak self] in
+        performRequest({ [weak self] in
             if let discussionProxyId = self?.discussionProxyId {
-                _ = ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: {
-                        [weak self]
-                        discussionProxy in
-                        self?.discussionIds.all = discussionProxy.discussionIds
-                        if let discussionIdsToLoad = self?.getNextDiscussionIdsToLoad() {
-                            self?.loadDiscussions(discussionIdsToLoad, success: {
-                                    [weak self] in
-                                    UIThread.performUI {
-                                        self?.refreshControl?.endRefreshing()
-                                        self?.reloadTableData()
-                                        self?.isReloading = false
-                                    }
-                                }
-                            )
-                        }
-                    }, error: {
-                        [weak self]
-                        errorString in
-                        print(errorString)
-                        self?.isReloading = false
-                        self?.reloadTableData(.error)
-                        UIThread.performUI {
-                            [weak self] in
-                            self?.refreshControl?.endRefreshing()
-                        }
+                _ = ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: { [weak self]
+                    discussionProxy in
+                    self?.discussionIds.all = discussionProxy.discussionIds
+                    if let discussionIdsToLoad = self?.getNextDiscussionIdsToLoad() {
+                        self?.loadDiscussions(discussionIdsToLoad, success: { [weak self] in
+                            UIThread.performUI {
+                                self?.refreshControl?.endRefreshing()
+                                self?.reloadTableData()
+                                self?.isReloading = false
+                            }
+                        })
                     }
+                }, error: { [weak self] errorString in
+                    print(errorString)
+                    self?.isReloading = false
+                    self?.reloadTableData(.error)
+                    UIThread.performUI { [weak self] in
+                        self?.refreshControl?.endRefreshing()
+                    }
+                }
                 )
             }
-        }, error: {
-            [weak self]
-            error in
-            guard let s = self else { return }
+        }, error: { [weak self] error in
+            guard let s = self else {
+                return
+            }
 
             self?.isReloading = false
             self?.reloadTableData(.error)
-            UIThread.performUI {
-                [weak self] in
+
+            UIThread.performUI { [weak self] in
                 self?.refreshControl?.endRefreshing()
             }
 
             if error == PerformRequestError.noAccessToRefreshToken {
                 AuthInfo.shared.token = nil
-                RoutingManager.auth.routeFrom(controller: s, success: {
-                    [weak self] in
+                RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
                     self?.reloadDiscussions()
                 }, cancel: nil)
             }
-
         })
     }
 
@@ -401,60 +385,51 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
                 let vToSet: VoteValue? = (value == VoteValue.Epic) ? nil : .Epic
                 let v = Vote(id: comment.vote.id, value: vToSet)
                 performRequest({
-                    _ = ApiDataDownloader.votes.update(v, success: {
-                            vote in
-                            comment.vote = vote
-                            switch value {
-                            case .Abuse:
-                                comment.abuseCount -= 1
-                                comment.epicCount += 1
-                                c.setLiked(true, likesCount: comment.epicCount)
-                                AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked, parameters: nil)
-
-                            case .Epic:
-                                comment.epicCount -= 1
-                                c.setLiked(false, likesCount: comment.epicCount)
-                                AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unliked, parameters: nil)
-                            }
-                        }, error: {
-                            errorMsg in
-                            print(errorMsg)
+                    _ = ApiDataDownloader.votes.update(v, success: { vote in
+                        comment.vote = vote
+                        switch value {
+                        case .Abuse:
+                            comment.abuseCount -= 1
+                            comment.epicCount += 1
+                            c.setLiked(true, likesCount: comment.epicCount)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked, parameters: nil)
+                        case .Epic:
+                            comment.epicCount -= 1
+                            c.setLiked(false, likesCount: comment.epicCount)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unliked, parameters: nil)
+                        }
+                    }, error: { errorMsg in
+                        print(errorMsg)
                     })
-                }, error: {
-                    [weak self]
-                    error in
-                    guard let s = self else { return }
+                }, error: { [weak self] error in
+                    guard let s = self else {
+                        return
+                    }
                     if error == PerformRequestError.noAccessToRefreshToken {
                         AuthInfo.shared.token = nil
-                        RoutingManager.auth.routeFrom(controller: s, success: {
-                            [weak self] in
+                        RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
                             self?.reloadDiscussions()
                         }, cancel: nil)
                     }
                 })
-
             } else {
                 let v = Vote(id: comment.vote.id, value: .Epic)
                 performRequest({
-                    _ = ApiDataDownloader.votes.update(v, success: {
-                            vote in
-                            comment.vote = vote
-                            comment.epicCount += 1
-                            c.setLiked(true, likesCount: comment.epicCount)
-                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked, parameters: nil)
-                        }, error: {
-                            errorMsg in
-                            print(errorMsg)
-                        }
-                    )
-                }, error: {
-                    [weak self]
-                    error in
-                    guard let s = self else { return }
+                    _ = ApiDataDownloader.votes.update(v, success: { vote in
+                        comment.vote = vote
+                        comment.epicCount += 1
+                        c.setLiked(true, likesCount: comment.epicCount)
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked, parameters: nil)
+                    }, error: { errorMsg in
+                        print(errorMsg)
+                    })
+                }, error: { [weak self] error in
+                    guard let s = self else {
+                        return
+                    }
                     if error == PerformRequestError.noAccessToRefreshToken {
                         AuthInfo.shared.token = nil
-                        RoutingManager.auth.routeFrom(controller: s, success: {
-                            [weak self] in
+                        RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
                             self?.reloadDiscussions()
                         }, cancel: nil)
                     }
@@ -468,57 +443,49 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
             if let value = comment.vote.value {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
                 performRequest({
-                    _ = ApiDataDownloader.votes.update(v, success: {
-                            vote in
-                            comment.vote = vote
-                            switch value {
-                            case .Abuse:
-                                break
-                            case .Epic:
-                                comment.epicCount -= 1
-                                comment.abuseCount += 1
-                                c.setLiked(false, likesCount: comment.epicCount)
-                                AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused, parameters: nil)
-                            }
-                        }, error: {
-                            errorMsg in
-                            print(errorMsg)
+                    _ = ApiDataDownloader.votes.update(v, success: { vote in
+                        comment.vote = vote
+                        switch value {
+                        case .Abuse:
+                            break
+                        case .Epic:
+                            comment.epicCount -= 1
+                            comment.abuseCount += 1
+                            c.setLiked(false, likesCount: comment.epicCount)
+                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused, parameters: nil)
+                        }
+                    }, error: { errorMsg in
+                        print(errorMsg)
                     })
-                }, error: {
-                    [weak self]
-                    error in
-                    guard let s = self else { return }
+                }, error: { [weak self] error in
+                    guard let s = self else {
+                        return
+                    }
                     if error == PerformRequestError.noAccessToRefreshToken {
                         AuthInfo.shared.token = nil
-                        RoutingManager.auth.routeFrom(controller: s, success: {
-                            [weak self] in
+                        RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
                             self?.reloadDiscussions()
                         }, cancel: nil)
                     }
                 })
-
             } else {
                 let v = Vote(id: comment.vote.id, value: .Abuse)
                 performRequest({
                     _ = ApiDataDownloader.votes.update(v, success: {
-                            vote in
-                            comment.vote = vote
-                            comment.abuseCount += 1
-                            AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused, parameters: nil)
-
-                        }, error: {
-                            errorMsg in
-                            print(errorMsg)
-                        }
-                    )
-                }, error: {
-                    [weak self]
-                    error in
-                    guard let s = self else { return }
+                        vote in
+                        comment.vote = vote
+                        comment.abuseCount += 1
+                        AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused, parameters: nil)
+                    }, error: { errorMsg in
+                        print(errorMsg)
+                    })
+                }, error: { [weak self] error in
+                    guard let s = self else {
+                        return
+                    }
                     if error == PerformRequestError.noAccessToRefreshToken {
                         AuthInfo.shared.token = nil
-                        RoutingManager.auth.routeFrom(controller: s, success: {
-                            [weak self] in
+                        RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
                             self?.reloadDiscussions()
                         }, cancel: nil)
                     }
@@ -529,54 +496,49 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
 
     func handleSelectDiscussion(_ comment: Comment, cell: UITableViewCell, completion: (() -> Void)?) {
         let alert = DiscussionAlertConstructor.getCommentAlert(comment,
-            replyBlock: {
-                [weak self] in
-                guard let s = self else { return }
+            replyBlock: { [weak self] in
+                guard let s = self else {
+                    return
+                }
                 if !AuthInfo.shared.isAuthorized {
-                    RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in
+                    RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
                         self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
                     }, cancel: nil)
                 } else {
                     self?.presentWriteCommentController(parent: comment.parentId ?? comment.id)
                 }
-            }, likeBlock: {
-                [weak self] in
-                guard let s = self else { return }
-                if !AuthInfo.shared.isAuthorized {
-                    RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in
-                        self?.setLiked(comment, cell: cell)
-                    }, cancel: nil)
-                } else {
-                    self?.setLiked(comment, cell: cell)
-                }
-            }, abuseBlock: {
-                [weak self] in
-                guard let s = self else { return }
-                if !AuthInfo.shared.isAuthorized {
-                    RoutingManager.auth.routeFrom(controller: s, success: {
-                        [weak self] in
-                        self?.setAbused(comment, cell: cell)
-                    }, cancel: nil)
-                } else {
-                    self?.setAbused(comment, cell: cell)
-                }
-            }, openURLBlock: {
-                [weak self]
-                url in
-                if let s = self {
-                    WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: s, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
-                }
+            }, likeBlock: { [weak self] in
+            guard let s = self else {
+                return
             }
-        )
+            if !AuthInfo.shared.isAuthorized {
+                RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
+                    self?.setLiked(comment, cell: cell)
+                }, cancel: nil)
+            } else {
+                self?.setLiked(comment, cell: cell)
+            }
+        }, abuseBlock: { [weak self] in
+            guard let s = self else {
+                return
+            }
+            if !AuthInfo.shared.isAuthorized {
+                RoutingManager.auth.routeFrom(controller: s, success: { [weak self] in
+                    self?.setAbused(comment, cell: cell)
+                }, cancel: nil)
+            } else {
+                self?.setAbused(comment, cell: cell)
+            }
+        }, openURLBlock: { [weak self] url in
+            if let s = self {
+                WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: s, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+            }
+        })
 
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = cell
             popoverController.sourceRect = cell.bounds
         }
-
-//        alert.view.layoutIfNeeded()
 
         self.present(alert, animated: true, completion: {
             completion?()
@@ -584,7 +546,10 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     }
 
     func presentWriteCommentController(parent: Int?) {
-        if let writeController = ControllerHelper.instantiateViewController(identifier: "WriteCommentViewController", storyboardName: "DiscussionsStoryboard") as? WriteCommentViewController {
+        if let writeController = ControllerHelper.instantiateViewController(
+            identifier: "WriteCommentViewController", 
+            storyboardName: "DiscussionsStoryboard"
+        ) as? WriteCommentViewController {
             writeController.parentId = parent
             writeController.target = target
             writeController.delegate = self
@@ -605,7 +570,7 @@ class DiscussionsViewController: UIViewController, ControllerWithStepikPlacehold
     var webViewHeightForDiscussionId = [Int: CGFloat]()
 }
 
-extension DiscussionsViewController : UITableViewDelegate {
+extension DiscussionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if let comment = cellsInfo[(indexPath as NSIndexPath).row].comment {
             if let est = estimatedHeightForDiscussionId[comment.id] {
@@ -614,6 +579,7 @@ extension DiscussionsViewController : UITableViewDelegate {
         }
         return 44
     }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
@@ -626,8 +592,7 @@ extension DiscussionsViewController : UITableViewDelegate {
         if let comment = cellsInfo[(indexPath as NSIndexPath).row].comment {
             let cell = tableView.cellForRow(at: indexPath)
             if let c = cell {
-                handleSelectDiscussion(comment, cell: c, completion: {
-                    [weak self] in
+                handleSelectDiscussion(comment, cell: c, completion: { [weak self] in
                     UIThread.performUI {
                         self?.tableView.deselectRow(at: indexPath, animated: true)
                     }
@@ -640,16 +605,14 @@ extension DiscussionsViewController : UITableViewDelegate {
             if let c = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
                 c.isUpdating = true
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                loadDiscussions(idsToLoad, success: {
-                        [weak self] in
-                        UIThread.performUI {
-                            //TODO: Change to animated reload
-                            self?.reloadTableData()
-                            c.isUpdating = false
-                        }
-                    })
+                loadDiscussions(idsToLoad, success: { [weak self] in
+                    UIThread.performUI {
+                        //TODO: Change to animated reload
+                        self?.reloadTableData()
+                        c.isUpdating = false
+                    }
+                })
             }
-
         }
 
         if cellsInfo[(indexPath as NSIndexPath).row].loadDiscussions != nil {
@@ -657,20 +620,23 @@ extension DiscussionsViewController : UITableViewDelegate {
             if let c = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
                 c.isUpdating = true
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                loadDiscussions(idsToLoad, success: {
-                        [weak self] in
-                        UIThread.performUI {
-                            //TODO: Change to animated reload
-                            self?.reloadTableData()
-                            c.isUpdating = false
-                        }
-                    })
+                loadDiscussions(idsToLoad, success: { [weak self] in
+                    UIThread.performUI {
+                        //TODO: Change to animated reload
+                        self?.reloadTableData()
+                        c.isUpdating = false
+                    }
+                })
             }
         }
     }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("will display cell for \((indexPath as NSIndexPath).row)")
+    }
 }
 
-extension DiscussionsViewController : UITableViewDataSource {
+extension DiscussionsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -679,52 +645,14 @@ extension DiscussionsViewController : UITableViewDataSource {
         return cellsInfo.count
     }
 
-    @objc(tableView:willDisplayCell:forRowAtIndexPath:) func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("will display cell for \((indexPath as NSIndexPath).row)")
-    }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         print("cell for row \((indexPath as NSIndexPath).row)")
 
         if let comment = cellsInfo[(indexPath as NSIndexPath).row].comment {
-
-//            if !TagDetectionUtil.isWebViewSupportNeeded(comment.text) {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "DiscussionTableViewCell", for: indexPath) as! DiscussionTableViewCell
-
-                cell.initWithComment(comment, separatorType: cellsInfo[(indexPath as NSIndexPath).row].separatorType)
-
-                cell.delegate = self
-                return cell
-//            } else {
-//                let cell = tableView.dequeueReusableCellWithIdentifier("DiscussionWebTableViewCell", forIndexPath: indexPath) as! DiscussionWebTableViewCell
-//                
-//                if let user = userInfos[comment.userId] {
-//                    if let h = webViewHeightForDiscussionId[comment.id]  {
-//                        cell.webContainerViewHeight.constant = h
-//                    } else {
-//
-//                        cell.heightUpdateBlock = {
-//                            [weak self] 
-//                            height, webViewHeight in
-//                            self?.webViewHeightForDiscussionId[comment.id] = webViewHeight
-//                            print("height update block for \(indexPath.row) with height \(height)")
-//                            dispatch_async(dispatch_get_main_queue(), {
-//                                [weak self] in
-//                                if self?.estimatedHeightForDiscussionId[comment.id] < height {
-//                                    self?.tableView.beginUpdates()
-//                                    self?.estimatedHeightForDiscussionId[comment.id] = height
-//                                    self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-//                                    self?.tableView.endUpdates()
-//                                }
-//                            })
-//                        }
-//                    }
-//                    cell.initWithComment(comment, user: user, separatorType: cellsInfo[indexPath.row].separatorType) 
-//                } 
-//                return cell
-//
-//            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DiscussionTableViewCell", for: indexPath) as! DiscussionTableViewCell
+            cell.initWithComment(comment, separatorType: cellsInfo[(indexPath as NSIndexPath).row].separatorType)
+            cell.delegate = self
+            return cell
         }
 
         if let loadRepliesFor = cellsInfo[(indexPath as NSIndexPath).row].loadRepliesFor {
@@ -745,11 +673,11 @@ extension DiscussionsViewController : UITableViewDataSource {
     }
 }
 
-extension DiscussionsViewController : WriteCommentDelegate {
+extension DiscussionsViewController: WriteCommentDelegate {
     func didWriteComment(_ comment: Comment) {
         if let parentId = comment.parentId {
-            //insert row in an existing section
-            if let section = discussions.index(where: {$0.id == parentId}) {
+            // Insert row in an existing section.
+            if let section = discussions.index(where: { $0.id == parentId }) {
                 discussions[section].repliesIds += [comment.id]
                 if replies.loaded[parentId] == nil {
                     replies.loaded[parentId] = []
@@ -758,7 +686,7 @@ extension DiscussionsViewController : WriteCommentDelegate {
                 reloadTableData()
             }
         } else {
-            //insert section
+            // Insert section.
             discussionIds.all.insert(comment.id, at: 0)
             discussionIds.loaded.insert(comment.id, at: 0)
             discussions.insert(comment, at: 0)

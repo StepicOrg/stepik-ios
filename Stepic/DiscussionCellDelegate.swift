@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol DiscussionCellDelegate : class {
+protocol DiscussionCellDelegate: class {
     func didSelect(_ indexPath: IndexPath, deselectBlock: (() -> Void))
 }

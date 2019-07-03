@@ -11,8 +11,7 @@ import SDWebImage
 import WebKit
 import SnapKit
 
-class DiscussionWebTableViewCell: UITableViewCell {
-
+final class DiscussionWebTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var userAvatarImageView: AvatarImageView!
     @IBOutlet weak var nameLabel: UILabel!
 
@@ -59,14 +58,14 @@ class DiscussionWebTableViewCell: UITableViewCell {
     var heightUpdateBlock: ((CGFloat, CGFloat) -> Void)?
     var commentWebView: WKWebView?
 
-    fileprivate func constructWebView() {
+    private func constructWebView() {
         let theConfiguration = WKWebViewConfiguration()
         let contentController = theConfiguration.userContentController
-        contentController.addUserScript( WKUserScript(
+        contentController.addUserScript(WKUserScript(
             source: "window.onload=function () { window.webkit.messageHandlers.sizeNotification.postMessage({width: document.width, height: document.height});};",
             injectionTime: WKUserScriptInjectionTime.atDocumentStart,
             forMainFrameOnly: false
-            ))
+        ))
 
         contentController.add(self, name: "sizeNotification")
 
@@ -97,7 +96,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
         loadWebView(comment.text)
     }
 
-    fileprivate func loadWebView(_ htmlString: String) {
+    private func loadWebView(_ htmlString: String) {
         let processor = HTMLProcessor(html: htmlString)
         let html = processor
             .injectDefault()
@@ -106,7 +105,7 @@ class DiscussionWebTableViewCell: UITableViewCell {
         commentWebView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
-    fileprivate func setLeadingConstraints(_ constant: CGFloat) {
+    private func setLeadingConstraints(_ constant: CGFloat) {
         ImageLeadingConstraint.constant = constant
         webViewLeadingConstraint.constant = constant
         switch self.separatorType {
@@ -140,14 +139,12 @@ class DiscussionWebTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }
 
-extension DiscussionWebTableViewCell : WKScriptMessageHandler {
+extension DiscussionWebTableViewCell: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let height = (message.body as? NSDictionary)?["height"] as? CGFloat {
-            DispatchQueue.main.async(execute: {
-                [weak self] in
+            DispatchQueue.main.async(execute: { [weak self] in
                 self?.webContainerViewHeight?.constant = height
                 self?.heightUpdateBlock?(height + (self?.separatorHeightConstraint.constant ?? 0) + 69, height)
                 self?.layoutSubviews()

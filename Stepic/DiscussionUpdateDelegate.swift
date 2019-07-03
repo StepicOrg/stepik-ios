@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol DiscussionUpdateDelegate : class {
+protocol DiscussionUpdateDelegate: class {
     func update(section: Int?, completion: (() -> Void)?)
 }

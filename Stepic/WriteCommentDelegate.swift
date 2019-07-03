@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol WriteCommentDelegate : class {
+protocol WriteCommentDelegate: class {
     func didWriteComment(_ comment: Comment)
 }
