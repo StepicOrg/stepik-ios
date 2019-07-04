@@ -11,19 +11,27 @@ import SDWebImage
 
 @available(*, deprecated, message: "Legacy assembly")
 final class DiscussionsLegacyAssembly: Assembly {
-    private let discussionProxyId: String
-    private let stepId: Step.IdType
+    private let discussionProxyID: String
+    private let stepID: Step.IdType
 
-    init(discussionProxyId: String, stepId: Step.IdType) {
-        self.discussionProxyId = discussionProxyId
-        self.stepId = stepId
+    init(discussionProxyID: String, stepID: Step.IdType) {
+        self.discussionProxyID = discussionProxyID
+        self.stepID = stepID
     }
 
     func makeModule() -> UIViewController {
         let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-        vc.discussionProxyId = self.discussionProxyId
-        vc.target = self.stepId
-        vc.presenter = DiscussionsPresenter()
+        vc.discussionProxyId = self.discussionProxyID
+        vc.target = self.stepID
+        vc.presenter = DiscussionsPresenter(
+            view: vc,
+            discussionProxyId: self.discussionProxyID,
+            stepId: self.stepID,
+            discussionProxiesNetworkService: DiscussionProxiesNetworkService(
+                discussionProxiesAPI: DiscussionProxiesAPI()
+            ),
+            commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI())
+        )
         return vc
     }
 }
@@ -54,32 +62,32 @@ struct DiscussionsCellInfo {
     }
 }
 
-final class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
+struct DiscussionIds {
+    var all = [Int]()
+    var loaded = [Int]()
+    
+    var leftToLoad: Int {
+        return self.all.count - self.loaded.count
+    }
+}
+
+struct Replies {
+    var loaded = [Int: [Comment]]()
+
+    func leftToLoad(_ comment: Comment) -> Int {
+        if let loadedCount = self.loaded[comment.id]?.count {
+            return comment.repliesIds.count - loadedCount
+        } else {
+            return comment.repliesIds.count
+        }
+    }
+}
+
+final class DiscussionsViewController: UIViewController, DiscussionsView, ControllerWithStepikPlaceholder {
     private enum EmptyDatasetState {
         case error
         case empty
         case none
-    }
-
-    private struct DiscussionIds {
-        var all = [Int]()
-        var loaded = [Int]()
-
-        var leftToLoad: Int {
-            return self.all.count - self.loaded.count
-        }
-    }
-
-    private struct Replies {
-        var loaded = [Int: [Comment]]()
-
-        func leftToLoad(_ comment: Comment) -> Int {
-            if let loadedCount = self.loaded[comment.id]?.count {
-                return comment.repliesIds.count - loadedCount
-            } else {
-                return comment.repliesIds.count
-            }
-        }
     }
 
     var discussionProxyId: String!
@@ -121,6 +129,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.presenter?.refresh()
 
         self.edgesForExtendedLayout = []
 
@@ -176,6 +186,65 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 
         self.tableView.beginUpdates()
         self.tableView.endUpdates()
+    }
+
+    @objc
+    private func reloadDiscussions() {
+        func onLoaded(success: Bool) {
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.isReloading = false
+                strongSelf.refreshControl?.endRefreshing()
+                strongSelf.reloadTableData(success ? .empty : .error)
+            }
+        }
+
+        self.emptyDatasetState = .none
+
+        if self.isReloading {
+            return
+        }
+
+        self.resetData(reload: false)
+        self.isReloading = true
+
+        performRequest({ [weak self] in
+            guard let discussionProxyId = self?.discussionProxyId else {
+                return
+            }
+
+            _ = ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: { [weak self] discussionProxy in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.discussionIds.all = discussionProxy.discussionIds
+                strongSelf.loadDiscussions(
+                    ids: strongSelf.getNextDiscussionIdsToLoad(),
+                    success: { onLoaded(success: true) }
+                )
+            }, error: { errorString in
+                print("DiscussionsViewController :: \(errorString)")
+                onLoaded(success: false)
+            })
+        }, error: { [weak self] error in
+            print("DiscussionsViewController :: \(error)")
+            guard let strongSelf = self else {
+                return
+            }
+
+            onLoaded(success: false)
+
+            if error == PerformRequestError.noAccessToRefreshToken {
+                AuthInfo.shared.token = nil
+                RoutingManager.auth.routeFrom(controller: strongSelf, success: { [weak self] in
+                    self?.reloadDiscussions()
+                }, cancel: nil)
+            }
+        })
     }
 
     private func resetData(reload: Bool) {
@@ -300,65 +369,6 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             }
             self.tableView.reloadData()
         }
-    }
-
-    @objc
-    private func reloadDiscussions() {
-        func onLoaded(success: Bool) {
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.isReloading = false
-                strongSelf.refreshControl?.endRefreshing()
-                strongSelf.reloadTableData(success ? .empty : .error)
-            }
-        }
-
-        self.emptyDatasetState = .none
-
-        if self.isReloading {
-            return
-        }
-
-        self.resetData(reload: false)
-        self.isReloading = true
-
-        performRequest({ [weak self] in
-            guard let discussionProxyId = self?.discussionProxyId else {
-                return
-            }
-
-            _ = ApiDataDownloader.discussionProxies.retrieve(discussionProxyId, success: { [weak self] discussionProxy in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.discussionIds.all = discussionProxy.discussionIds
-                strongSelf.loadDiscussions(
-                    ids: strongSelf.getNextDiscussionIdsToLoad(),
-                    success: { onLoaded(success: true) }
-                )
-            }, error: { errorString in
-                print("DiscussionsViewController :: \(errorString)")
-                onLoaded(success: false)
-            })
-        }, error: { [weak self] error in
-            print("DiscussionsViewController :: \(error)")
-            guard let strongSelf = self else {
-                return
-            }
-
-            onLoaded(success: false)
-
-            if error == PerformRequestError.noAccessToRefreshToken {
-                AuthInfo.shared.token = nil
-                RoutingManager.auth.routeFrom(controller: strongSelf, success: { [weak self] in
-                    self?.reloadDiscussions()
-                }, cancel: nil)
-            }
-        })
     }
 
     private func setLiked(comment: Comment, cell: UITableViewCell) {

@@ -389,8 +389,8 @@ class WebStepViewController: UIViewController {
     func showComments() {
         if let discussionProxyId = step.discussionProxyId {
             let assembly = DiscussionsLegacyAssembly(
-                discussionProxyId: discussionProxyId,
-                stepId: step.id
+                discussionProxyID: discussionProxyId,
+                stepID: step.id
             )
             self.nController?.pushViewController(assembly.makeModule(), animated: true)
         } else {

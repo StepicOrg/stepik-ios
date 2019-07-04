@@ -282,8 +282,8 @@ final class DeepLinkRouter {
 
                         if let discussionProxyId = step.discussionProxyId {
                             let assembly = DiscussionsLegacyAssembly(
-                                discussionProxyId: discussionProxyId,
-                                stepId: step.id
+                                discussionProxyID: discussionProxyId,
+                                stepID: step.id
                             )
                             completion(viewControllers + [assembly.makeModule()])
                         } else {
@@ -318,8 +318,8 @@ final class DeepLinkRouter {
 
                         if let discussionProxyId = step.discussionProxyId {
                             let assembly = DiscussionsLegacyAssembly(
-                                discussionProxyId: discussionProxyId,
-                                stepId: step.id
+                                discussionProxyID: discussionProxyId,
+                                stepID: step.id
                             )
                             completion(viewControllers + [assembly.makeModule()])
                         } else {
