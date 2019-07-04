@@ -16,9 +16,13 @@ final class DiscussionProxiesNetworkService: DiscussionProxiesNetworkServiceProt
         return Promise { seal in
             self.discussionProxiesAPI.retrieve(id: id).done { discussionProxy in
                 seal.fulfill(discussionProxy)
-            }.catch { error in
-                seal.reject(error)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
             }
         }
+    }
+
+    enum Error: Swift.Error {
+        case fetchFailed
     }
 }
