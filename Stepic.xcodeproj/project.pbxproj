@@ -1654,6 +1654,7 @@
 		2C1B64E01F4C596500236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CE1F4C595F00236804 /* Config.plist */; };
 		2C1B64E31F4C597F00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D31F4C595F00236804 /* icon.png */; };
 		2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64E61F4C5A6D00236804 /* Icons.xcassets */; };
+		2C1B75B322CDEEDE00262707 /* DiscussionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B222CDEEDE00262707 /* DiscussionsPresenter.swift */; };
 		2C1ED43A21662F5B000D7D52 /* GradientColorsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */; };
 		2C20778022BB897200D44DC0 /* DispatchQueue+promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20777F22BB897200D44DC0 /* DispatchQueue+promise.swift */; };
 		2C20778222BB956900D44DC0 /* BaseQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778122BB956900D44DC0 /* BaseQuizViewModel.swift */; };
@@ -5595,6 +5596,7 @@
 		2C1B64D11F4C595F00236804 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/3124/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2C1B64D31F4C595F00236804 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3124/icon.png; sourceTree = "<group>"; };
 		2C1B64E61F4C5A6D00236804 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3124/Icons.xcassets; sourceTree = "<group>"; };
+		2C1B75B222CDEEDE00262707 /* DiscussionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsPresenter.swift; sourceTree = "<group>"; };
 		2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColorsResolver.swift; sourceTree = "<group>"; };
 		2C20777F22BB897200D44DC0 /* DispatchQueue+promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+promise.swift"; sourceTree = "<group>"; };
@@ -6966,6 +6968,7 @@
 			isa = PBXGroup;
 			children = (
 				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
+				2C1B75B222CDEEDE00262707 /* DiscussionsPresenter.swift */,
 				08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */,
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
@@ -15429,6 +15432,7 @@
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
 				0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */,
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
+				2C1B75B322CDEEDE00262707 /* DiscussionsPresenter.swift in Sources */,
 				2C8AD7622204932300C9C089 /* CourseSubscriptionManager.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */,

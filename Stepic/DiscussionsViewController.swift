@@ -23,6 +23,7 @@ final class DiscussionsLegacyAssembly: Assembly {
         let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
         vc.discussionProxyId = self.discussionProxyId
         vc.target = self.stepId
+        vc.presenter = DiscussionsPresenter()
         return vc
     }
 }
@@ -84,7 +85,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     var discussionProxyId: String!
     var target: Int!
 
-    
+    var presenter: DiscussionsPresenterProtocol?
+
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var tableView: StepikTableView!
