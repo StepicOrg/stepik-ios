@@ -11,18 +11,18 @@ import SDWebImage
 
 @available(*, deprecated, message: "Legacy assembly")
 final class DiscussionsLegacyAssembly: Assembly {
-    private let discussionProxyID: String
-    private let stepID: Step.IdType
+    private let discussionProxyId: String
+    private let stepId: Step.IdType
 
-    init(discussionProxyID: String, stepID: Step.IdType) {
-        self.discussionProxyID = discussionProxyID
-        self.stepID = stepID
+    init(discussionProxyId: String, stepId: Step.IdType) {
+        self.discussionProxyId = discussionProxyId
+        self.stepId = stepId
     }
 
     func makeModule() -> UIViewController {
         let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-        vc.discussionProxyId = self.discussionProxyID
-        vc.target = self.stepID
+        vc.discussionProxyId = self.discussionProxyId
+        vc.target = self.stepId
         return vc
     }
 }
@@ -83,9 +83,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 
     var discussionProxyId: String!
     var target: Int!
-    // This var is used only for incrementing discussions count
-    var step: Step?
 
+    
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var tableView: StepikTableView!
@@ -679,7 +678,9 @@ extension DiscussionsViewController: WriteCommentViewControllerDelegate {
             self.discussionIds.loaded.insert(comment.id, at: 0)
             self.discussions.insert(comment, at: 0)
             self.reloadTableData()
-            self.step?.discussionsCount? += 1
+            
+            // TODO: increment discussions count
+            //self.step?.discussionsCount? += 1
         }
     }
 }

@@ -281,11 +281,11 @@ final class DeepLinkRouter {
                         }
 
                         if let discussionProxyId = step.discussionProxyId {
-                            let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-                            vc.discussionProxyId = discussionProxyId
-                            vc.target = step.id
-                            vc.step = step
-                            completion(viewControllers + [vc])
+                            let assembly = DiscussionsLegacyAssembly(
+                                discussionProxyId: discussionProxyId,
+                                stepId: step.id
+                            )
+                            completion(viewControllers + [assembly.makeModule()])
                         } else {
                             completion([])
                         }
@@ -317,11 +317,11 @@ final class DeepLinkRouter {
                         }
 
                         if let discussionProxyId = step.discussionProxyId {
-                            let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-                            vc.discussionProxyId = discussionProxyId
-                            vc.target = step.id
-                            vc.step = step
-                            completion(viewControllers + [vc])
+                            let assembly = DiscussionsLegacyAssembly(
+                                discussionProxyId: discussionProxyId,
+                                stepId: step.id
+                            )
+                            completion(viewControllers + [assembly.makeModule()])
                         } else {
                             completion([])
                         }

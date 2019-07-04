@@ -251,11 +251,11 @@ class VideoStepViewController: UIViewController {
 
     func showComments() {
         if let discussionProxyId = step.discussionProxyId {
-            let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-            vc.discussionProxyId = discussionProxyId
-            vc.target = self.step.id
-            vc.step = self.step
-            nController?.pushViewController(vc, animated: true)
+            let assembly = DiscussionsLegacyAssembly(
+                discussionProxyId: discussionProxyId,
+                stepId: step.id
+            )
+            self.nController?.pushViewController(assembly.makeModule(), animated: true)
         } else {
             //TODO: Load comments here
         }
@@ -272,14 +272,4 @@ class VideoStepViewController: UIViewController {
     deinit {
         print("deinit VideoStepViewController")
     }
-
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
 }
