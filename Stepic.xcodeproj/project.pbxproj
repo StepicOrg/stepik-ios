@@ -10819,13 +10819,13 @@
 			children = (
 				2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */,
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
-				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
-				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
-				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
-				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
-				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
-				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
 				62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */,
+				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
+				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
+				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
+				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
+				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
+				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -10947,21 +10947,21 @@
 		62E984335766CF35B18ED73E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
-				2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */,
-				2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */,
-				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
-				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
-				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
-				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
-				62E98E41865820B1B8F7357D /* UnitsNetworkService.swift */,
-				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
-				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
-				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
+				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
+				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
+				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
+				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
+				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
+				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
+				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
+				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
 				2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */,
+				62E98E41865820B1B8F7357D /* UnitsNetworkService.swift */,
+				2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */,
 				62E98407592112A22E967DE1 /* UsersNetworkService.swift */,
+				2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -11500,14 +11500,14 @@
 		62E98E0FB32DB9DAC0362672 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
-				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
-				62E98A358EF538D7F89D10F1 /* Models */,
 				62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */,
+				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
-				62E986D1988A3445F3416404 /* Managers */,
-				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
+				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
+				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
+				62E986D1988A3445F3416404 /* Managers */,
+				62E98A358EF538D7F89D10F1 /* Models */,
 			);
 			path = Services;
 			sourceTree = "<group>";
