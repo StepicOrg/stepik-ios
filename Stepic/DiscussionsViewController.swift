@@ -38,6 +38,11 @@ final class DiscussionsLegacyAssembly: Assembly {
     }
 }
 
+protocol DiscussionsViewControllerDelegate: class {
+    func cellDidSelect(_ viewData: DiscussionsViewData)
+    func profileButtonDidClick(_ userId: Int)
+}
+
 final class DiscussionsViewController: UIViewController, DiscussionsView, ControllerWithStepikPlaceholder {
     private enum EmptyDatasetState {
         case error
@@ -50,19 +55,10 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     var presenter: DiscussionsPresenterProtocol?
 
     @IBOutlet weak var tableView: StepikTableView!
-
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    private lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(self.refreshDiscussions), for: .valueChanged)
-        return refreshControl
-    }()
-
-    private var viewData = [DiscussionsViewData]()
-
-    private var discussions = [Comment]()
-    private var votes = [String: Vote]()
+    private let tableDataSource = DiscussionsTableViewDataSource()
+    private let refreshControl = UIRefreshControl()
 
     private var emptyDatasetState: EmptyDatasetState = .none {
         didSet {
@@ -93,8 +89,9 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
             self?.refreshDiscussions()
         }), for: .connectionError)
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        self.tableDataSource.delegate = self
+        self.tableView.delegate = self.tableDataSource
+        self.tableView.dataSource = self.tableDataSource
         self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyDiscussions)
         self.tableView.loadingPlaceholder = StepikPlaceholder(.emptyDiscussionsLoading)
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -103,6 +100,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         self.tableView.register(cellClass: DiscussionTableViewCell.self)
         self.tableView.register(cellClass: LoadMoreTableViewCell.self)
         self.tableView.addSubview(self.refreshControl)
+        self.refreshControl.addTarget(self, action: #selector(self.refreshDiscussions), for: .valueChanged)
 
         // TODO: Add bottom insets for iPhone X.
         
@@ -126,9 +124,9 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     }
 
     func setViewData(_ viewData: [DiscussionsViewData]) {
-        self.viewData = viewData
+        self.tableDataSource.viewDatas = viewData
 
-        if self.viewData.count == 0 {
+        if viewData.count == 0 {
             self.emptyDatasetState = .empty
         }
 
@@ -194,56 +192,19 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     }
 }
 
-extension DiscussionsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+extension DiscussionsViewController: DiscussionsViewControllerDelegate {
+    func cellDidSelect(_ viewData: DiscussionsViewData) {
+        self.presenter?.selectViewData(viewData)
     }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.presenter?.selectViewData(self.viewData[indexPath.row])
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension DiscussionsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewData.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let viewData = self.viewData[indexPath.row]
-        if viewData.comment != nil {
-            let cell: DiscussionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(viewData: viewData)
-            cell.delegate = self
-            return cell
-        } else if viewData.fetchRepliesFor != nil || viewData.needFetchDiscussions {
-            let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(viewData: viewData)
-            return cell
-        } else {
-            return UITableViewCell()
-        }
+    
+    func profileButtonDidClick(_ userId: Int) {
+        let assembly = ProfileAssembly(userID: userId)
+        self.push(module: assembly.makeModule())
     }
 }
 
 extension DiscussionsViewController: WriteCommentViewControllerDelegate {
     func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
         self.presenter?.writeComment(comment)
-    }
-}
-
-extension DiscussionsViewController: DiscussionTableViewCellDelegate {
-    func discussionTableViewCellDidRequestOpenProfile(_ cell: DiscussionTableViewCell, forUserWithId userID: Int) {
-        let assembly = ProfileAssembly(userID: userID)
-        self.push(module: assembly.makeModule())
     }
 }

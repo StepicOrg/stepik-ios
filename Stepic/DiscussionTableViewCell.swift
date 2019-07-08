@@ -10,13 +10,6 @@ import UIKit
 import SDWebImage
 import SnapKit
 
-protocol DiscussionTableViewCellDelegate: class {
-    func discussionTableViewCellDidRequestOpenProfile(
-        _ cell: DiscussionTableViewCell,
-        forUserWithId userID: Int
-    )
-}
-
 final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var userAvatarImageView: AvatarImageView!
     @IBOutlet weak var userAvatarImageViewLeadingConstraint: NSLayoutConstraint!
@@ -34,9 +27,9 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var likesLabel: StepikLabel!
     @IBOutlet weak var likesImageView: UIImageView!
 
-    weak var delegate: DiscussionTableViewCellDelegate?
-
     var comment: Comment?
+    
+    var onProfileButtonClick: ((Int) -> Void)?
 
     private var hasSeparator: Bool = false {
         didSet {
@@ -153,7 +146,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @objc
     private func actionUserTapped() {
         if let userId = self.comment?.userInfo.id {
-            self.delegate?.discussionTableViewCellDidRequestOpenProfile(self, forUserWithId: userId)
+            self.onProfileButtonClick?(userId)
         }
     }
 }
