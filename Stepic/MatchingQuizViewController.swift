@@ -241,7 +241,8 @@ extension MatchingQuizViewController : UITableViewDataSource {
 
         switch tableView.tag {
         case 1:
-            cell.setHTMLText(dataset.firstValues[indexPath.row], width: cellWidth(forTableView: firstTableView), finishedBlock: {
+            let htmlEscapedText = dataset.firstValues[indexPath.row].addingHTMLEntities()
+            cell.setHTMLText(htmlEscapedText, width: cellWidth(forTableView: firstTableView), finishedBlock: {
                 [weak self]
                 newHeight in
 
@@ -264,8 +265,9 @@ extension MatchingQuizViewController : UITableViewDataSource {
                 }
             })
         case 2:
+            let htmlEscapedText = self.orderedOptions[indexPath.row].addingHTMLEntities()
             cell.sortable = true
-            cell.setHTMLText(orderedOptions[indexPath.row], width: cellWidth(forTableView: secondTableView), finishedBlock: {
+            cell.setHTMLText(htmlEscapedText, width: cellWidth(forTableView: secondTableView), finishedBlock: {
                 [weak self]
                 newHeight in
 
