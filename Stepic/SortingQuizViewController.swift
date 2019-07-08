@@ -116,17 +116,6 @@ class SortingQuizViewController: QuizViewController {
             s.tableView.reloadData()
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension SortingQuizViewController : UITableViewDelegate {
@@ -171,7 +160,8 @@ extension SortingQuizViewController : UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SortingQuizTableViewCell", for: indexPath) as! SortingQuizTableViewCell
 
-        cell.setHTMLText(orderedOptions[indexPath.row], width: cellWidth, finishedBlock: {
+        let htmlEscapedText = self.orderedOptions[indexPath.row].addingHTMLEntities()
+        cell.setHTMLText(htmlEscapedText, width: cellWidth, finishedBlock: {
             [weak self]
             newHeight in
 
