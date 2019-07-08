@@ -229,7 +229,7 @@ extension DiscussionsViewController: UITableViewDataSource {
             return cell
         }
 
-        if self.viewData[indexPath.row].loadDiscussions != nil {
+        if self.viewData[indexPath.row].loadDiscussions {
             let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             //cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(self.discussionIds.leftToLoad))"
             return cell

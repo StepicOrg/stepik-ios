@@ -103,7 +103,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             }.catch { error in
                 self.view?.displayError(error)
             }
-        } else if viewData.loadDiscussions != nil {
+        } else if viewData.loadDiscussions {
             let idsToLoad = self.getNextDiscussionIdsToLoad()
             self.fetchComments(ids: idsToLoad).done {
                 self.reloadViewData()
