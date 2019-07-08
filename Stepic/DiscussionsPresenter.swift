@@ -22,6 +22,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     private let discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol
     private let commentsNetworkService: CommentsNetworkServiceProtocol
+    private let votesNetworkService: VotesNetworkServiceProtocol
 
     private var discussionIds = DiscussionIds()
     private var discussions = [Comment]()
@@ -34,13 +35,15 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         discussionProxyId: String,
         stepId: Step.IdType,
         discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol,
-        commentsNetworkService: CommentsNetworkServiceProtocol
+        commentsNetworkService: CommentsNetworkServiceProtocol,
+        votesNetworkService: VotesNetworkServiceProtocol
     ) {
         self.view = view
         self.discussionProxyId = discussionProxyId
         self.stepId = stepId
         self.discussionProxiesNetworkService = discussionProxiesNetworkService
         self.commentsNetworkService = commentsNetworkService
+        self.votesNetworkService = votesNetworkService
     }
 
     func refresh() {

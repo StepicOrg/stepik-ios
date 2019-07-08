@@ -30,7 +30,8 @@ final class DiscussionsLegacyAssembly: Assembly {
             discussionProxiesNetworkService: DiscussionProxiesNetworkService(
                 discussionProxiesAPI: DiscussionProxiesAPI()
             ),
-            commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI())
+            commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI()),
+            votesNetworkService: VotesNetworkService(votesAPI: VotesAPI())
         )
         return vc
     }
