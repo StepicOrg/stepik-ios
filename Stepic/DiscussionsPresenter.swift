@@ -91,9 +91,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             self.discussionIds.all.insert(comment.id, at: 0)
             self.discussionIds.loaded.insert(comment.id, at: 0)
             self.discussions.insert(comment, at: 0)
-
-            // TODO: increment discussions count
-            //self.step?.discussionsCount? += 1
+            self.incrementStepDiscussionsCount()
         }
         self.reloadViewData()
     }
@@ -283,6 +281,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         self.view?.setViewData(viewData)
     }
 
+    private func incrementStepDiscussionsCount() {
+        Step.fetchAsync(ids: [self.stepId]).done { steps in
+            if let step = steps.first {
+                step.discussionsCount? += 1
+            }
+        }
+    }
+    
     // MARK: Inner structs
 
     private struct DiscussionIds {
