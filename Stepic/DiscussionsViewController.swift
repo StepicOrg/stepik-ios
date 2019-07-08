@@ -137,6 +137,12 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     func displayError(_ error: Error) {
         self.emptyDatasetState = .error
     }
+    
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        self.present(alert, animated: true)
+    }
 
     func displayDiscussionAlert(comment: Comment) {
         let alert = DiscussionAlertConstructor.getCommentAlert(

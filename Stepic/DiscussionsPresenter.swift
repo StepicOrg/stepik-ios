@@ -114,10 +114,10 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             self.fetchComments(ids: idsToLoad).done {
                 self.discussionsFetchingRepliesIds.remove(loadRepliesFor.id)
                 self.reloadViewData()
-            }.catch { error in
-                // TODO: Show alert
+            }.catch { _ in
                 self.discussionsFetchingRepliesIds.remove(loadRepliesFor.id)
-                self.view?.displayError(error)
+                self.reloadViewData()
+                self.displayErrorAlert()
             }
         } else if viewData.needFetchDiscussions {
             if self.isFetchingMoreDiscussions {
@@ -131,10 +131,10 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             self.fetchComments(ids: idsToLoad).done {
                 self.isFetchingMoreDiscussions = false
                 self.reloadViewData()
-            }.catch { error in
-                // TODO: Show alert
+            }.catch { _ in
                 self.isFetchingMoreDiscussions = false
-                self.view?.displayError(error)
+                self.reloadViewData()
+                self.displayErrorAlert()
             }
         }
     }
@@ -156,8 +156,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                     comment.epicCount -= 1
                 }
                 self?.reloadViewData()
-            }.catch { error in
-                print("DiscussionsPresenter :: \(#function) :: \(error)")
+            }.catch { _ in
+                self.displayErrorAlert()
             }
         } else {
             let vote = Vote(id: comment.vote.id, value: .epic)
@@ -166,8 +166,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 comment.vote = vote
                 comment.epicCount += 1
                 self?.reloadViewData()
-            }.catch { error in
-                print("DiscussionsPresenter :: \(#function) :: \(error)")
+            }.catch { _ in
+                self.displayErrorAlert()
             }
         }
     }
@@ -186,8 +186,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                     comment.abuseCount += 1
                     self?.reloadViewData()
                 }
-            }.catch { error in
-                print("DiscussionsPresenter :: \(#function) :: \(error)")
+            }.catch { _ in
+                self.displayErrorAlert()
             }
         } else {
             let vote = Vote(id: comment.vote.id, value: .abuse)
@@ -195,8 +195,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused, parameters: nil)
                 comment.vote = vote
                 comment.abuseCount += 1
-            }.catch { error in
-                print("DiscussionsPresenter :: \(#function) :: \(error)")
+            }.catch { _ in
+                self.displayErrorAlert()
             }
         }
     }
@@ -288,6 +288,13 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         self.view?.setViewData(viewData)
     }
 
+    private func displayErrorAlert(
+        title: String = NSLocalizedString("Error", comment: ""),
+        message: String = NSLocalizedString("ErrorMessage", comment: "")
+    ) {
+        self.view?.displayAlert(title: title, message: message)
+    }
+    
     private func incrementStepDiscussionsCount() {
         self.stepsPersistenceService.fetch(ids: [self.stepId]).done { steps in
             if let step = steps.first {

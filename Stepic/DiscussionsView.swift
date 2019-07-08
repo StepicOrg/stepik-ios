@@ -45,6 +45,7 @@ struct DiscussionsViewData {
 protocol DiscussionsView: class {
     func setViewData(_ viewData: [DiscussionsViewData])
     func displayError(_ error: Error)
+    func displayAlert(title: String, message: String)
     func displayWriteComment(parentId: Comment.IdType?)
     func displayDiscussionAlert(comment: Comment)
 }
