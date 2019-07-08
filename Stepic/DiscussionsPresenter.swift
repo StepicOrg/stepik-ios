@@ -96,14 +96,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     func selectViewData(_ viewData: DiscussionsViewData) {
         if let comment = viewData.comment {
             self.view?.displayDiscussionAlert(comment: comment)
-        } else if let loadRepliesFor = viewData.loadRepliesFor {
+        } else if let loadRepliesFor = viewData.fetchRepliesFor {
             let idsToLoad = self.getNextReplyIdsToLoad(discussion: loadRepliesFor)
             self.fetchComments(ids: idsToLoad).done {
                 self.reloadViewData()
             }.catch { error in
                 self.view?.displayError(error)
             }
-        } else if viewData.loadDiscussions {
+        } else if viewData.needFetchDiscussions {
             let idsToLoad = self.getNextDiscussionIdsToLoad()
             self.fetchComments(ids: idsToLoad).done {
                 self.reloadViewData()
@@ -263,7 +263,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             let leftToLoad = self.replies.leftToLoad(discussion)
             if leftToLoad > 0 {
                 let showMoreText = "\(NSLocalizedString("ShowMoreReplies", comment: "")) (\(leftToLoad))"
-                viewData.append(DiscussionsViewData(loadRepliesFor: discussion, showMoreText: showMoreText))
+                viewData.append(DiscussionsViewData(fetchRepliesFor: discussion, showMoreText: showMoreText))
             } else {
                 viewData[viewData.count - 1].separatorType = .big
             }
@@ -271,7 +271,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
         if self.discussionIds.leftToLoad > 0 {
             let showMoreText = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(self.discussionIds.leftToLoad))"
-            viewData.append(DiscussionsViewData(loadDiscussions: true, showMoreText: showMoreText))
+            viewData.append(DiscussionsViewData(needFetchDiscussions: true, showMoreText: showMoreText))
         }
 
         self.view?.setViewData(viewData)

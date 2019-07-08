@@ -222,7 +222,7 @@ extension DiscussionsViewController: UITableViewDataSource {
             cell.configure(comment: comment, separatorType: viewData.separatorType)
             cell.delegate = self
             return cell
-        } else if viewData.loadRepliesFor != nil || viewData.loadDiscussions {
+        } else if viewData.fetchRepliesFor != nil || viewData.needFetchDiscussions {
             let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.showMoreLabel.text = viewData.showMoreText
             return cell

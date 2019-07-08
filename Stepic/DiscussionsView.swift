@@ -8,31 +8,31 @@ enum SeparatorType {
 
 struct DiscussionsViewData {
     let comment: Comment?
-    let loadRepliesFor: Comment?
-    let loadDiscussions: Bool
+    let fetchRepliesFor: Comment?
+    let needFetchDiscussions: Bool
     let showMoreText: String
     var separatorType: SeparatorType
 
     init(comment: Comment, separatorType: SeparatorType) {
         self.comment = comment
-        self.loadRepliesFor = nil
-        self.loadDiscussions = false
+        self.fetchRepliesFor = nil
+        self.needFetchDiscussions = false
         self.showMoreText = ""
         self.separatorType = separatorType
     }
 
-    init(loadRepliesFor: Comment, showMoreText: String) {
+    init(fetchRepliesFor: Comment, showMoreText: String) {
         self.comment = nil
-        self.loadRepliesFor = loadRepliesFor
-        self.loadDiscussions = false
+        self.fetchRepliesFor = fetchRepliesFor
+        self.needFetchDiscussions = false
         self.showMoreText = showMoreText
         self.separatorType = .none
     }
 
-    init(loadDiscussions: Bool, showMoreText: String) {
+    init(needFetchDiscussions: Bool, showMoreText: String) {
         self.comment = nil
-        self.loadRepliesFor = nil
-        self.loadDiscussions = loadDiscussions
+        self.fetchRepliesFor = nil
+        self.needFetchDiscussions = needFetchDiscussions
         self.showMoreText = showMoreText
         self.separatorType = .none
     }
