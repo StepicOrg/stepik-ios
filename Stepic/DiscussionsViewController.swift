@@ -33,6 +33,7 @@ final class DiscussionsLegacyAssembly: Assembly {
             commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI()),
             votesNetworkService: VotesNetworkService(votesAPI: VotesAPI())
         )
+        vc.title = NSLocalizedString("Discussions", comment: "")
         return vc
     }
 }
