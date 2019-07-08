@@ -11,6 +11,7 @@ struct DiscussionsViewData {
     let fetchRepliesFor: Comment?
     let needFetchDiscussions: Bool
     let showMoreText: String
+    let isUpdating: Bool
     var separatorType: SeparatorType
 
     init(comment: Comment, separatorType: SeparatorType) {
@@ -18,22 +19,25 @@ struct DiscussionsViewData {
         self.fetchRepliesFor = nil
         self.needFetchDiscussions = false
         self.showMoreText = ""
+        self.isUpdating = false
         self.separatorType = separatorType
     }
 
-    init(fetchRepliesFor: Comment, showMoreText: String) {
+    init(fetchRepliesFor: Comment, showMoreText: String, isUpdating: Bool) {
         self.comment = nil
         self.fetchRepliesFor = fetchRepliesFor
         self.needFetchDiscussions = false
         self.showMoreText = showMoreText
+        self.isUpdating = isUpdating
         self.separatorType = .none
     }
 
-    init(needFetchDiscussions: Bool, showMoreText: String) {
+    init(needFetchDiscussions: Bool, showMoreText: String, isUpdating: Bool) {
         self.comment = nil
         self.fetchRepliesFor = nil
         self.needFetchDiscussions = needFetchDiscussions
         self.showMoreText = showMoreText
+        self.isUpdating = isUpdating
         self.separatorType = .none
     }
 }

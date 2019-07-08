@@ -29,7 +29,12 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     private var discussions = [Comment]()
     private var replies = Replies()
 
+    /// A Boolean value that determines whether the refresh is in progress.
     private var isReloading = false
+    /// A Boolean value that determines whether the fetch of the discussions is in progress (load more discussions).
+    private var isFetchingMoreDiscussions = false
+    /// A Boolean value that determines whether the fetch of the replies for comment is in progress.
+    private var isFetchingRepliesFor: Set<Comment.IdType> = []
 
     init(
         view: DiscussionsView?,
@@ -97,46 +102,36 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         if let comment = viewData.comment {
             self.view?.displayDiscussionAlert(comment: comment)
         } else if let loadRepliesFor = viewData.fetchRepliesFor {
+            if self.isFetchingRepliesFor.contains(loadRepliesFor.id) {
+                return
+            }
+
+            self.isFetchingRepliesFor.insert(loadRepliesFor.id)
+            self.reloadViewData()
+
             let idsToLoad = self.getNextReplyIdsToLoad(discussion: loadRepliesFor)
             self.fetchComments(ids: idsToLoad).done {
+                self.isFetchingRepliesFor.remove(loadRepliesFor.id)
                 self.reloadViewData()
             }.catch { error in
+                // TODO: Show alert
+                self.isFetchingRepliesFor.remove(loadRepliesFor.id)
                 self.view?.displayError(error)
             }
         } else if viewData.needFetchDiscussions {
+            self.isFetchingMoreDiscussions = true
+            self.reloadViewData()
+
             let idsToLoad = self.getNextDiscussionIdsToLoad()
             self.fetchComments(ids: idsToLoad).done {
+                self.isFetchingMoreDiscussions = false
                 self.reloadViewData()
             }.catch { error in
+                // TODO: Show alert
+                self.isFetchingMoreDiscussions = false
                 self.view?.displayError(error)
             }
         }
-
-//        if let loadRepliesFor = self.cellsInfo[indexPath.row].loadRepliesFor {
-//            let idsToLoad = self.getNextReplyIdsToLoad(discussion: loadRepliesFor)
-//            if let cell = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
-//                cell.isUpdating = true
-//                self.loadDiscussions(ids: idsToLoad, success: { [weak self, weak cell] in
-//                    DispatchQueue.main.async {
-//                        self?.reloadTableData()
-//                        cell?.isUpdating = false
-//                    }
-//                })
-//            }
-//        }
-
-//        if self.cellsInfo[indexPath.row].loadDiscussions != nil {
-//            let idsToLoad = self.getNextDiscussionIdsToLoad()
-//            if let cell = tableView.cellForRow(at: indexPath) as? LoadMoreTableViewCell {
-//                cell.isUpdating = true
-//                self.loadDiscussions(ids: idsToLoad, success: { [weak self, weak cell] in
-//                    DispatchQueue.main.async {
-//                        self?.reloadTableData()
-//                        cell?.isUpdating = false
-//                    }
-//                })
-//            }
-//        }
     }
 
     func likeComment(_ comment: Comment) {
@@ -200,7 +195,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             }
         }
     }
-    
+
     private func getNextDiscussionIdsToLoad() -> [Int] {
         let startIndex = self.discussionIds.loaded.count
         let offset = min(self.discussionIds.leftToLoad, DiscussionsPresenter.discussionsLoadingInterval)
@@ -262,16 +257,27 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
             let leftToLoad = self.replies.leftToLoad(discussion)
             if leftToLoad > 0 {
-                let showMoreText = "\(NSLocalizedString("ShowMoreReplies", comment: "")) (\(leftToLoad))"
-                viewData.append(DiscussionsViewData(fetchRepliesFor: discussion, showMoreText: showMoreText))
+                viewData.append(
+                    DiscussionsViewData(
+                        fetchRepliesFor: discussion,
+                        showMoreText: "\(NSLocalizedString("ShowMoreReplies", comment: "")) (\(leftToLoad))",
+                        isUpdating: self.isFetchingRepliesFor.contains(discussion.id)
+                    )
+                )
             } else {
                 viewData[viewData.count - 1].separatorType = .big
             }
         }
 
         if self.discussionIds.leftToLoad > 0 {
-            let showMoreText = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(self.discussionIds.leftToLoad))"
-            viewData.append(DiscussionsViewData(needFetchDiscussions: true, showMoreText: showMoreText))
+            let text = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(self.discussionIds.leftToLoad))"
+            viewData.append(
+                DiscussionsViewData(
+                    needFetchDiscussions: true,
+                    showMoreText: text,
+                    isUpdating: self.isFetchingMoreDiscussions
+                )
+            )
         }
 
         self.view?.setViewData(viewData)

@@ -91,14 +91,18 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
         self.setLeadingConstraints(self.comment?.parentId == nil ? 0 : -40)
     }
 
-    func configure(comment: Comment, separatorType: SeparatorType) {
+    func configure(viewData: DiscussionsViewData) {
+        guard let comment = viewData.comment else {
+            return
+        }
+
         if let url = URL(string: comment.userInfo.avatarURL) {
             self.userAvatarImageView.set(with: url)
         }
 
         self.nameLabel.text = "\(comment.userInfo.firstName) \(comment.userInfo.lastName)"
         self.comment = comment
-        self.separatorType = separatorType
+        self.separatorType = viewData.separatorType
         self.timeLabel.text = comment.time.getStepicFormatString(withTime: true)
         self.setLiked(comment.vote.value == .epic, likesCount: comment.epicCount)
         self.commentLabel.setTextWithHTMLString(comment.text)
@@ -125,7 +129,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
         }
     }
 
-    func setLiked(_ liked: Bool, likesCount: Int) {
+    private func setLiked(_ liked: Bool, likesCount: Int) {
         self.likesLabel.text = "\(likesCount)"
         if liked {
             self.likesImageView.image = Images.thumbsUp.filled

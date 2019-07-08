@@ -103,6 +103,8 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         self.tableView.register(cellClass: LoadMoreTableViewCell.self)
         self.tableView.addSubview(self.refreshControl)
 
+        // TODO: Add bottom insets for iPhone X.
+        
         if #available(iOS 11.0, *) {
             self.tableView.contentInsetAdjustmentBehavior = .never
         }
@@ -205,8 +207,8 @@ extension DiscussionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         self.presenter?.selectViewData(self.viewData[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -217,14 +219,14 @@ extension DiscussionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewData = self.viewData[indexPath.row]
-        if let comment = viewData.comment {
+        if viewData.comment != nil {
             let cell: DiscussionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(comment: comment, separatorType: viewData.separatorType)
+            cell.configure(viewData: viewData)
             cell.delegate = self
             return cell
         } else if viewData.fetchRepliesFor != nil || viewData.needFetchDiscussions {
             let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.showMoreLabel.text = viewData.showMoreText
+            cell.configure(viewData: viewData)
             return cell
         } else {
             return UITableViewCell()

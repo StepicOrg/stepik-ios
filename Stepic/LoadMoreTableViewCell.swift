@@ -12,7 +12,7 @@ final class LoadMoreTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var showMoreLabel: StepikLabel!
     @IBOutlet weak var showMoreActivityIndicator: UIActivityIndicatorView!
 
-    var isUpdating: Bool = false {
+    private var isUpdating: Bool = false {
         didSet {
             if self.isUpdating {
                 self.showMoreLabel.isHidden = true
@@ -33,5 +33,10 @@ final class LoadMoreTableViewCell: UITableViewCell, Reusable, NibLoadable {
 
     override func prepareForReuse() {
         self.showMoreLabel.isHidden = false
+    }
+
+    func configure(viewData: DiscussionsViewData) {
+        self.isUpdating = viewData.isUpdating
+        self.showMoreLabel.text = viewData.showMoreText
     }
 }
