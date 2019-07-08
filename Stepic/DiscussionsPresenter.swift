@@ -262,14 +262,16 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
             let leftToLoad = self.replies.leftToLoad(discussion)
             if leftToLoad > 0 {
-                viewData.append(DiscussionsViewData(loadRepliesFor: discussion))
+                let showMoreText = "\(NSLocalizedString("ShowMoreReplies", comment: "")) (\(leftToLoad))"
+                viewData.append(DiscussionsViewData(loadRepliesFor: discussion, showMoreText: showMoreText))
             } else {
                 viewData[viewData.count - 1].separatorType = .big
             }
         }
 
         if self.discussionIds.leftToLoad > 0 {
-            viewData.append(DiscussionsViewData(loadDiscussions: true))
+            let showMoreText = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(self.discussionIds.leftToLoad))"
+            viewData.append(DiscussionsViewData(loadDiscussions: true, showMoreText: showMoreText))
         }
 
         self.view?.setViewData(viewData)

@@ -216,26 +216,19 @@ extension DiscussionsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let comment = self.viewData[indexPath.row].comment {
+        let viewData = self.viewData[indexPath.row]
+        if let comment = viewData.comment {
             let cell: DiscussionTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(comment: comment, separatorType: self.viewData[indexPath.row].separatorType)
+            cell.configure(comment: comment, separatorType: viewData.separatorType)
             cell.delegate = self
             return cell
-        }
-
-        if let loadRepliesFor = self.viewData[indexPath.row].loadRepliesFor {
+        } else if viewData.loadRepliesFor != nil || viewData.loadDiscussions {
             let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            //cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreReplies", comment: "")) (\(self.replies.leftToLoad(loadRepliesFor)))"
+            cell.showMoreLabel.text = viewData.showMoreText
             return cell
+        } else {
+            return UITableViewCell()
         }
-
-        if self.viewData[indexPath.row].loadDiscussions {
-            let cell: LoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            //cell.showMoreLabel.text = "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(self.discussionIds.leftToLoad))"
-            return cell
-        }
-
-        return UITableViewCell()
     }
 }
 

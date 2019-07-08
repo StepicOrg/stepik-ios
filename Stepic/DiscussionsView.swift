@@ -10,26 +10,30 @@ struct DiscussionsViewData {
     let comment: Comment?
     let loadRepliesFor: Comment?
     let loadDiscussions: Bool
+    let showMoreText: String
     var separatorType: SeparatorType
 
     init(comment: Comment, separatorType: SeparatorType) {
         self.comment = comment
         self.loadRepliesFor = nil
         self.loadDiscussions = false
+        self.showMoreText = ""
         self.separatorType = separatorType
     }
 
-    init(loadRepliesFor: Comment) {
+    init(loadRepliesFor: Comment, showMoreText: String) {
         self.comment = nil
         self.loadRepliesFor = loadRepliesFor
         self.loadDiscussions = false
+        self.showMoreText = showMoreText
         self.separatorType = .none
     }
 
-    init(loadDiscussions: Bool) {
+    init(loadDiscussions: Bool, showMoreText: String) {
         self.comment = nil
         self.loadRepliesFor = nil
         self.loadDiscussions = loadDiscussions
+        self.showMoreText = showMoreText
         self.separatorType = .none
     }
 }
