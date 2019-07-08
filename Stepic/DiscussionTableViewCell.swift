@@ -36,7 +36,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
 
     weak var delegate: DiscussionTableViewCellDelegate?
 
-    private var comment: Comment?
+    var comment: Comment?
 
     private var hasSeparator: Bool = false {
         didSet {
@@ -91,7 +91,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
         self.setLeadingConstraints(self.comment?.parentId == nil ? 0 : -40)
     }
 
-    func initWithComment(_ comment: Comment, separatorType: SeparatorType) {
+    func configure(comment: Comment, separatorType: SeparatorType) {
         if let url = URL(string: comment.userInfo.avatarURL) {
             self.userAvatarImageView.set(with: url)
         }
@@ -101,12 +101,12 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
         self.separatorType = separatorType
         self.timeLabel.text = comment.time.getStepicFormatString(withTime: true)
         self.setLiked(comment.vote.value == .epic, likesCount: comment.epicCount)
-        self.loadLabel(comment.text)
+        self.commentLabel.setTextWithHTMLString(comment.text)
 
         if comment.isDeleted {
             self.contentView.backgroundColor = .wrongQuizBackground
             if comment.text == "" {
-                self.loadLabel(NSLocalizedString("DeletedComment", comment: ""))
+                self.commentLabel.text = NSLocalizedString("DeletedComment", comment: "")
             }
         } else {
             self.contentView.backgroundColor = .white
@@ -132,10 +132,6 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
         } else {
             self.likesImageView.image = Images.thumbsUp.normal
         }
-    }
-
-    private func loadLabel(_ htmlString: String) {
-        self.commentLabel.setTextWithHTMLString(htmlString)
     }
 
     private func setLeadingConstraints(_ constant: CGFloat) {
