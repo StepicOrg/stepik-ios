@@ -14,7 +14,7 @@ final class LoadMoreTableViewCell: UITableViewCell, Reusable, NibLoadable {
 
     var isUpdating: Bool = false {
         didSet {
-            if isUpdating {
+            if self.isUpdating {
                 self.showMoreLabel.isHidden = true
                 self.showMoreActivityIndicator.isHidden = false
                 self.showMoreActivityIndicator.startAnimating()
@@ -29,10 +29,6 @@ final class LoadMoreTableViewCell: UITableViewCell, Reusable, NibLoadable {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.showMoreActivityIndicator.isHidden = true
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 
     override func prepareForReuse() {
