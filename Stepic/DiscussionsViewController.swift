@@ -30,7 +30,8 @@ final class DiscussionsLegacyAssembly: Assembly {
                 discussionProxiesAPI: DiscussionProxiesAPI()
             ),
             commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI()),
-            votesNetworkService: VotesNetworkService(votesAPI: VotesAPI())
+            votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
+            stepsPersistenceService: StepsPersistenceService()
         )
         vc.title = NSLocalizedString("Discussions", comment: "")
         return vc

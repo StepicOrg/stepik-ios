@@ -24,6 +24,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     private let discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol
     private let commentsNetworkService: CommentsNetworkServiceProtocol
     private let votesNetworkService: VotesNetworkServiceProtocol
+    private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
     private var discussionIds = DiscussionIds()
     private var discussions = [Comment]()
@@ -42,7 +43,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         stepId: Step.IdType,
         discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol,
         commentsNetworkService: CommentsNetworkServiceProtocol,
-        votesNetworkService: VotesNetworkServiceProtocol
+        votesNetworkService: VotesNetworkServiceProtocol,
+        stepsPersistenceService: StepsPersistenceServiceProtocol
     ) {
         self.view = view
         self.discussionProxyId = discussionProxyId
@@ -50,6 +52,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         self.discussionProxiesNetworkService = discussionProxiesNetworkService
         self.commentsNetworkService = commentsNetworkService
         self.votesNetworkService = votesNetworkService
+        self.stepsPersistenceService = stepsPersistenceService
     }
 
     func refresh() {
@@ -286,11 +289,11 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     }
 
     private func incrementStepDiscussionsCount() {
-        Step.fetchAsync(ids: [self.stepId]).done { steps in
+        self.stepsPersistenceService.fetch(ids: [self.stepId]).done { steps in
             if let step = steps.first {
                 step.discussionsCount? += 1
             }
-        }
+        }.cauterize()
     }
     
     // MARK: Inner structs
