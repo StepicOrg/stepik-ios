@@ -3132,6 +3132,7 @@
 		2C97E00F215E482B005684A1 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF301FBA0CA1008F342F /* SearchResultsViewController.swift */; };
 		2C97E010215E5246005684A1 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
 		2C98B6B61FDFD74C005AB72C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */; };
+		2C9A8D2E22D348A5009434DB /* String+HTMLEscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */; };
 		2C9BD78E1FC43C6B00F89CBE /* NotificationsBadgesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */; };
 		2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */; };
 		2C9E3F3E1F7A930100DDF1AA /* NotificationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */; };
@@ -5897,6 +5898,7 @@
 		2C9732F71F4C391900AC9301 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3150/Icons.xcassets; sourceTree = "<group>"; };
 		2C9732F91F4C391900AC9301 /* Tokens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Tokens.plist; path = Content/3150/Tokens.plist; sourceTree = "<group>"; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLEscape.swift"; sourceTree = "<group>"; };
 		2C9BD78D1FC43C6B00F89CBE /* NotificationsBadgesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsBadgesManager.swift; sourceTree = "<group>"; };
 		2C9E3F351F7A79E600DDF1AA /* Model_notifications.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_notifications.xcdatamodel; sourceTree = "<group>"; };
 		2C9E3F3B1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -11147,10 +11149,11 @@
 		62E986D974D797A3BDF8DA59 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2C48D5FB228D865E00739477 /* Guarantee+thenableWithFallback.swift */,
-				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
-				62E9866C8BA98FF768F487E2 /* UICollectionViewExtensions.swift */,
 				2C20777F22BB897200D44DC0 /* DispatchQueue+promise.swift */,
+				2C48D5FB228D865E00739477 /* Guarantee+thenableWithFallback.swift */,
+				2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */,
+				62E9866C8BA98FF768F487E2 /* UICollectionViewExtensions.swift */,
+				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -16083,6 +16086,7 @@
 				B8042A238380ACC1F32082E1 /* NewStepAssembly.swift in Sources */,
 				60B1FF909EC34FCFD6D2502D /* NewStepViewController.swift in Sources */,
 				FE43FE17249BB2B4F6890F8D /* NewStepInteractor.swift in Sources */,
+				2C9A8D2E22D348A5009434DB /* String+HTMLEscape.swift in Sources */,
 				36D02A00641C747F6D18DB60 /* NewStepPresenter.swift in Sources */,
 				7FBB25F3FD251734F7E049DD /* NewStepDataFlow.swift in Sources */,
 				E68F5C66A733F2B9F2C18920 /* NewStepProvider.swift in Sources */,
