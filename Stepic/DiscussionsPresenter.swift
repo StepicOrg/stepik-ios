@@ -1,9 +1,6 @@
 import Foundation
 import PromiseKit
 
-protocol DiscussionsView: class {
-}
-
 protocol DiscussionsPresenterProtocol: class {
     var discussionProxyId: String { get }
     var stepId: Step.IdType { get }
