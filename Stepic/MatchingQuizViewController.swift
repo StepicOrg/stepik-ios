@@ -69,7 +69,6 @@ class MatchingQuizViewController: QuizViewController {
 
     fileprivate var orderedOptions: [String] = []
     fileprivate var optionsPermutation: [Int] = []
-    fileprivate var positionForOptionInAttempt: [String : Int] = [:]
     fileprivate var firstCellHeights: [CGFloat?] = []
     fileprivate var secondCellHeights: [CGFloat?] = []
 
@@ -129,13 +128,11 @@ class MatchingQuizViewController: QuizViewController {
 
     fileprivate func resetOptionsToDataset() {
         orderedOptions = []
-        positionForOptionInAttempt = [:]
         optionsPermutation = []
         if let dataset = dataset {
             self.orderedOptions = dataset.secondValues
-            for (index, option) in dataset.secondValues.enumerated() {
+            for (index, _) in dataset.secondValues.enumerated() {
                 optionsPermutation += [index]
-                positionForOptionInAttempt[option] = index
             }
         }
     }
@@ -158,11 +155,6 @@ class MatchingQuizViewController: QuizViewController {
             s.firstTableView.reloadData()
             s.secondTableView.reloadData()
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func maxCellHeight(options: [String], heights: [CGFloat?], sortable: Bool) -> CGFloat {
