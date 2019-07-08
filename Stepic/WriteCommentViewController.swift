@@ -12,11 +12,11 @@ import IQKeyboardManagerSwift
 @available(*, deprecated, message: "Legacy assembly")
 final class WriteCommentLegacyAssembly: Assembly {
     private let target: Int
-    private let parentId: Int?
+    private let parentId: Comment.IdType?
 
     private weak var delegate: WriteCommentViewControllerDelegate?
 
-    init(target: Int, parentId: Int?, delegate: WriteCommentViewControllerDelegate? = nil) {
+    init(target: Int, parentId: Comment.IdType?, delegate: WriteCommentViewControllerDelegate? = nil) {
         self.target = target
         self.parentId = parentId
         self.delegate = delegate
