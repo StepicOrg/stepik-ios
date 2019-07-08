@@ -37,7 +37,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
         }
     }
 
-    private var separatorType: SeparatorType = .none {
+    private var separatorType: DiscussionsViewData.SeparatorType = .none {
         didSet {
             switch self.separatorType {
             case .none:

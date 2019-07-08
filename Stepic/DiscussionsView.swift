@@ -1,11 +1,5 @@
 import Foundation
 
-enum SeparatorType {
-    case small
-    case big
-    case none
-}
-
 struct DiscussionsViewData {
     let comment: Comment?
     let fetchRepliesFor: Comment?
@@ -39,6 +33,12 @@ struct DiscussionsViewData {
         self.showMoreText = showMoreText
         self.isUpdating = isUpdating
         self.separatorType = .none
+    }
+    
+    enum SeparatorType {
+        case small
+        case big
+        case none
     }
 }
 
