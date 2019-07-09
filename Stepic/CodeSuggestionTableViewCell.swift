@@ -11,10 +11,6 @@ import UIKit
 class CodeSuggestionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var suggestionLabel: StepikLabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     func setSuggestion(_ suggestion: String, prefixLength: Int, size: CodeSuggestionsSize?) {
         var fontSize: CGFloat = 11
@@ -27,11 +23,4 @@ class CodeSuggestionTableViewCell: UITableViewCell {
         attributedSuggestion.addAttributes([NSAttributedString.Key.font: boldCourier], range: NSRange(location: 0, length: prefixLength))
         suggestionLabel.attributedText = attributedSuggestion
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

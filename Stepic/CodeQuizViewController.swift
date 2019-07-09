@@ -342,11 +342,6 @@ class CodeQuizViewController: QuizViewController {
         return CodeReply(code: code, language: language)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     private func updateTextViewInsets() {
         if #available(iOS 11.0, *) {
             codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: containerView.safeAreaInsets.left, bottom: 0, right: containerView.safeAreaInsets.right)
