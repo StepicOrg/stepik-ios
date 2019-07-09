@@ -60,6 +60,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     private let tableDataSource = DiscussionsTableViewDataSource()
     private let refreshControl = UIRefreshControl()
 
+    private var isFirstAppear = true
     private var emptyDatasetState: EmptyDatasetState = .none {
         didSet {
             switch self.emptyDatasetState {
@@ -79,12 +80,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         super.viewDidLoad()
 
         self.edgesForExtendedLayout = []
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .compose,
-            target: self,
-            action: #selector(self.writeCommentBarButtonItemPressed)
-        )
-
+        
         self.registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
             self?.refreshDiscussions()
         }), for: .connectionError)
@@ -99,19 +95,31 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         self.tableView.tableFooterView = UIView()
         self.tableView.register(cellClass: DiscussionTableViewCell.self)
         self.tableView.register(cellClass: LoadMoreTableViewCell.self)
-        self.tableView.addSubview(self.refreshControl)
         self.refreshControl.addTarget(self, action: #selector(self.refreshDiscussions), for: .valueChanged)
-
-        // TODO: Add bottom insets for iPhone X.
+        self.tableView.addSubview(self.refreshControl)
         
         if #available(iOS 11.0, *) {
             self.tableView.contentInsetAdjustmentBehavior = .never
         }
-
-        self.emptyDatasetState = .none
-        self.refreshDiscussions()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .compose,
+            target: self,
+            action: #selector(self.writeCommentBarButtonItemPressed)
+        )
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if self.isFirstAppear {
+            self.isFirstAppear = false
+            DispatchQueue.main.async {
+                self.refreshDiscussions()
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AmplitudeAnalyticsEvents.Discussions.opened.send()
@@ -120,6 +128,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     @objc
     private func refreshDiscussions() {
         self.refreshControl.beginRefreshing()
+        self.emptyDatasetState = .none
         self.presenter?.refresh()
     }
 
