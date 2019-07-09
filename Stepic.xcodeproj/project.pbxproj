@@ -494,8 +494,6 @@
 		08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
 		08B65AE41CFCA72800C3A770 /* ImageTapHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */; };
 		08B845DC1D36998E00267FF4 /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */; };
-		08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
-		08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		08BC47061CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */; };
 		08BC47091CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */; };
 		08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */; };
@@ -725,10 +723,7 @@
 		08EA89D6200E69CC00BCAF44 /* SQLQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA41FBF0121000AD405 /* SQLQuizViewController.swift */; };
 		08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
-		08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
-		08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
 		08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
@@ -1022,14 +1017,10 @@
 		2C1B61061F4C4AEF00236804 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C1B61071F4C4AEF00236804 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C1B61091F4C4AEF00236804 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C1B610A1F4C4AEF00236804 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C1B610B1F4C4AEF00236804 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C1B61101F4C4AEF00236804 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
-		2C1B61121F4C4AEF00236804 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
-		2C1B61151F4C4AEF00236804 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
 		2C1B61161F4C4AEF00236804 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C1B61171F4C4AEF00236804 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C1B61181F4C4AEF00236804 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C1B61191F4C4AEF00236804 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C1B611A1F4C4AEF00236804 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -1283,7 +1274,6 @@
 		2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C1B62771F4C4AEF00236804 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C1B627A1F4C4AEF00236804 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C1B627D1F4C4AEF00236804 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C1B627E1F4C4AEF00236804 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C1B627F1F4C4AEF00236804 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -1374,14 +1364,10 @@
 		2C1B63171F4C590700236804 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C1B63181F4C590700236804 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C1B631A1F4C590700236804 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C1B631B1F4C590700236804 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C1B631C1F4C590700236804 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C1B63211F4C590700236804 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
-		2C1B63231F4C590700236804 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
-		2C1B63261F4C590700236804 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
 		2C1B63271F4C590700236804 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C1B63281F4C590700236804 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C1B63291F4C590700236804 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C1B632A1F4C590700236804 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C1B632B1F4C590700236804 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -1635,7 +1621,6 @@
 		2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C1B648A1F4C590700236804 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C1B648D1F4C590700236804 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C1B64901F4C590700236804 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C1B64911F4C590700236804 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C1B64921F4C590700236804 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -1669,6 +1654,8 @@
 		2C1B64E01F4C596500236804 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64CE1F4C595F00236804 /* Config.plist */; };
 		2C1B64E31F4C597F00236804 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64D31F4C595F00236804 /* icon.png */; };
 		2C1B64E81F4C5A9E00236804 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B64E61F4C5A6D00236804 /* Icons.xcassets */; };
+		2C1B75B322CDEEDE00262707 /* DiscussionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B222CDEEDE00262707 /* DiscussionsPresenter.swift */; };
+		2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */; };
 		2C1ED43A21662F5B000D7D52 /* GradientColorsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */; };
 		2C20778022BB897200D44DC0 /* DispatchQueue+promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20777F22BB897200D44DC0 /* DispatchQueue+promise.swift */; };
 		2C20778222BB956900D44DC0 /* BaseQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778122BB956900D44DC0 /* BaseQuizViewModel.swift */; };
@@ -2143,6 +2130,7 @@
 		2C6BBBBB22B261E700889A45 /* QuizFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBB122B261E200889A45 /* QuizFeedbackView.swift */; };
 		2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */; };
 		2C6BBBBF22B26DB200889A45 /* SubmissionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */; };
+		2C6C17BB22CF412900FE776A /* DiscussionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C17BA22CF412900FE776A /* DiscussionsView.swift */; };
 		2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */; };
 		2C6E9CD51FED6ADD001821A2 /* loading_robot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 863262F81ECFC5AE007A20B3 /* loading_robot.gif */; };
 		2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
@@ -2212,6 +2200,7 @@
 		2C8530F321512A0B001E6B55 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
 		2C8530F421512ACA001E6B55 /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0890560C1E97CE1800B8FE6A /* LaunchDefaultsContainer.swift */; };
 		2C8530F921513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8530F821513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift */; };
+		2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */; };
 		2C86506D1F4B1A6B00D51654 /* AchievementManager+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */; };
 		2C8652581F4B2C8200D51654 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C8652571F4B2C8200D51654 /* Icons.xcassets */; };
 		2C8652601F4B2F7D00D51654 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C86525A1F4B2F7D00D51654 /* Config.plist */; };
@@ -2278,14 +2267,10 @@
 		2C89A99A1F4C289900227C3B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C89A9A41F4C289900227C3B /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C89A9A51F4C289900227C3B /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
-		2C89A9A61F4C289900227C3B /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
-		2C89A9A91F4C289900227C3B /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
 		2C89A9AA1F4C289900227C3B /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C89A9AB1F4C289900227C3B /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C89A9AC1F4C289900227C3B /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C89A9AD1F4C289900227C3B /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C89A9AE1F4C289900227C3B /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -2542,7 +2527,6 @@
 		2C89AB041F4C289900227C3B /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C89AB0D1F4C289900227C3B /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C89AB0E1F4C289900227C3B /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C89AB0F1F4C289900227C3B /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -2825,14 +2809,10 @@
 		2C97314E1F4C38F600AC9301 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2C97314F1F4C38F600AC9301 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2C9731511F4C38F600AC9301 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2C9731521F4C38F600AC9301 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2C9731531F4C38F600AC9301 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2C9731581F4C38F600AC9301 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
-		2C97315A1F4C38F600AC9301 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
-		2C97315D1F4C38F600AC9301 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
 		2C97315E1F4C38F600AC9301 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		2C97315F1F4C38F600AC9301 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2C9731601F4C38F600AC9301 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2C9731611F4C38F600AC9301 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2C9731621F4C38F600AC9301 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -3088,7 +3068,6 @@
 		2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */; };
 		2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2C9732BC1F4C38F600AC9301 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		2C9732BE1F4C38F600AC9301 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2C9732C11F4C38F600AC9301 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		2C9732C31F4C38F600AC9301 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -3263,16 +3242,12 @@
 		2CA8D1892088D9C000E105E9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		2CA8D18A2088D9C000E105E9 /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		2CA8D18B2088D9C000E105E9 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		2CA8D18C2088D9C000E105E9 /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		2CA8D18D2088D9C000E105E9 /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		2CA8D1932088D9C000E105E9 /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		2CA8D1942088D9C000E105E9 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
-		2CA8D1952088D9C000E105E9 /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
 		2CA8D1962088D9C000E105E9 /* StepCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1471FED2B71003B1177 /* StepCardView.swift */; };
-		2CA8D1982088D9C000E105E9 /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
 		2CA8D1992088D9C000E105E9 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
 		2CA8D19A2088D9C000E105E9 /* AdaptiveRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9295032035D83F0058D18C /* AdaptiveRemoteConfig.swift */; };
-		2CA8D19B2088D9C000E105E9 /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		2CA8D19C2088D9C000E105E9 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		2CA8D19D2088D9C000E105E9 /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		2CA8D19E2088D9C000E105E9 /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -3629,7 +3604,6 @@
 		2CA8D3452088D9C000E105E9 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		2CA8D3462088D9C000E105E9 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
 		2CA8D3472088D9C000E105E9 /* HeaderMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DF788C1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib */; };
-		2CA8D3482088D9C000E105E9 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		2CA8D3492088D9C000E105E9 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2CA8D34A2088D9C000E105E9 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		2CA8D34B2088D9C000E105E9 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CB0D391FB5FB28001A1E02 /* Explore.storyboard */; };
@@ -3980,6 +3954,7 @@
 		62E9818F8226625FBA9760C9 /* CourseWidgetCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9882E0C54434F220FC5DB /* CourseWidgetCoverView.swift */; };
 		62E981A09293D322A38F2D13 /* ProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9830545E2E72A276F308B /* ProgressService.swift */; };
 		62E981A406A91D91498A3B19 /* CourseInfoTabReviewsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E987308713F1FD4002C5C4 /* CourseInfoTabReviewsCellView.swift */; };
+		62E981A7B87D4281EBBB5184 /* DiscussionProxiesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983E08309F9779A0691DC /* DiscussionProxiesNetworkService.swift */; };
 		62E981AC996C4AA91527B064 /* WrappingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98E55BD59203DE01307B1 /* WrappingNavigationViewController.swift */; };
 		62E981B26AD9DC231C5414D1 /* PinsMapBlockContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985F73C3288F8D0045327 /* PinsMapBlockContentView.swift */; };
 		62E981B40D24CBBF5B97CFFD /* CourseInfoTabInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9840BDAEA337E54A640ED /* CourseInfoTabInfoInteractor.swift */; };
@@ -4215,6 +4190,7 @@
 		62E98C0B1237D4B65EEDBADE /* CourseListInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AC83C032405A77BAC72 /* CourseListInputProtocol.swift */; };
 		62E98C0BC0F2F1C04047799F /* ProfileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98275C20698D3770CD6D8 /* ProfileInfoPresenter.swift */; };
 		62E98C1377148A52D15AAEBF /* CodeEditorPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */; };
+		62E98C185F4AFB3DD11E072E /* DiscussionsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9809004D6D03BB53BFCD7 /* DiscussionsTableViewDataSource.swift */; };
 		62E98C1F76B23AFDE100CF6B /* ProfileHeaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98FC406CB025F46041481 /* ProfileHeaderInfoView.swift */; };
 		62E98C351D74B1712611311E /* BaseExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E989B5BA842691CE1D7247 /* BaseExploreViewController.swift */; };
 		62E98C3824298B04928351E5 /* FormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E981CAF11255059CB09BF1 /* FormatterHelper.swift */; };
@@ -4518,14 +4494,10 @@
 		864D675B1E83E08E001E8D9E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D41C99B9FB006809D9 /* Player.swift */; };
 		864D675C1E83E08E001E8D9E /* VideoRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085DF8D71C99C49E006809D9 /* VideoRate.swift */; };
 		864D675E1E83E08E001E8D9E /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		864D67611E83E08E001E8D9E /* DiscussionWebTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */; };
 		864D67621E83E08E001E8D9E /* DiscussionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */; };
 		864D67671E83E08E001E8D9E /* DiscussionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */; };
 		864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
-		864D676B1E83E08E001E8D9E /* DiscussionUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */; };
-		864D676D1E83E08E001E8D9E /* DiscussionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */; };
 		864D676E1E83E08E001E8D9E /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
-		864D676F1E83E08E001E8D9E /* WriteCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */; };
 		864D67711E83E08E001E8D9E /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		864D67721E83E08E001E8D9E /* VideoStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424D1BCEED8E0000BCB0 /* VideoStepViewController.swift */; };
 		864D67731E83E08E001E8D9E /* WebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0891424F1BCFFB7F0000BCB0 /* WebStepViewController.swift */; };
@@ -4590,7 +4562,6 @@
 		86AE94761E84511A00F67691 /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
 		86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 085DF8CF1C99A6F7006809D9 /* PlayerTestStoryboard.storyboard */; };
 		86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
-		86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */; };
 		86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */; };
 		86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */; };
 		86AE947C1E84511A00F67691 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
@@ -5347,8 +5318,6 @@
 		08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIThreadHelper.swift; sourceTree = "<group>"; };
 		08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTapHelper.swift; sourceTree = "<group>"; };
 		08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireExtensions.swift; sourceTree = "<group>"; };
-		08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionWebTableViewCell.xib; sourceTree = "<group>"; };
-		08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionWebTableViewCell.swift; sourceTree = "<group>"; };
 		08BC47051CD9F424009A1D25 /* DeleteDeviceExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeleteDeviceExecutableTask.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08BC47081CD9FE10009A1D25 /* PersistentTaskManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentTaskManagerProtocol.swift; sourceTree = "<group>"; };
 		08BC47131CDA3E99009A1D25 /* ExecutableTaskTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableTaskTypes.swift; sourceTree = "<group>"; };
@@ -5451,10 +5420,7 @@
 		08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
-		08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionUpdateDelegate.swift; sourceTree = "<group>"; };
-		08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionCellDelegate.swift; sourceTree = "<group>"; };
 		08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
-		08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentDelegate.swift; sourceTree = "<group>"; };
 		08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscussionsStoryboard.storyboard; sourceTree = "<group>"; };
 		08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DiscussionAlertConstructor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08EDD6291F7C6785005203E4 /* StepikButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikButton.swift; sourceTree = "<group>"; };
@@ -5636,6 +5602,8 @@
 		2C1B64D11F4C595F00236804 /* AdaptiveInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AdaptiveInfo.plist; path = Content/3124/AdaptiveInfo.plist; sourceTree = "<group>"; };
 		2C1B64D31F4C595F00236804 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Content/3124/icon.png; sourceTree = "<group>"; };
 		2C1B64E61F4C5A6D00236804 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/3124/Icons.xcassets; sourceTree = "<group>"; };
+		2C1B75B222CDEEDE00262707 /* DiscussionsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsPresenter.swift; sourceTree = "<group>"; };
+		2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsNetworkService.swift; sourceTree = "<group>"; };
 		2C1BF0AF2107328900EA83CA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C1ED43921662F5B000D7D52 /* GradientColorsResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientColorsResolver.swift; sourceTree = "<group>"; };
 		2C20777F22BB897200D44DC0 /* DispatchQueue+promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+promise.swift"; sourceTree = "<group>"; };
@@ -5809,6 +5777,7 @@
 		2C6BBBB122B261E200889A45 /* QuizFeedbackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizFeedbackView.swift; sourceTree = "<group>"; };
 		2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsNetworkService.swift; sourceTree = "<group>"; };
 		2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsNetworkService.swift; sourceTree = "<group>"; };
+		2C6C17BA22CF412900FE776A /* DiscussionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsView.swift; sourceTree = "<group>"; };
 		2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Adaptive.storyboard; sourceTree = "<group>"; };
 		2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStorageManager.swift; sourceTree = "<group>"; };
 		2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveStatsManager.swift; path = Stepic/AdaptiveStatsManager.swift; sourceTree = SOURCE_ROOT; };
@@ -5850,6 +5819,7 @@
 		2C8530EB215121B2001E6B55 /* Tokens.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Tokens.plist; sourceTree = "<group>"; };
 		2C8530F12151264D001E6B55 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		2C8530F821513BDF001E6B55 /* AmplitudeAnalyticsEvents+Exam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmplitudeAnalyticsEvents+Exam.swift"; sourceTree = "<group>"; };
+		2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesNetworkService.swift; sourceTree = "<group>"; };
 		2C86506C1F4B1A6B00D51654 /* AchievementManager+Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AchievementManager+Data.swift"; sourceTree = "<group>"; };
 		2C8652571F4B2C8200D51654 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = Content/1838/Icons.xcassets; sourceTree = "<group>"; };
 		2C86525A1F4B2F7D00D51654 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = Content/1838/Config.plist; sourceTree = "<group>"; };
@@ -6135,6 +6105,7 @@
 		62E9806A771FEF01F91F6F5D /* ContentLanguageSwitchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchButton.swift; sourceTree = "<group>"; };
 		62E9807E3506DAF40179593F /* ContinueActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinueActionButton.swift; sourceTree = "<group>"; };
 		62E98084AC5ED9D4F6F429D9 /* ExploreInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreInteractor.swift; sourceTree = "<group>"; };
+		62E9809004D6D03BB53BFCD7 /* DiscussionsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsTableViewDataSource.swift; sourceTree = "<group>"; };
 		62E980995BBE30D6844BC889 /* CourseInfoTabReviewsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsPresenter.swift; sourceTree = "<group>"; };
 		62E980A100038D961261E476 /* CourseInfoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoPresenter.swift; sourceTree = "<group>"; };
 		62E980A41B871F8FD6D3A412 /* ExploreStoriesContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreStoriesContainerView.swift; sourceTree = "<group>"; };
@@ -6189,6 +6160,7 @@
 		62E983C44270B73F5F3508F2 /* DownloadControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadControlView.swift; sourceTree = "<group>"; };
 		62E983D4436B935F9B27AF98 /* TagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
 		62E983DAAB5C6F2B14290F27 /* CourseInfoTabInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoViewController.swift; sourceTree = "<group>"; };
+		62E983E08309F9779A0691DC /* DiscussionProxiesNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionProxiesNetworkService.swift; sourceTree = "<group>"; };
 		62E983E21584CD07F5E7EB22 /* CourseInfoTabInfoAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabInfoAssembly.swift; sourceTree = "<group>"; };
 		62E983E3B5A17908BFD6C755 /* TagsAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsAssembly.swift; sourceTree = "<group>"; };
 		62E983ECB91B2F753DC02E22 /* AchievementsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementsListViewController.swift; sourceTree = "<group>"; };
@@ -7007,17 +6979,15 @@
 		082CB1AD1D088B6900C79A27 /* Discussions */ = {
 			isa = PBXGroup;
 			children = (
-				08B977061D19D29A00FFC52C /* DiscussionTableViewCells */,
+				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
+				2C1B75B222CDEEDE00262707 /* DiscussionsPresenter.swift */,
+				08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */,
+				62E9809004D6D03BB53BFCD7 /* DiscussionsTableViewDataSource.swift */,
+				2C6C17BA22CF412900FE776A /* DiscussionsView.swift */,
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
-				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
-				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
-				08EB85E51D0F446A00E4F345 /* DiscussionUpdateDelegate.swift */,
-				08EB85EB1D100B7300E4F345 /* DiscussionCellDelegate.swift */,
+				2CD2605322CCD0C40054F01B /* Views */,
 				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
-				08EB85F41D10267800E4F345 /* WriteCommentDelegate.swift */,
-				08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */,
-				08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */,
 			);
 			name = Discussions;
 			sourceTree = "<group>";
@@ -7838,31 +7808,13 @@
 			name = "Controller Helper";
 			sourceTree = "<group>";
 		};
-		08B977061D19D29A00FFC52C /* DiscussionTableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				08B977081D19D55100FFC52C /* WebView */,
-				08B977071D19D54B00FFC52C /* Label */,
-			);
-			name = DiscussionTableViewCells;
-			sourceTree = "<group>";
-		};
-		08B977071D19D54B00FFC52C /* Label */ = {
+		08B977061D19D29A00FFC52C /* DiscussionTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */,
 				08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */,
 			);
-			name = Label;
-			sourceTree = "<group>";
-		};
-		08B977081D19D55100FFC52C /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				08B977091D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib */,
-				08B9770A1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift */,
-			);
-			name = WebView;
+			name = DiscussionTableViewCell;
 			sourceTree = "<group>";
 		};
 		08BC47111CDA3BFF009A1D25 /* Task Managers */ = {
@@ -10472,6 +10424,24 @@
 			name = Screenshots;
 			sourceTree = "<group>";
 		};
+		2CD2605322CCD0C40054F01B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08B977061D19D29A00FFC52C /* DiscussionTableViewCell */,
+				2CD2605422CCD0DE0054F01B /* LoadMoreTableViewCell */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2CD2605422CCD0DE0054F01B /* LoadMoreTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */,
+				08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */,
+			);
+			name = LoadMoreTableViewCell;
+			sourceTree = "<group>";
+		};
 		2CD43588212459E7005A5B19 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -10863,13 +10833,13 @@
 			children = (
 				2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */,
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
-				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
-				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
-				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
-				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
-				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
-				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
 				62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */,
+				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
+				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
+				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
+				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
+				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
+				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -10991,21 +10961,24 @@
 		62E984335766CF35B18ED73E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
-				2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */,
-				2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */,
-				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
-				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
-				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
-				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
-				62E98E41865820B1B8F7357D /* UnitsNetworkService.swift */,
-				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
-				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
-				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
+				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
+				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
+				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
+				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
+				62E983E08309F9779A0691DC /* DiscussionProxiesNetworkService.swift */,
+				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
+				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
+				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
+				62E98E680AE36BC996E47264 /* SectionsNetworkService.swift */,
+				62E987944A98FB989B36D72C /* StepsNetworkService.swift */,
 				2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */,
+				62E98E41865820B1B8F7357D /* UnitsNetworkService.swift */,
+				2C16495822C10DD300DF18CA /* UserActivitiesNetworkService.swift */,
 				62E98407592112A22E967DE1 /* UsersNetworkService.swift */,
+				2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */,
+				2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -11545,14 +11518,14 @@
 		62E98E0FB32DB9DAC0362672 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
-				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
-				62E98A358EF538D7F89D10F1 /* Models */,
 				62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */,
+				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
-				62E986D1988A3445F3416404 /* Managers */,
-				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
+				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
+				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
+				62E986D1988A3445F3416404 /* Managers */,
+				62E98A358EF538D7F89D10F1 /* Models */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -12719,7 +12692,6 @@
 				2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */,
 				083F2B261E9EC10A00714173 /* LoadingPaginationView.xib in Resources */,
 				2C7FEE6F1FDAF8F600B2B4F1 /* Onboarding.storyboard in Resources */,
-				08B9770B1D19D5AA00FFC52C /* DiscussionWebTableViewCell.xib in Resources */,
 				08CBA3541F5A2D9400302154 /* Profile.storyboard in Resources */,
 				0860D91B1F115D830087D61B /* CodeSuggestionsTableViewController.xib in Resources */,
 				083622DC1CD1FA6700CD8915 /* StepTabView.xib in Resources */,
@@ -12849,7 +12821,6 @@
 				2C1B62731F4C4AEF00236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B62751F4C4AEF00236804 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C1B62771F4C4AEF00236804 /* DownloadTableViewCell.xib in Resources */,
-				2C1B627A1F4C4AEF00236804 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C1B627D1F4C4AEF00236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B627E1F4C4AEF00236804 /* DiscussionsViewController.xib in Resources */,
 				2C1B627F1F4C4AEF00236804 /* LoadMoreTableViewCell.xib in Resources */,
@@ -12940,7 +12911,6 @@
 				2C1B64861F4C590700236804 /* CodeInputAccessoryView.xib in Resources */,
 				2C1B64881F4C590700236804 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C1B648A1F4C590700236804 /* DownloadTableViewCell.xib in Resources */,
-				2C1B648D1F4C590700236804 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C1B64901F4C590700236804 /* DiscussionTableViewCell.xib in Resources */,
 				2C1B64911F4C590700236804 /* DiscussionsViewController.xib in Resources */,
 				2C4BBF26203DC670000A4250 /* plyr.js in Resources */,
@@ -13074,7 +13044,6 @@
 				2C89AB061F4C289900227C3B /* PlayerTestStoryboard.storyboard in Resources */,
 				2C89AB081F4C289900227C3B /* DownloadTableViewCell.xib in Resources */,
 				08DF78991F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
-				2C89AB0A1F4C289900227C3B /* DiscussionWebTableViewCell.xib in Resources */,
 				2C35C4E91F4DA48E002F3BF4 /* nouns_m.plist in Resources */,
 				2C89AB0D1F4C289900227C3B /* DiscussionTableViewCell.xib in Resources */,
 				08CB0D3E1FB5FB28001A1E02 /* Explore.storyboard in Resources */,
@@ -13166,7 +13135,6 @@
 				2C9732B81F4C38F600AC9301 /* CodeInputAccessoryView.xib in Resources */,
 				2C9732BA1F4C38F600AC9301 /* PlayerTestStoryboard.storyboard in Resources */,
 				2C9732BC1F4C38F600AC9301 /* DownloadTableViewCell.xib in Resources */,
-				2C9732BE1F4C38F600AC9301 /* DiscussionWebTableViewCell.xib in Resources */,
 				2C9732C11F4C38F600AC9301 /* DiscussionTableViewCell.xib in Resources */,
 				2C4BBF20203DC66F000A4250 /* plyr.js in Resources */,
 				2C9732C21F4C38F600AC9301 /* DiscussionsViewController.xib in Resources */,
@@ -13253,7 +13221,6 @@
 				2CA8D3452088D9C000E105E9 /* PlayerTestStoryboard.storyboard in Resources */,
 				2CA8D3462088D9C000E105E9 /* DownloadTableViewCell.xib in Resources */,
 				2CA8D3472088D9C000E105E9 /* HeaderMenuBlockTableViewCell.xib in Resources */,
-				2CA8D3482088D9C000E105E9 /* DiscussionWebTableViewCell.xib in Resources */,
 				2CA8D3492088D9C000E105E9 /* nouns_m.plist in Resources */,
 				2CE11348208E103400293EAE /* Icons.xcassets in Resources */,
 				2CA8D34A2088D9C000E105E9 /* DiscussionTableViewCell.xib in Resources */,
@@ -13386,7 +13353,6 @@
 				08DF78971F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				86AE94771E84511A00F67691 /* PlayerTestStoryboard.storyboard in Resources */,
 				86AE94781E84511A00F67691 /* DownloadTableViewCell.xib in Resources */,
-				86AE94791E84511A00F67691 /* DiscussionWebTableViewCell.xib in Resources */,
 				2CF425282024A5F3002D7305 /* step3.html in Resources */,
 				86AE947A1E84511A00F67691 /* DiscussionTableViewCell.xib in Resources */,
 				86AE947B1E84511A00F67691 /* DiscussionsViewController.xib in Resources */,
@@ -15317,7 +15283,6 @@
 				9F9C71541E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
-				08EB85EC1D100B7300E4F345 /* DiscussionCellDelegate.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
 				0859AEA81E4F26C700A0D206 /* FillBlanksTextTableViewCell.swift in Sources */,
@@ -15367,7 +15332,6 @@
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
-				08EB85F51D10267800E4F345 /* WriteCommentDelegate.swift in Sources */,
 				08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */,
 				0861E67B1CD9483500B45652 /* ExecutionQueues.swift in Sources */,
 				0834C46C1E2CE66B002F8516 /* MatchingReply.swift in Sources */,
@@ -15454,12 +15418,12 @@
 				08CA59EE1BBFC962008DC44D /* ButtonExtension.swift in Sources */,
 				082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */,
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
-				08B9770C1D19D5AA00FFC52C /* DiscussionWebTableViewCell.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
 				2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */,
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */,
+				2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */,
 				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
@@ -15487,6 +15451,7 @@
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
 				0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */,
 				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
+				2C1B75B322CDEEDE00262707 /* DiscussionsPresenter.swift in Sources */,
 				2C8AD7622204932300C9C089 /* CourseSubscriptionManager.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
 				2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */,
@@ -15670,6 +15635,7 @@
 				089142491BCEE4EF0000BCB0 /* Video.swift in Sources */,
 				2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */,
 				2C2F0BE92186EF87007DCA0A /* CommonNotificationsRequestAlertDataSource.swift in Sources */,
+				2C6C17BB22CF412900FE776A /* DiscussionsView.swift in Sources */,
 				086BE2851F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				08B5E29A1BF509C900B875E6 /* UIThreadHelper.swift in Sources */,
 				2C15EB961FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift in Sources */,
@@ -15773,7 +15739,6 @@
 				2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */,
 				089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */,
 				083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */,
-				08EB85E61D0F446A00E4F345 /* DiscussionUpdateDelegate.swift in Sources */,
 				089200712199DB9900083627 /* BranchService.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */,
@@ -16096,6 +16061,7 @@
 				FF6724819335FB28269A43B7 /* NewStringQuizAssembly.swift in Sources */,
 				580F18AF73EFFCBF1EDED227 /* NewStringQuizViewController.swift in Sources */,
 				857E1FD24A70F87BCA6EBABA /* NewStringQuizInteractor.swift in Sources */,
+				2C1B75B722CE1E4400262707 /* CommentsNetworkService.swift in Sources */,
 				C72AAB2E66F9618214B2B3CD /* NewStringQuizPresenter.swift in Sources */,
 				FD4DF3653C56C80E65B7678B /* NewStringQuizDataFlow.swift in Sources */,
 				EEE23D861EC13465CD0211C0 /* NewStringQuizView.swift in Sources */,
@@ -16111,6 +16077,8 @@
 				CCD2044493C055C6F7C7A3DD /* NewChoiceQuizPresenter.swift in Sources */,
 				4E3A4636F1A4E8E38E0AB66B /* NewChoiceQuizDataFlow.swift in Sources */,
 				0D389430943C20609C095B3D /* NewChoiceQuizView.swift in Sources */,
+				62E981A7B87D4281EBBB5184 /* DiscussionProxiesNetworkService.swift in Sources */,
+				62E98C185F4AFB3DD11E072E /* DiscussionsTableViewDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -16429,7 +16397,6 @@
 				2C1B61061F4C4AEF00236804 /* Player.swift in Sources */,
 				2C1B61071F4C4AEF00236804 /* VideoRate.swift in Sources */,
 				2C1B61091F4C4AEF00236804 /* DownloadTableViewCell.swift in Sources */,
-				2C1B610A1F4C4AEF00236804 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28B1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B610B1F4C4AEF00236804 /* DiscussionTableViewCell.swift in Sources */,
 				2C0107C7210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
@@ -16438,12 +16405,9 @@
 				2C1B61101F4C4AEF00236804 /* DiscussionsViewController.swift in Sources */,
 				2CA1001A2174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2C1B61111F4C4AEF00236804 /* LoadMoreTableViewCell.swift in Sources */,
-				2C1B61121F4C4AEF00236804 /* DiscussionUpdateDelegate.swift in Sources */,
 				08C1BF371FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C608B0420456958006870BB /* CardsStepsPresenter.swift in Sources */,
-				2C1B61151F4C4AEF00236804 /* DiscussionCellDelegate.swift in Sources */,
 				2C1B61161F4C4AEF00236804 /* WriteCommentViewController.swift in Sources */,
-				2C1B61171F4C4AEF00236804 /* WriteCommentDelegate.swift in Sources */,
 				2C1B61181F4C4AEF00236804 /* DiscussionAlertConstructor.swift in Sources */,
 				2C1B61191F4C4AEF00236804 /* VideoStepViewController.swift in Sources */,
 				2C1B611A1F4C4AEF00236804 /* WebStepViewController.swift in Sources */,
@@ -16856,7 +16820,6 @@
 				2C1B63171F4C590700236804 /* Player.swift in Sources */,
 				2C1B63181F4C590700236804 /* VideoRate.swift in Sources */,
 				2C1B631A1F4C590700236804 /* DownloadTableViewCell.swift in Sources */,
-				2C1B631B1F4C590700236804 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28C1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C1B631C1F4C590700236804 /* DiscussionTableViewCell.swift in Sources */,
 				2C0107C8210F746B009A53DF /* AdaptiveCourseSelectPresenter.swift in Sources */,
@@ -16865,12 +16828,9 @@
 				2C1B63211F4C590700236804 /* DiscussionsViewController.swift in Sources */,
 				2CA1001B2174BDEC003775CB /* NotificationService+Streak.swift in Sources */,
 				2C1B63221F4C590700236804 /* LoadMoreTableViewCell.swift in Sources */,
-				2C1B63231F4C590700236804 /* DiscussionUpdateDelegate.swift in Sources */,
 				08C1BF381FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C608B0520456959006870BB /* CardsStepsPresenter.swift in Sources */,
-				2C1B63261F4C590700236804 /* DiscussionCellDelegate.swift in Sources */,
 				2C1B63271F4C590700236804 /* WriteCommentViewController.swift in Sources */,
-				2C1B63281F4C590700236804 /* WriteCommentDelegate.swift in Sources */,
 				2C1B63291F4C590700236804 /* DiscussionAlertConstructor.swift in Sources */,
 				2C1B632A1F4C590700236804 /* VideoStepViewController.swift in Sources */,
 				2C1B632B1F4C590700236804 /* WebStepViewController.swift in Sources */,
@@ -17810,16 +17770,12 @@
 				2C89A99A1F4C289900227C3B /* Player.swift in Sources */,
 				2C89A99B1F4C289900227C3B /* VideoRate.swift in Sources */,
 				2C89A99D1F4C289900227C3B /* DownloadTableViewCell.swift in Sources */,
-				2C89A99E1F4C289900227C3B /* DiscussionWebTableViewCell.swift in Sources */,
 				2C89A99F1F4C289900227C3B /* DiscussionTableViewCell.swift in Sources */,
 				2C89A9A41F4C289900227C3B /* DiscussionsViewController.swift in Sources */,
 				2C89A9A51F4C289900227C3B /* LoadMoreTableViewCell.swift in Sources */,
-				2C89A9A61F4C289900227C3B /* DiscussionUpdateDelegate.swift in Sources */,
 				2C6A76342045CE7000C509A6 /* StepCardView.swift in Sources */,
-				2C89A9A91F4C289900227C3B /* DiscussionCellDelegate.swift in Sources */,
 				2C89A9AA1F4C289900227C3B /* WriteCommentViewController.swift in Sources */,
 				2C6A76472045CEF300C509A6 /* AdaptiveRemoteConfig.swift in Sources */,
-				2C89A9AB1F4C289900227C3B /* WriteCommentDelegate.swift in Sources */,
 				2C89A9AC1F4C289900227C3B /* DiscussionAlertConstructor.swift in Sources */,
 				2C89A9AD1F4C289900227C3B /* VideoStepViewController.swift in Sources */,
 				2CBC261621086947004245D6 /* UserRegistrationServiceImpl.swift in Sources */,
@@ -18246,19 +18202,15 @@
 				2C97314E1F4C38F600AC9301 /* Player.swift in Sources */,
 				2C97314F1F4C38F600AC9301 /* VideoRate.swift in Sources */,
 				2C9731511F4C38F600AC9301 /* DownloadTableViewCell.swift in Sources */,
-				2C9731521F4C38F600AC9301 /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE28A1F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2C9731531F4C38F600AC9301 /* DiscussionTableViewCell.swift in Sources */,
 				2C608AC8204568CD006870BB /* CongratsView.swift in Sources */,
 				2C608ADB204568F0006870BB /* AdaptiveStatsSection.swift in Sources */,
 				2C9731581F4C38F600AC9301 /* DiscussionsViewController.swift in Sources */,
 				2C9731591F4C38F600AC9301 /* LoadMoreTableViewCell.swift in Sources */,
-				2C97315A1F4C38F600AC9301 /* DiscussionUpdateDelegate.swift in Sources */,
 				08C1BF361FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
 				2C608B0320456958006870BB /* CardsStepsPresenter.swift in Sources */,
-				2C97315D1F4C38F600AC9301 /* DiscussionCellDelegate.swift in Sources */,
 				2C97315E1F4C38F600AC9301 /* WriteCommentViewController.swift in Sources */,
-				2C97315F1F4C38F600AC9301 /* WriteCommentDelegate.swift in Sources */,
 				2C9731601F4C38F600AC9301 /* DiscussionAlertConstructor.swift in Sources */,
 				2C9731611F4C38F600AC9301 /* VideoStepViewController.swift in Sources */,
 				2C9731621F4C38F600AC9301 /* WebStepViewController.swift in Sources */,
@@ -18679,16 +18631,12 @@
 				2CA8D1892088D9C000E105E9 /* Player.swift in Sources */,
 				2CA8D18A2088D9C000E105E9 /* VideoRate.swift in Sources */,
 				2CA8D18B2088D9C000E105E9 /* DownloadTableViewCell.swift in Sources */,
-				2CA8D18C2088D9C000E105E9 /* DiscussionWebTableViewCell.swift in Sources */,
 				2CA8D18D2088D9C000E105E9 /* DiscussionTableViewCell.swift in Sources */,
 				2CA8D1932088D9C000E105E9 /* DiscussionsViewController.swift in Sources */,
 				2CA8D1942088D9C000E105E9 /* LoadMoreTableViewCell.swift in Sources */,
-				2CA8D1952088D9C000E105E9 /* DiscussionUpdateDelegate.swift in Sources */,
 				2CA8D1962088D9C000E105E9 /* StepCardView.swift in Sources */,
-				2CA8D1982088D9C000E105E9 /* DiscussionCellDelegate.swift in Sources */,
 				2CA8D1992088D9C000E105E9 /* WriteCommentViewController.swift in Sources */,
 				2CA8D19A2088D9C000E105E9 /* AdaptiveRemoteConfig.swift in Sources */,
-				2CA8D19B2088D9C000E105E9 /* WriteCommentDelegate.swift in Sources */,
 				2CA8D19C2088D9C000E105E9 /* DiscussionAlertConstructor.swift in Sources */,
 				2CA8D19D2088D9C000E105E9 /* VideoStepViewController.swift in Sources */,
 				2CF2248620EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
@@ -19187,17 +19135,13 @@
 				86A1C3362065173700D0914C /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
 				864D675E1E83E08E001E8D9E /* DownloadTableViewCell.swift in Sources */,
 				2CF2248120EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
-				864D67611E83E08E001E8D9E /* DiscussionWebTableViewCell.swift in Sources */,
 				086BE2871F901CCF00B4BE56 /* LastStepRouter.swift in Sources */,
 				2CA2E71920237E14001DC410 /* StepCardView.swift in Sources */,
 				864D67621E83E08E001E8D9E /* DiscussionTableViewCell.swift in Sources */,
 				864D67671E83E08E001E8D9E /* DiscussionsViewController.swift in Sources */,
 				864D67691E83E08E001E8D9E /* LoadMoreTableViewCell.swift in Sources */,
-				864D676B1E83E08E001E8D9E /* DiscussionUpdateDelegate.swift in Sources */,
 				08C1BF331FBA0CA1008F342F /* SearchResultsViewController.swift in Sources */,
-				864D676D1E83E08E001E8D9E /* DiscussionCellDelegate.swift in Sources */,
 				864D676E1E83E08E001E8D9E /* WriteCommentViewController.swift in Sources */,
-				864D676F1E83E08E001E8D9E /* WriteCommentDelegate.swift in Sources */,
 				864D67711E83E08E001E8D9E /* DiscussionAlertConstructor.swift in Sources */,
 				864D67721E83E08E001E8D9E /* VideoStepViewController.swift in Sources */,
 				864D67731E83E08E001E8D9E /* WebStepViewController.swift in Sources */,

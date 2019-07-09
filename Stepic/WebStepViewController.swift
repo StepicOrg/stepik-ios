@@ -388,11 +388,11 @@ class WebStepViewController: UIViewController {
 
     func showComments() {
         if let discussionProxyId = step.discussionProxyId {
-            let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-            vc.discussionProxyId = discussionProxyId
-            vc.target = self.step.id
-            vc.step = self.step
-            nController?.pushViewController(vc, animated: true)
+            let assembly = DiscussionsLegacyAssembly(
+                discussionProxyID: discussionProxyId,
+                stepID: step.id
+            )
+            self.nController?.pushViewController(assembly.makeModule(), animated: true)
         } else {
             //TODO: Load comments here
         }

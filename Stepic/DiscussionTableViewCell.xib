@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,7 +62,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qt-gd-xNy" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
-                        <rect key="frame" x="380" y="13" width="9" height="16"/>
+                        <rect key="frame" x="380" y="12.5" width="9" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -114,18 +113,18 @@
             <viewLayoutGuide key="safeArea" id="A0U-wb-SKO"/>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
-                <outlet property="ImageLeadingConstraint" destination="zeC-Ii-ThB" id="ZcW-0g-gNI"/>
                 <outlet property="badgeLabel" destination="JBD-B0-dRF" id="xD5-za-CIg"/>
                 <outlet property="commentLabel" destination="qtJ-hP-Joz" id="sc7-SB-dp1"/>
-                <outlet property="labelLeadingConstraint" destination="eal-E1-aBI" id="15O-Re-2oa"/>
+                <outlet property="commentLabelLeadingConstraint" destination="eal-E1-aBI" id="15O-Re-2oa"/>
                 <outlet property="likesImageView" destination="eQf-K2-Thw" id="7Hh-xy-3WI"/>
                 <outlet property="likesLabel" destination="0qt-gd-xNy" id="UQw-MR-Wd0"/>
                 <outlet property="nameLabel" destination="6YZ-wn-n05" id="OxI-1P-viA"/>
-                <outlet property="separatorHeightConstraint" destination="wgI-Pg-Mbo" id="epW-KA-daK"/>
-                <outlet property="separatorLeadingConstraint" destination="EJ0-8Z-U7Z" id="X2X-wB-q8E"/>
                 <outlet property="separatorView" destination="pV4-ue-5er" id="ZQA-fC-Y3W"/>
+                <outlet property="separatorViewHeightConstraint" destination="wgI-Pg-Mbo" id="1BA-fY-gfC"/>
+                <outlet property="separatorViewLeadingConstraint" destination="EJ0-8Z-U7Z" id="X2X-wB-q8E"/>
                 <outlet property="timeLabel" destination="RmE-el-xJX" id="aU3-Xg-wIJ"/>
                 <outlet property="userAvatarImageView" destination="IO2-jl-qQ3" id="FXP-ux-Uch"/>
+                <outlet property="userAvatarImageViewLeadingConstraint" destination="zeC-Ii-ThB" id="ZcW-0g-gNI"/>
             </connections>
             <point key="canvasLocation" x="184.5" y="443"/>
         </tableViewCell>

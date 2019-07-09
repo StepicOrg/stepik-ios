@@ -101,10 +101,11 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     }
 
     func presentDiscussions(stepId: Int, discussionProxyId: String) {
-        let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-        vc.discussionProxyId = discussionProxyId
-        vc.target = stepId
-        navigationController?.pushViewController(vc, animated: true)
+        let assembly = DiscussionsLegacyAssembly(
+            discussionProxyID: discussionProxyId,
+            stepID: stepId
+        )
+        self.push(module: assembly.makeModule())
     }
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int) {
