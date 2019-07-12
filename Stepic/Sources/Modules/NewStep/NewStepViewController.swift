@@ -134,8 +134,6 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
                     return SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
                 case .matching:
                     return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .fillBlanks:
-                    return FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil)
                 case .code:
                     return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
                 case .sql:
