@@ -1,3 +1,4 @@
+import Agrume
 import UIKit
 
 protocol BaseQuizViewControllerProtocol: class {
@@ -163,6 +164,24 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL) {
+        let agrume = Agrume(url: url)
+        agrume.show(from: self)
+    }
+
+    func baseQuizView(_ view: BaseQuizView, didRequestOpenURL url: URL) {
+        let scheme = url.scheme?.lowercased() ?? ""
+        if ["http", "https"].contains(scheme) {
+            WebControllerManager.sharedManager.presentWebControllerWithURL(
+                url,
+                inController: self,
+                withKey: "external link",
+                allowsSafari: true,
+                backButtonStyle: .done
+            )
+        }
     }
 }
 
