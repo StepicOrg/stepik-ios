@@ -1,4 +1,4 @@
-In the new version of Stepik we fixed some bugs and updated string and text quizzes.
+In the new version of Stepik we fixed some bugs and updated choice quiz screen.
 
 Enjoy learning!
 Stepik team
