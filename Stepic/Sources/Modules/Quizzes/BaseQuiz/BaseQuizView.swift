@@ -4,6 +4,8 @@ import UIKit
 protocol BaseQuizViewDelegate: class {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView)
     func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView)
+    func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL)
+    func baseQuizView(_ view: BaseQuizView, didRequestOpenURL url: URL)
 }
 
 extension BaseQuizView {
@@ -52,6 +54,7 @@ final class BaseQuizView: UIView {
     private lazy var feedbackView: QuizFeedbackView = {
         let view = QuizFeedbackView()
         view.isHidden = true
+        view.delegate = self
         return view
     }()
 
@@ -191,5 +194,15 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
         self.loadingIndicatorView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+    }
+}
+
+extension BaseQuizView: QuizFeedbackViewDelegate {
+    func quizFeedbackView(_ view: QuizFeedbackView, didRequestFullscreenImage url: URL) {
+        self.delegate?.baseQuizView(self, didRequestFullscreenImage: url)
+    }
+
+    func quizFeedbackView(_ view: QuizFeedbackView, didRequestOpenURL url: URL) {
+        self.delegate?.baseQuizView(self, didRequestOpenURL: url)
     }
 }
