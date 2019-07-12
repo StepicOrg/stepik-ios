@@ -13,7 +13,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
     private var cachedSectionViewModels: [Section.IdType: CourseInfoTabSyllabusSectionViewModel] = [:]
     private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
-    
+
     private var lastDateFailedVideoAlertShown: Date?
     private var shouldPresentFailedVideoAlert: Bool {
         return Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60

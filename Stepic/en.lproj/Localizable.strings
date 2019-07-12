@@ -694,3 +694,5 @@ StringQuizTitle = "Write an answer in form of a text (string)";
 NumberQuizTitle = "Enter a number";
 MathQuizTitle = "Enter a math formula";
 StringQuizPlaceholder = "Type your answer";
+MultipleChoiceQuizTitle = "Select one or more options";
+SingleChoiceQuizTitle = "Select one option";

@@ -92,6 +92,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         }
 
         self.stepURL = data.stepURL
+        self.currentReply = data.reply
 
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
@@ -110,6 +111,8 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
             self.baseQuizView?.hideFeedback()
         }
 
+        self.childQuizModuleInput?.update(dataset: data.dataset)
+        self.childQuizModuleInput?.update(feedback: data.feedback)
         self.childQuizModuleInput?.update(reply: data.reply)
         self.childQuizModuleInput?.update(status: data.quizStatus)
 

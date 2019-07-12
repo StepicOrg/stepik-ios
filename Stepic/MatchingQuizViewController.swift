@@ -69,7 +69,6 @@ class MatchingQuizViewController: QuizViewController {
 
     fileprivate var orderedOptions: [String] = []
     fileprivate var optionsPermutation: [Int] = []
-    fileprivate var positionForOptionInAttempt: [String : Int] = [:]
     fileprivate var firstCellHeights: [CGFloat?] = []
     fileprivate var secondCellHeights: [CGFloat?] = []
 
@@ -129,13 +128,11 @@ class MatchingQuizViewController: QuizViewController {
 
     fileprivate func resetOptionsToDataset() {
         orderedOptions = []
-        positionForOptionInAttempt = [:]
         optionsPermutation = []
         if let dataset = dataset {
             self.orderedOptions = dataset.secondValues
-            for (index, option) in dataset.secondValues.enumerated() {
+            for (index, _) in dataset.secondValues.enumerated() {
                 optionsPermutation += [index]
-                positionForOptionInAttempt[option] = index
             }
         }
     }
@@ -158,11 +155,6 @@ class MatchingQuizViewController: QuizViewController {
             s.firstTableView.reloadData()
             s.secondTableView.reloadData()
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func maxCellHeight(options: [String], heights: [CGFloat?], sortable: Bool) -> CGFloat {
@@ -249,7 +241,8 @@ extension MatchingQuizViewController : UITableViewDataSource {
 
         switch tableView.tag {
         case 1:
-            cell.setHTMLText(dataset.firstValues[indexPath.row], width: cellWidth(forTableView: firstTableView), finishedBlock: {
+            let htmlEscapedText = dataset.firstValues[indexPath.row].addingHTMLEntities()
+            cell.setHTMLText(htmlEscapedText, width: cellWidth(forTableView: firstTableView), finishedBlock: {
                 [weak self]
                 newHeight in
 
@@ -272,8 +265,9 @@ extension MatchingQuizViewController : UITableViewDataSource {
                 }
             })
         case 2:
+            let htmlEscapedText = self.orderedOptions[indexPath.row].addingHTMLEntities()
             cell.sortable = true
-            cell.setHTMLText(orderedOptions[indexPath.row], width: cellWidth(forTableView: secondTableView), finishedBlock: {
+            cell.setHTMLText(htmlEscapedText, width: cellWidth(forTableView: secondTableView), finishedBlock: {
                 [weak self]
                 newHeight in
 

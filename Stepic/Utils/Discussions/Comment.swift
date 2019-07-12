@@ -10,7 +10,9 @@ import Foundation
 import SwiftyJSON
 
 enum UserRole: String {
-    case Student = "student", Teacher = "teacher", Staff = "staff"
+    case student
+    case teacher
+    case staff
 }
 
 /*
@@ -23,7 +25,7 @@ class Comment: JSONSerializable {
     var id: Int = 0
     var parentId: Int?
     var userId: Int = 0
-    var userRole: UserRole = .Student
+    var userRole: UserRole = .student
     var time: Date = Date()
     var lastTime: Date = Date()
     var text: String = ""
@@ -44,7 +46,7 @@ class Comment: JSONSerializable {
         id = json["id"].intValue
         parentId = json["parent"].int
         userId = json["user"].intValue
-        userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .Student
+        userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .student
         time = Parser.sharedParser.dateFromTimedateJSON(json["time"])!
         lastTime = Parser.sharedParser.dateFromTimedateJSON(json["last_time"])!
         text = json["text"].stringValue
@@ -64,7 +66,7 @@ class Comment: JSONSerializable {
         id = json["id"].intValue
         parentId = json["parent"].int
         userId = json["user"].intValue
-        userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .Student
+        userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .student
         time = Parser.sharedParser.dateFromTimedateJSON(json["time"])!
         lastTime = Parser.sharedParser.dateFromTimedateJSON(json["last_time"])!
         text = json["text"].stringValue

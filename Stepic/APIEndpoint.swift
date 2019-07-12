@@ -44,17 +44,6 @@ class APIEndpoint {
         })
     }
 
-    func constructIdsString<TID>(array arr: [TID]) -> String {
-        var result = ""
-        for element in arr {
-            result += "ids[]=\(element)&"
-        }
-        if result != "" {
-            result.remove(at: result.index(before: result.endIndex))
-        }
-        return result
-    }
-
     //TODO: Remove this in next refactoring iterations
     func getObjectsByIds<T: JSONSerializable>(ids: [T.IdType], updating: [T], printOutput: Bool = false) -> Promise<([T])> {
         return retrieve.request(requestEndpoint: name, paramName: name, ids: ids, updating: updating, withManager: manager)

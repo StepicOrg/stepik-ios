@@ -10,7 +10,7 @@ import Foundation
 
 final class DiscussionAlertConstructor {
     static func getCommentAlert(
-        _ comment: Comment,
+        comment: Comment,
         replyBlock: @escaping (() -> Void),
         likeBlock: @escaping (() -> Void),
         abuseBlock: @escaping (() -> Void),
@@ -39,19 +39,17 @@ final class DiscussionAlertConstructor {
         }))
 
         if comment.userId != AuthInfo.shared.userId {
-            let likeTitle: String = (comment.vote.value == VoteValue.Epic)
+            let likeTitle: String = (comment.vote.value == .epic)
                 ? NSLocalizedString("Unlike", comment: "")
                 : NSLocalizedString("Like", comment: "")
-            alert.addAction(UIAlertAction(title: likeTitle, style: .default, handler: {
-                _ in
+            alert.addAction(UIAlertAction(title: likeTitle, style: .default, handler: { _ in
                 likeBlock()
             }))
 
-            let abuseTitle: String = (comment.vote.value == VoteValue.Abuse)
+            let abuseTitle: String = (comment.vote.value == .abuse)
                 ? NSLocalizedString("Unabuse", comment: "")
                 : NSLocalizedString("Abuse", comment: "")
-            alert.addAction(UIAlertAction(title: abuseTitle, style: .destructive, handler: {
-                _ in
+            alert.addAction(UIAlertAction(title: abuseTitle, style: .destructive, handler: { _ in
                 abuseBlock()
             }))
         }
