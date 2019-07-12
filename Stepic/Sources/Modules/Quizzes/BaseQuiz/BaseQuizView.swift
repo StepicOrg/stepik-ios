@@ -84,11 +84,7 @@ final class BaseQuizView: UIView {
         }
     }
 
-    var isPeerReviewAvailable = false {
-        didSet {
-            self.feedbackView.isUserInteractionEnabled = self.isPeerReviewAvailable
-        }
-    }
+    var isPeerReviewAvailable = false
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -145,7 +141,9 @@ final class BaseQuizView: UIView {
 
     @objc
     private func peerReviewSelected() {
-        self.delegate?.baseQuizViewDidRequestPeerReview(self)
+        if self.isPeerReviewAvailable {
+            self.delegate?.baseQuizViewDidRequestPeerReview(self)
+        }
     }
 }
 
