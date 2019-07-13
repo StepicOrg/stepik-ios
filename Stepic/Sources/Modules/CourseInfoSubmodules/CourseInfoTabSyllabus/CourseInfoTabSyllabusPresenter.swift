@@ -189,6 +189,23 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             return "\(progress.numberOfStepsPassed)/\(progress.numberOfSteps)"
         }()
 
+        let timeToCompleteLabelText: String? = {
+            guard let timeToComplete = unit.lesson?.timeToComplete else {
+                return nil
+            }
+
+            let isAtLeastOneMinute = timeToComplete >= 60
+            let isAtLeastOneHour = timeToComplete / 3600.0 >= 1
+
+            if isAtLeastOneHour {
+                return FormatterHelper.hoursInSeconds(timeToComplete)
+            } else if isAtLeastOneMinute {
+                return FormatterHelper.minutesInSeconds(timeToComplete)
+            } else {
+                return nil
+            }
+        }()
+
         let viewModel = CourseInfoTabSyllabusUnitViewModel(
             uniqueIdentifier: uid,
             title: "\(sectionIndex + 1).\(unitIndex + 1) \(lesson.title)",
@@ -197,6 +214,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             likesCount: likesCount == 0 ? nil : likesCount,
             learnersLabelText: FormatterHelper.longNumber(lesson.passedBy),
             progressLabelText: progressLabelText,
+            timeToCompleteLabelText: timeToCompleteLabelText,
             downloadState: isAvailable ? downloadState : .notAvailable,
             isSelectable: isAvailable
         )
