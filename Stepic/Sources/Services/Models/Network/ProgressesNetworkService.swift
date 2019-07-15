@@ -14,6 +14,10 @@ final class ProgressesNetworkService: ProgressesNetworkServiceProtocol {
     }
 
     func fetch(ids: [Progress.IdType], page: Int = 1) -> Promise<([Progress], Meta)> {
+        if ids.isEmpty {
+            return .value(([], Meta.oneAndOnlyPage))
+        }
+
         // FIXME: We have no pagination here but should support it
         return Promise { seal in
             self.progressesAPI.retrieve(ids: ids).done { progresses in
