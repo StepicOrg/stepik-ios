@@ -45,8 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
 
-        WatchSessionManager.sharedManager.startSession()
-
         NotificationsBadgesManager.shared.setup()
 
         RemoteConfig.shared.setup()

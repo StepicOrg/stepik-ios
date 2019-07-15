@@ -146,7 +146,6 @@
 		0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492C1DE5B07900144C14 /* AlertManager.swift */; };
 		083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */; };
 		083749341DE5BC2B00144C14 /* NotificationPreferencesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */; };
-		083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		083AABE81BE8D63D005E1E96 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE71BE8D63C005E1E96 /* Progress.swift */; };
 		083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */; };
@@ -177,7 +176,6 @@
 		084156941BCBFFBD006B8C73 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156901BCBFFBD006B8C73 /* Block.swift */; };
 		084156951BCBFFBD006B8C73 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
 		084156961BCBFFBD006B8C73 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
-		0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
 		08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */; };
 		084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */; };
 		084472081D05918E00197166 /* ChoiceQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */; };
@@ -304,8 +302,6 @@
 		086442D71F765014000CC53D /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351991F68339A004255B6 /* AuthTextField.swift */; };
 		086538381EB02716003A8415 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086538371EB02716003A8415 /* Stickers.xcassets */; };
 		0865383C1EB02716003A8415 /* StickerPackExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 086538351EB02715003A8415 /* StickerPackExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		08666B5A1E11C53D00799731 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08666B5C1E11C53D00799731 /* Localizable.strings */; };
-		08666B611E11C57500799731 /* Localizables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666B601E11C57500799731 /* Localizables.swift */; };
 		08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */; };
 		08687BAF1BACB43700F5BDE1 /* RefreshTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */; };
 		0868C1801F375A1200D77C5F /* SearchQueriesPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868C17D1F375A1200D77C5F /* SearchQueriesPersistentManager.swift */; };
@@ -1031,14 +1027,6 @@
 		2C1B616E1F4C4AEF00236804 /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C1B61711F4C4AEF00236804 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		2C1B61721F4C4AEF00236804 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		2C1B61731F4C4AEF00236804 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		2C1B61751F4C4AEF00236804 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		2C1B61761F4C4AEF00236804 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		2C1B61771F4C4AEF00236804 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		2C1B61781F4C4AEF00236804 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		2C1B61791F4C4AEF00236804 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		2C1B617A1F4C4AEF00236804 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C1B61801F4C4AEF00236804 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -1060,8 +1048,6 @@
 		2C1B61911F4C4AEF00236804 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		2C1B61921F4C4AEF00236804 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		2C1B61931F4C4AEF00236804 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
-		2C1B61941F4C4AEF00236804 /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		2C1B61951F4C4AEF00236804 /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		2C1B61961F4C4AEF00236804 /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		2C1B61971F4C4AEF00236804 /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		2C1B61981F4C4AEF00236804 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
@@ -1378,14 +1364,6 @@
 		2C1B637F1F4C590700236804 /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C1B63821F4C590700236804 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		2C1B63831F4C590700236804 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		2C1B63841F4C590700236804 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		2C1B63861F4C590700236804 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		2C1B63871F4C590700236804 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		2C1B63881F4C590700236804 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		2C1B63891F4C590700236804 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		2C1B638A1F4C590700236804 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		2C1B638B1F4C590700236804 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C1B63911F4C590700236804 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -1407,8 +1385,6 @@
 		2C1B63A21F4C590700236804 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		2C1B63A31F4C590700236804 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		2C1B63A41F4C590700236804 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
-		2C1B63A51F4C590700236804 /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		2C1B63A61F4C590700236804 /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		2C1B63A71F4C590700236804 /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		2C1B63A81F4C590700236804 /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		2C1B63A91F4C590700236804 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
@@ -1789,7 +1765,6 @@
 		2C4A1ED021087D2800A1D68C /* TrainingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A1ECF21087D2800A1D68C /* TrainingAssembly.swift */; };
 		2C4B6A58212B430A008B3953 /* AdaptiveStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A56212B430A008B3953 /* AdaptiveStepsViewController.swift */; };
 		2C4B6A60212B517C008B3953 /* CoursePlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B6A5F212B517C008B3953 /* CoursePlainObject.swift */; };
-		2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
 		2C4BADEB2121D7E600E42F8C /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C4BADED2121DE3600E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
 		2C4BADEE2121DE3700E42F8C /* AdaptiveCourseSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0107C3210F746B009A53DF /* AdaptiveCourseSelectViewController.swift */; };
@@ -2278,14 +2253,6 @@
 		2C89AA021F4C289900227C3B /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C89AA051F4C289900227C3B /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		2C89AA061F4C289900227C3B /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		2C89AA071F4C289900227C3B /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		2C89AA091F4C289900227C3B /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		2C89AA0A1F4C289900227C3B /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		2C89AA0B1F4C289900227C3B /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		2C89AA0C1F4C289900227C3B /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		2C89AA0D1F4C289900227C3B /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		2C89AA0E1F4C289900227C3B /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		2C89AA0F1F4C289900227C3B /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		2C89AA111F4C289900227C3B /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C89AA131F4C289900227C3B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C89AA141F4C289900227C3B /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -2307,8 +2274,6 @@
 		2C89AA251F4C289900227C3B /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		2C89AA261F4C289900227C3B /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		2C89AA271F4C289900227C3B /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
-		2C89AA281F4C289900227C3B /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		2C89AA291F4C289900227C3B /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		2C89AA2A1F4C289900227C3B /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		2C89AA2B1F4C289900227C3B /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		2C89AA2C1F4C289900227C3B /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
@@ -2560,10 +2525,6 @@
 		2C94999C20ECB8EF0049E9A8 /* Sorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1256E1BDE8E460066B2B2 /* Sorter.swift */; };
 		2C94999E20ECB91C0049E9A8 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156921BCBFFBD006B8C73 /* Step.swift */; };
 		2C94999F20ECB9220049E9A8 /* Step+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */; };
-		2C9499A020ECB93E0049E9A8 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		2C9499A120ECB9430049E9A8 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		2C9499A220ECB9470049E9A8 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		2C9499A320ECB9590049E9A8 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
 		2C9499A420ECB9730049E9A8 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
 		2C9499A620ECB9A90049E9A8 /* DatabaseFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D9E98B206C243D002F41D3 /* DatabaseFetchService.swift */; };
 		2C9499A720ECB9C30049E9A8 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1EF711BB5636700BE84E6 /* Course+CoreDataProperties.swift */; };
@@ -2591,7 +2552,6 @@
 		2C9499BF20ECBB5D0049E9A8 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CE16DF1BFA5A80008511B7 /* DeviceInfo.swift */; };
 		2C9499C020ECBB750049E9A8 /* Progress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */; };
 		2C9499C120ECBB950049E9A8 /* StorageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E35AF20B5B14A006E28F9 /* StorageData.swift */; };
-		2C9499C220ECBBAF0049E9A8 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
 		2C9499C320ECBBE80049E9A8 /* Section+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0828FF6C1BC5D177000AFEA7 /* Section+CoreDataProperties.swift */; };
 		2C9499C620ECBC250049E9A8 /* VideoDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B370C1BFA07AE003DC593 /* VideoDownloadDelegate.swift */; };
 		2C9499C720ECBC3C0049E9A8 /* DiscussionProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800B8171D06D961006C987E /* DiscussionProxy.swift */; };
@@ -2625,7 +2585,6 @@
 		2C9499E620ECBEBE0049E9A8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
 		2C9499E720ECBF880049E9A8 /* CodeTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1141EDDF63200D64D77 /* CodeTemplate.swift */; };
 		2C9499E820ECBF9B0049E9A8 /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
-		2C9499E920ECBFB20049E9A8 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		2C9499EA20ECBFD90049E9A8 /* UIThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5E2991BF509C900B875E6 /* UIThreadHelper.swift */; };
 		2C9499EE20ECC02A0049E9A8 /* TabsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F74601BD8159F0064AAEA /* TabsInfo.swift */; };
 		2C9499EF20ECC0580049E9A8 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
@@ -2641,7 +2600,6 @@
 		2C9499FB20ECC1780049E9A8 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
 		2C9499FC20ECC18D0049E9A8 /* ExecutionQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861E6741CD8106E00B45652 /* ExecutionQueue.swift */; };
 		2C9499FD20ECC22D0049E9A8 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C0A4331BF1276C0010F049 /* Messages.swift */; };
-		2C9499FE20ECC2530049E9A8 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
 		2C9499FF20ECC26F0049E9A8 /* StepOptions+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0846B1061EDDED4400D64D77 /* StepOptions+CoreDataProperties.swift */; };
 		2C949A0020ECC2880049E9A8 /* CodeSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7A1EFC13ED0036EB3D /* CodeSample.swift */; };
 		2C949A0220ECC2BF0049E9A8 /* CodeSample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C5E7F1EFC28CE0036EB3D /* CodeSample+CoreDataProperties.swift */; };
@@ -2820,14 +2778,6 @@
 		2C9731B61F4C38F600AC9301 /* CodeReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E3B9661EEA16DC0072995B /* CodeReply.swift */; };
 		2C9731B91F4C38F600AC9301 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		2C9731BA1F4C38F600AC9301 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		2C9731BB1F4C38F600AC9301 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		2C9731BD1F4C38F600AC9301 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		2C9731BE1F4C38F600AC9301 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		2C9731BF1F4C38F600AC9301 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		2C9731C01F4C38F600AC9301 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		2C9731C11F4C38F600AC9301 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		2C9731C21F4C38F600AC9301 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		2C9731C31F4C38F600AC9301 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		2C9731C51F4C38F600AC9301 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2C9731C71F4C38F600AC9301 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
 		2C9731C81F4C38F600AC9301 /* ConnectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E16F281BDBA731004822E1 /* ConnectionHelper.swift */; };
@@ -2849,8 +2799,6 @@
 		2C9731D91F4C38F600AC9301 /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		2C9731DA1F4C38F600AC9301 /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		2C9731DB1F4C38F600AC9301 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
-		2C9731DC1F4C38F600AC9301 /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		2C9731DD1F4C38F600AC9301 /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		2C9731DE1F4C38F600AC9301 /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		2C9731DF1F4C38F600AC9301 /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		2C9731E01F4C38F600AC9301 /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
@@ -3276,14 +3224,6 @@
 		2CA8D1FA2088D9C000E105E9 /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		2CA8D1FB2088D9C000E105E9 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
 		2CA8D1FC2088D9C000E105E9 /* CourseReviewSummariesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */; };
-		2CA8D1FD2088D9C000E105E9 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		2CA8D1FE2088D9C000E105E9 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		2CA8D1FF2088D9C000E105E9 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		2CA8D2002088D9C000E105E9 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		2CA8D2012088D9C000E105E9 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		2CA8D2022088D9C000E105E9 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		2CA8D2032088D9C000E105E9 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		2CA8D2042088D9C000E105E9 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		2CA8D2062088D9C000E105E9 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CA8D2072088D9C000E105E9 /* UICustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C9A2B1BAC88E2001BE326 /* UICustomizer.swift */; };
 		2CA8D2082088D9C000E105E9 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D71BB9A4BD003CFAD1 /* CoreDataHelper.swift */; };
@@ -3318,8 +3258,6 @@
 		2CA8D2282088D9C000E105E9 /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
 		2CA8D2292088D9C000E105E9 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
 		2CA8D22A2088D9C000E105E9 /* CourseListsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087585A21FB50D640047A269 /* CourseListsAPI.swift */; };
-		2CA8D22B2088D9C000E105E9 /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		2CA8D22C2088D9C000E105E9 /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		2CA8D22D2088D9C000E105E9 /* HeaderMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF788B1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift */; };
 		2CA8D22E2088D9C000E105E9 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E31F6BF52700FC2B7C /* AuthButton.swift */; };
 		2CA8D22F2088D9C000E105E9 /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
@@ -4251,7 +4189,6 @@
 		73D03D39FC486C2703DEEAC7 /* Pods_Adaptive_8290.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B58AE31B0AA2FF680DB161 /* Pods_Adaptive_8290.framework */; };
 		74FD831A02995D35BB0B4334 /* Pods_Adaptive_3149.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B949C80924417C8FDF3E619 /* Pods_Adaptive_3149.framework */; };
 		7FBB25F3FD251734F7E049DD /* NewStepDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49034C40838BCF58896D0118 /* NewStepDataFlow.swift */; };
-		828CF38E1E0866E40058ACFC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 828CF38D1E0866E40058ACFC /* clock.png */; };
 		82CFDAF7B1E042059EC337E7 /* Pods_Adaptive_1838.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FB680AE7FF9ADFE72FCEA1C /* Pods_Adaptive_1838.framework */; };
 		857E1FD24A70F87BCA6EBABA /* NewStringQuizInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2111290D2E9D752A22AFC024 /* NewStringQuizInteractor.swift */; };
 		860BC3381EAA1E520058F440 /* LoadingPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F2B291E9EC17F00714173 /* LoadingPaginationView.swift */; };
@@ -4307,8 +4244,6 @@
 		864D66A01E83DE03001E8D9E /* SharingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0840707F1D64847000308FC1 /* SharingHelper.swift */; };
 		864D66A11E83DE03001E8D9E /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035201D65A252003515C6 /* AnalyticsEvents.swift */; };
 		864D66A21E83DE03001E8D9E /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */; };
-		864D66A31E83DE03001E8D9E /* WatchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */; };
-		864D66A41E83DE03001E8D9E /* WatchCoursesDisplayingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */; };
 		864D66A51E83DE03001E8D9E /* HTMLParsingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087F6B951CE9E2C8002649AB /* HTMLParsingUtil.swift */; };
 		864D66A61E83DE03001E8D9E /* TagDetectionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0858B7081CFF271200459A6A /* TagDetectionUtil.swift */; };
 		864D66A71E83DE03001E8D9E /* UIImageView+SVGDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */; };
@@ -4431,14 +4366,6 @@
 		864D67321E83DE03001E8D9E /* AlamofireExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B845DB1D36998E00267FF4 /* AlamofireExtensions.swift */; };
 		864D67331E83DE03001E8D9E /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087387D91BB9B768003CFAD1 /* ErrorEnums.swift */; };
 		864D67341E83DE03001E8D9E /* EmptyDatasetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E542021C6C75FD00DEC38E /* EmptyDatasetState.swift */; };
-		864D67351E83DE76001E8D9E /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		864D67361E83DE76001E8D9E /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		864D67371E83DE76001E8D9E /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		864D67381E83DE76001E8D9E /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		864D67391E83DE76001E8D9E /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		864D673A1E83DE76001E8D9E /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		864D673B1E83DE76001E8D9E /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		864D673C1E83DE76001E8D9E /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		864D673F1E83DE8A001E8D9E /* Alamofire-SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824289B1BB0104700C98185 /* Alamofire-SwiftyJSON.swift */; };
 		864D67401E83DE8A001E8D9E /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
 		864D674A1E83E08E001E8D9E /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485921C574D79000165AA /* WarningView.swift */; };
@@ -4549,34 +4476,6 @@
 		914E0524A012EA79D3188148 /* Pods_Adaptive_GMAT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441EA0C64BFC90DADA0E0706 /* Pods_Adaptive_GMAT.framework */; };
 		92E876582D263061F44316EB /* NewFreeAnswerQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7667856CC2C2A2AC43631 /* NewFreeAnswerQuizView.swift */; };
 		9967FCEF844E914AF66A06D7 /* Pods_ExamEGERussianTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8614EEBD19ACC087895DA2 /* Pods_ExamEGERussianTests.framework */; };
-		9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */; };
-		9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C71191E076AE000EC8DA3 /* Interface.storyboard */; };
-		9F9C711D1E076AE000EC8DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */; };
-		9F9C71241E076AE100EC8DA3 /* StepicWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9F9C712D1E076AE100EC8DA3 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C712C1E076AE100EC8DA3 /* ComplicationController.swift */; };
-		9F9C712F1E076AE100EC8DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9C712E1E076AE100EC8DA3 /* Assets.xcassets */; };
-		9F9C71331E076AE100EC8DA3 /* StepicWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 9F9C71171E076AE000EC8DA3 /* StepicWatch.app */; };
-		9F9C71421E076B0000EC8DA3 /* CoursesInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713C1E076B0000EC8DA3 /* CoursesInterfaceController.swift */; };
-		9F9C71431E076B0000EC8DA3 /* CourseInfoInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713D1E076B0000EC8DA3 /* CourseInfoInterfaceController.swift */; };
-		9F9C71441E076B0000EC8DA3 /* PaybackInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713E1E076B0000EC8DA3 /* PaybackInterfaceController.swift */; };
-		9F9C71451E076B0000EC8DA3 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C713F1E076B0000EC8DA3 /* ExtensionDelegate.swift */; };
-		9F9C71461E076B0000EC8DA3 /* CourseRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71401E076B0000EC8DA3 /* CourseRowType.swift */; };
-		9F9C71471E076B0000EC8DA3 /* DataRowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71411E076B0000EC8DA3 /* DataRowType.swift */; };
-		9F9C71501E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		9F9C71511E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */; };
-		9F9C71521E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		9F9C71531E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */; };
-		9F9C71541E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		9F9C71551E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */; };
-		9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		9F9C71571E076B3E00EC8DA3 /* DataConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */; };
-		9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		9F9C71591E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */; };
-		9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */; };
-		9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
-		9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */; };
 		B0D23296AB3FAC5BC6F45029 /* NewLessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC193B8E01FF4A61441ABF13 /* NewLessonViewController.swift */; };
 		B19640F51AB03FCB93746775 /* Pods_Adaptive_3149_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD5025C17EF2EF0CB187EFA /* Pods_Adaptive_3149_Screenshots.framework */; };
 		B7C9249982C2E41025257FB1 /* Pods_Adaptive_3124_Screenshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6A115E37188145524175A9 /* Pods_Adaptive_3124_Screenshots.framework */; };
@@ -4661,20 +4560,6 @@
 			remoteGlobalIDString = 2C1B62CE1F4C590700236804;
 			remoteInfo = "Adaptive 3124";
 		};
-		9F9C71251E076AE100EC8DA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9F9C71221E076AE000EC8DA3;
-			remoteInfo = "StepicWatch Extension";
-		};
-		9F9C71311E076AE100EC8DA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9F9C71161E076AE000EC8DA3;
-			remoteInfo = StepicWatch;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -4687,28 +4572,6 @@
 				0865383C1EB02716003A8415 /* StickerPackExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9F9C71391E076AE100EC8DA3 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				9F9C71241E076AE100EC8DA3 /* StepicWatch Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				9F9C71331E076AE100EC8DA3 /* StepicWatch.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -4846,7 +4709,6 @@
 		0837492F1DE5BBF700144C14 /* PreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesContainer.swift; sourceTree = "<group>"; };
 		083749331DE5BC2A00144C14 /* NotificationPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesContainer.swift; sourceTree = "<group>"; };
 		0839C5451D58B4650027F452 /* Model_v6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v6.xcdatamodel; sourceTree = "<group>"; };
-		083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchCoursesDisplayingHelper.swift; sourceTree = "<group>"; };
 		083AA36C1E089533003E054E /* Model_course_progress_v11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_progress_v11.xcdatamodel; sourceTree = "<group>"; };
 		083AABE61BE8D63C005E1E96 /* Progress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		083AABE71BE8D63C005E1E96 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
@@ -4875,7 +4737,6 @@
 		084156901BCBFFBD006B8C73 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		084156911BCBFFBD006B8C73 /* Step+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Step+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		084156921BCBFFBD006B8C73 /* Step.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
-		0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchDataHelper.swift; sourceTree = "<group>"; };
 		08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSplitTestsContainer.swift; sourceTree = "<group>"; };
 		084472041D05918E00197166 /* ChoiceQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceQuizTableViewCell.swift; sourceTree = "<group>"; };
 		084472051D05918E00197166 /* ChoiceQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceQuizTableViewCell.xib; sourceTree = "<group>"; };
@@ -4946,9 +4807,6 @@
 		086538351EB02715003A8415 /* StickerPackExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StickerPackExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		086538371EB02716003A8415 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
 		086538391EB02716003A8415 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08666B5E1E11C54300799731 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		08666B5F1E11C55F00799731 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		08666B601E11C57500799731 /* Localizables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizables.swift; sourceTree = "<group>"; };
 		08687BAC1BACB43700F5BDE1 /* RefreshTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTableViewCell.swift; sourceTree = "<group>"; };
 		08687BAD1BACB43700F5BDE1 /* RefreshTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshTableViewCell.xib; sourceTree = "<group>"; };
 		0868C17D1F375A1200D77C5F /* SearchQueriesPersistentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchQueriesPersistentManager.swift; sourceTree = "<group>"; };
@@ -5118,8 +4976,6 @@
 		08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Stepic.entitlements; sourceTree = "<group>"; };
 		08DB8CB71D0BECF000A6D079 /* DiscussionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTableViewCell.swift; sourceTree = "<group>"; };
 		08DB8CB81D0BECF000A6D079 /* DiscussionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscussionTableViewCell.xib; sourceTree = "<group>"; };
-		08DC5A021E171C730051B14A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Interface.strings; sourceTree = "<group>"; };
-		08DC5A041E171EA00051B14A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
 		08DDF90C20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalDeadlinesSuggestionWidgetView.xib; sourceTree = "<group>"; };
 		08DDF90F20A9B2E9004ECC11 /* PersonalDeadlinesSuggestionWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesSuggestionWidgetView.swift; sourceTree = "<group>"; };
 		08DE94111B8C58AC00D278AB /* Stepic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stepic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5225,7 +5081,6 @@
 		232D0A4BD87325BE0E568BF0 /* NewFreeAnswerQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizInteractor.swift; sourceTree = "<group>"; };
 		2567A30435F1B9A9F8997D7A /* Pods-Adaptive 3149 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149 Screenshots.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive 3149 Screenshots/Pods-Adaptive 3149 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		2849359FD9DCC5A2A3C296D2 /* Pods-Adaptive 8290.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 8290.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290.debug.xcconfig"; sourceTree = "<group>"; };
-		289128D1F909937A7B27843D /* Pods_StepikTVTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTVTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C0107A7210F420C009A53DF /* LessonsAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssemblyProtocol.swift; sourceTree = "<group>"; };
 		2C0107A9210F4214009A53DF /* LessonsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAssembly.swift; sourceTree = "<group>"; };
 		2C0107AC210F42A6009A53DF /* LessonsRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsRouterProtocol.swift; sourceTree = "<group>"; };
@@ -5781,7 +5636,6 @@
 		367AA546A9882F4F733F8866 /* Pods-Adaptive 8290.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 8290.release.xcconfig"; path = "Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290.release.xcconfig"; sourceTree = "<group>"; };
 		36E041388C85D190467E74A5 /* NewChoiceQuizViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizViewController.swift; sourceTree = "<group>"; };
 		37D0922F478391C8B44EA5D0 /* NewFreeAnswerQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizPresenter.swift; sourceTree = "<group>"; };
-		3861831C4DABBD55B553036C /* Pods-StepikTV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.release.xcconfig"; path = "Target Support Files/Pods-StepikTV/Pods-StepikTV.release.xcconfig"; sourceTree = "<group>"; };
 		3AD36917F532D0F83798B2F2 /* NewChoiceQuizAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizAssembly.swift; sourceTree = "<group>"; };
 		3C1049108DA5FB2370275330 /* Pods-StepicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepicTests.release.xcconfig"; path = "Target Support Files/Pods-StepicTests/Pods-StepicTests.release.xcconfig"; sourceTree = "<group>"; };
 		3E6741032B8AF7696CAC7126 /* NewFreeAnswerQuizAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizAssembly.swift; sourceTree = "<group>"; };
@@ -5789,7 +5643,6 @@
 		47B33C7005A1D434A84E070C /* Pods-Adaptive 3124.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124.debug.xcconfig"; sourceTree = "<group>"; };
 		49034C40838BCF58896D0118 /* NewStepDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStepDataFlow.swift; sourceTree = "<group>"; };
 		49B8797DC84D64C5BAA84E76 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
-		49C753F2F3DABAF2AAFDADC1 /* Pods-StepikTVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.release.xcconfig"; path = "Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.release.xcconfig"; sourceTree = "<group>"; };
 		4A4D51541BF7AE1FCD2865C0 /* ProfileEditAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProfileEditAssembly.swift; sourceTree = "<group>"; };
 		4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProfileEditDataFlow.swift; sourceTree = "<group>"; };
 		508C25A19DBEE7176400D767 /* NewChoiceQuizView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizView.swift; sourceTree = "<group>"; };
@@ -6070,12 +5923,9 @@
 		643FD144A06A3F4845E22BFD /* Pods-Adaptive 3124 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3124 Screenshots.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive 3124 Screenshots/Pods-Adaptive 3124 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		6E5BA4688D7B46C416231BD9 /* ProfileEditInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProfileEditInteractor.swift; sourceTree = "<group>"; };
 		7056967683273E908BA806A6 /* Pods-Adaptive GMAT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.debug.xcconfig"; sourceTree = "<group>"; };
-		73A6ED0445E6700050A3F64F /* Pods_StepikTV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepikTV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		75CA1178E25863EFD4241FEB /* Pods-StepikTVTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTVTests.debug.xcconfig"; path = "Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7658D9F92534F2E4B82F86BC /* Pods-ExamEGERussian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExamEGERussian.release.xcconfig"; path = "Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian.release.xcconfig"; sourceTree = "<group>"; };
 		79467CCB416E6C3CC9613912 /* NewStringQuizView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStringQuizView.swift; sourceTree = "<group>"; };
 		80E8045E8645E07DAAA62D82 /* NewLessonProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewLessonProvider.swift; sourceTree = "<group>"; };
-		828CF38D1E0866E40058ACFC /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
 		831CC7AB7FC20E336DB6813F /* ProfileEditView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		84763D78E2F327874DA51576 /* NewStepInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStepInteractor.swift; sourceTree = "<group>"; };
 		857A13D34DD46EE775195731 /* Pods-Adaptive GMAT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive GMAT.release.xcconfig"; path = "Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT.release.xcconfig"; sourceTree = "<group>"; };
@@ -6105,29 +5955,7 @@
 		8D8614EEBD19ACC087895DA2 /* Pods_ExamEGERussianTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExamEGERussianTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B949C80924417C8FDF3E619 /* Pods_Adaptive_3149.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMetainfoEntity.swift; sourceTree = "<group>"; };
 		9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F9C71171E076AE000EC8DA3 /* StepicWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StepicWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F9C711A1E076AE000EC8DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9F9C711E1E076AE000EC8DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "StepicWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F9C712C1E076AE100EC8DA3 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		9F9C712E1E076AE100EC8DA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9F9C71301E076AE100EC8DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F9C713C1E076B0000EC8DA3 /* CoursesInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesInterfaceController.swift; sourceTree = "<group>"; };
-		9F9C713D1E076B0000EC8DA3 /* CourseInfoInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoInterfaceController.swift; sourceTree = "<group>"; };
-		9F9C713E1E076B0000EC8DA3 /* PaybackInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaybackInterfaceController.swift; sourceTree = "<group>"; };
-		9F9C713F1E076B0000EC8DA3 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		9F9C71401E076B0000EC8DA3 /* CourseRowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseRowType.swift; sourceTree = "<group>"; };
-		9F9C71411E076B0000EC8DA3 /* DataRowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRowType.swift; sourceTree = "<group>"; };
-		9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
-		9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionDataObserver.swift; sourceTree = "<group>"; };
-		9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionSender.swift; sourceTree = "<group>"; };
-		9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConvertable.swift; sourceTree = "<group>"; };
-		9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursePlainEntity.swift; sourceTree = "<group>"; };
-		9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackCommandEntity.swift; sourceTree = "<group>"; };
-		9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackStatusEntity.swift; sourceTree = "<group>"; };
 		AC5B5698955B5FF2B7EFB6F4 /* NewLessonDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewLessonDataFlow.swift; sourceTree = "<group>"; };
 		ACDDB66D0848F4DCD752795B /* NewStringQuizDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStringQuizDataFlow.swift; sourceTree = "<group>"; };
 		AF89927A843447A9AE4C0AF4 /* NewChoiceQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizPresenter.swift; sourceTree = "<group>"; };
@@ -6141,7 +5969,6 @@
 		BF50F304BF0016F5B477EEC8 /* NewFreeAnswerQuizDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizDataFlow.swift; sourceTree = "<group>"; };
 		C6F7667856CC2C2A2AC43631 /* NewFreeAnswerQuizView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizView.swift; sourceTree = "<group>"; };
 		C749384D02261D0E8DFAAF25 /* Pods-Adaptive 3149.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.debug.xcconfig"; sourceTree = "<group>"; };
-		CCAB0282703AFA684A4AA0B8 /* Pods-StepikTV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StepikTV.debug.xcconfig"; path = "Target Support Files/Pods-StepikTV/Pods-StepikTV.debug.xcconfig"; sourceTree = "<group>"; };
 		CD84F0E654CCD364B63C7BA6 /* Pods-Adaptive 3150 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		CF5CB698895F2AC1E9E40FFC /* Pods-Adaptive 1838 Screenshots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 1838 Screenshots.debug.xcconfig"; path = "Target Support Files/Pods-Adaptive 1838 Screenshots/Pods-Adaptive 1838 Screenshots.debug.xcconfig"; sourceTree = "<group>"; };
 		D109E72D69B31373C97237F8 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
@@ -6293,20 +6120,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F9C71201E076AE000EC8DA3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4823D557770D87F640127A2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -6363,7 +6176,6 @@
 				08B65AE31CFCA72800C3A770 /* ImageTapHelper.swift */,
 				089611031D52250500561AC1 /* DeepLinkRouter.swift */,
 				0840707F1D64847000308FC1 /* SharingHelper.swift */,
-				083AA36B1E0842FE003E054E /* Watch Helpers */,
 				08B3B80520F3909400F64D20 /* HTMLProcessor.swift */,
 			);
 			name = Helpers;
@@ -6686,15 +6498,6 @@
 				62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */,
 			);
 			name = Preferences;
-			sourceTree = "<group>";
-		};
-		083AA36B1E0842FE003E054E /* Watch Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				0841BDC61E082AE7008CE13E /* WatchDataHelper.swift */,
-				083AA3691E083FD3003E054E /* WatchCoursesDisplayingHelper.swift */,
-			);
-			name = "Watch Helpers";
 			sourceTree = "<group>";
 		};
 		083F11761E54DB09006EF4F1 /* Picker View Controller */ = {
@@ -7587,9 +7390,6 @@
 				2CD12B911F4F3357001D3C82 /* UITests */,
 				08DE94131B8C58AC00D278AB /* Stepic */,
 				085D5CDA1D007F2100092060 /* StepicTests */,
-				9F9C71481E076B3200EC8DA3 /* Shared */,
-				9F9C71181E076AE000EC8DA3 /* StepicWatch */,
-				9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */,
 				86EF29351E83CEA900F8D214 /* Adaptive Course */,
 				086538361EB02716003A8415 /* StickerPackExtension */,
 				2C59F02820EB8AC800666EE0 /* ExamEGERussian */,
@@ -7605,8 +7405,6 @@
 			children = (
 				08DE94111B8C58AC00D278AB /* Stepic.app */,
 				085D5CD91D007F2100092060 /* StepicTests.xctest */,
-				9F9C71171E076AE000EC8DA3 /* StepicWatch.app */,
-				9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */,
 				86EF29341E83CEA900F8D214 /* Adaptive 1838.app */,
 				086538351EB02715003A8415 /* StickerPackExtension.appex */,
 				2C89AB3A1F4C289900227C3B /* Adaptive GMAT.app */,
@@ -8029,8 +7827,6 @@
 				8D8614EEBD19ACC087895DA2 /* Pods_ExamEGERussianTests.framework */,
 				9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */,
 				938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */,
-				73A6ED0445E6700050A3F64F /* Pods_StepikTV.framework */,
-				289128D1F909937A7B27843D /* Pods_StepikTVTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -11193,51 +10989,6 @@
 			path = StepicAdaptiveCourse;
 			sourceTree = "<group>";
 		};
-		9F9C71181E076AE000EC8DA3 /* StepicWatch */ = {
-			isa = PBXGroup;
-			children = (
-				9F9C71191E076AE000EC8DA3 /* Interface.storyboard */,
-				9F9C711C1E076AE000EC8DA3 /* Assets.xcassets */,
-				9F9C711E1E076AE000EC8DA3 /* Info.plist */,
-			);
-			path = StepicWatch;
-			sourceTree = "<group>";
-		};
-		9F9C71271E076AE100EC8DA3 /* StepicWatch Extension */ = {
-			isa = PBXGroup;
-			children = (
-				9F9C713C1E076B0000EC8DA3 /* CoursesInterfaceController.swift */,
-				9F9C713D1E076B0000EC8DA3 /* CourseInfoInterfaceController.swift */,
-				9F9C713E1E076B0000EC8DA3 /* PaybackInterfaceController.swift */,
-				9F9C713F1E076B0000EC8DA3 /* ExtensionDelegate.swift */,
-				9F9C71401E076B0000EC8DA3 /* CourseRowType.swift */,
-				9F9C71411E076B0000EC8DA3 /* DataRowType.swift */,
-				9F9C712C1E076AE100EC8DA3 /* ComplicationController.swift */,
-				828CF38D1E0866E40058ACFC /* clock.png */,
-				9F9C712E1E076AE100EC8DA3 /* Assets.xcassets */,
-				9F9C71301E076AE100EC8DA3 /* Info.plist */,
-				08666B5C1E11C53D00799731 /* Localizable.strings */,
-				08666B601E11C57500799731 /* Localizables.swift */,
-			);
-			path = "StepicWatch Extension";
-			sourceTree = "<group>";
-		};
-		9F9C71481E076B3200EC8DA3 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				9F9C71491E076B3E00EC8DA3 /* WatchSessionManager.swift */,
-				9F9C714A1E076B3E00EC8DA3 /* WatchSessionDataObserver.swift */,
-				9F9C714B1E076B3E00EC8DA3 /* WatchSessionSender.swift */,
-				9F9C714C1E076B3E00EC8DA3 /* DataConvertable.swift */,
-				9F9C714D1E076B3E00EC8DA3 /* CoursePlainEntity.swift */,
-				9F5F3D701E08783E00000423 /* CourseMetainfoEntity.swift */,
-				9F9C714E1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift */,
-				9F9C714F1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift */,
-			);
-			name = Shared;
-			path = StepicWatch;
-			sourceTree = "<group>";
-		};
 		C029726DE3288A13E774C8C3 /* InputOutput */ = {
 			isa = PBXGroup;
 			children = (
@@ -11293,10 +11044,6 @@
 				D109E72D69B31373C97237F8 /* Pods-Stepic.release.xcconfig */,
 				ECD9168AF529D0D527B1DCDB /* Pods-StepicTests.debug.xcconfig */,
 				3C1049108DA5FB2370275330 /* Pods-StepicTests.release.xcconfig */,
-				CCAB0282703AFA684A4AA0B8 /* Pods-StepikTV.debug.xcconfig */,
-				3861831C4DABBD55B553036C /* Pods-StepikTV.release.xcconfig */,
-				75CA1178E25863EFD4241FEB /* Pods-StepikTVTests.debug.xcconfig */,
-				49C753F2F3DABAF2AAFDADC1 /* Pods-StepikTVTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -11382,14 +11129,12 @@
 				08DE940F1B8C58AC00D278AB /* Resources */,
 				08343B1A1BF5EC7F00370FC1 /* Fabric Script */,
 				08983F241F3E4112008199B1 /* SwiftLint Script */,
-				9F9C713B1E076AE100EC8DA3 /* Embed Watch Content */,
 				086538401EB02716003A8415 /* Embed App Extensions */,
 				D25EB23E484464AD999FE2C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9F9C71321E076AE100EC8DA3 /* PBXTargetDependency */,
 				0865383B1EB02716003A8415 /* PBXTargetDependency */,
 			);
 			name = Stepic;
@@ -11678,41 +11423,6 @@
 			productReference = 86EF29341E83CEA900F8D214 /* Adaptive 1838.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9F9C71161E076AE000EC8DA3 /* StepicWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9F9C713A1E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch" */;
-			buildPhases = (
-				9F9C71151E076AE000EC8DA3 /* Resources */,
-				9F9C71391E076AE100EC8DA3 /* Embed App Extensions */,
-				F4823D557770D87F640127A2 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9F9C71261E076AE100EC8DA3 /* PBXTargetDependency */,
-			);
-			name = StepicWatch;
-			productName = StepicWatch;
-			productReference = 9F9C71171E076AE000EC8DA3 /* StepicWatch.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9F9C71381E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch Extension" */;
-			buildPhases = (
-				9F9C711F1E076AE000EC8DA3 /* Sources */,
-				9F9C71201E076AE000EC8DA3 /* Frameworks */,
-				9F9C71211E076AE000EC8DA3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "StepicWatch Extension";
-			productName = "StepicWatch Extension";
-			productReference = 9F9C71231E076AE000EC8DA3 /* StepicWatch Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -11830,18 +11540,6 @@
 							};
 						};
 					};
-					9F9C71161E076AE000EC8DA3 = {
-						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = UJ4KC2QN7B;
-						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
-					};
-					9F9C71221E076AE000EC8DA3 = {
-						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = UJ4KC2QN7B;
-						LastSwiftMigration = 1010;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 08DE940C1B8C58AC00D278AB /* Build configuration list for PBXProject "Stepic" */;
@@ -11861,8 +11559,6 @@
 			targets = (
 				08DE94101B8C58AC00D278AB /* Stepic */,
 				085D5CD81D007F2100092060 /* StepicTests */,
-				9F9C71161E076AE000EC8DA3 /* StepicWatch */,
-				9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */,
 				086538341EB02715003A8415 /* StickerPackExtension */,
 				86EF29331E83CEA900F8D214 /* Adaptive 1838 */,
 				2C89A9511F4C289900227C3B /* Adaptive GMAT */,
@@ -12644,25 +12340,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F9C71151E076AE000EC8DA3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9F9C711D1E076AE000EC8DA3 /* Assets.xcassets in Resources */,
-				9F9C711B1E076AE000EC8DA3 /* Interface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9F9C71211E076AE000EC8DA3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				828CF38E1E0866E40058ACFC /* clock.png in Resources */,
-				08666B5A1E11C53D00799731 /* Localizable.strings in Resources */,
-				9F9C712F1E076AE100EC8DA3 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -12895,17 +12572,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -12921,17 +12598,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -13242,17 +12919,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 8290/Pods-Adaptive 8290-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -13268,17 +12945,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -13374,17 +13051,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 1838/Pods-Adaptive 1838-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -13400,17 +13077,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -13488,17 +13165,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3150/Pods-Adaptive 3150-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -13514,17 +13191,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -13624,17 +13301,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Adaptive 3124/Pods-Adaptive 3124-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -13650,17 +13327,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -13738,17 +13415,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ExamEGERussian/Pods-ExamEGERussian-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -13764,17 +13441,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -13870,17 +13547,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -13896,17 +13573,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -13984,17 +13661,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-StepicTests/Pods-StepicTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -14010,17 +13687,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -14031,8 +13708,8 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 				"${BUILT_PRODUCTS_DIR}/Mockingjay/Mockingjay.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble-iOS/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick-iOS/Quick.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 				"${BUILT_PRODUCTS_DIR}/URITemplate/URITemplate.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -14166,17 +13843,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Stepic/Pods-Stepic-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Agrume/Agrume.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Amplitude-iOS/Amplitude_iOS.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-iOS/Atributika.framework",
+				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-iOS/DeviceKit.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DeviceKit/DeviceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -14192,17 +13869,17 @@
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-iOS/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-iOS/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-iOS/SVGKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SVGKit/SVGKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TSMessages/TSMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/TUSafariActivity/TUSafariActivity.framework",
@@ -14377,7 +14054,6 @@
 				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
 				2C82F22421D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift in Sources */,
 				08CBA34B1F57734900302154 /* ProfileViewController.swift in Sources */,
-				9F9C71521E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */,
 				08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				2C6BBBBA22B261E700889A45 /* BaseQuizInteractor.swift in Sources */,
 				2C20778622BBC05F00D44DC0 /* NewStringQuizViewModel.swift in Sources */,
@@ -14389,7 +14065,6 @@
 				2C22042D20E277F70060117A /* Skeletonable+UITableView.swift in Sources */,
 				08E43E9421495FD500E3CB50 /* DeepLinkRoutingService.swift in Sources */,
 				089142481BCEE4EF0000BCB0 /* Video+CoreDataProperties.swift in Sources */,
-				9F9C71541E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */,
 				08D1EF701BB5618700BE84E6 /* Model.xcdatamodeld in Sources */,
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
@@ -14418,7 +14093,6 @@
 				0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */,
 				08D5F5801F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2CA100162174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift in Sources */,
-				9F9C715C1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
 				08FA62242121BF1200F00275 /* ShrinkDismissAnimationController.swift in Sources */,
 				080ACF501BD79D5500329F2B /* Images.swift in Sources */,
 				082B54DB20AA445C00144817 /* DeadlineMode.swift in Sources */,
@@ -14475,7 +14149,6 @@
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
-				9F9C715A1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
 				083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */,
 				0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
@@ -14559,7 +14232,6 @@
 				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
 				0899842C1ECDE194005C0B27 /* LessonPresenter.swift in Sources */,
-				9F5F3D711E08783E00000423 /* CourseMetainfoEntity.swift in Sources */,
 				2C1B75B322CDEEDE00262707 /* DiscussionsPresenter.swift in Sources */,
 				2C8AD7622204932300C9C089 /* CourseSubscriptionManager.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
@@ -14589,7 +14261,6 @@
 				080CE1431E955D300089A27F /* CoursesAPI.swift in Sources */,
 				08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */,
 				08C1FC331F41E74500E14B46 /* QuizPresenter.swift in Sources */,
-				9F9C71581E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
 				2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */,
 				084490001F5CE15200D01940 /* SettingsPresenter.swift in Sources */,
 				083F2B1D1E9D9ABB00714173 /* CertificateViewData.swift in Sources */,
@@ -14612,7 +14283,6 @@
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */,
-				9F9C71561E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				082348391ECA264100D2CB40 /* ShareableController.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
@@ -14729,7 +14399,6 @@
 				2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */,
 				080C5E771EFC09730036EB3D /* CodeQuizToolbarView.swift in Sources */,
 				2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */,
-				9F9C71501E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */,
 				086A8B251D21434B00F45C45 /* Vote.swift in Sources */,
 				08AB82381D74C44100FDEADE /* Session.swift in Sources */,
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
@@ -14847,7 +14516,6 @@
 				083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */,
 				2C23C12721AD8907001DCF89 /* NextLessonService.swift in Sources */,
 				089984291ECDE188005C0B27 /* LessonViewController.swift in Sources */,
-				083AA36A1E083FD3003E054E /* WatchCoursesDisplayingHelper.swift in Sources */,
 				089200712199DB9900083627 /* BranchService.swift in Sources */,
 				086953121D748303003857A2 /* ApiRequest.swift in Sources */,
 				2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */,
@@ -14864,7 +14532,6 @@
 				080217831F55B1B200186245 /* Menu.swift in Sources */,
 				08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */,
 				085C4FF61D8C835600B27C95 /* StepsControllerDeepLinkRouter.swift in Sources */,
-				0841BDC71E082AE7008CE13E /* WatchDataHelper.swift in Sources */,
 				86624A751FC76682008E7E6C /* NotificationsStatus.swift in Sources */,
 				088E73F220619EEF00D458E3 /* CreateRequestMaker.swift in Sources */,
 				08AC214B1CE0DE9B00FBB9CD /* DeviceDefaults.swift in Sources */,
@@ -15349,15 +15016,7 @@
 				2C1B61721F4C4AEF00236804 /* JSQWebViewController.swift in Sources */,
 				08D5F5861F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C608B4320456A57006870BB /* CAGradientLayer+Init.swift in Sources */,
-				2C1B61731F4C4AEF00236804 /* WatchSessionManager.swift in Sources */,
 				2C608AC020456891006870BB /* CongratulationAlertManager.swift in Sources */,
-				2C1B61751F4C4AEF00236804 /* WatchSessionDataObserver.swift in Sources */,
-				2C1B61761F4C4AEF00236804 /* WatchSessionSender.swift in Sources */,
-				2C1B61771F4C4AEF00236804 /* DataConvertable.swift in Sources */,
-				2C1B61781F4C4AEF00236804 /* CoursePlainEntity.swift in Sources */,
-				2C1B61791F4C4AEF00236804 /* CourseMetainfoEntity.swift in Sources */,
-				2C1B617A1F4C4AEF00236804 /* PlaybackCommandEntity.swift in Sources */,
-				2C1B617B1F4C4AEF00236804 /* PlaybackStatusEntity.swift in Sources */,
 				2CF2248420EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C1B617D1F4C4AEF00236804 /* UICustomizer.swift in Sources */,
 				2C1B617F1F4C4AEF00236804 /* CoreDataHelper.swift in Sources */,
@@ -15390,8 +15049,6 @@
 				2C1B61911F4C4AEF00236804 /* SharingHelper.swift in Sources */,
 				2C1B61921F4C4AEF00236804 /* AnalyticsEvents.swift in Sources */,
 				2C1B61931F4C4AEF00236804 /* AnalyticsReporter.swift in Sources */,
-				2C1B61941F4C4AEF00236804 /* WatchDataHelper.swift in Sources */,
-				2C1B61951F4C4AEF00236804 /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08DF78931F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C1B61961F4C4AEF00236804 /* HTMLParsingUtil.swift in Sources */,
 				2C1B61971F4C4AEF00236804 /* TagDetectionUtil.swift in Sources */,
@@ -15772,15 +15429,7 @@
 				2C1B63831F4C590700236804 /* JSQWebViewController.swift in Sources */,
 				08D5F5871F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C608B4020456A56006870BB /* CAGradientLayer+Init.swift in Sources */,
-				2C1B63841F4C590700236804 /* WatchSessionManager.swift in Sources */,
 				2C608AC120456892006870BB /* CongratulationAlertManager.swift in Sources */,
-				2C1B63861F4C590700236804 /* WatchSessionDataObserver.swift in Sources */,
-				2C1B63871F4C590700236804 /* WatchSessionSender.swift in Sources */,
-				2C1B63881F4C590700236804 /* DataConvertable.swift in Sources */,
-				2C1B63891F4C590700236804 /* CoursePlainEntity.swift in Sources */,
-				2C1B638A1F4C590700236804 /* CourseMetainfoEntity.swift in Sources */,
-				2C1B638B1F4C590700236804 /* PlaybackCommandEntity.swift in Sources */,
-				2C1B638C1F4C590700236804 /* PlaybackStatusEntity.swift in Sources */,
 				2CF2248520EF9E020093D844 /* RandomCredentialsGeneratorImplementation.swift in Sources */,
 				2C1B638E1F4C590700236804 /* UICustomizer.swift in Sources */,
 				2C1B63901F4C590700236804 /* CoreDataHelper.swift in Sources */,
@@ -15813,8 +15462,6 @@
 				2C1B63A21F4C590700236804 /* SharingHelper.swift in Sources */,
 				2C1B63A31F4C590700236804 /* AnalyticsEvents.swift in Sources */,
 				2C1B63A41F4C590700236804 /* AnalyticsReporter.swift in Sources */,
-				2C1B63A51F4C590700236804 /* WatchDataHelper.swift in Sources */,
-				2C1B63A61F4C590700236804 /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08DF78941F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C1B63A71F4C590700236804 /* HTMLParsingUtil.swift in Sources */,
 				2C1B63A81F4C590700236804 /* TagDetectionUtil.swift in Sources */,
@@ -16230,7 +15877,6 @@
 				2C9499BA20ECBB2C0049E9A8 /* Profile.swift in Sources */,
 				2C94999320ECB80F0049E9A8 /* SearchResult.swift in Sources */,
 				2C9499BC20ECBB400049E9A8 /* Block.swift in Sources */,
-				2C9499E920ECBFB20049E9A8 /* PlaybackStatusEntity.swift in Sources */,
 				2C83E5F2211085B000A8322D /* HTMLProcessor.swift in Sources */,
 				2C3E42B52101D05C009D76DF /* KnowledgeGraphLesson.swift in Sources */,
 				2C94999520ECB8420049E9A8 /* Unit+CoreDataProperties.swift in Sources */,
@@ -16369,7 +16015,6 @@
 				2C9499D920ECBD430049E9A8 /* StorageRecord.swift in Sources */,
 				2C33CBF620EC3287009956B0 /* SubmissionsAPI.swift in Sources */,
 				2C9492C721130EA400552600 /* WebControllerManager.swift in Sources */,
-				2C9499A220ECB9470049E9A8 /* WatchSessionDataObserver.swift in Sources */,
 				2C94999420ECB8230049E9A8 /* CoreDataHelper.swift in Sources */,
 				2C33CBDE20EC2F25009956B0 /* StringHelper.swift in Sources */,
 				2C9499CE20ECBCC40049E9A8 /* TextReply.swift in Sources */,
@@ -16426,12 +16071,10 @@
 				2C33CBE820EC3160009956B0 /* AnalyticsEvents.swift in Sources */,
 				2C15BC4A212AEECD00AB1015 /* AdaptiveStepsAssemblyProtocol.swift in Sources */,
 				2C94998B20ECB7080049E9A8 /* UIColorExtensions.swift in Sources */,
-				2C9499FE20ECC2530049E9A8 /* PlaybackCommandEntity.swift in Sources */,
 				2C949A7120ECD17F0049E9A8 /* Skeletonable+UITableView.swift in Sources */,
 				2C770306210F29B0002E250D /* LessonPlainObject.swift in Sources */,
 				2C77030B210F2AD5002E250D /* BaseRouter.swift in Sources */,
 				2C949A1B20ECC5650049E9A8 /* StepikPlaceholderView.swift in Sources */,
-				2C9499A020ECB93E0049E9A8 /* WatchSessionSender.swift in Sources */,
 				2C093F0A211B436D00162DD0 /* StreakNotificationsControlPresenter.swift in Sources */,
 				2C949A2520ECC5EF0049E9A8 /* ProfileAchievementsPresenter.swift in Sources */,
 				2C949A6D20ECD0750049E9A8 /* PinsMapView.swift in Sources */,
@@ -16445,7 +16088,6 @@
 				2C949A2720ECC61B0049E9A8 /* ProfileDescriptionContentView.swift in Sources */,
 				2CFE247120ECD80D00AF1E3D /* AlamofireExtensions.swift in Sources */,
 				2C33CBDD20EC2E50009956B0 /* DefaultsStorageManager.swift in Sources */,
-				2C9499A120ECB9430049E9A8 /* WatchSessionManager.swift in Sources */,
 				2C9499F420ECC0C40049E9A8 /* ExecutableTaskTypes.swift in Sources */,
 				2C093EF7211B41D500162DD0 /* NotificationSuggestionManager.swift in Sources */,
 				2C949A2820ECC6240049E9A8 /* PinsMapBlockContentView.swift in Sources */,
@@ -16461,8 +16103,6 @@
 				2C33CBF920EC32A8009956B0 /* StepsAPI.swift in Sources */,
 				2C4EB2DA21242F5700AF2331 /* ExamChoiceQuizViewController.swift in Sources */,
 				2C093F1D211B44C700162DD0 /* SettingsViewController.swift in Sources */,
-				2C9499A320ECB9590049E9A8 /* DataConvertable.swift in Sources */,
-				2C9499C220ECBBAF0049E9A8 /* CourseMetainfoEntity.swift in Sources */,
 				2C093F23211B455100162DD0 /* ProfileViewController+StreakNotificationsControlView.swift in Sources */,
 				2C0159D7213932050043DBFF /* LearningPresenter.swift in Sources */,
 				2C949A1C20ECC5690049E9A8 /* NibInitializableView.swift in Sources */,
@@ -16476,7 +16116,6 @@
 				62E98997447430EA3F2459EE /* StepWebView.swift in Sources */,
 				62E98119817EFAF2CC853018 /* AuthGreetingViewController.swift in Sources */,
 				2C0107AF210F42B7009A53DF /* LessonsRouter.swift in Sources */,
-				2C4B6A63212B5300008B3953 /* CoursePlainEntity.swift in Sources */,
 				2C0107AA210F4214009A53DF /* LessonsAssembly.swift in Sources */,
 				62E989FCC70E2F3F5675B1A7 /* ClearNavigationViewController.swift in Sources */,
 				62E987AE77EBF9995848ED55 /* HeaderEmptyAuthView.swift in Sources */,
@@ -16725,14 +16364,6 @@
 				2C89AA051F4C289900227C3B /* Alamofire-SwiftyJSON.swift in Sources */,
 				2C89AA061F4C289900227C3B /* JSQWebViewController.swift in Sources */,
 				08D5F5841F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
-				2C89AA071F4C289900227C3B /* WatchSessionManager.swift in Sources */,
-				2C89AA091F4C289900227C3B /* WatchSessionDataObserver.swift in Sources */,
-				2C89AA0A1F4C289900227C3B /* WatchSessionSender.swift in Sources */,
-				2C89AA0B1F4C289900227C3B /* DataConvertable.swift in Sources */,
-				2C89AA0C1F4C289900227C3B /* CoursePlainEntity.swift in Sources */,
-				2C89AA0D1F4C289900227C3B /* CourseMetainfoEntity.swift in Sources */,
-				2C89AA0E1F4C289900227C3B /* PlaybackCommandEntity.swift in Sources */,
-				2C89AA0F1F4C289900227C3B /* PlaybackStatusEntity.swift in Sources */,
 				08EA89CC200E688900BCAF44 /* SQLReply.swift in Sources */,
 				2C89AA111F4C289900227C3B /* UICustomizer.swift in Sources */,
 				2C89AA131F4C289900227C3B /* CoreDataHelper.swift in Sources */,
@@ -16767,8 +16398,6 @@
 				2C6A76322045CE6100C509A6 /* AdaptiveRatingsViewController.swift in Sources */,
 				2C89AA271F4C289900227C3B /* AnalyticsReporter.swift in Sources */,
 				087585A71FB50D640047A269 /* CourseListsAPI.swift in Sources */,
-				2C89AA281F4C289900227C3B /* WatchDataHelper.swift in Sources */,
-				2C89AA291F4C289900227C3B /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08DF78911F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				086442CD1F765007000CC53D /* AuthButton.swift in Sources */,
 				2C89AA2A1F4C289900227C3B /* HTMLParsingUtil.swift in Sources */,
@@ -17152,15 +16781,7 @@
 				2C9731BA1F4C38F600AC9301 /* JSQWebViewController.swift in Sources */,
 				08D5F5851F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
 				2C608B4220456A57006870BB /* CAGradientLayer+Init.swift in Sources */,
-				2C9731BB1F4C38F600AC9301 /* WatchSessionManager.swift in Sources */,
 				2C608ABF20456891006870BB /* CongratulationAlertManager.swift in Sources */,
-				2C9731BD1F4C38F600AC9301 /* WatchSessionDataObserver.swift in Sources */,
-				2C9731BE1F4C38F600AC9301 /* WatchSessionSender.swift in Sources */,
-				2C9731BF1F4C38F600AC9301 /* DataConvertable.swift in Sources */,
-				2C9731C01F4C38F600AC9301 /* CoursePlainEntity.swift in Sources */,
-				2C9731C11F4C38F600AC9301 /* CourseMetainfoEntity.swift in Sources */,
-				2C9731C21F4C38F600AC9301 /* PlaybackCommandEntity.swift in Sources */,
-				2C9731C31F4C38F600AC9301 /* PlaybackStatusEntity.swift in Sources */,
 				2C9731C51F4C38F600AC9301 /* UICustomizer.swift in Sources */,
 				2C9731C71F4C38F600AC9301 /* CoreDataHelper.swift in Sources */,
 				2C9731C81F4C38F600AC9301 /* ConnectionHelper.swift in Sources */,
@@ -17193,8 +16814,6 @@
 				2C9731D91F4C38F600AC9301 /* SharingHelper.swift in Sources */,
 				2C9731DA1F4C38F600AC9301 /* AnalyticsEvents.swift in Sources */,
 				2C9731DB1F4C38F600AC9301 /* AnalyticsReporter.swift in Sources */,
-				2C9731DC1F4C38F600AC9301 /* WatchDataHelper.swift in Sources */,
-				2C9731DD1F4C38F600AC9301 /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08DF78921F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2C9731DE1F4C38F600AC9301 /* HTMLParsingUtil.swift in Sources */,
 				2C9731DF1F4C38F600AC9301 /* TagDetectionUtil.swift in Sources */,
@@ -17583,14 +17202,6 @@
 				2CA8D1FA2088D9C000E105E9 /* Alamofire-SwiftyJSON.swift in Sources */,
 				2CA8D1FB2088D9C000E105E9 /* JSQWebViewController.swift in Sources */,
 				2CA8D1FC2088D9C000E105E9 /* CourseReviewSummariesAPI.swift in Sources */,
-				2CA8D1FD2088D9C000E105E9 /* WatchSessionManager.swift in Sources */,
-				2CA8D1FE2088D9C000E105E9 /* WatchSessionDataObserver.swift in Sources */,
-				2CA8D1FF2088D9C000E105E9 /* WatchSessionSender.swift in Sources */,
-				2CA8D2002088D9C000E105E9 /* DataConvertable.swift in Sources */,
-				2CA8D2012088D9C000E105E9 /* CoursePlainEntity.swift in Sources */,
-				2CA8D2022088D9C000E105E9 /* CourseMetainfoEntity.swift in Sources */,
-				2CA8D2032088D9C000E105E9 /* PlaybackCommandEntity.swift in Sources */,
-				2CA8D2042088D9C000E105E9 /* PlaybackStatusEntity.swift in Sources */,
 				2CA8D2062088D9C000E105E9 /* SQLReply.swift in Sources */,
 				2CA8D2072088D9C000E105E9 /* UICustomizer.swift in Sources */,
 				2CA8D2082088D9C000E105E9 /* CoreDataHelper.swift in Sources */,
@@ -17625,8 +17236,6 @@
 				2CA8D2282088D9C000E105E9 /* AdaptiveRatingsViewController.swift in Sources */,
 				2CA8D2292088D9C000E105E9 /* AnalyticsReporter.swift in Sources */,
 				2CA8D22A2088D9C000E105E9 /* CourseListsAPI.swift in Sources */,
-				2CA8D22B2088D9C000E105E9 /* WatchDataHelper.swift in Sources */,
-				2CA8D22C2088D9C000E105E9 /* WatchCoursesDisplayingHelper.swift in Sources */,
 				2CA8D22D2088D9C000E105E9 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				2CA8D22E2088D9C000E105E9 /* AuthButton.swift in Sources */,
 				2CA8D22F2088D9C000E105E9 /* HTMLParsingUtil.swift in Sources */,
@@ -18077,16 +17686,8 @@
 				864D673F1E83DE8A001E8D9E /* Alamofire-SwiftyJSON.swift in Sources */,
 				864D67401E83DE8A001E8D9E /* JSQWebViewController.swift in Sources */,
 				08D5F5821F7DBA70007C1634 /* CourseReviewSummariesAPI.swift in Sources */,
-				864D67351E83DE76001E8D9E /* WatchSessionManager.swift in Sources */,
-				864D67361E83DE76001E8D9E /* WatchSessionDataObserver.swift in Sources */,
-				864D67371E83DE76001E8D9E /* WatchSessionSender.swift in Sources */,
 				2CA2E71D20237E2D001DC410 /* AdaptiveStatsPagerViewController.swift in Sources */,
-				864D67381E83DE76001E8D9E /* DataConvertable.swift in Sources */,
-				864D67391E83DE76001E8D9E /* CoursePlainEntity.swift in Sources */,
 				083C9CAD2056717D00B2CC78 /* NotificationRequestAlertViewController.swift in Sources */,
-				864D673A1E83DE76001E8D9E /* CourseMetainfoEntity.swift in Sources */,
-				864D673B1E83DE76001E8D9E /* PlaybackCommandEntity.swift in Sources */,
-				864D673C1E83DE76001E8D9E /* PlaybackStatusEntity.swift in Sources */,
 				864D66901E83DE03001E8D9E /* UICustomizer.swift in Sources */,
 				864D66911E83DE03001E8D9E /* CoreDataHelper.swift in Sources */,
 				864D66921E83DE03001E8D9E /* ConnectionHelper.swift in Sources */,
@@ -18117,8 +17718,6 @@
 				864D66A11E83DE03001E8D9E /* AnalyticsEvents.swift in Sources */,
 				864D66A21E83DE03001E8D9E /* AnalyticsReporter.swift in Sources */,
 				2CA2E71320237E00001DC410 /* CardStepViewController.swift in Sources */,
-				864D66A31E83DE03001E8D9E /* WatchDataHelper.swift in Sources */,
-				864D66A41E83DE03001E8D9E /* WatchCoursesDisplayingHelper.swift in Sources */,
 				08DF788F1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				864D66A51E83DE03001E8D9E /* HTMLParsingUtil.swift in Sources */,
 				864D66A61E83DE03001E8D9E /* TagDetectionUtil.swift in Sources */,
@@ -18342,29 +17941,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F9C711F1E076AE000EC8DA3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9F9C715B1E076B3E00EC8DA3 /* PlaybackCommandEntity.swift in Sources */,
-				9F9C715D1E076B3E00EC8DA3 /* PlaybackStatusEntity.swift in Sources */,
-				08666B611E11C57500799731 /* Localizables.swift in Sources */,
-				9F9C71531E076B3E00EC8DA3 /* WatchSessionDataObserver.swift in Sources */,
-				9F9C71451E076B0000EC8DA3 /* ExtensionDelegate.swift in Sources */,
-				9F9C71421E076B0000EC8DA3 /* CoursesInterfaceController.swift in Sources */,
-				9F9C71511E076B3E00EC8DA3 /* WatchSessionManager.swift in Sources */,
-				9F9C71431E076B0000EC8DA3 /* CourseInfoInterfaceController.swift in Sources */,
-				9F9C71571E076B3E00EC8DA3 /* DataConvertable.swift in Sources */,
-				9F5F3D721E087A6E00000423 /* CourseMetainfoEntity.swift in Sources */,
-				9F9C71471E076B0000EC8DA3 /* DataRowType.swift in Sources */,
-				9F9C71441E076B0000EC8DA3 /* PaybackInterfaceController.swift in Sources */,
-				9F9C71591E076B3E00EC8DA3 /* CoursePlainEntity.swift in Sources */,
-				9F9C71551E076B3E00EC8DA3 /* WatchSessionSender.swift in Sources */,
-				9F9C712D1E076AE100EC8DA3 /* ComplicationController.swift in Sources */,
-				9F9C71461E076B0000EC8DA3 /* CourseRowType.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -18408,28 +17984,9 @@
 			target = 2C1B62CE1F4C590700236804 /* Adaptive 3124 */;
 			targetProxy = 2CD12BEA1F4F34E6001D3C82 /* PBXContainerItemProxy */;
 		};
-		9F9C71261E076AE100EC8DA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9F9C71221E076AE000EC8DA3 /* StepicWatch Extension */;
-			targetProxy = 9F9C71251E076AE100EC8DA3 /* PBXContainerItemProxy */;
-		};
-		9F9C71321E076AE100EC8DA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9F9C71161E076AE000EC8DA3 /* StepicWatch */;
-			targetProxy = 9F9C71311E076AE100EC8DA3 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		08666B5C1E11C53D00799731 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				08666B5E1E11C54300799731 /* ru */,
-				08666B5F1E11C55F00799731 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		08A1257B1BDEBCC90066B2B2 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -18642,16 +18199,6 @@
 				86EF29401E83CEA900F8D214 /* Base */,
 			);
 			name = AdaptiveLaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		9F9C71191E076AE000EC8DA3 /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9F9C711A1E076AE000EC8DA3 /* Base */,
-				08DC5A021E171C730051B14A /* ru */,
-				08DC5A041E171EA00051B14A /* en */,
-			);
-			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -19604,114 +19151,6 @@
 			};
 			name = Release;
 		};
-		9F9C71341E076AE100EC8DA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				IBSC_MODULE = StepicWatch_Extension;
-				INFOPLIST_FILE = StepicWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
-			};
-			name = Debug;
-		};
-		9F9C71351E076AE100EC8DA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				IBSC_MODULE = StepicWatch_Extension;
-				INFOPLIST_FILE = StepicWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
-			};
-			name = Release;
-		};
-		9F9C71361E076AE100EC8DA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
-			};
-			name = Debug;
-		};
-		9F9C71371E076AE100EC8DA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UJ4KC2QN7B;
-				INFOPLIST_FILE = "StepicWatch Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexKarpov.Stepic.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -19873,24 +19312,6 @@
 			buildConfigurations = (
 				86EF29431E83CEA900F8D214 /* Debug */,
 				86EF29441E83CEA900F8D214 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9F9C71381E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9F9C71361E076AE100EC8DA3 /* Debug */,
-				9F9C71371E076AE100EC8DA3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9F9C713A1E076AE100EC8DA3 /* Build configuration list for PBXNativeTarget "StepicWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9F9C71341E076AE100EC8DA3 /* Debug */,
-				9F9C71351E076AE100EC8DA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

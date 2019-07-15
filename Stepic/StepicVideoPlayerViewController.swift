@@ -12,34 +12,6 @@ import AVFoundation
 import MediaPlayer
 import SnapKit
 
-@available(iOS 9.0, *)
-extension StepicVideoPlayerViewController: WatchSessionDataObserver {
-
-	var keysForObserving: [WatchSessionSender.Name] {
-		return [.PlaybackCommand, .RequestPlaybackStatus]
-	}
-
-	func recieved(data: Any, forKey key: WatchSessionSender.Name) {
-		if key == .PlaybackCommand {
-			let commandEntity = PlaybackCommandEntity(data: data as! Data)
-			switch commandEntity.command {
-			case .play:
-				self.handlePlay()
-			case .pause:
-                self.handlePlay()
-			case .forward:
-				self.seekForwardPressed(UIButton())
-			case .backward:
-				self.seekBackPressed(UIButton())
-			}
-		}
-
-		if key == .RequestPlaybackStatus {
-			WatchSessionSender.sendPlaybackStatus(self.isPlaying ? .pause : .play)
-		}
-	}
-}
-
 class StepicVideoPlayerViewController: UIViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -211,11 +183,7 @@ class StepicVideoPlayerViewController: UIViewController {
         handlePlay()
     }
 
-	fileprivate var isPlaying: Bool = false {
-		didSet {
-            WatchSessionSender.sendPlaybackStatus(self.isPlaying ? .pause : .play)
-		}
-	}
+	fileprivate var isPlaying: Bool = false
 
     fileprivate func setButtonPlaying(_ isPlaying: Bool) {
 		self.isPlaying = isPlaying
@@ -238,9 +206,6 @@ class StepicVideoPlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        WatchSessionManager.sharedManager.addObserver(self)
-        WatchSessionSender.sendPlaybackStatus(.available)
 
         NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: AVAudioSession.routeChangeNotification, object: nil)
 
@@ -309,8 +274,6 @@ class StepicVideoPlayerViewController: UIViewController {
     }
 
     deinit {
-        WatchSessionSender.sendPlaybackStatus(.noVideo)
-        WatchSessionManager.sharedManager.removeObserver(self)
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         print("did deinit")
         saveCurrentPlayerTime()

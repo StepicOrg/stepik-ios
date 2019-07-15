@@ -86,16 +86,6 @@ target 'Stepic' do
     end
 end
 
-target 'StepikTV' do
-    platform :tvos, '10.1'
-    shared_pods
-    target 'StepikTVTests' do
-        inherit! :search_paths
-        shared_pods
-        testing_pods
-    end
-end
-
 target 'Adaptive 1838' do
     platform :ios, '9.0'
     all_pods
