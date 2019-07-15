@@ -3787,6 +3787,7 @@
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD8464D1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
+		2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */; };
 		2CDAD308229EB3F700AA9EF5 /* AssignmentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */; };
 		2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */; };
 		2CDE2ADD216B3F61008AF0D1 /* ProgressPlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */; };
@@ -6003,6 +6004,7 @@
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
+		2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestsLogger.swift; sourceTree = "<group>"; };
 		2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsNetworkService.swift; sourceTree = "<group>"; };
 		2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceQueuesService.swift; sourceTree = "<group>"; };
 		2CDE2ADC216B3F61008AF0D1 /* ProgressPlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPlainObject.swift; sourceTree = "<group>"; };
@@ -8031,6 +8033,7 @@
 				866AD0D52061A7D70004C2B2 /* ControllerWithStepikPlaceholder.swift */,
 				62E98DC7237B8757A9F58935 /* StepikURLSessionConfiguration.swift */,
 				62E98D998C0EBCA801E4BD65 /* AlamofireDefaultSessionManager.swift */,
+				2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */,
 				2C2EA36A212D5FEF002116C9 /* Result.swift */,
 				100D33CD3AAC03A84EA5B18A /* Modules */,
 				62E9835CAD3FB794FCA9C3DE /* Sources */,
@@ -16032,6 +16035,7 @@
 				34577A9694176BFA7CAC950C /* ProfileEditDataFlow.swift in Sources */,
 				E31985EE51C589E6F169D77C /* ProfileEditProvider.swift in Sources */,
 				C45AFCD5C2566D6E63CF28EC /* ProfileEditView.swift in Sources */,
+				2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */,
 				62E985D6A85E24E493C064E9 /* SettingsTableView.swift in Sources */,
 				62E98CB2C2F2B7AE44023FEA /* SettingsTableViewModel.swift in Sources */,
 				62E989CCBB953CEF37E17013 /* SettingsTableSectionFooterView.swift in Sources */,

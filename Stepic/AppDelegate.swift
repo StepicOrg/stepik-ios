@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let notificationsService = NotificationsService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
+    private let alamofireRequestsLogger = AlamofireRequestsLogger()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -54,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
 
         ConnectionHelper.shared.instantiate()
+        self.alamofireRequestsLogger.startIfDebug()
 
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")
