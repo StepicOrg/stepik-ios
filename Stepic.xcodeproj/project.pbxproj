@@ -817,7 +817,6 @@
 		1B4310BB1FBF8A0B006679CF /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		1BAE12F21F93F67700482251 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE12F11F93F67700482251 /* AppDelegate.swift */; };
 		1BAE12FB1F93F67700482251 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BAE12FA1F93F67700482251 /* Assets.xcassets */; };
-		1BAE13061F93F67700482251 /* StepikTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE13051F93F67700482251 /* StepikTVTests.swift */; };
 		2C01079E210F37A2009A53DF /* AttemptsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */; };
 		2C0107A0210F39A0009A53DF /* CreateRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */; };
 		2C0107A1210F39CB009A53DF /* StepikLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF78D11F64059900AEEA85 /* StepikLabel.swift */; };
@@ -3908,7 +3907,6 @@
 		34577A9694176BFA7CAC950C /* ProfileEditDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */; };
 		36D02A00641C747F6D18DB60 /* NewStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4737058E519D801DAB2131 /* NewStepPresenter.swift */; };
 		3CE76179FE70EA84C4627AF6 /* NewStepOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A31B642B26D8A51B139F01 /* NewStepOutputProtocol.swift */; };
-		40884257B6F14A5041308389 /* Pods_StepikTVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289128D1F909937A7B27843D /* Pods_StepikTVTests.framework */; };
 		47AA3FAF72E7AD067ABF2804 /* NewFreeAnswerQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50F304BF0016F5B477EEC8 /* NewFreeAnswerQuizDataFlow.swift */; };
 		4AC49732BD397C516D132297 /* NewLessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC0A2EAEB9E30B54695D44A /* NewLessonPresenter.swift */; };
 		4E3A4636F1A4E8E38E0AB66B /* NewChoiceQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECD143E5E804E55A9DE096 /* NewChoiceQuizDataFlow.swift */; };
@@ -4867,13 +4865,6 @@
 			remoteGlobalIDString = 086538341EB02715003A8415;
 			remoteInfo = StickerPackExtension;
 		};
-		1BAE13021F93F67700482251 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1BAE12EE1F93F67700482251;
-			remoteInfo = StepikTV;
-		};
 		2C59F03B20EB8ACA00666EE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08DE94091B8C58AC00D278AB /* Project object */;
@@ -5509,9 +5500,6 @@
 		1BAE12F11F93F67700482251 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BAE12FA1F93F67700482251 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BAE12FC1F93F67700482251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1BAE13011F93F67700482251 /* StepikTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StepikTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1BAE13051F93F67700482251 /* StepikTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTVTests.swift; sourceTree = "<group>"; };
-		1BAE13071F93F67700482251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BD5025C17EF2EF0CB187EFA /* Pods_Adaptive_3149_Screenshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adaptive_3149_Screenshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D354E75F582815B94DF5BBC /* Pods-Adaptive 3149.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3149.release.xcconfig"; path = "Target Support Files/Pods-Adaptive 3149/Pods-Adaptive 3149.release.xcconfig"; sourceTree = "<group>"; };
 		1EAD495BA1B5A8B101EB47C5 /* Pods-Adaptive 3150 Screenshots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adaptive 3150 Screenshots.release.xcconfig"; path = "Target Support Files/Pods-Adaptive 3150 Screenshots/Pods-Adaptive 3150 Screenshots.release.xcconfig"; sourceTree = "<group>"; };
@@ -6537,14 +6525,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1E72CBCF72A66C374B47ED4 /* Pods_StepikTV.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1BAE12FE1F93F67700482251 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				40884257B6F14A5041308389 /* Pods_StepikTVTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7965,7 +7945,6 @@
 				86EF29351E83CEA900F8D214 /* Adaptive Course */,
 				086538361EB02716003A8415 /* StickerPackExtension */,
 				1BAE12F01F93F67700482251 /* StepikTV */,
-				1BAE13041F93F67700482251 /* StepikTVTests */,
 				2C59F02820EB8AC800666EE0 /* ExamEGERussian */,
 				2C59F03D20EB8ACA00666EE0 /* ExamEGERussianTests */,
 				08DE94121B8C58AC00D278AB /* Products */,
@@ -7994,7 +7973,6 @@
 				2CD12BD41F4F34BD001D3C82 /* Adaptive 3149 Screenshots.xctest */,
 				2CD12BE31F4F34CC001D3C82 /* Adaptive 3124 Screenshots.xctest */,
 				1BAE12EF1F93F67700482251 /* StepikTV.app */,
-				1BAE13011F93F67700482251 /* StepikTVTests.xctest */,
 				2CA8D3872088D9C000E105E9 /* Adaptive 8290.app */,
 				2C59F02720EB8AC800666EE0 /* ExamEGERussian.app */,
 				2C59F03A20EB8ACA00666EE0 /* ExamEGERussianTests.xctest */,
@@ -8538,15 +8516,6 @@
 				2C47A16020628420003E87EC /* AnalyticsReporter.swift */,
 			);
 			path = StepikTV;
-			sourceTree = "<group>";
-		};
-		1BAE13041F93F67700482251 /* StepikTVTests */ = {
-			isa = PBXGroup;
-			children = (
-				1BAE13051F93F67700482251 /* StepikTVTests.swift */,
-				1BAE13071F93F67700482251 /* Info.plist */,
-			);
-			path = StepikTVTests;
 			sourceTree = "<group>";
 		};
 		2C0107A6210F41F6009A53DF /* Assembly */ = {
@@ -12090,26 +12059,6 @@
 			productReference = 1BAE12EF1F93F67700482251 /* StepikTV.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1BAE13001F93F67700482251 /* StepikTVTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1BAE130D1F93F67700482251 /* Build configuration list for PBXNativeTarget "StepikTVTests" */;
-			buildPhases = (
-				C03166D4573FFBDFB91BD627 /* [CP] Check Pods Manifest.lock */,
-				1BAE12FD1F93F67700482251 /* Sources */,
-				1BAE12FE1F93F67700482251 /* Frameworks */,
-				1BAE12FF1F93F67700482251 /* Resources */,
-				503C993373AA1C7AB23BC3F0 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1BAE13031F93F67700482251 /* PBXTargetDependency */,
-			);
-			name = StepikTVTests;
-			productName = StepikTVTests;
-			productReference = 1BAE13011F93F67700482251 /* StepikTVTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		2C1B60BD1F4C4AEF00236804 /* Adaptive 3149 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C1B62AB1F4C4AEF00236804 /* Build configuration list for PBXNativeTarget "Adaptive 3149" */;
@@ -12481,12 +12430,6 @@
 						DevelopmentTeam = PEYKHN6GF6;
 						ProvisioningStyle = Automatic;
 					};
-					1BAE13001F93F67700482251 = {
-						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = 3YGLEX9HN3;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1BAE12EE1F93F67700482251;
-					};
 					2C1B60BD1F4C4AEF00236804 = {
 						DevelopmentTeam = E9KER42773;
 						ProvisioningStyle = Manual;
@@ -12600,7 +12543,6 @@
 				2CD12BC61F4F34BD001D3C82 /* Adaptive 3149 Screenshots */,
 				2CD12BD51F4F34CC001D3C82 /* Adaptive 3124 Screenshots */,
 				1BAE12EE1F93F67700482251 /* StepikTV */,
-				1BAE13001F93F67700482251 /* StepikTVTests */,
 				2CA8D1392088D9C000E105E9 /* Adaptive 8290 */,
 				2C59F02620EB8AC800666EE0 /* ExamEGERussian */,
 				2C59F03920EB8ACA00666EE0 /* ExamEGERussianTests */,
@@ -12776,13 +12718,6 @@
 				1B3BB0A81FE6E145002DDD9A /* MajorItemCell.xib in Resources */,
 				1B3BB0A71FE6E145002DDD9A /* NarrowItemCell.xib in Resources */,
 				93BBE5F01FE6A917006DEC28 /* Config.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1BAE12FF1F93F67700482251 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13989,44 +13924,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		503C993373AA1C7AB23BC3F0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika-tvOS/Atributika.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-tvOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/DeviceKit-tvOS/DeviceKit.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit-tvOS/PromiseKit.framework",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/tvOS/RevealServer.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage-tvOS/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVGKit-tvOS/SVGKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-tvOS/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble-tvOS/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick-tvOS/Quick.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeviceKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVGKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StepikTVTests/Pods-StepikTVTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5753E9371DCCED3A6EA46861 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -14811,28 +14708,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adaptive GMAT/Pods-Adaptive GMAT-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C03166D4573FFBDFB91BD627 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StepikTVTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C79C1B724717A179569871E5 /* [CP] Embed Pods Frameworks */ = {
@@ -16311,14 +16186,6 @@
 				933563BF20126BCD0061FE2E /* LessonContentView.swift in Sources */,
 				1B3BB05F1FE6DE48002DDD9A /* CourseContentMenuViewController.swift in Sources */,
 				933E3F271FBA61D9005A885D /* Reachability.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1BAE12FD1F93F67700482251 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1BAE13061F93F67700482251 /* StepikTVTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19508,11 +19375,6 @@
 			target = 086538341EB02715003A8415 /* StickerPackExtension */;
 			targetProxy = 0865383A1EB02716003A8415 /* PBXContainerItemProxy */;
 		};
-		1BAE13031F93F67700482251 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1BAE12EE1F93F67700482251 /* StepikTV */;
-			targetProxy = 1BAE13021F93F67700482251 /* PBXContainerItemProxy */;
-		};
 		2C59F03C20EB8ACA00666EE0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2C59F02620EB8AC800666EE0 /* ExamEGERussian */;
@@ -20123,72 +19985,6 @@
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Release;
-		};
-		1BAE130A1F93F67700482251 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75CA1178E25863EFD4241FEB /* Pods-StepikTVTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3YGLEX9HN3;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = StepikTVTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepikTVTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StepikTV.app/StepikTV";
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Debug;
-		};
-		1BAE130B1F93F67700482251 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49C753F2F3DABAF2AAFDADC1 /* Pods-StepikTVTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3YGLEX9HN3;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = StepikTVTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kondranton.StepikTVTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StepikTV.app/StepikTV";
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Release;
@@ -21027,15 +20823,6 @@
 			buildConfigurations = (
 				1BAE13081F93F67700482251 /* Debug */,
 				1BAE13091F93F67700482251 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1BAE130D1F93F67700482251 /* Build configuration list for PBXNativeTarget "StepikTVTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1BAE130A1F93F67700482251 /* Debug */,
-				1BAE130B1F93F67700482251 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
