@@ -137,15 +137,3 @@ end
 target 'Adaptive 3150 Screenshots' do
     pod 'SimulatorStatusMagic', :configurations => ['Debug']
 end
-
-target 'ExamEGERussian' do
-    platform :ios, '9.0'
-    
-    all_pods
-    pod 'AlamofireNetworkActivityIndicator', '2.2.1'
-
-    target 'ExamEGERussianTests' do
-        inherit! :search_paths
-    end
-end
-
