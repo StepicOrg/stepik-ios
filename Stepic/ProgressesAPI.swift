@@ -16,13 +16,14 @@ class ProgressesAPI: APIEndpoint {
 
     @discardableResult
     func retrieve(
-        ids: [String],
+        ids: [Progress.IdType],
         headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
         existing: [Progress],
         refreshMode: RefreshMode,
         success: @escaping (([Progress]) -> Void),
         error errorHandler: @escaping ((NetworkError) -> Void)
     ) -> Request? {
+        let ids = self.filterIds(ids)
         if ids.isEmpty {
             success([])
         }
@@ -39,7 +40,11 @@ class ProgressesAPI: APIEndpoint {
     }
 
     @available(*, deprecated, message: "Legacy with update existing")
-    func retrieve(ids: [String], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Progress]> {
+    func retrieve(
+        ids: [Progress.IdType],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<[Progress]> {
+        let ids = self.filterIds(ids)
         if ids.isEmpty {
             return .value([])
         }
@@ -53,5 +58,9 @@ class ProgressesAPI: APIEndpoint {
                 seal.reject(error)
             }
         }
+    }
+
+    private func filterIds(_ ids: [Progress.IdType]) -> [Progress.IdType] {
+        return ids.filter { !$0.isEmpty }
     }
 }
