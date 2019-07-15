@@ -2,7 +2,7 @@ PODS:
   - ActionSheetPicker-3.0 (2.3.0)
   - Agrume (5.3.1):
     - SwiftyGif
-  - Alamofire (4.8.0)
+  - Alamofire (4.8.2)
   - AlamofireNetworkActivityIndicator (2.2.1):
     - Alamofire (~> 4.7)
   - Amplitude-iOS (4.3.0)
@@ -161,7 +161,7 @@ PODS:
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3.0)
   - Agrume (from `https://github.com/JanGorman/Agrume.git`)
-  - Alamofire (= 4.8.0)
+  - Alamofire (= 4.8.2)
   - AlamofireNetworkActivityIndicator (= 2.2.1)
   - Amplitude-iOS (= 4.3.0)
   - Atributika (= 4.8.2)
@@ -297,8 +297,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
-  Agrume: a78d1183008fe20886422bbfef845081eb6f64dd
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Agrume: ba24ea58e9a012a36eec748dcc1f1845ac13fc90
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireNetworkActivityIndicator: aeac50e6ecb78ec71a5f1f29098bcf4ec2962910
   Amplitude-iOS: 05f25e5bc08ecf3b42b0ae1d4f1fe6d3c6476e49
   Atributika: 7b3631032cf11f2197b352343e0bd1b783d8ca88
@@ -362,6 +362,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
   YandexMobileMetrica: f18374ee6977a4cd1d0a86298a0df4ad7baf4135
 
-PODFILE CHECKSUM: 7769b89748475030b140dd7bb7b6a248ac6fcce1
+PODFILE CHECKSUM: fb66903c3f155dacdf2972fc62d992a0f49fcc6c
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.4
