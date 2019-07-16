@@ -72,11 +72,6 @@ class StepicVideoPlayerViewController: UIViewController {
         dismissPlayer()
     }
 
-    fileprivate func makeFullscreenControlsVisible(_ visible: Bool) {
-        topContainerView.isHidden = !visible
-        bottomFullscreenControlsView.isHidden = !visible
-    }
-
     //Controlling the rate
     @IBAction func changeRatePressed(_ sender: UIButton) {
         displayRateChangeAlert()

@@ -14,6 +14,5 @@ import Foundation
 class DefaultsContainer {
     private init() {}
     static let launch = LaunchDefaultsContainer()
-    static let personalDeadlines = PersonalDeadlinesDefaultsContainer()
     static let explore = ExploreDefaultsContainer()
 }
