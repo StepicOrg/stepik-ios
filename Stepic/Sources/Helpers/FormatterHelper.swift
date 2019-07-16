@@ -37,9 +37,9 @@ enum FormatterHelper {
     }
 
     /// Format hours count with localized and pluralized suffix; 1 -> "1 hour", 5 -> "5 hours"
-    static func hoursInSeconds(_ seconds: TimeInterval) -> String {
+    static func hoursInSeconds(_ seconds: TimeInterval, roundingRule: FloatingPointRoundingRule = .up) -> String {
         let hour = 3600.0
-        let hours = Int(ceil(seconds / hour))
+        let hours = Int((seconds / hour).rounded(roundingRule))
 
         let pluralizedHoursString = StringHelper.pluralize(
             number: hours,
@@ -51,6 +51,23 @@ enum FormatterHelper {
         )
 
         return "\(hours) \(pluralizedHoursString)"
+    }
+
+    /// Format minutes count with localized and pluralized suffix; 1 -> "1 minute", 5 -> "5 minutes"
+    static func minutesInSeconds(_ seconds: TimeInterval, roundingRule: FloatingPointRoundingRule = .up) -> String {
+        let minute = 60.0
+        let minutes = Int((seconds / minute).rounded(roundingRule))
+
+        let pluralizedMinutesString = StringHelper.pluralize(
+            number: minutes,
+            forms: [
+                NSLocalizedString("minutes1", comment: ""),
+                NSLocalizedString("minutes234", comment: ""),
+                NSLocalizedString("minutes567890", comment: "")
+            ]
+        )
+
+        return "\(minutes) \(pluralizedMinutesString)"
     }
 
     /// Format date with full month and year; "18 October 2018 00:00"
