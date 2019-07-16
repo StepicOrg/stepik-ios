@@ -6,18 +6,18 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
-import MediaPlayer
-import FirebaseCore
-import FirebaseMessaging
-import FirebaseInstanceID
-import IQKeyboardManagerSwift
-import SVProgressHUD
-import VK_ios_sdk
 import FBSDKCoreKit
-import YandexMobileMetrica
+import FirebaseCore
+import FirebaseInstanceID
+import FirebaseMessaging
+import IQKeyboardManagerSwift
+import MediaPlayer
 import Presentr
 import PromiseKit
+import SVProgressHUD
+import UIKit
+import VK_ios_sdk
+import YandexMobileMetrica
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,8 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
-
-        WatchSessionManager.sharedManager.startSession()
 
         NotificationsBadgesManager.shared.setup()
 

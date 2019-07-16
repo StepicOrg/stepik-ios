@@ -89,12 +89,7 @@ class QuizPresenter {
                 }
 
                 if !step.hasReview {
-                    // FIXME: Replace two different notifications with one from NSNotification.Name extension
-                    #if os(tvOS)
-                    NotificationCenter.default.post(name: .stepUpdated, object: nil, userInfo: ["id": step.position])
-                    #else
                     NotificationCenter.default.post(name: .stepDone, object: nil, userInfo: ["id": step.id])
-                    #endif
                     DispatchQueue.main.async {
                         [weak self] in
                         self?.step.progress?.isPassed = true

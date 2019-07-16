@@ -1,3 +1,0 @@
-This app can be used for preparation for Problem Solving and Data Sufficiency questions in the Quantitative sections of the GMAT test. Problem solving questions measure your ability to solve numerical problems, interpret graphical data, and evaluate information.
-
-Learning in the app is really simple! If the problem seems too difficult or too easy, you can just swipe the card with the question, the engine will take into account the knowledge level for future content recommendations.

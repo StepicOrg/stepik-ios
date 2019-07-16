@@ -69,10 +69,7 @@ end
 def testing_pods
     pod 'Quick', '1.3.1'
     pod 'Nimble', '8.0.1'
-end
-
-def adaptive_pods
-    pod 'SDWebImage/GIF', '4.4.2'
+    pod 'Mockingjay', '2.0.1'
 end
 
 target 'Stepic' do
@@ -82,80 +79,5 @@ target 'Stepic' do
         inherit! :search_paths
         all_pods
         testing_pods
-		pod 'Mockingjay', '2.0.1'
     end
 end
-
-target 'StepikTV' do
-    platform :tvos, '10.1'
-    shared_pods
-    target 'StepikTVTests' do
-        inherit! :search_paths
-        shared_pods
-        testing_pods
-    end
-end
-
-target 'Adaptive 1838' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods    
-end
-
-target 'Adaptive GMAT' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods
-end
-
-target 'Adaptive 3150' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods
-end
-
-target 'Adaptive 3149' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods
-end
-
-target 'Adaptive 3124' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods
-end
-
-target 'Adaptive 8290' do
-    platform :ios, '9.0'
-    all_pods
-    adaptive_pods
-end
-
-target 'Adaptive 1838 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'Adaptive 3124 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'Adaptive 3149 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'Adaptive 3150 Screenshots' do
-    pod 'SimulatorStatusMagic', :configurations => ['Debug']
-end
-
-target 'ExamEGERussian' do
-    platform :ios, '9.0'
-    
-    all_pods
-    pod 'AlamofireNetworkActivityIndicator', '2.2.1'
-
-    target 'ExamEGERussianTests' do
-        inherit! :search_paths
-    end
-end
-
