@@ -17,30 +17,7 @@ platform :ios do
     schemes = {
         "Stepic" => [
             "Stepic",
-            "StepicWatch", 
-            "StepicWatch Extension", 
             "StickerPackExtension"
-        ],
-        "Adaptive 1838" => [
-            "Adaptive 1838"
-        ],
-        "Adaptive 3150" => [
-            "Adaptive 3150"
-        ],
-        "Adaptive 3149" => [
-            "Adaptive 3149"
-        ],
-        "Adaptive 3124" => [
-            "Adaptive 3124"
-        ],
-        "Adaptive GMAT" => [
-            "Adaptive GMAT"
-        ],
-        "Adaptive 8290" => [
-            "Adaptive 8290"
-        ],
-        "ExamEGERussian" => [
-            "ExamEGERussian"
         ]
     }
 
