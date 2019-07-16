@@ -82,11 +82,7 @@ class CourseSubscriptionManager: NSObject {
         deletedCourses += [course]
         handleUpdatesBlock?()
         if notifyOthers {
-            // FIXME: Replace two different notifications with one from NSNotification.Name extension
             NotificationCenter.default.post(name: .courseUnsubscribedNotification, object: nil, userInfo: ["course": course])
-            #if os(tvOS)
-            NotificationCenter.default.post(name: .courseUnsubscribed, object: nil, userInfo: ["id": course.id])
-            #endif
         }
     }
 
@@ -97,11 +93,7 @@ class CourseSubscriptionManager: NSObject {
         addedCourses += [course]
         handleUpdatesBlock?()
         if notifyOthers {
-            // FIXME: Replace two different notifications with one from NSNotification.Name extension
             NotificationCenter.default.post(name: .courseSubscribedNotification, object: nil, userInfo: ["course": course])
-            #if os(tvOS)
-                NotificationCenter.default.post(name: .courseSubscribed, object: nil, userInfo: ["course": course])
-            #endif
         }
     }
 

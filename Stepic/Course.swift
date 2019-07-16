@@ -86,23 +86,6 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    var metaInfoContainer: CourseMetainfoContainer {
-        var metaArr = [CourseMetainfoEntity]()
-        if workload != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Workload", comment: ""), subtitle: workload)]
-        }
-        if certificate != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Certificate", comment: ""), subtitle: certificate)]
-        }
-        if audience != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Audience", comment: ""), subtitle: audience)]
-        }
-        if format != "" {
-            metaArr += [CourseMetainfoEntity(title: NSLocalizedString("Format", comment: ""), subtitle: format)]
-        }
-        return CourseMetainfoContainer(courseId: id, metainfo: metaArr)
-    }
-
     var nearestDeadlines: (nearest: Date?, second: Date?)? {
         guard sections.count > 0 else {
             return nil

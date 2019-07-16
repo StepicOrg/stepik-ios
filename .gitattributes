@@ -9,11 +9,4 @@ fastlane/Deliverfile filter=git-crypt diff=git-crypt
 fastlane/Appfile filter=git-crypt diff=git-crypt
 fastlane/Matchfile filter=git-crypt diff=git-crypt
 
-StepicAdaptiveCourse/Content/**/Auth.plist filter=git-crypt diff=git-crypt
-StepicAdaptiveCourse/Content/**/Tokens.plist filter=git-crypt diff=git-crypt
-StepicAdaptiveCourse/Content/**/GoogleService-Info.plist filter=git-crypt diff=git-crypt
-
-ExamEGERussian/Resources/Config/Auth.plist filter=git-crypt diff=git-crypt
-ExamEGERussian/Resources/Config/Tokens.plist filter=git-crypt diff=git-crypt
-
 .gitattributes !filter !diff

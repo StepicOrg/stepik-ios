@@ -218,9 +218,6 @@ class WebStepViewController: UIViewController {
         case "matching":
             initQuizController(MatchingQuizViewController(nibName: "QuizViewController", bundle: nil))
             break
-        case "fill-blanks":
-            initQuizController(FillBlanksQuizViewController(nibName: "QuizViewController", bundle: nil))
-            break
         case "code":
             initQuizController(CodeQuizViewController(nibName: "QuizViewController", bundle: nil))
             break

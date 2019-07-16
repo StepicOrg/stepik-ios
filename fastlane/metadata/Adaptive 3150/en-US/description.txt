@@ -1,3 +1,0 @@
-This app consists of a number of assignments for your to check your knowledge of the basic vocabulary needed for the TOEFL.
-
-Learning in the app is really simple! If the problem seems too difficult or too easy, you can just swipe the card with the question, the engine will take into account the knowledge level for future problem recommendations.

@@ -1,6 +1,11 @@
 import SnapKit
 import UIKit
 
+protocol QuizFeedbackViewDelegate: class {
+    func quizFeedbackView(_ view: QuizFeedbackView, didRequestFullscreenImage url: URL)
+    func quizFeedbackView(_ view: QuizFeedbackView, didRequestOpenURL url: URL)
+}
+
 extension QuizFeedbackView {
     struct Appearance {
         let cornerRadius: CGFloat = 6
@@ -16,6 +21,7 @@ extension QuizFeedbackView {
 
 final class QuizFeedbackView: UIView {
     let appearance: Appearance
+    weak var delegate: QuizFeedbackViewDelegate?
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -32,6 +38,8 @@ final class QuizFeedbackView: UIView {
         appearance.backgroundColor = .clear
 
         let view = ProcessedContentTextView(appearance: appearance)
+        view.delegate = self
+
         return view
     }()
 
@@ -240,5 +248,18 @@ extension QuizFeedbackView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.feedbackContentInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.feedbackContentInsets.bottom)
         }
+    }
+}
+
+extension QuizFeedbackView: ProcessedContentTextViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+        self.delegate?.quizFeedbackView(self, didRequestFullscreenImage: url)
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+        self.delegate?.quizFeedbackView(self, didRequestOpenURL: url)
     }
 }

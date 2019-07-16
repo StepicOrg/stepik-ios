@@ -78,16 +78,10 @@ class AuthInfo: NSObject {
                         NotificationCenter.default.post(name: .didLogout, object: nil)
                     }
                 }
-
-                #if os(tvOS)
-                    NotificationCenter.default.post(name: .userLoggedOut, object: nil)
+                // Unregister from notifications.
+                NotificationsRegistrationService().unregisterFromNotifications(completion: {
                     performLogoutActions()
-                #else
-                    //Unregister from notifications
-                    NotificationsRegistrationService().unregisterFromNotifications(completion: {
-                        performLogoutActions()
-                    })
-                #endif
+                })
             } else {
                 let oldToken = token
                 print("\nsetting new token -> \(newToken!.accessToken)\n")

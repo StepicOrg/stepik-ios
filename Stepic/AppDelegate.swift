@@ -6,18 +6,18 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
-import MediaPlayer
-import FirebaseCore
-import FirebaseMessaging
-import FirebaseInstanceID
-import IQKeyboardManagerSwift
-import SVProgressHUD
-import VK_ios_sdk
 import FBSDKCoreKit
-import YandexMobileMetrica
+import FirebaseCore
+import FirebaseInstanceID
+import FirebaseMessaging
+import IQKeyboardManagerSwift
+import MediaPlayer
 import Presentr
 import PromiseKit
+import SVProgressHUD
+import UIKit
+import VK_ios_sdk
+import YandexMobileMetrica
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let notificationsService = NotificationsService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
+    private let alamofireRequestsLogger = AlamofireRequestsLogger()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -44,8 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
 
-        WatchSessionManager.sharedManager.startSession()
-
         NotificationsBadgesManager.shared.setup()
 
         RemoteConfig.shared.setup()
@@ -54,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
 
         ConnectionHelper.shared.instantiate()
+        self.alamofireRequestsLogger.startIfDebug()
 
         if !AudioManager.sharedManager.initAudioSession() {
             print("Could not initialize audio session")

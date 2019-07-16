@@ -44,27 +44,6 @@ class StreakNotificationsControlPresenter {
         NotificationCenter.default.removeObserver(self)
     }
 
-    private var notificationTimeString: String? {
-        func getDisplayingStreakTimeInterval(startHour: Int) -> String {
-            let startInterval = TimeInterval((startHour % 24) * 60 * 60)
-            let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
-            let endInterval = TimeInterval((startHour + 1) % 24 * 60 * 60)
-            let endDate = Date(timeIntervalSinceReferenceDate: endInterval)
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = .short
-            dateFormatter.dateStyle = .none
-            return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
-        }
-
-        let hasPermissionToSendStreakNotifications = PreferencesContainer.notifications.allowStreaksNotifications
-        let streaksNotificationStartHour = PreferencesContainer.notifications.streaksNotificationStartHourUTC
-        if hasPermissionToSendStreakNotifications {
-            return getDisplayingStreakTimeInterval(startHour: streaksNotificationStartHour)
-        } else {
-            return nil
-        }
-    }
-
     func selectStreakNotificationTime() {
         let startHour = PreferencesContainer.notifications.streaksNotificationStartHourLocal
         view?.showStreakTimeSelection(startHour: startHour)
