@@ -194,15 +194,12 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 return nil
             }
 
-            let isAtLeastOneMinute = timeToComplete >= 60
-            let isAtLeastOneHour = timeToComplete / 3600.0 >= 1
-
-            if isAtLeastOneHour {
-                return FormatterHelper.hoursInSeconds(timeToComplete)
-            } else if isAtLeastOneMinute {
-                return FormatterHelper.minutesInSeconds(timeToComplete)
-            } else {
+            if timeToComplete < 60 {
                 return nil
+            } else if case 60..<3600 = timeToComplete {
+                return FormatterHelper.minutesInSeconds(timeToComplete, roundingRule: .down)
+            } else {
+                return FormatterHelper.hoursInSeconds(timeToComplete, roundingRule: .down)
             }
         }()
 
