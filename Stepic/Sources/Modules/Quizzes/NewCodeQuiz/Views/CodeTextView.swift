@@ -3,6 +3,7 @@ import UIKit
 final class CodeTextView: UITextView {
     private static let lineNumberGutterWidth: CGFloat = 40
 
+    // swiftlint:disable:next force_cast
     private lazy var codeTextViewLayoutManager = self.layoutManager as! CodeTextViewLayoutManager
 
     var lineNumberFont: UIFont {
@@ -54,9 +55,11 @@ final class CodeTextView: UITextView {
         let textContainer = NSTextContainer()
         textContainer.widthTracksTextView = true
         textContainer.exclusionPaths = [
-            UIBezierPath(rect: CGRect(
-                origin: .zero,
-                size: CGSize(width: CodeTextView.lineNumberGutterWidth, height: CGFloat.greatestFiniteMagnitude))
+            UIBezierPath(
+                rect: CGRect(
+                    origin: .zero,
+                    size: CGSize(width: CodeTextView.lineNumberGutterWidth, height: CGFloat.greatestFiniteMagnitude)
+                )
             )
         ]
 
@@ -68,6 +71,7 @@ final class CodeTextView: UITextView {
         self.contentMode = .redraw
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
