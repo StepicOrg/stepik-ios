@@ -50,7 +50,7 @@ final class AlamofireRequestsLogger {
 
         if let httpBody = request.httpBody,
            let httpBodyString = String(data: httpBody, encoding: .utf8) {
-            print(httpBodyString)
+            print("Body: \(httpBodyString)")
         }
     }
 }
