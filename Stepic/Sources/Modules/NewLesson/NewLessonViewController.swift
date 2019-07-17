@@ -48,8 +48,6 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         return view
     }()
 
-    private lazy var tooltipView = LessonInfoTooltipView()
-
     private var stepControllers: [UIViewController?] = []
     private var stepModulesInputs: [NewStepInputProtocol?] = []
 
