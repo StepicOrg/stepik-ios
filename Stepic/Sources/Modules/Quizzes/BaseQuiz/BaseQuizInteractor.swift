@@ -42,6 +42,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.rateAppManager = rateAppManager
     }
 
+    // TODO: Cache reply, currently unused.
     func doReplyCache(request: BaseQuiz.ReplyCache.Request) {
         guard let attempt = self.currentAttempt else {
             return
