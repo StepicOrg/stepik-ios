@@ -195,6 +195,7 @@ extension ChoiceElementView: ProgrammaticallyInitializableViewProtocol {
             make.size.equalTo(self.quizElementView)
         }
 
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
