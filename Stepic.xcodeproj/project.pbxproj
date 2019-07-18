@@ -695,13 +695,10 @@
 		3382D26FC5E2AB43D5CD0B71 /* NewFreeAnswerQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BB01DDF94CCF5E5EBBB43 /* NewFreeAnswerQuizViewController.swift */; };
 		34577A9694176BFA7CAC950C /* ProfileEditDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */; };
 		36D02A00641C747F6D18DB60 /* NewStepPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4737058E519D801DAB2131 /* NewStepPresenter.swift */; };
-		39C2C175670442E93122A691 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		39CE38F99BF00EF07C1C8192 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		3CE76179FE70EA84C4627AF6 /* NewStepOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A31B642B26D8A51B139F01 /* NewStepOutputProtocol.swift */; };
 		47AA3FAF72E7AD067ABF2804 /* NewFreeAnswerQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50F304BF0016F5B477EEC8 /* NewFreeAnswerQuizDataFlow.swift */; };
 		4AC49732BD397C516D132297 /* NewLessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC0A2EAEB9E30B54695D44A /* NewLessonPresenter.swift */; };
 		4E3A4636F1A4E8E38E0AB66B /* NewChoiceQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECD143E5E804E55A9DE096 /* NewChoiceQuizDataFlow.swift */; };
-		56DD7038EFE9828EC250AF0E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		580F18AF73EFFCBF1EDED227 /* NewStringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D70A098825966D4584016F /* NewStringQuizViewController.swift */; };
 		582E484FCF140403A5F7739B /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304C7487F9B47AE32F4190D /* ProfileEditViewController.swift */; };
 		5DABE0AA5285D92AE83E5C3A /* NewLessonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E8045E8645E07DAAA62D82 /* NewLessonProvider.swift */; };
@@ -4072,20 +4069,20 @@
 				2C6BBBA822B261E200889A45 /* BaseQuizView.swift */,
 				2C6BBBA922B261E200889A45 /* BaseQuizViewController.swift */,
 				2C20778122BB956900D44DC0 /* BaseQuizViewModel.swift */,
-				2C6BBBAB22B261E200889A45 /* Child protocols */,
+				2C6BBBAB22B261E200889A45 /* ChildProtocols */,
 				2C6BBBB022B261E200889A45 /* Views */,
 			);
 			path = BaseQuiz;
 			sourceTree = "<group>";
 		};
-		2C6BBBAB22B261E200889A45 /* Child protocols */ = {
+		2C6BBBAB22B261E200889A45 /* ChildProtocols */ = {
 			isa = PBXGroup;
 			children = (
 				2C6BBBAC22B261E200889A45 /* QuizInputProtocol.swift */,
 				2C6BBBAD22B261E200889A45 /* QuizOutputProtocol.swift */,
 				2C20778922BD349300D44DC0 /* QuizAssembly.swift */,
 			);
-			path = "Child protocols";
+			path = ChildProtocols;
 			sourceTree = "<group>";
 		};
 		2C6BBBB022B261E200889A45 /* Views */ = {
@@ -6852,9 +6849,6 @@
 				CCD2044493C055C6F7C7A3DD /* NewChoiceQuizPresenter.swift in Sources */,
 				4E3A4636F1A4E8E38E0AB66B /* NewChoiceQuizDataFlow.swift in Sources */,
 				0D389430943C20609C095B3D /* NewChoiceQuizView.swift in Sources */,
-				56DD7038EFE9828EC250AF0E /* (null) in Sources */,
-				39CE38F99BF00EF07C1C8192 /* (null) in Sources */,
-				39C2C175670442E93122A691 /* (null) in Sources */,
 				62E981A7B87D4281EBBB5184 /* DiscussionProxiesNetworkService.swift in Sources */,
 				62E98C185F4AFB3DD11E072E /* DiscussionsTableViewDataSource.swift in Sources */,
 			);
