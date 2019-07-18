@@ -16,7 +16,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     private let presenter: BaseQuizPresenterProtocol
     private let provider: BaseQuizProviderProtocol
 
-    // Lagacy dependencies
+    // Legacy dependencies
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let rateAppManager: RateAppManager
 
