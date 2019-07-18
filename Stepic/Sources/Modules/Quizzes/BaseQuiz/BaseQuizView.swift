@@ -165,14 +165,10 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.submitButton.translatesAutoresizingMaskIntoConstraints = false
         self.submitButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.submitButtonHeight)
-        }
-
-        self.submitButton.translatesAutoresizingMaskIntoConstraints = false
-        self.submitButton.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+            make.height.equalTo(self.appearance.submitButtonHeight)
         }
 
         self.feedbackView.translatesAutoresizingMaskIntoConstraints = false
@@ -182,12 +178,9 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
         }
 
-
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.edges.equalToSuperview()
         }
 
         self.loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
