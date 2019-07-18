@@ -4559,11 +4559,11 @@
 			isa = PBXGroup;
 			children = (
 				3E6741032B8AF7696CAC7126 /* NewFreeAnswerQuizAssembly.swift */,
-				227BB01DDF94CCF5E5EBBB43 /* NewFreeAnswerQuizViewController.swift */,
+				BF50F304BF0016F5B477EEC8 /* NewFreeAnswerQuizDataFlow.swift */,
 				232D0A4BD87325BE0E568BF0 /* NewFreeAnswerQuizInteractor.swift */,
 				37D0922F478391C8B44EA5D0 /* NewFreeAnswerQuizPresenter.swift */,
-				BF50F304BF0016F5B477EEC8 /* NewFreeAnswerQuizDataFlow.swift */,
 				C6F7667856CC2C2A2AC43631 /* NewFreeAnswerQuizView.swift */,
+				227BB01DDF94CCF5E5EBBB43 /* NewFreeAnswerQuizViewController.swift */,
 				2C16495622C0E50A00DF18CA /* NewFreeAnswerQuizViewModel.swift */,
 			);
 			path = NewFreeAnswerQuiz;
@@ -5328,14 +5328,14 @@
 		CB9D99278A64D07995DD1C68 /* NewChoiceQuiz */ = {
 			isa = PBXGroup;
 			children = (
-				2C29B62E22C6649100730C16 /* Views */,
 				3AD36917F532D0F83798B2F2 /* NewChoiceQuizAssembly.swift */,
-				36E041388C85D190467E74A5 /* NewChoiceQuizViewController.swift */,
+				BAECD143E5E804E55A9DE096 /* NewChoiceQuizDataFlow.swift */,
 				077CA2A02D61A314B281C7C3 /* NewChoiceQuizInteractor.swift */,
 				AF89927A843447A9AE4C0AF4 /* NewChoiceQuizPresenter.swift */,
-				BAECD143E5E804E55A9DE096 /* NewChoiceQuizDataFlow.swift */,
 				508C25A19DBEE7176400D767 /* NewChoiceQuizView.swift */,
+				36E041388C85D190467E74A5 /* NewChoiceQuizViewController.swift */,
 				2CB273FF22C4E9870078CA2F /* NewChoiceQuizViewModel.swift */,
+				2C29B62E22C6649100730C16 /* Views */,
 			);
 			path = NewChoiceQuiz;
 			sourceTree = "<group>";
@@ -5355,11 +5355,11 @@
 			isa = PBXGroup;
 			children = (
 				063F920E9867D0DB4C2CBA6A /* NewStringQuizAssembly.swift */,
-				06D70A098825966D4584016F /* NewStringQuizViewController.swift */,
+				ACDDB66D0848F4DCD752795B /* NewStringQuizDataFlow.swift */,
 				2111290D2E9D752A22AFC024 /* NewStringQuizInteractor.swift */,
 				02E495D6D30976CAD27AE1EB /* NewStringQuizPresenter.swift */,
-				ACDDB66D0848F4DCD752795B /* NewStringQuizDataFlow.swift */,
 				79467CCB416E6C3CC9613912 /* NewStringQuizView.swift */,
+				06D70A098825966D4584016F /* NewStringQuizViewController.swift */,
 				2C20778522BBC05F00D44DC0 /* NewStringQuizViewModel.swift */,
 			);
 			path = NewStringQuiz;
