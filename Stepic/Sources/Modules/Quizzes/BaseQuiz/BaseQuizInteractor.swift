@@ -97,7 +97,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 throw Error.submissionFetchFailed
             }
 
-            print("base quiz interactor: submission created = \(submission.id), status = \(submission.status)")
+            print("base quiz interactor: submission created = \(submission.id), status = \(submission.status ??? "")")
 
             // Analytics
             AnalyticsUserProperties.shared.incrementSubmissionsCount()
