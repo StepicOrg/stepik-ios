@@ -11,6 +11,9 @@ import CoreData
 import SwiftyJSON
 
 class StepOptions: NSManagedObject {
+    override var description: String {
+        return "StepOptions(limits: \(self.limits), templates: \(self.templates), samples: \(self.samples)"
+    }
 
     convenience required init(json: JSON) {
         self.init()

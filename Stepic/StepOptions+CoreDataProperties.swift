@@ -26,7 +26,6 @@ extension StepOptions {
         get {
             return (managedLimits?.array as? [CodeLimit]) ?? []
         }
-
         set(value) {
             managedLimits = NSOrderedSet(array: value)
         }
@@ -36,7 +35,6 @@ extension StepOptions {
         get {
             return (managedTemplates?.array as? [CodeTemplate]) ?? []
         }
-
         set(value) {
             managedTemplates = NSOrderedSet(array: value)
         }
@@ -46,10 +44,8 @@ extension StepOptions {
         get {
             return (managedSamples?.array as? [CodeSample]) ?? []
         }
-
         set(value) {
             managedSamples = NSOrderedSet(array: value)
         }
     }
-
 }

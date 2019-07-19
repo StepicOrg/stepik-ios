@@ -7,12 +7,15 @@
 //
 
 import Foundation
-
 import SwiftyJSON
 
-protocol Reply {
+protocol Reply: CustomStringConvertible {
+    var dictValue: [String: Any] { get }
     init(json: JSON)
-    var dictValue: [String : Any] {
-        get
+}
+
+extension Reply {
+    var description: String {
+        return "Reply(\(self.dictValue))"
     }
 }

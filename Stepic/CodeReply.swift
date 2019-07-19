@@ -6,14 +6,17 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SwiftyJSON
 
 class CodeReply: Reply {
-
     var code: String
     var language: CodeLanguage?
     var languageName: String
+
+    var description: String {
+        return "CodeReply(code: \(self.code), languageName: \(self.languageName))"
+    }
 
     init(code: String, language: CodeLanguage) {
         self.code = code
