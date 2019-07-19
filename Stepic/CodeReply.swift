@@ -18,6 +18,12 @@ class CodeReply: Reply {
         return "CodeReply(code: \(self.code), languageName: \(self.languageName))"
     }
 
+    init(code: String, languageName: String) {
+        self.code = code
+        self.language = CodeLanguage(rawValue: languageName)
+        self.languageName = languageName
+    }
+
     init(code: String, language: CodeLanguage) {
         self.code = code
         self.language = language
