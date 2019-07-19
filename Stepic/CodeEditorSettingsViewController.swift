@@ -110,14 +110,14 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
 
 extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
-        let availableLanguages = Array(Set(CodeLanguage.allLanguages.map { $0.humanReadableName }))
+        let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName }))
 
         ActionSheetStringPicker.show(withTitle: NSLocalizedString("CodeEditorLanguage", comment: ""),
             rows: availableLanguages,
             initialSelection: availableLanguages.index(of: previewLanguage.humanReadableName)!,
             doneBlock: { _, _, value in
                 if let value = value as? String {
-                    self.previewLanguage = CodeLanguage.allLanguages.first(where: { $0.humanReadableName == value }) ?? self.previewLanguage
+                    self.previewLanguage = CodeLanguage.allCases.first(where: { $0.humanReadableName == value }) ?? self.previewLanguage
                     self.previewView.updateLanguage(with: self.previewLanguage)
                 }
             },

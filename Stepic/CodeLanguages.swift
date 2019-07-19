@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CodeLanguage: String {
+enum CodeLanguage: String, CaseIterable {
     case python = "python3"
     case cpp11 = "c++11"
     case cpp = "c++"
@@ -36,11 +36,6 @@ enum CodeLanguage: String {
     case pascal = "pascalabc"
     case perl = "perl"
     case sql = "sql"
-
-    static let allLanguages: [CodeLanguage] = [.python, .cpp11, .cpp, .c, .haskell, .haskell7,
-                               .haskell8, .java, .java8, .java9, .java11, .octave, .asm32, .asm64,
-                               .shell, .rust, .r, .ruby, .clojure, .cs, .javascript,
-                               .scala, .kotlin, .go, .pascal, .perl, .sql]
 
     var highlightr: String {
         switch self {
