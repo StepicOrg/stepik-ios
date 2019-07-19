@@ -114,6 +114,8 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
         self.childQuizModuleInput?.update(dataset: data.dataset)
         self.childQuizModuleInput?.update(feedback: data.feedback)
+        // TODO: Fix
+        self.childQuizModuleInput?.update(options: data.options)
         self.childQuizModuleInput?.update(reply: data.reply)
         self.childQuizModuleInput?.update(status: data.quizStatus)
 

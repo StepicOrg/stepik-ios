@@ -106,7 +106,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             retryWithNewAttempt: retryWithNewAttempt,
             shouldPassPeerReview: shouldPassPeerReview,
             stepURL: self.makeURL(for: step),
-            hintContent: hintContent
+            hintContent: hintContent,
+            // TODO: Fix
+            options: step.options
         )
     }
 
