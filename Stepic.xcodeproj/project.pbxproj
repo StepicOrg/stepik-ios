@@ -2102,13 +2102,13 @@
 			path = NewLesson;
 			sourceTree = "<group>";
 		};
-		0805FE3E1F0D38C5001226B4 /* Code Analysis */ = {
+		0805FE3E1F0D38C5001226B4 /* CodeAnalysis */ = {
 			isa = PBXGroup;
 			children = (
 				0805FE431F0D390B001226B4 /* CodePlaygroundManager.swift */,
 				0805FE471F0E584B001226B4 /* CodePlaygroundTest.swift */,
 			);
-			name = "Code Analysis";
+			name = CodeAnalysis;
 			sourceTree = "<group>";
 		};
 		0806B2C01EBDBAE300FDE0F7 /* Views */ = {
@@ -2162,15 +2162,15 @@
 		080C5E641EFC078F0036EB3D /* CodeQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
-				080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */,
 				0888D1081F1E42A000A16863 /* CodeElementsSize.swift */,
-				0860D9101F10BE5C0087D61B /* Input Accessory */,
-				0805FE3E1F0D38C5001226B4 /* Code Analysis */,
-				080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */,
-				080C5E751EFC09550036EB3D /* Toolbar */,
 				081BF3461EFEF630002F84AA /* CodeLanguagePickerViewController.swift */,
+				080E80F41F0070C900DC0EA5 /* CodeLanguages.swift */,
+				080C5E651EFC07C10036EB3D /* CodeQuizViewController.swift */,
+				0805FE3E1F0D38C5001226B4 /* CodeAnalysis */,
+				0860D91D1F115DBC0087D61B /* CodeSuggestions */,
 				080E81041F0147A300DC0EA5 /* Fullscreen */,
-				0860D91D1F115DBC0087D61B /* Code Suggestions */,
+				0860D9101F10BE5C0087D61B /* InputAccessory */,
+				080C5E751EFC09550036EB3D /* Toolbar */,
 			);
 			name = CodeQuizViewController;
 			sourceTree = "<group>";
@@ -2178,9 +2178,9 @@
 		080C5E751EFC09550036EB3D /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
-				080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */,
-				080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */,
 				080C5E831EFD252D0036EB3D /* CodeQuizToolbarDelegate.swift */,
+				080C5E761EFC09730036EB3D /* CodeQuizToolbarView.swift */,
+				080C5E711EFC094F0036EB3D /* CodeQuizToolbarView.xib */,
 			);
 			name = Toolbar;
 			sourceTree = "<group>";
@@ -2807,26 +2807,26 @@
 			name = Lesson;
 			sourceTree = "<group>";
 		};
-		0860D9101F10BE5C0087D61B /* Input Accessory */ = {
+		0860D9101F10BE5C0087D61B /* InputAccessory */ = {
 			isa = PBXGroup;
 			children = (
-				0888D0F31F1E3C0C00A16863 /* Toolbar */,
 				0860D9111F10C5480087D61B /* CodeSnippetSymbols.swift */,
 				0860D9141F10EA690087D61B /* InputAccessoryBuilder.swift */,
+				0888D0F31F1E3C0C00A16863 /* Toolbar */,
 			);
-			name = "Input Accessory";
+			name = InputAccessory;
 			sourceTree = "<group>";
 		};
-		0860D91D1F115DBC0087D61B /* Code Suggestions */ = {
+		0860D91D1F115DBC0087D61B /* CodeSuggestions */ = {
 			isa = PBXGroup;
 			children = (
+				08FEFC201F127470005CA0FB /* AutocompleteWords.swift */,
 				0860D9171F115D830087D61B /* CodeSuggestionsTableViewController.swift */,
 				0860D9181F115D830087D61B /* CodeSuggestionsTableViewController.xib */,
 				08FEFC1A1F117257005CA0FB /* CodeSuggestionTableViewCell.swift */,
 				08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */,
-				08FEFC201F127470005CA0FB /* AutocompleteWords.swift */,
 			);
-			name = "Code Suggestions";
+			name = CodeSuggestions;
 			sourceTree = "<group>";
 		};
 		0861E6701CD80A0A00B45652 /* ExecutionQueue */ = {
@@ -3012,10 +3012,10 @@
 		0888D0F31F1E3C0C00A16863 /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
-				0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */,
-				0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */,
 				0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */,
 				0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */,
+				0888D0FC1F1E3CFC00A16863 /* CodeInputAccessoryView.swift */,
+				0888D0F81F1E3CEF00A16863 /* CodeInputAccessoryView.xib */,
 			);
 			name = Toolbar;
 			sourceTree = "<group>";
@@ -3296,10 +3296,10 @@
 			isa = PBXGroup;
 			children = (
 				08F555641C4FF22600C877E8 /* QuizControllerDelegate.swift */,
+				08C1FC321F41E74500E14B46 /* QuizPresenter.swift */,
 				081A7DA81C56625F00583728 /* QuizViewController.swift */,
 				081A7DF21C56A09300583728 /* QuizViewController.xib */,
-				08F555611C4FE2D200C877E8 /* Quiz Types */,
-				08C1FC321F41E74500E14B46 /* QuizPresenter.swift */,
+				08F555611C4FE2D200C877E8 /* QuizTypes */,
 			);
 			name = Quizzes;
 			sourceTree = "<group>";
@@ -3657,7 +3657,7 @@
 			name = Datasets;
 			sourceTree = "<group>";
 		};
-		08F555611C4FE2D200C877E8 /* Quiz Types */ = {
+		08F555611C4FE2D200C877E8 /* QuizTypes */ = {
 			isa = PBXGroup;
 			children = (
 				2CE3BCA31FBEFF74000AD405 /* SQLQuizViewController */,
@@ -3673,7 +3673,7 @@
 				0834C4741E2CEC55002F8516 /* MatchingQuizViewController */,
 				0859AE931E4F194D00A0D206 /* FillBlanksQuizViewController */,
 			);
-			name = "Quiz Types";
+			name = QuizTypes;
 			sourceTree = "<group>";
 		};
 		08F5556A1C50009000C877E8 /* ChoiceQuizViewController */ = {
