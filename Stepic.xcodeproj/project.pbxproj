@@ -508,10 +508,7 @@
 		2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */; };
 		2C53DFFA22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFED22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift */; };
 		2C53DFFB22DDDBFD0084BA2B /* NewCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFEE22DDDBFD0084BA2B /* NewCodeQuizViewController.swift */; };
-		2C53DFFC22DDDBFD0084BA2B /* NewCodeQuizInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF022DDDBFD0084BA2B /* NewCodeQuizInputProtocol.swift */; };
-		2C53DFFD22DDDBFD0084BA2B /* NewCodeQuizOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF122DDDBFD0084BA2B /* NewCodeQuizOutputProtocol.swift */; };
 		2C53DFFE22DDDBFD0084BA2B /* NewCodeQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF222DDDBFD0084BA2B /* NewCodeQuizDataFlow.swift */; };
-		2C53DFFF22DDDBFD0084BA2B /* NewCodeQuizProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF322DDDBFD0084BA2B /* NewCodeQuizProvider.swift */; };
 		2C53E00022DDDBFD0084BA2B /* NewCodeQuizInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF422DDDBFD0084BA2B /* NewCodeQuizInteractor.swift */; };
 		2C53E00122DDDBFD0084BA2B /* NewCodeQuizAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF522DDDBFD0084BA2B /* NewCodeQuizAssembly.swift */; };
 		2C53E00222DDDBFD0084BA2B /* NewCodeQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF622DDDBFD0084BA2B /* NewCodeQuizView.swift */; };
@@ -1590,10 +1587,7 @@
 		2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C53DFED22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizPresenter.swift; sourceTree = "<group>"; };
 		2C53DFEE22DDDBFD0084BA2B /* NewCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizViewController.swift; sourceTree = "<group>"; };
-		2C53DFF022DDDBFD0084BA2B /* NewCodeQuizInputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizInputProtocol.swift; sourceTree = "<group>"; };
-		2C53DFF122DDDBFD0084BA2B /* NewCodeQuizOutputProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizOutputProtocol.swift; sourceTree = "<group>"; };
 		2C53DFF222DDDBFD0084BA2B /* NewCodeQuizDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizDataFlow.swift; sourceTree = "<group>"; };
-		2C53DFF322DDDBFD0084BA2B /* NewCodeQuizProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizProvider.swift; sourceTree = "<group>"; };
 		2C53DFF422DDDBFD0084BA2B /* NewCodeQuizInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizInteractor.swift; sourceTree = "<group>"; };
 		2C53DFF522DDDBFD0084BA2B /* NewCodeQuizAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizAssembly.swift; sourceTree = "<group>"; };
 		2C53DFF622DDDBFD0084BA2B /* NewCodeQuizView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizView.swift; sourceTree = "<group>"; };
@@ -3911,22 +3905,11 @@
 				2C53DFF222DDDBFD0084BA2B /* NewCodeQuizDataFlow.swift */,
 				2C53DFF422DDDBFD0084BA2B /* NewCodeQuizInteractor.swift */,
 				2C53DFED22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift */,
-				2C53DFF322DDDBFD0084BA2B /* NewCodeQuizProvider.swift */,
 				2C53DFF622DDDBFD0084BA2B /* NewCodeQuizView.swift */,
 				2C53DFEE22DDDBFD0084BA2B /* NewCodeQuizViewController.swift */,
-				2C53DFEF22DDDBFD0084BA2B /* InputOutput */,
 				2C53DFF722DDDBFD0084BA2B /* Views */,
 			);
 			path = NewCodeQuiz;
-			sourceTree = "<group>";
-		};
-		2C53DFEF22DDDBFD0084BA2B /* InputOutput */ = {
-			isa = PBXGroup;
-			children = (
-				2C53DFF022DDDBFD0084BA2B /* NewCodeQuizInputProtocol.swift */,
-				2C53DFF122DDDBFD0084BA2B /* NewCodeQuizOutputProtocol.swift */,
-			);
-			path = InputOutput;
 			sourceTree = "<group>";
 		};
 		2C53DFF722DDDBFD0084BA2B /* Views */ = {
@@ -6620,7 +6603,6 @@
 				62E98AFE065F891A05D6E46F /* CourseInfoTabSyllabusInputProtocol.swift in Sources */,
 				62E983D90C3585F9A9AD0402 /* CourseInfoTabSyllabusOutputProtocol.swift in Sources */,
 				62E98570B05049B3A8619283 /* CourseRatingView.swift in Sources */,
-				2C53DFFD22DDDBFD0084BA2B /* NewCodeQuizOutputProtocol.swift in Sources */,
 				62E980CB3EB9E38E716EB433 /* TabSegmentedControlView.swift in Sources */,
 				62E98ABA0A56F069278EF47D /* CourseReviewSummariesNetworkService.swift in Sources */,
 				62E98F5E955545F7A75F77BC /* ProgressesNetworkService.swift in Sources */,
@@ -6754,7 +6736,6 @@
 				2C53E00222DDDBFD0084BA2B /* NewCodeQuizView.swift in Sources */,
 				62E981FCD3F080DDF310562B /* CourseInfoTabReviewsProvider.swift in Sources */,
 				62E9803EAF8716CC4673DDE6 /* CourseInfoTabReviewsViewModel.swift in Sources */,
-				2C53DFFC22DDDBFD0084BA2B /* NewCodeQuizInputProtocol.swift in Sources */,
 				2CB5B1612297F2FB00D7F706 /* StepVideoPreviewView.swift in Sources */,
 				62E98B88931268A63B55CFFD /* CourseInfoTabSyllabusViewModel.swift in Sources */,
 				62E98B337D0BA97FB0796C2C /* CoursesNetworkService.swift in Sources */,
@@ -6841,7 +6822,6 @@
 				FED534F473711C52863B4B7E /* NewFreeAnswerQuizInteractor.swift in Sources */,
 				67CA89D9CC2C8E98875F5FDF /* NewFreeAnswerQuizPresenter.swift in Sources */,
 				47AA3FAF72E7AD067ABF2804 /* NewFreeAnswerQuizDataFlow.swift in Sources */,
-				2C53DFFF22DDDBFD0084BA2B /* NewCodeQuizProvider.swift in Sources */,
 				92E876582D263061F44316EB /* NewFreeAnswerQuizView.swift in Sources */,
 				EBF9068859AF1AFB10EE4364 /* NewChoiceQuizAssembly.swift in Sources */,
 				3317FC9AECA8FF54902BF61D /* NewChoiceQuizViewController.swift in Sources */,

@@ -6,17 +6,16 @@ protocol NewCodeQuizInteractorProtocol {
 }
 
 final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
-    weak var moduleOutput: NewCodeQuizOutputProtocol?
+    weak var moduleOutput: QuizOutputProtocol?
 
     private let presenter: NewCodeQuizPresenterProtocol
-    private let provider: NewCodeQuizProviderProtocol
+
+    private var currentStatus: QuizStatus?
 
     init(
-        presenter: NewCodeQuizPresenterProtocol,
-        provider: NewCodeQuizProviderProtocol
+        presenter: NewCodeQuizPresenterProtocol
     ) {
         self.presenter = presenter
-        self.provider = provider
     }
 
     func doSomeAction(request: NewCodeQuiz.SomeAction.Request) { }
@@ -26,4 +25,34 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 }
 
-extension NewCodeQuizInteractor: NewCodeQuizInputProtocol { }
+extension NewCodeQuizInteractor: QuizInputProtocol {
+    func update(reply: Reply?) {
+        guard let reply = reply else {
+            return
+        }
+
+        self.moduleOutput?.update(reply: reply)
+
+        if let reply = reply as? CodeReply {
+            print(reply)
+            return
+        }
+
+        fatalError("Unexpected reply type")
+    }
+
+    func update(status: QuizStatus?) {
+        self.currentStatus = status
+    }
+
+    func update(dataset: Dataset?) {
+        guard let dataset = dataset else {
+            return
+        }
+        print(dataset)
+    }
+
+    func update(feedback: SubmissionFeedback?) {
+        print("feedback: \(feedback)")
+    }
+}

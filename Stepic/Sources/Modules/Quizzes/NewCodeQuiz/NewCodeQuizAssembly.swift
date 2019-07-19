@@ -1,18 +1,12 @@
 import UIKit
 
-final class NewCodeQuizAssembly: Assembly {
-    var moduleInput: NewCodeQuizInputProtocol?
-
-    private weak var moduleOutput: NewCodeQuizOutputProtocol?
-
-    init(output: NewCodeQuizOutputProtocol? = nil) {
-        self.moduleOutput = output
-    }
+final class NewCodeQuizAssembly: QuizAssembly {
+    var moduleInput: QuizInputProtocol?
+    weak var moduleOutput: QuizOutputProtocol?
 
     func makeModule() -> UIViewController {
-        let provider = NewCodeQuizProvider()
         let presenter = NewCodeQuizPresenter()
-        let interactor = NewCodeQuizInteractor(presenter: presenter, provider: provider)
+        let interactor = NewCodeQuizInteractor(presenter: presenter)
         let viewController = NewCodeQuizViewController(interactor: interactor)
 
         presenter.viewController = viewController
