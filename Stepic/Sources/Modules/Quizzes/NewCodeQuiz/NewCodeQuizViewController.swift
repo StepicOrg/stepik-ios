@@ -1,7 +1,7 @@
 import UIKit
 
 protocol NewCodeQuizViewControllerProtocol: class {
-    func displaySomeActionResult(viewModel: NewCodeQuiz.SomeAction.ViewModel)
+    func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel)
 }
 
 final class NewCodeQuizViewController: UIViewController {
@@ -24,5 +24,7 @@ final class NewCodeQuizViewController: UIViewController {
 }
 
 extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewCodeQuiz.SomeAction.ViewModel) { }
+    func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel) {
+        print("\(#function) :: \(viewModel)")
+    }
 }

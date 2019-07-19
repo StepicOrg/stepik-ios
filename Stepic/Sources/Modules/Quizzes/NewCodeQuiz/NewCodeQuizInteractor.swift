@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol NewCodeQuizInteractorProtocol {
-    func doSomeAction(request: NewCodeQuiz.SomeAction.Request)
+    func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request)
 }
 
 final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
@@ -10,23 +10,41 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     private let presenter: NewCodeQuizPresenterProtocol
 
-    private var currentStatus: QuizStatus?
+    private var currentCode: String?
+    private var currentLanguage: String?
+    private var currentOptions: StepOptions?
 
-    init(
-        presenter: NewCodeQuizPresenterProtocol
-    ) {
+    init(presenter: NewCodeQuizPresenterProtocol) {
         self.presenter = presenter
     }
 
-    func doSomeAction(request: NewCodeQuiz.SomeAction.Request) { }
+    func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
+        self.currentCode = request.code
+        self.currentLanguage = request.language
 
-    enum Error: Swift.Error {
-        case something
+        let reply = CodeReply(code: request.code, languageName: request.language)
+        self.moduleOutput?.update(reply: reply)
+    }
+
+    private func presentNewData() {
+        guard let options = self.currentOptions else {
+            return
+        }
+
+        self.presenter.presentReply(
+            response: .init(
+                samples: options.samples.map { NewCodeQuiz.CodeSample.init(input: $0.input, output: $0.output) }
+            )
+        )
     }
 }
 
 extension NewCodeQuizInteractor: QuizInputProtocol {
     func update(reply: Reply?) {
+        defer {
+            self.presentNewData()
+        }
+
         guard let reply = reply else {
             return
         }
@@ -34,7 +52,8 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         self.moduleOutput?.update(reply: reply)
 
         if let reply = reply as? CodeReply {
-            print(reply)
+            self.currentCode = reply.code
+            self.currentLanguage = reply.languageName
             return
         }
 
@@ -42,17 +61,22 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
     }
 
     func update(status: QuizStatus?) {
-        self.currentStatus = status
+        print("status :: \(status)")
     }
 
     func update(dataset: Dataset?) {
         guard let dataset = dataset else {
             return
         }
-        print(dataset)
+        print("dataset :: \(dataset)")
     }
 
     func update(feedback: SubmissionFeedback?) {
         print("feedback: \(feedback)")
+    }
+
+    func update(options: StepOptions?) {
+        self.currentOptions = options
+        print("options :: \(options)")
     }
 }
