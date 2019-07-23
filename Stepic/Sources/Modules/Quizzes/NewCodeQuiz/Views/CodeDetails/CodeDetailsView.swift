@@ -14,7 +14,6 @@ extension CodeDetailsView {
     }
 }
 
-// TODO: Respect safe area layout gide
 final class CodeDetailsView: UIView {
     let appearance: Appearance
 
