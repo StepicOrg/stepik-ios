@@ -21,6 +21,7 @@ final class NewCodeQuizViewController: UIViewController {
 
     override func loadView() {
         let view = NewCodeQuizView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 }
@@ -36,5 +37,11 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
                 languages: viewModel.data.languages
             )
         )
+    }
+}
+
+extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
+    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: String) {
+        print(language)
     }
 }
