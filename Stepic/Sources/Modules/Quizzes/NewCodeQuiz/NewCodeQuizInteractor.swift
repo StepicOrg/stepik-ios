@@ -31,7 +31,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
-        let limit: NewCodeQuiz.CodeLimit = {
+        let codeLimit: NewCodeQuiz.CodeLimit = {
             if let currentLanguage = self.currentLanguage,
                let codeLanguage = CodeLanguage(rawValue: currentLanguage),
                let limit = options.limit(language: codeLanguage) {
@@ -43,7 +43,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 samples: options.samples.map { NewCodeQuiz.CodeSample(input: $0.input, output: $0.output) },
-                limit: limit,
+                limit: codeLimit,
                 languages: options.languages.map { $0.displayName }.sorted()
             )
         )
