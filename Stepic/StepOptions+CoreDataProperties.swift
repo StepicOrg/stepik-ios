@@ -10,6 +10,9 @@ import Foundation
 import CoreData
 
 extension StepOptions {
+    @NSManaged var managedExecutionTimeLimit: NSNumber?
+    @NSManaged var managedExecutionMemoryLimit: NSNumber?
+    
     @NSManaged var managedLimits: NSOrderedSet?
     @NSManaged var managedTemplates: NSOrderedSet?
     @NSManaged var managedSamples: NSOrderedSet?
@@ -22,6 +25,24 @@ extension StepOptions {
         self.init(entity: StepOptions.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
 
+    var executionTimeLimit: Double {
+        get {
+            return self.managedExecutionTimeLimit?.doubleValue ?? 0.0
+        }
+        set {
+            self.managedExecutionTimeLimit = newValue as NSNumber?
+        }
+    }
+
+    var executionMemoryLimit: Double {
+        get {
+            return self.managedExecutionMemoryLimit?.doubleValue ?? 0.0
+        }
+        set {
+            self.managedExecutionMemoryLimit = newValue as NSNumber?
+        }
+    }
+    
     var limits: [CodeLimit] {
         get {
             return (managedLimits?.array as? [CodeLimit]) ?? []

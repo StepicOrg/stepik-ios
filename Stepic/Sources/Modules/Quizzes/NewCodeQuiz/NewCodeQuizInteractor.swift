@@ -37,7 +37,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
                let limit = options.limit(language: codeLanguage) {
                 return .init(time: limit.time, memory: limit.memory)
             }
-            return .init(time: 1, memory: 256)
+            return .init(time: options.executionTimeLimit, memory: options.executionMemoryLimit)
         }()
 
         self.presenter.presentReply(
