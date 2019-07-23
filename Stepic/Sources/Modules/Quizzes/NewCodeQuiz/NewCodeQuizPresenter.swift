@@ -8,20 +8,32 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
     weak var viewController: NewCodeQuizViewControllerProtocol?
 
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
+        let codeLimit: NewCodeQuiz.CodeLimit = {
+            if let language = response.language,
+               let limit = response.options.limit(language: language) {
+                return .init(time: limit.time, memory: limit.memory)
+            }
+            return .init(time: response.options.executionTimeLimit, memory: response.options.executionMemoryLimit)
+        }()
+
         let viewModel = NewCodeQuizViewModel(
-            samples: self.processedCodeSamples(response.samples),
-            limit: response.limit,
-            languages: response.languages
+            code: response.code,
+            language: response.language?.displayName,
+            samples: response.options.samples.map { processCodeSample($0) },
+            limit: codeLimit,
+            languages: response.options.languages.map {
+                $0.displayName
+            }.sorted()
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
     }
 
-    private func processedCodeSamples(_ samples: [NewCodeQuiz.CodeSample]) -> [NewCodeQuiz.CodeSample] {
+    private func processCodeSample(_ sample: CodeSample) -> NewCodeQuiz.CodeSample {
         func processText(_ text: String) -> String {
             return text.replacingOccurrences(of: "<br>", with: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
-        return samples.map { .init(input: processText($0.input), output: processText($0.output)) }
+        return .init(input: processText(sample.input), output: processText(sample.output))
     }
 }

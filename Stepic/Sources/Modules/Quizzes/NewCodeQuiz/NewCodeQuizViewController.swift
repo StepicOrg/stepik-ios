@@ -29,14 +29,7 @@ final class NewCodeQuizViewController: UIViewController {
 extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
     func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel) {
         print("\(#function) :: \(viewModel)")
-
-        self.newCodeQuizView?.configure(
-            viewModel: .init(
-                samples: viewModel.data.samples,
-                limit: viewModel.data.limit,
-                languages: viewModel.data.languages
-            )
-        )
+        self.newCodeQuizView?.configure(viewModel: viewModel.data)
     }
 }
 

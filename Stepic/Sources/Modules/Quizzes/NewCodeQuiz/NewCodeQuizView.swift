@@ -48,7 +48,7 @@ final class NewCodeQuizView: UIView {
     }
 
     func configure(viewModel: NewCodeQuizViewModel) {
-        self.detailsView.configure(viewModel: .init(samples: viewModel.samples, limit: viewModel.limit))
+        self.detailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.languagePickerView.languages = viewModel.languages
     }
 }

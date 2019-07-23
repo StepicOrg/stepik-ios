@@ -53,8 +53,8 @@ final class CodeDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(viewModel: NewCodeQuizCodeDetailsViewModel) {
-        self.detailsContentView.configure(samples: viewModel.samples, limit: viewModel.limit)
+    func configure(samples: [NewCodeQuiz.CodeSample], limit: NewCodeQuiz.CodeLimit) {
+        self.detailsContentView.configure(samples: samples, limit: limit)
     }
 
     @objc

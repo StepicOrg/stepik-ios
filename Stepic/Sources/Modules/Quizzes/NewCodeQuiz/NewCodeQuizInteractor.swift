@@ -11,8 +11,9 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private let presenter: NewCodeQuizPresenterProtocol
 
     private var currentCode: String?
-    private var currentLanguage: String?
+    private var currentLanguage: CodeLanguage?
     private var currentOptions: StepOptions?
+    private var currentStatus: QuizStatus?
 
     init(presenter: NewCodeQuizPresenterProtocol) {
         self.presenter = presenter
@@ -20,9 +21,13 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
         self.currentCode = request.code
-        self.currentLanguage = request.language
+        self.currentLanguage = CodeLanguage(rawValue: request.language)
 
-        let reply = CodeReply(code: request.code, languageName: request.language)
+        guard let language = self.currentLanguage else {
+            fatalError("language should exists at this point")
+        }
+
+        let reply = CodeReply(code: request.code, language: language)
         self.moduleOutput?.update(reply: reply)
     }
 
@@ -31,20 +36,12 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
-        let codeLimit: NewCodeQuiz.CodeLimit = {
-            if let currentLanguage = self.currentLanguage,
-               let codeLanguage = CodeLanguage(rawValue: currentLanguage),
-               let limit = options.limit(language: codeLanguage) {
-                return .init(time: limit.time, memory: limit.memory)
-            }
-            return .init(time: options.executionTimeLimit, memory: options.executionMemoryLimit)
-        }()
-
         self.presenter.presentReply(
             response: .init(
-                samples: options.samples.map { NewCodeQuiz.CodeSample(input: $0.input, output: $0.output) },
-                limit: codeLimit,
-                languages: options.languages.map { $0.displayName }.sorted()
+                code: self.currentCode,
+                language: self.currentLanguage,
+                options: options,
+                status: self.currentStatus
             )
         )
     }
@@ -64,7 +61,7 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
 
         if let reply = reply as? CodeReply {
             self.currentCode = reply.code
-            self.currentLanguage = reply.languageName
+            self.currentLanguage = reply.language
             return
         }
 
@@ -72,22 +69,11 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
     }
 
     func update(status: QuizStatus?) {
-        print("status :: \(status)")
-    }
-
-    func update(dataset: Dataset?) {
-        guard let dataset = dataset else {
-            return
-        }
-        print("dataset :: \(dataset)")
-    }
-
-    func update(feedback: SubmissionFeedback?) {
-        print("feedback: \(feedback)")
+        self.currentStatus = status
+        self.presentNewData()
     }
 
     func update(options: StepOptions?) {
         self.currentOptions = options
-        print("options :: \(options)")
     }
 }

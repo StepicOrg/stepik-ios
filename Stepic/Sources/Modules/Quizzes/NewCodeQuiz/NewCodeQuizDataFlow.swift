@@ -4,9 +4,10 @@ enum NewCodeQuiz {
     /// Show quiz state
     enum ReplyLoad {
         struct Response {
-            let samples: [CodeSample]
-            let limit: CodeLimit
-            let languages: [String]
+            let code: String?
+            let language: CodeLanguage?
+            let options: StepOptions
+            let status: QuizStatus?
         }
 
         struct ViewModel {
