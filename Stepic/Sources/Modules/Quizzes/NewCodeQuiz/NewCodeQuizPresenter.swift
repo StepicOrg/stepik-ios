@@ -9,7 +9,8 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
 
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
         let viewModel = NewCodeQuizViewModel(
-            samples: response.samples
+            samples: response.samples,
+            limit: response.limit
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))

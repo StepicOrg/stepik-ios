@@ -31,9 +31,19 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
+        let limit: NewCodeQuiz.CodeLimit = {
+            if let currentLanguage = self.currentLanguage,
+               let codeLanguage = CodeLanguage(rawValue: currentLanguage),
+               let limit = options.limit(language: codeLanguage) {
+                return .init(time: limit.time, memory: limit.memory)
+            }
+            return .init(time: 1, memory: 256)
+        }()
+
         self.presenter.presentReply(
             response: .init(
-                samples: options.samples.map { NewCodeQuiz.CodeSample.init(input: $0.input, output: $0.output) }
+                samples: options.samples.map { NewCodeQuiz.CodeSample(input: $0.input, output: $0.output) },
+                limit: limit
             )
         )
     }

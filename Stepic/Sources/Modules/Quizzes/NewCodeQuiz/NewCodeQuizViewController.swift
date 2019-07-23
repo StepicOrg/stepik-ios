@@ -7,6 +7,8 @@ protocol NewCodeQuizViewControllerProtocol: class {
 final class NewCodeQuizViewController: UIViewController {
     private let interactor: NewCodeQuizInteractorProtocol
 
+    lazy var newCodeQuizView = self.view as? NewCodeQuizView
+
     init(interactor: NewCodeQuizInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
@@ -26,5 +28,12 @@ final class NewCodeQuizViewController: UIViewController {
 extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
     func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel) {
         print("\(#function) :: \(viewModel)")
+
+        self.newCodeQuizView?.configure(
+            viewModel: .init(
+                samples: viewModel.data.samples,
+                limit: viewModel.data.limit
+            )
+        )
     }
 }

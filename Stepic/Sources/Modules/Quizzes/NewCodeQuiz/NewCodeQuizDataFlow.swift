@@ -5,6 +5,7 @@ enum NewCodeQuiz {
     enum ReplyLoad {
         struct Response {
             let samples: [CodeSample]
+            let limit: CodeLimit
         }
 
         struct ViewModel {
@@ -25,5 +26,10 @@ enum NewCodeQuiz {
     struct CodeSample {
         let input: String
         let output: String
+    }
+
+    struct CodeLimit {
+        let time: TimeInterval
+        let memory: Double
     }
 }
