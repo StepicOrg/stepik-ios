@@ -12,9 +12,12 @@ extension CodeDetailsButton {
         let textFont = UIFont.systemFont(ofSize: 16)
         let backgroundColor = UIColor(hex: 0xF6F6F6)
     }
+
+    enum Animation {
+        static let iconRotationAnimationDuration: TimeInterval = 0.33
+    }
 }
 
-// TODO: Animate rightIcon on touch
 final class CodeDetailsButton: UIControl {
     let appearance: Appearance
 
@@ -41,6 +44,8 @@ final class CodeDetailsButton: UIControl {
         view.tintColor = self.appearance.mainColor
         return view
     }()
+
+    private var currentRotationAngle: CGFloat = 0
 
     override var isHighlighted: Bool {
         didSet {
@@ -69,11 +74,30 @@ final class CodeDetailsButton: UIControl {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    @objc
+    private func onClick() {
+        self.animateRightIconImageViewRotation()
+    }
+
+    private func animateRightIconImageViewRotation() {
+        self.rightIconImageView.layer.removeAllAnimations()
+        UIView.animate(withDuration: Animation.iconRotationAnimationDuration) {
+            if self.currentRotationAngle == 0 {
+                self.currentRotationAngle = CGFloat(Double.pi)
+                self.rightIconImageView.transform = CGAffineTransform(rotationAngle: self.currentRotationAngle)
+            } else {
+                self.currentRotationAngle = 0
+                self.rightIconImageView.transform = .identity
+            }
+        }
+    }
 }
 
 extension CodeDetailsButton: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
+        self.addTarget(self, action: #selector(self.onClick), for: .touchUpInside)
     }
 
     func addSubviews() {
