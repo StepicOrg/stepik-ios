@@ -10,8 +10,9 @@ extension CodeDetailsSampleItemView {
 
         let backgroundColor = UIColor(hex: 0xF6F6F6)
         let mainColor = UIColor.mainDark
+
         let titleFont = UIFont.systemFont(ofSize: 16)
-        let detailFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let detailFont = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .light)
     }
 }
 
@@ -60,7 +61,7 @@ final class CodeDetailsSampleItemView: UIView {
         let label = UILabel()
         label.font = self.appearance.detailFont
         label.textColor = self.appearance.mainColor
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
@@ -69,7 +70,7 @@ final class CodeDetailsSampleItemView: UIView {
         let label = UILabel()
         label.font = self.appearance.detailFont
         label.textColor = self.appearance.mainColor
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
@@ -145,7 +146,7 @@ extension CodeDetailsSampleItemView: ProgrammaticallyInitializableViewProtocol {
         self.inputIconImageView.translatesAutoresizingMaskIntoConstraints = false
         self.inputIconImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview()
             make.height.equalTo(self.appearance.iconSize.height)
             make.width.equalTo(self.appearance.iconSize.width)
         }
@@ -159,10 +160,9 @@ extension CodeDetailsSampleItemView: ProgrammaticallyInitializableViewProtocol {
         self.outputIconImageView.translatesAutoresizingMaskIntoConstraints = false
         self.outputIconImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.centerY.equalTo(self.outputLabel.snp.centerY)
+            make.top.equalToSuperview()
             make.height.equalTo(self.appearance.iconSize.height)
             make.width.equalTo(self.appearance.iconSize.width)
-            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
         }
 
         self.outputLabel.translatesAutoresizingMaskIntoConstraints = false
