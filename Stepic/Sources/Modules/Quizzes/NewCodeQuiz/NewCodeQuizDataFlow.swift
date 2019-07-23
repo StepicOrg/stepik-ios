@@ -6,6 +6,7 @@ enum NewCodeQuiz {
         struct Response {
             let samples: [CodeSample]
             let limit: CodeLimit
+            let languages: [String]
         }
 
         struct ViewModel {

@@ -43,7 +43,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 samples: options.samples.map { NewCodeQuiz.CodeSample(input: $0.input, output: $0.output) },
-                limit: limit
+                limit: limit,
+                languages: options.languages.map { $0.displayName }.sorted()
             )
         )
     }

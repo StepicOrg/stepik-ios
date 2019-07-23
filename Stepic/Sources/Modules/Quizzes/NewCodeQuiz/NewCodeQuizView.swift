@@ -1,12 +1,17 @@
 import SnapKit
 import UIKit
 
+protocol NewCodeQuizViewDelegate: class {
+    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: String)
+}
+
 extension NewCodeQuizView {
     struct Appearance { }
 }
 
 final class NewCodeQuizView: UIView {
     let appearance: Appearance
+    weak var delegate: NewCodeQuizViewDelegate?
 
     private lazy var detailsView: CodeDetailsView = {
         let codeDetailsView = CodeDetailsView()
@@ -15,6 +20,7 @@ final class NewCodeQuizView: UIView {
 
     private lazy var languagePickerView: CodeLanguagePickerView = {
         let languagePickerView = CodeLanguagePickerView()
+        languagePickerView.delegate = self
         return languagePickerView
     }()
 
@@ -43,6 +49,7 @@ final class NewCodeQuizView: UIView {
 
     func configure(viewModel: NewCodeQuizViewModel) {
         self.detailsView.configure(viewModel: .init(samples: viewModel.samples, limit: viewModel.limit))
+        self.languagePickerView.languages = viewModel.languages
     }
 }
 
@@ -58,5 +65,11 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
         self.stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+}
+
+extension NewCodeQuizView: CodeLanguagePickerViewDelegate {
+    func codeLanguagePickerView(_ view: CodeLanguagePickerView, didSelectLanguage language: String) {
+        self.delegate?.newCodeQuizView(self, didSelectLanguage: language)
     }
 }

@@ -1,6 +1,10 @@
 import SnapKit
 import UIKit
 
+protocol CodeLanguagePickerViewDelegate: class {
+    func codeLanguagePickerView(_ view: CodeLanguagePickerView, didSelectLanguage language: String)
+}
+
 extension CodeLanguagePickerView {
     struct Appearance {
         let separatorColor = UIColor(hex: 0xEAECF0)
@@ -11,13 +15,19 @@ extension CodeLanguagePickerView {
         let horizontalSpacing: CGFloat = 16
         let headerHeight: CGFloat = 44
 
+        let tableViewHeight: CGFloat = 192
+        let tableViewEstimatedRowHeight: CGFloat = 44
+
         let mainColor = UIColor.mainDark
         let titleTextFont = UIFont.systemFont(ofSize: 16)
     }
 }
 
 final class CodeLanguagePickerView: UIView {
+    private static let cellReuseIdentifier = "CodeLanguageCell"
+
     let appearance: Appearance
+    weak var delegate: CodeLanguagePickerViewDelegate?
 
     private lazy var iconImageView: UIImageView = {
         let image = UIImage(named: "code-quiz-select-language")
@@ -37,11 +47,29 @@ final class CodeLanguagePickerView: UIView {
 
     private lazy var headerContainerView = UIView()
 
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = self.appearance.tableViewEstimatedRowHeight
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CodeLanguagePickerView.cellReuseIdentifier)
+
+        return tableView
+    }()
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
                 self.makeSeparatorView(),
                 self.headerContainerView,
+                self.makeSeparatorView(),
+                self.tableView,
                 self.makeSeparatorView()
             ]
         )
@@ -49,9 +77,17 @@ final class CodeLanguagePickerView: UIView {
         return stackView
     }()
 
+    var onLanguageSelect: (() -> Void)?
+
     var title: String? {
         didSet {
             self.titleLabel.text = self.title
+        }
+    }
+
+    var languages: [String] = [] {
+        didSet {
+            self.tableView.reloadData()
         }
     }
 
@@ -116,5 +152,34 @@ extension CodeLanguagePickerView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
             make.centerY.equalTo(self.iconImageView.snp.centerY)
         }
+
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.tableViewHeight)
+        }
+    }
+}
+
+extension CodeLanguagePickerView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.languages.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: CodeLanguagePickerView.cellReuseIdentifier,
+            for: indexPath
+        )
+        cell.textLabel?.text = self.languages[indexPath.row]
+        cell.textLabel?.textColor = self.appearance.mainColor
+
+        return cell
+    }
+}
+
+extension CodeLanguagePickerView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.delegate?.codeLanguagePickerView(self, didSelectLanguage: self.languages[indexPath.row])
     }
 }

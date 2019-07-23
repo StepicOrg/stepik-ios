@@ -32,7 +32,8 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
         self.newCodeQuizView?.configure(
             viewModel: .init(
                 samples: viewModel.data.samples,
-                limit: viewModel.data.limit
+                limit: viewModel.data.limit,
+                languages: viewModel.data.languages
             )
         )
     }
