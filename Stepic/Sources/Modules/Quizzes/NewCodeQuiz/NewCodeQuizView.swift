@@ -24,8 +24,19 @@ final class NewCodeQuizView: UIView {
         return languagePickerView
     }()
 
+    private lazy var toolbarView: CodeToolbarView = {
+        let toolbarView = CodeToolbarView()
+        toolbarView.onPickLanguageButtonClick = {
+            print("onPickLanguageButtonClick")
+        }
+        toolbarView.onFullscreenButtonClick = {
+            print("onPickLanguageButtonClick")
+        }
+        return toolbarView
+    }()
+
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.detailsView, self.languagePickerView])
+        let stackView = UIStackView(arrangedSubviews: [self.detailsView, self.toolbarView, self.languagePickerView])
         stackView.axis = .vertical
         return stackView
     }()
@@ -50,6 +61,10 @@ final class NewCodeQuizView: UIView {
     func configure(viewModel: NewCodeQuizViewModel) {
         self.detailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.languagePickerView.languages = viewModel.languages
+
+        if let language = viewModel.language {
+            self.toolbarView.language = language
+        }
     }
 }
 

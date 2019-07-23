@@ -492,6 +492,7 @@
 		2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */; };
 		2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */; };
 		2C31A73C22E7065900D2A41E /* CodeLanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31A73B22E7065900D2A41E /* CodeLanguagePickerView.swift */; };
+		2C31A74022E7B0EB00D2A41E /* CodeToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31A73F22E7B0EB00D2A41E /* CodeToolbarView.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C331C5721734764007B0D01 /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
@@ -927,6 +928,7 @@
 		62E98E58E7BC6B6AF4881084 /* CourseReviewSummariesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */; };
 		62E98E591285E12F8D82759B /* ExploreBlockPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98D95D858F6D7A5D25EC4 /* ExploreBlockPlaceholderView.swift */; };
 		62E98E651364CDC640E357E7 /* CourseListsCollectionAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982F86EAE17AD1B857D39 /* CourseListsCollectionAssembly.swift */; };
+		62E98E679378F1C1D0652DD5 /* CodeToolbarLanguagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9818B54DA07703C68568B /* CodeToolbarLanguagePickerButton.swift */; };
 		62E98E72EB42F2A772BF9760 /* AchievementProgressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */; };
 		62E98E788CD3D0116562BF69 /* BaseExploreDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982BFC874A67BEB0019DA /* BaseExploreDataFlow.swift */; };
 		62E98E7E9187BE3A6599AB09 /* ContentLanguageSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9806A771FEF01F91F6F5D /* ContentLanguageSwitchButton.swift */; };
@@ -1572,6 +1574,7 @@
 		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C31A73B22E7065900D2A41E /* CodeLanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLanguagePickerView.swift; sourceTree = "<group>"; };
 		2C31A73D22E7372900D2A41E /* Model_step_options_execution_limits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_options_execution_limits.xcdatamodel; sourceTree = "<group>"; };
+		2C31A73F22E7B0EB00D2A41E /* CodeToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeToolbarView.swift; sourceTree = "<group>"; };
 		2C331C5621734764007B0D01 /* NotificationService+Streak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationService+Streak.swift"; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
 		2C35C4C81F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_m.plist; sourceTree = "<group>"; };
@@ -1811,6 +1814,7 @@
 		62E981584DC6ED05B532EEA8 /* CourseWidgetStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseWidgetStatsView.swift; sourceTree = "<group>"; };
 		62E98180244B0ED6E9EDA581 /* FullscreenCourseListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCourseListPresenter.swift; sourceTree = "<group>"; };
 		62E981805E34DA181141071B /* ContentLanguageSwitchInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageSwitchInteractor.swift; sourceTree = "<group>"; };
+		62E9818B54DA07703C68568B /* CodeToolbarLanguagePickerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeToolbarLanguagePickerButton.swift; sourceTree = "<group>"; };
 		62E9819721AE70E0BCAD1375 /* FullscreenCourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCourseListViewController.swift; sourceTree = "<group>"; };
 		62E981A02A8E071C5BA610E7 /* FullscreenCourseListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenCourseListView.swift; sourceTree = "<group>"; };
 		62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsPersistenceService.swift; sourceTree = "<group>"; };
@@ -3885,6 +3889,15 @@
 			path = LanguagePicker;
 			sourceTree = "<group>";
 		};
+		2C31A73E22E7B09D00D2A41E /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				62E9818B54DA07703C68568B /* CodeToolbarLanguagePickerButton.swift */,
+				2C31A73F22E7B0EB00D2A41E /* CodeToolbarView.swift */,
+			);
+			path = Toolbar;
+			sourceTree = "<group>";
+		};
 		2C32BAEC1F9636520003DD91 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -3963,6 +3976,7 @@
 				2C04740222E60623003050B7 /* CodeDetails */,
 				2C1B0F9A22E6865E00B43850 /* CodeEditor */,
 				2C31A73A22E7063400D2A41E /* LanguagePicker */,
+				2C31A73E22E7B09D00D2A41E /* Toolbar */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -6836,6 +6850,7 @@
 				2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */,
 				62E985D6A85E24E493C064E9 /* SettingsTableView.swift in Sources */,
 				62E98CB2C2F2B7AE44023FEA /* SettingsTableViewModel.swift in Sources */,
+				2C31A74022E7B0EB00D2A41E /* CodeToolbarView.swift in Sources */,
 				62E989CCBB953CEF37E17013 /* SettingsTableSectionFooterView.swift in Sources */,
 				62E98524AB7850FA81448B4A /* SeparatorView.swift in Sources */,
 				62E98E8F09C3C24A98858518 /* SettingsTableSectionHeaderView.swift in Sources */,
@@ -6884,6 +6899,7 @@
 				62E983DAA599AAF57CA06F76 /* NewCodeQuizViewModel.swift in Sources */,
 				62E98210E817755F7D840AA6 /* CodeDetailsButton.swift in Sources */,
 				62E984AC095744C7D0BEF9C3 /* CodeDetailsSampleItemView.swift in Sources */,
+				62E98E679378F1C1D0652DD5 /* CodeToolbarLanguagePickerButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
