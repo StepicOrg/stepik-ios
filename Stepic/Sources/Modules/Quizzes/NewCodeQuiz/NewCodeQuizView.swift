@@ -13,6 +13,17 @@ final class NewCodeQuizView: UIView {
         return codeDetailsView
     }()
 
+    private lazy var languagePickerView: CodeLanguagePickerView = {
+        let languagePickerView = CodeLanguagePickerView()
+        return languagePickerView
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.detailsView, self.languagePickerView])
+        stackView.axis = .vertical
+        return stackView
+    }()
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -39,12 +50,12 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
     func setupView() { }
 
     func addSubviews() {
-        self.addSubview(self.detailsView)
+        self.addSubview(self.stackView)
     }
 
     func makeConstraints() {
-        self.detailsView.translatesAutoresizingMaskIntoConstraints = false
-        self.detailsView.snp.makeConstraints { make in
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
