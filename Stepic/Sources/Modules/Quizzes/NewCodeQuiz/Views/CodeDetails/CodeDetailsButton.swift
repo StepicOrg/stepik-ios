@@ -77,10 +77,10 @@ final class CodeDetailsButton: UIControl {
 
     @objc
     private func onClick() {
-        self.animateRightIconImageViewRotation()
+        self.rotateRightIconImageView()
     }
 
-    private func animateRightIconImageViewRotation() {
+    private func rotateRightIconImageView() {
         self.rightIconImageView.layer.removeAllAnimations()
         UIView.animate(withDuration: Animation.iconRotationAnimationDuration) {
             if self.currentRotationAngle == 0 {
