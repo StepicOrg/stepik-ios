@@ -6,7 +6,12 @@ protocol NewCodeQuizViewDelegate: class {
 }
 
 extension NewCodeQuizView {
-    struct Appearance { }
+    struct Appearance {
+        let separatorColor = UIColor(hex: 0xEAECF0)
+        let separatorHeight: CGFloat = 1
+
+        let codeTextViewHeight: CGFloat = 192
+    }
 }
 
 final class NewCodeQuizView: UIView {
@@ -35,16 +40,34 @@ final class NewCodeQuizView: UIView {
         return toolbarView
     }()
 
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.detailsView, self.toolbarView, self.languagePickerView])
+    private lazy var codeTextView = CodeTextView()
+
+    private lazy var codeEditorStackView: UIStackView = {
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                self.makeSeparatorView(),
+                self.codeTextView,
+                self.makeSeparatorView()
+            ]
+        )
         stackView.axis = .vertical
         return stackView
     }()
 
-    init(
-        frame: CGRect = .zero,
-        appearance: Appearance = Appearance()
-    ) {
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                self.detailsView,
+                self.toolbarView,
+                self.codeEditorStackView,
+                self.languagePickerView
+            ]
+        )
+        stackView.axis = .vertical
+        return stackView
+    }()
+
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
 
@@ -65,6 +88,19 @@ final class NewCodeQuizView: UIView {
         if let language = viewModel.language {
             self.toolbarView.language = language
         }
+
+        self.codeTextView.text = viewModel.code
+    }
+
+    // MARK: - Private API
+
+    private func makeSeparatorView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        view.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
+        }
+        return view
     }
 }
 
@@ -79,6 +115,11 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.codeTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.codeTextView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.codeTextViewHeight)
         }
     }
 }
