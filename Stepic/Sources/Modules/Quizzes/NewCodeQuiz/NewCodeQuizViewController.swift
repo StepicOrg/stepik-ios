@@ -36,4 +36,8 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
     func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: String) {
         self.interactor.doLanguageSelect(request: .init(language: language))
     }
+
+    func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView) {
+        print("\(#function)")
+    }
 }

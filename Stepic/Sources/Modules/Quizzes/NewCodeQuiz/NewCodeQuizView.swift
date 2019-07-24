@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewCodeQuizViewDelegate: class {
     func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: String)
+    func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)
 }
 
 extension NewCodeQuizView {
@@ -18,10 +19,7 @@ final class NewCodeQuizView: UIView {
     let appearance: Appearance
     weak var delegate: NewCodeQuizViewDelegate?
 
-    private lazy var detailsView: CodeDetailsView = {
-        let codeDetailsView = CodeDetailsView()
-        return codeDetailsView
-    }()
+    private lazy var codeDetailsView = CodeDetailsView()
 
     private lazy var languagePickerView: CodeLanguagePickerView = {
         let languagePickerView = CodeLanguagePickerView()
@@ -34,8 +32,12 @@ final class NewCodeQuizView: UIView {
         toolbarView.onPickLanguageButtonClick = {
             print("onPickLanguageButtonClick")
         }
-        toolbarView.onFullscreenButtonClick = {
-            print("onPickLanguageButtonClick")
+        toolbarView.onFullscreenButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.newCodeQuizViewDidRequestFullscreen(strongSelf)
         }
         return toolbarView
     }()
@@ -57,7 +59,7 @@ final class NewCodeQuizView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
-                self.detailsView,
+                self.codeDetailsView,
                 self.toolbarView,
                 self.codeEditorStackView,
                 self.languagePickerView
@@ -83,6 +85,7 @@ final class NewCodeQuizView: UIView {
 
     func configure(viewModel: NewCodeQuizViewModel) {
         self.detailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
+        self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.languagePickerView.languages = viewModel.languages
 
         if let language = viewModel.language {
