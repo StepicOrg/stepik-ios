@@ -6,9 +6,10 @@ struct NewCodeQuizViewModel {
     let samples: [NewCodeQuiz.CodeSample]
     let limit: NewCodeQuiz.CodeLimit
     let languages: [String]
-    let finalState: State?
+    let finalState: State
 
     enum State {
+        case `default`
         case correct
         case wrong
         case evaluation

@@ -8,13 +8,13 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
     weak var viewController: NewCodeQuizViewControllerProtocol?
 
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
-        let state: NewCodeQuizViewModel.State? = {
+        let state: NewCodeQuizViewModel.State = {
             if response.language == nil {
                 return .noLanguage
             }
 
             guard let status = response.status else {
-                return nil
+                return .default
             }
 
             switch status {
