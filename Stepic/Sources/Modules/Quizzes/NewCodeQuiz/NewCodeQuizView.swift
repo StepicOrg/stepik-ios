@@ -93,7 +93,34 @@ final class NewCodeQuizView: UIView {
     }
 
     func configure(viewModel: NewCodeQuizViewModel) {
-        self.detailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
+        switch viewModel.finalState {
+        case .default:
+            self.languagePickerView.isHidden = true
+            self.toolbarView.isHidden = false
+            self.codeEditorStackView.isHidden = false
+            self.setActionControlsEnabled(true)
+        case .correct:
+            self.languagePickerView.isHidden = true
+            self.toolbarView.isHidden = false
+            self.codeEditorStackView.isHidden = false
+            self.setActionControlsEnabled(false)
+        case .wrong:
+            self.languagePickerView.isHidden = true
+            self.toolbarView.isHidden = false
+            self.codeEditorStackView.isHidden = false
+            self.setActionControlsEnabled(false)
+        case .evaluation:
+            self.languagePickerView.isHidden = true
+            self.toolbarView.isHidden = false
+            self.codeEditorStackView.isHidden = false
+            self.setActionControlsEnabled(false)
+        case .noLanguage:
+            self.languagePickerView.isHidden = false
+            self.toolbarView.isHidden = true
+            self.codeEditorStackView.isHidden = true
+            self.setActionControlsEnabled(false)
+        }
+
         self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.languagePickerView.languages = viewModel.languages
         self.toolbarView.language = viewModel.language
