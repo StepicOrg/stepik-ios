@@ -38,6 +38,13 @@ final class CodeToolbarView: UIView {
         }
     }
 
+    var isEnabled = true {
+        didSet {
+            self.languagePickerButton.isEnabled = self.isEnabled
+            self.fullscreenButton.isEnabled = self.isEnabled
+        }
+    }
+
     var onPickLanguageButtonClick: (() -> Void)?
     var onFullscreenButtonClick: (() -> Void)?
 

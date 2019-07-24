@@ -103,6 +103,11 @@ final class NewCodeQuizView: UIView {
 
     // MARK: - Private API
 
+    private func setActionControlsEnabled(_ enabled: Bool) {
+        self.toolbarView.isEnabled = enabled
+        self.codeTextView.isEditable = enabled
+    }
+
     private func makeSeparatorView() -> UIView {
         let view = UIView()
         view.backgroundColor = self.appearance.separatorColor

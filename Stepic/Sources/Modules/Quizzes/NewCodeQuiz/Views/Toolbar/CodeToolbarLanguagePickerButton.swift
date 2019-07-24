@@ -44,6 +44,13 @@ final class CodeToolbarLanguagePickerButton: UIControl {
         }
     }
 
+    override var isEnabled: Bool {
+        didSet {
+            self.textLabel.alpha = self.isEnabled ? 1.0 : 0.5
+            self.imageView.alpha = self.isEnabled ? 1.0 : 0.5
+        }
+    }
+
     var language: String? {
         didSet {
             self.textLabel.text = self.language
