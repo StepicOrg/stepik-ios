@@ -7042,7 +7042,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECD9168AF529D0D527B1DCDB /* Pods-StepicTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -7064,7 +7063,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C1049108DA5FB2370275330 /* Pods-StepicTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -7248,7 +7246,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 49B8797DC84D64C5BAA84E76 /* Pods-Stepic.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
@@ -7279,7 +7276,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D109E72D69B31373C97237F8 /* Pods-Stepic.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stepic/Stepic.entitlements;
