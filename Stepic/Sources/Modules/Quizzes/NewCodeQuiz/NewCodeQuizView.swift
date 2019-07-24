@@ -11,7 +11,7 @@ extension NewCodeQuizView {
         let separatorColor = UIColor(hex: 0xEAECF0)
         let separatorHeight: CGFloat = 1
 
-        let codeTextViewHeight: CGFloat = 192
+        let codeTextViewHeight: CGFloat = 236
     }
 }
 
@@ -29,8 +29,17 @@ final class NewCodeQuizView: UIView {
 
     private lazy var toolbarView: CodeToolbarView = {
         let toolbarView = CodeToolbarView()
-        toolbarView.onPickLanguageButtonClick = {
-            print("onPickLanguageButtonClick")
+        toolbarView.onPickLanguageButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            if strongSelf.languagePickerView.languages.isEmpty {
+                strongSelf.toolbarView.toggleLanguagePickerButton()
+            } else {
+                strongSelf.languagePickerView.isHidden.toggle()
+                strongSelf.codeEditorStackView.isHidden = !strongSelf.languagePickerView.isHidden
+            }
         }
         toolbarView.onFullscreenButtonClick = { [weak self] in
             guard let strongSelf = self else {
@@ -87,11 +96,7 @@ final class NewCodeQuizView: UIView {
         self.detailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.languagePickerView.languages = viewModel.languages
-
-        if let language = viewModel.language {
-            self.toolbarView.language = language
-        }
-
+        self.toolbarView.language = viewModel.language
         self.codeTextView.language = viewModel.language
         self.codeTextView.text = viewModel.code
     }
@@ -131,5 +136,6 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
 extension NewCodeQuizView: CodeLanguagePickerViewDelegate {
     func codeLanguagePickerView(_ view: CodeLanguagePickerView, didSelectLanguage language: String) {
         self.delegate?.newCodeQuizView(self, didSelectLanguage: language)
+        self.toolbarView.collapseLanguagePickerButton()
     }
 }

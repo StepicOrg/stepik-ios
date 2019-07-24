@@ -55,6 +55,18 @@ final class CodeToolbarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func collapseLanguagePickerButton() {
+        self.languagePickerButton.collapse()
+    }
+
+    func toggleLanguagePickerButton() {
+        if self.languagePickerButton.isCollapsed {
+            self.languagePickerButton.expand()
+        } else {
+            self.languagePickerButton.collapse()
+        }
+    }
+
     // MARK: - Private API
 
     @objc

@@ -50,6 +50,14 @@ final class CodeToolbarLanguagePickerButton: UIControl {
         }
     }
 
+    var isExpanded: Bool {
+        return self.currentRotationAngle != 0
+    }
+
+    var isCollapsed: Bool {
+        return self.currentRotationAngle == 0
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -64,17 +72,29 @@ final class CodeToolbarLanguagePickerButton: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc
-    private func onClick() {
+    func expand() {
+        self.currentRotationAngle = CGFloat(Double.pi)
+        self.rotateImageViewWithAnimation()
+    }
+
+    func collapse() {
+        self.currentRotationAngle = 0
+        self.rotateImageViewWithAnimation()
+    }
+
+    private func rotateImageViewWithAnimation() {
         self.imageView.layer.removeAllAnimations()
         UIView.animate(withDuration: Animation.iconRotationAnimationDuration) {
-            if self.currentRotationAngle == 0 {
-                self.currentRotationAngle = CGFloat(Double.pi)
-                self.imageView.transform = CGAffineTransform(rotationAngle: self.currentRotationAngle)
-            } else {
-                self.currentRotationAngle = 0
-                self.imageView.transform = .identity
-            }
+            self.imageView.transform = CGAffineTransform(rotationAngle: self.currentRotationAngle)
+        }
+    }
+
+    @objc
+    private func onClick() {
+        if self.isCollapsed {
+            self.expand()
+        } else {
+            self.collapse()
         }
     }
 }
