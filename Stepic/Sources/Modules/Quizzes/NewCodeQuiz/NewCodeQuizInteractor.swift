@@ -13,7 +13,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     private var currentCode: String? {
         didSet {
-            self.updateTemplate()
+            self.updateUserCodeTemplate()
         }
     }
     private var currentLanguage: CodeLanguage?
@@ -80,9 +80,9 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         )
     }
 
-    private func updateTemplate() {
-        guard let code = self.currentCode,
-              let options = self.currentOptions,
+    private func updateUserCodeTemplate() {
+        guard let options = self.currentOptions,
+              let code = self.currentCode,
               let language = self.currentLanguage else {
             return
         }
@@ -112,8 +112,8 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         self.moduleOutput?.update(reply: reply)
 
         if let reply = reply as? CodeReply {
-            self.currentCode = reply.code
             self.currentLanguage = reply.language
+            self.currentCode = reply.code
             return
         }
 
