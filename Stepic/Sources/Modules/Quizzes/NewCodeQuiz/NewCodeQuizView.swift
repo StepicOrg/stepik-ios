@@ -89,6 +89,7 @@ final class NewCodeQuizView: UIView {
             self.toolbarView.language = language
         }
 
+        self.codeTextView.language = viewModel.language
         self.codeTextView.text = viewModel.code
     }
 

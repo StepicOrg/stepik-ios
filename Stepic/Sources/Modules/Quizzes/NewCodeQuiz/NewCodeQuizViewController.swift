@@ -28,13 +28,12 @@ final class NewCodeQuizViewController: UIViewController {
 
 extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
     func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel) {
-        print("\(#function) :: \(viewModel)")
         self.newCodeQuizView?.configure(viewModel: viewModel.data)
     }
 }
 
 extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
     func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: String) {
-        print(language)
+        self.interactor.doLanguageSelect(request: .init(language: language))
     }
 }

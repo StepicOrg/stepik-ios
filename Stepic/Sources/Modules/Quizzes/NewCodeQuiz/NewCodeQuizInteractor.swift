@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol NewCodeQuizInteractorProtocol {
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request)
+    func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request)
 }
 
 final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
@@ -10,7 +11,11 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     private let presenter: NewCodeQuizPresenterProtocol
 
-    private var currentCode: String?
+    private var currentCode: String? {
+        didSet {
+            self.updateTemplate()
+        }
+    }
     private var currentLanguage: CodeLanguage?
     private var currentOptions: StepOptions?
     private var currentStatus: QuizStatus?
@@ -31,6 +36,35 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.moduleOutput?.update(reply: reply)
     }
 
+    func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request) {
+        defer {
+            self.presentNewData()
+        }
+
+        AnalyticsReporter.reportEvent(
+            AnalyticsEvents.Code.languageChosen,
+            parameters: [
+                "size": "standard",
+                "language": request.language
+            ]
+        )
+
+        self.currentLanguage = CodeLanguage(rawValue: request.language)
+
+        guard let options = self.currentOptions,
+              let language = self.currentLanguage else {
+            return
+        }
+
+        if let userTemplate = options.template(language: language, userGenerated: true) {
+            self.currentCode = userTemplate.templateString
+        } else if let template = options.template(language: language, userGenerated: false) {
+            self.currentCode = template.templateString
+        }
+    }
+
+    // MARK: - Private API
+
     private func presentNewData() {
         guard let options = self.currentOptions else {
             return
@@ -44,6 +78,24 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
                 status: self.currentStatus
             )
         )
+    }
+
+    private func updateTemplate() {
+        guard let code = self.currentCode,
+              let options = self.currentOptions,
+              let language = self.currentLanguage else {
+            return
+        }
+
+        if let userTemplate = options.template(language: language, userGenerated: true) {
+            userTemplate.templateString = code
+        } else {
+            let newTemplate = CodeTemplate(language: language, template: code)
+            newTemplate.isUserGenerated = true
+            options.templates += [newTemplate]
+        }
+
+        CoreDataHelper.instance.save()
     }
 }
 

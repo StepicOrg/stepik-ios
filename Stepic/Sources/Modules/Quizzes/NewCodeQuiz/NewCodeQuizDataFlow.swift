@@ -23,6 +23,13 @@ enum NewCodeQuiz {
         }
     }
 
+    /// Select code language
+    enum LanguageSelect {
+        struct Request {
+            let language: String
+        }
+    }
+
     // MARK: - Common structs
 
     struct CodeSample {

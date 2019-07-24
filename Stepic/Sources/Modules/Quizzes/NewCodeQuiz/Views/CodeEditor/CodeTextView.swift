@@ -1,3 +1,4 @@
+import Highlightr
 import UIKit
 
 final class CodeTextView: UITextView {
@@ -5,6 +6,18 @@ final class CodeTextView: UITextView {
 
     // swiftlint:disable:next force_cast
     private lazy var codeTextViewLayoutManager = self.layoutManager as! CodeTextViewLayoutManager
+
+    var language: String? {
+        didSet {
+            guard self.language != oldValue,
+                  let language = self.language,
+                  let codeAttributedString = self.codeTextViewLayoutManager.textStorage as? CodeAttributedString else {
+                return
+            }
+
+            codeAttributedString.language = CodeLanguage(rawValue: language)?.highlightr
+        }
+    }
 
     var lineNumberFont: UIFont {
         get {
@@ -47,13 +60,16 @@ final class CodeTextView: UITextView {
     }
 
     init(lineNumberFont: UIFont = .systemFont(ofSize: 10), lineNumberTextColor: UIColor = .white) {
-        let textStorage = NSTextStorage()
+        let textStorage = CodeAttributedString()
+        textStorage.language = self.language
+
         let layoutManager = CodeTextViewLayoutManager(
             lineNumberFont: lineNumberFont,
             lineNumberTextColor: lineNumberTextColor
         )
         let textContainer = NSTextContainer()
         textContainer.widthTracksTextView = true
+        // Exclude (move right) the line number gutter from the display area of the text container.
         textContainer.exclusionPaths = [
             UIBezierPath(
                 rect: CGRect(
@@ -68,6 +84,7 @@ final class CodeTextView: UITextView {
 
         super.init(frame: .zero, textContainer: textContainer)
 
+        layoutManager.delegate = self
         self.contentMode = .redraw
     }
 
@@ -94,5 +111,17 @@ final class CodeTextView: UITextView {
         }
 
         super.draw(rect)
+    }
+}
+
+extension CodeTextView: NSLayoutManagerDelegate {
+    func layoutManager(
+        _ layoutManager: NSLayoutManager,
+        didCompleteLayoutFor textContainer: NSTextContainer?,
+        atEnd layoutFinishedFlag: Bool
+    ) {
+        if layoutFinishedFlag {
+            self.setNeedsDisplay()
+        }
     }
 }
