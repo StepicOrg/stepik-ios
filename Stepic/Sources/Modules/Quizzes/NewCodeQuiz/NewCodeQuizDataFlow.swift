@@ -19,7 +19,6 @@ enum NewCodeQuiz {
     /// Convert code data to reply
     enum ReplyConvert {
         struct Request {
-            let language: CodeLanguage
             let code: String
         }
     }

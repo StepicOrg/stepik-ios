@@ -4,6 +4,7 @@ import UIKit
 protocol NewCodeQuizViewDelegate: class {
     func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage)
     func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)
+    func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String)
 }
 
 extension NewCodeQuizView {
@@ -51,13 +52,17 @@ final class NewCodeQuizView: UIView {
         return toolbarView
     }()
 
-    private lazy var codeTextView = CodeTextView()
+    private lazy var codeEditorView: CodeEditorView = {
+        let codeEditorView = CodeEditorView()
+        codeEditorView.delegate = self
+        return codeEditorView
+    }()
 
     private lazy var codeEditorStackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
                 self.makeSeparatorView(),
-                self.codeTextView,
+                self.codeEditorView,
                 self.makeSeparatorView()
             ]
         )
@@ -130,16 +135,16 @@ final class NewCodeQuizView: UIView {
         self.languagePickerView.languages = viewModel.languages.map { $0.rawValue }.sorted()
         self.toolbarView.language = viewModel.language?.rawValue
 
-        self.codeTextView.language = viewModel.language
-        self.codeTextView.text = viewModel.code
-        self.codeTextView.updateTheme(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font)
+        self.codeEditorView.language = viewModel.language
+        self.codeEditorView.code = viewModel.code
+        self.codeEditorView.theme = .init(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font)
     }
 
     // MARK: - Private API
 
     private func setActionControlsEnabled(_ enabled: Bool) {
         self.toolbarView.isEnabled = enabled
-        self.codeTextView.isEditable = enabled
+        self.codeEditorView.isEnabled = enabled
     }
 
     private func makeSeparatorView() -> UIView {
@@ -153,7 +158,8 @@ final class NewCodeQuizView: UIView {
 }
 
 extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
+    func setupView() {
+    }
 
     func addSubviews() {
         self.addSubview(self.stackView)
@@ -165,8 +171,8 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
             make.edges.equalToSuperview()
         }
 
-        self.codeTextView.translatesAutoresizingMaskIntoConstraints = false
-        self.codeTextView.snp.makeConstraints { make in
+        self.codeEditorView.translatesAutoresizingMaskIntoConstraints = false
+        self.codeEditorView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.codeTextViewHeight)
         }
     }
@@ -180,5 +186,11 @@ extension NewCodeQuizView: CodeLanguagePickerViewDelegate {
 
         self.delegate?.newCodeQuizView(self, didSelectLanguage: codeLanguage)
         self.toolbarView.collapseLanguagePickerButton()
+    }
+}
+
+extension NewCodeQuizView: CodeEditorViewDelegate {
+    func codeEditorViewDidChange(_ codeEditorView: CodeEditorView) {
+        self.delegate?.newCodeQuizView(self, didUpdateCode: codeEditorView.code ?? "")
     }
 }

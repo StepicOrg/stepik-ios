@@ -28,10 +28,13 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
-        self.currentCode = request.code
-        self.currentLanguageName = request.language.rawValue
+        guard let codeLanguage = self.currentCodeLanguage else {
+            return print("NewCodeQuizInteractor :: code language should be selected at this point.")
+        }
 
-        let reply = CodeReply(code: request.code, languageName: request.language.rawValue)
+        self.currentCode = request.code
+
+        let reply = CodeReply(code: request.code, language: codeLanguage)
         self.moduleOutput?.update(reply: reply)
     }
 

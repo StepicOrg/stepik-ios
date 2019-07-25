@@ -36,7 +36,7 @@ class CodeReply: Reply {
         language = CodeLanguage(rawValue: languageName)
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return ["code": code, "language": languageName]
     }
 }

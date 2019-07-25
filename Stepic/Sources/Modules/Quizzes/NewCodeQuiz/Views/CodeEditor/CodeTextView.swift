@@ -7,11 +7,11 @@ final class CodeTextView: UITextView {
     // swiftlint:disable:next force_cast
     private lazy var codeTextViewLayoutManager = self.layoutManager as! CodeTextViewLayoutManager
 
-    var language: CodeLanguage? {
+    var language: String? {
         didSet {
             if self.language != oldValue,
                let textStorage = self.layoutManager.textStorage as? CodeAttributedString {
-                textStorage.language = self.language?.highlightr
+                textStorage.language = self.language
             }
         }
     }
@@ -58,7 +58,7 @@ final class CodeTextView: UITextView {
 
     init(lineNumberFont: UIFont = .systemFont(ofSize: 10), lineNumberTextColor: UIColor = .white) {
         let textStorage = CodeAttributedString()
-        textStorage.language = self.language?.highlightr
+        textStorage.language = self.language
 
         let layoutManager = CodeTextViewLayoutManager(
             lineNumberFont: lineNumberFont,
