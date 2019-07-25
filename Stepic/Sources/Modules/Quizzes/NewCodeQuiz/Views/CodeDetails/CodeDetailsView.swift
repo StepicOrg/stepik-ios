@@ -24,7 +24,12 @@ final class CodeDetailsView: UIView {
         return detailsButton
     }()
 
-    private lazy var detailsContentView = CodeDetailsContentView()
+    private lazy var detailsContentView: CodeDetailsContentView = {
+        let view = CodeDetailsContentView()
+        view.isHidden = true
+        view.alpha = 0
+        return view
+    }()
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.detailsButton, self.detailsContentView])
@@ -60,6 +65,7 @@ final class CodeDetailsView: UIView {
     @objc
     private func detailsButtonClicked() {
         UIView.animate(withDuration: Animation.appearanceAnimationDuration) {
+            self.detailsContentView.alpha = self.isDetailsHidden ? 1 : 0
             self.isDetailsHidden.toggle()
         }
     }
@@ -68,7 +74,6 @@ final class CodeDetailsView: UIView {
 extension CodeDetailsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
-        self.isDetailsHidden = true
     }
 
     func addSubviews() {
