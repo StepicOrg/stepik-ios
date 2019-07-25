@@ -7,9 +7,6 @@ protocol CodeLanguagePickerViewDelegate: class {
 
 extension CodeLanguagePickerView {
     struct Appearance {
-        let separatorColor = UIColor(hex: 0xEAECF0)
-        let separatorHeight: CGFloat = 1
-
         let insets = LayoutInsets(left: 16, right: 16)
         let iconSize = CGSize(width: 16, height: 16)
         let horizontalSpacing: CGFloat = 16
@@ -66,11 +63,11 @@ final class CodeLanguagePickerView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
-                self.makeSeparatorView(),
+                SeparatorView(),
                 self.headerContainerView,
-                self.makeSeparatorView(),
+                SeparatorView(),
                 self.tableView,
-                self.makeSeparatorView()
+                SeparatorView()
             ]
         )
         stackView.axis = .vertical
@@ -103,15 +100,6 @@ final class CodeLanguagePickerView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    private func makeSeparatorView() -> UIView {
-        let view = UIView()
-        view.backgroundColor = self.appearance.separatorColor
-        view.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.separatorHeight)
-        }
-        return view
     }
 }
 
