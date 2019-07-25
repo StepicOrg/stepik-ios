@@ -6,6 +6,7 @@ enum NewCodeQuiz {
         struct Response {
             let code: String?
             let language: CodeLanguage?
+            let languageName: String?
             let options: StepOptions
             let status: QuizStatus?
         }
@@ -18,7 +19,7 @@ enum NewCodeQuiz {
     /// Convert code data to reply
     enum ReplyConvert {
         struct Request {
-            let language: String
+            let language: CodeLanguage
             let code: String
         }
     }
@@ -26,7 +27,7 @@ enum NewCodeQuiz {
     /// Select code language
     enum LanguageSelect {
         struct Request {
-            let language: String
+            let language: CodeLanguage
         }
     }
 

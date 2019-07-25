@@ -7,15 +7,12 @@ final class CodeTextView: UITextView {
     // swiftlint:disable:next force_cast
     private lazy var codeTextViewLayoutManager = self.layoutManager as! CodeTextViewLayoutManager
 
-    var language: String? {
+    var language: CodeLanguage? {
         didSet {
-            guard self.language != oldValue,
-                  let language = self.language,
-                  let codeAttributedString = self.codeTextViewLayoutManager.textStorage as? CodeAttributedString else {
-                return
+            if self.language != oldValue,
+               let textStorage = self.layoutManager.textStorage as? CodeAttributedString {
+                textStorage.language = self.language?.highlightr
             }
-
-            codeAttributedString.language = CodeLanguage(rawValue: language)?.highlightr
         }
     }
 
@@ -61,7 +58,7 @@ final class CodeTextView: UITextView {
 
     init(lineNumberFont: UIFont = .systemFont(ofSize: 10), lineNumberTextColor: UIColor = .white) {
         let textStorage = CodeAttributedString()
-        textStorage.language = self.language
+        textStorage.language = self.language?.highlightr
 
         let layoutManager = CodeTextViewLayoutManager(
             lineNumberFont: lineNumberFont,
@@ -111,6 +108,21 @@ final class CodeTextView: UITextView {
         }
 
         super.draw(rect)
+    }
+
+    func updateTheme(name: String, font: UIFont) {
+        guard let textStorage = self.layoutManager.textStorage as? CodeAttributedString else {
+            return
+        }
+
+        textStorage.highlightr.setTheme(to: name)
+
+        if let theme = textStorage.highlightr.theme {
+            theme.setCodeFont(font)
+            textStorage.highlightr.theme = theme
+
+            self.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
+        }
     }
 }
 

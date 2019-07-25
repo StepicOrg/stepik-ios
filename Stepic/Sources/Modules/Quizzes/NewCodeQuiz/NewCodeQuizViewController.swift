@@ -33,7 +33,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
 }
 
 extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
-    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: String) {
+    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage) {
         self.interactor.doLanguageSelect(request: .init(language: language))
     }
 

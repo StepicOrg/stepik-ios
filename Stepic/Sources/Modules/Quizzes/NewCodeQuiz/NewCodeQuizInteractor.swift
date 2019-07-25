@@ -16,7 +16,10 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             self.updateUserCodeTemplate()
         }
     }
-    private var currentLanguage: CodeLanguage?
+    private var currentLanguageName: String?
+    private var currentCodeLanguage: CodeLanguage? {
+        return CodeLanguage(rawValue: self.currentLanguageName ?? "")
+    }
     private var currentOptions: StepOptions?
     private var currentStatus: QuizStatus?
 
@@ -26,13 +29,9 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
         self.currentCode = request.code
-        self.currentLanguage = CodeLanguage(rawValue: request.language)
+        self.currentLanguageName = request.language.rawValue
 
-        guard let language = self.currentLanguage else {
-            fatalError("language should exists at this point")
-        }
-
-        let reply = CodeReply(code: request.code, language: language)
+        let reply = CodeReply(code: request.code, languageName: request.language.rawValue)
         self.moduleOutput?.update(reply: reply)
     }
 
@@ -49,16 +48,15 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             ]
         )
 
-        self.currentLanguage = CodeLanguage(rawValue: request.language)
+        self.currentLanguageName = request.language.rawValue
 
-        guard let options = self.currentOptions,
-              let language = self.currentLanguage else {
+        guard let options = self.currentOptions else {
             return
         }
 
-        if let userTemplate = options.template(language: language, userGenerated: true) {
+        if let userTemplate = options.template(language: request.language, userGenerated: true) {
             self.currentCode = userTemplate.templateString
-        } else if let template = options.template(language: language, userGenerated: false) {
+        } else if let template = options.template(language: request.language, userGenerated: false) {
             self.currentCode = template.templateString
         }
     }
@@ -73,7 +71,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 code: self.currentCode,
-                language: self.currentLanguage,
+                language: self.currentCodeLanguage,
+                languageName: self.currentLanguageName,
                 options: options,
                 status: self.currentStatus
             )
@@ -83,14 +82,14 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private func updateUserCodeTemplate() {
         guard let options = self.currentOptions,
               let code = self.currentCode,
-              let language = self.currentLanguage else {
+              let codeLanguage = self.currentCodeLanguage else {
             return
         }
 
-        if let userTemplate = options.template(language: language, userGenerated: true) {
+        if let userTemplate = options.template(language: codeLanguage, userGenerated: true) {
             userTemplate.templateString = code
         } else {
-            let newTemplate = CodeTemplate(language: language, template: code)
+            let newTemplate = CodeTemplate(language: codeLanguage, template: code)
             newTemplate.isUserGenerated = true
             options.templates += [newTemplate]
         }
@@ -106,13 +105,15 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         }
 
         guard let reply = reply else {
+            self.currentLanguageName = nil
+            self.currentCode = nil
             return
         }
 
         self.moduleOutput?.update(reply: reply)
 
         if let reply = reply as? CodeReply {
-            self.currentLanguage = reply.language
+            self.currentLanguageName = reply.languageName
             self.currentCode = reply.code
             return
         }

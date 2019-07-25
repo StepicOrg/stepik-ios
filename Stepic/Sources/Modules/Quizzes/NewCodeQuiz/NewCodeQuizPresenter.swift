@@ -9,6 +9,9 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
 
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
         let state: NewCodeQuizViewModel.State = {
+            if response.languageName != response.language?.rawValue {
+                return .notSupportedLanguage
+            }
             if response.language == nil {
                 return .noLanguage
             }
@@ -28,19 +31,27 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
         }()
 
         let codeLimit: NewCodeQuiz.CodeLimit = {
-            if let language = response.language,
-               let limit = response.options.limit(language: language) {
+            if let codeLanguage = response.language,
+               let limit = response.options.limit(language: codeLanguage) {
                 return .init(time: limit.time, memory: limit.memory)
             }
             return .init(time: response.options.executionTimeLimit, memory: response.options.executionMemoryLimit)
         }()
 
+        let codeEditorTheme: NewCodeQuizViewModel.CodeEditorTheme = {
+            let codeElementsSize: CodeQuizElementsSize = DeviceInfo.current.isPad ? .big : .small
+            let fontSize = codeElementsSize.elements.editor.realSizes.fontSize
+            let font = UIFont(name: "Courier", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+            return .init(name: PreferencesContainer.codeEditor.theme, font: font)
+        }()
+
         let viewModel = NewCodeQuizViewModel(
             code: response.code,
-            language: response.language?.displayName,
+            language: response.language,
+            languages: response.options.languages,
             samples: response.options.samples.map { processCodeSample($0) },
             limit: codeLimit,
-            languages: response.options.languages.map { $0.displayName }.sorted(),
+            codeEditorTheme: codeEditorTheme,
             finalState: state
         )
 

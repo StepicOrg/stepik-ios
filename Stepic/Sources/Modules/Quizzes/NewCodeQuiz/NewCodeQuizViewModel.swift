@@ -1,12 +1,18 @@
-import Foundation
+import UIKit
 
 struct NewCodeQuizViewModel {
     let code: String?
-    let language: String?
+    let language: CodeLanguage?
+    let languages: [CodeLanguage]
     let samples: [NewCodeQuiz.CodeSample]
     let limit: NewCodeQuiz.CodeLimit
-    let languages: [String]
+    let codeEditorTheme: CodeEditorTheme
     let finalState: State
+
+    struct CodeEditorTheme {
+        let name: String
+        let font: UIFont
+    }
 
     enum State {
         case `default`
@@ -14,5 +20,6 @@ struct NewCodeQuizViewModel {
         case wrong
         case evaluation
         case noLanguage
+        case notSupportedLanguage
     }
 }

@@ -2,7 +2,7 @@ import SnapKit
 import UIKit
 
 protocol NewCodeQuizViewDelegate: class {
-    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: String)
+    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage)
     func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)
 }
 
@@ -119,13 +119,20 @@ final class NewCodeQuizView: UIView {
             self.toolbarView.isHidden = true
             self.codeEditorStackView.isHidden = true
             self.setActionControlsEnabled(false)
+        case .notSupportedLanguage:
+            self.languagePickerView.isHidden = true
+            self.toolbarView.isHidden = true
+            self.codeEditorStackView.isHidden = true
+            self.setActionControlsEnabled(false)
         }
 
         self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
-        self.languagePickerView.languages = viewModel.languages
-        self.toolbarView.language = viewModel.language
+        self.languagePickerView.languages = viewModel.languages.map { $0.rawValue }.sorted()
+        self.toolbarView.language = viewModel.language?.rawValue
+
         self.codeTextView.language = viewModel.language
         self.codeTextView.text = viewModel.code
+        self.codeTextView.updateTheme(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font)
     }
 
     // MARK: - Private API
@@ -167,7 +174,11 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
 
 extension NewCodeQuizView: CodeLanguagePickerViewDelegate {
     func codeLanguagePickerView(_ view: CodeLanguagePickerView, didSelectLanguage language: String) {
-        self.delegate?.newCodeQuizView(self, didSelectLanguage: language)
+        guard let codeLanguage = CodeLanguage(rawValue: language) else {
+            return
+        }
+
+        self.delegate?.newCodeQuizView(self, didSelectLanguage: codeLanguage)
         self.toolbarView.collapseLanguagePickerButton()
     }
 }
