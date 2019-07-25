@@ -9,9 +9,6 @@ protocol NewCodeQuizViewDelegate: class {
 
 extension NewCodeQuizView {
     struct Appearance {
-        let separatorColor = UIColor(hex: 0xEAECF0)
-        let separatorHeight: CGFloat = 1
-
         let codeTextViewHeight: CGFloat = 236
     }
 }
@@ -59,13 +56,7 @@ final class NewCodeQuizView: UIView {
     }()
 
     private lazy var codeEditorStackView: UIStackView = {
-        let stackView = UIStackView(
-            arrangedSubviews: [
-                self.makeSeparatorView(),
-                self.codeEditorView,
-                self.makeSeparatorView()
-            ]
-        )
+        let stackView = UIStackView(arrangedSubviews: [SeparatorView(), self.codeEditorView, SeparatorView()])
         stackView.axis = .vertical
         return stackView
     }()
@@ -145,15 +136,6 @@ final class NewCodeQuizView: UIView {
     private func setActionControlsEnabled(_ enabled: Bool) {
         self.toolbarView.isEnabled = enabled
         self.codeEditorView.isEnabled = enabled
-    }
-
-    private func makeSeparatorView() -> UIView {
-        let view = UIView()
-        view.backgroundColor = self.appearance.separatorColor
-        view.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.separatorHeight)
-        }
-        return view
     }
 }
 
