@@ -28,14 +28,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
-        guard let codeLanguage = self.currentCodeLanguage else {
-            return print("NewCodeQuizInteractor :: code language should be selected at this point.")
-        }
-
         self.currentCode = request.code
-
-        let reply = CodeReply(code: request.code, language: codeLanguage)
-        self.moduleOutput?.update(reply: reply)
+        self.outputCurrentReply()
     }
 
     func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request) {
@@ -62,6 +56,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         } else if let template = options.template(language: request.language, userGenerated: false) {
             self.currentCode = template.templateString
         }
+
+        self.outputCurrentReply()
     }
 
     // MARK: - Private API
@@ -98,6 +94,16 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         }
 
         CoreDataHelper.instance.save()
+    }
+
+    private func outputCurrentReply() {
+        guard let code = self.currentCode,
+              let language = self.currentCodeLanguage else {
+            return
+        }
+
+        let reply = CodeReply(code: code, language: language)
+        self.moduleOutput?.update(reply: reply)
     }
 }
 
