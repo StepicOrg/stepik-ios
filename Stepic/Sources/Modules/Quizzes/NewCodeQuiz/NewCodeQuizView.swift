@@ -124,7 +124,9 @@ final class NewCodeQuizView: UIView {
 
         self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.languagePickerView.languages = viewModel.languages.map { $0.rawValue }.sorted()
+
         self.toolbarView.language = viewModel.language?.rawValue
+        self.toolbarView.isLanguagePickerEnabled = viewModel.languages.count > 1
 
         self.codeEditorView.language = viewModel.language
         self.codeEditorView.code = viewModel.code

@@ -45,6 +45,12 @@ final class CodeToolbarView: UIView {
         }
     }
 
+    var isLanguagePickerEnabled = true {
+        didSet {
+            self.languagePickerButton.isEnabled = self.isLanguagePickerEnabled
+        }
+    }
+
     var onPickLanguageButtonClick: (() -> Void)?
     var onFullscreenButtonClick: (() -> Void)?
 

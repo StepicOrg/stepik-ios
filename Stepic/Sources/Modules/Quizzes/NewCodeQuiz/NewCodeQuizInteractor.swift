@@ -105,6 +105,15 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         let reply = CodeReply(code: code, language: language)
         self.moduleOutput?.update(reply: reply)
     }
+
+    private func autoSelectLanguageIfOne() {
+        guard self.currentOptions?.languages.count == 1,
+              let language = self.currentOptions?.languages.first else {
+            return
+        }
+
+        self.doLanguageSelect(request: .init(language: language))
+    }
 }
 
 extension NewCodeQuizInteractor: QuizInputProtocol {
@@ -116,6 +125,7 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         guard let reply = reply else {
             self.currentLanguageName = nil
             self.currentCode = nil
+            self.autoSelectLanguageIfOne()
             return
         }
 
