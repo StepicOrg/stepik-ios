@@ -123,8 +123,6 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         }
 
         guard let reply = reply else {
-            self.currentLanguageName = nil
-            self.currentCode = nil
             self.autoSelectLanguageIfOne()
             return
         }
