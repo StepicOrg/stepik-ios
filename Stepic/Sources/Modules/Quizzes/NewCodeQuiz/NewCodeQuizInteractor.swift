@@ -41,7 +41,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             AnalyticsEvents.Code.languageChosen,
             parameters: [
                 "size": "standard",
-                "language": request.language
+                "language": request.language.rawValue
             ]
         )
 
