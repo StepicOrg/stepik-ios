@@ -17,6 +17,17 @@ final class CodeEditorView: UIView {
     private lazy var codeTextView: CodeTextView = {
         let codeTextView = CodeTextView()
         codeTextView.delegate = self
+
+        codeTextView.autocapitalizationType = .none
+        codeTextView.autocorrectionType = .no
+        codeTextView.spellCheckingType = .no
+
+        if #available(iOS 11.0, *) {
+            codeTextView.smartDashesType = .no
+            codeTextView.smartQuotesType = .no
+            codeTextView.smartInsertDeleteType = .no
+        }
+
         return codeTextView
     }()
 
