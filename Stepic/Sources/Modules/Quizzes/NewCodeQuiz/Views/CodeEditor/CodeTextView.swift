@@ -1,11 +1,21 @@
 import Highlightr
 import UIKit
 
-final class CodeTextView: UITextView {
-    private static let lineNumberGutterWidth: CGFloat = 40
+extension CodeTextView {
+    struct Appearance {
+        let gutterWidth: CGFloat = 24
+        let gutterBackgroundColor = UIColor(hex: 0xF6F6F6)
+        let gutterBorderColor = UIColor(hex: 0xC8C7CC)
+        let gutterBorderWidth: CGFloat = 0.5
 
-    // swiftlint:disable:next force_cast
-    private lazy var codeTextViewLayoutManager = self.layoutManager as! CodeTextViewLayoutManager
+        let lineNumberFont = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)
+        let lineNumberTextColor = UIColor.mainDark.withAlphaComponent(0.5)
+        let lineSpacing: CGFloat = 1.2
+    }
+}
+
+final class CodeTextView: UITextView {
+    let appearance: Appearance
 
     var language: String? {
         didSet {
@@ -16,54 +26,21 @@ final class CodeTextView: UITextView {
         }
     }
 
-    var lineNumberFont: UIFont {
-        get {
-            return self.codeTextViewLayoutManager.lineNumberFont
-        }
-        set {
-            if self.codeTextViewLayoutManager.lineNumberFont != newValue {
-                self.codeTextViewLayoutManager.lineNumberFont = newValue
-                self.setNeedsDisplay()
-            }
-        }
-    }
+    init(appearance: Appearance = Appearance()) {
+        self.appearance = appearance
 
-    var lineNumberTextColor: UIColor {
-        get {
-            return self.codeTextViewLayoutManager.lineNumberTextColor
-        }
-        set {
-            if self.codeTextViewLayoutManager.lineNumberTextColor != newValue {
-                self.codeTextViewLayoutManager.lineNumberTextColor = newValue
-                self.setNeedsDisplay()
-            }
-        }
-    }
-
-    var lineNumberBackgroundColor = UIColor.gray {
-        didSet {
-            if self.lineNumberBackgroundColor != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-
-    var lineNumberBorderColor = UIColor.darkGray {
-        didSet {
-            if self.lineNumberBorderColor != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-
-    init(lineNumberFont: UIFont = .systemFont(ofSize: 10), lineNumberTextColor: UIColor = .white) {
         let textStorage = CodeAttributedString()
         textStorage.language = self.language
 
         let layoutManager = CodeTextViewLayoutManager(
-            lineNumberFont: lineNumberFont,
-            lineNumberTextColor: lineNumberTextColor
+            appearance: .init(
+                lineSpacing: self.appearance.lineSpacing,
+                gutterWidth: self.appearance.gutterWidth,
+                lineNumberFont: self.appearance.lineNumberFont,
+                lineNumberTextColor: self.appearance.lineNumberTextColor
+            )
         )
+
         let textContainer = NSTextContainer()
         textContainer.widthTracksTextView = true
         // Exclude (move right) the line number gutter from the display area of the text container.
@@ -71,7 +48,7 @@ final class CodeTextView: UITextView {
             UIBezierPath(
                 rect: CGRect(
                     origin: .zero,
-                    size: CGSize(width: CodeTextView.lineNumberGutterWidth, height: CGFloat.greatestFiniteMagnitude)
+                    size: CGSize(width: appearance.gutterWidth, height: CGFloat.greatestFiniteMagnitude)
                 )
             )
         ]
@@ -94,16 +71,21 @@ final class CodeTextView: UITextView {
         if let context = UIGraphicsGetCurrentContext() {
             let bounds = self.bounds
 
-            context.setFillColor(self.lineNumberBackgroundColor.cgColor)
+            context.setFillColor(self.appearance.gutterBackgroundColor.cgColor)
             let fillRect = CGRect(
                 origin: bounds.origin,
-                size: CGSize(width: CodeTextView.lineNumberGutterWidth, height: bounds.height)
+                size: CGSize(width: self.appearance.gutterWidth, height: bounds.height)
             )
             context.fill(fillRect)
 
-            context.setStrokeColor(self.lineNumberBorderColor.cgColor)
-            context.setLineWidth(0.5)
-            let strokeRect = CGRect(x: bounds.origin.x + 39.5, y: bounds.origin.y, width: 0.5, height: bounds.height)
+            context.setStrokeColor(self.appearance.gutterBorderColor.cgColor)
+            context.setLineWidth(self.appearance.gutterBorderWidth)
+            let strokeRect = CGRect(
+                x: bounds.origin.x + self.appearance.gutterWidth - self.appearance.gutterBorderWidth,
+                y: bounds.origin.y,
+                width: self.appearance.gutterBorderWidth,
+                height: bounds.height
+            )
             context.stroke(strokeRect)
         }
 
@@ -135,5 +117,13 @@ extension CodeTextView: NSLayoutManagerDelegate {
         if layoutFinishedFlag {
             self.setNeedsDisplay()
         }
+    }
+
+    func layoutManager(
+        _ layoutManager: NSLayoutManager,
+        lineSpacingAfterGlyphAt glyphIndex: Int,
+        withProposedLineFragmentRect rect: CGRect
+    ) -> CGFloat {
+        return self.appearance.lineSpacing
     }
 }

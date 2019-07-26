@@ -1,15 +1,24 @@
 import UIKit
 
+extension CodeTextViewLayoutManager {
+    struct Appearance {
+        var lineSpacing: CGFloat
+        var gutterWidth: CGFloat
+
+        var lineNumberFont: UIFont
+        var lineNumberTextColor: UIColor
+        let lineNumberInsets = LayoutInsets(right: 4)
+    }
+}
+
 final class CodeTextViewLayoutManager: NSLayoutManager {
-    var lineNumberFont: UIFont
-    var lineNumberTextColor: UIColor
+    let appearance: Appearance
 
     private var lastParagraphLocation = 0
     private var lastParagraphNumber = 0
 
-    init(lineNumberFont: UIFont, lineNumberTextColor: UIColor) {
-        self.lineNumberFont = lineNumberFont
-        self.lineNumberTextColor = lineNumberTextColor
+    init(appearance: Appearance) {
+        self.appearance = appearance
         super.init()
     }
 
@@ -43,8 +52,8 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
         super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
 
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: self.lineNumberFont,
-            .foregroundColor: self.lineNumberTextColor
+            .font: self.appearance.lineNumberFont,
+            .foregroundColor: self.appearance.lineNumberTextColor
         ]
 
         var gutterRect = CGRect.zero
@@ -59,7 +68,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
             let paragraphRange = (textStorage.string as NSString).paragraphRange(for: characterRange)
 
             if characterRange.location == paragraphRange.location {
-                gutterRect = CGRect(x: 0, y: rect.origin.y, width: 40, height: rect.height)
+                gutterRect = CGRect(x: 0, y: rect.origin.y, width: self.appearance.gutterWidth, height: rect.height)
                 gutterRect = gutterRect.offsetBy(dx: origin.x, dy: origin.y)
 
                 paragraphNumber = self.getParagraph(for: characterRange)
@@ -68,26 +77,12 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
                 let lineNumberSize = lineNumber.size(withAttributes: attributes)
 
                 let lineNumberRect = gutterRect.offsetBy(
-                    dx: gutterRect.width - 4 - lineNumberSize.width,
-                    dy: (gutterRect.height - lineNumberSize.height) / 2
+                    dx: gutterRect.width - self.appearance.lineNumberInsets.right - lineNumberSize.width,
+                    dy: (gutterRect.height - lineNumberSize.height - self.appearance.lineSpacing) / 2
                 )
 
                 lineNumber.draw(in: lineNumberRect, withAttributes: attributes)
             }
-        }
-
-        if NSMaxRange(glyphsToShow) > self.numberOfGlyphs {
-            let lineNumber = "\(paragraphNumber + 2)"
-            let lineNumberSize = lineNumber.size(withAttributes: attributes)
-
-            gutterRect = gutterRect.offsetBy(dx: 0, dy: gutterRect.height)
-
-            let lineNumberRect = gutterRect.offsetBy(
-                dx: gutterRect.width - 4 - lineNumberSize.width,
-                dy: (gutterRect.height - lineNumberSize.height) / 2
-            )
-
-            lineNumber.draw(in: lineNumberRect, withAttributes: attributes)
         }
     }
 
