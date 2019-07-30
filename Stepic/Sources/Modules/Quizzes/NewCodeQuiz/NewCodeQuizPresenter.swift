@@ -47,6 +47,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
 
         let viewModel = NewCodeQuizViewModel(
             code: response.code,
+            codeTemplate: response.codeTemplate,
             language: response.language,
             languages: response.options.languages,
             samples: response.options.samples.map { processCodeSample($0) },

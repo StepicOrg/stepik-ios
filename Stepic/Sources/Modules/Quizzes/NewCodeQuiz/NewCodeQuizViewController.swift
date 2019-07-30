@@ -37,11 +37,15 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
         self.interactor.doLanguageSelect(request: .init(language: language))
     }
 
+    func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String) {
+        self.interactor.doReplyUpdate(request: .init(code: code))
+    }
+
     func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView) {
         print("\(#function)")
     }
 
-    func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String) {
-        self.interactor.doReplyUpdate(request: .init(code: code))
+    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? {
+        return self
     }
 }

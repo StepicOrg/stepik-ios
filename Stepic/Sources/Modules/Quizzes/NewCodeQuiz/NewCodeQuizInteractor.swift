@@ -67,9 +67,17 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
+        let codeTemplate: String? = {
+            if let language = self.currentCodeLanguage {
+                return options.template(language: language, userGenerated: false)?.templateString
+            }
+            return nil
+        }()
+
         self.presenter.presentReply(
             response: .init(
                 code: self.currentCode,
+                codeTemplate: codeTemplate,
                 language: self.currentCodeLanguage,
                 languageName: self.currentLanguageName,
                 options: options,

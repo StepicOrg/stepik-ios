@@ -5,6 +5,7 @@ enum NewCodeQuiz {
     enum ReplyLoad {
         struct Response {
             let code: String?
+            let codeTemplate: String?
             let language: CodeLanguage?
             let languageName: String?
             let options: StepOptions

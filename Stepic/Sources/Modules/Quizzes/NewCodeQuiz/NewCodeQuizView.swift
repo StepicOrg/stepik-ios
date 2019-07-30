@@ -3,8 +3,10 @@ import UIKit
 
 protocol NewCodeQuizViewDelegate: class {
     func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage)
-    func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)
     func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String)
+    func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)
+    // TODO: Remove this after CodePlaygroundManager code suggestion presentation refactoring.
+    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController?
 }
 
 extension NewCodeQuizView {
@@ -142,6 +144,7 @@ final class NewCodeQuizView: UIView {
 
         self.codeEditorView.language = viewModel.language
         self.codeEditorView.code = viewModel.code
+        self.codeEditorView.codeTemplate = viewModel.codeTemplate
         self.codeEditorView.theme = .init(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font)
     }
 
@@ -185,5 +188,11 @@ extension NewCodeQuizView: CodeLanguagePickerViewDelegate {
 extension NewCodeQuizView: CodeEditorViewDelegate {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView) {
         self.delegate?.newCodeQuizView(self, didUpdateCode: codeEditorView.code ?? "")
+    }
+
+    func codeEditorViewDidRequestSuggestionPresentationController(
+        _ codeEditorView: CodeEditorView
+    ) -> UIViewController? {
+        return self.delegate?.newCodeQuizViewDidRequestPresentationController(self)
     }
 }

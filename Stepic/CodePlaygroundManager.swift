@@ -251,6 +251,7 @@ class CodePlaygroundManager {
         suggestionsController = nil
     }
 
+    // TODO: Refactor code suggestion presentation.
     fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView, suggestionsDelegate: CodeSuggestionDelegate) {
         //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if suggestionsController == nil {

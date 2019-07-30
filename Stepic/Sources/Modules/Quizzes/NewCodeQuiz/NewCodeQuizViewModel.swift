@@ -2,6 +2,7 @@ import UIKit
 
 struct NewCodeQuizViewModel {
     let code: String?
+    let codeTemplate: String?
     let language: CodeLanguage?
     let languages: [CodeLanguage]
     let samples: [NewCodeQuiz.CodeSample]
