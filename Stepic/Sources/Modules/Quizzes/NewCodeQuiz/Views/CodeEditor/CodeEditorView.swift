@@ -211,10 +211,14 @@ extension CodeEditorView: UITextViewDelegate {
 
 extension CodeEditorView: CodeSuggestionDelegate {
     func didSelectSuggestion(suggestion: String, prefix: String) {
+        guard self.codeTextView.isEditable else {
+            return
+        }
+
         self.codeTextView.becomeFirstResponder()
 
         let symbols = String(suggestion[suggestion.index(suggestion.startIndex, offsetBy: prefix.count)...])
-        self.codePlaygroundManager.insertAtCurrentPosition(symbols: symbols, textView: codeTextView)
+        self.codePlaygroundManager.insertAtCurrentPosition(symbols: symbols, textView: self.codeTextView)
 
         self.analyzeCodeAndComplete()
     }
