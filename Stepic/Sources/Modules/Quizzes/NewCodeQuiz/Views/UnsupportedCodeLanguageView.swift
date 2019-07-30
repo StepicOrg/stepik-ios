@@ -6,7 +6,6 @@ extension UnsupportedCodeLanguageView {
         let height: CGFloat = 236
         let textFont = UIFont.systemFont(ofSize: 16)
         let textColor = UIColor.lightGray
-        let backgroundColor = UIColor.white
     }
 }
 
@@ -41,10 +40,6 @@ final class UnsupportedCodeLanguageView: UIView {
 }
 
 extension UnsupportedCodeLanguageView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.backgroundColor = self.appearance.backgroundColor
-    }
-
     func addSubviews() {
         self.addSubview(self.containerView)
         self.containerView.addSubview(self.messageLabel)
