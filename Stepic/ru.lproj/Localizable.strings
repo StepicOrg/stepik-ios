@@ -710,3 +710,4 @@ CodeQuizDetailSampleTitleOne = "Пример данных:";
 CodeQuizDetailLimitTitleTime = "Ограничение по времени:";
 CodeQuizDetailLimitTitleMemory = "Ограничение по памяти:";
 CodeQuizDetailLimitValueMemory = "%@ МБ";
+CodeQuizEmptyCodeLanguages = "Нет поддерживаемых языков в приложении";

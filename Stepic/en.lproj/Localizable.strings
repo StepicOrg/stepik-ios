@@ -709,3 +709,4 @@ CodeQuizDetailSampleTitleOne = "Sample data:";
 CodeQuizDetailLimitTitleTime = "Time limit:";
 CodeQuizDetailLimitTitleMemory = "Memory limit:";
 CodeQuizDetailLimitValueMemory = "%@ MB";
+CodeQuizEmptyCodeLanguages = "No supported languages";

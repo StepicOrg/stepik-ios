@@ -14,9 +14,12 @@ extension CodeLanguagePickerView {
 
         let tableViewHeight: CGFloat = 192
         let tableViewEstimatedRowHeight: CGFloat = 44
+        let separatorStyle = UITableViewCell.SeparatorStyle.singleLine
 
         let mainColor = UIColor.mainDark
         let titleTextFont = UIFont.systemFont(ofSize: 16)
+        let emptyTextFont = UIFont.systemFont(ofSize: 16)
+        let emptyTextColor = UIColor.lightGray
     }
 }
 
@@ -150,6 +153,12 @@ extension CodeLanguagePickerView: ProgrammaticallyInitializableViewProtocol {
 
 extension CodeLanguagePickerView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.languages.isEmpty {
+            self.displayEmptyView()
+        } else {
+            self.hideEmptyView()
+        }
+
         return self.languages.count
     }
 
@@ -162,6 +171,24 @@ extension CodeLanguagePickerView: UITableViewDataSource {
         cell.textLabel?.textColor = self.appearance.mainColor
 
         return cell
+    }
+
+    private func displayEmptyView() {
+        let messageLabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: tableView.bounds.size))
+        messageLabel.text = NSLocalizedString("CodeQuizEmptyCodeLanguages", comment: "")
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = self.appearance.emptyTextFont
+        messageLabel.textColor = self.appearance.emptyTextColor
+        messageLabel.sizeToFit()
+
+        self.tableView.backgroundView = messageLabel
+        self.tableView.separatorStyle = .none
+    }
+
+    private func hideEmptyView() {
+        self.tableView.backgroundView = nil
+        self.tableView.separatorStyle = self.appearance.separatorStyle
     }
 }
 
