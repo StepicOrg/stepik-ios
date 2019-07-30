@@ -24,7 +24,7 @@ final class Unit: NSManagedObject, IDFetchable {
         position = json["position"].intValue
         isActive = json["is_active"].boolValue
         lessonId = json["lesson"].intValue
-        progressId = json["progress"].stringValue
+        progressId = json["progress"].string
         sectionId = json["section"].intValue
 
         assignmentsArray = json["assignments"].arrayObject as! [Int]

@@ -64,6 +64,17 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
         return view
     }()
 
+    private lazy var timeToCompleteView: CourseWidgetStatsItemView = {
+        var appearance = CourseWidgetStatsItemView.Appearance()
+        // There is no icon in this view now
+        appearance.iconSpacing = 0
+        appearance.imageViewSize = .zero
+        appearance.textColor = self.appearance.itemTextColor
+        appearance.font = self.appearance.itemTextFont
+        let view = CourseWidgetStatsItemView(appearance: appearance)
+        return view
+    }()
+
     var learnersLabelText: String? {
         didSet {
             self.learnersView.isHidden = self.learnersLabelText?.isEmpty ?? true
@@ -88,6 +99,13 @@ final class CourseInfoTabSyllabusCellStatsView: UIView {
         didSet {
             self.progressView.isHidden = self.progressLabelText == nil
             self.progressView.text = self.progressLabelText
+        }
+    }
+
+    var timeToCompleteLabelText: String? {
+        didSet {
+            self.timeToCompleteView.isHidden = self.timeToCompleteLabelText?.isEmpty ?? true
+            self.timeToCompleteView.text = self.timeToCompleteLabelText
         }
     }
 
@@ -117,6 +135,7 @@ extension CourseInfoTabSyllabusCellStatsView: ProgrammaticallyInitializableViewP
         self.itemsStackView.addArrangedSubview(self.learnersView)
         self.itemsStackView.addArrangedSubview(self.likesView)
         self.itemsStackView.addArrangedSubview(self.progressView)
+        self.itemsStackView.addArrangedSubview(self.timeToCompleteView)
     }
 
     func makeConstraints() {

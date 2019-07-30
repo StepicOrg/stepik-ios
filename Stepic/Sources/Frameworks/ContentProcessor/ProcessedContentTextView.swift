@@ -50,8 +50,13 @@ final class ProcessedContentTextView: UIView {
 
         userContentController.addUserScript(userScript)
         userContentController.addUserScript(userScriptViewport)
+
         let webViewConfig = WKWebViewConfiguration()
         webViewConfig.userContentController = userContentController
+        if #available(iOS 10.0, *) {
+            webViewConfig.dataDetectorTypes = [.link]
+        }
+
         return webViewConfig
     }()
 

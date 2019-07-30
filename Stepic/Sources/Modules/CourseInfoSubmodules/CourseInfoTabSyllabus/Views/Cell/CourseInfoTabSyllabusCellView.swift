@@ -99,6 +99,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
 
         self.statsView.progressLabelText = viewModel.progressLabelText
         self.statsView.learnersLabelText = viewModel.learnersLabelText
+        self.statsView.timeToCompleteLabelText = viewModel.timeToCompleteLabelText
         self.statsView.likesCount = viewModel.likesCount
 
         self.updateDownloadState(newState: viewModel.downloadState)

@@ -62,10 +62,6 @@ class CourseSubscriber: CourseSubscriberProtocol {
                         CourseSubscriptionManager.sharedManager.subscribedTo(course: course)
                     }
 
-                    #if !os(tvOS)
-                        WatchDataHelper.parseAndAddPlainCourses(WatchCoursesDisplayingHelper.getCurrentlyDisplayingCourses())
-                    #endif
-
                     seal.fulfill(course)
                 }
 

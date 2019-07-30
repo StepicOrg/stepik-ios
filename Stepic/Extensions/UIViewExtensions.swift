@@ -6,10 +6,7 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-#if os(tvOS)
-    import UIKit
-#endif
+import UIKit
 
 extension UIView {
     func setRoundedBounds(width: CGFloat, color: UIColor = UIColor.white) {

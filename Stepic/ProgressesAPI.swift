@@ -14,12 +14,41 @@ import PromiseKit
 class ProgressesAPI: APIEndpoint {
     override var name: String { return "progresses" }
 
-    @discardableResult func retrieve(ids: [String], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Progress], refreshMode: RefreshMode, success: @escaping (([Progress]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
-        return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    @discardableResult
+    func retrieve(
+        ids: [Progress.IdType],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        existing: [Progress],
+        refreshMode: RefreshMode,
+        success: @escaping (([Progress]) -> Void),
+        error errorHandler: @escaping ((NetworkError) -> Void)
+    ) -> Request? {
+        let ids = self.filterIds(ids)
+        if ids.isEmpty {
+            success([])
+        }
+
+        return getObjectsByIds(
+            requestString: name,
+            printOutput: false,
+            ids: ids,
+            deleteObjects: existing,
+            refreshMode: refreshMode,
+            success: success,
+            failure: errorHandler
+        )
     }
 
     @available(*, deprecated, message: "Legacy with update existing")
-    func retrieve(ids: [String], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Progress]> {
+    func retrieve(
+        ids: [Progress.IdType],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<[Progress]> {
+        let ids = self.filterIds(ids)
+        if ids.isEmpty {
+            return .value([])
+        }
+
         return Promise { seal in
             Progress.fetchAsync(ids: ids).then { progresses in
                 self.getObjectsByIds(ids: ids, updating: progresses)
@@ -29,5 +58,9 @@ class ProgressesAPI: APIEndpoint {
                 seal.reject(error)
             }
         }
+    }
+
+    private func filterIds(_ ids: [Progress.IdType]) -> [Progress.IdType] {
+        return ids.filter { !$0.isEmpty }
     }
 }

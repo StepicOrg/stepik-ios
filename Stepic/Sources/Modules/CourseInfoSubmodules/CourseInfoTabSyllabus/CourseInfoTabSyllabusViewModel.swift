@@ -36,6 +36,7 @@ struct CourseInfoTabSyllabusUnitViewModel: UniqueIdentifiable {
     let likesCount: Int?
     let learnersLabelText: String
     let progressLabelText: String?
+    let timeToCompleteLabelText: String?
 
     var downloadState: CourseInfoTabSyllabus.DownloadState
     let isSelectable: Bool
