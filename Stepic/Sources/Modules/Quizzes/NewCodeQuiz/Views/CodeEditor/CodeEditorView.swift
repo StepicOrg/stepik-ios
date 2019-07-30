@@ -6,7 +6,19 @@ protocol CodeEditorViewDelegate: class {
     func codeEditorViewDidRequestSuggestionPresentationController(_ codeEditorView: CodeEditorView) -> UIViewController?
 }
 
+extension CodeEditorView {
+    struct Appearance {
+        let languageNameLabelLayoutInsets = LayoutInsets(top: 8, right: 16)
+        let languageNameLabelTextColor = UIColor.mainDark
+        let languageNameLabelBackgroundColor = UIColor(hex: 0xF6F6F6).withAlphaComponent(0.75)
+        let languageNameLabelFont = UIFont.systemFont(ofSize: 10)
+        let languageNameLabelInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        let languageNameLabelCornerRadius: CGFloat = 10
+    }
+}
+
 final class CodeEditorView: UIView {
+    let appearance: Appearance
     weak var delegate: CodeEditorViewDelegate?
 
     private lazy var codeTextView: CodeTextView = {
@@ -24,6 +36,20 @@ final class CodeEditorView: UIView {
         }
 
         return codeTextView
+    }()
+
+    private lazy var languageNameLabel: UILabel = {
+        let label = PaddingLabel(padding: self.appearance.languageNameLabelInsets)
+        label.textAlignment = .center
+
+        label.clipsToBounds = true
+        label.layer.cornerRadius = self.appearance.languageNameLabelCornerRadius
+
+        label.textColor = self.appearance.languageNameLabelTextColor
+        label.backgroundColor = self.appearance.languageNameLabelBackgroundColor
+        label.font = self.appearance.languageNameLabelFont
+
+        return label
     }()
 
     private let codePlaygroundManager = CodePlaygroundManager()
@@ -54,6 +80,7 @@ final class CodeEditorView: UIView {
     var language: CodeLanguage? {
         didSet {
             self.codeTextView.language = self.language?.highlightr
+            self.languageNameLabel.text = self.language?.rawValue
             self.setupAccessoryView(isEditable: self.isEnabled)
         }
     }
@@ -73,7 +100,15 @@ final class CodeEditorView: UIView {
         }
     }
 
-    override init(frame: CGRect = .zero) {
+    var isLanguageNameVisible = false {
+        didSet {
+            self.languageNameLabel.isHidden = self.isLanguageNameVisible
+            self.languageNameLabel.alpha = self.isLanguageNameVisible ? 1 : 0
+        }
+    }
+
+    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
+        self.appearance = appearance
         super.init(frame: frame)
 
         self.setupView()
@@ -151,14 +186,25 @@ final class CodeEditorView: UIView {
 }
 
 extension CodeEditorView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.isLanguageNameVisible = false
+    }
+
     func addSubviews() {
         self.addSubview(self.codeTextView)
+        self.addSubview(self.languageNameLabel)
     }
 
     func makeConstraints() {
         self.codeTextView.translatesAutoresizingMaskIntoConstraints = false
         self.codeTextView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.languageNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.languageNameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.languageNameLabelLayoutInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.languageNameLabelLayoutInsets.right)
         }
     }
 }
