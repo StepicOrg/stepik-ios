@@ -150,9 +150,9 @@ final class NewCodeQuizView: UIView {
 
     // MARK: - Private API
 
-    private func setActionControlsEnabled(_ enabled: Bool) {
-        self.toolbarView.isEnabled = enabled
-        self.codeEditorView.isEnabled = enabled
+    private func setActionControlsEnabled(_ isEnabled: Bool) {
+        self.toolbarView.isEnabled = isEnabled
+        self.codeEditorView.isEnabled = isEnabled
     }
 }
 
