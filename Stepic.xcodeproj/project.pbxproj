@@ -571,6 +571,7 @@
 		2C82D51721830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82D51621830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift */; };
 		2C82F22421D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82F22321D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift */; };
 		2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */; };
+		2C87DE1E22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87DE1D22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift */; };
 		2C88A51F2289C18200BD9949 /* StepControllerSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C88A51E2289C18200BD9949 /* StepControllerSkeletonView.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
 		2C8AD7622204932300C9C089 /* CourseSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8AD7612204932200C9C089 /* CourseSubscriptionManager.swift */; };
@@ -1661,6 +1662,7 @@
 		2C82D51621830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationServiceProtocol.swift; sourceTree = "<group>"; };
 		2C82F22321D64DFF00E0CB2A /* CourseInfoTabSyllabusCellSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusCellSkeletonView.swift; sourceTree = "<group>"; };
 		2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesNetworkService.swift; sourceTree = "<group>"; };
+		2C87DE1D22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsupportedCodeLanguageView.swift; sourceTree = "<group>"; };
 		2C88A51E2289C18200BD9949 /* StepControllerSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControllerSkeletonView.swift; sourceTree = "<group>"; };
 		2C88C11E21C12C31004BDF21 /* Model_course_readiness_v30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_readiness_v30.xcdatamodel; sourceTree = "<group>"; };
 		2C89089F216F465200083341 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
@@ -3976,6 +3978,7 @@
 		2C53DFF722DDDBFD0084BA2B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C87DE1D22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift */,
 				2C04740222E60623003050B7 /* CodeDetails */,
 				2C1B0F9A22E6865E00B43850 /* CodeEditor */,
 				2C31A73A22E7063400D2A41E /* LanguagePicker */,
@@ -6841,6 +6844,7 @@
 				62E98390FCCFBE5C79FD19C2 /* CourseInfoPresenter.swift in Sources */,
 				62E9884EE92275DE964EFB37 /* CourseInfoDataFlow.swift in Sources */,
 				62E9856F1F3C7092AB299CC2 /* CourseInfoSubmoduleProtocol.swift in Sources */,
+				2C87DE1E22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift in Sources */,
 				62E98C69112F273700EE6F53 /* CourseInfoProvider.swift in Sources */,
 				62E9851367C7F37D5986E077 /* CourseInfoHeaderViewModel.swift in Sources */,
 				62E98E92833D3A0649EBA590 /* StyledNavigationController.swift in Sources */,

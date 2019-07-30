@@ -61,13 +61,20 @@ final class NewCodeQuizView: UIView {
         return stackView
     }()
 
+    private lazy var unsupportedCodeLanguageStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [SeparatorView(), UnsupportedCodeLanguageView(), SeparatorView()])
+        stackView.axis = .vertical
+        return stackView
+    }()
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
                 self.codeDetailsView,
                 self.toolbarView,
                 self.codeEditorStackView,
-                self.languagePickerView
+                self.languagePickerView,
+                self.unsupportedCodeLanguageStackView
             ]
         )
         stackView.axis = .vertical
@@ -94,39 +101,44 @@ final class NewCodeQuizView: UIView {
             self.languagePickerView.isHidden = true
             self.toolbarView.isHidden = false
             self.codeEditorStackView.isHidden = false
+            self.unsupportedCodeLanguageStackView.isHidden = true
             self.setActionControlsEnabled(true)
+            self.toolbarView.isLanguagePickerEnabled = viewModel.languages.count > 1
         case .correct:
             self.languagePickerView.isHidden = true
             self.toolbarView.isHidden = false
             self.codeEditorStackView.isHidden = false
+            self.unsupportedCodeLanguageStackView.isHidden = true
             self.setActionControlsEnabled(false)
         case .wrong:
             self.languagePickerView.isHidden = true
             self.toolbarView.isHidden = false
             self.codeEditorStackView.isHidden = false
+            self.unsupportedCodeLanguageStackView.isHidden = true
             self.setActionControlsEnabled(false)
         case .evaluation:
             self.languagePickerView.isHidden = true
             self.toolbarView.isHidden = false
             self.codeEditorStackView.isHidden = false
+            self.unsupportedCodeLanguageStackView.isHidden = true
             self.setActionControlsEnabled(false)
         case .noLanguage:
             self.languagePickerView.isHidden = false
             self.toolbarView.isHidden = true
             self.codeEditorStackView.isHidden = true
+            self.unsupportedCodeLanguageStackView.isHidden = true
             self.setActionControlsEnabled(false)
         case .unsupportedLanguage:
             self.languagePickerView.isHidden = true
             self.toolbarView.isHidden = true
             self.codeEditorStackView.isHidden = true
+            self.unsupportedCodeLanguageStackView.isHidden = false
             self.setActionControlsEnabled(false)
         }
 
         self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
         self.languagePickerView.languages = viewModel.languages.map { $0.rawValue }.sorted()
-
         self.toolbarView.language = viewModel.language?.rawValue
-        self.toolbarView.isLanguagePickerEnabled = viewModel.languages.count > 1
 
         self.codeEditorView.language = viewModel.language
         self.codeEditorView.code = viewModel.code
@@ -142,9 +154,6 @@ final class NewCodeQuizView: UIView {
 }
 
 extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-    }
-
     func addSubviews() {
         self.addSubview(self.stackView)
     }

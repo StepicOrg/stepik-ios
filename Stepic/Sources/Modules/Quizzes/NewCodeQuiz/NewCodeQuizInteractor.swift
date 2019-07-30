@@ -105,15 +105,6 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         let reply = CodeReply(code: code, language: language)
         self.moduleOutput?.update(reply: reply)
     }
-
-    private func autoSelectLanguageIfOne() {
-        guard self.currentOptions?.languages.count == 1,
-              let language = self.currentOptions?.languages.first else {
-            return
-        }
-
-        self.doLanguageSelect(request: .init(language: language))
-    }
 }
 
 extension NewCodeQuizInteractor: QuizInputProtocol {
@@ -123,8 +114,7 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         }
 
         guard let reply = reply else {
-            self.autoSelectLanguageIfOne()
-            return
+            return self.handleEmptyReply()
         }
 
         self.moduleOutput?.update(reply: reply)
@@ -145,5 +135,16 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
 
     func update(options: StepOptions?) {
         self.currentOptions = options
+    }
+
+    private func handleEmptyReply() {
+        let isCurrentLanguageUnsupported = self.currentLanguageName != self.currentCodeLanguage?.rawValue
+        if isCurrentLanguageUnsupported {
+            self.currentLanguageName = nil
+            self.currentCode = nil
+        } else if self.currentOptions?.languages.count == 1,
+                  let language = self.currentOptions?.languages.first {
+            self.doLanguageSelect(request: .init(language: language))
+        }
     }
 }
