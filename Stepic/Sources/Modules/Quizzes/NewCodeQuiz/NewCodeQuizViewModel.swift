@@ -20,6 +20,6 @@ struct NewCodeQuizViewModel {
         case wrong
         case evaluation
         case noLanguage
-        case notSupportedLanguage
+        case unsupportedLanguage
     }
 }

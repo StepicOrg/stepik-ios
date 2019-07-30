@@ -10,7 +10,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
         let state: NewCodeQuizViewModel.State = {
             if response.languageName != response.language?.rawValue {
-                return .notSupportedLanguage
+                return .unsupportedLanguage
             }
             if response.language == nil {
                 return .noLanguage

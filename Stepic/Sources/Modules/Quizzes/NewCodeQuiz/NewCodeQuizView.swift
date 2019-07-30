@@ -115,7 +115,7 @@ final class NewCodeQuizView: UIView {
             self.toolbarView.isHidden = true
             self.codeEditorStackView.isHidden = true
             self.setActionControlsEnabled(false)
-        case .notSupportedLanguage:
+        case .unsupportedLanguage:
             self.languagePickerView.isHidden = true
             self.toolbarView.isHidden = true
             self.codeEditorStackView.isHidden = true
