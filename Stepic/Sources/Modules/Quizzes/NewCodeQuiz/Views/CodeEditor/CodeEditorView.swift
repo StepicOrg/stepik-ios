@@ -91,43 +91,39 @@ final class CodeEditorView: UIView {
             self.codeTextView.reloadInputViews()
         }
 
-        guard let language = self.language else {
+        guard let language = self.language, isEditable else {
             self.codeTextView.inputAccessoryView = nil
             return
         }
 
-        if isEditable {
-            self.codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(
-                size: self.elementsSize.elements.toolbar,
-                language: language,
-                tabAction: { [weak self] in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    strongSelf.codePlaygroundManager.insertAtCurrentPosition(
-                        symbols: String(repeating: " ", count: strongSelf.tabSize),
-                        textView: strongSelf.codeTextView
-                    )
-                },
-                insertStringAction: { [weak self] symbols in
-                    guard let strongSelf = self else {
-                        return
-                    }
-
-                    strongSelf.codePlaygroundManager.insertAtCurrentPosition(
-                        symbols: symbols,
-                        textView: strongSelf.codeTextView
-                    )
-                    strongSelf.analyzeCodeAndComplete()
-                },
-                hideKeyboardAction: { [weak self] in
-                    self?.codeTextView.resignFirstResponder()
+        self.codeTextView.inputAccessoryView = InputAccessoryBuilder.buildAccessoryView(
+            size: self.elementsSize.elements.toolbar,
+            language: language,
+            tabAction: { [weak self] in
+                guard let strongSelf = self else {
+                    return
                 }
-            )
-        } else {
-            self.codeTextView.inputAccessoryView = nil
-        }
+
+                strongSelf.codePlaygroundManager.insertAtCurrentPosition(
+                    symbols: String(repeating: " ", count: strongSelf.tabSize),
+                    textView: strongSelf.codeTextView
+                )
+            },
+            insertStringAction: { [weak self] symbols in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.codePlaygroundManager.insertAtCurrentPosition(
+                    symbols: symbols,
+                    textView: strongSelf.codeTextView
+                )
+                strongSelf.analyzeCodeAndComplete()
+            },
+            hideKeyboardAction: { [weak self] in
+                self?.codeTextView.resignFirstResponder()
+            }
+        )
     }
 
     private func analyzeCodeAndComplete() {
