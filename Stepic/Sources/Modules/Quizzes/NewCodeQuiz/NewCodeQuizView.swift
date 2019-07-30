@@ -176,11 +176,10 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
 
 extension NewCodeQuizView: CodeLanguagePickerViewDelegate {
     func codeLanguagePickerView(_ view: CodeLanguagePickerView, didSelectLanguage language: String) {
-        guard let codeLanguage = CodeLanguage(rawValue: language) else {
-            return
+        if let codeLanguage = CodeLanguage(rawValue: language) {
+            self.delegate?.newCodeQuizView(self, didSelectLanguage: codeLanguage)
         }
 
-        self.delegate?.newCodeQuizView(self, didSelectLanguage: codeLanguage)
         self.toolbarView.collapseLanguagePickerButton()
     }
 }
