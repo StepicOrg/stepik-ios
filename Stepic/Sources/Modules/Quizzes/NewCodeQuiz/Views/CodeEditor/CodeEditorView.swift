@@ -86,7 +86,7 @@ final class CodeEditorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupAccessoryView(isEditable: Bool) {
+    private func setupAccessoryView(isEditable: Bool) {
         defer {
             self.codeTextView.reloadInputViews()
         }
