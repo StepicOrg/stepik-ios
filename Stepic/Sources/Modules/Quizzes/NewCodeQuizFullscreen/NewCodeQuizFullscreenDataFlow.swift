@@ -8,4 +8,21 @@ enum NewCodeQuizFullscreen {
 
         struct ViewModel { }
     }
+
+    enum Tab {
+        case instruction
+        case code
+        case run
+
+        var title: String {
+            switch self {
+            case .instruction:
+                return NSLocalizedString("CodeQuizFullscreenTabInstructionTitle", comment: "")
+            case .code:
+                return NSLocalizedString("CodeQuizFullscreenTabCodeTitle", comment: "")
+            case .run:
+                return NSLocalizedString("CodeQuizFullscreenTabRunTitle", comment: "")
+            }
+        }
+    }
 }

@@ -710,3 +710,6 @@ CodeQuizDetailLimitTitleTime = "Time limit:";
 CodeQuizDetailLimitTitleMemory = "Memory limit:";
 CodeQuizDetailLimitValueMemory = "%@ MB";
 CodeQuizEmptyCodeLanguages = "No supported languages";
+CodeQuizFullscreenTabInstructionTitle = "Instruction";
+CodeQuizFullscreenTabCodeTitle = "Code";
+CodeQuizFullscreenTabRunTitle = "Run";

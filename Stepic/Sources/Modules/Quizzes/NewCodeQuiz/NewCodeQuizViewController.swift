@@ -43,7 +43,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
 
     func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView) {
         let assembly = NewCodeQuizFullscreenAssembly(output: nil)
-        self.push(module: assembly.makeModule())
+        self.present(moduleStack: [assembly.makeModule()])
     }
 
     func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? {
