@@ -22,6 +22,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
     private var currentOptions: StepOptions?
     private var currentStatus: QuizStatus?
+    private var currentContent: String?
 
     init(presenter: NewCodeQuizPresenterProtocol) {
         self.presenter = presenter
@@ -143,6 +144,10 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
 
     func update(options: StepOptions?) {
         self.currentOptions = options
+    }
+
+    func update(content: String?) {
+        self.currentContent = content
     }
 
     private func handleEmptyReply() {

@@ -15,4 +15,5 @@ struct BaseQuizViewModel {
     let hintContent: String?
     // TODO: Fix
     let options: StepOptions?
+    let stepContent: String?
 }

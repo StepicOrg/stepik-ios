@@ -108,7 +108,8 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             stepURL: self.makeURL(for: step),
             hintContent: hintContent,
             // TODO: Fix
-            options: step.options
+            options: step.options,
+            stepContent: step.block.text ?? ""
         )
     }
 

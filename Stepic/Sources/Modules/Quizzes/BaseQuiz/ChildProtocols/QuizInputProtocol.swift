@@ -7,6 +7,7 @@ protocol QuizInputProtocol: class {
     func update(feedback: SubmissionFeedback?)
     // TODO: Fix
     func update(options: StepOptions?)
+    func update(content: String?)
 }
 
 extension QuizInputProtocol {
@@ -15,4 +16,5 @@ extension QuizInputProtocol {
     func update(dataset: Dataset?) { }
     func update(feedback: SubmissionFeedback?) { }
     func update(options: StepOptions?) { }
+    func update(content: String?) { }
 }
