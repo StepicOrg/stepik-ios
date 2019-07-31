@@ -105,6 +105,11 @@ class CodePlaygroundManager {
             var text = currentText
 
             let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+
+            guard cursorIndex > text.startIndex else {
+                return nil
+            }
+
             //searching previous \n or beginning of the string
             let firstPart = text.substring(to: text.index(before: cursorIndex))
             if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
