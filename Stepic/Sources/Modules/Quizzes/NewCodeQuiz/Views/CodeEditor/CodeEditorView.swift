@@ -4,6 +4,7 @@ import UIKit
 protocol CodeEditorViewDelegate: class {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView)
     func codeEditorViewDidRequestSuggestionPresentationController(_ codeEditorView: CodeEditorView) -> UIViewController?
+    func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool)
 }
 
 extension CodeEditorView {
@@ -81,7 +82,7 @@ final class CodeEditorView: UIView {
         didSet {
             self.codeTextView.language = self.language?.highlightr
             self.languageNameLabel.text = self.language?.rawValue
-            self.setupAccessoryView(isEditable: self.isEnabled)
+            self.setupAccessoryView(isEditable: self.isEditable)
         }
     }
 
@@ -93,10 +94,9 @@ final class CodeEditorView: UIView {
         }
     }
 
-    var isEnabled = true {
+    var isEditable = true {
         didSet {
-            self.codeTextView.isEditable = self.isEnabled
-            self.setupAccessoryView(isEditable: self.isEnabled)
+            self.setupAccessoryView(isEditable: self.isEditable)
         }
     }
 
@@ -210,6 +210,11 @@ extension CodeEditorView: ProgrammaticallyInitializableViewProtocol {
 }
 
 extension CodeEditorView: UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.delegate?.codeEditorView(self, beginEditing: self.isEditable)
+        return self.isEditable
+    }
+
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "\n"

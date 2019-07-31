@@ -125,6 +125,7 @@ final class NewCodeQuizView: UIView {
         self.codeEditorView.code = viewModel.code
         self.codeEditorView.codeTemplate = viewModel.codeTemplate
         self.codeEditorView.theme = .init(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font)
+        self.codeEditorView.isEditable = false
     }
 
     // MARK: - Private API
@@ -138,7 +139,7 @@ final class NewCodeQuizView: UIView {
 
     private func setCodeEditorActionControlsEnabled(_ isEnabled: Bool) {
         self.toolbarView.isEnabled = isEnabled
-        self.codeEditorView.isEnabled = isEnabled
+        self.codeEditorView.isEditable = isEnabled
     }
 }
 
@@ -179,5 +180,11 @@ extension NewCodeQuizView: CodeEditorViewDelegate {
         _ codeEditorView: CodeEditorView
     ) -> UIViewController? {
         return self.delegate?.newCodeQuizViewDidRequestPresentationController(self)
+    }
+
+    func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool) {
+        if self.toolbarView.isEnabled {
+            self.delegate?.newCodeQuizViewDidRequestFullscreen(self)
+        }
     }
 }
