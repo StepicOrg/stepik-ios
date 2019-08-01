@@ -331,20 +331,13 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             title: NSLocalizedString("Certificates", comment: "")
         )
         block.onTouch = { [weak self] in
-            guard let strongSelf = self else {
+            guard let strongSelf = self,
+                  let userID = strongSelf.presenter?.userSeed.userId else {
                 return
             }
 
-            guard let viewController = ControllerHelper.instantiateViewController(
-                identifier: "CertificatesViewController",
-                storyboardName: "CertificatesStoryboard"
-            ) as? CertificatesViewController else {
-                return
-            }
-
-            viewController.userID = strongSelf.presenter?.userSeed.userId
-
-            strongSelf.push(module: viewController)
+            let assembly = CertificatesLegacyAssembly(userID: userID)
+            strongSelf.push(module: assembly.makeModule())
         }
 
         return block

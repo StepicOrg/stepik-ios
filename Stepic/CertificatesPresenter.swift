@@ -30,7 +30,7 @@ final class CertificatesPresenter {
         certificatesAPI: CertificatesAPI,
         coursesAPI: CoursesAPI,
         presentationContainer: CertificatesPresentationContainer,
-        view: CertificatesView
+        view: CertificatesView?
     ) {
         self.userID = userID
         self.certificatesAPI = certificatesAPI

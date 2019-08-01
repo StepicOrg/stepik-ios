@@ -8,6 +8,35 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Class to initialize certificates w/o storyboards logic")
+final class CertificatesLegacyAssembly: Assembly {
+    private let userID: User.IdType
+
+    init(userID: User.IdType) {
+        self.userID = userID
+    }
+
+    func makeModule() -> UIViewController {
+        guard let certificatesVC = ControllerHelper.instantiateViewController(
+            identifier: "CertificatesViewController",
+            storyboardName: "CertificatesStoryboard"
+        ) as? CertificatesViewController else {
+            fatalError("Unable to initialize CertificatesViewController via storyboard")
+        }
+
+        certificatesVC.userID = self.userID
+        certificatesVC.presenter = CertificatesPresenter(
+            userID: self.userID,
+            certificatesAPI: ApiDataDownloader.certificates,
+            coursesAPI: ApiDataDownloader.courses,
+            presentationContainer: PresentationContainer.certificates,
+            view: certificatesVC
+        )
+
+        return certificatesVC
+    }
+}
+
 final class CertificatesViewController: UIViewController, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
 
@@ -55,17 +84,6 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         }), for: .connectionError)
 
         title = NSLocalizedString("Certificates", comment: "")
-
-        if let userID = self.userID {
-            presenter = CertificatesPresenter(
-                userID: userID,
-                certificatesAPI: ApiDataDownloader.certificates,
-                coursesAPI: ApiDataDownloader.courses,
-                presentationContainer: PresentationContainer.certificates,
-                view: self
-            )
-            presenter?.view = self
-        }
 
         tableView.register(
             UINib(nibName: "CertificateTableViewCell", bundle: nil),
