@@ -20,9 +20,7 @@ class QuizPresenter {
     var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
 
-    #if !os(tvOS)
-        var streaksNotificationSuggestionManager: NotificationSuggestionManager?
-    #endif
+    var streaksNotificationSuggestionManager: NotificationSuggestionManager?
 
     var state: QuizState = .nothing {
         didSet {
@@ -44,12 +42,10 @@ class QuizPresenter {
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
     }
 
-    #if !os(tvOS)
     convenience init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: NotificationSuggestionManager) {
         self.init(view: view, step: step, dataSource: dataSource, alwaysCreateNewAttemptOnRefresh: alwaysCreateNewAttemptOnRefresh, submissionsAPI: submissionsAPI, attemptsAPI: attemptsAPI, userActivitiesAPI: userActivitiesAPI)
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
-    #endif
 
     private var submissionLimit: SubmissionLimitation? {
         var limit: SubmissionLimitation?
@@ -390,22 +386,19 @@ class QuizPresenter {
             return nil
         }
 
-        #if !os(tvOS)
-            if RoutingManager.rate.submittedCorrect() {
-                self.view?.showRateAlert()
-                return
-            }
+        if RoutingManager.rate.submittedCorrect() {
+            self.view?.showRateAlert()
+            return
+        }
 
-            guard let streaksManager = streaksNotificationSuggestionManager, streaksManager.canShowAlert(context: .streak, after: .submission) else {
-                return
-            }
-	#endif
+        guard let streaksManager = self.streaksNotificationSuggestionManager,
+              streaksManager.canShowAlert(context: .streak, after: .submission) else {
+            return
+        }
 
         guard let user = AuthInfo.shared.user else {
             return
         }
-
-
 
         _ = userActivitiesAPI.retrieve(user: user.id, success: {
             [weak self]
