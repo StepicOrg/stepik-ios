@@ -31,6 +31,26 @@ enum NewCodeQuiz {
         }
     }
 
+    /// Display fullscreen mode
+    enum FullscreenPresentation {
+        struct Request { }
+
+        struct Response {
+            let data: Data
+        }
+
+        struct ViewModel {
+            let data: Data
+            let codeEditorTheme: NewCodeQuizViewModel.CodeEditorTheme
+        }
+
+        struct Data {
+            let content: String
+            let language: CodeLanguage
+            let options: StepOptions
+        }
+    }
+
     // MARK: - Common structs
 
     struct CodeSample {

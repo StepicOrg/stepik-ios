@@ -3,8 +3,27 @@ import UIKit
 
 protocol CodeEditorViewDelegate: class {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView)
-    func codeEditorViewDidRequestSuggestionPresentationController(_ codeEditorView: CodeEditorView) -> UIViewController?
     func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool)
+    func codeEditorViewDidBeginEditing(_ codeEditorView: CodeEditorView)
+    func codeEditorViewDidEndEditing(_ codeEditorView: CodeEditorView)
+
+    func codeEditorViewDidRequestSuggestionPresentationController(_ codeEditorView: CodeEditorView) -> UIViewController?
+}
+
+extension CodeEditorViewDelegate {
+    func codeEditorViewDidChange(_ codeEditorView: CodeEditorView) { }
+
+    func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool) { }
+
+    func codeEditorViewDidBeginEditing(_ codeEditorView: CodeEditorView) { }
+
+    func codeEditorViewDidEndEditing(_ codeEditorView: CodeEditorView) { }
+
+    func codeEditorViewDidRequestSuggestionPresentationController(
+        _ codeEditorView: CodeEditorView
+    ) -> UIViewController? {
+        return nil
+    }
 }
 
 extension CodeEditorView {
@@ -104,6 +123,12 @@ final class CodeEditorView: UIView {
         didSet {
             self.languageNameLabel.isHidden = self.isLanguageNameVisible
             self.languageNameLabel.alpha = self.isLanguageNameVisible ? 1 : 0
+        }
+    }
+
+    var textInsets: UIEdgeInsets = .zero {
+        didSet {
+            self.codeTextView.textContainerInset = self.textInsets
         }
     }
 
@@ -213,6 +238,14 @@ extension CodeEditorView: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         self.delegate?.codeEditorView(self, beginEditing: self.isEditable)
         return self.isEditable
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.delegate?.codeEditorViewDidBeginEditing(self)
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.delegate?.codeEditorViewDidEndEditing(self)
     }
 
     func textViewDidChange(_ textView: UITextView) {

@@ -60,10 +60,12 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         action: #selector(self.actionButtonClicked)
     )
 
+    private var viewModel: NewCodeQuizFullscreenViewModel?
+
     init(
         interactor: NewCodeQuizFullscreenInteractorProtocol,
         availableTabs: [NewCodeQuizFullscreen.Tab] = [.instruction, .code],
-        initialTab: NewCodeQuizFullscreen.Tab = .instruction
+        initialTab: NewCodeQuizFullscreen.Tab = .code
     ) {
         self.interactor = interactor
 
@@ -105,9 +107,17 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                 styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
             }
         }
+
+        self.interactor.doSomeAction(request: .init())
     }
 
+    // MARK: Private API
+
     private func loadTabViewControllerIfNeeded(at index: Int) {
+        guard let viewModel = self.viewModel else {
+            return
+        }
+
         guard self.tabViewControllers[index] == nil else {
             return
         }
@@ -119,9 +129,18 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         let controller: UIViewController? = {
             switch tab {
             case .instruction:
-                return NewCodeQuizFullscreenInstructionViewController()
+                return NewCodeQuizFullscreenInstructionViewController(
+                    content: viewModel.content,
+                    samples: viewModel.samples,
+                    limit: viewModel.limit
+                )
             case .code:
-                return NewCodeQuizFullscreenCodeViewController()
+                return NewCodeQuizFullscreenCodeViewController(
+                    language: viewModel.language,
+                    code: viewModel.code,
+                    codeTemplate: viewModel.codeTemplate,
+                    codeEditorTheme: viewModel.codeEditorTheme
+                )
             case .run:
                 return nil
             }
@@ -160,7 +179,10 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
 }
 
 extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewCodeQuizFullscreen.SomeAction.ViewModel) { }
+    func displaySomeActionResult(viewModel: NewCodeQuizFullscreen.SomeAction.ViewModel) {
+        self.viewModel = viewModel.data
+        self.reloadData()
+    }
 }
 
 extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {

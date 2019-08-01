@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewCodeQuizPresenterProtocol {
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response)
+    func presentFullscreen(response: NewCodeQuiz.FullscreenPresentation.Response)
 }
 
 final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
@@ -38,13 +39,6 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             return .init(time: response.options.executionTimeLimit, memory: response.options.executionMemoryLimit)
         }()
 
-        let codeEditorTheme: NewCodeQuizViewModel.CodeEditorTheme = {
-            let codeElementsSize: CodeQuizElementsSize = DeviceInfo.current.isPad ? .big : .small
-            let fontSize = codeElementsSize.elements.editor.realSizes.fontSize
-            let font = UIFont(name: "Courier", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
-            return .init(name: PreferencesContainer.codeEditor.theme, font: font)
-        }()
-
         let viewModel = NewCodeQuizViewModel(
             code: response.code,
             codeTemplate: response.codeTemplate,
@@ -52,11 +46,27 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             languages: response.options.languages,
             samples: response.options.samples.map { processCodeSample($0) },
             limit: codeLimit,
-            codeEditorTheme: codeEditorTheme,
+            codeEditorTheme: self.getCodeEditorTheme(),
             finalState: state
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
+    }
+
+    func presentFullscreen(response: NewCodeQuiz.FullscreenPresentation.Response) {
+        self.viewController?.displayFullscreen(
+            viewModel: .init(
+                data: response.data,
+                codeEditorTheme: self.getCodeEditorTheme()
+            )
+        )
+    }
+
+    private func getCodeEditorTheme() -> NewCodeQuizViewModel.CodeEditorTheme {
+        let codeElementsSize: CodeQuizElementsSize = DeviceInfo.current.isPad ? .big : .small
+        let fontSize = codeElementsSize.elements.editor.realSizes.fontSize
+        let font = UIFont(name: "Courier", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+        return .init(name: PreferencesContainer.codeEditor.theme, font: font)
     }
 
     private func processCodeSample(_ sample: CodeSample) -> NewCodeQuiz.CodeSample {

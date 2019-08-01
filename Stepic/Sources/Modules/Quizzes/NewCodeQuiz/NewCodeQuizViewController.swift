@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewCodeQuizViewControllerProtocol: class {
     func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel)
+    func displayFullscreen(viewModel: NewCodeQuiz.FullscreenPresentation.ViewModel)
 }
 
 final class NewCodeQuizViewController: UIViewController {
@@ -30,6 +31,18 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
     func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel) {
         self.newCodeQuizView?.configure(viewModel: viewModel.data)
     }
+
+    func displayFullscreen(viewModel: NewCodeQuiz.FullscreenPresentation.ViewModel) {
+        let data = viewModel.data
+        let assembly = NewCodeQuizFullscreenAssembly(
+            content: data.content,
+            language: data.language,
+            options: data.options,
+            codeEditorTheme: .init(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font),
+            output: nil
+        )
+        self.present(moduleStack: [assembly.makeModule()])
+    }
 }
 
 extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
@@ -42,8 +55,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
     }
 
     func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView) {
-        let assembly = NewCodeQuizFullscreenAssembly(output: nil)
-        self.present(moduleStack: [assembly.makeModule()])
+        self.interactor.doFullscreenAction(request: .init())
     }
 
     func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? {

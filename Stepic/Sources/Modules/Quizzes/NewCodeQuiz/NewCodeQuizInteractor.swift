@@ -4,6 +4,7 @@ import PromiseKit
 protocol NewCodeQuizInteractorProtocol {
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request)
     func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request)
+    func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request)
 }
 
 final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
@@ -59,6 +60,21 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         }
 
         self.outputCurrentReply()
+    }
+
+    func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request) {
+        guard let language = self.currentCodeLanguage,
+              let options = self.currentOptions else {
+            return
+        }
+
+        let data = NewCodeQuiz.FullscreenPresentation.Data(
+            content: self.currentContent ?? "",
+            language: language,
+            options: options
+        )
+
+        self.presenter.presentFullscreen(response: .init(data: data))
     }
 
     // MARK: - Private API

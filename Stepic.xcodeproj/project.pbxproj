@@ -617,6 +617,8 @@
 		2CA9D98F2012334B007AA743 /* nouns_m.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C35C4CB1F4DA462002F3BF4 /* nouns_m.plist */; };
 		2CAB5C7422F1B90300ED2221 /* NewCodeQuizFullscreenInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB5C7322F1B90300ED2221 /* NewCodeQuizFullscreenInstructionViewController.swift */; };
 		2CAB5C7622F1B97A00ED2221 /* NewCodeQuizFullscreenCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB5C7522F1B97A00ED2221 /* NewCodeQuizFullscreenCodeViewController.swift */; };
+		2CAB5C7922F1E1DF00ED2221 /* NewCodeQuizFullscreenInstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB5C7822F1E1DF00ED2221 /* NewCodeQuizFullscreenInstructionView.swift */; };
+		2CAB5C7D22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
 		2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */; };
@@ -1706,6 +1708,8 @@
 		2CAB3718219EF332007A524A /* Model_course_time_to_complete_v26.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_time_to_complete_v26.xcdatamodel; sourceTree = "<group>"; };
 		2CAB5C7322F1B90300ED2221 /* NewCodeQuizFullscreenInstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenInstructionViewController.swift; sourceTree = "<group>"; };
 		2CAB5C7522F1B97A00ED2221 /* NewCodeQuizFullscreenCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenCodeViewController.swift; sourceTree = "<group>"; };
+		2CAB5C7822F1E1DF00ED2221 /* NewCodeQuizFullscreenInstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenInstructionView.swift; sourceTree = "<group>"; };
+		2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenViewModel.swift; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
@@ -4331,9 +4335,18 @@
 			isa = PBXGroup;
 			children = (
 				2CAB5C7522F1B97A00ED2221 /* NewCodeQuizFullscreenCodeViewController.swift */,
-				2CAB5C7322F1B90300ED2221 /* NewCodeQuizFullscreenInstructionViewController.swift */,
+				2CAB5C7A22F1E1F200ED2221 /* Instruction */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		2CAB5C7A22F1E1F200ED2221 /* Instruction */ = {
+			isa = PBXGroup;
+			children = (
+				2CAB5C7822F1E1DF00ED2221 /* NewCodeQuizFullscreenInstructionView.swift */,
+				2CAB5C7322F1B90300ED2221 /* NewCodeQuizFullscreenInstructionViewController.swift */,
+			);
+			path = Instruction;
 			sourceTree = "<group>";
 		};
 		2CAD8B9E2170CDF7003F420B /* Notifications */ = {
@@ -5403,6 +5416,7 @@
 				7D3417B44078A2AB57A0E63F /* NewCodeQuizFullscreenPresenter.swift */,
 				081C378AAE221323BF85346D /* NewCodeQuizFullscreenView.swift */,
 				35F47B9DDB10472D2B2542B4 /* NewCodeQuizFullscreenViewController.swift */,
+				2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */,
 				2CAB5C7722F1B9A800ED2221 /* Tabs */,
 			);
 			path = NewCodeQuizFullscreen;
@@ -6504,6 +6518,7 @@
 				080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */,
 				2C6BBBB222B261E700889A45 /* BaseQuizDataFlow.swift in Sources */,
 				084DDDE1204EDF7600913503 /* NotificationRequestAlertViewController.swift in Sources */,
+				2CAB5C7922F1E1DF00ED2221 /* NewCodeQuizFullscreenInstructionView.swift in Sources */,
 				2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */,
 				2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */,
 				2CC0754720177A2E004A6005 /* AdaptiveStatsViewController.swift in Sources */,
@@ -6801,6 +6816,7 @@
 				62E98D82655D6D23A2C73DD6 /* ContinueCourseInteractor.swift in Sources */,
 				62E98DAAF9C3E79D42E7E02D /* ContinueCoursePresenter.swift in Sources */,
 				62E98F9D4DFE12505014E204 /* ContinueCourseDataFlow.swift in Sources */,
+				2CAB5C7D22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift in Sources */,
 				62E9823AE017E3E0C20F076A /* ContinueCourseView.swift in Sources */,
 				62E98E651364CDC640E357E7 /* CourseListsCollectionAssembly.swift in Sources */,
 				62E98A522931AE7AD51BB1D6 /* CourseListsCollectionViewController.swift in Sources */,
