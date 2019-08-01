@@ -65,7 +65,7 @@ final class ProfilePresenter {
 
     private var dataBackUpdateService: DataBackUpdateServiceProtocol
 
-    private var userSeed: UserSeed
+    var userSeed: UserSeed
 
     private var didProfileAttach = false
 

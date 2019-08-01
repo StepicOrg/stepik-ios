@@ -8,112 +8,78 @@
 
 import Foundation
 
-class CertificatesPresenter {
-
+final class CertificatesPresenter {
     weak var view: CertificatesView?
-    private var certificatesAPI: CertificatesAPI?
-    private var coursesAPI: CoursesAPI?
-    private var presentationContainer: CertificatesPresentationContainer?
 
-    private var lastRefreshedUserId: Int?
+    private let userID: User.IdType
+    private let certificatesAPI: CertificatesAPI
+    private let coursesAPI: CoursesAPI
+    private let presentationContainer: CertificatesPresentationContainer
 
-    init(certificatesAPI: CertificatesAPI, coursesAPI: CoursesAPI, presentationContainer: CertificatesPresentationContainer, view: CertificatesView) {
-        self.certificatesAPI = certificatesAPI
-        self.coursesAPI = coursesAPI
-        self.presentationContainer = presentationContainer
-        self.view = view
-        guard let userId = AuthInfo.shared.userId,
-            AuthInfo.shared.isAuthorized else {
-                certificates = []
-                lastRefreshedUserId = nil
-                view.displayAnonymous()
-                return
-        }
-
-        getCachedCertificates(userId: userId)
-    }
-
-    var page: Int = 1
-    var certificates: [Certificate] = [] {
+    private var certificates: [Certificate] = [] {
         didSet {
             self.updatePersistentPresentationData()
         }
     }
 
-    func checkStatus() {
-        if lastRefreshedUserId != AuthInfo.shared.userId {
-            certificates = []
-            lastRefreshedUserId = AuthInfo.shared.userId
-            if !AuthInfo.shared.isAuthorized {
-                view?.displayAnonymous()
-                view?.setCertificates(certificates: [], hasNextPage: false)
-            } else {
-                view?.displayEmpty()
-                view?.setCertificates(certificates: [], hasNextPage: false)
-                refreshCertificates()
-            }
-        }
+    private var page = 1
+    private var isGettingNextPage = false
+
+    init(
+        userID: User.IdType,
+        certificatesAPI: CertificatesAPI,
+        coursesAPI: CoursesAPI,
+        presentationContainer: CertificatesPresentationContainer,
+        view: CertificatesView
+    ) {
+        self.userID = userID
+        self.certificatesAPI = certificatesAPI
+        self.coursesAPI = coursesAPI
+        self.presentationContainer = presentationContainer
+        self.view = view
+
+        self.getCachedCertificates(userId: userID)
     }
 
     func getCachedCertificates(userId: Int) {
-        guard let localIds = presentationContainer?.certificatesIds else {
-            return
-        }
+        let localIds = presentationContainer.certificatesIds
 
         let localCertificates = Certificate.fetch(localIds, user: userId).sorted(by: {
             guard let index1 = localIds.index(of: $0.id),
-                let index2 = localIds.index(of: $1.id) else {
-                    return false
+                  let index2 = localIds.index(of: $1.id) else {
+                return false
             }
             return index1 < index2
-        }).compactMap {
-            [weak self] in
-            self?.certificateViewData(fromCertificate: $0)
+        }).compactMap { [weak self] in
+            self?.makeViewData(from: $0)
         }
 
         view?.setCertificates(certificates: localCertificates, hasNextPage: false)
     }
 
-    fileprivate func updatePersistentPresentationData() {
-        presentationContainer?.certificatesIds = certificates.map({
-            $0.id
-        })
+    private func updatePersistentPresentationData() {
+        self.presentationContainer.certificatesIds = certificates.map { $0.id }
     }
 
     func refreshCertificates() {
-        guard let userId = AuthInfo.shared.userId,
-            AuthInfo.shared.isAuthorized else {
-            certificates = []
-            lastRefreshedUserId = nil
-            view?.displayAnonymous()
-            return
-        }
-
-        lastRefreshedUserId = userId
         view?.displayRefreshing()
 
-        certificatesAPI?.retrieve(userId: userId, success: {
-            [weak self]
-            meta, newCertificates in
-
+        self.certificatesAPI.retrieve(userId: self.userID, success: { [weak self] meta, newCertificates in
             self?.certificates = newCertificates
             self?.page = 1
 
-            self?.loadCoursesForCertificates(certificates: newCertificates, completion: {
-                [weak self] in
-                guard let s = self else {
+            self?.loadCoursesForCertificates(certificates: newCertificates, completion: { [weak self] in
+                guard let strongSelf = self else {
                     return
                 }
-                s.view?.setCertificates(certificates: s.certificates.compactMap({
-                    [weak self] in
-                    self?.certificateViewData(fromCertificate: $0)
+
+                strongSelf.view?.setCertificates(certificates: strongSelf.certificates.compactMap({ [weak self] in
+                    self?.makeViewData(from: $0)
                 }), hasNextPage: meta.hasNext)
-                s.view?.displayEmpty()
+                strongSelf.view?.displayEmpty()
                 CoreDataHelper.instance.save()
             })
-        }, error: {
-            [weak self]
-            _ in
+        }, error: { [weak self] _ in
             self?.view?.displayError()
         })
     }
@@ -127,25 +93,20 @@ class CertificatesPresenter {
             }
         }
 
-        let courseIds = certificates.map {
-            $0.courseId
-        }
+        let courseIds = certificates.map { $0.courseId }
 
         let localCourses = Course.getCourses(courseIds)
         matchCoursesToCertificates(courses: localCourses)
 
-        coursesAPI?.retrieve(ids: courseIds, existing: localCourses, refreshMode: .update, success: {
-            courses in
+        self.coursesAPI.retrieve(ids: courseIds, existing: localCourses, refreshMode: .update, success: { courses in
             matchCoursesToCertificates(courses: courses)
             completion()
-        }, error: {
-            _ in
+        }, error: { _ in
             completion()
         })
     }
 
-    private func certificateViewData(fromCertificate certificate: Certificate) -> CertificateViewData {
-
+    private func makeViewData(from certificate: Certificate) -> CertificateViewData {
         var courseImageURL: URL?
         if let courseImageURLString = certificate.course?.coverURLString {
             courseImageURL = URL(string: courseImageURLString)
@@ -156,56 +117,51 @@ class CertificatesPresenter {
             certificateURL = URL(string: certificateURLString)
         }
 
-        let certificateDescriptionBeginning = certificate.type == .distinction ? "\(NSLocalizedString("CertificateWithDistinction", comment: ""))" : "\(NSLocalizedString("Certificate", comment: ""))"
+        let certificateDescriptionBeginning = certificate.type == .distinction
+            ? "\(NSLocalizedString("CertificateWithDistinction", comment: ""))"
+            : "\(NSLocalizedString("Certificate", comment: ""))"
 
         let certificateDescriptionString = "\(certificateDescriptionBeginning) \(NSLocalizedString("CertificateDescriptionBody", comment: "")) \(certificate.course?.title ?? "")"
 
-        return CertificateViewData(courseName: certificate.course?.title, courseImageURL: courseImageURL, grade: certificate.grade, certificateURL: certificateURL, certificateDescription: certificateDescriptionString)
+        return CertificateViewData(
+            courseName: certificate.course?.title,
+            courseImageURL: courseImageURL,
+            grade: certificate.grade,
+            certificateURL: certificateURL,
+            certificateDescription: certificateDescriptionString
+        )
     }
 
-    fileprivate var isGettingNextPage: Bool = false
-
     func getNextPage() -> Bool {
-        guard let userId = AuthInfo.shared.userId else {
-            certificates = []
-            view?.displayAnonymous()
-            return false
-        }
-
         if isGettingNextPage {
             return false
         }
 
         isGettingNextPage = true
 
-        certificatesAPI?.retrieve(userId: userId, page: page + 1, success: {
-            [weak self]
-            meta, newCertificates in
+        self.certificatesAPI.retrieve(userId: self.userID, page: page + 1, success: {
+            [weak self] meta, newCertificates in
 
             self?.page += 1
             self?.certificates += newCertificates
 
-            self?.loadCoursesForCertificates(certificates: newCertificates, completion: {
-                [weak self] in
-                guard let s = self else {
+            self?.loadCoursesForCertificates(certificates: newCertificates, completion: { [weak self] in
+                guard let strongSelf = self else {
                     self?.isGettingNextPage = false
                     return
                 }
-                s.view?.setCertificates(certificates: s.certificates.compactMap({
-                    [weak self] in
-                    self?.certificateViewData(fromCertificate: $0)
+
+                strongSelf.view?.setCertificates(certificates: strongSelf.certificates.compactMap({ [weak self] in
+                    self?.makeViewData(from: $0)
                 }), hasNextPage: meta.hasNext)
                 CoreDataHelper.instance.save()
                 self?.isGettingNextPage = false
             })
-        }, error: {
-            [weak self]
-            _ in
+        }, error: { [weak self] _ in
             self?.view?.displayLoadNextPageError()
             self?.isGettingNextPage = false
         })
 
         return true
     }
-
 }

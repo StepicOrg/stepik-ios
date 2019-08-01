@@ -335,10 +335,14 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
                 return
             }
 
-            let viewController = ControllerHelper.instantiateViewController(
+            guard let viewController = ControllerHelper.instantiateViewController(
                 identifier: "CertificatesViewController",
                 storyboardName: "CertificatesStoryboard"
-            )
+            ) as? CertificatesViewController else {
+                return
+            }
+
+            viewController.userID = strongSelf.presenter?.userSeed.userId
 
             strongSelf.push(module: viewController)
         }
