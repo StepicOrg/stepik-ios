@@ -2234,13 +2234,6 @@
 			name = Certificates;
 			sourceTree = "<group>";
 		};
-		081058331E9FDD1800FAC30A /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
 		08195A041FA00FE300E6D6CD /* Course List */ = {
 			isa = PBXGroup;
 			children = (
@@ -2434,7 +2427,6 @@
 		083F2B0F1E9D8E2A00714173 /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
-				081058331E9FDD1800FAC30A /* Tests */,
 				083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */,
 				083F2B131E9D8EF800714173 /* CertificatesViewController.swift */,
 				083F2B161E9D8F1D00714173 /* CertificatesView.swift */,
