@@ -40,10 +40,15 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificates) { [weak self] in
-            self?.tabBarController?.selectedIndex = 1
+        let isMe = AuthInfo.shared.userId != nil && self.userID == AuthInfo.shared.userId
+        if isMe {
+            self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesMe) { [weak self] in
+                self?.tabBarController?.selectedIndex = 1
+            }
+        } else {
+            self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyCertificatesOther)
         }
-        tableView.loadingPlaceholder = StepikPlaceholder(.emptyCertificatesLoading)
+        self.tableView.loadingPlaceholder = StepikPlaceholder(.emptyCertificatesLoading)
 
         registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
             self?.presenter?.refreshCertificates()
