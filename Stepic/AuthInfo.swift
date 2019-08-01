@@ -64,9 +64,7 @@ class AuthInfo: NSObject {
                         Progress.deleteAllStoredProgresses()
                         Notification.deleteAll()
                         AnalyticsUserProperties.shared.clearUserDependentProperties()
-                        #if !os(tvOS)
-                            NotificationsBadgesManager.shared.set(number: 0)
-                        #endif
+                        NotificationsBadgesManager.shared.set(number: 0)
                         CoreDataHelper.instance.save()
 
                         AuthInfo.shared.user = nil

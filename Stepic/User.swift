@@ -24,6 +24,7 @@ final class User: NSManagedObject, IDFetchable {
         id = json["id"].intValue
         profile = json["profile"].intValue
         isPrivate = json["is_private"].boolValue
+        isOrganization = json["is_organization"].boolValue
         bio = json["short_bio"].stringValue
         details = json["details"].stringValue
         firstName = json["first_name"].stringValue
