@@ -8,21 +8,20 @@
 
 import UIKit
 
-class StyledTabBarViewController: UITabBarController {
+final class StyledTabBarViewController: UITabBarController {
+    private let items = StepicApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
-    let items = StepicApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
-
-    var notificationsBadgeNumber: Int {
+    private var notificationsBadgeNumber: Int {
         get {
-            if let tab = tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
+            if let tab = self.tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
                 return Int(tab.badgeValue ?? "0") ?? 0
             }
             return 0
         }
         set {
-            if let tab = tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
+            if let tab = self.tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
                 tab.badgeValue = newValue > 0 ? "\(newValue)" : nil
-                fixBadgePosition()
+                self.fixBadgePosition()
             }
         }
     }
@@ -30,27 +29,37 @@ class StyledTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.tintColor = UIColor.mainDark
+        self.tabBar.tintColor = UIColor.mainDark
         if #available(iOS 10.0, *) {
-            tabBar.unselectedItemTintColor = UIColor(hex: 0xbabac1)
+            self.tabBar.unselectedItemTintColor = UIColor(hex: 0xbabac1)
         }
-        tabBar.isTranslucent = false
+        self.tabBar.isTranslucent = false
 
-        self.setViewControllers(items.map {
+        self.setViewControllers(self.items.map {
             let vc = $0.controller
             vc.tabBarItem = $0.buildItem()
             return vc
         }, animated: false)
         self.updateTitlesForTabBarItems()
 
-        delegate = self
+        self.delegate = self
 
         if !AuthInfo.shared.isAuthorized {
-            selectedIndex = 1
+            self.selectedIndex = 1
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didBadgeUpdate(systemNotification:)), name: .badgeUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didBadgeUpdate(systemNotification:)),
+            name: .badgeUpdated,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didScreenRotate),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -59,8 +68,11 @@ class StyledTabBarViewController: UITabBarController {
         if !DefaultsContainer.launch.didLaunch {
             DefaultsContainer.launch.didLaunch = true
 
-            let onboardingVC = ControllerHelper.instantiateViewController(identifier: "Onboarding", storyboardName: "Onboarding")
-            present(onboardingVC, animated: true, completion: nil)
+            let onboardingViewController = ControllerHelper.instantiateViewController(
+                identifier: "Onboarding",
+                storyboardName: "Onboarding"
+            )
+            self.present(onboardingViewController, animated: true)
         }
     }
 
@@ -68,25 +80,22 @@ class StyledTabBarViewController: UITabBarController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    @objc func didBadgeUpdate(systemNotification: Foundation.Notification) {
+    // MARK: Private API
+
+    @objc
+    private func didBadgeUpdate(systemNotification: Foundation.Notification) {
         guard let userInfo = systemNotification.userInfo,
-            let value = userInfo["value"] as? Int else {
-                return
+              let value = userInfo["value"] as? Int else {
+            return
         }
 
         self.notificationsBadgeNumber = value
     }
 
-    @objc func didScreenRotate() {
+    @objc
+    private func didScreenRotate() {
         self.updateTitlesForTabBarItems()
         self.fixBadgePosition()
-    }
-
-    func getEventNameForTabIndex(index: Int) -> String? {
-        guard index < items.count else {
-            return nil
-        }
-        return items[index].clickEventName
     }
 
     private func updateTitlesForTabBarItems() {
@@ -166,7 +175,18 @@ class StyledTabBarViewController: UITabBarController {
     }
 }
 
-struct TabBarItemInfo {
+extension StyledTabBarViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        guard let selectedIndex = tabBarController.viewControllers?.index(of: viewController),
+              let eventName = self.items[safe: selectedIndex]?.clickEventName else {
+            return
+        }
+
+        AnalyticsReporter.reportEvent(eventName)
+    }
+}
+
+private struct TabBarItemInfo {
     var title: String
     var controller: UIViewController
     var clickEventName: String
@@ -178,8 +198,7 @@ struct TabBarItemInfo {
     }
 }
 
-enum TabController: String {
-    case certificates = "Certificates"
+private enum TabController: String {
     case profile = "Profile"
     case home = "Home"
     case notifications = "Notifications"
@@ -191,8 +210,6 @@ enum TabController: String {
 
     var itemInfo: TabBarItemInfo {
         switch self {
-        case .certificates:
-            return TabBarItemInfo(title: NSLocalizedString("Certificates", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "CertificatesNavigation", storyboardName: "CertificatesStoryboard"), clickEventName: AnalyticsEvents.Tabs.certificatesClicked, image: #imageLiteral(resourceName: "tab-certificates"), tag: self.tag)
         case .profile:
             return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
         case .home:
@@ -221,16 +238,6 @@ enum TabController: String {
                 image: #imageLiteral(resourceName: "tab-explore"),
                 tag: self.tag
             )
-        }
-    }
-}
-
-extension StyledTabBarViewController : UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let selectedIndex = tabBarController.viewControllers?.index(of: viewController) {
-            if let eventName = getEventNameForTabIndex(index: selectedIndex) {
-                AnalyticsReporter.reportEvent(eventName, parameters: nil)
-            }
         }
     }
 }
