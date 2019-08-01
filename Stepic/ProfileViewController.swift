@@ -124,6 +124,8 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
                 menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
             case .notificationsTimeSelection:
                 menuBlocks.append(buildNotificationsTimeSelectionBlock())
+            case .certificates:
+                menuBlocks.append(self.buildCertificatesBlock())
             case .description:
                 menuBlocks.append(buildInfoExpandableBlock())
             case .pinsMap:
@@ -164,7 +166,7 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         switch block {
         case .infoHeader:
             return self.profileStreaksView
-        case .notificationsTimeSelection, .notificationsSwitch(_):
+        case .notificationsTimeSelection, .notificationsSwitch(_), .certificates:
             return self
         case .description:
             return self.profileDescriptionView
@@ -318,6 +320,27 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
         block.onAppearance = { [weak self] in
             self?.presenterNotifications?.refreshStreakNotificationTime()
+        }
+
+        return block
+    }
+
+    private func buildCertificatesBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(
+            id: ProfileMenuBlock.certificates.rawValue,
+            title: NSLocalizedString("Certificates", comment: "")
+        )
+        block.onTouch = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            let viewController = ControllerHelper.instantiateViewController(
+                identifier: "CertificatesViewController",
+                storyboardName: "CertificatesStoryboard"
+            )
+
+            strongSelf.push(module: viewController)
         }
 
         return block

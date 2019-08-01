@@ -22,7 +22,7 @@ protocol ProfileView: class {
     func attachProfile(_ profile: Profile)
 }
 
-class ProfilePresenter {
+final class ProfilePresenter {
     enum UserSeed {
         case other(id: Int)
         case `self`(id: Int)
@@ -69,14 +69,21 @@ class ProfilePresenter {
 
     private var didProfileAttach = false
 
-    private static let selfUserMenu: [ProfileMenuBlock] = [.infoHeader,
-                                                           .notificationsSwitch(isOn: false),
-                                                           .pinsMap,
-                                                           .achievements,
-                                                           .description]
-    private static let otherUserMenu: [ProfileMenuBlock] = [.infoHeader, .pinsMap, .achievements, .description]
+    private static let selfUserMenu: [ProfileMenuBlock] = [
+        .infoHeader, .notificationsSwitch(isOn: false), .pinsMap, .certificates, .achievements, .description
+    ]
+    private static let otherUserMenu: [ProfileMenuBlock] = [
+        .infoHeader, .pinsMap, .certificates, .achievements, .description
+    ]
 
-    init(userSeed: UserSeed, view: ProfileView, userActivitiesAPI: UserActivitiesAPI, usersAPI: UsersAPI, profilesAPI: ProfilesAPI, dataBackUpdateService: DataBackUpdateServiceProtocol) {
+    init(
+        userSeed: UserSeed,
+        view: ProfileView,
+        userActivitiesAPI: UserActivitiesAPI,
+        usersAPI: UsersAPI,
+        profilesAPI: ProfilesAPI,
+        dataBackUpdateService: DataBackUpdateServiceProtocol
+    ) {
         self.view = view
         self.userActivitiesAPI = userActivitiesAPI
         self.usersAPI = usersAPI
@@ -212,8 +219,9 @@ class ProfilePresenter {
                 throw UnwrappingError.optionalError
             }
 
-            let menu = isMe ? strongSelf.buildSelfUserMenu(blocks: ProfilePresenter.selfUserMenu)
-                                                        : ProfilePresenter.otherUserMenu
+            let menu = isMe
+                ? strongSelf.buildSelfUserMenu(blocks: ProfilePresenter.selfUserMenu)
+                : ProfilePresenter.otherUserMenu
 
             if let user = user {
                 strongSelf.view?.set(state: .normal)

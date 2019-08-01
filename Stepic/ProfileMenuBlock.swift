@@ -1,10 +1,4 @@
-//
-//  ProfileViewController+StreakNotificationsControlView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 28.05.18.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
+import Foundation
 
 enum ProfileMenuBlock: RawRepresentable, Equatable {
     typealias RawValue = String
@@ -12,6 +6,7 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
     case infoHeader
     case notificationsSwitch(isOn: Bool)
     case notificationsTimeSelection
+    case certificates
     case description
     case pinsMap
     case achievements
@@ -28,6 +23,8 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
             return "notificationsSwitch"
         case .notificationsTimeSelection:
             return "notificationsTimeSelection"
+        case .certificates:
+            return "certificates"
         case .description:
             return "description"
         case .pinsMap:
