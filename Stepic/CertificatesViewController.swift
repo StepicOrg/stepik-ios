@@ -109,10 +109,13 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         presenter?.refreshCertificates()
 
         tableView.backgroundColor = UIColor.groupTableViewBackground
-        let _ = self.paginationView
 
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
+        }
+
+        DispatchQueue.main.async {
+            self.displayRefreshing()
         }
     }
 
