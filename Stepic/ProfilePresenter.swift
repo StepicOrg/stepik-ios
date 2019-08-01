@@ -219,11 +219,15 @@ final class ProfilePresenter {
                 throw UnwrappingError.optionalError
             }
 
-            let menu = isMe
+            var menu = isMe
                 ? strongSelf.buildSelfUserMenu(blocks: ProfilePresenter.selfUserMenu)
                 : ProfilePresenter.otherUserMenu
 
             if let user = user {
+                if user.isOrganization {
+                    menu.removeAll(where: { $0 == .certificates })
+                }
+
                 strongSelf.view?.set(state: .normal)
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
