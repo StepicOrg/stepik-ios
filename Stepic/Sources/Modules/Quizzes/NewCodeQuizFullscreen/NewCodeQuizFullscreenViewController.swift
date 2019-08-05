@@ -94,6 +94,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // TODO: Set title.
         self.title = "Title"
         self.navigationItem.rightBarButtonItem = self.moreBarButton
 
@@ -164,6 +165,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                         wrappedViewController: assembly.makeModule(),
                         title: NSLocalizedString("Settings", comment: ""),
                         onDismiss: {
+                            // TODO: Update theme.
                             print("self?.setupTheme()")
                         }
                     )
@@ -177,6 +179,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                 title: NSLocalizedString("Reset", comment: ""),
                 style: .destructive,
                 handler: { _ in
+                    // TODO: Reset code.
                     print("Reset")
                 }
             )
