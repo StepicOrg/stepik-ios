@@ -5,48 +5,116 @@
 //  Created by Vladislav Kiryukhin on 11.04.18.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
-import UIKit
-import ActionSheetPicker_3_0
 
-class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsView {
+import ActionSheetPicker_3_0
+import UIKit
+
+@available(*, deprecated, message: "Class to initialize code editor settings w/o storyboards logic")
+final class CodeEditorSettingsLegacyAssembly: Assembly {
+    private let previewLanguage: CodeLanguage
+
+    init(previewLanguage: CodeLanguage = .python) {
+        self.previewLanguage = previewLanguage
+    }
+    
+    func makeModule() -> UIViewController {
+        guard let viewController = ControllerHelper.instantiateViewController(
+            identifier: "CodeEditorSettings",
+            storyboardName: "Profile"
+        ) as? CodeEditorSettingsViewController else {
+            fatalError("Failed to initialize CodeEditorSettingsViewController")
+        }
+
+        let presenter = CodeEditorSettingsPresenter(view: viewController)
+        viewController.presenter = presenter
+        viewController.previewLanguage = self.previewLanguage
+
+        return viewController
+    }
+}
+
+final class CodeEditorSettingsViewController: MenuViewController {
     var presenter: CodeEditorSettingsPresenter?
-    var previewView: CodeEditorPreviewView!
     var previewLanguage = CodeLanguage.python
+
+    private lazy var previewView: CodeEditorPreviewView = {
+        let previewView = CodeEditorPreviewView()
+        previewView.delegate = self
+        return previewView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = []
+        self.edgesForExtendedLayout = []
+        self.tableView.tableHeaderView = self.previewView
 
-        previewView = CodeEditorPreviewView()
-        previewView.delegate = self
-        tableView.tableHeaderView = previewView
-        layoutTableHeaderView()
-
-        presenter = CodeEditorSettingsPresenter(view: self)
+        self.layoutTableHeaderView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        previewView.setupPreview(with: PreferencesContainer.codeEditor.theme, fontSize: PreferencesContainer.codeEditor.fontSize, language: previewLanguage)
+
+        // TODO: Add injection for theme.
+        self.previewView.setupPreview(
+            with: PreferencesContainer.codeEditor.theme,
+            fontSize: PreferencesContainer.codeEditor.fontSize,
+            language: self.previewLanguage
+        )
     }
 
-    func chooseEditorTheme(current: String) {
-        guard let hl = previewView.highlightr,
-              let currentThemeIndex = hl.availableThemes().index(of: current) else {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.layoutTableHeaderView()
+    }
+
+    private func layoutTableHeaderView() {
+        guard let tableHeaderView = self.tableView.tableHeaderView else {
             return
         }
 
-        ActionSheetStringPicker.show(withTitle: NSLocalizedString("CodeEditorTheme", comment: ""),
-            rows: hl.availableThemes(),
+        tableHeaderView.translatesAutoresizingMaskIntoConstraints = false
+
+        let headerWidth = tableHeaderView.bounds.size.width
+        let widthConstraint = tableHeaderView.widthAnchor.constraint(equalToConstant: headerWidth)
+        widthConstraint.isActive = true
+
+        tableHeaderView.setNeedsLayout()
+        tableHeaderView.layoutIfNeeded()
+
+        var frame = tableHeaderView.frame
+        frame.size.height = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        tableHeaderView.frame = frame
+
+        tableHeaderView.removeConstraint(widthConstraint)
+        tableHeaderView.translatesAutoresizingMaskIntoConstraints = true
+        self.tableView.tableHeaderView = tableHeaderView
+    }
+}
+
+extension CodeEditorSettingsViewController: CodeEditorSettingsView {
+    func setMenu(menu: Menu) {
+        self.menu = menu
+    }
+
+    func chooseEditorTheme(current: String) {
+        guard let highlightr = self.previewView.highlightr,
+              let currentThemeIndex = highlightr.availableThemes().index(of: current) else {
+            return
+        }
+
+        ActionSheetStringPicker.show(
+            withTitle: NSLocalizedString("CodeEditorTheme", comment: ""),
+            rows: highlightr.availableThemes(),
             initialSelection: currentThemeIndex,
-            doneBlock: { _, _, value in
+            doneBlock: { [weak self]  _, _, value in
                 if let value = value as? String {
-                    self.presenter?.updateTheme(with: value)
+                    self?.presenter?.updateTheme(with: value)
                 }
             },
             cancel: { _ in },
-            origin: previewView)
+            origin: self.previewView
+        )
     }
 
     func chooseFontSize(current: Int) {
@@ -56,55 +124,26 @@ class CodeEditorSettingsViewController: MenuViewController, CodeEditorSettingsVi
             return
         }
 
-        ActionSheetStringPicker.show(withTitle: NSLocalizedString("CodeEditorFontSize", comment: ""),
+        ActionSheetStringPicker.show(
+            withTitle: NSLocalizedString("CodeEditorFontSize", comment: ""),
             rows: availableSizes.map { "\($0)" },
             initialSelection: currentSizeIndex,
-            doneBlock: { _, _, value in
+            doneBlock: { [weak self] _, _, value in
                 if let value = value as? String, let intValue = Int(value) {
-                    self.presenter?.updateFontSize(with: intValue)
+                    self?.presenter?.updateFontSize(with: intValue)
                 }
             },
             cancel: { _ in },
-            origin: previewView)
+            origin: self.previewView
+        )
     }
 
     func updatePreview(theme: String) {
-        previewView?.updateTheme(with: theme)
+        self.previewView.updateTheme(with: theme)
     }
 
     func updatePreview(fontSize: Int) {
-        previewView?.updateFontSize(with: fontSize)
-    }
-
-    func setMenu(menu: Menu) {
-        self.menu = menu
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        layoutTableHeaderView()
-    }
-
-    func layoutTableHeaderView() {
-        guard let headerView = tableView.tableHeaderView else {
-            return
-        }
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-
-        let headerWidth = headerView.bounds.size.width
-        let widthConstraint = headerView.widthAnchor.constraint(equalToConstant: headerWidth)
-        widthConstraint.isActive = true
-
-        headerView.setNeedsLayout()
-        headerView.layoutIfNeeded()
-
-        var frame = headerView.frame
-        frame.size.height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-        headerView.frame = frame
-
-        headerView.removeConstraint(widthConstraint)
-        headerView.translatesAutoresizingMaskIntoConstraints = true
-        tableView.tableHeaderView = headerView
+        self.previewView.updateFontSize(with: fontSize)
     }
 }
 
@@ -112,16 +151,27 @@ extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
         let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName }))
 
-        ActionSheetStringPicker.show(withTitle: NSLocalizedString("CodeEditorLanguage", comment: ""),
+        guard let currentLanguageIndex = availableLanguages.index(of: self.previewLanguage.humanReadableName) else {
+            return
+        }
+
+        ActionSheetStringPicker.show(
+            withTitle: NSLocalizedString("CodeEditorLanguage", comment: ""),
             rows: availableLanguages,
-            initialSelection: availableLanguages.index(of: previewLanguage.humanReadableName)!,
-            doneBlock: { _, _, value in
+            initialSelection: currentLanguageIndex,
+            doneBlock: { [weak self] _, _, value in
+                guard let strongSelf = self else {
+                    return
+                }
+
                 if let value = value as? String {
-                    self.previewLanguage = CodeLanguage.allCases.first(where: { $0.humanReadableName == value }) ?? self.previewLanguage
-                    self.previewView.updateLanguage(with: self.previewLanguage)
+                    let newPreviewLanguage = CodeLanguage.allCases.first(where: { $0.humanReadableName == value })
+                    strongSelf.previewLanguage = newPreviewLanguage ?? strongSelf.previewLanguage
+                    strongSelf.previewView.updateLanguage(with: strongSelf.previewLanguage)
                 }
             },
             cancel: { _ in },
-            origin: previewView.languageButton)
+            origin: self.previewView.languageButton
+        )
     }
 }

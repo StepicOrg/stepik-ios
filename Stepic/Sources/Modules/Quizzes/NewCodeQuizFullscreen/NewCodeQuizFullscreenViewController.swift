@@ -152,10 +152,23 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(
-                title: NSLocalizedString("SelectLanguage", comment: ""),
+                title: NSLocalizedString("Settings", comment: ""),
                 style: .default,
-                handler: { _ in
-                    print("Select language")
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    let assembly = CodeEditorSettingsLegacyAssembly()
+                    let navigationController = WrappingNavigationViewController(
+                        wrappedViewController: assembly.makeModule(),
+                        title: NSLocalizedString("Settings", comment: ""),
+                        onDismiss: {
+                            print("self?.setupTheme()")
+                        }
+                    )
+
+                    strongSelf.present(navigationController, animated: true)
                 }
             )
         )

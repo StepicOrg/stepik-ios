@@ -361,17 +361,16 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
     }
 
     func settingsPressed() {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
-            return
-        }
+        let assembly = CodeEditorSettingsLegacyAssembly()
+        let navigationController = WrappingNavigationViewController(
+            wrappedViewController: assembly.makeModule(),
+            title: NSLocalizedString("Settings", comment: ""),
+            onDismiss: { [weak self] in
+                self?.setupTheme()
+            }
+        )
 
-        let presenter = CodeEditorSettingsPresenter(view: vc)
-        vc.presenter = presenter
-
-        let navVC = WrappingNavigationViewController(wrappedViewController: vc, title: NSLocalizedString("Settings", comment: ""), onDismiss: { [weak self] in
-            self?.setupTheme()
-        })
-        present(navVC, animated: true)
+        self.present(navigationController, animated: true)
     }
 
     func fullscreenPressed() {
