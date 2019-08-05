@@ -5,8 +5,14 @@ final class NewCodeQuizAssembly: QuizAssembly {
     weak var moduleOutput: QuizOutputProtocol?
 
     func makeModule() -> UIViewController {
+        let provider = NewCodeQuizProvider(
+            stepOptionsPersistenceService: StepOptionsPersistenceService(
+                stepsPersistenceService: StepsPersistenceService()
+            )
+        )
+
         let presenter = NewCodeQuizPresenter()
-        let interactor = NewCodeQuizInteractor(presenter: presenter)
+        let interactor = NewCodeQuizInteractor(presenter: presenter, provider: provider)
         let viewController = NewCodeQuizViewController(interactor: interactor)
 
         presenter.viewController = viewController

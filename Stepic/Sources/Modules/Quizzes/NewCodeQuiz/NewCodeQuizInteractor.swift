@@ -11,6 +11,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     weak var moduleOutput: QuizOutputProtocol?
 
     private let presenter: NewCodeQuizPresenterProtocol
+    private let provider: NewCodeQuizProviderProtocol
 
     private var currentCode: String? {
         didSet {
@@ -25,8 +26,12 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private var currentStatus: QuizStatus?
     private var currentContent: String?
 
-    init(presenter: NewCodeQuizPresenterProtocol) {
+    init(
+        presenter: NewCodeQuizPresenterProtocol,
+        provider: NewCodeQuizProviderProtocol
+    ) {
         self.presenter = presenter
+        self.provider = provider
     }
 
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
