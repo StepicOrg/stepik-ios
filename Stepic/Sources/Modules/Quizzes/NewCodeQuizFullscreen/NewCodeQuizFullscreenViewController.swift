@@ -94,8 +94,8 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // TODO: Set title.
-        self.title = "Title"
+        // TODO: Set lesson title.
+        self.title = "Lesson Title"
         self.navigationItem.rightBarButtonItem = self.moreBarButton
 
         self.dataSource = self
