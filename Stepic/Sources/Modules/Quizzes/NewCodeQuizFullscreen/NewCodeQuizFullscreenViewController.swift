@@ -95,8 +95,6 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         super.viewDidLoad()
 
         self.title = "Title"
-        self.view.backgroundColor = .white
-
         self.navigationItem.rightBarButtonItem = self.moreBarButton
 
         self.dataSource = self
