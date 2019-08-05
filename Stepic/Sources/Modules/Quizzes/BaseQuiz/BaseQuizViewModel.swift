@@ -13,7 +13,5 @@ struct BaseQuizViewModel {
     let shouldPassPeerReview: Bool
     let stepURL: URL
     let hintContent: String?
-    // TODO: Fix
-    let options: StepOptions?
-    let stepContent: String?
+    let codeDetails: CodeDetails?
 }

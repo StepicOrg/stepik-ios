@@ -94,6 +94,17 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             return nil
         }()
 
+        let codeDetails: CodeDetails? = {
+            if let options = step.options {
+                return CodeDetails(
+                    stepID: step.id,
+                    stepContent: step.block.text ?? "",
+                    stepOptions: StepOptionsPlainObject(stepOptions: options)
+                )
+            }
+            return nil
+        }()
+
         return BaseQuizViewModel(
             quizStatus: quizStatus,
             reply: submission?.reply ?? cachedReply,
@@ -107,9 +118,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             shouldPassPeerReview: shouldPassPeerReview,
             stepURL: self.makeURL(for: step),
             hintContent: hintContent,
-            // TODO: Fix
-            options: step.options,
-            stepContent: step.block.text ?? ""
+            codeDetails: codeDetails
         )
     }
 
