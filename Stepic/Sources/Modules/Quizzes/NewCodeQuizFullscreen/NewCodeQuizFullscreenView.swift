@@ -32,8 +32,4 @@ extension NewCodeQuizFullscreenView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }
-
-    func addSubviews() { }
-
-    func makeConstraints() { }
 }
