@@ -465,6 +465,7 @@
 		2C20778622BBC05F00D44DC0 /* NewStringQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778522BBC05F00D44DC0 /* NewStringQuizViewModel.swift */; };
 		2C20778822BCED1700D44DC0 /* BaseQuizOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778722BCED1600D44DC0 /* BaseQuizOutputProtocol.swift */; };
 		2C20778A22BD349300D44DC0 /* QuizAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20778922BD349300D44DC0 /* QuizAssembly.swift */; };
+		2C20C85922F8D08F0052E9BF /* StepOptionsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */; };
 		2C22042520E277B40060117A /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
 		2C22042720E277E50060117A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042620E277E50060117A /* SkeletonView.swift */; };
 		2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042820E277F60060117A /* SkeletonViewAnimation.swift */; };
@@ -1560,6 +1561,7 @@
 		2C20778522BBC05F00D44DC0 /* NewStringQuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStringQuizViewModel.swift; sourceTree = "<group>"; };
 		2C20778722BCED1600D44DC0 /* BaseQuizOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuizOutputProtocol.swift; sourceTree = "<group>"; };
 		2C20778922BD349300D44DC0 /* QuizAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAssembly.swift; sourceTree = "<group>"; };
+		2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOptionsPersistenceService.swift; sourceTree = "<group>"; };
 		2C22042420E277B40060117A /* Skeletonable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
 		2C22042620E277E50060117A /* SkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		2C22042820E277F60060117A /* SkeletonViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewAnimation.swift; sourceTree = "<group>"; };
@@ -4701,6 +4703,7 @@
 				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
 				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
 				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
+				2C20C85822F8D08F0052E9BF /* StepOptionsPersistenceService.swift */,
 				2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */,
 				62E981BE70619C07A3F72EC9 /* UnitsPersistenceService.swift */,
 			);
@@ -6385,6 +6388,7 @@
 				08F485931C574D79000165AA /* WarningView.swift in Sources */,
 				2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */,
 				2C6BBBB422B261E700889A45 /* BaseQuizView.swift in Sources */,
+				2C20C85922F8D08F0052E9BF /* StepOptionsPersistenceService.swift in Sources */,
 				080C5E801EFC28CF0036EB3D /* CodeSample+CoreDataProperties.swift in Sources */,
 				2CE664E320F5207A0082F3FE /* Downloader.swift in Sources */,
 				0829B8351E9D025C009B4A84 /* CertificatesAPI.swift in Sources */,
