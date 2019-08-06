@@ -15,6 +15,8 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         static let barButtonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
         static let barButtonTitleFontSelected = UIFont.systemFont(ofSize: 15)
         static let barButtonTitleColor = UIColor.mainDark
+
+        static let spacingBetweenPages: CGFloat = 16.0
     }
 
     private let interactor: NewCodeQuizFullscreenInteractorProtocol
@@ -100,6 +102,8 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
 
         self.dataSource = self
         self.addBar(self.tabBarView, dataSource: self, at: .top)
+
+        self.interPageSpacing = Appearance.spacingBetweenPages
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             DispatchQueue.main.async {
