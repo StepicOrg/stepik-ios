@@ -106,8 +106,6 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                 styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
             }
         }
-
-        self.interactor.doSomeAction(request: .init())
     }
 
     // MARK: Private API

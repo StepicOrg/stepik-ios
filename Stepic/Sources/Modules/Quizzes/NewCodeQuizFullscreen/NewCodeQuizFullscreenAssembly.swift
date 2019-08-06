@@ -3,33 +3,32 @@ import UIKit
 final class NewCodeQuizFullscreenAssembly: Assembly {
     private weak var moduleOutput: NewCodeQuizFullscreenOutputProtocol?
 
-    private let content: String
+    private let codeDetails: CodeDetails
     private let language: CodeLanguage
-    private let options: StepOptions
-    private let codeEditorTheme: CodeEditorView.Theme
 
     init(
-        content: String,
+        codeDetails: CodeDetails,
         language: CodeLanguage,
-        options: StepOptions,
-        codeEditorTheme: CodeEditorView.Theme,
         output: NewCodeQuizFullscreenOutputProtocol? = nil
     ) {
-        self.content = content
+        self.codeDetails = codeDetails
         self.language = language
-        self.options = options
-        self.codeEditorTheme = codeEditorTheme
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
+        let provider = NewCodeQuizProvider(
+            stepOptionsPersistenceService: StepOptionsPersistenceService(
+                stepsPersistenceService: StepsPersistenceService()
+            )
+        )
+
         let presenter = NewCodeQuizFullscreenPresenter()
         let interactor = NewCodeQuizFullscreenInteractor(
             presenter: presenter,
-            content: self.content,
-            language: self.language,
-            options: self.options,
-            codeEditorTheme: self.codeEditorTheme
+            provider: provider,
+            codeDetails: codeDetails,
+            language: self.language
         )
         let viewController = NewCodeQuizFullscreenViewController(interactor: interactor)
 

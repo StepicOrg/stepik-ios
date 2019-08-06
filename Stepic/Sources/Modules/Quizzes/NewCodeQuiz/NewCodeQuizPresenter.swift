@@ -57,7 +57,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             languages: stepOptions.languages,
             samples: stepOptions.samples.map { processCodeSample($0) },
             limit: codeLimit,
-            codeEditorTheme: self.getCodeEditorTheme(),
+            codeEditorTheme: .init(name: self.codeEditorThemeService.name, font: self.codeEditorThemeService.font),
             finalState: state
         )
 
@@ -67,14 +67,10 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
     func presentFullscreen(response: NewCodeQuiz.FullscreenPresentation.Response) {
         self.viewController?.displayFullscreen(
             viewModel: .init(
-                data: response.data,
-                codeEditorTheme: self.getCodeEditorTheme()
+                language: response.language,
+                codeDetails: response.codeDetails
             )
         )
-    }
-
-    private func getCodeEditorTheme() -> NewCodeQuizViewModel.CodeEditorTheme {
-        return .init(name: self.codeEditorThemeService.name, font: self.codeEditorThemeService.font)
     }
 
     private func processCodeSample(_ sample: CodeSamplePlainObject) -> NewCodeQuiz.CodeSample {

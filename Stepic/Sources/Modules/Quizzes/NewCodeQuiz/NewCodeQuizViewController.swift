@@ -33,12 +33,9 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
     }
 
     func displayFullscreen(viewModel: NewCodeQuiz.FullscreenPresentation.ViewModel) {
-        let data = viewModel.data
         let assembly = NewCodeQuizFullscreenAssembly(
-            content: data.content,
-            language: data.language,
-            options: data.options,
-            codeEditorTheme: .init(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font),
+            codeDetails: viewModel.codeDetails,
+            language: viewModel.language,
             output: nil
         )
         self.present(moduleStack: [assembly.makeModule()])

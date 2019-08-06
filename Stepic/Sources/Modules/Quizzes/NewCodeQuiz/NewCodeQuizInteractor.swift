@@ -76,19 +76,12 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
-        self.provider.fetchStepOptions(by: codeDetails.stepID).done { stepOptions in
-            guard let stepOptions = stepOptions else {
-                return
-            }
-
-            let data = NewCodeQuiz.FullscreenPresentation.Data(
-                content: codeDetails.stepContent,
+        self.presenter.presentFullscreen(
+            response: .init(
                 language: language,
-                options: stepOptions
+                codeDetails: codeDetails
             )
-
-            self.presenter.presentFullscreen(response: .init(data: data))
-        }.cauterize()
+        )
     }
 
     // MARK: - Private API

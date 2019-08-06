@@ -2,15 +2,10 @@ import Foundation
 
 enum NewCodeQuizFullscreen {
     enum SomeAction {
-        struct Request { }
-
         struct Response {
-            let content: String
-            let language: CodeLanguage
-            let options: StepOptions
             let code: String?
-            let codeTemplate: String?
-            let codeEditorTheme: CodeEditorView.Theme
+            let language: CodeLanguage
+            let codeDetails: CodeDetails
         }
 
         struct ViewModel {

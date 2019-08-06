@@ -35,18 +35,13 @@ enum NewCodeQuiz {
         struct Request { }
 
         struct Response {
-            let data: Data
+            let language: CodeLanguage
+            let codeDetails: CodeDetails
         }
 
         struct ViewModel {
-            let data: Data
-            let codeEditorTheme: NewCodeQuizViewModel.CodeEditorTheme
-        }
-
-        struct Data {
-            let content: String
             let language: CodeLanguage
-            let options: StepOptions
+            let codeDetails: CodeDetails
         }
     }
 

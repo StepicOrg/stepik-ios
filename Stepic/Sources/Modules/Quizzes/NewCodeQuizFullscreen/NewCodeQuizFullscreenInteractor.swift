@@ -1,55 +1,45 @@
 import Foundation
 import PromiseKit
 
-protocol NewCodeQuizFullscreenInteractorProtocol {
-    func doSomeAction(request: NewCodeQuizFullscreen.SomeAction.Request)
-}
+protocol NewCodeQuizFullscreenInteractorProtocol { }
 
 final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProtocol {
     weak var moduleOutput: NewCodeQuizFullscreenOutputProtocol?
 
     private let presenter: NewCodeQuizFullscreenPresenterProtocol
+    private let provider: NewCodeQuizProviderProtocol
 
-    private let content: String
+    private let codeDetails: CodeDetails
     private let language: CodeLanguage
-    private let options: StepOptions
-    private let codeEditorTheme: CodeEditorView.Theme
-
-    private var codeTemplate: String? {
-        return self.options.template(language: language, userGenerated: false)?.templateString
-    }
 
     private var currentCode: String?
 
     init(
         presenter: NewCodeQuizFullscreenPresenterProtocol,
-        content: String,
-        language: CodeLanguage,
-        options: StepOptions,
-        codeEditorTheme: CodeEditorView.Theme
+        provider: NewCodeQuizProviderProtocol,
+        codeDetails: CodeDetails,
+        language: CodeLanguage
     ) {
         self.presenter = presenter
-        self.content = content
+        self.provider = provider
+        self.codeDetails = codeDetails
         self.language = language
-        self.options = options
-        self.codeEditorTheme = codeEditorTheme
 
-        if let userTemplate = options.template(language: language, userGenerated: true) {
-            self.currentCode = userTemplate.templateString
-        } else if let template = options.template(language: language, userGenerated: false) {
-            self.currentCode = template.templateString
+        self.provider.fetchUserOrCodeTemplate(by: codeDetails.stepID, language: language).done { codeTemplate in
+            self.currentCode = codeTemplate?.templateString
+        }.ensure {
+            self.presentNewData()
+        }.catch { error in
+            print("NewCodeQuizFullscreenInteractor :: failed fetch code template \(error)")
         }
     }
 
-    func doSomeAction(request: NewCodeQuizFullscreen.SomeAction.Request) {
+    private func presentNewData() {
         self.presenter.presentSomeActionResult(
             response: .init(
-                content: self.content,
-                language: self.language,
-                options: self.options,
                 code: self.currentCode,
-                codeTemplate: self.codeTemplate,
-                codeEditorTheme: self.codeEditorTheme
+                language: self.language,
+                codeDetails: self.codeDetails
             )
         )
     }
