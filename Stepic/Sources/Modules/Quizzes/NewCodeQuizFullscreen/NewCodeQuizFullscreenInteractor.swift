@@ -1,7 +1,10 @@
 import Foundation
 import PromiseKit
 
-protocol NewCodeQuizFullscreenInteractorProtocol { }
+protocol NewCodeQuizFullscreenInteractorProtocol {
+    func doReplyUpdate(request: NewCodeQuizFullscreen.ReplyConvert.Request)
+    func doReplySubmit(request: NewCodeQuizFullscreen.ReplySubmit.Request)
+}
 
 final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProtocol {
     weak var moduleOutput: NewCodeQuizFullscreenOutputProtocol?
@@ -32,6 +35,16 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
         }.catch { error in
             print("NewCodeQuizFullscreenInteractor :: failed fetch code template \(error)")
         }
+    }
+
+    func doReplyUpdate(request: NewCodeQuizFullscreen.ReplyConvert.Request) {
+        self.currentCode = request.code
+        self.moduleOutput?.update(code: request.code)
+    }
+
+    func doReplySubmit(request: NewCodeQuizFullscreen.ReplySubmit.Request) {
+        let reply = CodeReply(code: self.currentCode ?? "", language: self.language)
+        self.moduleOutput?.submit(reply: reply)
     }
 
     private func presentNewData() {

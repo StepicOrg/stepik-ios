@@ -13,6 +13,18 @@ enum NewCodeQuizFullscreen {
         }
     }
 
+    /// Convert code data to reply
+    enum ReplyConvert {
+        struct Request {
+            let code: String
+        }
+    }
+
+    /// Submit current code reply
+    enum ReplySubmit {
+        struct Request { }
+    }
+
     enum Tab {
         case instruction
         case code

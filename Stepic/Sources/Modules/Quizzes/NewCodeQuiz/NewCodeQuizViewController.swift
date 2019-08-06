@@ -36,7 +36,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
         let assembly = NewCodeQuizFullscreenAssembly(
             codeDetails: viewModel.codeDetails,
             language: viewModel.language,
-            output: nil
+            output: self
         )
 
         let viewController = assembly.makeModule()
@@ -61,5 +61,15 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
 
     func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? {
         return self
+    }
+}
+
+extension NewCodeQuizViewController: NewCodeQuizFullscreenOutputProtocol {
+    func update(code: String) {
+        self.interactor.doReplyUpdate(request: .init(code: code))
+    }
+
+    func submit(reply: Reply) {
+        self.interactor.doReplySubmit(request: .init(reply: reply))
     }
 }

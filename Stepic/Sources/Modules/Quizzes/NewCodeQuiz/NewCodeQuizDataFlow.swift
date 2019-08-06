@@ -23,6 +23,13 @@ enum NewCodeQuiz {
         }
     }
 
+    /// Submit code reply.
+    enum ReplySubmit {
+        struct Request {
+            let reply: Reply?
+        }
+    }
+
     /// Select code language
     enum LanguageSelect {
         struct Request {

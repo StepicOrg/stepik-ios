@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol NewCodeQuizInteractorProtocol {
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request)
+    func doReplySubmit(request: NewCodeQuiz.ReplySubmit.Request)
     func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request)
     func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request)
 }
@@ -38,6 +39,15 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
         self.currentCode = request.code
         self.outputCurrentReply()
+    }
+
+    func doReplySubmit(request: NewCodeQuiz.ReplySubmit.Request) {
+        guard let reply = request.reply else {
+            return
+        }
+
+        self.update(reply: reply)
+        self.moduleOutput?.submit(reply: reply)
     }
 
     func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request) {

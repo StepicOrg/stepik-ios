@@ -130,12 +130,14 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                     limit: viewModel.limit
                 )
             case .code:
-                return NewCodeQuizFullscreenCodeViewController(
+                let viewController = NewCodeQuizFullscreenCodeViewController(
                     language: viewModel.language,
                     code: viewModel.code,
                     codeTemplate: viewModel.codeTemplate,
                     codeEditorTheme: viewModel.codeEditorTheme
                 )
+                viewController.delegate = self
+                return viewController
             case .run:
                 return nil
             }
@@ -217,5 +219,22 @@ extension NewCodeQuizFullscreenViewController: TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         let title = self.availableTabs[safe: index]?.title ?? ""
         return TMBarItem(title: title)
+    }
+}
+
+extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewControllerDelegate {
+    func newCodeQuizFullscreenCodeViewController(
+        _ viewController: NewCodeQuizFullscreenCodeViewController,
+        codeDidChange code: String
+    ) {
+        self.interactor.doReplyUpdate(request: .init(code: code))
+    }
+
+    func newCodeQuizFullscreenCodeViewController(
+        _ viewController: NewCodeQuizFullscreenCodeViewController,
+        didSubmitCode code: String
+    ) {
+        self.interactor.doReplySubmit(request: .init())
+        self.dismiss(animated: true)
     }
 }

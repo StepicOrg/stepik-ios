@@ -1,6 +1,18 @@
 import SnapKit
 import UIKit
 
+protocol NewCodeQuizFullscreenCodeViewControllerDelegate: class {
+    func newCodeQuizFullscreenCodeViewController(
+        _ viewController: NewCodeQuizFullscreenCodeViewController,
+        codeDidChange code: String
+    )
+
+    func newCodeQuizFullscreenCodeViewController(
+        _ viewController: NewCodeQuizFullscreenCodeViewController,
+        didSubmitCode code: String
+    )
+}
+
 final class NewCodeQuizFullscreenCodeViewController: UIViewController {
     enum Appearance {
         static let submitButtonBackgroundColor = UIColor.stepicGreen
@@ -12,6 +24,8 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
 
         static let codeEditorTextTopInset: CGFloat = 8
     }
+
+    weak var delegate: NewCodeQuizFullscreenCodeViewControllerDelegate?
 
     private let language: CodeLanguage
     private let code: String?
@@ -116,7 +130,7 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
 
     @objc
     private func submitClicked() {
-        self.dismiss(animated: true)
+        self.delegate?.newCodeQuizFullscreenCodeViewController(self, didSubmitCode: self.codeEditorView.code ?? "")
     }
 }
 
@@ -124,6 +138,8 @@ extension NewCodeQuizFullscreenCodeViewController: CodeEditorViewDelegate {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView) {
         let currentCode = (codeEditorView.code ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         self.isSubmitButtonEnabled = !currentCode.isEmpty
+
+        self.delegate?.newCodeQuizFullscreenCodeViewController(self, codeDidChange: codeEditorView.code ?? "")
     }
 
     func codeEditorViewDidBeginEditing(_ codeEditorView: CodeEditorView) {
