@@ -4,7 +4,7 @@ import Tabman
 import UIKit
 
 protocol NewCodeQuizFullscreenViewControllerProtocol: class {
-    func displaySomeActionResult(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
+    func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
 }
 
 final class NewCodeQuizFullscreenViewController: TabmanViewController {
@@ -187,7 +187,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
 }
 
 extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel) {
+    func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel) {
         self.viewModel = viewModel.data
         self.reloadData()
     }

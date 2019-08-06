@@ -48,7 +48,7 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
     }
 
     private func presentNewData() {
-        self.presenter.presentSomeActionResult(
+        self.presenter.presentContent(
             response: .init(
                 code: self.currentCode,
                 language: self.language,

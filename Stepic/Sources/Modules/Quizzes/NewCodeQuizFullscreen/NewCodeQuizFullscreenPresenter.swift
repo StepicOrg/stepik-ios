@@ -2,15 +2,13 @@ import PromiseKit
 import UIKit
 
 protocol NewCodeQuizFullscreenPresenterProtocol {
-    func presentSomeActionResult(response: NewCodeQuizFullscreen.ContentLoad.Response)
+    func presentContent(response: NewCodeQuizFullscreen.ContentLoad.Response)
 }
 
 final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtocol {
     weak var viewController: NewCodeQuizFullscreenViewControllerProtocol?
 
     func presentContent(response: NewCodeQuizFullscreen.ContentLoad.Response) {
-
-    func presentSomeActionResult(response: NewCodeQuizFullscreen.ContentLoad.Response) {
         DispatchQueue.global(qos: .userInitiated).promise {
             self.processStepContent(response.codeDetails.stepContent)
         }.done { content in
@@ -36,7 +34,7 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
                 codeTemplate: stepOptions.getTemplate(for: response.language)?.template
             )
 
-            self.viewController?.displaySomeActionResult(viewModel: .init(data: viewModel))
+            self.viewController?.displayContent(viewModel: .init(data: viewModel))
         }.cauterize()
     }
 
