@@ -19,8 +19,8 @@ class CodeEditorPreferencesContainer {
             if let value = defaults.value(forKey: themeKey) as? String {
                 return value
             } else {
-                self.theme = "androidstudio"
-                return "androidstudio"
+                self.theme = "xcode"
+                return "xcode"
             }
         }
 
