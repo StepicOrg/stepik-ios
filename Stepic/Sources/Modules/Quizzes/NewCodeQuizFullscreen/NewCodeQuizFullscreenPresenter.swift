@@ -2,7 +2,7 @@ import PromiseKit
 import UIKit
 
 protocol NewCodeQuizFullscreenPresenterProtocol {
-    func presentSomeActionResult(response: NewCodeQuizFullscreen.SomeAction.Response)
+    func presentSomeActionResult(response: NewCodeQuizFullscreen.ContentLoad.Response)
 }
 
 final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtocol {
@@ -10,7 +10,7 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
 
     private let codeEditorThemeService: CodeEditorThemeServiceProtocol = CodeEditorThemeService()
 
-    func presentSomeActionResult(response: NewCodeQuizFullscreen.SomeAction.Response) {
+    func presentSomeActionResult(response: NewCodeQuizFullscreen.ContentLoad.Response) {
         DispatchQueue.global(qos: .userInitiated).promise {
             self.processStepContent(response.codeDetails.stepContent)
         }.done { content in

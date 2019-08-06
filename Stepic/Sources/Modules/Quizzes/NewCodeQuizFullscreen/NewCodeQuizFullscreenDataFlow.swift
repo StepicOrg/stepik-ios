@@ -1,7 +1,8 @@
 import Foundation
 
 enum NewCodeQuizFullscreen {
-    enum SomeAction {
+    /// Show fullscreen code quiz
+    enum ContentLoad {
         struct Response {
             let code: String?
             let language: CodeLanguage
