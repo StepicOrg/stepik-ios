@@ -2,6 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol NewCodeQuizInteractorProtocol {
+    func doReplyLoad(request: NewCodeQuiz.ReplyLoad.Request)
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request)
     func doReplySubmit(request: NewCodeQuiz.ReplySubmit.Request)
     func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request)
@@ -34,6 +35,10 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     ) {
         self.presenter = presenter
         self.provider = provider
+    }
+
+    func doReplyLoad(request: NewCodeQuiz.ReplyLoad.Request) {
+        self.presentNewData()
     }
 
     func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {

@@ -4,18 +4,9 @@ import UIKit
 final class NewCodeQuizFullscreenInstructionViewController: UIViewController {
     lazy var instructionView = self.view as? NewCodeQuizFullscreenInstructionView
 
-    private let content: String
-    private let samples: [CodeSamplePlainObject]
-    private let limit: CodeLimitPlainObject
+    private var currentContent: String?
 
-    init(
-        content: String,
-        samples: [CodeSamplePlainObject],
-        limit: CodeLimitPlainObject
-    ) {
-        self.content = content
-        self.samples = samples
-        self.limit = limit
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,12 +20,22 @@ final class NewCodeQuizFullscreenInstructionViewController: UIViewController {
         view.delegate = self
         self.view = view
     }
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension NewCodeQuizFullscreenInstructionViewController: NewCodeQuizFullscreenSubmoduleProtocol {
+    func configure(viewModel: NewCodeQuizFullscreenViewModel) {
+        guard self.currentContent != viewModel.content else {
+            return
+        }
+
+        self.currentContent = viewModel.content
 
         self.instructionView?.startLoading()
-        self.instructionView?.configure(htmlString: self.content, samples: self.samples, limit: self.limit)
+        self.instructionView?.configure(
+            htmlString: viewModel.content,
+            samples: viewModel.samples,
+            limit: viewModel.limit
+        )
     }
 }
 

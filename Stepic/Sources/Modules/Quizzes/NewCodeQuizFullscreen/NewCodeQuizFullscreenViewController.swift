@@ -23,6 +23,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     private let initialTabIndex: Int
 
     private var tabViewControllers: [UIViewController?] = []
+    private var submodules: [NewCodeQuizFullscreenSubmoduleProtocol?] = []
 
     private lazy var tabBarView: TMBar = {
         let bar = TMBarView<TMHorizontalBarLayout, TMLabelBarButton, TMLineBarIndicator>()
@@ -71,6 +72,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
 
         self.availableTabs = availableTabs
         self.tabViewControllers = Array(repeating: nil, count: availableTabs.count)
+        self.submodules = Array(repeating: nil, count: availableTabs.count)
 
         if let initialTabIndex = self.availableTabs.firstIndex(of: initialTab) {
             self.initialTabIndex = initialTabIndex
@@ -109,10 +111,6 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     // MARK: Private API
 
     private func loadTabViewControllerIfNeeded(at index: Int) {
-        guard let viewModel = self.viewModel else {
-            return
-        }
-
         guard self.tabViewControllers[index] == nil else {
             return
         }
@@ -124,25 +122,16 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         let controller: UIViewController? = {
             switch tab {
             case .instruction:
-                return NewCodeQuizFullscreenInstructionViewController(
-                    content: viewModel.content,
-                    samples: viewModel.samples,
-                    limit: viewModel.limit
-                )
+                return NewCodeQuizFullscreenInstructionViewController()
             case .code:
-                let viewController = NewCodeQuizFullscreenCodeViewController(
-                    language: viewModel.language,
-                    code: viewModel.code,
-                    codeTemplate: viewModel.codeTemplate
-                )
-                viewController.delegate = self
-                return viewController
+                return NewCodeQuizFullscreenCodeViewController(delegate: self)
             case .run:
                 return nil
             }
         }()
 
         self.tabViewControllers[index] = controller
+        self.submodules[index] = controller as? NewCodeQuizFullscreenSubmoduleProtocol
     }
 
     @objc
@@ -172,9 +161,8 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
             UIAlertAction(
                 title: NSLocalizedString("Reset", comment: ""),
                 style: .destructive,
-                handler: { _ in
-                    // TODO: Reset code.
-                    print("Reset")
+                handler: { [weak self] _ in
+                    self?.presentCodeResetAlert()
                 }
             )
         )
@@ -183,6 +171,25 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         )
         alert.popoverPresentationController?.barButtonItem = self.moreBarButton
         self.present(module: alert)
+    }
+
+    private func presentCodeResetAlert() {
+        let alert = UIAlertController(
+            title: nil,
+            message: NSLocalizedString("ResetAlertDescription", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Reset", comment: ""),
+                style: .destructive,
+                handler: { [weak self] _ in
+                    self?.interactor.doCodeReset(request: .init())
+                }
+            )
+        )
+        self.present(alert, animated: true)
     }
 }
 
@@ -203,6 +210,12 @@ extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
         at index: PageboyViewController.PageIndex
     ) -> UIViewController? {
         self.loadTabViewControllerIfNeeded(at: index)
+
+        if let submodule = self.submodules[safe: index],
+           let viewModel = self.viewModel {
+            submodule?.configure(viewModel: viewModel)
+        }
+
         return self.tabViewControllers[index]
     }
 

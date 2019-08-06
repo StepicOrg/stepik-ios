@@ -3,6 +3,8 @@ import Foundation
 enum NewCodeQuiz {
     /// Show quiz state
     enum ReplyLoad {
+        struct Request { }
+
         struct Response {
             let code: String?
             let language: CodeLanguage?

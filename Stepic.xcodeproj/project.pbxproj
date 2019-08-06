@@ -474,6 +474,8 @@
 		2C20C86622F8E4BF0052E9BF /* CodeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */; };
 		2C20C86822F903D10052E9BF /* CodeEditorThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */; };
 		2C20C86C22F988030052E9BF /* CodeEditorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */; };
+		2C20C86E22F999890052E9BF /* NewCodeQuizFullscreenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86D22F999890052E9BF /* NewCodeQuizFullscreenProvider.swift */; };
+		2C20C87022F9A1180052E9BF /* NewCodeQuizFullscreenSubmoduleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86F22F9A1180052E9BF /* NewCodeQuizFullscreenSubmoduleProtocol.swift */; };
 		2C22042520E277B40060117A /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
 		2C22042720E277E50060117A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042620E277E50060117A /* SkeletonView.swift */; };
 		2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042820E277F60060117A /* SkeletonViewAnimation.swift */; };
@@ -1578,6 +1580,8 @@
 		2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetails.swift; sourceTree = "<group>"; };
 		2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorThemeService.swift; sourceTree = "<group>"; };
 		2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorTheme.swift; sourceTree = "<group>"; };
+		2C20C86D22F999890052E9BF /* NewCodeQuizFullscreenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenProvider.swift; sourceTree = "<group>"; };
+		2C20C86F22F9A1180052E9BF /* NewCodeQuizFullscreenSubmoduleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenSubmoduleProtocol.swift; sourceTree = "<group>"; };
 		2C22042420E277B40060117A /* Skeletonable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
 		2C22042620E277E50060117A /* SkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		2C22042820E277F60060117A /* SkeletonViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewAnimation.swift; sourceTree = "<group>"; };
@@ -4366,6 +4370,7 @@
 			isa = PBXGroup;
 			children = (
 				2CAB5C7522F1B97A00ED2221 /* NewCodeQuizFullscreenCodeViewController.swift */,
+				2C20C86F22F9A1180052E9BF /* NewCodeQuizFullscreenSubmoduleProtocol.swift */,
 				2CAB5C7A22F1E1F200ED2221 /* Instruction */,
 			);
 			path = Tabs;
@@ -5449,6 +5454,7 @@
 				3025F71BBEA83B2F2D4EE286 /* NewCodeQuizFullscreenInteractor.swift */,
 				DCCE000FB8689122DC202C3E /* NewCodeQuizFullscreenOutputProtocol.swift */,
 				7D3417B44078A2AB57A0E63F /* NewCodeQuizFullscreenPresenter.swift */,
+				2C20C86D22F999890052E9BF /* NewCodeQuizFullscreenProvider.swift */,
 				081C378AAE221323BF85346D /* NewCodeQuizFullscreenView.swift */,
 				35F47B9DDB10472D2B2542B4 /* NewCodeQuizFullscreenViewController.swift */,
 				2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */,
@@ -6875,6 +6881,7 @@
 				62E985FFA36C4D5A3C0E63DD /* TagsAssembly.swift in Sources */,
 				62E989959BFCE8A398DA3F7B /* TagsViewController.swift in Sources */,
 				62E98AE6C786140C4661AD24 /* TagsInteractor.swift in Sources */,
+				2C20C86E22F999890052E9BF /* NewCodeQuizFullscreenProvider.swift in Sources */,
 				62E9888FE65E12533C2ECAE2 /* TagsPresenter.swift in Sources */,
 				62E9853ADFEFEF7344FE9DF1 /* TagsDataFlow.swift in Sources */,
 				62E98FD3F94C23372CA8BF78 /* ContentLanguageSwitchAssembly.swift in Sources */,
@@ -6886,6 +6893,7 @@
 				62E983FFC2FECABE7564B879 /* ContentLanguageSwitchView.swift in Sources */,
 				62E98E7E9187BE3A6599AB09 /* ContentLanguageSwitchButton.swift in Sources */,
 				62E982132F6F132B7B228D1D /* UserAccountService.swift in Sources */,
+				2C20C87022F9A1180052E9BF /* NewCodeQuizFullscreenSubmoduleProtocol.swift in Sources */,
 				62E9850C449D6419FA06D8F3 /* HomeAssembly.swift in Sources */,
 				62E98381564D069955621A74 /* HomeViewController.swift in Sources */,
 				62E98FF1ADE8EA2198909DDA /* HomeInteractor.swift in Sources */,

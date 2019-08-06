@@ -26,6 +26,11 @@ enum NewCodeQuizFullscreen {
         struct Request { }
     }
 
+    /// Reset current user code template with quiz template
+    enum ResetCode {
+        struct Request { }
+    }
+
     enum Tab {
         case instruction
         case code

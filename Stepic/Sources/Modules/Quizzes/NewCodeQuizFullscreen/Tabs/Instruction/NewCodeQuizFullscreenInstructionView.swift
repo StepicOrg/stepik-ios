@@ -40,17 +40,6 @@ final class NewCodeQuizFullscreenInstructionView: UIView {
         return view
     }()
 
-    private lazy var stepTextView: ProcessedContentTextView = {
-        let view = ProcessedContentTextView()
-        view.delegate = self
-        return view
-    }()
-
-    private lazy var detailsContentView: CodeDetailsContentView = {
-        let view = CodeDetailsContentView()
-        return view
-    }()
-
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -86,18 +75,22 @@ final class NewCodeQuizFullscreenInstructionView: UIView {
     }
 
     func configure(htmlString: String, samples: [CodeSamplePlainObject], limit: CodeLimitPlainObject) {
-        self.scrollableStackView.insertArrangedView(self.stepTextView, at: 0)
-        self.stepTextView.loadHTMLText(htmlString)
+        self.scrollableStackView.removeAllArrangedViews()
 
-        self.detailsContentView.configure(samples: samples, limit: limit)
+        let stepTextView = ProcessedContentTextView()
+        stepTextView.delegate = self
+        self.scrollableStackView.addArrangedView(stepTextView)
+        stepTextView.loadHTMLText(htmlString)
+
+        let detailsContentView = CodeDetailsContentView()
+        self.scrollableStackView.addArrangedView(detailsContentView)
+        detailsContentView.configure(samples: samples, limit: limit)
     }
 }
 
 extension NewCodeQuizFullscreenInstructionView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
-        self.scrollableStackView.addArrangedView(self.detailsContentView)
-
         self.addSubview(self.loadingIndicatorView)
     }
 

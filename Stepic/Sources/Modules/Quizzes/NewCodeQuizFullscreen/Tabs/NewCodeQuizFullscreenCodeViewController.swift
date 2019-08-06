@@ -27,12 +27,9 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
 
     weak var delegate: NewCodeQuizFullscreenCodeViewControllerDelegate?
 
-    private let language: CodeLanguage
-    private let code: String?
-    private let codeTemplate: String?
-
     private lazy var codeEditorView: CodeEditorView = {
         let codeEditorView = CodeEditorView()
+        codeEditorView.isThemeAutoUpdating = true
         codeEditorView.delegate = self
         return codeEditorView
     }()
@@ -71,14 +68,24 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         }
     }
 
-    init(
-        language: CodeLanguage,
-        code: String?,
-        codeTemplate: String?
-    ) {
-        self.language = language
-        self.code = code
-        self.codeTemplate = codeTemplate
+    private var language: CodeLanguage? {
+        didSet {
+            self.codeEditorView.language = self.language
+        }
+    }
+    private var code: String? {
+        didSet {
+            self.codeEditorView.code = self.code
+        }
+    }
+    private var codeTemplate: String? {
+        didSet {
+            self.codeEditorView.codeTemplate = self.codeTemplate
+        }
+    }
+
+    init(delegate: NewCodeQuizFullscreenCodeViewControllerDelegate? = nil) {
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -91,12 +98,6 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         super.viewDidLoad()
 
         self.addSubviews()
-
-        self.codeEditorView.language = self.language
-        self.codeEditorView.code = self.code
-        self.codeEditorView.codeTemplate = self.codeTemplate
-        self.codeEditorView.isThemeAutoUpdating = true
-
         self.isSubmitButtonHidden = false
     }
 
@@ -128,6 +129,14 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
     @objc
     private func submitClicked() {
         self.delegate?.newCodeQuizFullscreenCodeViewController(self, didSubmitCode: self.codeEditorView.code ?? "")
+    }
+}
+
+extension NewCodeQuizFullscreenCodeViewController: NewCodeQuizFullscreenSubmoduleProtocol {
+    func configure(viewModel: NewCodeQuizFullscreenViewModel) {
+        self.language = viewModel.language
+        self.code = viewModel.code
+        self.codeTemplate = viewModel.codeTemplate
     }
 }
 

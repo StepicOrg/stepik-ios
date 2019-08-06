@@ -67,6 +67,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
 extension NewCodeQuizViewController: NewCodeQuizFullscreenOutputProtocol {
     func update(code: String) {
         self.interactor.doReplyUpdate(request: .init(code: code))
+        self.interactor.doReplyLoad(request: .init())
     }
 
     func submit(reply: Reply) {
