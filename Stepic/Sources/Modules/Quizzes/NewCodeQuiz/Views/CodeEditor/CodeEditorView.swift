@@ -105,13 +105,15 @@ final class CodeEditorView: UIView {
         }
     }
 
-    var theme: Theme? {
+    var theme: CodeEditorTheme? {
         didSet {
-            if let theme = theme {
+            if let theme = self.theme {
                 self.codeTextView.updateTheme(name: theme.name, font: theme.font)
             }
         }
     }
+
+    var isThemeAutoUpdating: Bool = true
 
     var isEditable = true {
         didSet {
@@ -139,11 +141,24 @@ final class CodeEditorView: UIView {
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
+
+        self.updateThemeIfAutoEnabled()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.themeDidChange),
+            name: .codeEditorThemeDidChange,
+            object: nil
+        )
     }
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     private func setupAccessoryView(isEditable: Bool) {
@@ -204,9 +219,15 @@ final class CodeEditorView: UIView {
         self.oldCode = self.code
     }
 
-    struct Theme {
-        let name: String
-        let font: UIFont
+    @objc
+    private func themeDidChange() {
+        self.updateThemeIfAutoEnabled()
+    }
+
+    private func updateThemeIfAutoEnabled() {
+        if self.isThemeAutoUpdating {
+            self.theme = CodeEditorThemeService().theme
+        }
     }
 }
 

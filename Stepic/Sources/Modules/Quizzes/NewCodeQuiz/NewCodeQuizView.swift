@@ -54,6 +54,7 @@ final class NewCodeQuizView: UIView {
     private lazy var codeEditorView: CodeEditorView = {
         let codeEditorView = CodeEditorView()
         codeEditorView.delegate = self
+        codeEditorView.isThemeAutoUpdating = true
         return codeEditorView
     }()
 
@@ -124,7 +125,7 @@ final class NewCodeQuizView: UIView {
         self.codeEditorView.language = viewModel.language
         self.codeEditorView.code = viewModel.code
         self.codeEditorView.codeTemplate = viewModel.codeTemplate
-        self.codeEditorView.theme = .init(name: viewModel.codeEditorTheme.name, font: viewModel.codeEditorTheme.font)
+        self.codeEditorView.theme = viewModel.codeEditorTheme
         self.codeEditorView.isEditable = false
     }
 

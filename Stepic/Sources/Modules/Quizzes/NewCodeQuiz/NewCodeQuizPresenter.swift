@@ -61,7 +61,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             languages: stepOptions.languages,
             samples: stepOptions.samples.map { processCodeSample($0) },
             limit: codeLimit,
-            codeEditorTheme: .init(name: self.codeEditorThemeService.name, font: self.codeEditorThemeService.font),
+            codeEditorTheme: self.codeEditorThemeService.theme,
             finalState: state
         )
 

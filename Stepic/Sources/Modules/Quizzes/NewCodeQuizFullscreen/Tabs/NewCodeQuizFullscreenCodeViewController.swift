@@ -30,7 +30,6 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
     private let language: CodeLanguage
     private let code: String?
     private let codeTemplate: String?
-    private let codeEditorTheme: CodeEditorView.Theme
 
     private lazy var codeEditorView: CodeEditorView = {
         let codeEditorView = CodeEditorView()
@@ -75,13 +74,11 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
     init(
         language: CodeLanguage,
         code: String?,
-        codeTemplate: String?,
-        codeEditorTheme: CodeEditorView.Theme
+        codeTemplate: String?
     ) {
         self.language = language
         self.code = code
         self.codeTemplate = codeTemplate
-        self.codeEditorTheme = codeEditorTheme
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -98,7 +95,7 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         self.codeEditorView.language = self.language
         self.codeEditorView.code = self.code
         self.codeEditorView.codeTemplate = self.codeTemplate
-        self.codeEditorView.theme = self.codeEditorTheme
+        self.codeEditorView.isThemeAutoUpdating = true
 
         self.isSubmitButtonHidden = false
     }

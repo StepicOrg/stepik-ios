@@ -7,5 +7,4 @@ struct NewCodeQuizFullscreenViewModel {
     let language: CodeLanguage
     let code: String?
     let codeTemplate: String?
-    let codeEditorTheme: CodeEditorView.Theme
 }

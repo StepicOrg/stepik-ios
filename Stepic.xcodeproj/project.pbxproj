@@ -473,6 +473,7 @@
 		2C20C86422F8E1EE0052E9BF /* CodeSamplePlainObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86322F8E1EE0052E9BF /* CodeSamplePlainObject.swift */; };
 		2C20C86622F8E4BF0052E9BF /* CodeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */; };
 		2C20C86822F903D10052E9BF /* CodeEditorThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */; };
+		2C20C86C22F988030052E9BF /* CodeEditorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */; };
 		2C22042520E277B40060117A /* Skeletonable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042420E277B40060117A /* Skeletonable.swift */; };
 		2C22042720E277E50060117A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042620E277E50060117A /* SkeletonView.swift */; };
 		2C22042B20E277F70060117A /* SkeletonViewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22042820E277F60060117A /* SkeletonViewAnimation.swift */; };
@@ -1576,6 +1577,7 @@
 		2C20C86322F8E1EE0052E9BF /* CodeSamplePlainObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSamplePlainObject.swift; sourceTree = "<group>"; };
 		2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetails.swift; sourceTree = "<group>"; };
 		2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorThemeService.swift; sourceTree = "<group>"; };
+		2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorTheme.swift; sourceTree = "<group>"; };
 		2C22042420E277B40060117A /* Skeletonable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeletonable.swift; sourceTree = "<group>"; };
 		2C22042620E277E50060117A /* SkeletonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		2C22042820E277F60060117A /* SkeletonViewAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewAnimation.swift; sourceTree = "<group>"; };
@@ -4585,6 +4587,7 @@
 			isa = PBXGroup;
 			children = (
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
+				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
@@ -6905,6 +6908,7 @@
 				62E9836BABB817788805073E /* CourseInfoTabReviewsInputProtocol.swift in Sources */,
 				2C53E00222DDDBFD0084BA2B /* NewCodeQuizView.swift in Sources */,
 				62E981FCD3F080DDF310562B /* CourseInfoTabReviewsProvider.swift in Sources */,
+				2C20C86C22F988030052E9BF /* CodeEditorTheme.swift in Sources */,
 				62E9803EAF8716CC4673DDE6 /* CourseInfoTabReviewsViewModel.swift in Sources */,
 				2CB5B1612297F2FB00D7F706 /* StepVideoPreviewView.swift in Sources */,
 				62E98B88931268A63B55CFFD /* CourseInfoTabSyllabusViewModel.swift in Sources */,

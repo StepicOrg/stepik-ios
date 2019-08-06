@@ -133,8 +133,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                 let viewController = NewCodeQuizFullscreenCodeViewController(
                     language: viewModel.language,
                     code: viewModel.code,
-                    codeTemplate: viewModel.codeTemplate,
-                    codeEditorTheme: viewModel.codeEditorTheme
+                    codeTemplate: viewModel.codeTemplate
                 )
                 viewController.delegate = self
                 return viewController
@@ -162,10 +161,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                     let navigationController = WrappingNavigationViewController(
                         wrappedViewController: assembly.makeModule(),
                         title: NSLocalizedString("Settings", comment: ""),
-                        onDismiss: {
-                            // TODO: Update theme.
-                            print("self?.setupTheme()")
-                        }
+                        onDismiss: nil
                     )
 
                     strongSelf.present(navigationController, animated: true)

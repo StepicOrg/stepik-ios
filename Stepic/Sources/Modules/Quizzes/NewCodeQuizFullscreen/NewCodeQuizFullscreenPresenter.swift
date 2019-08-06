@@ -8,7 +8,7 @@ protocol NewCodeQuizFullscreenPresenterProtocol {
 final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtocol {
     weak var viewController: NewCodeQuizFullscreenViewControllerProtocol?
 
-    private let codeEditorThemeService: CodeEditorThemeServiceProtocol = CodeEditorThemeService()
+    func presentContent(response: NewCodeQuizFullscreen.ContentLoad.Response) {
 
     func presentSomeActionResult(response: NewCodeQuizFullscreen.ContentLoad.Response) {
         DispatchQueue.global(qos: .userInitiated).promise {
@@ -27,19 +27,13 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
                 )
             }()
 
-            let codeEditorTheme = CodeEditorView.Theme(
-                name: self.codeEditorThemeService.name,
-                font: self.codeEditorThemeService.font
-            )
-
             let viewModel = NewCodeQuizFullscreenViewModel(
                 content: content,
                 samples: stepOptions.samples.map { self.processCodeSample($0) },
                 limit: codeLimit,
                 language: response.language,
                 code: response.code,
-                codeTemplate: stepOptions.getTemplate(for: response.language)?.template,
-                codeEditorTheme: codeEditorTheme
+                codeTemplate: stepOptions.getTemplate(for: response.language)?.template
             )
 
             self.viewController?.displaySomeActionResult(viewModel: .init(data: viewModel))

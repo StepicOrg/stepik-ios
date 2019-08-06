@@ -10,11 +10,6 @@ struct NewCodeQuizViewModel {
     let codeEditorTheme: CodeEditorTheme
     let finalState: State
 
-    struct CodeEditorTheme {
-        let name: String
-        let font: UIFont
-    }
-
     enum State {
         case `default`
         case correct
