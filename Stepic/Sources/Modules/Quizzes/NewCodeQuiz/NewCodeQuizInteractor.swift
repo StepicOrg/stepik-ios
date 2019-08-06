@@ -17,7 +17,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private var currentStatus: QuizStatus?
 
     private var languageName: String?
-    private var codeLanguage: CodeLanguage? {
+    private var language: CodeLanguage? {
         return CodeLanguage(rawValue: self.languageName ?? "")
     }
 
@@ -52,7 +52,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.languageName = request.language.rawValue
 
         guard let codeDetails = self.codeDetails,
-              let language = self.codeLanguage else {
+              let language = self.language else {
             return self.presentNewData()
         }
 
@@ -71,7 +71,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 
     func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request) {
-        guard let language = self.codeLanguage,
+        guard let language = self.language,
               let codeDetails = self.codeDetails else {
             return
         }
@@ -127,7 +127,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     private func updateUserCodeTemplate() {
         guard let codeDetails = self.codeDetails,
-              let language = self.codeLanguage,
+              let language = self.language,
               let code = self.currentCode else {
             return
         }
@@ -141,7 +141,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     private func outputCurrentReply() {
         guard let code = self.currentCode,
-              let language = self.codeLanguage else {
+              let language = self.language else {
             return
         }
 
@@ -181,7 +181,7 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
     }
 
     private func handleEmptyReply() {
-        let isCurrentLanguageUnsupported = self.languageName != self.codeLanguage?.rawValue
+        let isCurrentLanguageUnsupported = self.languageName != self.language?.rawValue
         if isCurrentLanguageUnsupported {
             self.languageName = nil
             self.currentCode = nil
