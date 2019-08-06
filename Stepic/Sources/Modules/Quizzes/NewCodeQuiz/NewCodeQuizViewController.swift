@@ -38,7 +38,11 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
             language: viewModel.language,
             output: nil
         )
-        self.present(moduleStack: [assembly.makeModule()])
+
+        let viewController = assembly.makeModule()
+        viewController.title = viewModel.lessonTitle
+
+        self.present(moduleStack: [viewController])
     }
 }
 

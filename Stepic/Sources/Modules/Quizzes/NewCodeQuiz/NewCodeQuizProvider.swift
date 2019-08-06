@@ -9,15 +9,23 @@ protocol NewCodeQuizProviderProtocol {
     func fetchUserOrCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
 
     func updateUserCodeTemplate(stepID: Step.IdType, language: CodeLanguage, code: String) -> Promise<Void>
+
+    func fetchLessonTitle(by stepID: Step.IdType) -> Guarantee<String?>
 }
 
 final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
+    private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
+    private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
 
     init(
-        stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
+        stepsPersistenceService: StepsPersistenceServiceProtocol,
+        stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol,
+        lessonsPersistenceService: LessonsPersistenceServiceProtocol
     ) {
+        self.stepsPersistenceService = stepsPersistenceService
         self.stepOptionsPersistenceService = stepOptionsPersistenceService
+        self.lessonsPersistenceService = lessonsPersistenceService
     }
 
     func fetchStepOptions(by stepID: Step.IdType) -> Promise<StepOptions?> {
@@ -84,6 +92,27 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
                 CoreDataHelper.instance.save()
             }.catch { _ in
                 seal.reject(Error.templateUpdateFailed)
+            }
+        }
+    }
+
+    func fetchLessonTitle(by stepID: Step.IdType) -> Guarantee<String?> {
+        return Guarantee { seal in
+            self.stepsPersistenceService.fetch(ids: [stepID]).then { steps -> Promise<String?> in
+                if let step = steps.first {
+                    if let lesson = step.lesson {
+                        return .value(lesson.title)
+                    }
+                    return self.lessonsPersistenceService.fetch(ids: [step.lessonId]).firstValue.then {
+                        lesson -> Promise<String?> in
+                            .value(lesson.title)
+                    }
+                }
+                return .value(nil)
+            }.done { result in
+                seal(result)
+            }.catch { _ in
+                seal(nil)
             }
         }
     }

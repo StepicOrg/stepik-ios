@@ -37,11 +37,13 @@ enum NewCodeQuiz {
         struct Response {
             let language: CodeLanguage
             let codeDetails: CodeDetails
+            let lessonTitle: String?
         }
 
         struct ViewModel {
             let language: CodeLanguage
             let codeDetails: CodeDetails
+            let lessonTitle: String?
         }
     }
 }

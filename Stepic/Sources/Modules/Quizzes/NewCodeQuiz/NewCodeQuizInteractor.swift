@@ -76,12 +76,15 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
-        self.presenter.presentFullscreen(
-            response: .init(
-                language: language,
-                codeDetails: codeDetails
+        self.provider.fetchLessonTitle(by: codeDetails.stepID).done { lessonTitle in
+            self.presenter.presentFullscreen(
+                response: .init(
+                    language: language,
+                    codeDetails: codeDetails,
+                    lessonTitle: lessonTitle
+                )
             )
-        )
+        }
     }
 
     // MARK: - Private API

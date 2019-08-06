@@ -18,9 +18,11 @@ final class NewCodeQuizFullscreenAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = NewCodeQuizProvider(
+            stepsPersistenceService: StepsPersistenceService(),
             stepOptionsPersistenceService: StepOptionsPersistenceService(
                 stepsPersistenceService: StepsPersistenceService()
-            )
+            ),
+            lessonsPersistenceService: LessonsPersistenceService()
         )
 
         let presenter = NewCodeQuizFullscreenPresenter()

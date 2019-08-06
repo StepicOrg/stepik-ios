@@ -72,7 +72,8 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
         self.viewController?.displayFullscreen(
             viewModel: .init(
                 language: response.language,
-                codeDetails: response.codeDetails
+                codeDetails: response.codeDetails,
+                lessonTitle: response.lessonTitle
             )
         )
     }
