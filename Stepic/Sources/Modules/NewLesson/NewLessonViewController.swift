@@ -23,6 +23,11 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
     private let interactor: NewLessonInteractorProtocol
 
+    private lazy var infoBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(named: "info-system"), style: .plain, target: self, action: nil)
+        return item
+    }()
+
     private lazy var shareBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(
             barButtonSystemItem: .action,
@@ -32,6 +37,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         item.isEnabled = false
         return item
     }()
+
+    private lazy var tooltipView = LessonInfoTooltipView()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
