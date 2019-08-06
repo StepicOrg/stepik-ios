@@ -8,6 +8,8 @@ protocol NewCodeQuizPresenterProtocol {
 final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
     weak var viewController: NewCodeQuizViewControllerProtocol?
 
+    private let codeEditorThemeService: CodeEditorThemeServiceProtocol = CodeEditorThemeService()
+
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
         let state: NewCodeQuizViewModel.State = {
             if response.languageName != response.language?.rawValue {
@@ -72,10 +74,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
     }
 
     private func getCodeEditorTheme() -> NewCodeQuizViewModel.CodeEditorTheme {
-        let codeElementsSize: CodeQuizElementsSize = DeviceInfo.current.isPad ? .big : .small
-        let fontSize = codeElementsSize.elements.editor.realSizes.fontSize
-        let font = UIFont(name: "Courier", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
-        return .init(name: PreferencesContainer.codeEditor.theme, font: font)
+        return .init(name: self.codeEditorThemeService.name, font: self.codeEditorThemeService.font)
     }
 
     private func processCodeSample(_ sample: CodeSamplePlainObject) -> NewCodeQuiz.CodeSample {
