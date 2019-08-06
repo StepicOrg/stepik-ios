@@ -38,8 +38,6 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         return item
     }()
 
-    private lazy var tooltipView = LessonInfoTooltipView()
-
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         loadingIndicatorView.color = Appearance.loadingIndicatorColor
@@ -54,6 +52,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         view.backgroundColor = .white
         return view
     }()
+
+    private lazy var tooltipView = LessonInfoTooltipView()
 
     private var stepControllers: [UIViewController?] = []
     private var stepModulesInputs: [NewStepInputProtocol?] = []
