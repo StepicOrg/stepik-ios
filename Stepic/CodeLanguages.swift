@@ -36,6 +36,7 @@ enum CodeLanguage: String, CaseIterable {
     case pascal = "pascalabc"
     case perl = "perl"
     case sql = "sql"
+    case swift = "swift"
 
     var highlightr: String {
         switch self {
@@ -77,6 +78,8 @@ enum CodeLanguage: String, CaseIterable {
             return "perl"
         case .sql:
             return "sql"
+        case .swift:
+            return "swift"
         }
     }
 
@@ -120,6 +123,8 @@ enum CodeLanguage: String, CaseIterable {
             return "Perl"
         case .sql:
             return "SQL"
+        case .swift:
+            return "Swift"
         }
     }
 
@@ -167,6 +172,8 @@ enum CodeLanguage: String, CaseIterable {
             return "# comment\nprint \"Hello World!\\n\";"
         case .sql:
             return "# comment\n\nSELECT 'Hello World';"
+        case .swift:
+            return "// comment\nprint(\"Hello World!\")"
         }
     }
 }
