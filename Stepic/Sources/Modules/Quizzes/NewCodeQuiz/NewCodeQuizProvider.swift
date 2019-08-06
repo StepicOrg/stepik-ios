@@ -7,6 +7,8 @@ protocol NewCodeQuizProviderProtocol {
     func fetchCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserOrCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
+
+    func updateUserCodeTemplate(stepID: Step.IdType, language: CodeLanguage, code: String) -> Promise<Void>
 }
 
 final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
@@ -61,9 +63,35 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
         }
     }
 
+    func updateUserCodeTemplate(stepID: Step.IdType, language: CodeLanguage, code: String) -> Promise<Void> {
+        return Promise { seal in
+            when(
+                fulfilled: self.fetchStepOptions(by: stepID),
+                self.fetchUserCodeTemplate(by: stepID, language: language)
+            ).done { stepOptions, userTemplate in
+                guard let stepOptions = stepOptions else {
+                    return
+                }
+
+                if let userTemplate = userTemplate {
+                    userTemplate.templateString = code
+                } else {
+                    let newUserTemplate = CodeTemplate(language: language, template: code)
+                    newUserTemplate.isUserGenerated = true
+                    stepOptions.templates += [newUserTemplate]
+                }
+
+                CoreDataHelper.instance.save()
+            }.catch { _ in
+                seal.reject(Error.templateUpdateFailed)
+            }
+        }
+    }
+
     // MARK: Enums
 
     enum Error: Swift.Error {
         case fetchFailed
+        case templateUpdateFailed
     }
 }

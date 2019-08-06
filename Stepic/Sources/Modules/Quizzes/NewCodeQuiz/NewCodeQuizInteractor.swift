@@ -22,9 +22,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private var currentCodeLanguage: CodeLanguage? {
         return CodeLanguage(rawValue: self.currentLanguageName ?? "")
     }
-    private var currentOptions: StepOptions?
+    private var currentCodeDetails: CodeDetails?
     private var currentStatus: QuizStatus?
-    private var currentContent: String?
 
     init(
         presenter: NewCodeQuizPresenterProtocol,
@@ -40,10 +39,6 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 
     func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request) {
-        defer {
-            self.presentNewData()
-        }
-
         AnalyticsReporter.reportEvent(
             AnalyticsEvents.Code.languageChosen,
             parameters: [
@@ -54,76 +49,92 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
         self.currentLanguageName = request.language.rawValue
 
-        guard let options = self.currentOptions else {
-            return
+        guard let codeDetails = self.currentCodeDetails,
+              let language = self.currentCodeLanguage else {
+            return self.presentNewData()
         }
 
-        if let userTemplate = options.template(language: request.language, userGenerated: true) {
-            self.currentCode = userTemplate.templateString
-        } else if let template = options.template(language: request.language, userGenerated: false) {
-            self.currentCode = template.templateString
-        }
+        self.provider.fetchUserOrCodeTemplate(
+            by: codeDetails.stepID,
+            language: language
+        ).done { [weak self] codeTemplate in
+            guard let strongSelf = self else {
+                return
+            }
 
-        self.outputCurrentReply()
+            strongSelf.currentCode = codeTemplate?.templateString
+            strongSelf.outputCurrentReply()
+            strongSelf.presentNewData()
+        }.cauterize()
     }
 
     func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request) {
         guard let language = self.currentCodeLanguage,
-              let options = self.currentOptions else {
+              let codeDetails = self.currentCodeDetails else {
             return
         }
 
-        let data = NewCodeQuiz.FullscreenPresentation.Data(
-            content: self.currentContent ?? "",
-            language: language,
-            options: options
-        )
+        self.provider.fetchStepOptions(by: codeDetails.stepID).done { stepOptions in
+            guard let stepOptions = stepOptions else {
+                return
+            }
 
-        self.presenter.presentFullscreen(response: .init(data: data))
+            let data = NewCodeQuiz.FullscreenPresentation.Data(
+                content: codeDetails.stepContent,
+                language: language,
+                options: stepOptions
+            )
+
+            self.presenter.presentFullscreen(response: .init(data: data))
+        }.cauterize()
     }
 
     // MARK: - Private API
 
     private func presentNewData() {
-        guard let options = self.currentOptions else {
+        guard let codeDetails = self.currentCodeDetails else {
             return
         }
 
         let codeTemplate: String? = {
             if let language = self.currentCodeLanguage {
-                return options.template(language: language, userGenerated: false)?.templateString
+                return codeDetails.stepOptions.templates
+                    .first(where: { $0.language == language.rawValue && !$0.isUserGenerated })?
+                    .template
             }
             return nil
         }()
 
-        self.presenter.presentReply(
-            response: .init(
-                code: self.currentCode,
-                codeTemplate: codeTemplate,
-                language: self.currentCodeLanguage,
-                languageName: self.currentLanguageName,
-                options: options,
-                status: self.currentStatus
+        self.provider.fetchStepOptions(by: codeDetails.stepID).done { stepOptions in
+            guard let stepOptions = stepOptions else {
+                return
+            }
+
+            self.presenter.presentReply(
+                response: .init(
+                    code: self.currentCode,
+                    codeTemplate: codeTemplate,
+                    language: self.currentCodeLanguage,
+                    languageName: self.currentLanguageName,
+                    options: stepOptions,
+                    status: self.currentStatus
+                )
             )
-        )
+        }.cauterize()
     }
 
     private func updateUserCodeTemplate() {
-        guard let options = self.currentOptions,
-              let code = self.currentCode,
-              let codeLanguage = self.currentCodeLanguage else {
+        guard let codeDetails = self.currentCodeDetails,
+              let language = self.currentCodeLanguage,
+              let code = self.currentCode else {
             return
         }
 
-        if let userTemplate = options.template(language: codeLanguage, userGenerated: true) {
-            userTemplate.templateString = code
-        } else {
-            let newTemplate = CodeTemplate(language: codeLanguage, template: code)
-            newTemplate.isUserGenerated = true
-            options.templates += [newTemplate]
-        }
-
-        CoreDataHelper.instance.save()
+        self.provider.updateUserCodeTemplate(
+            stepID: codeDetails.stepID,
+            language: language,
+            code: code
+        ).cauterize()
     }
 
     private func outputCurrentReply() {
@@ -163,12 +174,8 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         self.presentNewData()
     }
 
-    func update(options: StepOptions?) {
-        self.currentOptions = options
-    }
-
-    func update(content: String?) {
-        self.currentContent = content
+    func update(codeDetails: CodeDetails?) {
+        self.currentCodeDetails = codeDetails
     }
 
     private func handleEmptyReply() {
@@ -176,8 +183,8 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         if isCurrentLanguageUnsupported {
             self.currentLanguageName = nil
             self.currentCode = nil
-        } else if self.currentOptions?.languages.count == 1,
-                  let language = self.currentOptions?.languages.first {
+        } else if self.currentCodeDetails?.stepOptions.languages.count == 1,
+                  let language = self.currentCodeDetails?.stepOptions.languages.first {
             self.doLanguageSelect(request: .init(language: language))
         }
     }

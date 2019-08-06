@@ -7,6 +7,10 @@ struct StepOptionsPlainObject {
     let limits: [CodeLimitPlainObject]
     let templates: [CodeTemplatePlainObject]
     let samples: [CodeSamplePlainObject]
+
+    var languages: [CodeLanguage] {
+        return self.limits.compactMap { CodeLanguage(rawValue: $0.language) }
+    }
 }
 
 extension StepOptionsPlainObject {
