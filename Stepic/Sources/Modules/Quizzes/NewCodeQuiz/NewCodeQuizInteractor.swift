@@ -13,17 +13,19 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private let presenter: NewCodeQuizPresenterProtocol
     private let provider: NewCodeQuizProviderProtocol
 
+    private var codeDetails: CodeDetails?
+    private var currentStatus: QuizStatus?
+
+    private var languageName: String?
+    private var codeLanguage: CodeLanguage? {
+        return CodeLanguage(rawValue: self.languageName ?? "")
+    }
+
     private var currentCode: String? {
         didSet {
             self.updateUserCodeTemplate()
         }
     }
-    private var currentLanguageName: String?
-    private var currentCodeLanguage: CodeLanguage? {
-        return CodeLanguage(rawValue: self.currentLanguageName ?? "")
-    }
-    private var currentCodeDetails: CodeDetails?
-    private var currentStatus: QuizStatus?
 
     init(
         presenter: NewCodeQuizPresenterProtocol,
@@ -47,10 +49,10 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             ]
         )
 
-        self.currentLanguageName = request.language.rawValue
+        self.languageName = request.language.rawValue
 
-        guard let codeDetails = self.currentCodeDetails,
-              let language = self.currentCodeLanguage else {
+        guard let codeDetails = self.codeDetails,
+              let language = self.codeLanguage else {
             return self.presentNewData()
         }
 
@@ -69,8 +71,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 
     func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request) {
-        guard let language = self.currentCodeLanguage,
-              let codeDetails = self.currentCodeDetails else {
+        guard let language = self.codeLanguage,
+              let codeDetails = self.codeDetails else {
             return
         }
 
@@ -92,12 +94,12 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     // MARK: - Private API
 
     private func presentNewData() {
-        guard let codeDetails = self.currentCodeDetails else {
+        guard let codeDetails = self.codeDetails else {
             return
         }
 
         let codeTemplate: String? = {
-            if let language = self.currentCodeLanguage {
+            if let language = self.codeLanguage {
                 return codeDetails.stepOptions.templates
                     .first(where: { $0.language == language.rawValue && !$0.isUserGenerated })?
                     .template
@@ -114,8 +116,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
                 response: .init(
                     code: self.currentCode,
                     codeTemplate: codeTemplate,
-                    language: self.currentCodeLanguage,
-                    languageName: self.currentLanguageName,
+                    language: self.codeLanguage,
+                    languageName: self.languageName,
                     options: stepOptions,
                     status: self.currentStatus
                 )
@@ -124,8 +126,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 
     private func updateUserCodeTemplate() {
-        guard let codeDetails = self.currentCodeDetails,
-              let language = self.currentCodeLanguage,
+        guard let codeDetails = self.codeDetails,
+              let language = self.codeLanguage,
               let code = self.currentCode else {
             return
         }
@@ -139,7 +141,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     private func outputCurrentReply() {
         guard let code = self.currentCode,
-              let language = self.currentCodeLanguage else {
+              let language = self.codeLanguage else {
             return
         }
 
@@ -161,7 +163,7 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         self.moduleOutput?.update(reply: reply)
 
         if let reply = reply as? CodeReply {
-            self.currentLanguageName = reply.languageName
+            self.languageName = reply.languageName
             self.currentCode = reply.code
             return
         }
@@ -175,16 +177,16 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
     }
 
     func update(codeDetails: CodeDetails?) {
-        self.currentCodeDetails = codeDetails
+        self.codeDetails = codeDetails
     }
 
     private func handleEmptyReply() {
-        let isCurrentLanguageUnsupported = self.currentLanguageName != self.currentCodeLanguage?.rawValue
+        let isCurrentLanguageUnsupported = self.languageName != self.codeLanguage?.rawValue
         if isCurrentLanguageUnsupported {
-            self.currentLanguageName = nil
+            self.languageName = nil
             self.currentCode = nil
-        } else if self.currentCodeDetails?.stepOptions.languages.count == 1,
-                  let language = self.currentCodeDetails?.stepOptions.languages.first {
+        } else if self.codeDetails?.stepOptions.languages.count == 1,
+                  let language = self.codeDetails?.stepOptions.languages.first {
             self.doLanguageSelect(request: .init(language: language))
         }
     }
