@@ -31,20 +31,29 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             }
         }()
 
+        let stepOptions = response.codeDetails.stepOptions
+
+        let codeTemplate: String? = {
+            if let language = response.language {
+                return stepOptions.getTemplate(for: language)?.template
+            }
+            return nil
+        }()
+
         let codeLimit: NewCodeQuiz.CodeLimit = {
-            if let codeLanguage = response.language,
-               let limit = response.options.limit(language: codeLanguage) {
+            if let language = response.language,
+               let limit = stepOptions.getLimit(for: language) {
                 return .init(time: limit.time, memory: limit.memory)
             }
-            return .init(time: response.options.executionTimeLimit, memory: response.options.executionMemoryLimit)
+            return .init(time: stepOptions.executionTimeLimit, memory: stepOptions.executionMemoryLimit)
         }()
 
         let viewModel = NewCodeQuizViewModel(
             code: response.code,
-            codeTemplate: response.codeTemplate,
+            codeTemplate: codeTemplate,
             language: response.language,
-            languages: response.options.languages,
-            samples: response.options.samples.map { processCodeSample($0) },
+            languages: stepOptions.languages,
+            samples: stepOptions.samples.map { processCodeSample($0) },
             limit: codeLimit,
             codeEditorTheme: self.getCodeEditorTheme(),
             finalState: state
@@ -69,7 +78,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
         return .init(name: PreferencesContainer.codeEditor.theme, font: font)
     }
 
-    private func processCodeSample(_ sample: CodeSample) -> NewCodeQuiz.CodeSample {
+    private func processCodeSample(_ sample: CodeSamplePlainObject) -> NewCodeQuiz.CodeSample {
         func processText(_ text: String) -> String {
             return text
                 .replacingOccurrences(of: "<br>", with: "\n")

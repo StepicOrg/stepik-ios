@@ -11,6 +11,23 @@ struct StepOptionsPlainObject {
     var languages: [CodeLanguage] {
         return self.limits.compactMap { CodeLanguage(rawValue: $0.language) }
     }
+
+    func getLimit(for language: CodeLanguage) -> CodeLimitPlainObject? {
+        return self.limits.first(where: { $0.language == language.rawValue })
+    }
+
+    func getTemplate(for language: CodeLanguage) -> CodeTemplatePlainObject? {
+        return self.getTemplate(for: language, isUserGenerated: false)
+    }
+
+    func getUserTemplate(for language: CodeLanguage) -> CodeTemplatePlainObject? {
+        return self.getTemplate(for: language, isUserGenerated: true)
+    }
+
+    private func getTemplate(for language: CodeLanguage, isUserGenerated: Bool) -> CodeTemplatePlainObject? {
+        return self.templates
+            .first(where: { $0.language == language.rawValue && $0.isUserGenerated == isUserGenerated })
+    }
 }
 
 extension StepOptionsPlainObject {

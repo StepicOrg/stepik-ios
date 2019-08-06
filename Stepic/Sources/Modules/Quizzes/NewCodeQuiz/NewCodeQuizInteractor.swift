@@ -98,31 +98,15 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
-        let codeTemplate: String? = {
-            if let language = self.codeLanguage {
-                return codeDetails.stepOptions.templates
-                    .first(where: { $0.language == language.rawValue && !$0.isUserGenerated })?
-                    .template
-            }
-            return nil
-        }()
-
-        self.provider.fetchStepOptions(by: codeDetails.stepID).done { stepOptions in
-            guard let stepOptions = stepOptions else {
-                return
-            }
-
-            self.presenter.presentReply(
-                response: .init(
-                    code: self.currentCode,
-                    codeTemplate: codeTemplate,
-                    language: self.codeLanguage,
-                    languageName: self.languageName,
-                    options: stepOptions,
-                    status: self.currentStatus
-                )
+        self.presenter.presentReply(
+            response: .init(
+                code: self.currentCode,
+                language: self.language,
+                languageName: self.languageName,
+                codeDetails: codeDetails,
+                status: self.currentStatus
             )
-        }.cauterize()
+        )
     }
 
     private func updateUserCodeTemplate() {
