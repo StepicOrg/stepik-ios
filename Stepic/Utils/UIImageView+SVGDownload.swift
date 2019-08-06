@@ -12,7 +12,6 @@ import SDWebImage
 import SVGKit
 
 extension UIImageView {
-
     func setImageWithURL(url optionalURL: URL?, placeholder: UIImage, completion: (() -> Void)? = nil) {
         guard let url = optionalURL else {
             self.image = placeholder
@@ -22,16 +21,15 @@ extension UIImageView {
 
         guard url.pathExtension != "svg" else {
             self.image = placeholder
-            AlamofireDefaultSessionManager.shared.request(url).responseData(completionHandler: {
-                response in
+            AlamofireDefaultSessionManager.shared.request(url).responseData(completionHandler: { response in
                 if response.result.error != nil {
                     return
                 }
-                
+
                 guard let data = response.result.value else {
                     return
                 }
-                
+
                 DispatchQueue.global(qos: .userInitiated).async {
                     let svgImage = SVGKImage(data: data)
                     if !(svgImage?.hasSize() ?? true) {

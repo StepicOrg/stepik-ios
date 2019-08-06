@@ -6,13 +6,13 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
-import AVKit
 import AVFoundation
+import AVKit
 import MediaPlayer
 import SnapKit
+import UIKit
 
-class StepicVideoPlayerViewController: UIViewController {
+final class StepicVideoPlayerViewController: UIViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -50,12 +50,13 @@ class StepicVideoPlayerViewController: UIViewController {
         let neededTime = self.player.currentTime + 10
 
         seekToTime(min(neededTime, player.maximumDuration))
-
+        self.scheduleControlsHideTimer()
     }
 
     @IBAction func seekBackPressed(_ sender: UIButton) {
         let neededTime = self.player.currentTime - 10
         seekToTime(max(neededTime, 0))
+        self.scheduleControlsHideTimer()
     }
 
     //Buffering 
@@ -75,6 +76,7 @@ class StepicVideoPlayerViewController: UIViewController {
     //Controlling the rate
     @IBAction func changeRatePressed(_ sender: UIButton) {
         displayRateChangeAlert()
+        self.hideControlsTimer?.invalidate()
     }
 
     fileprivate func displayRateChangeAlert() {
@@ -90,10 +92,13 @@ class StepicVideoPlayerViewController: UIViewController {
                     target: rate.description
                 ).send()
                 self.currentRate = rate
+                self.scheduleControlsHideTimer()
             })
             alertController.addAction(action)
         }
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { [weak self] _ in
+            self?.scheduleControlsHideTimer()
+        }))
 
         if let popoverController = alertController.popoverPresentationController {
             popoverController.sourceView = rateButton
@@ -118,6 +123,7 @@ class StepicVideoPlayerViewController: UIViewController {
     //Controlling the quality
     @IBAction func changeQualityPressed(_ sender: UIButton) {
         displayQualityChangeAlert()
+        self.hideControlsTimer?.invalidate()
     }
 
     var currentQualityURL: URL! {
@@ -147,6 +153,7 @@ class StepicVideoPlayerViewController: UIViewController {
                             "device": DeviceInfo.current.deviceModelString as NSObject])
                     self.currentQuality = url.quality
                     self.currentQualityURL = URL(string: url.url)
+                    self.scheduleControlsHideTimer()
                 })
                 alertController.addAction(action)
             }
@@ -160,10 +167,13 @@ class StepicVideoPlayerViewController: UIViewController {
                         _ in
                         self.currentQuality = cachedQuality
                         self.currentQualityURL = VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: self.video.id)!.localURL
+                        self.scheduleControlsHideTimer()
                 }))
             }
         }
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { [weak self] _ in
+            self?.scheduleControlsHideTimer()
+        }))
 
         if let popoverController = alertController.popoverPresentationController {
             popoverController.sourceView = qualityButton
@@ -245,6 +255,8 @@ class StepicVideoPlayerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        self.scheduleControlsHideTimer()
+
         if TooltipDefaultsManager.shared.shouldShowInVideoPlayer {
             delay(2.0) { [weak self] in
                 guard let s = self else {
@@ -260,6 +272,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
     @objc func togglePlayPause() {
         handlePlay()
+        self.scheduleControlsHideTimer()
     }
 
     func saveCurrentPlayerTime() {
@@ -272,6 +285,7 @@ class StepicVideoPlayerViewController: UIViewController {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         print("did deinit")
         saveCurrentPlayerTime()
+        self.hideControlsTimer?.invalidate()
     }
 
     fileprivate func getInitialURL() -> URL! {
@@ -296,6 +310,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
     @objc func startedSeeking() {
         print("started seeking")
+        self.hideControlsTimer?.invalidate()
         if self.player.playbackState == .playing {
             wasPlayingBeforeSeeking = true
             self.player.pause()
@@ -306,6 +321,7 @@ class StepicVideoPlayerViewController: UIViewController {
 
     @objc func finishedSeeking() {
         print("finished seeking")
+        self.scheduleControlsHideTimer()
         if wasPlayingBeforeSeeking {
             self.player.playFromCurrentTime()
         }
@@ -338,11 +354,35 @@ class StepicVideoPlayerViewController: UIViewController {
         handleControlsVisibility()
     }
 
-    var controlsCurrentlyVisible = true
+    var isControlsCurrentlyVisible = true
+    private var hideControlsTimer: Timer?
+    private static let hideControlsTimeInterval = 4.5
 
-    fileprivate func handleControlsVisibility() {
-        animateBars(!controlsCurrentlyVisible)
-        controlsCurrentlyVisible = !controlsCurrentlyVisible
+    private func handleControlsVisibility(hideControlsAutomatically: Bool = true) {
+        self.animateBars(!self.isControlsCurrentlyVisible)
+        self.isControlsCurrentlyVisible.toggle()
+
+        if self.isControlsCurrentlyVisible && hideControlsAutomatically {
+            self.scheduleControlsHideTimer()
+        }
+    }
+
+    private func scheduleControlsHideTimer() {
+        self.hideControlsTimer?.invalidate()
+        self.hideControlsTimer = Timer.scheduledTimer(
+            timeInterval: StepicVideoPlayerViewController.hideControlsTimeInterval,
+            target: self,
+            selector: #selector(self.hideControlsIfVisible),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+
+    @objc
+    private func hideControlsIfVisible() {
+        if self.isControlsCurrentlyVisible {
+            self.handleControlsVisibility()
+        }
     }
 
     fileprivate func animateBars(_ visible: Bool) {
@@ -407,6 +447,9 @@ extension StepicVideoPlayerViewController : PlayerDelegate {
 
     func playerPlaybackDidEnd(_ player: Player) {
         setButtonPlaying(true)
-        dismissPlayer()
+
+        self.hideControlsTimer?.invalidate()
+        self.isControlsCurrentlyVisible = false
+        self.handleControlsVisibility(hideControlsAutomatically: false)
     }
 }

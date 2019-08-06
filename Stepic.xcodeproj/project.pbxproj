@@ -1610,7 +1610,6 @@
 		2C2F0BEB2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertPresenter.swift; sourceTree = "<group>"; };
 		2C2F0BED2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestAlertDataSource.swift; sourceTree = "<group>"; };
 		2C31A73B22E7065900D2A41E /* CodeLanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeLanguagePickerView.swift; sourceTree = "<group>"; };
-		2C31A73D22E7372900D2A41E /* Model_step_options_execution_limits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_options_execution_limits.xcdatamodel; sourceTree = "<group>"; };
 		2C31A73F22E7B0EB00D2A41E /* CodeToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeToolbarView.swift; sourceTree = "<group>"; };
 		2C331C5621734764007B0D01 /* NotificationService+Streak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationService+Streak.swift"; sourceTree = "<group>"; };
 		2C35C4C61F4DA462002F3BF4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = LeaderboardNames/ru.lproj/adjectives_f.plist; sourceTree = "<group>"; };
@@ -1646,6 +1645,7 @@
 		2C53DFF822DDDBFD0084BA2B /* CodeTextViewLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextViewLayoutManager.swift; sourceTree = "<group>"; };
 		2C53DFF922DDDBFD0084BA2B /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsMigrator.swift; sourceTree = "<group>"; };
+		2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_options_limits.xcdatamodel; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
@@ -1814,6 +1814,7 @@
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
 		2CF4252F2024C111002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF425302024C114002D7305 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/overlay_simple.png; sourceTree = "<group>"; };
+		2CF6649122F307A500F2A899 /* Model_user_ is_organization.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model_user_ is_organization.xcdatamodel"; sourceTree = "<group>"; };
 		2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsPersistenceService.swift; sourceTree = "<group>"; };
 		2CFC5ABD228AF0B400B5248A /* NewLessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLessonViewModel.swift; sourceTree = "<group>"; };
 		2CFDA8181FBB3CFD0098A441 /* Model_sections_with_course_id_v21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_sections_with_course_id_v21.xcdatamodel; sourceTree = "<group>"; };
@@ -2317,13 +2318,6 @@
 			name = Certificates;
 			sourceTree = "<group>";
 		};
-		081058331E9FDD1800FAC30A /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
 		08195A041FA00FE300E6D6CD /* Course List */ = {
 			isa = PBXGroup;
 			children = (
@@ -2517,7 +2511,6 @@
 		083F2B0F1E9D8E2A00714173 /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
-				081058331E9FDD1800FAC30A /* Tests */,
 				083F2B101E9D8E8F00714173 /* CertificatesStoryboard.storyboard */,
 				083F2B131E9D8EF800714173 /* CertificatesViewController.swift */,
 				083F2B161E9D8F1D00714173 /* CertificatesView.swift */,
@@ -7380,7 +7373,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -7410,7 +7403,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -7472,7 +7465,8 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2C31A73D22E7372900D2A41E /* Model_step_options_execution_limits.xcdatamodel */,
+				2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */,
+				2CF6649122F307A500F2A899 /* Model_user_ is_organization.xcdatamodel */,
 				2C22F3E2226E2A7100467F54 /* Model_course_paid.xcdatamodel */,
 				2C8C17282260EA94008DC7EA /* Model_course_is_certificate_auto_issued.xcdatamodel */,
 				2C06E09E2241434100AF4DA2 /* Model_profile_fields_v33.xcdatamodel */,
@@ -7510,7 +7504,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C31A73D22E7372900D2A41E /* Model_step_options_execution_limits.xcdatamodel */;
+			currentVersion = 2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

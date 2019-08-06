@@ -37,10 +37,18 @@ extension StepikPlaceholder.Style {
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-search"), scale: 0.49),
                                           text: NSLocalizedString("PlaceholderEmptySearchText", comment: ""),
                                           buttonTitle: nil)
-    static let emptyCertificates = StepikPlaceholderStyle(id: "emptyCertificates",
-                                          image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
-                                          text: NSLocalizedString("EmptyCertificatesTitle", comment: ""),
-                                          buttonTitle: NSLocalizedString("ChooseCourse", comment: ""))
+    static let emptyCertificatesMe = StepikPlaceholderStyle(
+        id: "emptyCertificates",
+        image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+        text: NSLocalizedString("EmptyCertificatesTitle", comment: ""),
+        buttonTitle: NSLocalizedString("ChooseCourse", comment: "")
+    )
+    static let emptyCertificatesOther = StepikPlaceholderStyle(
+        id: "emptyCertificates",
+        image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+        text: NSLocalizedString("EmptyCertificatesTitle", comment: ""),
+        buttonTitle: nil
+    )
     static let emptyCertificatesLoading = StepikPlaceholderStyle(id: "emptyCertificatesLoading",
                                           image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
                                           text: NSLocalizedString("Refreshing", comment: ""),
@@ -92,7 +100,7 @@ extension StepikPlaceholder.Style {
         return [
             .empty, .noConnection, .login,
             .emptyDownloads, .emptyNotifications, .emptySearch,
-            .emptyCertificates, .emptyDiscussions, .emptyProfileLoading,
+            .emptyCertificatesMe, .emptyCertificatesOther, .emptyDiscussions, .emptyProfileLoading,
             .emptySections, .emptyUnits
         ]
     }

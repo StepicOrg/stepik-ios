@@ -14,6 +14,10 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
     }
 
     func fetch(ids: [Comment.IdType]) -> Promise<[Comment]> {
+        if ids.isEmpty {
+            return .value([])
+        }
+
         return Promise { seal in
             self.commentsAPI.retrieve(ids: ids).done { comments in
                 let comments = comments.reordered(order: ids, transform: { $0.id })

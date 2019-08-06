@@ -385,16 +385,17 @@ class QuizPresenter {
             }
             return nil
         }
-        
+
         if RoutingManager.rate.submittedCorrect() {
             self.view?.showRateAlert()
             return
         }
-        
-        guard let streaksManager = streaksNotificationSuggestionManager, streaksManager.canShowAlert(context: .streak, after: .submission) else {
+
+        guard let streaksManager = self.streaksNotificationSuggestionManager,
+              streaksManager.canShowAlert(context: .streak, after: .submission) else {
             return
         }
-        
+
         guard let user = AuthInfo.shared.user else {
             return
         }
