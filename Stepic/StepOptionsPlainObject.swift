@@ -9,7 +9,7 @@ struct StepOptionsPlainObject {
     let samples: [CodeSamplePlainObject]
 
     var languages: [CodeLanguage] {
-        return self.limits.compactMap { CodeLanguage(rawValue: $0.language) }
+        return self.limits.compactMap { CodeLanguage(rawValue: $0.language ?? "") }
     }
 
     func getLimit(for language: CodeLanguage) -> CodeLimitPlainObject? {

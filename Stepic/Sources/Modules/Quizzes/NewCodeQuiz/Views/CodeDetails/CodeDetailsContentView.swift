@@ -31,7 +31,7 @@ final class CodeDetailsContentView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(samples: [NewCodeQuiz.CodeSample], limit: NewCodeQuiz.CodeLimit) {
+    func configure(samples: [CodeSamplePlainObject], limit: CodeLimitPlainObject) {
         if !self.stackView.arrangedSubviews.isEmpty {
             self.stackView.removeAllArrangedSubviews()
         }
@@ -42,7 +42,7 @@ final class CodeDetailsContentView: UIView {
 
     // MARK: - Private API
 
-    private func makeCodeSampleViews(_ samples: [NewCodeQuiz.CodeSample]) -> [UIView] {
+    private func makeCodeSampleViews(_ samples: [CodeSamplePlainObject]) -> [UIView] {
         func getTitle(at index: Int) -> String {
             return samples.count == 1
                 ? NSLocalizedString("CodeQuizDetailSampleTitleOne", comment: "")
@@ -59,7 +59,7 @@ final class CodeDetailsContentView: UIView {
         }
     }
 
-    private func makeCodeLimitViews(_ limit: NewCodeQuiz.CodeLimit) -> [UIView] {
+    private func makeCodeLimitViews(_ limit: CodeLimitPlainObject) -> [UIView] {
         let timeLimitView = CodeDetailsLimitItemView()
         timeLimitView.title = NSLocalizedString("CodeQuizDetailLimitTitleTime", comment: "")
         timeLimitView.subtitle = FormatterHelper.seconds(limit.time)

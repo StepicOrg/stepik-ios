@@ -5,8 +5,8 @@ struct NewCodeQuizViewModel {
     let codeTemplate: String?
     let language: CodeLanguage?
     let languages: [CodeLanguage]
-    let samples: [NewCodeQuiz.CodeSample]
-    let limit: NewCodeQuiz.CodeLimit
+    let samples: [CodeSamplePlainObject]
+    let limit: CodeLimitPlainObject
     let codeEditorTheme: CodeEditorTheme
     let finalState: State
 

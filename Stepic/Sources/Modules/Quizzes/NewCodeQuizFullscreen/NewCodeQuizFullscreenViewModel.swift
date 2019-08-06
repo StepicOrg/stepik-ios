@@ -2,8 +2,8 @@ import Foundation
 
 struct NewCodeQuizFullscreenViewModel {
     let content: String
-    let samples: [NewCodeQuiz.CodeSample]
-    let limit: NewCodeQuiz.CodeLimit
+    let samples: [CodeSamplePlainObject]
+    let limit: CodeLimitPlainObject
     let language: CodeLanguage
     let code: String?
     let codeTemplate: String?

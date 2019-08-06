@@ -42,12 +42,16 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             return nil
         }()
 
-        let codeLimit: NewCodeQuiz.CodeLimit = {
+        let codeLimit: CodeLimitPlainObject = {
             if let language = response.language,
                let limit = stepOptions.getLimit(for: language) {
-                return .init(time: limit.time, memory: limit.memory)
+                return limit
             }
-            return .init(time: stepOptions.executionTimeLimit, memory: stepOptions.executionMemoryLimit)
+            return CodeLimitPlainObject(
+                language: response.languageName,
+                memory: stepOptions.executionMemoryLimit,
+                time: stepOptions.executionTimeLimit
+            )
         }()
 
         let viewModel = NewCodeQuizViewModel(
@@ -73,7 +77,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
         )
     }
 
-    private func processCodeSample(_ sample: CodeSamplePlainObject) -> NewCodeQuiz.CodeSample {
+    private func processCodeSample(_ sample: CodeSamplePlainObject) -> CodeSamplePlainObject {
         func processText(_ text: String) -> String {
             return text
                 .replacingOccurrences(of: "<br>", with: "\n")

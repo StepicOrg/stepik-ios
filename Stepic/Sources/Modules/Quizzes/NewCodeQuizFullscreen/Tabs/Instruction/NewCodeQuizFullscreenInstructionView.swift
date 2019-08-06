@@ -85,7 +85,7 @@ final class NewCodeQuizFullscreenInstructionView: UIView {
         }
     }
 
-    func configure(htmlString: String, samples: [NewCodeQuiz.CodeSample], limit: NewCodeQuiz.CodeLimit) {
+    func configure(htmlString: String, samples: [CodeSamplePlainObject], limit: CodeLimitPlainObject) {
         self.scrollableStackView.insertArrangedView(self.stepTextView, at: 0)
         self.stepTextView.loadHTMLText(htmlString)
 

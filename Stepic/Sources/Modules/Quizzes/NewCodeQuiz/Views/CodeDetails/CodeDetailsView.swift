@@ -58,7 +58,7 @@ final class CodeDetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(samples: [NewCodeQuiz.CodeSample], limit: NewCodeQuiz.CodeLimit) {
+    func configure(samples: [CodeSamplePlainObject], limit: CodeLimitPlainObject) {
         self.detailsContentView.configure(samples: samples, limit: limit)
     }
 

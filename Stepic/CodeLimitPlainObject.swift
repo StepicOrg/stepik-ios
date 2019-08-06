@@ -1,9 +1,9 @@
 import Foundation
 
 struct CodeLimitPlainObject {
-    let language: String
+    let language: String?
     let memory: Double
-    let time: Double
+    let time: TimeInterval
 }
 
 extension CodeLimitPlainObject {

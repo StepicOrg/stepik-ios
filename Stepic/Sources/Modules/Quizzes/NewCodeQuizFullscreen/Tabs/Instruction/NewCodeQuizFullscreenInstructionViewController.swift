@@ -5,13 +5,13 @@ final class NewCodeQuizFullscreenInstructionViewController: UIViewController {
     lazy var instructionView = self.view as? NewCodeQuizFullscreenInstructionView
 
     private let content: String
-    private let samples: [NewCodeQuiz.CodeSample]
-    private let limit: NewCodeQuiz.CodeLimit
+    private let samples: [CodeSamplePlainObject]
+    private let limit: CodeLimitPlainObject
 
     init(
         content: String,
-        samples: [NewCodeQuiz.CodeSample],
-        limit: NewCodeQuiz.CodeLimit
+        samples: [CodeSamplePlainObject],
+        limit: CodeLimitPlainObject
     ) {
         self.content = content
         self.samples = samples

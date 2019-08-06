@@ -44,16 +44,4 @@ enum NewCodeQuiz {
             let codeDetails: CodeDetails
         }
     }
-
-    // MARK: - Common structs
-
-    struct CodeSample {
-        let input: String
-        let output: String
-    }
-
-    struct CodeLimit {
-        let time: TimeInterval
-        let memory: Double
-    }
 }

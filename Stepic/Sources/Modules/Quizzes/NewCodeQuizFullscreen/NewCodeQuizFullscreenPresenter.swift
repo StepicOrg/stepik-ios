@@ -1,5 +1,5 @@
-import UIKit
 import PromiseKit
+import UIKit
 
 protocol NewCodeQuizFullscreenPresenterProtocol {
     func presentSomeActionResult(response: NewCodeQuizFullscreen.SomeAction.Response)
@@ -14,15 +14,17 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
         DispatchQueue.global(qos: .userInitiated).promise {
             self.processStepContent(response.codeDetails.stepContent)
         }.done { content in
-            assert(Thread.isMainThread)
-
             let stepOptions = response.codeDetails.stepOptions
-            
-            let codeLimit: NewCodeQuiz.CodeLimit = {
+
+            let codeLimit: CodeLimitPlainObject = {
                 if let limit = stepOptions.getLimit(for: response.language) {
-                    return .init(time: limit.time, memory: limit.memory)
+                    return limit
                 }
-                return .init(time: stepOptions.executionTimeLimit, memory: stepOptions.executionMemoryLimit)
+                return CodeLimitPlainObject(
+                    language: response.language.rawValue,
+                    memory: stepOptions.executionMemoryLimit,
+                    time: stepOptions.executionTimeLimit
+                )
             }()
 
             let codeEditorTheme = CodeEditorView.Theme(
@@ -56,7 +58,7 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
         }
     }
 
-    private func processCodeSample(_ sample: CodeSamplePlainObject) -> NewCodeQuiz.CodeSample {
+    private func processCodeSample(_ sample: CodeSamplePlainObject) -> CodeSamplePlainObject {
         func processText(_ text: String) -> String {
             return text
                 .replacingOccurrences(of: "<br>", with: "\n")
