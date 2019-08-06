@@ -9,7 +9,7 @@ final class NewChoiceQuizViewController: UIViewController {
 
     lazy var newChoiceQuizView = self.view as? NewChoiceQuizView
 
-    // Store options to smart reset quiz
+    // Store options for smart quiz reset
     private var lastChoiceDataset: [String] = []
     private var lastFeedback: [String?] = []
 

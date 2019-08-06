@@ -8,7 +8,7 @@ protocol NewFreeAnswerQuizViewDelegate: class {
 extension NewFreeAnswerQuizView {
     struct Appearance {
         let separatorColor = UIColor(hex: 0xEAECF0)
-        let separatorWidth: CGFloat = 1
+        let separatorHeight: CGFloat = 1
 
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
@@ -119,7 +119,7 @@ extension NewFreeAnswerQuizView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.separatorWidth)
+            make.height.equalTo(self.appearance.separatorHeight)
         }
 
         self.textView.translatesAutoresizingMaskIntoConstraints = false

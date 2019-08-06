@@ -11,6 +11,9 @@ import CoreData
 import SwiftyJSON
 
 class CodeSample: NSManagedObject {
+    override var description: String {
+        return "CodeSample(input: \(self.input), output: \(self.output)"
+    }
 
     convenience required init(input: String, output: String) {
         self.init()

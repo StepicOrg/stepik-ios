@@ -19,7 +19,7 @@ class QuizPresenter {
     var attemptsAPI: AttemptsAPI
     var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
-
+    
     var streaksNotificationSuggestionManager: NotificationSuggestionManager?
 
     var state: QuizState = .nothing {

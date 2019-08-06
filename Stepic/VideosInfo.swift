@@ -9,11 +9,11 @@
 import Foundation
 
 struct VideosInfo {
-
-    fileprivate static let downloadingVideoQualityKey = "VideoQuality"
-    fileprivate static let watchingVideoQualityKey = "WatchingVideoQuality"
-
-    fileprivate static let defaults = UserDefaults.standard
+    private static let downloadingVideoQualityKey = "VideoQuality"
+    private static let watchingVideoQualityKey = "WatchingVideoQuality"
+    private static let videoRateKey = "VideoRate"
+    
+    private static let defaults = UserDefaults.standard
 
     static var downloadingVideoQuality: String {
         get {
@@ -27,7 +27,6 @@ struct VideosInfo {
                 }
             }
         }
-
         set(value) {
             defaults.set(value, forKey: downloadingVideoQualityKey)
             defaults.synchronize()
@@ -46,14 +45,11 @@ struct VideosInfo {
                 }
             }
         }
-
         set(value) {
             defaults.set(value, forKey: watchingVideoQualityKey)
             defaults.synchronize()
         }
     }
-
-    fileprivate static let videoRateKey = "VideoRate"
 
     static var videoRate: Float {
         get {
@@ -63,12 +59,10 @@ struct VideosInfo {
                 return 1
             }
         }
-
         set(value) {
             print("setting \(value)")
             defaults.set(value, forKey: videoRateKey)
             defaults.synchronize()
         }
     }
-
 }

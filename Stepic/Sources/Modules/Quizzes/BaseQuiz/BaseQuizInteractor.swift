@@ -16,7 +16,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     private let presenter: BaseQuizPresenterProtocol
     private let provider: BaseQuizProviderProtocol
 
-    // Lagacy dependencies
+    // Legacy dependencies
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let rateAppManager: RateAppManager
 
@@ -42,6 +42,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.rateAppManager = rateAppManager
     }
 
+    // TODO: Cache reply, currently unused.
     func doReplyCache(request: BaseQuiz.ReplyCache.Request) {
         guard let attempt = self.currentAttempt else {
             return
@@ -96,7 +97,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 throw Error.submissionFetchFailed
             }
 
-            print("base quiz interactor: submission created = \(submission.id), status = \(submission.status)")
+            print("base quiz interactor: submission created = \(submission.id), status = \(submission.status ??? "")")
 
             // Analytics
             AnalyticsUserProperties.shared.incrementSubmissionsCount()

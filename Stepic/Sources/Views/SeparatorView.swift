@@ -1,19 +1,21 @@
 import SnapKit
 import UIKit
 
-// View to make separator consistent appearance
 extension SeparatorView {
     struct Appearance {
-        let height: CGFloat = 0.5
-        let color = UIColor(hex: 0xD1D1D6)
+        /// UITableView's default separator height.
+        let height: CGFloat = 1.0
+        /// UITableView's default separator color.
+        let color = UIColor(hex: 0xC8C7CC)
     }
 }
 
+/// View to make separator consistent appearance.
 final class SeparatorView: UIView {
     let appearance: Appearance
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: 1 / UIScreen.main.scale)
+        return CGSize(width: UIView.noIntrinsicMetric, height: self.appearance.height / UIScreen.main.scale)
     }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {

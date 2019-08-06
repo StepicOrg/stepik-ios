@@ -19,7 +19,7 @@ extension ProcessedContentTextView {
 final class ProcessedContentTextView: UIView {
     private static let reloadTimeStandardInterval: TimeInterval = 0.5
     private static let reloadTimeout: TimeInterval = 10.0
-    private static let defaultWebviewHeight: CGFloat = 5
+    private static let defaultWebViewHeight: CGFloat = 5
 
     let appearance: Appearance
     weak var delegate: ProcessedContentTextViewDelegate?
@@ -180,7 +180,7 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
-            make.height.equalTo(ProcessedContentTextView.defaultWebviewHeight)
+            make.height.equalTo(ProcessedContentTextView.defaultWebViewHeight)
         }
     }
 }

@@ -105,6 +105,11 @@ class CodePlaygroundManager {
             var text = currentText
 
             let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+
+            guard cursorIndex > text.startIndex else {
+                return nil
+            }
+
             //searching previous \n or beginning of the string
             let firstPart = text.substring(to: text.index(before: cursorIndex))
             if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
@@ -251,6 +256,7 @@ class CodePlaygroundManager {
         suggestionsController = nil
     }
 
+    // TODO: Refactor code suggestion presentation.
     fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView, suggestionsDelegate: CodeSuggestionDelegate) {
         //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if suggestionsController == nil {
