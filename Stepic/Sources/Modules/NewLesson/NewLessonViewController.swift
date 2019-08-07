@@ -1,3 +1,4 @@
+import EasyTipView
 import Pageboy
 import SnapKit
 import Tabman
@@ -19,12 +20,19 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         static let indicatorHeight: CGFloat = 2
         static let separatorColor = UIColor.gray
         static let loadingIndicatorColor = UIColor.mainDark
+        static let tooltipBackgroundColor = UIColor.mainDark
     }
 
     private let interactor: NewLessonInteractorProtocol
 
     private lazy var infoBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "info-system"), style: .plain, target: self, action: nil)
+        let item = UIBarButtonItem(
+            image: UIImage(named: "info-system"),
+            style: .plain,
+            target: self,
+            action: #selector(self.infoButtonClicked)
+        )
+        item.isEnabled = false
         return item
     }()
 
@@ -53,7 +61,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         return view
     }()
 
-    private lazy var tooltipView = LessonInfoTooltipView()
+    private var tooltipView: EasyTipView?
+    private var isTooltipVisible = false
 
     private var stepControllers: [UIViewController?] = []
     private var stepModulesInputs: [NewStepInputProtocol?] = []
@@ -124,7 +133,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
         self.addSubviews()
 
-        self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem]
+        self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem, self.infoBarButtonItem]
         self.dataSource = self
 
         self.updateState()
@@ -167,6 +176,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
         self.title = data.lessonTitle
         self.shareBarButtonItem.isEnabled = true
+        self.infoBarButtonItem.isEnabled = true
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
@@ -247,12 +257,36 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.stepControllers.removeAll()
         self.stepModulesInputs.removeAll()
         self.shareBarButtonItem.isEnabled = false
+        self.infoBarButtonItem.isEnabled = false
 
         self.hasNavigationToPreviousUnit = false
         self.hasNavigationToNextUnit = false
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
+        }
+    }
+
+    @objc
+    private func infoButtonClicked() {
+        if self.isTooltipVisible {
+            self.tooltipView?.dismiss()
+        } else {
+            let contentView = LessonInfoTooltipView()
+            contentView.sizeToFit()
+
+            var preferences = EasyTipView.Preferences()
+            preferences.drawing.backgroundColor = Appearance.tooltipBackgroundColor
+            preferences.drawing.arrowPosition = .top
+
+            self.tooltipView = EasyTipView(contentView: contentView, preferences: preferences, delegate: self)
+            self.tooltipView?.show(
+                animated: true,
+                forItem: self.infoBarButtonItem,
+                withinSuperView: self.navigationController?.view
+            )
+
+            self.isTooltipVisible = true
         }
     }
 
@@ -342,5 +376,12 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
 
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel) {
         self.scrollToPage(.at(index: viewModel.index), animated: true)
+    }
+}
+
+extension NewLessonViewController: EasyTipViewDelegate {
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        self.isTooltipVisible = false
+        self.tooltipView = nil
     }
 }
