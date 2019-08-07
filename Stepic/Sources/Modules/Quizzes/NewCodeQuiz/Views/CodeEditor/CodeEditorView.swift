@@ -72,6 +72,8 @@ final class CodeEditorView: UIView {
         return label
     }()
 
+    private var languageNameLabelTopConstraint: Constraint?
+
     private let codePlaygroundManager = CodePlaygroundManager()
     // Uses by codePlaygroundManager for analysis between current code and old one (suggestions & completions).
     private var oldCode: String?
@@ -123,7 +125,7 @@ final class CodeEditorView: UIView {
 
     var isLanguageNameVisible = false {
         didSet {
-            self.languageNameLabel.isHidden = self.isLanguageNameVisible
+            self.languageNameLabel.isHidden = !self.isLanguageNameVisible
             self.languageNameLabel.alpha = self.isLanguageNameVisible ? 1 : 0
         }
     }
@@ -159,6 +161,14 @@ final class CodeEditorView: UIView {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.languageNameLabelTopConstraint?.update(
+            offset: max(0, self.codeTextView.contentInset.top) + self.appearance.languageNameLabelLayoutInsets.top
+        )
     }
 
     private func setupAccessoryView(isEditable: Bool) {
@@ -249,7 +259,7 @@ extension CodeEditorView: ProgrammaticallyInitializableViewProtocol {
 
         self.languageNameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.languageNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.languageNameLabelLayoutInsets.top)
+            self.languageNameLabelTopConstraint = make.top.equalToSuperview().constraint
             make.trailing.equalToSuperview().offset(-self.appearance.languageNameLabelLayoutInsets.right)
         }
     }

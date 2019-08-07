@@ -71,13 +71,16 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
     private var language: CodeLanguage? {
         didSet {
             self.codeEditorView.language = self.language
+            self.codeEditorView.isLanguageNameVisible = self.language != nil
         }
     }
+
     private var code: String? {
         didSet {
             self.codeEditorView.code = self.code
         }
     }
+
     private var codeTemplate: String? {
         didSet {
             self.codeEditorView.codeTemplate = self.codeTemplate
