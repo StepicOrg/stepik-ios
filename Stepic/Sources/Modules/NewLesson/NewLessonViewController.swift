@@ -289,10 +289,11 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         let isEnabled: Bool = {
             guard case .result(let data) = self.state,
                   let currentIndex = self.currentIndex,
-                  let step = data.steps[safe: currentIndex] else {
+                  let step = data.steps[safe: currentIndex],
+                  let info = self.tooltipInfos[step.id] else {
                 return false
             }
-            return self.tooltipInfos[step.id] != nil
+            return !info.isEmpty
         }()
         self.infoBarButtonItem.isEnabled = isEnabled
     }
