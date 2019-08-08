@@ -71,10 +71,20 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
                     return UIImage(named: "quiz_step_icon")
                 }
             }()
+
+            let timeToComplete = lesson.timeToComplete > 60
+                ? lesson.timeToComplete
+                : Double(lesson.stepsArray.count) * 60.0
+
+            let progress = progresses[safe: index]
+
             return .init(
                 id: step.id,
                 iconImage: iconImage ?? UIImage(),
-                isPassed: progresses[safe: index]?.isPassed ?? false
+                isPassed: progress?.isPassed ?? false,
+                score: progress?.score ?? 0,
+                cost: progress?.cost ?? 0,
+                timeToComplete: timeToComplete
             )
         }
         return NewLessonViewModel(

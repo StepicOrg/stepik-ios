@@ -19,8 +19,6 @@ final class LessonInfoTooltipView: UIView {
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
-
-        self.addSubviews()
     }
 
     @available(*, unavailable)
@@ -54,6 +52,43 @@ final class LessonInfoTooltipView: UIView {
         )
     }
 
+    func configure(score: Int, cost: Int, timeToComplete: TimeInterval) {
+        if score > 0 {
+            let text = String(
+                format: NSLocalizedString("LessonTooltipPointsWithScoreTitle", comment: ""),
+                FormatterHelper.pointsCount(score),
+                "\(cost)"
+            )
+            self.addSubview(self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-check"), text: text))
+        } else if cost > 0 {
+            let text = String(
+                format: NSLocalizedString("LessonTooltipPointsTitle", comment: ""),
+                FormatterHelper.pointsCount(cost)
+            )
+            self.addSubview(self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-check"), text: text))
+        }
+
+        let timeToCompleteString: String? = {
+            if timeToComplete < 60 {
+                return nil
+            } else if case 60..<3600 = timeToComplete {
+                return FormatterHelper.minutesInSeconds(timeToComplete, roundingRule: .down)
+            } else {
+                return FormatterHelper.hoursInSeconds(timeToComplete, roundingRule: .down)
+            }
+        }()
+
+        if let timeToCompleteString = timeToCompleteString {
+            let text = String(
+                format: NSLocalizedString("LessonTooltipTimeToCompleteTitle", comment: ""),
+                timeToCompleteString
+            )
+            self.addSubview(
+                self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-duration"), text: text)
+            )
+        }
+    }
+
     private func makeLabelWithIcon(icon: UIImage?, text: String) -> UIView {
         let imageView = UIImageView(image: icon?.withRenderingMode(.alwaysTemplate))
         imageView.contentMode = .scaleAspectFit
@@ -78,19 +113,5 @@ final class LessonInfoTooltipView: UIView {
         containerView.frame = CGRect(origin: .zero, size: CGSize(width: label.frame.maxX, height: label.frame.height))
 
         return containerView
-    }
-}
-
-extension LessonInfoTooltipView: ProgrammaticallyInitializableViewProtocol {
-    func addSubviews() {
-        self.addSubview(
-            self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-check"), text: "3 балла за верное")
-        )
-        self.addSubview(
-            self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-duration"), text: "20 минут на решение")
-        )
-        self.addSubview(
-            self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-info"), text: "94 балла до сертификата")
-        )
     }
 }

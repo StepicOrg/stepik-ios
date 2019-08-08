@@ -269,10 +269,24 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
     @objc
     private func infoButtonClicked() {
+        guard case .result(let data) = self.state else {
+            fatalError("Invalid state")
+        }
+
+        guard let currentIndex = self.currentIndex,
+              let stepDescription = data.steps[safe: currentIndex] else {
+            return
+        }
+
         if self.isTooltipVisible {
             self.tooltipView?.dismiss()
         } else {
             let contentView = LessonInfoTooltipView()
+            contentView.configure(
+                score: stepDescription.score,
+                cost: stepDescription.cost,
+                timeToComplete: stepDescription.timeToComplete
+            )
             contentView.sizeToFit()
 
             var preferences = EasyTipView.Preferences()
