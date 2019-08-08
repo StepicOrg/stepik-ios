@@ -8,6 +8,7 @@ protocol NewLessonViewControllerProtocol: class {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
     func displayLessonTooltipInfo(viewModel: NewLesson.LessonTooltipInfoLoad.ViewModel)
+    func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
 }
@@ -406,6 +407,11 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
 
     func displayLessonTooltipInfo(viewModel: NewLesson.LessonTooltipInfoLoad.ViewModel) {
         self.tooltipInfos = viewModel.data
+        self.updateInfoBarButtonItem()
+    }
+
+    func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel) {
+        self.tooltipInfos[viewModel.stepID] = viewModel.info
         self.updateInfoBarButtonItem()
     }
 

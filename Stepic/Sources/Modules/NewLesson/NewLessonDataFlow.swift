@@ -72,6 +72,20 @@ enum NewLesson {
         }
     }
 
+    /// Update tooltip info for step
+    enum StepTooltipInfoUpdate {
+        struct Response {
+            let lesson: Lesson
+            let step: Step
+            let progress: Progress
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let info: [TooltipInfo]
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

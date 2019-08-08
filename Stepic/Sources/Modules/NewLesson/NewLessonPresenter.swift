@@ -4,6 +4,7 @@ protocol NewLessonPresenterProtocol {
     func presentLesson(response: NewLesson.LessonLoad.Response)
     func presentLessonNavigation(response: NewLesson.LessonNavigationLoad.Response)
     func presentLessonTooltipInfo(response: NewLesson.LessonTooltipInfoLoad.Response)
+    func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response)
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
     func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response)
 }
@@ -44,47 +45,20 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
 
     func presentLessonTooltipInfo(response: NewLesson.LessonTooltipInfoLoad.Response) {
         var data: [Step.IdType: [NewLesson.TooltipInfo]] = [:]
-
-        for (step, progress) in zip(response.steps, response.progresses) {
-            var infos: [NewLesson.TooltipInfo] = []
-
-            if progress.score > 0 {
-                let text = String(
-                    format: NSLocalizedString("LessonTooltipPointsWithScoreTitle", comment: ""),
-                    FormatterHelper.pointsCount(progress.score),
-                    "\(progress.cost)"
-                )
-                infos.append(.init(iconImage: UIImage(named: "lesson-tooltip-check"), text: text))
-            } else if progress.cost > 0 {
-                let text = String(
-                    format: NSLocalizedString("LessonTooltipPointsTitle", comment: ""),
-                    FormatterHelper.pointsCount(progress.cost)
-                )
-                infos.append(.init(iconImage: UIImage(named: "lesson-tooltip-check"), text: text))
-            }
-
-            let timeToCompleteString: String = {
-                let timeToComplete = response.lesson.timeToComplete > 60
-                    ? response.lesson.timeToComplete
-                    : Double(response.lesson.stepsArray.count) * 60.0
-
-                if case 60..<3600 = timeToComplete {
-                    return FormatterHelper.minutesInSeconds(timeToComplete, roundingRule: .down)
-                } else {
-                    return FormatterHelper.hoursInSeconds(timeToComplete, roundingRule: .down)
-                }
-            }()
-
-            let lessonTooltipTimeToComplete = String(
-                format: NSLocalizedString("LessonTooltipTimeToCompleteTitle", comment: ""),
-                timeToCompleteString
-            )
-            infos.append(.init(iconImage: UIImage(named: "lesson-tooltip-duration"), text: lessonTooltipTimeToComplete))
-
-            data[step.id] = infos
+        zip(response.steps, response.progresses).forEach { step, progress in
+            data[step.id] = self.makeTooltipInfoViewModel(lesson: response.lesson, progress: progress)
         }
 
         self.viewController?.displayLessonTooltipInfo(viewModel: .init(data: data))
+    }
+
+    func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response) {
+        self.viewController?.displayStepTooltipInfoUpdate(
+            viewModel: .init(
+                stepID: response.step.id,
+                info: self.makeTooltipInfoViewModel(lesson: response.lesson, progress: response.progress)
+            )
+        )
     }
 
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response) {
@@ -131,5 +105,43 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             },
             startStepIndex: startStepIndex
         )
+    }
+
+    private func makeTooltipInfoViewModel(lesson: Lesson, progress: Progress) -> [NewLesson.TooltipInfo] {
+        var viewModel: [NewLesson.TooltipInfo] = []
+
+        if progress.score > 0 {
+            let text = String(
+                format: NSLocalizedString("LessonTooltipPointsWithScoreTitle", comment: ""),
+                FormatterHelper.pointsCount(progress.score),
+                "\(progress.cost)"
+            )
+            viewModel.append(.init(iconImage: UIImage(named: "lesson-tooltip-check"), text: text))
+        } else if progress.cost > 0 {
+            let text = String(
+                format: NSLocalizedString("LessonTooltipPointsTitle", comment: ""),
+                FormatterHelper.pointsCount(progress.cost)
+            )
+            viewModel.append(.init(iconImage: UIImage(named: "lesson-tooltip-check"), text: text))
+        }
+
+        let timeToCompleteString: String = {
+            let timeToComplete = lesson.timeToComplete > 60
+                ? lesson.timeToComplete
+                : Double(lesson.stepsArray.count) * 60.0
+            if case 60..<3600 = timeToComplete {
+                return FormatterHelper.minutesInSeconds(timeToComplete, roundingRule: .down)
+            } else {
+                return FormatterHelper.hoursInSeconds(timeToComplete, roundingRule: .down)
+            }
+        }()
+
+        let lessonTooltipTimeToComplete = String(
+            format: NSLocalizedString("LessonTooltipTimeToCompleteTitle", comment: ""),
+            timeToCompleteString
+        )
+        viewModel.append(.init(iconImage: UIImage(named: "lesson-tooltip-duration"), text: lessonTooltipTimeToComplete))
+
+        return viewModel
     }
 }
