@@ -116,15 +116,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
     private func makeFormattedCertificateDetailTitle(_ title: String, points: Int?) -> String {
         if let points = points, points > 0 {
-            let pluralizedPointsString = StringHelper.pluralize(
-                number: points,
-                forms: [
-                    NSLocalizedString("points1", comment: ""),
-                    NSLocalizedString("points234", comment: ""),
-                    NSLocalizedString("points567890", comment: "")
-                ]
-            )
-            return "\(title): \(points) \(pluralizedPointsString)"
+            return "\(title): \(FormatterHelper.pointsCount(points))"
         } else {
             return ""
         }
