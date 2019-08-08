@@ -52,40 +52,10 @@ final class LessonInfoTooltipView: UIView {
         )
     }
 
-    func configure(score: Int, cost: Int, timeToComplete: TimeInterval) {
-        if score > 0 {
-            let text = String(
-                format: NSLocalizedString("LessonTooltipPointsWithScoreTitle", comment: ""),
-                FormatterHelper.pointsCount(score),
-                "\(cost)"
-            )
-            self.addSubview(self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-check"), text: text))
-        } else if cost > 0 {
-            let text = String(
-                format: NSLocalizedString("LessonTooltipPointsTitle", comment: ""),
-                FormatterHelper.pointsCount(cost)
-            )
-            self.addSubview(self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-check"), text: text))
-        }
-
-        let timeToCompleteString: String? = {
-            if timeToComplete < 60 {
-                return nil
-            } else if case 60..<3600 = timeToComplete {
-                return FormatterHelper.minutesInSeconds(timeToComplete, roundingRule: .down)
-            } else {
-                return FormatterHelper.hoursInSeconds(timeToComplete, roundingRule: .down)
-            }
-        }()
-
-        if let timeToCompleteString = timeToCompleteString {
-            let text = String(
-                format: NSLocalizedString("LessonTooltipTimeToCompleteTitle", comment: ""),
-                timeToCompleteString
-            )
-            self.addSubview(
-                self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-duration"), text: text)
-            )
+    func configure(viewModel items: [Item]) {
+        items.forEach { item in
+            let label = self.makeLabelWithIcon(icon: item.icon, text: item.text)
+            self.addSubview(label)
         }
     }
 
@@ -113,5 +83,10 @@ final class LessonInfoTooltipView: UIView {
         containerView.frame = CGRect(origin: .zero, size: CGSize(width: label.frame.maxX, height: label.frame.height))
 
         return containerView
+    }
+
+    struct Item {
+        let icon: UIImage?
+        let text: String
     }
 }

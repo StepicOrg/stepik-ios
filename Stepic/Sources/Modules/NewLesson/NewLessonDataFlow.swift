@@ -59,6 +59,19 @@ enum NewLesson {
         }
     }
 
+    /// Load lesson tooltip info content
+    enum LessonTooltipInfoLoad {
+        struct Response {
+            let lesson: Lesson
+            let steps: [Step]
+            let progresses: [Progress]
+        }
+
+        struct ViewModel {
+            let data: [Step.IdType: [TooltipInfo]]
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {
@@ -77,5 +90,12 @@ enum NewLesson {
     enum StartStep {
         case index(_: Int)
         case id(_: Step.IdType)
+    }
+
+    // MARK: Structs
+
+    struct TooltipInfo {
+        let iconImage: UIImage?
+        let text: String
     }
 }

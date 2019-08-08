@@ -7,6 +7,7 @@ import UIKit
 protocol NewLessonViewControllerProtocol: class {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
+    func displayLessonTooltipInfo(viewModel: NewLesson.LessonTooltipInfoLoad.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
 }
@@ -63,6 +64,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
     private var tooltipView: EasyTipView?
     private var isTooltipVisible = false
+    private var tooltipInfos: [Step.IdType: [NewLesson.TooltipInfo]] = [:]
 
     private var stepControllers: [UIViewController?] = []
     private var stepModulesInputs: [NewStepInputProtocol?] = []
@@ -140,6 +142,21 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.interactor.doLessonLoad(request: .init())
     }
 
+    override func pageboyViewController(
+        _ pageboyViewController: PageboyViewController,
+        didScrollToPageAt index: TabmanViewController.PageIndex,
+        direction: PageboyViewController.NavigationDirection,
+        animated: Bool
+    ) {
+        super.pageboyViewController(
+            pageboyViewController,
+            didScrollToPageAt: index,
+            direction: direction,
+            animated: animated
+        )
+        self.updateInfoBarButtonItem()
+    }
+
     // MARK: Private API
 
     private func updateState() {
@@ -176,7 +193,6 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
         self.title = data.lessonTitle
         self.shareBarButtonItem.isEnabled = true
-        self.infoBarButtonItem.isEnabled = true
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
@@ -256,6 +272,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.title = nil
         self.stepControllers.removeAll()
         self.stepModulesInputs.removeAll()
+        self.tooltipInfos.removeAll()
         self.shareBarButtonItem.isEnabled = false
         self.infoBarButtonItem.isEnabled = false
 
@@ -267,6 +284,18 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }
     }
 
+    private func updateInfoBarButtonItem() {
+        let isEnabled: Bool = {
+            guard case .result(let data) = self.state,
+                  let currentIndex = self.currentIndex,
+                  let step = data.steps[safe: currentIndex] else {
+                return false
+            }
+            return self.tooltipInfos[step.id] != nil
+        }()
+        self.infoBarButtonItem.isEnabled = isEnabled
+    }
+
     @objc
     private func infoButtonClicked() {
         guard case .result(let data) = self.state else {
@@ -274,7 +303,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }
 
         guard let currentIndex = self.currentIndex,
-              let stepDescription = data.steps[safe: currentIndex] else {
+              let step = data.steps[safe: currentIndex],
+              let tooltipInfo = self.tooltipInfos[step.id] else {
             return
         }
 
@@ -282,11 +312,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             self.tooltipView?.dismiss()
         } else {
             let contentView = LessonInfoTooltipView()
-            contentView.configure(
-                score: stepDescription.score,
-                cost: stepDescription.cost,
-                timeToComplete: stepDescription.timeToComplete
-            )
+            contentView.configure(viewModel: tooltipInfo.map { .init(icon: $0.iconImage, text: $0.text) })
             contentView.sizeToFit()
 
             var preferences = EasyTipView.Preferences()
@@ -376,6 +402,11 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
             hasNavigationToPreviousUnit: self.hasNavigationToPreviousUnit,
             hasNavigationToNextUnit: self.hasNavigationToNextUnit
         )
+    }
+
+    func displayLessonTooltipInfo(viewModel: NewLesson.LessonTooltipInfoLoad.ViewModel) {
+        self.tooltipInfos = viewModel.data
+        self.updateInfoBarButtonItem()
     }
 
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel) {

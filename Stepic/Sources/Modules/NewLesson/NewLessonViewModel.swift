@@ -5,9 +5,6 @@ struct NewLessonViewModel {
         let id: Step.IdType
         let iconImage: UIImage
         let isPassed: Bool
-        let score: Int
-        let cost: Int
-        let timeToComplete: TimeInterval
     }
 
     let lessonTitle: String

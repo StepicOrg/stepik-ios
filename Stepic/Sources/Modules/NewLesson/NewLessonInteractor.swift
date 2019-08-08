@@ -126,6 +126,9 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             )
 
             self.presenter.presentLesson(response: .init(state: .success(data)))
+            self.presenter.presentLessonTooltipInfo(
+                response: .init(lesson: lesson, steps: steps, progresses: progresses)
+            )
         }.catch { error in
             print("new lesson interactor: error while loading lesson = \(error)")
             self.presenter.presentLesson(response: .init(state: .failure(error)))
