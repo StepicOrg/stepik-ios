@@ -182,6 +182,8 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
             return
         }
 
+        self.view.endEditing(true)
+
         if self.shouldRetryWithNewAttempt {
             self.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: true))
         } else {
