@@ -78,7 +78,7 @@ final class ProcessedContentTextView: UIView {
         return webView
     }()
 
-    private var isFirstNavigationAction = true
+    private var isLoadingHTMLText = false
 
     override var intrinsicContentSize: CGSize {
         return CGSize(
@@ -126,6 +126,7 @@ final class ProcessedContentTextView: UIView {
     // MARK: Public API
 
     func loadHTMLText(_ text: String) {
+        self.isLoadingHTMLText = true
         let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
         self.webView.loadHTMLString(text, baseURL: baseURL)
     }
@@ -192,6 +193,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             self.getContentHeight()
         }.done { height in
             self.webView.snp.updateConstraints { $0.height.equalTo(height) }
+            self.isLoadingHTMLText = false
             self.delegate?.processedContentTextViewDidLoadContent(self)
 
             self.fetchHeightWithInterval()
@@ -217,8 +219,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             return decisionHandler(.cancel)
         }
 
-        if self.isFirstNavigationAction && navigationAction.navigationType == .other {
-            self.isFirstNavigationAction = false
+        if self.isLoadingHTMLText && navigationAction.navigationType == .other {
             return decisionHandler(.allow)
         }
 
