@@ -106,6 +106,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         refreshControl.layoutIfNeeded()
         refreshControl.beginRefreshing()
 
+        presenter?.getCachedCertificates()
         presenter?.refreshCertificates()
 
         tableView.backgroundColor = UIColor.groupTableViewBackground
