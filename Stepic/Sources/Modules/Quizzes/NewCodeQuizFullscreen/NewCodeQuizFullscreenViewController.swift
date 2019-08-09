@@ -5,6 +5,7 @@ import UIKit
 
 protocol NewCodeQuizFullscreenViewControllerProtocol: class {
     func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
+    func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel)
 }
 
 final class NewCodeQuizFullscreenViewController: TabmanViewController {
@@ -18,14 +19,6 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
 
         static let spacingBetweenPages: CGFloat = 16.0
     }
-
-    private let interactor: NewCodeQuizFullscreenInteractorProtocol
-
-    private let availableTabs: [NewCodeQuizFullscreen.Tab]
-    private let initialTabIndex: Int
-
-    private var tabViewControllers: [UIViewController?] = []
-    private var submodules: [NewCodeQuizFullscreenSubmoduleProtocol?] = []
 
     private lazy var tabBarView: TMBar = {
         let bar = TMBarView<TMHorizontalBarLayout, TMLabelBarButton, TMLineBarIndicator>()
@@ -63,6 +56,15 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         action: #selector(self.actionButtonClicked)
     )
 
+    private let interactor: NewCodeQuizFullscreenInteractorProtocol
+
+    private let availableTabs: [NewCodeQuizFullscreen.Tab]
+    private let initialTabIndex: Int
+
+    private var tabViewControllers: [UIViewController?] = []
+    // TODO: Refactor
+    private var newCodeQuizFullscreenCodeViewController: NewCodeQuizFullscreenCodeViewController?
+
     private var viewModel: NewCodeQuizFullscreenViewModel?
 
     init(
@@ -74,7 +76,6 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
 
         self.availableTabs = availableTabs
         self.tabViewControllers = Array(repeating: nil, count: availableTabs.count)
-        self.submodules = Array(repeating: nil, count: availableTabs.count)
 
         if let initialTabIndex = self.availableTabs.firstIndex(of: initialTab) {
             self.initialTabIndex = initialTabIndex
@@ -115,27 +116,41 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     // MARK: Private API
 
     private func loadTabViewControllerIfNeeded(at index: Int) {
+        guard self.tabViewControllers.count > index else {
+            fatalError("Invalid controllers initialization")
+        }
+
         guard self.tabViewControllers[index] == nil else {
             return
         }
 
-        guard let tab = self.availableTabs[safe: index] else {
+        guard let tab = self.availableTabs[safe: index],
+              let viewModel = self.viewModel else {
             return
         }
 
         let controller: UIViewController? = {
             switch tab {
             case .instruction:
-                return NewCodeQuizFullscreenInstructionViewController()
+                return NewCodeQuizFullscreenInstructionViewController(
+                    content: viewModel.content,
+                    samples: viewModel.samples,
+                    limit: viewModel.limit
+                )
             case .code:
-                return NewCodeQuizFullscreenCodeViewController(delegate: self)
+                self.newCodeQuizFullscreenCodeViewController = NewCodeQuizFullscreenCodeViewController(
+                    language: viewModel.language,
+                    code: viewModel.code,
+                    codeTemplate: viewModel.codeTemplate,
+                    delegate: self
+                )
+                return self.newCodeQuizFullscreenCodeViewController
             case .run:
                 return nil
             }
         }()
 
         self.tabViewControllers[index] = controller
-        self.submodules[index] = controller as? NewCodeQuizFullscreenSubmoduleProtocol
     }
 
     @objc
@@ -202,6 +217,10 @@ extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControll
         self.viewModel = viewModel.data
         self.reloadData()
     }
+
+    func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel) {
+        self.newCodeQuizFullscreenCodeViewController?.code = viewModel.code
+    }
 }
 
 extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
@@ -214,12 +233,6 @@ extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
         at index: PageboyViewController.PageIndex
     ) -> UIViewController? {
         self.loadTabViewControllerIfNeeded(at: index)
-
-        if let submodule = self.submodules[safe: index],
-           let viewModel = self.viewModel {
-            submodule?.configure(viewModel: viewModel)
-        }
-
         return self.tabViewControllers[index]
     }
 
