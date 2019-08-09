@@ -100,11 +100,11 @@ final class NewCodeQuizView: UIView {
 
     func configure(viewModel: NewCodeQuizViewModel) {
         switch viewModel.finalState {
-        case .default:
+        case .default, .wrong:
             self.setCodeEditorReady(true)
             self.setCodeEditorActionControlsEnabled(true)
             self.toolbarView.isLanguagePickerEnabled = viewModel.languages.count > 1
-        case .correct, .wrong, .evaluation:
+        case .correct, .evaluation:
             self.setCodeEditorReady(true)
             self.setCodeEditorActionControlsEnabled(false)
         case .noLanguage:
