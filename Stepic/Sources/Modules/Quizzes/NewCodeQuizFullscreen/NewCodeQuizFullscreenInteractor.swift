@@ -29,13 +29,7 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
         self.codeDetails = codeDetails
         self.language = language
 
-        self.provider.fetchUserOrCodeTemplate(by: codeDetails.stepID, language: language).done { codeTemplate in
-            self.currentCode = codeTemplate?.templateString
-        }.ensure {
-            self.presentNewData()
-        }.catch { error in
-            print("NewCodeQuizFullscreenInteractor :: failed fetch code template \(error)")
-        }
+        self.refresh()
     }
 
     func doReplyUpdate(request: NewCodeQuizFullscreen.ReplyConvert.Request) {
@@ -64,19 +58,28 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
         }.done { codeTemplate in
             self.doReplyUpdate(request: .init(code: codeTemplate?.templateString ?? ""))
         }.ensure {
-            self.presentNewData()
+            self.presenter.presentCodeReset(response: .init(code: self.currentCode))
         }.catch { _ in
             self.currentCode = ""
         }
     }
 
-    private func presentNewData() {
-        self.presenter.presentContent(
-            response: .init(
-                code: self.currentCode,
-                language: self.language,
-                codeDetails: self.codeDetails
+    private func refresh() {
+        self.provider.fetchUserOrCodeTemplate(
+            by: self.codeDetails.stepID,
+            language: self.language
+        ).done { codeTemplate in
+            self.currentCode = codeTemplate?.templateString
+        }.ensure {
+            self.presenter.presentContent(
+                response: .init(
+                    code: self.currentCode,
+                    language: self.language,
+                    codeDetails: self.codeDetails
+                )
             )
-        )
+        }.catch { error in
+            print("NewCodeQuizFullscreenInteractor :: failed fetch code template \(error)")
+        }
     }
 }

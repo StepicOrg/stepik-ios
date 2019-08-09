@@ -695,6 +695,9 @@ NextLessonNavigation = "Следующий урок";
 PreviousLessonNavigation = "Предыдущий урок";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
+LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
+LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
+LessonTooltipTimeToCompleteTitle = "%@ на урок";
 
 OurSocialNetworks = "Наши аккаунты в соцсетях";
 

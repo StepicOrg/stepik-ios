@@ -37,14 +37,12 @@ final class CertificatesPresenter {
         self.coursesAPI = coursesAPI
         self.presentationContainer = presentationContainer
         self.view = view
-
-        self.getCachedCertificates(userId: userID)
     }
 
-    func getCachedCertificates(userId: Int) {
-        let localIds = presentationContainer.certificatesIds
+    func getCachedCertificates() {
+        let localIds = self.presentationContainer.certificatesIds
 
-        let localCertificates = Certificate.fetch(localIds, user: userId).sorted(by: {
+        let localCertificates = Certificate.fetch(localIds, user: self.userID).sorted(by: {
             guard let index1 = localIds.index(of: $0.id),
                   let index2 = localIds.index(of: $1.id) else {
                 return false
@@ -54,7 +52,7 @@ final class CertificatesPresenter {
             self?.makeViewData(from: $0)
         }
 
-        view?.setCertificates(certificates: localCertificates, hasNextPage: false)
+        self.view?.setCertificates(certificates: localCertificates, hasNextPage: false)
     }
 
     private func updatePersistentPresentationData() {

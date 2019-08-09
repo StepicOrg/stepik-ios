@@ -29,6 +29,14 @@ enum NewCodeQuizFullscreen {
     /// Reset current user code template with quiz template
     enum ResetCode {
         struct Request { }
+
+        struct Response {
+            let code: String?
+        }
+
+        struct ViewModel {
+            let code: String
+        }
     }
 
     enum Tab {

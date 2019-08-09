@@ -55,11 +55,13 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             }
         }()
 
-        // string / number / math quizzes can be retried w/o new attempt
+        // string / number / math / freeAnswer / code quizzes can be retried w/o new attempt
         let isQuizNotNeededNewAttempt = [
             NewStep.QuizType.string,
             NewStep.QuizType.number,
-            NewStep.QuizType.math
+            NewStep.QuizType.math,
+            NewStep.QuizType.freeAnswer,
+            NewStep.QuizType.code
         ].contains(NewStep.QuizType(blockName: step.block.name))
 
         // 1. if quiz is not needed new attempt and status == wrong
