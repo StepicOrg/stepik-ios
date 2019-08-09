@@ -68,26 +68,24 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         }
     }
 
-    private var language: CodeLanguage? {
-        didSet {
-            self.codeEditorView.language = self.language
-            self.codeEditorView.isLanguageNameVisible = self.language != nil
-        }
-    }
+    private var language: CodeLanguage
+    private var codeTemplate: String?
 
-    private var code: String? {
+    var code: String? {
         didSet {
             self.codeEditorView.code = self.code
         }
     }
 
-    private var codeTemplate: String? {
-        didSet {
-            self.codeEditorView.codeTemplate = self.codeTemplate
-        }
-    }
-
-    init(delegate: NewCodeQuizFullscreenCodeViewControllerDelegate? = nil) {
+    init(
+        language: CodeLanguage,
+        code: String?,
+        codeTemplate: String?,
+        delegate: NewCodeQuizFullscreenCodeViewControllerDelegate? = nil
+    ) {
+        self.language = language
+        self.code = code
+        self.codeTemplate = codeTemplate
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -102,6 +100,11 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
 
         self.addSubviews()
         self.isSubmitButtonHidden = false
+
+        self.codeEditorView.language = self.language
+        self.codeEditorView.isLanguageNameVisible = true
+        self.codeEditorView.codeTemplate = self.codeTemplate
+        self.codeEditorView.code = self.code
     }
 
     // MARK: - Private API
@@ -132,14 +135,6 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
     @objc
     private func submitClicked() {
         self.delegate?.newCodeQuizFullscreenCodeViewController(self, didSubmitCode: self.codeEditorView.code ?? "")
-    }
-}
-
-extension NewCodeQuizFullscreenCodeViewController: NewCodeQuizFullscreenSubmoduleProtocol {
-    func configure(viewModel: NewCodeQuizFullscreenViewModel) {
-        self.language = viewModel.language
-        self.code = viewModel.code
-        self.codeTemplate = viewModel.codeTemplate
     }
 }
 

@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewCodeQuizFullscreenPresenterProtocol {
     func presentContent(response: NewCodeQuizFullscreen.ContentLoad.Response)
+    func presentCodeReset(response: NewCodeQuizFullscreen.ResetCode.Response)
 }
 
 final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtocol {
@@ -36,6 +37,10 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
 
             self.viewController?.displayContent(viewModel: .init(data: viewModel))
         }.cauterize()
+    }
+
+    func presentCodeReset(response: NewCodeQuizFullscreen.ResetCode.Response) {
+        self.viewController?.displayCodeReset(viewModel: .init(code: response.code ?? ""))
     }
 
     private func processStepContent(_ content: String) -> Guarantee<String> {
