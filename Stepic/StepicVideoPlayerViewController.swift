@@ -365,6 +365,8 @@ final class StepicVideoPlayerViewController: UIViewController {
         if self.isControlsCurrentlyVisible && hideControlsAutomatically {
             self.scheduleControlsHideTimer()
         }
+
+        self.videoInBackgroundTooltip?.dismiss()
     }
 
     private func scheduleControlsHideTimer() {
