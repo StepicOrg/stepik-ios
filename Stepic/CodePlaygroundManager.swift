@@ -305,6 +305,9 @@ class CodePlaygroundManager {
             var text = textView.text!
             text.insert(contentsOf: symbols.characters, at: text.index(text.startIndex, offsetBy: cursorPosition))
             textView.text = text
+            // Manually call textViewDidChange, becuase when manually setting the text of a UITextView with code,
+            // the textViewDidChange: method does not get called.
+            textView.delegate?.textViewDidChange?(textView)
             textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
         }
     }
@@ -317,6 +320,7 @@ class CodePlaygroundManager {
 
             if textView.text != analyzed.text {
                 textView.text = analyzed.text
+                textView.delegate?.textViewDidChange?(textView)
             }
             if textView.selectedTextRange != textRangeFrom(position: analyzed.position, textView: textView) {
                 textView.selectedTextRange = textRangeFrom(position: analyzed.position, textView: textView)
