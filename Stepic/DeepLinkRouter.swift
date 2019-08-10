@@ -156,6 +156,18 @@ final class DeepLinkRouter {
             return
         }
 
+        if components.count == 4
+           && components[1].lowercased() == "users"
+           && components[3].lowercased() == "certificates" {
+            guard let userID = getID(components[2], reversed: false) else {
+                completion([])
+                return
+            }
+
+            self.routeToCertificates(userID: userID, completion: completion)
+            return
+        }
+
         if components.count >= 3 && components[1].lowercased() == "course" {
             guard let courseId = getID(components[2], reversed: true) else {
                 completion([])
@@ -233,6 +245,10 @@ final class DeepLinkRouter {
 
         vc.otherUserId = userId
         completion([vc])
+    }
+
+    static func routeToCertificates(userID: User.IdType, completion: @escaping ([UIViewController]) -> Void) {
+        completion([CertificatesLegacyAssembly(userID: userID).makeModule()])
     }
 
     static func routeToCourseWithId(_ courseId: Int, completion: @escaping ([UIViewController]) -> Void) {

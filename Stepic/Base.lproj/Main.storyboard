@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0uJ-IX-W04">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0uJ-IX-W04">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Downloads-->
         <scene sceneID="B6E-0I-IzT">
             <objects>
-                <viewController storyboardIdentifier="DownloadsViewController" id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DownloadsViewController" id="g7w-5Y-f4V" customClass="DownloadsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VVz-oY-EAd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,12 +50,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7a5-ET-4lH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2024.8" y="2162.9685157421291"/>
+            <point key="canvasLocation" x="1670" y="2641"/>
         </scene>
         <!--Lesson-->
         <scene sceneID="LMh-2U-yNH">
             <objects>
-                <viewController storyboardIdentifier="LessonViewController" id="7LO-Mv-R4f" customClass="LessonViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LessonViewController" id="7LO-Mv-R4f" customClass="LessonViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="18x-Lc-xSo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,12 +66,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sog-TK-f5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2788" y="2163"/>
+            <point key="canvasLocation" x="2433" y="2641"/>
         </scene>
         <!--Video Step View Controller-->
         <scene sceneID="LFg-le-xVl">
             <objects>
-                <viewController storyboardIdentifier="VideoStepViewController" id="3W9-IK-cIE" customClass="VideoStepViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoStepViewController" id="3W9-IK-cIE" customClass="VideoStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eOu-jp-hBO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,7 +90,7 @@
                                     <action selector="playButtonPressed:" destination="3W9-IK-cIE" eventType="touchUpInside" id="kVm-QE-2Cq"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68N-yM-TOn" customClass="DiscussionCountView" customModule="Adaptive_1838" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68N-yM-TOn" customClass="DiscussionCountView" customModule="Stepic" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="559" width="375" height="46"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -168,12 +168,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qo3-wV-bhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6116" y="1928.1859070464768"/>
+            <point key="canvasLocation" x="900" y="3471"/>
         </scene>
         <!--Web Step View Controller-->
         <scene sceneID="bJt-5m-7H3">
             <objects>
-                <viewController storyboardIdentifier="WebStepViewController" id="OsI-th-C1R" customClass="WebStepViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebStepViewController" id="OsI-th-C1R" customClass="WebStepViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gz8-wq-89z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -197,7 +197,7 @@
                                                     <constraint firstAttribute="height" constant="32" placeholder="YES" id="fD4-kU-l4I"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BE9-jp-jJZ" customClass="DiscussionCountView" customModule="Adaptive_1838" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BE9-jp-jJZ" customClass="DiscussionCountView" customModule="Stepic" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="32" width="375" height="46"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -285,7 +285,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RLq-xB-Eqy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5779" y="2607"/>
+            <point key="canvasLocation" x="900" y="4247"/>
         </scene>
         <!--Styled Tab Bar View Controller-->
         <scene sceneID="h7W-ra-FMl">
@@ -301,7 +301,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emr-b4-LSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-108" y="1442"/>
+            <point key="canvasLocation" x="-108" y="1330"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="YvC-9R-2bs">
@@ -311,12 +311,12 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XvM-lw-vUU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190" y="2591"/>
+            <point key="canvasLocation" x="1458" y="842"/>
         </scene>
         <!--Downloads-->
         <scene sceneID="Laj-7g-BZD">
             <objects>
-                <navigationController storyboardIdentifier="DownloadsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DownloadsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="StyledNavigationController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Downloads" image="tab-downloads" selectedImage="tab-downloads" id="Wmp-3r-xny"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">
@@ -330,12 +330,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KcB-yW-iiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1255.2" y="2162.9685157421291"/>
+            <point key="canvasLocation" x="900" y="2641"/>
         </scene>
         <!--Styled Navigation Controller-->
         <scene sceneID="dHl-Iz-Z0Q">
             <objects>
-                <navigationController storyboardIdentifier="ProfileNavigation" id="usg-zh-puE" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNavigation" id="usg-zh-puE" customClass="StyledNavigationController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Hg-Ye-byR">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -346,12 +346,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FiZ-KX-0MA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901" y="3575"/>
+            <point key="canvasLocation" x="900" y="1823"/>
         </scene>
         <!--Styled Navigation Controller-->
         <scene sceneID="tUu-h6-Dfw">
             <objects>
-                <navigationController storyboardIdentifier="HomeNavigation" id="l1A-DI-noi" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigation" id="l1A-DI-noi" customClass="StyledNavigationController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aYP-ew-qV1">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -362,12 +362,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ybu-TT-vbm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="916" y="4304"/>
+            <point key="canvasLocation" x="1670" y="1330"/>
         </scene>
         <!--Home Screen View Controller-->
         <scene sceneID="9Lh-fb-0BR">
             <objects>
-                <viewController id="Abp-QW-0uC" customClass="HomeScreenViewController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Abp-QW-0uC" customClass="HomeScreenViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6dy-mI-USE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -378,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyX-UA-2Rd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="4304"/>
+            <point key="canvasLocation" x="2398" y="1330"/>
         </scene>
         <!--Profile-->
         <scene sceneID="eaY-rL-sMF">
@@ -388,12 +388,12 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3a-ey-gSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1443" y="3314"/>
+            <point key="canvasLocation" x="1427" y="1822"/>
         </scene>
         <!--Styled Navigation Controller-->
         <scene sceneID="r2H-fY-2yw">
             <objects>
-                <navigationController storyboardIdentifier="NotificationsNavigation" id="v16-1y-UuB" customClass="StyledNavigationController" customModule="Adaptive_1838" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NotificationsNavigation" id="v16-1y-UuB" customClass="StyledNavigationController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UK7-tx-bfD">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -406,7 +406,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vad-ZM-NEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-382" y="2877"/>
+            <point key="canvasLocation" x="857" y="843"/>
         </scene>
     </scenes>
     <resources>

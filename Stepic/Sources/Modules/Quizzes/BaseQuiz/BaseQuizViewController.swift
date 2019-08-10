@@ -114,6 +114,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
         self.childQuizModuleInput?.update(dataset: data.dataset)
         self.childQuizModuleInput?.update(feedback: data.feedback)
+        self.childQuizModuleInput?.update(codeDetails: data.codeDetails)
         self.childQuizModuleInput?.update(reply: data.reply)
         self.childQuizModuleInput?.update(status: data.quizStatus)
 
@@ -141,15 +142,7 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
 
 extension BaseQuizViewController: BaseQuizViewDelegate {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView) {
-        guard let reply = self.currentReply else {
-            return
-        }
-
-        if self.shouldRetryWithNewAttempt {
-            self.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: true))
-        } else {
-            self.interactor.doSubmissionSubmit(request: .init(reply: reply))
-        }
+        self.submitCurrentReply()
     }
 
     func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView) {
@@ -183,10 +176,29 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
             )
         }
     }
+
+    private func submitCurrentReply() {
+        guard let reply = self.currentReply else {
+            return
+        }
+
+        self.view.endEditing(true)
+
+        if self.shouldRetryWithNewAttempt {
+            self.interactor.doSubmissionLoad(request: .init(shouldRefreshAttempt: true))
+        } else {
+            self.interactor.doSubmissionSubmit(request: .init(reply: reply))
+        }
+    }
 }
 
 extension BaseQuizViewController: QuizOutputProtocol {
     func update(reply: Reply) {
         self.currentReply = reply
+    }
+
+    func submit(reply: Reply) {
+        self.update(reply: reply)
+        self.submitCurrentReply()
     }
 }

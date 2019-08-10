@@ -17,7 +17,7 @@ protocol CodeEditorSettingsView: class {
     func updatePreview(fontSize: Int)
 }
 
-class CodeEditorSettingsPresenter {
+final class CodeEditorSettingsPresenter {
     weak var view: CodeEditorSettingsView?
 
     var themeBlock: TransitionMenuBlock?
@@ -34,12 +34,16 @@ class CodeEditorSettingsPresenter {
         PreferencesContainer.codeEditor.theme = newTheme
         themeBlock?.subtitle = String(format: NSLocalizedString("CodeEditorCurrentTheme", comment: ""), newTheme)
         view?.updatePreview(theme: newTheme)
+
+        NotificationCenter.default.post(name: .codeEditorThemeDidChange, object: nil)
     }
 
     func updateFontSize(with newSize: Int) {
         PreferencesContainer.codeEditor.fontSize = newSize
         fontSizeBlock?.subtitle = String(format: NSLocalizedString("CodeEditorCurrentFontSize", comment: ""), "\(newSize)")
         view?.updatePreview(fontSize: newSize)
+
+        NotificationCenter.default.post(name: .codeEditorThemeDidChange, object: nil)
     }
 
     private func buildSettingsMenu() -> Menu {
@@ -86,4 +90,8 @@ class CodeEditorSettingsPresenter {
 
         return fontSizeBlock!
     }
+}
+
+extension NSNotification.Name {
+    static let codeEditorThemeDidChange = NSNotification.Name("codeEditorThemeDidChange")
 }

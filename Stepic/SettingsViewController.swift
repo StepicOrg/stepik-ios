@@ -198,11 +198,8 @@ class SettingsViewController: MenuViewController, SettingsView {
     }
 
     func changeCodeEditorSettings() {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
-            return
-        }
-
-        self.navigationController?.pushViewController(vc, animated: true)
+        let assembly = CodeEditorSettingsLegacyAssembly()
+        self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
     }
 
     func openDownloads() {

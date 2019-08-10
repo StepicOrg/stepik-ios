@@ -11,9 +11,12 @@ import CoreData
 import SwiftyJSON
 
 class CodeLimit: NSManagedObject {
-
     var language: CodeLanguage? {
         return CodeLanguage(rawValue: languageString)
+    }
+
+    override var description: String {
+        return "CodeLimit(languageString: \(self.languageString), time: \(self.time), memory: \(self.memory)"
     }
 
     convenience required init(language: String, json: JSON) {

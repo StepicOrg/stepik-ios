@@ -11,6 +11,9 @@ import CoreData
 import SwiftyJSON
 
 class StepOptions: NSManagedObject {
+    override var description: String {
+        return "StepOptions(limits: \(self.limits), templates: \(self.templates), samples: \(self.samples)"
+    }
 
     convenience required init(json: JSON) {
         self.init()
@@ -18,10 +21,14 @@ class StepOptions: NSManagedObject {
     }
 
     func initialize(_ json: JSON) {
+        self.executionTimeLimit = json["execution_time_limit"].doubleValue
+        self.executionMemoryLimit = json["execution_memory_limit"].doubleValue
+
         guard let templatesJSON = json["code_templates"].dictionary,
-            let limitsJSON = json["limits"].dictionary else {
-                return
+              let limitsJSON = json["limits"].dictionary else {
+            return
         }
+
         for (key, value) in templatesJSON {
             if let templateString = value.string {
                 if let template = template(language: key, userGenerated: false) {
@@ -48,7 +55,10 @@ class StepOptions: NSManagedObject {
         if let samplesArray = json["samples"].array {
             for sampleJSON in samplesArray {
                 if let sampleArray = sampleJSON.arrayObject as? [String] {
-                    samples += [CodeSample(input: sampleArray[0].replacingOccurrences(of: "\n", with: "<br>"), output: sampleArray[1].replacingOccurrences(of: "\n", with: "<br>"))]
+                    samples += [CodeSample(
+                        input: sampleArray[0].replacingOccurrences(of: "\n", with: "<br>"),
+                        output: sampleArray[1].replacingOccurrences(of: "\n", with: "<br>"))
+                    ]
                 }
             }
         }

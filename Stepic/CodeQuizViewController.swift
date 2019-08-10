@@ -342,11 +342,6 @@ class CodeQuizViewController: QuizViewController {
         return CodeReply(code: code, language: language)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     private func updateTextViewInsets() {
         if #available(iOS 11.0, *) {
             codeTextView.textContainerInset = UIEdgeInsets(top: 0, left: containerView.safeAreaInsets.left, bottom: 0, right: containerView.safeAreaInsets.right)
@@ -366,17 +361,16 @@ extension CodeQuizViewController : CodeQuizToolbarDelegate {
     }
 
     func settingsPressed() {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "CodeEditorSettings", storyboardName: "Profile") as? CodeEditorSettingsViewController else {
-            return
-        }
+        let assembly = CodeEditorSettingsLegacyAssembly()
+        let navigationController = WrappingNavigationViewController(
+            wrappedViewController: assembly.makeModule(),
+            title: NSLocalizedString("Settings", comment: ""),
+            onDismiss: { [weak self] in
+                self?.setupTheme()
+            }
+        )
 
-        let presenter = CodeEditorSettingsPresenter(view: vc)
-        vc.presenter = presenter
-
-        let navVC = WrappingNavigationViewController(wrappedViewController: vc, title: NSLocalizedString("Settings", comment: ""), onDismiss: { [weak self] in
-            self?.setupTheme()
-        })
-        present(navVC, animated: true)
+        self.present(navigationController, animated: true)
     }
 
     func fullscreenPressed() {

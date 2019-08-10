@@ -17,6 +17,7 @@ extension User {
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedProfile: NSNumber?
     @NSManaged var managedPrivate: NSNumber?
+    @NSManaged var managedOrganization: NSNumber?
     @NSManaged var managedBio: String?
     @NSManaged var managedDetails: String?
     @NSManaged var managedFirstName: String?
@@ -71,6 +72,15 @@ extension User {
         }
         get {
             return managedPrivate?.boolValue ?? true
+        }
+    }
+
+    var isOrganization: Bool {
+        get {
+            return self.managedOrganization?.boolValue ?? false
+        }
+        set {
+            self.managedOrganization = newValue as NSNumber?
         }
     }
 

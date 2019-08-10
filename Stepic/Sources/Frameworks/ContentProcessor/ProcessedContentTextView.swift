@@ -19,7 +19,7 @@ extension ProcessedContentTextView {
 final class ProcessedContentTextView: UIView {
     private static let reloadTimeStandardInterval: TimeInterval = 0.5
     private static let reloadTimeout: TimeInterval = 10.0
-    private static let defaultWebviewHeight: CGFloat = 5
+    private static let defaultWebViewHeight: CGFloat = 5
 
     let appearance: Appearance
     weak var delegate: ProcessedContentTextViewDelegate?
@@ -78,7 +78,7 @@ final class ProcessedContentTextView: UIView {
         return webView
     }()
 
-    private var isFirstNavigationAction = true
+    private var isLoadingHTMLText = false
 
     override var intrinsicContentSize: CGSize {
         return CGSize(
@@ -126,6 +126,7 @@ final class ProcessedContentTextView: UIView {
     // MARK: Public API
 
     func loadHTMLText(_ text: String) {
+        self.isLoadingHTMLText = true
         let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
         self.webView.loadHTMLString(text, baseURL: baseURL)
     }
@@ -180,7 +181,7 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
-            make.height.equalTo(ProcessedContentTextView.defaultWebviewHeight)
+            make.height.equalTo(ProcessedContentTextView.defaultWebViewHeight)
         }
     }
 }
@@ -192,6 +193,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             self.getContentHeight()
         }.done { height in
             self.webView.snp.updateConstraints { $0.height.equalTo(height) }
+            self.isLoadingHTMLText = false
             self.delegate?.processedContentTextViewDidLoadContent(self)
 
             self.fetchHeightWithInterval()
@@ -217,8 +219,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             return decisionHandler(.cancel)
         }
 
-        if self.isFirstNavigationAction && navigationAction.navigationType == .other {
-            self.isFirstNavigationAction = false
+        if self.isLoadingHTMLText && navigationAction.navigationType == .other {
             return decisionHandler(.allow)
         }
 

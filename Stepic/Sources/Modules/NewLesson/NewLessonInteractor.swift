@@ -126,6 +126,9 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             )
 
             self.presenter.presentLesson(response: .init(state: .success(data)))
+            self.presenter.presentLessonTooltipInfo(
+                response: .init(lesson: lesson, steps: steps, progresses: progresses)
+            )
         }.catch { error in
             print("new lesson interactor: error while loading lesson = \(error)")
             self.presenter.presentLesson(response: .init(state: .failure(error)))
@@ -157,6 +160,29 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                     response: .init(hasPreviousUnit: previousUnit != nil, hasNextUnit: nextUnit != nil)
                 )
             }
+        }.cauterize()
+    }
+
+    private func refreshTooltipInfo(stepID: Step.IdType) {
+        guard let lesson = self.currentLesson else {
+            return
+        }
+
+        self.provider.fetchSteps(ids: [stepID]).map {
+            $0.value
+        }.then { steps -> Promise<(Step, Progress.IdType)> in
+            guard let step = steps?.first,
+                  let progressID = step.progressId else {
+                throw Error.fetchFailed
+            }
+            return .value((step, progressID))
+        }.then { step, progressID -> Promise<([Progress]?, Step)> in
+            self.provider.fetchProgresses(ids: [progressID]).map { ($0.value, step) }
+        }.done { progresses, step in
+            guard let progress = progresses?.first else {
+                throw Error.fetchFailed
+            }
+            self.presenter.presentStepTooltipInfoUpdate(response: .init(lesson: lesson, step: step, progress: progress))
         }.cauterize()
     }
 
@@ -204,6 +230,8 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         if let unit = self.currentUnit {
             self.dataBackUpdateService.triggerProgressUpdate(unit: unit.id, triggerRecursive: true)
         }
+
+        self.refreshTooltipInfo(stepID: id)
     }
 
     func handleStepNavigation(to index: Int) {

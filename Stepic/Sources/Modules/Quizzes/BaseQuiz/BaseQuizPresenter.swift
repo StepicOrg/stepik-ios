@@ -55,11 +55,13 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             }
         }()
 
-        // string / number / math quizzes can be retried w/o new attempt
+        // string / number / math / freeAnswer / code quizzes can be retried w/o new attempt
         let isQuizNotNeededNewAttempt = [
             NewStep.QuizType.string,
             NewStep.QuizType.number,
-            NewStep.QuizType.math
+            NewStep.QuizType.math,
+            NewStep.QuizType.freeAnswer,
+            NewStep.QuizType.code
         ].contains(NewStep.QuizType(blockName: step.block.name))
 
         // 1. if quiz is not needed new attempt and status == wrong
@@ -94,6 +96,17 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             return nil
         }()
 
+        let codeDetails: CodeDetails? = {
+            if let options = step.options {
+                return CodeDetails(
+                    stepID: step.id,
+                    stepContent: step.block.text ?? "",
+                    stepOptions: StepOptionsPlainObject(stepOptions: options)
+                )
+            }
+            return nil
+        }()
+
         return BaseQuizViewModel(
             quizStatus: quizStatus,
             reply: submission?.reply ?? cachedReply,
@@ -106,7 +119,8 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             retryWithNewAttempt: retryWithNewAttempt,
             shouldPassPeerReview: shouldPassPeerReview,
             stepURL: self.makeURL(for: step),
-            hintContent: hintContent
+            hintContent: hintContent,
+            codeDetails: codeDetails
         )
     }
 

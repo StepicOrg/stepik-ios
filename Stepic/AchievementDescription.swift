@@ -83,39 +83,89 @@ enum AchievementKind: String {
             return NSLocalizedString("AchievementsStepsSolvedStreakKindTitle", comment: "")
         case .activeDaysStreak:
             return NSLocalizedString("AchievementsActiveDaysStreakKindTitle", comment: "")
-        default:
-            return NSLocalizedString("AchievementsUnknownKindTitle", comment: "")
         }
     }
 
     func getDescription(for score: Int) -> String {
-        switch self {
-        case .stepsSolved:
-            return String(format: NSLocalizedString("AchievementsStepsSolvedKindDescription", comment: ""), "\(score)")
-        case .stepsSolvedChoice:
-            return String(format: NSLocalizedString("AchievementsStepsSolvedChoiceKindDescription", comment: ""), "\(score)")
-        case .stepsSolvedCode:
-            return String(format: NSLocalizedString("AchievementsStepsSolvedCodeKindDescription", comment: ""), "\(score)")
-        case .stepsSolvedNumber:
-            return String(format: NSLocalizedString("AchievementsStepsSolvedNumberKindDescription", comment: ""), "\(score)")
-        case .codeQuizzesSolvedPython:
-            return String(format: NSLocalizedString("AchievementsCodeQuizzesSolvedPythonKindDescription", comment: ""), "\(score)")
-        case .codeQuizzesSolvedJava:
-            return String(format: NSLocalizedString("AchievementsCodeQuizzesSolvedJavaKindDescription", comment: ""), "\(score)")
-        case .codeQuizzesSolvedCPP:
-            return String(format: NSLocalizedString("AchievementsCodeQuizzesSolvedCppKindDescription", comment: ""), "\(score)")
-        case .certificatesRegularCount:
-            return String(format: NSLocalizedString("AchievementsCertificatesRegularCountKindDescription", comment: ""), "\(score)")
-        case .certificatesDistinctionCount:
-            return String(format: NSLocalizedString("AchievementsCertificatesDistinctionCountKindDescription", comment: ""), "\(score)")
-        case .courseReviewsCount:
-            return String(format: NSLocalizedString("AchievementsCourseReviewsCountKindDescription", comment: ""), "\(score)")
-        case .stepsSolvedStreak:
-            return String(format: NSLocalizedString("AchievementsStepsSolvedStreakKindDescription", comment: ""), "\(score)")
-        case .activeDaysStreak:
-            return String(format: NSLocalizedString("AchievementsActiveDaysStreakKindDescription", comment: ""), "\(score)")
-        default:
-            return NSLocalizedString("AchievementsUnknownKindDescription", comment: "")
-        }
+        let forms: [String] = {
+            switch self {
+            case .stepsSolved:
+                return [
+                    NSLocalizedString("AchievementsStepsSolvedKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedKindDescription567890", comment: "")
+                ]
+            case .stepsSolvedChoice:
+                return [
+                    NSLocalizedString("AchievementsStepsSolvedChoiceKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedChoiceKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedChoiceKindDescription567890", comment: "")
+                ]
+            case .stepsSolvedCode:
+                return [
+                    NSLocalizedString("AchievementsStepsSolvedCodeKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedCodeKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedCodeKindDescription567890", comment: "")
+                ]
+            case .stepsSolvedNumber:
+                return [
+                    NSLocalizedString("AchievementsStepsSolvedNumberKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedNumberKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedNumberKindDescription567890", comment: "")
+                ]
+            case .codeQuizzesSolvedPython:
+                return [
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedPythonKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedPythonKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedPythonKindDescription567890", comment: "")
+                ]
+            case .codeQuizzesSolvedJava:
+                return [
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedJavaKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedJavaKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedJavaKindDescription567890", comment: "")
+                ]
+            case .codeQuizzesSolvedCPP:
+                return [
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedCppKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedCppKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsCodeQuizzesSolvedCppKindDescription567890", comment: "")
+                ]
+            case .certificatesRegularCount:
+                return [
+                    NSLocalizedString("AchievementsCertificatesRegularCountKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsCertificatesRegularCountKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsCertificatesRegularCountKindDescription567890", comment: "")
+                ]
+            case .certificatesDistinctionCount:
+                return [
+                    NSLocalizedString("AchievementsCertificatesDistinctionCountKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsCertificatesDistinctionCountKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsCertificatesDistinctionCountKindDescription567890", comment: "")
+                ]
+            case .courseReviewsCount:
+                return [
+                    NSLocalizedString("AchievementsCourseReviewsCountKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsCourseReviewsCountKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsCourseReviewsCountKindDescription567890", comment: "")
+                ]
+            case .stepsSolvedStreak:
+                return [
+                    NSLocalizedString("AchievementsStepsSolvedStreakKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedStreakKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsStepsSolvedStreakKindDescription567890", comment: "")
+                ]
+            case .activeDaysStreak:
+                return [
+                    NSLocalizedString("AchievementsActiveDaysStreakKindDescription1", comment: ""),
+                    NSLocalizedString("AchievementsActiveDaysStreakKindDescription234", comment: ""),
+                    NSLocalizedString("AchievementsActiveDaysStreakKindDescription567890", comment: "")
+                ]
+            }
+        }()
+
+        let pluralizedString = StringHelper.pluralize(number: score, forms: forms)
+
+        return String(format: pluralizedString, "\(score)")
     }
 }

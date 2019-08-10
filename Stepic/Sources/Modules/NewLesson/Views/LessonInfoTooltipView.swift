@@ -4,6 +4,7 @@ import UIKit
 extension LessonInfoTooltipView {
     struct Appearance {
         let iconSize = CGSize(width: 24, height: 24)
+        let iconColor = UIColor.white
         let font = UIFont.systemFont(ofSize: 16, weight: .medium)
         let textColor = UIColor.white
         let labelIconSpacing: CGFloat = 14
@@ -18,8 +19,6 @@ final class LessonInfoTooltipView: UIView {
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
-
-        self.addSubviews()
     }
 
     @available(*, unavailable)
@@ -53,8 +52,17 @@ final class LessonInfoTooltipView: UIView {
         )
     }
 
+    func configure(viewModel items: [Item]) {
+        items.forEach { item in
+            let label = self.makeLabelWithIcon(icon: item.icon, text: item.text)
+            self.addSubview(label)
+        }
+    }
+
     private func makeLabelWithIcon(icon: UIImage?, text: String) -> UIView {
-        let imageView = UIImageView(image: icon)
+        let imageView = UIImageView(image: icon?.withRenderingMode(.alwaysTemplate))
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = self.appearance.iconColor
 
         let label = UILabel()
         label.font = self.appearance.font
@@ -76,18 +84,9 @@ final class LessonInfoTooltipView: UIView {
 
         return containerView
     }
-}
 
-extension LessonInfoTooltipView: ProgrammaticallyInitializableViewProtocol {
-    func addSubviews() {
-        self.addSubview(
-            self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-info"), text: "3 балла за верное")
-        )
-        self.addSubview(
-            self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-info"), text: "20 минут на решение")
-        )
-        self.addSubview(
-            self.makeLabelWithIcon(icon: UIImage(named: "lesson-tooltip-info"), text: "94 балла до сертификата")
-        )
+    struct Item {
+        let icon: UIImage?
+        let text: String
     }
 }

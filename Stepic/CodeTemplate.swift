@@ -11,9 +11,12 @@ import CoreData
 import SwiftyJSON
 
 class CodeTemplate: NSManagedObject {
-
     var language: CodeLanguage? {
         return CodeLanguage(rawValue: languageString)
+    }
+
+    override var description: String {
+        return "CodeTemplate(languageString: \(self.languageString), templateString: \(self.templateString)"
     }
 
     convenience required init(language: CodeLanguage, template: String) {
