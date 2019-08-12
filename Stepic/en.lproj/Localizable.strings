@@ -9,6 +9,7 @@
 /* Common phrases */
 SignedIn = "Signed in!";
 FailedToSignIn = "Failed to sign in";
+FailedToSignInNoEmail = "Failed to sign in: email is not provided by social network";
 RemoveVideoTitle = "Remove cached videos";
 RemoveVideoBody = "Are you sure you want to remove cached videos?";
 Cancel = "Cancel";

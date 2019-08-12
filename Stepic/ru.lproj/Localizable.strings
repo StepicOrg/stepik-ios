@@ -9,6 +9,7 @@
 /* Common phrases */
 SignedIn = "Успешно!";
 FailedToSignIn = "Не удалось авторизоваться";
+FailedToSignInNoEmail = "Не удалось авторизоваться: в аккаунте социальной сети не указан email";
 RemoveVideoTitle = "Удаление видео из урока";
 RemoveVideoBody = "Вы уверены, что хотите удалить сохраненное видео из этого урока?";
 Cancel = "Отмена";
