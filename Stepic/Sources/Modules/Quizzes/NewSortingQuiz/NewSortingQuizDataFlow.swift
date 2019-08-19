@@ -1,11 +1,15 @@
 import Foundation
 
 enum NewSortingQuiz {
-    enum SomeAction {
-        struct Request { }
+    /// Show quiz state
+    enum ReplyLoad {
+        struct Response {
+            let options: [String]
+            let status: QuizStatus?
+        }
 
-        struct Response { }
-
-        struct ViewModel { }
+        struct ViewModel {
+            let data: NewSortingQuizViewModel
+        }
     }
 }

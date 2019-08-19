@@ -1,11 +1,16 @@
 import UIKit
 
 protocol NewSortingQuizViewControllerProtocol: class {
-    func displaySomeActionResult(viewModel: NewSortingQuiz.SomeAction.ViewModel)
+    func displayReply(viewModel: NewSortingQuiz.ReplyLoad.ViewModel)
 }
 
 final class NewSortingQuizViewController: UIViewController {
     private let interactor: NewSortingQuizInteractorProtocol
+
+    lazy var newSortingQuizView = self.view as? NewSortingQuizView
+
+    // Store options for smart quiz reset
+    private var lastOptionDataset: [String] = []
 
     init(interactor: NewSortingQuizInteractorProtocol) {
         self.interactor = interactor
@@ -24,5 +29,12 @@ final class NewSortingQuizViewController: UIViewController {
 }
 
 extension NewSortingQuizViewController: NewSortingQuizViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewSortingQuiz.SomeAction.ViewModel) { }
+    func displayReply(viewModel: NewSortingQuiz.ReplyLoad.ViewModel) {
+        if self.lastOptionDataset != viewModel.data.options {
+            self.lastOptionDataset = viewModel.data.options
+            self.newSortingQuizView?.set(options: viewModel.data.options)
+        }
+
+        self.newSortingQuizView?.isEnabled = viewModel.data.isEnabled
+    }
 }
