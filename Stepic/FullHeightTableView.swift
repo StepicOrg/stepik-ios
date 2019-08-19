@@ -6,12 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class FullHeightTableView: UITableView {
+final class FullHeightTableView: UITableView {
     override var intrinsicContentSize: CGSize {
-//        self.layoutIfNeeded()
         return CGSize(width: UIView.noIntrinsicMetric, height: self.contentSize.height)
     }
 
@@ -29,5 +27,4 @@ class FullHeightTableView: UITableView {
         super.endUpdates()
         self.invalidateIntrinsicContentSize()
     }
-
 }
