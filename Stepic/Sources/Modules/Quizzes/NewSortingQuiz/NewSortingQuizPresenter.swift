@@ -9,15 +9,15 @@ final class NewSortingQuizPresenter: NewSortingQuizPresenterProtocol {
 
     func presentReply(response: NewSortingQuiz.ReplyLoad.Response) {
         let viewModel = NewSortingQuizViewModel(
-            options: response.options.map { self.processOption($0) },
-            isEnabled: response.status != .correct
+            options: response.options.map { .init(id: $0.id, text: self.processText($0.text)) },
+            isEnabled: response.status == nil
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
     }
 
-    private func processOption(_ option: String) -> String {
-        let text = option.addingHTMLEntities()
+    private func processText(_ text: String) -> String {
+        let text = text.addingHTMLEntities()
 
         let processor = ContentProcessor(
             content: text,

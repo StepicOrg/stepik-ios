@@ -1,6 +1,8 @@
 import Foundation
 
-protocol NewSortingQuizInteractorProtocol { }
+protocol NewSortingQuizInteractorProtocol {
+    func doReplyUpdate(request: NewSortingQuiz.ReplyConvert.Request)
+}
 
 final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
     weak var moduleOutput: QuizOutputProtocol?
@@ -10,10 +12,15 @@ final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
     private var currentStatus: QuizStatus?
     private var currentDataset: SortingDataset?
     // swiftlint:disable:next discouraged_optional_collection
-    private var currentOptions: [String]?
+    private var currentOptions: [NewSortingQuiz.Option]?
 
     init(presenter: NewSortingQuizPresenterProtocol) {
         self.presenter = presenter
+    }
+
+    func doReplyUpdate(request: NewSortingQuiz.ReplyConvert.Request) {
+        self.currentOptions = request.options
+        self.outputCurrentReply()
     }
 
     private func presentNewData() {
@@ -30,19 +37,11 @@ final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
     }
 
     private func outputCurrentReply() {
-        guard let options = self.currentOptions,
-              let dataset = self.currentDataset else {
+        guard let options = self.currentOptions else {
             return
         }
 
-        var optionByPosition: [String: Int] = [:]
-        for (index, option) in dataset.options.enumerated() {
-            optionByPosition[option] = index
-        }
-
-        let reply = SortingReply(ordering: options.compactMap { optionByPosition[$0] })
-
-        self.moduleOutput?.update(reply: reply)
+        self.moduleOutput?.update(reply: SortingReply(ordering: options.map { $0.id }))
     }
 }
 
@@ -57,7 +56,7 @@ extension NewSortingQuizInteractor: QuizInputProtocol {
         }
 
         guard let reply = reply else {
-            self.currentOptions = dataset.options
+            self.currentOptions = dataset.options.enumerated().map { .init(id: $0, text: $1) }
             self.outputCurrentReply()
             return
         }
@@ -65,15 +64,10 @@ extension NewSortingQuizInteractor: QuizInputProtocol {
         self.moduleOutput?.update(reply: reply)
 
         if let reply = reply as? SortingReply {
-            var options = [String](repeating: "", count: dataset.options.count)
-            for (index, order) in reply.ordering.enumerated() {
-                options[index] = dataset.options[order]
-            }
-
-            self.currentOptions = options
+            self.currentOptions = reply.ordering.enumerated().map { .init(id: $0, text: dataset.options[$1]) }
+        } else {
+            fatalError("Unsupported reply")
         }
-
-        fatalError("Unsupported reply")
     }
 
     func update(status: QuizStatus?) {
@@ -87,6 +81,6 @@ extension NewSortingQuizInteractor: QuizInputProtocol {
         }
 
         self.currentDataset = dataset
-        self.currentOptions = dataset.options
+        self.currentOptions = dataset.options.enumerated().map { .init(id: $0, text: $1) }
     }
 }

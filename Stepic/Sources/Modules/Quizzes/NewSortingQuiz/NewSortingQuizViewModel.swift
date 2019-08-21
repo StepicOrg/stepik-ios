@@ -1,6 +1,6 @@
 import Foundation
 
 struct NewSortingQuizViewModel {
-    let options: [String]
+    let options: [NewSortingQuiz.Option]
     let isEnabled: Bool
 }

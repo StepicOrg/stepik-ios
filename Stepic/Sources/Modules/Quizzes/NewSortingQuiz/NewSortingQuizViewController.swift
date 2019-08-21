@@ -24,17 +24,33 @@ final class NewSortingQuizViewController: UIViewController {
 
     override func loadView() {
         let view = NewSortingQuizView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 }
 
 extension NewSortingQuizViewController: NewSortingQuizViewControllerProtocol {
     func displayReply(viewModel: NewSortingQuiz.ReplyLoad.ViewModel) {
-        if self.lastOptionDataset != viewModel.data.options {
-            self.lastOptionDataset = viewModel.data.options
+        if self.lastOptionDataset != viewModel.data.options.map { $0.text } {
+            self.lastOptionDataset = viewModel.data.options.map { $0.text }
             self.newSortingQuizView?.set(options: viewModel.data.options)
         }
 
         self.newSortingQuizView?.isEnabled = viewModel.data.isEnabled
+    }
+}
+
+extension NewSortingQuizViewController: NewSortingQuizViewDelegate {
+    func newSortingQuizView(
+        _ view: NewSortingQuizView,
+        didMoveOption option: NewSortingQuiz.Option,
+        atIndex sourceIndex: Int,
+        toIndex destinationIndex: Int
+    ) {
+        guard let options = self.newSortingQuizView?.options else {
+            return
+        }
+
+        self.interactor.doReplyUpdate(request: .init(options: options))
     }
 }
