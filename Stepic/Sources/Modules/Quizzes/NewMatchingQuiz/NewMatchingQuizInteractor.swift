@@ -1,6 +1,7 @@
 import Foundation
 
 protocol NewMatchingQuizInteractorProtocol {
+    func doReplyUpdate(request: NewMatchingQuiz.ReplyConvert.Request)
 }
 
 final class NewMatchingQuizInteractor: NewMatchingQuizInteractorProtocol {
@@ -17,10 +18,10 @@ final class NewMatchingQuizInteractor: NewMatchingQuizInteractorProtocol {
         self.presenter = presenter
     }
 
-//    func doReplyUpdate(request: NewSortingQuiz.ReplyConvert.Request) {
-//        self.currentOptions = request.options
-//        self.outputCurrentReply()
-//    }
+    func doReplyUpdate(request: NewMatchingQuiz.ReplyConvert.Request) {
+        self.currentItems = request.items
+        self.outputCurrentReply()
+    }
 
     private func presentNewData() {
         guard let items = self.currentItems else {

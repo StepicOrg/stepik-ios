@@ -41,7 +41,11 @@ extension NewMatchingQuizViewController: NewMatchingQuizViewDelegate {
         atIndex sourceIndex: Int,
         toIndex destinationIndex: Int
     ) {
-        print(item)
+        guard let items = self.newMatchingQuizView?.items else {
+            return
+        }
+
+        self.interactor.doReplyUpdate(request: .init(items: items))
     }
 
     func newMatchingQuizView(_ view: NewMatchingQuizView, didRequestOpenURL url: URL) {

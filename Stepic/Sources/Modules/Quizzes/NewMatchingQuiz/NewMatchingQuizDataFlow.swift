@@ -13,6 +13,13 @@ enum NewMatchingQuiz {
         }
     }
 
+    /// Convert options to reply
+    enum ReplyConvert {
+        struct Request {
+            let items: [MatchItem]
+        }
+    }
+
     // MARK: - Common structs
 
     struct MatchItem {

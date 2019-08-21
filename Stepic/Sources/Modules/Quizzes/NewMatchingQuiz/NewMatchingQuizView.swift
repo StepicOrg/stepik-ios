@@ -112,7 +112,7 @@ final class NewMatchingQuizView: UIView {
             sortingOptionView.configure(
                 viewModel: .init(
                     option: item.option.text,
-                    direction: self.getAvailableNavigationDirectionAtIndex(index)
+                    direction: self.getAvailableNavigationDirectionAtIndex(self.itemsStackView.arrangedSubviews.count)
                 )
             )
 
@@ -147,11 +147,11 @@ final class NewMatchingQuizView: UIView {
     private func getAvailableNavigationDirectionAtIndex(_ index: Int) -> NewSortingQuizElementView.Direction {
         var direction: NewSortingQuizElementView.Direction = []
 
-        if index != 0 {
+        if index != 1 {
             direction.insert(.top)
         }
 
-        if index != self.items.count - 1 {
+        if index != (self.items.count * 2) - 1 {
             direction.insert(.bottom)
         }
 
@@ -226,39 +226,49 @@ extension NewMatchingQuizView: NewSortingQuizElementViewDelegate {
     }
 
     private func move(_ view: NewSortingQuizElementView, direction: Direction) {
-//        guard let option = self.items.first(where: { $0.id == view.tag }),
-//              let sourceIndex = self.items.firstIndex(where: { $0.id == option.id }) else {
-//            return
-//        }
-//
-//        let destinationIndex = direction == .top ? sourceIndex - 1 : sourceIndex + 1
-//
-//        self.itemsStackView.removeArrangedSubview(view)
-//        UIView.animate(
-//            withDuration: Animation.moveSortingOptionAnimationDuration,
-//            animations: {
-//                self.itemsStackView.insertArrangedSubview(view, at: destinationIndex)
-//                self.itemsStackView.setNeedsLayout()
-//                self.itemsStackView.layoutIfNeeded()
-//            },
-//            completion: { isFinished in
-//                guard isFinished else {
-//                    return
-//                }
-//
-//                view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(destinationIndex))
-//                if let affectedView = self.itemsStackView.arrangedSubviews[
-//                    safe: sourceIndex
-//                    ] as? NewSortingQuizElementView {
-//                    affectedView.updateNavigation(self.getAvailableNavigationDirectionAtIndex(sourceIndex))
-//                }
-//            }
-//        )
-//
-//        self.items.remove(at: sourceIndex)
-//        self.items.insert(option, at: destinationIndex)
-//
-//        self.delegate?.newSortingQuizView(self, didMoveOption: option, atIndex: sourceIndex, toIndex: destinationIndex)
+        guard let item = self.items.first(where: { $0.option.id == view.tag }),
+              let subviewSourceIndex = self.itemsStackView.arrangedSubviews.firstIndex(where: { $0 === view }),
+              let itemSourceIndex = self.items.firstIndex(where: { $0.option.id == item.option.id }) else {
+            return
+        }
+
+        let subviewDestinationIndex = direction == .top ? subviewSourceIndex - 2 : subviewSourceIndex + 2
+        let itemDestinationIndex = direction == .top ? itemSourceIndex - 1 : itemSourceIndex + 1
+
+        let movingView = self.itemsStackView.arrangedSubviews[subviewDestinationIndex]
+
+        UIView.animate(
+            withDuration: Animation.moveSortingOptionAnimationDuration,
+            animations: {
+                self.itemsStackView.removeArrangedSubview(view)
+                self.itemsStackView.insertArrangedSubview(view, at: subviewDestinationIndex)
+                self.itemsStackView.removeArrangedSubview(movingView)
+                self.itemsStackView.insertArrangedSubview(movingView, at: subviewSourceIndex)
+
+                self.itemsStackView.setNeedsLayout()
+                self.itemsStackView.layoutIfNeeded()
+            },
+            completion: { isFinished in
+                guard isFinished else {
+                    return
+                }
+
+                view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(subviewDestinationIndex))
+                if let movingView = movingView as? NewSortingQuizElementView {
+                    movingView.updateNavigation(self.getAvailableNavigationDirectionAtIndex(subviewSourceIndex))
+                }
+            }
+        )
+
+        self.items.remove(at: itemSourceIndex)
+        self.items.insert(item, at: itemDestinationIndex)
+
+        self.delegate?.newMatchingQuizView(
+            self,
+            didMoveItem: item,
+            atIndex: subviewSourceIndex,
+            toIndex: subviewDestinationIndex
+        )
     }
 
     private enum Direction {
