@@ -8,6 +8,9 @@ protocol NewSortingQuizViewDelegate: class {
         atIndex sourceIndex: Int,
         toIndex destinationIndex: Int
     )
+
+    func newSortingQuizView(_ view: NewSortingQuizView, didRequestFullscreenImage url: URL)
+    func newSortingQuizView(_ view: NewSortingQuizView, didRequestOpenURL url: URL)
 }
 
 extension NewSortingQuizView {
@@ -61,7 +64,7 @@ final class NewSortingQuizView: UIView {
             sortingOptionView.tag = option.id
             sortingOptionView.configure(
                 viewModel: .init(
-                    text: option.text,
+                    option: option.text,
                     direction: self.getAvailableNavigationDirectionAtIndex(index)
                 )
             )
@@ -101,18 +104,26 @@ extension NewSortingQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension NewSortingQuizView: NewSortingQuizTableViewCellDelegate {
-    func newSortingQuizTableViewCellDidLoadContent(_ view: NewSortingQuizElementView) {
+extension NewSortingQuizView: NewSortingQuizElementViewDelegate {
+    func newSortingQuizElementViewDidLoadContent(_ view: NewSortingQuizElementView) {
         self.stackView.setNeedsLayout()
         self.stackView.layoutIfNeeded()
     }
 
-    func newSortingQuizTableViewCellDidRequestMoveTop(_ view: NewSortingQuizElementView) {
+    func newSortingQuizElementViewDidRequestMoveTop(_ view: NewSortingQuizElementView) {
         self.move(view, direction: .top)
     }
 
-    func newSortingQuizTableViewCellDidRequestMoveDown(_ view: NewSortingQuizElementView) {
+    func newSortingQuizElementViewDidRequestMoveDown(_ view: NewSortingQuizElementView) {
         self.move(view, direction: .bottom)
+    }
+
+    func newSortingQuizElementView(_ view: NewSortingQuizElementView, didRequestOpenURL url: URL) {
+        self.delegate?.newSortingQuizView(self, didRequestOpenURL: url)
+    }
+
+    func newSortingQuizElementView(_ view: NewSortingQuizElementView, didRequestFullscreenImage url: URL) {
+        self.delegate?.newSortingQuizView(self, didRequestFullscreenImage: url)
     }
 
     private func move(_ view: NewSortingQuizElementView, direction: Direction) {

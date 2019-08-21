@@ -1,11 +1,15 @@
 import SnapKit
 import UIKit
 
-protocol NewSortingQuizTableViewCellDelegate: class {
-    func newSortingQuizTableViewCellDidLoadContent(_ view: NewSortingQuizElementView)
+protocol NewSortingQuizElementViewDelegate: class {
+    func newSortingQuizElementViewDidLoadContent(_ view: NewSortingQuizElementView)
+    func newSortingQuizElementViewDidUpdateContentHeight(_ view: NewSortingQuizElementView)
 
-    func newSortingQuizTableViewCellDidRequestMoveTop(_ view: NewSortingQuizElementView)
-    func newSortingQuizTableViewCellDidRequestMoveDown(_ view: NewSortingQuizElementView)
+    func newSortingQuizElementViewDidRequestMoveTop(_ view: NewSortingQuizElementView)
+    func newSortingQuizElementViewDidRequestMoveDown(_ view: NewSortingQuizElementView)
+
+    func newSortingQuizElementView(_ view: NewSortingQuizElementView, didRequestFullscreenImage url: URL)
+    func newSortingQuizElementView(_ view: NewSortingQuizElementView, didRequestOpenURL url: URL)
 }
 
 extension NewSortingQuizElementView {
@@ -26,7 +30,7 @@ extension NewSortingQuizElementView {
 
 final class NewSortingQuizElementView: UIView {
     let appearance: Appearance
-    weak var delegate: NewSortingQuizTableViewCellDelegate?
+    weak var delegate: NewSortingQuizElementViewDelegate?
 
     private lazy var quizElementView = QuizElementView()
     private lazy var contentView: ProcessedContentTextView = {
@@ -74,7 +78,7 @@ final class NewSortingQuizElementView: UIView {
 
     override var intrinsicContentSize: CGSize {
         let contentHeight = max(
-            self.contentView.intrinsicContentSize.height,
+            self.contentTextView.intrinsicContentSize.height,
             self.navigationControlsContainerViewHeight
         )
         return CGSize(
@@ -120,7 +124,7 @@ final class NewSortingQuizElementView: UIView {
     // MARK: - Public API
 
     func configure(viewModel: ViewModel) {
-        self.contentView.loadHTMLText(viewModel.text)
+        self.contentTextView.loadHTMLText(viewModel.option)
         self.updateNavigation(viewModel.direction)
         self.invalidateIntrinsicContentSize()
     }
@@ -134,18 +138,18 @@ final class NewSortingQuizElementView: UIView {
 
     @objc
     private func topNavigationButtonClicked() {
-        self.delegate?.newSortingQuizTableViewCellDidRequestMoveTop(self)
+        self.delegate?.newSortingQuizElementViewDidRequestMoveTop(self)
     }
 
     @objc
     private func bottomNavigationButtonClicked() {
-        self.delegate?.newSortingQuizTableViewCellDidRequestMoveDown(self)
+        self.delegate?.newSortingQuizElementViewDidRequestMoveDown(self)
     }
 
     // MARK: - Inner structs
 
     struct ViewModel {
-        let text: String
+        let option: String
         let direction: Direction
     }
 
@@ -166,7 +170,7 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
         self.navigationControlsContainerView.addSubview(self.topNavigationButton)
         self.navigationControlsContainerView.addSubview(self.bottomNavigationButton)
 
-        self.quizElementView.addSubview(self.contentView)
+        self.quizElementView.addSubview(self.contentTextView)
         self.quizElementView.addSubview(self.navigationControlsContainerView)
 
         self.addSubview(self.quizElementView)
@@ -188,8 +192,8 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
             make.size.equalTo(self.quizElementView)
         }
 
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.snp.makeConstraints { make in
+        self.contentTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentTextView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(self.appearance.contentInsets.top)
             make.bottom.equalToSuperview().offset(-self.appearance.contentInsets.bottom)
             make.leading.equalToSuperview().offset(self.appearance.contentInsets.left)
@@ -229,7 +233,11 @@ extension NewSortingQuizElementView: ProcessedContentTextViewDelegate {
         self.delegate?.newSortingQuizTableViewCellDidLoadContent(self)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) { }
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+        self.delegate?.newSortingQuizElementView(self, didRequestOpenURL: url)
+    }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) { }
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+        self.delegate?.newSortingQuizElementView(self, didRequestFullscreenImage: url)
+    }
 }

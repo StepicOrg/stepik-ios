@@ -1,3 +1,4 @@
+import Agrume
 import UIKit
 
 protocol NewSortingQuizViewControllerProtocol: class {
@@ -52,5 +53,23 @@ extension NewSortingQuizViewController: NewSortingQuizViewDelegate {
         }
 
         self.interactor.doReplyUpdate(request: .init(options: options))
+    }
+
+    func newSortingQuizView(_ view: NewSortingQuizView, didRequestOpenURL url: URL) {
+        let scheme = url.scheme?.lowercased() ?? ""
+        if ["http", "https"].contains(scheme) {
+            WebControllerManager.sharedManager.presentWebControllerWithURL(
+                url,
+                inController: self,
+                withKey: "external link",
+                allowsSafari: true,
+                backButtonStyle: .done
+            )
+        }
+    }
+
+    func newSortingQuizView(_ view: NewSortingQuizView, didRequestFullscreenImage url: URL) {
+        let agrume = Agrume(url: url)
+        agrume.show(from: self)
     }
 }
