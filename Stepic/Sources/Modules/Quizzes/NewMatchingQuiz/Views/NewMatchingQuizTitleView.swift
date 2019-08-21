@@ -9,7 +9,7 @@ protocol NewMatchingQuizTitleViewDelegate: class {
 
 extension NewMatchingQuizTitleView {
     struct Appearance {
-        let containerInsets = LayoutInsets(top: 12, left: 16, bottom: 4, right: 64)
+        let containerInsets = LayoutInsets(top: 12, left: 16, bottom: 10, right: 64)
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
         let shadowColor = UIColor(hex: 0xEAECF0)

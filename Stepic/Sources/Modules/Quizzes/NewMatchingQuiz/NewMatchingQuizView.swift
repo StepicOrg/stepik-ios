@@ -99,7 +99,14 @@ final class NewMatchingQuizView: UIView {
             self.loadGroup?.enter()
             self.itemsStackView.addArrangedSubview(titleView)
 
-            let sortingOptionView = NewSortingQuizElementView()
+            let bottomInset: CGFloat = index == items.count - 1 ? 0 : 12
+            let sortingOptionAppearance = NewSortingQuizElementView.Appearance(
+                containerInsets: LayoutInsets(top: 0, left: 64, bottom: bottomInset, right: 16)
+            )
+            let sortingOptionView = NewSortingQuizElementView(
+                frame: .zero,
+                appearance: sortingOptionAppearance
+            )
             sortingOptionView.delegate = self
             sortingOptionView.tag = item.option.id
             sortingOptionView.configure(

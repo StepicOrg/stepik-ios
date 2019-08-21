@@ -14,6 +14,7 @@ protocol NewSortingQuizElementViewDelegate: class {
 
 extension NewSortingQuizElementView {
     struct Appearance {
+        var containerInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
         let shadowColor = UIColor(hex: 0xEAECF0)
@@ -179,10 +180,10 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.quizElementView.translatesAutoresizingMaskIntoConstraints = false
         self.quizElementView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.contentInsets.top)
-            make.bottom.equalToSuperview().offset(-self.appearance.contentInsets.bottom)
-            make.leading.equalToSuperview().offset(self.appearance.contentInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.contentInsets.right)
+            make.top.equalToSuperview().offset(self.appearance.containerInsets.top)
+            make.bottom.equalToSuperview().offset(-self.appearance.containerInsets.bottom)
+            make.leading.equalToSuperview().offset(self.appearance.containerInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.containerInsets.right)
         }
 
         self.shadowView.translatesAutoresizingMaskIntoConstraints = false
