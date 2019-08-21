@@ -684,6 +684,7 @@
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
+		2CD87011230DE5F4003D9F1A /* NewMatchingQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD87010230DE5F4003D9F1A /* NewMatchingQuizViewModel.swift */; };
 		2CD99DD622DCE4D500628224 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF425292024C10C002D7305 /* overlay_hard.png */; };
 		2CD99DD722DCE4D800628224 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF4252B2024C10D002D7305 /* overlay_simple.png */; };
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
@@ -1799,6 +1800,7 @@
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
+		2CD87010230DE5F4003D9F1A /* NewMatchingQuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchingQuizViewModel.swift; sourceTree = "<group>"; };
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestsLogger.swift; sourceTree = "<group>"; };
 		2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsNetworkService.swift; sourceTree = "<group>"; };
@@ -3834,6 +3836,7 @@
 				D779F899F835A1724F0C1186 /* NewMatchingQuizPresenter.swift */,
 				404D37E2105ABA9C150864A6 /* NewMatchingQuizView.swift */,
 				7398B256EE198D1F6A6AF959 /* NewMatchingQuizViewController.swift */,
+				2CD87010230DE5F4003D9F1A /* NewMatchingQuizViewModel.swift */,
 			);
 			path = NewMatchingQuiz;
 			sourceTree = "<group>";
@@ -6897,6 +6900,7 @@
 				62E98204E6B4E748AB087640 /* CourseInfoTabInfoHeaderBlockView.swift in Sources */,
 				62E98CF264C7DE7E15028D15 /* CourseInfoTabInfoInstructorsBlockView.swift in Sources */,
 				62E988B531F6567528603111 /* CourseInfoTabInfoInstructorView.swift in Sources */,
+				2CD87011230DE5F4003D9F1A /* NewMatchingQuizViewModel.swift in Sources */,
 				62E9860D3AD2309881B4914E /* CourseInfoTabInfoIntroVideoBlockView.swift in Sources */,
 				62E980F0A25978045A1C2E43 /* CourseInfoTabInfoTextBlockView.swift in Sources */,
 				62E9829A3C9F8110523F2FBF /* CourseInfoTabInfoView.swift in Sources */,

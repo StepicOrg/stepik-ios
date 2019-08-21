@@ -1,6 +1,7 @@
 import UIKit
 
 protocol NewMatchingQuizViewControllerProtocol: class {
+    func displayReply(viewModel: NewMatchingQuiz.ReplyLoad.ViewModel)
 }
 
 final class NewMatchingQuizViewController: UIViewController {
@@ -23,4 +24,7 @@ final class NewMatchingQuizViewController: UIViewController {
 }
 
 extension NewMatchingQuizViewController: NewMatchingQuizViewControllerProtocol {
+    func displayReply(viewModel: NewMatchingQuiz.ReplyLoad.ViewModel) {
+        print(viewModel)
+    }
 }

@@ -1,4 +1,32 @@
 import Foundation
 
 enum NewMatchingQuiz {
+    /// Show quiz state
+    enum ReplyLoad {
+        struct Response {
+            let items: [MatchItem]
+            let status: QuizStatus?
+        }
+
+        struct ViewModel {
+            let data: NewMatchingQuizViewModel
+        }
+    }
+
+    // MARK: - Common structs
+
+    struct MatchItem {
+        let title: Title
+        let option: Option
+
+        struct Title {
+            let id: Int
+            let text: String
+        }
+
+        struct Option {
+            let id: Int
+            let text: String
+        }
+    }
 }
