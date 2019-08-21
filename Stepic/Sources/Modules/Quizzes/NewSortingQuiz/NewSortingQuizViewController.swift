@@ -10,9 +10,6 @@ final class NewSortingQuizViewController: UIViewController {
 
     lazy var newSortingQuizView = self.view as? NewSortingQuizView
 
-    // Store options for smart quiz reset
-    private var lastOptionDataset: [String] = []
-
     init(interactor: NewSortingQuizInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
@@ -32,11 +29,7 @@ final class NewSortingQuizViewController: UIViewController {
 
 extension NewSortingQuizViewController: NewSortingQuizViewControllerProtocol {
     func displayReply(viewModel: NewSortingQuiz.ReplyLoad.ViewModel) {
-        if self.lastOptionDataset != viewModel.data.options.map { $0.text } {
-            self.lastOptionDataset = viewModel.data.options.map { $0.text }
-            self.newSortingQuizView?.set(options: viewModel.data.options)
-        }
-
+        self.newSortingQuizView?.set(options: viewModel.data.options)
         self.newSortingQuizView?.isEnabled = viewModel.data.isEnabled
     }
 }
