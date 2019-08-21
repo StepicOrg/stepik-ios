@@ -14,16 +14,31 @@ protocol NewSortingQuizViewDelegate: class {
 }
 
 extension NewSortingQuizView {
+    struct Appearance {
+        let loadingIndicatorColor = UIColor.mainDark
+    }
+
     enum Animation {
-        static let appearanceAnimationDuration: TimeInterval = 0.33
+        static let appearanceAnimationDuration: TimeInterval = 0.2
+        static let appearanceAnimationDelay: TimeInterval = 1.0
+
         static let moveSortingOptionAnimationDuration: TimeInterval = 0.33
     }
 }
 
 final class NewSortingQuizView: UIView {
+    let appearance: Appearance
     weak var delegate: NewSortingQuizViewDelegate?
 
-    private lazy var stackView: UIStackView = {
+    private lazy var loadingIndicatorView: UIActivityIndicatorView = {
+        let loadingIndicatorView = UIActivityIndicatorView(style: .white)
+        loadingIndicatorView.color = self.appearance.loadingIndicatorColor
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.startAnimating()
+        return loadingIndicatorView
+    }()
+
+    private lazy var optionsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         return stackView
@@ -31,13 +46,19 @@ final class NewSortingQuizView: UIView {
 
     var isEnabled = true {
         didSet {
-            self.stackView.isUserInteractionEnabled = self.isEnabled
+            self.optionsStackView.isUserInteractionEnabled = self.isEnabled
         }
     }
 
+    private var loadGroup: DispatchGroup?
+
     private(set) var options: [NewSortingQuiz.Option] = []
 
-    override init(frame: CGRect = .zero) {
+    init(
+        frame: CGRect = .zero,
+        appearance: Appearance = Appearance()
+    ) {
+        self.appearance = appearance
         super.init(frame: frame)
 
         self.setupView()
@@ -55,9 +76,19 @@ final class NewSortingQuizView: UIView {
             return
         }
 
+        self.startLoading()
+
+        self.loadGroup = DispatchGroup()
+        self.loadGroup?.notify(queue: .main) { [weak self] in
+            self?.endLoading()
+        }
+
         self.options = options
 
-        self.stackView.removeAllArrangedSubviews()
+        if !self.optionsStackView.arrangedSubviews.isEmpty {
+            self.optionsStackView.removeAllArrangedSubviews()
+        }
+
         options.enumerated().forEach { index, option in
             let sortingOptionView = NewSortingQuizElementView()
             sortingOptionView.delegate = self
@@ -69,11 +100,32 @@ final class NewSortingQuizView: UIView {
                 )
             )
 
-            self.stackView.addArrangedSubview(sortingOptionView)
+            self.loadGroup?.enter()
+            self.optionsStackView.addArrangedSubview(sortingOptionView)
         }
 
-        self.stackView.setNeedsLayout()
-        self.stackView.layoutIfNeeded()
+        self.optionsStackView.setNeedsLayout()
+        self.optionsStackView.layoutIfNeeded()
+    }
+
+    // MARK: - Private API
+
+    func startLoading() {
+        self.optionsStackView.alpha = 0.0
+        self.loadingIndicatorView.startAnimating()
+    }
+
+    func endLoading() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.appearanceAnimationDelay) {
+            self.loadingIndicatorView.stopAnimating()
+
+            UIView.animate(
+                withDuration: Animation.appearanceAnimationDuration,
+                animations: {
+                    self.optionsStackView.alpha = 1.0
+                }
+            )
+        }
     }
 
     private func getAvailableNavigationDirectionAtIndex(_ index: Int) -> NewSortingQuizElementView.Direction {
@@ -93,26 +145,34 @@ final class NewSortingQuizView: UIView {
 
 extension NewSortingQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.addSubview(self.stackView)
+        self.addSubview(self.optionsStackView)
+        self.addSubview(self.loadingIndicatorView)
     }
 
     func makeConstraints() {
-        self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView.snp.makeConstraints { make in
+        self.optionsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.optionsStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+
+        self.loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingIndicatorView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
 }
 
 extension NewSortingQuizView: NewSortingQuizElementViewDelegate {
     func newSortingQuizElementViewDidLoadContent(_ view: NewSortingQuizElementView) {
-        self.stackView.setNeedsLayout()
-        self.stackView.layoutIfNeeded()
+        self.optionsStackView.setNeedsLayout()
+        self.optionsStackView.layoutIfNeeded()
+
+        self.loadGroup?.leave()
     }
 
     func newSortingQuizElementViewDidUpdateContentHeight(_ view: NewSortingQuizElementView) {
-        self.stackView.setNeedsLayout()
-        self.stackView.layoutIfNeeded()
+        self.optionsStackView.setNeedsLayout()
+        self.optionsStackView.layoutIfNeeded()
     }
 
     func newSortingQuizElementViewDidRequestMoveTop(_ view: NewSortingQuizElementView) {
@@ -139,13 +199,13 @@ extension NewSortingQuizView: NewSortingQuizElementViewDelegate {
 
         let destinationIndex = direction == .top ? sourceIndex - 1 : sourceIndex + 1
 
-        self.stackView.removeArrangedSubview(view)
+        self.optionsStackView.removeArrangedSubview(view)
         UIView.animate(
             withDuration: Animation.moveSortingOptionAnimationDuration,
             animations: {
-                self.stackView.insertArrangedSubview(view, at: destinationIndex)
-                self.stackView.setNeedsLayout()
-                self.stackView.layoutIfNeeded()
+                self.optionsStackView.insertArrangedSubview(view, at: destinationIndex)
+                self.optionsStackView.setNeedsLayout()
+                self.optionsStackView.layoutIfNeeded()
             },
             completion: { isFinished in
                 guard isFinished else {
@@ -153,7 +213,9 @@ extension NewSortingQuizView: NewSortingQuizElementViewDelegate {
                 }
 
                 view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(destinationIndex))
-                if let affectedView = self.stackView.arrangedSubviews[safe: sourceIndex] as? NewSortingQuizElementView {
+                if let affectedView = self.optionsStackView.arrangedSubviews[
+                    safe: sourceIndex
+                ] as? NewSortingQuizElementView {
                     affectedView.updateNavigation(self.getAvailableNavigationDirectionAtIndex(sourceIndex))
                 }
             }
