@@ -26,6 +26,7 @@ final class NewSortingQuizView: UIView {
         tableView.showsHorizontalScrollIndicator = false
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
