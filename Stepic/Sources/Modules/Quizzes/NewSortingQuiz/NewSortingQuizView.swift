@@ -110,6 +110,11 @@ extension NewSortingQuizView: NewSortingQuizElementViewDelegate {
         self.stackView.layoutIfNeeded()
     }
 
+    func newSortingQuizElementViewDidUpdateContentHeight(_ view: NewSortingQuizElementView) {
+        self.stackView.setNeedsLayout()
+        self.stackView.layoutIfNeeded()
+    }
+
     func newSortingQuizElementViewDidRequestMoveTop(_ view: NewSortingQuizElementView) {
         self.move(view, direction: .top)
     }

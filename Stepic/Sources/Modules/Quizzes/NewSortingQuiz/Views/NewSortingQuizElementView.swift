@@ -33,10 +33,9 @@ final class NewSortingQuizElementView: UIView {
     weak var delegate: NewSortingQuizElementViewDelegate?
 
     private lazy var quizElementView = QuizElementView()
-    private lazy var contentView: ProcessedContentTextView = {
-        let verticalInset = self.appearance.navigationButtonSize.height
+    private lazy var contentTextView: ProcessedContentTextView = {
         var appearance = ProcessedContentTextView.Appearance(
-            insets: LayoutInsets(top: 19, left: 0, bottom: 19, right: 0),
+            insets: LayoutInsets(insets: .zero),
             backgroundColor: .clear
         )
         let view = ProcessedContentTextView(appearance: appearance)
@@ -230,7 +229,19 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
 extension NewSortingQuizElementView: ProcessedContentTextViewDelegate {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         self.invalidateIntrinsicContentSize()
-        self.delegate?.newSortingQuizTableViewCellDidLoadContent(self)
+        self.layoutIfNeeded()
+        self.delegate?.newSortingQuizElementViewDidLoadContent(self)
+    }
+
+    // TODO: Fix problem with contentTextView height contraint (should not be less that navigation buttons height)
+    // and remove manual insets adjustment.
+    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {
+        if height < Int(self.navigationControlsContainerViewHeight) {
+            let verticalInset = (self.navigationControlsContainerViewHeight - CGFloat(height)) / 2.0
+            self.contentTextView.insets = LayoutInsets(top: verticalInset, left: 0, bottom: verticalInset, right: 0)
+            self.invalidateIntrinsicContentSize()
+            self.layoutIfNeeded()
+        }
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
