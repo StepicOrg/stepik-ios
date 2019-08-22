@@ -91,16 +91,19 @@ final class NewSortingQuizElementView: UIView {
         return self.appearance.navigationButtonSize.height * 2 + self.appearance.navigationButtonVerticalSpacing
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    var insets: LayoutInsets? {
+        didSet {
+            let insets = self.insets ?? LayoutInsets(insets: .zero)
 
-        self.invalidateIntrinsicContentSize()
+            self.quizElementView.snp.updateConstraints { make in
+                make.top.equalToSuperview().offset(insets.top)
+                make.bottom.equalToSuperview().offset(-insets.bottom)
+                make.leading.equalToSuperview().offset(insets.left)
+                make.trailing.equalToSuperview().offset(-insets.right)
+            }
 
-        DispatchQueue.main.async {
-            self.shadowView.layer.shadowPath = UIBezierPath(
-                roundedRect: self.shadowView.bounds,
-                cornerRadius: self.quizElementView.appearance.cornerRadius
-            ).cgPath
+            self.invalidateIntrinsicContentSize()
+            self.layoutIfNeeded()
         }
     }
 
@@ -119,6 +122,19 @@ final class NewSortingQuizElementView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.invalidateIntrinsicContentSize()
+
+        DispatchQueue.main.async {
+            self.shadowView.layer.shadowPath = UIBezierPath(
+                roundedRect: self.shadowView.bounds,
+                cornerRadius: self.quizElementView.appearance.cornerRadius
+            ).cgPath
+        }
     }
 
     // MARK: - Public API

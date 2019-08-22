@@ -15,6 +15,21 @@ protocol NewMatchingQuizViewDelegate: class {
 
 extension NewMatchingQuizView {
     struct Appearance {
+        let spacing: CGFloat = 16
+        let insets = LayoutInsets(left: 16, right: 16)
+
+        let defaultSortingOptionInsets = LayoutInsets(top: 0, left: 64, bottom: 12, right: 16)
+        let lastSortingOptionInsets = LayoutInsets(top: 0, left: 64, bottom: 0, right: 16)
+
+        let defaultSortingTitleInsets = LayoutInsets(top: 12, left: 16, bottom: 10, right: 64)
+        let firstSortingTitleInsets = LayoutInsets(top: 0, left: 16, bottom: 10, right: 64)
+
+        let separatorColor = UIColor(hex: 0xEAECF0)
+        let separatorHeight: CGFloat = 1
+
+        let titleColor = UIColor.mainDark
+        let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+
         let loadingIndicatorColor = UIColor.mainDark
     }
 
@@ -38,6 +53,31 @@ final class NewMatchingQuizView: UIView {
         return loadingIndicatorView
     }()
 
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        return view
+    }()
+
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = self.appearance.titleColor
+        label.font = self.appearance.titleFont
+        return label
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(
+            arrangedSubviews: [self.separatorView, self.titleLabelContainerView, self.itemsContainerView]
+        )
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.spacing
+        return stackView
+    }()
+
+    private lazy var titleLabelContainerView = UIView()
+    private lazy var itemsContainerView = UIView()
+
     private lazy var itemsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -47,6 +87,12 @@ final class NewMatchingQuizView: UIView {
     var isEnabled = true {
         didSet {
             self.itemsStackView.isUserInteractionEnabled = self.isEnabled
+        }
+    }
+
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
         }
     }
 
@@ -91,7 +137,10 @@ final class NewMatchingQuizView: UIView {
         }
 
         items.enumerated().forEach { index, item in
-            let titleView = NewMatchingQuizTitleView()
+            let titleInsets = index == 0
+                ? self.appearance.firstSortingTitleInsets
+                : self.appearance.defaultSortingTitleInsets
+            let titleView = NewMatchingQuizTitleView(frame: .zero, appearance: .init(containerInsets: titleInsets))
             titleView.delegate = self
             titleView.tag = item.title.id
             titleView.title = item.title.text
@@ -99,13 +148,12 @@ final class NewMatchingQuizView: UIView {
             self.loadGroup?.enter()
             self.itemsStackView.addArrangedSubview(titleView)
 
-            let bottomInset: CGFloat = index == items.count - 1 ? 0 : 12
-            let sortingOptionAppearance = NewSortingQuizElementView.Appearance(
-                containerInsets: LayoutInsets(top: 0, left: 64, bottom: bottomInset, right: 16)
-            )
+            let sortingOptionInsets = index == items.count - 1
+                ? self.appearance.lastSortingOptionInsets
+                : self.appearance.defaultSortingOptionInsets
             let sortingOptionView = NewSortingQuizElementView(
                 frame: .zero,
-                appearance: sortingOptionAppearance
+                appearance: .init(containerInsets: sortingOptionInsets)
             )
             sortingOptionView.delegate = self
             sortingOptionView.tag = item.option.id
@@ -161,11 +209,32 @@ final class NewMatchingQuizView: UIView {
 
 extension NewMatchingQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.addSubview(self.itemsStackView)
+        self.addSubview(self.stackView)
+
+        self.titleLabelContainerView.addSubview(self.titleLabel)
+        self.itemsContainerView.addSubview(self.itemsStackView)
+
         self.addSubview(self.loadingIndicatorView)
     }
 
     func makeConstraints() {
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
+        }
+
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         self.itemsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.itemsStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -237,28 +306,20 @@ extension NewMatchingQuizView: NewSortingQuizElementViewDelegate {
 
         let movingView = self.itemsStackView.arrangedSubviews[subviewDestinationIndex]
 
-        UIView.animate(
-            withDuration: Animation.moveSortingOptionAnimationDuration,
-            animations: {
-                self.itemsStackView.removeArrangedSubview(view)
-                self.itemsStackView.insertArrangedSubview(view, at: subviewDestinationIndex)
-                self.itemsStackView.removeArrangedSubview(movingView)
-                self.itemsStackView.insertArrangedSubview(movingView, at: subviewSourceIndex)
+        UIView.animate(withDuration: Animation.moveSortingOptionAnimationDuration) {
+            self.itemsStackView.removeArrangedSubview(view)
+            self.itemsStackView.insertArrangedSubview(view, at: subviewDestinationIndex)
+            self.itemsStackView.removeArrangedSubview(movingView)
+            self.itemsStackView.insertArrangedSubview(movingView, at: subviewSourceIndex)
 
-                self.itemsStackView.setNeedsLayout()
-                self.itemsStackView.layoutIfNeeded()
-            },
-            completion: { isFinished in
-                guard isFinished else {
-                    return
-                }
-
-                view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(subviewDestinationIndex))
-                if let movingView = movingView as? NewSortingQuizElementView {
-                    movingView.updateNavigation(self.getAvailableNavigationDirectionAtIndex(subviewSourceIndex))
-                }
+            self.updateSortingOptionView(view, at: subviewDestinationIndex)
+            if let movingView = movingView as? NewSortingQuizElementView {
+                self.updateSortingOptionView(movingView, at: subviewSourceIndex)
             }
-        )
+
+            self.itemsStackView.setNeedsLayout()
+            self.itemsStackView.layoutIfNeeded()
+        }
 
         self.items.remove(at: itemSourceIndex)
         self.items.insert(item, at: itemDestinationIndex)
@@ -269,6 +330,13 @@ extension NewMatchingQuizView: NewSortingQuizElementViewDelegate {
             atIndex: subviewSourceIndex,
             toIndex: subviewDestinationIndex
         )
+    }
+
+    private func updateSortingOptionView(_ view: NewSortingQuizElementView, at index: Int) {
+        view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(index))
+        view.insets = index == self.itemsStackView.arrangedSubviews.count - 1
+            ? self.appearance.lastSortingOptionInsets
+            : self.appearance.defaultSortingOptionInsets
     }
 
     private enum Direction {

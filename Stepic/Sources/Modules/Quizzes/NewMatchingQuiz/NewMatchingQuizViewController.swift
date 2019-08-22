@@ -29,6 +29,7 @@ final class NewMatchingQuizViewController: UIViewController {
 
 extension NewMatchingQuizViewController: NewMatchingQuizViewControllerProtocol {
     func displayReply(viewModel: NewMatchingQuiz.ReplyLoad.ViewModel) {
+        self.newMatchingQuizView?.title = viewModel.data.title
         self.newMatchingQuizView?.set(items: viewModel.data.items)
         self.newMatchingQuizView?.isEnabled = viewModel.data.isEnabled
     }

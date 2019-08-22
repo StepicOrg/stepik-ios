@@ -728,6 +728,7 @@ MathQuizTitle = "Enter a math formula";
 StringQuizPlaceholder = "Type your answer";
 MultipleChoiceQuizTitle = "Select one or more options";
 SingleChoiceQuizTitle = "Select one option";
+MatchingQuizTitle = "Match two lists";
 
 CodeQuizDetails = "Details";
 CodeQuizDetailSampleTitle = "Sample data %@:";
