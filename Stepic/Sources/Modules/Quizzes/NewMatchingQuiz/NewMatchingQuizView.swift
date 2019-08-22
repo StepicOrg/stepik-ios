@@ -87,6 +87,17 @@ final class NewMatchingQuizView: UIView {
     var isEnabled = true {
         didSet {
             self.itemsStackView.isUserInteractionEnabled = self.isEnabled
+            self.itemsStackView.arrangedSubviews.enumerated().forEach { index, view in
+                guard let view = view as? NewSortingQuizElementView else {
+                    return
+                }
+
+                if self.isEnabled {
+                    view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(index))
+                } else {
+                    view.isEnabled = false
+                }
+            }
         }
     }
 

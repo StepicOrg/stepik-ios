@@ -107,6 +107,13 @@ final class NewSortingQuizElementView: UIView {
         }
     }
 
+    var isEnabled = true {
+        didSet {
+            self.topNavigationButton.isEnabled = self.isEnabled
+            self.bottomNavigationButton.isEnabled = self.isEnabled
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()

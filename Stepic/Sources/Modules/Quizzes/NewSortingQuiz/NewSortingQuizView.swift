@@ -81,6 +81,16 @@ final class NewSortingQuizView: UIView {
     var isEnabled = true {
         didSet {
             self.optionsStackView.isUserInteractionEnabled = self.isEnabled
+            self.optionsStackView.arrangedSubviews
+                .compactMap { $0 as? NewSortingQuizElementView }
+                .enumerated()
+                .forEach { index, view in
+                    if self.isEnabled {
+                        view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(index))
+                    } else {
+                        view.isEnabled = false
+                    }
+                }
         }
     }
 
