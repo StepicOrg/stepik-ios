@@ -3,10 +3,12 @@ import UIKit
 final class BaseQuizAssembly: Assembly {
     private weak var moduleOutput: BaseQuizOutputProtocol?
     private let step: Step
+    private let hasNextStep: Bool
 
-    init(step: Step, output: BaseQuizOutputProtocol? = nil) {
+    init(step: Step, hasNextStep: Bool = false, output: BaseQuizOutputProtocol? = nil) {
         self.moduleOutput = output
         self.step = step
+        self.hasNextStep = hasNextStep
     }
 
     func makeModule() -> UIViewController {
@@ -18,6 +20,7 @@ final class BaseQuizAssembly: Assembly {
         let presenter = BaseQuizPresenter()
         let interactor = BaseQuizInteractor(
             step: self.step,
+            hasNextStep: self.hasNextStep,
             presenter: presenter,
             provider: provider,
             notificationSuggestionManager: NotificationSuggestionManager(),

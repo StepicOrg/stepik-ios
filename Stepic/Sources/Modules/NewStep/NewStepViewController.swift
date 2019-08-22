@@ -26,6 +26,8 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
     private var isFirstAppearance = true
 
+    private var canNavigateToNextStep = false
+
     init(interactor: NewStepInteractorProtocol) {
         self.interactor = interactor
         self.state = .loading
@@ -168,7 +170,11 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         let quizController: UIViewController? = {
             switch quizType {
             case .string, .number, .math, .freeAnswer, .choice, .code, .sorting, .matching:
-                let assembly = BaseQuizAssembly(step: viewModel.step, output: self)
+                let assembly = BaseQuizAssembly(
+                    step: viewModel.step,
+                    hasNextStep: self.canNavigateToNextStep,
+                    output: self
+                )
                 return assembly.makeModule()
             default:
                 return initQuizController(type: quizType, step: viewModel.step)
@@ -197,6 +203,7 @@ extension NewStepViewController: NewStepViewControllerProtocol {
             hasPreviousButton: viewModel.canNavigateToPreviousUnit,
             hasNextButton: viewModel.canNavigateToNextUnit
         )
+        self.canNavigateToNextStep = viewModel.canNavigateToNextStep
     }
 }
 

@@ -19,11 +19,13 @@ enum NewStep {
         struct Response {
             let canNavigateToPreviousUnit: Bool
             let canNavigateToNextUnit: Bool
+            let canNavigateToNextStep: Bool
         }
 
         struct ViewModel {
             let canNavigateToPreviousUnit: Bool
             let canNavigateToNextUnit: Bool
+            let canNavigateToNextStep: Bool
         }
     }
 

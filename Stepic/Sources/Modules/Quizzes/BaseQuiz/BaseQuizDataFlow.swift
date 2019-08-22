@@ -9,6 +9,7 @@ enum BaseQuiz {
             let submission: Submission?
             let cachedReply: Reply?
             let submissionsCount: Int
+            let hasNextStep: Bool
         }
 
         struct Request {

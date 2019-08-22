@@ -248,6 +248,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         // Can navigate to previous unit from current step
         let canNavigateToPreviousUnit = index == 0 && hasNavigationToPreviousUnit
         let canNavigateToNextUnit = (index == self.stepModulesInputs.count - 1) && hasNavigationToNextUnit
+        let canNavigateToNextStep = index != self.stepModulesInputs.count - 1
 
         guard let input = self.stepModulesInputs[safe: index].flatMap({ $0 }) else {
             return
@@ -255,7 +256,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
         input.updateStepNavigation(
             canNavigateToPreviousUnit: canNavigateToPreviousUnit,
-            canNavigateNextUnit: canNavigateToNextUnit
+            canNavigateNextUnit: canNavigateToNextUnit,
+            canNavigateNextStep: canNavigateToNextStep
         )
     }
 
