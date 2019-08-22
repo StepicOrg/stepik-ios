@@ -20,6 +20,8 @@ final class QuizAssemblyFactory {
             return NewChoiceQuizAssembly()
         case .code:
             return NewCodeQuizAssembly()
+        case .sorting:
+            return NewSortingQuizAssembly()
         default:
             fatalError("Unsupported quiz")
         }

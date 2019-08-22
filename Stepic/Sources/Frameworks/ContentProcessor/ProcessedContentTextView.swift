@@ -5,8 +5,13 @@ import WebKit
 
 protocol ProcessedContentTextViewDelegate: class {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView)
+    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL)
+}
+
+extension ProcessedContentTextViewDelegate {
+    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) { }
 }
 
 extension ProcessedContentTextView {
@@ -78,8 +83,6 @@ final class ProcessedContentTextView: UIView {
         return webView
     }()
 
-    private var isLoadingHTMLText = false
-
     override var intrinsicContentSize: CGSize {
         return CGSize(
             width: UIView.noIntrinsicMetric,
@@ -97,6 +100,23 @@ final class ProcessedContentTextView: UIView {
             self.webView.scrollView.isScrollEnabled = newValue
         }
     }
+
+    var insets: LayoutInsets? {
+        didSet {
+            let insets = self.insets ?? LayoutInsets(insets: .zero)
+            self.webView.snp.updateConstraints { make in
+                make.top.equalToSuperview().offset(insets.top)
+                make.leading.equalToSuperview().offset(insets.left)
+                make.trailing.equalToSuperview().offset(-insets.right)
+                make.bottom.equalToSuperview().offset(-insets.bottom)
+            }
+            self.layoutIfNeeded()
+        }
+    }
+
+    private var isLoadingHTMLText = false
+    /// Keeps track of current web view height.
+    private var currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -143,8 +163,12 @@ final class ProcessedContentTextView: UIView {
 
     private func getContentHeight() -> Guarantee<Int> {
         return Guarantee { seal in
-            self.webView.evaluateJavaScript("document.body.scrollHeight;") { res, _ in
+            self.webView.evaluateJavaScript("document.body.scrollHeight;") { [weak self] res, _ in
                 if let height = res as? Int {
+                    if let strongSelf = self, strongSelf.currentWebViewHeight != height {
+                        strongSelf.currentWebViewHeight = height
+                        strongSelf.delegate?.processedContentTextView(strongSelf, didReportNewHeight: height)
+                    }
                     seal(height)
                     return
                 }
