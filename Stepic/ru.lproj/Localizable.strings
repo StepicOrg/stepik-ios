@@ -729,6 +729,7 @@ MathQuizTitle = "Введите математическую формулу";
 StringQuizPlaceholder = "Введите ответ";
 MultipleChoiceQuizTitle = "Выберите один или несколько вариантов";
 SingleChoiceQuizTitle = "Выберите один вариант";
+SortingQuizTitle = "Упорядочьте элементы списка";
 MatchingQuizTitle = "Сопоставьте значения из двух списков";
 
 CodeQuizDetails = "Детали";
