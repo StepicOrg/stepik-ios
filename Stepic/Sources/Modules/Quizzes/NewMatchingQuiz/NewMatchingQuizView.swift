@@ -321,8 +321,16 @@ extension NewMatchingQuizView: NewSortingQuizElementViewDelegate {
             self.itemsStackView.layoutIfNeeded()
         }
 
-        self.items.remove(at: itemSourceIndex)
-        self.items.insert(item, at: itemDestinationIndex)
+        let movingPair = NewMatchingQuiz.MatchItem(
+            title: self.items[itemDestinationIndex].title,
+            option: self.items[itemSourceIndex].option
+        )
+        let affectedPair = NewMatchingQuiz.MatchItem(
+            title: self.items[itemSourceIndex].title,
+            option: self.items[itemDestinationIndex].option
+        )
+        self.items[itemDestinationIndex] = movingPair
+        self.items[itemSourceIndex] = affectedPair
 
         self.delegate?.newMatchingQuizView(
             self,

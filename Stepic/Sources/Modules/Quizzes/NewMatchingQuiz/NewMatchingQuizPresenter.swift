@@ -18,7 +18,7 @@ final class NewMatchingQuizPresenter: NewMatchingQuizPresenterProtocol {
         let viewModel = NewMatchingQuizViewModel(
             title: NSLocalizedString("MatchingQuizTitle", comment: ""),
             items: items,
-            isEnabled: response.status == nil
+            isEnabled: response.status == nil || response.status == .wrong
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))

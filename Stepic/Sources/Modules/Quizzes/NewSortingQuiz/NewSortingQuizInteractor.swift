@@ -64,7 +64,7 @@ extension NewSortingQuizInteractor: QuizInputProtocol {
         self.moduleOutput?.update(reply: reply)
 
         if let reply = reply as? SortingReply {
-            self.currentOptions = reply.ordering.enumerated().map { .init(id: $0, text: dataset.options[$1]) }
+            self.currentOptions = reply.ordering.map { .init(id: $0, text: dataset.options[$0]) }
         } else {
             fatalError("Unsupported reply")
         }

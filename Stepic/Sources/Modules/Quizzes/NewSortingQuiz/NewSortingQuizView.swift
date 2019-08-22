@@ -89,7 +89,7 @@ final class NewSortingQuizView: UIView {
             self.titleLabel.text = self.title
         }
     }
-    
+
     private var loadGroup: DispatchGroup?
 
     private(set) var options: [NewSortingQuiz.Option] = []
