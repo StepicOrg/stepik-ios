@@ -14,6 +14,7 @@ protocol NewSortingQuizElementViewDelegate: class {
 
 extension NewSortingQuizElementView {
     struct Appearance {
+        var containerInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
         let shadowColor = UIColor(hex: 0xEAECF0)
@@ -90,16 +91,19 @@ final class NewSortingQuizElementView: UIView {
         return self.appearance.navigationButtonSize.height * 2 + self.appearance.navigationButtonVerticalSpacing
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    var insets: LayoutInsets? {
+        didSet {
+            let insets = self.insets ?? LayoutInsets(insets: .zero)
 
-        self.invalidateIntrinsicContentSize()
+            self.quizElementView.snp.updateConstraints { make in
+                make.top.equalToSuperview().offset(insets.top)
+                make.bottom.equalToSuperview().offset(-insets.bottom)
+                make.leading.equalToSuperview().offset(insets.left)
+                make.trailing.equalToSuperview().offset(-insets.right)
+            }
 
-        DispatchQueue.main.async {
-            self.shadowView.layer.shadowPath = UIBezierPath(
-                roundedRect: self.shadowView.bounds,
-                cornerRadius: self.quizElementView.appearance.cornerRadius
-            ).cgPath
+            self.invalidateIntrinsicContentSize()
+            self.layoutIfNeeded()
         }
     }
 
@@ -118,6 +122,19 @@ final class NewSortingQuizElementView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.invalidateIntrinsicContentSize()
+
+        DispatchQueue.main.async {
+            self.shadowView.layer.shadowPath = UIBezierPath(
+                roundedRect: self.shadowView.bounds,
+                cornerRadius: self.quizElementView.appearance.cornerRadius
+            ).cgPath
+        }
     }
 
     // MARK: - Public API
@@ -179,10 +196,10 @@ extension NewSortingQuizElementView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.quizElementView.translatesAutoresizingMaskIntoConstraints = false
         self.quizElementView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.contentInsets.top)
-            make.bottom.equalToSuperview().offset(-self.appearance.contentInsets.bottom)
-            make.leading.equalToSuperview().offset(self.appearance.contentInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.contentInsets.right)
+            make.top.equalToSuperview().offset(self.appearance.containerInsets.top)
+            make.bottom.equalToSuperview().offset(-self.appearance.containerInsets.bottom)
+            make.leading.equalToSuperview().offset(self.appearance.containerInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.containerInsets.right)
         }
 
         self.shadowView.translatesAutoresizingMaskIntoConstraints = false

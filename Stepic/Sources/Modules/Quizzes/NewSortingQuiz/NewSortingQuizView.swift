@@ -15,6 +15,15 @@ protocol NewSortingQuizViewDelegate: class {
 
 extension NewSortingQuizView {
     struct Appearance {
+        let spacing: CGFloat = 16
+        let insets = LayoutInsets(left: 16, right: 16)
+
+        let separatorColor = UIColor(hex: 0xEAECF0)
+        let separatorHeight: CGFloat = 1
+
+        let titleColor = UIColor.mainDark
+        let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+
         let loadingIndicatorColor = UIColor.mainDark
     }
 
@@ -38,6 +47,31 @@ final class NewSortingQuizView: UIView {
         return loadingIndicatorView
     }()
 
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        return view
+    }()
+
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = self.appearance.titleColor
+        label.font = self.appearance.titleFont
+        return label
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(
+            arrangedSubviews: [self.separatorView, self.titleLabelContainerView, self.optionsContainerView]
+        )
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.spacing
+        return stackView
+    }()
+
+    private lazy var titleLabelContainerView = UIView()
+    private lazy var optionsContainerView = UIView()
+
     private lazy var optionsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -50,6 +84,12 @@ final class NewSortingQuizView: UIView {
         }
     }
 
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
+    
     private var loadGroup: DispatchGroup?
 
     private(set) var options: [NewSortingQuiz.Option] = []
@@ -145,11 +185,32 @@ final class NewSortingQuizView: UIView {
 
 extension NewSortingQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.addSubview(self.optionsStackView)
+        self.addSubview(self.stackView)
+
+        self.titleLabelContainerView.addSubview(self.titleLabel)
+        self.optionsContainerView.addSubview(self.optionsStackView)
+
         self.addSubview(self.loadingIndicatorView)
     }
 
     func makeConstraints() {
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
+        }
+
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         self.optionsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.optionsStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

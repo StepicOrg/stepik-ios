@@ -9,6 +9,7 @@ final class NewSortingQuizPresenter: NewSortingQuizPresenterProtocol {
 
     func presentReply(response: NewSortingQuiz.ReplyLoad.Response) {
         let viewModel = NewSortingQuizViewModel(
+            title: NSLocalizedString("SortingQuizTitle", comment: ""),
             options: response.options.map { .init(id: $0.id, text: self.processText($0.text)) },
             isEnabled: response.status == nil
         )
