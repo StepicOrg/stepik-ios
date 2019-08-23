@@ -67,8 +67,8 @@ extension NewMatchingQuizInteractor: QuizInputProtocol {
         if let reply = reply as? MatchingReply {
             self.currentItems = reply.ordering.enumerated().map { index, order in
                 .init(
-                    title: .init(id: index, text: dataset.firstValues[order]),
-                    option: .init(id: index, text: dataset.secondValues[order])
+                    title: .init(id: index, text: dataset.firstValues[index]),
+                    option: .init(id: order, text: dataset.secondValues[order])
                 )
             }
         } else {

@@ -63,7 +63,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             NewStep.QuizType.number,
             NewStep.QuizType.math,
             NewStep.QuizType.freeAnswer,
-            NewStep.QuizType.code
+            NewStep.QuizType.code,
+            NewStep.QuizType.sorting,
+            NewStep.QuizType.matching
         ].contains(NewStep.QuizType(blockName: step.block.name))
 
         // 1. if quiz is not needed new attempt and status == wrong

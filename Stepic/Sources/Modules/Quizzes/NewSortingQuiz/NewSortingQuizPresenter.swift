@@ -11,7 +11,7 @@ final class NewSortingQuizPresenter: NewSortingQuizPresenterProtocol {
         let viewModel = NewSortingQuizViewModel(
             title: NSLocalizedString("SortingQuizTitle", comment: ""),
             options: response.options.map { .init(id: $0.id, text: self.processText($0.text)) },
-            isEnabled: response.status == nil
+            isEnabled: response.status == nil || response.status == .wrong
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))

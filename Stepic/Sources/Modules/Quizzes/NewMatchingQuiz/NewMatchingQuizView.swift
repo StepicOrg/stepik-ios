@@ -87,6 +87,17 @@ final class NewMatchingQuizView: UIView {
     var isEnabled = true {
         didSet {
             self.itemsStackView.isUserInteractionEnabled = self.isEnabled
+            self.itemsStackView.arrangedSubviews.enumerated().forEach { index, view in
+                guard let view = view as? NewSortingQuizElementView else {
+                    return
+                }
+
+                if self.isEnabled {
+                    view.updateNavigation(self.getAvailableNavigationDirectionAtIndex(index))
+                } else {
+                    view.isEnabled = false
+                }
+            }
         }
     }
 
@@ -321,8 +332,16 @@ extension NewMatchingQuizView: NewSortingQuizElementViewDelegate {
             self.itemsStackView.layoutIfNeeded()
         }
 
-        self.items.remove(at: itemSourceIndex)
-        self.items.insert(item, at: itemDestinationIndex)
+        let movingPair = NewMatchingQuiz.MatchItem(
+            title: self.items[itemDestinationIndex].title,
+            option: self.items[itemSourceIndex].option
+        )
+        let affectedPair = NewMatchingQuiz.MatchItem(
+            title: self.items[itemSourceIndex].title,
+            option: self.items[itemDestinationIndex].option
+        )
+        self.items[itemDestinationIndex] = movingPair
+        self.items[itemSourceIndex] = affectedPair
 
         self.delegate?.newMatchingQuizView(
             self,
