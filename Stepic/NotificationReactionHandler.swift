@@ -15,7 +15,8 @@ final class NotificationReactionHandler {
         }
 
         if notification.action == .issuedCertificate {
-            return TabBarRouter(tab: .certificates).route()
+            // TODO: Route to certificates.
+            return TabBarRouter(tab: .profile).route()
         }
 
         switch notification.type {
