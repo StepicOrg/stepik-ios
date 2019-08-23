@@ -143,6 +143,11 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.interactor.doLessonLoad(request: .init())
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tooltipView?.dismiss()
+    }
+
     override func pageboyViewController(
         _ pageboyViewController: PageboyViewController,
         didScrollToPageAt index: TabmanViewController.PageIndex,
@@ -313,6 +318,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         if self.isTooltipVisible {
             self.tooltipView?.dismiss()
         } else {
+            // TODO: Refactor add support for custom content views to the `Tooltip`.
             let contentView = LessonInfoTooltipView()
             contentView.configure(viewModel: tooltipInfo.map { .init(icon: $0.iconImage, text: $0.text) })
             contentView.sizeToFit()

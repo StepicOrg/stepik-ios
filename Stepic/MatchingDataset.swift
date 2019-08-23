@@ -9,22 +9,22 @@
 import UIKit
 import SwiftyJSON
 
-class MatchingDataset: Dataset {
+final class MatchingDataset: Dataset {
     typealias Pair = (first: String, second: String)
+
     var pairs: [Pair]
 
     var firstValues: [String] {
-        return pairs.map({return $0.first})
+        return self.pairs.map { $0.first }
     }
 
     var secondValues: [String] {
-        return pairs.map({return $0.second})
+        return self.pairs.map { $0.second }
     }
 
     required init(json: JSON) {
-        pairs = json["pairs"].arrayValue.map({
-            pairJSON in
+        self.pairs = json["pairs"].arrayValue.map { pairJSON in
             (first: pairJSON["first"].stringValue, second: pairJSON["second"].stringValue)
-        })
+        }
     }
 }

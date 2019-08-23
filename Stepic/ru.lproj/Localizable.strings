@@ -9,6 +9,7 @@
 /* Common phrases */
 SignedIn = "Успешно!";
 FailedToSignIn = "Не удалось авторизоваться";
+FailedToSignInNoEmail = "Не удалось авторизоваться: в аккаунте социальной сети не указан email";
 RemoveVideoTitle = "Удаление видео из урока";
 RemoveVideoBody = "Вы уверены, что хотите удалить сохраненное видео из этого урока?";
 Cancel = "Отмена";
@@ -728,6 +729,8 @@ MathQuizTitle = "Введите математическую формулу";
 StringQuizPlaceholder = "Введите ответ";
 MultipleChoiceQuizTitle = "Выберите один или несколько вариантов";
 SingleChoiceQuizTitle = "Выберите один вариант";
+SortingQuizTitle = "Упорядочьте элементы списка";
+MatchingQuizTitle = "Сопоставьте значения из двух списков";
 
 CodeQuizDetails = "Детали";
 CodeQuizDetailSampleTitle = "Пример данных %@:";

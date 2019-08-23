@@ -31,7 +31,7 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
     }
 
     private func selectNotificationsSection() {
-        guard let navigationController = self.currentTabBarController?.viewControllers?[self.tab.rawValue] as? UINavigationController,
+        guard let navigationController = self.currentTabBarController?.viewControllers?[safe: self.tab.rawValue] as? UINavigationController,
               let pager = navigationController.topViewController as? NotificationsPagerViewController else {
             return
         }
@@ -48,7 +48,6 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
         case home
         case catalog
         case profile
-        case certificates
         case notifications
     }
 }
