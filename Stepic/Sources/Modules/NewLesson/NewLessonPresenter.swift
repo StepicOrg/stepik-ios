@@ -7,6 +7,7 @@ protocol NewLessonPresenterProtocol {
     func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response)
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
     func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response)
+    func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class NewLessonPresenter: NewLessonPresenterProtocol {
@@ -67,6 +68,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
 
     func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response) {
         self.viewController?.displayCurrentStepUpdate(viewModel: .init(index: response.index))
+    }
+
+    func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
     // MAKE: Private API

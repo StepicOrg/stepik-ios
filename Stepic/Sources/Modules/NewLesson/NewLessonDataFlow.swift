@@ -86,6 +86,17 @@ enum NewLesson {
         }
     }
 
+    /// Handle HUD
+    enum BlockingWaitingIndicatorUpdate {
+        struct Response {
+            let shouldDismiss: Bool
+        }
+
+        struct ViewModel {
+            let shouldDismiss: Bool
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

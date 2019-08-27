@@ -1,6 +1,7 @@
 import EasyTipView
 import Pageboy
 import SnapKit
+import SVProgressHUD
 import Tabman
 import UIKit
 
@@ -11,6 +12,7 @@ protocol NewLessonViewControllerProtocol: class {
     func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 final class NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder {
@@ -367,12 +369,17 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
         for pageboyViewController: PageboyViewController,
         at index: PageboyViewController.PageIndex
     ) -> UIViewController? {
+        guard 0..<self.stepControllers.count ~= index else {
+            return nil
+        }
+
         let controller = self.loadStepIfNeeded(index: index)
         self.updateLessonNavigationInStep(
             index: index,
             hasNavigationToPreviousUnit: self.hasNavigationToPreviousUnit,
             hasNavigationToNextUnit: self.hasNavigationToNextUnit
         )
+
         return controller
     }
 
@@ -434,6 +441,14 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
 
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel) {
         self.scrollToPage(.at(index: viewModel.index), animated: true)
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
     }
 }
 
