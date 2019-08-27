@@ -137,6 +137,7 @@ final class CourseInfoHeaderView: UIView {
             ? .callToAction
             : .default
         self.actionButton.setTitle(viewModel.buttonDescription.title, for: .normal)
+        self.actionButton.isEnabled = viewModel.buttonDescription.isEnabled
     }
 
     // MARK: Private methods

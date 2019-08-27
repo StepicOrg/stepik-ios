@@ -117,6 +117,12 @@ final class Course: NSManagedObject, IDFetchable {
         return (nearest: nil, second: nil)
     }
 
+    var canContinue: Bool {
+        return self.totalUnits > 0
+            && self.scheduleType != "ended"
+            && self.scheduleType != "upcoming"
+    }
+
     func update(json: JSON) {
         initialize(json)
     }
