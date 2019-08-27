@@ -42,6 +42,7 @@ extension Course {
     @NSManaged var managedLastStepId: String?
     @NSManaged var managedTimeToComplete: NSNumber?
     @NSManaged var managedLanguageCode: String?
+    @NSManaged var managedTotalUnits: NSNumber?
 
     @NSManaged var managedInstructors: NSOrderedSet?
     @NSManaged var managedSections: NSOrderedSet?
@@ -85,6 +86,15 @@ extension Course {
         }
         get {
             return managedLearnersCount?.intValue
+        }
+    }
+
+    var totalUnits: Int {
+        get {
+            return self.managedTotalUnits?.intValue ?? 0
+        }
+        set {
+            self.managedTotalUnits = newValue as NSNumber?
         }
     }
 

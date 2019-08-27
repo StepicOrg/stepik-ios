@@ -51,6 +51,7 @@ final class Course: NSManagedObject, IDFetchable {
         lastStepId = json["last_step"].string
         scheduleType = json["schedule_type"].string
         learnersCount = json["learners_count"].int
+        totalUnits = json["total_units"].intValue
         reviewSummaryId = json["review_summary"].int
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
