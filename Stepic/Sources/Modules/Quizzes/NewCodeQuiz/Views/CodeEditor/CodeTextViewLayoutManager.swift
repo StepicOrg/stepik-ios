@@ -17,7 +17,12 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
     private var lastParagraphLocation = 0
     private var lastParagraphNumber = 0
 
-    init(appearance: Appearance = Appearance()) {
+    override init() {
+        self.appearance = Appearance()
+        super.init()
+    }
+
+    init(appearance: Appearance) {
         self.appearance = appearance
         super.init()
     }
