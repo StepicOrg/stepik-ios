@@ -51,6 +51,7 @@ final class Course: NSManagedObject, IDFetchable {
         lastStepId = json["last_step"].string
         scheduleType = json["schedule_type"].string
         learnersCount = json["learners_count"].int
+        totalUnits = json["total_units"].intValue
         reviewSummaryId = json["review_summary"].int
         sectionsArray = json["sections"].arrayObject as! [Int]
         instructorsArray = json["instructors"].arrayObject as! [Int]
@@ -114,6 +115,12 @@ final class Course: NSManagedObject, IDFetchable {
         }
 
         return (nearest: nil, second: nil)
+    }
+
+    var canContinue: Bool {
+        return self.totalUnits > 0
+            && self.scheduleType != "ended"
+            && self.scheduleType != "upcoming"
     }
 
     func update(json: JSON) {

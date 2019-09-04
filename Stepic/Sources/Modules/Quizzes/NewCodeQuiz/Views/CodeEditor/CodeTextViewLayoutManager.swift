@@ -2,11 +2,11 @@ import UIKit
 
 extension CodeTextViewLayoutManager {
     struct Appearance {
-        var lineSpacing: CGFloat
-        var gutterWidth: CGFloat
+        var lineSpacing: CGFloat = 1.2
+        var gutterWidth: CGFloat = 24.0
 
-        var lineNumberFont: UIFont
-        var lineNumberTextColor: UIColor
+        var lineNumberFont = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)
+        var lineNumberTextColor = UIColor.mainDark.withAlphaComponent(0.5)
         let lineNumberInsets = LayoutInsets(right: 4)
     }
 }
@@ -16,6 +16,11 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
 
     private var lastParagraphLocation = 0
     private var lastParagraphNumber = 0
+
+    override init() {
+        self.appearance = Appearance()
+        super.init()
+    }
 
     init(appearance: Appearance) {
         self.appearance = appearance

@@ -23,7 +23,8 @@ class LastStepRouter {
         using navigationController: UINavigationController,
         skipSyllabus: Bool = false
     ) {
-        guard let lastStepId = course.lastStepId else {
+        guard let lastStepId = course.lastStepId,
+              course.canContinue else {
             return
         }
         SVProgressHUD.show()

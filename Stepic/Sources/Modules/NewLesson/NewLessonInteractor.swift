@@ -129,6 +129,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             self.presenter.presentLessonTooltipInfo(
                 response: .init(lesson: lesson, steps: steps, progresses: progresses)
             )
+        }.ensure {
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }.catch { error in
             print("new lesson interactor: error while loading lesson = \(error)")
             self.presenter.presentLesson(response: .init(state: .failure(error)))
@@ -199,6 +201,7 @@ extension NewLessonInteractor: NewStepOutputProtocol {
             return
         }
 
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
         self.refresh(context: .unit(id: unit.id))
     }
 
@@ -207,6 +210,7 @@ extension NewLessonInteractor: NewStepOutputProtocol {
             return
         }
 
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
         self.refresh(context: .unit(id: unit.id))
     }
 

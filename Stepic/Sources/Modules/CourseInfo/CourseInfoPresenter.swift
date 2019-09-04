@@ -133,6 +133,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
     private func makeButtonDescription(course: Course) -> CourseInfoHeaderViewModel.ButtonDescription {
         let isEnrolled = course.enrolled
+        let isEnabled = isEnrolled ? course.canContinue : true
         let title: String = {
             if isEnrolled {
                 return NSLocalizedString("WidgetButtonLearn", comment: "")
@@ -147,7 +148,8 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
         return CourseInfoHeaderViewModel.ButtonDescription(
             title: title,
-            isCallToAction: !isEnrolled
+            isCallToAction: !isEnrolled,
+            isEnabled: isEnabled
         )
     }
 }
