@@ -22,7 +22,6 @@ class Block: NSManagedObject {
     func initialize(_ json: JSON) {
         name = json["name"].stringValue
         text = json["text"].string
-        animation = json["animation"].string
     }
 
     func update(json: JSON) {
