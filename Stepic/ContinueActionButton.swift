@@ -32,6 +32,12 @@ final class ContinueActionButton: BounceButton {
         }
     }
 
+    override var isEnabled: Bool {
+        didSet {
+            self.alpha = self.isEnabled ? 1.0 : 0.5
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         mode: Mode = .default,
