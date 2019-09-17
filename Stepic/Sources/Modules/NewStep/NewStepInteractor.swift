@@ -105,12 +105,16 @@ final class NewStepInteractor: NewStepInteractorProtocol {
 }
 
 extension NewStepInteractor: NewStepInputProtocol {
-    func updateStepNavigation(canNavigateToPreviousUnit: Bool, canNavigateNextUnit: Bool, canNavigateNextStep: Bool) {
+    func updateStepNavigation(
+        canNavigateToPreviousUnit: Bool,
+        canNavigateToNextUnit: Bool,
+        canNavigateToNextStep: Bool
+    ) {
         self.presenter.presentControlsUpdate(
             response: .init(
                 canNavigateToPreviousUnit: canNavigateToPreviousUnit,
-                canNavigateToNextUnit: canNavigateNextUnit,
-                canNavigateToNextStep: canNavigateNextStep
+                canNavigateToNextUnit: canNavigateToNextUnit,
+                canNavigateToNextStep: canNavigateToNextStep
             )
         )
     }

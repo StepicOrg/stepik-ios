@@ -1,5 +1,5 @@
 import Foundation
 
 protocol NewStepInputProtocol: class {
-    func updateStepNavigation(canNavigateToPreviousUnit: Bool, canNavigateNextUnit: Bool, canNavigateNextStep: Bool)
+    func updateStepNavigation(canNavigateToPreviousUnit: Bool, canNavigateToNextUnit: Bool, canNavigateToNextStep: Bool)
 }

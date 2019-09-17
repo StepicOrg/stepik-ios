@@ -263,8 +263,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
         input.updateStepNavigation(
             canNavigateToPreviousUnit: canNavigateToPreviousUnit,
-            canNavigateNextUnit: canNavigateToNextUnit,
-            canNavigateNextStep: canNavigateToNextStep
+            canNavigateToNextUnit: canNavigateToNextUnit,
+            canNavigateToNextStep: canNavigateToNextStep
         )
     }
 
