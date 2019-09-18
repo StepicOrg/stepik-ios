@@ -3,6 +3,7 @@ import UIKit
 
 protocol BaseQuizViewDelegate: class {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView)
+    func baseQuizViewDidRequestNextStep(_ view: BaseQuizView)
     func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView)
     func baseQuizView(_ view: BaseQuizView, didRequestFullscreenImage url: URL)
     func baseQuizView(_ view: BaseQuizView, didRequestOpenURL url: URL)

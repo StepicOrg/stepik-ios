@@ -721,6 +721,7 @@ WrongFeedbackTitleNotLastTry = "Wrong. Let's try again.";
 WrongFeedbackTitleLastTry = "Incorrect.";
 EvaluationFeedbackTitle = "Evaluation...";
 PeerReviewFeedbackTitle = "This is a task with peer review. Tap to open in web to get points.";
+NextStepNavigationTitle = "Next";
 
 StringQuizTitle = "Write an answer in form of a text (string)";
 NumberQuizTitle = "Enter a number";

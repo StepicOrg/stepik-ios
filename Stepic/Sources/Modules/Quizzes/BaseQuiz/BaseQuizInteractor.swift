@@ -5,6 +5,7 @@ protocol BaseQuizInteractorProtocol {
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request)
     func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request)
     func doReplyCache(request: BaseQuiz.ReplyCache.Request)
+    func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request)
 }
 
 final class BaseQuizInteractor: BaseQuizInteractorProtocol {
@@ -148,6 +149,10 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             print("base quiz interactor: error while submission = \(error.localizedDescription)")
             self.presenter.presentSubmission(response: .init(result: .failure(error)))
         }
+    }
+
+    func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request) {
+        self.moduleOutput?.handleNextStepNavigation()
     }
 
     // MARK: - Private API

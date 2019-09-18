@@ -18,6 +18,9 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     private let stepID: Step.IdType
     private var didAnalyticsSend = false
 
+    /// Current step index inside lesson.
+    private var currentStepIndex: Int?
+
     init(
         stepID: Step.IdType,
         presenter: NewStepPresenterProtocol,
@@ -34,6 +37,8 @@ final class NewStepInteractor: NewStepInteractorProtocol {
             guard let step = result.value else {
                 throw Error.fetchFailed
             }
+
+            self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
                 self?.presenter.presentStep(response: .init(result: .success(step)))
@@ -79,7 +84,16 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     }
 
     func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request) {
-        self.moduleOutput?.handleStepNavigation(to: request.index - 1)
+        switch request.direction {
+        case .index(let stepIndex):
+            self.moduleOutput?.handleStepNavigation(to: stepIndex)
+        case .next:
+            guard let currentStepIndex = self.currentStepIndex else {
+                return
+            }
+
+            self.moduleOutput?.handleStepNavigation(to: currentStepIndex + 1)
+        }
     }
 
     func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request) {

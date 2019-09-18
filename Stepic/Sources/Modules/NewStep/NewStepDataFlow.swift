@@ -53,8 +53,13 @@ enum NewStep {
 
     /// Handle navigation inside lesson
     enum StepNavigationRequest {
+        enum Direction {
+            case index(Int)
+            case next
+        }
+
         struct Request {
-            let index: Int
+            let direction: Direction
         }
     }
 

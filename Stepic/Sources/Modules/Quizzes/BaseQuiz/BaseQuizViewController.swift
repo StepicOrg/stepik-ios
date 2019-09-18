@@ -145,6 +145,10 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
         self.submitCurrentReply()
     }
 
+    func baseQuizViewDidRequestNextStep(_ view: BaseQuizView) {
+        self.interactor.doNextStepNavigationRequest(request: .init())
+    }
+
     func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView) {
         guard let url = self.stepURL else {
             return

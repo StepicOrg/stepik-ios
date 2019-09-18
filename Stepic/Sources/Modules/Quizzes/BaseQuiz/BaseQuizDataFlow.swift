@@ -57,6 +57,11 @@ enum BaseQuiz {
         }
     }
 
+    /// Navigate to next step  inside lesson
+    enum NextStepNavigation {
+        struct Request { }
+    }
+
     enum ViewControllerState {
         case loading
         case result(data: BaseQuizViewModel)
