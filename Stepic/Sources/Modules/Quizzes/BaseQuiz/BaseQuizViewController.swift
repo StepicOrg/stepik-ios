@@ -98,6 +98,8 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
         self.baseQuizView?.isPeerReviewAvailable = data.shouldPassPeerReview
+        self.baseQuizView?.isNextStepAvailable = data.canNavigateToNextStep
+        self.baseQuizView?.isRetryAvailable = data.canRetry
 
         if let status = data.quizStatus {
             switch status {

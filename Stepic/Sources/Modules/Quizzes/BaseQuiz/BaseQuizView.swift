@@ -17,6 +17,14 @@ extension BaseQuizView {
         let submitButtonCornerRadius: CGFloat = 6
         let submitButtonFont = UIFont.systemFont(ofSize: 16)
 
+        let retryButtonSize = CGSize(width: 44, height: 44)
+        let retryButtonIconSize = CGSize(width: 22, height: 22)
+        let retryButtonIconInsets = UIEdgeInsets(top: 0, left: 11, bottom: 0, right: 0)
+        let retryButtonBorderWidth: CGFloat = 1
+        let retryButtonCornerRadius: CGFloat = 6
+        let retryButtonBackgroundColor = UIColor.white
+        let retryButtonTintColor = UIColor(hex: 0xC8C7CC)
+
         let spacing: CGFloat = 16
 
         let insets = LayoutInsets(left: 16, right: 16)
@@ -52,6 +60,21 @@ final class BaseQuizView: UIView {
         return submitButton
     }()
 
+    private lazy var retryButton: ImageButton = {
+        let button = ImageButton()
+        button.clipsToBounds = true
+        button.layer.cornerRadius = self.appearance.retryButtonCornerRadius
+        button.backgroundColor = self.appearance.retryButtonBackgroundColor
+        button.layer.borderColor = self.appearance.retryButtonTintColor.cgColor
+        button.layer.borderWidth = self.appearance.retryButtonBorderWidth
+        button.image = UIImage(named: "Refresh")?.withRenderingMode(.alwaysTemplate)
+        button.tintColor = self.appearance.retryButtonTintColor
+        button.imageInsets = self.appearance.retryButtonIconInsets
+        button.imageSize = self.appearance.retryButtonIconSize
+        button.addTarget(self, action: #selector(self.retryClicked), for: .touchUpInside)
+        return button
+    }()
+
     private lazy var feedbackView: QuizFeedbackView = {
         let view = QuizFeedbackView()
         view.isHidden = true
@@ -60,13 +83,22 @@ final class BaseQuizView: UIView {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.feedbackContainerView, self.submitContainerView])
+        let stackView = UIStackView(arrangedSubviews: [self.feedbackContainerView, self.submitControlsContainerView])
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
         return stackView
     }()
 
+    private lazy var submitControlsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.retryContainerView, self.submitContainerView])
+        stackView.axis = .horizontal
+        stackView.spacing = self.appearance.spacing
+        return stackView
+    }()
+
+    private lazy var submitControlsContainerView = UIView()
     private lazy var submitContainerView = UIView()
+    private lazy var retryContainerView = UIView()
     private lazy var feedbackContainerView = UIView()
 
     // Peer review: make feedback view clickable
@@ -85,6 +117,21 @@ final class BaseQuizView: UIView {
         didSet {
             self.submitButton.isEnabled = self.isSubmitButtonEnabled
             self.submitButton.alpha = self.isSubmitButtonEnabled ? 1.0 : 0.5
+        }
+    }
+
+    var isRetryAvailable = false {
+        didSet {
+            self.updateRetryButton()
+        }
+    }
+
+    var isNextStepAvailable = false {
+        didSet {
+            if self.isNextStepAvailable {
+                self.submitButton.setTitle(NSLocalizedString("NextStepNavigationTitle", comment: ""), for: .normal)
+                self.isSubmitButtonEnabled = true
+            }
         }
     }
 
@@ -138,8 +185,30 @@ final class BaseQuizView: UIView {
 
     // MARK: - Private API
 
+    private func updateRetryButton() {
+        if !self.isNextStepAvailable && self.isRetryAvailable {
+            self.retryContainerView.isHidden = true
+            self.retryButton.isEnabled = true
+        } else if self.isNextStepAvailable && !self.isRetryAvailable {
+            self.retryContainerView.isHidden = false
+            self.retryButton.isEnabled = false
+        } else {
+            self.retryContainerView.isHidden = !self.isRetryAvailable
+            self.retryButton.isEnabled = true
+        }
+    }
+
     @objc
     private func submitClicked() {
+        if self.isNextStepAvailable {
+            self.delegate?.baseQuizViewDidRequestNextStep(self)
+        } else {
+            self.delegate?.baseQuizViewDidRequestSubmit(self)
+        }
+    }
+
+    @objc
+    private func retryClicked() {
         self.delegate?.baseQuizViewDidRequestSubmit(self)
     }
 
@@ -155,6 +224,8 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.stackView)
 
+        self.submitControlsContainerView.addSubview(self.submitControlsStackView)
+        self.retryContainerView.addSubview(self.retryButton)
         self.submitContainerView.addSubview(self.submitButton)
         self.feedbackContainerView.addSubview(self.feedbackView)
 
@@ -164,11 +235,22 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func makeConstraints() {
-        self.submitButton.translatesAutoresizingMaskIntoConstraints = false
-        self.submitButton.snp.makeConstraints { make in
+        self.submitControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.submitControlsStackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
+        self.retryButton.translatesAutoresizingMaskIntoConstraints = false
+        self.retryButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.size.equalTo(self.appearance.retryButtonSize)
+        }
+
+        self.submitButton.translatesAutoresizingMaskIntoConstraints = false
+        self.submitButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
             make.height.equalTo(self.appearance.submitButtonHeight)
         }
 

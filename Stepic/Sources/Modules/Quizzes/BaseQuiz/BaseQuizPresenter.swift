@@ -93,6 +93,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         let isSubmitButtonDisabled = quizStatus == .evaluation || submissionsLeft == 0
         let shouldPassPeerReview = quizStatus == .correct && step.hasReview
         let canNavigateToNextStep = quizStatus == .correct && hasNextStep
+        let canRetry = quizStatus == .correct && !(submissionsLeft == 0)
 
         let hintContent: String? = {
             if let text = submission?.hint, !text.isEmpty {
@@ -126,7 +127,8 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             stepURL: self.makeURL(for: step),
             hintContent: hintContent,
             codeDetails: codeDetails,
-            canNavigateToNextStep: canNavigateToNextStep
+            canNavigateToNextStep: canNavigateToNextStep,
+            canRetry: canRetry
         )
     }
 
