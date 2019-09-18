@@ -9,6 +9,7 @@ enum BaseQuiz {
             let submission: Submission?
             let cachedReply: Reply?
             let submissionsCount: Int
+            let hasNextStep: Bool
         }
 
         struct Request {
@@ -54,6 +55,11 @@ enum BaseQuiz {
         struct ViewModel {
             let streak: Int
         }
+    }
+
+    /// Navigate to next step  inside lesson
+    enum NextStepNavigation {
+        struct Request { }
     }
 
     enum ViewControllerState {

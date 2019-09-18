@@ -5,6 +5,7 @@ protocol BaseQuizInteractorProtocol {
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request)
     func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request)
     func doReplyCache(request: BaseQuiz.ReplyCache.Request)
+    func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request)
 }
 
 final class BaseQuizInteractor: BaseQuizInteractorProtocol {
@@ -21,12 +22,14 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     private let rateAppManager: RateAppManager
 
     let step: Step
+    private let hasNextStep: Bool
 
     private var submissionsCount = 0
     private var currentAttempt: Attempt?
 
     init(
         step: Step,
+        hasNextStep: Bool,
         presenter: BaseQuizPresenterProtocol,
         provider: BaseQuizProviderProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
@@ -34,6 +37,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         userService: UserAccountServiceProtocol
     ) {
         self.step = step
+        self.hasNextStep = hasNextStep
         self.presenter = presenter
         self.provider = provider
         self.userService = userService
@@ -147,6 +151,10 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
+    func doNextStepNavigationRequest(request: BaseQuiz.NextStepNavigation.Request) {
+        self.moduleOutput?.handleNextStepNavigation()
+    }
+
     // MARK: - Private API
 
     @discardableResult
@@ -186,7 +194,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             attempt: attempt,
             submission: submission,
             cachedReply: cachedReply,
-            submissionsCount: self.submissionsCount
+            submissionsCount: self.submissionsCount,
+            hasNextStep: self.hasNextStep
         )
 
         self.presenter.presentSubmission(response: .init(result: .success(response)))

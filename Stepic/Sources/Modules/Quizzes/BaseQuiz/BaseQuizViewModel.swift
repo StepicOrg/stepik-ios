@@ -14,4 +14,6 @@ struct BaseQuizViewModel {
     let stepURL: URL
     let hintContent: String?
     let codeDetails: CodeDetails?
+    let canNavigateToNextStep: Bool
+    let canRetry: Bool
 }
