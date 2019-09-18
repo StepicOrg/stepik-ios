@@ -186,10 +186,12 @@ final class BaseQuizView: UIView {
     // MARK: - Private API
 
     private func updateRetryButton() {
+        // Hide retry button for last step in lesson.
         if !self.isNextStepAvailable && self.isRetryAvailable {
             self.retryContainerView.isHidden = true
             self.retryButton.isEnabled = true
         } else if self.isNextStepAvailable && !self.isRetryAvailable {
+            // Disable retry button when there are no more submissions left.
             self.retryContainerView.isHidden = false
             self.retryButton.isEnabled = false
         } else {
