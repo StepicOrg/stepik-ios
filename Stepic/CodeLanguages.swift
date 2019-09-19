@@ -8,6 +8,9 @@
 
 import Foundation
 
+// TODO: Add support for:
+// - php
+// - julia
 enum CodeLanguage: String, CaseIterable {
     case python = "python3"
     case cpp11 = "c++11"
@@ -175,5 +178,38 @@ enum CodeLanguage: String, CaseIterable {
         case .swift:
             return "// comment\nprint(\"Hello World!\")"
         }
+    }
+
+    // https://jupyterhub.int.stepik.org/user/ivan.magda/notebooks/ivan.magda/programming-languages-popularity.ipynb
+    var priorityOrder: [CodeLanguage] {
+        return [
+            .python,
+            .cpp11,
+            .java11,
+            .cs,
+            .cpp,
+            .java8,
+            .c,
+            .javascript,
+            .kotlin,
+            .r,
+            .haskell,
+            .scala,
+            .pascal,
+            .shell,
+            .haskell8,
+            .go,
+            .asm64,
+            .java,
+            .asm32,
+            .java9,
+            .octave,
+            .perl,
+            .rust,
+            .ruby,
+            .swift,
+            .haskell7,
+            .clojure
+        ]
     }
 }
