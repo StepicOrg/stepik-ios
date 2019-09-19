@@ -12,6 +12,7 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let index: String
     let title: String
     let progress: Float
+    let progressLabelText: String?
 
     var units: [UnitViewModelWrapper]
     var deadlines: CourseInfoTabSyllabusSectionDeadlinesViewModel?
