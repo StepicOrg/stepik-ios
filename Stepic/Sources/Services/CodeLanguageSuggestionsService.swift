@@ -25,7 +25,8 @@ final class CodeLanguageSuggestionsService: CodeLanguageSuggestionsServiceProtoc
                 }
 
                 if let lastCodeLanguage = course.lastCodeLanguage,
-                   let language = lastCodeLanguage.language {
+                   let language = lastCodeLanguage.language,
+                   step.options?.languages.contains(language) ?? false {
                     seal(language)
                 } else {
                     seal(self.getMostPopularLanguage(step: step))
