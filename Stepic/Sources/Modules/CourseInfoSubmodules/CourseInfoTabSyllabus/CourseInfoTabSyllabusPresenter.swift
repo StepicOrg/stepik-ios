@@ -182,11 +182,12 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }()
 
         let progressLabelText: String? = {
-            guard let progress = unit.progress else {
+            guard let progress = unit.progress,
+                  progress.cost > 0 else {
                 return nil
             }
 
-            return "\(progress.numberOfStepsPassed)/\(progress.numberOfSteps)"
+            return "\(progress.score)/\(progress.cost)"
         }()
 
         let timeToCompleteLabelText: String? = {

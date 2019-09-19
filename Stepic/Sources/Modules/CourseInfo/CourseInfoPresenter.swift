@@ -98,7 +98,7 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
 
         return CourseInfoProgressViewModel(
             progress: normalizedPercent / 100.0,
-            progressLabelText: FormatterHelper.integerPercent(Int(normalizedPercent))
+            progressLabelText: "\(progress.score)/\(progress.cost)"
         )
     }
 

@@ -30,7 +30,7 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
                 var normalizedPercent = progress.percentPassed
                 normalizedPercent.round(.up)
                 return (
-                    description: FormatterHelper.integerPercent(Int(normalizedPercent)),
+                    description: "\(progress.score)/\(progress.cost)",
                     value: normalizedPercent / 100
                 )
             }
