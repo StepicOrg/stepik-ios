@@ -20,6 +20,9 @@ extension CourseInfoTabSyllabusSectionView {
         let titleTextColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 14)
 
+        let progressTextColor = UIColor.mainDark
+        let progressTextFont = UIFont.systemFont(ofSize: 14, weight: .light)
+
         let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
 
@@ -49,6 +52,13 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         label.font = self.appearance.titleFont
         label.textColor = self.appearance.titleTextColor
         label.numberOfLines = 2
+        return label
+    }()
+
+    private lazy var progressLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.progressTextFont
+        label.textColor = self.appearance.progressTextColor
         return label
     }()
 
@@ -118,9 +128,11 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     func configure(viewModel: CourseInfoTabSyllabusSectionViewModel) {
         self.titleLabel.text = viewModel.title
         self.indexLabel.text = viewModel.index
+        self.progressLabel.text = viewModel.progressLabelText
         self.progressIndicatorView.progress = viewModel.progress
 
         self.examLabel.isHidden = !viewModel.isExam
+        self.progressLabel.isHidden = viewModel.progressLabelText == nil
 
         self.updateDownloadState(newState: viewModel.downloadState)
 
@@ -179,6 +191,7 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.addSubview(self.indexLabel)
 
         self.textStackView.addArrangedSubview(self.titleLabel)
+        self.textStackView.addArrangedSubview(self.progressLabel)
         self.textStackView.addArrangedSubview(self.examLabel)
         self.addSubview(self.textStackView)
 

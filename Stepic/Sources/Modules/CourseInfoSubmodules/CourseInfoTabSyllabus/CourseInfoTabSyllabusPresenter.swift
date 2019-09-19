@@ -143,11 +143,21 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             personalDeadlineDate: personalDeadlineDate
         )
 
+        let progressLabelText: String? = {
+            guard let progress = section.progress,
+                  progress.cost > 0 else {
+                return nil
+            }
+
+            return "\(progress.score)/\(progress.cost)"
+        }()
+
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
             index: "\(index + 1)",
             title: section.title,
             progress: (section.progress?.percentPassed ?? 0) / 100.0,
+            progressLabelText: progressLabelText,
             units: units,
             deadlines: deadlines,
             downloadState: downloadState,
