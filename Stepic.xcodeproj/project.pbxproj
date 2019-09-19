@@ -547,6 +547,9 @@
 		2C5DF1461FED2B36003B1177 /* StepCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5DF1451FED2B36003B1177 /* StepCardView.xib */; };
 		2C5DF14B1FED2C51003B1177 /* StepReversedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF14A1FED2C51003B1177 /* StepReversedCardView.swift */; };
 		2C5DF14F1FED2E84003B1177 /* CardOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF14E1FED2E84003B1177 /* CardOverlayView.swift */; };
+		2C5E90802333CF3B00288BE3 /* LastCodeLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E907F2333CF3B00288BE3 /* LastCodeLanguage.swift */; };
+		2C5E90822333CF4C00288BE3 /* LastCodeLanguage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E90812333CF4C00288BE3 /* LastCodeLanguage+CoreDataProperties.swift */; };
+		2C5E90842333DF2100288BE3 /* CodeLanguageSuggestionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */; };
 		2C5F77BE1F90EE3F00E8E175 /* TapProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */; };
 		2C5F77C11F90F63B00E8E175 /* Notification+FetchMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */; };
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
@@ -1671,6 +1674,10 @@
 		2C5DF1471FED2B71003B1177 /* StepCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCardView.swift; sourceTree = "<group>"; };
 		2C5DF14A1FED2C51003B1177 /* StepReversedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepReversedCardView.swift; sourceTree = "<group>"; };
 		2C5DF14E1FED2E84003B1177 /* CardOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOverlayView.swift; sourceTree = "<group>"; };
+		2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_last_code_language.xcdatamodel; sourceTree = "<group>"; };
+		2C5E907F2333CF3B00288BE3 /* LastCodeLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastCodeLanguage.swift; sourceTree = "<group>"; };
+		2C5E90812333CF4C00288BE3 /* LastCodeLanguage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LastCodeLanguage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeLanguageSuggestionsService.swift; sourceTree = "<group>"; };
 		2C5F77C01F90F63B00E8E175 /* Notification+FetchMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+FetchMethods.swift"; sourceTree = "<group>"; };
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
 		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
@@ -2371,28 +2378,29 @@
 		0828FF701BC5D181000AFEA7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				2C4BE7DC221325E800AEAC34 /* CourseReview */,
+				0846B0F51EDDECA900D64D77 /* Assignment */,
+				0846B0F91EDDECC100D64D77 /* Block */,
+				0846B0F41EDDEC9E00D64D77 /* Certificate */,
+				0846B10A1EDDEE7100D64D77 /* CodeLimit */,
+				080C5E7E1EFC13F30036EB3D /* CodeSample */,
+				0846B1131EDDF05F00D64D77 /* CodeTemplates */,
+				0846B0FE1EDDECDB00D64D77 /* Course */,
 				087585AC1FB51D590047A269 /* CourseList */,
+				2C4BE7DC221325E800AEAC34 /* CourseReview */,
+				08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */,
+				2C5E907E2333CF2700288BE3 /* LastCodeLanguage */,
+				0846B1001EDDECE600D64D77 /* LastStep */,
+				0846B0FB1EDDECCC00D64D77 /* Lesson */,
 				2C9E3F381F7A7B2D00DDF1AA /* Notification */,
 				2CD8463D1F25F7AF00E8153C /* Profile */,
-				0846B1131EDDF05F00D64D77 /* CodeTemplates */,
-				0846B10A1EDDEE7100D64D77 /* CodeLimit */,
-				0846B1011EDDECEC00D64D77 /* StepOptions */,
-				0846B0F41EDDEC9E00D64D77 /* Certificate */,
-				0846B0F51EDDECA900D64D77 /* Assignment */,
 				0846B0F61EDDECB000D64D77 /* Progress */,
+				0846B0FD1EDDECD600D64D77 /* Section */,
+				0846B0FA1EDDECC700D64D77 /* Step */,
+				0846B1011EDDECEC00D64D77 /* StepOptions */,
+				0846B0FC1EDDECD100D64D77 /* Unit */,
+				0846B0FF1EDDECE100D64D77 /* User */,
 				0846B0F71EDDECB500D64D77 /* Video */,
 				0846B0F81EDDECBB00D64D77 /* VideoURL */,
-				0846B0F91EDDECC100D64D77 /* Block */,
-				0846B0FA1EDDECC700D64D77 /* Step */,
-				0846B0FB1EDDECCC00D64D77 /* Lesson */,
-				0846B0FC1EDDECD100D64D77 /* Unit */,
-				0846B0FD1EDDECD600D64D77 /* Section */,
-				0846B0FE1EDDECDB00D64D77 /* Course */,
-				0846B0FF1EDDECE100D64D77 /* User */,
-				0846B1001EDDECE600D64D77 /* LastStep */,
-				080C5E7E1EFC13F30036EB3D /* CodeSample */,
-				08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -4139,6 +4147,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		2C5E907E2333CF2700288BE3 /* LastCodeLanguage */ = {
+			isa = PBXGroup;
+			children = (
+				2C5E907F2333CF3B00288BE3 /* LastCodeLanguage.swift */,
+				2C5E90812333CF4C00288BE3 /* LastCodeLanguage+CoreDataProperties.swift */,
+			);
+			name = LastCodeLanguage;
+			sourceTree = "<group>";
+		};
 		2C5F77C21F90FBF600E8E175 /* NotificationsMarkAsReadButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -5411,6 +5428,7 @@
 			isa = PBXGroup;
 			children = (
 				2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */,
+				2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */,
 				62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */,
 				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
@@ -6513,6 +6531,7 @@
 				089056111E98021000B8FE6A /* RateAppViewController.swift in Sources */,
 				08F5555A1C4FB0A300C877E8 /* Reply.swift in Sources */,
 				080F211B2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */,
+				2C5E90802333CF3B00288BE3 /* LastCodeLanguage.swift in Sources */,
 				86624A731FC76578008E7E6C /* NotificationStatusesAPI.swift in Sources */,
 				080CE1581E9566220089A27F /* ViewsAPI.swift in Sources */,
 				2CC3519C1F6837B4004255B6 /* RegistrationViewController.swift in Sources */,
@@ -6588,6 +6607,7 @@
 				2CE8390C20C8094000FE3672 /* ProfileAchievementsContentView.swift in Sources */,
 				08CB4ABE1C4D3DCE00D7F918 /* WKWebViewPanelManager.m in Sources */,
 				0885F84E1BA837E200F2A188 /* ApiDataDownloader.swift in Sources */,
+				2C5E90842333DF2100288BE3 /* CodeLanguageSuggestionsService.swift in Sources */,
 				2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */,
 				0802C3B21BFE3B95003CDAD2 /* GeneralInfoTableViewCell.swift in Sources */,
 				08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */,
@@ -6785,6 +6805,7 @@
 				62E98A973A47105C195530CD /* AchievementsRetriever.swift in Sources */,
 				62E98622F3B03F7282DC06D8 /* AchievementDescription.swift in Sources */,
 				62E98381EC6AD8DD7613C32D /* AchievementsListViewController.swift in Sources */,
+				2C5E90822333CF4C00288BE3 /* LastCodeLanguage+CoreDataProperties.swift in Sources */,
 				62E98DE7FA0EE5EB23136B52 /* AchievementsListPresenter.swift in Sources */,
 				62E98B8919D18CD0F8238F97 /* Collection+SafeSubscript.swift in Sources */,
 				62E987CB113F6D20B108D070 /* AchievementPopupAlertManager.swift in Sources */,
@@ -7559,6 +7580,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */,
 				2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */,
 				2C8345D123156D5E00E6CE91 /* Model_course_can_continue.xcdatamodel */,
 				2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */,
@@ -7600,7 +7622,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */;
+			currentVersion = 2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

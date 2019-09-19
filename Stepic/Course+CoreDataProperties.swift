@@ -44,24 +44,24 @@ extension Course {
     @NSManaged var managedLanguageCode: String?
     @NSManaged var managedTotalUnits: NSNumber?
 
-    @NSManaged var managedInstructors: NSOrderedSet?
-    @NSManaged var managedSections: NSOrderedSet?
-    @NSManaged var managedAuthors: NSOrderedSet?
-
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
     @NSManaged var managedAuthorsArray: NSObject?
 
-    @NSManaged var managedIntroVideo: Video?
-
-    @NSManaged var managedProgress: Progress?
-    @NSManaged var managedLastStep: LastStep?
-    @NSManaged var managedCertificateEntity: Certificate?
-    @NSManaged var managedReviewSummary: CourseReviewSummary?
-
     @NSManaged var managedIsCertificateAutoIssued: NSNumber?
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
+
+    // MARK: Relationships
+    @NSManaged var managedAuthors: NSOrderedSet?
+    @NSManaged var managedCertificateEntity: Certificate?
+    @NSManaged var managedInstructors: NSOrderedSet?
+    @NSManaged var managedIntroVideo: Video?
+    @NSManaged var managedLastCodeLanguage: LastCodeLanguage?
+    @NSManaged var managedLastStep: LastStep?
+    @NSManaged var managedProgress: Progress?
+    @NSManaged var managedReviewSummary: CourseReviewSummary?
+    @NSManaged var managedSections: NSOrderedSet?
 
     class var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
@@ -367,6 +367,15 @@ extension Course {
         }
         set(value) {
             managedLastStep = value
+        }
+    }
+
+    var lastCodeLanguage: LastCodeLanguage? {
+        get {
+            return self.managedLastCodeLanguage
+        }
+        set {
+            self.managedLastCodeLanguage = newValue
         }
     }
 
