@@ -10,7 +10,10 @@ final class NewCodeQuizAssembly: QuizAssembly {
             stepOptionsPersistenceService: StepOptionsPersistenceService(
                 stepsPersistenceService: StepsPersistenceService()
             ),
-            lessonsPersistenceService: LessonsPersistenceService()
+            lessonsPersistenceService: LessonsPersistenceService(),
+            languageSuggestionsService: CodeLanguageSuggestionsService(
+                stepsPersistenceService: StepsPersistenceService()
+            )
         )
 
         let presenter = NewCodeQuizPresenter()
