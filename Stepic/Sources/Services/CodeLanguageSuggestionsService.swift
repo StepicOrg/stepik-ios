@@ -49,6 +49,7 @@ final class CodeLanguageSuggestionsService: CodeLanguageSuggestionsServiceProtoc
             }
 
             CoreDataHelper.instance.save()
+
             seal.fulfill(())
         }
     }
@@ -60,7 +61,17 @@ final class CodeLanguageSuggestionsService: CodeLanguageSuggestionsServiceProtoc
             return nil
         }
 
-        return options.languages.randomElement()
+        let ordering = Dictionary(
+            uniqueKeysWithValues: CodeLanguage.priorityOrder.enumerated().map { ($1, $0) }
+        )
+
+        return options.languages.min { lhs, rhs -> Bool in
+            if let first = ordering[lhs],
+               let second = ordering[rhs] {
+                return first < second
+            }
+            return false
+        }
     }
 
     // MARK: - Inner Types

@@ -181,7 +181,7 @@ enum CodeLanguage: String, CaseIterable {
     }
 
     // https://jupyterhub.int.stepik.org/user/ivan.magda/notebooks/ivan.magda/programming-languages-popularity.ipynb
-    var priorityOrder: [CodeLanguage] {
+    static var priorityOrder: [CodeLanguage] {
         return [
             .python,
             .cpp11,
