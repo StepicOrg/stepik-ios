@@ -118,9 +118,15 @@ final class NewCodeQuizView: UIView {
             self.setCodeEditorActionControlsEnabled(false)
         }
 
+        let isEmptyDetails = viewModel.samples.isEmpty && viewModel.limit.memory == 0 && viewModel.limit.time == 0
+        self.codeDetailsView.isHidden = isEmptyDetails
         self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
+
         self.languagePickerView.languages = viewModel.languages.map { $0.rawValue }.sorted()
+
         self.toolbarView.language = viewModel.language?.rawValue
+        self.toolbarView.isTopSeparatorHidden = !isEmptyDetails
+        self.toolbarView.isBottomSeparatorHidden = true
 
         self.codeEditorView.language = viewModel.language
         self.codeEditorView.code = viewModel.code
