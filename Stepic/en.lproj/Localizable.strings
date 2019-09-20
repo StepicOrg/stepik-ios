@@ -354,8 +354,6 @@ WidgetAdaptiveLabel = "ADAPTIVE";
 
 CanBeChangedInSettings = "It can be changed in settings.";
 
-EnterSQLQuery = "Enter SQL query:";
-
 SolveStreaksDaysCount = "Your current streak is %@ %@ in a row. Great!";
 SolveSomethingToday = "Solve anything today to increase your streak.";
 Close = "Close";
@@ -731,6 +729,7 @@ MultipleChoiceQuizTitle = "Select one or more options";
 SingleChoiceQuizTitle = "Select one option";
 SortingQuizTitle = "Sort a given list";
 MatchingQuizTitle = "Match two lists";
+SQLQuizTitle = "SQL Challenge - Enter SQL query";
 
 CodeQuizDetails = "Details";
 CodeQuizDetailSampleTitle = "Sample data %@:";

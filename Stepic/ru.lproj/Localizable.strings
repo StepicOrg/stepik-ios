@@ -353,8 +353,6 @@ WidgetButtonLearn = "Учиться";
 WidgetAdaptiveLabel = "АДАПТИВНЫЙ";
 WidgetButtonBuy = "Купить за %@";
 
-EnterSQLQuery = "Введите SQL запрос:";
-
 CanBeChangedInSettings = "Это можно изменить в настройках.";
 
 SolveStreaksDaysCount = "Вы решаете %@ %@ подряд. Отлично!";
@@ -732,6 +730,7 @@ MultipleChoiceQuizTitle = "Выберите один или несколько �
 SingleChoiceQuizTitle = "Выберите один вариант";
 SortingQuizTitle = "Упорядочьте элементы списка";
 MatchingQuizTitle = "Сопоставьте значения из двух списков";
+SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
 
 CodeQuizDetails = "Детали";
 CodeQuizDetailSampleTitle = "Пример данных %@:";
