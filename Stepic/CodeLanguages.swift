@@ -37,6 +37,8 @@ enum CodeLanguage: String, CaseIterable {
     case perl = "perl"
     case sql = "sql"
     case swift = "swift"
+    case php = "php"
+    case julia = "julia"
 
     var highlightr: String {
         switch self {
@@ -80,6 +82,10 @@ enum CodeLanguage: String, CaseIterable {
             return "sql"
         case .swift:
             return "swift"
+        case .php:
+            return "php"
+        case .julia:
+            return "julia"
         }
     }
 
@@ -125,11 +131,15 @@ enum CodeLanguage: String, CaseIterable {
             return "SQL"
         case .swift:
             return "Swift"
+        case .php:
+            return "PHP"
+        case .julia:
+            return "Julia"
         }
     }
 
     var displayName: String {
-        return rawValue
+        return self.rawValue
     }
 
     var highlightrSample: String {
@@ -174,6 +184,45 @@ enum CodeLanguage: String, CaseIterable {
             return "# comment\n\nSELECT 'Hello World';"
         case .swift:
             return "// comment\nprint(\"Hello World!\")"
+        case .php:
+            return "// comment\n\n<?php\n\necho 'Hello World';"
+        case .julia:
+            return "# comment\n\nprintln(\"Hello World\")"
         }
+    }
+
+    // https://jupyterhub.int.stepik.org/user/ivan.magda/notebooks/ivan.magda/programming-languages-popularity.ipynb
+    static var priorityOrder: [CodeLanguage] {
+        return [
+            .python,
+            .cpp11,
+            .java11,
+            .cs,
+            .cpp,
+            .java8,
+            .c,
+            .javascript,
+            .kotlin,
+            .r,
+            .haskell,
+            .scala,
+            .pascal,
+            .shell,
+            .haskell8,
+            .go,
+            .asm64,
+            .java,
+            .asm32,
+            .java9,
+            .octave,
+            .perl,
+            .rust,
+            .php,
+            .ruby,
+            .swift,
+            .haskell7,
+            .clojure,
+            .julia
+        ]
     }
 }

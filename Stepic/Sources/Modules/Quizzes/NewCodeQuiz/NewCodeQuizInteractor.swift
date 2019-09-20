@@ -83,6 +83,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             strongSelf.outputCurrentReply()
             strongSelf.presentNewData()
         }.cauterize()
+
+        self.provider.updateAutoSuggestedCodeLanguage(language: language, stepID: codeDetails.stepID).cauterize()
     }
 
     func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request) {
@@ -183,6 +185,14 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         } else if self.codeDetails?.stepOptions.languages.count == 1,
                   let language = self.codeDetails?.stepOptions.languages.first {
             self.doLanguageSelect(request: .init(language: language))
+        } else if let stepID = self.codeDetails?.stepID {
+            self.provider.fetchAutoSuggestedCodeLanguage(by: stepID).done { language in
+                guard let language = language else {
+                    return
+                }
+
+                self.doLanguageSelect(request: .init(language: language))
+            }
         }
     }
 }

@@ -11,21 +11,27 @@ protocol NewCodeQuizProviderProtocol {
     func updateUserCodeTemplate(stepID: Step.IdType, language: CodeLanguage, code: String) -> Promise<Void>
 
     func fetchLessonTitle(by stepID: Step.IdType) -> Guarantee<String?>
+
+    func fetchAutoSuggestedCodeLanguage(by stepID: Step.IdType) -> Guarantee<CodeLanguage?>
+    func updateAutoSuggestedCodeLanguage(language: CodeLanguage, stepID: Step.IdType) -> Promise<Void>
 }
 
 final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
     private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
+    private let languageSuggestionsService: CodeLanguageSuggestionsServiceProtocol
 
     init(
         stepsPersistenceService: StepsPersistenceServiceProtocol,
         stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol,
-        lessonsPersistenceService: LessonsPersistenceServiceProtocol
+        lessonsPersistenceService: LessonsPersistenceServiceProtocol,
+        languageSuggestionsService: CodeLanguageSuggestionsServiceProtocol
     ) {
         self.stepsPersistenceService = stepsPersistenceService
         self.stepOptionsPersistenceService = stepOptionsPersistenceService
         self.lessonsPersistenceService = lessonsPersistenceService
+        self.languageSuggestionsService = languageSuggestionsService
     }
 
     func fetchStepOptions(by stepID: Step.IdType) -> Promise<StepOptions?> {
@@ -115,6 +121,14 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
                 seal(nil)
             }
         }
+    }
+
+    func fetchAutoSuggestedCodeLanguage(by stepID: Step.IdType) -> Guarantee<CodeLanguage?> {
+        return self.languageSuggestionsService.suggest(stepID: stepID)
+    }
+
+    func updateAutoSuggestedCodeLanguage(language: CodeLanguage, stepID: Step.IdType) -> Promise<Void> {
+        return self.languageSuggestionsService.update(language: language, stepID: stepID)
     }
 
     // MARK: Enums
