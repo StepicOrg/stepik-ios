@@ -144,7 +144,15 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
-        let reply = CodeReply(code: code, language: language)
+        let reply: Reply = {
+            switch language {
+            case .sql:
+                return SQLReply(code: code)
+            default:
+                return CodeReply(code: code, language: language)
+            }
+        }()
+
         self.moduleOutput?.update(reply: reply)
     }
 }
@@ -167,6 +175,12 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
             return
         }
 
+        if let reply = reply as? SQLReply {
+            self.languageName = CodeLanguage.sql.rawValue
+            self.currentCode = reply.code
+            return
+        }
+
         fatalError("Unexpected reply type")
     }
 
@@ -180,6 +194,10 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
     }
 
     private func handleEmptyReply() {
+        if self.language == CodeLanguage.sql {
+            return
+        }
+
         let isCurrentLanguageUnsupported = self.languageName != self.language?.rawValue
         if isCurrentLanguageUnsupported {
             self.languageName = nil
