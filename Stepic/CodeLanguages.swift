@@ -8,9 +8,6 @@
 
 import Foundation
 
-// TODO: Add support for:
-// - php
-// - julia
 enum CodeLanguage: String, CaseIterable {
     case python = "python3"
     case cpp11 = "c++11"
@@ -40,6 +37,8 @@ enum CodeLanguage: String, CaseIterable {
     case perl = "perl"
     case sql = "sql"
     case swift = "swift"
+    case php = "php"
+    case julia = "julia"
 
     var highlightr: String {
         switch self {
@@ -83,6 +82,10 @@ enum CodeLanguage: String, CaseIterable {
             return "sql"
         case .swift:
             return "swift"
+        case .php:
+            return "php"
+        case .julia:
+            return "julia"
         }
     }
 
@@ -128,11 +131,15 @@ enum CodeLanguage: String, CaseIterable {
             return "SQL"
         case .swift:
             return "Swift"
+        case .php:
+            return "PHP"
+        case .julia:
+            return "Julia"
         }
     }
 
     var displayName: String {
-        return rawValue
+        return self.rawValue
     }
 
     var highlightrSample: String {
@@ -177,6 +184,10 @@ enum CodeLanguage: String, CaseIterable {
             return "# comment\n\nSELECT 'Hello World';"
         case .swift:
             return "// comment\nprint(\"Hello World!\")"
+        case .php:
+            return "// comment\n\n<?php\n\necho 'Hello World';"
+        case .julia:
+            return "# comment\n\nprintln(\"Hello World\")"
         }
     }
 
@@ -206,10 +217,12 @@ enum CodeLanguage: String, CaseIterable {
             .octave,
             .perl,
             .rust,
+            .php,
             .ruby,
             .swift,
             .haskell7,
-            .clojure
+            .clojure,
+            .julia
         ]
     }
 }
