@@ -10,7 +10,6 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
 
     private let codeEditorThemeService: CodeEditorThemeServiceProtocol = CodeEditorThemeService()
 
-    // swiftlint:disable:next cyclomatic_complexity
     func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
         let state: NewCodeQuizViewModel.State = {
             if response.languageName != response.language?.rawValue {
@@ -55,21 +54,8 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             )
         }()
 
-        let quizTitle: String? = {
-            guard let language = response.language else {
-                return nil
-            }
-
-            switch language {
-            case .sql:
-                return NSLocalizedString("SQLQuizTitle", comment: "")
-            default:
-                return nil
-            }
-        }()
-
         let viewModel = NewCodeQuizViewModel(
-            title: quizTitle,
+            title: response.language == .sql ? NSLocalizedString("SQLQuizTitle", comment: "") : nil,
             code: response.code,
             codeTemplate: codeTemplate,
             language: response.language,
