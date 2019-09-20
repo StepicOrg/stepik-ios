@@ -73,19 +73,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return self.presentNewData()
         }
 
-        self.provider.fetchUserOrCodeTemplate(
-            by: codeDetails.stepID,
-            language: language
-        ).done { [weak self] codeTemplate in
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.currentCode = codeTemplate?.templateString
-            strongSelf.outputCurrentReply()
-            strongSelf.presentNewData()
-        }.cauterize()
-
+        self.fetchUserOrCodeTemplate()
         self.provider.updateAutoSuggestedCodeLanguage(language: language, stepID: codeDetails.stepID).cauterize()
     }
 
@@ -122,6 +110,26 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
                 status: self.currentStatus
             )
         )
+    }
+
+    private func fetchUserOrCodeTemplate() {
+        guard let codeDetails = self.codeDetails,
+              let language = self.language else {
+            return
+        }
+
+        self.provider.fetchUserOrCodeTemplate(
+            by: codeDetails.stepID,
+            language: language
+        ).done { [weak self] codeTemplate in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.currentCode = codeTemplate?.templateString
+            strongSelf.outputCurrentReply()
+            strongSelf.presentNewData()
+        }.cauterize()
     }
 
     private func updateUserCodeTemplate() {
@@ -192,6 +200,11 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
 
     func update(codeDetails: CodeDetails?) {
         self.codeDetails = codeDetails
+
+        // Prefetch code here (on init with not nil language), because we don't know stepID at initialization.
+        if self.language != nil && self.currentCode?.isEmpty ?? true {
+            self.fetchUserOrCodeTemplate()
+        }
     }
 
     private func handleEmptyReply() {
