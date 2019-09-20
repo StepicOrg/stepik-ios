@@ -64,7 +64,6 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             NewStep.QuizType.math,
             NewStep.QuizType.freeAnswer,
             NewStep.QuizType.code,
-            NewStep.QuizType.sql,
             NewStep.QuizType.sorting,
             NewStep.QuizType.matching
         ].contains(NewStep.QuizType(blockName: step.block.name))
