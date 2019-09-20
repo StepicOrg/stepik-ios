@@ -31,10 +31,12 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     init(
         presenter: NewCodeQuizPresenterProtocol,
-        provider: NewCodeQuizProviderProtocol
+        provider: NewCodeQuizProviderProtocol,
+        language: CodeLanguage?
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.languageName = language?.rawValue
     }
 
     func doReplyLoad(request: NewCodeQuiz.ReplyLoad.Request) {
