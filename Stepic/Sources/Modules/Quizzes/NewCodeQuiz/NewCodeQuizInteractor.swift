@@ -160,6 +160,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 extension NewCodeQuizInteractor: QuizInputProtocol {
     func update(reply: Reply?) {
         defer {
+            self.outputCurrentReply()
             self.presentNewData()
         }
 
