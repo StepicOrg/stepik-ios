@@ -82,9 +82,12 @@ final class NewCodeQuizFullscreenInstructionView: UIView {
         self.scrollableStackView.addArrangedView(stepTextView)
         stepTextView.loadHTMLText(htmlString)
 
-        let detailsContentView = CodeDetailsContentView()
-        self.scrollableStackView.addArrangedView(detailsContentView)
-        detailsContentView.configure(samples: samples, limit: limit)
+        let isEmptyDetails = samples.isEmpty && limit.memory == 0 && limit.time == 0
+        if !isEmptyDetails {
+            let detailsContentView = CodeDetailsContentView()
+            self.scrollableStackView.addArrangedView(detailsContentView)
+            detailsContentView.configure(samples: samples, limit: limit)
+        }
     }
 }
 

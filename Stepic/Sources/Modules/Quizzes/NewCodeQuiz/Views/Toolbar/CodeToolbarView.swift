@@ -31,6 +31,18 @@ final class CodeToolbarView: UIView {
     }()
 
     private lazy var containerView = UIView()
+    private lazy var topSeparatorView = SeparatorView()
+    private lazy var bottomSeparatorView = SeparatorView()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                self.topSeparatorView, self.containerView, self.bottomSeparatorView
+            ]
+        )
+        stackView.axis = .vertical
+        return stackView
+    }()
 
     var language: String? {
         didSet {
@@ -48,6 +60,18 @@ final class CodeToolbarView: UIView {
     var isLanguagePickerEnabled = true {
         didSet {
             self.languagePickerButton.isEnabled = self.isLanguagePickerEnabled
+        }
+    }
+
+    var isTopSeparatorHidden = true {
+        didSet {
+            self.topSeparatorView.isHidden = self.isTopSeparatorHidden
+        }
+    }
+
+    var isBottomSeparatorHidden = true {
+        didSet {
+            self.bottomSeparatorView.isHidden = self.isBottomSeparatorHidden
         }
     }
 
@@ -94,17 +118,26 @@ final class CodeToolbarView: UIView {
 }
 
 extension CodeToolbarView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.isTopSeparatorHidden = true
+        self.isBottomSeparatorHidden = true
+    }
+
     func addSubviews() {
-        self.addSubview(self.containerView)
+        self.addSubview(self.stackView)
 
         self.containerView.addSubview(self.languagePickerButton)
         self.containerView.addSubview(self.fullscreenButton)
     }
 
     func makeConstraints() {
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.containerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
             make.height.equalTo(self.appearance.containerHeight)
         }
 
