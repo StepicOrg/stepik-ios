@@ -106,7 +106,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 self.presenter.presentCourses(response: response)
             }
 
-            // Retry if successfuly
+            // Retry if successfully
             let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
             if shouldRetryAfterFetching {
                 // End of recursion cause shouldRetryAfterFetching will be false on next call
