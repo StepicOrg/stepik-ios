@@ -4,6 +4,7 @@ import PromiseKit
 protocol CourseListProviderProtocol: class {
     func fetchCached() -> Promise<([Course], Meta)>
     func fetchRemote(page: Int) -> Promise<([Course], Meta)>
+    func cache(courses: [Course])
 }
 
 final class CourseListProvider: CourseListProviderProtocol {
@@ -27,6 +28,8 @@ final class CourseListProvider: CourseListProviderProtocol {
         self.progressesNetworkService = progressesNetworkService
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
     }
+
+    // MARK: - CourseListProviderProtocol
 
     func fetchCached() -> Promise<([Course], Meta)> {
         guard let persistenceService = self.persistenceService else {
@@ -61,8 +64,6 @@ final class CourseListProvider: CourseListProviderProtocol {
                     reviewSummaries: reviewSummaries
                 ).map { ($0, meta) }
             }.done { courses, meta in
-                self.persistenceService?.update(newCachedList: courses)
-
                 seal.fulfill((courses, meta))
             }.catch { error in
                 print("course list provider: unable to fetch courses from api, error = \(error)")
@@ -70,6 +71,12 @@ final class CourseListProvider: CourseListProviderProtocol {
             }
         }
     }
+
+    func cache(courses: [Course]) {
+        self.persistenceService?.update(newCachedList: courses)
+    }
+
+    // MARK: - Private API
 
     private func mergeAsync(
         courses: [Course],
@@ -95,6 +102,8 @@ final class CourseListProvider: CourseListProviderProtocol {
             seal(courses)
         }
     }
+
+    // MARK: - Types
 
     enum Error: Swift.Error {
         case persistenceFetchFailed

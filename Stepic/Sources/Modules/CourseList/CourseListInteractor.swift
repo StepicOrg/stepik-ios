@@ -71,6 +71,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
             self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
 
+            if !self.didLoadFromCache {
+                self.provider.cache(courses: courses)
+            }
+
             // Fetch personal deadlines
             if let userID = self.userAccountService.currentUser?.id, self.isOnline {
                 courses.forEach { course in
@@ -160,6 +164,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 result: courses
             )
             self.presenter.presentNextCourses(response: response)
+
+            self.provider.cache(courses: self.currentCourses.map { $0.1 })
         }.catch { _ in
             // TODO: catch pagination error
         }
