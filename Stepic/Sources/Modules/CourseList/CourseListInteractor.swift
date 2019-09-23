@@ -71,7 +71,8 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
             self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
 
-            if !self.didLoadFromCache {
+            // Cache new courses fetched from remote.
+            if self.didLoadFromCache {
                 self.provider.cache(courses: courses)
             }
 
