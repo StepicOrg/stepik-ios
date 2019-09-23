@@ -237,6 +237,7 @@ final class VerticalCourseListViewController: CourseListViewController {
     override func updatePagination(hasNextPage: Bool, hasError: Bool) {
         super.updatePagination(hasNextPage: hasNextPage, hasError: hasError)
 
+        // Block pagination requests on scroll until we have error.
         if hasError {
             self.canTriggerPagination = false
         }
