@@ -47,7 +47,7 @@ final class CourseListProvider: CourseListProviderProtocol {
     }
 
     func fetchRemote(page: Int) -> Promise<([Course], Meta)> {
-        Promise { seal in
+        return Promise { seal in
             self.networkService.fetch(page: page).then {
                 (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
                 let progressIDs = courses.compactMap { $0.progressId }
