@@ -13,6 +13,8 @@ extension PaginationView {
     struct Appearance {
         let refreshButtonColor = UIColor.mainDark
         let refreshButtonSize = CGSize(width: 44, height: 44)
+        let refreshButtonImageSize = CGSize(width: 22, height: 22)
+        let refreshButtonImageInsets = UIEdgeInsets(top: 0, left: 11, bottom: 0, right: 0)
     }
 }
 
@@ -20,12 +22,11 @@ final class PaginationView: UIView {
     let appearance: Appearance
 
     private lazy var activityIndicatorView = UIActivityIndicatorView(style: .gray)
-    private lazy var errorRefreshButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(
-            UIImage(named: "Refresh")!,
-            for: .normal
-        )
+    private lazy var errorRefreshButton: ImageButton = {
+        let button = ImageButton()
+        button.image = UIImage(named: "Refresh")?.withRenderingMode(.alwaysTemplate)
+        button.imageSize = self.appearance.refreshButtonImageSize
+        button.imageInsets = self.appearance.refreshButtonImageInsets
         button.tintColor = self.appearance.refreshButtonColor
         button.addTarget(
             self,
