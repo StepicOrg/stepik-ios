@@ -41,7 +41,7 @@ enum CourseList {
 
         struct Response {
             let isAuthorized: Bool
-            let result: AvailableCourses
+            let result: Result<AvailableCourses>
         }
 
         struct ViewModel {
@@ -90,6 +90,6 @@ enum CourseList {
 
     enum PaginationState {
         case result(data: ListData<CourseWidgetViewModel>)
-        case error(message: String)
+        case error
     }
 }

@@ -26,7 +26,7 @@ class CourseListViewController: UIViewController {
     lazy var courseListView = self.view as? CourseListView
 
     let colorMode: CourseListColorMode
-    private var canTriggerPagination = true
+    fileprivate var canTriggerPagination = true
 
     fileprivate init(
         interactor: CourseListInteractorProtocol,
@@ -97,7 +97,7 @@ extension CourseListViewController: CourseListViewControllerProtocol {
             self.updatePagination(hasNextPage: data.hasNextPage, hasError: false)
         case .error:
             self.updateState(newState: self.state)
-            self.updatePagination(hasNextPage: false, hasError: true)
+            self.updatePagination(hasNextPage: true, hasError: true)
         }
     }
 
@@ -221,7 +221,13 @@ final class VerticalCourseListViewController: CourseListViewController {
 
         let paginationView = PaginationView()
         paginationView.onRefreshButtonClick = { [weak self] in
-            self?.interactor.doNextCoursesFetch(request: .init())
+            guard let strongSelf = self,
+                  let paginationView = strongSelf.verticalCourseListView?.paginationView as? PaginationView else {
+                return
+            }
+
+            paginationView.setLoading()
+            strongSelf.interactor.doNextCoursesFetch(request: .init())
         }
         view.paginationView = paginationView
 
@@ -230,6 +236,11 @@ final class VerticalCourseListViewController: CourseListViewController {
 
     override func updatePagination(hasNextPage: Bool, hasError: Bool) {
         super.updatePagination(hasNextPage: hasNextPage, hasError: hasError)
+
+        // Block pagination requests on scroll until we have error.
+        if hasError {
+            self.canTriggerPagination = false
+        }
 
         self.verticalCourseListView?.isPaginationViewHidden = !hasNextPage
 

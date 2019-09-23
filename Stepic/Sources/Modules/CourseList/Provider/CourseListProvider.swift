@@ -4,6 +4,7 @@ import PromiseKit
 protocol CourseListProviderProtocol: class {
     func fetchCached() -> Promise<([Course], Meta)>
     func fetchRemote(page: Int) -> Promise<([Course], Meta)>
+    func cache(courses: [Course])
 }
 
 final class CourseListProvider: CourseListProviderProtocol {
@@ -28,6 +29,8 @@ final class CourseListProvider: CourseListProviderProtocol {
         self.reviewSummariesNetworkService = reviewSummariesNetworkService
     }
 
+    // MARK: - CourseListProviderProtocol
+
     func fetchCached() -> Promise<([Course], Meta)> {
         guard let persistenceService = self.persistenceService else {
             return Promise.value(([], Meta.oneAndOnlyPage))
@@ -44,26 +47,23 @@ final class CourseListProvider: CourseListProviderProtocol {
     }
 
     func fetchRemote(page: Int) -> Promise<([Course], Meta)> {
-        var meta = Meta.oneAndOnlyPage
         return Promise { seal in
             self.networkService.fetch(page: page).then {
-                (courses, _) -> Promise<([Course], [Progress], [CourseReviewSummary])> in
+                (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
                 let progressIDs = courses.compactMap { $0.progressId }
                 let summariesIDs = courses.compactMap { $0.reviewSummaryId }
 
                 return when(
                     fulfilled: self.progressesNetworkService.fetch(ids: progressIDs, page: 1),
                     self.reviewSummariesNetworkService.fetch(ids: summariesIDs, page: 1)
-                ).compactMap { (courses, $0.0, $1.0) }
-            }.then { (courses, progresses, reviewSummaries) -> Guarantee<([Course])> in
+                ).compactMap { (courses, meta, $0.0, $1.0) }
+            }.then { (courses, meta, progresses, reviewSummaries) -> Guarantee<([Course], Meta)> in
                 self.mergeAsync(
                     courses: courses,
                     progresses: progresses,
                     reviewSummaries: reviewSummaries
-                )
-            }.done { courses in
-                self.persistenceService?.update(newCachedList: courses)
-
+                ).map { ($0, meta) }
+            }.done { courses, meta in
                 seal.fulfill((courses, meta))
             }.catch { error in
                 print("course list provider: unable to fetch courses from api, error = \(error)")
@@ -71,6 +71,12 @@ final class CourseListProvider: CourseListProviderProtocol {
             }
         }
     }
+
+    func cache(courses: [Course]) {
+        self.persistenceService?.update(newCachedList: courses)
+    }
+
+    // MARK: - Private API
 
     private func mergeAsync(
         courses: [Course],
@@ -96,6 +102,8 @@ final class CourseListProvider: CourseListProviderProtocol {
             seal(courses)
         }
     }
+
+    // MARK: - Types
 
     enum Error: Swift.Error {
         case persistenceFetchFailed
