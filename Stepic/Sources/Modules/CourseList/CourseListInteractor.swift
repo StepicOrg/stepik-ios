@@ -137,7 +137,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
-                result: result
+                result: .success(result)
             )
             self.presenter.presentNextCourses(response: response)
             return
@@ -161,13 +161,17 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
-                result: courses
+                result: .success(courses)
             )
             self.presenter.presentNextCourses(response: response)
 
             self.provider.cache(courses: self.currentCourses.map { $0.1 })
-        }.catch { _ in
-            // TODO: catch pagination error
+        }.catch { error in
+            let response = CourseList.NextCoursesLoad.Response(
+                isAuthorized: self.userAccountService.isAuthorized,
+                result: .failure(error)
+            )
+            self.presenter.presentNextCourses(response: response)
         }
     }
 
