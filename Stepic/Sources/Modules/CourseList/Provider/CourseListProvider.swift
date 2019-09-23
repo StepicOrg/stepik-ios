@@ -44,24 +44,23 @@ final class CourseListProvider: CourseListProviderProtocol {
     }
 
     func fetchRemote(page: Int) -> Promise<([Course], Meta)> {
-        var meta = Meta.oneAndOnlyPage
-        return Promise { seal in
+        Promise { seal in
             self.networkService.fetch(page: page).then {
-                (courses, _) -> Promise<([Course], [Progress], [CourseReviewSummary])> in
+                (courses, meta) -> Promise<([Course], Meta, [Progress], [CourseReviewSummary])> in
                 let progressIDs = courses.compactMap { $0.progressId }
                 let summariesIDs = courses.compactMap { $0.reviewSummaryId }
 
                 return when(
                     fulfilled: self.progressesNetworkService.fetch(ids: progressIDs, page: 1),
                     self.reviewSummariesNetworkService.fetch(ids: summariesIDs, page: 1)
-                ).compactMap { (courses, $0.0, $1.0) }
-            }.then { (courses, progresses, reviewSummaries) -> Guarantee<([Course])> in
+                ).compactMap { (courses, meta, $0.0, $1.0) }
+            }.then { (courses, meta, progresses, reviewSummaries) -> Guarantee<([Course], Meta)> in
                 self.mergeAsync(
                     courses: courses,
                     progresses: progresses,
                     reviewSummaries: reviewSummaries
-                )
-            }.done { courses in
+                ).map { ($0, meta) }
+            }.done { courses, meta in
                 self.persistenceService?.update(newCachedList: courses)
 
                 seal.fulfill((courses, meta))
