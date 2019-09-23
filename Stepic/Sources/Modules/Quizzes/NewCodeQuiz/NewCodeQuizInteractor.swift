@@ -200,16 +200,15 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
 
     func update(codeDetails: CodeDetails?) {
         self.codeDetails = codeDetails
-
-        // Prefetch code here (on init with not nil language), because we don't know stepID at initialization.
-        if self.language != nil && self.currentCode?.isEmpty ?? true {
-            self.fetchUserOrCodeTemplate()
-        }
     }
 
     private func handleEmptyReply() {
         if self.language == CodeLanguage.sql {
-            return
+            guard self.currentCode?.isEmpty ?? true else {
+                return
+            }
+
+            return self.fetchUserOrCodeTemplate()
         }
 
         let isCurrentLanguageUnsupported = self.languageName != self.language?.rawValue
