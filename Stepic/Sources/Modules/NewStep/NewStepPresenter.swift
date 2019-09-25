@@ -30,7 +30,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     func presentControlsUpdate(response: NewStep.ControlsUpdate.Response) {
         let viewModel = NewStep.ControlsUpdate.ViewModel(
             canNavigateToPreviousUnit: response.canNavigateToPreviousUnit,
-            canNavigateToNextUnit: response.canNavigateToNextUnit
+            canNavigateToNextUnit: response.canNavigateToNextUnit,
+            canNavigateToNextStep: response.canNavigateToNextStep
         )
 
         self.viewController?.displayControlsUpdate(viewModel: viewModel)

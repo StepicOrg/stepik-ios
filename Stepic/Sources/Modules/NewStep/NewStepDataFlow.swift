@@ -19,11 +19,13 @@ enum NewStep {
         struct Response {
             let canNavigateToPreviousUnit: Bool
             let canNavigateToNextUnit: Bool
+            let canNavigateToNextStep: Bool
         }
 
         struct ViewModel {
             let canNavigateToPreviousUnit: Bool
             let canNavigateToNextUnit: Bool
+            let canNavigateToNextStep: Bool
         }
     }
 
@@ -51,8 +53,13 @@ enum NewStep {
 
     /// Handle navigation inside lesson
     enum StepNavigationRequest {
+        enum Direction {
+            case index(Int)
+            case next
+        }
+
         struct Request {
-            let index: Int
+            let direction: Direction
         }
     }
 

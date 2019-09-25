@@ -55,6 +55,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
         }()
 
         let viewModel = NewCodeQuizViewModel(
+            title: response.language == .sql ? NSLocalizedString("SQLQuizTitle", comment: "") : nil,
             code: response.code,
             codeTemplate: codeTemplate,
             language: response.language,

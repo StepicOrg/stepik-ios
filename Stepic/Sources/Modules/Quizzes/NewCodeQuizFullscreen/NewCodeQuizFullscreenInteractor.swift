@@ -38,7 +38,15 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
     }
 
     func doReplySubmit(request: NewCodeQuizFullscreen.ReplySubmit.Request) {
-        let reply = CodeReply(code: self.currentCode ?? "", language: self.language)
+        let reply: Reply = {
+            switch self.language {
+            case .sql:
+                return SQLReply(code: self.currentCode ?? "")
+            default:
+                return CodeReply(code: self.currentCode ?? "", language: self.language)
+            }
+        }()
+
         self.moduleOutput?.submit(reply: reply)
     }
 

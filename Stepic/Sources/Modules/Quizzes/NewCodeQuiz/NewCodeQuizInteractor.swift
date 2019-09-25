@@ -31,10 +31,12 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 
     init(
         presenter: NewCodeQuizPresenterProtocol,
-        provider: NewCodeQuizProviderProtocol
+        provider: NewCodeQuizProviderProtocol,
+        language: CodeLanguage?
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.languageName = language?.rawValue
     }
 
     func doReplyLoad(request: NewCodeQuiz.ReplyLoad.Request) {
@@ -71,18 +73,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return self.presentNewData()
         }
 
-        self.provider.fetchUserOrCodeTemplate(
-            by: codeDetails.stepID,
-            language: language
-        ).done { [weak self] codeTemplate in
-            guard let strongSelf = self else {
-                return
-            }
-
-            strongSelf.currentCode = codeTemplate?.templateString
-            strongSelf.outputCurrentReply()
-            strongSelf.presentNewData()
-        }.cauterize()
+        self.fetchUserOrCodeTemplate()
+        self.provider.updateAutoSuggestedCodeLanguage(language: language, stepID: codeDetails.stepID).cauterize()
     }
 
     func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request) {
@@ -120,6 +112,26 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         )
     }
 
+    private func fetchUserOrCodeTemplate() {
+        guard let codeDetails = self.codeDetails,
+              let language = self.language else {
+            return
+        }
+
+        self.provider.fetchUserOrCodeTemplate(
+            by: codeDetails.stepID,
+            language: language
+        ).done { [weak self] codeTemplate in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.currentCode = codeTemplate?.templateString
+            strongSelf.outputCurrentReply()
+            strongSelf.presentNewData()
+        }.cauterize()
+    }
+
     private func updateUserCodeTemplate() {
         guard let codeDetails = self.codeDetails,
               let language = self.language,
@@ -140,7 +152,15 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
             return
         }
 
-        let reply = CodeReply(code: code, language: language)
+        let reply: Reply = {
+            switch language {
+            case .sql:
+                return SQLReply(code: code)
+            default:
+                return CodeReply(code: code, language: language)
+            }
+        }()
+
         self.moduleOutput?.update(reply: reply)
     }
 }
@@ -148,6 +168,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
 extension NewCodeQuizInteractor: QuizInputProtocol {
     func update(reply: Reply?) {
         defer {
+            self.outputCurrentReply()
             self.presentNewData()
         }
 
@@ -159,6 +180,12 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
 
         if let reply = reply as? CodeReply {
             self.languageName = reply.languageName
+            self.currentCode = reply.code
+            return
+        }
+
+        if let reply = reply as? SQLReply {
+            self.languageName = CodeLanguage.sql.rawValue
             self.currentCode = reply.code
             return
         }
@@ -176,6 +203,14 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
     }
 
     private func handleEmptyReply() {
+        if self.language == CodeLanguage.sql {
+            guard self.currentCode?.isEmpty ?? true else {
+                return
+            }
+
+            return self.fetchUserOrCodeTemplate()
+        }
+
         let isCurrentLanguageUnsupported = self.languageName != self.language?.rawValue
         if isCurrentLanguageUnsupported {
             self.languageName = nil
@@ -183,6 +218,14 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
         } else if self.codeDetails?.stepOptions.languages.count == 1,
                   let language = self.codeDetails?.stepOptions.languages.first {
             self.doLanguageSelect(request: .init(language: language))
+        } else if let stepID = self.codeDetails?.stepID {
+            self.provider.fetchAutoSuggestedCodeLanguage(by: stepID).done { language in
+                guard let language = language else {
+                    return
+                }
+
+                self.doLanguageSelect(request: .init(language: language))
+            }
         }
     }
 }

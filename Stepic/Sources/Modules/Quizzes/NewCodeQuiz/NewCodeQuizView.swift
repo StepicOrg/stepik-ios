@@ -11,6 +11,11 @@ protocol NewCodeQuizViewDelegate: class {
 
 extension NewCodeQuizView {
     struct Appearance {
+        let titleColor = UIColor.mainDark
+        let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+
+        let insets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
+
         let codeTextViewHeight: CGFloat = 236
     }
 }
@@ -18,6 +23,16 @@ extension NewCodeQuizView {
 final class NewCodeQuizView: UIView {
     let appearance: Appearance
     weak var delegate: NewCodeQuizViewDelegate?
+
+    private lazy var topSeparatorView = SeparatorView()
+
+    // Only visible for sql quiz.
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = self.appearance.titleColor
+        label.font = self.appearance.titleFont
+        return label
+    }()
 
     private lazy var codeDetailsView = CodeDetailsView()
 
@@ -73,8 +88,10 @@ final class NewCodeQuizView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
+                self.topSeparatorContainerView,
                 self.codeDetailsView,
                 self.toolbarView,
+                self.titleLabelContainerView,
                 self.codeEditorStackView,
                 self.languagePickerView,
                 self.unsupportedCodeLanguageStackView
@@ -83,6 +100,9 @@ final class NewCodeQuizView: UIView {
         stackView.axis = .vertical
         return stackView
     }()
+
+    private lazy var topSeparatorContainerView = UIView()
+    private lazy var titleLabelContainerView = UIView()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -98,6 +118,7 @@ final class NewCodeQuizView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // TODO: Refactor rendering and state management.
     func configure(viewModel: NewCodeQuizViewModel) {
         switch viewModel.finalState {
         case .default, .wrong:
@@ -118,15 +139,31 @@ final class NewCodeQuizView: UIView {
             self.setCodeEditorActionControlsEnabled(false)
         }
 
+        let isEmptyDetails = viewModel.samples.isEmpty && viewModel.limit.memory == 0 && viewModel.limit.time == 0
+        self.codeDetailsView.isHidden = isEmptyDetails
         self.codeDetailsView.configure(samples: viewModel.samples, limit: viewModel.limit)
+
         self.languagePickerView.languages = viewModel.languages.map { $0.rawValue }.sorted()
+
         self.toolbarView.language = viewModel.language?.rawValue
+        self.toolbarView.isTopSeparatorHidden = !isEmptyDetails
+        self.toolbarView.isBottomSeparatorHidden = true
 
         self.codeEditorView.language = viewModel.language
         self.codeEditorView.code = viewModel.code
         self.codeEditorView.codeTemplate = viewModel.codeTemplate
         self.codeEditorView.theme = viewModel.codeEditorTheme
         self.codeEditorView.isEditable = false
+
+        // Hide toolbar and show title for sql quiz.
+        if viewModel.language == .sql {
+            self.titleLabel.text = viewModel.title
+            self.titleLabelContainerView.isHidden = viewModel.title?.isEmpty ?? true
+            self.toolbarView.isHidden = !self.titleLabelContainerView.isHidden
+        } else {
+            self.topSeparatorView.backgroundColor = .clear
+            self.titleLabelContainerView.isHidden = true
+        }
     }
 
     // MARK: - Private API
@@ -146,10 +183,27 @@ final class NewCodeQuizView: UIView {
 
 extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
+        self.topSeparatorContainerView.addSubview(self.topSeparatorView)
+        self.titleLabelContainerView.addSubview(self.titleLabel)
+
         self.addSubview(self.stackView)
     }
 
     func makeConstraints() {
+        self.topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.topSeparatorView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.bottom.leading.trailing.equalToSuperview()
+        }
+
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

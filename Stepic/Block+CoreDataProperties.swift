@@ -14,8 +14,6 @@ import CoreData
 import UIKit
 
 extension Block {
-
-    @NSManaged var managedAnimation: String?
     @NSManaged var managedName: String?
     @NSManaged var managedText: String?
 
@@ -55,16 +53,6 @@ extension Block {
         }
         set(value) {
             managedVideo = value
-        }
-    }
-
-    var animation: String? {
-        get {
-            return managedAnimation
-        }
-
-        set(value) {
-            managedAnimation = value
         }
     }
 

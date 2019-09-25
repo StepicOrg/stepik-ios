@@ -28,20 +28,22 @@ final class CourseListPresenter: CourseListPresenterProtocol {
     }
 
     func presentNextCourses(response: CourseList.NextCoursesLoad.Response) {
-        var viewModel: CourseList.NextCoursesLoad.ViewModel
-
-        let courses = self.makeWidgetViewModels(
-            courses: response.result.fetchedCourses.courses,
-            availableInAdaptive: response.result.availableAdaptiveCourses,
-            isAuthorized: response.isAuthorized
-        )
-        let data = CourseList.ListData(
-            courses: courses,
-            hasNextPage: response.result.fetchedCourses.hasNextPage
-        )
-        viewModel = CourseList.NextCoursesLoad.ViewModel(state: .result(data: data))
-
-        self.viewController?.displayNextCourses(viewModel: viewModel)
+        switch response.result {
+        case .failure:
+            self.viewController?.displayNextCourses(viewModel: .init(state: .error))
+        case .success(let data):
+            let courses = self.makeWidgetViewModels(
+                courses: data.fetchedCourses.courses,
+                availableInAdaptive: data.availableAdaptiveCourses,
+                isAuthorized: response.isAuthorized
+            )
+            let listData = CourseList.ListData(
+                courses: courses,
+                hasNextPage: data.fetchedCourses.hasNextPage
+            )
+            let viewModel = CourseList.NextCoursesLoad.ViewModel(state: .result(data: listData))
+            self.viewController?.displayNextCourses(viewModel: viewModel)
+        }
     }
 
     func presentWaitingState(response: CourseList.BlockingWaitingIndicatorUpdate.Response) {
@@ -74,7 +76,7 @@ final class CourseListPresenter: CourseListPresenterProtocol {
 
         return CourseWidgetProgressViewModel(
             progress: normalizedPercent / 100.0,
-            progressLabelText: FormatterHelper.integerPercent(Int(normalizedPercent))
+            progressLabelText: "\(progress.score)/\(progress.cost)"
         )
     }
 

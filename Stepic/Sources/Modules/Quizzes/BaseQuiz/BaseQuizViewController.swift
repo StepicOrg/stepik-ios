@@ -98,6 +98,8 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         self.baseQuizView?.isSubmitButtonEnabled = data.isSubmitButtonEnabled
         self.baseQuizView?.submitButtonTitle = data.submitButtonTitle
         self.baseQuizView?.isPeerReviewAvailable = data.shouldPassPeerReview
+        self.baseQuizView?.isNextStepAvailable = data.canNavigateToNextStep
+        self.baseQuizView?.isRetryAvailable = data.canRetry
 
         if let status = data.quizStatus {
             switch status {
@@ -143,6 +145,10 @@ extension BaseQuizViewController: BaseQuizViewControllerProtocol {
 extension BaseQuizViewController: BaseQuizViewDelegate {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView) {
         self.submitCurrentReply()
+    }
+
+    func baseQuizViewDidRequestNextStep(_ view: BaseQuizView) {
+        self.interactor.doNextStepNavigationRequest(request: .init())
     }
 
     func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView) {

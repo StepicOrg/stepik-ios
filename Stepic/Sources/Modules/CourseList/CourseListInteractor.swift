@@ -71,6 +71,11 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
             self.currentCourses = courses.map { (self.getUniqueIdentifierForCourse($0), $0) }
 
+            // Cache new courses fetched from remote.
+            if self.didLoadFromCache {
+                self.provider.cache(courses: courses)
+            }
+
             // Fetch personal deadlines
             if let userID = self.userAccountService.currentUser?.id, self.isOnline {
                 courses.forEach { course in
@@ -102,7 +107,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
                 self.presenter.presentCourses(response: response)
             }
 
-            // Retry if successfuly
+            // Retry if successfully
             let shouldRetryAfterFetching = self.isOnline && !self.didLoadFromCache
             if shouldRetryAfterFetching {
                 // End of recursion cause shouldRetryAfterFetching will be false on next call
@@ -133,7 +138,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
-                result: result
+                result: .success(result)
             )
             self.presenter.presentNextCourses(response: response)
             return
@@ -157,11 +162,17 @@ final class CourseListInteractor: CourseListInteractorProtocol {
             )
             let response = CourseList.NextCoursesLoad.Response(
                 isAuthorized: self.userAccountService.isAuthorized,
-                result: courses
+                result: .success(courses)
             )
             self.presenter.presentNextCourses(response: response)
-        }.catch { _ in
-            // TODO: catch pagination error
+
+            self.provider.cache(courses: self.currentCourses.map { $0.1 })
+        }.catch { error in
+            let response = CourseList.NextCoursesLoad.Response(
+                isAuthorized: self.userAccountService.isAuthorized,
+                result: .failure(error)
+            )
+            self.presenter.presentNextCourses(response: response)
         }
     }
 
