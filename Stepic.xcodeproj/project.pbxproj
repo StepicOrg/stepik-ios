@@ -538,6 +538,7 @@
 		2C53E00322DDDBFD0084BA2B /* CodeTextViewLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF822DDDBFD0084BA2B /* CodeTextViewLayoutManager.swift */; };
 		2C53E00422DDDBFD0084BA2B /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF922DDDBFD0084BA2B /* CodeTextView.swift */; };
 		2C558780217521E8009E1BDE /* LocalNotificationsMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */; };
+		2C5BE9DC233C0A110098EB2F /* katex in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BE9DB233C0A100098EB2F /* katex */; };
 		2C5D51592024653B00B9D932 /* BaseCardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */; };
 		2C5DF1391FEBDC8C003B1177 /* CardsStepsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */; };
 		2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */; };
@@ -1664,6 +1665,7 @@
 		2C53DFF922DDDBFD0084BA2B /* CodeTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		2C55877F217521E8009E1BDE /* LocalNotificationsMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsMigrator.swift; sourceTree = "<group>"; };
 		2C5AB2B122F9BC78005E7AA0 /* Model_step_options_limits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_options_limits.xcdatamodel; sourceTree = "<group>"; };
+		2C5BE9DB233C0A100098EB2F /* katex */ = {isa = PBXFileReference; lastKnownFileType = folder; path = katex; sourceTree = "<group>"; };
 		2C5D51582024653B00B9D932 /* BaseCardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardsStepsViewController.swift; sourceTree = "<group>"; };
 		2C5DF1381FEBDC8C003B1177 /* CardsStepsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsPresenter.swift; sourceTree = "<group>"; };
 		2C5DF13A1FEC0534003B1177 /* CardsStepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsStepsViewController.swift; sourceTree = "<group>"; };
@@ -3825,6 +3827,7 @@
 		1BAD14BA674336E6C1C0716C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C5BE9DB233C0A100098EB2F /* katex */,
 				08E542001C6A76E100DEC38E /* MathJax */,
 				2CB190781F2A17E800BD9508 /* Charts.framework */,
 				9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */,
@@ -5867,6 +5870,7 @@
 				08C6E31E1DFB2691007F7E39 /* NotificationRequestAlertViewController.xib in Resources */,
 				2C7FEE761FDAF9D600B2B4F1 /* onboardingAnimation2.json in Resources */,
 				080C5E721EFC094F0036EB3D /* CodeQuizToolbarView.xib in Resources */,
+				2C5BE9DC233C0A110098EB2F /* katex in Resources */,
 				085DF8D01C99A6F7006809D9 /* PlayerTestStoryboard.storyboard in Resources */,
 				2CE8390920C7F16700FE3672 /* ContentMenuBlockTableViewCell.xib in Resources */,
 				2CB62BE42019FD8500B5E336 /* step3.html in Resources */,
