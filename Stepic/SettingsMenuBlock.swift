@@ -10,7 +10,7 @@ import Foundation
 
 enum SettingsMenuBlock: String {
     case videoHeader
-    case loadedVideoQuality
+    case loadingVideoQuality
     case onlineVideoQuality
     case adaptiveHeader
     case adaptiveModeSwitch

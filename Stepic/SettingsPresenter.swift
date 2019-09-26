@@ -20,7 +20,7 @@ class SettingsPresenter {
     var menu: [SettingsMenuBlock] = [
         .videoHeader,
         .downloads,
-        .loadedVideoQuality,
+        .loadingVideoQuality,
         .onlineVideoQuality,
         .codeEditorSettingsHeader,
         .codeEditorSettings,
