@@ -196,7 +196,8 @@ extension SettingsViewController: SettingsView {
             title: NSLocalizedString("ContentLanguagePreference", comment: "")
         )
         block.onTouch = { [weak self] in
-            self?.displayContentLanguageSettings()
+            let assembly = LanguageSettingsLegacyAssembly()
+            self?.navigationController?.pushViewController(assembly.makeModule(), animated: true)
         }
 
         return block
@@ -251,17 +252,6 @@ extension SettingsViewController: SettingsView {
         }
 
         viewController.action = action
-
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    private func displayContentLanguageSettings() {
-        guard let viewController = ControllerHelper.instantiateViewController(
-            identifier: "LanguageSettingsViewController",
-            storyboardName: "Profile"
-        ) as? LanguageSettingsViewController else {
-            return
-        }
 
         self.navigationController?.pushViewController(viewController, animated: true)
     }

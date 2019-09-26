@@ -8,7 +8,19 @@
 
 import UIKit
 
-class LanguageSettingsViewController: UIViewController {
+@available(*, deprecated, message: "Class to initialize content language settings w/o storyboards logic")
+final class LanguageSettingsLegacyAssembly: Assembly {
+    func makeModule() -> UIViewController {
+        guard let viewController = ControllerHelper.instantiateViewController(
+            identifier: "LanguageSettingsViewController",
+            storyboardName: "Profile"
+        ) as? LanguageSettingsViewController else {
+            fatalError("Failed to initialize LanguageSettingsViewController")
+        }
+
+        return viewController
+    }
+}
 
     @IBOutlet weak var tableView: UITableView!
 
