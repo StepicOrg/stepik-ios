@@ -8,6 +8,23 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Class to initialize settings w/o storyboards logic")
+final class SettingsViewControllerLegacyAssembly: Assembly {
+    func makeModule() -> UIViewController {
+        guard let viewController = ControllerHelper.instantiateViewController(
+            identifier: "SettingsViewController",
+            storyboardName: "Profile"
+        ) as? SettingsViewController else {
+            fatalError("Failed to initialize SettingsViewController")
+        }
+
+        let presenter = SettingsPresenter(view: viewController)
+        viewController.presenter = presenter
+
+        return viewController
+    }
+}
+
 final class SettingsViewController: MenuViewController {
     var presenter: SettingsPresenter?
 
@@ -42,8 +59,9 @@ final class SettingsViewController: MenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        assert(self.presenter != nil)
+
         self.title = NSLocalizedString("Settings", comment: "")
-        self.presenter = SettingsPresenter(view: self)
 
         self.edgesForExtendedLayout = []
         self.tableView.tableHeaderView = self.artView
