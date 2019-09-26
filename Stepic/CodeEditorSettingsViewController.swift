@@ -154,7 +154,7 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
 
 extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
-        let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName }))
+        let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName })).sorted()
 
         guard let currentLanguageIndex = availableLanguages.index(of: self.previewLanguage.humanReadableName) else {
             return
