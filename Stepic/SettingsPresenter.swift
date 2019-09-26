@@ -14,7 +14,7 @@ protocol SettingsView: class {
     func presentAuth()
 }
 
-class SettingsPresenter {
+final class SettingsPresenter {
     weak var view: SettingsView?
 
     var menu: [SettingsMenuBlock] = [
@@ -22,8 +22,9 @@ class SettingsPresenter {
         .downloads,
         .loadingVideoQuality,
         .onlineVideoQuality,
-        .codeEditorSettingsHeader,
+        .appearanceHeader,
         .codeEditorSettings,
+        .stepFontSize,
         .languageSettingsHeader,
         .contentLanguage,
         .adaptiveHeader,
@@ -37,9 +38,10 @@ class SettingsPresenter {
     }
 
     // MARK: - Menu blocks
+
     func logout() {
         AuthInfo.shared.token = nil
-        view?.presentAuth()
+        self.view?.presentAuth()
     }
 
     func changeAdaptiveModeEnabled(to isEnabled: Bool) {

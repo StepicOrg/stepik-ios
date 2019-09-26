@@ -20,4 +20,6 @@ enum SettingsMenuBlock: String {
     case languageSettingsHeader
     case contentLanguage
     case downloads
+    case appearanceHeader
+    case stepFontSize
 }

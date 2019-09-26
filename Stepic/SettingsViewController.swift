@@ -128,6 +128,13 @@ extension SettingsViewController: SettingsView {
             )
         case .codeEditorSettings:
             return self.makeCodeEditorSettingsBlock()
+        case .appearanceHeader:
+            return self.makeTitleMenuBlock(
+                id: menuBlockID,
+                title: NSLocalizedString("SettingsBlockTitleAppearance", comment: "")
+            )
+        case .stepFontSize:
+            return self.makeStepFontSizeBlock()
         case .languageSettingsHeader:
             return self.makeTitleMenuBlock(
                 id: menuBlockID,
@@ -172,6 +179,20 @@ extension SettingsViewController: SettingsView {
         )
         block.onTouch = { [weak self] in
             self?.displayChangeVideoQuality(action: .watching)
+        }
+
+        return block
+    }
+
+    private func makeStepFontSizeBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(
+            id: SettingsMenuBlock.stepFontSize.rawValue,
+            title: NSLocalizedString("SettingsStepFontSizeTitle", comment: "")
+        )
+        block.subtitle = NSLocalizedString("SettingsStepFontSizeSubtitle", comment: "")
+        block.onTouch = { [weak self] in
+            let assembly = SettingsStepFontSizeAssembly()
+            self?.navigationController?.pushViewController(assembly.makeModule(), animated: true)
         }
 
         return block
