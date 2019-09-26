@@ -444,6 +444,7 @@
 		19CEA9C063AE5CD5A682CFA9 /* ProfileEditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5BA4688D7B46C416231BD9 /* ProfileEditInteractor.swift */; };
 		2275960EAA689AD0656C20E6 /* NewSortingQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5C47F13975D3915692AA71 /* NewSortingQuizDataFlow.swift */; };
 		283CD08DD1D81B47A81F70EA /* NewSortingQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E836B14C65BADD59C0CAA65B /* NewSortingQuizView.swift */; };
+		2C01BB68233CD92C00C8DCF0 /* Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01BB67233CD92C00C8DCF0 /* Require.swift */; };
 		2C01D3AA22DDB7EA00C84CEE /* DefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */; };
 		2C01D3AC22DDB98900C84CEE /* LaunchDefaultsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */; };
 		2C0473FF22E5BC20003050B7 /* CodeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0473FE22E5BC20003050B7 /* CodeDetailsView.swift */; };
@@ -1561,6 +1562,7 @@
 		230630B59E23EF2D82208F85 /* NewLessonInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewLessonInteractor.swift; sourceTree = "<group>"; };
 		232D0A4BD87325BE0E568BF0 /* NewFreeAnswerQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizInteractor.swift; sourceTree = "<group>"; };
 		2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAlertsAnalytics.swift; sourceTree = "<group>"; };
+		2C01BB67233CD92C00C8DCF0 /* Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Require.swift; sourceTree = "<group>"; };
 		2C01D3A922DDB7EA00C84CEE /* DefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsContainer.swift; sourceTree = "<group>"; };
 		2C01D3AB22DDB98900C84CEE /* LaunchDefaultsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchDefaultsContainer.swift; sourceTree = "<group>"; };
 		2C03B2A31F0CD87600005383 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
@@ -5035,6 +5037,7 @@
 			isa = PBXGroup;
 			children = (
 				62E981CAF11255059CB09BF1 /* FormatterHelper.swift */,
+				2C01BB67233CD92C00C8DCF0 /* Require.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -6692,6 +6695,7 @@
 				087F6B961CE9E2C8002649AB /* HTMLParsingUtil.swift in Sources */,
 				089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */,
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
+				2C01BB68233CD92C00C8DCF0 /* Require.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
