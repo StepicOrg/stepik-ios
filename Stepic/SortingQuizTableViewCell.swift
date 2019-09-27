@@ -52,7 +52,7 @@ class SortingQuizTableViewCell: UITableViewCell {
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
         optionWebView.snp.makeConstraints { $0.edges.equalTo(textContainerView) }
-        webViewHelper = CellWebViewHelper(webView: optionWebView)
+        webViewHelper = CellWebViewHelper(webView: optionWebView, fontSize: StepFontSizeService().globalStepFontSize)
         optionWebView.isHidden = true
     }
 

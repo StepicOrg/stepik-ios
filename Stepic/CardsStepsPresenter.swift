@@ -236,7 +236,11 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                         return
                     }
 
-                    let cardStepPresenter = CardStepPresenter(view: cardStepViewController, step: step)
+                    let cardStepPresenter = CardStepPresenter(
+                        view: cardStepViewController,
+                        step: step,
+                        stepFontSizeService: StepFontSizeService()
+                    )
                     cardStepViewController.presenter = cardStepPresenter
                     strongSelf.currentStepPresenter = cardStepPresenter
                     if let cardStepDelegate = strongSelf.view as? CardStepDelegate {

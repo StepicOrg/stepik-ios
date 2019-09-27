@@ -8,14 +8,17 @@
 
 import Foundation
 
-class CellWebViewHelper: NSObject {
+final class CellWebViewHelper: NSObject {
+    private weak var webView: UIWebView?
 
-    fileprivate weak var webView: UIWebView?
+    private let fontSize: FontSize
 
     var mathJaxFinishedBlock : (() -> Void)?
 
-    init(webView: UIWebView) {
+    init(webView: UIWebView, fontSize: FontSize) {
         self.webView = webView
+        self.fontSize = fontSize
+
         self.webView?.isOpaque = false
         self.webView?.backgroundColor = UIColor.clear
         self.webView?.isUserInteractionEnabled = false
@@ -24,7 +27,7 @@ class CellWebViewHelper: NSObject {
         self.webView?.scrollView.canCancelContentTouches = false
     }
 
-    fileprivate func getContentHeight(_ webView: UIWebView) -> Int {
+    private func getContentHeight(_ webView: UIWebView) -> Int {
         return Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
     }
 
@@ -35,24 +38,24 @@ class CellWebViewHelper: NSObject {
             .injectDefault()
             .inject(script: .mathJaxCompletion)
             .inject(script: .textColor(color: color))
+            .inject(script: .fontSize(fontSize: self.fontSize))
             .html
 
         webView?.delegate = self
         webView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
-    deinit {
-        print("deinit cell helper")
-    }
-
-    fileprivate func finishedMathJax() {
+    private func finishedMathJax() {
         mathJaxFinishedBlock?()
     }
-
 }
 
 extension CellWebViewHelper : UIWebViewDelegate {
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
+    func webView(
+        _ webView: UIWebView,
+        shouldStartLoadWith request: URLRequest,
+        navigationType: UIWebView.NavigationType
+    ) -> Bool {
         if request.url?.scheme == "mathjaxfinish" {
             finishedMathJax()
             return false

@@ -127,7 +127,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }), for: .connectionError)
 
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
-        self.hintHeightWebViewHelper = CellWebViewHelper(webView: hintWebView)
+        self.hintHeightWebViewHelper = CellWebViewHelper(
+            webView: hintWebView,
+            fontSize: StepFontSizeService().globalStepFontSize
+        )
         self.hintView.backgroundColor = UIColor.black
         self.hintWebView.isUserInteractionEnabled = true
         self.hintWebView.delegate = self

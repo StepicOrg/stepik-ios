@@ -169,6 +169,7 @@ class WebStepViewController: UIViewController {
         let processor = HTMLProcessor(html: htmlText)
         let html = processor
             .injectDefault()
+            .inject(script: .fontSize(fontSize: StepFontSizeService().globalStepFontSize))
             .html
         stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }

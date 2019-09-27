@@ -17,15 +17,22 @@ enum CardStepState: String {
 protocol CardStepView: class {
     var baseScrollView: UIScrollView { get }
 
-    func updateProblem(with htmlText: String)
+    func updateProblem(viewModel: CardStepViewModel)
     func updateQuiz(with controller: UIViewController)
 
     func scrollToQuizBottom()
 }
 
+struct CardStepViewModel {
+    let htmlText: String
+    let fontSize: FontSize
+}
+
 class CardStepPresenter {
     weak var view: CardStepView?
     weak var delegate: CardStepDelegate?
+
+    private let stepFontSizeService: StepFontSizeServiceProtocol
 
     var step: Step!
     var state: CardStepState = .unsolved
@@ -35,9 +42,14 @@ class CardStepPresenter {
 
     var quizViewController: QuizViewController?
 
-    init(view: CardStepView, step: Step) {
+    init(
+        view: CardStepView,
+        step: Step,
+        stepFontSizeService: StepFontSizeServiceProtocol
+    ) {
         self.step = step
         self.view = view
+        self.stepFontSizeService = stepFontSizeService
     }
 
     deinit {
@@ -46,7 +58,11 @@ class CardStepPresenter {
 
     func refreshStep() {
         // Set up problem
-        view?.updateProblem(with: step.block.text ?? "")
+        let viewModel = CardStepViewModel(
+            htmlText: step.block.text ?? "",
+            fontSize: self.stepFontSizeService.globalStepFontSize
+        )
+        self.view?.updateProblem(viewModel: viewModel)
 
         // Set up quiz view controller
         switch step.block.name {
