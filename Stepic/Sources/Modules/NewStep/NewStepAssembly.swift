@@ -14,7 +14,8 @@ final class NewStepAssembly: Assembly {
     func makeModule() -> UIViewController {
         let provider = NewStepProvider(
             stepsPersistenceService: StepsPersistenceService(),
-            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
+            stepFontSizeService: StepFontSizeService()
         )
         let presenter = NewStepPresenter()
         let interactor = NewStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)

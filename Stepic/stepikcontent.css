@@ -1,5 +1,10 @@
 :root {
     --textColor: #535366;
+    --body-font-size: 12pt;
+    --h1-font-size: 20pt;
+    --h2-font-size: 17pt;
+    --h3-font-size: 14pt;
+    --blockquote-font-size: 16px;
 }
 
 html {
@@ -7,14 +12,14 @@ html {
 }
 
 body {
-    font-size: 12pt;
+    font-size: var(--body-font-size);
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
     color: var(--textColor);
 }
 
 h1 {
-    font-size: 20pt;
+    font-size: var(--h1-font-size);
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
     text-align: center;
@@ -22,7 +27,7 @@ h1 {
 }
 
 h2 {
-    font-size: 17pt;
+    font-size: var(--h2-font-size);
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
     text-align: center;
@@ -30,10 +35,20 @@ h2 {
 }
 
 h3 {
-    font-size: 14pt;
+    font-size: var(--h3-font-size);
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6em;
     text-align: center;
+    color: var(--textColor);
+}
+
+blockquote {
+    font-style: italic;
+    font-size: var(--blockquote-font-size);
+    margin-left: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-left: 4px solid #ccc;
+    padding-left: 8px;
     color: var(--textColor);
 }
 
@@ -45,32 +60,22 @@ iframe {
     max-width: 100%;
 }
 
-blockquote {
-    font-style: italic;
-    font-size: 16px;
-    margin-left: 32px;
-    font-family: Arial, Helvetica, sans-serif;
-    border-left: 4px solid #CCC;
-    padding-left: 8px;
-    color: var(--textColor);
-}
-
 body table {
     border-collapse: collapse;
     border-spacing: 0;
     margin: 0;
     padding: 0;
     background-color: #fff;
-    border: 1px solid #ddd
+    border: 1px solid #ddd;
 }
 
 body table tr:nth-of-type(even) {
-    background-color: #f9f9f9
+    background-color: #f9f9f9;
 }
 
 body table tr td {
-    padding: .5625em .625em;
+    padding: 0.5625em 0.625em;
     line-height: inherit;
     color: inherit;
-    font-size: inherit
+    font-size: inherit;
 }

@@ -101,3 +101,16 @@ final class CustomAudioControlInjection: ContentProcessingInjection {
         return code.contains("<audio")
     }
 }
+
+/// Injects script that assigns font sizes.
+final class FontSizeInjection: ContentProcessingInjection {
+    private let fontSize: FontSize
+
+    init(fontSize: FontSize) {
+        self.fontSize = fontSize
+    }
+
+    var headScript: String {
+        return Scripts.fontSize(self.fontSize)
+    }
+}

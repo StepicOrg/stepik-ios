@@ -24,6 +24,7 @@ struct Scripts {
     private static let textColorScriptKey = "textColorScript"
     private static let highlightJSKey = "highlightJS"
     private static let webkitCalloutDisableKey = "WebkitTouchCalloutDisable"
+    private static let fontSizeScriptKey = "FontSizeScript"
 
     static var localJQuery: String {
         return loadScriptWithKey(localJQueryScriptKey)
@@ -63,17 +64,28 @@ struct Scripts {
         return "\(loadScriptWithKey(wysiwygStylesKey))\(loadScriptWithKey(commonStylesKey))"
     }
 
-    static func textColor(color: UIColor) -> String {
-        let script = loadScriptWithKey(textColorScriptKey)
-        return script.replacingOccurrences(of: "######", with: "#\(color.hexString)")
-    }
-
     static var highlightJS: String {
         return "\(loadScriptWithKey(highlightJSKey))"
     }
 
     static var webkitCalloutDisable: String {
         return "\(loadScriptWithKey(webkitCalloutDisableKey))"
+    }
+
+    static func textColor(color: UIColor) -> String {
+        let script = self.loadScriptWithKey(self.textColorScriptKey)
+        return script.replacingOccurrences(of: "######", with: "#\(color.hexString)")
+    }
+
+    /// Returns script that replaces font size variables with the provided ones at `stepikcontent.css`.
+    static func fontSize(_ fontSize: FontSize) -> String {
+        let script = self.loadScriptWithKey(self.fontSizeScriptKey)
+        return script
+            .replacingOccurrences(of: "##--body-font-size##", with: fontSize.body)
+            .replacingOccurrences(of: "##--h1-font-size##", with: fontSize.h1)
+            .replacingOccurrences(of: "##--h2-font-size##", with: fontSize.h2)
+            .replacingOccurrences(of: "##--h3-font-size##", with: fontSize.h3)
+            .replacingOccurrences(of: "##--blockquote-font-size##", with: fontSize.blockquote)
     }
 
     private static func loadScriptWithKey(_ key: String) -> String {

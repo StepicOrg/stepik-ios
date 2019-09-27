@@ -520,6 +520,8 @@
 		2C31A74022E7B0EB00D2A41E /* CodeToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31A73F22E7B0EB00D2A41E /* CodeToolbarView.swift */; };
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C331C5721734764007B0D01 /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
+		2C3DAB8D233D71B100453B1C /* StepFontSizeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeService.swift */; };
+		2C3DAB91233D735E00453B1C /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* FontSize.swift */; };
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
@@ -1652,6 +1654,8 @@
 		2C35C4D21F4DA46A002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/adjectives_m.plist; sourceTree = "<group>"; };
 		2C35C4D31F4DA46E002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_f.plist; sourceTree = "<group>"; };
 		2C35C4D41F4DA471002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_m.plist; sourceTree = "<group>"; };
+		2C3DAB8C233D71B100453B1C /* StepFontSizeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFontSizeService.swift; sourceTree = "<group>"; };
+		2C3DAB90233D735D00453B1C /* FontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
@@ -4683,6 +4687,7 @@
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
+				2C3DAB90233D735D00453B1C /* FontSize.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
 			);
@@ -5466,6 +5471,7 @@
 				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
+				2C3DAB8C233D71B100453B1C /* StepFontSizeService.swift */,
 				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
 				62E986D1988A3445F3416404 /* Managers */,
@@ -6568,6 +6574,7 @@
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
 				080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */,
 				2C0473FF22E5BC20003050B7 /* CodeDetailsView.swift in Sources */,
+				2C3DAB91233D735E00453B1C /* FontSize.swift in Sources */,
 				08687BAE1BACB43700F5BDE1 /* RefreshTableViewCell.swift in Sources */,
 				082348391ECA264100D2CB40 /* ShareableController.swift in Sources */,
 				08C0A4341BF1276C0010F049 /* Messages.swift in Sources */,
@@ -7164,6 +7171,7 @@
 				67CA89D9CC2C8E98875F5FDF /* NewFreeAnswerQuizPresenter.swift in Sources */,
 				47AA3FAF72E7AD067ABF2804 /* NewFreeAnswerQuizDataFlow.swift in Sources */,
 				92E876582D263061F44316EB /* NewFreeAnswerQuizView.swift in Sources */,
+				2C3DAB8D233D71B100453B1C /* StepFontSizeService.swift in Sources */,
 				EBF9068859AF1AFB10EE4364 /* NewChoiceQuizAssembly.swift in Sources */,
 				3317FC9AECA8FF54902BF61D /* NewChoiceQuizViewController.swift in Sources */,
 				0FC4DF01DB2BF054237EBD04 /* NewChoiceQuizInteractor.swift in Sources */,
