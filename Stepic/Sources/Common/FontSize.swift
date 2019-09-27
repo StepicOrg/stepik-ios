@@ -1,9 +1,20 @@
 import Foundation
 
-enum FontSize: Int {
+enum FontSize: Int, CaseIterable {
     case small
     case medium
     case large
+
+    var title: String {
+        switch self {
+        case .small:
+            return NSLocalizedString("SettingsStepFontSizeItemSmall", comment: "")
+        case .medium:
+            return NSLocalizedString("SettingsStepFontSizeItemMedium", comment: "")
+        case .large:
+            return NSLocalizedString("SettingsStepFontSizeItemLarge", comment: "")
+        }
+    }
 
     // swiftlint:disable:next identifier_name
     var h1: String {

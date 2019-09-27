@@ -550,8 +550,12 @@ CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
 
 SettingsBlockTitleAppearance = "Внешний вид";
+/* Font size settings */
 SettingsStepFontSizeTitle = "Размер текста";
 SettingsStepFontSizeSubtitle = "Изменения размера текста влияют только на текст шага.";
+SettingsStepFontSizeItemSmall = "Маленький";
+SettingsStepFontSizeItemMedium = "Средний";
+SettingsStepFontSizeItemLarge = "Большой";
 
 /* Achievements */
 Achievements = "Достижения";

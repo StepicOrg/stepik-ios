@@ -2,14 +2,15 @@ import Foundation
 import PromiseKit
 
 protocol SettingsStepFontSizeInteractorProtocol {
-    func doSomeAction(request: SettingsStepFontSize.SomeAction.Request)
+    func doFontSizesListPresentation(request: SettingsStepFontSize.FontSizesLoad.Request)
+    func doFontSizeSelection(request: SettingsStepFontSize.FontSizeSelection.Request)
 }
 
 final class SettingsStepFontSizeInteractor: SettingsStepFontSizeInteractorProtocol {
-    weak var moduleOutput: SettingsStepFontSizeOutputProtocol?
-
     private let presenter: SettingsStepFontSizePresenterProtocol
     private let provider: SettingsStepFontSizeProviderProtocol
+
+    private var currentAvailableFontSizes: [(UniqueIdentifierType, FontSize)] = []
 
     init(
         presenter: SettingsStepFontSizePresenterProtocol,
@@ -19,11 +20,43 @@ final class SettingsStepFontSizeInteractor: SettingsStepFontSizeInteractorProtoc
         self.provider = provider
     }
 
-    func doSomeAction(request: SettingsStepFontSize.SomeAction.Request) { }
+    func doFontSizesListPresentation(request: SettingsStepFontSize.FontSizesLoad.Request) {
+        when(
+            fulfilled: self.provider.fetchAvailableFontSizes(),
+            self.provider.fetchCurrentFontSize()
+        ).done { (availableFontSizes, currentFontSize) in
+            let fontSizes = availableFontSizes.map { fontSize -> (UniqueIdentifierType, FontSize) in
+                (fontSize.title, fontSize)
+            }
 
-    enum Error: Swift.Error {
-        case something
+            self.currentAvailableFontSizes = fontSizes
+            self.presenter.presentFontSizes(
+                response: SettingsStepFontSize.FontSizesLoad.Response(
+                    result: SettingsStepFontSize.FontSizeInfo(
+                        availableFontSizes: fontSizes,
+                        activeFontSize: currentFontSize
+                    )
+                )
+            )
+        }.catch { _ in
+            fatalError("Unexpected error while extracting info about languages")
+        }
+    }
+
+    func doFontSizeSelection(request: SettingsStepFontSize.FontSizeSelection.Request) {
+        guard let selectedFontSize = self.currentAvailableFontSizes
+            .first(where: { $0.0 == request.viewModelUniqueIdentifier })?.1 else {
+            fatalError("Request contains invalid data")
+        }
+
+        self.provider.setGlobalFontSize(selectedFontSize)
+        self.presenter.presentFontSizeChange(
+            response: SettingsStepFontSize.FontSizeSelection.Response(
+                result: SettingsStepFontSize.FontSizeInfo(
+                    availableFontSizes: self.currentAvailableFontSizes,
+                    activeFontSize: selectedFontSize
+                )
+            )
+        )
     }
 }
-
-extension SettingsStepFontSizeInteractor: SettingsStepFontSizeInputProtocol { }
