@@ -9,18 +9,17 @@
 import Foundation
 
 class QuizPresenter {
-
     weak var delegate: QuizControllerDelegate?
     weak var dataSource: QuizControllerDataSource?
     weak var view: QuizView?
 
     var step: Step
-    var submissionsAPI: SubmissionsAPI
-    var attemptsAPI: AttemptsAPI
-    var userActivitiesAPI: UserActivitiesAPI
     var alwaysCreateNewAttemptOnRefresh: Bool
-    
-    var streaksNotificationSuggestionManager: NotificationSuggestionManager?
+
+    private let submissionsAPI: SubmissionsAPI
+    private let attemptsAPI: AttemptsAPI
+    private let userActivitiesAPI: UserActivitiesAPI
+    private var streaksNotificationSuggestionManager: NotificationSuggestionManager?
 
     var state: QuizState = .nothing {
         didSet {
@@ -32,7 +31,15 @@ class QuizPresenter {
         return "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonId)/step/\(step.position)?from_mobile_app=true"
     }
 
-    init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI) {
+    init(
+        view: QuizView,
+        step: Step,
+        dataSource: QuizControllerDataSource,
+        alwaysCreateNewAttemptOnRefresh: Bool,
+        submissionsAPI: SubmissionsAPI,
+        attemptsAPI: AttemptsAPI,
+        userActivitiesAPI: UserActivitiesAPI
+    ) {
         self.view = view
         self.step = step
         self.dataSource = dataSource
@@ -42,8 +49,25 @@ class QuizPresenter {
         self.alwaysCreateNewAttemptOnRefresh = alwaysCreateNewAttemptOnRefresh
     }
 
-    convenience init(view: QuizView, step: Step, dataSource: QuizControllerDataSource, alwaysCreateNewAttemptOnRefresh: Bool, submissionsAPI: SubmissionsAPI, attemptsAPI: AttemptsAPI, userActivitiesAPI: UserActivitiesAPI, streaksNotificationSuggestionManager: NotificationSuggestionManager) {
-        self.init(view: view, step: step, dataSource: dataSource, alwaysCreateNewAttemptOnRefresh: alwaysCreateNewAttemptOnRefresh, submissionsAPI: submissionsAPI, attemptsAPI: attemptsAPI, userActivitiesAPI: userActivitiesAPI)
+    convenience init(
+        view: QuizView,
+        step: Step,
+        dataSource: QuizControllerDataSource,
+        alwaysCreateNewAttemptOnRefresh: Bool,
+        submissionsAPI: SubmissionsAPI,
+        attemptsAPI: AttemptsAPI,
+        userActivitiesAPI: UserActivitiesAPI,
+        streaksNotificationSuggestionManager: NotificationSuggestionManager
+    ) {
+        self.init(
+            view: view,
+            step: step,
+            dataSource: dataSource,
+            alwaysCreateNewAttemptOnRefresh: alwaysCreateNewAttemptOnRefresh,
+            submissionsAPI: submissionsAPI,
+            attemptsAPI: attemptsAPI,
+            userActivitiesAPI: userActivitiesAPI
+        )
         self.streaksNotificationSuggestionManager = streaksNotificationSuggestionManager
     }
 
@@ -115,7 +139,7 @@ class QuizPresenter {
     var attempt: Attempt? {
         didSet {
             guard let attempt = attempt,
-                let dataset = attempt.dataset else {
+                  let dataset = attempt.dataset else {
                 print("Attempt should never be nil")
                 return
             }
@@ -259,9 +283,9 @@ class QuizPresenter {
                 [weak self]
                 count in
                 self?.submissionsCount = count
-                }, error: {
-                    _ in
-                    print("failed to get submissions count")
+            }, error: {
+                _ in
+                print("failed to get submissions count")
             })
         }
     }
@@ -287,10 +311,10 @@ class QuizPresenter {
                 success(count)
                 return
             }
-            }, error: {
-                errorMsg in
-                error(errorMsg)
-                return
+        }, error: {
+            errorMsg in
+            error(errorMsg)
+            return
         })
     }
 
@@ -366,10 +390,10 @@ class QuizPresenter {
         createNewAttempt(completion: {
             [weak self] in
             self?.view?.showLoading(visible: false)
-            }, error: {
-                [weak self] in
-                self?.view?.showLoading(visible: false)
-                self?.view?.showConnectionError()
+        }, error: {
+            [weak self] in
+            self?.view?.showLoading(visible: false)
+            self?.view?.showConnectionError()
         })
     }
 
@@ -453,7 +477,7 @@ class QuizPresenter {
 
     func submitPressed() {
         switch state {
-        case .attempt :
+        case .attempt:
             if submissionLimit?.canSubmit ?? true {
                 submit()
             } else {

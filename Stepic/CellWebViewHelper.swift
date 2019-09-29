@@ -10,10 +10,9 @@ import Foundation
 
 final class CellWebViewHelper: NSObject {
     private weak var webView: UIWebView?
-
     private let fontSize: FontSize
 
-    var mathJaxFinishedBlock : (() -> Void)?
+    var mathJaxFinishedBlock: (() -> Void)?
 
     init(webView: UIWebView, fontSize: FontSize) {
         self.webView = webView
@@ -50,7 +49,7 @@ final class CellWebViewHelper: NSObject {
     }
 }
 
-extension CellWebViewHelper : UIWebViewDelegate {
+extension CellWebViewHelper: UIWebViewDelegate {
     func webView(
         _ webView: UIWebView,
         shouldStartLoadWith request: URLRequest,

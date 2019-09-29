@@ -58,8 +58,8 @@ class WebStepViewController: UIViewController {
     var lessonSlug: String!
 
     var startStepId: Int!
-    var startStepBlock : (() -> Void)!
-    var shouldSendViewsBlock : (() -> Bool)!
+    var startStepBlock: (() -> Void)!
+    var shouldSendViewsBlock: (() -> Bool)!
 
     var stepText = ""
 
@@ -92,7 +92,7 @@ class WebStepViewController: UIViewController {
     @objc func sharePressed(_ item: UIBarButtonItem) {
         //        AnalyticsReporter.reportEvent(AnalyticsEvents.Syllabus.shared, parameters: nil)
         guard let stepid = stepId,
-            let slug = lessonSlug else {
+              let slug = lessonSlug else {
             return
         }
 //        let slug = lessonSlug!
@@ -293,7 +293,7 @@ class WebStepViewController: UIViewController {
                         print("initializing post views task")
                         print("user id \(String(describing: AuthInfo.shared.userId)) , token \(String(describing: AuthInfo.shared.token))")
                         if let userId = AuthInfo.shared.userId,
-                            let token = AuthInfo.shared.token {
+                           let token = AuthInfo.shared.token {
 
                             let task = PostViewsExecutableTask(stepId: stepid, assignmentId: self?.assignment?.id, userId: userId)
                             ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(task)
@@ -314,8 +314,8 @@ class WebStepViewController: UIViewController {
             })
             //Update LastStep locally from the context
             if let course = LastStepGlobalContext.context.course,
-                let unitId = LastStepGlobalContext.context.unitId,
-                let stepId = LastStepGlobalContext.context.stepId {
+               let unitId = LastStepGlobalContext.context.unitId,
+               let stepId = LastStepGlobalContext.context.stepId {
 
                 if let lastStep = course.lastStep {
                     lastStep.update(unitId: unitId, stepId: stepId)
@@ -413,7 +413,7 @@ class WebStepViewController: UIViewController {
     var lastUpdatingQuizHeight: CGFloat?
 }
 
-extension WebStepViewController : UIWebViewDelegate {
+extension WebStepViewController: UIWebViewDelegate {
 
     func openInBrowserAlert(_ url: URL) {
         let alert = UIAlertController(title: NSLocalizedString("Link", comment: ""), message: NSLocalizedString("OpenInBrowser", comment: ""), preferredStyle: .alert)

@@ -21,7 +21,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var hintTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var hintLeadingConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet weak var statusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var statusLabel: StepikLabel!
     @IBOutlet weak var statusImageView: UIImageView!
@@ -47,19 +47,20 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }
     }
 
-    var submissionPressedBlock : (() -> Void)?
+    var submissionPressedBlock: (() -> Void)?
 
     var displayingHint: String?
 
     private let submitTitle: String = NSLocalizedString("Submit", comment: "")
     private let tryAgainTitle: String = NSLocalizedString("TryAgain", comment: "")
     var correctTitle: String {
-        return  NSLocalizedString("Correct", comment: "")
+        return NSLocalizedString("Correct", comment: "")
     }
     private let wrongTitle: String = NSLocalizedString("Wrong", comment: "")
     private let peerReviewText: String = NSLocalizedString("PeerReviewText", comment: "")
 
     private var activityView: UIView?
+
     func initActivityView(color: UIColor = .mainDark) -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
@@ -148,7 +149,16 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
 
-        self.presenter = QuizPresenter(view: self, step: step, dataSource: self, alwaysCreateNewAttemptOnRefresh: needNewAttempt, submissionsAPI: ApiDataDownloader.submissions, attemptsAPI: ApiDataDownloader.attempts, userActivitiesAPI: ApiDataDownloader.userActivities, streaksNotificationSuggestionManager: NotificationSuggestionManager())
+        self.presenter = QuizPresenter(
+            view: self,
+            step: step,
+            dataSource: self,
+            alwaysCreateNewAttemptOnRefresh: needNewAttempt,
+            submissionsAPI: ApiDataDownloader.submissions,
+            attemptsAPI: ApiDataDownloader.attempts,
+            userActivitiesAPI: ApiDataDownloader.userActivities,
+            streaksNotificationSuggestionManager: NotificationSuggestionManager()
+        )
         presenter?.delegate = self.delegate
         presenter?.refreshAttempt()
     }
@@ -270,7 +280,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: encodedUrl)
             else {
-                return
+            return
         }
 
         WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
@@ -478,7 +488,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 }
 
-extension QuizViewController : UIWebViewDelegate {
+extension QuizViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         if let url = request.url {
             if url.isFileURL {
