@@ -10,8 +10,11 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     weak var viewController: NewStepViewControllerProtocol?
 
     func presentStep(response: NewStep.StepLoad.Response) {
-        if case .success(let step) = response.result {
-            self.makeViewModel(step: step).done(on: DispatchQueue.global(qos: .userInitiated)) { viewModel in
+        if case .success(let data) = response.result {
+            self.makeViewModel(
+                step: data.step,
+                fontSize: data.fontSize
+            ).done(on: .global(qos: .userInitiated)) { viewModel in
                 DispatchQueue.main.async { [weak self] in
                     self?.viewController?.displayStep(
                         viewModel: NewStep.StepLoad.ViewModel(state: .result(data: viewModel))
@@ -39,7 +42,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(step: Step) -> Guarantee<NewStepViewModel> {
+    private func makeViewModel(step: Step, fontSize: FontSize) -> Guarantee<NewStepViewModel> {
         return Guarantee { seal in
             let discussionsLabelTitle: String = {
                 if let discussionsCount = step.discussionsCount, discussionsCount > 0 {
@@ -63,10 +66,13 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                     }
                     return .video(viewModel: nil)
                 default:
+                    var injections = ContentProcessor.defaultInjections
+                    injections.append(FontSizeInjection(fontSize: fontSize))
+
                     let contentProcessor = ContentProcessor(
                         content: step.block.text ?? "",
                         rules: ContentProcessor.defaultRules,
-                        injections: ContentProcessor.defaultInjections
+                        injections: injections
                     )
                     let content = contentProcessor.processContent()
 

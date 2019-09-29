@@ -3,18 +3,22 @@ import PromiseKit
 
 protocol NewStepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
+    func fetchCurrentFontSize() -> Guarantee<FontSize>
 }
 
 final class NewStepProvider: NewStepProviderProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
+    private let stepFontSizeService: StepFontSizeServiceProtocol
 
     init(
         stepsPersistenceService: StepsPersistenceServiceProtocol,
-        stepsNetworkService: StepsNetworkServiceProtocol
+        stepsNetworkService: StepsNetworkServiceProtocol,
+        stepFontSizeService: StepFontSizeServiceProtocol
     ) {
         self.stepsPersistenceService = stepsPersistenceService
         self.stepsNetworkService = stepsNetworkService
+        self.stepFontSizeService = stepFontSizeService
     }
 
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>> {
@@ -38,6 +42,12 @@ final class NewStepProvider: NewStepProviderProtocol {
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
+        }
+    }
+
+    func fetchCurrentFontSize() -> Guarantee<FontSize> {
+        return Guarantee { seal in
+            seal(self.stepFontSizeService.globalStepFontSize)
         }
     }
 

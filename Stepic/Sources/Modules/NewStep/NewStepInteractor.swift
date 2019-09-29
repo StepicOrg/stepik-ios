@@ -33,7 +33,11 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     }
 
     func doStepLoad(request: NewStep.StepLoad.Request) {
-        self.provider.fetchStep(id: self.stepID).done(on: DispatchQueue.global(qos: .userInitiated)) { result in
+        firstly {
+            self.provider.fetchStep(id: self.stepID)
+        }.then { fetchResult in
+                self.provider.fetchCurrentFontSize().map { ($0, fetchResult) }
+        }.done(on: DispatchQueue.global(qos: .userInitiated)) { fontSize, result in
             guard let step = result.value else {
                 throw Error.fetchFailed
             }
@@ -41,7 +45,8 @@ final class NewStepInteractor: NewStepInteractorProtocol {
             self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
-                self?.presenter.presentStep(response: .init(result: .success(step)))
+                let data = NewStep.StepLoad.Data(step: step, fontSize: fontSize)
+                self?.presenter.presentStep(response: .init(result: .success(data)))
             }
 
             if !self.didAnalyticsSend {

@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ContentLanguagePreferenceTableViewCell: UITableViewCell {
-
+final class ContentLanguagePreferenceTableViewCell: UITableViewCell {
     @IBOutlet weak var languageLabel: StepikLabel!
 
-    func setup(contentLanguage: ContentLanguage) {
-        self.languageLabel.text = contentLanguage.fullString
+    var title: String? {
+        didSet {
+            self.languageLabel.text = self.title
+        }
     }
 }

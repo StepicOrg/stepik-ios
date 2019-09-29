@@ -10,8 +10,7 @@ import UIKit
 import BEMCheckBox
 import SnapKit
 
-class ChoiceQuizTableViewCell: UITableViewCell {
-
+final class ChoiceQuizTableViewCell: UITableViewCell {
     @IBOutlet weak var textContainerView: UIView!
     @IBOutlet weak var checkBox: BEMCheckBox!
 
@@ -20,7 +19,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
 
     var webViewHelper: CellWebViewHelper?
 
-    func initLabel() {
+    private func initLabel() {
         guard optionLabel == nil else { return }
         optionLabel = StepikLabel()
         guard let optionLabel = optionLabel else { return }
@@ -39,13 +38,13 @@ class ChoiceQuizTableViewCell: UITableViewCell {
         optionLabel.isHidden = true
     }
 
-    func initWebView() {
+    private func initWebView() {
         guard optionWebView == nil else { return }
         optionWebView = FullHeightWebView()
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
         optionWebView.snp.makeConstraints { $0.edges.equalTo(textContainerView) }
-        webViewHelper = CellWebViewHelper(webView: optionWebView)
+        webViewHelper = CellWebViewHelper(webView: optionWebView, fontSize: StepFontSizeService().globalStepFontSize)
         optionWebView.isHidden = true
     }
 
@@ -75,8 +74,7 @@ class ChoiceQuizTableViewCell: UITableViewCell {
 }
 
 extension ChoiceQuizTableViewCell {
-
-    //All optimization logics is now encapsulated here
+    //All optimization logic is now encapsulated here
     func setHTMLText(_ text: String, width: CGFloat, finishedBlock: @escaping (CGFloat) -> Void) {
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
             initWebView()

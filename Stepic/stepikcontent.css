@@ -1,59 +1,63 @@
 :root {
-	--textColor : #535366;
+    --textColor: #535366;
+    --body-font-size: 12pt;
+    --h1-font-size: 20pt;
+    --h2-font-size: 17pt;
+    --h3-font-size: 14pt;
+    --blockquote-font-size: 16px;
 }
 
 html {
-	-webkit-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-	font-size: 12pt; 
-	font-family:Arial, Helvetica, sans-serif; 
-	line-height:1.6em; 
-	color: var(--textColor);
+    font-size: var(--body-font-size);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    color: var(--textColor);
 }
 
 h1 {
-	font-size: 20pt; 
-	font-family:Arial, Helvetica, sans-serif; 
-	line-height:1.6em; 
-	text-align: center; 
-	color: var(--textColor);
+    font-size: var(--h1-font-size);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    text-align: center;
+    color: var(--textColor);
 }
 
 h2 {
-	font-size: 17pt; 
-	font-family:Arial, Helvetica, sans-serif; 
-	line-height:1.6em; 
-	text-align: center; 
-	color: var(--textColor);
+    font-size: var(--h2-font-size);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    text-align: center;
+    color: var(--textColor);
 }
 
 h3 {
-	font-size: 14pt; 
-	font-family:Arial, Helvetica, sans-serif; 
-	line-height:1.6em; 
-	text-align: center; 
-	color: var(--textColor);
+    font-size: var(--h3-font-size);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6em;
+    text-align: center;
+    color: var(--textColor);
 }
 
-img { 
-	max-width: 100%; 
+blockquote {
+    font-style: italic;
+    font-size: var(--blockquote-font-size);
+    margin-left: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-left: 4px solid #ccc;
+    padding-left: 8px;
+    color: var(--textColor);
 }
 
-iframe { 
-	max-width: 100%; 
+img {
+    max-width: 100%;
 }
 
-blockquote
-{
-  	font-style: italic;
-  	font-size: 16px;
-  	margin-left: 32px;
-	font-family:Arial, Helvetica, sans-serif; 
- 	border-left: 4px solid #CCC;
-  	padding-left: 8px;
-  	color: var(--textColor);
+iframe {
+    max-width: 100%;
 }
 
 body table {
@@ -62,16 +66,16 @@ body table {
     margin: 0;
     padding: 0;
     background-color: #fff;
-    border: 1px solid #ddd
+    border: 1px solid #ddd;
 }
 
 body table tr:nth-of-type(even) {
-    background-color: #f9f9f9
+    background-color: #f9f9f9;
 }
 
 body table tr td {
-    padding: .5625em .625em;
+    padding: 0.5625em 0.625em;
     line-height: inherit;
     color: inherit;
-    font-size: inherit
+    font-size: inherit;
 }

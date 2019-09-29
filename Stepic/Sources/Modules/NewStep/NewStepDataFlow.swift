@@ -5,8 +5,13 @@ enum NewStep {
     enum StepLoad {
         struct Request { }
 
+        struct Data {
+            let step: Step
+            let fontSize: FontSize
+        }
+
         struct Response {
-            let result: Result<Step>
+            let result: Result<Data>
         }
 
         struct ViewModel {

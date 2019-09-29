@@ -73,6 +73,7 @@ class BaseCardsStepsViewController: CardsStepsViewController {
                     presenter: NotificationsRequestAlertPresenter(context: .courseSubscription),
                     analytics: .init(source: .courseSubscription)
                 ),
+                stepFontSizeService: StepFontSizeService(),
                 course: course,
                 view: self
             )

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
+final class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
     var presenter: ProfilePresenter?
 
@@ -69,12 +69,25 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             self?.presenter?.refresh(shouldReload: true)
         }), for: .connectionError)
 
-        settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon-settings-profile"), style: .plain, target: self, action: #selector(ProfileViewController.settingsButtonPressed))
-        shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(ProfileViewController.shareButtonPressed))
-        profileEditButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(ProfileViewController.profileEditButtonPressed))
+        self.settingsButton = UIBarButtonItem(
+            image: UIImage(named: "icon-settings-profile").require(),
+            style: .plain,
+            target: self,
+            action: #selector(self.settingsButtonClicked)
+        )
+        self.shareButton = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(ProfileViewController.shareButtonPressed)
+        )
+        self.profileEditButton = UIBarButtonItem(
+            barButtonSystemItem: .compose,
+            target: self,
+            action: #selector(ProfileViewController.profileEditButtonPressed)
+        )
 
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
+            self.tableView.contentInsetAdjustmentBehavior = .never
         }
 
         self.title = NSLocalizedString("Profile", comment: "")
@@ -201,17 +214,21 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
             coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
         )
-        presenter = ProfilePresenter(userSeed: seed, view: self, userActivitiesAPI: UserActivitiesAPI(), usersAPI: UsersAPI(), profilesAPI: ProfilesAPI(), dataBackUpdateService: dataBackUpdateService)
+        presenter = ProfilePresenter(
+            userSeed: seed,
+            view: self,
+            userActivitiesAPI: UserActivitiesAPI(),
+            usersAPI: UsersAPI(),
+            profilesAPI: ProfilesAPI(),
+            dataBackUpdateService: dataBackUpdateService
+        )
         presenter?.refresh(shouldReload: true)
     }
 
-    @objc func settingsButtonPressed() {
-        // Bad route injection :(
-        if let vc = ControllerHelper.instantiateViewController(identifier: "SettingsViewController", storyboardName:  "Profile") as? SettingsViewController {
-            let presenter = SettingsPresenter(view: vc)
-            vc.presenter = presenter
-            navigationController?.pushViewController(vc, animated: true)
-        }
+    @objc
+    private func settingsButtonClicked() {
+        let assembly = SettingsViewControllerLegacyAssembly()
+        self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
     }
 
     @objc func profileEditButtonPressed() {
@@ -345,7 +362,11 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     private func buildInfoExpandableBlock() -> ContentExpandableMenuBlock? {
         profileDescriptionView = profileDescriptionView ?? ProfileDescriptionContentView.fromNib()
-        let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.description.rawValue, title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))", contentView: profileDescriptionView)
+        let block = ContentExpandableMenuBlock(
+            id: ProfileMenuBlock.description.rawValue,
+            title: "\(NSLocalizedString("ShortBio", comment: "")) & \(NSLocalizedString("Info", comment: ""))",
+            contentView: self.profileDescriptionView
+        )
 
         block.onExpanded = { [weak self, weak block] isExpanded in
             guard let strongBlock = block else {
@@ -365,8 +386,11 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
 
     private func buildPinsMapExpandableBlock() -> ContentExpandableMenuBlock? {
         pinsMapContentView = pinsMapContentView ?? PinsMapBlockContentView()
-        let block = ContentExpandableMenuBlock(id: ProfileMenuBlock.pinsMap.rawValue, title: NSLocalizedString("Activity", comment: ""), contentView: pinsMapContentView)
-        //block.isExpanded = true
+        let block = ContentExpandableMenuBlock(
+            id: ProfileMenuBlock.pinsMap.rawValue,
+            title: NSLocalizedString("Activity", comment: ""),
+            contentView: self.pinsMapContentView
+        )
 
         block.onExpanded = { [weak block] isExpanded in
             block?.isExpanded = isExpanded
@@ -378,20 +402,35 @@ class ProfileViewController: MenuViewController, ProfileView, ControllerWithStep
         profileAchievementsView = profileAchievementsView ?? ProfileAchievementsContentView.fromNib()
         let onButtonClick = { [weak self] in
             if let userId = self?.otherUserId ?? AuthInfo.shared.userId,
-               let vc = ControllerHelper.instantiateViewController(identifier: "AchievementsListViewController", storyboardName: "Profile") as? AchievementsListViewController {
+               let viewController = ControllerHelper.instantiateViewController(
+                   identifier: "AchievementsListViewController",
+                   storyboardName: "Profile"
+               ) as? AchievementsListViewController {
                 // FIXME: API injection :((
-                let retriever = AchievementsRetriever(userId: userId, achievementsAPI: AchievementsAPI(), achievementProgressesAPI: AchievementProgressesAPI())
-                let presenter = AchievementsListPresenter(userId: userId, view: vc, achievementsAPI: AchievementsAPI(), achievementsRetriever: retriever)
-                vc.presenter = presenter
-                self?.navigationController?.pushViewController(vc, animated: true)
+                let retriever = AchievementsRetriever(
+                    userId: userId,
+                    achievementsAPI: AchievementsAPI(),
+                    achievementProgressesAPI: AchievementProgressesAPI()
+                )
+                let presenter = AchievementsListPresenter(
+                    userId: userId,
+                    view: viewController,
+                    achievementsAPI: AchievementsAPI(),
+                    achievementsRetriever: retriever
+                )
+                viewController.presenter = presenter
+                self?.navigationController?.pushViewController(viewController, animated: true)
             }
         }
 
-        let block = ContentMenuBlock(id: ProfileMenuBlock.achievements.rawValue,
-                                     title: NSLocalizedString("Achievements", comment: ""),
-                                     contentView: profileAchievementsView,
-                                     buttonTitle: NSLocalizedString("ShowAll", comment: ""),
-                                     onButtonClick: onButtonClick)
+        let block = ContentMenuBlock(
+            id: ProfileMenuBlock.achievements.rawValue,
+            title: NSLocalizedString("Achievements", comment: ""),
+            contentView: profileAchievementsView,
+            buttonTitle: NSLocalizedString("ShowAll", comment: ""),
+            onButtonClick: onButtonClick
+        )
+
         return block
     }
 }

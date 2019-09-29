@@ -16,7 +16,7 @@ final class CodeEditorSettingsLegacyAssembly: Assembly {
     init(previewLanguage: CodeLanguage = .python) {
         self.previewLanguage = previewLanguage
     }
-    
+
     func makeModule() -> UIViewController {
         guard let viewController = ControllerHelper.instantiateViewController(
             identifier: "CodeEditorSettings",
@@ -45,6 +45,11 @@ final class CodeEditorSettingsViewController: MenuViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Set default title if not provided.
+        if self.navigationItem.title == nil && self.title == nil {
+            self.title = NSLocalizedString("CodeEditorSettingsTitle", comment: "")
+        }
 
         self.edgesForExtendedLayout = []
         self.tableView.tableHeaderView = self.previewView
@@ -149,7 +154,7 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
 
 extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
-        let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName }))
+        let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName })).sorted()
 
         guard let currentLanguageIndex = availableLanguages.index(of: self.previewLanguage.humanReadableName) else {
             return

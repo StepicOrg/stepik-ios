@@ -32,6 +32,7 @@ class HTMLProcessor {
         case highlightJS
         case customHead(head: String)
         case customBody(body: String)
+        case fontSize(fontSize: FontSize)
 
         var headInjectionString: String {
             switch self {
@@ -53,6 +54,8 @@ class HTMLProcessor {
                 return Scripts.highlightJS
             case .customHead(let customHead):
                 return customHead
+            case .fontSize(fontSize: let fontSize):
+                return Scripts.fontSize(fontSize)
             default:
                 return ""
             }

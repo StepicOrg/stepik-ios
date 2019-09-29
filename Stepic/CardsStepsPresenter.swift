@@ -59,18 +59,19 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     weak var view: CardsStepsView?
     var currentStepPresenter: CardStepPresenter?
 
-    internal var stepsAPI: StepsAPI
-    internal var lessonsAPI: LessonsAPI
-    internal var recommendationsAPI: RecommendationsAPI
-    internal var unitsAPI: UnitsAPI
-    internal var viewsAPI: ViewsAPI
-    internal var ratingManager: AdaptiveRatingManager
-    internal var statsManager: AdaptiveStatsManager
-    internal var storageManager: AdaptiveStorageManager
-    internal var ratingsAPI: AdaptiveRatingsAPI
-    internal var lastViewedUpdater: LocalProgressLastViewedUpdater
-    internal var notificationSuggestionManager: NotificationSuggestionManager
-    internal var notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    private let stepsAPI: StepsAPI
+    private let lessonsAPI: LessonsAPI
+    private let recommendationsAPI: RecommendationsAPI
+    private let unitsAPI: UnitsAPI
+    private let viewsAPI: ViewsAPI
+    private let ratingManager: AdaptiveRatingManager
+    private let statsManager: AdaptiveStatsManager
+    private let storageManager: AdaptiveStorageManager
+    private let ratingsAPI: AdaptiveRatingsAPI
+    private let lastViewedUpdater: LocalProgressLastViewedUpdater
+    private let notificationSuggestionManager: NotificationSuggestionManager
+    private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    private let stepFontSizeService: StepFontSizeServiceProtocol
 
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
@@ -131,6 +132,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         lastViewedUpdater: LocalProgressLastViewedUpdater,
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        stepFontSizeService: StepFontSizeServiceProtocol,
         course: Course?,
         view: CardsStepsView
     ) {
@@ -146,6 +148,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.lastViewedUpdater = lastViewedUpdater
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
+        self.stepFontSizeService = stepFontSizeService
 
         self.course = course
         self.view = view
@@ -154,10 +157,19 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func refresh() {
-        view?.refreshCards()
+        guard let view = self.view else {
+            return
+        }
 
-        let currentLevel = AdaptiveRatingHelper.getLevel(for: rating)
-        view?.updateProgress(rating: rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+        view.refreshCards()
+
+        let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
+        view.updateProgress(
+            rating: self.rating,
+            prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1),
+            maxRating: AdaptiveRatingHelper.getRating(for: currentLevel),
+            level: currentLevel
+        )
     }
 
     func didAppear() {
@@ -179,7 +191,10 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             let title = NSLocalizedString("AdaptiveOnboardingTitle", comment: "")
             strongSelf.state = .loading
             DispatchQueue.main.async {
-                guard let cardStepViewController = ControllerHelper.instantiateViewController(identifier: "OnboardingCardStep", storyboardName: "Adaptive") as? OnboardingCardStepViewController else {
+                guard let cardStepViewController = ControllerHelper.instantiateViewController(
+                    identifier: "OnboardingCardStep",
+                    storyboardName: "Adaptive"
+                ) as? OnboardingCardStepViewController else {
                     print("cards steps: fail to init onboarding card step view")
                     return
                 }
@@ -196,7 +211,6 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func refreshTopCard() {
-
         if !storageManager.isAdaptiveOnboardingPassed {
             let stepIndex = lastOnboardingStep ?? onboardingFirstStepIndex
 
@@ -221,7 +235,9 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             var title = ""
             strongSelf.state = .loading
 
-            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating) ? strongSelf.syncRatingAndStreak(for: course) : .value(())
+            let startPromise = (strongSelf.useRatingSynchronization && strongSelf.shouldSyncRating)
+                ? strongSelf.syncRatingAndStreak(for: course)
+                : .value(())
             checkToken().then {
                 startPromise
             }.then {
@@ -231,12 +247,19 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 return strongSelf.getStep(for: lesson)
             }.then { step -> Promise<Void> in
                 DispatchQueue.main.async {
-                    guard let cardStepViewController = ControllerHelper.instantiateViewController(identifier: "CardStep", storyboardName: "Adaptive") as? CardStepViewController else {
+                    guard let cardStepViewController = ControllerHelper.instantiateViewController(
+                        identifier: "CardStep",
+                        storyboardName: "Adaptive"
+                    ) as? CardStepViewController else {
                         print("cards steps: fail to init card step view")
                         return
                     }
 
-                    let cardStepPresenter = CardStepPresenter(view: cardStepViewController, step: step)
+                    let cardStepPresenter = CardStepPresenter(
+                        view: cardStepViewController,
+                        step: step,
+                        stepFontSizeService: strongSelf.stepFontSizeService
+                    )
                     cardStepViewController.presenter = cardStepPresenter
                     strongSelf.currentStepPresenter = cardStepPresenter
                     if let cardStepDelegate = strongSelf.view as? CardStepDelegate {
@@ -333,7 +356,7 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     fileprivate func getNewRecommendation(for course: Course) -> Promise<Lesson> {
-        print("cards steps: preloaded lessons = \(cachedRecommendedLessons.map {$0.id})")
+        print("cards steps: preloaded lessons = \(cachedRecommendedLessons.map { $0.id })")
 
         return Promise { seal in
             if self.cachedRecommendedLessons.isEmpty {
@@ -406,13 +429,18 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     fileprivate func sendReaction(_ reaction: Reaction, for lesson: Lesson, user: User) -> Promise<Void> {
         return Promise { seal in
             self.recommendationsAPI.sendReaction(user: user.id, lesson: lesson.id, reaction: reaction).done { _ in
-                // Analytics
                 if let curState = self.currentStepPresenter?.state {
                     switch reaction {
                     case .maybeLater:
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.hard, parameters: ["status": curState.rawValue])
+                        AnalyticsReporter.reportEvent(
+                            AnalyticsEvents.Adaptive.Reaction.hard,
+                            parameters: ["status": curState.rawValue]
+                        )
                     case .neverAgain:
-                        AnalyticsReporter.reportEvent(AnalyticsEvents.Adaptive.Reaction.easy, parameters: ["status": curState.rawValue])
+                        AnalyticsReporter.reportEvent(
+                            AnalyticsEvents.Adaptive.Reaction.easy,
+                            parameters: ["status": curState.rawValue]
+                        )
                     default: break
                     }
                 }
@@ -432,7 +460,12 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                 self.streak = max(self.streak, streak)
 
                 let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
-                self.view?.updateProgress(rating: self.rating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+                self.view?.updateProgress(
+                    rating: self.rating,
+                    prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1),
+                    maxRating: AdaptiveRatingHelper.getRating(for: currentLevel),
+                    level: currentLevel
+                )
             }.ensure {
                 self.shouldSyncRating = false
                 seal(())
@@ -470,7 +503,12 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
         view?.showCongratulation(for: streak, isSpecial: streak > 1, completion: {
             let currentLevel = AdaptiveRatingHelper.getLevel(for: self.rating)
-            self.view?.updateProgress(rating: newRating, prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1), maxRating: AdaptiveRatingHelper.getRating(for: currentLevel), level: currentLevel)
+            self.view?.updateProgress(
+                rating: newRating,
+                prevMaxRating: AdaptiveRatingHelper.getRating(for: currentLevel - 1),
+                maxRating: AdaptiveRatingHelper.getRating(for: currentLevel),
+                level: currentLevel
+            )
         })
 
         rating = newRating
@@ -503,15 +541,18 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
             let newRating = rating
             let oldRating = newRating - streak + 1
             if AdaptiveRatingHelper.getLevel(for: oldRating) != AdaptiveRatingHelper.getLevel(for: newRating) {
-                view?.showCongratulationPopup(type: .level(level: AdaptiveRatingHelper.getLevel(for: newRating)), completion: nil)
+                view?.showCongratulationPopup(
+                    type: .level(level: AdaptiveRatingHelper.getLevel(for: newRating)),
+                    completion: nil
+                )
             }
         }
     }
 
     func onTitleButtonClick() {
         guard let stepId = currentStepPresenter?.step.id,
-            let discussionProxyId = currentStepPresenter?.step.discussionProxyId else {
-                return
+              let discussionProxyId = currentStepPresenter?.step.discussionProxyId else {
+            return
         }
 
         view?.presentDiscussions(stepId: stepId, discussionProxyId: discussionProxyId)
