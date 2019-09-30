@@ -99,4 +99,11 @@ extension CourseReview {
             managedText = newValue
         }
     }
+
+    var isCurrentUserReview: Bool {
+        if let currentUser = AuthInfo.shared.user {
+            return currentUser.id == self.userID
+        }
+        return false
+    }
 }
