@@ -1,3 +1,4 @@
+import IQKeyboardManagerSwift
 import UIKit
 
 protocol WriteCourseReviewViewControllerProtocol: class {
@@ -15,10 +16,11 @@ final class WriteCourseReviewViewController: UIViewController {
         action: #selector(self.cancelButtonDidClick)
     )
 
-    private lazy var doneBarButton = UIBarButtonItem(
-        barButtonSystemItem: .done,
+    private lazy var sendBarButton = UIBarButtonItem(
+        title: NSLocalizedString("WriteCourseReviewActionSend", comment: ""),
+        style: .done,
         target: self,
-        action: #selector(self.doneButtonDidClick)
+        action: #selector(self.sendButtonDidClick)
     )
 
     init(interactor: WriteCourseReviewInteractorProtocol) {
@@ -33,6 +35,7 @@ final class WriteCourseReviewViewController: UIViewController {
 
     override func loadView() {
         let view = WriteCourseReviewView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 
@@ -40,9 +43,23 @@ final class WriteCourseReviewViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.leftBarButtonItem = self.cancelBarButton
-        self.navigationItem.rightBarButtonItem = self.doneBarButton
+        self.navigationItem.rightBarButtonItem = self.sendBarButton
         self.title = NSLocalizedString("WriteCourseReviewTitle", comment: "")
+
+        self.edgesForExtendedLayout = []
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enable = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enable = true
+    }
+
+    // MARK: - Private API
 
     @objc
     private func cancelButtonDidClick(_ sender: UIBarButtonItem) {
@@ -50,11 +67,17 @@ final class WriteCourseReviewViewController: UIViewController {
     }
 
     @objc
-    private func doneButtonDidClick(_ sender: UIBarButtonItem) {
+    private func sendButtonDidClick(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension WriteCourseReviewViewController: WriteCourseReviewViewControllerProtocol {
     func displaySomeActionResult(viewModel: WriteCourseReview.SomeAction.ViewModel) { }
+}
+
+extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
+    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateReview review: String) {
+        print("review: \(review)")
+    }
 }

@@ -645,7 +645,10 @@ ProfileEditAboutMeTitle = "About me";
 
 /* Write course review */
 WriteCourseReviewTitle = "Course review";
+WriteCourseReviewActionSend = "Send";
 WriteCourseReviewActionCreate = "Write a review";
+WriteCourseReviewPlaceholder = "Review";
+WriteCourseReviewRatingHint = "Tap a Star to Rate";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
