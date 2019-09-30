@@ -9,16 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Story: JSONSerializable {
-    func update(json: JSON) {
-        self.id = json["id"].intValue
-        self.coverPath = json["cover"].stringValue
-        self.title = json["title"].stringValue
-        self.parts = json["parts"].arrayValue.map { StoryPart(json: $0, storyID: id) }
-        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
-        self.position = json["position"].intValue
-    }
-
+final class Story: JSONSerializable {
     var id: Int
     var coverPath: String
     var title: String
@@ -32,9 +23,16 @@ class Story: JSONSerializable {
         self.coverPath = HTMLProcessor.addStepikURLIfNeeded(url: json["cover"].stringValue)
         self.title = json["title"].stringValue
         self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
-        self.parts = json["parts"].arrayValue.compactMap {
-            Story.buildStoryPart(json: $0, storyID: id)
-        }
+        self.parts = json["parts"].arrayValue.compactMap { Story.buildStoryPart(json: $0, storyID: id) }
+        self.position = json["position"].intValue
+    }
+
+    func update(json: JSON) {
+        self.id = json["id"].intValue
+        self.coverPath = json["cover"].stringValue
+        self.title = json["title"].stringValue
+        self.parts = json["parts"].arrayValue.map { StoryPart(json: $0, storyID: id) }
+        self.isViewed = CachedValue<Bool>(key: "isViewed_id\(id)", defaultValue: false)
         self.position = json["position"].intValue
     }
 
@@ -70,7 +68,7 @@ class StoryPart {
     }
 }
 
-class TextStoryPart: StoryPart {
+final class TextStoryPart: StoryPart {
     var imagePath: String
 
     struct Text {
@@ -80,7 +78,9 @@ class TextStoryPart: StoryPart {
         var backgroundStyle: BackgroundStyle
 
         enum BackgroundStyle: String {
-            case light, dark, none
+            case light
+            case dark
+            case none
 
             var backgroundColor: UIColor {
                 switch self {
@@ -89,7 +89,7 @@ class TextStoryPart: StoryPart {
                 case .dark:
                     return UIColor.mainDark.withAlphaComponent(0.7)
                 default:
-                    return UIColor.clear
+                    return .clear
                 }
             }
         }
@@ -103,10 +103,11 @@ class TextStoryPart: StoryPart {
         var backgroundColor: UIColor
         var titleColor: UIColor
     }
+
     var button: Button?
 
     override init(json: JSON, storyID: Int) {
-        imagePath = HTMLProcessor.addStepikURLIfNeeded(url: json["image"].stringValue)
+        self.imagePath = HTMLProcessor.addStepikURLIfNeeded(url: json["image"].stringValue)
 
         let textJSON = json["text"]
         if textJSON != JSON.null {
@@ -126,7 +127,12 @@ class TextStoryPart: StoryPart {
             let backgroundColor = UIColor(hex: backgroundColorHexInt)
             let titleColorHexInt = Int(buttonJSON["text_color"].stringValue, radix: 16) ?? 0x000000
             let titleColor = UIColor(hex: titleColorHexInt)
-            self.button = Button(title: title, urlPath: urlPath, backgroundColor: backgroundColor, titleColor: titleColor)
+            self.button = Button(
+                title: title,
+                urlPath: urlPath,
+                backgroundColor: backgroundColor,
+                titleColor: titleColor
+            )
         }
 
         super.init(json: json, storyID: storyID)

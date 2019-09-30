@@ -135,11 +135,11 @@ extension NotificationsService {
         if key.localizedCaseInsensitiveContains(NotificationType.streak.rawValue) {
             route(to: .home)
         } else if key.localizedCaseInsensitiveContains(NotificationType.personalDeadline.rawValue) {
-            guard let courseId = userInfo[PersonalDeadlineLocalNotificationContentProvider.Key.course.rawValue] as? Int else {
-                return route(to: .home)
+            if let courseID = userInfo[PersonalDeadlineLocalNotificationContentProvider.Key.course.rawValue] as? Int {
+                route(to: .course(courseID: courseID))
+            } else {
+                route(to: .home)
             }
-
-            route(to: .course(courseID: courseId))
         } else {
             route(to: .home)
         }

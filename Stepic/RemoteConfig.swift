@@ -18,7 +18,7 @@ enum RemoteConfigKeys: String {
     case newLessonAvailable = "new_lesson_available_ios"
 }
 
-class RemoteConfig {
+final class RemoteConfig {
     private let defaultShowStreaksNotificationTrigger = ShowStreaksNotificationTrigger.loginAndSubmission
     static let shared = RemoteConfig()
 
@@ -40,14 +40,19 @@ class RemoteConfig {
     }
 
     var showStreaksNotificationTrigger: ShowStreaksNotificationTrigger {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.showStreaksNotificationTrigger.rawValue).stringValue else {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
+            forKey: RemoteConfigKeys.showStreaksNotificationTrigger.rawValue
+        ).stringValue else {
             return defaultShowStreaksNotificationTrigger
         }
+
         return ShowStreaksNotificationTrigger(rawValue: configValue) ?? defaultShowStreaksNotificationTrigger
     }
 
     var adaptiveBackendUrl: String {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.adaptiveBackendUrl.rawValue).stringValue else {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
+            forKey: RemoteConfigKeys.adaptiveBackendUrl.rawValue
+        ).stringValue else {
             return StepicApplicationsInfo.adaptiveRatingURL
         }
 
@@ -59,16 +64,21 @@ class RemoteConfig {
             return false
         }
 
-        return FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.newLessonAvailable.rawValue).boolValue
+        return FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
+            forKey: RemoteConfigKeys.newLessonAvailable.rawValue
+        ).boolValue
     }
 
     var supportedInAdaptiveModeCourses: [Int] {
-        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue).stringValue else {
+        guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
+            forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue
+        ).stringValue else {
             return StepicApplicationsInfo.adaptiveSupportedCourses
         }
 
         let courses = configValue.components(separatedBy: ",")
         var supportedCourses = [String]()
+
         for course in courses {
             let parts = course.components(separatedBy: "-")
             if parts.count == 1 {
@@ -79,12 +89,13 @@ class RemoteConfig {
                 if let build = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as? String,
                    let buildNum = Int(build),
                    let minimalBuild = Int(parts[1]) {
-                   if buildNum >= minimalBuild {
-                       supportedCourses.append(courseId)
-                   }
+                    if buildNum >= minimalBuild {
+                        supportedCourses.append(courseId)
+                    }
                 }
             }
         }
+
         return supportedCourses.compactMap { Int($0) }
     }
 
@@ -93,7 +104,7 @@ class RemoteConfig {
         fetchCloudValues()
     }
 
-    func setup() {}
+    func setup() { }
 
     private func loadDefaultValues() {
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().setDefaults(appDefaults)
@@ -104,11 +115,9 @@ class RemoteConfig {
             activateDebugMode()
         #endif
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: fetchDuration) {
-            [weak self]
-            _, error in
-
+            [weak self] _, error in
             guard error == nil else {
-                print ("Got an error fetching remote values \(String(describing: error))")
+                print("Got an error fetching remote values \(String(describing: error))")
                 return
             }
 

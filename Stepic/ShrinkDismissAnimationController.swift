@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ShrinkDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-
+final class ShrinkDismissAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     let interactionController: SwipeInteractionController?
 
     private let destinationFrame: CGRect
@@ -24,33 +23,30 @@ class ShrinkDismissAnimationController: NSObject, UIViewControllerAnimatedTransi
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard
-            let toVC = transitionContext.viewController(forKey: .to),
-            let fromVC = transitionContext.viewController(forKey: .from),
-            let snapshot = fromVC.view.snapshotView(afterScreenUpdates: true)
-            else {
-                return
+        guard let _ = transitionContext.viewController(forKey: .to),
+              let fromViewController = transitionContext.viewController(forKey: .from),
+              let snapshotView = fromViewController.view.snapshotView(afterScreenUpdates: true) else {
+            return
         }
 
         let containerView = transitionContext.containerView
 
-        snapshot.frame = fromVC.view.frame
-        snapshot.layer.masksToBounds = true
-        snapshot.layer.cornerRadius = 0
-        fromVC.view.isHidden = true
+        snapshotView.frame = fromViewController.view.frame
+        snapshotView.layer.masksToBounds = true
+        snapshotView.layer.cornerRadius = 0
+        fromViewController.view.isHidden = true
 
-        containerView.addSubview(snapshot)
+        containerView.addSubview(snapshotView)
 
-        let duration = transitionDuration(using: transitionContext)
+        let duration = self.transitionDuration(using: transitionContext)
 
         UIView.animate(withDuration: duration, animations: {
-            snapshot.frame = self.destinationFrame
-            snapshot.alpha = 0
-            snapshot.layer.cornerRadius = 16
-        }, completion: {
-            _ in
-            fromVC.view.isHidden = false
-            snapshot.removeFromSuperview()
+            snapshotView.frame = self.destinationFrame
+            snapshotView.alpha = 0
+            snapshotView.layer.cornerRadius = 16
+        }, completion: { _ in
+            fromViewController.view.isHidden = false
+            snapshotView.removeFromSuperview()
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }

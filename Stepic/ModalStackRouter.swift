@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ModalStackRouter: RouterProtocol {
+final class ModalStackRouter: RouterProtocol {
     var destinationStack: [UIViewController]
     var source: ModalStackRouterSourceProtocol
 
@@ -21,7 +21,6 @@ class ModalStackRouter: RouterProtocol {
     }
 
     func route() {
-        source.present(moduleStack: destinationStack)
+        self.source.present(moduleStack: self.destinationStack)
     }
-
 }

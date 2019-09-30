@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PushRouter: RouterProtocol {
+final class PushRouter: RouterProtocol {
     var destination: UIViewController
     var source: PushRouterSourceProtocol
 
@@ -21,6 +21,6 @@ class PushRouter: RouterProtocol {
     }
 
     func route() {
-        source.push(module: destination)
+        self.source.push(module: self.destination)
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SafariServices
 
 final class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
@@ -21,23 +21,30 @@ final class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
         fallbackPath: String
     ) {
         super.init()
-        let possibleSource = currentNavigation?.topViewController
+
+        let possibleSource = self.currentNavigation?.topViewController
         guard let source = optionalSource ?? possibleSource else {
             return
         }
+
         self.source = source
         self.fallbackPath = fallbackPath
+
         if destinationStack.count == 1 && source.navigationController == nil {
-            router = ModalRouter(source: source, destination: destinationStack[0], embedInNavigation: embedInNavigation)
+            self.router = ModalRouter(
+                source: source,
+                destination: destinationStack[0],
+                embedInNavigation: embedInNavigation
+            )
         }
         if destinationStack.count == 1 && source.navigationController != nil {
-            router = PushRouter(source: source, destination: destinationStack[0])
+            self.router = PushRouter(source: source, destination: destinationStack[0])
         }
         if destinationStack.count > 1 && source.navigationController == nil {
-            router = ModalStackRouter(source: source, destinationStack: destinationStack)
+            self.router = ModalStackRouter(source: source, destinationStack: destinationStack)
         }
         if destinationStack.count > 1 && source.navigationController != nil {
-            router = PushStackRouter(source: source, destinationStack: destinationStack)
+            self.router = PushStackRouter(source: source, destinationStack: destinationStack)
         }
     }
 
