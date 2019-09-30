@@ -6,6 +6,7 @@ enum CourseInfoTabReviews {
     struct ReviewsResult {
         let reviews: [CourseInfoTabReviewsViewModel]
         let hasNextPage: Bool
+        let canWriteReview: Bool
     }
 
     // MARK: Use cases
@@ -17,6 +18,7 @@ enum CourseInfoTabReviews {
         struct Response {
             let reviews: [CourseReview]
             let hasNextPage: Bool
+            let canWriteReview: Bool
         }
 
         struct ViewModel {
@@ -31,6 +33,7 @@ enum CourseInfoTabReviews {
         struct Response {
             let reviews: [CourseReview]
             let hasNextPage: Bool
+            let canWriteReview: Bool
         }
 
         struct ViewModel {

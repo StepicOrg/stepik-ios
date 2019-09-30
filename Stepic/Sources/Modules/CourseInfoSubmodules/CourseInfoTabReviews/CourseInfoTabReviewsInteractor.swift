@@ -77,7 +77,8 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
                 let response = CourseInfoTabReviews.NextReviewsLoad.Response(
                     reviews: sortedReviews,
-                    hasNextPage: meta.hasNext
+                    hasNextPage: meta.hasNext,
+                    canWriteReview: course.canWriteReview
                 )
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextCourseReviews(response: response)
@@ -107,7 +108,8 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
                 let response = CourseInfoTabReviews.ReviewsLoad.Response(
                     reviews: sortedReviews,
-                    hasNextPage: meta.hasNext
+                    hasNextPage: meta.hasNext,
+                    canWriteReview: course.canWriteReview
                 )
                 seal.fulfill(response)
             }.catch { _ in

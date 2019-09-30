@@ -644,6 +644,10 @@ ProfileEditGeneralTitle = "Общие данные";
 ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах";
 ProfileEditAboutMeTitle = "О себе";
 
+/* Write course review */
+WriteCourseReviewTitle = "Отзыв о курсе";
+WriteCourseReviewActionCreate = "Написать отзыв";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
 "Ok" = "Ok";

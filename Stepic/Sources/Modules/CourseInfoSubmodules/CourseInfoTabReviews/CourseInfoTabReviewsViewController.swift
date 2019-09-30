@@ -68,8 +68,9 @@ final class CourseInfoTabReviewsViewController: UIViewController {
             self.courseInfoTabReviewsView?.hideLoading()
         }
 
-        if case .result(_) = newState {
+        if case .result(let data) = newState {
             self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
+            self.courseInfoTabReviewsView?.canWriteReview = data.canWriteReview
         }
     }
 }
@@ -104,5 +105,11 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
 
         self.canTriggerPagination = false
         self.interactor.doNextCourseReviewsFetch(request: .init())
+    }
+
+    func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
+        let assembly = WriteCourseReviewAssembly(output: nil)
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+        self.present(module: controller)
     }
 }

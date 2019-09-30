@@ -643,6 +643,10 @@ ProfileEditGeneralTitle = "General";
 ProfileEditGeneralDescription = "Your legal names, used for any certificates";
 ProfileEditAboutMeTitle = "About me";
 
+/* Write course review */
+WriteCourseReviewTitle = "Course review";
+WriteCourseReviewActionCreate = "Write a review";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
 "Ok" = "Ok";

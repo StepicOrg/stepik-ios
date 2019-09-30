@@ -3,6 +3,7 @@ import UIKit
 
 protocol CourseInfoTabReviewsViewDelegate: class {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
 }
 
 extension CourseInfoTabReviewsView {
@@ -18,6 +19,14 @@ extension CourseInfoTabReviewsView {
 final class CourseInfoTabReviewsView: UIView {
     let appearance: Appearance
     weak var delegate: CourseInfoTabReviewsViewDelegate?
+
+    private lazy var writeReviewButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(NSLocalizedString("WriteCourseReviewActionCreate", comment: ""), for: .normal)
+        button.addTarget(self, action: #selector(self.writeReviewDidClick), for: .touchUpInside)
+        button.setTitleColor(.mainDark, for: .normal)
+        return button
+    }()
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -49,6 +58,23 @@ final class CourseInfoTabReviewsView: UIView {
 
     private var shouldShowPaginationView = false
     var paginationView: UIView?
+
+    var canWriteReview: Bool = false {
+        didSet {
+            if self.canWriteReview {
+                self.tableView.tableHeaderView = self.writeReviewButton
+                self.tableView.tableHeaderView?.frame = CGRect(
+                    x: 0,
+                    y: 0,
+                    width: self.frame.width,
+                    height: 52
+                )
+            } else {
+                self.tableView.tableHeaderView?.frame = .zero
+                self.tableView.tableHeaderView = nil
+            }
+        }
+    }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -99,6 +125,11 @@ final class CourseInfoTabReviewsView: UIView {
 
     func hideLoading() {
         self.tableView.skeleton.hide()
+    }
+
+    @objc
+    private func writeReviewDidClick() {
+        self.delegate?.courseInfoTabReviewsViewDidRequestWriteReview(self)
     }
 }
 

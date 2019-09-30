@@ -13,7 +13,8 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
             state: CourseInfoTabReviews.ViewControllerState.result(
                 data: .init(
                     reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
-                    hasNextPage: response.hasNextPage
+                    hasNextPage: response.hasNextPage,
+                    canWriteReview: response.canWriteReview
                 )
             )
         )
@@ -25,7 +26,8 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
             state: CourseInfoTabReviews.PaginationState.result(
                 data: .init(
                     reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
-                    hasNextPage: response.hasNextPage
+                    hasNextPage: response.hasNextPage,
+                    canWriteReview: response.canWriteReview
                 )
             )
         )

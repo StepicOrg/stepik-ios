@@ -2,7 +2,9 @@ import SnapKit
 import UIKit
 
 extension WriteCourseReviewView {
-    struct Appearance { }
+    struct Appearance {
+        let backgroundColor = UIColor.white
+    }
 }
 
 final class WriteCourseReviewView: UIView {
@@ -27,7 +29,9 @@ final class WriteCourseReviewView: UIView {
 }
 
 extension WriteCourseReviewView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
+    func setupView() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
 
     func addSubviews() { }
 
