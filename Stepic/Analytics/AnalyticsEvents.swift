@@ -9,7 +9,6 @@
 import Foundation
 
 struct AnalyticsEvents {
-
     struct Logout {
         static let clicked = "clicked_logout"
     }
@@ -312,5 +311,9 @@ struct AnalyticsEvents {
         }
         static let deleted = "personal_deadline_deleted"
         static let notSupportedNotification = "personal_deadline_not_supported_notification_scheduled"
+    }
+
+    struct Settings {
+        static let fontSizeSelected = "font_size_selected"
     }
 }

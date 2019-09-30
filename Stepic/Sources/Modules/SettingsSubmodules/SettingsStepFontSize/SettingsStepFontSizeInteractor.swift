@@ -49,6 +49,23 @@ final class SettingsStepFontSizeInteractor: SettingsStepFontSizeInteractorProtoc
             fatalError("Request contains invalid data")
         }
 
+        // FIXME: analytics dependency
+        let analyticsSelectedFontSizeString: String = {
+            switch selectedFontSize {
+            case .small:
+                return "small"
+            case .medium:
+                return "medium"
+            case .large:
+                return "large"
+            }
+        }()
+        AmplitudeAnalyticsEvents.Settings.fontSizeSelected(size: analyticsSelectedFontSizeString).send()
+        AnalyticsReporter.reportEvent(
+            AnalyticsEvents.Settings.fontSizeSelected,
+            parameters: ["size": analyticsSelectedFontSizeString]
+        )
+
         self.provider.setGlobalFontSize(selectedFontSize)
         self.presenter.presentFontSizeChange(
             response: SettingsStepFontSize.FontSizeSelection.Response(
