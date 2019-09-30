@@ -80,4 +80,8 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateReview review: String) {
         print("review: \(review)")
     }
+
+    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateRating rating: Int) {
+        print("rating: \(rating)")
+    }
 }

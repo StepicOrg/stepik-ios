@@ -2,6 +2,10 @@ import Nuke
 import SnapKit
 import UIKit
 
+protocol CourseRatingViewDelegate: class {
+    func courseRatingView(_ view: CourseRatingView, didSelectStarAtIndex index: Int)
+}
+
 extension CourseRatingView {
     struct Appearance {
         var starFilledColor = UIColor(hex: 0x66cc66)
@@ -15,6 +19,8 @@ extension CourseRatingView {
 final class CourseRatingView: UIView {
     let appearance: Appearance
     private static let maxStarsCount = 5
+
+    weak var delegate: CourseRatingViewDelegate?
 
     private lazy var starsStackView: UIStackView = {
         let stackView = UIStackView()
@@ -47,26 +53,44 @@ final class CourseRatingView: UIView {
         self.starsStackView.removeAllArrangedSubviews()
         let count = min(CourseRatingView.maxStarsCount, count)
 
+        var currentIndex = 0
+
         for _ in 0..<count {
-            self.starsStackView.addArrangedSubview(self.makeStar(isFilled: true))
+            self.starsStackView.addArrangedSubview(self.makeStar(isFilled: true, atIndex: currentIndex))
+            currentIndex += 1
         }
 
         for _ in 0..<(CourseRatingView.maxStarsCount - count) {
-            self.starsStackView.addArrangedSubview(self.makeStar(isFilled: false))
+            self.starsStackView.addArrangedSubview(self.makeStar(isFilled: false, atIndex: currentIndex))
+            currentIndex += 1
         }
     }
 
-    private func makeStar(isFilled: Bool) -> UIView {
+    private func makeStar(isFilled: Bool, atIndex index: Int) -> UIView {
         let image = isFilled
             ? UIImage(named: "rating-star-filled")
             : UIImage(named: "rating-star-clear")
         let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.tintColor = isFilled ? self.appearance.starFilledColor : self.appearance.statClearColor
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.starDidClick(_:)))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(gestureRecognizer)
+        imageView.tag = index
+
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.starsSize)
         }
+
         return imageView
+    }
+
+    @objc
+    private func starDidClick(_ sender: UITapGestureRecognizer? = nil) {
+        if let index = sender?.view?.tag {
+            self.delegate?.courseRatingView(self, didSelectStarAtIndex: index)
+        }
     }
 }
 

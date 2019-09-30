@@ -3,6 +3,7 @@ import UIKit
 
 protocol WriteCourseReviewViewDelegate: class {
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateReview review: String)
+    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateRating rating: Int)
 }
 
 extension WriteCourseReviewView {
@@ -38,6 +39,7 @@ final class WriteCourseReviewView: UIView {
         appearance.starsSpacing = self.appearance.starsSpacing
         appearance.starsSize = self.appearance.starsSize
         let view = CourseRatingView(appearance: appearance)
+        view.delegate = self
         return view
     }()
 
@@ -148,7 +150,20 @@ extension WriteCourseReviewView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// MARK: - WriteCourseReviewView (UITextViewDelegate) -
+// MARK: - WriteCourseReviewView: CourseRatingViewDelegate -
+
+extension WriteCourseReviewView: CourseRatingViewDelegate {
+    func courseRatingView(_ view: CourseRatingView, didSelectStarAtIndex index: Int) {
+        let newStarsCount = index + 1
+        if self.starsRatingView.starsCount != newStarsCount {
+            self.starsRatingView.starsCount = newStarsCount
+        }
+
+        self.delegate?.writeCourseReviewView(self, didUpdateRating: newStarsCount)
+    }
+}
+
+// MARK: - WriteCourseReviewView: UITextViewDelegate -
 
 extension WriteCourseReviewView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
