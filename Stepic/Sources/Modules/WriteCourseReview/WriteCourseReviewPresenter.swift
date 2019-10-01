@@ -1,6 +1,7 @@
 import UIKit
 
 protocol WriteCourseReviewPresenterProtocol {
+    func presentCourseReview(response: WriteCourseReview.CourseReviewLoad.Response)
     func presentSendReviewResult(response: WriteCourseReview.SendReview.Response)
     func presentReviewUpdate(response: WriteCourseReview.ReviewUpdate.Response)
     func presentRatingUpdate(response: WriteCourseReview.RatingUpdate.Response)
@@ -9,6 +10,14 @@ protocol WriteCourseReviewPresenterProtocol {
 
 final class WriteCourseReviewPresenter: WriteCourseReviewPresenterProtocol {
     weak var viewController: WriteCourseReviewViewControllerProtocol?
+
+    func presentCourseReview(response: WriteCourseReview.CourseReviewLoad.Response) {
+        self.viewController?.displayCourseReview(
+            viewModel: WriteCourseReview.CourseReviewLoad.ViewModel(
+                viewModel: self.makeViewModel(info: response.result)
+            )
+        )
+    }
 
     func presentSendReviewResult(response: WriteCourseReview.SendReview.Response) {
         self.viewController?.displaySendReviewResult(
@@ -22,19 +31,17 @@ final class WriteCourseReviewPresenter: WriteCourseReviewPresenterProtocol {
     }
 
     func presentReviewUpdate(response: WriteCourseReview.ReviewUpdate.Response) {
-        let viewModel = self.makeViewModel(info: response.result)
         self.viewController?.displayReviewUpdate(
             viewModel: WriteCourseReview.ReviewUpdate.ViewModel(
-                viewModel: viewModel
+                viewModel: self.makeViewModel(info: response.result)
             )
         )
     }
 
     func presentRatingUpdate(response: WriteCourseReview.RatingUpdate.Response) {
-        let viewModel = self.makeViewModel(info: response.result)
         self.viewController?.displayRatingUpdate(
             viewModel: WriteCourseReview.RatingUpdate.ViewModel(
-                viewModel: viewModel
+                viewModel: self.makeViewModel(info: response.result)
             )
         )
     }

@@ -3,6 +3,7 @@ import SVProgressHUD
 import UIKit
 
 protocol WriteCourseReviewViewControllerProtocol: class {
+    func displayCourseReview(viewModel: WriteCourseReview.CourseReviewLoad.ViewModel)
     func displaySendReviewResult(viewModel: WriteCourseReview.SendReview.ViewModel)
     func displayReviewUpdate(viewModel: WriteCourseReview.ReviewUpdate.ViewModel)
     func displayRatingUpdate(viewModel: WriteCourseReview.RatingUpdate.ViewModel)
@@ -51,7 +52,8 @@ final class WriteCourseReviewViewController: UIViewController {
 
         self.navigationItem.leftBarButtonItem = self.cancelBarButton
         self.navigationItem.rightBarButtonItem = self.sendBarButton
-        self.sendBarButton.isEnabled = false
+
+        self.interactor.doCourseReviewLoad(request: .init())
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +81,10 @@ final class WriteCourseReviewViewController: UIViewController {
 }
 
 extension WriteCourseReviewViewController: WriteCourseReviewViewControllerProtocol {
+    func displayCourseReview(viewModel: WriteCourseReview.CourseReviewLoad.ViewModel) {
+        self.updateView(viewModel: viewModel.viewModel)
+    }
+
     func displaySendReviewResult(viewModel: WriteCourseReview.SendReview.ViewModel) {
         if viewModel.isSuccessful {
             SVProgressHUD.showSuccess(withStatus: viewModel.message)

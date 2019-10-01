@@ -10,6 +10,20 @@ enum WriteCourseReview {
 
     // MARK: Use cases
 
+    /// Show course review
+    enum CourseReviewLoad {
+        struct Request { }
+
+        struct Response {
+            let result: CourseReviewInfo
+        }
+
+        struct ViewModel {
+            let viewModel: WriteCourseReviewViewModel
+        }
+    }
+
+    /// Create course review
     enum SendReview {
         struct Request { }
 
