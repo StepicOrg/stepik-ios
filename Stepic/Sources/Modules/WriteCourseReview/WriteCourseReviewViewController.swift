@@ -2,7 +2,8 @@ import IQKeyboardManagerSwift
 import UIKit
 
 protocol WriteCourseReviewViewControllerProtocol: class {
-    func displaySomeActionResult(viewModel: WriteCourseReview.SomeAction.ViewModel)
+    func displayReviewUpdate(viewModel: WriteCourseReview.ReviewUpdate.ViewModel)
+    func displayRatingUpdate(viewModel: WriteCourseReview.RatingUpdate.ViewModel)
 }
 
 final class WriteCourseReviewViewController: UIViewController {
@@ -42,11 +43,12 @@ final class WriteCourseReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = NSLocalizedString("WriteCourseReviewTitle", comment: "")
+        self.edgesForExtendedLayout = []
+
         self.navigationItem.leftBarButtonItem = self.cancelBarButton
         self.navigationItem.rightBarButtonItem = self.sendBarButton
-        self.title = NSLocalizedString("WriteCourseReviewTitle", comment: "")
-
-        self.edgesForExtendedLayout = []
+        self.sendBarButton.isEnabled = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,15 +75,26 @@ final class WriteCourseReviewViewController: UIViewController {
 }
 
 extension WriteCourseReviewViewController: WriteCourseReviewViewControllerProtocol {
-    func displaySomeActionResult(viewModel: WriteCourseReview.SomeAction.ViewModel) { }
+    func displayReviewUpdate(viewModel: WriteCourseReview.ReviewUpdate.ViewModel) {
+        self.updateView(viewModel: viewModel.viewModel)
+    }
+
+    func displayRatingUpdate(viewModel: WriteCourseReview.RatingUpdate.ViewModel) {
+        self.updateView(viewModel: viewModel.viewModel)
+    }
+
+    private func updateView(viewModel: WriteCourseReviewViewModel) {
+        self.sendBarButton.isEnabled = viewModel.isFilled
+        self.writeCourseReviewView?.configure(viewModel: viewModel)
+    }
 }
 
 extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateReview review: String) {
-        print("review: \(review)")
+        self.interactor.doReviewUpdate(request: .init(review: review))
     }
 
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateRating rating: Int) {
-        print("rating: \(rating)")
+        self.interactor.doRatingUpdate(request: .init(rating: rating))
     }
 }

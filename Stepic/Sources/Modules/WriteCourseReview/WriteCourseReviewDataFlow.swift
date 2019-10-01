@@ -1,11 +1,42 @@
 import Foundation
 
 enum WriteCourseReview {
-    enum SomeAction {
-        struct Request { }
+    // MARK: Common structs
 
-        struct Response { }
+    struct CourseReviewInfo {
+        let review: String?
+        let rating: Int?
+    }
 
-        struct ViewModel { }
+    // MARK: Use cases
+
+    /// Handle review text change.
+    enum ReviewUpdate {
+        struct Request {
+            let review: String
+        }
+
+        struct Response {
+            let result: CourseReviewInfo
+        }
+
+        struct ViewModel {
+            let viewModel: WriteCourseReviewViewModel
+        }
+    }
+
+    /// Handle rating change.
+    enum RatingUpdate {
+        struct Request {
+            let rating: Int
+        }
+
+        struct Response {
+            let result: CourseReviewInfo
+        }
+
+        struct ViewModel {
+            let viewModel: WriteCourseReviewViewModel
+        }
     }
 }

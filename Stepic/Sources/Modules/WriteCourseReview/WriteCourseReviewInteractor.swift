@@ -2,7 +2,8 @@ import Foundation
 import PromiseKit
 
 protocol WriteCourseReviewInteractorProtocol {
-    func doSomeAction(request: WriteCourseReview.SomeAction.Request)
+    func doReviewUpdate(request: WriteCourseReview.ReviewUpdate.Request)
+    func doRatingUpdate(request: WriteCourseReview.RatingUpdate.Request)
 }
 
 final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
@@ -10,6 +11,9 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
 
     private let presenter: WriteCourseReviewPresenterProtocol
     private let provider: WriteCourseReviewProviderProtocol
+
+    private var currentReview: String?
+    private var currentRating: Int?
 
     init(
         presenter: WriteCourseReviewPresenterProtocol,
@@ -19,9 +23,29 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
         self.provider = provider
     }
 
-    func doSomeAction(request: WriteCourseReview.SomeAction.Request) { }
+    func doReviewUpdate(request: WriteCourseReview.ReviewUpdate.Request) {
+        self.currentReview = request.review
 
-    enum Error: Swift.Error {
-        case something
+        self.presenter.presentReviewUpdate(
+            response: WriteCourseReview.ReviewUpdate.Response(
+                result: WriteCourseReview.CourseReviewInfo(
+                    review: self.currentReview,
+                    rating: self.currentRating
+                )
+            )
+        )
+    }
+
+    func doRatingUpdate(request: WriteCourseReview.RatingUpdate.Request) {
+        self.currentRating = request.rating
+
+        self.presenter.presentRatingUpdate(
+            response: WriteCourseReview.RatingUpdate.Response(
+                result: WriteCourseReview.CourseReviewInfo(
+                    review: self.currentReview,
+                    rating: self.currentRating
+                )
+            )
+        )
     }
 }

@@ -73,6 +73,18 @@ final class WriteCourseReviewView: UIView {
         return textView
     }()
 
+    private var starsCount: Int {
+        get {
+            return self.starsRatingView.starsCount
+        }
+        set {
+            if newValue != self.starsRatingView.starsCount {
+                self.starsRatingView.starsCount = newValue
+                self.delegate?.writeCourseReviewView(self, didUpdateRating: newValue)
+            }
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -88,6 +100,11 @@ final class WriteCourseReviewView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(viewModel: WriteCourseReviewViewModel) {
+        self.textView.text = viewModel.review
+        self.starsCount = viewModel.rating
     }
 }
 
@@ -154,12 +171,7 @@ extension WriteCourseReviewView: ProgrammaticallyInitializableViewProtocol {
 
 extension WriteCourseReviewView: CourseRatingViewDelegate {
     func courseRatingView(_ view: CourseRatingView, didSelectStarAtIndex index: Int) {
-        let newStarsCount = index + 1
-        if self.starsRatingView.starsCount != newStarsCount {
-            self.starsRatingView.starsCount = newStarsCount
-        }
-
-        self.delegate?.writeCourseReviewView(self, didUpdateRating: newStarsCount)
+        self.starsCount = index + 1
     }
 }
 

@@ -539,6 +539,7 @@
 		2C4BE7DE221325FB00AEAC34 /* CourseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DD221325F400AEAC34 /* CourseReview.swift */; };
 		2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */; };
 		2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		2C52F9F92342C98E00B0A151 /* WriteCourseReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52F9F82342C98E00B0A151 /* WriteCourseReviewViewModel.swift */; };
 		2C53DFFA22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFED22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift */; };
 		2C53DFFB22DDDBFD0084BA2B /* NewCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFEE22DDDBFD0084BA2B /* NewCodeQuizViewController.swift */; };
 		2C53DFFE22DDDBFD0084BA2B /* NewCodeQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFF222DDDBFD0084BA2B /* NewCodeQuizDataFlow.swift */; };
@@ -1683,6 +1684,7 @@
 		2C4BE7DD221325F400AEAC34 /* CourseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReview.swift; sourceTree = "<group>"; };
 		2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReview+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C52F9F82342C98E00B0A151 /* WriteCourseReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCourseReviewViewModel.swift; sourceTree = "<group>"; };
 		2C53DFED22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizPresenter.swift; sourceTree = "<group>"; };
 		2C53DFEE22DDDBFD0084BA2B /* NewCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizViewController.swift; sourceTree = "<group>"; };
 		2C53DFF222DDDBFD0084BA2B /* NewCodeQuizDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizDataFlow.swift; sourceTree = "<group>"; };
@@ -5589,6 +5591,7 @@
 				B97CDBCF62D822BE8DF6A365 /* WriteCourseReviewProvider.swift */,
 				233DE469779653213327B9C5 /* WriteCourseReviewView.swift */,
 				BFB28C8741D8E5CBF35B3437 /* WriteCourseReviewViewController.swift */,
+				2C52F9F82342C98E00B0A151 /* WriteCourseReviewViewModel.swift */,
 				EB5F21FDD28D4192C92208F1 /* InputOutput */,
 			);
 			path = WriteCourseReview;
@@ -7000,6 +7003,7 @@
 				62E98382AC35194D9C0CE966 /* UITableViewExtensions.swift in Sources */,
 				62E98C3B15ABFA56C29FEC3B /* UICollectionViewExtensions.swift in Sources */,
 				62E98116576B12451E5418F4 /* CourseCoverImageView.swift in Sources */,
+				2C52F9F92342C98E00B0A151 /* WriteCourseReviewViewModel.swift in Sources */,
 				62E98C3824298B04928351E5 /* FormatterHelper.swift in Sources */,
 				62E9801D3AE83BF0735EFA3B /* CourseListAssembly.swift in Sources */,
 				62E98DDD53A76A1822756659 /* CourseListViewController.swift in Sources */,
