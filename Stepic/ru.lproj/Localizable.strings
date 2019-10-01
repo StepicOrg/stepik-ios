@@ -647,6 +647,8 @@ ProfileEditAboutMeTitle = "О себе";
 /* Write course review */
 WriteCourseReviewTitle = "Отзыв о курсе";
 WriteCourseReviewActionSend = "Отправить";
+WriteCourseReviewActionSendResultSuccess = "Отправлено";
+WriteCourseReviewActionSendResultFailed = "Не удалось отправить отзыв";
 WriteCourseReviewActionCreate = "Написать отзыв";
 WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";

@@ -10,7 +10,20 @@ enum WriteCourseReview {
 
     // MARK: Use cases
 
-    /// Handle review text change.
+    enum SendReview {
+        struct Request { }
+
+        struct Response {
+            let isSuccessful: Bool
+        }
+
+        struct ViewModel {
+            let isSuccessful: Bool
+            let message: String
+        }
+    }
+
+    /// Handle review text change
     enum ReviewUpdate {
         struct Request {
             let review: String
@@ -25,7 +38,7 @@ enum WriteCourseReview {
         }
     }
 
-    /// Handle rating change.
+    /// Handle rating change
     enum RatingUpdate {
         struct Request {
             let rating: Int
@@ -37,6 +50,17 @@ enum WriteCourseReview {
 
         struct ViewModel {
             let viewModel: WriteCourseReviewViewModel
+        }
+    }
+
+    /// Handle HUD
+    enum BlockingWaitingIndicatorUpdate {
+        struct Response {
+            let shouldDismiss: Bool
+        }
+
+        struct ViewModel {
+            let shouldDismiss: Bool
         }
     }
 }

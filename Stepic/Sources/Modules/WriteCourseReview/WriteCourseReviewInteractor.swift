@@ -2,6 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol WriteCourseReviewInteractorProtocol {
+    func doSendReview(request: WriteCourseReview.SendReview.Request)
     func doReviewUpdate(request: WriteCourseReview.ReviewUpdate.Request)
     func doRatingUpdate(request: WriteCourseReview.RatingUpdate.Request)
 }
@@ -21,6 +22,24 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
     ) {
         self.presenter = presenter
         self.provider = provider
+    }
+
+    func doSendReview(request: WriteCourseReview.SendReview.Request) {
+        guard let review = self.currentReview?.trimmingCharacters(in: .whitespacesAndNewlines),
+              let rating = self.currentRating else {
+            return
+        }
+
+        print("review: \(review)\nrating: \(rating)")
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.presenter.presentSendReviewResult(
+                response: WriteCourseReview.SendReview.Response(
+                    isSuccessful: false
+                )
+            )
+        }
     }
 
     func doReviewUpdate(request: WriteCourseReview.ReviewUpdate.Request) {

@@ -646,6 +646,8 @@ ProfileEditAboutMeTitle = "About me";
 /* Write course review */
 WriteCourseReviewTitle = "Course review";
 WriteCourseReviewActionSend = "Send";
+WriteCourseReviewActionSendResultSuccess = "Sent";
+WriteCourseReviewActionSendResultFailed = "Failed to send your feedback";
 WriteCourseReviewActionCreate = "Write a review";
 WriteCourseReviewPlaceholder = "Review";
 WriteCourseReviewRatingHint = "Tap a Star to Rate";
