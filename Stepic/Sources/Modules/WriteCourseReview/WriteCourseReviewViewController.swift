@@ -76,6 +76,9 @@ final class WriteCourseReviewViewController: UIViewController {
     @objc
     private func sendButtonDidClick(_ sender: UIBarButtonItem) {
         self.view.endEditing(true)
+        // Wait for displaySendReviewResult(viewModel:) to toggle state.
+        self.sendBarButton.isEnabled = false
+
         self.interactor.doSendReview(request: .init())
     }
 }
@@ -86,6 +89,8 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewControllerProtoc
     }
 
     func displaySendReviewResult(viewModel: WriteCourseReview.SendReview.ViewModel) {
+        self.sendBarButton.isEnabled = true
+
         if viewModel.isSuccessful {
             SVProgressHUD.showSuccess(withStatus: viewModel.message)
             self.dismiss(animated: true)
