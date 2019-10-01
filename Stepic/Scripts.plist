@@ -25,7 +25,7 @@
 $(document).ready(function() {
     $(&quot;img&quot;).each(function() {
         var $this = $(this);
-        var src = "openimg://" + $this.attr(&apos;src&apos;);
+        var src = &quot;openimg://&quot; + $this.attr(&apos;src&apos;);
         $this.addClass(&apos;image&apos;);
         var a = $(&apos;&lt;a/&gt;&apos;).attr(&apos;href&apos;, src);
         $this.wrap(a);
@@ -44,15 +44,33 @@ window.location= &quot;mathjaxfinish://finished&quot;;
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
 &lt;/script&gt;</string>
-	<key>SizeReportScript</key>
-	<string>&lt;script type=&quot;text/javascript&quot;&gt;
-   window.onload = function() { 
-      window.location.href = &quot;ready://&quot; + document.body.scrollHeight;
-   }
+	<key>LocalKaTeXScript</key>
+	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;katex/katex.min.css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;katex/katex.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;katex/auto-render.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+document.addEventListener(&quot;DOMContentLoaded&quot;, function() {
+    renderMathInElement(document.body, {
+        delimiters: [
+            { left: &quot;$$&quot;, right: &quot;$$&quot;, display: true },
+            { left: &quot;\\[&quot;, right: &quot;\\]&quot;, display: true },
+            { left: &quot;$&quot;, right: &quot;$&quot;, display: false },
+            { left: &quot;\\(&quot;, right: &quot;\\)&quot;, display: false }
+        ]
+    });
+});
 &lt;/script&gt;</string>
 	<key>TexScript</key>
 	<string>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   MathJax.Hub.Config({messageStyle: &quot;none&quot;, tex2jax: {preview: &quot;none&quot;, inlineMath: [[&apos;$&apos;,&apos;$&apos;], [&apos;\\(&apos;,&apos;\\)&apos;]], displayMath: [[&apos;$$&apos;,&apos;$$&apos;], [&apos;\\[&apos;,&apos;\\]&apos;]]}});
+&lt;/script&gt;</string>
+	<key>FontSizeScript</key>
+	<string>&lt;script type=&quot;text/javascript&quot;&gt;
+	document.documentElement.style.setProperty(&apos;--body-font-size&apos;, &apos;##--body-font-size##&apos;);
+	document.documentElement.style.setProperty(&apos;--h1-font-size&apos;, &apos;##--h1-font-size##&apos;);
+	document.documentElement.style.setProperty(&apos;--h2-font-size&apos;, &apos;##--h2-font-size##&apos;);
+	document.documentElement.style.setProperty(&apos;--h3-font-size&apos;, &apos;##--h3-font-size##&apos;);
+	document.documentElement.style.setProperty(&apos;--blockquote-font-size&apos;, &apos;##--blockquote-font-size##&apos;);
 &lt;/script&gt;</string>
 </dict>
 </plist>

@@ -47,6 +47,7 @@ final class ContentProcessor: ContentProcessorProtocol {
         let bodyTailInjections = injectionsToInject.map { $0.bodyTailScript }.joined(separator: "\n")
 
         return """
+        <!DOCTYPE html>
         <html>
         <head>
             \(headInjections)
