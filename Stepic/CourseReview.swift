@@ -85,4 +85,13 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
             _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
         }
     }
+
+    static func delete(_ id: CourseReview.IdType) -> Guarantee<Void> {
+        return CourseReview.fetchAsync(ids: [id]).done { courseReviews in
+            courseReviews.forEach {
+                CoreDataHelper.instance.deleteFromStore($0, save: false)
+            }
+            CoreDataHelper.instance.save()
+        }
+    }
 }

@@ -95,6 +95,8 @@ final class CourseReviewsAPI: APIEndpoint {
     }
 
     func delete(id: CourseReview.IdType) -> Promise<Void> {
-        return self.delete.request(requestEndpoint: self.name, deletingId: id, withManager: self.manager)
+        return self.delete.request(requestEndpoint: self.name, deletingId: id, withManager: self.manager).then {
+            CourseReview.delete(id)
+        }
     }
 }
