@@ -14,6 +14,15 @@ import PromiseKit
 final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
 
+    var json: JSON {
+        return [
+            "course": self.courseID,
+            "user": self.userID,
+            "score": self.score,
+            "text": self.text
+        ]
+    }
+
     convenience required init(json: JSON) {
         self.init()
         initialize(json)
@@ -49,6 +58,29 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
                     return
                 }
                 seal(results)
+            })
+            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+        }
+    }
+
+    static func fetch(courseID: Course.IdType, userID: User.IdType) -> Guarantee<[CourseReview]> {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseReview")
+        let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
+
+        let courseIDPredicate = NSPredicate(format: "managedCourseId == %@", courseID.fetchValue)
+        let userIDPredicate = NSPredicate(format: "managedUserId == %@", userID.fetchValue)
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [courseIDPredicate, userIDPredicate])
+
+        request.predicate = predicate
+        request.sortDescriptors = [descriptor]
+
+        return Guarantee { seal in
+            let asyncRequest = NSAsynchronousFetchRequest(fetchRequest: request, completionBlock: { results in
+                if let results = results.finalResult as? [CourseReview] {
+                    seal(results)
+                } else {
+                    seal([])
+                }
             })
             _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
         }

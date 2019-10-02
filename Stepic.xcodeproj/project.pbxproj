@@ -2819,42 +2819,42 @@
 		084F7AAF1E775A410088368A /* API Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				082E35B120B5F1E4006E28F9 /* StorageRecordsAPI.swift */,
-				2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */,
-				086A8B271D21796800F45C45 /* VotesAPI.swift */,
-				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
-				085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */,
-				08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */,
-				86795EF61E85325000A985C2 /* RecommendationsAPI.swift */,
-				08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */,
-				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
+				62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */,
+				62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */,
 				2CA9D9842010EEA2007AA743 /* AdaptiveRatingsAPI.swift */,
+				08F261201E79DD0B00AC908B /* APIEndpoint.swift */,
+				080CE1511E9563170089A27F /* AssignmentsAPI.swift */,
+				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
+				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
+				0800B8211D07029B006C987E /* CommentsAPI.swift */,
+				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
+				2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */,
+				08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */,
+				080CE1421E955D300089A27F /* CoursesAPI.swift */,
 				08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */,
 				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
-				0800B8211D07029B006C987E /* CommentsAPI.swift */,
+				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
-				08F261201E79DD0B00AC908B /* APIEndpoint.swift */,
-				080CE1421E955D300089A27F /* CoursesAPI.swift */,
-				080CE1451E9560EB0089A27F /* SectionsAPI.swift */,
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
-				080CE14B1E9562BF0089A27F /* UsersAPI.swift */,
-				080CE14E1E9562F30089A27F /* StepsAPI.swift */,
-				080CE1511E9563170089A27F /* AssignmentsAPI.swift */,
-				080CE1541E9563590089A27F /* ProgressesAPI.swift */,
-				080CE1571E9566220089A27F /* ViewsAPI.swift */,
-				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
-				080CE15D1E9580CD0089A27F /* AttemptsAPI.swift */,
-				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
-				0829B8341E9D025C009B4A84 /* CertificatesAPI.swift */,
-				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
-				08D5F57F1F7DBA70007C1634 /* CourseReviewSummariesAPI.swift */,
-				087585A21FB50D640047A269 /* CourseListsAPI.swift */,
+				2C9E3F3D1F7A930100DDF1AA /* NotificationsAPI.swift */,
 				86624A721FC76578008E7E6C /* NotificationStatusesAPI.swift */,
-				62E98F54E53E13FA7F6EDB82 /* AchievementsAPI.swift */,
-				62E98B1DA8236C4C5E5B89A2 /* AchievementProgressesAPI.swift */,
+				2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */,
+				080CE1541E9563590089A27F /* ProgressesAPI.swift */,
+				08964BCC1F3072BA00DBBCCE /* QueriesAPI.swift */,
+				86795EF61E85325000A985C2 /* RecommendationsAPI.swift */,
+				080CE15A1E95804C0089A27F /* SearchResultsAPI.swift */,
+				080CE1451E9560EB0089A27F /* SectionsAPI.swift */,
+				08AB82341D74926F00FDEADE /* StepicsAPI.swift */,
+				080CE14E1E9562F30089A27F /* StepsAPI.swift */,
+				082E35B120B5F1E4006E28F9 /* StorageRecordsAPI.swift */,
 				080E1ACD212583E5006B58A9 /* StoryTemplatesAPI.swift */,
+				080CE1601E9581960089A27F /* SubmissionsAPI.swift */,
+				085C4FF21D89C86F00B27C95 /* UnitsAPI.swift */,
+				08E6BB671DC8DF59006622EC /* UserActivitiesAPI.swift */,
 				62E98FD3186BA23C6E8B4DB5 /* UserCoursesAPI.swift */,
-				2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */,
+				080CE14B1E9562BF0089A27F /* UsersAPI.swift */,
+				080CE1571E9566220089A27F /* ViewsAPI.swift */,
+				086A8B271D21796800F45C45 /* VotesAPI.swift */,
 			);
 			name = "API Endpoints";
 			sourceTree = "<group>";
@@ -3131,14 +3131,14 @@
 		0885F84B1BA8376D00F2A188 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				088E58BF1DE34E140009B9CE /* SocialSDKProviders */,
+				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
+				08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */,
 				086953111D748303003857A2 /* ApiRequest.swift */,
 				08FCEB631B9ED2AC00FC4F8B /* AuthAPI.swift */,
-				0885F84D1BA837E200F2A188 /* ApiDataDownloader.swift */,
 				0885F8531BA9DB5C00F2A188 /* Meta.swift */,
 				084F7AAF1E775A410088368A /* API Endpoints */,
-				08AEC3A61CCA75F400FFF29E /* APIDefaults.swift */,
 				088E73EE20619C7800D458E3 /* Request Makers */,
+				088E58BF1DE34E140009B9CE /* SocialSDKProviders */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -3213,9 +3213,9 @@
 		088E58BF1DE34E140009B9CE /* SocialSDKProviders */ = {
 			isa = PBXGroup;
 			children = (
+				08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */,
 				088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */,
 				088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */,
-				08407EC61DE4891D0082C4E7 /* FBSocialSDKProvider.swift */,
 			);
 			name = SocialSDKProviders;
 			sourceTree = "<group>";
@@ -3223,10 +3223,10 @@
 		088E73EE20619C7800D458E3 /* Request Makers */ = {
 			isa = PBXGroup;
 			children = (
-				088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */,
-				088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */,
 				088E73F120619EEF00D458E3 /* CreateRequestMaker.swift */,
+				088E73EF20619C8F00D458E3 /* DeleteRequestMaker.swift */,
 				0863B9662069A41A0023A182 /* RetrieveRequestMaker.swift */,
+				088E73EC20614DFC00D458E3 /* UpdateRequestMaker.swift */,
 			);
 			name = "Request Makers";
 			sourceTree = "<group>";
