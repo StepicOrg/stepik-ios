@@ -15,6 +15,8 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
     private let provider: WriteCourseReviewProviderProtocol
 
     private let courseID: Course.IdType
+    private let context: Context
+
     private var courseReview: CourseReview?
     private var currentText: String
     private var currentScore: Int
@@ -26,6 +28,7 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
         provider: WriteCourseReviewProviderProtocol
     ) {
         self.courseID = courseID
+        self.context = courseReview == nil ? .create : .update
         self.courseReview = courseReview
         self.currentText = courseReview?.text ?? ""
         self.currentScore = courseReview?.score ?? 0
@@ -75,20 +78,24 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
-        if let courseReview = self.courseReview {
-            self.updateCourseReview(courseReview, score: self.currentScore, text: trimmedText)
-        } else {
+        switch self.context {
+        case .create:
             self.createCourseReview(score: self.currentScore, text: trimmedText)
+        case .update:
+            self.updateCourseReview(self.courseReview.require(), score: self.currentScore, text: trimmedText)
         }
     }
 
     // MARK: - Private API
 
     private func createCourseReview(score: Int, text: String) {
-        self.provider.create(courseID: self.courseID, score: score, text: text).done { _ in
+        self.provider.create(courseID: self.courseID, score: score, text: text).done { createdCourseReview in
+            self.courseReview = createdCourseReview
+
             self.presenter.presentCourseReviewMainActionResult(
                 response: WriteCourseReview.CourseReviewMainAction.Response(isSuccessful: true)
             )
+            self.moduleOutput?.handleCourseReviewCreated(createdCourseReview)
         }.catch { _ in
             self.presenter.presentCourseReviewMainActionResult(
                 response: WriteCourseReview.CourseReviewMainAction.Response(isSuccessful: false)
@@ -102,13 +109,22 @@ final class WriteCourseReviewInteractor: WriteCourseReviewInteractorProtocol {
 
         self.provider.update(courseReview: courseReview).done { updatedCourseReview in
             self.courseReview = updatedCourseReview
+
             self.presenter.presentCourseReviewMainActionResult(
                 response: WriteCourseReview.CourseReviewMainAction.Response(isSuccessful: true)
             )
+            self.moduleOutput?.handleCourseReviewUpdated(updatedCourseReview)
         }.catch { _ in
             self.presenter.presentCourseReviewMainActionResult(
                 response: WriteCourseReview.CourseReviewMainAction.Response(isSuccessful: false)
             )
         }
+    }
+
+    // MARK: - Inner Types
+
+    private enum Context {
+        case create
+        case update
     }
 }
