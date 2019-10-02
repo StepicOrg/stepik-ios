@@ -2,9 +2,10 @@ import UIKit
 
 protocol WriteCourseReviewPresenterProtocol {
     func presentCourseReview(response: WriteCourseReview.CourseReviewLoad.Response)
-    func presentSendReviewResult(response: WriteCourseReview.SendReview.Response)
-    func presentReviewUpdate(response: WriteCourseReview.ReviewUpdate.Response)
-    func presentRatingUpdate(response: WriteCourseReview.RatingUpdate.Response)
+    func presentCourseReviewTextUpdate(response: WriteCourseReview.CourseReviewTextUpdate.Response)
+    func presentCourseReviewScoreUpdate(response: WriteCourseReview.CourseReviewScoreUpdate.Response)
+    func presentCourseReviewMainActionResult(response: WriteCourseReview.CourseReviewMainAction.Response)
+
     func presentWaitingState(response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -19,29 +20,29 @@ final class WriteCourseReviewPresenter: WriteCourseReviewPresenterProtocol {
         )
     }
 
-    func presentSendReviewResult(response: WriteCourseReview.SendReview.Response) {
-        self.viewController?.displaySendReviewResult(
-            viewModel: WriteCourseReview.SendReview.ViewModel(
+    func presentCourseReviewTextUpdate(response: WriteCourseReview.CourseReviewTextUpdate.Response) {
+        self.viewController?.displayCourseReviewTextUpdate(
+            viewModel: WriteCourseReview.CourseReviewTextUpdate.ViewModel(
+                viewModel: self.makeViewModel(info: response.result)
+            )
+        )
+    }
+
+    func presentCourseReviewScoreUpdate(response: WriteCourseReview.CourseReviewScoreUpdate.Response) {
+        self.viewController?.displayCourseReviewScoreUpdate(
+            viewModel: WriteCourseReview.CourseReviewScoreUpdate.ViewModel(
+                viewModel: self.makeViewModel(info: response.result)
+            )
+        )
+    }
+
+    func presentCourseReviewMainActionResult(response: WriteCourseReview.CourseReviewMainAction.Response) {
+        self.viewController?.displayCourseReviewMainActionResult(
+            viewModel: WriteCourseReview.CourseReviewMainAction.ViewModel(
                 isSuccessful: response.isSuccessful,
                 message: response.isSuccessful
                     ? NSLocalizedString("WriteCourseReviewActionSendResultSuccess", comment: "")
                     : NSLocalizedString("WriteCourseReviewActionSendResultFailed", comment: "")
-            )
-        )
-    }
-
-    func presentReviewUpdate(response: WriteCourseReview.ReviewUpdate.Response) {
-        self.viewController?.displayReviewUpdate(
-            viewModel: WriteCourseReview.ReviewUpdate.ViewModel(
-                viewModel: self.makeViewModel(info: response.result)
-            )
-        )
-    }
-
-    func presentRatingUpdate(response: WriteCourseReview.RatingUpdate.Response) {
-        self.viewController?.displayRatingUpdate(
-            viewModel: WriteCourseReview.RatingUpdate.ViewModel(
-                viewModel: self.makeViewModel(info: response.result)
             )
         )
     }
@@ -54,14 +55,13 @@ final class WriteCourseReviewPresenter: WriteCourseReviewPresenterProtocol {
         )
     }
 
-    private func makeViewModel(info: WriteCourseReview.CourseReviewInfo) -> WriteCourseReviewViewModel {
-        let review = info.review ?? ""
-        let rating = info.rating ?? 0
+    // MARK: - Private API
 
+    private func makeViewModel(info: WriteCourseReview.CourseReviewInfo) -> WriteCourseReviewViewModel {
         return WriteCourseReviewViewModel(
-            review: review,
-            rating: rating,
-            isFilled: !review.isEmpty && rating > 0
+            text: info.text,
+            score: info.score,
+            isFilled: !info.text.isEmpty && info.score > 0
         )
     }
 }

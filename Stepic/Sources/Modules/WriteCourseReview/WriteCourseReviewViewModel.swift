@@ -1,7 +1,7 @@
 import Foundation
 
 struct WriteCourseReviewViewModel {
-    let review: String
-    let rating: Int
+    let text: String
+    let score: Int
     let isFilled: Bool
 }

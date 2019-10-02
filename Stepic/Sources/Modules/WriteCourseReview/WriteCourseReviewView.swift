@@ -2,8 +2,8 @@ import SnapKit
 import UIKit
 
 protocol WriteCourseReviewViewDelegate: class {
-    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateReview review: String)
-    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateRating rating: Int)
+    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateText text: String)
+    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateScore score: Int)
 }
 
 extension WriteCourseReviewView {
@@ -11,13 +11,13 @@ extension WriteCourseReviewView {
         let backgroundColor = UIColor.white
 
         let starsViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
-        let clearStarsColor = UIColor.mainDark
+        let starsClearColor = UIColor.mainDark
         let starsSpacing: CGFloat = 10
         let starsSize = CGSize(width: 31.5, height: 31.5)
 
-        let ratingMessageInsets = LayoutInsets(top: 8)
-        let ratingMessageFont = UIFont.systemFont(ofSize: 12)
-        let ratingMessageTextColor = UIColor.mainDark
+        let starsHintLabelInsets = LayoutInsets(top: 8)
+        let starsHintLabelFont = UIFont.systemFont(ofSize: 12)
+        let starsHintLabelTextColor = UIColor.mainDark
 
         let separatorViewInsets = LayoutInsets(top: 16, left: 16)
 
@@ -33,9 +33,9 @@ final class WriteCourseReviewView: UIView {
 
     weak var delegate: WriteCourseReviewViewDelegate?
 
-    private lazy var starsRatingView: CourseRatingView = {
+    private lazy var starsView: CourseRatingView = {
         var appearance = CourseRatingView.Appearance()
-        appearance.statClearColor = self.appearance.clearStarsColor
+        appearance.statClearColor = self.appearance.starsClearColor
         appearance.starsSpacing = self.appearance.starsSpacing
         appearance.starsSize = self.appearance.starsSize
         let view = CourseRatingView(appearance: appearance)
@@ -43,14 +43,14 @@ final class WriteCourseReviewView: UIView {
         return view
     }()
 
-    private lazy var starsRatingContainerView = UIView()
+    private lazy var starsContainerView = UIView()
 
-    private lazy var ratingMessageLabel: UILabel = {
+    private lazy var starsHintLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.font = self.appearance.ratingMessageFont
-        label.textColor = self.appearance.ratingMessageTextColor
+        label.font = self.appearance.starsHintLabelFont
+        label.textColor = self.appearance.starsHintLabelTextColor
         label.text = NSLocalizedString("WriteCourseReviewRatingHint", comment: "")
         return label
     }()
@@ -75,12 +75,12 @@ final class WriteCourseReviewView: UIView {
 
     private var starsCount: Int {
         get {
-            return self.starsRatingView.starsCount
+            return self.starsView.starsCount
         }
         set {
-            if newValue != self.starsRatingView.starsCount {
-                self.starsRatingView.starsCount = newValue
-                self.delegate?.writeCourseReviewView(self, didUpdateRating: newValue)
+            if newValue != self.starsView.starsCount {
+                self.starsView.starsCount = newValue
+                self.delegate?.writeCourseReviewView(self, didUpdateScore: newValue)
             }
         }
     }
@@ -103,8 +103,8 @@ final class WriteCourseReviewView: UIView {
     }
 
     func configure(viewModel: WriteCourseReviewViewModel) {
-        self.textView.text = viewModel.review
-        self.starsCount = viewModel.rating
+        self.textView.text = viewModel.text
+        self.starsCount = viewModel.score
     }
 }
 
@@ -114,36 +114,36 @@ extension WriteCourseReviewView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
-        self.starsRatingContainerView.addSubview(self.starsRatingView)
-        self.addSubview(self.starsRatingContainerView)
-        self.addSubview(self.ratingMessageLabel)
+        self.starsContainerView.addSubview(self.starsView)
+        self.addSubview(self.starsContainerView)
+        self.addSubview(self.starsHintLabel)
         self.addSubview(self.separatorView)
         self.addSubview(self.textView)
     }
 
     func makeConstraints() {
-        self.starsRatingContainerView.translatesAutoresizingMaskIntoConstraints = false
-        self.starsRatingContainerView.snp.makeConstraints { make in
+        self.starsContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.starsContainerView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.starsViewInsets.left)
             make.top.equalToSuperview().offset(self.appearance.starsViewInsets.top)
             make.trailing.equalToSuperview().offset(-self.appearance.starsViewInsets.right)
             make.height.equalTo(self.appearance.starsSize.height)
         }
 
-        self.starsRatingView.translatesAutoresizingMaskIntoConstraints = false
-        self.starsRatingView.snp.makeConstraints { make in
+        self.starsView.translatesAutoresizingMaskIntoConstraints = false
+        self.starsView.snp.makeConstraints { make in
             make.top.leading.greaterThanOrEqualToSuperview()
             make.trailing.bottom.lessThanOrEqualToSuperview()
             make.centerY.centerX.equalToSuperview()
         }
 
-        self.ratingMessageLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.ratingMessageLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.starsRatingContainerView.snp.leading)
-            make.trailing.equalTo(self.starsRatingContainerView.snp.trailing)
+        self.starsHintLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.starsHintLabel.snp.makeConstraints { make in
+            make.leading.equalTo(self.starsContainerView.snp.leading)
+            make.trailing.equalTo(self.starsContainerView.snp.trailing)
             make.top
-                .equalTo(self.starsRatingContainerView.snp.bottom)
-                .offset(self.appearance.ratingMessageInsets.top)
+                .equalTo(self.starsContainerView.snp.bottom)
+                .offset(self.appearance.starsHintLabelInsets.top)
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
@@ -151,7 +151,7 @@ extension WriteCourseReviewView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.separatorViewInsets.left)
             make.trailing.equalToSuperview()
             make.top
-                .equalTo(self.ratingMessageLabel.snp.bottom)
+                .equalTo(self.starsHintLabel.snp.bottom)
                 .offset(self.appearance.separatorViewInsets.top)
         }
 
@@ -179,6 +179,6 @@ extension WriteCourseReviewView: CourseRatingViewDelegate {
 
 extension WriteCourseReviewView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        self.delegate?.writeCourseReviewView(self, didUpdateReview: textView.text)
+        self.delegate?.writeCourseReviewView(self, didUpdateText: textView.text)
     }
 }

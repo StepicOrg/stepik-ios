@@ -4,9 +4,10 @@ import UIKit
 
 protocol WriteCourseReviewViewControllerProtocol: class {
     func displayCourseReview(viewModel: WriteCourseReview.CourseReviewLoad.ViewModel)
-    func displaySendReviewResult(viewModel: WriteCourseReview.SendReview.ViewModel)
-    func displayReviewUpdate(viewModel: WriteCourseReview.ReviewUpdate.ViewModel)
-    func displayRatingUpdate(viewModel: WriteCourseReview.RatingUpdate.ViewModel)
+    func displayCourseReviewTextUpdate(viewModel: WriteCourseReview.CourseReviewTextUpdate.ViewModel)
+    func displayCourseReviewScoreUpdate(viewModel: WriteCourseReview.CourseReviewScoreUpdate.ViewModel)
+    func displayCourseReviewMainActionResult(viewModel: WriteCourseReview.CourseReviewMainAction.ViewModel)
+
     func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -18,14 +19,13 @@ final class WriteCourseReviewViewController: UIViewController {
     private lazy var cancelBarButton = UIBarButtonItem(
         barButtonSystemItem: .cancel,
         target: self,
-        action: #selector(self.cancelButtonDidClick)
+        action: #selector(self.cancelButtonDidClick(_:))
     )
 
-    private lazy var sendBarButton = UIBarButtonItem(
-        title: NSLocalizedString("WriteCourseReviewActionSend", comment: ""),
-        style: .done,
+    private lazy var doneBarButton = UIBarButtonItem(
+        barButtonSystemItem: .done,
         target: self,
-        action: #selector(self.sendButtonDidClick)
+        action: #selector(self.doneButtonDidClick(_:))
     )
 
     init(interactor: WriteCourseReviewInteractorProtocol) {
@@ -51,7 +51,7 @@ final class WriteCourseReviewViewController: UIViewController {
         self.edgesForExtendedLayout = []
 
         self.navigationItem.leftBarButtonItem = self.cancelBarButton
-        self.navigationItem.rightBarButtonItem = self.sendBarButton
+        self.navigationItem.rightBarButtonItem = self.doneBarButton
 
         self.interactor.doCourseReviewLoad(request: .init())
     }
@@ -74,22 +74,32 @@ final class WriteCourseReviewViewController: UIViewController {
     }
 
     @objc
-    private func sendButtonDidClick(_ sender: UIBarButtonItem) {
+    private func doneButtonDidClick(_ sender: UIBarButtonItem) {
         self.view.endEditing(true)
-        // Wait for displaySendReviewResult(viewModel:) to toggle state.
-        self.sendBarButton.isEnabled = false
+        // Wait for displayCourseReviewMainActionResult(viewModel:) to toggle state.
+        self.doneBarButton.isEnabled = false
 
-        self.interactor.doSendReview(request: .init())
+        self.interactor.doCourseReviewMainAction(request: .init())
     }
 }
+
+// MARK: - WriteCourseReviewViewController: WriteCourseReviewViewControllerProtocol -
 
 extension WriteCourseReviewViewController: WriteCourseReviewViewControllerProtocol {
     func displayCourseReview(viewModel: WriteCourseReview.CourseReviewLoad.ViewModel) {
         self.updateView(viewModel: viewModel.viewModel)
     }
 
-    func displaySendReviewResult(viewModel: WriteCourseReview.SendReview.ViewModel) {
-        self.sendBarButton.isEnabled = true
+    func displayCourseReviewTextUpdate(viewModel: WriteCourseReview.CourseReviewTextUpdate.ViewModel) {
+        self.updateView(viewModel: viewModel.viewModel)
+    }
+
+    func displayCourseReviewScoreUpdate(viewModel: WriteCourseReview.CourseReviewScoreUpdate.ViewModel) {
+        self.updateView(viewModel: viewModel.viewModel)
+    }
+
+    func displayCourseReviewMainActionResult(viewModel: WriteCourseReview.CourseReviewMainAction.ViewModel) {
+        self.doneBarButton.isEnabled = true
 
         if viewModel.isSuccessful {
             SVProgressHUD.showSuccess(withStatus: viewModel.message)
@@ -97,14 +107,6 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewControllerProtoc
         } else {
             SVProgressHUD.showError(withStatus: viewModel.message)
         }
-    }
-
-    func displayReviewUpdate(viewModel: WriteCourseReview.ReviewUpdate.ViewModel) {
-        self.updateView(viewModel: viewModel.viewModel)
-    }
-
-    func displayRatingUpdate(viewModel: WriteCourseReview.RatingUpdate.ViewModel) {
-        self.updateView(viewModel: viewModel.viewModel)
     }
 
     func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel) {
@@ -115,18 +117,22 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewControllerProtoc
         }
     }
 
+    // MARK: Private helpers
+
     private func updateView(viewModel: WriteCourseReviewViewModel) {
-        self.sendBarButton.isEnabled = viewModel.isFilled
+        self.doneBarButton.isEnabled = viewModel.isFilled
         self.writeCourseReviewView?.configure(viewModel: viewModel)
     }
 }
 
+// MARK: - WriteCourseReviewViewController: WriteCourseReviewViewDelegate -
+
 extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
-    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateReview review: String) {
-        self.interactor.doReviewUpdate(request: .init(review: review))
+    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateText text: String) {
+        self.interactor.doCourseReviewTextUpdate(request: .init(text: text))
     }
 
-    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateRating rating: Int) {
-        self.interactor.doRatingUpdate(request: .init(rating: rating))
+    func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateScore score: Int) {
+        self.interactor.doCourseReviewScoreUpdate(request: .init(score: score))
     }
 }

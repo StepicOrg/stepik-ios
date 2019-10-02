@@ -4,8 +4,8 @@ enum WriteCourseReview {
     // MARK: Common structs
 
     struct CourseReviewInfo {
-        let review: String?
-        let rating: Int?
+        let text: String
+        let score: Int
     }
 
     // MARK: Use cases
@@ -23,8 +23,38 @@ enum WriteCourseReview {
         }
     }
 
-    /// Create course review
-    enum SendReview {
+    /// Handle review text change
+    enum CourseReviewTextUpdate {
+        struct Request {
+            let text: String
+        }
+
+        struct Response {
+            let result: CourseReviewInfo
+        }
+
+        struct ViewModel {
+            let viewModel: WriteCourseReviewViewModel
+        }
+    }
+
+    /// Handle review score change
+    enum CourseReviewScoreUpdate {
+        struct Request {
+            let score: Int
+        }
+
+        struct Response {
+            let result: CourseReviewInfo
+        }
+
+        struct ViewModel {
+            let viewModel: WriteCourseReviewViewModel
+        }
+    }
+
+    /// Do review main action (screate or update)
+    enum CourseReviewMainAction {
         struct Request { }
 
         struct Response {
@@ -34,36 +64,6 @@ enum WriteCourseReview {
         struct ViewModel {
             let isSuccessful: Bool
             let message: String
-        }
-    }
-
-    /// Handle review text change
-    enum ReviewUpdate {
-        struct Request {
-            let review: String
-        }
-
-        struct Response {
-            let result: CourseReviewInfo
-        }
-
-        struct ViewModel {
-            let viewModel: WriteCourseReviewViewModel
-        }
-    }
-
-    /// Handle rating change
-    enum RatingUpdate {
-        struct Request {
-            let rating: Int
-        }
-
-        struct Response {
-            let result: CourseReviewInfo
-        }
-
-        struct ViewModel {
-            let viewModel: WriteCourseReviewViewModel
         }
     }
 
