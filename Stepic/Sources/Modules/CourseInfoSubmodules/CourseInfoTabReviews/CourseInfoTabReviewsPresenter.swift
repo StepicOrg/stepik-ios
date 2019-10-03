@@ -14,7 +14,10 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                 data: .init(
                     reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
                     hasNextPage: response.hasNextPage,
-                    canWriteReview: response.canWriteReview
+                    writeCourseReviewState: self.getWriteCourseReviewState(
+                        course: response.course,
+                        reviews: response.reviews
+                    )
                 )
             )
         )
@@ -27,7 +30,10 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                 data: .init(
                     reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
                     hasNextPage: response.hasNextPage,
-                    canWriteReview: response.canWriteReview
+                    writeCourseReviewState: self.getWriteCourseReviewState(
+                        course: response.course,
+                        reviews: response.reviews
+                    )
                 )
             )
         )
@@ -46,5 +52,28 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
             avatarImageURL: URL(string: reviewAuthor.avatarURL),
             score: courseReview.score
         )
+    }
+
+    private func getWriteCourseReviewState(
+        course: Course,
+        reviews: [CourseReview]
+    ) -> CourseInfoTabReviews.WriteCourseReviewState {
+        // 1. current user joined course, has review -> hide
+        // 2. current user joined course, no review and can write -> write
+        // 3. current user joined course, no review and can't write -> banner
+        // 4. current user not joined course -> hide
+        if course.progressId == nil {
+            return .hide
+        }
+
+        let isAlreadyWroteReview = reviews.contains { $0.isCurrentUserReview }
+
+        if isAlreadyWroteReview {
+            return .hide
+        }
+
+        return course.canWriteReview
+            ? .write
+            : .banner(NSLocalizedString("WriteCourseReviewActionNotAllowedDescription", comment: ""))
     }
 }

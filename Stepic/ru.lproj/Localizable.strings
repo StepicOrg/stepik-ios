@@ -651,6 +651,7 @@ WriteCourseReviewActionSendResultFailed = "Не удалось отправит�
 WriteCourseReviewActionCreate = "Написать отзыв";
 WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";
+WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";

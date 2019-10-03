@@ -8,6 +8,8 @@ protocol CourseInfoTabReviewsViewDelegate: class {
 
 extension CourseInfoTabReviewsView {
     struct Appearance {
+        let headerViewHeight: CGFloat = 60
+
         let paginationViewHeight: CGFloat = 52
 
         let emptyStateLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
@@ -20,12 +22,24 @@ final class CourseInfoTabReviewsView: UIView {
     let appearance: Appearance
     weak var delegate: CourseInfoTabReviewsViewDelegate?
 
-    private lazy var writeReviewButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("WriteCourseReviewActionCreate", comment: ""), for: .normal)
-        button.addTarget(self, action: #selector(self.writeReviewDidClick), for: .touchUpInside)
-        button.setTitleColor(.mainDark, for: .normal)
-        return button
+    private lazy var headerView: CourseInfoTabReviewsHeaderView = {
+        let headerView = CourseInfoTabReviewsHeaderView()
+
+        // Disable masks to prevent constraints breaking
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.headerViewHeight)
+        }
+
+        headerView.onWriteReviewButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabReviewsViewDidRequestWriteReview(strongSelf)
+        }
+
+        return headerView
     }()
 
     private lazy var tableView: UITableView = {
@@ -59,19 +73,18 @@ final class CourseInfoTabReviewsView: UIView {
     private var shouldShowPaginationView = false
     var paginationView: UIView?
 
-    var canWriteReview: Bool = false {
+    var writeCourseReviewState: CourseInfoTabReviews.WriteCourseReviewState = .hide {
         didSet {
-            if self.canWriteReview {
-                self.tableView.tableHeaderView = self.writeReviewButton
-                self.tableView.tableHeaderView?.frame = CGRect(
-                    x: 0,
-                    y: 0,
-                    width: self.frame.width,
-                    height: 52
-                )
-            } else {
-                self.tableView.tableHeaderView?.frame = .zero
+            switch self.writeCourseReviewState {
+            case .write:
+                self.tableView.tableHeaderView = self.headerView
+                self.headerView.shouldShowWriteReviewButton = true
+            case .hide:
                 self.tableView.tableHeaderView = nil
+            case .banner(let text):
+                self.tableView.tableHeaderView = self.headerView
+                self.headerView.writeReviewBannerText = text
+                self.headerView.shouldShowWriteReviewBanner = true
             }
         }
     }
@@ -88,6 +101,11 @@ final class CourseInfoTabReviewsView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.tableView.layoutTableHeaderView()
     }
 
     func updateTableViewData(dataSource: UITableViewDataSource) {

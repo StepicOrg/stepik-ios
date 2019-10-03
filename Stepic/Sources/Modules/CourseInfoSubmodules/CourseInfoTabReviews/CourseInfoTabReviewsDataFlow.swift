@@ -6,7 +6,7 @@ enum CourseInfoTabReviews {
     struct ReviewsResult {
         let reviews: [CourseInfoTabReviewsViewModel]
         let hasNextPage: Bool
-        let canWriteReview: Bool
+        let writeCourseReviewState: WriteCourseReviewState
     }
 
     // MARK: Use cases
@@ -16,9 +16,9 @@ enum CourseInfoTabReviews {
         struct Request { }
 
         struct Response {
+            let course: Course
             let reviews: [CourseReview]
             let hasNextPage: Bool
-            let canWriteReview: Bool
         }
 
         struct ViewModel {
@@ -31,9 +31,9 @@ enum CourseInfoTabReviews {
         struct Request { }
 
         struct Response {
+            let course: Course
             let reviews: [CourseReview]
             let hasNextPage: Bool
-            let canWriteReview: Bool
         }
 
         struct ViewModel {
@@ -51,5 +51,11 @@ enum CourseInfoTabReviews {
     enum PaginationState {
         case result(data: ReviewsResult)
         case error(message: String)
+    }
+
+    enum WriteCourseReviewState {
+        case write
+        case hide
+        case banner(String)
     }
 }

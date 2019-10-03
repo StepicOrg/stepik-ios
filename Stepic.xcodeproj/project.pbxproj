@@ -637,6 +637,7 @@
 		2CA5E5A5200E1FC500CE77B0 /* AdaptiveStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */; };
 		2CA5E5A6200E1FC700CE77B0 /* AdaptiveRatingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */; };
 		2CA5E5A7200E1FCA00CE77B0 /* AdaptiveRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */; };
+		2CA725112344F6840033AF7E /* CourseInfoTabReviewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA725102344F6840033AF7E /* CourseInfoTabReviewsHeaderView.swift */; };
 		2CA9D97720109718007AA743 /* AdaptiveStatsPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */; };
 		2CA9D97920109727007AA743 /* AdaptiveStatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */; };
 		2CA9D97D20109C07007AA743 /* AdaptiveRatingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */; };
@@ -1779,6 +1780,7 @@
 		2CA255361F8CD62B00C58048 /* NotificationStatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatusButton.swift; sourceTree = "<group>"; };
 		2CA3DAA02179C6F600F43888 /* NotificationsRegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRegistrationService.swift; sourceTree = "<group>"; };
 		2CA3DAA22179C71500F43888 /* NotificationPermissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionStatus.swift; sourceTree = "<group>"; };
+		2CA725102344F6840033AF7E /* CourseInfoTabReviewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsHeaderView.swift; sourceTree = "<group>"; };
 		2CA9D97620109718007AA743 /* AdaptiveStatsPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPagerViewController.swift; sourceTree = "<group>"; };
 		2CA9D97820109727007AA743 /* AdaptiveStatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsPresenter.swift; sourceTree = "<group>"; };
 		2CA9D97C20109C07007AA743 /* AdaptiveRatingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsPresenter.swift; sourceTree = "<group>"; };
@@ -4437,6 +4439,31 @@
 			name = "Rating & Stats";
 			sourceTree = "<group>";
 		};
+		2CA7250F2344F6600033AF7E /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				2CA725102344F6840033AF7E /* CourseInfoTabReviewsHeaderView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		2CA725122344F6AF0033AF7E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				62E987308713F1FD4002C5C4 /* CourseInfoTabReviewsCellView.swift */,
+				62E98EE1E2562D26941B17E5 /* CourseInfoTabReviewsTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		2CA72513234503820033AF7E /* InputOutput */ = {
+			isa = PBXGroup;
+			children = (
+				62E98A7D37ADA240B233475D /* CourseInfoTabReviewsInputProtocol.swift */,
+			);
+			path = InputOutput;
+			sourceTree = "<group>";
+		};
 		2CA9D975201096EB007AA743 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
@@ -4855,10 +4882,10 @@
 		62E98015BD617352F88F1568 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62E98320617E2301C47D7E47 /* CourseInfoTabReviewsView.swift */,
 				62E98120B0C3386F65F3DA21 /* CourseInfoTabReviewsTableViewDataSource.swift */,
-				62E987308713F1FD4002C5C4 /* CourseInfoTabReviewsCellView.swift */,
-				62E98EE1E2562D26941B17E5 /* CourseInfoTabReviewsTableViewCell.swift */,
+				62E98320617E2301C47D7E47 /* CourseInfoTabReviewsView.swift */,
+				2CA725122344F6AF0033AF7E /* Cell */,
+				2CA7250F2344F6600033AF7E /* Header */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5234,12 +5261,12 @@
 			children = (
 				62E9839AB6FC6C23475C7601 /* CourseInfoTabReviewsAssembly.swift */,
 				62E982C5076ACF7A9001D3C5 /* CourseInfoTabReviewsDataFlow.swift */,
-				62E98A7D37ADA240B233475D /* CourseInfoTabReviewsInputProtocol.swift */,
 				62E98559630C91C2F66EB581 /* CourseInfoTabReviewsInteractor.swift */,
 				62E980995BBE30D6844BC889 /* CourseInfoTabReviewsPresenter.swift */,
 				62E98A09818C53FE2E86D6EA /* CourseInfoTabReviewsProvider.swift */,
 				62E9814B50BF148E60164FEB /* CourseInfoTabReviewsViewController.swift */,
 				62E98E79F6DDAB90D2CA6968 /* CourseInfoTabReviewsViewModel.swift */,
+				2CA72513234503820033AF7E /* InputOutput */,
 				62E98015BD617352F88F1568 /* Views */,
 			);
 			path = CourseInfoTabReviews;
@@ -6793,6 +6820,7 @@
 				0859AE951E4F19B600A0D206 /* FillBlanksQuizViewController.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */,
+				2CA725112344F6840033AF7E /* CourseInfoTabReviewsHeaderView.swift in Sources */,
 				08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,
 				089504831F27C5C600EEC939 /* FullHeightTableView.swift in Sources */,
 				0861E6751CD8106E00B45652 /* ExecutionQueue.swift in Sources */,

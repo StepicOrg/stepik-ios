@@ -70,7 +70,7 @@ final class CourseInfoTabReviewsViewController: UIViewController {
 
         if case .result(let data) = newState {
             self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
-            self.courseInfoTabReviewsView?.canWriteReview = data.canWriteReview
+            self.courseInfoTabReviewsView?.writeCourseReviewState = data.writeCourseReviewState
         }
     }
 }
@@ -108,8 +108,13 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
     }
 
     func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
-        let assembly = WriteCourseReviewAssembly(output: nil)
+        guard let courseID = LastStepGlobalContext.context.course?.id else {
+            return
+        }
+
+        let assembly = WriteCourseReviewAssembly(courseID: courseID, courseReview: nil, output: nil)
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
         self.present(module: controller)
     }
 }
