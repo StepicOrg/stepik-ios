@@ -139,6 +139,9 @@ final class NewChoiceQuizView: UIView {
 
         self.loadGroup = DispatchGroup()
         self.loadGroup?.notify(queue: .main) { [weak self] in
+            // dispatch_group_leave call isn't balanced with dispatch_group_enter, deinit dispatch_group_t here to
+            // prevent possible future call to leave onContentLoad.
+            self?.loadGroup = nil
             self?.endLoading()
         }
 
