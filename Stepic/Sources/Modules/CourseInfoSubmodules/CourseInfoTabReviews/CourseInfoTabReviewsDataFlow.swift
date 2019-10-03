@@ -19,6 +19,7 @@ enum CourseInfoTabReviews {
             let course: Course
             let reviews: [CourseReview]
             let hasNextPage: Bool
+            let currentUserReview: CourseReview?
         }
 
         struct ViewModel {
@@ -34,6 +35,7 @@ enum CourseInfoTabReviews {
             let course: Course
             let reviews: [CourseReview]
             let hasNextPage: Bool
+            let currentUserReview: CourseReview?
         }
 
         struct ViewModel {

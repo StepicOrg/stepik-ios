@@ -9,7 +9,8 @@ final class CourseInfoTabReviewsAssembly: Assembly {
         let provider = CourseInfoTabReviewsProvider(
             courseReviewsPersistenceService: CourseReviewsPersistenceService(),
             courseReviewsNetworkService: CourseReviewsNetworkService(courseReviewsAPI: CourseReviewsAPI()),
-            usersNetworkService: UsersNetworkService(usersAPI: UsersAPI())
+            usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
+            userAccountService: UserAccountService()
         )
         let interactor = CourseInfoTabReviewsInteractor(presenter: presenter, provider: provider)
         let viewController = CourseInfoTabReviewsViewController(interactor: interactor)

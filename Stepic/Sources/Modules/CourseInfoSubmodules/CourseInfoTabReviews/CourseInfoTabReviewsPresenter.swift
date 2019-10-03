@@ -16,7 +16,8 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                     hasNextPage: response.hasNextPage,
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
-                        reviews: response.reviews
+                        reviews: response.reviews,
+                        currentUserReview: response.currentUserReview
                     )
                 )
             )
@@ -32,7 +33,8 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                     hasNextPage: response.hasNextPage,
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
-                        reviews: response.reviews
+                        reviews: response.reviews,
+                        currentUserReview: response.currentUserReview
                     )
                 )
             )
@@ -56,7 +58,8 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
 
     private func getWriteCourseReviewState(
         course: Course,
-        reviews: [CourseReview]
+        reviews: [CourseReview],
+        currentUserReview: CourseReview?
     ) -> CourseInfoTabReviews.WriteCourseReviewState {
         // 1. current user joined course, has review -> hide
         // 2. current user joined course, no review and can write -> write
@@ -66,9 +69,7 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
             return .hide
         }
 
-        let isAlreadyWroteReview = reviews.contains { $0.isCurrentUserReview }
-
-        if isAlreadyWroteReview {
+        if currentUserReview != nil {
             return .hide
         }
 

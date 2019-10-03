@@ -13,6 +13,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     private let provider: CourseInfoTabReviewsProviderProtocol
 
     private var currentCourse: Course?
+    private var currentUserReview: CourseReview?
     private var isOnline = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var shouldOpenedAnalyticsEventSend = false
@@ -78,7 +79,8 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 let response = CourseInfoTabReviews.NextReviewsLoad.Response(
                     course: course,
                     reviews: sortedReviews,
-                    hasNextPage: meta.hasNext
+                    hasNextPage: meta.hasNext,
+                    currentUserReview: strongSelf.currentUserReview
                 )
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextCourseReviews(response: response)
@@ -95,25 +97,47 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         course: Course,
         isOnline: Bool
     ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Response> {
-        guard let course = self.currentCourse else {
-            return Promise(error: Error.undefinedCourse)
-        }
-
         return Promise { seal in
             firstly {
                 isOnline
                     ? self.provider.fetchRemote(course: course, page: 1)
                     : self.provider.fetchCached(course: course)
-            }.done { reviews, meta in
+            }.then { reviews, meta in
+                self.fetchCurrentUserReviewInAppropriateMode(
+                    course: course,
+                    isOnline: isOnline
+                ).map { ($0, reviews, meta) }
+            }.done { currentUserReview, reviews, meta in
+                self.currentUserReview = currentUserReview
+
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
                 let response = CourseInfoTabReviews.ReviewsLoad.Response(
                     course: course,
                     reviews: sortedReviews,
-                    hasNextPage: meta.hasNext
+                    hasNextPage: meta.hasNext,
+                    currentUserReview: self.currentUserReview
                 )
+
                 seal.fulfill(response)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    private func fetchCurrentUserReviewInAppropriateMode(
+        course: Course,
+        isOnline: Bool
+    ) -> Guarantee<CourseReview?> {
+        return Guarantee { seal in
+            firstly {
+                isOnline
+                    ? self.provider.fetchCurrentUserReviewRemote(course: course)
+                    : self.provider.fetchCurrentUserReviewCached(course: course)
+            }.done { review in
+                seal(review)
+            }.catch { _ in
+                seal(nil)
             }
         }
     }
