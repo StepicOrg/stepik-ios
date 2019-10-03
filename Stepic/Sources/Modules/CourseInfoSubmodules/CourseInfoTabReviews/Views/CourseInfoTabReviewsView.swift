@@ -4,6 +4,7 @@ import UIKit
 protocol CourseInfoTabReviewsViewDelegate: class {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
 }
 
 extension CourseInfoTabReviewsView {
@@ -37,6 +38,14 @@ final class CourseInfoTabReviewsView: UIView {
             }
 
             strongSelf.delegate?.courseInfoTabReviewsViewDidRequestWriteReview(strongSelf)
+        }
+
+        headerView.onEditReviewButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabReviewsViewDidRequestEditReview(strongSelf)
         }
 
         return headerView
@@ -79,6 +88,9 @@ final class CourseInfoTabReviewsView: UIView {
             case .write:
                 self.tableView.tableHeaderView = self.headerView
                 self.headerView.shouldShowWriteReviewButton = true
+            case .edit:
+                self.tableView.tableHeaderView = self.headerView
+                self.headerView.shouldShowEditReviewButton = true
             case .hide:
                 self.tableView.tableHeaderView = nil
             case .banner(let text):

@@ -61,16 +61,12 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         reviews: [CourseReview],
         currentUserReview: CourseReview?
     ) -> CourseInfoTabReviews.WriteCourseReviewState {
-        // 1. current user joined course, has review -> hide
-        // 2. current user joined course, no review and can write -> write
-        // 3. current user joined course, no review and can't write -> banner
-        // 4. current user not joined course -> hide
         if course.progressId == nil {
             return .hide
         }
 
         if currentUserReview != nil {
-            return .hide
+            return .edit
         }
 
         return course.canWriteReview

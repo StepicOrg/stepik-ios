@@ -648,6 +648,7 @@ WriteCourseReviewTitle = "Course review";
 WriteCourseReviewActionSendResultSuccess = "Sent";
 WriteCourseReviewActionSendResultFailed = "Failed to send your feedback";
 WriteCourseReviewActionCreate = "Write a review";
+WriteCourseReviewActionEdit = "Edit a review";
 WriteCourseReviewPlaceholder = "Review";
 WriteCourseReviewRatingHint = "Tap a Star to Rate";
 WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more than 80% steps";

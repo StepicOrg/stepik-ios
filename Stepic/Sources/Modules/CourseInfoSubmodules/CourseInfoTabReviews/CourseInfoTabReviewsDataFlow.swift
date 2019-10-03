@@ -57,6 +57,7 @@ enum CourseInfoTabReviews {
 
     enum WriteCourseReviewState {
         case write
+        case edit
         case hide
         case banner(String)
     }

@@ -117,4 +117,8 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
 
         self.present(module: controller)
     }
+
+    func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
+        print("EDIT")
+    }
 }

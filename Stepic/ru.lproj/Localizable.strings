@@ -649,6 +649,7 @@ WriteCourseReviewTitle = "Отзыв о курсе";
 WriteCourseReviewActionSendResultSuccess = "Отправлено";
 WriteCourseReviewActionSendResultFailed = "Не удалось отправить отзыв";
 WriteCourseReviewActionCreate = "Написать отзыв";
+WriteCourseReviewActionEdit = "Редактировать отзыв";
 WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";
 WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";

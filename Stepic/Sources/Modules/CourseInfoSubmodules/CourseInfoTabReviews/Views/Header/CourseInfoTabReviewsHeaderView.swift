@@ -28,7 +28,7 @@ final class CourseInfoTabReviewsHeaderView: UIView {
         return stackView
     }()
 
-    private lazy var writeReviewButton: ImageButton = {
+    private lazy var reviewButton: ImageButton = {
         let button = ImageButton()
         button.image = UIImage(named: "course-info-reviews-write")?.withRenderingMode(.alwaysTemplate)
         button.tintColor = self.appearance.buttonTintColor
@@ -37,12 +37,12 @@ final class CourseInfoTabReviewsHeaderView: UIView {
         button.imageInsets = self.appearance.buttonImageInsets
         button.titleInsets = self.appearance.buttonTitleInsets
         button.imageSize = self.appearance.buttonImageSize
-        button.addTarget(self, action: #selector(self.onWriteReviewButtonClicked), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.onReviewButtonClicked), for: .touchUpInside)
         button.isHidden = true
         return button
     }()
 
-    private lazy var writeReviewDescriptionLabel: UILabel = {
+    private lazy var reviewDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("WriteCourseReviewActionNotAllowedDescription", comment: "")
         label.font = self.appearance.labelFont
@@ -53,26 +53,36 @@ final class CourseInfoTabReviewsHeaderView: UIView {
 
     private lazy var separatorView = SeparatorView()
 
+    private var currentReviewAction = ReviewAction.write
+
     var shouldShowWriteReviewButton: Bool = false {
         didSet {
-            self.writeReviewButton.isHidden = !self.shouldShowWriteReviewButton
-            self.writeReviewDescriptionLabel.isHidden = self.shouldShowWriteReviewBanner
+            self.currentReviewAction = .write
+            self.updateReviewButton()
+        }
+    }
+
+    var shouldShowEditReviewButton: Bool = false {
+        didSet {
+            self.currentReviewAction = .edit
+            self.updateReviewButton()
         }
     }
 
     var shouldShowWriteReviewBanner: Bool = true {
         didSet {
-            self.writeReviewDescriptionLabel.isHidden = !self.shouldShowWriteReviewBanner
+            self.reviewDescriptionLabel.isHidden = !self.shouldShowWriteReviewBanner
         }
     }
 
     var writeReviewBannerText: String? {
         didSet {
-            self.writeReviewDescriptionLabel.text = self.writeReviewBannerText
+            self.reviewDescriptionLabel.text = self.writeReviewBannerText
         }
     }
 
     var onWriteReviewButtonClick: (() -> Void)?
+    var onEditReviewButtonClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -88,19 +98,54 @@ final class CourseInfoTabReviewsHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Private API
+
+    private func updateReviewButton() {
+        let isVisible = self.shouldShowWriteReviewButton || self.shouldShowEditReviewButton
+        if isVisible {
+            self.shouldShowWriteReviewBanner = false
+        }
+
+        self.reviewButton.isHidden = !isVisible
+        self.reviewButton.title = self.currentReviewAction.title
+    }
+
     @objc
-    private func onWriteReviewButtonClicked() {
-        self.onWriteReviewButtonClick?()
+    private func onReviewButtonClicked() {
+        switch self.currentReviewAction {
+        case .write:
+            self.onWriteReviewButtonClick?()
+        case .edit:
+            self.onEditReviewButtonClick?()
+        }
+    }
+
+    // MARK: - Types
+
+    private enum ReviewAction {
+        case write
+        case edit
+
+        var title: String {
+            switch self {
+            case .write:
+                return NSLocalizedString("WriteCourseReviewActionCreate", comment: "")
+            case .edit:
+                return NSLocalizedString("WriteCourseReviewActionEdit", comment: "")
+            }
+        }
     }
 }
+
+// MARK: - CourseInfoTabReviewsHeaderView: ProgrammaticallyInitializableViewProtocol -
 
 extension CourseInfoTabReviewsHeaderView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.stackView)
-        self.addSubview(self.writeReviewDescriptionLabel)
+        self.addSubview(self.reviewDescriptionLabel)
         self.addSubview(self.separatorView)
 
-        self.stackView.addArrangedSubview(self.writeReviewButton)
+        self.stackView.addArrangedSubview(self.reviewButton)
     }
 
     func makeConstraints() {
@@ -111,8 +156,8 @@ extension CourseInfoTabReviewsHeaderView: ProgrammaticallyInitializableViewProto
             make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.insets.right).priority(999)
         }
 
-        self.writeReviewDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.writeReviewDescriptionLabel.snp.makeConstraints { make in
+        self.reviewDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.reviewDescriptionLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.top.equalToSuperview()
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
