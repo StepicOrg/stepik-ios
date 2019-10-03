@@ -18,6 +18,7 @@ final class WriteCourseReviewAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = WriteCourseReviewProvider(
+            coursesPersistenceService: CoursesPersistenceService(),
             courseReviewsNetworkService: CourseReviewsNetworkService(
                 courseReviewsAPI: CourseReviewsAPI()
             ),

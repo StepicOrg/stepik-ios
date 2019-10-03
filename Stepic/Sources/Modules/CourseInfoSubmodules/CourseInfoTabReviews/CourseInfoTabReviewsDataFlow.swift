@@ -43,6 +43,21 @@ enum CourseInfoTabReviews {
         }
     }
 
+    /// Present write course review (after click)
+    enum WriteCourseReviewPresentation {
+        struct Request { }
+
+        struct Response {
+            let course: Course
+            let review: CourseReview?
+        }
+
+        struct ViewModel {
+            let courseID: Course.IdType
+            let review: CourseReview?
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

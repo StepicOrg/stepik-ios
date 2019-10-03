@@ -3,6 +3,7 @@ import Foundation
 protocol CourseInfoTabReviewsPresenterProtocol: class {
     func presentCourseReviews(response: CourseInfoTabReviews.ReviewsLoad.Response)
     func presentNextCourseReviews(response: CourseInfoTabReviews.NextReviewsLoad.Response)
+    func presentWriteCourseReview(response: CourseInfoTabReviews.WriteCourseReviewPresentation.Response)
 }
 
 final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol {
@@ -40,6 +41,15 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
             )
         )
         self.viewController?.displayNextCourseReviews(viewModel: viewModel)
+    }
+
+    func presentWriteCourseReview(response: CourseInfoTabReviews.WriteCourseReviewPresentation.Response) {
+        self.viewController?.displayWriteCourseReview(
+            viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel(
+                courseID: response.course.id,
+                review: response.review
+            )
+        )
     }
 
     private func makeViewModel(courseReview: CourseReview) -> CourseInfoTabReviewsViewModel? {

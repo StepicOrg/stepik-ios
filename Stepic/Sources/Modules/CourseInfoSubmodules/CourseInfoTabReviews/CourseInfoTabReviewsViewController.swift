@@ -3,6 +3,7 @@ import UIKit
 protocol CourseInfoTabReviewsViewControllerProtocol: class {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel)
     func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel)
+    func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel)
 }
 
 final class CourseInfoTabReviewsViewController: UIViewController {
@@ -75,6 +76,8 @@ final class CourseInfoTabReviewsViewController: UIViewController {
     }
 }
 
+// MARK: - CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol -
+
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel) {
         if case .result(let data) = viewModel.state {
@@ -95,7 +98,20 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
             self.updatePagination(hasNextPage: false, hasError: true)
         }
     }
+
+    func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel) {
+        let assembly = WriteCourseReviewAssembly(
+            courseID: viewModel.courseID,
+            courseReview: viewModel.review,
+            output: self.interactor as? WriteCourseReviewOutputProtocol
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller)
+    }
 }
+
+// MARK: - CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate -
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
@@ -108,17 +124,10 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
     }
 
     func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
-        guard let courseID = LastStepGlobalContext.context.course?.id else {
-            return
-        }
-
-        let assembly = WriteCourseReviewAssembly(courseID: courseID, courseReview: nil, output: nil)
-        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
-
-        self.present(module: controller)
+        self.interactor.doWriteCourseReviewPresentation(request: .init())
     }
 
     func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
-        print("EDIT")
+        self.interactor.doWriteCourseReviewPresentation(request: .init())
     }
 }

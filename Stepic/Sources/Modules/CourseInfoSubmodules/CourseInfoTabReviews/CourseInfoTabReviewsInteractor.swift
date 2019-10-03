@@ -4,6 +4,7 @@ import PromiseKit
 protocol CourseInfoTabReviewsInteractorProtocol: class {
     func doCourseReviewsFetch(request: CourseInfoTabReviews.ReviewsLoad.Request)
     func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request)
+    func doWriteCourseReviewPresentation(request: CourseInfoTabReviews.WriteCourseReviewPresentation.Request)
 }
 
 final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtocol {
@@ -93,6 +94,19 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         }
     }
 
+    func doWriteCourseReviewPresentation(request: CourseInfoTabReviews.WriteCourseReviewPresentation.Request) {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        self.presenter.presentWriteCourseReview(
+            response: CourseInfoTabReviews.WriteCourseReviewPresentation.Response(
+                course: course,
+                review: self.currentUserReview
+            )
+        )
+    }
+
     private func fetchReviewsInAppropriateMode(
         course: Course,
         isOnline: Bool
@@ -148,6 +162,8 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     }
 }
 
+// MARK: - CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol -
+
 extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
     func handleControllerAppearance() {
         if let course = self.currentCourse {
@@ -168,5 +184,15 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
             AmplitudeAnalyticsEvents.CourseReviews.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         }
+    }
+}
+
+// MARK: - CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol -
+
+extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
+    func handleCourseReviewCreated(_ courseReview: CourseReview) {
+    }
+
+    func handleCourseReviewUpdated(_ courseReview: CourseReview) {
     }
 }
