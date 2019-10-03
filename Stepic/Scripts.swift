@@ -31,9 +31,7 @@ struct Scripts {
     }
 
     static var localTex: String {
-        return RemoteConfig.shared.newLessonAvailable
-            ? loadScriptWithKey(localKaTeXScriptKey)
-            : "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
+        return "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
     }
 
     static var metaViewport: String {
