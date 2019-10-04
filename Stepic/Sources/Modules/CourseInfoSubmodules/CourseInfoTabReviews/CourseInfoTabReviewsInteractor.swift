@@ -191,8 +191,16 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
 
 extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
     func handleCourseReviewCreated(_ courseReview: CourseReview) {
+        self.currentUserReview = courseReview
+        self.presenter.presentReviewCreated(
+            response: CourseInfoTabReviews.ReviewCreated.Response(review: courseReview)
+        )
     }
 
     func handleCourseReviewUpdated(_ courseReview: CourseReview) {
+        self.currentUserReview = courseReview
+        self.presenter.presentReviewUpdated(
+            response: CourseInfoTabReviews.ReviewUpdated.Response(review: courseReview)
+        )
     }
 }

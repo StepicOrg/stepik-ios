@@ -4,6 +4,8 @@ protocol CourseInfoTabReviewsViewControllerProtocol: class {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel)
     func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel)
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel)
+    func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel)
+    func displayReviewUpdated(viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel)
 }
 
 final class CourseInfoTabReviewsViewController: UIViewController {
@@ -108,6 +110,18 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
         self.present(module: controller)
+    }
+
+    func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel) {
+        self.tableDataSource.insertViewModelIfNotContains(viewModel.viewModel, at: 0)
+        self.updateState(newState: self.state)
+        self.courseInfoTabReviewsView?.writeCourseReviewState = .edit
+    }
+
+    func displayReviewUpdated(viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel) {
+        self.tableDataSource.updateViewModel(viewModel.viewModel)
+        self.updateState(newState: self.state)
+        self.courseInfoTabReviewsView?.writeCourseReviewState = .edit
     }
 }
 

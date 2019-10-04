@@ -20,4 +20,20 @@ final class CourseInfoTabReviewsTableViewDataSource: NSObject, UITableViewDataSo
         cell.configure(viewModel: viewModel)
         return cell
     }
+
+    func insertViewModelIfNotContains(_ viewModel: CourseInfoTabReviewsViewModel, at index: Int) {
+        guard 0..<self.viewModels.count ~= index else {
+            return
+        }
+
+        if !self.viewModels.contains(where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }) {
+            self.viewModels.insert(viewModel, at: index)
+        }
+    }
+
+    func updateViewModel(_ viewModel: CourseInfoTabReviewsViewModel) {
+        if let index = self.viewModels.firstIndex(where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }) {
+            self.viewModels[index] = viewModel
+        }
+    }
 }

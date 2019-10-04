@@ -43,6 +43,28 @@ enum CourseInfoTabReviews {
         }
     }
 
+    /// Show current user newly created review
+    enum ReviewCreated {
+        struct Response {
+            let review: CourseReview
+        }
+
+        struct ViewModel {
+            let viewModel: CourseInfoTabReviewsViewModel
+        }
+    }
+
+    /// Show current user review update
+    enum ReviewUpdated {
+        struct Response {
+            let review: CourseReview
+        }
+
+        struct ViewModel {
+            let viewModel: CourseInfoTabReviewsViewModel
+        }
+    }
+
     /// Present write course review (after click)
     enum WriteCourseReviewPresentation {
         struct Request { }

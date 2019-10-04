@@ -4,6 +4,8 @@ protocol CourseInfoTabReviewsPresenterProtocol: class {
     func presentCourseReviews(response: CourseInfoTabReviews.ReviewsLoad.Response)
     func presentNextCourseReviews(response: CourseInfoTabReviews.NextReviewsLoad.Response)
     func presentWriteCourseReview(response: CourseInfoTabReviews.WriteCourseReviewPresentation.Response)
+    func presentReviewCreated(response: CourseInfoTabReviews.ReviewCreated.Response)
+    func presentReviewUpdated(response: CourseInfoTabReviews.ReviewUpdated.Response)
 }
 
 final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol {
@@ -13,7 +15,12 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         let viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel = .init(
             state: CourseInfoTabReviews.ViewControllerState.result(
                 data: .init(
-                    reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
+                    reviews: response.reviews.compactMap {
+                        self.makeViewModel(
+                            courseReview: $0,
+                            isCurrentUserReview: $0.id == response.currentUserReview?.id
+                        )
+                    },
                     hasNextPage: response.hasNextPage,
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
@@ -30,7 +37,12 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         let viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel = .init(
             state: CourseInfoTabReviews.PaginationState.result(
                 data: .init(
-                    reviews: response.reviews.compactMap { self.makeViewModel(courseReview: $0) },
+                    reviews: response.reviews.compactMap {
+                        self.makeViewModel(
+                            courseReview: $0,
+                            isCurrentUserReview: $0.id == response.currentUserReview?.id
+                        )
+                    },
                     hasNextPage: response.hasNextPage,
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
@@ -52,17 +64,44 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         )
     }
 
-    private func makeViewModel(courseReview: CourseReview) -> CourseInfoTabReviewsViewModel? {
+    func presentReviewCreated(response: CourseInfoTabReviews.ReviewCreated.Response) {
+        guard let viewModel = self.makeViewModel(courseReview: response.review, isCurrentUserReview: true) else {
+            return
+        }
+
+        self.viewController?.displayReviewCreated(
+            viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel(viewModel: viewModel)
+        )
+    }
+
+    func presentReviewUpdated(response: CourseInfoTabReviews.ReviewUpdated.Response) {
+        guard let viewModel = self.makeViewModel(courseReview: response.review, isCurrentUserReview: true) else {
+            return
+        }
+
+        self.viewController?.displayReviewUpdated(
+            viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel(viewModel: viewModel)
+        )
+    }
+
+    // MARK: - Private API
+
+    private func makeViewModel(
+        courseReview: CourseReview,
+        isCurrentUserReview: Bool
+    ) -> CourseInfoTabReviewsViewModel? {
         guard let reviewAuthor = courseReview.user else {
             return nil
         }
 
         return CourseInfoTabReviewsViewModel(
+            uniqueIdentifier: courseReview.id,
             userName: reviewAuthor.fullName,
             dateRepresentation: FormatterHelper.dateStringWithFullMonthAndYear(courseReview.creationDate),
             text: courseReview.text.trimmingCharacters(in: .whitespacesAndNewlines),
             avatarImageURL: URL(string: reviewAuthor.avatarURL),
-            score: courseReview.score
+            score: courseReview.score,
+            isCurrentUserReview: isCurrentUserReview
         )
     }
 
