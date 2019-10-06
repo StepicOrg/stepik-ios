@@ -102,6 +102,10 @@ final class WriteCourseReviewView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func becomeFirstResponder() -> Bool {
+        return self.textView.becomeFirstResponder()
+    }
+
     func configure(viewModel: WriteCourseReviewViewModel) {
         self.textView.text = viewModel.text
         self.starsCount = viewModel.score

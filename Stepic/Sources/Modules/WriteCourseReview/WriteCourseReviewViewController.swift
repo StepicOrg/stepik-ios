@@ -61,8 +61,14 @@ final class WriteCourseReviewViewController: UIViewController {
         IQKeyboardManager.shared.enable = false
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _ = self.writeCourseReviewView?.becomeFirstResponder()
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.view.endEditing(true)
         IQKeyboardManager.shared.enable = true
     }
 
