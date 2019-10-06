@@ -5,6 +5,7 @@ protocol CourseInfoTabReviewsInteractorProtocol: class {
     func doCourseReviewsFetch(request: CourseInfoTabReviews.ReviewsLoad.Request)
     func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request)
     func doWriteCourseReviewPresentation(request: CourseInfoTabReviews.WriteCourseReviewPresentation.Request)
+    func doCourseReviewDelete(request: CourseInfoTabReviews.DeleteReview.Request)
 }
 
 final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtocol {
@@ -105,6 +106,38 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 review: self.currentUserReview
             )
         )
+    }
+
+    func doCourseReviewDelete(request: CourseInfoTabReviews.DeleteReview.Request) {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        let isCurrentUserReviewDeleting = self.currentUserReview?.id == request.uniqueIdentifier
+
+        self.provider.delete(id: request.uniqueIdentifier).done {
+            if isCurrentUserReviewDeleting {
+                self.currentUserReview = nil
+            }
+
+            self.presenter.presentCourseReviewDelete(
+                response: CourseInfoTabReviews.DeleteReview.Response(
+                    isSuccessful: true,
+                    uniqueIdentifier: request.uniqueIdentifier,
+                    course: course,
+                    currentUserReview: self.currentUserReview
+                )
+            )
+        }.catch { _ in
+            self.presenter.presentCourseReviewDelete(
+                response: CourseInfoTabReviews.DeleteReview.Response(
+                    isSuccessful: false,
+                    uniqueIdentifier: request.uniqueIdentifier,
+                    course: course,
+                    currentUserReview: self.currentUserReview
+                )
+            )
+        }
     }
 
     private func fetchReviewsInAppropriateMode(

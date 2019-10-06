@@ -7,6 +7,8 @@ protocol CourseInfoTabReviewsProviderProtocol: class {
 
     func fetchCurrentUserReviewCached(course: Course) -> Promise<CourseReview?>
     func fetchCurrentUserReviewRemote(course: Course) -> Promise<CourseReview?>
+
+    func delete(id: CourseReview.IdType) -> Promise<Void>
 }
 
 final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
@@ -87,6 +89,21 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
                 review?.user = user
 
                 seal.fulfill(review)
+                CoreDataHelper.instance.save()
+            }.catch { _ in
+                seal.reject(Error.networkFetchFailed)
+            }
+        }
+    }
+
+    func delete(id: CourseReview.IdType) -> Promise<Void> {
+        return Promise { seal in
+            self.courseReviewsNetworkService.delete(id: id).then { _ in
+                self.courseReviewsPersistenceService.fetch(ids: [id])
+            }.then { cachedReviews in
+                when(resolved: cachedReviews.map({ self.courseReviewsPersistenceService.delete(by: $0.id) }))
+            }.done { _ in
+                seal.fulfill(())
                 CoreDataHelper.instance.save()
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)

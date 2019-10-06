@@ -1,6 +1,6 @@
 import UIKit
 
-final class CourseInfoTabReviewsTableViewDataSource: NSObject, UITableViewDataSource {
+final class CourseInfoTabReviewsTableViewDataSource: NSObject {
     var viewModels: [CourseInfoTabReviewsViewModel]
 
     init(viewModels: [CourseInfoTabReviewsViewModel] = []) {
@@ -8,6 +8,28 @@ final class CourseInfoTabReviewsTableViewDataSource: NSObject, UITableViewDataSo
         super.init()
     }
 
+    // MARK: - Public API
+
+    func insertIfNotContains(viewModel: CourseInfoTabReviewsViewModel, at index: Int) {
+        guard 0..<self.viewModels.count ~= index else {
+            return
+        }
+
+        if !self.viewModels.contains(where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }) {
+            self.viewModels.insert(viewModel, at: index)
+        }
+    }
+
+    func update(viewModel: CourseInfoTabReviewsViewModel) {
+        if let index = self.viewModels.firstIndex(where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }) {
+            self.viewModels[index] = viewModel
+        }
+    }
+}
+
+// MARK: - CourseInfoTabReviewsTableViewDataSource: UITableViewDataSource -
+
+extension CourseInfoTabReviewsTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModels.count
     }
@@ -18,22 +40,7 @@ final class CourseInfoTabReviewsTableViewDataSource: NSObject, UITableViewDataSo
 
         let viewModel = self.viewModels[indexPath.row]
         cell.configure(viewModel: viewModel)
+
         return cell
-    }
-
-    func insertViewModelIfNotContains(_ viewModel: CourseInfoTabReviewsViewModel, at index: Int) {
-        guard 0..<self.viewModels.count ~= index else {
-            return
-        }
-
-        if !self.viewModels.contains(where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }) {
-            self.viewModels.insert(viewModel, at: index)
-        }
-    }
-
-    func updateViewModel(_ viewModel: CourseInfoTabReviewsViewModel) {
-        if let index = self.viewModels.firstIndex(where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }) {
-            self.viewModels[index] = viewModel
-        }
     }
 }

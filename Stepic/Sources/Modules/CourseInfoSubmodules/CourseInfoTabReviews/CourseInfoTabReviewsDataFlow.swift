@@ -51,6 +51,7 @@ enum CourseInfoTabReviews {
 
         struct ViewModel {
             let viewModel: CourseInfoTabReviewsViewModel
+            let writeCourseReviewState: WriteCourseReviewState
         }
     }
 
@@ -62,6 +63,7 @@ enum CourseInfoTabReviews {
 
         struct ViewModel {
             let viewModel: CourseInfoTabReviewsViewModel
+            let writeCourseReviewState: WriteCourseReviewState
         }
     }
 
@@ -77,6 +79,27 @@ enum CourseInfoTabReviews {
         struct ViewModel {
             let courseID: Course.IdType
             let review: CourseReview?
+        }
+    }
+
+    /// Delete review by id
+    enum DeleteReview {
+        struct Request {
+            let uniqueIdentifier: CourseInfoTabReviewsViewModel.ID
+        }
+
+        struct Response {
+            let isSuccessful: Bool
+            let uniqueIdentifier: CourseInfoTabReviewsViewModel.ID
+            let course: Course
+            let currentUserReview: CourseReview?
+        }
+
+        struct ViewModel {
+            let uniqueIdentifier: CourseInfoTabReviewsViewModel.ID
+            let writeCourseReviewState: WriteCourseReviewState
+            let isSuccessful: Bool
+            let statusMessage: String
         }
     }
 

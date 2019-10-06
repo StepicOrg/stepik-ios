@@ -1,7 +1,9 @@
 import Foundation
 
 struct CourseInfoTabReviewsViewModel {
-    let uniqueIdentifier: Int
+    typealias ID = Int
+
+    let uniqueIdentifier: ID
     let userName: String
     let dateRepresentation: String
     let text: String

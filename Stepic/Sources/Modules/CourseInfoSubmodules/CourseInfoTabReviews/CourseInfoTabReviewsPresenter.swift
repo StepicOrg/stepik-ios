@@ -6,6 +6,7 @@ protocol CourseInfoTabReviewsPresenterProtocol: class {
     func presentWriteCourseReview(response: CourseInfoTabReviews.WriteCourseReviewPresentation.Response)
     func presentReviewCreated(response: CourseInfoTabReviews.ReviewCreated.Response)
     func presentReviewUpdated(response: CourseInfoTabReviews.ReviewUpdated.Response)
+    func presentCourseReviewDelete(response: CourseInfoTabReviews.DeleteReview.Response)
 }
 
 final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol {
@@ -24,7 +25,6 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                     hasNextPage: response.hasNextPage,
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
-                        reviews: response.reviews,
                         currentUserReview: response.currentUserReview
                     )
                 )
@@ -46,7 +46,6 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
                     hasNextPage: response.hasNextPage,
                     writeCourseReviewState: self.getWriteCourseReviewState(
                         course: response.course,
-                        reviews: response.reviews,
                         currentUserReview: response.currentUserReview
                     )
                 )
@@ -70,7 +69,10 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         }
 
         self.viewController?.displayReviewCreated(
-            viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel(viewModel: viewModel)
+            viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel(
+                viewModel: viewModel,
+                writeCourseReviewState: .edit
+            )
         )
     }
 
@@ -80,7 +82,28 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
         }
 
         self.viewController?.displayReviewUpdated(
-            viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel(viewModel: viewModel)
+            viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel(
+                viewModel: viewModel,
+                writeCourseReviewState: .edit
+            )
+        )
+    }
+
+    func presentCourseReviewDelete(response: CourseInfoTabReviews.DeleteReview.Response) {
+        let statusMessage = response.isSuccessful
+            ? NSLocalizedString("WriteCourseReviewActionDeleteResultSuccess", comment: "")
+            : NSLocalizedString("WriteCourseReviewActionDeleteResultFailed", comment: "")
+
+        self.viewController?.displayCourseReviewDelete(
+            viewModel: CourseInfoTabReviews.DeleteReview.ViewModel(
+                uniqueIdentifier: response.uniqueIdentifier,
+                writeCourseReviewState: self.getWriteCourseReviewState(
+                    course: response.course,
+                    currentUserReview: response.currentUserReview
+                ),
+                isSuccessful: response.isSuccessful,
+                statusMessage: statusMessage
+            )
         )
     }
 
@@ -107,7 +130,6 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
 
     private func getWriteCourseReviewState(
         course: Course,
-        reviews: [CourseReview],
         currentUserReview: CourseReview?
     ) -> CourseInfoTabReviews.WriteCourseReviewState {
         if course.progressId == nil {

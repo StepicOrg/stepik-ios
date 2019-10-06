@@ -1,3 +1,4 @@
+import SVProgressHUD
 import UIKit
 
 protocol CourseInfoTabReviewsViewControllerProtocol: class {
@@ -6,6 +7,7 @@ protocol CourseInfoTabReviewsViewControllerProtocol: class {
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel)
     func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel)
     func displayReviewUpdated(viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel)
+    func displayCourseReviewDelete(viewModel: CourseInfoTabReviews.DeleteReview.ViewModel)
 }
 
 final class CourseInfoTabReviewsViewController: UIViewController {
@@ -113,15 +115,30 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
     }
 
     func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel) {
-        self.tableDataSource.insertViewModelIfNotContains(viewModel.viewModel, at: 0)
+        self.tableDataSource.insertIfNotContains(viewModel: viewModel.viewModel, at: 0)
         self.updateState(newState: self.state)
-        self.courseInfoTabReviewsView?.writeCourseReviewState = .edit
+        self.courseInfoTabReviewsView?.writeCourseReviewState = viewModel.writeCourseReviewState
     }
 
     func displayReviewUpdated(viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel) {
-        self.tableDataSource.updateViewModel(viewModel.viewModel)
+        self.tableDataSource.update(viewModel: viewModel.viewModel)
         self.updateState(newState: self.state)
-        self.courseInfoTabReviewsView?.writeCourseReviewState = .edit
+        self.courseInfoTabReviewsView?.writeCourseReviewState = viewModel.writeCourseReviewState
+    }
+
+    func displayCourseReviewDelete(viewModel: CourseInfoTabReviews.DeleteReview.ViewModel) {
+        guard viewModel.isSuccessful,
+              let index = self.tableDataSource.viewModels.firstIndex(
+                  where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }
+              ) else {
+            return SVProgressHUD.showError(withStatus: viewModel.statusMessage)
+        }
+
+        self.tableDataSource.viewModels.remove(at: index)
+        self.updateState(newState: self.state)
+        self.courseInfoTabReviewsView?.writeCourseReviewState = viewModel.writeCourseReviewState
+
+        SVProgressHUD.showSuccess(withStatus: viewModel.statusMessage)
     }
 }
 
@@ -143,5 +160,42 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
 
     func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
         self.interactor.doWriteCourseReviewPresentation(request: .init())
+    }
+
+    func courseInfoTabReviewsView(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
+        willSelectRowAt index: Int
+    ) -> Bool {
+        return self.tableDataSource.viewModels[safe: index]?.isCurrentUserReview ?? false
+    }
+
+    func courseInfoTabReviewsView(_ courseInfoTabReviewsView: CourseInfoTabReviewsView, didSelectRowAt index: Int) {
+        guard let review = self.tableDataSource.viewModels[safe: index],
+              review.isCurrentUserReview else {
+            return
+        }
+
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("WriteCourseReviewActionEdit", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doWriteCourseReviewPresentation(request: .init())
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("WriteCourseReviewActionDelete", comment: ""),
+                style: .destructive,
+                handler: { [weak self] _ in
+                    self?.interactor.doCourseReviewDelete(request: .init(uniqueIdentifier: review.uniqueIdentifier))
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        self.present(alert, animated: true)
     }
 }

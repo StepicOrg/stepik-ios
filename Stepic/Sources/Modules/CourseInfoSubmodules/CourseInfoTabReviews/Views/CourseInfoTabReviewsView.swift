@@ -5,6 +5,14 @@ protocol CourseInfoTabReviewsViewDelegate: class {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsView(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
+        willSelectRowAt index: Int
+    ) -> Bool
+    func courseInfoTabReviewsView(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
+        didSelectRowAt index: Int
+    )
 }
 
 extension CourseInfoTabReviewsView {
@@ -57,7 +65,6 @@ final class CourseInfoTabReviewsView: UIView {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
 
         tableView.delegate = self
         tableView.register(cellClass: CourseInfoTabReviewsTableViewCell.self)
@@ -120,6 +127,8 @@ final class CourseInfoTabReviewsView: UIView {
         self.tableView.layoutTableHeaderView()
     }
 
+    // MARK: - Public API
+
     func updateTableViewData(dataSource: UITableViewDataSource) {
         let numberOfRows = dataSource.tableView(self.tableView, numberOfRowsInSection: 0)
         self.tableView.isHidden = numberOfRows == 0
@@ -157,6 +166,8 @@ final class CourseInfoTabReviewsView: UIView {
         self.tableView.skeleton.hide()
     }
 
+    // MARK: - Private API
+
     @objc
     private func writeReviewDidClick() {
         self.delegate?.courseInfoTabReviewsViewDidRequestWriteReview(self)
@@ -192,6 +203,8 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
+// MARK: - CourseInfoTabReviewsView: UITableViewDelegate -
+
 extension CourseInfoTabReviewsView: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
@@ -204,7 +217,22 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
             self.delegate?.courseInfoTabReviewsViewDidPaginationRequesting(self)
         }
     }
+
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath.row) ?? false
+    }
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath.row) ?? false ? indexPath : nil
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.delegate?.courseInfoTabReviewsView(self, didSelectRowAt: indexPath.row)
+    }
 }
+
+// MARK: - CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol -
 
 extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
