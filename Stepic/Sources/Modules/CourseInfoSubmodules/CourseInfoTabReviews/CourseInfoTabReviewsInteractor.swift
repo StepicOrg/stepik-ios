@@ -122,7 +122,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
 
             self.presenter.presentCourseReviewDelete(
                 response: CourseInfoTabReviews.DeleteReview.Response(
-                    isSuccessful: true,
+                    isDeleted: true,
                     uniqueIdentifier: request.uniqueIdentifier,
                     course: course,
                     currentUserReview: self.currentUserReview
@@ -131,7 +131,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         }.catch { _ in
             self.presenter.presentCourseReviewDelete(
                 response: CourseInfoTabReviews.DeleteReview.Response(
-                    isSuccessful: false,
+                    isDeleted: false,
                     uniqueIdentifier: request.uniqueIdentifier,
                     course: course,
                     currentUserReview: self.currentUserReview

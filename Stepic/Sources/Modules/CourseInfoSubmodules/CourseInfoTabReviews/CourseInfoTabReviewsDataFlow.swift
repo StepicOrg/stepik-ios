@@ -89,16 +89,16 @@ enum CourseInfoTabReviews {
         }
 
         struct Response {
-            let isSuccessful: Bool
+            let isDeleted: Bool
             let uniqueIdentifier: CourseInfoTabReviewsViewModel.ID
             let course: Course
             let currentUserReview: CourseReview?
         }
 
         struct ViewModel {
+            let isDeleted: Bool
             let uniqueIdentifier: CourseInfoTabReviewsViewModel.ID
             let writeCourseReviewState: WriteCourseReviewState
-            let isSuccessful: Bool
             let statusMessage: String
         }
     }

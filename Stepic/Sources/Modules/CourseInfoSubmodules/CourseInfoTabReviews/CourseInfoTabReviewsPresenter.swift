@@ -90,18 +90,18 @@ final class CourseInfoTabReviewsPresenter: CourseInfoTabReviewsPresenterProtocol
     }
 
     func presentCourseReviewDelete(response: CourseInfoTabReviews.DeleteReview.Response) {
-        let statusMessage = response.isSuccessful
+        let statusMessage = response.isDeleted
             ? NSLocalizedString("WriteCourseReviewActionDeleteResultSuccess", comment: "")
             : NSLocalizedString("WriteCourseReviewActionDeleteResultFailed", comment: "")
 
         self.viewController?.displayCourseReviewDelete(
             viewModel: CourseInfoTabReviews.DeleteReview.ViewModel(
+                isDeleted: response.isDeleted,
                 uniqueIdentifier: response.uniqueIdentifier,
                 writeCourseReviewState: self.getWriteCourseReviewState(
                     course: response.course,
                     currentUserReview: response.currentUserReview
                 ),
-                isSuccessful: response.isSuccessful,
                 statusMessage: statusMessage
             )
         )
