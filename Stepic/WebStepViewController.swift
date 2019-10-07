@@ -227,8 +227,8 @@ class WebStepViewController: UIViewController {
             break
         default:
             print("unknown type \(step.block.name)")
-            let quizController = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
-            quizController.stepUrl = self.stepUrl
+            let assembly = UnsupportedQuizAssembly(stepURLPath: self.stepUrl)
+            let quizController = assembly.makeModule()
             self.addChild(quizController)
             quizPlaceholderView.addSubview(quizController.view)
 
