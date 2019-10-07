@@ -193,7 +193,11 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             if submissionsLeft == 0 {
                 return NSLocalizedString("WrongFeedbackTitleLastTry", comment: "")
             }
-            return NSLocalizedString("WrongFeedbackTitleNotLastTry", comment: "")
+            return (1...3)
+                // swiftlint:disable:next nslocalizedstring_key
+                .map { NSLocalizedString("WrongFeedbackTitleNotLastTry\($0)", comment: "") }
+                .randomElement()
+                .require()
         case .evaluation:
             return NSLocalizedString("EvaluationFeedbackTitle", comment: "")
         }

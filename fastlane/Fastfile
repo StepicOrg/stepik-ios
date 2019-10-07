@@ -326,6 +326,10 @@ platform :ios do
         scheme = options[:scheme]
         UI.user_error!("Wrong scheme parameter") if scheme.nil?
 
+        # Workaround because the traditional transporter broke on 1st March 2018
+        # More information https://github.com/fastlane/fastlane/issues/11958
+        ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+
         app_identifier = get_bundle_id(scheme: scheme)
         metapath = "#{project_metapath}/#{scheme}"
         should_submit = options.key?(:should_submit) ? options[:should_submit] : false
