@@ -3702,11 +3702,10 @@
 		08EF9A0B1C91D12700433E4A /* Video Player */ = {
 			isa = PBXGroup;
 			children = (
-				08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */,
-				08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */,
-				085DF8D11C99A8D8006809D9 /* Test */,
 				085DF8D41C99B9FB006809D9 /* Player.swift */,
 				085DF8D71C99C49E006809D9 /* VideoRate.swift */,
+				2C41B4E2234B655F00644ED5 /* StepicVideoPlayerViewController */,
+				085DF8D11C99A8D8006809D9 /* Test */,
 			);
 			name = "Video Player";
 			sourceTree = "<group>";
@@ -4078,6 +4077,15 @@
 				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
 			);
 			path = ActiveTests;
+			sourceTree = "<group>";
+		};
+		2C41B4E2234B655F00644ED5 /* StepicVideoPlayerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */,
+				08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */,
+			);
+			name = StepicVideoPlayerViewController;
 			sourceTree = "<group>";
 		};
 		2C453396204D46B70061342A /* PinsMap */ = {
