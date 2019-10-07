@@ -31,7 +31,8 @@ extension NewMatchingQuizViewController: NewMatchingQuizViewControllerProtocol {
     func displayReply(viewModel: NewMatchingQuiz.ReplyLoad.ViewModel) {
         self.newMatchingQuizView?.title = viewModel.data.title
         self.newMatchingQuizView?.set(items: viewModel.data.items)
-        self.newMatchingQuizView?.isEnabled = viewModel.data.isEnabled
+        self.newMatchingQuizView?.isEnabled = viewModel.data.finalState == nil || viewModel.data.finalState == .wrong
+        self.newMatchingQuizView?.shouldShowShadows = viewModel.data.finalState != .correct
     }
 }
 

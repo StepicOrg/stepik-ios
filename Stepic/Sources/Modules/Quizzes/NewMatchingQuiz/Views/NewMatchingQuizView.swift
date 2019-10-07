@@ -101,6 +101,19 @@ final class NewMatchingQuizView: UIView {
         }
     }
 
+    var shouldShowShadows: Bool = true {
+        didSet {
+            self.itemsStackView.arrangedSubviews
+                .forEach { view in
+                    if let titleView = view as? NewMatchingQuizTitleView {
+                        titleView.isShadowVisible = self.shouldShowShadows
+                    } else if let elementView = view as? NewSortingQuizElementView {
+                        elementView.isShadowVisible = self.shouldShowShadows
+                    }
+                }
+        }
+    }
+
     var title: String? {
         didSet {
             self.titleLabel.text = self.title

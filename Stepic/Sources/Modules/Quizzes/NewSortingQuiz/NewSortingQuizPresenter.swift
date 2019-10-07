@@ -8,10 +8,25 @@ final class NewSortingQuizPresenter: NewSortingQuizPresenterProtocol {
     weak var viewController: NewSortingQuizViewControllerProtocol?
 
     func presentReply(response: NewSortingQuiz.ReplyLoad.Response) {
+        let state: NewSortingQuizViewModel.State? = {
+            guard let status = response.status else {
+                return nil
+            }
+
+            switch status {
+            case .correct:
+                return .correct
+            case .wrong:
+                return .wrong
+            case .evaluation:
+                return .evaluation
+            }
+        }()
+
         let viewModel = NewSortingQuizViewModel(
             title: NSLocalizedString("SortingQuizTitle", comment: ""),
             options: response.options.map { .init(id: $0.id, text: self.processText($0.text)) },
-            isEnabled: response.status == nil || response.status == .wrong
+            finalState: state
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))

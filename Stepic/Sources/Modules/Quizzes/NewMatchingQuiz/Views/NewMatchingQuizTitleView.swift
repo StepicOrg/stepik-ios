@@ -53,6 +53,12 @@ final class NewMatchingQuizTitleView: UIView {
         )
     }
 
+    var isShadowVisible: Bool = true {
+        didSet {
+            self.shadowView.isHidden = !self.isShadowVisible
+        }
+    }
+
     var title: String? {
         didSet {
             self.contentTextView.loadHTMLText(self.title ?? "")
