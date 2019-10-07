@@ -10,13 +10,9 @@ final class CourseInfoTabReviewsTableViewDataSource: NSObject {
 
     // MARK: - Public API
 
-    func insertIfNotContains(viewModel: CourseInfoTabReviewsViewModel, at index: Int) {
-        guard 0..<self.viewModels.count ~= index else {
-            return
-        }
-
+    func addFirstIfNotContains(viewModel: CourseInfoTabReviewsViewModel) {
         if !self.viewModels.contains(where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }) {
-            self.viewModels.insert(viewModel, at: index)
+            self.viewModels.insert(viewModel, at: 0)
         }
     }
 

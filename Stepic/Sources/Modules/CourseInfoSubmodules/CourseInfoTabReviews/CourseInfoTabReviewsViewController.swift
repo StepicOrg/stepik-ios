@@ -115,7 +115,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
     }
 
     func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel) {
-        self.tableDataSource.insertIfNotContains(viewModel: viewModel.viewModel, at: 0)
+        self.tableDataSource.addFirstIfNotContains(viewModel: viewModel.viewModel)
         self.updateState(newState: self.state)
         self.courseInfoTabReviewsView?.writeCourseReviewState = viewModel.writeCourseReviewState
     }
