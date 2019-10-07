@@ -185,10 +185,10 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             self.addChild(controller)
             self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         } else {
-            let controller = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
-            controller.stepUrl = viewModel.stepURLPath
-            self.addChild(controller)
-            self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
+            let assembly = UnsupportedQuizAssembly(stepURLPath: viewModel.stepURLPath)
+            let viewController = assembly.makeModule()
+            self.addChild(viewController)
+            self.newStepView?.configure(viewModel: viewModel, quizView: viewController.view)
         }
     }
 }
