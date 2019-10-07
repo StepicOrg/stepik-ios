@@ -31,7 +31,8 @@ extension NewSortingQuizViewController: NewSortingQuizViewControllerProtocol {
     func displayReply(viewModel: NewSortingQuiz.ReplyLoad.ViewModel) {
         self.newSortingQuizView?.title = viewModel.data.title
         self.newSortingQuizView?.set(options: viewModel.data.options)
-        self.newSortingQuizView?.isEnabled = viewModel.data.isEnabled
+        self.newSortingQuizView?.isEnabled = viewModel.data.finalState == nil || viewModel.data.finalState == .wrong
+        self.newSortingQuizView?.shouldShowShadows = viewModel.data.finalState != .correct
     }
 }
 

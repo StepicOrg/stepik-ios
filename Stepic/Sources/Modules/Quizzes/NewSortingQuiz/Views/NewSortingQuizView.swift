@@ -94,6 +94,14 @@ final class NewSortingQuizView: UIView {
         }
     }
 
+    var shouldShowShadows: Bool = true {
+        didSet {
+            self.optionsStackView.arrangedSubviews
+                .compactMap { $0 as? NewSortingQuizElementView }
+                .forEach { $0.isShadowVisible = self.shouldShowShadows }
+        }
+    }
+
     var title: String? {
         didSet {
             self.titleLabel.text = self.title

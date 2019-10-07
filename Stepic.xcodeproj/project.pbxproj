@@ -3892,7 +3892,6 @@
 				547578D4D5EFD63704E87CAB /* NewMatchingQuizDataFlow.swift */,
 				A484FA9C0CDF08A193A71381 /* NewMatchingQuizInteractor.swift */,
 				D779F899F835A1724F0C1186 /* NewMatchingQuizPresenter.swift */,
-				404D37E2105ABA9C150864A6 /* NewMatchingQuizView.swift */,
 				7398B256EE198D1F6A6AF959 /* NewMatchingQuizViewController.swift */,
 				2CD87010230DE5F4003D9F1A /* NewMatchingQuizViewModel.swift */,
 				2CD87012230DF614003D9F1A /* Views */,
@@ -4020,6 +4019,7 @@
 			isa = PBXGroup;
 			children = (
 				2C29B62F22C664C500730C16 /* ChoiceElementView.swift */,
+				508C25A19DBEE7176400D767 /* NewChoiceQuizView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4771,6 +4771,7 @@
 			isa = PBXGroup;
 			children = (
 				2CD87013230DF663003D9F1A /* NewMatchingQuizTitleView.swift */,
+				404D37E2105ABA9C150864A6 /* NewMatchingQuizView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4853,6 +4854,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9C9771230D73F800E44F68 /* NewSortingQuizElementView.swift */,
+				E836B14C65BADD59C0CAA65B /* NewSortingQuizView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4878,7 +4880,6 @@
 				BF5C47F13975D3915692AA71 /* NewSortingQuizDataFlow.swift */,
 				6520F5CFAE56B9CFBA963C1D /* NewSortingQuizInteractor.swift */,
 				34BBD3EFC6CF6DE0ADC84018 /* NewSortingQuizPresenter.swift */,
-				E836B14C65BADD59C0CAA65B /* NewSortingQuizView.swift */,
 				2D76D90D632B5CFB603F1295 /* NewSortingQuizViewController.swift */,
 				2CF1DD9B230A8D780083350A /* NewSortingQuizViewModel.swift */,
 				2CF1DD9D230A99A00083350A /* Views */,
@@ -5702,7 +5703,6 @@
 				BAECD143E5E804E55A9DE096 /* NewChoiceQuizDataFlow.swift */,
 				077CA2A02D61A314B281C7C3 /* NewChoiceQuizInteractor.swift */,
 				AF89927A843447A9AE4C0AF4 /* NewChoiceQuizPresenter.swift */,
-				508C25A19DBEE7176400D767 /* NewChoiceQuizView.swift */,
 				36E041388C85D190467E74A5 /* NewChoiceQuizViewController.swift */,
 				2CB273FF22C4E9870078CA2F /* NewChoiceQuizViewModel.swift */,
 				2C29B62E22C6649100730C16 /* Views */,

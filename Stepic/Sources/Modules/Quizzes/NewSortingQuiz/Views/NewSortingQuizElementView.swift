@@ -119,6 +119,12 @@ final class NewSortingQuizElementView: UIView {
         }
     }
 
+    var isShadowVisible: Bool = true {
+        didSet {
+            self.shadowView.isHidden = !self.isShadowVisible
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
