@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CachedValue<T> {
+final class CachedValue<T> {
     private let defaults = UserDefaults.standard
 
     private let key: String
@@ -18,14 +18,14 @@ class CachedValue<T> {
 
     var value: T {
         get {
-            if privateValue == nil {
-                privateValue = defaults.value(forKey: key) as? T
+            if self.privateValue == nil {
+                self.privateValue = self.defaults.value(forKey: self.key) as? T
             }
-            return privateValue ?? defaultValue
+            return self.privateValue ?? self.defaultValue
         }
         set {
-            defaults.set(newValue, forKey: key)
-            privateValue = newValue
+            self.defaults.set(newValue, forKey: self.key)
+            self.privateValue = newValue
         }
     }
 

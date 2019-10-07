@@ -8,8 +8,7 @@
 
 import UIKit
 
-class StoryPartViewFactory {
-
+final class StoryPartViewFactory {
     weak var urlNavigationDelegate: StoryURLNavigationDelegate?
 
     init(urlNavigationDelegate: StoryURLNavigationDelegate?) {
@@ -20,13 +19,16 @@ class StoryPartViewFactory {
         guard let type = storyPart.type else {
             return nil
         }
+
         switch type {
         case .text:
             guard let storyPart = storyPart as? TextStoryPart else {
                 return nil
             }
+
             let viewToAnimate: TextStoryView = .fromNib()
-            viewToAnimate.setup(storyPart: storyPart, urlNavigationDelegate: urlNavigationDelegate)
+            viewToAnimate.setup(storyPart: storyPart, urlNavigationDelegate: self.urlNavigationDelegate)
+
             return viewToAnimate
         }
     }

@@ -9,8 +9,7 @@
 import UIKit
 import SnapKit
 
-class StoryViewController: UIViewController {
-
+final class StoryViewController: UIViewController {
     @IBOutlet weak var closeButtonTapProxyView: TapProxyView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var progressView: SegmentedProgressView!
@@ -37,37 +36,41 @@ class StoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        progressView.completion = {
-            [weak self] in
+        self.progressView.completion = { [weak self] in
             self?.presenter?.finishedAnimating()
         }
-        progressView.segmentsCount = presenter?.storyPartsCount ?? 0
+        self.progressView.segmentsCount = self.presenter?.storyPartsCount ?? 0
 
-        let tapG = UITapGestureRecognizer(target: self, action: #selector(StoryViewController.didTap(recognizer:)))
-        view.addGestureRecognizer(tapG)
-        tapG.cancelsTouchesInView = false
+        let gestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(StoryViewController.didTap(recognizer:))
+        )
+        self.view.addGestureRecognizer(gestureRecognizer)
+        gestureRecognizer.cancelsTouchesInView = false
 
         if DeviceInfo.current.isPad {
-            view.layer.cornerRadius = 8
-            view.clipsToBounds = true
-            view.layer.masksToBounds = true
+            self.view.layer.cornerRadius = 8
+            self.view.clipsToBounds = true
+            self.view.layer.masksToBounds = true
         }
 
-        closeButtonTapProxyView.targetView = closeButton
+        self.closeButtonTapProxyView.targetView = self.closeButton
 
         self.view.layer.insertSublayer(self.topGradientLayer, below: self.progressView.layer)
-        presenter?.animate()
+        self.presenter?.animate()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        didAppear = true
 
-        if didAppear && didLayout {
-            onAppearBlock?()
+        self.didAppear = true
+
+        if self.didAppear && self.didLayout {
+            self.onAppearBlock?()
         }
-        presenter?.didAppear()
-        presenter?.resume()
+
+        self.presenter?.didAppear()
+        self.presenter?.resume()
     }
 
     override func viewDidLayoutSubviews() {
@@ -80,77 +83,77 @@ class StoryViewController: UIViewController {
             height: 2 * self.closeButton.frame.maxY
         )
 
-        didLayout = true
+        self.didLayout = true
 
-        if didAppear && didLayout {
-            onAppearBlock?()
+        if self.didAppear && self.didLayout {
+            self.onAppearBlock?()
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        presenter?.pause()
+        self.presenter?.pause()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        didAppear = false
-        didLayout = false
-        presenter?.pause()
+
+        self.didAppear = false
+        self.didLayout = false
+        self.presenter?.pause()
     }
 
     private func add(partView: UIView) {
-        partsContainerView.addSubview(partView)
-        partView.snp.makeConstraints {
-            make in
+        self.partsContainerView.addSubview(partView)
+        partView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
 
     @objc
-    func didTap(recognizer: UITapGestureRecognizer) {
-        let closeLocation = recognizer.location(in: closeButtonTapProxyView)
-        if closeButtonTapProxyView.bounds.contains(closeLocation) {
+    private func didTap(recognizer: UITapGestureRecognizer) {
+        let closeLocation = recognizer.location(in: self.closeButtonTapProxyView)
+        if self.closeButtonTapProxyView.bounds.contains(closeLocation) {
             return
         }
 
-        let location = recognizer.location(in: view)
-        if location.x < view.frame.width / 3 {
-            rewind()
+        let location = recognizer.location(in: self.view)
+        if location.x < self.view.frame.width / 3 {
+            self.rewind()
             return
         }
 
-        if location.x > view.frame.width / 3 * 2 {
-            skip()
+        if location.x > self.view.frame.width / 3 * 2 {
+            self.skip()
             return
         }
     }
 
     func rewind() {
-        presenter?.rewind()
+        self.presenter?.rewind()
     }
 
     func skip() {
-        presenter?.skip()
+        self.presenter?.skip()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        presenter?.pause()
+        self.presenter?.pause()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        presenter?.resume()
+        self.presenter?.resume()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        presenter?.resume()
+        self.presenter?.resume()
     }
 
     func close() {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -164,10 +167,10 @@ extension StoryViewController: StoryViewProtocol {
     }
 
     func animate(view: UIView & UIStoryPartViewProtocol) {
-        if view.isDescendant(of: partsContainerView) {
-            partsContainerView.bringSubviewToFront(view)
+        if view.isDescendant(of: self.partsContainerView) {
+            self.partsContainerView.bringSubviewToFront(view)
         } else {
-            add(partView: view)
+            self.add(partView: view)
             view.startLoad()
         }
     }
@@ -177,23 +180,27 @@ extension StoryViewController: StoryViewProtocol {
     }
 
     func animateProgress(segment: Int, duration: TimeInterval) {
-        if !didAppear {
-            onAppearBlock = { [weak self] in
-                self?.progressView.animate(duration: duration, segment: segment)
-                self?.presenter?.resume()
-                self?.onAppearBlock = nil
+        if !self.didAppear {
+            self.onAppearBlock = { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.progressView.animate(duration: duration, segment: segment)
+                strongSelf.presenter?.resume()
+                strongSelf.onAppearBlock = nil
             }
         } else {
-            progressView.animate(duration: duration, segment: segment)
+            self.progressView.animate(duration: duration, segment: segment)
             self.presenter?.resume()
         }
     }
 
     func pause(segment: Int) {
-        progressView.pause(segment: segment)
+        self.progressView.pause(segment: segment)
     }
 
     func resume(segment: Int) {
-        progressView.resume(segment: segment)
+        self.progressView.resume(segment: segment)
     }
 }

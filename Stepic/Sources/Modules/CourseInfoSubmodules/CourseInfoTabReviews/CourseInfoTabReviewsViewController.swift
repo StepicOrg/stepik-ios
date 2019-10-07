@@ -1,8 +1,13 @@
+import SVProgressHUD
 import UIKit
 
 protocol CourseInfoTabReviewsViewControllerProtocol: class {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel)
     func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel)
+    func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel)
+    func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel)
+    func displayReviewUpdated(viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel)
+    func displayCourseReviewDelete(viewModel: CourseInfoTabReviews.DeleteReview.ViewModel)
 }
 
 final class CourseInfoTabReviewsViewController: UIViewController {
@@ -68,11 +73,14 @@ final class CourseInfoTabReviewsViewController: UIViewController {
             self.courseInfoTabReviewsView?.hideLoading()
         }
 
-        if case .result(_) = newState {
+        if case .result(let data) = newState {
             self.courseInfoTabReviewsView?.updateTableViewData(dataSource: self.tableDataSource)
+            self.courseInfoTabReviewsView?.writeCourseReviewState = data.writeCourseReviewState
         }
     }
 }
+
+// MARK: - CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol -
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewControllerProtocol {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel) {
@@ -94,7 +102,47 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
             self.updatePagination(hasNextPage: false, hasError: true)
         }
     }
+
+    func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel) {
+        let assembly = WriteCourseReviewAssembly(
+            courseID: viewModel.courseID,
+            courseReview: viewModel.review,
+            output: self.interactor as? WriteCourseReviewOutputProtocol
+        )
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller)
+    }
+
+    func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel) {
+        self.tableDataSource.addFirstIfNotContains(viewModel: viewModel.viewModel)
+        self.updateState(newState: self.state)
+        self.courseInfoTabReviewsView?.writeCourseReviewState = viewModel.writeCourseReviewState
+    }
+
+    func displayReviewUpdated(viewModel: CourseInfoTabReviews.ReviewUpdated.ViewModel) {
+        self.tableDataSource.update(viewModel: viewModel.viewModel)
+        self.updateState(newState: self.state)
+        self.courseInfoTabReviewsView?.writeCourseReviewState = viewModel.writeCourseReviewState
+    }
+
+    func displayCourseReviewDelete(viewModel: CourseInfoTabReviews.DeleteReview.ViewModel) {
+        guard viewModel.isDeleted,
+              let index = self.tableDataSource.viewModels.firstIndex(
+                  where: { $0.uniqueIdentifier == viewModel.uniqueIdentifier }
+              ) else {
+            return SVProgressHUD.showError(withStatus: viewModel.statusMessage)
+        }
+
+        self.tableDataSource.viewModels.remove(at: index)
+        self.updateState(newState: self.state)
+        self.courseInfoTabReviewsView?.writeCourseReviewState = viewModel.writeCourseReviewState
+
+        SVProgressHUD.showSuccess(withStatus: viewModel.statusMessage)
+    }
 }
+
+// MARK: - CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate -
 
 extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
@@ -104,5 +152,50 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
 
         self.canTriggerPagination = false
         self.interactor.doNextCourseReviewsFetch(request: .init())
+    }
+
+    func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
+        self.interactor.doWriteCourseReviewPresentation(request: .init())
+    }
+
+    func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView) {
+        self.interactor.doWriteCourseReviewPresentation(request: .init())
+    }
+
+    func courseInfoTabReviewsView(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
+        willSelectRowAt index: Int
+    ) -> Bool {
+        return self.tableDataSource.viewModels[safe: index]?.isCurrentUserReview ?? false
+    }
+
+    func courseInfoTabReviewsView(_ courseInfoTabReviewsView: CourseInfoTabReviewsView, didSelectRowAt index: Int) {
+        guard let review = self.tableDataSource.viewModels[safe: index],
+              review.isCurrentUserReview else {
+            return
+        }
+
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("WriteCourseReviewActionEdit", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doWriteCourseReviewPresentation(request: .init())
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("WriteCourseReviewActionDelete", comment: ""),
+                style: .destructive,
+                handler: { [weak self] _ in
+                    self?.interactor.doCourseReviewDelete(request: .init(uniqueIdentifier: review.uniqueIdentifier))
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        self.present(alert, animated: true)
     }
 }

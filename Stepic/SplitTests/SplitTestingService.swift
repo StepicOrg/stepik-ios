@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol SplitTestingServiceProtocol {
     func fetchSplitTest<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value
@@ -29,6 +28,7 @@ class SplitTestingService: SplitTestingServiceProtocol {
 
         let randomGroup = self.randomGroup(Value.self)
         self.saveGroup(splitTestType, group: randomGroup)
+
         return Value(currentGroup: randomGroup, analytics: self.analyticsService)
     }
 
@@ -40,12 +40,14 @@ class SplitTestingService: SplitTestingServiceProtocol {
         guard let stringValue = self.storage.getString(for: Value.dataBaseKey) else {
             return nil
         }
+
         return Value.GroupType(rawValue: stringValue)
     }
 
     private func randomGroup<Value: SplitTestProtocol>(_ splitTestType: Value.Type) -> Value.GroupType {
         let count = Value.GroupType.groups.count
         let random = Int.random(lower: 0, count - 1)
+
         return Value.GroupType.groups[random]
     }
 }

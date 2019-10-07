@@ -11,7 +11,7 @@ import UIKit
 import Nuke
 import SnapKit
 
-class TextStoryView: UIView, UIStoryPartViewProtocol {
+final class TextStoryView: UIView, UIStoryPartViewProtocol {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
@@ -24,7 +24,7 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        activityIndicator.isHidden = true
+        self.activityIndicator.isHidden = true
     }
 
     func setup(storyPart: TextStoryPart, urlNavigationDelegate: StoryURLNavigationDelegate?) {
@@ -38,18 +38,23 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
         if let button = storyPart.button {
             storyContentViews += [buildButtonView(button: button)]
         }
+
         let stackView = UIStackView(arrangedSubviews: storyContentViews)
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 16
-        addSubview(stackView)
+
+        self.addSubview(stackView)
+        // TODO: Check for translatesAutoresizingMaskIntoConstraints
         stackView.snp.makeConstraints { make in
             make.leadingMargin.trailingMargin.equalTo(self)
             make.bottomMargin.equalTo(self).offset(-12)
         }
-        elementsStackView = stackView
-        elementsStackView?.isHidden = true
+
+        self.elementsStackView = stackView
+        self.elementsStackView?.isHidden = true
+
         self.storyPart = storyPart
     }
 
@@ -63,11 +68,14 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
             label.textColor = textModel.textColor
             label.font = UIFont.systemFont(ofSize: 16, weight: .light)
             label.numberOfLines = 0
+
             containerView.addSubview(label)
+            // TODO: Check for translatesAutoresizingMaskIntoConstraints
             label.snp.makeConstraints { make in
                 make.leading.equalTo(containerView).offset(16)
                 make.bottom.trailing.equalTo(containerView).offset(-16)
             }
+
             views += [label]
         }
 
@@ -77,7 +85,9 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
             label.textColor = textModel.textColor
             label.font = UIFont.systemFont(ofSize: 22, weight: .medium)
             label.numberOfLines = 0
+
             containerView.addSubview(label)
+            // TODO: Check for translatesAutoresizingMaskIntoConstraints
             label.snp.makeConstraints { make in
                 make.leading.equalTo(containerView).offset(16)
                 make.trailing.equalTo(containerView).offset(-16)
@@ -85,61 +95,76 @@ class TextStoryView: UIView, UIStoryPartViewProtocol {
                     make.bottom.equalTo(lastView.snp.top).offset(-8)
                 }
             }
+
             views += [label]
         }
 
         containerView.backgroundColor = textModel.backgroundStyle.backgroundColor
         containerView.setRoundedCorners(cornerRadius: 8)
+
         views.last?.snp.makeConstraints { make in
             make.top.equalTo(containerView).offset(16)
         }
+
         return containerView
     }
 
     private func buildButtonView(button buttonModel: TextStoryPart.Button) -> UIView {
         let containerView = UIView()
         containerView.backgroundColor = UIColor.clear
+
         let storyButton = StepikButton(type: .system)
         storyButton.backgroundColor = buttonModel.backgroundColor
         storyButton.setTitleColor(buttonModel.titleColor, for: .normal)
         storyButton.setTitle(buttonModel.title, for: .normal)
+
         containerView.addSubview(storyButton)
+        // TODO: Check for translatesAutoresizingMaskIntoConstraints
         storyButton.snp.makeConstraints { make in
             make.bottom.top.equalTo(containerView)
             make.centerX.equalTo(containerView)
             make.width.equalTo(180)
             make.height.equalTo(48)
         }
+
         storyButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+
         return containerView
     }
 
     func startLoad() {
-        if activityIndicator.isHidden != false {
-            activityIndicator.isHidden = false
-            elementsStackView?.isHidden = true
-            activityIndicator.startAnimating()
+        if self.activityIndicator.isHidden != false {
+            self.activityIndicator.isHidden = false
+            self.elementsStackView?.isHidden = true
+            self.activityIndicator.startAnimating()
         }
-        guard let url = URL(string: imagePath) else { return }
-        Nuke.loadImage(with: url, options: .shared, into: imageView) { [weak self] (_, _) in
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.isHidden = true
-            self?.elementsStackView?.isHidden = false
-            self?.completion?()
+
+        guard let url = URL(string: self.imagePath) else {
+            return
+        }
+
+        Nuke.loadImage(with: url, options: .shared, into: self.imageView) { [weak self] (_, _) in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.activityIndicator.stopAnimating()
+            strongSelf.activityIndicator.isHidden = true
+            strongSelf.elementsStackView?.isHidden = false
+            strongSelf.completion?()
         }
     }
 
     @objc
     func buttonClicked() {
-        guard
-            let part = storyPart,
-            let path = part.button?.urlPath,
-            let url = URL(string: path)
-        else {
+        guard let part = self.storyPart,
+              let path = part.button?.urlPath,
+              let url = URL(string: path) else {
             return
         }
+
         AmplitudeAnalyticsEvents.Stories.buttonPressed(id: part.storyID, position: part.position).send()
-        urlNavigationDelegate?.open(url: url)
+        self.urlNavigationDelegate?.open(url: url)
     }
 }
 

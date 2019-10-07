@@ -146,9 +146,7 @@ extension CourseInfoTabInfoViewController: CourseInfoTabInfoViewDelegate {
         _ courseInfoTabInfoView: CourseInfoTabInfoView,
         instructor: CourseInfoTabInfoInstructorViewModel
     ) {
-        let module = ProfileAssembly(userID: instructor.id).makeModule()
-        if let module = module as? ProfileViewController {
-            self.navigationController?.pushViewController(module, animated: true)
-        }
+        let assembly = ProfileAssembly(userID: instructor.id)
+        self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
     }
 }

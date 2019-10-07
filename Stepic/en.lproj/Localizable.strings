@@ -642,6 +642,19 @@ ProfileEditGeneralTitle = "General";
 ProfileEditGeneralDescription = "Your legal names, used for any certificates";
 ProfileEditAboutMeTitle = "About me";
 
+/* Write course review */
+WriteCourseReviewTitle = "Course review";
+WriteCourseReviewActionSendResultSuccess = "Sent";
+WriteCourseReviewActionSendResultFailed = "Failed to send your review";
+WriteCourseReviewActionDeleteResultSuccess = "Deleted";
+WriteCourseReviewActionDeleteResultFailed = "Failed to delete your review";
+WriteCourseReviewActionCreate = "Write a review";
+WriteCourseReviewActionEdit = "Edit a review";
+WriteCourseReviewActionDelete = "Delete a review";
+WriteCourseReviewPlaceholder = "Review";
+WriteCourseReviewRatingHint = "Tap a Star to Rate";
+WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more than 80% steps";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
 "Ok" = "Ok";

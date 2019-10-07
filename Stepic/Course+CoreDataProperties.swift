@@ -458,6 +458,13 @@ extension Course {
         }
     }
 
+    var canWriteReview: Bool {
+        if let progress = self.progress {
+            return (Double(progress.numberOfStepsPassed) * 100.0 / Double(progress.numberOfSteps)) >= 80.0
+        }
+        return false
+    }
+
     func addSection(_ section: Section) {
         let mutableItems = managedSections?.mutableCopy() as! NSMutableOrderedSet
         mutableItems.add(section)

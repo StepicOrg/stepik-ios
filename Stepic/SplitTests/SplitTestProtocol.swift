@@ -10,6 +10,7 @@ import Foundation
 
 protocol SplitTestProtocol {
     associatedtype GroupType: SplitTestGroupProtocol
+
     static var identifier: String { get }
 
     static var shouldParticipate: Bool { get }
@@ -18,6 +19,7 @@ protocol SplitTestProtocol {
     var currentGroup: GroupType { get }
 
     var analytics: ABAnalyticsServiceProtocol { get }
+
     init(currentGroup: GroupType, analytics: ABAnalyticsServiceProtocol)
 }
 

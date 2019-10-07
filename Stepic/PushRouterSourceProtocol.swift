@@ -6,7 +6,6 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 protocol PushRouterSourceProtocol {
@@ -21,19 +20,19 @@ protocol PushStackRouterSourceProtocol {
 extension UIViewController: PushRouterSourceProtocol, PushStackRouterSourceProtocol {
     @objc
     func push(module: UIViewController) {
-        navigationController?.pushViewController(module, animated: true)
+        self.navigationController?.pushViewController(module, animated: true)
     }
 
     @objc
     func replace(by module: UIViewController) {
-        navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: false)
         self.push(module: module)
     }
 
     @objc
     func push(moduleStack: [UIViewController]) {
         for (index, module) in moduleStack.enumerated() {
-            navigationController?.pushViewController(module, animated: index == moduleStack.count - 1)
+            self.navigationController?.pushViewController(module, animated: index == moduleStack.count - 1)
         }
     }
 }

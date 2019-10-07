@@ -6,7 +6,6 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 protocol ModalRouterSourceProtocol {
@@ -20,26 +19,26 @@ protocol ModalStackRouterSourceProtocol {
 extension UIViewController: ModalRouterSourceProtocol, ModalStackRouterSourceProtocol {
     @objc
     func present(module: UIViewController, embedInNavigation: Bool = false) {
-        self.present(
-            embedInNavigation ? getEmbedded(moduleStack: [module]) : module,
-            animated: true
-        )
+        let moduleToPresent = embedInNavigation ? self.getEmbedded(moduleStack: [module]) : module
+        self.present(moduleToPresent, animated: true)
     }
 
     @objc
     func present(moduleStack: [UIViewController]) {
-        let moduleToPresent = getEmbedded(moduleStack: moduleStack)
+        let moduleToPresent = self.getEmbedded(moduleStack: moduleStack)
         self.present(moduleToPresent, animated: true, completion: nil)
     }
 
     private func getEmbedded(moduleStack: [UIViewController]) -> UIViewController {
-        let navigation = StyledNavigationController()
-        navigation.setViewControllers(moduleStack, animated: false)
-        let closeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: nil)
+        let navigationController = StyledNavigationController()
+        navigationController.setViewControllers(moduleStack, animated: false)
+
+        let closeItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: nil)
         closeItem.actionClosure = {
-            navigation.dismiss(animated: true, completion: nil)
+            navigationController.dismiss(animated: true, completion: nil)
         }
         moduleStack.last?.navigationItem.leftBarButtonItem = closeItem
-        return navigation
+
+        return navigationController
     }
 }

@@ -4,6 +4,8 @@ import PromiseKit
 protocol CourseInfoTabReviewsInteractorProtocol: class {
     func doCourseReviewsFetch(request: CourseInfoTabReviews.ReviewsLoad.Request)
     func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request)
+    func doWriteCourseReviewPresentation(request: CourseInfoTabReviews.WriteCourseReviewPresentation.Request)
+    func doCourseReviewDelete(request: CourseInfoTabReviews.DeleteReview.Request)
 }
 
 final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtocol {
@@ -13,6 +15,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     private let provider: CourseInfoTabReviewsProviderProtocol
 
     private var currentCourse: Course?
+    private var currentUserReview: CourseReview?
     private var isOnline = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var shouldOpenedAnalyticsEventSend = false
@@ -76,8 +79,10 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 strongSelf.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
                 let response = CourseInfoTabReviews.NextReviewsLoad.Response(
+                    course: course,
                     reviews: sortedReviews,
-                    hasNextPage: meta.hasNext
+                    hasNextPage: meta.hasNext,
+                    currentUserReview: strongSelf.currentUserReview
                 )
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextCourseReviews(response: response)
@@ -90,28 +95,96 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         }
     }
 
+    func doWriteCourseReviewPresentation(request: CourseInfoTabReviews.WriteCourseReviewPresentation.Request) {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        self.presenter.presentWriteCourseReview(
+            response: CourseInfoTabReviews.WriteCourseReviewPresentation.Response(
+                course: course,
+                review: self.currentUserReview
+            )
+        )
+    }
+
+    func doCourseReviewDelete(request: CourseInfoTabReviews.DeleteReview.Request) {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        let isCurrentUserReviewDeleting = self.currentUserReview?.id == request.uniqueIdentifier
+
+        self.provider.delete(id: request.uniqueIdentifier).done {
+            if isCurrentUserReviewDeleting {
+                self.currentUserReview = nil
+            }
+
+            self.presenter.presentCourseReviewDelete(
+                response: CourseInfoTabReviews.DeleteReview.Response(
+                    isDeleted: true,
+                    uniqueIdentifier: request.uniqueIdentifier,
+                    course: course,
+                    currentUserReview: self.currentUserReview
+                )
+            )
+        }.catch { _ in
+            self.presenter.presentCourseReviewDelete(
+                response: CourseInfoTabReviews.DeleteReview.Response(
+                    isDeleted: false,
+                    uniqueIdentifier: request.uniqueIdentifier,
+                    course: course,
+                    currentUserReview: self.currentUserReview
+                )
+            )
+        }
+    }
+
     private func fetchReviewsInAppropriateMode(
         course: Course,
         isOnline: Bool
     ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Response> {
-        guard let course = self.currentCourse else {
-            return Promise(error: Error.undefinedCourse)
-        }
-
         return Promise { seal in
             firstly {
                 isOnline
                     ? self.provider.fetchRemote(course: course, page: 1)
                     : self.provider.fetchCached(course: course)
-            }.done { reviews, meta in
+            }.then { reviews, meta in
+                self.fetchCurrentUserReviewInAppropriateMode(
+                    course: course,
+                    isOnline: isOnline
+                ).map { ($0, reviews, meta) }
+            }.done { currentUserReview, reviews, meta in
+                self.currentUserReview = currentUserReview
+
                 let sortedReviews = reviews.sorted { $0.creationDate > $1.creationDate }
                 let response = CourseInfoTabReviews.ReviewsLoad.Response(
+                    course: course,
                     reviews: sortedReviews,
-                    hasNextPage: meta.hasNext
+                    hasNextPage: meta.hasNext,
+                    currentUserReview: self.currentUserReview
                 )
+
                 seal.fulfill(response)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    private func fetchCurrentUserReviewInAppropriateMode(
+        course: Course,
+        isOnline: Bool
+    ) -> Guarantee<CourseReview?> {
+        return Guarantee { seal in
+            firstly {
+                isOnline
+                    ? self.provider.fetchCurrentUserReviewRemote(course: course)
+                    : self.provider.fetchCurrentUserReviewCached(course: course)
+            }.done { review in
+                seal(review)
+            }.catch { _ in
+                seal(nil)
             }
         }
     }
@@ -121,6 +194,8 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         case fetchFailed
     }
 }
+
+// MARK: - CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol -
 
 extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
     func handleControllerAppearance() {
@@ -142,5 +217,23 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
             AmplitudeAnalyticsEvents.CourseReviews.opened(courseID: course.id, courseTitle: course.title).send()
             self.shouldOpenedAnalyticsEventSend = false
         }
+    }
+}
+
+// MARK: - CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol -
+
+extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
+    func handleCourseReviewCreated(_ courseReview: CourseReview) {
+        self.currentUserReview = courseReview
+        self.presenter.presentReviewCreated(
+            response: CourseInfoTabReviews.ReviewCreated.Response(review: courseReview)
+        )
+    }
+
+    func handleCourseReviewUpdated(_ courseReview: CourseReview) {
+        self.currentUserReview = courseReview
+        self.presenter.presentReviewUpdated(
+            response: CourseInfoTabReviews.ReviewUpdated.Response(review: courseReview)
+        )
     }
 }
