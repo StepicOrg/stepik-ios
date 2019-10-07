@@ -164,13 +164,16 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
 
     func courseInfoTabReviewsView(
         _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
-        willSelectRowAt index: Int
+        willSelectRowAt indexPath: IndexPath
     ) -> Bool {
-        return self.tableDataSource.viewModels[safe: index]?.isCurrentUserReview ?? false
+        return self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
     }
 
-    func courseInfoTabReviewsView(_ courseInfoTabReviewsView: CourseInfoTabReviewsView, didSelectRowAt index: Int) {
-        guard let review = self.tableDataSource.viewModels[safe: index],
+    func courseInfoTabReviewsView(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        guard let review = self.tableDataSource.viewModels[safe: indexPath.row],
               review.isCurrentUserReview else {
             return
         }
@@ -195,6 +198,12 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
             )
         )
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+
+        if let popoverPresentationController = alert.popoverPresentationController,
+           let (sourceView, sourceRect) = self.courseInfoTabReviewsView?.popoverPresentationAnchorPoint(at: indexPath) {
+            popoverPresentationController.sourceView = sourceView
+            popoverPresentationController.sourceRect = sourceRect
+        }
 
         self.present(alert, animated: true)
     }

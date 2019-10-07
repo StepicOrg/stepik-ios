@@ -7,11 +7,11 @@ protocol CourseInfoTabReviewsViewDelegate: class {
     func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsView(
         _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
-        willSelectRowAt index: Int
+        willSelectRowAt indexPath: IndexPath
     ) -> Bool
     func courseInfoTabReviewsView(
         _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
-        didSelectRowAt index: Int
+        didSelectRowAt indexPath: IndexPath
     )
 }
 
@@ -165,6 +165,10 @@ final class CourseInfoTabReviewsView: UIView {
         self.tableView.skeleton.hide()
     }
 
+    func popoverPresentationAnchorPoint(at indexPath: IndexPath) -> (UIView, CGRect) {
+        return (self.tableView, self.tableView.rectForRow(at: indexPath))
+    }
+
     // MARK: - Private API
 
     @objc
@@ -218,16 +222,16 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath.row) ?? false
+        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false
     }
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath.row) ?? false ? indexPath : nil
+        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false ? indexPath : nil
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.delegate?.courseInfoTabReviewsView(self, didSelectRowAt: indexPath.row)
+        self.delegate?.courseInfoTabReviewsView(self, didSelectRowAt: indexPath)
     }
 }
 
