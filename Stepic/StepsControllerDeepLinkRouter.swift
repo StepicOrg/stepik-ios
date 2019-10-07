@@ -118,36 +118,21 @@ class StepsControllerDeepLinkRouter: NSObject {
             fetchOrLoadCourse(for: section)
         }.done { course in
             if lesson.isPublic || course.enrolled {
-                let lessonAssemblyWithoutUnit: Assembly = {
-                    if RemoteConfig.shared.newLessonAvailable {
-                        return NewLessonAssembly(initialContext: .lesson(id: lesson.id), startStep: .index(stepId - 1))
-                    } else {
-                        return LessonLegacyAssembly(
-                            initObjects: (lesson: lesson, startStepId: stepId - 1, context: .lesson),
-                            initIDs: nil
-                        )
-                    }
-                }()
+                let lessonAssemblyWithoutUnit = NewLessonAssembly(
+                    initialContext: .lesson(id: lesson.id),
+                    startStep: .index(stepId - 1)
+                )
 
                 var controllersStack: [UIViewController] = []
+
                 if includeUnit {
                     controllersStack.append(CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule())
 
                     if let unit = currentUnit {
-                        let lessonAssembly: Assembly = {
-                            if RemoteConfig.shared.newLessonAvailable {
-                                return NewLessonAssembly(
-                                    initialContext: .unit(id: unit.id),
-                                    startStep: .index(stepId - 1)
-                                )
-                            } else {
-                                return LessonLegacyAssembly(
-                                    initObjects: nil,
-                                    initIDs: (stepId: lesson.stepsArray[stepId - 1], unitId: unit.id)
-                                )
-                            }
-                        }()
-
+                        let lessonAssembly = NewLessonAssembly(
+                            initialContext: .unit(id: unit.id),
+                            startStep: .index(stepId - 1)
+                        )
                         controllersStack.append(lessonAssembly.makeModule())
                     } else {
                         controllersStack.append(lessonAssemblyWithoutUnit.makeModule())

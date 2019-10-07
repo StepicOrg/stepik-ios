@@ -415,17 +415,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
-        let assembly: Assembly = {
-            if RemoteConfig.shared.newLessonAvailable {
-                return NewLessonAssembly(initialContext: .unit(id: viewModel.unitID))
-            } else {
-                return LessonLegacyAssembly(
-                    initObjects: viewModel.initObjects,
-                    initIDs: viewModel.initIDs
-                )
-            }
-        }()
-
+        let assembly = NewLessonAssembly(initialContext: .unit(id: viewModel.unitID))
         self.push(module: assembly.makeModule())
     }
 

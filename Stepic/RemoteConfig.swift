@@ -59,16 +59,6 @@ final class RemoteConfig {
         return configValue
     }
 
-    var newLessonAvailable: Bool {
-        if DeviceInfo.current.isPad || DeviceInfo.current.OSVersion.major < 11 {
-            return false
-        }
-
-        return FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
-            forKey: RemoteConfigKeys.newLessonAvailable.rawValue
-        ).boolValue
-    }
-
     var supportedInAdaptiveModeCourses: [Int] {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
             forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue

@@ -141,11 +141,7 @@ class CodeQuizViewController: QuizViewController {
 
         limitsLabel.snp.makeConstraints { make -> Void in
             make.top.equalTo(self.containerView).offset(8)
-            if RemoteConfig.shared.newLessonAvailable {
-                make.leading.equalTo(self.containerView).offset(16)
-            } else {
-                make.leading.equalTo(self.containerView).offset(8)
-            }
+            make.leading.equalTo(self.containerView).offset(16)
             make.trailing.equalTo(self.containerView)
             make.height.equalTo(limitsLabelHeight)
         }

@@ -43,15 +43,11 @@ enum CourseInfo {
     /// Show lesson
     enum LessonPresentation {
         struct Response {
-            let lesson: Lesson
             let unitID: Unit.IdType
         }
 
-        @available(*, deprecated, message: "Old ugly Lesson controller initialization")
         struct ViewModel {
             let unitID: Unit.IdType
-            let initObjects: LessonInitObjects
-            let initIDs: LessonInitIds
         }
     }
 
