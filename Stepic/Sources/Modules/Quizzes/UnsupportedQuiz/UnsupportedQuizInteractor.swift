@@ -19,6 +19,9 @@ final class UnsupportedQuizInteractor: UnsupportedQuizInteractorProtocol {
     }
 
     func doUnsupportedQuizPresentation(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request) {
+        // FIXME: analytics dependency
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.solveInWebPressed)
+
         self.presenter.presentUnsupportedQuiz(
             response: UnsupportedQuiz.UnsupportedQuizPresentation.Response(stepURLPath: self.stepURLPath)
         )
