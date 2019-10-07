@@ -131,7 +131,6 @@ final class CourseInfoTabReviewsView: UIView {
 
     func updateTableViewData(dataSource: UITableViewDataSource) {
         let numberOfRows = dataSource.tableView(self.tableView, numberOfRowsInSection: 0)
-        self.tableView.isHidden = numberOfRows == 0
         self.emptyStateLabel.isHidden = numberOfRows != 0
 
         self.tableView.dataSource = dataSource
