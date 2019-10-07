@@ -2,28 +2,25 @@ import Foundation
 import PromiseKit
 
 protocol UnsupportedQuizInteractorProtocol {
-    func doSomeAction(request: UnsupportedQuiz.SomeAction.Request)
+    func doUnsupportedQuizPresentation(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request)
 }
 
 final class UnsupportedQuizInteractor: UnsupportedQuizInteractorProtocol {
-    weak var moduleOutput: UnsupportedQuizOutputProtocol?
-
     private let presenter: UnsupportedQuizPresenterProtocol
-    private let provider: UnsupportedQuizProviderProtocol
+
+    private let stepURLPath: String
 
     init(
-        presenter: UnsupportedQuizPresenterProtocol,
-        provider: UnsupportedQuizProviderProtocol
+        stepURLPath: String,
+        presenter: UnsupportedQuizPresenterProtocol
     ) {
+        self.stepURLPath = stepURLPath
         self.presenter = presenter
-        self.provider = provider
     }
 
-    func doSomeAction(request: UnsupportedQuiz.SomeAction.Request) { }
-
-    enum Error: Swift.Error {
-        case something
+    func doUnsupportedQuizPresentation(request: UnsupportedQuiz.UnsupportedQuizPresentation.Request) {
+        self.presenter.presentUnsupportedQuiz(
+            response: UnsupportedQuiz.UnsupportedQuizPresentation.Response(stepURLPath: self.stepURLPath)
+        )
     }
 }
-
-extension UnsupportedQuizInteractor: UnsupportedQuizInputProtocol { }

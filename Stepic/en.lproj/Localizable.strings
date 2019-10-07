@@ -85,7 +85,6 @@ TryAgain = "Try again";
 Correct = "Correct!";
 Wrong = "Wrong. Please, try again.";
 CorrectFreeResponse = "Your answer was saved.";
-SolveOnTheWebsite = "Solve on the website";
 ConnectionErrorText = "Could not connect to the internet";
 PeerReviewText = "This is a task with peer review. Tap to open in web to get points.";
 ConnectionErrorPullToRefresh = "Enable connection and pull to refresh";
@@ -740,6 +739,9 @@ SingleChoiceQuizTitle = "Select one option";
 SortingQuizTitle = "Sort a given list";
 MatchingQuizTitle = "Match two lists";
 SQLQuizTitle = "SQL Challenge - Enter SQL query";
+UnsupportedQuizTitle = "Unsupported step type";
+
+UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 
 CodeQuizDetails = "Details";
 CodeQuizDetailSampleTitle = "Sample data %@:";

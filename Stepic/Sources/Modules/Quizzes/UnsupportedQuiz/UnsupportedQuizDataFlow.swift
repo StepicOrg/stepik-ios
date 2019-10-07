@@ -1,11 +1,16 @@
 import Foundation
 
 enum UnsupportedQuiz {
-    enum SomeAction {
+    // Show step web version
+    enum UnsupportedQuizPresentation {
         struct Request { }
 
-        struct Response { }
+        struct Response {
+            let stepURLPath: String
+        }
 
-        struct ViewModel { }
+        struct ViewModel {
+            let stepURLPath: String
+        }
     }
 }

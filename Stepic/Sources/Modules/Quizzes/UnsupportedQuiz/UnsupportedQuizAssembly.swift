@@ -1,23 +1,18 @@
 import UIKit
 
 final class UnsupportedQuizAssembly: Assembly {
-    var moduleInput: UnsupportedQuizInputProtocol?
+    private let stepURLPath: String
 
-    private weak var moduleOutput: UnsupportedQuizOutputProtocol?
-
-    init(output: UnsupportedQuizOutputProtocol? = nil) {
-        self.moduleOutput = output
+    init(stepURLPath: String) {
+        self.stepURLPath = stepURLPath
     }
 
     func makeModule() -> UIViewController {
-        let provider = UnsupportedQuizProvider()
         let presenter = UnsupportedQuizPresenter()
-        let interactor = UnsupportedQuizInteractor(presenter: presenter, provider: provider)
+        let interactor = UnsupportedQuizInteractor(stepURLPath: self.stepURLPath, presenter: presenter)
         let viewController = UnsupportedQuizViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

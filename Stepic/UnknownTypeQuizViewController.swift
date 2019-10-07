@@ -25,7 +25,7 @@ class UnknownTypeQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         solveOnTheWebsiteButton.setStepicGreenStyle()
-        solveOnTheWebsiteButton.setTitle(NSLocalizedString("SolveOnTheWebsite", comment: ""), for: UIControl.State())
+        solveOnTheWebsiteButton.setTitle(NSLocalizedString("UnsupportedQuizActionButtonTitle", comment: ""), for: UIControl.State())
         // Do any additional setup after loading the view.
     }
 

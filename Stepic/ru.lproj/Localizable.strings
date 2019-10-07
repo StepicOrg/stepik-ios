@@ -85,7 +85,6 @@ TryAgain = "Попробовать снова";
 Correct = "Верно!";
 Wrong = "Неправильно. Пожалуйста, попробуйте еще раз.";
 CorrectFreeResponse = "Ваше решение сохранено.";
-SolveOnTheWebsite = "Решить на сайте";
 ConnectionErrorText = "Не удалось подключиться к сети";
 PeerReviewText = "Это задание с рецензией. Нажмите, чтобы закончить задание в web и получить баллы.";
 ConnectionErrorPullToRefresh = "Включите соединение и потяните вниз";
@@ -741,6 +740,9 @@ SingleChoiceQuizTitle = "Выберите один вариант";
 SortingQuizTitle = "Упорядочьте элементы списка";
 MatchingQuizTitle = "Сопоставьте значения из двух списков";
 SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
+UnsupportedQuizTitle = "Неподдерживаемый тип шага";
+
+UnsupportedQuizActionButtonTitle = "Пройти задание в web-версии";
 
 CodeQuizDetails = "Детали";
 CodeQuizDetailSampleTitle = "Пример данных %@:";
