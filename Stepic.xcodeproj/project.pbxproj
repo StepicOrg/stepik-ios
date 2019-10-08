@@ -403,7 +403,6 @@
 		08F485A21C57987C000165AA /* NumberQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A11C57987B000165AA /* NumberQuizViewController.swift */; };
 		08F485A51C57AF2E000165AA /* FreeAnswerReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */; };
 		08F485AA1C580D61000165AA /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
-		08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AB1C580DB3000165AA /* MathQuizViewController.swift */; };
 		08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AE1C58E946000165AA /* SortingDataset.swift */; };
 		08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B01C58EB0D000165AA /* SortingReply.swift */; };
 		08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B21C58EC33000165AA /* SortingQuizViewController.swift */; };
@@ -1543,7 +1542,6 @@
 		08F485A11C57987B000165AA /* NumberQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberQuizViewController.swift; sourceTree = "<group>"; };
 		08F485A41C57AF2E000165AA /* FreeAnswerReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAnswerReply.swift; sourceTree = "<group>"; };
 		08F485A91C580D61000165AA /* MathReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathReply.swift; sourceTree = "<group>"; };
-		08F485AB1C580DB3000165AA /* MathQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathQuizViewController.swift; sourceTree = "<group>"; };
 		08F485AE1C58E946000165AA /* SortingDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingDataset.swift; sourceTree = "<group>"; };
 		08F485B01C58EB0D000165AA /* SortingReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingReply.swift; sourceTree = "<group>"; };
 		08F485B21C58EC33000165AA /* SortingQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingQuizViewController.swift; sourceTree = "<group>"; };
@@ -3692,14 +3690,6 @@
 			name = NumberQuizViewController;
 			sourceTree = "<group>";
 		};
-		08F485AD1C580DB8000165AA /* MathQuizViewController */ = {
-			isa = PBXGroup;
-			children = (
-				08F485AB1C580DB3000165AA /* MathQuizViewController.swift */,
-			);
-			name = MathQuizViewController;
-			sourceTree = "<group>";
-		};
 		08F485B51C58EC45000165AA /* SortingQuizViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3761,7 +3751,6 @@
 				08F5556A1C50009000C877E8 /* ChoiceQuizViewController */,
 				08F4859D1C5786E6000165AA /* StringQuizViewController */,
 				08F485A31C57988D000165AA /* NumberQuizViewController */,
-				08F485AD1C580DB8000165AA /* MathQuizViewController */,
 				08F485B51C58EC45000165AA /* SortingQuizViewController */,
 				0834C4741E2CEC55002F8516 /* MatchingQuizViewController */,
 				0859AE931E4F194D00A0D206 /* FillBlanksQuizViewController */,
@@ -6365,7 +6354,6 @@
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
 				86BB7C022019538100063538 /* CongratsView.swift in Sources */,
 				0895A13B1E43836B00FE22DD /* FillBlanksReply.swift in Sources */,
-				08F485AC1C580DB3000165AA /* MathQuizViewController.swift in Sources */,
 				08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */,
 				083749301DE5BBF700144C14 /* PreferencesContainer.swift in Sources */,
