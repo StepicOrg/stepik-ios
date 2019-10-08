@@ -45,7 +45,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="jdI-2w-A1S" id="M2W-YW-0ok"/>
-                        <segue destination="7LO-Mv-R4f" kind="show" identifier="showSteps" id="gVj-jL-WXR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7a5-ET-4lH" userLabel="First Responder" sceneMemberID="firstResponder"/>
