@@ -13,13 +13,13 @@ protocol CodeSuggestionDelegate: class {
     var suggestionsSize: CodeSuggestionsSize { get }
 }
 
-class CodeSuggestionsTableViewController: UITableViewController {
-
+final class CodeSuggestionsTableViewController: UITableViewController {
     var suggestions: [String] = [] {
         didSet {
             tableView.reloadData()
         }
     }
+    
     var prefix: String = "" {
         didSet {
             tableView.reloadData()

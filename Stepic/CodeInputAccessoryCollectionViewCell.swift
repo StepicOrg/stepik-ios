@@ -7,26 +7,14 @@
 //
 
 import UIKit
-import Foundation
 
-class CodeInputAccessoryCollectionViewCell: UICollectionViewCell {
-
+final class CodeInputAccessoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
+
     var text: String?
     var size: CodeInputAccessorySize?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    fileprivate func setRoundedStyle() {
-        self.layer.cornerRadius = 4.0
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.clear.cgColor
-        self.layer.masksToBounds = true
-    }
-
-    class func width(for text: String, size: CodeInputAccessorySize) -> CGFloat {
+    static func width(for text: String, size: CodeInputAccessorySize) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 1
         label.text = text
@@ -44,5 +32,12 @@ class CodeInputAccessoryCollectionViewCell: UICollectionViewCell {
         let regularCourier = UIFont(name: "Courier", size: size.realSizes.textSize)!
         textLabel.font = regularCourier
         setRoundedStyle()
+    }
+
+    private func setRoundedStyle() {
+        self.layer.cornerRadius = 4.0
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.masksToBounds = true
     }
 }

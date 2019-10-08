@@ -8,16 +8,27 @@
 
 import Foundation
 
-class InputAccessoryBuilder {
-
-    static func buildAccessoryView(size: CodeInputAccessorySize, language: CodeLanguage, tabAction: @escaping () -> Void, insertStringAction: @escaping (String) -> Void, hideKeyboardAction: @escaping () -> Void) -> UIView {
+final class InputAccessoryBuilder {
+    static func buildAccessoryView(
+        size: CodeInputAccessorySize,
+        language: CodeLanguage,
+        tabAction: @escaping () -> Void,
+        insertStringAction: @escaping (String) -> Void,
+        hideKeyboardAction: @escaping () -> Void
+    ) -> UIView {
         let symbols = CodeSnippetSymbols.snippets(language: language)
 
         var buttons: [CodeInputAccessoryButtonData] = []
 
         let tabButton = CodeInputAccessoryButtonData(title: "Tab", action: {
             tabAction()
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Code.toolbarSelected, parameters: ["language": language.rawValue, "symbol": "Tab"])
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Code.toolbarSelected,
+                parameters: [
+                    "language": language.rawValue,
+                    "symbol": "Tab"
+                ]
+            )
         })
 
         buttons += [tabButton]
@@ -25,7 +36,12 @@ class InputAccessoryBuilder {
         for symbol in symbols {
             let symButton = CodeInputAccessoryButtonData(title: symbol, action: {
                 insertStringAction(symbol)
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Code.toolbarSelected, parameters: ["language": language.rawValue, "symbol": symbol])
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.Code.toolbarSelected,
+                    parameters: [
+                        "language": language.rawValue,
+                        "symbol": symbol]
+                )
             })
             buttons += [symButton]
         }
@@ -36,7 +52,7 @@ class InputAccessoryBuilder {
             hideKeyboardAction()
             AnalyticsReporter.reportEvent(AnalyticsEvents.Code.hideKeyboard)
         })
+
         return accessoryView
     }
-
 }
