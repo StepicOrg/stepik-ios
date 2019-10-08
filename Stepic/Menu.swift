@@ -8,7 +8,13 @@
 
 import Foundation
 
-class Menu {
+protocol MenuDelegate: class {
+    func update(at index: Int)
+    func insert(at index: Int)
+    func remove(at index: Int)
+}
+
+final class Menu {
     var blocks: [MenuBlock]
     weak var delegate: MenuDelegate?
 
@@ -126,10 +132,4 @@ class Menu {
         delegate?.remove(at: index)
         return true
     }
-}
-
-protocol MenuDelegate: class {
-    func update(at index: Int)
-    func insert(at index: Int)
-    func remove(at index: Int)
 }

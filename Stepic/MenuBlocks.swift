@@ -24,7 +24,18 @@ class MenuBlock {
     }
 }
 
-class HeaderMenuBlock: MenuBlock {
+final class HeaderMenuBlock: MenuBlock {
+}
+
+final class CustomMenuBlock: MenuBlock {
+    private(set) var contentView: UIView?
+
+    var onClick: (() -> Void)?
+
+    convenience init(id: String, contentView: UIView) {
+        self.init(id: id, title: "")
+        self.contentView = contentView
+    }
 }
 
 class ExpandableMenuBlock: MenuBlock {
@@ -32,7 +43,7 @@ class ExpandableMenuBlock: MenuBlock {
     var isExpanded: Bool = false
 }
 
-class ContentExpandableMenuBlock: ExpandableMenuBlock {
+final class ContentExpandableMenuBlock: ExpandableMenuBlock {
     weak var contentView: UIView?
 
     convenience init(id: String, title: String, contentView: UIView?) {
@@ -41,7 +52,7 @@ class ContentExpandableMenuBlock: ExpandableMenuBlock {
     }
 }
 
-class ContentMenuBlock: MenuBlock {
+final class ContentMenuBlock: MenuBlock {
     weak var contentView: UIView?
     var buttonTitle: String?
     var onButtonClick: (() -> Void)?
@@ -54,7 +65,7 @@ class ContentMenuBlock: MenuBlock {
     }
 }
 
-class TransitionMenuBlock: MenuBlock {
+final class TransitionMenuBlock: MenuBlock {
     var subtitle: String? {
         didSet {
             (cell as? TransitionMenuBlockTableViewCell)?.subtitleLabel.text = subtitle
@@ -69,7 +80,7 @@ class TransitionMenuBlock: MenuBlock {
     }
 }
 
-class SwitchMenuBlock: MenuBlock {
+final class SwitchMenuBlock: MenuBlock {
     var onSwitch: ((Bool) -> Void)?
     var isOn: Bool
 
@@ -80,7 +91,7 @@ class SwitchMenuBlock: MenuBlock {
     }
 }
 
-class PlaceholderMenuBlock: MenuBlock {
+final class PlaceholderMenuBlock: MenuBlock {
     func animate() {
         (cell as? PlaceholderTableViewCell)?.startAnimating()
     }
