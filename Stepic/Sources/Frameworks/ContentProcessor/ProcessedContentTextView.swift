@@ -58,9 +58,7 @@ final class ProcessedContentTextView: UIView {
 
         let webViewConfig = WKWebViewConfiguration()
         webViewConfig.userContentController = userContentController
-        if #available(iOS 10.0, *) {
-            webViewConfig.dataDetectorTypes = [.link]
-        }
+        webViewConfig.dataDetectorTypes = [.link]
 
         return webViewConfig
     }()
@@ -77,9 +75,8 @@ final class ProcessedContentTextView: UIView {
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.scrollView.contentInset = .zero
-        if #available(iOS 11.0, *) {
-            webView.scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
+
         return webView
     }()
 

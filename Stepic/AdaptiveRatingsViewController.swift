@@ -125,11 +125,7 @@ class AdaptiveRatingsViewController: UIViewController {
 
         tableView.register(UINib(nibName: "LeaderboardTableViewCell", bundle: nil), forCellReuseIdentifier: LeaderboardTableViewCell.reuseId)
 
-        #if swift(>=3.2)
-            if #available(iOS 11.0, *) {
-                tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never
-            }
-        #endif
+        self.tableView.contentInsetAdjustmentBehavior = .never
     }
 }
 

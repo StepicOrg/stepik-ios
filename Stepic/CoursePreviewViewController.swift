@@ -88,9 +88,7 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         videoWebView.scrollView.isScrollEnabled = false
         videoWebView.scrollView.bouncesZoom = false
 
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-        }
+        tableView.contentInsetAdjustmentBehavior = .never
 
         if let c = course {
             sectionTitles = []
@@ -459,7 +457,6 @@ class CoursePreviewViewController: UIViewController, ShareableController {
         resetHeightConstraints()
     }
 
-    @available(iOS 9.0, *)
     override var previewActionItems: [UIPreviewActionItem] {
         let shareItem = UIPreviewAction(title: NSLocalizedString("Share", comment: ""), style: .default, handler: {
             [weak self]

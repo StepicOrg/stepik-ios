@@ -73,12 +73,10 @@ final class NewStringQuizView: UIView {
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.spellCheckingType = .no
+        field.smartDashesType = .no
+        field.smartQuotesType = .no
+        field.smartInsertDeleteType = .no
 
-        if #available(iOS 11.0, *) {
-            field.smartDashesType = .no
-            field.smartQuotesType = .no
-            field.smartInsertDeleteType = .no
-        }
         return field
     }()
 

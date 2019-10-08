@@ -30,9 +30,7 @@ final class DownloadsViewController: UIViewController {
         }
         self.tableView.tableFooterView = UIView()
 
-        if #available(iOS 11.0, *) {
-            self.tableView.contentInsetAdjustmentBehavior = .never
-        }
+        self.tableView.contentInsetAdjustmentBehavior = .never
     }
 
     override func viewWillAppear(_ animated: Bool) {

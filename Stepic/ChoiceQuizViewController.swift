@@ -20,11 +20,7 @@ final class ChoiceQuizViewController: QuizViewController {
     var cellHeights: [CGFloat?] = []
 
     var cellWidth: CGFloat {
-        if #available(iOS 11.0, *) {
-            return tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
-        } else {
-            return tableView.bounds.width
-        }
+        return tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
     }
 
     override func viewDidLoad() {

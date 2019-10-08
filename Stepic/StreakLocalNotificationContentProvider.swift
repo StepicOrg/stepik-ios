@@ -30,11 +30,7 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
     var title = ""
 
     var body: String {
-        if #available(iOS 10.0, *) {
-            return NSString.localizedUserNotificationString(forKey: "StreakNotificationAlertBody", arguments: nil)
-        } else {
-            return NSLocalizedString("StreakNotificationAlertBody", comment: "")
-        }
+        return NSString.localizedUserNotificationString(forKey: "StreakNotificationAlertBody", arguments: nil)
     }
 
     var userInfo: [AnyHashable: Any] {
@@ -51,20 +47,10 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
         return "default_sound.wav"
     }
 
-    var repeatInterval: NSCalendar.Unit? {
-        return .day
-    }
-
-    var fireDate: Date? {
-        return self.calendar.date(from: self.dateComponents)
-    }
-
-    @available(iOS 10.0, *)
     var sound: UNNotificationSound {
         return UNNotificationSound(named: convertToUNNotificationSoundName(self.soundName))
     }
 
-    @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
         return UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: true)
     }

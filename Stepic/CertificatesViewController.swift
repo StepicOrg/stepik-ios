@@ -98,11 +98,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
             action: #selector(CertificatesViewController.refreshCertificates),
             for: .valueChanged
         )
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = refreshControl
-        } else {
-            tableView.addSubview(refreshControl)
-        }
+        tableView.refreshControl = refreshControl
         refreshControl.layoutIfNeeded()
         refreshControl.beginRefreshing()
 
@@ -111,9 +107,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
 
         tableView.backgroundColor = UIColor.groupTableViewBackground
 
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        }
+        tableView.contentInsetAdjustmentBehavior = .never
 
         DispatchQueue.main.async {
             self.displayRefreshing()

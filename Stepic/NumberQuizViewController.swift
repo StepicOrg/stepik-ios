@@ -32,16 +32,9 @@ class NumberQuizViewController: QuizViewController {
             make.height.equalTo(textFieldHeight)
         }
 
-        if #available(iOS 11.0, *) {
-            textField.snp.makeConstraints { make -> Void in
-                make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(useSmallPadding ? 8 : 16)
-                make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(useSmallPadding ? -8 : -16)
-            }
-        } else {
-            textField.snp.makeConstraints { make -> Void in
-                make.leading.equalTo(containerView).offset(useSmallPadding ? 8 : 16)
-                make.trailing.equalTo(containerView).offset(useSmallPadding ? -8 : -16)
-            }
+        textField.snp.makeConstraints { make -> Void in
+            make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(useSmallPadding ? 8 : 16)
+            make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(useSmallPadding ? -8 : -16)
         }
 
         textField.borderStyle = UITextField.BorderStyle.roundedRect
