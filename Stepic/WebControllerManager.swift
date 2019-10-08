@@ -71,11 +71,11 @@ final class WebControllerManager: NSObject {
         forceCustom: Bool = false
     ) {
         guard ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
+            UIApplication.shared.open(
+                url,
+                options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]),
+                completionHandler: nil
+            )
             return
         }
 

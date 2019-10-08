@@ -34,17 +34,7 @@ final class ScrollableStackView: UIView {
                 )
             }
 
-            if #available(iOS 10.0, *) {
-                self.scrollView.refreshControl = refreshControl
-            } else {
-                if let refreshControl = refreshControl {
-                    self.scrollView.insertSubview(refreshControl, at: 0)
-                } else {
-                    let oldRefreshControl = self.scrollView.subviews.first(where: { $0 is UIRefreshControl })
-                        as? UIRefreshControl
-                    oldRefreshControl?.removeFromSuperview()
-                }
-            }
+            self.scrollView.refreshControl = refreshControl
         }
     }
 
@@ -87,7 +77,6 @@ final class ScrollableStackView: UIView {
         }
     }
 
-    @available(iOS 11.0, *)
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.scrollView.contentInsetAdjustmentBehavior

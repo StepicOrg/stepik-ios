@@ -294,11 +294,7 @@ public class Player: UIViewController {
         super.viewDidLoad()
 
         do {
-            if #available(iOS 10.0, *) {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
-            } else {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: [])
-            }
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("failed to set up background playing: \(error)")

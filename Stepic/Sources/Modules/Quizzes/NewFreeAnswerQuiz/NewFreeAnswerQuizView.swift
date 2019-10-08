@@ -53,12 +53,9 @@ final class NewFreeAnswerQuizView: UIView {
         textView.autocapitalizationType = .none
         textView.autocorrectionType = .no
         textView.spellCheckingType = .no
-
-        if #available(iOS 11.0, *) {
-            textView.smartDashesType = .no
-            textView.smartQuotesType = .no
-            textView.smartInsertDeleteType = .no
-        }
+        textView.smartDashesType = .no
+        textView.smartQuotesType = .no
+        textView.smartInsertDeleteType = .no
 
         return textView
     }()

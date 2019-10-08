@@ -209,7 +209,6 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
         }
     }
 
-    @available(iOS 11.0, *)
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.tableView.contentInsetAdjustmentBehavior

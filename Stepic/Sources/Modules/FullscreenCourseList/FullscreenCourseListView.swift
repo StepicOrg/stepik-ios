@@ -16,14 +16,8 @@ final class FullscreenCourseListView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-
-            if #available(iOS 11.0, *) {
-                make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-                make.width.equalTo(self.safeAreaLayoutGuide.snp.width)
-            } else {
-                make.leading.trailing.equalToSuperview()
-                make.width.equalTo(self.snp.width)
-            }
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.width.equalTo(self.safeAreaLayoutGuide.snp.width)
         }
 
         self.contentView = view

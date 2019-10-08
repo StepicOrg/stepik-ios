@@ -8,9 +8,7 @@
 
 import Foundation
 
-class CodePlaygroundManager {
-    init() {}
-
+final class CodePlaygroundManager {
     let closers: [String: String] = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
 
     typealias Autocomplete = (suggestions: [String], prefix: String)

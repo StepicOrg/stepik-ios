@@ -92,16 +92,8 @@ class NotificationsViewController: UIViewController, NotificationsView {
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableView.automaticDimension
 
-//        if #available(iOS 11.0, *) {
-//            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-//        }
-
         refreshControl.addTarget(self, action: #selector(NotificationsViewController.refreshNotifications), for: .valueChanged)
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = refreshControl
-        } else {
-            tableView.addSubview(refreshControl)
-        }
+        tableView.refreshControl = refreshControl
 
         self.tableView.tableFooterView = UIView()
 

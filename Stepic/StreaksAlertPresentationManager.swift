@@ -173,11 +173,7 @@ final class StreaksAlertPresentationManager {
 
             if UIApplication.shared.canOpenURL(settingsURL) {
                 NotificationCenter.default.post(name: .notificationsRegistrationServiceWillOpenSettings, object: nil)
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(settingsURL)
-                } else {
-                    UIApplication.shared.openURL(settingsURL)
-                }
+                UIApplication.shared.open(settingsURL)
                 self?.didTransitionToSettings = true
             }
         }

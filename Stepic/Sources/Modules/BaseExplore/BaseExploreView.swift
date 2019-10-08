@@ -68,12 +68,7 @@ extension BaseExploreView: ProgrammaticallyInitializableViewProtocol {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-
-            if #available(iOS 11.0, *) {
-                make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            } else {
-                make.leading.trailing.equalToSuperview()
-            }
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

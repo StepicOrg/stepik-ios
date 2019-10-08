@@ -264,11 +264,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
 
 extension CourseInfoInteractor: CourseInfoTabSyllabusOutputProtocol {
     func presentLesson(in unit: Unit) {
-        guard let lesson = unit.lesson else {
-            return
-        }
-
-        self.presenter.presentLesson(response: .init(lesson: lesson, unitID: unit.id))
+        self.presenter.presentLesson(
+            response: CourseInfo.LessonPresentation.Response(unitID: unit.id)
+        )
     }
 
     func presentPersonalDeadlinesCreation(for course: Course) {

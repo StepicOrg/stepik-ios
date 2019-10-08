@@ -73,7 +73,7 @@ def testing_pods
 end
 
 target 'Stepic' do
-    platform :ios, '9.0'
+    platform :ios, '11.0'
     all_pods
     target 'StepicTests' do
         inherit! :search_paths

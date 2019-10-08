@@ -46,13 +46,10 @@ final class ExploreSearchBar: UISearchBar {
     }
 
     private func applySystemFixes() {
-        if #available(iOS 11.0, *) {
-            self.searchFieldBackgroundPositionAdjustment = Appearance
-                .searchFieldPositionAdjustment
-            self.translatesAutoresizingMaskIntoConstraints = false
-            self.snp.makeConstraints { make in
-                make.height.equalTo(Appearance.barHeight)
-            }
+        self.searchFieldBackgroundPositionAdjustment = Appearance.searchFieldPositionAdjustment
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.snp.makeConstraints { make in
+            make.height.equalTo(Appearance.barHeight)
         }
     }
 }

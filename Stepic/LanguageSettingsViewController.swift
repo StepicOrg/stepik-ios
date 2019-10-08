@@ -43,10 +43,7 @@ final class LanguageSettingsViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
 
         self.edgesForExtendedLayout = []
-
-        if #available(iOS 11.0, *) {
-            self.tableView.contentInsetAdjustmentBehavior = .never
-        }
+        self.tableView.contentInsetAdjustmentBehavior = .never
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -20,17 +20,10 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
     }
 
     var body: String {
-        if #available(iOS 10.0, *) {
-            return NSString.localizedUserNotificationString(
-                forKey: "PersonalDeadlineNotificationBody",
-                arguments: ["\(self.section.title)", "\(self.hoursBeforeDeadline)"]
-            )
-        } else {
-            return String(
-                format: NSLocalizedString("PersonalDeadlineNotificationBody", comment: ""),
-                "\(self.section.title)", "\(self.hoursBeforeDeadline)"
-            )
-        }
+        return NSString.localizedUserNotificationString(
+            forKey: "PersonalDeadlineNotificationBody",
+            arguments: ["\(self.section.title)", "\(self.hoursBeforeDeadline)"]
+        )
     }
 
     var userInfo: [AnyHashable : Any] {
@@ -46,11 +39,6 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         return "\(NotificationsService.NotificationType.personalDeadline.rawValue)_section_\(self.section.id)_hours_\(self.hoursBeforeDeadline)"
     }
 
-    var fireDate: Date? {
-        return Calendar.current.date(from: self.dateComponents)
-    }
-
-    @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
         return UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: false)
     }

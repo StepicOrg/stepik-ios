@@ -9,8 +9,7 @@
 import Foundation
 import SnapKit
 
-class CodeInputAccessoryView: NibInitializableView {
-
+final class CodeInputAccessoryView: NibInitializableView {
     @IBOutlet weak var hideKeyboardImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -21,6 +20,7 @@ class CodeInputAccessoryView: NibInitializableView {
             collectionView.reloadData()
         }
     }
+
     var size: CodeInputAccessorySize = .small
 
     override var nibName: String {

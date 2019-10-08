@@ -11,13 +11,10 @@ import UserNotifications
 
 final class UserNotificationsCenterDelegate: NSObject {
     func attachNotificationDelegate() {
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        }
+        UNUserNotificationCenter.current().delegate = self
     }
 }
 
-@available(iOS 10.0, *)
 extension UserNotificationsCenterDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,

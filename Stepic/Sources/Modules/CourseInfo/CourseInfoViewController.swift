@@ -7,8 +7,6 @@ protocol CourseInfoScrollablePageViewProtocol: class {
     var scrollViewDelegate: UIScrollViewDelegate? { get set }
     var contentInsets: UIEdgeInsets { get set }
     var contentOffset: CGPoint { get set }
-
-    @available(iOS 11.0, *)
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior { get set }
 }
 
@@ -94,9 +92,7 @@ final class CourseInfoViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = self.moreBarButton
         self.styledNavigationController?.removeBackButtonTitleForTopController()
 
-        if #available(iOS 11.0, *) { } else {
-            self.automaticallyAdjustsScrollViewInsets = false
-        }
+        self.automaticallyAdjustsScrollViewInsets = false
 
         self.interactor.doCourseRefresh(request: .init())
     }
@@ -246,11 +242,7 @@ final class CourseInfoViewController: UIViewController {
             viewController.view.setNeedsLayout()
             viewController.view.layoutIfNeeded()
 
-            if #available(iOS 11.0, *) {
-                view?.contentInsetAdjustmentBehavior = .never
-            } else {
-                viewController.automaticallyAdjustsScrollViewInsets = false
-            }
+            view?.contentInsetAdjustmentBehavior = .never
         }
     }
 
@@ -415,17 +407,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
-        let assembly: Assembly = {
-            if RemoteConfig.shared.newLessonAvailable {
-                return NewLessonAssembly(initialContext: .unit(id: viewModel.unitID))
-            } else {
-                return LessonLegacyAssembly(
-                    initObjects: viewModel.initObjects,
-                    initIDs: viewModel.initIDs
-                )
-            }
-        }()
-
+        let assembly = NewLessonAssembly(initialContext: .unit(id: viewModel.unitID))
         self.push(module: assembly.makeModule())
     }
 

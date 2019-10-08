@@ -22,11 +22,7 @@ class AudioManager: NSObject {
         set(ignore) {
             do {
                 print("setting ignore status to \(ignore)")
-                if #available(iOS 10.0, *) {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
-                } else {
-                    try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: [])
-                }
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
                 try AVAudioSession.sharedInstance().setActive(!ignore)
             } catch {
                 print("Error while setting ignore mute switch")
@@ -36,11 +32,7 @@ class AudioManager: NSObject {
 
     func initAudioSession() -> Bool {
         do {
-            if #available(iOS 10.0, *) {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
-            } else {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: [])
-            }
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
             return true
         } catch {
             return false
