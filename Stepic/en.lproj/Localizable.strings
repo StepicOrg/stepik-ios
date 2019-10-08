@@ -31,6 +31,7 @@ FailedToRemoveMessage = "Failed to remove";
 RemovedAllMessage = "Removed";
 Downloading = "Downloading";
 Completed = "Completed";
+Copied = "Copied";
 EmptyDownloadsTitle = "No downloading or downloaded videos";
 EmptyDownloadsDescription = "You can only download videos from courses that you are enrolled in. Please, go to one of the courses' tabs and try to download videos.";
 Lesson = "Lesson";

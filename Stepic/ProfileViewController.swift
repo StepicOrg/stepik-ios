@@ -452,6 +452,14 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         )
         block.hasSeparatorOnBottom = false
         block.isSelectable = true
+        block.onClick = { [weak self] in
+            guard let sharingURLString = self?.sharingURL else {
+                return
+            }
+
+            UIPasteboard.general.string = sharingURLString
+            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("Copied", comment: ""))
+        }
 
         let insets = LayoutInsets(top: 24, left: 24, bottom: 24, right: 24)
 

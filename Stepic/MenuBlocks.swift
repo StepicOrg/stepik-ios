@@ -32,8 +32,8 @@ final class CustomMenuBlock: MenuBlock {
 
     var onClick: (() -> Void)?
 
-    convenience init(id: String, contentView: UIView) {
-        self.init(id: id, title: "")
+    init(id: String, contentView: UIView) {
+        super.init(id: id, title: "")
         self.contentView = contentView
     }
 }
