@@ -138,8 +138,6 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
                     return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
                 case .code:
                     return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .sql:
-                    return SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
                 default:
                     return nil
                 }
