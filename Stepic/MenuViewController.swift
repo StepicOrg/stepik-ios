@@ -18,7 +18,6 @@ class MenuViewController: UIViewController {
         didSet {
             menu?.delegate = self
             tableView.reloadData()
-//            tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
     }
 
@@ -41,11 +40,6 @@ class MenuViewController: UIViewController {
         tableView.contentInsetAdjustmentBehavior = .never
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         menu?.willAppear()
@@ -53,7 +47,6 @@ class MenuViewController: UIViewController {
 }
 
 extension MenuViewController: MenuDelegate {
-
     func getMenuIndexPath(from index: Int) -> IndexPath {
         return IndexPath(row: index, section: 0)
     }

@@ -2531,9 +2531,9 @@
 		08448FFD1F5CE13100D01940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */,
 				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
 				08CBA34A1F57734900302154 /* ProfileViewController.swift */,
-				62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";

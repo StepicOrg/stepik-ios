@@ -132,22 +132,24 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         for block in blocks {
             switch block {
             case .notificationsSwitch(let isOn):
-                menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
+                menuBlocks.append(self.buildNotificationsSwitchBlock(isOn: isOn))
             case .notificationsTimeSelection:
-                menuBlocks.append(buildNotificationsTimeSelectionBlock())
+                menuBlocks.append(self.buildNotificationsTimeSelectionBlock())
             case .certificates:
                 menuBlocks.append(self.buildCertificatesBlock())
             case .description:
-                menuBlocks.append(buildInfoExpandableBlock())
+                menuBlocks.append(self.buildInfoExpandableBlock())
             case .pinsMap:
-                menuBlocks.append(buildPinsMapExpandableBlock())
+                menuBlocks.append(self.buildPinsMapExpandableBlock())
             case .achievements:
-                menuBlocks.append(buildAchievementsBlock())
+                menuBlocks.append(self.buildAchievementsBlock())
+            case .userID(let id):
+                print("User ID: \(id)")
             default:
                 break
             }
         }
-        menu = Menu(blocks: menuBlocks.compactMap { $0 })
+        self.menu = Menu(blocks: menuBlocks.compactMap { $0 })
     }
 
     func manageBarItemControls(settingsIsHidden: Bool, profileEditIsAvailable: Bool, shareId: Int?) {
@@ -177,7 +179,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         switch block {
         case .infoHeader:
             return self.profileStreaksView
-        case .notificationsTimeSelection, .notificationsSwitch(_), .certificates:
+        case .notificationsTimeSelection, .notificationsSwitch(_), .certificates, .userID:
             return self
         case .description:
             return self.profileDescriptionView
