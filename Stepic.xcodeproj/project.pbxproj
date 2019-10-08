@@ -109,7 +109,6 @@
 		083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */; };
 		0834C4691E2CE469002F8516 /* MatchingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C4681E2CE469002F8516 /* MatchingDataset.swift */; };
 		0834C46C1E2CE66B002F8516 /* MatchingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46B1E2CE66B002F8516 /* MatchingReply.swift */; };
-		0834C4701E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */; };
 		083540611CE5DD5000BDFEA5 /* NotificationReactionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */; };
 		083540671CE5FC0E00BDFEA5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083540661CE5FC0E00BDFEA5 /* Notification.swift */; };
 		083622D81CD1FA4800CD8915 /* StepTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083622D71CD1FA4800CD8915 /* StepTabView.swift */; };
@@ -405,9 +404,6 @@
 		08F485AA1C580D61000165AA /* MathReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485A91C580D61000165AA /* MathReply.swift */; };
 		08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485AE1C58E946000165AA /* SortingDataset.swift */; };
 		08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B01C58EB0D000165AA /* SortingReply.swift */; };
-		08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B21C58EC33000165AA /* SortingQuizViewController.swift */; };
-		08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */; };
-		08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */; };
 		08F4CB281CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */; };
 		08F5554E1C4F924000C877E8 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554D1C4F924000C877E8 /* Attempt.swift */; };
 		08F555501C4F93B700C877E8 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5554F1C4F93B700C877E8 /* Dataset.swift */; };
@@ -1207,7 +1203,6 @@
 		083267A81CDCF59B002F7B5A /* DictionarySerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionarySerializable.swift; sourceTree = "<group>"; };
 		0834C4681E2CE469002F8516 /* MatchingDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingDataset.swift; sourceTree = "<group>"; };
 		0834C46B1E2CE66B002F8516 /* MatchingReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingReply.swift; sourceTree = "<group>"; };
-		0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchingQuizViewController.swift; sourceTree = "<group>"; };
 		083540601CE5DD5000BDFEA5 /* NotificationReactionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NotificationReactionHandler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		083540661CE5FC0E00BDFEA5 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		083622D71CD1FA4800CD8915 /* StepTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepTabView.swift; sourceTree = "<group>"; };
@@ -1544,9 +1539,6 @@
 		08F485A91C580D61000165AA /* MathReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathReply.swift; sourceTree = "<group>"; };
 		08F485AE1C58E946000165AA /* SortingDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingDataset.swift; sourceTree = "<group>"; };
 		08F485B01C58EB0D000165AA /* SortingReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingReply.swift; sourceTree = "<group>"; };
-		08F485B21C58EC33000165AA /* SortingQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingQuizViewController.swift; sourceTree = "<group>"; };
-		08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingQuizTableViewCell.swift; sourceTree = "<group>"; };
-		08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortingQuizTableViewCell.xib; sourceTree = "<group>"; };
 		08F4CB271CF5C58C00B15B3D /* WebViewHorizontalScrollHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewHorizontalScrollHelper.swift; sourceTree = "<group>"; };
 		08F5554D1C4F924000C877E8 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
 		08F5554F1C4F93B700C877E8 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
@@ -2520,14 +2512,6 @@
 				082E35AF20B5B14A006E28F9 /* StorageData.swift */,
 			);
 			name = "Storage Records";
-			sourceTree = "<group>";
-		};
-		0834C4741E2CEC55002F8516 /* MatchingQuizViewController */ = {
-			isa = PBXGroup;
-			children = (
-				0834C46E1E2CEC4E002F8516 /* MatchingQuizViewController.swift */,
-			);
-			name = MatchingQuizViewController;
 			sourceTree = "<group>";
 		};
 		083554261CC8FD0B004C4E85 /* Notifications */ = {
@@ -3690,16 +3674,6 @@
 			name = NumberQuizViewController;
 			sourceTree = "<group>";
 		};
-		08F485B51C58EC45000165AA /* SortingQuizViewController */ = {
-			isa = PBXGroup;
-			children = (
-				08F485B21C58EC33000165AA /* SortingQuizViewController.swift */,
-				08F485B61C58ECE3000165AA /* SortingQuizTableViewCell.swift */,
-				08F485B81C58ED01000165AA /* SortingQuizTableViewCell.xib */,
-			);
-			name = SortingQuizViewController;
-			sourceTree = "<group>";
-		};
 		08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3751,8 +3725,6 @@
 				08F5556A1C50009000C877E8 /* ChoiceQuizViewController */,
 				08F4859D1C5786E6000165AA /* StringQuizViewController */,
 				08F485A31C57988D000165AA /* NumberQuizViewController */,
-				08F485B51C58EC45000165AA /* SortingQuizViewController */,
-				0834C4741E2CEC55002F8516 /* MatchingQuizViewController */,
 				0859AE931E4F194D00A0D206 /* FillBlanksQuizViewController */,
 			);
 			name = QuizTypes;
@@ -5957,7 +5929,6 @@
 				2CB62BEF2019FDB100B5E336 /* arrow_left.svg in Resources */,
 				2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */,
 				082CB1B81D08971900C79A27 /* DiscussionsViewController.xib in Resources */,
-				08F485B91C58ED01000165AA /* SortingQuizTableViewCell.xib in Resources */,
 				08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */,
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
 				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
@@ -6323,7 +6294,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0834C4701E2CEC4E002F8516 /* MatchingQuizViewController.swift in Sources */,
 				0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
@@ -6512,7 +6482,6 @@
 				08CA59E61BBD25DC008DC44D /* TeachersTableViewCell.swift in Sources */,
 				08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */,
 				2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */,
-				08F485B71C58ECE3000165AA /* SortingQuizTableViewCell.swift in Sources */,
 				089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */,
 				0828FF6E1BC5D177000AFEA7 /* Section+CoreDataProperties.swift in Sources */,
 				089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */,
@@ -6570,7 +6539,6 @@
 				081A7DA91C56625F00583728 /* QuizViewController.swift in Sources */,
 				2C16495922C10DD400DF18CA /* UserActivitiesNetworkService.swift in Sources */,
 				2C82D51721830DD500C10805 /* NotificationsRegistrationServiceProtocol.swift in Sources */,
-				08F485B31C58EC33000165AA /* SortingQuizViewController.swift in Sources */,
 				2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				087585A31FB50D640047A269 /* CourseListsAPI.swift in Sources */,
