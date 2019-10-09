@@ -22,7 +22,7 @@ final class ProfileEditPresenter: ProfileEditPresenterProtocol {
             lastName: response.profile.lastName,
             shortBio: response.profile.shortBio,
             details: response.profile.details,
-            email: email
+            email: (email?.isEmpty ?? true) ? nil : email
         )
 
         self.viewController?.displayProfileEditForm(viewModel: .init(viewModel: viewModel))

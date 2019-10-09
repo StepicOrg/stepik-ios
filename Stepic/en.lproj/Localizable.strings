@@ -642,6 +642,8 @@ ProfileEditDetailsPlaceholder = "About";
 ProfileEditGeneralTitle = "General";
 ProfileEditGeneralDescription = "Your legal names, used for any certificates";
 ProfileEditAboutMeTitle = "About me";
+ProfileEditEmailTitle = "Email";
+ProfileEditEmailPlaceholder = "Address";
 
 /* Write course review */
 WriteCourseReviewTitle = "Course review";

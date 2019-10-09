@@ -5092,9 +5092,9 @@
 		62E98975086503C4516ECDE1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
-				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
 				62E98E991593286E1C15B7E3 /* SettingsInputTableViewCell.swift */,
+				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
+				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

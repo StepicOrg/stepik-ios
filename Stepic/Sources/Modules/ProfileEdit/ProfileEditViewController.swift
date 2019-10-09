@@ -102,6 +102,8 @@ final class ProfileEditViewController: UIViewController {
             self.formState?.shortBio = text ?? ""
         case .details:
             self.formState?.details = text ?? ""
+        case .email:
+            break
         }
 
         self.updateSaveButtonState()
@@ -112,6 +114,7 @@ final class ProfileEditViewController: UIViewController {
         case lastName
         case shortBio
         case details
+        case email
 
         init?(uniqueIdentifier: UniqueIdentifierType) {
             if let value = FormField(rawValue: uniqueIdentifier) {
@@ -187,23 +190,44 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
             )
         )
 
-        let viewModel = SettingsTableViewModel(
-            sections: [
-                .init(
-                    header: .init(title: NSLocalizedString("ProfileEditGeneralTitle", comment: "")),
-                    cells: [firstNameField, lastNameField],
-                    footer: .init(description: NSLocalizedString("ProfileEditGeneralDescription", comment: ""))
-                ),
-                .init(
-                    header: .init(title: NSLocalizedString("ProfileEditAboutMeTitle", comment: "")),
-                    cells: [shortBioField, detailsField],
-                    footer: nil
+        var sections: [SettingsTableSectionViewModel] = [
+            .init(
+                header: .init(title: NSLocalizedString("ProfileEditGeneralTitle", comment: "")),
+                cells: [firstNameField, lastNameField],
+                footer: .init(description: NSLocalizedString("ProfileEditGeneralDescription", comment: ""))
+            ),
+            .init(
+                header: .init(title: NSLocalizedString("ProfileEditAboutMeTitle", comment: "")),
+                cells: [shortBioField, detailsField],
+                footer: nil
+            )
+        ]
+
+        if let email = profileEditViewModel.email {
+            let emailField = SettingsTableSectionViewModel.Cell(
+                uniqueIdentifier: FormField.email.rawValue,
+                type: .input(
+                    options: .init(
+                        valueText: email,
+                        placeholderText: NSLocalizedString("ProfileEditEmailPlaceholder", comment: ""),
+                        shouldAlwaysShowPlaceholder: true,
+                        inputGroup: nil,
+                        isEnabled: false
+                    )
                 )
-            ]
-        )
+            )
+
+            let emailSection = SettingsTableSectionViewModel(
+                header: .init(title: NSLocalizedString("ProfileEditEmailTitle", comment: "")),
+                cells: [emailField],
+                footer: nil
+            )
+
+            sections.insert(emailSection, at: 1)
+        }
 
         self.formState = state
-        self.profileEditView?.configure(viewModel: viewModel)
+        self.profileEditView?.configure(viewModel: SettingsTableViewModel(sections: sections))
 
         self.updateSaveButtonState()
     }

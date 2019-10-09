@@ -59,11 +59,8 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         return Guarantee { seal in
-            self.provider.fetchEmailAddresses(ids: self.currentProfile.emailAddressesArray).done { result in
-                if let emailAddresses = result.value {
-                    self.currentProfile.emailAddresses = emailAddresses
-                    CoreDataHelper.instance.save()
-                }
+            self.provider.fetchEmailAddresses(ids: self.currentProfile.emailAddressesArray).done { emailAddresses in
+                self.currentProfile.emailAddresses = emailAddresses
                 seal(())
             }.ensure {
                 self.presenter.presentWaitingState(response: .init(shouldDismiss: true))

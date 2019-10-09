@@ -643,6 +643,8 @@ ProfileEditDetailsPlaceholder = "Обо мне";
 ProfileEditGeneralTitle = "Общие данные";
 ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах";
 ProfileEditAboutMeTitle = "О себе";
+ProfileEditEmailTitle = "Email";
+ProfileEditEmailPlaceholder = "Адрес";
 
 /* Write course review */
 WriteCourseReviewTitle = "Отзыв о курсе";

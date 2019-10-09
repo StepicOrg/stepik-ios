@@ -76,6 +76,7 @@ final class SettingsTableView: UIView {
         cell.elementView.placeholder = options.placeholderText
         cell.elementView.text = options.valueText
         cell.elementView.shouldAlwaysShowPlaceholder = options.shouldAlwaysShowPlaceholder
+        cell.elementView.isEnabled = options.isEnabled
         cell.delegate = self.delegate
         self.inputCellGroups.first { $0.uniqueIdentifier == options.inputGroup }?.addInputCell(cell)
     }
@@ -128,8 +129,8 @@ extension SettingsTableView: UITableViewDataSource {
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let sectionViewModel = self.viewModel?.sections[safe: indexPath.section],
-            let cellViewModel = sectionViewModel.cells[safe: indexPath.item] else {
-                fatalError("View model is undefined")
+              let cellViewModel = sectionViewModel.cells[safe: indexPath.item] else {
+            fatalError("View model is undefined")
         }
 
         switch cellViewModel.type {
