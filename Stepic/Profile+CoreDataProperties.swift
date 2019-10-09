@@ -6,11 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Profile {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedFirstName: String?
     @NSManaged var managedLastName: String?
@@ -18,7 +17,9 @@ extension Profile {
     @NSManaged var managedDetails: String?
     @NSManaged var managedSubscribedForMail: NSNumber?
     @NSManaged var managedIsStaff: NSNumber?
+
     @NSManaged var managedEmailAddressesArray: NSObject?
+    @NSManaged var managedEmailAddresses: NSOrderedSet?
 
     @NSManaged var managedUser: User?
 
@@ -99,6 +100,15 @@ extension Profile {
         }
         set {
             self.managedEmailAddressesArray = newValue as NSObject?
+        }
+    }
+
+    var emailAddresses: [EmailAddress] {
+        get {
+            return (self.managedEmailAddresses?.array as? [EmailAddress]) ?? []
+        }
+        set {
+            self.managedEmailAddresses = NSOrderedSet(array: newValue)
         }
     }
 
