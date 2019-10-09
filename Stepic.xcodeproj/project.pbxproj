@@ -430,6 +430,8 @@
 		2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */; };
 		2C09313521CD4BDD002B605D /* VideoStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */; };
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
+		2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */; };
+		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
@@ -666,6 +668,11 @@
 		2CCE6CCC215153D600DC4419 /* LanguageSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */; };
 		2CD1CAA221FD1B2100B9E2DD /* DownloadTreeNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1CAA121FD1B2100B9E2DD /* DownloadTreeNodeTests.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
+		2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */; };
+		2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E258234E0A1B00F49303 /* EmailAddress.swift */; };
+		2CD6E25B234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */; };
+		2CD6E25D234E388B00F49303 /* EmailAddressesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */; };
+		2CD6E25F234E392900F49303 /* EmailAddressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */; };
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
@@ -1541,6 +1548,8 @@
 		2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_lesson_fields_v31.xcdatamodel; sourceTree = "<group>"; };
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
+		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
+		2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsAPI.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
@@ -1781,6 +1790,12 @@
 		2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_language_code_v27.xcdatamodel; sourceTree = "<group>"; };
 		2CD1CAA121FD1B2100B9E2DD /* DownloadTreeNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTreeNodeTests.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
+		2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_email_addresses.xcdatamodel; sourceTree = "<group>"; };
+		2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesAPI.swift; sourceTree = "<group>"; };
+		2CD6E258234E0A1B00F49303 /* EmailAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddress.swift; sourceTree = "<group>"; };
+		2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmailAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesPersistenceService.swift; sourceTree = "<group>"; };
+		2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesNetworkService.swift; sourceTree = "<group>"; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
@@ -2353,6 +2368,7 @@
 				087585AC1FB51D590047A269 /* CourseList */,
 				2C4BE7DC221325E800AEAC34 /* CourseReview */,
 				08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */,
+				2CD6E257234E0A0C00F49303 /* EmailAddress */,
 				2C5E907E2333CF2700288BE3 /* LastCodeLanguage */,
 				0846B1001EDDECE600D64D77 /* LastStep */,
 				0846B0FB1EDDECCC00D64D77 /* Lesson */,
@@ -2531,9 +2547,9 @@
 		08448FFD1F5CE13100D01940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */,
 				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
 				08CBA34A1F57734900302154 /* ProfileViewController.swift */,
-				62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -2736,6 +2752,7 @@
 				080CE1421E955D300089A27F /* CoursesAPI.swift */,
 				08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */,
 				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
+				2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */,
 				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
@@ -3212,13 +3229,14 @@
 		08CBA3091F57558200302154 /* MenuBlockCells */ = {
 			isa = PBXGroup;
 			children = (
+				08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */,
+				2C0B42BE234CD13100B03EA1 /* CustomMenuBlock */,
 				2CE8390320C7EF5A00FE3672 /* GenericContent */,
 				2CB2393B20BB455200F0FE3B /* GenericExpandableContent */,
+				08DF78C71F5EF03B00AEEA85 /* Header */,
 				2C92669420B5C78900525AFC /* PlaceholderCell */,
-				08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */,
 				08DF78C41F5EF02300AEEA85 /* Switch */,
 				08DF78C51F5EF02900AEEA85 /* Transition */,
-				08DF78C71F5EF03B00AEEA85 /* Header */,
 			);
 			name = MenuBlockCells;
 			sourceTree = "<group>";
@@ -3226,11 +3244,11 @@
 		08CBA3491F57574F00302154 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				08CBA3091F57558200302154 /* MenuBlockCells */,
-				080217791F54E91300186245 /* MenuBlocks.swift */,
 				080217821F55B1B200186245 /* Menu.swift */,
-				08CBA2F71F573F6900302154 /* MenuViewController.swift */,
+				080217791F54E91300186245 /* MenuBlocks.swift */,
 				08CBA3001F57459800302154 /* MenuUIManager.swift */,
+				08CBA2F71F573F6900302154 /* MenuViewController.swift */,
+				08CBA3091F57558200302154 /* MenuBlockCells */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -3683,6 +3701,15 @@
 				2C0473FE22E5BC20003050B7 /* CodeDetailsView.swift */,
 			);
 			path = CodeDetails;
+			sourceTree = "<group>";
+		};
+		2C0B42BE234CD13100B03EA1 /* CustomMenuBlock */ = {
+			isa = PBXGroup;
+			children = (
+				2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */,
+				2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */,
+			);
+			name = CustomMenuBlock;
 			sourceTree = "<group>";
 		};
 		2C10AFE8217E04780019966D /* Registration */ = {
@@ -4521,6 +4548,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		2CD6E257234E0A0C00F49303 /* EmailAddress */ = {
+			isa = PBXGroup;
+			children = (
+				2CD6E258234E0A1B00F49303 /* EmailAddress.swift */,
+				2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */,
+			);
+			name = EmailAddress;
+			sourceTree = "<group>";
+		};
 		2CD8463D1F25F7AF00E8153C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -4681,6 +4717,7 @@
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
 				62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */,
 				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
+				2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */,
 				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
 				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
 				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
@@ -4797,6 +4834,7 @@
 				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
 				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
 				62E983E08309F9779A0691DC /* DiscussionProxiesNetworkService.swift */,
+				2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */,
 				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
@@ -5054,9 +5092,9 @@
 		62E98975086503C4516ECDE1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
-				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
 				62E98E991593286E1C15B7E3 /* SettingsInputTableViewCell.swift */,
+				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
+				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -5391,12 +5429,12 @@
 			isa = PBXGroup;
 			children = (
 				4A4D51541BF7AE1FCD2865C0 /* ProfileEditAssembly.swift */,
-				B304C7487F9B47AE32F4190D /* ProfileEditViewController.swift */,
+				4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */,
 				6E5BA4688D7B46C416231BD9 /* ProfileEditInteractor.swift */,
 				BD0FAD2AD12244A99DAD7BE6 /* ProfileEditPresenter.swift */,
-				4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */,
 				B871095B7511E41F19281EE9 /* ProfileEditProvider.swift */,
 				831CC7AB7FC20E336DB6813F /* ProfileEditView.swift */,
+				B304C7487F9B47AE32F4190D /* ProfileEditViewController.swift */,
 				2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */,
 			);
 			path = ProfileEdit;
@@ -5728,6 +5766,7 @@
 				08DDF90D20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib in Resources */,
 				08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */,
+				2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */,
 				2CD99DD722DCE4D800628224 /* overlay_simple.png in Resources */,
 				08484F0B211AF4320006266F /* StoryViewController.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
@@ -6322,6 +6361,7 @@
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
+				2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */,
 				2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */,
 				08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */,
 				2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */,
@@ -6347,6 +6387,7 @@
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
 				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
+				2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */,
 				2C1B75B322CDEEDE00262707 /* DiscussionsPresenter.swift in Sources */,
 				2C8AD7622204932300C9C089 /* CourseSubscriptionManager.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
@@ -6731,6 +6772,7 @@
 				2C53DFFB22DDDBFD0084BA2B /* NewCodeQuizViewController.swift in Sources */,
 				62E98BCFF2B85E440D0B23E8 /* CourseInfoTabReviewsViewController.swift in Sources */,
 				62E987367E4233CE076E5E04 /* CourseInfoTabReviewsInteractor.swift in Sources */,
+				2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */,
 				62E989DBD26BECC245F05848 /* CourseInfoTabReviewsPresenter.swift in Sources */,
 				2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */,
 				62E98C3AD2F1891521387578 /* CourseInfoTabReviewsDataFlow.swift in Sources */,
@@ -6793,6 +6835,7 @@
 				62E987F6149525BC5F7CFDE7 /* CourseListColorMode.swift in Sources */,
 				62E98FE7A0B080FA2DA7D84D /* CourseListCollectionViewDataSource.swift in Sources */,
 				62E980F942A9A8CA7B1ED756 /* CourseWidgetButton.swift in Sources */,
+				2CD6E25F234E392900F49303 /* EmailAddressesNetworkService.swift in Sources */,
 				62E9818F8226625FBA9760C9 /* CourseWidgetCoverView.swift in Sources */,
 				62E9843A0F8DE2BDECB071E1 /* CourseWidgetLabel.swift in Sources */,
 				62E98ECCD8B697DF80DDFE06 /* CourseWidgetStatsItemView.swift in Sources */,
@@ -6908,6 +6951,7 @@
 				62E98CFD78F78B8053639E86 /* CourseInfoTabInfoProvider.swift in Sources */,
 				62E982769F779FD011D51705 /* CourseInfoTabInfoViewModel.swift in Sources */,
 				62E983408FE8FBDBC232AD18 /* ContinueCourseProvider.swift in Sources */,
+				2CD6E25D234E388B00F49303 /* EmailAddressesPersistenceService.swift in Sources */,
 				62E981EE3D51AD0C24A49687 /* ContinueCourseViewModel.swift in Sources */,
 				62E98F70C242A21FE473B4FC /* ContinueCourseOutputProtocol.swift in Sources */,
 				62E98F1F660D5053CBBB59A3 /* CourseListCollectionOutputProtocol.swift in Sources */,
@@ -6940,6 +6984,7 @@
 				62E98E92833D3A0649EBA590 /* StyledNavigationController.swift in Sources */,
 				0E600BAD134430EDC4B7B683 /* ProfileEditAssembly.swift in Sources */,
 				582E484FCF140403A5F7739B /* ProfileEditViewController.swift in Sources */,
+				2CD6E25B234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift in Sources */,
 				19CEA9C063AE5CD5A682CFA9 /* ProfileEditInteractor.swift in Sources */,
 				C5C3CEDDFA57BFF4EDF0BBA0 /* ProfileEditPresenter.swift in Sources */,
 				34577A9694176BFA7CAC950C /* ProfileEditDataFlow.swift in Sources */,
@@ -7486,6 +7531,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */,
 				2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */,
 				2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */,
 				2C8345D123156D5E00E6CE91 /* Model_course_can_continue.xcdatamodel */,
@@ -7528,7 +7574,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */;
+			currentVersion = 2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
+import SnapKit
 import UIKit
 
 final class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
@@ -132,22 +133,24 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         for block in blocks {
             switch block {
             case .notificationsSwitch(let isOn):
-                menuBlocks.append(buildNotificationsSwitchBlock(isOn: isOn))
+                menuBlocks.append(self.buildNotificationsSwitchBlock(isOn: isOn))
             case .notificationsTimeSelection:
-                menuBlocks.append(buildNotificationsTimeSelectionBlock())
+                menuBlocks.append(self.buildNotificationsTimeSelectionBlock())
             case .certificates:
                 menuBlocks.append(self.buildCertificatesBlock())
             case .description:
-                menuBlocks.append(buildInfoExpandableBlock())
+                menuBlocks.append(self.buildInfoExpandableBlock())
             case .pinsMap:
-                menuBlocks.append(buildPinsMapExpandableBlock())
+                menuBlocks.append(self.buildPinsMapExpandableBlock())
             case .achievements:
-                menuBlocks.append(buildAchievementsBlock())
+                menuBlocks.append(self.buildAchievementsBlock())
+            case .userID(let id):
+                menuBlocks.append(self.buildUserIDBlock(userID: id))
             default:
                 break
             }
         }
-        menu = Menu(blocks: menuBlocks.compactMap { $0 })
+        self.menu = Menu(blocks: menuBlocks.compactMap { $0 })
     }
 
     func manageBarItemControls(settingsIsHidden: Bool, profileEditIsAvailable: Bool, shareId: Int?) {
@@ -177,7 +180,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         switch block {
         case .infoHeader:
             return self.profileStreaksView
-        case .notificationsTimeSelection, .notificationsSwitch(_), .certificates:
+        case .notificationsTimeSelection, .notificationsSwitch(_), .certificates, .userID:
             return self
         case .description:
             return self.profileDescriptionView
@@ -428,6 +431,46 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             buttonTitle: NSLocalizedString("ShowAll", comment: ""),
             onButtonClick: onButtonClick
         )
+
+        return block
+    }
+
+    private func buildUserIDBlock(userID: User.IdType) -> CustomMenuBlock {
+        let label: UILabel = {
+            let label = UILabel()
+            label.textAlignment = .center
+            label.textColor = UIColor(hex: 0x535366, alpha: 0.5)
+            label.font = UIFont.systemFont(ofSize: 12)
+            label.text = "User ID: \(userID)"
+            return label
+        }()
+        let containerView = UIView()
+
+        let block = CustomMenuBlock(
+            id: ProfileMenuBlock.userID(id: userID).rawValue,
+            contentView: containerView
+        )
+        block.hasSeparatorOnBottom = false
+        block.isSelectable = true
+        block.onClick = { [weak self] in
+            guard let sharingURLString = self?.sharingURL else {
+                return
+            }
+
+            UIPasteboard.general.string = sharingURLString
+            SVProgressHUD.showSuccess(withStatus: NSLocalizedString("Copied", comment: ""))
+        }
+
+        let insets = LayoutInsets(top: 24, left: 24, bottom: 24, right: 24)
+
+        containerView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(insets.left).priority(999)
+            make.top.equalToSuperview().offset(insets.top).priority(999)
+            make.trailing.equalToSuperview().offset(-insets.right).priority(999)
+            make.bottom.equalToSuperview().offset(-insets.bottom).priority(999)
+        }
 
         return block
     }

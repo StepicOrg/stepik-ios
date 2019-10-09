@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MenuUIManager {
+final class MenuUIManager {
     var tableView: UITableView
 
     init(tableView: UITableView) {
@@ -18,7 +18,10 @@ class MenuUIManager {
 
     private func registerNibsForSupportedTypes() {
         for blockType in SupportedMenuBlockType.all {
-            tableView.register(UINib(nibName: blockType.nibName, bundle: nil), forCellReuseIdentifier: blockType.cellIdentifier)
+            self.tableView.register(
+                UINib(nibName: blockType.nibName, bundle: nil),
+                forCellReuseIdentifier: blockType.cellIdentifier
+            )
         }
     }
 
@@ -53,6 +56,10 @@ class MenuUIManager {
             if let cell = cell as? PlaceholderTableViewCell, let block = block as? PlaceholderMenuBlock {
                 cell.initWithBlock(block: block)
             }
+        case .custom:
+            if let cell = cell as? CustomMenuBlockTableViewCell, let block = block as? CustomMenuBlock {
+                cell.initWithBlock(block: block)
+            }
         }
 
         block.cell = cell
@@ -77,8 +84,12 @@ class MenuUIManager {
                 block.onTouch?()
             }
         case .contentExpandable:
-            if let cell = tableView.cellForRow(at: indexPath) as? ContentExpandableMenuBlockTableViewCell {
+            if let cell = self.tableView.cellForRow(at: indexPath) as? ContentExpandableMenuBlockTableViewCell {
                 cell.expandPressed()
+            }
+        case .custom:
+            if let block = block as? CustomMenuBlock {
+                block.onClick?()
             }
         default:
             break
@@ -101,6 +112,7 @@ class MenuUIManager {
         guard let type = SupportedMenuBlockType(block: block) else {
             return false
         }
+
         switch type {
         case .contentExpandable:
             return true
@@ -123,6 +135,7 @@ enum SupportedMenuBlockType {
     case header
     case placeholder
     case content
+    case custom
 
     static var all: [SupportedMenuBlockType] = [
         .switchBlock,
@@ -130,7 +143,8 @@ enum SupportedMenuBlockType {
         .contentExpandable,
         .header,
         .placeholder,
-        .content
+        .content,
+        .custom
     ]
 
     var nibName: String {
@@ -147,6 +161,8 @@ enum SupportedMenuBlockType {
             return "PlaceholderTableViewCell"
         case .content:
             return "ContentMenuBlockTableViewCell"
+        case .custom:
+            return "CustomMenuBlockTableViewCell"
         }
     }
 
@@ -177,6 +193,10 @@ enum SupportedMenuBlockType {
         }
         if block is ContentMenuBlock {
             self = .content
+            return
+        }
+        if block is CustomMenuBlock {
+            self = .custom
             return
         }
         return nil

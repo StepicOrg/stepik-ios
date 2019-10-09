@@ -34,9 +34,9 @@ final class StyledTabBarViewController: UITabBarController {
         self.tabBar.isTranslucent = false
 
         self.setViewControllers(self.items.map {
-            let vc = $0.controller
-            vc.tabBarItem = $0.buildItem()
-            return vc
+            let viewController = $0.controller
+            viewController.tabBarItem = $0.makeTabBarItem()
+            return viewController
         }, animated: false)
         self.updateTitlesForTabBarItems()
 
@@ -169,8 +169,8 @@ private struct TabBarItemInfo {
     var image: UIImage
     var tag: Int
 
-    func buildItem() -> UITabBarItem {
-        return UITabBarItem(title: title, image: image, tag: tag)
+    func makeTabBarItem() -> UITabBarItem {
+        return UITabBarItem(title: self.title, image: self.image, tag: self.tag)
     }
 }
 
@@ -187,7 +187,17 @@ private enum TabController: String {
     var itemInfo: TabBarItemInfo {
         switch self {
         case .profile:
-            return TabBarItemInfo(title: NSLocalizedString("Profile", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "ProfileNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.profileClicked, image: #imageLiteral(resourceName: "tab-profile"), tag: self.tag)
+            let viewController = ControllerHelper.instantiateViewController(
+                identifier: "ProfileNavigation",
+                storyboardName: "Main"
+            )
+            return TabBarItemInfo(
+                title: NSLocalizedString("Profile", comment: ""),
+                controller: viewController,
+                clickEventName: AnalyticsEvents.Tabs.profileClicked,
+                image: UIImage(named: "tab-profile").require(),
+                tag: self.tag
+            )
         case .home:
             let viewController = HomeAssembly().makeModule()
             let navigationViewController = StyledNavigationController(
@@ -197,11 +207,21 @@ private enum TabController: String {
                 title: NSLocalizedString("Home", comment: ""),
                 controller: navigationViewController,
                 clickEventName: AnalyticsEvents.Tabs.myCoursesClicked,
-                image: #imageLiteral(resourceName: "tab-home"),
+                image: UIImage(named: "tab-home").require(),
                 tag: self.tag
             )
-       case .notifications:
-            return TabBarItemInfo(title: NSLocalizedString("Notifications", comment: ""), controller: ControllerHelper.instantiateViewController(identifier: "NotificationsNavigation", storyboardName: "Main"), clickEventName: AnalyticsEvents.Tabs.notificationsClicked, image: #imageLiteral(resourceName: "tab-notifications"), tag: self.tag)
+        case .notifications:
+            let viewController = ControllerHelper.instantiateViewController(
+                identifier: "NotificationsNavigation",
+                storyboardName: "Main"
+            )
+            return TabBarItemInfo(
+                title: NSLocalizedString("Notifications", comment: ""),
+                controller: viewController,
+                clickEventName: AnalyticsEvents.Tabs.notificationsClicked,
+                image: UIImage(named: "tab-notifications").require(),
+                tag: self.tag
+            )
         case .explore:
             let viewController = ExploreAssembly().makeModule()
             let navigationViewController = StyledNavigationController(
@@ -211,7 +231,7 @@ private enum TabController: String {
                 title: NSLocalizedString("Catalog", comment: ""),
                 controller: navigationViewController,
                 clickEventName: AnalyticsEvents.Tabs.catalogClicked,
-                image: #imageLiteral(resourceName: "tab-explore"),
+                image: UIImage(named: "tab-explore").require(),
                 tag: self.tag
             )
         }
