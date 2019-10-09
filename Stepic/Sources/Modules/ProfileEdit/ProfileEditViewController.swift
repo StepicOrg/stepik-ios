@@ -4,6 +4,7 @@ import UIKit
 protocol ProfileEditViewControllerProtocol: class {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel)
     func displayProfileEditResult(viewModel: ProfileEdit.RemoteProfileUpdate.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: ProfileEdit.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 final class ProfileEditViewController: UIViewController {
@@ -214,6 +215,14 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
             self.dismiss(animated: true, completion: nil)
         } else {
             SVProgressHUD.showError(withStatus: nil)
+        }
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: ProfileEdit.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
         }
     }
 }

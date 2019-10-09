@@ -5,4 +5,5 @@ struct ProfileEditViewModel {
     let lastName: String
     let shortBio: String
     let details: String
+    let email: String?
 }

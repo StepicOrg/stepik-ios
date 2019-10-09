@@ -5429,12 +5429,12 @@
 			isa = PBXGroup;
 			children = (
 				4A4D51541BF7AE1FCD2865C0 /* ProfileEditAssembly.swift */,
-				B304C7487F9B47AE32F4190D /* ProfileEditViewController.swift */,
+				4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */,
 				6E5BA4688D7B46C416231BD9 /* ProfileEditInteractor.swift */,
 				BD0FAD2AD12244A99DAD7BE6 /* ProfileEditPresenter.swift */,
-				4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */,
 				B871095B7511E41F19281EE9 /* ProfileEditProvider.swift */,
 				831CC7AB7FC20E336DB6813F /* ProfileEditView.swift */,
+				B304C7487F9B47AE32F4190D /* ProfileEditViewController.swift */,
 				2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */,
 			);
 			path = ProfileEdit;
