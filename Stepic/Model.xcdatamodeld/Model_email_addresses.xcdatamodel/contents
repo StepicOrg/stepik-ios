@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Xcode 7.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="19A583" minimumToolsVersion="Xcode 7.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Assignment" representedClassName=".Assignment" syncable="YES">
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedStepId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -149,6 +149,7 @@
     </entity>
     <entity name="Profile" representedClassName=".Profile" syncable="YES">
         <attribute name="managedDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedEmailAddressesArray" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="managedFirstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedIsStaff" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -270,10 +271,11 @@
         <element name="CourseList" positionX="-14.1953125" positionY="793.859375" width="128" height="135"/>
         <element name="CourseReview" positionX="-441" positionY="-234" width="128" height="165"/>
         <element name="CourseReviewSummary" positionX="-389.45703125" positionY="795.01171875" width="128" height="120"/>
+        <element name="LastCodeLanguage" positionX="-450" positionY="-234" width="128" height="75"/>
         <element name="LastStep" positionX="-361.27734375" positionY="646.40625" width="128" height="105"/>
         <element name="Lesson" positionX="-201.69140625" positionY="-66.22265625" width="128" height="225"/>
         <element name="Notification" positionX="-208.453125" positionY="793.484375" width="128" height="195"/>
-        <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="165"/>
+        <element name="Profile" positionX="-547.68359375" positionY="-119.4140625" width="128" height="180"/>
         <element name="Progress" positionX="210.40234375" positionY="32.89453125" width="128" height="210"/>
         <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="300"/>
         <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="240"/>
@@ -282,6 +284,5 @@
         <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="255"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
-        <element name="LastCodeLanguage" positionX="-450" positionY="-234" width="128" height="75"/>
     </elements>
 </model>

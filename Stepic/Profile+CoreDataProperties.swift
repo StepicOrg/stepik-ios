@@ -18,6 +18,7 @@ extension Profile {
     @NSManaged var managedDetails: String?
     @NSManaged var managedSubscribedForMail: NSNumber?
     @NSManaged var managedIsStaff: NSNumber?
+    @NSManaged var managedEmailAddressesArray: NSObject?
 
     @NSManaged var managedUser: User?
 
@@ -89,6 +90,15 @@ extension Profile {
         }
         get {
             return managedIsStaff?.boolValue ?? false
+        }
+    }
+
+    var emailAddressesArray: [Int] {
+        get {
+            return (self.managedEmailAddressesArray as? [Int]) ?? []
+        }
+        set {
+            self.managedEmailAddressesArray = newValue as NSObject?
         }
     }
 
