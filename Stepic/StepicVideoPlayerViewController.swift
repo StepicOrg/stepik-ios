@@ -135,9 +135,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     var currentQuality: String! {
         didSet {
-            VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: currentQuality)
-            qualityButton.setTitle("\(currentQuality ?? "0")p", for: UIControl.State())
-
+            self.qualityButton.setTitle("\(currentQuality ?? "0")p", for: .normal)
         }
     }
 
@@ -145,15 +143,23 @@ final class StepicVideoPlayerViewController: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("VideoQuality", comment: ""), message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         for url in video.urls {
             if url.quality != video.cachedQuality {
-                let action = UIAlertAction(title: url.quality, style: .default, handler: {
-                    [unowned self]
-                    _ in
-                    AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.qualityChanged, parameters:
-                        ["quality": url.quality as NSObject,
-                            "device": DeviceInfo.current.deviceModelString as NSObject])
-                    self.currentQuality = url.quality
-                    self.currentQualityURL = URL(string: url.url)
-                    self.scheduleControlsHideTimer()
+                let action = UIAlertAction(title: url.quality, style: .default, handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    AnalyticsReporter.reportEvent(
+                        AnalyticsEvents.VideoPlayer.qualityChanged,
+                        parameters: [
+                            "quality": url.quality as NSObject,
+                            "device": DeviceInfo.current.deviceModelString as NSObject
+                        ]
+                    )
+
+                    strongSelf.currentQuality = url.quality
+                    VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: url.quality)
+                    strongSelf.currentQualityURL = URL(string: url.url)
+                    strongSelf.scheduleControlsHideTimer()
                 })
                 alertController.addAction(action)
             }
@@ -162,12 +168,14 @@ final class StepicVideoPlayerViewController: UIViewController {
             if let cachedQuality = video.cachedQuality {
                 alertController.addAction(UIAlertAction(title: "\(NSLocalizedString("Downloaded", comment: ""))(\(cachedQuality))",
                     style: .default,
-                    handler: {
-                        [unowned self]
-                        _ in
-                        self.currentQuality = cachedQuality
-                        self.currentQualityURL = VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: self.video.id)!.localURL
-                        self.scheduleControlsHideTimer()
+                    handler: { [weak self] _ in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        strongSelf.currentQuality = cachedQuality
+                        strongSelf.currentQualityURL = VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: strongSelf.video.id)!.localURL
+                        strongSelf.scheduleControlsHideTimer()
                 }))
             }
         }

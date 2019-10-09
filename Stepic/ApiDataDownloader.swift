@@ -6,42 +6,43 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Alamofire
-import SwiftyJSON
 import CoreData
+import SwiftyJSON
+import UIKit
 
-class ApiDataDownloader {
-    static let devices = DevicesAPI()
-    static let discussionProxies = DiscussionProxiesAPI()
+final class ApiDataDownloader {
+    static let assignments = AssignmentsAPI()
+    static let attempts = AttemptsAPI()
+    static let auth = AuthAPI()
+    static let certificates = CertificatesAPI()
     static let comments = CommentsAPI()
-    static let votes = VotesAPI()
+    static let courseReviewSummaries = CourseReviewSummariesAPI()
+    static let courses = CoursesAPI()
+    static let discussionProxies = DiscussionProxiesAPI()
+    static let enrollments = EnrollmentsAPI()
+    static let lastSteps = LastStepsAPI()
+    static let lessons = LessonsAPI()
+    static let notifications = NotificationsAPI()
+    static let notificationsStatusAPI = NotificationStatusesAPI()
+    static let profiles = ProfilesAPI()
+    static let progresses = ProgressesAPI()
+    static let queries = QueriesAPI()
+    static let recommendations = RecommendationsAPI()
+    static let search = SearchResultsAPI()
+    static let sections = SectionsAPI()
     static let stepics = StepicsAPI()
+    static let steps = StepsAPI()
+    static let submissions = SubmissionsAPI()
     static let units = UnitsAPI()
     static let userActivities = UserActivitiesAPI()
-    static let recommendations = RecommendationsAPI()
-    static let lastSteps = LastStepsAPI()
-    static let courses = CoursesAPI()
-    static let sections = SectionsAPI()
-    static let lessons = LessonsAPI()
     static let users = UsersAPI()
-    static let submissions = SubmissionsAPI()
-    static let search = SearchResultsAPI()
     static let views = ViewsAPI()
-    static let steps = StepsAPI()
-    static let assignments = AssignmentsAPI()
-    static let certificates = CertificatesAPI()
-    static let profiles = ProfilesAPI()
-    static let queries = QueriesAPI()
-    static let notifications = NotificationsAPI()
-    static let courseReviewSummaries = CourseReviewSummariesAPI()
-    static let enrollments = EnrollmentsAPI()
-    static let attempts = AttemptsAPI()
-    static let progresses = ProgressesAPI()
-    static let auth = AuthAPI()
-    static let notificationsStatusAPI = NotificationStatusesAPI()
+    static let votes = VotesAPI()
+    static let devices = DevicesAPI()
 }
 
 enum RefreshMode {
-    case delete, update
+    case delete
+    case update
 }

@@ -6,13 +6,11 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class StoryAssembly: Assembly {
-
-    var story: Story
-    weak var navigationDelegate: StoryNavigationDelegate?
+final class StoryAssembly: Assembly {
+    private let story: Story
+    private weak var navigationDelegate: StoryNavigationDelegate?
 
     init(story: Story, navigationDelegate: StoryNavigationDelegate) {
         self.story = story
@@ -20,17 +18,30 @@ class StoryAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let vc = StoryViewController()
+        let viewController = StoryViewController()
 
-        let urlNavigator = URLNavigator(presentingController: vc, deepLinkRoutingService: DeepLinkRoutingService())
-        vc.presenter = StoryPresenter(view: vc, story: story, storyPartViewFactory: StoryPartViewFactory(urlNavigationDelegate: urlNavigator), urlNavigator: urlNavigator, navigationDelegate: navigationDelegate)
-        return vc
+        let urlNavigator = URLNavigator(
+            presentingController: viewController,
+            deepLinkRoutingService: DeepLinkRoutingService()
+        )
+
+        let presenter = StoryPresenter(
+            view: viewController,
+            story: self.story,
+            storyPartViewFactory: StoryPartViewFactory(urlNavigationDelegate: urlNavigator),
+            urlNavigator: urlNavigator,
+            navigationDelegate: self.navigationDelegate
+        )
+
+        viewController.presenter = presenter
+
+        return viewController
     }
 }
 
-class URLNavigator: StoryURLNavigationDelegate {
+final class URLNavigator: StoryURLNavigationDelegate {
     weak var presentingController: UIViewController?
-    var deepLinkRoutingService: DeepLinkRoutingService
+    let deepLinkRoutingService: DeepLinkRoutingService
 
     init(presentingController: UIViewController?, deepLinkRoutingService: DeepLinkRoutingService) {
         self.presentingController = presentingController
@@ -38,8 +49,7 @@ class URLNavigator: StoryURLNavigationDelegate {
     }
 
     func open(url: URL) {
-        deepLinkRoutingService.route(path: url.absoluteString, from: presentingController)
-//        DeepLinkRouter.routeFromDeepLink(url: url, presentFrom: presentingController, isModal: true, withDelay: false)
+        self.deepLinkRoutingService.route(path: url.absoluteString, from: self.presentingController)
     }
 }
 

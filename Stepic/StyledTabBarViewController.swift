@@ -30,9 +30,7 @@ final class StyledTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         self.tabBar.tintColor = UIColor.mainDark
-        if #available(iOS 10.0, *) {
-            self.tabBar.unselectedItemTintColor = UIColor(hex: 0xbabac1)
-        }
+        self.tabBar.unselectedItemTintColor = UIColor(hex: 0xbabac1)
         self.tabBar.isTranslucent = false
 
         self.setViewControllers(self.items.map {
@@ -111,23 +109,17 @@ final class StyledTabBarViewController: UITabBarController {
         }
 
         self.tabBar.items?.forEach { item in
-            if #available(iOS 11.0, *) {
-                // For new tabbar in iOS 11.0+
-                if DeviceInfo.current.orientation.interface.isLandscape {
-                    // Using default tabbar in landscape
+            if DeviceInfo.current.orientation.interface.isLandscape {
+                // Using default tabbar in landscape
+                showDefaultTitle(for: item)
+            } else {
+                if DeviceInfo.current.isPad {
+                    // Using default tabbar on iPads in both orientations
                     showDefaultTitle(for: item)
                 } else {
-                    if DeviceInfo.current.isPad {
-                        // Using default tabbar on iPads in both orientations
-                        showDefaultTitle(for: item)
-                    } else {
-                        // Using tabbar w/o titles in other cases
-                        hideTitle(for: item)
-                    }
+                    // Using tabbar w/o titles in other cases
+                    hideTitle(for: item)
                 }
-            } else {
-                // Using tabbar w/o titles if iOS version < 11.0
-                hideTitle(for: item)
             }
         }
     }
@@ -140,33 +132,17 @@ final class StyledTabBarViewController: UITabBarController {
                 if NSStringFromClass(badgeView.classForCoder) == "_UIBadgeView" {
                     badgeView.layer.transform = CATransform3DIdentity
 
-                    if #available(iOS 11.0, *) {
-                        if DeviceInfo.current.orientation.interface.isLandscape {
-                            if DeviceInfo.current.isPlus {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
-                            } else {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 2.0, 1.0)
-                            }
+                    if DeviceInfo.current.orientation.interface.isLandscape {
+                        if DeviceInfo.current.isPlus {
+                            badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
                         } else {
-                            if DeviceInfo.current.isPad {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 3.0, 1.0)
-                            } else {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
-                            }
+                            badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 2.0, 1.0)
                         }
                     } else {
-                        if DeviceInfo.current.orientation.interface.isLandscape {
-                            if DeviceInfo.current.isPlus {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
-                            } else {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
-                            }
+                        if DeviceInfo.current.isPad {
+                            badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 3.0, 1.0)
                         } else {
-                            if DeviceInfo.current.isPad {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
-                            } else {
-                                badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
-                            }
+                            badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
                         }
                     }
                 }

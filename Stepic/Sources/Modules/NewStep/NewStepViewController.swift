@@ -118,41 +118,6 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
     @objc
     private func showContent() {
-        // swiftlint:disable:next cyclomatic_complexity
-        func initQuizController(type: NewStep.QuizType, step: Step) -> QuizViewController? {
-            let quizController: QuizViewController? = {
-                switch type {
-                case .choice:
-                    return ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .string:
-                    return StringQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .number:
-                    return NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .freeAnswer:
-                    return FreeAnswerQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .math:
-                    return MathQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .sorting:
-                    return SortingQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .matching:
-                    return MatchingQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .code:
-                    return CodeQuizViewController(nibName: "QuizViewController", bundle: nil)
-                case .sql:
-                    return SQLQuizViewController(nibName: "QuizViewController", bundle: nil)
-                default:
-                    return nil
-                }
-            }()
-
-            if let controller = quizController {
-                controller.step = step
-                controller.delegate = self
-                return controller
-            }
-            return nil
-        }
-
         guard case .result(let viewModel) = self.state else {
             return
         }
@@ -177,7 +142,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
                 )
                 return assembly.makeModule()
             default:
-                return initQuizController(type: quizType, step: viewModel.step)
+                return nil
             }
         }()
 
@@ -185,10 +150,10 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             self.addChild(controller)
             self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
         } else {
-            let controller = UnknownTypeQuizViewController(nibName: "UnknownTypeQuizViewController", bundle: nil)
-            controller.stepUrl = viewModel.stepURLPath
-            self.addChild(controller)
-            self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
+            let assembly = UnsupportedQuizAssembly(stepURLPath: viewModel.stepURLPath)
+            let viewController = assembly.makeModule()
+            self.addChild(viewController)
+            self.newStepView?.configure(viewModel: viewModel, quizView: viewController.view)
         }
     }
 }
@@ -281,12 +246,6 @@ extension NewStepViewController: NewStepViewDelegate {
 
     func newStepViewDidLoadContent(_ view: NewStepView) {
         self.newStepView?.endLoading()
-    }
-}
-
-extension NewStepViewController: QuizControllerDelegate {
-    func submissionDidCorrect() {
-        self.interactor.doStepDoneRequest(request: .init())
     }
 }
 

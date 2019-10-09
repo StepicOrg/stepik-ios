@@ -21,6 +21,7 @@ protocol StoryViewProtocol: class {
 protocol StoryPresenterProtocol: class {
     var storyPartsCount: Int { get }
     var storyID: Int { get }
+
     func animate()
     func finishedAnimating()
     func skip()
@@ -35,7 +36,7 @@ extension NSNotification.Name {
     static let storyDidAppear = NSNotification.Name("storyDidAppear")
 }
 
-class StoryPresenter: StoryPresenterProtocol {
+final class StoryPresenter: StoryPresenterProtocol {
     weak var view: StoryViewProtocol?
     weak var navigationDelegate: StoryNavigationDelegate?
 
@@ -48,19 +49,25 @@ class StoryPresenter: StoryPresenterProtocol {
     private var shouldRestartSegment = false
 
     var storyID: Int {
-        return story.id
+        return self.story.id
     }
 
     var storyPartsCount: Int {
-        return story.parts.count
+        return self.story.parts.count
     }
 
     func finishedAnimating() {
-        partToAnimate += 1
-        animate()
+        self.partToAnimate += 1
+        self.animate()
     }
 
-    init(view: StoryViewProtocol, story: Story, storyPartViewFactory: StoryPartViewFactory, urlNavigator: URLNavigator, navigationDelegate: StoryNavigationDelegate?) {
+    init(
+        view: StoryViewProtocol,
+        story: Story,
+        storyPartViewFactory: StoryPartViewFactory,
+        urlNavigator: URLNavigator,
+        navigationDelegate: StoryNavigationDelegate?
+    ) {
         self.view = view
         self.story = story
         self.storyPartViewFactory = storyPartViewFactory
@@ -69,86 +76,92 @@ class StoryPresenter: StoryPresenterProtocol {
     }
 
     func animate() {
-        if partToAnimate < 0 {
-            showPreviousStory()
+        if self.partToAnimate < 0 {
+            self.showPreviousStory()
             return
         }
-        if partToAnimate >= story.parts.count {
-            showNextStory()
+        if self.partToAnimate >= self.story.parts.count {
+            self.showNextStory()
             return
         }
 
-        let animatingStoryPart = story.parts[partToAnimate]
+        let animatingStoryPart = self.story.parts[partToAnimate]
 
-        if let viewToAnimate = viewForIndex[partToAnimate] {
-            view?.animate(view: viewToAnimate)
-            view?.animateProgress(segment: partToAnimate, duration: animatingStoryPart.duration)
+        if let viewToAnimate = self.viewForIndex[partToAnimate] {
+            self.view?.animate(view: viewToAnimate)
+            self.view?.animateProgress(segment: self.partToAnimate, duration: animatingStoryPart.duration)
         } else {
-            guard var viewToAnimate = storyPartViewFactory.makeView(storyPart: animatingStoryPart) else {
+            guard var viewToAnimate = self.storyPartViewFactory.makeView(storyPart: animatingStoryPart) else {
                 return
             }
-            viewToAnimate.completion = {
-                [weak self] in
+
+            viewToAnimate.completion = { [weak self] in
                 guard let strongSelf = self else {
                     return
                 }
+
                 if strongSelf.partToAnimate == animatingStoryPart.position {
-                    strongSelf.view?.animateProgress(segment: strongSelf.partToAnimate, duration: animatingStoryPart.duration)
+                    strongSelf.view?.animateProgress(
+                        segment: strongSelf.partToAnimate,
+                        duration: animatingStoryPart.duration
+                    )
                 }
             }
-            view?.animate(view: viewToAnimate)
+
+            self.view?.animate(view: viewToAnimate)
         }
-        AmplitudeAnalyticsEvents.Stories.storyPartOpened(id: storyID, position: animatingStoryPart.position).send()
+
+        AmplitudeAnalyticsEvents.Stories.storyPartOpened(id: self.storyID, position: animatingStoryPart.position).send()
     }
 
     func didAppear() {
-        AmplitudeAnalyticsEvents.Stories.storyOpened(id: storyID).send()
-        NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": storyID])
+        AmplitudeAnalyticsEvents.Stories.storyOpened(id: self.storyID).send()
+        NotificationCenter.default.post(name: .storyDidAppear, object: nil, userInfo: ["id": self.storyID])
 
-        if shouldRestartSegment {
-            shouldRestartSegment = false
-            animate()
+        if self.shouldRestartSegment {
+            self.shouldRestartSegment = false
+            self.animate()
         }
     }
 
     private func showPreviousStory() {
-        AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .automatic).send()
-        navigationDelegate?.didFinishBack()
+        AmplitudeAnalyticsEvents.Stories.storyClosed(id: self.storyID, type: .automatic).send()
+        self.navigationDelegate?.didFinishBack()
 
-        partToAnimate = 0
-        shouldRestartSegment = true
+        self.partToAnimate = 0
+        self.shouldRestartSegment = true
     }
 
     private func showNextStory() {
-        AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .automatic).send()
-        navigationDelegate?.didFinishForward()
+        AmplitudeAnalyticsEvents.Stories.storyClosed(id: self.storyID, type: .automatic).send()
+        self.navigationDelegate?.didFinishForward()
 
-        partToAnimate = story.parts.count - 1
-        shouldRestartSegment = true
+        self.partToAnimate = self.story.parts.count - 1
+        self.shouldRestartSegment = true
     }
 
     func skip() {
-        view?.set(segment: partToAnimate, completed: true)
-        partToAnimate += 1
-        animate()
+        self.view?.set(segment: self.partToAnimate, completed: true)
+        self.partToAnimate += 1
+        self.animate()
     }
 
     func rewind() {
-        view?.set(segment: partToAnimate, completed: false)
-        partToAnimate -= 1
-        animate()
+        self.view?.set(segment: self.partToAnimate, completed: false)
+        self.partToAnimate -= 1
+        self.animate()
     }
 
     func pause() {
-        view?.pause(segment: partToAnimate)
+        self.view?.pause(segment: self.partToAnimate)
     }
 
     func resume() {
-        view?.resume(segment: partToAnimate)
+        self.view?.resume(segment: self.partToAnimate)
     }
 
     func onClosePressed() {
-        AmplitudeAnalyticsEvents.Stories.storyClosed(id: storyID, type: .cross).send()
-        view?.close()
+        AmplitudeAnalyticsEvents.Stories.storyClosed(id: self.storyID, type: .cross).send()
+        self.view?.close()
     }
 }

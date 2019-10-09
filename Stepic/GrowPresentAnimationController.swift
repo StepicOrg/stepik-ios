@@ -8,8 +8,7 @@
 
 import UIKit
 
-class GrowPresentAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-
+final class GrowPresentAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     private let originFrame: CGRect
 
     init(originFrame: CGRect) {
@@ -21,29 +20,27 @@ class GrowPresentAnimationController: NSObject, UIViewControllerAnimatedTransiti
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toVC = transitionContext.viewController(forKey: .to) else {
-                return
+        guard let toViewController = transitionContext.viewController(forKey: .to) else {
+            return
         }
 
         let containerView = transitionContext.containerView
-        let finalFrame = transitionContext.finalFrame(for: toVC)
+        let finalFrame = transitionContext.finalFrame(for: toViewController)
 
-        toVC.view.frame = originFrame
-        toVC.view.layer.masksToBounds = true
-        toVC.view.alpha = 0
+        toViewController.view.frame = self.originFrame
+        toViewController.view.layer.masksToBounds = true
+        toViewController.view.alpha = 0
 
-        containerView.addSubview(toVC.view)
-        let duration = transitionDuration(using: transitionContext)
+        containerView.addSubview(toViewController.view)
+        let duration = self.transitionDuration(using: transitionContext)
 
         UIView.animate(withDuration: duration, animations: {
-            toVC.view.frame = finalFrame
-            toVC.view.layoutSubviews()
-            toVC.view.alpha = 1
-        }, completion: {
-            _ in
-            toVC.view.alpha = 1
+            toViewController.view.frame = finalFrame
+            toViewController.view.layoutSubviews()
+            toViewController.view.alpha = 1
+        }, completion: { _ in
+            toViewController.view.alpha = 1
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
-
 }

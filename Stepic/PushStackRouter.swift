@@ -6,9 +6,9 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class PushStackRouter: RouterProtocol {
+final class PushStackRouter: RouterProtocol {
     var destinationStack: [UIViewController]
     var source: PushStackRouterSourceProtocol
 
@@ -21,6 +21,6 @@ class PushStackRouter: RouterProtocol {
     }
 
     func route() {
-        source.push(moduleStack: destinationStack)
+        self.source.push(moduleStack: destinationStack)
     }
 }

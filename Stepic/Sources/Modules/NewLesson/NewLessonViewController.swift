@@ -25,6 +25,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         static let separatorColor = UIColor.gray
         static let loadingIndicatorColor = UIColor.mainDark
         static let tooltipBackgroundColor = UIColor.mainDark
+        static let tooltipHorizontalSpacing: CGFloat = 16
     }
 
     private let interactor: NewLessonInteractorProtocol
@@ -330,6 +331,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             var preferences = EasyTipView.Preferences()
             preferences.drawing.backgroundColor = Appearance.tooltipBackgroundColor
             preferences.drawing.arrowPosition = .top
+            preferences.positioning.contentHInset = Appearance.tooltipHorizontalSpacing
 
             self.tooltipView = EasyTipView(contentView: contentView, preferences: preferences, delegate: self)
             self.tooltipView?.show(

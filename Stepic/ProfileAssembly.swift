@@ -8,19 +8,23 @@
 
 import Foundation
 
-class ProfileAssembly: Assembly {
-    var userID: Int
+final class ProfileAssembly: Assembly {
+    private let userID: User.IdType
 
-    init(userID: Int) {
+    init(userID: User.IdType) {
         self.userID = userID
     }
 
     func makeModule() -> UIViewController {
-        guard let vc = ControllerHelper.instantiateViewController(identifier: "ProfileViewController", storyboardName: "Profile") as? ProfileViewController else {
-            return UIViewController()
+        guard let viewController = ControllerHelper.instantiateViewController(
+            identifier: "ProfileViewController",
+            storyboardName: "Profile"
+        ) as? ProfileViewController else {
+            fatalError("Failed to initialize ProfileViewController")
         }
 
-        vc.otherUserId = userID
-        return vc
+        viewController.otherUserId = userID
+
+        return viewController
     }
 }

@@ -6,27 +6,29 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class SourcelessRouter {
     var window: UIWindow? {
         return (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
+    var currentTabBarController: UITabBarController? {
+        return self.window?.rootViewController as? UITabBarController
+    }
+
     var currentNavigation: UINavigationController? {
-        guard let tabController = currentTabBarController else {
+        guard let tabController = self.currentTabBarController else {
             return nil
         }
-        let cnt = tabController.viewControllers?.count ?? 0
+
+        let count = tabController.viewControllers?.count ?? 0
         let index = tabController.selectedIndex
-        if index < cnt {
+
+        if index < count {
             return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
         } else {
             return tabController.viewControllers?[0] as? UINavigationController
         }
-    }
-
-    var currentTabBarController: UITabBarController? {
-        return window?.rootViewController as? UITabBarController
     }
 }

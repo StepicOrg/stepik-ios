@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TabBarRouter: SourcelessRouter, RouterProtocol {
+final class TabBarRouter: SourcelessRouter, RouterProtocol {
     let tab: Tab
     let notificationsSection: NotificationsSection
 
@@ -26,12 +26,13 @@ class TabBarRouter: SourcelessRouter, RouterProtocol {
         self.currentTabBarController?.selectedIndex = self.tab.rawValue
 
         if self.tab == .notifications {
-            selectNotificationsSection()
+            self.selectNotificationsSection()
         }
     }
 
     private func selectNotificationsSection() {
-        guard let navigationController = self.currentTabBarController?.viewControllers?[safe: self.tab.rawValue] as? UINavigationController,
+        guard let currentViewControllers = self.currentTabBarController?.viewControllers,
+              let navigationController = currentViewControllers[safe: self.tab.rawValue] as? UINavigationController,
               let pager = navigationController.topViewController as? NotificationsPagerViewController else {
             return
         }

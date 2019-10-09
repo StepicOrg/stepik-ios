@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CoreGraphics
 
 protocol SplitTestGroupProtocol: RawRepresentable where RawValue == String {
     static var groups: [Self] { get }

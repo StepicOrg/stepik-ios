@@ -48,12 +48,9 @@ final class CodeEditorView: UIView {
         codeTextView.autocapitalizationType = .none
         codeTextView.autocorrectionType = .no
         codeTextView.spellCheckingType = .no
-
-        if #available(iOS 11.0, *) {
-            codeTextView.smartDashesType = .no
-            codeTextView.smartQuotesType = .no
-            codeTextView.smartInsertDeleteType = .no
-        }
+        codeTextView.smartDashesType = .no
+        codeTextView.smartQuotesType = .no
+        codeTextView.smartInsertDeleteType = .no
 
         return codeTextView
     }()
@@ -291,7 +288,6 @@ extension CodeEditorView: UITextViewDelegate {
         self.delegate?.codeEditorViewDidChange(self)
     }
 
-    @available(iOS 10.0, *)
     func textView(
         _ textView: UITextView,
         shouldInteractWith URL: URL,
@@ -301,7 +297,6 @@ extension CodeEditorView: UITextViewDelegate {
         return false
     }
 
-    @available(iOS 10.0, *)
     func textView(
         _ textView: UITextView,
         shouldInteractWith textAttachment: NSTextAttachment,

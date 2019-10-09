@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
+final class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
     var interactionInProgress = false
 
     private var shouldCompleteTransition = false
@@ -17,47 +17,46 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
 
     init(viewController: UIViewController, onFinish: (() -> Void)?) {
         super.init()
+
         self.viewController = viewController
         self.onFinish = onFinish
-        prepareGestureRecognizer(in: viewController.view)
+
+        self.prepareGestureRecognizer(in: viewController.view)
     }
 
     private func prepareGestureRecognizer(in view: UIView) {
-        let gesture = UIPanGestureRecognizer(target: self,
-                                                       action: #selector(handleGesture(_:)))
-        view.addGestureRecognizer(gesture)
-        gesture.delegate = self
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)))
+        view.addGestureRecognizer(gestureRecognizer)
+        gestureRecognizer.delegate = self
     }
 
-    @objc func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc
+    private func handleGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard let superView = gestureRecognizer.view?.superview else {
             return
         }
+
         let translation = gestureRecognizer.translation(in: superView)
         var progress = translation.y / 400
         progress = min(max(CGFloat(progress), 0.0), 1.0)
 
         switch gestureRecognizer.state {
-
         case .began:
-            interactionInProgress = true
-            viewController.dismiss(animated: true, completion: nil)
-
+            self.interactionInProgress = true
+            self.viewController.dismiss(animated: true, completion: nil)
         case .changed:
-            shouldCompleteTransition = progress > 0.35
-            update(progress)
-
+            self.shouldCompleteTransition = progress > 0.35
+            self.update(progress)
         case .cancelled:
-            interactionInProgress = false
-            cancel()
-
+            self.interactionInProgress = false
+            self.cancel()
         case .ended:
-            interactionInProgress = false
-            if shouldCompleteTransition {
-                finish()
-                onFinish?()
+            self.interactionInProgress = false
+            if self.shouldCompleteTransition {
+                self.finish()
+                self.onFinish?()
             } else {
-                cancel()
+                self.cancel()
             }
         default:
             break
@@ -67,8 +66,8 @@ class SwipeInteractionController: UIPercentDrivenInteractiveTransition {
 
 extension SwipeInteractionController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let pan = gestureRecognizer as? UIPanGestureRecognizer {
-            let translation = pan.translation(in: pan.view)
+        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = panGestureRecognizer.translation(in: panGestureRecognizer.view)
             let angle = atan2(translation.y, translation.x)
             return abs(angle - .pi / 2.0) < (.pi / 8.0)
         }

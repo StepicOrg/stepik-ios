@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CodeSuggestionTableViewCell: UITableViewCell {
+final class CodeSuggestionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var suggestionLabel: StepikLabel!
 

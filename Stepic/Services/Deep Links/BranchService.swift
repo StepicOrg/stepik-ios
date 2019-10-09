@@ -46,6 +46,7 @@ final class BranchService {
 }
 
 // MARK: - DeepLinkRoute branch extension -
+
 extension DeepLinkRoute {
     private enum BranchPayload: String {
         case screen
@@ -70,6 +71,7 @@ extension DeepLinkRoute {
                 return
             }
         }
+
         return nil
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol OpenedStoriesViewProtocol: class {
     func set(module: UIViewController, direction: UIPageViewController.NavigationDirection, animated: Bool)
@@ -17,6 +17,7 @@ protocol OpenedStoriesPresenterProtocol: class {
     var nextModule: UIViewController? { get }
     var prevModule: UIViewController? { get }
     var currentModule: UIViewController { get }
+
     func onSwipeDismiss()
     func refresh()
 }
@@ -29,22 +30,22 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     var moduleForStoryID: [Int: UIViewController] = [:]
 
     var nextModule: UIViewController? {
-        guard let story = stories[safe: currentPosition + 1] else {
-            return nil
+        if let story = self.stories[safe: self.currentPosition + 1] {
+            return self.getModule(story: story)
         }
-        return getModule(story: story)
+        return nil
     }
 
     var prevModule: UIViewController? {
-        guard let story = stories[safe: currentPosition - 1] else {
-            return nil
+        if let story = self.stories[safe: self.currentPosition - 1] {
+            self.getModule(story: story)
         }
-        return getModule(story: story)
+        return nil
     }
 
     var currentModule: UIViewController {
-        let story = stories[currentPosition]
-        return getModule(story: story)
+        let story = self.stories[self.currentPosition]
+        return self.getModule(story: story)
     }
 
     var currentPosition: Int
@@ -53,11 +54,17 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
         self.view = view
         self.stories = stories
         self.currentPosition = startPosition
-        NotificationCenter.default.addObserver(self, selector: #selector(OpenedStoriesPresenter.storyDidAppear(_:)), name: .storyDidAppear, object: nil)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(OpenedStoriesPresenter.storyDidAppear(_:)),
+            name: .storyDidAppear,
+            object: nil
+        )
     }
 
     func refresh() {
-        view?.set(module: currentModule, direction: .forward, animated: false)
+        self.view?.set(module: self.currentModule, direction: .forward, animated: false)
     }
 
     func onSwipeDismiss() {
@@ -65,11 +72,11 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     }
 
     private func getModule(story: Story) -> UIViewController {
-        if let module = moduleForStoryID[story.id] {
+        if let module = self.moduleForStoryID[story.id] {
             return module
         } else {
-            let module = makeModule(for: story)
-            moduleForStoryID[story.id] = module
+            let module = self.makeModule(for: story)
+            self.moduleForStoryID[story.id] = module
             return module
         }
     }
@@ -81,32 +88,31 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     @objc
     func storyDidAppear(_ notification: Foundation.Notification) {
         guard let storyID = (notification as NSNotification).userInfo?["id"] as? Int,
-            let position = stories.index(where: {$0.id == storyID}) else {
-                return
+              let position = self.stories.index(where: { $0.id == storyID }) else {
+            return
         }
-        currentPosition = position
+        self.currentPosition = position
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-
     }
 }
 
 extension OpenedStoriesPresenter: StoryNavigationDelegate {
     func didFinishForward() {
-        guard let nextModule = nextModule else {
-            view?.close()
-            return
+        if let nextModule = self.nextModule {
+            self.view?.set(module: nextModule, direction: .forward, animated: true)
+        } else {
+            self.view?.close()
         }
-        view?.set(module: nextModule, direction: .forward, animated: true)
     }
 
     func didFinishBack() {
-        guard let prevModule = prevModule else {
-            view?.close()
-            return
+        if let prevModule = self.prevModule {
+            self.view?.set(module: prevModule, direction: .reverse, animated: true)
+        } else {
+            self.view?.close()
         }
-        view?.set(module: prevModule, direction: .reverse, animated: true)
     }
 }

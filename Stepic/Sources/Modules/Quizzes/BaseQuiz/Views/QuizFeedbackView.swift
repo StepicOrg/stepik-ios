@@ -185,12 +185,14 @@ final class QuizFeedbackView: UIView {
                 let view = UIImageView(
                     image: UIImage(named: "quiz-feedback-correct")?.withRenderingMode(.alwaysTemplate)
                 )
+                view.contentMode = .scaleAspectFit
                 view.tintColor = self.titleColor
                 return view
             case .wrong:
                 let view = UIImageView(
                     image: UIImage(named: "quiz-feedback-wrong")?.withRenderingMode(.alwaysTemplate)
                 )
+                view.contentMode = .scaleAspectFit
                 view.tintColor = self.titleColor
                 return view
             case .evaluation:
@@ -202,6 +204,7 @@ final class QuizFeedbackView: UIView {
                 let view = UIImageView(
                     image: UIImage(named: "quiz-feedback-info")?.withRenderingMode(.alwaysTemplate)
                 )
+                view.contentMode = .scaleAspectFit
                 view.tintColor = self.titleColor
                 return view
             }

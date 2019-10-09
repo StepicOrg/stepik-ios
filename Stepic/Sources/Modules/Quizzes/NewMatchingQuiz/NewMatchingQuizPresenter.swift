@@ -8,6 +8,21 @@ final class NewMatchingQuizPresenter: NewMatchingQuizPresenterProtocol {
     weak var viewController: NewMatchingQuizViewControllerProtocol?
 
     func presentReply(response: NewMatchingQuiz.ReplyLoad.Response) {
+        let state: NewMatchingQuizViewModel.State? = {
+            guard let status = response.status else {
+                return nil
+            }
+
+            switch status {
+            case .correct:
+                return .correct
+            case .wrong:
+                return .wrong
+            case .evaluation:
+                return .evaluation
+            }
+        }()
+
         let items: [NewMatchingQuiz.MatchItem] = response.items.map { item in
             .init(
                 title: .init(id: item.title.id, text: self.processText(item.title.text)),
@@ -18,7 +33,7 @@ final class NewMatchingQuizPresenter: NewMatchingQuizPresenterProtocol {
         let viewModel = NewMatchingQuizViewModel(
             title: NSLocalizedString("MatchingQuizTitle", comment: ""),
             items: items,
-            isEnabled: response.status == nil || response.status == .wrong
+            finalState: state
         )
 
         self.viewController?.displayReply(viewModel: .init(data: viewModel))

@@ -97,10 +97,8 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         self.tableView.register(cellClass: LoadMoreTableViewCell.self)
         self.refreshControl.addTarget(self, action: #selector(self.refreshDiscussions), for: .valueChanged)
         self.tableView.addSubview(self.refreshControl)
-        
-        if #available(iOS 11.0, *) {
-            self.tableView.contentInsetAdjustmentBehavior = .never
-        }
+
+        self.tableView.contentInsetAdjustmentBehavior = .never
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .compose,

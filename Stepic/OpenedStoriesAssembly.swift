@@ -6,12 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class OpenedStoriesAssembly: Assembly {
-
-    var stories: [Story]
-    var startPosition: Int
+final class OpenedStoriesAssembly: Assembly {
+    private let stories: [Story]
+    private let startPosition: Int
 
     init(stories: [Story], startPosition: Int) {
         self.stories = stories
@@ -19,9 +18,16 @@ class OpenedStoriesAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let vc = OpenedStoriesPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-//        let navigation = StyledNavigationViewController(rootViewController: vc)
-        vc.presenter = OpenedStoriesPresenter(view: vc, stories: stories, startPosition: startPosition)
-        return vc
+        let viewController = OpenedStoriesPageViewController(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal,
+            options: nil
+        )
+        viewController.presenter = OpenedStoriesPresenter(
+            view: viewController,
+            stories: self.stories, startPosition: self.startPosition
+        )
+
+        return viewController
     }
 }

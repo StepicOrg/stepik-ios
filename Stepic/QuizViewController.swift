@@ -305,21 +305,19 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             break
         }
 
-        if RemoteConfig.shared.newLessonAvailable {
-            self.sendButton.backgroundColor = UIColor.stepicGreen
-            self.sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            self.sendButton.layer.cornerRadius = 6
-            self.sendButtonLeadingConstraint.constant = -16
-            self.sendButtonTrailingConstraint.constant = 16
-            self.peerReviewLeadingConstraint.constant = 16
-            self.peerReviewTrailingConstraint.constant = 16
-            self.hintLeadingConstraint.constant = 16
-            self.hintTrailingConstraint.constant = 16
-            self.sendButtonHeight.constant = 44
-            self.sendButtonBottomConstraint.constant = 0
-            self.sendButton.layer.borderWidth = 0
-            self.sendButton.setTitleColor(.white, for: .normal)
-        }
+        self.sendButton.backgroundColor = UIColor.stepicGreen
+        self.sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        self.sendButton.layer.cornerRadius = 6
+        self.sendButtonLeadingConstraint.constant = -16
+        self.sendButtonTrailingConstraint.constant = 16
+        self.peerReviewLeadingConstraint.constant = 16
+        self.peerReviewTrailingConstraint.constant = 16
+        self.hintLeadingConstraint.constant = 16
+        self.hintTrailingConstraint.constant = 16
+        self.sendButtonHeight.constant = 44
+        self.sendButtonBottomConstraint.constant = 0
+        self.sendButton.layer.borderWidth = 0
+        self.sendButton.setTitleColor(.white, for: .normal)
     }
 
     private func disableSendButton() {

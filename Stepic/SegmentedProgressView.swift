@@ -6,21 +6,20 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
 extension SegmentedProgressView {
     struct Appearance {
-        var spacing: CGFloat = 5
-        var barColor = UIColor.white.withAlphaComponent(0.5)
-        var progressColor = UIColor.white.withAlphaComponent(1)
+        let spacing: CGFloat = 5
+        let barColor = UIColor.white.withAlphaComponent(0.5)
+        let progressColor = UIColor.white.withAlphaComponent(1)
     }
 }
 
-class SegmentedProgressView: UIView {
+final class SegmentedProgressView: UIView {
+    let appearance = Appearance()
 
-    var appearance = Appearance()
     var isAutoPlayEnabled = false
     var segmentsCount = 0 {
         didSet {
@@ -38,77 +37,86 @@ class SegmentedProgressView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupView()
+        self.setupView()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        progressesStackView.layoutIfNeeded()
-        progressViews.forEach { $0.layoutIfNeeded() }
+
+        self.progressesStackView.layoutIfNeeded()
+        self.progressViews.forEach { $0.layoutIfNeeded() }
     }
 
     private func setupView() {
-        addSubview(progressesStackView)
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .clear
-        progressesStackView.alignment = .fill
-        progressesStackView.distribution = .fillEqually
-        progressesStackView.spacing = appearance.spacing
+        self.addSubview(self.progressesStackView)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = .clear
+        self.progressesStackView.alignment = .fill
+        self.progressesStackView.distribution = .fillEqually
+        self.progressesStackView.spacing = self.appearance.spacing
 
-        progressesStackView.snp.makeConstraints {
-            make in
-            make.edges.equalToSuperview().priority(ConstraintPriority.required)
+        self.progressesStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().priority(.required)
         }
     }
 
     private func addProgresses() {
-        progressViews.forEach { progressesStackView.removeArrangedSubview($0) }
-        progressViews = []
-        for _ in 0 ..< segmentsCount {
-            let progressView = SegmentAnimatedProgressView(barColor: appearance.barColor, progressColor: appearance.progressColor)
+        self.progressViews.forEach { self.progressesStackView.removeArrangedSubview($0) }
+        self.progressViews = []
 
-            progressesStackView.addArrangedSubview(progressView)
-            progressViews += [progressView]
+        for _ in 0..<self.segmentsCount {
+            let progressView = SegmentAnimatedProgressView(
+                barColor: self.appearance.barColor,
+                progressColor: self.appearance.progressColor
+            )
+
+            self.progressesStackView.addArrangedSubview(progressView)
+            self.progressViews += [progressView]
         }
-        progressesStackView.setNeedsLayout()
-        progressesStackView.layoutIfNeeded()
+
+        self.progressesStackView.setNeedsLayout()
+        self.progressesStackView.layoutIfNeeded()
     }
 
     private func isInBounds(index: Int) -> Bool {
-        return index >= 0 && index < segmentsCount
+        return index >= 0 && index < self.segmentsCount
     }
 
     func animate(duration: TimeInterval, segment: Int) {
-        guard isInBounds(index: segment) else {
-            completion?()
+        guard self.isInBounds(index: segment) else {
+            self.completion?()
             return
         }
 
-        for id in 0 ..< segmentsCount {
-            set(segment: id, completed: id < segment)
+        for id in 0..<self.segmentsCount {
+            self.set(segment: id, completed: id < segment)
         }
-        progressViews[segment].animate(duration: duration, completion: completion)
+
+        self.progressViews[segment].animate(duration: duration, completion: self.completion)
     }
 
     func set(segment: Int, completed: Bool) {
-        guard isInBounds(index: segment) else {
+        guard self.isInBounds(index: segment) else {
             return
         }
-        progressViews[segment].set(progress: completed ? 1 : 0)
+
+        self.progressViews[segment].set(progress: completed ? 1 : 0)
     }
 
     func pause(segment: Int) {
-        guard isInBounds(index: segment) else {
+        guard self.isInBounds(index: segment) else {
             return
         }
-        progressViews[segment].isPaused = true
+
+        self.progressViews[segment].isPaused = true
     }
 
     func resume(segment: Int) {
-        guard isInBounds(index: segment) else {
+        guard self.isInBounds(index: segment) else {
             return
         }
-        progressViews[segment].isPaused = false
+
+        self.progressViews[segment].isPaused = false
     }
 }
 
@@ -121,20 +129,21 @@ private class SegmentAnimatedProgressView: UIView {
 
     var isPaused = false {
         didSet {
-            guard isPaused != oldValue else {
+            guard self.isPaused != oldValue else {
                 return
             }
-            if isPaused {
-                let pausedTime = topSegmentView.layer.convertTime(CACurrentMediaTime(), from: nil)
-                topSegmentView.layer.speed = 0.0
-                topSegmentView.layer.timeOffset = pausedTime
+
+            if self.isPaused {
+                let pausedTime = self.topSegmentView.layer.convertTime(CACurrentMediaTime(), from: nil)
+                self.topSegmentView.layer.speed = 0.0
+                self.topSegmentView.layer.timeOffset = pausedTime
             } else {
-                let pausedTime = topSegmentView.layer.timeOffset
-                topSegmentView.layer.speed = 1.0
-                topSegmentView.layer.timeOffset = 0.0
-                topSegmentView.layer.beginTime = 0.0
-                let timeSincePause = topSegmentView.layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
-                topSegmentView.layer.beginTime = timeSincePause
+                let pausedTime = self.topSegmentView.layer.timeOffset
+                self.topSegmentView.layer.speed = 1.0
+                self.topSegmentView.layer.timeOffset = 0.0
+                self.topSegmentView.layer.beginTime = 0.0
+                let timeSincePause = self.topSegmentView.layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+                self.topSegmentView.layer.beginTime = timeSincePause
             }
         }
     }
@@ -146,71 +155,82 @@ private class SegmentAnimatedProgressView: UIView {
     }
 
     private func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
+        self.translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(bottomSegmentView)
-        addSubview(topSegmentView)
+        self.addSubview(self.bottomSegmentView)
+        self.addSubview(self.topSegmentView)
 
-        alignToSelf(view: topSegmentView)
-        topSegmentView.snp.makeConstraints { make in
-            topWidthConstraint = make.width.equalTo(self.snp.width).multipliedBy(CGFloat.leastNormalMagnitude).constraint
-
+        self.alignToSelf(view: self.topSegmentView)
+        self.topSegmentView.snp.makeConstraints { make in
+            self.topWidthConstraint = make.width
+                .equalTo(self.snp.width)
+                .multipliedBy(CGFloat.leastNormalMagnitude)
+                .constraint
         }
-        topWidthConstraint?.activate()
+        self.topWidthConstraint?.activate()
 
-        alignToSelf(view: bottomSegmentView)
-        bottomSegmentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        self.alignToSelf(view: self.bottomSegmentView)
+        self.bottomSegmentView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        bottomSegmentView.layer.cornerRadius = frame.height / 2
-        topSegmentView.layer.cornerRadius = frame.height / 2
+        self.bottomSegmentView.layer.cornerRadius = self.frame.height / 2
+        self.topSegmentView.layer.cornerRadius = self.frame.height / 2
 
-        isPaused = false
-        topSegmentView.layoutIfNeeded()
-        bottomSegmentView.layoutIfNeeded()
+        self.isPaused = false
+        self.topSegmentView.layoutIfNeeded()
+        self.bottomSegmentView.layoutIfNeeded()
     }
 
     init(barColor: UIColor, progressColor: UIColor) {
-        bottomSegmentView.backgroundColor = barColor
-        topSegmentView.backgroundColor = progressColor
+        self.bottomSegmentView.backgroundColor = barColor
+        self.topSegmentView.backgroundColor = progressColor
         super.init(frame: CGRect.zero)
-        setupView()
+        self.setupView()
     }
 
     func animate(duration: TimeInterval, completion: (() -> Void)?) {
-        isPaused = false
-        topWidthConstraint?.deactivate()
-        topSegmentView.snp.makeConstraints { make in
-            topWidthConstraint = make.width.equalTo(self.snp.width).multipliedBy(1).constraint
+        self.isPaused = false
+
+        self.topWidthConstraint?.deactivate()
+        self.topSegmentView.snp.makeConstraints { make in
+            self.topWidthConstraint = make.width.equalTo(self.snp.width).multipliedBy(1).constraint
         }
-        topWidthConstraint?.activate()
+        self.topWidthConstraint?.activate()
         self.setNeedsLayout()
+
         UIView.animate(
             withDuration: duration,
             delay: 0.0,
             options: .curveLinear,
-        animations: {
-            self.layoutIfNeeded()
-        }, completion: { [weak self] finished in
-            if !finished {
-                return
+            animations: {
+                self.layoutIfNeeded()
+            },
+            completion: { [weak self] finished in
+                if !finished {
+                    return
+                }
+                self?.isPaused = true
+                completion?()
             }
-            self?.isPaused = true
-            completion?()
-        })
+        )
     }
 
     func set(progress: CGFloat) {
-        isPaused = false
-        topSegmentView.layer.removeAllAnimations()
-        topWidthConstraint?.deactivate()
-        topSegmentView.snp.makeConstraints { make in
-            topWidthConstraint = make.width.equalTo(self.snp.width).multipliedBy(progress == 0 ? CGFloat.leastNormalMagnitude : progress).constraint
+        self.isPaused = false
+
+        self.topSegmentView.layer.removeAllAnimations()
+        self.topWidthConstraint?.deactivate()
+        self.topSegmentView.snp.makeConstraints { make in
+            self.topWidthConstraint = make.width
+                .equalTo(self.snp.width)
+                .multipliedBy(progress == 0 ? CGFloat.leastNormalMagnitude : progress)
+                .constraint
         }
-        topWidthConstraint?.activate()
+        self.topWidthConstraint?.activate()
+
         self.updateConstraints()
         self.setNeedsLayout()
         self.layoutIfNeeded()

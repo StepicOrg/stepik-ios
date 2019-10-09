@@ -3,7 +3,7 @@ import UIKit
 
 extension LessonInfoTooltipView {
     struct Appearance {
-        let iconSize = CGSize(width: 24, height: 24)
+        let iconSize = CGSize(width: 22, height: 22)
         let iconColor = UIColor.white
         let font = UIFont.systemFont(ofSize: 16, weight: .medium)
         let textColor = UIColor.white

@@ -45,15 +45,6 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         return "RetentionLocalNotification_\(self.repetition.rawValue)"
     }
 
-    var fireDate: Date? {
-        if let dateComponents = self.dateComponents {
-            return Calendar.current.date(from: dateComponents)
-        } else {
-            return nil
-        }
-    }
-
-    @available(iOS 10.0, *)
     var trigger: UNNotificationTrigger? {
         guard let dateComponents = self.dateComponents else {
             return nil
@@ -118,11 +109,7 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         }
 
         private func localized(for key: String) -> String {
-            if #available(iOS 10.0, *) {
-                return NSString.localizedUserNotificationString(forKey: key, arguments: nil)
-            } else {
-                return NSLocalizedString(key, comment: "")
-            }
+            return NSString.localizedUserNotificationString(forKey: key, arguments: nil)
         }
     }
 }

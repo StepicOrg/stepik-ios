@@ -115,13 +115,10 @@ class LastStepRouter {
             }
 
             stepIdPromise.done { targetStepId in
-                let lessonAssembly: Assembly = {
-                    if RemoteConfig.shared.newLessonAvailable {
-                        return NewLessonAssembly(initialContext: .unit(id: unit.id), startStep: .id(targetStepId))
-                    } else {
-                        return LessonLegacyAssembly(initObjects: nil, initIDs: (stepId: targetStepId, unitId: unit.id))
-                    }
-                }()
+                let lessonAssembly = NewLessonAssembly(
+                    initialContext: .unit(id: unit.id),
+                    startStep: .id(targetStepId)
+                )
 
                 SVProgressHUD.showSuccess(withStatus: "")
 

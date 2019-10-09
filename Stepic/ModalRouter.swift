@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ModalRouter: RouterProtocol {
+final class ModalRouter: RouterProtocol {
     var destination: UIViewController
     var source: ModalRouterSourceProtocol
     var embedInNavigation: Bool
@@ -25,6 +25,6 @@ class ModalRouter: RouterProtocol {
     }
 
     func route() {
-        source.present(module: destination, embedInNavigation: embedInNavigation)
+        self.source.present(module: self.destination, embedInNavigation: self.embedInNavigation)
     }
 }

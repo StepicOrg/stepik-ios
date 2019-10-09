@@ -3,10 +3,22 @@ import UIKit
 
 protocol CourseInfoTabReviewsViewDelegate: class {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
+    func courseInfoTabReviewsView(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
+        willSelectRowAt indexPath: IndexPath
+    ) -> Bool
+    func courseInfoTabReviewsView(
+        _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
+        didSelectRowAt indexPath: IndexPath
+    )
 }
 
 extension CourseInfoTabReviewsView {
     struct Appearance {
+        let headerViewHeight: CGFloat = 60
+
         let paginationViewHeight: CGFloat = 52
 
         let emptyStateLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
@@ -19,13 +31,40 @@ final class CourseInfoTabReviewsView: UIView {
     let appearance: Appearance
     weak var delegate: CourseInfoTabReviewsViewDelegate?
 
+    private lazy var headerView: CourseInfoTabReviewsHeaderView = {
+        let headerView = CourseInfoTabReviewsHeaderView()
+
+        // Disable masks to prevent constraints breaking
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.headerViewHeight)
+        }
+
+        headerView.onWriteReviewButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabReviewsViewDidRequestWriteReview(strongSelf)
+        }
+
+        headerView.onEditReviewButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.courseInfoTabReviewsViewDidRequestEditReview(strongSelf)
+        }
+
+        return headerView
+    }()
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
 
         tableView.delegate = self
         tableView.register(cellClass: CourseInfoTabReviewsTableViewCell.self)
@@ -50,6 +89,25 @@ final class CourseInfoTabReviewsView: UIView {
     private var shouldShowPaginationView = false
     var paginationView: UIView?
 
+    var writeCourseReviewState: CourseInfoTabReviews.WriteCourseReviewState = .hide {
+        didSet {
+            switch self.writeCourseReviewState {
+            case .write:
+                self.tableView.tableHeaderView = self.headerView
+                self.headerView.shouldShowWriteReviewButton = true
+            case .edit:
+                self.tableView.tableHeaderView = self.headerView
+                self.headerView.shouldShowEditReviewButton = true
+            case .hide:
+                self.tableView.tableHeaderView = nil
+            case .banner(let text):
+                self.tableView.tableHeaderView = self.headerView
+                self.headerView.writeReviewBannerText = text
+                self.headerView.shouldShowWriteReviewBanner = true
+            }
+        }
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -64,9 +122,15 @@ final class CourseInfoTabReviewsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.tableView.layoutTableHeaderView()
+    }
+
+    // MARK: - Public API
+
     func updateTableViewData(dataSource: UITableViewDataSource) {
         let numberOfRows = dataSource.tableView(self.tableView, numberOfRowsInSection: 0)
-        self.tableView.isHidden = numberOfRows == 0
         self.emptyStateLabel.isHidden = numberOfRows != 0
 
         self.tableView.dataSource = dataSource
@@ -100,6 +164,17 @@ final class CourseInfoTabReviewsView: UIView {
     func hideLoading() {
         self.tableView.skeleton.hide()
     }
+
+    func popoverPresentationAnchorPoint(at indexPath: IndexPath) -> (UIView, CGRect) {
+        return (self.tableView, self.tableView.rectForRow(at: indexPath))
+    }
+
+    // MARK: - Private API
+
+    @objc
+    private func writeReviewDidClick() {
+        self.delegate?.courseInfoTabReviewsViewDidRequestWriteReview(self)
+    }
 }
 
 extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
@@ -131,6 +206,8 @@ extension CourseInfoTabReviewsView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
+// MARK: - CourseInfoTabReviewsView: UITableViewDelegate -
+
 extension CourseInfoTabReviewsView: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.pageScrollViewDelegate?.scrollViewDidScroll?(scrollView)
@@ -143,7 +220,22 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
             self.delegate?.courseInfoTabReviewsViewDidPaginationRequesting(self)
         }
     }
+
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false
+    }
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false ? indexPath : nil
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.delegate?.courseInfoTabReviewsView(self, didSelectRowAt: indexPath)
+    }
 }
+
+// MARK: - CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol -
 
 extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
@@ -176,7 +268,6 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
         }
     }
 
-    @available(iOS 11.0, *)
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
             return self.tableView.contentInsetAdjustmentBehavior

@@ -22,10 +22,15 @@ extension NewSortingQuizElementView {
         let shadowRadius: CGFloat = 4
 
         let navigationButtonSize = CGSize(width: 24, height: 24)
-        let navigationButtonImageSize = CGSize(width: 24, height: 24)
-        let navigationButtonTintColor = UIColor.mainDark
+        let navigationButtonImageSize = CGSize(width: 20, height: 20)
+        let navigationButtonTintColorActive = UIColor.mainDark
+        let navigationButtonTintColorInactive = UIColor(hex: 0xCCCCCC)
         let navigationButtonVerticalSpacing: CGFloat = 16
         let navigationButtonHorizontalSpacing: CGFloat = 8
+    }
+
+    enum Animation {
+        static let updateNavigationAnimationDuration: TimeInterval = 0.2
     }
 }
 
@@ -58,8 +63,8 @@ final class NewSortingQuizElementView: UIView {
 
     private lazy var topNavigationButton: ImageButton = {
         let button = ImageButton()
-        button.image = UIImage(named: "menu_arrow_top")
-        button.tintColor = self.appearance.navigationButtonTintColor
+        button.image = UIImage(named: "menu_arrow_top")?.withRenderingMode(.alwaysTemplate)
+        button.tintColor = self.appearance.navigationButtonTintColorActive
         button.imageSize = self.appearance.navigationButtonImageSize
         button.addTarget(self, action: #selector(self.topNavigationButtonClicked), for: .touchUpInside)
         return button
@@ -67,8 +72,8 @@ final class NewSortingQuizElementView: UIView {
 
     private lazy var bottomNavigationButton: ImageButton = {
         let button = ImageButton()
-        button.image = UIImage(named: "menu_arrow_bottom")
-        button.tintColor = self.appearance.navigationButtonTintColor
+        button.image = UIImage(named: "menu_arrow_bottom")?.withRenderingMode(.alwaysTemplate)
+        button.tintColor = self.appearance.navigationButtonTintColorActive
         button.imageSize = self.appearance.navigationButtonImageSize
         button.addTarget(self, action: #selector(self.bottomNavigationButtonClicked), for: .touchUpInside)
         return button
@@ -114,6 +119,12 @@ final class NewSortingQuizElementView: UIView {
         }
     }
 
+    var isShadowVisible: Bool = true {
+        didSet {
+            self.shadowView.isHidden = !self.isShadowVisible
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -153,8 +164,18 @@ final class NewSortingQuizElementView: UIView {
     }
 
     func updateNavigation(_ direction: Direction) {
-        self.topNavigationButton.isEnabled = direction.contains(.top)
-        self.bottomNavigationButton.isEnabled = direction.contains(.bottom)
+        UIView.animate(withDuration: Animation.updateNavigationAnimationDuration) {
+            self.topNavigationButton.tintColor = direction.contains(.top)
+                ? self.appearance.navigationButtonTintColorActive
+                : self.appearance.navigationButtonTintColorInactive
+
+            self.bottomNavigationButton.tintColor = direction.contains(.bottom)
+                ? self.appearance.navigationButtonTintColorActive
+                : self.appearance.navigationButtonTintColorInactive
+
+            self.topNavigationButton.isEnabled = direction.contains(.top)
+            self.bottomNavigationButton.isEnabled = direction.contains(.bottom)
+        }
     }
 
     // MARK: - Private API

@@ -28,24 +28,9 @@ final class CourseInfoPresenter: CourseInfoPresenterProtocol {
     }
 
     func presentLesson(response: CourseInfo.LessonPresentation.Response) {
-        let initObjects: LessonInitObjects = (
-            lesson: response.lesson,
-            startStepId: 0,
-            context: .unit
+        self.viewController?.displayLesson(
+            viewModel: CourseInfo.LessonPresentation.ViewModel(unitID: response.unitID)
         )
-
-        let initIDs: LessonInitIds = (
-            stepId: nil,
-            unitId: response.unitID
-        )
-
-        let viewModel = CourseInfo.LessonPresentation.ViewModel(
-            unitID: response.unitID,
-            initObjects: initObjects,
-            initIDs: initIDs
-        )
-
-        self.viewController?.displayLesson(viewModel: viewModel)
     }
 
     func presentPersonalDeadlinesSettings(response: CourseInfo.PersonalDeadlinesSettingsPresentation.Response) {

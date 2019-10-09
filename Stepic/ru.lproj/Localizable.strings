@@ -85,7 +85,6 @@ TryAgain = "Попробовать снова";
 Correct = "Верно!";
 Wrong = "Неправильно. Пожалуйста, попробуйте еще раз.";
 CorrectFreeResponse = "Ваше решение сохранено.";
-SolveOnTheWebsite = "Решить на сайте";
 ConnectionErrorText = "Не удалось подключиться к сети";
 PeerReviewText = "Это задание с рецензией. Нажмите, чтобы закончить задание в web и получить баллы.";
 ConnectionErrorPullToRefresh = "Включите соединение и потяните вниз";
@@ -644,6 +643,19 @@ ProfileEditGeneralTitle = "Общие данные";
 ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах";
 ProfileEditAboutMeTitle = "О себе";
 
+/* Write course review */
+WriteCourseReviewTitle = "Отзыв о курсе";
+WriteCourseReviewActionSendResultSuccess = "Отправлено";
+WriteCourseReviewActionSendResultFailed = "Не удалось отправить отзыв";
+WriteCourseReviewActionDeleteResultSuccess = "Удалено";
+WriteCourseReviewActionDeleteResultFailed = "Не удалось удалить отзыв";
+WriteCourseReviewActionCreate = "Написать отзыв";
+WriteCourseReviewActionEdit = "Редактировать отзыв";
+WriteCourseReviewActionDelete = "Удалить отзыв";
+WriteCourseReviewPlaceholder = "Отзыв";
+WriteCourseReviewRatingHint = "Коснитесь для оценки";
+WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";
+
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
 "Ok" = "Ok";
@@ -724,8 +736,10 @@ CorrectFeedbackTitle12 = "Так точно!";
 CorrectFeedbackTitle13 = "Отлично!";
 CorrectFeedbackTitle14 = "Всё получилось!";
 CorrectFeedbackTitleFreeAnswer = "Любой ответ будет оценен как правильный.";
-WrongFeedbackTitleNotLastTry = "Пока неправильно, попробуйте еще раз!";
-WrongFeedbackTitleLastTry = "Неверно!";
+WrongFeedbackTitleNotLastTry1 = "Пока неправильно, попробуйте ещё раз.";
+WrongFeedbackTitleNotLastTry2 = "Пока неверно, но вы можете попробовать ещё.";
+WrongFeedbackTitleNotLastTry3 = "Не получилось. Ещё немного и вы точно сможете.";
+WrongFeedbackTitleLastTry = "Неверно.";
 EvaluationFeedbackTitle = "Проверка...";
 PeerReviewFeedbackTitle = "Это задание с рецензией. Нажмите, чтобы закончить задание в веб-версии и получить баллы.";
 NextStepNavigationTitle = "Дальше";
@@ -739,6 +753,9 @@ SingleChoiceQuizTitle = "Выберите один вариант";
 SortingQuizTitle = "Упорядочьте элементы списка";
 MatchingQuizTitle = "Сопоставьте значения из двух списков";
 SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
+UnsupportedQuizTitle = "Неподдерживаемый тип шага";
+
+UnsupportedQuizActionButtonTitle = "Пройти задание в web-версии";
 
 CodeQuizDetails = "Детали";
 CodeQuizDetailSampleTitle = "Пример данных %@:";

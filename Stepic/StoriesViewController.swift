@@ -6,12 +6,11 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Presentr
 
-class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
-    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
+final class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     var presenter: StoriesPresenterProtocol?
 
@@ -20,14 +19,14 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    private var willDisappear: Bool = false
+    private var willDisappear = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupCollectionView()
+        self.setupCollectionView()
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.refreshStories, action: { [weak self] in
+        self.registerPlaceholder(placeholder: StepikPlaceholder(.refreshStories, action: { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -35,26 +34,31 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
             strongSelf.presenter?.refresh()
         }), for: .connectionError)
 
-        transitioningDelegate = self
-        modalPresentationStyle = .custom
+        self.transitioningDelegate = self
+        self.modalPresentationStyle = .custom
 
-        refresh()
+        self.refresh()
     }
 
     private func setupCollectionView() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.skeleton.viewBuilder = { UIView.fromNib(named: "StorySkeletonPlaceholderView") }
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.skeleton.viewBuilder = { UIView.fromNib(named: "StorySkeletonPlaceholderView") }
 
-        collectionView.register(UINib(nibName: "StoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "StoryCollectionViewCell")
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        self.collectionView.register(
+            UINib(nibName: "StoryCollectionViewCell", bundle: nil),
+            forCellWithReuseIdentifier: "StoryCollectionViewCell"
+        )
+
+        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 98, height: 98)
             layout.minimumInteritemSpacing = 16
             layout.minimumLineSpacing = 16
             layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             layout.scrollDirection = .horizontal
         }
-        collectionView.showsHorizontalScrollIndicator = false
+
+        self.collectionView.showsHorizontalScrollIndicator = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,28 +81,39 @@ class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
         presentr.dismissTransitionType = TransitionType.coverVertical
         presentr.roundCorners = true
         presentr.cornerRadius = 8
-        presentr.dropShadow = PresentrShadow(shadowColor: .black, shadowOpacity: 0.3, shadowOffset: CGSize(width: 0.0, height: 0.0), shadowRadius: 1.2)
+        presentr.dropShadow = PresentrShadow(
+            shadowColor: .black,
+            shadowOpacity: 0.3,
+            shadowOffset: CGSize(width: 0.0, height: 0.0),
+            shadowRadius: 1.2
+        )
+
         return presentr
     }()
 
     func showStory(at index: Int) {
-        let moduleToPresent = OpenedStoriesAssembly(stories: stories, startPosition: index).makeModule()
+        let moduleToPresent = OpenedStoriesAssembly(stories: self.stories, startPosition: index).makeModule()
         if DeviceInfo.current.isPad {
-            customPresentViewController(storyPresentr, viewController: moduleToPresent, animated: true, completion: nil)
+            self.customPresentViewController(
+                self.storyPresentr,
+                viewController: moduleToPresent,
+                animated: true,
+                completion: nil
+            )
         } else {
             moduleToPresent.modalPresentationStyle = .custom
             moduleToPresent.transitioningDelegate = self
-            present(moduleToPresent, animated: true, completion: nil)
+            self.present(moduleToPresent, animated: true, completion: nil)
         }
     }
 
     private func refresh() {
-        presenter?.refresh()
+        self.presenter?.refresh()
     }
 
     private func getFrame(indexPath: IndexPath) -> CGRect? {
-        if let frame = collectionView.cellForItem(at: indexPath)?.frame {
-            return collectionView.convert(frame, to: UIApplication.shared.keyWindow)
+        if let frame = self.collectionView.cellForItem(at: indexPath)?.frame {
+            return self.collectionView.convert(frame, to: UIApplication.shared.keyWindow)
         } else {
             return nil
         }
@@ -109,28 +124,30 @@ extension StoriesViewController: StoriesViewProtocol {
     func set(state: StoriesViewState) {
         switch state {
         case .empty:
-            collectionView.skeleton.hide()
-            showPlaceholder(for: .connectionError)
+            self.collectionView.skeleton.hide()
+            self.showPlaceholder(for: .connectionError)
         case .normal:
-            collectionView.skeleton.hide()
-            isPlaceholderShown = false
+            self.collectionView.skeleton.hide()
+            self.isPlaceholderShown = false
         case .loading:
-            isPlaceholderShown = false
-            collectionView.skeleton.show()
+            self.isPlaceholderShown = false
+            self.collectionView.skeleton.show()
         }
     }
 
     func set(stories: [Story]) {
         self.stories = stories
-        collectionView.reloadData()
+        self.collectionView.reloadData()
     }
 
     func updateStory(index: Int) {
         let indexPath = IndexPath(item: index, section: 0)
-        if !collectionView.indexPathsForVisibleItems.contains(indexPath) {
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        if !self.collectionView.indexPathsForVisibleItems.contains(indexPath) {
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
-        collectionView.reloadItems(at: [indexPath])
+
+        self.collectionView.reloadItems(at: [indexPath])
+
         DispatchQueue.main.async { [weak self] in
             self?.currentItemFrame = self?.getFrame(indexPath: indexPath)
         }
@@ -139,8 +156,8 @@ extension StoriesViewController: StoriesViewProtocol {
 
 extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        currentItemFrame = getFrame(indexPath: indexPath)
-        showStory(at: indexPath.item)
+        self.currentItemFrame = self.getFrame(indexPath: indexPath)
+        self.showStory(at: indexPath.item)
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -148,16 +165,20 @@ extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stories.count
+        return self.stories.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as? StoryCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "StoryCollectionViewCell",
+            for: indexPath
+        ) as? StoryCollectionViewCell else {
             return UICollectionViewCell()
         }
 
-        let story = stories[indexPath.item]
+        let story = self.stories[indexPath.item]
         cell.update(imagePath: story.coverPath, title: story.title, isWatched: story.isViewed.value)
+
         return cell
     }
 }
@@ -168,7 +189,7 @@ extension StoriesViewController: UIViewControllerTransitioningDelegate {
         presenting: UIViewController,
         source: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
-        guard let currentItemFrame = currentItemFrame else {
+        guard let currentItemFrame = self.currentItemFrame else {
             return nil
         }
 
@@ -176,11 +197,8 @@ extension StoriesViewController: UIViewControllerTransitioningDelegate {
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard
-            let revealVC = dismissed as? OpenedStoriesPageViewController,
-            let currentItemFrame = currentItemFrame
-            else
-        {
+        guard let revealVC = dismissed as? OpenedStoriesPageViewController,
+              let currentItemFrame = self.currentItemFrame else {
             return nil
         }
 
@@ -192,11 +210,11 @@ extension StoriesViewController: UIViewControllerTransitioningDelegate {
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         guard let animator = animator as? ShrinkDismissAnimationController,
-            let interactionController = animator.interactionController,
-            interactionController.interactionInProgress
-            else {
-                return nil
+              let interactionController = animator.interactionController,
+              interactionController.interactionInProgress else {
+            return nil
         }
+
         return interactionController
     }
 }

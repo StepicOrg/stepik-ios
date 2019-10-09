@@ -37,11 +37,15 @@ class CardStepViewController: UIViewController, CardStepView {
 
         setupWebView()
         presenter?.refreshStep()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didScreenRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
 
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        self.scrollView.contentInsetAdjustmentBehavior = .never
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didScreenRotate),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
     }
 
     @objc func didScreenRotate() {

@@ -32,16 +32,9 @@ class StringQuizViewController: QuizViewController {
             make.bottom.equalTo(self.containerView)
         }
 
-        if #available(iOS 11.0, *) {
-            textView.snp.makeConstraints { make -> Void in
-                make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(useSmallPadding ? 8 : 16)
-                make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(useSmallPadding ? -8 : -16)
-            }
-        } else {
-            textView.snp.makeConstraints { make -> Void in
-                make.leading.equalTo(containerView).offset(useSmallPadding ? 8 : 16)
-                make.trailing.equalTo(containerView).offset(useSmallPadding ? -8 : -16)
-            }
+        textView.snp.makeConstraints { make -> Void in
+            make.leading.equalTo(containerView.safeAreaLayoutGuide.snp.leading).offset(useSmallPadding ? 8 : 16)
+            make.trailing.equalTo(containerView.safeAreaLayoutGuide.snp.trailing).offset(useSmallPadding ? -8 : -16)
         }
 
         textView.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.5, borderColor: UIColor.lightGray)

@@ -6,11 +6,9 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class StoriesAssembly: Assembly {
-
+final class StoriesAssembly: Assembly {
     weak var moduleOutput: StoriesOutputProtocol?
 
     init(output: StoriesOutputProtocol?) {
@@ -18,10 +16,11 @@ class StoriesAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let vc = StoriesViewController()
-        let presenter = StoriesPresenter(view: vc, storyTemplatesAPI: StoryTemplatesAPI())
+        let viewController = StoriesViewController()
+        let presenter = StoriesPresenter(view: viewController, storyTemplatesAPI: StoryTemplatesAPI())
         presenter.moduleOutput = self.moduleOutput
-        vc.presenter = presenter
-        return vc
+        viewController.presenter = presenter
+
+        return viewController
     }
 }

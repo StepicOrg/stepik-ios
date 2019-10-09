@@ -28,6 +28,14 @@ extension CourseReview {
         self.init(entity: CourseReview.oldEntity, insertInto: CoreDataHelper.instance.context)
     }
 
+    convenience init(courseID: Course.IdType, userID: User.IdType, score: Int, text: String) {
+        self.init(entity: CourseReview.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.courseID = courseID
+        self.userID = userID
+        self.score = score
+        self.text = text
+    }
+
     var id: Int {
         set {
             self.managedId = newValue as NSNumber?
@@ -98,5 +106,12 @@ extension CourseReview {
         set {
             managedText = newValue
         }
+    }
+
+    var isCurrentUserReview: Bool {
+        if let currentUser = AuthInfo.shared.user {
+            return currentUser.id == self.userID
+        }
+        return false
     }
 }

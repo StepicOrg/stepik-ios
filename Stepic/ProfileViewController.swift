@@ -86,9 +86,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             action: #selector(ProfileViewController.profileEditButtonPressed)
         )
 
-        if #available(iOS 11.0, *) {
-            self.tableView.contentInsetAdjustmentBehavior = .never
-        }
+        self.tableView.contentInsetAdjustmentBehavior = .never
 
         self.title = NSLocalizedString("Profile", comment: "")
 

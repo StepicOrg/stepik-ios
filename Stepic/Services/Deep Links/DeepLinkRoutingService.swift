@@ -10,18 +10,19 @@ import Foundation
 import PromiseKit
 
 final class DeepLinkRoutingService {
-
     private var window: UIWindow? {
         return (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
     private var currentNavigation: UINavigationController? {
-        guard let tabController = currentTabBarController else {
+        guard let tabController = self.currentTabBarController else {
             return nil
         }
-        let cnt = tabController.viewControllers?.count ?? 0
+
+        let count = tabController.viewControllers?.count ?? 0
         let index = tabController.selectedIndex
-        if index < cnt {
+
+        if index < count {
             return tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController
         } else {
             return tabController.viewControllers?[0] as? UINavigationController
@@ -29,7 +30,7 @@ final class DeepLinkRoutingService {
     }
 
     private var currentTabBarController: UITabBarController? {
-        return window?.rootViewController as? UITabBarController
+        return self.window?.rootViewController as? UITabBarController
     }
 
     func route(path: String, from source: UIViewController? = nil) {
@@ -38,7 +39,12 @@ final class DeepLinkRoutingService {
 
     func route(_ route: DeepLinkRoute?, fallbackPath: String = "", from source: UIViewController? = nil) {
         self.getModuleStack(route: route).done { moduleStack in
-            let router = self.makeRouter(route: route, from: source, moduleStack: moduleStack, fallbackPath: fallbackPath)
+            let router = self.makeRouter(
+                route: route,
+                from: source,
+                moduleStack: moduleStack,
+                fallbackPath: fallbackPath
+            )
             router.route()
         }.catch { _ in
             //TODO: Handle this
@@ -95,13 +101,24 @@ final class DeepLinkRoutingService {
             case .syllabus(let courseID):
                 seal.fulfill([CourseInfoAssembly(courseID: courseID, initialTab: .syllabus).makeModule()])
             case .lesson(let lessonID, let stepID, let unitID):
-                DeepLinkRouter.routeToStepWithId(stepID, lessonId: lessonID, unitID: unitID, completion: { moduleStack in
-                    seal.fulfill(moduleStack)
-                })
+                DeepLinkRouter.routeToStepWithId(
+                    stepID,
+                    lessonId: lessonID,
+                    unitID: unitID,
+                    completion: { moduleStack in
+                        seal.fulfill(moduleStack)
+                    }
+                )
             case .discussions(let lessonID, let stepID, let discussionID, let unitID):
-                DeepLinkRouter.routeToDiscussionWithId(lessonID, stepId: stepID, unitID: unitID, discussionId: discussionID, completion: { moduleStack in
-                    seal.fulfill(moduleStack)
-                })
+                DeepLinkRouter.routeToDiscussionWithId(
+                    lessonID,
+                    stepId: stepID,
+                    unitID: unitID,
+                    discussionId: discussionID,
+                    completion: { moduleStack in
+                        seal.fulfill(moduleStack)
+                    }
+                )
             }
         }
     }

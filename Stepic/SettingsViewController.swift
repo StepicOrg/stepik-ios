@@ -65,10 +65,7 @@ final class SettingsViewController: MenuViewController {
 
         self.edgesForExtendedLayout = []
         self.tableView.tableHeaderView = self.artView
-
-        if #available(iOS 11.0, *) {
-            self.tableView.contentInsetAdjustmentBehavior = .never
-        }
+        self.tableView.contentInsetAdjustmentBehavior = .never
     }
 
     override func viewDidAppear(_ animated: Bool) {
