@@ -1785,6 +1785,7 @@
 		2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_language_code_v27.xcdatamodel; sourceTree = "<group>"; };
 		2CD1CAA121FD1B2100B9E2DD /* DownloadTreeNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTreeNodeTests.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
+		2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_email_addresses.xcdatamodel; sourceTree = "<group>"; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
@@ -7502,6 +7503,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */,
 				2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */,
 				2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */,
 				2C8345D123156D5E00E6CE91 /* Model_course_can_continue.xcdatamodel */,
@@ -7544,7 +7546,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */;
+			currentVersion = 2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
