@@ -4874,11 +4874,11 @@
 		62E98567757A6ECCEF33933F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62E98B5DA62569080D5455A5 /* Section */,
-				62E980240A62513E09A19558 /* Cell */,
-				62E987BA4B4676C52310C7A0 /* Header */,
 				62E9826CE6F076640792E2C0 /* CourseInfoTabSyllabusTableViewDataSource.swift */,
 				62E9843E4F41BAF86C14534E /* CourseInfoTabSyllabusView.swift */,
+				62E980240A62513E09A19558 /* Cell */,
+				62E987BA4B4676C52310C7A0 /* Header */,
+				62E98B5DA62569080D5455A5 /* Section */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5076,15 +5076,15 @@
 		62E988F9B9BD87DE7831AF70 /* CourseInfoTabSyllabus */ = {
 			isa = PBXGroup;
 			children = (
-				62E98567757A6ECCEF33933F /* Views */,
 				62E98D42EB07C699B6521ECA /* CourseInfoTabSyllabusAssembly.swift */,
-				62E98202B63DCB3B6908745E /* CourseInfoTabSyllabusViewController.swift */,
+				62E98A4EF921D387E9686164 /* CourseInfoTabSyllabusDataFlow.swift */,
 				62E98FB0FB1D292E786D3B0D /* CourseInfoTabSyllabusInteractor.swift */,
 				62E98A7DB2CCE55D3380256D /* CourseInfoTabSyllabusPresenter.swift */,
-				62E98A4EF921D387E9686164 /* CourseInfoTabSyllabusDataFlow.swift */,
-				62E9898E1963FD3905B69BCE /* Provider */,
-				62E9829079EC9C0DB1874CDF /* InputOutput */,
+				62E98202B63DCB3B6908745E /* CourseInfoTabSyllabusViewController.swift */,
 				62E98A9BC67D7426CE1117E5 /* CourseInfoTabSyllabusViewModel.swift */,
+				62E9829079EC9C0DB1874CDF /* InputOutput */,
+				62E9898E1963FD3905B69BCE /* Provider */,
+				62E98567757A6ECCEF33933F /* Views */,
 			);
 			path = CourseInfoTabSyllabus;
 			sourceTree = "<group>";
