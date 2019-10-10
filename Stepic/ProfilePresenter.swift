@@ -206,6 +206,12 @@ final class ProfilePresenter {
             return self.refresh()
         }
 
+        // Checking login case to another account.
+        if isMe && AuthInfo.shared.isAuthorized && userID != AuthInfo.shared.userId {
+            self.userSeed = .anonymous
+            return self.refresh()
+        }
+
         self.view?.manageBarItemControls(
             settingsIsHidden: !isMe,
             profileEditIsAvailable: self.didProfileAttach,
