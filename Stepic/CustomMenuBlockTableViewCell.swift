@@ -12,6 +12,11 @@ import UIKit
 final class CustomMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet var containerView: UIView!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.containerView.subviews.forEach { $0.removeFromSuperview() }
+    }
+
     override func initWithBlock(block: MenuBlock) {
         super.initWithBlock(block: block)
 
