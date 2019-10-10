@@ -151,6 +151,7 @@ final class NewMatchingQuizView: UIView {
 
         self.loadGroup = DispatchGroup()
         self.loadGroup?.notify(queue: .main) { [weak self] in
+            self?.loadGroup = nil
             self?.endLoading()
         }
 
