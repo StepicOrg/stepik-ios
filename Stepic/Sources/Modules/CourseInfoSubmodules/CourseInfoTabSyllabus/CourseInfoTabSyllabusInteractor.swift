@@ -337,6 +337,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
     private func updateCurrentData(sections: [Section]? = nil, units: [Unit], shouldRemoveAll: Bool) {
         if shouldRemoveAll {
             self.currentSections.removeAll(keepingCapacity: true)
