@@ -102,17 +102,17 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             let isOnline = strongSelf.isOnline
             print("course info tab syllabus interactor: start fetching syllabus, isOnline = \(isOnline)")
 
-            DispatchQueue.main.promise {
-                strongSelf.fetchSyllabusInAppropriateMode(course: course, isOnline: isOnline)
-            }.done { response in
-                print("course info tab syllabus interactor: finish fetching syllabus, isOnline = \(isOnline)")
+            strongSelf.fetchSyllabusInAppropriateMode(course: course, isOnline: isOnline).done { response in
+                DispatchQueue.main.async {
+                    print("course info tab syllabus interactor: finish fetching syllabus, isOnline = \(isOnline)")
 
-                strongSelf.presenter.presentCourseSyllabus(response: response)
+                    strongSelf.presenter.presentCourseSyllabus(response: response)
 
-                if isOnline && !strongSelf.didLoadFromNetwork {
-                    strongSelf.didLoadFromNetwork = true
-                    strongSelf.updateSyllabusHeader()
-                    strongSelf.sectionFetchSemaphore.signal()
+                    if isOnline && !strongSelf.didLoadFromNetwork {
+                        strongSelf.didLoadFromNetwork = true
+                        strongSelf.updateSyllabusHeader()
+                        strongSelf.sectionFetchSemaphore.signal()
+                    }
                 }
             }.catch { _ in
                 // TODO: handle
@@ -138,12 +138,12 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
             print("course info tab syllabus interactor: start fetching section from network, id = \(section.id)")
 
-            DispatchQueue.main.promise {
-                strongSelf.fetchSyllabusSection(section: section)
-            }.done { response in
-                print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
-                strongSelf.presenter.presentCourseSyllabus(response: response)
-                strongSelf.updateSyllabusHeader()
+            strongSelf.fetchSyllabusSection(section: section).done { response in
+                DispatchQueue.main.async {
+                    print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
+                    strongSelf.presenter.presentCourseSyllabus(response: response)
+                    strongSelf.updateSyllabusHeader()
+                }
             }.catch { error in
                 print("course info tab syllabus interactor: error while fetching section from network, error = \(error)")
             }
