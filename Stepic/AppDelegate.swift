@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not initialize audio session")
         }
 
-        FBSDKApplicationDelegate.sharedInstance().application(
+        ApplicationDelegate.shared.application(
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
@@ -231,7 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            VKSdk.processOpen(url, fromApplication: sourceApplication) {
             return true
         }
-        if FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options) {
+        if ApplicationDelegate.shared.application(app, open: url, options: options) {
             return true
         }
         if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"

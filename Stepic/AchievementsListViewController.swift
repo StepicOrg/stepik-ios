@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import NotificationBannerSwift
 
 class AchievementsListViewController: UIViewController, AchievementsListView, ControllerWithStepikPlaceholder {
     @IBOutlet weak var tableView: UITableView!
