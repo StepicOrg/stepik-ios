@@ -15,7 +15,7 @@ def shared_pods
     pod 'Crashlytics', '3.14.0'
     pod 'DeviceKit', '1.10.0'
     pod 'PromiseKit', '6.8.4'
-    pod 'SwiftLint', '0.31.0'
+    pod 'SwiftLint', '0.35.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
 
