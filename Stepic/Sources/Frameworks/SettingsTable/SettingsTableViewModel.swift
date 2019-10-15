@@ -45,17 +45,20 @@ struct InputCellOptions {
     let placeholderText: String?
     let valueText: String?
     let inputGroup: UniqueIdentifierType?
+    let isEnabled: Bool
 
     init(
         valueText: String? = nil,
         placeholderText: String? = nil,
         shouldAlwaysShowPlaceholder: Bool = false,
-        inputGroup: UniqueIdentifierType? = nil
+        inputGroup: UniqueIdentifierType? = nil,
+        isEnabled: Bool = true
     ) {
         self.valueText = valueText
         self.placeholderText = placeholderText
         self.shouldAlwaysShowPlaceholder = shouldAlwaysShowPlaceholder
         self.inputGroup = inputGroup
+        self.isEnabled = isEnabled
     }
 }
 

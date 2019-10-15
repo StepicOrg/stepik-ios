@@ -223,16 +223,18 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         // State changed
         task.stateReporter = { [weak self] newState in
             if case .stopped = newState {
-                guard let video = self?.videosForTasks[task.id] else {
+                guard let strongSelf = self,
+                      let video = self?.videosForTasks[task.id] else {
                     return
                 }
 
-                self?.reportToSubscribers(
+                strongSelf.reportToSubscribers(
                     event: VideoDownloadingServiceEvent(
                         videoID: video.id,
                         state: .error(Error.videoDownloadingStopped)
                     )
                 )
+                strongSelf.removeObservedTask(id: task.id)
             }
         }
     }

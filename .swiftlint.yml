@@ -7,7 +7,7 @@ included:
 
 analyzer_rules:
   - explicit_self
-  - unused_private_declaration
+  - unused_declaration
 
 whitelist_rules:
   - array_init
@@ -117,7 +117,6 @@ whitelist_rules:
   - vertical_whitespace_closing_braces
   - vertical_whitespace_opening_braces
   - void_return
-  - weak_computed_property
   - weak_delegate
   - yoda_condition
 

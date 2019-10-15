@@ -76,7 +76,7 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
 
         let presentr = Presentr(presentationType: .custom(width: width, height: height, center: .center))
         presentr.backgroundOpacity = 0.5
-        presentr.dismissOnTap = false
+        presentr.backgroundTap = .noAction
         presentr.dismissAnimated = true
         presentr.dismissTransitionType = TransitionType.coverVertical
         presentr.roundCorners = true

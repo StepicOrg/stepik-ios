@@ -31,4 +31,15 @@ enum ProfileEdit {
             let isSuccessful: Bool
         }
     }
+
+    /// Handle HUD
+    enum BlockingWaitingIndicatorUpdate {
+        struct Response {
+            let shouldDismiss: Bool
+        }
+
+        struct ViewModel {
+            let shouldDismiss: Bool
+        }
+    }
 }

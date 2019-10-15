@@ -1,6 +1,7 @@
 import Foundation
 
 struct CourseInfoTabReviewsViewModel {
+    // swiftlint:disable:next type_name
     typealias ID = Int
 
     let uniqueIdentifier: ID

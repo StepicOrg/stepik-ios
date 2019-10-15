@@ -27,7 +27,14 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
 
     func doProfileEditLoad(request: ProfileEdit.ProfileEditLoad.Request) {
         AmplitudeAnalyticsEvents.Profile.editOpened.send()
-        self.presenter.presentProfileEditForm(response: .init(profile: self.currentProfile))
+
+        firstly {
+            self.currentProfile.emailAddresses.isEmpty
+                ? self.fetchEmailAddresses()
+                : Guarantee()
+        }.done {
+            self.presenter.presentProfileEditForm(response: .init(profile: self.currentProfile))
+        }
     }
 
     func doRemoteProfileUpdate(request: ProfileEdit.RemoteProfileUpdate.Request) {
@@ -45,6 +52,21 @@ final class ProfileEditInteractor: ProfileEditInteractorProtocol {
         }.catch { error in
             print("profile edit interactor: unable to update profile, error = \(error)")
             self.presenter.presentProfileEditResult(response: .init(isSuccessful: false))
+        }
+    }
+
+    private func fetchEmailAddresses() -> Guarantee<Void> {
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        return Guarantee { seal in
+            self.provider.fetchEmailAddresses(ids: self.currentProfile.emailAddressesArray).done { emailAddresses in
+                self.currentProfile.emailAddresses = emailAddresses
+                seal(())
+            }.ensure {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            }.catch { _ in
+                seal(())
+            }
         }
     }
 }

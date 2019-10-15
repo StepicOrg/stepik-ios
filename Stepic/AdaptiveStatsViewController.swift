@@ -190,7 +190,7 @@ extension AdaptiveStatsViewController: AdaptiveStatsView {
             return
         }
 
-        let dataSet = updateDataSet(LineChartDataSet(values: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
+        let dataSet = updateDataSet(LineChartDataSet(entries: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
         let data = LineChartData(dataSet: dataSet)
         progressChart.data = data
         progressChart.data?.highlightEnabled = true

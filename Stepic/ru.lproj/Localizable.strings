@@ -31,6 +31,7 @@ FailedToRemoveMessage = "Ошибка при удалении";
 RemovedAllMessage = "Удалено";
 Downloading = "Загружается";
 Completed = "Загружено";
+Copied = "Скопировано";
 EmptyDownloadsTitle = "Загрузок нет!";
 EmptyDownloadsDescription = "Вы можете загрузить видео из вкладок \"Мои курсы\" и \"Все курсы\".";
 Lesson = "Урок";
@@ -642,6 +643,8 @@ ProfileEditDetailsPlaceholder = "Обо мне";
 ProfileEditGeneralTitle = "Общие данные";
 ProfileEditGeneralDescription = "Ваше официальное имя, используемое в сертификатах";
 ProfileEditAboutMeTitle = "О себе";
+ProfileEditEmailTitle = "Email";
+ProfileEditEmailPlaceholder = "Адрес";
 
 /* Write course review */
 WriteCourseReviewTitle = "Отзыв о курсе";

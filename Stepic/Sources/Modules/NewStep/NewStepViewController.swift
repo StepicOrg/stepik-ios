@@ -22,7 +22,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     private var didInitRequestsSend = false
-    private var sendStepDidPassedGroup = DispatchGroup()
+    private var sendStepDidPassedGroup: DispatchGroup? = DispatchGroup()
 
     private var isFirstAppearance = true
 
@@ -59,11 +59,12 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         self.newStepView?.delegate = self
 
         // Enter group, leave when content did load & in view did appear
-        self.sendStepDidPassedGroup.enter()
-        self.sendStepDidPassedGroup.enter()
+        self.sendStepDidPassedGroup?.enter()
+        self.sendStepDidPassedGroup?.enter()
 
         self.updateState()
-        self.sendStepDidPassedGroup.notify(queue: .main) { [weak self] in
+        self.sendStepDidPassedGroup?.notify(queue: .main) { [weak self] in
+            self?.sendStepDidPassedGroup = nil
             self?.sendInitStepStatusRequests()
         }
     }
@@ -81,7 +82,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         }
 
         if !self.didInitRequestsSend {
-            self.sendStepDidPassedGroup.leave()
+            self.sendStepDidPassedGroup?.leave()
         }
     }
 
@@ -123,7 +124,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         }
 
         if !self.didInitRequestsSend {
-            self.sendStepDidPassedGroup.leave()
+            self.sendStepDidPassedGroup?.leave()
         }
 
         guard let quizType = viewModel.quizType else {

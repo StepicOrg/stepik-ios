@@ -3,13 +3,19 @@ import PromiseKit
 
 protocol ProfileEditProviderProtocol {
     func update(profile: Profile) -> Promise<Profile>
+    func fetchEmailAddresses(ids: [EmailAddress.IdType]) -> Promise<[EmailAddress]>
 }
 
 final class ProfileEditProvider: ProfileEditProviderProtocol {
     private let profilesNetworkService: ProfilesNetworkServiceProtocol
+    private let emailAddressesNetworkService: EmailAddressesNetworkServiceProtocol
 
-    init(profilesNetworkService: ProfilesNetworkServiceProtocol) {
+    init(
+        profilesNetworkService: ProfilesNetworkServiceProtocol,
+        emailAddressesNetworkService: EmailAddressesNetworkServiceProtocol
+    ) {
         self.profilesNetworkService = profilesNetworkService
+        self.emailAddressesNetworkService = emailAddressesNetworkService
     }
 
     func update(profile: Profile) -> Promise<Profile> {
@@ -20,7 +26,18 @@ final class ProfileEditProvider: ProfileEditProviderProtocol {
         }
     }
 
+    func fetchEmailAddresses(ids: [EmailAddress.IdType]) -> Promise<[EmailAddress]> {
+        return Promise { seal in
+            self.emailAddressesNetworkService.fetch(ids: ids, page: 1).done { emailAddresses, _ in
+                seal.fulfill(emailAddresses)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
     enum Error: Swift.Error {
         case networkUpdateFailed
+        case fetchFailed
     }
 }

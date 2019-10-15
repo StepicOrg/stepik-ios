@@ -1,4 +1,3 @@
-# Uncomment this line to define a global platform for your project
 install! 'cocoapods', :deterministic_uuids => false
 source 'https://github.com/CocoaPods/Specs.git'
 
@@ -6,69 +5,70 @@ inhibit_all_warnings!
 use_frameworks!
 
 def shared_pods
-    pod 'Alamofire', '4.8.2'
-    pod 'Atributika', '4.8.2'
-    pod 'SwiftyJSON', '4.1.0'
-    pod 'SDWebImage', '4.4.2'
+    pod 'Alamofire', '4.9.0'
+    pod 'Atributika', '4.9.0'
+    pod 'SwiftyJSON', '5.0.0'
+    pod 'SDWebImage', '5.2.3'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
-    pod 'Fabric', '1.7.11'
-    pod 'Crashlytics', '3.10.7'
-    pod 'DeviceKit', '1.10.0'
-    pod 'PromiseKit', '6.8.4'
-    pod 'SwiftLint', '0.31.0'
+    pod 'Fabric', '1.10.2'
+    pod 'Crashlytics', '3.14.0'
+    pod 'DeviceKit', '1.13.0'
+    pod 'PromiseKit', '6.11.0'
+    pod 'SwiftLint', '0.35.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
 
 def all_pods
-
     shared_pods
+
     pod 'DownloadButton', '0.1.0'
     pod 'SVProgressHUD', '2.2.5'
+    # TSMessages is no longer being maintained/updated, remove or migrate to RMessage/SwiftMessages
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'YandexMobileMetrica/Dynamic', '3.2.0'
+    pod 'YandexMobileMetrica/Dynamic', '3.8.2'
 
     pod 'SnapKit', '4.2.0'
-    
-    pod 'FirebaseCore', '5.1.0'
-    pod 'FirebaseMessaging' , '3.1.0'
-    pod 'FirebaseAnalytics' , '5.1.0'
-    pod 'FirebaseRemoteConfig', '3.0.1'
 
-    pod 'Amplitude-iOS', '4.3.0'
+    # Firebase
+    pod 'Firebase/Core', '6.10.0'
+    pod 'Firebase/Messaging' , '6.10.0'
+    pod 'Firebase/Analytics' , '6.10.0'
+    pod 'Firebase/RemoteConfig', '6.10.0'
+
+    pod 'Amplitude-iOS', '4.8.2'
         
     pod 'BEMCheckBox', '1.4.1'
 
-    pod 'IQKeyboardManagerSwift', '6.2.1'
+    pod 'IQKeyboardManagerSwift', '6.5.1'
 
-    pod 'Kanna', '4.0.1'
+    pod 'Kanna', '4.0.3'
+    # Remove after NotificationsService refactoring
     pod 'CRToast', '0.0.9'
     pod 'TUSafariActivity', '1.0.4'
     
-    pod 'VK-ios-sdk', '1.4.6'
-    pod 'FBSDKCoreKit', '4.35.0'
-    pod 'FBSDKLoginKit', '4.35.0'
+    pod 'VK-ios-sdk', '1.5.1'
+    pod 'FBSDKCoreKit', '5.8.0'
+    pod 'FBSDKLoginKit', '5.8.0'
     
-    pod 'Presentr', '1.3.2'
+    pod 'Presentr', '1.9'
     
-    pod 'Agrume', :git => 'https://github.com/JanGorman/Agrume.git'
+    pod 'Agrume', '5.3.2'
     pod 'Highlightr', '2.1.0'
-    pod 'RFKeyboardToolbar', '1.3'
     pod 'TTTAttributedLabel', '2.0.0'
-    pod 'lottie-ios', '2.5.0'
+    pod 'lottie-ios', '2.5.3'
     pod 'Koloda', '4.7'
-    pod 'Charts', '3.2.2'
+    pod 'Charts', '3.4.0'
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.3.0'
-    pod 'NotificationBannerSwift', '2.0.1'
-    pod 'Nuke', '7.3.2'
-    pod 'STRegex', '2.0.0'
-    pod 'Tabman', '2.4.1' 
-    pod 'Branch', '0.25.5'
+    pod 'Nuke', '7.6.3'
+    pod 'STRegex', '2.1.0'
+    pod 'Tabman', '2.4.3'
+    pod 'Branch', '0.25.11'
 end
 
 def testing_pods
-    pod 'Quick', '1.3.1'
-    pod 'Nimble', '8.0.1'
+    pod 'Quick', '2.2.0'
+    pod 'Nimble', '8.0.4'
     pod 'Mockingjay', '2.0.1'
 end
 

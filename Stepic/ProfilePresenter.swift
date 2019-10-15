@@ -155,7 +155,7 @@ final class ProfilePresenter {
         let isNotificationOn = PreferencesContainer.notifications.allowStreaksNotifications
 
         for i in 0..<blocks.count {
-            if case ProfileMenuBlock.notificationsSwitch(_) = blocks[i] {
+            if case .notificationsSwitch(_) = blocks[i] {
                 blocks[i] = ProfileMenuBlock.notificationsSwitch(isOn: isNotificationOn)
 
                 if i + 1 < blocks.count && blocks[i + 1] == ProfileMenuBlock.notificationsTimeSelection {
@@ -168,41 +168,56 @@ final class ProfilePresenter {
             }
         }
 
+        if let userID = self.userSeed.userId {
+            blocks.append(ProfileMenuBlock.userID(id: userID))
+        }
+
         return blocks
     }
 
     func refresh(shouldReload: Bool = false) {
-        if case UserSeed.anonymous = userSeed {
+        if case .anonymous = self.userSeed {
             // Check case when we've init Profile for anonymous but now have logged user
-            if AuthInfo.shared.isAuthorized, let userId = AuthInfo.shared.userId {
-                userSeed = UserSeed.`self`(id: userId)
-                return refresh(shouldReload: true)
+            if AuthInfo.shared.isAuthorized, let userID = AuthInfo.shared.userId {
+                self.userSeed = UserSeed.`self`(id: userID)
+                return self.refresh(shouldReload: true)
             } else {
-                view?.manageBarItemControls(settingsIsHidden: true, profileEditIsAvailable: false, shareId: nil)
-                view?.set(state: .anonymous)
+                self.view?.manageBarItemControls(settingsIsHidden: true, profileEditIsAvailable: false, shareId: nil)
+                self.view?.set(state: .anonymous)
                 return
             }
         }
 
         // We handle anonymous case (when userId is nil) above
-        let userId = userSeed.userId!
-        let isMe = userSeed.isMe
+        let userID = userSeed.userId!
+        let isMe = self.userSeed.isMe
 
         // Check logout case
         if isMe && !AuthInfo.shared.isAuthorized {
-            userSeed = .anonymous
-            return refresh()
+            self.userSeed = .anonymous
+            return self.refresh()
         }
 
-        view?.manageBarItemControls(settingsIsHidden: !isMe, profileEditIsAvailable: didProfileAttach, shareId: userId)
+        // Checking login case to another account.
+        if isMe && AuthInfo.shared.isAuthorized && userID != AuthInfo.shared.userId {
+            self.userSeed = .anonymous
+            return self.refresh()
+        }
+
+        self.view?.manageBarItemControls(
+            settingsIsHidden: !isMe,
+            profileEditIsAvailable: self.didProfileAttach,
+            shareId: userID
+        )
 
         guard shouldReload else {
             return
         }
-        view?.set(state: .loading)
+
+        self.view?.set(state: .loading)
 
         var user: User?
-        loadProfile(userId: userId).then { [weak self] loadedUser -> Promise<(UserActivity, Profile?)> in
+        self.loadProfile(userId: userID).then { [weak self] loadedUser -> Promise<(UserActivity, Profile?)> in
             user = loadedUser
 
             guard let strongSelf = self else {
@@ -211,7 +226,7 @@ final class ProfilePresenter {
 
             // return strongSelf.userActivitiesAPI.retrieve(user: userId)
             return when(
-                fulfilled: strongSelf.userActivitiesAPI.retrieve(user: userId),
+                fulfilled: strongSelf.userActivitiesAPI.retrieve(user: userID),
                 isMe ? strongSelf.profilesAPI.retrieve(id: loadedUser.profile).map { $0.first } : Promise.value(nil)
             )
         }.done { [weak self] activity, profile in
@@ -231,7 +246,11 @@ final class ProfilePresenter {
                 strongSelf.view?.set(state: .normal)
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
-                strongSelf.view?.manageBarItemControls(settingsIsHidden: !isMe, profileEditIsAvailable: profile != nil, shareId: userId)
+                strongSelf.view?.manageBarItemControls(
+                    settingsIsHidden: !isMe,
+                    profileEditIsAvailable: profile != nil,
+                    shareId: userID
+                )
 
                 if let profile = profile {
                     strongSelf.didProfileAttach = true

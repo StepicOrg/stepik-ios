@@ -27,13 +27,16 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
         let interactor = CourseInfoTabSyllabusInteractor(
             presenter: presenter,
             provider: provider,
-            videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
-            syllabusDownloadsInteractionService: SyllabusDownloadsInteractionService(
-                videoDownloadingService: VideoDownloadingService.shared
-            ),
             personalDeadlinesService: PersonalDeadlinesService(),
             nextLessonService: NextLessonService(),
-            tooltipStorageManager: TooltipStorageManager()
+            tooltipStorageManager: TooltipStorageManager(),
+            syllabusDownloadsService: SyllabusDownloadsService(
+                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+                syllabusDownloadsInteractionService: SyllabusDownloadsInteractionService(
+                    videoDownloadingService: VideoDownloadingService.shared
+                ),
+                stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
+            )
         )
         let viewController = CourseInfoTabSyllabusViewController(interactor: interactor)
 

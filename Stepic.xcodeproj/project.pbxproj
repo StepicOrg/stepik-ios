@@ -430,6 +430,8 @@
 		2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E0AF2243CD2C00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift */; };
 		2C09313521CD4BDD002B605D /* VideoStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */; };
 		2C09313721D00B8D002B605D /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09313621D00B8D002B605D /* VideoDownloadingService.swift */; };
+		2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */; };
+		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
@@ -622,6 +624,7 @@
 		2CAB5C7D22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
+		2CB1401E2354A3E900452AA2 /* SyllabusDownloadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1401D2354A3E900452AA2 /* SyllabusDownloadsService.swift */; };
 		2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */; };
 		2CB2393F20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2393D20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib */; };
 		2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2394020BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib */; };
@@ -666,6 +669,11 @@
 		2CCE6CCC215153D600DC4419 /* LanguageSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829ED9120C863B30018E6FF /* LanguageSettingsViewController.swift */; };
 		2CD1CAA221FD1B2100B9E2DD /* DownloadTreeNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD1CAA121FD1B2100B9E2DD /* DownloadTreeNodeTests.swift */; };
 		2CD462EA226F4279004E4725 /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD462E9226F4279004E4725 /* FetchResult.swift */; };
+		2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */; };
+		2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E258234E0A1B00F49303 /* EmailAddress.swift */; };
+		2CD6E25B234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */; };
+		2CD6E25D234E388B00F49303 /* EmailAddressesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */; };
+		2CD6E25F234E392900F49303 /* EmailAddressesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */; };
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
@@ -1541,6 +1549,8 @@
 		2C09313321CCFE47002B605D /* Model_course_lesson_fields_v31.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_lesson_fields_v31.xcdatamodel; sourceTree = "<group>"; };
 		2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStoredFileManager.swift; sourceTree = "<group>"; };
 		2C09313621D00B8D002B605D /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
+		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
+		2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsAPI.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
@@ -1733,6 +1743,7 @@
 		2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenViewModel.swift; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
+		2CB1401D2354A3E900452AA2 /* SyllabusDownloadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusDownloadsService.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2CB2393D20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
@@ -1781,6 +1792,12 @@
 		2CCC7DBD219F09C60000540F /* Model_course_language_code_v27.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_language_code_v27.xcdatamodel; sourceTree = "<group>"; };
 		2CD1CAA121FD1B2100B9E2DD /* DownloadTreeNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTreeNodeTests.swift; sourceTree = "<group>"; };
 		2CD462E9226F4279004E4725 /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
+		2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_email_addresses.xcdatamodel; sourceTree = "<group>"; };
+		2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesAPI.swift; sourceTree = "<group>"; };
+		2CD6E258234E0A1B00F49303 /* EmailAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddress.swift; sourceTree = "<group>"; };
+		2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmailAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesPersistenceService.swift; sourceTree = "<group>"; };
+		2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAddressesNetworkService.swift; sourceTree = "<group>"; };
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
@@ -2186,14 +2203,14 @@
 		04261228D8CE67BAF558EC33 /* NewLesson */ = {
 			isa = PBXGroup;
 			children = (
-				2C7F782622708A520089FDD7 /* Views */,
 				132A23540B83F9E4658F740C /* NewLessonAssembly.swift */,
-				DC193B8E01FF4A61441ABF13 /* NewLessonViewController.swift */,
+				AC5B5698955B5FF2B7EFB6F4 /* NewLessonDataFlow.swift */,
 				230630B59E23EF2D82208F85 /* NewLessonInteractor.swift */,
 				DFC0A2EAEB9E30B54695D44A /* NewLessonPresenter.swift */,
-				AC5B5698955B5FF2B7EFB6F4 /* NewLessonDataFlow.swift */,
 				80E8045E8645E07DAAA62D82 /* NewLessonProvider.swift */,
+				DC193B8E01FF4A61441ABF13 /* NewLessonViewController.swift */,
 				2CFC5ABD228AF0B400B5248A /* NewLessonViewModel.swift */,
+				2C7F782622708A520089FDD7 /* Views */,
 			);
 			path = NewLesson;
 			sourceTree = "<group>";
@@ -2353,6 +2370,7 @@
 				087585AC1FB51D590047A269 /* CourseList */,
 				2C4BE7DC221325E800AEAC34 /* CourseReview */,
 				08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */,
+				2CD6E257234E0A0C00F49303 /* EmailAddress */,
 				2C5E907E2333CF2700288BE3 /* LastCodeLanguage */,
 				0846B1001EDDECE600D64D77 /* LastStep */,
 				0846B0FB1EDDECCC00D64D77 /* Lesson */,
@@ -2531,9 +2549,9 @@
 		08448FFD1F5CE13100D01940 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */,
 				08C02DB31F53201A00F848F5 /* ProfilePresenter.swift */,
 				08CBA34A1F57734900302154 /* ProfileViewController.swift */,
-				62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -2736,6 +2754,7 @@
 				080CE1421E955D300089A27F /* CoursesAPI.swift */,
 				08AEC3A21CCA69C700FFF29E /* DevicesAPI.swift */,
 				0800B81E1D06FDE4006C987E /* DiscussionProxiesAPI.swift */,
+				2CD6E255234E042800F49303 /* EmailAddressesAPI.swift */,
 				2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */,
 				084F7AAC1E775A210088368A /* LastStepsAPI.swift */,
 				080CE1481E9562430089A27F /* LessonsAPI.swift */,
@@ -3212,13 +3231,14 @@
 		08CBA3091F57558200302154 /* MenuBlockCells */ = {
 			isa = PBXGroup;
 			children = (
+				08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */,
+				2C0B42BE234CD13100B03EA1 /* CustomMenuBlock */,
 				2CE8390320C7EF5A00FE3672 /* GenericContent */,
 				2CB2393B20BB455200F0FE3B /* GenericExpandableContent */,
+				08DF78C71F5EF03B00AEEA85 /* Header */,
 				2C92669420B5C78900525AFC /* PlaceholderCell */,
-				08DF78BB1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift */,
 				08DF78C41F5EF02300AEEA85 /* Switch */,
 				08DF78C51F5EF02900AEEA85 /* Transition */,
-				08DF78C71F5EF03B00AEEA85 /* Header */,
 			);
 			name = MenuBlockCells;
 			sourceTree = "<group>";
@@ -3226,11 +3246,11 @@
 		08CBA3491F57574F00302154 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				08CBA3091F57558200302154 /* MenuBlockCells */,
-				080217791F54E91300186245 /* MenuBlocks.swift */,
 				080217821F55B1B200186245 /* Menu.swift */,
-				08CBA2F71F573F6900302154 /* MenuViewController.swift */,
+				080217791F54E91300186245 /* MenuBlocks.swift */,
 				08CBA3001F57459800302154 /* MenuUIManager.swift */,
+				08CBA2F71F573F6900302154 /* MenuViewController.swift */,
+				08CBA3091F57558200302154 /* MenuBlockCells */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -3685,6 +3705,15 @@
 			path = CodeDetails;
 			sourceTree = "<group>";
 		};
+		2C0B42BE234CD13100B03EA1 /* CustomMenuBlock */ = {
+			isa = PBXGroup;
+			children = (
+				2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */,
+				2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */,
+			);
+			name = CustomMenuBlock;
+			sourceTree = "<group>";
+		};
 		2C10AFE8217E04780019966D /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -4103,8 +4132,8 @@
 		2C7F782622708A520089FDD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2C7F782722708A5B0089FDD7 /* TabBar */,
 				2C7F782A2270B0910089FDD7 /* LessonInfoTooltipView.swift */,
+				2C7F782722708A5B0089FDD7 /* TabBar */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4351,9 +4380,9 @@
 			isa = PBXGroup;
 			children = (
 				2CB5B1582292E0D700D7F706 /* StepControlsView.swift */,
+				2CB5B15C22941D7000D7F706 /* StepDiscussionsButton.swift */,
 				2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */,
 				2CB5B1602297F2FA00D7F706 /* StepVideoPreviewView.swift */,
-				2CB5B15C22941D7000D7F706 /* StepDiscussionsButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4521,6 +4550,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		2CD6E257234E0A0C00F49303 /* EmailAddress */ = {
+			isa = PBXGroup;
+			children = (
+				2CD6E258234E0A1B00F49303 /* EmailAddress.swift */,
+				2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */,
+			);
+			name = EmailAddress;
+			sourceTree = "<group>";
+		};
 		2CD8463D1F25F7AF00E8153C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -4656,9 +4694,9 @@
 		62E980240A62513E09A19558 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				62E98270EC373087E18B51FE /* CourseInfoTabSyllabusTableViewCell.swift */,
 				62E98D09B94937AEC4A61D2E /* CourseInfoTabSyllabusCellStatsView.swift */,
 				62E983435E92496A3D77C76D /* CourseInfoTabSyllabusCellView.swift */,
+				62E98270EC373087E18B51FE /* CourseInfoTabSyllabusTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -4666,10 +4704,10 @@
 		62E98036A6E4F917B698F61D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62E986B709FFB21979B63911 /* CourseInfoView.swift */,
-				62E9871898355B25F3A39E7F /* CourseInfoStatsView.swift */,
 				62E983F6DD0E4790770F88EE /* CourseInfoBlurredBackgroundView.swift */,
 				62E984C544A44FBC7ABF9BF9 /* CourseInfoHeaderView.swift */,
+				62E9871898355B25F3A39E7F /* CourseInfoStatsView.swift */,
+				62E986B709FFB21979B63911 /* CourseInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4681,6 +4719,7 @@
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
 				62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */,
 				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
+				2CD6E25C234E388B00F49303 /* EmailAddressesPersistenceService.swift */,
 				62E985EA7905BE734BB77FBD /* LessonsPersistenceService.swift */,
 				62E9803E0D93EBBD439FFEDD /* ProgressesPersistenceService.swift */,
 				62E9867D3CF2B4F6A52B2B4A /* SectionsPersistenceService.swift */,
@@ -4694,9 +4733,9 @@
 		62E980F27D1FEE6BF7AA5059 /* CourseInfoSubmodules */ = {
 			isa = PBXGroup;
 			children = (
+				62E98DC5925BF32752AA4C44 /* CourseInfoTabInfo */,
 				62E988C309A98CFC604AA062 /* CourseInfoTabReviews */,
 				62E988F9B9BD87DE7831AF70 /* CourseInfoTabSyllabus */,
-				62E98DC5925BF32752AA4C44 /* CourseInfoTabInfo */,
 			);
 			path = CourseInfoSubmodules;
 			sourceTree = "<group>";
@@ -4797,6 +4836,7 @@
 				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
 				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
 				62E983E08309F9779A0691DC /* DiscussionProxiesNetworkService.swift */,
+				2CD6E25E234E392900F49303 /* EmailAddressesNetworkService.swift */,
 				62E98B1D8C5FD917DC6E6053 /* LessonsNetworkService.swift */,
 				2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */,
 				62E989FAD86F79364CC2EF89 /* ProgressesNetworkService.swift */,
@@ -4824,11 +4864,11 @@
 			isa = PBXGroup;
 			children = (
 				62E98495AD977008DC9F856A /* HomeAssembly.swift */,
-				62E987C58F9A26F4871513CD /* HomeViewController.swift */,
+				62E98AD841627CB2FA2005DB /* HomeDataFlow.swift */,
 				62E98E764FA74952681A970D /* HomeInteractor.swift */,
 				62E98B616FDB1CA4B394C0D8 /* HomePresenter.swift */,
-				62E98AD841627CB2FA2005DB /* HomeDataFlow.swift */,
 				62E98CB40E4B44EA17C076F1 /* HomeProvider.swift */,
+				62E987C58F9A26F4871513CD /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -4836,11 +4876,11 @@
 		62E98567757A6ECCEF33933F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62E98B5DA62569080D5455A5 /* Section */,
-				62E980240A62513E09A19558 /* Cell */,
-				62E987BA4B4676C52310C7A0 /* Header */,
 				62E9826CE6F076640792E2C0 /* CourseInfoTabSyllabusTableViewDataSource.swift */,
 				62E9843E4F41BAF86C14534E /* CourseInfoTabSyllabusView.swift */,
+				62E980240A62513E09A19558 /* Cell */,
+				62E987BA4B4676C52310C7A0 /* Header */,
+				62E98B5DA62569080D5455A5 /* Section */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4870,9 +4910,9 @@
 		62E985D2239BE433E5BF7845 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
-				62E984CF1978CFF3511E7C3F /* CourseListsCollectionProvider.swift */,
-				62E98298A41D6042259064E7 /* CourseListsCollectionPersistenceService.swift */,
 				62E9863DF0F0B9A7C4D9E0D0 /* CourseListsCollectionNetworkService.swift */,
+				62E98298A41D6042259064E7 /* CourseListsCollectionPersistenceService.swift */,
+				62E984CF1978CFF3511E7C3F /* CourseListsCollectionProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -4911,14 +4951,14 @@
 			isa = PBXGroup;
 			children = (
 				62E983E3B5A17908BFD6C755 /* TagsAssembly.swift */,
-				62E9885F4EEC17D8303345D7 /* TagsViewController.swift */,
-				62E984954DECC6ECEF63441A /* TagsInteractor.swift */,
-				62E98A4EE5612477F7881AA5 /* TagsPresenter.swift */,
 				62E9880C1035A122BD4BE0C6 /* TagsDataFlow.swift */,
-				62E983D4436B935F9B27AF98 /* TagsView.swift */,
-				62E98994947302308B5E0881 /* TagsProvider.swift */,
-				62E98B6E416C7960F131F3FF /* TagViewModel.swift */,
+				62E984954DECC6ECEF63441A /* TagsInteractor.swift */,
 				62E988A6C464257A349C2AE5 /* TagsOutputProtocol.swift */,
+				62E98A4EE5612477F7881AA5 /* TagsPresenter.swift */,
+				62E98994947302308B5E0881 /* TagsProvider.swift */,
+				62E983D4436B935F9B27AF98 /* TagsView.swift */,
+				62E9885F4EEC17D8303345D7 /* TagsViewController.swift */,
+				62E98B6E416C7960F131F3FF /* TagViewModel.swift */,
 			);
 			path = Tags;
 			sourceTree = "<group>";
@@ -4957,15 +4997,15 @@
 		62E9873D5ADC1E53BE3B05F3 /* CourseListsCollection */ = {
 			isa = PBXGroup;
 			children = (
+				62E9834549BB3BFCE234A888 /* CourseListCollectionOutputProtocol.swift */,
 				62E982F86EAE17AD1B857D39 /* CourseListsCollectionAssembly.swift */,
-				62E987D1646077E7D1A81FF4 /* CourseListsCollectionViewController.swift */,
+				62E980B02F97B2A1556FA610 /* CourseListsCollectionDataFlow.swift */,
 				62E987A174F6DEE204CE73F4 /* CourseListsCollectionInteractor.swift */,
 				62E98E4AA6424175A89137AC /* CourseListsCollectionPresenter.swift */,
-				62E980B02F97B2A1556FA610 /* CourseListsCollectionDataFlow.swift */,
-				62E98AE8C79B8D14997FF56B /* Views */,
-				62E985D2239BE433E5BF7845 /* Provider */,
-				62E9834549BB3BFCE234A888 /* CourseListCollectionOutputProtocol.swift */,
+				62E987D1646077E7D1A81FF4 /* CourseListsCollectionViewController.swift */,
 				62E98B7D06FC60800FBAD0F4 /* CourseListsCollectionViewModel.swift */,
+				62E985D2239BE433E5BF7845 /* Provider */,
+				62E98AE8C79B8D14997FF56B /* Views */,
 			);
 			path = CourseListsCollection;
 			sourceTree = "<group>";
@@ -4982,14 +5022,14 @@
 			isa = PBXGroup;
 			children = (
 				62E98C88E5E12D98362C9B43 /* ContinueCourseAssembly.swift */,
-				62E9885AB7CB8987671B8B8E /* ContinueCourseViewController.swift */,
-				62E9802ED57E0E267BEE3526 /* ContinueCourseInteractor.swift */,
-				62E982ADA81596DDED794721 /* ContinueCoursePresenter.swift */,
 				62E983C0D92833ECC836D369 /* ContinueCourseDataFlow.swift */,
-				62E98E12DFEC7C30C4EC32BA /* ContinueCourseView.swift */,
-				62E988CA1679C4856F1FB074 /* ContinueCourseProvider.swift */,
-				62E9838EA380A6661505EEFF /* ContinueCourseViewModel.swift */,
+				62E9802ED57E0E267BEE3526 /* ContinueCourseInteractor.swift */,
 				62E982A16F209817B2EDF2A5 /* ContinueCourseOutputProtocol.swift */,
+				62E982ADA81596DDED794721 /* ContinueCoursePresenter.swift */,
+				62E988CA1679C4856F1FB074 /* ContinueCourseProvider.swift */,
+				62E98E12DFEC7C30C4EC32BA /* ContinueCourseView.swift */,
+				62E9885AB7CB8987671B8B8E /* ContinueCourseViewController.swift */,
+				62E9838EA380A6661505EEFF /* ContinueCourseViewModel.swift */,
 			);
 			path = ContinueCourse;
 			sourceTree = "<group>";
@@ -4998,14 +5038,14 @@
 			isa = PBXGroup;
 			children = (
 				62E98BDD9EAD60B14A684687 /* CourseListAssembly.swift */,
-				62E9823CEE80A194D6C304F4 /* CourseListViewController.swift */,
+				62E98F88CE9663F2A109437E /* CourseListDataFlow.swift */,
 				62E980064090DA98D603E600 /* CourseListInteractor.swift */,
 				62E98B20B4F4F542BA35C1B6 /* CourseListPresenter.swift */,
-				62E98F88CE9663F2A109437E /* CourseListDataFlow.swift */,
+				62E9823CEE80A194D6C304F4 /* CourseListViewController.swift */,
+				62E98DA10600D9009297CFBA /* CourseWidgetViewModel.swift */,
+				62E98A4667683F3AE46943CD /* InputOutput */,
 				62E98FCF9636B8A7D68F1D17 /* Provider */,
 				62E98B8B9FE3CD859015B60C /* Views */,
-				62E98A4667683F3AE46943CD /* InputOutput */,
-				62E98DA10600D9009297CFBA /* CourseWidgetViewModel.swift */,
 			);
 			path = CourseList;
 			sourceTree = "<group>";
@@ -5038,15 +5078,15 @@
 		62E988F9B9BD87DE7831AF70 /* CourseInfoTabSyllabus */ = {
 			isa = PBXGroup;
 			children = (
-				62E98567757A6ECCEF33933F /* Views */,
 				62E98D42EB07C699B6521ECA /* CourseInfoTabSyllabusAssembly.swift */,
-				62E98202B63DCB3B6908745E /* CourseInfoTabSyllabusViewController.swift */,
+				62E98A4EF921D387E9686164 /* CourseInfoTabSyllabusDataFlow.swift */,
 				62E98FB0FB1D292E786D3B0D /* CourseInfoTabSyllabusInteractor.swift */,
 				62E98A7DB2CCE55D3380256D /* CourseInfoTabSyllabusPresenter.swift */,
-				62E98A4EF921D387E9686164 /* CourseInfoTabSyllabusDataFlow.swift */,
-				62E9898E1963FD3905B69BCE /* Provider */,
-				62E9829079EC9C0DB1874CDF /* InputOutput */,
+				62E98202B63DCB3B6908745E /* CourseInfoTabSyllabusViewController.swift */,
 				62E98A9BC67D7426CE1117E5 /* CourseInfoTabSyllabusViewModel.swift */,
+				62E9829079EC9C0DB1874CDF /* InputOutput */,
+				62E9898E1963FD3905B69BCE /* Provider */,
+				62E98567757A6ECCEF33933F /* Views */,
 			);
 			path = CourseInfoTabSyllabus;
 			sourceTree = "<group>";
@@ -5054,9 +5094,9 @@
 		62E98975086503C4516ECDE1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
-				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
 				62E98E991593286E1C15B7E3 /* SettingsInputTableViewCell.swift */,
+				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
+				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -5066,6 +5106,7 @@
 			children = (
 				62E988014EB49A8A04A433C5 /* CourseInfoTabSyllabusProvider.swift */,
 				62E98C1B35D7FBAC0ABCEAFD /* SyllabusDownloadsInteractionService.swift */,
+				2CB1401D2354A3E900452AA2 /* SyllabusDownloadsService.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -5073,11 +5114,11 @@
 		62E989DBE9CC260C7D87D972 /* BaseExplore */ = {
 			isa = PBXGroup;
 			children = (
-				62E989B5BA842691CE1D7247 /* BaseExploreViewController.swift */,
+				62E982BFC874A67BEB0019DA /* BaseExploreDataFlow.swift */,
 				62E98BE02DDD45341BA76AC6 /* BaseExploreInteractor.swift */,
 				62E984C3F4EE78D2D22FF7BF /* BaseExplorePresenter.swift */,
-				62E982BFC874A67BEB0019DA /* BaseExploreDataFlow.swift */,
 				62E98C4D6C3DA666F573529F /* BaseExploreView.swift */,
+				62E989B5BA842691CE1D7247 /* BaseExploreViewController.swift */,
 			);
 			path = BaseExplore;
 			sourceTree = "<group>";
@@ -5126,10 +5167,10 @@
 		62E98AD1A0A46256AE28CD6C /* ExploreSubmodules */ = {
 			isa = PBXGroup;
 			children = (
+				62E98D002930A3E489A3BCD8 /* ContentLanguageSwitch */,
 				62E987BC8E8183CAD2D2C7DB /* ContinueCourse */,
 				62E9873D5ADC1E53BE3B05F3 /* CourseListsCollection */,
 				62E986B7B53DCB972149272E /* Tags */,
-				62E98D002930A3E489A3BCD8 /* ContentLanguageSwitch */,
 			);
 			path = ExploreSubmodules;
 			sourceTree = "<group>";
@@ -5137,10 +5178,10 @@
 		62E98AE8C79B8D14997FF56B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				62E98BED17F6F15334BE26B8 /* CourseListsCollectionView.swift */,
 				62E980B9E4264AD2A1188B9F /* ExploreCoursesCollectionHeaderView.swift */,
 				62E98E3646251D7E474D55D9 /* GradientCoursesPlaceholderView.swift */,
 				62E98344E9FBB0C209AB13BB /* GradientCoursesPlaceholderViewFactory.swift */,
-				62E98BED17F6F15334BE26B8 /* CourseListsCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5158,13 +5199,13 @@
 			isa = PBXGroup;
 			children = (
 				62E98D5BDF91D64BACBA991A /* CourseListCollectionViewCell.swift */,
-				62E98DCABA63F2DB37D83ECB /* Layouts */,
-				62E98BEFF76B93DDAF02BD09 /* CourseListCollectionViewDelegate.swift */,
-				62E98B191638D1B97FFABB15 /* CourseListViewDelegate.swift */,
-				62E986C27C3371C7E8B38566 /* CourseListColorMode.swift */,
 				62E98AB4EECCECC846538906 /* CourseListCollectionViewDataSource.swift */,
-				62E98A4383B1042D7C8F391E /* Widget */,
+				62E98BEFF76B93DDAF02BD09 /* CourseListCollectionViewDelegate.swift */,
+				62E986C27C3371C7E8B38566 /* CourseListColorMode.swift */,
 				62E98DF4B9BCD88D6576ABFA /* CourseListView.swift */,
+				62E98B191638D1B97FFABB15 /* CourseListViewDelegate.swift */,
+				62E98DCABA63F2DB37D83ECB /* Layouts */,
+				62E98A4383B1042D7C8F391E /* Widget */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5172,13 +5213,13 @@
 		62E98C473245FCD11E5CAFD7 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
+				62E981F1C2013A08AB3104DA /* ContentLanguageSwitchAvailabilityService.swift */,
 				62E98F1A16F62DDFC041244F /* ExploreAssembly.swift */,
-				62E986DA4B69983947DA9687 /* ExploreViewController.swift */,
+				62E98A07EBE3FE55ABFF330F /* ExploreDataFlow.swift */,
 				62E98084AC5ED9D4F6F429D9 /* ExploreInteractor.swift */,
 				62E987A1D9C8D5D8455C86DD /* ExplorePresenter.swift */,
-				62E98A07EBE3FE55ABFF330F /* ExploreDataFlow.swift */,
+				62E986DA4B69983947DA9687 /* ExploreViewController.swift */,
 				62E98C5100BBAFF1E29EA8E7 /* View */,
-				62E981F1C2013A08AB3104DA /* ContentLanguageSwitchAvailabilityService.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -5188,8 +5229,8 @@
 			children = (
 				62E98CCD8D3A65826FD76F26 /* CourseListContainerViewFactory.swift */,
 				62E987A905FB8549F2072DF4 /* ExploreBlockHeaderView.swift */,
-				62E9846ED8A00A1041FFB84E /* ExploreSearchBar.swift */,
 				62E98D95D858F6D7A5D25EC4 /* ExploreBlockPlaceholderView.swift */,
+				62E9846ED8A00A1041FFB84E /* ExploreSearchBar.swift */,
 				62E980A41B871F8FD6D3A412 /* ExploreStoriesContainerView.swift */,
 			);
 			path = View;
@@ -5208,13 +5249,13 @@
 			isa = PBXGroup;
 			children = (
 				62E98744A19E3CEB75D70CF8 /* ContentLanguageSwitchAssembly.swift */,
-				62E98F1B6FB3278C6A2DEB27 /* ContentLanguageSwitchViewController.swift */,
+				62E9891451C8B8E029A571D9 /* ContentLanguageSwitchDataFlow.swift */,
 				62E981805E34DA181141071B /* ContentLanguageSwitchInteractor.swift */,
 				62E987BDC512F1B1624D611A /* ContentLanguageSwitchPresenter.swift */,
-				62E9891451C8B8E029A571D9 /* ContentLanguageSwitchDataFlow.swift */,
-				62E98DDC6AE377959777329B /* Views */,
 				62E9833273DAC6E8CD71C4E3 /* ContentLanguageSwitchProvider.swift */,
+				62E98F1B6FB3278C6A2DEB27 /* ContentLanguageSwitchViewController.swift */,
 				62E989D3A92567DBE245BAA8 /* ContentLanguageSwitchViewModel.swift */,
+				62E98DDC6AE377959777329B /* Views */,
 			);
 			path = ContentLanguageSwitch;
 			sourceTree = "<group>";
@@ -5222,15 +5263,15 @@
 		62E98D9FCDB5F961C3803BEB /* CourseInfo */ = {
 			isa = PBXGroup;
 			children = (
-				62E98036A6E4F917B698F61D /* Views */,
 				62E98694D39D242F1DDBA5FD /* CourseInfoAssembly.swift */,
-				62E98A86AF422B9248692C03 /* CourseInfoViewController.swift */,
+				62E982F96FE46CDC2F032E31 /* CourseInfoDataFlow.swift */,
+				62E986EB52A77A7E71C5619C /* CourseInfoHeaderViewModel.swift */,
 				62E98C48C0EF20E670405D77 /* CourseInfoInteractor.swift */,
 				62E980A100038D961261E476 /* CourseInfoPresenter.swift */,
-				62E982F96FE46CDC2F032E31 /* CourseInfoDataFlow.swift */,
-				62E985F1D09759D7FD968637 /* CourseInfoSubmoduleProtocol.swift */,
 				62E98BC1EFE727BFEDA068F8 /* CourseInfoProvider.swift */,
-				62E986EB52A77A7E71C5619C /* CourseInfoHeaderViewModel.swift */,
+				62E985F1D09759D7FD968637 /* CourseInfoSubmoduleProtocol.swift */,
+				62E98A86AF422B9248692C03 /* CourseInfoViewController.swift */,
+				62E98036A6E4F917B698F61D /* Views */,
 			);
 			path = CourseInfo;
 			sourceTree = "<group>";
@@ -5264,8 +5305,8 @@
 		62E98DDC6AE377959777329B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62E98A44DBD83A8C1A62B71B /* ContentLanguageSwitchView.swift */,
 				62E9806A771FEF01F91F6F5D /* ContentLanguageSwitchButton.swift */,
+				62E98A44DBD83A8C1A62B71B /* ContentLanguageSwitchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5274,11 +5315,11 @@
 			isa = PBXGroup;
 			children = (
 				62E98E9650A31A4D36C23C77 /* FullscreenCourseListAssembly.swift */,
-				62E9819721AE70E0BCAD1375 /* FullscreenCourseListViewController.swift */,
+				62E989C22FA2D21C300C7CDF /* FullscreenCourseListDataFlow.swift */,
 				62E98F11087660208A282328 /* FullscreenCourseListInteractor.swift */,
 				62E98180244B0ED6E9EDA581 /* FullscreenCourseListPresenter.swift */,
-				62E989C22FA2D21C300C7CDF /* FullscreenCourseListDataFlow.swift */,
 				62E981A02A8E071C5BA610E7 /* FullscreenCourseListView.swift */,
+				62E9819721AE70E0BCAD1375 /* FullscreenCourseListViewController.swift */,
 			);
 			path = FullscreenCourseList;
 			sourceTree = "<group>";
@@ -5335,8 +5376,8 @@
 		62E98F631F62327314F62817 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62E9869E7E423007185DD2AA /* Blocks */,
 				62E985D0AD28CB5AD1793190 /* CourseInfoTabInfoView.swift */,
+				62E9869E7E423007185DD2AA /* Blocks */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5352,10 +5393,10 @@
 		62E98FCF9636B8A7D68F1D17 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
-				62E98D68A8BEB457961A32E4 /* CourseListProvider.swift */,
-				62E98E473D7A45AB25B64AA5 /* CourseListPersistenceService.swift */,
 				62E98104AE84A217F4483F80 /* CourseListNetworkService.swift */,
+				62E98E473D7A45AB25B64AA5 /* CourseListPersistenceService.swift */,
 				62E98B46D64F254F0A835EEB /* CourseListPersistenceStorage.swift */,
+				62E98D68A8BEB457961A32E4 /* CourseListProvider.swift */,
 				62E986B618D4274BD837ECB7 /* CourseListTypes.swift */,
 			);
 			path = Provider;
@@ -5391,12 +5432,12 @@
 			isa = PBXGroup;
 			children = (
 				4A4D51541BF7AE1FCD2865C0 /* ProfileEditAssembly.swift */,
-				B304C7487F9B47AE32F4190D /* ProfileEditViewController.swift */,
+				4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */,
 				6E5BA4688D7B46C416231BD9 /* ProfileEditInteractor.swift */,
 				BD0FAD2AD12244A99DAD7BE6 /* ProfileEditPresenter.swift */,
-				4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */,
 				B871095B7511E41F19281EE9 /* ProfileEditProvider.swift */,
 				831CC7AB7FC20E336DB6813F /* ProfileEditView.swift */,
+				B304C7487F9B47AE32F4190D /* ProfileEditViewController.swift */,
 				2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */,
 			);
 			path = ProfileEdit;
@@ -5516,16 +5557,16 @@
 		FE8AFFAEB370EB0581BEA460 /* NewStep */ = {
 			isa = PBXGroup;
 			children = (
-				2CB5B1572292E0C200D7F706 /* Views */,
 				8D1AB142BF62815DF8939656 /* NewStepAssembly.swift */,
-				88372B078904014335CC5A4F /* NewStepViewController.swift */,
-				84763D78E2F327874DA51576 /* NewStepInteractor.swift */,
-				2C48D5FD228ECF3D00739477 /* NewStepViewModel.swift */,
-				DA4737058E519D801DAB2131 /* NewStepPresenter.swift */,
 				49034C40838BCF58896D0118 /* NewStepDataFlow.swift */,
+				84763D78E2F327874DA51576 /* NewStepInteractor.swift */,
+				DA4737058E519D801DAB2131 /* NewStepPresenter.swift */,
 				362684BA69196E87B5919671 /* NewStepProvider.swift */,
 				E3FE676A699B1C33D4D0F5CC /* NewStepView.swift */,
+				88372B078904014335CC5A4F /* NewStepViewController.swift */,
+				2C48D5FD228ECF3D00739477 /* NewStepViewModel.swift */,
 				C029726DE3288A13E774C8C3 /* InputOutput */,
+				2CB5B1572292E0C200D7F706 /* Views */,
 			);
 			path = NewStep;
 			sourceTree = "<group>";
@@ -5728,6 +5769,7 @@
 				08DDF90D20A9B2CC004ECC11 /* PersonalDeadlinesSuggestionWidgetView.xib in Resources */,
 				08DF78951F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.xib in Resources */,
 				2C7FEE751FDAF9D600B2B4F1 /* onboardingAnimation1.json in Resources */,
+				2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */,
 				2CD99DD722DCE4D800628224 /* overlay_simple.png in Resources */,
 				08484F0B211AF4320006266F /* StoryViewController.xib in Resources */,
 				08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */,
@@ -5898,7 +5940,6 @@
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
@@ -5914,14 +5955,11 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
-				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
@@ -5936,6 +5974,7 @@
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk/VK_ios_sdk.framework",
 				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetricaCrashes.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
@@ -5953,7 +5992,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutoInsetter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Branch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
@@ -5969,14 +6007,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
@@ -5991,6 +6026,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetricaCrashes.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
@@ -6018,7 +6054,6 @@
 				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/CRToast/CRToast.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
@@ -6034,14 +6069,11 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
-				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/RFKeyboardToolbar/RFKeyboardToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-20/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/STRegex/Regex.framework",
@@ -6056,6 +6088,7 @@
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk/VK_ios_sdk.framework",
 				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetrica.framework",
+				"${PODS_ROOT}/YandexMobileMetrica/dynamic/YandexMobileMetricaCrashes.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
@@ -6069,7 +6102,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutoInsetter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Branch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRToast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
@@ -6085,14 +6117,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RFKeyboardToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
@@ -6107,6 +6136,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetricaCrashes.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
@@ -6322,6 +6352,7 @@
 				08DB8CB91D0BECF000A6D079 /* DiscussionTableViewCell.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
+				2CD6E256234E042800F49303 /* EmailAddressesAPI.swift in Sources */,
 				2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */,
 				08421BCB21764FC400E8A81B /* ActiveSplitTestsContainer.swift in Sources */,
 				2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */,
@@ -6347,6 +6378,7 @@
 				08E59ABF1E433057008EEECE /* FillBlanksDataset.swift in Sources */,
 				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
+				2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */,
 				2C1B75B322CDEEDE00262707 /* DiscussionsPresenter.swift in Sources */,
 				2C8AD7622204932300C9C089 /* CourseSubscriptionManager.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
@@ -6731,6 +6763,7 @@
 				2C53DFFB22DDDBFD0084BA2B /* NewCodeQuizViewController.swift in Sources */,
 				62E98BCFF2B85E440D0B23E8 /* CourseInfoTabReviewsViewController.swift in Sources */,
 				62E987367E4233CE076E5E04 /* CourseInfoTabReviewsInteractor.swift in Sources */,
+				2CD6E259234E0A1B00F49303 /* EmailAddress.swift in Sources */,
 				62E989DBD26BECC245F05848 /* CourseInfoTabReviewsPresenter.swift in Sources */,
 				2C6BBBBD22B265B300889A45 /* AttemptsNetworkService.swift in Sources */,
 				62E98C3AD2F1891521387578 /* CourseInfoTabReviewsDataFlow.swift in Sources */,
@@ -6793,6 +6826,7 @@
 				62E987F6149525BC5F7CFDE7 /* CourseListColorMode.swift in Sources */,
 				62E98FE7A0B080FA2DA7D84D /* CourseListCollectionViewDataSource.swift in Sources */,
 				62E980F942A9A8CA7B1ED756 /* CourseWidgetButton.swift in Sources */,
+				2CD6E25F234E392900F49303 /* EmailAddressesNetworkService.swift in Sources */,
 				62E9818F8226625FBA9760C9 /* CourseWidgetCoverView.swift in Sources */,
 				62E9843A0F8DE2BDECB071E1 /* CourseWidgetLabel.swift in Sources */,
 				62E98ECCD8B697DF80DDFE06 /* CourseWidgetStatsItemView.swift in Sources */,
@@ -6861,6 +6895,7 @@
 				62E985FFA36C4D5A3C0E63DD /* TagsAssembly.swift in Sources */,
 				62E989959BFCE8A398DA3F7B /* TagsViewController.swift in Sources */,
 				62E98AE6C786140C4661AD24 /* TagsInteractor.swift in Sources */,
+				2CB1401E2354A3E900452AA2 /* SyllabusDownloadsService.swift in Sources */,
 				2C20C86E22F999890052E9BF /* NewCodeQuizFullscreenProvider.swift in Sources */,
 				62E9888FE65E12533C2ECAE2 /* TagsPresenter.swift in Sources */,
 				62E9853ADFEFEF7344FE9DF1 /* TagsDataFlow.swift in Sources */,
@@ -6908,6 +6943,7 @@
 				62E98CFD78F78B8053639E86 /* CourseInfoTabInfoProvider.swift in Sources */,
 				62E982769F779FD011D51705 /* CourseInfoTabInfoViewModel.swift in Sources */,
 				62E983408FE8FBDBC232AD18 /* ContinueCourseProvider.swift in Sources */,
+				2CD6E25D234E388B00F49303 /* EmailAddressesPersistenceService.swift in Sources */,
 				62E981EE3D51AD0C24A49687 /* ContinueCourseViewModel.swift in Sources */,
 				62E98F70C242A21FE473B4FC /* ContinueCourseOutputProtocol.swift in Sources */,
 				62E98F1F660D5053CBBB59A3 /* CourseListCollectionOutputProtocol.swift in Sources */,
@@ -6940,6 +6976,7 @@
 				62E98E92833D3A0649EBA590 /* StyledNavigationController.swift in Sources */,
 				0E600BAD134430EDC4B7B683 /* ProfileEditAssembly.swift in Sources */,
 				582E484FCF140403A5F7739B /* ProfileEditViewController.swift in Sources */,
+				2CD6E25B234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift in Sources */,
 				19CEA9C063AE5CD5A682CFA9 /* ProfileEditInteractor.swift in Sources */,
 				C5C3CEDDFA57BFF4EDF0BBA0 /* ProfileEditPresenter.swift in Sources */,
 				34577A9694176BFA7CAC950C /* ProfileEditDataFlow.swift in Sources */,
@@ -7394,7 +7431,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 152;
+				CURRENT_PROJECT_VERSION = 153;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -7424,7 +7461,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 152;
+				CURRENT_PROJECT_VERSION = 153;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -7486,6 +7523,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */,
 				2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */,
 				2CA1EDAC231FA770003F8576 /* Model_block_remove_animation.xcdatamodel */,
 				2C8345D123156D5E00E6CE91 /* Model_course_can_continue.xcdatamodel */,
@@ -7528,7 +7566,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */;
+			currentVersion = 2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

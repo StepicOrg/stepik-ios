@@ -10,6 +10,7 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
     case description
     case pinsMap
     case achievements
+    case userID(id: User.IdType)
 
     init?(rawValue: RawValue) {
         fatalError("init with raw value has not been implemented")
@@ -31,6 +32,8 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
             return "pinsMap"
         case .achievements:
             return "achievements"
+        case .userID(let id):
+            return "userID-\(id)"
         }
     }
 
