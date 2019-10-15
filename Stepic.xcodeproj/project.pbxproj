@@ -624,6 +624,7 @@
 		2CAB5C7D22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */; };
 		2CAD8B9B217096AB003F420B /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */; };
 		2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */; };
+		2CB1401E2354A3E900452AA2 /* SyllabusDownloadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1401D2354A3E900452AA2 /* SyllabusDownloadsService.swift */; };
 		2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */; };
 		2CB2393F20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2393D20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib */; };
 		2CB2394120BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2394020BB4EFD00F0FE3B /* ProfileDescriptionContentView.xib */; };
@@ -1742,6 +1743,7 @@
 		2CAB5C7C22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenViewModel.swift; sourceTree = "<group>"; };
 		2CAD8B9A217096AB003F420B /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		2CAD8B9C2170CDB4003F420B /* LocalNotificationContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationContentProvider.swift; sourceTree = "<group>"; };
+		2CB1401D2354A3E900452AA2 /* SyllabusDownloadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusDownloadsService.swift; sourceTree = "<group>"; };
 		2CB190781F2A17E800BD9508 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Stepic-fydekjxzcjwzgdealqtqdnjhtajm/Build/Products/Debug-iphonesimulator/Charts/Charts.framework"; sourceTree = "<group>"; };
 		2CB2393C20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentExpandableMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2CB2393D20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentExpandableMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
@@ -5104,6 +5106,7 @@
 			children = (
 				62E988014EB49A8A04A433C5 /* CourseInfoTabSyllabusProvider.swift */,
 				62E98C1B35D7FBAC0ABCEAFD /* SyllabusDownloadsInteractionService.swift */,
+				2CB1401D2354A3E900452AA2 /* SyllabusDownloadsService.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -6892,6 +6895,7 @@
 				62E985FFA36C4D5A3C0E63DD /* TagsAssembly.swift in Sources */,
 				62E989959BFCE8A398DA3F7B /* TagsViewController.swift in Sources */,
 				62E98AE6C786140C4661AD24 /* TagsInteractor.swift in Sources */,
+				2CB1401E2354A3E900452AA2 /* SyllabusDownloadsService.swift in Sources */,
 				2C20C86E22F999890052E9BF /* NewCodeQuizFullscreenProvider.swift in Sources */,
 				62E9888FE65E12533C2ECAE2 /* TagsPresenter.swift in Sources */,
 				62E9853ADFEFEF7344FE9DF1 /* TagsDataFlow.swift in Sources */,
