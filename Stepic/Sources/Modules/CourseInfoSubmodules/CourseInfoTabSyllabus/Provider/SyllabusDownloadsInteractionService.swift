@@ -283,7 +283,7 @@ extension SyllabusDownloadsInteractionService: DownloadsTreeNodeDelegate {
     func downloadsTreeNodeDidUpdateState(_ downloadsTreeNode: DownloadsTreeNode) {
         print(
             "syllabus downloads interaction service: reports new state for node: "
-            + "source = \(downloadsTreeNode.source.description), state = \(downloadsTreeNode.state)"
+                + "source = \(downloadsTreeNode.source.description), state = \(downloadsTreeNode.state)"
         )
         switch downloadsTreeNode.state {
         case .downloading(let progress):
@@ -388,6 +388,7 @@ final class DownloadsTreeNode {
                 currentNode.updateAndReturnState()
             }
         }
+
         invalidate(node: self.parent)
     }
 
@@ -418,6 +419,7 @@ final class DownloadsTreeNode {
         // Add fake node `nil` node
         // TopologyEdge – edge in tree that contains sources
         typealias TopologyEdge = (from: SyllabusTreeNode.Source?, to: SyllabusTreeNode.Source)
+
         func getAllEdges(in tree: DownloadsTreeNode, parent: DownloadsTreeNode? = nil) -> [TopologyEdge] {
             return [(from: parent?.source, to: tree.source)]
                 + tree.children.map { getAllEdges(in: $0, parent: tree) }.reduce([], +)

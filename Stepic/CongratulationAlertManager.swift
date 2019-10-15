@@ -25,7 +25,7 @@ class CongratulationAlertManager: AlertManager {
     let presenter: Presentr = {
         let presenter = Presentr(presentationType: .dynamic(center: .center))
         presenter.backgroundOpacity = 0.0
-        presenter.dismissOnTap = false
+        presenter.backgroundTap = .noAction
         presenter.dismissAnimated = true
         presenter.dismissTransitionType = TransitionType.custom(CrossDissolveAnimation(options: .normal(duration: 0.4)))
         presenter.roundCorners = true

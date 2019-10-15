@@ -45,19 +45,19 @@ final class Section: NSManagedObject, IDFetchable {
 
     static func fetch(_ ids: [Int]) -> [Section] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
+        let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
+        request.predicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
 
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
-        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
-        do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Section] else {
-                return []
+        var sections = [Section]()
+        CoreDataHelper.instance.context.performAndWait {
+            do {
+                sections = try CoreDataHelper.instance.context.fetch(request) as? [Section] ?? []
+            } catch {
+                sections = []
             }
-            return results
-        } catch {
-            return []
         }
+
+        return sections
     }
 
     class func getSections(_ id: Int) throws -> [Section] {

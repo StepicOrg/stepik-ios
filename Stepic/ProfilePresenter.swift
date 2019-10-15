@@ -70,13 +70,7 @@ final class ProfilePresenter {
     private var didProfileAttach = false
 
     private static let selfUserMenu: [ProfileMenuBlock] = [
-        .infoHeader,
-        .notificationsSwitch(isOn: false),
-        .pinsMap,
-        .certificates,
-        .achievements,
-        .description,
-        .userID(id: -1)
+        .infoHeader, .notificationsSwitch(isOn: false), .pinsMap, .certificates, .achievements, .description
     ]
     private static let otherUserMenu: [ProfileMenuBlock] = [
         .infoHeader, .pinsMap, .certificates, .achievements, .description
@@ -171,13 +165,11 @@ final class ProfilePresenter {
                 if isNotificationOn {
                     blocks.insert(.notificationsTimeSelection, at: i + 1)
                 }
-            } else if case .userID(_) = blocks[i] {
-                if let userID = self.userSeed.userId {
-                    blocks[i] = ProfileMenuBlock.userID(id: userID)
-                } else {
-                    blocks.remove(at: i)
-                }
             }
+        }
+
+        if let userID = self.userSeed.userId {
+            blocks.append(ProfileMenuBlock.userID(id: userID))
         }
 
         return blocks

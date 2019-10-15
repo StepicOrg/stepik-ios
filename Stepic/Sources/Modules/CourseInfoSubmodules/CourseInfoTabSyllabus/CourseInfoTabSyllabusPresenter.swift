@@ -50,10 +50,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
 
                 let hasPlaceholderUnits = currentSectionUnitViewModels.contains(
                     where: { unit in
-                        if case .normal(_) = unit {
-                            return false
+                        if case .placeholder = unit {
+                            return true
                         }
-                        return true
+                        return false
                     }
                 )
 
