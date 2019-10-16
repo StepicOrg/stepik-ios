@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Vote: JSONSerializable {
+final class Vote: JSONSerializable {
     func update(json: JSON) {
         id = json["id"].stringValue
         if let v = json["value"].string {
@@ -24,7 +24,7 @@ class Vote: JSONSerializable {
         id = ""
     }
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         update(json: json)
     }

@@ -6,19 +6,34 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct ControllerHelper {
     static func getTopViewController() -> UIViewController? {
-        var topVC = UIApplication.shared.keyWindow?.rootViewController
-        while((topVC!.presentedViewController) != nil) {
-            topVC = topVC!.presentedViewController
+        var topViewController = UIApplication.shared.keyWindow?.rootViewController
+
+        while(topViewController?.presentedViewController != nil) {
+            topViewController = topViewController?.presentedViewController
         }
-        return topVC
+
+        return topViewController
     }
 
-    static func instantiateViewController(identifier id: String, storyboardName: String = "Main") -> UIViewController {
+    static func getAuthController() -> UIViewController {
+        guard let viewController = self.instantiateViewController(
+            identifier: "AuthNavigation",
+            storyboardName: "Auth"
+        ) as? AuthNavigationViewController else {
+            fatalError("Unable to initialize AuthNavigationViewController via storyboard")
+        }
+
+        return viewController
+    }
+
+    static func instantiateViewController(
+        identifier id: String,
+        storyboardName: String = "Main"
+    ) -> UIViewController {
         let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: id)
     }

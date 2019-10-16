@@ -9,7 +9,6 @@
 import UIKit
 
 class TapProxyView: UIView {
-
     var targetView: UIView?
 
     convenience init(targetView: UIView) {

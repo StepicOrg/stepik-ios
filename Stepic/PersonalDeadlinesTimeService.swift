@@ -36,7 +36,7 @@ final class PersonalDeadlinesTimeService: PersonalDeadlinesTimeServiceProtocol {
                     timeForSection[timeTuple.0] = timeTuple.1 * strongSelf.sectionTimeMultiplier
                 }
                 var sectionDeadlines: [SectionDeadline] = []
-                var previousDeadline: Date = Date()
+                var previousDeadline = Date()
                 for sectionId in course.sectionsArray {
                     guard let secondsToCompleteSection = timeForSection[sectionId] else {
                         seal.reject(DeadlineCountError.noSectionInfo)

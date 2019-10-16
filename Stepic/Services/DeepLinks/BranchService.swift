@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Branch
+import Foundation
 
 final class BranchService {
     private let deepLinkRoutingService: DeepLinkRoutingService

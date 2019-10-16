@@ -6,11 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class TextReply: NSObject, Reply {
-
+final class TextReply: NSObject, Reply {
     var text: String
 
     init(text: String) {
@@ -22,7 +21,7 @@ class TextReply: NSObject, Reply {
         super.init()
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return ["text": text]
     }
 }

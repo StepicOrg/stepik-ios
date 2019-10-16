@@ -52,7 +52,7 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
         var downloadedContentLength: Int64 = 0
 
         var canBeRestarted = false
-        var resumeDataAfterError: Data = Data(count: 0)
+        var resumeDataAfterError = Data(count: 0)
 
         init(task: DownloaderTaskProtocol, urlSessionTask: URLSessionDownloadTask) {
             self.task = task
@@ -486,7 +486,7 @@ extension Downloader.Cache {
                 Downloader.Cache.taskIDKey: taskInfo.task.id,
                 Downloader.Cache.urlTaskIDKey: urlTaskID,
                 Downloader.Cache.urlKey: taskInfo.task.url.absoluteString
-                ])
+            ])
         }
         defaults.set(data, forKey: key)
         // Write on disk immediately to prevent cache losing

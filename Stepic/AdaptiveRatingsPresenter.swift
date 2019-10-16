@@ -6,8 +6,8 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import PromiseKit
 
 protocol AdaptiveRatingsView: class {
@@ -28,7 +28,7 @@ struct ScoreboardViewData {
     let leaders: [RatingViewData]
 }
 
-class AdaptiveRatingsPresenter {
+final class AdaptiveRatingsPresenter {
     weak var view: AdaptiveRatingsView?
 
     fileprivate var ratingsAPI: AdaptiveRatingsAPI

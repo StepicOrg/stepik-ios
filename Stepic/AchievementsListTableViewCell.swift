@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AchievementsListTableViewCell: UITableViewCell {
+final class AchievementsListTableViewCell: UITableViewCell {
     @IBOutlet weak var badgeContainer: UIView!
     @IBOutlet weak var achievementName: UILabel!
     @IBOutlet weak var achievementDescription: UILabel!

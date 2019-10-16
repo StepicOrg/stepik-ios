@@ -6,11 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
-import SVProgressHUD
-import IQKeyboardManagerSwift
-import TTTAttributedLabel
 import Atributika
+import IQKeyboardManagerSwift
+import SVProgressHUD
+import TTTAttributedLabel
+import UIKit
 
 extension RegistrationViewController: RegistrationView {
     func update(with result: RegistrationResult) {
@@ -32,7 +32,7 @@ extension RegistrationViewController: RegistrationView {
     }
 }
 
-class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
     var presenter: RegistrationPresenter?
 
     @IBOutlet weak var alertBottomLabelConstraint: NSLayoutConstraint!
@@ -145,7 +145,7 @@ class RegistrationViewController: UIViewController {
 
         // Drop state after rotation to prevent layout issues on small screens
         switch state {
-        case .validationError(_):
+        case .validationError:
             state = .normal
         default:
             break

@@ -6,16 +6,16 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
-class StepOptions: NSManagedObject {
+final class StepOptions: NSManagedObject {
     override var description: String {
         return "StepOptions(limits: \(self.limits), templates: \(self.templates), samples: \(self.samples)"
     }
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }

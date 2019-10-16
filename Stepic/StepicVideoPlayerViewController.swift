@@ -13,7 +13,6 @@ import SnapKit
 import UIKit
 
 final class StepicVideoPlayerViewController: UIViewController {
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     //Control views
@@ -108,7 +107,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    fileprivate var currentRate: VideoRate = VideoRate(rawValue: VideosInfo.videoRate)! {
+    fileprivate var currentRate = VideoRate(rawValue: VideosInfo.videoRate)! {
         didSet {
             adjustToCurrentRate()
             VideosInfo.videoRate = currentRate.rawValue
@@ -250,7 +249,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
         self.player.playbackLoops = false
 
-        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StepicVideoPlayerViewController.handleTapGestureRecognizer(_:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StepicVideoPlayerViewController.handleTapGestureRecognizer(_:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.player.view.addGestureRecognizer(tapGestureRecognizer)
 
@@ -417,7 +416,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     }
 }
 
-extension StepicVideoPlayerViewController : PlayerDelegate {
+extension StepicVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
         guard player.playbackState == .stopped else {
             return

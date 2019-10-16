@@ -1,5 +1,5 @@
-import Foundation
 import CoreData
+import Foundation
 
 final class LastCodeLanguage: NSManagedObject {
     var language: CodeLanguage? {

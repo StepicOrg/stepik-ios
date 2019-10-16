@@ -38,7 +38,7 @@ final class CertificatesLegacyAssembly: Assembly {
 }
 
 final class CertificatesViewController: UIViewController, ControllerWithStepikPlaceholder {
-    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var tableView: StepikTableView!
 

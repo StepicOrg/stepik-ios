@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Lottie
+import UIKit
 
-class OnboardingAnimatedView: UIView {
+final class OnboardingAnimatedView: UIView {
     private let autoFlipAnimationDuration = 0.5
 
     private let animationSegmentsNames = [
@@ -142,5 +142,4 @@ class OnboardingAnimatedView: UIView {
             completion?()
         })
     }
-
 }

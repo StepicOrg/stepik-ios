@@ -13,7 +13,7 @@ import Kanna
  Parses an HTML, allowing to get all the needed information from HTML string
  */
 @available(*, deprecated, message: "Use ContentProcessor instead")
-class HTMLParsingUtil {
+final class HTMLParsingUtil {
     fileprivate init() {}
 
     static func getLink(_ htmlString: String, index: Int) -> String? {
@@ -57,7 +57,7 @@ class HTMLParsingUtil {
 
             for match in matches {
                 if let urlString = match.url?.absoluteString {
-                    if res.index(where: {$0.link == urlString}) == nil {
+                    if res.index(where: { $0.link == urlString }) == nil {
                         res += [(link: urlString, text: urlString)]
                     }
                 }

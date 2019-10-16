@@ -6,8 +6,8 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Atributika
+import UIKit
 
 extension UILabel {
     func setTextWithHTMLString(_ htmlText: String, lineSpacing: CGFloat? = nil) {
@@ -41,12 +41,10 @@ extension UILabel {
     }
 
     class func heightForLabelWithText(_ text: String, lines: Int, font: UIFont, width: CGFloat, html: Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
-
         return heightForLabelWithText(text, lines: lines, fontName: font.fontName, fontSize: font.pointSize, width: width, html: html, alignment: alignment)
     }
 
     class func heightForLabelWithText(_ text: String, lines: Int, fontName: String, fontSize: CGFloat, width: CGFloat, html: Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
-
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
 
         label.numberOfLines = lines
@@ -83,7 +81,6 @@ extension UILabel {
         label.textAlignment = alignment
         label.sizeToFit()
 
-//        print(label.bounds.height)
         return label.bounds.height
     }
 }
@@ -103,7 +100,7 @@ extension CGSize {
     }
 }
 
-class WiderLabel: UILabel {
+final class WiderLabel: UILabel {
     override var intrinsicContentSize: CGSize {
         return super.intrinsicContentSize.sizeByDelta(dw: 10, dh: 0)
     }

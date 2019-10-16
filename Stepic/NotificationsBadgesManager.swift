@@ -12,7 +12,7 @@ extension NSNotification.Name {
     static let badgeUpdated = NSNotification.Name("badgeUpdated")
 }
 
-class NotificationsBadgesManager {
+final class NotificationsBadgesManager {
     static let shared = NotificationsBadgesManager()
 
     private var badgeValues = Set<Int>()

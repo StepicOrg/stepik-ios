@@ -1,5 +1,5 @@
-import Foundation
 import CoreData
+import Foundation
 
 extension LastCodeLanguage {
     @NSManaged var managedLanguage: String?

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import SwiftyJSON
 import PromiseKit
+import SwiftyJSON
 
 protocol IDFetchable: JSONSerializable where IdType: CoreDataRepresentable {
-
     static func getId(json: JSON) -> IdType?
     static func fetchAsync(ids: [IdType]) -> Guarantee<[Self]>
 }

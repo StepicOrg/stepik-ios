@@ -27,7 +27,7 @@ protocol ProfileInfoView: class {
     func set(streaks: StreakViewData)
 }
 
-class ProfileInfoPresenter {
+final class ProfileInfoPresenter {
     weak var view: ProfileInfoView?
 
     private var lastAvatarURL: URL?

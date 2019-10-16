@@ -6,11 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-class NumberQuizViewController: QuizViewController {
-
+final class NumberQuizViewController: QuizViewController {
     var textField = UITextField()
 
     let textFieldHeight = 32
@@ -62,11 +61,6 @@ class NumberQuizViewController: QuizViewController {
         self.view.endEditing(true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override var needsToRefreshAttemptWhenWrong: Bool {
         return false
     }
@@ -109,20 +103,8 @@ class NumberQuizViewController: QuizViewController {
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
             _ in
-
         }))
 
         self.present(alert, animated: true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-
 }

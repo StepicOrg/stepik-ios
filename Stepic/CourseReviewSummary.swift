@@ -6,15 +6,14 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 final class CourseReviewSummary: NSManagedObject, JSONSerializable, IDFetchable {
-
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }

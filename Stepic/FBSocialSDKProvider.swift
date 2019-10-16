@@ -15,7 +15,7 @@ final class FBSocialSDKProvider: NSObject, SocialSDKProvider {
 
     let name = "facebook"
 
-    private override init() {
+    override private init() {
         super.init()
     }
 

@@ -6,11 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import PromiseKit
 
-class DeleteRequestMaker {
+final class DeleteRequestMaker {
     func request(requestEndpoint: String, deletingId: Int, withManager manager: Alamofire.SessionManager) -> Promise<Void> {
         return Promise { seal in
             checkToken().done {
@@ -18,7 +18,7 @@ class DeleteRequestMaker {
                     switch response.result {
                     case .failure(let error):
                         seal.reject(NetworkError(error: error))
-                    case .success(_):
+                    case .success:
                         seal.fulfill(())
                     }
                 }

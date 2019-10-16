@@ -6,12 +6,12 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class UnitsAPI: APIEndpoint {
+final class UnitsAPI: APIEndpoint {
     override var name: String { return "units" }
 
     //TODO: Seems like a bug. Fix this when fixing CoreData duplicates
@@ -29,18 +29,6 @@ class UnitsAPI: APIEndpoint {
                 error in
                 seal.reject(error)
             }
-//            This is a correct replacement after CoreData duplicates fix for this
-//            retrieve.requestWithFetching(requestEndpoint: "units", paramName: "units", params: params, withManager: manager).then {
-//                (units, _) -> Void in
-//                guard let unit: Unit = units.first else {
-//                    reject(UnitRetrieveError.noUnits)
-//                    return
-//                }
-//                fulfill(unit)
-//            }.catch {
-//                error in
-//                reject(error)
-//            }
         }
     }
 
@@ -64,7 +52,7 @@ extension UnitsAPI {
         retrieve(lesson: lessonId).done {
             unit in
             success(unit)
-            }.catch {
+        }.catch {
                 error in
                 errorHandler(error)
         }

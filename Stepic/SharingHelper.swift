@@ -6,10 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import TUSafariActivity
+import UIKit
 
-class SharingHelper {
+final class SharingHelper {
     static func getSharingController(_ link: String) -> UIActivityViewController {
         let activityItemSource = CyrillicURLActivityItemSource(link: link)
         let objectsToShare = [activityItemSource]

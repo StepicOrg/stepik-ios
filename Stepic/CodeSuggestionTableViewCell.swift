@@ -9,7 +9,6 @@
 import UIKit
 
 final class CodeSuggestionTableViewCell: UITableViewCell {
-
     @IBOutlet weak var suggestionLabel: StepikLabel!
 
     func setSuggestion(_ suggestion: String, prefixLength: Int, size: CodeSuggestionsSize?) {

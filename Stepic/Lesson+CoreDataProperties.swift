@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Lesson {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedFeatured: NSNumber?
     @NSManaged var managedPublic: NSNumber?
@@ -100,7 +99,6 @@ extension Lesson {
         get {
             return (self.managedStepsArray as? [Int]) ?? []
         }
-
     }
 
     var steps: [Step] {

@@ -6,11 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension CourseListModel {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedTitle: String?
     @NSManaged var managedDescription: String?

@@ -6,18 +6,18 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class CommentsAPI: APIEndpoint {
+final class CommentsAPI: APIEndpoint {
     override var name: String { return "comments" }
 
     func retrieve(ids: [Int]) -> Promise<[Comment]> {
         return Promise { seal in
             retrieve.request(requestEndpoint: "comments", paramName: "comments", ids: ids, updating: Array<Comment>(), withManager: manager).done { comments, json in
-                var usersDict: [Int : UserInfo] = [Int: UserInfo]()
+                var usersDict: [Int: UserInfo] = [Int: UserInfo]()
 
                 json["users"].arrayValue.forEach {
                     let user = UserInfo(json: $0)

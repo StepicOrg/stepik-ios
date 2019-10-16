@@ -21,7 +21,6 @@ import YandexMobileMetrica
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
     private let userNotificationsCenterDelegate = UserNotificationsCenterDelegate()
@@ -239,7 +238,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        if let code = Parser.sharedParser.codeFromURL(url) {
+        if let code = Parser.shared.codeFromURL(url) {
             // Auth token
             NotificationCenter.default.post(
                 name: Foundation.Notification.Name(rawValue: "ReceivedAuthorizationCodeNotification"),
@@ -288,7 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 addNeverAskAction: true
             )
 
-            UIThread.performUI {
+            DispatchQueue.main.async {
                 self?.window?.rootViewController?.present(alert, animated: true)
             }
         }, error: { error in

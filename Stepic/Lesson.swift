@@ -6,16 +6,14 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 final class Lesson: NSManagedObject, IDFetchable {
-
-    // Insert code here to add functionality to your managed object subclass
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -46,8 +44,6 @@ final class Lesson: NSManagedObject, IDFetchable {
         } catch {
             return nil
         }
-
-//        return Lesson.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
     }
 
     func update(json: JSON) {
@@ -83,7 +79,6 @@ final class Lesson: NSManagedObject, IDFetchable {
                 print("Error while downloading steps")
                 errorHandler?("Error while downloading steps")
         })
-
     }
 
     func loadProgressesForSteps(_ completion: @escaping (() -> Void)) {

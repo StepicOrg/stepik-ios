@@ -80,7 +80,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         super.viewDidLoad()
 
         self.edgesForExtendedLayout = []
-        
+
         self.registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
             self?.refreshDiscussions()
         }), for: .connectionError)
@@ -99,7 +99,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         self.tableView.addSubview(self.refreshControl)
 
         self.tableView.contentInsetAdjustmentBehavior = .never
-        
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .compose,
             target: self,
@@ -109,7 +109,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if self.isFirstAppear {
             self.isFirstAppear = false
             DispatchQueue.main.async {
@@ -117,7 +117,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AmplitudeAnalyticsEvents.Discussions.opened.send()
@@ -144,7 +144,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     func displayError(_ error: Error) {
         self.emptyDatasetState = .error
     }
-    
+
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -209,7 +209,7 @@ extension DiscussionsViewController: DiscussionsViewControllerDelegate {
     func cellDidSelect(_ viewData: DiscussionsViewData) {
         self.presenter?.selectViewData(viewData)
     }
-    
+
     func profileButtonDidClick(_ userId: Int) {
         let assembly = ProfileAssembly(userID: userId)
         self.push(module: assembly.makeModule())

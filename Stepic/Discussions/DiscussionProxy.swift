@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class DiscussionProxy: JSONSerializable {
+final class DiscussionProxy: JSONSerializable {
     var discussionIds: [Int] = []
     var id: String = ""
 

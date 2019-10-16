@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CertificatesPresentationContainer {
+final class CertificatesPresentationContainer {
     fileprivate let defaults = UserDefaults.standard
 
     fileprivate let certificatesStoredKey = "certificatesStoredIdsKey"
@@ -26,5 +26,4 @@ class CertificatesPresentationContainer {
             defaults.synchronize()
         }
     }
-
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeaderboardTableViewCell: UITableViewCell {
+final class LeaderboardTableViewCell: UITableViewCell {
     static let reuseId = "LeaderboardTableViewCell"
 
     @IBOutlet weak var userLabel: UILabel!

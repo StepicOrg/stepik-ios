@@ -9,8 +9,7 @@
 import UIKit
 import WebKit
 
-class OnboardingCardStepViewController: CardStepViewController {
-
+final class OnboardingCardStepViewController: CardStepViewController {
     var stepIndex: Int!
     weak var delegate: CardStepDelegate?
 

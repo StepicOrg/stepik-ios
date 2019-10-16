@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Video {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedThumbnailURL: String?
     @NSManaged var managedStatus: String?

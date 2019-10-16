@@ -9,43 +9,66 @@
 import Foundation
 import PromiseKit
 
-//Tip: Inherited from NSObject in order to be able to find a selector
-class StepsControllerDeepLinkRouter: NSObject {
-    func getStepsViewControllerFor(step stepId: Int, inLesson lessonId: Int, withUnit unitID: Int?, success successHandler : @escaping (([UIViewController]) -> Void), error errorHandler : @escaping ((String) -> Void)) {
-        //Download lesson and pass stepId to StepsViewController
-
+// Tip: Inherited from NSObject in order to be able to find a selector
+final class StepsControllerDeepLinkRouter: NSObject {
+    func getStepsViewControllerFor(
+        step stepId: Int,
+        inLesson lessonId: Int,
+        withUnit unitID: Int?,
+        success successHandler : @escaping (([UIViewController]) -> Void),
+        error errorHandler : @escaping ((String) -> Void)
+    ) {
+        // Download lesson and pass stepId to StepsViewController
         if let lesson = Lesson.getLesson(lessonId) {
-            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [lesson], refreshMode: .update, success: {
-                    lessons in
+            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [lesson], refreshMode: .update, success: { lessons in
                     if let lesson = lessons.first {
-                        self.getVCForLesson(lesson, stepId: stepId, includeUnit: unitID != nil, success: successHandler, error: errorHandler)
+                        self.getViewControllerForLesson(
+                            lesson,
+                            stepId: stepId,
+                            includeUnit: unitID != nil,
+                            success: successHandler,
+                            error: errorHandler
+                        )
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
-
-                }, error: {
-                    error in
-                    self.getVCForLesson(lesson, stepId: stepId, includeUnit: unitID != nil, success: successHandler, error: errorHandler)
+                }, error: { error in
+                    self.getViewControllerForLesson(
+                        lesson,
+                        stepId: stepId,
+                        includeUnit: unitID != nil,
+                        success: successHandler,
+                        error: errorHandler
+                    )
                 }
             )
         } else {
-            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [], refreshMode: .update, success: {
-                    lessons in
+            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [], refreshMode: .update, success: { lessons in
                     if let lesson = lessons.first {
-                        self.getVCForLesson(lesson, stepId: stepId, includeUnit: unitID != nil, success: successHandler, error: errorHandler)
+                        self.getViewControllerForLesson(
+                            lesson,
+                            stepId: stepId,
+                            includeUnit: unitID != nil,
+                            success: successHandler,
+                            error: errorHandler
+                        )
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
-
-                }, error: {
-                    _ in
+                }, error: { _ in
                     errorHandler("Could not get lesson for deep link")
                 }
             )
         }
     }
 
-    fileprivate func getVCForLesson(_ lesson: Lesson, stepId: Int, includeUnit: Bool = false, success successHandler: @escaping (([UIViewController]) -> Void), error errorHandler: @escaping ((String) -> Void)) {
+    private func getViewControllerForLesson(
+        _ lesson: Lesson,
+        stepId: Int,
+        includeUnit: Bool = false,
+        success successHandler: @escaping (([UIViewController]) -> Void),
+        error errorHandler: @escaping ((String) -> Void)
+    ) {
         var currentUnit: Unit?
 
         func fetchOrLoadUnit(for lesson: Lesson) -> Promise<Unit> {
@@ -148,11 +171,5 @@ class StepsControllerDeepLinkRouter: NSObject {
         }.catch { error in
             errorHandler(error.localizedDescription)
         }
-    }
-
-    var vc: UIViewController?
-
-    func dismissPressed(_ item: UIBarButtonItem) {
-        vc?.dismiss(animated: true, completion: nil)
     }
 }

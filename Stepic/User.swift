@@ -6,16 +6,15 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 @objc
 final class User: NSManagedObject, IDFetchable {
-
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -31,7 +30,7 @@ final class User: NSManagedObject, IDFetchable {
         lastName = json["last_name"].stringValue
         avatarURL = json["avatar"].stringValue
         level = json["level"].intValue
-        joinDate = Parser.sharedParser.dateFromTimedateJSON(json["join_date"])
+        joinDate = Parser.shared.dateFromTimedateJSON(json["join_date"])
     }
 
     func update(json: JSON) {

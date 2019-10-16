@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension User {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedProfile: NSNumber?
     @NSManaged var managedPrivate: NSNumber?

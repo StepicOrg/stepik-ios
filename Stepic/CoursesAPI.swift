@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class CoursesAPI: APIEndpoint {
+final class CoursesAPI: APIEndpoint {
     override var name: String { return "courses" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course]) -> Promise<[Course]> {
@@ -89,5 +89,4 @@ extension CoursesAPI {
         }
         return nil
     }
-
 }

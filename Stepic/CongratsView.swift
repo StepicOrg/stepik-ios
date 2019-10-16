@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CongratsView: UIView {
-    let backgroundAnimationColor: UIColor = UIColor.white.withAlphaComponent(0.3)
+final class CongratsView: UIView {
+    let backgroundAnimationColor = UIColor.white.withAlphaComponent(0.3)
     let backgroundSectionsCount: Int = 18
     let padOpacity: CGFloat = 0.15
 
@@ -39,7 +39,7 @@ class CongratsView: UIView {
         addSubview(blurView ?? UIView())
 
         // Background animation
-        let path: CGMutablePath = CGMutablePath()
+        let path = CGMutablePath()
 
         // colors and clears sections
         shapeLayer = CAShapeLayer()

@@ -6,14 +6,13 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import MessageUI
 import Presentr
-import StoreKit
 import SnapKit
+import StoreKit
+import UIKit
 
-class RateAppViewController: UIViewController {
-
+final class RateAppViewController: UIViewController {
     @IBOutlet weak var topLabel: StepikLabel!
     @IBOutlet weak var bottomLabel: StepikLabel!
     @IBOutlet weak var laterButton: UIButton!
@@ -84,11 +83,10 @@ class RateAppViewController: UIViewController {
             star.highlightedImage = Images.star.filled
             star.addGestureRecognizer(tapG)
         }
-
-        // Do any additional setup after loading the view.
     }
 
-    @objc func didTap(_ recognizer: UITapGestureRecognizer) {
+    @objc
+    func didTap(_ recognizer: UITapGestureRecognizer) {
         guard let tappedIndex = recognizer.view?.tag else {
             return
         }
@@ -125,7 +123,6 @@ class RateAppViewController: UIViewController {
     }
 
     func showEmail() {
-
         AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.email, parameters: defaultAnalyticsParams)
 
         if !MFMailComposeViewController.canSendMail() {
@@ -141,7 +138,6 @@ class RateAppViewController: UIViewController {
         composeVC.setSubject(String(format: NSLocalizedString("FeedbackAbout", comment: ""), Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String ?? "Stepik"))
         composeVC.setMessageBody("", isHTML: false)
         self.customPresentViewController(mailPresenter, viewController: composeVC, animated: true, completion: nil)
-
     }
 
     func showAppStore() {
@@ -149,11 +145,6 @@ class RateAppViewController: UIViewController {
         self.dismiss(animated: true, completion: {
             SKStoreReviewController.requestReview()
         })
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func laterButtonPressed(_ sender: UIButton) {
@@ -203,22 +194,32 @@ class RateAppViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         bottomLabelWidth?.update(offset: UIScreen.main.bounds.height - 48)
     }
-
 }
 
-extension RateAppViewController : MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController,
-                               didFinishWith result: MFMailComposeResult, error: Error?) {
+extension RateAppViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult,
+        error: Error?
+    ) {
         switch result {
         case .cancelled, .failed, .saved:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.cancelled, parameters: defaultAnalyticsParams)
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Rate.Negative.Email.cancelled,
+                parameters: defaultAnalyticsParams
+            )
         case .sent:
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.Email.success, parameters: defaultAnalyticsParams)
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Rate.Negative.Email.success,
+                parameters: defaultAnalyticsParams
+            )
         }
 
-        controller.dismiss(animated: true, completion: {
-            [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        })
+        controller.dismiss(
+            animated: true,
+            completion: { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            }
+        )
     }
 }

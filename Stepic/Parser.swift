@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
+
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -28,10 +29,10 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class Parser: NSObject {
-    static var sharedParser = Parser()
+final class Parser: NSObject {
+    static var shared = Parser()
 
-    fileprivate override init() {}
+    override fileprivate init() {}
 
     func dateFromTimedateJSON(_ json: JSON) -> Date? {
         if let date = json.string {
@@ -65,7 +66,6 @@ extension URL {
                     results.updateValue(kv[1], forKey: kv[0])
                 }
             }
-
         }
         return results
     }

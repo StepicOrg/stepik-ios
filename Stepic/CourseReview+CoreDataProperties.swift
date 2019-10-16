@@ -6,8 +6,8 @@
 //  Copyright © 2019 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension CourseReview {
     @NSManaged var managedText: String?

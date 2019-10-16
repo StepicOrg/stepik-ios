@@ -18,16 +18,15 @@ enum UserRole: String {
 /*
  Comment model, without voting
  */
-class Comment: JSONSerializable {
-
+final class Comment: JSONSerializable {
     typealias IdType = Int
 
     var id: Int = 0
     var parentId: Int?
     var userId: Int = 0
     var userRole: UserRole = .student
-    var time: Date = Date()
-    var lastTime: Date = Date()
+    var time = Date()
+    var lastTime = Date()
     var text: String = ""
     var replyCount: Int = 0
     var isDeleted: Bool = false
@@ -47,8 +46,8 @@ class Comment: JSONSerializable {
         parentId = json["parent"].int
         userId = json["user"].intValue
         userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .student
-        time = Parser.sharedParser.dateFromTimedateJSON(json["time"])!
-        lastTime = Parser.sharedParser.dateFromTimedateJSON(json["last_time"])!
+        time = Parser.shared.dateFromTimedateJSON(json["time"])!
+        lastTime = Parser.shared.dateFromTimedateJSON(json["last_time"])!
         text = json["text"].stringValue
         replyCount = json["reply_count"].intValue
         isDeleted = json["is_deleted"].boolValue
@@ -67,8 +66,8 @@ class Comment: JSONSerializable {
         parentId = json["parent"].int
         userId = json["user"].intValue
         userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .student
-        time = Parser.sharedParser.dateFromTimedateJSON(json["time"])!
-        lastTime = Parser.sharedParser.dateFromTimedateJSON(json["last_time"])!
+        time = Parser.shared.dateFromTimedateJSON(json["time"])!
+        lastTime = Parser.shared.dateFromTimedateJSON(json["last_time"])!
         text = json["text"].stringValue
         replyCount = json["reply_count"].intValue
         isDeleted = json["is_deleted"].boolValue

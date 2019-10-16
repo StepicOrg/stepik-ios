@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Atributika
+import UIKit
 
-class NotificationsViewController: UIViewController, NotificationsView {
+final class NotificationsViewController: UIViewController, NotificationsView {
     var presenter: NotificationsPresenter?
 
     var section: NotificationsSection!

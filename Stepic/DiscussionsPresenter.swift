@@ -294,7 +294,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     ) {
         self.view?.displayAlert(title: title, message: message)
     }
-    
+
     private func incrementStepDiscussionsCount() {
         self.stepsPersistenceService.fetch(ids: [self.stepId]).done { steps in
             if let step = steps.first {
@@ -302,7 +302,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             }
         }.cauterize()
     }
-    
+
     // MARK: Inner structs
 
     private struct DiscussionIds {

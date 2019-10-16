@@ -6,13 +6,13 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
 //TODO: Refactor this class into two separate API classes
-class RecommendationsAPI: APIEndpoint {
+final class RecommendationsAPI: APIEndpoint {
     override var name: String { return "recommendations" }
     var reactionName: String { return "recommendation-reactions" }
 
@@ -43,7 +43,7 @@ class RecommendationsAPI: APIEndpoint {
                 switch response.result {
                 case .failure(let error):
                     seal.reject(NetworkError(error: error))
-                case .success(_):
+                case .success:
                     seal.fulfill(())
                 }
             }

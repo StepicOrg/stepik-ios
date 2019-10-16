@@ -8,8 +8,7 @@
 
 import Foundation
 
-class PinsMap {
-
+final class PinsMap {
     private var calendar: Calendar
 
     init(calendar: Calendar = Calendar.current) {
@@ -21,7 +20,7 @@ class PinsMap {
         }
     }
 
-    class Week: Equatable {
+    final class Week: Equatable {
         // allowedPins[i] == false when the day should be displayed as empty day
         // e. g. a day from previous month
         var allowedPins: [Bool] = Array(repeating: false, count: 7)
@@ -39,7 +38,7 @@ class PinsMap {
         }
     }
 
-    class Month {
+    final class Month {
         var weeks: [Week] = []
 
         var days: [(Bool, Int)] {
@@ -50,7 +49,7 @@ class PinsMap {
             self.weeks = weeks
         }
 
-        open func shifted(firstWeekDay: Int) -> Month {
+        func shifted(firstWeekDay: Int) -> Month {
             var i = 0
             // Copy array
             var weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
@@ -63,7 +62,7 @@ class PinsMap {
             return Month(weeks: weeks)
         }
 
-        open func filled(pins: [Int]) -> Month {
+        func filled(pins: [Int]) -> Month {
             var week = 0, day = 0, pin = 0
             // Copy array
             var weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
@@ -85,7 +84,7 @@ class PinsMap {
             return Month(weeks: weeks)
         }
 
-        open func trimmed(daysCount: Int) -> Month {
+        func trimmed(daysCount: Int) -> Month {
             var week = 0, day = 0, days = daysCount
             // Copy array
             var weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })

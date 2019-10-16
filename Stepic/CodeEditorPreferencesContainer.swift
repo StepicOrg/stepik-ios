@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CodeEditorPreferencesContainer {
+final class CodeEditorPreferencesContainer {
     fileprivate let defaults = UserDefaults.standard
 
     fileprivate let themeKey = "themeKey"

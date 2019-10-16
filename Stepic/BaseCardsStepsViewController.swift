@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BaseCardsStepsViewController: CardsStepsViewController {
+final class BaseCardsStepsViewController: CardsStepsViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var expLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
@@ -218,5 +218,4 @@ class BaseCardsStepsViewController: CardsStepsViewController {
     private func sendElementsToBack() {
         changeZPositionForElements(change: -1.0, relativeTo: kolodaView.layer)
     }
-
 }

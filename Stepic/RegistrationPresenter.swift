@@ -23,7 +23,7 @@ enum RegistrationState {
     case normal, loading, validationError(message: String)
 }
 
-class RegistrationPresenter {
+final class RegistrationPresenter {
     weak var view: RegistrationView?
 
     var authAPI: AuthAPI

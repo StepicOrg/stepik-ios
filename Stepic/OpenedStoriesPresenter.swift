@@ -38,7 +38,7 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
 
     var prevModule: UIViewController? {
         if let story = self.stories[safe: self.currentPosition - 1] {
-            self.getModule(story: story)
+            return self.getModule(story: story)
         }
         return nil
     }

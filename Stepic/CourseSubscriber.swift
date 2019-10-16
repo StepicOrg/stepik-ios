@@ -19,12 +19,21 @@ protocol CourseSubscriberProtocol {
 }
 
 @available(*, deprecated, message: "Legacy code")
-class CourseSubscriber: CourseSubscriberProtocol {
-
+final class CourseSubscriber: CourseSubscriberProtocol {
     enum CourseSubscriptionError: Error {
         case error(status: String)
         case badResponseFormat
     }
+
+    private lazy var dataBackUpdateService: DataBackUpdateServiceProtocol = {
+        let service = DataBackUpdateService(
+            unitsNetworkService: UnitsNetworkService(unitsAPI: UnitsAPI()),
+            sectionsNetworkService: SectionsNetworkService(sectionsAPI: SectionsAPI()),
+            coursesNetworkService: CoursesNetworkService(coursesAPI: CoursesAPI()),
+            progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
+        )
+        return service
+    }()
 
     func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
         return performCourseJoinActions(course: course, unsubscribe: false, source: source)
@@ -36,7 +45,6 @@ class CourseSubscriber: CourseSubscriberProtocol {
 
     private func performCourseJoinActions(course: Course, unsubscribe: Bool, source: CourseSubscriptionSource) -> Promise<Course> {
         return Promise<Course> { seal in
-
             _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: {
                 guard let progressId = course.progressId else {
                     seal.reject(CourseSubscriptionError.badResponseFormat)
@@ -56,11 +64,7 @@ class CourseSubscriber: CourseSubscriberProtocol {
                     course.enrolled = !unsubscribe
                     CoreDataHelper.instance.save()
 
-                    if unsubscribe {
-                        CourseSubscriptionManager.sharedManager.unsubscribedFrom(course: course)
-                    } else {
-                        CourseSubscriptionManager.sharedManager.subscribedTo(course: course)
-                    }
+                    self.dataBackUpdateService.triggerEnrollmentUpdate(retrievedCourse: course)
 
                     seal.fulfill(course)
                 }

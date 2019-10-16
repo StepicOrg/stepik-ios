@@ -8,8 +8,7 @@
 
 import Foundation
 
-class Tokens {
-
+final class Tokens {
     var amplitudeToken: String = ""
     var appMetricaToken: String = ""
     var firebaseId: UInt = 0
@@ -41,5 +40,4 @@ class Tokens {
         }
         self.init(amplitudeToken: amplitude, appMetricaToken: appmetrica, firebaseId: firebase)
     }
-
 }

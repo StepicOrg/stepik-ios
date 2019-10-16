@@ -407,7 +407,7 @@ struct AmplitudeAnalyticsEvents {
     }
 
     struct Discussions {
-        static var opened: AnalyticsEvent = AnalyticsEvent(name: "Discussions screen opened")
+        static var opened = AnalyticsEvent(name: "Discussions screen opened")
     }
 
     struct Stories {

@@ -8,8 +8,7 @@
 
 import Foundation
 
-class AdaptiveStatsManager {
-
+final class AdaptiveStatsManager {
     private let courseId: Int
 
     private lazy var statsKey: String = {

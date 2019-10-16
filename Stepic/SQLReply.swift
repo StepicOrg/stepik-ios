@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class SQLReply: Reply {
+final class SQLReply: Reply {
     var code: String
 
     init(code: String) {
@@ -20,7 +20,7 @@ class SQLReply: Reply {
         code = json["solve_sql"].stringValue
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return ["solve_sql": code]
     }
 }

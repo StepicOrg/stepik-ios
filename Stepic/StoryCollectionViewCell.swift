@@ -6,8 +6,8 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import UIKit
 import Nuke
+import UIKit
 
 final class StoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!

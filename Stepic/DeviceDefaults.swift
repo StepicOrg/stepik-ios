@@ -11,7 +11,7 @@ import Foundation
 /*
  Stores and manages information about device defaults
  */
-class DeviceDefaults {
+final class DeviceDefaults {
     fileprivate init() {}
     static let sharedDefaults = DeviceDefaults()
 

@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension ContinueLastStepView {
     struct Appearance {
@@ -48,7 +48,7 @@ final class ContinueLastStepView: UIView {
     }()
 
     // Should use wrapped button cause we have stack view
-    private lazy var continueButtonBlock: UIView = UIView()
+    private lazy var continueButtonBlock = UIView()
 
     // Contains [continue button] and [info]
     private lazy var contentStackView: UIStackView = {

@@ -41,8 +41,7 @@ enum StepikLabelColorMode {
 }
 
 @IBDesignable
-class StepikLabel: UILabel {
-
+final class StepikLabel: UILabel {
     var colorMode: StepikLabelColorMode = .dark {
         didSet {
             updateColorMode()

@@ -8,14 +8,13 @@
 
 import UIKit
 
-class CongratulationViewController: UIViewController {
-
+final class CongratulationViewController: UIViewController {
     enum CongratulationType {
         var image: UIImage {
             switch self {
             case .achievement(_, _, let cover):
                 return cover
-            case .level(_):
+            case .level:
                 return Images.placeholders.coursePassed
             }
         }

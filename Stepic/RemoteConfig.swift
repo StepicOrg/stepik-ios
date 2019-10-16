@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import FirebaseRemoteConfig
-import FirebaseInstanceID
 import DeviceKit
+import FirebaseInstanceID
+import FirebaseRemoteConfig
+import Foundation
 
 enum RemoteConfigKeys: String {
     case showStreaksNotificationTrigger = "show_streaks_notification_trigger"
@@ -111,7 +111,9 @@ final class RemoteConfig {
                 return
             }
 
-            FirebaseRemoteConfig.RemoteConfig.remoteConfig().activateFetched()
+            FirebaseRemoteConfig.RemoteConfig.remoteConfig().activate(completionHandler: { error in
+                print("remote config failed activate firebase remote config with error: \(error ??? "nil")")
+            })
 
             self?.fetchComplete = true
             self?.loadingDoneCallback?()
@@ -120,7 +122,8 @@ final class RemoteConfig {
 
     private func activateDebugMode() {
         fetchDuration = 0
-        let debugSettings = RemoteConfigSettings(developerModeEnabled: true)
+        let debugSettings = RemoteConfigSettings()
+        debugSettings.minimumFetchInterval = 0
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().configSettings = debugSettings
     }
 

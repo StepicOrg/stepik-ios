@@ -6,11 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class StepikTableView: UITableView {
-
     // Empty state placeholder
     var emptySetPlaceholder: StepikPlaceholder?
 
@@ -18,7 +17,7 @@ class StepikTableView: UITableView {
     var loadingPlaceholder: StepikPlaceholder?
 
     // View for placeholders
-    lazy private var placeholderView: StepikPlaceholderView = {
+    private lazy var placeholderView: StepikPlaceholderView = {
         let view = StepikPlaceholderView()
         return view
     }()

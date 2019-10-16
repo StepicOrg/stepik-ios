@@ -13,7 +13,7 @@ import SwiftyJSON
 final class EmailAddress: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         self.initialize(json)
     }

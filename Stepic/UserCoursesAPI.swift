@@ -6,11 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import PromiseKit
-import Alamofire
 
-class UserCoursesAPI: APIEndpoint {
+final class UserCoursesAPI: APIEndpoint {
     override var name: String { return "user-courses" }
 
     func retrieve(page: Int = 1) -> Promise<([UserCourse], Meta)> {

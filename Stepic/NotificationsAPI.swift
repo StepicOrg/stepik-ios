@@ -8,16 +8,15 @@
 
 import Foundation
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class NotificationsAPI: APIEndpoint {
+final class NotificationsAPI: APIEndpoint {
     override var name: String { return "notifications" }
 
     func retrieve(page: Int = 1, notificationType: NotificationType? = nil) -> Promise<( [Notification], Meta)> {
-
         var parameters = [
             "page": "\(page)"
         ]
@@ -40,7 +39,7 @@ class NotificationsAPI: APIEndpoint {
                     switch response.result {
                     case .failure(let error):
                         seal.reject(NetworkError(error: error))
-                    case .success(_):
+                    case .success:
                         if response.response?.statusCode != 204 {
                             seal.reject(NetworkError.badStatus(204))
                         } else {

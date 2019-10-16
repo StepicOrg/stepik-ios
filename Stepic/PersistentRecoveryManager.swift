@@ -12,7 +12,6 @@ import Foundation
  All recovery managers' base class. MUST BE OVERRIDEN
  */
 class PersistentRecoveryManager {
-
     var plistName: String
 
     var plistPath: String {
@@ -51,5 +50,4 @@ class PersistentRecoveryManager {
         plistData[key] = object.serializeToDictionary()
         plistData.write(toFile: plistPath, atomically: true)
     }
-
 }

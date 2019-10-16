@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
+final class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var arrowButton: UIButton!
@@ -95,5 +95,4 @@ class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
             animationBlock()
         }
     }
-
 }

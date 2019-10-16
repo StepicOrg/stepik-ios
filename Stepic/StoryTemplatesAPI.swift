@@ -6,11 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import PromiseKit
-import Alamofire
 
-class StoryTemplatesAPI: APIEndpoint {
+final class StoryTemplatesAPI: APIEndpoint {
     override var name: String { return "story-templates" }
 
     func retrieve(isPublished: Bool?, language: ContentLanguage, maxVersion: Int, page: Int = 1) -> Promise<([Story], Meta)> {

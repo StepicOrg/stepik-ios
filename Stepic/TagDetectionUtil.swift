@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TagDetectionUtil {
+final class TagDetectionUtil {
     static let supportedHtmlTagsForLabel = ["b", "strong", "i", "em", "strike"]
 
     static func isWebViewSupportNeeded(_ htmlString: String) -> Bool {
@@ -17,7 +17,7 @@ class TagDetectionUtil {
 
     // POSSIBLY detects LaTeX in html string
     static func detectLaTeX(_ htmlString: String) -> Bool {
-        let filtered = htmlString.filter({$0 == "$"})
+        let filtered = htmlString.filter({ $0 == "$" })
         return filtered.count >= 2 || (htmlString.range(of: "\\[") != nil && htmlString.range(of: "\\]") != nil) || (htmlString.contains("math-tex"))
     }
 

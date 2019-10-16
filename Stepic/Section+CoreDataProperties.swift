@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Section {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedTitle: String?
@@ -184,5 +183,4 @@ extension Section {
             return (self.managedUnitsArray as? [Int]) ?? []
         }
     }
-
 }

@@ -6,11 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class SearchResult: NSObject {
-
+final class SearchResult: NSObject {
     var score: Float
     var courseId: Int?
     var lessonId: Int?

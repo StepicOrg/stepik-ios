@@ -6,17 +6,15 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 @objc
 final class Section: NSManagedObject, IDFetchable {
-
-    // Insert code here to add functionality to your managed object subclass
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -27,11 +25,10 @@ final class Section: NSManagedObject, IDFetchable {
         position = json["position"].intValue
         isActive = json["is_active"].boolValue
         progressId = json["progress"].string
-        //        print("initialized section \(id) with progress id -> \(progressId)")
-        beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
-        endDate = Parser.sharedParser.dateFromTimedateJSON(json["end_date"])
-        softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
-        hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["hard_deadline"])
+        beginDate = Parser.shared.dateFromTimedateJSON(json["begin_date"])
+        endDate = Parser.shared.dateFromTimedateJSON(json["end_date"])
+        softDeadline = Parser.shared.dateFromTimedateJSON(json["soft_deadline"])
+        hardDeadline = Parser.shared.dateFromTimedateJSON(json["hard_deadline"])
 
         testSectionAction = json["actions"]["test_section"].string
         isExam = json["is_exam"].boolValue
@@ -80,8 +77,7 @@ final class Section: NSManagedObject, IDFetchable {
         }
     }
 
-    func loadUnits(success: @escaping (() -> Void), error errorHandler : @escaping (() -> Void)) {
-
+    func loadUnits(success: @escaping (() -> Void), error errorHandler: @escaping (() -> Void)) {
         if self.unitsArray.count == 0 {
             success()
             return
@@ -98,7 +94,6 @@ final class Section: NSManagedObject, IDFetchable {
             idsArray[dimCount - 1].append(unitId)
         }
 
-        //            let sectionsToDownload = idsArray.count
         var downloadedUnits = [Unit]()
 
         let idsDownloaded: ([Unit]) -> Void = {
@@ -228,20 +223,6 @@ final class Section: NSManagedObject, IDFetchable {
     var isReachable: Bool {
         return (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
     }
-
-    //    func loadIfNotLoaded(success success : (Void -> Void)) {
-    //        if !loaded {
-    //            ApiDataDownloader.sharedDownloader.getSectionById(id, existingSection: self, refreshToken: false, success: {
-    //                    sec in
-    //                    success()
-    //                }, failure: {
-    //                    error in
-    //                    print("failed to load section with id -> \(self.id)")
-    //            })
-    //        } else {
-    //            success()
-    //        }
-    //    }
 }
 
 extension Section: NextLessonServiceSectionSourceProtocol {

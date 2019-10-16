@@ -19,7 +19,7 @@ final class CodeSuggestionsTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
-    
+
     var prefix: String = "" {
         didSet {
             tableView.reloadData()

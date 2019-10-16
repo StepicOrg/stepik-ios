@@ -6,8 +6,8 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 import WebKit
 
 final class WebControllerManager: NSObject {
@@ -26,7 +26,7 @@ final class WebControllerManager: NSObject {
         }
     }
 
-    private override init() {
+    override private init() {
         super.init()
     }
 
@@ -73,7 +73,7 @@ final class WebControllerManager: NSObject {
         guard ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
             UIApplication.shared.open(
                 url,
-                options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]),
+                options: [:],
                 completionHandler: nil
             )
             return
@@ -187,9 +187,4 @@ extension WebControllerManager: WKUIDelegate {
             WKWebViewPanelManager.presentPrompt(on: currentVC, title: NSLocalizedString("Prompt", comment: ""), message: prompt, defaultText: defaultText, handler: completionHandler)
         }
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

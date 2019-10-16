@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnboardingPageView: NibInitializableView {
+final class OnboardingPageView: NibInitializableView {
     enum NextButtonStyle {
         var title: String {
             switch self {

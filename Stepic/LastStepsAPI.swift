@@ -6,11 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import SwiftyJSON
 
-class LastStepsAPI: APIEndpoint {
+final class LastStepsAPI: APIEndpoint {
     override var name: String { return "last-steps" }
 
     @discardableResult func retrieve(ids: [String], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, updatingLastSteps: [LastStep], success: @escaping (([LastStep]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {

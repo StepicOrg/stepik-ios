@@ -9,9 +9,8 @@
 import UIKit
 
 extension UIColor {
-
     public convenience init(hex: Int) {
-        self.init(hex:hex, alpha:1.0)
+        self.init(hex: hex, alpha: 1.0)
     }
 
     public convenience init(hex: Int, alpha: CGFloat) {
@@ -23,7 +22,6 @@ extension UIColor {
 
     //default color is black
     var hexString: String {
-
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
@@ -38,15 +36,15 @@ extension UIColor {
         return hexString
     }
 
-    static let errorRed: UIColor = UIColor(hex: 0xff0033)
+    static let errorRed = UIColor(hex: 0xff0033)
 
-    static let lightBlue: UIColor = UIColor(hex: 0x45B0FF)
+    static let lightBlue = UIColor(hex: 0x45B0FF)
 
     class var stepicGreen: UIColor {
         return StepicApplicationsInfo.Colors.mainGreen
     }
 
-    static let mainLight: UIColor = UIColor(hex: 0xf6f6f6)
+    static let mainLight = UIColor(hex: 0xf6f6f6)
 
     class var mainDark: UIColor {
         return StepicApplicationsInfo.Colors.mainDark
@@ -56,10 +54,9 @@ extension UIColor {
         return StepicApplicationsInfo.Colors.mainText
     }
 
-    static let thirdColor: UIColor = UIColor(hex: 0x54a2ff)
+    static let thirdColor = UIColor(hex: 0x54a2ff)
 
-    static let correctQuizBackground: UIColor = UIColor(hex: 0xE9F9E9)
-    static let wrongQuizBackground: UIColor = UIColor(hex: 0xF5EBF2)
-    static let peerReviewYellow: UIColor = UIColor(hex: 0xFFFAE9)
-
+    static let correctQuizBackground = UIColor(hex: 0xE9F9E9)
+    static let wrongQuizBackground = UIColor(hex: 0xF5EBF2)
+    static let peerReviewYellow = UIColor(hex: 0xFFFAE9)
 }

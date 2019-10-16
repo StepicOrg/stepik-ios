@@ -6,8 +6,8 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension CodeSample {
     @NSManaged var managedInput: String?

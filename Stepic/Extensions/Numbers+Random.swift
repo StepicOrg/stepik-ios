@@ -6,8 +6,8 @@
 //  Copyright © 2018 Akexander. All rights reserved.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 public extension Int {
     /// SwiftRandom extension
@@ -17,7 +17,6 @@ public extension Int {
 }
 
 public extension Float {
-
     /// Returns a random floating point number between 0.0 and 1.0, inclusive.
     public static var random: Float {
         return Float(arc4random()) / 0xFFFFFFFF
@@ -33,7 +32,6 @@ public extension Float {
 }
 
 public extension CGFloat {
-
     /// Randomly returns either 1.0 or -1.0.
     public static var randomSign: CGFloat {
         return (arc4random_uniform(2) == 0) ? 1.0 : -1.0

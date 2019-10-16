@@ -6,8 +6,8 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import PromiseKit
 
 enum PerformRequestError: Error {
@@ -29,13 +29,11 @@ func performRequest(_ request: @escaping (() -> Void), error: ((PerformRequestEr
     ApiRequestPerformer.performAPIRequest(request, error: error)
 }
 
-class ApiRequestPerformer {
-
+final class ApiRequestPerformer {
     static let semaphore = DispatchSemaphore(value: 1)
     static let queue = DispatchQueue(label: "perform_request_queue", qos: DispatchQoS.userInitiated)
 
     static func performAPIRequest(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
-
         let completionWithSemaphore : () -> Void = {
             print("finished performing API Request")
             semaphore.signal()
@@ -83,7 +81,6 @@ class ApiRequestPerformer {
     }
 
     fileprivate static func performRequestWithAuthorizationCheck(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
-
 //        if let user = AuthInfo.shared.user {
 //            print("performing request with user \(user.id)")
         if !AuthInfo.shared.isAuthorized && Session.needsRefresh {
@@ -103,7 +100,7 @@ class ApiRequestPerformer {
                         t in
                         AuthInfo.shared.token = t
                         completion()
-                    }, failure : {
+                    }, failure: {
                         error in
                         print("error while auto refresh token")
                         if error == TokenRefreshError.noAccess {
@@ -123,5 +120,4 @@ class ApiRequestPerformer {
 
         completion()
     }
-
 }

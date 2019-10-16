@@ -6,10 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class Device: NSObject {
+final class Device: NSObject {
     var id: Int?
     var registrationId: String
     var user: String?

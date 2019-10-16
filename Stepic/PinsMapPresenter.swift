@@ -12,7 +12,7 @@ protocol PinsMapContentView: class {
     func set(pins: [Int])
 }
 
-class PinsMapPresenter {
+final class PinsMapPresenter {
     weak var view: PinsMapContentView?
 
     init(view: PinsMapContentView?) {

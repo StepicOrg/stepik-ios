@@ -6,11 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class Submission: JSONSerializable {
-
+final class Submission: JSONSerializable {
     typealias IdType = Int
 
     var id: Int = 0
@@ -71,7 +70,6 @@ class Submission: JSONSerializable {
         case "math": return MathReply(json: json)
         case "sorting": return SortingReply(json: json)
         case "matching": return MatchingReply(json: json)
-        case "fill-blanks": return FillBlanksReply(json: json)
         case "code": return CodeReply(json: json)
         case "sql": return SQLReply(json: json)
         default: return nil

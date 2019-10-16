@@ -6,15 +6,14 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 protocol SearchQueriesViewControllerDelegate: class {
     func didSelectSuggestion(suggestion: String, position: Int)
 }
 
-class SearchQueriesViewController: UIViewController {
-    var tableView: UITableView = UITableView()
+final class SearchQueriesViewController: UIViewController {
+    var tableView = UITableView()
 
     var presenter: SearchQueriesPresenter?
 
@@ -31,7 +30,6 @@ class SearchQueriesViewController: UIViewController {
         let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
         paginationView.refreshAction = {
             [weak self] in
-
             guard let presenter = self?.presenter, let query = self?.query else {
                 return
             }
@@ -91,7 +89,7 @@ extension SearchQueriesViewController: UITableViewDataSource {
     }
 }
 
-extension SearchQueriesViewController : SearchQueriesView {
+extension SearchQueriesViewController: SearchQueriesView {
     func updateSuggestions(suggestions: [String]) {
         DispatchQueue.main.async {
             [weak self] in
@@ -124,5 +122,4 @@ extension SearchQueriesViewController : SearchQueriesView {
             break
         }
     }
-
 }

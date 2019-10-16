@@ -5,10 +5,11 @@
 //  Created by Vladislav Kiryukhin on 08.06.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
-import PromiseKit
-import Foundation
 
-class AchievementsRetriever {
+import Foundation
+import PromiseKit
+
+final class AchievementsRetriever {
     private var userId: Int
 
     private var achievementsAPI: AchievementsAPI

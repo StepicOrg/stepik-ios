@@ -12,7 +12,7 @@ struct VideosInfo {
     private static let downloadingVideoQualityKey = "VideoQuality"
     private static let watchingVideoQualityKey = "WatchingVideoQuality"
     private static let videoRateKey = "VideoRate"
-    
+
     private static let defaults = UserDefaults.standard
 
     static var downloadingVideoQuality: String {

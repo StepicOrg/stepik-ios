@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Course {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedBeginDate: Date?
     @NSManaged var managedCourseDescription: String?

@@ -8,22 +8,11 @@
 
 import UIKit
 
-class SwitchMenuBlockTableViewCell: MenuBlockTableViewCell {
+final class SwitchMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var blockSwitch: UISwitch!
 
     var block: SwitchMenuBlock?
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 
     func initWithBlock(block: SwitchMenuBlock) {
         super.initWithBlock(block: block)

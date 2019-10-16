@@ -6,15 +6,15 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 @objc
 final class Certificate: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -23,8 +23,8 @@ final class Certificate: NSManagedObject, IDFetchable {
         self.id = json["id"].intValue
         self.userId = json["user"].intValue
         self.courseId = json["course"].intValue
-        self.issueDate = Parser.sharedParser.dateFromTimedateJSON(json["issue_date"])
-        self.updateDate = Parser.sharedParser.dateFromTimedateJSON(json["update_date"])
+        self.issueDate = Parser.shared.dateFromTimedateJSON(json["issue_date"])
+        self.updateDate = Parser.shared.dateFromTimedateJSON(json["update_date"])
         self.grade = json["grade"].intValue
         self.type = CertificateType(rawValue: json["type"].stringValue) ?? .regular
         self.urlString = json["url"].string
