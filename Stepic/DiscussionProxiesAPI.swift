@@ -15,7 +15,12 @@ final class DiscussionProxiesAPI: APIEndpoint {
     override var name: String { return "discussion-proxies" }
 
     func retrieve(id: String) -> Promise<DiscussionProxy> {
-        return retrieve.request(requestEndpoint: "discussion-proxies", paramName: "discussion-proxies", id: id, withManager: manager)
+        return self.retrieve.request(
+            requestEndpoint: "discussion-proxies",
+            paramName: "discussion-proxies",
+            id: id,
+            withManager: self.manager
+        )
     }
 }
 

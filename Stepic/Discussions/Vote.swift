@@ -9,40 +9,45 @@
 import Foundation
 import SwiftyJSON
 
-final class Vote: JSONSerializable {
-    func update(json: JSON) {
-        id = json["id"].stringValue
-        if let v = json["value"].string {
-            value = VoteValue(rawValue: v)
-        }
-    }
+enum VoteValue: String {
+    case epic
+    case abuse
+}
 
+final class Vote: JSONSerializable {
     var id: String
     var value: VoteValue?
 
+    var json: JSON {
+        return [
+            JSONKey.id.rawValue: self.id,
+            JSONKey.value.rawValue: self.value?.rawValue ?? NSNull()
+        ]
+    }
+
     private init() {
-        id = ""
+        self.id = ""
     }
 
     required convenience init(json: JSON) {
         self.init()
-        update(json: json)
+        self.update(json: json)
     }
 
-    init(id: String, value: VoteValue?) {
+    init(id: Vote.IdType, value: VoteValue?) {
         self.id = id
         self.value = value
     }
 
-    var json: JSON {
-        return [
-            "id": id,
-            "value": value?.rawValue ?? NSNull()
-        ]
+    func update(json: JSON) {
+        self.id = json[JSONKey.id.rawValue].stringValue
+        if let voteValue = json[JSONKey.value.rawValue].string {
+            self.value = VoteValue(rawValue: voteValue)
+        }
     }
-}
 
-enum VoteValue: String {
-    case epic
-    case abuse
+    enum JSONKey: String {
+        case id
+        case value
+    }
 }

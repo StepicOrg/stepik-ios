@@ -2872,7 +2872,6 @@
 				083749281DE5AE1400144C14 /* Alerts */,
 				08F5554C1C4F921B00C877E8 /* Attempts&Sumbissions */,
 				080ACF4E1BD79D4600329F2B /* Constants */,
-				2CA3DAA62179DF7300F43888 /* Discussions */,
 				0828FF701BC5D181000AFEA7 /* Entities */,
 				0861E6701CD80A0A00B45652 /* ExecutionQueue */,
 				08E542071C6CD59A00DEC38E /* Managers */,
@@ -3561,6 +3560,17 @@
 			path = Registration;
 			sourceTree = "<group>";
 		};
+		2C1661012358D3290020B7F4 /* StepOptions */ = {
+			isa = PBXGroup;
+			children = (
+				2C20C85F22F8E1C90052E9BF /* CodeLimitPlainObject.swift */,
+				2C20C86322F8E1EE0052E9BF /* CodeSamplePlainObject.swift */,
+				2C20C86122F8E1DE0052E9BF /* CodeTemplatePlainObject.swift */,
+				2C20C85D22F8E19F0052E9BF /* StepOptionsPlainObject.swift */,
+			);
+			path = StepOptions;
+			sourceTree = "<group>";
+		};
 		2C1B0F9A22E6865E00B43850 /* CodeEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -3586,10 +3596,8 @@
 		2C20C85C22F8E1810052E9BF /* PlainObjects */ = {
 			isa = PBXGroup;
 			children = (
-				2C20C85F22F8E1C90052E9BF /* CodeLimitPlainObject.swift */,
-				2C20C86322F8E1EE0052E9BF /* CodeSamplePlainObject.swift */,
-				2C20C86122F8E1DE0052E9BF /* CodeTemplatePlainObject.swift */,
-				2C20C85D22F8E19F0052E9BF /* StepOptionsPlainObject.swift */,
+				2CA3DAA62179DF7300F43888 /* Discussions */,
+				2C1661012358D3290020B7F4 /* StepOptions */,
 			);
 			name = PlainObjects;
 			sourceTree = "<group>";

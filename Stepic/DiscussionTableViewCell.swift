@@ -81,7 +81,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
 
     override func updateConstraints() {
         super.updateConstraints()
-        self.setLeadingConstraints(self.comment?.parentId == nil ? 0 : -40)
+        self.setLeadingConstraints(self.comment?.parentID == nil ? 0 : -40)
     }
 
     func configure(viewData: DiscussionsViewData) {

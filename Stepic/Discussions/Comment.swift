@@ -15,91 +15,88 @@ enum UserRole: String {
     case staff
 }
 
-/*
- Comment model, without voting
- */
 final class Comment: JSONSerializable {
-    typealias IdType = Int
-
     var id: Int = 0
-    var parentId: Int?
-    var userId: Int = 0
+    var parentID: Comment.IdType?
+    var userID: User.IdType = 0
     var userRole: UserRole = .student
     var time = Date()
     var lastTime = Date()
     var text: String = ""
     var replyCount: Int = 0
     var isDeleted: Bool = false
-    var targetStepId: Int = 0
-    var repliesIds: [Int] = []
+    var targetStepID: Int = 0
+    var repliesIDs: [Int] = []
     var isPinned: Bool = false
-    var voteId: String = ""
+    var voteID: String = ""
     var epicCount: Int = 0
     var abuseCount: Int = 0
 
-    //TODO: Check those "!" marks, they look suspicious
     var userInfo: UserInfo!
     var vote: Vote!
 
-    func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        parentId = json["parent"].int
-        userId = json["user"].intValue
-        userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .student
-        time = Parser.shared.dateFromTimedateJSON(json["time"])!
-        lastTime = Parser.shared.dateFromTimedateJSON(json["last_time"])!
-        text = json["text"].stringValue
-        replyCount = json["reply_count"].intValue
-        isDeleted = json["is_deleted"].boolValue
-        targetStepId = json["target"].intValue
-        repliesIds = json["replies"].arrayValue.compactMap {
-            $0.int
-        }
-        isPinned = json["is_pinned"].boolValue
-        voteId = json["vote"].stringValue
-        epicCount = json["epic_count"].intValue
-        abuseCount = json["abuse_count"].intValue
-    }
-
-    required init(json: JSON) {
-        id = json["id"].intValue
-        parentId = json["parent"].int
-        userId = json["user"].intValue
-        userRole = UserRole(rawValue: json["user_role"].stringValue) ?? .student
-        time = Parser.shared.dateFromTimedateJSON(json["time"])!
-        lastTime = Parser.shared.dateFromTimedateJSON(json["last_time"])!
-        text = json["text"].stringValue
-        replyCount = json["reply_count"].intValue
-        isDeleted = json["is_deleted"].boolValue
-        targetStepId = json["target"].intValue
-        repliesIds = json["replies"].arrayValue.compactMap {
-            $0.int
-        }
-        isPinned = json["is_pinned"].boolValue
-        voteId = json["vote"].stringValue
-        epicCount = json["epic_count"].intValue
-        abuseCount = json["abuse_count"].intValue
-    }
-
-    func update(json: JSON) {
-        initialize(json)
-    }
-
-    init(parent: Int? = nil, target: Int, text: String) {
-        self.parentId = parent
-        self.targetStepId = target
-        self.text = text
-    }
-
     var json: JSON {
         var dict: JSON = [
-            "target": targetStepId,
-            "text": text
+            JSONKey.target.rawValue: self.targetStepID,
+            JSONKey.text.rawValue: self.text
         ]
-        if let parent = parentId {
-            try! dict.merge(with: ["parent": parent])
+
+        if let parentID = self.parentID {
+            try? dict.merge(
+                with: [
+                    JSONKey.parent.rawValue: parentID
+                ]
+            )
         }
 
         return dict
+    }
+
+    required init(json: JSON) {
+        self.update(json: json)
+    }
+
+    init(parent: Int? = nil, target: Int, text: String) {
+        self.parentID = parent
+        self.targetStepID = target
+        self.text = text
+    }
+
+    func update(json: JSON) {
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.parentID = json[JSONKey.parent.rawValue].int
+        self.userID = json[JSONKey.user.rawValue].intValue
+        self.userRole = UserRole(rawValue: json[JSONKey.userRole.rawValue].stringValue) ?? .student
+        self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]).require()
+        self.lastTime = Parser.shared.dateFromTimedateJSON(json[JSONKey.lastTime.rawValue]).require()
+        self.text = json[JSONKey.text.rawValue].stringValue
+        self.replyCount = json[JSONKey.replyCount.rawValue].intValue
+        self.isDeleted = json[JSONKey.isDeleted.rawValue].boolValue
+        self.targetStepID = json[JSONKey.target.rawValue].intValue
+        self.repliesIDs = json[JSONKey.replies.rawValue].arrayValue.compactMap { $0.int }
+        self.isPinned = json[JSONKey.isPinned.rawValue].boolValue
+        self.voteID = json[JSONKey.vote.rawValue].stringValue
+        self.epicCount = json[JSONKey.epicCount.rawValue].intValue
+        self.abuseCount = json[JSONKey.abuseCount.rawValue].intValue
+    }
+
+    enum JSONKey: String {
+        case id
+        case parent
+        case user
+        case userRole = "user_role"
+        case time
+        case lastTime = "last_time"
+        case text
+        case replyCount = "reply_count"
+        case isDeleted = "is_deleted"
+        case target
+        case replies
+        case isPinned = "is_pinned"
+        case vote
+        case epicCount = "epic_count"
+        case abuseCount = "abuse_count"
+        case users
+        case votes
     }
 }

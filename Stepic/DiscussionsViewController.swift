@@ -19,13 +19,13 @@ final class DiscussionsLegacyAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-        vc.discussionProxyId = self.discussionProxyID
-        vc.target = self.stepID
-        vc.presenter = DiscussionsPresenter(
-            view: vc,
-            discussionProxyId: self.discussionProxyID,
-            stepId: self.stepID,
+        let viewController = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
+        viewController.discussionProxyId = self.discussionProxyID
+        viewController.target = self.stepID
+        viewController.presenter = DiscussionsPresenter(
+            view: viewController,
+            discussionProxyID: self.discussionProxyID,
+            stepID: self.stepID,
             discussionProxiesNetworkService: DiscussionProxiesNetworkService(
                 discussionProxiesAPI: DiscussionProxiesAPI()
             ),
@@ -33,8 +33,8 @@ final class DiscussionsLegacyAssembly: Assembly {
             votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
-        vc.title = NSLocalizedString("Discussions", comment: "")
-        return vc
+        viewController.title = NSLocalizedString("Discussions", comment: "")
+        return viewController
     }
 }
 
@@ -155,7 +155,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         let alert = DiscussionAlertConstructor.getCommentAlert(
             comment: comment,
             replyBlock: { [weak self] in
-                self?.displayWriteComment(parentId: comment.parentId ?? comment.id)
+                self?.displayWriteComment(parentId: comment.parentID ?? comment.id)
             },
             likeBlock: { [weak self] in
                 self?.presenter?.likeComment(comment)

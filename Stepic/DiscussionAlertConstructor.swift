@@ -38,7 +38,7 @@ final class DiscussionAlertConstructor {
             replyBlock()
         }))
 
-        if comment.userId != AuthInfo.shared.userId {
+        if comment.userID != AuthInfo.shared.userId {
             let likeTitle: String = (comment.vote.value == .epic)
                 ? NSLocalizedString("Unlike", comment: "")
                 : NSLocalizedString("Like", comment: "")
