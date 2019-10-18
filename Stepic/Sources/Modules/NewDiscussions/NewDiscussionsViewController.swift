@@ -1,11 +1,13 @@
 import UIKit
 
 protocol NewDiscussionsViewControllerProtocol: class {
-    func displaySomeActionResult(viewModel: NewDiscussions.SomeAction.ViewModel)
+    func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel)
 }
 
 final class NewDiscussionsViewController: UIViewController {
     private let interactor: NewDiscussionsInteractorProtocol
+
+    lazy var newDiscussionsView = self.view as? NewDiscussionsView
 
     init(interactor: NewDiscussionsInteractorProtocol) {
         self.interactor = interactor
@@ -21,8 +23,14 @@ final class NewDiscussionsViewController: UIViewController {
         let view = NewDiscussionsView(frame: UIScreen.main.bounds)
         self.view = view
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.interactor.doDiscussionsLoad(request: .init())
+    }
 }
 
 extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
-    func displaySomeActionResult(viewModel: NewDiscussions.SomeAction.ViewModel) { }
+    func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel) { }
 }

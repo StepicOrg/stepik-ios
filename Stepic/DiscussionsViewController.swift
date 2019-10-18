@@ -10,10 +10,10 @@ import UIKit
 
 @available(*, deprecated, message: "Legacy assembly")
 final class DiscussionsLegacyAssembly: Assembly {
-    private let discussionProxyID: String
+    private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
 
-    init(discussionProxyID: String, stepID: Step.IdType) {
+    init(discussionProxyID: DiscussionProxy.IdType, stepID: Step.IdType) {
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
     }

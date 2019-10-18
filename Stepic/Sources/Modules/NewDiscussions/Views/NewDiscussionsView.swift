@@ -27,7 +27,9 @@ final class NewDiscussionsView: UIView {
 }
 
 extension NewDiscussionsView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
+    func setupView() {
+        self.backgroundColor = .white
+    }
 
     func addSubviews() { }
 

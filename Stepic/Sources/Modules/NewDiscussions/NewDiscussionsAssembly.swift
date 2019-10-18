@@ -1,23 +1,28 @@
 import UIKit
 
 final class NewDiscussionsAssembly: Assembly {
-    var moduleInput: NewDiscussionsInputProtocol?
+    private let discussionProxyID: DiscussionProxy.IdType
 
-    private weak var moduleOutput: NewDiscussionsOutputProtocol?
-
-    init(output: NewDiscussionsOutputProtocol? = nil) {
-        self.moduleOutput = output
+    init(discussionProxyID: DiscussionProxy.IdType) {
+        self.discussionProxyID = discussionProxyID
     }
 
     func makeModule() -> UIViewController {
-        let provider = NewDiscussionsProvider()
+        let provider = NewDiscussionsProvider(
+            discussionProxiesNetworkService: DiscussionProxiesNetworkService(
+                discussionProxiesAPI: DiscussionProxiesAPI()
+            ),
+            commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI())
+        )
         let presenter = NewDiscussionsPresenter()
-        let interactor = NewDiscussionsInteractor(presenter: presenter, provider: provider)
+        let interactor = NewDiscussionsInteractor(
+            discussionProxyID: self.discussionProxyID,
+            presenter: presenter,
+            provider: provider
+        )
         let viewController = NewDiscussionsViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }
