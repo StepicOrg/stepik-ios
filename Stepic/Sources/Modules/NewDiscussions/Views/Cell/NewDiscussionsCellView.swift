@@ -78,7 +78,8 @@ final class NewDiscussionsCellView: UIView {
 
         self.nameLabel.text = viewModel.userName
         self.dateLabel.text = viewModel.dateRepresentation
-        self.textLabel.text = viewModel.text
+        // TODO: Add LaTeX support via ProcessedContentTextView
+        self.textLabel.setTextWithHTMLString(viewModel.text)
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
