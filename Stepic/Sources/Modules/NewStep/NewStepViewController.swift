@@ -205,10 +205,7 @@ extension NewStepViewController: NewStepViewDelegate {
             return
         }
 
-        let assembly = DiscussionsLegacyAssembly(
-            discussionProxyID: discussionProxyID,
-            stepID: viewModel.step.id
-        )
+        let assembly = NewDiscussionsAssembly(discussionProxyID: discussionProxyID)
         self.push(module: assembly.makeModule())
     }
 

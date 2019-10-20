@@ -4,7 +4,8 @@ enum NewDiscussions {
     // MARK: Common structs
 
     struct DiscussionsResult {
-        let discussions: [NewDiscussionsViewModel]
+        let discussions: [NewDiscussionsDiscussionViewModel]
+        let discussionsLeftToLoad: Int
     }
 
     enum SortType {
@@ -47,13 +48,16 @@ enum NewDiscussions {
             let result: Result<Data>
         }
 
-        struct ViewModel { }
+        struct ViewModel {
+            let state: ViewControllerState
+        }
     }
 
     // MARK: States
 
     enum ViewControllerState {
         case loading
+        case error
         case result(data: DiscussionsResult)
     }
 }

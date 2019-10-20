@@ -452,6 +452,9 @@
 		2C23C5E61F6BFA8800FC2B7C /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */; };
 		2C2485472101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */; };
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
+		2C251BA6235A1B1E00D3FBD8 /* NewDiscussionsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C251BA5235A1B1E00D3FBD8 /* NewDiscussionsCellView.swift */; };
+		2C251BA8235A1B3D00D3FBD8 /* NewDiscussionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C251BA7235A1B3D00D3FBD8 /* NewDiscussionsTableViewCell.swift */; };
+		2C251BAA235A290A00D3FBD8 /* NewDiscussionsTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C251BA9235A290A00D3FBD8 /* NewDiscussionsTableViewDataSource.swift */; };
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C2972052147F5FD001502BD /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		2C29B63022C664C500730C16 /* ChoiceElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C29B62F22C664C500730C16 /* ChoiceElementView.swift */; };
@@ -1550,6 +1553,9 @@
 		2C23C5E51F6BFA8800FC2B7C /* RegistrationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorableBackgroundDownloaderProtocol.swift; sourceTree = "<group>"; };
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
+		2C251BA5235A1B1E00D3FBD8 /* NewDiscussionsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscussionsCellView.swift; sourceTree = "<group>"; };
+		2C251BA7235A1B3D00D3FBD8 /* NewDiscussionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscussionsTableViewCell.swift; sourceTree = "<group>"; };
+		2C251BA9235A290A00D3FBD8 /* NewDiscussionsTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscussionsTableViewDataSource.swift; sourceTree = "<group>"; };
 		2C29B62F22C664C500730C16 /* ChoiceElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceElementView.swift; sourceTree = "<group>"; };
 		2C2D2D8A22E9FC2F003F1563 /* CodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -3705,9 +3711,20 @@
 		2C3A24552359DA9200E2405F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C251BA9235A290A00D3FBD8 /* NewDiscussionsTableViewDataSource.swift */,
 				3E49C6C90E2C87E46C552570 /* NewDiscussionsView.swift */,
+				2C3A2459235A1ACA00E2405F /* Cell */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2C3A2459235A1ACA00E2405F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2C251BA5235A1B1E00D3FBD8 /* NewDiscussionsCellView.swift */,
+				2C251BA7235A1B3D00D3FBD8 /* NewDiscussionsTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		2C41B4E2234B655F00644ED5 /* StepicVideoPlayerViewController */ = {
@@ -6139,6 +6156,7 @@
 				089877A1214047650065DFA2 /* SplitTestProtocol.swift in Sources */,
 				082BE3B21E67686B006BC60F /* RoutingManager.swift in Sources */,
 				2C01D3AC22DDB98900C84CEE /* LaunchDefaultsContainer.swift in Sources */,
+				2C251BAA235A290A00D3FBD8 /* NewDiscussionsTableViewDataSource.swift in Sources */,
 				08E43EA5214C2D1A00E3CB50 /* PushStackRouter.swift in Sources */,
 				2C9E3F3C1F7A80A300DDF1AA /* Notification+CoreDataProperties.swift in Sources */,
 				083267A61CDCE64F002F7B5A /* PersistentTaskRecoveryManager.swift in Sources */,
@@ -6287,6 +6305,7 @@
 				0829B8321E9C4CB5009B4A84 /* RateAppManager.swift in Sources */,
 				2CA1001F2174BE49003775CB /* StreakLocalNotificationContentProvider.swift in Sources */,
 				0828FF7D1BC7F9D7000AFEA7 /* Unit.swift in Sources */,
+				2C251BA6235A1B1E00D3FBD8 /* NewDiscussionsCellView.swift in Sources */,
 				08484F05211AF4320006266F /* StoryAssembly.swift in Sources */,
 				2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */,
 				2CA1001421749877003775CB /* NotificationService+PersonalDeadline.swift in Sources */,
@@ -6369,6 +6388,7 @@
 				08F555651C4FF22600C877E8 /* QuizControllerDelegate.swift in Sources */,
 				08D035251D65B5E5003515C6 /* AnalyticsReporter.swift in Sources */,
 				0891424B1BCEE4EF0000BCB0 /* VideoURL.swift in Sources */,
+				2C251BA8235A1B3D00D3FBD8 /* NewDiscussionsTableViewCell.swift in Sources */,
 				080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */,
 				089877A0214047650065DFA2 /* SplitTestGroupProtocol.swift in Sources */,
 				088E73EA2060124B00D458E3 /* ApiRequestRetrier.swift in Sources */,
