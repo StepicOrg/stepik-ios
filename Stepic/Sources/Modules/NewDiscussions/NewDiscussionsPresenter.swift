@@ -84,6 +84,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         )
     }
 
+    // swiftlint:disable:next discouraged_optional_collection
     private func makeDiscussionViewModel(
         discussion: Comment,
         replies: [Comment]?

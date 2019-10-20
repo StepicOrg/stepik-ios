@@ -28,12 +28,42 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
         let cell: NewDiscussionsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.updateConstraintsIfNeeded()
 
-        let discussionViewModel = self.viewModels[indexPath.section]
-        let commentViewModel = indexPath.row == NewDiscussionsTableViewDataSource.parentDiscussionRowIndex
-            ? discussionViewModel.comment
-            : discussionViewModel.replies[indexPath.row - NewDiscussionsTableViewDataSource.parentDiscussionInset]
-        cell.configure(viewModel: commentViewModel)
+        self.tableView(tableView, configureCell: cell, at: indexPath)
 
         return cell
+    }
+
+    // MARK: Private helpers
+
+    private func tableView(
+        _ tableView: UITableView,
+        configureCell cell: NewDiscussionsTableViewCell,
+        at indexPath: IndexPath
+    ) {
+        let discussionViewModel = self.viewModels[indexPath.section]
+
+        let commentType: NewDiscussionsTableViewCell.ViewModel.CommentType =
+            indexPath.row == NewDiscussionsTableViewDataSource.parentDiscussionRowIndex ? .discussion : .reply
+        let separatorType: NewDiscussionsTableViewCell.ViewModel.SeparatorType = {
+            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                if discussionViewModel.repliesLeftToLoad > 0 {
+                    return .none
+                }
+                return .large
+            }
+            return .small
+        }()
+
+        let commentViewModel = commentType == .discussion
+            ? discussionViewModel.comment
+            : discussionViewModel.replies[indexPath.row - NewDiscussionsTableViewDataSource.parentDiscussionInset]
+
+        cell.configure(
+            viewModel: NewDiscussionsTableViewCell.ViewModel(
+                comment: commentViewModel,
+                commentType: commentType,
+                separatorType: separatorType
+            )
+        )
     }
 }
