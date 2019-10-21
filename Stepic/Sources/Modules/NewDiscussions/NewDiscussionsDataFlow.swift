@@ -11,6 +11,7 @@ enum NewDiscussions {
     struct DiscussionsData {
         let discussionProxy: DiscussionProxy
         let discussions: [Comment]
+        let discussionsIDsFetchingMore: Set<Comment.IdType>
         let replies: [Comment.IdType: [Comment]]
         let sortType: SortType
     }
@@ -64,6 +65,21 @@ enum NewDiscussions {
 
         struct ViewModel {
             let state: PaginationState
+        }
+    }
+
+    /// Load next part discussions
+    enum NextRepliesLoad {
+        struct Request {
+            let discussionID: Comment.IdType
+        }
+
+        struct Response {
+            let result: DiscussionsData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsResult
         }
     }
 

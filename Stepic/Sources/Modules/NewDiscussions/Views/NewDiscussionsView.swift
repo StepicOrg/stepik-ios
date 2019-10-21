@@ -4,6 +4,11 @@ import UIKit
 protocol NewDiscussionsViewDelegate: class {
     func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView)
     func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView)
+    func newDiscussionsViewDidRequestRepliesPagination(
+        _ view: NewDiscussionsView,
+        cell: NewDiscussionsLoadMoreTableViewCell,
+        at indexPath: IndexPath
+    )
 }
 
 extension NewDiscussionsView {
@@ -33,6 +38,7 @@ final class NewDiscussionsView: UIView {
 
         tableView.delegate = self
         tableView.register(cellClass: NewDiscussionsTableViewCell.self)
+        tableView.register(cellClass: NewDiscussionsLoadMoreTableViewCell.self)
 
         return tableView
     }()
@@ -133,5 +139,9 @@ extension NewDiscussionsView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        if let loadMoreRepliesCell = tableView.cellForRow(at: indexPath) as? NewDiscussionsLoadMoreTableViewCell {
+            self.delegate?.newDiscussionsViewDidRequestRepliesPagination(self, cell: loadMoreRepliesCell, at: indexPath)
+        }
     }
 }

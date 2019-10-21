@@ -3,6 +3,7 @@ import UIKit
 protocol NewDiscussionsViewControllerProtocol: class {
     func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel)
     func displayNextDiscussions(viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel)
+    func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel)
 }
 
 final class NewDiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -134,6 +135,10 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
             self.updatePagination(hasNextPage: true)
         }
     }
+
+    func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
 }
 
 // MARK: - NewDiscussionsViewController: NewDiscussionsViewDelegate -
@@ -148,5 +153,17 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
             self.canTriggerPagination = false
             self.interactor.doNextDiscussionsLoad(request: .init())
         }
+    }
+
+    func newDiscussionsViewDidRequestRepliesPagination(
+        _ view: NewDiscussionsView,
+        cell: NewDiscussionsLoadMoreTableViewCell,
+        at indexPath: IndexPath
+    ) {
+        guard let discussionViewModel = self.tableDataSource.getDiscussionViewModel(at: indexPath) else {
+            return
+        }
+
+        self.interactor.doNextRepliesLoad(request: .init(discussionID: discussionViewModel.id))
     }
 }

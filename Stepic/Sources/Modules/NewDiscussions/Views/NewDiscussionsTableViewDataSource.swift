@@ -7,6 +7,10 @@ final class NewDiscussionsTableViewDataSource: NSObject {
         self.viewModels = viewModels
         super.init()
     }
+
+    func getDiscussionViewModel(at indexPath: IndexPath) -> NewDiscussionsDiscussionViewModel? {
+        return self.viewModels[safe: indexPath.section]
+    }
 }
 
 // MARK: - NewDiscussionsTableViewDataSource: UITableViewDataSource -
@@ -21,19 +25,35 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModels[section].replies.count + NewDiscussionsTableViewDataSource.parentDiscussionInset
+        return self.viewModels[section].replies.count
+            + NewDiscussionsTableViewDataSource.parentDiscussionInset
+            + (self.shouldShowLoadMoreRepliesForSection(section) ? 1 : 0)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: NewDiscussionsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.updateConstraintsIfNeeded()
+        if self.shouldShowLoadMoreRepliesForSection(indexPath.section)
+            && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            let cell: NewDiscussionsLoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.updateConstraintsIfNeeded()
 
-        self.tableView(tableView, configureCell: cell, at: indexPath)
+            self.configureCell(cell, at: indexPath)
 
-        return cell
+            return cell
+        } else {
+            let cell: NewDiscussionsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.updateConstraintsIfNeeded()
+
+            self.tableView(tableView, configureCell: cell, at: indexPath)
+
+            return cell
+        }
     }
 
     // MARK: Private helpers
+
+    private func shouldShowLoadMoreRepliesForSection(_ section: Int) -> Bool {
+        return self.viewModels[section].repliesLeftToLoad > 0
+    }
 
     private func tableView(
         _ tableView: UITableView,
@@ -67,5 +87,12 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
                 separatorType: separatorType
             )
         )
+    }
+
+    private func configureCell(_ cell: NewDiscussionsLoadMoreTableViewCell, at indexPath: IndexPath) {
+        let viewModel = self.viewModels[indexPath.section]
+
+        cell.title = viewModel.formattedRepliesLeftToLoad
+        cell.isUpdating = viewModel.isFetchingMoreReplies
     }
 }

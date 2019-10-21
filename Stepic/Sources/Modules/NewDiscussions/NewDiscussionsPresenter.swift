@@ -3,6 +3,7 @@ import UIKit
 protocol NewDiscussionsPresenterProtocol {
     func presentDiscussions(response: NewDiscussions.DiscussionsLoad.Response)
     func presentNextDiscussions(response: NewDiscussions.NextDiscussionsLoad.Response)
+    func presentNextReplies(response: NewDiscussions.NextRepliesLoad.Response)
 }
 
 final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
@@ -16,6 +17,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             let data = self.makeDiscussionsData(
                 discussionProxy: result.discussionProxy,
                 discussions: result.discussions,
+                discussionsIDsFetchingMore: result.discussionsIDsFetchingMore,
                 replies: result.replies,
                 sortType: result.sortType
             )
@@ -35,6 +37,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             let data = self.makeDiscussionsData(
                 discussionProxy: result.discussionProxy,
                 discussions: result.discussions,
+                discussionsIDsFetchingMore: result.discussionsIDsFetchingMore,
                 replies: result.replies,
                 sortType: result.sortType
             )
@@ -46,11 +49,24 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         self.viewController?.displayNextDiscussions(viewModel: viewModel)
     }
 
+    func presentNextReplies(response: NewDiscussions.NextRepliesLoad.Response) {
+        let data = self.makeDiscussionsData(
+            discussionProxy: response.result.discussionProxy,
+            discussions: response.result.discussions,
+            discussionsIDsFetchingMore: response.result.discussionsIDsFetchingMore,
+            replies: response.result.replies,
+            sortType: response.result.sortType
+        )
+
+        self.viewController?.displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel(data: data))
+    }
+
     // MARK: - Private API -
 
     private func makeDiscussionsData(
         discussionProxy: DiscussionProxy,
         discussions: [Comment],
+        discussionsIDsFetchingMore: Set<Comment.IdType>,
         replies: [Comment.IdType: [Comment]],
         sortType: NewDiscussions.SortType
     ) -> NewDiscussions.DiscussionsResult {
@@ -63,7 +79,11 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         )
 
         let discussionsViewModels = discussions.map { discussion in
-            self.makeDiscussionViewModel(discussion: discussion, replies: replies[discussion.id] ?? [])
+            self.makeDiscussionViewModel(
+                discussion: discussion,
+                replies: replies[discussion.id] ?? [],
+                isFetchingMoreReplies: discussionsIDsFetchingMore.contains(discussion.id)
+            )
         }
 
         let discussionsLeftToLoad = self.getDiscussionsIDs(
@@ -117,17 +137,22 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
 
     private func makeDiscussionViewModel(
         discussion: Comment,
-        replies: [Comment]
+        replies: [Comment],
+        isFetchingMoreReplies: Bool
     ) -> NewDiscussionsDiscussionViewModel {
         let repliesViewModels = self.sortedReplies(
             replies,
             parentDiscussion: discussion
         ).map { self.makeCommentViewModel(comment: $0) }
 
+        let leftToLoad = discussion.repliesIDs.count - repliesViewModels.count
+
         return NewDiscussionsDiscussionViewModel(
             comment: self.makeCommentViewModel(comment: discussion),
             replies: repliesViewModels,
-            repliesLeftToLoad: discussion.repliesIDs.count - repliesViewModels.count
+            repliesLeftToLoad: leftToLoad,
+            formattedRepliesLeftToLoad: "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(leftToLoad))",
+            isFetchingMoreReplies: isFetchingMoreReplies
         )
     }
 

@@ -3,7 +3,10 @@ import Foundation
 struct NewDiscussionsDiscussionViewModel {
     let comment: NewDiscussionsCommentViewModel
     let replies: [NewDiscussionsCommentViewModel]
+
     let repliesLeftToLoad: Int
+    let formattedRepliesLeftToLoad: String
+    let isFetchingMoreReplies: Bool
 
     var id: Int {
         return self.comment.id

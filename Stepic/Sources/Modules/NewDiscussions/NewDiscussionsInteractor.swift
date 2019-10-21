@@ -5,6 +5,7 @@ import PromiseKit
 protocol NewDiscussionsInteractorProtocol {
     func doDiscussionsLoad(request: NewDiscussions.DiscussionsLoad.Request)
     func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request)
+    func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request)
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
@@ -42,6 +43,9 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
     private let currentSortType: NewDiscussions.SortType = .default
+
+    /// A Boolean value that determines whether the fetch of the replies for root discussion is in progress.
+    private var discussionsIDsFetchingReplies: Set<Comment.IdType> = []
 
     // Semaphore to prevent concurrent fetching
     private let fetchSemaphore = DispatchSemaphore(value: 1)
@@ -105,18 +109,12 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
 
             strongSelf.provider.fetchComments(ids: idsToLoad).done { fetchedComments in
                 strongSelf.updateDataWithNewComments(fetchedComments)
-
-                let discussionsData = NewDiscussions.DiscussionsData(
-                    discussionProxy: strongSelf.currentDiscussionProxy.require(),
-                    discussions: strongSelf.currentDiscussions,
-                    replies: strongSelf.currentReplies,
-                    sortType: strongSelf.currentSortType
-                )
-
                 DispatchQueue.main.async {
                     NewDiscussionsInteractor.logger.info("new discussions interactor: finish fetching next discussions")
                     strongSelf.presenter.presentNextDiscussions(
-                        response: NewDiscussions.NextDiscussionsLoad.Response(result: .success(discussionsData))
+                        response: NewDiscussions.NextDiscussionsLoad.Response(
+                            result: .success(strongSelf.makeDiscussionsData())
+                        )
                     )
                 }
             }.catch { error in
@@ -126,6 +124,55 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextDiscussions(
                         response: NewDiscussions.NextDiscussionsLoad.Response(result: .failure(Error.fetchFailed))
+                    )
+                }
+            }.finally {
+                strongSelf.fetchSemaphore.signal()
+            }
+        }
+    }
+
+    func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request) {
+        guard let discussion = self.currentDiscussions.first(where: { $0.id == request.discussionID }),
+              !self.discussionsIDsFetchingReplies.contains(discussion.id) else {
+            return
+        }
+
+        self.discussionsIDsFetchingReplies.insert(request.discussionID)
+        self.presenter.presentNextReplies(
+            response: NewDiscussions.NextRepliesLoad.Response(result: self.makeDiscussionsData())
+        )
+
+        self.fetchBackgroundQueue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchSemaphore.wait()
+
+            let idsToLoad = strongSelf.getNextReplyIDsToLoad(discussion: discussion)
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: start fetching next replies",
+                metadata: ["ids": .string("\(idsToLoad)")]
+            )
+
+            strongSelf.provider.fetchComments(ids: idsToLoad).done { fetchedComments in
+                strongSelf.updateDataWithNewComments(fetchedComments)
+                strongSelf.discussionsIDsFetchingReplies.remove(discussion.id)
+                DispatchQueue.main.async {
+                    NewDiscussionsInteractor.logger.info("new discussions interactor: finish fetching next replies")
+                    strongSelf.presenter.presentNextReplies(
+                        response: NewDiscussions.NextRepliesLoad.Response(result: strongSelf.makeDiscussionsData())
+                    )
+                }
+            }.catch { error in
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: failed fetching next replies, error: \(error)"
+                )
+                strongSelf.discussionsIDsFetchingReplies.remove(discussion.id)
+                DispatchQueue.main.async {
+                    strongSelf.presenter.presentNextReplies(
+                        response: NewDiscussions.NextRepliesLoad.Response(result: strongSelf.makeDiscussionsData())
                     )
                 }
             }.finally {
@@ -153,15 +200,7 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
                 self.provider.fetchComments(ids: ids)
             }.done { fetchedComments in
                 self.updateDataWithNewComments(fetchedComments)
-
-                let discussionsData = NewDiscussions.DiscussionsData(
-                    discussionProxy: self.currentDiscussionProxy.require(),
-                    discussions: self.currentDiscussions,
-                    replies: self.currentReplies,
-                    sortType: self.currentSortType
-                )
-
-                seal.fulfill(discussionsData)
+                seal.fulfill(self.makeDiscussionsData())
             }.catch { error in
                 seal.reject(error)
             }
@@ -189,6 +228,16 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
 
+    private func makeDiscussionsData() -> NewDiscussions.DiscussionsData {
+        return NewDiscussions.DiscussionsData(
+            discussionProxy: self.currentDiscussionProxy.require(),
+            discussions: self.currentDiscussions,
+            discussionsIDsFetchingMore: self.discussionsIDsFetchingReplies,
+            replies: self.currentReplies,
+            sortType: self.currentSortType
+        )
+    }
+
     private func getNextDiscussionsIDsToLoad() -> [Comment.IdType] {
         assert(self.currentDiscussionProxy != nil, "discussion proxy must exists, unexpected behavior")
 
@@ -198,6 +247,22 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         let offset = min(discussionsLeftToLoad, NewDiscussionsInteractor.discussionsLoadingInterval)
 
         return Array(self.currentDiscussionsIDs[startIndex..<startIndex + offset])
+    }
+
+    private func getNextReplyIDsToLoad(discussion: Comment) -> [Comment.IdType] {
+        let loadedRepliesIDs = Set(self.currentReplies[discussion.id, default: []].map { $0.id })
+        var idsToLoad = [Comment.IdType]()
+
+        for replyID in discussion.repliesIDs {
+            if !loadedRepliesIDs.contains(replyID) {
+                idsToLoad.append(replyID)
+                if idsToLoad.count == NewDiscussionsInteractor.repliesLoadingInterval {
+                    return idsToLoad
+                }
+            }
+        }
+
+        return idsToLoad
     }
 
     // MARK: - Types -
