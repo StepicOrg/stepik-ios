@@ -1,4 +1,5 @@
 import Foundation
+import Logging
 import PromiseKit
 
 protocol NewDiscussionsInteractorProtocol {
@@ -6,6 +7,8 @@ protocol NewDiscussionsInteractorProtocol {
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
+    private static let logger = Logger(label: "com.AlexKarpov.Stepic.NewDiscussionsInteractor")
+
     private static let discussionsLoadingInterval = 20
     private static let repliesLoadingInterval = 20
 
@@ -64,11 +67,11 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             }
 
             strongSelf.fetchSemaphore.wait()
-            print("new discussions interactor: start fetching discussions")
+            NewDiscussionsInteractor.logger.info("new discussions interactor: start fetching discussions")
 
             strongSelf.fetchDiscussions(discussionProxyID: strongSelf.discussionProxyID).done { discussionsData in
                 DispatchQueue.main.async {
-                    print("new discussions interactor: finish fetching discussions")
+                    NewDiscussionsInteractor.logger.info("new discussions interactor: finish fetching discussions")
                     strongSelf.presenter.presentDiscussions(
                         response: NewDiscussions.DiscussionsLoad.Response(result: .success(discussionsData))
                     )
