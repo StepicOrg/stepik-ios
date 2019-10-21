@@ -4,6 +4,9 @@ protocol NewDiscussionsPresenterProtocol {
     func presentDiscussions(response: NewDiscussions.DiscussionsLoad.Response)
     func presentNextDiscussions(response: NewDiscussions.NextDiscussionsLoad.Response)
     func presentNextReplies(response: NewDiscussions.NextRepliesLoad.Response)
+    func presentWriteComment(response: NewDiscussions.WriteCommentPresentation.Response)
+    func presentCommentCreated(response: NewDiscussions.CommentCreated.Response)
+    func presentWaitingState(response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
@@ -59,6 +62,21 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         )
 
         self.viewController?.displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel(data: data))
+    }
+
+    func presentWriteComment(response: NewDiscussions.WriteCommentPresentation.Response) {
+        self.viewController?.displayWriteComment(
+            viewModel: NewDiscussions.WriteCommentPresentation.ViewModel(stepID: response.stepID)
+        )
+    }
+
+    func presentCommentCreated(response: NewDiscussions.CommentCreated.Response) {
+    }
+
+    func presentWaitingState(response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(
+            viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel(shouldDismiss: response.shouldDismiss)
+        )
     }
 
     // MARK: - Private API -

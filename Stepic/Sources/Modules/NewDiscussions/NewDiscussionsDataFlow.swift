@@ -83,6 +83,45 @@ enum NewDiscussions {
         }
     }
 
+    /// Present write course review (after compose bar button item click)
+    enum WriteCommentPresentation {
+        struct Request { }
+
+        struct Response {
+            let stepID: Step.IdType
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+        }
+    }
+
+    /// Show current user newly created comment
+    enum CommentCreated {
+        struct Request {
+            let comment: Comment
+        }
+
+        struct Response {
+            let result: DiscussionsData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsResult
+        }
+    }
+
+    /// Handle HUD
+    enum BlockingWaitingIndicatorUpdate {
+        struct Response {
+            let shouldDismiss: Bool
+        }
+
+        struct ViewModel {
+            let shouldDismiss: Bool
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

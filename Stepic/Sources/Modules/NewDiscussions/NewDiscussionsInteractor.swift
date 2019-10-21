@@ -6,6 +6,8 @@ protocol NewDiscussionsInteractorProtocol {
     func doDiscussionsLoad(request: NewDiscussions.DiscussionsLoad.Request)
     func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request)
     func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request)
+    func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request )
+    func doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request)
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
@@ -18,6 +20,7 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     private let provider: NewDiscussionsProviderProtocol
 
     private let discussionProxyID: DiscussionProxy.IdType
+    private let stepID: Step.IdType
 
     private var currentDiscussionProxy: DiscussionProxy?
     private var currentDiscussions: [Comment] = [] {
@@ -55,10 +58,12 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
 
     init(
         discussionProxyID: DiscussionProxy.IdType,
+        stepID: Step.IdType,
         presenter: NewDiscussionsPresenterProtocol,
         provider: NewDiscussionsProviderProtocol
     ) {
         self.discussionProxyID = discussionProxyID
+        self.stepID = stepID
         self.presenter = presenter
         self.provider = provider
     }
@@ -178,6 +183,43 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             }.finally {
                 strongSelf.fetchSemaphore.signal()
             }
+        }
+    }
+
+    func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request) {
+        self.presenter.presentWriteComment(
+            response: NewDiscussions.WriteCommentPresentation.Response(stepID: self.stepID)
+        )
+    }
+
+    func doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request) {
+        print("Commend ID: \(request.comment.id)")
+
+        if let parentID = request.comment.parentID,
+           let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
+            self.currentDiscussions[parentIndex].repliesIDs.append(request.comment.id)
+            self.currentReplies[parentID, default: []].append(request.comment)
+
+            self.presenter.presentCommentCreated(
+                response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+            )
+        } else {
+            self.presenter.presentWaitingState(
+                response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
+            )
+            self.currentDiscussions.append(request.comment)
+            self.provider.fetchDiscussionProxy(id: self.discussionProxyID).done { discussionProxy in
+                self.currentDiscussionProxy = discussionProxy
+                print("Discussions IDs: \(self.currentDiscussionsIDs)")
+                print("IS contains :\(self.currentDiscussionsIDs.contains(request.comment.id))")
+            }.ensure {
+                self.presenter.presentWaitingState(
+                    response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)
+                )
+                self.presenter.presentCommentCreated(
+                    response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+                )
+            }.cauterize()
         }
     }
 

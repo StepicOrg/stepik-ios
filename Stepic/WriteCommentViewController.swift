@@ -11,7 +11,7 @@ import UIKit
 
 @available(*, deprecated, message: "Legacy assembly")
 final class WriteCommentLegacyAssembly: Assembly {
-    private let target: Int
+    private let target: Step.IdType
     private let parentId: Comment.IdType?
 
     private weak var delegate: WriteCommentViewControllerDelegate?

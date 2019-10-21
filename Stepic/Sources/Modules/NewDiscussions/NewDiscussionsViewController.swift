@@ -1,9 +1,13 @@
+import SVProgressHUD
 import UIKit
 
 protocol NewDiscussionsViewControllerProtocol: class {
     func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel)
     func displayNextDiscussions(viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel)
     func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel)
+    func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel)
+    func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 final class NewDiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -43,6 +47,12 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
 
         self.title = NSLocalizedString("Discussions", comment: "")
         self.registerPlaceholders()
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .compose,
+            target: self,
+            action: #selector(self.didClickWriteComment)
+        )
 
         self.updateState(newState: self.state)
         self.interactor.doDiscussionsLoad(request: .init())
@@ -118,6 +128,16 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
             self.newDiscussionsView?.hidePaginationView()
         }
     }
+
+    @objc
+    private func didClickWriteComment() {
+        self.interactor.doWriteCommentPresentation(request: .init())
+    }
+
+    private func presentWriteComment(stepID: Step.IdType, parentID: Comment.IdType? = nil) {
+        let assembly = WriteCommentLegacyAssembly(target: stepID, parentId: parentID, delegate: self)
+        self.push(module: assembly.makeModule())
+    }
 }
 
 // MARK: - NewDiscussionsViewController: NewDiscussionsViewControllerProtocol -
@@ -138,6 +158,22 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
 
     func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel) {
+        self.presentWriteComment(stepID: viewModel.stepID)
+    }
+
+    func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
     }
 }
 
@@ -160,10 +196,16 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
         cell: NewDiscussionsLoadMoreTableViewCell,
         at indexPath: IndexPath
     ) {
-        guard let discussionViewModel = self.tableDataSource.getDiscussionViewModel(at: indexPath) else {
-            return
+        if let discussionViewModel = self.tableDataSource.getDiscussionViewModel(at: indexPath) {
+            self.interactor.doNextRepliesLoad(request: .init(discussionID: discussionViewModel.id))
         }
+    }
+}
 
-        self.interactor.doNextRepliesLoad(request: .init(discussionID: discussionViewModel.id))
+// MARK: - NewDiscussionsViewController: WriteCommentViewControllerDelegate -
+
+extension NewDiscussionsViewController: WriteCommentViewControllerDelegate {
+    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
+        self.interactor.doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request(comment: comment))
     }
 }
