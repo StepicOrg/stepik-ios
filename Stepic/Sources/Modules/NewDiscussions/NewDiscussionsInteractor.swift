@@ -193,12 +193,12 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     }
 
     func doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request) {
-        print("Commend ID: \(request.comment.id)")
+        let comment = request.comment
 
-        if let parentID = request.comment.parentID,
+        if let parentID = comment.parentID,
            let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
-            self.currentDiscussions[parentIndex].repliesIDs.append(request.comment.id)
-            self.currentReplies[parentID, default: []].append(request.comment)
+            self.currentDiscussions[parentIndex].repliesIDs.append(comment.id)
+            self.currentReplies[parentID, default: []].append(comment)
 
             self.presenter.presentCommentCreated(
                 response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
@@ -207,11 +207,11 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             self.presenter.presentWaitingState(
                 response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
             )
-            self.currentDiscussions.append(request.comment)
+
+            self.currentDiscussions.append(comment)
+
             self.provider.fetchDiscussionProxy(id: self.discussionProxyID).done { discussionProxy in
                 self.currentDiscussionProxy = discussionProxy
-                print("Discussions IDs: \(self.currentDiscussionsIDs)")
-                print("IS contains :\(self.currentDiscussionsIDs.contains(request.comment.id))")
             }.ensure {
                 self.presenter.presentWaitingState(
                     response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)

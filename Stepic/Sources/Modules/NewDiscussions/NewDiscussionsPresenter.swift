@@ -71,6 +71,17 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
     }
 
     func presentCommentCreated(response: NewDiscussions.CommentCreated.Response) {
+        let data = self.makeDiscussionsData(
+            discussionProxy: response.result.discussionProxy,
+            discussions: response.result.discussions,
+            discussionsIDsFetchingMore: response.result.discussionsIDsFetchingMore,
+            replies: response.result.replies,
+            sortType: response.result.sortType
+        )
+
+        self.viewController?.displayCommentCreated(
+            viewModel: NewDiscussions.CommentCreated.ViewModel(data: data)
+        )
     }
 
     func presentWaitingState(response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response) {
