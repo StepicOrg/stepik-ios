@@ -48,6 +48,8 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
                 if discussionViewModel.repliesLeftToLoad > 0 {
                     return .none
+                } else if indexPath.section == tableView.numberOfSections - 1 {
+                    return .small
                 }
                 return .large
             }

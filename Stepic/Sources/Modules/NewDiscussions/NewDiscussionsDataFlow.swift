@@ -8,6 +8,13 @@ enum NewDiscussions {
         let discussionsLeftToLoad: Int
     }
 
+    struct DiscussionsData {
+        let discussionProxy: DiscussionProxy
+        let discussions: [Comment]
+        let replies: [Comment.IdType: [Comment]]
+        let sortType: SortType
+    }
+
     enum SortType {
         case last
         case mostLiked
@@ -34,22 +41,29 @@ enum NewDiscussions {
 
     // MARK: - Use cases -
 
+    /// Show discussions
     enum DiscussionsLoad {
-        struct Data {
-            let discussionProxy: DiscussionProxy
-            let discussions: [Comment]
-            let replies: [Comment.IdType: [Comment]]
-            let sortType: SortType
-        }
-
         struct Request { }
 
         struct Response {
-            let result: Result<Data>
+            let result: Result<DiscussionsData>
         }
 
         struct ViewModel {
             let state: ViewControllerState
+        }
+    }
+
+    /// Load next part discussions
+    enum NextDiscussionsLoad {
+        struct Request { }
+
+        struct Response {
+            let result: Result<DiscussionsData>
+        }
+
+        struct ViewModel {
+            let state: PaginationState
         }
     }
 
@@ -59,5 +73,10 @@ enum NewDiscussions {
         case loading
         case error
         case result(data: DiscussionsResult)
+    }
+
+    enum PaginationState {
+        case result(data: DiscussionsResult)
+        case error
     }
 }

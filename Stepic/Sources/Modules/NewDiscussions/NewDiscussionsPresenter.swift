@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewDiscussionsPresenterProtocol {
     func presentDiscussions(response: NewDiscussions.DiscussionsLoad.Response)
+    func presentNextDiscussions(response: NewDiscussions.NextDiscussionsLoad.Response)
 }
 
 final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
@@ -12,31 +13,13 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
 
         switch response.result {
         case .success(let result):
-            assert(result.discussions.filter({ !$0.repliesIDs.isEmpty }).count == result.replies.keys.count)
-
-            let discussions = self.sortedDiscussions(
-                result.discussions,
+            let data = self.makeDiscussionsData(
                 discussionProxy: result.discussionProxy,
-                by: result.sortType
-            )
-
-            let discussionsViewModels = discussions.map { discussion in
-                self.makeDiscussionViewModel(discussion: discussion, replies: result.replies[discussion.id])
-            }
-
-            let discussionsLeftToLoad = self.getDiscussionsIDs(
-                discussionProxy: result.discussionProxy,
+                discussions: result.discussions,
+                replies: result.replies,
                 sortType: result.sortType
-            ).count - discussions.count
-
-            viewModel = NewDiscussions.DiscussionsLoad.ViewModel(
-                state: .result(
-                    data: NewDiscussions.DiscussionsResult(
-                        discussions: discussionsViewModels,
-                        discussionsLeftToLoad: discussionsLeftToLoad
-                    )
-                )
             )
+            viewModel = NewDiscussions.DiscussionsLoad.ViewModel(state: .result(data: data))
         case .failure:
             viewModel = NewDiscussions.DiscussionsLoad.ViewModel(state: .error)
         }
@@ -44,7 +27,55 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         self.viewController?.displayDiscussions(viewModel: viewModel)
     }
 
-    // MARK: - Private API
+    func presentNextDiscussions(response: NewDiscussions.NextDiscussionsLoad.Response) {
+        var viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel
+
+        switch response.result {
+        case .success(let result):
+            let data = self.makeDiscussionsData(
+                discussionProxy: result.discussionProxy,
+                discussions: result.discussions,
+                replies: result.replies,
+                sortType: result.sortType
+            )
+            viewModel = NewDiscussions.NextDiscussionsLoad.ViewModel(state: .result(data: data))
+        case .failure:
+            viewModel = NewDiscussions.NextDiscussionsLoad.ViewModel(state: .error)
+        }
+
+        self.viewController?.displayNextDiscussions(viewModel: viewModel)
+    }
+
+    // MARK: - Private API -
+
+    private func makeDiscussionsData(
+        discussionProxy: DiscussionProxy,
+        discussions: [Comment],
+        replies: [Comment.IdType: [Comment]],
+        sortType: NewDiscussions.SortType
+    ) -> NewDiscussions.DiscussionsResult {
+        assert(discussions.filter({ !$0.repliesIDs.isEmpty }).count == replies.keys.count)
+
+        let discussions = self.sortedDiscussions(
+            discussions,
+            discussionProxy: discussionProxy,
+            by: sortType
+        )
+
+        let discussionsViewModels = discussions.map { discussion in
+            self.makeDiscussionViewModel(discussion: discussion, replies: replies[discussion.id] ?? [])
+        }
+
+        let discussionsLeftToLoad = self.getDiscussionsIDs(
+            discussionProxy: discussionProxy,
+            sortType: sortType
+        ).count - discussions.count
+
+        return NewDiscussions.DiscussionsResult(
+            discussions: discussionsViewModels,
+            discussionsLeftToLoad: discussionsLeftToLoad
+        )
+    }
 
     private func makeCommentViewModel(comment: Comment) -> NewDiscussionsCommentViewModel {
         let avatarImageURL: URL? = {
@@ -84,13 +115,12 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         )
     }
 
-    // swiftlint:disable:next discouraged_optional_collection
     private func makeDiscussionViewModel(
         discussion: Comment,
-        replies: [Comment]?
+        replies: [Comment]
     ) -> NewDiscussionsDiscussionViewModel {
         let repliesViewModels = self.sortedReplies(
-            replies ?? [],
+            replies,
             parentDiscussion: discussion
         ).map { self.makeCommentViewModel(comment: $0) }
 

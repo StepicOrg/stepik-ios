@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewDiscussionsViewDelegate: class {
     func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView)
+    func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView)
 }
 
 extension NewDiscussionsView {
@@ -16,8 +17,7 @@ final class NewDiscussionsView: UIView {
     let appearance: Appearance
     weak var delegate: NewDiscussionsViewDelegate?
 
-    private lazy var verticalPaginationView = PaginationView()
-    private lazy var bottomPaginationView = PaginationView()
+    private lazy var paginationView = PaginationView()
 
     private lazy var refreshControl = UIRefreshControl()
 
@@ -68,17 +68,8 @@ final class NewDiscussionsView: UIView {
     func showPaginationView() {
         self.shouldShowPaginationView = true
 
-        self.verticalPaginationView.setLoading()
-        self.bottomPaginationView.setLoading()
-
-        self.tableView.tableHeaderView = self.verticalPaginationView
-        self.tableView.tableHeaderView?.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: self.frame.width,
-            height: self.appearance.paginationViewHeight
-        )
-        self.tableView.tableFooterView = self.bottomPaginationView
+        self.paginationView.setLoading()
+        self.tableView.tableFooterView = self.paginationView
         self.tableView.tableFooterView?.frame = CGRect(
             x: 0,
             y: 0,
@@ -89,8 +80,6 @@ final class NewDiscussionsView: UIView {
 
     func hidePaginationView() {
         self.shouldShowPaginationView = false
-        self.tableView.tableHeaderView?.frame = .zero
-        self.tableView.tableHeaderView = nil
         self.tableView.tableFooterView?.frame = .zero
         self.tableView.tableFooterView = nil
     }
@@ -131,7 +120,17 @@ extension NewDiscussionsView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
+// MARK: - NewDiscussionsView: UITableViewDelegate -
+
 extension NewDiscussionsView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let isLastIndexPath = indexPath.section == tableView.numberOfSections - 1
+            && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
+        if isLastIndexPath && self.shouldShowPaginationView {
+            self.delegate?.newDiscussionsViewDidRequestPagination(self)
+        }
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }

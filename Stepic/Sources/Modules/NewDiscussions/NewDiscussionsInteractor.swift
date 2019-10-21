@@ -4,6 +4,7 @@ import PromiseKit
 
 protocol NewDiscussionsInteractorProtocol {
     func doDiscussionsLoad(request: NewDiscussions.DiscussionsLoad.Request)
+    func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request)
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
@@ -88,11 +89,56 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
 
+    func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request) {
+        self.fetchBackgroundQueue.async { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.fetchSemaphore.wait()
+
+            let idsToLoad = strongSelf.getNextDiscussionsIDsToLoad()
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: start fetching next discussions",
+                metadata: ["ids": .string("\(idsToLoad)")]
+            )
+
+            strongSelf.provider.fetchComments(ids: idsToLoad).done { fetchedComments in
+                strongSelf.updateDataWithNewComments(fetchedComments)
+
+                let discussionsData = NewDiscussions.DiscussionsData(
+                    discussionProxy: strongSelf.currentDiscussionProxy.require(),
+                    discussions: strongSelf.currentDiscussions,
+                    replies: strongSelf.currentReplies,
+                    sortType: strongSelf.currentSortType
+                )
+
+                DispatchQueue.main.async {
+                    NewDiscussionsInteractor.logger.info("new discussions interactor: finish fetching next discussions")
+                    strongSelf.presenter.presentNextDiscussions(
+                        response: NewDiscussions.NextDiscussionsLoad.Response(result: .success(discussionsData))
+                    )
+                }
+            }.catch { error in
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: failed fetching next discussions, error: \(error)"
+                )
+                DispatchQueue.main.async {
+                    strongSelf.presenter.presentNextDiscussions(
+                        response: NewDiscussions.NextDiscussionsLoad.Response(result: .failure(Error.fetchFailed))
+                    )
+                }
+            }.finally {
+                strongSelf.fetchSemaphore.signal()
+            }
+        }
+    }
+
     // MARK: - Private API
 
     private func fetchDiscussions(
         discussionProxyID: DiscussionProxy.IdType
-    ) -> Promise<NewDiscussions.DiscussionsLoad.Data> {
+    ) -> Promise<NewDiscussions.DiscussionsData> {
         // Reset data
         self.currentDiscussions = []
         self.currentReplies = [:]
@@ -108,7 +154,7 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             }.done { fetchedComments in
                 self.updateDataWithNewComments(fetchedComments)
 
-                let discussionsData = NewDiscussions.DiscussionsLoad.Data(
+                let discussionsData = NewDiscussions.DiscussionsData(
                     discussionProxy: self.currentDiscussionProxy.require(),
                     discussions: self.currentDiscussions,
                     replies: self.currentReplies,

@@ -2,6 +2,7 @@ import UIKit
 
 protocol NewDiscussionsViewControllerProtocol: class {
     func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel)
+    func displayNextDiscussions(viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel)
 }
 
 final class NewDiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -10,7 +11,9 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private let interactor: NewDiscussionsInteractorProtocol
+
     private var state: NewDiscussions.ViewControllerState
+    private var canTriggerPagination = true
 
     private let tableDataSource = NewDiscussionsTableViewDataSource()
 
@@ -85,18 +88,33 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
 
         switch newState {
         case .result(let data):
-            if data.discussions.isEmpty {
-                self.showPlaceholder(for: .empty)
-            } else {
-                self.isPlaceholderShown = false
-            }
-
-            self.tableDataSource.viewModels = data.discussions
-            self.newDiscussionsView?.updateTableViewData(dataSource: self.tableDataSource)
+            self.updateDiscussionsData(newData: data)
         case .error:
             self.showPlaceholder(for: .connectionError)
         default:
             break
+        }
+    }
+
+    private func updateDiscussionsData(newData data: NewDiscussions.DiscussionsResult) {
+        if data.discussions.isEmpty {
+            self.showPlaceholder(for: .empty)
+        } else {
+            self.isPlaceholderShown = false
+        }
+
+        self.tableDataSource.viewModels = data.discussions
+        self.newDiscussionsView?.updateTableViewData(dataSource: self.tableDataSource)
+
+        self.updatePagination(hasNextPage: data.discussionsLeftToLoad > 0)
+    }
+
+    private func updatePagination(hasNextPage: Bool) {
+        self.canTriggerPagination = hasNextPage
+        if hasNextPage {
+            self.newDiscussionsView?.showPaginationView()
+        } else {
+            self.newDiscussionsView?.hidePaginationView()
         }
     }
 }
@@ -106,7 +124,15 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
 extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
     func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
-        self.newDiscussionsView?.showPaginationView()
+    }
+
+    func displayNextDiscussions(viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            self.updateDiscussionsData(newData: data)
+        case .error:
+            self.updatePagination(hasNextPage: true)
+        }
     }
 }
 
@@ -115,5 +141,12 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
 extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
     func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView) {
         self.interactor.doDiscussionsLoad(request: .init())
+    }
+
+    func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView) {
+        if self.canTriggerPagination {
+            self.canTriggerPagination = false
+            self.interactor.doNextDiscussionsLoad(request: .init())
+        }
     }
 }
