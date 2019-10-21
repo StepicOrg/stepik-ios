@@ -11,7 +11,14 @@ extension NewDiscussionsTableViewCell {
 }
 
 final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
-    private lazy var cellView = NewDiscussionsCellView()
+    private lazy var cellView: NewDiscussionsCellView = {
+        let cellView = NewDiscussionsCellView()
+        cellView.onReplyClick = { [weak self] in
+            self?.onReplyClick?()
+        }
+        return cellView
+    }()
+
     private lazy var separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = Appearance.separatorColor
@@ -26,6 +33,8 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     // Dynamic separator height
     private var separatorHeightConstraint: Constraint?
     private var separatorType: ViewModel.SeparatorType = .small
+
+    var onReplyClick: (() -> Void)?
 
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
@@ -123,7 +132,7 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
                 case .small:
                     return 0.5
                 case .large:
-                    return 10.0
+                    return 4.0
                 case .none:
                     return 0.0
                 }

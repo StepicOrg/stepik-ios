@@ -85,14 +85,18 @@ enum NewDiscussions {
 
     /// Present write course review (after compose bar button item click)
     enum WriteCommentPresentation {
-        struct Request { }
+        struct Request {
+            let parentID: Comment.IdType?
+        }
 
         struct Response {
             let stepID: Step.IdType
+            let parentID: Comment.IdType?
         }
 
         struct ViewModel {
             let stepID: Step.IdType
+            let parentID: Comment.IdType?
         }
     }
 

@@ -1,6 +1,15 @@
 import UIKit
 
+protocol NewDiscussionsTableViewDataSourceDelegate: class {
+    func newDiscussionsTableViewDataSourceDidRequestReply(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    )
+}
+
 final class NewDiscussionsTableViewDataSource: NSObject {
+    weak var delegate: NewDiscussionsTableViewDataSourceDelegate?
+
     var viewModels: [NewDiscussionsDiscussionViewModel]
 
     init(viewModels: [NewDiscussionsDiscussionViewModel] = []) {
@@ -79,6 +88,17 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
         let commentViewModel = commentType == .discussion
             ? discussionViewModel.comment
             : discussionViewModel.replies[indexPath.row - NewDiscussionsTableViewDataSource.parentDiscussionInset]
+
+        cell.onReplyClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.newDiscussionsTableViewDataSourceDidRequestReply(
+                strongSelf,
+                viewModel: commentViewModel
+            )
+        }
 
         cell.configure(
             viewModel: NewDiscussionsTableViewCell.ViewModel(

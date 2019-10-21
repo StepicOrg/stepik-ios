@@ -2,21 +2,26 @@ import UIKit
 
 extension NewDiscussionsCellView {
     struct Appearance {
-        let avatarImageViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 16)
+        let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
         let avatarImageViewSize = CGSize(width: 30, height: 30)
         let avatarImageViewCornerRadius: CGFloat = 4.0
 
-        let dateLabelInsets = UIEdgeInsets(top: 16, left: 16, bottom: 20, right: 20)
+        let nameLabelInsets = LayoutInsets(left: 16, right: 16)
+        let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
+        let nameLabelTextColor = UIColor.mainDark
+
+        let textLabelInsets = LayoutInsets(top: 8, right: 16)
+        let textLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
+        let textLabelTextColor = UIColor.mainDark
+
+        let bottomControlsSpacing: CGFloat = 4
+        let bottomControlsInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
+
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let dateLabelTextColor = UIColor.mainDark
 
-        let nameLabelTextColor = UIColor.mainDark
-        let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let nameLabelInsets = UIEdgeInsets(top: 8, left: 16, bottom: 0, right: 20)
-
-        let textLabelTextColor = UIColor.mainDark
-        let textLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let textLabelInsets = UIEdgeInsets(top: 8, left: 0, bottom: 20, right: 20)
+        let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let replyButtonTextColor = UIColor(hex: 0x3E50CB)
     }
 }
 
@@ -27,14 +32,6 @@ final class NewDiscussionsCellView: UIView {
         let view = AvatarImageView()
         view.shape = .rectangle(cornerRadius: self.appearance.avatarImageViewCornerRadius)
         return view
-    }()
-
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.dateLabelFont
-        label.textColor = self.appearance.dateLabelTextColor
-        label.numberOfLines = 1
-        return label
     }()
 
     private lazy var nameLabel: UILabel = {
@@ -53,6 +50,32 @@ final class NewDiscussionsCellView: UIView {
         return label
     }()
 
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.dateLabelFont
+        label.textColor = self.appearance.dateLabelTextColor
+        label.numberOfLines = 1
+        return label
+    }()
+
+    private lazy var replyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = self.appearance.replyButtonFont
+        button.setTitleColor(self.appearance.replyButtonTextColor, for: .normal)
+        button.setTitle(NSLocalizedString("Reply", comment: ""), for: .normal)
+        button.addTarget(self, action: #selector(self.replyDidClick), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var bottomControlsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.dateLabel, self.replyButton])
+        stackView.axis = .horizontal
+        stackView.spacing = self.appearance.bottomControlsSpacing
+        return stackView
+    }()
+
+    var onReplyClick: (() -> Void)?
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -66,6 +89,8 @@ final class NewDiscussionsCellView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Public API
 
     func configure(viewModel: NewDiscussionsCommentViewModel?) {
         guard let viewModel = viewModel else {
@@ -85,14 +110,23 @@ final class NewDiscussionsCellView: UIView {
             self.avatarImageView.set(with: url)
         }
     }
+
+    // MARK: - Private API
+
+    @objc
+    private func replyDidClick() {
+        self.onReplyClick?()
+    }
 }
+
+// MARK: - NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
 
 extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarImageView)
-        self.addSubview(self.dateLabel)
         self.addSubview(self.nameLabel)
         self.addSubview(self.textLabel)
+        self.addSubview(self.bottomControlsStackView)
     }
 
     func makeConstraints() {
@@ -116,12 +150,12 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.textLabelInsets.right)
         }
 
-        self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.textLabel.snp.bottom).offset(self.appearance.dateLabelInsets.top)
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.dateLabelInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.dateLabelInsets.right)
-            make.bottom.equalToSuperview().offset(-self.appearance.dateLabelInsets.bottom)
+        self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.bottomControlsStackView.snp.makeConstraints { make in
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsInsets.left)
+            make.top.equalTo(self.textLabel.snp.bottom).offset(self.appearance.bottomControlsInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsInsets.right)
+            make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsInsets.bottom)
         }
     }
 }

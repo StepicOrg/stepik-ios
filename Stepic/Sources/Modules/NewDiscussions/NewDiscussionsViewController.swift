@@ -20,7 +20,11 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     private var state: NewDiscussions.ViewControllerState
     private var canTriggerPagination = true
 
-    private let tableDataSource = NewDiscussionsTableViewDataSource()
+    private lazy var tableDataSource: NewDiscussionsTableViewDataSource = {
+        let tableDataSource = NewDiscussionsTableViewDataSource()
+        tableDataSource.delegate = self
+        return tableDataSource
+    }()
 
     init(
         interactor: NewDiscussionsInteractorProtocol,
@@ -131,12 +135,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
 
     @objc
     private func didClickWriteComment() {
-        self.interactor.doWriteCommentPresentation(request: .init())
-    }
-
-    private func presentWriteComment(stepID: Step.IdType, parentID: Comment.IdType? = nil) {
-        let assembly = WriteCommentLegacyAssembly(target: stepID, parentId: parentID, delegate: self)
-        self.push(module: assembly.makeModule())
+        self.interactor.doWriteCommentPresentation(request: .init(parentID: nil))
     }
 }
 
@@ -161,7 +160,12 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
     }
 
     func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel) {
-        self.presentWriteComment(stepID: viewModel.stepID)
+        let assembly = WriteCommentLegacyAssembly(
+            target: viewModel.stepID,
+            parentId: viewModel.parentID,
+            delegate: self
+        )
+        self.push(module: assembly.makeModule())
     }
 
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel) {
@@ -207,5 +211,16 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
 extension NewDiscussionsViewController: WriteCommentViewControllerDelegate {
     func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
         self.interactor.doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request(comment: comment))
+    }
+}
+
+// MARK: - NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate -
+
+extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate {
+    func newDiscussionsTableViewDataSourceDidRequestReply(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doWriteCommentPresentation(request: .init(parentID: viewModel.id))
     }
 }

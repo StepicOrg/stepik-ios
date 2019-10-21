@@ -188,7 +188,7 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
 
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request) {
         self.presenter.presentWriteComment(
-            response: NewDiscussions.WriteCommentPresentation.Response(stepID: self.stepID)
+            response: NewDiscussions.WriteCommentPresentation.Response(stepID: self.stepID, parentID: request.parentID)
         )
     }
 
