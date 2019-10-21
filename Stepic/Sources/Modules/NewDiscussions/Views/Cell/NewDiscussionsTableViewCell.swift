@@ -28,7 +28,6 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     // Dynamic cell/separator leading space
     private var cellLeadingConstraint: Constraint?
     private var separatorLeadingConstraint: Constraint?
-    private var leadingSpaceValue: CGFloat = Appearance.leadingSpaceDiscussion
 
     // Dynamic separator height
     private var separatorHeightConstraint: Constraint?
@@ -64,13 +63,15 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
 
         self.cellView.translatesAutoresizingMaskIntoConstraints = false
         self.cellView.snp.makeConstraints { make in
-            self.cellLeadingConstraint = make.leading.equalToSuperview().offset(self.leadingSpaceValue).constraint
+            self.cellLeadingConstraint = make.leading.equalToSuperview()
+                .offset(Appearance.leadingSpaceDiscussion).constraint
             make.top.trailing.equalToSuperview()
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
-            self.separatorLeadingConstraint = make.leading.equalToSuperview().offset(self.leadingSpaceValue).constraint
+            self.separatorLeadingConstraint = make.leading.equalToSuperview()
+                .offset(Appearance.leadingSpaceDiscussion).constraint
             make.top.equalTo(self.cellView.snp.bottom)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().priority(999)
@@ -80,25 +81,27 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
 
     private func configure(optionalViewModel: ViewModel?) {
         if let viewModel = optionalViewModel {
-            self.updateCommentType(newCommentType: viewModel.commentType)
+            self.updateLeadingInsets(
+                newCommentType: viewModel.commentType,
+                separatorFollowsDepth: viewModel.separatorFollowsDepth
+            )
             self.updateSeparatorType(newSeparatorType: viewModel.separatorType)
             self.cellView.configure(viewModel: viewModel.comment)
         } else {
-            self.updateCommentType(newCommentType: .discussion)
+            self.updateLeadingInsets(newCommentType: .discussion, separatorFollowsDepth: false)
             self.updateSeparatorType(newSeparatorType: .small)
             self.cellView.configure(viewModel: nil)
         }
     }
 
-    private func updateCommentType(newCommentType: ViewModel.CommentType) {
-        let newLeadingSpace = newCommentType == .discussion
+    private func updateLeadingInsets(newCommentType: ViewModel.CommentType, separatorFollowsDepth: Bool) {
+        let leadingSpaceValue = newCommentType == .discussion
             ? Appearance.leadingSpaceDiscussion
             : Appearance.leadingSpaceReply
-        if newLeadingSpace != self.leadingSpaceValue {
-            self.leadingSpaceValue = newLeadingSpace
-            self.cellLeadingConstraint?.update(offset: self.leadingSpaceValue)
-            self.separatorLeadingConstraint?.update(offset: self.leadingSpaceValue)
-        }
+        self.cellLeadingConstraint?.update(offset: leadingSpaceValue)
+        self.separatorLeadingConstraint?.update(
+            offset: separatorFollowsDepth ? leadingSpaceValue : Appearance.leadingSpaceDiscussion
+        )
     }
 
     private func updateSeparatorType(newSeparatorType: ViewModel.SeparatorType) {
@@ -116,6 +119,7 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         let comment: NewDiscussionsCommentViewModel
         let commentType: CommentType
         let separatorType: SeparatorType
+        let separatorFollowsDepth: Bool
 
         enum CommentType {
             case discussion

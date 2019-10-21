@@ -36,7 +36,7 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModels[section].replies.count
             + NewDiscussionsTableViewDataSource.parentDiscussionInset
-            + (self.shouldShowLoadMoreRepliesForSection(section) ? 1 : 0)
+            + self.loadMoreRepliesInset(section: section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,6 +62,10 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
 
     private func shouldShowLoadMoreRepliesForSection(_ section: Int) -> Bool {
         return self.viewModels[section].repliesLeftToLoad > 0
+    }
+
+    private func loadMoreRepliesInset(section: Int) -> Int {
+        return self.shouldShowLoadMoreRepliesForSection(section) ? 1 : 0
     }
 
     private func tableView(
@@ -100,11 +104,15 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
             )
         }
 
+        let isLastComment = indexPath.row == tableView.numberOfRows(inSection: indexPath.section)
+            - self.loadMoreRepliesInset(section: indexPath.section) - 1
+
         cell.configure(
             viewModel: NewDiscussionsTableViewCell.ViewModel(
                 comment: commentViewModel,
                 commentType: commentType,
-                separatorType: separatorType
+                separatorType: separatorType,
+                separatorFollowsDepth: !isLastComment
             )
         )
     }
