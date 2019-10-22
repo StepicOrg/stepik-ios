@@ -249,6 +249,7 @@
 		089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877AB214047ED0065DFA2 /* UserDefaults+StorageServiceProtocol.swift */; };
 		089877B221404CF10065DFA2 /* StringStorageServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089877B121404CF00065DFA2 /* StringStorageServiceProtocol.swift */; };
 		089A0DA71BE9FFCE004AF4EB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A0DA61BE9FFCE004AF4EB /* UIViewExtensions.swift */; };
+		089A949DBE3F34A047F45AFB /* WriteCommentInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BD0B89320D6F0435F7313E /* WriteCommentInputProtocol.swift */; };
 		089F58851D22BD3C000CD540 /* DiscussionCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089F58841D22BD3C000CD540 /* DiscussionCountView.swift */; };
 		089F58891D22BD59000CD540 /* DiscussionCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 089F58881D22BD59000CD540 /* DiscussionCountView.xib */; };
 		08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0218D1D675B4700915679 /* SectionNavigationDelegate.swift */; };
@@ -380,12 +381,15 @@
 		08FEFC211F127470005CA0FB /* AutocompleteWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FEFC201F127470005CA0FB /* AutocompleteWords.swift */; };
 		0B55A18E03044AF8E4C4E730 /* NewSortingQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BBD3EFC6CF6DE0ADC84018 /* NewSortingQuizPresenter.swift */; };
 		0BC1205C2851D3AFE8026893 /* NewMatchingQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547578D4D5EFD63704E87CAB /* NewMatchingQuizDataFlow.swift */; };
+		0C97AFADC2099B3785D9B910 /* WriteCommentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACBF39DAC4A4A599F8949F2 /* WriteCommentInteractor.swift */; };
 		0D389430943C20609C095B3D /* NewChoiceQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C25A19DBEE7176400D767 /* NewChoiceQuizView.swift */; };
+		0E3927B3DADE084DA71C868B /* WriteCommentAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F53BF6D2A309CFC55A72D5 /* WriteCommentAssembly.swift */; };
 		0E600BAD134430EDC4B7B683 /* ProfileEditAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D51541BF7AE1FCD2865C0 /* ProfileEditAssembly.swift */; };
 		0E8FC0797A66F24878602C13 /* NewCodeQuizFullscreenOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCE000FB8689122DC202C3E /* NewCodeQuizFullscreenOutputProtocol.swift */; };
 		0FB3527D1A23BBFBC2DEC937 /* SettingsStepFontSizeDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA402843D014B6EBD94BADDA /* SettingsStepFontSizeDataFlow.swift */; };
 		0FC4DF01DB2BF054237EBD04 /* NewChoiceQuizInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077CA2A02D61A314B281C7C3 /* NewChoiceQuizInteractor.swift */; };
 		10B5CCF7E39ED3E7BB8382F6 /* SettingsStepFontSizeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35918ED4BFF0FC4C8692E8A6 /* SettingsStepFontSizeInteractor.swift */; };
+		10F32F9073D41A146E8A3994 /* WriteCommentOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995EDC0C4A4B7085EE7589C2 /* WriteCommentOutputProtocol.swift */; };
 		18DBB0FACACD30EC7F311E3C /* NewCodeQuizFullscreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081C378AAE221323BF85346D /* NewCodeQuizFullscreenView.swift */; };
 		18E3319B16168E42505378AB /* SettingsStepFontSizePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934F4CAA53B3137AE330BC4 /* SettingsStepFontSizePresenter.swift */; };
 		19CEA9C063AE5CD5A682CFA9 /* ProfileEditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5BA4688D7B46C416231BD9 /* ProfileEditInteractor.swift */; };
@@ -688,6 +692,7 @@
 		2CFC5ABC228ADFC400B5248A /* StepsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC5ABB228ADFC400B5248A /* StepsPersistenceService.swift */; };
 		2CFC5ABE228AF0B400B5248A /* NewLessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFC5ABD228AF0B400B5248A /* NewLessonViewModel.swift */; };
 		2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDB1231F559F9A00B8035C /* AvatarImageView.swift */; };
+		2D6AB32933F1C93FCF849056 /* WriteCommentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77A40A485EDD8A3E4AA0157 /* WriteCommentProvider.swift */; };
 		3203AD6A1594995EDE114EA0 /* Pods_StepicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */; };
 		3317FC9AECA8FF54902BF61D /* NewChoiceQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E041388C85D190467E74A5 /* NewChoiceQuizViewController.swift */; };
 		3382D26FC5E2AB43D5CD0B71 /* NewFreeAnswerQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BB01DDF94CCF5E5EBBB43 /* NewFreeAnswerQuizViewController.swift */; };
@@ -701,6 +706,7 @@
 		3E2FBE43761DC0D89BD35ED1 /* NewSortingQuizInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6520F5CFAE56B9CFBA963C1D /* NewSortingQuizInteractor.swift */; };
 		4300EB39EFE2C4ABA5FA1CC5 /* SettingsStepFontSizeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CF16CCDB9103E521B889D /* SettingsStepFontSizeProvider.swift */; };
 		47AA3FAF72E7AD067ABF2804 /* NewFreeAnswerQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50F304BF0016F5B477EEC8 /* NewFreeAnswerQuizDataFlow.swift */; };
+		49D8E231DE76283BD37FFD3B /* WriteCommentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44BBB1022CD4FB280EB7DFB /* WriteCommentPresenter.swift */; };
 		4AC49732BD397C516D132297 /* NewLessonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC0A2EAEB9E30B54695D44A /* NewLessonPresenter.swift */; };
 		4E3A4636F1A4E8E38E0AB66B /* NewChoiceQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECD143E5E804E55A9DE096 /* NewChoiceQuizDataFlow.swift */; };
 		580F18AF73EFFCBF1EDED227 /* NewStringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D70A098825966D4584016F /* NewStringQuizViewController.swift */; };
@@ -970,9 +976,11 @@
 		682816CD6963D970C0C4374E /* SettingsStepFontSizeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F67C33C94A34359300BFA21 /* SettingsStepFontSizeAssembly.swift */; };
 		68CF5EDC9EC0D659F78BDE54 /* NewCodeQuizFullscreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3417B44078A2AB57A0E63F /* NewCodeQuizFullscreenPresenter.swift */; };
 		6E7B886BB0F8832440F729A3 /* UnsupportedQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8E4DEE020E670D88BD7FEA /* UnsupportedQuizPresenter.swift */; };
+		7060C8E8055EC26669A7051B /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCE255730E82181FAAF0AAA /* WriteCommentViewController.swift */; };
 		70B5E9BE261BB46951DCA892 /* NewFreeAnswerQuizAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6741032B8AF7696CAC7126 /* NewFreeAnswerQuizAssembly.swift */; };
 		725D1718466B8BC980C95AFB /* WriteCourseReviewAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1D58A415B3B4B592268DA /* WriteCourseReviewAssembly.swift */; };
 		7AC15207BB66E845FDBEE234 /* NewCodeQuizFullscreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3025F71BBEA83B2F2D4EE286 /* NewCodeQuizFullscreenInteractor.swift */; };
+		7D334A7F2599276A266E17AE /* WriteCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C65429C78822944952072FB /* WriteCommentView.swift */; };
 		7FBB25F3FD251734F7E049DD /* NewStepDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49034C40838BCF58896D0118 /* NewStepDataFlow.swift */; };
 		857E1FD24A70F87BCA6EBABA /* NewStringQuizInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2111290D2E9D752A22AFC024 /* NewStringQuizInteractor.swift */; };
 		85CD3504769C1B6C8C21661A /* NewMatchingQuizAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC73A992112910D33A82457 /* NewMatchingQuizAssembly.swift */; };
@@ -989,6 +997,7 @@
 		8DF8D727FFAF37772B6AE2B9 /* WriteCourseReviewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D74D3F78768D42D919852E /* WriteCourseReviewInteractor.swift */; };
 		92E876582D263061F44316EB /* NewFreeAnswerQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7667856CC2C2A2AC43631 /* NewFreeAnswerQuizView.swift */; };
 		97B20DBCAE18BA196B55CA91 /* WriteCourseReviewDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C485A2D511BCFEA6E85B22F /* WriteCourseReviewDataFlow.swift */; };
+		A0A7AC991F92BEC73820B298 /* WriteCommentDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBF5A43025E726B6D61E1E /* WriteCommentDataFlow.swift */; };
 		B05BCD4B9FBDCF94AF7DB650 /* NewDiscussionsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B671AACF375B3ED49120185 /* NewDiscussionsPresenter.swift */; };
 		B0D23296AB3FAC5BC6F45029 /* NewLessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC193B8E01FF4A61441ABF13 /* NewLessonViewController.swift */; };
 		B8042A238380ACC1F32082E1 /* NewStepAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AB142BF62815DF8939656 /* NewStepAssembly.swift */; };
@@ -1481,6 +1490,7 @@
 		08FEFC1B1F117257005CA0FB /* CodeSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeSuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		08FEFC201F127470005CA0FB /* AutocompleteWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteWords.swift; sourceTree = "<group>"; };
 		132A23540B83F9E4658F740C /* NewLessonAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewLessonAssembly.swift; sourceTree = "<group>"; };
+		1C65429C78822944952072FB /* WriteCommentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentView.swift; sourceTree = "<group>"; };
 		20DD1856CD25464BAC75EE10 /* NewDiscussionsInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewDiscussionsInteractor.swift; sourceTree = "<group>"; };
 		2111290D2E9D752A22AFC024 /* NewStringQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStringQuizInteractor.swift; sourceTree = "<group>"; };
 		21A89AE8D9541C3D75F0D343 /* NewStepInputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStepInputProtocol.swift; sourceTree = "<group>"; };
@@ -1803,6 +1813,7 @@
 		35F47B9DDB10472D2B2542B4 /* NewCodeQuizFullscreenViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenViewController.swift; sourceTree = "<group>"; };
 		362684BA69196E87B5919671 /* NewStepProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStepProvider.swift; sourceTree = "<group>"; };
 		36E041388C85D190467E74A5 /* NewChoiceQuizViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizViewController.swift; sourceTree = "<group>"; };
+		36F53BF6D2A309CFC55A72D5 /* WriteCommentAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentAssembly.swift; sourceTree = "<group>"; };
 		37D0922F478391C8B44EA5D0 /* NewFreeAnswerQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizPresenter.swift; sourceTree = "<group>"; };
 		3934F4CAA53B3137AE330BC4 /* SettingsStepFontSizePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsStepFontSizePresenter.swift; sourceTree = "<group>"; };
 		3AD36917F532D0F83798B2F2 /* NewChoiceQuizAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizAssembly.swift; sourceTree = "<group>"; };
@@ -1816,6 +1827,7 @@
 		49B8797DC84D64C5BAA84E76 /* Pods-Stepic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.debug.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.debug.xcconfig"; sourceTree = "<group>"; };
 		4A4D51541BF7AE1FCD2865C0 /* ProfileEditAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProfileEditAssembly.swift; sourceTree = "<group>"; };
 		4C9CD16032427B60FC4C99EF /* ProfileEditDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProfileEditDataFlow.swift; sourceTree = "<group>"; };
+		4CCE255730E82181FAAF0AAA /* WriteCommentViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
 		4F646AB1EA500AD2EB797350 /* NewDiscussionsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewDiscussionsProvider.swift; sourceTree = "<group>"; };
 		4FBB4E2D74ED45195B3EF372 /* NewCodeQuizFullscreenAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenAssembly.swift; sourceTree = "<group>"; };
 		508C25A19DBEE7176400D767 /* NewChoiceQuizView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizView.swift; sourceTree = "<group>"; };
@@ -2092,6 +2104,7 @@
 		86BB7C04201953AE00063538 /* CongratulationAlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationAlertManager.swift; sourceTree = "<group>"; };
 		86BB7C05201953AF00063538 /* CongratulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratulationViewController.swift; sourceTree = "<group>"; };
 		86BB7C06201953AF00063538 /* CongratulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CongratulationViewController.xib; sourceTree = "<group>"; };
+		87BD0B89320D6F0435F7313E /* WriteCommentInputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentInputProtocol.swift; sourceTree = "<group>"; };
 		88372B078904014335CC5A4F /* NewStepViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStepViewController.swift; sourceTree = "<group>"; };
 		899A181C0230E6359625710F /* NewDiscussionsDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewDiscussionsDataFlow.swift; sourceTree = "<group>"; };
 		8C485A2D511BCFEA6E85B22F /* WriteCourseReviewDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCourseReviewDataFlow.swift; sourceTree = "<group>"; };
@@ -2100,10 +2113,12 @@
 		90E18232B2A8EC99F6ACBEF3 /* WriteCourseReviewOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCourseReviewOutputProtocol.swift; sourceTree = "<group>"; };
 		938533EAAD61D57EF139C60C /* Pods_StepicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StepicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		989FDF7763311650D54A4A11 /* SettingsStepFontSizeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsStepFontSizeViewController.swift; sourceTree = "<group>"; };
+		995EDC0C4A4B7085EE7589C2 /* WriteCommentOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentOutputProtocol.swift; sourceTree = "<group>"; };
 		9F98579F526E5A4D162C3356 /* Pods_Stepic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stepic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F285E88F0E449B536C9DE9 /* NewCodeQuizFullscreenDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenDataFlow.swift; sourceTree = "<group>"; };
 		A458B834FD5BF8E1E16E5A0A /* NewDiscussionsAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewDiscussionsAssembly.swift; sourceTree = "<group>"; };
 		A484FA9C0CDF08A193A71381 /* NewMatchingQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewMatchingQuizInteractor.swift; sourceTree = "<group>"; };
+		AACBF39DAC4A4A599F8949F2 /* WriteCommentInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentInteractor.swift; sourceTree = "<group>"; };
 		AC5B5698955B5FF2B7EFB6F4 /* NewLessonDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewLessonDataFlow.swift; sourceTree = "<group>"; };
 		ACDDB66D0848F4DCD752795B /* NewStringQuizDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStringQuizDataFlow.swift; sourceTree = "<group>"; };
 		AF89927A843447A9AE4C0AF4 /* NewChoiceQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizPresenter.swift; sourceTree = "<group>"; };
@@ -2118,9 +2133,12 @@
 		BF5C47F13975D3915692AA71 /* NewSortingQuizDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewSortingQuizDataFlow.swift; sourceTree = "<group>"; };
 		BFB28C8741D8E5CBF35B3437 /* WriteCourseReviewViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCourseReviewViewController.swift; sourceTree = "<group>"; };
 		C6F7667856CC2C2A2AC43631 /* NewFreeAnswerQuizView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizView.swift; sourceTree = "<group>"; };
+		C77A40A485EDD8A3E4AA0157 /* WriteCommentProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentProvider.swift; sourceTree = "<group>"; };
 		D109E72D69B31373C97237F8 /* Pods-Stepic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stepic.release.xcconfig"; path = "Target Support Files/Pods-Stepic/Pods-Stepic.release.xcconfig"; sourceTree = "<group>"; };
 		D3AF52F67CF39A1A5DC20F44 /* UnsupportedQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UnsupportedQuizInteractor.swift; sourceTree = "<group>"; };
+		D44BBB1022CD4FB280EB7DFB /* WriteCommentPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentPresenter.swift; sourceTree = "<group>"; };
 		D779F899F835A1724F0C1186 /* NewMatchingQuizPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewMatchingQuizPresenter.swift; sourceTree = "<group>"; };
+		D7DBF5A43025E726B6D61E1E /* WriteCommentDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCommentDataFlow.swift; sourceTree = "<group>"; };
 		DA4737058E519D801DAB2131 /* NewStepPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewStepPresenter.swift; sourceTree = "<group>"; };
 		DC193B8E01FF4A61441ABF13 /* NewLessonViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewLessonViewController.swift; sourceTree = "<group>"; };
 		DCCE000FB8689122DC202C3E /* NewCodeQuizFullscreenOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewCodeQuizFullscreenOutputProtocol.swift; sourceTree = "<group>"; };
@@ -3513,6 +3531,30 @@
 			path = NewMatchingQuiz;
 			sourceTree = "<group>";
 		};
+		257195BBF7205219EE894C00 /* WriteComment */ = {
+			isa = PBXGroup;
+			children = (
+				36F53BF6D2A309CFC55A72D5 /* WriteCommentAssembly.swift */,
+				D7DBF5A43025E726B6D61E1E /* WriteCommentDataFlow.swift */,
+				AACBF39DAC4A4A599F8949F2 /* WriteCommentInteractor.swift */,
+				D44BBB1022CD4FB280EB7DFB /* WriteCommentPresenter.swift */,
+				C77A40A485EDD8A3E4AA0157 /* WriteCommentProvider.swift */,
+				1C65429C78822944952072FB /* WriteCommentView.swift */,
+				4CCE255730E82181FAAF0AAA /* WriteCommentViewController.swift */,
+				2B9378F3E9BF5C903F9F283E /* InputOutput */,
+			);
+			path = WriteComment;
+			sourceTree = "<group>";
+		};
+		2B9378F3E9BF5C903F9F283E /* InputOutput */ = {
+			isa = PBXGroup;
+			children = (
+				87BD0B89320D6F0435F7313E /* WriteCommentInputProtocol.swift */,
+				995EDC0C4A4B7085EE7589C2 /* WriteCommentOutputProtocol.swift */,
+			);
+			path = InputOutput;
+			sourceTree = "<group>";
+		};
 		2C0176C32188A49100DDB9D0 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -4678,6 +4720,7 @@
 				685E26390C2E037B1CD1C8A1 /* ProfileEdit */,
 				2CB273FE22C4E25C0078CA2F /* Quizzes */,
 				2C01BB69233D01E200C8DCF0 /* SettingsSubmodules */,
+				257195BBF7205219EE894C00 /* WriteComment */,
 				6770E38E55D13B80C3F16A99 /* WriteCourseReview */,
 			);
 			path = Modules;
@@ -6991,6 +7034,15 @@
 				22B4950F115BC4B44A6CF64A /* NewDiscussionsDataFlow.swift in Sources */,
 				BD98999E70D8AE972B458DB5 /* NewDiscussionsProvider.swift in Sources */,
 				3DE8B8A99E32EB6B11246C34 /* NewDiscussionsView.swift in Sources */,
+				0E3927B3DADE084DA71C868B /* WriteCommentAssembly.swift in Sources */,
+				7060C8E8055EC26669A7051B /* WriteCommentViewController.swift in Sources */,
+				0C97AFADC2099B3785D9B910 /* WriteCommentInteractor.swift in Sources */,
+				49D8E231DE76283BD37FFD3B /* WriteCommentPresenter.swift in Sources */,
+				A0A7AC991F92BEC73820B298 /* WriteCommentDataFlow.swift in Sources */,
+				2D6AB32933F1C93FCF849056 /* WriteCommentProvider.swift in Sources */,
+				7D334A7F2599276A266E17AE /* WriteCommentView.swift in Sources */,
+				089A949DBE3F34A047F45AFB /* WriteCommentInputProtocol.swift in Sources */,
+				10F32F9073D41A146E8A3994 /* WriteCommentOutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
