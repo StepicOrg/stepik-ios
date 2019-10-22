@@ -28,7 +28,7 @@ struct CardStepViewModel {
     let fontSize: FontSize
 }
 
-class CardStepPresenter {
+final class CardStepPresenter {
     weak var view: CardStepView?
     weak var delegate: CardStepDelegate?
 

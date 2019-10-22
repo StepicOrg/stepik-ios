@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileDescriptionContentView: UIView, ProfileDescriptionView {
+final class ProfileDescriptionContentView: UIView, ProfileDescriptionView {
     @IBOutlet weak var shortBioTextLabel: StepikLabel!
     @IBOutlet weak var infoHeaderLabel: StepikLabel!
     @IBOutlet weak var infoTextLabel: StepikLabel!

@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Progress {
-
     @NSManaged var managedId: String?
     @NSManaged var managedIsPassed: NSNumber?
     @NSManaged var managedScore: NSNumber?

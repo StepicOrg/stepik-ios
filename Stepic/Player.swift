@@ -24,10 +24,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import UIKit
-import Foundation
 import AVFoundation
 import CoreGraphics
+import Foundation
+import UIKit
 
 // MARK: - types
 
@@ -89,7 +89,6 @@ public enum BufferingState: Int, CustomStringConvertible {
 // MARK: - Player
 
 public class Player: UIViewController {
-
     public weak var delegate: PlayerDelegate?
 
     // configuration
@@ -204,7 +203,6 @@ public class Player: UIViewController {
     fileprivate var periodicTimeObserver: AnyObject?
 
     fileprivate func getTimeFromBufferSize() {
-
     }
 
     //block's parameters are current current time + current buffered value 
@@ -225,9 +223,7 @@ public class Player: UIViewController {
                     print("ALERT loadedTimeTanges count < 0")
                     block(nTime, nil)
                 }
-
             }
-
         }) as AnyObject?
     }
 
@@ -253,7 +249,7 @@ public class Player: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.avplayer = AVPlayer()
         self.avplayer.actionAtItemEnd = .pause
         self.playbackFreezesAtEnd = false
@@ -283,14 +279,14 @@ public class Player: UIViewController {
 
     // MARK: - view lifecycle
 
-    public override func loadView() {
+    override public func loadView() {
         self.playerView = PlayerView(frame: CGRect.zero)
         self.playerView.fillMode = AVLayerVideoGravity.resizeAspect.rawValue
         self.playerView.playerLayer.isHidden = true
         self.view = self.playerView
     }
 
-    public override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         do {
@@ -311,7 +307,7 @@ public class Player: UIViewController {
         self.addApplicationObservers()
     }
 
-    public override func viewDidDisappear(_ animated: Bool) {
+    override public func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         if self.playbackState == .playing {
@@ -388,10 +384,9 @@ public class Player: UIViewController {
 
         self.asset.loadValuesAsynchronously(forKeys: keys, completionHandler: { () -> Void in
             DispatchQueue.main.sync(execute: { () -> Void in
-
                 for key in keys {
                     var error: NSError?
-                    let status = self.asset.statusOfValue(forKey: key, error:&error)
+                    let status = self.asset.statusOfValue(forKey: key, error: &error)
                     if status == .failed {
                         self.playbackState = .failed
                         return
@@ -403,9 +398,8 @@ public class Player: UIViewController {
                     return
                 }
 
-                let playerItem: AVPlayerItem = AVPlayerItem(asset:self.asset)
+                let playerItem = AVPlayerItem(asset: self.asset)
                 self.setupPlayerItem(playerItem)
-
             })
         })
     }
@@ -444,13 +438,11 @@ public class Player: UIViewController {
             self.avplayer.actionAtItemEnd = .pause
         }
     }
-
 }
 
 // MARK: - NSNotifications
 
 extension Player {
-
     // AVPlayerItem
 
     @objc internal func playerItemDidPlayToEndTime(_ aNotification: NSNotification) {
@@ -521,9 +513,7 @@ private let PlayerLoadedTimeRangesKey = "loadedTimeRanges"
 private let PlayerReadyForDisplayKey = "readyForDisplay"
 
 extension Player {
-
-    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         // PlayerRateKey, PlayerObserverContext
 
         if (context == &PlayerItemObserverContext) {
@@ -587,7 +577,6 @@ extension Player {
                     }
                 }
             }
-
         } else if (context == &PlayerLayerObserverContext) {
             if self.playerView.playerLayer.isReadyForDisplay {
                 self.executeClosureOnMainQueueIfNecessary(withClosure: {
@@ -599,13 +588,11 @@ extension Player {
         //    super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         //}
     }
-
 }
 
 // MARK: - queues
 
 extension Player {
-
     internal func executeClosureOnMainQueueIfNecessary(withClosure closure: @escaping () -> Void) {
         if Thread.isMainThread {
             closure()
@@ -613,13 +600,11 @@ extension Player {
             DispatchQueue.main.async(execute: closure)
         }
     }
-
 }
 
 // MARK: - PlayerView
 
 internal class PlayerView: UIView {
-
     var player: AVPlayer? {
         get {
             return playerLayer.player
@@ -659,10 +644,9 @@ internal class PlayerView: UIView {
         super.init(coder: aDecoder)
         self.playerLayer.backgroundColor = UIColor.black.cgColor
     }
-
 }
 
 // Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+private func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
 	return input.rawValue
 }

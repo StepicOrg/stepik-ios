@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class SectionsAPI: APIEndpoint {
+final class SectionsAPI: APIEndpoint {
     override var name: String { return "sections" }
 
     func retrieve(ids: [Int], existing: [Section]) -> Promise<[Section]> {

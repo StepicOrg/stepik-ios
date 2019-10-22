@@ -7,14 +7,14 @@
 //
 
 import Foundation
-import VK_ios_sdk
 import PromiseKit
+import VK_ios_sdk
 
 protocol VKSocialSDKProviderDelegate: class {
     func presentAuthController(_ controller: UIViewController)
 }
 
-class VKSocialSDKProvider: NSObject, SocialSDKProvider {
+final class VKSocialSDKProvider: NSObject, SocialSDKProvider {
     weak var delegate: VKSocialSDKProviderDelegate?
 
     public static let instance = VKSocialSDKProvider()
@@ -23,7 +23,7 @@ class VKSocialSDKProvider: NSObject, SocialSDKProvider {
 
     private var sdkInstance: VKSdk
 
-    private override init() {
+    override private init() {
         sdkInstance = VKSdk.initialize(withAppId: StepicApplicationsInfo.SocialInfo.AppIds.vk)
         super.init()
         sdkInstance.register(self)
@@ -54,7 +54,7 @@ class VKSocialSDKProvider: NSObject, SocialSDKProvider {
     fileprivate var errorHandler: ((SocialSDKError) -> Void)?
 }
 
-extension VKSocialSDKProvider : VKSdkDelegate {
+extension VKSocialSDKProvider: VKSdkDelegate {
     /**
      Notifies about access error. For example, this may occurs when user rejected app permissions through VK.com
      */
@@ -78,7 +78,6 @@ extension VKSocialSDKProvider : VKSdkDelegate {
 
 extension VKSocialSDKProvider: VKSdkUIDelegate {
     public func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
-
     }
 
     func vkSdkShouldPresent(_ controller: UIViewController) {

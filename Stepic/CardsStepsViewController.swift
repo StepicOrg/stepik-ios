@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import PromiseKit
 import Koloda
+import PromiseKit
 
 class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWithStepikPlaceholder {
-
-    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
+    var placeholderContainer = StepikPlaceholderControllerContainer()
     var presenter: CardsStepsPresenter?
 
     @IBOutlet weak var kolodaView: KolodaView!
@@ -109,11 +108,9 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     }
 
     func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int) {
-
     }
 
     func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {
-
     }
 
     func presentShareDialog(for link: String) {

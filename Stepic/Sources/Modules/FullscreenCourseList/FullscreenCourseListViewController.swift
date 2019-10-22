@@ -146,7 +146,3 @@ extension FullscreenCourseListViewController: FullscreenCourseListViewController
         )
     }
 }
-
-private extension StepikPlaceholderControllerContainer.PlaceholderState {
-    static let empty = StepikPlaceholderControllerContainer.PlaceholderState(id: "empty")
-}

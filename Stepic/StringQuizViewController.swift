@@ -6,12 +6,11 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import IQKeyboardManagerSwift
 import SnapKit
+import UIKit
 
-class StringQuizViewController: QuizViewController {
-
+final class StringQuizViewController: QuizViewController {
     var textView = IQTextView()
 
     var dataset: String?
@@ -92,11 +91,6 @@ class StringQuizViewController: QuizViewController {
         self.view.endEditing(true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override var needsToRefreshAttemptWhenWrong: Bool {
         return false
     }
@@ -105,20 +99,9 @@ class StringQuizViewController: QuizViewController {
     override func getReply() -> Reply? {
         return TextReply(text: textView.text ?? "")
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
-extension StringQuizViewController : UITextViewDelegate {
+extension StringQuizViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         textViewTextDidChange(textView: textView)
     }

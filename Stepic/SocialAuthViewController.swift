@@ -6,8 +6,8 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SVProgressHUD
+import UIKit
 
 extension SocialAuthViewController: SocialAuthView {
     func set(providers: [SocialProviderViewData]) {
@@ -49,7 +49,7 @@ extension SocialAuthViewController: SocialAuthView {
     }
 }
 
-class SocialAuthViewController: UIViewController {
+final class SocialAuthViewController: UIViewController {
     var presenter: SocialAuthPresenter?
 
     fileprivate let numberOfColumns = 3
@@ -247,7 +247,7 @@ extension SocialAuthViewController: VKSocialSDKProviderDelegate {
     }
 }
 
-class SocialCollectionViewFlowLayout: UICollectionViewFlowLayout {
+final class SocialCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var numberOfColumns: Int = 3
     var itemSizeHeight: CGFloat = 51.0
 

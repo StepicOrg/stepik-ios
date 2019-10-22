@@ -2,8 +2,8 @@ import Foundation
 import PromiseKit
 
 protocol DiscussionsPresenterProtocol: class {
-    var discussionProxyId: String { get }
-    var stepId: Step.IdType { get }
+    var discussionProxyID: DiscussionProxy.IdType { get }
+    var stepID: Step.IdType { get }
 
     func refresh()
     func selectViewData(_ viewData: DiscussionsViewData)
@@ -18,15 +18,15 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     weak var view: DiscussionsView?
 
-    let discussionProxyId: String
-    let stepId: Step.IdType
+    let discussionProxyID: DiscussionProxy.IdType
+    let stepID: Step.IdType
 
     private let discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol
     private let commentsNetworkService: CommentsNetworkServiceProtocol
     private let votesNetworkService: VotesNetworkServiceProtocol
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
-    private var discussionIds = DiscussionIds()
+    private var discussionsIDs = DiscussionsIDs()
     private var discussions = [Comment]()
     private var replies = Replies()
 
@@ -39,16 +39,16 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     init(
         view: DiscussionsView?,
-        discussionProxyId: String,
-        stepId: Step.IdType,
+        discussionProxyID: DiscussionProxy.IdType,
+        stepID: Step.IdType,
         discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol,
         commentsNetworkService: CommentsNetworkServiceProtocol,
         votesNetworkService: VotesNetworkServiceProtocol,
         stepsPersistenceService: StepsPersistenceServiceProtocol
     ) {
         self.view = view
-        self.discussionProxyId = discussionProxyId
-        self.stepId = stepId
+        self.discussionProxyID = discussionProxyID
+        self.stepID = stepID
         self.discussionProxiesNetworkService = discussionProxiesNetworkService
         self.commentsNetworkService = commentsNetworkService
         self.votesNetworkService = votesNetworkService
@@ -61,17 +61,17 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         }
         self.isReloading = true
 
-        self.discussionIds = DiscussionIds()
+        self.discussionsIDs = DiscussionsIDs()
         self.replies = Replies()
         self.discussions = [Comment]()
 
         let queue = DispatchQueue.global(qos: .userInitiated)
 
         queue.promise {
-            self.discussionProxiesNetworkService.fetch(id: self.discussionProxyId)
-        }.then(on: queue) { discussionProxy -> Promise<[Int]> in
-            self.discussionIds.all = discussionProxy.discussionIds
-            return .value(self.getNextDiscussionIdsToLoad())
+            self.discussionProxiesNetworkService.fetch(id: self.discussionProxyID)
+        }.then(on: queue) { discussionProxy -> Promise<[Comment.IdType]> in
+            self.discussionsIDs.all = discussionProxy.discussionsIDs
+            return .value(self.getNextDiscussionsIDsToLoad())
         }.then(on: queue) { ids in
             self.fetchComments(ids: ids)
         }.done {
@@ -85,14 +85,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     }
 
     func writeComment(_ comment: Comment) {
-        if let parentId = comment.parentId {
+        if let parentId = comment.parentID {
             if let parentIdx = self.discussions.index(where: { $0.id == parentId }) {
-                self.discussions[parentIdx].repliesIds += [comment.id]
+                self.discussions[parentIdx].repliesIDs += [comment.id]
                 self.replies.loaded[parentId, default: []] += [comment]
             }
         } else {
-            self.discussionIds.all.insert(comment.id, at: 0)
-            self.discussionIds.loaded.insert(comment.id, at: 0)
+            self.discussionsIDs.all.insert(comment.id, at: 0)
+            self.discussionsIDs.loaded.insert(comment.id, at: 0)
             self.discussions.insert(comment, at: 0)
             self.incrementStepDiscussionsCount()
         }
@@ -110,7 +110,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             self.discussionsFetchingRepliesIds.insert(loadRepliesFor.id)
             self.reloadViewData()
 
-            let idsToLoad = self.getNextReplyIdsToLoad(discussion: loadRepliesFor)
+            let idsToLoad = self.getNextReplyIDsToLoad(discussion: loadRepliesFor)
             self.fetchComments(ids: idsToLoad).done {
                 self.discussionsFetchingRepliesIds.remove(loadRepliesFor.id)
                 self.reloadViewData()
@@ -127,7 +127,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             self.isFetchingMoreDiscussions = true
             self.reloadViewData()
 
-            let idsToLoad = self.getNextDiscussionIdsToLoad()
+            let idsToLoad = self.getNextDiscussionsIDsToLoad()
             self.fetchComments(ids: idsToLoad).done {
                 self.isFetchingMoreDiscussions = false
                 self.reloadViewData()
@@ -201,19 +201,19 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         }
     }
 
-    private func getNextDiscussionIdsToLoad() -> [Int] {
-        let startIndex = self.discussionIds.loaded.count
-        let offset = min(self.discussionIds.leftToLoad, DiscussionsPresenter.discussionsLoadingInterval)
-        return Array(self.discussionIds.all[startIndex..<startIndex + offset])
+    private func getNextDiscussionsIDsToLoad() -> [Int] {
+        let startIndex = self.discussionsIDs.loaded.count
+        let offset = min(self.discussionsIDs.leftToLoad, DiscussionsPresenter.discussionsLoadingInterval)
+        return Array(self.discussionsIDs.all[startIndex..<startIndex + offset])
     }
 
-    private func getNextReplyIdsToLoad(discussion: Comment) -> [Int] {
-        let loadedReplies = Set(replies.loaded[discussion.id, default: []].map { $0.id })
+    private func getNextReplyIDsToLoad(discussion: Comment) -> [Int] {
+        let loadedRepliesIDs = Set(replies.loaded[discussion.id, default: []].map { $0.id })
         var idsToLoad = [Int]()
 
-        for replyId in discussion.repliesIds {
-            if !loadedReplies.contains(replyId) {
-                idsToLoad.append(replyId)
+        for replyID in discussion.repliesIDs {
+            if !loadedRepliesIDs.contains(replyID) {
+                idsToLoad.append(replyID)
                 if idsToLoad.count == DiscussionsPresenter.repliesLoadingInterval {
                     return idsToLoad
                 }
@@ -225,26 +225,29 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     private func fetchComments(ids: [Comment.IdType]) -> Promise<Void> {
         return self.commentsNetworkService.fetch(ids: ids).done(on: .global(qos: .userInitiated)) { comments in
-            self.discussionIds.loaded += ids
+            let fetchedDiscussions = comments.filter { $0.parentID == nil }
 
-            self.discussions += comments
-                .filter { $0.parentId == nil }
-                .reordered(order: ids, transform: { $0.id })
+            self.discussionsIDs.loaded += fetchedDiscussions.map { $0.id }
+            self.discussions += fetchedDiscussions.reordered(order: ids, transform: { $0.id })
             self.discussions.sort { $0.time.compare($1.time) == .orderedDescending }
 
-            var commentIdsWithReplies = Set<Int>()
-            for comment in comments where comment.parentId != nil {
-                self.replies.loaded[comment.parentId!, default: []] += [comment]
-                commentIdsWithReplies.insert(comment.parentId!)
+            var commentsIDsWithReplies = Set<Comment.IdType>()
+            for comment in comments {
+                guard let parentID = comment.parentID else {
+                    continue
+                }
+
+                self.replies.loaded[parentID, default: []] += [comment]
+                commentsIDsWithReplies.insert(parentID)
             }
 
-            for id in commentIdsWithReplies {
-                guard let idx = self.discussions.firstIndex(where: { $0.id == id }) else {
+            for id in commentsIDsWithReplies {
+                guard let index = self.discussions.firstIndex(where: { $0.id == id }) else {
                     continue
                 }
 
                 self.replies.loaded[id] = self.replies.loaded[id, default: []]
-                    .reordered(order: self.discussions[idx].repliesIds, transform: { $0.id })
+                    .reordered(order: self.discussions[index].repliesIDs, transform: { $0.id })
                     .sorted { $0.time.compare($1.time) == .orderedAscending }
             }
         }
@@ -274,7 +277,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             }
         }
 
-        let leftToLoad = self.discussionIds.leftToLoad
+        let leftToLoad = self.discussionsIDs.leftToLoad
         if leftToLoad > 0 {
             viewData.append(
                 DiscussionsViewData(
@@ -294,20 +297,21 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     ) {
         self.view?.displayAlert(title: title, message: message)
     }
-    
+
     private func incrementStepDiscussionsCount() {
-        self.stepsPersistenceService.fetch(ids: [self.stepId]).done { steps in
+        self.stepsPersistenceService.fetch(ids: [self.stepID]).done { steps in
             if let step = steps.first {
                 step.discussionsCount? += 1
             }
+            CoreDataHelper.instance.save()
         }.cauterize()
     }
-    
+
     // MARK: Inner structs
 
-    private struct DiscussionIds {
-        var all = [Int]()
-        var loaded = [Int]()
+    private struct DiscussionsIDs {
+        var all: [Comment.IdType] = []
+        var loaded: [Comment.IdType] = []
 
         var leftToLoad: Int {
             return self.all.count - self.loaded.count
@@ -315,13 +319,13 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     }
 
     private struct Replies {
-        var loaded = [Int: [Comment]]()
+        var loaded: [Comment.IdType: [Comment]] = [:]
 
         func leftToLoad(_ comment: Comment) -> Int {
             if let loadedCount = self.loaded[comment.id]?.count {
-                return comment.repliesIds.count - loadedCount
+                return comment.repliesIDs.count - loadedCount
             } else {
-                return comment.repliesIds.count
+                return comment.repliesIDs.count
             }
         }
     }

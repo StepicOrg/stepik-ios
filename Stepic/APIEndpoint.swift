@@ -6,14 +6,13 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
 import CoreData
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
 class APIEndpoint {
-
     var name: String {
         return ""
     }

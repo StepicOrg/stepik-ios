@@ -6,15 +6,14 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 final class Unit: NSManagedObject, IDFetchable {
-
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -29,9 +28,9 @@ final class Unit: NSManagedObject, IDFetchable {
 
         assignmentsArray = json["assignments"].arrayObject as! [Int]
 
-        beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date"])
-        softDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
-        hardDeadline = Parser.sharedParser.dateFromTimedateJSON(json["soft_deadline"])
+        beginDate = Parser.shared.dateFromTimedateJSON(json["begin_date"])
+        softDeadline = Parser.shared.dateFromTimedateJSON(json["soft_deadline"])
+        hardDeadline = Parser.shared.dateFromTimedateJSON(json["soft_deadline"])
     }
 
     func update(json: JSON) {

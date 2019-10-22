@@ -6,12 +6,12 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class UserActivitiesAPI: APIEndpoint {
+final class UserActivitiesAPI: APIEndpoint {
     override var name: String { return "user-activities" }
 
     func retrieve(user userId: Int) -> Promise<UserActivity> {
@@ -23,7 +23,6 @@ class UserActivitiesAPI: APIEndpoint {
 extension UserActivitiesAPI {
     @available(*, deprecated, message: "Use retrieve with promises instead")
     @discardableResult func retrieve(user userId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((UserActivity) -> Void), error errorHandler: @escaping ((Error) -> Void)) -> Request? {
-
         retrieve(user: userId).done {
             userActivity in
             success(userActivity)

@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import UserNotifications
 import PromiseKit
+import UserNotifications
 
 /// Defines whether the app is allowed to schedule notifications.
 enum NotificationPermissionStatus: String {

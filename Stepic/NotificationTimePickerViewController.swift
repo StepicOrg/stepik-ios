@@ -8,8 +8,7 @@
 
 import UIKit
 
-class NotificationTimePickerViewController: PickerViewController {
-
+final class NotificationTimePickerViewController: PickerViewController {
     var startHour: Int = 0
 
     override func viewDidLoad() {
@@ -53,13 +52,7 @@ class NotificationTimePickerViewController: PickerViewController {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     func getDisplayingStreakTimeInterval(startHour: Int) -> String {
-
         let timeZoneDiff = NSTimeZone.system.secondsFromGMT()
         let startInterval = TimeInterval((startHour % 24) * 60 * 60 - timeZoneDiff)
         let startDate = Date(timeIntervalSinceReferenceDate: startInterval)
@@ -70,15 +63,4 @@ class NotificationTimePickerViewController: PickerViewController {
         dateFormatter.dateStyle = .none
         return "\(dateFormatter.string(from: startDate)) - \(dateFormatter.string(from: endDate))"
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -6,10 +6,10 @@
 //  Copyright © 2019 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
 final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
@@ -23,7 +23,7 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         ]
     }
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -34,7 +34,7 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
         userID = json["user"].intValue
         courseID = json["course"].intValue
         score = json["score"].intValue
-        creationDate = Parser.sharedParser.dateFromTimedateJSON(json["create_date"]) ?? Date()
+        creationDate = Parser.shared.dateFromTimedateJSON(json["create_date"]) ?? Date()
     }
 
     func update(json: JSON) {

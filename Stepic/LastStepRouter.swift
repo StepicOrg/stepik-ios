@@ -15,7 +15,7 @@ enum LastStepError: Error {
 }
 
 @available(*, deprecated, message: "Legacy class, should be refactored")
-class LastStepRouter {
+final class LastStepRouter {
     static func continueLearning(
         for course: Course,
         isAdaptive: Bool? = nil,

@@ -6,10 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class MathReply: NSObject, Reply {
+final class MathReply: NSObject, Reply {
     var formula: String
 
     init(formula: String) {
@@ -21,8 +21,7 @@ class MathReply: NSObject, Reply {
         super.init()
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return ["formula": formula]
     }
-
 }

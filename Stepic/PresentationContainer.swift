@@ -11,7 +11,8 @@ import Foundation
 /*
  Used to store presentation data
  */
-class PresentationContainer {
-    private init() {}
+final class PresentationContainer {
     static let certificates = CertificatesPresentationContainer()
+
+    private init() { }
 }

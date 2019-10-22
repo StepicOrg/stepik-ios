@@ -6,8 +6,8 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 protocol StepCardViewDelegate: class {
     func onControlButtonClick()
@@ -19,7 +19,7 @@ extension StepCardViewDelegate {
     func onTitleButtonClick() { }
 }
 
-class StepCardView: NibInitializableView {
+final class StepCardView: NibInitializableView {
     override var nibName: String {
         return "StepCardView"
     }

@@ -6,11 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
-
+final class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var container: UIView!
@@ -36,5 +35,4 @@ class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
             }
         }
     }
-
 }

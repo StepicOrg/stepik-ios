@@ -6,12 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Alamofire
 import SVGKit
+import UIKit
 
-class AvatarImageView: UIImageView {
-
+final class AvatarImageView: UIImageView {
     enum Shape {
         case rectangle(cornerRadius: CGFloat)
         case circle
@@ -80,7 +79,6 @@ class AvatarImageView: UIImageView {
                         }
                     }
                 }
-
             })
         }
     }
@@ -113,5 +111,4 @@ class AvatarImageView: UIImageView {
         }
         return nil
     }
-
 }

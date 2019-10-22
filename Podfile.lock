@@ -130,6 +130,7 @@ PODS:
   - Kanna (4.0.3)
   - Koloda (4.7):
     - pop (~> 1.0)
+  - Logging (0.0.1)
   - lottie-ios (2.5.3)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
@@ -212,6 +213,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (= 6.5.1)
   - Kanna (= 4.0.3)
   - Koloda (= 4.7)
+  - Logging (from `https://github.com/ivan-magda/swift-log.git`, branch `swift-4`)
   - lottie-ios (= 2.5.3)
   - Mockingjay (= 2.0.1)
   - Nimble (= 8.0.4)
@@ -300,6 +302,9 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 EXTERNAL SOURCES:
+  Logging:
+    :branch: swift-4
+    :git: https://github.com/ivan-magda/swift-log.git
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -307,6 +312,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
+  Logging:
+    :commit: cca23268da048a8d16b7a1dd88dcbd7dbda92a7b
+    :git: https://github.com/ivan-magda/swift-log.git
   SVGKit:
     :commit: bfe62f6d45f55c9fe39619d9e91fed1844c59da6
     :git: https://github.com/SVGKit/SVGKit.git
@@ -352,6 +360,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 9ac7524fad9f9fe9a3b98c927e7772471ca546d2
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
   Koloda: f456d003d2ce15ef9f10c2874a444f1f570b490c
+  Logging: 30d7a6efba25f06bee2b6f5f76914baaeac2e422
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -380,6 +389,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: edb00e8af2903290e142ba4c488adf8d394e828a
 
-PODFILE CHECKSUM: 70f255532ba0c504afc35bf14d4f7c37dcfc28a7
+PODFILE CHECKSUM: dc63d7ff94795a04c64f1ed6339d1e679ac8adcd
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.4

@@ -6,9 +6,9 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import BEMCheckBox
 import SnapKit
+import UIKit
 
 final class ChoiceQuizTableViewCell: UITableViewCell {
     @IBOutlet weak var textContainerView: UIView!

@@ -33,7 +33,7 @@ enum SocialAuthState {
     case normal, loading
 }
 
-class SocialAuthPresenter {
+final class SocialAuthPresenter {
     weak var view: SocialAuthView?
 
     var stepicsAPI: StepicsAPI

@@ -28,5 +28,4 @@ extension UIView {
         self.layer.masksToBounds = true
         self.clipsToBounds = true
     }
-
 }

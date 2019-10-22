@@ -6,15 +6,14 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
-class LastStep: NSManagedObject, JSONSerializable {
-
+final class LastStep: NSManagedObject, JSONSerializable {
     typealias IdType = String
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }

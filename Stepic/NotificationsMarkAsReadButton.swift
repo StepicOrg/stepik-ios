@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-class NotificationsMarkAsReadButton: StepikButton {
+final class NotificationsMarkAsReadButton: StepikButton {
     enum Status {
         case normal, loading, error
     }

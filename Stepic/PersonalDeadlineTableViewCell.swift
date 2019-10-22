@@ -8,8 +8,7 @@
 
 import UIKit
 
-class PersonalDeadlineTableViewCell: UITableViewCell {
-
+final class PersonalDeadlineTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var deadlineLabel: StepikLabel!
 

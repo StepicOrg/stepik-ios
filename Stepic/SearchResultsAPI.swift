@@ -6,18 +6,18 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class SearchResultsAPI: APIEndpoint {
+final class SearchResultsAPI: APIEndpoint {
     override var name: String { return "search-results" }
 
     @available(*, deprecated, message: "Use searchCourse() -> Promise<([SearchResult], Meta)> instead")
     @discardableResult func search(query: String, type: String?, language: ContentLanguage, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
         var params: Parameters = [
-           "query" : query.lowercased(),
+           "query": query.lowercased(),
            "access_token": AuthInfo.shared.token?.accessToken ?? "",
            "language": language.searchCoursesParameter ?? "",
            "is_popular": "true",

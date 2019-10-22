@@ -8,8 +8,7 @@
 
 import UIKit
 
-class AuthButton: UIButton {
-
+final class AuthButton: UIButton {
     override var isEnabled: Bool {
         willSet {
             if newValue != isEnabled {
@@ -19,5 +18,4 @@ class AuthButton: UIButton {
             }
         }
     }
-
 }

@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
-import SVProgressHUD
-import IQKeyboardManagerSwift
 import Atributika
+import IQKeyboardManagerSwift
+import SVProgressHUD
+import UIKit
 
 extension EmailAuthViewController: EmailAuthView {
     func update(with result: EmailAuthResult) {
@@ -33,7 +33,7 @@ extension EmailAuthViewController: EmailAuthView {
     }
 }
 
-class EmailAuthViewController: UIViewController {
+final class EmailAuthViewController: UIViewController {
     var presenter: EmailAuthPresenter?
 
     var prefilledEmail: String?

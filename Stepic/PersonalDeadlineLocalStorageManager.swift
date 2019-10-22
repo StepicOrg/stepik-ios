@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class PersonalDeadlineLocalStorageManager {
+final class PersonalDeadlineLocalStorageManager {
     private let defaults = UserDefaults.standard
 
     private func defaultsKey(for course: Course) -> String {
@@ -31,7 +31,7 @@ class PersonalDeadlineLocalStorageManager {
         guard let jsonString = defaults.value(forKey: key) as? String else {
             return nil
         }
-        let json: JSON = JSON(parseJSON: jsonString)
+        let json = JSON(parseJSON: jsonString)
         return StorageRecord(json: json)
     }
 }

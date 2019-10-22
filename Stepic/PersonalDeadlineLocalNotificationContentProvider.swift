@@ -26,7 +26,7 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
         )
     }
 
-    var userInfo: [AnyHashable : Any] {
+    var userInfo: [AnyHashable: Any] {
         return [
             Key.course.rawValue: course.id,
             Key.section.rawValue: section.id,

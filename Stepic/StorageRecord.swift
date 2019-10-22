@@ -31,8 +31,7 @@ enum StorageKind {
     }
 }
 
-class StorageRecord: JSONSerializable {
-
+final class StorageRecord: JSONSerializable {
     var id: Int = 0
     var user: Int?
     var data: StorageData?
@@ -52,8 +51,8 @@ class StorageRecord: JSONSerializable {
     func update(json: JSON) {
         id = json["id"].int ?? 0
         kind = StorageKind(string: json["kind"].stringValue)
-        createDate = Parser.sharedParser.dateFromTimedateJSON(json["create_date"])
-        updateDate = Parser.sharedParser.dateFromTimedateJSON(json["update_date"])
+        createDate = Parser.shared.dateFromTimedateJSON(json["create_date"])
+        updateDate = Parser.shared.dateFromTimedateJSON(json["update_date"])
         data = getStorageData(from: json["data"], withKind: kind)
         user = json["user"].int
     }

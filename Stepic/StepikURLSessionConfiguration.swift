@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StepikURLSessionConfiguration: URLSessionConfiguration {
+final class StepikURLSessionConfiguration: URLSessionConfiguration {
     private static func buildUserAgent() -> String {
         if let bundleId = Bundle.main.bundleIdentifier,
            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,

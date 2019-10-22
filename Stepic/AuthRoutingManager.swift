@@ -8,13 +8,13 @@
 
 import Foundation
 
-class AuthRoutingManager {
+final class AuthRoutingManager {
     func routeFrom(controller: UIViewController, success: (() -> Void)?, cancel: (() -> Void)?) {
-        if let vc = ControllerHelper.getAuthController() as? AuthNavigationViewController {
-            vc.success = success
-            vc.cancel = cancel
-            vc.source = controller
-            controller.present(vc, animated: true, completion: nil)
+        if let viewController = ControllerHelper.getAuthController() as? AuthNavigationViewController {
+            viewController.success = success
+            viewController.cancel = cancel
+            viewController.source = controller
+            controller.present(viewController, animated: true, completion: nil)
         }
     }
 }

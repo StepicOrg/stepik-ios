@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import ActionSheetPicker_3_0
+import Foundation
 import Presentr
+import UIKit
 
 @available(*, deprecated, message: "Class to incapsulate edit & delete logic")
 final class PersonalDeadlineEditDeleteAlertLegacyAssembly: Assembly {
@@ -108,7 +108,7 @@ final class PersonalDeadlineEditScheduleLegacyAssembly: Assembly {
     }
 }
 
-class PersonalDeadlineEditScheduleViewController: UIViewController {
+final class PersonalDeadlineEditScheduleViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: FullHeightTableView!
 
@@ -170,7 +170,6 @@ class PersonalDeadlineEditScheduleViewController: UIViewController {
     @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-
 }
 
 extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {

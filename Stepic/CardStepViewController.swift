@@ -6,11 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Agrume
-import WebKit
+import Foundation
 import PromiseKit
 import SnapKit
+import WebKit
 
 class CardStepViewController: UIViewController, CardStepView {
     weak var presenter: CardStepPresenter?
@@ -168,7 +168,6 @@ class CardStepViewController: UIViewController, CardStepView {
         }.catch { _ in
             print("card step: error while refreshing")
         }
-
     }
 }
 

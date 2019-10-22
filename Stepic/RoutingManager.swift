@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RoutingManager {
+final class RoutingManager {
     static let auth = AuthRoutingManager()
     static let rate = RateAppManager()
 }

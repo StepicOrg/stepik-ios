@@ -21,7 +21,7 @@ final class UserCourse: JSONSerializable {
         self.userId = json["user"].intValue
         self.courseId = json["course"].intValue
         self.isFavorite = json["is_favorite"].boolValue
-        self.lastViewed = Parser.sharedParser.dateFromTimedateJSON(json["last_viewed"]) ?? Date()
+        self.lastViewed = Parser.shared.dateFromTimedateJSON(json["last_viewed"]) ?? Date()
     }
 
     required init(json: JSON) {
@@ -29,6 +29,6 @@ final class UserCourse: JSONSerializable {
         self.userId = json["user"].intValue
         self.courseId = json["course"].intValue
         self.isFavorite = json["is_favorite"].boolValue
-        self.lastViewed = Parser.sharedParser.dateFromTimedateJSON(json["last_viewed"]) ?? Date()
+        self.lastViewed = Parser.shared.dateFromTimedateJSON(json["last_viewed"]) ?? Date()
     }
 }

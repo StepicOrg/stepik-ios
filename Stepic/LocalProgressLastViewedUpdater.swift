@@ -8,8 +8,7 @@
 
 import Foundation
 
-class LocalProgressLastViewedUpdater {
-
+final class LocalProgressLastViewedUpdater {
     static let shared = LocalProgressLastViewedUpdater()
 
     func updateView(for step: Step) {
@@ -43,5 +42,4 @@ class LocalProgressLastViewedUpdater {
         course.progress?.lastViewed = NSDate().timeIntervalSince1970
         CoreDataHelper.instance.save()
     }
-
 }

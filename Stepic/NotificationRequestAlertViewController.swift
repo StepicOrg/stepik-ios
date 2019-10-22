@@ -6,9 +6,9 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Lottie
 import SnapKit
+import UIKit
 
 final class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var imageContainerView: UIView!
@@ -20,7 +20,7 @@ final class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var yesButton: UIButton!
 
     var messageLabelWidth: Constraint?
-    let animationView: LOTAnimationView = LOTAnimationView(name: "onboardingAnimation4")
+    let animationView = LOTAnimationView(name: "onboardingAnimation4")
 
     var yesAction: (() -> Void)?
     var noAction: (() -> Void)?

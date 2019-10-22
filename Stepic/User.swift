@@ -6,48 +6,47 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 @objc
 final class User: NSManagedObject, IDFetchable {
-
     typealias IdType = Int
-
-    convenience required init(json: JSON) {
-        self.init()
-        initialize(json)
-    }
-
-    func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        profile = json["profile"].intValue
-        isPrivate = json["is_private"].boolValue
-        isOrganization = json["is_organization"].boolValue
-        bio = json["short_bio"].stringValue
-        details = json["details"].stringValue
-        firstName = json["first_name"].stringValue
-        lastName = json["last_name"].stringValue
-        avatarURL = json["avatar"].stringValue
-        level = json["level"].intValue
-        joinDate = Parser.sharedParser.dateFromTimedateJSON(json["join_date"])
-    }
-
-    func update(json: JSON) {
-        initialize(json)
-    }
 
     var isGuest: Bool {
         return level == 0
     }
 
-    //Returns true if joinDate is less than in 5 minutes from now
+    /// Returns true if joinDate is less than in 5 minutes from now.
     var didJustRegister: Bool {
-        guard let joinDate = joinDate else {
-            return false
+        if let joinDate = self.joinDate {
+            return Date().timeIntervalSince(joinDate) < 5 * 60
         }
-        return Date().timeIntervalSince(joinDate) < 5 * 60
+        return false
+    }
+
+    required convenience init(json: JSON) {
+        self.init()
+        self.initialize(json)
+    }
+
+    func initialize(_ json: JSON) {
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.profile = json[JSONKey.profile.rawValue].intValue
+        self.isPrivate = json[JSONKey.isPrivate.rawValue].boolValue
+        self.isOrganization = json[JSONKey.isOrganization.rawValue].boolValue
+        self.bio = json[JSONKey.shortBio.rawValue].stringValue
+        self.details = json[JSONKey.shortBio.rawValue].stringValue
+        self.firstName = json[JSONKey.firstName.rawValue].stringValue
+        self.lastName = json[JSONKey.lastName.rawValue].stringValue
+        self.avatarURL = json[JSONKey.avatar.rawValue].stringValue
+        self.level = json[JSONKey.level.rawValue].intValue
+        self.joinDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.joinDate.rawValue])
+    }
+
+    func update(json: JSON) {
+        self.initialize(json)
     }
 
     static func fetchById(_ id: Int) -> [User]? {
@@ -65,7 +64,6 @@ final class User: NSManagedObject, IDFetchable {
         }
     }
 
-    //synchronous 
     static func removeAllExcept(_ user: User) {
         if let fetchedUsers = fetchById(user.id) {
             for fetchedUser in fetchedUsers {
@@ -93,6 +91,20 @@ final class User: NSManagedObject, IDFetchable {
             return []
         }
     }
+
+    enum JSONKey: String {
+        case id
+        case profile
+        case isPrivate = "is_private"
+        case isOrganization = "is_organization"
+        case shortBio = "short_bio"
+        case details
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case avatar
+        case level
+        case joinDate = "join_date"
+    }
 }
 
 struct UserInfo {
@@ -100,10 +112,18 @@ struct UserInfo {
     var avatarURL: String
     var firstName: String
     var lastName: String
+
     init(json: JSON) {
-        id = json["id"].intValue
-        avatarURL = json["avatar"].stringValue
-        firstName = json["first_name"].stringValue
-        lastName = json["last_name"].stringValue
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.avatarURL = json[JSONKey.avatar.rawValue].stringValue
+        self.firstName = json[JSONKey.firstName.rawValue].stringValue
+        self.lastName = json[JSONKey.lastName.rawValue].stringValue
+    }
+
+    enum JSONKey: String {
+        case id
+        case avatar
+        case firstName = "first_name"
+        case lastName = "last_name"
     }
 }

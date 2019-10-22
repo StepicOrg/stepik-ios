@@ -6,13 +6,13 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
 //TODO: Refactor this by adding class Query: JSONSerializable
-class QueriesAPI: APIEndpoint {
+final class QueriesAPI: APIEndpoint {
     override var name: String { return "queries" }
 
     func retrieve(query: String) -> Promise<[String]> {
@@ -20,7 +20,7 @@ class QueriesAPI: APIEndpoint {
         return Promise { seal in
             retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: Array<Query>(), withManager: manager).done {
                 queries, _ in
-                seal.fulfill(queries.map {$0.text})
+                seal.fulfill(queries.map { $0.text })
             }.catch {
                 error in
                 seal.reject(error)
@@ -29,7 +29,6 @@ class QueriesAPI: APIEndpoint {
     }
 
     @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
-
         retrieve(query: query).done {
             queries in
             success(queries)
@@ -44,7 +43,6 @@ class QueriesAPI: APIEndpoint {
 
         return nil
     }
-
 }
 
 class Query: JSONSerializable {

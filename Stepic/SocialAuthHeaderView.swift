@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SocialAuthHeaderView: UICollectionReusableView {
+final class SocialAuthHeaderView: UICollectionReusableView {
     static let reuseId = "socialAuthHeaderView"
 
     @IBOutlet weak var titleLabel: StepikLabel!

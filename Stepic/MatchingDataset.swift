@@ -6,8 +6,8 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
 final class MatchingDataset: Dataset {
     typealias Pair = (first: String, second: String)

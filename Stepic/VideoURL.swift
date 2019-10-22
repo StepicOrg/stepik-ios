@@ -6,21 +6,18 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
-class VideoURL: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-    convenience required init(json: JSON) {
+final class VideoURL: NSManagedObject {
+    required convenience init(json: JSON) {
         self.init()
-        initialize(json)
+        self.initialize(json)
     }
 
     func initialize(_ json: JSON) {
-        quality = json["quality"].stringValue
-//        print(quality)
-        url = json["url"].stringValue
+        self.quality = json["quality"].stringValue
+        self.url = json["url"].stringValue
     }
 }

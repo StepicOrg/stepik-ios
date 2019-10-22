@@ -6,14 +6,14 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class SortingDataset: NSObject, Dataset {
+final class SortingDataset: NSObject, Dataset {
     var options: [String]
 
     required init(json: JSON) {
-        options = json["options"].arrayValue.map({return $0.stringValue})
+        options = json["options"].arrayValue.map({ $0.stringValue })
         super.init()
     }
 }

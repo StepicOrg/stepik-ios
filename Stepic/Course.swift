@@ -6,19 +6,16 @@
 //
 //
 
-import Foundation
 import CoreData
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
 @objc
 final class Course: NSManagedObject, IDFetchable {
-
-// Insert code here to add functionality to your managed object subclass
-
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -29,8 +26,8 @@ final class Course: NSManagedObject, IDFetchable {
         courseDescription = json["description"].stringValue
         coverURLString = "\(StepicApplicationsInfo.stepicURL)" + json["cover"].stringValue
 
-        beginDate = Parser.sharedParser.dateFromTimedateJSON(json["begin_date_source"])
-        endDate = Parser.sharedParser.dateFromTimedateJSON(json["last_deadline"])
+        beginDate = Parser.shared.dateFromTimedateJSON(json["begin_date_source"])
+        endDate = Parser.shared.dateFromTimedateJSON(json["last_deadline"])
 
         enrolled = json["enrollment"].int != nil
         featured = json["is_featured"].boolValue
@@ -78,7 +75,6 @@ final class Course: NSManagedObject, IDFetchable {
     var metaInfo: String {
         //percent of completion = n_steps_passed/n_steps
         if let p = self.progress {
-
             let percentage = p.numberOfSteps != 0 ? Int(Double(p.numberOfStepsPassed) / Double(p.numberOfSteps) * 100) : 100
             return "\(NSLocalizedString("PassedPercent", comment: "")) \(percentage)%"
 //            return "Выполнение курса: " + "\(percentage)%"
@@ -133,14 +129,13 @@ final class Course: NSManagedObject, IDFetchable {
             self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
             CoreDataHelper.instance.save()
             success()
-            }, error : {
+            }, error: {
                 _ in
                 print("error while loading section")
         })
     }
 
     func loadAllSections(success: @escaping (() -> Void), error errorHandler : @escaping (() -> Void), withProgresses: Bool = true) {
-
         if sectionsArray.count == 0 {
             success()
             return
@@ -189,7 +184,7 @@ final class Course: NSManagedObject, IDFetchable {
                 } else {
                     idsDownloaded(secs)
                 }
-            }, error : {
+            }, error: {
                 _ in
                 print("error while loading section")
                 errorWhileDownloading()
@@ -245,7 +240,6 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     class func fetchAsync(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> Promise<[Course]> {
-
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 

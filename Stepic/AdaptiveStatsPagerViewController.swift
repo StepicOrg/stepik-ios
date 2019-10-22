@@ -8,8 +8,7 @@
 
 import UIKit
 
-class AdaptiveStatsPagerViewController: PagerController {
-
+final class AdaptiveStatsPagerViewController: PagerController {
     var sections: [AdaptiveStatsSection] {
         return [.progress, .rating]
     }

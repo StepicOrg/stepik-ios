@@ -6,17 +6,18 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
-class AudioManager: NSObject {
-    fileprivate override init() { super.init() }
+final class AudioManager: NSObject {
+    override fileprivate init() { super.init() }
     static let sharedManager = AudioManager()
 
     var ignoreMuteSwitch: Bool {
         get {
-            print("in isIgnoring, current category = \(convertFromAVAudioSessionCategory(AVAudioSession.sharedInstance().category))")
-            return convertFromAVAudioSessionCategory(AVAudioSession.sharedInstance().category) == convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)
+            let currentCategory = AVAudioSession.sharedInstance().category
+            print("in isIgnoring, current category = \(currentCategory))")
+            return currentCategory == .playback
         }
 
         set(ignore) {
@@ -47,9 +48,4 @@ class AudioManager: NSObject {
             return false
         }
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-	return input.rawValue
 }

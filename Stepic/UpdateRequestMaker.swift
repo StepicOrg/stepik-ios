@@ -6,11 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import PromiseKit
 
-class UpdateRequestMaker {
+final class UpdateRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, updatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<T> {
         return Promise { seal in
             let params: Parameters? = [

@@ -6,12 +6,11 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class FreeAnswerReply: NSObject, Reply {
+final class FreeAnswerReply: NSObject, Reply {
     var text: String
-    //TODO: further implementations should possibly contain attachments!
 
     init(text: String) {
         self.text = text
@@ -22,7 +21,7 @@ class FreeAnswerReply: NSObject, Reply {
         super.init()
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return ["text": text as NSObject, "attachments": []]
     }
 }

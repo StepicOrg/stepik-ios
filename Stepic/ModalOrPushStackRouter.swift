@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 
 final class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
     var router: RouterProtocol?

@@ -121,8 +121,7 @@ Comment = "Comment";
 ShowMoreReplies = "More replies";
 ShowMoreDiscussions = "More discussions";
 RefreshingDiscussions = "Refreshing discussions...";
-NoDiscussionsTitle = "No discussions";
-NoDiscussionsDescription = "Start the first one!";
+NoDiscussionsTitle = "No discussions. Start the first one!";
 Like = "Like";
 Unlike = "Unlike";
 Abuse = "Abuse";
@@ -657,6 +656,12 @@ WriteCourseReviewActionDelete = "Delete a review";
 WriteCourseReviewPlaceholder = "Review";
 WriteCourseReviewRatingHint = "Tap a Star to Rate";
 WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more than 80% steps";
+
+/* Discussions */
+DiscussionsSortTypeLastDiscussions = "Last discussions";
+DiscussionsSortTypeMostLikedDiscussions = "Most liked";
+DiscussionsSortTypeMostActiveDiscussions = "Most active";
+DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";

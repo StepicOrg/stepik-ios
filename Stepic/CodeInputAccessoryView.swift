@@ -51,7 +51,7 @@ final class CodeInputAccessoryView: NibInitializableView {
     }
 }
 
-extension CodeInputAccessoryView : UICollectionViewDelegateFlowLayout {
+extension CodeInputAccessoryView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = CodeInputAccessoryCollectionViewCell.width(for: buttons[indexPath.item].title, size: size)
         return CGSize(width: width, height: collectionView.bounds.height)
@@ -62,7 +62,7 @@ extension CodeInputAccessoryView : UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CodeInputAccessoryView : UICollectionViewDataSource {
+extension CodeInputAccessoryView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

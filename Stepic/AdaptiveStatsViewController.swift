@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Charts
+import UIKit
 
-class AdaptiveStatsViewController: UIViewController {
+final class AdaptiveStatsViewController: UIViewController {
     enum State {
         case empty(message: String)
         case error(message: String)

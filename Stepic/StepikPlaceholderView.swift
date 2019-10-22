@@ -12,7 +12,7 @@ protocol StepikPlaceholderViewDelegate: class {
     func buttonDidClick(_ button: UIButton)
 }
 
-class StepikPlaceholderView: NibInitializableView {
+final class StepikPlaceholderView: NibInitializableView {
     struct maxHeight {
         static let horizontal = CGFloat(500)
         static let vertical = CGFloat(500)
@@ -32,7 +32,7 @@ class StepikPlaceholderView: NibInitializableView {
     @IBOutlet weak var actionsStackView: UIStackView!
     @IBOutlet weak var imageContainerView: UIView!
 
-    lazy private var allPlaceholders: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = {
+    private lazy var allPlaceholders: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = {
         var idToView: [StepikPlaceholderStyle.PlaceholderId: StepikPlaceholderStyle] = [:]
         for placeholder in StepikPlaceholderStyle.stepikStyledPlaceholders {
             idToView[placeholder.id] = placeholder

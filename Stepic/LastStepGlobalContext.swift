@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LastStepGlobalContext {
+final class LastStepGlobalContext {
     private init() {}
 
     static let context = LastStepGlobalContext()

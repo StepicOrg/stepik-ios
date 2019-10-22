@@ -10,7 +10,7 @@ import UIKit
 
 typealias StepikPlaceholderStyle = StepikPlaceholder.Style
 
-class StepikPlaceholder {
+final class StepikPlaceholder {
     var style: StepikPlaceholderStyle
     var buttonAction: (() -> Void)?
 
@@ -19,7 +19,7 @@ class StepikPlaceholder {
         self.buttonAction = action
     }
 
-    class Style: Equatable {
+    final class Style: Equatable {
         typealias PlaceholderImage = (image: UIImage, scale: CGFloat)
         typealias PlaceholderId = String
 

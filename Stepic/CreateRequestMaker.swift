@@ -6,12 +6,12 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import PromiseKit
 import SwiftyJSON
 
-class CreateRequestMaker {
+final class CreateRequestMaker {
     func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, creatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<(T, JSON?)> {
         return Promise { seal in
             let params: Parameters? = [

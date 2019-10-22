@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Presentr
+import UIKit
 
-class RateAppAlertManager: AlertManager {
+final class RateAppAlertManager: AlertManager {
     func present(alert: UIViewController, inController controller: UIViewController) {
         controller.customPresentViewController(presenter, viewController: alert, animated: true, completion: nil)
     }

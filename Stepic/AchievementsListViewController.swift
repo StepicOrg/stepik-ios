@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AchievementsListViewController: UIViewController, AchievementsListView, ControllerWithStepikPlaceholder {
+final class AchievementsListViewController: UIViewController, AchievementsListView, ControllerWithStepikPlaceholder {
     @IBOutlet weak var tableView: UITableView!
 
     var placeholderContainer = StepikPlaceholderControllerContainer()

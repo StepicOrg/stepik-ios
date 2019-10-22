@@ -8,26 +8,25 @@
 
 import Foundation
 
-class ReplyCache {
+final class ReplyCache {
+    typealias ReplyForAttempt = (reply: Reply?, attemptId: Int)
 
     static var shared = ReplyCache()
 
-    typealias ReplyForAttempt = (reply: Reply?, attemptId: Int)
+    private init() { }
 
-    private init() {}
-
-    private var replyForStepId: [Int: ReplyForAttempt] = [:]
+    private var replyByStepID: [Int: ReplyForAttempt] = [:]
 
     private func resetCache() {
-        replyForStepId = [:]
+        self.replyByStepID = [:]
     }
 
     func set(reply: Reply?, forStepId id: Int, attemptId: Int) {
-        replyForStepId[id] = (reply: reply, attemptId: attemptId)
+        self.replyByStepID[id] = (reply: reply, attemptId: attemptId)
     }
 
     func getReply(forStepId id: Int, attemptId: Int) -> Reply? {
-        let replyForAttempt = replyForStepId[id]
+        let replyForAttempt = self.replyByStepID[id]
         if replyForAttempt?.attemptId == attemptId {
             return replyForAttempt?.reply
         } else {

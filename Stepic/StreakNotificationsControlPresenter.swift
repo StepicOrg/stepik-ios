@@ -16,7 +16,7 @@ protocol StreakNotificationsControlView: class {
     func attachPresenter(_ presenter: StreakNotificationsControlPresenter)
 }
 
-class StreakNotificationsControlPresenter {
+final class StreakNotificationsControlPresenter {
     weak var view: StreakNotificationsControlView?
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
 

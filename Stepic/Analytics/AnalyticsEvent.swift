@@ -12,7 +12,7 @@ protocol AnalyticsReportable {
     func send()
 }
 
-class AnalyticsEvent: AnalyticsReportable {
+final class AnalyticsEvent: AnalyticsReportable {
     func send() {
         AnalyticsReporter.reportAmplitudeEvent(name, parameters: parameters)
     }

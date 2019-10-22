@@ -6,17 +6,16 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 final class Step: NSManagedObject, IDFetchable {
-
     typealias IdType = Int
 
     var canEdit: Bool = false
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
         block = Block(json: json["block"])
@@ -49,7 +48,6 @@ final class Step: NSManagedObject, IDFetchable {
         } else {
             options = StepOptions(json: json["block"]["options"])
         }
-
     }
 
     func update(json: JSON) {
@@ -80,13 +78,9 @@ final class Step: NSManagedObject, IDFetchable {
             } else {
                 return results.first
             }
-//            (results as? [Step])?.forEach {
-//                print("\($0.lesson?.unit?.id)")
-//            }
         } catch {
             return nil
         }
-//        return Step.MR_findFirstWithPredicate(NSPredicate(format: "managedId == %@", id as NSNumber))
     }
 
     static func fetch(_ ids: [Int]) -> [Step] {

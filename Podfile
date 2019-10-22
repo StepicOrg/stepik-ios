@@ -10,6 +10,7 @@ def shared_pods
     pod 'SwiftyJSON', '5.0.0'
     pod 'SDWebImage', '5.2.3'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
+    pod 'Logging', :git => 'https://github.com/ivan-magda/swift-log.git', :branch => 'swift-4'
     pod 'Fabric', '1.10.2'
     pod 'Crashlytics', '3.14.0'
     pod 'DeviceKit', '1.13.0'

@@ -12,7 +12,7 @@ protocol ProfileDescriptionView: class {
     func set(shortBio: String?, info: String?)
 }
 
-class ProfileDescriptionPresenter {
+final class ProfileDescriptionPresenter {
     weak var view: ProfileDescriptionView?
 
     init(view: ProfileDescriptionView) {

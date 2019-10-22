@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
-import SVProgressHUD
-import SnapKit
 import Presentr
+import SnapKit
+import SVProgressHUD
+import UIKit
 
 @available(*, deprecated, message: "Class to initialize personal deadlines selection w/o storyboards logic")
 final class PersonalDeadlinesModeSelectionLegacyAssembly: Assembly {
@@ -42,8 +42,7 @@ final class PersonalDeadlinesModeSelectionLegacyAssembly: Assembly {
     }
 }
 
-class PersonalDeadlinesModeSelectionViewController: UIViewController {
-
+final class PersonalDeadlinesModeSelectionViewController: UIViewController {
     @IBOutlet weak var questionLabel: StepikLabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var cancelButton: UIButton!
@@ -104,7 +103,6 @@ class PersonalDeadlinesModeSelectionViewController: UIViewController {
     @IBAction func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.closed)
-
     }
 
     func didSelectMode(mode: DeadlineMode) {

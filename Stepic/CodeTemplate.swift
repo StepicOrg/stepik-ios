@@ -6,11 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
-class CodeTemplate: NSManagedObject {
+final class CodeTemplate: NSManagedObject {
     var language: CodeLanguage? {
         return CodeLanguage(rawValue: languageString)
     }
@@ -19,18 +19,18 @@ class CodeTemplate: NSManagedObject {
         return "CodeTemplate(languageString: \(self.languageString), templateString: \(self.templateString)"
     }
 
-    convenience required init(language: CodeLanguage, template: String) {
+    required convenience init(language: CodeLanguage, template: String) {
         self.init()
         let lan = language.rawValue
         initialize(language: lan, template: template)
     }
 
-    convenience required init(language: String, template: String) {
+    required convenience init(language: String, template: String) {
         self.init()
         initialize(language: language, template: template)
     }
 
-    convenience required init(language: String, template: String, isUserGenerated: Bool) {
+    required convenience init(language: String, template: String, isUserGenerated: Bool) {
         self.init()
         initialize(language: language, template: template)
         self.isUserGenerated = isUserGenerated

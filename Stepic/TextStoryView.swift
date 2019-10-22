@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import UIKit
 import Nuke
 import SnapKit
+import UIKit
 
 final class TextStoryView: UIView, UIStoryPartViewProtocol {
     @IBOutlet private weak var imageView: UIImageView!

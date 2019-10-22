@@ -52,7 +52,7 @@ enum CardsStepsPresenterState {
     case loading, loaded, coursePassed, connectionError
 }
 
-class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
+final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     var recommendationsBatchSize: Int { return 6 }
     var nextRecommendationsBatchThreshold: Int { return 4 }
 
@@ -313,7 +313,6 @@ class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     func logout() {
-
     }
 
     fileprivate func loadRecommendations(for course: Course, count: Int) -> Promise<[Lesson]> {

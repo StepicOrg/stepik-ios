@@ -6,12 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Amplitude_iOS
 import Crashlytics
+import Foundation
 
-class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
-
+final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     static let shared = AnalyticsUserProperties()
 
     func setProperty(key: String, value: Any?) {

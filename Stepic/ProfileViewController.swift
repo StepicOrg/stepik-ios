@@ -10,7 +10,7 @@ import SnapKit
 import UIKit
 
 final class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
-    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
+    var placeholderContainer = StepikPlaceholderControllerContainer()
     var presenter: ProfilePresenter?
 
     var profileStreaksView: ProfileHeaderInfoView?
@@ -180,7 +180,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         switch block {
         case .infoHeader:
             return self.profileStreaksView
-        case .notificationsTimeSelection, .notificationsSwitch(_), .certificates, .userID:
+        case .notificationsTimeSelection, .notificationsSwitch, .certificates, .userID:
             return self
         case .description:
             return self.profileDescriptionView
@@ -327,7 +327,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             return dateFormatter.string(from: date)
         }
 
-        let block: TransitionMenuBlock = TransitionMenuBlock(id: ProfileMenuBlock.notificationsTimeSelection.rawValue, title: "")
+        let block = TransitionMenuBlock(id: ProfileMenuBlock.notificationsTimeSelection.rawValue, title: "")
 
         let notificationTimeSubtitle = "\(NSLocalizedString("StreaksAreUpdated", comment: "")) \(currentZone00UTC)\n\(TimeZone.current.localizedName(for: .standard, locale: .current) ?? "")"
         block.subtitle = notificationTimeSubtitle

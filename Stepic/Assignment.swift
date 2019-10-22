@@ -6,16 +6,15 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 @objc
 final class Assignment: NSManagedObject, IDFetchable {
-
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }

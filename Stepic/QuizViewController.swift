@@ -6,11 +6,11 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
-    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     @IBOutlet weak var peerReviewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var peerReviewTrailingConstraint: NSLayoutConstraint!
@@ -196,7 +196,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func display(dataset: Dataset) {
-
     }
 
     func display(reply: Reply, hint: String?, status: SubmissionStatus) {
@@ -234,12 +233,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         if let hint = hint {
             if hint != "" {
                 if TagDetectionUtil.isWebViewSupportNeeded(hint) {
-                    hintHeightWebViewHelper?.mathJaxFinishedBlock = {
-                        [weak self] in
+                    hintHeightWebViewHelper?.mathJaxFinishedBlock = { [weak self] in
                         if let webView = self?.hintWebView {
                             webView.invalidateIntrinsicContentSize()
-                            UIThread.performUI {
-                                [weak self] in
+                            DispatchQueue.main.async { [weak self] in
                                 self?.view.layoutIfNeeded()
                                 self?.hintView.isHidden = false
                                 self?.hintHeight.constant = webView.contentHeight
@@ -419,7 +416,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             guard let s = self else { return }
             s.display(hint: s.displayingHint)
         }
-
     }
 
     private func setStatusElements(visible: Bool) {

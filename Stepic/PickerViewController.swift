@@ -9,7 +9,6 @@
 import UIKit
 
 class PickerViewController: UIViewController {
-
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
@@ -26,7 +25,6 @@ class PickerViewController: UIViewController {
         titleLabel.text = pickerTitle
 
         localize()
-        // Do any additional setup after loading the view.
     }
 
     func localize() {
@@ -38,11 +36,6 @@ class PickerViewController: UIViewController {
     var cancelAction : (() -> Void)?
 
     var data: [String] = []
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     @IBAction func backPressed(_ sender: UIButton) {
         cancelAction?()
@@ -58,20 +51,9 @@ class PickerViewController: UIViewController {
     var selectedData: String {
         return data[picker.selectedRow(inComponent: 0)]
     }
-
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-
 }
 
-extension PickerViewController : UIPickerViewDataSource {
+extension PickerViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -81,7 +63,7 @@ extension PickerViewController : UIPickerViewDataSource {
     }
 }
 
-extension PickerViewController : UIPickerViewDelegate {
+extension PickerViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
     }

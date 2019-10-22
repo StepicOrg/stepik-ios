@@ -6,11 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
-class CodeLimit: NSManagedObject {
+final class CodeLimit: NSManagedObject {
     var language: CodeLanguage? {
         return CodeLanguage(rawValue: languageString)
     }
@@ -19,7 +19,7 @@ class CodeLimit: NSManagedObject {
         return "CodeLimit(languageString: \(self.languageString), time: \(self.time), memory: \(self.memory)"
     }
 
-    convenience required init(language: String, json: JSON) {
+    required convenience init(language: String, json: JSON) {
         self.init()
         initialize(language: language, json: json)
     }

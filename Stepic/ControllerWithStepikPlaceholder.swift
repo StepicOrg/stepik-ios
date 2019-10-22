@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 typealias StepikPlaceholderControllerState = StepikPlaceholderControllerContainer.PlaceholderState
 
@@ -24,6 +24,7 @@ class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
         static let anonymous = PlaceholderState(id: "anonymous")
         static let connectionError = PlaceholderState(id: "connectionError")
         static let refreshing = PlaceholderState(id: "refreshing")
+        static let empty = PlaceholderState(id: "empty")
         static let adaptiveCoursePassed = PlaceholderState(id: "adaptiveCoursePassed")
 
         var hashValue: Int {

@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ProgressTableViewCell: UITableViewCell {
-
+final class ProgressTableViewCell: UITableViewCell {
     static var reuseId = "progressCell"
 
     @IBOutlet weak var bracketLabel: UILabel!

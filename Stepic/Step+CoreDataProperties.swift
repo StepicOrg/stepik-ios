@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Step {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedStatus: String?
@@ -154,5 +153,4 @@ extension Step {
             managedMaxSubmissionsCount = value as NSNumber?
         }
     }
-
 }

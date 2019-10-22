@@ -10,22 +10,22 @@ import UIKit
 
 @available(*, deprecated, message: "Legacy assembly")
 final class DiscussionsLegacyAssembly: Assembly {
-    private let discussionProxyID: String
+    private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
 
-    init(discussionProxyID: String, stepID: Step.IdType) {
+    init(discussionProxyID: DiscussionProxy.IdType, stepID: Step.IdType) {
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
     }
 
     func makeModule() -> UIViewController {
-        let vc = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
-        vc.discussionProxyId = self.discussionProxyID
-        vc.target = self.stepID
-        vc.presenter = DiscussionsPresenter(
-            view: vc,
-            discussionProxyId: self.discussionProxyID,
-            stepId: self.stepID,
+        let viewController = DiscussionsViewController(nibName: "DiscussionsViewController", bundle: nil)
+        viewController.discussionProxyId = self.discussionProxyID
+        viewController.target = self.stepID
+        viewController.presenter = DiscussionsPresenter(
+            view: viewController,
+            discussionProxyID: self.discussionProxyID,
+            stepID: self.stepID,
             discussionProxiesNetworkService: DiscussionProxiesNetworkService(
                 discussionProxiesAPI: DiscussionProxiesAPI()
             ),
@@ -33,8 +33,8 @@ final class DiscussionsLegacyAssembly: Assembly {
             votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
-        vc.title = NSLocalizedString("Discussions", comment: "")
-        return vc
+        viewController.title = NSLocalizedString("Discussions", comment: "")
+        return viewController
     }
 }
 
@@ -80,7 +80,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         super.viewDidLoad()
 
         self.edgesForExtendedLayout = []
-        
+
         self.registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
             self?.refreshDiscussions()
         }), for: .connectionError)
@@ -99,7 +99,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         self.tableView.addSubview(self.refreshControl)
 
         self.tableView.contentInsetAdjustmentBehavior = .never
-        
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .compose,
             target: self,
@@ -109,7 +109,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if self.isFirstAppear {
             self.isFirstAppear = false
             DispatchQueue.main.async {
@@ -117,7 +117,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AmplitudeAnalyticsEvents.Discussions.opened.send()
@@ -144,7 +144,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     func displayError(_ error: Error) {
         self.emptyDatasetState = .error
     }
-    
+
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -155,7 +155,7 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
         let alert = DiscussionAlertConstructor.getCommentAlert(
             comment: comment,
             replyBlock: { [weak self] in
-                self?.displayWriteComment(parentId: comment.parentId ?? comment.id)
+                self?.displayWriteComment(parentId: comment.parentID ?? comment.id)
             },
             likeBlock: { [weak self] in
                 self?.presenter?.likeComment(comment)
@@ -209,7 +209,7 @@ extension DiscussionsViewController: DiscussionsViewControllerDelegate {
     func cellDidSelect(_ viewData: DiscussionsViewData) {
         self.presenter?.selectViewData(viewData)
     }
-    
+
     func profileButtonDidClick(_ userId: Int) {
         let assembly = ProfileAssembly(userID: userId)
         self.push(module: assembly.makeModule())

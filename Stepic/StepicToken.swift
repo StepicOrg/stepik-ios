@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class StepicToken: DictionarySerializable {
+final class StepicToken: DictionarySerializable {
     let accessToken: String!
     let refreshToken: String!
     let tokenType: String!
@@ -32,7 +32,7 @@ class StepicToken: DictionarySerializable {
         self.expireDate = expireDate
     }
 
-    required convenience init?(dictionary: [String : Any]) {
+    required convenience init?(dictionary: [String: Any]) {
         if let aToken = dictionary["access_token"] as? String,
             let rToken = dictionary["refresh_token"] as? String,
             let tType = dictionary["token_type"] as? String {
@@ -42,7 +42,7 @@ class StepicToken: DictionarySerializable {
         }
     }
 
-    func serializeToDictionary() -> [String : Any] {
+    func serializeToDictionary() -> [String: Any] {
         return getDictionary()
     }
 

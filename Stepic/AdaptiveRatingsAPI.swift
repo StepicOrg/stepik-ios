@@ -6,13 +6,13 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
 //TODO: Better refactor this to two classes
-class AdaptiveRatingsAPI: APIEndpoint {
+final class AdaptiveRatingsAPI: APIEndpoint {
     override var name: String { return "rating" }
     var restoreName: String { return "rating-restore" }
 
@@ -34,7 +34,7 @@ class AdaptiveRatingsAPI: APIEndpoint {
                 switch response.result {
                 case .failure(let error):
                     seal.reject(error)
-                case .success(_):
+                case .success:
                     switch response.response?.statusCode ?? 500 {
                     case 200: seal.fulfill(())
                     case 401: seal.reject(RatingsAPIError.badRequest)

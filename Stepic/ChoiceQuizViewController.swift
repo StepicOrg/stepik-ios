@@ -6,10 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import BEMCheckBox
 import Foundation
 import SnapKit
+import UIKit
 
 final class ChoiceQuizViewController: QuizViewController {
     var tableView = FullHeightTableView()
@@ -139,7 +139,7 @@ extension ChoiceQuizViewController: UITableViewDelegate {
     }
 
     func setAllCellsOff() {
-        let indexPaths = (0..<self.tableView.numberOfRows(inSection: 0)).map({ return IndexPath(row: $0, section: 0) })
+        let indexPaths = (0..<self.tableView.numberOfRows(inSection: 0)).map({ IndexPath(row: $0, section: 0) })
         for indexPath in indexPaths {
             if let cell = tableView.cellForRow(at: indexPath) as? ChoiceQuizTableViewCell {
                 cell.checkBox.on = false
@@ -152,7 +152,6 @@ extension ChoiceQuizViewController: UITableViewDelegate {
     }
 
     fileprivate func reactOnSelection(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
-
         if let cell = tableView.cellForRow(at: indexPath) as? ChoiceQuizTableViewCell {
             if let dataset = dataset {
                 if dataset.isMultipleChoice {
@@ -215,7 +214,7 @@ extension ChoiceQuizViewController: UITableViewDataSource {
                 }
             }
 
-            UIThread.performUI {
+            DispatchQueue.main.async {
                 strongSelf.tableView.contentSize = CGSize(width: strongSelf.tableView.contentSize.width, height: sum)
                 strongSelf.tableView.beginUpdates()
                 strongSelf.tableView.endUpdates()

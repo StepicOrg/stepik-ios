@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import UserNotifications
 import PromiseKit
 import SwiftyJSON
+import UserNotifications
 
 final class NotificationsService {
     typealias NotificationUserInfo = [AnyHashable: Any]

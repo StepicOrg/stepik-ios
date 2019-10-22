@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RateAppManager {
+final class RateAppManager {
     fileprivate let defaults = UserDefaults.standard
 
     fileprivate let correctSubmissionsThreshold = StepicApplicationsInfo.RateApp.correctSubmissionsThreshold
@@ -23,7 +23,6 @@ class RateAppManager {
         get {
             return defaults.value(forKey: showRateLaterPressedDateKey) as? TimeInterval
         }
-
         set(value) {
             defaults.set(value, forKey: showRateLaterPressedDateKey)
             defaults.synchronize()
@@ -34,7 +33,6 @@ class RateAppManager {
         get {
             return defaults.value(forKey: neverShowRateAlertKey) as? Bool ?? false
         }
-
         set(value) {
             defaults.set(value, forKey: neverShowRateAlertKey)
             defaults.synchronize()
@@ -50,7 +48,6 @@ class RateAppManager {
                 return 0
             }
         }
-
         set(value) {
             defaults.set(value, forKey: correctSubmissionsCountKey)
             defaults.synchronize()
@@ -84,5 +81,4 @@ class RateAppManager {
 
         return NSDate().timeIntervalSince1970 > lastPressedInterval.advanced(by: 60 * 60 * 24)
     }
-
 }

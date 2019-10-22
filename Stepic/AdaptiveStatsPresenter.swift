@@ -20,7 +20,7 @@ struct WeekProgressViewData {
     let isRecord: Bool
 }
 
-class AdaptiveStatsPresenter {
+final class AdaptiveStatsPresenter {
     weak var view: AdaptiveStatsView?
 
     fileprivate var ratingManager: AdaptiveRatingManager

@@ -6,12 +6,12 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class StepicsAPI: APIEndpoint {
+final class StepicsAPI: APIEndpoint {
     override var name: String { return "stepics" }
 
     func retrieveCurrentUser() -> Promise<User> {

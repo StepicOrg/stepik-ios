@@ -6,8 +6,8 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import PromiseKit
 
 //Is used for handling errors in network requests
@@ -33,7 +33,7 @@ enum NetworkError: Error {
         }
 
         self = .other(error)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unknownNetworkError, parameters: ["aferror":"\(error.errorDescription ?? "")"])
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unknownNetworkError, parameters: ["aferror": "\(error.errorDescription ?? "")"])
     }
 
     private init(NSError error: NSError) {
@@ -44,7 +44,7 @@ enum NetworkError: Error {
         default:
             print("tried to construct unknown error")
             self = .other(error)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unknownNetworkError, parameters: ["nserror":" code: \(error.code), description: \(error.localizedDescription)"])
+            AnalyticsReporter.reportEvent(AnalyticsEvents.Errors.unknownNetworkError, parameters: ["nserror": " code: \(error.code), description: \(error.localizedDescription)"])
         }
     }
 

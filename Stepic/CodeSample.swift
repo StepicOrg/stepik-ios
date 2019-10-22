@@ -6,16 +6,16 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
-class CodeSample: NSManagedObject {
+final class CodeSample: NSManagedObject {
     override var description: String {
         return "CodeSample(input: \(self.input), output: \(self.output)"
     }
 
-    convenience required init(input: String, output: String) {
+    required convenience init(input: String, output: String) {
         self.init()
         initialize(input: input, output: output)
     }

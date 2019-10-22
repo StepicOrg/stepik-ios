@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import SnapKit
+import UIKit
 
-class PinsMapView: UIView {
+final class PinsMapView: UIView {
     enum Day {
         var color: UIColor {
             switch self {

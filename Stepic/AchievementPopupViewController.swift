@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 final class AchievementPopupViewController: UIViewController {
     @IBOutlet weak var achievementNameLabel: UILabel!

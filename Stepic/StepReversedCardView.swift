@@ -8,8 +8,7 @@
 
 import UIKit
 
-class StepReversedCardView: UIView {
-
+final class StepReversedCardView: UIView {
     lazy var whiteView: UIView = {
         let view = UIView(frame: self.bounds)
         self.addSubview(view)

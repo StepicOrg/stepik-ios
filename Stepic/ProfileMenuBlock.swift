@@ -20,7 +20,7 @@ enum ProfileMenuBlock: RawRepresentable, Equatable {
         switch self {
         case .infoHeader:
             return "infoHeader"
-        case .notificationsSwitch(_):
+        case .notificationsSwitch:
             return "notificationsSwitch"
         case .notificationsTimeSelection:
             return "notificationsTimeSelection"

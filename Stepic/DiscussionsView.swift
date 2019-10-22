@@ -34,7 +34,7 @@ struct DiscussionsViewData {
         self.isUpdating = isUpdating
         self.separatorType = .none
     }
-    
+
     enum SeparatorType {
         case small
         case big

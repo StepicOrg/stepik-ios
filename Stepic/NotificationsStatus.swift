@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class NotificationsStatus: JSONSerializable {
+final class NotificationsStatus: JSONSerializable {
     var id: Int
     var learnCount: Int
     var reviewCount: Int

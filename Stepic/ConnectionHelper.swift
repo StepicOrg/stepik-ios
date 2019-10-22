@@ -8,9 +8,8 @@
 
 import UIKit
 
-class ConnectionHelper: NSObject {
-
-    fileprivate override init() {
+final class ConnectionHelper: NSObject {
+    override fileprivate init() {
         super.init()
         reachability = Reachability.forInternetConnection()
         reachability.reachableOnWWAN = reachableOnWWAN

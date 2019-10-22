@@ -6,11 +6,9 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class FullHeightWebView: UIWebView {
-
+final class FullHeightWebView: UIWebView {
     var contentHeight: CGFloat {
         return CGFloat(Float(self.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0)
     }

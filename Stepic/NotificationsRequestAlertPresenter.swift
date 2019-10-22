@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Presentr
+import UIKit
 
 final class NotificationsRequestAlertPresenter: NotificationsRegistrationPresentationServiceProtocol {
     var onPositiveCallback: (() -> Void)?

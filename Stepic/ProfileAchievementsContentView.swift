@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
+final class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     @IBOutlet weak var achievementsStackView: UIStackView!
     @IBOutlet weak var refreshButton: UIButton!
 

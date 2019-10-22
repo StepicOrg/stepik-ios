@@ -16,7 +16,7 @@ enum SocialProvider: Int {
         case .vk:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "vk"),
                                  registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
-                                 socialSDKProvider : VKSocialSDKProvider.instance)
+                                 socialSDKProvider: VKSocialSDKProvider.instance)
         case .google:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "google"),
                                  registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)

@@ -69,5 +69,4 @@ enum CodeQuizElementsSize {
             return (toolbar: .big, suggestions: .big, editor: .big)
         }
     }
-
 }

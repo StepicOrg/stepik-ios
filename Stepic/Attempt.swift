@@ -6,11 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class Attempt: JSONSerializable {
-
+final class Attempt: JSONSerializable {
     typealias IdType = Int
 
     var id: Int = 0
@@ -78,8 +77,6 @@ class Attempt: JSONSerializable {
             return FreeAnswerDataset(json: json)
         case "matching":
             return MatchingDataset(json: json)
-        case "fill-blanks":
-            return FillBlanksDataset(json: json)
         default:
             return nil
         }

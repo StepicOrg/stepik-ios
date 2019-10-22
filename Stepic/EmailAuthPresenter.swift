@@ -23,7 +23,7 @@ enum EmailAuthState {
     case normal, loading, validationError, existingEmail
 }
 
-class EmailAuthPresenter {
+final class EmailAuthPresenter {
     weak var view: EmailAuthView?
 
     var authAPI: AuthAPI
