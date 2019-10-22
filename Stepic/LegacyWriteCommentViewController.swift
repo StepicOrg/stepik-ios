@@ -14,9 +14,9 @@ final class WriteCommentLegacyAssembly: Assembly {
     private let target: Step.IdType
     private let parentId: Comment.IdType?
 
-    private weak var delegate: WriteCommentViewControllerDelegate?
+    private weak var delegate: LegacyWriteCommentViewControllerDelegate?
 
-    init(target: Int, parentId: Comment.IdType?, delegate: WriteCommentViewControllerDelegate? = nil) {
+    init(target: Int, parentId: Comment.IdType?, delegate: LegacyWriteCommentViewControllerDelegate? = nil) {
         self.target = target
         self.parentId = parentId
         self.delegate = delegate
@@ -24,9 +24,9 @@ final class WriteCommentLegacyAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         guard let vc = ControllerHelper.instantiateViewController(
-            identifier: "WriteCommentViewController",
+            identifier: "LegacyWriteCommentViewController",
             storyboardName: "DiscussionsStoryboard"
-        ) as? WriteCommentViewController else {
+        ) as? LegacyWriteCommentViewController else {
             fatalError()
         }
 
@@ -38,11 +38,14 @@ final class WriteCommentLegacyAssembly: Assembly {
     }
 }
 
-protocol WriteCommentViewControllerDelegate: class {
-    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment)
+protocol LegacyWriteCommentViewControllerDelegate: class {
+    func legacyWriteCommentViewControllerDidWriteComment(
+        _ controller: LegacyWriteCommentViewController,
+        comment: Comment
+    )
 }
 
-final class WriteCommentViewController: UIViewController {
+final class LegacyWriteCommentViewController: UIViewController {
     enum State {
         case editing
         case sending
@@ -51,7 +54,7 @@ final class WriteCommentViewController: UIViewController {
 
     @IBOutlet weak var commentTextView: IQTextView!
 
-    weak var delegate: WriteCommentViewControllerDelegate?
+    weak var delegate: LegacyWriteCommentViewControllerDelegate?
 
     var target: Int!
     var parentId: Int?
@@ -63,7 +66,7 @@ final class WriteCommentViewController: UIViewController {
             image: Images.sendImage,
             style: .done,
             target: self,
-            action: #selector(WriteCommentViewController.sendPressed)
+            action: #selector(LegacyWriteCommentViewController.sendPressed)
         )
     }()
 
@@ -79,7 +82,7 @@ final class WriteCommentViewController: UIViewController {
             image: Images.checkMarkImage,
             style: .done,
             target: self,
-            action: #selector(WriteCommentViewController.okPressed)
+            action: #selector(LegacyWriteCommentViewController.okPressed)
         )
     }()
 
@@ -132,7 +135,7 @@ final class WriteCommentViewController: UIViewController {
 
             strongSelf.state = .ok
 
-            strongSelf.delegate?.writeCommentViewControllerDidWriteComment(strongSelf, comment: comment)
+            strongSelf.delegate?.legacyWriteCommentViewControllerDidWriteComment(strongSelf, comment: comment)
             strongSelf.navigationController?.popViewController(animated: true)
         }.catch { [weak self] _ in
             self?.state = .editing

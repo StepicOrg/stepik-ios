@@ -345,7 +345,7 @@
 		08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
 		08EB85DF1D0F192900E4F345 /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */; };
 		08EB85E11D0F192A00E4F345 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */; };
-		08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */; };
+		08EB85F01D101D7800E4F345 /* LegacyWriteCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85EE1D101D7800E4F345 /* LegacyWriteCommentViewController.swift */; };
 		08EB85F81D10454D00E4F345 /* DiscussionsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */; };
 		08EB85FB1D10863F00E4F345 /* DiscussionAlertConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */; };
 		08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
@@ -1446,7 +1446,7 @@
 		08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		08EB85DD1D0F192900E4F345 /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		08EB85DE1D0F192900E4F345 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
-		08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentViewController.swift; sourceTree = "<group>"; };
+		08EB85EE1D101D7800E4F345 /* LegacyWriteCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyWriteCommentViewController.swift; sourceTree = "<group>"; };
 		08EB85F71D10454D00E4F345 /* DiscussionsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscussionsStoryboard.storyboard; sourceTree = "<group>"; };
 		08EB85FA1D10863F00E4F345 /* DiscussionAlertConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DiscussionAlertConstructor.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		08EDD6291F7C6785005203E4 /* StepikButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikButton.swift; sourceTree = "<group>"; };
@@ -2405,7 +2405,7 @@
 				62E9809004D6D03BB53BFCD7 /* DiscussionsTableViewDataSource.swift */,
 				2C6C17BA22CF412900FE776A /* DiscussionsView.swift */,
 				082CB1B41D08971900C79A27 /* DiscussionsViewController.swift */,
-				08EB85EE1D101D7800E4F345 /* WriteCommentViewController.swift */,
+				08EB85EE1D101D7800E4F345 /* LegacyWriteCommentViewController.swift */,
 				082CB1B51D08971900C79A27 /* DiscussionsViewController.xib */,
 				2CD2605322CCD0C40054F01B /* Views */,
 			);
@@ -6401,7 +6401,7 @@
 				088E73EA2060124B00D458E3 /* ApiRequestRetrier.swift in Sources */,
 				2CF08864205BEF3C00FCB9C0 /* StepikPlaceholderView.swift in Sources */,
 				2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */,
-				08EB85F01D101D7800E4F345 /* WriteCommentViewController.swift in Sources */,
+				08EB85F01D101D7800E4F345 /* LegacyWriteCommentViewController.swift in Sources */,
 				08AEC3A71CCA75F400FFF29E /* APIDefaults.swift in Sources */,
 				080CE1611E9581960089A27F /* SubmissionsAPI.swift in Sources */,
 				081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */,

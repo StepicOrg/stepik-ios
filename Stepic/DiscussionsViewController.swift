@@ -216,8 +216,11 @@ extension DiscussionsViewController: DiscussionsViewControllerDelegate {
     }
 }
 
-extension DiscussionsViewController: WriteCommentViewControllerDelegate {
-    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
+extension DiscussionsViewController: LegacyWriteCommentViewControllerDelegate {
+    func legacyWriteCommentViewControllerDidWriteComment(
+        _ controller: LegacyWriteCommentViewController,
+        comment: Comment
+    ) {
         self.presenter?.writeComment(comment)
     }
 }

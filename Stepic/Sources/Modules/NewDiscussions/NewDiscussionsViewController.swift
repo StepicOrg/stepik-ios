@@ -225,8 +225,11 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
 
 // MARK: - NewDiscussionsViewController: WriteCommentViewControllerDelegate -
 
-extension NewDiscussionsViewController: WriteCommentViewControllerDelegate {
-    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
+extension NewDiscussionsViewController: LegacyWriteCommentViewControllerDelegate {
+    func legacyWriteCommentViewControllerDidWriteComment(
+        _ controller: LegacyWriteCommentViewController,
+        comment: Comment
+    ) {
         self.interactor.doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request(comment: comment))
     }
 }
