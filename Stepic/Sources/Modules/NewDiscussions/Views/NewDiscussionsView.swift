@@ -4,11 +4,8 @@ import UIKit
 protocol NewDiscussionsViewDelegate: class {
     func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView)
     func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView)
-    func newDiscussionsViewDidRequestRepliesPagination(
-        _ view: NewDiscussionsView,
-        cell: NewDiscussionsLoadMoreTableViewCell,
-        at indexPath: IndexPath
-    )
+    func newDiscussionsViewDidRequestRepliesPagination(_ view: NewDiscussionsView, at indexPath: IndexPath)
+    func newDiscussionsView(_ view: NewDiscussionsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath)
 }
 
 extension NewDiscussionsView {
@@ -138,10 +135,18 @@ extension NewDiscussionsView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-
-        if let loadMoreRepliesCell = tableView.cellForRow(at: indexPath) as? NewDiscussionsLoadMoreTableViewCell {
-            self.delegate?.newDiscussionsViewDidRequestRepliesPagination(self, cell: loadMoreRepliesCell, at: indexPath)
+        defer {
+            tableView.deselectRow(at: indexPath, animated: true)
         }
+
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+
+        if selectedCell is NewDiscussionsLoadMoreTableViewCell {
+            self.delegate?.newDiscussionsViewDidRequestRepliesPagination(self, at: indexPath)
+        }
+
+        self.delegate?.newDiscussionsView(self, didSelectCell: selectedCell, at: indexPath)
     }
 }

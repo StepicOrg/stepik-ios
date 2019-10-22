@@ -187,8 +187,27 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     }
 
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request) {
+        var parentID: Comment.IdType?
+
+        if let commentID = request.commentID {
+            parentID = {
+                if self.currentDiscussions.contains(where: { $0.id == commentID }) {
+                    return commentID
+                }
+                for (discussionID, replies) in self.currentReplies {
+                    if discussionID == commentID {
+                        return discussionID
+                    }
+                    if replies.contains(where: { $0.id == commentID }) {
+                        return discussionID
+                    }
+                }
+                return nil
+            }()
+        }
+
         self.presenter.presentWriteComment(
-            response: NewDiscussions.WriteCommentPresentation.Response(stepID: self.stepID, parentID: request.parentID)
+            response: NewDiscussions.WriteCommentPresentation.Response(targetID: self.stepID, parentID: parentID)
         )
     }
 

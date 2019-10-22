@@ -67,7 +67,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
     func presentWriteComment(response: NewDiscussions.WriteCommentPresentation.Response) {
         self.viewController?.displayWriteComment(
             viewModel: NewDiscussions.WriteCommentPresentation.ViewModel(
-                stepID: response.stepID,
+                targetID: response.targetID,
                 parentID: response.parentID
             )
         )

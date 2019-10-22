@@ -135,7 +135,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
 
     @objc
     private func didClickWriteComment() {
-        self.interactor.doWriteCommentPresentation(request: .init(parentID: nil))
+        self.interactor.doWriteCommentPresentation(request: .init(commentID: nil))
     }
 }
 
@@ -161,7 +161,7 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
 
     func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel) {
         let assembly = WriteCommentLegacyAssembly(
-            target: viewModel.stepID,
+            target: viewModel.targetID,
             parentId: viewModel.parentID,
             delegate: self
         )
@@ -195,14 +195,31 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
         }
     }
 
-    func newDiscussionsViewDidRequestRepliesPagination(
-        _ view: NewDiscussionsView,
-        cell: NewDiscussionsLoadMoreTableViewCell,
-        at indexPath: IndexPath
-    ) {
+    func newDiscussionsViewDidRequestRepliesPagination(_ view: NewDiscussionsView, at indexPath: IndexPath) {
         if let discussionViewModel = self.tableDataSource.getDiscussionViewModel(at: indexPath) {
             self.interactor.doNextRepliesLoad(request: .init(discussionID: discussionViewModel.id))
         }
+    }
+
+    func newDiscussionsView(_ view: NewDiscussionsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath) {
+        if let commentViewModel = self.tableDataSource.getCommentViewModel(at: indexPath) {
+            self.presentCommentActionSheet(commentViewModel)
+        }
+    }
+
+    private func presentCommentActionSheet(_ viewModel: NewDiscussionsCommentViewModel) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Reply", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doWriteCommentPresentation(request: .init(commentID: viewModel.id))
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
 }
 
@@ -221,6 +238,6 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         viewModel: NewDiscussionsCommentViewModel
     ) {
-        self.interactor.doWriteCommentPresentation(request: .init(parentID: viewModel.id))
+        self.interactor.doWriteCommentPresentation(request: .init(commentID: viewModel.id))
     }
 }

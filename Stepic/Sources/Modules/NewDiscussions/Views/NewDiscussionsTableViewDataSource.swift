@@ -20,6 +20,15 @@ final class NewDiscussionsTableViewDataSource: NSObject {
     func getDiscussionViewModel(at indexPath: IndexPath) -> NewDiscussionsDiscussionViewModel? {
         return self.viewModels[safe: indexPath.section]
     }
+
+    func getCommentViewModel(at indexPath: IndexPath) -> NewDiscussionsCommentViewModel? {
+        if indexPath.row == NewDiscussionsTableViewDataSource.parentDiscussionRowIndex {
+            return self.viewModels[safe: indexPath.section]?.comment
+        }
+        return self.viewModels[safe: indexPath.section]?.replies[
+            safe: indexPath.row - NewDiscussionsTableViewDataSource.parentDiscussionInset
+        ]
+    }
 }
 
 // MARK: - NewDiscussionsTableViewDataSource: UITableViewDataSource -
