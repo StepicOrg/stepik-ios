@@ -1,12 +1,20 @@
+import SnapKit
 import UIKit
 
 extension NewDiscussionsCellView {
     struct Appearance {
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
-        let avatarImageViewSize = CGSize(width: 30, height: 30)
+        let avatarImageViewSize = CGSize(width: 36, height: 36)
         let avatarImageViewCornerRadius: CGFloat = 4.0
 
-        let nameLabelInsets = LayoutInsets(left: 16, right: 16)
+        let badgeLabelInsets = LayoutInsets(left: 16)
+        let badgeLabelFont = UIFont.systemFont(ofSize: 10, weight: .medium)
+        let badgeLabelTextColor = UIColor.white
+        let badgeLabelBackgroundColor = UIColor.stepicGreen
+        let badgeLabelCornerRadius: CGFloat = 10
+        let badgeLabelHeight: CGFloat = 20
+
+        let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let nameLabelTextColor = UIColor.mainDark
 
@@ -32,6 +40,21 @@ final class NewDiscussionsCellView: UIView {
         let view = AvatarImageView()
         view.shape = .rectangle(cornerRadius: self.appearance.avatarImageViewCornerRadius)
         return view
+    }()
+
+    private lazy var badgeLabel: UILabel = {
+        let label = WiderLabel()
+        label.font = self.appearance.badgeLabelFont
+        label.textColor = self.appearance.badgeLabelTextColor
+        label.backgroundColor = self.appearance.badgeLabelBackgroundColor
+        label.textAlignment = .center
+        label.numberOfLines = 1
+
+        label.layer.cornerRadius = self.appearance.badgeLabelCornerRadius
+        label.layer.masksToBounds = true
+        label.clipsToBounds = true
+
+        return label
     }()
 
     private lazy var nameLabel: UILabel = {
@@ -74,6 +97,10 @@ final class NewDiscussionsCellView: UIView {
         return stackView
     }()
 
+    // Dynamically show/hide badge
+    private var badgelabelHeightConstraint: Constraint?
+    private var nameLabelTopConstraint: Constraint?
+
     var onReplyClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -94,11 +121,21 @@ final class NewDiscussionsCellView: UIView {
 
     func configure(viewModel: NewDiscussionsCommentViewModel?) {
         guard let viewModel = viewModel else {
+            self.updateBadge(text: "", isHidden: true)
             self.nameLabel.text = nil
             self.dateLabel.text = nil
             self.textLabel.text = nil
             self.avatarImageView.reset()
             return
+        }
+
+        switch viewModel.userRole {
+        case .student:
+            self.updateBadge(text: "", isHidden: true)
+        case .teacher:
+            self.updateBadge(text: NSLocalizedString("CourseStaff", comment: ""), isHidden: false)
+        case .staff:
+            self.updateBadge(text: NSLocalizedString("Staff", comment: ""), isHidden: false)
         }
 
         self.nameLabel.text = viewModel.userName
@@ -113,6 +150,13 @@ final class NewDiscussionsCellView: UIView {
 
     // MARK: - Private API
 
+    private func updateBadge(text: String, isHidden: Bool) {
+        self.badgeLabel.text = text
+        self.badgeLabel.isHidden = isHidden
+        self.badgelabelHeightConstraint?.update(offset: isHidden ? 0 : self.appearance.badgeLabelHeight)
+        self.nameLabelTopConstraint?.update(offset: isHidden ? 0 : self.appearance.nameLabelInsets.top)
+    }
+
     @objc
     private func replyDidClick() {
         self.onReplyClick?()
@@ -124,6 +168,7 @@ final class NewDiscussionsCellView: UIView {
 extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarImageView)
+        self.addSubview(self.badgeLabel)
         self.addSubview(self.nameLabel)
         self.addSubview(self.textLabel)
         self.addSubview(self.bottomControlsStackView)
@@ -137,10 +182,18 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.size.equalTo(self.appearance.avatarImageViewSize)
         }
 
+        self.badgeLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.badgeLabel.snp.makeConstraints { make in
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeLabelInsets.left)
+            make.top.equalTo(self.avatarImageView.snp.top)
+            self.badgelabelHeightConstraint = make.height.equalTo(self.appearance.badgeLabelHeight).constraint
+        }
+
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
-            make.top.equalTo(self.avatarImageView.snp.top)
+            self.nameLabelTopConstraint = make.top.equalTo(self.badgeLabel.snp.bottom)
+                .offset(self.appearance.nameLabelInsets.top).constraint
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
         }
 
