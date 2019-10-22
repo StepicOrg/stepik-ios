@@ -26,6 +26,7 @@ final class WriteCommentView: UIView {
         textView.font = self.appearance.textViewFont
         textView.textColor = self.appearance.textViewTextColor
         textView.placeholderColor = self.appearance.textViewPlaceholderColor
+        textView.placeholder = NSLocalizedString("WriteCommentPlaceholder", comment: "")
         textView.textInsets = .zero
 
         // Disable features
@@ -59,7 +60,6 @@ final class WriteCommentView: UIView {
 
     func configure(viewModel: WriteCommentViewModel) {
         self.textView.text = viewModel.text
-        self.textView.placeholder = viewModel.placeholder
     }
 }
 

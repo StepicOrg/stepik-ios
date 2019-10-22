@@ -775,7 +775,6 @@ CodeQuizFullscreenTabRunTitle = "Run";
 
 /* Write comment */
 WriteCommentTitle = "Comment";
-WriteCommentPlaceholderCreate = "Leave a comment";
-WriteCommentPlaceholderEdit = "Edit a comment";
+WriteCommentPlaceholder = "Leave a comment...";
 WriteCommentActionButtonCreate = "Send";
-WriteCommentActionButtonEdit = "Edit";
+WriteCommentActionButtonEdit = "Update";

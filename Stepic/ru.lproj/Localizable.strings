@@ -776,7 +776,6 @@ CodeQuizFullscreenTabRunTitle = "Запуск";
 
 /* Write comment */
 WriteCommentTitle = "Комментарий";
-WriteCommentPlaceholderCreate = "Оставьте комментарий";
-WriteCommentPlaceholderEdit = "Измените комментарий";
+WriteCommentPlaceholder = "Оставьте комментарий...";
 WriteCommentActionButtonCreate = "Отправить";
-WriteCommentActionButtonEdit = "Редактировать";
+WriteCommentActionButtonEdit = "Обновить";

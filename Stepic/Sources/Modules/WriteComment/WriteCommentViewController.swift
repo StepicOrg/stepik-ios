@@ -94,7 +94,7 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
     // MARK: Private helpers
 
     private func updateView(viewModel: WriteCommentViewModel) {
-        self.doneBarButton.title = viewModel.mainActionButtonTitle
+        self.doneBarButton.title = viewModel.doneButtonTitle
         self.doneBarButton.isEnabled = viewModel.isFilled
         self.writeCommentView?.configure(viewModel: viewModel)
     }

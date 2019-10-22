@@ -19,22 +19,12 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
         text: String,
         presentationContext: WriteComment.PresentationContext
     ) -> WriteCommentViewModel {
-        var placeholder: String
-        var mainActionButtonTitle: String
-
-        switch presentationContext {
-        case .create:
-            placeholder = NSLocalizedString("WriteCommentPlaceholderCreate", comment: "")
-            mainActionButtonTitle = NSLocalizedString("WriteCommentActionButtonCreate", comment: "")
-        case .edit:
-            placeholder = NSLocalizedString("WriteCommentPlaceholderEdit", comment: "")
-            mainActionButtonTitle = NSLocalizedString("WriteCommentActionButtonEdit", comment: "")
-        }
-
+        let buttonTitle = presentationContext == .create
+            ? NSLocalizedString("WriteCommentActionButtonCreate", comment: "")
+            : NSLocalizedString("WriteCommentActionButtonEdit", comment: "")
         return WriteCommentViewModel(
             text: text,
-            placeholder: placeholder,
-            mainActionButtonTitle: mainActionButtonTitle,
+            doneButtonTitle: buttonTitle,
             isFilled: !text.isEmpty
         )
     }
