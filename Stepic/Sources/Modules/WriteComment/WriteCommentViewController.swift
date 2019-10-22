@@ -4,28 +4,41 @@ import UIKit
 
 protocol WriteCommentViewControllerProtocol: class {
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel)
+    func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel)
 }
 
 final class WriteCommentViewController: UIViewController {
-    private let interactor: WriteCommentInteractorProtocol
-
     lazy var writeCommentView = self.view as? WriteCommentView
 
-    private lazy var cancelBarButton = UIBarButtonItem(
+    private let interactor: WriteCommentInteractorProtocol
+    private var state: WriteComment.ViewControllerState
+
+    private lazy var cancelBarButtonItem = UIBarButtonItem(
         barButtonSystemItem: .cancel,
         target: self,
         action: #selector(self.cancelButtonDidClick(_:))
     )
 
-    private lazy var doneBarButton = UIBarButtonItem(
+    private lazy var doneBarButtonItem = UIBarButtonItem(
         title: nil,
         style: .done,
         target: self,
         action: #selector(self.doneButtonDidClick(_:))
     )
 
-    init(interactor: WriteCommentInteractorProtocol) {
+    private lazy var activityBarButtonItem: UIBarButtonItem = {
+        let activityIndicatorView = UIActivityIndicatorView(style: .white)
+        activityIndicatorView.color = .mainDark
+        activityIndicatorView.startAnimating()
+        return UIBarButtonItem(customView: activityIndicatorView)
+    }()
+
+    init(
+        interactor: WriteCommentInteractorProtocol,
+        initialState: WriteComment.ViewControllerState = .loading
+    ) {
         self.interactor = interactor
+        self.state = initialState
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -46,11 +59,12 @@ final class WriteCommentViewController: UIViewController {
         self.title = NSLocalizedString("WriteCommentTitle", comment: "")
         self.edgesForExtendedLayout = []
 
-        self.navigationItem.leftBarButtonItem = self.cancelBarButton
-        self.navigationItem.rightBarButtonItem = self.doneBarButton
+        self.navigationItem.leftBarButtonItem = self.cancelBarButtonItem
+        self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
 
-        self.doneBarButton.isEnabled = false
+        self.doneBarButtonItem.isEnabled = false
 
+        self.updateState(newState: self.state)
         self.interactor.doCommentLoad(request: .init())
     }
 
@@ -72,6 +86,28 @@ final class WriteCommentViewController: UIViewController {
 
     // MARK: - Private API
 
+    private func updateState(newState: WriteComment.ViewControllerState) {
+        switch newState {
+        case .result(let data):
+            self.writeCommentView?.isEnabled = true
+            self.writeCommentView?.configure(viewModel: data)
+            self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
+            self.doneBarButtonItem.title = data.doneButtonTitle
+            self.doneBarButtonItem.isEnabled = data.isFilled
+        case .loading:
+            self.view.endEditing(true)
+            self.writeCommentView?.isEnabled = false
+            self.navigationItem.rightBarButtonItem = self.activityBarButtonItem
+        case .error:
+            SVProgressHUD.showError(withStatus: "")
+            self.writeCommentView?.isEnabled = true
+            _ = self.writeCommentView?.becomeFirstResponder()
+            self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
+            self.doneBarButtonItem.isEnabled = true
+        }
+        self.state = newState
+    }
+
     @objc
     private func cancelButtonDidClick(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -80,7 +116,7 @@ final class WriteCommentViewController: UIViewController {
     @objc
     private func doneButtonDidClick(_ sender: UIBarButtonItem) {
         self.view.endEditing(true)
-        self.doneBarButton.isEnabled = false
+        self.doneBarButtonItem.isEnabled = false
     }
 }
 
@@ -88,15 +124,11 @@ final class WriteCommentViewController: UIViewController {
 
 extension WriteCommentViewController: WriteCommentViewControllerProtocol {
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel) {
-        self.updateView(viewModel: viewModel.viewModel)
+        self.updateState(newState: viewModel.state)
     }
 
-    // MARK: Private helpers
-
-    private func updateView(viewModel: WriteCommentViewModel) {
-        self.doneBarButton.title = viewModel.doneButtonTitle
-        self.doneBarButton.isEnabled = viewModel.isFilled
-        self.writeCommentView?.configure(viewModel: viewModel)
+    func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel) {
+        self.updateState(newState: viewModel.state)
     }
 }
 
@@ -104,6 +136,6 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
 
 extension WriteCommentViewController: WriteCommentViewDelegate {
     func writeCommentView(_ view: WriteCommentView, didUpdateText text: String) {
-        print(text)
+        self.interactor.doCommentTextUpdate(request: .init(text: text))
     }
 }

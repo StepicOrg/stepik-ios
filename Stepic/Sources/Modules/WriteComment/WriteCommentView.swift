@@ -37,6 +37,12 @@ final class WriteCommentView: UIView {
         return textView
     }()
 
+    var isEnabled: Bool = true {
+        didSet {
+            self.textView.isEditable = self.isEnabled
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()

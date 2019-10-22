@@ -25,11 +25,34 @@ enum WriteComment {
         struct Request { }
 
         struct Response {
-            let result: CommentInfo
+            let data: CommentInfo
         }
 
         struct ViewModel {
-            let viewModel: WriteCommentViewModel
+            let state: ViewControllerState
         }
+    }
+
+    /// Handle review text change
+    enum CommentTextUpdate {
+        struct Request {
+            let text: String
+        }
+
+        struct Response {
+            let data: CommentInfo
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    // MARK: States
+
+    enum ViewControllerState {
+        case loading
+        case error
+        case result(data: WriteCommentViewModel)
     }
 }

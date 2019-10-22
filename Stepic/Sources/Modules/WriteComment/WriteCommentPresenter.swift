@@ -2,6 +2,7 @@ import UIKit
 
 protocol WriteCommentPresenterProtocol {
     func presentComment(response: WriteComment.CommentLoad.Response)
+    func presentCommentTextUpdate(response: WriteComment.CommentTextUpdate.Response)
 }
 
 final class WriteCommentPresenter: WriteCommentPresenterProtocol {
@@ -9,11 +10,25 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
 
     func presentComment(response: WriteComment.CommentLoad.Response) {
         let viewModel = self.makeViewModel(
-            text: response.result.text,
-            presentationContext: response.result.presentationContext
+            text: response.data.text,
+            presentationContext: response.data.presentationContext
         )
-        self.viewController?.displayComment(viewModel: .init(viewModel: viewModel))
+        self.viewController?.displayComment(
+            viewModel: WriteComment.CommentLoad.ViewModel(state: .result(data: viewModel))
+        )
     }
+
+    func presentCommentTextUpdate(response: WriteComment.CommentTextUpdate.Response) {
+        let viewModel = self.makeViewModel(
+            text: response.data.text,
+            presentationContext: response.data.presentationContext
+        )
+        self.viewController?.displayCommentTextUpdate(
+            viewModel: WriteComment.CommentTextUpdate.ViewModel(state: .result(data: viewModel))
+        )
+    }
+
+    // MARK: - Private API
 
     private func makeViewModel(
         text: String,
