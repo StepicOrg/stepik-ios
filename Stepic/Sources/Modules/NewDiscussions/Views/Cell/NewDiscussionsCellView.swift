@@ -30,6 +30,14 @@ extension NewDiscussionsCellView {
 
         let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let replyButtonTextColor = UIColor(hex: 0x3E50CB)
+
+        let likeImageSize = CGSize(width: 20, height: 20)
+        let likeImageNormalTintColor = UIColor.mainDark.withAlphaComponent(0.5)
+        let likeImageFilledTintColor = UIColor.mainDark
+        let likeButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let likeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
+
+        let dislikeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
     }
 }
 
@@ -90,9 +98,34 @@ final class NewDiscussionsCellView: UIView {
         return button
     }()
 
+    private lazy var likeImageButton: ImageButton = {
+        let imageButton = ImageButton()
+        imageButton.imageSize = self.appearance.likeImageSize
+        imageButton.tintColor = self.appearance.likeImageNormalTintColor
+        imageButton.font = self.appearance.likeButtonFont
+        imageButton.title = "0"
+        imageButton.image = UIImage(named: "discussions-thumb-up")?.withRenderingMode(.alwaysTemplate)
+        imageButton.titleInsets = self.appearance.likeButtonTitleInsets
+        return imageButton
+    }()
+
+    private lazy var dislikeImageButton: ImageButton = {
+        let imageButton = ImageButton()
+        imageButton.imageSize = self.appearance.likeImageSize
+        imageButton.tintColor = self.appearance.likeImageNormalTintColor
+        imageButton.font = self.appearance.likeButtonFont
+        imageButton.title = "0"
+        imageButton.image = UIImage(named: "discussions-thumb-down")?.withRenderingMode(.alwaysTemplate)
+        imageButton.titleInsets = self.appearance.dislikeButtonTitleInsets
+        return imageButton
+    }()
+
     private lazy var bottomControlsStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.dateLabel, self.replyButton])
+        let stackView = UIStackView(
+            arrangedSubviews: [self.dateLabel, self.replyButton, self.likeImageButton, self.dislikeImageButton]
+        )
         stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
         stackView.spacing = self.appearance.bottomControlsSpacing
         return stackView
     }()
@@ -125,6 +158,7 @@ final class NewDiscussionsCellView: UIView {
             self.nameLabel.text = nil
             self.dateLabel.text = nil
             self.textLabel.text = nil
+            self.updateVote(likes: 0, dislikes: 0, voteValue: nil)
             self.avatarImageView.reset()
             return
         }
@@ -137,6 +171,8 @@ final class NewDiscussionsCellView: UIView {
         case .staff:
             self.updateBadge(text: NSLocalizedString("Staff", comment: ""), isHidden: false)
         }
+
+        self.updateVote(likes: viewModel.likesCount, dislikes: viewModel.dislikesCount, voteValue: viewModel.voteValue)
 
         self.nameLabel.text = viewModel.userName
         self.dateLabel.text = viewModel.dateRepresentation
@@ -155,6 +191,22 @@ final class NewDiscussionsCellView: UIView {
         self.badgeLabel.isHidden = isHidden
         self.badgelabelHeightConstraint?.update(offset: isHidden ? 0 : self.appearance.badgeLabelHeight)
         self.nameLabelTopConstraint?.update(offset: isHidden ? 0 : self.appearance.nameLabelInsets.top)
+    }
+
+    private func updateVote(likes: Int, dislikes: Int, voteValue: VoteValue?) {
+        self.likeImageButton.title = "\(likes)"
+        self.dislikeImageButton.title = "\(dislikes)"
+
+        if let voteValue = voteValue {
+            if voteValue == .epic {
+                self.likeImageButton.tintColor = self.appearance.likeImageFilledTintColor
+            } else {
+                self.dislikeImageButton.tintColor = self.appearance.likeImageFilledTintColor
+            }
+        } else {
+            self.likeImageButton.tintColor = self.appearance.likeImageNormalTintColor
+            self.dislikeImageButton.tintColor = self.appearance.likeImageNormalTintColor
+        }
     }
 
     @objc
