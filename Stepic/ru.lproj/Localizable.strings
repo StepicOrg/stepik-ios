@@ -116,8 +116,6 @@ NewCommentAlertMessage = "Прочитать комментарий в брау�
 Reply = "Ответить";
 ShowComments = "Показать комментарии";
 Discussions = "Комментарии";
-WriteComment = "Написать комментарий...";
-Comment = "Комментарий";
 ShowMoreReplies = "Больше ответов";
 ShowMoreDiscussions = "Больше комментариев";
 RefreshingDiscussions = "Обновляем комментарии...";
@@ -775,3 +773,10 @@ CodeQuizEmptyCodeLanguages = "Нет поддерживаемых языков �
 CodeQuizFullscreenTabInstructionTitle = "Инструкция";
 CodeQuizFullscreenTabCodeTitle = "Код";
 CodeQuizFullscreenTabRunTitle = "Запуск";
+
+/* Write comment */
+WriteCommentTitle = "Комментарий";
+WriteCommentPlaceholderCreate = "Оставьте комментарий";
+WriteCommentPlaceholderEdit = "Измените комментарий";
+WriteCommentActionButtonCreate = "Отправить";
+WriteCommentActionButtonEdit = "Редактировать";

@@ -109,9 +109,9 @@ final class LegacyWriteCommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("Comment", comment: "")
+        self.title = NSLocalizedString("WriteCommentTitle", comment: "")
 
-        self.commentTextView.placeholder = NSLocalizedString("WriteComment", comment: "")
+        self.commentTextView.placeholder = NSLocalizedString("WriteCommentPlaceholderCreate", comment: "")
         self.commentTextView.tintColor = .mainDark
         self.commentTextView.textColor = .mainText
 

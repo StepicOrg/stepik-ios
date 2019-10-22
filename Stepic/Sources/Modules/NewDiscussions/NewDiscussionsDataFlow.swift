@@ -1,7 +1,7 @@
 import Foundation
 
 enum NewDiscussions {
-    // MARK: Common structs
+    // MARK: Common types
 
     struct DiscussionsResult {
         let discussions: [NewDiscussionsDiscussionViewModel]
