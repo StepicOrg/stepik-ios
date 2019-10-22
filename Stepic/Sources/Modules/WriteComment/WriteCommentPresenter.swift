@@ -3,6 +3,7 @@ import UIKit
 protocol WriteCommentPresenterProtocol {
     func presentComment(response: WriteComment.CommentLoad.Response)
     func presentCommentTextUpdate(response: WriteComment.CommentTextUpdate.Response)
+    func presentCommentCancelPresentation(response: WriteComment.WriteCommentCancelPresentation.Response)
 }
 
 final class WriteCommentPresenter: WriteCommentPresenterProtocol {
@@ -25,6 +26,14 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
         )
         self.viewController?.displayCommentTextUpdate(
             viewModel: WriteComment.CommentTextUpdate.ViewModel(state: .result(data: viewModel))
+        )
+    }
+
+    func presentCommentCancelPresentation(response: WriteComment.WriteCommentCancelPresentation.Response) {
+        self.viewController?.displayCommentCancelPresentation(
+            viewModel: WriteComment.WriteCommentCancelPresentation.ViewModel(
+                shouldAsksUser: response.originalText != response.currentText && !response.currentText.isEmpty
+            )
         )
     }
 

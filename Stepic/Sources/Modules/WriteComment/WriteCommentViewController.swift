@@ -5,6 +5,7 @@ import UIKit
 protocol WriteCommentViewControllerProtocol: class {
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel)
     func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel)
+    func displayCommentCancelPresentation(viewModel: WriteComment.WriteCommentCancelPresentation.ViewModel)
 }
 
 final class WriteCommentViewController: UIViewController {
@@ -110,7 +111,7 @@ final class WriteCommentViewController: UIViewController {
 
     @objc
     private func cancelButtonDidClick(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        self.interactor.doCommentCancelPresentation(request: .init())
     }
 
     @objc
@@ -129,6 +130,32 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
 
     func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel) {
         self.updateState(newState: viewModel.state)
+    }
+
+    func displayCommentCancelPresentation(viewModel: WriteComment.WriteCommentCancelPresentation.ViewModel) {
+        if viewModel.shouldAsksUser {
+            let alert = UIAlertController(
+                title: nil,
+                message: NSLocalizedString("WriteCommentCancelPromptMessage", comment: ""),
+                preferredStyle: .alert
+            )
+
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
+            let discardAction = UIAlertAction(
+                title: NSLocalizedString("WriteCommentCancelPromptDestructiveActionTitle", comment: ""),
+                style: .destructive,
+                handler: { [weak self] _ in
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            )
+
+            alert.addAction(cancelAction)
+            alert.addAction(discardAction)
+
+            self.present(alert, animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

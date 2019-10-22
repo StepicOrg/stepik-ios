@@ -778,3 +778,5 @@ WriteCommentTitle = "Comment";
 WriteCommentPlaceholder = "Leave a comment...";
 WriteCommentActionButtonCreate = "Send";
 WriteCommentActionButtonEdit = "Update";
+WriteCommentCancelPromptMessage = "Delete draft?";
+WriteCommentCancelPromptDestructiveActionTitle = "Delete";

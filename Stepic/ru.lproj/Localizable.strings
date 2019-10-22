@@ -779,3 +779,5 @@ WriteCommentTitle = "Комментарий";
 WriteCommentPlaceholder = "Оставьте комментарий...";
 WriteCommentActionButtonCreate = "Отправить";
 WriteCommentActionButtonEdit = "Обновить";
+WriteCommentCancelPromptMessage = "Удалить черновик?";
+WriteCommentCancelPromptDestructiveActionTitle = "Удалить";

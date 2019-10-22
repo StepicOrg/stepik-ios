@@ -4,6 +4,7 @@ import PromiseKit
 protocol WriteCommentInteractorProtocol {
     func doCommentLoad(request: WriteComment.CommentLoad.Request)
     func doCommentTextUpdate(request: WriteComment.CommentTextUpdate.Request)
+    func doCommentCancelPresentation(request: WriteComment.WriteCommentCancelPresentation.Request)
 }
 
 final class WriteCommentInteractor: WriteCommentInteractorProtocol {
@@ -43,6 +44,15 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
 
         self.presenter.presentCommentTextUpdate(
             response: WriteComment.CommentTextUpdate.Response(data: self.makeCommentInfo())
+        )
+    }
+
+    func doCommentCancelPresentation(request: WriteComment.WriteCommentCancelPresentation.Request) {
+        self.presenter.presentCommentCancelPresentation(
+            response: WriteComment.WriteCommentCancelPresentation.Response(
+                originalText: "",
+                currentText: self.currentText
+            )
         )
     }
 

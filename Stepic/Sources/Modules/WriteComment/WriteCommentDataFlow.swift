@@ -48,6 +48,20 @@ enum WriteComment {
         }
     }
 
+    /// Shows alert about changes losing
+    enum WriteCommentCancelPresentation {
+        struct Request { }
+
+        struct Response {
+            let originalText: String
+            let currentText: String
+        }
+
+        struct ViewModel {
+            let shouldAsksUser: Bool
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {
