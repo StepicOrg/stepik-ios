@@ -4,6 +4,7 @@ import PromiseKit
 protocol CommentsNetworkServiceProtocol: class {
     func fetch(ids: [Comment.IdType]) -> Promise<[Comment]>
     func create(comment: Comment) -> Promise<Comment>
+    func update(comment: Comment) -> Promise<Comment>
 }
 
 final class CommentsNetworkService: CommentsNetworkServiceProtocol {
@@ -33,12 +34,25 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
             self.commentsAPI.create(comment).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in
-                seal.reject(Error.fetchFailed)
+                seal.reject(Error.createFailed)
+            }
+        }
+    }
+
+    func update(comment: Comment) -> Promise<Comment> {
+        return Promise { seal in
+            self.commentsAPI.update(comment).done { comment in
+                seal.fulfill(comment)
+            }.catch { _ in
+                seal.reject(Error.updateFailed)
             }
         }
     }
 
     enum Error: Swift.Error {
         case fetchFailed
+        case createFailed
+        case updateFailed
+        case deleteFailed
     }
 }

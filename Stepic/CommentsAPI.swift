@@ -49,37 +49,43 @@ final class CommentsAPI: APIEndpoint {
 
     func create(_ comment: Comment) -> Promise<Comment> {
         return Promise { seal in
-            create.request(requestEndpoint: "comments", paramName: "comment", creatingObject: comment, withManager: manager).done { comment, json in
-                guard let json = json else {
-                    seal.fulfill(comment)
-                    return
-                }
-                let userInfo = UserInfo(json: json["users"].arrayValue[0])
-                let vote = Vote(json: json["votes"].arrayValue[0])
+            self.create.request(
+                requestEndpoint: self.name,
+                paramName: "comment",
+                creatingObject: comment,
+                withManager: self.manager
+            ).done { comment, json in
+                let userInfo = UserInfo(json: json[Comment.JSONKey.users.rawValue].arrayValue[0])
+                let vote = Vote(json: json[Comment.JSONKey.votes.rawValue].arrayValue[0])
+
                 comment.userInfo = userInfo
                 comment.vote = vote
+
                 seal.fulfill(comment)
             }.catch { error in
                 seal.reject(error)
             }
         }
     }
-}
 
-extension CommentsAPI {
-    @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func create(_ comment: Comment, success: @escaping (Comment) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        create(comment).done { success($0) }.catch { errorHandler($0.localizedDescription) }
-        return nil
-    }
+    func update(_ comment: Comment) -> Promise<Comment> {
+        return Promise { seal in
+            self.update.request(
+                requestEndpoint: self.name,
+                paramName: "comment",
+                updatingObject: comment,
+                withManager: self.manager
+            ).done { comment, json in
+                let userInfo = UserInfo(json: json[Comment.JSONKey.users.rawValue].arrayValue[0])
+                let vote = Vote(json: json[Comment.JSONKey.votes.rawValue].arrayValue[0])
 
-    @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(_ ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Comment]) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        retrieve(ids: ids).done { comments in
-            success(comments)
-        }.catch { error in
-            errorHandler(error.localizedDescription)
+                comment.userInfo = userInfo
+                comment.vote = vote
+
+                seal.fulfill(comment)
+            }.catch { error in
+                seal.reject(error)
+            }
         }
-        return nil
     }
 }
