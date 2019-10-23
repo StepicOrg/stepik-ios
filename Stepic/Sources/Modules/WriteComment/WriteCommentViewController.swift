@@ -1,11 +1,11 @@
 import IQKeyboardManagerSwift
-import SVProgressHUD
 import UIKit
 
 protocol WriteCommentViewControllerProtocol: class {
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel)
     func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel)
-    func displayCommentCancelPresentation(viewModel: WriteComment.WriteCommentCancelPresentation.ViewModel)
+    func displayCommentMainActionResult(viewModel: WriteComment.CommentMainAction.ViewModel)
+    func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel)
 }
 
 final class WriteCommentViewController: UIViewController {
@@ -100,7 +100,6 @@ final class WriteCommentViewController: UIViewController {
             self.writeCommentView?.isEnabled = false
             self.navigationItem.rightBarButtonItem = self.activityBarButtonItem
         case .error:
-            SVProgressHUD.showError(withStatus: "")
             self.writeCommentView?.isEnabled = true
             _ = self.writeCommentView?.becomeFirstResponder()
             self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
@@ -116,8 +115,8 @@ final class WriteCommentViewController: UIViewController {
 
     @objc
     private func doneButtonDidClick(_ sender: UIBarButtonItem) {
-        self.view.endEditing(true)
-        self.doneBarButtonItem.isEnabled = false
+        self.updateState(newState: .loading)
+        self.interactor.doCommentMainAction(request: .init())
     }
 }
 
@@ -132,8 +131,16 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
         self.updateState(newState: viewModel.state)
     }
 
-    func displayCommentCancelPresentation(viewModel: WriteComment.WriteCommentCancelPresentation.ViewModel) {
-        if viewModel.shouldAsksUser {
+    func displayCommentMainActionResult(viewModel: WriteComment.CommentMainAction.ViewModel) {
+        if case .result = viewModel.state {
+            self.dismiss(animated: true)
+        } else {
+            self.updateState(newState: viewModel.state)
+        }
+    }
+
+    func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel) {
+        if viewModel.shouldAskUser {
             let alert = UIAlertController(
                 title: nil,
                 message: NSLocalizedString("WriteCommentCancelPromptMessage", comment: ""),

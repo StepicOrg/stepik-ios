@@ -4,7 +4,8 @@ import PromiseKit
 protocol WriteCommentInteractorProtocol {
     func doCommentLoad(request: WriteComment.CommentLoad.Request)
     func doCommentTextUpdate(request: WriteComment.CommentTextUpdate.Request)
-    func doCommentCancelPresentation(request: WriteComment.WriteCommentCancelPresentation.Request)
+    func doCommentMainAction(request: WriteComment.CommentMainAction.Request)
+    func doCommentCancelPresentation(request: WriteComment.CommentCancelPresentation.Request)
 }
 
 final class WriteCommentInteractor: WriteCommentInteractorProtocol {
@@ -47,9 +48,18 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
         )
     }
 
-    func doCommentCancelPresentation(request: WriteComment.WriteCommentCancelPresentation.Request) {
+    func doCommentMainAction(request: WriteComment.CommentMainAction.Request) {
+        switch self.presentationContext {
+        case .create:
+            self.createComment()
+        case .edit:
+            break
+        }
+    }
+
+    func doCommentCancelPresentation(request: WriteComment.CommentCancelPresentation.Request) {
         self.presenter.presentCommentCancelPresentation(
-            response: WriteComment.WriteCommentCancelPresentation.Response(
+            response: WriteComment.CommentCancelPresentation.Response(
                 originalText: "",
                 currentText: self.currentText
             )
@@ -57,6 +67,30 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
     }
 
     // MARK: - Private API
+
+    private func createComment() {
+        let htmlText = self.currentText
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "\n", with: "<br>")
+
+        self.provider.create(
+            targetID: self.targetID,
+            parentID: self.parentID,
+            text: htmlText
+        ).done { comment in
+            self.currentText = comment.text.replacingOccurrences(of: "<br>", with: "\n")
+            self.presenter.presentCommentMainActionResult(
+                response: WriteComment.CommentMainAction.Response(
+                    data: .success(self.makeCommentInfo())
+                )
+            )
+            self.moduleOutput?.handleCommentCreated(comment)
+        }.catch { error in
+            self.presenter.presentCommentMainActionResult(
+                response: WriteComment.CommentMainAction.Response(data: .failure(error))
+            )
+        }
+    }
 
     private func makeCommentInfo() -> WriteComment.CommentInfo {
         return WriteComment.CommentInfo(

@@ -3,7 +3,8 @@ import UIKit
 protocol WriteCommentPresenterProtocol {
     func presentComment(response: WriteComment.CommentLoad.Response)
     func presentCommentTextUpdate(response: WriteComment.CommentTextUpdate.Response)
-    func presentCommentCancelPresentation(response: WriteComment.WriteCommentCancelPresentation.Response)
+    func presentCommentMainActionResult(response: WriteComment.CommentMainAction.Response)
+    func presentCommentCancelPresentation(response: WriteComment.CommentCancelPresentation.Response)
 }
 
 final class WriteCommentPresenter: WriteCommentPresenterProtocol {
@@ -29,10 +30,27 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
         )
     }
 
-    func presentCommentCancelPresentation(response: WriteComment.WriteCommentCancelPresentation.Response) {
+    func presentCommentMainActionResult(response: WriteComment.CommentMainAction.Response) {
+        switch response.data {
+        case .success(let data):
+            let viewModel = self.makeViewModel(
+                text: data.text,
+                presentationContext: data.presentationContext
+            )
+            self.viewController?.displayCommentMainActionResult(
+                viewModel: WriteComment.CommentMainAction.ViewModel(state: .result(data: viewModel))
+            )
+        case .failure:
+            self.viewController?.displayCommentMainActionResult(
+                viewModel: WriteComment.CommentMainAction.ViewModel(state: .error)
+            )
+        }
+    }
+
+    func presentCommentCancelPresentation(response: WriteComment.CommentCancelPresentation.Response) {
         self.viewController?.displayCommentCancelPresentation(
-            viewModel: WriteComment.WriteCommentCancelPresentation.ViewModel(
-                shouldAsksUser: response.originalText != response.currentText && !response.currentText.isEmpty
+            viewModel: WriteComment.CommentCancelPresentation.ViewModel(
+                shouldAskUser: response.originalText != response.currentText && !response.currentText.isEmpty
             )
         )
     }

@@ -48,8 +48,21 @@ enum WriteComment {
         }
     }
 
+    /// Do comment main action (create or update)
+    enum CommentMainAction {
+        struct Request { }
+
+        struct Response {
+            let data: Result<CommentInfo>
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
     /// Shows alert about changes losing
-    enum WriteCommentCancelPresentation {
+    enum CommentCancelPresentation {
         struct Request { }
 
         struct Response {
@@ -58,7 +71,7 @@ enum WriteComment {
         }
 
         struct ViewModel {
-            let shouldAsksUser: Bool
+            let shouldAskUser: Bool
         }
     }
 

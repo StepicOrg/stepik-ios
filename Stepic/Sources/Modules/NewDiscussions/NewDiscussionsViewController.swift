@@ -160,12 +160,14 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
     }
 
     func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel) {
-        let assembly = WriteCommentLegacyAssembly(
-            target: viewModel.targetID,
-            parentId: viewModel.parentID,
-            delegate: self
+        let assembly = WriteCommentAssembly(
+            targetID: viewModel.targetID,
+            parentID: viewModel.parentID,
+            presentationContext: .create,
+            output: self.interactor as? WriteCommentOutputProtocol
         )
-        self.push(module: assembly.makeModule())
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+        self.present(navigationController, animated: true)
     }
 
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel) {
@@ -220,17 +222,6 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
         )
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         self.present(alert, animated: true)
-    }
-}
-
-// MARK: - NewDiscussionsViewController: WriteCommentViewControllerDelegate -
-
-extension NewDiscussionsViewController: LegacyWriteCommentViewControllerDelegate {
-    func legacyWriteCommentViewControllerDidWriteComment(
-        _ controller: LegacyWriteCommentViewController,
-        comment: Comment
-    ) {
-        self.interactor.doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request(comment: comment))
     }
 }
 

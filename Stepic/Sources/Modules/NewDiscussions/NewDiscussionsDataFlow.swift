@@ -102,10 +102,6 @@ enum NewDiscussions {
 
     /// Show current user newly created comment
     enum CommentCreated {
-        struct Request {
-            let comment: Comment
-        }
-
         struct Response {
             let result: DiscussionsData
         }

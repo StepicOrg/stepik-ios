@@ -7,7 +7,6 @@ protocol NewDiscussionsInteractorProtocol {
     func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request)
     func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request)
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request )
-    func doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request)
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
@@ -211,37 +210,6 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         )
     }
 
-    func doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request) {
-        let comment = request.comment
-
-        if let parentID = comment.parentID,
-           let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
-            self.currentDiscussions[parentIndex].repliesIDs.append(comment.id)
-            self.currentReplies[parentID, default: []].append(comment)
-
-            self.presenter.presentCommentCreated(
-                response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
-            )
-        } else {
-            self.presenter.presentWaitingState(
-                response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
-            )
-
-            self.currentDiscussions.append(comment)
-
-            self.provider.fetchDiscussionProxy(id: self.discussionProxyID).done { discussionProxy in
-                self.currentDiscussionProxy = discussionProxy
-            }.ensure {
-                self.presenter.presentWaitingState(
-                    response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)
-                )
-                self.presenter.presentCommentCreated(
-                    response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
-                )
-            }.cauterize()
-        }
-    }
-
     // MARK: - Private API
 
     private func fetchDiscussions(
@@ -330,5 +298,38 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+    }
+}
+
+// MARK: - NewDiscussionsInteractor: WriteCommentOutputProtocol -
+
+extension NewDiscussionsInteractor: WriteCommentOutputProtocol {
+    func handleCommentCreated(_ comment: Comment) {
+        if let parentID = comment.parentID,
+            let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
+            self.currentDiscussions[parentIndex].repliesIDs.append(comment.id)
+            self.currentReplies[parentID, default: []].append(comment)
+
+            self.presenter.presentCommentCreated(
+                response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+            )
+        } else {
+            self.presenter.presentWaitingState(
+                response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
+            )
+
+            self.currentDiscussions.append(comment)
+
+            self.provider.fetchDiscussionProxy(id: self.discussionProxyID).done { discussionProxy in
+                self.currentDiscussionProxy = discussionProxy
+            }.ensure {
+                self.presenter.presentWaitingState(
+                    response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)
+                )
+                self.presenter.presentCommentCreated(
+                    response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+                )
+            }.cauterize()
+        }
     }
 }

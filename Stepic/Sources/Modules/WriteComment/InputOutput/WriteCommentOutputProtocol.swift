@@ -1,3 +1,5 @@
 import Foundation
 
-protocol WriteCommentOutputProtocol: class { }
+protocol WriteCommentOutputProtocol: class {
+    func handleCommentCreated(_ comment: Comment)
+}

@@ -14,11 +14,6 @@ final class WriteCommentAssembly: Assembly {
         output: WriteCommentOutputProtocol? = nil
     ) {
         assert(targetID != parentID)
-
-        if presentationContext == .edit {
-            fatalError("not implemented yet")
-        }
-
         self.targetID = targetID
         self.parentID = parentID
         self.presentationContext = presentationContext
@@ -26,7 +21,9 @@ final class WriteCommentAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = WriteCommentProvider()
+        let provider = WriteCommentProvider(
+            commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI())
+        )
         let presenter = WriteCommentPresenter()
         let interactor = WriteCommentInteractor(
             targetID: self.targetID,
