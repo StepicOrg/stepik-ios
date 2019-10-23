@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaceholderTableViewCell: MenuBlockTableViewCell {
+final class PlaceholderTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var placeholderView: UIView!
     @IBOutlet weak var rightConstraint: NSLayoutConstraint!
 

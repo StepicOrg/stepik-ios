@@ -6,13 +6,13 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension StepOptions {
     @NSManaged var managedExecutionTimeLimit: NSNumber?
     @NSManaged var managedExecutionMemoryLimit: NSNumber?
-    
+
     @NSManaged var managedLimits: NSOrderedSet?
     @NSManaged var managedTemplates: NSOrderedSet?
     @NSManaged var managedSamples: NSOrderedSet?
@@ -42,7 +42,7 @@ extension StepOptions {
             self.managedExecutionMemoryLimit = newValue as NSNumber?
         }
     }
-    
+
     var limits: [CodeLimit] {
         get {
             return (managedLimits?.array as? [CodeLimit]) ?? []

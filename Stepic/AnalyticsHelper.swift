@@ -6,14 +6,14 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
+import Amplitude_iOS
+import Crashlytics
 import Fabric
 import FirebaseCore
+import UIKit
 import YandexMobileMetrica
-import Crashlytics
-import Amplitude_iOS
 
-class AnalyticsHelper {
+final class AnalyticsHelper {
     static var sharedHelper = AnalyticsHelper()
 
     func setupAnalytics() {

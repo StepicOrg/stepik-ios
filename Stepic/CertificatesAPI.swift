@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class CertificatesAPI: APIEndpoint {
+final class CertificatesAPI: APIEndpoint {
     override var name: String { return "certificates" }
 
     func retrieve(userId: Int, page: Int = 1) -> Promise<([Certificate], Meta)> {

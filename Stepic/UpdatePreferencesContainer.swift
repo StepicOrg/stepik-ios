@@ -11,8 +11,8 @@ import UIKit
 /*
  Contains user preferences for version update check
  */
-class UpdatePreferencesContainer: NSObject {
-    fileprivate override init() {}
+final class UpdatePreferencesContainer: NSObject {
+    override fileprivate init() {}
     static let sharedContainer = UpdatePreferencesContainer()
 
     fileprivate let defaults = UserDefaults.standard

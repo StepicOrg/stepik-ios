@@ -6,8 +6,8 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension SegmentedProgressView {
     struct Appearance {

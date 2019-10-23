@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
+final class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var loadLabel: StepikLabel!
 
@@ -23,7 +23,7 @@ class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
 
     override var isHighlighted: Bool {
         didSet {
-            let animationOffset : CGFloat = 2
+            let animationOffset: CGFloat = 2
             //Animate mode cell shrink & green on selection
             UIView.animate(withDuration: 0.1) {
                 self.contentView.frame = CGRect(x: self.isHighlighted ? self.contentView.frame.origin.x + animationOffset : self.contentView.frame.origin.x - animationOffset,

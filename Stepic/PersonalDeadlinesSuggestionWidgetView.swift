@@ -6,10 +6,9 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class PersonalDeadlinesSuggestionWidgetView: NibInitializableView {
-
+final class PersonalDeadlinesSuggestionWidgetView: NibInitializableView {
     @IBOutlet weak var textLabel: StepikLabel!
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!

@@ -6,11 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
-class Session {
-
+final class Session {
     static func delete() {
         let storage = HTTPCookieStorage.shared
         for cookie in storage.cookies ?? [] {
@@ -53,7 +52,6 @@ class Session {
 
                 if let csrftoken = cookieDict["\(StepicApplicationsInfo.cookiePrefix)csrftoken"],
                     let sessionId = cookieDict["\(StepicApplicationsInfo.cookiePrefix)sessionid"] {
-
                     Session.cookieHeaders = [
                         "Referer": "\(StepicApplicationsInfo.stepicURL)/",
                         "X-CSRFToken": csrftoken,

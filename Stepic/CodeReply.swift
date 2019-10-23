@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class CodeReply: Reply {
+final class CodeReply: Reply {
     var code: String
     var language: CodeLanguage?
     var languageName: String

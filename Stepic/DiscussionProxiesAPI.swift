@@ -6,16 +6,21 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class DiscussionProxiesAPI: APIEndpoint {
+final class DiscussionProxiesAPI: APIEndpoint {
     override var name: String { return "discussion-proxies" }
 
     func retrieve(id: String) -> Promise<DiscussionProxy> {
-        return retrieve.request(requestEndpoint: "discussion-proxies", paramName: "discussion-proxies", id: id, withManager: manager)
+        return self.retrieve.request(
+            requestEndpoint: "discussion-proxies",
+            paramName: "discussion-proxies",
+            id: id,
+            withManager: self.manager
+        )
     }
 }
 

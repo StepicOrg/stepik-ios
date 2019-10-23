@@ -6,16 +6,15 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
 final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
-
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -23,7 +22,7 @@ final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
     func initialize(_ json: JSON) {
         id = json["id"].intValue
         htmlText = json["html_text"].stringValue
-        time = Parser.sharedParser.dateFromTimedateJSON(json["time"])
+        time = Parser.shared.dateFromTimedateJSON(json["time"])
         isMuted = json["is_muted"].boolValue
         isFavorite = json["is_favorite"].boolValue
 

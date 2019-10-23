@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileHeaderInfoView: UIView, ProfileInfoView {
+final class ProfileHeaderInfoView: UIView, ProfileInfoView {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var avatarImageView: AvatarImageView!
     @IBOutlet weak var placeholderAvatarView: UIView!

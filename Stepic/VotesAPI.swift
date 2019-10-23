@@ -6,18 +6,17 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class VotesAPI: APIEndpoint {
+final class VotesAPI: APIEndpoint {
     override var name: String { return "votes" }
 
     func update(_ vote: Vote) -> Promise<Vote> {
         return update.request(requestEndpoint: "votes", paramName: "vote", updatingObject: vote, withManager: manager)
     }
-
 }
 
 extension VotesAPI {

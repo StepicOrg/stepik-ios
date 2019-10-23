@@ -6,12 +6,12 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import IQKeyboardManagerSwift
+import UIKit
 
 @available(*, deprecated, message: "Legacy assembly")
 final class WriteCommentLegacyAssembly: Assembly {
-    private let target: Int
+    private let target: Step.IdType
     private let parentId: Comment.IdType?
 
     private weak var delegate: WriteCommentViewControllerDelegate?
@@ -59,7 +59,7 @@ final class WriteCommentViewController: UIViewController {
     private let commentsAPI = CommentsAPI()
 
     private lazy var editBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(
+        UIBarButtonItem(
             image: Images.sendImage,
             style: .done,
             target: self,
@@ -75,7 +75,7 @@ final class WriteCommentViewController: UIViewController {
     }()
 
     private lazy var okBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(
+        UIBarButtonItem(
             image: Images.checkMarkImage,
             style: .done,
             target: self,

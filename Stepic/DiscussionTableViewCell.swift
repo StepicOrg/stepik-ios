@@ -6,9 +6,9 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SDWebImage
 import SnapKit
+import UIKit
 
 final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var userAvatarImageView: AvatarImageView!
@@ -28,7 +28,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var likesImageView: UIImageView!
 
     var comment: Comment?
-    
+
     var onProfileButtonClick: ((Int) -> Void)?
 
     private var hasSeparator: Bool = false {
@@ -81,7 +81,7 @@ final class DiscussionTableViewCell: UITableViewCell, Reusable, NibLoadable {
 
     override func updateConstraints() {
         super.updateConstraints()
-        self.setLeadingConstraints(self.comment?.parentId == nil ? 0 : -40)
+        self.setLeadingConstraints(self.comment?.parentID == nil ? 0 : -40)
     }
 
     func configure(viewData: DiscussionsViewData) {

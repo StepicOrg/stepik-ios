@@ -23,7 +23,6 @@ final class CodePlaygroundManager {
     //Detects the changes string between currentText and previousText
     //!!!All changes should be a substring inserted somewhere into the string
     func getChangesSubstring(currentText: String, previousText: String) -> Changes {
-
         var maxString: String = ""
         var minString: String = ""
         var isInsertion: Bool = true
@@ -79,7 +78,6 @@ final class CodePlaygroundManager {
 
     //Gets current token for text
     fileprivate func getCurrentToken(text: String, cursorPosition: Int) -> String {
-
         var offsetBefore = 0
         while (text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore) &&
             allowedCharacters.indexOf("\(text.characters[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])") != nil) {
@@ -98,7 +96,6 @@ final class CodePlaygroundManager {
     }
 
     fileprivate func checkNextLineInsertion(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
-
         if changes.isInsertion && changes.changes == "\n" {
             var text = currentText
 

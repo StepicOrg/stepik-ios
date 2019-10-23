@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
-class SearchQueriesPresenter {
+final class SearchQueriesPresenter {
     weak var view: SearchQueriesView?
     var queriesAPI: QueriesAPI
 
@@ -30,15 +30,13 @@ class SearchQueriesPresenter {
         self.view?.updateSuggestions(suggestions: localSuggestions)
         currentRequest?.cancel()
         self.view?.setState(state: .updating)
-        self.currentRequest = self.queriesAPI.retrieve(query: query.lowercased(), success: {
-            [weak self]
-            suggestions in
-            let uniqueSuggestions = NSOrderedSet(array: localSuggestions + suggestions.map({$0.lowercased()})).array as? [String] ?? (localSuggestions + suggestions)
+        self.currentRequest = self.queriesAPI.retrieve(query: query.lowercased(), success: { [weak self] suggestions in
+            let uniqueSuggestions = NSOrderedSet(
+                array: localSuggestions + suggestions.map({ $0.lowercased() })).array as? [String] ?? (localSuggestions + suggestions
+            )
             self?.view?.updateSuggestions(suggestions: uniqueSuggestions)
             self?.view?.setState(state: .ok)
-        }, error: {
-            [weak self]
-            error in
+        }, error: { [weak self] error in
             switch error {
             case .cancelled:
                 self?.view?.setState(state: .ok)

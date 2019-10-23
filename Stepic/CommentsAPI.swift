@@ -6,35 +6,40 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class CommentsAPI: APIEndpoint {
+final class CommentsAPI: APIEndpoint {
     override var name: String { return "comments" }
 
-    func retrieve(ids: [Int]) -> Promise<[Comment]> {
+    func retrieve(ids: [Comment.IdType]) -> Promise<[Comment]> {
         return Promise { seal in
-            retrieve.request(requestEndpoint: "comments", paramName: "comments", ids: ids, updating: Array<Comment>(), withManager: manager).done { comments, json in
-                var usersDict: [Int : UserInfo] = [Int: UserInfo]()
-
-                json["users"].arrayValue.forEach {
+            self.retrieve.request(
+                requestEndpoint: self.name,
+                paramName: self.name,
+                ids: ids,
+                updating: Array<Comment>(),
+                withManager: self.manager
+            ).done { comments, json in
+                var userInfoByID = [Int: UserInfo]()
+                json[Comment.JSONKey.users.rawValue].arrayValue.forEach {
                     let user = UserInfo(json: $0)
-                    usersDict[user.id] = user
+                    userInfoByID[user.id] = user
                 }
 
-                var votesDict: [String: Vote] = [String: Vote]()
-
-                json["votes"].arrayValue.forEach({
+                var voteByID = [Vote.IdType: Vote]()
+                json[Comment.JSONKey.votes.rawValue].arrayValue.forEach {
                     let vote = Vote(json: $0)
-                    votesDict[vote.id] = vote
-                })
+                    voteByID[vote.id] = vote
+                }
 
                 for comment in comments {
-                    comment.userInfo = usersDict[comment.userId]
-                    comment.vote = votesDict[comment.voteId]
+                    comment.userInfo = userInfoByID[comment.userID]
+                    comment.vote = voteByID[comment.voteID]
                 }
+
                 seal.fulfill(comments)
             }.catch { error in
                 seal.reject(error)

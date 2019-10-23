@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
+final class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
     static let reuseId = "notificationsSectionHeaderView"
 
     @IBOutlet weak var leftLabel: UILabel!
@@ -22,5 +22,4 @@ class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
         formatter.dateFormat = "EEEE"
         rightLabel.text = formatter.string(from: date)
     }
-
 }

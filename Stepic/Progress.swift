@@ -6,15 +6,14 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
 final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
-
     typealias IdType = String
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -31,7 +30,7 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
 
     var json: JSON {
         return [
-            "id" : id,
+            "id": id,
             "is_passed": isPassed,
             "score": score,
             "cost": cost,
@@ -60,6 +59,5 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
         } catch {
             print("\n\n\nCould nnot delete progresses! \n\n\n")
         }
-
     }
 }

@@ -6,15 +6,15 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Alamofire
 import SwiftyJSON
+import UIKit
 
 /*
  This class manages remote version change
  */
-class RemoteVersionManager: NSObject {
-    fileprivate override init() {}
+final class RemoteVersionManager: NSObject {
+    override fileprivate init() {}
     static let sharedManager = RemoteVersionManager()
 
     fileprivate func isVersion(_ v1: String, olderThan v2: String) -> Bool {
@@ -38,7 +38,7 @@ class RemoteVersionManager: NSObject {
             error: {
                 error in
                 errorHandler(error)
-        })
+            })
     }
 
     fileprivate func getLocalVersion() -> String {
@@ -58,7 +58,6 @@ class RemoteVersionManager: NSObject {
             } else {
                 json = response.result.value!
             }
-//            let response = response.response
 
             if let e = error as NSError? {
                 errorHandler(e)

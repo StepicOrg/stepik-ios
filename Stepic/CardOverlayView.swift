@@ -6,12 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Koloda
 import SnapKit
+import UIKit
 
-class CardOverlayView: OverlayView {
-
+final class CardOverlayView: OverlayView {
     private let overlayRightImageName = "overlay_simple"
     private let overlayLeftImageName = "overlay_hard"
 
@@ -48,8 +47,6 @@ class CardOverlayView: OverlayView {
             default:
                 overlayImageView.image = nil
             }
-
         }
     }
-
 }

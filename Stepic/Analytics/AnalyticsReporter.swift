@@ -6,12 +6,12 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import FirebaseAnalytics
-import YandexMobileMetrica
 import Amplitude_iOS
+import FirebaseAnalytics
+import Foundation
+import YandexMobileMetrica
 
-class AnalyticsReporter {
+final class AnalyticsReporter {
     static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
         let params = parameters as? [String: NSObject]
 

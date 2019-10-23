@@ -6,8 +6,8 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import CRToast
+import UIKit
 
 final class LegacyNotificationsPresenter {
     static func present(

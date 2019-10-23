@@ -11,7 +11,7 @@ import Foundation
 /*
  Contains all ExecutionQueues
  */
-class ExecutionQueues {
+final class ExecutionQueues {
     fileprivate init() {}
     static let sharedQueues = ExecutionQueues()
 
@@ -46,5 +46,4 @@ class ExecutionQueues {
             print("failed to recover connection available queue from persistent store")
         }
     }
-
 }

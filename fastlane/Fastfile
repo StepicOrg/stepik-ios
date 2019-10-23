@@ -1,5 +1,5 @@
 # This is the minimum version number required.
-fastlane_version "2.116"
+fastlane_version "2.134.0"
 
 default_platform :ios
 
@@ -7,6 +7,7 @@ platform :ios do
     # Config variables
 
     team_id = ENV["FASTLANE_TEAM_ID"]
+    keychain_password = ENV["KEYCHAIN_PASSWORD"]
 
     # Constants
 
@@ -170,7 +171,7 @@ platform :ios do
         clear_derived_data
         cocoapods(repo_update: true)
 
-        unlock_keychain
+        unlock_keychain(password: keychain_password)
 
         match_adhoc(scheme: scheme)
 
@@ -337,7 +338,7 @@ platform :ios do
         clear_derived_data
         cocoapods(repo_update: true)
 
-        unlock_keychain
+        unlock_keychain(password: keychain_password)
 
         match_release(scheme: scheme)
 

@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class UsersAPI: APIEndpoint {
+final class UsersAPI: APIEndpoint {
     override var name: String { return "users" }
 
     func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [User]) -> Promise<[User]> {

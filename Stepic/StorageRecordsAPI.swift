@@ -6,12 +6,12 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class StorageRecordsAPI: APIEndpoint {
+final class StorageRecordsAPI: APIEndpoint {
     override var name: String { return "storage-records" }
 
     func retrieve(kind: StorageKind?, user: Int) -> Promise<([StorageRecord], Meta)> {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationStatusButton: UIButton {
+final class NotificationStatusButton: UIButton {
     var unreadMark: UIView?
 
     enum Status {

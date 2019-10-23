@@ -6,11 +6,11 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import PromiseKit
-import Alamofire
 
-class NotificationStatusesAPI: APIEndpoint {
+final class NotificationStatusesAPI: APIEndpoint {
     override var name: String { return "notification-statuses" }
 
     func retrieve() -> Promise<NotificationsStatus> {

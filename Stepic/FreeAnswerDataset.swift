@@ -6,10 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class FreeAnswerDataset: Dataset {
+final class FreeAnswerDataset: Dataset {
     var isHTMLEnabled: Bool
     var isAttachmentsEnabled: Bool
 

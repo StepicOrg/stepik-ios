@@ -6,8 +6,8 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import EasyTipView
+import Foundation
 
 protocol Tooltip {
     init(text: String, shouldDismissAfterTime: Bool, color: TooltipColor)
@@ -54,8 +54,8 @@ enum TooltipColor {
     }
 }
 
-class EasyTipTooltip: Tooltip {
-    private var easyTip: EasyTipView = EasyTipView(text: "")
+final class EasyTipTooltip: Tooltip {
+    private var easyTip = EasyTipView(text: "")
     private var preferences: EasyTipView.Preferences
     let dismissesAfter: TimeInterval = 7.5
 

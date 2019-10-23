@@ -165,14 +165,10 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                         return
                     }
 
-                    let assembly = CodeEditorSettingsLegacyAssembly()
-                    let navigationController = WrappingNavigationViewController(
-                        wrappedViewController: assembly.makeModule(),
-                        title: NSLocalizedString("Settings", comment: ""),
-                        onDismiss: nil
-                    )
+                    let controller = CodeEditorSettingsLegacyAssembly().makeModule()
+                    controller.title = NSLocalizedString("Settings", comment: "")
 
-                    strongSelf.present(navigationController, animated: true)
+                    strongSelf.present(module: controller, embedInNavigation: true)
                 }
             )
         )

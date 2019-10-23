@@ -6,10 +6,10 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import DeviceKit
+import Foundation
 
-class DeviceInfo {
+final class DeviceInfo {
     static var current = DeviceInfo()
 
     private var currentDevice: DeviceKit.Device = DeviceKit.Device()

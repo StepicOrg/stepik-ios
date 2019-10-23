@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ExploreDefaultsContainer {
+final class ExploreDefaultsContainer {
     private let shouldDisplayContentLanguageWidgetKey = "shouldDisplayContentLanguageWidget"
     let defaults = UserDefaults.standard
 

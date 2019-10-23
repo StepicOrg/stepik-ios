@@ -11,8 +11,8 @@ import Foundation
 /*
  A PersistentRecoveryManager for StepicToken object
  */
-class PersistentUserTokenRecoveryManager: PersistentRecoveryManager {
-    override func recoverObjectFromDictionary(_ dictionary: [String : Any]) -> DictionarySerializable? {
+final class PersistentUserTokenRecoveryManager: PersistentRecoveryManager {
+    override func recoverObjectFromDictionary(_ dictionary: [String: Any]) -> DictionarySerializable? {
         return StepicToken(dictionary: dictionary)
     }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchQueriesPersistentManager {
+final class SearchQueriesPersistentManager {
     private let key = "searchqueries"
     private let defaults = UserDefaults.standard
 

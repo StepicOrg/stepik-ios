@@ -10,7 +10,6 @@ import Foundation
 
 @IBDesignable
 class StepikButton: UIButton {
-
     let bounceDuration: TimeInterval = 0.15
     let bounceScale: CGFloat = 0.95
 

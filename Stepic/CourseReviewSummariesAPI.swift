@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class CourseReviewSummariesAPI: APIEndpoint {
+final class CourseReviewSummariesAPI: APIEndpoint {
     override var name: String { return "course-review-summaries" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [CourseReviewSummary], refreshMode: RefreshMode, success: @escaping (([CourseReviewSummary]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {

@@ -6,16 +6,15 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class SubmissionsAPI: APIEndpoint {
+final class SubmissionsAPI: APIEndpoint {
     override var name: String { return "submissions" }
 
     @discardableResult fileprivate func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-
         var params: Parameters = [:]
 
         params[objectName] = objectId
@@ -52,7 +51,7 @@ class SubmissionsAPI: APIEndpoint {
 
             if response?.statusCode == 200 {
                 let meta = Meta(json: json["meta"])
-                let submissions = json["submissions"].arrayValue.map({return Submission(json: $0, stepName: stepName)})
+                let submissions = json["submissions"].arrayValue.map({ Submission(json: $0, stepName: stepName) })
                 success(submissions, meta)
                 return
             } else {
@@ -101,7 +100,6 @@ class SubmissionsAPI: APIEndpoint {
     }
 
     @discardableResult func retrieve(stepName: String, submissionId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-
         let params: Parameters = [:]
 
         return manager.request("\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
@@ -167,5 +165,4 @@ extension SubmissionsAPI {
         }
         return nil
     }
-
 }

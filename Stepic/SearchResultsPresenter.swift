@@ -13,7 +13,7 @@ protocol SearchResultsView: class {
     func set(controller: UIViewController, forState: CoursesSearchResultsState)
 }
 
-class SearchResultsPresenter: SearchResultsModuleInputProtocol {
+final class SearchResultsPresenter: SearchResultsModuleInputProtocol {
     weak var view: SearchResultsView?
 
     var updateQueryBlock: ((String) -> Void)?

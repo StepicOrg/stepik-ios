@@ -11,8 +11,7 @@ import Foundation
 /*
  ExecutableTask for deleting device on the server
  */
-class PostViewsExecutableTask: Executable, DictionarySerializable {
-
+final class PostViewsExecutableTask: Executable, DictionarySerializable {
     var id: String {
         get {
             return description
@@ -25,7 +24,7 @@ class PostViewsExecutableTask: Executable, DictionarySerializable {
         self.assignmentId = assignmentId
     }
 
-    convenience required init?(dictionary dict: [String: Any]) {
+    required convenience init?(dictionary dict: [String: Any]) {
         guard let taskDict = dict["task"] as? [String: Any] else {
             return nil
         }
@@ -42,7 +41,7 @@ class PostViewsExecutableTask: Executable, DictionarySerializable {
         self.init(stepId: step, assignmentId: assignment, userId: user)
     }
 
-    func serializeToDictionary() -> [String : Any] {
+    func serializeToDictionary() -> [String: Any] {
         let res: [String: Any] =
             [
                 "type": type.rawValue,
@@ -51,7 +50,7 @@ class PostViewsExecutableTask: Executable, DictionarySerializable {
                     "step": stepId,
                     "assignment": assignmentId
                 ]
-        ]
+            ]
         print(res)
         return res
     }

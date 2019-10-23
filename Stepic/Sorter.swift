@@ -14,7 +14,7 @@ struct Sorter {
         var res: [T] = []
 
         for id in ids {
-            let elements = array.filter({return $0.id == id})
+            let elements = array.filter({ $0.id == id })
 //            let elements = array.filter({return $0.hasEqualId(json: JSON(["id": id]))})//$0.id == id})
             if elements.count > 0 {
                 res += [elements[0]]
@@ -30,11 +30,10 @@ struct Sorter {
     }
 
     static func sort(_ assignments: [Assignment], steps: [Step]) -> [Assignment] {
-
         var res: [Assignment] = []
 
         for step in steps {
-            let elements = assignments.filter({return $0.stepId == step.id})
+            let elements = assignments.filter({ $0.stepId == step.id })
             if elements.count > 0 {
                 res += [elements[0]]
             } else {

@@ -9,8 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class UserActivity: JSONSerializable {
-
+final class UserActivity: JSONSerializable {
     var id: Int
     var pins: [Int]
 
@@ -21,12 +20,12 @@ class UserActivity: JSONSerializable {
 
     func update(json: JSON) {
         self.id = json["id"].intValue
-        self.pins = json["pins"].arrayValue.map({return $0.intValue})
+        self.pins = json["pins"].arrayValue.map({ $0.intValue })
     }
 
     required init(json: JSON) {
         self.id = json["id"].intValue
-        self.pins = json["pins"].arrayValue.map({return $0.intValue})
+        self.pins = json["pins"].arrayValue.map({ $0.intValue })
     }
 
     var currentStreak: Int {

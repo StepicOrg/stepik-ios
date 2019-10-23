@@ -6,14 +6,14 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Highlightr
+import UIKit
 
 protocol CodeEditorPreviewViewDelegate: class {
     func languageButtonDidClick()
 }
 
-class CodeEditorPreviewView: NibInitializableView {
+final class CodeEditorPreviewView: NibInitializableView {
     override var nibName: String {
         return "CodeEditorPreviewView"
     }

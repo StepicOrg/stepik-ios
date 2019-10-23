@@ -6,8 +6,8 @@
 //  Copyright © 2019 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 extension CourseInfoTabReviewsSkeletonView {
     struct Appearance {

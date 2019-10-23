@@ -21,8 +21,7 @@ enum VideoQualityChoiceAction: Int {
     }
 }
 
-class VideoQualityTableViewController: UITableViewController {
-
+final class VideoQualityTableViewController: UITableViewController {
     @IBOutlet var qualityCells: [UITableViewCell]!
 
     @IBOutlet weak var lowLabel: StepikLabel!
@@ -54,21 +53,10 @@ class VideoQualityTableViewController: UITableViewController {
         localize()
         tableView.tableFooterView = UIView()
         self.title = action.title
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         setCheckmarkTo(defaultQualities.index(of: (action == .downloading ? VideosInfo.downloadingVideoQuality : VideosInfo.watchingVideoQuality)) ?? 0)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func setQualutyTo(quality: String) {
@@ -81,11 +69,9 @@ class VideoQualityTableViewController: UITableViewController {
             return
         }
     }
-
 }
 
 extension VideoQualityTableViewController {
-
     fileprivate func setCheckmarkTo(_ selectedTag: Int) {
         for cell in qualityCells {
             if cell.tag == selectedTag {
@@ -97,7 +83,7 @@ extension VideoQualityTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let filtered = qualityCells.filter({return $0.tag == (indexPath as NSIndexPath).row})
+        let filtered = qualityCells.filter({ $0.tag == (indexPath as NSIndexPath).row })
         switch filtered.count {
         case 0:
             print("error! selected a video quality cell without a tag!")
@@ -108,6 +94,5 @@ extension VideoQualityTableViewController {
         default:
             print("something wrong happened during selection in videoQualityTableViewController")
         }
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }

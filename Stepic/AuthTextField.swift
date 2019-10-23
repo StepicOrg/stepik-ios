@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthTextField: UITextField {
+final class AuthTextField: UITextField {
     let eyeButtonSize = CGSize(width: 50, height: 50)
 
     enum `Type` {

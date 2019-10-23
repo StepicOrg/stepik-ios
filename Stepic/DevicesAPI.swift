@@ -6,13 +6,13 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Alamofire
-import SwiftyJSON
 import PromiseKit
+import SwiftyJSON
+import UIKit
 
 //TODO: Refactor this after DeviceError refactoring
-class DevicesAPI: APIEndpoint {
+final class DevicesAPI: APIEndpoint {
     override var name: String { return "devices" }
 
     func retrieve(registrationId: String) -> Promise<Device?> {

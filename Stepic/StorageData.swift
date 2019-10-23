@@ -11,7 +11,7 @@ import SwiftyJSON
 
 protocol StorageData {
     init(json: JSON)
-    var dictValue: [String : Any] { get }
+    var dictValue: [String: Any] { get }
 }
 
 struct SectionDeadline {
@@ -23,22 +23,22 @@ struct SectionDeadline {
     }
 
     init?(json: JSON) {
-        guard let section = json["section"].int, let deadlineDate = Parser.sharedParser.dateFromTimedateJSON(json["deadline"]) else {
+        guard let section = json["section"].int, let deadlineDate = Parser.shared.dateFromTimedateJSON(json["deadline"]) else {
             return nil
         }
         self.section = section
         self.deadlineDate = deadlineDate
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return [
             "section": section,
-            "deadline": Parser.sharedParser.timedateStringFromDate(date: deadlineDate)
+            "deadline": Parser.shared.timedateStringFromDate(date: deadlineDate)
         ]
     }
 }
 
-class DeadlineStorageData: StorageData {
+final class DeadlineStorageData: StorageData {
     var courseID: Int
     var deadlines: [SectionDeadline]
 
@@ -57,7 +57,7 @@ class DeadlineStorageData: StorageData {
         }
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return [
             "course": courseID,
             "deadlines": deadlines.map { $0.dictValue }

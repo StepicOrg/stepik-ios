@@ -6,10 +6,10 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import CoreData
+import UIKit
 
-class CoreDataHelper: NSObject {
+final class CoreDataHelper: NSObject {
     static var instance = CoreDataHelper()
 
     let coordinator: NSPersistentStoreCoordinator
@@ -17,10 +17,10 @@ class CoreDataHelper: NSObject {
     let context: NSManagedObjectContext
     var storeURL: URL
 
-    fileprivate override init() {
+    override fileprivate init() {
         let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")!
         model = NSManagedObjectModel(contentsOf: modelURL)!
-        
+
         let fileManager = FileManager.default
         let docsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
         storeURL = docsURL.appendingPathComponent("base.sqlite")

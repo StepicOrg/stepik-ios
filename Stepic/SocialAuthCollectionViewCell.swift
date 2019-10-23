@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SocialAuthCollectionViewCell: UICollectionViewCell {
+final class SocialAuthCollectionViewCell: UICollectionViewCell {
     static let reuseId = "socialAuthCell"
 
     @IBOutlet weak var imageView: UIImageView!

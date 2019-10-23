@@ -85,7 +85,7 @@ final class CertificatesPresenter {
     private func loadCoursesForCertificates(certificates: [Certificate], completion: @escaping () -> Void) {
         func matchCoursesToCertificates(courses: [Course]) {
             for certificate in certificates {
-                if let filtered = courses.filter({$0.id == certificate.courseId}).first {
+                if let filtered = courses.filter({ $0.id == certificate.courseId }).first {
                     certificate.course = filtered
                 }
             }
@@ -139,7 +139,6 @@ final class CertificatesPresenter {
 
         self.certificatesAPI.retrieve(userId: self.userID, page: page + 1, success: {
             [weak self] meta, newCertificates in
-
             self?.page += 1
             self?.certificates += newCertificates
 

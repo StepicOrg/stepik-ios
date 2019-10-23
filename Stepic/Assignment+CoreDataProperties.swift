@@ -9,11 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension Assignment {
-
     @NSManaged var managedId: NSNumber?
     @NSManaged var managedStepId: NSNumber?
     @NSManaged var managedUnitId: NSNumber?
@@ -52,5 +51,4 @@ extension Assignment {
             return managedUnitId?.intValue ?? -1
         }
     }
-
 }

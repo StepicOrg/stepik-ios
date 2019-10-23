@@ -9,7 +9,6 @@
 import Foundation
 
 struct AutocompleteWords {
-
     private static let suggestionsFilename = "autocomplete_suggestions"
 
     static func autocompleteFor(_ text: String, language: CodeLanguage) -> [String] {

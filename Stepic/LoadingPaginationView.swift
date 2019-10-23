@@ -6,10 +6,9 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class LoadingPaginationView: NibInitializableView {
-
+final class LoadingPaginationView: NibInitializableView {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var refreshButton: UIButton!
 

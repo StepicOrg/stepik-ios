@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AdaptiveRatingHelper {
+final class AdaptiveRatingHelper {
     static func getLevel(for rating: Int) -> Int {
         return rating < 5 ? 1 : 2 + Int(log(Double(rating) / 5.0) / log(2.0))
     }

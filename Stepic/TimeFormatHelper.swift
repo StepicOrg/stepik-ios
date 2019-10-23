@@ -8,8 +8,8 @@
 
 import UIKit
 
-class TimeFormatHelper: NSObject {
-    fileprivate override init() {
+final class TimeFormatHelper: NSObject {
+    override fileprivate init() {
         super.init()
     }
 

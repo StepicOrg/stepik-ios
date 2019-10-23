@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationDataExtractor {
+final class NotificationDataExtractor {
     private var text: String
     private var type: NotificationType
 

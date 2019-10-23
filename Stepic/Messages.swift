@@ -6,12 +6,13 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import TSMessages
+import UIKit
 
-class Messages: NSObject {
+final class Messages: NSObject {
     static let sharedManager = Messages()
-    fileprivate override init() {
+
+    override fileprivate init() {
         super.init()
         TSMessage.setDelegate(self)
         TSMessage.addCustomDesignFromFile(withName: "CustomMessagesDesign.json")
@@ -52,7 +53,7 @@ class Messages: NSObject {
     }
 }
 
-extension Messages : TSMessageViewProtocol {
+extension Messages: TSMessageViewProtocol {
     func customize(_ messageView: TSMessageView!) {
         messageView.alpha = 0.85
     }

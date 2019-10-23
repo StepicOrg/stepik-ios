@@ -6,8 +6,8 @@
 //  Copyright © 2018 Ostrenkiy. All rights reserved.
 //
 
-import UIKit
 import Presentr
+import UIKit
 
 final class StoriesViewController: UIViewController, ControllerWithStepikPlaceholder {
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -66,9 +66,9 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     let storyPresentr: Presentr = {
-        let sourcePortraitHeight: Float = Float(max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.8)
+        let sourcePortraitHeight = Float(max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.8)
         let sourcePortraitWidth: Float = sourcePortraitHeight * 9 / 16
-        let sourceLandscapeHeight: Float = Float(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.8)
+        let sourceLandscapeHeight = Float(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.8)
         let sourceLandscapeWidth: Float = sourceLandscapeHeight * 9 / 16
 
         let height = ModalSize.customOrientation(sizePortrait: sourcePortraitHeight, sizeLandscape: sourceLandscapeHeight)
@@ -208,7 +208,9 @@ extension StoriesViewController: UIViewControllerTransitioningDelegate {
         )
     }
 
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForDismissal(
+        using animator: UIViewControllerAnimatedTransitioning
+    ) -> UIViewControllerInteractiveTransitioning? {
         guard let animator = animator as? ShrinkDismissAnimationController,
               let interactionController = animator.interactionController,
               interactionController.interactionInProgress else {

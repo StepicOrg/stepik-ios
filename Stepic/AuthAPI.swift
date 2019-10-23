@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import Alamofire
-import SwiftyJSON
 import PromiseKit
+import SwiftyJSON
+import UIKit
 
 enum SignInError: Error {
     case manyAttempts, noAppWithCredentials, invalidEmailAndPassword, badConnection
@@ -36,7 +36,7 @@ enum TokenRefreshError: Error {
     case noAccess, noAppWithCredentials, other
 }
 
-class AuthAPI {
+final class AuthAPI {
     let manager: Alamofire.SessionManager
 
     init() {

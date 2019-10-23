@@ -22,7 +22,7 @@ final class CodeEditorSettingsPresenter {
 
     var themeBlock: TransitionMenuBlock?
     var fontSizeBlock: TransitionMenuBlock?
-    var menu: Menu = Menu(blocks: [])
+    var menu = Menu(blocks: [])
 
     init(view: CodeEditorSettingsView) {
         self.view = view

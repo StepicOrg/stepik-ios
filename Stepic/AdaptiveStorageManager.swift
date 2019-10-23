@@ -15,7 +15,7 @@ protocol AdaptiveStorageManagerProtocol: class {
 }
 
 @available(*, deprecated, message: "Legacy class")
-class AdaptiveStorageManager: AdaptiveStorageManagerProtocol {
+final class AdaptiveStorageManager: AdaptiveStorageManagerProtocol {
     static let shared = AdaptiveStorageManager()
 
     let defaults = UserDefaults.standard

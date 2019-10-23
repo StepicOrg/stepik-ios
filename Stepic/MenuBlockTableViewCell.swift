@@ -6,13 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class MenuBlockTableViewCell: UITableViewCell {
-
-    var hidingView: UIView = UIView()
-    var separator: UIView = UIView()
+    var hidingView = UIView()
+    var separator = UIView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,5 +59,4 @@ class MenuBlockTableViewCell: UITableViewCell {
             self?.hidingView.alpha = 1
         })
     }
-
 }

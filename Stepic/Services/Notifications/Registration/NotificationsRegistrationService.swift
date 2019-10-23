@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import FirebaseMessaging
 import FirebaseCore
 import FirebaseInstanceID
+import FirebaseMessaging
+import Foundation
 import PromiseKit
 import UserNotifications
 
@@ -331,7 +331,6 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
                     default:
                         if let userId = AuthInfo.shared.userId,
                            let token = AuthInfo.shared.token {
-
                             let deleteTask = DeleteDeviceExecutableTask(userId: userId, deviceId: deviceId)
                             ExecutionQueues.sharedQueues.connectionAvailableExecutionQueue.push(deleteTask)
 

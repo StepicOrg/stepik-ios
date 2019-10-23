@@ -8,8 +8,7 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
-
+final class OnboardingViewController: UIViewController {
     @IBOutlet weak var animatedView: OnboardingAnimatedView!
     @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var secondStackView: UIStackView!
@@ -32,10 +31,10 @@ class OnboardingViewController: UIViewController {
         return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
     }
 
-    private var backgroundGradient: CAGradientLayer = CAGradientLayer(colors: [UIColor(hex: 0x3a3947), UIColor(hex: 0x5d6780)], rotationAngle: -50.0)
+    private var backgroundGradient = CAGradientLayer(colors: [UIColor(hex: 0x3a3947), UIColor(hex: 0x5d6780)], rotationAngle: -50.0)
 
-    private var titles = (1...4).map { NSLocalizedString("OnboardingTitle\($0)", comment: "")}
-    private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "")}
+    private var titles = (1...4).map { NSLocalizedString("OnboardingTitle\($0)", comment: "") }
+    private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "") }
 
     fileprivate var shouldUseLandscapeLayout: Bool {
         return DeviceInfo.current.orientation.interface.isLandscape

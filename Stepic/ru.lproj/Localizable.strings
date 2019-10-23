@@ -121,8 +121,7 @@ Comment = "Комментарий";
 ShowMoreReplies = "Больше ответов";
 ShowMoreDiscussions = "Больше комментариев";
 RefreshingDiscussions = "Обновляем комментарии...";
-NoDiscussionsTitle = "Обсуждений нет.";
-NoDiscussionsDescription = "Начните первое!";
+NoDiscussionsTitle = "Обсуждений нет. Начните первое!";
 Like = "Нравится";
 Unlike = "Больше не нравится";
 Abuse = "Пожаловаться";
@@ -658,6 +657,12 @@ WriteCourseReviewActionDelete = "Удалить отзыв";
 WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";
 WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";
+
+/* Discussions */
+DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
+DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
+DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
+DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";

@@ -8,8 +8,7 @@
 
 import Foundation
 
-class AdaptiveRatingManager {
-
+final class AdaptiveRatingManager {
     let courseId: Int
 
     private lazy var ratingKey: String = {

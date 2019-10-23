@@ -6,10 +6,10 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-class PinsMapBlockContentView: UIView, PinsMapContentView {
+final class PinsMapBlockContentView: UIView, PinsMapContentView {
     lazy var mapView: PinsMapView = {
         let mapView = PinsMapView() // fromNib initialization
 

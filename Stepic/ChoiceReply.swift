@@ -6,11 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class ChoiceReply: NSObject, Reply {
-
+final class ChoiceReply: NSObject, Reply {
     var choices: [Bool]
 
     init(choices: [Bool]) {
@@ -18,11 +17,11 @@ class ChoiceReply: NSObject, Reply {
     }
 
     required init(json: JSON) {
-        choices = json["choices"].arrayValue.map({return $0.boolValue})
+        choices = json["choices"].arrayValue.map({ $0.boolValue })
         super.init()
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return ["choices": choices]
     }
 }

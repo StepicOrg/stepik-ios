@@ -8,8 +8,7 @@
 
 import UIKit
 
-class DiscussionCountView: NibInitializableView {
-
+final class DiscussionCountView: NibInitializableView {
     @IBOutlet weak var showCommentsLabel: StepikLabel!
     var showCommentsHandler: (() -> Void)?
 

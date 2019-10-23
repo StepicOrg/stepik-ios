@@ -13,12 +13,12 @@ extension Foundation.Notification.Name {
     static let didLogin = Foundation.Notification.Name("didLogin")
 }
 
-class AuthInfo: NSObject {
+final class AuthInfo: NSObject {
     static var shared = AuthInfo()
 
     fileprivate let defaults = UserDefaults.standard
 
-    fileprivate override init() {
+    override fileprivate init() {
         super.init()
 
         print("initializing AuthInfo with userId \(String(describing: userId))")
@@ -52,9 +52,8 @@ class AuthInfo: NSObject {
                         return
                     }
 
-                    UIThread.performUI {
+                    DispatchQueue.main.async {
                         //Delete enrolled information
-                        TabsInfo.myCoursesIds = []
                         let c = Course.getAllCourses(enrolled: true)
                         for course in c {
                             course.enrolled = false

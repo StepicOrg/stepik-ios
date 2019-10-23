@@ -6,10 +6,10 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import CoreData
-import SwiftyJSON
 import Alamofire
+import CoreData
+import Foundation
+import SwiftyJSON
 import SwiftyJSON
 
 enum VideoState {
@@ -17,11 +17,10 @@ enum VideoState {
 }
 
 @objc
-class Video: NSManagedObject, JSONSerializable {
-
+final class Video: NSManagedObject, JSONSerializable {
     typealias IdType = Int
 
-    convenience required init(json: JSON) {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
     }
@@ -78,7 +77,6 @@ class Video: NSManagedObject, JSONSerializable {
         }
 
         if let url = urlToReturn {
-//            print("chose \(url.quality)")
             return URL(string: url.url)!
         } else {
             return URL(string: urls[0].url)!

@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 struct StepicApplicationsInfo {
-
     // Dictionary with auth (encrypted)
     private static let stepikAuthDic = ApplicationInfo(plist: "Auth")
     // Dictionary with configutation

@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class AttemptsAPI: APIEndpoint {
+final class AttemptsAPI: APIEndpoint {
     override var name: String { return "attempts" }
 
     func create(stepName: String, stepId: Int) -> Promise<Attempt> {
@@ -46,7 +46,6 @@ class AttemptsAPI: APIEndpoint {
     }
 
     @discardableResult func retrieve(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Attempt], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-
         let headers = AuthInfo.shared.initialHTTPHeaders
 
         var params: Parameters = [:]
@@ -80,14 +79,13 @@ class AttemptsAPI: APIEndpoint {
 
             if response?.statusCode == 200 {
                 let meta = Meta(json: json["meta"])
-                let attempts = json["attempts"].arrayValue.map({return Attempt(json: $0, stepName: stepName)})
+                let attempts = json["attempts"].arrayValue.map({ Attempt(json: $0, stepName: stepName) })
                 success(attempts, meta)
                 return
             } else {
                 errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
-
         })
     }
 }

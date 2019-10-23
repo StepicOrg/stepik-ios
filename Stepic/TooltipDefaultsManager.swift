@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TooltipDefaultsManager {
+final class TooltipDefaultsManager {
     static let shared = TooltipDefaultsManager()
     private init() {}
 

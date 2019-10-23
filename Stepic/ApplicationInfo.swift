@@ -8,8 +8,7 @@
 
 import Foundation
 
-class ApplicationInfo {
-
+final class ApplicationInfo {
     struct Path {
         struct URL {
             static let appId = "url.appId"

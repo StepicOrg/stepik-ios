@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
-class MatchingReply: Reply {
+final class MatchingReply: Reply {
     var ordering: [Int]
 
     init(ordering: [Int]) {
@@ -17,10 +17,10 @@ class MatchingReply: Reply {
     }
 
     required init(json: JSON) {
-        ordering = json["ordering"].arrayValue.map({return $0.intValue})
+        ordering = json["ordering"].arrayValue.map({ $0.intValue })
     }
 
-    var dictValue: [String : Any] {
+    var dictValue: [String: Any] {
         return ["ordering": ordering]
     }
 }

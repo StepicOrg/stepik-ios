@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Legacy assembly")
 final class ProfileAssembly: Assembly {
     private let userID: User.IdType
 

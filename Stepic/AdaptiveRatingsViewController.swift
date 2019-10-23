@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AdaptiveRatingsViewController: UIViewController {
+final class AdaptiveRatingsViewController: UIViewController {
     enum State {
         case empty(message: String)
         case error(message: String)
@@ -137,7 +137,7 @@ extension AdaptiveRatingsViewController: AdaptiveRatingsView {
             NSLocalizedString("AdaptiveRatingFooterText1", comment: ""),
             NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
             NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
-            ])
+        ])
         state = .normal(message: String(format: pluralizedString, "\(data.allCount)"))
     }
 

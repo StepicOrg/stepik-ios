@@ -6,8 +6,8 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
 protocol Dataset {
     init(json: JSON)

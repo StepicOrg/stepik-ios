@@ -6,10 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
+final class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var subtitleLabel: StepikLabel!
 
@@ -24,12 +24,6 @@ class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
         subtitleLabel.snp.makeConstraints { make -> Void in
             subtitleBottomSpaceConstraint = make.bottom.equalTo(self.contentView).offset(-25).constraint
         }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     func initWithBlock(block: TransitionMenuBlock) {
@@ -47,5 +41,4 @@ class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
             subtitleLabel.isHidden = true
         }
     }
-
 }

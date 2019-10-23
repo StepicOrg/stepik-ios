@@ -15,5 +15,6 @@ protocol SocialSDKProvider {
 }
 
 enum SocialSDKError: Error {
-    case connectionError, accessDenied
+    case connectionError
+    case accessDenied
 }

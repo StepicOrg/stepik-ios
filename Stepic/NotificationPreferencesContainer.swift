@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationPreferencesContainer {
+final class NotificationPreferencesContainer {
     fileprivate let defaults = UserDefaults.standard
 
     fileprivate let allowStreaksNotificationKey = "allowStreaksNotification"

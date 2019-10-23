@@ -9,8 +9,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Use ContentProcessor instead")
-class HTMLProcessor {
-
+final class HTMLProcessor {
     private var htmlString: String
     private var headInjections = ""
     private var bodyInjectionsHead = ""

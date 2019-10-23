@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LaunchDefaultsContainer {
+final class LaunchDefaultsContainer {
     fileprivate let defaults = UserDefaults.standard
 
     fileprivate let didLaunchKey = "didLaunchKey"

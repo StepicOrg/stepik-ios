@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
 import SwiftyJSON
+import UIKit
 
 struct Meta {
     var hasNext: Bool

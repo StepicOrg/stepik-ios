@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-extension String : Dataset {
+extension String: Dataset {
     public init(json: JSON) {
         self = json.stringValue
     }

@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import PromiseKit
-import Alamofire
 import SwiftyJSON
 
-class AssignmentsAPI: APIEndpoint {
+final class AssignmentsAPI: APIEndpoint {
     override var name: String { return "assignments" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Assignment], refreshMode: RefreshMode, success: @escaping (([Assignment]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {

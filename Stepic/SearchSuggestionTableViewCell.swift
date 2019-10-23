@@ -8,8 +8,7 @@
 
 import UIKit
 
-class SearchSuggestionTableViewCell: UITableViewCell {
-
+final class SearchSuggestionTableViewCell: UITableViewCell {
     @IBOutlet weak var suggestionLabel: StepikLabel!
 
     func set(suggestion: String, query: String) {
@@ -22,16 +21,5 @@ class SearchSuggestionTableViewCell: UITableViewCell {
             attributedSuggestion.addAttributes([NSAttributedString.Key.font: bold, NSAttributedString.Key.foregroundColor: UIColor.mainText], range: NSRange(location: queryLocation, length: query.count))
         }
         suggestionLabel.attributedText = attributedSuggestion
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 }

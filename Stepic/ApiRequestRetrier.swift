@@ -5,12 +5,11 @@
 //  Created by Ostrenkiy on 18.03.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
-import Foundation
 import Alamofire
+import Foundation
 import PromiseKit
 
-class ApiRequestRetrier: RequestRetrier, RequestAdapter {
-
+final class ApiRequestRetrier: RequestRetrier, RequestAdapter {
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
 

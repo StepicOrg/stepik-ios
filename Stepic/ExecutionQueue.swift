@@ -11,7 +11,7 @@ import Foundation
 /*
  Contains and runs a queue of Executable objects 
  */
-class ExecutionQueue: DictionarySerializable {
+final class ExecutionQueue: DictionarySerializable {
     fileprivate var queue: [Executable] = []
 
     var count: Int {
@@ -65,12 +65,11 @@ class ExecutionQueue: DictionarySerializable {
         executeTasks {
             completion(notCompletedExecutionQueue)
         }
-
     }
 
     init() {}
 
-    required init?(dictionary: [String : Any]) {
+    required init?(dictionary: [String: Any]) {
         let taskRecoveryManager = PersistentTaskRecoveryManager(baseName: "Tasks")
         if let ids = dictionary["task_ids"] as? [String] {
             for id in ids {
@@ -81,7 +80,7 @@ class ExecutionQueue: DictionarySerializable {
         }
     }
 
-    func serializeToDictionary() -> [String : Any] {
+    func serializeToDictionary() -> [String: Any] {
         var ids = [String]()
         for executable in queue {
             ids += [executable.id]
@@ -92,5 +91,4 @@ class ExecutionQueue: DictionarySerializable {
 
         return res
     }
-
 }

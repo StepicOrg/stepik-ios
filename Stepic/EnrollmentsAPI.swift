@@ -6,12 +6,12 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
-import SwiftyJSON
 import Alamofire
+import Foundation
 import PromiseKit
+import SwiftyJSON
 
-class EnrollmentsAPI: APIEndpoint {
+final class EnrollmentsAPI: APIEndpoint {
     override var name: String { return "enrollments" }
 
     func delete(courseId: Int) -> Promise<Void> {
@@ -33,7 +33,7 @@ extension EnrollmentsAPI {
 
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult func joinCourse(_ course: Course, delete: Bool = false, success : @escaping () -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        let headers: [String : String] = AuthInfo.shared.initialHTTPHeaders
+        let headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
         let params: Parameters = [
             "enrollment": [
                 "course": "\(course.id)"
@@ -45,7 +45,7 @@ extension EnrollmentsAPI {
                 response in
 
                 var error = response.result.error
-                var json : JSON = [:]
+                var json: JSON = [:]
                 if response.result.value == nil {
                     if error == nil {
                         error = NSError()

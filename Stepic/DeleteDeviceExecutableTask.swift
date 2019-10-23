@@ -6,15 +6,14 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import SwiftyJSON
 
 /*
  ExecutableTask for deleting device on the server 
  */
-class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
-
+final class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
     var id: String {
         get {
             return description
@@ -26,7 +25,7 @@ class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
         self.deviceId = deviceId
     }
 
-    convenience required init?(dictionary dict: [String: Any]) {
+    required convenience init?(dictionary dict: [String: Any]) {
         let taskDict = dict["task"] as? [String: Any]
         let typeString = dict["type"] as? String
         let userId = taskDict?["user"] as? Int
@@ -43,7 +42,7 @@ class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
         }
     }
 
-    func serializeToDictionary() -> [String : Any] {
+    func serializeToDictionary() -> [String: Any] {
         let res: [String: Any] =
             [
                 "type": type.rawValue,

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class NotificationsPagerViewController: PagerController, ControllerWithStepikPlaceholder {
-    var placeholderContainer: StepikPlaceholderControllerContainer = StepikPlaceholderControllerContainer()
+final class NotificationsPagerViewController: PagerController, ControllerWithStepikPlaceholder {
+    var placeholderContainer = StepikPlaceholderControllerContainer()
 
     var sections: [NotificationsSection] = [
         .all, .learning, .comments, .reviews, .teaching, .other

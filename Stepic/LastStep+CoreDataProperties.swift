@@ -6,11 +6,10 @@
 //  Copyright © 2017 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 extension LastStep {
-
     @NSManaged var managedId: String?
     @NSManaged var managedStepId: NSNumber?
     @NSManaged var managedUnitId: NSNumber?
@@ -54,5 +53,4 @@ extension LastStep {
             return managedUnitId?.intValue
         }
     }
-
 }

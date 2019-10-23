@@ -5,8 +5,9 @@
 //  Created by Vladislav Kiryukhin on 13.06.2018.
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
-import PromiseKit
+
 import Foundation
+import PromiseKit
 
 protocol AchievementsListView: class {
     func set(achievements: [AchievementViewData])
@@ -14,7 +15,7 @@ protocol AchievementsListView: class {
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)
 }
 
-class AchievementsListPresenter {
+final class AchievementsListPresenter {
     weak var view: AchievementsListView?
 
     private var achievementsAPI: AchievementsAPI

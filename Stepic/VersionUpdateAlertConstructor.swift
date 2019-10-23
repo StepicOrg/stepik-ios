@@ -11,8 +11,8 @@ import UIKit
 /*
  Constructs alert controller 
  */
-class VersionUpdateAlertConstructor: NSObject {
-    fileprivate override init() {}
+final class VersionUpdateAlertConstructor: NSObject {
+    override fileprivate init() {}
     static let sharedConstructor = VersionUpdateAlertConstructor()
 
     func getUpdateAlertController(updateUrl url: URL, addNeverAskAction: Bool) -> UIAlertController {
@@ -48,5 +48,4 @@ class VersionUpdateAlertConstructor: NSObject {
 
         return alert
     }
-
 }

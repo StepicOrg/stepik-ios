@@ -12,11 +12,13 @@ import Foundation
  Protocol for executable objects
  */
 protocol Executable {
-    func execute(success: @escaping (() -> Void), failure: @escaping ((ExecutionError) -> Void))
     var type: ExecutableTaskType { get }
-    var id: String {get}
+    var id: String { get }
+
+    func execute(success: @escaping (() -> Void), failure: @escaping ((ExecutionError) -> Void))
 }
 
 enum ExecutionError: Error {
-    case retry, remove
+    case retry
+    case remove
 }

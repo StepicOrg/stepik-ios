@@ -8,7 +8,7 @@
 
 import Foundation
 
-class QuizPresenter {
+final class QuizPresenter {
     weak var delegate: QuizControllerDelegate?
     weak var dataSource: QuizControllerDataSource?
     weak var view: QuizView?
@@ -109,7 +109,6 @@ class QuizPresenter {
                 }
 
                 if !step.hasReview {
-                    NotificationCenter.default.post(name: .stepDone, object: nil, userInfo: ["id": step.id])
                     DispatchQueue.main.async {
                         [weak self] in
                         self?.step.progress?.isPassed = true
@@ -274,7 +273,6 @@ class QuizPresenter {
                 }
             }
         })
-
     }
 
     private func checkSubmissionRestrictions() {

@@ -6,14 +6,12 @@
 //  Copyright © 2015 Alex Karpov. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 import SwiftyJSON
 
-class Block: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-    convenience required init(json: JSON) {
+final class Block: NSManagedObject {
+    required convenience init(json: JSON) {
         self.init()
         initialize(json)
         video = Video(json: json["video"])

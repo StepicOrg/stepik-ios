@@ -6,11 +6,11 @@
 //  Copyright © 2018 Alex Karpov. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import PromiseKit
-import Alamofire
 
-class AchievementProgressesAPI: APIEndpoint {
+final class AchievementProgressesAPI: APIEndpoint {
     override var name: String { return "achievement-progresses" }
 
     func retrieve(user: Int, kind: String? = nil, sortByObtainDateDesc: Bool = false, page: Int = 1) -> Promise<([AchievementProgress], Meta)> {

@@ -11,6 +11,6 @@ import Foundation
 /*
  Class, which contains different alert managers
  */
-class Alerts {
+final class Alerts {
     static let rate = RateAppAlertManager()
 }

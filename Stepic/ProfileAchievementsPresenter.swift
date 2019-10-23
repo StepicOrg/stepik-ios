@@ -19,7 +19,7 @@ protocol ProfileAchievementsPresenterDelegate: class {
     func achievementInfoShouldPresent(viewData: AchievementViewData)
 }
 
-class ProfileAchievementsPresenter {
+final class ProfileAchievementsPresenter {
     weak var view: ProfileAchievementsView?
     weak var delegate: ProfileAchievementsPresenterDelegate?
 
@@ -30,15 +30,21 @@ class ProfileAchievementsPresenter {
     private var achievementProgressesAPI: AchievementProgressesAPI
     private var achievementsRetriever: AchievementsRetriever
 
-    init(userId: Int, view: ProfileAchievementsView, achievementsAPI: AchievementsAPI, achievementProgressesAPI: AchievementProgressesAPI) {
+    init(
+        userId: Int,
+        view: ProfileAchievementsView,
+        achievementsAPI: AchievementsAPI,
+        achievementProgressesAPI: AchievementProgressesAPI
+    ) {
         self.view = view
         self.userId = userId
         self.achievementsAPI = achievementsAPI
         self.achievementProgressesAPI = achievementProgressesAPI
-
-        self.achievementsRetriever = AchievementsRetriever(userId: userId,
-                                                           achievementsAPI: achievementsAPI,
-                                                           achievementProgressesAPI: achievementProgressesAPI)
+        self.achievementsRetriever = AchievementsRetriever(
+            userId: userId,
+            achievementsAPI: achievementsAPI,
+            achievementProgressesAPI: achievementProgressesAPI
+        )
     }
 
     func loadLastAchievements() {
