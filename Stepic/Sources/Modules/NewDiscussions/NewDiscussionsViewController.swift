@@ -205,11 +205,15 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
 
     func newDiscussionsView(_ view: NewDiscussionsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath) {
         if let commentViewModel = self.tableDataSource.getCommentViewModel(at: indexPath) {
-            self.presentCommentActionSheet(commentViewModel)
+            self.presentCommentActionSheet(commentViewModel, sourceView: cell, sourceRect: cell.bounds)
         }
     }
 
-    private func presentCommentActionSheet(_ viewModel: NewDiscussionsCommentViewModel) {
+    private func presentCommentActionSheet(
+        _ viewModel: NewDiscussionsCommentViewModel,
+        sourceView: UIView,
+        sourceRect: CGRect
+    ) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(
@@ -221,6 +225,12 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
             )
         )
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = sourceView
+            popoverPresentationController.sourceRect = sourceRect
+        }
+
         self.present(alert, animated: true)
     }
 }
