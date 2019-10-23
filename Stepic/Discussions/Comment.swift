@@ -31,6 +31,7 @@ final class Comment: JSONSerializable {
     var voteID: String = ""
     var epicCount: Int = 0
     var abuseCount: Int = 0
+    var actions: [Action] = []
 
     var userInfo: UserInfo!
     var vote: Vote!
@@ -78,6 +79,25 @@ final class Comment: JSONSerializable {
         self.voteID = json[JSONKey.vote.rawValue].stringValue
         self.epicCount = json[JSONKey.epicCount.rawValue].intValue
         self.abuseCount = json[JSONKey.abuseCount.rawValue].intValue
+
+        self.actions.removeAll(keepingCapacity: true)
+        for (actionKey, value) in json[JSONKey.actions.rawValue].dictionaryValue {
+            guard let action = Action(rawValue: actionKey) else {
+                continue
+            }
+
+            if value.boolValue {
+                self.actions.append(action)
+            }
+        }
+    }
+
+    enum Action: String {
+        case delete
+        case pin
+        case report
+        case vote
+        case edit
     }
 
     enum JSONKey: String {
@@ -96,6 +116,7 @@ final class Comment: JSONSerializable {
         case vote
         case epicCount = "epic_count"
         case abuseCount = "abuse_count"
+        case actions
         case users
         case votes
     }
