@@ -3,37 +3,26 @@ import Foundation
 enum NewDiscussions {
     // MARK: Common types
 
+    /// Presenter -> ViewController
     struct DiscussionsResult {
         let discussions: [NewDiscussionsDiscussionViewModel]
         let discussionsLeftToLoad: Int
     }
 
-    struct DiscussionsData {
+    /// Interactor -> presenter
+    struct DiscussionsResponseData {
         let discussionProxy: DiscussionProxy
         let discussions: [Comment]
         let discussionsIDsFetchingMore: Set<Comment.IdType>
         let replies: [Comment.IdType: [Comment]]
-        let sortType: SortType
+        let currentSortType: SortType
     }
 
-    enum SortType {
+    enum SortType: String, CaseIterable {
         case last
         case mostLiked
         case mostActive
         case recentActivity
-
-        var title: String {
-            switch self {
-            case .last:
-                return NSLocalizedString("DiscussionsSortTypeLastDiscussions", comment: "")
-            case .mostLiked:
-                return NSLocalizedString("DiscussionsSortTypeMostLikedDiscussions", comment: "")
-            case .mostActive:
-                return NSLocalizedString("DiscussionsSortTypeMostActiveDiscussions", comment: "")
-            case .recentActivity:
-                return NSLocalizedString("DiscussionsSortTypeRecentActivityDiscussions", comment: "")
-            }
-        }
 
         static var `default`: SortType {
             return .last
@@ -47,7 +36,7 @@ enum NewDiscussions {
         struct Request { }
 
         struct Response {
-            let result: Result<DiscussionsData>
+            let result: Result<DiscussionsResponseData>
         }
 
         struct ViewModel {
@@ -60,7 +49,7 @@ enum NewDiscussions {
         struct Request { }
 
         struct Response {
-            let result: Result<DiscussionsData>
+            let result: Result<DiscussionsResponseData>
         }
 
         struct ViewModel {
@@ -75,7 +64,7 @@ enum NewDiscussions {
         }
 
         struct Response {
-            let result: DiscussionsData
+            let result: DiscussionsResponseData
         }
 
         struct ViewModel {
@@ -112,7 +101,7 @@ enum NewDiscussions {
     /// Show newly created comment
     enum CommentCreated {
         struct Response {
-            let result: DiscussionsData
+            let result: DiscussionsResponseData
         }
 
         struct ViewModel {
@@ -123,7 +112,7 @@ enum NewDiscussions {
     /// Show updated comment
     enum CommentUpdated {
         struct Response {
-            let result: DiscussionsData
+            let result: DiscussionsResponseData
         }
 
         struct ViewModel {
@@ -138,11 +127,46 @@ enum NewDiscussions {
         }
 
         struct Response {
-            let result: Result<DiscussionsData>
+            let result: Result<DiscussionsResponseData>
         }
 
         struct ViewModel {
             let state: ViewControllerState
+        }
+    }
+
+    /// Presents sort action sheet (after sort type bar button item click)
+    enum SortTypePresentation {
+        struct Request { }
+
+        struct Response {
+            let currentSortType: SortType
+            let availableSortTypes: [SortType]
+        }
+
+        struct ViewModel {
+            let title: String
+            let items: [Item]
+
+            struct Item {
+                let uniqueIdentifier: UniqueIdentifierType
+                let title: String
+            }
+        }
+    }
+
+    /// Updates current sort type
+    enum SortTypeUpdate {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let result: DiscussionsResponseData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsResult
         }
     }
 
