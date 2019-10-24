@@ -7,7 +7,7 @@ protocol NewDiscussionsInteractorProtocol {
     func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request)
     func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request)
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request )
-    func doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request)
+    func doCommentDelete(request: NewDiscussions.CommentDelete.Request)
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
@@ -187,58 +187,66 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     }
 
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request) {
-        var parentID: Comment.IdType?
-
-        if let commentID = request.commentID {
-            parentID = {
-                if self.currentDiscussions.contains(where: { $0.id == commentID }) {
-                    return commentID
-                }
-                for (discussionID, replies) in self.currentReplies {
-                    if discussionID == commentID {
-                        return discussionID
-                    }
-                    if replies.contains(where: { $0.id == commentID }) {
-                        return discussionID
-                    }
-                }
-                return nil
-            }()
+        switch request.presentationContext {
+        case .create:
+            self.presentWriteComment(commentID: request.commentID)
+        case .edit:
+            if let commentID = request.commentID {
+                self.presentEditComment(commentID: commentID)
+            } else {
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: attempt to edit comment but comment id is nil"
+                )
+            }
         }
-
-        self.presenter.presentWriteComment(
-            response: NewDiscussions.WriteCommentPresentation.Response(targetID: self.stepID, parentID: parentID)
-        )
     }
 
-    func doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request) {
-        let comment = request.comment
+    func doCommentDelete(request: NewDiscussions.CommentDelete.Request) {
+        NewDiscussionsInteractor.logger.info(
+            "new discussions interactor: start deleting comment by id: \(request.commentID)"
+        )
+        self.presenter.presentWaitingState(
+            response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
+        )
 
-        if let parentID = comment.parentID,
-           let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
-            self.currentDiscussions[parentIndex].repliesIDs.append(comment.id)
-            self.currentReplies[parentID, default: []].append(comment)
+        let commentID = request.commentID
 
-            self.presenter.presentCommentCreated(
-                response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+        self.provider.deleteComment(id: commentID).done {
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: successfully deleted comment with id: \(commentID)"
             )
-        } else {
-            self.presenter.presentWaitingState(
-                response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
-            )
 
-            self.currentDiscussions.append(comment)
+            if let discussionIndex = self.currentDiscussions.firstIndex(where: { $0.id == commentID }) {
+                self.currentDiscussions.remove(at: discussionIndex)
+                self.currentReplies[commentID] = nil
+            } else {
+                for (discussionID, replies) in self.currentReplies {
+                    guard let replyIndex = replies.firstIndex(where: { $0.id == commentID }) else {
+                        continue
+                    }
+
+                    self.currentReplies[discussionID]?.remove(at: replyIndex)
+                    if let discussionIndex = self.currentDiscussions.firstIndex(where: { $0.id == discussionID }) {
+                        self.currentDiscussions[discussionIndex].repliesIDs.removeAll(where: { $0 == commentID })
+                    }
+                    break
+                }
+            }
 
             self.provider.fetchDiscussionProxy(id: self.discussionProxyID).done { discussionProxy in
                 self.currentDiscussionProxy = discussionProxy
             }.ensure {
-                self.presenter.presentWaitingState(
-                    response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)
-                )
-                self.presenter.presentCommentCreated(
-                    response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+                self.presenter.presentCommentDeleteResult(
+                    response: NewDiscussions.CommentDelete.Response(result: .success(self.makeDiscussionsData()))
                 )
             }.cauterize()
+        }.catch { error in
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: failed delete comment with id: \(commentID)"
+            )
+            self.presenter.presentCommentDeleteResult(
+                response: NewDiscussions.CommentDelete.Response(result: .failure(error))
+            )
         }
     }
 
@@ -326,9 +334,120 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         return idsToLoad
     }
 
+    private func presentWriteComment(commentID: Comment.IdType?) {
+        var parentID: Comment.IdType?
+
+        if let commentID = commentID {
+            parentID = {
+                if self.currentDiscussions.contains(where: { $0.id == commentID }) {
+                    return commentID
+                }
+                for (discussionID, replies) in self.currentReplies {
+                    if discussionID == commentID {
+                        return discussionID
+                    }
+                    if replies.contains(where: { $0.id == commentID }) {
+                        return discussionID
+                    }
+                }
+                return nil
+            }()
+        }
+
+        self.presenter.presentWriteComment(
+            response: NewDiscussions.WriteCommentPresentation.Response(
+                targetID: self.stepID,
+                parentID: parentID,
+                comment: nil,
+                presentationContext: .create
+            )
+        )
+    }
+
+    private func presentEditComment(commentID: Comment.IdType) {
+        let comment: Comment? = {
+            if let discussion = self.currentDiscussions.first(where: { $0.id == commentID }) {
+                return discussion
+            }
+            for (_, replies) in self.currentReplies {
+                if let reply = replies.first(where: { $0.id == commentID }) {
+                    return reply
+                }
+            }
+            return nil
+        }()
+
+        guard let unwrappedComment = comment else {
+            return NewDiscussionsInteractor.logger.error(
+                "new discussions interactor: attempt to edit comment but not able to find it by id"
+            )
+        }
+
+        self.presenter.presentWriteComment(
+            response: NewDiscussions.WriteCommentPresentation.Response(
+                targetID: self.stepID,
+                parentID: unwrappedComment.parentID,
+                comment: unwrappedComment,
+                presentationContext: .edit
+            )
+        )
+    }
+
     // MARK: - Types -
 
     enum Error: Swift.Error {
         case fetchFailed
+    }
+}
+
+// MARK: - NewDiscussionsInteractor: WriteCommentOutputProtocol -
+
+extension NewDiscussionsInteractor: WriteCommentOutputProtocol {
+    func handleCommentCreated(_ comment: Comment) {
+        if let parentID = comment.parentID,
+            let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
+            self.currentDiscussions[parentIndex].repliesIDs.append(comment.id)
+            self.currentReplies[parentID, default: []].append(comment)
+
+            self.presenter.presentCommentCreated(
+                response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+            )
+        } else {
+            self.presenter.presentWaitingState(
+                response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
+            )
+
+            self.currentDiscussions.append(comment)
+
+            self.provider.fetchDiscussionProxy(id: self.discussionProxyID).done { discussionProxy in
+                self.currentDiscussionProxy = discussionProxy
+            }.ensure {
+                self.presenter.presentWaitingState(
+                    response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)
+                )
+                self.presenter.presentCommentCreated(
+                    response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
+                )
+            }.cauterize()
+        }
+    }
+
+    func handleCommentUpdated(_ comment: Comment) {
+        if let discussionIndex = self.currentDiscussions.firstIndex(where: { $0.id == comment.id }) {
+            self.currentDiscussions[discussionIndex] = comment
+        } else {
+            for (discussionID, replies) in self.currentReplies {
+                guard let replyIndex = replies.firstIndex(where: { $0.id == comment.id }) else {
+                    continue
+                }
+
+                self.currentReplies[discussionID]?[replyIndex] = comment
+                break
+            }
+        }
+
+        self.presenter.presentCommentUpdated(
+            response: NewDiscussions.CommentUpdated.Response(result: self.makeDiscussionsData())
+        )
     }
 }

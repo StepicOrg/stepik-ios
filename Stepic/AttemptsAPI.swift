@@ -17,11 +17,12 @@ final class AttemptsAPI: APIEndpoint {
     func create(stepName: String, stepId: Int) -> Promise<Attempt> {
         let attempt = Attempt(step: stepId)
         return Promise { seal in
-            create.request(requestEndpoint: "attempts", paramName: "attempt", creatingObject: attempt, withManager: manager).done { attempt, json in
-                guard let json = json else {
-                    seal.fulfill(attempt)
-                    return
-                }
+            self.create.request(
+                requestEndpoint: "attempts",
+                paramName: "attempt",
+                creatingObject: attempt,
+                withManager: manager
+            ).done { attempt, json in
                 attempt.initDataset(json: json["attempts"].arrayValue[0]["dataset"], stepName: stepName)
                 seal.fulfill(attempt)
             }.catch { error in

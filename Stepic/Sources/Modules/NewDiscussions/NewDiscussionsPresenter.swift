@@ -6,6 +6,8 @@ protocol NewDiscussionsPresenterProtocol {
     func presentNextReplies(response: NewDiscussions.NextRepliesLoad.Response)
     func presentWriteComment(response: NewDiscussions.WriteCommentPresentation.Response)
     func presentCommentCreated(response: NewDiscussions.CommentCreated.Response)
+    func presentCommentUpdated(response: NewDiscussions.CommentUpdated.Response)
+    func presentCommentDeleteResult(response: NewDiscussions.CommentDelete.Response)
     func presentWaitingState(response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -65,10 +67,20 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
     }
 
     func presentWriteComment(response: NewDiscussions.WriteCommentPresentation.Response) {
+        let presentationContext: WriteComment.PresentationContext = {
+            switch response.presentationContext {
+            case .create:
+                return .create
+            case .edit:
+                return .edit(response.comment.require())
+            }
+        }()
+
         self.viewController?.displayWriteComment(
             viewModel: NewDiscussions.WriteCommentPresentation.ViewModel(
                 targetID: response.targetID,
-                parentID: response.parentID
+                parentID: response.parentID,
+                presentationContext: presentationContext
             )
         )
     }
@@ -85,6 +97,40 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         self.viewController?.displayCommentCreated(
             viewModel: NewDiscussions.CommentCreated.ViewModel(data: data)
         )
+    }
+
+    func presentCommentUpdated(response: NewDiscussions.CommentUpdated.Response) {
+        let data = self.makeDiscussionsData(
+            discussionProxy: response.result.discussionProxy,
+            discussions: response.result.discussions,
+            discussionsIDsFetchingMore: response.result.discussionsIDsFetchingMore,
+            replies: response.result.replies,
+            sortType: response.result.sortType
+        )
+
+        self.viewController?.displayCommentUpdated(
+            viewModel: NewDiscussions.CommentUpdated.ViewModel(data: data)
+        )
+    }
+
+    func presentCommentDeleteResult(response: NewDiscussions.CommentDelete.Response) {
+        switch response.result {
+        case .success(let data):
+            let viewModel = self.makeDiscussionsData(
+                discussionProxy: data.discussionProxy,
+                discussions: data.discussions,
+                discussionsIDsFetchingMore: data.discussionsIDsFetchingMore,
+                replies: data.replies,
+                sortType: data.sortType
+            )
+            self.viewController?.displayCommentDeleteResult(
+                viewModel: NewDiscussions.CommentDelete.ViewModel(state: .result(data: viewModel))
+            )
+        case .failure:
+            self.viewController?.displayCommentDeleteResult(
+                viewModel: NewDiscussions.CommentDelete.ViewModel(state: .error)
+            )
+        }
     }
 
     func presentWaitingState(response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response) {
@@ -163,7 +209,9 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             dateRepresentation: dateRepresentation,
             likesCount: comment.epicCount,
             dislikesCount: comment.abuseCount,
-            voteValue: voteValue
+            voteValue: voteValue,
+            canEdit: comment.actions.contains(.edit),
+            canDelete: comment.actions.contains(.delete)
         )
     }
 

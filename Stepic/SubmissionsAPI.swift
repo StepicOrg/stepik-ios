@@ -137,12 +137,12 @@ final class SubmissionsAPI: APIEndpoint {
     func create(stepName: String, attemptId: Int, reply: Reply) -> Promise<Submission> {
         let submission = Submission(attempt: attemptId, reply: reply)
         return Promise { seal in
-            create.request(requestEndpoint: "submissions", paramName: "submission", creatingObject: submission, withManager: manager).done {
-                submission, json in
-                guard let json = json else {
-                    seal.fulfill(submission)
-                    return
-                }
+            self.create.request(
+                requestEndpoint: "submissions",
+                paramName: "submission",
+                creatingObject: submission,
+                withManager: manager
+            ).done { submission, json in
                 submission.initReply(json: json["submissions"].arrayValue[0]["reply"], stepName: stepName)
                 seal.fulfill(submission)
             }.catch {

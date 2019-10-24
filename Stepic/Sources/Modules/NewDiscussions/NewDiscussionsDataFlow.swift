@@ -1,7 +1,7 @@
 import Foundation
 
 enum NewDiscussions {
-    // MARK: Common structs
+    // MARK: Common types
 
     struct DiscussionsResult {
         let discussions: [NewDiscussionsDiscussionViewModel]
@@ -85,33 +85,64 @@ enum NewDiscussions {
 
     /// Present write course review (after compose bar button item click)
     enum WriteCommentPresentation {
+        enum PresentationContext {
+            case create
+            case edit
+        }
+
         struct Request {
             let commentID: Comment.IdType?
+            let presentationContext: PresentationContext
         }
 
         struct Response {
             let targetID: Int
             let parentID: Comment.IdType?
+            let comment: Comment?
+            let presentationContext: PresentationContext
         }
 
         struct ViewModel {
             let targetID: Int
             let parentID: Comment.IdType?
+            let presentationContext: WriteComment.PresentationContext
         }
     }
 
-    /// Show current user newly created comment
+    /// Show newly created comment
     enum CommentCreated {
-        struct Request {
-            let comment: Comment
-        }
-
         struct Response {
             let result: DiscussionsData
         }
 
         struct ViewModel {
             let data: DiscussionsResult
+        }
+    }
+
+    /// Show updated comment
+    enum CommentUpdated {
+        struct Response {
+            let result: DiscussionsData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsResult
+        }
+    }
+
+    /// Deletes comment by id
+    enum CommentDelete {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let result: Result<DiscussionsData>
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
         }
     }
 
