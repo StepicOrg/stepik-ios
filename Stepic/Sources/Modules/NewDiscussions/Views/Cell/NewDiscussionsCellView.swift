@@ -86,6 +86,7 @@ final class NewDiscussionsCellView: UIView {
         label.font = self.appearance.dateLabelFont
         label.textColor = self.appearance.dateLabelTextColor
         label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return label
     }()
 
