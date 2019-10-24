@@ -181,7 +181,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             return "Unknown"
         }()
 
-        let dateRepresentation = comment.time.getStepicFormatString(withTime: true)
+        let dateRepresentation = FormatterHelper.dateToRelativeString(comment.time)
 
         let voteValue: VoteValue? = {
             if let vote = comment.vote {

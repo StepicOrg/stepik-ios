@@ -26,7 +26,6 @@ def all_pods
     pod 'SVProgressHUD', '2.2.5'
     # TSMessages is no longer being maintained/updated, remove or migrate to RMessage/SwiftMessages
     pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
-    pod 'YandexMobileMetrica/Dynamic', '3.8.2'
 
     pod 'SnapKit', '4.2.0'
 
@@ -36,7 +35,9 @@ def all_pods
     pod 'Firebase/Analytics' , '6.10.0'
     pod 'Firebase/RemoteConfig', '6.10.0'
 
+    pod 'YandexMobileMetrica/Dynamic', '3.8.2'
     pod 'Amplitude-iOS', '4.8.2'
+    pod 'Branch', '0.25.11'
         
     pod 'BEMCheckBox', '1.4.1'
 
@@ -64,7 +65,7 @@ def all_pods
     pod 'Nuke', '7.6.3'
     pod 'STRegex', '2.1.0'
     pod 'Tabman', '2.4.3'
-    pod 'Branch', '0.25.11'
+    pod 'SwiftDate', '6.1.0'
 end
 
 def testing_pods
