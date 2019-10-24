@@ -772,6 +772,7 @@ CodeQuizFullscreenTabRunTitle = "Запуск";
 DiscussionsTitle = "Комментарии";
 DiscussionsAlertActionEditTitle = "Редактировать";
 DiscussionsAlertActionDeleteTitle = "Удалить";
+DiscussionsSortTypeAlertTitle = "Сортировать по";
 DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
 DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";

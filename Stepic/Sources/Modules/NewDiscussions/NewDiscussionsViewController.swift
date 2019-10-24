@@ -9,7 +9,9 @@ protocol NewDiscussionsViewControllerProtocol: class {
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel)
     func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel)
     func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel)
+    func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 final class NewDiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -27,6 +29,19 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         tableDataSource.delegate = self
         return tableDataSource
     }()
+
+    private lazy var sortTypeBarButtonItem = UIBarButtonItem(
+        image: UIImage(named: "discussions-sort")?.withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: #selector(self.didClickSortType)
+    )
+
+    private lazy var composeBarButtonItem = UIBarButtonItem(
+        barButtonSystemItem: .compose,
+        target: self,
+        action: #selector(self.didClickWriteComment)
+    )
 
     init(
         interactor: NewDiscussionsInteractorProtocol,
@@ -54,11 +69,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         self.title = NSLocalizedString("DiscussionsTitle", comment: "")
         self.registerPlaceholders()
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .compose,
-            target: self,
-            action: #selector(self.didClickWriteComment)
-        )
+        self.navigationItem.rightBarButtonItems = [self.composeBarButtonItem, self.sortTypeBarButtonItem]
 
         self.updateState(newState: self.state)
         self.interactor.doDiscussionsLoad(request: .init())
@@ -113,7 +124,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         }
     }
 
-    private func updateDiscussionsData(newData data: NewDiscussions.DiscussionsResult) {
+    private func updateDiscussionsData(newData data: NewDiscussions.DiscussionsViewData) {
         if data.discussions.isEmpty {
             self.showPlaceholder(for: .empty)
         } else {
@@ -138,6 +149,11 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     @objc
     private func didClickWriteComment() {
         self.interactor.doWriteCommentPresentation(request: .init(commentID: nil, presentationContext: .create))
+    }
+
+    @objc
+    private func didClickSortType() {
+        self.interactor.doSortTypePresentation(request: .init())
     }
 }
 
@@ -192,7 +208,34 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         }
     }
 
-    func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel) {
+    func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
+
+        viewModel.items.forEach { sortTypeItem in
+            let action = UIAlertAction(
+                title: sortTypeItem.title,
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doSortTypeUpdate(request: .init(uniqueIdentifier: sortTypeItem.uniqueIdentifier))
+                }
+            )
+            alert.addAction(action)
+        }
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.barButtonItem = self.sortTypeBarButtonItem
+        }
+
+        self.present(alert, animated: true)
+    }
+
+    func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {

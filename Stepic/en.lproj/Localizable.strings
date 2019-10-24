@@ -771,6 +771,7 @@ CodeQuizFullscreenTabRunTitle = "Run";
 DiscussionsTitle = "Discussions";
 DiscussionsAlertActionEditTitle = "Edit";
 DiscussionsAlertActionDeleteTitle = "Delete";
+DiscussionsSortTypeAlertTitle = "Sort by";
 DiscussionsSortTypeLastDiscussions = "Last discussions";
 DiscussionsSortTypeMostLikedDiscussions = "Most liked";
 DiscussionsSortTypeMostActiveDiscussions = "Most active";

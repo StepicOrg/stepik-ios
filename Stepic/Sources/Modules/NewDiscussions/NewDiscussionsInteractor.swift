@@ -8,6 +8,8 @@ protocol NewDiscussionsInteractorProtocol {
     func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request)
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request )
     func doCommentDelete(request: NewDiscussions.CommentDelete.Request)
+    func doSortTypePresentation(request: NewDiscussions.SortTypePresentation.Request)
+    func doSortTypeUpdate(request: NewDiscussions.SortTypeUpdate.Request)
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
@@ -45,7 +47,7 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             return discussionProxy.discussionsIDsRecentActivity
         }
     }
-    private let currentSortType: NewDiscussions.SortType = .default
+    private var currentSortType: NewDiscussions.SortType = .default
 
     /// A Boolean value that determines whether the fetch of the replies for root discussion is in progress.
     private var discussionsIDsFetchingReplies: Set<Comment.IdType> = []
@@ -206,7 +208,7 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             "new discussions interactor: start deleting comment by id: \(request.commentID)"
         )
         self.presenter.presentWaitingState(
-            response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
+            response: NewDiscussions.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
         )
 
         let commentID = request.commentID
@@ -250,11 +252,32 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
 
+    func doSortTypePresentation(request: NewDiscussions.SortTypePresentation.Request) {
+        self.presenter.presentSortType(
+            response: NewDiscussions.SortTypePresentation.Response(
+                currentSortType: self.currentSortType,
+                availableSortTypes: NewDiscussions.SortType.allCases
+            )
+        )
+    }
+
+    func doSortTypeUpdate(request: NewDiscussions.SortTypeUpdate.Request) {
+        guard let selectedSortType = NewDiscussions.SortType(rawValue: request.uniqueIdentifier),
+              self.currentSortType != selectedSortType else {
+            return
+        }
+
+        self.currentSortType = selectedSortType
+        self.presenter.presentSortTypeUpdate(
+            response: NewDiscussions.SortTypeUpdate.Response(result: self.makeDiscussionsData())
+        )
+    }
+
     // MARK: - Private API
 
     private func fetchDiscussions(
         discussionProxyID: DiscussionProxy.IdType
-    ) -> Promise<NewDiscussions.DiscussionsData> {
+    ) -> Promise<NewDiscussions.DiscussionsResponseData> {
         // Reset data
         self.currentDiscussions = []
         self.currentReplies = [:]
@@ -297,13 +320,13 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
 
-    private func makeDiscussionsData() -> NewDiscussions.DiscussionsData {
-        return NewDiscussions.DiscussionsData(
+    private func makeDiscussionsData() -> NewDiscussions.DiscussionsResponseData {
+        return NewDiscussions.DiscussionsResponseData(
             discussionProxy: self.currentDiscussionProxy.require(),
             discussions: self.currentDiscussions,
             discussionsIDsFetchingMore: self.discussionsIDsFetchingReplies,
             replies: self.currentReplies,
-            sortType: self.currentSortType
+            currentSortType: self.currentSortType
         )
     }
 
@@ -414,7 +437,7 @@ extension NewDiscussionsInteractor: WriteCommentOutputProtocol {
             )
         } else {
             self.presenter.presentWaitingState(
-                response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
+                response: NewDiscussions.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
             )
 
             self.currentDiscussions.append(comment)
@@ -423,7 +446,7 @@ extension NewDiscussionsInteractor: WriteCommentOutputProtocol {
                 self.currentDiscussionProxy = discussionProxy
             }.ensure {
                 self.presenter.presentWaitingState(
-                    response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)
+                    response: NewDiscussions.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: true)
                 )
                 self.presenter.presentCommentCreated(
                     response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
