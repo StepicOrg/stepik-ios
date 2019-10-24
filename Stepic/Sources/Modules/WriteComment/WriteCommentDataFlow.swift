@@ -10,7 +10,7 @@ enum WriteComment {
 
     enum PresentationContext {
         case create
-        case edit
+        case edit(Comment)
     }
 
     struct CommentInfo {

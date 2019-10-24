@@ -61,9 +61,15 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
         text: String,
         presentationContext: WriteComment.PresentationContext
     ) -> WriteCommentViewModel {
-        let buttonTitle = presentationContext == .create
-            ? NSLocalizedString("WriteCommentActionButtonCreate", comment: "")
-            : NSLocalizedString("WriteCommentActionButtonEdit", comment: "")
+        var buttonTitle: String
+
+        switch presentationContext {
+        case .create:
+            buttonTitle = NSLocalizedString("WriteCommentActionButtonCreate", comment: "")
+        case .edit:
+            buttonTitle = NSLocalizedString("WriteCommentActionButtonEdit", comment: "")
+        }
+
         return WriteCommentViewModel(
             text: text,
             doneButtonTitle: buttonTitle,

@@ -33,7 +33,7 @@ final class DiscussionsLegacyAssembly: Assembly {
             votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
-        viewController.title = NSLocalizedString("Discussions", comment: "")
+        viewController.title = NSLocalizedString("DiscussionsTitle", comment: "")
         return viewController
     }
 }

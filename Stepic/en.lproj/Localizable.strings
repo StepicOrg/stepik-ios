@@ -655,12 +655,6 @@ WriteCourseReviewPlaceholder = "Review";
 WriteCourseReviewRatingHint = "Tap a Star to Rate";
 WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more than 80% steps";
 
-/* Discussions */
-DiscussionsSortTypeLastDiscussions = "Last discussions";
-DiscussionsSortTypeMostLikedDiscussions = "Most liked";
-DiscussionsSortTypeMostActiveDiscussions = "Most active";
-DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
-
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
 "Ok" = "Ok";
@@ -772,6 +766,15 @@ CodeQuizEmptyCodeLanguages = "No supported languages";
 CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
+
+/* Discussions */
+DiscussionsTitle = "Discussions";
+DiscussionsAlertActionEditTitle = "Edit";
+DiscussionsAlertActionDeleteTitle = "Delete";
+DiscussionsSortTypeLastDiscussions = "Last discussions";
+DiscussionsSortTypeMostLikedDiscussions = "Most liked";
+DiscussionsSortTypeMostActiveDiscussions = "Most active";
+DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
 
 /* Write comment */
 WriteCommentTitle = "Comment";

@@ -13,7 +13,6 @@ final class WriteCommentAssembly: Assembly {
         presentationContext: WriteComment.PresentationContext = .create,
         output: WriteCommentOutputProtocol? = nil
     ) {
-        assert(targetID != parentID)
         self.targetID = targetID
         self.parentID = parentID
         self.presentationContext = presentationContext

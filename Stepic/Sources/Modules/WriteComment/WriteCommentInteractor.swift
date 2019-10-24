@@ -18,7 +18,8 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
     private let presenter: WriteCommentPresenterProtocol
     private let provider: WriteCommentProviderProtocol
 
-    private var currentText: String = ""
+    private let originalText: String
+    private var currentText: String
 
     init(
         targetID: WriteComment.TargetIDType,
@@ -32,6 +33,14 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
         self.presentationContext = presentationContext
         self.presenter = presenter
         self.provider = provider
+
+        switch presentationContext {
+        case .create:
+            self.originalText = ""
+        case .edit(let comment):
+            self.originalText = comment.text
+        }
+        self.currentText = self.originalText
     }
 
     func doCommentLoad(request: WriteComment.CommentLoad.Request) {
@@ -49,48 +58,49 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
     }
 
     func doCommentMainAction(request: WriteComment.CommentMainAction.Request) {
-        switch self.presentationContext {
-        case .create:
-            self.createComment()
-        case .edit:
-            break
-        }
-    }
-
-    func doCommentCancelPresentation(request: WriteComment.CommentCancelPresentation.Request) {
-        self.presenter.presentCommentCancelPresentation(
-            response: WriteComment.CommentCancelPresentation.Response(
-                originalText: "",
-                currentText: self.currentText
-            )
-        )
-    }
-
-    // MARK: - Private API
-
-    private func createComment() {
         let htmlText = self.currentText
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: "\n", with: "<br>")
+        let currentComment = Comment(parent: self.parentID, target: self.targetID, text: htmlText)
 
-        self.provider.create(
-            targetID: self.targetID,
-            parentID: self.parentID,
-            text: htmlText
-        ).done { comment in
+        var actionPromise: Promise<Comment>
+        var moduleOutputHandler: ((Comment) -> Void)?
+
+        switch self.presentationContext {
+        case .create:
+            actionPromise = self.provider.create(comment: currentComment)
+            moduleOutputHandler = self.moduleOutput?.handleCommentCreated(_:)
+        case .edit(let comment):
+            currentComment.id = comment.id
+            actionPromise = self.provider.update(comment: currentComment)
+            moduleOutputHandler = self.moduleOutput?.handleCommentUpdated(_:)
+        }
+
+        actionPromise.done { comment in
             self.currentText = comment.text.replacingOccurrences(of: "<br>", with: "\n")
             self.presenter.presentCommentMainActionResult(
                 response: WriteComment.CommentMainAction.Response(
                     data: .success(self.makeCommentInfo())
                 )
             )
-            self.moduleOutput?.handleCommentCreated(comment)
+            moduleOutputHandler?(comment)
         }.catch { error in
             self.presenter.presentCommentMainActionResult(
                 response: WriteComment.CommentMainAction.Response(data: .failure(error))
             )
         }
     }
+
+    func doCommentCancelPresentation(request: WriteComment.CommentCancelPresentation.Request) {
+        self.presenter.presentCommentCancelPresentation(
+            response: WriteComment.CommentCancelPresentation.Response(
+                originalText: self.originalText,
+                currentText: self.currentText
+            )
+        )
+    }
+
+    // MARK: - Private API
 
     private func makeCommentInfo() -> WriteComment.CommentInfo {
         return WriteComment.CommentInfo(

@@ -85,23 +85,43 @@ enum NewDiscussions {
 
     /// Present write course review (after compose bar button item click)
     enum WriteCommentPresentation {
+        enum PresentationContext {
+            case create
+            case edit
+        }
+
         struct Request {
             let commentID: Comment.IdType?
+            let presentationContext: PresentationContext
         }
 
         struct Response {
             let targetID: Int
             let parentID: Comment.IdType?
+            let comment: Comment?
+            let presentationContext: PresentationContext
         }
 
         struct ViewModel {
             let targetID: Int
             let parentID: Comment.IdType?
+            let presentationContext: WriteComment.PresentationContext
         }
     }
 
-    /// Show current user newly created comment
+    /// Show newly created comment
     enum CommentCreated {
+        struct Response {
+            let result: DiscussionsData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsResult
+        }
+    }
+
+    /// Show updated comment
+    enum CommentUpdated {
         struct Response {
             let result: DiscussionsData
         }

@@ -16,7 +16,7 @@ enum UserRole: String {
 }
 
 final class Comment: JSONSerializable {
-    var id: Int = 0
+    var id: Int = -1
     var parentID: Comment.IdType?
     var userID: User.IdType = 0
     var userRole: UserRole = .student

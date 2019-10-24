@@ -2,11 +2,8 @@ import Foundation
 import PromiseKit
 
 protocol WriteCommentProviderProtocol {
-    func create(
-        targetID: WriteComment.TargetIDType,
-        parentID: WriteComment.ParentIDtype?,
-        text: String
-    ) -> Promise<Comment>
+    func create(comment: Comment) -> Promise<Comment>
+    func update(comment: Comment) -> Promise<Comment>
 }
 
 final class WriteCommentProvider: WriteCommentProviderProtocol {
@@ -16,18 +13,22 @@ final class WriteCommentProvider: WriteCommentProviderProtocol {
         self.commentsNetworkService = commentsNetworkService
     }
 
-    func create(
-        targetID: WriteComment.TargetIDType,
-        parentID: WriteComment.ParentIDtype?,
-        text: String
-    ) -> Promise<Comment> {
+    func create(comment: Comment) -> Promise<Comment> {
         return Promise { seal in
-            self.commentsNetworkService.create(
-                comment: Comment(parent: parentID, target: targetID, text: text)
-            ).done { comment in
+            self.commentsNetworkService.create(comment: comment).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in
                 seal.reject(Error.networkCreateFailed)
+            }
+        }
+    }
+
+    func update(comment: Comment) -> Promise<Comment> {
+        return Promise { seal in
+            self.commentsNetworkService.update(comment: comment).done { comment in
+                seal.fulfill(comment)
+            }.catch { _ in
+                seal.reject(Error.networkUpdateFailed)
             }
         }
     }

@@ -656,12 +656,6 @@ WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";
 WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";
 
-/* Discussions */
-DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
-DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
-DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
-DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
-
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
 "Ok" = "Ok";
@@ -773,6 +767,15 @@ CodeQuizEmptyCodeLanguages = "Нет поддерживаемых языков �
 CodeQuizFullscreenTabInstructionTitle = "Инструкция";
 CodeQuizFullscreenTabCodeTitle = "Код";
 CodeQuizFullscreenTabRunTitle = "Запуск";
+
+/* Discussions */
+DiscussionsTitle = "Комментарии";
+DiscussionsAlertActionEditTitle = "Редактировать";
+DiscussionsAlertActionDeleteTitle = "Удалить";
+DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
+DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
+DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
+DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
 
 /* Write comment */
 WriteCommentTitle = "Комментарий";

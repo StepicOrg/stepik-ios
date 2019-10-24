@@ -186,28 +186,18 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     }
 
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request) {
-        var parentID: Comment.IdType?
-
-        if let commentID = request.commentID {
-            parentID = {
-                if self.currentDiscussions.contains(where: { $0.id == commentID }) {
-                    return commentID
-                }
-                for (discussionID, replies) in self.currentReplies {
-                    if discussionID == commentID {
-                        return discussionID
-                    }
-                    if replies.contains(where: { $0.id == commentID }) {
-                        return discussionID
-                    }
-                }
-                return nil
-            }()
+        switch request.presentationContext {
+        case .create:
+            self.presentWriteComment(commentID: request.commentID)
+        case .edit:
+            if let commentID = request.commentID {
+                self.presentEditComment(commentID: commentID)
+            } else {
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: attempt to edit comment but comment id is nil"
+                )
+            }
         }
-
-        self.presenter.presentWriteComment(
-            response: NewDiscussions.WriteCommentPresentation.Response(targetID: self.stepID, parentID: parentID)
-        )
     }
 
     // MARK: - Private API
@@ -294,6 +284,65 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         return idsToLoad
     }
 
+    private func presentWriteComment(commentID: Comment.IdType?) {
+        var parentID: Comment.IdType?
+
+        if let commentID = commentID {
+            parentID = {
+                if self.currentDiscussions.contains(where: { $0.id == commentID }) {
+                    return commentID
+                }
+                for (discussionID, replies) in self.currentReplies {
+                    if discussionID == commentID {
+                        return discussionID
+                    }
+                    if replies.contains(where: { $0.id == commentID }) {
+                        return discussionID
+                    }
+                }
+                return nil
+            }()
+        }
+
+        self.presenter.presentWriteComment(
+            response: NewDiscussions.WriteCommentPresentation.Response(
+                targetID: self.stepID,
+                parentID: parentID,
+                comment: nil,
+                presentationContext: .create
+            )
+        )
+    }
+
+    private func presentEditComment(commentID: Comment.IdType) {
+        let comment: Comment? = {
+            if let discussion = self.currentDiscussions.first(where: { $0.id == commentID }) {
+                return discussion
+            }
+            for (_, replies) in self.currentReplies {
+                if let reply = replies.first(where: { $0.id == commentID }) {
+                    return reply
+                }
+            }
+            return nil
+        }()
+
+        guard let unwrappedComment = comment else {
+            return NewDiscussionsInteractor.logger.error(
+                "new discussions interactor: attempt to edit comment but not able to find it by id"
+            )
+        }
+
+        self.presenter.presentWriteComment(
+            response: NewDiscussions.WriteCommentPresentation.Response(
+                targetID: self.stepID,
+                parentID: unwrappedComment.parentID,
+                comment: unwrappedComment,
+                presentationContext: .edit
+            )
+        )
+    }
+
     // MARK: - Types -
 
     enum Error: Swift.Error {
@@ -331,5 +380,24 @@ extension NewDiscussionsInteractor: WriteCommentOutputProtocol {
                 )
             }.cauterize()
         }
+    }
+
+    func handleCommentUpdated(_ comment: Comment) {
+        if let discussionIndex = self.currentDiscussions.firstIndex(where: { $0.id == comment.id }) {
+            self.currentDiscussions[discussionIndex] = comment
+        } else {
+            for (discussionID, replies) in self.currentReplies {
+                guard let replyIndex = replies.firstIndex(where: { $0.id == comment.id }) else {
+                    continue
+                }
+
+                self.currentReplies[discussionID]?[replyIndex] = comment
+                break
+            }
+        }
+
+        self.presenter.presentCommentUpdated(
+            response: NewDiscussions.CommentUpdated.Response(result: self.makeDiscussionsData())
+        )
     }
 }

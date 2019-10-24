@@ -7,6 +7,7 @@ protocol NewDiscussionsViewControllerProtocol: class {
     func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel)
     func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel)
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel)
+    func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -49,7 +50,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("Discussions", comment: "")
+        self.title = NSLocalizedString("DiscussionsTitle", comment: "")
         self.registerPlaceholders()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -135,7 +136,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
 
     @objc
     private func didClickWriteComment() {
-        self.interactor.doWriteCommentPresentation(request: .init(commentID: nil))
+        self.interactor.doWriteCommentPresentation(request: .init(commentID: nil, presentationContext: .create))
     }
 }
 
@@ -163,7 +164,7 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
             parentID: viewModel.parentID,
-            presentationContext: .create,
+            presentationContext: viewModel.presentationContext,
             output: self.interactor as? WriteCommentOutputProtocol
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
@@ -171,6 +172,10 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
     }
 
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
@@ -220,10 +225,39 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
                 title: NSLocalizedString("Reply", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-                    self?.interactor.doWriteCommentPresentation(request: .init(commentID: viewModel.id))
+                    self?.interactor.doWriteCommentPresentation(
+                        request: .init(commentID: viewModel.id, presentationContext: .create)
+                    )
                 }
             )
         )
+
+        if viewModel.canEdit {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doWriteCommentPresentation(
+                            request: .init(commentID: viewModel.id, presentationContext: .edit)
+                        )
+                    }
+                )
+            )
+        }
+
+        if viewModel.canDelete {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionDeleteTitle", comment: ""),
+                    style: .destructive,
+                    handler: { _ in
+                        print("DELETE")
+                    }
+                )
+            )
+        }
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
 
         if let popoverPresentationController = alert.popoverPresentationController {
@@ -242,6 +276,8 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         viewModel: NewDiscussionsCommentViewModel
     ) {
-        self.interactor.doWriteCommentPresentation(request: .init(commentID: viewModel.id))
+        self.interactor.doWriteCommentPresentation(
+            request: .init(commentID: viewModel.id, presentationContext: .create)
+        )
     }
 }
