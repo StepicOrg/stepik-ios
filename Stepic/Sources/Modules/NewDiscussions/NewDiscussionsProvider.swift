@@ -4,6 +4,7 @@ import PromiseKit
 protocol NewDiscussionsProviderProtocol {
     func fetchDiscussionProxy(id: DiscussionProxy.IdType) -> Promise<DiscussionProxy>
     func fetchComments(ids: [Comment.IdType]) -> Promise<[Comment]>
+    func deleteComment(id: Comment.IdType) -> Promise<Void>
 }
 
 final class NewDiscussionsProvider: NewDiscussionsProviderProtocol {
@@ -38,7 +39,18 @@ final class NewDiscussionsProvider: NewDiscussionsProviderProtocol {
         }
     }
 
+    func deleteComment(id: Comment.IdType) -> Promise<Void> {
+        return Promise { seal in
+            self.commentsNetworkService.delete(id: id).done {
+                seal.fulfill(())
+            }.catch { _ in
+                seal.reject(Error.commentDeleteFailed)
+            }
+        }
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
+        case commentDeleteFailed
     }
 }

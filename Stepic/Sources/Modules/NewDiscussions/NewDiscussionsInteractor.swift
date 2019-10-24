@@ -7,6 +7,7 @@ protocol NewDiscussionsInteractorProtocol {
     func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request)
     func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request)
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request )
+    func doCommentDelete(request: NewDiscussions.CommentDelete.Request)
 }
 
 final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
@@ -197,6 +198,55 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
                     "new discussions interactor: attempt to edit comment but comment id is nil"
                 )
             }
+        }
+    }
+
+    func doCommentDelete(request: NewDiscussions.CommentDelete.Request) {
+        NewDiscussionsInteractor.logger.info(
+            "new discussions interactor: start deleting comment by id: \(request.commentID)"
+        )
+        self.presenter.presentWaitingState(
+            response: WriteCourseReview.BlockingWaitingIndicatorUpdate.Response(shouldDismiss: false)
+        )
+
+        let commentID = request.commentID
+
+        self.provider.deleteComment(id: commentID).done {
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: successfully deleted comment with id: \(commentID)"
+            )
+
+            if let discussionIndex = self.currentDiscussions.firstIndex(where: { $0.id == commentID }) {
+                self.currentDiscussions.remove(at: discussionIndex)
+                self.currentReplies[commentID] = nil
+            } else {
+                for (discussionID, replies) in self.currentReplies {
+                    guard let replyIndex = replies.firstIndex(where: { $0.id == commentID }) else {
+                        continue
+                    }
+
+                    self.currentReplies[discussionID]?.remove(at: replyIndex)
+                    if let discussionIndex = self.currentDiscussions.firstIndex(where: { $0.id == discussionID }) {
+                        self.currentDiscussions[discussionIndex].repliesIDs.removeAll(where: { $0 == commentID })
+                    }
+                    break
+                }
+            }
+
+            self.provider.fetchDiscussionProxy(id: self.discussionProxyID).done { discussionProxy in
+                self.currentDiscussionProxy = discussionProxy
+            }.ensure {
+                self.presenter.presentCommentDeleteResult(
+                    response: NewDiscussions.CommentDelete.Response(result: .success(self.makeDiscussionsData()))
+                )
+            }.cauterize()
+        }.catch { error in
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: failed delete comment with id: \(commentID)"
+            )
+            self.presenter.presentCommentDeleteResult(
+                response: NewDiscussions.CommentDelete.Response(result: .failure(error))
+            )
         }
     }
 

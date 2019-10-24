@@ -131,6 +131,21 @@ enum NewDiscussions {
         }
     }
 
+    /// Deletes comment by id
+    enum CommentDelete {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let result: Result<DiscussionsData>
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

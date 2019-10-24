@@ -5,6 +5,7 @@ protocol CommentsNetworkServiceProtocol: class {
     func fetch(ids: [Comment.IdType]) -> Promise<[Comment]>
     func create(comment: Comment) -> Promise<Comment>
     func update(comment: Comment) -> Promise<Comment>
+    func delete(id: Comment.IdType) -> Promise<Void>
 }
 
 final class CommentsNetworkService: CommentsNetworkServiceProtocol {
@@ -45,6 +46,16 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
                 seal.fulfill(comment)
             }.catch { _ in
                 seal.reject(Error.updateFailed)
+            }
+        }
+    }
+
+    func delete(id: Comment.IdType) -> Promise<Void> {
+        return Promise { seal in
+            self.commentsAPI.delete(commentID: id).done {
+                seal.fulfill(())
+            }.catch { _ in
+                seal.reject(Error.deleteFailed)
             }
         }
     }

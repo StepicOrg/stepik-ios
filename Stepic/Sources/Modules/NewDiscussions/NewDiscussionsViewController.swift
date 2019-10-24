@@ -8,6 +8,7 @@ protocol NewDiscussionsViewControllerProtocol: class {
     func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel)
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel)
     func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel)
+    func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -179,6 +180,18 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
+    func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            SVProgressHUD.showSuccess(withStatus: "")
+            self.updateDiscussionsData(newData: data)
+        case .error:
+            SVProgressHUD.showError(withStatus: "")
+        case .loading:
+            break
+        }
+    }
+
     func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
@@ -251,8 +264,8 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
                 UIAlertAction(
                     title: NSLocalizedString("DiscussionsAlertActionDeleteTitle", comment: ""),
                     style: .destructive,
-                    handler: { _ in
-                        print("DELETE")
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentDelete(request: .init(commentID: viewModel.id))
                     }
                 )
             )

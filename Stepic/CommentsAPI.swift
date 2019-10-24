@@ -88,4 +88,8 @@ final class CommentsAPI: APIEndpoint {
             }
         }
     }
+
+    func delete(commentID: Comment.IdType) -> Promise<Void> {
+        return self.delete.request(requestEndpoint: self.name, deletingId: commentID, withManager: self.manager)
+    }
 }
