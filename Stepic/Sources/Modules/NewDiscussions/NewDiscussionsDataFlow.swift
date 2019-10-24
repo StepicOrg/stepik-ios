@@ -3,12 +3,6 @@ import Foundation
 enum NewDiscussions {
     // MARK: Common types
 
-    /// Presenter -> ViewController
-    struct DiscussionsViewData {
-        let discussions: [NewDiscussionsDiscussionViewModel]
-        let discussionsLeftToLoad: Int
-    }
-
     /// Interactor -> presenter
     struct DiscussionsResponseData {
         let discussionProxy: DiscussionProxy
@@ -16,6 +10,12 @@ enum NewDiscussions {
         let discussionsIDsFetchingMore: Set<Comment.IdType>
         let replies: [Comment.IdType: [Comment]]
         let currentSortType: SortType
+    }
+
+    /// Presenter -> ViewController
+    struct DiscussionsViewData {
+        let discussions: [NewDiscussionsDiscussionViewModel]
+        let discussionsLeftToLoad: Int
     }
 
     enum SortType: String, CaseIterable {
