@@ -189,8 +189,6 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     }
 
     func displayWriteComment(parentId: Comment.IdType?) {
-        let assembly = WriteCommentLegacyAssembly(target: self.target, parentId: parentId, delegate: self)
-        self.push(module: assembly.makeModule())
     }
 
     @objc
@@ -213,14 +211,5 @@ extension DiscussionsViewController: DiscussionsViewControllerDelegate {
     func profileButtonDidClick(_ userId: Int) {
         let assembly = ProfileAssembly(userID: userId)
         self.push(module: assembly.makeModule())
-    }
-}
-
-extension DiscussionsViewController: LegacyWriteCommentViewControllerDelegate {
-    func legacyWriteCommentViewControllerDidWriteComment(
-        _ controller: LegacyWriteCommentViewController,
-        comment: Comment
-    ) {
-        self.presenter?.writeComment(comment)
     }
 }
