@@ -4,7 +4,7 @@ enum NewDiscussions {
     // MARK: Common types
 
     /// Presenter -> ViewController
-    struct DiscussionsResult {
+    struct DiscussionsViewData {
         let discussions: [NewDiscussionsDiscussionViewModel]
         let discussionsLeftToLoad: Int
     }
@@ -68,7 +68,7 @@ enum NewDiscussions {
         }
 
         struct ViewModel {
-            let data: DiscussionsResult
+            let data: DiscussionsViewData
         }
     }
 
@@ -105,7 +105,7 @@ enum NewDiscussions {
         }
 
         struct ViewModel {
-            let data: DiscussionsResult
+            let data: DiscussionsViewData
         }
     }
 
@@ -116,7 +116,7 @@ enum NewDiscussions {
         }
 
         struct ViewModel {
-            let data: DiscussionsResult
+            let data: DiscussionsViewData
         }
     }
 
@@ -166,7 +166,7 @@ enum NewDiscussions {
         }
 
         struct ViewModel {
-            let data: DiscussionsResult
+            let data: DiscussionsViewData
         }
     }
 
@@ -186,11 +186,11 @@ enum NewDiscussions {
     enum ViewControllerState {
         case loading
         case error
-        case result(data: DiscussionsResult)
+        case result(data: DiscussionsViewData)
     }
 
     enum PaginationState {
-        case result(data: DiscussionsResult)
+        case result(data: DiscussionsViewData)
         case error
     }
 }

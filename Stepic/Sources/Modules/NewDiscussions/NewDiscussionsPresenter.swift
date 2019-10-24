@@ -138,7 +138,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
 
     private func makeDiscussionsData(
         _ data: NewDiscussions.DiscussionsResponseData
-    ) -> NewDiscussions.DiscussionsResult {
+    ) -> NewDiscussions.DiscussionsViewData {
         assert(data.discussions.filter({ !$0.repliesIDs.isEmpty }).count == data.replies.keys.count)
 
         let discussions = self.sortedDiscussions(
@@ -160,7 +160,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             sortType: data.currentSortType
         ).count - discussions.count
 
-        return NewDiscussions.DiscussionsResult(
+        return NewDiscussions.DiscussionsViewData(
             discussions: discussionsViewModels,
             discussionsLeftToLoad: discussionsLeftToLoad
         )
