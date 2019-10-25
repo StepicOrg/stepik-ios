@@ -9,6 +9,8 @@ protocol NewDiscussionsViewControllerProtocol: class {
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel)
     func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel)
     func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel)
+    func displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel)
+    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel)
     func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel)
     func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel)
@@ -208,6 +210,14 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         }
     }
 
+    func displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
     func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
 
@@ -302,6 +312,34 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
             )
         }
 
+        if viewModel.canVote {
+            let likeTitle = viewModel.voteValue == .epic
+                ? NSLocalizedString("DiscussionsAlertActionUnlikeTitle", comment: "")
+                : NSLocalizedString("DiscussionsAlertActionLikeTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: likeTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentLike(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+
+            let abuseTitle = viewModel.voteValue == .abuse
+                ? NSLocalizedString("DiscussionsAlertActionUnabuseTitle", comment: "")
+                : NSLocalizedString("DiscussionsAlertActionAbuseTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: abuseTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+        }
+
         if viewModel.canDelete {
             alert.addAction(
                 UIAlertAction(
@@ -335,5 +373,19 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
         self.interactor.doWriteCommentPresentation(
             request: .init(commentID: viewModel.id, presentationContext: .create)
         )
+    }
+
+    func newDiscussionsTableViewDataSourceDidRequestLike(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doCommentLike(request: .init(commentID: viewModel.id))
+    }
+
+    func newDiscussionsTableViewDataSourceDidRequestDislike(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
     }
 }

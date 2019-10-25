@@ -120,6 +120,7 @@ struct AnalyticsEvents {
         static let liked = "discussion_liked"
         static let unliked = "discussion_unliked"
         static let abused = "discussion_abused"
+        static let unabused = "discussion_unabused"
     }
 
     struct DeepLink {

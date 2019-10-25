@@ -5,6 +5,14 @@ protocol NewDiscussionsTableViewDataSourceDelegate: class {
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         viewModel: NewDiscussionsCommentViewModel
     )
+    func newDiscussionsTableViewDataSourceDidRequestLike(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    )
+    func newDiscussionsTableViewDataSourceDidRequestDislike(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    )
 }
 
 final class NewDiscussionsTableViewDataSource: NSObject {
@@ -108,6 +116,26 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
             }
 
             strongSelf.delegate?.newDiscussionsTableViewDataSourceDidRequestReply(
+                strongSelf,
+                viewModel: commentViewModel
+            )
+        }
+        cell.onLikeClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.newDiscussionsTableViewDataSourceDidRequestLike(
+                strongSelf,
+                viewModel: commentViewModel
+            )
+        }
+        cell.onDislikeClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.delegate?.newDiscussionsTableViewDataSourceDidRequestDislike(
                 strongSelf,
                 viewModel: commentViewModel
             )

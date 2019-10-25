@@ -135,6 +135,36 @@ enum NewDiscussions {
         }
     }
 
+    /// Updates comment's vote value to epic or null
+    enum CommentLike {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let result: DiscussionsResponseData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsViewData
+        }
+    }
+
+    /// Updates comment's vote value to abuse or null
+    enum CommentAbuse {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let result: DiscussionsResponseData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsViewData
+        }
+    }
+
     /// Presents sort action sheet (after sort type bar button item click)
     enum SortTypePresentation {
         struct Request { }

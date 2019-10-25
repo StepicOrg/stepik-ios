@@ -26,4 +26,5 @@ struct NewDiscussionsCommentViewModel {
     let voteValue: VoteValue?
     let canEdit: Bool
     let canDelete: Bool
+    let canVote: Bool
 }

@@ -16,6 +16,12 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         cellView.onReplyClick = { [weak self] in
             self?.onReplyClick?()
         }
+        cellView.onLikeClick = { [weak self] in
+            self?.onLikeClick?()
+        }
+        cellView.onDislikeClick = { [weak self] in
+            self?.onDislikeClick?()
+        }
         return cellView
     }()
 
@@ -34,6 +40,8 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     private var separatorType: ViewModel.SeparatorType = .small
 
     var onReplyClick: (() -> Void)?
+    var onLikeClick: (() -> Void)?
+    var onDislikeClick: (() -> Void)?
 
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
