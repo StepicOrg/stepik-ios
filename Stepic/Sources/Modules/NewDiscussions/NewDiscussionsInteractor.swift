@@ -8,6 +8,7 @@ protocol NewDiscussionsInteractorProtocol {
     func doNextRepliesLoad(request: NewDiscussions.NextRepliesLoad.Request)
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request )
     func doCommentDelete(request: NewDiscussions.CommentDelete.Request)
+    func doCommentLike(request: NewDiscussions.CommentLike.Request)
     func doSortTypePresentation(request: NewDiscussions.SortTypePresentation.Request)
     func doSortTypeUpdate(request: NewDiscussions.SortTypeUpdate.Request)
 }
@@ -252,6 +253,77 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
 
+    func doCommentLike(request: NewDiscussions.CommentLike.Request) {
+        guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
+            return NewDiscussionsInteractor.logger.error(
+                "new discussions interactor: unable to find comment: \(request.commentID)"
+            )
+        }
+
+        if let voteValue = comment.vote.value {
+            let voteValueToSet: VoteValue? = voteValue == .epic ? nil : .epic
+            let vote = Vote(id: comment.vote.id, value: voteValueToSet)
+
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: starting update vote from \(voteValue) to \(voteValueToSet ??? "null")"
+            )
+
+            self.provider.updateVote(vote).done { vote in
+                NewDiscussionsInteractor.logger.info("new discussions interactor: successfully updated vote")
+
+                comment.vote = vote
+
+                switch voteValue {
+                case .abuse:
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked)
+                    comment.abuseCount -= 1
+                    comment.epicCount += 1
+                case .epic:
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unliked)
+                    comment.epicCount -= 1
+                }
+            }.ensure {
+                self.presenter.presentCommentLikeResult(
+                    response: NewDiscussions.CommentLike.Response(result: self.makeDiscussionsData())
+                )
+            }.catch { error in
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: failed update vote",
+                    metadata: [
+                        "error": .string("\(error)"),
+                        "commentID": .string("\(request.commentID)"),
+                        "voteID": .string("\(vote.id)")
+                    ]
+                )
+            }
+        } else {
+            NewDiscussionsInteractor.logger.info("new discussions interactor: starting update vote value to epic")
+
+            let vote = Vote(id: comment.vote.id, value: .epic)
+
+            self.provider.updateVote(vote).done { vote in
+                NewDiscussionsInteractor.logger.info("new discussions interactor: successfully updated vote")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked)
+
+                comment.vote = vote
+                comment.epicCount += 1
+            }.ensure {
+                self.presenter.presentCommentLikeResult(
+                    response: NewDiscussions.CommentLike.Response(result: self.makeDiscussionsData())
+                )
+            }.catch { error in
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: failed update vote",
+                    metadata: [
+                        "error": .string("\(error)"),
+                        "commentID": .string("\(request.commentID)"),
+                        "voteID": .string("\(vote.id)")
+                    ]
+                )
+            }
+        }
+    }
+
     func doSortTypePresentation(request: NewDiscussions.SortTypePresentation.Request) {
         self.presenter.presentSortType(
             response: NewDiscussions.SortTypePresentation.Response(
@@ -355,6 +427,10 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
 
         return idsToLoad
+    }
+
+    private func getAllComments() -> [Comment] {
+        return self.currentDiscussions + Array(self.currentReplies.values).reduce([], +)
     }
 
     private func presentWriteComment(commentID: Comment.IdType?) {

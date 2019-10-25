@@ -8,6 +8,7 @@ protocol NewDiscussionsPresenterProtocol {
     func presentCommentCreated(response: NewDiscussions.CommentCreated.Response)
     func presentCommentUpdated(response: NewDiscussions.CommentUpdated.Response)
     func presentCommentDeleteResult(response: NewDiscussions.CommentDelete.Response)
+    func presentCommentLikeResult(response: NewDiscussions.CommentLike.Response)
     func presentSortType(response: NewDiscussions.SortTypePresentation.Response)
     func presentSortTypeUpdate(response: NewDiscussions.SortTypeUpdate.Response)
     func presentWaitingState(response: NewDiscussions.BlockingWaitingIndicatorUpdate.Response)
@@ -90,6 +91,11 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
                 viewModel: NewDiscussions.CommentDelete.ViewModel(state: .error)
             )
         }
+    }
+
+    func presentCommentLikeResult(response: NewDiscussions.CommentLike.Response) {
+        let data = self.makeDiscussionsData(response.result)
+        self.viewController?.displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel(data: data))
     }
 
     func presentSortType(response: NewDiscussions.SortTypePresentation.Response) {
@@ -202,7 +208,8 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             dislikesCount: comment.abuseCount,
             voteValue: voteValue,
             canEdit: comment.actions.contains(.edit),
-            canDelete: comment.actions.contains(.delete)
+            canDelete: comment.actions.contains(.delete),
+            canVote: comment.actions.contains(.vote)
         )
     }
 

@@ -135,6 +135,21 @@ enum NewDiscussions {
         }
     }
 
+    /// Likes comment by id
+    enum CommentLike {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let result: DiscussionsResponseData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsViewData
+        }
+    }
+
     /// Presents sort action sheet (after sort type bar button item click)
     enum SortTypePresentation {
         struct Request { }
