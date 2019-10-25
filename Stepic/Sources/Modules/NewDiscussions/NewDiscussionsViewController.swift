@@ -10,6 +10,7 @@ protocol NewDiscussionsViewControllerProtocol: class {
     func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel)
     func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel)
     func displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel)
+    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel)
     func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel)
     func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel)
@@ -213,6 +214,10 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
+    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
     func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
 
@@ -328,7 +333,8 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
                 UIAlertAction(
                     title: abuseTitle,
                     style: .default,
-                    handler: { _ in
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
                     }
                 )
             )
@@ -380,6 +386,6 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         viewModel: NewDiscussionsCommentViewModel
     ) {
-        print("\(#function) :: \(viewModel)")
+        self.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
     }
 }

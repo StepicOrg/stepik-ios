@@ -9,6 +9,7 @@ protocol NewDiscussionsPresenterProtocol {
     func presentCommentUpdated(response: NewDiscussions.CommentUpdated.Response)
     func presentCommentDeleteResult(response: NewDiscussions.CommentDelete.Response)
     func presentCommentLikeResult(response: NewDiscussions.CommentLike.Response)
+    func presentCommentAbuseResult(response: NewDiscussions.CommentAbuse.Response)
     func presentSortType(response: NewDiscussions.SortTypePresentation.Response)
     func presentSortTypeUpdate(response: NewDiscussions.SortTypeUpdate.Response)
     func presentWaitingState(response: NewDiscussions.BlockingWaitingIndicatorUpdate.Response)
@@ -96,6 +97,11 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
     func presentCommentLikeResult(response: NewDiscussions.CommentLike.Response) {
         let data = self.makeDiscussionsData(response.result)
         self.viewController?.displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel(data: data))
+    }
+
+    func presentCommentAbuseResult(response: NewDiscussions.CommentAbuse.Response) {
+        let data = self.makeDiscussionsData(response.result)
+        self.viewController?.displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel(data: data))
     }
 
     func presentSortType(response: NewDiscussions.SortTypePresentation.Response) {

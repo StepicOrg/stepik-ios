@@ -9,6 +9,7 @@ protocol NewDiscussionsInteractorProtocol {
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request )
     func doCommentDelete(request: NewDiscussions.CommentDelete.Request)
     func doCommentLike(request: NewDiscussions.CommentLike.Request)
+    func doCommentAbuse(request: NewDiscussions.CommentAbuse.Request)
     func doSortTypePresentation(request: NewDiscussions.SortTypePresentation.Request)
     func doSortTypeUpdate(request: NewDiscussions.SortTypeUpdate.Request)
 }
@@ -72,6 +73,8 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     }
 
     // MARK: - NewDiscussionsInteractorProtocol -
+
+    // MARK: Fetching
 
     func doDiscussionsLoad(request: NewDiscussions.DiscussionsLoad.Request) {
         self.fetchBackgroundQueue.async { [weak self] in
@@ -189,6 +192,8 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
 
+    // MARK: Write & delete
+
     func doWriteCommentPresentation(request: NewDiscussions.WriteCommentPresentation.Request) {
         switch request.presentationContext {
         case .create:
@@ -252,6 +257,8 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             )
         }
     }
+
+    // MARK: Like & abuse
 
     func doCommentLike(request: NewDiscussions.CommentLike.Request) {
         guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
@@ -324,6 +331,79 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         }
     }
 
+    func doCommentAbuse(request: NewDiscussions.CommentAbuse.Request) {
+        guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
+            return NewDiscussionsInteractor.logger.error(
+                "new discussions interactor: unable to find comment: \(request.commentID)"
+            )
+        }
+
+        if let voteValue = comment.vote.value {
+            let voteValueToSet: VoteValue? = voteValue == .abuse ? nil : .abuse
+            let vote = Vote(id: comment.vote.id, value: voteValueToSet)
+
+            NewDiscussionsInteractor.logger.info(
+                "new discussions interactor: starting update vote from \(voteValue) to \(voteValueToSet ??? "null")"
+            )
+
+            self.provider.updateVote(vote).done { vote in
+                NewDiscussionsInteractor.logger.info("new discussions interactor: successfully updated vote")
+
+                comment.vote = vote
+
+                switch voteValue {
+                case .abuse:
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.unabused)
+                    comment.abuseCount -= 1
+                case .epic:
+                    AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused)
+                    comment.epicCount -= 1
+                    comment.abuseCount += 1
+                }
+            }.ensure {
+                self.presenter.presentCommentAbuseResult(
+                    response: NewDiscussions.CommentAbuse.Response(result: self.makeDiscussionsData())
+                )
+            }.catch { error in
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: failed update vote",
+                    metadata: [
+                        "error": .string("\(error)"),
+                        "commentID": .string("\(request.commentID)"),
+                        "voteID": .string("\(vote.id)")
+                    ]
+                )
+            }
+        } else {
+            NewDiscussionsInteractor.logger.info("new discussions interactor: starting update vote value to abuse")
+
+            let vote = Vote(id: comment.vote.id, value: .abuse)
+
+            self.provider.updateVote(vote).done { vote in
+                NewDiscussionsInteractor.logger.info("new discussions interactor: successfully updated vote")
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused)
+
+                comment.vote = vote
+                comment.abuseCount += 1
+            }.ensure {
+                self.presenter.presentCommentAbuseResult(
+                    response: NewDiscussions.CommentAbuse.Response(result: self.makeDiscussionsData())
+                )
+            }.catch { error in
+                NewDiscussionsInteractor.logger.error(
+                    "new discussions interactor: failed update vote",
+                    metadata: [
+                        "error": .string("\(error)"),
+                        "commentID": .string("\(request.commentID)"),
+                        "voteID": .string("\(vote.id)")
+                    ]
+                )
+            }
+        }
+    }
+
+    // MARK: Sort type
+
     func doSortTypePresentation(request: NewDiscussions.SortTypePresentation.Request) {
         self.presenter.presentSortType(
             response: NewDiscussions.SortTypePresentation.Response(
@@ -346,6 +426,8 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     }
 
     // MARK: - Private API
+
+    // MARK: Fetching helpers
 
     private func fetchDiscussions(
         discussionProxyID: DiscussionProxy.IdType
@@ -432,6 +514,8 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
     private func getAllComments() -> [Comment] {
         return self.currentDiscussions + Array(self.currentReplies.values).reduce([], +)
     }
+
+    // MARK: Write & delete helpers
 
     private func presentWriteComment(commentID: Comment.IdType?) {
         var parentID: Comment.IdType?

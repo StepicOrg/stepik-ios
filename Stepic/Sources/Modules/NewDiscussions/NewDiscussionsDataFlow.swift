@@ -135,8 +135,23 @@ enum NewDiscussions {
         }
     }
 
-    /// Likes comment by id
+    /// Updates comment's vote value to epic or null
     enum CommentLike {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let result: DiscussionsResponseData
+        }
+
+        struct ViewModel {
+            let data: DiscussionsViewData
+        }
+    }
+
+    /// Updates comment's vote value to abuse or null
+    enum CommentAbuse {
         struct Request {
             let commentID: Comment.IdType
         }
