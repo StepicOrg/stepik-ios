@@ -73,12 +73,15 @@ final class NewDiscussionsCellView: UIView {
         return label
     }()
 
-    private lazy var textLabel: UILabel = {
-        let label = UILabel()
-        label.font = self.appearance.textLabelFont
-        label.textColor = self.appearance.textLabelTextColor
-        label.numberOfLines = 0
-        return label
+    private lazy var contentTextView: ProcessedContentTextView = {
+        var appearance = ProcessedContentTextView.Appearance()
+        appearance.insets = LayoutInsets(insets: .zero)
+        appearance.backgroundColor = .clear
+
+        let view = ProcessedContentTextView(appearance: appearance)
+        view.delegate = self
+
+        return view
     }()
 
     private lazy var dateLabel: UILabel = {
@@ -140,6 +143,7 @@ final class NewDiscussionsCellView: UIView {
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
+    var onContentLoaded: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -162,7 +166,7 @@ final class NewDiscussionsCellView: UIView {
             self.updateBadge(text: "", isHidden: true)
             self.nameLabel.text = nil
             self.dateLabel.text = nil
-            self.textLabel.text = nil
+            self.contentTextView.isHidden = true
             self.updateVotes(likes: 0, dislikes: 0, voteValue: nil, canVote: false)
             self.avatarImageView.reset()
             return
@@ -186,8 +190,7 @@ final class NewDiscussionsCellView: UIView {
 
         self.nameLabel.text = viewModel.userName
         self.dateLabel.text = viewModel.dateRepresentation
-        // TODO: Add LaTeX support via ProcessedContentTextView
-        self.textLabel.setTextWithHTMLString(viewModel.text)
+        self.contentTextView.loadHTMLText(viewModel.text)
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
@@ -245,7 +248,7 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.badgeLabel)
         self.addSubview(self.nameLabel)
-        self.addSubview(self.textLabel)
+        self.addSubview(self.contentTextView)
         self.addSubview(self.bottomControlsStackView)
     }
 
@@ -272,7 +275,7 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
         }
 
-        self.textLabel.snp.makeConstraints { make in
+        self.contentTextView.snp.makeConstraints { make in
             make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textLabelInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-self.appearance.textLabelInsets.right)
@@ -281,9 +284,22 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomControlsStackView.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsInsets.left)
-            make.top.equalTo(self.textLabel.snp.bottom).offset(self.appearance.bottomControlsInsets.top)
+            make.top.equalTo(self.contentTextView.snp.bottom).offset(self.appearance.bottomControlsInsets.top)
             make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsInsets.bottom)
         }
     }
+}
+
+// MARK: - NewDiscussionsCellView: ProcessedContentTextViewDelegate -
+
+extension NewDiscussionsCellView: ProcessedContentTextViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+        self.contentTextView.isHidden = false
+        self.onContentLoaded?()
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) { }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) { }
 }

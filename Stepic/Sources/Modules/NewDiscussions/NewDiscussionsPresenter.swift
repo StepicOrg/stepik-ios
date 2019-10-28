@@ -193,6 +193,15 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             return "Unknown"
         }()
 
+        let htmlText: String = {
+            let contentProcessor = ContentProcessor(
+                content: comment.text,
+                rules: ContentProcessor.defaultRules,
+                injections: ContentProcessor.defaultInjections
+            )
+            return contentProcessor.processContent()
+        }()
+
         let dateRepresentation = FormatterHelper.dateToRelativeString(comment.time)
 
         let voteValue: VoteValue? = {
@@ -208,7 +217,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             userRole: comment.userRole,
             isPinned: comment.isPinned,
             userName: userName,
-            text: comment.text,
+            text: htmlText,
             dateRepresentation: dateRepresentation,
             likesCount: comment.epicCount,
             dislikesCount: comment.abuseCount,

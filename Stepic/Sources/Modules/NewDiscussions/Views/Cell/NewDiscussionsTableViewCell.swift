@@ -22,6 +22,14 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         cellView.onDislikeClick = { [weak self] in
             self?.onDislikeClick?()
         }
+        cellView.onContentLoaded = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.layoutIfNeeded()
+            strongSelf.onContentLoaded?()
+        }
         return cellView
     }()
 
@@ -42,6 +50,7 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
+    var onContentLoaded: (() -> Void)?
 
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
