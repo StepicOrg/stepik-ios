@@ -26,7 +26,8 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     private var state: NewDiscussions.ViewControllerState
     private var canTriggerPagination = true
 
-    private lazy var tableDataSource: NewDiscussionsTableViewDataSource = {
+    // swiftlint:disable:next weak_delegate
+    private lazy var discussionsTableDelegate: NewDiscussionsTableViewDataSource = {
         let tableDataSource = NewDiscussionsTableViewDataSource()
         tableDataSource.delegate = self
         return tableDataSource
@@ -60,7 +61,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     }
 
     override func loadView() {
-        let view = NewDiscussionsView(frame: UIScreen.main.bounds)
+        let view = NewDiscussionsView(frame: UIScreen.main.bounds, tableViewDelegate: self.discussionsTableDelegate)
         view.delegate = self
         self.view = view
     }
@@ -133,8 +134,8 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
             self.isPlaceholderShown = false
         }
 
-        self.tableDataSource.viewModels = data.discussions
-        self.newDiscussionsView?.updateTableViewData(dataSource: self.tableDataSource)
+        self.discussionsTableDelegate.viewModels = data.discussions
+        self.newDiscussionsView?.updateTableViewData(delegate: self.discussionsTableDelegate)
 
         self.updatePagination(hasNextPage: data.discussionsLeftToLoad > 0)
     }
@@ -267,17 +268,48 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
             self.interactor.doNextDiscussionsLoad(request: .init())
         }
     }
+}
 
-    func newDiscussionsViewDidRequestRepliesPagination(_ view: NewDiscussionsView, at indexPath: IndexPath) {
-        if let discussionViewModel = self.tableDataSource.getDiscussionViewModel(at: indexPath) {
-            self.interactor.doNextRepliesLoad(request: .init(discussionID: discussionViewModel.id))
-        }
+// MARK: - NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate -
+
+extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate {
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didReplyForComment comment: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doWriteCommentPresentation(
+            request: .init(commentID: comment.id, presentationContext: .create)
+        )
     }
 
-    func newDiscussionsView(_ view: NewDiscussionsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath) {
-        if let commentViewModel = self.tableDataSource.getCommentViewModel(at: indexPath) {
-            self.presentCommentActionSheet(commentViewModel, sourceView: cell, sourceRect: cell.bounds)
-        }
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didLikeComment comment: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doCommentLike(request: .init(commentID: comment.id))
+    }
+
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didDislikeComment comment: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doCommentAbuse(request: .init(commentID: comment.id))
+    }
+
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectLoadMoreRepliesForDiscussion discussion: NewDiscussionsDiscussionViewModel
+    ) {
+        self.interactor.doNextRepliesLoad(request: .init(discussionID: discussion.id))
+    }
+
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectComment comment: NewDiscussionsCommentViewModel,
+        at indexPath: IndexPath,
+        cell: UITableViewCell
+    ) {
+        self.presentCommentActionSheet(comment, sourceView: cell, sourceRect: cell.bounds)
     }
 
     private func presentCommentActionSheet(
@@ -360,32 +392,5 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
         }
 
         self.present(alert, animated: true)
-    }
-}
-
-// MARK: - NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate -
-
-extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate {
-    func newDiscussionsTableViewDataSourceDidRequestReply(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        viewModel: NewDiscussionsCommentViewModel
-    ) {
-        self.interactor.doWriteCommentPresentation(
-            request: .init(commentID: viewModel.id, presentationContext: .create)
-        )
-    }
-
-    func newDiscussionsTableViewDataSourceDidRequestLike(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        viewModel: NewDiscussionsCommentViewModel
-    ) {
-        self.interactor.doCommentLike(request: .init(commentID: viewModel.id))
-    }
-
-    func newDiscussionsTableViewDataSourceDidRequestDislike(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        viewModel: NewDiscussionsCommentViewModel
-    ) {
-        self.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
     }
 }

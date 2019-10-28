@@ -1,17 +1,27 @@
 import UIKit
 
 protocol NewDiscussionsTableViewDataSourceDelegate: class {
-    func newDiscussionsTableViewDataSourceDidRequestReply(
+    func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        viewModel: NewDiscussionsCommentViewModel
+        didReplyForComment comment: NewDiscussionsCommentViewModel
     )
-    func newDiscussionsTableViewDataSourceDidRequestLike(
+    func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        viewModel: NewDiscussionsCommentViewModel
+        didLikeComment comment: NewDiscussionsCommentViewModel
     )
-    func newDiscussionsTableViewDataSourceDidRequestDislike(
+    func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        viewModel: NewDiscussionsCommentViewModel
+        didDislikeComment comment: NewDiscussionsCommentViewModel
+    )
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectLoadMoreRepliesForDiscussion discussion: NewDiscussionsDiscussionViewModel
+    )
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectComment comment: NewDiscussionsCommentViewModel,
+        at indexPath: IndexPath,
+        cell: UITableViewCell
     )
 }
 
@@ -23,19 +33,6 @@ final class NewDiscussionsTableViewDataSource: NSObject {
     init(viewModels: [NewDiscussionsDiscussionViewModel] = []) {
         self.viewModels = viewModels
         super.init()
-    }
-
-    func getDiscussionViewModel(at indexPath: IndexPath) -> NewDiscussionsDiscussionViewModel? {
-        return self.viewModels[safe: indexPath.section]
-    }
-
-    func getCommentViewModel(at indexPath: IndexPath) -> NewDiscussionsCommentViewModel? {
-        if indexPath.row == NewDiscussionsTableViewDataSource.parentDiscussionRowIndex {
-            return self.viewModels[safe: indexPath.section]?.comment
-        }
-        return self.viewModels[safe: indexPath.section]?.replies[
-            safe: indexPath.row - NewDiscussionsTableViewDataSource.parentDiscussionInset
-        ]
     }
 }
 
@@ -115,30 +112,21 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
                 return
             }
 
-            strongSelf.delegate?.newDiscussionsTableViewDataSourceDidRequestReply(
-                strongSelf,
-                viewModel: commentViewModel
-            )
+            strongSelf.delegate?.newDiscussionsTableViewDataSource(strongSelf, didReplyForComment: commentViewModel)
         }
         cell.onLikeClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.newDiscussionsTableViewDataSourceDidRequestLike(
-                strongSelf,
-                viewModel: commentViewModel
-            )
+            strongSelf.delegate?.newDiscussionsTableViewDataSource(strongSelf, didLikeComment: commentViewModel)
         }
         cell.onDislikeClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.delegate?.newDiscussionsTableViewDataSourceDidRequestDislike(
-                strongSelf,
-                viewModel: commentViewModel
-            )
+            strongSelf.delegate?.newDiscussionsTableViewDataSource(strongSelf, didDislikeComment: commentViewModel)
         }
 
         let isLastComment = indexPath.row == tableView.numberOfRows(inSection: indexPath.section)
@@ -159,5 +147,44 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
 
         cell.title = viewModel.formattedRepliesLeftToLoad
         cell.isUpdating = viewModel.isFetchingMoreReplies
+    }
+}
+
+// MARK: - NewDiscussionsTableViewDataSource: UITableViewDelegate -
+
+extension NewDiscussionsTableViewDataSource: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        defer {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+
+        if selectedCell is NewDiscussionsLoadMoreTableViewCell {
+            self.delegate?.newDiscussionsTableViewDataSource(
+                self,
+                didSelectLoadMoreRepliesForDiscussion: self.viewModels[indexPath.section]
+            )
+        } else if let selectedComment = self.getCommentViewModel(at: indexPath) {
+            self.delegate?.newDiscussionsTableViewDataSource(
+                self,
+                didSelectComment: selectedComment,
+                at: indexPath,
+                cell: selectedCell
+            )
+        }
+    }
+
+    // MARK: Private helpers
+
+    private func getCommentViewModel(at indexPath: IndexPath) -> NewDiscussionsCommentViewModel? {
+        if indexPath.row == NewDiscussionsTableViewDataSource.parentDiscussionRowIndex {
+            return self.viewModels[safe: indexPath.section]?.comment
+        }
+        return self.viewModels[safe: indexPath.section]?.replies[
+            safe: indexPath.row - NewDiscussionsTableViewDataSource.parentDiscussionInset
+        ]
     }
 }
