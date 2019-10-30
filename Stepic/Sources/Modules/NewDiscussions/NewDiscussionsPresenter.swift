@@ -195,7 +195,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
 
         let htmlText: String = {
             let contentProcessor = ContentProcessor(
-                content: comment.text,
+                content: comment.text.trimmingCharacters(in: .whitespacesAndNewlines),
                 rules: ContentProcessor.defaultRules,
                 injections: ContentProcessor.defaultInjections
             )
