@@ -28,11 +28,15 @@ protocol NewDiscussionsTableViewDataSourceDelegate: class {
 final class NewDiscussionsTableViewDataSource: NSObject {
     weak var delegate: NewDiscussionsTableViewDataSourceDelegate?
 
-    var viewModels: [NewDiscussionsDiscussionViewModel]
+    private var viewModels: [NewDiscussionsDiscussionViewModel]
 
     init(viewModels: [NewDiscussionsDiscussionViewModel] = []) {
         self.viewModels = viewModels
         super.init()
+    }
+
+    func update(viewModels: [NewDiscussionsDiscussionViewModel]) {
+        self.viewModels = viewModels
     }
 }
 

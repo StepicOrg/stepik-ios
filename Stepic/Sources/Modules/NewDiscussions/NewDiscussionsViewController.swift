@@ -134,7 +134,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
             self.isPlaceholderShown = false
         }
 
-        self.discussionsTableDelegate.viewModels = data.discussions
+        self.discussionsTableDelegate.update(viewModels: data.discussions)
         self.newDiscussionsView?.updateTableViewData(delegate: self.discussionsTableDelegate)
 
         self.updatePagination(hasNextPage: data.discussionsLeftToLoad > 0)
