@@ -33,7 +33,7 @@ final class DiscussionsLegacyAssembly: Assembly {
             votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
-        viewController.title = NSLocalizedString("Discussions", comment: "")
+        viewController.title = NSLocalizedString("DiscussionsTitle", comment: "")
         return viewController
     }
 }
@@ -189,8 +189,6 @@ final class DiscussionsViewController: UIViewController, DiscussionsView, Contro
     }
 
     func displayWriteComment(parentId: Comment.IdType?) {
-        let assembly = WriteCommentLegacyAssembly(target: self.target, parentId: parentId, delegate: self)
-        self.push(module: assembly.makeModule())
     }
 
     @objc
@@ -213,11 +211,5 @@ extension DiscussionsViewController: DiscussionsViewControllerDelegate {
     func profileButtonDidClick(_ userId: Int) {
         let assembly = ProfileAssembly(userID: userId)
         self.push(module: assembly.makeModule())
-    }
-}
-
-extension DiscussionsViewController: WriteCommentViewControllerDelegate {
-    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
-        self.presenter?.writeComment(comment)
     }
 }

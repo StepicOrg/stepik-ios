@@ -86,6 +86,7 @@ final class NewDiscussionsCellView: UIView {
         label.font = self.appearance.dateLabelFont
         label.textColor = self.appearance.dateLabelTextColor
         label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return label
     }()
 
@@ -106,6 +107,7 @@ final class NewDiscussionsCellView: UIView {
         imageButton.title = "0"
         imageButton.image = UIImage(named: "discussions-thumb-up")?.withRenderingMode(.alwaysTemplate)
         imageButton.titleInsets = self.appearance.likeButtonTitleInsets
+        imageButton.addTarget(self, action: #selector(self.likeDidClick), for: .touchUpInside)
         return imageButton
     }()
 
@@ -117,6 +119,7 @@ final class NewDiscussionsCellView: UIView {
         imageButton.title = "0"
         imageButton.image = UIImage(named: "discussions-thumb-down")?.withRenderingMode(.alwaysTemplate)
         imageButton.titleInsets = self.appearance.dislikeButtonTitleInsets
+        imageButton.addTarget(self, action: #selector(self.dislikeDidClick), for: .touchUpInside)
         return imageButton
     }()
 
@@ -135,6 +138,8 @@ final class NewDiscussionsCellView: UIView {
     private var nameLabelTopConstraint: Constraint?
 
     var onReplyClick: (() -> Void)?
+    var onLikeClick: (() -> Void)?
+    var onDislikeClick: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -158,7 +163,7 @@ final class NewDiscussionsCellView: UIView {
             self.nameLabel.text = nil
             self.dateLabel.text = nil
             self.textLabel.text = nil
-            self.updateVote(likes: 0, dislikes: 0, voteValue: nil)
+            self.updateVotes(likes: 0, dislikes: 0, voteValue: nil, canVote: false)
             self.avatarImageView.reset()
             return
         }
@@ -172,7 +177,12 @@ final class NewDiscussionsCellView: UIView {
             self.updateBadge(text: NSLocalizedString("Staff", comment: ""), isHidden: false)
         }
 
-        self.updateVote(likes: viewModel.likesCount, dislikes: viewModel.dislikesCount, voteValue: viewModel.voteValue)
+        self.updateVotes(
+            likes: viewModel.likesCount,
+            dislikes: viewModel.dislikesCount,
+            voteValue: viewModel.voteValue,
+            canVote: viewModel.canVote
+        )
 
         self.nameLabel.text = viewModel.userName
         self.dateLabel.text = viewModel.dateRepresentation
@@ -193,7 +203,7 @@ final class NewDiscussionsCellView: UIView {
         self.nameLabelTopConstraint?.update(offset: isHidden ? 0 : self.appearance.nameLabelInsets.top)
     }
 
-    private func updateVote(likes: Int, dislikes: Int, voteValue: VoteValue?) {
+    private func updateVotes(likes: Int, dislikes: Int, voteValue: VoteValue?, canVote: Bool) {
         self.likeImageButton.title = "\(likes)"
         self.dislikeImageButton.title = "\(dislikes)"
 
@@ -207,11 +217,24 @@ final class NewDiscussionsCellView: UIView {
             self.likeImageButton.tintColor = self.appearance.likeImageNormalTintColor
             self.dislikeImageButton.tintColor = self.appearance.likeImageNormalTintColor
         }
+
+        self.likeImageButton.isEnabled = canVote
+        self.dislikeImageButton.isEnabled = canVote
     }
 
     @objc
     private func replyDidClick() {
         self.onReplyClick?()
+    }
+
+    @objc
+    private func likeDidClick() {
+        self.onLikeClick?()
+    }
+
+    @objc
+    private func dislikeDidClick() {
+        self.onDislikeClick?()
     }
 }
 

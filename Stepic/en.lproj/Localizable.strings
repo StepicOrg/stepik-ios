@@ -116,16 +116,10 @@ NewCommentAlertMessage = "Show comment in web?";
 Reply = "Reply";
 ShowComments = "Show discussions";
 Discussions = "Discussions";
-WriteComment = "Write comment...";
-Comment = "Comment";
 ShowMoreReplies = "More replies";
 ShowMoreDiscussions = "More discussions";
 RefreshingDiscussions = "Refreshing discussions...";
 NoDiscussionsTitle = "No discussions. Start the first one!";
-Like = "Like";
-Unlike = "Unlike";
-Abuse = "Abuse";
-Unabuse = "Don't abuse";
 Syllabus = "Syllabus";
 Course = "Course";
 NextLesson = "Next lesson";
@@ -657,12 +651,6 @@ WriteCourseReviewPlaceholder = "Review";
 WriteCourseReviewRatingHint = "Tap a Star to Rate";
 WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more than 80% steps";
 
-/* Discussions */
-DiscussionsSortTypeLastDiscussions = "Last discussions";
-DiscussionsSortTypeMostLikedDiscussions = "Most liked";
-DiscussionsSortTypeMostActiveDiscussions = "Most active";
-DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
-
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
 "Ok" = "Ok";
@@ -774,3 +762,25 @@ CodeQuizEmptyCodeLanguages = "No supported languages";
 CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
+
+/* Discussions */
+DiscussionsTitle = "Discussions";
+DiscussionsAlertActionEditTitle = "Edit";
+DiscussionsAlertActionDeleteTitle = "Delete";
+DiscussionsAlertActionLikeTitle = "Like";
+DiscussionsAlertActionUnlikeTitle = "Unlike";
+DiscussionsAlertActionAbuseTitle = "Abuse";
+DiscussionsAlertActionUnabuseTitle = "Don't abuse";
+DiscussionsSortTypeAlertTitle = "Sort by";
+DiscussionsSortTypeLastDiscussions = "Last discussions";
+DiscussionsSortTypeMostLikedDiscussions = "Most liked";
+DiscussionsSortTypeMostActiveDiscussions = "Most active";
+DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
+
+/* Write comment */
+WriteCommentTitle = "Comment";
+WriteCommentPlaceholder = "Leave a comment...";
+WriteCommentActionButtonCreate = "Send";
+WriteCommentActionButtonEdit = "Update";
+WriteCommentCancelPromptMessage = "Delete draft?";
+WriteCommentCancelPromptDestructiveActionTitle = "Delete";

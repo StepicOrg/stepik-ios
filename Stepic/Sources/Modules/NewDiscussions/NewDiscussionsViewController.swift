@@ -7,7 +7,13 @@ protocol NewDiscussionsViewControllerProtocol: class {
     func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel)
     func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel)
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
+    func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel)
+    func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel)
+    func displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel)
+    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel)
+    func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel)
+    func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 final class NewDiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -25,6 +31,19 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         tableDataSource.delegate = self
         return tableDataSource
     }()
+
+    private lazy var sortTypeBarButtonItem = UIBarButtonItem(
+        image: UIImage(named: "discussions-sort")?.withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: #selector(self.didClickSortType)
+    )
+
+    private lazy var composeBarButtonItem = UIBarButtonItem(
+        barButtonSystemItem: .compose,
+        target: self,
+        action: #selector(self.didClickWriteComment)
+    )
 
     init(
         interactor: NewDiscussionsInteractorProtocol,
@@ -49,14 +68,10 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("Discussions", comment: "")
+        self.title = NSLocalizedString("DiscussionsTitle", comment: "")
         self.registerPlaceholders()
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .compose,
-            target: self,
-            action: #selector(self.didClickWriteComment)
-        )
+        self.navigationItem.rightBarButtonItems = [self.composeBarButtonItem, self.sortTypeBarButtonItem]
 
         self.updateState(newState: self.state)
         self.interactor.doDiscussionsLoad(request: .init())
@@ -111,7 +126,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         }
     }
 
-    private func updateDiscussionsData(newData data: NewDiscussions.DiscussionsResult) {
+    private func updateDiscussionsData(newData data: NewDiscussions.DiscussionsViewData) {
         if data.discussions.isEmpty {
             self.showPlaceholder(for: .empty)
         } else {
@@ -135,7 +150,12 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
 
     @objc
     private func didClickWriteComment() {
-        self.interactor.doWriteCommentPresentation(request: .init(commentID: nil))
+        self.interactor.doWriteCommentPresentation(request: .init(commentID: nil, presentationContext: .create))
+    }
+
+    @objc
+    private func didClickSortType() {
+        self.interactor.doSortTypePresentation(request: .init())
     }
 }
 
@@ -160,19 +180,72 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
     }
 
     func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel) {
-        let assembly = WriteCommentLegacyAssembly(
-            target: viewModel.targetID,
-            parentId: viewModel.parentID,
-            delegate: self
+        let assembly = WriteCommentAssembly(
+            targetID: viewModel.targetID,
+            parentID: viewModel.parentID,
+            presentationContext: viewModel.presentationContext,
+            output: self.interactor as? WriteCommentOutputProtocol
         )
-        self.push(module: assembly.makeModule())
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+        self.present(navigationController, animated: true)
     }
 
     func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel) {
+    func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel) {
+        switch viewModel.state {
+        case .result(let data):
+            SVProgressHUD.showSuccess(withStatus: "")
+            self.updateDiscussionsData(newData: data)
+        case .error:
+            SVProgressHUD.showError(withStatus: "")
+        case .loading:
+            break
+        }
+    }
+
+    func displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
+
+        viewModel.items.forEach { sortTypeItem in
+            let action = UIAlertAction(
+                title: sortTypeItem.title,
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doSortTypeUpdate(request: .init(uniqueIdentifier: sortTypeItem.uniqueIdentifier))
+                }
+            )
+            alert.addAction(action)
+        }
+
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.barButtonItem = self.sortTypeBarButtonItem
+        }
+
+        self.present(alert, animated: true)
+    }
+
+    func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel) {
+        self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
@@ -218,10 +291,67 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
                 title: NSLocalizedString("Reply", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-                    self?.interactor.doWriteCommentPresentation(request: .init(commentID: viewModel.id))
+                    self?.interactor.doWriteCommentPresentation(
+                        request: .init(commentID: viewModel.id, presentationContext: .create)
+                    )
                 }
             )
         )
+
+        if viewModel.canEdit {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doWriteCommentPresentation(
+                            request: .init(commentID: viewModel.id, presentationContext: .edit)
+                        )
+                    }
+                )
+            )
+        }
+
+        if viewModel.canVote {
+            let likeTitle = viewModel.voteValue == .epic
+                ? NSLocalizedString("DiscussionsAlertActionUnlikeTitle", comment: "")
+                : NSLocalizedString("DiscussionsAlertActionLikeTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: likeTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentLike(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+
+            let abuseTitle = viewModel.voteValue == .abuse
+                ? NSLocalizedString("DiscussionsAlertActionUnabuseTitle", comment: "")
+                : NSLocalizedString("DiscussionsAlertActionAbuseTitle", comment: "")
+            alert.addAction(
+                UIAlertAction(
+                    title: abuseTitle,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+        }
+
+        if viewModel.canDelete {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionDeleteTitle", comment: ""),
+                    style: .destructive,
+                    handler: { [weak self] _ in
+                        self?.interactor.doCommentDelete(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+        }
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
 
         if let popoverPresentationController = alert.popoverPresentationController {
@@ -233,14 +363,6 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
     }
 }
 
-// MARK: - NewDiscussionsViewController: WriteCommentViewControllerDelegate -
-
-extension NewDiscussionsViewController: WriteCommentViewControllerDelegate {
-    func writeCommentViewControllerDidWriteComment(_ controller: WriteCommentViewController, comment: Comment) {
-        self.interactor.doCommentCreatedHandling(request: NewDiscussions.CommentCreated.Request(comment: comment))
-    }
-}
-
 // MARK: - NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate -
 
 extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate {
@@ -248,6 +370,22 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         viewModel: NewDiscussionsCommentViewModel
     ) {
-        self.interactor.doWriteCommentPresentation(request: .init(commentID: viewModel.id))
+        self.interactor.doWriteCommentPresentation(
+            request: .init(commentID: viewModel.id, presentationContext: .create)
+        )
+    }
+
+    func newDiscussionsTableViewDataSourceDidRequestLike(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doCommentLike(request: .init(commentID: viewModel.id))
+    }
+
+    func newDiscussionsTableViewDataSourceDidRequestDislike(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        viewModel: NewDiscussionsCommentViewModel
+    ) {
+        self.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
     }
 }

@@ -116,16 +116,10 @@ NewCommentAlertMessage = "Прочитать комментарий в брау�
 Reply = "Ответить";
 ShowComments = "Показать комментарии";
 Discussions = "Комментарии";
-WriteComment = "Написать комментарий...";
-Comment = "Комментарий";
 ShowMoreReplies = "Больше ответов";
 ShowMoreDiscussions = "Больше комментариев";
 RefreshingDiscussions = "Обновляем комментарии...";
 NoDiscussionsTitle = "Обсуждений нет. Начните первое!";
-Like = "Нравится";
-Unlike = "Больше не нравится";
-Abuse = "Пожаловаться";
-Unabuse = "Не жаловаться";
 Syllabus = "Модули";
 Course = "Курс";
 NextLesson = "Следующий урок";
@@ -658,12 +652,6 @@ WriteCourseReviewPlaceholder = "Отзыв";
 WriteCourseReviewRatingHint = "Коснитесь для оценки";
 WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить отзыв, пройдите больше 80% материалов";
 
-/* Discussions */
-DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
-DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
-DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
-DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
-
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
 "Ok" = "Ok";
@@ -775,3 +763,25 @@ CodeQuizEmptyCodeLanguages = "Нет поддерживаемых языков �
 CodeQuizFullscreenTabInstructionTitle = "Инструкция";
 CodeQuizFullscreenTabCodeTitle = "Код";
 CodeQuizFullscreenTabRunTitle = "Запуск";
+
+/* Discussions */
+DiscussionsTitle = "Комментарии";
+DiscussionsAlertActionEditTitle = "Редактировать";
+DiscussionsAlertActionDeleteTitle = "Удалить";
+DiscussionsAlertActionLikeTitle = "Нравится";
+DiscussionsAlertActionUnlikeTitle = "Больше не нравится";
+DiscussionsAlertActionAbuseTitle = "Пожаловаться";
+DiscussionsAlertActionUnabuseTitle = "Не жаловаться";
+DiscussionsSortTypeAlertTitle = "Сортировать по";
+DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
+DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
+DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
+DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
+
+/* Write comment */
+WriteCommentTitle = "Комментарий";
+WriteCommentPlaceholder = "Оставьте комментарий...";
+WriteCommentActionButtonCreate = "Отправить";
+WriteCommentActionButtonEdit = "Обновить";
+WriteCommentCancelPromptMessage = "Удалить черновик?";
+WriteCommentCancelPromptDestructiveActionTitle = "Удалить";

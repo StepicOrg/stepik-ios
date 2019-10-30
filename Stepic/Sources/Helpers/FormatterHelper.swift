@@ -1,4 +1,5 @@
 import Foundation
+import SwiftDate
 
 enum FormatterHelper {
     /// Format number; 1000 -> "1K", 900 -> "900"
@@ -105,5 +106,14 @@ enum FormatterHelper {
         dateFormatter.dateFormat = "dd MMMM yyyy HH:mm"
 
         return dateFormatter.string(from: date)
+    }
+
+    /// Format a date to a string representation relative to another reference date (default current).
+    static func dateToRelativeString(_ date: Date, referenceDate: Date = Date()) -> String {
+        return date.in(region: .UTC).toRelative(
+            since: DateInRegion(referenceDate, region: .UTC),
+            style: RelativeFormatter.defaultStyle(),
+            locale: Locales.current
+        )
     }
 }

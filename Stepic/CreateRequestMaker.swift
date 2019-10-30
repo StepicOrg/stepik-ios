@@ -12,14 +12,24 @@ import PromiseKit
 import SwiftyJSON
 
 final class CreateRequestMaker {
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, creatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<(T, JSON?)> {
+    func request<T: JSONSerializable>(
+        requestEndpoint: String,
+        paramName: String,
+        creatingObject: T,
+        withManager manager: Alamofire.SessionManager
+    ) -> Promise<(T, JSON)> {
         return Promise { seal in
             let params: Parameters? = [
                 paramName: creatingObject.json.dictionaryObject ?? ""
             ]
 
             checkToken().done {
-                manager.request("\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)", method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseSwiftyJSON { response in
+                manager.request(
+                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    method: .post,
+                    parameters: params,
+                    encoding: JSONEncoding.default
+                ).validate().responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
                         seal.reject(NetworkError(error: error))
@@ -28,16 +38,25 @@ final class CreateRequestMaker {
                         seal.fulfill((creatingObject, json))
                     }
                 }
-            }.catch {
-                error in
+            }.catch { error in
                 seal.reject(error)
             }
         }
     }
 
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, creatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<T> {
+    func request<T: JSONSerializable>(
+        requestEndpoint: String,
+        paramName: String,
+        creatingObject: T,
+        withManager manager: Alamofire.SessionManager
+    ) -> Promise<T> {
         return Promise { seal in
-            request(requestEndpoint: requestEndpoint, paramName: paramName, creatingObject: creatingObject, withManager: manager).done { comment, _ in
+            self.request(
+                requestEndpoint: requestEndpoint,
+                paramName: paramName,
+                creatingObject: creatingObject,
+                withManager: manager
+            ).done { comment, _ in
                 seal.fulfill(comment)
             }.catch { error in
                 seal.reject(error)
@@ -45,9 +64,19 @@ final class CreateRequestMaker {
         }
     }
 
-    func request<T: JSONSerializable>(requestEndpoint: String, paramName: String, creatingObject: T, withManager manager: Alamofire.SessionManager) -> Promise<Void> {
+    func request<T: JSONSerializable>(
+        requestEndpoint: String,
+        paramName: String,
+        creatingObject: T,
+        withManager manager: Alamofire.SessionManager
+    ) -> Promise<Void> {
         return Promise { seal in
-            request(requestEndpoint: requestEndpoint, paramName: paramName, creatingObject: creatingObject, withManager: manager).done { _, _ in
+            self.request(
+                requestEndpoint: requestEndpoint,
+                paramName: paramName,
+                creatingObject: creatingObject,
+                withManager: manager
+            ).done { _, _ in
                 seal.fulfill(())
             }.catch { error in
                 seal.reject(error)
