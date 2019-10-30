@@ -113,7 +113,7 @@ final class ProcessedContentTextView: UIView {
 
     private var isLoadingHTMLText = false
     /// Keeps track of current web view height.
-    private var currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
+    private(set) var currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -144,8 +144,14 @@ final class ProcessedContentTextView: UIView {
 
     func loadHTMLText(_ text: String) {
         self.isLoadingHTMLText = true
-        let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
-        self.webView.loadHTMLString(text, baseURL: baseURL)
+        self.webView.stopLoading()
+        self.webView.loadHTMLString(text, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+    }
+
+    func reset() {
+        self.webView.snp.updateConstraints { $0.height.equalTo(ProcessedContentTextView.defaultWebViewHeight) }
+        self.currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
+        self.loadHTMLText("")
     }
 
     // MARK: Private API

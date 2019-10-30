@@ -23,12 +23,12 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
             self?.onDislikeClick?()
         }
         cellView.onContentLoaded = { [weak self] in
-            guard let strongSelf = self else {
-                return
+            self?.onContentLoaded?()
+        }
+        cellView.onNewHeightUpdate = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.onNewHeightUpdate?(strongSelf.contentHeight)
             }
-
-            strongSelf.layoutIfNeeded()
-            strongSelf.onContentLoaded?()
         }
         return cellView
     }()
@@ -38,6 +38,11 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         view.backgroundColor = Appearance.separatorColor
         return view
     }()
+
+    // Use computer property because intrinsicContentSize works not well
+    var contentHeight: CGFloat {
+        return self.cellView.contentHeight + self.separatorType.height
+    }
 
     // Dynamic cell/separator leading space
     private var cellLeadingConstraint: Constraint?
@@ -50,7 +55,9 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
+    // Dynamic content callbacks
     var onContentLoaded: (() -> Void)?
+    var onNewHeightUpdate: ((CGFloat) -> Void)?
 
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()

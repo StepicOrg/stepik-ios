@@ -9,7 +9,9 @@ protocol NewDiscussionsViewDelegate: class {
 extension NewDiscussionsView {
     struct Appearance {
         let backgroundColor: UIColor = .white
+
         let paginationViewHeight: CGFloat = 52
+        let skeletonCellHeight: CGFloat = 130
     }
 }
 
@@ -24,8 +26,6 @@ final class NewDiscussionsView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
 
         tableView.refreshControl = self.refreshControl
@@ -43,6 +43,8 @@ final class NewDiscussionsView: UIView {
 
     private weak var tableViewDelegate: (UITableViewDelegate & UITableViewDataSource)?
     private var shouldShowPaginationView = false
+
+    private var isSkeletonVisible = false
 
     init(
         frame: CGRect = .zero,
@@ -93,6 +95,7 @@ final class NewDiscussionsView: UIView {
     }
 
     func showLoading() {
+        self.isSkeletonVisible = true
         self.tableView.skeleton.viewBuilder = {
             CourseInfoTabReviewsSkeletonView()
         }
@@ -100,6 +103,7 @@ final class NewDiscussionsView: UIView {
     }
 
     func hideLoading() {
+        self.isSkeletonVisible = false
         self.tableView.skeleton.hide()
     }
 
@@ -139,6 +143,13 @@ extension NewDiscussionsView: UITableViewDelegate {
         }
 
         self.tableViewDelegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if self.isSkeletonVisible {
+            return self.appearance.skeletonCellHeight
+        }
+        return self.tableViewDelegate?.tableView?(tableView, heightForRowAt: indexPath) ?? 0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

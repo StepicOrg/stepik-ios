@@ -18,12 +18,12 @@ extension NewDiscussionsCellView {
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let nameLabelTextColor = UIColor.mainDark
 
-        let textLabelInsets = LayoutInsets(top: 8, right: 16)
-        let textLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let textLabelTextColor = UIColor.mainDark
+        let contentTextViewInsets = LayoutInsets(top: 8, right: 16)
+        let contentTextViewDefaultHeight: CGFloat = 5
 
         let bottomControlsSpacing: CGFloat = 4
         let bottomControlsInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
+        let bottomControlsHeight: CGFloat = 20
 
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let dateLabelTextColor = UIColor.mainDark
@@ -81,6 +81,9 @@ final class NewDiscussionsCellView: UIView {
         let view = ProcessedContentTextView(appearance: appearance)
         view.delegate = self
 
+        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+
         return view
     }()
 
@@ -136,14 +139,31 @@ final class NewDiscussionsCellView: UIView {
         return stackView
     }()
 
+    var contentHeight: CGFloat {
+        let userInfoHeight = (self.badgeLabel.isHidden ? 0 : self.appearance.badgeLabelHeight)
+            + (self.badgeLabel.isHidden ? 0 : self.appearance.nameLabelInsets.top)
+            + self.nameLabel.intrinsicContentSize.height
+        return self.appearance.avatarImageViewInsets.top
+            + userInfoHeight
+            + self.appearance.contentTextViewInsets.top
+            + self.contentTextViewHeight
+            + self.appearance.bottomControlsInsets.top
+            + self.appearance.bottomControlsHeight
+            + self.appearance.bottomControlsInsets.bottom
+    }
+
+    private lazy var contentTextViewHeight: CGFloat = self.appearance.contentTextViewDefaultHeight
+
     // Dynamically show/hide badge
-    private var badgelabelHeightConstraint: Constraint?
+    private var badgeLabelHeightConstraint: Constraint?
     private var nameLabelTopConstraint: Constraint?
 
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
+    // Dynamic content callbacks
     var onContentLoaded: (() -> Void)?
+    var onNewHeightUpdate: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -166,9 +186,10 @@ final class NewDiscussionsCellView: UIView {
             self.updateBadge(text: "", isHidden: true)
             self.nameLabel.text = nil
             self.dateLabel.text = nil
-            self.contentTextView.isHidden = true
             self.updateVotes(likes: 0, dislikes: 0, voteValue: nil, canVote: false)
             self.avatarImageView.reset()
+            self.contentTextView.isHidden = true
+            self.contentTextView.reset()
             return
         }
 
@@ -202,7 +223,7 @@ final class NewDiscussionsCellView: UIView {
     private func updateBadge(text: String, isHidden: Bool) {
         self.badgeLabel.text = text
         self.badgeLabel.isHidden = isHidden
-        self.badgelabelHeightConstraint?.update(offset: isHidden ? 0 : self.appearance.badgeLabelHeight)
+        self.badgeLabelHeightConstraint?.update(offset: isHidden ? 0 : self.appearance.badgeLabelHeight)
         self.nameLabelTopConstraint?.update(offset: isHidden ? 0 : self.appearance.nameLabelInsets.top)
     }
 
@@ -264,7 +285,7 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.badgeLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeLabelInsets.left)
             make.top.equalTo(self.avatarImageView.snp.top)
-            self.badgelabelHeightConstraint = make.height.equalTo(self.appearance.badgeLabelHeight).constraint
+            self.badgeLabelHeightConstraint = make.height.equalTo(self.appearance.badgeLabelHeight).constraint
         }
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -276,17 +297,19 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         }
 
         self.contentTextView.snp.makeConstraints { make in
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textLabelInsets.top)
+            make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.contentTextViewInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
-            make.trailing.equalToSuperview().offset(-self.appearance.textLabelInsets.right)
+            make.trailing.equalToSuperview().offset(-self.appearance.contentTextViewInsets.right)
         }
 
         self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomControlsStackView.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsInsets.left)
-            make.top.equalTo(self.contentTextView.snp.bottom).offset(self.appearance.bottomControlsInsets.top)
+            make.top.greaterThanOrEqualTo(self.contentTextView.snp.bottom)
+                .offset(self.appearance.bottomControlsInsets.top)
             make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsInsets.bottom)
+            make.height.equalTo(self.appearance.bottomControlsHeight)
         }
     }
 }
@@ -295,8 +318,17 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 
 extension NewDiscussionsCellView: ProcessedContentTextViewDelegate {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+        self.contentTextViewHeight = CGFloat(self.contentTextView.currentWebViewHeight)
         self.contentTextView.isHidden = false
         self.onContentLoaded?()
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {
+        let newHeight = CGFloat(height)
+        if newHeight != self.contentTextViewHeight {
+            self.contentTextViewHeight = newHeight
+            self.onNewHeightUpdate?()
+        }
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) { }
