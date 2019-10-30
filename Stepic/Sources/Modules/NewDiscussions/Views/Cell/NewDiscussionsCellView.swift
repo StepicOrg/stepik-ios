@@ -190,6 +190,7 @@ final class NewDiscussionsCellView: UIView {
             self.avatarImageView.reset()
             self.contentTextView.isHidden = true
             self.contentTextView.reset()
+            self.contentTextViewHeight = self.appearance.contentTextViewDefaultHeight
             return
         }
 
