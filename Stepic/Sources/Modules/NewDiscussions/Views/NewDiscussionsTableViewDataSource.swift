@@ -31,6 +31,8 @@ final class NewDiscussionsTableViewDataSource: NSObject {
     private var viewModels: [NewDiscussionsDiscussionViewModel]
     private var cellHeightByCommentID: [Int: CGFloat] = [:]
 
+    private var pendingTableViewUpdateWorkItem: DispatchWorkItem?
+
     init(viewModels: [NewDiscussionsDiscussionViewModel] = []) {
         self.viewModels = viewModels
         super.init()
@@ -48,7 +50,7 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
     private static let parentDiscussionInset = 1
     private static let parentDiscussionRowIndex = 0
 
-    private static let tableViewUpdatesDelay: TimeInterval = 0.25
+    private static let tableViewUpdatesDelay: TimeInterval = 0.33
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.viewModels.count
@@ -131,22 +133,14 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
         let commentID = commentViewModel.id
 
         cell.onContentLoaded = { [weak self, weak cell, weak tableView] in
-            guard let strongSelf = self,
-                  let strongCell = cell,
-                  let strongTableView = tableView else {
-                return
+            if let strongSelf = self, let strongCell = cell, let strongTableView = tableView {
+                strongSelf.updateCellHeight(strongCell.contentHeight, commentID: commentID, tableView: strongTableView)
             }
-
-            strongSelf.updateCellHeight(strongCell.contentHeight, commentID: commentID, tableView: strongTableView)
         }
         cell.onNewHeightUpdate = { [weak self, weak tableView] newHeight in
-            guard let strongSelf = self,
-                  let strongTableView = tableView,
-                  strongSelf.cellHeightByCommentID[commentID] != nil else {
-                return
+            if let strongSelf = self, let strongTableView = tableView {
+                strongSelf.updateCellHeight(newHeight, commentID: commentID, tableView: strongTableView)
             }
-
-            strongSelf.updateCellHeight(newHeight, commentID: commentID, tableView: strongTableView)
         }
         cell.onReplyClick = { [weak self] in
             if let strongSelf = self {
@@ -184,17 +178,25 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
 
         self.cellHeightByCommentID[id] = newHeight
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + NewDiscussionsTableViewDataSource.tableViewUpdatesDelay) {
-            tableView.beginUpdates()
-            tableView.endUpdates()
+        let workItem = DispatchWorkItem { [weak tableView] in
+            tableView?.beginUpdates()
+            tableView?.endUpdates()
         }
+
+        self.pendingTableViewUpdateWorkItem?.cancel()
+        self.pendingTableViewUpdateWorkItem = workItem
+
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + NewDiscussionsTableViewDataSource.tableViewUpdatesDelay,
+            execute: workItem
+        )
     }
 }
 
 // MARK: - NewDiscussionsTableViewDataSource: UITableViewDelegate -
 
 extension NewDiscussionsTableViewDataSource: UITableViewDelegate {
-    private static let estimatedRowHeight: CGFloat = 130
+    private static let estimatedRowHeight: CGFloat = 150
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let height: CGFloat = {

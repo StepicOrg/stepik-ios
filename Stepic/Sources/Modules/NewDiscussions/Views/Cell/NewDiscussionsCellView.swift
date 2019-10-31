@@ -70,6 +70,10 @@ final class NewDiscussionsCellView: UIView {
         label.font = self.appearance.nameLabelFont
         label.textColor = self.appearance.nameLabelTextColor
         label.numberOfLines = 1
+
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+
         return label
     }()
 
@@ -188,7 +192,7 @@ final class NewDiscussionsCellView: UIView {
             self.dateLabel.text = nil
             self.updateVotes(likes: 0, dislikes: 0, voteValue: nil, canVote: false)
             self.avatarImageView.reset()
-            self.contentTextView.isHidden = true
+            self.contentTextView.alpha = 0
             self.contentTextView.reset()
             self.contentTextViewHeight = self.appearance.contentTextViewDefaultHeight
             return
@@ -306,8 +310,6 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomControlsStackView.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsInsets.left)
-            make.top.greaterThanOrEqualTo(self.contentTextView.snp.bottom)
-                .offset(self.appearance.bottomControlsInsets.top)
             make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsInsets.bottom)
             make.height.equalTo(self.appearance.bottomControlsHeight)
@@ -320,7 +322,7 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
 extension NewDiscussionsCellView: ProcessedContentTextViewDelegate {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         self.contentTextViewHeight = CGFloat(self.contentTextView.currentWebViewHeight)
-        self.contentTextView.isHidden = false
+        self.contentTextView.alpha = 1
         self.onContentLoaded?()
     }
 
