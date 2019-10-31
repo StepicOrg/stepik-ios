@@ -13,13 +13,22 @@ extension UILabel {
     func setTextWithHTMLString(_ htmlText: String, lineSpacing: CGFloat? = nil) {
         let currentFontSize = self.font.pointSize
 
-        let attributedString = htmlText.style(tags: [
+        let tags = [
             Style("b").font(.boldSystemFont(ofSize: currentFontSize)),
             Style("strong").font(.boldSystemFont(ofSize: currentFontSize)),
             Style("i").font(.italicSystemFont(ofSize: currentFontSize)),
             Style("em").font(.italicSystemFont(ofSize: currentFontSize)),
-            Style("strike").strikethroughStyle(NSUnderlineStyle.single)
-        ]).attributedString
+            Style("strike").strikethroughStyle(NSUnderlineStyle.single),
+            Style("p").font(.systemFont(ofSize: currentFontSize))
+        ]
+
+        let transformers: [TagTransformer] = [
+            TagTransformer.brTransformer,
+            TagTransformer(tagName: "p", tagType: .start, replaceValue: "\n"),
+            TagTransformer(tagName: "p", tagType: .end, replaceValue: "\n")
+        ]
+
+        let attributedString = htmlText.style(tags: tags, transformers: transformers).attributedString
 
         if let lineSpacing = lineSpacing {
             let paragraphStyle = NSMutableParagraphStyle()
