@@ -61,21 +61,24 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.shouldShowLoadMoreRepliesForSection(indexPath.section)
-            && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-            let cell: NewDiscussionsLoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.updateConstraintsIfNeeded()
+        var cell: UITableViewCell
 
-            self.configureLoadMoreCell(cell, at: indexPath)
-
-            return cell
+        if self.isLoadMoreTableViewCell(at: indexPath) {
+            cell = tableView.dequeueReusableCell(for: indexPath) as NewDiscussionsLoadMoreTableViewCell
         } else {
-            let cell: NewDiscussionsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.updateConstraintsIfNeeded()
+            cell = tableView.dequeueReusableCell(for: indexPath) as NewDiscussionsTableViewCell
+        }
 
-            self.configureDiscussionCell(cell, at: indexPath, tableView: tableView)
+        cell.updateConstraintsIfNeeded()
 
-            return cell
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let loadMoreCell = cell as? NewDiscussionsLoadMoreTableViewCell {
+            self.configureLoadMoreCell(loadMoreCell, at: indexPath)
+        } else if let discussionCell = cell as? NewDiscussionsTableViewCell {
+            self.configureDiscussionCell(discussionCell, at: indexPath, tableView: tableView)
         }
     }
 
