@@ -187,10 +187,12 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         }()
 
         let userName: String = {
+            let userIDString = "User \(comment.userID)"
             if let userInfo = comment.userInfo {
-                return "\(userInfo.firstName) \(userInfo.lastName)"
+                let fullName = "\(userInfo.firstName) \(userInfo.lastName)"
+                return fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? userIDString : fullName
             }
-            return "Unknown"
+            return userIDString
         }()
 
         let htmlText: String = {
