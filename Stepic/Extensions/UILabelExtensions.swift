@@ -28,7 +28,9 @@ extension UILabel {
             TagTransformer(tagName: "p", tagType: .end, replaceValue: "\n")
         ]
 
-        let attributedString = htmlText.style(tags: tags, transformers: transformers).attributedString
+        let attributedString = htmlText.style(tags: tags, transformers: transformers)
+            .attributedString
+            .trimmingCharacters(in: .whitespacesAndNewlines)
 
         if let lineSpacing = lineSpacing {
             let paragraphStyle = NSMutableParagraphStyle()
@@ -46,14 +48,44 @@ extension UILabel {
     }
 
     func getHeightWithText(_ text: String, html: Bool = false) -> CGFloat {
-        return type(of: self).heightForLabelWithText(text, lines: numberOfLines, font: font, width: bounds.width, html: html, alignment: textAlignment)
+        return type(of: self).heightForLabelWithText(
+            text,
+            lines: self.numberOfLines,
+            font: self.font,
+            width: self.bounds.width,
+            html: html,
+            alignment: self.textAlignment
+        )
     }
 
-    class func heightForLabelWithText(_ text: String, lines: Int, font: UIFont, width: CGFloat, html: Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
-        return heightForLabelWithText(text, lines: lines, fontName: font.fontName, fontSize: font.pointSize, width: width, html: html, alignment: alignment)
+    class func heightForLabelWithText(
+        _ text: String,
+        lines: Int,
+        font: UIFont,
+        width: CGFloat,
+        html: Bool = false,
+        alignment: NSTextAlignment = NSTextAlignment.natural
+    ) -> CGFloat {
+        return self.heightForLabelWithText(
+            text,
+            lines: lines,
+            fontName: font.fontName,
+            fontSize: font.pointSize,
+            width: width,
+            html: html,
+            alignment: alignment
+        )
     }
 
-    class func heightForLabelWithText(_ text: String, lines: Int, fontName: String, fontSize: CGFloat, width: CGFloat, html: Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
+    class func heightForLabelWithText(
+        _ text: String,
+        lines: Int,
+        fontName: String,
+        fontSize: CGFloat,
+        width: CGFloat,
+        html: Bool = false,
+        alignment: NSTextAlignment = NSTextAlignment.natural
+    ) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
 
         label.numberOfLines = lines
@@ -68,12 +100,20 @@ extension UILabel {
         } else {
             label.text = text
         }
+
         label.sizeToFit()
 
         return label.bounds.height
     }
 
-    class func heightForLabelWithText(_ text: String, lines: Int, standardFontOfSize size: CGFloat, width: CGFloat, html: Bool = false, alignment: NSTextAlignment = NSTextAlignment.natural) -> CGFloat {
+    class func heightForLabelWithText(
+        _ text: String,
+        lines: Int,
+        standardFontOfSize size: CGFloat,
+        width: CGFloat,
+        html: Bool = false,
+        alignment: NSTextAlignment = NSTextAlignment.natural
+    ) -> CGFloat {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
 
         label.numberOfLines = lines
