@@ -20,6 +20,7 @@ struct NewDiscussionsCommentViewModel {
     let isPinned: Bool
     let userName: String
     let text: String
+    let isWebViewSupportNeeded: Bool
     let dateRepresentation: String
     let likesCount: Int
     let dislikesCount: Int

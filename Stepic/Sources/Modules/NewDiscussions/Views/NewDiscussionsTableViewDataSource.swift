@@ -29,8 +29,11 @@ final class NewDiscussionsTableViewDataSource: NSObject {
     weak var delegate: NewDiscussionsTableViewDataSourceDelegate?
 
     private var viewModels: [NewDiscussionsDiscussionViewModel]
+    /// Caches cells heights
     private var cellHeightByCommentID: [Int: CGFloat] = [:]
-
+    /// Need for dynamic cell layouts & variable row heights where web view support not needed
+    private var discussionPrototypeCell: NewDiscussionsTableViewCell?
+    /// Accumulates multiple table view updates into one invocation
     private var pendingTableViewUpdateWorkItem: DispatchWorkItem?
 
     init(viewModels: [NewDiscussionsDiscussionViewModel] = []) {
@@ -49,7 +52,7 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
     // First row in a section is always a discussion comment, after that follows replies.
     private static let parentDiscussionInset = 1
     private static let parentDiscussionRowIndex = 0
-
+    // For smooth table view update animation
     private static let tableViewUpdatesDelay: TimeInterval = 0.33
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,24 +64,16 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
-
         if self.isLoadMoreTableViewCell(at: indexPath) {
-            cell = tableView.dequeueReusableCell(for: indexPath) as NewDiscussionsLoadMoreTableViewCell
-        } else {
-            cell = tableView.dequeueReusableCell(for: indexPath) as NewDiscussionsTableViewCell
-        }
-
-        cell.updateConstraintsIfNeeded()
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let loadMoreCell = cell as? NewDiscussionsLoadMoreTableViewCell {
+            let loadMoreCell: NewDiscussionsLoadMoreTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            loadMoreCell.updateConstraintsIfNeeded()
             self.configureLoadMoreCell(loadMoreCell, at: indexPath)
-        } else if let discussionCell = cell as? NewDiscussionsTableViewCell {
+            return loadMoreCell
+        } else {
+            let discussionCell: NewDiscussionsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            discussionCell.updateConstraintsIfNeeded()
             self.configureDiscussionCell(discussionCell, at: indexPath, tableView: tableView)
+            return discussionCell
         }
     }
 
@@ -90,6 +85,10 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
             + self.loadMoreRepliesInset(section: section)
     }
 
+    private func loadMoreRepliesInset(section: Int) -> Int {
+        return self.shouldShowLoadMoreRepliesForSection(section) ? 1 : 0
+    }
+
     private func shouldShowLoadMoreRepliesForSection(_ section: Int) -> Bool {
         return self.viewModels[section].repliesLeftToLoad > 0
     }
@@ -97,10 +96,6 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
     private func isLoadMoreTableViewCell(at indexPath: IndexPath) -> Bool {
         return self.shouldShowLoadMoreRepliesForSection(indexPath.section)
             && indexPath.row == self.numberOfRowsInSection(indexPath.section) - 1
-    }
-
-    private func loadMoreRepliesInset(section: Int) -> Int {
-        return self.shouldShowLoadMoreRepliesForSection(section) ? 1 : 0
     }
 
     private func configureLoadMoreCell(_ cell: NewDiscussionsLoadMoreTableViewCell, at indexPath: IndexPath) {
@@ -137,7 +132,8 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
 
         cell.onContentLoaded = { [weak self, weak cell, weak tableView] in
             if let strongSelf = self, let strongCell = cell, let strongTableView = tableView {
-                strongSelf.updateCellHeight(strongCell.contentHeight, commentID: commentID, tableView: strongTableView)
+                let cellHeight = strongCell.calculateCellHeight(maxPreferredWidth: strongTableView.bounds.width)
+                strongSelf.updateCellHeight(cellHeight, commentID: commentID, tableView: strongTableView)
             }
         }
         cell.onNewHeightUpdate = { [weak self, weak tableView] newHeight in
@@ -172,6 +168,10 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
                 separatorFollowsDepth: !isLastComment
             )
         )
+
+        if !commentViewModel.isWebViewSupportNeeded {
+            self.cellHeightByCommentID[commentID] = cell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
+        }
     }
 
     private func updateCellHeight(_ newHeight: CGFloat, commentID id: Int, tableView: UITableView) {
@@ -207,12 +207,29 @@ extension NewDiscussionsTableViewDataSource: UITableViewDelegate {
                 return NewDiscussionsLoadMoreTableViewCell.Appearance.containerHeight
                     + NewDiscussionsLoadMoreTableViewCell.Appearance.separatorHeight
             }
-            if let comment = self.getCommentViewModel(at: indexPath),
-               let cellHeight = self.cellHeightByCommentID[comment.id] {
+
+            guard let comment = self.getCommentViewModel(at: indexPath) else {
+                return NewDiscussionsTableViewDataSource.estimatedRowHeight
+            }
+
+            if let cellHeight = self.cellHeightByCommentID[comment.id] {
                 return cellHeight
             }
+
+            if !comment.isWebViewSupportNeeded {
+                let prototypeCell = self.getDiscussionPrototypeCell(tableView: tableView)
+                self.configureDiscussionCell(prototypeCell, at: indexPath, tableView: tableView)
+                prototypeCell.layoutIfNeeded()
+
+                let cellHeight = prototypeCell.calculateCellHeight(maxPreferredWidth: tableView.bounds.width)
+                self.cellHeightByCommentID[comment.id] = cellHeight
+
+                return cellHeight
+            }
+
             return NewDiscussionsTableViewDataSource.estimatedRowHeight
         }()
+
         return height.rounded(.up)
     }
 
@@ -249,5 +266,20 @@ extension NewDiscussionsTableViewDataSource: UITableViewDelegate {
         return self.viewModels[safe: indexPath.section]?.replies[
             safe: indexPath.row - NewDiscussionsTableViewDataSource.parentDiscussionInset
         ]
+    }
+
+    private func getDiscussionPrototypeCell(tableView: UITableView) -> NewDiscussionsTableViewCell {
+        if let discussionPrototypeCell = self.discussionPrototypeCell {
+            return discussionPrototypeCell
+        }
+
+        let dequeuedReusableCell = tableView.dequeueReusableCell(
+            withIdentifier: NewDiscussionsTableViewCell.defaultReuseIdentifier
+        ) as? NewDiscussionsTableViewCell
+        dequeuedReusableCell?.updateConstraintsIfNeeded()
+
+        self.discussionPrototypeCell = dequeuedReusableCell
+
+        return self.discussionPrototypeCell.require()
     }
 }

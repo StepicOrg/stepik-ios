@@ -27,7 +27,9 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         }
         cellView.onNewHeightUpdate = { [weak self] in
             if let strongSelf = self {
-                strongSelf.onNewHeightUpdate?(strongSelf.contentHeight)
+                strongSelf.onNewHeightUpdate?(
+                    strongSelf.calculateCellHeight(maxPreferredWidth: strongSelf.cellView.bounds.width)
+                )
             }
         }
         return cellView
@@ -38,11 +40,6 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         view.backgroundColor = Appearance.separatorColor
         return view
     }()
-
-    // Use computer property because intrinsicContentSize works not well
-    var contentHeight: CGFloat {
-        return self.cellView.contentHeight + self.separatorType.height
-    }
 
     // Dynamic cell/separator leading space
     private var cellLeadingConstraint: Constraint?
@@ -55,7 +52,6 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
-    // Dynamic content callbacks
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: ((CGFloat) -> Void)?
 
@@ -72,8 +68,16 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         self.configure(optionalViewModel: nil)
     }
 
+    // MARK: - Public API
+
     func configure(viewModel: ViewModel) {
         self.configure(optionalViewModel: viewModel)
+    }
+
+    func calculateCellHeight(maxPreferredWidth: CGFloat) -> CGFloat {
+        let leadingInset = self.cellLeadingConstraint?.layoutConstraints.first?.constant ?? 0
+        let cellViewWidth = maxPreferredWidth - leadingInset
+        return self.cellView.calculateContentHeight(maxPreferredWidth: cellViewWidth) + self.separatorType.height
     }
 
     // MARK: - Private API

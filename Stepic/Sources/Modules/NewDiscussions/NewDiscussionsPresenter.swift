@@ -195,13 +195,19 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             return userIDString
         }()
 
-        let htmlText: String = {
-            let contentProcessor = ContentProcessor(
-                content: comment.text.trimmingCharacters(in: .whitespacesAndNewlines),
-                rules: ContentProcessor.defaultRules,
-                injections: ContentProcessor.defaultInjections
-            )
-            return contentProcessor.processContent()
+        let isWebViewSupportNeeded = TagDetectionUtil.isWebViewSupportNeeded(comment.text)
+
+        let text: String = {
+            let trimmedText = comment.text.trimmingCharacters(in: .whitespacesAndNewlines)
+            if isWebViewSupportNeeded {
+                let contentProcessor = ContentProcessor(
+                    content: trimmedText,
+                    rules: ContentProcessor.defaultRules,
+                    injections: ContentProcessor.defaultInjections
+                )
+                return contentProcessor.processContent()
+            }
+            return trimmedText
         }()
 
         let dateRepresentation = FormatterHelper.dateToRelativeString(comment.time)
@@ -219,7 +225,8 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             userRole: comment.userRole,
             isPinned: comment.isPinned,
             userName: userName,
-            text: htmlText,
+            text: text,
+            isWebViewSupportNeeded: isWebViewSupportNeeded,
             dateRepresentation: dateRepresentation,
             likesCount: comment.epicCount,
             dislikesCount: comment.abuseCount,
