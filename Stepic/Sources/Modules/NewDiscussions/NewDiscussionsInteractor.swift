@@ -612,6 +612,8 @@ extension NewDiscussionsInteractor: WriteCommentOutputProtocol {
                     response: NewDiscussions.CommentCreated.Response(result: self.makeDiscussionsData())
                 )
             }.cauterize()
+
+            self.provider.incrementStepDiscussionsCount(stepID: self.stepID).cauterize()
         }
     }
 

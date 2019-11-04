@@ -15,7 +15,8 @@ final class NewDiscussionsAssembly: Assembly {
                 discussionProxiesAPI: DiscussionProxiesAPI()
             ),
             commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI()),
-            votesNetworkService: VotesNetworkService(votesAPI: VotesAPI())
+            votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
+            stepsPersistenceService: StepsPersistenceService()
         )
         let presenter = NewDiscussionsPresenter()
         let interactor = NewDiscussionsInteractor(
