@@ -70,6 +70,9 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
         self.stepID = stepID
         self.presenter = presenter
         self.provider = provider
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Discussions.opened.send()
     }
 
     // MARK: - NewDiscussionsInteractorProtocol -
