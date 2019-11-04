@@ -13,7 +13,7 @@ def shared_pods
     pod 'Logging', :git => 'https://github.com/ivan-magda/swift-log.git', :branch => 'swift-4'
     pod 'Fabric', '1.10.2'
     pod 'Crashlytics', '3.14.0'
-    pod 'DeviceKit', '1.13.0'
+    pod 'DeviceKit', '2.3.0'
     pod 'PromiseKit', '6.11.0'
     pod 'SwiftLint', '0.35.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
