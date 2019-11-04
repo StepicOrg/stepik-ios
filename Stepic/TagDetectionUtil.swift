@@ -9,16 +9,17 @@
 import Foundation
 
 final class TagDetectionUtil {
-    static let supportedHtmlTagsForLabel = ["b", "strong", "i", "em", "strike"]
+    static let supportedHtmlTagsForLabel = ["b", "strong", "i", "em", "strike", "p", "br"]
 
     static func isWebViewSupportNeeded(_ htmlString: String) -> Bool {
-        return detectLaTeX(htmlString) || detectUnsupportedTags(htmlString)
+        return self.detectLaTeX(htmlString) || self.detectUnsupportedTags(htmlString)
     }
 
     // POSSIBLY detects LaTeX in html string
     static func detectLaTeX(_ htmlString: String) -> Bool {
-        let filtered = htmlString.filter({ $0 == "$" })
-        return filtered.count >= 2 || (htmlString.range(of: "\\[") != nil && htmlString.range(of: "\\]") != nil) || (htmlString.contains("math-tex"))
+        return htmlString.filter({ $0 == "$" }).count >= 2
+            || (htmlString.range(of: "\\[") != nil && htmlString.range(of: "\\]") != nil)
+            || (htmlString.contains("math-tex"))
     }
 
     static func detectImage(_ htmlString: String) -> Bool {

@@ -12,40 +12,54 @@ import Foundation
 final class DeviceInfo {
     static var current = DeviceInfo()
 
-    private var currentDevice: DeviceKit.Device = DeviceKit.Device()
+    private var currentDevice: DeviceKit.Device = DeviceKit.Device.current
 
     private init() { }
 
     var isPad: Bool {
-        return currentDevice.isPad
+        return self.currentDevice.isPad
     }
 
     var isPlus: Bool {
-        return currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices) ||
-                   currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
+        return self.currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices)
+            || self.currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
     }
 
     var isXSerie: Bool {
-        return currentDevice.isOneOf(DeviceKit.Device.allXSeriesDevices) ||
-               currentDevice.isOneOf(DeviceKit.Device.allSimulatorXSeriesDevices)
+        return self.currentDevice.isOneOf(DeviceKit.Device.allXSeriesDevices)
+            || self.currentDevice.isOneOf(DeviceKit.Device.allSimulatorXSeriesDevices)
     }
 
     var OSVersion: (major: Int, minor: Int, patch: Int) {
-        return (major: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
-                minor: ProcessInfo.processInfo.operatingSystemVersion.minorVersion,
-                patch: ProcessInfo.processInfo.operatingSystemVersion.patchVersion)
+        return (
+            major: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
+            minor: ProcessInfo.processInfo.operatingSystemVersion.minorVersion,
+            patch: ProcessInfo.processInfo.operatingSystemVersion.patchVersion
+        )
     }
 
     var diagonal: Double {
-        return currentDevice.diagonal
+        return self.currentDevice.diagonal
     }
 
     var deviceInfoString: String {
-        return "\(currentDevice.model) \(currentDevice.name) \(currentDevice.systemName) \(currentDevice.systemVersion)"
+        return "\(self.deviceModelString) \(self.deviceNameString) \(self.systemNameString) \(self.systemVersionString)"
     }
 
     var deviceModelString: String {
-        return currentDevice.model
+        return self.currentDevice.model ?? ""
+    }
+
+    var deviceNameString: String {
+        return self.currentDevice.name ?? ""
+    }
+
+    var systemNameString: String {
+        return self.currentDevice.systemName ?? ""
+    }
+
+    var systemVersionString: String {
+        return self.currentDevice.systemVersion ?? ""
     }
 
     var orientation: (device: UIDeviceOrientation, interface: UIInterfaceOrientation) {

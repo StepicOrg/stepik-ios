@@ -119,7 +119,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
         storyButton.setTitle(buttonModel.title, for: .normal)
 
         containerView.addSubview(storyButton)
-        // TODO: Check for translatesAutoresizingMaskIntoConstraints
+        storyButton.translatesAutoresizingMaskIntoConstraints = false
         storyButton.snp.makeConstraints { make in
             make.bottom.top.equalTo(containerView)
             make.centerX.equalTo(containerView)
@@ -143,7 +143,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
             return
         }
 
-        Nuke.loadImage(with: url, options: .shared, into: self.imageView) { [weak self] (_, _) in
+        Nuke.loadImage(with: url, options: .shared, into: self.imageView) { [weak self] _ in
             guard let strongSelf = self else {
                 return
             }

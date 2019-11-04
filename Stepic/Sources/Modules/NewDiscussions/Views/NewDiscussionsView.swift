@@ -4,14 +4,14 @@ import UIKit
 protocol NewDiscussionsViewDelegate: class {
     func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView)
     func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView)
-    func newDiscussionsViewDidRequestRepliesPagination(_ view: NewDiscussionsView, at indexPath: IndexPath)
-    func newDiscussionsView(_ view: NewDiscussionsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath)
 }
 
 extension NewDiscussionsView {
     struct Appearance {
         let backgroundColor: UIColor = .white
+
         let paginationViewHeight: CGFloat = 52
+        let skeletonCellHeight: CGFloat = 130
     }
 }
 
@@ -26,27 +26,33 @@ final class NewDiscussionsView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
 
         tableView.refreshControl = self.refreshControl
         self.refreshControl.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: .valueChanged)
 
-        tableView.delegate = self
         tableView.register(cellClass: NewDiscussionsTableViewCell.self)
         tableView.register(cellClass: NewDiscussionsLoadMoreTableViewCell.self)
+
+        // Should use `self` as delegate to proxify some delegate methods
+        tableView.delegate = self
+        tableView.dataSource = self.tableViewDelegate
 
         return tableView
     }()
 
+    private weak var tableViewDelegate: (UITableViewDelegate & UITableViewDataSource)?
     private var shouldShowPaginationView = false
+
+    private var isSkeletonVisible = false
 
     init(
         frame: CGRect = .zero,
+        tableViewDelegate: (UITableViewDelegate & UITableViewDataSource),
         appearance: Appearance = Appearance()
     ) {
         self.appearance = appearance
+        self.tableViewDelegate = tableViewDelegate
         super.init(frame: frame)
 
         self.setupView()
@@ -61,10 +67,11 @@ final class NewDiscussionsView: UIView {
 
     // MARK: - Public API
 
-    func updateTableViewData(dataSource: UITableViewDataSource) {
+    func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
         self.refreshControl.endRefreshing()
 
-        self.tableView.dataSource = dataSource
+        self.tableViewDelegate = delegate
+        self.tableView.dataSource = self.tableViewDelegate
         self.tableView.reloadData()
     }
 
@@ -88,6 +95,7 @@ final class NewDiscussionsView: UIView {
     }
 
     func showLoading() {
+        self.isSkeletonVisible = true
         self.tableView.skeleton.viewBuilder = {
             CourseInfoTabReviewsSkeletonView()
         }
@@ -95,6 +103,7 @@ final class NewDiscussionsView: UIView {
     }
 
     func hideLoading() {
+        self.isSkeletonVisible = false
         self.tableView.skeleton.hide()
     }
 
@@ -132,21 +141,18 @@ extension NewDiscussionsView: UITableViewDelegate {
         if isLastIndexPath && self.shouldShowPaginationView {
             self.delegate?.newDiscussionsViewDidRequestPagination(self)
         }
+
+        self.tableViewDelegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if self.isSkeletonVisible {
+            return self.appearance.skeletonCellHeight
+        }
+        return self.tableViewDelegate?.tableView?(tableView, heightForRowAt: indexPath) ?? 0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-
-        guard let selectedCell = tableView.cellForRow(at: indexPath) else {
-            return
-        }
-
-        if selectedCell is NewDiscussionsLoadMoreTableViewCell {
-            self.delegate?.newDiscussionsViewDidRequestRepliesPagination(self, at: indexPath)
-        }
-
-        self.delegate?.newDiscussionsView(self, didSelectCell: selectedCell, at: indexPath)
+        self.tableViewDelegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
 }

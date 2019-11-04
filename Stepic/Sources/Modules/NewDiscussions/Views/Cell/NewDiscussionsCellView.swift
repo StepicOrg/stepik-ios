@@ -17,13 +17,17 @@ extension NewDiscussionsCellView {
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let nameLabelTextColor = UIColor.mainDark
+        let nameLabelHeight: CGFloat = 18
 
-        let textLabelInsets = LayoutInsets(top: 8, right: 16)
-        let textLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let textLabelTextColor = UIColor.mainDark
+        let textContentContainerViewInsets = LayoutInsets(top: 8, bottom: 8, right: 16)
+        let textContentWebBasedTextViewDefaultHeight: CGFloat = 5
+        let textContentTextLabelFontSize: CGFloat = 14
+        let textContentTextLabelFont = UIFont.systemFont(ofSize: 14)
+        let textContentTextLabelTextColor = UIColor.mainDark
 
         let bottomControlsSpacing: CGFloat = 4
         let bottomControlsInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
+        let bottomControlsHeight: CGFloat = 20
 
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let dateLabelTextColor = UIColor.mainDark
@@ -50,6 +54,13 @@ final class NewDiscussionsCellView: UIView {
         return view
     }()
 
+    private lazy var avatarOverlayButton: UIButton = {
+        let button = HighlightFakeButton()
+        button.highlightedBackgroundColor = UIColor.white.withAlphaComponent(0.5)
+        button.addTarget(self, action: #selector(self.avatarOverlayButtonClicked), for: .touchUpInside)
+        return button
+    }()
+
     private lazy var badgeLabel: UILabel = {
         let label = WiderLabel()
         label.font = self.appearance.badgeLabelFont
@@ -70,15 +81,37 @@ final class NewDiscussionsCellView: UIView {
         label.font = self.appearance.nameLabelFont
         label.textColor = self.appearance.nameLabelTextColor
         label.numberOfLines = 1
+        label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         return label
     }()
 
-    private lazy var textLabel: UILabel = {
+    private lazy var textContentWebBasedTextView: ProcessedContentTextView = {
+        var appearance = ProcessedContentTextView.Appearance()
+        appearance.insets = LayoutInsets(insets: .zero)
+        appearance.backgroundColor = .clear
+
+        let view = ProcessedContentTextView(appearance: appearance)
+        view.delegate = self
+        view.isHidden = true
+
+        return view
+    }()
+
+    private lazy var textContentTextLabel: UILabel = {
         let label = UILabel()
-        label.font = self.appearance.textLabelFont
-        label.textColor = self.appearance.textLabelTextColor
+        label.font = self.appearance.textContentTextLabelFont
+        label.textColor = self.appearance.textContentTextLabelTextColor
         label.numberOfLines = 0
         return label
+    }()
+
+    private lazy var textContentStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.textContentWebBasedTextView, self.textContentTextLabel])
+        stackView.axis = .vertical
+        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        stackView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        return stackView
     }()
 
     private lazy var dateLabel: UILabel = {
@@ -134,12 +167,21 @@ final class NewDiscussionsCellView: UIView {
     }()
 
     // Dynamically show/hide badge
-    private var badgelabelHeightConstraint: Constraint?
+    private var badgeLabelHeightConstraint: Constraint?
     private var nameLabelTopConstraint: Constraint?
+
+    // Keeps track of web content text view height
+    private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
+    private var currentText: String?
 
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
+    var onAvatarClick: (() -> Void)?
+    var onLinkClick: ((URL) -> Void)?
+    // Content height.
+    var onContentLoaded: (() -> Void)?
+    var onNewHeightUpdate: (() -> Void)?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -159,13 +201,7 @@ final class NewDiscussionsCellView: UIView {
 
     func configure(viewModel: NewDiscussionsCommentViewModel?) {
         guard let viewModel = viewModel else {
-            self.updateBadge(text: "", isHidden: true)
-            self.nameLabel.text = nil
-            self.dateLabel.text = nil
-            self.textLabel.text = nil
-            self.updateVotes(likes: 0, dislikes: 0, voteValue: nil, canVote: false)
-            self.avatarImageView.reset()
-            return
+            return self.resetViews()
         }
 
         switch viewModel.userRole {
@@ -186,20 +222,42 @@ final class NewDiscussionsCellView: UIView {
 
         self.nameLabel.text = viewModel.userName
         self.dateLabel.text = viewModel.dateRepresentation
-        // TODO: Add LaTeX support via ProcessedContentTextView
-        self.textLabel.setTextWithHTMLString(viewModel.text)
+
+        self.updateTextContent(text: viewModel.text, isWebViewSupportNeeded: viewModel.isWebViewSupportNeeded)
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
         }
     }
 
+    func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
+        let userInfoHeight = (self.badgeLabel.isHidden ? 0 : self.appearance.badgeLabelHeight)
+            + (self.badgeLabel.isHidden ? 0 : self.appearance.nameLabelInsets.top)
+            + self.appearance.nameLabelHeight
+        return self.appearance.avatarImageViewInsets.top
+            + userInfoHeight
+            + self.appearance.textContentContainerViewInsets.top
+            + self.textContentHeight(maxPreferredWidth: maxPreferredWidth)
+            + self.appearance.bottomControlsInsets.top
+            + self.appearance.bottomControlsHeight
+            + self.appearance.bottomControlsInsets.bottom
+    }
+
     // MARK: - Private API
+
+    private func resetViews() {
+        self.updateBadge(text: "", isHidden: true)
+        self.nameLabel.text = nil
+        self.dateLabel.text = nil
+        self.updateVotes(likes: 0, dislikes: 0, voteValue: nil, canVote: false)
+        self.avatarImageView.reset()
+        self.updateTextContent(text: "", isWebViewSupportNeeded: false)
+    }
 
     private func updateBadge(text: String, isHidden: Bool) {
         self.badgeLabel.text = text
         self.badgeLabel.isHidden = isHidden
-        self.badgelabelHeightConstraint?.update(offset: isHidden ? 0 : self.appearance.badgeLabelHeight)
+        self.badgeLabelHeightConstraint?.update(offset: isHidden ? 0 : self.appearance.badgeLabelHeight)
         self.nameLabelTopConstraint?.update(offset: isHidden ? 0 : self.appearance.nameLabelInsets.top)
     }
 
@@ -222,6 +280,48 @@ final class NewDiscussionsCellView: UIView {
         self.dislikeImageButton.isEnabled = canVote
     }
 
+    private func updateTextContent(text: String, isWebViewSupportNeeded: Bool) {
+        self.currentText = text
+
+        if isWebViewSupportNeeded {
+            self.textContentTextLabel.text = nil
+            self.textContentTextLabel.isHidden = true
+
+            self.textContentWebBasedTextView.alpha = 0
+            self.textContentWebBasedTextView.isHidden = false
+            self.currentWebBasedTextViewHeight = self.appearance.textContentWebBasedTextViewDefaultHeight
+            self.textContentWebBasedTextView.loadHTMLText(text)
+        } else {
+            self.textContentWebBasedTextView.isHidden = true
+            self.currentWebBasedTextViewHeight = self.appearance.textContentWebBasedTextViewDefaultHeight
+            self.textContentWebBasedTextView.reset()
+
+            self.textContentTextLabel.isHidden = false
+            self.textContentTextLabel.setTextWithHTMLString(text)
+        }
+    }
+
+    private func textContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
+        let remainingTextContentWidth = maxPreferredWidth
+            - self.appearance.avatarImageViewInsets.left
+            - self.appearance.avatarImageViewSize.width
+            - self.appearance.nameLabelInsets.left
+            - self.appearance.textContentContainerViewInsets.right
+        if self.textContentWebBasedTextView.isHidden {
+            return UILabel.heightForLabelWithText(
+                self.currentText ?? "",
+                lines: self.textContentTextLabel.numberOfLines,
+                standardFontOfSize: self.appearance.textContentTextLabelFontSize,
+                width: remainingTextContentWidth,
+                html: true,
+                alignment: self.textContentTextLabel.textAlignment
+            )
+        }
+        return self.currentWebBasedTextViewHeight
+    }
+
+    // MARK: Actions
+
     @objc
     private func replyDidClick() {
         self.onReplyClick?()
@@ -236,6 +336,11 @@ final class NewDiscussionsCellView: UIView {
     private func dislikeDidClick() {
         self.onDislikeClick?()
     }
+
+    @objc
+    private func avatarOverlayButtonClicked() {
+        self.onAvatarClick?()
+    }
 }
 
 // MARK: - NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
@@ -243,9 +348,10 @@ final class NewDiscussionsCellView: UIView {
 extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarImageView)
+        self.addSubview(self.avatarOverlayButton)
         self.addSubview(self.badgeLabel)
         self.addSubview(self.nameLabel)
-        self.addSubview(self.textLabel)
+        self.addSubview(self.textContentStackView)
         self.addSubview(self.bottomControlsStackView)
     }
 
@@ -257,11 +363,16 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.size.equalTo(self.appearance.avatarImageViewSize)
         }
 
+        self.avatarOverlayButton.translatesAutoresizingMaskIntoConstraints = false
+        self.avatarOverlayButton.snp.makeConstraints { make in
+            make.edges.equalTo(self.avatarImageView)
+        }
+
         self.badgeLabel.translatesAutoresizingMaskIntoConstraints = false
         self.badgeLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeLabelInsets.left)
             make.top.equalTo(self.avatarImageView.snp.top)
-            self.badgelabelHeightConstraint = make.height.equalTo(self.appearance.badgeLabelHeight).constraint
+            self.badgeLabelHeightConstraint = make.height.equalTo(self.appearance.badgeLabelHeight).constraint
         }
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -270,20 +381,56 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             self.nameLabelTopConstraint = make.top.equalTo(self.badgeLabel.snp.bottom)
                 .offset(self.appearance.nameLabelInsets.top).constraint
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
+            make.height.equalTo(self.appearance.nameLabelHeight)
         }
 
-        self.textLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textLabelInsets.top)
+        self.textContentStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.textContentStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textContentContainerViewInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
-            make.trailing.equalToSuperview().offset(-self.appearance.textLabelInsets.right)
+            make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
+            make.bottom.equalTo(self.bottomControlsStackView.snp.top)
+                .offset(-self.appearance.textContentContainerViewInsets.bottom)
         }
 
         self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomControlsStackView.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.bottomControlsInsets.left)
-            make.top.equalTo(self.textLabel.snp.bottom).offset(self.appearance.bottomControlsInsets.top)
             make.trailing.equalToSuperview().offset(-self.appearance.bottomControlsInsets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.bottomControlsInsets.bottom)
+            make.height.equalTo(self.appearance.bottomControlsHeight)
         }
+    }
+}
+
+// MARK: - NewDiscussionsCellView: ProcessedContentTextViewDelegate -
+
+extension NewDiscussionsCellView: ProcessedContentTextViewDelegate {
+    func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
+        if self.textContentWebBasedTextView.isHidden {
+            return
+        }
+
+        self.currentWebBasedTextViewHeight = CGFloat(self.textContentWebBasedTextView.currentWebViewHeight)
+        self.textContentWebBasedTextView.alpha = 1
+        self.onContentLoaded?()
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {
+        if self.textContentWebBasedTextView.isHidden {
+            return
+        }
+
+        let newHeight = CGFloat(height)
+        if newHeight != self.currentWebBasedTextViewHeight {
+            self.currentWebBasedTextViewHeight = newHeight
+            self.onNewHeightUpdate?()
+        }
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) { }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+        self.onLinkClick?(url)
     }
 }
