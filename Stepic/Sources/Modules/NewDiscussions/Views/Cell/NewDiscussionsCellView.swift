@@ -178,6 +178,8 @@ final class NewDiscussionsCellView: UIView {
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
     var onAvatarClick: (() -> Void)?
+    var onLinkClick: ((URL) -> Void)?
+    // Content height.
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: (() -> Void)?
 
@@ -428,5 +430,7 @@ extension NewDiscussionsCellView: ProcessedContentTextViewDelegate {
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) { }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) { }
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
+        self.onLinkClick?(url)
+    }
 }

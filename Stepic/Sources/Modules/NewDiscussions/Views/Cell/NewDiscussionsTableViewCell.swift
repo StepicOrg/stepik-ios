@@ -25,6 +25,9 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         cellView.onAvatarClick = { [weak self] in
             self?.onAvatarClick?()
         }
+        cellView.onLinkClick = { [weak self] url in
+            self?.onLinkClick?(url)
+        }
         cellView.onContentLoaded = { [weak self] in
             self?.onContentLoaded?()
         }
@@ -56,6 +59,7 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
     var onAvatarClick: (() -> Void)?
+    var onLinkClick: ((URL) -> Void)?
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: ((CGFloat) -> Void)?
 

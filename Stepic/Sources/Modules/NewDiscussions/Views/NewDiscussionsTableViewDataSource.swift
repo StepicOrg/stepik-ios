@@ -27,6 +27,10 @@ protocol NewDiscussionsTableViewDataSourceDelegate: class {
         at indexPath: IndexPath,
         cell: UITableViewCell
     )
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didRequestOpenURL url: URL
+    )
 }
 
 final class NewDiscussionsTableViewDataSource: NSObject {
@@ -163,6 +167,11 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
         cell.onAvatarClick = { [weak self] in
             if let strongSelf = self {
                 strongSelf.delegate?.newDiscussionsTableViewDataSource(strongSelf, didSelectAvatar: commentViewModel)
+            }
+        }
+        cell.onLinkClick = { [weak self] url in
+            if let strongSelf = self {
+                strongSelf.delegate?.newDiscussionsTableViewDataSource(strongSelf, didRequestOpenURL: url)
             }
         }
 

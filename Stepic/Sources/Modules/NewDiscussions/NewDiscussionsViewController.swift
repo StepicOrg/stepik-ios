@@ -306,6 +306,19 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
 
     func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didRequestOpenURL url: URL
+    ) {
+        WebControllerManager.sharedManager.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: "external link",
+            allowsSafari: true,
+            backButtonStyle: .done
+        )
+    }
+
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         didSelectLoadMoreRepliesForDiscussion discussion: NewDiscussionsDiscussionViewModel
     ) {
         self.interactor.doNextRepliesLoad(request: .init(discussionID: discussion.id))
