@@ -16,6 +16,7 @@ struct NewDiscussionsDiscussionViewModel {
 struct NewDiscussionsCommentViewModel {
     let id: Int
     let avatarImageURL: URL?
+    let userID: User.IdType
     let userRole: UserRole
     let isPinned: Bool
     let userName: String

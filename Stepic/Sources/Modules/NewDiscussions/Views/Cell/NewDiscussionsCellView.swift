@@ -54,6 +54,13 @@ final class NewDiscussionsCellView: UIView {
         return view
     }()
 
+    private lazy var avatarOverlayButton: UIButton = {
+        let button = HighlightFakeButton()
+        button.highlightedBackgroundColor = UIColor.white.withAlphaComponent(0.5)
+        button.addTarget(self, action: #selector(self.avatarOverlayButtonClicked), for: .touchUpInside)
+        return button
+    }()
+
     private lazy var badgeLabel: UILabel = {
         let label = WiderLabel()
         label.font = self.appearance.badgeLabelFont
@@ -170,6 +177,7 @@ final class NewDiscussionsCellView: UIView {
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
+    var onAvatarClick: (() -> Void)?
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: (() -> Void)?
 
@@ -326,6 +334,11 @@ final class NewDiscussionsCellView: UIView {
     private func dislikeDidClick() {
         self.onDislikeClick?()
     }
+
+    @objc
+    private func avatarOverlayButtonClicked() {
+        self.onAvatarClick?()
+    }
 }
 
 // MARK: - NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
@@ -333,6 +346,7 @@ final class NewDiscussionsCellView: UIView {
 extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarImageView)
+        self.addSubview(self.avatarOverlayButton)
         self.addSubview(self.badgeLabel)
         self.addSubview(self.nameLabel)
         self.addSubview(self.textContentStackView)
@@ -345,6 +359,11 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.avatarImageViewInsets.left)
             make.top.equalToSuperview().offset(self.appearance.avatarImageViewInsets.top)
             make.size.equalTo(self.appearance.avatarImageViewSize)
+        }
+
+        self.avatarOverlayButton.translatesAutoresizingMaskIntoConstraints = false
+        self.avatarOverlayButton.snp.makeConstraints { make in
+            make.edges.equalTo(self.avatarImageView)
         }
 
         self.badgeLabel.translatesAutoresizingMaskIntoConstraints = false

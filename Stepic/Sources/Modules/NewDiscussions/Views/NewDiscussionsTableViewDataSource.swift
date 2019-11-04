@@ -15,6 +15,10 @@ protocol NewDiscussionsTableViewDataSourceDelegate: class {
     )
     func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectAvatar comment: NewDiscussionsCommentViewModel
+    )
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         didSelectLoadMoreRepliesForDiscussion discussion: NewDiscussionsDiscussionViewModel
     )
     func newDiscussionsTableViewDataSource(
@@ -154,6 +158,11 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
         cell.onDislikeClick = { [weak self] in
             if let strongSelf = self {
                 strongSelf.delegate?.newDiscussionsTableViewDataSource(strongSelf, didDislikeComment: commentViewModel)
+            }
+        }
+        cell.onAvatarClick = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.newDiscussionsTableViewDataSource(strongSelf, didSelectAvatar: commentViewModel)
             }
         }
 

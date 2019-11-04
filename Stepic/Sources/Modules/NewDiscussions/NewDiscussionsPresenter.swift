@@ -222,6 +222,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         return NewDiscussionsCommentViewModel(
             id: comment.id,
             avatarImageURL: avatarImageURL,
+            userID: comment.userID,
             userRole: comment.userRole,
             isPinned: comment.isPinned,
             userName: userName,

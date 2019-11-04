@@ -298,6 +298,14 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
 
     func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectAvatar comment: NewDiscussionsCommentViewModel
+    ) {
+        let assembly = ProfileAssembly(userID: comment.userID)
+        self.push(module: assembly.makeModule())
+    }
+
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         didSelectLoadMoreRepliesForDiscussion discussion: NewDiscussionsDiscussionViewModel
     ) {
         self.interactor.doNextRepliesLoad(request: .init(discussionID: discussion.id))
