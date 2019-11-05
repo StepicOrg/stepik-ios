@@ -25,6 +25,7 @@ final class ProcessedContentTextView: UIView {
     private static let reloadTimeStandardInterval: TimeInterval = 0.5
     private static let reloadTimeout: TimeInterval = 10.0
     private static let defaultWebViewHeight: CGFloat = 5
+    private static let clearWebViewContentURL = URL(string: "about:blank").require()
 
     let appearance: Appearance
     weak var delegate: ProcessedContentTextViewDelegate?
@@ -111,9 +112,11 @@ final class ProcessedContentTextView: UIView {
         }
     }
 
-    private var isLoadingHTMLText = false
     /// Keeps track of current web view height.
-    private var currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
+    private(set) var currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
+    private var isLoadingHTMLText = false
+    private var isClearingContent = false
+    private var htmlTextToLoadAfterClearing: String?
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
@@ -143,9 +146,29 @@ final class ProcessedContentTextView: UIView {
     // MARK: Public API
 
     func loadHTMLText(_ text: String) {
-        self.isLoadingHTMLText = true
-        let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
-        self.webView.loadHTMLString(text, baseURL: baseURL)
+        if self.isClearingContent {
+            self.htmlTextToLoadAfterClearing = text
+        } else {
+            self.isLoadingHTMLText = true
+
+            self.webView.stopLoading()
+            let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
+            self.webView.loadHTMLString(text, baseURL: baseURL)
+        }
+    }
+
+    func reset() {
+        if self.isClearingContent {
+            return
+        }
+
+        self.isClearingContent = true
+
+        self.webView.snp.updateConstraints { $0.height.equalTo(ProcessedContentTextView.defaultWebViewHeight) }
+        self.currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
+
+        self.webView.stopLoading()
+        self.webView.load(URLRequest(url: ProcessedContentTextView.clearWebViewContentURL))
     }
 
     // MARK: Private API
@@ -215,7 +238,18 @@ extension ProcessedContentTextView: WKNavigationDelegate {
         }.done { height in
             self.webView.snp.updateConstraints { $0.height.equalTo(height) }
             self.isLoadingHTMLText = false
-            self.delegate?.processedContentTextViewDidLoadContent(self)
+
+            if self.isClearingContent {
+                self.isClearingContent = false
+                if let htmlText = self.htmlTextToLoadAfterClearing {
+                    self.loadHTMLText(htmlText)
+                } else {
+                    self.delegate?.processedContentTextViewDidLoadContent(self)
+                }
+                self.htmlTextToLoadAfterClearing = nil
+            } else {
+                self.delegate?.processedContentTextViewDidLoadContent(self)
+            }
 
             self.fetchHeightWithInterval()
         }
@@ -244,7 +278,12 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             return decisionHandler(.allow)
         }
 
+        if url.absoluteString == ProcessedContentTextView.clearWebViewContentURL.absoluteString {
+            return decisionHandler(.allow)
+        }
+
         self.delegate?.processedContentTextView(self, didOpenLink: url)
+
         return decisionHandler(.cancel)
     }
 }

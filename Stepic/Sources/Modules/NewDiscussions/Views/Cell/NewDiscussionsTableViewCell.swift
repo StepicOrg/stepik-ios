@@ -13,6 +13,9 @@ extension NewDiscussionsTableViewCell {
 final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     private lazy var cellView: NewDiscussionsCellView = {
         let cellView = NewDiscussionsCellView()
+        cellView.onDotsMenuClick = { [weak self] in
+            self?.onDotsMenuClick?()
+        }
         cellView.onReplyClick = { [weak self] in
             self?.onReplyClick?()
         }
@@ -21,6 +24,22 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         }
         cellView.onDislikeClick = { [weak self] in
             self?.onDislikeClick?()
+        }
+        cellView.onAvatarClick = { [weak self] in
+            self?.onAvatarClick?()
+        }
+        cellView.onLinkClick = { [weak self] url in
+            self?.onLinkClick?(url)
+        }
+        cellView.onContentLoaded = { [weak self] in
+            self?.onContentLoaded?()
+        }
+        cellView.onNewHeightUpdate = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.onNewHeightUpdate?(
+                    strongSelf.calculateCellHeight(maxPreferredWidth: strongSelf.cellView.bounds.width)
+                )
+            }
         }
         return cellView
     }()
@@ -39,9 +58,14 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     private var separatorHeightConstraint: Constraint?
     private var separatorType: ViewModel.SeparatorType = .small
 
+    var onDotsMenuClick: (() -> Void)?
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
+    var onAvatarClick: (() -> Void)?
+    var onLinkClick: ((URL) -> Void)?
+    var onContentLoaded: (() -> Void)?
+    var onNewHeightUpdate: ((CGFloat) -> Void)?
 
     override func updateConstraintsIfNeeded() {
         super.updateConstraintsIfNeeded()
@@ -56,8 +80,16 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         self.configure(optionalViewModel: nil)
     }
 
+    // MARK: - Public API
+
     func configure(viewModel: ViewModel) {
         self.configure(optionalViewModel: viewModel)
+    }
+
+    func calculateCellHeight(maxPreferredWidth: CGFloat) -> CGFloat {
+        let leadingInset = self.cellLeadingConstraint?.layoutConstraints.first?.constant ?? 0
+        let cellViewWidth = maxPreferredWidth - leadingInset
+        return self.cellView.calculateContentHeight(maxPreferredWidth: cellViewWidth) + self.separatorType.height
     }
 
     // MARK: - Private API

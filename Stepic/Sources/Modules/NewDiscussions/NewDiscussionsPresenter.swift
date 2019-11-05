@@ -187,10 +187,27 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         }()
 
         let userName: String = {
+            let userIDString = "User \(comment.userID)"
             if let userInfo = comment.userInfo {
-                return "\(userInfo.firstName) \(userInfo.lastName)"
+                let fullName = "\(userInfo.firstName) \(userInfo.lastName)"
+                return fullName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? userIDString : fullName
             }
-            return "Unknown"
+            return userIDString
+        }()
+
+        let isWebViewSupportNeeded = TagDetectionUtil.isWebViewSupportNeeded(comment.text)
+
+        let text: String = {
+            let trimmedText = comment.text.trimmingCharacters(in: .whitespacesAndNewlines)
+            if isWebViewSupportNeeded {
+                let contentProcessor = ContentProcessor(
+                    content: trimmedText,
+                    rules: ContentProcessor.defaultRules,
+                    injections: ContentProcessor.defaultInjections
+                )
+                return contentProcessor.processContent()
+            }
+            return trimmedText
         }()
 
         let dateRepresentation = FormatterHelper.dateToRelativeString(comment.time)
@@ -205,10 +222,12 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         return NewDiscussionsCommentViewModel(
             id: comment.id,
             avatarImageURL: avatarImageURL,
+            userID: comment.userID,
             userRole: comment.userRole,
             isPinned: comment.isPinned,
             userName: userName,
-            text: comment.text,
+            text: text,
+            isWebViewSupportNeeded: isWebViewSupportNeeded,
             dateRepresentation: dateRepresentation,
             likesCount: comment.epicCount,
             dislikesCount: comment.abuseCount,
