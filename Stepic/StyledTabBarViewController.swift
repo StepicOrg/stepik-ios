@@ -38,7 +38,7 @@ final class StyledTabBarViewController: UITabBarController {
             viewController.tabBarItem = $0.makeTabBarItem()
             return viewController
         }, animated: false)
-        self.updateTitlesForTabBarItems()
+        self.fixBadgePosition()
 
         self.delegate = self
 
@@ -92,35 +92,8 @@ final class StyledTabBarViewController: UITabBarController {
 
     @objc
     private func didScreenRotate() {
-        self.updateTitlesForTabBarItems()
-        self.fixBadgePosition()
-    }
-
-    private func updateTitlesForTabBarItems() {
-        func hideTitle(for item: UITabBarItem) {
-            let inset: CGFloat = DeviceInfo.current.isPad ? 8.0 : 6.0
-            item.imageInsets = UIEdgeInsets(top: inset, left: 0, bottom: -inset, right: 0)
-            item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: CGFloat.greatestFiniteMagnitude)
-        }
-
-        func showDefaultTitle(for item: UITabBarItem) {
-            item.imageInsets = UIEdgeInsets.zero
-            item.titlePositionAdjustment = UIOffset.zero
-        }
-
-        self.tabBar.items?.forEach { item in
-            if DeviceInfo.current.orientation.interface.isLandscape {
-                // Using default tabbar in landscape
-                showDefaultTitle(for: item)
-            } else {
-                if DeviceInfo.current.isPad {
-                    // Using default tabbar on iPads in both orientations
-                    showDefaultTitle(for: item)
-                } else {
-                    // Using tabbar w/o titles in other cases
-                    hideTitle(for: item)
-                }
-            }
+        DispatchQueue.main.async {
+            self.fixBadgePosition()
         }
     }
 
@@ -133,16 +106,12 @@ final class StyledTabBarViewController: UITabBarController {
                     badgeView.layer.transform = CATransform3DIdentity
 
                     if DeviceInfo.current.orientation.interface.isLandscape {
-                        if DeviceInfo.current.isPlus {
-                            badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
-                        } else {
-                            badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 2.0, 1.0)
-                        }
+                        badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
                     } else {
                         if DeviceInfo.current.isPad {
                             badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 3.0, 1.0)
                         } else {
-                            badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            badgeView.layer.transform = CATransform3DMakeTranslation(-6.0, -1.0, 1.0)
                         }
                     }
                 }
