@@ -92,7 +92,9 @@ final class StyledTabBarViewController: UITabBarController {
 
     @objc
     private func didScreenRotate() {
-        self.fixBadgePosition()
+        DispatchQueue.main.async {
+            self.fixBadgePosition()
+        }
     }
 
     private func fixBadgePosition() {
@@ -104,11 +106,7 @@ final class StyledTabBarViewController: UITabBarController {
                     badgeView.layer.transform = CATransform3DIdentity
 
                     if DeviceInfo.current.orientation.interface.isLandscape {
-                        if DeviceInfo.current.isPlus {
-                            badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
-                        } else {
-                            badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 2.0, 1.0)
-                        }
+                        badgeView.layer.transform = CATransform3DMakeTranslation(-2.0, 5.0, 1.0)
                     } else {
                         if DeviceInfo.current.isPad {
                             badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 3.0, 1.0)
