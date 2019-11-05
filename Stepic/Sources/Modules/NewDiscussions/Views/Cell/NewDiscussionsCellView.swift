@@ -14,6 +14,10 @@ extension NewDiscussionsCellView {
         let badgeLabelCornerRadius: CGFloat = 10
         let badgeLabelHeight: CGFloat = 20
 
+        let dotsMenuImageSize = CGSize(width: 20, height: 20)
+        let dotsMenuImageTintColor = UIColor.mainDark.withAlphaComponent(0.5)
+        let dotsMenuImageInsets = LayoutInsets(top: 16, right: 16)
+
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let nameLabelTextColor = UIColor.mainDark
@@ -74,6 +78,15 @@ final class NewDiscussionsCellView: UIView {
         label.clipsToBounds = true
 
         return label
+    }()
+
+    private lazy var dotsMenuImageButton: ImageButton = {
+        let imageButton = ImageButton()
+        imageButton.imageSize = self.appearance.dotsMenuImageSize
+        imageButton.tintColor = self.appearance.dotsMenuImageTintColor
+        imageButton.image = UIImage(named: "discussions-dots-menu")?.withRenderingMode(.alwaysTemplate)
+        imageButton.addTarget(self, action: #selector(self.dotsMenuDidClick), for: .touchUpInside)
+        return imageButton
     }()
 
     private lazy var nameLabel: UILabel = {
@@ -174,6 +187,7 @@ final class NewDiscussionsCellView: UIView {
     private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
     private var currentText: String?
 
+    var onDotsMenuClick: (() -> Void)?
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
@@ -323,6 +337,11 @@ final class NewDiscussionsCellView: UIView {
     // MARK: Actions
 
     @objc
+    private func dotsMenuDidClick() {
+        self.onDotsMenuClick?()
+    }
+
+    @objc
     private func replyDidClick() {
         self.onReplyClick?()
     }
@@ -350,6 +369,7 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.avatarOverlayButton)
         self.addSubview(self.badgeLabel)
+        self.addSubview(self.dotsMenuImageButton)
         self.addSubview(self.nameLabel)
         self.addSubview(self.textContentStackView)
         self.addSubview(self.bottomControlsStackView)
@@ -373,6 +393,13 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeLabelInsets.left)
             make.top.equalTo(self.avatarImageView.snp.top)
             self.badgeLabelHeightConstraint = make.height.equalTo(self.appearance.badgeLabelHeight).constraint
+        }
+
+        self.dotsMenuImageButton.translatesAutoresizingMaskIntoConstraints = false
+        self.dotsMenuImageButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.dotsMenuImageInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.dotsMenuImageInsets.right)
+            make.size.equalTo(self.appearance.dotsMenuImageSize)
         }
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
