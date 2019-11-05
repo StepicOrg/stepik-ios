@@ -15,6 +15,11 @@ protocol NewDiscussionsTableViewDataSourceDelegate: class {
     )
     func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectDotsMenu comment: NewDiscussionsCommentViewModel,
+        cell: UITableViewCell
+    )
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         didSelectAvatar comment: NewDiscussionsCommentViewModel
     )
     func newDiscussionsTableViewDataSource(
@@ -147,6 +152,15 @@ extension NewDiscussionsTableViewDataSource: UITableViewDataSource {
         cell.onNewHeightUpdate = { [weak self, weak tableView] newHeight in
             if let strongSelf = self, let strongTableView = tableView {
                 strongSelf.updateCellHeight(newHeight, commentID: commentID, tableView: strongTableView)
+            }
+        }
+        cell.onDotsMenuClick = { [weak self, weak cell] in
+            if let strongSelf = self, let strongCell = cell {
+                strongSelf.delegate?.newDiscussionsTableViewDataSource(
+                    strongSelf,
+                    didSelectDotsMenu: commentViewModel,
+                    cell: strongCell
+                )
             }
         }
         cell.onReplyClick = { [weak self] in

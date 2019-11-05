@@ -298,6 +298,14 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
 
     func newDiscussionsTableViewDataSource(
         _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+        didSelectDotsMenu comment: NewDiscussionsCommentViewModel,
+        cell: UITableViewCell
+    ) {
+        self.presentCommentActionSheet(comment, sourceView: cell, sourceRect: cell.bounds)
+    }
+
+    func newDiscussionsTableViewDataSource(
+        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
         didSelectAvatar comment: NewDiscussionsCommentViewModel
     ) {
         let assembly = ProfileAssembly(userID: comment.userID)

@@ -13,6 +13,9 @@ extension NewDiscussionsTableViewCell {
 final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     private lazy var cellView: NewDiscussionsCellView = {
         let cellView = NewDiscussionsCellView()
+        cellView.onDotsMenuClick = { [weak self] in
+            self?.onDotsMenuClick?()
+        }
         cellView.onReplyClick = { [weak self] in
             self?.onReplyClick?()
         }
@@ -55,6 +58,7 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     private var separatorHeightConstraint: Constraint?
     private var separatorType: ViewModel.SeparatorType = .small
 
+    var onDotsMenuClick: (() -> Void)?
     var onReplyClick: (() -> Void)?
     var onLikeClick: (() -> Void)?
     var onDislikeClick: (() -> Void)?
