@@ -113,7 +113,7 @@ final class StyledTabBarViewController: UITabBarController {
                         if DeviceInfo.current.isPad {
                             badgeView.layer.transform = CATransform3DMakeTranslation(1.0, 3.0, 1.0)
                         } else {
-                            badgeView.layer.transform = CATransform3DMakeTranslation(-5.0, 3.0, 1.0)
+                            badgeView.layer.transform = CATransform3DMakeTranslation(-6.0, -1.0, 1.0)
                         }
                     }
                 }
