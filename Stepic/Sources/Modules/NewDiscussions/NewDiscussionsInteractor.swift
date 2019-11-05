@@ -2,6 +2,7 @@ import Foundation
 import Logging
 import PromiseKit
 
+// swiftlint:disable file_length
 protocol NewDiscussionsInteractorProtocol {
     func doDiscussionsLoad(request: NewDiscussions.DiscussionsLoad.Request)
     func doNextDiscussionsLoad(request: NewDiscussions.NextDiscussionsLoad.Request)
@@ -49,7 +50,6 @@ final class NewDiscussionsInteractor: NewDiscussionsInteractorProtocol {
             return discussionProxy.discussionsIDsRecentActivity
         }
     }
-    private var currentSortType: NewDiscussions.SortType = .default
 
     /// A Boolean value that determines whether the fetch of the replies for root discussion is in progress.
     private var discussionsIDsFetchingReplies: Set<Comment.IdType> = []
@@ -637,5 +637,23 @@ extension NewDiscussionsInteractor: WriteCommentOutputProtocol {
         self.presenter.presentCommentUpdated(
             response: NewDiscussions.CommentUpdated.Response(result: self.makeDiscussionsData())
         )
+    }
+}
+
+// MARK: - NewDiscussionsInteractor (UserDefaults) -
+
+extension NewDiscussionsInteractor {
+    private static let discussionsSortTypeKey = "discussionsSortTypeKey"
+
+    private var currentSortType: NewDiscussions.SortType {
+        get {
+            if let sortTypeKey = UserDefaults.standard.string(forKey: NewDiscussionsInteractor.discussionsSortTypeKey) {
+                return NewDiscussions.SortType(rawValue: sortTypeKey) ?? .last
+            }
+            return .last
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: NewDiscussionsInteractor.discussionsSortTypeKey)
+        }
     }
 }

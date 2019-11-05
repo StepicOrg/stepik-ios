@@ -23,10 +23,6 @@ enum NewDiscussions {
         case mostLiked
         case mostActive
         case recentActivity
-
-        static var `default`: SortType {
-            return .last
-        }
     }
 
     // MARK: - Use cases -
