@@ -12,6 +12,7 @@ FailedToSignIn = "Failed to sign in";
 FailedToSignInNoEmail = "Failed to sign in: email is not provided by social network";
 RemoveVideoTitle = "Remove cached videos";
 RemoveVideoBody = "Are you sure you want to remove cached videos?";
+OK = "OK";
 Cancel = "Cancel";
 Remove = "Remove";
 Yes = "Yes";
@@ -653,7 +654,6 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
-"Ok" = "Ok";
 
 "Practice" = "Practice";
 "Theory" = "Theory";

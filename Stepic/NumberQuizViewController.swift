@@ -101,7 +101,7 @@ final class NumberQuizViewController: QuizViewController {
     fileprivate func presentWrongFormatAlert() {
         let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertController.Style.alert)
 
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: {
             _ in
         }))
 

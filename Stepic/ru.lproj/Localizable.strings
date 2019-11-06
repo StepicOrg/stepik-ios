@@ -12,6 +12,7 @@ FailedToSignIn = "Не удалось авторизоваться";
 FailedToSignInNoEmail = "Не удалось авторизоваться: в аккаунте социальной сети не указан email";
 RemoveVideoTitle = "Удаление видео из урока";
 RemoveVideoBody = "Вы уверены, что хотите удалить сохраненное видео из этого урока?";
+OK = "OK";
 Cancel = "Отмена";
 Remove = "Удалить";
 Yes = "Да";
@@ -654,7 +655,6 @@ WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить от
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
-"Ok" = "Ok";
 
 "Practice" = "Практика";
 "Theory" = "Теория";

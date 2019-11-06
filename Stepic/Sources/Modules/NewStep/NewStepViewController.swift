@@ -191,7 +191,7 @@ extension NewStepViewController: NewStepViewDelegate {
                 message: NSLocalizedString("StepVideoPlayingNotReachableErrorMessage", comment: ""),
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
             self.present(alert, animated: true)
         } else if isVideoCached || isVideoPlayingReachable {
             let assembly = StepicVideoPlayerLegacyAssembly(video: video)
