@@ -8,140 +8,310 @@
 
 import AVFoundation
 import AVKit
+import Logging
 import MediaPlayer
 import SnapKit
 import UIKit
 
+// MARK: StepicVideoPlayerLegacyAssembly: Assembly -
+
+@available(*, deprecated, message: "Class to initialize video player w/o storyboards logic")
+final class StepicVideoPlayerLegacyAssembly: Assembly {
+    private let video: Video
+
+    init(video: Video) {
+        self.video = video
+    }
+
+    func makeModule() -> UIViewController {
+        let videoPlayerViewController = StepicVideoPlayerViewController(
+            nibName: "StepicVideoPlayerViewController",
+            bundle: nil
+        )
+        videoPlayerViewController.video = self.video
+
+        return videoPlayerViewController
+    }
+}
+
+// MARK: - StepicVideoPlayerViewController (Appearance) -
+extension StepicVideoPlayerViewController {
+    struct Appearance {
+        static let topContainerViewCornerRadius: CGFloat = 8
+        static let bottomFullscreenControlsCornerRadius: CGFloat = 8
+    }
+
+    struct Animation {
+        static let playerBarControlsAnimationDuration: TimeInterval = 0.5
+    }
+}
+
+// MARK: - StepicVideoPlayerViewController: UIViewController -
+
 final class StepicVideoPlayerViewController: UIViewController {
+    private static let logger = Logger(label: "com.AlexKarpov.Stepic.StepicVideoPlayerViewController")
+
+    private static let seekForwardTimeOffset: TimeInterval = 10
+    private static let seekBackTimeOffset: TimeInterval = 10
+    private static let seekPreferredTimescale: CMTimeScale = 1000
+
+    private static let hidePlayerControlsTimeInterval = 4.5
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    //Control views
+    // MARK: Control views
     @IBOutlet weak var topFullscreenControlsView: UIView!
     @IBOutlet weak var bottomFullscreenControlsView: UIView!
     @IBOutlet weak var topContainerView: UIView!
 
-    //Top fullscreen controls
+    // MARK: Top fullscreen controls
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var currentTimeTopLabel: UILabel!
     @IBOutlet weak var fullTimeTopLabel: UILabel!
     @IBOutlet weak var topTimeProgressView: UIProgressView!
     @IBOutlet weak var topTimeSlider: UISlider!
 
-    //Bottom fullscreen controls
+    // MARK: Bottom fullscreen controls
     @IBOutlet weak var rateButton: UIButton!
     @IBOutlet weak var qualityButton: UIButton!
     @IBOutlet weak var back10SecButton: UIButton!
     @IBOutlet weak var fullscreenPlayButton: UIButton!
     @IBOutlet weak var forward10SecButton: UIButton!
 
-    //Seek events
+    var video: Video!
 
-    func seekToTime(_ time: TimeInterval) {
-        self.player.seekToTime(CMTime(seconds: Double(time), preferredTimescale: 1000))
+    private lazy var player: Player = {
+        let player = Player()
+        player.delegate = self
+        return player
+    }()
+    private var playerStartTime: TimeInterval = 0.0
+    private var isPlaying = false
+
+    private var currentVideoRate: VideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
+        didSet {
+            self.adjustToCurrentVideoRate()
+            VideosInfo.videoRate = self.currentVideoRate.rawValue
+        }
     }
+
+    private var currentVideoQualityURL: URL! {
+        didSet {
+            self.playerStartTime = self.player.currentTime
+            self.player.setUrl(self.currentVideoQualityURL)
+        }
+    }
+
+    private var currentVideoQuality: String = "0p" {
+        didSet {
+            self.qualityButton.setTitle("\(self.currentVideoQuality)p", for: .normal)
+        }
+    }
+
+    private var wasPlayingBeforeSeeking = false
+
+    private var isPlayerControlsVisible = true
+    private var hidePlayerControlsTimer: Timer?
+
+    private var videoInBackgroundTooltip: Tooltip?
+
+    // MARK: - UIViewController life cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.audioRouteChanged(_:)),
+            name: AVAudioSession.routeChangeNotification,
+            object: nil
+        )
+
+        self.topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: .normal)
+
+        self.backButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+
+        self.topContainerView.setRoundedCorners(cornerRadius: Appearance.topContainerViewCornerRadius)
+        self.bottomFullscreenControlsView.setRoundedCorners(
+            cornerRadius: Appearance.bottomFullscreenControlsCornerRadius
+        )
+
+        self.rateButton.setTitle("\(self.currentVideoRate.rawValue)x", for: .normal)
+
+        self.addChild(self.player)
+        self.view.insertSubview(self.player.view, at: 0)
+        self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
+        self.player.didMove(toParent: self)
+
+        // Player Start Time should be set AFTER the currentQualityURL
+        // TODO: Change this in the future
+        self.currentVideoQualityURL = self.getInitialVideoQualityURL()
+        self.currentVideoQuality = self.getInitialVideoQuality()
+        self.playerStartTime = self.video.playTime
+
+        self.player.playbackLoops = false
+
+        let controlsVisibilityTapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.handleTapGestureRecognizer(_:))
+        )
+        controlsVisibilityTapGestureRecognizer.numberOfTapsRequired = 1
+        self.player.view.addGestureRecognizer(controlsVisibilityTapGestureRecognizer)
+
+        self.view.addGestureRecognizer(controlsVisibilityTapGestureRecognizer)
+
+        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
+        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
+        self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.scheduleHidePlayerControlsTimer()
+
+        if TooltipDefaultsManager.shared.shouldShowInVideoPlayer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.videoInBackgroundTooltip = TooltipFactory.videoInBackground
+                self.videoInBackgroundTooltip?.show(
+                    direction: .down,
+                    in: self.view,
+                    from: self.fullscreenPlayButton,
+                    isArrowVisible: false
+                )
+                TooltipDefaultsManager.shared.didShowInVideoPlayer = true
+            }
+        }
+    }
+
+    deinit {
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
+        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: did deinit")
+        self.saveCurrentPlayerTime()
+        self.hidePlayerControlsTimer?.invalidate()
+    }
+    
+    // MARK: - Seek events
 
     @IBAction func topTimeSliderValueChanged(_ sender: UISlider) {
         let time = TimeInterval(sender.value) * self.player.maximumDuration
-        seekToTime(time)
+        self.seekToTime(time)
     }
 
     @IBAction func seekForwardPressed(_ sender: UIButton) {
-        let neededTime = self.player.currentTime + 10
+        let seekedTime = self.player.currentTime + StepicVideoPlayerViewController.seekForwardTimeOffset
+        let resultTime = min(seekedTime, self.player.maximumDuration)
 
-        seekToTime(min(neededTime, player.maximumDuration))
-        self.scheduleControlsHideTimer()
+        self.seekToTime(resultTime)
+        self.scheduleHidePlayerControlsTimer()
     }
 
     @IBAction func seekBackPressed(_ sender: UIButton) {
-        let neededTime = self.player.currentTime - 10
-        seekToTime(max(neededTime, 0))
-        self.scheduleControlsHideTimer()
+        let seekedTime = self.player.currentTime - StepicVideoPlayerViewController.seekBackTimeOffset
+        let resultTime = max(seekedTime, 0)
+
+        self.seekToTime(resultTime)
+        self.scheduleHidePlayerControlsTimer()
     }
 
-    //Buffering 
-    func bufferingChangedToPercentage(_ percentage: Float) {
-        topTimeProgressView.progress = percentage
+    private func seekToTime(_ time: TimeInterval) {
+        let time = CMTime(seconds: time, preferredTimescale: StepicVideoPlayerViewController.seekPreferredTimescale)
+        self.player.seekToTime(time)
     }
 
-    fileprivate func dismissPlayer() {
-        saveCurrentPlayerTime()
-        self.dismiss(animated: true, completion: nil)
-    }
+    // MARK: - Dismiss player
 
     @IBAction func backPressed(_ sender: UIButton) {
-        dismissPlayer()
+        self.dismissPlayer()
     }
 
-    //Controlling the rate
+    private func dismissPlayer() {
+        self.saveCurrentPlayerTime()
+        self.dismiss(animated: true)
+    }
+
+    // MARK: - Controlling the video rate
+
     @IBAction func changeRatePressed(_ sender: UIButton) {
-        displayRateChangeAlert()
-        self.hideControlsTimer?.invalidate()
+        self.displayChangeVideoRateAlert()
+        self.hidePlayerControlsTimer?.invalidate()
     }
 
-    fileprivate func displayRateChangeAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("VideoRate", comment: ""), message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        for rate in VideoRate.allValues {
-            let action = UIAlertAction(title: rate.description, style: .default, handler: {
-                [unowned self]
-                _ in
-                AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.rateChanged, parameters:
-                    ["rate": rate.description as NSObject])
-                AmplitudeAnalyticsEvents.Video.changedSpeed(
-                    source: self.currentRate.description,
-                    target: rate.description
-                ).send()
-                self.currentRate = rate
-                self.scheduleControlsHideTimer()
-            })
-            alertController.addAction(action)
+    private func adjustToCurrentVideoRate() {
+        self.player.rate = self.currentVideoRate.rawValue
+        self.rateButton.setTitle("\(self.currentVideoRate.rawValue)x", for: .normal)
+    }
+
+    private func displayChangeVideoRateAlert() {
+        let alert = UIAlertController(
+            title: NSLocalizedString("VideoRate", comment: ""),
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        for videoRate in VideoRate.allValues {
+            let action = UIAlertAction(
+                title: videoRate.description,
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    AnalyticsReporter.reportEvent(
+                        AnalyticsEvents.VideoPlayer.rateChanged,
+                        parameters: ["rate": videoRate.description as NSObject]
+                    )
+                    AmplitudeAnalyticsEvents.Video.changedSpeed(
+                        source: strongSelf.currentVideoRate.description,
+                        target: videoRate.description
+                    ).send()
+
+                    strongSelf.currentVideoRate = videoRate
+                    strongSelf.scheduleHidePlayerControlsTimer()
+                }
+            )
+            alert.addAction(action)
         }
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { [weak self] _ in
-            self?.scheduleControlsHideTimer()
-        }))
 
-        if let popoverController = alertController.popoverPresentationController {
-            popoverController.sourceView = rateButton
-            popoverController.sourceRect = rateButton.bounds
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: { [weak self] _ in
+                    self?.scheduleHidePlayerControlsTimer()
+                }
+            )
+        )
+
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = self.rateButton
+            popoverPresentationController.sourceRect = self.rateButton.bounds
         }
 
-        self.present(alertController, animated: true, completion: nil)
+        self.present(alert, animated: true)
     }
 
-    fileprivate var currentRate = VideoRate(rawValue: VideosInfo.videoRate)! {
-        didSet {
-            adjustToCurrentRate()
-            VideosInfo.videoRate = currentRate.rawValue
-        }
-    }
+    // MARK: - Controlling the video quality
 
-    fileprivate func adjustToCurrentRate() {
-        self.player.rate = currentRate.rawValue
-        rateButton.setTitle("\(currentRate.rawValue)x", for: UIControl.State())
-    }
-
-    //Controlling the quality
     @IBAction func changeQualityPressed(_ sender: UIButton) {
-        displayQualityChangeAlert()
-        self.hideControlsTimer?.invalidate()
+        self.displayChangeVideoQualityAlert()
+        self.hidePlayerControlsTimer?.invalidate()
     }
 
-    var currentQualityURL: URL! {
-        didSet {
-            playerStartTime = player.currentTime
-            player.setUrl(currentQualityURL)
-        }
-    }
+    private func displayChangeVideoQualityAlert() {
+        let alert = UIAlertController(
+            title: NSLocalizedString("VideoQuality", comment: ""),
+            message: nil,
+            preferredStyle: .actionSheet
+        )
 
-    var currentQuality: String! {
-        didSet {
-            self.qualityButton.setTitle("\(currentQuality ?? "0")p", for: .normal)
-        }
-    }
-
-    fileprivate func displayQualityChangeAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("VideoQuality", comment: ""), message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        for url in video.urls {
-            if url.quality != video.cachedQuality {
+        for url in self.video.urls {
+            if url.quality != self.video.cachedQuality {
                 let action = UIAlertAction(title: url.quality, style: .default, handler: { [weak self] _ in
                     guard let strongSelf = self else {
                         return
@@ -155,266 +325,196 @@ final class StepicVideoPlayerViewController: UIViewController {
                         ]
                     )
 
-                    strongSelf.currentQuality = url.quality
+                    strongSelf.currentVideoQuality = url.quality
                     VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: url.quality)
-                    strongSelf.currentQualityURL = URL(string: url.url)
-                    strongSelf.scheduleControlsHideTimer()
+                    strongSelf.currentVideoQualityURL = URL(string: url.url)
+                    strongSelf.scheduleHidePlayerControlsTimer()
                 })
-                alertController.addAction(action)
+                alert.addAction(action)
             }
         }
-        if video.state == VideoState.cached {
-            if let cachedQuality = video.cachedQuality {
-                alertController.addAction(UIAlertAction(title: "\(NSLocalizedString("Downloaded", comment: ""))(\(cachedQuality))",
+
+        if self.video.state == VideoState.cached, let cachedQuality = self.video.cachedQuality {
+            alert.addAction(
+                UIAlertAction(
+                    title: "\(NSLocalizedString("Downloaded", comment: ""))(\(cachedQuality))",
                     style: .default,
                     handler: { [weak self] _ in
                         guard let strongSelf = self else {
                             return
                         }
 
-                        strongSelf.currentQuality = cachedQuality
-                        strongSelf.currentQualityURL = VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: strongSelf.video.id)!.localURL
-                        strongSelf.scheduleControlsHideTimer()
-                }))
-            }
-        }
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: { [weak self] _ in
-            self?.scheduleControlsHideTimer()
-        }))
+                        strongSelf.currentVideoQuality = cachedQuality
+                        strongSelf.currentVideoQualityURL = VideoStoredFileManager(fileManager: FileManager.default)
+                            .getVideoStoredFile(videoID: strongSelf.video.id)
+                            .require()
+                            .localURL
 
-        if let popoverController = alertController.popoverPresentationController {
-            popoverController.sourceView = qualityButton
-            popoverController.sourceRect = qualityButton.bounds
+                        strongSelf.scheduleHidePlayerControlsTimer()
+                    }
+                )
+            )
         }
 
-        self.present(alertController, animated: true, completion: nil)
-    }
-
-    //Controlling the playback state
-    @IBAction func playPressed(_ sender: UIButton) {
-        handlePlay()
-    }
-
-	fileprivate var isPlaying: Bool = false
-
-    fileprivate func setButtonPlaying(_ isPlaying: Bool) {
-		self.isPlaying = isPlaying
-        fullscreenPlayButton.setImage(isPlaying ? Images.playerControls.play : Images.playerControls.pause, for: UIControl.State())
-    }
-
-    @objc func audioRouteChanged(_ notification: Foundation.Notification) {
-        if let routeChangeReason = ((notification as NSNotification).userInfo?[AVAudioSessionRouteChangeReasonKey] as? NSNumber)?.intValue {
-            if (UInt(routeChangeReason) == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue) {
-                self.player.pause()
-            }
-        }
-    }
-
-    fileprivate var playerStartTime: TimeInterval = 0.0
-    fileprivate var player: Player!
-
-    var video: Video!
-    var videoInBackgroundTooltip: Tooltip?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(StepicVideoPlayerViewController.audioRouteChanged(_:)), name: AVAudioSession.routeChangeNotification, object: nil)
-
-        topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: UIControl.State())
-
-        backButton.setTitle(NSLocalizedString("Done", comment: ""), for: UIControl.State())
-
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-
-        topContainerView.setRoundedCorners(cornerRadius: 8.0)
-        bottomFullscreenControlsView.setRoundedCorners(cornerRadius: 8.0)
-
-        rateButton.setTitle("\(currentRate.rawValue)x", for: UIControl.State())
-
-        self.player = Player()
-        self.player.delegate = self
-
-        self.addChild(self.player)
-        self.view.insertSubview(self.player.view, at: 0)
-        self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
-        self.player.didMove(toParent: self)
-
-        //Player Start Time should be set AFTER the currentQualityURL
-        //TODO: Change this in the future
-        currentQualityURL = getInitialURL()
-        currentQuality = getInitialQuality()
-        playerStartTime = video.playTime
-
-        self.player.playbackLoops = false
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(StepicVideoPlayerViewController.handleTapGestureRecognizer(_:)))
-        tapGestureRecognizer.numberOfTapsRequired = 1
-        self.player.view.addGestureRecognizer(tapGestureRecognizer)
-
-        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControl.Event.touchUpOutside)
-        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.finishedSeeking), for: UIControl.Event.touchUpInside)
-        topTimeSlider.addTarget(self, action: #selector(StepicVideoPlayerViewController.startedSeeking), for: UIControl.Event.touchDown)
-        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(StepicVideoPlayerViewController.togglePlayPause))
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        self.scheduleControlsHideTimer()
-
-        if TooltipDefaultsManager.shared.shouldShowInVideoPlayer {
-            delay(2.0) { [weak self] in
-                guard let s = self else {
-                    return
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: { [weak self] _ in
+                    self?.scheduleHidePlayerControlsTimer()
                 }
+            )
+        )
 
-                s.videoInBackgroundTooltip = TooltipFactory.videoInBackground
-                s.videoInBackgroundTooltip?.show(direction: .down, in: s.view, from: s.fullscreenPlayButton, isArrowVisible: false)
-                TooltipDefaultsManager.shared.didShowInVideoPlayer = true
-            }
+        if let popoverPresentationController = alert.popoverPresentationController {
+            popoverPresentationController.sourceView = self.qualityButton
+            popoverPresentationController.sourceRect = self.qualityButton.bounds
+        }
+
+        self.present(alert, animated: true)
+    }
+
+    // MARK: - Controlling the playback state
+
+    private func getInitialVideoQualityURL() -> URL {
+        if self.video.state == VideoState.cached {
+            return VideoStoredFileManager(
+                fileManager: FileManager.default
+            ).getVideoStoredFile(videoID: video.id).require().localURL
+        } else {
+            return self.video.getUrlForQuality(VideosInfo.watchingVideoQuality)
         }
     }
 
-    @objc func togglePlayPause() {
-        handlePlay()
-        self.scheduleControlsHideTimer()
+    private func getInitialVideoQuality() -> String {
+        if self.video.state == VideoState.cached {
+            return self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality
+        } else {
+            return self.video.getNearestQualityToDefault(VideosInfo.watchingVideoQuality)
+        }
     }
 
-    func saveCurrentPlayerTime() {
+    private func setButtonPlaying(_ isPlaying: Bool) {
+		self.isPlaying = isPlaying
+
+        let fullscreenPlayButtonImage = isPlaying ? Images.playerControls.play : Images.playerControls.pause
+        self.fullscreenPlayButton.setImage(fullscreenPlayButtonImage, for: .normal)
+    }
+
+    private func saveCurrentPlayerTime() {
         let time = self.player.currentTime != self.player.maximumDuration ? self.player.currentTime : 0.0
-        video.playTime = time
+        self.video.playTime = time
         CoreDataHelper.instance.save()
     }
 
-    deinit {
-        MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
-        print("did deinit")
-        saveCurrentPlayerTime()
-        self.hideControlsTimer?.invalidate()
+    @IBAction func playPressed(_ sender: UIButton) {
+        self.handlePlay()
     }
 
-    fileprivate func getInitialURL() -> URL! {
-        if video.state == VideoState.cached {
-            return VideoStoredFileManager(
-                fileManager: FileManager.default
-            ).getVideoStoredFile(videoID: video.id)!.localURL
-        } else {
-            return video.getUrlForQuality(VideosInfo.watchingVideoQuality)
+    @objc
+    private func togglePlayPause() {
+        self.handlePlay()
+        self.scheduleHidePlayerControlsTimer()
+    }
+
+    @objc
+    private func audioRouteChanged(_ notification: Foundation.Notification) {
+        let notification = notification as NSNotification
+
+        guard let routeChangeReason = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? NSNumber else {
+            return
+        }
+
+        if routeChangeReason.uintValue == AVAudioSession.RouteChangeReason.oldDeviceUnavailable.rawValue {
+            self.player.pause()
         }
     }
 
-    fileprivate func getInitialQuality() -> String {
-        if video.state == VideoState.cached {
-            return video.cachedQuality ?? VideosInfo.downloadingVideoQuality
-        } else {
-            return video.getNearestQualityToDefault(VideosInfo.watchingVideoQuality)
-        }
-    }
+    @objc
+    private func startedSeeking() {
+        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: started seeking")
 
-    fileprivate var wasPlayingBeforeSeeking: Bool = false
+        self.hidePlayerControlsTimer?.invalidate()
 
-    @objc func startedSeeking() {
-        print("started seeking")
-        self.hideControlsTimer?.invalidate()
         if self.player.playbackState == .playing {
-            wasPlayingBeforeSeeking = true
+            self.wasPlayingBeforeSeeking = true
             self.player.pause()
         } else {
-            wasPlayingBeforeSeeking = false
+            self.wasPlayingBeforeSeeking = false
         }
     }
 
-    @objc func finishedSeeking() {
-        print("finished seeking")
-        self.scheduleControlsHideTimer()
-        if wasPlayingBeforeSeeking {
+    @objc
+    private func finishedSeeking() {
+        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: finished seeking")
+
+        self.scheduleHidePlayerControlsTimer()
+
+        if self.wasPlayingBeforeSeeking {
             self.player.playFromCurrentTime()
         }
     }
 
-    // MARK: UIGestureRecognizer
-
-    fileprivate func handlePlay() {
-        switch (self.player.playbackState.rawValue) {
-        case PlaybackState.stopped.rawValue:
+    private func handlePlay() {
+        switch self.player.playbackState {
+        case .stopped:
             self.player.playFromBeginning()
-        case PlaybackState.paused.rawValue:
+        case .paused:
             self.player.playFromCurrentTime()
-        case PlaybackState.playing.rawValue:
+        case .playing:
             self.player.pause()
-        case PlaybackState.failed.rawValue:
-            self.player.pause()
-        default:
+        case .failed:
             self.player.pause()
         }
-
-//        if player.playbackState == PlaybackState.Playing {
-//            setButtonPlaying(false)
-//        } else {
-//            setButtonPlaying(true)
-//        }
     }
 
-    @objc func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
-        handleControlsVisibility()
-    }
+    // MARK: - Controls visibility
 
-    var isControlsCurrentlyVisible = true
-    private var hideControlsTimer: Timer?
-    private static let hideControlsTimeInterval = 4.5
+    @objc
+    private func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
+        self.handleControlsVisibility()
+    }
 
     private func handleControlsVisibility(hideControlsAutomatically: Bool = true) {
-        self.animateBars(!self.isControlsCurrentlyVisible)
-        self.isControlsCurrentlyVisible.toggle()
+        self.setPlayerBarControlsVisibleAnimated(visible: !self.isPlayerControlsVisible)
+        self.isPlayerControlsVisible.toggle()
 
-        if self.isControlsCurrentlyVisible && hideControlsAutomatically {
-            self.scheduleControlsHideTimer()
+        if self.isPlayerControlsVisible && hideControlsAutomatically {
+            self.scheduleHidePlayerControlsTimer()
         }
 
         self.videoInBackgroundTooltip?.dismiss()
     }
 
-    private func scheduleControlsHideTimer() {
-        self.hideControlsTimer?.invalidate()
-        self.hideControlsTimer = Timer.scheduledTimer(
-            timeInterval: StepicVideoPlayerViewController.hideControlsTimeInterval,
+    private func setPlayerBarControlsVisibleAnimated(visible: Bool) {
+        let targetAlpha: CGFloat = visible ? 1.0 : 0.0
+
+        UIView.animate(withDuration: Animation.playerBarControlsAnimationDuration) {
+            self.topContainerView.alpha = targetAlpha
+            self.bottomFullscreenControlsView.alpha = targetAlpha
+        }
+    }
+
+    private func scheduleHidePlayerControlsTimer() {
+        self.hidePlayerControlsTimer?.invalidate()
+        self.hidePlayerControlsTimer = Timer.scheduledTimer(
+            timeInterval: StepicVideoPlayerViewController.hidePlayerControlsTimeInterval,
             target: self,
-            selector: #selector(self.hideControlsIfVisible),
+            selector: #selector(self.hidePlayerControlsIfVisible),
             userInfo: nil,
             repeats: false
         )
     }
 
     @objc
-    private func hideControlsIfVisible() {
-        if self.isControlsCurrentlyVisible {
+    private func hidePlayerControlsIfVisible() {
+        if self.isPlayerControlsVisible {
             self.handleControlsVisibility()
         }
     }
-
-    fileprivate func animateBars(_ visible: Bool) {
-        let targetAlpha: CGFloat = visible ? 1.0 : 0.0
-        UIView.animate(withDuration: 0.5, animations: {
-            self.topContainerView.alpha = targetAlpha
-            self.bottomFullscreenControlsView.alpha = targetAlpha
-        })
-    }
-
-    fileprivate func setTimeParametersAfterPlayerIsReady() {
-        fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
-        player.setPeriodicTimeObserver {
-            [unowned self]
-            time, bufferedTime in
-            self.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
-            self.topTimeSlider.value = Float(time / Double(self.player.maximumDuration))
-            if let bTime = bufferedTime {
-                self.topTimeProgressView.progress = Float(bTime / Double(self.player.maximumDuration))
-            }
-        }
-    }
 }
+
+// MARK: - StepicVideoPlayerViewController: PlayerDelegate -
 
 extension StepicVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
@@ -422,43 +522,61 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
             return
         }
 
-        print("player is ready to display")
-        activityIndicator.isHidden = true
-        setTimeParametersAfterPlayerIsReady()
+        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: player is ready to display")
 
-        player.seekToTime(CMTime(seconds: playerStartTime, preferredTimescale: 1000))
+        self.activityIndicator.isHidden = true
+        self.setTimeParametersAfterPlayerIsReady()
+
+        player.seekToTime(CMTime(seconds: self.playerStartTime, preferredTimescale: 1000))
         player.playFromCurrentTime()
-        player.rate = currentRate.rawValue
-//        setButtonPlaying(false)
+        player.rate = self.currentVideoRate.rawValue
     }
 
     func playerPlaybackStateDidChange(_ player: Player) {
-        if player.playbackState == .failed {
-            print("failed, retry")
-            player.setUrl(currentQualityURL)
+        switch player.playbackState {
+        case .failed:
+            StepicVideoPlayerViewController.logger.error("StepicVideoPlayerViewController :: failed, retry")
+            player.setUrl(self.currentVideoQualityURL)
+        case .paused:
+            self.setButtonPlaying(true)
+            self.saveCurrentPlayerTime()
+            self.playerStartTime = player.currentTime
+        case .playing:
+            self.setButtonPlaying(false)
+        case .stopped:
+            break
         }
-        if player.playbackState == .paused {
-            setButtonPlaying(true)
-            saveCurrentPlayerTime()
-            playerStartTime = player.currentTime
-        }
-        if player.playbackState == .playing {
-            setButtonPlaying(false)
-        }
-        print("player playback state changed to \(player.playbackState)")
+
+        StepicVideoPlayerViewController.logger.info(
+            "StepicVideoPlayerViewController :: player playback state changed to \(player.playbackState)"
+        )
     }
 
-    func playerBufferingStateDidChange(_ player: Player) {
-    }
+    func playerBufferingStateDidChange(_ player: Player) { }
 
-    func playerPlaybackWillStartFromBeginning(_ player: Player) {
-    }
+    func playerPlaybackWillStartFromBeginning(_ player: Player) { }
 
     func playerPlaybackDidEnd(_ player: Player) {
-        setButtonPlaying(true)
+        self.setButtonPlaying(true)
 
-        self.hideControlsTimer?.invalidate()
-        self.isControlsCurrentlyVisible = false
+        self.hidePlayerControlsTimer?.invalidate()
+        self.isPlayerControlsVisible = false
         self.handleControlsVisibility(hideControlsAutomatically: false)
+    }
+
+    private func setTimeParametersAfterPlayerIsReady() {
+        self.fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
+        self.player.setPeriodicTimeObserver { [weak self] time, bufferedTime in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.currentTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(time)
+            strongSelf.topTimeSlider.value = Float(time / Double(strongSelf.player.maximumDuration))
+
+            if let bufferedTime = bufferedTime {
+                strongSelf.topTimeProgressView.progress = Float(bufferedTime / Double(strongSelf.player.maximumDuration))
+            }
+        }
     }
 }

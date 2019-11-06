@@ -194,10 +194,9 @@ extension NewStepViewController: NewStepViewDelegate {
             alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default))
             self.present(alert, animated: true)
         } else if isVideoCached || isVideoPlayingReachable {
-            let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
-            player.video = video
+            let assembly = StepicVideoPlayerLegacyAssembly(video: video)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
-            self.present(player, animated: true)
+            self.present(assembly.makeModule(), animated: true)
         }
     }
 
