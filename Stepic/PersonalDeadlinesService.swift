@@ -13,6 +13,7 @@ protocol PersonalDeadlinesServiceProtocol: class {
     func canAddDeadlines(in course: Course) -> Bool
     func countDeadlines(for course: Course, mode: DeadlineMode) -> Promise<Void>
     func syncDeadline(for course: Course, userID: Int) -> Promise<Void>
+    func syncDeadlines(for courses: [Course], userID: User.IdType) -> Promise<Void>
     func changeDeadline(for course: Course, newDeadlines: [SectionDeadline]) -> Promise<Void>
     func deleteDeadline(for course: Course) -> Promise<Void>
     func hasDeadlines(in course: Course) -> Bool
@@ -61,9 +62,37 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
         }
     }
 
+    func syncDeadlines(for courses: [Course], userID: User.IdType) -> Promise<Void> {
+        return Promise { seal in
+            self.storageRecordsAPI.retrieve(userID: userID, kindPrefixType: .deadline).done { storageRecords, _ in
+                if storageRecords.isEmpty {
+                    courses.forEach { course in
+                        self.localStorageManager.deleteRecord(for: course)
+                        self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                    }
+                    seal.fulfill(())
+                } else {
+                    storageRecords.forEach { storageRecord in
+                        if case .deadline(let courseID)? = storageRecord.kind,
+                           let course = courses.first(where: { $0.id == courseID }) {
+                            self.localStorageManager.set(storageRecord: storageRecord, for: course)
+                            self.notificationsService.updatePersonalDeadlineNotifications(for: course)
+                        }
+                    }
+                    seal.fulfill(())
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     func syncDeadline(for course: Course, userID: Int) -> Promise<Void> {
         return Promise { seal in
-            storageRecordsAPI.retrieve(kind: StorageKind.deadline(courseID: course.id), user: userID).done { storageRecords, _ in
+            self.storageRecordsAPI.retrieve(
+                userID: userID,
+                kind: .deadline(courseID: course.id)
+            ).done { storageRecords, _ in
                 guard let storageRecord = storageRecords.first else {
                     self.localStorageManager.deleteRecord(for: course)
                     self.notificationsService.updatePersonalDeadlineNotifications(for: course)
@@ -73,8 +102,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
                 self.localStorageManager.set(storageRecord: storageRecord, for: course)
                 self.notificationsService.updatePersonalDeadlineNotifications(for: course)
                 seal.fulfill(())
-            }.catch {
-                error in
+            }.catch { error in
                 seal.reject(error)
             }
         }

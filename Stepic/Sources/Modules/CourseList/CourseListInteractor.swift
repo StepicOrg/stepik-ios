@@ -78,12 +78,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
 
             // Fetch personal deadlines
             if let userID = self.userAccountService.currentUser?.id, self.isOnline {
-                courses.forEach { course in
-                    self.personalDeadlinesService.syncDeadline(
-                        for: course,
-                        userID: userID
-                    ).cauterize()
-                }
+                self.personalDeadlinesService.syncDeadlines(for: courses, userID: userID).cauterize()
             }
 
             if self.currentCourses.isEmpty {
