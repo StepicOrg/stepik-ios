@@ -713,6 +713,8 @@ NoDiscussionsButtonTitle = "Напишите комментарий";
 LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
 LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
+StepVideoPlayingNotReachableErrorTitle = "Ошибка соединения";
+StepVideoPlayingNotReachableErrorMessage = "Подключитесь к интернету и повторите попытку.";
 
 OurSocialNetworks = "Наши аккаунты в соцсетях";
 

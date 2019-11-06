@@ -712,6 +712,8 @@ NoDiscussionsButtonTitle = "Leave a comment";
 LessonTooltipPointsWithScoreTitle = "You got: %@ out of %@ for step";
 LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";
+StepVideoPlayingNotReachableErrorTitle = "You're offline";
+StepVideoPlayingNotReachableErrorMessage = "Check​ your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
 
 OurSocialNetworks = "Our social networks";
 
