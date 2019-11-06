@@ -17,24 +17,32 @@ protocol StorageData {
 struct SectionDeadline {
     var section: Int
     var deadlineDate: Date
+
     init(section: Int, deadlineDate: Date) {
         self.section = section
         self.deadlineDate = deadlineDate
     }
 
     init?(json: JSON) {
-        guard let section = json["section"].int, let deadlineDate = Parser.shared.dateFromTimedateJSON(json["deadline"]) else {
+        guard let section = json[JSONKey.section.rawValue].int,
+              let deadlineDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.deadline.rawValue]) else {
             return nil
         }
+
         self.section = section
         self.deadlineDate = deadlineDate
     }
 
     var dictValue: [String: Any] {
         return [
-            "section": section,
-            "deadline": Parser.shared.timedateStringFromDate(date: deadlineDate)
+            JSONKey.section.rawValue: self.section,
+            JSONKey.deadline.rawValue: Parser.shared.timedateStringFromDate(date: self.deadlineDate)
         ]
+    }
+
+    enum JSONKey: String {
+        case section
+        case deadline
     }
 }
 
@@ -48,19 +56,24 @@ final class DeadlineStorageData: StorageData {
     }
 
     required init(json: JSON) {
-        courseID = json["course"].intValue
-        deadlines = []
-        for deadlineJSON in json["deadlines"].arrayValue {
+        self.courseID = json[JSONKey.course.rawValue].intValue
+        self.deadlines = []
+        for deadlineJSON in json[JSONKey.deadlines.rawValue].arrayValue {
             if let deadline = SectionDeadline(json: deadlineJSON) {
-                deadlines += [deadline]
+                self.deadlines += [deadline]
             }
         }
     }
 
     var dictValue: [String: Any] {
         return [
-            "course": courseID,
-            "deadlines": deadlines.map { $0.dictValue }
+            JSONKey.course.rawValue: self.courseID,
+            JSONKey.deadlines.rawValue: self.deadlines.map { $0.dictValue }
         ]
+    }
+
+    enum JSONKey: String {
+        case course
+        case deadlines
     }
 }
