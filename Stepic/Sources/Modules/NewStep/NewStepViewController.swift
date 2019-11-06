@@ -183,7 +183,17 @@ extension NewStepViewController: NewStepViewDelegate {
 
         let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
             || ConnectionHelper.shared.reachability.isReachableViaWWAN()
-        if video.state == VideoState.cached || isVideoPlayingReachable {
+        let isVideoCached = video.state == VideoState.cached
+
+        if !isVideoCached && !isVideoPlayingReachable {
+            let alert = UIAlertController(
+                title: NSLocalizedString("StepVideoPlayingNotReachableErrorTitle", comment: ""),
+                message: NSLocalizedString("StepVideoPlayingNotReachableErrorMessage", comment: ""),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default))
+            self.present(alert, animated: true)
+        } else if isVideoCached || isVideoPlayingReachable {
             let player = StepicVideoPlayerViewController(nibName: "StepicVideoPlayerViewController", bundle: nil)
             player.video = video
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
