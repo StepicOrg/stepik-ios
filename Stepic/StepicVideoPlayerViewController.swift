@@ -88,6 +88,8 @@ final class StepicVideoPlayerViewController: UIViewController {
     private var playerStartTime: TimeInterval = 0.0
     private var isPlaying = false
 
+    private var isPlayerPassedReadyState = false
+
     private var currentVideoRate: VideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
         didSet {
             self.adjustToCurrentVideoRate()
@@ -518,16 +520,23 @@ final class StepicVideoPlayerViewController: UIViewController {
 
 extension StepicVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
-        guard player.playbackState == .stopped else {
+        guard player.playbackState == .stopped || !self.isPlayerPassedReadyState else {
             return
         }
 
+        self.isPlayerPassedReadyState = true
+        
         StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: player is ready to display")
 
         self.activityIndicator.isHidden = true
         self.setTimeParametersAfterPlayerIsReady()
 
-        player.seekToTime(CMTime(seconds: self.playerStartTime, preferredTimescale: 1000))
+        let time = CMTime(
+            seconds: self.playerStartTime,
+            preferredTimescale: StepicVideoPlayerViewController.seekPreferredTimescale
+        )
+
+        player.seekToTime(time)
         player.playFromCurrentTime()
         player.rate = self.currentVideoRate.rawValue
     }
@@ -536,7 +545,7 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
         switch player.playbackState {
         case .failed:
             StepicVideoPlayerViewController.logger.error("StepicVideoPlayerViewController :: failed, retry")
-            player.setUrl(self.currentVideoQualityURL)
+            self.displayPlayerPlaybackFailedStateAlert()
         case .paused:
             self.setButtonPlaying(true)
             self.saveCurrentPlayerTime()
@@ -578,5 +587,40 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
                 strongSelf.topTimeProgressView.progress = Float(bufferedTime / Double(strongSelf.player.maximumDuration))
             }
         }
+    }
+
+    private func displayPlayerPlaybackFailedStateAlert() {
+        let alert = UIAlertController(
+            title: NSLocalizedString("VideoPlayerPlaybackFailedStateAlertTitle", comment: ""),
+            message: NSLocalizedString("VideoPlayerPlaybackFailedStateAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Close", comment: ""),
+                style: .cancel,
+                handler: { [weak self] _ in
+                    self?.dismissPlayer()
+                }
+            )
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("TryAgain", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.player.setUrl(strongSelf.currentVideoQualityURL)
+                    strongSelf.player.playFromCurrentTime()
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
     }
 }

@@ -716,6 +716,10 @@ LessonTooltipTimeToCompleteTitle = "%@ на урок";
 StepVideoPlayingNotReachableErrorTitle = "Ошибка соединения";
 StepVideoPlayingNotReachableErrorMessage = "Подключитесь к интернету и повторите попытку.";
 
+/* Video player */
+VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
+VideoPlayerPlaybackFailedStateAlertMessage = "Возникла ошибка воспроизведения видео, попробовать снова или закрыть плеер?";
+
 OurSocialNetworks = "Наши аккаунты в соцсетях";
 
 /* Quiz */

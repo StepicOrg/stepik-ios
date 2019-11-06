@@ -715,6 +715,10 @@ LessonTooltipTimeToCompleteTitle = "%@ for lesson";
 StepVideoPlayingNotReachableErrorTitle = "You're offline";
 StepVideoPlayingNotReachableErrorMessage = "Check​ your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
 
+/* Video player */
+VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
+VideoPlayerPlaybackFailedStateAlertMessage = "Video playback error occurred, try again or close the player?";
+
 OurSocialNetworks = "Our social networks";
 
 /* Quiz */
