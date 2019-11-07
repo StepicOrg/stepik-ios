@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol NewDiscussionsProviderProtocol {
+protocol DiscussionsProviderProtocol {
     func fetchDiscussionProxy(id: DiscussionProxy.IdType) -> Promise<DiscussionProxy>
     func fetchComments(ids: [Comment.IdType]) -> Promise<[Comment]>
     func deleteComment(id: Comment.IdType) -> Promise<Void>
@@ -9,7 +9,7 @@ protocol NewDiscussionsProviderProtocol {
     func incrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void>
 }
 
-final class NewDiscussionsProvider: NewDiscussionsProviderProtocol {
+final class DiscussionsProvider: DiscussionsProviderProtocol {
     private let discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol
     private let commentsNetworkService: CommentsNetworkServiceProtocol
     private let votesNetworkService: VotesNetworkServiceProtocol

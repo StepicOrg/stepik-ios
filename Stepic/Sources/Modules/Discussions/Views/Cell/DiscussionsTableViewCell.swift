@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension NewDiscussionsTableViewCell {
+extension DiscussionsTableViewCell {
     enum Appearance {
         static let separatorColor = UIColor(hex: 0xe7e7e7)
 
@@ -10,9 +10,9 @@ extension NewDiscussionsTableViewCell {
     }
 }
 
-final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
-    private lazy var cellView: NewDiscussionsCellView = {
-        let cellView = NewDiscussionsCellView()
+final class DiscussionsTableViewCell: UITableViewCell, Reusable {
+    private lazy var cellView: DiscussionsCellView = {
+        let cellView = DiscussionsCellView()
         cellView.onDotsMenuClick = { [weak self] in
             self?.onDotsMenuClick?()
         }
@@ -122,20 +122,20 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     private func configure(optionalViewModel: ViewModel?) {
         if let viewModel = optionalViewModel {
             self.updateLeadingInsets(
-                newCommentType: viewModel.commentType,
+                commentType: viewModel.commentType,
                 separatorFollowsDepth: viewModel.separatorFollowsDepth
             )
-            self.updateSeparatorType(newSeparatorType: viewModel.separatorType)
+            self.updateSeparatorType(separatorType: viewModel.separatorType)
             self.cellView.configure(viewModel: viewModel.comment)
         } else {
-            self.updateLeadingInsets(newCommentType: .discussion, separatorFollowsDepth: false)
-            self.updateSeparatorType(newSeparatorType: .small)
+            self.updateLeadingInsets(commentType: .discussion, separatorFollowsDepth: false)
+            self.updateSeparatorType(separatorType: .small)
             self.cellView.configure(viewModel: nil)
         }
     }
 
-    private func updateLeadingInsets(newCommentType: ViewModel.CommentType, separatorFollowsDepth: Bool) {
-        let leadingSpaceValue = newCommentType == .discussion
+    private func updateLeadingInsets(commentType: ViewModel.CommentType, separatorFollowsDepth: Bool) {
+        let leadingSpaceValue = commentType == .discussion
             ? Appearance.leadingSpaceDiscussion
             : Appearance.leadingSpaceReply
         self.cellLeadingConstraint?.update(offset: leadingSpaceValue)
@@ -144,9 +144,9 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         )
     }
 
-    private func updateSeparatorType(newSeparatorType: ViewModel.SeparatorType) {
-        if newSeparatorType != self.separatorType {
-            self.separatorType = newSeparatorType
+    private func updateSeparatorType(separatorType: ViewModel.SeparatorType) {
+        if separatorType != self.separatorType {
+            self.separatorType = separatorType
             self.separatorHeightConstraint?.update(offset: self.separatorType.height)
         }
 
@@ -156,7 +156,7 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     // MARK: - Types
 
     struct ViewModel {
-        let comment: NewDiscussionsCommentViewModel
+        let comment: DiscussionsCommentViewModel
         let commentType: CommentType
         let separatorType: SeparatorType
         let separatorFollowsDepth: Bool

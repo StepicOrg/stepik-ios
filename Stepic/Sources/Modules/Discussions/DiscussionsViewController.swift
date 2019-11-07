@@ -1,34 +1,34 @@
 import SVProgressHUD
 import UIKit
 
-protocol NewDiscussionsViewControllerProtocol: class {
-    func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel)
-    func displayNextDiscussions(viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel)
-    func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel)
-    func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel)
-    func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel)
-    func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel)
-    func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel)
-    func displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel)
-    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel)
-    func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel)
-    func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel)
+protocol DiscussionsViewControllerProtocol: class {
+    func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel)
+    func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel)
+    func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel)
+    func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel)
+    func displayCommentCreated(viewModel: Discussions.CommentCreated.ViewModel)
+    func displayCommentUpdated(viewModel: Discussions.CommentUpdated.ViewModel)
+    func displayCommentDeleteResult(viewModel: Discussions.CommentDelete.ViewModel)
+    func displayCommentLikeResult(viewModel: Discussions.CommentLike.ViewModel)
+    func displayCommentAbuseResult(viewModel: Discussions.CommentAbuse.ViewModel)
+    func displaySortTypeAlert(viewModel: Discussions.SortTypePresentation.ViewModel)
+    func displaySortTypeUpdate(viewModel: Discussions.SortTypeUpdate.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
-final class NewDiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
-    lazy var newDiscussionsView = self.view as? NewDiscussionsView
+final class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
+    lazy var discussionsView = self.view as? DiscussionsView
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    private let interactor: NewDiscussionsInteractorProtocol
+    private let interactor: DiscussionsInteractorProtocol
 
-    private var state: NewDiscussions.ViewControllerState
+    private var state: Discussions.ViewControllerState
     private var canTriggerPagination = true
 
     // swiftlint:disable:next weak_delegate
-    private lazy var discussionsTableDelegate: NewDiscussionsTableViewDataSource = {
-        let tableDataSource = NewDiscussionsTableViewDataSource()
+    private lazy var discussionsTableDelegate: DiscussionsTableViewDataSource = {
+        let tableDataSource = DiscussionsTableViewDataSource()
         tableDataSource.delegate = self
         return tableDataSource
     }()
@@ -47,8 +47,8 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     )
 
     init(
-        interactor: NewDiscussionsInteractorProtocol,
-        initialState: NewDiscussions.ViewControllerState = .loading
+        interactor: DiscussionsInteractorProtocol,
+        initialState: Discussions.ViewControllerState = .loading
     ) {
         self.interactor = interactor
         self.state = initialState
@@ -61,7 +61,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     }
 
     override func loadView() {
-        let view = NewDiscussionsView(frame: UIScreen.main.bounds, tableViewDelegate: self.discussionsTableDelegate)
+        let view = DiscussionsView(frame: UIScreen.main.bounds, tableViewDelegate: self.discussionsTableDelegate)
         view.delegate = self
         self.view = view
     }
@@ -101,20 +101,20 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         )
     }
 
-    private func updateState(newState: NewDiscussions.ViewControllerState) {
+    private func updateState(newState: Discussions.ViewControllerState) {
         defer {
             self.state = newState
         }
 
         if case .loading = newState {
             self.isPlaceholderShown = false
-            self.newDiscussionsView?.showLoading()
+            self.discussionsView?.showLoading()
             return
         }
 
         if case .loading = self.state {
             self.isPlaceholderShown = false
-            self.newDiscussionsView?.hideLoading()
+            self.discussionsView?.hideLoading()
         }
 
         switch newState {
@@ -127,7 +127,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         }
     }
 
-    private func updateDiscussionsData(newData data: NewDiscussions.DiscussionsViewData) {
+    private func updateDiscussionsData(newData data: Discussions.DiscussionsViewData) {
         if data.discussions.isEmpty {
             self.showPlaceholder(for: .empty)
         } else {
@@ -135,7 +135,7 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
         }
 
         self.discussionsTableDelegate.update(viewModels: data.discussions)
-        self.newDiscussionsView?.updateTableViewData(delegate: self.discussionsTableDelegate)
+        self.discussionsView?.updateTableViewData(delegate: self.discussionsTableDelegate)
 
         self.updatePagination(hasNextPage: data.discussionsLeftToLoad > 0)
     }
@@ -143,9 +143,9 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     private func updatePagination(hasNextPage: Bool) {
         self.canTriggerPagination = hasNextPage
         if hasNextPage {
-            self.newDiscussionsView?.showPaginationView()
+            self.discussionsView?.showPaginationView()
         } else {
-            self.newDiscussionsView?.hidePaginationView()
+            self.discussionsView?.hidePaginationView()
         }
     }
 
@@ -160,14 +160,14 @@ final class NewDiscussionsViewController: UIViewController, ControllerWithStepik
     }
 }
 
-// MARK: - NewDiscussionsViewController: NewDiscussionsViewControllerProtocol -
+// MARK: - DiscussionsViewController: DiscussionsViewControllerProtocol -
 
-extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
-    func displayDiscussions(viewModel: NewDiscussions.DiscussionsLoad.ViewModel) {
+extension DiscussionsViewController: DiscussionsViewControllerProtocol {
+    func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
 
-    func displayNextDiscussions(viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel) {
+    func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             self.updateDiscussionsData(newData: data)
@@ -176,11 +176,11 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         }
     }
 
-    func displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel) {
+    func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayWriteComment(viewModel: NewDiscussions.WriteCommentPresentation.ViewModel) {
+    func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel) {
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
             parentID: viewModel.parentID,
@@ -191,15 +191,15 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         self.present(navigationController, animated: true)
     }
 
-    func displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel) {
+    func displayCommentCreated(viewModel: Discussions.CommentCreated.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel) {
+    func displayCommentUpdated(viewModel: Discussions.CommentUpdated.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayCommentDeleteResult(viewModel: NewDiscussions.CommentDelete.ViewModel) {
+    func displayCommentDeleteResult(viewModel: Discussions.CommentDelete.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             SVProgressHUD.showSuccess(withStatus: "")
@@ -211,15 +211,15 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         }
     }
 
-    func displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel) {
+    func displayCommentLikeResult(viewModel: Discussions.CommentLike.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel) {
+    func displayCommentAbuseResult(viewModel: Discussions.CommentAbuse.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displaySortTypeAlert(viewModel: NewDiscussions.SortTypePresentation.ViewModel) {
+    func displaySortTypeAlert(viewModel: Discussions.SortTypePresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
 
         viewModel.items.forEach { sortTypeItem in
@@ -242,11 +242,11 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
         self.present(alert, animated: true)
     }
 
-    func displaySortTypeUpdate(viewModel: NewDiscussions.SortTypeUpdate.ViewModel) {
+    func displaySortTypeUpdate(viewModel: Discussions.SortTypeUpdate.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayBlockingLoadingIndicator(viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel) {
+    func displayBlockingLoadingIndicator(viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
@@ -255,14 +255,14 @@ extension NewDiscussionsViewController: NewDiscussionsViewControllerProtocol {
     }
 }
 
-// MARK: - NewDiscussionsViewController: NewDiscussionsViewDelegate -
+// MARK: - DiscussionsViewController: DiscussionsViewDelegate -
 
-extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
-    func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView) {
+extension DiscussionsViewController: DiscussionsViewDelegate {
+    func discussionsViewDidRequestRefresh(_ view: DiscussionsView) {
         self.interactor.doDiscussionsLoad(request: .init())
     }
 
-    func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView) {
+    func discussionsViewDidRequestPagination(_ view: DiscussionsView) {
         if self.canTriggerPagination {
             self.canTriggerPagination = false
             self.interactor.doNextDiscussionsLoad(request: .init())
@@ -270,50 +270,50 @@ extension NewDiscussionsViewController: NewDiscussionsViewDelegate {
     }
 }
 
-// MARK: - NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate -
+// MARK: - DiscussionsViewController: DiscussionsTableViewDataSourceDelegate -
 
-extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegate {
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        didReplyForComment comment: NewDiscussionsCommentViewModel
+extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didReplyForComment comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doWriteCommentPresentation(
             request: .init(commentID: comment.id, presentationContext: .create)
         )
     }
 
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        didLikeComment comment: NewDiscussionsCommentViewModel
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didLikeComment comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doCommentLike(request: .init(commentID: comment.id))
     }
 
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        didDislikeComment comment: NewDiscussionsCommentViewModel
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didDislikeComment comment: DiscussionsCommentViewModel
     ) {
         self.interactor.doCommentAbuse(request: .init(commentID: comment.id))
     }
 
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        didSelectDotsMenu comment: NewDiscussionsCommentViewModel,
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectDotsMenu comment: DiscussionsCommentViewModel,
         cell: UITableViewCell
     ) {
         self.presentCommentActionSheet(comment, sourceView: cell, sourceRect: cell.bounds)
     }
 
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        didSelectAvatar comment: NewDiscussionsCommentViewModel
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectAvatar comment: DiscussionsCommentViewModel
     ) {
         let assembly = ProfileAssembly(userID: comment.userID)
         self.push(module: assembly.makeModule())
     }
 
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
         didRequestOpenURL url: URL
     ) {
         WebControllerManager.sharedManager.presentWebControllerWithURL(
@@ -325,16 +325,16 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
         )
     }
 
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        didSelectLoadMoreRepliesForDiscussion discussion: NewDiscussionsDiscussionViewModel
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectLoadMoreRepliesForDiscussion discussion: DiscussionsDiscussionViewModel
     ) {
         self.interactor.doNextRepliesLoad(request: .init(discussionID: discussion.id))
     }
 
-    func newDiscussionsTableViewDataSource(
-        _ tableViewDataSource: NewDiscussionsTableViewDataSource,
-        didSelectComment comment: NewDiscussionsCommentViewModel,
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectComment comment: DiscussionsCommentViewModel,
         at indexPath: IndexPath,
         cell: UITableViewCell
     ) {
@@ -342,7 +342,7 @@ extension NewDiscussionsViewController: NewDiscussionsTableViewDataSourceDelegat
     }
 
     private func presentCommentActionSheet(
-        _ viewModel: NewDiscussionsCommentViewModel,
+        _ viewModel: DiscussionsCommentViewModel,
         sourceView: UIView,
         sourceRect: CGRect
     ) {

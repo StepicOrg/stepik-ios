@@ -1,8 +1,8 @@
 import Foundation
 
-struct NewDiscussionsDiscussionViewModel {
-    let comment: NewDiscussionsCommentViewModel
-    let replies: [NewDiscussionsCommentViewModel]
+struct DiscussionsDiscussionViewModel {
+    let comment: DiscussionsCommentViewModel
+    let replies: [DiscussionsCommentViewModel]
 
     let repliesLeftToLoad: Int
     let formattedRepliesLeftToLoad: String
@@ -13,7 +13,7 @@ struct NewDiscussionsDiscussionViewModel {
     }
 }
 
-struct NewDiscussionsCommentViewModel {
+struct DiscussionsCommentViewModel {
     let id: Int
     let avatarImageURL: URL?
     let userID: User.IdType

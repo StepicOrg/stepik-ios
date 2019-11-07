@@ -100,7 +100,7 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     }
 
     func presentDiscussions(stepId: Int, discussionProxyId: String) {
-        let assembly = NewDiscussionsAssembly(discussionProxyID: discussionProxyId, stepID: stepId)
+        let assembly = DiscussionsAssembly(discussionProxyID: discussionProxyId, stepID: stepId)
         self.push(module: assembly.makeModule())
     }
 

@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension NewDiscussionsCellView {
+extension DiscussionsCellView {
     struct Appearance {
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
         let avatarImageViewSize = CGSize(width: 36, height: 36)
@@ -49,7 +49,7 @@ extension NewDiscussionsCellView {
     }
 }
 
-final class NewDiscussionsCellView: UIView {
+final class DiscussionsCellView: UIView {
     let appearance: Appearance
 
     private lazy var avatarImageView: AvatarImageView = {
@@ -213,7 +213,7 @@ final class NewDiscussionsCellView: UIView {
 
     // MARK: - Public API
 
-    func configure(viewModel: NewDiscussionsCommentViewModel?) {
+    func configure(viewModel: DiscussionsCommentViewModel?) {
         guard let viewModel = viewModel else {
             return self.resetViews()
         }
@@ -362,9 +362,9 @@ final class NewDiscussionsCellView: UIView {
     }
 }
 
-// MARK: - NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
+// MARK: - DiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
 
-extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
+extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.avatarOverlayButton)
@@ -430,9 +430,9 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// MARK: - NewDiscussionsCellView: ProcessedContentTextViewDelegate -
+// MARK: - DiscussionsCellView: ProcessedContentTextViewDelegate -
 
-extension NewDiscussionsCellView: ProcessedContentTextViewDelegate {
+extension DiscussionsCellView: ProcessedContentTextViewDelegate {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         if self.textContentWebBasedTextView.isHidden {
             return

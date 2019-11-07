@@ -1,57 +1,57 @@
 import UIKit
 
-protocol NewDiscussionsPresenterProtocol {
-    func presentDiscussions(response: NewDiscussions.DiscussionsLoad.Response)
-    func presentNextDiscussions(response: NewDiscussions.NextDiscussionsLoad.Response)
-    func presentNextReplies(response: NewDiscussions.NextRepliesLoad.Response)
-    func presentWriteComment(response: NewDiscussions.WriteCommentPresentation.Response)
-    func presentCommentCreated(response: NewDiscussions.CommentCreated.Response)
-    func presentCommentUpdated(response: NewDiscussions.CommentUpdated.Response)
-    func presentCommentDeleteResult(response: NewDiscussions.CommentDelete.Response)
-    func presentCommentLikeResult(response: NewDiscussions.CommentLike.Response)
-    func presentCommentAbuseResult(response: NewDiscussions.CommentAbuse.Response)
-    func presentSortType(response: NewDiscussions.SortTypePresentation.Response)
-    func presentSortTypeUpdate(response: NewDiscussions.SortTypeUpdate.Response)
-    func presentWaitingState(response: NewDiscussions.BlockingWaitingIndicatorUpdate.Response)
+protocol DiscussionsPresenterProtocol {
+    func presentDiscussions(response: Discussions.DiscussionsLoad.Response)
+    func presentNextDiscussions(response: Discussions.NextDiscussionsLoad.Response)
+    func presentNextReplies(response: Discussions.NextRepliesLoad.Response)
+    func presentWriteComment(response: Discussions.WriteCommentPresentation.Response)
+    func presentCommentCreated(response: Discussions.CommentCreated.Response)
+    func presentCommentUpdated(response: Discussions.CommentUpdated.Response)
+    func presentCommentDeleteResult(response: Discussions.CommentDelete.Response)
+    func presentCommentLikeResult(response: Discussions.CommentLike.Response)
+    func presentCommentAbuseResult(response: Discussions.CommentAbuse.Response)
+    func presentSortType(response: Discussions.SortTypePresentation.Response)
+    func presentSortTypeUpdate(response: Discussions.SortTypeUpdate.Response)
+    func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response)
 }
 
-final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
-    weak var viewController: NewDiscussionsViewControllerProtocol?
+final class DiscussionsPresenter: DiscussionsPresenterProtocol {
+    weak var viewController: DiscussionsViewControllerProtocol?
 
-    func presentDiscussions(response: NewDiscussions.DiscussionsLoad.Response) {
-        var viewModel: NewDiscussions.DiscussionsLoad.ViewModel
+    func presentDiscussions(response: Discussions.DiscussionsLoad.Response) {
+        var viewModel: Discussions.DiscussionsLoad.ViewModel
 
         switch response.result {
         case .success(let result):
             let data = self.makeDiscussionsData(result)
-            viewModel = NewDiscussions.DiscussionsLoad.ViewModel(state: .result(data: data))
+            viewModel = Discussions.DiscussionsLoad.ViewModel(state: .result(data: data))
         case .failure:
-            viewModel = NewDiscussions.DiscussionsLoad.ViewModel(state: .error)
+            viewModel = Discussions.DiscussionsLoad.ViewModel(state: .error)
         }
 
         self.viewController?.displayDiscussions(viewModel: viewModel)
     }
 
-    func presentNextDiscussions(response: NewDiscussions.NextDiscussionsLoad.Response) {
-        var viewModel: NewDiscussions.NextDiscussionsLoad.ViewModel
+    func presentNextDiscussions(response: Discussions.NextDiscussionsLoad.Response) {
+        var viewModel: Discussions.NextDiscussionsLoad.ViewModel
 
         switch response.result {
         case .success(let result):
             let data = self.makeDiscussionsData(result)
-            viewModel = NewDiscussions.NextDiscussionsLoad.ViewModel(state: .result(data: data))
+            viewModel = Discussions.NextDiscussionsLoad.ViewModel(state: .result(data: data))
         case .failure:
-            viewModel = NewDiscussions.NextDiscussionsLoad.ViewModel(state: .error)
+            viewModel = Discussions.NextDiscussionsLoad.ViewModel(state: .error)
         }
 
         self.viewController?.displayNextDiscussions(viewModel: viewModel)
     }
 
-    func presentNextReplies(response: NewDiscussions.NextRepliesLoad.Response) {
+    func presentNextReplies(response: Discussions.NextRepliesLoad.Response) {
         let data = self.makeDiscussionsData(response.result)
-        self.viewController?.displayNextReplies(viewModel: NewDiscussions.NextRepliesLoad.ViewModel(data: data))
+        self.viewController?.displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel(data: data))
     }
 
-    func presentWriteComment(response: NewDiscussions.WriteCommentPresentation.Response) {
+    func presentWriteComment(response: Discussions.WriteCommentPresentation.Response) {
         let presentationContext: WriteComment.PresentationContext = {
             switch response.presentationContext {
             case .create:
@@ -62,7 +62,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         }()
 
         self.viewController?.displayWriteComment(
-            viewModel: NewDiscussions.WriteCommentPresentation.ViewModel(
+            viewModel: Discussions.WriteCommentPresentation.ViewModel(
                 targetID: response.targetID,
                 parentID: response.parentID,
                 presentationContext: presentationContext
@@ -70,42 +70,42 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         )
     }
 
-    func presentCommentCreated(response: NewDiscussions.CommentCreated.Response) {
+    func presentCommentCreated(response: Discussions.CommentCreated.Response) {
         let data = self.makeDiscussionsData(response.result)
-        self.viewController?.displayCommentCreated(viewModel: NewDiscussions.CommentCreated.ViewModel(data: data))
+        self.viewController?.displayCommentCreated(viewModel: Discussions.CommentCreated.ViewModel(data: data))
     }
 
-    func presentCommentUpdated(response: NewDiscussions.CommentUpdated.Response) {
+    func presentCommentUpdated(response: Discussions.CommentUpdated.Response) {
         let data = self.makeDiscussionsData(response.result)
-        self.viewController?.displayCommentUpdated(viewModel: NewDiscussions.CommentUpdated.ViewModel(data: data))
+        self.viewController?.displayCommentUpdated(viewModel: Discussions.CommentUpdated.ViewModel(data: data))
     }
 
-    func presentCommentDeleteResult(response: NewDiscussions.CommentDelete.Response) {
+    func presentCommentDeleteResult(response: Discussions.CommentDelete.Response) {
         switch response.result {
         case .success(let data):
             let viewModel = self.makeDiscussionsData(data)
             self.viewController?.displayCommentDeleteResult(
-                viewModel: NewDiscussions.CommentDelete.ViewModel(state: .result(data: viewModel))
+                viewModel: Discussions.CommentDelete.ViewModel(state: .result(data: viewModel))
             )
         case .failure:
             self.viewController?.displayCommentDeleteResult(
-                viewModel: NewDiscussions.CommentDelete.ViewModel(state: .error)
+                viewModel: Discussions.CommentDelete.ViewModel(state: .error)
             )
         }
     }
 
-    func presentCommentLikeResult(response: NewDiscussions.CommentLike.Response) {
+    func presentCommentLikeResult(response: Discussions.CommentLike.Response) {
         let data = self.makeDiscussionsData(response.result)
-        self.viewController?.displayCommentLikeResult(viewModel: NewDiscussions.CommentLike.ViewModel(data: data))
+        self.viewController?.displayCommentLikeResult(viewModel: Discussions.CommentLike.ViewModel(data: data))
     }
 
-    func presentCommentAbuseResult(response: NewDiscussions.CommentAbuse.Response) {
+    func presentCommentAbuseResult(response: Discussions.CommentAbuse.Response) {
         let data = self.makeDiscussionsData(response.result)
-        self.viewController?.displayCommentAbuseResult(viewModel: NewDiscussions.CommentAbuse.ViewModel(data: data))
+        self.viewController?.displayCommentAbuseResult(viewModel: Discussions.CommentAbuse.ViewModel(data: data))
     }
 
-    func presentSortType(response: NewDiscussions.SortTypePresentation.Response) {
-        let items = response.availableSortTypes.map { sortType -> NewDiscussions.SortTypePresentation.ViewModel.Item in
+    func presentSortType(response: Discussions.SortTypePresentation.Response) {
+        let items = response.availableSortTypes.map { sortType -> Discussions.SortTypePresentation.ViewModel.Item in
             var title: String = {
                 switch sortType {
                 case .last:
@@ -127,30 +127,30 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         }
 
         self.viewController?.displaySortTypeAlert(
-            viewModel: NewDiscussions.SortTypePresentation.ViewModel(
+            viewModel: Discussions.SortTypePresentation.ViewModel(
                 title: NSLocalizedString("DiscussionsSortTypeAlertTitle", comment: ""),
                 items: items
             )
         )
     }
 
-    func presentSortTypeUpdate(response: NewDiscussions.SortTypeUpdate.Response) {
+    func presentSortTypeUpdate(response: Discussions.SortTypeUpdate.Response) {
         self.viewController?.displaySortTypeUpdate(
-            viewModel: NewDiscussions.SortTypeUpdate.ViewModel(data: self.makeDiscussionsData(response.result))
+            viewModel: Discussions.SortTypeUpdate.ViewModel(data: self.makeDiscussionsData(response.result))
         )
     }
 
-    func presentWaitingState(response: NewDiscussions.BlockingWaitingIndicatorUpdate.Response) {
+    func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(
-            viewModel: NewDiscussions.BlockingWaitingIndicatorUpdate.ViewModel(shouldDismiss: response.shouldDismiss)
+            viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel(shouldDismiss: response.shouldDismiss)
         )
     }
 
     // MARK: - Private API -
 
     private func makeDiscussionsData(
-        _ data: NewDiscussions.DiscussionsResponseData
-    ) -> NewDiscussions.DiscussionsViewData {
+        _ data: Discussions.DiscussionsResponseData
+    ) -> Discussions.DiscussionsViewData {
         assert(data.discussions.filter({ !$0.repliesIDs.isEmpty }).count == data.replies.keys.count)
 
         let discussions = self.sortedDiscussions(
@@ -172,13 +172,13 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             sortType: data.currentSortType
         ).count - discussions.count
 
-        return NewDiscussions.DiscussionsViewData(
+        return Discussions.DiscussionsViewData(
             discussions: discussionsViewModels,
             discussionsLeftToLoad: discussionsLeftToLoad
         )
     }
 
-    private func makeCommentViewModel(comment: Comment) -> NewDiscussionsCommentViewModel {
+    private func makeCommentViewModel(comment: Comment) -> DiscussionsCommentViewModel {
         let avatarImageURL: URL? = {
             if let userInfo = comment.userInfo {
                 return URL(string: userInfo.avatarURL)
@@ -219,7 +219,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
             return nil
         }()
 
-        return NewDiscussionsCommentViewModel(
+        return DiscussionsCommentViewModel(
             id: comment.id,
             avatarImageURL: avatarImageURL,
             userID: comment.userID,
@@ -242,7 +242,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
         discussion: Comment,
         replies: [Comment],
         isFetchingMoreReplies: Bool
-    ) -> NewDiscussionsDiscussionViewModel {
+    ) -> DiscussionsDiscussionViewModel {
         let repliesViewModels = self.sortedReplies(
             replies,
             parentDiscussion: discussion
@@ -250,7 +250,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
 
         let leftToLoad = discussion.repliesIDs.count - repliesViewModels.count
 
-        return NewDiscussionsDiscussionViewModel(
+        return DiscussionsDiscussionViewModel(
             comment: self.makeCommentViewModel(comment: discussion),
             replies: repliesViewModels,
             repliesLeftToLoad: leftToLoad,
@@ -262,7 +262,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
     private func sortedDiscussions(
         _ discussions: [Comment],
         discussionProxy: DiscussionProxy,
-        by sortType: NewDiscussions.SortType
+        by sortType: Discussions.SortType
     ) -> [Comment] {
         return discussions.reordered(
             order: self.getDiscussionsIDs(discussionProxy: discussionProxy, sortType: sortType),
@@ -278,7 +278,7 @@ final class NewDiscussionsPresenter: NewDiscussionsPresenterProtocol {
 
     private func getDiscussionsIDs(
         discussionProxy: DiscussionProxy,
-        sortType: NewDiscussions.SortType
+        sortType: Discussions.SortType
     ) -> [Comment.IdType] {
         switch sortType {
         case .last:

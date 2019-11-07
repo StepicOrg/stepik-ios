@@ -1,6 +1,6 @@
 import UIKit
 
-final class NewDiscussionsAssembly: Assembly {
+final class DiscussionsAssembly: Assembly {
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
 
@@ -10,7 +10,7 @@ final class NewDiscussionsAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = NewDiscussionsProvider(
+        let provider = DiscussionsProvider(
             discussionProxiesNetworkService: DiscussionProxiesNetworkService(
                 discussionProxiesAPI: DiscussionProxiesAPI()
             ),
@@ -18,14 +18,14 @@ final class NewDiscussionsAssembly: Assembly {
             votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
-        let presenter = NewDiscussionsPresenter()
-        let interactor = NewDiscussionsInteractor(
+        let presenter = DiscussionsPresenter()
+        let interactor = DiscussionsInteractor(
             discussionProxyID: self.discussionProxyID,
             stepID: stepID,
             presenter: presenter,
             provider: provider
         )
-        let viewController = NewDiscussionsViewController(interactor: interactor)
+        let viewController = DiscussionsViewController(interactor: interactor)
 
         presenter.viewController = viewController
 

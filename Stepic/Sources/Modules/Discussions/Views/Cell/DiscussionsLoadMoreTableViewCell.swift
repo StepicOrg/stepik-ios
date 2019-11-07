@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension NewDiscussionsLoadMoreTableViewCell {
+extension DiscussionsLoadMoreTableViewCell {
     enum Appearance {
         static let containerHeight: CGFloat = 52
         static let containerBackgroundColor = UIColor(hex: 0xF6F6F6)
@@ -14,7 +14,7 @@ extension NewDiscussionsLoadMoreTableViewCell {
     }
 }
 
-final class NewDiscussionsLoadMoreTableViewCell: UITableViewCell, Reusable {
+final class DiscussionsLoadMoreTableViewCell: UITableViewCell, Reusable {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Appearance.titleLabelFont

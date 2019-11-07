@@ -1,12 +1,12 @@
 import SnapKit
 import UIKit
 
-protocol NewDiscussionsViewDelegate: class {
-    func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView)
-    func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView)
+protocol DiscussionsViewDelegate: class {
+    func discussionsViewDidRequestRefresh(_ view: DiscussionsView)
+    func discussionsViewDidRequestPagination(_ view: DiscussionsView)
 }
 
-extension NewDiscussionsView {
+extension DiscussionsView {
     struct Appearance {
         let backgroundColor: UIColor = .white
 
@@ -15,9 +15,9 @@ extension NewDiscussionsView {
     }
 }
 
-final class NewDiscussionsView: UIView {
+final class DiscussionsView: UIView {
     let appearance: Appearance
-    weak var delegate: NewDiscussionsViewDelegate?
+    weak var delegate: DiscussionsViewDelegate?
 
     private lazy var paginationView = PaginationView()
 
@@ -31,8 +31,8 @@ final class NewDiscussionsView: UIView {
         tableView.refreshControl = self.refreshControl
         self.refreshControl.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: .valueChanged)
 
-        tableView.register(cellClass: NewDiscussionsTableViewCell.self)
-        tableView.register(cellClass: NewDiscussionsLoadMoreTableViewCell.self)
+        tableView.register(cellClass: DiscussionsTableViewCell.self)
+        tableView.register(cellClass: DiscussionsLoadMoreTableViewCell.self)
 
         // Should use `self` as delegate to proxify some delegate methods
         tableView.delegate = self
@@ -111,11 +111,11 @@ final class NewDiscussionsView: UIView {
 
     @objc
     private func refreshControlDidChangeValue() {
-        self.delegate?.newDiscussionsViewDidRequestRefresh(self)
+        self.delegate?.discussionsViewDidRequestRefresh(self)
     }
 }
 
-extension NewDiscussionsView: ProgrammaticallyInitializableViewProtocol {
+extension DiscussionsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }
@@ -132,14 +132,14 @@ extension NewDiscussionsView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// MARK: - NewDiscussionsView: UITableViewDelegate -
+// MARK: - DiscussionsView: UITableViewDelegate -
 
-extension NewDiscussionsView: UITableViewDelegate {
+extension DiscussionsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let isLastIndexPath = indexPath.section == tableView.numberOfSections - 1
             && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
         if isLastIndexPath && self.shouldShowPaginationView {
-            self.delegate?.newDiscussionsViewDidRequestPagination(self)
+            self.delegate?.discussionsViewDidRequestPagination(self)
         }
 
         self.tableViewDelegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)

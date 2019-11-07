@@ -1,6 +1,6 @@
 import Foundation
 
-enum NewDiscussions {
+enum Discussions {
     // MARK: Common types
 
     /// Interactor -> presenter
@@ -14,7 +14,7 @@ enum NewDiscussions {
 
     /// Presenter -> ViewController
     struct DiscussionsViewData {
-        let discussions: [NewDiscussionsDiscussionViewModel]
+        let discussions: [DiscussionsDiscussionViewModel]
         let discussionsLeftToLoad: Int
     }
 

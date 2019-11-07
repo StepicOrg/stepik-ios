@@ -305,7 +305,7 @@ final class DeepLinkRouter {
                         }
 
                         if let discussionProxyID = step.discussionProxyId {
-                            let assembly = NewDiscussionsAssembly(
+                            let assembly = DiscussionsAssembly(
                                 discussionProxyID: discussionProxyID,
                                 stepID: step.id
                             )
