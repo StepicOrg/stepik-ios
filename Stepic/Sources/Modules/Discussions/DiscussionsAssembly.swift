@@ -3,10 +3,16 @@ import UIKit
 final class DiscussionsAssembly: Assembly {
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
+    private let presentationContext: Discussions.PresentationContext
 
-    init(discussionProxyID: DiscussionProxy.IdType, stepID: Step.IdType) {
+    init(
+        discussionProxyID: DiscussionProxy.IdType,
+        stepID: Step.IdType,
+        presentationContext: Discussions.PresentationContext = .fromBeginning
+    ) {
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
+        self.presentationContext = presentationContext
     }
 
     func makeModule() -> UIViewController {
@@ -21,7 +27,8 @@ final class DiscussionsAssembly: Assembly {
         let presenter = DiscussionsPresenter()
         let interactor = DiscussionsInteractor(
             discussionProxyID: self.discussionProxyID,
-            stepID: stepID,
+            stepID: self.stepID,
+            presentationContext: self.presentationContext,
             presenter: presenter,
             provider: provider
         )

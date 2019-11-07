@@ -3,6 +3,11 @@ import Foundation
 enum Discussions {
     // MARK: - Common types -
 
+    enum PresentationContext {
+        case fromBeginning
+        case scrollTo(discussionID: Comment.IdType, replyID: Comment.IdType?)
+    }
+
     /// Interactor -> presenter
     struct DiscussionsResponseData {
         let discussionProxy: DiscussionProxy

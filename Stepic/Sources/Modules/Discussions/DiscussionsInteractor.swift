@@ -25,6 +25,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
+    private let presentationContext: Discussions.PresentationContext
 
     private var currentDiscussionProxy: DiscussionProxy?
     private var currentDiscussions: [Comment] = []
@@ -58,13 +59,19 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     init(
         discussionProxyID: DiscussionProxy.IdType,
         stepID: Step.IdType,
+        presentationContext: Discussions.PresentationContext,
         presenter: DiscussionsPresenterProtocol,
         provider: DiscussionsProviderProtocol
     ) {
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
+        self.presentationContext = presentationContext
         self.presenter = presenter
         self.provider = provider
+
+        DiscussionsInteractor.logger.info(
+            "discussions interactor: did init with presentationContext: \(presentationContext)"
+        )
 
         // FIXME: analytics dependency
         AmplitudeAnalyticsEvents.Discussions.opened.send()
