@@ -10,6 +10,8 @@ extension DiscussionsTableViewCell {
     }
 }
 
+// MARK: - DiscussionsTableViewCell: UITableViewCell, Reusable -
+
 final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     private lazy var cellView: DiscussionsCellView = {
         let cellView = DiscussionsCellView()
@@ -88,8 +90,11 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
 
     func calculateCellHeight(maxPreferredWidth: CGFloat) -> CGFloat {
         let leadingInset = self.cellLeadingConstraint?.layoutConstraints.first?.constant ?? 0
+
         let cellViewWidth = maxPreferredWidth - leadingInset
-        return self.cellView.calculateContentHeight(maxPreferredWidth: cellViewWidth) + self.separatorType.height
+        let cellViewHeight = self.cellView.calculateContentHeight(maxPreferredWidth: cellViewWidth)
+
+        return cellViewHeight + self.separatorType.height
     }
 
     // MARK: - Private API
@@ -103,15 +108,19 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
 
         self.cellView.translatesAutoresizingMaskIntoConstraints = false
         self.cellView.snp.makeConstraints { make in
-            self.cellLeadingConstraint = make.leading.equalToSuperview()
-                .offset(Appearance.leadingSpaceDiscussion).constraint
+            self.cellLeadingConstraint = make.leading
+                .equalToSuperview()
+                .offset(Appearance.leadingSpaceDiscussion)
+                .constraint
             make.top.trailing.equalToSuperview()
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
-            self.separatorLeadingConstraint = make.leading.equalToSuperview()
-                .offset(Appearance.leadingSpaceDiscussion).constraint
+            self.separatorLeadingConstraint = make.leading
+                .equalToSuperview()
+                .offset(Appearance.leadingSpaceDiscussion)
+                .constraint
             make.top.equalTo(self.cellView.snp.bottom)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().priority(999)

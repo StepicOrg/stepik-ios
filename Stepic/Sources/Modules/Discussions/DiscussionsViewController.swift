@@ -6,15 +6,17 @@ protocol DiscussionsViewControllerProtocol: class {
     func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel)
     func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel)
     func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel)
-    func displayCommentCreated(viewModel: Discussions.CommentCreated.ViewModel)
-    func displayCommentUpdated(viewModel: Discussions.CommentUpdated.ViewModel)
-    func displayCommentDeleteResult(viewModel: Discussions.CommentDelete.ViewModel)
-    func displayCommentLikeResult(viewModel: Discussions.CommentLike.ViewModel)
-    func displayCommentAbuseResult(viewModel: Discussions.CommentAbuse.ViewModel)
-    func displaySortTypeAlert(viewModel: Discussions.SortTypePresentation.ViewModel)
+    func displayCommentCreate(viewModel: Discussions.CommentCreated.ViewModel)
+    func displayCommentUpdate(viewModel: Discussions.CommentUpdated.ViewModel)
+    func displayCommentDelete(viewModel: Discussions.CommentDelete.ViewModel)
+    func displayCommentLike(viewModel: Discussions.CommentLike.ViewModel)
+    func displayCommentAbuse(viewModel: Discussions.CommentAbuse.ViewModel)
+    func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel)
     func displaySortTypeUpdate(viewModel: Discussions.SortTypeUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel)
 }
+
+// MARK: - DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder -
 
 final class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
     lazy var discussionsView = self.view as? DiscussionsView
@@ -45,6 +47,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         target: self,
         action: #selector(self.didClickWriteComment)
     )
+
+    // MARK: UIViewController life cycle
 
     init(
         interactor: DiscussionsInteractorProtocol,
@@ -95,10 +99,7 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             ),
             for: .connectionError
         )
-        self.registerPlaceholder(
-            placeholder: StepikPlaceholder(.emptyDiscussions),
-            for: .empty
-        )
+        self.registerPlaceholder(placeholder: StepikPlaceholder(.emptyDiscussions), for: .empty)
     }
 
     private func updateState(newState: Discussions.ViewControllerState) {
@@ -149,6 +150,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         }
     }
 
+    // MARK: Actions
+
     @objc
     private func didClickWriteComment() {
         self.interactor.doWriteCommentPresentation(request: .init(commentID: nil, presentationContext: .create))
@@ -156,7 +159,7 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 
     @objc
     private func didClickSortType() {
-        self.interactor.doSortTypePresentation(request: .init())
+        self.interactor.doSortTypesPresentation(request: .init())
     }
 }
 
@@ -191,15 +194,15 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         self.present(navigationController, animated: true)
     }
 
-    func displayCommentCreated(viewModel: Discussions.CommentCreated.ViewModel) {
+    func displayCommentCreate(viewModel: Discussions.CommentCreated.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayCommentUpdated(viewModel: Discussions.CommentUpdated.ViewModel) {
+    func displayCommentUpdate(viewModel: Discussions.CommentUpdated.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayCommentDeleteResult(viewModel: Discussions.CommentDelete.ViewModel) {
+    func displayCommentDelete(viewModel: Discussions.CommentDelete.ViewModel) {
         switch viewModel.state {
         case .result(let data):
             SVProgressHUD.showSuccess(withStatus: "")
@@ -211,29 +214,29 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         }
     }
 
-    func displayCommentLikeResult(viewModel: Discussions.CommentLike.ViewModel) {
+    func displayCommentLike(viewModel: Discussions.CommentLike.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displayCommentAbuseResult(viewModel: Discussions.CommentAbuse.ViewModel) {
+    func displayCommentAbuse(viewModel: Discussions.CommentAbuse.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
-    func displaySortTypeAlert(viewModel: Discussions.SortTypePresentation.ViewModel) {
+    func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
 
-        viewModel.items.forEach { sortTypeItem in
+        viewModel.items.forEach { item in
             let action = UIAlertAction(
-                title: sortTypeItem.title,
+                title: item.title,
                 style: .default,
                 handler: { [weak self] _ in
-                    self?.interactor.doSortTypeUpdate(request: .init(uniqueIdentifier: sortTypeItem.uniqueIdentifier))
+                    self?.interactor.doSortTypeUpdate(request: .init(uniqueIdentifier: item.uniqueIdentifier))
                 }
             )
             alert.addAction(action)
         }
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
 
         if let popoverPresentationController = alert.popoverPresentationController {
             popoverPresentationController.barButtonItem = self.sortTypeBarButtonItem
@@ -277,9 +280,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didReplyForComment comment: DiscussionsCommentViewModel
     ) {
-        self.interactor.doWriteCommentPresentation(
-            request: .init(commentID: comment.id, presentationContext: .create)
-        )
+        self.interactor.doWriteCommentPresentation(request: .init(commentID: comment.id, presentationContext: .create))
     }
 
     func discussionsTableViewDataSource(
@@ -347,6 +348,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         sourceRect: CGRect
     ) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Reply", comment: ""),
@@ -413,7 +415,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             )
         }
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
 
         if let popoverPresentationController = alert.popoverPresentationController {
             popoverPresentationController.sourceView = sourceView

@@ -15,6 +15,8 @@ extension DiscussionsView {
     }
 }
 
+// MARK: - DiscussionsView: UIView -
+
 final class DiscussionsView: UIView {
     let appearance: Appearance
     weak var delegate: DiscussionsViewDelegate?
@@ -115,6 +117,8 @@ final class DiscussionsView: UIView {
     }
 }
 
+// MARK: - DiscussionsView: ProgrammaticallyInitializableViewProtocol -
+
 extension DiscussionsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
@@ -149,6 +153,7 @@ extension DiscussionsView: UITableViewDelegate {
         if self.isSkeletonVisible {
             return self.appearance.skeletonCellHeight
         }
+
         return self.tableViewDelegate?.tableView?(tableView, heightForRowAt: indexPath) ?? 0
     }
 

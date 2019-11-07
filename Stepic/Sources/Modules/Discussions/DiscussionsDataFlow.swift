@@ -1,7 +1,7 @@
 import Foundation
 
 enum Discussions {
-    // MARK: Common types
+    // MARK: - Common types -
 
     /// Interactor -> presenter
     struct DiscussionsResponseData {
@@ -26,6 +26,7 @@ enum Discussions {
     }
 
     // MARK: - Use cases -
+    // MARK: Fetch comments
 
     /// Show discussions
     enum DiscussionsLoad {
@@ -67,6 +68,8 @@ enum Discussions {
             let data: DiscussionsViewData
         }
     }
+
+    // MARK: - Comment actions
 
     /// Present write course review (after compose bar button item click)
     enum WriteCommentPresentation {
@@ -161,8 +164,10 @@ enum Discussions {
         }
     }
 
-    /// Presents sort action sheet (after sort type bar button item click)
-    enum SortTypePresentation {
+    // MARK: - Sort type
+
+    /// Presents action sheet with available and current sort type (after sort type bar button item click)
+    enum SortTypesPresentation {
         struct Request { }
 
         struct Response {
@@ -196,6 +201,8 @@ enum Discussions {
         }
     }
 
+    // MARK: - HUD
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {
@@ -207,7 +214,7 @@ enum Discussions {
         }
     }
 
-    // MARK: States
+    // MARK: - States -
 
     enum ViewControllerState {
         case loading

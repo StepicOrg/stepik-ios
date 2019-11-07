@@ -38,6 +38,8 @@ protocol DiscussionsTableViewDataSourceDelegate: class {
     )
 }
 
+// MARK: - DiscussionsTableViewDataSource: NSObject -
+
 final class DiscussionsTableViewDataSource: NSObject {
     weak var delegate: DiscussionsTableViewDataSourceDelegate?
 
@@ -103,7 +105,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
     }
 
     private func shouldShowLoadMoreRepliesForSection(_ section: Int) -> Bool {
-        return self.viewModels[section].repliesLeftToLoad > 0
+        return self.viewModels[section].repliesLeftToLoadCount > 0
     }
 
     private func isLoadMoreTableViewCell(at indexPath: IndexPath) -> Bool {
@@ -128,7 +130,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
             indexPath.row == DiscussionsTableViewDataSource.parentDiscussionRowIndex ? .discussion : .reply
         let separatorType: DiscussionsTableViewCell.ViewModel.SeparatorType = {
             if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-                if discussionViewModel.repliesLeftToLoad > 0 {
+                if discussionViewModel.repliesLeftToLoadCount > 0 {
                     return .none
                 } else if indexPath.section == tableView.numberOfSections - 1 {
                     return .small
@@ -193,7 +195,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
             - self.loadMoreRepliesInset(section: indexPath.section) - 1
 
         cell.configure(
-            viewModel: DiscussionsTableViewCell.ViewModel(
+            viewModel: .init(
                 comment: commentViewModel,
                 commentType: commentType,
                 separatorType: separatorType,
@@ -214,8 +216,12 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         self.cellHeightByCommentID[id] = newHeight
 
         let workItem = DispatchWorkItem { [weak tableView] in
-            tableView?.beginUpdates()
-            tableView?.endUpdates()
+            guard let strongTableView = tableView else {
+                return
+            }
+
+            strongTableView.beginUpdates()
+            strongTableView.endUpdates()
         }
 
         self.pendingTableViewUpdateWorkItem?.cancel()
@@ -295,6 +301,7 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
         if indexPath.row == DiscussionsTableViewDataSource.parentDiscussionRowIndex {
             return self.viewModels[safe: indexPath.section]?.comment
         }
+
         return self.viewModels[safe: indexPath.section]?.replies[
             safe: indexPath.row - DiscussionsTableViewDataSource.parentDiscussionInset
         ]

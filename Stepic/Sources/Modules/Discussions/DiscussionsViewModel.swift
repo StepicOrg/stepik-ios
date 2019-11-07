@@ -4,7 +4,7 @@ struct DiscussionsDiscussionViewModel {
     let comment: DiscussionsCommentViewModel
     let replies: [DiscussionsCommentViewModel]
 
-    let repliesLeftToLoad: Int
+    let repliesLeftToLoadCount: Int
     let formattedRepliesLeftToLoad: String
     let isFetchingMoreReplies: Bool
 
@@ -19,10 +19,10 @@ struct DiscussionsCommentViewModel {
     let userID: User.IdType
     let userRole: UserRole
     let isPinned: Bool
-    let userName: String
+    let username: String
     let text: String
     let isWebViewSupportNeeded: Bool
-    let dateRepresentation: String
+    let formattedDate: String
     let likesCount: Int
     let dislikesCount: Int
     let voteValue: VoteValue?

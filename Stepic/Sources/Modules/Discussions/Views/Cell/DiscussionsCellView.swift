@@ -49,6 +49,8 @@ extension DiscussionsCellView {
     }
 }
 
+// MARK: - DiscussionsCellView: UIView -
+
 final class DiscussionsCellView: UIView {
     let appearance: Appearance
 
@@ -193,7 +195,7 @@ final class DiscussionsCellView: UIView {
     var onDislikeClick: (() -> Void)?
     var onAvatarClick: (() -> Void)?
     var onLinkClick: ((URL) -> Void)?
-    // Content height.
+    // Content height updates callbacks
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: (() -> Void)?
 
@@ -234,8 +236,8 @@ final class DiscussionsCellView: UIView {
             canVote: viewModel.canVote
         )
 
-        self.nameLabel.text = viewModel.userName
-        self.dateLabel.text = viewModel.dateRepresentation
+        self.nameLabel.text = viewModel.username
+        self.dateLabel.text = viewModel.formattedDate
 
         self.updateTextContent(text: viewModel.text, isWebViewSupportNeeded: viewModel.isWebViewSupportNeeded)
 
@@ -251,7 +253,7 @@ final class DiscussionsCellView: UIView {
         return self.appearance.avatarImageViewInsets.top
             + userInfoHeight
             + self.appearance.textContentContainerViewInsets.top
-            + self.textContentHeight(maxPreferredWidth: maxPreferredWidth)
+            + self.getTextContentHeight(maxPreferredWidth: maxPreferredWidth)
             + self.appearance.bottomControlsInsets.top
             + self.appearance.bottomControlsHeight
             + self.appearance.bottomControlsInsets.bottom
@@ -315,13 +317,14 @@ final class DiscussionsCellView: UIView {
         }
     }
 
-    private func textContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let remainingTextContentWidth = maxPreferredWidth
-            - self.appearance.avatarImageViewInsets.left
-            - self.appearance.avatarImageViewSize.width
-            - self.appearance.nameLabelInsets.left
-            - self.appearance.textContentContainerViewInsets.right
+    private func getTextContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
         if self.textContentWebBasedTextView.isHidden {
+            let remainingTextContentWidth = maxPreferredWidth
+                - self.appearance.avatarImageViewInsets.left
+                - self.appearance.avatarImageViewSize.width
+                - self.appearance.nameLabelInsets.left
+                - self.appearance.textContentContainerViewInsets.right
+
             return UILabel.heightForLabelWithText(
                 self.currentText ?? "",
                 lines: self.textContentTextLabel.numberOfLines,
@@ -331,6 +334,7 @@ final class DiscussionsCellView: UIView {
                 alignment: self.textContentTextLabel.textAlignment
             )
         }
+
         return self.currentWebBasedTextViewHeight
     }
 
@@ -405,8 +409,10 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
-            self.nameLabelTopConstraint = make.top.equalTo(self.badgeLabel.snp.bottom)
-                .offset(self.appearance.nameLabelInsets.top).constraint
+            self.nameLabelTopConstraint = make.top
+                .equalTo(self.badgeLabel.snp.bottom)
+                .offset(self.appearance.nameLabelInsets.top)
+                .constraint
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
             make.height.equalTo(self.appearance.nameLabelHeight)
         }
@@ -416,7 +422,8 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textContentContainerViewInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
-            make.bottom.equalTo(self.bottomControlsStackView.snp.top)
+            make.bottom
+                .equalTo(self.bottomControlsStackView.snp.top)
                 .offset(-self.appearance.textContentContainerViewInsets.bottom)
         }
 
