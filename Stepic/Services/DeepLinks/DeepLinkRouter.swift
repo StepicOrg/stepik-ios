@@ -75,37 +75,46 @@ final class DeepLinkRouter {
         }
     }
 
-    static func routeFromDeepLink(url: URL, presentFrom presentationSource: UIViewController? = nil, isModal: Bool = false, withDelay: Bool = true) {
+    static func routeFromDeepLink(
+        url: URL,
+        presentFrom presentationSource: UIViewController? = nil,
+        isModal: Bool = false,
+        withDelay: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
         DeepLinkRouter.routeFromDeepLink(url, completion: { controllers in
-            let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
+            let navigationController = presentationSource?.navigationController ?? self.currentNavigation
+
             if controllers.count > 0 {
                 let openBlock = {
+                    completion?()
                     DeepLinkRouter.open(
                         modules: controllers,
-                        from: presentationSource ?? navigation?.topViewController,
+                        from: presentationSource ?? navigationController?.topViewController,
                         isModal: isModal
                     )
                 }
                 if withDelay {
-                    delay(0.5, closure: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
                         openBlock()
-                    })
+                    }
                 } else {
                     openBlock()
                 }
             } else {
-                let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
-                guard let source = presentationSource ?? navigation?.topViewController else {
+                completion?()
+                
+                guard let sourceViewController = presentationSource ?? navigationController?.topViewController else {
                     return
                 }
 
-                guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
+                guard let urlWithAppendedQueryParams = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
                     return
                 }
 
                 WebControllerManager.sharedManager.presentWebControllerWithURL(
-                    url,
-                    inController: source,
+                    urlWithAppendedQueryParams,
+                    inController: sourceViewController,
                     withKey: "external link",
                     allowsSafari: true,
                     backButtonStyle: .close
