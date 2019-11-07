@@ -9,9 +9,9 @@
 import Foundation
 
 final class CertificatesPresentationContainer {
-    fileprivate let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 
-    fileprivate let certificatesStoredKey = "certificatesStoredIdsKey"
+    private let certificatesStoredKey = "certificatesStoredIdsKey"
 
     var certificatesIds: [Int] {
         get {

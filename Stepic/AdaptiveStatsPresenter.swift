@@ -23,8 +23,8 @@ struct WeekProgressViewData {
 final class AdaptiveStatsPresenter {
     weak var view: AdaptiveStatsView?
 
-    fileprivate var ratingManager: AdaptiveRatingManager
-    fileprivate var statsManager: AdaptiveStatsManager
+    private var ratingManager: AdaptiveRatingManager
+    private var statsManager: AdaptiveStatsManager
 
     private var progressByWeek: [WeekProgressViewData]?
 

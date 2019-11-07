@@ -9,9 +9,9 @@
 import Foundation
 
 final class LaunchDefaultsContainer {
-    fileprivate let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 
-    fileprivate let didLaunchKey = "didLaunchKey"
+    private let didLaunchKey = "didLaunchKey"
 
     var didLaunch: Bool {
         get {
@@ -28,7 +28,7 @@ final class LaunchDefaultsContainer {
         }
     }
 
-    fileprivate let startVersionKey = "startVersionKey"
+    private let startVersionKey = "startVersionKey"
 
     var startVersion: String {
         get {

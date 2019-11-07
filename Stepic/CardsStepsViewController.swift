@@ -18,8 +18,8 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
 
     var canSwipeCurrentCardUp = false
 
-    fileprivate var topCard: StepCardView?
-    fileprivate var currentStepViewController: CardStepViewController?
+    private var topCard: StepCardView?
+    private var currentStepViewController: CardStepViewController?
 
     var state: CardsStepsViewState = .normal {
         didSet {

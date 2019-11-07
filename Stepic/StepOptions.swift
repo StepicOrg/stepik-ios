@@ -68,7 +68,7 @@ final class StepOptions: NSManagedObject {
         initialize(json)
     }
 
-    fileprivate func limit(language: String) -> CodeLimit? {
+    private func limit(language: String) -> CodeLimit? {
         return limits.filter({
             $0.languageString == language
         }).first
@@ -83,7 +83,7 @@ final class StepOptions: NSManagedObject {
         return limits.compactMap { $0.language }
     }
 
-    fileprivate func template(language: String, userGenerated: Bool) -> CodeTemplate? {
+    private func template(language: String, userGenerated: Bool) -> CodeTemplate? {
         return templates.filter({
             $0.languageString == language && $0.isUserGenerated == userGenerated
         }).first

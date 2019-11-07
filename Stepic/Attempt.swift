@@ -65,7 +65,7 @@ final class Attempt: JSONSerializable {
         ]
     }
 
-    fileprivate func getDatasetFromJSON(_ json: JSON, stepName: String) -> Dataset? {
+    private func getDatasetFromJSON(_ json: JSON, stepName: String) -> Dataset? {
         switch stepName {
         case "choice" :
             return ChoiceDataset(json: json)

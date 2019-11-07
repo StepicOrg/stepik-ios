@@ -9,10 +9,10 @@
 import Foundation
 
 final class CodeEditorPreferencesContainer {
-    fileprivate let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 
-    fileprivate let themeKey = "themeKey"
-    fileprivate let fontSizeKey = "fontSizeKey"
+    private let themeKey = "themeKey"
+    private let fontSizeKey = "fontSizeKey"
 
     var theme: String {
         get {

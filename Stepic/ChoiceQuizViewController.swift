@@ -37,7 +37,7 @@ final class ChoiceQuizViewController: QuizViewController {
         tableView.register(UINib(nibName: "ChoiceQuizTableViewCell", bundle: nil), forCellReuseIdentifier: "ChoiceQuizTableViewCell")
     }
 
-    fileprivate func hasTagsInDataset(dataset: ChoiceDataset) -> Bool {
+    private func hasTagsInDataset(dataset: ChoiceDataset) -> Bool {
         for option in dataset.options {
             if TagDetectionUtil.isWebViewSupportNeeded(option) {
                 return true
@@ -151,7 +151,7 @@ extension ChoiceQuizViewController: UITableViewDelegate {
         reactOnSelection(tableView, didSelectRowAtIndexPath: indexPath)
     }
 
-    fileprivate func reactOnSelection(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    private func reactOnSelection(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? ChoiceQuizTableViewCell {
             if let dataset = dataset {
                 if dataset.isMultipleChoice {

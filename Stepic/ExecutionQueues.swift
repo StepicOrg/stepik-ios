@@ -12,7 +12,7 @@ import Foundation
  Contains all ExecutionQueues
  */
 final class ExecutionQueues {
-    fileprivate init() {}
+    private init() {}
     static let sharedQueues = ExecutionQueues()
 
     var connectionAvailableExecutionQueue = ExecutionQueue()

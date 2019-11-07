@@ -52,11 +52,11 @@ extension SocialAuthViewController: SocialAuthView {
 final class SocialAuthViewController: UIViewController {
     var presenter: SocialAuthPresenter?
 
-    fileprivate let numberOfColumns = 3
-    fileprivate let numberOfRows = 2
-    fileprivate let headerHeight: CGFloat = 47.0
+    private let numberOfColumns = 3
+    private let numberOfRows = 2
+    private let headerHeight: CGFloat = 47.0
 
-    fileprivate let webControllerKey = "social auth"
+    private let webControllerKey = "social auth"
 
     var isExpanded = false
 
@@ -67,7 +67,7 @@ final class SocialAuthViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
 
-    fileprivate var providers: [SocialProviderViewData] = []
+    private var providers: [SocialProviderViewData] = []
 
     var state: SocialAuthState = .normal {
         didSet {

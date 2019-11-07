@@ -14,7 +14,7 @@ import Kanna
  */
 @available(*, deprecated, message: "Use ContentProcessor instead")
 final class HTMLParsingUtil {
-    fileprivate init() {}
+    private init() {}
 
     static func getLink(_ htmlString: String, index: Int) -> String? {
 //        if let doc = Kanna.HTML(html: htmlString, encoding: String.Encoding.utf8) {

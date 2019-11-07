@@ -44,7 +44,7 @@ final class WebControllerManager: NSObject {
         error?("Could not dismiss web controller with key \(key)")
     }
 
-    fileprivate func presentCustomWebController(_ url: URL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
+    private func presentCustomWebController(_ url: URL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
         let controller = WebViewController(url: url)
         controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle

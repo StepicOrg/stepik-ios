@@ -315,7 +315,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     func logout() {
     }
 
-    fileprivate func loadRecommendations(for course: Course, count: Int) -> Promise<[Lesson]> {
+    private func loadRecommendations(for course: Course, count: Int) -> Promise<[Lesson]> {
         return Promise { seal in
             self.recommendationsAPI.retrieve(course: course.id, count: count).then { lessonsIds -> Promise<[Lesson]> in
                 guard !lessonsIds.isEmpty else {
@@ -332,7 +332,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
     }
 
-    fileprivate func getStep(for lesson: Lesson, index: Int = 0) -> Promise<Step> {
+    private func getStep(for lesson: Lesson, index: Int = 0) -> Promise<Step> {
         return Promise { seal in
             guard lesson.stepsArray.count > index else {
                 throw CardsStepsError.noStepsInLesson
@@ -354,7 +354,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
     }
 
-    fileprivate func getNewRecommendation(for course: Course) -> Promise<Lesson> {
+    private func getNewRecommendation(for course: Course) -> Promise<Lesson> {
         print("cards steps: preloaded lessons = \(cachedRecommendedLessons.map { $0.id })")
 
         return Promise { seal in
@@ -404,7 +404,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
     }
 
-    fileprivate func sendView(step: Step) -> Promise<Void> {
+    private func sendView(step: Step) -> Promise<Void> {
         return Promise { seal in
             guard let lesson = step.lesson else {
                 throw CardsStepsError.viewNotSent
@@ -425,7 +425,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
     }
 
-    fileprivate func sendReaction(_ reaction: Reaction, for lesson: Lesson, user: User) -> Promise<Void> {
+    private func sendReaction(_ reaction: Reaction, for lesson: Lesson, user: User) -> Promise<Void> {
         return Promise { seal in
             self.recommendationsAPI.sendReaction(user: user.id, lesson: lesson.id, reaction: reaction).done { _ in
                 if let curState = self.currentStepPresenter?.state {
@@ -452,7 +452,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         }
     }
 
-    fileprivate func syncRatingAndStreak(for course: Course) -> Guarantee<Void> {
+    private func syncRatingAndStreak(for course: Course) -> Guarantee<Void> {
         return Guarantee { seal in
             self.ratingsAPI.restore(courseId: course.id).done { exp, streak in
                 self.rating = max(self.rating, exp)

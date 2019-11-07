@@ -61,7 +61,7 @@ final class Submission: JSONSerializable {
         ]
     }
 
-    fileprivate func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
+    private func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
         switch stepName {
         case "choice" : return ChoiceReply(json: json)
         case "string" : return TextReply(json: json)

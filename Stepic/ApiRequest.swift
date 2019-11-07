@@ -80,7 +80,7 @@ final class ApiRequestPerformer {
         }
     }
 
-    fileprivate static func performRequestWithAuthorizationCheck(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
+    private static func performRequestWithAuthorizationCheck(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
 //        if let user = AuthInfo.shared.user {
 //            print("performing request with user \(user.id)")
         if !AuthInfo.shared.isAuthorized && Session.needsRefresh {

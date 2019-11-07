@@ -32,7 +32,7 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 final class Parser: NSObject {
     static var shared = Parser()
 
-    override fileprivate init() {}
+    override private init() {}
 
     func dateFromTimedateJSON(_ json: JSON) -> Date? {
         if let date = json.string {

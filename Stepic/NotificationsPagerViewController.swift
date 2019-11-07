@@ -11,19 +11,17 @@ import UIKit
 final class NotificationsPagerViewController: PagerController, ControllerWithStepikPlaceholder {
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    var sections: [NotificationsSection] = [
-        .all, .learning, .comments, .reviews, .teaching, .other
-    ]
+    var sections: [NotificationsSection] = [.all, .learning, .comments, .reviews, .teaching, .other]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = NSLocalizedString("Notifications", comment: "")
+        self.navigationItem.title = NSLocalizedString("Notifications", comment: "")
 
         self.dataSource = self
-        setUpTabs()
+        self.setUpTabs()
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.login, action: { [weak self] in
+        self.registerPlaceholder(placeholder: StepikPlaceholder(.login, action: { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -32,7 +30,7 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
         }), for: .anonymous)
 
         if !AuthInfo.shared.isAuthorized {
-            showPlaceholder(for: .anonymous)
+            self.showPlaceholder(for: .anonymous)
         }
     }
 
@@ -40,9 +38,9 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
         super.viewDidAppear(animated)
 
         if AuthInfo.shared.isAuthorized {
-            isPlaceholderShown = false
+            self.isPlaceholderShown = false
         } else {
-            showPlaceholder(for: .anonymous)
+            self.showPlaceholder(for: .anonymous)
         }
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
@@ -50,15 +48,15 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
         }
     }
 
-    fileprivate func setUpTabs() {
-        tabHeight = 44.0
-        indicatorHeight = 1.5
-        centerCurrentTab = true
-        indicatorColor = UIColor.mainDark
-        selectedTabTextColor = UIColor.mainDark
-        tabsTextColor = UIColor.mainDark
-        tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
-        tabsViewBackgroundColor = UIColor.mainLight
+    private func setUpTabs() {
+        self.tabHeight = 44.0
+        self.indicatorHeight = 1.5
+        self.centerCurrentTab = true
+        self.indicatorColor = UIColor.mainDark
+        self.selectedTabTextColor = UIColor.mainDark
+        self.tabsTextColor = UIColor.mainDark
+        self.tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
+        self.tabsViewBackgroundColor = UIColor.mainLight
     }
 
     func selectSection(_ notificationSection: NotificationsSection) {
@@ -70,22 +68,30 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
 
 extension NotificationsPagerViewController: PagerDataSource {
     func numberOfTabs(_ pager: PagerController) -> Int {
-        return sections.count
+        return self.sections.count
     }
 
     func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
         let label = UILabel()
-
         label.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
         label.text = sections[index].localizedName
+
         label.sizeToFit()
+
         return label
     }
 
     func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
-        let vc = ControllerHelper.instantiateViewController(identifier: "NotificationsViewController", storyboardName: "Notifications") as! NotificationsViewController
-        vc.section = sections[index]
-        return vc
+        guard let notificationsViewController = ControllerHelper.instantiateViewController(
+            identifier: "NotificationsViewController",
+            storyboardName: "Notifications"
+        ) as? NotificationsViewController else {
+            fatalError("Failed instantiate NotificationsViewController via storyboard")
+        }
+
+        notificationsViewController.section = self.sections[index]
+
+        return notificationsViewController
     }
 }
 

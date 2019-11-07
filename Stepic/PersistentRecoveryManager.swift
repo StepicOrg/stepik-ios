@@ -27,7 +27,7 @@ class PersistentRecoveryManager {
         self.plistName = baseName
     }
 
-    fileprivate func loadObjectDictionaryFromKey(_ key: String) -> [String: Any]? {
+    private func loadObjectDictionaryFromKey(_ key: String) -> [String: Any]? {
         let plistData = NSDictionary(contentsOfFile: plistPath)!
         return plistData[key] as? [String: Any]
     }

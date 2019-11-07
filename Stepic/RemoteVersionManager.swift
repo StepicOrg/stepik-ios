@@ -14,10 +14,10 @@ import UIKit
  This class manages remote version change
  */
 final class RemoteVersionManager: NSObject {
-    override fileprivate init() {}
+    override private init() {}
     static let sharedManager = RemoteVersionManager()
 
-    fileprivate func isVersion(_ v1: String, olderThan v2: String) -> Bool {
+    private func isVersion(_ v1: String, olderThan v2: String) -> Bool {
         return v1.compare(v2, options: NSString.CompareOptions.numeric) == ComparisonResult.orderedDescending
     }
 
@@ -41,11 +41,11 @@ final class RemoteVersionManager: NSObject {
             })
     }
 
-    fileprivate func getLocalVersion() -> String {
+    private func getLocalVersion() -> String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
 
-    fileprivate func getRemoteVersion(success: @escaping (String, String) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request {
+    private func getRemoteVersion(success: @escaping (String, String) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request {
         return AlamofireDefaultSessionManager.shared.request(StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({
             response in
 

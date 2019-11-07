@@ -56,7 +56,7 @@ final class LeaderboardTableViewCell: UITableViewCell {
         }
     }
 
-    fileprivate func updatePosition(_ position: Int) {
+    private func updatePosition(_ position: Int) {
         medalImageView.isHidden = false
         positionLabel.isHidden = true
         positionLabel.text = "\(position)."
