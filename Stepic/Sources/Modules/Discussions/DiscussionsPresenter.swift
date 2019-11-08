@@ -4,6 +4,7 @@ protocol DiscussionsPresenterProtocol {
     func presentDiscussions(response: Discussions.DiscussionsLoad.Response)
     func presentNextDiscussions(response: Discussions.NextDiscussionsLoad.Response)
     func presentNextReplies(response: Discussions.NextRepliesLoad.Response)
+    func presentSelectComment(response: Discussions.SelectComment.Response)
     func presentWriteComment(response: Discussions.WriteCommentPresentation.Response)
     func presentCommentCreate(response: Discussions.CommentCreated.Response)
     func presentCommentUpdate(response: Discussions.CommentUpdated.Response)
@@ -48,6 +49,10 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     func presentNextReplies(response: Discussions.NextRepliesLoad.Response) {
         self.viewController?.displayNextReplies(viewModel: .init(data: self.makeDiscussionsData(response.result)))
+    }
+
+    func presentSelectComment(response: Discussions.SelectComment.Response) {
+        self.viewController?.displaySelectComment(viewModel: .init(commentID: response.commentID))
     }
 
     func presentWriteComment(response: Discussions.WriteCommentPresentation.Response) {

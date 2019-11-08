@@ -45,7 +45,7 @@ final class DiscussionsTableViewDataSource: NSObject {
 
     private var viewModels: [DiscussionsDiscussionViewModel]
     /// Caches cells heights
-    private var cellHeightByCommentID: [Int: CGFloat] = [:]
+    private var cellHeightByCommentID: [Comment.IdType: CGFloat] = [:]
     /// Need for dynamic cell layouts & variable row heights where web view support not needed
     private var discussionPrototypeCell: DiscussionsTableViewCell?
     /// Accumulates multiple table view updates into one invocation
@@ -58,6 +58,14 @@ final class DiscussionsTableViewDataSource: NSObject {
 
     func update(viewModels: [DiscussionsDiscussionViewModel]) {
         self.viewModels = viewModels
+    }
+
+    func indexPath(of commentID: Comment.IdType) -> IndexPath? {
+        // Expected to have discussion id here
+        if let discussionIndex = self.viewModels.firstIndex(where: { $0.id == commentID }) {
+            return IndexPath(row: 0, section: discussionIndex)
+        }
+        return nil
     }
 }
 

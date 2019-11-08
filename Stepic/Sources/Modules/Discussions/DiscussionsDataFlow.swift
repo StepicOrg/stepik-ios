@@ -84,6 +84,17 @@ enum Discussions {
 
     // MARK: - Comment actions
 
+    /// Scrolls to comment
+    enum SelectComment {
+        struct Response {
+            let commentID: Comment.IdType
+        }
+
+        struct ViewModel {
+            let commentID: Comment.IdType
+        }
+    }
+
     /// Present write course review (after compose bar button item click)
     enum WriteCommentPresentation {
         enum PresentationContext {

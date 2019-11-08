@@ -132,6 +132,10 @@ final class DiscussionsView: UIView {
         self.tableView.skeleton.hide()
     }
 
+    func scrollToRow(at indexPath: IndexPath, animated: Bool) {
+        self.tableView.scrollToRow(at: indexPath, at: .middle, animated: animated)
+    }
+
     // MARK: - Private API
 
     @objc

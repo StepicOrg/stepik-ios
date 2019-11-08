@@ -96,6 +96,10 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 DiscussionsInteractor.logger.info("discussions interactor: finish fetching discussions")
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentDiscussions(response: .init(result: .success(discussionsData)))
+
+                    if case .scrollTo(let discussionID, _) = strongSelf.presentationContext {
+                        strongSelf.presenter.presentSelectComment(response: .init(commentID: discussionID))
+                    }
                 }
             }.catch { error in
                 DiscussionsInteractor.logger.error("discussions interactor: failed fetch discussions, error: \(error)")

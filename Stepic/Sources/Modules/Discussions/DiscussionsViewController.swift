@@ -5,6 +5,7 @@ protocol DiscussionsViewControllerProtocol: class {
     func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel)
     func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel)
     func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel)
+    func displaySelectComment(viewModel: Discussions.SelectComment.ViewModel)
     func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel)
     func displayCommentCreate(viewModel: Discussions.CommentCreated.ViewModel)
     func displayCommentUpdate(viewModel: Discussions.CommentUpdated.ViewModel)
@@ -195,6 +196,12 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
 
     func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel) {
         self.updateDiscussionsData(newData: viewModel.data)
+    }
+
+    func displaySelectComment(viewModel: Discussions.SelectComment.ViewModel) {
+        if let indexPath = self.discussionsTableDelegate.indexPath(of: viewModel.commentID) {
+            self.discussionsView?.scrollToRow(at: indexPath, animated: false)
+        }
     }
 
     func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel) {
