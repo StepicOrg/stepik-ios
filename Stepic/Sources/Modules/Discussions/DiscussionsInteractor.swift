@@ -422,6 +422,13 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     }
 
     private func makeDiscussionsData() -> Discussions.DiscussionsResponseData {
+        let selectedDiscussionID: Comment.IdType? = {
+            if case .scrollTo(let discussionID, _) = self.presentationContext {
+                return discussionID
+            }
+            return nil
+        }()
+
         return Discussions.DiscussionsResponseData(
             discussionProxy: self.currentDiscussionProxy.require(),
             discussions: self.currentDiscussions,
@@ -429,7 +436,8 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             replies: self.currentReplies,
             currentSortType: self.currentSortType,
             discussionsLeftToLoadInLeftHalf: self.getDiscussionsLeftToLoadInLeftHalfCount(),
-            discussionsLeftToLoadInRightHalf: self.getDiscussionsLeftToLoadInRightHalfCount()
+            discussionsLeftToLoadInRightHalf: self.getDiscussionsLeftToLoadInRightHalfCount(),
+            selectedDiscussionID: selectedDiscussionID
         )
     }
 

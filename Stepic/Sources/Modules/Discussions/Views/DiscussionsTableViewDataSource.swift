@@ -199,7 +199,8 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
                 comment: commentViewModel,
                 commentType: commentType,
                 separatorType: separatorType,
-                separatorFollowsDepth: !isLastComment
+                separatorFollowsDepth: !isLastComment,
+                isSelected: commentViewModel.isSelected
             )
         )
 

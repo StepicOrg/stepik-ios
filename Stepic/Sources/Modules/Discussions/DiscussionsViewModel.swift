@@ -19,6 +19,7 @@ struct DiscussionsCommentViewModel {
     let userID: User.IdType
     let userRole: UserRole
     let isPinned: Bool
+    let isSelected: Bool
     let username: String
     let text: String
     let isWebViewSupportNeeded: Bool

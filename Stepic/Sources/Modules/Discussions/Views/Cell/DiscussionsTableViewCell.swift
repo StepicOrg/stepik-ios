@@ -3,7 +3,10 @@ import UIKit
 
 extension DiscussionsTableViewCell {
     enum Appearance {
-        static let separatorColor = UIColor(hex: 0xe7e7e7)
+        static let separatorColor = UIColor(hex: 0xE7E7E7)
+
+        static let selectedBackgroundColor = UIColor(hex: 0xE9EBFA)
+        static let defaultBackgroundColor = UIColor.white
 
         static let leadingSpaceDiscussion: CGFloat = 0
         static let leadingSpaceReply: CGFloat = 40
@@ -130,6 +133,9 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
 
     private func configure(optionalViewModel: ViewModel?) {
         if let viewModel = optionalViewModel {
+            self.backgroundColor = viewModel.isSelected
+                ? Appearance.selectedBackgroundColor
+                : Appearance.defaultBackgroundColor
             self.updateLeadingInsets(
                 commentType: viewModel.commentType,
                 separatorFollowsDepth: viewModel.separatorFollowsDepth
@@ -137,6 +143,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
             self.updateSeparatorType(separatorType: viewModel.separatorType)
             self.cellView.configure(viewModel: viewModel.comment)
         } else {
+            self.backgroundColor = Appearance.defaultBackgroundColor
             self.updateLeadingInsets(commentType: .discussion, separatorFollowsDepth: false)
             self.updateSeparatorType(separatorType: .small)
             self.cellView.configure(viewModel: nil)
@@ -169,6 +176,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
         let commentType: CommentType
         let separatorType: SeparatorType
         let separatorFollowsDepth: Bool
+        let isSelected: Bool
 
         enum CommentType {
             case discussion

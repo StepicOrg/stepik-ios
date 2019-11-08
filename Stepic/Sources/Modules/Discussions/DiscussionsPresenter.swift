@@ -149,7 +149,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             self.makeDiscussionViewModel(
                 discussion: discussion,
                 replies: data.replies[discussion.id] ?? [],
-                isFetchingMoreReplies: data.discussionsIDsFetchingMore.contains(discussion.id)
+                isFetchingMoreReplies: data.discussionsIDsFetchingMore.contains(discussion.id),
+                isSelected: discussion.id == data.selectedDiscussionID
             )
         }
 
@@ -160,7 +161,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         )
     }
 
-    private func makeCommentViewModel(comment: Comment) -> DiscussionsCommentViewModel {
+    private func makeCommentViewModel(comment: Comment, isSelected: Bool) -> DiscussionsCommentViewModel {
         let avatarImageURL: URL? = {
             if let userInfo = comment.userInfo {
                 return URL(string: userInfo.avatarURL)
@@ -207,6 +208,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             userID: comment.userID,
             userRole: comment.userRole,
             isPinned: comment.isPinned,
+            isSelected: isSelected,
             username: username,
             text: text,
             isWebViewSupportNeeded: isWebViewSupportNeeded,
@@ -223,17 +225,18 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     private func makeDiscussionViewModel(
         discussion: Comment,
         replies: [Comment],
-        isFetchingMoreReplies: Bool
+        isFetchingMoreReplies: Bool,
+        isSelected: Bool
     ) -> DiscussionsDiscussionViewModel {
         let repliesViewModels = self.sortedReplies(
             replies,
             parentDiscussion: discussion
-        ).map { self.makeCommentViewModel(comment: $0) }
+        ).map { self.makeCommentViewModel(comment: $0, isSelected: false) }
 
         let leftToLoadCount = discussion.repliesIDs.count - repliesViewModels.count
 
         return DiscussionsDiscussionViewModel(
-            comment: self.makeCommentViewModel(comment: discussion),
+            comment: self.makeCommentViewModel(comment: discussion, isSelected: isSelected),
             replies: repliesViewModels,
             repliesLeftToLoadCount: leftToLoadCount,
             formattedRepliesLeftToLoad: "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(leftToLoadCount))",

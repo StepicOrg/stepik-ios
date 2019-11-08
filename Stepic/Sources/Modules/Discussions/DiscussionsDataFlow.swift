@@ -17,6 +17,7 @@ enum Discussions {
         let currentSortType: SortType
         let discussionsLeftToLoadInLeftHalf: Int
         let discussionsLeftToLoadInRightHalf: Int
+        let selectedDiscussionID: Comment.IdType?
     }
 
     /// Presenter -> ViewController
