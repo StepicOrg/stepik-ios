@@ -15,12 +15,15 @@ enum Discussions {
         let discussionsIDsFetchingMore: Set<Comment.IdType>
         let replies: [Comment.IdType: [Comment]]
         let currentSortType: SortType
+        let discussionsLeftToLoadInLeftHalf: Int
+        let discussionsLeftToLoadInRightHalf: Int
     }
 
     /// Presenter -> ViewController
     struct DiscussionsViewData {
         let discussions: [DiscussionsDiscussionViewModel]
-        let discussionsLeftToLoad: Int
+        let hasPreviousPage: Bool
+        let hasNextPage: Bool
     }
 
     enum SortType: String, CaseIterable {
@@ -48,14 +51,18 @@ enum Discussions {
 
     /// Load next part discussions
     enum NextDiscussionsLoad {
-        struct Request { }
+        struct Request {
+            let direction: PaginationDirection
+        }
 
         struct Response {
             let result: Result<DiscussionsResponseData>
+            let direction: PaginationDirection
         }
 
         struct ViewModel {
             let state: PaginationState
+            let direction: PaginationDirection
         }
     }
 
@@ -225,6 +232,11 @@ enum Discussions {
         case loading
         case error
         case result(data: DiscussionsViewData)
+    }
+
+    enum PaginationDirection {
+        case top
+        case bottom
     }
 
     enum PaginationState {

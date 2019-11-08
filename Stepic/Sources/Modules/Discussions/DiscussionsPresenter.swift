@@ -38,9 +38,9 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         switch response.result {
         case .success(let result):
             let data = self.makeDiscussionsData(result)
-            viewModel = Discussions.NextDiscussionsLoad.ViewModel(state: .result(data: data))
+            viewModel = .init(state: .result(data: data), direction: response.direction)
         case .failure:
-            viewModel = Discussions.NextDiscussionsLoad.ViewModel(state: .error)
+            viewModel = .init(state: .error, direction: response.direction)
         }
 
         self.viewController?.displayNextDiscussions(viewModel: viewModel)
@@ -153,12 +153,11 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             )
         }
 
-        let discussionsLeftToLoadCount = self.getDiscussionsIDs(
-            discussionProxy: data.discussionProxy,
-            sortType: data.currentSortType
-        ).count - discussions.count
-
-        return .init(discussions: discussionsViewModels, discussionsLeftToLoad: discussionsLeftToLoadCount)
+        return .init(
+            discussions: discussionsViewModels,
+            hasPreviousPage: data.discussionsLeftToLoadInLeftHalf > 0,
+            hasNextPage: data.discussionsLeftToLoadInRightHalf > 0
+        )
     }
 
     private func makeCommentViewModel(comment: Comment) -> DiscussionsCommentViewModel {

@@ -3,7 +3,8 @@ import UIKit
 
 protocol DiscussionsViewDelegate: class {
     func discussionsViewDidRequestRefresh(_ view: DiscussionsView)
-    func discussionsViewDidRequestPagination(_ view: DiscussionsView)
+    func discussionsViewDidRequestTopPagination(_ view: DiscussionsView)
+    func discussionsViewDidRequestBottomPagination(_ view: DiscussionsView)
 }
 
 extension DiscussionsView {
@@ -21,7 +22,8 @@ final class DiscussionsView: UIView {
     let appearance: Appearance
     weak var delegate: DiscussionsViewDelegate?
 
-    private lazy var paginationView = PaginationView()
+    private lazy var topPaginationView = PaginationView()
+    private lazy var bottomPaginationView = PaginationView()
 
     private lazy var refreshControl = UIRefreshControl()
 
@@ -44,7 +46,9 @@ final class DiscussionsView: UIView {
     }()
 
     private weak var tableViewDelegate: (UITableViewDelegate & UITableViewDataSource)?
-    private var shouldShowPaginationView = false
+
+    private var shouldShowTopPaginationView = false
+    private var shouldShowBottomPaginationView = false
 
     private var isSkeletonVisible = false
 
@@ -77,11 +81,30 @@ final class DiscussionsView: UIView {
         self.tableView.reloadData()
     }
 
-    func showPaginationView() {
-        self.shouldShowPaginationView = true
+    func showTopPaginationView() {
+        self.shouldShowTopPaginationView = true
 
-        self.paginationView.setLoading()
-        self.tableView.tableFooterView = self.paginationView
+        self.topPaginationView.setLoading()
+        self.tableView.tableHeaderView = self.topPaginationView
+        self.tableView.tableHeaderView?.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.frame.width,
+            height: self.appearance.paginationViewHeight
+        )
+    }
+
+    func hideTopPaginationView() {
+        self.shouldShowTopPaginationView = false
+        self.tableView.tableHeaderView?.frame = .zero
+        self.tableView.tableHeaderView = nil
+    }
+
+    func showBottomPaginationView() {
+        self.shouldShowBottomPaginationView = true
+
+        self.bottomPaginationView.setLoading()
+        self.tableView.tableFooterView = self.bottomPaginationView
         self.tableView.tableFooterView?.frame = CGRect(
             x: 0,
             y: 0,
@@ -90,8 +113,8 @@ final class DiscussionsView: UIView {
         )
     }
 
-    func hidePaginationView() {
-        self.shouldShowPaginationView = false
+    func hideBottomPaginationView() {
+        self.shouldShowBottomPaginationView = false
         self.tableView.tableFooterView?.frame = .zero
         self.tableView.tableFooterView = nil
     }
@@ -140,10 +163,15 @@ extension DiscussionsView: ProgrammaticallyInitializableViewProtocol {
 
 extension DiscussionsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let isFirstIndexPath = indexPath.section == 0 && indexPath.row == 0
+        if isFirstIndexPath && self.shouldShowTopPaginationView {
+            self.delegate?.discussionsViewDidRequestTopPagination(self)
+        }
+
         let isLastIndexPath = indexPath.section == tableView.numberOfSections - 1
             && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
-        if isLastIndexPath && self.shouldShowPaginationView {
-            self.delegate?.discussionsViewDidRequestPagination(self)
+        if isLastIndexPath && self.shouldShowBottomPaginationView {
+            self.delegate?.discussionsViewDidRequestBottomPagination(self)
         }
 
         self.tableViewDelegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)

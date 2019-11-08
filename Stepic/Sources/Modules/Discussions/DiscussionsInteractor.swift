@@ -2,6 +2,8 @@ import Foundation
 import Logging
 import PromiseKit
 
+// swiftlint:disable file_length
+
 protocol DiscussionsInteractorProtocol {
     func doDiscussionsLoad(request: Discussions.DiscussionsLoad.Request)
     func doNextDiscussionsLoad(request: Discussions.NextDiscussionsLoad.Request)
@@ -114,7 +116,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
             strongSelf.fetchSemaphore.wait()
 
-            let idsToLoad = strongSelf.getNextDiscussionsIDsToLoad()
+            let idsToLoad = strongSelf.getNextDiscussionsIDsToLoad(direction: request.direction)
             DiscussionsInteractor.logger.info(
                 "discussions interactor: start fetching next discussions ids: \(idsToLoad)"
             )
@@ -124,7 +126,10 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 strongSelf.updateDataWithNewComments(fetchedComments)
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextDiscussions(
-                        response: .init(result: .success(strongSelf.makeDiscussionsData()))
+                        response: .init(
+                            result: .success(strongSelf.makeDiscussionsData()),
+                            direction: request.direction
+                        )
                     )
                 }
             }.catch { error in
@@ -132,7 +137,9 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                     "discussions interactor: failed fetch next discussions, error: \(error)"
                 )
                 DispatchQueue.main.async {
-                    strongSelf.presenter.presentNextDiscussions(response: .init(result: .failure(Error.fetchFailed)))
+                    strongSelf.presenter.presentNextDiscussions(
+                        response: .init(result: .failure(Error.fetchFailed), direction: request.direction)
+                    )
                 }
             }.finally {
                 strongSelf.fetchSemaphore.signal()
@@ -376,7 +383,12 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 self.provider.fetchDiscussionProxy(id: discussionProxyID)
             }.then { discussionProxy -> Promise<[Comment.IdType]> in
                 self.currentDiscussionProxy = discussionProxy
-                return .value(self.getNextDiscussionsIDsToLoad())
+                switch self.presentationContext {
+                case .fromBeginning:
+                    return .value(self.getNextDiscussionsIDsToLoad(direction: .bottom))
+                case .scrollTo:
+                    return .value(self.getNextDiscussionsIDsToLoad(direction: nil))
+                }
             }.then { ids -> Promise<[Comment]> in
                 self.provider.fetchComments(ids: ids)
             }.done { fetchedComments in
@@ -415,19 +427,143 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             discussions: self.currentDiscussions,
             discussionsIDsFetchingMore: self.discussionsIDsFetchingReplies,
             replies: self.currentReplies,
-            currentSortType: self.currentSortType
+            currentSortType: self.currentSortType,
+            discussionsLeftToLoadInLeftHalf: self.getDiscussionsLeftToLoadInLeftHalfCount(),
+            discussionsLeftToLoadInRightHalf: self.getDiscussionsLeftToLoadInRightHalfCount()
         )
     }
 
-    private func getNextDiscussionsIDsToLoad() -> [Comment.IdType] {
-        assert(self.currentDiscussionProxy != nil, "discussion proxy must exists, unexpected behavior")
+    private func getDiscussionsLeftToLoadInLeftHalfCount(discussionsWindow: DiscussionsWindow? = nil) -> Int {
+        switch self.presentationContext {
+        case .fromBeginning:
+            return 0
+        case .scrollTo:
+            let discussionsWindow = discussionsWindow != nil
+                ? discussionsWindow.require()
+                : self.getLoadedDiscussionsWindow()
+            return discussionsWindow.startIndex == 1 ? 1 : max(discussionsWindow.startIndex - 1, 0)
+        }
+    }
 
-        let discussionsLeftToLoadCount = self.currentDiscussionsIDs.count - self.currentDiscussions.count
+    private func getDiscussionsLeftToLoadInRightHalfCount(discussionsWindow: DiscussionsWindow? = nil) -> Int {
+        let discussionsWindow = discussionsWindow != nil
+            ? discussionsWindow.require()
+            : self.getLoadedDiscussionsWindow()
 
-        let startIndex = self.currentDiscussions.count
-        let offset = min(discussionsLeftToLoadCount, DiscussionsInteractor.discussionsLoadingInterval)
+        let index = discussionsWindow.endIndex == 0
+            ? self.currentDiscussionsIDs.count
+            : self.currentDiscussionsIDs.count - discussionsWindow.endIndex - 1
 
-        return Array(self.currentDiscussionsIDs[startIndex..<startIndex + offset])
+        return max(index, 0)
+    }
+
+    private func getLoadedDiscussionsWindow() -> (startIndex: Int, endIndex: Int) {
+        let loadedDiscussionsIDs = Set(self.currentDiscussions.map({ $0.id }))
+
+        switch self.presentationContext {
+        case .fromBeginning:
+            if loadedDiscussionsIDs.isEmpty {
+                return (0, 0)
+            }
+
+            for (index, id) in self.currentDiscussionsIDs.reversed().enumerated() {
+                if loadedDiscussionsIDs.contains(id) {
+                    let reversedIndex = self.currentDiscussionsIDs.count - index - 1
+                    return (0, reversedIndex)
+                }
+            }
+
+            return (0, 0)
+        case .scrollTo(let discussionID, _):
+            guard let discussionIndex = self.currentDiscussionsIDs.index(of: discussionID) else {
+                assertionFailure("Discussion must appear in the collection")
+                return (0, 0)
+            }
+
+            if loadedDiscussionsIDs.isEmpty {
+                return (discussionIndex, discussionIndex)
+            }
+
+            let startIndex: Int = {
+                for (index, id) in self.currentDiscussionsIDs.enumerated() {
+                    if loadedDiscussionsIDs.contains(id) {
+                        return index
+                    } else if id == discussionID {
+                        return discussionIndex
+                    }
+                }
+                return discussionIndex
+            }()
+
+            let endIndex: Int = {
+                for (index, id) in self.currentDiscussionsIDs.reversed().enumerated() {
+                    if loadedDiscussionsIDs.contains(id) {
+                        return self.currentDiscussionsIDs.count - index - 1
+                    } else if id == discussionID {
+                        return discussionIndex
+                    }
+                }
+                return discussionIndex
+            }()
+
+            return (startIndex, endIndex)
+        }
+    }
+
+    private func getNextDiscussionsIDsToLoad(direction: Discussions.PaginationDirection?) -> [Comment.IdType] {
+        let discussionsWindow = self.getLoadedDiscussionsWindow()
+
+        switch direction {
+        case .top?:
+            if case .scrollTo = self.presentationContext {
+                let endIndex = discussionsWindow.startIndex
+                let offset = min(
+                    self.getDiscussionsLeftToLoadInLeftHalfCount(discussionsWindow: discussionsWindow),
+                    DiscussionsInteractor.discussionsLoadingInterval
+                )
+                let startIndex = max(endIndex - offset, 0)
+
+                return Array(self.currentDiscussionsIDs[startIndex..<endIndex])
+            } else {
+                assertionFailure("Invalid state")
+            }
+        case .bottom?:
+            let startIndex = discussionsWindow.endIndex == 0 ? 0 : discussionsWindow.endIndex + 1
+            let offset = min(
+                self.getDiscussionsLeftToLoadInRightHalfCount(discussionsWindow: discussionsWindow),
+                DiscussionsInteractor.discussionsLoadingInterval
+            )
+            let endIndex = startIndex + offset
+
+            return Array(self.currentDiscussionsIDs[startIndex..<endIndex])
+        case .none:
+            if case .scrollTo(let discussionID, _) = self.presentationContext {
+                guard let discussionIndex = self.currentDiscussionsIDs.index(of: discussionID) else {
+                    assertionFailure("Discussion must appear in the collection")
+                    return []
+                }
+
+                let loadingInterval = DiscussionsInteractor.discussionsLoadingInterval / 2
+
+                let leftOffset = min(
+                    self.getDiscussionsLeftToLoadInLeftHalfCount(discussionsWindow: discussionsWindow), loadingInterval
+                )
+                let startIndex = max(discussionIndex - leftOffset, 0)
+                let leftHalf = Array(self.currentDiscussionsIDs[startIndex..<discussionIndex])
+
+                let rightOffset = min(
+                    self.getDiscussionsLeftToLoadInRightHalfCount(discussionsWindow: discussionsWindow), loadingInterval
+                )
+                let endIndex = discussionIndex + rightOffset
+                let rightHalf = Array(self.currentDiscussionsIDs[discussionIndex...endIndex])
+
+                return leftHalf + rightHalf
+            } else {
+                assertionFailure("Invalid state")
+            }
+        }
+
+        return []
     }
 
     private func getNextReplyIDsToLoad(discussion: Comment) -> [Comment.IdType] {
@@ -506,6 +642,8 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     }
 
     // MARK: - Types -
+
+    private typealias DiscussionsWindow = (startIndex: Int, endIndex: Int)
 
     enum Error: Swift.Error {
         case fetchFailed

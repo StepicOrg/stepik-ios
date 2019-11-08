@@ -26,7 +26,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     private let interactor: DiscussionsInteractorProtocol
 
     private var state: Discussions.ViewControllerState
-    private var canTriggerPagination = true
+    private var canTriggerTopPagination = true
+    private var canTriggerBottomPagination = true
 
     // swiftlint:disable:next weak_delegate
     private lazy var discussionsTableDelegate: DiscussionsTableViewDataSource = {
@@ -138,15 +139,23 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         self.discussionsTableDelegate.update(viewModels: data.discussions)
         self.discussionsView?.updateTableViewData(delegate: self.discussionsTableDelegate)
 
-        self.updatePagination(hasNextPage: data.discussionsLeftToLoad > 0)
+        self.updatePagination(hasPreviousPage: data.hasPreviousPage, hasNextPage: data.hasNextPage)
     }
 
-    private func updatePagination(hasNextPage: Bool) {
-        self.canTriggerPagination = hasNextPage
-        if hasNextPage {
-            self.discussionsView?.showPaginationView()
+    private func updatePagination(hasPreviousPage: Bool, hasNextPage: Bool) {
+        self.canTriggerTopPagination = hasPreviousPage
+        self.canTriggerBottomPagination = hasNextPage
+
+        if hasPreviousPage {
+            self.discussionsView?.showTopPaginationView()
         } else {
-            self.discussionsView?.hidePaginationView()
+            self.discussionsView?.hideTopPaginationView()
+        }
+
+        if hasNextPage {
+            self.discussionsView?.showBottomPaginationView()
+        } else {
+            self.discussionsView?.hideBottomPaginationView()
         }
     }
 
@@ -175,7 +184,12 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         case .result(let data):
             self.updateDiscussionsData(newData: data)
         case .error:
-            self.updatePagination(hasNextPage: true)
+            switch viewModel.direction {
+            case .top:
+                self.updatePagination(hasPreviousPage: true, hasNextPage: self.canTriggerBottomPagination)
+            case .bottom:
+                self.updatePagination(hasPreviousPage: self.canTriggerTopPagination, hasNextPage: true)
+            }
         }
     }
 
@@ -265,10 +279,17 @@ extension DiscussionsViewController: DiscussionsViewDelegate {
         self.interactor.doDiscussionsLoad(request: .init())
     }
 
-    func discussionsViewDidRequestPagination(_ view: DiscussionsView) {
-        if self.canTriggerPagination {
-            self.canTriggerPagination = false
-            self.interactor.doNextDiscussionsLoad(request: .init())
+    func discussionsViewDidRequestTopPagination(_ view: DiscussionsView) {
+        if self.canTriggerTopPagination {
+            self.canTriggerTopPagination = false
+            self.interactor.doNextDiscussionsLoad(request: .init(direction: .top))
+        }
+    }
+
+    func discussionsViewDidRequestBottomPagination(_ view: DiscussionsView) {
+        if self.canTriggerBottomPagination {
+            self.canTriggerBottomPagination = false
+            self.interactor.doNextDiscussionsLoad(request: .init(direction: .bottom))
         }
     }
 }
