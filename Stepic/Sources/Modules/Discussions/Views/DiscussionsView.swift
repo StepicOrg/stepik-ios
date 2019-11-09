@@ -47,6 +47,8 @@ final class DiscussionsView: UIView {
 
     private weak var tableViewDelegate: (UITableViewDelegate & UITableViewDataSource)?
 
+    private var lastKnownContentOffset: CGPoint = .zero
+
     private var shouldShowTopPaginationView = false
     private var shouldShowBottomPaginationView = false
 
@@ -75,6 +77,9 @@ final class DiscussionsView: UIView {
 
     func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
         self.refreshControl.endRefreshing()
+
+        // stop scrolling
+        self.tableView.setContentOffset(self.lastKnownContentOffset, animated: false)
 
         self.tableViewDelegate = delegate
         self.tableView.dataSource = self.tableViewDelegate
@@ -132,8 +137,8 @@ final class DiscussionsView: UIView {
         self.tableView.skeleton.hide()
     }
 
-    func scrollToRow(at indexPath: IndexPath, animated: Bool) {
-        self.tableView.scrollToRow(at: indexPath, at: .middle, animated: animated)
+    func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
+        self.tableView.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
     }
 
     // MARK: - Private API
@@ -191,5 +196,13 @@ extension DiscussionsView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableViewDelegate?.tableView?(tableView, didSelectRowAt: indexPath)
+    }
+}
+
+// MARK: - DiscussionsView: UIScrollViewDelegate -
+
+extension DiscussionsView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.lastKnownContentOffset = scrollView.contentOffset
     }
 }

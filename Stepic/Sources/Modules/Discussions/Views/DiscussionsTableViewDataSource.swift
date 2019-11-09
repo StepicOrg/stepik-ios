@@ -50,6 +50,8 @@ final class DiscussionsTableViewDataSource: NSObject {
     private var discussionPrototypeCell: DiscussionsTableViewCell?
     /// Accumulates multiple table view updates into one invocation
     private var pendingTableViewUpdateWorkItem: DispatchWorkItem?
+    /// ID of the last visible comment, sets on tableView(_:willDisplay:forRowAt:)
+    private(set) var lastVisibleCommentID: Comment.IdType?
 
     init(viewModels: [DiscussionsDiscussionViewModel] = []) {
         self.viewModels = viewModels
@@ -301,6 +303,12 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                 at: indexPath,
                 cell: selectedCell
             )
+        }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell is DiscussionsTableViewCell {
+            self.lastVisibleCommentID = self.getCommentViewModel(at: indexPath)?.id
         }
     }
 

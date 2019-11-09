@@ -183,7 +183,17 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel) {
         switch viewModel.state {
         case .result(let data):
+            let lastVisibleCommentID = self.discussionsTableDelegate.lastVisibleCommentID
+
             self.updateDiscussionsData(newData: data)
+
+            guard viewModel.direction == .top,
+                  let commentID = lastVisibleCommentID,
+                  let indexPath = self.discussionsTableDelegate.indexPath(of: commentID) else {
+                return
+            }
+
+            self.discussionsView?.scrollToRow(at: indexPath, at: .top, animated: false)
         case .error:
             switch viewModel.direction {
             case .top:
@@ -200,7 +210,7 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
 
     func displaySelectComment(viewModel: Discussions.SelectComment.ViewModel) {
         if let indexPath = self.discussionsTableDelegate.indexPath(of: viewModel.commentID) {
-            self.discussionsView?.scrollToRow(at: indexPath, animated: false)
+            self.discussionsView?.scrollToRow(at: indexPath, at: .middle, animated: false)
         }
     }
 
