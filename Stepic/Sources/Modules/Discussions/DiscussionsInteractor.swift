@@ -75,8 +75,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             "discussions interactor: did init with presentationContext: \(presentationContext)"
         )
 
-        // FIXME: analytics dependency
-        AmplitudeAnalyticsEvents.Discussions.opened.send()
+        self.reportOpenedEventToAnalytics()
     }
 
     // MARK: - DiscussionsInteractorProtocol -
@@ -651,6 +650,24 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 presentationContext: .edit
             )
         )
+    }
+
+    // MARK: Analytics
+
+    private func reportOpenedEventToAnalytics() {
+        let source: AmplitudeAnalyticsEvents.Discussions.DiscussionsSource = {
+            switch self.presentationContext {
+            case .fromBeginning:
+                return .default
+            case .scrollTo(_, let replyID):
+                if replyID != nil {
+                    return .reply
+                }
+                return .discussion
+            }
+        }()
+
+        AmplitudeAnalyticsEvents.Discussions.opened(source: source).send()
     }
 
     // MARK: - Types -
