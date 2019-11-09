@@ -8,7 +8,7 @@ def shared_pods
     pod 'Alamofire', '4.9.1'
     pod 'Atributika', '4.9.0'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.3.0'
+    pod 'SDWebImage', '5.3.1'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Logging', :git => 'https://github.com/ivan-magda/swift-log.git', :branch => 'swift-4'
     pod 'Fabric', '1.10.2'
