@@ -1,18 +1,23 @@
 import SnapKit
 import UIKit
 
-extension NewDiscussionsTableViewCell {
+extension DiscussionsTableViewCell {
     enum Appearance {
-        static let separatorColor = UIColor(hex: 0xe7e7e7)
+        static let separatorColor = UIColor(hex: 0xE7E7E7)
+
+        static let selectedBackgroundColor = UIColor(hex: 0xE9EBFA)
+        static let defaultBackgroundColor = UIColor.white
 
         static let leadingSpaceDiscussion: CGFloat = 0
         static let leadingSpaceReply: CGFloat = 40
     }
 }
 
-final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
-    private lazy var cellView: NewDiscussionsCellView = {
-        let cellView = NewDiscussionsCellView()
+// MARK: - DiscussionsTableViewCell: UITableViewCell, Reusable -
+
+final class DiscussionsTableViewCell: UITableViewCell, Reusable {
+    private lazy var cellView: DiscussionsCellView = {
+        let cellView = DiscussionsCellView()
         cellView.onDotsMenuClick = { [weak self] in
             self?.onDotsMenuClick?()
         }
@@ -88,8 +93,11 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
 
     func calculateCellHeight(maxPreferredWidth: CGFloat) -> CGFloat {
         let leadingInset = self.cellLeadingConstraint?.layoutConstraints.first?.constant ?? 0
+
         let cellViewWidth = maxPreferredWidth - leadingInset
-        return self.cellView.calculateContentHeight(maxPreferredWidth: cellViewWidth) + self.separatorType.height
+        let cellViewHeight = self.cellView.calculateContentHeight(maxPreferredWidth: cellViewWidth)
+
+        return cellViewHeight + self.separatorType.height
     }
 
     // MARK: - Private API
@@ -103,15 +111,19 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
 
         self.cellView.translatesAutoresizingMaskIntoConstraints = false
         self.cellView.snp.makeConstraints { make in
-            self.cellLeadingConstraint = make.leading.equalToSuperview()
-                .offset(Appearance.leadingSpaceDiscussion).constraint
+            self.cellLeadingConstraint = make.leading
+                .equalToSuperview()
+                .offset(Appearance.leadingSpaceDiscussion)
+                .constraint
             make.top.trailing.equalToSuperview()
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
-            self.separatorLeadingConstraint = make.leading.equalToSuperview()
-                .offset(Appearance.leadingSpaceDiscussion).constraint
+            self.separatorLeadingConstraint = make.leading
+                .equalToSuperview()
+                .offset(Appearance.leadingSpaceDiscussion)
+                .constraint
             make.top.equalTo(self.cellView.snp.bottom)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().priority(999)
@@ -121,21 +133,25 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
 
     private func configure(optionalViewModel: ViewModel?) {
         if let viewModel = optionalViewModel {
+            self.backgroundColor = viewModel.isSelected
+                ? Appearance.selectedBackgroundColor
+                : Appearance.defaultBackgroundColor
             self.updateLeadingInsets(
-                newCommentType: viewModel.commentType,
+                commentType: viewModel.commentType,
                 separatorFollowsDepth: viewModel.separatorFollowsDepth
             )
-            self.updateSeparatorType(newSeparatorType: viewModel.separatorType)
+            self.updateSeparatorType(separatorType: viewModel.separatorType)
             self.cellView.configure(viewModel: viewModel.comment)
         } else {
-            self.updateLeadingInsets(newCommentType: .discussion, separatorFollowsDepth: false)
-            self.updateSeparatorType(newSeparatorType: .small)
+            self.backgroundColor = Appearance.defaultBackgroundColor
+            self.updateLeadingInsets(commentType: .discussion, separatorFollowsDepth: false)
+            self.updateSeparatorType(separatorType: .small)
             self.cellView.configure(viewModel: nil)
         }
     }
 
-    private func updateLeadingInsets(newCommentType: ViewModel.CommentType, separatorFollowsDepth: Bool) {
-        let leadingSpaceValue = newCommentType == .discussion
+    private func updateLeadingInsets(commentType: ViewModel.CommentType, separatorFollowsDepth: Bool) {
+        let leadingSpaceValue = commentType == .discussion
             ? Appearance.leadingSpaceDiscussion
             : Appearance.leadingSpaceReply
         self.cellLeadingConstraint?.update(offset: leadingSpaceValue)
@@ -144,9 +160,9 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
         )
     }
 
-    private func updateSeparatorType(newSeparatorType: ViewModel.SeparatorType) {
-        if newSeparatorType != self.separatorType {
-            self.separatorType = newSeparatorType
+    private func updateSeparatorType(separatorType: ViewModel.SeparatorType) {
+        if separatorType != self.separatorType {
+            self.separatorType = separatorType
             self.separatorHeightConstraint?.update(offset: self.separatorType.height)
         }
 
@@ -156,10 +172,11 @@ final class NewDiscussionsTableViewCell: UITableViewCell, Reusable {
     // MARK: - Types
 
     struct ViewModel {
-        let comment: NewDiscussionsCommentViewModel
+        let comment: DiscussionsCommentViewModel
         let commentType: CommentType
         let separatorType: SeparatorType
         let separatorFollowsDepth: Bool
+        let isSelected: Bool
 
         enum CommentType {
             case discussion

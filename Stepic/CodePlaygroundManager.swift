@@ -63,7 +63,7 @@ final class CodePlaygroundManager {
     }
 
     //Detects, if there should be made a new line after tab
-    fileprivate func shouldMakeTabLineAfter(symbol: Character, language: CodeLanguage) -> (shouldMakeNewLine: Bool, paired: Bool) {
+    private func shouldMakeTabLineAfter(symbol: Character, language: CodeLanguage) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
         case .python:
             return symbol == ":" ? (shouldMakeNewLine: true, paired: false) : (shouldMakeNewLine: false, paired: false)
@@ -77,7 +77,7 @@ final class CodePlaygroundManager {
     let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
 
     //Gets current token for text
-    fileprivate func getCurrentToken(text: String, cursorPosition: Int) -> String {
+    private func getCurrentToken(text: String, cursorPosition: Int) -> String {
         var offsetBefore = 0
         while (text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore) &&
             allowedCharacters.indexOf("\(text.characters[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])") != nil) {
@@ -95,7 +95,7 @@ final class CodePlaygroundManager {
         return token
     }
 
-    fileprivate func checkNextLineInsertion(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
+    private func checkNextLineInsertion(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
         if changes.isInsertion && changes.changes == "\n" {
             var text = currentText
 
@@ -161,7 +161,7 @@ final class CodePlaygroundManager {
         return nil
     }
 
-    fileprivate func checkPaired(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
+    private func checkPaired(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
         if changes.isInsertion {
             if let closer = closers[changes.changes] {
                 var text = currentText
@@ -194,7 +194,7 @@ final class CodePlaygroundManager {
         return nil
     }
 
-    fileprivate func getAutocompleteSuggestions(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage) -> AnalysisResult? {
+    private func getAutocompleteSuggestions(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage) -> AnalysisResult? {
         //Getting current token of a string
         let token = getCurrentToken(text: currentText, cursorPosition: cursorPosition)
 
@@ -244,7 +244,7 @@ final class CodePlaygroundManager {
         return minTabSize
     }
 
-    fileprivate func hideSuggestions() {
+    private func hideSuggestions() {
         //TODO: hide suggestions view here
         suggestionsController?.view.removeFromSuperview()
         suggestionsController?.removeFromParent()
@@ -252,7 +252,7 @@ final class CodePlaygroundManager {
     }
 
     // TODO: Refactor code suggestion presentation.
-    fileprivate func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView, suggestionsDelegate: CodeSuggestionDelegate) {
+    private func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView, suggestionsDelegate: CodeSuggestionDelegate) {
         //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
         if suggestionsController == nil {
             suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)

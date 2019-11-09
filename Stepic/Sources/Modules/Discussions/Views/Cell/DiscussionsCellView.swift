@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension NewDiscussionsCellView {
+extension DiscussionsCellView {
     struct Appearance {
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
         let avatarImageViewSize = CGSize(width: 36, height: 36)
@@ -49,7 +49,9 @@ extension NewDiscussionsCellView {
     }
 }
 
-final class NewDiscussionsCellView: UIView {
+// MARK: - DiscussionsCellView: UIView -
+
+final class DiscussionsCellView: UIView {
     let appearance: Appearance
 
     private lazy var avatarImageView: AvatarImageView = {
@@ -193,7 +195,7 @@ final class NewDiscussionsCellView: UIView {
     var onDislikeClick: (() -> Void)?
     var onAvatarClick: (() -> Void)?
     var onLinkClick: ((URL) -> Void)?
-    // Content height.
+    // Content height updates callbacks
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: (() -> Void)?
 
@@ -213,7 +215,7 @@ final class NewDiscussionsCellView: UIView {
 
     // MARK: - Public API
 
-    func configure(viewModel: NewDiscussionsCommentViewModel?) {
+    func configure(viewModel: DiscussionsCommentViewModel?) {
         guard let viewModel = viewModel else {
             return self.resetViews()
         }
@@ -234,8 +236,8 @@ final class NewDiscussionsCellView: UIView {
             canVote: viewModel.canVote
         )
 
-        self.nameLabel.text = viewModel.userName
-        self.dateLabel.text = viewModel.dateRepresentation
+        self.nameLabel.text = viewModel.username
+        self.dateLabel.text = viewModel.formattedDate
 
         self.updateTextContent(text: viewModel.text, isWebViewSupportNeeded: viewModel.isWebViewSupportNeeded)
 
@@ -251,7 +253,7 @@ final class NewDiscussionsCellView: UIView {
         return self.appearance.avatarImageViewInsets.top
             + userInfoHeight
             + self.appearance.textContentContainerViewInsets.top
-            + self.textContentHeight(maxPreferredWidth: maxPreferredWidth)
+            + self.getTextContentHeight(maxPreferredWidth: maxPreferredWidth)
             + self.appearance.bottomControlsInsets.top
             + self.appearance.bottomControlsHeight
             + self.appearance.bottomControlsInsets.bottom
@@ -315,13 +317,14 @@ final class NewDiscussionsCellView: UIView {
         }
     }
 
-    private func textContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let remainingTextContentWidth = maxPreferredWidth
-            - self.appearance.avatarImageViewInsets.left
-            - self.appearance.avatarImageViewSize.width
-            - self.appearance.nameLabelInsets.left
-            - self.appearance.textContentContainerViewInsets.right
+    private func getTextContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
         if self.textContentWebBasedTextView.isHidden {
+            let remainingTextContentWidth = maxPreferredWidth
+                - self.appearance.avatarImageViewInsets.left
+                - self.appearance.avatarImageViewSize.width
+                - self.appearance.nameLabelInsets.left
+                - self.appearance.textContentContainerViewInsets.right
+
             return UILabel.heightForLabelWithText(
                 self.currentText ?? "",
                 lines: self.textContentTextLabel.numberOfLines,
@@ -331,6 +334,7 @@ final class NewDiscussionsCellView: UIView {
                 alignment: self.textContentTextLabel.textAlignment
             )
         }
+
         return self.currentWebBasedTextViewHeight
     }
 
@@ -362,9 +366,9 @@ final class NewDiscussionsCellView: UIView {
     }
 }
 
-// MARK: - NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
+// MARK: - DiscussionsCellView: ProgrammaticallyInitializableViewProtocol -
 
-extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
+extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.avatarOverlayButton)
@@ -405,8 +409,10 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
-            self.nameLabelTopConstraint = make.top.equalTo(self.badgeLabel.snp.bottom)
-                .offset(self.appearance.nameLabelInsets.top).constraint
+            self.nameLabelTopConstraint = make.top
+                .equalTo(self.badgeLabel.snp.bottom)
+                .offset(self.appearance.nameLabelInsets.top)
+                .constraint
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)
             make.height.equalTo(self.appearance.nameLabelHeight)
         }
@@ -416,7 +422,8 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.top.equalTo(self.nameLabel.snp.bottom).offset(self.appearance.textContentContainerViewInsets.top)
             make.leading.equalTo(self.nameLabel.snp.leading)
             make.trailing.equalToSuperview().offset(-self.appearance.textContentContainerViewInsets.right)
-            make.bottom.equalTo(self.bottomControlsStackView.snp.top)
+            make.bottom
+                .equalTo(self.bottomControlsStackView.snp.top)
                 .offset(-self.appearance.textContentContainerViewInsets.bottom)
         }
 
@@ -430,9 +437,9 @@ extension NewDiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// MARK: - NewDiscussionsCellView: ProcessedContentTextViewDelegate -
+// MARK: - DiscussionsCellView: ProcessedContentTextViewDelegate -
 
-extension NewDiscussionsCellView: ProcessedContentTextViewDelegate {
+extension DiscussionsCellView: ProcessedContentTextViewDelegate {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         if self.textContentWebBasedTextView.isHidden {
             return

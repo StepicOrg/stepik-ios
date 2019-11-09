@@ -39,7 +39,7 @@ final class VideoQualityTableViewController: UITableViewController {
         NSLocalizedString("VeryHigh", comment: "")
     ]
 
-    fileprivate func localize() {
+    private func localize() {
         lowLabel.text = "\(qualityStrings[0]) (\(defaultQualities[0])p)"
         mediumLabel.text = "\(qualityStrings[1]) (\(defaultQualities[1])p)"
         highLabel.text = "\(qualityStrings[2]) (\(defaultQualities[2])p)"
@@ -72,7 +72,7 @@ final class VideoQualityTableViewController: UITableViewController {
 }
 
 extension VideoQualityTableViewController {
-    fileprivate func setCheckmarkTo(_ selectedTag: Int) {
+    private func setCheckmarkTo(_ selectedTag: Int) {
         for cell in qualityCells {
             if cell.tag == selectedTag {
                 cell.accessoryType = .checkmark

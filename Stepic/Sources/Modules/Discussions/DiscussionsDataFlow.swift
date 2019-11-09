@@ -1,7 +1,12 @@
 import Foundation
 
-enum NewDiscussions {
-    // MARK: Common types
+enum Discussions {
+    // MARK: - Common types -
+
+    enum PresentationContext {
+        case fromBeginning
+        case scrollTo(discussionID: Comment.IdType, replyID: Comment.IdType?)
+    }
 
     /// Interactor -> presenter
     struct DiscussionsResponseData {
@@ -10,12 +15,16 @@ enum NewDiscussions {
         let discussionsIDsFetchingMore: Set<Comment.IdType>
         let replies: [Comment.IdType: [Comment]]
         let currentSortType: SortType
+        let discussionsLeftToLoadInLeftHalf: Int
+        let discussionsLeftToLoadInRightHalf: Int
+        let selectedDiscussionID: Comment.IdType?
     }
 
     /// Presenter -> ViewController
     struct DiscussionsViewData {
-        let discussions: [NewDiscussionsDiscussionViewModel]
-        let discussionsLeftToLoad: Int
+        let discussions: [DiscussionsDiscussionViewModel]
+        let hasPreviousPage: Bool
+        let hasNextPage: Bool
     }
 
     enum SortType: String, CaseIterable {
@@ -26,6 +35,7 @@ enum NewDiscussions {
     }
 
     // MARK: - Use cases -
+    // MARK: Fetch comments
 
     /// Show discussions
     enum DiscussionsLoad {
@@ -42,14 +52,18 @@ enum NewDiscussions {
 
     /// Load next part discussions
     enum NextDiscussionsLoad {
-        struct Request { }
+        struct Request {
+            let direction: PaginationDirection
+        }
 
         struct Response {
             let result: Result<DiscussionsResponseData>
+            let direction: PaginationDirection
         }
 
         struct ViewModel {
             let state: PaginationState
+            let direction: PaginationDirection
         }
     }
 
@@ -65,6 +79,19 @@ enum NewDiscussions {
 
         struct ViewModel {
             let data: DiscussionsViewData
+        }
+    }
+
+    // MARK: - Comment actions
+
+    /// Scrolls to comment
+    enum SelectComment {
+        struct Response {
+            let commentID: Comment.IdType
+        }
+
+        struct ViewModel {
+            let commentID: Comment.IdType
         }
     }
 
@@ -161,8 +188,10 @@ enum NewDiscussions {
         }
     }
 
-    /// Presents sort action sheet (after sort type bar button item click)
-    enum SortTypePresentation {
+    // MARK: - Sort type
+
+    /// Presents action sheet with available and current sort type (after sort type bar button item click)
+    enum SortTypesPresentation {
         struct Request { }
 
         struct Response {
@@ -196,6 +225,8 @@ enum NewDiscussions {
         }
     }
 
+    // MARK: - HUD
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {
@@ -207,12 +238,17 @@ enum NewDiscussions {
         }
     }
 
-    // MARK: States
+    // MARK: - States -
 
     enum ViewControllerState {
         case loading
         case error
         case result(data: DiscussionsViewData)
+    }
+
+    enum PaginationDirection {
+        case top
+        case bottom
     }
 
     enum PaginationState {

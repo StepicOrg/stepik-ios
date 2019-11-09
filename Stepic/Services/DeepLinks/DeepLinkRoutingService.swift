@@ -110,11 +110,12 @@ final class DeepLinkRoutingService {
                     }
                 )
             case .discussions(let lessonID, let stepID, let discussionID, let unitID):
-                DeepLinkRouter.routeToDiscussionWithId(
-                    lessonID,
-                    stepId: stepID,
+                DeepLinkRouter.routeToDiscussionWithID(
+                    discussionID: discussionID,
+                    replyID: nil,
+                    lessonID: lessonID,
+                    stepID: stepID,
                     unitID: unitID,
-                    discussionId: discussionID,
                     completion: { moduleStack in
                         seal.fulfill(moduleStack)
                     }

@@ -75,37 +75,46 @@ final class DeepLinkRouter {
         }
     }
 
-    static func routeFromDeepLink(url: URL, presentFrom presentationSource: UIViewController? = nil, isModal: Bool = false, withDelay: Bool = true) {
+    static func routeFromDeepLink(
+        url: URL,
+        presentFrom presentationSource: UIViewController? = nil,
+        isModal: Bool = false,
+        withDelay: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
         DeepLinkRouter.routeFromDeepLink(url, completion: { controllers in
-            let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
+            let navigationController = presentationSource?.navigationController ?? self.currentNavigation
+
             if controllers.count > 0 {
                 let openBlock = {
+                    completion?()
                     DeepLinkRouter.open(
                         modules: controllers,
-                        from: presentationSource ?? navigation?.topViewController,
+                        from: presentationSource ?? navigationController?.topViewController,
                         isModal: isModal
                     )
                 }
                 if withDelay {
-                    delay(0.5, closure: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
                         openBlock()
-                    })
+                    }
                 } else {
                     openBlock()
                 }
             } else {
-                let navigation: UINavigationController? = presentationSource?.navigationController ?? currentNavigation
-                guard let source = presentationSource ?? navigation?.topViewController else {
+                completion?()
+
+                guard let sourceViewController = presentationSource ?? navigationController?.topViewController else {
                     return
                 }
 
-                guard let url = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
+                guard let urlWithAppendedQueryParams = url.appendingQueryParameters(["from_mobile_app": "true"]) else {
                     return
                 }
 
                 WebControllerManager.sharedManager.presentWebControllerWithURL(
-                    url,
-                    inController: source,
+                    urlWithAppendedQueryParams,
+                    inController: sourceViewController,
                     withKey: "external link",
                     allowsSafari: true,
                     backButtonStyle: .close
@@ -217,19 +226,47 @@ final class DeepLinkRouter {
             }
 
             if link.query?.contains("discussion") ?? false {
-                if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false), let queryItems = urlComponents.queryItems {
-                    if let discussion = queryItems.filter({ item in item.name == "discussion" }).first?.value! {
-                        if let discussionInt = Int(discussion) {
-                            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.discussion, parameters: ["lesson": lessonId, "step": stepId, "discussion": discussionInt])
-                            routeToDiscussionWithId(lessonId, stepId: stepId, unitID: nil, discussionId: discussionInt, completion: completion)
+                if let urlComponents = URLComponents(url: link, resolvingAgainstBaseURL: false),
+                   let queryItems = urlComponents.queryItems {
+                    if let discussionIDString = queryItems.first(where: { $0.name == "discussion" })?.value {
+                        if let discussionID = Int(discussionIDString) {
+                            let replyID = queryItems
+                                .first(where: { $0.name == "amp;reply" })?
+                                .value
+                                .flatMap(Int.init)
+
+                            AnalyticsReporter.reportEvent(
+                                AnalyticsEvents.DeepLink.discussion,
+                                parameters: [
+                                    "lesson": lessonId,
+                                    "step": stepId,
+                                    "discussion": discussionID
+                                ]
+                            )
+
+                            self.routeToDiscussionWithID(
+                                discussionID: discussionID,
+                                replyID: replyID,
+                                lessonID: lessonId,
+                                stepID: stepId,
+                                unitID: nil,
+                                completion: completion
+                            )
                             return
                         }
                     }
                 }
             }
 
-            AnalyticsReporter.reportEvent(AnalyticsEvents.DeepLink.step, parameters: ["lesson": lessonId as NSObject, "step": stepId as NSObject])
-            routeToStepWithId(stepId, lessonId: lessonId, unitID: nil, completion: completion)
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.DeepLink.step,
+                parameters: [
+                    "lesson": lessonId,
+                    "step": stepId
+                ]
+            )
+
+            self.routeToStepWithId(stepId, lessonId: lessonId, unitID: nil, completion: completion)
             return
         }
 
@@ -275,20 +312,21 @@ final class DeepLinkRouter {
         )
     }
 
-    static func routeToDiscussionWithId(
-        _ lessonId: Int,
-        stepId: Int,
+    static func routeToDiscussionWithID(
+        discussionID: Comment.IdType,
+        replyID: Comment.IdType?,
+        lessonID: Int,
+        stepID: Int,
         unitID: Int?,
-        discussionId: Int,
         completion: @escaping ([UIViewController]) -> Void
     ) {
-        DeepLinkRouter.routeToStepWithId(stepId, lessonId: lessonId, unitID: unitID) { viewControllers in
+        DeepLinkRouter.routeToStepWithId(stepID, lessonId: lessonID, unitID: unitID) { viewControllers in
             guard let _ = viewControllers.last as? NewLessonViewController else {
                 completion([])
                 return
             }
 
-            guard let stepInLessonID = Lesson.fetch([lessonId]).first?.stepsArray[safe: stepId - 1] else {
+            guard let stepInLessonID = Lesson.fetch([lessonID]).first?.stepsArray[safe: stepID - 1] else {
                 completion([])
                 return
             }
@@ -305,9 +343,10 @@ final class DeepLinkRouter {
                         }
 
                         if let discussionProxyID = step.discussionProxyId {
-                            let assembly = NewDiscussionsAssembly(
+                            let assembly = DiscussionsAssembly(
                                 discussionProxyID: discussionProxyID,
-                                stepID: step.id
+                                stepID: step.id,
+                                presentationContext: .scrollTo(discussionID: discussionID, replyID: replyID)
                             )
                             completion(viewControllers + [assembly.makeModule()])
                         } else {

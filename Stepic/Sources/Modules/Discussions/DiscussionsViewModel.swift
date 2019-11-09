@@ -1,10 +1,10 @@
 import Foundation
 
-struct NewDiscussionsDiscussionViewModel {
-    let comment: NewDiscussionsCommentViewModel
-    let replies: [NewDiscussionsCommentViewModel]
+struct DiscussionsDiscussionViewModel {
+    let comment: DiscussionsCommentViewModel
+    let replies: [DiscussionsCommentViewModel]
 
-    let repliesLeftToLoad: Int
+    let repliesLeftToLoadCount: Int
     let formattedRepliesLeftToLoad: String
     let isFetchingMoreReplies: Bool
 
@@ -13,16 +13,17 @@ struct NewDiscussionsDiscussionViewModel {
     }
 }
 
-struct NewDiscussionsCommentViewModel {
+struct DiscussionsCommentViewModel {
     let id: Int
     let avatarImageURL: URL?
     let userID: User.IdType
     let userRole: UserRole
     let isPinned: Bool
-    let userName: String
+    let isSelected: Bool
+    let username: String
     let text: String
     let isWebViewSupportNeeded: Bool
-    let dateRepresentation: String
+    let formattedDate: String
     let likesCount: Int
     let dislikesCount: Int
     let voteValue: VoteValue?

@@ -9,10 +9,10 @@
 import Foundation
 
 final class NotificationPreferencesContainer {
-    fileprivate let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 
-    fileprivate let allowStreaksNotificationKey = "allowStreaksNotification"
-    fileprivate let streaksNotificationStartHourUTCKey = "streaksNotificationStartHourUTCKey"
+    private let allowStreaksNotificationKey = "allowStreaksNotification"
+    private let streaksNotificationStartHourUTCKey = "streaksNotificationStartHourUTCKey"
 
     var allowStreaksNotifications: Bool {
         get {
@@ -30,7 +30,7 @@ final class NotificationPreferencesContainer {
         }
     }
 
-    fileprivate var defaultUTCStartHour: Int {
+    private var defaultUTCStartHour: Int {
         return (24 + 20 - (NSTimeZone.system.secondsFromGMT() / 60 / 60)) % 24
     }
 

@@ -200,9 +200,9 @@ public class Player: UIViewController {
         }
     }
 
-    fileprivate var periodicTimeObserver: AnyObject?
+    private var periodicTimeObserver: AnyObject?
 
-    fileprivate func getTimeFromBufferSize() {
+    private func getTimeFromBufferSize() {
     }
 
     //block's parameters are current current time + current buffered value 

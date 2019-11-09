@@ -12,13 +12,13 @@ import UIKit
  Contains user preferences for version update check
  */
 final class UpdatePreferencesContainer: NSObject {
-    override fileprivate init() {}
+    override private init() {}
     static let sharedContainer = UpdatePreferencesContainer()
 
-    fileprivate let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 
-    fileprivate let allowUpdateChecksKey = "allowUpdateChecks"
-    fileprivate let lastUpdateCheckTimeKey = "lastUpdateCheckTime"
+    private let allowUpdateChecksKey = "allowUpdateChecks"
+    private let lastUpdateCheckTimeKey = "lastUpdateCheckTime"
 
     var allowsUpdateChecks: Bool {
         get {

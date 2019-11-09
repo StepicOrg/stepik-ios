@@ -12,7 +12,7 @@ import UIKit
 final class Messages: NSObject {
     static let sharedManager = Messages()
 
-    override fileprivate init() {
+    override private init() {
         super.init()
         TSMessage.setDelegate(self)
         TSMessage.addCustomDesignFromFile(withName: "CustomMessagesDesign.json")

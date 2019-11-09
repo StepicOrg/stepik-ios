@@ -407,7 +407,20 @@ struct AmplitudeAnalyticsEvents {
     }
 
     struct Discussions {
-        static var opened = AnalyticsEvent(name: "Discussions screen opened")
+        enum DiscussionsSource: String {
+            case discussion
+            case reply
+            case `default`
+        }
+
+        static func opened(source: DiscussionsSource) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Discussions screen opened",
+                parameters: [
+                    "source": source.rawValue
+                ]
+            )
+        }
     }
 
     struct Stories {

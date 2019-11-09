@@ -10,8 +10,7 @@ import AVFoundation
 import UIKit
 
 final class AudioManager: NSObject {
-    override fileprivate init() { super.init() }
-    static let sharedManager = AudioManager()
+    static let shared = AudioManager()
 
     var ignoreMuteSwitch: Bool {
         get {
@@ -19,16 +18,19 @@ final class AudioManager: NSObject {
             print("in isIgnoring, current category = \(currentCategory))")
             return currentCategory == .playback
         }
-
-        set(ignore) {
+        set {
             do {
-                print("setting ignore status to \(ignore)")
+                print("setting ignore status to \(newValue)")
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default)
-                try AVAudioSession.sharedInstance().setActive(!ignore)
+                try AVAudioSession.sharedInstance().setActive(!newValue)
             } catch {
                 print("Error while setting ignore mute switch")
             }
         }
+    }
+
+    private override init() {
+        super.init()
     }
 
     func initAudioSession() -> Bool {
@@ -40,7 +42,7 @@ final class AudioManager: NSObject {
         }
     }
 
-    fileprivate func changeMuteIgnoreStatusTo(ignore: Bool) -> Bool {
+    private func changeMuteIgnoreStatusTo(ignore: Bool) -> Bool {
         do {
             try AVAudioSession.sharedInstance().setActive(!ignore)
             return true

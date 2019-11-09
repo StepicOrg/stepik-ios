@@ -16,9 +16,9 @@ extension Foundation.Notification.Name {
 final class AuthInfo: NSObject {
     static var shared = AuthInfo()
 
-    fileprivate let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 
-    override fileprivate init() {
+    private override init() {
         super.init()
 
         print("initializing AuthInfo with userId \(String(describing: userId))")
@@ -33,7 +33,7 @@ final class AuthInfo: NSObject {
         }
     }
 
-    fileprivate func setTokenValue(_ newToken: StepicToken?) {
+    private func setTokenValue(_ newToken: StepicToken?) {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
         defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
         defaults.setValue(newToken?.tokenType, forKey: "token_type")

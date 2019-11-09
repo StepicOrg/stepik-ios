@@ -1,12 +1,13 @@
 import SnapKit
 import UIKit
 
-protocol NewDiscussionsViewDelegate: class {
-    func newDiscussionsViewDidRequestRefresh(_ view: NewDiscussionsView)
-    func newDiscussionsViewDidRequestPagination(_ view: NewDiscussionsView)
+protocol DiscussionsViewDelegate: class {
+    func discussionsViewDidRequestRefresh(_ view: DiscussionsView)
+    func discussionsViewDidRequestTopPagination(_ view: DiscussionsView)
+    func discussionsViewDidRequestBottomPagination(_ view: DiscussionsView)
 }
 
-extension NewDiscussionsView {
+extension DiscussionsView {
     struct Appearance {
         let backgroundColor: UIColor = .white
 
@@ -15,11 +16,14 @@ extension NewDiscussionsView {
     }
 }
 
-final class NewDiscussionsView: UIView {
-    let appearance: Appearance
-    weak var delegate: NewDiscussionsViewDelegate?
+// MARK: - DiscussionsView: UIView -
 
-    private lazy var paginationView = PaginationView()
+final class DiscussionsView: UIView {
+    let appearance: Appearance
+    weak var delegate: DiscussionsViewDelegate?
+
+    private lazy var topPaginationView = PaginationView()
+    private lazy var bottomPaginationView = PaginationView()
 
     private lazy var refreshControl = UIRefreshControl()
 
@@ -31,8 +35,8 @@ final class NewDiscussionsView: UIView {
         tableView.refreshControl = self.refreshControl
         self.refreshControl.addTarget(self, action: #selector(self.refreshControlDidChangeValue), for: .valueChanged)
 
-        tableView.register(cellClass: NewDiscussionsTableViewCell.self)
-        tableView.register(cellClass: NewDiscussionsLoadMoreTableViewCell.self)
+        tableView.register(cellClass: DiscussionsTableViewCell.self)
+        tableView.register(cellClass: DiscussionsLoadMoreTableViewCell.self)
 
         // Should use `self` as delegate to proxify some delegate methods
         tableView.delegate = self
@@ -42,7 +46,11 @@ final class NewDiscussionsView: UIView {
     }()
 
     private weak var tableViewDelegate: (UITableViewDelegate & UITableViewDataSource)?
-    private var shouldShowPaginationView = false
+
+    private var lastKnownContentOffset: CGPoint = .zero
+
+    private var shouldShowTopPaginationView = false
+    private var shouldShowBottomPaginationView = false
 
     private var isSkeletonVisible = false
 
@@ -70,16 +78,38 @@ final class NewDiscussionsView: UIView {
     func updateTableViewData(delegate: UITableViewDelegate & UITableViewDataSource) {
         self.refreshControl.endRefreshing()
 
+        // stop scrolling
+        self.tableView.setContentOffset(self.lastKnownContentOffset, animated: false)
+
         self.tableViewDelegate = delegate
         self.tableView.dataSource = self.tableViewDelegate
         self.tableView.reloadData()
     }
 
-    func showPaginationView() {
-        self.shouldShowPaginationView = true
+    func showTopPaginationView() {
+        self.shouldShowTopPaginationView = true
 
-        self.paginationView.setLoading()
-        self.tableView.tableFooterView = self.paginationView
+        self.topPaginationView.setLoading()
+        self.tableView.tableHeaderView = self.topPaginationView
+        self.tableView.tableHeaderView?.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: self.frame.width,
+            height: self.appearance.paginationViewHeight
+        )
+    }
+
+    func hideTopPaginationView() {
+        self.shouldShowTopPaginationView = false
+        self.tableView.tableHeaderView?.frame = .zero
+        self.tableView.tableHeaderView = nil
+    }
+
+    func showBottomPaginationView() {
+        self.shouldShowBottomPaginationView = true
+
+        self.bottomPaginationView.setLoading()
+        self.tableView.tableFooterView = self.bottomPaginationView
         self.tableView.tableFooterView?.frame = CGRect(
             x: 0,
             y: 0,
@@ -88,8 +118,8 @@ final class NewDiscussionsView: UIView {
         )
     }
 
-    func hidePaginationView() {
-        self.shouldShowPaginationView = false
+    func hideBottomPaginationView() {
+        self.shouldShowBottomPaginationView = false
         self.tableView.tableFooterView?.frame = .zero
         self.tableView.tableFooterView = nil
     }
@@ -107,15 +137,21 @@ final class NewDiscussionsView: UIView {
         self.tableView.skeleton.hide()
     }
 
+    func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
+        self.tableView.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
+    }
+
     // MARK: - Private API
 
     @objc
     private func refreshControlDidChangeValue() {
-        self.delegate?.newDiscussionsViewDidRequestRefresh(self)
+        self.delegate?.discussionsViewDidRequestRefresh(self)
     }
 }
 
-extension NewDiscussionsView: ProgrammaticallyInitializableViewProtocol {
+// MARK: - DiscussionsView: ProgrammaticallyInitializableViewProtocol -
+
+extension DiscussionsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }
@@ -132,14 +168,19 @@ extension NewDiscussionsView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-// MARK: - NewDiscussionsView: UITableViewDelegate -
+// MARK: - DiscussionsView: UITableViewDelegate -
 
-extension NewDiscussionsView: UITableViewDelegate {
+extension DiscussionsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let isFirstIndexPath = indexPath.section == 0 && indexPath.row == 0
+        if isFirstIndexPath && self.shouldShowTopPaginationView {
+            self.delegate?.discussionsViewDidRequestTopPagination(self)
+        }
+
         let isLastIndexPath = indexPath.section == tableView.numberOfSections - 1
             && indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
-        if isLastIndexPath && self.shouldShowPaginationView {
-            self.delegate?.newDiscussionsViewDidRequestPagination(self)
+        if isLastIndexPath && self.shouldShowBottomPaginationView {
+            self.delegate?.discussionsViewDidRequestBottomPagination(self)
         }
 
         self.tableViewDelegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
@@ -149,10 +190,19 @@ extension NewDiscussionsView: UITableViewDelegate {
         if self.isSkeletonVisible {
             return self.appearance.skeletonCellHeight
         }
+
         return self.tableViewDelegate?.tableView?(tableView, heightForRowAt: indexPath) ?? 0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableViewDelegate?.tableView?(tableView, didSelectRowAt: indexPath)
+    }
+}
+
+// MARK: - DiscussionsView: UIScrollViewDelegate -
+
+extension DiscussionsView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.lastKnownContentOffset = scrollView.contentOffset
     }
 }

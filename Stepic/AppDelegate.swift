@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ConnectionHelper.shared.instantiate()
         self.alamofireRequestsLogger.startIfDebug()
 
-        if !AudioManager.sharedManager.initAudioSession() {
+        if !AudioManager.shared.initAudioSession() {
             print("Could not initialize audio session")
         }
 

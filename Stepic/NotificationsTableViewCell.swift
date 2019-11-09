@@ -32,7 +32,7 @@ final class NotificationsTableViewCell: UITableViewCell {
 
     weak var delegate: NotificationsTableViewCellDelegate?
 
-    fileprivate var displayedNotification: NotificationViewData?
+    private var displayedNotification: NotificationViewData?
 
     var status: NotificationStatus = .unread {
         didSet {
