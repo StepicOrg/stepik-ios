@@ -1,6 +1,8 @@
 import Foundation
 import PromiseKit
 
+// MARK: SyllabusDownloadsServiceDelegate -
+
 protocol SyllabusDownloadsServiceDelegate: class {
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
@@ -40,6 +42,8 @@ protocol SyllabusDownloadsServiceDelegate: class {
     )
 }
 
+// MARK: - SyllabusDownloadsServiceProtocol -
+
 protocol SyllabusDownloadsServiceProtocol: class {
     var delegate: SyllabusDownloadsServiceDelegate? { get set }
 
@@ -57,23 +61,27 @@ protocol SyllabusDownloadsServiceProtocol: class {
     func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
 }
 
+// MARK: - SyllabusDownloadsService: SyllabusDownloadsServiceProtocol -
+
 final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     weak var delegate: SyllabusDownloadsServiceDelegate?
 
+    private let videoDownloadingService: VideoDownloadingServiceProtocol
     private let videoFileManager: VideoStoredFileManagerProtocol
-    private let syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
 
+    private var activeVideoDownloads: Set<Video.IdType> = []
+
     init(
+        videoDownloadingService: VideoDownloadingServiceProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
-        syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol
     ) {
+        self.videoDownloadingService = videoDownloadingService
         self.videoFileManager = videoFileManager
         self.stepsNetworkService = stepsNetworkService
 
-        self.syllabusDownloadsInteractionService = syllabusDownloadsInteractionService
-        self.syllabusDownloadsInteractionService.delegate = self
+        self.subscribeOnVideoDownloadingEvents()
     }
 
     // MARK: Download
@@ -86,9 +94,19 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return firstly {
             self.fetchSteps(for: lesson)
         }.done { steps in
-            try self.syllabusDownloadsInteractionService.startDownloading(
-                syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
-            )
+            let uncachedVideos = steps.compactMap { step -> Video? in
+                guard step.block.type == .video,
+                      let video = step.block.video else {
+                    return nil
+                }
+
+                return self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil ? video : nil
+            }
+
+            for video in uncachedVideos where !self.activeVideoDownloads.contains(video.id) {
+                try self.videoDownloadingService.download(video: video)
+                self.activeVideoDownloads.insert(video.id)
+            }
         }
     }
 
@@ -113,10 +131,17 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             fulfilled: fetchStepsPromises
         ).done { result in
             result.forEach { unit, steps in
-                try? self.syllabusDownloadsInteractionService.startDownloading(
-                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
-                )
+                // TODO: Download
+//                try? self.syllabusDownloadsInteractionService.startDownloading(
+//                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
+//                )
             }
+        }
+    }
+
+    private func subscribeOnVideoDownloadingEvents() {
+        self.videoDownloadingService.subscribeOnEvents { event in
+            print("syllabus downloads service: did receive event = \(event)")
         }
     }
 
@@ -231,9 +256,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let stepsWithVideo = steps
             .filter { $0.block.type == .video }
             .compactMap { $0.block.video }
-        let downloadingVideosProgresses = stepsWithVideo.compactMap {
-            self.syllabusDownloadsInteractionService.getDownloadProgress(for: $0)
-        }
+        // TODO: get progress
+//        let downloadingVideosProgresses = stepsWithVideo.compactMap {
+//            self.syllabusDownloadsInteractionService.getDownloadProgress(for: $0)
+//        }
+        let downloadingVideosProgresses = [Float]()
 
         // TODO: remove calculation, get progress for unit from service
         if !downloadingVideosProgresses.isEmpty {
@@ -243,9 +270,10 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         // Try to restore downloads
-        try? self.syllabusDownloadsInteractionService.restoreDownloading(
-            syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
-        )
+        // TODO: restore
+//        try? self.syllabusDownloadsInteractionService.restoreDownloading(
+//            syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
+//        )
 
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
@@ -339,9 +367,10 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private func cancelDownload(section: Section?, unit: Unit, steps: [Step]) -> Promise<Void> {
         return Promise { seal in
             do {
-                try self.syllabusDownloadsInteractionService.cancelDownloading(
-                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
-                )
+                // TODO: Cancel
+//                try self.syllabusDownloadsInteractionService.cancelDownloading(
+//                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
+//                )
                 seal.fulfill(())
             } catch {
                 seal.reject(error)
