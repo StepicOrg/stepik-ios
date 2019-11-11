@@ -94,19 +94,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return firstly {
             self.fetchSteps(for: lesson)
         }.done { steps in
-            let uncachedVideos = steps.compactMap { step -> Video? in
-                guard step.block.type == .video,
-                      let video = step.block.video else {
-                    return nil
-                }
-
-                return self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil ? video : nil
-            }
-
-            for video in uncachedVideos where !self.activeVideoDownloads.contains(video.id) {
-                try self.videoDownloadingService.download(video: video)
-                self.activeVideoDownloads.insert(video.id)
-            }
+            try self.startDownloading(unit: unit, steps: steps)
         }
     }
 
@@ -130,11 +118,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return when(
             fulfilled: fetchStepsPromises
         ).done { result in
-            result.forEach { unit, steps in
-                // TODO: Download
-//                try? self.syllabusDownloadsInteractionService.startDownloading(
-//                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
-//                )
+            for (unit, steps) in result {
+                try self.startDownloading(section: section, unit: unit, steps: steps)
             }
         }
     }
@@ -142,6 +127,22 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private func subscribeOnVideoDownloadingEvents() {
         self.videoDownloadingService.subscribeOnEvents { event in
             print("syllabus downloads service: did receive event = \(event)")
+        }
+    }
+
+    private func startDownloading(section: Section? = nil, unit: Unit, steps: [Step]) throws {
+        let uncachedVideos = steps.compactMap { step -> Video? in
+            guard step.block.type == .video,
+                let video = step.block.video else {
+                    return nil
+            }
+
+            return self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil ? video : nil
+        }
+
+        for video in uncachedVideos where !self.activeVideoDownloads.contains(video.id) {
+            try self.videoDownloadingService.download(video: video)
+            self.activeVideoDownloads.insert(video.id)
         }
     }
 
