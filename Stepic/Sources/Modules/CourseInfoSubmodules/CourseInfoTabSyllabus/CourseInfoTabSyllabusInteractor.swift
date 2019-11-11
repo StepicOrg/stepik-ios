@@ -1,4 +1,5 @@
 import Foundation
+import Logging
 import PromiseKit
 
 // swiftlint:disable file_length
@@ -11,6 +12,8 @@ protocol CourseInfoTabSyllabusInteractorProtocol {
 }
 
 final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProtocol {
+    private static let logger = Logger(label: "com.AlexKarpov.Stepic.CourseInfoTabSyllabusInteractor")
+
     weak var moduleOutput: CourseInfoTabSyllabusOutputProtocol?
 
     private let presenter: CourseInfoTabSyllabusPresenterProtocol
@@ -97,11 +100,15 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             strongSelf.fetchSemaphore.wait()
 
             let isOnline = strongSelf.isOnline
-            print("course info tab syllabus interactor: start fetching syllabus, isOnline = \(isOnline)")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: start fetching syllabus, isOnline = \(isOnline)"
+            )
 
             strongSelf.fetchSyllabusInAppropriateMode(course: course, isOnline: isOnline).done { response in
                 DispatchQueue.main.async {
-                    print("course info tab syllabus interactor: finish fetching syllabus, isOnline = \(isOnline)")
+                    CourseInfoTabSyllabusInteractor.logger.info(
+                        "course info tab syllabus interactor: finish fetching syllabus, isOnline = \(isOnline)"
+                    )
 
                     strongSelf.presenter.presentCourseSyllabus(response: response)
 
@@ -111,8 +118,11 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                         strongSelf.sectionFetchSemaphore.signal()
                     }
                 }
-            }.catch { _ in
-                // TODO: handle
+            }.catch { error in
+                // TODO: handle error
+                CourseInfoTabSyllabusInteractor.logger.error(
+                    "course info tab syllabus interactor: error while fetching syllabus, isOnline = \(isOnline), error = \(error)"
+                )
             }.finally {
                 strongSelf.fetchSemaphore.signal()
             }
@@ -133,16 +143,23 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return
             }
 
-            print("course info tab syllabus interactor: start fetching section from network, id = \(section.id)")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: start fetching section from network, id = \(section.id)"
+            )
 
             strongSelf.fetchSyllabusSection(section: section).done { response in
                 DispatchQueue.main.async {
-                    print("course info tab syllabus interactor: finish fetching section from network, id = \(section.id)")
+                    CourseInfoTabSyllabusInteractor.logger.info(
+                        "course info tab syllabus interactor: finish fetching section from network, id = \(section.id)"
+                    )
+
                     strongSelf.presenter.presentCourseSyllabus(response: response)
                     strongSelf.updateSyllabusHeader()
                 }
             }.catch { error in
-                print("course info tab syllabus interactor: error while fetching section from network, error = \(error)")
+                CourseInfoTabSyllabusInteractor.logger.error(
+                    "course info tab syllabus interactor: error while fetching section from network, error = \(error)"
+                )
             }
         }
     }
@@ -150,7 +167,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request) {
         func handleUnit(id: UniqueIdentifierType) {
             guard let unit = self.currentUnits[id] as? Unit else {
-                print("course info tab syllabus interactor: unit doesn't exist in current units, id = \(id)")
+                CourseInfoTabSyllabusInteractor.logger.warning(
+                    "course info tab syllabus interactor: unit doesn't exists in current units, id = \(id)"
+                )
                 return
             }
 
@@ -169,7 +188,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
         func handleSection(id: UniqueIdentifierType) {
             guard let section = self.currentSections[id] else {
-                print("course info tab syllabus interactor: section doesn't exist in current sections, id = \(id)")
+                CourseInfoTabSyllabusInteractor.logger.warning(
+                    "course info tab syllabus interactor: section doesn't exists in current sections, id = \(id)"
+                )
                 return
             }
 
@@ -295,7 +316,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
             }.catch { error in
-                print("course info tab syllabus interactor: unable to fetch section, error = \(error)")
+                CourseInfoTabSyllabusInteractor.logger.error(
+                    "course info tab syllabus interactor: unable to fetch section, error = \(error)"
+                )
                 seal.reject(Error.fetchFailed)
             }
         }
@@ -330,7 +353,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
             }.catch { error in
-                print("course info tab syllabus interactor: unable to fetch syllabus, error = \(error)")
+                CourseInfoTabSyllabusInteractor.logger.error(
+                    "course info tab syllabus interactor: unable to fetch syllabus, error = \(error)"
+                )
                 seal.reject(Error.fetchFailed)
             }
         }
@@ -422,7 +447,10 @@ extension CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInputProtocol {
     }
 
     func update(with course: Course, isOnline: Bool) {
-        print("course info tab syllabus interactor: updated from parent module, isOnline = \(isOnline)")
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: updated from parent module, isOnline = \(isOnline)"
+        )
+
         self.currentCourse = course
         self.isOnline = isOnline
         self.doSectionsFetch(request: .init())
@@ -589,10 +617,19 @@ extension CourseInfoTabSyllabusInteractor {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
         AmplitudeAnalyticsEvents.Downloads.cancelled(content: "lesson").send()
 
+        let unitID = unit.id
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: start cancelling unit = \(unitID)"
+        )
+
         self.syllabusDownloadsService.cancel(unit: unit).done {
-            print("course info tab syllabus interactor: successfully cancelled unit")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: finish cancelling unit = \(unitID)"
+            )
         }.catch { error in
-            print("course info tab syllabus interactor: error while cancelling unit: \(error)")
+            CourseInfoTabSyllabusInteractor.logger.error(
+                "course info tab syllabus interactor: error while cancelling unit = \(unitID), error = \(error)"
+            )
         }
     }
 
@@ -600,10 +637,19 @@ extension CourseInfoTabSyllabusInteractor {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
         AmplitudeAnalyticsEvents.Downloads.cancelled(content: "section").send()
 
+        let sectionID = section.id
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: start cancelling section = \(sectionID)"
+        )
+
         self.syllabusDownloadsService.cancel(section: section).done {
-            print("course info tab syllabus interactor: successfully cancelled section")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: finish cancelling section = \(sectionID)"
+            )
         }.catch { error in
-            print("course info tab syllabus interactor: error while cancelling section: \(error)")
+            CourseInfoTabSyllabusInteractor.logger.error(
+                "course info tab syllabus interactor: error while cancelling section = \(sectionID), error = \(error)"
+            )
         }
     }
 
@@ -611,8 +657,15 @@ extension CourseInfoTabSyllabusInteractor {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
         AmplitudeAnalyticsEvents.Downloads.deleted(content: "lesson").send()
 
+        let unitID = unit.id
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: start removing cached unit = \(unitID)"
+        )
+
         self.syllabusDownloadsService.remove(unit: unit).done {
-            print("course info tab syllabus interactor: successfully removed unit")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: finish removing cached unit = \(unitID)"
+            )
         }.ensure {
             self.presenter.presentDownloadButtonUpdate(
                 response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
@@ -621,7 +674,9 @@ extension CourseInfoTabSyllabusInteractor {
                 )
             )
         }.catch { error in
-            print("course info tab syllabus interactor: error while unit file removing = \(error)")
+            CourseInfoTabSyllabusInteractor.logger.error(
+                "course info tab syllabus interactor: error while removing cached unit = \(unitID), error = \(error)"
+            )
         }
     }
 
@@ -629,8 +684,15 @@ extension CourseInfoTabSyllabusInteractor {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
         AmplitudeAnalyticsEvents.Downloads.deleted(content: "section").send()
 
+        let sectionID = section.id
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: start removing cached section = \(sectionID)"
+        )
+
         self.syllabusDownloadsService.remove(section: section).done {
-            print("course info tab syllabus interactor: successfully removed section")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: finish removing cached section = \(sectionID)"
+            )
         }.ensure {
             section.units.forEach { unit in
                 self.presenter.presentDownloadButtonUpdate(
@@ -640,6 +702,7 @@ extension CourseInfoTabSyllabusInteractor {
                     )
                 )
             }
+
             self.presenter.presentDownloadButtonUpdate(
                 response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                     source: .section(entity: section),
@@ -647,13 +710,20 @@ extension CourseInfoTabSyllabusInteractor {
                 )
             )
         }.catch { error in
-            print("course info tab syllabus interactor: error while section files removing = \(error)")
+            CourseInfoTabSyllabusInteractor.logger.error(
+                "course info tab syllabus interactor: error while removing cached section = \(sectionID), error = \(error)"
+            )
         }
     }
 
     private func startDownloading(unit: Unit) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
         AmplitudeAnalyticsEvents.Downloads.started(content: "lesson").send()
+
+        let unitID = unit.id
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: start downloading unit = \(unitID)"
+        )
 
         self.presenter.presentDownloadButtonUpdate(
             response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
@@ -663,8 +733,14 @@ extension CourseInfoTabSyllabusInteractor {
         )
 
         self.syllabusDownloadsService.download(unit: unit).done {
-            print("course info tab syllabus interactor: started downloading unit")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: started downloading unit = \(unitID)"
+            )
         }.catch { error in
+            CourseInfoTabSyllabusInteractor.logger.error(
+                "course info tab syllabus interactor: error while starting download unit = \(unitID), error = \(error)"
+            )
+
             self.presenter.presentDownloadButtonUpdate(
                 response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                     source: .unit(entity: unit),
@@ -679,8 +755,15 @@ extension CourseInfoTabSyllabusInteractor {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
         AmplitudeAnalyticsEvents.Downloads.started(content: "section").send()
 
+        let sectionID = section.id
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: start downloading section = \(sectionID)"
+        )
+
         self.syllabusDownloadsService.download(section: section).done {
-            print("course info tab syllabus interactor: started downloading section")
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: started downloading section = \(sectionID)"
+            )
         }.ensure {
             section.units.forEach { unit in
                 self.presenter.presentDownloadButtonUpdate(
@@ -690,6 +773,7 @@ extension CourseInfoTabSyllabusInteractor {
                     )
                 )
             }
+
             self.presenter.presentDownloadButtonUpdate(
                 response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                     source: .section(entity: section),
@@ -697,6 +781,10 @@ extension CourseInfoTabSyllabusInteractor {
                 )
             )
         }.catch { error in
+            CourseInfoTabSyllabusInteractor.logger.error(
+                "course info tab syllabus interactor: error while starting download section = \(sectionID), error = \(error)"
+            )
+
             self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }
