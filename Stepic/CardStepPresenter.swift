@@ -65,20 +65,21 @@ final class CardStepPresenter {
         self.view?.updateProblem(viewModel: viewModel)
 
         // Set up quiz view controller
-        switch step.block.name {
-        case "choice":
+        switch step.block.type {
+        case .choice:
             quizViewController = ChoiceQuizViewController(nibName: "QuizViewController", bundle: nil)
-        case "string":
+        case .string:
             let vc = StringQuizViewController(nibName: "QuizViewController", bundle: nil)
             vc.useSmallPadding = true
             vc.textView.placeholder = NSLocalizedString("StringInputTextFieldPlaceholder", comment: "")
             quizViewController = vc
-        case "number":
+        case .number:
             let vc = NumberQuizViewController(nibName: "QuizViewController", bundle: nil)
             vc.useSmallPadding = true
             vc.textField.placeholder = NSLocalizedString("NumberInputTextFieldPlaceholder", comment: "")
             quizViewController = vc
-        default: break
+        default:
+            break
         }
 
         guard let quizViewController = quizViewController else {
@@ -103,12 +104,13 @@ final class CardStepPresenter {
     func submit() {
         var isSelected = false
 
-        switch step.block.name {
-        case "choice":
+        switch step.block.type {
+        case .choice:
             (quizViewController as? ChoiceQuizViewController)?.choices.forEach { isSelected = isSelected || $0 }
-        case "string", "number":
+        case .string, .number:
             isSelected = true
-        default: break
+        default:
+            break
         }
 
         if isSelected {

@@ -128,7 +128,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         let removeVideosPromises = lesson.steps
-            .filter { $0.block.name == "video" }
+            .filter { $0.block.type == .video }
             .compactMap { $0.block.video }
             .map { video -> Promise<Void> in
                 Promise { seal in
@@ -214,10 +214,10 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // Iterate through steps and determine final state
         let stepsWithVideoCount = steps
-            .filter { $0.block.name == "video" }
+            .filter { $0.block.type == .video }
             .count
         let stepsWithCachedVideoCount = steps
-            .filter { $0.block.name == "video" }
+            .filter { $0.block.type == .video }
             .compactMap { $0.block.video?.id }
             .filter { self.videoFileManager.getVideoStoredFile(videoID: $0) != nil }
             .count
@@ -229,7 +229,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // Check if video is downloading
         let stepsWithVideo = steps
-            .filter { $0.block.name == "video" }
+            .filter { $0.block.type == .video }
             .compactMap { $0.block.video }
         let downloadingVideosProgresses = stepsWithVideo.compactMap {
             self.syllabusDownloadsInteractionService.getDownloadProgress(for: $0)
@@ -352,7 +352,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private func makeSyllabusTree(section: Section? = nil, unit: Unit, steps: [Step]) -> SyllabusTreeNode {
         var stepsTrees: [SyllabusTreeNode] = []
         for step in steps {
-            guard step.block.name == "video",
+            guard step.block.type == .video,
                   let video = step.block.video else {
                 continue
             }
