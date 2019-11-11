@@ -52,9 +52,9 @@ protocol SyllabusDownloadsServiceProtocol: class {
     func cancel(unit: Unit) -> Promise<Void>
     func cancel(section: Section) -> Promise<Void>
 
-    func getDownloadStateForUnit(_ unit: Unit, section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getDownloadStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getDownloadStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
+    func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState
+    func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
+    func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
 }
 
 final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
@@ -188,9 +188,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
-    // MARK: Get download state
+    // MARK: Downloading state
 
-    func getDownloadStateForUnit(_ unit: Unit, section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
         // If section is unreachable or exam then all units are not available
         guard !section.isExam, section.isReachable else {
             return .notAvailable
@@ -256,7 +256,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return .available(isCached: true)
     }
 
-    func getDownloadStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
         let units = section.units
 
         // Unreachable and exam not available
@@ -272,7 +272,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return .notAvailable
         }
 
-        let unitStates = units.map { self.getDownloadStateForUnit($0, section: section) }
+        let unitStates = units.map { self.getDownloadingStateForUnit($0, in: section) }
         var shouldBeCachedUnitsCount = 0
         var notAvailableUnitsCount = 0
         var downloadingUnitProgresses: [Float] = []
@@ -311,8 +311,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return .available(isCached: true)
     }
 
-    func getDownloadStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
-        let sectionStates = course.sections.map { self.getDownloadStateForSection($0) }
+    func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
+        let sectionStates = course.sections.map { self.getDownloadingStateForSection($0) }
 
         let containsUncachedSection = sectionStates.contains { state in
             if case .available(let isCached) = state {

@@ -50,7 +50,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private var shouldOpenedAnalyticsEventSend = false
 
-    private var reportedToAnalyticsVideoDownloadIds = Set<Video.IdType>()
+    private var reportedToAnalyticsVideoDownloadIDs = Set<Video.IdType>()
 
     // Fetch syllabus only after previous fetch completed
     private let fetchSemaphore = DispatchSemaphore(value: 1)
@@ -154,7 +154,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return
             }
 
-            let currentState = self.getDownloadingState(for: unit)
+            let currentState = self.getDownloadingStateForUnit(unit)
             switch currentState {
             case .available(let isCached):
                 return isCached
@@ -173,7 +173,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 return
             }
 
-            let currentState = self.getDownloadingState(for: section)
+            let currentState = self.getDownloadingStateForSection(section)
             switch currentState {
             case .available(let isCached):
                 return isCached
@@ -191,7 +191,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
             self.forceLoadAllSectionsIfNeeded().done {
                 for (uid, section) in self.currentSections {
-                    let sectionState = self.getDownloadingState(for: section)
+                    let sectionState = self.getDownloadingStateForSection(section)
                     if case .available(let isCached) = sectionState, !isCached {
                         handleSection(id: uid)
                     }
@@ -270,6 +270,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
             return false
         }() && !shouldForceDisableDownloadAll
+
         self.presenter.presentCourseSyllabusHeader(
             response: .init(
                 isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
@@ -358,19 +359,20 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         return CourseInfoTabSyllabus.SyllabusData(
             sections: self.currentSections
                 .map { uid, entity in
-                    .init(uniqueIdentifier: uid, entity: entity, downloadState: self.getDownloadingState(for: entity))
+                    .init(
+                        uniqueIdentifier: uid,
+                        entity: entity,
+                        downloadState: self.getDownloadingStateForSection(entity)
+                    )
                 }
                 .sorted(by: { $0.entity.position < $1.entity.position }),
             units: self.currentUnits
                 .map { uid, entity in
-                    var state: CourseInfoTabSyllabus.DownloadState
-                    if let unit = entity {
-                        state = self.getDownloadingState(for: unit)
-                    } else {
-                        state = .notAvailable
-                    }
-
-                    return .init(uniqueIdentifier: uid, entity: entity, downloadState: state)
+                    .init(
+                        uniqueIdentifier: uid,
+                        entity: entity,
+                        downloadState: entity != nil ? self.getDownloadingStateForUnit(entity.require()) : .notAvailable
+                    )
                 }
                 .sorted(by: { ($0.entity?.position ?? 0) < ($1.entity?.position ?? 0) }),
             sectionsDeadlines: self.currentCourse?.sectionDeadlines ?? [],
@@ -462,8 +464,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         didReceiveProgress progress: Float,
         forVideoWithID videoID: Video.IdType
     ) {
-        if !self.reportedToAnalyticsVideoDownloadIds.contains(videoID) {
-            self.reportedToAnalyticsVideoDownloadIds.insert(videoID)
+        if !self.reportedToAnalyticsVideoDownloadIDs.contains(videoID) {
+            self.reportedToAnalyticsVideoDownloadIDs.insert(videoID)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.started)
         }
     }
@@ -507,7 +509,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         didReceiveCompletion isCompleted: Bool,
         forVideoWithID videoID: Video.IdType
     ) {
-        self.reportedToAnalyticsVideoDownloadIds.remove(videoID)
+        self.reportedToAnalyticsVideoDownloadIDs.remove(videoID)
         AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.succeeded)
     }
 
@@ -615,7 +617,7 @@ extension CourseInfoTabSyllabusInteractor {
             self.presenter.presentDownloadButtonUpdate(
                 response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                     source: .unit(entity: unit),
-                    downloadState: self.getDownloadingState(for: unit)
+                    downloadState: self.getDownloadingStateForUnit(unit)
                 )
             )
         }.catch { error in
@@ -634,14 +636,14 @@ extension CourseInfoTabSyllabusInteractor {
                 self.presenter.presentDownloadButtonUpdate(
                     response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                         source: .unit(entity: unit),
-                        downloadState: self.getDownloadingState(for: unit)
+                        downloadState: self.getDownloadingStateForUnit(unit)
                     )
                 )
             }
             self.presenter.presentDownloadButtonUpdate(
                 response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                     source: .section(entity: section),
-                    downloadState: self.getDownloadingState(for: section)
+                    downloadState: self.getDownloadingStateForSection(section)
                 )
             )
         }.catch { error in
@@ -684,7 +686,7 @@ extension CourseInfoTabSyllabusInteractor {
                 self.presenter.presentDownloadButtonUpdate(
                     response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
                         source: .unit(entity: unit),
-                        downloadState: self.getDownloadingState(for: unit)
+                        downloadState: self.getDownloadingStateForUnit(unit)
                     )
                 )
             }
@@ -699,21 +701,21 @@ extension CourseInfoTabSyllabusInteractor {
         }
     }
 
-    private func getDownloadingState(for unit: Unit) -> CourseInfoTabSyllabus.DownloadState {
+    private func getDownloadingStateForUnit(_ unit: Unit) -> CourseInfoTabSyllabus.DownloadState {
         if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)] {
-            return self.syllabusDownloadsService.getDownloadStateForUnit(unit, section: section)
+            return self.syllabusDownloadsService.getDownloadingStateForUnit(unit, in: section)
         }
         return .notAvailable
+    }
+
+    private func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
+        return self.syllabusDownloadsService.getDownloadingStateForSection(section)
     }
 
     private func getDownloadingStateForCourse() -> CourseInfoTabSyllabus.DownloadState {
         if let course = self.currentCourse {
-            return self.syllabusDownloadsService.getDownloadStateForCourse(course)
+            return self.syllabusDownloadsService.getDownloadingStateForCourse(course)
         }
         return .notAvailable
-    }
-
-    private func getDownloadingState(for section: Section) -> CourseInfoTabSyllabus.DownloadState {
-        return self.syllabusDownloadsService.getDownloadStateForSection(section)
     }
 }
