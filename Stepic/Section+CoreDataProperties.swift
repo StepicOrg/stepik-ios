@@ -32,7 +32,7 @@ extension Section {
     @NSManaged var managedCourse: Course?
     @NSManaged var managedProgress: Progress?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.instance.context)!
     }
 

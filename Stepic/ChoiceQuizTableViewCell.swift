@@ -68,8 +68,12 @@ final class ChoiceQuizTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    class func getHeightForText(text: String, width: CGFloat) -> CGFloat {
-        return max(27, StepikLabel.heightForLabelWithText(text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 68, html: true)) + 17
+    static func getHeightForText(text: String, width: CGFloat) -> CGFloat {
+        let labelHeight = StepikLabel.heightForLabelWithText(
+            text, lines: 0, fontName: "ArialMT", fontSize: 16, width: width - 68, html: true
+        )
+
+        return max(27, labelHeight) + 17
     }
 }
 

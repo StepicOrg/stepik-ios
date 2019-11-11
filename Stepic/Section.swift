@@ -57,7 +57,7 @@ final class Section: NSManagedObject, IDFetchable {
         return sections
     }
 
-    class func getSections(_ id: Int) throws -> [Section] {
+    static func getSections(_ id: Int) throws -> [Section] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
 
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)

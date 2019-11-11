@@ -17,7 +17,7 @@ extension StepOptions {
     @NSManaged var managedTemplates: NSOrderedSet?
     @NSManaged var managedSamples: NSOrderedSet?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "StepOptions", in: CoreDataHelper.instance.context)!
     }
 

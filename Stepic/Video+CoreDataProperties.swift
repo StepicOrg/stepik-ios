@@ -22,7 +22,7 @@ extension Video {
 //    @NSManaged var managedCachedPath: String?
     @NSManaged var managedCachedQuality: NSNumber?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.instance.context)!
     }
 

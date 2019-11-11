@@ -21,7 +21,7 @@ extension Block {
 
     @NSManaged var managedStep: Step?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
     }
 

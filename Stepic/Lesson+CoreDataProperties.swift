@@ -29,7 +29,7 @@ extension Lesson {
 
     @NSManaged var managedUnit: Unit?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.instance.context)!
     }
 

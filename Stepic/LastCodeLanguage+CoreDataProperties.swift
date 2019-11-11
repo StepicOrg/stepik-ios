@@ -5,7 +5,7 @@ extension LastCodeLanguage {
     @NSManaged var managedLanguage: String?
     @NSManaged var managedCourse: Course?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "LastCodeLanguage", in: CoreDataHelper.instance.context)!
     }
 

@@ -40,17 +40,17 @@ extension UIColor {
 
     static let lightBlue = UIColor(hex: 0x45B0FF)
 
-    class var stepicGreen: UIColor {
+    static var stepicGreen: UIColor {
         return StepicApplicationsInfo.Colors.mainGreen
     }
 
     static let mainLight = UIColor(hex: 0xf6f6f6)
 
-    class var mainDark: UIColor {
+    static var mainDark: UIColor {
         return StepicApplicationsInfo.Colors.mainDark
     }
 
-    class var mainText: UIColor {
+    static var mainText: UIColor {
         return StepicApplicationsInfo.Colors.mainText
     }
 

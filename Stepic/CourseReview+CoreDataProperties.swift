@@ -20,7 +20,7 @@ extension CourseReview {
     @NSManaged var managedCourse: Course?
     @NSManaged var managedUser: User?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CourseReview", in: CoreDataHelper.instance.context)!
     }
 

@@ -28,7 +28,7 @@ extension Step {
     @NSManaged var managedDiscussionProxy: String?
     @NSManaged var managedDiscussionsCount: NSNumber?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.instance.context)!
     }
 

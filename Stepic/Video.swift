@@ -89,7 +89,7 @@ final class Video: NSManagedObject, JSONSerializable {
             : .online
     }
 
-    class func getAllVideos() -> [Video] {
+    static func getAllVideos() -> [Video] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Video")
         let predicate = NSPredicate(value: true)
         request.predicate = predicate
