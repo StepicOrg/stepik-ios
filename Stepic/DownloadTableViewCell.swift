@@ -23,9 +23,10 @@ final class DownloadTableViewCell: UITableViewCell {
         self.lessonNameLabel.text = "\(video.managedBlock?.managedStep?.managedLesson?.title ?? "")"
 
         let videoStoredFileManager = VideoStoredFileManager(fileManager: .default)
-        let size = videoStoredFileManager.getVideoStoredFile(videoID: video.id)?.size ?? 0
+        let fileSizeInBytes = videoStoredFileManager.getVideoStoredFile(videoID: video.id)?.size ?? 0
+        let fileSizeInMegabytes = max(1, fileSizeInBytes / 1024 / 1024)
 
-        self.sizeLabel.text = "\(size / 1024 / 1024) \(NSLocalizedString("Mb", comment: ""))"
+        self.sizeLabel.text = "\(fileSizeInMegabytes) \(NSLocalizedString("Mb", comment: ""))"
         self.qualityLabel.text = "\(video.cachedQuality ?? "0")p"
     }
 }
