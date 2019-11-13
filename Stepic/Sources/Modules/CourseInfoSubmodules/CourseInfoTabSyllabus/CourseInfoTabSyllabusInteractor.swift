@@ -508,7 +508,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         }
 
         self.presenter.presentDownloadButtonUpdate(
-            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+            response: .init(
                 source: .unit(entity: unit),
                 downloadState: .downloading(progress: progress)
             )
@@ -525,7 +525,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         }
 
         self.presenter.presentDownloadButtonUpdate(
-            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+            response: .init(
                 source: .section(entity: section),
                 downloadState: .downloading(progress: progress)
             )
@@ -538,7 +538,9 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         forVideoWithID videoID: Video.IdType
     ) {
         self.reportedToAnalyticsVideoDownloadIDs.remove(videoID)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.VideoDownload.succeeded)
+        AnalyticsReporter.reportEvent(
+            isCompleted ? AnalyticsEvents.VideoDownload.succeeded : AnalyticsEvents.VideoDownload.failed
+        )
     }
 
     func syllabusDownloadsService(
@@ -551,7 +553,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         }
 
         self.presenter.presentDownloadButtonUpdate(
-            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+            response: .init(
                 source: .unit(entity: unit),
                 downloadState: .available(isCached: isCompleted)
             )
@@ -568,7 +570,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
         }
 
         self.presenter.presentDownloadButtonUpdate(
-            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+            response: .init(
                 source: .section(entity: section),
                 downloadState: .available(isCached: isCompleted)
             )
