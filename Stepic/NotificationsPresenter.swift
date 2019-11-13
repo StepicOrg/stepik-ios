@@ -207,17 +207,17 @@ final class NotificationsPresenter {
         }
     }
 
-    fileprivate func updateDisplayedNotifications(_ notifications: NotificationViewDataStruct) {
+    private func updateDisplayedNotifications(_ notifications: NotificationViewDataStruct) {
         self.displayedNotifications = notifications
         self.view?.set(notifications: self.displayedNotifications, withReload: true)
     }
 
-    fileprivate func loadCached() -> Guarantee<NotificationViewDataStruct> {
+    private func loadCached() -> Guarantee<NotificationViewDataStruct> {
         let notifications = Notification.fetch(type: section.notificationType, offset: 0, limit: 50)
         return merge(old: self.displayedNotifications, new: notifications ?? [])
     }
 
-    fileprivate func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
+    private func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
         return Promise { seal in
             var hasNext: Bool = false
             notificationsAPI.retrieve(page: page, notificationType: section.notificationType).then { result, meta -> Guarantee<NotificationViewDataStruct> in
@@ -230,7 +230,7 @@ final class NotificationsPresenter {
         }
     }
 
-    fileprivate func merge(old: NotificationViewDataStruct, new: [Notification]) -> Guarantee<NotificationViewDataStruct> {
+    private func merge(old: NotificationViewDataStruct, new: [Notification]) -> Guarantee<NotificationViewDataStruct> {
         // id -> url
         var userAvatars: [Int: URL] = [:]
         var usersQuery: Set<Int> = Set()

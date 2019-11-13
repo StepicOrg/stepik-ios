@@ -78,12 +78,12 @@ final class CongratulationViewController: UIViewController {
         coverImageView.image = congratulationType.image
     }
 
-    fileprivate func localize() {
+    private func localize() {
         shareButton.setTitle(NSLocalizedString("ShareAchievement", comment: ""), for: .normal)
         continueButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
     }
 
-    fileprivate func colorize() {
+    private func colorize() {
         continueButton.tintColor = UIColor.mainDark
         shareButton.tintColor = UIColor.mainDark
     }

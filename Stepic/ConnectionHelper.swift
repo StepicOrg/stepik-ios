@@ -9,7 +9,7 @@
 import UIKit
 
 final class ConnectionHelper: NSObject {
-    override fileprivate init() {
+    override private init() {
         super.init()
         reachability = Reachability.forInternetConnection()
         reachability.reachableOnWWAN = reachableOnWWAN
@@ -20,7 +20,7 @@ final class ConnectionHelper: NSObject {
         reachability.startNotifier()
     }
 
-    fileprivate var reachabilityChangedHandlers: [(Bool) -> Void] = []
+    private var reachabilityChangedHandlers: [(Bool) -> Void] = []
 
     func instantiate() {}
 
@@ -28,7 +28,7 @@ final class ConnectionHelper: NSObject {
         reachabilityChangedHandlers.append(handler)
     }
 
-    fileprivate func callReachabilityhandlers(_ result: Bool) {
+    private func callReachabilityhandlers(_ result: Bool) {
         for handler in reachabilityChangedHandlers {
             handler(result)
         }
@@ -69,6 +69,6 @@ final class ConnectionHelper: NSObject {
 
     var reachability: Reachability!
 
-    fileprivate let defaults = UserDefaults.standard
-    fileprivate let reachableOnWWANKey = "reachableOnWWAN"
+    private let defaults = UserDefaults.standard
+    private let reachableOnWWANKey = "reachableOnWWAN"
 }

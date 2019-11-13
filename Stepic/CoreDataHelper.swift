@@ -17,7 +17,7 @@ final class CoreDataHelper: NSObject {
     let context: NSManagedObjectContext
     var storeURL: URL
 
-    override fileprivate init() {
+    override private init() {
         let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")!
         model = NSManagedObjectModel(contentsOf: modelURL)!
 

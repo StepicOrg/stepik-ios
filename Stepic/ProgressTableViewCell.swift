@@ -26,7 +26,7 @@ final class ProgressTableViewCell: UITableViewCell {
         xpPerWeekTitleLabel.text = NSLocalizedString("AdaptiveXPperWeekCell", comment: "")
     }
 
-    fileprivate func colorize() {
+    private func colorize() {
         bracketLabel.textColor = UIColor.mainDark
     }
 

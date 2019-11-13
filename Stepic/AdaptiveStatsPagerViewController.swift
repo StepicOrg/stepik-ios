@@ -27,7 +27,7 @@ final class AdaptiveStatsPagerViewController: PagerController {
         setUpTabs()
     }
 
-    fileprivate func setUpTabs() {
+    private func setUpTabs() {
         tabHeight = 44.0
         indicatorHeight = 1.5
         centerCurrentTab = true

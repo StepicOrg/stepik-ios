@@ -9,7 +9,7 @@
 import UIKit
 
 final class TimeFormatHelper: NSObject {
-    override fileprivate init() {
+    override private init() {
         super.init()
     }
 

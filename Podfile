@@ -8,7 +8,7 @@ def shared_pods
     pod 'Alamofire', '4.9.1'
     pod 'Atributika', '4.9.0'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.2.5'
+    pod 'SDWebImage', '5.3.1'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Logging', :git => 'https://github.com/ivan-magda/swift-log.git', :branch => 'swift-4'
     pod 'Fabric', '1.10.2'
@@ -30,10 +30,10 @@ def all_pods
     pod 'SnapKit', '4.2.0'
 
     # Firebase
-    pod 'Firebase/Core', '6.11.0'
-    pod 'Firebase/Messaging' , '6.11.0'
-    pod 'Firebase/Analytics' , '6.11.0'
-    pod 'Firebase/RemoteConfig', '6.11.0'
+    pod 'Firebase/Core', '6.12.0'
+    pod 'Firebase/Messaging' , '6.12.0'
+    pod 'Firebase/Analytics' , '6.12.0'
+    pod 'Firebase/RemoteConfig', '6.12.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.8.2'
     pod 'Amplitude-iOS', '4.8.2'

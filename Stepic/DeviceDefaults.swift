@@ -12,11 +12,11 @@ import Foundation
  Stores and manages information about device defaults
  */
 final class DeviceDefaults {
-    fileprivate init() {}
+    private init() {}
     static let sharedDefaults = DeviceDefaults()
 
-    fileprivate let defaults = UserDefaults.standard
-    fileprivate let deviceIdKey = "nofiticationsDeviceId"
+    private let defaults = UserDefaults.standard
+    private let deviceIdKey = "nofiticationsDeviceId"
 
     var deviceId: Int? {
         get {

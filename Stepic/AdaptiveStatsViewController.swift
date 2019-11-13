@@ -17,7 +17,7 @@ final class AdaptiveStatsViewController: UIViewController {
         case normal(message: String?)
     }
 
-    fileprivate var state: State = .loading {
+    private var state: State = .loading {
         didSet {
             switch state {
             case .loading:
@@ -58,7 +58,7 @@ final class AdaptiveStatsViewController: UIViewController {
     @IBOutlet weak var xpPer7DaysTitleLabel: UILabel!
     @IBOutlet weak var last7DaysTitleLabel: UILabel!
 
-    fileprivate var data: [Any]?
+    private var data: [Any]?
 
     @IBAction func onCancelButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -81,7 +81,7 @@ final class AdaptiveStatsViewController: UIViewController {
         presenter?.reloadData(force: data == nil)
     }
 
-    fileprivate func colorize() {
+    private func colorize() {
         currentWeekXPLabel.textColor = UIColor.mainDark
         bestStreakLabel.textColor = UIColor.mainDark
         currentLevelLabel.textColor = UIColor.mainDark
@@ -123,7 +123,7 @@ final class AdaptiveStatsViewController: UIViewController {
         }
     }
 
-    fileprivate func valuesToDataEntries(values: [Int]) -> [ChartDataEntry] {
+    private func valuesToDataEntries(values: [Int]) -> [ChartDataEntry] {
         var dataEntries: [ChartDataEntry] = []
 
         for i in 0..<values.count {
@@ -134,7 +134,7 @@ final class AdaptiveStatsViewController: UIViewController {
         return dataEntries
     }
 
-    fileprivate func setUpTable() {
+    private func setUpTable() {
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -144,7 +144,7 @@ final class AdaptiveStatsViewController: UIViewController {
         tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)
     }
 
-    fileprivate func setUpChart() {
+    private func setUpChart() {
         progressChart.chartDescription?.enabled = false
         progressChart.isUserInteractionEnabled = false
         progressChart.setScaleEnabled(false)
@@ -157,7 +157,7 @@ final class AdaptiveStatsViewController: UIViewController {
         progressChart.legend.enabled = false
     }
 
-    fileprivate func updateDataSet(_ dataSet: LineChartDataSet) -> LineChartDataSet {
+    private func updateDataSet(_ dataSet: LineChartDataSet) -> LineChartDataSet {
         dataSet.setColor(UIColor.mainDark)
         dataSet.mode = .horizontalBezier
         dataSet.cubicIntensity = 0.2

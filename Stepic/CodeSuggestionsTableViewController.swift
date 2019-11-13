@@ -26,14 +26,14 @@ final class CodeSuggestionsTableViewController: UITableViewController {
         }
     }
 
-    fileprivate var suggestionHeight: CGFloat {
+    private var suggestionHeight: CGFloat {
         if let size = delegate?.suggestionsSize {
             return size.realSizes.suggestionHeight
         } else {
             return 22
         }
     }
-    fileprivate let maxSuggestionCount = 4
+    private let maxSuggestionCount = 4
 
     weak var delegate: CodeSuggestionDelegate?
 

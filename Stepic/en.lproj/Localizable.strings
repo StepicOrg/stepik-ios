@@ -12,6 +12,7 @@ FailedToSignIn = "Failed to sign in";
 FailedToSignInNoEmail = "Failed to sign in: email is not provided by social network";
 RemoveVideoTitle = "Remove cached videos";
 RemoveVideoBody = "Are you sure you want to remove cached videos?";
+OK = "OK";
 Cancel = "Cancel";
 Remove = "Remove";
 Yes = "Yes";
@@ -653,7 +654,6 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 
 /* ExamEGERussian */
 "ErrorMessage" = "Sorry, something went wrong: please try again later.";
-"Ok" = "Ok";
 
 "Practice" = "Practice";
 "Theory" = "Theory";
@@ -712,6 +712,12 @@ NoDiscussionsButtonTitle = "Leave a comment";
 LessonTooltipPointsWithScoreTitle = "You got: %@ out of %@ for step";
 LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";
+StepVideoPlayingNotReachableErrorTitle = "You're offline";
+StepVideoPlayingNotReachableErrorMessage = "Check​ your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
+
+/* Video player */
+VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
+VideoPlayerPlaybackFailedStateAlertMessage = "Video playback error occurred, try again or close the player?";
 
 OurSocialNetworks = "Our social networks";
 

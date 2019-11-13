@@ -18,7 +18,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var shadowView: UIView!
 
-    fileprivate var statusBarPad: UIView?
+    private var statusBarPad: UIView?
     private var shouldToggleNavigationBar = true
 
     // For init View-Presenter via view creating

@@ -9,17 +9,17 @@
 import Foundation
 
 final class RateAppManager {
-    fileprivate let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
 
-    fileprivate let correctSubmissionsThreshold = StepicApplicationsInfo.RateApp.correctSubmissionsThreshold
+    private let correctSubmissionsThreshold = StepicApplicationsInfo.RateApp.correctSubmissionsThreshold
 
-    fileprivate let showRateLaterPressedDateKey = "showRateLaterPressedDateKey"
+    private let showRateLaterPressedDateKey = "showRateLaterPressedDateKey"
 
-    fileprivate let correctSubmissionsCountKey = "correctSubmissionsCountKey"
+    private let correctSubmissionsCountKey = "correctSubmissionsCountKey"
 
-    fileprivate let neverShowRateAlertKey = "neverShowRateAlertKey"
+    private let neverShowRateAlertKey = "neverShowRateAlertKey"
 
-    fileprivate var showRateLaterPressedDate: TimeInterval? {
+    private var showRateLaterPressedDate: TimeInterval? {
         get {
             return defaults.value(forKey: showRateLaterPressedDateKey) as? TimeInterval
         }
@@ -29,7 +29,7 @@ final class RateAppManager {
         }
     }
 
-    fileprivate var neverShowRateAlert: Bool {
+    private var neverShowRateAlert: Bool {
         get {
             return defaults.value(forKey: neverShowRateAlertKey) as? Bool ?? false
         }
@@ -39,7 +39,7 @@ final class RateAppManager {
         }
     }
 
-    fileprivate var correctSubmissionsCount: Int {
+    private var correctSubmissionsCount: Int {
         get {
             if let cnt = defaults.value(forKey: correctSubmissionsCountKey) as? Int {
                 return cnt

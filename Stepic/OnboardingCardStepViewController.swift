@@ -48,7 +48,7 @@ final class OnboardingCardStepViewController: CardStepViewController {
         delegate?.contentLoadingDidComplete()
     }
 
-    fileprivate func loadOnboardingStep(from file: String) -> (text: String?, baseURL: URL?) {
+    private func loadOnboardingStep(from file: String) -> (text: String?, baseURL: URL?) {
         guard let filePath = Bundle.main.path(forResource: file, ofType: "html") else {
             return (text: nil, baseURL: nil)
         }

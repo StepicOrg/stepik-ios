@@ -31,9 +31,9 @@ struct ScoreboardViewData {
 final class AdaptiveRatingsPresenter {
     weak var view: AdaptiveRatingsView?
 
-    fileprivate var ratingsAPI: AdaptiveRatingsAPI
-    fileprivate var usersAPI: UsersAPI
-    fileprivate var ratingManager: AdaptiveRatingManager
+    private var ratingsAPI: AdaptiveRatingsAPI
+    private var usersAPI: UsersAPI
+    private var ratingManager: AdaptiveRatingManager
 
     private var scoreboard: [Int: ScoreboardViewData] = [:]
 
@@ -81,7 +81,7 @@ final class AdaptiveRatingsPresenter {
         AmplitudeAnalyticsEvents.AdaptiveRating.opened(course: ratingManager.courseId).send()
     }
 
-    fileprivate func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
+    private func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
         return Promise { seal in
             let currentUser = AuthInfo.shared.userId
             var usersForDeanonIds = [Int]()
@@ -123,7 +123,7 @@ final class AdaptiveRatingsPresenter {
         }
     }
 
-    fileprivate func loadNamesFromFiles() {
+    private func loadNamesFromFiles() {
         func readFile(name: String) -> [String] {
             if let path = Bundle.main.path(forResource: name, ofType: "plist"),
                 let words = NSArray(contentsOfFile: path) as? [String] {
@@ -140,7 +140,7 @@ final class AdaptiveRatingsPresenter {
         assert(adjs.count % 2 == 0)
     }
 
-    fileprivate func generateNameBy(userId: Int) -> String {
+    private func generateNameBy(userId: Int) -> String {
         func hash(_ id: Int) -> Int {
             var x = id
             x = ((x >> 16) ^ x) &* 0x45d9f3b

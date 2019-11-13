@@ -12,10 +12,10 @@ import UIKit
  This class checks for updates if needed
  */
 final class UpdateChecker: NSObject {
-    override fileprivate init() {}
+    override private init() {}
     static let sharedChecker = UpdateChecker()
 
-    fileprivate func isCheckNeeded() -> Bool {
+    private func isCheckNeeded() -> Bool {
         let lastUpdate = UpdatePreferencesContainer.sharedContainer.lastUpdateCheckTime
 
         let isMoreThanDayBetweenChecks = (Date().timeIntervalSince1970 - lastUpdate) > 86400

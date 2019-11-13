@@ -12,6 +12,7 @@ FailedToSignIn = "Не удалось авторизоваться";
 FailedToSignInNoEmail = "Не удалось авторизоваться: в аккаунте социальной сети не указан email";
 RemoveVideoTitle = "Удаление видео из урока";
 RemoveVideoBody = "Вы уверены, что хотите удалить сохраненное видео из этого урока?";
+OK = "OK";
 Cancel = "Отмена";
 Remove = "Удалить";
 Yes = "Да";
@@ -320,7 +321,7 @@ ContinueLearningWidgetButtonTitle = "Продолжить учиться";
 ShowAll = "Все";
 Enrolled = "Мои курсы";
 Popular = "Популярные";
-Home = "Главная";
+Home = "Обучение";
 RecommendedCategory = "Подборка";
 YourCurrentProgressIs = "Текущий прогресс:";
 HomePlaceholderAnonymous = "<b>Войдите</b> и начните учиться прямо сейчас";
@@ -654,7 +655,6 @@ WriteCourseReviewActionNotAllowedDescription = "Чтобы оставить от
 
 /* ExamEGERussian */
 "ErrorMessage" = "Извините, что-то пошло не так: повторите попытку позже.";
-"Ok" = "Ok";
 
 "Practice" = "Практика";
 "Theory" = "Теория";
@@ -713,6 +713,12 @@ NoDiscussionsButtonTitle = "Напишите комментарий";
 LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
 LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
+StepVideoPlayingNotReachableErrorTitle = "Ошибка соединения";
+StepVideoPlayingNotReachableErrorMessage = "Подключитесь к интернету и повторите попытку.";
+
+/* Video player */
+VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
+VideoPlayerPlaybackFailedStateAlertMessage = "Возникла ошибка воспроизведения видео, попробовать снова или закрыть плеер?";
 
 OurSocialNetworks = "Наши аккаунты в соцсетях";
 

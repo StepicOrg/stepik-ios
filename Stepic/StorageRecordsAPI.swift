@@ -14,23 +14,56 @@ import SwiftyJSON
 final class StorageRecordsAPI: APIEndpoint {
     override var name: String { return "storage-records" }
 
-    func retrieve(kind: StorageKind?, user: Int) -> Promise<([StorageRecord], Meta)> {
+    func retrieve(
+        userID: User.IdType,
+        kindPrefixType prefixType: StorageKind.PrefixType
+    ) -> Promise<([StorageRecord], Meta)> {
         let params: Parameters = [
-            "kind": kind?.getName() ?? "",
-            "user": user
+            StorageRecord.JSONKey.user.rawValue: userID,
+            "kind__startswith": prefixType.startsWith
         ]
-        return retrieve.request(requestEndpoint: "storage-records", paramName: "storage-records", params: params, withManager: manager)
+
+        return self.retrieve.request(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: params,
+            withManager: self.manager
+        )
+    }
+
+    func retrieve(userID: User.IdType, kind: StorageKind?) -> Promise<([StorageRecord], Meta)> {
+        let params: Parameters = [
+            StorageRecord.JSONKey.kind.rawValue: kind?.name ?? "",
+            StorageRecord.JSONKey.user.rawValue: userID
+        ]
+
+        return self.retrieve.request(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: params,
+            withManager: self.manager
+        )
     }
 
     func delete(id: Int) -> Promise<Void> {
-        return delete.request(requestEndpoint: "storage-records", deletingId: id, withManager: manager)
+        return self.delete.request(requestEndpoint: self.name, deletingId: id, withManager: self.manager)
     }
 
     func create(record: StorageRecord) -> Promise<StorageRecord> {
-        return create.request(requestEndpoint: "storage-records", paramName: "storage-record", creatingObject: record, withManager: manager)
+        return self.create.request(
+            requestEndpoint: self.name,
+            paramName: "storage-record",
+            creatingObject: record,
+            withManager: self.manager
+        )
     }
 
     func update(record: StorageRecord) -> Promise<StorageRecord> {
-        return update.request(requestEndpoint: "storage-records", paramName: "storage-record", updatingObject: record, withManager: manager)
+        return self.update.request(
+            requestEndpoint: self.name,
+            paramName: "storage-record",
+            updatingObject: record,
+            withManager: self.manager
+        )
     }
 }

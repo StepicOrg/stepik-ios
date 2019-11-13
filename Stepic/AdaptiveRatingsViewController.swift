@@ -16,7 +16,7 @@ final class AdaptiveRatingsViewController: UIViewController {
         case normal(message: String?)
     }
 
-    fileprivate var state: State = .loading {
+    private var state: State = .loading {
         didSet {
             switch state {
             case .loading:
@@ -50,7 +50,7 @@ final class AdaptiveRatingsViewController: UIViewController {
 
     @IBOutlet weak var ratingSegmentedControl: UISegmentedControl!
 
-    fileprivate var data: [Any]?
+    private var data: [Any]?
 
     @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
         let sections: [Int: Int?] = [
@@ -77,12 +77,12 @@ final class AdaptiveRatingsViewController: UIViewController {
         presenter?.sendOpenedAnalytics()
     }
 
-    fileprivate func colorize() {
+    private func colorize() {
         loadingIndicator.color = UIColor.mainDark
         ratingSegmentedControl.tintColor = UIColor.mainDark
     }
 
-    fileprivate func localize() {
+    private func localize() {
         ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveAllTime", comment: ""), forSegmentAt: 0)
         ratingSegmentedControl.setTitle(NSLocalizedString("Adaptive7Days", comment: ""), forSegmentAt: 1)
         ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveToday", comment: ""), forSegmentAt: 2)
@@ -116,7 +116,7 @@ final class AdaptiveRatingsViewController: UIViewController {
         }
     }
 
-    fileprivate func setUpTable() {
+    private func setUpTable() {
         tableView.delegate = self
         tableView.dataSource = self
 

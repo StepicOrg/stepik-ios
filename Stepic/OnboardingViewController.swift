@@ -22,10 +22,10 @@ final class OnboardingViewController: UIViewController {
 
     private let splitTestingService = SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard)
 
-    fileprivate var currentPageIndex = 0
+    private var currentPageIndex = 0
 
     private var scrollView: UIScrollView!
-    fileprivate var pages: [OnboardingPageView] = []
+    private var pages: [OnboardingPageView] = []
 
     var authSource: UIViewController? {
         return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
@@ -36,7 +36,7 @@ final class OnboardingViewController: UIViewController {
     private var titles = (1...4).map { NSLocalizedString("OnboardingTitle\($0)", comment: "") }
     private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "") }
 
-    fileprivate var shouldUseLandscapeLayout: Bool {
+    private var shouldUseLandscapeLayout: Bool {
         return DeviceInfo.current.orientation.interface.isLandscape
     }
 

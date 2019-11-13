@@ -12,7 +12,7 @@ import Foundation
  Contains and runs a queue of Executable objects 
  */
 final class ExecutionQueue: DictionarySerializable {
-    fileprivate var queue: [Executable] = []
+    private var queue: [Executable] = []
 
     var count: Int {
         return queue.count

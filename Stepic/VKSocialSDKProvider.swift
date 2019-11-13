@@ -50,8 +50,8 @@ final class VKSocialSDKProvider: NSObject, SocialSDKProvider {
         VKSdk.authorize(["email"])
     }
 
-    fileprivate var successHandler: ((String, String?) -> Void)?
-    fileprivate var errorHandler: ((SocialSDKError) -> Void)?
+    private var successHandler: ((String, String?) -> Void)?
+    private var errorHandler: ((SocialSDKError) -> Void)?
 }
 
 extension VKSocialSDKProvider: VKSdkDelegate {

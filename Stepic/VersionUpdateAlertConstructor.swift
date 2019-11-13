@@ -12,7 +12,7 @@ import UIKit
  Constructs alert controller 
  */
 final class VersionUpdateAlertConstructor: NSObject {
-    override fileprivate init() {}
+    override private init() {}
     static let sharedConstructor = VersionUpdateAlertConstructor()
 
     func getUpdateAlertController(updateUrl url: URL, addNeverAskAction: Bool) -> UIAlertController {
