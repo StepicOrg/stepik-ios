@@ -286,6 +286,20 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
+    private func cancelDownload(section: Section?, unit: Unit, steps: [Step]) -> Promise<Void> {
+        return Promise { seal in
+            do {
+                // TODO: Cancel
+//                try self.syllabusDownloadsInteractionService.cancelDownloading(
+//                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
+//                )
+                seal.fulfill(())
+            } catch {
+                seal.reject(error)
+            }
+        }
+    }
+
     // MARK: Downloading state
 
     func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
@@ -465,53 +479,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
-    private func cancelDownload(section: Section?, unit: Unit, steps: [Step]) -> Promise<Void> {
-        return Promise { seal in
-            do {
-                // TODO: Cancel
-//                try self.syllabusDownloadsInteractionService.cancelDownloading(
-//                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
-//                )
-                seal.fulfill(())
-            } catch {
-                seal.reject(error)
-            }
-        }
-    }
-
-    private func makeSyllabusTree(section: Section? = nil, unit: Unit, steps: [Step]) -> SyllabusTreeNode {
-        var stepsTrees: [SyllabusTreeNode] = []
-        for step in steps {
-            guard step.block.type == .video,
-                  let video = step.block.video else {
-                continue
-            }
-
-            if self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil {
-                stepsTrees.append(
-                    SyllabusTreeNode(
-                        value: .step(id: step.id),
-                        children: [SyllabusTreeNode(value: .video(entity: video))]
-                    )
-                )
-            }
-        }
-
-        let unitTree = SyllabusTreeNode(
-            value: .unit(id: unit.id),
-            children: stepsTrees
-        )
-
-        if let section = section {
-            return SyllabusTreeNode(
-                value: .section(id: section.id),
-                children: [unitTree]
-            )
-        }
-
-        return unitTree
-    }
-
     // MARK: - Types -
 
     enum Error: Swift.Error {
@@ -519,56 +486,5 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         case removeUnitFailed
         case downloadSectionFailed
         case cancelSectionFailed
-    }
-}
-
-// MARK: - SyllabusDownloadsService: SyllabusDownloadsInteractionServiceDelegate -
-
-extension SyllabusDownloadsService: SyllabusDownloadsInteractionServiceDelegate {
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didReceiveProgress progress: Float,
-        source: SyllabusTreeNode.Source
-    ) {
-        DispatchQueue.main.async {
-            switch source {
-            case .video(let video):
-                self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forVideoWithID: video.id)
-            case .unit(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forUnitWithID: id)
-            case .section(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forSectionWithID: id)
-            default:
-                break
-            }
-        }
-    }
-
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didReceiveCompletion completed: Bool,
-        source: SyllabusTreeNode.Source
-    ) {
-        DispatchQueue.main.async {
-            switch source {
-            case .video(let video):
-                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: completed, forVideoWithID: video.id)
-            case .unit(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: completed, forUnitWithID: id)
-            case .section(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: completed, forSectionWithID: id)
-            default:
-                break
-            }
-        }
-    }
-
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didFailLoadVideo error: Swift.Error
-    ) {
-        DispatchQueue.main.async {
-            self.delegate?.syllabusDownloadsService(self, didFailLoadVideoWithError: error)
-        }
     }
 }
