@@ -157,9 +157,19 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             let currentState = self.getDownloadingState(for: unit)
             switch currentState {
             case .available(let isCached):
-                return isCached
-                    ? self.removeCached(unit: unit)
-                    : self.startDownloading(unit: unit)
+                if isCached {
+                    self.presenter.presentDeleteDownloadsConfirmationAlert(
+                        response: .init(
+                            type: .unit,
+                            cancelActionHandler: {},
+                            confirmedActionHandler: { [weak self] in
+                                self?.removeCached(unit: unit)
+                            }
+                        )
+                    )
+                } else {
+                    self.startDownloading(unit: unit)
+                }
             case .downloading:
                 self.cancelDownloading(unit: unit)
             default:
@@ -176,9 +186,19 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             let currentState = self.getDownloadingState(for: section)
             switch currentState {
             case .available(let isCached):
-                return isCached
-                    ? self.removeCached(section: section)
-                    : self.startDownloading(section: section)
+                if isCached {
+                    self.presenter.presentDeleteDownloadsConfirmationAlert(
+                        response: .init(
+                            type: .section,
+                            cancelActionHandler: {},
+                            confirmedActionHandler: { [weak self] in
+                                self?.removeCached(section: section)
+                            }
+                        )
+                    )
+                } else {
+                    self.startDownloading(section: section)
+                }
             case .downloading:
                 self.cancelDownloading(section: section)
             default:
