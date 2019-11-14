@@ -149,9 +149,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             self.unitIDsBySectionID[section.id, default: []].insert(unit.id)
         }
 
-        self.videoIDsByUnitID[unit.id] = uncachedVideosIDs
+        let uniqueUncachedVideosIDs = uncachedVideosIDs.symmetricDifference(self.videoIDsByUnitID[unit.id, default: []])
+        uncachedVideosIDs.forEach { self.videoIDsByUnitID[unit.id, default: []].insert($0) }
 
-        for video in uncachedVideos where !self.activeVideoDownloads.contains(video.id) {
+        let uniqueUncachedVideos = uncachedVideos.filter { uniqueUncachedVideosIDs.contains($0.id) }
+        for video in uniqueUncachedVideos where !self.activeVideoDownloads.contains(video.id) {
             try self.videoDownloadingService.download(video: video)
             self.activeVideoDownloads.insert(video.id)
         }
@@ -436,11 +438,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     private func getVideoDownloadProgress(_ video: Video) -> Float? {
-        if self.activeVideoDownloads.contains(video.id),
-           let progress = self.progressByVideoID[video.id] {
-            return progress
-        }
-        return nil
+        return self.progressByVideoID[video.id]
     }
 
     private func getUnitDownloadProgress(unitID: Unit.IdType) -> Float? {
