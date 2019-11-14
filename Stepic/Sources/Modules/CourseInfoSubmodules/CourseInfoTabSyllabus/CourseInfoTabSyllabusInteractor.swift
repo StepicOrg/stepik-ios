@@ -670,7 +670,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.presenter.presentDownloadButtonUpdate(
-                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                response: .init(
                     source: .unit(entity: unit),
                     downloadState: self.getDownloadingStateForUnit(unit)
                 )
@@ -698,7 +698,7 @@ extension CourseInfoTabSyllabusInteractor {
         }.ensure {
             section.units.forEach { unit in
                 self.presenter.presentDownloadButtonUpdate(
-                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                    response: .init(
                         source: .unit(entity: unit),
                         downloadState: self.getDownloadingStateForUnit(unit)
                     )
@@ -706,7 +706,7 @@ extension CourseInfoTabSyllabusInteractor {
             }
 
             self.presenter.presentDownloadButtonUpdate(
-                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                response: .init(
                     source: .section(entity: section),
                     downloadState: self.getDownloadingStateForSection(section)
                 )
@@ -728,7 +728,7 @@ extension CourseInfoTabSyllabusInteractor {
         )
 
         self.presenter.presentDownloadButtonUpdate(
-            response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+            response: .init(
                 source: .unit(entity: unit),
                 downloadState: .waiting
             )
@@ -738,17 +738,19 @@ extension CourseInfoTabSyllabusInteractor {
             CourseInfoTabSyllabusInteractor.logger.info(
                 "course info tab syllabus interactor: started downloading unit = \(unitID)"
             )
+        }.ensure {
+            self.presenter.presentDownloadButtonUpdate(
+                response: .init(
+                    source: .unit(entity: unit),
+                    downloadState: self.getDownloadingStateForUnit(unit)
+                )
+            )
+            // TODO: Update section download state
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while starting download unit = \(unitID), error = \(error)"
             )
 
-            self.presenter.presentDownloadButtonUpdate(
-                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
-                    source: .unit(entity: unit),
-                    downloadState: .available(isCached: false)
-                )
-            )
             self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }
@@ -769,7 +771,7 @@ extension CourseInfoTabSyllabusInteractor {
         }.ensure {
             section.units.forEach { unit in
                 self.presenter.presentDownloadButtonUpdate(
-                    response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                    response: .init(
                         source: .unit(entity: unit),
                         downloadState: self.getDownloadingStateForUnit(unit)
                     )
@@ -777,9 +779,9 @@ extension CourseInfoTabSyllabusInteractor {
             }
 
             self.presenter.presentDownloadButtonUpdate(
-                response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
+                response: .init(
                     source: .section(entity: section),
-                    downloadState: .available(isCached: false)
+                    downloadState: self.getDownloadingStateForSection(section)
                 )
             )
         }.catch { error in

@@ -124,10 +124,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return when(
             fulfilled: fetchStepsPromises
         ).done { result in
-            self.unitIDsBySectionID[section.id] = []
-
             for (unit, steps) in result {
-                try self.startDownloading(section: section, unit: unit, steps: steps)
+                try? self.startDownloading(section: section, unit: unit, steps: steps)
             }
         }
     }
@@ -148,7 +146,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         if let section = section {
-            self.unitIDsBySectionID[section.id]?.insert(unit.id)
+            self.unitIDsBySectionID[section.id, default: []].insert(unit.id)
         }
 
         self.videoIDsByUnitID[unit.id] = uncachedVideosIDs
