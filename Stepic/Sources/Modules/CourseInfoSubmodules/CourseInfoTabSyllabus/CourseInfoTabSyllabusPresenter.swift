@@ -3,6 +3,7 @@ import UIKit
 protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response)
     func presentDownloadButtonUpdate(response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response)
+    func presentDeleteDownloadsConfirmationAlert(response: CourseInfoTabSyllabus.DeleteDownloadsConfirmation.Response)
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
     func presentFailedVideoDownloadAlert(response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response)
@@ -103,6 +104,46 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
     }
 
+    func presentDeleteDownloadsConfirmationAlert(response: CourseInfoTabSyllabus.DeleteDownloadsConfirmation.Response) {
+        let actions: [CourseInfoTabSyllabus.DeleteDownloadsConfirmation.Action] = [
+            .init(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: response.cancelActionHandler
+            ),
+            .init(
+                title: NSLocalizedString("Delete", comment: ""),
+                style: .destructive,
+                handler: response.confirmedActionHandler
+            )
+        ]
+
+        switch response.type {
+        case .unit:
+            self.viewController?.displayDeleteDownloadsConfirmationAlert(
+                viewModel: .init(
+                    title: NSLocalizedString("CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle", comment: ""),
+                    message: NSLocalizedString(
+                        "CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationMessage", comment: ""
+                    ),
+                    actions: actions
+                )
+            )
+        case .section:
+            self.viewController?.displayDeleteDownloadsConfirmationAlert(
+                viewModel: .init(
+                    title: NSLocalizedString(
+                        "CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationTitle", comment: ""
+                    ),
+                    message: NSLocalizedString(
+                        "CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationMessage", comment: ""
+                    ),
+                    actions: actions
+                )
+            )
+        }
+    }
+
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response) {
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
@@ -129,6 +170,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             )
         }
     }
+
+    // MARK: - Private API
 
     private func makeSectionViewModel(
         index: Int,
