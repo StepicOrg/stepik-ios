@@ -58,6 +58,37 @@ enum CourseInfoTabSyllabus {
         }
     }
 
+    /// Request delete downloads confirmation via alert
+    enum DeleteDownloadsConfirmation {
+        enum `Type` {
+            case section
+            case unit
+        }
+
+        struct Response {
+            let type: Type
+            let cancelActionHandler: (() -> Void)
+            let confirmedActionHandler: (() -> Void)
+        }
+
+        struct Action {
+            let title: String
+            let style: Style
+            let handler: (() -> Void)
+
+            enum Style {
+                case cancel
+                case destructive
+            }
+        }
+
+        struct ViewModel {
+            let title: String?
+            let message: String
+            let actions: [Action]
+        }
+    }
+
     /// Update download state
     enum DownloadButtonStateUpdate {
         enum Source {

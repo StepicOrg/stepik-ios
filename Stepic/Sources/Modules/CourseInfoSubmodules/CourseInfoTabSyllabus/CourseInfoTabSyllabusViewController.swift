@@ -3,6 +3,7 @@ import UIKit
 protocol CourseInfoTabSyllabusViewControllerProtocol: class {
     func displaySyllabus(viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel)
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
+    func displayDeleteDownloadsConfirmationAlert(viewModel: CourseInfoTabSyllabus.DeleteDownloadsConfirmation.ViewModel)
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayFailedVideoDownloadAlert(
@@ -16,6 +17,8 @@ protocol CourseInfoTabSyllabusViewControllerDelegate: class {
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusUnitViewModel)
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusSectionViewModel)
 }
+
+// MARK: - CourseInfoTabSyllabusViewController: UIViewController -
 
 final class CourseInfoTabSyllabusViewController: UIViewController {
     private let interactor: CourseInfoTabSyllabusInteractorProtocol
@@ -54,6 +57,8 @@ final class CourseInfoTabSyllabusViewController: UIViewController {
         self.view = view
     }
 }
+
+// MARK: - CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerProtocol -
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerProtocol {
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel) {
@@ -96,6 +101,27 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         }
     }
 
+    func displayDeleteDownloadsConfirmationAlert(
+        viewModel: CourseInfoTabSyllabus.DeleteDownloadsConfirmation.ViewModel
+    ) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+
+        viewModel.actions.forEach { action in
+            let style: UIAlertAction.Style = {
+                switch action.style {
+                case .cancel:
+                    return .cancel
+                case .destructive:
+                    return .destructive
+                }
+            }()
+
+            alert.addAction(UIAlertAction(title: action.title, style: style, handler: { _ in action.handler() }))
+        }
+
+        self.present(alert, animated: true)
+    }
+
     func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
@@ -112,6 +138,8 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         self.present(alert, animated: true)
     }
 }
+
+// MARK: - CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerDelegate -
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControllerDelegate {
     func sectionWillDisplay(_ section: CourseInfoTabSyllabusSectionViewModel) {
@@ -138,6 +166,8 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         )
     }
 }
+
+// MARK: - CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate -
 
 extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewDelegate {
     func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView) {
