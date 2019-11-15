@@ -10,7 +10,7 @@ import DownloadButton
 import SVProgressHUD
 import UIKit
 
-final class DownloadsViewController: UIViewController {
+final class LegacyDownloadsViewController: UIViewController {
     @IBOutlet weak var tableView: StepikTableView!
 
     var cachedVideos: [Video] = []
@@ -21,8 +21,8 @@ final class DownloadsViewController: UIViewController {
         self.edgesForExtendedLayout = []
 
         self.tableView.register(
-            UINib(nibName: "DownloadTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "DownloadTableViewCell"
+            UINib(nibName: "LegacyDownloadTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "LegacyDownloadTableViewCell"
         )
 
         self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyDownloads) { [weak self] in
@@ -115,16 +115,16 @@ final class DownloadsViewController: UIViewController {
 
 // MARK: - DownloadsViewController: UITableViewDataSource -
 
-extension DownloadsViewController: UITableViewDataSource {
+extension LegacyDownloadsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.cachedVideos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "DownloadTableViewCell",
+            withIdentifier: "LegacyDownloadTableViewCell",
             for: indexPath
-        ) as? DownloadTableViewCell else {
+        ) as? LegacyDownloadTableViewCell else {
             return UITableViewCell()
         }
 
@@ -138,7 +138,7 @@ extension DownloadsViewController: UITableViewDataSource {
 
 // MARK: - DownloadsViewController: UITableViewDelegate -
 
-extension DownloadsViewController: UITableViewDelegate {
+extension LegacyDownloadsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 

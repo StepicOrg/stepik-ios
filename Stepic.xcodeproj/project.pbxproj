@@ -211,8 +211,8 @@
 		0888D1021F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */; };
 		0888D1051F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */; };
 		0888D1091F1E42A000A16863 /* CodeElementsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0888D1081F1E42A000A16863 /* CodeElementsSize.swift */; };
-		0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */; };
-		0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */; };
+		0889FEB21BFB864B00C6417E /* LegacyDownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEB01BFB864B00C6417E /* LegacyDownloadTableViewCell.swift */; };
+		0889FEB31BFB864B00C6417E /* LegacyDownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0889FEB11BFB864B00C6417E /* LegacyDownloadTableViewCell.xib */; };
 		088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */; };
 		088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */; };
 		088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */; };
@@ -547,7 +547,7 @@
 		2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */; };
 		2C87DE1E22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87DE1D22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
-		2C8AD7662208646100C9C089 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */; };
+		2C8AD7662208646100C9C089 /* LegacyDownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0889FEAE1BFB771200C6417E /* LegacyDownloadsViewController.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C97E008215E47D8005684A1 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
@@ -1289,9 +1289,9 @@
 		0888D1001F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeInputAccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0888D1011F1E41FF00A16863 /* CodeInputAccessoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CodeInputAccessoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		0888D1081F1E42A000A16863 /* CodeElementsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeElementsSize.swift; sourceTree = "<group>"; };
-		0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
-		0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewCell.swift; sourceTree = "<group>"; };
-		0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
+		0889FEAE1BFB771200C6417E /* LegacyDownloadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyDownloadsViewController.swift; sourceTree = "<group>"; };
+		0889FEB01BFB864B00C6417E /* LegacyDownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegacyDownloadTableViewCell.swift; sourceTree = "<group>"; };
+		0889FEB11BFB864B00C6417E /* LegacyDownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegacyDownloadTableViewCell.xib; sourceTree = "<group>"; };
 		088CB1EB1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeAnswerDataset.swift; sourceTree = "<group>"; };
 		088E58C01DE34E2F0009B9CE /* SocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialSDKProvider.swift; sourceTree = "<group>"; };
 		088E58C31DE34ED20009B9CE /* VKSocialSDKProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKSocialSDKProvider.swift; sourceTree = "<group>"; };
@@ -2944,9 +2944,9 @@
 		0889FEAD1BFB76FF00C6417E /* Downloads */ = {
 			isa = PBXGroup;
 			children = (
-				0889FEAE1BFB771200C6417E /* DownloadsViewController.swift */,
-				0889FEB01BFB864B00C6417E /* DownloadTableViewCell.swift */,
-				0889FEB11BFB864B00C6417E /* DownloadTableViewCell.xib */,
+				0889FEAE1BFB771200C6417E /* LegacyDownloadsViewController.swift */,
+				0889FEB01BFB864B00C6417E /* LegacyDownloadTableViewCell.swift */,
+				0889FEB11BFB864B00C6417E /* LegacyDownloadTableViewCell.xib */,
 			);
 			name = Downloads;
 			sourceTree = "<group>";
@@ -5703,7 +5703,7 @@
 				08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */,
 				2C7FEE741FDAF9D600B2B4F1 /* onboardingAnimation4.json in Resources */,
 				08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */,
-				0889FEB31BFB864B00C6417E /* DownloadTableViewCell.xib in Resources */,
+				0889FEB31BFB864B00C6417E /* LegacyDownloadTableViewCell.xib in Resources */,
 				08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */,
 				2CB2393F20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.xib in Resources */,
 				2C22043020E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib in Resources */,
@@ -6351,9 +6351,9 @@
 				2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */,
 				0885F8561BA9F18900F2A188 /* Parser.swift in Sources */,
 				087585A31FB50D640047A269 /* CourseListsAPI.swift in Sources */,
-				2C8AD7662208646100C9C089 /* DownloadsViewController.swift in Sources */,
+				2C8AD7662208646100C9C089 /* LegacyDownloadsViewController.swift in Sources */,
 				08E43E98214C279700E3CB50 /* PushRouter.swift in Sources */,
-				0889FEB21BFB864B00C6417E /* DownloadTableViewCell.swift in Sources */,
+				0889FEB21BFB864B00C6417E /* LegacyDownloadTableViewCell.swift in Sources */,
 				2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */,
 				08DF789E1F5DE64300AEEA85 /* ArtView.swift in Sources */,
 				2CF1DD9C230A8D780083350A /* NewSortingQuizViewModel.swift in Sources */,

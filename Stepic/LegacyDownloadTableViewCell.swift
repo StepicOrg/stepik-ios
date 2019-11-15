@@ -9,7 +9,7 @@
 import DownloadButton
 import UIKit
 
-final class DownloadTableViewCell: UITableViewCell {
+final class LegacyDownloadTableViewCell: UITableViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var lessonNameLabel: StepikLabel!
     @IBOutlet weak var qualityLabel: StepikLabel!

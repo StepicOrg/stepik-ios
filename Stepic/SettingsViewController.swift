@@ -278,7 +278,7 @@ extension SettingsViewController: SettingsView {
         guard let viewController = ControllerHelper.instantiateViewController(
             identifier: "DownloadsViewController",
             storyboardName: "Main"
-        ) as? DownloadsViewController else {
+        ) as? LegacyDownloadsViewController else {
             return
         }
 
