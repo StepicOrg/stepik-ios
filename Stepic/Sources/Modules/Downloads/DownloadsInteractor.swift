@@ -6,8 +6,6 @@ protocol DownloadsInteractorProtocol {
 }
 
 final class DownloadsInteractor: DownloadsInteractorProtocol {
-    weak var moduleOutput: DownloadsOutputProtocol?
-
     private let presenter: DownloadsPresenterProtocol
     private let provider: DownloadsProviderProtocol
 
@@ -25,5 +23,3 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
         case something
     }
 }
-
-extension DownloadsInteractor: DownloadsInputProtocol { }

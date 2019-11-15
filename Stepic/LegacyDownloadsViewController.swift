@@ -24,12 +24,8 @@ final class LegacyDownloadsViewController: UIViewController {
             UINib(nibName: "LegacyDownloadTableViewCell", bundle: nil),
             forCellReuseIdentifier: "LegacyDownloadTableViewCell"
         )
-
-        self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyDownloads) { [weak self] in
-            self?.tabBarController?.selectedIndex = 1
-        }
+        self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyDownloads) { TabBarRouter(tab: .catalog).route() }
         self.tableView.tableFooterView = UIView()
-
         self.tableView.contentInsetAdjustmentBehavior = .never
     }
 
