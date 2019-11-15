@@ -156,12 +156,12 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
-        static func deleteDownloadsConfirmationInteracted(content: Content, confirmed: Bool) -> AnalyticsEvent {
+        static func deleteDownloadsConfirmationInteracted(content: Content, isConfirmed: Bool) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Delete downloads confirmation interacted",
                 parameters: [
                     "content": content.rawValue,
-                    "result": confirmed ? "yes" : "no"
+                    "result": isConfirmed ? "yes" : "no"
                 ]
             )
         }

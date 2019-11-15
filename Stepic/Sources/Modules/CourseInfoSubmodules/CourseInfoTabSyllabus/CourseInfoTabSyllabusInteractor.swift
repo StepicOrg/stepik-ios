@@ -163,12 +163,12 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                             type: .unit,
                             cancelActionHandler: {
                                 AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .lesson, confirmed: false
+                                    content: .lesson, isConfirmed: false
                                 ).send()
                             },
                             confirmedActionHandler: { [weak self] in
                                 AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .lesson, confirmed: true
+                                    content: .lesson, isConfirmed: true
                                 ).send()
                                 self?.removeCached(unit: unit)
                             }
@@ -199,12 +199,12 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                             type: .section,
                             cancelActionHandler: {
                                 AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .section, confirmed: false
+                                    content: .section, isConfirmed: false
                                 ).send()
                             },
                             confirmedActionHandler: { [weak self] in
                                 AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .section, confirmed: true
+                                    content: .section, isConfirmed: true
                                 ).send()
                                 self?.removeCached(section: section)
                             }
