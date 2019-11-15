@@ -9,6 +9,7 @@ enum Downloads {
         }
 
         let downloadedItemsByCourse: [Course: [Item]]
+        let adaptiveCoursesIDs: [Course.IdType]
     }
 
     // MARK: - Use cases -

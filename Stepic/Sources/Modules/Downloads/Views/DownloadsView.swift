@@ -1,14 +1,31 @@
 import SnapKit
 import UIKit
 
+// MARK: Appearance -
+
 extension DownloadsView {
-    struct Appearance { }
+    struct Appearance {
+        let estimatedRowHeight: CGFloat = 96
+    }
 }
 
 // MARK: - DownloadsView: UIView -
 
 final class DownloadsView: UIView {
     let appearance: Appearance
+
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = self.appearance.estimatedRowHeight
+
+        tableView.register(cellClass: DownloadsTableViewCell.self)
+
+        tableView.delegate = self
+
+        return tableView
+    }()
 
     init(
         frame: CGRect = .zero,
@@ -26,16 +43,34 @@ final class DownloadsView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Public API
+
+    func updateTableViewData(dataSource: UITableViewDataSource) {
+        self.tableView.dataSource = dataSource
+        self.tableView.reloadData()
+    }
 }
 
 // MARK: - DownloadsView: ProgrammaticallyInitializableViewProtocol -
 
 extension DownloadsView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {
-        self.backgroundColor = .white
+    func addSubviews() {
+        self.addSubview(self.tableView)
     }
 
-    func addSubviews() { }
+    func makeConstraints() {
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+}
 
-    func makeConstraints() { }
+// MARK: - DownloadsView: UITableViewDelegate -
+
+extension DownloadsView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

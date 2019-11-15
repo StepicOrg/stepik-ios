@@ -49,12 +49,13 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
             }
         }
 
-        return .init(downloadedItemsByCourse: downloadedItemsByCourse)
-    }
+        let availableAdaptiveCoursesIDs = self.currentCachedStepsByCourse.keys.compactMap {
+            self.provider.isAdaptiveCourse(courseID: $0.id) ? $0.id : nil
+        }
 
-    // MARK: - Types
-
-    enum Error: Swift.Error {
-        case something
+        return .init(
+            downloadedItemsByCourse: downloadedItemsByCourse,
+            adaptiveCoursesIDs: availableAdaptiveCoursesIDs
+        )
     }
 }

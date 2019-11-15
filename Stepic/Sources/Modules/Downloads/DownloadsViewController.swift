@@ -13,6 +13,8 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
+    private lazy var downloadsTableViewDataSource = DownloadsTableViewDataSource()
+
     // MARK: UIViewController life cycle
 
     init(interactor: DownloadsInteractorProtocol) {
@@ -70,6 +72,7 @@ extension DownloadsViewController: DownloadsViewControllerProtocol {
             self.isPlaceholderShown = false
         }
 
-        // TODO: Update list view
+        self.downloadsTableViewDataSource.update(viewModels: newData)
+        self.downloadsView?.updateTableViewData(dataSource: self.downloadsTableViewDataSource)
     }
 }

@@ -4,20 +4,24 @@ import PromiseKit
 protocol DownloadsProviderProtocol {
     func fetchCachedSteps() -> Guarantee<[Course: [Step]]>
     func getVideoFileSize(videoID: Video.IdType) -> UInt64
+    func isAdaptiveCourse(courseID: Course.IdType) -> Bool
 }
 
 final class DownloadsProvider: DownloadsProviderProtocol {
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
     private let videoFileManager: VideoStoredFileManagerProtocol
+    private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
     private var videoFileSizeCache: [Video.IdType: UInt64] = [:]
 
     init(
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
-        videoFileManager: VideoStoredFileManagerProtocol
+        videoFileManager: VideoStoredFileManagerProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol
     ) {
         self.coursesPersistenceService = coursesPersistenceService
         self.videoFileManager = videoFileManager
+        self.adaptiveStorageManager = adaptiveStorageManager
     }
 
     func fetchCachedSteps() -> Guarantee<[Course: [Step]]> {
@@ -46,6 +50,10 @@ final class DownloadsProvider: DownloadsProviderProtocol {
             self.videoFileSizeCache[videoID] = cachedVideoFileSize
             return cachedVideoFileSize
         }
+    }
+
+    func isAdaptiveCourse(courseID: Course.IdType) -> Bool {
+        return self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: courseID)
     }
 
     // MARK: - Private API
