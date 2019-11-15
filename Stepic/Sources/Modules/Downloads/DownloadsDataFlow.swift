@@ -1,11 +1,28 @@
 import Foundation
 
 enum Downloads {
-    enum SomeAction {
+    // MARK: Common structs
+
+    struct DownloadsData {
+        struct Item {
+            let sizeInBytes: UInt64
+        }
+
+        let downloadedItemsByCourse: [Course: [Item]]
+    }
+
+    // MARK: - Use cases -
+
+    /// Show downloads
+    enum DownloadsLoad {
         struct Request { }
 
-        struct Response { }
+        struct Response {
+            let data: DownloadsData
+        }
 
-        struct ViewModel { }
+        struct ViewModel {
+            let downloads: [DownloadsItemViewModel]
+        }
     }
 }

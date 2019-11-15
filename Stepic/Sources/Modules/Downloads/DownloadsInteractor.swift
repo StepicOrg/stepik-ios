@@ -2,8 +2,10 @@ import Foundation
 import PromiseKit
 
 protocol DownloadsInteractorProtocol {
-    func doSomeAction(request: Downloads.SomeAction.Request)
+    func doDownloadsFetch(request: Downloads.DownloadsLoad.Request)
 }
+
+// MARK: - DownloadsInteractor: DownloadsInteractorProtocol -
 
 final class DownloadsInteractor: DownloadsInteractorProtocol {
     private let presenter: DownloadsPresenterProtocol
@@ -17,7 +19,19 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
         self.provider = provider
     }
 
-    func doSomeAction(request: Downloads.SomeAction.Request) { }
+    // MARK: - DownloadsInteractorProtocol
+
+    func doDownloadsFetch(request: Downloads.DownloadsLoad.Request) {
+        self.presenter.presentDownloads(response: .init(data: self.makeDownloadsData()))
+    }
+
+    // MARK: - Private API
+
+    private func makeDownloadsData() -> Downloads.DownloadsData {
+        return .init(downloadedItemsByCourse: [:])
+    }
+
+    // MARK: - Types
 
     enum Error: Swift.Error {
         case something

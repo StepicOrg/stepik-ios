@@ -5,6 +5,8 @@ extension DownloadsView {
     struct Appearance { }
 }
 
+// MARK: - DownloadsView: UIView -
+
 final class DownloadsView: UIView {
     let appearance: Appearance
 
@@ -26,8 +28,12 @@ final class DownloadsView: UIView {
     }
 }
 
+// MARK: - DownloadsView: ProgrammaticallyInitializableViewProtocol -
+
 extension DownloadsView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
+    func setupView() {
+        self.backgroundColor = .white
+    }
 
     func addSubviews() { }
 
