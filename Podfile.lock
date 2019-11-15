@@ -13,12 +13,9 @@ PODS:
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
-  - CocoaLumberjack (3.4.2):
-    - CocoaLumberjack/Default (= 3.4.2)
-    - CocoaLumberjack/Extensions (= 3.4.2)
-  - CocoaLumberjack/Default (3.4.2)
-  - CocoaLumberjack/Extensions (3.4.2):
-    - CocoaLumberjack/Default
+  - CocoaLumberjack (3.6.0):
+    - CocoaLumberjack/Core (= 3.6.0)
+  - CocoaLumberjack/Core (3.6.0)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - CRToast (0.0.9)
@@ -160,7 +157,7 @@ PODS:
     - PromiseKit/CorePromise
   - Protobuf (3.10.0)
   - Quick (2.2.0)
-  - Reveal-SDK (20)
+  - Reveal-SDK (24)
   - SDWebImage (5.3.1):
     - SDWebImage/Core (= 5.3.1)
   - SDWebImage/Core (5.3.1)
@@ -171,7 +168,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.1.0)
   - SwiftLint (0.35.0)
-  - SwiftyGif (5.1.1)
+  - SwiftyGif (5.2.0)
   - SwiftyJSON (5.0.0)
   - Tabman (2.4.3):
     - AutoInsetter (~> 1.7.2)
@@ -319,7 +316,7 @@ CHECKOUT OPTIONS:
     :commit: cca23268da048a8d16b7a1dd88dcbd7dbda92a7b
     :git: https://github.com/ivan-magda/swift-log.git
   SVGKit:
-    :commit: bfe62f6d45f55c9fe39619d9e91fed1844c59da6
+    :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
   TSMessages:
     :commit: e4802d290362c87ba8a35c1afae88668dba8ab9a
@@ -335,7 +332,7 @@ SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: 3cc6dcfd726db42ced22c418c0fb09aa5e90a847
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
-  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   DeviceKit: da103891aa928d89f64ea8dd8aca738c5f3d8ac0
@@ -375,7 +372,7 @@ SPEC CHECKSUMS:
   PromiseKit: e4863d06976e7dee5e41c04fc7371c16b3600292
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
-  Reveal-SDK: 43206a57f575632fd304e85385cc259b5d359e32
+  Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
   SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   STRegex: dfa420d93d8c1402956233b3879ec1fc14b45fbe
@@ -383,7 +380,7 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftLint: 5553187048b900c91aa03552807681bb6b027846
-  SwiftyGif: f7702483db93586a41f04f4927cd682852a2fa10
+  SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: c2c83ebfcbec3e5be67e27a1dd6689a4e3efccd3
   TSMessages: eb3cf27b6900684a21bad4fe9ea426e287b8c839
