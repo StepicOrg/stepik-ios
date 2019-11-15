@@ -161,8 +161,15 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     self.presenter.presentDeleteDownloadsConfirmationAlert(
                         response: .init(
                             type: .unit,
-                            cancelActionHandler: {},
+                            cancelActionHandler: {
+                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                    content: .lesson, confirmed: false
+                                ).send()
+                            },
                             confirmedActionHandler: { [weak self] in
+                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                    content: .lesson, confirmed: true
+                                ).send()
                                 self?.removeCached(unit: unit)
                             }
                         )
@@ -190,8 +197,15 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     self.presenter.presentDeleteDownloadsConfirmationAlert(
                         response: .init(
                             type: .section,
-                            cancelActionHandler: {},
+                            cancelActionHandler: {
+                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                    content: .section, confirmed: false
+                                ).send()
+                            },
                             confirmedActionHandler: { [weak self] in
+                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                    content: .section, confirmed: true
+                                ).send()
                                 self?.removeCached(section: section)
                             }
                         )
@@ -207,7 +221,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
 
         func handleAll() {
-            AmplitudeAnalyticsEvents.Downloads.started(content: "course").send()
+            AmplitudeAnalyticsEvents.Downloads.started(content: .course).send()
             self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
             self.forceLoadAllSectionsIfNeeded().done {
                 for (uid, section) in self.currentSections {
@@ -605,7 +619,7 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
 extension CourseInfoTabSyllabusInteractor {
     private func cancelDownloading(unit: Unit) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cancel, parameters: nil)
-        AmplitudeAnalyticsEvents.Downloads.cancelled(content: "lesson").send()
+        AmplitudeAnalyticsEvents.Downloads.cancelled(content: .lesson).send()
 
         self.syllabusDownloadsService.cancel(unit: unit).done {
             print("course info tab syllabus interactor: successfully cancelled unit")
@@ -616,7 +630,7 @@ extension CourseInfoTabSyllabusInteractor {
 
     private func cancelDownloading(section: Section) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cancel, parameters: nil)
-        AmplitudeAnalyticsEvents.Downloads.cancelled(content: "section").send()
+        AmplitudeAnalyticsEvents.Downloads.cancelled(content: .section).send()
 
         self.syllabusDownloadsService.cancel(section: section).done {
             print("course info tab syllabus interactor: successfully cancelled section")
@@ -627,7 +641,7 @@ extension CourseInfoTabSyllabusInteractor {
 
     private func removeCached(unit: Unit) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: "lesson").send()
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: .lesson).send()
 
         self.syllabusDownloadsService.remove(unit: unit).done {
             print("course info tab syllabus interactor: successfully removed unit")
@@ -645,7 +659,7 @@ extension CourseInfoTabSyllabusInteractor {
 
     private func removeCached(section: Section) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: "section").send()
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: .section).send()
 
         self.syllabusDownloadsService.remove(section: section).done {
             print("course info tab syllabus interactor: successfully removed section")
@@ -671,7 +685,7 @@ extension CourseInfoTabSyllabusInteractor {
 
     private func startDownloading(unit: Unit) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.cache, parameters: nil)
-        AmplitudeAnalyticsEvents.Downloads.started(content: "lesson").send()
+        AmplitudeAnalyticsEvents.Downloads.started(content: .lesson).send()
 
         self.presenter.presentDownloadButtonUpdate(
             response: CourseInfoTabSyllabus.DownloadButtonStateUpdate.Response(
@@ -695,7 +709,7 @@ extension CourseInfoTabSyllabusInteractor {
 
     private func startDownloading(section: Section) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.Section.cache, parameters: nil)
-        AmplitudeAnalyticsEvents.Downloads.started(content: "section").send()
+        AmplitudeAnalyticsEvents.Downloads.started(content: .section).send()
 
         self.syllabusDownloadsService.download(section: section).done {
             print("course info tab syllabus interactor: started downloading section")
