@@ -19,7 +19,7 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
                 sizeInBytes: downloadedItemsSizeInBytes,
                 availableAdaptiveCoursesIDs: response.data.adaptiveCoursesIDs
             )
-        }
+        }.sorted { $0.id < $1.id }
 
         self.viewController?.displayDownloads(viewModel: .init(downloads: downloads))
     }
@@ -35,7 +35,7 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
         let formattedSize = "\(sizeInMegabytes) \(NSLocalizedString("Mb", comment: ""))"
 
         return DownloadsItemViewModel(
-            uniqueIdentifier: "\(course.id)",
+            id: course.id,
             coverImageURL: URL(string: course.coverURLString),
             isAdaptive: availableAdaptiveCoursesIDs.contains(course.id),
             title: course.title,

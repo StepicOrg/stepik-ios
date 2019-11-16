@@ -1,8 +1,7 @@
 import Foundation
 
-struct DownloadsItemViewModel: UniqueIdentifiable {
-    let uniqueIdentifier: UniqueIdentifierType
-
+struct DownloadsItemViewModel {
+    let id: Int
     let coverImageURL: URL?
     let isAdaptive: Bool
     let title: String
