@@ -29,6 +29,7 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
 
     override func loadView() {
         let view = DownloadsView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 
@@ -74,5 +75,17 @@ extension DownloadsViewController: DownloadsViewControllerProtocol {
 
         self.downloadsTableViewDataSource.update(viewModels: newData)
         self.downloadsView?.updateTableViewData(dataSource: self.downloadsTableViewDataSource)
+    }
+}
+
+// MARK: - DownloadsViewController: DownloadsViewDelegate -
+
+extension DownloadsViewController: DownloadsViewDelegate {
+    func downloadsView(_ downloadsView: DownloadsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath) {
+        guard let selectedViewModel = self.downloadsTableViewDataSource.viewModels[safe: indexPath.row] else {
+            return
+        }
+
+        print(selectedViewModel)
     }
 }

@@ -9,10 +9,18 @@ extension DownloadsView {
     }
 }
 
+// MARK: - DownloadsViewDelegate -
+
+protocol DownloadsViewDelegate: class {
+    func downloadsView(_ downloadsView: DownloadsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath)
+}
+
 // MARK: - DownloadsView: UIView -
 
 final class DownloadsView: UIView {
     let appearance: Appearance
+
+    weak var delegate: DownloadsViewDelegate?
 
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -44,7 +52,7 @@ final class DownloadsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Public API
+    // MARK: Public API
 
     func updateTableViewData(dataSource: UITableViewDataSource) {
         self.tableView.dataSource = dataSource
@@ -72,5 +80,9 @@ extension DownloadsView: ProgrammaticallyInitializableViewProtocol {
 extension DownloadsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        if let selectedCell = tableView.cellForRow(at: indexPath) {
+            self.delegate?.downloadsView(self, didSelectCell: selectedCell, at: indexPath)
+        }
     }
 }

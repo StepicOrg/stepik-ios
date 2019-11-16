@@ -1,7 +1,7 @@
 import UIKit
 
 final class DownloadsTableViewDataSource: NSObject {
-    private var viewModels: [DownloadsItemViewModel]
+    private(set) var viewModels: [DownloadsItemViewModel]
 
     init(viewModels: [DownloadsItemViewModel] = []) {
         self.viewModels = viewModels
