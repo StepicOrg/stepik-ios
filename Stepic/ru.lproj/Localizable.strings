@@ -796,3 +796,6 @@ WriteCommentActionButtonCreate = "Отправить";
 WriteCommentActionButtonEdit = "Обновить";
 WriteCommentCancelPromptMessage = "Удалить черновик?";
 WriteCommentCancelPromptDestructiveActionTitle = "Удалить";
+
+/* Downloads */
+DownloadsTitle = "Загруженные курсы";

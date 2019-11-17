@@ -36,7 +36,7 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("Downloads", comment: "")
+        self.title = NSLocalizedString("DownloadsTitle", comment: "")
         self.registerPlaceholders()
     }
 

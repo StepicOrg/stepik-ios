@@ -795,3 +795,6 @@ WriteCommentActionButtonCreate = "Send";
 WriteCommentActionButtonEdit = "Update";
 WriteCommentCancelPromptMessage = "Delete draft?";
 WriteCommentCancelPromptDestructiveActionTitle = "Delete";
+
+/* Downloads */
+DownloadsTitle = "Downloaded courses";
