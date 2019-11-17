@@ -90,6 +90,7 @@ extension DownloadsViewController: DownloadsViewControllerProtocol {
     private func updateDownloadsData(newData: [DownloadsItemViewModel]) {
         if newData.isEmpty {
             self.showPlaceholder(for: .empty)
+            self.setEditing(false, animated: true)
             self.navigationItem.rightBarButtonItem = nil
         } else {
             self.isPlaceholderShown = false
