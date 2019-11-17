@@ -38,6 +38,8 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
             )
         }
 
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: .course, source: .downloads).send()
+
         self.provider.deleteSteps(steps).done { succeededIDs, failedIDs in
             if succeededIDs.count == steps.count {
                 self.currentCachedStepsByCourse[course] = nil

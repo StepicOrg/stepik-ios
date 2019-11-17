@@ -51,6 +51,11 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
         self.interactor.doDownloadsFetch(request: .init())
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AmplitudeAnalyticsEvents.Downloads.downloadsScreenOpened.send()
+    }
+
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         self.downloadsView?.setEditing(editing, animated: animated)
