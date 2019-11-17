@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol DownloadsInteractorProtocol {
     func doDownloadsFetch(request: Downloads.DownloadsLoad.Request)
+    func doDeleteDownload(request: Downloads.DeleteDownload.Request)
 }
 
 // MARK: - DownloadsInteractor: DownloadsInteractorProtocol -
@@ -27,6 +28,26 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
         self.provider.fetchCachedSteps().done { cachedStepsByCourse in
             self.currentCachedStepsByCourse = cachedStepsByCourse
             self.presenter.presentDownloads(response: .init(data: self.makeDownloadsDataFromCurrentData()))
+        }
+    }
+
+    func doDeleteDownload(request: Downloads.DeleteDownload.Request) {
+        guard let (course, steps) = self.currentCachedStepsByCourse.first(where: { $0.key.id == request.id }) else {
+            return self.presenter.presentDeleteDownloadResult(
+                response: .init(data: self.makeDownloadsDataFromCurrentData())
+            )
+        }
+
+        self.provider.deleteSteps(steps).done { succeededIDs, failedIDs in
+            if succeededIDs.count == steps.count {
+                self.currentCachedStepsByCourse[course] = nil
+            } else {
+                self.currentCachedStepsByCourse[course] = self.currentCachedStepsByCourse[course]?.filter {
+                    failedIDs.contains($0.id)
+                }
+            }
+
+            self.presenter.presentDeleteDownloadResult(response: .init(data: self.makeDownloadsDataFromCurrentData()))
         }
     }
 

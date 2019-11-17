@@ -5,6 +5,7 @@ protocol DownloadsProviderProtocol {
     func fetchCachedSteps() -> Guarantee<[Course: [Step]]>
     func getVideoFileSize(videoID: Video.IdType) -> UInt64
     func isAdaptiveCourse(courseID: Course.IdType) -> Bool
+    func deleteSteps(_ steps: [Step]) -> Guarantee<(succeededIDs: [Step.IdType], failedIDs: [Step.IdType])>
 }
 
 final class DownloadsProvider: DownloadsProviderProtocol {
@@ -56,6 +57,39 @@ final class DownloadsProvider: DownloadsProviderProtocol {
         return self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: courseID)
     }
 
+    func deleteSteps(_ steps: [Step]) -> Guarantee<(succeededIDs: [Step.IdType], failedIDs: [Step.IdType])> {
+        var succeededIDs = [Step.IdType]()
+        var failedIDs = [Step.IdType]()
+
+        return Guarantee { seal in
+            for step in steps {
+                let stepID = step.id
+
+                if step.block.type == .Video {
+                    guard let video = step.block.video else {
+                        failedIDs.append(stepID)
+                        continue
+                    }
+
+                    do {
+                        try self.deleteVideo(video)
+                    } catch {
+                        failedIDs.append(stepID)
+                    }
+
+                    succeededIDs.append(stepID)
+                } else {
+                    self.deleteStep(step)
+                    succeededIDs.append(stepID)
+                }
+            }
+
+            CoreDataHelper.instance.save()
+
+            seal((succeededIDs, failedIDs))
+        }
+    }
+
     // MARK: - Private API
 
     private func getCachedSteps(for course: Course) -> [Step] {
@@ -82,5 +116,14 @@ final class DownloadsProvider: DownloadsProviderProtocol {
         }
 
         return resultSteps
+    }
+
+    private func deleteVideo(_ video: Video) throws {
+        try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+        video.cachedQuality = nil
+    }
+
+    private func deleteStep(_ step: Step) {
+        CoreDataHelper.instance.deleteFromStore(step, save: false)
     }
 }

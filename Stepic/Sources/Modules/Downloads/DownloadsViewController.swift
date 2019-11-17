@@ -2,6 +2,7 @@ import UIKit
 
 protocol DownloadsViewControllerProtocol: class {
     func displayDownloads(viewModel: Downloads.DownloadsLoad.ViewModel)
+    func displayDeleteDownloadResult(viewModel: Downloads.DownloadsLoad.ViewModel)
 }
 
 // MARK: - DownloadsViewController: UIViewController -
@@ -13,7 +14,11 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    private lazy var downloadsTableViewDataSource = DownloadsTableViewDataSource()
+    private lazy var downloadsTableViewDataSource: DownloadsTableViewDataSource = {
+        let dataSource = DownloadsTableViewDataSource()
+        dataSource.delegate = self
+        return dataSource
+    }()
 
     // MARK: UIViewController life cycle
 
@@ -46,6 +51,11 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
         self.interactor.doDownloadsFetch(request: .init())
     }
 
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.downloadsView?.setEditing(editing, animated: animated)
+    }
+
     // MARK: - Private API
 
     private func registerPlaceholders() {
@@ -66,11 +76,19 @@ extension DownloadsViewController: DownloadsViewControllerProtocol {
         self.updateDownloadsData(newData: viewModel.downloads)
     }
 
+    func displayDeleteDownloadResult(viewModel: Downloads.DownloadsLoad.ViewModel) {
+        self.updateDownloadsData(newData: viewModel.downloads)
+    }
+
+    // MARK: Private helpers
+
     private func updateDownloadsData(newData: [DownloadsItemViewModel]) {
         if newData.isEmpty {
             self.showPlaceholder(for: .empty)
+            self.navigationItem.rightBarButtonItem = nil
         } else {
             self.isPlaceholderShown = false
+            self.navigationItem.rightBarButtonItem = self.editButtonItem
         }
 
         self.downloadsTableViewDataSource.update(viewModels: newData)
@@ -88,5 +106,17 @@ extension DownloadsViewController: DownloadsViewDelegate {
 
         let assembly = CourseInfoAssembly(courseID: selectedViewModel.id, initialTab: .syllabus)
         self.push(module: assembly.makeModule())
+    }
+}
+
+// MARK: - DownloadsViewController: DownloadsTableViewDataSourceDelegate -
+
+extension DownloadsViewController: DownloadsTableViewDataSourceDelegate {
+    func downloadsTableViewDataSource(
+        _ dataSource: DownloadsTableViewDataSource,
+        didDelete viewModel: DownloadsItemViewModel,
+        at indexPath: IndexPath
+    ) {
+        self.interactor.doDeleteDownload(request: .init(id: viewModel.id))
     }
 }

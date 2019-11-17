@@ -58,6 +58,10 @@ final class DownloadsView: UIView {
         self.tableView.dataSource = dataSource
         self.tableView.reloadData()
     }
+
+    func setEditing(_ editing: Bool, animated: Bool) {
+        self.tableView.setEditing(editing, animated: animated)
+    }
 }
 
 // MARK: - DownloadsView: ProgrammaticallyInitializableViewProtocol -
