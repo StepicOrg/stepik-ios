@@ -86,6 +86,7 @@ extension DownloadsViewController: DownloadsViewDelegate {
             return
         }
 
-        print(selectedViewModel)
+        let assembly = CourseInfoAssembly(courseID: selectedViewModel.id, initialTab: .syllabus)
+        self.push(module: assembly.makeModule())
     }
 }
