@@ -10,47 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Downloads-->
-        <scene sceneID="B6E-0I-IzT">
-            <objects>
-                <viewController storyboardIdentifier="DownloadsViewController" id="g7w-5Y-f4V" customClass="LegacyDownloadsViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VVz-oY-EAd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="jdI-2w-A1S" customClass="StepikTableView" customModule="Stepic">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="g7w-5Y-f4V" id="AXZ-6d-SaB"/>
-                                    <outlet property="delegate" destination="g7w-5Y-f4V" id="nUB-Md-pGz"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="jdI-2w-A1S" firstAttribute="bottom" secondItem="Wte-7e-MNR" secondAttribute="bottom" id="FCZ-yK-uZj"/>
-                            <constraint firstItem="Wte-7e-MNR" firstAttribute="trailing" secondItem="jdI-2w-A1S" secondAttribute="trailing" id="FN6-0f-0IO"/>
-                            <constraint firstItem="jdI-2w-A1S" firstAttribute="top" secondItem="VVz-oY-EAd" secondAttribute="top" id="J49-xR-zY8"/>
-                            <constraint firstItem="jdI-2w-A1S" firstAttribute="leading" secondItem="Wte-7e-MNR" secondAttribute="leading" id="grd-Io-dlx"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Wte-7e-MNR"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Downloads" id="9Ja-ap-5iY">
-                        <barButtonItem key="rightBarButtonItem" title="Clear cache" id="WWT-xn-H4f">
-                            <connections>
-                                <action selector="clearCachePressed:" destination="g7w-5Y-f4V" id="2ET-gg-F9K"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="jdI-2w-A1S" id="M2W-YW-0ok"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7a5-ET-4lH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1670" y="2641"/>
-        </scene>
         <!--Styled Tab Bar View Controller-->
         <scene sceneID="h7W-ra-FMl">
             <objects>
@@ -76,25 +35,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XvM-lw-vUU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1458" y="842"/>
-        </scene>
-        <!--Downloads-->
-        <scene sceneID="Laj-7g-BZD">
-            <objects>
-                <navigationController storyboardIdentifier="DownloadsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="MT9-2h-A7A" customClass="StyledNavigationController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Downloads" image="tab-downloads" selectedImage="tab-downloads" id="Wmp-3r-xny"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W60-es-dLX">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="g7w-5Y-f4V" kind="relationship" relationship="rootViewController" id="4gB-gX-pmH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KcB-yW-iiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="900" y="2641"/>
         </scene>
         <!--Styled Navigation Controller-->
         <scene sceneID="dHl-Iz-Z0Q">
@@ -173,7 +113,4 @@
             <point key="canvasLocation" x="857" y="843"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="tab-downloads" width="20" height="22"/>
-    </resources>
 </document>
