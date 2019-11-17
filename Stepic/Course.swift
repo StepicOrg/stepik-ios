@@ -329,12 +329,13 @@ final class Course: NSManagedObject, IDFetchable {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         var predicate = NSPredicate(value: true)
 
-        if let e = enrolled {
-            let p = NSPredicate(format: "managedEnrolled == %@", e as NSNumber)
-            predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicate, p])
+        if let enrolled = enrolled {
+            let enrolledPredicate = NSPredicate(format: "managedEnrolled == %@", enrolled as NSNumber)
+            predicate = NSCompoundPredicate(type: .and, subpredicates: [predicate, enrolledPredicate])
         }
 
         request.predicate = predicate
+
         do {
             let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Course]

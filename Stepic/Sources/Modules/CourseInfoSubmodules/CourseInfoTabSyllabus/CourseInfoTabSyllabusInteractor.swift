@@ -747,8 +747,8 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func removeCached(unit: Unit) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete)
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: .lesson).send()
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Unit.delete, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: .lesson, source: .syllabus).send()
 
         let unitID = unit.id
         CourseInfoTabSyllabusInteractor.logger.info(
@@ -769,8 +769,8 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func removeCached(section: Section) {
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete)
-        AmplitudeAnalyticsEvents.Downloads.deleted(content: .section).send()
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Section.delete, parameters: nil)
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: .section, source: .syllabus).send()
 
         let sectionID = section.id
         CourseInfoTabSyllabusInteractor.logger.info(
