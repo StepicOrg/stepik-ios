@@ -147,11 +147,12 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
-        static func deleted(content: Content) -> AnalyticsEvent {
+        static func deleted(content: Content, source: DeleteDownloadSource) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Download deleted",
                 parameters: [
-                    "content": content.rawValue
+                    "content": content.rawValue,
+                    "source": source.rawValue
                 ]
             )
         }
@@ -173,6 +174,11 @@ struct AmplitudeAnalyticsEvents {
             case section
             case lesson
             case step
+        }
+
+        enum DeleteDownloadSource: String {
+            case syllabus
+            case downloads
         }
     }
 

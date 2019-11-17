@@ -275,13 +275,7 @@ extension SettingsViewController: SettingsView {
     }
 
     private func displayDownloads() {
-        guard let viewController = ControllerHelper.instantiateViewController(
-            identifier: "DownloadsViewController",
-            storyboardName: "Main"
-        ) as? DownloadsViewController else {
-            return
-        }
-
-        self.navigationController?.pushViewController(viewController, animated: true)
+        let assembly = DownloadsAssembly()
+        self.push(module: assembly.makeModule())
     }
 }
