@@ -13,41 +13,44 @@ import SwiftyJSON
 final class Lesson: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
+    var isCached: Bool {
+        if self.steps.isEmpty {
+            return false
+        }
+
+        for video in self.getVideos() {
+            if video.state != .cached {
+                return false
+            }
+        }
+
+        return true
+    }
+
     required convenience init(json: JSON) {
         self.init()
-        initialize(json)
+        self.initialize(json)
     }
 
     func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        title = json["title"].stringValue
-        isFeatured = json["is_featured"].boolValue
-        isPublic = json["is_public"].boolValue
-        slug = json["slug"].stringValue
-        coverURL = json["cover_url"].string
-        timeToComplete = json["time_to_complete"].doubleValue
-        stepsArray = json["steps"].arrayObject as! [Int]
-        passedBy = json["passed_by"].intValue
-        voteDelta = json["vote_delta"].intValue
-    }
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.title = json[JSONKey.title.rawValue].stringValue
+        self.isFeatured = json[JSONKey.isFeatured.rawValue].boolValue
+        self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
+        self.slug = json[JSONKey.slug.rawValue].stringValue
+        self.coverURL = json[JSONKey.coverURL.rawValue].string
+        self.timeToComplete = json[JSONKey.timeToComplete.rawValue].doubleValue
+        self.stepsArray = json[JSONKey.steps.rawValue].arrayObject as! [Int]
+        self.passedBy = json[JSONKey.passedBy.rawValue].intValue
+        self.voteDelta = json[JSONKey.voteDelta.rawValue].intValue
 
-    static func getLesson(_ id: Int) -> Lesson? {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
-
-        let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
-
-        request.predicate = predicate
-
-        do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
-            return (results as? [Lesson])?.first
-        } catch {
-            return nil
+        if let actionsDictionary = json[JSONKey.actions.rawValue].dictionary {
+            self.canEdit = actionsDictionary[JSONKey.editLesson.rawValue]?.stringValue == JSONKey.actionStatusGranted
         }
     }
 
     func update(json: JSON) {
-        initialize(json)
+        self.initialize(json)
     }
 
     func loadSteps(completion: @escaping (() -> Void), error errorHandler: ((String) -> Void)? = nil, onlyLesson: Bool = false) {
@@ -133,27 +136,24 @@ final class Lesson: NSManagedObject, IDFetchable {
         return videos
     }
 
-    var isCached: Bool {
-        if self.steps.isEmpty {
-            return false
-        }
+    static func getLesson(_ id: IdType) -> Lesson? {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
+        request.predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
 
-        for video in self.getVideos() {
-            if video.state != .cached {
-                return false
-            }
+        do {
+            let results = try CoreDataHelper.instance.context.fetch(request)
+            return (results as? [Lesson])?.first
+        } catch {
+            return nil
         }
-
-        return true
     }
 
-    static func fetch(_ ids: [Int]) -> [Lesson] {
+    static func fetch(_ ids: [IdType]) -> [Lesson] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Lesson")
 
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
+        let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
         request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
+
         do {
             guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Lesson] else {
                 return []
@@ -162,5 +162,24 @@ final class Lesson: NSManagedObject, IDFetchable {
         } catch {
             return []
         }
+    }
+
+    // MARK: - Types
+
+    enum JSONKey: String {
+        static let actionStatusGranted = "#"
+
+        case id
+        case title
+        case isFeatured = "is_featured"
+        case isPublic = "is_public"
+        case slug
+        case coverURL = "cover_url"
+        case timeToComplete = "time_to_complete"
+        case steps
+        case passedBy = "passed_by"
+        case voteDelta = "vote_delta"
+        case actions
+        case editLesson = "edit_lesson"
     }
 }
