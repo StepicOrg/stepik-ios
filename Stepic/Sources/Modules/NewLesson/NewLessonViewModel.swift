@@ -11,4 +11,5 @@ struct NewLessonViewModel {
     let steps: [StepDescription]
     let stepLinkMaker: (String) -> String
     let startStepIndex: Int
+    let canEdit: Bool
 }

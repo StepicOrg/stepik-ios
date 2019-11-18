@@ -26,7 +26,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
                         lesson: result.lesson,
                         steps: result.steps,
                         progresses: result.progresses,
-                        startStepIndex: result.startStepIndex
+                        startStepIndex: result.startStepIndex,
+                        canEdit: result.canEdit
                     )
                 )
             )
@@ -80,7 +81,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         lesson: Lesson,
         steps: [Step],
         progresses: [Progress],
-        startStepIndex: Int
+        startStepIndex: Int,
+        canEdit: Bool
     ) -> NewLessonViewModel {
         let lessonTitle = lesson.title
         let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
@@ -108,7 +110,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             stepLinkMaker: {
                 "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
             },
-            startStepIndex: startStepIndex
+            startStepIndex: startStepIndex,
+            canEdit: canEdit
         )
     }
 

@@ -122,7 +122,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 lesson: lesson,
                 steps: steps,
                 progresses: progresses,
-                startStepIndex: startStepIndex
+                startStepIndex: startStepIndex,
+                canEdit: lesson.canEdit
             )
 
             self.presenter.presentLesson(response: .init(state: .success(data)))

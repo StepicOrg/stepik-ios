@@ -12,6 +12,7 @@ enum NewLesson {
             let steps: [Step]
             let progresses: [Progress]
             let startStepIndex: Int
+            let canEdit: Bool
         }
 
         struct Response {

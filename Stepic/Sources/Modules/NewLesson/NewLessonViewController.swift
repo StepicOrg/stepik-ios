@@ -51,6 +51,12 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         return item
     }()
 
+    private lazy var editBarButtonItem = UIBarButtonItem(
+        barButtonSystemItem: .compose,
+        target: self,
+        action: #selector(self.editButtonClicked)
+    )
+
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         loadingIndicatorView.color = Appearance.loadingIndicatorColor
@@ -205,6 +211,16 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
+        let containsEditBarButtonItem = self.navigationItem.rightBarButtonItems?.contains {
+            $0 === self.editBarButtonItem
+        } ?? false
+
+        if data.canEdit && !containsEditBarButtonItem {
+            self.navigationItem.rightBarButtonItems?.insert(self.editBarButtonItem, at: 0)
+        } else {
+            self.navigationItem.rightBarButtonItems?.removeAll(where: { $0 === self.editBarButtonItem })
+        }
+
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
         }
@@ -358,6 +374,11 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
                 self.present(sharingViewController, animated: true, completion: nil)
             }
         }
+    }
+
+    @objc
+    private func editButtonClicked() {
+        print(#function)
     }
 }
 
