@@ -1,11 +1,11 @@
 import SnapKit
 import UIKit
 
-extension EditLessonView {
+extension EditStepView {
     struct Appearance { }
 }
 
-final class EditLessonView: UIView {
+final class EditStepView: UIView {
     let appearance: Appearance
 
     init(
@@ -26,7 +26,7 @@ final class EditLessonView: UIView {
     }
 }
 
-extension EditLessonView: ProgrammaticallyInitializableViewProtocol {
+extension EditStepView: ProgrammaticallyInitializableViewProtocol {
     func setupView() { }
 
     func addSubviews() { }

@@ -88,7 +88,7 @@ enum NewLesson {
     }
 
     /// Edit current step text
-    enum EditLessonPresentation {
+    enum EditStepPresentation {
         struct Request {
             let index: Int
         }

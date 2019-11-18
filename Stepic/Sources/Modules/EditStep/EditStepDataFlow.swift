@@ -1,6 +1,6 @@
 import Foundation
 
-enum EditLesson {
+enum EditStep {
     enum SomeAction {
         struct Request { }
 

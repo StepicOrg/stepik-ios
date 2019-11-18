@@ -3,7 +3,7 @@ import PromiseKit
 
 protocol NewLessonInteractorProtocol {
     func doLessonLoad(request: NewLesson.LessonLoad.Request)
-    func doEditLessonPresentation(request: NewLesson.EditLessonPresentation.Request)
+    func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request)
 }
 
 final class NewLessonInteractor: NewLessonInteractorProtocol {
@@ -49,13 +49,13 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         self.refresh(context: self.lastLoadState.context, startStep: self.lastLoadState.startStep)
     }
 
-    func doEditLessonPresentation(request: NewLesson.EditLessonPresentation.Request) {
+    func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request) {
         guard let currentUnit = self.currentUnit,
               let stepID = currentUnit.lesson?.stepsArray[safe: request.index] else {
             return
         }
 
-        self.presenter.presentEditLesson(response: .init(stepID: stepID))
+        self.presenter.presentEditStep(response: .init(stepID: stepID))
     }
 
     // MARK: Private API
