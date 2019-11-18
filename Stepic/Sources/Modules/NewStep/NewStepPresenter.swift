@@ -55,8 +55,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             }()
 
             let contentType: NewStepViewModel.ContentType = {
-                switch step.block.name {
-                case "video":
+                switch step.block.type {
+                case .video:
                     if let video = step.block.video {
                         let viewModel = NewStepVideoViewModel(
                             video: video,
@@ -81,8 +81,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             }()
 
             let quizType: NewStep.QuizType?
-            switch step.block.name {
-            case "text", "video":
+            switch step.block.type {
+            case .text, .video:
                 quizType = nil
             default:
                 quizType = NewStep.QuizType(blockName: step.block.name)

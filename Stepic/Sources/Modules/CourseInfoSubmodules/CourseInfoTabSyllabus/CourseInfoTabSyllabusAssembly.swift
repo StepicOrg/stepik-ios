@@ -31,10 +31,8 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             nextLessonService: NextLessonService(),
             tooltipStorageManager: TooltipStorageManager(),
             syllabusDownloadsService: SyllabusDownloadsService(
+                videoDownloadingService: VideoDownloadingService.shared,
                 videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
-                syllabusDownloadsInteractionService: SyllabusDownloadsInteractionService(
-                    videoDownloadingService: VideoDownloadingService.shared
-                ),
                 stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
             )
         )

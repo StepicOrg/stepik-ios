@@ -336,7 +336,7 @@ final class StepicVideoPlayerViewController: UIViewController {
             }
         }
 
-        if self.video.state == VideoState.cached, let cachedQuality = self.video.cachedQuality {
+        if self.video.state == .cached, let cachedQuality = self.video.cachedQuality {
             alert.addAction(
                 UIAlertAction(
                     title: "\(NSLocalizedString("Downloaded", comment: ""))(\(cachedQuality))",
@@ -379,7 +379,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     // MARK: - Controlling the playback state
 
     private func getInitialVideoQualityURL() -> URL {
-        if self.video.state == VideoState.cached {
+        if self.video.state == .cached {
             return VideoStoredFileManager(
                 fileManager: FileManager.default
             ).getVideoStoredFile(videoID: video.id).require().localURL
@@ -389,7 +389,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     }
 
     private func getInitialVideoQuality() -> String {
-        if self.video.state == VideoState.cached {
+        if self.video.state == .cached {
             return self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality
         } else {
             return self.video.getNearestQualityToDefault(VideosInfo.watchingVideoQuality)

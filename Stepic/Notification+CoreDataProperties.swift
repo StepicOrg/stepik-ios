@@ -21,7 +21,7 @@ extension Notification {
     @NSManaged public var managedPriority: String?
     @NSManaged public var managedHtmlText: String?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Notification", in: CoreDataHelper.instance.context)!
     }
 

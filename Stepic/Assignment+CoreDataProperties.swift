@@ -17,7 +17,7 @@ extension Assignment {
     @NSManaged var managedStepId: NSNumber?
     @NSManaged var managedUnitId: NSNumber?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Assignment", in: CoreDataHelper.instance.context)!
     }
 

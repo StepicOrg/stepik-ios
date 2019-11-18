@@ -18,10 +18,9 @@ extension Block {
     @NSManaged var managedText: String?
 
     @NSManaged var managedVideo: Video?
-
     @NSManaged var managedStep: Step?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
     }
 
@@ -31,47 +30,59 @@ extension Block {
 
     var name: String {
         get {
-            return managedName ?? "undefined"
+            return self.managedName ?? "undefined"
         }
-        set(value) {
-            managedName = value
+        set {
+            self.managedName = newValue
         }
     }
 
     var text: String? {
         get {
-            return managedText
+            return self.managedText
         }
-        set(value) {
-            managedText = value
+        set {
+            self.managedText = newValue
         }
     }
 
     var video: Video? {
         get {
-            return managedVideo
+            return self.managedVideo
         }
-        set(value) {
-            managedVideo = value
-        }
-    }
-
-    var type: BlockTypes {
-        get {
-            return BlockTypes(rawValue: name) ?? .Text
+        set {
+            self.managedVideo = newValue
         }
     }
 
     var image: UIImage {
-        switch (name) {
-        case "video" : return #imageLiteral(resourceName: "ic_video_dark")
-        case "text" : return #imageLiteral(resourceName: "ic_theory_dark")
-        case "code", "dataset", "admin", "sql" : return #imageLiteral(resourceName: "ic_hard_dark")
-        default: return #imageLiteral(resourceName: "ic_easy_dark")
+        switch (self.type) {
+        case .text:
+            return UIImage(named: "ic_theory_dark").require()
+        case .video:
+            return UIImage(named: "ic_video_dark").require()
+        case .code, .dataset, .admin, .sql:
+            return UIImage(named: "ic_hard_dark").require()
+        default:
+            return UIImage(named: "ic_easy_dark").require()
         }
     }
-}
+    
+    var type: BlockType {
+        return BlockType(rawValue: self.name) ?? .text
+    }
 
-enum BlockTypes: String {
-    case Text = "text", Video = "video", Animation = "animation"
+    // MARK: - Types -
+
+    enum BlockType: String {
+        case text
+        case video
+        case code
+        case dataset
+        case admin
+        case sql
+        case choice
+        case string
+        case number
+    }
 }

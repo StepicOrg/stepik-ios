@@ -13,19 +13,25 @@ import SwiftyJSON
 final class Block: NSManagedObject {
     required convenience init(json: JSON) {
         self.init()
-        initialize(json)
-        video = Video(json: json["video"])
+        self.initialize(json)
+        self.video = Video(json: json[JSONKey.video.rawValue])
     }
 
     func initialize(_ json: JSON) {
-        name = json["name"].stringValue
-        text = json["text"].string
+        self.name = json[JSONKey.name.rawValue].stringValue
+        self.text = json[JSONKey.text.rawValue].string
     }
 
     func update(json: JSON) {
-        initialize(json)
-        if let v = video {
-            v.update(json: json["video"])
+        self.initialize(json)
+        if let video = self.video {
+            video.update(json: json[JSONKey.video.rawValue])
         }
+    }
+
+    enum JSONKey: String {
+        case name
+        case text
+        case video
     }
 }

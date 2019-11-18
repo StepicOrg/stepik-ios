@@ -23,7 +23,7 @@ extension Profile {
 
     @NSManaged var managedUser: User?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Profile", in: CoreDataHelper.instance.context)!
     }
 

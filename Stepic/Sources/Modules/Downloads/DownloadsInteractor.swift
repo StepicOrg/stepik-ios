@@ -38,6 +38,7 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
             )
         }
 
+        AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.delete, parameters: ["source": "downloads"])
         AmplitudeAnalyticsEvents.Downloads.deleted(content: .course, source: .downloads).send()
 
         self.provider.deleteSteps(steps).done { succeededIDs, failedIDs in
@@ -61,7 +62,7 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
         self.currentCachedStepsByCourse.forEach { course, steps in
             downloadedItemsByCourse[course] = steps.map { step in
                 var stepSizeInBytes: UInt64
-                if step.block.type == .Video,
+                if step.block.type == .video,
                    let videoID = step.block.video?.id {
                     stepSizeInBytes = self.provider.getVideoFileSize(videoID: videoID)
                 } else {

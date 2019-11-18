@@ -1,6 +1,8 @@
 import Foundation
 import PromiseKit
 
+// MARK: SyllabusDownloadsServiceDelegate -
+
 protocol SyllabusDownloadsServiceDelegate: class {
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
@@ -40,6 +42,8 @@ protocol SyllabusDownloadsServiceDelegate: class {
     )
 }
 
+// MARK: - SyllabusDownloadsServiceProtocol -
+
 protocol SyllabusDownloadsServiceProtocol: class {
     var delegate: SyllabusDownloadsServiceDelegate? { get set }
 
@@ -52,28 +56,38 @@ protocol SyllabusDownloadsServiceProtocol: class {
     func cancel(unit: Unit) -> Promise<Void>
     func cancel(section: Section) -> Promise<Void>
 
-    func getDownloadStateForUnit(_ unit: Unit, section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getDownloadStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getDownloadStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
+    func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState
+    func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
+    func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
 }
 
+// MARK: - SyllabusDownloadsService: SyllabusDownloadsServiceProtocol -
+
 final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
+    private static let progressCompletedValue: Float = 1.0
+
     weak var delegate: SyllabusDownloadsServiceDelegate?
 
+    private let videoDownloadingService: VideoDownloadingServiceProtocol
     private let videoFileManager: VideoStoredFileManagerProtocol
-    private let syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
 
+    // Section -> Unit -> Videos
+    private var unitIDsBySectionID: [Section.IdType: Set<Unit.IdType>] = [:]
+    private var videoIDsByUnitID: [Unit.IdType: Set<Video.IdType>] = [:]
+    private var progressByVideoID: [Video.IdType: Float] = [:]
+    private var activeVideoDownloads: Set<Video.IdType> = []
+
     init(
+        videoDownloadingService: VideoDownloadingServiceProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
-        syllabusDownloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol
     ) {
+        self.videoDownloadingService = videoDownloadingService
         self.videoFileManager = videoFileManager
         self.stepsNetworkService = stepsNetworkService
 
-        self.syllabusDownloadsInteractionService = syllabusDownloadsInteractionService
-        self.syllabusDownloadsInteractionService.delegate = self
+        self.subscribeOnVideoDownloadingEvents()
     }
 
     // MARK: Download
@@ -86,9 +100,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return firstly {
             self.fetchSteps(for: lesson)
         }.done { steps in
-            try self.syllabusDownloadsInteractionService.startDownloading(
-                syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
-            )
+            try self.startDownloading(unit: unit, steps: steps)
         }
     }
 
@@ -112,10 +124,94 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return when(
             fulfilled: fetchStepsPromises
         ).done { result in
-            result.forEach { unit, steps in
-                try? self.syllabusDownloadsInteractionService.startDownloading(
-                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
-                )
+            for (unit, steps) in result {
+                try? self.startDownloading(section: section, unit: unit, steps: steps)
+            }
+        }
+    }
+
+    private func startDownloading(section: Section? = nil, unit: Unit, steps: [Step]) throws {
+        let uncachedVideos = steps.compactMap { step -> Video? in
+            guard step.block.type == .video,
+                  let video = step.block.video else {
+                return nil
+            }
+
+            return self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil ? video : nil
+        }
+        let uncachedVideosIDs = Set(uncachedVideos.map { $0.id })
+
+        if uncachedVideosIDs.isEmpty {
+            return
+        }
+
+        if let section = section {
+            self.unitIDsBySectionID[section.id, default: []].insert(unit.id)
+        }
+
+        let uniqueUncachedVideosIDs = uncachedVideosIDs.symmetricDifference(self.videoIDsByUnitID[unit.id, default: []])
+        uncachedVideosIDs.forEach { self.videoIDsByUnitID[unit.id, default: []].insert($0) }
+
+        let uniqueUncachedVideos = uncachedVideos.filter { uniqueUncachedVideosIDs.contains($0.id) }
+        for video in uniqueUncachedVideos where !self.activeVideoDownloads.contains(video.id) {
+            try self.videoDownloadingService.download(video: video)
+            self.activeVideoDownloads.insert(video.id)
+        }
+    }
+
+    private func subscribeOnVideoDownloadingEvents() {
+        self.videoDownloadingService.subscribeOnEvents { [weak self] event in
+            DispatchQueue.main.async {
+                self?.handleUpdate(with: event)
+            }
+        }
+    }
+
+    /// Handle events from downloading service
+    private func handleUpdate(with event: VideoDownloadingServiceEvent) {
+        let videoID = event.videoID
+
+        switch event.state {
+        case .error(let error):
+            self.progressByVideoID[videoID] = nil
+            self.activeVideoDownloads.remove(videoID)
+
+            self.delegate?.syllabusDownloadsService(self, didFailLoadVideoWithError: error)
+        case .active(let progress):
+            self.progressByVideoID[videoID] = progress
+            self.reportDownloadingProgress(progress, forVideoWithID: videoID)
+        case .completed:
+            self.progressByVideoID[videoID] = SyllabusDownloadsService.progressCompletedValue
+            self.activeVideoDownloads.remove(videoID)
+
+            self.reportDownloadingProgress(SyllabusDownloadsService.progressCompletedValue, forVideoWithID: videoID)
+            self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forVideoWithID: videoID)
+        }
+    }
+
+    private func reportDownloadingProgress(_ progress: Float, forVideoWithID videoID: Video.IdType) {
+        self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forVideoWithID: videoID)
+
+        guard let unitID = self.videoIDsByUnitID.first(where: { $0.value.contains(videoID) })?.key else {
+            return
+        }
+
+        if let unitProgress = self.getUnitDownloadProgress(unitID: unitID) {
+            self.delegate?.syllabusDownloadsService(self, didReceiveProgress: unitProgress, forUnitWithID: unitID)
+
+            if unitProgress == SyllabusDownloadsService.progressCompletedValue {
+                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forUnitWithID: unitID)
+            }
+        }
+
+        if let sectionID = self.unitIDsBySectionID.first(where: { $0.value.contains(unitID) })?.key,
+           let sectionProgress = self.getSectionDownloadProgress(sectionID: sectionID) {
+            self.delegate?.syllabusDownloadsService(
+                self, didReceiveProgress: sectionProgress, forSectionWithID: sectionID
+            )
+
+            if sectionProgress == SyllabusDownloadsService.progressCompletedValue {
+                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forSectionWithID: sectionID)
             }
         }
     }
@@ -128,13 +224,17 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         let removeVideosPromises = lesson.steps
-            .filter { $0.block.name == "video" }
+            .filter { $0.block.type == .video }
             .compactMap { $0.block.video }
             .map { video -> Promise<Void> in
                 Promise { seal in
                     do {
                         try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
                         video.cachedQuality = nil
+
+                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                        self.progressByVideoID[video.id] = nil
+
                         seal.fulfill(())
                     } catch {
                         seal.reject(Error.removeUnitFailed)
@@ -157,7 +257,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             fulfilled: section.units.map {
                 self.remove(unit: $0)
             }
-        )
+        ).done { _ in
+            self.unitIDsBySectionID[section.id] = nil
+        }
     }
 
     // MARK: Cancel
@@ -167,20 +269,34 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        return self.cancelDownload(section: nil, unit: unit, steps: lesson.steps)
+        let cancelVideosPromises = lesson.steps
+            .filter { $0.block.type == .video }
+            .compactMap { $0.block.video }
+            .filter { self.activeVideoDownloads.contains($0.id) }
+            .map { video -> Promise<Void> in
+                Promise { seal in
+                    do {
+                        try self.videoDownloadingService.cancelDownload(videoID: video.id)
+
+                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                        self.progressByVideoID[video.id] = nil
+
+                        seal.fulfill(())
+                    } catch {
+                        seal.reject(Error.cancelUnitFailed)
+                    }
+                }
+            }
+
+        return when(fulfilled: cancelVideosPromises)
     }
 
     func cancel(section: Section) -> Promise<Void> {
         return Promise { seal in
-            let cancelUnitsPromises = section.units.map { unit -> Promise<Void> in
-                guard let lesson = unit.lesson else {
-                    return Promise(error: Error.lessonNotFound)
-                }
-
-                return self.cancelDownload(section: section, unit: unit, steps: lesson.steps)
-            }
-
-            when(fulfilled: cancelUnitsPromises).done {
+            when(
+                fulfilled: section.units.map { self.cancel(unit: $0) }
+            ).done { _ in
+                self.unitIDsBySectionID[section.id] = nil
                 seal.fulfill(())
             }.catch { _ in
                 seal.reject(Error.cancelSectionFailed)
@@ -188,9 +304,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
-    // MARK: Get download state
+    // MARK: Downloading state
 
-    func getDownloadStateForUnit(_ unit: Unit, section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
         // If section is unreachable or exam then all units are not available
         guard !section.isExam, section.isReachable else {
             return .notAvailable
@@ -214,38 +330,34 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // Iterate through steps and determine final state
         let stepsWithVideoCount = steps
-            .filter { $0.block.name == "video" }
+            .filter { $0.block.type == .video }
             .count
-        let stepsWithCachedVideoCount = steps
-            .filter { $0.block.name == "video" }
-            .compactMap { $0.block.video?.id }
-            .filter { self.videoFileManager.getVideoStoredFile(videoID: $0) != nil }
-            .count
-
         // Lesson has no steps with video
         if stepsWithVideoCount == 0 {
             return .notAvailable
         }
 
+        let stepsWithCachedVideoCount = steps
+            .filter { $0.block.type == .video }
+            .compactMap { $0.block.video?.id }
+            .filter { self.videoFileManager.getVideoStoredFile(videoID: $0) != nil }
+            .count
+
         // Check if video is downloading
         let stepsWithVideo = steps
-            .filter { $0.block.name == "video" }
+            .filter { $0.block.type == .video }
             .compactMap { $0.block.video }
-        let downloadingVideosProgresses = stepsWithVideo.compactMap {
-            self.syllabusDownloadsInteractionService.getDownloadProgress(for: $0)
-        }
+        let downloadingVideosProgresses = stepsWithVideo.compactMap { self.getVideoDownloadProgress($0) }
 
-        // TODO: remove calculation, get progress for unit from service
         if !downloadingVideosProgresses.isEmpty {
+            let requestedVideosToDownloadCount = Float(self.videoIDsByUnitID[unit.id].require().count)
             return .downloading(
-                progress: downloadingVideosProgresses.reduce(0, +) / Float(downloadingVideosProgresses.count)
+                progress: downloadingVideosProgresses.reduce(0, +) / requestedVideosToDownloadCount
             )
         }
 
         // Try to restore downloads
-        try? self.syllabusDownloadsInteractionService.restoreDownloading(
-            syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
-        )
+        try? self.restoreDownloading(section: section, unit: unit)
 
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
@@ -256,7 +368,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return .available(isCached: true)
     }
 
-    func getDownloadStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
         let units = section.units
 
         // Unreachable and exam not available
@@ -272,7 +384,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return .notAvailable
         }
 
-        let unitStates = units.map { self.getDownloadStateForUnit($0, section: section) }
+        let unitStates = units.map { self.getDownloadingStateForUnit($0, in: section) }
         var shouldBeCachedUnitsCount = 0
         var notAvailableUnitsCount = 0
         var downloadingUnitProgresses: [Float] = []
@@ -291,7 +403,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         // Downloading state
-        if downloadingUnitProgresses.count == units.count && !units.isEmpty {
+        if !downloadingUnitProgresses.isEmpty && !units.isEmpty {
             return .downloading(
                 progress: downloadingUnitProgresses.reduce(0, +) / Float(downloadingUnitProgresses.count)
             )
@@ -311,8 +423,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return .available(isCached: true)
     }
 
-    func getDownloadStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
-        let sectionStates = course.sections.map { self.getDownloadStateForSection($0) }
+    func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
+        let sectionStates = course.sections.map { self.getDownloadingStateForSection($0) }
 
         let containsUncachedSection = sectionStates.contains { state in
             if case .available(let isCached) = state {
@@ -324,7 +436,53 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return containsUncachedSection ? .available(isCached: false) : .notAvailable
     }
 
-    // MARK: - Private API -
+    private func getVideoDownloadProgress(_ video: Video) -> Float? {
+        return self.activeVideoDownloads.contains(video.id) ? self.progressByVideoID[video.id] : nil
+    }
+
+    private func getUnitDownloadProgress(unitID: Unit.IdType) -> Float? {
+        guard let videoIDs = self.videoIDsByUnitID[unitID] else {
+            return nil
+        }
+
+        if videoIDs.isEmpty {
+            return nil
+        }
+
+        return videoIDs.reduce(0, { $0 + (self.progressByVideoID[$1] ?? 0) }) / Float(videoIDs.count)
+    }
+
+    private func getSectionDownloadProgress(sectionID: Section.IdType) -> Float? {
+        guard let unitIDs = self.unitIDsBySectionID[sectionID] else {
+            return nil
+        }
+
+        if unitIDs.isEmpty {
+            return nil
+        }
+
+        return unitIDs.reduce(0, { $0 + (self.getUnitDownloadProgress(unitID: $1) ?? 0) }) / Float(unitIDs.count)
+    }
+
+    // MARK: - Private helpers -
+
+    private func restoreDownloading(section: Section, unit: Unit) throws {
+        guard let lesson = unit.lesson else {
+            throw Error.lessonNotFound
+        }
+
+        let videos = lesson.steps
+            .filter { $0.block.type == .video }
+            .compactMap { $0.block.video }
+
+        for video in videos where !self.activeVideoDownloads.contains(video.id) {
+            if self.videoDownloadingService.isTaskActive(videoID: video.id) {
+                self.activeVideoDownloads.insert(video.id)
+                self.videoIDsByUnitID[unit.id, default: []].insert(video.id)
+                self.unitIDsBySectionID[section.id, default: []].insert(unit.id)
+            }
+        }
+    }
 
     private func fetchSteps(for lesson: Lesson) -> Promise<[Step]> {
         return firstly {
@@ -336,109 +494,13 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
-    private func cancelDownload(section: Section?, unit: Unit, steps: [Step]) -> Promise<Void> {
-        return Promise { seal in
-            do {
-                try self.syllabusDownloadsInteractionService.cancelDownloading(
-                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
-                )
-                seal.fulfill(())
-            } catch {
-                seal.reject(error)
-            }
-        }
-    }
-
-    private func makeSyllabusTree(section: Section? = nil, unit: Unit, steps: [Step]) -> SyllabusTreeNode {
-        var stepsTrees: [SyllabusTreeNode] = []
-        for step in steps {
-            guard step.block.name == "video",
-                  let video = step.block.video else {
-                continue
-            }
-
-            if self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil {
-                stepsTrees.append(
-                    SyllabusTreeNode(
-                        value: .step(id: step.id),
-                        children: [SyllabusTreeNode(value: .video(entity: video))]
-                    )
-                )
-            }
-        }
-
-        let unitTree = SyllabusTreeNode(
-            value: .unit(id: unit.id),
-            children: stepsTrees
-        )
-
-        if let section = section {
-            return SyllabusTreeNode(
-                value: .section(id: section.id),
-                children: [unitTree]
-            )
-        }
-
-        return unitTree
-    }
-
     // MARK: - Types -
 
     enum Error: Swift.Error {
         case lessonNotFound
         case removeUnitFailed
         case downloadSectionFailed
+        case cancelUnitFailed
         case cancelSectionFailed
-    }
-}
-
-// MARK: - SyllabusDownloadsService: SyllabusDownloadsInteractionServiceDelegate -
-
-extension SyllabusDownloadsService: SyllabusDownloadsInteractionServiceDelegate {
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didReceiveProgress progress: Float,
-        source: SyllabusTreeNode.Source
-    ) {
-        DispatchQueue.main.async {
-            switch source {
-            case .video(let video):
-                self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forVideoWithID: video.id)
-            case .unit(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forUnitWithID: id)
-            case .section(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forSectionWithID: id)
-            default:
-                break
-            }
-        }
-    }
-
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didReceiveCompletion completed: Bool,
-        source: SyllabusTreeNode.Source
-    ) {
-        DispatchQueue.main.async {
-            switch source {
-            case .video(let video):
-                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: completed, forVideoWithID: video.id)
-            case .unit(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: completed, forUnitWithID: id)
-            case .section(let id):
-                self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: completed, forSectionWithID: id)
-            default:
-                break
-            }
-        }
-    }
-
-    func downloadsInteractionService(
-        _ downloadsInteractionService: SyllabusDownloadsInteractionServiceProtocol,
-        didFailLoadVideo error: Swift.Error
-    ) {
-        DispatchQueue.main.async {
-            self.delegate?.syllabusDownloadsService(self, didFailLoadVideoWithError: error)
-        }
     }
 }

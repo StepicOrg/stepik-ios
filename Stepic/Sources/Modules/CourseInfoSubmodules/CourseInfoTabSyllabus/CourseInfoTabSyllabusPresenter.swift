@@ -95,10 +95,24 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             }
         case .unit(let unit):
             self.cachedUnitViewModels[unit.id]?.downloadState = response.downloadState
+
             if let cachedViewModel = self.cachedUnitViewModels[unit.id] {
+                // Update unit downloadState in cached sections view models.
+                var updatedUnit = false
+                for (sectionID, sectionViewModel) in self.cachedSectionViewModels where !updatedUnit {
+                    for (index, unitViewModelWrapper) in sectionViewModel.units.enumerated() where !updatedUnit {
+                        if case .normal(let viewModel) = unitViewModelWrapper,
+                           viewModel.uniqueIdentifier == "\(unit.id)" {
+                            updatedUnit = true
+                            self.cachedSectionViewModels[sectionID]?.units[index] = .normal(viewModel: cachedViewModel)
+                        }
+                    }
+                }
+
                 let viewModel = CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel(
                     data: .unit(viewModel: cachedViewModel)
                 )
+
                 self.viewController?.displayDownloadButtonStateUpdate(viewModel: viewModel)
             }
         }

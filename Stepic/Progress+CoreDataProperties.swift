@@ -26,7 +26,7 @@ extension Progress {
     @NSManaged var managedUnit: Unit?
     @NSManaged var managedCourse: Course?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.instance.context)!
     }
 

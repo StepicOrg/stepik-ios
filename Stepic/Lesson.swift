@@ -110,40 +110,40 @@ final class Lesson: NSManagedObject, IDFetchable {
     }
 
     func getVideoURLs() -> [String] {
-        var res: [String] = []
-        for step in steps {
-            if step.block.name == "video" {
-                if let vid = step.block.video {
-                    res += [vid.urls[0].url]
-                }
+        var videoURLs = [String]()
+
+        for step in self.steps where step.block.type == .video {
+            if let video = step.block.video {
+                videoURLs += [video.urls[0].url]
             }
         }
-        return res
+
+        return videoURLs
     }
 
-    var stepVideos: [Video] {
-        var res: [Video] = []
-        for step in steps {
-            if step.block.name == "video" {
-                if let video = step.block.video {
-                    res += [video]
-                }
+    func getVideos() -> [Video] {
+        var videos = [Video]()
+
+        for step in self.steps where step.block.type == .video {
+            if let video = step.block.video {
+                videos += [video]
             }
         }
 
-        return res
+        return videos
     }
 
     var isCached: Bool {
-        if steps.count == 0 {
+        if self.steps.isEmpty {
             return false
         }
 
-        for vid in stepVideos {
-            if vid.state != VideoState.cached {
+        for video in self.getVideos() {
+            if video.state != .cached {
                 return false
             }
         }
+
         return true
     }
 

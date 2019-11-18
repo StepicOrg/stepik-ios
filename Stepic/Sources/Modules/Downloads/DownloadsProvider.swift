@@ -65,7 +65,7 @@ final class DownloadsProvider: DownloadsProviderProtocol {
             for step in steps {
                 let stepID = step.id
 
-                if step.block.type == .Video {
+                if step.block.type == .video {
                     guard let video = step.block.video else {
                         failedIDs.append(stepID)
                         continue
@@ -102,7 +102,7 @@ final class DownloadsProvider: DownloadsProviderProtocol {
                 }
 
                 let cachedSteps = lesson.steps.filter { step in
-                    if step.block.type == .Video,
+                    if step.block.type == .video,
                        let videoID = step.block.video?.id {
                         let videoStoredFile = self.videoFileManager.getVideoStoredFile(videoID: videoID)
                         self.videoFileSizeCache[videoID] = videoStoredFile?.size

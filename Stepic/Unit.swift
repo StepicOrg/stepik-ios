@@ -49,7 +49,7 @@ final class Unit: NSManagedObject, IDFetchable {
         })
    }
 
-    class func getUnit(id: Int) -> Unit? {
+    static func getUnit(id: Int) -> Unit? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Unit")
 
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)

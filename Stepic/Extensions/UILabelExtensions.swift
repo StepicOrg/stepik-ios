@@ -58,7 +58,7 @@ extension UILabel {
         )
     }
 
-    class func heightForLabelWithText(
+    static func heightForLabelWithText(
         _ text: String,
         lines: Int,
         font: UIFont,
@@ -77,7 +77,7 @@ extension UILabel {
         )
     }
 
-    class func heightForLabelWithText(
+    static func heightForLabelWithText(
         _ text: String,
         lines: Int,
         fontName: String,
@@ -106,7 +106,7 @@ extension UILabel {
         return label.bounds.height
     }
 
-    class func heightForLabelWithText(
+    static func heightForLabelWithText(
         _ text: String,
         lines: Int,
         standardFontOfSize size: CGFloat,

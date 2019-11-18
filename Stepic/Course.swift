@@ -239,7 +239,12 @@ final class Course: NSManagedObject, IDFetchable {
         })
     }
 
-    class func fetchAsync(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> Promise<[Course]> {
+    static func fetchAsync(
+        _ ids: [Int],
+        featured: Bool? = nil,
+        enrolled: Bool? = nil,
+        isPublic: Bool? = nil
+    ) -> Promise<[Course]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
@@ -279,7 +284,12 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> [Course] {
+    static func getCourses(
+        _ ids: [Int],
+        featured: Bool? = nil,
+        enrolled: Bool? = nil,
+        isPublic: Bool? = nil
+    ) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 

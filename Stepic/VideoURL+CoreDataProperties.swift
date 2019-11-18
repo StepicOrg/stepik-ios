@@ -17,7 +17,7 @@ extension VideoURL {
     @NSManaged var managedURL: String?
     @NSManaged var managedVideo: Video?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "VideoURL", in: CoreDataHelper.instance.context)!
     }
 
