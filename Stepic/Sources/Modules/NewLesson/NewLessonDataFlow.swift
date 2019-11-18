@@ -87,6 +87,21 @@ enum NewLesson {
         }
     }
 
+    /// Edit current step text
+    enum EditLessonPresentation {
+        struct Request {
+            let index: Int
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

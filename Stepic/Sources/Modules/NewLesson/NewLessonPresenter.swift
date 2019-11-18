@@ -7,6 +7,7 @@ protocol NewLessonPresenterProtocol {
     func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response)
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
     func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response)
+    func presentEditLesson(response: NewLesson.EditLessonPresentation.Response)
     func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -69,6 +70,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
 
     func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response) {
         self.viewController?.displayCurrentStepUpdate(viewModel: .init(index: response.index))
+    }
+
+    func presentEditLesson(response: NewLesson.EditLessonPresentation.Response) {
+        self.viewController?.displayEditLesson(viewModel: .init(stepID: response.stepID))
     }
 
     func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response) {

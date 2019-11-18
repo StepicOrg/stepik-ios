@@ -12,6 +12,7 @@ protocol NewLessonViewControllerProtocol: class {
     func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
+    func displayEditLesson(viewModel: NewLesson.EditLessonPresentation.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -378,7 +379,9 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
     @objc
     private func editButtonClicked() {
-        print(#function)
+        if let currentIndex = self.currentIndex {
+            self.interactor.doEditLessonPresentation(request: .init(index: currentIndex))
+        }
     }
 }
 
@@ -466,6 +469,10 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
 
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel) {
         self.scrollToPage(.at(index: viewModel.index), animated: true)
+    }
+
+    func displayEditLesson(viewModel: NewLesson.EditLessonPresentation.ViewModel) {
+        print("\(#function) stepID = \(viewModel.stepID)")
     }
 
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel) {
