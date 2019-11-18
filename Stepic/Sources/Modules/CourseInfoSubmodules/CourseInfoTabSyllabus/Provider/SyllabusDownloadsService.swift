@@ -197,8 +197,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         if let unitProgress = self.getUnitDownloadProgress(unitID: unitID) {
-            print("unit = \(unitID), progress = \(unitProgress)")
-
             self.delegate?.syllabusDownloadsService(self, didReceiveProgress: unitProgress, forUnitWithID: unitID)
 
             if unitProgress == SyllabusDownloadsService.progressCompletedValue {
@@ -208,8 +206,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         if let sectionID = self.unitIDsBySectionID.first(where: { $0.value.contains(unitID) })?.key,
            let sectionProgress = self.getSectionDownloadProgress(sectionID: sectionID) {
-            print("section = \(sectionID), progress = \(sectionProgress)")
-
             self.delegate?.syllabusDownloadsService(
                 self, didReceiveProgress: sectionProgress, forSectionWithID: sectionID
             )
@@ -273,37 +269,38 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        return self.cancelDownload(section: nil, unit: unit, steps: lesson.steps)
+        let cancelVideosPromises = lesson.steps
+            .filter { $0.block.type == .video }
+            .compactMap { $0.block.video }
+            .filter { self.activeVideoDownloads.contains($0.id) }
+            .map { video -> Promise<Void> in
+                Promise { seal in
+                    do {
+                        try self.videoDownloadingService.cancelDownload(videoID: video.id)
+
+                        self.activeVideoDownloads.remove(video.id)
+                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                        self.progressByVideoID[video.id] = nil
+
+                        seal.fulfill(())
+                    } catch {
+                        seal.reject(Error.cancelUnitFailed)
+                    }
+                }
+            }
+
+        return when(fulfilled: cancelVideosPromises)
     }
 
     func cancel(section: Section) -> Promise<Void> {
         return Promise { seal in
-            let cancelUnitsPromises = section.units.map { unit -> Promise<Void> in
-                guard let lesson = unit.lesson else {
-                    return Promise(error: Error.lessonNotFound)
-                }
-
-                return self.cancelDownload(section: section, unit: unit, steps: lesson.steps)
-            }
-
-            when(fulfilled: cancelUnitsPromises).done {
+            when(
+                fulfilled: section.units.map { self.cancel(unit: $0) }
+            ).done { _ in
+                self.unitIDsBySectionID[section.id] = nil
                 seal.fulfill(())
             }.catch { _ in
                 seal.reject(Error.cancelSectionFailed)
-            }
-        }
-    }
-
-    private func cancelDownload(section: Section?, unit: Unit, steps: [Step]) -> Promise<Void> {
-        return Promise { seal in
-            do {
-                // TODO: Cancel
-//                try self.syllabusDownloadsInteractionService.cancelDownloading(
-//                    syllabusTree: self.makeSyllabusTree(section: section, unit: unit, steps: steps)
-//                )
-                seal.fulfill(())
-            } catch {
-                seal.reject(error)
             }
         }
     }
@@ -489,6 +486,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         case lessonNotFound
         case removeUnitFailed
         case downloadSectionFailed
+        case cancelUnitFailed
         case cancelSectionFailed
     }
 }
