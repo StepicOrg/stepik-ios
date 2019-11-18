@@ -38,6 +38,7 @@ final class DownloadsInteractor: DownloadsInteractorProtocol {
             )
         }
 
+        AnalyticsReporter.reportEvent(AnalyticsEvents.CourseOverview.delete, parameters: ["source": "downloads"])
         AmplitudeAnalyticsEvents.Downloads.deleted(content: .course, source: .downloads).send()
 
         self.provider.deleteSteps(steps).done { succeededIDs, failedIDs in
