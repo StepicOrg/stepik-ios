@@ -358,10 +358,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         // Try to restore downloads
-        // TODO: restore
-//        try? self.syllabusDownloadsInteractionService.restoreDownloading(
-//            syllabusTree: self.makeSyllabusTree(unit: unit, steps: steps)
-//        )
+        try? self.restoreDownloading(section: section, unit: unit)
 
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
@@ -469,6 +466,24 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     // MARK: - Private helpers -
+
+    private func restoreDownloading(section: Section, unit: Unit) throws {
+        guard let lesson = unit.lesson else {
+            throw Error.lessonNotFound
+        }
+
+        let videos = lesson.steps
+            .filter { $0.block.type == .video }
+            .compactMap { $0.block.video }
+
+        for video in videos where !self.activeVideoDownloads.contains(video.id) {
+            if self.videoDownloadingService.isTaskActive(videoID: video.id) {
+                self.activeVideoDownloads.insert(video.id)
+                self.videoIDsByUnitID[unit.id, default: []].insert(video.id)
+                self.unitIDsBySectionID[section.id, default: []].insert(unit.id)
+            }
+        }
+    }
 
     private func fetchSteps(for lesson: Lesson) -> Promise<[Step]> {
         return firstly {
