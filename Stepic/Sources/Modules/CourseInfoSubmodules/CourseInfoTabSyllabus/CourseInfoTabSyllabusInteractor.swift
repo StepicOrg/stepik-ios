@@ -247,7 +247,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             self.forceLoadAllSectionsIfNeeded().done {
                 for (uid, section) in self.currentSections {
                     let sectionState = self.getDownloadingStateForSection(section)
-                    if case .available(let isCached) = sectionState, !isCached {
+                    if case .available(false) = sectionState {
                         handleSection(id: uid)
                     }
                 }
@@ -694,6 +694,18 @@ extension CourseInfoTabSyllabusInteractor {
                 downloadState: .waiting
             )
         )
+
+        // Present waiting state for units if not cached
+        section.units.forEach { unit in
+            if case .available(false) = self.getDownloadingStateForUnit(unit) {
+                self.presenter.presentDownloadButtonUpdate(
+                    response: .init(
+                        source: .unit(entity: unit),
+                        downloadState: .waiting
+                    )
+                )
+            }
+        }
 
         self.syllabusDownloadsService.download(section: section).done {
             CourseInfoTabSyllabusInteractor.logger.info(
