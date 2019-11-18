@@ -139,7 +139,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
             return self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil ? video : nil
         }
-        let uncachedVideosIDs = Set(uncachedVideos.map({ $0.id }))
+        let uncachedVideosIDs = Set(uncachedVideos.map { $0.id })
 
         if uncachedVideosIDs.isEmpty {
             return
@@ -235,6 +235,10 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                     do {
                         try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
                         video.cachedQuality = nil
+
+                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                        self.progressByVideoID[video.id] = nil
+
                         seal.fulfill(())
                     } catch {
                         seal.reject(Error.removeUnitFailed)
@@ -257,7 +261,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             fulfilled: section.units.map {
                 self.remove(unit: $0)
             }
-        )
+        ).done { _ in
+            self.unitIDsBySectionID[section.id] = nil
+        }
     }
 
     // MARK: Cancel
@@ -438,7 +444,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     private func getVideoDownloadProgress(_ video: Video) -> Float? {
-        return self.progressByVideoID[video.id]
+        return self.activeVideoDownloads.contains(video.id) ? self.progressByVideoID[video.id] : nil
     }
 
     private func getUnitDownloadProgress(unitID: Unit.IdType) -> Float? {
