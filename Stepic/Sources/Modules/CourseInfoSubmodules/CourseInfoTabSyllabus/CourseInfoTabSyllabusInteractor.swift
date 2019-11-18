@@ -688,6 +688,13 @@ extension CourseInfoTabSyllabusInteractor {
             "course info tab syllabus interactor: start downloading section = \(sectionID)"
         )
 
+        self.presenter.presentDownloadButtonUpdate(
+            response: .init(
+                source: .section(entity: section),
+                downloadState: .waiting
+            )
+        )
+
         self.syllabusDownloadsService.download(section: section).done {
             CourseInfoTabSyllabusInteractor.logger.info(
                 "course info tab syllabus interactor: started downloading section = \(sectionID)"
