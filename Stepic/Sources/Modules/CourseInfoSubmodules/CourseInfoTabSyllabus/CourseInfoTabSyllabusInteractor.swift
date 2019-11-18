@@ -745,7 +745,10 @@ extension CourseInfoTabSyllabusInteractor {
                 "course info tab syllabus interactor: finish cancelling section = \(sectionID)"
             )
         }.ensure {
-            self.updateSectionDownloadState(section)
+            // FIXME: Better handle this case, w/o delay section downloading tasks may not be cancelled
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                self.updateSectionDownloadState(section)
+            }
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while cancelling section = \(sectionID), error = \(error)"
