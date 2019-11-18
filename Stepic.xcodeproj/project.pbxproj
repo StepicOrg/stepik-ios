@@ -20,7 +20,6 @@
 		0805FE441F0D390B001226B4 /* CodePlaygroundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FE431F0D390B001226B4 /* CodePlaygroundManager.swift */; };
 		0805FE481F0E584B001226B4 /* CodePlaygroundTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805FE471F0E584B001226B4 /* CodePlaygroundTest.swift */; };
 		0806B2C21EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */; };
-		080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA22F1EA017FB0079272F /* CertificateSpec.swift */; };
 		080AA2351EA05BE00079272F /* TestInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 080AA2341EA05BE00079272F /* TestInfo.plist */; };
 		080AA2371EA05CD20079272F /* TestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080AA2361EA05CD20079272F /* TestConfig.swift */; };
 		080ACF501BD79D5500329F2B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080ACF4F1BD79D5500329F2B /* Images.swift */; };
@@ -1078,7 +1077,6 @@
 		0805FE471F0E584B001226B4 /* CodePlaygroundTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodePlaygroundTest.swift; sourceTree = "<group>"; };
 		0806B2C11EBDBB0200FDE0F7 /* PostViewsExecutableTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewsExecutableTask.swift; sourceTree = "<group>"; };
 		080852771ED5CC4C007C0877 /* Model_step_submission_count_v16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_submission_count_v16.xcdatamodel; sourceTree = "<group>"; };
-		080AA22F1EA017FB0079272F /* CertificateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateSpec.swift; sourceTree = "<group>"; };
 		080AA2341EA05BE00079272F /* TestInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestInfo.plist; sourceTree = "<group>"; };
 		080AA2361EA05CD20079272F /* TestConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConfig.swift; sourceTree = "<group>"; };
 		080ACF4F1BD79D5500329F2B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -2295,14 +2293,6 @@
 			name = Stepic;
 			sourceTree = "<group>";
 		};
-		081058321E9FB50700FAC30A /* Certificates */ = {
-			isa = PBXGroup;
-			children = (
-				080AA22F1EA017FB0079272F /* CertificateSpec.swift */,
-			);
-			name = Certificates;
-			sourceTree = "<group>";
-		};
 		08195A041FA00FE300E6D6CD /* CourseList */ = {
 			isa = PBXGroup;
 			children = (
@@ -2743,7 +2733,6 @@
 				080AA2361EA05CD20079272F /* TestConfig.swift */,
 				2CB51F6A204FC6220008431C /* UserActivitySpec.swift */,
 				62E987B9D418CC2175A64EC2 /* UserAgentTests.swift */,
-				081058321E9FB50700FAC30A /* Certificates */,
 			);
 			path = StepicTests;
 			sourceTree = "<group>";
@@ -6133,7 +6122,6 @@
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
 				2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */,
-				080AA2301EA017FB0079272F /* CertificateSpec.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
 				0805FE481F0E584B001226B4 /* CodePlaygroundTest.swift in Sources */,
 				2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */,
