@@ -278,7 +278,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                     do {
                         try self.videoDownloadingService.cancelDownload(videoID: video.id)
 
-                        self.activeVideoDownloads.remove(video.id)
                         self.videoIDsByUnitID[unit.id]?.remove(video.id)
                         self.progressByVideoID[video.id] = nil
 
@@ -404,7 +403,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         // Downloading state
-        if downloadingUnitProgresses.count == units.count && !units.isEmpty {
+        if !downloadingUnitProgresses.isEmpty && !units.isEmpty {
             return .downloading(
                 progress: downloadingUnitProgresses.reduce(0, +) / Float(downloadingUnitProgresses.count)
             )
