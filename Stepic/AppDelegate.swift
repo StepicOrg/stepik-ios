@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
+        SVProgressHUD.setHapticsEnabled(true)
 
         ConnectionHelper.shared.instantiate()
         self.alamofireRequestsLogger.startIfDebug()
