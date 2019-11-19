@@ -799,3 +799,7 @@ WriteCommentCancelPromptDestructiveActionTitle = "Удалить";
 
 /* Downloads */
 DownloadsTitle = "Загруженные курсы";
+
+/* Edit step */
+EditStepTitle = "Редактирование шага";
+EditStepPlaceholder = "Введите текст...";

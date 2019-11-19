@@ -680,6 +680,7 @@
 		2CF10C892384243100F8CC95 /* StepSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF10C882384243100F8CC95 /* StepSource.swift */; };
 		2CF10C8B238426B300F8CC95 /* StepSourcesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */; };
 		2CF10C8D238426DC00F8CC95 /* StepSourcesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */; };
+		2CF10C8F23842EB300F8CC95 /* EditStepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF10C8E23842EB300F8CC95 /* EditStepViewModel.swift */; };
 		2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EEC211AF4300006266F /* StoriesAssembly.swift */; };
 		2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EF5211AF4310006266F /* StoriesPresenter.swift */; };
 		2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08484EE5211AF42E0006266F /* StoriesViewController.swift */; };
@@ -1797,6 +1798,7 @@
 		2CF10C882384243100F8CC95 /* StepSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSource.swift; sourceTree = "<group>"; };
 		2CF10C8A238426B300F8CC95 /* StepSourcesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSourcesNetworkService.swift; sourceTree = "<group>"; };
 		2CF10C8C238426DC00F8CC95 /* StepSourcesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSourcesAPI.swift; sourceTree = "<group>"; };
+		2CF10C8E23842EB300F8CC95 /* EditStepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStepViewModel.swift; sourceTree = "<group>"; };
 		2CF1DD9B230A8D780083350A /* NewSortingQuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSortingQuizViewModel.swift; sourceTree = "<group>"; };
 		2CF4252A2024C10C002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_hard.png; sourceTree = "<group>"; };
 		2CF4252C2024C10D002D7305 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/overlay_simple.png; sourceTree = "<group>"; };
@@ -5462,6 +5464,7 @@
 				2B8F2031F6100BFD4570B903 /* EditStepProvider.swift */,
 				04C0635413716CE788EAC4CC /* EditStepView.swift */,
 				387BE230BE0ABC4E38FF9642 /* EditStepViewController.swift */,
+				2CF10C8E23842EB300F8CC95 /* EditStepViewModel.swift */,
 				2E90778F7C4AF2F70EE30777 /* InputOutput */,
 			);
 			path = EditStep;
@@ -6637,6 +6640,7 @@
 				0837492D1DE5B07900144C14 /* AlertManager.swift in Sources */,
 				08DF78D21F64059900AEEA85 /* StepikLabel.swift in Sources */,
 				2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */,
+				2CF10C8F23842EB300F8CC95 /* EditStepViewModel.swift in Sources */,
 				08883AC4214C6AF200898BBE /* ProfileAssembly.swift in Sources */,
 				2C6BBBB522B261E700889A45 /* BaseQuizViewController.swift in Sources */,
 				2C20C86822F903D10052E9BF /* CodeEditorThemeService.swift in Sources */,
