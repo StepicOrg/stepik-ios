@@ -4,6 +4,7 @@ import PromiseKit
 
 protocol EditStepInteractorProtocol {
     func doStepSourceLoad(request: EditStep.LoadStepSource.Request)
+    func doStepTextUpdate(request: EditStep.UpdateStepText.Request)
 }
 
 // MARK: - EditStepInteractor: EditStepInteractorProtocol -
@@ -14,16 +15,11 @@ final class EditStepInteractor: EditStepInteractorProtocol {
     weak var moduleOutput: EditStepOutputProtocol?
 
     private let stepID: Step.IdType
-
     private let presenter: EditStepPresenterProtocol
     private let provider: EditStepProviderProtocol
 
     private var currentStepSource: StepSource?
-
     private var currentText: String = ""
-    private var originalText: String {
-        return self.currentStepSource?.text ?? ""
-    }
 
     init(
         stepID: Step.IdType,
@@ -53,12 +49,25 @@ final class EditStepInteractor: EditStepInteractorProtocol {
             self.currentStepSource = stepSource
             self.currentText = stepSource.text
 
-            let data = EditStep.LoadStepSource.Data(originalText: self.originalText, currentText: self.currentText)
-            self.presenter.presentStepSource(response: .init(data: .success(data)))
+            self.presenter.presentStepSource(response: .init(data: .success(self.makeStepSourceDataFromCurrentData())))
         }.catch { error in
             EditStepInteractor.logger.error("edit step interactor :: error while fetching step source, error \(error)")
             self.presenter.presentStepSource(response: .init(data: .failure(error)))
         }
+    }
+
+    func doStepTextUpdate(request: EditStep.UpdateStepText.Request) {
+        self.currentText = request.text
+        self.presenter.presentStepTextUpdate(response: .init(data: self.makeStepSourceDataFromCurrentData()))
+    }
+
+    // MARK: Private API
+
+    private func makeStepSourceDataFromCurrentData() -> EditStep.StepSourceData {
+        return .init(
+            originalText: self.currentStepSource?.text ?? "",
+            currentText: self.currentText
+        )
     }
 
     // MARK: - Types

@@ -1,7 +1,10 @@
 import UIKit
 
+// MARK: EditStepViewControllerProtocol -
+
 protocol EditStepViewControllerProtocol: class {
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel)
+    func displayStepTextUpdate(response: EditStep.UpdateStepText.ViewModel)
 }
 
 // MARK: - EditStepViewController: UIViewController, ControllerWithStepikPlaceholder -
@@ -92,11 +95,10 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
         self.state = newState
 
         switch newState {
-        case .result(let data):
+        case .result(let viewModel):
             self.editStepView?.hideLoading()
-            self.editStepView?.text = data.text
-            self.doneBarButtonItem.isEnabled = data.isFilled
             self.isPlaceholderShown = false
+            self.updateView(newViewModel: viewModel)
         case .loading:
             self.editStepView?.showLoading()
             self.isPlaceholderShown = false
@@ -104,6 +106,8 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
             self.showPlaceholder(for: .connectionError)
         }
     }
+
+    // MARK: Actions
 
     @objc
     private func cancelButtonDidClick(_ sender: UIBarButtonItem) {
@@ -122,12 +126,23 @@ extension EditStepViewController: EditStepViewControllerProtocol {
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
+
+    func displayStepTextUpdate(response: EditStep.UpdateStepText.ViewModel) {
+        self.updateView(newViewModel: response.viewModel)
+    }
+
+    // MARK: Private helpers
+
+    private func updateView(newViewModel: EditStepViewModel) {
+        self.editStepView?.text = newViewModel.text
+        self.doneBarButtonItem.isEnabled = newViewModel.isFilled
+    }
 }
 
 // MARK: - EditStepViewController: EditStepViewDelegate -
 
 extension EditStepViewController: EditStepViewDelegate {
     func editStepView(_ view: EditStepView, didChangeText text: String) {
-        print("did change text = \(text)")
+        self.interactor.doStepTextUpdate(request: .init(text: text))
     }
 }

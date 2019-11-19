@@ -2,6 +2,7 @@ import UIKit
 
 protocol EditStepPresenterProtocol {
     func presentStepSource(response: EditStep.LoadStepSource.Response)
+    func presentStepTextUpdate(response: EditStep.UpdateStepText.Response)
 }
 
 // MARK: - EditStepPresenter: EditStepPresenterProtocol -
@@ -17,6 +18,14 @@ final class EditStepPresenter: EditStepPresenterProtocol {
         case .failure:
             self.viewController?.displayStepSource(viewModel: .init(state: .error))
         }
+    }
+
+    func presentStepTextUpdate(response: EditStep.UpdateStepText.Response) {
+        let viewModel = self.makeViewModel(
+            currentText: response.data.currentText,
+            originalText: response.data.originalText
+        )
+        self.viewController?.displayStepTextUpdate(response: .init(viewModel: viewModel))
     }
 
     // MARK: Private API
