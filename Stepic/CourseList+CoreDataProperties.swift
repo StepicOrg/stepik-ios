@@ -17,7 +17,7 @@ extension CourseListModel {
     @NSManaged var managedPosition: NSNumber?
     @NSManaged var managedCoursesArray: NSObject?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.instance.context)!
     }
 

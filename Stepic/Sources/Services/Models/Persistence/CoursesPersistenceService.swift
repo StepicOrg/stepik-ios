@@ -7,6 +7,7 @@ protocol CoursesPersistenceServiceProtocol: class {
         page: Int
     ) -> Promise<([Course], Meta)>
     func fetch(id: Course.IdType) -> Promise<Course?>
+    func fetchAll() -> Guarantee<[Course]>
 }
 
 final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
@@ -30,6 +31,12 @@ final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
+        }
+    }
+
+    func fetchAll() -> Guarantee<[Course]> {
+        return Guarantee { seal in
+            seal(Course.getAllCourses())
         }
     }
 

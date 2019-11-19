@@ -16,7 +16,7 @@ extension LastStep {
 
     @NSManaged var managedCourse: Course?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "LastStep", in: CoreDataHelper.instance.context)!
     }
 

@@ -31,7 +31,7 @@ extension Unit {
 
     @NSManaged var managedAssignments: NSOrderedSet?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.instance.context)!
     }
 

@@ -16,7 +16,7 @@ extension CodeTemplate {
 
     @NSManaged var managedOptions: StepOptions?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CodeTemplate", in: CoreDataHelper.instance.context)!
     }
 

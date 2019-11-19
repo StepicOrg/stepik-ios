@@ -565,7 +565,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 let rightOffset = min(
                     self.getDiscussionsLeftToLoadInRightHalfCount(discussionsWindow: discussionsWindow), loadingInterval
                 )
-                let endIndex = discussionIndex + rightOffset
+                let endIndex = min(discussionIndex + rightOffset, self.currentDiscussionsIDs.count - 1)
                 let rightHalf = Array(self.currentDiscussionsIDs[discussionIndex...endIndex])
 
                 return leftHalf + rightHalf

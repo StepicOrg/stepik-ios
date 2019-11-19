@@ -85,12 +85,12 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         let lessonTitle = lesson.title
         let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
-                switch step.block.name {
-                case "video":
+                switch step.block.type {
+                case .video:
                     return UIImage(named: "video_step_icon")
-                case "text":
+                case .text:
                     return UIImage(named: "theory_step_icon")
-                case "code", "dataset", "admin", "sql":
+                case .code, .dataset, .admin, .sql:
                     return UIImage(named: "code_step_icon")
                 default:
                     return UIImage(named: "quiz_step_icon")

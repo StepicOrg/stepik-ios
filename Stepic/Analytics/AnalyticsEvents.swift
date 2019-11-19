@@ -75,14 +75,18 @@ struct AnalyticsEvents {
 
     struct CourseOverview {
         static let shared = "share_course_clicked"
+
         struct JoinPressed {
             static let anonymous = "join_course_anonymous"
             static let signed = "join_course_signed"
         }
+
         struct Video {
             static let clicked = "course_detail_video_clicked"
             static let shown = "course_detail_video_shown"
         }
+
+        static let delete = "clicked_delete_cached_course"
     }
 
     struct Step {

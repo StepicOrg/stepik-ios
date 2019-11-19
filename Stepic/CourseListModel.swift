@@ -36,7 +36,7 @@ final class CourseListModel: NSManagedObject, IDFetchable {
         return ContentLanguage(languageString: languageString)
     }
 
-    class func recoverAsync(ids: [Int]) -> Guarantee<[CourseListModel]> {
+    static func recoverAsync(ids: [Int]) -> Guarantee<[CourseListModel]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
         let descriptor = NSSortDescriptor(key: "managedPosition", ascending: true)
 
@@ -61,7 +61,7 @@ final class CourseListModel: NSManagedObject, IDFetchable {
         }
     }
 
-    class func recover(ids: [Int]) -> [CourseListModel] {
+    static func recover(ids: [Int]) -> [CourseListModel] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
         let descriptor = NSSortDescriptor(key: "managedPosition", ascending: false)
 

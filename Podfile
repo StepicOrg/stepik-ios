@@ -15,7 +15,7 @@ def shared_pods
     pod 'Crashlytics', '3.14.0'
     pod 'DeviceKit', '2.3.0'
     pod 'PromiseKit', '6.11.0'
-    pod 'SwiftLint', '0.35.0'
+    pod 'SwiftLint', '0.37.0'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
 
@@ -30,10 +30,10 @@ def all_pods
     pod 'SnapKit', '4.2.0'
 
     # Firebase
-    pod 'Firebase/Core', '6.12.0'
-    pod 'Firebase/Messaging' , '6.12.0'
-    pod 'Firebase/Analytics' , '6.12.0'
-    pod 'Firebase/RemoteConfig', '6.12.0'
+    pod 'Firebase/Core', '6.13.0'
+    pod 'Firebase/Messaging' , '6.13.0'
+    pod 'Firebase/Analytics' , '6.13.0'
+    pod 'Firebase/RemoteConfig', '6.13.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.8.2'
     pod 'Amplitude-iOS', '4.8.2'

@@ -129,34 +129,57 @@ struct AmplitudeAnalyticsEvents {
     }
 
     struct Downloads {
-        static func started(content: String) -> AnalyticsEvent {
+        static func started(content: Content) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Download started",
                 parameters: [
-                    "content": content
+                    "content": content.rawValue
                 ]
             )
         }
 
-        static func cancelled(content: String) -> AnalyticsEvent {
+        static func cancelled(content: Content) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Download cancelled",
                 parameters: [
-                    "content": content
+                    "content": content.rawValue
                 ]
             )
         }
 
-        static func deleted(content: String) -> AnalyticsEvent {
+        static func deleted(content: Content, source: DeleteDownloadSource) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Download deleted",
                 parameters: [
-                    "content": content
+                    "content": content.rawValue,
+                    "source": source.rawValue
+                ]
+            )
+        }
+
+        static func deleteDownloadsConfirmationInteracted(content: Content, isConfirmed: Bool) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Delete downloads confirmation interacted",
+                parameters: [
+                    "content": content.rawValue,
+                    "result": isConfirmed ? "yes" : "no"
                 ]
             )
         }
 
         static var downloadsScreenOpened = AnalyticsEvent(name: "Downloads screen opened")
+
+        enum Content: String {
+            case course
+            case section
+            case lesson
+            case step
+        }
+
+        enum DeleteDownloadSource: String {
+            case syllabus
+            case downloads
+        }
     }
 
     struct Search {

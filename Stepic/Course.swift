@@ -239,7 +239,12 @@ final class Course: NSManagedObject, IDFetchable {
         })
     }
 
-    class func fetchAsync(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> Promise<[Course]> {
+    static func fetchAsync(
+        _ ids: [Int],
+        featured: Bool? = nil,
+        enrolled: Bool? = nil,
+        isPublic: Bool? = nil
+    ) -> Promise<[Course]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
@@ -279,7 +284,12 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    class func getCourses(_ ids: [Int], featured: Bool? = nil, enrolled: Bool? = nil, isPublic: Bool? = nil) -> [Course] {
+    static func getCourses(
+        _ ids: [Int],
+        featured: Bool? = nil,
+        enrolled: Bool? = nil,
+        isPublic: Bool? = nil
+    ) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         let descriptor = NSSortDescriptor(key: "managedId", ascending: false)
 
@@ -315,16 +325,17 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    class func getAllCourses(enrolled: Bool? = nil) -> [Course] {
+    static func getAllCourses(enrolled: Bool? = nil) -> [Course] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
         var predicate = NSPredicate(value: true)
 
-        if let e = enrolled {
-            let p = NSPredicate(format: "managedEnrolled == %@", e as NSNumber)
-            predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [predicate, p])
+        if let enrolled = enrolled {
+            let enrolledPredicate = NSPredicate(format: "managedEnrolled == %@", enrolled as NSNumber)
+            predicate = NSCompoundPredicate(type: .and, subpredicates: [predicate, enrolledPredicate])
         }
 
         request.predicate = predicate
+
         do {
             let results = try CoreDataHelper.instance.context.fetch(request)
             return results as! [Course]

@@ -183,7 +183,7 @@ extension NewStepViewController: NewStepViewDelegate {
 
         let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
             || ConnectionHelper.shared.reachability.isReachableViaWWAN()
-        let isVideoCached = video.state == VideoState.cached
+        let isVideoCached = video.state == .cached
 
         if !isVideoCached && !isVideoPlayingReachable {
             let alert = UIAlertController(

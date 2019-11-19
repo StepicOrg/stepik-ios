@@ -16,7 +16,7 @@ extension CodeLimit {
 
     @NSManaged var managedOptions: StepOptions?
 
-    class var oldEntity: NSEntityDescription {
+    static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "CodeLimit", in: CoreDataHelper.instance.context)!
     }
 
