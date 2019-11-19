@@ -123,6 +123,8 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     }
 }
 
+// MARK: - NewStepInteractor: NewStepInputProtocol -
+
 extension NewStepInteractor: NewStepInputProtocol {
     func updateStepNavigation(
         canNavigateToPreviousUnit: Bool,
@@ -136,5 +138,9 @@ extension NewStepInteractor: NewStepInputProtocol {
                 canNavigateToNextStep: canNavigateToNextStep
             )
         )
+    }
+
+    func refresh() {
+        self.doStepLoad(request: .init())
     }
 }

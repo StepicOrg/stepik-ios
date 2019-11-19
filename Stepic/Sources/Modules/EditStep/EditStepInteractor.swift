@@ -83,6 +83,7 @@ final class EditStepInteractor: EditStepInteractorProtocol {
             self.currentText = stepSource.text
 
             self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: true))
+            self.moduleOutput?.handleStepSourceUpdated(stepSource)
         }.catch { error in
             EditStepInteractor.logger.error("edit step interactor :: error while updating step source, error \(error)")
             self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: false))

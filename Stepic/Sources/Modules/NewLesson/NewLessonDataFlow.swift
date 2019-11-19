@@ -102,6 +102,17 @@ enum NewLesson {
         }
     }
 
+    /// Force step content reload (after step source updated)
+    enum RefreshStep {
+        struct Response {
+            let index: Int
+        }
+
+        struct ViewModel {
+            let index: Int
+        }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

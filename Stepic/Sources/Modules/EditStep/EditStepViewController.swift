@@ -136,7 +136,7 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
 // MARK: - EditStepViewController: EditStepViewControllerProtocol -
 
 extension EditStepViewController: EditStepViewControllerProtocol {
-    private static let dismissDelay: DispatchTimeInterval = .seconds(1)
+    private static let dismissDelay: DispatchTimeInterval = .milliseconds(750)
 
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel) {
         self.updateState(newState: viewModel.state)

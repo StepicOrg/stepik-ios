@@ -13,6 +13,7 @@ protocol NewLessonViewControllerProtocol: class {
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel)
+    func displayStepRefresh(viewModel: NewLesson.RefreshStep.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -432,6 +433,8 @@ extension NewLessonViewController: TMBarDataSource {
     }
 }
 
+// MARK: - NewLessonViewController: NewLessonViewControllerProtocol -
+
 extension NewLessonViewController: NewLessonViewControllerProtocol {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel) {
         self.state = viewModel.state
@@ -472,9 +475,20 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
     }
 
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
-        let assembly = EditStepAssembly(stepID: viewModel.stepID, output: nil)
+        let assembly = EditStepAssembly(
+            stepID: viewModel.stepID,
+            output: self.interactor as? EditStepOutputProtocol
+        )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
         self.present(navigationController, animated: true)
+    }
+
+    func displayStepRefresh(viewModel: NewLesson.RefreshStep.ViewModel) {
+        guard let stepModuleInput = self.stepModulesInputs[safe: viewModel.index] else {
+            return
+        }
+
+        stepModuleInput?.refresh()
     }
 
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel) {
@@ -485,6 +499,8 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         }
     }
 }
+
+// MARK: - NewLessonViewController: EasyTipViewDelegate -
 
 extension NewLessonViewController: EasyTipViewDelegate {
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {

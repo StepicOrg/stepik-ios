@@ -50,8 +50,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     }
 
     func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request) {
-        guard let currentUnit = self.currentUnit,
-              let stepID = currentUnit.lesson?.stepsArray[safe: request.index] else {
+        guard let lesson = self.currentLesson,
+              let stepID = lesson.stepsArray[safe: request.index] else {
             return
         }
 
@@ -206,6 +206,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     }
 }
 
+// MARK: - NewLessonInteractor: NewStepOutputProtocol -
+
 extension NewLessonInteractor: NewStepOutputProtocol {
     func handlePreviousUnitNavigation() {
         guard let unit = self.previousUnit else {
@@ -255,5 +257,18 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         }
 
         self.presenter.presentCurrentStepUpdate(response: .init(index: index))
+    }
+}
+
+// MARK: - NewLessonInteractor: EditStepOutputProtocol -
+
+extension NewLessonInteractor: EditStepOutputProtocol {
+    func handleStepSourceUpdated(_ stepSource: StepSource) {
+        guard let lesson = self.currentLesson,
+              let stepIndex = lesson.stepsArray.firstIndex(where: { $0 == stepSource.id }) else {
+            return
+        }
+
+        self.presenter.presentStepRefresh(response: .init(index: stepIndex))
     }
 }
