@@ -50,8 +50,10 @@ final class EditStepView: UIView {
         textView.alwaysBounceVertical = true
         textView.showsHorizontalScrollIndicator = false
         // Disable features
-        textView.dataDetectorTypes = []
+        textView.autocapitalizationType = .none
         textView.autocorrectionType = .no
+        textView.spellCheckingType = .no
+        textView.dataDetectorTypes = []
 
         textView.delegate = self
 
