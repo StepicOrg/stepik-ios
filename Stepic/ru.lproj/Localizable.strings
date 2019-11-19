@@ -802,4 +802,4 @@ DownloadsTitle = "Загруженные курсы";
 
 /* Edit step */
 EditStepTitle = "Редактирование шага";
-EditStepPlaceholder = "Введите текст...";
+EditStepPlaceholder = "Текст...";

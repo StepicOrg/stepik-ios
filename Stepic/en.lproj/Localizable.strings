@@ -801,4 +801,4 @@ DownloadsTitle = "Downloaded courses";
 
 /* Edit step */
 EditStepTitle = "Edit step";
-EditStepPlaceholder = "Enter text...";
+EditStepPlaceholder = "Text...";
