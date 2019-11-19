@@ -20,4 +20,13 @@ final class StepSourcesAPI: APIEndpoint {
             withManager: self.manager
         )
     }
+
+    func update(_ stepSource: StepSource) -> Promise<StepSource> {
+        return self.update.request(
+            requestEndpoint: self.name,
+            paramName: "stepSource",
+            updatingObject: stepSource,
+            withManager: self.manager
+        )
+    }
 }

@@ -4,7 +4,8 @@ import PromiseKit
 
 protocol EditStepInteractorProtocol {
     func doStepSourceLoad(request: EditStep.LoadStepSource.Request)
-    func doStepTextUpdate(request: EditStep.UpdateStepText.Request)
+    func doStepSourceTextUpdate(request: EditStep.UpdateStepText.Request)
+    func doRemoteStepSourceUpdate(request: EditStep.RemoteStepSourceUpdate.Request)
 }
 
 // MARK: - EditStepInteractor: EditStepInteractorProtocol -
@@ -56,9 +57,36 @@ final class EditStepInteractor: EditStepInteractorProtocol {
         }
     }
 
-    func doStepTextUpdate(request: EditStep.UpdateStepText.Request) {
+    func doStepSourceTextUpdate(request: EditStep.UpdateStepText.Request) {
         self.currentText = request.text
-        self.presenter.presentStepTextUpdate(response: .init(data: self.makeStepSourceDataFromCurrentData()))
+        self.presenter.presentStepSourceTextUpdate(response: .init(data: self.makeStepSourceDataFromCurrentData()))
+    }
+
+    func doRemoteStepSourceUpdate(request: EditStep.RemoteStepSourceUpdate.Request) {
+        guard let currentStepSource = self.currentStepSource else {
+            EditStepInteractor.logger.info("edit step interactor :: error while updating step source, no step source")
+            return self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: false))
+        }
+
+        let updatingStepSource = StepSource(
+            id: currentStepSource.id,
+            name: currentStepSource.name,
+            text: self.currentText
+        )
+
+        EditStepInteractor.logger.info("edit step interactor :: start updating step source = \(updatingStepSource.id)")
+
+        self.provider.updateStepSource(updatingStepSource).done { stepSource in
+            EditStepInteractor.logger.info("edit step interactor :: finish updating step source = \(stepSource)")
+
+            self.currentStepSource = stepSource
+            self.currentText = stepSource.text
+
+            self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: true))
+        }.catch { error in
+            EditStepInteractor.logger.error("edit step interactor :: error while updating step source, error \(error)")
+            self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: false))
+        }
     }
 
     // MARK: Private API

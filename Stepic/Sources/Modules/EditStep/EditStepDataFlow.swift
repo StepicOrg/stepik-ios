@@ -38,6 +38,20 @@ enum EditStep {
         }
     }
 
+    /// Try to update remote step source via API
+    enum RemoteStepSourceUpdate {
+        struct Request { }
+
+        struct Response {
+            let isSuccessful: Bool
+        }
+
+        struct ViewModel {
+            let isSuccessful: Bool
+            let feedback: String
+        }
+    }
+
     // MARK: - States
 
     enum ViewControllerState {

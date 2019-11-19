@@ -803,3 +803,5 @@ DownloadsTitle = "Загруженные курсы";
 /* Edit step */
 EditStepTitle = "Редактирование шага";
 EditStepPlaceholder = "Текст...";
+EditStepRemoteUpdateSuccessfulTitle = "Обновлено";
+EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";

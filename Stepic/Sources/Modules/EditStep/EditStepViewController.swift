@@ -1,10 +1,12 @@
+import SVProgressHUD
 import UIKit
 
 // MARK: EditStepViewControllerProtocol -
 
 protocol EditStepViewControllerProtocol: class {
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel)
-    func displayStepTextUpdate(response: EditStep.UpdateStepText.ViewModel)
+    func displayStepSourceTextUpdate(viewModel: EditStep.UpdateStepText.ViewModel)
+    func displayStepSourceEditResult(viewModel: EditStep.RemoteStepSourceUpdate.ViewModel)
 }
 
 // MARK: - EditStepViewController: UIViewController, ControllerWithStepikPlaceholder -
@@ -28,6 +30,13 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
         target: self,
         action: #selector(self.doneButtonDidClick(_:))
     )
+
+    private lazy var activityIndicatorBarButtonItem: UIBarButtonItem = {
+        let activityIndicator = UIActivityIndicatorView(style: .white)
+        activityIndicator.color = .mainDark
+        activityIndicator.startAnimating()
+        return UIBarButtonItem(customView: activityIndicator)
+    }()
 
     init(
         interactor: EditStepInteractorProtocol,
@@ -116,19 +125,40 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
 
     @objc
     private func doneButtonDidClick(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true)
+        self.view.endEditing(true)
+        self.editStepView?.isEnabled = false
+        self.navigationItem.rightBarButtonItem = self.activityIndicatorBarButtonItem
+
+        self.interactor.doRemoteStepSourceUpdate(request: .init())
     }
 }
 
 // MARK: - EditStepViewController: EditStepViewControllerProtocol -
 
 extension EditStepViewController: EditStepViewControllerProtocol {
+    private static let dismissDelay: DispatchTimeInterval = .seconds(1)
+
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
 
-    func displayStepTextUpdate(response: EditStep.UpdateStepText.ViewModel) {
-        self.updateView(newViewModel: response.viewModel)
+    func displayStepSourceTextUpdate(viewModel: EditStep.UpdateStepText.ViewModel) {
+        self.updateView(newViewModel: viewModel.viewModel)
+    }
+
+    func displayStepSourceEditResult(viewModel: EditStep.RemoteStepSourceUpdate.ViewModel) {
+        if viewModel.isSuccessful {
+            SVProgressHUD.showSuccess(withStatus: viewModel.feedback)
+            self.navigationItem.rightBarButtonItem = nil
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + EditStepViewController.dismissDelay) {
+                self.dismiss(animated: true)
+            }
+        } else {
+            SVProgressHUD.showError(withStatus: viewModel.feedback)
+            self.editStepView?.isEnabled = true
+            self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
+        }
     }
 
     // MARK: Private helpers
@@ -143,6 +173,6 @@ extension EditStepViewController: EditStepViewControllerProtocol {
 
 extension EditStepViewController: EditStepViewDelegate {
     func editStepView(_ view: EditStepView, didChangeText text: String) {
-        self.interactor.doStepTextUpdate(request: .init(text: text))
+        self.interactor.doStepSourceTextUpdate(request: .init(text: text))
     }
 }

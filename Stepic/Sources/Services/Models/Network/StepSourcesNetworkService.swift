@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol StepSourcesNetworkServiceProtocol: class {
     func fetch(ids: [StepSource.IdType], page: Int) -> Promise<([StepSource], Meta)>
+    func update(stepSource: StepSource) -> Promise<StepSource>
 }
 
 extension StepSourcesNetworkServiceProtocol {
@@ -24,5 +25,9 @@ final class StepSourcesNetworkService: StepSourcesNetworkServiceProtocol {
         }
 
         return self.stepSourcesAPI.retrieve(ids: ids, page: page)
+    }
+
+    func update(stepSource: StepSource) -> Promise<StepSource> {
+        return self.stepSourcesAPI.update(stepSource)
     }
 }

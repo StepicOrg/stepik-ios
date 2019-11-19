@@ -8,6 +8,21 @@ final class StepSource: JSONSerializable {
     var name: String = ""
     var text: String = ""
 
+    var json: JSON {
+        return [
+            JSONKey.block.rawValue: [
+                JSONKey.name.rawValue: self.name,
+                JSONKey.text.rawValue: self.text
+            ]
+        ]
+    }
+
+    init(id: IdType, name: String, text: String) {
+        self.id = id
+        self.name = name
+        self.text = text
+    }
+
     init(json: JSON) {
         self.update(json: json)
     }

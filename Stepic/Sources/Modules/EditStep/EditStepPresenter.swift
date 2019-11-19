@@ -2,7 +2,8 @@ import UIKit
 
 protocol EditStepPresenterProtocol {
     func presentStepSource(response: EditStep.LoadStepSource.Response)
-    func presentStepTextUpdate(response: EditStep.UpdateStepText.Response)
+    func presentStepSourceTextUpdate(response: EditStep.UpdateStepText.Response)
+    func presentStepSourceEditResult(response: EditStep.RemoteStepSourceUpdate.Response)
 }
 
 // MARK: - EditStepPresenter: EditStepPresenterProtocol -
@@ -20,12 +21,22 @@ final class EditStepPresenter: EditStepPresenterProtocol {
         }
     }
 
-    func presentStepTextUpdate(response: EditStep.UpdateStepText.Response) {
+    func presentStepSourceTextUpdate(response: EditStep.UpdateStepText.Response) {
         let viewModel = self.makeViewModel(
             currentText: response.data.currentText,
             originalText: response.data.originalText
         )
-        self.viewController?.displayStepTextUpdate(response: .init(viewModel: viewModel))
+        self.viewController?.displayStepSourceTextUpdate(viewModel: .init(viewModel: viewModel))
+    }
+
+    func presentStepSourceEditResult(response: EditStep.RemoteStepSourceUpdate.Response) {
+        let feedback = response.isSuccessful
+            ? NSLocalizedString("EditStepRemoteUpdateSuccessfulTitle", comment: "")
+            : NSLocalizedString("EditStepRemoteUpdateUnsuccessfulTitle", comment: "")
+
+        self.viewController?.displayStepSourceEditResult(
+            viewModel: .init(isSuccessful: response.isSuccessful, feedback: feedback)
+        )
     }
 
     // MARK: Private API
