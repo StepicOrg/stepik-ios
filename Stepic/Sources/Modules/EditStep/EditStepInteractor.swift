@@ -48,6 +48,8 @@ final class EditStepInteractor: EditStepInteractorProtocol {
                 return self.presenter.presentStepSource(response: .init(data: .failure(Error.noStepSource)))
             }
 
+            EditStepInteractor.logger.info("edit step interactor :: finish fetching step source")
+
             self.currentStepSource = stepSource
             self.currentText = stepSource.text
 

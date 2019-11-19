@@ -1,18 +1,18 @@
-import IQKeyboardManagerSwift
-import SVProgressHUD
 import UIKit
 
 protocol EditStepViewControllerProtocol: class {
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel)
 }
 
-// MARK: - EditStepViewController: UIViewController -
+// MARK: - EditStepViewController: UIViewController, ControllerWithStepikPlaceholder -
 
-final class EditStepViewController: UIViewController {
+final class EditStepViewController: UIViewController, ControllerWithStepikPlaceholder {
+    lazy var editStepView = self.view as? EditStepView
+
+    var placeholderContainer = StepikPlaceholderControllerContainer()
+
     private let interactor: EditStepInteractorProtocol
     private var state: EditStep.ViewControllerState
-
-    lazy var editStepView = self.view as? EditStepView
 
     private lazy var cancelBarButtonItem = UIBarButtonItem(
         barButtonSystemItem: .cancel,
@@ -56,8 +56,9 @@ final class EditStepViewController: UIViewController {
 
         self.navigationItem.leftBarButtonItem = self.cancelBarButtonItem
         self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
-
         self.doneBarButtonItem.isEnabled = false
+
+        self.registerPlaceholders()
 
         self.updateState(newState: self.state)
         self.interactor.doStepSourceLoad(request: .init())
@@ -70,17 +71,37 @@ final class EditStepViewController: UIViewController {
 
     // MARK: Private API
 
+    private func registerPlaceholders() {
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+
+                    strongSelf.updateState(newState: .loading)
+                    strongSelf.interactor.doStepSourceLoad(request: .init())
+                }
+            ),
+            for: .connectionError
+        )
+    }
+
     private func updateState(newState: EditStep.ViewControllerState) {
         self.state = newState
+
         switch newState {
         case .result(let data):
             self.editStepView?.hideLoading()
             self.editStepView?.text = data.text
             self.doneBarButtonItem.isEnabled = data.isFilled
+            self.isPlaceholderShown = false
         case .loading:
             self.editStepView?.showLoading()
+            self.isPlaceholderShown = false
         case .error:
-            SVProgressHUD.showError(withStatus: "")
+            self.showPlaceholder(for: .connectionError)
         }
     }
 
