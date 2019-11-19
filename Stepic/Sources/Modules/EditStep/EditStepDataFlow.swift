@@ -1,7 +1,9 @@
 import Foundation
 
 enum EditStep {
-    enum SomeAction {
+    // MARK: - Use cases -
+
+    enum LoadStepSource {
         struct Request { }
 
         struct Response { }

@@ -472,7 +472,9 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
     }
 
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
-        print("\(#function) stepID = \(viewModel.stepID)")
+        let assembly = EditStepAssembly(stepID: viewModel.stepID, output: nil)
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+        self.present(navigationController, animated: true)
     }
 
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel) {

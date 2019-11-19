@@ -1,22 +1,23 @@
 import UIKit
 
 final class EditStepAssembly: Assembly {
-    var moduleInput: EditStepInputProtocol?
-
+    private let stepID: Step.IdType
     private weak var moduleOutput: EditStepOutputProtocol?
 
-    init(output: EditStepOutputProtocol? = nil) {
+    init(stepID: Step.IdType, output: EditStepOutputProtocol? = nil) {
+        self.stepID = stepID
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
-        let provider = EditStepProvider()
+        let provider = EditStepProvider(
+            stepSourcesNetworkService: StepSourcesNetworkService(stepSourcesAPI: StepSourcesAPI())
+        )
         let presenter = EditStepPresenter()
-        let interactor = EditStepInteractor(presenter: presenter, provider: provider)
+        let interactor = EditStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
         let viewController = EditStepViewController(interactor: interactor)
 
         presenter.viewController = viewController
-        self.moduleInput = interactor
         interactor.moduleOutput = self.moduleOutput
 
         return viewController

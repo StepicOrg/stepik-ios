@@ -1,9 +1,13 @@
 import SnapKit
 import UIKit
 
+// MARK: Appearance -
+
 extension EditStepView {
     struct Appearance { }
 }
+
+// MARK: - EditStepView: UIView -
 
 final class EditStepView: UIView {
     let appearance: Appearance
