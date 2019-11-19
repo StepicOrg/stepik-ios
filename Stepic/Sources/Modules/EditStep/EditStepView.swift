@@ -9,8 +9,7 @@ extension EditStepView {
 
         let loadingIndicatorColor = UIColor.mainDark
 
-        let textViewInsets = LayoutInsets(top: 16, bottom: 16)
-        let textViewTextInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        let textViewTextInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         let textViewFont = UIFont.systemFont(ofSize: 16)
         let textViewTextColor = UIColor.mainDark
         let textViewPlaceholderColor = UIColor.mainDark.withAlphaComponent(0.4)
@@ -48,6 +47,8 @@ final class EditStepView: UIView {
         // Enable scrolling
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
+        textView.alwaysBounceVertical = true
+        textView.showsHorizontalScrollIndicator = false
         // Disable features
         textView.dataDetectorTypes = []
         textView.autocorrectionType = .no
@@ -115,9 +116,9 @@ extension EditStepView: ProgrammaticallyInitializableViewProtocol {
         self.textView.translatesAutoresizingMaskIntoConstraints = false
         self.textView.snp.makeConstraints { make in
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading)
-            make.top.equalToSuperview().offset(self.appearance.textViewInsets.top)
+            make.top.equalToSuperview()
             make.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-self.appearance.textViewInsets.bottom)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
 
         self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
