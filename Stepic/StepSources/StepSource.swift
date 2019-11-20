@@ -5,22 +5,26 @@ final class StepSource: JSONSerializable {
     typealias IdType = Int
 
     var id: IdType = -1
-    var name: String = ""
-    var text: String = ""
+    var block: JSONDictionary = [:]
+
+    var text: String {
+        get {
+            return self.block[JSONKey.text.rawValue] as? String ?? ""
+        }
+        set {
+            self.block[JSONKey.text.rawValue] = newValue
+        }
+    }
 
     var json: JSON {
         return [
-            JSONKey.block.rawValue: [
-                JSONKey.name.rawValue: self.name,
-                JSONKey.text.rawValue: self.text
-            ]
+            JSONKey.block.rawValue: self.block
         ]
     }
 
-    init(id: IdType, name: String, text: String) {
-        self.id = id
-        self.name = name
-        self.text = text
+    init(stepSource: StepSource) {
+        self.id = stepSource.id
+        self.block = stepSource.block
     }
 
     init(json: JSON) {
@@ -30,9 +34,8 @@ final class StepSource: JSONSerializable {
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
 
-        if let blockDictionary = json[JSONKey.block.rawValue].dictionary {
-            self.name = blockDictionary[JSONKey.name.rawValue]?.string ?? ""
-            self.text = blockDictionary[JSONKey.text.rawValue]?.string ?? ""
+        if let block = json[JSONKey.block.rawValue].dictionaryObject {
+            self.block = block
         }
     }
 
@@ -41,7 +44,14 @@ final class StepSource: JSONSerializable {
     enum JSONKey: String {
         case id
         case block
-        case name
         case text
+    }
+}
+
+// MARK: - StepSource: CustomDebugStringConvertible -
+
+extension StepSource: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "StepSource(id: \(self.id), block: \(self.block))"
     }
 }
