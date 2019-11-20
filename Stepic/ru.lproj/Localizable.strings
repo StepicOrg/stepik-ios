@@ -720,6 +720,7 @@ LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
 StepVideoPlayingNotReachableErrorTitle = "Ошибка соединения";
 StepVideoPlayingNotReachableErrorMessage = "Подключитесь к интернету и повторите попытку.";
+EditStepAlertActionTitle = "Редактировать";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
@@ -799,3 +800,10 @@ WriteCommentCancelPromptDestructiveActionTitle = "Удалить";
 
 /* Downloads */
 DownloadsTitle = "Загруженные курсы";
+
+/* Edit step */
+EditStepTitle = "Редактирование шага";
+EditStepPlaceholder = "Текст...";
+EditStepMessage = "Вы можете редактировать только текст шага и только в виде HTML кода. Для доступа к полноценному редактору шагов, пожалуйста, воспользуйтесь веб версией Stepik.";
+EditStepRemoteUpdateSuccessfulTitle = "Обновлено";
+EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";

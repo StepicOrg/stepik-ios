@@ -165,6 +165,13 @@ final class NewStepView: UIView {
         }
     }
 
+    func updateText(_ htmlText: String) {
+        if self.stepTextView.superview != nil {
+            self.stepTextView.reset()
+            self.stepTextView.loadHTMLText(htmlText)
+        }
+    }
+
     // MARK: Private API
 
     private func positionVideoPreview() {

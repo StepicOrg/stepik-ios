@@ -3,6 +3,7 @@ import PromiseKit
 
 protocol NewLessonInteractorProtocol {
     func doLessonLoad(request: NewLesson.LessonLoad.Request)
+    func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request)
 }
 
 final class NewLessonInteractor: NewLessonInteractorProtocol {
@@ -46,6 +47,15 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
     func doLessonLoad(request: NewLesson.LessonLoad.Request) {
         self.refresh(context: self.lastLoadState.context, startStep: self.lastLoadState.startStep)
+    }
+
+    func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request) {
+        guard let lesson = self.currentLesson,
+              let stepID = lesson.stepsArray[safe: request.index] else {
+            return
+        }
+
+        self.presenter.presentEditStep(response: .init(stepID: stepID))
     }
 
     // MARK: Private API
@@ -122,7 +132,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 lesson: lesson,
                 steps: steps,
                 progresses: progresses,
-                startStepIndex: startStepIndex
+                startStepIndex: startStepIndex,
+                canEdit: lesson.canEdit
             )
 
             self.presenter.presentLesson(response: .init(state: .success(data)))
@@ -195,6 +206,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     }
 }
 
+// MARK: - NewLessonInteractor: NewStepOutputProtocol -
+
 extension NewLessonInteractor: NewStepOutputProtocol {
     func handlePreviousUnitNavigation() {
         guard let unit = self.previousUnit else {
@@ -244,5 +257,18 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         }
 
         self.presenter.presentCurrentStepUpdate(response: .init(index: index))
+    }
+}
+
+// MARK: - NewLessonInteractor: EditStepOutputProtocol -
+
+extension NewLessonInteractor: EditStepOutputProtocol {
+    func handleStepSourceUpdated(_ stepSource: StepSource) {
+        guard let lesson = self.currentLesson,
+              let stepIndex = lesson.stepsArray.firstIndex(where: { $0 == stepSource.id }) else {
+            return
+        }
+
+        self.presenter.presentStepTextUpdate(response: .init(index: stepIndex, stepSource: stepSource))
     }
 }

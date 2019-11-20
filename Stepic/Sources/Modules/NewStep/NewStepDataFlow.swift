@@ -19,6 +19,18 @@ enum NewStep {
         }
     }
 
+    /// Update step HTML text - after step source being updated
+    enum StepTextUpdate {
+        struct Response {
+            let text: String
+            let fontSize: FontSize
+        }
+
+        struct ViewModel {
+            let htmlText: String
+        }
+    }
+
     /// Update bottom step controls – navigation buttons
     enum ControlsUpdate {
         struct Response {

@@ -10,6 +10,8 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
+typealias JSONDictionary = [String: Any]
+
 protocol JSONSerializable {
     associatedtype IdType: Equatable
 

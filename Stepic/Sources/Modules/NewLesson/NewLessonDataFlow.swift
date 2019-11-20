@@ -12,6 +12,7 @@ enum NewLesson {
             let steps: [Step]
             let progresses: [Progress]
             let startStepIndex: Int
+            let canEdit: Bool
         }
 
         struct Response {
@@ -83,6 +84,34 @@ enum NewLesson {
         struct ViewModel {
             let stepID: Step.IdType
             let info: [TooltipInfo]
+        }
+    }
+
+    /// Edit current step text
+    enum EditStepPresentation {
+        struct Request {
+            let index: Int
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+        }
+    }
+
+    /// Load new step HTML text (after step source updated)
+    enum StepTextUpdate {
+        struct Response {
+            let index: Int
+            let stepSource: StepSource
+        }
+
+        struct ViewModel {
+            let index: Int
+            let text: String
         }
     }
 

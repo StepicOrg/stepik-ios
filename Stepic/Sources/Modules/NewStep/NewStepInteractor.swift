@@ -123,6 +123,8 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     }
 }
 
+// MARK: - NewStepInteractor: NewStepInputProtocol -
+
 extension NewStepInteractor: NewStepInputProtocol {
     func updateStepNavigation(
         canNavigateToPreviousUnit: Bool,
@@ -136,5 +138,11 @@ extension NewStepInteractor: NewStepInputProtocol {
                 canNavigateToNextStep: canNavigateToNextStep
             )
         )
+    }
+
+    func updateStepText(_ text: String) {
+        self.provider.fetchCurrentFontSize().done { fontSize in
+            self.presenter.presentStepTextUpdate(response: .init(text: text, fontSize: fontSize))
+        }
     }
 }
