@@ -9,7 +9,14 @@ extension EditStepView {
 
         let loadingIndicatorColor = UIColor.mainDark
 
-        let textViewTextInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        let messageFont = UIFont.systemFont(ofSize: 12)
+        let messageTextColor = UIColor(hex: 0x8E8E93)
+        let messageLabelInsets = LayoutInsets(top: 16, left: 16, right: 16)
+
+        let separatorInsets = LayoutInsets(top: 8)
+
+        let textViewInsets = LayoutInsets(top: 16)
+        let textViewTextInsets = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
         let textViewFont = UIFont.systemFont(ofSize: 16)
         let textViewTextColor = UIColor.mainDark
         let textViewPlaceholderColor = UIColor.mainDark.withAlphaComponent(0.4)
@@ -29,13 +36,16 @@ final class EditStepView: UIView {
 
     weak var delegate: EditStepViewDelegate?
 
-    private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
-        loadingIndicatorView.color = self.appearance.loadingIndicatorColor
-        loadingIndicatorView.hidesWhenStopped = true
-        loadingIndicatorView.startAnimating()
-        return loadingIndicatorView
+    private lazy var messageLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("EditStepMessage", comment: "")
+        label.font = self.appearance.messageFont
+        label.textColor = self.appearance.messageTextColor
+        label.numberOfLines = 0
+        return label
     }()
+
+    private lazy var separatorView = SeparatorView()
 
     private lazy var textView: TableInputTextView = {
         let textView = TableInputTextView()
@@ -47,8 +57,6 @@ final class EditStepView: UIView {
         // Enable scrolling
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
-        textView.alwaysBounceVertical = true
-        textView.showsHorizontalScrollIndicator = false
         // Disable features
         textView.autocapitalizationType = .none
         textView.autocorrectionType = .no
@@ -58,6 +66,14 @@ final class EditStepView: UIView {
         textView.delegate = self
 
         return textView
+    }()
+
+    private lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        loadingIndicatorView.color = self.appearance.loadingIndicatorColor
+        loadingIndicatorView.hidesWhenStopped = true
+        loadingIndicatorView.startAnimating()
+        return loadingIndicatorView
     }()
 
     var text: String? {
@@ -111,15 +127,31 @@ extension EditStepView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
+        self.addSubview(self.messageLabel)
+        self.addSubview(self.separatorView)
         self.addSubview(self.textView)
         self.addSubview(self.loadingIndicator)
     }
 
     func makeConstraints() {
+        self.messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.messageLabel.snp.makeConstraints { make in
+            make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(self.appearance.messageLabelInsets.left)
+            make.top.equalToSuperview().offset(self.appearance.messageLabelInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.messageLabelInsets.right)
+        }
+
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.snp.makeConstraints { make in
+            make.leading.equalTo(self.messageLabel.snp.leading)
+            make.top.equalTo(self.messageLabel.snp.bottom).offset(self.appearance.separatorInsets.top)
+            make.trailing.equalToSuperview()
+        }
+
         self.textView.translatesAutoresizingMaskIntoConstraints = false
         self.textView.snp.makeConstraints { make in
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading)
-            make.top.equalToSuperview()
+            make.top.equalTo(self.separatorView.snp.bottom).offset(self.appearance.textViewInsets.top)
             make.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }

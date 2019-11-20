@@ -804,5 +804,6 @@ DownloadsTitle = "Загруженные курсы";
 /* Edit step */
 EditStepTitle = "Редактирование шага";
 EditStepPlaceholder = "Текст...";
+EditStepMessage = "Вы можете редактировать только текст шага и только в виде HTML кода. Для доступа к полноценному редактору шагов, пожалуйста, воспользуйтесь веб версией Stepik.";
 EditStepRemoteUpdateSuccessfulTitle = "Обновлено";
 EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
