@@ -5,6 +5,8 @@ import SVProgressHUD
 import Tabman
 import UIKit
 
+// MARK: NewLessonViewControllerProtocol: class -
+
 protocol NewLessonViewControllerProtocol: class {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
@@ -16,6 +18,8 @@ protocol NewLessonViewControllerProtocol: class {
     func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
 }
+
+// MARK: - NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
 
 final class NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder {
     private static let animationDuration: TimeInterval = 0.25
@@ -53,11 +57,15 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         return item
     }()
 
-    private lazy var editBarButtonItem = UIBarButtonItem(
-        barButtonSystemItem: .compose,
+    private lazy var moreBarButtonItem = UIBarButtonItem(
+        image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
+        style: .plain,
         target: self,
-        action: #selector(self.editButtonClicked)
+        action: #selector(self.moreButtonClicked)
     )
+
+    private lazy var studentRightBarButtonItems = [self.shareBarButtonItem, self.infoBarButtonItem]
+    private lazy var teacherRightBarButtonItems = [self.moreBarButtonItem, self.infoBarButtonItem]
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
@@ -124,6 +132,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: UIViewController life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -146,8 +156,6 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }
 
         self.addSubviews()
-
-        self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem, self.infoBarButtonItem]
         self.dataSource = self
 
         self.updateState()
@@ -213,15 +221,9 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
-        let containsEditBarButtonItem = self.navigationItem.rightBarButtonItems?.contains {
-            $0 === self.editBarButtonItem
-        } ?? false
-
-        if data.canEdit && !containsEditBarButtonItem {
-            self.navigationItem.rightBarButtonItems?.insert(self.editBarButtonItem, at: 0)
-        } else {
-            self.navigationItem.rightBarButtonItems?.removeAll(where: { $0 === self.editBarButtonItem })
-        }
+        self.navigationItem.rightBarButtonItems = data.canEdit
+            ? self.teacherRightBarButtonItems
+            : self.studentRightBarButtonItems
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
@@ -379,10 +381,35 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
     }
 
     @objc
-    private func editButtonClicked() {
-        if let currentIndex = self.currentIndex {
-            self.interactor.doEditStepPresentation(request: .init(index: currentIndex))
-        }
+    private func moreButtonClicked() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Share", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.shareButtonClicked()
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("EditStepAlertActionTitle", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self,
+                          let currentIndex = strongSelf.currentIndex else {
+                        return
+                    }
+
+                    strongSelf.interactor.doEditStepPresentation(request: .init(index: currentIndex))
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+        alert.popoverPresentationController?.barButtonItem = self.moreBarButtonItem
+
+        self.present(module: alert)
     }
 }
 
