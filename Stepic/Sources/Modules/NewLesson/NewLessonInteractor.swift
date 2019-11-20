@@ -269,6 +269,6 @@ extension NewLessonInteractor: EditStepOutputProtocol {
             return
         }
 
-        self.presenter.presentStepRefresh(response: .init(index: stepIndex))
+        self.presenter.presentStepTextUpdate(response: .init(index: stepIndex, stepSource: stepSource))
     }
 }

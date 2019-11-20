@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewStepPresenterProtocol {
     func presentStep(response: NewStep.StepLoad.Response)
+    func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response)
     func presentControlsUpdate(response: NewStep.ControlsUpdate.Response)
 }
 
@@ -28,6 +29,15 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         if case .failure = response.result {
             self.viewController?.displayStep(viewModel: NewStep.StepLoad.ViewModel(state: .error))
         }
+    }
+
+    func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response) {
+        let htmlString = NewStepPresenter.makeProcessedContentHTMLString(
+            response.text,
+            fontSize: response.fontSize
+        )
+
+        self.viewController?.displayStepTextUpdate(viewModel: .init(htmlText: htmlString))
     }
 
     func presentControlsUpdate(response: NewStep.ControlsUpdate.Response) {
@@ -66,17 +76,11 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                     }
                     return .video(viewModel: nil)
                 default:
-                    var injections = ContentProcessor.defaultInjections
-                    injections.append(FontSizeInjection(fontSize: fontSize))
-
-                    let contentProcessor = ContentProcessor(
-                        content: step.block.text ?? "",
-                        rules: ContentProcessor.defaultRules,
-                        injections: injections
+                    let htmlString = NewStepPresenter.makeProcessedContentHTMLString(
+                        step.block.text ?? "",
+                        fontSize: fontSize
                     )
-                    let content = contentProcessor.processContent()
-
-                    return .text(htmlString: content)
+                    return .text(htmlString: htmlString)
                 }
             }()
 
@@ -101,5 +105,18 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             )
             seal(viewModel)
         }
+    }
+
+    private static func makeProcessedContentHTMLString(_ text: String, fontSize: FontSize) -> String {
+        var injections = ContentProcessor.defaultInjections
+        injections.append(FontSizeInjection(fontSize: fontSize))
+
+        let contentProcessor = ContentProcessor(
+            content: text,
+            rules: ContentProcessor.defaultRules,
+            injections: injections
+        )
+
+        return contentProcessor.processContent()
     }
 }

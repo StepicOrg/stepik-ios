@@ -3,6 +3,7 @@ import UIKit
 
 protocol NewStepViewControllerProtocol: class {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
+    func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
 }
 
@@ -159,9 +160,15 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 }
 
+// MARK: - NewStepViewController: NewStepViewControllerProtocol -
+
 extension NewStepViewController: NewStepViewControllerProtocol {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel) {
         self.state = viewModel.state
+    }
+
+    func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel) {
+        self.newStepView?.updateText(viewModel.htmlText)
     }
 
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel) {
@@ -172,6 +179,8 @@ extension NewStepViewController: NewStepViewControllerProtocol {
         self.canNavigateToNextStep = viewModel.canNavigateToNextStep
     }
 }
+
+// MARK: - NewStepViewController: NewStepViewDelegate -
 
 extension NewStepViewController: NewStepViewDelegate {
     func newStepViewDidRequestVideo(_ view: NewStepView) {
@@ -255,6 +264,8 @@ extension NewStepViewController: NewStepViewDelegate {
         self.newStepView?.endLoading()
     }
 }
+
+// MARK: - NewStepViewController: BaseQuizOutputProtocol -
 
 extension NewStepViewController: BaseQuizOutputProtocol {
     func handleCorrectSubmission() {

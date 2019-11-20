@@ -68,22 +68,22 @@ final class EditStepInteractor: EditStepInteractorProtocol {
             return self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: false))
         }
 
-        let updatingStepSource = StepSource(
-            id: currentStepSource.id,
-            name: currentStepSource.name,
-            text: self.currentText
-        )
+        let updatingStepSource = StepSource(stepSource: currentStepSource)
+        updatingStepSource.text = self.currentText
 
         EditStepInteractor.logger.info("edit step interactor :: start updating step source = \(updatingStepSource.id)")
 
         self.provider.updateStepSource(updatingStepSource).done { stepSource in
-            EditStepInteractor.logger.info("edit step interactor :: finish updating step source = \(stepSource)")
+            EditStepInteractor.logger.info("edit step interactor :: finish updating step source = \(stepSource.id)")
 
             self.currentStepSource = stepSource
             self.currentText = stepSource.text
 
             self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: true))
-            self.moduleOutput?.handleStepSourceUpdated(stepSource)
+
+            DispatchQueue.main.async {
+                self.moduleOutput?.handleStepSourceUpdated(stepSource)
+            }
         }.catch { error in
             EditStepInteractor.logger.error("edit step interactor :: error while updating step source, error \(error)")
             self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: false))

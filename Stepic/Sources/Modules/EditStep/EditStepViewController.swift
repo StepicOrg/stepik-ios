@@ -136,8 +136,6 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
 // MARK: - EditStepViewController: EditStepViewControllerProtocol -
 
 extension EditStepViewController: EditStepViewControllerProtocol {
-    private static let dismissDelay: DispatchTimeInterval = .milliseconds(750)
-
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
@@ -151,9 +149,7 @@ extension EditStepViewController: EditStepViewControllerProtocol {
             SVProgressHUD.showSuccess(withStatus: viewModel.feedback)
             self.navigationItem.rightBarButtonItem = nil
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + EditStepViewController.dismissDelay) {
-                self.dismiss(animated: true)
-            }
+            self.dismiss(animated: true)
         } else {
             SVProgressHUD.showError(withStatus: viewModel.feedback)
             self.editStepView?.isEnabled = true

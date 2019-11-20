@@ -140,7 +140,9 @@ extension NewStepInteractor: NewStepInputProtocol {
         )
     }
 
-    func refresh() {
-        self.doStepLoad(request: .init())
+    func updateStepText(_ text: String) {
+        self.provider.fetchCurrentFontSize().done { fontSize in
+            self.presenter.presentStepTextUpdate(response: .init(text: text, fontSize: fontSize))
+        }
     }
 }

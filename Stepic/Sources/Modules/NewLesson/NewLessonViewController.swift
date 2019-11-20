@@ -13,7 +13,7 @@ protocol NewLessonViewControllerProtocol: class {
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel)
-    func displayStepRefresh(viewModel: NewLesson.RefreshStep.ViewModel)
+    func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
@@ -483,12 +483,12 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         self.present(navigationController, animated: true)
     }
 
-    func displayStepRefresh(viewModel: NewLesson.RefreshStep.ViewModel) {
+    func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel) {
         guard let stepModuleInput = self.stepModulesInputs[safe: viewModel.index] else {
             return
         }
 
-        stepModuleInput?.refresh()
+        stepModuleInput?.updateStepText(viewModel.text)
     }
 
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel) {

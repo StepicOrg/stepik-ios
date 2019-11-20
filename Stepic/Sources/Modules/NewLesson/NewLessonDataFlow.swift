@@ -102,14 +102,16 @@ enum NewLesson {
         }
     }
 
-    /// Force step content reload (after step source updated)
-    enum RefreshStep {
+    /// Load new step HTML text (after step source updated)
+    enum StepTextUpdate {
         struct Response {
             let index: Int
+            let stepSource: StepSource
         }
 
         struct ViewModel {
             let index: Int
+            let text: String
         }
     }
 
