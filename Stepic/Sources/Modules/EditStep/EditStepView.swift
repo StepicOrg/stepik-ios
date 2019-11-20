@@ -110,12 +110,20 @@ final class EditStepView: UIView {
 
     func showLoading() {
         self.loadingIndicator.startAnimating()
-        self.textView.isHidden = true
+        self.setStepContentViewsHidden(true)
     }
 
     func hideLoading() {
         self.loadingIndicator.stopAnimating()
-        self.textView.isHidden = false
+        self.setStepContentViewsHidden(false)
+    }
+
+    // MARK: Private API
+
+    private func setStepContentViewsHidden(_ isHidden: Bool) {
+        for view in self.subviews where view !== self.loadingIndicator {
+            view.isHidden = isHidden
+        }
     }
 }
 
