@@ -21,7 +21,7 @@ extension DiscussionsCellView {
         let dotsMenuImageInsets = LayoutInsets(top: 16, right: 16)
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
-        let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
+        let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
         let nameLabelTextColor = UIColor.mainDark
         let nameLabelHeight: CGFloat = 18
 
