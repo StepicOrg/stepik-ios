@@ -9,12 +9,21 @@ extension DiscussionsCellView {
         let avatarImageViewSize = CGSize(width: 36, height: 36)
         let avatarImageViewCornerRadius: CGFloat = 4.0
 
-        let badgeLabelInsets = LayoutInsets(left: 16)
         let badgeLabelFont = UIFont.systemFont(ofSize: 10, weight: .medium)
-        let badgeLabelTextColor = UIColor.white
-        let badgeLabelBackgroundColor = UIColor.stepicGreen
-        let badgeLabelCornerRadius: CGFloat = 10
-        let badgeLabelHeight: CGFloat = 20
+        let badgeTintColor = UIColor.white
+        let badgeCornerRadius: CGFloat = 10
+
+        let badgeUserRoleWidthDelta: CGFloat = 16
+        let badgeUserRoleBackgroundColor = UIColor.stepicGreen
+
+        let badgeIsPinnedBackgroundColor = UIColor(hex: 0x6C7BDF)
+        let badgeIsPinnedImageSize = CGSize(width: 10, height: 10)
+        let badgeIsPinnedImageInsets = UIEdgeInsets(top: 1, left: 8, bottom: 0, right: 2)
+        let badgeIsPinnedTitleInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+
+        let badgesStackViewHeight: CGFloat = 20
+        let badgesStackViewSpacing: CGFloat = 8
+        let badgeStackViewInsets = LayoutInsets(left: 16)
 
         let dotsMenuImageSize = CGSize(width: 20, height: 20)
         let dotsMenuImageTintColor = UIColor.mainDark.withAlphaComponent(0.5)
@@ -71,19 +80,46 @@ final class DiscussionsCellView: UIView {
         return button
     }()
 
-    private lazy var badgeLabel: UILabel = {
+    private lazy var userRoleBadgeLabel: UILabel = {
         let label = WiderLabel()
+        label.widthDelta = self.appearance.badgeUserRoleWidthDelta
         label.font = self.appearance.badgeLabelFont
-        label.textColor = self.appearance.badgeLabelTextColor
-        label.backgroundColor = self.appearance.badgeLabelBackgroundColor
+        label.textColor = self.appearance.badgeTintColor
+        label.backgroundColor = self.appearance.badgeUserRoleBackgroundColor
         label.textAlignment = .center
         label.numberOfLines = 1
-
-        label.layer.cornerRadius = self.appearance.badgeLabelCornerRadius
+        // Round corners
+        label.layer.cornerRadius = self.appearance.badgeCornerRadius
         label.layer.masksToBounds = true
         label.clipsToBounds = true
-
         return label
+    }()
+
+    private lazy var isPinnedImageButton: ImageButton = {
+        let imageButton = ImageButton()
+        imageButton.imageSize = self.appearance.badgeIsPinnedImageSize
+        imageButton.imageInsets = self.appearance.badgeIsPinnedImageInsets
+        imageButton.titleInsets = self.appearance.badgeIsPinnedTitleInsets
+        imageButton.tintColor = self.appearance.badgeTintColor
+        imageButton.font = self.appearance.badgeLabelFont
+        imageButton.title = NSLocalizedString("DiscussionsIsPinnedBadgeTitle", comment: "")
+        imageButton.image = UIImage(named: "discussions-pin")?.withRenderingMode(.alwaysTemplate)
+        imageButton.backgroundColor = self.appearance.badgeIsPinnedBackgroundColor
+        imageButton.disabledAlpha = 1.0
+        imageButton.isEnabled = false
+        // Round corners
+        imageButton.layer.cornerRadius = self.appearance.badgeCornerRadius
+        imageButton.layer.masksToBounds = true
+        imageButton.clipsToBounds = true
+        return imageButton
+    }()
+
+    private lazy var badgesStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.userRoleBadgeLabel, self.isPinnedImageButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.spacing = self.appearance.badgesStackViewSpacing
+        return stackView
     }()
 
     private lazy var dotsMenuImageButton: ImageButton = {
@@ -196,12 +232,16 @@ final class DiscussionsCellView: UIView {
     }()
 
     // Dynamically show/hide badge
-    private var badgeLabelHeightConstraint: Constraint?
+    private var badgesStackViewHeightConstraint: Constraint?
     private var nameLabelTopConstraint: Constraint?
 
     // Keeps track of web content text view height
     private var currentWebBasedTextViewHeight = Appearance().textContentWebBasedTextViewDefaultHeight
     private var currentText: String?
+
+    private var isBadgesHidden: Bool {
+        return self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
+    }
 
     var onDotsMenuClick: (() -> Void)?
     var onReplyClick: (() -> Void)?
@@ -234,25 +274,16 @@ final class DiscussionsCellView: UIView {
             return self.resetViews()
         }
 
-        switch viewModel.userRole {
-        case .student:
-            self.updateBadge(text: "", isHidden: true)
-        case .teacher:
-            self.updateBadge(text: NSLocalizedString("CourseStaff", comment: ""), isHidden: false)
-        case .staff:
-            self.updateBadge(text: NSLocalizedString("Staff", comment: ""), isHidden: false)
-        }
+        self.nameLabel.text = viewModel.username
+        self.dateLabel.text = viewModel.formattedDate
 
+        self.updateBadges(userRole: viewModel.userRole, isPinned: viewModel.isPinned)
         self.updateVotes(
             likesCount: viewModel.likesCount,
             dislikesCount: viewModel.dislikesCount,
             canVote: viewModel.canVote,
             voteValue: viewModel.voteValue
         )
-
-        self.nameLabel.text = viewModel.username
-        self.dateLabel.text = viewModel.formattedDate
-
         self.updateTextContent(text: viewModel.text, isWebViewSupportNeeded: viewModel.isWebViewSupportNeeded)
 
         if let url = viewModel.avatarImageURL {
@@ -261,8 +292,8 @@ final class DiscussionsCellView: UIView {
     }
 
     func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
-        let userInfoHeight = (self.badgeLabel.isHidden ? 0 : self.appearance.badgeLabelHeight)
-            + (self.badgeLabel.isHidden ? 0 : self.appearance.nameLabelInsets.top)
+        let userInfoHeight = (self.isBadgesHidden ? 0 : self.appearance.badgesStackViewHeight)
+            + (self.isBadgesHidden ? 0 : self.appearance.nameLabelInsets.top)
             + self.appearance.nameLabelHeight
         return self.appearance.avatarImageViewInsets.top
             + userInfoHeight
@@ -276,19 +307,33 @@ final class DiscussionsCellView: UIView {
     // MARK: - Private API
 
     private func resetViews() {
-        self.updateBadge(text: "", isHidden: true)
         self.nameLabel.text = nil
         self.dateLabel.text = nil
-        self.updateVotes(likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
         self.avatarImageView.reset()
+        self.updateBadges(userRole: .student, isPinned: false)
+        self.updateVotes(likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
         self.updateTextContent(text: "", isWebViewSupportNeeded: false)
     }
 
-    private func updateBadge(text: String, isHidden: Bool) {
-        self.badgeLabel.text = text
-        self.badgeLabel.isHidden = isHidden
-        self.badgeLabelHeightConstraint?.update(offset: isHidden ? 0 : self.appearance.badgeLabelHeight)
-        self.nameLabelTopConstraint?.update(offset: isHidden ? 0 : self.appearance.nameLabelInsets.top)
+    private func updateBadges(userRole: UserRole, isPinned: Bool) {
+        switch userRole {
+        case .student:
+            self.userRoleBadgeLabel.text = ""
+            self.userRoleBadgeLabel.isHidden = true
+        case .teacher:
+            self.userRoleBadgeLabel.text = NSLocalizedString("CourseStaff", comment: "")
+            self.userRoleBadgeLabel.isHidden = false
+        case .staff:
+            self.userRoleBadgeLabel.text = NSLocalizedString("Staff", comment: "")
+            self.userRoleBadgeLabel.isHidden = false
+        }
+
+        self.isPinnedImageButton.isHidden = !isPinned
+
+        self.badgesStackViewHeightConstraint?.update(
+            offset: self.isBadgesHidden ? 0 : self.appearance.badgesStackViewHeight
+        )
+        self.nameLabelTopConstraint?.update(offset: self.isBadgesHidden ? 0 : self.appearance.nameLabelInsets.top)
     }
 
     private func updateVotes(likesCount: Int, dislikesCount: Int, canVote: Bool, voteValue: VoteValue?) {
@@ -391,7 +436,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarImageView)
         self.addSubview(self.avatarOverlayButton)
-        self.addSubview(self.badgeLabel)
+        self.addSubview(self.badgesStackView)
         self.addSubview(self.dotsMenuImageButton)
         self.addSubview(self.nameLabel)
         self.addSubview(self.textContentStackView)
@@ -411,11 +456,11 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.edges.equalTo(self.avatarImageView)
         }
 
-        self.badgeLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.badgeLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeLabelInsets.left)
+        self.badgesStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.badgesStackView.snp.makeConstraints { make in
+            make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.badgeStackViewInsets.left)
             make.top.equalTo(self.avatarImageView.snp.top)
-            self.badgeLabelHeightConstraint = make.height.equalTo(self.appearance.badgeLabelHeight).constraint
+            self.badgesStackViewHeightConstraint = make.height.equalTo(self.appearance.badgesStackViewHeight).constraint
         }
 
         self.dotsMenuImageButton.translatesAutoresizingMaskIntoConstraints = false
@@ -429,7 +474,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.avatarImageView.snp.trailing).offset(self.appearance.nameLabelInsets.left)
             self.nameLabelTopConstraint = make.top
-                .equalTo(self.badgeLabel.snp.bottom)
+                .equalTo(self.userRoleBadgeLabel.snp.bottom)
                 .offset(self.appearance.nameLabelInsets.top)
                 .constraint
             make.trailing.equalToSuperview().offset(-self.appearance.nameLabelInsets.right)

@@ -789,6 +789,7 @@ DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
 DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
 DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
+DiscussionsIsPinnedBadgeTitle = "Закреплён";
 
 /* Write comment */
 WriteCommentTitle = "Комментарий";
