@@ -31,7 +31,8 @@ extension DiscussionsCellView {
         let textContentTextLabelFont = UIFont.systemFont(ofSize: 14)
         let textContentTextLabelTextColor = UIColor.mainDark
 
-        let bottomControlsSpacing: CGFloat = 4
+        let bottomControlsSpacing: CGFloat = 16
+        let bottomControlsSubgroupSpacing: CGFloat = 8
         let bottomControlsInsets = LayoutInsets(top: 8, left: 16, bottom: 16, right: 16)
         let bottomControlsHeight: CGFloat = 20
 
@@ -175,13 +176,23 @@ final class DiscussionsCellView: UIView {
     }()
 
     private lazy var bottomControlsStackView: UIStackView = {
-        let stackView = UIStackView(
-            arrangedSubviews: [self.dateLabel, self.replyButton, self.likeImageButton, self.dislikeImageButton]
-        )
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.spacing = self.appearance.bottomControlsSpacing
-        return stackView
+        let dateAndReplyStackView = UIStackView(arrangedSubviews: [self.dateLabel, self.replyButton])
+        dateAndReplyStackView.axis = .horizontal
+        dateAndReplyStackView.distribution = .fill
+        dateAndReplyStackView.spacing = self.appearance.bottomControlsSubgroupSpacing
+        dateAndReplyStackView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        let votesStackView = UIStackView(arrangedSubviews: [self.likeImageButton, self.dislikeImageButton])
+        votesStackView.axis = .horizontal
+        votesStackView.distribution = .fill
+        votesStackView.spacing = self.appearance.bottomControlsSubgroupSpacing * 2
+
+        let containerStackView = UIStackView(arrangedSubviews: [dateAndReplyStackView, votesStackView])
+        containerStackView.axis = .horizontal
+        containerStackView.distribution = .equalSpacing
+        containerStackView.spacing = self.appearance.bottomControlsSpacing
+
+        return containerStackView
     }()
 
     // Dynamically show/hide badge
