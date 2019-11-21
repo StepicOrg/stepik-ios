@@ -126,7 +126,7 @@ final class DiscussionsCellView: UIView {
         let imageButton = ImageButton()
         imageButton.imageSize = self.appearance.dotsMenuImageSize
         imageButton.tintColor = self.appearance.dotsMenuImageTintColor
-        imageButton.image = UIImage(named: "discussions-dots-menu")?.withRenderingMode(.alwaysTemplate)
+        imageButton.image = UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate)
         imageButton.addTarget(self, action: #selector(self.dotsMenuDidClick), for: .touchUpInside)
         return imageButton
     }()
