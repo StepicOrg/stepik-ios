@@ -192,11 +192,23 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         let text: String = {
             let trimmedText = comment.text.trimmingCharacters(in: .whitespacesAndNewlines)
             if isWebViewSupportNeeded {
+                var injections = ContentProcessor.defaultInjections
+                injections.append(
+                    CustomFontSizeInjection(
+                        bodyFontSize: 11,
+                        h1FontSize: 19,
+                        h2FontSize: 16,
+                        h3FontSize: 13,
+                        blockquoteFontSize: 15
+                    )
+                )
+
                 let contentProcessor = ContentProcessor(
                     content: trimmedText,
                     rules: ContentProcessor.defaultRules,
-                    injections: ContentProcessor.defaultInjections
+                    injections: injections
                 )
+
                 return contentProcessor.processContent()
             }
             return trimmedText
