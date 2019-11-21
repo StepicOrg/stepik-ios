@@ -9,7 +9,7 @@ extension DiscussionsTableViewCell {
         static let defaultBackgroundColor = UIColor.white
 
         static let leadingSpaceDiscussion: CGFloat = 0
-        static let leadingSpaceReply: CGFloat = 40
+        static let leadingSpaceReply: CGFloat = 18
     }
 }
 
