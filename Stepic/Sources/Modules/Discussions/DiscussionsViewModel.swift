@@ -30,4 +30,5 @@ struct DiscussionsCommentViewModel {
     let canEdit: Bool
     let canDelete: Bool
     let canVote: Bool
+    let hasReplies: Bool
 }
