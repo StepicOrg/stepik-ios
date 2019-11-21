@@ -1,6 +1,8 @@
 import SnapKit
 import UIKit
 
+// MARK: Appearance -
+
 extension DiscussionsCellView {
     struct Appearance {
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
@@ -39,13 +41,14 @@ extension DiscussionsCellView {
         let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let replyButtonTextColor = UIColor(hex: 0x3E50CB)
 
-        let likeImageSize = CGSize(width: 20, height: 20)
-        let likeImageNormalTintColor = UIColor.mainDark.withAlphaComponent(0.5)
-        let likeImageFilledTintColor = UIColor.mainDark
-        let likeButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let likeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
-
-        let dislikeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
+        // Like & dislike
+        let voteImageSize = CGSize(width: 20, height: 20)
+        let voteImageFilledTintColor = UIColor.mainDark
+        let voteImageNormalTintColor = UIColor.mainDark.withAlphaComponent(0.5)
+        let voteImageDisabledTintColor = UIColor.mainDark.withAlphaComponent(0.25)
+        let voteButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let voteLikeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
+        let voteDislikeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
     }
 }
 
@@ -149,24 +152,24 @@ final class DiscussionsCellView: UIView {
 
     private lazy var likeImageButton: ImageButton = {
         let imageButton = ImageButton()
-        imageButton.imageSize = self.appearance.likeImageSize
-        imageButton.tintColor = self.appearance.likeImageNormalTintColor
-        imageButton.font = self.appearance.likeButtonFont
+        imageButton.imageSize = self.appearance.voteImageSize
+        imageButton.tintColor = self.appearance.voteImageNormalTintColor
+        imageButton.font = self.appearance.voteButtonFont
         imageButton.title = "0"
         imageButton.image = UIImage(named: "discussions-thumb-up")?.withRenderingMode(.alwaysTemplate)
-        imageButton.titleInsets = self.appearance.likeButtonTitleInsets
+        imageButton.titleInsets = self.appearance.voteLikeButtonTitleInsets
         imageButton.addTarget(self, action: #selector(self.likeDidClick), for: .touchUpInside)
         return imageButton
     }()
 
     private lazy var dislikeImageButton: ImageButton = {
         let imageButton = ImageButton()
-        imageButton.imageSize = self.appearance.likeImageSize
-        imageButton.tintColor = self.appearance.likeImageNormalTintColor
-        imageButton.font = self.appearance.likeButtonFont
+        imageButton.imageSize = self.appearance.voteImageSize
+        imageButton.tintColor = self.appearance.voteImageNormalTintColor
+        imageButton.font = self.appearance.voteButtonFont
         imageButton.title = "0"
         imageButton.image = UIImage(named: "discussions-thumb-down")?.withRenderingMode(.alwaysTemplate)
-        imageButton.titleInsets = self.appearance.dislikeButtonTitleInsets
+        imageButton.titleInsets = self.appearance.voteDislikeButtonTitleInsets
         imageButton.addTarget(self, action: #selector(self.dislikeDidClick), for: .touchUpInside)
         return imageButton
     }()
@@ -230,10 +233,10 @@ final class DiscussionsCellView: UIView {
         }
 
         self.updateVotes(
-            likes: viewModel.likesCount,
-            dislikes: viewModel.dislikesCount,
-            voteValue: viewModel.voteValue,
-            canVote: viewModel.canVote
+            likesCount: viewModel.likesCount,
+            dislikesCount: viewModel.dislikesCount,
+            canVote: viewModel.canVote,
+            voteValue: viewModel.voteValue
         )
 
         self.nameLabel.text = viewModel.username
@@ -265,7 +268,7 @@ final class DiscussionsCellView: UIView {
         self.updateBadge(text: "", isHidden: true)
         self.nameLabel.text = nil
         self.dateLabel.text = nil
-        self.updateVotes(likes: 0, dislikes: 0, voteValue: nil, canVote: false)
+        self.updateVotes(likesCount: 0, dislikesCount: 0, canVote: false, voteValue: nil)
         self.avatarImageView.reset()
         self.updateTextContent(text: "", isWebViewSupportNeeded: false)
     }
@@ -277,19 +280,24 @@ final class DiscussionsCellView: UIView {
         self.nameLabelTopConstraint?.update(offset: isHidden ? 0 : self.appearance.nameLabelInsets.top)
     }
 
-    private func updateVotes(likes: Int, dislikes: Int, voteValue: VoteValue?, canVote: Bool) {
-        self.likeImageButton.title = "\(likes)"
-        self.dislikeImageButton.title = "\(dislikes)"
+    private func updateVotes(likesCount: Int, dislikesCount: Int, canVote: Bool, voteValue: VoteValue?) {
+        self.likeImageButton.title = "\(likesCount)"
+        self.dislikeImageButton.title = "\(dislikesCount)"
 
         if let voteValue = voteValue {
             if voteValue == .epic {
-                self.likeImageButton.tintColor = self.appearance.likeImageFilledTintColor
+                self.likeImageButton.tintColor = self.appearance.voteImageFilledTintColor
+                self.dislikeImageButton.tintColor = self.appearance.voteImageNormalTintColor
             } else {
-                self.dislikeImageButton.tintColor = self.appearance.likeImageFilledTintColor
+                self.dislikeImageButton.tintColor = self.appearance.voteImageFilledTintColor
+                self.likeImageButton.tintColor = self.appearance.voteImageNormalTintColor
             }
+        } else if canVote {
+            self.likeImageButton.tintColor = self.appearance.voteImageNormalTintColor
+            self.dislikeImageButton.tintColor = self.appearance.voteImageNormalTintColor
         } else {
-            self.likeImageButton.tintColor = self.appearance.likeImageNormalTintColor
-            self.dislikeImageButton.tintColor = self.appearance.likeImageNormalTintColor
+            self.likeImageButton.tintColor = self.appearance.voteImageDisabledTintColor
+            self.dislikeImageButton.tintColor = self.appearance.voteImageDisabledTintColor
         }
 
         self.likeImageButton.isEnabled = canVote
