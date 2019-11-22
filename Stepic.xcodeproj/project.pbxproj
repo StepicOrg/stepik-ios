@@ -527,6 +527,7 @@
 		2C6BBBBF22B26DB200889A45 /* SubmissionsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBBE22B26DB100889A45 /* SubmissionsNetworkService.swift */; };
 		2C6E9CD41FED657E001821A2 /* Adaptive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */; };
 		2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
+		2C74AEC823881E6A00EB6725 /* DiscussionsInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74AEC723881E6A00EB6725 /* DiscussionsInputProtocol.swift */; };
 		2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */; };
 		2C7F782922708AA60089FDD7 /* StepTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F782822708AA60089FDD7 /* StepTabBarButton.swift */; };
 		2C7F782B2270B0910089FDD7 /* LessonInfoTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F782A2270B0910089FDD7 /* LessonInfoTooltipView.swift */; };
@@ -1650,6 +1651,7 @@
 		2C6E9CD31FED657E001821A2 /* Adaptive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Adaptive.storyboard; sourceTree = "<group>"; };
 		2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStorageManager.swift; sourceTree = "<group>"; };
 		2C733C391F29E090000E7FAF /* AdaptiveStatsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveStatsManager.swift; path = Stepic/AdaptiveStatsManager.swift; sourceTree = SOURCE_ROOT; };
+		2C74AEC723881E6A00EB6725 /* DiscussionsInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsInputProtocol.swift; sourceTree = "<group>"; };
 		2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingManager.swift; path = Stepic/AdaptiveRatingManager.swift; sourceTree = SOURCE_ROOT; };
 		2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestOnlySettingsAlertPresenter.swift; sourceTree = "<group>"; };
 		2C7F782822708AA60089FDD7 /* StepTabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTabBarButton.swift; sourceTree = "<group>"; };
@@ -4113,6 +4115,14 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		2C74AEC623881DF700EB6725 /* InputOutput */ = {
+			isa = PBXGroup;
+			children = (
+				2C74AEC723881E6A00EB6725 /* DiscussionsInputProtocol.swift */,
+			);
+			path = InputOutput;
+			sourceTree = "<group>";
+		};
 		2C7F782622708A520089FDD7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -5510,6 +5520,7 @@
 				4F646AB1EA500AD2EB797350 /* DiscussionsProvider.swift */,
 				DF03A1A429714E7C4A2EBA60 /* DiscussionsViewController.swift */,
 				2C3A24562359DD2E00E2405F /* DiscussionsViewModel.swift */,
+				2C74AEC623881DF700EB6725 /* InputOutput */,
 				2C3A24552359DA9200E2405F /* Views */,
 			);
 			path = Discussions;
@@ -6236,6 +6247,7 @@
 				2C53E00122DDDBFD0084BA2B /* NewCodeQuizAssembly.swift in Sources */,
 				08BC47141CDA3E99009A1D25 /* ExecutableTaskTypes.swift in Sources */,
 				2C6BBBBA22B261E700889A45 /* BaseQuizInteractor.swift in Sources */,
+				2C74AEC823881E6A00EB6725 /* DiscussionsInputProtocol.swift in Sources */,
 				2C20778622BBC05F00D44DC0 /* NewStringQuizViewModel.swift in Sources */,
 				08901E6A1CD1019A00D94613 /* UpdateChecker.swift in Sources */,
 				08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,

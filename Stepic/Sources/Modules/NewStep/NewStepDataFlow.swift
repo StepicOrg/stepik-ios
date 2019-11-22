@@ -94,6 +94,21 @@ enum NewStep {
         }
     }
 
+    /// Prsent discussions module (list or with write comment on top on empty discussions empty state)
+    enum DiscussionsPresentation {
+        struct Request { }
+
+        struct Response {
+            let step: Step
+        }
+
+        struct ViewModel {
+            let discussionProxyID: DiscussionProxy.IdType
+            let stepID: Step.IdType
+            let embeddedInWriteComment: Bool
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

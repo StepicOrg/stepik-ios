@@ -684,6 +684,10 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     }
 }
 
+// MARK: - DiscussionsInteractor: DiscussionsInputProtocol -
+
+extension DiscussionsInteractor: DiscussionsInputProtocol { }
+
 // MARK: - DiscussionsInteractor: WriteCommentOutputProtocol -
 
 extension DiscussionsInteractor: WriteCommentOutputProtocol {

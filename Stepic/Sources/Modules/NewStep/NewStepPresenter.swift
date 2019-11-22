@@ -6,6 +6,7 @@ protocol NewStepPresenterProtocol {
     func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response)
     func presentControlsUpdate(response: NewStep.ControlsUpdate.Response)
     func presentDiscussionsButtonUpdate(response: NewStep.DiscussionsButtonUpdate.Response)
+    func presentDiscussions(response: NewStep.DiscussionsPresentation.Response)
 }
 
 final class NewStepPresenter: NewStepPresenterProtocol {
@@ -56,6 +57,20 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             viewModel: .init(
                 title: self.makeDiscussionsLabelTitle(step: response.step),
                 isHidden: response.step.discussionProxyId == nil
+            )
+        )
+    }
+
+    func presentDiscussions(response: NewStep.DiscussionsPresentation.Response) {
+        guard let discussionProxyID = response.step.discussionProxyId else {
+            return
+        }
+
+        self.viewController?.displayDiscussions(
+            viewModel: .init(
+                discussionProxyID: discussionProxyID,
+                stepID: response.step.id,
+                embeddedInWriteComment: (response.step.discussionsCount ?? 0) == 0
             )
         )
     }
