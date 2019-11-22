@@ -716,6 +716,7 @@ NextLessonNavigation = "Следующий урок";
 PreviousLessonNavigation = "Предыдущий урок";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
+DisabledDiscussionsButtonTitle = "Комментарии отключены";
 LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
 LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";

@@ -715,6 +715,7 @@ NextLessonNavigation = "Next lesson";
 PreviousLessonNavigation = "Previous lesson";
 DiscussionsButtonTitle = "Show discussions (%@)";
 NoDiscussionsButtonTitle = "Leave a comment";
+DisabledDiscussionsButtonTitle = "Comments disabled";
 LessonTooltipPointsWithScoreTitle = "You got: %@ out of %@ for step";
 LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";

@@ -194,7 +194,7 @@ extension NewStepViewController: NewStepViewControllerProtocol {
     }
 
     func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel) {
-        self.newStepView?.updateDiscussionButton(title: viewModel.title, isHidden: viewModel.isHidden)
+        self.newStepView?.updateDiscussionButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
     }
 
     func displayDiscussions(viewModel: NewStep.DiscussionsPresentation.ViewModel) {

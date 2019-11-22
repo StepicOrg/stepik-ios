@@ -56,7 +56,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         self.viewController?.displayDiscussionsButtonUpdate(
             viewModel: .init(
                 title: self.makeDiscussionsLabelTitle(step: response.step),
-                isHidden: response.step.discussionProxyId == nil
+                isEnabled: response.step.discussionProxyId != nil
             )
         )
     }
@@ -79,8 +79,6 @@ final class NewStepPresenter: NewStepPresenterProtocol {
 
     private func makeViewModel(step: Step, fontSize: FontSize) -> Guarantee<NewStepViewModel> {
         return Guarantee { seal in
-            let discussionsLabelTitle = self.makeDiscussionsLabelTitle(step: step)
-
             let contentType: NewStepViewModel.ContentType = {
                 switch step.block.type {
                 case .video:
@@ -109,28 +107,36 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 quizType = NewStep.QuizType(blockName: step.block.name)
             }
 
+            let discussionsLabelTitle = self.makeDiscussionsLabelTitle(step: step)
             let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonId)/step/\(step.position)?from_mobile_app=true"
 
             let viewModel = NewStepViewModel(
                 content: contentType,
                 quizType: quizType,
                 discussionsLabelTitle: discussionsLabelTitle,
+                isDiscussionsEnabled: step.discussionProxyId != nil,
                 discussionProxyID: step.discussionProxyId,
                 stepURLPath: urlPath,
                 lessonID: step.lessonId,
                 step: step
             )
+
             seal(viewModel)
         }
     }
 
     private func makeDiscussionsLabelTitle(step: Step) -> String {
+        if step.discussionProxyId == nil {
+            return NSLocalizedString("DisabledDiscussionsButtonTitle", comment: "")
+        }
+
         if let discussionsCount = step.discussionsCount, discussionsCount > 0 {
             return String(
                 format: NSLocalizedString("DiscussionsButtonTitle", comment: ""),
                 FormatterHelper.longNumber(discussionsCount)
             )
         }
+
         return NSLocalizedString("NoDiscussionsButtonTitle", comment: "")
     }
 

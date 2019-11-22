@@ -90,7 +90,7 @@ enum NewStep {
 
         struct ViewModel {
             let title: String
-            let isHidden: Bool
+            let isEnabled: Bool
         }
     }
 

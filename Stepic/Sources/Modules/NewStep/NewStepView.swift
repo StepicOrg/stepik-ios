@@ -138,9 +138,7 @@ final class NewStepView: UIView {
             self.stepTextView.loadHTMLText(htmlString)
         }
 
-        self.updateDiscussionButton(
-            title: viewModel.discussionsLabelTitle, isHidden: viewModel.discussionProxyID == nil
-        )
+        self.updateDiscussionButton(title: viewModel.discussionsLabelTitle, isEnabled: viewModel.isDiscussionsEnabled)
 
         guard let quizView = quizView else {
             return
@@ -173,9 +171,9 @@ final class NewStepView: UIView {
         }
     }
 
-    func updateDiscussionButton(title: String, isHidden: Bool) {
+    func updateDiscussionButton(title: String, isEnabled: Bool) {
         self.stepControlsView.discussionsTitle = title
-        self.stepControlsView.isDiscussionsButtonHidden = isHidden
+        self.stepControlsView.isDiscussionsButtonEnabled = isEnabled
     }
 
     // MARK: Private API
