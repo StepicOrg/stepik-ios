@@ -57,8 +57,8 @@ extension DiscussionsCellView {
         let voteImageNormalTintColor = UIColor.mainDark.withAlphaComponent(0.5)
         let voteImageDisabledTintColor = UIColor.mainDark.withAlphaComponent(0.25)
         let voteButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let voteLikeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
-        let voteDislikeButtonTitleInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
+        let voteLikeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)
+        let voteDislikeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)
     }
 }
 
