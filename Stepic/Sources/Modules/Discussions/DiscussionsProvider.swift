@@ -7,6 +7,7 @@ protocol DiscussionsProviderProtocol {
     func deleteComment(id: Comment.IdType) -> Promise<Void>
     func updateVote(_ vote: Vote) -> Promise<Vote>
     func incrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void>
+    func decrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void>
 }
 
 final class DiscussionsProvider: DiscussionsProviderProtocol {
@@ -81,10 +82,24 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
         }
     }
 
+    func decrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void> {
+        return Promise { seal in
+            self.stepsPersistenceService.fetch(ids: [stepID]).done { steps in
+                if let step = steps.first {
+                    step.discussionsCount? -= 1
+                }
+                CoreDataHelper.instance.save()
+            }.catch { _ in
+                seal.reject(Error.stepDiscussionsDecrementFailed)
+            }
+        }
+    }
+
     enum Error: Swift.Error {
         case fetchFailed
         case commentDeleteFailed
         case voteUpdateFailed
         case stepDiscussionsIncrementFailed
+        case stepDiscussionsDecrementFailed
     }
 }

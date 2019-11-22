@@ -5,6 +5,7 @@ protocol NewStepPresenterProtocol {
     func presentStep(response: NewStep.StepLoad.Response)
     func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response)
     func presentControlsUpdate(response: NewStep.ControlsUpdate.Response)
+    func presentDiscussionsButtonUpdate(response: NewStep.DiscussionsButtonUpdate.Response)
 }
 
 final class NewStepPresenter: NewStepPresenterProtocol {
@@ -32,7 +33,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     }
 
     func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response) {
-        let htmlString = NewStepPresenter.makeProcessedContentHTMLString(
+        let htmlString = self.makeProcessedContentHTMLString(
             response.text,
             fontSize: response.fontSize
         )
@@ -50,19 +51,20 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         self.viewController?.displayControlsUpdate(viewModel: viewModel)
     }
 
+    func presentDiscussionsButtonUpdate(response: NewStep.DiscussionsButtonUpdate.Response) {
+        self.viewController?.displayDiscussionsButtonUpdate(
+            viewModel: .init(
+                title: self.makeDiscussionsLabelTitle(step: response.step),
+                isHidden: response.step.discussionProxyId == nil
+            )
+        )
+    }
+
     // MARK: Private API
 
     private func makeViewModel(step: Step, fontSize: FontSize) -> Guarantee<NewStepViewModel> {
         return Guarantee { seal in
-            let discussionsLabelTitle: String = {
-                if let discussionsCount = step.discussionsCount, discussionsCount > 0 {
-                    return String(
-                        format: NSLocalizedString("DiscussionsButtonTitle", comment: ""),
-                        FormatterHelper.longNumber(discussionsCount)
-                    )
-                }
-                return NSLocalizedString("NoDiscussionsButtonTitle", comment: "")
-            }()
+            let discussionsLabelTitle = self.makeDiscussionsLabelTitle(step: step)
 
             let contentType: NewStepViewModel.ContentType = {
                 switch step.block.type {
@@ -76,7 +78,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                     }
                     return .video(viewModel: nil)
                 default:
-                    let htmlString = NewStepPresenter.makeProcessedContentHTMLString(
+                    let htmlString = self.makeProcessedContentHTMLString(
                         step.block.text ?? "",
                         fontSize: fontSize
                     )
@@ -107,7 +109,17 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         }
     }
 
-    private static func makeProcessedContentHTMLString(_ text: String, fontSize: FontSize) -> String {
+    private func makeDiscussionsLabelTitle(step: Step) -> String {
+        if let discussionsCount = step.discussionsCount, discussionsCount > 0 {
+            return String(
+                format: NSLocalizedString("DiscussionsButtonTitle", comment: ""),
+                FormatterHelper.longNumber(discussionsCount)
+            )
+        }
+        return NSLocalizedString("NoDiscussionsButtonTitle", comment: "")
+    }
+
+    private func makeProcessedContentHTMLString(_ text: String, fontSize: FontSize) -> String {
         var injections = ContentProcessor.defaultInjections
         injections.append(FontSizeInjection(fontSize: fontSize))
 

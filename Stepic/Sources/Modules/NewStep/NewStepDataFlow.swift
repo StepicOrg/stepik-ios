@@ -80,6 +80,20 @@ enum NewStep {
         }
     }
 
+    /// Update discussions button (on appear)
+    enum DiscussionsButtonUpdate {
+        struct Request { }
+
+        struct Response {
+            let step: Step
+        }
+
+        struct ViewModel {
+            let title: String
+            let isHidden: Bool
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

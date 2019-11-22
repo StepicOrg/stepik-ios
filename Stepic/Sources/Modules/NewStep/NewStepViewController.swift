@@ -1,11 +1,16 @@
 import Agrume
 import UIKit
 
+// MARK: NewStepViewControllerProtocol: class -
+
 protocol NewStepViewControllerProtocol: class {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
+    func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel)
 }
+
+// MARK: - NewStepViewController: UIViewController, ControllerWithStepikPlaceholder -
 
 final class NewStepViewController: UIViewController, ControllerWithStepikPlaceholder {
     private static let stepPassedDelay: TimeInterval = 1.0
@@ -67,6 +72,14 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         self.sendStepDidPassedGroup?.notify(queue: .main) { [weak self] in
             self?.sendStepDidPassedGroup = nil
             self?.sendInitStepStatusRequests()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if !self.isFirstAppearance {
+            self.interactor.doDiscussionsButtonUpdate(request: .init())
         }
     }
 
@@ -177,6 +190,10 @@ extension NewStepViewController: NewStepViewControllerProtocol {
             hasNextButton: viewModel.canNavigateToNextUnit
         )
         self.canNavigateToNextStep = viewModel.canNavigateToNextStep
+    }
+
+    func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel) {
+        self.newStepView?.updateDiscussionButton(title: viewModel.title, isHidden: viewModel.isHidden)
     }
 }
 
