@@ -300,10 +300,11 @@ final class CodePlaygroundManager {
             var text = textView.text!
             text.insert(contentsOf: symbols.characters, at: text.index(text.startIndex, offsetBy: cursorPosition))
             textView.text = text
+            // Import here to update selectedTextRange before calling textViewDidChange #APPS-2352
+            textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
             // Manually call textViewDidChange, becuase when manually setting the text of a UITextView with code,
             // the textViewDidChange: method does not get called.
             textView.delegate?.textViewDidChange?(textView)
-            textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
         }
     }
 
