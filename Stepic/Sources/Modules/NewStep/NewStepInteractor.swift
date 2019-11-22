@@ -7,6 +7,8 @@ protocol NewStepInteractorProtocol {
     func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request)
     func doStepViewRequest(request: NewStep.StepViewRequest.Request)
     func doStepDoneRequest(request: NewStep.StepDoneRequest.Request)
+    func doDiscussionsButtonUpdate(request: NewStep.DiscussionsButtonUpdate.Request)
+    func doDiscussionsPresentation(request: NewStep.DiscussionsPresentation.Request)
 }
 
 final class NewStepInteractor: NewStepInteractorProtocol {
@@ -117,6 +119,24 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     func doStepDoneRequest(request: NewStep.StepDoneRequest.Request) {
         self.moduleOutput?.handleStepDone(id: self.stepID)
     }
+
+    func doDiscussionsButtonUpdate(request: NewStep.DiscussionsButtonUpdate.Request) {
+        self.provider.fetchCachedStep(id: self.stepID).done { cachedStep in
+            if let cachedStep = cachedStep {
+                self.presenter.presentDiscussionsButtonUpdate(response: .init(step: cachedStep))
+            }
+        }.cauterize()
+    }
+
+    func doDiscussionsPresentation(request: NewStep.DiscussionsPresentation.Request) {
+        self.provider.fetchCachedStep(id: self.stepID).done { cachedStep in
+            if let cachedStep = cachedStep {
+                self.presenter.presentDiscussions(response: .init(step: cachedStep))
+            }
+        }.cauterize()
+    }
+
+    // MARK: - Types
 
     enum Error: Swift.Error {
         case fetchFailed

@@ -1,10 +1,15 @@
 import Foundation
 import PromiseKit
 
+// MARK: NewStepProviderProtocol -
+
 protocol NewStepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
+    func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
     func fetchCurrentFontSize() -> Guarantee<FontSize>
 }
+
+// MARK: - NewStepProvider: NewStepProviderProtocol -
 
 final class NewStepProvider: NewStepProviderProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
@@ -39,6 +44,16 @@ final class NewStepProvider: NewStepProviderProtocol {
                 return Promise.value(result)
             }.done { result in
                 seal.fulfill(result)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchCachedStep(id: Step.IdType) -> Promise<Step?> {
+        return Promise { seal in
+            self.stepsPersistenceService.fetch(ids: [id]).done { cachedSteps in
+                seal.fulfill(cachedSteps.first)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

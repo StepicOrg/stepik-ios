@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: DiscussionsTableViewDataSourceDelegate: class -
+
 protocol DiscussionsTableViewDataSourceDelegate: class {
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
@@ -138,18 +140,6 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
 
         let commentType: DiscussionsTableViewCell.ViewModel.CommentType =
             indexPath.row == DiscussionsTableViewDataSource.parentDiscussionRowIndex ? .discussion : .reply
-        let separatorType: DiscussionsTableViewCell.ViewModel.SeparatorType = {
-            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-                if discussionViewModel.repliesLeftToLoadCount > 0 {
-                    return .none
-                } else if indexPath.section == tableView.numberOfSections - 1 {
-                    return .small
-                }
-                return .large
-            }
-            return .small
-        }()
-
         let commentViewModel = commentType == .discussion
             ? discussionViewModel.comment
             : discussionViewModel.replies[indexPath.row - DiscussionsTableViewDataSource.parentDiscussionInset]
@@ -201,6 +191,17 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
             }
         }
 
+        let separatorStyle: DiscussionsTableViewCell.ViewModel.SeparatorStyle = {
+            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                if discussionViewModel.repliesLeftToLoadCount > 0 {
+                    return .none
+                } else if indexPath.section == tableView.numberOfSections - 1 {
+                    return .small
+                }
+                return .large
+            }
+            return .small
+        }()
         let isLastComment = indexPath.row == tableView.numberOfRows(inSection: indexPath.section)
             - self.loadMoreRepliesInset(section: indexPath.section) - 1
 
@@ -208,9 +209,9 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
             viewModel: .init(
                 comment: commentViewModel,
                 commentType: commentType,
-                separatorType: separatorType,
-                separatorFollowsDepth: !isLastComment,
-                isSelected: commentViewModel.isSelected
+                isSelected: commentViewModel.isSelected,
+                separatorStyle: separatorStyle,
+                separatorFollowsDepth: !isLastComment
             )
         )
 

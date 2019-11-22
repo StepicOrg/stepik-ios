@@ -121,7 +121,8 @@ Discussions = "Discussions";
 ShowMoreReplies = "More replies";
 ShowMoreDiscussions = "More discussions";
 RefreshingDiscussions = "Refreshing discussions...";
-NoDiscussionsTitle = "No discussions. Start the first one!";
+PlaceholderNoDiscussionsTitle = "No discussions. Start the first one!";
+PlaceholderNoDiscussionsButtonTitle = "Leave a comment";
 Syllabus = "Syllabus";
 Course = "Course";
 NextLesson = "Next lesson";
@@ -712,8 +713,9 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 /* New lesson & step */
 NextLessonNavigation = "Next lesson";
 PreviousLessonNavigation = "Previous lesson";
-DiscussionsButtonTitle = "Show discussions (%@)";
+DiscussionsButtonTitle = "Show comments (%@)";
 NoDiscussionsButtonTitle = "Leave a comment";
+DisabledDiscussionsButtonTitle = "Comments disabled";
 LessonTooltipPointsWithScoreTitle = "You got: %@ out of %@ for step";
 LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";
@@ -776,7 +778,7 @@ CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
 
 /* Discussions */
-DiscussionsTitle = "Discussions";
+DiscussionsTitle = "Comments";
 DiscussionsAlertActionEditTitle = "Edit";
 DiscussionsAlertActionDeleteTitle = "Delete";
 DiscussionsAlertActionLikeTitle = "Like";
@@ -788,6 +790,7 @@ DiscussionsSortTypeLastDiscussions = "Last discussions";
 DiscussionsSortTypeMostLikedDiscussions = "Most liked";
 DiscussionsSortTypeMostActiveDiscussions = "Most active";
 DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
+DiscussionsIsPinnedBadgeTitle = "Pinned";
 
 /* Write comment */
 WriteCommentTitle = "Comment";

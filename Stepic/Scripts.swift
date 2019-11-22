@@ -77,13 +77,31 @@ struct Scripts {
 
     /// Returns script that replaces font size variables with the provided ones at `stepikcontent.css`.
     static func fontSize(_ fontSize: FontSize) -> String {
+        return self.fontSizeScript(
+            bodyFontSizeString: fontSize.body,
+            h1FontSizeString: fontSize.h1,
+            h2FontSizeString: fontSize.h2,
+            h3FontSizeString: fontSize.h3,
+            blockquoteFontSizeString: fontSize.blockquote
+        )
+    }
+
+    /// Returns script that replaces font size variables with the provided ones at `stepikcontent.css`.
+    /// Example: h1FontSizeString = 20pt, h2FontSizeString = 17pt, blockquoteFontSizeString = 16px
+    static func fontSizeScript(
+        bodyFontSizeString: String = FontSize.small.body,
+        h1FontSizeString: String = FontSize.small.h1,
+        h2FontSizeString: String = FontSize.small.h2,
+        h3FontSizeString: String = FontSize.small.h3,
+        blockquoteFontSizeString: String = FontSize.small.blockquote
+    ) -> String {
         let script = self.loadScriptWithKey(self.fontSizeScriptKey)
         return script
-            .replacingOccurrences(of: "##--body-font-size##", with: fontSize.body)
-            .replacingOccurrences(of: "##--h1-font-size##", with: fontSize.h1)
-            .replacingOccurrences(of: "##--h2-font-size##", with: fontSize.h2)
-            .replacingOccurrences(of: "##--h3-font-size##", with: fontSize.h3)
-            .replacingOccurrences(of: "##--blockquote-font-size##", with: fontSize.blockquote)
+            .replacingOccurrences(of: "##--body-font-size##", with: bodyFontSizeString)
+            .replacingOccurrences(of: "##--h1-font-size##", with: h1FontSizeString)
+            .replacingOccurrences(of: "##--h2-font-size##", with: h2FontSizeString)
+            .replacingOccurrences(of: "##--h3-font-size##", with: h3FontSizeString)
+            .replacingOccurrences(of: "##--blockquote-font-size##", with: blockquoteFontSizeString)
     }
 
     private static func loadScriptWithKey(_ key: String) -> String {

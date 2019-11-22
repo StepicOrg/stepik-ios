@@ -4,6 +4,7 @@ struct NewStepViewModel {
     let content: ContentType
     let quizType: NewStep.QuizType?
     let discussionsLabelTitle: String
+    let isDiscussionsEnabled: Bool
     let discussionProxyID: DiscussionProxy.IdType?
     let stepURLPath: String
     let lessonID: Lesson.IdType

@@ -80,6 +80,35 @@ enum NewStep {
         }
     }
 
+    /// Update discussions button (on appear)
+    enum DiscussionsButtonUpdate {
+        struct Request { }
+
+        struct Response {
+            let step: Step
+        }
+
+        struct ViewModel {
+            let title: String
+            let isEnabled: Bool
+        }
+    }
+
+    /// Prsent discussions module (list or with write comment on top on empty discussions empty state)
+    enum DiscussionsPresentation {
+        struct Request { }
+
+        struct Response {
+            let step: Step
+        }
+
+        struct ViewModel {
+            let discussionProxyID: DiscussionProxy.IdType
+            let stepID: Step.IdType
+            let embeddedInWriteComment: Bool
+        }
+    }
+
     // MARK: Enums
 
     enum ViewControllerState {

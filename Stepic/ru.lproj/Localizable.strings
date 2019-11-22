@@ -121,7 +121,8 @@ Discussions = "Комментарии";
 ShowMoreReplies = "Больше ответов";
 ShowMoreDiscussions = "Больше комментариев";
 RefreshingDiscussions = "Обновляем комментарии...";
-NoDiscussionsTitle = "Обсуждений нет. Начните первое!";
+PlaceholderNoDiscussionsTitle = "Обсуждений нет. Начните первое!";
+PlaceholderNoDiscussionsButtonTitle = "Написать комментарий";
 Syllabus = "Модули";
 Course = "Курс";
 NextLesson = "Следующий урок";
@@ -715,6 +716,7 @@ NextLessonNavigation = "Следующий урок";
 PreviousLessonNavigation = "Предыдущий урок";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
+DisabledDiscussionsButtonTitle = "Комментарии отключены";
 LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
 LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
@@ -789,6 +791,7 @@ DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
 DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
 DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
+DiscussionsIsPinnedBadgeTitle = "Закреплён";
 
 /* Write comment */
 WriteCommentTitle = "Комментарий";

@@ -166,7 +166,11 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         )
     }
 
-    private func makeCommentViewModel(comment: Comment, isSelected: Bool) -> DiscussionsCommentViewModel {
+    private func makeCommentViewModel(
+        comment: Comment,
+        isSelected: Bool,
+        hasReplies: Bool
+    ) -> DiscussionsCommentViewModel {
         let avatarImageURL: URL? = {
             if let userInfo = comment.userInfo {
                 return URL(string: userInfo.avatarURL)
@@ -188,11 +192,23 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         let text: String = {
             let trimmedText = comment.text.trimmingCharacters(in: .whitespacesAndNewlines)
             if isWebViewSupportNeeded {
+                var injections = ContentProcessor.defaultInjections
+                injections.append(
+                    CustomFontSizeInjection(
+                        bodyFontSize: 11,
+                        h1FontSize: 19,
+                        h2FontSize: 16,
+                        h3FontSize: 13,
+                        blockquoteFontSize: 15
+                    )
+                )
+
                 let contentProcessor = ContentProcessor(
                     content: trimmedText,
                     rules: ContentProcessor.defaultRules,
-                    injections: ContentProcessor.defaultInjections
+                    injections: injections
                 )
+
                 return contentProcessor.processContent()
             }
             return trimmedText
@@ -223,7 +239,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             voteValue: voteValue,
             canEdit: comment.actions.contains(.edit),
             canDelete: comment.actions.contains(.delete),
-            canVote: comment.actions.contains(.vote)
+            canVote: comment.actions.contains(.vote),
+            hasReplies: hasReplies
         )
     }
 
@@ -236,12 +253,13 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         let repliesViewModels = self.sortedReplies(
             replies,
             parentDiscussion: discussion
-        ).map { self.makeCommentViewModel(comment: $0, isSelected: false) }
+        ).map { self.makeCommentViewModel(comment: $0, isSelected: false, hasReplies: false) }
 
+        let hasReplies = !discussion.repliesIDs.isEmpty
         let leftToLoadCount = discussion.repliesIDs.count - repliesViewModels.count
 
         return DiscussionsDiscussionViewModel(
-            comment: self.makeCommentViewModel(comment: discussion, isSelected: isSelected),
+            comment: self.makeCommentViewModel(comment: discussion, isSelected: isSelected, hasReplies: hasReplies),
             replies: repliesViewModels,
             repliesLeftToLoadCount: leftToLoadCount,
             formattedRepliesLeftToLoad: "\(NSLocalizedString("ShowMoreDiscussions", comment: "")) (\(leftToLoadCount))",

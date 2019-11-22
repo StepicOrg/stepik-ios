@@ -1,11 +1,17 @@
 import Agrume
 import UIKit
 
+// MARK: NewStepViewControllerProtocol: class -
+
 protocol NewStepViewControllerProtocol: class {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
+    func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel)
+    func displayDiscussions(viewModel: NewStep.DiscussionsPresentation.ViewModel)
 }
+
+// MARK: - NewStepViewController: UIViewController, ControllerWithStepikPlaceholder -
 
 final class NewStepViewController: UIViewController, ControllerWithStepikPlaceholder {
     private static let stepPassedDelay: TimeInterval = 1.0
@@ -67,6 +73,14 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         self.sendStepDidPassedGroup?.notify(queue: .main) { [weak self] in
             self?.sendStepDidPassedGroup = nil
             self?.sendInitStepStatusRequests()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if !self.isFirstAppearance {
+            self.interactor.doDiscussionsButtonUpdate(request: .init())
         }
     }
 
@@ -178,6 +192,48 @@ extension NewStepViewController: NewStepViewControllerProtocol {
         )
         self.canNavigateToNextStep = viewModel.canNavigateToNextStep
     }
+
+    func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel) {
+        self.newStepView?.updateDiscussionButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
+    }
+
+    func displayDiscussions(viewModel: NewStep.DiscussionsPresentation.ViewModel) {
+        let discussionsAssembly = DiscussionsAssembly(
+            discussionProxyID: viewModel.discussionProxyID,
+            stepID: viewModel.stepID
+        )
+        let discussionsViewController = discussionsAssembly.makeModule()
+
+        if viewModel.embeddedInWriteComment {
+            let writeCommentAssembly = WriteCommentAssembly(
+                targetID: viewModel.stepID,
+                parentID: nil,
+                presentationContext: .create,
+                output: discussionsAssembly.moduleInput
+            )
+            let writeCommentNavigationController = StyledNavigationController(
+                rootViewController: writeCommentAssembly.makeModule()
+            )
+
+            self.navigationController?.present(
+                writeCommentNavigationController,
+                animated: true,
+                completion: { [weak self] in
+                    guard let strongSelf = self,
+                          let navigationController = strongSelf.navigationController else {
+                        return
+                    }
+
+                    navigationController.setViewControllers(
+                        navigationController.viewControllers + [discussionsViewController],
+                        animated: false
+                    )
+                }
+            )
+        } else {
+            self.push(module: discussionsViewController)
+        }
+    }
 }
 
 // MARK: - NewStepViewController: NewStepViewDelegate -
@@ -218,13 +274,7 @@ extension NewStepViewController: NewStepViewDelegate {
     }
 
     func newStepViewDidRequestDiscussions(_ view: NewStepView) {
-        guard case .result(let viewModel) = self.state,
-              let discussionProxyID = viewModel.discussionProxyID else {
-            return
-        }
-
-        let assembly = DiscussionsAssembly(discussionProxyID: discussionProxyID, stepID: viewModel.step.id)
-        self.push(module: assembly.makeModule())
+        self.interactor.doDiscussionsPresentation(request: .init())
     }
 
     func newStepView(_ view: NewStepView, didRequestOpenURL url: URL) {
