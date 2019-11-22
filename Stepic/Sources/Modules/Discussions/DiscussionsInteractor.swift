@@ -461,11 +461,14 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             ? discussionsWindow.require()
             : self.getLoadedDiscussionsWindow()
 
-        let index = discussionsWindow.endIndex == 0
-            ? self.currentDiscussionsIDs.count
-            : self.currentDiscussionsIDs.count - discussionsWindow.endIndex - 1
+        let leftToLoad: Int = {
+            if discussionsWindow.endIndex == 0 {
+                return self.currentDiscussionsIDs.count - self.currentDiscussions.count
+            }
+            return self.currentDiscussionsIDs.count - discussionsWindow.endIndex - 1
+        }()
 
-        return max(index, 0)
+        return max(leftToLoad, 0)
     }
 
     private func getLoadedDiscussionsWindow() -> (startIndex: Int, endIndex: Int) {
@@ -486,8 +489,8 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
             return (0, 0)
         case .scrollTo(let discussionID, _):
+            // This could happen when the selected comment was deleted and there are no more comments.
             guard let discussionIndex = self.currentDiscussionsIDs.index(of: discussionID) else {
-                assertionFailure("Discussion must appear in the collection")
                 return (0, 0)
             }
 

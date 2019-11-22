@@ -101,7 +101,15 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             ),
             for: .connectionError
         )
-        self.registerPlaceholder(placeholder: StepikPlaceholder(.emptyDiscussions), for: .empty)
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .emptyDiscussions,
+                action: { [weak self] in
+                    self?.didClickWriteComment()
+                }
+            ),
+            for: .empty
+        )
     }
 
     private func updateState(newState: Discussions.ViewControllerState) {
