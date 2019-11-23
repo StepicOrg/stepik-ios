@@ -16,7 +16,7 @@ final class AnalyticsReporter {
     static func reportAmplitudeEvent(_ event: String, parameters: [String: Any]? = nil) {
         Amplitude.instance().logEvent(event, withEventProperties: parameters)
         #if DEBUG
-        print("Logging amplitude event \(event), parameters: \(String(describing: parameters))")
+        print("Logging Amplitude event \(event), parameters: \(String(describing: parameters))")
         #endif
     }
 

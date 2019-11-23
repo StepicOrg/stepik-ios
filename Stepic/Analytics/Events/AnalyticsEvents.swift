@@ -89,9 +89,9 @@ struct AnalyticsEvents {
         static let acceptedClear = "clicked_accepted_clear_cache"
     }
 
-    // MARK: - CourseOverview -
+    // MARK: - Course -
 
-    struct CourseOverview {
+    struct Course {
         static let shared = "share_course_clicked"
 
         struct JoinPressed {
@@ -104,7 +104,18 @@ struct AnalyticsEvents {
             static let shown = "course_detail_video_shown"
         }
 
-        static let delete = "clicked_delete_cached_course"
+        struct Downloads {
+            static let deleted = "clicked_delete_cached_course"
+        }
+
+        struct Reviews {
+            static let opened = "course_reviews_screen_opened"
+            static let clickedCreate = "create_course_review_pressed"
+            static let clickedEdit = "edit_course_review_pressed"
+            static let created = "course_review_created"
+            static let updated = "course_review_updated"
+            static let deleted = "course_review_deleted"
+        }
     }
 
     // MARK: - Step -

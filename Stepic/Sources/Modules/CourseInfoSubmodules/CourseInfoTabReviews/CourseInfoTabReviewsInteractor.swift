@@ -15,10 +15,17 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     private let provider: CourseInfoTabReviewsProviderProtocol
 
     private var currentCourse: Course?
-    private var currentUserReview: CourseReview?
+    private var currentUserReview: CourseReview? {
+        didSet {
+            self.currentUserReviewScore = self.currentUserReview?.score
+        }
+    }
     private var isOnline = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var shouldOpenedAnalyticsEventSend = false
+
+    // Need for updated analytics event.
+    private var currentUserReviewScore: Int?
 
     // Semaphore to prevent concurrent fetching
     private let fetchSemaphore = DispatchSemaphore(value: 1)
@@ -106,6 +113,12 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 review: self.currentUserReview
             )
         )
+
+        if self.currentUserReview == nil {
+            self.reportAnalyticsEvent(.create(course))
+        } else {
+            self.reportAnalyticsEvent(.edit(course))
+        }
     }
 
     func doCourseReviewDelete(request: CourseInfoTabReviews.DeleteReview.Request) {
@@ -113,11 +126,20 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
             return
         }
 
+        var deletingScore: Int?
+        self.provider.fetchCachedCourseReview(courseReviewID: request.uniqueIdentifier).done { deletingCourseReview in
+            deletingScore = deletingCourseReview?.score
+        }
+
         let isCurrentUserReviewDeleting = self.currentUserReview?.id == request.uniqueIdentifier
 
         self.provider.delete(id: request.uniqueIdentifier).done {
             if isCurrentUserReviewDeleting {
                 self.currentUserReview = nil
+            }
+
+            if let deletingScore = deletingScore {
+                self.reportAnalyticsEvent(.deleted(courseID: course.id, score: deletingScore))
             }
 
             self.presenter.presentCourseReviewDelete(
@@ -189,9 +211,72 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         }
     }
 
+    private func reportAnalyticsEvent(_ event: AnalyticsEvent) {
+        switch event {
+        case .opened(let course):
+            AmplitudeAnalyticsEvents.CourseReviews.opened(courseID: course.id, courseTitle: course.title).send()
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Course.Reviews.opened, parameters: ["course": course.id, "title": course.title]
+            )
+        case .create(let course):
+            AmplitudeAnalyticsEvents.CourseReviews.writePressed(courseID: course.id, courseTitle: course.title).send()
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Course.Reviews.clickedCreate, parameters: ["course": course.id, "title": course.title]
+            )
+        case .edit(let course):
+            AmplitudeAnalyticsEvents.CourseReviews.editPressed(courseID: course.id, courseTitle: course.title).send()
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Course.Reviews.clickedEdit, parameters: ["course": course.id, "title": course.title]
+            )
+        case .created(let courseReview):
+            AmplitudeAnalyticsEvents.CourseReviews.created(
+                courseID: courseReview.courseID, rating: courseReview.score
+            ).send()
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Course.Reviews.created,
+                parameters: [
+                    "course": courseReview.courseID,
+                    "rating": courseReview.score
+                ]
+            )
+        case .updated(let courseID, let fromScore, let toScore):
+            AmplitudeAnalyticsEvents.CourseReviews.updated(
+                courseID: courseID, fromRating: fromScore, toRating: toScore
+            ).send()
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Course.Reviews.updated,
+                parameters: [
+                    "course": courseID,
+                    "from_rating": fromScore,
+                    "to_rating": toScore
+                ]
+            )
+        case .deleted(let courseID, let score):
+            AmplitudeAnalyticsEvents.CourseReviews.deleted(courseID: courseID, rating: score).send()
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Course.Reviews.deleted,
+                parameters: [
+                    "course": courseID,
+                    "rating": score
+                ]
+            )
+        }
+    }
+
+    // MARK: - Types
+
     enum Error: Swift.Error {
         case undefinedCourse
         case fetchFailed
+    }
+
+    private enum AnalyticsEvent {
+        case opened(Course)
+        case create(Course)
+        case edit(Course)
+        case created(CourseReview)
+        case updated(courseID: Course.IdType, fromScore: Int, toScore: Int)
+        case deleted(courseID: Course.IdType, score: Int)
     }
 }
 
@@ -200,7 +285,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
 extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
     func handleControllerAppearance() {
         if let course = self.currentCourse {
-            AmplitudeAnalyticsEvents.CourseReviews.opened(courseID: course.id, courseTitle: course.title).send()
+            self.reportAnalyticsEvent(.opened(course))
             self.shouldOpenedAnalyticsEventSend = false
         } else {
             self.shouldOpenedAnalyticsEventSend = true
@@ -214,7 +299,7 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
         self.doCourseReviewsFetch(request: .init())
 
         if self.shouldOpenedAnalyticsEventSend {
-            AmplitudeAnalyticsEvents.CourseReviews.opened(courseID: course.id, courseTitle: course.title).send()
+            self.reportAnalyticsEvent(.opened(course))
             self.shouldOpenedAnalyticsEventSend = false
         }
     }
@@ -224,6 +309,8 @@ extension CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInputProtocol {
 
 extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
     func handleCourseReviewCreated(_ courseReview: CourseReview) {
+        self.reportAnalyticsEvent(.created(courseReview))
+
         self.currentUserReview = courseReview
         self.presenter.presentReviewCreated(
             response: CourseInfoTabReviews.ReviewCreated.Response(review: courseReview)
@@ -231,6 +318,16 @@ extension CourseInfoTabReviewsInteractor: WriteCourseReviewOutputProtocol {
     }
 
     func handleCourseReviewUpdated(_ courseReview: CourseReview) {
+        if let currentUserReviewScore = self.currentUserReviewScore {
+            self.reportAnalyticsEvent(
+                .updated(
+                    courseID: courseReview.courseID,
+                    fromScore: currentUserReviewScore,
+                    toScore: courseReview.score
+                )
+            )
+        }
+
         self.currentUserReview = courseReview
         self.presenter.presentReviewUpdated(
             response: CourseInfoTabReviews.ReviewUpdated.Response(review: courseReview)

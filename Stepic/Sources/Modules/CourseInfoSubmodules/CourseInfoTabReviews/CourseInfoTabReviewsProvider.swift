@@ -4,6 +4,7 @@ import PromiseKit
 protocol CourseInfoTabReviewsProviderProtocol: class {
     func fetchCached(course: Course) -> Promise<([CourseReview], Meta)>
     func fetchRemote(course: Course, page: Int) -> Promise<([CourseReview], Meta)>
+    func fetchCachedCourseReview(courseReviewID: CourseReview.IdType) -> Guarantee<CourseReview?>
 
     func fetchCurrentUserReviewCached(course: Course) -> Promise<CourseReview?>
     func fetchCurrentUserReviewRemote(course: Course) -> Promise<CourseReview?>
@@ -55,6 +56,14 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
                 CoreDataHelper.instance.save()
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
+            }
+        }
+    }
+
+    func fetchCachedCourseReview(courseReviewID: CourseReview.IdType) -> Guarantee<CourseReview?> {
+        return Guarantee { seal in
+            self.courseReviewsPersistenceService.fetch(ids: [courseReviewID]).done { courseReviews in
+                seal(courseReviews.first)
             }
         }
     }

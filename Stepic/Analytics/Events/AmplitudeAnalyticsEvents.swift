@@ -131,7 +131,7 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
-        static func stepEditOpened(stepID: Step.IdType, type: String, position: Int) -> AnalyticsEvent {
+        static func stepEditOpened(stepID: Int, type: String, position: Int) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Step edit opened",
                 parameters: [
@@ -142,7 +142,7 @@ struct AmplitudeAnalyticsEvents {
             )
         }
 
-        static func stepEditCompleted(stepID: Step.IdType, type: String, position: Int) -> AnalyticsEvent {
+        static func stepEditCompleted(stepID: Int, type: String, position: Int) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Step edit completed",
                 parameters: [
@@ -478,6 +478,57 @@ struct AmplitudeAnalyticsEvents {
                 parameters: [
                     "course": courseID,
                     "title": courseTitle
+                ]
+            )
+        }
+
+        static func writePressed(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Create course review pressed",
+                parameters: [
+                    "course": courseID,
+                    "title": courseTitle
+                ]
+            )
+        }
+
+        static func editPressed(courseID: Int, courseTitle: String) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Edit course review pressed",
+                parameters: [
+                    "course": courseID,
+                    "title": courseTitle
+                ]
+            )
+        }
+
+        static func created(courseID: Int, rating: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course review created",
+                parameters: [
+                    "course": courseID,
+                    "rating": rating
+                ]
+            )
+        }
+
+        static func updated(courseID: Int, fromRating: Int, toRating: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course review updated",
+                parameters: [
+                    "course": courseID,
+                    "from_rating": fromRating,
+                    "to_rating": toRating
+                ]
+            )
+        }
+
+        static func deleted(courseID: Int, rating: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Course review deleted",
+                parameters: [
+                    "course": courseID,
+                    "rating": rating
                 ]
             )
         }
