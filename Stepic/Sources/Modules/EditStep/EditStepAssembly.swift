@@ -11,7 +11,8 @@ final class EditStepAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = EditStepProvider(
-            stepSourcesNetworkService: StepSourcesNetworkService(stepSourcesAPI: StepSourcesAPI())
+            stepSourcesNetworkService: StepSourcesNetworkService(stepSourcesAPI: StepSourcesAPI()),
+            stepsPersistenceService: StepsPersistenceService()
         )
         let presenter = EditStepPresenter()
         let interactor = EditStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)

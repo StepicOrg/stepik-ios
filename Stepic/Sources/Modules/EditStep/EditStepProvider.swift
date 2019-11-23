@@ -4,15 +4,21 @@ import PromiseKit
 protocol EditStepProviderProtocol {
     func fetchStepSource(stepID: Step.IdType) -> Promise<StepSource?>
     func updateStepSource(_ stepSource: StepSource) -> Promise<StepSource>
+    func fetchCachedStep(stepID: Step.IdType) -> Promise<Step?>
 }
 
 // MARK: - EditStepProvider: EditStepProviderProtocol -
 
 final class EditStepProvider: EditStepProviderProtocol {
     private let stepSourcesNetworkService: StepSourcesNetworkService
+    private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
-    init(stepSourcesNetworkService: StepSourcesNetworkService) {
+    init(
+        stepSourcesNetworkService: StepSourcesNetworkService,
+        stepsPersistenceService: StepsPersistenceServiceProtocol
+    ) {
         self.stepSourcesNetworkService = stepSourcesNetworkService
+        self.stepsPersistenceService = stepsPersistenceService
     }
 
     func fetchStepSource(stepID: Step.IdType) -> Promise<StepSource?> {
@@ -35,10 +41,21 @@ final class EditStepProvider: EditStepProviderProtocol {
         }
     }
 
+    func fetchCachedStep(stepID: Step.IdType) -> Promise<Step?> {
+        return Promise { seal in
+            self.stepsPersistenceService.fetch(ids: [stepID]).done { steps in
+                seal.fulfill(steps.first)
+            }.catch { _ in
+                seal.reject(Error.stepFetchFailed)
+            }
+        }
+    }
+
     // MARK: Types
 
     enum Error: Swift.Error {
         case networkFetchFailed
         case networkUpdateFailed
+        case stepFetchFailed
     }
 }
