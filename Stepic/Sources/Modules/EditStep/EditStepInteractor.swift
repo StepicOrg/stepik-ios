@@ -30,6 +30,8 @@ final class EditStepInteractor: EditStepInteractorProtocol {
         self.stepID = stepID
         self.presenter = presenter
         self.provider = provider
+
+        self.reportAnalyticsEvent(.opened)
     }
 
     // MARK: EditStepInteractorProtocol
@@ -76,6 +78,8 @@ final class EditStepInteractor: EditStepInteractorProtocol {
         self.provider.updateStepSource(updatingStepSource).done { stepSource in
             EditStepInteractor.logger.info("edit step interactor :: finish updating step source = \(stepSource.id)")
 
+            self.reportAnalyticsEvent(.completed)
+
             self.currentStepSource = stepSource
             self.currentText = stepSource.text
 
@@ -99,9 +103,37 @@ final class EditStepInteractor: EditStepInteractorProtocol {
         )
     }
 
+    private func reportAnalyticsEvent(_ event: AnalyticsEvent) {
+        self.provider.fetchCachedStep(stepID: self.stepID).done { step in
+            guard let step = step else {
+                return
+            }
+
+            switch event {
+            case .opened:
+                AmplitudeAnalyticsEvents.Steps.stepEditOpened(
+                    stepID: step.id,
+                    type: step.block.type.rawValue,
+                    position: step.position
+                ).send()
+            case .completed:
+                AmplitudeAnalyticsEvents.Steps.stepEditCompleted(
+                    stepID: step.id,
+                    type: step.block.type.rawValue,
+                    position: step.position
+                ).send()
+            }
+        }.cauterize()
+    }
+
     // MARK: - Types
 
     enum Error: Swift.Error {
         case noStepSource
+    }
+
+    private enum AnalyticsEvent {
+        case opened
+        case completed
     }
 }

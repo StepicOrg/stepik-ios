@@ -126,6 +126,28 @@ struct AmplitudeAnalyticsEvents {
                 ]
             )
         }
+
+        static func stepEditOpened(stepID: Step.IdType, type: String, position: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Step edit opened",
+                parameters: [
+                    "step": stepID,
+                    "type": type,
+                    "number": position
+                ]
+            )
+        }
+
+        static func stepEditCompleted(stepID: Step.IdType, type: String, position: Int) -> AnalyticsEvent {
+            return AnalyticsEvent(
+                name: "Step edit completed",
+                parameters: [
+                    "step": stepID,
+                    "type": type,
+                    "number": position
+                ]
+            )
+        }
     }
 
     struct Downloads {
