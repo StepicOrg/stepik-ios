@@ -119,6 +119,19 @@ struct AnalyticsEvents {
 
         static let hasRestrictions = "step_with_submission_restriction"
         static let opened = "step_type_opened"
+
+        struct Edit {
+            static let opened = "step_edit_opened"
+            static let completed = "step_edit_completed"
+
+            static func makeParams(stepID: Int, type: String, position: Int) -> [String: Any] {
+                return [
+                    "step": stepID,
+                    "type": type,
+                    "number": position
+                ]
+            }
+        }
     }
 
     // MARK: - VideoPlayer -
