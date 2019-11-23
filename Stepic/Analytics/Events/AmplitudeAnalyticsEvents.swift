@@ -1,14 +1,8 @@
-//
-//  AmplitudeAnalyticsEvents.swift
-//  Stepic
-//
-//  Created by Ostrenkiy on 19.06.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 struct AmplitudeAnalyticsEvents {
+    // MARK: - Launch -
+
     struct Launch {
         static var firstTime = AnalyticsEvent(name: "Launch first time")
 
@@ -25,6 +19,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Onboarding -
 
     struct Onboarding {
         static func screenOpened(screen: Int) -> AnalyticsEvent {
@@ -48,6 +44,8 @@ struct AmplitudeAnalyticsEvents {
         static let completed = AnalyticsEvent(name: "Onboarding completed")
     }
 
+    // MARK: - SignIn -
+
     struct SignIn {
         static func loggedIn(source: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -59,6 +57,8 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - SignUp -
+
     struct SignUp {
         static func registered(source: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -69,6 +69,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Course -
 
     struct Course {
         static func joined(source: String, courseID: Int, courseTitle: String) -> AnalyticsEvent {
@@ -103,6 +105,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Steps -
 
     struct Steps {
         static func submissionMade(step: Int, type: String, language: String? = nil) -> AnalyticsEvent {
@@ -149,6 +153,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Downloads -
 
     struct Downloads {
         static func started(content: Content) -> AnalyticsEvent {
@@ -204,6 +210,8 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - Search -
+
     struct Search {
         static var started = AnalyticsEvent(name: "Course search started")
 
@@ -218,6 +226,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Notifications -
 
     struct Notifications {
         static var screenOpened = AnalyticsEvent(name: "Notifications screen opened")
@@ -312,9 +322,13 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - Home -
+
     struct Home {
         static var opened = AnalyticsEvent(name: "Home screen opened")
     }
+
+    // MARK: - Catalog -
 
     struct Catalog {
         static var opened = AnalyticsEvent(name: "Catalog screen opened")
@@ -332,6 +346,8 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - CourseList -
+
     struct CourseList {
         static func opened(ID: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -342,6 +358,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Profile -
 
     struct Profile {
         static func opened(state: String) -> AnalyticsEvent {
@@ -357,9 +375,13 @@ struct AmplitudeAnalyticsEvents {
         static var editSaved = AnalyticsEvent(name: "Profile edit saved")
     }
 
+    // MARK: - Certificates -
+
     struct Certificates {
         static var opened = AnalyticsEvent(name: "Certificates screen opened")
     }
+
+    // MARK: - Achievements -
 
     struct Achievements {
         static func opened(isPersonal: Bool) -> AnalyticsEvent {
@@ -396,6 +418,8 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - Settings -
+
     struct Settings {
         static var opened = AnalyticsEvent(name: "Settings screen opened")
 
@@ -403,6 +427,8 @@ struct AmplitudeAnalyticsEvents {
             return AnalyticsEvent(name: "Font size selected", parameters: ["size": size])
         }
     }
+
+    // MARK: - CoursePreview -
 
     struct CoursePreview {
         static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
@@ -416,6 +442,8 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - Sections -
+
     struct Sections {
         static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -428,6 +456,8 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - Lessons -
+
     struct Lessons {
         static func opened(sectionID: Int?) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -438,6 +468,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - CourseReviews -
 
     struct CourseReviews {
         static func opened(courseID: Int, courseTitle: String) -> AnalyticsEvent {
@@ -450,6 +482,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Discussions -
 
     struct Discussions {
         enum DiscussionsSource: String {
@@ -467,6 +501,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Stories -
 
     struct Stories {
         static func storyOpened(id: Int) -> AnalyticsEvent {
@@ -513,6 +549,8 @@ struct AmplitudeAnalyticsEvents {
         }
     }
 
+    // MARK: - PersonalDeadlines -
+
     struct PersonalDeadlines {
         static func created(weeklyLoadHours: Int) -> AnalyticsEvent {
             return AnalyticsEvent(
@@ -525,6 +563,8 @@ struct AmplitudeAnalyticsEvents {
 
         static var buttonClicked = AnalyticsEvent(name: "Personal deadline schedule button pressed")
     }
+
+    // MARK: - Video -
 
     struct Video {
         static var continuedInBackground = AnalyticsEvent(name: "Video played in background")
@@ -539,6 +579,8 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - AdaptiveRating -
 
     struct AdaptiveRating {
         static func opened(course: Int) -> AnalyticsEvent {
