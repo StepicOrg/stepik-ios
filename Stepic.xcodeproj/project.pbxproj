@@ -3529,13 +3529,11 @@
 		2C0176C32188A49100DDB9D0 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				081A14FE20D963090016364E /* AmplitudeAnalyticsEvents.swift */,
 				087235ED20FE2F2F00B4D5B1 /* AnalyticsEvent.swift */,
-				08D035201D65A252003515C6 /* AnalyticsEvents.swift */,
 				08D035241D65B5E5003515C6 /* AnalyticsReporter.swift */,
 				08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */,
 				089877A4214047BB0065DFA2 /* AnalyticsUserPropertiesServiceProtocol.swift */,
-				2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */,
+				2C99D087238967FD00078D2B /* Events */,
 				62E98F39D7A7B4486E71DF3E /* SplitTests */,
 			);
 			path = Analytics;
@@ -4178,6 +4176,16 @@
 				2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */,
 			);
 			name = PlaceholderCell;
+			sourceTree = "<group>";
+		};
+		2C99D087238967FD00078D2B /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				081A14FE20D963090016364E /* AmplitudeAnalyticsEvents.swift */,
+				08D035201D65A252003515C6 /* AnalyticsEvents.swift */,
+				2C0176C02188953700DDB9D0 /* NotificationAlertsAnalytics.swift */,
+			);
+			path = Events;
 			sourceTree = "<group>";
 		};
 		2C9E3F381F7A7B2D00DDF1AA /* Notification */ = {

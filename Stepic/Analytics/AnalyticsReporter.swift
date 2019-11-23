@@ -1,36 +1,36 @@
-//
-//  AnalyticsReporter.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 18.08.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
-//
-
 import Amplitude_iOS
 import FirebaseAnalytics
 import Foundation
 import YandexMobileMetrica
 
 final class AnalyticsReporter {
+    private init() { }
+
     static func reportEvent(_ event: String, parameters: [String: Any]? = nil) {
         let params = parameters as? [String: NSObject]
 
-        reportFirebaseEvent(event, parameters: params)
-        reportAppMetricaEvent(event, parameters: params)
+        self.reportFirebaseEvent(event, parameters: params)
+        self.reportAppMetricaEvent(event, parameters: params)
     }
 
     static func reportAmplitudeEvent(_ event: String, parameters: [String: Any]? = nil) {
         Amplitude.instance().logEvent(event, withEventProperties: parameters)
         #if DEBUG
-        print("Logging amplitude event \(event), parameters: \(String(describing: parameters))")
+        print("Logging Amplitude event \(event), parameters: \(String(describing: parameters))")
         #endif
     }
 
     private static func reportFirebaseEvent(_ event: String, parameters: [String: NSObject]?) {
         Analytics.logEvent(event, parameters: parameters)
+        #if DEBUG
+        print("Logging Firebase event \(event), parameters: \(String(describing: parameters))")
+        #endif
     }
 
     private static func reportAppMetricaEvent(_ event: String, parameters: [String: NSObject]?) {
         YMMYandexMetrica.reportEvent(event, parameters: parameters, onFailure: nil)
+        #if DEBUG
+        print("Logging AppMetrica event \(event), parameters: \(String(describing: parameters))")
+        #endif
     }
 }
