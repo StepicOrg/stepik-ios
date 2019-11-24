@@ -211,6 +211,32 @@ final class ProcessedContentTextView: UIView {
             self?.fetchHeightWithInterval(count + 1)
         }
     }
+
+    private func getContentWidth() -> Guarantee<Int> {
+        return Guarantee { seal in
+            self.webView.evaluateJavaScript("document.body.scrollWidth;") { res, _ in
+                if let width = res as? Int {
+                    seal(width)
+                    return
+                }
+                seal(0)
+            }
+        }
+    }
+
+    private func fetchWidthWithInterval(_ count: Int = 0) {
+        let currentTime = TimeInterval(count) * ProcessedContentTextView.reloadTimeStandardInterval
+        guard currentTime <= ProcessedContentTextView.reloadTimeout else {
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + currentTime) { [weak self] in
+            self?.getContentWidth().done { width in
+                print("width = \(width)")
+            }
+            self?.fetchWidthWithInterval(count + 1)
+        }
+    }
 }
 
 extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
@@ -252,6 +278,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             }
 
             self.fetchHeightWithInterval()
+            self.fetchWidthWithInterval()
         }
     }
 
