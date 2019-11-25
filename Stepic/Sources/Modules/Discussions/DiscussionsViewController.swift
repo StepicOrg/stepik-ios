@@ -1,3 +1,4 @@
+import Agrume
 import SVProgressHUD
 import UIKit
 
@@ -378,6 +379,14 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didRequestOpenImage url: URL
+    ) {
+        let agrume = Agrume(url: url)
+        agrume.show(from: self)
     }
 
     func discussionsTableViewDataSource(
