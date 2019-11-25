@@ -3,6 +3,8 @@ import SnapKit
 import UIKit
 import WebKit
 
+// MARK: ProcessedContentTextViewDelegate: class -
+
 protocol ProcessedContentTextViewDelegate: class {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView)
     func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int)
@@ -14,12 +16,16 @@ extension ProcessedContentTextViewDelegate {
     func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) { }
 }
 
+// MARK: - Appearance -
+
 extension ProcessedContentTextView {
     struct Appearance {
         var insets = LayoutInsets(top: 10, left: 16, bottom: 4, right: 16)
         var backgroundColor = UIColor.white
     }
 }
+
+// MARK: - ProcessedContentTextView: UIView -
 
 final class ProcessedContentTextView: UIView {
     private static let reloadTimeStandardInterval: TimeInterval = 0.5
@@ -89,6 +95,12 @@ final class ProcessedContentTextView: UIView {
                 + self.appearance.insets.bottom
         )
     }
+
+    /// A Boolean value that determines whether auto-scrolling is enabled.
+    ///
+    /// If the value of this property is `true`, auto-scrolling is enabled and view will enable scrolling for wider content than webView's size,
+    /// and if it is `false`, auto-scrolling is disabled.
+    var isAutoScrollingEnabled = true
 
     var isScrollEnabled: Bool {
         get {
@@ -211,7 +223,41 @@ final class ProcessedContentTextView: UIView {
             self?.fetchHeightWithInterval(count + 1)
         }
     }
+
+    private func getContentWidth() -> Guarantee<Int> {
+        return Guarantee { seal in
+            self.webView.evaluateJavaScript("document.body.scrollWidth;") { res, _ in
+                if let width = res as? Int {
+                    seal(width)
+                    return
+                }
+                seal(0)
+            }
+        }
+    }
+
+    private func fetchWidthWithInterval(_ count: Int = 0) {
+        let currentTime = TimeInterval(count) * ProcessedContentTextView.reloadTimeStandardInterval
+        guard currentTime <= ProcessedContentTextView.reloadTimeout else {
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + currentTime) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.getContentWidth().done { width in
+                if strongSelf.isAutoScrollingEnabled {
+                    strongSelf.isScrollEnabled = CGFloat(width) > strongSelf.webView.bounds.size.width
+                }
+            }
+            strongSelf.fetchWidthWithInterval(count + 1)
+        }
+    }
 }
+
+// MARK: - ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol -
 
 extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
@@ -229,6 +275,8 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
         }
     }
 }
+
+// MARK: - ProcessedContentTextView: WKNavigationDelegate -
 
 extension ProcessedContentTextView: WKNavigationDelegate {
     // swiftlint:disable:next implicitly_unwrapped_optional
@@ -252,6 +300,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
             }
 
             self.fetchHeightWithInterval()
+            self.fetchWidthWithInterval()
         }
     }
 
@@ -287,6 +336,8 @@ extension ProcessedContentTextView: WKNavigationDelegate {
         return decisionHandler(.cancel)
     }
 }
+
+// MARK: - ProcessedContentTextView: UIScrollViewDelegate -
 
 extension ProcessedContentTextView: UIScrollViewDelegate {
     // swiftlint:disable:next identifier_name
