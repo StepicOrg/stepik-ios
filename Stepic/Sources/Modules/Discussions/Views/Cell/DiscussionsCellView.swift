@@ -284,7 +284,7 @@ final class DiscussionsCellView: UIView {
             canVote: viewModel.canVote,
             voteValue: viewModel.voteValue
         )
-        self.updateTextContent(text: viewModel.text, isWebViewSupportNeeded: viewModel.isWebViewSupportNeeded)
+        self.updateTextContent(text: viewModel.processedText, isWebViewSupportNeeded: viewModel.isWebViewSupportNeeded)
 
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)

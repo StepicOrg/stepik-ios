@@ -17,6 +17,7 @@ Cancel = "Cancel";
 Remove = "Remove";
 Delete = "Delete";
 Yes = "Yes";
+Copy = "Copy";
 Reload = "Reload";
 ConnectionErrorTitle = "Connection error";
 ConnectionErrorSubtitle = "Enable internet connection and retry";

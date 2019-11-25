@@ -21,7 +21,8 @@ struct DiscussionsCommentViewModel {
     let isPinned: Bool
     let isSelected: Bool
     let username: String
-    let text: String
+    let rawText: String
+    let processedText: String
     let isWebViewSupportNeeded: Bool
     let formattedDate: String
     let likesCount: Int
