@@ -1,4 +1,3 @@
-import IQKeyboardManagerSwift
 import UIKit
 
 protocol WriteCommentViewControllerProtocol: class {
@@ -69,11 +68,6 @@ final class WriteCommentViewController: UIViewController {
         self.interactor.doCommentLoad(request: .init())
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        IQKeyboardManager.shared.enable = false
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         _ = self.writeCommentView?.becomeFirstResponder()
@@ -82,7 +76,6 @@ final class WriteCommentViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
-        IQKeyboardManager.shared.enable = true
     }
 
     // MARK: - Private API
