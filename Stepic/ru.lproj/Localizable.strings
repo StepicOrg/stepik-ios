@@ -17,6 +17,7 @@ Cancel = "Отмена";
 Remove = "Удалить";
 Delete = "Удалить";
 Yes = "Да";
+Copy = "Скопировать";
 Reload = "Обновить";
 ConnectionErrorTitle = "Ошибка соединения";
 ConnectionErrorSubtitle = "Подключитесь к интернету и повторите попытку";

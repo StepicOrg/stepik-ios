@@ -405,6 +405,16 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
 
         alert.addAction(
             UIAlertAction(
+                title: NSLocalizedString("Copy", comment: ""),
+                style: .default,
+                handler: { _ in
+                    UIPasteboard.general.string = viewModel.rawText
+                }
+            )
+        )
+
+        alert.addAction(
+            UIAlertAction(
                 title: NSLocalizedString("Reply", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
