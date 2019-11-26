@@ -3,6 +3,7 @@ import Foundation
 struct NewLessonViewModel {
     struct StepDescription {
         let id: Step.IdType
+        let type: Block.BlockType
         let iconImage: UIImage
         let isPassed: Bool
     }

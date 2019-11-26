@@ -112,6 +112,7 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             }()
             return .init(
                 id: step.id,
+                type: step.block.type,
                 iconImage: iconImage ?? UIImage(),
                 isPassed: progresses[safe: index]?.isPassed ?? false
             )
