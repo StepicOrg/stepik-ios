@@ -12,9 +12,6 @@ extension DiscussionsSkeletonView {
         let badgeViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         let badgeViewSize = CGSize(width: 80, height: 12)
 
-        let dotsMenuViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
-        let dotsMenuViewSize = CGSize(width: 24, height: 12)
-
         let nameLabelHeight: CGFloat = 14.0
         let nameLabelInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
 
@@ -37,13 +34,6 @@ final class DiscussionsSkeletonView: UIView {
     }()
 
     private lazy var badgeView: UIView = {
-        let view = UIView()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = self.appearance.labelCornerRadius
-        return view
-    }()
-
-    private lazy var dotsMenuView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.labelCornerRadius
@@ -94,7 +84,6 @@ extension DiscussionsSkeletonView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.avatarView)
         self.addSubview(self.badgeView)
-        self.addSubview(self.dotsMenuView)
         self.addSubview(self.nameLabelView)
         self.addSubview(self.descriptionLabel1View)
         self.addSubview(self.descriptionLabel2View)
@@ -114,13 +103,6 @@ extension DiscussionsSkeletonView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalTo(self.avatarView.snp.trailing).offset(self.appearance.badgeViewInsets.left)
             make.top.equalTo(self.avatarView.snp.top)
             make.size.equalTo(self.appearance.badgeViewSize)
-        }
-
-        self.dotsMenuView.translatesAutoresizingMaskIntoConstraints = false
-        self.dotsMenuView.snp.makeConstraints { make in
-            make.top.equalTo(self.avatarView.snp.top)
-            make.trailing.equalToSuperview().offset(-self.appearance.dotsMenuViewInsets.right)
-            make.size.equalTo(self.appearance.dotsMenuViewSize)
         }
 
         self.nameLabelView.translatesAutoresizingMaskIntoConstraints = false
