@@ -19,6 +19,18 @@ enum NewStep {
         }
     }
 
+    /// Update step HTML text - after step source being updated
+    enum StepTextUpdate {
+        struct Response {
+            let text: String
+            let fontSize: FontSize
+        }
+
+        struct ViewModel {
+            let htmlText: String
+        }
+    }
+
     /// Update bottom step controls – navigation buttons
     enum ControlsUpdate {
         struct Response {
@@ -65,6 +77,35 @@ enum NewStep {
 
         struct Request {
             let direction: Direction
+        }
+    }
+
+    /// Update discussions button (on appear)
+    enum DiscussionsButtonUpdate {
+        struct Request { }
+
+        struct Response {
+            let step: Step
+        }
+
+        struct ViewModel {
+            let title: String
+            let isEnabled: Bool
+        }
+    }
+
+    /// Prsent discussions module (list or with write comment on top on empty discussions empty state)
+    enum DiscussionsPresentation {
+        struct Request { }
+
+        struct Response {
+            let step: Step
+        }
+
+        struct ViewModel {
+            let discussionProxyID: DiscussionProxy.IdType
+            let stepID: Step.IdType
+            let embeddedInWriteComment: Bool
         }
     }
 

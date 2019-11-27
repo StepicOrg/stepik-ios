@@ -74,6 +74,12 @@ final class StepControlsView: UIView {
         }
     }
 
+    var isDiscussionsButtonEnabled: Bool = true {
+        didSet {
+            self.discussionsButton.isEnabled = self.isDiscussionsButtonEnabled
+        }
+    }
+
     var isDiscussionsButtonHidden: Bool = false {
         didSet {
             self.updateDiscussionsButton()

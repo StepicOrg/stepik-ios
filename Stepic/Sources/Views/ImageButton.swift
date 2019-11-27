@@ -69,6 +69,9 @@ final class ImageButton: UIControl {
         }
     }
 
+    // To be able to prevent alpha being changed on isEnabled state changes.
+    var disabledAlpha: CGFloat = 0.5
+
     // To store private titleLabel
     // but sometimes we want to get direct reference to title view
     var titleContentView: UIView {
@@ -93,7 +96,7 @@ final class ImageButton: UIControl {
                 self.alpha = 0.3
             } else {
                 UIView.animate(withDuration: 0.25) {
-                    self.alpha = self.isEnabled ? 1.0 : 0.5
+                    self.alpha = self.isEnabled ? 1.0 : self.disabledAlpha
                 }
             }
         }
@@ -101,7 +104,7 @@ final class ImageButton: UIControl {
 
     override var isEnabled: Bool {
         didSet {
-            self.alpha = self.isEnabled ? 1.0 : 0.5
+            self.alpha = self.isEnabled ? 1.0 : self.disabledAlpha
         }
     }
 

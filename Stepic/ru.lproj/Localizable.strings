@@ -17,6 +17,7 @@ Cancel = "Отмена";
 Remove = "Удалить";
 Delete = "Удалить";
 Yes = "Да";
+Copy = "Скопировать";
 Reload = "Обновить";
 ConnectionErrorTitle = "Ошибка соединения";
 ConnectionErrorSubtitle = "Подключитесь к интернету и повторите попытку";
@@ -121,7 +122,8 @@ Discussions = "Комментарии";
 ShowMoreReplies = "Больше ответов";
 ShowMoreDiscussions = "Больше комментариев";
 RefreshingDiscussions = "Обновляем комментарии...";
-NoDiscussionsTitle = "Обсуждений нет. Начните первое!";
+PlaceholderNoDiscussionsTitle = "Обсуждений нет. Начните первое!";
+PlaceholderNoDiscussionsButtonTitle = "Написать комментарий";
 Syllabus = "Модули";
 Course = "Курс";
 NextLesson = "Следующий урок";
@@ -715,11 +717,13 @@ NextLessonNavigation = "Следующий урок";
 PreviousLessonNavigation = "Предыдущий урок";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
+DisabledDiscussionsButtonTitle = "Комментарии отключены";
 LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
 LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
 StepVideoPlayingNotReachableErrorTitle = "Ошибка соединения";
 StepVideoPlayingNotReachableErrorMessage = "Подключитесь к интернету и повторите попытку.";
+EditStepAlertActionTitle = "Редактировать";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
@@ -788,6 +792,7 @@ DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
 DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
 DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
+DiscussionsIsPinnedBadgeTitle = "Закреплён";
 
 /* Write comment */
 WriteCommentTitle = "Комментарий";
@@ -799,3 +804,10 @@ WriteCommentCancelPromptDestructiveActionTitle = "Удалить";
 
 /* Downloads */
 DownloadsTitle = "Загруженные курсы";
+
+/* Edit step */
+EditStepTitle = "Редактирование шага";
+EditStepPlaceholder = "Текст...";
+EditStepMessage = "Вы можете редактировать только текст шага и только в виде HTML кода. Для доступа к полноценному редактору шагов, пожалуйста, воспользуйтесь веб версией Stepik.";
+EditStepRemoteUpdateSuccessfulTitle = "Обновлено";
+EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";

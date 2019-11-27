@@ -114,3 +114,36 @@ final class FontSizeInjection: ContentProcessingInjection {
         return Scripts.fontSize(self.fontSize)
     }
 }
+
+/// Injects script that assigns custom font sizes.
+final class CustomFontSizeInjection: ContentProcessingInjection {
+    private let bodyFontSize: Int
+    private let h1FontSize: Int
+    private let h2FontSize: Int
+    private let h3FontSize: Int
+    private let blockquoteFontSize: Int
+
+    init(
+        bodyFontSize: Int,
+        h1FontSize: Int,
+        h2FontSize: Int,
+        h3FontSize: Int,
+        blockquoteFontSize: Int
+    ) {
+        self.bodyFontSize = bodyFontSize
+        self.h1FontSize = h1FontSize
+        self.h2FontSize = h2FontSize
+        self.h3FontSize = h3FontSize
+        self.blockquoteFontSize = blockquoteFontSize
+    }
+
+    var headScript: String {
+        return Scripts.fontSizeScript(
+            bodyFontSizeString: "\(self.bodyFontSize)pt",
+            h1FontSizeString: "\(self.h1FontSize)pt",
+            h2FontSizeString: "\(self.h2FontSize)pt",
+            h3FontSizeString: "\(self.h3FontSize)pt",
+            blockquoteFontSizeString: "\(self.blockquoteFontSize)px"
+        )
+    }
+}

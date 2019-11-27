@@ -127,7 +127,7 @@ final class DiscussionsView: UIView {
     func showLoading() {
         self.isSkeletonVisible = true
         self.tableView.skeleton.viewBuilder = {
-            CourseInfoTabReviewsSkeletonView()
+            DiscussionsSkeletonView()
         }
         self.tableView.skeleton.show()
     }

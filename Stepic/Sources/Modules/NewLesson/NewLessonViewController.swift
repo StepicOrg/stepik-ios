@@ -5,6 +5,8 @@ import SVProgressHUD
 import Tabman
 import UIKit
 
+// MARK: NewLessonViewControllerProtocol: class -
+
 protocol NewLessonViewControllerProtocol: class {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
@@ -12,8 +14,12 @@ protocol NewLessonViewControllerProtocol: class {
     func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
+    func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel)
+    func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
 }
+
+// MARK: - NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
 
 final class NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder {
     private static let animationDuration: TimeInterval = 0.25
@@ -50,6 +56,16 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         item.isEnabled = false
         return item
     }()
+
+    private lazy var moreBarButtonItem = UIBarButtonItem(
+        image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
+        style: .plain,
+        target: self,
+        action: #selector(self.moreButtonClicked)
+    )
+
+    private lazy var studentRightBarButtonItems = [self.shareBarButtonItem, self.infoBarButtonItem]
+    private lazy var teacherRightBarButtonItems = [self.moreBarButtonItem, self.infoBarButtonItem]
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
@@ -116,6 +132,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: UIViewController life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -138,8 +156,6 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }
 
         self.addSubviews()
-
-        self.navigationItem.rightBarButtonItems = [self.shareBarButtonItem, self.infoBarButtonItem]
         self.dataSource = self
 
         self.updateState()
@@ -163,7 +179,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             direction: direction,
             animated: animated
         )
-        self.updateInfoBarButtonItem()
+        self.updateRightBarButtonItems()
     }
 
     // MARK: Private API
@@ -295,6 +311,24 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }
     }
 
+    private func updateRightBarButtonItems() {
+        defer {
+            self.updateInfoBarButtonItem()
+        }
+
+        guard case .result(let data) = self.state,
+              let currentIndex = self.currentIndex,
+              let step = data.steps[safe: currentIndex] else {
+            return
+        }
+
+        let showEditStep = data.canEdit && step.type != .video
+
+        self.navigationItem.rightBarButtonItems = showEditStep
+            ? self.teacherRightBarButtonItems
+            : self.studentRightBarButtonItems
+    }
+
     private func updateInfoBarButtonItem() {
         let isEnabled: Bool = {
             guard case .result(let data) = self.state,
@@ -307,6 +341,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }()
         self.infoBarButtonItem.isEnabled = isEnabled
     }
+
+    // MARK: Actions
 
     @objc
     private func infoButtonClicked() {
@@ -359,7 +395,41 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             }
         }
     }
+
+    @objc
+    private func moreButtonClicked() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Share", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.shareButtonClicked()
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("EditStepAlertActionTitle", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self,
+                          let currentIndex = strongSelf.currentIndex else {
+                        return
+                    }
+
+                    strongSelf.interactor.doEditStepPresentation(request: .init(index: currentIndex))
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+        alert.popoverPresentationController?.barButtonItem = self.moreBarButtonItem
+
+        self.present(module: alert)
+    }
 }
+
+// MARK: - NewLessonViewController: PageboyViewControllerDataSource -
 
 extension NewLessonViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
@@ -395,6 +465,8 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
     }
 }
 
+// MARK: - NewLessonViewController: TMBarDataSource -
+
 extension NewLessonViewController: TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         guard case .result(let data) = self.state, let stepDescription = data.steps[safe: index] else {
@@ -407,6 +479,8 @@ extension NewLessonViewController: TMBarDataSource {
         return TMBarItem(title: stepStringID, image: stepDescription.iconImage, badgeValue: badgeValue)
     }
 }
+
+// MARK: - NewLessonViewController: NewLessonViewControllerProtocol -
 
 extension NewLessonViewController: NewLessonViewControllerProtocol {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel) {
@@ -447,6 +521,23 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         self.scrollToPage(.at(index: viewModel.index), animated: true)
     }
 
+    func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
+        let assembly = EditStepAssembly(
+            stepID: viewModel.stepID,
+            output: self.interactor as? EditStepOutputProtocol
+        )
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+        self.present(navigationController, animated: true)
+    }
+
+    func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel) {
+        guard let stepModuleInput = self.stepModulesInputs[safe: viewModel.index] else {
+            return
+        }
+
+        stepModuleInput?.updateStepText(viewModel.text)
+    }
+
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
@@ -455,6 +546,8 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         }
     }
 }
+
+// MARK: - NewLessonViewController: EasyTipViewDelegate -
 
 extension NewLessonViewController: EasyTipViewDelegate {
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {

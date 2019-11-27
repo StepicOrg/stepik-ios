@@ -150,7 +150,13 @@ extension CGSize {
 }
 
 final class WiderLabel: UILabel {
+    var widthDelta: CGFloat = 10 {
+        didSet {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
-        return super.intrinsicContentSize.sizeByDelta(dw: 10, dh: 0)
+        return super.intrinsicContentSize.sizeByDelta(dw: self.widthDelta, dh: 0)
     }
 }

@@ -7,6 +7,8 @@ protocol NewLessonPresenterProtocol {
     func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response)
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
     func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response)
+    func presentEditStep(response: NewLesson.EditStepPresentation.Response)
+    func presentStepTextUpdate(response: NewLesson.StepTextUpdate.Response)
     func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -26,7 +28,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
                         lesson: result.lesson,
                         steps: result.steps,
                         progresses: result.progresses,
-                        startStepIndex: result.startStepIndex
+                        startStepIndex: result.startStepIndex,
+                        canEdit: result.canEdit
                     )
                 )
             )
@@ -70,6 +73,16 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         self.viewController?.displayCurrentStepUpdate(viewModel: .init(index: response.index))
     }
 
+    func presentStepTextUpdate(response: NewLesson.StepTextUpdate.Response) {
+        self.viewController?.displayStepTextUpdate(
+            viewModel: .init(index: response.index, text: response.stepSource.text)
+        )
+    }
+
+    func presentEditStep(response: NewLesson.EditStepPresentation.Response) {
+        self.viewController?.displayEditStep(viewModel: .init(stepID: response.stepID))
+    }
+
     func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
@@ -80,7 +93,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         lesson: Lesson,
         steps: [Step],
         progresses: [Progress],
-        startStepIndex: Int
+        startStepIndex: Int,
+        canEdit: Bool
     ) -> NewLessonViewModel {
         let lessonTitle = lesson.title
         let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
@@ -98,6 +112,7 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             }()
             return .init(
                 id: step.id,
+                type: step.block.type,
                 iconImage: iconImage ?? UIImage(),
                 isPassed: progresses[safe: index]?.isPassed ?? false
             )
@@ -108,7 +123,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             stepLinkMaker: {
                 "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
             },
-            startStepIndex: startStepIndex
+            startStepIndex: startStepIndex,
+            canEdit: canEdit
         )
     }
 

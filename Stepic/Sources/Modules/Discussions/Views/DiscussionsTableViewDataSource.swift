@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: DiscussionsTableViewDataSourceDelegate: class -
+
 protocol DiscussionsTableViewDataSourceDelegate: class {
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
@@ -12,11 +14,6 @@ protocol DiscussionsTableViewDataSourceDelegate: class {
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didDislikeComment comment: DiscussionsCommentViewModel
-    )
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectDotsMenu comment: DiscussionsCommentViewModel,
-        cell: UITableViewCell
     )
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
@@ -35,6 +32,10 @@ protocol DiscussionsTableViewDataSourceDelegate: class {
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didRequestOpenURL url: URL
+    )
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didRequestOpenImage url: URL
     )
 }
 
@@ -138,18 +139,6 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
 
         let commentType: DiscussionsTableViewCell.ViewModel.CommentType =
             indexPath.row == DiscussionsTableViewDataSource.parentDiscussionRowIndex ? .discussion : .reply
-        let separatorType: DiscussionsTableViewCell.ViewModel.SeparatorType = {
-            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
-                if discussionViewModel.repliesLeftToLoadCount > 0 {
-                    return .none
-                } else if indexPath.section == tableView.numberOfSections - 1 {
-                    return .small
-                }
-                return .large
-            }
-            return .small
-        }()
-
         let commentViewModel = commentType == .discussion
             ? discussionViewModel.comment
             : discussionViewModel.replies[indexPath.row - DiscussionsTableViewDataSource.parentDiscussionInset]
@@ -164,15 +153,6 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         cell.onNewHeightUpdate = { [weak self, weak tableView] newHeight in
             if let strongSelf = self, let strongTableView = tableView {
                 strongSelf.updateCellHeight(newHeight, commentID: commentID, tableView: strongTableView)
-            }
-        }
-        cell.onDotsMenuClick = { [weak self, weak cell] in
-            if let strongSelf = self, let strongCell = cell {
-                strongSelf.delegate?.discussionsTableViewDataSource(
-                    strongSelf,
-                    didSelectDotsMenu: commentViewModel,
-                    cell: strongCell
-                )
             }
         }
         cell.onReplyClick = { [weak self] in
@@ -200,7 +180,29 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
                 strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didRequestOpenURL: url)
             }
         }
+        cell.onImageClick = { [weak self] url in
+            if let strongSelf = self {
+                strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didRequestOpenImage: url)
+            }
+        }
+        cell.onTextContentClick = { [weak tableView] in
+            if let strongTableView = tableView {
+                strongTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                strongTableView.delegate?.tableView?(strongTableView, didSelectRowAt: indexPath)
+            }
+        }
 
+        let separatorStyle: DiscussionsTableViewCell.ViewModel.SeparatorStyle = {
+            if indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                if discussionViewModel.repliesLeftToLoadCount > 0 {
+                    return .none
+                } else if indexPath.section == tableView.numberOfSections - 1 {
+                    return .small
+                }
+                return .large
+            }
+            return .small
+        }()
         let isLastComment = indexPath.row == tableView.numberOfRows(inSection: indexPath.section)
             - self.loadMoreRepliesInset(section: indexPath.section) - 1
 
@@ -208,9 +210,9 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
             viewModel: .init(
                 comment: commentViewModel,
                 commentType: commentType,
-                separatorType: separatorType,
-                separatorFollowsDepth: !isLastComment,
-                isSelected: commentViewModel.isSelected
+                isSelected: commentViewModel.isSelected,
+                separatorStyle: separatorStyle,
+                separatorFollowsDepth: !isLastComment
             )
         )
 

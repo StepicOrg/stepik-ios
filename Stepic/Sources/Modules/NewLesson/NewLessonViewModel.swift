@@ -3,6 +3,7 @@ import Foundation
 struct NewLessonViewModel {
     struct StepDescription {
         let id: Step.IdType
+        let type: Block.BlockType
         let iconImage: UIImage
         let isPassed: Bool
     }
@@ -11,4 +12,5 @@ struct NewLessonViewModel {
     let steps: [StepDescription]
     let stepLinkMaker: (String) -> String
     let startStepIndex: Int
+    let canEdit: Bool
 }

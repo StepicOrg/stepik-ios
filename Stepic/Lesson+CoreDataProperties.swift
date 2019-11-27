@@ -22,11 +22,10 @@ extension Lesson {
     @NSManaged var managedTimeToComplete: NSNumber?
     @NSManaged var managedVoteDelta: NSNumber?
     @NSManaged var managedPassedBy: NSNumber?
+    @NSManaged var managedCanEdit: NSNumber?
 
     @NSManaged var managedStepsArray: NSObject?
-
     @NSManaged var managedSteps: NSOrderedSet?
-
     @NSManaged var managedUnit: Unit?
 
     static var oldEntity: NSEntityDescription {
@@ -38,91 +37,98 @@ extension Lesson {
     }
 
     var id: Int {
-        set(newId) {
-            self.managedId = newId as NSNumber?
-        }
         get {
-            return managedId?.intValue ?? -1
+            return self.managedId?.intValue ?? -1
+        }
+        set {
+            self.managedId = newValue as NSNumber?
         }
     }
 
     var title: String {
-        set(value) {
-            self.managedTitle = value
-        }
         get {
-            return managedTitle ?? "No title"
+            return self.managedTitle ?? "No title"
+        }
+        set {
+            self.managedTitle = newValue
         }
     }
 
     var slug: String {
-        set(value) {
-            self.managedSlug = value
-        }
         get {
-            return managedSlug ?? ""
+            return self.managedSlug ?? ""
+        }
+        set {
+            self.managedSlug = newValue
         }
     }
 
     var coverURL: String? {
-        set(value) {
-            managedCoverURL = value
-        }
         get {
-            return managedCoverURL
+            return self.managedCoverURL
+        }
+        set {
+            self.managedCoverURL = newValue
         }
     }
 
     var isFeatured: Bool {
-        set(value) {
-            self.managedFeatured = value as NSNumber?
-        }
         get {
-            return managedFeatured?.boolValue ?? false
+            return self.managedFeatured?.boolValue ?? false
+        }
+        set {
+            self.managedFeatured = newValue as NSNumber?
         }
     }
 
     var isPublic: Bool {
-        set(value) {
-            self.managedPublic = value as NSNumber?
-        }
         get {
-            return managedPublic?.boolValue ?? false
+            return self.managedPublic?.boolValue ?? false
+        }
+        set {
+            self.managedPublic = newValue as NSNumber?
         }
     }
 
-    var stepsArray: [Int] {
-        set(value) {
-            self.managedStepsArray = value as NSObject?
-        }
-
+    var canEdit: Bool {
         get {
-            return (self.managedStepsArray as? [Int]) ?? []
+            return self.managedCanEdit?.boolValue ?? false
+        }
+        set {
+            self.managedCanEdit = newValue as NSNumber?
+        }
+    }
+
+    var stepsArray: [IdType] {
+        get {
+            return (self.managedStepsArray as? [IdType]) ?? []
+        }
+        set {
+            self.managedStepsArray = newValue as NSObject?
         }
     }
 
     var steps: [Step] {
         get {
-            return (managedSteps?.array as? [Step]) ?? []
+            return (self.managedSteps?.array as? [Step]) ?? []
         }
-
-        set(value) {
-            managedSteps = NSOrderedSet(array: value)
+        set {
+            self.managedSteps = NSOrderedSet(array: newValue)
         }
     }
 
     var timeToComplete: Double {
         get {
-            return managedTimeToComplete?.doubleValue ?? 0
+            return self.managedTimeToComplete?.doubleValue ?? 0
         }
-        set(value) {
-            managedTimeToComplete = value as NSNumber?
+        set {
+            self.managedTimeToComplete = newValue as NSNumber?
         }
     }
 
     var voteDelta: Int {
         get {
-            return managedVoteDelta?.intValue ?? 0
+            return self.managedVoteDelta?.intValue ?? 0
         }
         set {
             self.managedVoteDelta = newValue as NSNumber?
@@ -139,6 +145,6 @@ extension Lesson {
     }
 
     var unit: Unit? {
-        return managedUnit
+        return self.managedUnit
     }
 }

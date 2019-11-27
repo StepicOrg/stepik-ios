@@ -1,6 +1,8 @@
 import UIKit
 
 final class DiscussionsAssembly: Assembly {
+    var moduleInput: DiscussionsInputProtocol?
+
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
     private let presentationContext: Discussions.PresentationContext
@@ -35,6 +37,7 @@ final class DiscussionsAssembly: Assembly {
         let viewController = DiscussionsViewController(interactor: interactor)
 
         presenter.viewController = viewController
+        self.moduleInput = interactor
 
         return viewController
     }

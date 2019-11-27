@@ -1,3 +1,4 @@
+import Agrume
 import SVProgressHUD
 import UIKit
 
@@ -84,6 +85,14 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         self.interactor.doDiscussionsLoad(request: .init())
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
+        }
+    }
+
     // MARK: - Private API
 
     private func registerPlaceholders() {
@@ -101,7 +110,15 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             ),
             for: .connectionError
         )
-        self.registerPlaceholder(placeholder: StepikPlaceholder(.emptyDiscussions), for: .empty)
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .emptyDiscussions,
+                action: { [weak self] in
+                    self?.didClickWriteComment()
+                }
+            ),
+            for: .empty
+        )
     }
 
     private func updateState(newState: Discussions.ViewControllerState) {
@@ -337,14 +354,6 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
 
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectDotsMenu comment: DiscussionsCommentViewModel,
-        cell: UITableViewCell
-    ) {
-        self.presentCommentActionSheet(comment, sourceView: cell, sourceRect: cell.bounds)
-    }
-
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
         didSelectAvatar comment: DiscussionsCommentViewModel
     ) {
         let assembly = ProfileAssembly(userID: comment.userID)
@@ -362,6 +371,14 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             allowsSafari: true,
             backButtonStyle: .done
         )
+    }
+
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didRequestOpenImage url: URL
+    ) {
+        let agrume = Agrume(url: url)
+        agrume.show(from: self)
     }
 
     func discussionsTableViewDataSource(
@@ -386,6 +403,16 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
         sourceRect: CGRect
     ) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Copy", comment: ""),
+                style: .default,
+                handler: { _ in
+                    UIPasteboard.general.string = viewModel.rawText
+                }
+            )
+        )
 
         alert.addAction(
             UIAlertAction(
