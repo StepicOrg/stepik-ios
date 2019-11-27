@@ -110,9 +110,14 @@ final class CourseInfoTabSyllabusCellView: UIView {
         switch newState {
         case .notAvailable:
             self.downloadButton.isHidden = true
-        case .available(let isCached):
+        case .cached(let bytesTotal):
+            // TODO: Add label
+            print("bytesTotal = \(bytesTotal)")
             self.downloadButton.isHidden = false
-            self.downloadButton.actionState = isCached ? .readyToRemoving : .readyToDownloading
+            self.downloadButton.actionState = .readyToRemoving
+        case .notCached:
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .readyToDownloading
         case .waiting:
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .pending

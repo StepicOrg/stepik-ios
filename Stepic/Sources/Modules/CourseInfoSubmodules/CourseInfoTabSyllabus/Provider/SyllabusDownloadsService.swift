@@ -317,7 +317,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         guard let lesson = unit.lesson else {
             // We should call this method only with completely loaded units
             // But return "not cached" in this case
-            return .available(isCached: false)
+            return .notCached
         }
 
         let steps = lesson.steps
@@ -327,7 +327,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             .filter { lesson.stepsArray.contains($0.id) }
             .count != lesson.stepsArray.count
         if hasUncachedSteps {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // Iterate through steps and determine final state
@@ -336,7 +336,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             .count
         // Lesson has no steps with video and all steps cached -> return "cached" state.
         if stepsWithVideoCount == 0 {
-            return .available(isCached: true)
+            // TODO: Count bytes
+            return .cached(bytesTotal: 0)
         }
 
         let stepsWithCachedVideoCount = steps
@@ -363,11 +364,12 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // All videos are cached
-        return .available(isCached: true)
+        // TODO: Count bytes
+        return .cached(bytesTotal: 0)
     }
 
     func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
@@ -395,8 +397,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             switch state {
             case .notAvailable:
                 notAvailableUnitsCount += 1
-            case .available(let isCached):
-                shouldBeCachedUnitsCount += isCached ? 0 : 1
+            case .notCached:
+                shouldBeCachedUnitsCount += 1
             case .downloading(let progress):
                 downloadingUnitProgresses.append(progress)
             default:
@@ -418,24 +420,25 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // If some units are not cached then section is available to downloading
         if shouldBeCachedUnitsCount > 0 {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // All units are cached, section too
-        return .available(isCached: true)
+        // TODO: Count bytes
+        return .cached(bytesTotal: 0)
     }
 
     func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
         let sectionStates = course.sections.map { self.getDownloadingStateForSection($0) }
 
         let containsUncachedSection = sectionStates.contains { state in
-            if case .available(let isCached) = state {
-                return !isCached
+            if case .notCached = state {
+                return true
             }
             return false
         }
 
-        return containsUncachedSection ? .available(isCached: false) : .notAvailable
+        return containsUncachedSection ? .notCached : .notAvailable
     }
 
     private func getVideoDownloadProgress(_ video: Video) -> Float? {
