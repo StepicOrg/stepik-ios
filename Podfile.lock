@@ -155,7 +155,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.11.0):
     - PromiseKit/CorePromise
-  - Protobuf (3.10.0)
+  - Protobuf (3.11.0)
   - Quick (2.2.0)
   - Reveal-SDK (24)
   - SDWebImage (5.3.2):
@@ -370,7 +370,7 @@ SPEC CHECKSUMS:
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
   PromiseKit: e4863d06976e7dee5e41c04fc7371c16b3600292
-  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
+  Protobuf: 394b2bf29ec303f4325e3ee4892c09e675647152
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
   SDWebImage: 6ac2eb96571bff96ecde31a987172c5934a0eb7d
