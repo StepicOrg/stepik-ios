@@ -223,27 +223,29 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        let removeVideosPromises = lesson.steps
-            .filter { $0.block.type == .video }
-            .compactMap { $0.block.video }
-            .map { video -> Promise<Void> in
+        let removeStepsPromises = lesson.steps
+            .map { step -> Promise<Void> in
                 Promise { seal in
-                    do {
-                        try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
-                        video.cachedQuality = nil
+                    if step.block.type == .video, let video = step.block.video {
+                        do {
+                            try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+                            video.cachedQuality = nil
 
-                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
-                        self.progressByVideoID[video.id] = nil
-
-                        seal.fulfill(())
-                    } catch {
-                        seal.reject(Error.removeUnitFailed)
+                            self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                            self.progressByVideoID[video.id] = nil
+                        } catch {
+                            seal.reject(Error.removeUnitFailed)
+                        }
                     }
+
+                    CoreDataHelper.instance.deleteFromStore(step, save: false)
+
+                    seal.fulfill(())
                 }
             }
 
         return Promise { seal in
-            when(fulfilled: removeVideosPromises).done { _ in
+            when(fulfilled: removeStepsPromises).done { _ in
                 CoreDataHelper.instance.save()
                 seal.fulfill(())
             }.catch { error in
