@@ -223,27 +223,29 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        let removeVideosPromises = lesson.steps
-            .filter { $0.block.type == .video }
-            .compactMap { $0.block.video }
-            .map { video -> Promise<Void> in
+        let removeStepsPromises = lesson.steps
+            .map { step -> Promise<Void> in
                 Promise { seal in
-                    do {
-                        try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
-                        video.cachedQuality = nil
+                    if step.block.type == .video, let video = step.block.video {
+                        do {
+                            try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+                            video.cachedQuality = nil
 
-                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
-                        self.progressByVideoID[video.id] = nil
-
-                        seal.fulfill(())
-                    } catch {
-                        seal.reject(Error.removeUnitFailed)
+                            self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                            self.progressByVideoID[video.id] = nil
+                        } catch {
+                            seal.reject(Error.removeUnitFailed)
+                        }
                     }
+
+                    CoreDataHelper.instance.deleteFromStore(step, save: false)
+
+                    seal.fulfill(())
                 }
             }
 
         return Promise { seal in
-            when(fulfilled: removeVideosPromises).done { _ in
+            when(fulfilled: removeStepsPromises).done { _ in
                 CoreDataHelper.instance.save()
                 seal.fulfill(())
             }.catch { error in
@@ -332,9 +334,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let stepsWithVideoCount = steps
             .filter { $0.block.type == .video }
             .count
-        // Lesson has no steps with video
+        // Lesson has no steps with video and all steps cached -> return "cached" state.
         if stepsWithVideoCount == 0 {
-            return .notAvailable
+            return .available(isCached: true)
         }
 
         let stepsWithCachedVideoCount = steps
