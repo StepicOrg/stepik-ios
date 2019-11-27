@@ -332,9 +332,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let stepsWithVideoCount = steps
             .filter { $0.block.type == .video }
             .count
-        // Lesson has no steps with video
+        // Lesson has no steps with video and all steps cached -> return "cached" state.
         if stepsWithVideoCount == 0 {
-            return .notAvailable
+            return .available(isCached: true)
         }
 
         let stepsWithCachedVideoCount = steps
