@@ -76,10 +76,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("DiscussionsTitle", comment: "")
+        self.configureNavigationBar()
         self.registerPlaceholders()
-
-        self.navigationItem.rightBarButtonItems = [self.composeBarButtonItem, self.sortTypeBarButtonItem]
 
         self.updateState(newState: self.state)
         self.interactor.doDiscussionsLoad(request: .init())
@@ -94,6 +92,13 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     }
 
     // MARK: - Private API
+
+    private func configureNavigationBar() {
+        self.title = NSLocalizedString("DiscussionsTitle", comment: "")
+
+        self.navigationItem.rightBarButtonItems = [self.composeBarButtonItem, self.sortTypeBarButtonItem]
+        self.sortTypeBarButtonItem.isEnabled = false
+    }
 
     private func registerPlaceholders() {
         self.registerPlaceholder(
@@ -124,6 +129,12 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     private func updateState(newState: Discussions.ViewControllerState) {
         defer {
             self.state = newState
+        }
+
+        if case .result = newState {
+            self.sortTypeBarButtonItem.isEnabled = true
+        } else {
+            self.sortTypeBarButtonItem.isEnabled = false
         }
 
         if case .loading = newState {
