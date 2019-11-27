@@ -364,7 +364,8 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     func doSortTypeUpdate(request: Discussions.SortTypeUpdate.Request) {
         guard let selectedSortType = Discussions.SortType(rawValue: request.uniqueIdentifier),
-              self.currentSortType != selectedSortType else {
+              self.currentSortType != selectedSortType,
+              self.currentDiscussionProxy != nil else {
             return
         }
 
