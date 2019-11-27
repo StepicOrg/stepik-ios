@@ -179,7 +179,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             direction: direction,
             animated: animated
         )
-        self.updateInfoBarButtonItem()
+        self.updateRightBarButtonItems()
     }
 
     // MARK: Private API
@@ -220,10 +220,6 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.shareBarButtonItem.isEnabled = true
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
-
-        self.navigationItem.rightBarButtonItems = data.canEdit
-            ? self.teacherRightBarButtonItems
-            : self.studentRightBarButtonItems
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
@@ -315,6 +311,24 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }
     }
 
+    private func updateRightBarButtonItems() {
+        defer {
+            self.updateInfoBarButtonItem()
+        }
+
+        guard case .result(let data) = self.state,
+              let currentIndex = self.currentIndex,
+              let step = data.steps[safe: currentIndex] else {
+            return
+        }
+
+        let showEditStep = data.canEdit && step.type != .video
+
+        self.navigationItem.rightBarButtonItems = showEditStep
+            ? self.teacherRightBarButtonItems
+            : self.studentRightBarButtonItems
+    }
+
     private func updateInfoBarButtonItem() {
         let isEnabled: Bool = {
             guard case .result(let data) = self.state,
@@ -327,6 +341,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         }()
         self.infoBarButtonItem.isEnabled = isEnabled
     }
+
+    // MARK: Actions
 
     @objc
     private func infoButtonClicked() {
@@ -413,6 +429,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
     }
 }
 
+// MARK: - NewLessonViewController: PageboyViewControllerDataSource -
+
 extension NewLessonViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         if case .result(let data) = self.state {
@@ -446,6 +464,8 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
         return nil
     }
 }
+
+// MARK: - NewLessonViewController: TMBarDataSource -
 
 extension NewLessonViewController: TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {

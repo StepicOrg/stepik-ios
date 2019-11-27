@@ -365,14 +365,6 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
 
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
-        didSelectDotsMenu comment: DiscussionsCommentViewModel,
-        cell: UITableViewCell
-    ) {
-        self.presentCommentActionSheet(comment, sourceView: cell, sourceRect: cell.bounds)
-    }
-
-    func discussionsTableViewDataSource(
-        _ tableViewDataSource: DiscussionsTableViewDataSource,
         didSelectAvatar comment: DiscussionsCommentViewModel
     ) {
         let assembly = ProfileAssembly(userID: comment.userID)
