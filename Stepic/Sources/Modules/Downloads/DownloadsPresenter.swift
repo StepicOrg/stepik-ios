@@ -14,7 +14,7 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
 
     func presentDownloads(response: Downloads.DownloadsLoad.Response) {
         let downloads = self.makeViewModel(
-            downloadedItems: response.data.downloadedItemsByCourse,
+            sizeInBytesByCourse: response.data.sizeInBytesByCourse,
             adaptiveCoursesIDs: response.data.adaptiveCoursesIDs
         )
 
@@ -23,7 +23,7 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
 
     func presentDeleteDownloadResult(response: Downloads.DeleteDownload.Response) {
         let downloads = self.makeViewModel(
-            downloadedItems: response.data.downloadedItemsByCourse,
+            sizeInBytesByCourse: response.data.sizeInBytesByCourse,
             adaptiveCoursesIDs: response.data.adaptiveCoursesIDs
         )
 
@@ -33,14 +33,13 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
     // MARK: - Private API
 
     private func makeViewModel(
-        downloadedItems: [Course: [Downloads.DownloadsData.Item]],
-        adaptiveCoursesIDs: [Course.IdType]
+        sizeInBytesByCourse: [Course: UInt64],
+        adaptiveCoursesIDs: Set<Course.IdType>
     ) -> [DownloadsItemViewModel] {
-        return downloadedItems.map { item -> DownloadsItemViewModel in
-            let downloadedItemsSizeInBytes = item.value.reduce(0) { $0 + $1.sizeInBytes }
-            return self.makeDownloadItemViewModel(
+        return sizeInBytesByCourse.map { item -> DownloadsItemViewModel in
+            self.makeDownloadItemViewModel(
                 course: item.key,
-                sizeInBytes: downloadedItemsSizeInBytes,
+                sizeInBytes: item.value,
                 availableAdaptiveCoursesIDs: adaptiveCoursesIDs
             )
         }.sorted { $0.id < $1.id }
@@ -49,7 +48,7 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
     private func makeDownloadItemViewModel(
         course: Course,
         sizeInBytes: UInt64,
-        availableAdaptiveCoursesIDs: [Course.IdType]
+        availableAdaptiveCoursesIDs: Set<Course.IdType>
     ) -> DownloadsItemViewModel {
         let formattedSize = FormatterHelper.megabytesInBytes(sizeInBytes)
 
