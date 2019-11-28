@@ -584,11 +584,17 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
             return
         }
 
-        // TODO: Get bytesTotal
+        let downloadState: CourseInfoTabSyllabus.DownloadState = {
+            if isCompleted {
+                return .cached(bytesTotal: self.syllabusDownloadsService.getUnitSize(unit))
+            }
+            return .notCached
+        }()
+
         self.presenter.presentDownloadButtonUpdate(
             response: .init(
                 source: .unit(entity: unit),
-                downloadState: isCompleted ? .cached(bytesTotal: 0) : .notCached
+                downloadState: downloadState
             )
         )
     }
@@ -602,11 +608,17 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
             return
         }
 
-        // TODO: Get bytesTotal
+        let downloadState: CourseInfoTabSyllabus.DownloadState = {
+            if isCompleted {
+                return .cached(bytesTotal: self.syllabusDownloadsService.getSectionSize(section))
+            }
+            return .notCached
+        }()
+
         self.presenter.presentDownloadButtonUpdate(
             response: .init(
                 source: .section(entity: section),
-                downloadState: isCompleted ? .cached(bytesTotal: 0) : .notCached
+                downloadState: downloadState
             )
         )
     }

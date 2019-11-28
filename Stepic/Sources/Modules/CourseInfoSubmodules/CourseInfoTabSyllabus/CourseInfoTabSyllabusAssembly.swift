@@ -33,7 +33,10 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             syllabusDownloadsService: SyllabusDownloadsService(
                 videoDownloadingService: VideoDownloadingService.shared,
                 videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
-                stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
+                stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
+                storageUsageService: StorageUsageService(
+                    videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+                )
             )
         )
         let viewController = CourseInfoTabSyllabusViewController(interactor: interactor)
