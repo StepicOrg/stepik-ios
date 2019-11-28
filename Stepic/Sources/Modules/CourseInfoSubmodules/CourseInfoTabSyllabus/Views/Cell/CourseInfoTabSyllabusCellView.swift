@@ -1,6 +1,8 @@
 import SnapKit
 import UIKit
 
+// MARK: Appearance -
+
 extension CourseInfoTabSyllabusCellView {
     struct Appearance {
         let coverImageViewCornerRadius: CGFloat = 4
@@ -13,6 +15,10 @@ extension CourseInfoTabSyllabusCellView {
 
         let downloadButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
+
+        let downloadSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let downloadSizeLabelTextColor = UIColor.mainDark
+        let downloadSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
         let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
         let statsViewHeight: CGFloat = 17.0
@@ -27,6 +33,8 @@ extension CourseInfoTabSyllabusCellView {
         let disabledStateAlpha: CGFloat = 0.5
     }
 }
+
+// MARK: - CourseInfoTabSyllabusCellView: UIView -
 
 final class CourseInfoTabSyllabusCellView: UIView {
     let appearance: Appearance
@@ -53,6 +61,16 @@ final class CourseInfoTabSyllabusCellView: UIView {
         view.isHidden = true
         view.addTarget(self, action: #selector(self.downloadButtonClicked), for: .touchUpInside)
         return view
+    }()
+
+    private lazy var downloadSizeLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.downloadSizeLabelFont
+        label.textColor = self.appearance.downloadSizeLabelTextColor
+        label.numberOfLines = 1
+        label.textAlignment = .right
+        label.text = "15000000 MB"
+        return label
     }()
 
     private lazy var statsView = CourseInfoTabSyllabusCellStatsView()
@@ -167,9 +185,12 @@ final class CourseInfoTabSyllabusCellView: UIView {
     }
 }
 
+// MARK: - CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtocol -
+
 extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.downloadButton)
+        self.addSubview(self.downloadSizeLabel)
         self.addSubview(self.coverImageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.statsView)
@@ -184,8 +205,15 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
         self.downloadButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.downloadButton.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.downloadButtonSize)
-            make.centerY.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-9)
             make.trailing.equalToSuperview().offset(-self.appearance.downloadButtonInsets.right)
+        }
+
+        self.downloadSizeLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.downloadSizeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        self.downloadSizeLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.downloadButton.snp.bottom).offset(self.appearance.downloadSizeLabelInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.downloadSizeLabelInsets.right)
         }
 
         self.downloadButtonTapProxyView.translatesAutoresizingMaskIntoConstraints = false
