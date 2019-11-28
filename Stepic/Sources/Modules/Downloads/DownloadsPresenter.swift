@@ -51,8 +51,7 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
         sizeInBytes: UInt64,
         availableAdaptiveCoursesIDs: [Course.IdType]
     ) -> DownloadsItemViewModel {
-        let sizeInMegabytes = max(1, sizeInBytes / 1024 / 1024)
-        let formattedSize = "\(sizeInMegabytes) \(NSLocalizedString("Mb", comment: ""))"
+        let formattedSize = FormatterHelper.megabytesInBytes(sizeInBytes)
 
         return DownloadsItemViewModel(
             id: course.id,

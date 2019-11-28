@@ -24,6 +24,19 @@ enum FormatterHelper {
         return String(format: "%.2f", number)
     }
 
+    static func megabytesInBytes(_ bytes: UInt64, checkForLessThanOne: Bool = true) -> String {
+        let megabytesTotal = bytes / 1024 / 1024
+
+        var prefix = ""
+        if megabytesTotal < 1 && checkForLessThanOne {
+            prefix = "< "
+        }
+
+        let adjustedMegabytes = max(1, megabytesTotal)
+
+        return "\(prefix)\(adjustedMegabytes) \(NSLocalizedString("Mb", comment: ""))"
+    }
+
     /// Format courses count with localized and pluralized suffix; 1 -> "1 course", 5 -> "5 courses"
     static func coursesCount(_ count: Int) -> String {
         let pluralizedCountString = StringHelper.pluralize(
