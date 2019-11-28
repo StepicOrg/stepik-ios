@@ -19,7 +19,8 @@ enum CourseInfoTabSyllabus {
     enum DownloadState {
         case notAvailable
         case waiting
-        case available(isCached: Bool)
+        case notCached
+        case cached(bytesTotal: UInt64)
         case downloading(progress: Float)
     }
 

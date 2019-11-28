@@ -4,12 +4,8 @@ enum Downloads {
     // MARK: Common structs
 
     struct DownloadsData {
-        struct Item {
-            let sizeInBytes: UInt64
-        }
-
-        let downloadedItemsByCourse: [Course: [Item]]
-        let adaptiveCoursesIDs: [Course.IdType]
+        let sizeInBytesByCourse: [Course: UInt64]
+        let adaptiveCoursesIDs: Set<Course.IdType>
     }
 
     // MARK: - Use cases -

@@ -59,6 +59,11 @@ protocol SyllabusDownloadsServiceProtocol: class {
     func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState
     func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
     func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
+
+    /// Returns unit size in bytes on disk.
+    func getUnitSize(_ unit: Unit) -> UInt64
+    /// Returns section size in bytes on disk.
+    func getSectionSize(_ section: Section) -> UInt64
 }
 
 // MARK: - SyllabusDownloadsService: SyllabusDownloadsServiceProtocol -
@@ -71,6 +76,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private let videoDownloadingService: VideoDownloadingServiceProtocol
     private let videoFileManager: VideoStoredFileManagerProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
+    private let storageUsageService: StorageUsageServiceProtocol
 
     // Section -> Unit -> Videos
     private var unitIDsBySectionID: [Section.IdType: Set<Unit.IdType>] = [:]
@@ -81,11 +87,13 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     init(
         videoDownloadingService: VideoDownloadingServiceProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
-        stepsNetworkService: StepsNetworkServiceProtocol
+        stepsNetworkService: StepsNetworkServiceProtocol,
+        storageUsageService: StorageUsageServiceProtocol
     ) {
         self.videoDownloadingService = videoDownloadingService
         self.videoFileManager = videoFileManager
         self.stepsNetworkService = stepsNetworkService
+        self.storageUsageService = storageUsageService
 
         self.subscribeOnVideoDownloadingEvents()
     }
@@ -306,6 +314,16 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
+    // MARK: Cache size
+
+    func getUnitSize(_ unit: Unit) -> UInt64 {
+        return self.storageUsageService.getUnitSize(unit: unit)
+    }
+
+    func getSectionSize(_ section: Section) -> UInt64 {
+        return self.storageUsageService.getSectionSize(section: section)
+    }
+
     // MARK: Downloading state
 
     func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
@@ -317,17 +335,18 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         guard let lesson = unit.lesson else {
             // We should call this method only with completely loaded units
             // But return "not cached" in this case
-            return .available(isCached: false)
+            return .notCached
         }
 
         let steps = lesson.steps
+        let unitSizeInBytes = self.getUnitSize(unit)
 
         // If have unloaded steps for lesson then show "not cached" state
         let hasUncachedSteps = steps
             .filter { lesson.stepsArray.contains($0.id) }
             .count != lesson.stepsArray.count
         if hasUncachedSteps {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // Iterate through steps and determine final state
@@ -336,7 +355,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             .count
         // Lesson has no steps with video and all steps cached -> return "cached" state.
         if stepsWithVideoCount == 0 {
-            return .available(isCached: true)
+            return .cached(bytesTotal: unitSizeInBytes)
         }
 
         let stepsWithCachedVideoCount = steps
@@ -363,11 +382,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // All videos are cached
-        return .available(isCached: true)
+        return .cached(bytesTotal: unitSizeInBytes)
     }
 
     func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
@@ -390,15 +409,18 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         var shouldBeCachedUnitsCount = 0
         var notAvailableUnitsCount = 0
         var downloadingUnitProgresses: [Float] = []
+        var sectionSizeInBytes: UInt64 = 0
 
         for state in unitStates {
             switch state {
             case .notAvailable:
                 notAvailableUnitsCount += 1
-            case .available(let isCached):
-                shouldBeCachedUnitsCount += isCached ? 0 : 1
+            case .notCached:
+                shouldBeCachedUnitsCount += 1
             case .downloading(let progress):
                 downloadingUnitProgresses.append(progress)
+            case .cached(let unitSizeinBytes):
+                sectionSizeInBytes += unitSizeinBytes
             default:
                 break
             }
@@ -418,24 +440,24 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // If some units are not cached then section is available to downloading
         if shouldBeCachedUnitsCount > 0 {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // All units are cached, section too
-        return .available(isCached: true)
+        return .cached(bytesTotal: sectionSizeInBytes)
     }
 
     func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
         let sectionStates = course.sections.map { self.getDownloadingStateForSection($0) }
 
         let containsUncachedSection = sectionStates.contains { state in
-            if case .available(let isCached) = state {
-                return !isCached
+            if case .notCached = state {
+                return true
             }
             return false
         }
 
-        return containsUncachedSection ? .available(isCached: false) : .notAvailable
+        return containsUncachedSection ? .notCached : .notAvailable
     }
 
     private func getVideoDownloadProgress(_ video: Video) -> Float? {
