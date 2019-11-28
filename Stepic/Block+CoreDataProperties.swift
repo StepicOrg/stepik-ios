@@ -75,14 +75,24 @@ extension Block {
     // MARK: - Types -
 
     enum BlockType: String {
-        case text
-        case video
+        case animation
+        case chemical
+        case choice
         case code
         case dataset
-        case admin
-        case sql
-        case choice
-        case string
+        case fillBlanks = "fill-blanks"
+        case freeAnswer = "free-answer"
+        case linuxCode = "linux-code"
+        case matching
+        case math
         case number
+        case puzzle
+        case pycharm
+        case sorting
+        case sql
+        case string
+        case text
+        case video
+        case admin
     }
 }
