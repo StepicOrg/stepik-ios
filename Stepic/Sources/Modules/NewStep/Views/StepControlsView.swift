@@ -3,23 +3,33 @@ import UIKit
 
 extension StepControlsView {
     struct Appearance {
-        let insets = LayoutInsets(top: 16, left: 16, right: 16)
+        let insets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
         let spacing: CGFloat = 16
 
         let navigationButtonsSpacing: CGFloat = 16
         let navigationButtonsHeight: CGFloat = 44
 
         let discussionsButtonHeight: CGFloat = 44
+        let statisticsViewHeight: CGFloat = 44
     }
 }
 
 final class StepControlsView: UIView {
     let appearance: Appearance
 
+    private lazy var statisticsView = StepStatisticsView()
+
     private lazy var discussionsButton: StepDiscussionsButton = {
         let button = StepDiscussionsButton()
         button.addTarget(self, action: #selector(self.discussionsButtonClicked), for: .touchUpInside)
         return button
+    }()
+
+    private lazy var bottomControlsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.statisticsView, self.discussionsButton])
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        return stackView
     }()
 
     private lazy var navigationStackView: UIStackView = {
@@ -29,15 +39,14 @@ final class StepControlsView: UIView {
         return stackView
     }()
 
+    private lazy var navigationContainerView = UIView()
+
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
+        let stackView = UIStackView(arrangedSubviews: [self.navigationContainerView, self.bottomControlsStackView])
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
         return stackView
     }()
-
-    private var navigationBottomConstraint: Constraint?
-    private var navigationBottomDiscussionsConstraint: Constraint?
 
     override var intrinsicContentSize: CGSize {
         let stackViewSize = self.stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
@@ -46,7 +55,8 @@ final class StepControlsView: UIView {
             height: self.appearance.insets.top
                 + stackViewSize.height
                 + (self.navigationState == .none ? 0 : self.appearance.spacing)
-                + (self.isDiscussionsButtonHidden ? 0 : self.appearance.discussionsButtonHeight)
+                + self.appearance.statisticsViewHeight
+                + self.appearance.discussionsButtonHeight
         )
     }
 
@@ -57,20 +67,20 @@ final class StepControlsView: UIView {
             height: self.appearance.insets.top
                 + self.appearance.navigationButtonsHeight
                 + self.appearance.spacing
+                + self.appearance.statisticsViewHeight
                 + self.appearance.discussionsButtonHeight
         )
-    }
-
-    var discussionsTitle: String? {
-        didSet {
-            self.discussionsButton.title = self.discussionsTitle
-        }
     }
 
     var navigationState: NavigationState? {
         didSet {
             self.updateNavigationState()
-            self.updateNavigationButtons()
+        }
+    }
+
+    var discussionsTitle: String? {
+        didSet {
+            self.discussionsButton.title = self.discussionsTitle
         }
     }
 
@@ -80,9 +90,17 @@ final class StepControlsView: UIView {
         }
     }
 
-    var isDiscussionsButtonHidden: Bool = false {
+    var passedByCount: Int? {
         didSet {
-            self.updateDiscussionsButton()
+            self.statisticsView.passedByCount = self.passedByCount
+            self.updateStatisticsVisibility()
+        }
+    }
+
+    var correctRatio: Float? {
+        didSet {
+            self.statisticsView.correctRatio = self.correctRatio
+            self.updateStatisticsVisibility()
         }
     }
 
@@ -129,9 +147,9 @@ final class StepControlsView: UIView {
     private func updateNavigationState() {
         self.navigationStackView.removeAllArrangedSubviews()
 
-        if self.navigationStackView.superview != nil {
-            self.stackView.removeArrangedSubview(self.navigationStackView)
-            self.navigationStackView.removeFromSuperview()
+        if self.navigationContainerView.superview != nil {
+            self.stackView.removeArrangedSubview(self.navigationContainerView)
+            self.navigationContainerView.removeFromSuperview()
         }
 
         if self.navigationState == .none {
@@ -155,28 +173,11 @@ final class StepControlsView: UIView {
             self.navigationStackView.addArrangedSubview(nextButton)
         }
 
-        self.stackView.addArrangedSubview(self.navigationStackView)
+        self.stackView.insertArrangedSubview(self.navigationContainerView, at: 0)
     }
 
-    private func updateDiscussionsButton() {
-        if self.isDiscussionsButtonHidden {
-            self.discussionsButton.isHidden = true
-            self.navigationBottomDiscussionsConstraint?.deactivate()
-            self.navigationBottomConstraint?.activate()
-        } else {
-            self.navigationBottomDiscussionsConstraint?.activate()
-            self.navigationBottomConstraint?.deactivate()
-        }
-    }
-
-    private func updateNavigationButtons() {
-        if self.navigationState == .none {
-            self.navigationBottomDiscussionsConstraint?.update(offset: 0)
-            self.navigationBottomConstraint?.update(offset: 0)
-        } else {
-            self.navigationBottomDiscussionsConstraint?.update(offset: -self.appearance.spacing)
-            self.navigationBottomConstraint?.update(offset: -self.appearance.spacing)
-        }
+    private func updateStatisticsVisibility() {
+        self.statisticsView.isHidden = self.passedByCount == nil && self.correctRatio == nil
     }
 
     // MARK: Enum
@@ -195,38 +196,37 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
 
     func addSubviews() {
         self.addSubview(self.stackView)
-        self.addSubview(self.discussionsButton)
+        self.navigationContainerView.addSubview(self.navigationStackView)
     }
 
     func makeConstraints() {
-        self.discussionsButton.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalToSuperview()
-            make.height.equalTo(self.appearance.discussionsButtonHeight)
+        self.stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
         }
 
-        self.navigationStackView.snp.makeConstraints { make in
+        self.navigationContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.navigationContainerView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.navigationButtonsHeight)
         }
 
-        self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.insets.top)
+        self.navigationStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.navigationStackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
-
-            self.navigationBottomDiscussionsConstraint = make.bottom
-                .equalTo(self.discussionsButton.snp.top)
-                .offset(-self.appearance.spacing)
-                .constraint
-
-            self.navigationBottomConstraint = make.bottom
-                .equalToSuperview()
-                .offset(-self.appearance.spacing)
-                .constraint
+            make.top.bottom.equalToSuperview()
         }
 
-        // Should be executed when all constraints set up
-        self.updateDiscussionsButton()
-        self.updateNavigationButtons()
+        self.statisticsView.translatesAutoresizingMaskIntoConstraints = false
+        self.statisticsView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.statisticsViewHeight)
+        }
+
+        self.discussionsButton.translatesAutoresizingMaskIntoConstraints = false
+        self.discussionsButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.discussionsButtonHeight)
+        }
     }
 }

@@ -8,6 +8,8 @@ struct NewStepViewModel {
     let discussionProxyID: DiscussionProxy.IdType?
     let stepURLPath: String
     let lessonID: Lesson.IdType
+    let passedByCount: Int?
+    let correctRatio: Float?
 
     @available(*, deprecated, message: "Deprecated initialization")
     let step: Step

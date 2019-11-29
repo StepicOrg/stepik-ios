@@ -118,6 +118,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 discussionProxyID: step.discussionProxyID,
                 stepURLPath: urlPath,
                 lessonID: step.lessonID,
+                passedByCount: step.block.type.isQuiz ? step.passedByCount : nil,
+                correctRatio: step.block.type.isQuiz ? step.correctRatio : nil,
                 step: step
             )
 

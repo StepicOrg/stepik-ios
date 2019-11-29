@@ -722,6 +722,8 @@ LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";
 StepVideoPlayingNotReachableErrorTitle = "You're offline";
 StepVideoPlayingNotReachableErrorMessage = "Check​ your​ ​internet​ ​connection,​ ​then​ ​try​ ​again.";
+StepStatisticsPassedByTitle = "Passed:";
+StepStatisticsCorrectRatioTitle = "Successfully:";
 EditStepAlertActionTitle = "Edit";
 
 /* Video player */
