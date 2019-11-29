@@ -88,7 +88,7 @@ final class Lesson: NSManagedObject, IDFetchable {
         var progressIds: [String] = []
         var progresses: [Progress] = []
         for step in steps {
-            if let progressId = step.progressId {
+            if let progressId = step.progressID {
                 progressIds += [progressId]
             }
             if let progress = step.progress {

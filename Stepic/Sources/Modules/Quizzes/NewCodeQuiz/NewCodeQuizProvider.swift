@@ -109,7 +109,7 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
                     if let lesson = step.lesson {
                         return .value(lesson.title)
                     }
-                    return self.lessonsPersistenceService.fetch(ids: [step.lessonId]).firstValue.then {
+                    return self.lessonsPersistenceService.fetch(ids: [step.lessonID]).firstValue.then {
                         lesson -> Promise<String?> in
                             .value(lesson.title)
                     }

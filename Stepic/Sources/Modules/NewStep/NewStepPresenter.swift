@@ -56,13 +56,13 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         self.viewController?.displayDiscussionsButtonUpdate(
             viewModel: .init(
                 title: self.makeDiscussionsLabelTitle(step: response.step),
-                isEnabled: response.step.discussionProxyId != nil
+                isEnabled: response.step.discussionProxyID != nil
             )
         )
     }
 
     func presentDiscussions(response: NewStep.DiscussionsPresentation.Response) {
-        guard let discussionProxyID = response.step.discussionProxyId else {
+        guard let discussionProxyID = response.step.discussionProxyID else {
             return
         }
 
@@ -108,16 +108,16 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             }
 
             let discussionsLabelTitle = self.makeDiscussionsLabelTitle(step: step)
-            let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonId)/step/\(step.position)?from_mobile_app=true"
+            let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
 
             let viewModel = NewStepViewModel(
                 content: contentType,
                 quizType: quizType,
                 discussionsLabelTitle: discussionsLabelTitle,
-                isDiscussionsEnabled: step.discussionProxyId != nil,
-                discussionProxyID: step.discussionProxyId,
+                isDiscussionsEnabled: step.discussionProxyID != nil,
+                discussionProxyID: step.discussionProxyID,
                 stepURLPath: urlPath,
-                lessonID: step.lessonId,
+                lessonID: step.lessonID,
                 step: step
             )
 
@@ -126,7 +126,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     }
 
     private func makeDiscussionsLabelTitle(step: Step) -> String {
-        if step.discussionProxyId == nil {
+        if step.discussionProxyID == nil {
             return NSLocalizedString("DisabledDiscussionsButtonTitle", comment: "")
         }
 

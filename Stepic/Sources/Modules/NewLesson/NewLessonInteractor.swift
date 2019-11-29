@@ -116,7 +116,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 throw Error.fetchFailed
             }
 
-            return self.provider.fetchProgresses(ids: steps.compactMap { $0.progressId })
+            return self.provider.fetchProgresses(ids: steps.compactMap { $0.progressID })
                 .map { (steps, lesson, $0.value ?? []) }
         }.done { steps, lesson, progresses in
             let startStepIndex: Int = {
@@ -185,7 +185,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             $0.value
         }.then { steps -> Promise<(Step, Progress.IdType)> in
             guard let step = steps?.first,
-                  let progressID = step.progressId else {
+                  let progressID = step.progressID else {
                 throw Error.fetchFailed
             }
             return .value((step, progressID))
