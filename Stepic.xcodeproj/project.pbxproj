@@ -1797,6 +1797,7 @@
 		2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementBadgeView.xib; sourceTree = "<group>"; };
 		2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementBadgeView.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
+		2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_passed_by_correct_ratio.xcdatamodel; sourceTree = "<group>"; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
 		2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikPlaceholder.swift; sourceTree = "<group>"; };
@@ -7596,6 +7597,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */,
 				2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */,
 				2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */,
 				2C5E907D2333BE4E00288BE3 /* Model_last_code_language.xcdatamodel */,
@@ -7640,7 +7642,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */;
+			currentVersion = 2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

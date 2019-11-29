@@ -13,55 +13,56 @@ import SwiftyJSON
 final class Step: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
-    var canEdit: Bool = false
+    var canEdit = false
+    var hasReview = false
 
     required convenience init(json: JSON) {
         self.init()
-        initialize(json)
-        block = Block(json: json["block"])
+        self.initialize(json)
+        self.block = Block(json: json[JSONKey.block.rawValue])
     }
 
     func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        position = json["position"].intValue
-        status = json["status"].stringValue
-        progressId = json["progress"].stringValue
-        hasSubmissionRestrictions = json["has_submissions_restrictions"].boolValue
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.position = json[JSONKey.position.rawValue].intValue
+        self.status = json[JSONKey.status.rawValue].stringValue
+        self.progressID = json[JSONKey.progress.rawValue].stringValue
+        self.hasSubmissionRestrictions = json[JSONKey.hasSubmissionsRestrictions.rawValue].boolValue
 
-        if let doesReview = json["actions"]["do_review"].string {
-            hasReview = (doesReview != "")
+        if let doReview = json[JSONKey.actions.rawValue][JSONKey.doReview.rawValue].string {
+            self.hasReview = (doReview != "")
         } else {
-            hasReview = false
-        }
-        maxSubmissionsCount = json["max_submissions_count"].int
-        discussionsCount = json["discussions_count"].int
-        discussionProxyId = json["discussion_proxy"].string
-        lessonId = json["lesson"].intValue
-        if let edit = json["actions"]["edit_instructions"].string {
-            canEdit = (edit != "")
-        } else {
-            canEdit = false
+            self.hasReview = false
         }
 
-        if let o = options {
-            o.update(json: json["block"]["options"])
+        self.maxSubmissionsCount = json[JSONKey.maxSubmissionsCount.rawValue].int
+        self.discussionsCount = json[JSONKey.discussionsCount.rawValue].int
+        self.discussionProxyID = json[JSONKey.discussionProxy.rawValue].string
+        self.lessonID = json[JSONKey.lesson.rawValue].intValue
+        self.passedByCount = json[JSONKey.passedBy.rawValue].intValue
+        self.correctRatio = json[JSONKey.correctRatio.rawValue].floatValue
+
+        if let editInstructions = json[JSONKey.actions.rawValue][JSONKey.editInstructions.rawValue].string {
+            self.canEdit = (editInstructions != "")
         } else {
-            options = StepOptions(json: json["block"]["options"])
+            self.canEdit = false
+        }
+
+        if let options = self.options {
+            options.update(json: json[JSONKey.block.rawValue][JSONKey.options.rawValue])
+        } else {
+            self.options = StepOptions(json: json[JSONKey.block.rawValue][JSONKey.options.rawValue])
         }
     }
 
     func update(json: JSON) {
-        initialize(json)
-        block.update(json: json["block"])
+        self.initialize(json)
+        self.block.update(json: json["block"])
     }
 
-    var hasReview: Bool = false
-
-    static func getStepWithId(_ id: Int, unitId: Int? = nil) -> Step? {
+    static func getStepWithID(_ id: IdType, unitID: Unit.IdType? = nil) -> Step? {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
-
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
-
         request.predicate = predicate
 
         do {
@@ -69,8 +70,8 @@ final class Step: NSManagedObject, IDFetchable {
                 return nil
             }
 
-            if let unitId = unitId {
-                if let step = results.filter({ $0.lesson?.unit?.id == unitId }).first {
+            if let unitID = unitID {
+                if let step = results.filter({ $0.lesson?.unit?.id == unitID }).first {
                     return step
                 } else {
                     return results.first
@@ -83,13 +84,11 @@ final class Step: NSManagedObject, IDFetchable {
         }
     }
 
-    static func fetch(_ ids: [Int]) -> [Step] {
+    static func fetch(_ ids: [IdType]) -> [Step] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Step")
+        let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
+        request.predicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
 
-        let idPredicates = ids.map {
-            NSPredicate(format: "managedId == %@", $0 as NSNumber)
-        }
-        request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         do {
             guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Step] else {
                 return []
@@ -98,5 +97,24 @@ final class Step: NSManagedObject, IDFetchable {
         } catch {
             return []
         }
+    }
+
+    enum JSONKey: String {
+        case id
+        case block
+        case options
+        case position
+        case status
+        case progress
+        case hasSubmissionsRestrictions = "has_submissions_restrictions"
+        case actions
+        case doReview = "do_review"
+        case maxSubmissionsCount = "max_submissions_count"
+        case discussionsCount = "discussions_count"
+        case discussionProxy = "discussion_proxy"
+        case lesson
+        case editInstructions = "edit_instructions"
+        case passedBy = "passed_by"
+        case correctRatio = "correct_ratio"
     }
 }
