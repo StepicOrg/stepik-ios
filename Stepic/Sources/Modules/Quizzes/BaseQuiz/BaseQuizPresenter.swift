@@ -204,7 +204,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
     }
 
     private func makeURL(for step: Step) -> URL {
-        let link = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonId)/step/\(step.position)?from_mobile_app=true"
+        let link = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
         guard let url = URL(string: link) else {
             fatalError("Invalid step link")
         }

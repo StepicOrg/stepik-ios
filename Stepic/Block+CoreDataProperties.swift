@@ -94,5 +94,13 @@ extension Block {
         case text
         case video
         case admin
+
+        var isTheory: Bool {
+            return [BlockType.text, BlockType.video].contains(self)
+        }
+
+        var isQuiz: Bool {
+            return !self.isTheory
+        }
     }
 }
