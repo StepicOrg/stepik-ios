@@ -689,13 +689,14 @@ extension CourseInfoTabSyllabusInteractor {
             CourseInfoTabSyllabusInteractor.logger.info(
                 "course info tab syllabus interactor: started downloading unit = \(unitID)"
             )
-        }.ensure {
-            self.updateUnitDownloadState(unit, forceSectionUpdate: true)
-            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while starting download unit = \(unitID), error = \(error)"
             )
+
+            self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+            self.updateSyllabusHeader()
+
             self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }
@@ -732,13 +733,14 @@ extension CourseInfoTabSyllabusInteractor {
             CourseInfoTabSyllabusInteractor.logger.info(
                 "course info tab syllabus interactor: started downloading section = \(sectionID)"
             )
-        }.ensure {
-            self.updateSectionDownloadState(section)
-            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while starting download section = \(sectionID), error = \(error)"
             )
+
+            self.updateSectionDownloadState(section)
+            self.updateSyllabusHeader()
+
             self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }

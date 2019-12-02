@@ -146,6 +146,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let uncachedVideosIDs = Set(uncachedVideos.map { $0.id })
 
         if uncachedVideosIDs.isEmpty {
+            self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forUnitWithID: unit.id)
             return
         }
 
