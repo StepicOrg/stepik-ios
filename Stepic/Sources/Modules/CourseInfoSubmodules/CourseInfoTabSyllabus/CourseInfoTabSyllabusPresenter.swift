@@ -133,6 +133,18 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         ]
 
         switch response.type {
+        case .course:
+            self.viewController?.displayDeleteDownloadsConfirmationAlert(
+                viewModel: .init(
+                    title: NSLocalizedString(
+                        "CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle", comment: ""
+                    ),
+                    message: NSLocalizedString(
+                        "CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage", comment: ""
+                    ),
+                    actions: actions
+                )
+            )
         case .unit:
             self.viewController?.displayDeleteDownloadsConfirmationAlert(
                 viewModel: .init(

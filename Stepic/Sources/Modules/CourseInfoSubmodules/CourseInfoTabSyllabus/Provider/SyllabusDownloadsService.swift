@@ -52,6 +52,7 @@ protocol SyllabusDownloadsServiceProtocol: class {
 
     func remove(unit: Unit) -> Promise<Void>
     func remove(section: Section) -> Promise<Void>
+    func remove(course: Course) -> Promise<Void>
 
     func cancel(unit: Unit) -> Promise<Void>
     func cancel(section: Section) -> Promise<Void>
@@ -272,6 +273,14 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
+    func remove(course: Course) -> Promise<Void> {
+        return when(
+            fulfilled: course.sections.map {
+                self.remove(section: $0)
+            }
+        )
+    }
+
     // MARK: Cancel
 
     func cancel(unit: Unit) -> Promise<Void> {
@@ -450,11 +459,24 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
         let sectionStates = course.sections.map { self.getDownloadingStateForSection($0) }
 
-        let containsUncachedSection = sectionStates.contains { state in
-            if case .notCached = state {
-                return true
+        var cachedSectionsCount = 0
+        var courseSizeInBytes: UInt64 = 0
+        var containsUncachedSection = false
+
+        for sectionDownloadState in sectionStates {
+            switch sectionDownloadState {
+            case .notCached:
+                containsUncachedSection = true
+            case .cached(let bytesTotal):
+                cachedSectionsCount += 1
+                courseSizeInBytes += bytesTotal
+            default:
+                return .notAvailable
             }
-            return false
+        }
+
+        if course.sectionsArray.count == cachedSectionsCount {
+            return .cached(bytesTotal: courseSizeInBytes)
         }
 
         return containsUncachedSection ? .notCached : .notAvailable
