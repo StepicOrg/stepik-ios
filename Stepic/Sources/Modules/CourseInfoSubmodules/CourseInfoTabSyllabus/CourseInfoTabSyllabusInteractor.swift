@@ -627,6 +627,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
                 downloadState: downloadState
             )
         )
+
+        self.updateSyllabusHeader()
     }
 
     func syllabusDownloadsService(
@@ -651,6 +653,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
                 downloadState: downloadState
             )
         )
+
+        self.updateSyllabusHeader()
     }
 
     func syllabusDownloadsService(
@@ -713,6 +717,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while starting download unit = \(unitID), error = \(error)"
@@ -755,6 +760,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateSectionDownloadState(section)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while starting download section = \(sectionID), error = \(error)"
@@ -778,6 +784,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while cancelling unit = \(unitID), error = \(error)"
@@ -802,6 +809,7 @@ extension CourseInfoTabSyllabusInteractor {
             // FIXME: Better handle this case, w/o delay section downloading tasks may not be cancelled
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                 self.updateSectionDownloadState(section)
+                self.updateSyllabusHeader()
             }
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
@@ -825,6 +833,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while removing cached unit = \(unitID), error = \(error)"
@@ -847,6 +856,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateSectionDownloadState(section)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while removing cached section = \(sectionID), error = \(error)"
