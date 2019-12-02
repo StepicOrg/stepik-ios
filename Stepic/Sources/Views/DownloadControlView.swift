@@ -30,7 +30,7 @@ final class DownloadControlView: UIControl {
             case .downloading(let progress):
                 self.updateDownloadingProgress(progress)
             default:
-                self.updateDownloadingProgress(0)
+                break
             }
         }
     }

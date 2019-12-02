@@ -133,6 +133,18 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         ]
 
         switch response.type {
+        case .course:
+            self.viewController?.displayDeleteDownloadsConfirmationAlert(
+                viewModel: .init(
+                    title: NSLocalizedString(
+                        "CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle", comment: ""
+                    ),
+                    message: NSLocalizedString(
+                        "CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage", comment: ""
+                    ),
+                    actions: actions
+                )
+            )
         case .unit:
             self.viewController?.displayDeleteDownloadsConfirmationAlert(
                 viewModel: .init(
@@ -162,7 +174,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
             isDownloadAllButtonEnabled: response.isDownloadAllAvailable,
-            isDeadlineTooltipVisible: response.isPersonalDeadlinesTooltipVisible
+            isDeadlineTooltipVisible: response.isPersonalDeadlinesTooltipVisible,
+            courseDownloadState: response.courseDownloadState
         )
         self.viewController?.displaySyllabusHeader(viewModel: .init(data: viewModel))
     }

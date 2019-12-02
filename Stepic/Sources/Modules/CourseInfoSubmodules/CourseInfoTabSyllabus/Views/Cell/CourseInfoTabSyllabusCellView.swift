@@ -1,6 +1,8 @@
 import SnapKit
 import UIKit
 
+// MARK: Appearance -
+
 extension CourseInfoTabSyllabusCellView {
     struct Appearance {
         let coverImageViewCornerRadius: CGFloat = 4
@@ -13,6 +15,11 @@ extension CourseInfoTabSyllabusCellView {
 
         let downloadButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
+        let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
+
+        let downloadedSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let downloadedSizeLabelTextColor = UIColor.mainDark
+        let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
         let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
         let statsViewHeight: CGFloat = 17.0
@@ -27,6 +34,8 @@ extension CourseInfoTabSyllabusCellView {
         let disabledStateAlpha: CGFloat = 0.5
     }
 }
+
+// MARK: - CourseInfoTabSyllabusCellView: UIView -
 
 final class CourseInfoTabSyllabusCellView: UIView {
     let appearance: Appearance
@@ -55,6 +64,16 @@ final class CourseInfoTabSyllabusCellView: UIView {
         return view
     }()
 
+    private lazy var downloadedSizeLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.downloadedSizeLabelFont
+        label.textColor = self.appearance.downloadedSizeLabelTextColor
+        label.numberOfLines = 1
+        label.textAlignment = .right
+        label.isHidden = true
+        return label
+    }()
+
     private lazy var statsView = CourseInfoTabSyllabusCellStatsView()
 
     private lazy var progressIndicatorView: UIProgressView = {
@@ -68,6 +87,8 @@ final class CourseInfoTabSyllabusCellView: UIView {
 
     // To use rotated view w/ auto-layout
     private lazy var progressIndicatorViewContainerView = UIView()
+    // To properly center when downloaded size visible
+    private var downloadButtonCenterYConstraint: Constraint?
 
     var onDownloadButtonClick: (() -> Void)?
 
@@ -107,18 +128,36 @@ final class CourseInfoTabSyllabusCellView: UIView {
     }
 
     func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
+        var downloadedBytesTotal: UInt64?
+
         switch newState {
         case .notAvailable:
             self.downloadButton.isHidden = true
-        case .available(let isCached):
+        case .cached(let bytesTotal):
             self.downloadButton.isHidden = false
-            self.downloadButton.actionState = isCached ? .readyToRemoving : .readyToDownloading
+            self.downloadButton.actionState = .readyToRemoving
+            downloadedBytesTotal = bytesTotal
+        case .notCached:
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .readyToDownloading
         case .waiting:
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .pending
         case .downloading(let progress):
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .downloading(progress: progress)
+        }
+
+        if let downloadedBytesTotal = downloadedBytesTotal {
+            self.downloadedSizeLabel.text = FormatterHelper.megabytesInBytes(downloadedBytesTotal)
+            self.downloadedSizeLabel.isHidden = false
+            self.downloadButtonCenterYConstraint?.update(
+                offset: -self.appearance.downloadButtonCenterYOffsetOnCachedState
+            )
+        } else {
+            self.downloadedSizeLabel.text = nil
+            self.downloadedSizeLabel.isHidden = true
+            self.downloadButtonCenterYConstraint?.update(offset: 0)
         }
     }
 
@@ -137,6 +176,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
             self.coverImageView,
             self.titleLabel,
             self.downloadButton,
+            self.downloadedSizeLabel,
             self.progressIndicatorView,
             self.statsView
         ].forEach { $0.alpha = 0.0 }
@@ -151,6 +191,7 @@ final class CourseInfoTabSyllabusCellView: UIView {
             self.coverImageView,
             self.titleLabel,
             self.downloadButton,
+            self.downloadedSizeLabel,
             self.progressIndicatorView,
             self.statsView
         ].forEach { $0.alpha = 1.0 }
@@ -162,9 +203,12 @@ final class CourseInfoTabSyllabusCellView: UIView {
     }
 }
 
+// MARK: - CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtocol -
+
 extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.downloadButton)
+        self.addSubview(self.downloadedSizeLabel)
         self.addSubview(self.coverImageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.statsView)
@@ -179,8 +223,15 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
         self.downloadButton.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.downloadButton.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.downloadButtonSize)
-            make.centerY.equalToSuperview()
+            self.downloadButtonCenterYConstraint = make.centerY.equalToSuperview().constraint
             make.trailing.equalToSuperview().offset(-self.appearance.downloadButtonInsets.right)
+        }
+
+        self.downloadedSizeLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.downloadedSizeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        self.downloadedSizeLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.downloadButton.snp.bottom).offset(self.appearance.downloadedSizeLabelInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.downloadedSizeLabelInsets.right)
         }
 
         self.downloadButtonTapProxyView.translatesAutoresizingMaskIntoConstraints = false

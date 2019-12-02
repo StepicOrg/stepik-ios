@@ -603,6 +603,7 @@
 		2CB2394320BB53B200F0FE3B /* ProfileDescriptionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2394220BB53B200F0FE3B /* ProfileDescriptionContentView.swift */; };
 		2CB2740022C4E9870078CA2F /* NewChoiceQuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB273FF22C4E9870078CA2F /* NewChoiceQuizViewModel.swift */; };
 		2CB2740422C515050078CA2F /* QuizElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2740322C515050078CA2F /* QuizElementView.swift */; };
+		2CB37E6623902BB80050D85E /* StorageUsageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB37E6523902BB80050D85E /* StorageUsageService.swift */; };
 		2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB51F6A204FC6220008431C /* UserActivitySpec.swift */; };
 		2CB5B1592292E0D700D7F706 /* StepControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B1582292E0D700D7F706 /* StepControlsView.swift */; };
 		2CB5B15B2292E65400D7F706 /* StepNavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */; };
@@ -1723,6 +1724,7 @@
 		2CB2394220BB53B200F0FE3B /* ProfileDescriptionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionContentView.swift; sourceTree = "<group>"; };
 		2CB273FF22C4E9870078CA2F /* NewChoiceQuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChoiceQuizViewModel.swift; sourceTree = "<group>"; };
 		2CB2740322C515050078CA2F /* QuizElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizElementView.swift; sourceTree = "<group>"; };
+		2CB37E6523902BB80050D85E /* StorageUsageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUsageService.swift; sourceTree = "<group>"; };
 		2CB51F6A204FC6220008431C /* UserActivitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActivitySpec.swift; sourceTree = "<group>"; };
 		2CB5B1582292E0D700D7F706 /* StepControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepControlsView.swift; sourceTree = "<group>"; };
 		2CB5B15A2292E65400D7F706 /* StepNavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepNavigationButton.swift; sourceTree = "<group>"; };
@@ -5371,6 +5373,7 @@
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
 				2C3DAB8C233D71B100453B1C /* StepFontSizeService.swift */,
+				2CB37E6523902BB80050D85E /* StorageUsageService.swift */,
 				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
 				62E986D1988A3445F3416404 /* Managers */,
@@ -6482,6 +6485,7 @@
 				086D5B52201283C2000F7715 /* TooltipFactory.swift in Sources */,
 				0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */,
 				080C5E7B1EFC13ED0036EB3D /* CodeSample.swift in Sources */,
+				2CB37E6623902BB80050D85E /* StorageUsageService.swift in Sources */,
 				2C581DEE233E160B00DC335A /* SettingsStepFontSizeViewModel.swift in Sources */,
 				080DD22020CFC7CE00A86B2A /* SettingsMenuBlock.swift in Sources */,
 				2C0473FF22E5BC20003050B7 /* CodeDetailsView.swift in Sources */,

@@ -52,6 +52,7 @@ protocol SyllabusDownloadsServiceProtocol: class {
 
     func remove(unit: Unit) -> Promise<Void>
     func remove(section: Section) -> Promise<Void>
+    func remove(course: Course) -> Promise<Void>
 
     func cancel(unit: Unit) -> Promise<Void>
     func cancel(section: Section) -> Promise<Void>
@@ -71,21 +72,27 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private let videoDownloadingService: VideoDownloadingServiceProtocol
     private let videoFileManager: VideoStoredFileManagerProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
+    private let storageUsageService: StorageUsageServiceProtocol
 
     // Section -> Unit -> Videos
     private var unitIDsBySectionID: [Section.IdType: Set<Unit.IdType>] = [:]
     private var videoIDsByUnitID: [Unit.IdType: Set<Video.IdType>] = [:]
     private var progressByVideoID: [Video.IdType: Float] = [:]
     private var activeVideoDownloads: Set<Video.IdType> = []
+    // Units ids requested to be downloaded but not being started yet.
+    // To be able to return `DownloadState.waiting`.
+    private var pendingUnitsIDs: Set<Unit.IdType> = []
 
     init(
         videoDownloadingService: VideoDownloadingServiceProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
-        stepsNetworkService: StepsNetworkServiceProtocol
+        stepsNetworkService: StepsNetworkServiceProtocol,
+        storageUsageService: StorageUsageServiceProtocol
     ) {
         self.videoDownloadingService = videoDownloadingService
         self.videoFileManager = videoFileManager
         self.stepsNetworkService = stepsNetworkService
+        self.storageUsageService = storageUsageService
 
         self.subscribeOnVideoDownloadingEvents()
     }
@@ -97,10 +104,16 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        return firstly {
-            self.fetchSteps(for: lesson)
-        }.done { steps in
-            try self.startDownloading(unit: unit, steps: steps)
+        self.pendingUnitsIDs.insert(unit.id)
+
+        return Promise { seal in
+            self.fetchSteps(for: lesson).done { steps in
+                try self.startDownloading(unit: unit, steps: steps)
+                seal.fulfill(())
+            }.catch { _ in
+                self.pendingUnitsIDs.remove(unit.id)
+                seal.reject(Error.downloadUnitFailed)
+            }
         }
     }
 
@@ -112,6 +125,10 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.downloadSectionFailed)
         }
 
+        // Move units to pending state.
+        let unitIDsToBeDownloaded = section.units.compactMap { $0.lesson != nil ? $0.id : nil }
+        unitIDsToBeDownloaded.forEach { self.pendingUnitsIDs.insert($0) }
+
         let fetchStepsPromises = section.units.compactMap { unit -> (Unit, Lesson)? in
             if let lesson = unit.lesson {
                 return (unit, lesson)
@@ -121,11 +138,26 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             self.fetchSteps(for: result.1).map { (result.0, $0) }
         }
 
-        return when(
-            fulfilled: fetchStepsPromises
-        ).done { result in
+        let fetchStepsPromise = Promise { seal in
+            when(
+                fulfilled: fetchStepsPromises
+            ).done {
+                seal.fulfill($0)
+            }.catch { _ in
+                unitIDsToBeDownloaded.forEach { self.pendingUnitsIDs.remove($0) }
+                seal.reject(Error.downloadSectionFailed)
+            }
+        }
+
+        return firstly {
+            fetchStepsPromise
+        }.done { result in
             for (unit, steps) in result {
-                try? self.startDownloading(section: section, unit: unit, steps: steps)
+                do {
+                    try self.startDownloading(section: section, unit: unit, steps: steps)
+                } catch {
+                    self.pendingUnitsIDs.remove(unit.id)
+                }
             }
         }
     }
@@ -142,6 +174,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let uncachedVideosIDs = Set(uncachedVideos.map { $0.id })
 
         if uncachedVideosIDs.isEmpty {
+            self.pendingUnitsIDs.remove(unit.id)
+            self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forUnitWithID: unit.id)
             return
         }
 
@@ -170,6 +204,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     /// Handle events from downloading service
     private func handleUpdate(with event: VideoDownloadingServiceEvent) {
         let videoID = event.videoID
+
+        // Remove unit from the pending state
+        if let unitID = self.videoIDsByUnitID.first(where: { $0.value.contains(videoID) })?.key {
+            self.pendingUnitsIDs.remove(unitID)
+        }
 
         switch event.state {
         case .error(let error):
@@ -223,27 +262,29 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        let removeVideosPromises = lesson.steps
-            .filter { $0.block.type == .video }
-            .compactMap { $0.block.video }
-            .map { video -> Promise<Void> in
+        let removeStepsPromises = lesson.steps
+            .map { step -> Promise<Void> in
                 Promise { seal in
-                    do {
-                        try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
-                        video.cachedQuality = nil
+                    if step.block.type == .video, let video = step.block.video {
+                        do {
+                            try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+                            video.cachedQuality = nil
 
-                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
-                        self.progressByVideoID[video.id] = nil
-
-                        seal.fulfill(())
-                    } catch {
-                        seal.reject(Error.removeUnitFailed)
+                            self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                            self.progressByVideoID[video.id] = nil
+                        } catch {
+                            seal.reject(Error.removeUnitFailed)
+                        }
                     }
+
+                    CoreDataHelper.instance.deleteFromStore(step, save: false)
+
+                    seal.fulfill(())
                 }
             }
 
         return Promise { seal in
-            when(fulfilled: removeVideosPromises).done { _ in
+            when(fulfilled: removeStepsPromises).done { _ in
                 CoreDataHelper.instance.save()
                 seal.fulfill(())
             }.catch { error in
@@ -262,12 +303,22 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
+    func remove(course: Course) -> Promise<Void> {
+        return when(
+            fulfilled: course.sections.map {
+                self.remove(section: $0)
+            }
+        )
+    }
+
     // MARK: Cancel
 
     func cancel(unit: Unit) -> Promise<Void> {
         guard let lesson = unit.lesson else {
             return Promise(error: Error.lessonNotFound)
         }
+
+        self.pendingUnitsIDs.remove(unit.id)
 
         let cancelVideosPromises = lesson.steps
             .filter { $0.block.type == .video }
@@ -315,26 +366,27 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         guard let lesson = unit.lesson else {
             // We should call this method only with completely loaded units
             // But return "not cached" in this case
-            return .available(isCached: false)
+            return .notCached
         }
 
         let steps = lesson.steps
+        let unitSizeInBytes = self.storageUsageService.getUnitSize(unit: unit)
 
         // If have unloaded steps for lesson then show "not cached" state
         let hasUncachedSteps = steps
             .filter { lesson.stepsArray.contains($0.id) }
             .count != lesson.stepsArray.count
         if hasUncachedSteps {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // Iterate through steps and determine final state
         let stepsWithVideoCount = steps
             .filter { $0.block.type == .video }
             .count
-        // Lesson has no steps with video
+        // Lesson has no steps with video and all steps cached -> return "cached" state.
         if stepsWithVideoCount == 0 {
-            return .notAvailable
+            return .cached(bytesTotal: unitSizeInBytes)
         }
 
         let stepsWithCachedVideoCount = steps
@@ -359,13 +411,18 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         // Try to restore downloads
         try? self.restoreDownloading(section: section, unit: unit)
 
+        // Maybe it's still in the pending state
+        if self.pendingUnitsIDs.contains(unit.id) {
+            return .waiting
+        }
+
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // All videos are cached
-        return .available(isCached: true)
+        return .cached(bytesTotal: unitSizeInBytes)
     }
 
     func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
@@ -387,18 +444,22 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let unitStates = units.map { self.getDownloadingStateForUnit($0, in: section) }
         var shouldBeCachedUnitsCount = 0
         var notAvailableUnitsCount = 0
+        var pendingUnitsCount = 0
         var downloadingUnitProgresses: [Float] = []
+        var sectionSizeInBytes: UInt64 = 0
 
         for state in unitStates {
             switch state {
             case .notAvailable:
                 notAvailableUnitsCount += 1
-            case .available(let isCached):
-                shouldBeCachedUnitsCount += isCached ? 0 : 1
+            case .notCached:
+                shouldBeCachedUnitsCount += 1
             case .downloading(let progress):
                 downloadingUnitProgresses.append(progress)
-            default:
-                break
+            case .cached(let unitSizeinBytes):
+                sectionSizeInBytes += unitSizeinBytes
+            case .waiting:
+                pendingUnitsCount += 1
             }
         }
 
@@ -414,26 +475,44 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return .notAvailable
         }
 
+        // If all units are in the pending state, then section too
+        if pendingUnitsCount == units.count {
+            return .waiting
+        }
+
         // If some units are not cached then section is available to downloading
         if shouldBeCachedUnitsCount > 0 {
-            return .available(isCached: false)
+            return .notCached
         }
 
         // All units are cached, section too
-        return .available(isCached: true)
+        return .cached(bytesTotal: sectionSizeInBytes)
     }
 
     func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
         let sectionStates = course.sections.map { self.getDownloadingStateForSection($0) }
 
-        let containsUncachedSection = sectionStates.contains { state in
-            if case .available(let isCached) = state {
-                return !isCached
+        var cachedSectionsCount = 0
+        var courseSizeInBytes: UInt64 = 0
+        var containsUncachedSection = false
+
+        for sectionDownloadState in sectionStates {
+            switch sectionDownloadState {
+            case .notCached:
+                containsUncachedSection = true
+            case .cached(let bytesTotal):
+                cachedSectionsCount += 1
+                courseSizeInBytes += bytesTotal
+            default:
+                continue
             }
-            return false
         }
 
-        return containsUncachedSection ? .available(isCached: false) : .notAvailable
+        if course.sectionsArray.count == cachedSectionsCount {
+            return .cached(bytesTotal: courseSizeInBytes)
+        }
+
+        return containsUncachedSection ? .notCached : .notAvailable
     }
 
     private func getVideoDownloadProgress(_ video: Video) -> Float? {
@@ -499,6 +578,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     enum Error: Swift.Error {
         case lessonNotFound
         case removeUnitFailed
+        case downloadUnitFailed
         case downloadSectionFailed
         case cancelUnitFailed
         case cancelSectionFailed

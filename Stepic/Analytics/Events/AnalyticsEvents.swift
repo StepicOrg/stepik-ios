@@ -93,6 +93,7 @@ struct AnalyticsEvents {
 
     struct Course {
         static let shared = "share_course_clicked"
+        static let delete = "clicked_delete_cached_course"
 
         struct JoinPressed {
             static let anonymous = "join_course_anonymous"

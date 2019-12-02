@@ -6,11 +6,11 @@ import SwiftyJSON
 import XCTest
 
 private final class NewStepViewControllerMock: NewStepViewControllerProtocol {
-    var viewModelDidSetCompletion: ((NewStepViewModel) -> Void)?
+    var didSetViewModelCompletion: ((NewStepViewModel) -> Void)?
 
     func displayStep(viewModel: NewStep.StepLoad.ViewModel) {
         if case .result(let data) = viewModel.state {
-            self.viewModelDidSetCompletion?(data)
+            self.didSetViewModelCompletion?(data)
         }
     }
 
@@ -60,7 +60,7 @@ class NewStepViewControllerSpec: QuickSpec {
                     )
                 )
 
-                viewController.viewModelDidSetCompletion = { viewModel in
+                viewController.didSetViewModelCompletion = { viewModel in
                     expect(viewModel.quizType).to(beNil())
 
                     switch viewModel.content {
@@ -129,7 +129,7 @@ class NewStepViewControllerSpec: QuickSpec {
                     )
                 )
 
-                viewController.viewModelDidSetCompletion = { viewModel in
+                viewController.didSetViewModelCompletion = { viewModel in
                     expect(viewModel.quizType).to(beNil())
 
                     switch viewModel.content {
@@ -193,7 +193,7 @@ class NewStepViewControllerSpec: QuickSpec {
                         )
                     )
 
-                    viewController.viewModelDidSetCompletion = { viewModel in
+                    viewController.didSetViewModelCompletion = { viewModel in
                         expect(viewModel.quizType).toNot(beNil())
                         expect(viewModel.quizType) == blockNameWithQuizTypePairs[index].1
 

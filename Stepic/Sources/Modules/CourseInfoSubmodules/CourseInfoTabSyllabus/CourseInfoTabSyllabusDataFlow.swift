@@ -19,7 +19,8 @@ enum CourseInfoTabSyllabus {
     enum DownloadState {
         case notAvailable
         case waiting
-        case available(isCached: Bool)
+        case notCached
+        case cached(bytesTotal: UInt64)
         case downloading(progress: Float)
     }
 
@@ -61,6 +62,7 @@ enum CourseInfoTabSyllabus {
     /// Request delete downloads confirmation via alert
     enum DeleteDownloadsConfirmation {
         enum `Type` {
+            case course
             case section
             case unit
         }
@@ -126,6 +128,7 @@ enum CourseInfoTabSyllabus {
             let isPersonalDeadlinesAvailable: Bool
             let isDownloadAllAvailable: Bool
             let isPersonalDeadlinesTooltipVisible: Bool
+            let courseDownloadState: CourseInfoTabSyllabus.DownloadState
         }
 
         struct ViewModel {
