@@ -79,6 +79,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private var videoIDsByUnitID: [Unit.IdType: Set<Video.IdType>] = [:]
     private var progressByVideoID: [Video.IdType: Float] = [:]
     private var activeVideoDownloads: Set<Video.IdType> = []
+    // Units ids requested to be downloaded but not being started yet.
+    // To be able to return `DownloadState.waiting`.
+    private var pendingUnitsIDs: Set<Unit.IdType> = []
 
     init(
         videoDownloadingService: VideoDownloadingServiceProtocol,
@@ -101,10 +104,16 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        return firstly {
-            self.fetchSteps(for: lesson)
-        }.done { steps in
-            try self.startDownloading(unit: unit, steps: steps)
+        self.pendingUnitsIDs.insert(unit.id)
+
+        return Promise { seal in
+            self.fetchSteps(for: lesson).done { steps in
+                try self.startDownloading(unit: unit, steps: steps)
+                seal.fulfill(())
+            }.catch { _ in
+                self.pendingUnitsIDs.remove(unit.id)
+                seal.reject(Error.downloadUnitFailed)
+            }
         }
     }
 
@@ -116,6 +125,10 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.downloadSectionFailed)
         }
 
+        // Move units to pending state.
+        let unitIDsToBeDownloaded = section.units.compactMap { $0.lesson != nil ? $0.id : nil }
+        unitIDsToBeDownloaded.forEach { self.pendingUnitsIDs.insert($0) }
+
         let fetchStepsPromises = section.units.compactMap { unit -> (Unit, Lesson)? in
             if let lesson = unit.lesson {
                 return (unit, lesson)
@@ -125,11 +138,26 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             self.fetchSteps(for: result.1).map { (result.0, $0) }
         }
 
-        return when(
-            fulfilled: fetchStepsPromises
-        ).done { result in
+        let fetchStepsPromise = Promise { seal in
+            when(
+                fulfilled: fetchStepsPromises
+            ).done {
+                seal.fulfill($0)
+            }.catch { _ in
+                unitIDsToBeDownloaded.forEach { self.pendingUnitsIDs.remove($0) }
+                seal.reject(Error.downloadSectionFailed)
+            }
+        }
+
+        return firstly {
+            fetchStepsPromise
+        }.done { result in
             for (unit, steps) in result {
-                try? self.startDownloading(section: section, unit: unit, steps: steps)
+                do {
+                    try self.startDownloading(section: section, unit: unit, steps: steps)
+                } catch {
+                    self.pendingUnitsIDs.remove(unit.id)
+                }
             }
         }
     }
@@ -146,6 +174,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let uncachedVideosIDs = Set(uncachedVideos.map { $0.id })
 
         if uncachedVideosIDs.isEmpty {
+            self.pendingUnitsIDs.remove(unit.id)
             self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forUnitWithID: unit.id)
             return
         }
@@ -175,6 +204,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     /// Handle events from downloading service
     private func handleUpdate(with event: VideoDownloadingServiceEvent) {
         let videoID = event.videoID
+
+        // Remove unit from the pending state
+        if let unitID = self.videoIDsByUnitID.first(where: { $0.value.contains(videoID) })?.key {
+            self.pendingUnitsIDs.remove(unitID)
+        }
 
         switch event.state {
         case .error(let error):
@@ -284,6 +318,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
+        self.pendingUnitsIDs.remove(unit.id)
+
         let cancelVideosPromises = lesson.steps
             .filter { $0.block.type == .video }
             .compactMap { $0.block.video }
@@ -375,6 +411,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         // Try to restore downloads
         try? self.restoreDownloading(section: section, unit: unit)
 
+        // Maybe it's still in the pending state
+        if self.pendingUnitsIDs.contains(unit.id) {
+            return .waiting
+        }
+
         // Some videos aren't cached
         if stepsWithCachedVideoCount != stepsWithVideoCount {
             return .notCached
@@ -403,6 +444,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         let unitStates = units.map { self.getDownloadingStateForUnit($0, in: section) }
         var shouldBeCachedUnitsCount = 0
         var notAvailableUnitsCount = 0
+        var pendingUnitsCount = 0
         var downloadingUnitProgresses: [Float] = []
         var sectionSizeInBytes: UInt64 = 0
 
@@ -416,8 +458,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                 downloadingUnitProgresses.append(progress)
             case .cached(let unitSizeinBytes):
                 sectionSizeInBytes += unitSizeinBytes
-            default:
-                break
+            case .waiting:
+                pendingUnitsCount += 1
             }
         }
 
@@ -431,6 +473,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         // If all units are not available to downloading then section is not available too
         if notAvailableUnitsCount == units.count {
             return .notAvailable
+        }
+
+        // If all units are in the pending state, then section too
+        if pendingUnitsCount == units.count {
+            return .waiting
         }
 
         // If some units are not cached then section is available to downloading
@@ -531,6 +578,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     enum Error: Swift.Error {
         case lessonNotFound
         case removeUnitFailed
+        case downloadUnitFailed
         case downloadSectionFailed
         case cancelUnitFailed
         case cancelSectionFailed
