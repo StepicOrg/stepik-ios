@@ -631,7 +631,7 @@ DeadlineModeQuestion = "How much time would you like to spend studying on this c
 /* Course info */
 CourseMeetsRecommendations = "Meets the recommendations of Stepik";
 SyllabusDeadlinesButton = "Schedule";
-SyllabusDownloadAll = "Download all";
+SyllabusDownloadAll = "Download";
 NoReviews = "Unfortunately, there are no reviews sent for this course";
 
 /* Profile edit */

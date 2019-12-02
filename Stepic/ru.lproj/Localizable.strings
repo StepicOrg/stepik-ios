@@ -632,7 +632,7 @@ DeadlineModeQuestion = "Сколько времени вы готовы трат
 /* Course info */
 CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
 SyllabusDeadlinesButton = "Расписание";
-SyllabusDownloadAll = "Загрузить всё";
+SyllabusDownloadAll = "Скачать";
 NoReviews = "К сожалению, ни одного отзыва об этом курсе пока нет";
 
 /* Profile edit */
