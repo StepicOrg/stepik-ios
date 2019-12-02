@@ -60,11 +60,6 @@ protocol SyllabusDownloadsServiceProtocol: class {
     func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState
     func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
     func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
-
-    /// Returns unit size in bytes on disk.
-    func getUnitSize(_ unit: Unit) -> UInt64
-    /// Returns section size in bytes on disk.
-    func getSectionSize(_ section: Section) -> UInt64
 }
 
 // MARK: - SyllabusDownloadsService: SyllabusDownloadsServiceProtocol -
@@ -323,16 +318,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
     }
 
-    // MARK: Cache size
-
-    func getUnitSize(_ unit: Unit) -> UInt64 {
-        return self.storageUsageService.getUnitSize(unit: unit)
-    }
-
-    func getSectionSize(_ section: Section) -> UInt64 {
-        return self.storageUsageService.getSectionSize(section: section)
-    }
-
     // MARK: Downloading state
 
     func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
@@ -348,7 +333,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         let steps = lesson.steps
-        let unitSizeInBytes = self.getUnitSize(unit)
+        let unitSizeInBytes = self.storageUsageService.getUnitSize(unit: unit)
 
         // If have unloaded steps for lesson then show "not cached" state
         let hasUncachedSteps = steps
