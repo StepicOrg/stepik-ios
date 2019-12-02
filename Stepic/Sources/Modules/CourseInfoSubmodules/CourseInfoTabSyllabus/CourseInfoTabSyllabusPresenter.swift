@@ -162,7 +162,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
             isDownloadAllButtonEnabled: response.isDownloadAllAvailable,
-            isDeadlineTooltipVisible: response.isPersonalDeadlinesTooltipVisible
+            isDeadlineTooltipVisible: response.isPersonalDeadlinesTooltipVisible,
+            courseDownloadState: response.courseDownloadState
         )
         self.viewController?.displaySyllabusHeader(viewModel: .init(data: viewModel))
     }

@@ -315,8 +315,10 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(in: course)
             || self.personalDeadlinesService.hasDeadlines(in: course)
 
+        let courseDownloadState = self.getDownloadingStateForCourse()
+
         let isDownloadAllAvailable: Bool = {
-            switch self.getDownloadingStateForCourse() {
+            switch courseDownloadState {
             case .cached, .notCached:
                 return true
             default:
@@ -328,7 +330,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             response: .init(
                 isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
                 isDownloadAllAvailable: isDownloadAllAvailable,
-                isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton
+                isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton,
+                courseDownloadState: courseDownloadState
             )
         )
 
