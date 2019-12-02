@@ -471,7 +471,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                 cachedSectionsCount += 1
                 courseSizeInBytes += bytesTotal
             default:
-                return .notAvailable
+                continue
             }
         }
 
