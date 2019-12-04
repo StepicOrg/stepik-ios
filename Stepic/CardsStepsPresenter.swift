@@ -340,7 +340,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
             let stepId = lesson.stepsArray[index]
 
-            let cachedSteps = [Step.getStepWithId(stepId)].compactMap { $0 }
+            let cachedSteps = [Step.getStepWithID(stepId)].compactMap { $0 }
             self.stepsAPI.retrieve(ids: [stepId], existing: cachedSteps).done { steps in
                 if let step = steps.first {
                     step.lesson = lesson
@@ -550,7 +550,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
     func onTitleButtonClick() {
         guard let stepId = currentStepPresenter?.step.id,
-              let discussionProxyId = currentStepPresenter?.step.discussionProxyId else {
+              let discussionProxyId = currentStepPresenter?.step.discussionProxyID else {
             return
         }
 

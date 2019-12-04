@@ -4,6 +4,8 @@ struct CourseInfoTabSyllabusHeaderViewModel {
     let isDeadlineButtonVisible: Bool
     let isDownloadAllButtonEnabled: Bool
     let isDeadlineTooltipVisible: Bool
+
+    let courseDownloadState: CourseInfoTabSyllabus.DownloadState
 }
 
 struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {

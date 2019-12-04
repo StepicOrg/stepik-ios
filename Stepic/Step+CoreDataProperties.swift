@@ -20,6 +20,9 @@ extension Step {
     @NSManaged var managedLessonId: NSNumber?
     @NSManaged var managedHasSubmissionRestrictions: NSNumber?
     @NSManaged var managedMaxSubmissionsCount: NSNumber?
+    @NSManaged var managedPassedBy: NSNumber?
+    @NSManaged var managedCorrectRatio: NSNumber?
+
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
@@ -37,120 +40,137 @@ extension Step {
     }
 
     var id: Int {
-        set(newId) {
-            self.managedId = newId as NSNumber?
-        }
         get {
-            return managedId?.intValue ?? -1
+            return self.managedId?.intValue ?? -1
+        }
+        set {
+            self.managedId = newValue as NSNumber?
         }
     }
 
-    var lessonId: Int {
-        set(newId) {
-            self.managedLessonId = newId as NSNumber?
-        }
+    var lessonID: Int {
         get {
-            return managedLessonId?.intValue ?? -1
+            return self.managedLessonId?.intValue ?? -1
+        }
+        set {
+            self.managedLessonId = newValue as NSNumber?
         }
     }
 
     var position: Int {
-        set(value) {
-            self.managedPosition = value as NSNumber?
-        }
         get {
-            return managedPosition?.intValue ?? -1
+            return self.managedPosition?.intValue ?? -1
+        }
+        set {
+            self.managedPosition = newValue as NSNumber?
+        }
+    }
+
+    var passedByCount: Int {
+        get {
+            return self.managedPassedBy?.intValue ?? 0
+        }
+        set {
+            self.managedPassedBy = newValue as NSNumber?
+        }
+    }
+
+    var correctRatio: Float {
+        get {
+            return self.managedCorrectRatio?.floatValue ?? 0
+        }
+        set {
+            self.managedCorrectRatio = newValue as NSNumber?
         }
     }
 
     var hasSubmissionRestrictions: Bool {
-        set(value) {
-            self.managedHasSubmissionRestrictions = value as NSNumber?
-        }
         get {
-            return managedHasSubmissionRestrictions?.boolValue ?? false
+            return self.managedHasSubmissionRestrictions?.boolValue ?? false
+        }
+        set {
+            self.managedHasSubmissionRestrictions = newValue as NSNumber?
         }
     }
 
     var status: String {
-        set(value) {
-            self.managedStatus = value
-        }
         get {
-            return managedStatus ?? "no status"
+            return self.managedStatus ?? "no status"
+        }
+        set {
+            self.managedStatus = newValue
         }
     }
 
     var block: Block {
         get {
-            return managedBlock!
+            return self.managedBlock!
         }
-
-        set(value) {
-            managedBlock = value
+        set {
+            self.managedBlock = newValue
         }
     }
 
-    var progressId: String? {
+    var progressID: String? {
         get {
-            return managedProgressId
+            return self.managedProgressId
         }
-        set(value) {
-            managedProgressId = value
+        set {
+            self.managedProgressId = newValue
         }
     }
 
     var progress: Progress? {
         get {
-            return managedProgress
+            return self.managedProgress
         }
-        set(value) {
-            managedProgress = value
+        set {
+            self.managedProgress = newValue
         }
     }
 
-    var discussionProxyId: String? {
+    var discussionProxyID: String? {
         get {
-            return managedDiscussionProxy
+            return self.managedDiscussionProxy
         }
-        set(value) {
-            managedDiscussionProxy = value
+        set {
+            self.managedDiscussionProxy = newValue
         }
     }
 
     var discussionsCount: Int? {
         get {
-            return managedDiscussionsCount?.intValue
+            return self.managedDiscussionsCount?.intValue
         }
-        set(value) {
-            managedDiscussionsCount = value as NSNumber?
+        set {
+            self.managedDiscussionsCount = newValue as NSNumber?
         }
     }
 
     var lesson: Lesson? {
         get {
-            return managedLesson
+            return self.managedLesson
         }
-        set(value) {
-            managedLesson = value
+        set {
+            self.managedLesson = newValue
         }
     }
 
     var options: StepOptions? {
         get {
-            return managedOptions
+            return self.managedOptions
         }
-        set(value) {
-            managedOptions = value
+        set {
+            self.managedOptions = newValue
         }
     }
 
     var maxSubmissionsCount: Int? {
         get {
-            return managedMaxSubmissionsCount?.intValue
+            return self.managedMaxSubmissionsCount?.intValue
         }
-        set(value) {
-            managedMaxSubmissionsCount = value as NSNumber?
+        set {
+            self.managedMaxSubmissionsCount = newValue as NSNumber?
         }
     }
 }

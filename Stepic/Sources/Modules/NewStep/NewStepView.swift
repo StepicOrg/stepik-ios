@@ -138,6 +138,9 @@ final class NewStepView: UIView {
             self.stepTextView.loadHTMLText(htmlString)
         }
 
+        self.stepControlsView.passedByCount = viewModel.passedByCount
+        self.stepControlsView.correctRatio = viewModel.correctRatio
+
         self.updateDiscussionButton(title: viewModel.discussionsLabelTitle, isEnabled: viewModel.isDiscussionsEnabled)
 
         guard let quizView = quizView else {

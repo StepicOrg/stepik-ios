@@ -25,6 +25,11 @@ extension CourseInfoTabSyllabusSectionView {
 
         let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
+        let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
+
+        let downloadedSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        let downloadedSizeLabelTextColor = UIColor.mainDark
+        let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
         let deadlinesInsets = UIEdgeInsets(top: 16, left: 0, bottom: 19, right: 0)
 
@@ -71,6 +76,16 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         return view
     }()
 
+    private lazy var downloadedSizeLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.downloadedSizeLabelFont
+        label.textColor = self.appearance.downloadedSizeLabelTextColor
+        label.numberOfLines = 1
+        label.textAlignment = .right
+        label.isHidden = true
+        return label
+    }()
+
     private lazy var textStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -108,6 +123,9 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         let view = CourseInfoTabSyllabusSectionDeadlinesView(appearance: appearance)
         return view
     }()
+
+    // To properly center when downloaded size visible
+    private var downloadButtonCenterYConstraint: Constraint?
 
     var onDownloadButtonClick: (() -> Void)?
 
@@ -161,18 +179,36 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     }
 
     func updateDownloadState(newState: CourseInfoTabSyllabus.DownloadState) {
+        var downloadedBytesTotal: UInt64?
+
         switch newState {
         case .notAvailable:
             self.downloadButton.isHidden = true
-        case .available(let isCached):
+        case .cached(let bytesTotal):
             self.downloadButton.isHidden = false
-            self.downloadButton.actionState = isCached ? .readyToRemoving : .readyToDownloading
+            self.downloadButton.actionState = .readyToRemoving
+            downloadedBytesTotal = bytesTotal
+        case .notCached:
+            self.downloadButton.isHidden = false
+            self.downloadButton.actionState = .readyToDownloading
         case .waiting:
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .pending
         case .downloading(let progress):
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .downloading(progress: progress)
+        }
+
+        if let downloadedBytesTotal = downloadedBytesTotal {
+            self.downloadedSizeLabel.text = FormatterHelper.megabytesInBytes(downloadedBytesTotal)
+            self.downloadedSizeLabel.isHidden = false
+            self.downloadButtonCenterYConstraint?.update(
+                offset: -self.appearance.downloadButtonCenterYOffsetOnCachedState
+            )
+        } else {
+            self.downloadedSizeLabel.text = nil
+            self.downloadedSizeLabel.isHidden = true
+            self.downloadButtonCenterYConstraint?.update(offset: 0)
         }
     }
 
@@ -197,6 +233,7 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
 
         self.addSubview(self.downloadButtonTapProxyView)
         self.addSubview(self.downloadButton)
+        self.addSubview(self.downloadedSizeLabel)
         self.addSubview(self.deadlinesView)
 
         self.addSubview(self.progressIndicatorViewContainerView)
@@ -230,7 +267,14 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
         self.downloadButton.snp.makeConstraints { make in
             make.size.equalTo(self.appearance.downloadButtonSize)
             make.trailing.equalToSuperview().offset(-self.appearance.downloadButtonInsets.right)
-            make.centerY.equalTo(self.textStackView.snp.centerY)
+            self.downloadButtonCenterYConstraint = make.centerY.equalTo(self.textStackView.snp.centerY).constraint
+        }
+
+        self.downloadedSizeLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.downloadedSizeLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        self.downloadedSizeLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.downloadButton.snp.bottom).offset(self.appearance.downloadedSizeLabelInsets.top)
+            make.trailing.equalToSuperview().offset(-self.appearance.downloadedSizeLabelInsets.right)
         }
 
         self.downloadButtonTapProxyView.translatesAutoresizingMaskIntoConstraints = false

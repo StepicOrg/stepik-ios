@@ -4,8 +4,11 @@ final class DownloadsAssembly: Assembly {
     func makeModule() -> UIViewController {
         let provider = DownloadsProvider(
             coursesPersistenceService: CoursesPersistenceService(),
+            adaptiveStorageManager: AdaptiveStorageManager.shared,
             videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
-            adaptiveStorageManager: AdaptiveStorageManager.shared
+            storageUsageService: StorageUsageService(
+                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+            )
         )
         let presenter = DownloadsPresenter()
         let interactor = DownloadsInteractor(presenter: presenter, provider: provider)

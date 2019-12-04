@@ -446,6 +446,8 @@ CourseInfoTitle = "О курсе";
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusFailedLoadVideoAlertMessage = "Не удалось загрузить видео, повторите загрузку позже.";
+CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Удалить курс";
+CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный курс?";
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle = "Удалить урок";
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный урок?";
 CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationTitle = "Удалить модуль";
@@ -632,7 +634,8 @@ DeadlineModeQuestion = "Сколько времени вы готовы трат
 /* Course info */
 CourseMeetsRecommendations = "Соответствует рекомендациям Stepik";
 SyllabusDeadlinesButton = "Расписание";
-SyllabusDownloadAll = "Загрузить всё";
+SyllabusDownloadAll = "Скачать";
+SyllabusDownloaded = "Загружено %@";
 NoReviews = "К сожалению, ни одного отзыва об этом курсе пока нет";
 
 /* Profile edit */
@@ -723,6 +726,8 @@ LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
 StepVideoPlayingNotReachableErrorTitle = "Ошибка соединения";
 StepVideoPlayingNotReachableErrorMessage = "Подключитесь к интернету и повторите попытку.";
+StepStatisticsPassedByTitle = "Решило:";
+StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
 
 /* Video player */

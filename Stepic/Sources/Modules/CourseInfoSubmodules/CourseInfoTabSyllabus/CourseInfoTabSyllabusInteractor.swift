@@ -175,27 +175,25 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
             let currentState = self.getDownloadingStateForUnit(unit)
             switch currentState {
-            case .available(let isCached):
-                if isCached {
-                    self.presenter.presentDeleteDownloadsConfirmationAlert(
-                        response: .init(
-                            type: .unit,
-                            cancelActionHandler: {
-                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .lesson, isConfirmed: false
-                                ).send()
-                            },
-                            confirmedActionHandler: { [weak self] in
-                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .lesson, isConfirmed: true
-                                ).send()
-                                self?.removeCached(unit: unit)
-                            }
-                        )
+            case .cached:
+                self.presenter.presentDeleteDownloadsConfirmationAlert(
+                    response: .init(
+                        type: .unit,
+                        cancelActionHandler: {
+                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                content: .lesson, isConfirmed: false
+                            ).send()
+                        },
+                        confirmedActionHandler: { [weak self] in
+                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                content: .lesson, isConfirmed: true
+                            ).send()
+                            self?.removeCached(unit: unit)
+                        }
                     )
-                } else {
-                    self.startDownloading(unit: unit)
-                }
+                )
+            case .notCached:
+                self.startDownloading(unit: unit)
             case .downloading:
                 self.cancelDownloading(unit: unit)
             default:
@@ -213,27 +211,25 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
             let currentState = self.getDownloadingStateForSection(section)
             switch currentState {
-            case .available(let isCached):
-                if isCached {
-                    self.presenter.presentDeleteDownloadsConfirmationAlert(
-                        response: .init(
-                            type: .section,
-                            cancelActionHandler: {
-                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .section, isConfirmed: false
-                                ).send()
-                            },
-                            confirmedActionHandler: { [weak self] in
-                                AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
-                                    content: .section, isConfirmed: true
-                                ).send()
-                                self?.removeCached(section: section)
-                            }
-                        )
+            case .cached:
+                self.presenter.presentDeleteDownloadsConfirmationAlert(
+                    response: .init(
+                        type: .section,
+                        cancelActionHandler: {
+                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                content: .section, isConfirmed: false
+                            ).send()
+                        },
+                        confirmedActionHandler: { [weak self] in
+                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                content: .section, isConfirmed: true
+                            ).send()
+                            self?.removeCached(section: section)
+                        }
                     )
-                } else {
-                    self.startDownloading(section: section)
-                }
+                )
+            case .notCached:
+                self.startDownloading(section: section)
             case .downloading:
                 self.cancelDownloading(section: section)
             default:
@@ -242,20 +238,47 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
 
         func handleAll() {
-            AmplitudeAnalyticsEvents.Downloads.started(content: .course).send()
-            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-            self.forceLoadAllSectionsIfNeeded().done {
-                for (uid, section) in self.currentSections {
-                    let sectionState = self.getDownloadingStateForSection(section)
-                    if case .available(false) = sectionState {
-                        handleSection(id: uid)
+            let currentState = self.getDownloadingStateForCourse()
+            switch currentState {
+            case .cached:
+                self.presenter.presentDeleteDownloadsConfirmationAlert(
+                    response: .init(
+                        type: .course,
+                        cancelActionHandler: {
+                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                content: .course, isConfirmed: false
+                            ).send()
+                        },
+                        confirmedActionHandler: { [weak self] in
+                            AmplitudeAnalyticsEvents.Downloads.deleteDownloadsConfirmationInteracted(
+                                content: .course, isConfirmed: true
+                            ).send()
+                            self?.removeCachedCourse()
+                        }
+                    )
+                )
+            case .notCached:
+                AmplitudeAnalyticsEvents.Downloads.started(content: .course).send()
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+                self.forceLoadAllSectionsIfNeeded().done {
+                    for (uid, section) in self.currentSections {
+                        let sectionState = self.getDownloadingStateForSection(section)
+                        if case .notCached = sectionState {
+                            handleSection(id: uid)
+                        }
                     }
+                    self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
+                }.ensure {
+                    self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+                }.catch { error in
+                    self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
                 }
-                self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
-            }.ensure {
-                self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-            }.catch { error in
-                self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
+            default:
+                CourseInfoTabSyllabusInteractor.logger.warning(
+                    "course info tab syllabus interactor: did receive invalid state when handle download all"
+                )
+                return
             }
         }
 
@@ -319,18 +342,23 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(in: course)
             || self.personalDeadlinesService.hasDeadlines(in: course)
 
+        let courseDownloadState = self.getDownloadingStateForCourse()
+
         let isDownloadAllAvailable: Bool = {
-            if case .available(_) = self.getDownloadingStateForCourse() {
+            switch courseDownloadState {
+            case .cached, .notCached:
                 return true
+            default:
+                return false
             }
-            return false
         }() && !shouldForceDisableDownloadAll
 
         self.presenter.presentCourseSyllabusHeader(
             response: .init(
                 isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
                 isDownloadAllAvailable: isDownloadAllAvailable,
-                isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton
+                isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton,
+                courseDownloadState: courseDownloadState
             )
         )
 
@@ -586,12 +614,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
             return
         }
 
-        self.presenter.presentDownloadButtonUpdate(
-            response: .init(
-                source: .unit(entity: unit),
-                downloadState: .available(isCached: isCompleted)
-            )
-        )
+        self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+        self.updateSyllabusHeader()
     }
 
     func syllabusDownloadsService(
@@ -603,12 +627,8 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
             return
         }
 
-        self.presenter.presentDownloadButtonUpdate(
-            response: .init(
-                source: .section(entity: section),
-                downloadState: .available(isCached: isCompleted)
-            )
-        )
+        self.updateSectionDownloadState(section)
+        self.updateSyllabusHeader()
     }
 
     func syllabusDownloadsService(
@@ -669,12 +689,14 @@ extension CourseInfoTabSyllabusInteractor {
             CourseInfoTabSyllabusInteractor.logger.info(
                 "course info tab syllabus interactor: started downloading unit = \(unitID)"
             )
-        }.ensure {
-            self.updateUnitDownloadState(unit, forceSectionUpdate: true)
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while starting download unit = \(unitID), error = \(error)"
             )
+
+            self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+            self.updateSyllabusHeader()
+
             self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }
@@ -697,7 +719,7 @@ extension CourseInfoTabSyllabusInteractor {
 
         // Present waiting state for units if not cached
         section.units.forEach { unit in
-            if case .available(false) = self.getDownloadingStateForUnit(unit) {
+            if case .notCached = self.getDownloadingStateForUnit(unit) {
                 self.presenter.presentDownloadButtonUpdate(
                     response: .init(
                         source: .unit(entity: unit),
@@ -711,12 +733,14 @@ extension CourseInfoTabSyllabusInteractor {
             CourseInfoTabSyllabusInteractor.logger.info(
                 "course info tab syllabus interactor: started downloading section = \(sectionID)"
             )
-        }.ensure {
-            self.updateSectionDownloadState(section)
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while starting download section = \(sectionID), error = \(error)"
             )
+
+            self.updateSectionDownloadState(section)
+            self.updateSyllabusHeader()
+
             self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
     }
@@ -736,6 +760,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while cancelling unit = \(unitID), error = \(error)"
@@ -760,6 +785,7 @@ extension CourseInfoTabSyllabusInteractor {
             // FIXME: Better handle this case, w/o delay section downloading tasks may not be cancelled
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                 self.updateSectionDownloadState(section)
+                self.updateSyllabusHeader()
             }
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
@@ -783,6 +809,7 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while removing cached unit = \(unitID), error = \(error)"
@@ -805,9 +832,37 @@ extension CourseInfoTabSyllabusInteractor {
             )
         }.ensure {
             self.updateSectionDownloadState(section)
+            self.updateSyllabusHeader()
         }.catch { error in
             CourseInfoTabSyllabusInteractor.logger.error(
                 "course info tab syllabus interactor: error while removing cached section = \(sectionID), error = \(error)"
+            )
+        }
+    }
+
+    private func removeCachedCourse() {
+        guard let course = self.currentCourse else {
+            return
+        }
+
+        AnalyticsReporter.reportEvent(AnalyticsEvents.Course.delete, parameters: ["source": "syllabus"])
+        AmplitudeAnalyticsEvents.Downloads.deleted(content: .course, source: .syllabus).send()
+
+        let courseID = course.id
+        CourseInfoTabSyllabusInteractor.logger.info(
+            "course info tab syllabus interactor: start removing cached course = \(courseID)"
+        )
+
+        self.syllabusDownloadsService.remove(course: course).done {
+            CourseInfoTabSyllabusInteractor.logger.info(
+                "course info tab syllabus interactor: finish removing cached course = \(courseID)"
+            )
+        }.ensure {
+            self.updateSyllabusHeader()
+            course.sections.forEach { self.updateSectionDownloadState($0) }
+        }.catch { error in
+            CourseInfoTabSyllabusInteractor.logger.error(
+                "course info tab syllabus interactor: error while removing cached course = \(courseID), error = \(error)"
             )
         }
     }

@@ -42,11 +42,9 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         return button
     }()
 
-    private lazy var downloadAllButton: UIControl = {
+    private lazy var downloadAllButton: ImageButton = {
         let button = ImageButton()
-        button.image = UIImage(named: "course-info-syllabus-download-all")?.withRenderingMode(.alwaysTemplate)
         button.tintColor = self.appearance.buttonTintColor
-        button.title = NSLocalizedString("SyllabusDownloadAll", comment: "")
         button.font = self.appearance.buttonFont
         button.imageInsets = self.appearance.buttonImageInsets
         button.titleInsets = self.appearance.buttonTitleInsets
@@ -79,6 +77,12 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         return self.calendarButton.titleContentView
     }
 
+    var courseDownloadState: CourseInfoTabSyllabus.DownloadState = .notCached {
+        didSet {
+            self.updateDownloadAllButton()
+        }
+    }
+
     var onCalendarButtonClick: (() -> Void)?
     var onDownloadAllButtonClick: (() -> Void)?
 
@@ -96,6 +100,22 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private func updateDownloadAllButton() {
+        switch self.courseDownloadState {
+        case .cached(let bytesTotal):
+            self.downloadAllButton.image = UIImage(named: "download-button-remove")?.withRenderingMode(.alwaysTemplate)
+            self.downloadAllButton.title = String(
+                format: NSLocalizedString("SyllabusDownloaded", comment: ""),
+                FormatterHelper.megabytesInBytes(bytesTotal)
+            )
+        default:
+            self.downloadAllButton.image = UIImage(
+                named: "course-info-syllabus-download-all"
+            )?.withRenderingMode(.alwaysTemplate)
+            self.downloadAllButton.title = NSLocalizedString("SyllabusDownloadAll", comment: "")
+        }
+    }
+
     @objc
     private func onCalendarButtonClicked() {
         self.onCalendarButtonClick?()
@@ -108,6 +128,10 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
 }
 
 extension CourseInfoTabSyllabusHeaderView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.updateDownloadAllButton()
+    }
+
     func addSubviews() {
         self.addSubview(self.stackView)
         self.addSubview(self.separatorView)
