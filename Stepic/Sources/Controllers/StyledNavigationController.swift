@@ -34,16 +34,11 @@ class StyledNavigationController: UINavigationController {
         }
     }
 
-    // To fix memory leak, cause constructor for UINavigationControllerDelegateRepeater called 2 times
-    // first - from init(rootViewController:), second - from init(nibName:bundle:)
-    // swiftlint:disable:next implicitly_unwrapped_optional
-    private var delegateRepeater: UINavigationControllerDelegateRepeater!
     override var delegate: UINavigationControllerDelegate? {
-        set {
-            self.delegateRepeater.secondaryDelegate = newValue
-        }
-        get {
-            return self.delegateRepeater
+        didSet {
+            if self.delegate !== self {
+                fatalError("To set a delegate use `addDelegate(_:)`")
+            }
         }
     }
 
@@ -57,11 +52,13 @@ class StyledNavigationController: UINavigationController {
 
     private var navigationBarAppearanceForController: [Int: NavigationBarAppearanceState] = [:]
 
+    // swiftlint:disable:next weak_delegate
+    private var multicastDelegate = MulticastDelegate<UINavigationControllerDelegate>()
+
     // MARK: ViewController lifecycle & base methods
 
     override func viewDidLoad() {
-        self.delegateRepeater = UINavigationControllerDelegateRepeater()
-        self.delegateRepeater.mainDelegate = self
+        self.delegate = self
         super.viewDidLoad()
         self.setupAppearance()
     }
@@ -168,6 +165,16 @@ class StyledNavigationController: UINavigationController {
             return
         }
         return self.changeStatusBarStyle(style)
+    }
+
+    /// Adds an delegate to the delegates collection.
+    func addDelegate(_ delegate: UINavigationControllerDelegate) {
+        self.multicastDelegate.add(delegate)
+    }
+
+    /// Removes an delegate from the delegates collection.
+    func removeDelegate(_ delegate: UINavigationControllerDelegate) {
+        self.multicastDelegate.remove(delegate)
     }
 
     // MARK: Private API
@@ -349,12 +356,20 @@ class StyledNavigationController: UINavigationController {
     }
 }
 
+// MARK: - StyledNavigationController: UINavigationControllerDelegate -
+
 extension StyledNavigationController: UINavigationControllerDelegate {
+    // MARK: Responding to a View Controller Being Shown
+
     func navigationController(
         _ navigationController: UINavigationController,
         willShow viewController: UIViewController,
         animated: Bool
     ) {
+        self.multicastDelegate.invoke { delegate in
+            delegate.navigationController?(navigationController, willShow: viewController, animated: animated)
+        }
+
         let targetControllerAppearance = self.getNavigationBarAppearance(for: viewController)
 
         guard animated, let fromViewController = self.transitionCoordinator?.viewController(forKey: .from) else {
@@ -420,6 +435,112 @@ extension StyledNavigationController: UINavigationControllerDelegate {
             }
         )
     }
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        didShow viewController: UIViewController,
+        animated: Bool
+    ) {
+        self.multicastDelegate.invoke { delegate in
+            delegate.navigationController?(navigationController, didShow: viewController, animated: animated)
+        }
+    }
+
+    // MARK: Supporting Custom Transition Animations
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        var animatedTransitioning: UIViewControllerAnimatedTransitioning?
+
+        self.multicastDelegate.invoke { delegate in
+            if animatedTransitioning != nil {
+                return
+            }
+
+            if let transitioning = delegate.navigationController?(
+                navigationController,
+                animationControllerFor: operation,
+                from: fromVC,
+                to: toVC
+            ) {
+                animatedTransitioning = transitioning
+            }
+        }
+
+        return animatedTransitioning
+    }
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        interactionControllerFor animationController: UIViewControllerAnimatedTransitioning
+    ) -> UIViewControllerInteractiveTransitioning? {
+        var interactiveTransitioning: UIViewControllerInteractiveTransitioning?
+
+        self.multicastDelegate.invoke { delegate in
+            if interactiveTransitioning != nil {
+                return
+            }
+
+            if let transitioning = delegate.navigationController?(
+                navigationController,
+                interactionControllerFor: animationController
+            ) {
+                interactiveTransitioning = transitioning
+            }
+        }
+
+        return interactiveTransitioning
+    }
+
+    func navigationControllerPreferredInterfaceOrientationForPresentation(
+        _ navigationController: UINavigationController
+    ) -> UIInterfaceOrientation {
+        var interfaceOrientation: UIInterfaceOrientation?
+
+        self.multicastDelegate.invoke { delegate in
+            if interfaceOrientation != nil {
+                return
+            }
+
+            if let orientation = delegate.navigationControllerPreferredInterfaceOrientationForPresentation?(
+                navigationController
+            ) {
+                interfaceOrientation = orientation
+            }
+        }
+
+        if let interfaceOrientation = interfaceOrientation {
+            return interfaceOrientation
+        }
+
+        return DeviceInfo.current.orientation.interface
+    }
+
+    func navigationControllerSupportedInterfaceOrientations(
+        _ navigationController: UINavigationController
+    ) -> UIInterfaceOrientationMask {
+        var interfaceOrientationMask: UIInterfaceOrientationMask?
+
+        self.multicastDelegate.invoke { delegate in
+            if interfaceOrientationMask != nil {
+                return
+            }
+
+            if let mask = delegate.navigationControllerSupportedInterfaceOrientations?(navigationController) {
+                interfaceOrientationMask = mask
+            }
+        }
+
+        if let interfaceOrientationMask = interfaceOrientationMask {
+            return interfaceOrientationMask
+        }
+
+        return .all
+    }
 }
 
 // MARK: - Default appearance protocol
@@ -438,56 +559,6 @@ extension StyledNavigationControllerPresentable {
 
     var shouldSaveAppearanceState: Bool {
         return true
-    }
-}
-
-// MARK: - Delegate Repeater
-
-private class UINavigationControllerDelegateRepeater: NSObject, UINavigationControllerDelegate {
-    weak var mainDelegate: UINavigationControllerDelegate?
-    weak var secondaryDelegate: UINavigationControllerDelegate?
-
-    private var delegates: [UINavigationControllerDelegate] {
-        return [self.mainDelegate, self.secondaryDelegate].compactMap { $0 }
-    }
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        willShow viewController: UIViewController,
-        animated: Bool
-    ) {
-        for delegate in self.delegates {
-            delegate.navigationController?(navigationController, willShow: viewController, animated: animated)
-        }
-    }
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        didShow viewController: UIViewController,
-        animated: Bool
-    ) {
-        for delegate in self.delegates {
-            delegate.navigationController?(navigationController, didShow: viewController, animated: animated)
-        }
-    }
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        animationControllerFor operation: UINavigationController.Operation,
-        from fromVC: UIViewController,
-        to toVC: UIViewController
-    ) -> UIViewControllerAnimatedTransitioning? {
-        for delegate in self.delegates {
-            if let transitioning = delegate.navigationController?(
-                navigationController,
-                animationControllerFor: operation,
-                from: fromVC,
-                to: toVC
-            ) {
-                return transitioning
-            }
-        }
-        return nil
     }
 }
 
