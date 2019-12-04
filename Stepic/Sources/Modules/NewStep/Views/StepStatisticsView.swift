@@ -11,7 +11,7 @@ extension StepStatisticsView {
 
         let textColor = UIColor.mainDark
         let textFont = UIFont.systemFont(ofSize: 14)
-        let textFontDetail = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        let textFontDetail = UIFont.systemFont(ofSize: 14, weight: .bold)
     }
 }
 
@@ -21,7 +21,7 @@ final class StepStatisticsView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.passedByLabel, self.correctRatioLabel])
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         stackView.spacing = self.appearance.labelsSpacing
         return stackView
     }()
@@ -29,7 +29,7 @@ final class StepStatisticsView: UIView {
     private lazy var passedByLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.textFont
-        label.textAlignment = .right
+        label.textAlignment = .left
         label.numberOfLines = 1
         return label
     }()
@@ -45,12 +45,14 @@ final class StepStatisticsView: UIView {
     private lazy var topSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = self.appearance.separatorColor
+        view.isHidden = true
         return view
     }()
 
     private lazy var bottomSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = self.appearance.separatorColor
+        view.isHidden = true
         return view
     }()
 
@@ -68,13 +70,13 @@ final class StepStatisticsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var isTopSeparatorVisible: Bool = true {
+    var isTopSeparatorVisible: Bool = false {
         didSet {
             self.topSeparatorView.isHidden = !self.isTopSeparatorVisible
         }
     }
 
-    var isBottomSeparatorVisible: Bool = true {
+    var isBottomSeparatorVisible: Bool = false {
         didSet {
             self.bottomSeparatorView.isHidden = !self.isBottomSeparatorVisible
         }
@@ -158,22 +160,18 @@ extension StepStatisticsView: ProgrammaticallyInitializableViewProtocol {
         self.topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         self.topSeparatorView.snp.makeConstraints { make in
             make.leading.top.trailing.equalToSuperview()
-            make.height.equalTo(self.appearance.separatorHeight / UIScreen.main.scale)
+            make.height.equalTo(self.appearance.separatorHeight)
         }
 
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(self.appearance.insets.left)
-            make.top.equalToSuperview().offset(self.appearance.insets.top).priority(999)
-            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
-            make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom).priority(999)
-            make.centerY.equalToSuperview()
+            make.center.equalToSuperview()
         }
 
         self.bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomSeparatorView.snp.makeConstraints { make in
             make.leading.bottom.trailing.equalToSuperview()
-            make.height.equalTo(self.appearance.separatorHeight / UIScreen.main.scale)
+            make.height.equalTo(self.appearance.separatorHeight)
         }
     }
 }

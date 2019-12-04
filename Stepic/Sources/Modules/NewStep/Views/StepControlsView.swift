@@ -17,7 +17,11 @@ extension StepControlsView {
 final class StepControlsView: UIView {
     let appearance: Appearance
 
-    private lazy var statisticsView = StepStatisticsView()
+    private lazy var statisticsView: StepStatisticsView = {
+        let view = StepStatisticsView()
+        view.isTopSeparatorVisible = true
+        return view
+    }()
 
     private lazy var discussionsButton: StepDiscussionsButton = {
         let button = StepDiscussionsButton()
