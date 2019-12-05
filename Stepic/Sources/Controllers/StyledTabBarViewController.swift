@@ -1,11 +1,3 @@
-//
-//  StyledTabBarViewController.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 03.09.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 final class StyledTabBarViewController: UITabBarController {
@@ -13,14 +5,14 @@ final class StyledTabBarViewController: UITabBarController {
 
     private var notificationsBadgeNumber: Int {
         get {
-            if let tab = self.tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
-                return Int(tab.badgeValue ?? "0") ?? 0
+            if let notificationsTab = self.tabBar.items?.first(where: { $0.tag == TabController.notifications.tag }) {
+                return Int(notificationsTab.badgeValue ?? "0") ?? 0
             }
             return 0
         }
         set {
-            if let tab = self.tabBar.items?.filter({ $0.tag == TabController.notifications.tag }).first {
-                tab.badgeValue = newValue > 0 ? "\(newValue)" : nil
+            if let notificationsTab = self.tabBar.items?.first(where: { $0.tag == TabController.notifications.tag }) {
+                notificationsTab.badgeValue = newValue > 0 ? "\(newValue)" : nil
                 self.fixBadgePosition()
             }
         }
@@ -33,11 +25,12 @@ final class StyledTabBarViewController: UITabBarController {
         self.tabBar.unselectedItemTintColor = UIColor(hex: 0xbabac1)
         self.tabBar.isTranslucent = false
 
-        self.setViewControllers(self.items.map {
-            let viewController = $0.controller
-            viewController.tabBarItem = $0.makeTabBarItem()
+        let tabBarViewControllers = self.items.map { tabBarItem -> UIViewController in
+            let viewController = tabBarItem.controller
+            viewController.tabBarItem = tabBarItem.makeTabBarItem()
             return viewController
-        }, animated: false)
+        }
+        self.setViewControllers(tabBarViewControllers, animated: false)
         self.fixBadgePosition()
 
         self.delegate = self

@@ -2458,14 +2458,6 @@
 			name = Notifications;
 			sourceTree = "<group>";
 		};
-		08368C061F6FFF7D00173F8C /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
-			);
-			name = TabBar;
-			sourceTree = "<group>";
-		};
 		083749281DE5AE1400144C14 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -2938,7 +2930,6 @@
 				08D565C91C5F7CF000DE2B6A /* Quizzes */,
 				0828FF841BC81EA9000AFEA7 /* Registration&SignIn */,
 				08484EDF211AF41A0006266F /* Stories */,
-				08368C061F6FFF7D00173F8C /* TabBar */,
 				08EF9A0B1C91D12700433E4A /* VideoPlayer */,
 			);
 			name = Controllers;
@@ -4905,6 +4896,7 @@
 			isa = PBXGroup;
 			children = (
 				62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */,
+				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
