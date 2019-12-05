@@ -36,7 +36,7 @@ final class StyledTabBarViewController: UITabBarController {
         self.delegate = self
 
         if !AuthInfo.shared.isAuthorized {
-            self.selectedIndex = 1
+            self.selectedIndex = TabController.explore.position
         }
 
         NotificationCenter.default.addObserver(
@@ -146,6 +146,19 @@ private enum TabController: String {
 
     var tag: Int {
         return self.hashValue
+    }
+
+    var position: Int {
+        switch self {
+        case .home:
+            return 0
+        case .explore:
+            return 1
+        case .profile:
+            return 2
+        case .notifications:
+            return 3
+        }
     }
 
     var itemInfo: TabBarItemInfo {
