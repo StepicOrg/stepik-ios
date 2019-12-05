@@ -48,13 +48,13 @@ class StyledNavigationController: UINavigationController {
         return self.statusBarStyle
     }
 
-    private lazy var statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-
-    private var statusBarStyle: UIStatusBarStyle = StyledNavigationController.Appearance.statusBarStyle {
+    private var statusBarStyle = StyledNavigationController.Appearance.statusBarStyle {
         didSet {
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
+
+    private lazy var statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
 
     private lazy var shadowView = UIView()
     private var shadowViewLeadingConstraint: Constraint?
