@@ -63,6 +63,8 @@ final class StyledTabBarViewController: UITabBarController {
                 identifier: "Onboarding",
                 storyboardName: "Onboarding"
             )
+            onboardingViewController.modalPresentationStyle = .fullScreen
+
             self.present(onboardingViewController, animated: true)
         }
     }
