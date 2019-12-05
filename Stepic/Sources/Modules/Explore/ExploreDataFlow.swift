@@ -57,6 +57,17 @@ enum Explore {
         }
     }
 
+    /// Update status bar style (called by stories module)
+    enum StatusBarStyleUpdate {
+        struct Response {
+            let statusBarStyle: UIStatusBarStyle
+        }
+
+        struct ViewModel {
+            let statusBarStyle: UIStatusBarStyle
+        }
+    }
+
     // MARK: States
 
     enum ViewControllerState {

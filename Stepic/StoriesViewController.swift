@@ -92,7 +92,11 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
     }()
 
     func showStory(at index: Int) {
-        let moduleToPresent = OpenedStoriesAssembly(stories: self.stories, startPosition: index).makeModule()
+        let moduleToPresent = OpenedStoriesAssembly(
+            stories: self.stories,
+            startPosition: index,
+            moduleOutput: self.presenter as? OpenedStoriesOutputProtocol
+        ).makeModule()
         if DeviceInfo.current.isPad {
             self.customPresentViewController(
                 self.storyPresentr,

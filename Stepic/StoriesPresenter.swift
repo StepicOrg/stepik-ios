@@ -26,6 +26,7 @@ protocol StoriesPresenterProtocol: class {
 
 protocol StoriesOutputProtocol: class {
     func hideStories()
+    func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle)
 }
 
 final class StoriesPresenter: StoriesPresenterProtocol {
@@ -109,5 +110,13 @@ final class StoriesPresenter: StoriesPresenterProtocol {
 
             strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)
         }
+    }
+}
+
+// MARK: - StoriesPresenter: OpenedStoriesOutputProtocol -
+
+extension StoriesPresenter: OpenedStoriesOutputProtocol {
+    func handleOpenedStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle) {
+        self.moduleOutput?.handleStoriesStatusBarStyleUpdate(statusBarStyle)
     }
 }
