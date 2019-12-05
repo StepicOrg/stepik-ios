@@ -10,6 +10,8 @@ class StyledNavigationController: UINavigationController {
 
         static let shadowViewColor = UIColor.lightGray
         static let shadowViewHeight: CGFloat = 0.5
+
+        static let statusBarStyle = UIStatusBarStyle.dark
     }
 
     struct NavigationBarAppearanceState {
@@ -24,7 +26,7 @@ class StyledNavigationController: UINavigationController {
             backgroundColor: UIColor = StyledNavigationController.Appearance.backgroundColor,
             textColor: UIColor = StyledNavigationController.Appearance.tintColor,
             tintColor: UIColor = StyledNavigationController.Appearance.tintColor,
-            statusBarStyle: UIStatusBarStyle = .default
+            statusBarStyle: UIStatusBarStyle = StyledNavigationController.Appearance.statusBarStyle
         ) {
             self.shadowViewAlpha = shadowViewAlpha
             self.backgroundColor = backgroundColor
@@ -42,7 +44,17 @@ class StyledNavigationController: UINavigationController {
         }
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.statusBarStyle
+    }
+
     private lazy var statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+
+    private var statusBarStyle: UIStatusBarStyle = StyledNavigationController.Appearance.statusBarStyle {
+        didSet {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
 
     private lazy var shadowView = UIView()
     private var shadowViewLeadingConstraint: Constraint?
@@ -159,7 +171,6 @@ class StyledNavigationController: UINavigationController {
     }
 
     /// Change status bar style
-    @available(*, deprecated, message: "Obsolete method; we must migrate to preferredStatusBarStyle usage")
     func changeStatusBarStyle(_ style: UIStatusBarStyle, sender: UIViewController) {
         guard sender === self.topViewController else {
             return
@@ -221,7 +232,7 @@ class StyledNavigationController: UINavigationController {
     }
 
     private func changeStatusBarStyle(_ style: UIStatusBarStyle) {
-        UIApplication.shared.statusBarStyle = style
+        self.statusBarStyle = style
 
         if let topViewController = self.topViewController {
             self.navigationBarAppearanceForController[topViewController.hashValue]?.statusBarStyle = style
@@ -245,7 +256,7 @@ class StyledNavigationController: UINavigationController {
         self.changeTextColor(StyledNavigationController.Appearance.tintColor)
         self.changeTintColor(StyledNavigationController.Appearance.tintColor)
         self.changeShadowViewAlpha(1.0)
-        self.changeStatusBarStyle(.default)
+        self.changeStatusBarStyle(self.statusBarStyle)
     }
 
     private func normalizeAlphaValue(_ alpha: CGFloat) -> CGFloat {
