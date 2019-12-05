@@ -2680,7 +2680,6 @@
 		08484EDF211AF41A0006266F /* Stories */ = {
 			isa = PBXGroup;
 			children = (
-				08484EE4211AF42E0006266F /* CachedValue.swift */,
 				08484EE6211AF42E0006266F /* SegmentedProgressView.swift */,
 				08484EED211AF4300006266F /* Story.swift */,
 				08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */,
@@ -4515,6 +4514,7 @@
 		2CD462E8226F424A004E4725 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				08484EE4211AF42E0006266F /* CachedValue.swift */,
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
