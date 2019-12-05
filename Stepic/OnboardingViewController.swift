@@ -45,12 +45,8 @@ final class OnboardingViewController: UIViewController {
         analytics: .init(source: .onboarding)
     )
 
-    @IBAction func onCloseButtonClick(_ sender: Any) {
-        dismiss(animated: true) {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": self.currentPageIndex + 1])
-            AmplitudeAnalyticsEvents.Onboarding.closed(screen: self.currentPageIndex + 1).send()
-            self.notificationsRegistrationService.registerForRemoteNotifications()
-        }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     override func viewDidLoad() {
@@ -75,16 +71,6 @@ final class OnboardingViewController: UIViewController {
 
         backgroundGradient.frame = view.bounds
         view.layer.insertSublayer(self.backgroundGradient, at: 0)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        UIApplication.shared.statusBarStyle = .default
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +104,17 @@ final class OnboardingViewController: UIViewController {
 
             let newScrollViewContentOffsetX = CGFloat(self.currentPageIndex) * self.scrollView.frame.width
             self.scrollView.bounds.origin = CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y)
+        }
+    }
+
+    @IBAction func onCloseButtonClick(_ sender: Any) {
+        dismiss(animated: true) {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Onboarding.onboardingClosed,
+                parameters: ["screen": self.currentPageIndex + 1]
+            )
+            AmplitudeAnalyticsEvents.Onboarding.closed(screen: self.currentPageIndex + 1).send()
+            self.notificationsRegistrationService.registerForRemoteNotifications()
         }
     }
 
