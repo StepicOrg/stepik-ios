@@ -493,6 +493,7 @@ extension CourseInfoViewController: StyledNavigationControllerPresentable {
         return .init(
             shadowViewAlpha: 0.0,
             backgroundColor: StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(0.0),
+            statusBarColor: StyledNavigationController.Appearance.statusBarColor.withAlphaComponent(0.0),
             textColor: StyledNavigationController.Appearance.tintColor.withAlphaComponent(0.0),
             tintColor: .white,
             statusBarStyle: .lightContent

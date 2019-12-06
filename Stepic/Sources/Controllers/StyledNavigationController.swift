@@ -4,6 +4,7 @@ import UIKit
 class StyledNavigationController: UINavigationController {
     enum Appearance {
         static let backgroundColor = UIColor.mainLight
+        static let statusBarColor = UIColor.mainLight
         static let tintColor = UIColor.mainDark
 
         static let titleFont = UIFont.systemFont(ofSize: 17, weight: .regular)
@@ -17,6 +18,7 @@ class StyledNavigationController: UINavigationController {
     struct NavigationBarAppearanceState {
         var shadowViewAlpha: CGFloat
         var backgroundColor: UIColor
+        var statusBarColor: UIColor
         var textColor: UIColor
         var tintColor: UIColor
         var statusBarStyle: UIStatusBarStyle
@@ -24,12 +26,14 @@ class StyledNavigationController: UINavigationController {
         init(
             shadowViewAlpha: CGFloat = 1.0,
             backgroundColor: UIColor = StyledNavigationController.Appearance.backgroundColor,
+            statusBarColor: UIColor = StyledNavigationController.Appearance.statusBarColor,
             textColor: UIColor = StyledNavigationController.Appearance.tintColor,
             tintColor: UIColor = StyledNavigationController.Appearance.tintColor,
             statusBarStyle: UIStatusBarStyle = StyledNavigationController.Appearance.statusBarStyle
         ) {
             self.shadowViewAlpha = shadowViewAlpha
             self.backgroundColor = backgroundColor
+            self.statusBarColor = statusBarColor
             self.textColor = textColor
             self.tintColor = tintColor
             self.statusBarStyle = statusBarStyle
@@ -140,7 +144,18 @@ class StyledNavigationController: UINavigationController {
             self.navigationBarAppearanceForController[sender.hashValue]?.backgroundColor = color
             return
         }
-        return self.changeBackgroundColor(color)
+
+        self.changeStatusBarColor(color, sender: sender)
+        self.changeBackgroundColor(color)
+    }
+
+    /// Change color of status bar background
+    func changeStatusBarColor(_ color: UIColor, sender: UIViewController) {
+        guard sender === self.topViewController else {
+            self.navigationBarAppearanceForController[sender.hashValue]?.statusBarColor = color
+            return
+        }
+        return self.changeStatusBarColor(color)
     }
 
     /// Change alpha of shadow view
@@ -202,6 +217,14 @@ class StyledNavigationController: UINavigationController {
         }
     }
 
+    private func changeStatusBarColor(_ color: UIColor) {
+        self.statusBarView.backgroundColor = color
+
+        if let topViewController = self.topViewController {
+            self.navigationBarAppearanceForController[topViewController.hashValue]?.statusBarColor = color
+        }
+    }
+
     private func changeShadowViewAlpha(_ alpha: CGFloat) {
         let alpha = self.normalizeAlphaValue(alpha)
         self.navigationBar.shadowImage = UIImage()
@@ -253,6 +276,7 @@ class StyledNavigationController: UINavigationController {
         }
 
         self.changeBackgroundColor(StyledNavigationController.Appearance.backgroundColor)
+        self.changeStatusBarColor(StyledNavigationController.Appearance.statusBarColor)
         self.changeTextColor(StyledNavigationController.Appearance.tintColor)
         self.changeTintColor(StyledNavigationController.Appearance.tintColor)
         self.changeShadowViewAlpha(1.0)
@@ -385,6 +409,7 @@ extension StyledNavigationController: UINavigationControllerDelegate {
 
         guard animated, let fromViewController = self.transitionCoordinator?.viewController(forKey: .from) else {
             self.changeBackgroundColor(targetControllerAppearance.backgroundColor)
+            self.changeStatusBarColor(targetControllerAppearance.statusBarColor)
             self.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
             self.changeTextColor(targetControllerAppearance.textColor)
             self.changeTintColor(targetControllerAppearance.tintColor)
@@ -414,6 +439,7 @@ extension StyledNavigationController: UINavigationControllerDelegate {
 
                 // change appearance w/o status bar style
                 strongSelf.changeBackgroundColor(targetControllerAppearance.backgroundColor)
+                strongSelf.changeStatusBarColor(targetControllerAppearance.statusBarColor)
                 strongSelf.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
                 strongSelf.changeTextColor(targetControllerAppearance.textColor)
                 strongSelf.changeTintColor(targetControllerAppearance.tintColor)
@@ -438,6 +464,7 @@ extension StyledNavigationController: UINavigationControllerDelegate {
                     let sourceControllerAppearance = strongSelf.getNavigationBarAppearance(for: fromViewController)
 
                     strongSelf.changeBackgroundColor(sourceControllerAppearance.backgroundColor)
+                    strongSelf.changeStatusBarColor(sourceControllerAppearance.statusBarColor)
                     strongSelf.changeShadowViewAlpha(sourceControllerAppearance.shadowViewAlpha)
                     strongSelf.changeTextColor(sourceControllerAppearance.textColor)
                     strongSelf.changeTintColor(sourceControllerAppearance.tintColor)
