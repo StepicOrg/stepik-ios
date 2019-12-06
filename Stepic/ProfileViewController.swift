@@ -153,27 +153,29 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         self.menu = Menu(blocks: menuBlocks.compactMap { $0 })
     }
 
-    func manageBarItemControls(settingsIsHidden: Bool, profileEditIsAvailable: Bool, shareId: Int?) {
-        var items: [UIBarButtonItem] = []
-        if let settingsButton = settingsButton, !settingsIsHidden {
-            items.append(settingsButton)
+    func manageBarItemControls(isSettingsHidden: Bool, isEditProfileAvailable: Bool, shareID: Int?) {
+        var rightBarButtonItems = [UIBarButtonItem]()
+
+        if let settingsButton = self.settingsButton, !isSettingsHidden {
+            rightBarButtonItems.append(settingsButton)
         }
-        if let profileEditButton = profileEditButton, profileEditIsAvailable, !settingsIsHidden {
-            items.append(profileEditButton)
+        if let profileEditButton = self.profileEditButton, isEditProfileAvailable, !isSettingsHidden {
+            rightBarButtonItems.append(profileEditButton)
         }
 
-        if let shareButton = shareButton, let id = shareId {
-            sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(id)"
-            if settingsIsHidden {
-                navigationItem.rightBarButtonItem = shareButton
+        if let shareButton = self.shareButton, let shareID = shareID {
+            self.sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(shareID)"
+            if isSettingsHidden {
+                self.navigationItem.rightBarButtonItem = shareButton
             } else {
-                navigationItem.leftBarButtonItem = shareButton
+                self.navigationItem.leftBarButtonItem = shareButton
             }
         } else {
-            sharingURL = nil
+            self.navigationItem.leftBarButtonItem = nil
+            self.sharingURL = nil
         }
 
-        navigationItem.rightBarButtonItems = items
+        self.navigationItem.rightBarButtonItems = rightBarButtonItems
     }
 
     func getView(for block: ProfileMenuBlock) -> Any? {
