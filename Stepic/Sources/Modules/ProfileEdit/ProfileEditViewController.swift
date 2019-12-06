@@ -52,6 +52,15 @@ final class ProfileEditViewController: UIViewController {
         self.interactor.doProfileEditLoad(request: .init())
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if #available(iOS 13.0, *),
+           let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeStatusBarColor(.clear, sender: self)
+        }
+    }
+
     @objc
     private func cancelButtonDidClick(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -268,5 +277,15 @@ extension ProfileEditViewController: ProfileEditViewDelegate {
         identifiedBy uniqueIdentifier: UniqueIdentifierType?
     ) {
         self.handleTextField(uniqueIdentifier: uniqueIdentifier, text: text)
+    }
+}
+
+extension ProfileEditViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        if #available(iOS 13.0, *) {
+            return .init(statusBarColor: .clear)
+        } else {
+            return .init()
+        }
     }
 }
