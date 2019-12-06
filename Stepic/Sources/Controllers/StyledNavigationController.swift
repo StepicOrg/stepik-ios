@@ -58,7 +58,11 @@ class StyledNavigationController: UINavigationController {
         }
     }
 
-    private lazy var statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+    private lazy var statusBarView: UIView = {
+        let view = UIView(frame: UIApplication.shared.statusBarFrame)
+        view.isUserInteractionEnabled = false
+        return view
+    }()
 
     private lazy var shadowView = UIView()
     private var shadowViewLeadingConstraint: Constraint?
