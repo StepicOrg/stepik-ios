@@ -465,7 +465,13 @@ extension StyledNavigationController: UINavigationControllerDelegate {
                     }
                 } else {
                     // Rollback appearance
-                    let sourceControllerAppearance = strongSelf.getNavigationBarAppearance(for: fromViewController)
+                    let sourceControllerAppearance: NavigationBarAppearanceState = {
+                        if let navigationController = fromViewController as? UINavigationController,
+                           let topViewController = navigationController.topViewController {
+                            return strongSelf.getNavigationBarAppearance(for: topViewController)
+                        }
+                        return strongSelf.getNavigationBarAppearance(for: fromViewController)
+                    }()
 
                     strongSelf.changeBackgroundColor(sourceControllerAppearance.backgroundColor)
                     strongSelf.changeStatusBarColor(sourceControllerAppearance.statusBarColor)
