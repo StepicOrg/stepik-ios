@@ -70,8 +70,14 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             self?.presenter?.refresh(shouldReload: true)
         }), for: .connectionError)
 
+        let settingsImage: UIImage? = {
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "gear")
+            }
+            return UIImage(named: "icon-settings-profile")
+        }()
         self.settingsButton = UIBarButtonItem(
-            image: UIImage(named: "icon-settings-profile").require(),
+            image: settingsImage,
             style: .plain,
             target: self,
             action: #selector(self.settingsButtonClicked)
