@@ -146,11 +146,12 @@ class StyledNavigationController: UINavigationController {
     func changeBackgroundColor(_ color: UIColor, sender: UIViewController) {
         guard sender === self.topViewController else {
             self.navigationBarAppearanceForController[sender.hashValue]?.backgroundColor = color
+            self.navigationBarAppearanceForController[sender.hashValue]?.statusBarColor = color
             return
         }
 
-        self.changeStatusBarColor(color, sender: sender)
         self.changeBackgroundColor(color)
+        self.changeStatusBarColor(color)
     }
 
     /// Change color of status bar background
@@ -492,102 +493,6 @@ extension StyledNavigationController: UINavigationControllerDelegate {
         self.multicastDelegate.invoke { delegate in
             delegate.navigationController?(navigationController, didShow: viewController, animated: animated)
         }
-    }
-
-    // MARK: Supporting Custom Transition Animations
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        animationControllerFor operation: UINavigationController.Operation,
-        from fromVC: UIViewController,
-        to toVC: UIViewController
-    ) -> UIViewControllerAnimatedTransitioning? {
-        var animatedTransitioning: UIViewControllerAnimatedTransitioning?
-
-        self.multicastDelegate.invoke { delegate in
-            if animatedTransitioning != nil {
-                return
-            }
-
-            if let transitioning = delegate.navigationController?(
-                navigationController,
-                animationControllerFor: operation,
-                from: fromVC,
-                to: toVC
-            ) {
-                animatedTransitioning = transitioning
-            }
-        }
-
-        return animatedTransitioning
-    }
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        interactionControllerFor animationController: UIViewControllerAnimatedTransitioning
-    ) -> UIViewControllerInteractiveTransitioning? {
-        var interactiveTransitioning: UIViewControllerInteractiveTransitioning?
-
-        self.multicastDelegate.invoke { delegate in
-            if interactiveTransitioning != nil {
-                return
-            }
-
-            if let transitioning = delegate.navigationController?(
-                navigationController,
-                interactionControllerFor: animationController
-            ) {
-                interactiveTransitioning = transitioning
-            }
-        }
-
-        return interactiveTransitioning
-    }
-
-    func navigationControllerPreferredInterfaceOrientationForPresentation(
-        _ navigationController: UINavigationController
-    ) -> UIInterfaceOrientation {
-        var interfaceOrientation: UIInterfaceOrientation?
-
-        self.multicastDelegate.invoke { delegate in
-            if interfaceOrientation != nil {
-                return
-            }
-
-            if let orientation = delegate.navigationControllerPreferredInterfaceOrientationForPresentation?(
-                navigationController
-            ) {
-                interfaceOrientation = orientation
-            }
-        }
-
-        if let interfaceOrientation = interfaceOrientation {
-            return interfaceOrientation
-        }
-
-        return DeviceInfo.current.orientation.interface
-    }
-
-    func navigationControllerSupportedInterfaceOrientations(
-        _ navigationController: UINavigationController
-    ) -> UIInterfaceOrientationMask {
-        var interfaceOrientationMask: UIInterfaceOrientationMask?
-
-        self.multicastDelegate.invoke { delegate in
-            if interfaceOrientationMask != nil {
-                return
-            }
-
-            if let mask = delegate.navigationControllerSupportedInterfaceOrientations?(navigationController) {
-                interfaceOrientationMask = mask
-            }
-        }
-
-        if let interfaceOrientationMask = interfaceOrientationMask {
-            return interfaceOrientationMask
-        }
-
-        return .all
     }
 }
 
