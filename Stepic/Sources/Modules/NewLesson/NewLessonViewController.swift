@@ -389,8 +389,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         DispatchQueue.global().async {
             let link = data.stepLinkMaker("\((self.currentIndex ?? 0) + 1)")
             let sharingViewController = SharingHelper.getSharingController(link)
-            sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
             DispatchQueue.main.async {
+                sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
                 self.present(sharingViewController, animated: true, completion: nil)
             }
         }
