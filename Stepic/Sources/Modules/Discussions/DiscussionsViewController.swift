@@ -250,7 +250,12 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
             output: self.interactor as? WriteCommentOutputProtocol
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
-        self.present(navigationController, animated: true)
+
+        if #available(iOS 13.0, *) {
+            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .automatic)
+        } else {
+            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .fullScreen)
+        }
     }
 
     func displayCommentCreate(viewModel: Discussions.CommentCreated.ViewModel) {

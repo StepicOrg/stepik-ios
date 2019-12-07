@@ -55,8 +55,7 @@ final class ProfileEditViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if #available(iOS 13.0, *),
-           let styledNavigationController = self.navigationController as? StyledNavigationController {
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeStatusBarColor(.clear, sender: self)
         }
     }

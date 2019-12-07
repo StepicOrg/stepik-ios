@@ -257,11 +257,11 @@ extension NewStepViewController: NewStepViewDelegate {
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-            self.present(alert, animated: true)
+            self.present(alert, animated: true, completion: nil)
         } else if isVideoCached || isVideoPlayingReachable {
             let assembly = StepicVideoPlayerLegacyAssembly(video: video)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
-            self.present(assembly.makeModule(), animated: true)
+            self.present(module: assembly.makeModule(), embedInNavigation: false, modalPresentationStyle: .fullScreen)
         }
     }
 

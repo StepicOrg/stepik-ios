@@ -9,6 +9,29 @@
 import ActionSheetPicker_3_0
 import UIKit
 
+// MARK: Appearance -
+
+extension CodeEditorSettingsViewController {
+    enum Appearance {
+        static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
+            if #available(iOS 13.0, *) {
+                return .init(
+                    shadowViewAlpha: 1.0,
+                    backgroundColor: StyledNavigationController.Appearance.backgroundColor,
+                    statusBarColor: .clear,
+                    textColor: StyledNavigationController.Appearance.tintColor,
+                    tintColor: StyledNavigationController.Appearance.tintColor,
+                    statusBarStyle: .lightContent
+                )
+            } else {
+                return .init()
+            }
+        }
+    }
+}
+
+// MARK: - CodeEditorSettingsLegacyAssembly: Assembly -
+
 @available(*, deprecated, message: "Class to initialize code editor settings w/o storyboards logic")
 final class CodeEditorSettingsLegacyAssembly: Assembly {
     private let previewLanguage: CodeLanguage
@@ -32,6 +55,8 @@ final class CodeEditorSettingsLegacyAssembly: Assembly {
         return viewController
     }
 }
+
+// MARK: - CodeEditorSettingsViewController: MenuViewController -
 
 final class CodeEditorSettingsViewController: MenuViewController {
     var presenter: CodeEditorSettingsPresenter?
@@ -57,6 +82,14 @@ final class CodeEditorSettingsViewController: MenuViewController {
         self.layoutTableHeaderView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assert(
+            self.navigationController != nil,
+            "\(CodeEditorSettingsViewController.self) must be presented in a \(UINavigationController.self)"
+        )
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -66,6 +99,13 @@ final class CodeEditorSettingsViewController: MenuViewController {
             fontSize: PreferencesContainer.codeEditor.fontSize,
             language: self.previewLanguage
         )
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeStatusBarColor(
+                Appearance.navigationBarAppearance.statusBarColor,
+                sender: self
+            )
+        }
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -96,6 +136,8 @@ final class CodeEditorSettingsViewController: MenuViewController {
         self.tableView.tableHeaderView = tableHeaderView
     }
 }
+
+// MARK: - CodeEditorSettingsViewController: CodeEditorSettingsView -
 
 extension CodeEditorSettingsViewController: CodeEditorSettingsView {
     func setMenu(menu: Menu) {
@@ -151,6 +193,16 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
         self.previewView.updateFontSize(with: fontSize)
     }
 }
+
+// MARK: - CodeEditorSettingsViewController: StyledNavigationControllerPresentable -
+
+extension CodeEditorSettingsViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return Appearance.navigationBarAppearance
+    }
+}
+
+// MARK: - CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate -
 
 extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {

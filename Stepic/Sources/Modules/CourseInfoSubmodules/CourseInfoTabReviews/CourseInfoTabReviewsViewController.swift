@@ -111,7 +111,11 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
         )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        self.present(module: controller)
+        if #available(iOS 13.0, *) {
+            self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .automatic)
+        } else {
+            self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .fullScreen)
+        }
     }
 
     func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel) {

@@ -247,7 +247,12 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
         let assembly = ProfileEditAssembly(profile: profile)
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
-        self.present(module: controller)
+
+        if #available(iOS 13.0, *) {
+            self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .automatic)
+        } else {
+            self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .fullScreen)
+        }
     }
 
     @objc func shareButtonPressed() {

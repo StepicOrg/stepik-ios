@@ -42,7 +42,11 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
         let viewController = assembly.makeModule()
         viewController.title = viewModel.lessonTitle
 
-        self.present(moduleStack: [viewController])
+        if #available(iOS 13.0, *) {
+            self.present(moduleStack: [viewController], modalPresentationStyle: .automatic)
+        } else {
+            self.present(moduleStack: [viewController], modalPresentationStyle: .fullScreen)
+        }
     }
 }
 

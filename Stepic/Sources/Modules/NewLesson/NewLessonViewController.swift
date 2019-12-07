@@ -425,7 +425,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
         alert.popoverPresentationController?.barButtonItem = self.moreBarButtonItem
 
-        self.present(module: alert)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -527,7 +527,12 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
             output: self.interactor as? EditStepOutputProtocol
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
-        self.present(navigationController, animated: true)
+
+        if #available(iOS 13.0, *) {
+            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .automatic)
+        } else {
+            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .fullScreen)
+        }
     }
 
     func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel) {

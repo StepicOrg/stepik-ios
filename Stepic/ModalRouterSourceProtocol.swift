@@ -9,23 +9,32 @@
 import UIKit
 
 protocol ModalRouterSourceProtocol {
-    func present(module: UIViewController, embedInNavigation: Bool)
+    func present(module: UIViewController, embedInNavigation: Bool, modalPresentationStyle: UIModalPresentationStyle)
 }
 
 protocol ModalStackRouterSourceProtocol {
-    func present(moduleStack: [UIViewController])
+    func present(moduleStack: [UIViewController], modalPresentationStyle: UIModalPresentationStyle)
 }
 
 extension UIViewController: ModalRouterSourceProtocol, ModalStackRouterSourceProtocol {
     @objc
-    func present(module: UIViewController, embedInNavigation: Bool = false) {
+    func present(
+        module: UIViewController,
+        embedInNavigation: Bool = false,
+        modalPresentationStyle: UIModalPresentationStyle = .fullScreen
+    ) {
         let moduleToPresent = embedInNavigation ? self.getEmbedded(moduleStack: [module]) : module
+        moduleToPresent.modalPresentationStyle = modalPresentationStyle
         self.present(moduleToPresent, animated: true)
     }
 
     @objc
-    func present(moduleStack: [UIViewController]) {
+    func present(
+        moduleStack: [UIViewController],
+        modalPresentationStyle: UIModalPresentationStyle = .fullScreen
+    ) {
         let moduleToPresent = self.getEmbedded(moduleStack: moduleStack)
+        moduleToPresent.modalPresentationStyle = modalPresentationStyle
         self.present(moduleToPresent, animated: true, completion: nil)
     }
 

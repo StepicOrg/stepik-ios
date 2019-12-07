@@ -1,7 +1,28 @@
 import SVProgressHUD
 import UIKit
 
-// MARK: EditStepViewControllerProtocol -
+// MARK: Appearance -
+
+extension EditStepViewController {
+    enum Appearance {
+        static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
+            if #available(iOS 13.0, *) {
+                return .init(
+                    shadowViewAlpha: 1.0,
+                    backgroundColor: StyledNavigationController.Appearance.backgroundColor,
+                    statusBarColor: .clear,
+                    textColor: StyledNavigationController.Appearance.tintColor,
+                    tintColor: StyledNavigationController.Appearance.tintColor,
+                    statusBarStyle: .lightContent
+                )
+            } else {
+                return .init()
+            }
+        }
+    }
+}
+
+// MARK: - EditStepViewControllerProtocol -
 
 protocol EditStepViewControllerProtocol: class {
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel)
@@ -66,6 +87,11 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
         self.title = NSLocalizedString("EditStepTitle", comment: "")
         self.edgesForExtendedLayout = []
 
+        // Disable swipe down to dismiss
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+
         self.navigationItem.leftBarButtonItem = self.cancelBarButtonItem
         self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
         self.doneBarButtonItem.isEnabled = false
@@ -74,6 +100,25 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
 
         self.updateState(newState: self.state)
         self.interactor.doStepSourceLoad(request: .init())
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assert(
+            self.navigationController != nil,
+            "\(EditStepViewController.self) must be presented in a \(UINavigationController.self)"
+        )
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeStatusBarColor(
+                Appearance.navigationBarAppearance.statusBarColor,
+                sender: self
+            )
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -170,5 +215,13 @@ extension EditStepViewController: EditStepViewControllerProtocol {
 extension EditStepViewController: EditStepViewDelegate {
     func editStepView(_ view: EditStepView, didChangeText text: String) {
         self.interactor.doStepSourceTextUpdate(request: .init(text: text))
+    }
+}
+
+// MARK: - EditStepViewController: StyledNavigationControllerPresentable -
+
+extension EditStepViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return Appearance.navigationBarAppearance
     }
 }
