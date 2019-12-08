@@ -467,7 +467,19 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayAuthorization(viewModel: CourseInfo.AuthorizationPresentation.ViewModel) {
-        RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+        RoutingManager.auth.routeFrom(
+            controller: self,
+            success: { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                // Refresh course state and continue learning
+                strongSelf.interactor.doCourseRefresh(request: .init())
+                strongSelf.interactor.doMainCourseAction(request: .init())
+            },
+            cancel: nil
+        )
     }
 
     func displayPaidCourseBuying(viewModel: CourseInfo.PaidCourseBuyingPresentation.ViewModel) {
