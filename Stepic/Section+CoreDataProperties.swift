@@ -32,6 +32,8 @@ extension Section {
     @NSManaged var managedCourse: Course?
     @NSManaged var managedProgress: Progress?
 
+    @NSManaged var managedDiscountingPolicy: String?
+
     static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.instance.context)!
     }
@@ -182,5 +184,18 @@ extension Section {
         get {
             return (self.managedUnitsArray as? [Int]) ?? []
         }
+    }
+
+    var discountingPolicy: String? {
+        get {
+            return self.managedDiscountingPolicy
+        }
+        set {
+            self.managedDiscountingPolicy = newValue
+        }
+    }
+
+    var discountingPolicyType: DiscountingPolicy {
+        return DiscountingPolicy(rawValue: self.discountingPolicy ?? "") ?? .noDiscount
     }
 }
