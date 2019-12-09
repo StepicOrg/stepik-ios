@@ -113,6 +113,42 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             return nil
         }()
 
+        let discountingPolicy: DiscountingPolicy = {
+            guard let section = step.lesson?.unit?.section else {
+                return .noDiscount
+            }
+
+            return section.discountingPolicyType
+        }()
+
+        let isDiscountingPolicyVisible = discountingPolicy != .noDiscount && quizStatus != .correct
+
+        let discountingPolicyText: String = {
+            switch discountingPolicy {
+            case .inverse:
+                return NSLocalizedString("DiscountPolicyInverseTitle", comment: "")
+            case .firstOne, .firstThree:
+                let remainingSubmissionCount = discountingPolicy.numberOfTries - submissionsCount
+                if remainingSubmissionCount > 0 {
+                    return String(
+                        format: StringHelper.pluralize(
+                            number: remainingSubmissionCount,
+                            forms: [
+                                NSLocalizedString("DiscountPolicyFirstNTitle1", comment: ""),
+                                NSLocalizedString("DiscountPolicyFirstNTitle234", comment: ""),
+                                NSLocalizedString("DiscountPolicyFirstNTitle567890", comment: "")
+                            ]
+                        ),
+                        "\(remainingSubmissionCount)"
+                    )
+                } else {
+                    return NSLocalizedString("DiscountPolicyNoWayTitle", comment: "")
+                }
+            default:
+                return ""
+            }
+        }()
+
         return BaseQuizViewModel(
             quizStatus: quizStatus,
             reply: submission?.reply ?? cachedReply,
@@ -128,7 +164,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             hintContent: hintContent,
             codeDetails: codeDetails,
             canNavigateToNextStep: canNavigateToNextStep,
-            canRetry: canRetry
+            canRetry: canRetry,
+            discountingPolicyTitle: discountingPolicyText,
+            isDiscountingPolicyVisible: isDiscountingPolicyVisible
         )
     }
 

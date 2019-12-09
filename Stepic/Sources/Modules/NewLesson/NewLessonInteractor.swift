@@ -97,6 +97,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             // If unit exists then load assignments
             let assignmentsPromise: Promise<[Assignment]>
             if let unit = unit {
+                unit.lesson = lesson
                 assignmentsPromise = self.provider.fetchAssignments(ids: unit.assignmentsArray).map { $0.value ?? [] }
             } else {
                 assignmentsPromise = .value([])
@@ -127,6 +128,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                     return lesson.stepsArray.index(of: value) ?? 0
                 }
             }()
+
+            steps.forEach { $0.lesson = lesson }
 
             let data = NewLesson.LessonLoad.Data(
                 lesson: lesson,

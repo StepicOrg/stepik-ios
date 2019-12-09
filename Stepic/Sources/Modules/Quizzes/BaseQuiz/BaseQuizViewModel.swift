@@ -16,4 +16,6 @@ struct BaseQuizViewModel {
     let codeDetails: CodeDetails?
     let canNavigateToNextStep: Bool
     let canRetry: Bool
+    let discountingPolicyTitle: String
+    let isDiscountingPolicyVisible: Bool
 }

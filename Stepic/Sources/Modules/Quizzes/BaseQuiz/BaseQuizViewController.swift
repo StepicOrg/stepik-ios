@@ -100,6 +100,8 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
         self.baseQuizView?.isPeerReviewAvailable = data.shouldPassPeerReview
         self.baseQuizView?.isNextStepAvailable = data.canNavigateToNextStep
         self.baseQuizView?.isRetryAvailable = data.canRetry
+        self.baseQuizView?.isDiscountPolicyAvailable = data.isDiscountingPolicyVisible
+        self.baseQuizView?.discountPolicyTitle = data.discountingPolicyTitle
 
         if let status = data.quizStatus {
             switch status {
