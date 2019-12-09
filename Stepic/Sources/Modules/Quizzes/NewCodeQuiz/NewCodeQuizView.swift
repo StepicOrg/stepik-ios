@@ -24,8 +24,6 @@ final class NewCodeQuizView: UIView {
     let appearance: Appearance
     weak var delegate: NewCodeQuizViewDelegate?
 
-    private lazy var topSeparatorView = SeparatorView()
-
     // Only visible for sql quiz.
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -161,7 +159,6 @@ final class NewCodeQuizView: UIView {
             self.titleLabelContainerView.isHidden = viewModel.title?.isEmpty ?? true
             self.toolbarView.isHidden = !self.titleLabelContainerView.isHidden
         } else {
-            self.topSeparatorView.backgroundColor = .clear
             self.titleLabelContainerView.isHidden = true
         }
     }
@@ -183,22 +180,14 @@ final class NewCodeQuizView: UIView {
 
 extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
-        self.topSeparatorContainerView.addSubview(self.topSeparatorView)
         self.titleLabelContainerView.addSubview(self.titleLabel)
-
         self.addSubview(self.stackView)
     }
 
     func makeConstraints() {
-        self.topSeparatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.topSeparatorView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.insets.top)
-            make.bottom.leading.trailing.equalToSuperview()
-        }
-
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.insets.top)
+            make.top.equalToSuperview()
             make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)

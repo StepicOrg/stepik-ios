@@ -7,9 +7,6 @@ protocol NewFreeAnswerQuizViewDelegate: class {
 
 extension NewFreeAnswerQuizView {
     struct Appearance {
-        let separatorColor = UIColor(hex: 0xEAECF0)
-        let separatorHeight: CGFloat = 1
-
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
@@ -28,12 +25,6 @@ extension NewFreeAnswerQuizView {
 final class NewFreeAnswerQuizView: UIView {
     let appearance: Appearance
     weak var delegate: NewFreeAnswerQuizViewDelegate?
-
-    private lazy var separatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = self.appearance.separatorColor
-        return view
-    }()
 
     private lazy var textView: TableInputTextView = {
         let textView = TableInputTextView()
@@ -61,9 +52,7 @@ final class NewFreeAnswerQuizView: UIView {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(
-            arrangedSubviews: [self.separatorView, self.textFieldContainerView]
-        )
+        let stackView = UIStackView(arrangedSubviews: [self.textFieldContainerView])
         stackView.spacing = self.appearance.spacing
         stackView.axis = .vertical
         return stackView
@@ -114,11 +103,6 @@ extension NewFreeAnswerQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func makeConstraints() {
-        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.separatorView.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.separatorHeight)
-        }
-
         self.textView.translatesAutoresizingMaskIntoConstraints = false
         self.textView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
