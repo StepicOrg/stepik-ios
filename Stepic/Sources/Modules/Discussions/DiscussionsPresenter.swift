@@ -1,3 +1,4 @@
+import Kanna
 import UIKit
 
 protocol DiscussionsPresenterProtocol {
@@ -223,6 +224,15 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             return nil
         }()
 
+        let strippedText: String = {
+            do {
+                let htmlDocument = try Kanna.HTML(html: comment.text, encoding: .utf8)
+                return htmlDocument.css("*").first?.text ?? comment.text
+            } catch {
+                return comment.text
+            }
+        }()
+
         return DiscussionsCommentViewModel(
             id: comment.id,
             avatarImageURL: avatarImageURL,
@@ -231,7 +241,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             isPinned: comment.isPinned,
             isSelected: isSelected,
             username: username,
-            rawText: comment.text,
+            strippedText: strippedText,
             processedText: text,
             isWebViewSupportNeeded: isWebViewSupportNeeded,
             formattedDate: formattedDate,
