@@ -25,8 +25,8 @@ extension BaseQuizView {
         let retryButtonBackgroundColor = UIColor.white
         let retryButtonTintColor = UIColor(hex: 0xC8C7CC)
 
-        let discountingPolicyTitleColor = UIColor.mainDark
-        let discountingPolicyTitleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+        let discountingPolicyTextColor = UIColor.mainDark
+        let discountingPolicyFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let spacing: CGFloat = 16
 
@@ -63,8 +63,8 @@ final class BaseQuizView: UIView {
 
     private lazy var discountingPolicyLabel: UILabel = {
         let label = UILabel()
-        label.textColor = self.appearance.discountingPolicyTitleColor
-        label.font = self.appearance.discountingPolicyTitleFont
+        label.textColor = self.appearance.discountingPolicyTextColor
+        label.font = self.appearance.discountingPolicyFont
         label.numberOfLines = 0
         return label
     }()

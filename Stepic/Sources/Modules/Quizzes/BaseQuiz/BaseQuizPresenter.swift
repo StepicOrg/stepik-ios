@@ -113,14 +113,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             return nil
         }()
 
-        let discountingPolicy: DiscountingPolicy = {
-            guard let section = step.lesson?.unit?.section else {
-                return .noDiscount
-            }
-
-            return section.discountingPolicyType
-        }()
-
+        let discountingPolicy = step.lesson?.unit?.section?.discountingPolicyType ?? .noDiscount
         let isDiscountingPolicyVisible = discountingPolicy != .noDiscount && quizStatus != .correct
 
         let discountingPolicyText: String = {
