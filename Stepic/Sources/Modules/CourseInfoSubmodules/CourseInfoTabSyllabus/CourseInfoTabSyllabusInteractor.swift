@@ -341,6 +341,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
         let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(in: course)
             || self.personalDeadlinesService.hasDeadlines(in: course)
+        let isPersonalDeadlinesEnabled = course.enrolled
 
         let courseDownloadState = self.getDownloadingStateForCourse()
 
@@ -356,6 +357,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.presenter.presentCourseSyllabusHeader(
             response: .init(
                 isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
+                isPersonalDeadlinesEnabled: isPersonalDeadlinesEnabled,
                 isDownloadAllAvailable: isDownloadAllAvailable,
                 isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton,
                 courseDownloadState: courseDownloadState

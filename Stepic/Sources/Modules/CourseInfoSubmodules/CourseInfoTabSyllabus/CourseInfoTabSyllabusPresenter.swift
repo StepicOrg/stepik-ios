@@ -173,6 +173,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response) {
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
+            isDeadlineButtonEnabled: response.isPersonalDeadlinesEnabled,
             isDownloadAllButtonEnabled: response.isDownloadAllAvailable,
             isDeadlineTooltipVisible: response.isPersonalDeadlinesTooltipVisible,
             courseDownloadState: response.courseDownloadState

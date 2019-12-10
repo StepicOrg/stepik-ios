@@ -112,6 +112,7 @@ final class CourseInfoTabSyllabusView: UIView {
     func configure(headerViewModel: CourseInfoTabSyllabusHeaderViewModel) {
         self.headerView.isDownloadAllButtonEnabled = headerViewModel.isDownloadAllButtonEnabled
         self.headerView.shouldShowCalendarButton = headerViewModel.isDeadlineButtonVisible
+        self.headerView.isCalendarButtonEnabled = headerViewModel.isDeadlineButtonEnabled
         self.headerView.courseDownloadState = headerViewModel.courseDownloadState
     }
 }

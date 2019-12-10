@@ -2,6 +2,7 @@ import Foundation
 
 struct CourseInfoTabSyllabusHeaderViewModel {
     let isDeadlineButtonVisible: Bool
+    let isDeadlineButtonEnabled: Bool
     let isDownloadAllButtonEnabled: Bool
     let isDeadlineTooltipVisible: Bool
 
