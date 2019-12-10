@@ -16,31 +16,33 @@ final class Section: NSManagedObject, IDFetchable {
 
     required convenience init(json: JSON) {
         self.init()
-        initialize(json)
+        self.initialize(json)
     }
 
     func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        title = json["title"].stringValue
-        position = json["position"].intValue
-        isActive = json["is_active"].boolValue
-        progressId = json["progress"].string
-        beginDate = Parser.shared.dateFromTimedateJSON(json["begin_date"])
-        endDate = Parser.shared.dateFromTimedateJSON(json["end_date"])
-        softDeadline = Parser.shared.dateFromTimedateJSON(json["soft_deadline"])
-        hardDeadline = Parser.shared.dateFromTimedateJSON(json["hard_deadline"])
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.title = json[JSONKey.title.rawValue].stringValue
+        self.position = json[JSONKey.position.rawValue].intValue
+        self.isActive = json[JSONKey.isActive.rawValue].boolValue
+        self.progressId = json[JSONKey.progress.rawValue].string
+        self.beginDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
+        self.endDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
+        self.softDeadline = Parser.shared.dateFromTimedateJSON(json[JSONKey.softDeadline.rawValue])
+        self.hardDeadline = Parser.shared.dateFromTimedateJSON(json[JSONKey.hardDeadline.rawValue])
 
-        testSectionAction = json["actions"]["test_section"].string
-        isExam = json["is_exam"].boolValue
-        unitsArray = json["units"].arrayObject as! [Int]
-        courseId = json["course"].intValue
+        self.testSectionAction = json[JSONKey.actions.rawValue][JSONKey.testSection.rawValue].string
+        self.isExam = json[JSONKey.isExam.rawValue].boolValue
+        self.unitsArray = json[JSONKey.units.rawValue].arrayObject as! [Int]
+        self.courseId = json[JSONKey.course.rawValue].intValue
+
+        self.discountingPolicy = json[JSONKey.discountingPolicy.rawValue].string
     }
 
     func update(json: JSON) {
-        initialize(json)
+        self.initialize(json)
     }
 
-    static func fetch(_ ids: [Int]) -> [Section] {
+    static func fetch(_ ids: [IdType]) -> [Section] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Section")
         let idPredicates = ids.map { NSPredicate(format: "managedId == %@", $0 as NSNumber) }
         request.predicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
@@ -223,7 +225,27 @@ final class Section: NSManagedObject, IDFetchable {
     var isReachable: Bool {
         return (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
     }
+
+    enum JSONKey: String {
+        case id
+        case title
+        case position
+        case isActive = "is_active"
+        case progress
+        case beginDate = "begin_date"
+        case endDate = "end_date"
+        case softDeadline = "soft_deadline"
+        case hardDeadline = "hard_deadline"
+        case actions
+        case testSection = "test_section"
+        case isExam = "is_exam"
+        case units
+        case course
+        case discountingPolicy = "discounting_policy"
+    }
 }
+
+// MARK: - Section: NextLessonServiceSectionSourceProtocol -
 
 extension Section: NextLessonServiceSectionSourceProtocol {
     var unitsList: [NextLessonServiceUnitSourceProtocol] {

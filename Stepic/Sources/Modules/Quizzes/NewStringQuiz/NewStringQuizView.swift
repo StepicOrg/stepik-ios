@@ -7,9 +7,6 @@ protocol NewStringQuizViewDelegate: class {
 
 extension NewStringQuizView {
     struct Appearance {
-        let separatorColor = UIColor(hex: 0xEAECF0)
-        let separatorHeight: CGFloat = 1
-
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
@@ -37,12 +34,6 @@ extension NewStringQuizView {
 final class NewStringQuizView: UIView {
     let appearance: Appearance
     weak var delegate: NewStringQuizViewDelegate?
-
-    private lazy var separatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = self.appearance.separatorColor
-        return view
-    }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -82,7 +73,7 @@ final class NewStringQuizView: UIView {
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
-            arrangedSubviews: [self.separatorView, self.titleLabelContainerView, self.textFieldContainerView]
+            arrangedSubviews: [self.titleLabelContainerView, self.textFieldContainerView]
         )
         stackView.spacing = self.appearance.spacing
         stackView.axis = .vertical
@@ -175,11 +166,6 @@ extension NewStringQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func makeConstraints() {
-        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.separatorView.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.separatorHeight)
-        }
-
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()

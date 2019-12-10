@@ -69,8 +69,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             return self.provider.fetchSubmissions(for: self.step, attempt: attempt).map { (attempt, $0.0.first) }
         }.then(on: queue) { attempt, submission -> Guarantee<(Attempt, Submission?, Reply?, Int)> in
             let cachedReply = ReplyCache.shared.getReply(forStepId: self.step.id, attemptId: attempt.id)
-            return (self.step.hasSubmissionRestrictions ? self.countSubmissions() : Guarantee.value(0))
-                .map { (attempt, submission, cachedReply, $0) }
+            return self.countSubmissions().map { (attempt, submission, cachedReply, $0) }
         }.done { attempt, submission, cachedReply, submissionLimit in
             self.submissionsCount = submissionLimit
             self.currentAttempt = attempt
