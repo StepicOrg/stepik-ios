@@ -232,6 +232,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 return comment.text
             }
         }()
+        let strippedAndTrimmedText = strippedText.trimmingCharacters(in: .whitespacesAndNewlines)
 
         return DiscussionsCommentViewModel(
             id: comment.id,
@@ -241,7 +242,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             isPinned: comment.isPinned,
             isSelected: isSelected,
             username: username,
-            strippedText: strippedText,
+            strippedText: strippedAndTrimmedText,
             processedText: text,
             isWebViewSupportNeeded: isWebViewSupportNeeded,
             formattedDate: formattedDate,
