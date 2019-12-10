@@ -66,7 +66,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         }
     }
 
-    var isCalendarButtonEnabled: Bool = false {
+    var isCalendarButtonEnabled: Bool = true {
         didSet {
             self.calendarButton.isEnabled = self.isCalendarButtonEnabled
         }
