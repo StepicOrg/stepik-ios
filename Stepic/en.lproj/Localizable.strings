@@ -760,6 +760,7 @@ PeerReviewFeedbackTitle = "This is a task with peer review. Tap to open in web t
 NextStepNavigationTitle = "Next";
 DiscountPolicyInverseTitle = "After every wrong submission your maximum points will be reduced";
 DiscountPolicyNoWayTitle = "You will not get points for the next attempts";
+DiscountPolicyHalfTitle = "For next attempts, you will be able to get half of points";
 DiscountPolicyFirstNTitle1 = "You have %@ attempt, for which you will get points";
 DiscountPolicyFirstNTitle234 = "You have %@ attempts, for which you will get points";
 DiscountPolicyFirstNTitle567890 = "You have %@ attempts, for which you will get points";

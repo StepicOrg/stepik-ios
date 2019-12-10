@@ -1,3 +1,4 @@
+import SwiftDate
 import UIKit
 
 protocol BaseQuizPresenterProtocol {
@@ -114,33 +115,10 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         }()
 
         let discountingPolicy = step.lesson?.unit?.section?.discountingPolicyType ?? .noDiscount
-        let isDiscountingPolicyVisible = discountingPolicy != .noDiscount && quizStatus != .correct
+        let discountingPolicyTitle = self.makeDiscountingPolicyTitle(step: step, submissionsCount: submissionsCount)
 
-        let discountingPolicyText: String = {
-            switch discountingPolicy {
-            case .inverse:
-                return NSLocalizedString("DiscountPolicyInverseTitle", comment: "")
-            case .firstOne, .firstThree:
-                let remainingSubmissionCount = discountingPolicy.numberOfTries - submissionsCount
-                if remainingSubmissionCount > 0 {
-                    return String(
-                        format: StringHelper.pluralize(
-                            number: remainingSubmissionCount,
-                            forms: [
-                                NSLocalizedString("DiscountPolicyFirstNTitle1", comment: ""),
-                                NSLocalizedString("DiscountPolicyFirstNTitle234", comment: ""),
-                                NSLocalizedString("DiscountPolicyFirstNTitle567890", comment: "")
-                            ]
-                        ),
-                        "\(remainingSubmissionCount)"
-                    )
-                } else {
-                    return NSLocalizedString("DiscountPolicyNoWayTitle", comment: "")
-                }
-            default:
-                return ""
-            }
-        }()
+        let isDiscountingPolicyNotInTerminatedState = discountingPolicy != .noDiscount && quizStatus != .correct
+        let isDiscountingPolicyVisible = isDiscountingPolicyNotInTerminatedState || discountingPolicyTitle != nil
 
         return BaseQuizViewModel(
             quizStatus: quizStatus,
@@ -158,7 +136,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             codeDetails: codeDetails,
             canNavigateToNextStep: canNavigateToNextStep,
             canRetry: canRetry,
-            discountingPolicyTitle: discountingPolicyText,
+            discountingPolicyTitle: discountingPolicyTitle ?? "",
             isDiscountingPolicyVisible: isDiscountingPolicyVisible
         )
     }
@@ -241,5 +219,48 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         }
 
         return url
+    }
+
+    private func makeDiscountingPolicyTitle(step: Step, submissionsCount: Int) -> String? {
+        guard let section = step.lesson?.unit?.section else {
+            return nil
+        }
+
+        let currentDateInUTC = Date().convertTo(region: .UTC)
+        // If hardDeadline passed -> no points
+        // If softDeadline passed -> by default half of points
+        if let hardDeadline = section.hardDeadline {
+            if currentDateInUTC.date >= hardDeadline {
+                return NSLocalizedString("DiscountPolicyNoWayTitle", comment: "")
+            }
+        } else if let softDeadline = section.softDeadline {
+            if currentDateInUTC.date >= softDeadline {
+                return NSLocalizedString("DiscountPolicyHalfTitle", comment: "")
+            }
+        }
+
+        switch section.discountingPolicyType {
+        case .inverse:
+            return NSLocalizedString("DiscountPolicyInverseTitle", comment: "")
+        case .firstOne, .firstThree:
+            let remainingSubmissionCount = section.discountingPolicyType.numberOfTries - submissionsCount
+            if remainingSubmissionCount > 0 {
+                return String(
+                    format: StringHelper.pluralize(
+                        number: remainingSubmissionCount,
+                        forms: [
+                            NSLocalizedString("DiscountPolicyFirstNTitle1", comment: ""),
+                            NSLocalizedString("DiscountPolicyFirstNTitle234", comment: ""),
+                            NSLocalizedString("DiscountPolicyFirstNTitle567890", comment: "")
+                        ]
+                    ),
+                    "\(remainingSubmissionCount)"
+                )
+            } else {
+                return NSLocalizedString("DiscountPolicyNoWayTitle", comment: "")
+            }
+        default:
+            return nil
+        }
     }
 }

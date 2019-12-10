@@ -30,7 +30,7 @@ final class Unit: NSManagedObject, IDFetchable {
 
         beginDate = Parser.shared.dateFromTimedateJSON(json["begin_date"])
         softDeadline = Parser.shared.dateFromTimedateJSON(json["soft_deadline"])
-        hardDeadline = Parser.shared.dateFromTimedateJSON(json["soft_deadline"])
+        hardDeadline = Parser.shared.dateFromTimedateJSON(json["hard_deadline"])
     }
 
     func update(json: JSON) {

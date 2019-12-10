@@ -761,6 +761,7 @@ PeerReviewFeedbackTitle = "Это задание с рецензией. Нажм
 NextStepNavigationTitle = "Дальше";
 DiscountPolicyInverseTitle = "После каждого неправильного решения баллы, которые можно получить за задание, будут уменьшены";
 DiscountPolicyNoWayTitle = "За Ваши следующие попытки не будут начислены баллы";
+DiscountPolicyHalfTitle = "За Ваши следующие попытки Вы сможете получить половину баллов";
 DiscountPolicyFirstNTitle1 = "У Вас осталась %@ попытка, за которую Вы сможете получить баллы";
 DiscountPolicyFirstNTitle234 = "У Вас осталось %@ попытки, за которые Вы сможете получить баллы";
 DiscountPolicyFirstNTitle567890 = "У Вас осталось %@ попыток, за которые Вы сможете получить баллы";
