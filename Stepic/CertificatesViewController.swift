@@ -142,10 +142,10 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         )
 
         DispatchQueue.global(qos: .background).async {
-            let shareVC = SharingHelper.getSharingController(url.absoluteString)
-            shareVC.popoverPresentationController?.sourceView = button
+            let sharingViewController = SharingHelper.getSharingController(url.absoluteString)
             DispatchQueue.main.async {
-                self.present(shareVC, animated: true, completion: nil)
+                sharingViewController.popoverPresentationController?.sourceView = button
+                self.present(sharingViewController, animated: true, completion: nil)
             }
         }
     }

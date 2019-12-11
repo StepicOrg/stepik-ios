@@ -44,7 +44,13 @@ final class WebControllerManager: NSObject {
         error?("Could not dismiss web controller with key \(key)")
     }
 
-    private func presentCustomWebController(_ url: URL, inController c: UIViewController, allowsSafari: Bool = true, backButtonStyle: BackButtonStyle, animated: Bool = true) {
+    private func presentCustomWebController(
+        _ url: URL,
+        inController presentingViewController: UIViewController,
+        allowsSafari: Bool = true,
+        backButtonStyle: BackButtonStyle,
+        animated: Bool = true
+    ) {
         let controller = WebViewController(url: url)
         controller.allowsToOpenInSafari = allowsSafari
         controller.backButtonStyle = backButtonStyle
@@ -56,9 +62,12 @@ final class WebControllerManager: NSObject {
             self?.currentWebControllerKey = nil
         }
 
-        let nav = UINavigationController(rootViewController: controller)
-        self.currentWebController = nav
-        c.present(nav, animated: animated, completion: nil)
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.modalPresentationStyle = .fullScreen
+
+        self.currentWebController = navigationController
+
+        presentingViewController.present(navigationController, animated: animated, completion: nil)
     }
 
     func presentWebControllerWithURL(
@@ -94,9 +103,12 @@ final class WebControllerManager: NSObject {
             )
         } else {
             let safariViewController = SFSafariViewController(url: url)
-            controller.present(safariViewController, animated: true)
+            safariViewController.modalPresentationStyle = .fullScreen
+
             self.currentWebControllerKey = key
             self.currentWebController = safariViewController
+
+            controller.present(safariViewController, animated: true)
         }
     }
 

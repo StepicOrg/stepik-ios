@@ -482,6 +482,7 @@
 		2C4BE7DE221325FB00AEAC34 /* CourseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DD221325F400AEAC34 /* CourseReview.swift */; };
 		2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */; };
 		2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */; };
+		2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */; };
 		2C52F9F92342C98E00B0A151 /* WriteCourseReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C52F9F82342C98E00B0A151 /* WriteCourseReviewViewModel.swift */; };
 		2C53DFFA22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFED22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift */; };
 		2C53DFFB22DDDBFD0084BA2B /* NewCodeQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53DFEE22DDDBFD0084BA2B /* NewCodeQuizViewController.swift */; };
@@ -626,6 +627,8 @@
 		2CB9E8CB1F8397960004E17F /* NotificationsSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */; };
 		2CB9E8D01F839C8E0004E17F /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */; };
 		2CB9E8D11F839C8E0004E17F /* NotificationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */; };
+		2CBBCB9823980EB2006D6C15 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */; };
+		2CBBCB9A23980ED6006D6C15 /* WeakBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBCB9923980ED6006D6C15 /* WeakBox.swift */; };
 		2CBC4C061F1E4A1300FE96C4 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CBC4C051F1E4A1300FE96C4 /* Config.plist */; };
 		2CBCBD4A20D1AAFC000B5732 /* AchievementsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCBD4820D1AAFC000B5732 /* AchievementsListTableViewCell.swift */; };
 		2CBCBD4B20D1AAFC000B5732 /* AchievementsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */; };
@@ -1609,6 +1612,7 @@
 		2C4BE7DD221325F400AEAC34 /* CourseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReview.swift; sourceTree = "<group>"; };
 		2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReview+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+DarkContent.swift"; sourceTree = "<group>"; };
 		2C52F9F82342C98E00B0A151 /* WriteCourseReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCourseReviewViewModel.swift; sourceTree = "<group>"; };
 		2C53DFED22DDDBFD0084BA2B /* NewCodeQuizPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizPresenter.swift; sourceTree = "<group>"; };
 		2C53DFEE22DDDBFD0084BA2B /* NewCodeQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizViewController.swift; sourceTree = "<group>"; };
@@ -1752,6 +1756,8 @@
 		2CB9E8CA1F8397960004E17F /* NotificationsSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsSectionHeaderView.xib; sourceTree = "<group>"; };
 		2CB9E8CE1F839C8E0004E17F /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
 		2CB9E8CF1F839C8E0004E17F /* NotificationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsTableViewCell.xib; sourceTree = "<group>"; };
+		2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		2CBBCB9923980ED6006D6C15 /* WeakBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakBox.swift; sourceTree = "<group>"; };
 		2CBC4C051F1E4A1300FE96C4 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		2CBCBD4820D1AAFC000B5732 /* AchievementsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsListTableViewCell.swift; sourceTree = "<group>"; };
 		2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementsListTableViewCell.xib; sourceTree = "<group>"; };
@@ -2455,14 +2461,6 @@
 			name = Notifications;
 			sourceTree = "<group>";
 		};
-		08368C061F6FFF7D00173F8C /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
-			);
-			name = TabBar;
-			sourceTree = "<group>";
-		};
 		083749281DE5AE1400144C14 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -2685,7 +2683,6 @@
 		08484EDF211AF41A0006266F /* Stories */ = {
 			isa = PBXGroup;
 			children = (
-				08484EE4211AF42E0006266F /* CachedValue.swift */,
 				08484EE6211AF42E0006266F /* SegmentedProgressView.swift */,
 				08484EED211AF4300006266F /* Story.swift */,
 				08D2F72C2122E4B5009BA052 /* StoryNavigationDelegate.swift */,
@@ -2935,7 +2932,6 @@
 				08D565C91C5F7CF000DE2B6A /* Quizzes */,
 				0828FF841BC81EA9000AFEA7 /* Registration&SignIn */,
 				08484EDF211AF41A0006266F /* Stories */,
-				08368C061F6FFF7D00173F8C /* TabBar */,
 				08EF9A0B1C91D12700433E4A /* VideoPlayer */,
 			);
 			name = Controllers;
@@ -3585,6 +3581,7 @@
 			isa = PBXGroup;
 			children = (
 				62E9866C8BA98FF768F487E2 /* UICollectionViewExtensions.swift */,
+				2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */,
 				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
 			);
 			path = UIKit;
@@ -4520,13 +4517,16 @@
 		2CD462E8226F424A004E4725 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				08484EE4211AF42E0006266F /* CachedValue.swift */,
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
 				2C3DAB90233D735D00453B1C /* FontSize.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
+				2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
+				2CBBCB9923980ED6006D6C15 /* WeakBox.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -4900,6 +4900,7 @@
 			isa = PBXGroup;
 			children = (
 				62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */,
+				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -6273,6 +6274,7 @@
 				08484F03211AF4320006266F /* SegmentedProgressView.swift in Sources */,
 				0861E6721CD80A9600B45652 /* Executable.swift in Sources */,
 				083AABE91BE8D63D005E1E96 /* Progress.swift in Sources */,
+				2CBBCB9823980EB2006D6C15 /* MulticastDelegate.swift in Sources */,
 				86BB7C022019538100063538 /* CongratsView.swift in Sources */,
 				08B062DD1FDEFD5900A6C999 /* StreaksAlertPresentationManager.swift in Sources */,
 				2CA3DAA12179C6F600F43888 /* NotificationsRegistrationService.swift in Sources */,
@@ -6853,6 +6855,7 @@
 				62E9854D204FADAEDD044CAD /* NibLoadable.swift in Sources */,
 				62E9824265673F973F160C0A /* ProgressCircleImage.swift in Sources */,
 				62E981DD043FB3AEC3BDB669 /* PaddingLabel.swift in Sources */,
+				2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */,
 				62E989403A2025381E5B308B /* BounceButton.swift in Sources */,
 				62E98382AC35194D9C0CE966 /* UITableViewExtensions.swift in Sources */,
 				62E98C3B15ABFA56C29FEC3B /* UICollectionViewExtensions.swift in Sources */,
@@ -6935,6 +6938,7 @@
 				2CAB5C7D22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift in Sources */,
 				62E9823AE017E3E0C20F076A /* ContinueCourseView.swift in Sources */,
 				62E98E651364CDC640E357E7 /* CourseListsCollectionAssembly.swift in Sources */,
+				2CBBCB9A23980ED6006D6C15 /* WeakBox.swift in Sources */,
 				62E98A522931AE7AD51BB1D6 /* CourseListsCollectionViewController.swift in Sources */,
 				2C2D2D8B22E9FC2F003F1563 /* CodeEditorView.swift in Sources */,
 				62E98B53ADFF97347B179BA7 /* CourseListsCollectionInteractor.swift in Sources */,

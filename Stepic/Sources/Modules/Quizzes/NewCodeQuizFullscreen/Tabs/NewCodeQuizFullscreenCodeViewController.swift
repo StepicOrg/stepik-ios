@@ -106,12 +106,7 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         super.viewDidLoad()
 
         self.addSubviews()
-        self.isSubmitButtonHidden = false
-
-        self.codeEditorView.language = self.language
-        self.codeEditorView.isLanguageNameVisible = true
-        self.codeEditorView.codeTemplate = self.codeTemplate
-        self.codeEditorView.code = self.code
+        self.setupCodeEditor()
     }
 
     // MARK: - Private API
@@ -138,6 +133,13 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
                 .offset(-Appearance.submitButtonInsets.bottom)
             make.height.equalTo(Appearance.submitButtonHeight)
         }
+    }
+
+    private func setupCodeEditor() {
+        self.codeEditorView.language = self.language
+        self.codeEditorView.isLanguageNameVisible = true
+        self.codeEditorView.codeTemplate = self.codeTemplate
+        self.codeEditorView.code = self.code
     }
 
     @objc

@@ -122,8 +122,6 @@ final class SocialAuthViewController: UIViewController {
         presenter = SocialAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), splitTestingService: SplitTestingService(analyticsService: AnalyticsUserProperties(), storage: UserDefaults.standard), view: self)
         presenter?.update()
 
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "SocialAuthCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SocialAuthCollectionViewCell.reuseId)

@@ -205,15 +205,32 @@ extension NewStepViewController: NewStepViewControllerProtocol {
         let discussionsViewController = discussionsAssembly.makeModule()
 
         if viewModel.embeddedInWriteComment {
+            let (modalPresentationStyle, navigationBarAppearance) = {
+                () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+                if #available(iOS 13.0, *) {
+                    return (
+                        .automatic,
+                        .init(
+                            statusBarColor: .clear,
+                            statusBarStyle: .lightContent
+                        )
+                    )
+                } else {
+                    return (.fullScreen, .init())
+                }
+            }()
+
             let writeCommentAssembly = WriteCommentAssembly(
                 targetID: viewModel.stepID,
                 parentID: nil,
                 presentationContext: .create,
+                navigationBarAppearance: navigationBarAppearance,
                 output: discussionsAssembly.moduleInput
             )
             let writeCommentNavigationController = StyledNavigationController(
                 rootViewController: writeCommentAssembly.makeModule()
             )
+            writeCommentNavigationController.modalPresentationStyle = modalPresentationStyle
 
             self.navigationController?.present(
                 writeCommentNavigationController,
@@ -257,11 +274,11 @@ extension NewStepViewController: NewStepViewDelegate {
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-            self.present(alert, animated: true)
+            self.present(alert, animated: true, completion: nil)
         } else if isVideoCached || isVideoPlayingReachable {
             let assembly = StepicVideoPlayerLegacyAssembly(video: video)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
-            self.present(assembly.makeModule(), animated: true)
+            self.present(module: assembly.makeModule(), embedInNavigation: false, modalPresentationStyle: .fullScreen)
         }
     }
 

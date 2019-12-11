@@ -45,6 +45,10 @@ extension ExploreInteractor: StoriesOutputProtocol {
     func hideStories() {
         self.explorePresenter?.presentStoriesBlock(response: .init(isHidden: true))
     }
+
+    func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle) {
+        self.explorePresenter?.presentStatusBarStyle(response: .init(statusBarStyle: statusBarStyle))
+    }
 }
 
 extension ExploreInteractor: TagsOutputProtocol {

@@ -11,16 +11,19 @@ import Foundation
 final class ModalStackRouter: RouterProtocol {
     var destinationStack: [UIViewController]
     var source: ModalStackRouterSourceProtocol
+    let modalPresentationStyle: UIModalPresentationStyle
 
     init(
         source: ModalStackRouterSourceProtocol,
-        destinationStack: [UIViewController]
+        destinationStack: [UIViewController],
+        modalPresentationStyle: UIModalPresentationStyle = .fullScreen
     ) {
         self.destinationStack = destinationStack
         self.source = source
+        self.modalPresentationStyle = modalPresentationStyle
     }
 
     func route() {
-        self.source.present(moduleStack: self.destinationStack)
+        self.source.present(moduleStack: self.destinationStack, modalPresentationStyle: self.modalPresentationStyle)
     }
 }

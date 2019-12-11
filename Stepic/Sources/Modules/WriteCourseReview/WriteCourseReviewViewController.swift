@@ -2,6 +2,8 @@ import IQKeyboardManagerSwift
 import SVProgressHUD
 import UIKit
 
+// MARK: WriteCourseReviewViewControllerProtocol: class -
+
 protocol WriteCourseReviewViewControllerProtocol: class {
     func displayCourseReview(viewModel: WriteCourseReview.CourseReviewLoad.ViewModel)
     func displayCourseReviewTextUpdate(viewModel: WriteCourseReview.CourseReviewTextUpdate.ViewModel)
@@ -11,7 +13,19 @@ protocol WriteCourseReviewViewControllerProtocol: class {
     func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
+// MARK: - Appearance -
+
+extension WriteCourseReviewViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
+// MARK: - WriteCourseReviewViewController: UIViewController -
+
 final class WriteCourseReviewViewController: UIViewController {
+    let appearance: Appearance
+
     private let interactor: WriteCourseReviewInteractorProtocol
 
     lazy var writeCourseReviewView = self.view as? WriteCourseReviewView
@@ -28,8 +42,12 @@ final class WriteCourseReviewViewController: UIViewController {
         action: #selector(self.doneButtonDidClick(_:))
     )
 
-    init(interactor: WriteCourseReviewInteractorProtocol) {
+    init(
+        interactor: WriteCourseReviewInteractorProtocol,
+        appearance: Appearance = .init()
+    ) {
         self.interactor = interactor
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -58,12 +76,23 @@ final class WriteCourseReviewViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        assert(
+            self.navigationController != nil,
+            "\(WriteCourseReviewViewController.self) must be presented in a \(UINavigationController.self)"
+        )
+
         IQKeyboardManager.shared.enable = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         _ = self.writeCourseReviewView?.becomeFirstResponder()
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -140,5 +169,13 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
 
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateScore score: Int) {
         self.interactor.doCourseReviewScoreUpdate(request: .init(score: score))
+    }
+}
+
+// MARK: - WriteCourseReviewViewController: StyledNavigationControllerPresentable -
+
+extension WriteCourseReviewViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return self.appearance.navigationBarAppearance
     }
 }

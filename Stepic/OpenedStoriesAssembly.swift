@@ -9,12 +9,15 @@
 import UIKit
 
 final class OpenedStoriesAssembly: Assembly {
+    weak var moduleOutput: OpenedStoriesOutputProtocol?
+
     private let stories: [Story]
     private let startPosition: Int
 
-    init(stories: [Story], startPosition: Int) {
+    init(stories: [Story], startPosition: Int, moduleOutput: OpenedStoriesOutputProtocol?) {
         self.stories = stories
         self.startPosition = startPosition
+        self.moduleOutput = moduleOutput
     }
 
     func makeModule() -> UIViewController {
@@ -23,10 +26,13 @@ final class OpenedStoriesAssembly: Assembly {
             navigationOrientation: .horizontal,
             options: nil
         )
-        viewController.presenter = OpenedStoriesPresenter(
+        let presenter = OpenedStoriesPresenter(
             view: viewController,
             stories: self.stories, startPosition: self.startPosition
         )
+        
+        presenter.moduleOutput = self.moduleOutput
+        viewController.presenter = presenter
 
         return viewController
     }

@@ -414,9 +414,11 @@ final class StepicVideoPlayerViewController: UIViewController {
     }
 
     @objc
-    private func togglePlayPause() {
+    private func togglePlayPause() -> MPRemoteCommandHandlerStatus {
         self.handlePlay()
         self.scheduleHidePlayerControlsTimer()
+
+        return .success
     }
 
     @objc

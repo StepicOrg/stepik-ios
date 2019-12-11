@@ -389,8 +389,8 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         DispatchQueue.global().async {
             let link = data.stepLinkMaker("\((self.currentIndex ?? 0) + 1)")
             let sharingViewController = SharingHelper.getSharingController(link)
-            sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
             DispatchQueue.main.async {
+                sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
                 self.present(sharingViewController, animated: true, completion: nil)
             }
         }
@@ -425,7 +425,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
         alert.popoverPresentationController?.barButtonItem = self.moreBarButtonItem
 
-        self.present(module: alert)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -522,12 +522,33 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
     }
 
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
         let assembly = EditStepAssembly(
             stepID: viewModel.stepID,
+            navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? EditStepOutputProtocol
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
-        self.present(navigationController, animated: true)
+
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
     }
 
     func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel) {

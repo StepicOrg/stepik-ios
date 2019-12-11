@@ -147,7 +147,7 @@ final class CourseInfoViewController: UIViewController {
         )
 
         let statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
-            ? UIStatusBarStyle.default
+            ? UIStatusBarStyle.dark
             : UIStatusBarStyle.lightContent
         self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
     }
@@ -505,6 +505,7 @@ extension CourseInfoViewController: StyledNavigationControllerPresentable {
         return .init(
             shadowViewAlpha: 0.0,
             backgroundColor: StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(0.0),
+            statusBarColor: StyledNavigationController.Appearance.statusBarColor.withAlphaComponent(0.0),
             textColor: StyledNavigationController.Appearance.tintColor.withAlphaComponent(0.0),
             tintColor: .white,
             statusBarStyle: .lightContent

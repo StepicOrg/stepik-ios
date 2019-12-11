@@ -65,7 +65,10 @@ final class ModalOrPushStackRouter: SourcelessRouter, RouterProtocol {
         }
 
         if ["http", "https"].contains(scheme) {
-            source.present(SFSafariViewController(url: url), animated: true)
+            let safariViewController = SFSafariViewController(url: url)
+            safariViewController.modalPresentationStyle = .fullScreen
+
+            source.present(safariViewController, animated: true)
         }
     }
 }

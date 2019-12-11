@@ -61,13 +61,21 @@ final class DeepLinkRouter {
         guard let source = source else {
             return
         }
+
         if isModal {
-            let navigation = StyledNavigationController()
-            navigation.setViewControllers(modules, animated: false)
-            let closeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(DeepLinkRouter.close))
-            navigationToClose = navigation
-            modules.last?.navigationItem.leftBarButtonItem = closeItem
-            source.present(navigation, animated: true, completion: nil)
+            let navigationController = StyledNavigationController()
+            navigationController.modalPresentationStyle = .fullScreen
+            navigationController.setViewControllers(modules, animated: false)
+
+            let closeBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .done,
+                target: self,
+                action: #selector(DeepLinkRouter.close)
+            )
+            self.navigationToClose = navigationController
+            modules.last?.navigationItem.leftBarButtonItem = closeBarButtonItem
+
+            source.present(navigationController, animated: true, completion: nil)
         } else {
             for (index, vc) in modules.enumerated() {
                 source.navigationController?.pushViewController(vc, animated: index == modules.count - 1)

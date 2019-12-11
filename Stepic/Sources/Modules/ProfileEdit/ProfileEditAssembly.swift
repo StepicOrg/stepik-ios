@@ -3,9 +3,14 @@ import UIKit
 final class ProfileEditAssembly: Assembly {
     // We should init assembly with profile to open
     private let profile: Profile
+    private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
 
-    init(profile: Profile) {
+    init(
+        profile: Profile,
+        navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    ) {
         self.profile = profile
+        self.navigationBarAppearance = navigationBarAppearance
     }
 
     func makeModule() -> UIViewController {
@@ -25,7 +30,12 @@ final class ProfileEditAssembly: Assembly {
                 progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
             )
         )
-        let viewController = ProfileEditViewController(interactor: interactor)
+        let viewController = ProfileEditViewController(
+            interactor: interactor,
+            appearance: .init(
+                navigationBarAppearance: self.navigationBarAppearance
+            )
+        )
 
         presenter.viewController = viewController
         viewController.hidesBottomBarWhenPushed = true

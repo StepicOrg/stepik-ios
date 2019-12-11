@@ -13,6 +13,10 @@ protocol OpenedStoriesViewProtocol: class {
     func close()
 }
 
+protocol OpenedStoriesOutputProtocol: class {
+    func handleOpenedStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle)
+}
+
 protocol OpenedStoriesPresenterProtocol: class {
     var nextModule: UIViewController? { get }
     var prevModule: UIViewController? { get }
@@ -20,10 +24,13 @@ protocol OpenedStoriesPresenterProtocol: class {
 
     func onSwipeDismiss()
     func refresh()
+
+    func setStatusBarStyle(_ statusBarStyle: UIStatusBarStyle)
 }
 
 class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     weak var view: OpenedStoriesViewProtocol?
+    weak var moduleOutput: OpenedStoriesOutputProtocol?
 
     var stories: [Story]
 
@@ -65,6 +72,10 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
 
     func refresh() {
         self.view?.set(module: self.currentModule, direction: .forward, animated: false)
+    }
+
+    func setStatusBarStyle(_ statusBarStyle: UIStatusBarStyle) {
+        self.moduleOutput?.handleOpenedStoriesStatusBarStyleUpdate(statusBarStyle)
     }
 
     func onSwipeDismiss() {

@@ -4,6 +4,7 @@ protocol ExplorePresenterProtocol: BaseExplorePresenterProtocol {
     func presentContent(response: Explore.ContentLoad.Response)
     func presentLanguageSwitchBlock(response: Explore.LanguageSwitchAvailabilityCheck.Response)
     func presentStoriesBlock(response: Explore.StoriesVisibilityUpdate.Response)
+    func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response)
 }
 
 final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
@@ -25,5 +26,9 @@ final class ExplorePresenter: BaseExplorePresenter, ExplorePresenterProtocol {
         self.exploreViewController?.displayStoriesBlock(
             viewModel: .init(isHidden: response.isHidden)
         )
+    }
+
+    func presentStatusBarStyle(response: Explore.StatusBarStyleUpdate.Response) {
+        self.exploreViewController?.displayStatusBarStyle(response: .init(statusBarStyle: response.statusBarStyle))
     }
 }

@@ -15,7 +15,7 @@ final class OpenedStoriesPageViewController: UIPageViewController, OpenedStories
     var startOffset: CGFloat = 0
 
     private var isDragging: Bool = false
-    private var prevStatusBarStyle: UIStatusBarStyle?
+    private var previousStatusBarStyle: UIStatusBarStyle?
 
     private weak var currentStoryController: UIViewController?
 
@@ -46,19 +46,19 @@ final class OpenedStoriesPageViewController: UIPageViewController, OpenedStories
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        self.prevStatusBarStyle = UIApplication.shared.statusBarStyle
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        if let currentStatusBarStyle = SourcelessRouter().currentNavigation?.preferredStatusBarStyle {
+            self.previousStatusBarStyle = currentStatusBarStyle
+        }
+
+        self.presenter?.setStatusBarStyle(.lightContent)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if let style = self.prevStatusBarStyle {
-            UIApplication.shared.statusBarStyle = style
+        if let previousStatusBarStyle = self.previousStatusBarStyle {
+            self.presenter?.setStatusBarStyle(previousStatusBarStyle)
         }
-
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     func close() {

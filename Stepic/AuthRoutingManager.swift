@@ -14,6 +14,7 @@ final class AuthRoutingManager {
             viewController.success = success
             viewController.cancel = cancel
             viewController.source = controller
+            viewController.modalPresentationStyle = .fullScreen
             controller.present(viewController, animated: true, completion: nil)
         }
     }

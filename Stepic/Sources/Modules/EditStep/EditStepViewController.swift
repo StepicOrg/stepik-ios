@@ -9,9 +9,19 @@ protocol EditStepViewControllerProtocol: class {
     func displayStepSourceEditResult(viewModel: EditStep.RemoteStepSourceUpdate.ViewModel)
 }
 
+// MARK: Appearance -
+
+extension EditStepViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
 // MARK: - EditStepViewController: UIViewController, ControllerWithStepikPlaceholder -
 
 final class EditStepViewController: UIViewController, ControllerWithStepikPlaceholder {
+    let appearance: Appearance
+
     lazy var editStepView = self.view as? EditStepView
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -40,10 +50,12 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
 
     init(
         interactor: EditStepInteractorProtocol,
-        initialState: EditStep.ViewControllerState = .loading
+        initialState: EditStep.ViewControllerState = .loading,
+        appearance: Appearance = .init()
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -66,6 +78,11 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
         self.title = NSLocalizedString("EditStepTitle", comment: "")
         self.edgesForExtendedLayout = []
 
+        // Disable swipe down to dismiss
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+
         self.navigationItem.leftBarButtonItem = self.cancelBarButtonItem
         self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
         self.doneBarButtonItem.isEnabled = false
@@ -74,6 +91,22 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
 
         self.updateState(newState: self.state)
         self.interactor.doStepSourceLoad(request: .init())
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assert(
+            self.navigationController != nil,
+            "\(EditStepViewController.self) must be presented in a \(UINavigationController.self)"
+        )
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -170,5 +203,13 @@ extension EditStepViewController: EditStepViewControllerProtocol {
 extension EditStepViewController: EditStepViewDelegate {
     func editStepView(_ view: EditStepView, didChangeText text: String) {
         self.interactor.doStepSourceTextUpdate(request: .init(text: text))
+    }
+}
+
+// MARK: - EditStepViewController: StyledNavigationControllerPresentable -
+
+extension EditStepViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        return self.appearance.navigationBarAppearance
     }
 }

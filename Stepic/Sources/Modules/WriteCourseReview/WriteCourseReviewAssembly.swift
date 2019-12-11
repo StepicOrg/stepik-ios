@@ -3,16 +3,19 @@ import UIKit
 final class WriteCourseReviewAssembly: Assembly {
     private let courseID: Course.IdType
     private var courseReview: CourseReview?
+    private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
 
     private weak var moduleOutput: WriteCourseReviewOutputProtocol?
 
     init(
         courseID: Course.IdType,
         courseReview: CourseReview? = nil,
+        navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init(),
         output: WriteCourseReviewOutputProtocol? = nil
     ) {
         self.courseID = courseID
         self.courseReview = courseReview
+        self.navigationBarAppearance = navigationBarAppearance
         self.moduleOutput = output
     }
 
@@ -31,7 +34,12 @@ final class WriteCourseReviewAssembly: Assembly {
             presenter: presenter,
             provider: provider
         )
-        let viewController = WriteCourseReviewViewController(interactor: interactor)
+        let viewController = WriteCourseReviewViewController(
+            interactor: interactor,
+            appearance: .init(
+                navigationBarAppearance: self.navigationBarAppearance
+            )
+        )
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput

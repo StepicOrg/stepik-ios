@@ -9,6 +9,8 @@
 import ActionSheetPicker_3_0
 import UIKit
 
+// MARK: CodeEditorSettingsLegacyAssembly: Assembly -
+
 @available(*, deprecated, message: "Class to initialize code editor settings w/o storyboards logic")
 final class CodeEditorSettingsLegacyAssembly: Assembly {
     private let previewLanguage: CodeLanguage
@@ -33,9 +35,11 @@ final class CodeEditorSettingsLegacyAssembly: Assembly {
     }
 }
 
+// MARK: - CodeEditorSettingsViewController: MenuViewController -
+
 final class CodeEditorSettingsViewController: MenuViewController {
-    var presenter: CodeEditorSettingsPresenter?
-    var previewLanguage = CodeLanguage.python
+    fileprivate var presenter: CodeEditorSettingsPresenter?
+    fileprivate var previewLanguage = CodeLanguage.python
 
     private lazy var previewView: CodeEditorPreviewView = {
         let previewView = CodeEditorPreviewView()
@@ -55,6 +59,14 @@ final class CodeEditorSettingsViewController: MenuViewController {
         self.tableView.tableHeaderView = self.previewView
 
         self.layoutTableHeaderView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assert(
+            self.navigationController != nil,
+            "\(CodeEditorSettingsViewController.self) must be presented in a \(UINavigationController.self)"
+        )
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -96,6 +108,8 @@ final class CodeEditorSettingsViewController: MenuViewController {
         self.tableView.tableHeaderView = tableHeaderView
     }
 }
+
+// MARK: - CodeEditorSettingsViewController: CodeEditorSettingsView -
 
 extension CodeEditorSettingsViewController: CodeEditorSettingsView {
     func setMenu(menu: Menu) {
@@ -151,6 +165,8 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
         self.previewView.updateFontSize(with: fontSize)
     }
 }
+
+// MARK: - CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate -
 
 extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
