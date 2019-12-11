@@ -2,28 +2,7 @@ import IQKeyboardManagerSwift
 import SVProgressHUD
 import UIKit
 
-// MARK: Appearance -
-
-extension WriteCourseReviewViewController {
-    enum Appearance {
-        static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
-            if #available(iOS 13.0, *) {
-                return .init(
-                    shadowViewAlpha: 1.0,
-                    backgroundColor: StyledNavigationController.Appearance.backgroundColor,
-                    statusBarColor: .clear,
-                    textColor: StyledNavigationController.Appearance.tintColor,
-                    tintColor: StyledNavigationController.Appearance.tintColor,
-                    statusBarStyle: .lightContent
-                )
-            } else {
-                return .init()
-            }
-        }
-    }
-}
-
-// MARK: - WriteCourseReviewViewControllerProtocol: class -
+// MARK: WriteCourseReviewViewControllerProtocol: class -
 
 protocol WriteCourseReviewViewControllerProtocol: class {
     func displayCourseReview(viewModel: WriteCourseReview.CourseReviewLoad.ViewModel)
@@ -34,9 +13,19 @@ protocol WriteCourseReviewViewControllerProtocol: class {
     func displayBlockingLoadingIndicator(viewModel: WriteCourseReview.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
+// MARK: - Appearance -
+
+extension WriteCourseReviewViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
 // MARK: - WriteCourseReviewViewController: UIViewController -
 
 final class WriteCourseReviewViewController: UIViewController {
+    let appearance: Appearance
+
     private let interactor: WriteCourseReviewInteractorProtocol
 
     lazy var writeCourseReviewView = self.view as? WriteCourseReviewView
@@ -53,8 +42,12 @@ final class WriteCourseReviewViewController: UIViewController {
         action: #selector(self.doneButtonDidClick(_:))
     )
 
-    init(interactor: WriteCourseReviewInteractorProtocol) {
+    init(
+        interactor: WriteCourseReviewInteractorProtocol,
+        appearance: Appearance = .init()
+    ) {
         self.interactor = interactor
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -95,14 +88,11 @@ final class WriteCourseReviewViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarColor(
-                Appearance.navigationBarAppearance.statusBarColor,
-                sender: self
-            )
-        }
-
         _ = self.writeCourseReviewView?.becomeFirstResponder()
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -186,6 +176,6 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
 
 extension WriteCourseReviewViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return Appearance.navigationBarAppearance
+        return self.appearance.navigationBarAppearance
     }
 }

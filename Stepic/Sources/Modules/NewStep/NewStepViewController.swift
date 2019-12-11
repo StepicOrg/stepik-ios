@@ -205,15 +205,32 @@ extension NewStepViewController: NewStepViewControllerProtocol {
         let discussionsViewController = discussionsAssembly.makeModule()
 
         if viewModel.embeddedInWriteComment {
+            let (modalPresentationStyle, navigationBarAppearance) = {
+                () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+                if #available(iOS 13.0, *) {
+                    return (
+                        .automatic,
+                        .init(
+                            statusBarColor: .clear,
+                            statusBarStyle: .lightContent
+                        )
+                    )
+                } else {
+                    return (.fullScreen, .init())
+                }
+            }()
+
             let writeCommentAssembly = WriteCommentAssembly(
                 targetID: viewModel.stepID,
                 parentID: nil,
                 presentationContext: .create,
+                navigationBarAppearance: navigationBarAppearance,
                 output: discussionsAssembly.moduleInput
             )
             let writeCommentNavigationController = StyledNavigationController(
                 rootViewController: writeCommentAssembly.makeModule()
             )
+            writeCommentNavigationController.modalPresentationStyle = modalPresentationStyle
 
             self.navigationController?.present(
                 writeCommentNavigationController,

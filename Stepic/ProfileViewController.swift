@@ -240,19 +240,34 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
     }
 
-    @objc func profileEditButtonPressed() {
+    @objc
+    private func profileEditButtonPressed() {
         guard let profile = self.profile else {
             return
         }
 
-        let assembly = ProfileEditAssembly(profile: profile)
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
+        let assembly = ProfileEditAssembly(
+            profile: profile,
+            navigationBarAppearance: navigationBarAppearance
+        )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        if #available(iOS 13.0, *) {
-            self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .automatic)
-        } else {
-            self.present(module: controller, embedInNavigation: false, modalPresentationStyle: .fullScreen)
-        }
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     @objc func shareButtonPressed() {

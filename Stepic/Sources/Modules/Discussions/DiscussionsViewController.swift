@@ -243,19 +243,35 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     }
 
     func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
             parentID: viewModel.parentID,
             presentationContext: viewModel.presentationContext,
+            navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? WriteCommentOutputProtocol
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        if #available(iOS 13.0, *) {
-            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .automatic)
-        } else {
-            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .fullScreen)
-        }
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
     }
 
     func displayCommentCreate(viewModel: Discussions.CommentCreated.ViewModel) {

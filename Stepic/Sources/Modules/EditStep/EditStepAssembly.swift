@@ -2,10 +2,17 @@ import UIKit
 
 final class EditStepAssembly: Assembly {
     private let stepID: Step.IdType
+    private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
+
     private weak var moduleOutput: EditStepOutputProtocol?
 
-    init(stepID: Step.IdType, output: EditStepOutputProtocol? = nil) {
+    init(
+        stepID: Step.IdType,
+        navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init(),
+        output: EditStepOutputProtocol? = nil
+    ) {
         self.stepID = stepID
+        self.navigationBarAppearance = navigationBarAppearance
         self.moduleOutput = output
     }
 
@@ -16,7 +23,12 @@ final class EditStepAssembly: Assembly {
         )
         let presenter = EditStepPresenter()
         let interactor = EditStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
-        let viewController = EditStepViewController(interactor: interactor)
+        let viewController = EditStepViewController(
+            interactor: interactor,
+            appearance: .init(
+                navigationBarAppearance: self.navigationBarAppearance
+            )
+        )
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput

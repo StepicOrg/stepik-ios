@@ -193,30 +193,11 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                         return
                     }
 
-                    if #available(iOS 13.0, *) {
-                        let assembly = CodeEditorSettingsLegacyAssembly(
-                            appearance: .init(
-                                navigationBarAppearance: .init(statusBarColor: .clear)
-                            )
-                        )
-                        let controller = assembly.makeModule()
-                        controller.title = NSLocalizedString("Settings", comment: "")
+                    let assembly = CodeEditorSettingsLegacyAssembly()
+                    let controller = assembly.makeModule()
+                    controller.title = NSLocalizedString("Settings", comment: "")
 
-                        strongSelf.present(
-                            module: controller,
-                            embedInNavigation: true,
-                            modalPresentationStyle: .automatic
-                        )
-                    } else {
-                        let controller = CodeEditorSettingsLegacyAssembly().makeModule()
-                        controller.title = NSLocalizedString("Settings", comment: "")
-
-                        strongSelf.present(
-                            module: controller,
-                            embedInNavigation: true,
-                            modalPresentationStyle: .fullScreen
-                        )
-                    }
+                    strongSelf.navigationController?.pushViewController(controller, animated: true)
                 }
             )
         )

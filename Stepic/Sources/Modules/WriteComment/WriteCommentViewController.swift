@@ -1,27 +1,6 @@
 import UIKit
 
-// MARK: Appearance -
-
-extension WriteCommentViewController {
-    enum Appearance {
-        static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
-            if #available(iOS 13.0, *) {
-                return .init(
-                    shadowViewAlpha: 1.0,
-                    backgroundColor: StyledNavigationController.Appearance.backgroundColor,
-                    statusBarColor: .clear,
-                    textColor: StyledNavigationController.Appearance.tintColor,
-                    tintColor: StyledNavigationController.Appearance.tintColor,
-                    statusBarStyle: .lightContent
-                )
-            } else {
-                return .init()
-            }
-        }
-    }
-}
-
-// MARK: - WriteCommentViewControllerProtocol: class -
+// MARK: WriteCommentViewControllerProtocol: class -
 
 protocol WriteCommentViewControllerProtocol: class {
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel)
@@ -30,9 +9,19 @@ protocol WriteCommentViewControllerProtocol: class {
     func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel)
 }
 
+// MARK: - Appearance -
+
+extension WriteCommentViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
 // MARK: - WriteCommentViewController: UIViewController -
 
 final class WriteCommentViewController: UIViewController {
+    let appearance: Appearance
+
     lazy var writeCommentView = self.view as? WriteCommentView
 
     private let interactor: WriteCommentInteractorProtocol
@@ -60,10 +49,12 @@ final class WriteCommentViewController: UIViewController {
 
     init(
         interactor: WriteCommentInteractorProtocol,
-        initialState: WriteComment.ViewControllerState = .loading
+        initialState: WriteComment.ViewControllerState = .loading,
+        appearance: Appearance = .init()
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -109,14 +100,11 @@ final class WriteCommentViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarColor(
-                Appearance.navigationBarAppearance.statusBarColor,
-                sender: self
-            )
-        }
-
         _ = self.writeCommentView?.becomeFirstResponder()
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -217,6 +205,6 @@ extension WriteCommentViewController: WriteCommentViewDelegate {
 
 extension WriteCommentViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return Appearance.navigationBarAppearance
+        return self.appearance.navigationBarAppearance
     }
 }

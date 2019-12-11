@@ -1,13 +1,27 @@
 import SVProgressHUD
 import UIKit
 
+// MARK: ProfileEditViewControllerProtocol: class -
+
 protocol ProfileEditViewControllerProtocol: class {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel)
     func displayProfileEditResult(viewModel: ProfileEdit.RemoteProfileUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: ProfileEdit.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
+// MARK: - Appearance -
+
+extension ProfileEditViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
+// MARK: - ProfileEditViewController: UIViewController -
+
 final class ProfileEditViewController: UIViewController {
+    let appearance: Appearance
+
     private let interactor: ProfileEditInteractorProtocol
 
     lazy var profileEditView = self.view as? ProfileEditView
@@ -26,8 +40,12 @@ final class ProfileEditViewController: UIViewController {
 
     private var formState: FormState?
 
-    init(interactor: ProfileEditInteractorProtocol) {
+    init(
+        interactor: ProfileEditInteractorProtocol,
+        appearance: Appearance = .init()
+    ) {
         self.interactor = interactor
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -56,7 +74,7 @@ final class ProfileEditViewController: UIViewController {
         super.viewDidAppear(animated)
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarColor(.clear, sender: self)
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
         }
     }
 
@@ -140,6 +158,8 @@ final class ProfileEditViewController: UIViewController {
         var details: String
     }
 }
+
+// MARK: - ProfileEditViewController: ProfileEditViewControllerProtocol -
 
 extension ProfileEditViewController: ProfileEditViewControllerProtocol {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel) {
@@ -259,9 +279,9 @@ extension ProfileEditViewController: ProfileEditViewControllerProtocol {
     }
 }
 
-extension ProfileEditViewController: ProfileEditViewDelegate {
-    // MARK: SettingsTableViewDelegate
+// MARK: - ProfileEditViewController: ProfileEditViewDelegate -
 
+extension ProfileEditViewController: ProfileEditViewDelegate {
     func settingsCell(
         elementView: UITextField,
         didReportTextChange text: String?,
@@ -279,12 +299,10 @@ extension ProfileEditViewController: ProfileEditViewDelegate {
     }
 }
 
+// MARK: - ProfileEditViewController: StyledNavigationControllerPresentable -
+
 extension ProfileEditViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        if #available(iOS 13.0, *) {
-            return .init(statusBarColor: .clear)
-        } else {
-            return .init()
-        }
+        return self.appearance.navigationBarAppearance
     }
 }

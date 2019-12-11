@@ -1,28 +1,7 @@
 import SVProgressHUD
 import UIKit
 
-// MARK: Appearance -
-
-extension EditStepViewController {
-    enum Appearance {
-        static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
-            if #available(iOS 13.0, *) {
-                return .init(
-                    shadowViewAlpha: 1.0,
-                    backgroundColor: StyledNavigationController.Appearance.backgroundColor,
-                    statusBarColor: .clear,
-                    textColor: StyledNavigationController.Appearance.tintColor,
-                    tintColor: StyledNavigationController.Appearance.tintColor,
-                    statusBarStyle: .lightContent
-                )
-            } else {
-                return .init()
-            }
-        }
-    }
-}
-
-// MARK: - EditStepViewControllerProtocol -
+// MARK: EditStepViewControllerProtocol -
 
 protocol EditStepViewControllerProtocol: class {
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel)
@@ -30,9 +9,19 @@ protocol EditStepViewControllerProtocol: class {
     func displayStepSourceEditResult(viewModel: EditStep.RemoteStepSourceUpdate.ViewModel)
 }
 
+// MARK: Appearance -
+
+extension EditStepViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
 // MARK: - EditStepViewController: UIViewController, ControllerWithStepikPlaceholder -
 
 final class EditStepViewController: UIViewController, ControllerWithStepikPlaceholder {
+    let appearance: Appearance
+
     lazy var editStepView = self.view as? EditStepView
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -61,10 +50,12 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
 
     init(
         interactor: EditStepInteractorProtocol,
-        initialState: EditStep.ViewControllerState = .loading
+        initialState: EditStep.ViewControllerState = .loading,
+        appearance: Appearance = .init()
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -114,10 +105,7 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
         super.viewDidAppear(animated)
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarColor(
-                Appearance.navigationBarAppearance.statusBarColor,
-                sender: self
-            )
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
         }
     }
 
@@ -222,6 +210,6 @@ extension EditStepViewController: EditStepViewDelegate {
 
 extension EditStepViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return Appearance.navigationBarAppearance
+        return self.appearance.navigationBarAppearance
     }
 }

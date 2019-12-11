@@ -9,27 +9,14 @@
 import ActionSheetPicker_3_0
 import UIKit
 
-// MARK: Appearance -
-
-extension CodeEditorSettingsViewController {
-    struct Appearance {
-        var navigationBarAppearance = StyledNavigationController.NavigationBarAppearanceState()
-    }
-}
-
-// MARK: - CodeEditorSettingsLegacyAssembly: Assembly -
+// MARK: CodeEditorSettingsLegacyAssembly: Assembly -
 
 @available(*, deprecated, message: "Class to initialize code editor settings w/o storyboards logic")
 final class CodeEditorSettingsLegacyAssembly: Assembly {
     private let previewLanguage: CodeLanguage
-    private let appearance: CodeEditorSettingsViewController.Appearance
 
-    init(
-        previewLanguage: CodeLanguage = .python,
-        appearance: CodeEditorSettingsViewController.Appearance = .init()
-    ) {
+    init(previewLanguage: CodeLanguage = .python) {
         self.previewLanguage = previewLanguage
-        self.appearance = appearance
     }
 
     func makeModule() -> UIViewController {
@@ -43,7 +30,6 @@ final class CodeEditorSettingsLegacyAssembly: Assembly {
         let presenter = CodeEditorSettingsPresenter(view: viewController)
         viewController.presenter = presenter
         viewController.previewLanguage = self.previewLanguage
-        viewController.appearance = self.appearance
 
         return viewController
     }
@@ -60,8 +46,6 @@ final class CodeEditorSettingsViewController: MenuViewController {
         previewView.delegate = self
         return previewView
     }()
-
-    fileprivate var appearance: Appearance!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,13 +78,6 @@ final class CodeEditorSettingsViewController: MenuViewController {
             fontSize: PreferencesContainer.codeEditor.fontSize,
             language: self.previewLanguage
         )
-
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeStatusBarColor(
-                self.appearance.navigationBarAppearance.statusBarColor,
-                sender: self
-            )
-        }
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -186,14 +163,6 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
 
     func updatePreview(fontSize: Int) {
         self.previewView.updateFontSize(with: fontSize)
-    }
-}
-
-// MARK: - CodeEditorSettingsViewController: StyledNavigationControllerPresentable -
-
-extension CodeEditorSettingsViewController: StyledNavigationControllerPresentable {
-    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return self.appearance.navigationBarAppearance
     }
 }
 

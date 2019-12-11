@@ -522,17 +522,33 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
     }
 
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
         let assembly = EditStepAssembly(
             stepID: viewModel.stepID,
+            navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? EditStepOutputProtocol
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        if #available(iOS 13.0, *) {
-            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .automatic)
-        } else {
-            self.present(module: navigationController, embedInNavigation: false, modalPresentationStyle: .fullScreen)
-        }
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
     }
 
     func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel) {
