@@ -100,7 +100,8 @@ extension NewCodeQuizFullscreenInstructionView: ProgrammaticallyInitializableVie
     func makeConstraints() {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.top.bottom.equalToSuperview()
         }
 
         self.loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
