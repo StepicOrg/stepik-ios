@@ -17,18 +17,7 @@ extension NewCodeQuizFullscreenViewController {
         static let spacingBetweenPages: CGFloat = 16.0
 
         static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
-            if #available(iOS 13.0, *) {
-                return .init(
-                    shadowViewAlpha: 0,
-                    backgroundColor: StyledNavigationController.Appearance.backgroundColor,
-                    statusBarColor: .clear,
-                    textColor: StyledNavigationController.Appearance.tintColor,
-                    tintColor: StyledNavigationController.Appearance.tintColor,
-                    statusBarStyle: .lightContent
-                )
-            } else {
-                return .init(shadowViewAlpha: 0.0)
-            }
+            return .init(shadowViewAlpha: 0.0)
         }
     }
 }
@@ -146,18 +135,12 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     // MARK: Private API
 
     private func updateNavigationBarAppearance() {
-        guard let styledNavigationController = self.navigationController as? StyledNavigationController else {
-            return
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeShadowViewAlpha(
+                Appearance.navigationBarAppearance.shadowViewAlpha,
+                sender: self
+            )
         }
-
-        styledNavigationController.changeStatusBarColor(
-            Appearance.navigationBarAppearance.statusBarColor,
-            sender: self
-        )
-        styledNavigationController.changeShadowViewAlpha(
-            Appearance.navigationBarAppearance.shadowViewAlpha,
-            sender: self
-        )
     }
 
     private func loadTabViewControllerIfNeeded(at index: Int) {
