@@ -10,9 +10,12 @@ import Foundation
 import UserNotifications
 
 final class RetentionLocalNotificationProvider: LocalNotificationContentProvider {
+    private static let defaultRetentionHour = 17
+    private static let retentionHoursRange = (12...19)
+
     private let repetition: Repetition
 
-    /// Represents retention date `DateComponents`.
+    /// Represents retention date `DateComponents` between retention hours `retentionHoursRange`.
     /// - Based on `repetition` may contain:
     ///     - next day date
     ///     - third day date
@@ -21,7 +24,16 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         let components: Set<Calendar.Component> = [.hour, .day, .month, .year]
         let dayOffset = self.repetition.notificationDayOffset
         if let date = Calendar.current.date(byAdding: .day, value: dayOffset, to: Date()) {
-            return Calendar.current.dateComponents(components, from: date)
+            var retentionDateComponents = Calendar.current.dateComponents(components, from: date)
+            var retentionHour = retentionDateComponents.hour ?? RetentionLocalNotificationProvider.defaultRetentionHour
+
+            if !RetentionLocalNotificationProvider.retentionHoursRange.contains(retentionHour) {
+                retentionHour = RetentionLocalNotificationProvider.defaultRetentionHour
+            }
+
+            retentionDateComponents.hour = retentionHour
+
+            return retentionDateComponents
         } else {
             return nil
         }
