@@ -1,6 +1,21 @@
 import SnapKit
 import UIKit
 
+extension NewCodeQuizFullscreenCodeViewController {
+    enum Appearance {
+        static let submitButtonBackgroundColor = UIColor.stepicGreen
+        static let submitButtonHeight: CGFloat = 44
+        static let submitButtonTextColor = UIColor.white
+        static let submitButtonCornerRadius: CGFloat = 6
+        static let submitButtonFont = UIFont.systemFont(ofSize: 16)
+        static let submitButtonInsets = LayoutInsets(left: 32, bottom: 16, right: 32)
+
+        static let codeEditorTextTopInset: CGFloat = 8
+
+        static let languageNameLabelLayoutInsets = LayoutInsets(top: 8, right: 8)
+    }
+}
+
 protocol NewCodeQuizFullscreenCodeViewControllerDelegate: class {
     func newCodeQuizFullscreenCodeViewController(
         _ viewController: NewCodeQuizFullscreenCodeViewController,
@@ -14,21 +29,13 @@ protocol NewCodeQuizFullscreenCodeViewControllerDelegate: class {
 }
 
 final class NewCodeQuizFullscreenCodeViewController: UIViewController {
-    enum Appearance {
-        static let submitButtonBackgroundColor = UIColor.stepicGreen
-        static let submitButtonHeight: CGFloat = 44
-        static let submitButtonTextColor = UIColor.white
-        static let submitButtonCornerRadius: CGFloat = 6
-        static let submitButtonFont = UIFont.systemFont(ofSize: 16)
-        static let submitButtonInsets = LayoutInsets(left: 32, bottom: 16, right: 32)
-
-        static let codeEditorTextTopInset: CGFloat = 8
-    }
-
     weak var delegate: NewCodeQuizFullscreenCodeViewControllerDelegate?
 
     private lazy var codeEditorView: CodeEditorView = {
-        let codeEditorView = CodeEditorView()
+        let appearance = CodeEditorView.Appearance(
+            languageNameLabelLayoutInsets: Appearance.languageNameLabelLayoutInsets
+        )
+        let codeEditorView = CodeEditorView(appearance: appearance)
         codeEditorView.isThemeAutoUpdating = true
         codeEditorView.delegate = self
         return codeEditorView
