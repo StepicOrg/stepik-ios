@@ -66,6 +66,12 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         }
     }
 
+    var isCalendarButtonEnabled: Bool = true {
+        didSet {
+            self.calendarButton.isEnabled = self.isCalendarButtonEnabled
+        }
+    }
+
     var isDownloadAllButtonEnabled: Bool = true {
         didSet {
             self.downloadAllButton.isEnabled = self.isDownloadAllButtonEnabled
