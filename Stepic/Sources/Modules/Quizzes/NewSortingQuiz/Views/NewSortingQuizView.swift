@@ -18,9 +18,6 @@ extension NewSortingQuizView {
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
-        let separatorColor = UIColor(hex: 0xEAECF0)
-        let separatorHeight: CGFloat = 1
-
         let titleColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
@@ -47,12 +44,6 @@ final class NewSortingQuizView: UIView {
         return loadingIndicatorView
     }()
 
-    private lazy var separatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = self.appearance.separatorColor
-        return view
-    }()
-
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = self.appearance.titleColor
@@ -62,7 +53,7 @@ final class NewSortingQuizView: UIView {
 
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
-            arrangedSubviews: [self.separatorView, self.titleLabelContainerView, self.optionsContainerView]
+            arrangedSubviews: [self.titleLabelContainerView, self.optionsContainerView]
         )
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
@@ -213,11 +204,6 @@ extension NewSortingQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func makeConstraints() {
-        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.separatorView.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.separatorHeight)
-        }
-
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()

@@ -404,6 +404,7 @@
 		2C096583236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */; };
 		2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */; };
 		2C0B42C2234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */; };
+		2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10100A239EFAD700440651 /* DiscountingPolicy.swift */; };
 		2C104B682069064D0026FEB9 /* autocomplete_suggestions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */; };
 		2C10C458221496F300FA3E13 /* CourseReviewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */; };
 		2C1219901F9655AB00A43E98 /* NotificationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */; };
@@ -1522,6 +1523,8 @@
 		2C096582236C555D005B771A /* NSAttributedString+TrimmingCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+TrimmingCharacters.swift"; sourceTree = "<group>"; };
 		2C0B42BF234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C0B42C0234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMenuBlockTableViewCell.xib; sourceTree = "<group>"; };
+		2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_discount_policy.xcdatamodel; sourceTree = "<group>"; };
+		2C10100A239EFAD700440651 /* DiscountingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountingPolicy.swift; sourceTree = "<group>"; };
 		2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = autocomplete_suggestions.plist; sourceTree = "<group>"; };
 		2C10C457221496F300FA3E13 /* CourseReviewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewsAPI.swift; sourceTree = "<group>"; };
 		2C12198F1F9655AB00A43E98 /* NotificationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSection.swift; sourceTree = "<group>"; };
@@ -4519,6 +4522,7 @@
 			children = (
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
+				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
 				2C3DAB90233D735D00453B1C /* FontSize.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
@@ -6611,6 +6615,7 @@
 				08AB82381D74C44100FDEADE /* Session.swift in Sources */,
 				08901E6D1CD102DF00D94613 /* UpdatePreferencesContainer.swift in Sources */,
 				2C3A24572359DD2E00E2405F /* DiscussionsViewModel.swift in Sources */,
+				2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */,
 				082E35B220B5F1E4006E28F9 /* StorageRecordsAPI.swift in Sources */,
 				2CB5B15D22941D7000D7F706 /* StepDiscussionsButton.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
@@ -7513,7 +7518,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 170;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -7543,7 +7548,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 168;
+				CURRENT_PROJECT_VERSION = 170;
 				DEVELOPMENT_TEAM = UJ4KC2QN7B;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Stepic/Info.plist;
@@ -7605,6 +7610,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */,
 				2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */,
 				2C2EBAB92382E3EB00AB1B83 /* Model_lesson_can_edit.xcdatamodel */,
 				2CD6E254234DFFD500F49303 /* Model_email_addresses.xcdatamodel */,
@@ -7650,7 +7656,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */;
+			currentVersion = 2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

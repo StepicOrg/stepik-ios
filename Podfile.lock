@@ -155,19 +155,19 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.11.0):
     - PromiseKit/CorePromise
-  - Protobuf (3.11.0)
+  - Protobuf (3.11.1)
   - Quick (2.2.0)
   - Reveal-SDK (24)
-  - SDWebImage (5.3.2):
-    - SDWebImage/Core (= 5.3.2)
-  - SDWebImage/Core (5.3.2)
+  - SDWebImage (5.4.0):
+    - SDWebImage/Core (= 5.4.0)
+  - SDWebImage/Core (5.4.0)
   - SnapKit (4.2.0)
   - STRegex (2.1.0)
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.1.0)
-  - SwiftLint (0.37.0)
+  - SwiftLint (0.38.0)
   - SwiftyGif (5.2.0)
   - SwiftyJSON (5.0.0)
   - Tabman (2.4.3):
@@ -220,13 +220,13 @@ DEPENDENCIES:
   - PromiseKit (= 6.11.0)
   - Quick (= 2.2.0)
   - Reveal-SDK
-  - SDWebImage (= 5.3.2)
+  - SDWebImage (= 5.4.0)
   - SnapKit (= 4.2.0)
   - STRegex (= 2.1.0)
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - SVProgressHUD (= 2.2.5)
   - SwiftDate (= 6.1.0)
-  - SwiftLint (= 0.37.0)
+  - SwiftLint (= 0.38.0)
   - SwiftyJSON (= 5.0.0)
   - Tabman (= 2.4.3)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
@@ -370,16 +370,16 @@ SPEC CHECKSUMS:
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
   PromiseKit: e4863d06976e7dee5e41c04fc7371c16b3600292
-  Protobuf: 394b2bf29ec303f4325e3ee4892c09e675647152
+  Protobuf: 20d79da7f20b5928b80043b05080b816e802659e
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
-  SDWebImage: 6ac2eb96571bff96ecde31a987172c5934a0eb7d
+  SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   STRegex: dfa420d93d8c1402956233b3879ec1fc14b45fbe
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
-  SwiftLint: c078a14d7d7ade75e5507795d185e3da41d844d2
+  SwiftLint: 4105f061f9812b214568b736dab580ab2c73a582
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: c2c83ebfcbec3e5be67e27a1dd6689a4e3efccd3
@@ -390,6 +390,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: edb00e8af2903290e142ba4c488adf8d394e828a
 
-PODFILE CHECKSUM: 1a9ef034b87e939726fa45dce93df960f35abbcf
+PODFILE CHECKSUM: 82838d40c87b8a99393ee56f68f617bed56bd820
 
 COCOAPODS: 1.8.4
