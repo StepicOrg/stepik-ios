@@ -12,21 +12,8 @@ import UIKit
 // MARK: Appearance -
 
 extension CodeEditorSettingsViewController {
-    enum Appearance {
-        static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
-            if #available(iOS 13.0, *) {
-                return .init(
-                    shadowViewAlpha: 1.0,
-                    backgroundColor: StyledNavigationController.Appearance.backgroundColor,
-                    statusBarColor: .clear,
-                    textColor: StyledNavigationController.Appearance.tintColor,
-                    tintColor: StyledNavigationController.Appearance.tintColor,
-                    statusBarStyle: .lightContent
-                )
-            } else {
-                return .init()
-            }
-        }
+    struct Appearance {
+        var navigationBarAppearance = StyledNavigationController.NavigationBarAppearanceState()
     }
 }
 
@@ -35,9 +22,14 @@ extension CodeEditorSettingsViewController {
 @available(*, deprecated, message: "Class to initialize code editor settings w/o storyboards logic")
 final class CodeEditorSettingsLegacyAssembly: Assembly {
     private let previewLanguage: CodeLanguage
+    private let appearance: CodeEditorSettingsViewController.Appearance
 
-    init(previewLanguage: CodeLanguage = .python) {
+    init(
+        previewLanguage: CodeLanguage = .python,
+        appearance: CodeEditorSettingsViewController.Appearance = .init()
+    ) {
         self.previewLanguage = previewLanguage
+        self.appearance = appearance
     }
 
     func makeModule() -> UIViewController {
@@ -51,6 +43,7 @@ final class CodeEditorSettingsLegacyAssembly: Assembly {
         let presenter = CodeEditorSettingsPresenter(view: viewController)
         viewController.presenter = presenter
         viewController.previewLanguage = self.previewLanguage
+        viewController.appearance = self.appearance
 
         return viewController
     }
@@ -59,14 +52,16 @@ final class CodeEditorSettingsLegacyAssembly: Assembly {
 // MARK: - CodeEditorSettingsViewController: MenuViewController -
 
 final class CodeEditorSettingsViewController: MenuViewController {
-    var presenter: CodeEditorSettingsPresenter?
-    var previewLanguage = CodeLanguage.python
+    fileprivate var presenter: CodeEditorSettingsPresenter?
+    fileprivate var previewLanguage = CodeLanguage.python
 
     private lazy var previewView: CodeEditorPreviewView = {
         let previewView = CodeEditorPreviewView()
         previewView.delegate = self
         return previewView
     }()
+
+    fileprivate var appearance: Appearance!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +97,7 @@ final class CodeEditorSettingsViewController: MenuViewController {
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeStatusBarColor(
-                Appearance.navigationBarAppearance.statusBarColor,
+                self.appearance.navigationBarAppearance.statusBarColor,
                 sender: self
             )
         }
@@ -198,7 +193,7 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
 
 extension CodeEditorSettingsViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return Appearance.navigationBarAppearance
+        return self.appearance.navigationBarAppearance
     }
 }
 
