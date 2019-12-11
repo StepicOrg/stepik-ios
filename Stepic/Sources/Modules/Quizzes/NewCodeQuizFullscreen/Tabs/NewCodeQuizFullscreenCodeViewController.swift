@@ -113,18 +113,23 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         self.view.addSubview(self.codeEditorView)
         self.codeEditorView.translatesAutoresizingMaskIntoConstraints = false
         self.codeEditorView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.top.trailing.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
         }
 
         self.view.addSubview(self.submitButton)
         self.submitButton.translatesAutoresizingMaskIntoConstraints = false
         self.submitButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(Appearance.submitButtonInsets.left)
-            make.trailing.equalToSuperview().offset(-Appearance.submitButtonInsets.right)
-            make.height.equalTo(Appearance.submitButtonHeight)
+            make.leading
+                .equalTo(self.view.safeAreaLayoutGuide.snp.leading)
+                .offset(Appearance.submitButtonInsets.left)
+            make.trailing
+                .equalTo(self.view.safeAreaLayoutGuide.snp.trailing)
+                .offset(-Appearance.submitButtonInsets.right)
             make.bottom
                 .equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
                 .offset(-Appearance.submitButtonInsets.bottom)
+            make.height.equalTo(Appearance.submitButtonHeight)
         }
     }
 
