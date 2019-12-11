@@ -425,7 +425,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
                 title: NSLocalizedString("Copy", comment: ""),
                 style: .default,
                 handler: { _ in
-                    UIPasteboard.general.string = viewModel.rawText
+                    UIPasteboard.general.string = viewModel.strippedText
                 }
             )
         )

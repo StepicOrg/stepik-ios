@@ -25,10 +25,16 @@ extension BaseQuizView {
         let retryButtonBackgroundColor = UIColor.white
         let retryButtonTintColor = UIColor(hex: 0xC8C7CC)
 
+        let discountingPolicyTextColor = UIColor.mainDark
+        let discountingPolicyFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+
         let spacing: CGFloat = 16
 
         let insets = LayoutInsets(left: 16, right: 16)
         let loadingIndicatorColor = UIColor.mainDark
+
+        let separatorColor = UIColor(hex: 0xEAECF0)
+        let separatorHeight: CGFloat = 1
     }
 
     enum Animation {
@@ -47,6 +53,20 @@ final class BaseQuizView: UIView {
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()
         return loadingIndicatorView
+    }()
+
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        return view
+    }()
+
+    private lazy var discountingPolicyLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = self.appearance.discountingPolicyTextColor
+        label.font = self.appearance.discountingPolicyFont
+        label.numberOfLines = 0
+        return label
     }()
 
     private lazy var submitButton: UIButton = {
@@ -83,7 +103,14 @@ final class BaseQuizView: UIView {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.feedbackContainerView, self.submitControlsContainerView])
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                self.separatorView,
+                self.discountingPolicyContainerView,
+                self.feedbackContainerView,
+                self.submitControlsContainerView
+            ]
+        )
         stackView.axis = .vertical
         stackView.spacing = self.appearance.spacing
         return stackView
@@ -100,6 +127,11 @@ final class BaseQuizView: UIView {
     private lazy var submitContainerView = UIView()
     private lazy var retryContainerView = UIView()
     private lazy var feedbackContainerView = UIView()
+    private lazy var discountingPolicyContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
 
     // Peer review: make feedback view clickable
     private lazy var peerReviewTapGestureRecognizer = UITapGestureRecognizer(
@@ -135,6 +167,18 @@ final class BaseQuizView: UIView {
         }
     }
 
+    var isDiscountPolicyAvailable = false {
+        didSet {
+            self.discountingPolicyContainerView.isHidden = !self.isDiscountPolicyAvailable
+        }
+    }
+
+    var discountPolicyTitle: String? {
+        didSet {
+            self.discountingPolicyLabel.text = self.discountPolicyTitle
+        }
+    }
+
     var isPeerReviewAvailable = false
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -152,7 +196,13 @@ final class BaseQuizView: UIView {
     }
 
     func addQuiz(view: UIView) {
-        self.stackView.insertArrangedSubview(view, at: 0)
+        guard let discountingPolicyLabelIndex = self.stackView.arrangedSubviews.firstIndex(
+            where: { $0 === self.discountingPolicyContainerView }
+        ) else {
+            return self.stackView.insertArrangedSubview(view, at: 0)
+        }
+
+        self.stackView.insertArrangedSubview(view, at: discountingPolicyLabelIndex + 1)
     }
 
     func showFeedback(state: QuizFeedbackView.State, title: String, hint: String? = nil) {
@@ -226,6 +276,7 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.stackView)
 
+        self.discountingPolicyContainerView.addSubview(self.discountingPolicyLabel)
         self.submitControlsContainerView.addSubview(self.submitControlsStackView)
         self.retryContainerView.addSubview(self.retryButton)
         self.submitContainerView.addSubview(self.submitButton)
@@ -237,6 +288,18 @@ extension BaseQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func makeConstraints() {
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.separatorView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
+        }
+
+        self.discountingPolicyLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.discountingPolicyLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
         self.submitControlsStackView.translatesAutoresizingMaskIntoConstraints = false
         self.submitControlsStackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()

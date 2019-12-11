@@ -123,6 +123,8 @@ final class DownloadControlView: UIControl {
         rotation.byValue = 2 * Float.pi
         rotation.duration = Animation.pendingDuration
         rotation.repeatCount = .infinity
+        // Prevents CABasicAnimation object being destroyed APPS-2587.
+        rotation.isRemovedOnCompletion = false
 
         self.pendingCircleLayer.add(rotation, forKey: "circleRotation")
     }
