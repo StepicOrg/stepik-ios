@@ -127,6 +127,21 @@ class StyledNavigationController: UINavigationController {
 
     // MARK: Public API
 
+    /// Triggers a navigation bar appearance update.
+    /// See `NavigationBarAppearanceState` for properties that will be updated.
+    func setNeedsNavigationBarAppearanceUpdate(sender: UIViewController) {
+        let appearance = self.getNavigationBarAppearance(for: sender)
+
+        DispatchQueue.main.async {
+            self.changeShadowViewAlpha(appearance.shadowViewAlpha, sender: sender)
+            self.changeBackgroundColor(appearance.backgroundColor, sender: sender)
+            self.changeStatusBarColor(appearance.statusBarColor, sender: sender)
+            self.changeTextColor(appearance.textColor, sender: sender)
+            self.changeTintColor(appearance.tintColor, sender: sender)
+            self.changeStatusBarStyle(appearance.statusBarStyle, sender: sender)
+        }
+    }
+
     /// Remove title for "Back" button on top controller
     func removeBackButtonTitleForTopController() {
         // View controller before last in stack
