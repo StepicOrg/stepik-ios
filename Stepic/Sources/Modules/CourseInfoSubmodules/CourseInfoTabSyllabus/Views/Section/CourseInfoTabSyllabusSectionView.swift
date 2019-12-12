@@ -23,6 +23,9 @@ extension CourseInfoTabSyllabusSectionView {
         let progressTextColor = UIColor.mainDark
         let progressTextFont = UIFont.systemFont(ofSize: 14, weight: .light)
 
+        let requirementsTextColor = UIColor.mainDark
+        let requirementsTextFont = UIFont.systemFont(ofSize: 12)
+
         let downloadButtonInsets = UIEdgeInsets(top: 18, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
         let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
@@ -64,6 +67,14 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         let label = UILabel()
         label.font = self.appearance.progressTextFont
         label.textColor = self.appearance.progressTextColor
+        return label
+    }()
+
+    private lazy var requirementsLabel: UILabel = {
+        let label = UILabel()
+        label.font = self.appearance.requirementsTextFont
+        label.textColor = self.appearance.requirementsTextColor
+        label.numberOfLines = 0
         return label
     }()
 
@@ -146,11 +157,13 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     func configure(viewModel: CourseInfoTabSyllabusSectionViewModel) {
         self.titleLabel.text = viewModel.title
         self.indexLabel.text = viewModel.index
+        self.requirementsLabel.text = viewModel.requirementLabelText
         self.progressLabel.text = viewModel.progressLabelText
         self.progressIndicatorView.progress = viewModel.progress
 
         self.examLabel.isHidden = !viewModel.isExam
         self.progressLabel.isHidden = viewModel.progressLabelText == nil
+        self.requirementsLabel.isHidden = viewModel.requirementLabelText == nil
 
         self.updateDownloadState(newState: viewModel.downloadState)
 
@@ -228,6 +241,7 @@ extension CourseInfoTabSyllabusSectionView: ProgrammaticallyInitializableViewPro
 
         self.textStackView.addArrangedSubview(self.titleLabel)
         self.textStackView.addArrangedSubview(self.progressLabel)
+        self.textStackView.addArrangedSubview(self.requirementsLabel)
         self.textStackView.addArrangedSubview(self.examLabel)
         self.addSubview(self.textStackView)
 
