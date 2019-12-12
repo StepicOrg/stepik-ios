@@ -25,17 +25,20 @@ final class Section: NSManagedObject, IDFetchable {
         self.position = json[JSONKey.position.rawValue].intValue
         self.isActive = json[JSONKey.isActive.rawValue].boolValue
         self.progressId = json[JSONKey.progress.rawValue].string
+        self.isExam = json[JSONKey.isExam.rawValue].boolValue
+        self.unitsArray = json[JSONKey.units.rawValue].arrayObject as! [Int]
+        self.courseId = json[JSONKey.course.rawValue].intValue
+        self.testSectionAction = json[JSONKey.actions.rawValue][JSONKey.testSection.rawValue].string
+        self.discountingPolicy = json[JSONKey.discountingPolicy.rawValue].string
+        // Required section
+        self.isRequirementSatisfied = json[JSONKey.isRequirementSatisfied.rawValue].bool ?? true
+        self.requiredSectionID = json[JSONKey.requiredSection.rawValue].int
+        self.requiredPercent = json[JSONKey.requiredPercent.rawValue].intValue
+        // Dates
         self.beginDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.beginDate.rawValue])
         self.endDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.endDate.rawValue])
         self.softDeadline = Parser.shared.dateFromTimedateJSON(json[JSONKey.softDeadline.rawValue])
         self.hardDeadline = Parser.shared.dateFromTimedateJSON(json[JSONKey.hardDeadline.rawValue])
-
-        self.testSectionAction = json[JSONKey.actions.rawValue][JSONKey.testSection.rawValue].string
-        self.isExam = json[JSONKey.isExam.rawValue].boolValue
-        self.unitsArray = json[JSONKey.units.rawValue].arrayObject as! [Int]
-        self.courseId = json[JSONKey.course.rawValue].intValue
-
-        self.discountingPolicy = json[JSONKey.discountingPolicy.rawValue].string
     }
 
     func update(json: JSON) {
@@ -242,6 +245,9 @@ final class Section: NSManagedObject, IDFetchable {
         case units
         case course
         case discountingPolicy = "discounting_policy"
+        case isRequirementSatisfied = "is_requirement_satisfied"
+        case requiredSection = "required_section"
+        case requiredPercent = "required_percent"
     }
 }
 
