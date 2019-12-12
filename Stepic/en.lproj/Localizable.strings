@@ -450,6 +450,7 @@ CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle = "Delete unit";
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationMessage = "Are you sure you want to delete downloaded unit?";
 CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationTitle = "Delete section";
 CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationMessage = "Are you sure you want to delete downloaded section?";
+CourseInfoTabSyllabusSectionRequirementTitle = "To unlock this module you need to score %@ in module %@";
 CourseInfoTabReviews = "Reviews";
 CourseInfoTitleAuthor = "by";
 CourseInfoTitleAbout = "About";
