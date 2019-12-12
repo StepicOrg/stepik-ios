@@ -22,6 +22,11 @@ final class SettingsTableSectionFooterView: UITableViewHeaderFooterView, Reusabl
         }
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.text = nil
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
