@@ -229,7 +229,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             return "\(progress.score)/\(progress.cost)"
         }()
 
-        let requirementLabelText = self.makeFormattedSectionRequirementsText(
+        let requirementsLabelText = self.makeFormattedSectionRequirementsText(
             section: section,
             requiredSection: requiredSection
         )
@@ -240,7 +240,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             title: section.title,
             progress: (section.progress?.percentPassed ?? 0) / 100.0,
             progressLabelText: progressLabelText,
-            requirementLabelText: requirementLabelText,
+            requirementsLabelText: requirementsLabelText,
             units: units,
             deadlines: deadlines,
             downloadState: downloadState,

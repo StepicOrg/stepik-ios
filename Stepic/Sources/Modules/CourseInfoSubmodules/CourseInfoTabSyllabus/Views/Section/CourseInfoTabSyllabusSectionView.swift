@@ -157,13 +157,13 @@ final class CourseInfoTabSyllabusSectionView: UIView {
     func configure(viewModel: CourseInfoTabSyllabusSectionViewModel) {
         self.titleLabel.text = viewModel.title
         self.indexLabel.text = viewModel.index
-        self.requirementsLabel.text = viewModel.requirementLabelText
+        self.requirementsLabel.text = viewModel.requirementsLabelText
         self.progressLabel.text = viewModel.progressLabelText
         self.progressIndicatorView.progress = viewModel.progress
 
         self.examLabel.isHidden = !viewModel.isExam
         self.progressLabel.isHidden = viewModel.progressLabelText == nil
-        self.requirementsLabel.isHidden = viewModel.requirementLabelText == nil
+        self.requirementsLabel.isHidden = viewModel.requirementsLabelText == nil
 
         self.updateDownloadState(newState: viewModel.downloadState)
 
