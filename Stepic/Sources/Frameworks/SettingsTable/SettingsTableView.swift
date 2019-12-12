@@ -63,6 +63,9 @@ final class SettingsTableView: UIView {
         for group in Array(Set(flattenInputCellGroups)) {
             self.inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
         }
+
+        // Section footers heights not being calculated properly APPS-2586.
+        self.performTableViewUpdates()
     }
 
     // MARK: Cells initialization
@@ -92,11 +95,17 @@ final class SettingsTableView: UIView {
         cell.delegate = self.delegate
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
         cell.onHeightUpdate = { [weak self] in
-            DispatchQueue.main.async {
-                UIView.performWithoutAnimation {
-                    self?.tableView.beginUpdates()
-                    self?.tableView.endUpdates()
-                }
+            self?.performTableViewUpdates()
+        }
+    }
+
+    // MARK: Private API
+
+    private func performTableViewUpdates() {
+        DispatchQueue.main.async {
+            UIView.performWithoutAnimation {
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
             }
         }
     }

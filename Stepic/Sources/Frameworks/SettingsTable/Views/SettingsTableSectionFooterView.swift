@@ -22,21 +22,20 @@ final class SettingsTableSectionFooterView: UITableViewHeaderFooterView, Reusabl
         }
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.text = nil
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
         if self.descriptionLabel.superview == nil {
             self.contentView.addSubview(self.descriptionLabel)
-
             self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             self.descriptionLabel.snp.makeConstraints { make in
-                make.leading.equalToSuperview().offset(Appearance.labelInsets.left)
-                make.top.equalToSuperview().offset(Appearance.labelInsets.top)
-                make.trailing.equalToSuperview().offset(-Appearance.labelInsets.right)
-                make.bottom.equalToSuperview().offset(-Appearance.labelInsets.bottom)
+                make.edges.equalToSuperview().inset(Appearance.labelInsets)
             }
-
-            self.layoutIfNeeded()
         }
     }
 }
