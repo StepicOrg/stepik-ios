@@ -25,14 +25,16 @@ extension Section {
     @NSManaged var managedTestSectionAction: String?
     @NSManaged var managedIsExam: NSNumber?
     @NSManaged var managedCourseId: NSNumber?
-
+    @NSManaged var managedDiscountingPolicy: String?
     @NSManaged var managedUnitsArray: NSObject?
-
+    // Required section
+    @NSManaged var managedIsRequirementSatisfied: NSNumber?
+    @NSManaged var managedRequiredSectionID: NSNumber?
+    @NSManaged var managedRequiredPercent: NSNumber?
+    // Relationships
     @NSManaged var managedUnits: NSOrderedSet?
     @NSManaged var managedCourse: Course?
     @NSManaged var managedProgress: Progress?
-
-    @NSManaged var managedDiscountingPolicy: String?
 
     static var oldEntity: NSEntityDescription {
         return NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.instance.context)!
@@ -197,5 +199,32 @@ extension Section {
 
     var discountingPolicyType: DiscountingPolicy {
         return DiscountingPolicy(rawValue: self.discountingPolicy ?? "") ?? .noDiscount
+    }
+
+    var isRequirementSatisfied: Bool {
+        get {
+            return self.managedIsRequirementSatisfied?.boolValue ?? true
+        }
+        set {
+            self.managedIsRequirementSatisfied = newValue as NSNumber?
+        }
+    }
+
+    var requiredSectionID: Section.IdType? {
+        get {
+            return self.managedRequiredSectionID?.intValue
+        }
+        set {
+            self.managedRequiredSectionID = newValue as NSNumber?
+        }
+    }
+
+    var requiredPercent: Int {
+        get {
+            return self.managedRequiredPercent?.intValue ?? 0
+        }
+        set {
+            self.managedRequiredPercent = newValue as NSNumber?
+        }
     }
 }
