@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepicVideoPlayerViewController" customModule="Adaptive_1838" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepicVideoPlayerViewController" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="vAT-94-je7" id="9tO-6K-esf"/>
                 <outlet property="back10SecButton" destination="knc-c5-olR" id="BQr-pU-6yX"/>
                 <outlet property="backButton" destination="ga3-EW-ngM" id="4cU-A5-l4k"/>
                 <outlet property="bottomFullscreenControlsView" destination="fyR-gR-ToD" id="XcU-lf-8VI"/>
                 <outlet property="currentTimeTopLabel" destination="ZcT-UJ-DfH" id="Gde-5P-Ibt"/>
+                <outlet property="fillModeButton" destination="wP9-At-DbR" id="2SL-sO-liT"/>
                 <outlet property="forward10SecButton" destination="MoB-ve-4BS" id="Ilj-3b-seN"/>
                 <outlet property="fullTimeTopLabel" destination="ZZw-HW-dZ9" id="HwJ-V4-ibc"/>
                 <outlet property="fullscreenPlayButton" destination="um1-Jr-FFH" id="b7q-ye-mc8"/>
@@ -110,8 +110,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k6z-ye-53l" userLabel="Top FullScreen Controls">
                             <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wP9-At-DbR" userLabel="Fill Mode Button">
+                                    <rect key="frame" x="504" y="15" width="48" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="5Bj-dd-WL2"/>
+                                        <constraint firstAttribute="width" constant="48" id="tbz-ak-PeY"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_resize_vertical"/>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcT-UJ-DfH">
-                                    <rect key="frame" x="50" y="17" width="60" height="15"/>
+                                    <rect key="frame" x="50" y="17.5" width="60" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="6J9-i5-BAR"/>
                                     </constraints>
@@ -120,7 +128,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZw-HW-dZ9">
-                                    <rect key="frame" x="492" y="17" width="60" height="15"/>
+                                    <rect key="frame" x="436" y="17.5" width="60" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="SKt-KR-t52"/>
                                     </constraints>
@@ -129,11 +137,11 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9YA-SS-S7q">
-                                    <rect key="frame" x="118" y="25" width="366" height="2"/>
+                                    <rect key="frame" x="118" y="25" width="310" height="2"/>
                                     <color key="progressTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </progressView>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yp8-ke-m95">
-                                    <rect key="frame" x="116" y="10" width="370" height="31"/>
+                                    <rect key="frame" x="116" y="10" width="314" height="31"/>
                                     <color key="minimumTrackTintColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
@@ -152,20 +160,22 @@
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
+                                <constraint firstItem="wP9-At-DbR" firstAttribute="leading" secondItem="ZZw-HW-dZ9" secondAttribute="trailing" constant="8" id="4g0-mP-tCx"/>
                                 <constraint firstItem="9YA-SS-S7q" firstAttribute="width" secondItem="yp8-ke-m95" secondAttribute="width" id="7wA-xr-Cx3"/>
                                 <constraint firstItem="ZZw-HW-dZ9" firstAttribute="leading" secondItem="9YA-SS-S7q" secondAttribute="trailing" constant="8" id="Fkd-mG-kHv"/>
                                 <constraint firstItem="ZcT-UJ-DfH" firstAttribute="leading" secondItem="ga3-EW-ngM" secondAttribute="trailing" constant="8" id="I6o-6c-m4R"/>
                                 <constraint firstItem="ga3-EW-ngM" firstAttribute="leading" secondItem="k6z-ye-53l" secondAttribute="leading" constant="8" id="Paj-vg-Ucr"/>
                                 <constraint firstItem="9YA-SS-S7q" firstAttribute="centerY" secondItem="k6z-ye-53l" secondAttribute="centerY" constant="1" id="bZ9-lS-x1r"/>
                                 <constraint firstItem="ZcT-UJ-DfH" firstAttribute="centerY" secondItem="k6z-ye-53l" secondAttribute="centerY" id="bmw-gu-98m"/>
+                                <constraint firstAttribute="trailing" secondItem="wP9-At-DbR" secondAttribute="trailing" constant="8" id="cY7-Ik-Ziw"/>
                                 <constraint firstAttribute="height" constant="50" id="eEp-DW-0Xb"/>
                                 <constraint firstItem="9YA-SS-S7q" firstAttribute="leading" secondItem="ZcT-UJ-DfH" secondAttribute="trailing" constant="8" id="hTD-bP-oke"/>
                                 <constraint firstItem="yp8-ke-m95" firstAttribute="centerY" secondItem="k6z-ye-53l" secondAttribute="centerY" id="iG3-gX-Ujz"/>
+                                <constraint firstItem="wP9-At-DbR" firstAttribute="centerY" secondItem="k6z-ye-53l" secondAttribute="centerY" id="j30-jX-PoX"/>
                                 <constraint firstItem="ZZw-HW-dZ9" firstAttribute="centerY" secondItem="k6z-ye-53l" secondAttribute="centerY" id="mHe-GW-d0V"/>
                                 <constraint firstItem="ZZw-HW-dZ9" firstAttribute="leading" secondItem="yp8-ke-m95" secondAttribute="trailing" constant="8" id="om4-Na-uyz"/>
                                 <constraint firstItem="yp8-ke-m95" firstAttribute="leading" secondItem="ZcT-UJ-DfH" secondAttribute="trailing" constant="8" id="rg1-xM-zs3"/>
                                 <constraint firstItem="ga3-EW-ngM" firstAttribute="centerY" secondItem="k6z-ye-53l" secondAttribute="centerY" id="z1A-uP-zAx"/>
-                                <constraint firstAttribute="trailing" secondItem="ZZw-HW-dZ9" secondAttribute="trailing" constant="8" id="zUk-jN-UbT"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -179,7 +189,7 @@
                     <viewLayoutGuide key="safeArea" id="kig-3Z-BBq"/>
                 </view>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vAT-94-je7">
-                    <rect key="frame" x="282" y="184" width="37" height="37"/>
+                    <rect key="frame" x="281.5" y="184.5" width="37" height="37"/>
                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
             </subviews>
@@ -197,12 +207,13 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="ZrM-p1-paN"/>
-            <point key="canvasLocation" x="320" y="231"/>
+            <point key="canvasLocation" x="320" y="230.28485757121442"/>
         </view>
     </objects>
     <resources>
         <image name="ic_forward_10_48pt" width="48" height="48"/>
         <image name="ic_play_arrow_48pt" width="48" height="48"/>
         <image name="ic_replay_10_48pt" width="48" height="48"/>
+        <image name="ic_resize_vertical" width="48" height="48"/>
     </resources>
 </document>

@@ -34,7 +34,8 @@ final class StepicVideoPlayerLegacyAssembly: Assembly {
     }
 }
 
-// MARK: - StepicVideoPlayerViewController (Appearance) -
+// MARK: - Appearance -
+
 extension StepicVideoPlayerViewController {
     struct Appearance {
         static let topContainerViewCornerRadius: CGFloat = 8
@@ -70,7 +71,8 @@ final class StepicVideoPlayerViewController: UIViewController {
     @IBOutlet weak var fullTimeTopLabel: UILabel!
     @IBOutlet weak var topTimeProgressView: UIProgressView!
     @IBOutlet weak var topTimeSlider: UISlider!
-
+    @IBOutlet var fillModeButton: UIButton!
+    
     // MARK: Bottom fullscreen controls
     @IBOutlet weak var rateButton: UIButton!
     @IBOutlet weak var qualityButton: UIButton!
@@ -110,6 +112,12 @@ final class StepicVideoPlayerViewController: UIViewController {
         }
     }
 
+    private var currentVideoFillMode: VideoFillMode = .aspect {
+        didSet {
+            self.handleVideoFillModeDidChange()
+        }
+    }
+
     private var wasPlayingBeforeSeeking = false
 
     private var isPlayerControlsVisible = true
@@ -117,7 +125,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     private var videoInBackgroundTooltip: Tooltip?
 
-    // MARK: - UIViewController life cycle
+    // MARK: UIViewController life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,6 +177,9 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
         self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
+
+        self.fillModeButton.addTarget(self, action: #selector(self.fillModeButtonDidClick), for: .touchUpInside)
+        self.currentVideoFillMode = .aspect
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -190,6 +201,12 @@ final class StepicVideoPlayerViewController: UIViewController {
         }
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // Reset to aspect fit on device rotation.
+        self.currentVideoFillMode = .aspect
+    }
+
     deinit {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: did deinit")
@@ -197,7 +214,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.hidePlayerControlsTimer?.invalidate()
     }
     
-    // MARK: - Seek events
+    // MARK: Seek events
 
     @IBAction func topTimeSliderValueChanged(_ sender: UISlider) {
         let time = TimeInterval(sender.value) * self.player.maximumDuration
@@ -225,7 +242,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.player.seekToTime(time)
     }
 
-    // MARK: - Dismiss player
+    // MARK: Dismiss player
 
     @IBAction func backPressed(_ sender: UIButton) {
         self.dismissPlayer()
@@ -236,7 +253,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.dismiss(animated: true)
     }
 
-    // MARK: - Controlling the video rate
+    // MARK: Controlling the video rate
 
     @IBAction func changeRatePressed(_ sender: UIButton) {
         self.displayChangeVideoRateAlert()
@@ -298,7 +315,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.present(alert, animated: true)
     }
 
-    // MARK: - Controlling the video quality
+    // MARK: Controlling the video quality
 
     @IBAction func changeQualityPressed(_ sender: UIButton) {
         self.displayChangeVideoQualityAlert()
@@ -376,7 +393,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.present(alert, animated: true)
     }
 
-    // MARK: - Controlling the playback state
+    // MARK: Controlling the playback state
 
     private func getInitialVideoQualityURL() -> URL {
         if self.video.state == .cached {
@@ -472,7 +489,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         }
     }
 
-    // MARK: - Controls visibility
+    // MARK: Controls visibility
 
     @objc
     private func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
@@ -624,5 +641,53 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
         )
 
         self.present(alert, animated: true)
+    }
+}
+
+// MARK: - StepicVideoPlayerViewController (VideoFillMode) -
+
+extension StepicVideoPlayerViewController {
+    private enum VideoFillMode {
+        /// Preserve the video’s aspect ratio and fit the video within the layer’s bounds.
+        case aspect
+        /// Preserve the video’s aspect ratio and fill the layer’s bounds.
+        case aspectFill
+
+        var videoGravity: AVLayerVideoGravity {
+            switch self {
+            case .aspect:
+                return .resizeAspect
+            case .aspectFill:
+                return .resizeAspectFill
+            }
+        }
+    }
+
+    private func handleVideoFillModeDidChange() {
+        self.updateVideoFillModeIcon()
+
+        let requestedFillMode = self.currentVideoFillMode.videoGravity.rawValue
+        if self.player.fillMode != requestedFillMode {
+            self.player.fillMode = requestedFillMode
+        }
+    }
+
+    private func updateVideoFillModeIcon() {
+        self.fillModeButton.setImage(
+            UIImage(named: "ic_resize_vertical")?.withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        self.fillModeButton.tintColor = .black
+        self.fillModeButton.imageView?.contentMode = .scaleAspectFit
+    }
+
+    @objc
+    private func fillModeButtonDidClick() {
+        switch self.currentVideoFillMode {
+        case .aspect:
+            self.currentVideoFillMode = .aspectFill
+        case .aspectFill:
+            self.currentVideoFillMode = .aspect
+        }
     }
 }
