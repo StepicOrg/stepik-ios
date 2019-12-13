@@ -196,8 +196,15 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        // Reset to aspect fit on device rotation.
-        self.currentVideoFillMode = .aspect
+
+        coordinator.animate(
+            alongsideTransition: { _ in
+                self.currentVideoFillMode = .aspect
+            },
+            completion: { _ in
+                self.updateVideoFillModeIcon()
+            }
+        )
     }
 
     deinit {
@@ -701,17 +708,17 @@ extension StepicVideoPlayerViewController {
 
     private func updateVideoFillModeIcon() {
         let fillModeImage: UIImage? = {
-            let currentDeviceOrientation = DeviceInfo.current.orientation.device
+            let currentInterfaceOrientation = DeviceInfo.current.orientation.interface
 
             switch self.currentVideoFillMode {
             case .aspect:
-                if currentDeviceOrientation.isLandscape {
+                if currentInterfaceOrientation.isLandscape {
                     return UIImage(named: "resize-horizontal")
                 } else {
                     return UIImage(named: "resize-vertical")
                 }
             case .aspectFill:
-                if currentDeviceOrientation.isLandscape {
+                if currentInterfaceOrientation.isLandscape {
                     return UIImage(named: "compress-horizontal")
                 } else {
                     return UIImage(named: "compress-vertical")
