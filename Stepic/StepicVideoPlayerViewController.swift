@@ -673,11 +673,26 @@ extension StepicVideoPlayerViewController {
     }
 
     private func updateVideoFillModeIcon() {
-        self.fillModeButton.setImage(
-            UIImage(named: "ic_resize_vertical")?.withRenderingMode(.alwaysTemplate),
-            for: .normal
-        )
-        self.fillModeButton.tintColor = .black
+        let fillModeImage: UIImage? = {
+            let currentDeviceOrientation = DeviceInfo.current.orientation.device
+
+            switch self.currentVideoFillMode {
+            case .aspect:
+                if currentDeviceOrientation.isLandscape {
+                    return UIImage(named: "resize-horizontal")
+                } else {
+                    return UIImage(named: "resize-vertical")
+                }
+            case .aspectFill:
+                if currentDeviceOrientation.isLandscape {
+                    return UIImage(named: "compress-horizontal")
+                } else {
+                    return UIImage(named: "compress-vertical")
+                }
+            }
+        }()
+
+        self.fillModeButton.setImage(fillModeImage, for: .normal)
         self.fillModeButton.imageView?.contentMode = .scaleAspectFit
     }
 

@@ -111,12 +111,12 @@
                             <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wP9-At-DbR" userLabel="Fill Mode Button">
-                                    <rect key="frame" x="504" y="15" width="48" height="20"/>
+                                    <rect key="frame" x="522" y="15" width="30" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="5Bj-dd-WL2"/>
-                                        <constraint firstAttribute="width" constant="48" id="tbz-ak-PeY"/>
+                                        <constraint firstAttribute="width" constant="30" id="tbz-ak-PeY"/>
                                     </constraints>
-                                    <state key="normal" image="ic_resize_vertical"/>
+                                    <state key="normal" image="resize-horizontal"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcT-UJ-DfH">
                                     <rect key="frame" x="50" y="17.5" width="60" height="15"/>
@@ -128,7 +128,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZw-HW-dZ9">
-                                    <rect key="frame" x="436" y="17.5" width="60" height="15"/>
+                                    <rect key="frame" x="454" y="17.5" width="60" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="SKt-KR-t52"/>
                                     </constraints>
@@ -137,11 +137,11 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9YA-SS-S7q">
-                                    <rect key="frame" x="118" y="25" width="310" height="2"/>
+                                    <rect key="frame" x="118" y="25" width="328" height="2"/>
                                     <color key="progressTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </progressView>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yp8-ke-m95">
-                                    <rect key="frame" x="116" y="10" width="314" height="31"/>
+                                    <rect key="frame" x="116" y="10" width="332" height="31"/>
                                     <color key="minimumTrackTintColor" red="0.40000000596046448" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
@@ -214,6 +214,6 @@
         <image name="ic_forward_10_48pt" width="48" height="48"/>
         <image name="ic_play_arrow_48pt" width="48" height="48"/>
         <image name="ic_replay_10_48pt" width="48" height="48"/>
-        <image name="ic_resize_vertical" width="48" height="48"/>
+        <image name="resize-horizontal" width="33" height="33"/>
     </resources>
 </document>
