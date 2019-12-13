@@ -164,15 +164,6 @@ final class StepicVideoPlayerViewController: UIViewController {
 
         self.player.playbackLoops = false
 
-        let controlsVisibilityTapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.handleTapGestureRecognizer(_:))
-        )
-        controlsVisibilityTapGestureRecognizer.numberOfTapsRequired = 1
-        self.player.view.addGestureRecognizer(controlsVisibilityTapGestureRecognizer)
-
-        self.view.addGestureRecognizer(controlsVisibilityTapGestureRecognizer)
-
         self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
         self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
         self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
@@ -180,6 +171,8 @@ final class StepicVideoPlayerViewController: UIViewController {
 
         self.fillModeButton.addTarget(self, action: #selector(self.fillModeButtonDidClick), for: .touchUpInside)
         self.currentVideoFillMode = .aspect
+
+        self.setupGestureRecognizers()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -212,6 +205,26 @@ final class StepicVideoPlayerViewController: UIViewController {
         StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: did deinit")
         self.saveCurrentPlayerTime()
         self.hidePlayerControlsTimer?.invalidate()
+    }
+
+    // MARK: Setup player
+
+    private func setupGestureRecognizers() {
+        let videoTapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.videoLayerTapped(_:))
+        )
+        videoTapGestureRecognizer.numberOfTapsRequired = 1
+        self.player.view.addGestureRecognizer(videoTapGestureRecognizer)
+        self.view.addGestureRecognizer(videoTapGestureRecognizer)
+
+        let doubleTapVideoGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.videoLayerDoubleTapped(_:))
+        )
+        doubleTapVideoGestureRecognizer.numberOfTapsRequired = 2
+        self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
+        self.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
     }
     
     // MARK: Seek events
@@ -492,11 +505,16 @@ final class StepicVideoPlayerViewController: UIViewController {
     // MARK: Controls visibility
 
     @objc
-    private func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
-        self.handleControlsVisibility()
+    private func videoLayerTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        self.updateVideoControlsVisibility()
     }
 
-    private func handleControlsVisibility(hideControlsAutomatically: Bool = true) {
+    @objc
+    private func videoLayerDoubleTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        self.currentVideoFillMode.toggle()
+    }
+
+    private func updateVideoControlsVisibility(hideControlsAutomatically: Bool = true) {
         self.setPlayerBarControlsVisibleAnimated(visible: !self.isPlayerControlsVisible)
         self.isPlayerControlsVisible.toggle()
 
@@ -530,7 +548,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     @objc
     private func hidePlayerControlsIfVisible() {
         if self.isPlayerControlsVisible {
-            self.handleControlsVisibility()
+            self.updateVideoControlsVisibility()
         }
     }
 }
@@ -589,7 +607,7 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
 
         self.hidePlayerControlsTimer?.invalidate()
         self.isPlayerControlsVisible = false
-        self.handleControlsVisibility(hideControlsAutomatically: false)
+        self.updateVideoControlsVisibility(hideControlsAutomatically: false)
     }
 
     private func setTimeParametersAfterPlayerIsReady() {
@@ -661,6 +679,15 @@ extension StepicVideoPlayerViewController {
                 return .resizeAspectFill
             }
         }
+
+        mutating func toggle() {
+            switch self {
+            case .aspect:
+                self = .aspectFill
+            case .aspectFill:
+                self = .aspect
+            }
+        }
     }
 
     private func handleVideoFillModeDidChange() {
@@ -698,11 +725,6 @@ extension StepicVideoPlayerViewController {
 
     @objc
     private func fillModeButtonDidClick() {
-        switch self.currentVideoFillMode {
-        case .aspect:
-            self.currentVideoFillMode = .aspectFill
-        case .aspectFill:
-            self.currentVideoFillMode = .aspect
-        }
+        self.currentVideoFillMode.toggle()
     }
 }
