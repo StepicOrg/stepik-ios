@@ -158,6 +158,8 @@ extension NotificationsService {
                 ).send()
             case .background:
                 break
+            @unknown default:
+                break
             }
         }
     }

@@ -135,8 +135,7 @@ final class DeepLinkRouter {
         func getID(_ stringId: String, reversed: Bool) -> Int? {
             var slugString = ""
             let string = reversed ? String(stringId.reversed()) : stringId
-            // FIXME: fix
-            for character in ["string.characters"] {
+            for character in string {
                 if Int("\(character)") != nil {
                     if reversed {
                         slugString = "\(character)" + slugString

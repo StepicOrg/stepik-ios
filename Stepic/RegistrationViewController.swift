@@ -248,7 +248,7 @@ extension RegistrationViewController: UITextFieldDelegate {
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.onSignUpScreen, parameters: ["LoginInteractionType": "ime"])
 
             if registerButton.isEnabled {
-                self.onRegisterClick(registerButton)
+                self.onRegisterClick(registerButton!)
             }
             return true
         }

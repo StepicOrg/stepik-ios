@@ -262,7 +262,7 @@ public class Player: UIViewController {
             self.avplayer.removeTimeObserver(obs)
         }
 
-        self.avplayer.removeTimeObserver(timeObserver)
+        self.avplayer.removeTimeObserver(timeObserver!)
         self.delegate = nil
 
         NotificationCenter.default.removeObserver(self)
@@ -362,7 +362,7 @@ public class Player: UIViewController {
 
     public func seekToTime(_ time: CMTime) {
         if let playerItem = self.playerItem {
-            return playerItem.seek(to: time)
+            playerItem.seek(to: time, completionHandler: nil)
         }
     }
 
