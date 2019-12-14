@@ -29,7 +29,7 @@ final class BranchService {
     }
 
     func continueUserActivity(_ userActivity: NSUserActivity) {
-        Branch.getInstance()?.continue(userActivity)
+        Branch.getInstance().continue(userActivity)
     }
 
     func openURL(

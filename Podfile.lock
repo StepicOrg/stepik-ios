@@ -1,15 +1,15 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.3.0)
-  - Agrume (5.3.2):
+  - ActionSheetPicker-3.0 (2.4.0)
+  - Agrume (5.3.7):
     - SwiftyGif
   - Alamofire (4.9.1)
-  - Amplitude-iOS (4.8.2)
+  - Amplitude-iOS (4.9.3)
   - Atributika (4.9.0)
-  - AutoInsetter (1.7.2)
+  - AutoInsetter (1.8.0)
   - BEMCheckBox (1.4.1)
-  - Branch (0.25.11):
-    - Branch/Core (= 0.25.11)
-  - Branch/Core (0.25.11)
+  - Branch (0.31.0):
+    - Branch/Core (= 0.31.0)
+  - Branch/Core (0.31.0)
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
@@ -23,15 +23,15 @@ PODS:
   - DownloadButton (0.1.0)
   - EasyTipView (2.0.4)
   - Fabric (1.10.2)
-  - FBSDKCoreKit (5.8.0):
-    - FBSDKCoreKit/Basics (= 5.8.0)
-    - FBSDKCoreKit/Core (= 5.8.0)
-  - FBSDKCoreKit/Basics (5.8.0)
-  - FBSDKCoreKit/Core (5.8.0):
+  - FBSDKCoreKit (5.13.0):
+    - FBSDKCoreKit/Basics (= 5.13.0)
+    - FBSDKCoreKit/Core (= 5.13.0)
+  - FBSDKCoreKit/Basics (5.13.0)
+  - FBSDKCoreKit/Core (5.13.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.8.0):
-    - FBSDKLoginKit/Login (= 5.8.0)
-  - FBSDKLoginKit/Login (5.8.0):
+  - FBSDKLoginKit (5.13.0):
+    - FBSDKLoginKit/Login (= 5.13.0)
+  - FBSDKLoginKit/Login (5.13.0):
     - FBSDKCoreKit (~> 5.0)
   - Firebase/Analytics (6.13.0):
     - Firebase/Core
@@ -123,18 +123,18 @@ PODS:
     - GoogleUtilities/Logger
   - HexColors (2.3.0)
   - Highlightr (2.1.0)
-  - IQKeyboardManagerSwift (6.5.1)
-  - Kanna (4.0.3)
-  - Koloda (4.7):
+  - IQKeyboardManagerSwift (6.5.4)
+  - Kanna (5.0.0)
+  - Koloda (5.0):
     - pop (~> 1.0)
-  - Logging (0.0.1)
+  - Logging (1.2.0)
   - lottie-ios (2.5.3)
-  - Mockingjay (2.0.1):
-    - Mockingjay/Core (= 2.0.1)
-    - Mockingjay/XCTest (= 2.0.1)
-  - Mockingjay/Core (2.0.1):
-    - URITemplate (~> 2.0)
-  - Mockingjay/XCTest (2.0.1):
+  - Mockingjay (3.0.0-alpha.1):
+    - Mockingjay/Core (= 3.0.0-alpha.1)
+    - Mockingjay/XCTest (= 3.0.0-alpha.1)
+  - Mockingjay/Core (3.0.0-alpha.1):
+    - URITemplate (~> 3.0)
+  - Mockingjay/XCTest (3.0.0-alpha.1):
     - Mockingjay/Core
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -143,25 +143,25 @@ PODS:
   - nanopb/encode (0.3.9011)
   - Nimble (8.0.4)
   - Nuke (8.3.1)
-  - Pageboy (3.2.3)
+  - Pageboy (3.5.0)
   - pop (1.0.12)
   - Presentr (1.9)
-  - PromiseKit (6.11.0):
-    - PromiseKit/CorePromise (= 6.11.0)
-    - PromiseKit/Foundation (= 6.11.0)
-    - PromiseKit/UIKit (= 6.11.0)
-  - PromiseKit/CorePromise (6.11.0)
-  - PromiseKit/Foundation (6.11.0):
+  - PromiseKit (6.12.0):
+    - PromiseKit/CorePromise (= 6.12.0)
+    - PromiseKit/Foundation (= 6.12.0)
+    - PromiseKit/UIKit (= 6.12.0)
+  - PromiseKit/CorePromise (6.12.0)
+  - PromiseKit/Foundation (6.12.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.11.0):
+  - PromiseKit/UIKit (6.12.0):
     - PromiseKit/CorePromise
-  - Protobuf (3.11.1)
+  - Protobuf (3.11.2)
   - Quick (2.2.0)
   - Reveal-SDK (24)
   - SDWebImage (5.4.0):
     - SDWebImage/Core (= 5.4.0)
   - SDWebImage/Core (5.4.0)
-  - SnapKit (4.2.0)
+  - SnapKit (5.0.1)
   - STRegex (2.1.0)
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
@@ -170,14 +170,14 @@ PODS:
   - SwiftLint (0.38.0)
   - SwiftyGif (5.2.0)
   - SwiftyJSON (5.0.0)
-  - Tabman (2.4.3):
-    - AutoInsetter (~> 1.7.2)
-    - Pageboy (~> 3.2.3)
+  - Tabman (2.6.3):
+    - AutoInsetter (~> 1.8.0)
+    - Pageboy (~> 3.5.0)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
   - TTTAttributedLabel (2.0.0)
   - TUSafariActivity (1.0.4)
-  - URITemplate (2.0.3)
+  - URITemplate (3.0.0)
   - VK-ios-sdk (1.5.1)
   - YandexMobileMetrica/Dynamic (3.8.2):
     - YandexMobileMetrica/Dynamic/Core (= 3.8.2)
@@ -187,13 +187,13 @@ PODS:
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0 (= 2.3.0)
-  - Agrume (= 5.3.2)
+  - ActionSheetPicker-3.0 (= 2.4.0)
+  - Agrume (= 5.3.7)
   - Alamofire (= 4.9.1)
-  - Amplitude-iOS (= 4.8.2)
+  - Amplitude-iOS (= 4.9.3)
   - Atributika (= 4.9.0)
   - BEMCheckBox (= 1.4.1)
-  - Branch (= 0.25.11)
+  - Branch (= 0.31.0)
   - Charts (= 3.4.0)
   - Crashlytics (= 3.14.0)
   - CRToast (= 0.0.9)
@@ -201,34 +201,34 @@ DEPENDENCIES:
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.0.4)
   - Fabric (= 1.10.2)
-  - FBSDKCoreKit (= 5.8.0)
-  - FBSDKLoginKit (= 5.8.0)
+  - FBSDKCoreKit (= 5.13.0)
+  - FBSDKLoginKit (= 5.13.0)
   - Firebase/Analytics (= 6.13.0)
   - Firebase/Core (= 6.13.0)
   - Firebase/Messaging (= 6.13.0)
   - Firebase/RemoteConfig (= 6.13.0)
   - Highlightr (= 2.1.0)
-  - IQKeyboardManagerSwift (= 6.5.1)
-  - Kanna (= 4.0.3)
-  - Koloda (= 4.7)
-  - Logging (from `https://github.com/ivan-magda/swift-log.git`, branch `swift-4`)
+  - IQKeyboardManagerSwift (= 6.5.4)
+  - Kanna (= 5.0.0)
+  - Koloda (= 5.0)
+  - Logging (= 1.2.0)
   - lottie-ios (= 2.5.3)
-  - Mockingjay (= 2.0.1)
+  - Mockingjay (= 3.0.0-alpha.1)
   - Nimble (= 8.0.4)
   - Nuke (= 8.3.1)
   - Presentr (= 1.9)
-  - PromiseKit (= 6.11.0)
+  - PromiseKit (= 6.12.0)
   - Quick (= 2.2.0)
   - Reveal-SDK
   - SDWebImage (= 5.4.0)
-  - SnapKit (= 4.2.0)
+  - SnapKit (= 5.0.1)
   - STRegex (= 2.1.0)
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - SVProgressHUD (= 2.2.5)
   - SwiftDate (= 6.1.0)
   - SwiftLint (= 0.38.0)
   - SwiftyJSON (= 5.0.0)
-  - Tabman (= 2.4.3)
+  - Tabman (= 2.6.3)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
@@ -274,6 +274,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kanna
     - Koloda
+    - Logging
     - lottie-ios
     - Mockingjay
     - nanopb
@@ -302,9 +303,6 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 EXTERNAL SOURCES:
-  Logging:
-    :branch: swift-4
-    :git: https://github.com/ivan-magda/swift-log.git
   SVGKit:
     :branch: 2.x
     :git: https://github.com/SVGKit/SVGKit.git
@@ -312,9 +310,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
-  Logging:
-    :commit: cca23268da048a8d16b7a1dd88dcbd7dbda92a7b
-    :git: https://github.com/ivan-magda/swift-log.git
   SVGKit:
     :commit: c40671b9a264f8f71831c4e0452736debfae2164
     :git: https://github.com/SVGKit/SVGKit.git
@@ -323,14 +318,14 @@ CHECKOUT OPTIONS:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
-  Agrume: 171c1d1079324195c7ce04af4c7a66d86a9cf952
+  ActionSheetPicker-3.0: c68e1f8355828b4e1c823fa87185aacfef5e6fe3
+  Agrume: 365b69b37f5e3e527b164dbb782a03c710c7b781
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  Amplitude-iOS: 46c8e6e65c49bb1ad1909a9add1a68e1f8562b3f
+  Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   Atributika: 0127bf02cd86a16c3f29581627b2276af7096747
-  AutoInsetter: 176c5c069b40bf6afa51bf7081be346ab70ca315
+  AutoInsetter: 0b90ca74e36561c340129045a3722c51a0b15c58
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
-  Branch: 3cc6dcfd726db42ced22c418c0fb09aa5e90a847
+  Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
@@ -339,8 +334,8 @@ SPEC CHECKSUMS:
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
-  FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
+  FBSDKCoreKit: b1645dba3dfdba6102f2d4026fdbfca8114dc229
+  FBSDKLoginKit: 4aca55e93a63b1ff0cb9446208d49e32c13ab24a
   Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
   FirebaseABTesting: 0d10f3cdc3fa00f3f175b5b56c1003c8e888299f
   FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
@@ -357,24 +352,24 @@ SPEC CHECKSUMS:
   GoogleUtilities: 547a86735c6f0ee30ad17e94df4fc21f616b71cb
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
-  IQKeyboardManagerSwift: 9ac7524fad9f9fe9a3b98c927e7772471ca546d2
-  Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
-  Koloda: f456d003d2ce15ef9f10c2874a444f1f570b490c
-  Logging: 30d7a6efba25f06bee2b6f5f76914baaeac2e422
+  IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
+  Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
+  Koloda: 75302d21882cc3e274c1561b1155805ea5919dab
+  Logging: 7838d379d234d7e5ae1265fa02804a9084caf04c
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
-  Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
+  Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
   Nuke: 85fb80f8df0cb26c28d2f4e0cb7fb93bcd6548d3
-  Pageboy: 347c49b3a7f15aa78ddb6bf5c6c3b113e382fe52
+  Pageboy: 3794c578aae5fcce06e90b3ed4a0ad6b807d75bb
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
-  PromiseKit: e4863d06976e7dee5e41c04fc7371c16b3600292
-  Protobuf: 20d79da7f20b5928b80043b05080b816e802659e
+  PromiseKit: c06835ba442ce5454ce3cdde470232804a6e4ff8
+  Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
   SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   STRegex: dfa420d93d8c1402956233b3879ec1fc14b45fbe
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -382,14 +377,14 @@ SPEC CHECKSUMS:
   SwiftLint: 4105f061f9812b214568b736dab580ab2c73a582
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
-  Tabman: c2c83ebfcbec3e5be67e27a1dd6689a4e3efccd3
+  Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
   TSMessages: eb3cf27b6900684a21bad4fe9ea426e287b8c839
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
-  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
+  URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: edb00e8af2903290e142ba4c488adf8d394e828a
 
-PODFILE CHECKSUM: 82838d40c87b8a99393ee56f68f617bed56bd820
+PODFILE CHECKSUM: ef3304a3bbcea7d78474fe528d02661b67bd113f
 
 COCOAPODS: 1.8.4

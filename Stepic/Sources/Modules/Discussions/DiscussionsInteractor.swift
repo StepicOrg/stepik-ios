@@ -493,7 +493,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             return (0, 0)
         case .scrollTo(let discussionID, _):
             // This could happen when the selected comment was deleted and there are no more comments.
-            guard let discussionIndex = self.currentDiscussionsIDs.index(of: discussionID) else {
+            guard let discussionIndex = self.currentDiscussionsIDs.firstIndex(of: discussionID) else {
                 return (0, 0)
             }
 
@@ -555,7 +555,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             return Array(self.currentDiscussionsIDs[startIndex..<endIndex])
         case .none:
             if case .scrollTo(let discussionID, _) = self.presentationContext {
-                guard let discussionIndex = self.currentDiscussionsIDs.index(of: discussionID) else {
+                guard let discussionIndex = self.currentDiscussionsIDs.firstIndex(of: discussionID) else {
                     assertionFailure("Discussion must appear in the collection")
                     return []
                 }

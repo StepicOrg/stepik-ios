@@ -136,7 +136,7 @@ final class GradientCoursesPlaceholderViewFactory {
             case .firstWord:
                 return GradientCoursesPlaceholderViewFactory.makeWordsBoldAndLight(
                     text: string,
-                    firstSpaceIndex: string.index(of: " "),
+                    firstSpaceIndex: string.firstIndex(of: " "),
                     fontSize: fontSize
                 )
             case .useTags:

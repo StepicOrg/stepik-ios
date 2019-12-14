@@ -64,7 +64,7 @@ final class RetrieveRequestMaker {
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []
                         let resultArray: [T] = jsonArray.map { objectJSON in
-                            if let recoveredIndex = updatingObjects.index(where: { $0.hasEqualId(json: objectJSON) }) {
+                            if let recoveredIndex = updatingObjects.firstIndex(where: { $0.hasEqualId(json: objectJSON) }) {
                                 updatingObjects[recoveredIndex].update(json: objectJSON)
                                 return updatingObjects[recoveredIndex]
                             } else {
@@ -198,7 +198,7 @@ final class RetrieveRequestMaker {
                         let jsonArray: [JSON] = json[paramName].array ?? []
                         let resultArray: [T] = jsonArray.map {
                             objectJSON in
-                            if let recoveredIndex = updating.index(where: { $0.hasEqualId(json: objectJSON) }) {
+                            if let recoveredIndex = updating.firstIndex(where: { $0.hasEqualId(json: objectJSON) }) {
                                 updating[recoveredIndex].update(json: objectJSON)
                                 return updating[recoveredIndex]
                             } else {

@@ -60,7 +60,7 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
     }
 
     func selectSection(_ notificationSection: NotificationsSection) {
-        if let index = self.sections.index(of: notificationSection) {
+        if let index = self.sections.firstIndex(of: notificationSection) {
             self.selectTabAtIndex(index)
         }
     }

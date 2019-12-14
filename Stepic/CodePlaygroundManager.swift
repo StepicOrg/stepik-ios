@@ -9,25 +9,27 @@
 import Foundation
 
 final class CodePlaygroundManager {
-    let closers: [String: String] = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
-
     typealias Autocomplete = (suggestions: [String], prefix: String)
     typealias AnalysisResult = (text: String, position: Int, autocomplete: Autocomplete?)
     typealias Changes = (isInsertion: Bool, changes: String)
+
+    let closers: [String: String] = ["{": "}", "[": "]", "(": ")", "\"": "\"", "'": "'"]
+
+    let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
 
     var suggestionsController: CodeSuggestionsTableViewController?
     var isSuggestionsViewPresented: Bool {
         return suggestionsController != nil
     }
 
-    //Detects the changes string between currentText and previousText
-    //!!!All changes should be a substring inserted somewhere into the string
+    /// Detects the changes string between currentText and previousText.
+    /// All changes should be a substring inserted somewhere into the string.
     func getChangesSubstring(currentText: String, previousText: String) -> Changes {
-        var maxString: String = ""
-        var minString: String = ""
-        var isInsertion: Bool = true
+        var maxString = ""
+        var minString = ""
+        var isInsertion = true
 
-        //Understand, if something was deleted or inserted
+        // Determine if something was deleted or inserted
         if currentText.count > previousText.count {
             maxString = currentText
             minString = previousText
@@ -38,184 +40,287 @@ final class CodePlaygroundManager {
             isInsertion = false
         }
 
-        //Searching for the beginning of the changed substring
+        // Search for the beginning of the changed substring
         var changesBeginningOffset = 0
-        while (changesBeginningOffset < minString.count) && (minString.characters[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)] == maxString.characters[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)]) {
+        while changesBeginningOffset < minString.count
+            && minString[minString.index(minString.startIndex, offsetBy: changesBeginningOffset)]
+            == maxString[maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)] {
             changesBeginningOffset += 1
         }
-        minString.removeSubrange(minString.startIndex..<minString.index(minString.startIndex, offsetBy: changesBeginningOffset))
-        maxString.removeSubrange(maxString.startIndex..<maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset))
 
-        //Searching for the ending of the changed substring
+        minString.removeSubrange(
+            minString.startIndex..<minString.index(minString.startIndex, offsetBy: changesBeginningOffset)
+        )
+        maxString.removeSubrange(
+            maxString.startIndex..<maxString.index(maxString.startIndex, offsetBy: changesBeginningOffset)
+        )
+
+        // Search for the ending of the changed substring
         var changesEndingOffset = 0
-        while (changesEndingOffset < minString.count) && (minString.characters[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)] == maxString.characters[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)]) {
+        while changesEndingOffset < minString.count
+            && minString[minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset)]
+            == maxString[maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset)] {
             changesEndingOffset += 1
         }
 
-        if minString != "" {
-            minString.removeSubrange(minString.index(minString.index(before: minString.endIndex), offsetBy: -changesEndingOffset + 1)..<minString.endIndex)
+        if !minString.isEmpty {
+            minString.removeSubrange(
+                minString.index(
+                    minString.index(before: minString.endIndex),
+                    offsetBy: -changesEndingOffset + 1
+                )..<minString.endIndex
+            )
         }
-        if maxString != "" {
-            maxString.removeSubrange(maxString.index(maxString.index(before: maxString.endIndex), offsetBy: -changesEndingOffset + 1)..<maxString.endIndex)
+        if !maxString.isEmpty {
+            maxString.removeSubrange(
+                maxString.index(
+                    maxString.index(before: maxString.endIndex),
+                    offsetBy: -changesEndingOffset + 1
+                )..<maxString.endIndex
+            )
         }
 
         return (isInsertion: isInsertion, changes: maxString)
     }
 
-    //Detects, if there should be made a new line after tab
-    private func shouldMakeTabLineAfter(symbol: Character, language: CodeLanguage) -> (shouldMakeNewLine: Bool, paired: Bool) {
+    /// Detects if there should be made a new line after tab.
+    private func shouldMakeTabLineAfter(
+        symbol: Character,
+        language: CodeLanguage
+    ) -> (shouldMakeNewLine: Bool, paired: Bool) {
         switch language {
         case .python:
-            return symbol == ":" ? (shouldMakeNewLine: true, paired: false) : (shouldMakeNewLine: false, paired: false)
-        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin:
-            return symbol == "{" ? (shouldMakeNewLine: true, paired: true) : (shouldMakeNewLine: false, paired: false)
+            return symbol == ":"
+                ? (shouldMakeNewLine: true, paired: false)
+                : (shouldMakeNewLine: false, paired: false)
+        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin, .swift:
+            return symbol == "{"
+                ? (shouldMakeNewLine: true, paired: true)
+                : (shouldMakeNewLine: false, paired: false)
         default:
             return (shouldMakeNewLine: false, paired: false)
         }
     }
 
-    let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
-
-    //Gets current token for text
+    /// Returns current token for text.
     private func getCurrentToken(text: String, cursorPosition: Int) -> String {
         var offsetBefore = 0
-        while (text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore) &&
-            allowedCharacters.indexOf("\(text.characters[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])") != nil) {
+        while text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)
+            && self.allowedCharacters.indexOf(
+                String(text[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])
+            ) != nil {
             offsetBefore += 1
         }
 
         var offsetAfter = 0
-        while (text.endIndex != text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter) &&
-            allowedCharacters.indexOf("\(text.characters[text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])") != nil) {
-                offsetAfter += 1
+        while text.endIndex != text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)
+            && self.allowedCharacters.indexOf(
+                String(text[text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])
+            ) != nil {
+            offsetAfter += 1
         }
 
-        let token = text.substring(with: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)..<text.index(text.startIndex, offsetBy: cursorPosition)) + text.substring(with: text.index(text.startIndex, offsetBy: cursorPosition)..<text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter))
+        let token = String(text[text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)..<text.index(text.startIndex, offsetBy: cursorPosition)])
+            + String(text[text.index(text.startIndex, offsetBy: cursorPosition)..<text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])
 
         return token
     }
 
-    private func checkNextLineInsertion(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
-        if changes.isInsertion && changes.changes == "\n" {
-            var text = currentText
-
-            let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
-
-            guard cursorIndex > text.startIndex else {
-                return nil
-            }
-
-            //searching previous \n or beginning of the string
-            let firstPart = text.substring(to: text.index(before: cursorIndex))
-            if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
-                //extracting previous line before \n
-                let line = firstPart.substring(from: firstPart.index(after: firstPart.index(firstPart.startIndex, offsetBy: indexOfLineEndBefore)))
-
-                //counting spaces in the beginning to know the offset
-                var spacesCount = 0
-                for character in line.characters {
-                    if character == " " {
-                        spacesCount += 1
-                    } else {
-                        break
-                    }
-                }
-                let offset = spacesCount
-
-                //searching for the last non-space symbol in the string to know if we need to do more than just return
-                var characterBeforeEndline: Character?
-                for character in line.reversed() {
-                    if character == " " {
-                        continue
-                    } else {
-                        characterBeforeEndline = character
-                        break
-                    }
-                }
-
-                //Checking if there is any character before endline (it's not an empty or all-spaces line)
-                if let char = characterBeforeEndline {
-                    let shouldTab = shouldMakeTabLineAfter(symbol: char, language: language)
-                    if shouldTab.shouldMakeNewLine {
-                        if shouldTab.paired {
-                            let spacesString = String(repeating: " ", count: offset + tabSize) + "\n" + String(repeating: " ", count: offset)
-                            text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                            return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
-                        } else {
-                            let spacesString = String(repeating: " ", count: offset + tabSize)
-                            text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                            return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
-                        }
-                    }
-                }
-
-                // returning with just the spaces and offset
-                let spacesString = String(repeating: " ", count: offset)
-                text.insert(contentsOf: spacesString.characters, at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                return (text: text, position: cursorPosition + offset, autocomplete: nil)
-            } else {
-                return (text: text, position: cursorPosition, autocomplete: nil)
-            }
+    private func checkNextLineInsertion(
+        currentText: String,
+        previousText: String,
+        cursorPosition: Int,
+        language: CodeLanguage,
+        tabSize: Int,
+        changes: Changes
+    ) -> AnalysisResult? {
+        guard changes.isInsertion && changes.changes == "\n" else {
+            return nil
         }
 
-        return nil
+        var text = currentText
+        let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+
+        guard cursorIndex > text.startIndex else {
+            return nil
+        }
+
+        // Searching previous \n or beginning of the string
+        let firstPart = String(text[..<text.index(before: cursorIndex)])
+        if let indexOfLineEndBefore = firstPart.lastIndexOf("\n") {
+            // Extracting previous line before \n
+            let indexAfterEndOfLine = firstPart.index(
+                after: firstPart.index(firstPart.startIndex, offsetBy: indexOfLineEndBefore)
+            )
+            let line = String(firstPart[indexAfterEndOfLine...])
+
+            // Counting spaces in the beginning to know the offset
+            var spacesCount = 0
+            for character in line {
+                if character == " " {
+                    spacesCount += 1
+                } else {
+                    break
+                }
+            }
+            let offset = spacesCount
+
+            // Searching for the last non-space symbol in the string to know if we need to do more than just return
+            var characterBeforeEndline: Character?
+            for character in line.reversed() {
+                if character == " " {
+                    continue
+                } else {
+                    characterBeforeEndline = character
+                    break
+                }
+            }
+
+            // Checking if there is any character before endline (it's not an empty or all-spaces line)
+            if let char = characterBeforeEndline {
+                let shouldTab = self.shouldMakeTabLineAfter(symbol: char, language: language)
+                if shouldTab.shouldMakeNewLine {
+                    if shouldTab.paired {
+                        let spacesString = String(repeating: " ", count: offset + tabSize)
+                            + "\n"
+                            + String(repeating: " ", count: offset)
+                        text.insert(
+                            contentsOf: spacesString,
+                            at: currentText.index(currentText.startIndex, offsetBy: cursorPosition)
+                        )
+                        return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
+                    } else {
+                        let spacesString = String(repeating: " ", count: offset + tabSize)
+                        text.insert(
+                            contentsOf: spacesString,
+                            at: currentText.index(currentText.startIndex, offsetBy: cursorPosition)
+                        )
+                        return (text: text, position: cursorPosition + offset + tabSize, autocomplete: nil)
+                    }
+                }
+            }
+
+            // Returning with just the spaces and offset
+            let spacesString = String(repeating: " ", count: offset)
+            text.insert(
+                contentsOf: spacesString,
+                at: currentText.index(currentText.startIndex, offsetBy: cursorPosition)
+            )
+
+            return (text: text, position: cursorPosition + offset, autocomplete: nil)
+        } else {
+            return (text: text, position: cursorPosition, autocomplete: nil)
+        }
     }
 
-    private func checkPaired(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int, changes: Changes) -> AnalysisResult? {
-        if changes.isInsertion {
-            if let closer = closers[changes.changes] {
-                var text = currentText
+    private func checkPaired(
+        currentText: String,
+        previousText: String,
+        cursorPosition: Int,
+        language: CodeLanguage,
+        tabSize: Int,
+        changes: Changes
+    ) -> AnalysisResult? {
+        guard changes.isInsertion,
+              let closer = closers[changes.changes] else {
+            return nil
+        }
 
-                //check, if there is text after the bracket, not a \n or whitespace
-                let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
-                if cursorIndex != text.endIndex {
-                    let textAfter = text.substring(from: cursorIndex)
-                    if let indexOfLineEndAfter = textAfter.indexOf("\n") {
-                        let line = textAfter.substring(to: textAfter.index(textAfter.startIndex, offsetBy: indexOfLineEndAfter))
-                        var onlySpaces: Bool = true
-                        for character in line.characters {
-                            if character != " " {
-                                onlySpaces = false
-                                break
-                            }
-                        }
+        var text = currentText
 
-                        if onlySpaces {
-                            text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
-                            return (text: text, position: cursorPosition, autocomplete: nil)
-                        }
+        // Check if there is text after the bracket, not a \n or whitespace
+        let cursorIndex = text.index(text.startIndex, offsetBy: cursorPosition)
+        if cursorIndex != text.endIndex {
+            let textAfter = String(text[cursorIndex...])
+            if let indexOfLineEndAfter = textAfter.indexOf("\n") {
+                let line = String(textAfter[..<textAfter.index(textAfter.startIndex, offsetBy: indexOfLineEndAfter)])
+                var onlySpaces = true
+                for character in line {
+                    if character != " " {
+                        onlySpaces = false
+                        break
                     }
-                } else {
-                    text.insert(closer.characters[closer.startIndex], at: currentText.index(currentText.startIndex, offsetBy: cursorPosition))
+                }
+
+                if onlySpaces {
+                    text.insert(
+                        closer[closer.startIndex],
+                        at: currentText.index(currentText.startIndex, offsetBy: cursorPosition)
+                    )
                     return (text: text, position: cursorPosition, autocomplete: nil)
                 }
             }
+        } else {
+            text.insert(
+                closer[closer.startIndex],
+                at: currentText.index(currentText.startIndex, offsetBy: cursorPosition)
+            )
+            return (text: text, position: cursorPosition, autocomplete: nil)
         }
+
         return nil
     }
 
-    private func getAutocompleteSuggestions(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage) -> AnalysisResult? {
-        //Getting current token of a string
-        let token = getCurrentToken(text: currentText, cursorPosition: cursorPosition)
+    private func getAutocompleteSuggestions(
+        currentText: String,
+        previousText: String,
+        cursorPosition: Int,
+        language: CodeLanguage
+    ) -> AnalysisResult? {
+        // Getting current token of a string
+        let token = self.getCurrentToken(text: currentText, cursorPosition: cursorPosition)
 
-        if token != "" {
-            let suggestions = AutocompleteWords.autocompleteFor(token, language: language)
-            return (text: currentText, position: cursorPosition, autocomplete: (suggestions: suggestions, prefix: token))
+        if token.isEmpty {
+            return nil
         }
-        return nil
+
+        let suggestions = AutocompleteWords.autocompleteFor(token, language: language)
+
+        return (
+            text: currentText,
+            position: cursorPosition,
+            autocomplete: (suggestions: suggestions, prefix: token)
+        )
     }
 
-    //Analyzes given text using parameters
-    func analyze(currentText: String, previousText: String, cursorPosition: Int, language: CodeLanguage, tabSize: Int) -> AnalysisResult {
-        let changes = getChangesSubstring(currentText: currentText, previousText: previousText)
+    /// Analyzes given text using parameters.
+    func analyze(
+        currentText: String,
+        previousText: String,
+        cursorPosition: Int,
+        language: CodeLanguage,
+        tabSize: Int
+    ) -> AnalysisResult {
+        let changes = self.getChangesSubstring(currentText: currentText, previousText: previousText)
 
-        if let nextLineInsertionResult = checkNextLineInsertion(currentText: currentText, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize, changes: changes) {
+        if let nextLineInsertionResult = self.checkNextLineInsertion(
+            currentText: currentText,
+            previousText: previousText,
+            cursorPosition: cursorPosition,
+            language: language,
+            tabSize: tabSize,
+            changes: changes
+        ) {
             return nextLineInsertionResult
         }
-        if let pairedCheckResult = checkPaired(currentText: currentText, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize, changes: changes) {
+
+        if let pairedCheckResult = self.checkPaired(
+            currentText: currentText,
+            previousText: previousText,
+            cursorPosition: cursorPosition,
+            language: language,
+            tabSize: tabSize,
+            changes: changes
+        ) {
             return pairedCheckResult
         }
-        if let autocompleteSuggestionsResult = getAutocompleteSuggestions(currentText: currentText, previousText: previousText, cursorPosition: cursorPosition, language: language) {
+
+        if let autocompleteSuggestionsResult = self.getAutocompleteSuggestions(
+            currentText: currentText,
+            previousText: previousText,
+            cursorPosition: cursorPosition,
+            language: language
+        ) {
             return autocompleteSuggestionsResult
         }
 
@@ -224,45 +329,59 @@ final class CodePlaygroundManager {
 
     func countTabSize(text: String) -> Int {
         var minTabSize = 100
-        text.enumerateLines {
-            line, _ in
+
+        text.enumerateLines { line, _ in
             var spacesBeforeFirstCharacter = 0
-            for character in line.characters {
+
+            for character in line {
                 if character == " " {
                     spacesBeforeFirstCharacter += 1
                 } else {
                     break
                 }
             }
+
             if spacesBeforeFirstCharacter > 0 && minTabSize > spacesBeforeFirstCharacter {
                 minTabSize = spacesBeforeFirstCharacter
             }
         }
+
         if minTabSize == 100 {
             minTabSize = 4
         }
+
         return minTabSize
     }
 
     private func hideSuggestions() {
-        //TODO: hide suggestions view here
-        suggestionsController?.view.removeFromSuperview()
-        suggestionsController?.removeFromParent()
-        suggestionsController = nil
+        // TODO: hide suggestions view here
+        self.suggestionsController?.view.removeFromSuperview()
+        self.suggestionsController?.removeFromParent()
+        self.suggestionsController = nil
     }
 
     // TODO: Refactor code suggestion presentation.
-    private func presentSuggestions(suggestions: [String], prefix: String, cursorPosition: Int, inViewController vc: UIViewController, textView: UITextView, suggestionsDelegate: CodeSuggestionDelegate) {
-        //TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
-        if suggestionsController == nil {
-            suggestionsController = CodeSuggestionsTableViewController(nibName: "CodeSuggestionsTableViewController", bundle: nil)
-            vc.addChild(suggestionsController!)
-            textView.addSubview(suggestionsController!.view)
-            suggestionsController?.delegate = suggestionsDelegate
+    private func presentSuggestions(
+        suggestions: [String],
+        prefix: String,
+        cursorPosition: Int,
+        inViewController vc: UIViewController,
+        textView: UITextView,
+        suggestionsDelegate: CodeSuggestionDelegate
+    ) {
+        // TODO: If suggestions are presented, only change the data there, otherwise instantiate and add suggestions view
+        if self.suggestionsController == nil {
+            self.suggestionsController = CodeSuggestionsTableViewController(
+                nibName: "CodeSuggestionsTableViewController",
+                bundle: nil
+            )
+            vc.addChild(self.suggestionsController!)
+            textView.addSubview(self.suggestionsController!.view)
+            self.suggestionsController?.delegate = suggestionsDelegate
         }
 
-        suggestionsController?.suggestions = suggestions
-        suggestionsController?.prefix = prefix
+        self.suggestionsController?.suggestions = suggestions
+        self.suggestionsController?.prefix = prefix
 
         if let selectedRange = textView.selectedTextRange {
             // `caretRect` is in the `textView` coordinate space.
@@ -271,9 +390,9 @@ final class CodePlaygroundManager {
             var suggestionsFrameMinX = caretRect.minX
             var suggestionsFrameMinY = caretRect.maxY
 
-            let suggestionsHeight = suggestionsController!.suggestionsHeight
+            let suggestionsHeight = self.suggestionsController!.suggestionsHeight
 
-            //check if we need to move suggestionsFrame
+            // Check if we need to move suggestionsFrame
             if suggestionsFrameMinY + suggestionsHeight > (textView.frame.maxY - textView.frame.origin.y) {
                 suggestionsFrameMinY = caretRect.minY - suggestionsHeight
             }
@@ -282,8 +401,12 @@ final class CodePlaygroundManager {
                 suggestionsFrameMinX = (textView.frame.maxX - textView.frame.origin.x - 102)
             }
 
-            let rect = CGRect(x: suggestionsFrameMinX, y: suggestionsFrameMinY, width: 100, height: suggestionsHeight)
-            suggestionsController?.view.frame = rect
+            self.suggestionsController?.view.frame = CGRect(
+                x: suggestionsFrameMinX,
+                y: suggestionsFrameMinY,
+                width: 100,
+                height: suggestionsHeight
+            )
         }
     }
 
@@ -295,41 +418,67 @@ final class CodePlaygroundManager {
     }
 
     func insertAtCurrentPosition(symbols: String, textView: UITextView) {
-        if let selectedRange = textView.selectedTextRange {
-            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
-            var text = textView.text!
-            text.insert(contentsOf: symbols.characters, at: text.index(text.startIndex, offsetBy: cursorPosition))
-            textView.text = text
-            // Import here to update selectedTextRange before calling textViewDidChange #APPS-2352
-            textView.selectedTextRange = textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
-            // Manually call textViewDidChange, becuase when manually setting the text of a UITextView with code,
-            // the textViewDidChange: method does not get called.
-            textView.delegate?.textViewDidChange?(textView)
+        guard let selectedRange = textView.selectedTextRange else {
+            return
         }
+
+        let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+        var text = textView.text!
+        text.insert(contentsOf: symbols, at: text.index(text.startIndex, offsetBy: cursorPosition))
+        textView.text = text
+        // Import here to update selectedTextRange before calling textViewDidChange #APPS-2352
+        textView.selectedTextRange = self.textRangeFrom(position: cursorPosition + symbols.count, textView: textView)
+        // Manually call textViewDidChange, becuase when manually setting the text of a UITextView with code,
+        // the textViewDidChange: method does not get called.
+        textView.delegate?.textViewDidChange?(textView)
     }
 
-    func analyzeAndComplete(textView: UITextView, previousText: String, language: CodeLanguage, tabSize: Int, inViewController vc: UIViewController, suggestionsDelegate: CodeSuggestionDelegate) {
-        if let selectedRange = textView.selectedTextRange {
-            let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
+    func analyzeAndComplete(
+        textView: UITextView,
+        previousText: String,
+        language: CodeLanguage,
+        tabSize: Int,
+        inViewController vc: UIViewController,
+        suggestionsDelegate: CodeSuggestionDelegate
+    ) {
+        guard let selectedRange = textView.selectedTextRange else {
+            return
+        }
 
-            let analyzed = analyze(currentText: textView.text, previousText: previousText, cursorPosition: cursorPosition, language: language, tabSize: tabSize)
+        let cursorPosition = textView.offset(from: textView.beginningOfDocument, to: selectedRange.start)
 
-            if textView.text != analyzed.text {
-                textView.text = analyzed.text
-                textView.delegate?.textViewDidChange?(textView)
-            }
-            if textView.selectedTextRange != textRangeFrom(position: analyzed.position, textView: textView) {
-                textView.selectedTextRange = textRangeFrom(position: analyzed.position, textView: textView)
-            }
-            if let autocomplete = analyzed.autocomplete {
-                if autocomplete.suggestions.count == 0 {
-                    hideSuggestions()
-                } else {
-                    presentSuggestions(suggestions: autocomplete.suggestions, prefix: autocomplete.prefix, cursorPosition: analyzed.position, inViewController: vc, textView: textView, suggestionsDelegate: suggestionsDelegate)
-                }
+        let analyzed = self.analyze(
+            currentText: textView.text,
+            previousText: previousText,
+            cursorPosition: cursorPosition,
+            language: language,
+            tabSize: tabSize
+        )
+
+        if textView.text != analyzed.text {
+            textView.text = analyzed.text
+            textView.delegate?.textViewDidChange?(textView)
+        }
+
+        if textView.selectedTextRange != self.textRangeFrom(position: analyzed.position, textView: textView) {
+            textView.selectedTextRange = self.textRangeFrom(position: analyzed.position, textView: textView)
+        }
+
+        if let autocomplete = analyzed.autocomplete {
+            if autocomplete.suggestions.isEmpty {
+                self.hideSuggestions()
             } else {
-                hideSuggestions()
+                self.presentSuggestions(
+                    suggestions: autocomplete.suggestions,
+                    prefix: autocomplete.prefix,
+                    cursorPosition: analyzed.position,
+                    inViewController: vc,
+                    textView: textView,
+                    suggestionsDelegate: suggestionsDelegate
+                )
             }
+        } else {
+            self.hideSuggestions()
         }
     }
 }

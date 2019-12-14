@@ -346,7 +346,7 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     func getSection(before section: Section) -> Section? {
-        let currentIndex = sectionsArray.index(of: section.id)
+        let currentIndex = sectionsArray.firstIndex(of: section.id)
         if currentIndex == nil || currentIndex == sectionsArray.startIndex {
             return nil
         } else {
@@ -356,7 +356,7 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     func getSection(after section: Section) -> Section? {
-        let currentIndex = sectionsArray.index(of: section.id)
+        let currentIndex = sectionsArray.firstIndex(of: section.id)
         if currentIndex == nil || currentIndex == sectionsArray.endIndex.advanced(by: -1) {
             return nil
         } else {

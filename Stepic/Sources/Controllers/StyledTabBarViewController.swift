@@ -117,7 +117,7 @@ final class StyledTabBarViewController: UITabBarController {
 
 extension StyledTabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        guard let selectedIndex = tabBarController.viewControllers?.index(of: viewController),
+        guard let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController),
               let eventName = self.items[safe: selectedIndex]?.clickEventName else {
             return
         }

@@ -38,7 +38,7 @@ final class TabBarRouter: SourcelessRouter, RouterProtocol {
         }
 
         if !pager.isViewLoaded,
-           let sectionIndex = pager.sections.index(of: self.notificationsSection) {
+           let sectionIndex = pager.sections.firstIndex(of: self.notificationsSection) {
             pager.startTabIndex = sectionIndex
         } else {
             pager.selectSection(self.notificationsSection)

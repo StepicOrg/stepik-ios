@@ -65,7 +65,7 @@ final class UserActivity: JSONSerializable {
 
     var didSolveThisWeek: Bool {
         let thisWeekPins = pins.prefix(7)
-        return thisWeekPins.index(where: { $0 > 0 }) != nil
+        return thisWeekPins.firstIndex(where: { $0 > 0 }) != nil
     }
 
     var didSolveToday: Bool {

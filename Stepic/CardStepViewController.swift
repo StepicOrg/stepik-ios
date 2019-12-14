@@ -219,7 +219,7 @@ extension CardStepViewController: WKNavigationDelegate {
 
         // Check if the request is an iFrame
         if let text = problemText {
-            if HTMLParsingUtil.getAlliFrameLinks(text).index(of: url.absoluteString) != nil {
+            if HTMLParsingUtil.getAlliFrameLinks(text).firstIndex(of: url.absoluteString) != nil {
                 return decisionHandler(.allow)
             }
         }

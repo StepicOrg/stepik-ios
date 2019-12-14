@@ -99,7 +99,7 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     @objc
     func storyDidAppear(_ notification: Foundation.Notification) {
         guard let storyID = (notification as NSNotification).userInfo?["id"] as? Int,
-              let position = self.stories.index(where: { $0.id == storyID }) else {
+              let position = self.stories.firstIndex(where: { $0.id == storyID }) else {
             return
         }
         self.currentPosition = position

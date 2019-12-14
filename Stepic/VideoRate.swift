@@ -26,7 +26,7 @@ enum VideoRate: Float {
     //If the value is a maximal rate, it cyclically gets the lowest one
     var nextValue: VideoRate {
         get {
-            if let index = VideoRate.allValues.index(of: self) {
+            if let index = VideoRate.allValues.firstIndex(of: self) {
                 if index < VideoRate.allValues.count - 1 {
                     return VideoRate.allValues[index + 1]
                 } else {

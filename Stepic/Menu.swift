@@ -23,7 +23,7 @@ final class Menu {
     }
 
     func getBlockIndex(id: String) -> Int? {
-        return blocks.index(where: {
+        return blocks.firstIndex(where: {
             $0.id == id
         })
     }
