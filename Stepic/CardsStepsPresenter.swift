@@ -16,7 +16,7 @@ enum CardsStepsViewState {
     case coursePassed
 }
 
-protocol CardsStepsView: class {
+protocol CardsStepsView: AnyObject {
     var state: CardsStepsViewState { get set }
 
     func swipeCardUp()

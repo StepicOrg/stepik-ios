@@ -14,7 +14,7 @@ enum CardStepState: String {
     case successful
 }
 
-protocol CardStepView: class {
+protocol CardStepView: AnyObject {
     var baseScrollView: UIScrollView { get }
 
     func updateProblem(viewModel: CardStepViewModel)

@@ -9,7 +9,7 @@
 import SnapKit
 import UIKit
 
-protocol StepCardViewDelegate: class {
+protocol StepCardViewDelegate: AnyObject {
     func onControlButtonClick()
     func onTitleButtonClick()
 }

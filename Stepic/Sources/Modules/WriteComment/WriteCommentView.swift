@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: WriteCommentViewDelegate: class -
 
-protocol WriteCommentViewDelegate: class {
+protocol WriteCommentViewDelegate: AnyObject {
     func writeCommentView(_ view: WriteCommentView, didUpdateText text: String)
 }
 

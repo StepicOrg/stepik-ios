@@ -1,6 +1,6 @@
 import UIKit
 
-protocol UnsupportedQuizViewControllerProtocol: class {
+protocol UnsupportedQuizViewControllerProtocol: AnyObject {
     func displayUnsupportedQuiz(viewModel: UnsupportedQuiz.UnsupportedQuizPresentation.ViewModel)
 }
 

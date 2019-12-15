@@ -10,7 +10,7 @@ import Alamofire
 import Foundation
 import PromiseKit
 
-protocol AdaptiveRatingsView: class {
+protocol AdaptiveRatingsView: AnyObject {
     func reload()
     func setRatings(data: ScoreboardViewData)
     func showError()

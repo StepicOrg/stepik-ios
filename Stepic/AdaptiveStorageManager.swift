@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AdaptiveStorageManagerProtocol: class {
+protocol AdaptiveStorageManagerProtocol: AnyObject {
     var isAdaptiveModeEnabled: Bool { get set }
     var isAdaptiveOnboardingPassed: Bool { get set }
     func canOpenInAdaptiveMode(courseId: Int) -> Bool

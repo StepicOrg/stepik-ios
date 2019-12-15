@@ -52,7 +52,7 @@ class StepikPlaceholderControllerContainer: StepikPlaceholderViewDelegate {
     }
 }
 
-protocol ControllerWithStepikPlaceholder: class {
+protocol ControllerWithStepikPlaceholder: AnyObject {
     var isPlaceholderShown: Bool { get set }
     var placeholderContainer: StepikPlaceholderControllerContainer { get set }
 

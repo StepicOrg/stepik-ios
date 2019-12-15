@@ -1,7 +1,7 @@
 import Foundation
 import WebKit
 
-protocol ContentProcessingInjection: class {
+protocol ContentProcessingInjection: AnyObject {
     /// Script that will be injected to <head></head>
     var headScript: String { get }
     /// Script that will be injected after <body> tag

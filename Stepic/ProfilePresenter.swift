@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol ProfileView: class {
+protocol ProfileView: AnyObject {
     func set(state: ProfileState)
 
     func showStreakTimeSelection(startHour: Int)

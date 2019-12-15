@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol ViewsNetworkServiceProtocol: class {
+protocol ViewsNetworkServiceProtocol: AnyObject {
     func create(step: Step.IdType, assignment: Assignment.IdType?) -> Promise<Void>
 }
 

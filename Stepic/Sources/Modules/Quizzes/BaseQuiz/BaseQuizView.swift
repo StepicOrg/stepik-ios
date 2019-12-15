@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol BaseQuizViewDelegate: class {
+protocol BaseQuizViewDelegate: AnyObject {
     func baseQuizViewDidRequestSubmit(_ view: BaseQuizView)
     func baseQuizViewDidRequestNextStep(_ view: BaseQuizView)
     func baseQuizViewDidRequestPeerReview(_ view: BaseQuizView)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CardStepDelegate: class {
+protocol CardStepDelegate: AnyObject {
     func stepSubmissionDidCorrect()
     func stepSubmissionDidWrong()
     func stepSubmissionDidRetry()

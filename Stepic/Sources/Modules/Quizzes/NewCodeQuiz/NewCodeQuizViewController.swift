@@ -1,6 +1,6 @@
 import UIKit
 
-protocol NewCodeQuizViewControllerProtocol: class {
+protocol NewCodeQuizViewControllerProtocol: AnyObject {
     func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel)
     func displayFullscreen(viewModel: NewCodeQuiz.FullscreenPresentation.ViewModel)
 }

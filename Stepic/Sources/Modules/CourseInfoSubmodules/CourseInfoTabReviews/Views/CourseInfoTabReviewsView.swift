@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CourseInfoTabReviewsViewDelegate: class {
+protocol CourseInfoTabReviewsViewDelegate: AnyObject {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)

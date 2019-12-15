@@ -5,7 +5,7 @@ import WebKit
 
 // MARK: ProcessedContentTextViewDelegate: class -
 
-protocol ProcessedContentTextViewDelegate: class {
+protocol ProcessedContentTextViewDelegate: AnyObject {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView)
     func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL)

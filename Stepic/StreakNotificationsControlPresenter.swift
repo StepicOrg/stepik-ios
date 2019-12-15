@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol StreakNotificationsControlView: class {
+protocol StreakNotificationsControlView: AnyObject {
     func showStreakTimeSelection(startHour: Int)
     func updateDisplayedStreakTime(startHour: Int)
     func setNotificationsSwitchIsOn(_ isOn: Bool)

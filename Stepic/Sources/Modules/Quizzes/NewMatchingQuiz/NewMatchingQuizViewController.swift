@@ -1,7 +1,7 @@
 import Agrume
 import UIKit
 
-protocol NewMatchingQuizViewControllerProtocol: class {
+protocol NewMatchingQuizViewControllerProtocol: AnyObject {
     func displayReply(viewModel: NewMatchingQuiz.ReplyLoad.ViewModel)
 }
 

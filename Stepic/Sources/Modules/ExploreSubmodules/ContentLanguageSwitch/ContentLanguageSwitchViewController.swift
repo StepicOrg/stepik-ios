@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ContentLanguageSwitchViewControllerProtocol: class {
+protocol ContentLanguageSwitchViewControllerProtocol: AnyObject {
     func displayLanguages(viewModel: ContentLanguageSwitch.LanguagesLoad.ViewModel)
     func displayLanguageChange(viewModel: ContentLanguageSwitch.LanguageSelection.ViewModel)
 }

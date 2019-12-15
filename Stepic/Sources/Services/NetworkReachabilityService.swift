@@ -1,7 +1,7 @@
 import Alamofire
 import Foundation
 
-protocol NetworkReachabilityServiceProtocol: class {
+protocol NetworkReachabilityServiceProtocol: AnyObject {
     var networkStatus: NetworkReachabilityStatus { get }
     var isReachable: Bool { get }
 }

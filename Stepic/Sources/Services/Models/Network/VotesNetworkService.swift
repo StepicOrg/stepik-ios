@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol VotesNetworkServiceProtocol: class {
+protocol VotesNetworkServiceProtocol: AnyObject {
     func update(vote: Vote) -> Promise<Vote>
 }
 

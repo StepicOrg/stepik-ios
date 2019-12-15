@@ -1,6 +1,6 @@
 import Foundation
 
-protocol UserAccountServiceProtocol: class {
+protocol UserAccountServiceProtocol: AnyObject {
     var currentUser: User? { get }
     var isAuthorized: Bool { get }
 }

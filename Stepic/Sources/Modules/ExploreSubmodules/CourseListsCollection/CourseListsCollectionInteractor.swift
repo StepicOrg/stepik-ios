@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListsCollectionInteractorProtocol: class {
+protocol CourseListsCollectionInteractorProtocol: AnyObject {
     func doCourseListsFetch(request: CourseListsCollection.CourseListsLoad.Request)
     func doFullscreenCourseListPresentation(
         request: CourseListsCollection.FullscreenCourseListModulePresentation.Request

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchResultsModuleInputProtocol: class {
+protocol SearchResultsModuleInputProtocol: AnyObject {
     func queryChanged(to query: String)
     func search(query: String)
     func searchStarted()

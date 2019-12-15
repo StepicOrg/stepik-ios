@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseReviewSummariesNetworkServiceProtocol: class {
+protocol CourseReviewSummariesNetworkServiceProtocol: AnyObject {
     func fetch(
         ids: [CourseReviewSummary.IdType],
         page: Int

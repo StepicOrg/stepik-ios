@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol DiscussionProxiesNetworkServiceProtocol: class {
+protocol DiscussionProxiesNetworkServiceProtocol: AnyObject {
     func fetch(id: DiscussionProxy.IdType) -> Promise<DiscussionProxy>
 }
 

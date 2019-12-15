@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewStepViewDelegate: class {
+protocol NewStepViewDelegate: AnyObject {
     func newStepViewDidRequestVideo(_ view: NewStepView)
     func newStepViewDidRequestPrevious(_ view: NewStepView)
     func newStepViewDidRequestNext(_ view: NewStepView)

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseReviewsPersistenceServiceProtocol: class {
+protocol CourseReviewsPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [CourseReview.IdType]) -> Guarantee<[CourseReview]>
     func fetch(by courseID: Course.IdType) -> Promise<[CourseReview]>
     func fetch(by courseID: Course.IdType, userID: User.IdType) -> Promise<CourseReview?>

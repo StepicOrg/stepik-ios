@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol TabSegmentedControlViewDelegate: class {
+protocol TabSegmentedControlViewDelegate: AnyObject {
     func tabSegmentedControlView(
         _ tabSegmentedControlView: TabSegmentedControlView,
         didSelectTabWithIndex index: Int

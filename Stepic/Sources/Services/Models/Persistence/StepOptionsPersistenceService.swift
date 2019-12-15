@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol StepOptionsPersistenceServiceProtocol: class {
+protocol StepOptionsPersistenceServiceProtocol: AnyObject {
     func fetch(by stepID: Step.IdType) -> Promise<StepOptions?>
 }
 

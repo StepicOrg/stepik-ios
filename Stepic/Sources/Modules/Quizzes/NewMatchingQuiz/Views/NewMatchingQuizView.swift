@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewMatchingQuizViewDelegate: class {
+protocol NewMatchingQuizViewDelegate: AnyObject {
     func newMatchingQuizView(
         _ view: NewMatchingQuizView,
         didMoveItem item: NewMatchingQuiz.MatchItem,

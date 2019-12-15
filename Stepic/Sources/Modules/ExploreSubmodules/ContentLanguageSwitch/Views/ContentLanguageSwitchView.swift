@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol ContentLanguageSwitchViewDelegate: class {
+protocol ContentLanguageSwitchViewDelegate: AnyObject {
     func contentLanguageSwitchViewDiDLanguageSelected(
         _ contentLanguageSwitchView: ContentLanguageSwitchView,
         selectedViewModel: ContentLanguageSwitchViewModel

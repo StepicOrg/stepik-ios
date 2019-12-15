@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SearchQueriesView: class {
+protocol SearchQueriesView: AnyObject {
     func updateSuggestions(suggestions: [String])
     func setState(state: SearchQueriesState)
 }

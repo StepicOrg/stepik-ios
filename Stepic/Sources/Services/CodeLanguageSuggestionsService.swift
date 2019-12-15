@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CodeLanguageSuggestionsServiceProtocol: class {
+protocol CodeLanguageSuggestionsServiceProtocol: AnyObject {
     func suggest(stepID: Step.IdType) -> Guarantee<CodeLanguage?>
     func update(language: CodeLanguage, stepID: Step.IdType) -> Promise<Void>
 }

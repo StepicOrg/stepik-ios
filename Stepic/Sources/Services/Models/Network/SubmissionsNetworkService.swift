@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol SubmissionsNetworkServiceProtocol: class {
+protocol SubmissionsNetworkServiceProtocol: AnyObject {
     func create(attemptID: Attempt.IdType, blockName: String, reply: Reply) -> Promise<Submission?>
     func fetch(stepID: Step.IdType, blockName: String, page: Int) -> Promise<([Submission], Meta)>
     func fetch(attemptID: Attempt.IdType, blockName: String) -> Promise<([Submission], Meta)>

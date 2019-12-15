@@ -1,6 +1,6 @@
 import Foundation
 
-protocol NewStepInputProtocol: class {
+protocol NewStepInputProtocol: AnyObject {
     func updateStepNavigation(canNavigateToPreviousUnit: Bool, canNavigateToNextUnit: Bool, canNavigateToNextStep: Bool)
     func updateStepText(_ text: String)
 }

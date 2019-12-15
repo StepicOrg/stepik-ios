@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SettingsView: class {
+protocol SettingsView: AnyObject {
     func setMenu(menuIDs: [SettingsMenuBlock])
 
     func presentAuth()

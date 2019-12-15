@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewFreeAnswerQuizViewDelegate: class {
+protocol NewFreeAnswerQuizViewDelegate: AnyObject {
     func newFreeAnswerQuizView(_ view: NewFreeAnswerQuizView, didUpdate text: String)
 }
 

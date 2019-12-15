@@ -2,7 +2,7 @@ import Atributika
 import SnapKit
 import UIKit
 
-protocol CourseInfoTabInfoViewDelegate: class {
+protocol CourseInfoTabInfoViewDelegate: AnyObject {
     func courseInfoTabInfoViewDidClickInstructor(
         _ courseInfoTabInfoView: CourseInfoTabInfoView,
         instructor: CourseInfoTabInfoInstructorViewModel

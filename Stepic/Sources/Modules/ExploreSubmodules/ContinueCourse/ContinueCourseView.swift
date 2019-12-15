@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol ContinueCourseViewDelegate: class {
+protocol ContinueCourseViewDelegate: AnyObject {
     func continueCourseContinueButtonDidClick(_ continueCourseView: ContinueCourseView)
 }
 

@@ -15,7 +15,7 @@ struct SocialProviderViewData {
     let id: Int // id in SocialProvider
 }
 
-protocol SocialAuthView: class {
+protocol SocialAuthView: AnyObject {
     var state: SocialAuthState { get set }
 
     func set(providers: [SocialProviderViewData])

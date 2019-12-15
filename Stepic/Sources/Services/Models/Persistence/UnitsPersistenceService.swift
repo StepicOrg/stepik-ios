@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol UnitsPersistenceServiceProtocol: class {
+protocol UnitsPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [Unit.IdType]) -> Promise<[Unit]>
     func fetch(id: Unit.IdType) -> Promise<Unit?>
 }

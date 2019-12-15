@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol VideoStoredFileManagerProtocol: class {
+protocol VideoStoredFileManagerProtocol: AnyObject {
     func getVideoStoredFile(videoID: Video.IdType) -> StoredFileProtocol?
     func removeVideoStoredFile(videoID: Video.IdType) throws
     func saveTemporaryFileAsVideoFile(

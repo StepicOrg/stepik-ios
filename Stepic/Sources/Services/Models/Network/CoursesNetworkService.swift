@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CoursesNetworkServiceProtocol: class {
+protocol CoursesNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Course.IdType]) -> Promise<[Course]>
     func fetch(id: Course.IdType) -> Promise<Course?>
 }

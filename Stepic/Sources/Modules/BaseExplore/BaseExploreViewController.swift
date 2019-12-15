@@ -1,6 +1,6 @@
 import UIKit
 
-protocol BaseExploreViewControllerProtocol: class {
+protocol BaseExploreViewControllerProtocol: AnyObject {
     func displayFullscreenCourseList(
         viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel
     )

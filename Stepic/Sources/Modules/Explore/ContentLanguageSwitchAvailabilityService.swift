@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ContentLanguageSwitchAvailabilityServiceProtocol: class {
+protocol ContentLanguageSwitchAvailabilityServiceProtocol: AnyObject {
     var shouldShowLanguageSwitchOnExplore: Bool { get set }
 }
 

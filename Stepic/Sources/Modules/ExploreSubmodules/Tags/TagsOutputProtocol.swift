@@ -1,5 +1,5 @@
 import Foundation
 
-protocol TagsOutputProtocol: class {
+protocol TagsOutputProtocol: AnyObject {
     func presentCourseList(type: TagCourseListType)
 }

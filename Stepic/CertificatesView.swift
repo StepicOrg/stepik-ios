@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CertificatesView: class {
+protocol CertificatesView: AnyObject {
     func setCertificates(certificates: [CertificateViewData], hasNextPage: Bool)
 
     func displayError()

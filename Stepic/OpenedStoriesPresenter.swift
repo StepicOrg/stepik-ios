@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol OpenedStoriesViewProtocol: class {
+protocol OpenedStoriesViewProtocol: AnyObject {
     func set(module: UIViewController, direction: UIPageViewController.NavigationDirection, animated: Bool)
     func close()
 }
 
-protocol OpenedStoriesOutputProtocol: class {
+protocol OpenedStoriesOutputProtocol: AnyObject {
     func handleOpenedStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle)
 }
 
-protocol OpenedStoriesPresenterProtocol: class {
+protocol OpenedStoriesPresenterProtocol: AnyObject {
     var nextModule: UIViewController? { get }
     var prevModule: UIViewController? { get }
     var currentModule: UIViewController { get }

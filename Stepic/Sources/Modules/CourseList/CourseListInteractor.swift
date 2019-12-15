@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListInteractorProtocol: class {
+protocol CourseListInteractorProtocol: AnyObject {
     func doCoursesFetch(request: CourseList.CoursesLoad.Request)
     func doNextCoursesFetch(request: CourseList.NextCoursesLoad.Request)
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request)

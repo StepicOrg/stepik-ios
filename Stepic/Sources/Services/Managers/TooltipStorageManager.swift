@@ -1,6 +1,6 @@
 import Foundation
 
-protocol TooltipStorageManagerProtocol: class {
+protocol TooltipStorageManagerProtocol: AnyObject {
     var didShowOnHomeContinueLearning: Bool { get set }
     var didShowOnPersonalDeadlinesButton: Bool { get set }
 }

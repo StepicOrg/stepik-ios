@@ -1,6 +1,6 @@
 import Foundation
 
-protocol StorageUsageServiceProtocol: class {
+protocol StorageUsageServiceProtocol: AnyObject {
     typealias Bytes = UInt64
 
     /// Returns video stored file in bytes, otherwise returns nil if file not found.

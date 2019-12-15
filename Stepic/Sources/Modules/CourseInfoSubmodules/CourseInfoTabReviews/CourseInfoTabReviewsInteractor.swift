@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseInfoTabReviewsInteractorProtocol: class {
+protocol CourseInfoTabReviewsInteractorProtocol: AnyObject {
     func doCourseReviewsFetch(request: CourseInfoTabReviews.ReviewsLoad.Request)
     func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request)
     func doWriteCourseReviewPresentation(request: CourseInfoTabReviews.WriteCourseReviewPresentation.Request)

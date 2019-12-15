@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol QuizFeedbackViewDelegate: class {
+protocol QuizFeedbackViewDelegate: AnyObject {
     func quizFeedbackView(_ view: QuizFeedbackView, didRequestFullscreenImage url: URL)
     func quizFeedbackView(_ view: QuizFeedbackView, didRequestOpenURL url: URL)
 }

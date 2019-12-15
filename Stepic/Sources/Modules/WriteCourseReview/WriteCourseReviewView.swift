@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol WriteCourseReviewViewDelegate: class {
+protocol WriteCourseReviewViewDelegate: AnyObject {
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateText text: String)
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateScore score: Int)
 }

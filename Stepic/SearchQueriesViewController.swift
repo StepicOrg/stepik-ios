@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchQueriesViewControllerDelegate: class {
+protocol SearchQueriesViewControllerDelegate: AnyObject {
     func didSelectSuggestion(suggestion: String, position: Int)
 }
 

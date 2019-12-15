@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AdaptiveStatsView: class {
+protocol AdaptiveStatsView: AnyObject {
     func reload()
     func setProgress(records: [WeekProgressViewData])
     func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?)

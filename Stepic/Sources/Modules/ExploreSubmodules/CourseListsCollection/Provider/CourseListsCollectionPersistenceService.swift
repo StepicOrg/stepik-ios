@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListsCollectionPersistenceServiceProtocol: class {
+protocol CourseListsCollectionPersistenceServiceProtocol: AnyObject {
     func fetch(forLanguage language: ContentLanguage) -> Promise<[CourseListModel]>
     func update(courseLists: [CourseListModel], forLanguage language: ContentLanguage)
 }

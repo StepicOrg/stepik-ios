@@ -119,6 +119,7 @@ whitelist_rules:
   - void_return
   - weak_delegate
   - yoda_condition
+  - anyobject_protocol
 
 # settings
 mark:
@@ -281,3 +282,6 @@ object_literal:
 
 file_header:
   forbidden_pattern: "^//[^/]|/\\*[^*]"
+
+anyobject_protocol:
+  severity: error

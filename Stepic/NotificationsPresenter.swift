@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 import PromiseKit
 
-protocol NotificationsView: class {
+protocol NotificationsView: AnyObject {
     var state: NotificationsViewState { get set }
 
     func set(notifications: NotificationViewDataStruct, withReload: Bool)

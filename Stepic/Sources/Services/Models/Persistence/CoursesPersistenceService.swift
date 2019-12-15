@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CoursesPersistenceServiceProtocol: class {
+protocol CoursesPersistenceServiceProtocol: AnyObject {
     func fetch(
         ids: [Course.IdType],
         page: Int

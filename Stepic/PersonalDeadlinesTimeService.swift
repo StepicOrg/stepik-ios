@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol PersonalDeadlinesTimeServiceProtocol: class {
+protocol PersonalDeadlinesTimeServiceProtocol: AnyObject {
     func countDeadlines(mode: DeadlineMode, for course: Course) -> Promise<[SectionDeadline]>
 }
 

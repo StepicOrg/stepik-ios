@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol AchievementsListView: class {
+protocol AchievementsListView: AnyObject {
     func set(achievements: [AchievementViewData])
     func showLoadingError()
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool)

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListsCollectionProviderProtocol: class {
+protocol CourseListsCollectionProviderProtocol: AnyObject {
     func fetchCachedCourseLists() -> Promise<[CourseListModel]>
     func fetchRemoteCourseLists() -> Promise<[CourseListModel]>
 }

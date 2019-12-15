@@ -7,7 +7,7 @@
 //
 import Foundation
 
-protocol CodeEditorSettingsView: class {
+protocol CodeEditorSettingsView: AnyObject {
     func setMenu(menu: Menu)
 
     func chooseEditorTheme(current: String)

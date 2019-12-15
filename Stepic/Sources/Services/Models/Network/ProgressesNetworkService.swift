@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol ProgressesNetworkServiceProtocol: class {
+protocol ProgressesNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Progress.IdType], page: Int) -> Promise<([Progress], Meta)>
     func fetch(id: Progress.IdType) -> Promise<Progress?>
 }

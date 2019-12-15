@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CommentsNetworkServiceProtocol: class {
+protocol CommentsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Comment.IdType]) -> Promise<[Comment]>
     func create(comment: Comment) -> Promise<Comment>
     func update(comment: Comment) -> Promise<Comment>

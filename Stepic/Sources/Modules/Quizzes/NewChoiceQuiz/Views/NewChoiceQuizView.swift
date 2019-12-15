@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewChoiceQuizViewDelegate: class {
+protocol NewChoiceQuizViewDelegate: AnyObject {
     func newChoiceQuizView(_ view: NewChoiceQuizView, didReport selectionMask: [Bool])
 }
 

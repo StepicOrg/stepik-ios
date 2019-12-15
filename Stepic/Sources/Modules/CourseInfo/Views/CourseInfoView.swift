@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CourseInfoViewDelegate: class {
+protocol CourseInfoViewDelegate: AnyObject {
     func courseInfoView(_ courseInfoView: CourseInfoView, didReportNewHeaderHeight height: CGFloat)
     func courseInfoView(_ courseInfoView: CourseInfoView, didRequestScrollToPage index: Int)
     func numberOfPages(in courseInfoView: CourseInfoView) -> Int

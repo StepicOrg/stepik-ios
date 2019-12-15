@@ -1,5 +1,5 @@
 import Foundation
 
-protocol CourseListViewDelegate: class {
+protocol CourseListViewDelegate: AnyObject {
     func courseListViewDidPaginationRequesting(_ courseListView: CourseListView)
 }

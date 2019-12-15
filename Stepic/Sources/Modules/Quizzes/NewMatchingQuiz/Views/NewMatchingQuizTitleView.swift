@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewMatchingQuizTitleViewDelegate: class {
+protocol NewMatchingQuizTitleViewDelegate: AnyObject {
     func newMatchingQuizTitleViewDidLoadContent(_ view: NewMatchingQuizTitleView)
     func newMatchingQuizTitleView(_ view: NewMatchingQuizTitleView, didRequestFullscreenImage url: URL)
     func newMatchingQuizTitleView(_ view: NewMatchingQuizTitleView, didRequestOpenURL url: URL)

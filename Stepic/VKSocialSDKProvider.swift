@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 import VK_ios_sdk
 
-protocol VKSocialSDKProviderDelegate: class {
+protocol VKSocialSDKProviderDelegate: AnyObject {
     func presentAuthController(_ controller: UIViewController)
 }
 

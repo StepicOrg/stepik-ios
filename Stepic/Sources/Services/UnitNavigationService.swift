@@ -6,7 +6,7 @@ enum UnitNavigationDirection {
     case previous
 }
 
-protocol UnitNavigationServiceProtocol: class {
+protocol UnitNavigationServiceProtocol: AnyObject {
     func findUnitForNavigation(from unit: Unit.IdType, direction: UnitNavigationDirection) -> Promise<Unit?>
 }
 

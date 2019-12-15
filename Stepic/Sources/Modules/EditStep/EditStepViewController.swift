@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: EditStepViewControllerProtocol -
 
-protocol EditStepViewControllerProtocol: class {
+protocol EditStepViewControllerProtocol: AnyObject {
     func displayStepSource(viewModel: EditStep.LoadStepSource.ViewModel)
     func displayStepSourceTextUpdate(viewModel: EditStep.UpdateStepText.ViewModel)
     func displayStepSourceEditResult(viewModel: EditStep.RemoteStepSourceUpdate.ViewModel)

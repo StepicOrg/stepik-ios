@@ -1,6 +1,6 @@
 import UIKit
 
-protocol CodeEditorThemeServiceProtocol: class {
+protocol CodeEditorThemeServiceProtocol: AnyObject {
     var theme: CodeEditorTheme { get }
 
     func update(name: String)

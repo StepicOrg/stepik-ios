@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol StepikPlaceholderViewDelegate: class {
+protocol StepikPlaceholderViewDelegate: AnyObject {
     func buttonDidClick(_ button: UIButton)
 }
 

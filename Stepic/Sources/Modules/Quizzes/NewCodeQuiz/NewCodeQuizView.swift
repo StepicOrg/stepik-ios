@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizViewDelegate: class {
+protocol NewCodeQuizViewDelegate: AnyObject {
     func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage)
     func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String)
     func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)

@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol ScrollableStackViewDelegate: class {
+protocol ScrollableStackViewDelegate: AnyObject {
     func scrollableStackViewRefreshControlDidRefresh(_ scrollableStackView: ScrollableStackView)
 }
 

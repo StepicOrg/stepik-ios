@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: DiscussionsTableViewDataSourceDelegate: class -
 
-protocol DiscussionsTableViewDataSourceDelegate: class {
+protocol DiscussionsTableViewDataSourceDelegate: AnyObject {
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
         didReplyForComment comment: DiscussionsCommentViewModel

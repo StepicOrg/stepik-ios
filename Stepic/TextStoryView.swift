@@ -168,7 +168,7 @@ final class TextStoryView: UIView, UIStoryPartViewProtocol {
     }
 }
 
-protocol StoryURLNavigationDelegate: class {
+protocol StoryURLNavigationDelegate: AnyObject {
     func open(url: URL)
 }
 

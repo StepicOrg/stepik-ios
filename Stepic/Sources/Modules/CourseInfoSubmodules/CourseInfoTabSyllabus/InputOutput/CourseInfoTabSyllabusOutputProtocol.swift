@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CourseInfoTabSyllabusOutputProtocol: class {
+protocol CourseInfoTabSyllabusOutputProtocol: AnyObject {
     func presentLesson(in unit: Unit)
     func presentExamLesson()
     func presentPersonalDeadlinesCreation(for course: Course)

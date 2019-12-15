@@ -24,7 +24,7 @@ extension NewCodeQuizFullscreenViewController {
 
 // MARK: - NewCodeQuizFullscreenViewControllerProtocol: class -
 
-protocol NewCodeQuizFullscreenViewControllerProtocol: class {
+protocol NewCodeQuizFullscreenViewControllerProtocol: AnyObject {
     func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
     func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel)
 }

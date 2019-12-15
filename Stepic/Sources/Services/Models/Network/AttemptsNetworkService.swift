@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol AttemptsNetworkServiceProtocol: class {
+protocol AttemptsNetworkServiceProtocol: AnyObject {
     func fetch(stepID: Step.IdType, blockName: String) -> Promise<([Attempt], Meta)>
     func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt?>
 }

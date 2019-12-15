@@ -3,14 +3,14 @@ import Presentr
 import SVProgressHUD
 import UIKit
 
-protocol CourseInfoScrollablePageViewProtocol: class {
+protocol CourseInfoScrollablePageViewProtocol: AnyObject {
     var scrollViewDelegate: UIScrollViewDelegate? { get set }
     var contentInsets: UIEdgeInsets { get set }
     var contentOffset: CGPoint { get set }
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior { get set }
 }
 
-protocol CourseInfoViewControllerProtocol: class {
+protocol CourseInfoViewControllerProtocol: AnyObject {
     func displayCourse(viewModel: CourseInfo.CourseLoad.ViewModel)
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel)
     func displayPersonalDeadlinesSettings(viewModel: CourseInfo.PersonalDeadlinesSettingsPresentation.ViewModel)

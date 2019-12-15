@@ -1,5 +1,5 @@
 import Foundation
 
-protocol EditStepOutputProtocol: class {
+protocol EditStepOutputProtocol: AnyObject {
     func handleStepSourceUpdated(_ stepSource: StepSource)
 }

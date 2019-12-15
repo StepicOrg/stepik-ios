@@ -14,17 +14,17 @@ enum StoriesViewState {
     case loading
 }
 
-protocol StoriesViewProtocol: class {
+protocol StoriesViewProtocol: AnyObject {
     func set(state: StoriesViewState)
     func set(stories: [Story])
     func updateStory(index: Int)
 }
 
-protocol StoriesPresenterProtocol: class {
+protocol StoriesPresenterProtocol: AnyObject {
     func refresh()
 }
 
-protocol StoriesOutputProtocol: class {
+protocol StoriesOutputProtocol: AnyObject {
     func hideStories()
     func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle)
 }

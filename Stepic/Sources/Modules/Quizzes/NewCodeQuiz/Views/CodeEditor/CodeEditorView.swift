@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CodeEditorViewDelegate: class {
+protocol CodeEditorViewDelegate: AnyObject {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView)
     func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool)
     func codeEditorViewDidBeginEditing(_ codeEditorView: CodeEditorView)

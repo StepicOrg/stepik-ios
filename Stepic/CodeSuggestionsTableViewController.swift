@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CodeSuggestionDelegate: class {
+protocol CodeSuggestionDelegate: AnyObject {
     func didSelectSuggestion(suggestion: String, prefix: String)
     var suggestionsSize: CodeSuggestionsSize { get }
 }

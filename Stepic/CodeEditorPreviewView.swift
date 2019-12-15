@@ -9,7 +9,7 @@
 import Highlightr
 import UIKit
 
-protocol CodeEditorPreviewViewDelegate: class {
+protocol CodeEditorPreviewViewDelegate: AnyObject {
     func languageButtonDidClick()
 }
 

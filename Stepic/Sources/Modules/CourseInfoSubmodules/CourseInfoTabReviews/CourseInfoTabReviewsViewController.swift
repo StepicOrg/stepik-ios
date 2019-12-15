@@ -1,7 +1,7 @@
 import SVProgressHUD
 import UIKit
 
-protocol CourseInfoTabReviewsViewControllerProtocol: class {
+protocol CourseInfoTabReviewsViewControllerProtocol: AnyObject {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel)
     func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel)
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel)

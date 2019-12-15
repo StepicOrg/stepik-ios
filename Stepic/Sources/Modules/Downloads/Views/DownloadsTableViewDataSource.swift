@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: DownloadsTableViewDataSourceDelegate: class -
 
-protocol DownloadsTableViewDataSourceDelegate: class {
+protocol DownloadsTableViewDataSourceDelegate: AnyObject {
     func downloadsTableViewDataSource(
         _ dataSource: DownloadsTableViewDataSource,
         didDelete viewModel: DownloadsItemViewModel,

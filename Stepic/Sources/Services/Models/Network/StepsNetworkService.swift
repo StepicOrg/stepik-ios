@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol StepsNetworkServiceProtocol: class {
+protocol StepsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Step.IdType]) -> Promise<[Step]>
 }
 

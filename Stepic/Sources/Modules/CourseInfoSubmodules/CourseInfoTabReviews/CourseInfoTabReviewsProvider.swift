@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseInfoTabReviewsProviderProtocol: class {
+protocol CourseInfoTabReviewsProviderProtocol: AnyObject {
     func fetchCached(course: Course) -> Promise<([CourseReview], Meta)>
     func fetchRemote(course: Course, page: Int) -> Promise<([CourseReview], Meta)>
     func fetchCachedCourseReview(courseReviewID: CourseReview.IdType) -> Guarantee<CourseReview?>

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListProviderProtocol: class {
+protocol CourseListProviderProtocol: AnyObject {
     func fetchCached() -> Promise<([Course], Meta)>
     func fetchRemote(page: Int) -> Promise<([Course], Meta)>
     func cache(courses: [Course])

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ProfileDescriptionView: class {
+protocol ProfileDescriptionView: AnyObject {
     func set(shortBio: String?, info: String?)
 }
 

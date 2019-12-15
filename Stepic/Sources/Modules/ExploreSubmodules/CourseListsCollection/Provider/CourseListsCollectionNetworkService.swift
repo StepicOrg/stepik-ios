@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListsCollectionNetworkServiceProtocol: class {
+protocol CourseListsCollectionNetworkServiceProtocol: AnyObject {
     func fetch(language: ContentLanguage, page: Int) -> Promise<([CourseListModel], Meta)>
 }
 

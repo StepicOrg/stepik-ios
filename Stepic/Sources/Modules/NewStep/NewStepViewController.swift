@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: NewStepViewControllerProtocol: class -
 
-protocol NewStepViewControllerProtocol: class {
+protocol NewStepViewControllerProtocol: AnyObject {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)

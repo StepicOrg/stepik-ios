@@ -513,7 +513,7 @@ extension StyledNavigationController: UINavigationControllerDelegate {
 
 // MARK: - Default appearance protocol
 
-protocol StyledNavigationControllerPresentable: class {
+protocol StyledNavigationControllerPresentable: AnyObject {
     /// Appearance for navigation bar, status bar, etc when controller first time presented
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState { get }
     /// Determine whether controller should store appearance state and restore it when return back

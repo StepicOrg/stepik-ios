@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewSortingQuizElementViewDelegate: class {
+protocol NewSortingQuizElementViewDelegate: AnyObject {
     func newSortingQuizElementViewDidLoadContent(_ view: NewSortingQuizElementView)
     func newSortingQuizElementViewDidUpdateContentHeight(_ view: NewSortingQuizElementView)
 

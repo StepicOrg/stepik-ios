@@ -1,6 +1,6 @@
 import UIKit
 
-protocol Reusable: class {
+protocol Reusable: AnyObject {
     static var defaultReuseIdentifier: String { get }
 }
 

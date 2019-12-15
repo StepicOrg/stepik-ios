@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CourseListPersistenceStorage: class {
+protocol CourseListPersistenceStorage: AnyObject {
     func update(newCachedList: [Course.IdType])
     func getCoursesList() -> [Course.IdType]
 }

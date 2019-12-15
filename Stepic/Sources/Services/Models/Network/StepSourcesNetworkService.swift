@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol StepSourcesNetworkServiceProtocol: class {
+protocol StepSourcesNetworkServiceProtocol: AnyObject {
     func fetch(ids: [StepSource.IdType], page: Int) -> Promise<([StepSource], Meta)>
     func update(stepSource: StepSource) -> Promise<StepSource>
 }

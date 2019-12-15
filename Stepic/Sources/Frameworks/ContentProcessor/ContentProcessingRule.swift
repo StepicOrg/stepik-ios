@@ -1,7 +1,7 @@
 import Foundation
 import Regex
 
-protocol ContentProcessingRule: class {
+protocol ContentProcessingRule: AnyObject {
     func process(content: String) -> String
 }
 

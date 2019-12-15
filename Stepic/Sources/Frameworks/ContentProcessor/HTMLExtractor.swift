@@ -1,7 +1,7 @@
 import Foundation
 import Kanna
 
-protocol HTMLExtractorProtocol: class {
+protocol HTMLExtractorProtocol: AnyObject {
     static func extractAllTagsAttribute(tag: String, attribute: String, from text: String) -> [String]
     static func extractAllTagsContent(tag: String, from text: String) -> [String]
     static func extractAllTags(tag: String, from text: String) -> [String]

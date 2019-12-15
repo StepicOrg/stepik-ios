@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol NewCodeQuizFullscreenProviderProtocol: class {
+protocol NewCodeQuizFullscreenProviderProtocol: AnyObject {
     func fetchCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserOrCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>

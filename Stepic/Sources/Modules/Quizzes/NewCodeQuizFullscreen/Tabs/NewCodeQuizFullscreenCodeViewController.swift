@@ -16,7 +16,7 @@ extension NewCodeQuizFullscreenCodeViewController {
     }
 }
 
-protocol NewCodeQuizFullscreenCodeViewControllerDelegate: class {
+protocol NewCodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
     func newCodeQuizFullscreenCodeViewController(
         _ viewController: NewCodeQuizFullscreenCodeViewController,
         codeDidChange code: String

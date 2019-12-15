@@ -542,7 +542,7 @@ enum SubmissionStatus: String {
     case evaluation = "evaluation"
 }
 
-protocol QuizView: class {
+protocol QuizView: AnyObject {
     //Quiz content
     func display(dataset: Dataset)
     func display(reply: Reply, hint: String?, status: SubmissionStatus)

@@ -20,7 +20,7 @@ enum DownloaderError: Error {
     case clientSide(error: NSError)
 }
 
-protocol DownloaderProtocol: class {
+protocol DownloaderProtocol: AnyObject {
     /// Add task to downloader (w/o execution)
     func add(task: DownloaderTaskProtocol) throws
     /// Start or resume task (task should be added before)

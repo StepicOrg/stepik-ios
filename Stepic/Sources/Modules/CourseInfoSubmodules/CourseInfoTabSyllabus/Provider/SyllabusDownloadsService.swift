@@ -3,7 +3,7 @@ import PromiseKit
 
 // MARK: SyllabusDownloadsServiceDelegate -
 
-protocol SyllabusDownloadsServiceDelegate: class {
+protocol SyllabusDownloadsServiceDelegate: AnyObject {
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
         didReceiveProgress progress: Float,
@@ -44,7 +44,7 @@ protocol SyllabusDownloadsServiceDelegate: class {
 
 // MARK: - SyllabusDownloadsServiceProtocol -
 
-protocol SyllabusDownloadsServiceProtocol: class {
+protocol SyllabusDownloadsServiceProtocol: AnyObject {
     var delegate: SyllabusDownloadsServiceDelegate? { get set }
 
     func download(unit: Unit) -> Promise<Void>

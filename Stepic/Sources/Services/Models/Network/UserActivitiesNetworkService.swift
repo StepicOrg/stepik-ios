@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol UserActivitiesNetworkServiceProtocol: class {
+protocol UserActivitiesNetworkServiceProtocol: AnyObject {
     func retrieve(for user: User.IdType) -> Promise<UserActivity>
 }
 

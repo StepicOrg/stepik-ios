@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MenuDelegate: class {
+protocol MenuDelegate: AnyObject {
     func update(at index: Int)
     func insert(at index: Int)
     func remove(at index: Int)

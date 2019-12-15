@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: ProfileEditViewControllerProtocol: class -
 
-protocol ProfileEditViewControllerProtocol: class {
+protocol ProfileEditViewControllerProtocol: AnyObject {
     func displayProfileEditForm(viewModel: ProfileEdit.ProfileEditLoad.ViewModel)
     func displayProfileEditResult(viewModel: ProfileEdit.RemoteProfileUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: ProfileEdit.BlockingWaitingIndicatorUpdate.ViewModel)

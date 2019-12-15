@@ -18,7 +18,7 @@ protocol StoredFileProtocol {
 }
 
 /// Abstract file on the disk (e.g video, image, saved step html, ...)
-protocol StoredFileManagerProtocol: class {
+protocol StoredFileManagerProtocol: AnyObject {
     /// Find & get file info if file exists otherwise return nil
     func getLocalStoredFile(fileName: String) -> StoredFileProtocol?
     /// Remove local stored video; throw exception if error occured
@@ -30,7 +30,7 @@ protocol StoredFileManagerProtocol: class {
     ) throws -> StoredFileProtocol
 }
 
-protocol FileLocationManagerProtocol: class {
+protocol FileLocationManagerProtocol: AnyObject {
     func getFullURLForFile(fileName: String) -> URL
 }
 

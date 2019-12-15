@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CourseInfoTabSyllabusViewDelegate: class {
+protocol CourseInfoTabSyllabusViewDelegate: AnyObject {
     func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
     func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
 }

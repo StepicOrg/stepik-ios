@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol ProfilesNetworkServiceProtocol: class {
+protocol ProfilesNetworkServiceProtocol: AnyObject {
     func update(profile: Profile) -> Promise<Profile>
 }
 

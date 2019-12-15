@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseReviewsNetworkServiceProtocol: class {
+protocol CourseReviewsNetworkServiceProtocol: AnyObject {
     func fetch(by courseID: Course.IdType, page: Int) -> Promise<([CourseReview], Meta)>
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<([CourseReview], Meta)>
     func create(courseID: Course.IdType, userID: User.IdType, score: Int, text: String) -> Promise<CourseReview>

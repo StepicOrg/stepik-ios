@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol EmailAddressesPersistenceServiceProtocol: class {
+protocol EmailAddressesPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [EmailAddress.IdType]) -> Promise<[EmailAddress]>
 }
 
