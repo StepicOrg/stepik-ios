@@ -22,7 +22,7 @@ final class UserCoursesAPI: APIEndpoint {
                 requestEndpoint: name,
                 paramName: name,
                 params: params,
-                updatingObjects: Array<UserCourse>(),
+                updatingObjects: [UserCourse](),
                 withManager: manager
             ).done { userCourses, meta, _ in
                 seal.fulfill((userCourses, meta))

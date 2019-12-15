@@ -12,7 +12,7 @@ struct ControllerHelper {
     static func getTopViewController() -> UIViewController? {
         var topViewController = UIApplication.shared.keyWindow?.rootViewController
 
-        while(topViewController?.presentedViewController != nil) {
+        while topViewController?.presentedViewController != nil {
             topViewController = topViewController?.presentedViewController
         }
 

@@ -97,7 +97,7 @@ final class QuizPresenter {
                 }
             }
 
-            switch (submission.status ?? "evaluation") {
+            switch submission.status ?? "evaluation" {
             case "evaluation":
                 break
 

@@ -516,7 +516,7 @@ extension Player {
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         // PlayerRateKey, PlayerObserverContext
 
-        if (context == &PlayerItemObserverContext) {
+        if context == &PlayerItemObserverContext {
             // PlayerStatusKey
 
             if keyPath == PlayerKeepUpKey {
@@ -532,7 +532,7 @@ extension Player {
 
                 let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayer.Status.RawValue
 
-                switch (status) {
+                switch status {
                 case AVPlayer.Status.readyToPlay.rawValue:
                     self.playerView.playerLayer.player = self.avplayer
                     self.playerView.playerLayer.isHidden = false
@@ -552,7 +552,7 @@ extension Player {
 
                 let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayer.Status.RawValue
 
-                switch (status) {
+                switch status {
                 case AVPlayer.Status.readyToPlay.rawValue:
                     self.playerView.playerLayer.player = self.avplayer
                     self.playerView.playerLayer.isHidden = false
@@ -577,7 +577,7 @@ extension Player {
                     }
                 }
             }
-        } else if (context == &PlayerLayerObserverContext) {
+        } else if context == &PlayerLayerObserverContext {
             if self.playerView.playerLayer.isReadyForDisplay {
                 self.executeClosureOnMainQueueIfNecessary(withClosure: {
                     self.delegate?.playerReady?(self)

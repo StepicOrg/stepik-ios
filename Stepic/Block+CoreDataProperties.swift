@@ -56,7 +56,7 @@ extension Block {
     }
 
     var image: UIImage {
-        switch (self.type) {
+        switch self.type {
         case .text:
             return UIImage(named: "ic_theory_dark").require()
         case .video:
@@ -67,7 +67,7 @@ extension Block {
             return UIImage(named: "ic_easy_dark").require()
         }
     }
-    
+
     var type: BlockType {
         return BlockType(rawValue: self.name) ?? .text
     }

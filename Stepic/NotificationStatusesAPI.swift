@@ -15,7 +15,7 @@ final class NotificationStatusesAPI: APIEndpoint {
 
     func retrieve() -> Promise<NotificationsStatus> {
         return Promise { seal in
-            retrieve.request(requestEndpoint: "notification-statuses", paramName: "notification-statuses", params: Parameters(), updatingObjects: Array<NotificationsStatus>(), withManager: manager).done {
+            retrieve.request(requestEndpoint: "notification-statuses", paramName: "notification-statuses", params: Parameters(), updatingObjects: [NotificationsStatus](), withManager: manager).done {
                 notificationStatuses, _, _ in
                 guard let status = notificationStatuses.first else {
                     seal.reject(ParsingError.badData)

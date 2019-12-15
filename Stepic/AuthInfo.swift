@@ -18,7 +18,7 @@ final class AuthInfo: NSObject {
 
     private let defaults = UserDefaults.standard
 
-    private override init() {
+    override private init() {
         super.init()
 
         print("initializing AuthInfo with userId \(String(describing: userId))")

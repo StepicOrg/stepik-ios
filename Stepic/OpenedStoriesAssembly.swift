@@ -30,7 +30,7 @@ final class OpenedStoriesAssembly: Assembly {
             view: viewController,
             stories: self.stories, startPosition: self.startPosition
         )
-        
+
         presenter.moduleOutput = self.moduleOutput
         viewController.presenter = presenter
 

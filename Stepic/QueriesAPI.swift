@@ -18,7 +18,7 @@ final class QueriesAPI: APIEndpoint {
     func retrieve(query: String) -> Promise<[String]> {
         let params: Parameters = ["query": query]
         return Promise { seal in
-            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: Array<Query>(), withManager: manager).done {
+            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: [Query](), withManager: manager).done {
                 queries, _ in
                 seal.fulfill(queries.map { $0.text })
             }.catch {

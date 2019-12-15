@@ -20,7 +20,7 @@ final class CommentsAPI: APIEndpoint {
                 requestEndpoint: self.name,
                 paramName: self.name,
                 ids: ids,
-                updating: Array<Comment>(),
+                updating: [Comment](),
                 withManager: self.manager
             ).done { comments, json in
                 var userInfoByID = [Int: UserInfo]()

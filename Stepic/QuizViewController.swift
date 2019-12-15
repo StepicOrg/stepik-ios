@@ -110,7 +110,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     private func submissionsLeftLocalizable(count: Int) -> String {
         func triesLocalizableFor(count: Int) -> String {
-            switch (abs(count) % 10) {
+            switch abs(count) % 10 {
             case 1: return NSLocalizedString("triesLeft1", comment: "")
             case 2, 3, 4: return NSLocalizedString("triesLeft234", comment: "")
             default: return NSLocalizedString("triesLeft567890", comment: "")

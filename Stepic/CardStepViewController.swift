@@ -50,7 +50,7 @@ class CardStepViewController: UIViewController, CardStepView {
 
     @objc func didScreenRotate() {
         refreshWebView()
-        shouldRefreshOnAppear = !shouldRefreshOnAppear
+        shouldRefreshOnAppear.toggle()
     }
 
     override func viewWillAppear(_ animated: Bool) {

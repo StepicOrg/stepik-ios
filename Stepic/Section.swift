@@ -90,10 +90,10 @@ final class Section: NSManagedObject, IDFetchable {
 
         let requestUnitsCount = 50
         var dimCount = 0
-        var idsArray = Array<Array<Int>>()
+        var idsArray = [[Int]]()
         for (index, unitId) in self.unitsArray.enumerated() {
             if index % requestUnitsCount == 0 {
-                idsArray.append(Array<Int>())
+                idsArray.append([Int]())
                 dimCount += 1
             }
             idsArray[dimCount - 1].append(unitId)

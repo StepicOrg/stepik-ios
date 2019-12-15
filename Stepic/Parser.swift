@@ -56,7 +56,7 @@ final class Parser: NSObject {
 }
 
 extension URL {
-    func getKeyVals() -> Dictionary<String, String>? {
+    func getKeyVals() -> [String: String]? {
         var results = [String: String]()
         let keyValues = self.query?.components(separatedBy: "&")
         if keyValues?.count > 0 {

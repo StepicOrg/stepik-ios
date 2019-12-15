@@ -18,7 +18,7 @@ final class UnitsAPI: APIEndpoint {
     func retrieve(lesson lessonId: Int) -> Promise<Unit> {
         let params: Parameters = ["lesson": lessonId]
         return Promise { seal in
-            retrieve.request(requestEndpoint: "units", paramName: "units", params: params, updatingObjects: Array<Unit>(), withManager: manager).done {
+            retrieve.request(requestEndpoint: "units", paramName: "units", params: params, updatingObjects: [Unit](), withManager: manager).done {
                 units, _, _ in
                 guard let unit: Unit = units.first else {
                     seal.reject(UnitRetrieveError.noUnits)

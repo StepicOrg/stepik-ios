@@ -72,7 +72,7 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                 ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: course.progress != nil ? [course.progress!] : [], refreshMode: .update, success: {
                     progresses in
 
-                    if (!unsubscribe) {
+                    if !unsubscribe {
                         guard let progress = progresses.first else {
                             seal.reject(CourseSubscriptionError.badResponseFormat)
                             return

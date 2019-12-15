@@ -101,7 +101,7 @@ final class SocialAuthViewController: UIViewController {
     }
 
     @IBAction func moreButtonClick(_ sender: Any) {
-        isExpanded = !isExpanded
+        isExpanded.toggle()
 
         moreButton.setTitle(isExpanded ? NSLocalizedString("SignInLessButton", comment: "") : NSLocalizedString("SignInMoreButton", comment: ""), for: .normal)
 
