@@ -100,28 +100,28 @@ enum DeepLinkRoute {
         }
 
         private var pattern: String {
-            let stepik = "https:\\/\\/stepik.org\\/"
-            let course = "(?:course\\/|course\\/[a-zа-я-]+|)(\\d+)\\/?"
-            let lesson = "(?:lesson\\/|lesson\\/[a-zа-я-]+)(\\d+)\\/?"
+            let stepik = #"https:\/\/stepik.org\/"#
+            let course = #"(?:course\/|course\/[a-zа-я-]+|)(\d+)\/?"#
+            let lesson = #"(?:lesson\/|lesson\/[a-zа-я-]+)(\d+)\/?"#
             let queryComponents = "(?:(?=[?])[a-zа-я0-9=?&_-]+)?"
 
             switch self {
             case .catalog:
-                return "\(stepik)catalog\\/?\(queryComponents)"
+                return #"\#(stepik)catalog\/?\#(queryComponents)"#
             case .course:
                 return "\(stepik)\(course)\(queryComponents)"
             case .coursePromo:
-                return "\(stepik)\(course)(?:promo\\/?)\(queryComponents)"
+                return #"\#(stepik)\#(course)(?:promo\/?)\#(queryComponents)"#
             case .profile:
-                return "\(stepik)users\\/(\\d+)\\/?\(queryComponents)"
+                return #"\#(stepik)users\/(\d+)\/?\#(queryComponents)"#
             case .notifications:
-                return "\(stepik)notifications\\/?\(queryComponents)"
+                return #"\#(stepik)notifications\/?\#(queryComponents)"#
             case .syllabus:
-                return "\(stepik)\(course)syllabus\\/?\(queryComponents)"
+                return #"\#(stepik)\#(course)syllabus\/?\#(queryComponents)"#
             case .lesson:
-                return "\(stepik)\(lesson)step\\/(\\d+)(?:\\?unit=(\\d+))?\\/?"
+                return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?unit=(\d+))?\/?"#
             case .discussions:
-                return "\(stepik)\(lesson)step\\/(\\d+)(?:\\?discussion=(\\d+))(?:\\&unit=(\\d+))?\\/?\(queryComponents)"
+                return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?\/?\#(queryComponents)"#
             }
         }
     }
