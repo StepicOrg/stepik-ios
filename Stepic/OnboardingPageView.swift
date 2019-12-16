@@ -41,9 +41,7 @@ final class OnboardingPageView: NibInitializableView {
         case start
     }
 
-    override var nibName: String {
-        return "OnboardingPageView"
-    }
+    override var nibName: String { "OnboardingPageView" }
 
     @IBOutlet weak var nextButton: StepikButton!
     @IBOutlet weak var pageTitleLabel: StepikLabel!

@@ -12,10 +12,14 @@ import PromiseKit
 import SwiftyJSON
 
 final class StepsAPI: APIEndpoint {
-    override var name: String { return "steps" }
+    override var name: String { "steps" }
 
-    func retrieve(ids: [Int], existing: [Step], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Step]> {
-        return getObjectsByIds(ids: ids, updating: existing, printOutput: false)
+    func retrieve(
+        ids: [Int],
+        existing: [Step],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<[Step]> {
+        self.getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
 
     @available(*, deprecated, message: "Legacy: we want to pass existing")
@@ -24,14 +28,24 @@ final class StepsAPI: APIEndpoint {
             return .value([])
         }
 
-        return getObjectsByIds(ids: ids, updating: Step.fetch(ids))
+        return self.getObjectsByIds(ids: ids, updating: Step.fetch(ids))
     }
 }
 
 extension StepsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Step], refreshMode: RefreshMode, success: @escaping (([Step]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
-        retrieve(ids: ids, existing: existing, headers: headers).done { success($0) }.catch { errorHandler(NetworkError(error: $0)) }
+    @discardableResult
+    func retrieve(
+        ids: [Int],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        existing: [Step],
+        refreshMode: RefreshMode,
+        success: @escaping (([Step]) -> Void),
+        error errorHandler: @escaping ((NetworkError) -> Void)
+    ) -> Request? {
+        self.retrieve(ids: ids, existing: existing, headers: headers)
+            .done { success($0) }
+            .catch { errorHandler(NetworkError(error: $0)) }
         return nil
     }
 }

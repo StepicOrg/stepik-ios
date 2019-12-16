@@ -41,7 +41,7 @@ final class BranchService {
     }
 
     func canOpenWithBranch(url: URL) -> Bool {
-        return url.host == "stepik.app.link" || url.host == "stepik-alternate.app.link"
+        url.host == "stepik.app.link" || url.host == "stepik-alternate.app.link"
     }
 }
 

@@ -16,53 +16,41 @@ final class DeviceInfo {
 
     private init() { }
 
-    var isPad: Bool {
-        return self.currentDevice.isPad
-    }
+    var isPad: Bool { self.currentDevice.isPad }
 
     var isPlus: Bool {
-        return self.currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices)
+        self.currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices)
             || self.currentDevice.isOneOf(DeviceKit.Device.allPlusSizedDevices.map({ DeviceKit.Device.simulator($0) }))
     }
 
     var isXSerie: Bool {
-        return self.currentDevice.isOneOf(DeviceKit.Device.allXSeriesDevices)
+        self.currentDevice.isOneOf(DeviceKit.Device.allXSeriesDevices)
             || self.currentDevice.isOneOf(DeviceKit.Device.allSimulatorXSeriesDevices)
     }
 
     var OSVersion: (major: Int, minor: Int, patch: Int) {
-        return (
+        (
             major: ProcessInfo.processInfo.operatingSystemVersion.majorVersion,
             minor: ProcessInfo.processInfo.operatingSystemVersion.minorVersion,
             patch: ProcessInfo.processInfo.operatingSystemVersion.patchVersion
         )
     }
 
-    var diagonal: Double {
-        return self.currentDevice.diagonal
-    }
+    var diagonal: Double { self.currentDevice.diagonal }
 
     var deviceInfoString: String {
-        return "\(self.deviceModelString) \(self.deviceNameString) \(self.systemNameString) \(self.systemVersionString)"
+        "\(self.deviceModelString) \(self.deviceNameString) \(self.systemNameString) \(self.systemVersionString)"
     }
 
-    var deviceModelString: String {
-        return self.currentDevice.model ?? ""
-    }
+    var deviceModelString: String { self.currentDevice.model ?? "" }
 
-    var deviceNameString: String {
-        return self.currentDevice.name ?? ""
-    }
+    var deviceNameString: String { self.currentDevice.name ?? "" }
 
-    var systemNameString: String {
-        return self.currentDevice.systemName ?? ""
-    }
+    var systemNameString: String { self.currentDevice.systemName ?? "" }
 
-    var systemVersionString: String {
-        return self.currentDevice.systemVersion ?? ""
-    }
+    var systemVersionString: String { self.currentDevice.systemVersion ?? "" }
 
     var orientation: (device: UIDeviceOrientation, interface: UIInterfaceOrientation) {
-        return (device: UIDevice.current.orientation, interface: UIApplication.shared.statusBarOrientation)
+        (device: UIDevice.current.orientation, interface: UIApplication.shared.statusBarOrientation)
     }
 }

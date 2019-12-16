@@ -14,6 +14,6 @@ extension UserDefaults: StringStorageServiceProtocol {
     }
 
     func getString(for key: String) -> String? {
-        return self.object(forKey: key) as? String
+        self.object(forKey: key) as? String
     }
 }

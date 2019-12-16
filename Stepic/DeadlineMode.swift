@@ -20,7 +20,7 @@ struct DeadlineModeInfo {
     }
 
     var dailyLoadSeconds: Int {
-        return weeklyLoadHours * 60 * 60 / 7
+        weeklyLoadHours * 60 * 60 / 7
     }
 }
 

@@ -12,9 +12,7 @@ final class DiscussionCountView: NibInitializableView {
     @IBOutlet weak var showCommentsLabel: StepikLabel!
     var showCommentsHandler: (() -> Void)?
 
-    override var nibName: String {
-        return "DiscussionCountView"
-    }
+    override var nibName: String { "DiscussionCountView" }
 
     var commentsCount: Int = 0 {
         didSet {

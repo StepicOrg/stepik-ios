@@ -27,7 +27,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-            return defaults.value(forKey: didShowOnLessonDownloadsKey) as? Bool ?? false
+             defaults.value(forKey: didShowOnLessonDownloadsKey) as? Bool ?? false
         }
     }
 
@@ -37,7 +37,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-            return defaults.value(forKey: didShowOnHomeContinueLearningKey) as? Bool ?? false
+             defaults.value(forKey: didShowOnHomeContinueLearningKey) as? Bool ?? false
         }
     }
 
@@ -47,7 +47,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-            return defaults.value(forKey: didShowOnStreaksSwitchInProfileKey) as? Bool ?? false
+             defaults.value(forKey: didShowOnStreaksSwitchInProfileKey) as? Bool ?? false
         }
     }
 
@@ -57,7 +57,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-            return defaults.value(forKey: didShowInVideoPlayerKey) as? Bool ?? false
+             defaults.value(forKey: didShowInVideoPlayerKey) as? Bool ?? false
         }
     }
 
@@ -67,7 +67,7 @@ final class TooltipDefaultsManager {
         }
 
         get {
-            return defaults.value(forKey: didShowForCodeEditorKey) as? Bool ?? false
+             defaults.value(forKey: didShowForCodeEditorKey) as? Bool ?? false
         }
     }
 
@@ -77,27 +77,27 @@ final class TooltipDefaultsManager {
         }
 
         get {
-            return defaults.value(forKey: didShowOnPersonalDeadlinesButtonKey) as? Bool ?? false
+             defaults.value(forKey: didShowOnPersonalDeadlinesButtonKey) as? Bool ?? false
         }
     }
 
     var shouldShowOnHomeContinueLearning: Bool {
-        return !didShowOnHomeContinueLearning
+        !self.didShowOnHomeContinueLearning
     }
 
     var shouldShowLessonDownloadsTooltip: Bool {
-        return !didShowOnLessonDownloads
+        !self.didShowOnLessonDownloads
     }
 
     var shouldShowOnStreaksSwitchInProfile: Bool {
-        return !didShowOnStreaksSwitchInProfile
+        !self.didShowOnStreaksSwitchInProfile
     }
 
     var shouldShowInVideoPlayer: Bool {
-        return !didShowInVideoPlayer
+        !self.didShowInVideoPlayer
     }
 
     var shouldShowForCodeEditor: Bool {
-        return !didShowForCodeEditor
+        !self.didShowForCodeEditor
     }
 }

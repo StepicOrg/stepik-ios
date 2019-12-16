@@ -27,7 +27,7 @@ final class CourseListsCollectionPersistenceService: CourseListsCollectionPersis
     }
 
     private func getKey(forLanguage language: ContentLanguage) -> String {
-        return "ListIds_\(language.languageString)"
+        "ListIds_\(language.languageString)"
     }
 
     enum Error: Swift.Error {

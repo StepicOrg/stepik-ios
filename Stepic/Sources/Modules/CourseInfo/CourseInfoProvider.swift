@@ -37,7 +37,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     }
 
     func fetchCached() -> Promise<Course?> {
-        return Promise { seal in
+        Promise { seal in
             self.fetchAndMergeCourse(
                 courseFetchMethod: self.coursesPersistenceService.fetch(id:),
                 progressFetchMethod: self.progressesPersistenceService.fetch(id:),
@@ -51,7 +51,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
     }
 
     func fetchRemote() -> Promise<Course?> {
-        return Promise { seal in
+        Promise { seal in
             self.fetchAndMergeCourse(
                 courseFetchMethod: self.coursesNetworkService.fetch(id:),
                 progressFetchMethod: self.progressesNetworkService.fetch(id:),
@@ -69,7 +69,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
         progressFetchMethod: @escaping (Progress.IdType) -> Promise<Progress?>,
         reviewSummaryFetchMethod: @escaping (CourseReviewSummary.IdType) -> Promise<CourseReviewSummary?>
     ) -> Promise<Course?> {
-        return Promise { seal in
+        Promise { seal in
             courseFetchMethod(self.courseID).then {
                 course -> Promise<(Course?, Progress?, CourseReviewSummary?)> in
                 let progressFetch: Promise<Progress?> = {

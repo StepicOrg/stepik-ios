@@ -42,9 +42,7 @@ final class StepicToken: DictionarySerializable {
         }
     }
 
-    func serializeToDictionary() -> [String: Any] {
-        return getDictionary()
-    }
+    func serializeToDictionary() -> [String: Any] { self.getDictionary() }
 
     func getDictionary() -> [String: Any] {
         var res = [String: AnyObject]()

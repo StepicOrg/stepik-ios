@@ -49,7 +49,7 @@ final class WriteCourseReviewProvider: WriteCourseReviewProviderProtocol {
     }
 
     func update(courseReview: CourseReview) -> Promise<CourseReview> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsNetworkService.update(courseReview: courseReview).done { review in
                 seal.fulfill(review)
             }.catch { _ in

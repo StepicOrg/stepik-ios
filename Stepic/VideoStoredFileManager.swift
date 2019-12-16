@@ -49,7 +49,7 @@ final class VideoStoredFileManager: StoredFileManager, VideoStoredFileManagerPro
     }
 
     private func makeFileName(videoID: Video.IdType) -> String {
-        return "\(videoID).\(VideoStoredFileManager.fileExtension)"
+        "\(videoID).\(VideoStoredFileManager.fileExtension)"
     }
 
     enum Error: Swift.Error {
@@ -62,10 +62,7 @@ final class VideoLocationManager: FileLocationManagerProtocol {
     private var documentDirectoryURL: URL
 
     var videosDirectoryURL: URL {
-        return self.documentDirectoryURL.appendingPathComponent(
-            VideoLocationManager.videosFolderName,
-            isDirectory: true
-        )
+        self.documentDirectoryURL.appendingPathComponent(VideoLocationManager.videosFolderName, isDirectory: true)
     }
 
     init(documentDirectoryURL: URL) {
@@ -73,6 +70,6 @@ final class VideoLocationManager: FileLocationManagerProtocol {
     }
 
     func getFullURLForFile(fileName: String) -> URL {
-        return self.videosDirectoryURL.appendingPathComponent(fileName, isDirectory: false)
+        self.videosDirectoryURL.appendingPathComponent(fileName, isDirectory: false)
     }
 }

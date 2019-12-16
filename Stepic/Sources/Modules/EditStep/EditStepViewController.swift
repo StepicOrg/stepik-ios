@@ -210,6 +210,6 @@ extension EditStepViewController: EditStepViewDelegate {
 
 extension EditStepViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return self.appearance.navigationBarAppearance
+        self.appearance.navigationBarAppearance
     }
 }

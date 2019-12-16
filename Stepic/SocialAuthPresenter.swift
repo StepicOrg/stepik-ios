@@ -43,9 +43,7 @@ final class SocialAuthPresenter {
 
     var pendingAuthProviderInfo: SocialProviderInfo?
 
-    var socialAuthHeaderString: String {
-        return NSLocalizedString("SignInTitleSocial", comment: "")
-    }
+    var socialAuthHeaderString: String { NSLocalizedString("SignInTitleSocial", comment: "") }
 
     init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, splitTestingService: SplitTestingServiceProtocol, view: SocialAuthView) {
         self.authAPI = authAPI

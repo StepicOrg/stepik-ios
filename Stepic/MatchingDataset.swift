@@ -14,13 +14,9 @@ final class MatchingDataset: Dataset {
 
     var pairs: [Pair]
 
-    var firstValues: [String] {
-        return self.pairs.map { $0.first }
-    }
+    var firstValues: [String] { self.pairs.map { $0.first } }
 
-    var secondValues: [String] {
-        return self.pairs.map { $0.second }
-    }
+    var secondValues: [String] { self.pairs.map { $0.second } }
 
     required init(json: JSON) {
         self.pairs = json["pairs"].arrayValue.map { pairJSON in

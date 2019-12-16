@@ -31,7 +31,7 @@ final class VKSocialSDKProvider: NSObject, SocialSDKProvider {
     }
 
     func getAccessInfo() -> Promise<(token: String, email: String?)> {
-        return Promise { seal in
+        Promise { seal in
             getAccessInfo(success: { token, email in
                 seal.fulfill((token: token, email: email))
             }, error: { error in

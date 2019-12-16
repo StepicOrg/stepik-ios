@@ -600,7 +600,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     }
 
     private func getAllComments() -> [Comment] {
-        return self.currentDiscussions + self.currentReplies.values.flatMap { $0 }
+        self.currentDiscussions + self.currentReplies.values.flatMap { $0 }
     }
 
     // MARK: Write & delete helpers

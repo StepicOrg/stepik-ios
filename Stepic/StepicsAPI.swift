@@ -12,11 +12,16 @@ import PromiseKit
 import SwiftyJSON
 
 final class StepicsAPI: APIEndpoint {
-    override var name: String { return "stepics" }
+    override var name: String { "stepics" }
 
     func retrieveCurrentUser() -> Promise<User> {
-        return Promise { seal in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(name)/1", parameters: nil, encoding: URLEncoding.default, headers: AuthInfo.shared.initialHTTPHeaders).responseSwiftyJSON { response in
+        Promise { seal in
+            self.manager.request(
+                "\(StepicApplicationsInfo.apiURL)/\(name)/1",
+                parameters: nil,
+                encoding: URLEncoding.default,
+                headers: AuthInfo.shared.initialHTTPHeaders
+            ).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(NetworkError(error: error))
@@ -33,8 +38,15 @@ final class StepicsAPI: APIEndpoint {
 
 extension StepicsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieveCurrentUser(_ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (User) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
-        retrieveCurrentUser().done { success($0) }.catch { errorHandler($0) }
+    @discardableResult
+    func retrieveCurrentUser(
+        _ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (User) -> Void,
+        error errorHandler: @escaping (Error) -> Void
+    ) -> Request? {
+        self.retrieveCurrentUser()
+            .done { success($0) }
+            .catch { errorHandler($0) }
         return nil
     }
 }

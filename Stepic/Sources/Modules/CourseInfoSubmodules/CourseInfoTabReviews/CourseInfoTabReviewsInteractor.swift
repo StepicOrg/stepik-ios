@@ -166,7 +166,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         course: Course,
         isOnline: Bool
     ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Response> {
-        return Promise { seal in
+        Promise { seal in
             firstly {
                 isOnline
                     ? self.provider.fetchRemote(course: course, page: 1)
@@ -198,7 +198,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         course: Course,
         isOnline: Bool
     ) -> Guarantee<CourseReview?> {
-        return Guarantee { seal in
+        Guarantee { seal in
             firstly {
                 isOnline
                     ? self.provider.fetchCurrentUserReviewRemote(course: course)

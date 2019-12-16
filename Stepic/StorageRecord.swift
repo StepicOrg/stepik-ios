@@ -65,7 +65,7 @@ final class StorageRecord: JSONSerializable {
     var updateDate: Date?
 
     var json: JSON {
-        return [
+        [
             JSONKey.id.rawValue: self.id,
             JSONKey.kind.rawValue: self.kind?.name ?? "",
             JSONKey.data.rawValue: self.data?.dictValue ?? ""

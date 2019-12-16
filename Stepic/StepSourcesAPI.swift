@@ -4,7 +4,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class StepSourcesAPI: APIEndpoint {
-    override var name: String { return "step-sources" }
+    override var name: String { "step-sources" }
 
     /// Get step sources by ids.
     func retrieve(ids: [StepSource.IdType], page: Int = 1) -> Promise<([StepSource], Meta)> {
@@ -22,7 +22,7 @@ final class StepSourcesAPI: APIEndpoint {
     }
 
     func update(_ stepSource: StepSource) -> Promise<StepSource> {
-        return self.update.request(
+        self.update.request(
             requestEndpoint: self.name,
             paramName: "stepSource",
             updatingObject: stepSource,

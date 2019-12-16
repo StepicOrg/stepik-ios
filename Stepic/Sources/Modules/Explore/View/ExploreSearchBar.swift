@@ -24,7 +24,7 @@ final class ExploreSearchBar: UISearchBar {
 
     // TODO: iOS 13 has `searchTextField` property, take a look.
     private var searchField: UITextField? {
-        return self.value(forKey: "searchField") as? UITextField
+        self.value(forKey: "searchField") as? UITextField
     }
 
     override init(frame: CGRect) {

@@ -7,9 +7,7 @@ protocol CodeEditorThemeServiceProtocol: AnyObject {
 }
 
 final class CodeEditorThemeService: CodeEditorThemeServiceProtocol {
-    var theme: CodeEditorTheme {
-        return CodeEditorTheme(font: self.font, name: self.name)
-    }
+    var theme: CodeEditorTheme { CodeEditorTheme(font: self.font, name: self.name) }
 
     private var font: UIFont {
         let codeElementsSize: CodeQuizElementsSize = DeviceInfo.current.isPad ? .big : .small
@@ -19,7 +17,7 @@ final class CodeEditorThemeService: CodeEditorThemeServiceProtocol {
 
     private var name: String {
         get {
-            return PreferencesContainer.codeEditor.theme
+             PreferencesContainer.codeEditor.theme
         }
         set {
             PreferencesContainer.codeEditor.theme = newValue

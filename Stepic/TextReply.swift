@@ -21,7 +21,5 @@ final class TextReply: NSObject, Reply {
         super.init()
     }
 
-    var dictValue: [String: Any] {
-        return ["text": text]
-    }
+    var dictValue: [String: Any] { ["text": text] }
 }

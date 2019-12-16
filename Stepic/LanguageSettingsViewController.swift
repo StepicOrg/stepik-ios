@@ -74,7 +74,7 @@ final class LanguageSettingsViewController: UIViewController {
 
 extension LanguageSettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ContentLanguage.supportedLanguages.count
+        ContentLanguage.supportedLanguages.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

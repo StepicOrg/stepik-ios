@@ -17,7 +17,7 @@ extension LastStep {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "LastStep", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "LastStep", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -41,7 +41,7 @@ extension LastStep {
             self.managedStepId = newId as NSNumber?
         }
         get {
-            return managedStepId?.intValue
+             managedStepId?.intValue
         }
     }
 
@@ -50,7 +50,7 @@ extension LastStep {
             self.managedUnitId = newId as NSNumber?
         }
         get {
-            return managedUnitId?.intValue
+             managedUnitId?.intValue
         }
     }
 }

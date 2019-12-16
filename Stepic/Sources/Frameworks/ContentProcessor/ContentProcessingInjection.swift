@@ -13,92 +13,66 @@ protocol ContentProcessingInjection: AnyObject {
 }
 
 extension ContentProcessingInjection {
-    var headScript: String {
-        return ""
-    }
+    var headScript: String { "" }
 
-    var bodyHeadScript: String {
-        return ""
-    }
+    var bodyHeadScript: String { "" }
 
-    var bodyTailScript: String {
-        return ""
-    }
+    var bodyTailScript: String { "" }
 
-    func shouldInject(to code: String) -> Bool {
-        return true
-    }
+    func shouldInject(to code: String) -> Bool { true }
 }
 
 /// Injects WYSIWYG and Stepik CSS files
 final class CommonStylesInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.styles
-    }
+    var headScript: String { Scripts.styles }
 }
 
 /// Injects meta-viewport
 final class MetaViewportInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.metaViewport
-    }
+    var headScript: String { Scripts.metaViewport }
 }
 
 /// Clickable images
 final class ClickableImagesInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.clickableImages
-    }
+    var headScript: String { Scripts.clickableImages }
 }
 
 /// Disable images callout on long tap
 final class WebkitImagesCalloutDisableInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.webkitCalloutDisable
-    }
+    var headScript: String { Scripts.webkitCalloutDisable }
 }
 
 /// MathJax init script
 final class MathJaxInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.localTex
-    }
+    var headScript: String { Scripts.localTex }
 }
 
 /// Kotlin runnable code playground
 final class KotlinRunnableSamplesInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.kotlinRunnableSamples
-    }
+    var headScript: String { Scripts.kotlinRunnableSamples }
 
     func shouldInject(to code: String) -> Bool {
-        return code.contains("<kotlin-runnable")
+        code.contains("<kotlin-runnable")
     }
 }
 
 /// Code syntax highlight with highlight.js
 final class HightlightJSInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.highlightJS
-    }
+    var headScript: String { Scripts.highlightJS }
 
     func shouldInject(to code: String) -> Bool {
-        return code.contains("<code")
+        code.contains("<code")
     }
 }
 
 /// Code syntax highlight with highlight.js
 final class CustomAudioControlInjection: ContentProcessingInjection {
-    var headScript: String {
-        return Scripts.audioTagWrapper
-    }
+    var headScript: String { Scripts.audioTagWrapper }
 
-    var bodyTailScript: String {
-        return Scripts.audioTagWrapperInit
-    }
+    var bodyTailScript: String { Scripts.audioTagWrapperInit }
 
     func shouldInject(to code: String) -> Bool {
-        return code.contains("<audio")
+        code.contains("<audio")
     }
 }
 
@@ -110,9 +84,7 @@ final class FontSizeInjection: ContentProcessingInjection {
         self.fontSize = fontSize
     }
 
-    var headScript: String {
-        return Scripts.fontSize(self.fontSize)
-    }
+    var headScript: String { Scripts.fontSize(self.fontSize) }
 }
 
 /// Injects script that assigns custom font sizes.
@@ -138,7 +110,7 @@ final class CustomFontSizeInjection: ContentProcessingInjection {
     }
 
     var headScript: String {
-        return Scripts.fontSizeScript(
+        Scripts.fontSizeScript(
             bodyFontSizeString: "\(self.bodyFontSize)pt",
             h1FontSizeString: "\(self.h1FontSize)pt",
             h2FontSizeString: "\(self.h2FontSize)pt",

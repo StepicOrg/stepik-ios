@@ -81,12 +81,10 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
     // For smooth table view update animation
     private static let tableViewUpdatesDelay: TimeInterval = 0.33
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return self.viewModels.count
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { self.viewModels.count }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.numberOfRowsInSection(section)
+        self.numberOfRowsInSection(section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,21 +104,21 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
     // MARK: Private helpers
 
     private func numberOfRowsInSection(_ section: Int) -> Int {
-        return self.viewModels[section].replies.count
+        self.viewModels[section].replies.count
             + DiscussionsTableViewDataSource.parentDiscussionInset
             + self.loadMoreRepliesInset(section: section)
     }
 
     private func loadMoreRepliesInset(section: Int) -> Int {
-        return self.shouldShowLoadMoreRepliesForSection(section) ? 1 : 0
+        self.shouldShowLoadMoreRepliesForSection(section) ? 1 : 0
     }
 
     private func shouldShowLoadMoreRepliesForSection(_ section: Int) -> Bool {
-        return self.viewModels[section].repliesLeftToLoadCount > 0
+        self.viewModels[section].repliesLeftToLoadCount > 0
     }
 
     private func isLoadMoreTableViewCell(at indexPath: IndexPath) -> Bool {
-        return self.shouldShowLoadMoreRepliesForSection(indexPath.section)
+        self.shouldShowLoadMoreRepliesForSection(indexPath.section)
             && indexPath.row == self.numberOfRowsInSection(indexPath.section) - 1
     }
 

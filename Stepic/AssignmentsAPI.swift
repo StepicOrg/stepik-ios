@@ -12,14 +12,29 @@ import PromiseKit
 import SwiftyJSON
 
 final class AssignmentsAPI: APIEndpoint {
-    override var name: String { return "assignments" }
+    override var name: String { "assignments" }
 
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Assignment], refreshMode: RefreshMode, success: @escaping (([Assignment]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
-        return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    @discardableResult func retrieve(
+        ids: [Int],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        existing: [Assignment],
+        refreshMode: RefreshMode,
+        success: @escaping (([Assignment]) -> Void),
+        error errorHandler: @escaping ((NetworkError) -> Void)
+    ) -> Request? {
+        self.getObjectsByIds(
+            requestString: self.name,
+            printOutput: false,
+            ids: ids,
+            deleteObjects: existing,
+            refreshMode: refreshMode,
+            success: success,
+            failure: errorHandler
+        )
     }
 
     func retrieve(ids: [Assignment.IdType]) -> Promise<[Assignment]> {
-        return Promise { seal in
+        Promise { seal in
             Assignment.fetchAsync(ids: ids).done { assignments in
                 self.retrieve(ids: ids, existing: assignments, refreshMode: .update, success: { newAssignments in
                     seal.fulfill(newAssignments)

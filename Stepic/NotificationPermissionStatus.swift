@@ -29,7 +29,7 @@ enum NotificationPermissionStatus: String {
     }
 
     static var current: Guarantee<NotificationPermissionStatus> {
-        return Guarantee<NotificationPermissionStatus> { seal in
+        Guarantee { seal in
             UNUserNotificationCenter.current().getNotificationSettings {
                 seal(NotificationPermissionStatus(authorizationStatus: $0.authorizationStatus))
             }

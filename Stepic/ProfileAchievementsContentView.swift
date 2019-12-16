@@ -65,7 +65,6 @@ final class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     }
 
     func set(achievements: [AchievementViewData]) {
-        var achievements = achievements
         for view in achievementsStackView.arrangedSubviews {
             achievementsStackView.removeArrangedSubview(view)
             view.removeFromSuperview()

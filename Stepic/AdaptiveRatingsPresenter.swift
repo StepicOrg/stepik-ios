@@ -82,7 +82,7 @@ final class AdaptiveRatingsPresenter {
     }
 
     private func reloadRating(days: Int? = nil, force: Bool = false) -> Promise<ScoreboardViewData> {
-        return Promise { seal in
+        Promise { seal in
             let currentUser = AuthInfo.shared.userId
             var usersForDeanonIds = [Int]()
             var loadedScoreboard: AdaptiveRatingsAPI.Scoreboard?

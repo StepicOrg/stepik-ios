@@ -10,7 +10,7 @@ import Foundation
 
 final class DeepLinkRouter {
     static var window: UIWindow? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window
+        (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
     static var currentNavigation: UINavigationController? {
@@ -27,7 +27,7 @@ final class DeepLinkRouter {
     }
 
     static var currentTabBarController: UITabBarController? {
-        return window?.rootViewController as? UITabBarController
+        self.window?.rootViewController as? UITabBarController
     }
 
     static func routeToCatalog() {

@@ -15,7 +15,7 @@ final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
         ids: [Course.IdType],
         page: Int = 1
     ) -> Promise<([Course], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             Course.fetchAsync(ids: ids).done { courses in
                 seal.fulfill((courses, Meta.oneAndOnlyPage))
             }.catch { _ in
@@ -25,7 +25,7 @@ final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
     }
 
     func fetch(id: Course.IdType) -> Promise<Course?> {
-        return Promise { seal in
+        Promise { seal in
             self.fetch(ids: [id]).done { courses, _ in
                 seal.fulfill(courses.first)
             }.catch { _ in
@@ -35,7 +35,7 @@ final class CoursesPersistenceService: CoursesPersistenceServiceProtocol {
     }
 
     func fetchAll() -> Guarantee<[Course]> {
-        return Guarantee { seal in
+        Guarantee { seal in
             seal(Course.getAllCourses())
         }
     }

@@ -15,26 +15,26 @@ final class LocalNotificationsService {
     /// Returns a list of all notification requests that are scheduled and waiting to be delivered and
     /// a list of the app’s notifications that are still displayed in Notification Center.
     func getAllNotifications() -> Guarantee<(pending: [UNNotificationRequest], delivered: [UNNotification])> {
-        return Guarantee { seal in
-            when(fulfilled: self.getPendingNotificationRequests(), self.getDeliveredNotifications()).done { result in
+        Guarantee { seal in
+            when(
+                fulfilled:
+                self.getPendingNotificationRequests(),
+                self.getDeliveredNotifications()
+            ).done { result in
                 seal((pending: result.0, delivered: result.1))
             }.cauterize()
         }
     }
 
     private func getPendingNotificationRequests() -> Guarantee<[UNNotificationRequest]> {
-        return Guarantee { seal in
-            UNUserNotificationCenter.current().getPendingNotificationRequests {
-                seal($0)
-            }
+        Guarantee { seal in
+            UNUserNotificationCenter.current().getPendingNotificationRequests { seal($0) }
         }
     }
 
     private func getDeliveredNotifications() -> Guarantee<[UNNotification]> {
-        return Guarantee { seal in
-            UNUserNotificationCenter.current().getDeliveredNotifications {
-                seal($0)
-            }
+        Guarantee { seal in
+            UNUserNotificationCenter.current().getDeliveredNotifications { seal($0) }
         }
     }
 
@@ -65,11 +65,11 @@ final class LocalNotificationsService {
     // MARK: - Scheduling Notifications -
 
     func scheduleNotification(contentProvider: LocalNotificationContentProvider) -> Promise<Void> {
-        return self.userNotificationsScheduleNotification(contentProvider: contentProvider)
+        self.userNotificationsScheduleNotification(contentProvider: contentProvider)
     }
 
     func isNotificationExists(withIdentifier identifier: String) -> Guarantee<Bool> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.getAllNotifications().done { (pending, delivered) in
                 if pending.first(where: { $0.identifier == identifier }) != nil {
                     return seal(true)
@@ -99,7 +99,7 @@ final class LocalNotificationsService {
     private func userNotificationsScheduleNotification(
         contentProvider: LocalNotificationContentProvider
     ) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             guard let notificationTrigger = contentProvider.trigger else {
                 throw Error.badContentProvider
             }

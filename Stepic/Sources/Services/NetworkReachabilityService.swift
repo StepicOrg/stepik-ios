@@ -25,9 +25,7 @@ final class NetworkReachabilityService: NetworkReachabilityServiceProtocol {
         }
     }
 
-    var isReachable: Bool {
-        return self.networkStatus == .reachable
-    }
+    var isReachable: Bool { self.networkStatus == .reachable }
 
     init() { }
 }

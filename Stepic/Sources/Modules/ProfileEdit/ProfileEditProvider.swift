@@ -19,7 +19,7 @@ final class ProfileEditProvider: ProfileEditProviderProtocol {
     }
 
     func update(profile: Profile) -> Promise<Profile> {
-        return Promise { seal in
+        Promise { seal in
             self.profilesNetworkService.update(profile: profile)
                 .done { seal.fulfill($0) }
                 .catch { _ in seal.reject(Error.networkUpdateFailed) }
@@ -27,7 +27,7 @@ final class ProfileEditProvider: ProfileEditProviderProtocol {
     }
 
     func fetchEmailAddresses(ids: [EmailAddress.IdType]) -> Promise<[EmailAddress]> {
-        return Promise { seal in
+        Promise { seal in
             self.emailAddressesNetworkService.fetch(ids: ids, page: 1).done { emailAddresses, _ in
                 seal.fulfill(emailAddresses)
             }.catch { _ in

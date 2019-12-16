@@ -13,7 +13,7 @@ final class DefaultsCourseListPersistenceStorage: CourseListPersistenceStorage {
     }
 
     func getCoursesList() -> [Course.IdType] {
-        return UserDefaults.standard.object(forKey: self.cacheID) as? [Course.IdType] ?? []
+        UserDefaults.standard.object(forKey: self.cacheID) as? [Course.IdType] ?? []
     }
 
     func update(newCachedList: [Course.IdType]) {
@@ -31,7 +31,5 @@ final class PassiveCourseListPersistenceStorage: CourseListPersistenceStorage {
     func update(newCachedList: [Course.IdType]) {
     }
 
-    func getCoursesList() -> [Course.IdType] {
-        return self.list
-    }
+    func getCoursesList() -> [Course.IdType] { self.list }
 }

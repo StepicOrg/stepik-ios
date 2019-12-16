@@ -13,8 +13,8 @@ import SwiftyJSON
 
 //TODO: Better refactor this to two classes
 final class AdaptiveRatingsAPI: APIEndpoint {
-    override var name: String { return "rating" }
-    var restoreName: String { return "rating-restore" }
+    override var name: String { "rating" }
+    var restoreName: String { "rating-restore" }
 
     typealias RatingRecord = (userId: Int, exp: Int, rank: Int, isFake: Bool)
     typealias Scoreboard = (allCount: Int, leaders: [RatingRecord])

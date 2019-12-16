@@ -67,7 +67,7 @@ extension ControllerWithStepikPlaceholder where Self: UIViewController {
             placeholderContainer.isPlaceholderShown = newValue
         }
         get {
-            return placeholderContainer.isPlaceholderShown
+             placeholderContainer.isPlaceholderShown
         }
     }
 

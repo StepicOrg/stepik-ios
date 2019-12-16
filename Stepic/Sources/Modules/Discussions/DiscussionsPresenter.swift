@@ -284,14 +284,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         discussionProxy: DiscussionProxy,
         by sortType: Discussions.SortType
     ) -> [Comment] {
-        return discussions.reordered(
+        discussions.reordered(
             order: self.getDiscussionsIDs(discussionProxy: discussionProxy, sortType: sortType),
             transform: { $0.id }
         )
     }
 
     private func sortedReplies(_ replies: [Comment], parentDiscussion discussion: Comment) -> [Comment] {
-        return replies
+        replies
             .reordered(order: discussion.repliesIDs, transform: { $0.id })
             .sorted { $0.time.compare($1.time) == .orderedAscending }
     }

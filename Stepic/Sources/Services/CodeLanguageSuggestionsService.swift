@@ -14,7 +14,7 @@ final class CodeLanguageSuggestionsService: CodeLanguageSuggestionsServiceProtoc
     }
 
     func suggest(stepID: Step.IdType) -> Guarantee<CodeLanguage?> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.stepsPersistenceService.fetch(ids: [stepID]).done { steps in
                 guard let step = steps.first else {
                     return seal(nil)
@@ -38,7 +38,7 @@ final class CodeLanguageSuggestionsService: CodeLanguageSuggestionsServiceProtoc
     }
 
     func update(language: CodeLanguage, stepID: Step.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             guard let course = LastStepGlobalContext.context.course else {
                 return seal.reject(Error.fetchFailed)
             }

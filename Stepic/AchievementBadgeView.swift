@@ -21,9 +21,7 @@ struct AchievementViewData {
     let score: Int
     let maxScore: Int
 
-    var isLocked: Bool {
-        return completedLevel == 0
-    }
+    var isLocked: Bool { self.completedLevel == 0 }
 }
 
 final class AchievementBadgeView: UIView {

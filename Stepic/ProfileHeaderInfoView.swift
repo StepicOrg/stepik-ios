@@ -57,9 +57,14 @@ final class ProfileHeaderInfoView: UIView, ProfileInfoView {
     }
 
     private func pluralizedDays(count: Int) -> String {
-        return StringHelper.pluralize(number: count, forms: [NSLocalizedString("days1", comment: ""),
-                                                             NSLocalizedString("days234", comment: ""),
-                                                             NSLocalizedString("days567890", comment: "")])
+        StringHelper.pluralize(
+            number: count,
+            forms: [
+                NSLocalizedString("days1", comment: ""),
+                NSLocalizedString("days234", comment: ""),
+                NSLocalizedString("days567890", comment: "")
+            ]
+        )
     }
 
     private func localize() {

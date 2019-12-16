@@ -182,7 +182,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
         _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
         willSelectRowAt indexPath: IndexPath
     ) -> Bool {
-        return self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
+        self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
     }
 
     func courseInfoTabReviewsView(

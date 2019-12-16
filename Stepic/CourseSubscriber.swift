@@ -36,15 +36,15 @@ final class CourseSubscriber: CourseSubscriberProtocol {
     }()
 
     func join(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
-        return performCourseJoinActions(course: course, unsubscribe: false, source: source)
+        self.performCourseJoinActions(course: course, unsubscribe: false, source: source)
     }
 
     func leave(course: Course, source: CourseSubscriptionSource) -> Promise<Course> {
-        return performCourseJoinActions(course: course, unsubscribe: true, source: source)
+        self.performCourseJoinActions(course: course, unsubscribe: true, source: source)
     }
 
     private func performCourseJoinActions(course: Course, unsubscribe: Bool, source: CourseSubscriptionSource) -> Promise<Course> {
-        return Promise<Course> { seal in
+        Promise<Course> { seal in
             _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: {
                 guard let progressId = course.progressId else {
                     seal.reject(CourseSubscriptionError.badResponseFormat)

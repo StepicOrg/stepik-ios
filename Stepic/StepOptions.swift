@@ -12,7 +12,7 @@ import SwiftyJSON
 
 final class StepOptions: NSManagedObject {
     override var description: String {
-        return "StepOptions(limits: \(self.limits), templates: \(self.templates), samples: \(self.samples)"
+        "StepOptions(limits: \(self.limits), templates: \(self.templates), samples: \(self.samples)"
     }
 
     required convenience init(json: JSON) {
@@ -69,7 +69,7 @@ final class StepOptions: NSManagedObject {
     }
 
     private func limit(language: String) -> CodeLimit? {
-        return limits.filter({
+        self.limits.filter({
             $0.languageString == language
         }).first
     }
@@ -79,12 +79,10 @@ final class StepOptions: NSManagedObject {
         return limit(language: lan)
     }
 
-    var languages: [CodeLanguage] {
-        return limits.compactMap { $0.language }
-    }
+    var languages: [CodeLanguage] { limits.compactMap { $0.language } }
 
     private func template(language: String, userGenerated: Bool) -> CodeTemplate? {
-        return templates.filter({
+        self.templates.filter({
             $0.languageString == language && $0.isUserGenerated == userGenerated
         }).first
     }

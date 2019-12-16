@@ -53,8 +53,8 @@ enum CardsStepsPresenterState {
 }
 
 final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
-    var recommendationsBatchSize: Int { return 6 }
-    var nextRecommendationsBatchThreshold: Int { return 4 }
+    var recommendationsBatchSize: Int { 6 }
+    var nextRecommendationsBatchThreshold: Int { 4 }
 
     weak var view: CardsStepsView?
     var currentStepPresenter: CardStepPresenter?
@@ -79,13 +79,11 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     var course: Course?
 
     var cachedRecommendedLessons: [Lesson] = []
-    var canSwipeCard: Bool {
-        return state == .loaded
-    }
+    var canSwipeCard: Bool { self.state == .loaded }
 
     var rating: Int {
         get {
-            return self.ratingManager.rating
+            self.ratingManager.rating
         }
         set {
             self.ratingManager.rating = newValue
@@ -94,7 +92,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
 
     var streak: Int {
         get {
-            return self.ratingManager.streak
+            self.ratingManager.streak
         }
         set {
             self.ratingManager.streak = newValue
@@ -104,20 +102,14 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     // Onboarding
     private var lastOnboardingStep: Int?
 
-    var onboardingLastStepIndex: Int {
-        return 3
-    }
+    var onboardingLastStepIndex: Int { 3 }
 
-    var onboardingFirstStepIndex: Int {
-        return 1
-    }
+    var onboardingFirstStepIndex: Int { 1 }
 
     // Sync
     private var shouldSyncRating = true
 
-    var useRatingSynchronization: Bool {
-        return true
-    }
+    var useRatingSynchronization: Bool { true }
 
     init(
         stepsAPI: StepsAPI,
@@ -316,7 +308,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     private func loadRecommendations(for course: Course, count: Int) -> Promise<[Lesson]> {
-        return Promise { seal in
+        Promise { seal in
             self.recommendationsAPI.retrieve(course: course.id, count: count).then { lessonsIds -> Promise<[Lesson]> in
                 guard !lessonsIds.isEmpty else {
                     return .value([])
@@ -333,7 +325,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     private func getStep(for lesson: Lesson, index: Int = 0) -> Promise<Step> {
-        return Promise { seal in
+        Promise { seal in
             guard lesson.stepsArray.count > index else {
                 throw CardsStepsError.noStepsInLesson
             }
@@ -405,7 +397,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     private func sendView(step: Step) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             guard let lesson = step.lesson else {
                 throw CardsStepsError.viewNotSent
             }
@@ -426,7 +418,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     private func sendReaction(_ reaction: Reaction, for lesson: Lesson, user: User) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.recommendationsAPI.sendReaction(user: user.id, lesson: lesson.id, reaction: reaction).done { _ in
                 if let curState = self.currentStepPresenter?.state {
                     switch reaction {
@@ -453,7 +445,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     }
 
     private func syncRatingAndStreak(for course: Course) -> Guarantee<Void> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.ratingsAPI.restore(courseId: course.id).done { exp, streak in
                 self.rating = max(self.rating, exp)
                 self.streak = max(self.streak, streak)
@@ -565,7 +557,7 @@ extension BaseCardsStepsPresenter: NotificationsRegistrationServiceDelegate {
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) -> Bool {
-        return self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
+        self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
     }
 
     func notificationsRegistrationService(

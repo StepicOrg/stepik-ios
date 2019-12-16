@@ -44,7 +44,7 @@ class TableInputTextField: UITextField {
     }
 
     var placeholderWidth: CGFloat {
-        return self.pinnedPlaceholderLabel.frame.width
+        self.pinnedPlaceholderLabel.frame.width
     }
 
     override var font: UIFont? {

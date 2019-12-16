@@ -8,9 +8,7 @@ struct DiscussionsDiscussionViewModel {
     let formattedRepliesLeftToLoad: String
     let isFetchingMoreReplies: Bool
 
-    var id: Int {
-        return self.comment.id
-    }
+    var id: Int { self.comment.id }
 }
 
 struct DiscussionsCommentViewModel {

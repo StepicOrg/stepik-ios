@@ -35,7 +35,8 @@ final class ConnectionHelper: NSObject {
     }
 
     var isReachable: Bool {
-        return self.reachability.isReachableViaWiFi() || (self.reachability.isReachableViaWWAN() && self.reachability.reachableOnWWAN)
+        self.reachability.isReachableViaWiFi()
+            || (self.reachability.isReachableViaWWAN() && self.reachability.reachableOnWWAN)
     }
 
     var reachableOnWWAN: Bool {

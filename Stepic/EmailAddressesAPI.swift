@@ -12,11 +12,11 @@ import PromiseKit
 import SwiftyJSON
 
 final class EmailAddressesAPI: APIEndpoint {
-    override var name: String { return "email-addresses" }
+    override var name: String { "email-addresses" }
 
     /// Get email addresses by ids.
     func retrieve(ids: [EmailAddress.IdType], page: Int = 1) -> Promise<([EmailAddress], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             let parameters: Parameters = [
                 "ids": ids,
                 "page": page

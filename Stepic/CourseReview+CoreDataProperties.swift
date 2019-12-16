@@ -21,7 +21,7 @@ extension CourseReview {
     @NSManaged var managedUser: User?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "CourseReview", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CourseReview", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -41,13 +41,13 @@ extension CourseReview {
             self.managedId = newValue as NSNumber?
         }
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
     }
 
     var score: Int {
         get {
-            return managedScore?.intValue ?? 0
+             managedScore?.intValue ?? 0
         }
         set {
             managedScore = newValue as NSNumber?
@@ -56,7 +56,7 @@ extension CourseReview {
 
     var userID: User.IdType {
         get {
-            return managedUserId?.intValue ?? 0
+             managedUserId?.intValue ?? 0
         }
         set {
             managedUserId = newValue as NSNumber?
@@ -65,7 +65,7 @@ extension CourseReview {
 
     var courseID: Course.IdType {
         get {
-            return managedCourseId?.intValue ?? 0
+             managedCourseId?.intValue ?? 0
         }
         set {
             managedCourseId = newValue as NSNumber?
@@ -74,7 +74,7 @@ extension CourseReview {
 
     var course: Course? {
         get {
-            return managedCourse
+             managedCourse
         }
         set {
             managedCourse = newValue
@@ -83,7 +83,7 @@ extension CourseReview {
 
     var user: User? {
         get {
-            return managedUser
+             managedUser
         }
         set {
             managedUser = newValue
@@ -92,7 +92,7 @@ extension CourseReview {
 
     var creationDate: Date {
         get {
-            return managedCreateDate ?? Date()
+             managedCreateDate ?? Date()
         }
         set {
             managedCreateDate = newValue
@@ -101,7 +101,7 @@ extension CourseReview {
 
     var text: String {
         get {
-            return managedText ?? ""
+             managedText ?? ""
         }
         set {
             managedText = newValue

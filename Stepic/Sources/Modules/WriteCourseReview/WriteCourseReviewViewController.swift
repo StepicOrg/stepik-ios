@@ -176,6 +176,6 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
 
 extension WriteCourseReviewViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return self.appearance.navigationBarAppearance
+        self.appearance.navigationBarAppearance
     }
 }

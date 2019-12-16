@@ -112,7 +112,7 @@ final class NewStringQuizView: UIView {
 
     var isTextFieldEnabled: Bool {
         get {
-            return self.textField.isEnabled
+             self.textField.isEnabled
         }
         set {
             self.textField.isEnabled = newValue

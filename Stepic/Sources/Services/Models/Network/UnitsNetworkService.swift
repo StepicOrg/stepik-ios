@@ -14,7 +14,7 @@ final class UnitsNetworkService: UnitsNetworkServiceProtocol {
     }
 
     func fetch(ids: [Unit.IdType]) -> Promise<[Unit]> {
-        return Promise { seal in
+        Promise { seal in
             self.unitsAPI.retrieve(ids: ids).done { units in
                 let units = units.reordered(order: ids, transform: { $0.id })
                 seal.fulfill(units)
@@ -25,7 +25,7 @@ final class UnitsNetworkService: UnitsNetworkServiceProtocol {
     }
 
     func fetch(id: Unit.IdType) -> Promise<Unit?> {
-        return self.fetch(ids: [id]).then { result -> Promise<Unit?> in
+        self.fetch(ids: [id]).then { result -> Promise<Unit?> in
             Promise.value(result.first)
         }
     }

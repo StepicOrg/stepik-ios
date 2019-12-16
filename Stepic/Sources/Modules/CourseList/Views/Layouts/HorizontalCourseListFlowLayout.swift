@@ -16,9 +16,7 @@ final class HorizontalCourseListFlowLayout: BaseListFlowLayout {
     let columnsCount: Int
 
     private var _contentWidth: CGFloat = 0
-    override var contentWidth: CGFloat {
-        return self._contentWidth
-    }
+    override var contentWidth: CGFloat { self._contentWidth }
 
     override var contentHeight: CGFloat {
         let allItemsHeight = self.itemSize.height * CGFloat(self.rowsCount)

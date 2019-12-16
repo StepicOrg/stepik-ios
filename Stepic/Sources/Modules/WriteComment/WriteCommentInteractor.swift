@@ -103,7 +103,7 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
     // MARK: - Private API
 
     private func makeCommentInfo() -> WriteComment.CommentInfo {
-        return WriteComment.CommentInfo(
+        WriteComment.CommentInfo(
             text: self.currentText,
             presentationContext: self.presentationContext
         )

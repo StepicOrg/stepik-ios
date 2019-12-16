@@ -205,6 +205,6 @@ extension WriteCommentViewController: WriteCommentViewDelegate {
 
 extension WriteCommentViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return self.appearance.navigationBarAppearance
+        self.appearance.navigationBarAppearance
     }
 }

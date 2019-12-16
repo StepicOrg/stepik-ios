@@ -16,7 +16,7 @@ final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
     }
 
     func fetch(stepID: Step.IdType, blockName: String, page: Int) -> Promise<([Submission], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.submissionsAPI.retrieve(stepName: blockName, stepID: stepID, page: page).done { submissions, meta in
                 seal.fulfill((submissions, meta))
             }.catch { _ in
@@ -26,7 +26,7 @@ final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
     }
 
     func fetch(attemptID: Attempt.IdType, blockName: String) -> Promise<([Submission], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.submissionsAPI.retrieve(stepName: blockName, attemptID: attemptID).done { submissions, meta in
                 seal.fulfill((submissions, meta))
             }.catch { _ in
@@ -36,7 +36,7 @@ final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
     }
 
     func fetch(submissionID: Submission.IdType, blockName: String) -> Promise<Submission?> {
-        return Promise { seal in
+        Promise { seal in
             self.submissionsAPI.retrieve(stepName: blockName, submissionId: submissionID).done { submission in
                 seal.fulfill(submission)
             }.catch { _ in
@@ -46,7 +46,7 @@ final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
     }
 
     func create(attemptID: Attempt.IdType, blockName: String, reply: Reply) -> Promise<Submission?> {
-        return Promise { seal in
+        Promise { seal in
             self.submissionsAPI.create(stepName: blockName, attemptId: attemptID, reply: reply).done { submission in
                 seal.fulfill(submission)
             }.catch { _ in

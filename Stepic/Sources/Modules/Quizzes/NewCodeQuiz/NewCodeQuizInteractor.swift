@@ -19,9 +19,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private var currentStatus: QuizStatus?
 
     private var languageName: String?
-    private var language: CodeLanguage? {
-        return CodeLanguage(rawValue: self.languageName ?? "")
-    }
+    private var language: CodeLanguage? { CodeLanguage(rawValue: self.languageName ?? "") }
 
     private var currentCode: String? {
         didSet {

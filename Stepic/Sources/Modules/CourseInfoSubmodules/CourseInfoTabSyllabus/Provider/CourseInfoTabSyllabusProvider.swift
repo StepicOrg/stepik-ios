@@ -47,7 +47,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
     }
 
     func fetchSections(for course: Course, shouldUseNetwork: Bool) -> Promise<[Section]> {
-        return Promise { seal in
+        Promise { seal in
             firstly {
                 shouldUseNetwork
                     ? self.sectionsNetworkService.fetch(ids: course.sectionsArray)
@@ -80,7 +80,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
     }
 
     func fetchUnitsWithLessons(for section: Section, shouldUseNetwork: Bool) -> Promise<[Unit]> {
-        return Promise { seal in
+        Promise { seal in
             firstly {
                 shouldUseNetwork
                     ? self.fetchUnitsWithLessonsFromNetwork(unitsIDs: section.unitsArray)
@@ -97,7 +97,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
     }
 
     func fetchSteps(for lesson: Lesson) -> Promise<[Step]> {
-        return Promise { seal in
+        Promise { seal in
             self.stepsNetworkService.fetch(ids: lesson.stepsArray).done { steps in
                 lesson.steps = steps
                 seal.fulfill(steps)
@@ -110,7 +110,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
     }
 
     private func fetchUnitsWithLessonsLocally(unitsIDs: [Unit.IdType]) -> Promise<[Unit]> {
-        return Promise { seal in
+        Promise { seal in
             self.unitsPersistenceService.fetch(ids: unitsIDs).then {
                 units -> Promise<([Unit], [Lesson], [Progress])> in
                 let lessonsIDs = units.map { $0.lessonId }
@@ -190,7 +190,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
         progresses: [Progress],
         lessons: [Lesson]
     ) -> Guarantee<[Unit]> {
-        return Guarantee { seal in
+        Guarantee { seal in
             let progressesMap: [Progress.IdType: Progress] = progresses.reduce(into: [:]) { $0[$1.id] = $1 }
             let lessonsMap: [Lesson.IdType: Lesson] = lessons.reduce(into: [:]) { $0[$1.id] = $1 }
 

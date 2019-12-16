@@ -13,7 +13,7 @@ final class ViewsNetworkService: ViewsNetworkServiceProtocol {
     }
 
     func create(step: Step.IdType, assignment: Assignment.IdType?) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.viewsAPI.create(step: step, assignment: assignment).done {
                 seal.fulfill(())
             }.catch { _ in

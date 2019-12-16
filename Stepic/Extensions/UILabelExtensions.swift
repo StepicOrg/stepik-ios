@@ -48,7 +48,7 @@ extension UILabel {
     }
 
     func getHeightWithText(_ text: String, html: Bool = false) -> CGFloat {
-        return type(of: self).heightForLabelWithText(
+        type(of: self).heightForLabelWithText(
             text,
             lines: self.numberOfLines,
             font: self.font,
@@ -66,7 +66,7 @@ extension UILabel {
         html: Bool = false,
         alignment: NSTextAlignment = NSTextAlignment.natural
     ) -> CGFloat {
-        return self.heightForLabelWithText(
+        self.heightForLabelWithText(
             text,
             lines: lines,
             fontName: font.fontName,
@@ -145,7 +145,7 @@ extension UILabel {
 
 extension CGSize {
     func sizeByDelta(dw: CGFloat, dh: CGFloat) -> CGSize {
-        return CGSize(width: self.width + dw, height: self.height + dh)
+        CGSize(width: self.width + dw, height: self.height + dh)
     }
 }
 
@@ -157,6 +157,6 @@ final class WiderLabel: UILabel {
     }
 
     override var intrinsicContentSize: CGSize {
-        return super.intrinsicContentSize.sizeByDelta(dw: self.widthDelta, dh: 0)
+        super.intrinsicContentSize.sizeByDelta(dw: self.widthDelta, dh: 0)
     }
 }

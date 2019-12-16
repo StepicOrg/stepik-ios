@@ -6,6 +6,6 @@ protocol Reusable: AnyObject {
 
 extension Reusable where Self: UIView {
     static var defaultReuseIdentifier: String {
-        return String(describing: self)
+        String(describing: self)
     }
 }

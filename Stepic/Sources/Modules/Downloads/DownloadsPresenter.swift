@@ -36,7 +36,7 @@ final class DownloadsPresenter: DownloadsPresenterProtocol {
         sizeInBytesByCourse: [Course: UInt64],
         adaptiveCoursesIDs: Set<Course.IdType>
     ) -> [DownloadsItemViewModel] {
-        return sizeInBytesByCourse.map { item -> DownloadsItemViewModel in
+        sizeInBytesByCourse.map { item -> DownloadsItemViewModel in
             self.makeDownloadItemViewModel(
                 course: item.key,
                 sizeInBytes: item.value,

@@ -138,9 +138,7 @@ enum CodeLanguage: String, CaseIterable {
         }
     }
 
-    var displayName: String {
-        return self.rawValue
-    }
+    var displayName: String { self.rawValue }
 
     var highlightrSample: String {
         switch self {
@@ -193,7 +191,7 @@ enum CodeLanguage: String, CaseIterable {
 
     // https://jupyterhub.int.stepik.org/user/ivan.magda/notebooks/ivan.magda/programming-languages-popularity.ipynb
     static var priorityOrder: [CodeLanguage] {
-        return [
+        [
             .python,
             .cpp11,
             .java11,

@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class ProgressesAPI: APIEndpoint {
-    override var name: String { return "progresses" }
+    override var name: String { "progresses" }
 
     @discardableResult
     func retrieve(
@@ -61,6 +61,6 @@ final class ProgressesAPI: APIEndpoint {
     }
 
     private func filterIds(_ ids: [Progress.IdType]) -> [Progress.IdType] {
-        return ids.filter { !$0.isEmpty }
+        ids.filter { !$0.isEmpty }
     }
 }

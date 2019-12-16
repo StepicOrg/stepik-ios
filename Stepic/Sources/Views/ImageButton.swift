@@ -74,9 +74,7 @@ final class ImageButton: UIControl {
 
     // To store private titleLabel
     // but sometimes we want to get direct reference to title view
-    var titleContentView: UIView {
-        return self.titleLabel
-    }
+    var titleContentView: UIView { self.titleLabel }
 
     override var intrinsicContentSize: CGSize {
         let width = self.titleLabel.frame.maxX + self.titleInsets.right

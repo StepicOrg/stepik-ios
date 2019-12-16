@@ -9,7 +9,7 @@ final class ContentLanguageSwitchAvailabilityService: ContentLanguageSwitchAvail
 
     var shouldShowLanguageSwitchOnExplore: Bool {
         get {
-            return UserDefaults.standard.value(
+             UserDefaults.standard.value(
                 forKey: ContentLanguageSwitchAvailabilityService
                     .shouldDisplayContentLanguageWidgetKey
             ) as? Bool ?? true

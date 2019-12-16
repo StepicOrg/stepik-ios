@@ -307,7 +307,7 @@ final class CourseInfoViewController: UIViewController {
 
 extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyViewControllerDelegate {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return self.availableTabs.count
+        self.availableTabs.count
     }
 
     func viewController(
@@ -321,7 +321,7 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return .at(index: self.initialTabIndex)
+        .at(index: self.initialTabIndex)
     }
 
     func pageboyViewController(
@@ -515,7 +515,7 @@ extension CourseInfoViewController: StyledNavigationControllerPresentable {
 
 extension CourseInfoViewController: CourseInfoViewDelegate {
     func numberOfPages(in courseInfoView: CourseInfoView) -> Int {
-        return self.submodulesControllers.count
+        self.submodulesControllers.count
     }
 
     func courseInfoView(_ courseInfoView: CourseInfoView, didReportNewHeaderHeight height: CGFloat) {

@@ -27,7 +27,7 @@ class CourseListView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        return self.collectionView.collectionViewLayout.collectionViewContentSize
+        self.collectionView.collectionViewLayout.collectionViewContentSize
     }
 
     init(
@@ -187,7 +187,7 @@ final class VerticalCourseListView: CourseListView,
     }()
 
     override var flowLayout: UICollectionViewFlowLayout {
-        return self.verticalCourseFlowLayout
+        self.verticalCourseFlowLayout
     }
 
     private let isHeaderViewHidden: Bool
@@ -280,7 +280,7 @@ final class VerticalCourseListView: CourseListView,
     // MARK: UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.storedCollectionViewDataSource.collectionView(
+        self.storedCollectionViewDataSource.collectionView(
             collectionView,
             numberOfItemsInSection: section
         )
@@ -290,7 +290,7 @@ final class VerticalCourseListView: CourseListView,
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        return self.storedCollectionViewDataSource.collectionView(
+        self.storedCollectionViewDataSource.collectionView(
             collectionView,
             cellForItemAt: indexPath
         )
@@ -343,7 +343,7 @@ final class HorizontalCourseListView: CourseListView {
     }()
 
     override var flowLayout: UICollectionViewFlowLayout {
-        return self.horizontalCourseFlowLayout
+        self.horizontalCourseFlowLayout
     }
 
     init(
@@ -421,7 +421,7 @@ private class LightCourseListCollectionViewCell: CourseListCollectionViewCell {
     }
 
     static var defaultReuseIdentifier: String {
-        return String(describing: CourseListCollectionViewCell.self)
+        String(describing: CourseListCollectionViewCell.self)
     }
 }
 
@@ -436,6 +436,6 @@ private class DarkCourseListCollectionViewCell: CourseListCollectionViewCell {
     }
 
     static var defaultReuseIdentifier: String {
-        return String(describing: CourseListCollectionViewCell.self)
+        String(describing: CourseListCollectionViewCell.self)
     }
 }

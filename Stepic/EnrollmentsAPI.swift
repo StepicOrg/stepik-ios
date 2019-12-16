@@ -12,17 +12,17 @@ import PromiseKit
 import SwiftyJSON
 
 final class EnrollmentsAPI: APIEndpoint {
-    override var name: String { return "enrollments" }
+    override var name: String { "enrollments" }
 
     func delete(courseId: Int) -> Promise<Void> {
-        return delete.request(requestEndpoint: "enrollments", deletingId: courseId, withManager: manager)
+        self.delete.request(requestEndpoint: self.name, deletingId: courseId, withManager: manager)
     }
 }
 
 extension EnrollmentsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     func joinCourse(_ course: Course, delete: Bool = false) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             joinCourse(course, delete: delete, success: {
                 seal.fulfill(())
             }, error: { _ in
@@ -32,7 +32,13 @@ extension EnrollmentsAPI {
     }
 
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func joinCourse(_ course: Course, delete: Bool = false, success : @escaping () -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult
+    func joinCourse(
+        _ course: Course,
+        delete: Bool = false,
+        success : @escaping () -> Void,
+        error errorHandler: @escaping (String) -> Void
+    ) -> Request? {
         let headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
         let params: Parameters = [
             "enrollment": [
@@ -41,9 +47,13 @@ extension EnrollmentsAPI {
         ]
 
         if !delete {
-            return manager.request("\(StepicApplicationsInfo.apiURL)/\(name)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
-                response in
-
+            return self.manager.request(
+                "\(StepicApplicationsInfo.apiURL)/\(name)",
+                method: .post,
+                parameters: params,
+                encoding: JSONEncoding.default,
+                headers: headers
+            ).responseSwiftyJSON({ response in
                 var error = response.result.error
                 var json: JSON = [:]
                 if response.result.value == nil {
@@ -71,9 +81,13 @@ extension EnrollmentsAPI {
                 }
             })
         } else {
-            return manager.request("\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)", method: .delete, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-                response in
-
+            return self.manager.request(
+                "\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)",
+                method: .delete,
+                parameters: params,
+                encoding: URLEncoding.default,
+                headers: headers
+            ).responseSwiftyJSON({ response in
                 var error = response.result.error
                 //                var json : JSON = [:]
                 if response.result.value == nil {

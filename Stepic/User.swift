@@ -14,9 +14,7 @@ import SwiftyJSON
 final class User: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
-    var isGuest: Bool {
-        return level == 0
-    }
+    var isGuest: Bool { self.level == 0 }
 
     /// Returns true if joinDate is less than in 5 minutes from now.
     var didJustRegister: Bool {

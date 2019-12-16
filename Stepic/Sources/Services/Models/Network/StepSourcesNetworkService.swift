@@ -8,7 +8,7 @@ protocol StepSourcesNetworkServiceProtocol: AnyObject {
 
 extension StepSourcesNetworkServiceProtocol {
     func fetch(ids: [StepSource.IdType]) -> Promise<([StepSource], Meta)> {
-        return self.fetch(ids: ids, page: 1)
+        self.fetch(ids: ids, page: 1)
     }
 }
 
@@ -28,6 +28,6 @@ final class StepSourcesNetworkService: StepSourcesNetworkServiceProtocol {
     }
 
     func update(stepSource: StepSource) -> Promise<StepSource> {
-        return self.stepSourcesAPI.update(stepSource)
+        self.stepSourcesAPI.update(stepSource)
     }
 }

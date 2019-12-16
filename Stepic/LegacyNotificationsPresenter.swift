@@ -58,7 +58,7 @@ final class LegacyNotificationsPresenter {
     }
 
     private static func getBaseToastOptions() -> [AnyHashable: Any] {
-        return [
+        [
             kCRToastImageKey: Images.boundedStepicIcon,
             kCRToastNotificationTypeKey: NSNumber(value: CRToastType.navigationBar.rawValue),
             kCRToastNotificationPresentationTypeKey: NSNumber(value: CRToastPresentationType.cover.rawValue),

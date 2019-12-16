@@ -105,13 +105,9 @@ final class AuthInfo: NSObject {
         }
     }
 
-    var isAuthorized: Bool {
-        return token != nil
-    }
+    var isAuthorized: Bool { self.token != nil }
 
-    var hasUser: Bool {
-        return user != nil
-    }
+    var hasUser: Bool { self.user != nil }
 
     var needsToRefreshToken: Bool {
         //TODO: Fix this

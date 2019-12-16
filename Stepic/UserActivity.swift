@@ -68,9 +68,7 @@ final class UserActivity: JSONSerializable {
         return thisWeekPins.firstIndex(where: { $0 > 0 }) != nil
     }
 
-    var didSolveToday: Bool {
-        return pins[0] != 0
-    }
+    var didSolveToday: Bool { pins[0] != 0 }
 
     var needsToSolveToday: Bool {
         guard pins.count > 1 else {
@@ -79,7 +77,5 @@ final class UserActivity: JSONSerializable {
         return pins[0] == 0 && pins[1] != 0
     }
 
-    static var emptyYearPins: [Int] {
-        return Array(repeating: 0, count: 365)
-    }
+    static var emptyYearPins: [Int] { Array(repeating: 0, count: 365) }
 }

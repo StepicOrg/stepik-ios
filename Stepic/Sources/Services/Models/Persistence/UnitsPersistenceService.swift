@@ -8,7 +8,7 @@ protocol UnitsPersistenceServiceProtocol: AnyObject {
 
 final class UnitsPersistenceService: UnitsPersistenceServiceProtocol {
     func fetch(ids: [Unit.IdType]) -> Promise<[Unit]> {
-        return Promise { seal in
+        Promise { seal in
             Unit.fetchAsync(ids: ids).done { units in
                 let units = Array(Set(units)).reordered(order: ids, transform: { $0.id })
                 seal.fulfill(units)
@@ -19,7 +19,7 @@ final class UnitsPersistenceService: UnitsPersistenceServiceProtocol {
     }
 
     func fetch(id: Unit.IdType) -> Promise<Unit?> {
-        return Promise { seal in
+        Promise { seal in
             Unit.fetchAsync(ids: [id]).done { units in
                 seal.fulfill(units.first)
             }.catch { _ in

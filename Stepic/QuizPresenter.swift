@@ -28,7 +28,7 @@ final class QuizPresenter {
     }
 
     var stepUrl: String {
-        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+        "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
     }
 
     init(
@@ -525,9 +525,7 @@ struct SubmissionLimitation {
         self.isEditable = isEditable
     }
 
-    var canSubmit: Bool {
-        return (count ?? 0) > 0 || isEditable
-    }
+    var canSubmit: Bool { (count ?? 0) > 0 || isEditable }
 }
 
 enum QuizState {

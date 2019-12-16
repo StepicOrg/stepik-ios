@@ -19,7 +19,7 @@ enum VideoRate: Float {
 
     static var allValues: [VideoRate] {
         get {
-            return [verySlow, slow, normal, slightlyFast, fast, veryFast, doubleFast]
+             [verySlow, slow, normal, slightlyFast, fast, veryFast, doubleFast]
         }
     }
 
@@ -38,7 +38,5 @@ enum VideoRate: Float {
         }
     }
 
-    var description: String {
-        return "\(self.rawValue)"
-    }
+    var description: String { "\(self.rawValue)" }
 }

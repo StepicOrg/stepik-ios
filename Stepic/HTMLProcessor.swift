@@ -16,7 +16,7 @@ final class HTMLProcessor {
     private var bodyInjectionsTail = ""
 
     var html: String {
-        return "<html><head>\(headInjections)</head><body>\(bodyInjectionsHead)\(addStepikURLWhereNeeded(body: htmlString))\(bodyInjectionsTail)</body></html>"
+        "<html><head>\(headInjections)</head><body>\(bodyInjectionsHead)\(addStepikURLWhereNeeded(body: htmlString))\(bodyInjectionsTail)</body></html>"
     }
 
     enum SupportedScripts {
@@ -93,7 +93,7 @@ final class HTMLProcessor {
     }
 
     func injectDefault() -> HTMLProcessor {
-        return self
+        self
             .inject(script: .audio)
             .inject(script: .clickableImages)
             .inject(script: .localTex)
@@ -165,6 +165,6 @@ final class HTMLProcessor {
     }
 
     private func fixProtocolRelativeURLs(html: String) -> String {
-        return html.replacingOccurrences(of: "src=\"//", with: "src=\"http://")
+        html.replacingOccurrences(of: "src=\"//", with: "src=\"http://")
     }
 }

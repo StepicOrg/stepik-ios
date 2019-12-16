@@ -223,7 +223,7 @@ extension NewCodeQuizView: CodeEditorViewDelegate {
     func codeEditorViewDidRequestSuggestionPresentationController(
         _ codeEditorView: CodeEditorView
     ) -> UIViewController? {
-        return self.delegate?.newCodeQuizViewDidRequestPresentationController(self)
+        self.delegate?.newCodeQuizViewDidRequestPresentationController(self)
     }
 
     func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool) {

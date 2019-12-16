@@ -14,7 +14,7 @@ final class CoursesNetworkService: CoursesNetworkServiceProtocol {
     }
 
     func fetch(ids: [Course.IdType]) -> Promise<[Course]> {
-        return Promise { seal in
+        Promise { seal in
             self.coursesAPI.retrieve(ids: ids).done { courses in
                 let courses = courses.reordered(order: ids, transform: { $0.id })
                 seal.fulfill(courses)
@@ -25,7 +25,7 @@ final class CoursesNetworkService: CoursesNetworkServiceProtocol {
     }
 
     func fetch(id: Course.IdType) -> Promise<Course?> {
-        return Promise { seal in
+        Promise { seal in
             self.fetch(ids: [id]).done { courses in
                 seal.fulfill(courses.first)
             }.catch { error in

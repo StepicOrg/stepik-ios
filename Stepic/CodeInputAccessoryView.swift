@@ -23,9 +23,7 @@ final class CodeInputAccessoryView: NibInitializableView {
 
     var size: CodeInputAccessorySize = .small
 
-    override var nibName: String {
-        return "CodeInputAccessoryView"
-    }
+    override var nibName: String { "CodeInputAccessoryView" }
 
     override func setupSubviews() {
         collectionView.register(UINib(nibName: "CodeInputAccessoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CodeInputAccessoryCollectionViewCell")
@@ -63,16 +61,13 @@ extension CodeInputAccessoryView: UICollectionViewDelegateFlowLayout {
 }
 
 extension CodeInputAccessoryView: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return buttons.count
-    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { buttons.count }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CodeInputAccessoryCollectionViewCell", for: indexPath) as? CodeInputAccessoryCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "CodeInputAccessoryCollectionViewCell",
+            for: indexPath
+        ) as? CodeInputAccessoryCollectionViewCell else {
             return UICollectionViewCell()
         }
 
@@ -85,6 +80,7 @@ extension CodeInputAccessoryView: UICollectionViewDataSource {
 struct CodeInputAccessoryButtonData {
     var title: String
     var action: () -> Void
+
     init(title: String, action: @escaping () -> Void) {
         self.title = title
         self.action = action

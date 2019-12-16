@@ -36,9 +36,7 @@ final class CardStepPresenter {
 
     var step: Step!
     var state: CardStepState = .unsolved
-    var lesson: Lesson? {
-        return step.lesson
-    }
+    var lesson: Lesson? { self.step.lesson }
 
     var quizViewController: QuizViewController?
 

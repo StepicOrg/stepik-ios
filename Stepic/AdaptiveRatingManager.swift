@@ -27,7 +27,7 @@ final class AdaptiveRatingManager {
 
     var rating: Int {
         get {
-            return defaults.integer(forKey: ratingKey)
+             defaults.integer(forKey: ratingKey)
         }
         set(newValue) {
             updateValue(newValue, for: ratingKey)
@@ -36,7 +36,7 @@ final class AdaptiveRatingManager {
 
     var streak: Int {
         get {
-            return max(1, defaults.integer(forKey: streakKey))
+             max(1, defaults.integer(forKey: streakKey))
         }
         set(newValue) {
             updateValue(newValue, for: streakKey)

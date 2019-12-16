@@ -4,9 +4,7 @@ enum CourseListColorMode {
     case light
     case dark
 
-    static var `default`: CourseListColorMode {
-        return .light
-    }
+    static var `default`: CourseListColorMode { .light }
 }
 
 extension CourseListColorMode {

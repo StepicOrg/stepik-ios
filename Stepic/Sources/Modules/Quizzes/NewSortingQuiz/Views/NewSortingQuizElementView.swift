@@ -93,7 +93,7 @@ final class NewSortingQuizElementView: UIView {
     }
 
     private var navigationControlsContainerViewHeight: CGFloat {
-        return self.appearance.navigationButtonSize.height * 2 + self.appearance.navigationButtonVerticalSpacing
+        self.appearance.navigationButtonSize.height * 2 + self.appearance.navigationButtonVerticalSpacing
     }
 
     var insets: LayoutInsets? {

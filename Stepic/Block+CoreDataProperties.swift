@@ -21,7 +21,7 @@ extension Block {
     @NSManaged var managedStep: Step?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -30,7 +30,7 @@ extension Block {
 
     var name: String {
         get {
-            return self.managedName ?? "undefined"
+             self.managedName ?? "undefined"
         }
         set {
             self.managedName = newValue
@@ -39,7 +39,7 @@ extension Block {
 
     var text: String? {
         get {
-            return self.managedText
+             self.managedText
         }
         set {
             self.managedText = newValue
@@ -48,7 +48,7 @@ extension Block {
 
     var video: Video? {
         get {
-            return self.managedVideo
+             self.managedVideo
         }
         set {
             self.managedVideo = newValue
@@ -69,7 +69,7 @@ extension Block {
     }
 
     var type: BlockType {
-        return BlockType(rawValue: self.name) ?? .text
+        BlockType(rawValue: self.name) ?? .text
     }
 
     // MARK: - Types -

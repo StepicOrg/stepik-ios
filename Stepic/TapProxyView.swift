@@ -17,6 +17,6 @@ class TapProxyView: UIView {
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        return self.bounds.contains(point) ? targetView : nil
+        self.bounds.contains(point) ? targetView : nil
     }
 }

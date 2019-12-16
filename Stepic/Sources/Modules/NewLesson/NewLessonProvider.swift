@@ -194,7 +194,7 @@ final class NewLessonProvider: NewLessonProviderProtocol {
     }
 
     func createView(stepID: Step.IdType, assignmentID: Assignment.IdType?) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.viewsNetworkService.create(step: stepID, assignment: assignmentID).done {
                 seal.fulfill(())
             }.catch { _ in

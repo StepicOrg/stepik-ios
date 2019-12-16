@@ -154,7 +154,7 @@ extension SettingsViewController: SettingsView {
     }
 
     private func makeTitleMenuBlock(id: SettingsMenuBlock, title: String) -> HeaderMenuBlock {
-        return HeaderMenuBlock(id: id.rawValue, title: title)
+        .init(id: id.rawValue, title: title)
     }
 
     private func makeLoadingVideoQualityBlock() -> TransitionMenuBlock {

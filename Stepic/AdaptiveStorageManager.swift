@@ -38,7 +38,7 @@ final class AdaptiveStorageManager: AdaptiveStorageManagerProtocol {
 
     var isAdaptiveOnboardingPassed: Bool {
         get {
-            return defaults.bool(forKey: adaptiveOnboardingPassedKey)
+             defaults.bool(forKey: adaptiveOnboardingPassedKey)
         }
         set {
             defaults.set(newValue, forKey: adaptiveOnboardingPassedKey)

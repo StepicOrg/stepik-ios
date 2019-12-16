@@ -13,7 +13,7 @@ final class HomeProvider: HomeProviderProtocol {
     }
 
     func fetchUserActivity(user: User) -> Promise<UserActivity> {
-        return Promise { seal in
+        Promise { seal in
             self.userActivitiesAPI.retrieve(user: user.id).done { activity in
                 seal.fulfill(activity)
             }.catch { _ in

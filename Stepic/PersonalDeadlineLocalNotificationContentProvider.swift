@@ -15,19 +15,17 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
     private let deadlineDate: Date
     private let hoursBeforeDeadline: Int
 
-    var title: String {
-        return "\(self.course.title)"
-    }
+    var title: String { "\(self.course.title)" }
 
     var body: String {
-        return NSString.localizedUserNotificationString(
+        NSString.localizedUserNotificationString(
             forKey: "PersonalDeadlineNotificationBody",
             arguments: ["\(self.section.title)", "\(self.hoursBeforeDeadline)"]
         )
     }
 
     var userInfo: [AnyHashable: Any] {
-        return [
+        [
             Key.course.rawValue: course.id,
             Key.section.rawValue: section.id,
             Key.hoursBeforeDeadline.rawValue: self.hoursBeforeDeadline,
@@ -36,11 +34,11 @@ final class PersonalDeadlineLocalNotificationContentProvider: LocalNotificationC
     }
 
     var identifier: String {
-        return "\(NotificationsService.NotificationType.personalDeadline.rawValue)_section_\(self.section.id)_hours_\(self.hoursBeforeDeadline)"
+        "\(NotificationsService.NotificationType.personalDeadline.rawValue)_section_\(self.section.id)_hours_\(self.hoursBeforeDeadline)"
     }
 
     var trigger: UNNotificationTrigger? {
-        return UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: false)
+        UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: false)
     }
 
     private var dateComponents: DateComponents {

@@ -18,7 +18,7 @@ extension VideoURL {
     @NSManaged var managedVideo: Video?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "VideoURL", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "VideoURL", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -30,7 +30,7 @@ extension VideoURL {
             self.managedQuality = value
         }
         get {
-            return managedQuality ?? ""
+             managedQuality ?? ""
         }
     }
 
@@ -39,7 +39,7 @@ extension VideoURL {
             self.managedURL = value
         }
         get {
-            return managedURL ?? ""
+             managedURL ?? ""
         }
     }
 }

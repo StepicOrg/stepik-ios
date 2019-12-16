@@ -59,7 +59,7 @@ final class QuizFeedbackView: UIView {
     }()
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(
+        CGSize(
             width: UIView.noIntrinsicMetric,
             height: self.appearance.titleInsets.top
                 + self.appearance.titleInsets.bottom

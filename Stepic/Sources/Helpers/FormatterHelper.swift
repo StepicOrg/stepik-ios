@@ -4,24 +4,24 @@ import SwiftDate
 enum FormatterHelper {
     /// Format number; 1000 -> "1K", 900 -> "900"
     static func longNumber(_ number: Int) -> String {
-        return number >= 1000
+        number >= 1000
             ? "\(String(format: "%.1f", Double(number) / 1000.0))K"
             : "\(number)"
     }
 
     /// Format integer number with percent sign; 50 -> "50%"
     static func integerPercent(_ number: Int) -> String {
-        return "\(number)%"
+        "\(number)%"
     }
 
     /// Format floating point number with percent sign; 0.5 -> "50%"
     static func integerPercent(_ float: Float) -> String {
-        return FormatterHelper.integerPercent(Int(float * 100))
+        FormatterHelper.integerPercent(Int(float * 100))
     }
 
     /// Format floating point rating with 2 decimal points; 0.123456 -> "0.12"
     static func averageRating(_ number: Float) -> String {
-        return String(format: "%.2f", number)
+        String(format: "%.2f", number)
     }
 
     static func megabytesInBytes(_ bytes: UInt64, checkForLessThanOne: Bool = true) -> String {
@@ -123,7 +123,7 @@ enum FormatterHelper {
 
     /// Format a date to a string representation relative to another reference date (default current).
     static func dateToRelativeString(_ date: Date, referenceDate: Date = Date()) -> String {
-        return date.in(region: .UTC).toRelative(
+        date.in(region: .UTC).toRelative(
             since: DateInRegion(referenceDate, region: .UTC),
             style: RelativeFormatter.defaultStyle(),
             locale: Locales.current

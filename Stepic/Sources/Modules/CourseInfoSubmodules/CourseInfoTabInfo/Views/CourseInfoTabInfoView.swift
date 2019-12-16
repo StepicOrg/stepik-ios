@@ -197,7 +197,7 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
 extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
-            return self.scrollableStackView.scrollDelegate
+             self.scrollableStackView.scrollDelegate
         }
         set {
             self.scrollableStackView.scrollDelegate = newValue
@@ -206,7 +206,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsets: UIEdgeInsets {
         get {
-            return self.scrollableStackView.contentInsets
+             self.scrollableStackView.contentInsets
         }
         set {
             self.loadingIndicator.snp.updateConstraints { make in
@@ -219,7 +219,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
 
     var contentOffset: CGPoint {
         get {
-            return self.scrollableStackView.contentOffset
+             self.scrollableStackView.contentOffset
         }
         set {
             self.scrollableStackView.contentOffset = newValue
@@ -228,7 +228,7 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
-            return self.scrollableStackView.contentInsetAdjustmentBehavior
+             self.scrollableStackView.contentInsetAdjustmentBehavior
         }
         set {
             self.scrollableStackView.contentInsetAdjustmentBehavior = newValue

@@ -88,7 +88,7 @@ final class ProcessedContentTextView: UIView {
     }()
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(
+        CGSize(
             width: UIView.noIntrinsicMetric,
             height: self.webView.intrinsicContentSize.height
                 + self.appearance.insets.top
@@ -104,7 +104,7 @@ final class ProcessedContentTextView: UIView {
 
     var isScrollEnabled: Bool {
         get {
-            return self.webView.scrollView.isScrollEnabled
+             self.webView.scrollView.isScrollEnabled
         }
         set {
             self.webView.scrollView.isScrollEnabled = newValue
@@ -186,7 +186,7 @@ final class ProcessedContentTextView: UIView {
     // MARK: Private API
 
     private func refreshContentHeight() -> Guarantee<Void> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.webView.evaluateJavaScript("document.readyState;") { _, _ in
                 seal(())
             }
@@ -194,7 +194,7 @@ final class ProcessedContentTextView: UIView {
     }
 
     private func getContentHeight() -> Guarantee<Int> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.webView.evaluateJavaScript("document.body.scrollHeight;") { [weak self] res, _ in
                 if let height = res as? Int {
                     if let strongSelf = self, strongSelf.currentWebViewHeight != height {
@@ -225,7 +225,7 @@ final class ProcessedContentTextView: UIView {
     }
 
     private func getContentWidth() -> Guarantee<Int> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.webView.evaluateJavaScript("document.body.scrollWidth;") { res, _ in
                 if let width = res as? Int {
                     seal(width)
@@ -341,9 +341,7 @@ extension ProcessedContentTextView: WKNavigationDelegate {
 
 extension ProcessedContentTextView: UIScrollViewDelegate {
     // swiftlint:disable:next identifier_name
-    func viewForZooming(in: UIScrollView) -> UIView? {
-        return nil
-    }
+    func viewForZooming(in: UIScrollView) -> UIView? { nil }
 
     func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         scrollView.pinchGestureRecognizer?.isEnabled = false

@@ -97,7 +97,7 @@ final class EditStepInteractor: EditStepInteractorProtocol {
     // MARK: Private API
 
     private func makeStepSourceDataFromCurrentData() -> EditStep.StepSourceData {
-        return .init(
+        .init(
             originalText: self.currentStepSource?.text ?? "",
             currentText: self.currentText
         )

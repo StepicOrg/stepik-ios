@@ -51,7 +51,7 @@ final class Parser: NSObject {
     }
 
     func codeFromURL(_ url: URL) -> String? {
-        return url.getKeyVals()?["code"]
+        url.getKeyVals()?["code"]
     }
 }
 

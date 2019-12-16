@@ -14,7 +14,7 @@ final class WriteCommentProvider: WriteCommentProviderProtocol {
     }
 
     func create(comment: Comment) -> Promise<Comment> {
-        return Promise { seal in
+        Promise { seal in
             self.commentsNetworkService.create(comment: comment).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in
@@ -24,7 +24,7 @@ final class WriteCommentProvider: WriteCommentProviderProtocol {
     }
 
     func update(comment: Comment) -> Promise<Comment> {
-        return Promise { seal in
+        Promise { seal in
             self.commentsNetworkService.update(comment: comment).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in

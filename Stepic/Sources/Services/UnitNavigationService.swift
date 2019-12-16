@@ -35,7 +35,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     }
 
     func findUnitForNavigation(from unit: Unit.IdType, direction: UnitNavigationDirection) -> Promise<Unit?> {
-        return self.getUnitFromCacheOrNetwork(id: unit).then { unit -> Promise<(Unit?, Section?)> in
+        self.getUnitFromCacheOrNetwork(id: unit).then { unit -> Promise<(Unit?, Section?)> in
             guard let unit = unit else {
                 return Promise.value((nil, nil))
             }
@@ -99,7 +99,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         sectionPosition: Int,
         direction: UnitNavigationDirection
     ) -> Promise<Unit?> {
-        return self.getSlicedSections(
+        self.getSlicedSections(
             courseID: courseID,
             sectionPosition: sectionPosition,
             direction: direction
@@ -176,7 +176,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     // Remove after network layer & services refactoring
 
     private func getUnitFromCacheOrNetwork(id: Unit.IdType) -> Promise<Unit?> {
-        return self.unitsPersistenceService.fetch(id: id).then { unit -> Promise<Unit?> in
+        self.unitsPersistenceService.fetch(id: id).then { unit -> Promise<Unit?> in
             if let unit = unit {
                 return Promise.value(unit)
             } else {
@@ -186,7 +186,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     }
 
     private func getCourseFromCacheOrNetwork(id: Course.IdType) -> Promise<Course?> {
-        return self.coursesPersistenceService.fetch(id: id).then { course -> Promise<Course?> in
+        self.coursesPersistenceService.fetch(id: id).then { course -> Promise<Course?> in
             if let course = course {
                 return Promise.value(course)
             } else {
@@ -196,7 +196,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
     }
 
     private func getSectionFromCacheOrNetwork(id: Section.IdType) -> Promise<Section?> {
-        return self.sectionsPersistenceService.fetch(id: id).then { section -> Promise<Section?> in
+        self.sectionsPersistenceService.fetch(id: id).then { section -> Promise<Section?> in
             if let section = section {
                 return Promise.value(section)
             } else {

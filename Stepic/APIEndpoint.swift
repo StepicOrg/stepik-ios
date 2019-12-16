@@ -13,9 +13,7 @@ import PromiseKit
 import SwiftyJSON
 
 class APIEndpoint {
-    var name: String {
-        return ""
-    }
+    var name: String { "" }
 
     let manager: Alamofire.SessionManager
 
@@ -44,12 +42,33 @@ class APIEndpoint {
     }
 
     //TODO: Remove this in next refactoring iterations
-    func getObjectsByIds<T: JSONSerializable>(ids: [T.IdType], updating: [T], printOutput: Bool = false) -> Promise<([T])> {
-        return retrieve.request(requestEndpoint: name, paramName: name, ids: ids, updating: updating, withManager: manager)
+    func getObjectsByIds<T: JSONSerializable>(
+        ids: [T.IdType],
+        updating: [T],
+        printOutput: Bool = false
+    ) -> Promise<([T])> {
+        self.retrieve.request(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            ids: ids,
+            updating: updating,
+            withManager: self.manager
+        )
     }
 
-    func getObjectsByIds<T: JSONSerializable>(requestString: String, printOutput: Bool = false, ids: [T.IdType], deleteObjects: [T], refreshMode: RefreshMode, success: (([T]) -> Void)?, failure : @escaping (_ error: NetworkError) -> Void) -> Request? {
-        getObjectsByIds(ids: ids, updating: deleteObjects).done { objects in
+    func getObjectsByIds<T: JSONSerializable>(
+        requestString: String,
+        printOutput: Bool = false,
+        ids: [T.IdType],
+        deleteObjects: [T],
+        refreshMode: RefreshMode,
+        success: (([T]) -> Void)?,
+        failure : @escaping (_ error: NetworkError) -> Void
+    ) -> Request? {
+        self.getObjectsByIds(
+            ids: ids,
+            updating: deleteObjects
+        ).done { objects in
             success?(objects)
         }.catch { error in
             guard let e = error as? NetworkError else {

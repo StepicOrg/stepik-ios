@@ -31,7 +31,7 @@ extension User {
     @NSManaged var managedProfileEntity: Profile?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -43,7 +43,7 @@ extension User {
             managedId = value as NSNumber?
         }
         get {
-            return managedId?.intValue ?? 0
+             managedId?.intValue ?? 0
         }
     }
 
@@ -52,7 +52,7 @@ extension User {
             managedProfile = value as NSNumber?
         }
         get {
-            return managedProfile?.intValue ?? 0
+             managedProfile?.intValue ?? 0
         }
     }
 
@@ -61,7 +61,7 @@ extension User {
             managedJoinDate = value
         }
         get {
-            return managedJoinDate
+             managedJoinDate
         }
     }
 
@@ -70,13 +70,13 @@ extension User {
             managedPrivate = value as NSNumber?
         }
         get {
-            return managedPrivate?.boolValue ?? true
+             managedPrivate?.boolValue ?? true
         }
     }
 
     var isOrganization: Bool {
         get {
-            return self.managedOrganization?.boolValue ?? false
+             self.managedOrganization?.boolValue ?? false
         }
         set {
             self.managedOrganization = newValue as NSNumber?
@@ -88,7 +88,7 @@ extension User {
             managedBio = value
         }
         get {
-            return managedBio ?? "No bio"
+             managedBio ?? "No bio"
         }
     }
 
@@ -97,7 +97,7 @@ extension User {
             managedDetails = value
         }
         get {
-            return managedDetails ?? "No details"
+             managedDetails ?? "No details"
         }
     }
 
@@ -106,7 +106,7 @@ extension User {
             managedFirstName = value
         }
         get {
-            return managedFirstName ?? "No first name"
+             managedFirstName ?? "No first name"
         }
     }
 
@@ -115,12 +115,12 @@ extension User {
             managedLastName = value
         }
         get {
-            return managedLastName ?? "No last name"
+             managedLastName ?? "No last name"
         }
     }
 
     var fullName: String {
-        return "\(firstName) \(lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
+        "\(self.firstName) \(self.lastName)".trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     var avatarURL: String {
@@ -128,7 +128,7 @@ extension User {
             managedAvatarURL = value
         }
         get {
-            return managedAvatarURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+             managedAvatarURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
         }
     }
 
@@ -137,19 +137,19 @@ extension User {
             managedLevel = value as NSNumber?
         }
         get {
-            return managedLevel?.intValue ?? 0
+             managedLevel?.intValue ?? 0
         }
     }
 
     var instructedCourses: [Course] {
         get {
-            return managedInstructedCourses?.allObjects as! [Course]
+             managedInstructedCourses?.allObjects as! [Course]
         }
     }
 
     var profileEntity: Profile? {
         get {
-            return managedProfileEntity
+             managedProfileEntity
         }
         set(value) {
             managedProfileEntity = value
@@ -158,7 +158,7 @@ extension User {
 
     var authoredCourses: [Course] {
         get {
-            return self.managedAuthoredCourses?.allObjects as! [Course]
+             self.managedAuthoredCourses?.allObjects as! [Course]
         }
     }
 

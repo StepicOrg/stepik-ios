@@ -7,7 +7,7 @@ protocol TagsProviderProtocol {
 
 final class TagsProvider: TagsProviderProtocol {
     func fetchTags() -> Guarantee<[CourseTag]> {
-        return Guarantee { seal in
+        Guarantee { seal in
             seal(CourseTag.featuredTags)
         }
     }

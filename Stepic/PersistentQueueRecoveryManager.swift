@@ -10,14 +10,14 @@ import Foundation
 
 final class PersistentQueueRecoveryManager: PersistentRecoveryManager {
     override func recoverObjectFromDictionary(_ dictionary: [String: Any]) -> DictionarySerializable? {
-        return ExecutionQueue(dictionary: dictionary)
+        ExecutionQueue(dictionary: dictionary)
     }
 
     func recoverQueue(_ key: String) -> ExecutionQueue? {
-        return recoverObjectWithKey(key) as? ExecutionQueue
+        self.recoverObjectWithKey(key) as? ExecutionQueue
     }
 
     func writeQueue(_ queue: ExecutionQueue, key: String) {
-        writeObjectWithKey(key, object: queue)
+        self.writeObjectWithKey(key, object: queue)
     }
 }

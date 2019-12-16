@@ -167,6 +167,6 @@ extension NewCodeQuizFullscreenCodeViewController: CodeEditorViewDelegate {
     func codeEditorViewDidRequestSuggestionPresentationController(
         _ codeEditorView: CodeEditorView
     ) -> UIViewController? {
-        return self
+        self
     }
 }

@@ -32,7 +32,7 @@ extension Unit {
     @NSManaged var managedAssignments: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -44,7 +44,7 @@ extension Unit {
             self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
     }
 
@@ -53,13 +53,13 @@ extension Unit {
             self.managedSectionId = newId as NSNumber?
         }
         get {
-            return managedSectionId?.intValue ?? -1
+             managedSectionId?.intValue ?? -1
         }
     }
 
     var progressId: String? {
         get {
-            return managedProgressId
+             managedProgressId
         }
         set(value) {
             managedProgressId = value
@@ -71,7 +71,7 @@ extension Unit {
             self.managedLessonId = newId as NSNumber?
         }
         get {
-            return managedLessonId?.intValue ?? -1
+             managedLessonId?.intValue ?? -1
         }
     }
 
@@ -80,7 +80,7 @@ extension Unit {
             self.managedPosition = value as NSNumber?
         }
         get {
-            return managedPosition?.intValue ?? -1
+             managedPosition?.intValue ?? -1
         }
     }
 
@@ -89,7 +89,7 @@ extension Unit {
             self.managedBeginDate = date
         }
         get {
-            return managedBeginDate
+             managedBeginDate
         }
     }
 
@@ -98,7 +98,7 @@ extension Unit {
             self.managedSoftDeadline = date
         }
         get {
-            return managedSoftDeadline
+             managedSoftDeadline
         }
     }
 
@@ -107,7 +107,7 @@ extension Unit {
             self.managedHardDeadline = date
         }
         get {
-            return managedHardDeadline
+             managedHardDeadline
         }
     }
 
@@ -116,13 +116,13 @@ extension Unit {
             self.managedActive = value as NSNumber?
         }
         get {
-            return managedActive?.boolValue ?? false
+             managedActive?.boolValue ?? false
         }
     }
 
     var progress: Progress? {
         get {
-            return managedProgress
+             managedProgress
         }
         set(value) {
             managedProgress = value
@@ -131,7 +131,7 @@ extension Unit {
 
     var lesson: Lesson? {
         get {
-            return managedLesson
+             managedLesson
         }
         set(value) {
             self.managedLesson = value
@@ -144,13 +144,13 @@ extension Unit {
         }
 
         get {
-            return (self.managedAssignmentsArray as? [Int]) ?? []
+             (self.managedAssignmentsArray as? [Int]) ?? []
         }
     }
 
     var assignments: [Assignment] {
         get {
-            return (managedAssignments?.array as? [Assignment]) ?? []
+             (managedAssignments?.array as? [Assignment]) ?? []
         }
 
         set(value) {
@@ -160,7 +160,7 @@ extension Unit {
 
     var section: Section? {
         get {
-            return managedSection
+             managedSection
         }
         set(value) {
             self.managedSection = value

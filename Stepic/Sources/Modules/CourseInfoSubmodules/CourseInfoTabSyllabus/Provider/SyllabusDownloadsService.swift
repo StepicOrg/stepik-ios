@@ -294,20 +294,16 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     func remove(section: Section) -> Promise<Void> {
-        return when(
-            fulfilled: section.units.map {
-                self.remove(unit: $0)
-            }
+        when(
+            fulfilled: section.units.map { self.remove(unit: $0) }
         ).done { _ in
             self.unitIDsBySectionID[section.id] = nil
         }
     }
 
     func remove(course: Course) -> Promise<Void> {
-        return when(
-            fulfilled: course.sections.map {
-                self.remove(section: $0)
-            }
+        when(
+            fulfilled: course.sections.map { self.remove(section: $0) }
         )
     }
 
@@ -343,7 +339,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     func cancel(section: Section) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             when(
                 fulfilled: section.units.map { self.cancel(unit: $0) }
             ).done { _ in
@@ -516,7 +512,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     private func getVideoDownloadProgress(_ video: Video) -> Float? {
-        return self.activeVideoDownloads.contains(video.id) ? self.progressByVideoID[video.id] : nil
+        self.activeVideoDownloads.contains(video.id) ? self.progressByVideoID[video.id] : nil
     }
 
     private func getUnitDownloadProgress(unitID: Unit.IdType) -> Float? {
@@ -564,7 +560,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     private func fetchSteps(for lesson: Lesson) -> Promise<[Step]> {
-        return firstly {
+        firstly {
             self.stepsNetworkService.fetch(ids: lesson.stepsArray)
         }.then { steps -> Promise<[Step]> in
             lesson.steps = steps

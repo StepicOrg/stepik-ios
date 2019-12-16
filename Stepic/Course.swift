@@ -115,7 +115,7 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     var canContinue: Bool {
-        return self.totalUnits > 0
+        self.totalUnits > 0
             && self.scheduleType != "ended"
             && self.scheduleType != "upcoming"
     }

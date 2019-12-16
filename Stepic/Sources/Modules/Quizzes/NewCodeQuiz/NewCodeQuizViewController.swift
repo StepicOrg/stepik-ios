@@ -59,9 +59,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
         self.interactor.doFullscreenAction(request: .init())
     }
 
-    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? {
-        return self
-    }
+    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? { self }
 }
 
 extension NewCodeQuizViewController: NewCodeQuizFullscreenOutputProtocol {

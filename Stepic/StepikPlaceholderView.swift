@@ -44,9 +44,7 @@ final class StepikPlaceholderView: NibInitializableView {
 
     weak var delegate: StepikPlaceholderViewDelegate?
 
-    override var nibName: String {
-        return "StepikPlaceholderView"
-    }
+    override var nibName: String { "StepikPlaceholderView" }
 
     convenience init(placeholder: StepikPlaceholderStyle) {
         self.init()

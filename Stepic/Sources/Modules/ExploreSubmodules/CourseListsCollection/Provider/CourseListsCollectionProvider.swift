@@ -22,7 +22,7 @@ final class CourseListsCollectionProvider: CourseListsCollectionProviderProtocol
     }
 
     func fetchCachedCourseLists() -> Promise<[CourseListModel]> {
-        return Promise { seal in
+        Promise { seal in
             self.collectionsPersistenceService.fetch(
                 forLanguage: self.language
             ).done { courseLists in
@@ -35,7 +35,7 @@ final class CourseListsCollectionProvider: CourseListsCollectionProviderProtocol
     }
 
     func fetchRemoteCourseLists() -> Promise<[CourseListModel]> {
-        return Promise { seal in
+        Promise { seal in
             self.collectionsNetworkService.fetch(
                 language: self.language,
                 page: 1

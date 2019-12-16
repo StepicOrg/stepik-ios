@@ -15,7 +15,5 @@ protocol Reply: CustomStringConvertible {
 }
 
 extension Reply {
-    var description: String {
-        return "Reply(\(self.dictValue))"
-    }
+    var description: String { "Reply(\(self.dictValue))" }
 }

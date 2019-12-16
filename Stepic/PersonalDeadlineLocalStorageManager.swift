@@ -12,9 +12,7 @@ import SwiftyJSON
 final class PersonalDeadlineLocalStorageManager {
     private let defaults = UserDefaults.standard
 
-    private func defaultsKey(for course: Course) -> String {
-        return "personaldeadline_course_\(course.id)"
-    }
+    private func defaultsKey(for course: Course) -> String { "personaldeadline_course_\(course.id)" }
 
     func deleteRecord(for course: Course) {
         let key = defaultsKey(for: course)

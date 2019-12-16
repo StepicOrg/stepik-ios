@@ -6,6 +6,6 @@ protocol NibLoadable: AnyObject {
 
 extension NibLoadable where Self: UIView {
     static var nibName: String {
-        return String(describing: self)
+        String(describing: self)
     }
 }

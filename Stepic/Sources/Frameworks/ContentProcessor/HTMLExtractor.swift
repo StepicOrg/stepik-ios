@@ -9,7 +9,7 @@ protocol HTMLExtractorProtocol: AnyObject {
 
 final class HTMLExtractor: HTMLExtractorProtocol {
     private static func makeDocumentDOM(from text: String) -> HTMLDocument? {
-        return try? Kanna.HTML(html: text, encoding: String.Encoding.utf8)
+        try? Kanna.HTML(html: text, encoding: String.Encoding.utf8)
     }
 
     static func extractAllTagsAttribute(tag: String, attribute: String, from text: String) -> [String] {

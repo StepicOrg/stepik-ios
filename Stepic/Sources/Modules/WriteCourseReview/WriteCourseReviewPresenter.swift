@@ -58,7 +58,7 @@ final class WriteCourseReviewPresenter: WriteCourseReviewPresenterProtocol {
     // MARK: - Private API
 
     private func makeViewModel(info: WriteCourseReview.CourseReviewInfo) -> WriteCourseReviewViewModel {
-        return WriteCourseReviewViewModel(
+        WriteCourseReviewViewModel(
             text: info.text,
             score: info.score,
             isFilled: !info.text.isEmpty && info.score > 0

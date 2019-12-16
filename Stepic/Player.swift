@@ -106,7 +106,7 @@ public class Player: UIViewController {
 
     public var muted: Bool {
         get {
-            return self.avplayer.isMuted
+             self.avplayer.isMuted
         }
         set {
             self.avplayer.isMuted = newValue
@@ -115,7 +115,7 @@ public class Player: UIViewController {
 
     public var fillMode: String {
         get {
-            return self.playerView.fillMode
+             self.playerView.fillMode
         }
         set {
             self.playerView.fillMode = newValue
@@ -126,7 +126,7 @@ public class Player: UIViewController {
 
     public var playbackLoops: Bool {
         get {
-            return (self.avplayer.actionAtItemEnd == .none) as Bool
+             (self.avplayer.actionAtItemEnd == .none) as Bool
         }
         set {
             if newValue == true {
@@ -607,20 +607,18 @@ extension Player {
 internal class PlayerView: UIView {
     var player: AVPlayer? {
         get {
-            return playerLayer.player
+             playerLayer.player
         }
         set {
             playerLayer.player = newValue
         }
     }
 
-    var playerLayer: AVPlayerLayer {
-        return layer as! AVPlayerLayer
-    }
+    var playerLayer: AVPlayerLayer { layer as! AVPlayerLayer }
 
     var fillMode: String {
         get {
-            return (self.layer as! AVPlayerLayer).videoGravity.rawValue
+             (self.layer as! AVPlayerLayer).videoGravity.rawValue
         }
         set {
             (self.layer as! AVPlayerLayer).videoGravity = AVLayerVideoGravity(rawValue: newValue)
@@ -629,7 +627,7 @@ internal class PlayerView: UIView {
 
     override class var layerClass: Swift.AnyClass {
         get {
-            return AVPlayerLayer.self
+             AVPlayerLayer.self
         }
     }
 

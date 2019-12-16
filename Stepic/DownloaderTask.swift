@@ -27,7 +27,7 @@ class DownloaderTask: DownloaderTaskProtocol {
     var stateReporter: ((_ newState: DownloaderTaskState) -> Void)?
 
     var state: DownloaderTaskState {
-        return executor?.getTaskState(for: self) ?? .detached
+        self.executor?.getTaskState(for: self) ?? .detached
     }
 
     convenience init(url: URL, priority: DownloaderTaskPriority = .default) {

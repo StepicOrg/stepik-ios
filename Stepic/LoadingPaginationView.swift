@@ -16,9 +16,7 @@ final class LoadingPaginationView: NibInitializableView {
         refreshAction?()
     }
 
-    override var nibName: String {
-        return "LoadingPaginationView"
-    }
+    override var nibName: String { "LoadingPaginationView" }
 
     var refreshAction : (() -> Void)?
 

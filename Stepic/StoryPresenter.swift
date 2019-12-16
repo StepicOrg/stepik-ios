@@ -48,13 +48,9 @@ final class StoryPresenter: StoryPresenterProtocol {
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
     private var shouldRestartSegment = false
 
-    var storyID: Int {
-        return self.story.id
-    }
+    var storyID: Int { self.story.id }
 
-    var storyPartsCount: Int {
-        return self.story.parts.count
-    }
+    var storyPartsCount: Int { self.story.parts.count }
 
     func finishedAnimating() {
         self.partToAnimate += 1

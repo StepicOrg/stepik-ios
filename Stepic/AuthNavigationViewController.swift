@@ -105,10 +105,8 @@ final class AuthNavigationViewController: UINavigationController {
 
     // Disable landscape for iPhones with diagonal <= 4.7
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return DeviceInfo.current.diagonal > 4.7 ? .all : .portrait
+        DeviceInfo.current.diagonal > 4.7 ? .all : .portrait
     }
 
-    override var shouldAutorotate: Bool {
-        return DeviceInfo.current.diagonal > 4.7
-    }
+    override var shouldAutorotate: Bool { DeviceInfo.current.diagonal > 4.7 }
 }

@@ -125,7 +125,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     }
 
     func isTaskActive(videoID: Video.IdType) -> Bool {
-        return self.tasksForVideos.keys.contains(videoID)
+        self.tasksForVideos.keys.contains(videoID)
     }
 
     // MARK: Private methods

@@ -13,7 +13,7 @@ final class UserActivitiesNetworkService: UserActivitiesNetworkServiceProtocol {
     }
 
     func retrieve(for user: User.IdType) -> Promise<UserActivity> {
-        return Promise { seal in
+        Promise { seal in
             self.userActivitiesAPI.retrieve(user: user).done { userActivity in
                 seal.fulfill(userActivity)
             }.catch { _ in

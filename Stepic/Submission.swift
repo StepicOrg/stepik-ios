@@ -51,11 +51,11 @@ final class Submission: JSONSerializable {
     }
 
     func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
+        self.id == json["id"].int
     }
 
     var json: JSON {
-        return [
+        [
             "attempt": attempt,
             "reply": reply?.dictValue ?? ""
         ]

@@ -13,7 +13,7 @@ final class VotesNetworkService: VotesNetworkServiceProtocol {
     }
 
     func update(vote: Vote) -> Promise<Vote> {
-        return Promise { seal in
+        Promise { seal in
             self.votesAPI.update(vote).done { vote in
                 seal.fulfill(vote)
             }.catch { _ in

@@ -34,7 +34,7 @@ final class Profile: NSManagedObject, JSONSerializable {
     }
 
     var json: JSON {
-        return [
+        [
             "id": self.id as AnyObject,
             "first_name": self.firstName as AnyObject,
             "last_name": self.lastName as AnyObject,

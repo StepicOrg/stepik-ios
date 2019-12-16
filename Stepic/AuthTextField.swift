@@ -47,17 +47,11 @@ final class AuthTextField: UITextField {
     }
 
     // dx and dy for inset = 1/3 * height (empirical)
-    var insetDelta: CGFloat {
-        return self.bounds.height / 3
-    }
+    var insetDelta: CGFloat { self.bounds.height / 3 }
 
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return self.contentRect(for: bounds)
-    }
+    override func textRect(forBounds bounds: CGRect) -> CGRect { self.contentRect(for: bounds) }
 
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return self.contentRect(for: bounds)
-    }
+    override func editingRect(forBounds bounds: CGRect) -> CGRect { self.contentRect(for: bounds) }
 
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
         if self.fieldType == .text {

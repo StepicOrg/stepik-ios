@@ -135,7 +135,7 @@ extension NotificationsRegistrationServiceDelegate {
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) -> Bool {
-        return true
+        true
     }
 
     func notificationsRegistrationService(

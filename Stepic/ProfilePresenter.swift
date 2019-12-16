@@ -264,7 +264,7 @@ final class ProfilePresenter {
     }
 
     private func loadProfile(userId: Int) -> Promise<User> {
-        return User.fetchAsync(ids: [userId]).then { [weak self] users -> Promise<[User]> in
+        User.fetchAsync(ids: [userId]).then { [weak self] users -> Promise<[User]> in
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
             }

@@ -85,7 +85,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeLocalizedLanguageText(code: String) -> String {
-        return Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? ""
+        Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? ""
     }
 
     private func makeFormattedCertificateText(course: Course) -> String {

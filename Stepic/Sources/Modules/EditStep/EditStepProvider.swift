@@ -22,7 +22,7 @@ final class EditStepProvider: EditStepProviderProtocol {
     }
 
     func fetchStepSource(stepID: Step.IdType) -> Promise<StepSource?> {
-        return Promise { seal in
+        Promise { seal in
             self.stepSourcesNetworkService.fetch(ids: [stepID]).done { stepSources, _ in
                 seal.fulfill(stepSources.first)
             }.catch { _ in
@@ -32,7 +32,7 @@ final class EditStepProvider: EditStepProviderProtocol {
     }
 
     func updateStepSource(_ stepSource: StepSource) -> Promise<StepSource> {
-        return Promise { seal in
+        Promise { seal in
             self.stepSourcesNetworkService.update(stepSource: stepSource).done { stepSource in
                 seal.fulfill(stepSource)
             }.catch { _ in
@@ -42,7 +42,7 @@ final class EditStepProvider: EditStepProviderProtocol {
     }
 
     func fetchCachedStep(stepID: Step.IdType) -> Promise<Step?> {
-        return Promise { seal in
+        Promise { seal in
             self.stepsPersistenceService.fetch(ids: [stepID]).done { steps in
                 seal.fulfill(steps.first)
             }.catch { _ in

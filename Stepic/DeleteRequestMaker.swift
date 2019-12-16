@@ -16,7 +16,7 @@ final class DeleteRequestMaker {
         deletingId: Int,
         withManager manager: Alamofire.SessionManager
     ) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             checkToken().done {
                 manager.request(
                     "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(deletingId)",

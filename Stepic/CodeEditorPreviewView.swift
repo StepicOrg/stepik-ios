@@ -14,9 +14,7 @@ protocol CodeEditorPreviewViewDelegate: AnyObject {
 }
 
 final class CodeEditorPreviewView: NibInitializableView {
-    override var nibName: String {
-        return "CodeEditorPreviewView"
-    }
+    override var nibName: String { "CodeEditorPreviewView" }
 
     weak var delegate: CodeEditorPreviewViewDelegate?
 
@@ -27,9 +25,7 @@ final class CodeEditorPreviewView: NibInitializableView {
     var previewTextView: UITextView!
 
     var textStorage: CodeAttributedString?
-    var highlightr: Highlightr? {
-        return textStorage?.highlightr
-    }
+    var highlightr: Highlightr? { self.textStorage?.highlightr }
 
     private var theme: String?
     private var fontSize: Int?

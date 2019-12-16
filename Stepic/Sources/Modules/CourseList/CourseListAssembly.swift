@@ -77,7 +77,7 @@ final class HorizontalCourseListAssembly: CourseListAssembly {
     override fileprivate func makeViewController(
         interactor: CourseListInteractorProtocol
     ) -> (UIViewController & CourseListViewControllerProtocol) {
-        return HorizontalCourseListViewController(
+        HorizontalCourseListViewController(
             interactor: interactor,
             colorMode: self.colorMode,
             maxNumberOfDisplayedCourses: self.maxNumberOfDisplayedCourses
@@ -105,7 +105,7 @@ final class VerticalCourseListAssembly: CourseListAssembly {
     override fileprivate func makeViewController(
         interactor: CourseListInteractorProtocol
     ) -> (UIViewController & CourseListViewControllerProtocol) {
-        return VerticalCourseListViewController(
+        VerticalCourseListViewController(
             interactor: interactor,
             colorMode: self.colorMode,
             presentationDescription: self.presentationDescription

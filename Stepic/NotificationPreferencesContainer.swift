@@ -31,12 +31,12 @@ final class NotificationPreferencesContainer {
     }
 
     private var defaultUTCStartHour: Int {
-        return (24 + 20 - (NSTimeZone.system.secondsFromGMT() / 60 / 60)) % 24
+        (24 + 20 - (NSTimeZone.system.secondsFromGMT() / 60 / 60)) % 24
     }
 
     var streaksNotificationStartHourUTC: Int {
         get {
-            return (defaults.value(forKey: streaksNotificationStartHourUTCKey) as? Int) ?? defaultUTCStartHour
+            (defaults.value(forKey: streaksNotificationStartHourUTCKey) as? Int) ?? defaultUTCStartHour
         }
         set(start) {
             defaults.set(start, forKey: streaksNotificationStartHourUTCKey)

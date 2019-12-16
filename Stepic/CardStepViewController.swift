@@ -26,11 +26,7 @@ class CardStepViewController: UIViewController, CardStepView {
     // For updates after rotation only when controller not presented
     var shouldRefreshOnAppear: Bool = false
 
-    var baseScrollView: UIScrollView {
-        get {
-            return scrollView
-        }
-    }
+    var baseScrollView: UIScrollView { self.scrollView }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,7 +173,7 @@ extension CardStepViewController: WKNavigationDelegate {
     }
 
     func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
-        return Promise { seal in
+        Promise { seal in
             webView.evaluateJavaScript("document.body.scrollHeight;", completionHandler: { res, error in
                 if let error = error {
                     return seal.reject(error)

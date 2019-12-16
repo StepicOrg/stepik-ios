@@ -317,7 +317,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
     }
 
     func unregisterFromNotifications() -> Guarantee<Void> {
-        return Guarantee { seal in
+        Guarantee { seal in
             UIApplication.shared.unregisterForRemoteNotifications()
 
             if let deviceId = DeviceDefaults.sharedDefaults.deviceId {
@@ -370,7 +370,7 @@ extension NotificationsRegistrationService {
 
     private var didShowDefaultPermissionAlert: Bool {
         get {
-            return UserDefaults.standard.bool(
+             UserDefaults.standard.bool(
                 forKey: NotificationsRegistrationService.didShowDefaultPermissionAlertKey
             )
         }
@@ -384,7 +384,7 @@ extension NotificationsRegistrationService {
 
     private var isFirstRegistrationIsInProgress: Bool {
         get {
-            return UserDefaults.standard.bool(
+             UserDefaults.standard.bool(
                 forKey: NotificationsRegistrationService.isFirstRegistrationIsInProgressKey
             )
         }

@@ -23,19 +23,19 @@ final class Menu {
     }
 
     func getBlockIndex(id: String) -> Int? {
-        return blocks.firstIndex(where: {
+        self.blocks.firstIndex(where: {
             $0.id == id
         })
     }
 
     func getBlock(id: String) -> MenuBlock? {
-        return blocks.first(where: {
+        self.blocks.first(where: {
             $0.id == id
         })
     }
 
     func willAppear() {
-        for block in blocks {
+        for block in self.blocks {
             block.onAppearance?()
         }
     }

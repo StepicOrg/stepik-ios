@@ -30,7 +30,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
     }
 
     func fetchDiscussionProxy(id: DiscussionProxy.IdType) -> Promise<DiscussionProxy> {
-        return Promise { seal in
+        Promise { seal in
             self.discussionProxiesNetworkService.fetch(id: id).done {
                 seal.fulfill($0)
             }.catch { _ in
@@ -40,7 +40,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
     }
 
     func fetchComments(ids: [Comment.IdType]) -> Promise<[Comment]> {
-        return Promise { seal in
+        Promise { seal in
             self.commentsNetworkService.fetch(ids: ids).done {
                 seal.fulfill($0)
             }.catch { _ in
@@ -50,7 +50,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
     }
 
     func deleteComment(id: Comment.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.commentsNetworkService.delete(id: id).done {
                 seal.fulfill(())
             }.catch { _ in
@@ -60,7 +60,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
     }
 
     func updateVote(_ vote: Vote) -> Promise<Vote> {
-        return Promise { seal in
+        Promise { seal in
             self.votesNetworkService.update(vote: vote).done { vote in
                 seal.fulfill(vote)
             }.catch { _ in
@@ -70,7 +70,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
     }
 
     func incrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.stepsPersistenceService.fetch(ids: [stepID]).done { steps in
                 if let step = steps.first {
                     step.discussionsCount? += 1
@@ -83,7 +83,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
     }
 
     func decrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.stepsPersistenceService.fetch(ids: [stepID]).done { steps in
                 if let step = steps.first {
                     step.discussionsCount? -= 1

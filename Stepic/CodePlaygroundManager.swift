@@ -18,9 +18,7 @@ final class CodePlaygroundManager {
     let allowedCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_"
 
     var suggestionsController: CodeSuggestionsTableViewController?
-    var isSuggestionsViewPresented: Bool {
-        return suggestionsController != nil
-    }
+    var isSuggestionsViewPresented: Bool { self.suggestionsController != nil }
 
     /// Detects the changes string between currentText and previousText.
     /// All changes should be a substring inserted somewhere into the string.

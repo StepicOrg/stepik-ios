@@ -370,7 +370,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     private func fetchSyllabusSection(
         section: Section
     ) -> Promise<CourseInfoTabSyllabus.SyllabusLoad.Response> {
-        return Promise { seal in
+        Promise { seal in
             self.provider.fetchUnitsWithLessons(
                 for: section,
                 shouldUseNetwork: true
@@ -392,7 +392,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         course: Course,
         isOnline: Bool
     ) -> Promise<CourseInfoTabSyllabus.SyllabusLoad.Response> {
-        return Promise { seal in
+        Promise { seal in
             // Load sections & progresses
             self.provider.fetchSections(for: course, shouldUseNetwork: isOnline).then {
                 sections -> Promise<([Section], [[Unit]])> in
@@ -445,7 +445,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     private func makeSyllabusDataFromCurrentData() -> CourseInfoTabSyllabus.SyllabusData {
-        return CourseInfoTabSyllabus.SyllabusData(
+        CourseInfoTabSyllabus.SyllabusData(
             sections: self.currentSections
                 .map { uid, entity in
                     .init(
@@ -469,13 +469,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         )
     }
 
-    private func getUniqueIdentifierBySectionID(_ sectionID: Section.IdType) -> UniqueIdentifierType {
-        return "\(sectionID)"
-    }
+    private func getUniqueIdentifierBySectionID(_ sectionID: Section.IdType) -> UniqueIdentifierType { "\(sectionID)" }
 
-    private func getUniqueIdentifierByUnitID(_ unitID: Unit.IdType) -> UniqueIdentifierType {
-        return "\(unitID)"
-    }
+    private func getUniqueIdentifierByUnitID(_ unitID: Unit.IdType) -> UniqueIdentifierType { "\(unitID)" }
 
     private func refreshNextLessonService() {
         let orderedSections = self.currentSections.values.sorted(by: { $0.position < $1.position })
@@ -910,7 +906,7 @@ extension CourseInfoTabSyllabusInteractor {
     }
 
     private func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
-        return self.syllabusDownloadsService.getDownloadingStateForSection(section)
+        self.syllabusDownloadsService.getDownloadingStateForSection(section)
     }
 
     private func getDownloadingStateForCourse() -> CourseInfoTabSyllabus.DownloadState {

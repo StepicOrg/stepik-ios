@@ -16,9 +16,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
     private var quizAssembly: QuizAssembly
 
-    private var childQuizModuleInput: QuizInputProtocol? {
-        return self.quizAssembly.moduleInput
-    }
+    private var childQuizModuleInput: QuizInputProtocol? { self.quizAssembly.moduleInput }
 
     private var currentReply: Reply?
     private var shouldRetryWithNewAttempt = true

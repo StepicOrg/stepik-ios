@@ -125,9 +125,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     private var videoInBackgroundTooltip: Tooltip?
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    override var prefersStatusBarHidden: Bool { true }
 
     // MARK: UIViewController life cycle
 

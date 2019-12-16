@@ -12,7 +12,7 @@ import SwiftyJSON
 
 final class CodeSample: NSManagedObject {
     override var description: String {
-        return "CodeSample(input: \(self.input), output: \(self.output)"
+        "CodeSample(input: \(self.input), output: \(self.output)"
     }
 
     required convenience init(input: String, output: String) {

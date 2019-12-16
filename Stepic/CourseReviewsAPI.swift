@@ -12,11 +12,11 @@ import PromiseKit
 import SwiftyJSON
 
 final class CourseReviewsAPI: APIEndpoint {
-    override var name: String { return "course-reviews" }
+    override var name: String { "course-reviews" }
 
     /// Get course reviews by course id.
     func retrieve(courseID: Course.IdType, page: Int = 1) -> Promise<([CourseReview], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             let parameters: Parameters = [
                 "course": courseID,
                 "page": page
@@ -41,7 +41,7 @@ final class CourseReviewsAPI: APIEndpoint {
 
     /// Get course review by course id and user id.
     func retrieve(courseID: Course.IdType, userID: User.IdType) -> Promise<([CourseReview], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             let parameters: Parameters = [
                 "course": courseID,
                 "user": userID
@@ -86,7 +86,7 @@ final class CourseReviewsAPI: APIEndpoint {
     }
 
     func update(_ courseReview: CourseReview) -> Promise<CourseReview> {
-        return self.update.request(
+        self.update.request(
             requestEndpoint: self.name,
             paramName: self.name,
             updatingObject: courseReview,
@@ -95,7 +95,11 @@ final class CourseReviewsAPI: APIEndpoint {
     }
 
     func delete(id: CourseReview.IdType) -> Promise<Void> {
-        return self.delete.request(requestEndpoint: self.name, deletingId: id, withManager: self.manager).then {
+        self.delete.request(
+            requestEndpoint: self.name,
+            deletingId: id,
+            withManager: self.manager
+        ).then {
             CourseReview.delete(id)
         }
     }

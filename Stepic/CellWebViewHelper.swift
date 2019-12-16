@@ -27,7 +27,7 @@ final class CellWebViewHelper: NSObject {
     }
 
     private func getContentHeight(_ webView: UIWebView) -> Int {
-        return Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
+        Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
     }
 
     //Method sets text and returns the method which returns current cell height according to the webview content height

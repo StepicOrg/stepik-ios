@@ -11,9 +11,7 @@ import Foundation
 class ArtView: NibInitializableView {
     @IBOutlet weak var titleLabel: UILabel!
 
-    override var nibName: String {
-        return "ArtView"
-    }
+    override var nibName: String { "ArtView" }
 
     var onVKClick: (() -> Void)?
     var onFacebookClick: (() -> Void)?

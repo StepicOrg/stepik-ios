@@ -14,9 +14,7 @@ class NibInitializableView: UIView {
     var view: UIView!
 
     //Not the most beautiful solution, but didn't find good alternative for that
-    var nibName: String {
-        return ""
-    }
+    var nibName: String { "" }
 
     func setupSubviews() {
         //Add subclass init code here

@@ -23,7 +23,7 @@ extension Video {
     @NSManaged var managedCachedQuality: NSNumber?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -35,7 +35,7 @@ extension Video {
             self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
     }
 
@@ -44,7 +44,7 @@ extension Video {
             self.managedThumbnailURL = value
         }
         get {
-            return managedThumbnailURL ?? ""
+             managedThumbnailURL ?? ""
         }
     }
 
@@ -53,13 +53,13 @@ extension Video {
             self.managedStatus = value
         }
         get {
-            return managedStatus ?? ""
+             managedStatus ?? ""
         }
     }
 
     var urls: [VideoURL] {
         get {
-            return (managedURLs?.array as? [VideoURL]) ?? []
+             (managedURLs?.array as? [VideoURL]) ?? []
         }
         set(value) {
             managedURLs = NSOrderedSet(array: value)

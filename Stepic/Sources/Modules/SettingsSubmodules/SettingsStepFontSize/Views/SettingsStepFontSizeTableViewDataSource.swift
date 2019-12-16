@@ -13,7 +13,7 @@ final class SettingsStepFontSizeTableViewDataSource: NSObject {
 
 extension SettingsStepFontSizeTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModels.count
+        self.viewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

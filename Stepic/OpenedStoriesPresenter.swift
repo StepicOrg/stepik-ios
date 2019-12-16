@@ -93,7 +93,7 @@ class OpenedStoriesPresenter: OpenedStoriesPresenterProtocol {
     }
 
     private func makeModule(for story: Story) -> UIViewController {
-        return StoryAssembly(story: story, navigationDelegate: self).makeModule()
+        StoryAssembly(story: story, navigationDelegate: self).makeModule()
     }
 
     @objc

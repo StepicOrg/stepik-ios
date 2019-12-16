@@ -303,6 +303,6 @@ extension ProfileEditViewController: ProfileEditViewDelegate {
 
 extension ProfileEditViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return self.appearance.navigationBarAppearance
+        self.appearance.navigationBarAppearance
     }
 }

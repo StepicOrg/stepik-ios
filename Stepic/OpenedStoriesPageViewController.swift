@@ -19,13 +19,9 @@ final class OpenedStoriesPageViewController: UIPageViewController, OpenedStories
 
     private weak var currentStoryController: UIViewController?
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
 
-    override var shouldAutorotate: Bool {
-        return false
-    }
+    override var shouldAutorotate: Bool { false }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,14 +75,14 @@ extension OpenedStoriesPageViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        return self.presenter?.prevModule
+        self.presenter?.prevModule
     }
 
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
-        return self.presenter?.nextModule
+        self.presenter?.nextModule
     }
 }
 
