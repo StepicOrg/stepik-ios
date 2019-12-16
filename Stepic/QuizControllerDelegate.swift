@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol QuizControllerDelegate: class {
+protocol QuizControllerDelegate: AnyObject {
     func submissionDidCorrect()
     func submissionDidWrong()
     func submissionDidRetry()
@@ -22,7 +22,7 @@ extension QuizControllerDelegate {
     func didWarningPlaceholderShow() { }
 }
 
-protocol QuizControllerDataSource: class {
+protocol QuizControllerDataSource: AnyObject {
     var needsToRefreshAttemptWhenWrong: Bool { get }
     func getReply() -> Reply?
 }

@@ -34,7 +34,7 @@ struct SectionDeadline {
     }
 
     var dictValue: [String: Any] {
-        return [
+        [
             JSONKey.section.rawValue: self.section,
             JSONKey.deadline.rawValue: Parser.shared.timedateStringFromDate(date: self.deadlineDate)
         ]
@@ -66,7 +66,7 @@ final class DeadlineStorageData: StorageData {
     }
 
     var dictValue: [String: Any] {
-        return [
+        [
             JSONKey.course.rawValue: self.courseID,
             JSONKey.deadlines.rawValue: self.deadlines.map { $0.dictValue }
         ]

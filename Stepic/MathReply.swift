@@ -21,7 +21,5 @@ final class MathReply: NSObject, Reply {
         super.init()
     }
 
-    var dictValue: [String: Any] {
-        return ["formula": formula]
-    }
+    var dictValue: [String: Any] { ["formula": formula] }
 }

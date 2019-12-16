@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol SectionsNetworkServiceProtocol: class {
+protocol SectionsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Section.IdType]) -> Promise<[Section]>
     func fetch(id: Section.IdType) -> Promise<Section?>
 }
@@ -14,7 +14,7 @@ final class SectionsNetworkService: SectionsNetworkServiceProtocol {
     }
 
     func fetch(ids: [Section.IdType]) -> Promise<[Section]> {
-        return Promise { seal in
+        Promise { seal in
             self.sectionsAPI.retrieve(ids: ids).done { sections in
                 let sections = sections.reordered(order: ids, transform: { $0.id })
                 seal.fulfill(sections)
@@ -25,7 +25,7 @@ final class SectionsNetworkService: SectionsNetworkServiceProtocol {
     }
 
     func fetch(id: Section.IdType) -> Promise<Section?> {
-        return self.fetch(ids: [id]).then { result -> Promise<Section?> in
+        self.fetch(ids: [id]).then { result -> Promise<Section?> in
             Promise.value(result.first)
         }
     }

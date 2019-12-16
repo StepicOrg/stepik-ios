@@ -4,7 +4,7 @@ import UIKit
 
 // MARK: WriteCourseReviewViewControllerProtocol: class -
 
-protocol WriteCourseReviewViewControllerProtocol: class {
+protocol WriteCourseReviewViewControllerProtocol: AnyObject {
     func displayCourseReview(viewModel: WriteCourseReview.CourseReviewLoad.ViewModel)
     func displayCourseReviewTextUpdate(viewModel: WriteCourseReview.CourseReviewTextUpdate.ViewModel)
     func displayCourseReviewScoreUpdate(viewModel: WriteCourseReview.CourseReviewScoreUpdate.ViewModel)
@@ -176,6 +176,6 @@ extension WriteCourseReviewViewController: WriteCourseReviewViewDelegate {
 
 extension WriteCourseReviewViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return self.appearance.navigationBarAppearance
+        self.appearance.navigationBarAppearance
     }
 }

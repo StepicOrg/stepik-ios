@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PinsMapContentView: class {
+protocol PinsMapContentView: AnyObject {
     func set(pins: [Int])
 }
 

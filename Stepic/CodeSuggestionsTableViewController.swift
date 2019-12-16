@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CodeSuggestionDelegate: class {
+protocol CodeSuggestionDelegate: AnyObject {
     func didSelectSuggestion(suggestion: String, prefix: String)
     var suggestionsSize: CodeSuggestionsSize { get }
 }
@@ -37,9 +37,7 @@ final class CodeSuggestionsTableViewController: UITableViewController {
 
     weak var delegate: CodeSuggestionDelegate?
 
-    var suggestionsHeight: CGFloat {
-        return suggestionHeight * CGFloat(min(maxSuggestionCount, suggestions.count))
-    }
+    var suggestionsHeight: CGFloat { suggestionHeight * CGFloat(min(maxSuggestionCount, suggestions.count)) }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,16 +63,13 @@ final class CodeSuggestionsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return suggestions.count
-    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { suggestions.count }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CodeSuggestionTableViewCell", for: indexPath) as? CodeSuggestionTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "CodeSuggestionTableViewCell",
+            for: indexPath
+        ) as? CodeSuggestionTableViewCell else {
             return UITableViewCell()
         }
 
@@ -83,7 +78,5 @@ final class CodeSuggestionsTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return suggestionHeight
-    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { suggestionHeight }
 }

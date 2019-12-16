@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class SubmissionsAPI: APIEndpoint {
-    override var name: String { return "submissions" }
+    override var name: String { "submissions" }
 
     @discardableResult private func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
         var params: Parameters = [:]
@@ -61,16 +61,56 @@ final class SubmissionsAPI: APIEndpoint {
         })
     }
 
-    @discardableResult func retrieve(stepName: String, attemptId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        return retrieve(stepName: stepName, objectName: "attempt", objectId: attemptId, isDescending: isDescending, page: page, userId: userId, headers: headers, success: success, error: errorHandler)
+    @discardableResult
+    func retrieve(
+        stepName: String,
+        attemptId: Int,
+        isDescending: Bool? = true,
+        page: Int? = 1,
+        userId: Int? = nil,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping ([Submission], Meta) -> Void,
+        error errorHandler: @escaping (String) -> Void
+    ) -> Request? {
+        self.retrieve(
+            stepName: stepName,
+            objectName: "attempt",
+            objectId: attemptId,
+            isDescending: isDescending,
+            page: page,
+            userId: userId,
+            headers: headers,
+            success: success,
+            error: errorHandler
+        )
     }
 
-    @discardableResult func retrieve(stepName: String, stepId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        return retrieve(stepName: stepName, objectName: "step", objectId: stepId, isDescending: isDescending, page: page, userId: userId, headers: headers, success: success, error: errorHandler)
+    @discardableResult
+    func retrieve(
+        stepName: String,
+        stepId: Int,
+        isDescending: Bool? = true,
+        page: Int? = 1,
+        userId: Int? = nil,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping ([Submission], Meta) -> Void,
+        error errorHandler: @escaping (String) -> Void
+    ) -> Request? {
+        self.retrieve(
+            stepName: stepName,
+            objectName: "step",
+            objectId: stepId,
+            isDescending: isDescending,
+            page: page,
+            userId: userId,
+            headers: headers,
+            success: success,
+            error: errorHandler
+        )
     }
 
     func retrieve(stepName: String, submissionId: Int) -> Promise<Submission> {
-        return Promise { seal in
+        Promise { seal in
             self.retrieve(stepName: stepName, submissionId: submissionId, success: { submission in
                 seal.fulfill(submission)
             }, error: { error in
@@ -80,7 +120,7 @@ final class SubmissionsAPI: APIEndpoint {
     }
 
     func retrieve(stepName: String, attemptID: Int) -> Promise<([Submission], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.retrieve(stepName: stepName, attemptId: attemptID, success: { submissions, meta in
                 seal.fulfill((submissions, meta))
             }, error: { error in
@@ -90,7 +130,7 @@ final class SubmissionsAPI: APIEndpoint {
     }
 
     func retrieve(stepName: String, stepID: Int, page: Int = 1) -> Promise<([Submission], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.retrieve(stepName: stepName, stepId: stepID, page: page, success: { submissions, meta in
                 seal.fulfill((submissions, meta))
             }, error: { error in
@@ -99,12 +139,22 @@ final class SubmissionsAPI: APIEndpoint {
         }
     }
 
-    @discardableResult func retrieve(stepName: String, submissionId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult
+    func retrieve(
+        stepName: String,
+        submissionId: Int,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (Submission) -> Void,
+        error errorHandler: @escaping (String) -> Void
+    ) -> Request? {
         let params: Parameters = [:]
 
-        return manager.request("\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)", parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
+        return self.manager.request(
+            "\(StepicApplicationsInfo.apiURL)/submissions/\(submissionId)",
+            parameters: params,
+            encoding: URLEncoding.default,
+            headers: headers
+        ).responseSwiftyJSON({ response in
             var error = response.result.error
             var json: JSON = [:]
             if response.result.value == nil {

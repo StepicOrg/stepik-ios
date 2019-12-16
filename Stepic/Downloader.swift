@@ -91,7 +91,7 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     private var validRestoredTasksIDs: [Int] = []
 
     var restoredTasks: [DownloaderTaskProtocol] {
-        return Array(self.restoredTasksMapping.values)
+        Array(self.restoredTasksMapping.values)
     }
 
     init(session: DownloaderSessionType) {
@@ -307,7 +307,7 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func getTaskState(urlSessionTaskId: Int) -> DownloaderTaskState? {
-        return tasks[urlSessionTaskId]?.state
+        self.tasks[urlSessionTaskId]?.state
     }
 
     private func attachTaskAfterRestore(downloadTask: URLSessionDownloadTask) {
@@ -332,7 +332,7 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func isRestoredTask(urlSessionTaskId: Int) -> Bool {
-        return restoredTasksMapping[urlSessionTaskId] != nil
+        self.restoredTasksMapping[urlSessionTaskId] != nil
     }
 
     private func invalidateRestoredTask(urlSessionTaskId: Int) {
@@ -472,12 +472,10 @@ extension Downloader.Delegate: URLSessionDownloadDelegate {
 
 extension Downloader.Cache {
     var key: String {
-        return "downloaderCacheFor\(downloader.session.configuration.identifier ?? "")"
+        "downloaderCacheFor\(downloader.session.configuration.identifier ?? "")"
     }
 
-    var defaults: UserDefaults {
-        return UserDefaults.standard
-    }
+    var defaults: UserDefaults { UserDefaults.standard }
 
     func flush() {
         var data = [[String: Any]]()
@@ -508,9 +506,7 @@ extension Downloader.Cache {
 }
 
 extension Downloader {
-    var id: String? {
-        return session.configuration.identifier
-    }
+    var id: String? { self.session.configuration.identifier }
 
     func resumeRestoredTasks() {
         defer {

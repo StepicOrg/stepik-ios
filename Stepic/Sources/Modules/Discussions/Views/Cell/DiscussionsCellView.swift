@@ -3,7 +3,6 @@ import UIKit
 
 // MARK: Appearance -
 
-// swiftlint:disable file_length
 extension DiscussionsCellView {
     struct Appearance {
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)
@@ -235,7 +234,7 @@ final class DiscussionsCellView: UIView {
     private var currentText: String?
 
     private var isBadgesHidden: Bool {
-        return self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
+        self.userRoleBadgeLabel.isHidden && self.isPinnedImageButton.isHidden
     }
 
     private var didClickOnLinkOrImage = false
@@ -564,6 +563,6 @@ extension DiscussionsCellView: UIGestureRecognizerDelegate {
         _ gestureRecognizer: UIGestureRecognizer,
         shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
     ) -> Bool {
-        return true
+        true
     }
 }

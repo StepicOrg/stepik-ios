@@ -95,12 +95,10 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject, UITableViewDeleg
 
     // MARK: Delegate & data source
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return self.viewModels.count
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { self.viewModels.count }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModels[section].units.count
+        self.viewModels[section].units.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

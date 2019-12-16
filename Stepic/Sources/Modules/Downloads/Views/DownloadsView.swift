@@ -11,7 +11,7 @@ extension DownloadsView {
 
 // MARK: - DownloadsViewDelegate -
 
-protocol DownloadsViewDelegate: class {
+protocol DownloadsViewDelegate: AnyObject {
     func downloadsView(_ downloadsView: DownloadsView, didSelectCell cell: UITableViewCell, at indexPath: IndexPath)
 }
 

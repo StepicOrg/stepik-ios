@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MenuDelegate: class {
+protocol MenuDelegate: AnyObject {
     func update(at index: Int)
     func insert(at index: Int)
     func remove(at index: Int)
@@ -23,19 +23,19 @@ final class Menu {
     }
 
     func getBlockIndex(id: String) -> Int? {
-        return blocks.index(where: {
+        self.blocks.firstIndex(where: {
             $0.id == id
         })
     }
 
     func getBlock(id: String) -> MenuBlock? {
-        return blocks.first(where: {
+        self.blocks.first(where: {
             $0.id == id
         })
     }
 
     func willAppear() {
-        for block in blocks {
+        for block in self.blocks {
             block.onAppearance?()
         }
     }

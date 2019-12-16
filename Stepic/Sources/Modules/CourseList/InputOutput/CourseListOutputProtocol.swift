@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CourseListOutputProtocol: class {
+protocol CourseListOutputProtocol: AnyObject {
     func presentCourseInfo(course: Course)
     func presentCourseSyllabus(course: Course)
     func presentLastStep(course: Course, isAdaptive: Bool)

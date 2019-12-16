@@ -22,7 +22,7 @@ extension Certificate {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -34,7 +34,7 @@ extension Certificate {
             self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
     }
 
@@ -43,7 +43,7 @@ extension Certificate {
             self.managedCourseId = newId as NSNumber?
         }
         get {
-            return managedCourseId?.intValue ?? -1
+             managedCourseId?.intValue ?? -1
         }
     }
 
@@ -52,7 +52,7 @@ extension Certificate {
             self.managedUserId = newId as NSNumber?
         }
         get {
-            return managedUserId?.intValue ?? -1
+             managedUserId?.intValue ?? -1
         }
     }
 
@@ -61,7 +61,7 @@ extension Certificate {
             self.managedIssueDate = date
         }
         get {
-            return managedIssueDate
+             managedIssueDate
         }
     }
 
@@ -70,7 +70,7 @@ extension Certificate {
             self.managedUpdateDate = date
         }
         get {
-            return managedUpdateDate
+             managedUpdateDate
         }
     }
 
@@ -83,7 +83,7 @@ extension Certificate {
             self.managedType = type.rawValue
         }
         get {
-            return CertificateType(rawValue: self.managedType ?? "regular") ?? .regular
+             CertificateType(rawValue: self.managedType ?? "regular") ?? .regular
         }
     }
 
@@ -92,7 +92,7 @@ extension Certificate {
             self.managedGrade = newGrade as NSNumber?
         }
         get {
-            return managedGrade?.intValue ?? 0
+             managedGrade?.intValue ?? 0
         }
     }
 
@@ -101,13 +101,13 @@ extension Certificate {
             self.managedURL = newUrlString
         }
         get {
-            return self.managedURL
+             self.managedURL
         }
     }
 
     var isPublic: Bool? {
         get {
-            return self.managedisPublic?.boolValue ?? false
+             self.managedisPublic?.boolValue ?? false
         }
         set(value) {
             self.managedisPublic = value as NSNumber?
@@ -116,7 +116,7 @@ extension Certificate {
 
     var course: Course? {
         get {
-            return self.managedCourse
+             self.managedCourse
         }
         set(value) {
             self.managedCourse = value

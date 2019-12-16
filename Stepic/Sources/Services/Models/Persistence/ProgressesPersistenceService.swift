@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol ProgressesPersistenceServiceProtocol: class {
+protocol ProgressesPersistenceServiceProtocol: AnyObject {
     func fetch(
         ids: [Progress.IdType],
         page: Int
@@ -14,7 +14,7 @@ final class ProgressesPersistenceService: ProgressesPersistenceServiceProtocol {
         ids: [Progress.IdType],
         page: Int = 1
     ) -> Promise<([Progress], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             Progress.fetchAsync(ids: ids).done { progresses in
                 seal.fulfill((progresses, Meta.oneAndOnlyPage))
             }.catch { _ in
@@ -24,7 +24,7 @@ final class ProgressesPersistenceService: ProgressesPersistenceServiceProtocol {
     }
 
     func fetch(id: Progress.IdType) -> Promise<Progress?> {
-        return Promise { seal in
+        Promise { seal in
             self.fetch(ids: [id]).done { progresses, _ in
                 seal.fulfill(progresses.first)
             }.catch { error in

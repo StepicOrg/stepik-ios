@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseReviewSummariesPersistenceServiceProtocol: class {
+protocol CourseReviewSummariesPersistenceServiceProtocol: AnyObject {
     func fetch(
         ids: [CourseReviewSummary.IdType],
         page: Int
@@ -19,7 +19,7 @@ final class CourseReviewSummariesPersistenceService: CourseReviewSummariesPersis
     }
 
     func fetch(id: CourseReviewSummary.IdType) -> Promise<CourseReviewSummary?> {
-        return Promise { seal in
+        Promise { seal in
             CourseReviewSummary.fetchAsync(ids: [id]).done { reviewsSummary in
                 seal.fulfill(reviewsSummary.first)
             }.catch { _ in

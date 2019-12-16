@@ -117,7 +117,7 @@ final class StyledTabBarViewController: UITabBarController {
 
 extension StyledTabBarViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        guard let selectedIndex = tabBarController.viewControllers?.index(of: viewController),
+        guard let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController),
               let eventName = self.items[safe: selectedIndex]?.clickEventName else {
             return
         }
@@ -134,7 +134,7 @@ private struct TabBarItemInfo {
     var tag: Int
 
     func makeTabBarItem() -> UITabBarItem {
-        return UITabBarItem(title: self.title, image: self.image, tag: self.tag)
+        UITabBarItem(title: self.title, image: self.image, tag: self.tag)
     }
 }
 
@@ -144,9 +144,7 @@ private enum TabController: String {
     case notifications = "Notifications"
     case explore = "Catalog"
 
-    var tag: Int {
-        return self.hashValue
-    }
+    var tag: Int { self.hashValue }
 
     var position: Int {
         switch self {

@@ -61,6 +61,8 @@ final class DiscussionsLoadMoreTableViewCell: UITableViewCell, Reusable {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
+
         self.titleLabel.isHidden = false
     }
 

@@ -1,6 +1,6 @@
 import UIKit
 
-protocol DownloadsViewControllerProtocol: class {
+protocol DownloadsViewControllerProtocol: AnyObject {
     func displayDownloads(viewModel: Downloads.DownloadsLoad.ViewModel)
     func displayDeleteDownloadResult(viewModel: Downloads.DownloadsLoad.ViewModel)
 }

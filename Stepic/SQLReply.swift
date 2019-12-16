@@ -20,7 +20,5 @@ final class SQLReply: Reply {
         code = json["solve_sql"].stringValue
     }
 
-    var dictValue: [String: Any] {
-        return ["solve_sql": code]
-    }
+    var dictValue: [String: Any] { ["solve_sql": code] }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseInfoTabReviewsProviderProtocol: class {
+protocol CourseInfoTabReviewsProviderProtocol: AnyObject {
     func fetchCached(course: Course) -> Promise<([CourseReview], Meta)>
     func fetchRemote(course: Course, page: Int) -> Promise<([CourseReview], Meta)>
     func fetchCachedCourseReview(courseReviewID: CourseReview.IdType) -> Guarantee<CourseReview?>
@@ -31,7 +31,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
     }
 
     func fetchCached(course: Course) -> Promise<([CourseReview], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsPersistenceService.fetch(by: course.id).done {
                 seal.fulfill(($0, Meta.oneAndOnlyPage))
             }.catch { _ in
@@ -41,7 +41,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
     }
 
     func fetchRemote(course: Course, page: Int) -> Promise<([CourseReview], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsNetworkService.fetch(by: course.id, page: page).then {
                 reviews, meta -> Promise<([User], [CourseReview], Meta)> in
                 let userIDsToFetch = reviews.map { $0.userID }
@@ -61,7 +61,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
     }
 
     func fetchCachedCourseReview(courseReviewID: CourseReview.IdType) -> Guarantee<CourseReview?> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.courseReviewsPersistenceService.fetch(ids: [courseReviewID]).done { courseReviews in
                 seal(courseReviews.first)
             }
@@ -106,7 +106,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
     }
 
     func delete(id: CourseReview.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsNetworkService.delete(id: id).then { _ in
                 self.courseReviewsPersistenceService.fetch(ids: [id])
             }.then { cachedReviews in

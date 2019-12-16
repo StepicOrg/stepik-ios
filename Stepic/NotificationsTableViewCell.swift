@@ -10,7 +10,7 @@ import Atributika
 import TTTAttributedLabel
 import UIKit
 
-protocol NotificationsTableViewCellDelegate: class {
+protocol NotificationsTableViewCellDelegate: AnyObject {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int)
     func linkClicked(inCell cell: NotificationsTableViewCell, url: URL, withNotificationId id: Int)
 }

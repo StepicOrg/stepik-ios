@@ -62,17 +62,20 @@ final class AchievementsListViewController: UIViewController, AchievementsListVi
 }
 
 extension AchievementsListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { self.data.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AchievementsListTableViewCell.reuseId, for: indexPath) as? AchievementsListTableViewCell,
-              let viewData = data[safe: indexPath.row] else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: AchievementsListTableViewCell.reuseId,
+            for: indexPath
+        ) as? AchievementsListTableViewCell else {
             return UITableViewCell()
         }
 
-        cell.update(with: viewData)
+        if let viewData = self.data[safe: indexPath.row] {
+            cell.update(with: viewData)
+        }
+
         return cell
     }
 

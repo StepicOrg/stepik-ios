@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizFullscreenInstructionViewDelegate: class {
+protocol NewCodeQuizFullscreenInstructionViewDelegate: AnyObject {
     func newCodeQuizFullscreenInstructionViewDidLoadContent(_ view: NewCodeQuizFullscreenInstructionView)
     func newCodeQuizFullscreenInstructionView(_ view: NewCodeQuizFullscreenInstructionView, didRequestOpenURL url: URL)
     func newCodeQuizFullscreenInstructionView(

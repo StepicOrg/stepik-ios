@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol ProfilesNetworkServiceProtocol: class {
+protocol ProfilesNetworkServiceProtocol: AnyObject {
     func update(profile: Profile) -> Promise<Profile>
 }
 
@@ -13,7 +13,7 @@ final class ProfilesNetworkService: ProfilesNetworkServiceProtocol {
     }
 
     func update(profile: Profile) -> Promise<Profile> {
-        return Promise { seal in
+        Promise { seal in
             self.profilesAPI.update(profile).done { profile in
                 seal.fulfill(profile)
             }.catch { _ in

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseInfoTabReviewsInteractorProtocol: class {
+protocol CourseInfoTabReviewsInteractorProtocol: AnyObject {
     func doCourseReviewsFetch(request: CourseInfoTabReviews.ReviewsLoad.Request)
     func doNextCourseReviewsFetch(request: CourseInfoTabReviews.NextReviewsLoad.Request)
     func doWriteCourseReviewPresentation(request: CourseInfoTabReviews.WriteCourseReviewPresentation.Request)
@@ -166,7 +166,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         course: Course,
         isOnline: Bool
     ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Response> {
-        return Promise { seal in
+        Promise { seal in
             firstly {
                 isOnline
                     ? self.provider.fetchRemote(course: course, page: 1)
@@ -198,7 +198,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         course: Course,
         isOnline: Bool
     ) -> Guarantee<CourseReview?> {
-        return Guarantee { seal in
+        Guarantee { seal in
             firstly {
                 isOnline
                     ? self.provider.fetchCurrentUserReviewRemote(course: course)

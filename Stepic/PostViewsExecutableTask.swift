@@ -14,7 +14,7 @@ import Foundation
 final class PostViewsExecutableTask: Executable, DictionarySerializable {
     var id: String {
         get {
-            return description
+             description
         }
     }
 
@@ -55,16 +55,14 @@ final class PostViewsExecutableTask: Executable, DictionarySerializable {
         return res
     }
 
-    var type: ExecutableTaskType {
-        return .postViews
-    }
+    var type: ExecutableTaskType { .postViews }
 
     var userId: Int
     var stepId: Int
     var assignmentId: Int?
 
     var description: String {
-        return "\(type.rawValue) \(userId) \(stepId) \(String(describing: assignmentId))"
+        "\(type.rawValue) \(userId) \(stepId) \(String(describing: assignmentId))"
     }
 
     func execute(success: @escaping (() -> Void), failure: @escaping ((ExecutionError) -> Void)) {

@@ -16,8 +16,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
 
     private var lastDateFailedVideoAlertShown: Date?
+    /// Allows to present alert once per minute.
     private var shouldPresentFailedVideoAlert: Bool {
-        return Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
+        Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
     }
 
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response) {

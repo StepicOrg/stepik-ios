@@ -1,7 +1,7 @@
 import Foundation
 
 @available(*, deprecated, message: "Legacy code")
-protocol PersistenceQueuesServiceProtocol: class {
+protocol PersistenceQueuesServiceProtocol: AnyObject {
     func addSendViewTask(stepID: Step.IdType, assignmentID: Assignment.IdType?)
 }
 

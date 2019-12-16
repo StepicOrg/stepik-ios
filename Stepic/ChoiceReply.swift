@@ -21,7 +21,5 @@ final class ChoiceReply: NSObject, Reply {
         super.init()
     }
 
-    var dictValue: [String: Any] {
-        return ["choices": choices]
-    }
+    var dictValue: [String: Any] { ["choices": choices] }
 }

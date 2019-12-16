@@ -24,7 +24,7 @@ extension NewCodeQuizFullscreenViewController {
 
 // MARK: - NewCodeQuizFullscreenViewControllerProtocol: class -
 
-protocol NewCodeQuizFullscreenViewControllerProtocol: class {
+protocol NewCodeQuizFullscreenViewControllerProtocol: AnyObject {
     func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
     func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel)
 }
@@ -254,7 +254,7 @@ extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControll
 
 extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return self.availableTabs.count
+        self.availableTabs.count
     }
 
     func viewController(
@@ -266,7 +266,7 @@ extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return .at(index: self.initialTabIndex)
+        .at(index: self.initialTabIndex)
     }
 }
 
@@ -302,6 +302,6 @@ extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewCont
 
 extension NewCodeQuizFullscreenViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return Appearance.navigationBarAppearance
+        Appearance.navigationBarAppearance
     }
 }

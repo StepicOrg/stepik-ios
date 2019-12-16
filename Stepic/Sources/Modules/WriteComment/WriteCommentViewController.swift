@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: WriteCommentViewControllerProtocol: class -
 
-protocol WriteCommentViewControllerProtocol: class {
+protocol WriteCommentViewControllerProtocol: AnyObject {
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel)
     func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel)
     func displayCommentMainActionResult(viewModel: WriteComment.CommentMainAction.ViewModel)
@@ -205,6 +205,6 @@ extension WriteCommentViewController: WriteCommentViewDelegate {
 
 extension WriteCommentViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return self.appearance.navigationBarAppearance
+        self.appearance.navigationBarAppearance
     }
 }

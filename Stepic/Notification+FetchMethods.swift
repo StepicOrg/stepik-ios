@@ -30,7 +30,7 @@ extension Notification {
     }
 
     static func fetch(id: Int) -> Notification? {
-        return fetch([id]).first
+        self.fetch([id]).first
     }
 
     static func fetch(type: NotificationType?, offset: Int = 0, limit: Int = 10) -> [Notification]? {

@@ -9,9 +9,7 @@
 import UIKit
 
 final class AdaptiveStatsPagerViewController: PagerController {
-    var sections: [AdaptiveStatsSection] {
-        return [.progress, .rating]
-    }
+    var sections: [AdaptiveStatsSection] { [.progress, .rating] }
 
     var statsManager: AdaptiveStatsManager?
     var ratingsManager: AdaptiveRatingManager?
@@ -59,9 +57,7 @@ final class AdaptiveStatsPagerViewController: PagerController {
 }
 
 extension AdaptiveStatsPagerViewController: PagerDataSource {
-    func numberOfTabs(_ pager: PagerController) -> Int {
-        return sections.count
-    }
+    func numberOfTabs(_ pager: PagerController) -> Int { self.sections.count }
 
     func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
         let label = UILabel()
@@ -69,16 +65,17 @@ extension AdaptiveStatsPagerViewController: PagerDataSource {
         label.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
         label.text = sections[index].localizedName
         label.sizeToFit()
+
         return label
     }
 
     func controllerForTabAtIndex(_ index: Int, pager: PagerController) -> UIViewController {
-        return controllerForSection(sections[index])
+        self.controllerForSection(sections[index])
     }
 }
 
 extension AdaptiveStatsPagerViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return .init(shadowViewAlpha: 0.0)
+        .init(shadowViewAlpha: 0.0)
     }
 }

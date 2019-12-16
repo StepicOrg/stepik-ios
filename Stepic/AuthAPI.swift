@@ -46,7 +46,7 @@ final class AuthAPI {
     }
 
     func signInWithCode(_ code: String) -> Promise<(StepicToken, AuthorizationType)> {
-        return Promise { seal in
+        Promise { seal in
             guard let socialInfo = StepicApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
             }
@@ -84,7 +84,7 @@ final class AuthAPI {
     }
 
     func signInWithAccount(email: String, password: String) -> Promise<(StepicToken, AuthorizationType)> {
-        return Promise { seal in
+        Promise { seal in
             guard let passwordInfo = StepicApplicationsInfo.password else {
                 throw SignInError.noAppWithCredentials
             }
@@ -191,7 +191,7 @@ final class AuthAPI {
     }
 
     func signUpWithAccount(firstname: String, lastname: String, email: String, password: String) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             // FIXME: AuthInfo dependency
             let headers = AuthInfo.shared.initialHTTPHeaders
 
@@ -226,7 +226,7 @@ final class AuthAPI {
     }
 
     func signUpWithToken(socialToken: String, email: String?, provider: String) -> Promise<(StepicToken, AuthorizationType)> {
-        return Promise { seal in
+        Promise { seal in
             guard let socialInfo = StepicApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
             }

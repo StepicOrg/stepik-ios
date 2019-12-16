@@ -136,7 +136,7 @@ extension StepikPlaceholder.Style {
 
 extension StepikPlaceholder.Style {
     static var stepikStyledPlaceholders: [StepikPlaceholderStyle] {
-        return [
+        [
             .empty,
             .noConnection,
             .login,

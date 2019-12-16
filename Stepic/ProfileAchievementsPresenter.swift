@@ -9,13 +9,13 @@
 import Foundation
 import PromiseKit
 
-protocol ProfileAchievementsView: class {
+protocol ProfileAchievementsView: AnyObject {
     func set(achievements: [AchievementViewData])
     func showLoadingError()
     func attachPresenter(_ presenter: ProfileAchievementsPresenter)
 }
 
-protocol ProfileAchievementsPresenterDelegate: class {
+protocol ProfileAchievementsPresenterDelegate: AnyObject {
     func achievementInfoShouldPresent(viewData: AchievementViewData)
 }
 

@@ -39,23 +39,17 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
         }
     }
 
-    var title: String {
-        return self.repetition.notificationTitle
-    }
+    var title: String { self.repetition.notificationTitle }
 
-    var body: String {
-        return self.repetition.notificationText
-    }
+    var body: String { self.repetition.notificationText }
 
     var userInfo: [AnyHashable: Any] {
-        return [
+        [
             NotificationsService.PayloadKey.type.rawValue: self.repetition.notificationType
         ]
     }
 
-    var identifier: String {
-        return "RetentionLocalNotification_\(self.repetition.rawValue)"
-    }
+    var identifier: String { "RetentionLocalNotification_\(self.repetition.rawValue)" }
 
     var trigger: UNNotificationTrigger? {
         guard let dateComponents = self.dateComponents else {
@@ -128,7 +122,10 @@ final class RetentionLocalNotificationProvider: LocalNotificationContentProvider
 
 extension NotificationsService {
     private var retentionNotificationProviders: [RetentionLocalNotificationProvider] {
-        return [.init(repetition: .nextDay), .init(repetition: .thirdDay)]
+        [
+            .init(repetition: .nextDay),
+            .init(repetition: .thirdDay)
+        ]
     }
 
     func scheduleRetentionNotifications() {

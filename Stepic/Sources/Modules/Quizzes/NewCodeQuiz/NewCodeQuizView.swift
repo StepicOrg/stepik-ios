@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizViewDelegate: class {
+protocol NewCodeQuizViewDelegate: AnyObject {
     func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage)
     func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String)
     func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)
@@ -223,7 +223,7 @@ extension NewCodeQuizView: CodeEditorViewDelegate {
     func codeEditorViewDidRequestSuggestionPresentationController(
         _ codeEditorView: CodeEditorView
     ) -> UIViewController? {
-        return self.delegate?.newCodeQuizViewDidRequestPresentationController(self)
+        self.delegate?.newCodeQuizViewDidRequestPresentationController(self)
     }
 
     func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool) {

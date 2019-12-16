@@ -29,7 +29,7 @@ class StepikTableView: UITableView {
 
 extension StepikTableView {
     private var hasContent: Bool {
-        return (0..<self.numberOfSections).map({ self.numberOfRows(inSection: $0) }).reduce(0, +) > 0
+        (0..<self.numberOfSections).map({ self.numberOfRows(inSection: $0) }).reduce(0, +) > 0
     }
 
     private func handlePlaceholder(isHidden: Bool) {

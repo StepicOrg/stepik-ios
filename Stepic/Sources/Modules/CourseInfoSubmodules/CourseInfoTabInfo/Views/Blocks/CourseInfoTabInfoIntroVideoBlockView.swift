@@ -2,7 +2,7 @@ import Nuke
 import SnapKit
 import UIKit
 
-protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: class {
+protocol CourseInfoTabInfoIntroVideoBlockViewDelegate: AnyObject {
     func courseInfoTabInfoIntroVideoBlockViewRequestsVideoView(
         _ courseInfoTabInfoIntroVideoBlockView: CourseInfoTabInfoIntroVideoBlockView
     ) -> UIView

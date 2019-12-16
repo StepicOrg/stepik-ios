@@ -242,7 +242,7 @@ extension EmailAuthViewController: UITextFieldDelegate {
             AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.onSignInScreen, parameters: ["LoginInteractionType": "ime"])
 
             if logInButton.isEnabled {
-                self.onLogInClick(logInButton)
+                self.onLogInClick(logInButton!)
             }
             return true
         }

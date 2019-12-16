@@ -145,12 +145,10 @@ final class NotificationsViewController: UIViewController, NotificationsView {
 }
 
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { self.data.count }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data[section].notifications.count
+        self.data[section].notifications.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -183,9 +181,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         return header
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 50 }
 }
 
 extension NotificationsViewController: NotificationsTableViewCellDelegate {

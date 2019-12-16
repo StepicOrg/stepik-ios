@@ -60,16 +60,14 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
     }
 
     func selectSection(_ notificationSection: NotificationsSection) {
-        if let index = self.sections.index(of: notificationSection) {
+        if let index = self.sections.firstIndex(of: notificationSection) {
             self.selectTabAtIndex(index)
         }
     }
 }
 
 extension NotificationsPagerViewController: PagerDataSource {
-    func numberOfTabs(_ pager: PagerController) -> Int {
-        return self.sections.count
-    }
+    func numberOfTabs(_ pager: PagerController) -> Int { self.sections.count }
 
     func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
         let label = UILabel()
@@ -97,6 +95,6 @@ extension NotificationsPagerViewController: PagerDataSource {
 
 extension NotificationsPagerViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return .init(shadowViewAlpha: AuthInfo.shared.isAuthorized ? 0.0 : 1.0)
+        .init(shadowViewAlpha: AuthInfo.shared.isAuthorized ? 0.0 : 1.0)
     }
 }

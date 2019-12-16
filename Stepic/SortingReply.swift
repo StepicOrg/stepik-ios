@@ -21,7 +21,5 @@ final class SortingReply: NSObject, Reply {
         super.init()
     }
 
-    var dictValue: [String: Any] {
-        return ["ordering": ordering]
-    }
+    var dictValue: [String: Any] { ["ordering": ordering] }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol QuizInputProtocol: class {
+protocol QuizInputProtocol: AnyObject {
     func update(reply: Reply?)
     func update(status: QuizStatus?)
     func update(dataset: Dataset?)

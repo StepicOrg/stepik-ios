@@ -7,7 +7,7 @@ import UIKit
 
 // MARK: NewLessonViewControllerProtocol: class -
 
-protocol NewLessonViewControllerProtocol: class {
+protocol NewLessonViewControllerProtocol: AnyObject {
     func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
     func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
     func displayLessonTooltipInfo(viewModel: NewLesson.LessonTooltipInfoLoad.ViewModel)

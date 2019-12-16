@@ -37,9 +37,7 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     }
 
     // Can be overriden in the children classes (for adaptive app)
-    var cardView: StepCardView {
-        return StepCardView()
-    }
+    var cardView: StepCardView { StepCardView() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,10 +139,6 @@ extension CardsStepsViewController: KolodaViewDelegate {
         kolodaView.resetCurrentCardIndex()
     }
 
-    func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {
-        return false
-    }
-
     func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
         if !(presenter?.canSwipeCard ?? false) {
             return false
@@ -154,22 +148,20 @@ extension CardsStepsViewController: KolodaViewDelegate {
     }
 
     func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -> [SwipeResultDirection] {
-        return canSwipeCurrentCardUp ? [.up, .left, .right] : [.left, .right]
+        self.canSwipeCurrentCardUp
+            ? [.up, .left, .right]
+            : [.left, .right]
     }
 
-    func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool {
-        return false
-    }
+    func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool { false }
+
+    func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool { false }
 }
 
 extension CardsStepsViewController: KolodaViewDataSource {
-    func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {
-        return .`default`
-    }
+    func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed { .`default` }
 
-    func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-        return 2
-    }
+    func kolodaNumberOfCards(_ koloda: KolodaView) -> Int { 2 }
 
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         if index > 0 {
@@ -184,9 +176,7 @@ extension CardsStepsViewController: KolodaViewDataSource {
         }
     }
 
-    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-        return CardOverlayView()
-    }
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? { CardOverlayView() }
 }
 
 extension CardsStepsViewController: CardStepDelegate {

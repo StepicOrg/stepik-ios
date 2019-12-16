@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CourseListCollectionOutputProtocol: class {
+protocol CourseListCollectionOutputProtocol: AnyObject {
     func presentCourseList(
         presentationDescription: CourseList.PresentationDescription,
         type: CollectionCourseListType

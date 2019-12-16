@@ -16,7 +16,7 @@ private struct AssociatedKey {
 extension UICollectionView {
     private var savedDataSource: UICollectionViewDataSource? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UICollectionViewDataSource
+             objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UICollectionViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.savedDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -25,7 +25,7 @@ extension UICollectionView {
 
     private var skeletonDataSource: SkeletonCollectionViewDataSource? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonCollectionViewDataSource
+             objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonCollectionViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.skeletonDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -60,13 +60,8 @@ class SkeletonCollectionViewCell: UICollectionViewCell, Reusable {
 }
 
 class SkeletonCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let flowLayout = collectionView.collectionViewLayout
-            as? UICollectionViewFlowLayout else {
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
             return 20
         }
 

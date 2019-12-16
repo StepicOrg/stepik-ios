@@ -16,13 +16,13 @@ final class ContentLanguageSwitchProvider: ContentLanguageSwitchProviderProtocol
     }
 
     func fetchAvailableLanguages() -> Guarantee<[ContentLanguage]> {
-        return Guarantee { seal in
+        Guarantee { seal in
             seal(ContentLanguage.supportedLanguages)
         }
     }
 
     func fetchCurrentLanguage() -> Guarantee<ContentLanguage> {
-        return Guarantee { seal in
+        Guarantee { seal in
             seal(self.contentLanguageService.globalContentLanguage)
         }
     }

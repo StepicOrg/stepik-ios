@@ -101,7 +101,7 @@ final class SocialAuthViewController: UIViewController {
     }
 
     @IBAction func moreButtonClick(_ sender: Any) {
-        isExpanded = !isExpanded
+        isExpanded.toggle()
 
         moreButton.setTitle(isExpanded ? NSLocalizedString("SignInLessButton", comment: "") : NSLocalizedString("SignInMoreButton", comment: ""), for: .normal)
 
@@ -162,12 +162,10 @@ final class SocialAuthViewController: UIViewController {
 }
 
 extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? numberOfColumns : numberOfColumns - 1
-    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int { self.numberOfRows }
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return numberOfRows
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        section == 0 ? self.numberOfColumns : self.numberOfColumns - 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -177,7 +175,10 @@ extension SocialAuthViewController: UICollectionViewDelegate, UICollectionViewDa
         }
 
         let provider = providers[providerIndex]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SocialAuthCollectionViewCell.reuseId, for: indexPath) as! SocialAuthCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SocialAuthCollectionViewCell.reuseId,
+            for: indexPath
+        ) as! SocialAuthCollectionViewCell
 
         cell.imageView.image = provider.image
 
@@ -268,7 +269,7 @@ final class SocialCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override var itemSize: CGSize {
         set { }
         get {
-            return CGSize(width: itemSizeHeight, height: itemSizeHeight)
+             CGSize(width: itemSizeHeight, height: itemSizeHeight)
         }
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-protocol CourseListCollectionViewCellDelegate: class {
+protocol CourseListCollectionViewCellDelegate: AnyObject {
     func widgetPrimaryButtonClicked(viewModel: CourseWidgetViewModel?)
     func widgetSecondaryButtonClicked(viewModel: CourseWidgetViewModel?)
 }

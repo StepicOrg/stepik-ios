@@ -125,7 +125,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
                 case .index(let value):
                     return value
                 case .id(let value):
-                    return lesson.stepsArray.index(of: value) ?? 0
+                    return lesson.stepsArray.firstIndex(of: value) ?? 0
                 }
             }()
 

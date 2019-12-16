@@ -72,7 +72,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     @IBOutlet weak var topTimeProgressView: UIProgressView!
     @IBOutlet weak var topTimeSlider: UISlider!
     @IBOutlet var fillModeButton: UIButton!
-    
+
     // MARK: Bottom fullscreen controls
     @IBOutlet weak var rateButton: UIButton!
     @IBOutlet weak var qualityButton: UIButton!
@@ -92,7 +92,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     private var isPlayerPassedReadyState = false
 
-    private var currentVideoRate: VideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
+    private var currentVideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
         didSet {
             self.adjustToCurrentVideoRate()
             VideosInfo.videoRate = self.currentVideoRate.rawValue
@@ -125,9 +125,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     private var videoInBackgroundTooltip: Tooltip?
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    override var prefersStatusBarHidden: Bool { true }
 
     // MARK: UIViewController life cycle
 
@@ -237,7 +235,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
         self.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
     }
-    
+
     // MARK: Seek events
 
     @IBAction func topTimeSliderValueChanged(_ sender: UISlider) {
@@ -573,7 +571,7 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
         }
 
         self.isPlayerPassedReadyState = true
-        
+
         StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: player is ready to display")
 
         self.activityIndicator.isHidden = true

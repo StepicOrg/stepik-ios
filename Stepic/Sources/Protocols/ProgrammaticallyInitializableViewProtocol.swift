@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ProgrammaticallyInitializableViewProtocol: class {
+protocol ProgrammaticallyInitializableViewProtocol: AnyObject {
     func setupView()
     func addSubviews()
     func makeConstraints()

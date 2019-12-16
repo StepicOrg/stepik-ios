@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SearchResultsView: class {
+protocol SearchResultsView: AnyObject {
     func set(state: CoursesSearchResultsState)
     func set(controller: UIViewController, forState: CoursesSearchResultsState)
 }

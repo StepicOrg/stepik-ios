@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol EmailAuthView: class {
+protocol EmailAuthView: AnyObject {
     var state: EmailAuthState { get set }
 
     func update(with result: EmailAuthResult)

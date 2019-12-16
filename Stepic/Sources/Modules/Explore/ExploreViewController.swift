@@ -218,7 +218,7 @@ final class ExploreViewController: BaseExploreViewController {
 
 extension Explore.Submodule: SubmoduleType {
     var position: Int {
-        guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
+        guard let position = ExploreViewController.submodulesOrder.firstIndex(of: self) else {
             fatalError("Given submodule type has unknown position")
         }
         return position

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SectionNavigationDelegate: class {
+protocol SectionNavigationDelegate: AnyObject {
     func didRequestPreviousUnitPresentationForLessonInUnit(unitID: Unit.IdType)
     func didRequestNextUnitPresentationForLessonInUnit(unitID: Unit.IdType)
 }

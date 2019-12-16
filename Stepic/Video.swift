@@ -84,7 +84,7 @@ final class Video: NSManagedObject, JSONSerializable {
     }
 
     var state: VideoState {
-        return VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: id) != nil
+        VideoStoredFileManager(fileManager: FileManager.default).getVideoStoredFile(videoID: id) != nil
             ? .cached
             : .online
     }

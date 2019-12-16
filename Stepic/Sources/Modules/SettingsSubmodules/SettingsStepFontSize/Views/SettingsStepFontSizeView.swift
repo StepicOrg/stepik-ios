@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol SettingsStepFontSizeViewDelegate: class {
+protocol SettingsStepFontSizeViewDelegate: AnyObject {
     func settingsStepFontSizeView(
         _ view: SettingsStepFontSizeView,
         didSelectFontSize viewModelUniqueIdentifier: UniqueIdentifierType

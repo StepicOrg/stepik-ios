@@ -90,10 +90,10 @@ final class Section: NSManagedObject, IDFetchable {
 
         let requestUnitsCount = 50
         var dimCount = 0
-        var idsArray = Array<Array<Int>>()
+        var idsArray = [[Int]]()
         for (index, unitId) in self.unitsArray.enumerated() {
             if index % requestUnitsCount == 0 {
-                idsArray.append(Array<Int>())
+                idsArray.append([Int]())
                 dimCount += 1
             }
             idsArray[dimCount - 1].append(unitId)
@@ -226,7 +226,7 @@ final class Section: NSManagedObject, IDFetchable {
     }
 
     var isReachable: Bool {
-        return (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
+        (self.isActive || self.testSectionAction != nil) && (self.progressId != nil || self.isExam)
     }
 
     enum JSONKey: String {
@@ -254,11 +254,7 @@ final class Section: NSManagedObject, IDFetchable {
 // MARK: - Section: NextLessonServiceSectionSourceProtocol -
 
 extension Section: NextLessonServiceSectionSourceProtocol {
-    var unitsList: [NextLessonServiceUnitSourceProtocol] {
-        return self.units
-    }
+    var unitsList: [NextLessonServiceUnitSourceProtocol] { self.units }
 
-    var uniqueIdentifier: UniqueIdentifierType {
-        return "\(id)"
-    }
+    var uniqueIdentifier: UniqueIdentifierType { "\(self.id)" }
 }

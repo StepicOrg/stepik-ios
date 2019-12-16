@@ -16,7 +16,7 @@ import SwiftyJSON
 final class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
     var id: String {
         get {
-            return description
+             description
         }
     }
 
@@ -55,16 +55,12 @@ final class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
         return res
     }
 
-    var type: ExecutableTaskType {
-        return .deleteDevice
-    }
+    var type: ExecutableTaskType { .deleteDevice }
 
     var userId: Int
     var deviceId: Int
 
-    var description: String {
-        return "\(type.rawValue) \(userId) \(deviceId)"
-    }
+    var description: String { "\(type.rawValue) \(userId) \(deviceId)" }
 
     func execute(success: @escaping (() -> Void), failure: @escaping ((ExecutionError) -> Void)) {
         let recoveryManager = PersistentUserTokenRecoveryManager(baseName: "Users")

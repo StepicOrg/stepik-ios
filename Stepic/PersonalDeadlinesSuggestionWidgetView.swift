@@ -16,9 +16,7 @@ final class PersonalDeadlinesSuggestionWidgetView: NibInitializableView {
     var noAction: (() -> Void)?
     var yesAction: (() -> Void)?
 
-    override var nibName: String {
-        return "PersonalDeadlinesSuggestionWidgetView"
-    }
+    override var nibName: String { "PersonalDeadlinesSuggestionWidgetView" }
 
     override func setupSubviews() {
         self.view.setRoundedCorners(cornerRadius: 8)

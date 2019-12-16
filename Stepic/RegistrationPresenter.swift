@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol RegistrationView: class {
+protocol RegistrationView: AnyObject {
     var state: RegistrationState { get set }
 
     func update(with result: RegistrationResult)

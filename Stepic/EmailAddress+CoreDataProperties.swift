@@ -19,7 +19,7 @@ extension EmailAddress {
     @NSManaged var managedProfile: Profile?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "EmailAddress", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "EmailAddress", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -28,7 +28,7 @@ extension EmailAddress {
 
     var id: Int {
         get {
-            return self.managedId?.intValue ?? -1
+             self.managedId?.intValue ?? -1
         }
         set {
             self.managedId = newValue as NSNumber?
@@ -37,7 +37,7 @@ extension EmailAddress {
 
     var userID: Int {
         get {
-            return self.managedUserId?.intValue ?? -1
+             self.managedUserId?.intValue ?? -1
         }
         set {
             self.managedUserId = newValue as NSNumber?
@@ -46,7 +46,7 @@ extension EmailAddress {
 
     var email: String {
         get {
-            return self.managedEmail ?? ""
+             self.managedEmail ?? ""
         }
         set {
             self.managedEmail = newValue
@@ -55,7 +55,7 @@ extension EmailAddress {
 
     var isVerified: Bool {
         get {
-            return self.managedIsVerified?.boolValue ?? false
+             self.managedIsVerified?.boolValue ?? false
         }
         set {
             self.managedIsVerified = newValue as NSNumber?
@@ -64,7 +64,7 @@ extension EmailAddress {
 
     var isPrimary: Bool {
         get {
-            return self.managedIsPrimary?.boolValue ?? false
+             self.managedIsPrimary?.boolValue ?? false
         }
         set {
             self.managedIsPrimary = newValue as NSNumber?
@@ -73,7 +73,7 @@ extension EmailAddress {
 
     var profile: Profile? {
         get {
-            return self.managedProfile
+             self.managedProfile
         }
         set {
             self.managedProfile = newValue

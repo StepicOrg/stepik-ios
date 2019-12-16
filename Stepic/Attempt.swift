@@ -31,9 +31,7 @@ final class Attempt: JSONSerializable {
         user = json["user"].int
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return id == json["id"].int
-    }
+    func hasEqualId(json: JSON) -> Bool { id == json["id"].int }
 
     init(step: Int) {
         self.step = step
@@ -59,11 +57,7 @@ final class Attempt: JSONSerializable {
         dataset = getDatasetFromJSON(json["dataset"], stepName: stepName)
     }
 
-    var json: JSON {
-        return [
-            "step": step
-        ]
-    }
+    var json: JSON { ["step": step] }
 
     private func getDatasetFromJSON(_ json: JSON, stepName: String) -> Dataset? {
         switch stepName {

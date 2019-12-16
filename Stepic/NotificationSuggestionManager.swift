@@ -51,7 +51,7 @@ final class NotificationSuggestionManager {
     }
 
     private func isAlertAvailableNow(context: NotificationRequestAlertContext) -> Bool {
-        return Date().timeIntervalSince1970 - getLastAlertShownTime(for: context) >= 60 * 60 * 24
+        Date().timeIntervalSince1970 - getLastAlertShownTime(for: context) >= 60 * 60 * 24
     }
 
     var streakAlertShownCnt: Int {

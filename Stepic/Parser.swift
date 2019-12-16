@@ -51,12 +51,12 @@ final class Parser: NSObject {
     }
 
     func codeFromURL(_ url: URL) -> String? {
-        return url.getKeyVals()?["code"]
+        url.getKeyVals()?["code"]
     }
 }
 
 extension URL {
-    func getKeyVals() -> Dictionary<String, String>? {
+    func getKeyVals() -> [String: String]? {
         var results = [String: String]()
         let keyValues = self.query?.components(separatedBy: "&")
         if keyValues?.count > 0 {

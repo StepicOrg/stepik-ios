@@ -24,11 +24,7 @@ protocol LocalNotificationContentProvider {
 }
 
 extension LocalNotificationContentProvider {
-    var userInfo: [AnyHashable: Any] {
-        return [:]
-    }
+    var userInfo: [AnyHashable: Any] { [:] }
 
-    var sound: UNNotificationSound {
-        return .default
-    }
+    var sound: UNNotificationSound { .default }
 }

@@ -57,13 +57,9 @@ final class CodeToolbarLanguagePickerButton: UIControl {
         }
     }
 
-    var isExpanded: Bool {
-        return self.currentRotationAngle != 0
-    }
+    var isExpanded: Bool { self.currentRotationAngle != 0 }
 
-    var isCollapsed: Bool {
-        return self.currentRotationAngle == 0
-    }
+    var isCollapsed: Bool { self.currentRotationAngle == 0 }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance

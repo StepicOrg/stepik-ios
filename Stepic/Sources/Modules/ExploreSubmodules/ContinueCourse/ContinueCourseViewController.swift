@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ContinueCourseViewControllerProtocol: class {
+protocol ContinueCourseViewControllerProtocol: AnyObject {
     func displayLastCourse(viewModel: ContinueCourse.LastCourseLoad.ViewModel)
     func displayTooltip(viewModel: ContinueCourse.TooltipAvailabilityCheck.ViewModel)
 }

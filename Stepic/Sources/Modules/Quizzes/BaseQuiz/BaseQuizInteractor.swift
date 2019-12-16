@@ -201,7 +201,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     private func loadAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
-        return firstly { () -> Promise<Attempt?> in
+        firstly { () -> Promise<Attempt?> in
             if forceRefreshAttempt {
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
 
@@ -218,7 +218,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     private func countSubmissions() -> Guarantee<Int> {
-        return Guarantee { seal in
+        Guarantee { seal in
             var count = 0
             func loadSubmissions(page: Int) {
                 self.provider.fetchSubmissions(for: self.step, page: page).done { submissions, meta in
@@ -238,7 +238,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     private func pollSubmission(_ submission: Submission) -> Promise<Submission> {
-        return Promise { seal in
+        Promise { seal in
             func poll(retryCount: Int) {
                 after(seconds: Double(retryCount) * BaseQuizInteractor.pollInterval).then {
                     _ -> Promise<Submission?> in

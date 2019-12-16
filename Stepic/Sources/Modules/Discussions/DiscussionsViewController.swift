@@ -2,7 +2,7 @@ import Agrume
 import SVProgressHUD
 import UIKit
 
-protocol DiscussionsViewControllerProtocol: class {
+protocol DiscussionsViewControllerProtocol: AnyObject {
     func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel)
     func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel)
     func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel)

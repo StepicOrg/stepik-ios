@@ -16,7 +16,7 @@ private struct AssociatedKey {
 extension UITableView {
     private var savedDataSource: UITableViewDataSource? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UITableViewDataSource
+             objc_getAssociatedObject(self, &AssociatedKey.savedDataSource) as? UITableViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.savedDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -25,7 +25,7 @@ extension UITableView {
 
     private var skeletonDataSource: SkeletonTableViewDataSource? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonTableViewDataSource
+             objc_getAssociatedObject(self, &AssociatedKey.skeletonDataSource) as? SkeletonTableViewDataSource
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKey.skeletonDataSource, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -62,12 +62,10 @@ class SkeletonTableViewCell: UITableViewCell {
 }
 
 class SkeletonTableViewDataSource: NSObject, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int(max(tableView.bounds.width, tableView.bounds.height) / 44.0)
+        Int(max(tableView.bounds.width, tableView.bounds.height) / 44.0)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,6 +82,6 @@ class SkeletonTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        UITableView.automaticDimension
     }
 }

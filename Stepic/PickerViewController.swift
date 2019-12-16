@@ -49,22 +49,20 @@ class PickerViewController: UIViewController {
     }
 
     var selectedData: String {
-        return data[picker.selectedRow(inComponent: 0)]
+        self.data[self.picker.selectedRow(inComponent: 0)]
     }
 }
 
 extension PickerViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.count
+        self.data.count
     }
 }
 
 extension PickerViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
+        self.data[row]
     }
 }

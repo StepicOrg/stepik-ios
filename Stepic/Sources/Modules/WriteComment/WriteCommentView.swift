@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: WriteCommentViewDelegate: class -
 
-protocol WriteCommentViewDelegate: class {
+protocol WriteCommentViewDelegate: AnyObject {
     func writeCommentView(_ view: WriteCommentView, didUpdateText text: String)
 }
 
@@ -69,7 +69,7 @@ final class WriteCommentView: UIView {
     }
 
     override func becomeFirstResponder() -> Bool {
-        return self.textView.becomeFirstResponder()
+        self.textView.becomeFirstResponder()
     }
 
     func configure(viewModel: WriteCommentViewModel) {

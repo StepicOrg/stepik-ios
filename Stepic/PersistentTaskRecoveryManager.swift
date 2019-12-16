@@ -27,10 +27,10 @@ final class PersistentTaskRecoveryManager: PersistentRecoveryManager {
     }
 
     func recoverTask(name: String) -> Executable? {
-        return recoverObjectWithKey(name) as? Executable
+        self.recoverObjectWithKey(name) as? Executable
     }
 
     func writeTask(_ task: Executable & DictionarySerializable, name: String) {
-        return writeObjectWithKey(name, object: task)
+        self.writeObjectWithKey(name, object: task)
     }
 }

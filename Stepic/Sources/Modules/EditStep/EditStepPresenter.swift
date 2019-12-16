@@ -42,7 +42,7 @@ final class EditStepPresenter: EditStepPresenterProtocol {
     // MARK: Private API
 
     private func makeViewModel(currentText: String, originalText: String) -> EditStepViewModel {
-        return EditStepViewModel(
+        .init(
             text: currentText,
             isFilled: currentText != originalText
         )

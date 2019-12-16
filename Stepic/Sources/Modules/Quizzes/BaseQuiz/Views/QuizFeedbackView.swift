@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol QuizFeedbackViewDelegate: class {
+protocol QuizFeedbackViewDelegate: AnyObject {
     func quizFeedbackView(_ view: QuizFeedbackView, didRequestFullscreenImage url: URL)
     func quizFeedbackView(_ view: QuizFeedbackView, didRequestOpenURL url: URL)
 }
@@ -59,7 +59,7 @@ final class QuizFeedbackView: UIView {
     }()
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(
+        CGSize(
             width: UIView.noIntrinsicMetric,
             height: self.appearance.titleInsets.top
                 + self.appearance.titleInsets.bottom

@@ -1,13 +1,13 @@
 import SVProgressHUD
 import UIKit
 
-protocol CourseListViewControllerProtocol: class {
+protocol CourseListViewControllerProtocol: AnyObject {
     func displayCourses(viewModel: CourseList.CoursesLoad.ViewModel)
     func displayNextCourses(viewModel: CourseList.NextCoursesLoad.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseList.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
-protocol CourseListViewControllerDelegate: class {
+protocol CourseListViewControllerDelegate: AnyObject {
     func itemDidSelected(viewModel: CourseWidgetViewModel)
     func primaryButtonClicked(viewModel: CourseWidgetViewModel)
     func secondaryButtonClicked(viewModel: CourseWidgetViewModel)

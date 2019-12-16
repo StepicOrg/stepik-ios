@@ -11,10 +11,10 @@ import Foundation
 import PromiseKit
 
 final class AchievementsAPI: APIEndpoint {
-    override var name: String { return "achievements" }
+    override var name: String { "achievements" }
 
     func retrieve(kind: String? = nil, page: Int = 1) -> Promise<([Achievement], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             var params = Parameters()
             if let kind = kind {
                 params["kind"] = kind

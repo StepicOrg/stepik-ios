@@ -11,19 +11,19 @@ import Foundation
 import PromiseKit
 
 final class UserCoursesAPI: APIEndpoint {
-    override var name: String { return "user-courses" }
+    override var name: String { "user-courses" }
 
     func retrieve(page: Int = 1) -> Promise<([UserCourse], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             var params = Parameters()
             params["page"] = page
 
-            retrieve.request(
-                requestEndpoint: name,
-                paramName: name,
+            self.retrieve.request(
+                requestEndpoint: self.name,
+                paramName: self.name,
                 params: params,
-                updatingObjects: Array<UserCourse>(),
-                withManager: manager
+                updatingObjects: [UserCourse](),
+                withManager: self.manager
             ).done { userCourses, meta, _ in
                 seal.fulfill((userCourses, meta))
             }.catch { error in

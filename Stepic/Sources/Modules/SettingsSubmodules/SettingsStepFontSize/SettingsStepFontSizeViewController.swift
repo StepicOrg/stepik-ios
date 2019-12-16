@@ -1,6 +1,6 @@
 import UIKit
 
-protocol SettingsStepFontSizeViewControllerProtocol: class {
+protocol SettingsStepFontSizeViewControllerProtocol: AnyObject {
     func displayFontSizes(viewModel: SettingsStepFontSize.FontSizesLoad.ViewModel)
     func displayFontSizeChange(viewModel: SettingsStepFontSize.FontSizeSelection.ViewModel)
 }

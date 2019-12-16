@@ -1,6 +1,6 @@
 import UIKit
 
-protocol BaseExploreViewControllerProtocol: class {
+protocol BaseExploreViewControllerProtocol: AnyObject {
     func displayFullscreenCourseList(
         viewModel: BaseExplore.FullscreenCourseListModulePresentation.ViewModel
     )
@@ -76,7 +76,7 @@ class BaseExploreViewController: UIViewController {
     }
 
     func getSubmodule(type: SubmoduleType) -> Submodule? {
-        return self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
+        self.submodules.first(where: { $0.type.uniqueIdentifier == type.uniqueIdentifier })
     }
 
     final func tryToSetOnlineState(moduleInput: CourseListInputProtocol) {

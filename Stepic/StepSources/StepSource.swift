@@ -9,18 +9,14 @@ final class StepSource: JSONSerializable {
 
     var text: String {
         get {
-            return self.block[JSONKey.text.rawValue] as? String ?? ""
+             self.block[JSONKey.text.rawValue] as? String ?? ""
         }
         set {
             self.block[JSONKey.text.rawValue] = newValue
         }
     }
 
-    var json: JSON {
-        return [
-            JSONKey.block.rawValue: self.block
-        ]
-    }
+    var json: JSON { [JSONKey.block.rawValue: self.block] }
 
     init(stepSource: StepSource) {
         self.id = stepSource.id
@@ -52,6 +48,6 @@ final class StepSource: JSONSerializable {
 
 extension StepSource: CustomDebugStringConvertible {
     var debugDescription: String {
-        return "StepSource(id: \(self.id), block: \(self.block))"
+        "StepSource(id: \(self.id), block: \(self.block))"
     }
 }

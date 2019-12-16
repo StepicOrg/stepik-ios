@@ -1,7 +1,7 @@
 import SVProgressHUD
 import UIKit
 
-protocol CourseInfoTabReviewsViewControllerProtocol: class {
+protocol CourseInfoTabReviewsViewControllerProtocol: AnyObject {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel)
     func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel)
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel)
@@ -182,7 +182,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
         _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
         willSelectRowAt indexPath: IndexPath
     ) -> Bool {
-        return self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
+        self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
     }
 
     func courseInfoTabReviewsView(

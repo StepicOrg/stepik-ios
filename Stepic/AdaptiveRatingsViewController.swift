@@ -161,7 +161,7 @@ extension AdaptiveRatingsViewController: AdaptiveRatingsView {
 
 extension AdaptiveRatingsViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (data?.count ?? 0) + (separatorPosition != nil ? 1 : 0)
+        (self.data?.count ?? 0) + (self.separatorPosition != nil ? 1 : 0)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -178,6 +178,7 @@ extension AdaptiveRatingsViewController: UITableViewDelegate, UITableViewDataSou
                 cell.updateInfo(position: user.position, username: user.name, exp: user.exp, isMe: user.me)
             }
         }
+
         return cell
     }
 }

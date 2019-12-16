@@ -37,10 +37,10 @@ extension SplitTestProtocol {
     }
 
     static var analyticsKey: String {
-        return "split_test-\(self.identifier)"
+        "split_test-\(self.identifier)"
     }
 
     static var dataBaseKey: String {
-        return "split_test_database-\(self.identifier)"
+        "split_test_database-\(self.identifier)"
     }
 }

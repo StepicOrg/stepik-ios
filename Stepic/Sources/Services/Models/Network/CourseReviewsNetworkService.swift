@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseReviewsNetworkServiceProtocol: class {
+protocol CourseReviewsNetworkServiceProtocol: AnyObject {
     func fetch(by courseID: Course.IdType, page: Int) -> Promise<([CourseReview], Meta)>
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<([CourseReview], Meta)>
     func create(courseID: Course.IdType, userID: User.IdType, score: Int, text: String) -> Promise<CourseReview>
@@ -17,7 +17,7 @@ final class CourseReviewsNetworkService: CourseReviewsNetworkServiceProtocol {
     }
 
     func fetch(by courseID: Course.IdType, page: Int = 1) -> Promise<([CourseReview], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsAPI.retrieve(courseID: courseID, page: page).done { results, meta in
                 seal.fulfill((results, meta))
             }.catch { _ in
@@ -27,7 +27,7 @@ final class CourseReviewsNetworkService: CourseReviewsNetworkServiceProtocol {
     }
 
     func fetch(courseID: Course.IdType, userID: User.IdType) -> Promise<([CourseReview], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsAPI.retrieve(courseID: courseID, userID: userID).done { results, meta in
                 seal.fulfill((results, meta))
             }.catch { _ in
@@ -37,7 +37,7 @@ final class CourseReviewsNetworkService: CourseReviewsNetworkServiceProtocol {
     }
 
     func create(courseID: Course.IdType, userID: User.IdType, score: Int, text: String) -> Promise<CourseReview> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsAPI.create(courseID: courseID, userID: userID, score: score, text: text).done { result in
                 seal.fulfill(result)
             }.catch { _ in
@@ -47,7 +47,7 @@ final class CourseReviewsNetworkService: CourseReviewsNetworkServiceProtocol {
     }
 
     func update(courseReview: CourseReview) -> Promise<CourseReview> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsAPI.update(courseReview).done { result in
                 seal.fulfill(result)
             }.catch { _ in
@@ -57,7 +57,7 @@ final class CourseReviewsNetworkService: CourseReviewsNetworkServiceProtocol {
     }
 
     func delete(id: CourseReview.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.courseReviewsAPI.delete(id: id).done {
                 seal.fulfill(())
             }.catch { _ in

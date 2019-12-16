@@ -1,6 +1,6 @@
 import Foundation
 
-protocol WriteCourseReviewOutputProtocol: class {
+protocol WriteCourseReviewOutputProtocol: AnyObject {
     func handleCourseReviewCreated(_ courseReview: CourseReview)
     func handleCourseReviewUpdated(_ courseReview: CourseReview)
 }

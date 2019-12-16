@@ -57,13 +57,12 @@ final class NumberQuizViewController: QuizViewController {
         }
     }
 
-    @objc func tap() {
+    @objc
+    func tap() {
         self.view.endEditing(true)
     }
 
-    override var needsToRefreshAttemptWhenWrong: Bool {
-        return false
-    }
+    override var needsToRefreshAttemptWhenWrong: Bool { false }
 
     override func display(dataset: Dataset) {
         guard let dataset = dataset as? String else {
@@ -94,9 +93,7 @@ final class NumberQuizViewController: QuizViewController {
     }
 
     //Override this in the subclass
-    override func getReply() -> Reply? {
-        return NumberReply(number: textField.text ?? "")
-    }
+    override func getReply() -> Reply? { NumberReply(number: textField.text ?? "") }
 
     private func presentWrongFormatAlert() {
         let alert = UIAlertController(title: "Wrong number format", message: "Only numbers are allowed", preferredStyle: UIAlertController.Style.alert)

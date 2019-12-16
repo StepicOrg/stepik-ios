@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewSortingQuizElementViewDelegate: class {
+protocol NewSortingQuizElementViewDelegate: AnyObject {
     func newSortingQuizElementViewDidLoadContent(_ view: NewSortingQuizElementView)
     func newSortingQuizElementViewDidUpdateContentHeight(_ view: NewSortingQuizElementView)
 
@@ -93,7 +93,7 @@ final class NewSortingQuizElementView: UIView {
     }
 
     private var navigationControlsContainerViewHeight: CGFloat {
-        return self.appearance.navigationButtonSize.height * 2 + self.appearance.navigationButtonVerticalSpacing
+        self.appearance.navigationButtonSize.height * 2 + self.appearance.navigationButtonVerticalSpacing
     }
 
     var insets: LayoutInsets? {

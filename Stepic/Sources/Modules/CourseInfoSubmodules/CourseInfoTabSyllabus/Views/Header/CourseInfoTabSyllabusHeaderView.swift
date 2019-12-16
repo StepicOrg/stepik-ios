@@ -79,9 +79,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
     }
 
     // Reference to tooltip-anchor view
-    var deadlinesButtonTooltipAnchorView: UIView {
-        return self.calendarButton.titleContentView
-    }
+    var deadlinesButtonTooltipAnchorView: UIView { self.calendarButton.titleContentView }
 
     var courseDownloadState: CourseInfoTabSyllabus.DownloadState = .notCached {
         didSet {

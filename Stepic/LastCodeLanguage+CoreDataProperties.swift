@@ -6,7 +6,7 @@ extension LastCodeLanguage {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "LastCodeLanguage", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "LastCodeLanguage", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -15,7 +15,7 @@ extension LastCodeLanguage {
 
     var languageString: String {
         get {
-            return self.managedLanguage ?? ""
+             self.managedLanguage ?? ""
         }
         set(value) {
             self.managedLanguage = value

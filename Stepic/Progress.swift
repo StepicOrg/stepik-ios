@@ -29,7 +29,7 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     var json: JSON {
-        return [
+        [
             "id": id,
             "is_passed": isPassed,
             "score": score,
@@ -45,7 +45,9 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     var percentPassed: Float {
-        return numberOfSteps != 0 ? Float(numberOfStepsPassed) / Float(numberOfSteps) * 100 : 100.0
+        self.numberOfSteps != 0
+            ? Float(self.numberOfStepsPassed) / Float(self.numberOfSteps) * 100
+            : 100.0
     }
 
     static func deleteAllStoredProgresses() {

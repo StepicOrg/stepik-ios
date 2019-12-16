@@ -1,6 +1,6 @@
 import UIKit
 
-protocol CourseListsCollectionViewControllerProtocol: class {
+protocol CourseListsCollectionViewControllerProtocol: AnyObject {
     func displayCourseLists(viewModel: CourseListsCollection.CourseListsLoad.ViewModel)
 }
 

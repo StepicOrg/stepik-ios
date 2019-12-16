@@ -29,7 +29,7 @@ extension Lesson {
     @NSManaged var managedUnit: Unit?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -38,7 +38,7 @@ extension Lesson {
 
     var id: Int {
         get {
-            return self.managedId?.intValue ?? -1
+             self.managedId?.intValue ?? -1
         }
         set {
             self.managedId = newValue as NSNumber?
@@ -47,7 +47,7 @@ extension Lesson {
 
     var title: String {
         get {
-            return self.managedTitle ?? "No title"
+             self.managedTitle ?? "No title"
         }
         set {
             self.managedTitle = newValue
@@ -56,7 +56,7 @@ extension Lesson {
 
     var slug: String {
         get {
-            return self.managedSlug ?? ""
+             self.managedSlug ?? ""
         }
         set {
             self.managedSlug = newValue
@@ -65,7 +65,7 @@ extension Lesson {
 
     var coverURL: String? {
         get {
-            return self.managedCoverURL
+             self.managedCoverURL
         }
         set {
             self.managedCoverURL = newValue
@@ -74,7 +74,7 @@ extension Lesson {
 
     var isFeatured: Bool {
         get {
-            return self.managedFeatured?.boolValue ?? false
+             self.managedFeatured?.boolValue ?? false
         }
         set {
             self.managedFeatured = newValue as NSNumber?
@@ -83,7 +83,7 @@ extension Lesson {
 
     var isPublic: Bool {
         get {
-            return self.managedPublic?.boolValue ?? false
+             self.managedPublic?.boolValue ?? false
         }
         set {
             self.managedPublic = newValue as NSNumber?
@@ -92,7 +92,7 @@ extension Lesson {
 
     var canEdit: Bool {
         get {
-            return self.managedCanEdit?.boolValue ?? false
+             self.managedCanEdit?.boolValue ?? false
         }
         set {
             self.managedCanEdit = newValue as NSNumber?
@@ -101,7 +101,7 @@ extension Lesson {
 
     var stepsArray: [IdType] {
         get {
-            return (self.managedStepsArray as? [IdType]) ?? []
+             (self.managedStepsArray as? [IdType]) ?? []
         }
         set {
             self.managedStepsArray = newValue as NSObject?
@@ -110,7 +110,7 @@ extension Lesson {
 
     var steps: [Step] {
         get {
-            return (self.managedSteps?.array as? [Step]) ?? []
+             (self.managedSteps?.array as? [Step]) ?? []
         }
         set {
             self.managedSteps = NSOrderedSet(array: newValue)
@@ -119,7 +119,7 @@ extension Lesson {
 
     var timeToComplete: Double {
         get {
-            return self.managedTimeToComplete?.doubleValue ?? 0
+             self.managedTimeToComplete?.doubleValue ?? 0
         }
         set {
             self.managedTimeToComplete = newValue as NSNumber?
@@ -128,7 +128,7 @@ extension Lesson {
 
     var voteDelta: Int {
         get {
-            return self.managedVoteDelta?.intValue ?? 0
+             self.managedVoteDelta?.intValue ?? 0
         }
         set {
             self.managedVoteDelta = newValue as NSNumber?
@@ -137,14 +137,12 @@ extension Lesson {
 
     var passedBy: Int {
         get {
-            return managedPassedBy?.intValue ?? 0
+             managedPassedBy?.intValue ?? 0
         }
         set {
             self.managedPassedBy = newValue as NSNumber?
         }
     }
 
-    var unit: Unit? {
-        return self.managedUnit
-    }
+    var unit: Unit? { self.managedUnit }
 }

@@ -19,7 +19,7 @@ final class Vote: JSONSerializable {
     var value: VoteValue?
 
     var json: JSON {
-        return [
+        [
             JSONKey.id.rawValue: self.id,
             JSONKey.value.rawValue: self.value?.rawValue ?? NSNull()
         ]

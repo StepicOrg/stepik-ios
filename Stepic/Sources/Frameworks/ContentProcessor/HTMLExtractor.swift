@@ -1,7 +1,7 @@
 import Foundation
 import Kanna
 
-protocol HTMLExtractorProtocol: class {
+protocol HTMLExtractorProtocol: AnyObject {
     static func extractAllTagsAttribute(tag: String, attribute: String, from text: String) -> [String]
     static func extractAllTagsContent(tag: String, from text: String) -> [String]
     static func extractAllTags(tag: String, from text: String) -> [String]
@@ -9,7 +9,7 @@ protocol HTMLExtractorProtocol: class {
 
 final class HTMLExtractor: HTMLExtractorProtocol {
     private static func makeDocumentDOM(from text: String) -> HTMLDocument? {
-        return try? Kanna.HTML(html: text, encoding: String.Encoding.utf8)
+        try? Kanna.HTML(html: text, encoding: String.Encoding.utf8)
     }
 
     static func extractAllTagsAttribute(tag: String, attribute: String, from text: String) -> [String] {

@@ -18,9 +18,7 @@ final class VerticalCourseListFlowLayout: BaseListFlowLayout {
     }
 
     private var _contentHeight: CGFloat = 0
-    override var contentHeight: CGFloat {
-        return self._contentHeight
-    }
+    override var contentHeight: CGFloat { self._contentHeight }
 
     var isPaginationHidden = true {
         didSet {

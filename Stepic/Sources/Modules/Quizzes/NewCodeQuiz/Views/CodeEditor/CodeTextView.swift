@@ -124,6 +124,6 @@ extension CodeTextView: NSLayoutManagerDelegate {
         lineSpacingAfterGlyphAt glyphIndex: Int,
         withProposedLineFragmentRect rect: CGRect
     ) -> CGFloat {
-        return self.appearance.lineSpacing
+        self.appearance.lineSpacing
     }
 }

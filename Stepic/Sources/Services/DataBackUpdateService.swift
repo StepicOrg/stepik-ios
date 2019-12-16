@@ -22,7 +22,7 @@ struct DataBackUpdateDescription: OptionSet {
     static let profileDetails = DataBackUpdateDescription(rawValue: 6)
 }
 
-protocol DataBackUpdateServiceDelegate: class {
+protocol DataBackUpdateServiceDelegate: AnyObject {
     /// Reported changes in specific fields of target
     func dataBackUpdateService(
         _ dataBackUpdateService: DataBackUpdateService,
@@ -50,7 +50,7 @@ extension DataBackUpdateServiceDelegate {
     ) { }
 }
 
-protocol DataBackUpdateServiceProtocol: class {
+protocol DataBackUpdateServiceProtocol: AnyObject {
     var delegate: DataBackUpdateServiceDelegate? { get set }
 
     /// Report about unit progress update

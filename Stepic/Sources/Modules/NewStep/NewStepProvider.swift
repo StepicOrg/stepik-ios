@@ -51,7 +51,7 @@ final class NewStepProvider: NewStepProviderProtocol {
     }
 
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?> {
-        return Promise { seal in
+        Promise { seal in
             self.stepsPersistenceService.fetch(ids: [id]).done { cachedSteps in
                 seal.fulfill(cachedSteps.first)
             }.catch { _ in
@@ -61,7 +61,7 @@ final class NewStepProvider: NewStepProviderProtocol {
     }
 
     func fetchCurrentFontSize() -> Guarantee<FontSize> {
-        return Guarantee { seal in
+        Guarantee { seal in
             seal(self.stepFontSizeService.globalStepFontSize)
         }
     }

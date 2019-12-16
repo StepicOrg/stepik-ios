@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol PersonalDeadlinesTimeServiceProtocol: class {
+protocol PersonalDeadlinesTimeServiceProtocol: AnyObject {
     func countDeadlines(mode: DeadlineMode, for course: Course) -> Promise<[SectionDeadline]>
 }
 
@@ -21,7 +21,7 @@ final class PersonalDeadlinesTimeService: PersonalDeadlinesTimeServiceProtocol {
     let sectionTimeMultiplier = 1.3
 
     func countDeadlines(mode: DeadlineMode, for course: Course) -> Promise<[SectionDeadline]> {
-        return Promise { seal in
+        Promise { seal in
             var sectionCounters: [Promise<(Int, TimeInterval)>] = []
             for section in course.sections {
                 sectionCounters += [countTimeToComplete(section: section)]
@@ -61,7 +61,7 @@ final class PersonalDeadlinesTimeService: PersonalDeadlinesTimeServiceProtocol {
     }
 
     private func countTimeToComplete(section: Section) -> Promise<(Int, TimeInterval)> {
-        return Promise { seal in
+        Promise { seal in
             section.loadUnits(success: {
                 var sectionTimeToComplete: Double = 0
                 for unit in section.units {

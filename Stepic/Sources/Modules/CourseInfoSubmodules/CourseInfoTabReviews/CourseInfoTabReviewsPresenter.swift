@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CourseInfoTabReviewsPresenterProtocol: class {
+protocol CourseInfoTabReviewsPresenterProtocol: AnyObject {
     func presentCourseReviews(response: CourseInfoTabReviews.ReviewsLoad.Response)
     func presentNextCourseReviews(response: CourseInfoTabReviews.NextReviewsLoad.Response)
     func presentWriteCourseReview(response: CourseInfoTabReviews.WriteCourseReviewPresentation.Response)

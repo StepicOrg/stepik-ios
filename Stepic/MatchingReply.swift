@@ -20,7 +20,5 @@ final class MatchingReply: Reply {
         ordering = json["ordering"].arrayValue.map({ $0.intValue })
     }
 
-    var dictValue: [String: Any] {
-        return ["ordering": ordering]
-    }
+    var dictValue: [String: Any] { ["ordering": ordering] }
 }

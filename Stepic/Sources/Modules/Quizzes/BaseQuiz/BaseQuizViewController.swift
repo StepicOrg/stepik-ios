@@ -1,7 +1,7 @@
 import Agrume
 import UIKit
 
-protocol BaseQuizViewControllerProtocol: class {
+protocol BaseQuizViewControllerProtocol: AnyObject {
     func displaySubmission(viewModel: BaseQuiz.SubmissionLoad.ViewModel)
     func displayRateAppAlert(viewModel: BaseQuiz.RateAppAlertPresentation.ViewModel)
     func displayStreakAlert(viewModel: BaseQuiz.StreakAlertPresentation.ViewModel)
@@ -16,9 +16,7 @@ final class BaseQuizViewController: UIViewController, ControllerWithStepikPlaceh
 
     private var quizAssembly: QuizAssembly
 
-    private var childQuizModuleInput: QuizInputProtocol? {
-        return self.quizAssembly.moduleInput
-    }
+    private var childQuizModuleInput: QuizInputProtocol? { self.quizAssembly.moduleInput }
 
     private var currentReply: Reply?
     private var shouldRetryWithNewAttempt = true

@@ -12,9 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CourseListsAPI: APIEndpoint {
-    override var name: String {
-        return "course-lists"
-    }
+    override var name: String { "course-lists" }
 
     func retrieve(language: ContentLanguage, page: Int = 1) -> Promise<([CourseListModel], Meta)> {
         let params: Parameters = [
@@ -22,6 +20,12 @@ final class CourseListsAPI: APIEndpoint {
             "language": language.languageString,
             "page": page
         ]
-        return retrieve.requestWithFetching(requestEndpoint: "course-lists", paramName: "course-lists", params: params, withManager: manager)
+
+        return self.retrieve.requestWithFetching(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: params,
+            withManager: self.manager
+        )
     }
 }

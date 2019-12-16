@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListNetworkServiceProtocol: class {
+protocol CourseListNetworkServiceProtocol: AnyObject {
     func fetch(page: Int) -> Promise<([Course], Meta)>
 }
 
@@ -17,8 +17,7 @@ class BaseCourseListNetworkService {
     }
 }
 
-final class EnrolledCourseListNetworkService: BaseCourseListNetworkService,
-                                              CourseListNetworkServiceProtocol {
+final class EnrolledCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
     let type: EnrolledCourseListType
     private let userCoursesAPI: UserCoursesAPI
 
@@ -33,7 +32,7 @@ final class EnrolledCourseListNetworkService: BaseCourseListNetworkService,
     }
 
     func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.userCoursesAPI.retrieve(page: page).then {
                 userCoursesInfo -> Promise<([Course], [UserCourse], Meta)> in
                 // Cause we can't pass empty ids list to courses endpoint
@@ -57,8 +56,7 @@ final class EnrolledCourseListNetworkService: BaseCourseListNetworkService,
     }
 }
 
-final class PopularCourseListNetworkService: BaseCourseListNetworkService,
-                                             CourseListNetworkServiceProtocol {
+final class PopularCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
     let type: PopularCourseListType
 
     init(type: PopularCourseListType, coursesAPI: CoursesAPI) {
@@ -67,7 +65,7 @@ final class PopularCourseListNetworkService: BaseCourseListNetworkService,
     }
 
     func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.coursesAPI.retrieve(
                 excludeEnded: true,
                 isPublic: true,
@@ -84,8 +82,7 @@ final class PopularCourseListNetworkService: BaseCourseListNetworkService,
     }
 }
 
-final class TagCourseListNetworkService: BaseCourseListNetworkService,
-                                         CourseListNetworkServiceProtocol {
+final class TagCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
     let type: TagCourseListType
 
     init(type: TagCourseListType, coursesAPI: CoursesAPI) {
@@ -94,7 +91,7 @@ final class TagCourseListNetworkService: BaseCourseListNetworkService,
     }
 
     func fetch(page: Int = 1) -> Promise<([Course], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.coursesAPI.retrieve(
                 tag: self.type.id,
                 order: "-activity",
@@ -133,8 +130,7 @@ final class CollectionCourseListNetworkService: BaseCourseListNetworkService,
     }
 }
 
-final class SearchResultCourseListNetworkService: BaseCourseListNetworkService,
-                                                  CourseListNetworkServiceProtocol {
+final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
     let type: SearchResultCourseListType
     private let searchResultsAPI: SearchResultsAPI
 
@@ -149,7 +145,7 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService,
     }
 
     func fetch(page: Int) -> Promise<([Course], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.searchResultsAPI.searchCourse(
                 query: self.type.query,
                 language: self.type.language,

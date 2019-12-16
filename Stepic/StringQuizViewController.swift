@@ -91,14 +91,10 @@ final class StringQuizViewController: QuizViewController {
         self.view.endEditing(true)
     }
 
-    override var needsToRefreshAttemptWhenWrong: Bool {
-        return false
-    }
+    override var needsToRefreshAttemptWhenWrong: Bool { false }
 
     //Override this in the subclass
-    override func getReply() -> Reply? {
-        return TextReply(text: textView.text ?? "")
-    }
+    override func getReply() -> Reply? { TextReply(text: textView.text ?? "") }
 }
 
 extension StringQuizViewController: UITextViewDelegate {

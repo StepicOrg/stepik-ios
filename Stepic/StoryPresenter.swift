@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol StoryViewProtocol: class {
+protocol StoryViewProtocol: AnyObject {
     func animate(view: UIView & UIStoryPartViewProtocol)
     func animateProgress(segment: Int, duration: TimeInterval)
     func pause(segment: Int)
@@ -18,7 +18,7 @@ protocol StoryViewProtocol: class {
     func close()
 }
 
-protocol StoryPresenterProtocol: class {
+protocol StoryPresenterProtocol: AnyObject {
     var storyPartsCount: Int { get }
     var storyID: Int { get }
 
@@ -48,13 +48,9 @@ final class StoryPresenter: StoryPresenterProtocol {
     private var viewForIndex: [Int: UIView & UIStoryPartViewProtocol] = [:]
     private var shouldRestartSegment = false
 
-    var storyID: Int {
-        return self.story.id
-    }
+    var storyID: Int { self.story.id }
 
-    var storyPartsCount: Int {
-        return self.story.parts.count
-    }
+    var storyPartsCount: Int { self.story.parts.count }
 
     func finishedAnimating() {
         self.partToAnimate += 1

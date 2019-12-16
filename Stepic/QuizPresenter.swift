@@ -28,7 +28,7 @@ final class QuizPresenter {
     }
 
     var stepUrl: String {
-        return "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+        "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
     }
 
     init(
@@ -97,7 +97,7 @@ final class QuizPresenter {
                 }
             }
 
-            switch (submission.status ?? "evaluation") {
+            switch submission.status ?? "evaluation" {
             case "evaluation":
                 break
 
@@ -525,9 +525,7 @@ struct SubmissionLimitation {
         self.isEditable = isEditable
     }
 
-    var canSubmit: Bool {
-        return (count ?? 0) > 0 || isEditable
-    }
+    var canSubmit: Bool { (count ?? 0) > 0 || isEditable }
 }
 
 enum QuizState {
@@ -542,7 +540,7 @@ enum SubmissionStatus: String {
     case evaluation = "evaluation"
 }
 
-protocol QuizView: class {
+protocol QuizView: AnyObject {
     //Quiz content
     func display(dataset: Dataset)
     func display(reply: Reply, hint: String?, status: SubmissionStatus)

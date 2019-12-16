@@ -67,15 +67,9 @@ final class Session {
         }
     }
 
-    static var needsRefresh: Bool {
-        return cookieHeaders.count == 0
-    }
-
     static var cookieHeaders = [String: String]()
-
-    static var hasCookies: Bool {
-        return cookieDict.count > 0
-    }
+    static var needsRefresh: Bool { self.cookieHeaders.isEmpty }
 
     static var cookieDict = [String: String]()
+    static var hasCookies: Bool { !self.cookieDict.isEmpty }
 }

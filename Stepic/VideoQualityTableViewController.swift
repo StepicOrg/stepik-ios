@@ -56,7 +56,7 @@ final class VideoQualityTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        setCheckmarkTo(defaultQualities.index(of: (action == .downloading ? VideosInfo.downloadingVideoQuality : VideosInfo.watchingVideoQuality)) ?? 0)
+        setCheckmarkTo(defaultQualities.firstIndex(of: (action == .downloading ? VideosInfo.downloadingVideoQuality : VideosInfo.watchingVideoQuality)) ?? 0)
     }
 
     func setQualutyTo(quality: String) {

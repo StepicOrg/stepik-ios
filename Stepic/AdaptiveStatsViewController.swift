@@ -199,9 +199,7 @@ extension AdaptiveStatsViewController: AdaptiveStatsView {
 }
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data?.count ?? 0
-    }
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { self.data?.count ?? 0 }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ProgressTableViewCell.reuseId, for: indexPath) as! ProgressTableViewCell

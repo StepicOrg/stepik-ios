@@ -1,5 +1,5 @@
 import Foundation
 
-protocol BaseQuizOutputProtocol: class {
+protocol BaseQuizOutputProtocol: AnyObject {
     func handleCorrectSubmission()
 }

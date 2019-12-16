@@ -1,6 +1,6 @@
 import Foundation
 
-protocol StorageUsageServiceProtocol: class {
+protocol StorageUsageServiceProtocol: AnyObject {
     typealias Bytes = UInt64
 
     /// Returns video stored file in bytes, otherwise returns nil if file not found.
@@ -22,7 +22,7 @@ extension StorageUsageServiceProtocol {
     }
 
     func getLessonSize(lesson: Lesson) -> Bytes {
-        return lesson.steps.reduce(0) { $0 + self.getStepSize(step: $1) }
+        lesson.steps.reduce(0) { $0 + self.getStepSize(step: $1) }
     }
 
     func getUnitSize(unit: Unit) -> Bytes {
@@ -33,11 +33,11 @@ extension StorageUsageServiceProtocol {
     }
 
     func getSectionSize(section: Section) -> Bytes {
-        return section.units.reduce(0) { $0 + self.getUnitSize(unit: $1) }
+        section.units.reduce(0) { $0 + self.getUnitSize(unit: $1) }
     }
 
     func getCourseSize(course: Course) -> Bytes {
-        return course.sections.reduce(0) { $0 + self.getSectionSize(section: $1) }
+        course.sections.reduce(0) { $0 + self.getSectionSize(section: $1) }
     }
 }
 
@@ -49,6 +49,6 @@ final class StorageUsageService: StorageUsageServiceProtocol {
     }
 
     func getVideoFileSize(videoID: Video.IdType) -> Bytes? {
-        return self.videoFileManager.getVideoStoredFile(videoID: videoID)?.size
+        self.videoFileManager.getVideoStoredFile(videoID: videoID)?.size
     }
 }

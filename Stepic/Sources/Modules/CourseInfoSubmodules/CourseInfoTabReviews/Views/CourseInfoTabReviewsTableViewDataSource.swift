@@ -27,7 +27,7 @@ final class CourseInfoTabReviewsTableViewDataSource: NSObject {
 
 extension CourseInfoTabReviewsTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModels.count
+        self.viewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

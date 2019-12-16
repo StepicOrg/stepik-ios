@@ -128,6 +128,6 @@ final class RemoteConfig {
     }
 
     func string(forKey key: String) -> String? {
-        return FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: key).stringValue
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(forKey: key).stringValue
     }
 }

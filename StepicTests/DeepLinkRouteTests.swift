@@ -15,7 +15,7 @@ import Nimble
 
 class DeepLinkRouteSpec: QuickSpec {
     private func makeRoute(for path: String) -> DeepLinkRoute {
-        return DeepLinkRoute(path: path)!
+        DeepLinkRoute(path: path)!
     }
 
     private func checkPaths(_ paths: [String], result: @escaping (DeepLinkRoute) -> ToSucceedResult) {

@@ -34,18 +34,10 @@ class WebViewController: UIViewController {
     var onDismiss: (() -> Void)?
 
     /// Returns the web view for the controller.
-    final var webView: WKWebView {
-        get {
-            return _webView
-        }
-    }
+    final var webView: WKWebView { _webView }
 
     /// Returns the progress view for the controller.
-    final var progressBar: UIProgressView {
-        get {
-            return _progressBar
-        }
-    }
+    final var progressBar: UIProgressView { _progressBar }
 
     /// The URL request for the web view. Upon setting this property, the web view immediately begins loading the request.
     final var urlRequest: URLRequest {

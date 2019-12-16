@@ -29,7 +29,7 @@ final class DownloadsProvider: DownloadsProviderProtocol {
     }
 
     func fetchCachedCourses() -> Guarantee<[Course]> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.coursesPersistenceService.fetchAll().done { courses in
                 let cachedCourses = courses.filter { !self.getCourseCachedSteps($0).isEmpty }
                 seal(cachedCourses)
@@ -62,11 +62,11 @@ final class DownloadsProvider: DownloadsProviderProtocol {
     }
 
     func isAdaptiveCourse(courseID: Course.IdType) -> Bool {
-        return self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: courseID)
+        self.adaptiveStorageManager.canOpenInAdaptiveMode(courseId: courseID)
     }
 
     func getCourseSize(_ course: Course) -> UInt64 {
-        return self.storageUsageService.getCourseSize(course: course)
+        self.storageUsageService.getCourseSize(course: course)
     }
 
     private func getCourseCachedSteps(_ course: Course) -> [Step] {

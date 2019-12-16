@@ -44,7 +44,7 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
     }
 
     private func processStepContent(_ content: String) -> Guarantee<String> {
-        return Guarantee { seal in
+        Guarantee { seal in
             let contentProcessor = ContentProcessor(
                 content: content,
                 rules: ContentProcessor.defaultRules,

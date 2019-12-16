@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol DiscussionsViewDelegate: class {
+protocol DiscussionsViewDelegate: AnyObject {
     func discussionsViewDidRequestRefresh(_ view: DiscussionsView)
     func discussionsViewDidRequestTopPagination(_ view: DiscussionsView)
     func discussionsViewDidRequestBottomPagination(_ view: DiscussionsView)

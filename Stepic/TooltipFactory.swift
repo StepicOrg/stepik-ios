@@ -10,7 +10,7 @@ import Foundation
 
 enum TooltipFactory {
     static var sharingCourse: Tooltip {
-        return EasyTipTooltip(
+        EasyTipTooltip(
             text: NSLocalizedString("ShareCourseTooltip", comment: ""),
             shouldDismissAfterTime: true,
             color: .standard
@@ -18,7 +18,7 @@ enum TooltipFactory {
     }
 
     static var lessonDownload: Tooltip {
-        return EasyTipTooltip(
+        EasyTipTooltip(
             text: NSLocalizedString("LessonDownloadTooltip", comment: ""),
             shouldDismissAfterTime: true,
             color: .standard
@@ -26,7 +26,7 @@ enum TooltipFactory {
     }
 
     static var continueLearningWidget: Tooltip {
-        return EasyTipTooltip(
+        EasyTipTooltip(
             text: NSLocalizedString("ContinueLearningWidgetTooltip", comment: ""),
             shouldDismissAfterTime: true,
             color: .standard
@@ -34,7 +34,7 @@ enum TooltipFactory {
     }
 
     static var streaksTooltip: Tooltip {
-        return EasyTipTooltip(
+        EasyTipTooltip(
             text: NSLocalizedString("StreaksSwitchTooltip", comment: ""),
             shouldDismissAfterTime: true,
             color: .standard
@@ -42,7 +42,7 @@ enum TooltipFactory {
     }
 
     static var videoInBackground: Tooltip {
-        return EasyTipTooltip(
+        EasyTipTooltip(
             text: NSLocalizedString("VideoInBackgroundTooltip", comment: ""),
             shouldDismissAfterTime: true,
             color: .standard
@@ -50,7 +50,7 @@ enum TooltipFactory {
     }
 
     static var codeEditorSettings: Tooltip {
-        return EasyTipTooltip(
+        EasyTipTooltip(
             text: NSLocalizedString("CodeEditorSettingsTooltip", comment: ""),
             shouldDismissAfterTime: true,
             color: .standard
@@ -58,7 +58,7 @@ enum TooltipFactory {
     }
 
     static var personalDeadlinesButton: Tooltip {
-        return EasyTipTooltip(
+        EasyTipTooltip(
             text: NSLocalizedString("PersonalDeadlinesButtonTooltip", comment: ""),
             shouldDismissAfterTime: true,
             color: .standard

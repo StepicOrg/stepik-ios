@@ -27,47 +27,47 @@ struct Scripts {
     private static let fontSizeScriptKey = "FontSizeScript"
 
     static var localJQuery: String {
-        return loadScriptWithKey(localJQueryScriptKey)
+        self.loadScriptWithKey(localJQueryScriptKey)
     }
 
     static var localTex: String {
-        return "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
+        "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
     }
 
     static var metaViewport: String {
-        return loadScriptWithKey(metaViewportKey)
+        self.loadScriptWithKey(metaViewportKey)
     }
 
     static var mathJaxFinished: String {
-        return loadScriptWithKey(mathJaxFinishedScriptKey)
+        self.loadScriptWithKey(mathJaxFinishedScriptKey)
     }
 
     static var clickableImages: String {
-        return "\(localJQuery)\(loadScriptWithKey(clickableImagesScriptKey))"
+         "\(localJQuery)\(loadScriptWithKey(clickableImagesScriptKey))"
     }
 
     static var audioTagWrapper: String {
-        return loadScriptWithKey(audioTagWrapperKey)
+        self.loadScriptWithKey(audioTagWrapperKey)
     }
 
     static var audioTagWrapperInit: String {
-        return loadScriptWithKey(audioTagWrapperInitKey)
+        self.loadScriptWithKey(audioTagWrapperInitKey)
     }
 
     static var kotlinRunnableSamples: String {
-        return loadScriptWithKey(kotlinRunnableSamplesKey)
+        self.loadScriptWithKey(kotlinRunnableSamplesKey)
     }
 
     static var styles: String {
-        return "\(loadScriptWithKey(wysiwygStylesKey))\(loadScriptWithKey(commonStylesKey))"
+         "\(loadScriptWithKey(wysiwygStylesKey))\(loadScriptWithKey(commonStylesKey))"
     }
 
     static var highlightJS: String {
-        return "\(loadScriptWithKey(highlightJSKey))"
+         "\(loadScriptWithKey(highlightJSKey))"
     }
 
     static var webkitCalloutDisable: String {
-        return "\(loadScriptWithKey(webkitCalloutDisableKey))"
+         "\(loadScriptWithKey(webkitCalloutDisableKey))"
     }
 
     static func textColor(color: UIColor) -> String {
@@ -77,7 +77,7 @@ struct Scripts {
 
     /// Returns script that replaces font size variables with the provided ones at `stepikcontent.css`.
     static func fontSize(_ fontSize: FontSize) -> String {
-        return self.fontSizeScript(
+        self.fontSizeScript(
             bodyFontSizeString: fontSize.body,
             h1FontSizeString: fontSize.h1,
             h2FontSizeString: fontSize.h2,

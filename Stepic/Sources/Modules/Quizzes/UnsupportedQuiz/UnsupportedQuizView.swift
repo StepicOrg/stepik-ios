@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol UnsupportedQuizViewDelegate: class {
+protocol UnsupportedQuizViewDelegate: AnyObject {
     func unsupportedQuizViewDidClickOnActionButton(_ view: UnsupportedQuizView)
 }
 

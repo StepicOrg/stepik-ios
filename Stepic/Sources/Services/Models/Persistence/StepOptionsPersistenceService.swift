@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol StepOptionsPersistenceServiceProtocol: class {
+protocol StepOptionsPersistenceServiceProtocol: AnyObject {
     func fetch(by stepID: Step.IdType) -> Promise<StepOptions?>
 }
 
@@ -13,7 +13,7 @@ final class StepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
     }
 
     func fetch(by stepID: Step.IdType) -> Promise<StepOptions?> {
-        return Promise { seal in
+        Promise { seal in
             self.stepsPersistenceService.fetch(ids: [stepID]).done { steps in
                 seal.fulfill(steps.first?.options)
             }.catch { _ in

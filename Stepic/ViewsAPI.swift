@@ -12,18 +12,30 @@ import PromiseKit
 import SwiftyJSON
 
 final class ViewsAPI: APIEndpoint {
-    override var name: String { return "views" }
+    override var name: String { "views" }
 
     func create(view: StepikModelView) -> Promise<Void> {
-        return create.request(requestEndpoint: "views", paramName: "view", creatingObject: view, withManager: manager)
+        self.create.request(
+            requestEndpoint: self.name,
+            paramName: "view",
+            creatingObject: view,
+            withManager: self.manager
+        )
     }
 
     func create(step stepId: Int, assignment assignmentId: Int?) -> Promise<Void> {
-        return create(view: StepikModelView(step: stepId, assignment: assignmentId))
+        self.create(view: StepikModelView(step: stepId, assignment: assignmentId))
     }
 
     //TODO: Do not delete this until ViewsCreateError is handled correctly & device executable tasks are improved
-    @discardableResult func create(stepId id: Int, assignment: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping () -> Void, error errorHandler: @escaping (ViewsCreateError) -> Void) -> Request? {
+    @discardableResult
+    func create(
+        stepId id: Int,
+        assignment: Int?,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping () -> Void,
+        error errorHandler: @escaping (ViewsCreateError) -> Void
+    ) -> Request? {
         var params: Parameters = [:]
 
         if let assignment = assignment {
@@ -42,9 +54,13 @@ final class ViewsAPI: APIEndpoint {
             ]
         }
 
-        return manager.request("\(StepicApplicationsInfo.apiURL)/views", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
+        return self.manager.request(
+            "\(StepicApplicationsInfo.apiURL)/views",
+            method: .post,
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: headers
+        ).responseSwiftyJSON({ response in
             var error = response.result.error
 //            var json : JSON = [:]
             if response.result.value == nil {
@@ -82,5 +98,6 @@ final class ViewsAPI: APIEndpoint {
 }
 
 enum ViewsCreateError: Error {
-    case notAuthorized, other(error: Error?, code: Int?, message: String?)
+    case notAuthorized
+    case other(error: Error?, code: Int?, message: String?)
 }

@@ -1,7 +1,7 @@
 import Foundation
 import Regex
 
-protocol ContentProcessingRule: class {
+protocol ContentProcessingRule: AnyObject {
     func process(content: String) -> String
 }
 
@@ -13,15 +13,13 @@ class BaseHTMLExtractionRule: ContentProcessingRule {
     }
 
     /// Just return argument back
-    func process(content: String) -> String {
-        return content
-    }
+    func process(content: String) -> String { content }
 }
 
 /// Add default protocol to all protocol relative paths, e.g replace "//site.com" with "http://site.com"
 final class FixRelativeProtocolURLsRule: ContentProcessingRule {
     func process(content: String) -> String {
-        return content.replacingOccurrences(of: "src=\"//", with: "src=\"http://")
+        content.replacingOccurrences(of: "src=\"//", with: "src=\"http://")
     }
 }
 

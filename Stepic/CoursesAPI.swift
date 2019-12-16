@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CoursesAPI: APIEndpoint {
-    override var name: String { return "courses" }
+    override var name: String { "courses" }
 
     @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course]) -> Promise<[Course]> {
         if ids.isEmpty {
@@ -73,18 +73,55 @@ final class CoursesAPI: APIEndpoint {
 
     //Can't add this to extension because it is mocked in tests. "Declaration from extension cannot be overriden"
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course], refreshMode: RefreshMode, success: @escaping (([Course]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
-        return getObjectsByIds(requestString: name, printOutput: false, ids: ids, deleteObjects: existing, refreshMode: refreshMode, success: success, failure: errorHandler)
+    @discardableResult
+    func retrieve(
+        ids: [Int],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        existing: [Course],
+        refreshMode: RefreshMode,
+        success: @escaping (([Course]) -> Void),
+        error errorHandler: @escaping ((NetworkError) -> Void)
+    ) -> Request? {
+        self.getObjectsByIds(
+            requestString: self.name,
+            printOutput: false,
+            ids: ids,
+            deleteObjects: existing,
+            refreshMode: refreshMode,
+            success: success,
+            failure: errorHandler
+        )
     }
 }
 
 extension CoursesAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, order: String? = nil, language: String? = nil, page: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success successHandler: @escaping ([Course], Meta) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
-        retrieve(tag: tag, featured: featured, enrolled: enrolled, excludeEnded: excludeEnded, isPublic: isPublic, order: order, language: language, page: page).done { courses, meta in
+    @discardableResult
+    func retrieve(
+        tag: Int? = nil,
+        featured: Bool? = nil,
+        enrolled: Bool? = nil,
+        excludeEnded: Bool? = nil,
+        isPublic: Bool? = nil,
+        order: String? = nil,
+        language: String? = nil,
+        page: Int = 1,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success successHandler: @escaping ([Course], Meta) -> Void,
+        error errorHandler: @escaping (Error) -> Void
+    ) -> Request? {
+        self.retrieve(
+            tag: tag,
+            featured: featured,
+            enrolled: enrolled,
+            excludeEnded: excludeEnded,
+            isPublic: isPublic,
+            order: order,
+            language: language,
+            page: page
+        ).done { courses, meta in
             successHandler(courses, meta)
-        }.catch {
-            error in
+        }.catch { error in
             errorHandler(error)
         }
         return nil

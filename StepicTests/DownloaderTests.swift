@@ -24,7 +24,7 @@ class DownloaderTaskMock: DownloaderTask {
 
     override var stateReporter: ((DownloaderTaskState) -> Void)? {
         get {
-            return { newState in
+             { newState in
                 self._state = newState
                 self.customStateReporter?(newState)
             }
@@ -34,9 +34,7 @@ class DownloaderTaskMock: DownloaderTask {
         }
     }
 
-    override var state: DownloaderTaskState {
-        return _state
-    }
+    override var state: DownloaderTaskState { _state }
 }
 
 class DownloaderSpec: QuickSpec {
@@ -50,15 +48,15 @@ class DownloaderSpec: QuickSpec {
     var downloader: Downloader!
 
     private func isFileExists(url: URL) -> Bool {
-        return FileManager.default.fileExists(atPath: url.path)
+        FileManager.default.fileExists(atPath: url.path)
     }
 
     private func getFileSize(url: URL) -> UInt64? {
-        return (try? FileManager.default.attributesOfItem(atPath: url.path))?[FileAttributeKey.size] as? UInt64
+        (try? FileManager.default.attributesOfItem(atPath: url.path))?[FileAttributeKey.size] as? UInt64
     }
 
     private func jsonDataWithExpectedSizeHeader(data: Data, chunksCount: Int) -> ((_ request: URLRequest) -> Response) {
-        return { (request: URLRequest) in
+        { (request: URLRequest) in
             let headers = [
                 "Content-Length": "\(data.count)"
             ]
@@ -68,7 +66,7 @@ class DownloaderSpec: QuickSpec {
     }
 
     private func jsonDataWithEmptySizeHeader(data: Data, chunksCount: Int) -> ((_ request: URLRequest) -> Response) {
-        return { (request: URLRequest) in
+        { (request: URLRequest) in
             http(200, headers: [String: String](), download: .streamContent(data: data, inChunksOf: chunksCount))(request)
         }
     }

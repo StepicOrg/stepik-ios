@@ -76,11 +76,11 @@ final class AchievementsRetriever {
     }
 
     func loadAchievementProgress(for achievement: Achievement) -> Promise<AchievementProgressData> {
-        return loadAchievementProgress(for: achievement.kind)
+        self.loadAchievementProgress(for: achievement.kind)
     }
 
     func loadAchievementProgress(for kind: String) -> Promise<AchievementProgressData> {
-        return Promise { seal in
+        Promise { seal in
             let allAchievementsWithKind: Promise<[Achievement]> = Promise { seal in
                 achievementsAPI.retrieve(kind: kind).done { achievements, _ in
                     seal.fulfill(achievements)

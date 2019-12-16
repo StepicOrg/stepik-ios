@@ -29,7 +29,7 @@ final class BranchService {
     }
 
     func continueUserActivity(_ userActivity: NSUserActivity) {
-        Branch.getInstance()?.continue(userActivity)
+        Branch.getInstance().continue(userActivity)
     }
 
     func openURL(
@@ -41,7 +41,7 @@ final class BranchService {
     }
 
     func canOpenWithBranch(url: URL) -> Bool {
-        return url.host == "stepik.app.link" || url.host == "stepik-alternate.app.link"
+        url.host == "stepik.app.link" || url.host == "stepik-alternate.app.link"
     }
 }
 

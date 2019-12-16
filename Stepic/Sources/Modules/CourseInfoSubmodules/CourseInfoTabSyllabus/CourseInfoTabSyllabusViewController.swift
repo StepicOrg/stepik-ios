@@ -1,6 +1,6 @@
 import UIKit
 
-protocol CourseInfoTabSyllabusViewControllerProtocol: class {
+protocol CourseInfoTabSyllabusViewControllerProtocol: AnyObject {
     func displaySyllabus(viewModel: CourseInfoTabSyllabus.SyllabusLoad.ViewModel)
     func displayDownloadButtonStateUpdate(viewModel: CourseInfoTabSyllabus.DownloadButtonStateUpdate.ViewModel)
     func displayDeleteDownloadsConfirmationAlert(viewModel: CourseInfoTabSyllabus.DeleteDownloadsConfirmation.ViewModel)
@@ -11,7 +11,7 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: class {
     )
 }
 
-protocol CourseInfoTabSyllabusViewControllerDelegate: class {
+protocol CourseInfoTabSyllabusViewControllerDelegate: AnyObject {
     func sectionWillDisplay(_ section: CourseInfoTabSyllabusSectionViewModel)
     func cellDidSelect(_ cell: CourseInfoTabSyllabusUnitViewModel)
     func downloadButtonDidClick(_ cell: CourseInfoTabSyllabusUnitViewModel)

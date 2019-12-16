@@ -2,7 +2,7 @@ import AVFoundation
 import AVKit
 import UIKit
 
-protocol CourseInfoTabInfoViewControllerProtocol: class {
+protocol CourseInfoTabInfoViewControllerProtocol: AnyObject {
     func displayCourseInfo(viewModel: CourseInfoTabInfo.InfoLoad.ViewModel)
 }
 

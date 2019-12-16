@@ -1,13 +1,13 @@
 import Foundation
 import PromiseKit
 
-protocol LessonsPersistenceServiceProtocol: class {
+protocol LessonsPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [Lesson.IdType])-> Promise<[Lesson]>
 }
 
 final class LessonsPersistenceService: LessonsPersistenceServiceProtocol {
     func fetch(ids: [Lesson.IdType]) -> Promise<[Lesson]> {
-        return Promise { seal in
+        Promise { seal in
             Lesson.fetchAsync(ids: ids).done { lessons in
                 let lessons = Array(Set(lessons)).reordered(order: ids, transform: { $0.id })
                 seal.fulfill(lessons)

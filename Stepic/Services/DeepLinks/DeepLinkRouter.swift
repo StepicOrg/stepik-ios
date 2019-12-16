@@ -10,7 +10,7 @@ import Foundation
 
 final class DeepLinkRouter {
     static var window: UIWindow? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window
+        (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
     static var currentNavigation: UINavigationController? {
@@ -27,7 +27,7 @@ final class DeepLinkRouter {
     }
 
     static var currentTabBarController: UITabBarController? {
-        return window?.rootViewController as? UITabBarController
+        self.window?.rootViewController as? UITabBarController
     }
 
     static func routeToCatalog() {
@@ -135,7 +135,7 @@ final class DeepLinkRouter {
         func getID(_ stringId: String, reversed: Bool) -> Int? {
             var slugString = ""
             let string = reversed ? String(stringId.reversed()) : stringId
-            for character in string.characters {
+            for character in string {
                 if Int("\(character)") != nil {
                     if reversed {
                         slugString = "\(character)" + slugString

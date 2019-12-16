@@ -23,9 +23,7 @@ final class StepTabBarButton: TMBarButton {
 
     private var identifier: String?
 
-    override var intrinsicContentSize: CGSize {
-        return Appearance.size
-    }
+    override var intrinsicContentSize: CGSize { Appearance.size }
 
     deinit {
         NotificationCenter.default.removeObserver(self)

@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: NewStepViewControllerProtocol: class -
 
-protocol NewStepViewControllerProtocol: class {
+protocol NewStepViewControllerProtocol: AnyObject {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
@@ -300,9 +300,9 @@ extension NewStepViewController: NewStepViewDelegate {
         }
 
         // Check if the request is a navigation inside a lesson
-        if url.absoluteString.range(of: "\(viewModel.lessonID)/step/") != nil {
+        if url.absoluteString.contains("\(viewModel.lessonID)/step/") {
             let components = url.pathComponents
-            if let index = components.index(of: "step") {
+            if let index = components.firstIndex(of: "step") {
                 if index + 1 < components.count {
                     let urlStepIndexString = components[index + 1]
                     if let urlStepIndex = Int(urlStepIndexString) {

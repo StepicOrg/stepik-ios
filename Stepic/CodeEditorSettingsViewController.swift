@@ -118,7 +118,7 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
 
     func chooseEditorTheme(current: String) {
         guard let highlightr = self.previewView.highlightr,
-              let currentThemeIndex = highlightr.availableThemes().index(of: current) else {
+              let currentThemeIndex = highlightr.availableThemes().firstIndex(of: current) else {
             return
         }
 
@@ -139,7 +139,7 @@ extension CodeEditorSettingsViewController: CodeEditorSettingsView {
     func chooseFontSize(current: Int) {
         let availableSizes = (10...23).map { Int($0) }
 
-        guard let currentSizeIndex = availableSizes.index(of: current) else {
+        guard let currentSizeIndex = availableSizes.firstIndex(of: current) else {
             return
         }
 
@@ -172,7 +172,7 @@ extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
         let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName })).sorted()
 
-        guard let currentLanguageIndex = availableLanguages.index(of: self.previewLanguage.humanReadableName) else {
+        guard let currentLanguageIndex = availableLanguages.firstIndex(of: self.previewLanguage.humanReadableName) else {
             return
         }
 

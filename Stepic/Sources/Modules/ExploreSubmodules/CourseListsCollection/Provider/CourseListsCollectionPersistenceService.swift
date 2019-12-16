@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListsCollectionPersistenceServiceProtocol: class {
+protocol CourseListsCollectionPersistenceServiceProtocol: AnyObject {
     func fetch(forLanguage language: ContentLanguage) -> Promise<[CourseListModel]>
     func update(courseLists: [CourseListModel], forLanguage language: ContentLanguage)
 }
@@ -27,7 +27,7 @@ final class CourseListsCollectionPersistenceService: CourseListsCollectionPersis
     }
 
     private func getKey(forLanguage language: ContentLanguage) -> String {
-        return "ListIds_\(language.languageString)"
+        "ListIds_\(language.languageString)"
     }
 
     enum Error: Swift.Error {

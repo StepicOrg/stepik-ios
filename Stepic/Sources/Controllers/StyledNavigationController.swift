@@ -49,7 +49,7 @@ class StyledNavigationController: UINavigationController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.statusBarStyle
+        self.statusBarStyle
     }
 
     private var statusBarStyle = StyledNavigationController.Appearance.statusBarStyle {
@@ -304,7 +304,7 @@ class StyledNavigationController: UINavigationController {
     }
 
     private func normalizeAlphaValue(_ alpha: CGFloat) -> CGFloat {
-        return max(0.0, min(1.0, alpha))
+        max(0.0, min(1.0, alpha))
     }
 
     private func getNavigationBarAppearance(for viewController: UIViewController) -> NavigationBarAppearanceState {
@@ -513,7 +513,7 @@ extension StyledNavigationController: UINavigationControllerDelegate {
 
 // MARK: - Default appearance protocol
 
-protocol StyledNavigationControllerPresentable: class {
+protocol StyledNavigationControllerPresentable: AnyObject {
     /// Appearance for navigation bar, status bar, etc when controller first time presented
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState { get }
     /// Determine whether controller should store appearance state and restore it when return back
@@ -522,17 +522,15 @@ protocol StyledNavigationControllerPresentable: class {
 
 extension StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return StyledNavigationController.NavigationBarAppearanceState()
+        StyledNavigationController.NavigationBarAppearanceState()
     }
 
-    var shouldSaveAppearanceState: Bool {
-        return true
-    }
+    var shouldSaveAppearanceState: Bool { true }
 }
 
 // MARK: - Color transition helper
 
-final class ColorTransitionHelper {
+enum ColorTransitionHelper {
     static func makeTransitionColor(
         from sourceColor: UIColor,
         to targetColor: UIColor,

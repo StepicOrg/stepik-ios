@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewFreeAnswerQuizViewDelegate: class {
+protocol NewFreeAnswerQuizViewDelegate: AnyObject {
     func newFreeAnswerQuizView(_ view: NewFreeAnswerQuizView, didUpdate text: String)
 }
 
@@ -74,7 +74,7 @@ final class NewFreeAnswerQuizView: UIView {
 
     var isTextViewEnabled: Bool {
         get {
-            return self.textView.isEditable
+             self.textView.isEditable
         }
         set {
             self.textView.isEditable = newValue

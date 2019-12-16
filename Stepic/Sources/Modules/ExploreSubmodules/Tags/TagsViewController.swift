@@ -1,6 +1,6 @@
 import UIKit
 
-protocol TagsViewControllerProtocol: class {
+protocol TagsViewControllerProtocol: AnyObject {
     func displayTags(viewModel: Tags.TagsLoad.ViewModel)
 }
 

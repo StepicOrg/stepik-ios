@@ -17,7 +17,7 @@ extension CodeTemplate {
     @NSManaged var managedOptions: StepOptions?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "CodeTemplate", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CodeTemplate", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -26,7 +26,7 @@ extension CodeTemplate {
 
     var languageString: String {
         get {
-            return managedLanguage ?? ""
+             managedLanguage ?? ""
         }
         set(value) {
             managedLanguage = value
@@ -35,7 +35,7 @@ extension CodeTemplate {
 
     var templateString: String {
         get {
-            return managedTemplateString ?? ""
+             managedTemplateString ?? ""
         }
         set(value) {
             managedTemplateString = value
@@ -44,7 +44,7 @@ extension CodeTemplate {
 
     var isUserGenerated: Bool {
         get {
-            return managedIsUserGenerated?.boolValue ?? true
+             managedIsUserGenerated?.boolValue ?? true
         }
         set(value) {
             managedIsUserGenerated = value as NSNumber?

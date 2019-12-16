@@ -22,6 +22,9 @@ final class FreeAnswerReply: NSObject, Reply {
     }
 
     var dictValue: [String: Any] {
-        return ["text": text as NSObject, "attachments": []]
+        [
+            "text": text as NSObject,
+            "attachments": []
+        ]
     }
 }

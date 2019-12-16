@@ -18,7 +18,7 @@ final class AuthInfo: NSObject {
 
     private let defaults = UserDefaults.standard
 
-    private override init() {
+    override private init() {
         super.init()
 
         print("initializing AuthInfo with userId \(String(describing: userId))")
@@ -105,13 +105,9 @@ final class AuthInfo: NSObject {
         }
     }
 
-    var isAuthorized: Bool {
-        return token != nil
-    }
+    var isAuthorized: Bool { self.token != nil }
 
-    var hasUser: Bool {
-        return user != nil
-    }
+    var hasUser: Bool { self.user != nil }
 
     var needsToRefreshToken: Bool {
         //TODO: Fix this

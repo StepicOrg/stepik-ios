@@ -41,7 +41,7 @@ final class CourseInfoTabSyllabusSectionDeadlinesView: UIView {
     }()
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: self.scrollView.frame.height)
+        CGSize(width: UIView.noIntrinsicMetric, height: self.scrollView.frame.height)
     }
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
