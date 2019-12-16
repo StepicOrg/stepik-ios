@@ -3,7 +3,6 @@ import UIKit
 
 // MARK: Appearance -
 
-// swiftlint:disable file_length
 extension DiscussionsCellView {
     struct Appearance {
         let avatarImageViewInsets = LayoutInsets(top: 16, left: 16)

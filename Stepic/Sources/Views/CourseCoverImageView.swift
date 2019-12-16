@@ -3,7 +3,7 @@ import UIKit
 
 extension CourseCoverImageView {
     struct Appearance {
-        var placeholderImage: UIImage = #imageLiteral(resourceName: "lesson_cover_50")
+        var placeholderImage = UIImage(named: "lesson_cover_50")
         var imageFadeInDuration: TimeInterval = 0.15
     }
 }

@@ -532,7 +532,7 @@ extension StyledNavigationControllerPresentable {
 
 // MARK: - Color transition helper
 
-final class ColorTransitionHelper {
+enum ColorTransitionHelper {
     static func makeTransitionColor(
         from sourceColor: UIColor,
         to targetColor: UIColor,

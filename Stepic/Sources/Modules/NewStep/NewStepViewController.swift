@@ -300,7 +300,7 @@ extension NewStepViewController: NewStepViewDelegate {
         }
 
         // Check if the request is a navigation inside a lesson
-        if url.absoluteString.range(of: "\(viewModel.lessonID)/step/") != nil {
+        if url.absoluteString.contains("\(viewModel.lessonID)/step/") {
             let components = url.pathComponents
             if let index = components.firstIndex(of: "step") {
                 if index + 1 < components.count {

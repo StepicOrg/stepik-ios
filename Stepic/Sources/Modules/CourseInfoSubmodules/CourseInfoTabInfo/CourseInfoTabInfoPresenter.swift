@@ -67,8 +67,8 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         if authors.isEmpty {
             return ""
         } else {
-            var authorString = authors.reduce("") { result, user in
-                result + "\(user.firstName) \(user.lastName), "
+            var authorString = authors.reduce(into: "") { result, user in
+                result += "\(user.firstName) \(user.lastName), "
             }.trimmingCharacters(in: .whitespaces)
             authorString.removeLast()
 

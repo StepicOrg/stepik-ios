@@ -52,8 +52,7 @@ final class SettingsTableView: UIView {
         // Create input groups for each input type
         self.inputCellGroups.removeAll()
         let flattenInputCellGroups: [String] = viewModel.sections
-            .map { $0.cells }
-            .reduce([], +)
+            .flatMap { $0.cells }
             .compactMap { cell in
                 if case .input(let options) = cell.type {
                     return options.inputGroup

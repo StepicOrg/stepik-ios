@@ -49,12 +49,10 @@ final class RateAppViewController: UIViewController {
                 rightButton.titleLabel?.text = NSLocalizedString("AppStore", comment: "")
                 rightButton.setTitle(NSLocalizedString("AppStore", comment: ""), for: .normal)
                 rightButton.setTitleColor(UIColor.stepicGreen, for: .normal)
-                break
             case .email:
                 rightButton.titleLabel?.text = NSLocalizedString("Email", comment: "")
                 rightButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
                 rightButton.setTitleColor(UIColor.errorRed, for: .normal)
-                break
             }
         }
     }
@@ -157,10 +155,8 @@ final class RateAppViewController: UIViewController {
         switch buttonState! {
         case .appStore:
             AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Positive.later, parameters: defaultAnalyticsParams)
-            break
         case .email:
             AnalyticsReporter.reportEvent(AnalyticsEvents.Rate.Negative.later, parameters: defaultAnalyticsParams)
-            break
         }
     }
 
@@ -172,10 +168,8 @@ final class RateAppViewController: UIViewController {
         switch buttonState! {
         case .appStore:
             showAppStore()
-            break
         case .email:
             showEmail()
-            break
         }
     }
 
@@ -213,6 +207,8 @@ extension RateAppViewController: MFMailComposeViewControllerDelegate {
                 AnalyticsEvents.Rate.Negative.Email.success,
                 parameters: defaultAnalyticsParams
             )
+        @unknown default:
+            break
         }
 
         controller.dismiss(

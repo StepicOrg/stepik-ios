@@ -9,8 +9,8 @@
 import Foundation
 
 final class ApplicationInfo {
-    struct Path {
-        struct URL {
+    enum Path {
+        enum URL {
             static let appId = "url.appId"
             static let scheme = "url.scheme"
             static let api = "url.api"
@@ -19,52 +19,52 @@ final class ApplicationInfo {
             static let version = "url.version"
             static let adaptiveRating = "url.adaptiveRating"
         }
-        struct Cookie {
+        enum Cookie {
             static let prefix = "cookie.prefix"
         }
-        struct Feature {
+        enum Feature {
             static let courseUnenrollment = "feature.courseUnenrollment"
             static let inAppUpdates = "feature.inAppUpdates"
             static let streaks = "feature.streaks"
             static let notifications = "feature.notifications"
         }
-        struct Adaptive {
+        enum Adaptive {
             static let supportedCourses = "adaptive.supportedCourses"
             static let isAdaptive = "adaptive.isAdaptive"
             static let mainColor = "adaptive.mainColor"
             static let coursesInfoURL = "adaptive.coursesInfoURL"
         }
-        struct RateApp {
+        enum RateApp {
             static let submissionsThreshold = "rateApp.submissionsThreshold"
             static let appStoreLink = "rateApp.appStoreLink"
         }
-        struct SocialProviders {
+        enum SocialProviders {
             static let vkId = "socialProviders.vk"
             static let facebookId = "socialProviders.facebook"
         }
-        struct AuthType {
+        enum AuthType {
             static let social = "social"
             static let password = "password"
-            struct Social {
+            enum Social {
                 static let id = "social.id"
                 static let secret = "social.secret"
                 static let redirect = "social.redirect_uri"
             }
-            struct Password {
+            enum Password {
                 static let id = "password.id"
                 static let secret = "password.secret"
                 static let redirect = "password.redirect_uri"
             }
         }
-        struct Colors {
+        enum Colors {
             static let mainText = "colors.mainText"
             static let mainDark = "colors.mainDark"
             static let mainGreen = "colors.mainGreen"
         }
-        struct Modules {
+        enum Modules {
             static let tabs = "modules.tabs"
         }
-        struct Versions {
+        enum Versions {
             static let stories = "versions.stories"
         }
     }

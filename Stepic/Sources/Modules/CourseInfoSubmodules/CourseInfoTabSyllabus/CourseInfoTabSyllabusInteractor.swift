@@ -316,7 +316,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
 
     private func forceLoadAllSectionsIfNeeded() -> Promise<Void> {
         let allSections = Array(self.currentSections.values)
-        let allUnits = allSections.map { $0.unitsArray }.reduce([], +)
+        let allUnits = allSections.flatMap { $0.unitsArray }
         let availableUnits = self.currentUnits.values.compactMap { $0?.id }
 
         return Promise { seal in
