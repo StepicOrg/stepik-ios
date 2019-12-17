@@ -4,7 +4,7 @@ PODS:
     - SwiftyGif
   - Alamofire (4.9.1)
   - Amplitude-iOS (4.9.3)
-  - Atributika (4.9.0)
+  - Atributika (4.9.1)
   - AutoInsetter (1.8.0)
   - BEMCheckBox (1.4.1)
   - Branch (0.31.0):
@@ -191,7 +191,7 @@ DEPENDENCIES:
   - Agrume (= 5.3.7)
   - Alamofire (= 4.9.1)
   - Amplitude-iOS (= 4.9.3)
-  - Atributika (= 4.9.0)
+  - Atributika (= 4.9.1)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 0.31.0)
   - Charts (= 3.4.0)
@@ -322,7 +322,7 @@ SPEC CHECKSUMS:
   Agrume: 365b69b37f5e3e527b164dbb782a03c710c7b781
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
-  Atributika: 0127bf02cd86a16c3f29581627b2276af7096747
+  Atributika: 614101ca8dd2f5a05e465a3c8c10092602d6e804
   AutoInsetter: 0b90ca74e36561c340129045a3722c51a0b15c58
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
@@ -385,6 +385,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: edb00e8af2903290e142ba4c488adf8d394e828a
 
-PODFILE CHECKSUM: ef3304a3bbcea7d78474fe528d02661b67bd113f
+PODFILE CHECKSUM: be2e42549cbc5230554f7d18af82e2d705105ed2
 
 COCOAPODS: 1.8.4
