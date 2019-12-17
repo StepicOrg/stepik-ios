@@ -21,7 +21,7 @@ struct VideoDownloadingServiceEvent {
     }
 }
 
-protocol VideoDownloadingServiceProtocol: class {
+protocol VideoDownloadingServiceProtocol: AnyObject {
     /// Subscribe on events about downloads
     func subscribeOnEvents(handler: @escaping VideoDownloadingServiceEventHandler)
     /// Download video
@@ -125,7 +125,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     }
 
     func isTaskActive(videoID: Video.IdType) -> Bool {
-        return self.tasksForVideos.keys.contains(videoID)
+        self.tasksForVideos.keys.contains(videoID)
     }
 
     // MARK: Private methods

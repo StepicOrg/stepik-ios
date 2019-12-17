@@ -9,7 +9,7 @@
 import UIKit
 
 /// The centralized point for registration with Apple Push Notifications service (APNs).
-protocol NotificationsRegistrationServiceProtocol: class {
+protocol NotificationsRegistrationServiceProtocol: AnyObject {
     /// A set of methods that are called by the instance of the
     /// `NotificationsRegistrationServiceProtocol` object in response to lifetime events.
     var delegate: NotificationsRegistrationServiceDelegate? { get set }
@@ -90,7 +90,7 @@ protocol NotificationsRegistrationPresentationServiceProtocol {
 
 /// The delegate of a `NotificationsRegistrationServiceProtocol` object must adopt the `NotificationsRegistrationServiceDelegate` protocol.
 /// Methods of the protocol allow the delegate to manage presenting alerts and respond to the lifetime events.
-protocol NotificationsRegistrationServiceDelegate: class {
+protocol NotificationsRegistrationServiceDelegate: AnyObject {
     /// Asks the delegate if the alert should be shown.
     ///
     /// - Parameters:
@@ -135,7 +135,7 @@ extension NotificationsRegistrationServiceDelegate {
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) -> Bool {
-        return true
+        true
     }
 
     func notificationsRegistrationService(

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol NewCodeQuizFullscreenProviderProtocol: class {
+protocol NewCodeQuizFullscreenProviderProtocol: AnyObject {
     func fetchCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserOrCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
@@ -19,7 +19,7 @@ final class NewCodeQuizFullscreenProvider: NewCodeQuizFullscreenProviderProtocol
     }
 
     func fetchCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?> {
-        return self.stepOptionsPersistenceService.fetch(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
+        self.stepOptionsPersistenceService.fetch(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
             if let stepOptions = stepOptions {
                 return .value(stepOptions.template(language: language, userGenerated: false))
             } else {
@@ -29,7 +29,7 @@ final class NewCodeQuizFullscreenProvider: NewCodeQuizFullscreenProviderProtocol
     }
 
     func fetchUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?> {
-        return self.stepOptionsPersistenceService.fetch(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
+        self.stepOptionsPersistenceService.fetch(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
             if let stepOptions = stepOptions {
                 return .value(stepOptions.template(language: language, userGenerated: true))
             } else {
@@ -39,7 +39,7 @@ final class NewCodeQuizFullscreenProvider: NewCodeQuizFullscreenProviderProtocol
     }
 
     func fetchUserOrCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?> {
-        return Promise { seal in
+        Promise { seal in
             when(
                 fulfilled: self.fetchUserCodeTemplate(by: stepID, language: language),
                 self.fetchCodeTemplate(by: stepID, language: language)
@@ -57,7 +57,7 @@ final class NewCodeQuizFullscreenProvider: NewCodeQuizFullscreenProviderProtocol
     }
 
     func deleteUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<Void> {
-        return self.stepOptionsPersistenceService.fetch(by: stepID).done { stepOptions in
+        self.stepOptionsPersistenceService.fetch(by: stepID).done { stepOptions in
             guard let userTemplate = stepOptions?.template(language: language, userGenerated: true) else {
                 return
             }

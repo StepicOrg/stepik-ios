@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol DiscussionProxiesNetworkServiceProtocol: class {
+protocol DiscussionProxiesNetworkServiceProtocol: AnyObject {
     func fetch(id: DiscussionProxy.IdType) -> Promise<DiscussionProxy>
 }
 
@@ -13,7 +13,7 @@ final class DiscussionProxiesNetworkService: DiscussionProxiesNetworkServiceProt
     }
 
     func fetch(id: DiscussionProxy.IdType) -> Promise<DiscussionProxy> {
-        return Promise { seal in
+        Promise { seal in
             self.discussionProxiesAPI.retrieve(id: id).done { discussionProxy in
                 seal.fulfill(discussionProxy)
             }.catch { _ in

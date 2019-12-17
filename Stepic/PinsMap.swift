@@ -52,7 +52,7 @@ final class PinsMap {
         func shifted(firstWeekDay: Int) -> Month {
             var i = 0
             // Copy array
-            var weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
+            let weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
 
             for week in weeks {
                 weeks[i].allowedPins = week.allowedPins.shifted(by: 1 - firstWeekDay)
@@ -65,7 +65,7 @@ final class PinsMap {
         func filled(pins: [Int]) -> Month {
             var week = 0, day = 0, pin = 0
             // Copy array
-            var weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
+            let weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
 
             while week < weeks.count {
                 if weeks[week].allowedPins[day] && pin < pins.count {
@@ -87,7 +87,7 @@ final class PinsMap {
         func trimmed(daysCount: Int) -> Month {
             var week = 0, day = 0, days = daysCount
             // Copy array
-            var weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
+            let weeks = Array(self.weeks.map { Week(allowedPins: $0.allowedPins, pins: $0.pins) })
 
             while week < weeks.count {
                 if days > 0 {

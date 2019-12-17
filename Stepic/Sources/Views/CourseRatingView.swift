@@ -2,7 +2,7 @@ import Nuke
 import SnapKit
 import UIKit
 
-protocol CourseRatingViewDelegate: class {
+protocol CourseRatingViewDelegate: AnyObject {
     func courseRatingView(_ view: CourseRatingView, didSelectStarAtIndex index: Int)
 }
 

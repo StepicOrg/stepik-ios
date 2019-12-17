@@ -78,9 +78,7 @@ final class SegmentedProgressView: UIView {
         self.progressesStackView.layoutIfNeeded()
     }
 
-    private func isInBounds(index: Int) -> Bool {
-        return index >= 0 && index < self.segmentsCount
-    }
+    private func isInBounds(index: Int) -> Bool { index >= 0 && index < self.segmentsCount }
 
     func animate(duration: TimeInterval, segment: Int) {
         guard self.isInBounds(index: segment) else {

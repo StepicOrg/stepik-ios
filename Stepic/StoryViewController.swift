@@ -158,13 +158,9 @@ final class StoryViewController: UIViewController {
 }
 
 extension StoryViewController: StoryViewProtocol {
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
 
-    override var shouldAutorotate: Bool {
-        return false
-    }
+    override var shouldAutorotate: Bool { false }
 
     func animate(view: UIView & UIStoryPartViewProtocol) {
         if view.isDescendant(of: self.partsContainerView) {

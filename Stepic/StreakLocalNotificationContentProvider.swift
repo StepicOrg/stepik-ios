@@ -30,29 +30,21 @@ final class StreakLocalNotificationContentProvider: LocalNotificationContentProv
     var title = ""
 
     var body: String {
-        return NSString.localizedUserNotificationString(forKey: "StreakNotificationAlertBody", arguments: nil)
+        NSString.localizedUserNotificationString(forKey: "StreakNotificationAlertBody", arguments: nil)
     }
 
     var userInfo: [AnyHashable: Any] {
-        return [
-            NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.streak.rawValue
-        ]
+        [NotificationsService.PayloadKey.type.rawValue: NotificationsService.NotificationType.streak.rawValue]
     }
 
-    var identifier: String {
-        return "\(NotificationsService.NotificationType.streak.rawValue)_local_notification"
-    }
+    var identifier: String { "\(NotificationsService.NotificationType.streak.rawValue)_local_notification" }
 
-    var soundName: String {
-        return "default_sound.wav"
-    }
+    var soundName: String { "default_sound.wav" }
 
-    var sound: UNNotificationSound {
-        return UNNotificationSound(named: UNNotificationSoundName(self.soundName))
-    }
+    var sound: UNNotificationSound { UNNotificationSound(named: UNNotificationSoundName(self.soundName)) }
 
     var trigger: UNNotificationTrigger? {
-        return UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: true)
+        UNCalendarNotificationTrigger(dateMatching: self.dateComponents, repeats: true)
     }
 
     init(UTCStartHour: Int, calendar: Calendar = Calendar(identifier: .gregorian)) {

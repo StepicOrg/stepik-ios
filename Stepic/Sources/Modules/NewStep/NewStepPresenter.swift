@@ -78,7 +78,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     // MARK: Private API
 
     private func makeViewModel(step: Step, fontSize: FontSize) -> Guarantee<NewStepViewModel> {
-        return Guarantee { seal in
+        Guarantee { seal in
             let contentType: NewStepViewModel.ContentType = {
                 switch step.block.type {
                 case .video:

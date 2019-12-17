@@ -1,11 +1,3 @@
-//
-//  CachedValue.swift
-//  stepik-stories
-//
-//  Created by Ostrenkiy on 03.08.2018.
-//  Copyright © 2018 Ostrenkiy. All rights reserved.
-//
-
 import Foundation
 
 final class CachedValue<T> {

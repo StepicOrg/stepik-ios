@@ -5,6 +5,7 @@ protocol ExploreViewControllerProtocol: BaseExploreViewControllerProtocol {
     func displayContent(viewModel: Explore.ContentLoad.ViewModel)
     func displayLanguageSwitchBlock(viewModel: Explore.LanguageSwitchAvailabilityCheck.ViewModel)
     func displayStoriesBlock(viewModel: Explore.StoriesVisibilityUpdate.ViewModel)
+    func displayStatusBarStyle(response: Explore.StatusBarStyleUpdate.ViewModel)
 }
 
 final class ExploreViewController: BaseExploreViewController {
@@ -217,7 +218,7 @@ final class ExploreViewController: BaseExploreViewController {
 
 extension Explore.Submodule: SubmoduleType {
     var position: Int {
-        guard let position = ExploreViewController.submodulesOrder.index(of: self) else {
+        guard let position = ExploreViewController.submodulesOrder.firstIndex(of: self) else {
             fatalError("Given submodule type has unknown position")
         }
         return position
@@ -250,6 +251,12 @@ extension ExploreViewController: ExploreViewControllerProtocol {
         self.isStoriesHidden = true
         if let storiesBlock = self.getSubmodule(type: Explore.Submodule.stories) {
             self.removeSubmodule(storiesBlock)
+        }
+    }
+
+    func displayStatusBarStyle(response: Explore.StatusBarStyleUpdate.ViewModel) {
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeStatusBarStyle(response.statusBarStyle, sender: self)
         }
     }
 }

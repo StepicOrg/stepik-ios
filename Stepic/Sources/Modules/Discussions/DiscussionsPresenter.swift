@@ -1,3 +1,4 @@
+import Kanna
 import UIKit
 
 protocol DiscussionsPresenterProtocol {
@@ -223,6 +224,16 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             return nil
         }()
 
+        let strippedText: String = {
+            do {
+                let htmlDocument = try Kanna.HTML(html: comment.text, encoding: .utf8)
+                return htmlDocument.css("*").first?.text ?? comment.text
+            } catch {
+                return comment.text
+            }
+        }()
+        let strippedAndTrimmedText = strippedText.trimmingCharacters(in: .whitespacesAndNewlines)
+
         return DiscussionsCommentViewModel(
             id: comment.id,
             avatarImageURL: avatarImageURL,
@@ -231,7 +242,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             isPinned: comment.isPinned,
             isSelected: isSelected,
             username: username,
-            rawText: comment.text,
+            strippedText: strippedAndTrimmedText,
             processedText: text,
             isWebViewSupportNeeded: isWebViewSupportNeeded,
             formattedDate: formattedDate,
@@ -273,14 +284,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         discussionProxy: DiscussionProxy,
         by sortType: Discussions.SortType
     ) -> [Comment] {
-        return discussions.reordered(
+        discussions.reordered(
             order: self.getDiscussionsIDs(discussionProxy: discussionProxy, sortType: sortType),
             transform: { $0.id }
         )
     }
 
     private func sortedReplies(_ replies: [Comment], parentDiscussion discussion: Comment) -> [Comment] {
-        return replies
+        replies
             .reordered(order: discussion.repliesIDs, transform: { $0.id })
             .sorted { $0.time.compare($1.time) == .orderedAscending }
     }

@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: DownloadsTableViewDataSourceDelegate: class -
 
-protocol DownloadsTableViewDataSourceDelegate: class {
+protocol DownloadsTableViewDataSourceDelegate: AnyObject {
     func downloadsTableViewDataSource(
         _ dataSource: DownloadsTableViewDataSource,
         didDelete viewModel: DownloadsItemViewModel,
@@ -31,7 +31,7 @@ final class DownloadsTableViewDataSource: NSObject {
 
 extension DownloadsTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModels.count
+        self.viewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

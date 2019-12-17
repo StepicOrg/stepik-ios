@@ -1,6 +1,6 @@
 import UIKit
 
-protocol CourseListPresenterProtocol: class {
+protocol CourseListPresenterProtocol: AnyObject {
     func presentCourses(response: CourseList.CoursesLoad.Response)
     func presentNextCourses(response: CourseList.NextCoursesLoad.Response)
     func presentWaitingState(response: CourseList.BlockingWaitingIndicatorUpdate.Response)

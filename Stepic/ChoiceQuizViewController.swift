@@ -20,7 +20,7 @@ final class ChoiceQuizViewController: QuizViewController {
     var cellHeights: [CGFloat?] = []
 
     var cellWidth: CGFloat {
-        return tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
+        tableView.bounds.width - view.safeAreaInsets.left - view.safeAreaInsets.right
     }
 
     override func viewDidLoad() {
@@ -54,9 +54,7 @@ final class ChoiceQuizViewController: QuizViewController {
 
     var choices: [Bool] = []
 
-    var optionsCount: Int {
-        return dataset?.options.count ?? 0
-    }
+    var optionsCount: Int { dataset?.options.count ?? 0 }
 
     override func display(dataset: Dataset) {
         guard let dataset = dataset as? ChoiceDataset else {
@@ -175,9 +173,7 @@ extension ChoiceQuizViewController: BEMCheckBoxDelegate {
 }
 
 extension ChoiceQuizViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataset != nil ? 1 : 0
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { dataset != nil ? 1 : 0 }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let dataset = dataset {

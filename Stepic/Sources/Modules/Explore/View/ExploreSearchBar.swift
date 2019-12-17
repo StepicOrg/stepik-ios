@@ -22,8 +22,9 @@ final class ExploreSearchBar: UISearchBar {
         }
     }
 
-    private var searchTextField: UITextField? {
-        return self.value(forKey: "searchField") as? UITextField
+    // TODO: iOS 13 has `searchTextField` property, take a look.
+    private var searchField: UITextField? {
+        self.value(forKey: "searchField") as? UITextField
     }
 
     override init(frame: CGRect) {
@@ -32,10 +33,10 @@ final class ExploreSearchBar: UISearchBar {
 
         self.isTranslucent = false
 
-        self.searchTextField?.backgroundColor = .clear
-        self.searchTextField?.textColor = Appearance.textColor
+        self.searchField?.backgroundColor = .clear
+        self.searchField?.textColor = Appearance.textColor
         self.placeholder = Appearance.placeholderText
-        self.searchTextField?.rightViewMode = .whileEditing
+        self.searchField?.rightViewMode = .whileEditing
 
         self.applySystemFixes()
     }

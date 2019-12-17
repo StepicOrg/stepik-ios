@@ -18,7 +18,7 @@ extension CourseListModel {
     @NSManaged var managedCoursesArray: NSObject?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -30,7 +30,7 @@ extension CourseListModel {
             self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
     }
 
@@ -39,7 +39,7 @@ extension CourseListModel {
             managedTitle = value
         }
         get {
-            return managedTitle ?? ""
+             managedTitle ?? ""
         }
     }
 
@@ -48,7 +48,7 @@ extension CourseListModel {
             managedDescription = value
         }
         get {
-            return managedDescription ?? ""
+             managedDescription ?? ""
         }
     }
 
@@ -57,7 +57,7 @@ extension CourseListModel {
             managedLanguage = value
         }
         get {
-            return managedLanguage ?? ""
+             managedLanguage ?? ""
         }
     }
 
@@ -66,7 +66,7 @@ extension CourseListModel {
             self.managedPosition = value as NSNumber?
         }
         get {
-            return managedPosition?.intValue ?? 0
+             managedPosition?.intValue ?? 0
         }
     }
 
@@ -75,7 +75,7 @@ extension CourseListModel {
             self.managedCoursesArray = value as NSObject?
         }
         get {
-            return (self.managedCoursesArray as? [Int]) ?? []
+             (self.managedCoursesArray as? [Int]) ?? []
         }
     }
 }

@@ -25,7 +25,7 @@ extension EditStepView {
 
 // MARK: - EditStepViewDelegate: class -
 
-protocol EditStepViewDelegate: class {
+protocol EditStepViewDelegate: AnyObject {
     func editStepView(_ view: EditStepView, didChangeText text: String)
 }
 

@@ -29,7 +29,7 @@ final class AudioManager: NSObject {
         }
     }
 
-    private override init() {
+    override private init() {
         super.init()
     }
 

@@ -22,7 +22,7 @@ extension Notification {
     @NSManaged public var managedHtmlText: String?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Notification", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Notification", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -31,7 +31,7 @@ extension Notification {
 
     var id: Int {
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
         set {
             managedId = newValue as NSNumber?
@@ -40,7 +40,7 @@ extension Notification {
 
     var htmlText: String? {
         get {
-            return managedHtmlText
+             managedHtmlText
         }
         set {
             managedHtmlText = newValue
@@ -49,7 +49,7 @@ extension Notification {
 
     var time: Date? {
         get {
-            return managedTime
+             managedTime
         }
         set {
             managedTime = newValue
@@ -70,7 +70,7 @@ extension Notification {
 
     var isMuted: Bool {
         get {
-            return managedIsMuted?.boolValue ?? false
+             managedIsMuted?.boolValue ?? false
         }
         set {
             managedIsMuted = newValue as NSNumber?
@@ -79,7 +79,7 @@ extension Notification {
 
     var isFavorite: Bool {
         get {
-            return managedIsFavorite?.boolValue ?? false
+             managedIsFavorite?.boolValue ?? false
         }
         set {
             managedIsFavorite = newValue as NSNumber?
@@ -113,7 +113,7 @@ extension Notification {
     // Maybe it will be helpful in the future
     var priority: String? {
         get {
-            return managedPriority
+             managedPriority
         }
         set {
             managedPriority = newValue
@@ -123,7 +123,7 @@ extension Notification {
     // Maybe it will be helpful in the future
     var level: String? {
         get {
-            return managedLevel
+             managedLevel
         }
         set {
             managedLevel = newValue

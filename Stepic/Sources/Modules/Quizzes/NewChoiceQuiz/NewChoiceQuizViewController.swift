@@ -1,6 +1,6 @@
 import UIKit
 
-protocol NewChoiceQuizViewControllerProtocol: class {
+protocol NewChoiceQuizViewControllerProtocol: AnyObject {
     func displayReply(viewModel: NewChoiceQuiz.ReplyLoad.ViewModel)
 }
 

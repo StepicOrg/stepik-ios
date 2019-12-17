@@ -11,10 +11,15 @@ import Foundation
 import PromiseKit
 
 final class StoryTemplatesAPI: APIEndpoint {
-    override var name: String { return "story-templates" }
+    override var name: String { "story-templates" }
 
-    func retrieve(isPublished: Bool?, language: ContentLanguage, maxVersion: Int, page: Int = 1) -> Promise<([Story], Meta)> {
-        return Promise { seal in
+    func retrieve(
+        isPublished: Bool?,
+        language: ContentLanguage,
+        maxVersion: Int,
+        page: Int = 1
+    ) -> Promise<([Story], Meta)> {
+        Promise { seal in
             var params: Parameters = [
                 "page": page,
                 "language": language.languageString,
@@ -25,12 +30,12 @@ final class StoryTemplatesAPI: APIEndpoint {
                 params["is_published"] = isPublished ? "true" : "false"
             }
 
-            retrieve.request(
-                requestEndpoint: name,
-                paramName: name,
+            self.retrieve.request(
+                requestEndpoint: self.name,
+                paramName: self.name,
                 params: params,
                 updatingObjects: [],
-                withManager: manager
+                withManager: self.manager
             ).done { stories, meta in
                 seal.fulfill((stories, meta))
             }.catch { error in

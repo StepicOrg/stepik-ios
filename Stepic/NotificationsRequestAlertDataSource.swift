@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol NotificationsRequestAlertDataSource: class {
+protocol NotificationsRequestAlertDataSource: AnyObject {
     var positiveAction: (() -> Void)? { get set }
     var negativeAction: (() -> Void)? { get set }
 

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol StepsNetworkServiceProtocol: class {
+protocol StepsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Step.IdType]) -> Promise<[Step]>
 }
 
@@ -13,7 +13,7 @@ final class StepsNetworkService: StepsNetworkServiceProtocol {
     }
 
     func fetch(ids: [Step.IdType]) -> Promise<[Step]> {
-        return Promise { seal in
+        Promise { seal in
             self.stepsAPI.retrieve(ids: ids).done { steps in
                 let steps = steps.reordered(order: ids, transform: { $0.id })
                 seal.fulfill(steps)

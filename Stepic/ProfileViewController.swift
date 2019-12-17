@@ -70,8 +70,14 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             self?.presenter?.refresh(shouldReload: true)
         }), for: .connectionError)
 
+        let settingsImage: UIImage? = {
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "gear")
+            }
+            return UIImage(named: "icon-settings-profile")
+        }()
         self.settingsButton = UIBarButtonItem(
-            image: UIImage(named: "icon-settings-profile").require(),
+            image: settingsImage,
             style: .plain,
             target: self,
             action: #selector(self.settingsButtonClicked)
@@ -153,27 +159,29 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         self.menu = Menu(blocks: menuBlocks.compactMap { $0 })
     }
 
-    func manageBarItemControls(settingsIsHidden: Bool, profileEditIsAvailable: Bool, shareId: Int?) {
-        var items: [UIBarButtonItem] = []
-        if let settingsButton = settingsButton, !settingsIsHidden {
-            items.append(settingsButton)
+    func manageBarItemControls(isSettingsHidden: Bool, isEditProfileAvailable: Bool, shareID: Int?) {
+        var rightBarButtonItems = [UIBarButtonItem]()
+
+        if let settingsButton = self.settingsButton, !isSettingsHidden {
+            rightBarButtonItems.append(settingsButton)
         }
-        if let profileEditButton = profileEditButton, profileEditIsAvailable, !settingsIsHidden {
-            items.append(profileEditButton)
+        if let profileEditButton = self.profileEditButton, isEditProfileAvailable, !isSettingsHidden {
+            rightBarButtonItems.append(profileEditButton)
         }
 
-        if let shareButton = shareButton, let id = shareId {
-            sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(id)"
-            if settingsIsHidden {
-                navigationItem.rightBarButtonItem = shareButton
+        if let shareButton = self.shareButton, let shareID = shareID {
+            self.sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(shareID)"
+            if isSettingsHidden {
+                self.navigationItem.rightBarButtonItem = shareButton
             } else {
-                navigationItem.leftBarButtonItem = shareButton
+                self.navigationItem.leftBarButtonItem = shareButton
             }
         } else {
-            sharingURL = nil
+            self.navigationItem.leftBarButtonItem = nil
+            self.sharingURL = nil
         }
 
-        navigationItem.rightBarButtonItems = items
+        self.navigationItem.rightBarButtonItems = rightBarButtonItems
     }
 
     func getView(for block: ProfileMenuBlock) -> Any? {
@@ -232,14 +240,34 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
     }
 
-    @objc func profileEditButtonPressed() {
+    @objc
+    private func profileEditButtonPressed() {
         guard let profile = self.profile else {
             return
         }
 
-        let assembly = ProfileEditAssembly(profile: profile)
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
+        let assembly = ProfileEditAssembly(
+            profile: profile,
+            navigationBarAppearance: navigationBarAppearance
+        )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
-        self.present(module: controller)
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     @objc func shareButtonPressed() {

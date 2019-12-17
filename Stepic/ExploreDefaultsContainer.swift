@@ -14,7 +14,7 @@ final class ExploreDefaultsContainer {
 
     var shouldDisplayContentLanguageWidget: Bool {
         get {
-            return defaults.value(forKey: shouldDisplayContentLanguageWidgetKey) as? Bool ?? true
+             defaults.value(forKey: shouldDisplayContentLanguageWidgetKey) as? Bool ?? true
         }
         set {
             defaults.set(newValue, forKey: shouldDisplayContentLanguageWidgetKey)

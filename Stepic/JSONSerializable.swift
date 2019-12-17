@@ -25,9 +25,7 @@ protocol JSONSerializable {
 }
 
 extension JSONSerializable {
-    var json: JSON {
-        return []
-    }
+    var json: JSON { [] }
 
     func hasEqualId(json: JSON) -> Bool {
         if IdType.self == Int.self {

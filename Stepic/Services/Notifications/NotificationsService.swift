@@ -18,7 +18,7 @@ final class NotificationsService {
     private let deepLinkRoutingService: DeepLinkRoutingService
 
     private var isInForeground: Bool {
-        return UIApplication.shared.applicationState == .active
+        UIApplication.shared.applicationState == .active
     }
 
     init(
@@ -55,7 +55,7 @@ final class NotificationsService {
     }
 
     private func extractNotificationType(from userInfo: NotificationUserInfo?) -> String? {
-        return userInfo?[PayloadKey.type.rawValue] as? String
+        userInfo?[PayloadKey.type.rawValue] as? String
     }
 
     private func reportSessionStart(userInfo: NotificationUserInfo?) {
@@ -157,6 +157,8 @@ extension NotificationsService {
                     notificationType: notificationType
                 ).send()
             case .background:
+                break
+            @unknown default:
                 break
             }
         }
@@ -284,7 +286,7 @@ extension NotificationsService {
 
     private var lastActiveTimeInterval: TimeInterval {
         get {
-            return UserDefaults.standard.value(
+             UserDefaults.standard.value(
                 forKey: NotificationsService.lastActiveTimeIntervalKey
             ) as? TimeInterval ?? Date().timeIntervalSince1970
         }

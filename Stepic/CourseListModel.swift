@@ -32,9 +32,7 @@ final class CourseListModel: NSManagedObject, IDFetchable {
         initialize(json)
     }
 
-    var language: ContentLanguage {
-        return ContentLanguage(languageString: languageString)
-    }
+    var language: ContentLanguage { ContentLanguage(languageString: languageString) }
 
     static func recoverAsync(ids: [Int]) -> Guarantee<[CourseListModel]> {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CourseList")
@@ -82,6 +80,6 @@ final class CourseListModel: NSManagedObject, IDFetchable {
     }
 
     static func fetchAsync(ids: [CourseListModel.IdType]) -> Guarantee<[CourseListModel]> {
-        return DatabaseFetchService.fetchAsync(entityName: "CourseList", ids: ids)
+        DatabaseFetchService.fetchAsync(entityName: "CourseList", ids: ids)
     }
 }

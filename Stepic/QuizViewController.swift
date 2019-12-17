@@ -53,9 +53,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     private let submitTitle: String = NSLocalizedString("Submit", comment: "")
     private let tryAgainTitle: String = NSLocalizedString("TryAgain", comment: "")
-    var correctTitle: String {
-        return NSLocalizedString("Correct", comment: "")
-    }
+    var correctTitle: String { NSLocalizedString("Correct", comment: "") }
     private let wrongTitle: String = NSLocalizedString("Wrong", comment: "")
     private let peerReviewText: String = NSLocalizedString("PeerReviewText", comment: "")
 
@@ -110,7 +108,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     private func submissionsLeftLocalizable(count: Int) -> String {
         func triesLocalizableFor(count: Int) -> String {
-            switch (abs(count) % 10) {
+            switch abs(count) % 10 {
             case 1: return NSLocalizedString("triesLeft1", comment: "")
             case 2, 3, 4: return NSLocalizedString("triesLeft234", comment: "")
             default: return NSLocalizedString("triesLeft567890", comment: "")
@@ -395,9 +393,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         })
     }
 
-    var submissionAnalyticsParams: [String: Any]? {
-        return nil
-    }
+    var submissionAnalyticsParams: [String: Any]? { nil }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -473,13 +469,9 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }
     }
 
-    var needsToRefreshAttemptWhenWrong: Bool {
-        return true
-    }
+    var needsToRefreshAttemptWhenWrong: Bool { true }
 
-    func getReply() -> Reply? {
-        return nil
-    }
+    func getReply() -> Reply? { nil }
 }
 
 extension QuizViewController: UIWebViewDelegate {

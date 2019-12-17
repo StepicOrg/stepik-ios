@@ -20,7 +20,7 @@ final class FBSocialSDKProvider: NSObject, SocialSDKProvider {
     }
 
     func getAccessInfo() -> Promise<(token: String, email: String?)> {
-        return Promise { seal in
+        Promise { seal in
             let loginManager = LoginManager()
             loginManager.logIn(permissions: ["email"], from: nil, handler: { result, error in
                 if error != nil {

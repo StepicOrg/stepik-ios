@@ -38,7 +38,5 @@ final class StepikModelView: JSONSerializable {
         self.assignment = json["assignment"].int
     }
 
-    func hasEqualId(json: JSON) -> Bool {
-        return false
-    }
+    func hasEqualId(json: JSON) -> Bool { false }
 }

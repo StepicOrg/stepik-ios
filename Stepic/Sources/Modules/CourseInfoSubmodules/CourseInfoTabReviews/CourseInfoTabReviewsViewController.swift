@@ -1,7 +1,7 @@
 import SVProgressHUD
 import UIKit
 
-protocol CourseInfoTabReviewsViewControllerProtocol: class {
+protocol CourseInfoTabReviewsViewControllerProtocol: AnyObject {
     func displayCourseReviews(viewModel: CourseInfoTabReviews.ReviewsLoad.ViewModel)
     func displayNextCourseReviews(viewModel: CourseInfoTabReviews.NextReviewsLoad.ViewModel)
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel)
@@ -104,14 +104,30 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewController
     }
 
     func displayWriteCourseReview(viewModel: CourseInfoTabReviews.WriteCourseReviewPresentation.ViewModel) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    navigationBarAppearance: .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
         let assembly = WriteCourseReviewAssembly(
             courseID: viewModel.courseID,
             courseReview: viewModel.review,
+            navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? WriteCourseReviewOutputProtocol
         )
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
-        self.present(module: controller)
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     func displayReviewCreated(viewModel: CourseInfoTabReviews.ReviewCreated.ViewModel) {
@@ -166,7 +182,7 @@ extension CourseInfoTabReviewsViewController: CourseInfoTabReviewsViewDelegate {
         _ courseInfoTabReviewsView: CourseInfoTabReviewsView,
         willSelectRowAt indexPath: IndexPath
     ) -> Bool {
-        return self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
+        self.tableDataSource.viewModels[safe: indexPath.row]?.isCurrentUserReview ?? false
     }
 
     func courseInfoTabReviewsView(

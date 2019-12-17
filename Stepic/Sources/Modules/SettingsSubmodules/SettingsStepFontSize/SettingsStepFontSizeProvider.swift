@@ -16,13 +16,13 @@ final class SettingsStepFontSizeProvider: SettingsStepFontSizeProviderProtocol {
     }
 
     func fetchAvailableFontSizes() -> Guarantee<[FontSize]> {
-        return Guarantee { seal in
+        Guarantee { seal in
             seal(FontSize.allCases)
         }
     }
 
     func fetchCurrentFontSize() -> Guarantee<FontSize> {
-        return Guarantee { seal in
+        Guarantee { seal in
             seal(self.stepFontSizeService.globalStepFontSize)
         }
     }

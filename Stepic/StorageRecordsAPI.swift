@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class StorageRecordsAPI: APIEndpoint {
-    override var name: String { return "storage-records" }
+    override var name: String { "storage-records" }
 
     func retrieve(
         userID: User.IdType,
@@ -46,11 +46,11 @@ final class StorageRecordsAPI: APIEndpoint {
     }
 
     func delete(id: Int) -> Promise<Void> {
-        return self.delete.request(requestEndpoint: self.name, deletingId: id, withManager: self.manager)
+        self.delete.request(requestEndpoint: self.name, deletingId: id, withManager: self.manager)
     }
 
     func create(record: StorageRecord) -> Promise<StorageRecord> {
-        return self.create.request(
+        self.create.request(
             requestEndpoint: self.name,
             paramName: "storage-record",
             creatingObject: record,
@@ -59,7 +59,7 @@ final class StorageRecordsAPI: APIEndpoint {
     }
 
     func update(record: StorageRecord) -> Promise<StorageRecord> {
-        return self.update.request(
+        self.update.request(
             requestEndpoint: self.name,
             paramName: "storage-record",
             updatingObject: record,

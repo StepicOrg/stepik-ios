@@ -3,12 +3,9 @@ import SnapKit
 import Tabman
 import UIKit
 
-protocol NewCodeQuizFullscreenViewControllerProtocol: class {
-    func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
-    func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel)
-}
+// MARK: Appearance -
 
-final class NewCodeQuizFullscreenViewController: TabmanViewController {
+extension NewCodeQuizFullscreenViewController {
     enum Appearance {
         static let barTintColor = UIColor.mainDark
         static let barBackgroundColor = UIColor.mainLight
@@ -18,8 +15,23 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         static let barButtonTitleColor = UIColor.mainDark
 
         static let spacingBetweenPages: CGFloat = 16.0
-    }
 
+        static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
+            return .init(shadowViewAlpha: 0.0)
+        }
+    }
+}
+
+// MARK: - NewCodeQuizFullscreenViewControllerProtocol: class -
+
+protocol NewCodeQuizFullscreenViewControllerProtocol: AnyObject {
+    func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
+    func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel)
+}
+
+// MARK: - NewCodeQuizFullscreenViewController: TabmanViewController -
+
+final class NewCodeQuizFullscreenViewController: TabmanViewController {
     private lazy var tabBarView: TMBar = {
         let bar = TMBarView<TMHorizontalBarLayout, TMLabelBarButton, TMLineBarIndicator>()
         bar.layout.transitionStyle = .snap
@@ -105,15 +117,31 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         self.addBar(self.tabBarView, dataSource: self, at: .top)
 
         self.interPageSpacing = Appearance.spacingBetweenPages
+    }
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            DispatchQueue.main.async {
-                styledNavigationController.changeShadowViewAlpha(0.0, sender: self)
-            }
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assert(
+            self.navigationController != nil,
+            "\(NewCodeQuizFullscreenViewController.self) must be presented in a \(UINavigationController.self)"
+        )
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.updateNavigationBarAppearance()
     }
 
     // MARK: Private API
+
+    private func updateNavigationBarAppearance() {
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.changeShadowViewAlpha(
+                Appearance.navigationBarAppearance.shadowViewAlpha,
+                sender: self
+            )
+        }
+    }
 
     private func loadTabViewControllerIfNeeded(at index: Int) {
         guard self.tabViewControllers.count > index else {
@@ -165,10 +193,11 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                         return
                     }
 
-                    let controller = CodeEditorSettingsLegacyAssembly().makeModule()
+                    let assembly = CodeEditorSettingsLegacyAssembly()
+                    let controller = assembly.makeModule()
                     controller.title = NSLocalizedString("Settings", comment: "")
 
-                    strongSelf.present(module: controller, embedInNavigation: true)
+                    strongSelf.navigationController?.pushViewController(controller, animated: true)
                 }
             )
         )
@@ -185,7 +214,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
             UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
         )
         alert.popoverPresentationController?.barButtonItem = self.moreBarButton
-        self.present(module: alert)
+        self.present(alert, animated: true, completion: nil)
     }
 
     private func presentCodeResetAlert() {
@@ -204,9 +233,11 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
                 }
             )
         )
-        self.present(alert, animated: true)
+        self.present(alert, animated: true, completion: nil)
     }
 }
+
+// MARK: - NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControllerProtocol -
 
 extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControllerProtocol {
     func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel) {
@@ -219,9 +250,11 @@ extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControll
     }
 }
 
+// MARK: - NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource -
+
 extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return self.availableTabs.count
+        self.availableTabs.count
     }
 
     func viewController(
@@ -233,9 +266,11 @@ extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return .at(index: self.initialTabIndex)
+        .at(index: self.initialTabIndex)
     }
 }
+
+// MARK: - NewCodeQuizFullscreenViewController: TMBarDataSource -
 
 extension NewCodeQuizFullscreenViewController: TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
@@ -243,6 +278,8 @@ extension NewCodeQuizFullscreenViewController: TMBarDataSource {
         return TMBarItem(title: title)
     }
 }
+
+// MARK: - NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewControllerDelegate -
 
 extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewControllerDelegate {
     func newCodeQuizFullscreenCodeViewController(
@@ -258,5 +295,13 @@ extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewCont
     ) {
         self.interactor.doReplySubmit(request: .init())
         self.dismiss(animated: true)
+    }
+}
+
+// MARK: - NewCodeQuizFullscreenViewController: StyledNavigationControllerPresentable -
+
+extension NewCodeQuizFullscreenViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        Appearance.navigationBarAppearance
     }
 }

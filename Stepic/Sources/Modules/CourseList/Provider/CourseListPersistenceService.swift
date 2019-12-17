@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListPersistenceServiceProtocol: class {
+protocol CourseListPersistenceServiceProtocol: AnyObject {
     func fetch() -> Promise<[Course]>
     func update(newCachedList: [Course])
 }

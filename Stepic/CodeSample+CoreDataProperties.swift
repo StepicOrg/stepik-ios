@@ -16,7 +16,7 @@ extension CodeSample {
     @NSManaged var managedOptions: StepOptions?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "CodeSample", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CodeSample", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -25,7 +25,7 @@ extension CodeSample {
 
     var input: String {
         get {
-            return managedInput ?? ""
+             managedInput ?? ""
         }
         set(value) {
             managedInput = value
@@ -34,7 +34,7 @@ extension CodeSample {
 
     var output: String {
         get {
-            return managedOutput ?? ""
+             managedOutput ?? ""
         }
         set(value) {
             managedOutput = value

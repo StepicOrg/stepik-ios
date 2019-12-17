@@ -28,11 +28,11 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
     }
 
     func createAttempt(for step: Step) -> Promise<Attempt?> {
-        return self.attemptsNetworkService.create(stepID: step.id, blockName: step.block.name)
+        self.attemptsNetworkService.create(stepID: step.id, blockName: step.block.name)
     }
 
     func fetchAttempts(for step: Step) -> Promise<([Attempt], Meta)> {
-        return self.attemptsNetworkService.fetch(stepID: step.id, blockName: step.block.name)
+        self.attemptsNetworkService.fetch(stepID: step.id, blockName: step.block.name)
     }
 
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)> {
@@ -40,18 +40,18 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
     }
 
     func fetchSubmissions(for step: Step, page: Int = 1) -> Promise<([Submission], Meta)> {
-        return self.submissionsNetworkService.fetch(stepID: step.id, blockName: step.block.name, page: page)
+        self.submissionsNetworkService.fetch(stepID: step.id, blockName: step.block.name, page: page)
     }
 
     func fetchSubmission(id: Submission.IdType, step: Step) -> Promise<Submission?> {
-        return self.submissionsNetworkService.fetch(submissionID: id, blockName: step.block.name)
+        self.submissionsNetworkService.fetch(submissionID: id, blockName: step.block.name)
     }
 
     func createSubmission(for step: Step, attempt: Attempt, reply: Reply) -> Promise<Submission?> {
-        return self.submissionsNetworkService.create(attemptID: attempt.id, blockName: step.block.name, reply: reply)
+        self.submissionsNetworkService.create(attemptID: attempt.id, blockName: step.block.name, reply: reply)
     }
 
     func fetchActivity(for user: User.IdType) -> Promise<UserActivity> {
-        return self.userActivitiesNetworkService.retrieve(for: user)
+        self.userActivitiesNetworkService.retrieve(for: user)
     }
 }

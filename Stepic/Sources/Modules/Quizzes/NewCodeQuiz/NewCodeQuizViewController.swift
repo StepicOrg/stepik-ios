@@ -1,6 +1,6 @@
 import UIKit
 
-protocol NewCodeQuizViewControllerProtocol: class {
+protocol NewCodeQuizViewControllerProtocol: AnyObject {
     func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel)
     func displayFullscreen(viewModel: NewCodeQuiz.FullscreenPresentation.ViewModel)
 }
@@ -42,7 +42,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
         let viewController = assembly.makeModule()
         viewController.title = viewModel.lessonTitle
 
-        self.present(moduleStack: [viewController])
+        self.present(moduleStack: [viewController], modalPresentationStyle: .fullScreen)
     }
 }
 
@@ -59,9 +59,7 @@ extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
         self.interactor.doFullscreenAction(request: .init())
     }
 
-    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? {
-        return self
-    }
+    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? { self }
 }
 
 extension NewCodeQuizViewController: NewCodeQuizFullscreenOutputProtocol {

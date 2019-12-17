@@ -1,6 +1,6 @@
 import Foundation
 
-protocol StepFontSizeServiceProtocol: class {
+protocol StepFontSizeServiceProtocol: AnyObject {
     var globalStepFontSize: FontSize { get set }
 }
 

@@ -1,6 +1,6 @@
 import UIKit
 
-protocol SettingsLargeInputCellDelegate: class {
+protocol SettingsLargeInputCellDelegate: AnyObject {
     func settingsCell(
         elementView: UITextView,
         didReportTextChange text: String,

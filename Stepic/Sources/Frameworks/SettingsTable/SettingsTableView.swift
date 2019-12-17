@@ -52,8 +52,7 @@ final class SettingsTableView: UIView {
         // Create input groups for each input type
         self.inputCellGroups.removeAll()
         let flattenInputCellGroups: [String] = viewModel.sections
-            .map { $0.cells }
-            .reduce([], +)
+            .flatMap { $0.cells }
             .compactMap { cell in
                 if case .input(let options) = cell.type {
                     return options.inputGroup
@@ -63,6 +62,9 @@ final class SettingsTableView: UIView {
         for group in Array(Set(flattenInputCellGroups)) {
             self.inputCellGroups.append(SettingsInputCellGroup(uniqueIdentifier: group))
         }
+
+        // Section footers heights not being calculated properly APPS-2586.
+        self.performTableViewUpdates()
     }
 
     // MARK: Cells initialization
@@ -92,11 +94,17 @@ final class SettingsTableView: UIView {
         cell.delegate = self.delegate
         cell.uniqueIdentifier = viewModel.uniqueIdentifier
         cell.onHeightUpdate = { [weak self] in
-            DispatchQueue.main.async {
-                UIView.performWithoutAnimation {
-                    self?.tableView.beginUpdates()
-                    self?.tableView.endUpdates()
-                }
+            self?.performTableViewUpdates()
+        }
+    }
+
+    // MARK: Private API
+
+    private func performTableViewUpdates() {
+        DispatchQueue.main.async {
+            UIView.performWithoutAnimation {
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
             }
         }
     }
@@ -117,11 +125,11 @@ extension SettingsTableView: ProgrammaticallyInitializableViewProtocol {
 
 extension SettingsTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.viewModel?.sections.count ?? 0
+        self.viewModel?.sections.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel?.sections[safe: section]?.cells.count ?? 0
+        self.viewModel?.sections[safe: section]?.cells.count ?? 0
     }
 
     func tableView(
@@ -183,11 +191,7 @@ extension SettingsTableView: UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
-    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat { 44.0 }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 53.0
-    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 53.0 }
 }

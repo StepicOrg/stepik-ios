@@ -15,7 +15,7 @@ final class CodeReply: Reply {
     var languageName: String
 
     var description: String {
-        return "CodeReply(code: \(self.code), languageName: \(self.languageName))"
+        "CodeReply(code: \(self.code), languageName: \(self.languageName))"
     }
 
     init(code: String, languageName: String) {
@@ -37,6 +37,9 @@ final class CodeReply: Reply {
     }
 
     var dictValue: [String: Any] {
-        return ["code": code, "language": languageName]
+        [
+            "code": code,
+            "language": languageName
+        ]
     }
 }

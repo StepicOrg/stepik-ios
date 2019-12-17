@@ -22,7 +22,7 @@ enum DownloaderTaskState {
     case stopped
 }
 
-protocol DownloaderTaskProtocol: class {
+protocol DownloaderTaskProtocol: AnyObject {
     typealias IDType = Int
 
     /// Task unique id

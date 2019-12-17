@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol AttemptsNetworkServiceProtocol: class {
+protocol AttemptsNetworkServiceProtocol: AnyObject {
     func fetch(stepID: Step.IdType, blockName: String) -> Promise<([Attempt], Meta)>
     func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt?>
 }
@@ -14,7 +14,7 @@ final class AttemptsNetworkService: AttemptsNetworkServiceProtocol {
     }
 
     func fetch(stepID: Step.IdType, blockName: String) -> Promise<([Attempt], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.attemptsAPI.retrieve(stepName: blockName, stepID: stepID).done { attempts, meta in
                 seal.fulfill((attempts, meta))
             }.catch { _ in
@@ -24,7 +24,7 @@ final class AttemptsNetworkService: AttemptsNetworkServiceProtocol {
     }
 
     func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt?> {
-        return Promise { seal in
+        Promise { seal in
             self.attemptsAPI.create(stepName: blockName, stepId: stepID).done { attempt in
                 seal.fulfill(attempt)
             }.catch { _ in

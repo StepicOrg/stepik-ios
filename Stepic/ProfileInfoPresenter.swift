@@ -20,7 +20,7 @@ struct StreakViewData {
     var longestStreak: Int
 }
 
-protocol ProfileInfoView: class {
+protocol ProfileInfoView: AnyObject {
     var isLoading: Bool { get set }
 
     func set(profile: ProfileViewData)

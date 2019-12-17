@@ -15,7 +15,7 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
     typealias IdType = Int
 
     var json: JSON {
-        return [
+        [
             "course": self.courseID,
             "user": self.userID,
             "score": self.score,
@@ -87,7 +87,7 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     static func delete(_ id: CourseReview.IdType) -> Guarantee<Void> {
-        return CourseReview.fetchAsync(ids: [id]).done { courseReviews in
+        CourseReview.fetchAsync(ids: [id]).done { courseReviews in
             courseReviews.forEach {
                 CoreDataHelper.instance.deleteFromStore($0, save: false)
             }

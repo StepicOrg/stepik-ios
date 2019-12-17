@@ -25,16 +25,12 @@ class BaseListFlowLayout: UICollectionViewFlowLayout {
             || self.previousSize != self.collectionView?.bounds.size
     }
 
-    var contentWidth: CGFloat {
-        return 0
-    }
+    var contentWidth: CGFloat { 0 }
 
-    var contentHeight: CGFloat {
-        return 0
-    }
+    var contentHeight: CGFloat { 0 }
 
     override var collectionViewContentSize: CGSize {
-        return CGSize(width: self.contentWidth, height: self.contentHeight)
+        CGSize(width: self.contentWidth, height: self.contentHeight)
     }
 
     override func prepare() {

@@ -12,9 +12,7 @@ struct CodeSnippetSymbols {
     static let python: [String] = ["self", ":", "=", ".", "_", ",", "(", ")", "[", "]", "'", "*", "/", "+", "%", ">", "<", "and", "or", "not", "&", "|", "#", "\\", "{", "}", "@", "^", "~", ";"]
     static let cpp: [String] = ["=", ".", "_", ";", ",", "{", "}", "(", ")", "[", "]", "'", "\"", "*", "+", "/", "%", ">", "<", "&", "|", ":", "@", "^", "\\", "~"]
     static let sql: [String] = ["(", ")", "'", "`", ".", ",", "*", "/", "+", "-", ";", "<", ">", "=", "#", "@"]
-    static var java: [String] {
-        return cpp
-    }
+    static var java: [String] { cpp }
 
     static func snippets(language: CodeLanguage) -> [String] {
         switch language {

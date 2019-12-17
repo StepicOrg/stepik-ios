@@ -67,7 +67,7 @@ extension LocalNotificationsMigrator {
 
     private var didMigrateLocalNotifications: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: LocalNotificationsMigrator.didMigrateLocalNotificationsKey)
+             UserDefaults.standard.bool(forKey: LocalNotificationsMigrator.didMigrateLocalNotificationsKey)
         }
         set {
             UserDefaults.standard.set(newValue, forKey: LocalNotificationsMigrator.didMigrateLocalNotificationsKey)
@@ -76,7 +76,7 @@ extension LocalNotificationsMigrator {
 
     private var localNotificationsVersion: Int {
         get {
-            return UserDefaults.standard.value(forKey: LocalNotificationsMigrator.localNotificationsVersionKey) as? Int ?? 1
+             UserDefaults.standard.value(forKey: LocalNotificationsMigrator.localNotificationsVersionKey) as? Int ?? 1
         }
         set {
             UserDefaults.standard.set(newValue, forKey: LocalNotificationsMigrator.localNotificationsVersionKey)

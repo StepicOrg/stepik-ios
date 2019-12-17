@@ -10,7 +10,7 @@ import Foundation
 
 final class DeepLinkRouter {
     static var window: UIWindow? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window
+        (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
     static var currentNavigation: UINavigationController? {
@@ -27,7 +27,7 @@ final class DeepLinkRouter {
     }
 
     static var currentTabBarController: UITabBarController? {
-        return window?.rootViewController as? UITabBarController
+        self.window?.rootViewController as? UITabBarController
     }
 
     static func routeToCatalog() {
@@ -61,13 +61,21 @@ final class DeepLinkRouter {
         guard let source = source else {
             return
         }
+
         if isModal {
-            let navigation = StyledNavigationController()
-            navigation.setViewControllers(modules, animated: false)
-            let closeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(DeepLinkRouter.close))
-            navigationToClose = navigation
-            modules.last?.navigationItem.leftBarButtonItem = closeItem
-            source.present(navigation, animated: true, completion: nil)
+            let navigationController = StyledNavigationController()
+            navigationController.modalPresentationStyle = .fullScreen
+            navigationController.setViewControllers(modules, animated: false)
+
+            let closeBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .done,
+                target: self,
+                action: #selector(DeepLinkRouter.close)
+            )
+            self.navigationToClose = navigationController
+            modules.last?.navigationItem.leftBarButtonItem = closeBarButtonItem
+
+            source.present(navigationController, animated: true, completion: nil)
         } else {
             for (index, vc) in modules.enumerated() {
                 source.navigationController?.pushViewController(vc, animated: index == modules.count - 1)
@@ -127,7 +135,7 @@ final class DeepLinkRouter {
         func getID(_ stringId: String, reversed: Bool) -> Int? {
             var slugString = ""
             let string = reversed ? String(stringId.reversed()) : stringId
-            for character in string.characters {
+            for character in string {
                 if Int("\(character)") != nil {
                     if reversed {
                         slugString = "\(character)" + slugString

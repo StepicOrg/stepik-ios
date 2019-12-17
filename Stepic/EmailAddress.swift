@@ -31,7 +31,7 @@ final class EmailAddress: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     var json: JSON {
-        return [
+        [
             "id": self.id as AnyObject,
             "user": self.userID as AnyObject,
             "email": self.email as AnyObject,

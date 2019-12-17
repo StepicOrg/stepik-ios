@@ -214,7 +214,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     // MARK: Private methods
 
     private func fetchCourseInAppropriateMode() -> Promise<CourseInfo.CourseLoad.Response> {
-        return Promise { seal in
+        Promise { seal in
             firstly {
                 self.isOnline && self.didLoadFromCache
                     ? self.provider.fetchRemote()
@@ -297,7 +297,7 @@ extension CourseInfoInteractor: NotificationsRegistrationServiceDelegate {
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) -> Bool {
-        return self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
+        self.notificationSuggestionManager.canShowAlert(context: .courseSubscription)
     }
 
     func notificationsRegistrationService(

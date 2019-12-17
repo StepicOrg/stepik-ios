@@ -63,7 +63,7 @@ extension Course {
     @NSManaged var managedSections: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -75,7 +75,7 @@ extension Course {
             self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
     }
 
@@ -84,13 +84,13 @@ extension Course {
             self.managedLearnersCount = newCount as NSNumber?
         }
         get {
-            return managedLearnersCount?.intValue
+             managedLearnersCount?.intValue
         }
     }
 
     var totalUnits: Int {
         get {
-            return self.managedTotalUnits?.intValue ?? 0
+             self.managedTotalUnits?.intValue ?? 0
         }
         set {
             self.managedTotalUnits = newValue as NSNumber?
@@ -99,7 +99,7 @@ extension Course {
 
     var reviewSummaryId: Int? {
         get {
-            return managedReviewSummaryId?.intValue
+             managedReviewSummaryId?.intValue
         }
         set(value) {
             managedReviewSummaryId = value as NSNumber?
@@ -111,7 +111,7 @@ extension Course {
             self.managedBeginDate = date
         }
         get {
-            return managedBeginDate
+             managedBeginDate
         }
     }
 
@@ -120,7 +120,7 @@ extension Course {
             self.managedCourseDescription = description
         }
         get {
-            return managedCourseDescription ?? ""
+             managedCourseDescription ?? ""
         }
     }
 
@@ -129,7 +129,7 @@ extension Course {
             self.managedScheduleType = value
         }
         get {
-            return managedScheduleType
+             managedScheduleType
         }
     }
 
@@ -138,7 +138,7 @@ extension Course {
             self.managedTitle = title
         }
         get {
-            return managedTitle ?? ""
+             managedTitle ?? ""
         }
     }
 
@@ -147,7 +147,7 @@ extension Course {
             self.managedEndDate = date
         }
         get {
-            return managedEndDate
+             managedEndDate
         }
     }
 
@@ -156,13 +156,13 @@ extension Course {
             self.managedImageURL = url
         }
         get {
-            return managedImageURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
+             managedImageURL ?? "http://www.yoprogramo.com/wp-content/uploads/2015/08/human-error-in-finance-640x324.jpg"
         }
     }
 
     var progressId: String? {
         get {
-            return managedProgressId
+             managedProgressId
         }
         set(value) {
             managedProgressId = value
@@ -174,7 +174,7 @@ extension Course {
             self.managedSlug = slug
         }
         get {
-            return managedSlug
+             managedSlug
         }
     }
 
@@ -183,7 +183,7 @@ extension Course {
             self.managedLastStepId = id
         }
         get {
-            return managedLastStepId
+             managedLastStepId
         }
     }
 
@@ -192,7 +192,7 @@ extension Course {
             self.managedEnrolled = enrolled as NSNumber?
         }
         get {
-            return managedEnrolled?.boolValue ?? false
+             managedEnrolled?.boolValue ?? false
         }
     }
 
@@ -201,7 +201,7 @@ extension Course {
             self.managedFeatured = featured as NSNumber?
         }
         get {
-            return managedFeatured?.boolValue ?? false
+             managedFeatured?.boolValue ?? false
         }
     }
 
@@ -210,7 +210,7 @@ extension Course {
             self.managedPublic = isPublic as NSNumber?
         }
         get {
-            return managedPublic?.boolValue ?? false
+             managedPublic?.boolValue ?? false
         }
     }
 
@@ -219,7 +219,7 @@ extension Course {
             self.managedIsCertificateAutoIssued = newValue as NSNumber?
         }
         get {
-            return managedIsCertificateAutoIssued?.boolValue ?? false
+             managedIsCertificateAutoIssued?.boolValue ?? false
         }
     }
 
@@ -228,7 +228,7 @@ extension Course {
             self.managedIsPaid = newValue as NSNumber?
         }
         get {
-            return managedIsPaid?.boolValue ?? false
+             managedIsPaid?.boolValue ?? false
         }
     }
 
@@ -237,7 +237,7 @@ extension Course {
             self.managedDisplayPrice = newValue
         }
         get {
-            return managedDisplayPrice
+             managedDisplayPrice
         }
     }
 
@@ -246,7 +246,7 @@ extension Course {
             self.managedReadiness = newValue as NSNumber?
         }
         get {
-            return self.managedReadiness?.floatValue
+             self.managedReadiness?.floatValue
         }
     }
 
@@ -255,7 +255,7 @@ extension Course {
             self.managedSummary = value
         }
         get {
-            return managedSummary ?? ""
+             managedSummary ?? ""
         }
     }
 
@@ -264,7 +264,7 @@ extension Course {
             self.managedWorkload = value
         }
         get {
-            return managedWorkload ?? ""
+             managedWorkload ?? ""
         }
     }
 
@@ -284,7 +284,7 @@ extension Course {
             self.managedFormat = value
         }
         get {
-            return managedFormat ?? ""
+             managedFormat ?? ""
         }
     }
 
@@ -293,7 +293,7 @@ extension Course {
             self.managedAudience = value
         }
         get {
-            return managedAudience ?? ""
+             managedAudience ?? ""
         }
     }
 
@@ -302,13 +302,13 @@ extension Course {
             self.managedCertificate = value
         }
         get {
-            return managedCertificate ?? ""
+             managedCertificate ?? ""
         }
     }
 
     var certificateRegularThreshold: Int? {
         get {
-            return self.managedCertificateRegularThreshold?.intValue
+             self.managedCertificateRegularThreshold?.intValue
         }
         set {
             self.managedCertificateRegularThreshold = newValue as NSNumber?
@@ -317,7 +317,7 @@ extension Course {
 
     var certificateDistinctionThreshold: Int? {
         get {
-            return self.managedCertificateDistinctionThreshold?.intValue
+             self.managedCertificateDistinctionThreshold?.intValue
         }
         set {
             self.managedCertificateDistinctionThreshold = newValue as NSNumber?
@@ -329,13 +329,13 @@ extension Course {
             self.managedRequirements = value
         }
         get {
-            return managedRequirements ?? ""
+             managedRequirements ?? ""
         }
     }
 
     var timeToComplete: Int? {
         get {
-            return self.managedTimeToComplete?.intValue
+             self.managedTimeToComplete?.intValue
         }
         set {
             self.managedTimeToComplete = newValue as NSNumber?
@@ -344,7 +344,7 @@ extension Course {
 
     var languageCode: String {
         get {
-            return self.managedLanguageCode ?? ""
+             self.managedLanguageCode ?? ""
         }
         set {
             self.managedLanguageCode = newValue
@@ -353,7 +353,7 @@ extension Course {
 
     var progress: Progress? {
         get {
-            return managedProgress
+             managedProgress
         }
         set(value) {
             managedProgress = value
@@ -362,7 +362,7 @@ extension Course {
 
     var lastStep: LastStep? {
         get {
-            return managedLastStep
+             managedLastStep
         }
         set(value) {
             managedLastStep = value
@@ -371,7 +371,7 @@ extension Course {
 
     var lastCodeLanguage: LastCodeLanguage? {
         get {
-            return self.managedLastCodeLanguage
+             self.managedLastCodeLanguage
         }
         set {
             self.managedLastCodeLanguage = newValue
@@ -380,7 +380,7 @@ extension Course {
 
     var instructors: [User] {
         get {
-            return (managedInstructors?.array as? [User]) ?? []
+             (managedInstructors?.array as? [User]) ?? []
         }
         set(instructors) {
             managedInstructors = NSOrderedSet(array: instructors)
@@ -398,7 +398,7 @@ extension Course {
             self.managedSectionsArray = value as NSObject?
         }
         get {
-            return (self.managedSectionsArray as? [Int]) ?? []
+             (self.managedSectionsArray as? [Int]) ?? []
         }
     }
 
@@ -407,13 +407,13 @@ extension Course {
             self.managedInstructorsArray = value as NSObject?
         }
         get {
-            return (self.managedInstructorsArray as? [Int]) ?? []
+             (self.managedInstructorsArray as? [Int]) ?? []
         }
     }
 
     var sections: [Section] {
         get {
-            return (managedSections?.array as? [Section]) ?? []
+             (managedSections?.array as? [Section]) ?? []
         }
 
         set(sections) {
@@ -423,7 +423,7 @@ extension Course {
 
     var authorsArray: [Int] {
         get {
-            return (self.managedAuthorsArray as? [Int]) ?? []
+             (self.managedAuthorsArray as? [Int]) ?? []
         }
         set {
             self.managedAuthorsArray = newValue as NSObject?
@@ -432,7 +432,7 @@ extension Course {
 
     var authors: [User] {
         get {
-            return (self.managedAuthors?.array as? [User]) ?? []
+             (self.managedAuthors?.array as? [User]) ?? []
         }
         set {
             self.managedAuthors = NSOrderedSet(array: newValue)
@@ -441,7 +441,7 @@ extension Course {
 
     var introVideo: Video? {
         get {
-            return managedIntroVideo
+             managedIntroVideo
         }
         set(value) {
             managedIntroVideo = value
@@ -450,7 +450,7 @@ extension Course {
 
     var reviewSummary: CourseReviewSummary? {
         get {
-            return managedReviewSummary
+             managedReviewSummary
         }
         set(value) {
             managedReviewSummary = value

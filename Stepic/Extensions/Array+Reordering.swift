@@ -18,7 +18,7 @@ extension Array {
             }
         }
 
-        let ordering = Dictionary<T, Int>(
+        let ordering = [T: Int](
             uniqueKeysWithValues: uniqueOrder.enumerated().map { ($1, $0) }
         )
         return self.sorted { a, b -> Bool in

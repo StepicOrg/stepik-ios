@@ -1,6 +1,6 @@
 import UIKit
 
-protocol FullscreenCourseListViewControllerProtocol: class {
+protocol FullscreenCourseListViewControllerProtocol: AnyObject {
     func displayCourseInfo(viewModel: FullscreenCourseList.CourseInfoPresentation.ViewModel)
     func displayCourseSyllabus(viewModel: FullscreenCourseList.CourseSyllabusPresentation.ViewModel)
     func displayLastStep(viewModel: FullscreenCourseList.LastStepPresentation.ViewModel)

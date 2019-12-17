@@ -15,7 +15,7 @@ struct SocialProviderViewData {
     let id: Int // id in SocialProvider
 }
 
-protocol SocialAuthView: class {
+protocol SocialAuthView: AnyObject {
     var state: SocialAuthState { get set }
 
     func set(providers: [SocialProviderViewData])
@@ -43,9 +43,7 @@ final class SocialAuthPresenter {
 
     var pendingAuthProviderInfo: SocialProviderInfo?
 
-    var socialAuthHeaderString: String {
-        return NSLocalizedString("SignInTitleSocial", comment: "")
-    }
+    var socialAuthHeaderString: String { NSLocalizedString("SignInTitleSocial", comment: "") }
 
     init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, splitTestingService: SplitTestingServiceProtocol, view: SocialAuthView) {
         self.authAPI = authAPI

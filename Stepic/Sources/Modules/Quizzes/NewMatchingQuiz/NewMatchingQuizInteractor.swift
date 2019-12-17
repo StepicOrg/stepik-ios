@@ -91,7 +91,7 @@ extension NewMatchingQuizInteractor: QuizInputProtocol {
     }
 
     private func makeMatchItems(dataset: MatchingDataset) -> [NewMatchingQuiz.MatchItem] {
-        return dataset.pairs.enumerated().map { index, pair in
+        dataset.pairs.enumerated().map { index, pair in
             .init(
                 title: .init(id: index, text: pair.first),
                 option: .init(id: index, text: pair.second)

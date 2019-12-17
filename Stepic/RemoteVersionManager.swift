@@ -18,7 +18,7 @@ final class RemoteVersionManager: NSObject {
     static let sharedManager = RemoteVersionManager()
 
     private func isVersion(_ v1: String, olderThan v2: String) -> Bool {
-        return v1.compare(v2, options: NSString.CompareOptions.numeric) == ComparisonResult.orderedDescending
+        v1.compare(v2, options: NSString.CompareOptions.numeric) == ComparisonResult.orderedDescending
     }
 
     func checkRemoteVersionChange(needUpdateHandler update: @escaping (Version?) -> Void, error errorHandler: @escaping (NSError) -> Void) {
@@ -42,11 +42,11 @@ final class RemoteVersionManager: NSObject {
     }
 
     private func getLocalVersion() -> String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
 
     private func getRemoteVersion(success: @escaping (String, String) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request {
-        return AlamofireDefaultSessionManager.shared.request(StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({
+        AlamofireDefaultSessionManager.shared.request(StepicApplicationsInfo.versionInfoURL).responseSwiftyJSON({
             response in
 
             var error = response.result.error

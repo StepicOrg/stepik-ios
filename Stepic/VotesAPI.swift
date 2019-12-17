@@ -12,16 +12,23 @@ import PromiseKit
 import SwiftyJSON
 
 final class VotesAPI: APIEndpoint {
-    override var name: String { return "votes" }
+    override var name: String { "votes" }
 
     func update(_ vote: Vote) -> Promise<Vote> {
-        return update.request(requestEndpoint: "votes", paramName: "vote", updatingObject: vote, withManager: manager)
+        self.update.request(
+            requestEndpoint: self.name,
+            paramName: "vote",
+            updatingObject: vote,
+            withManager: self.manager
+        )
     }
 }
 
 extension VotesAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     func update(_ vote: Vote, success: @escaping ((Vote) -> Void), error errorHandler: @escaping ((String) -> Void)) {
-        update(vote).done { success($0) }.catch { errorHandler($0.localizedDescription) }
+        self.update(vote)
+            .done { success($0) }
+            .catch { errorHandler($0.localizedDescription) }
     }
 }

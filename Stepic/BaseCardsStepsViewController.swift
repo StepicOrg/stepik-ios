@@ -35,7 +35,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
             }
         }
         get {
-            return super.state
+            super.state
         }
     }
 

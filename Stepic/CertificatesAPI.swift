@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class CertificatesAPI: APIEndpoint {
-    override var name: String { return "certificates" }
+    override var name: String { "certificates" }
 
     func retrieve(userId: Int, page: Int = 1) -> Promise<([Certificate], Meta)> {
         let params: Parameters = [

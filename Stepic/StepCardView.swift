@@ -9,7 +9,7 @@
 import SnapKit
 import UIKit
 
-protocol StepCardViewDelegate: class {
+protocol StepCardViewDelegate: AnyObject {
     func onControlButtonClick()
     func onTitleButtonClick()
 }
@@ -20,9 +20,7 @@ extension StepCardViewDelegate {
 }
 
 final class StepCardView: NibInitializableView {
-    override var nibName: String {
-        return "StepCardView"
-    }
+    override var nibName: String { "StepCardView" }
 
     enum ControlState {
         case unsolved, wrong, successful

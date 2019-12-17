@@ -195,20 +195,20 @@ extension PersonalDeadlineEditScheduleViewController: UITableViewDelegate {
 }
 
 extension PersonalDeadlineEditScheduleViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return course?.sections.count ?? 0
+        self.course?.sections.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PersonalDeadlineTableViewCell", for: indexPath) as? PersonalDeadlineTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "PersonalDeadlineTableViewCell",
+            for: indexPath
+        ) as? PersonalDeadlineTableViewCell else {
             return UITableViewCell()
         }
 
-        cell.initWith(data: sectionDeadlinesData[indexPath.row])
+        cell.initWith(data: self.sectionDeadlinesData[indexPath.row])
+
         return cell
     }
 }
@@ -225,6 +225,6 @@ struct SectionDeadlineData {
     }
 
     var sectionDeadline: SectionDeadline {
-        return SectionDeadline(section: sectionID, deadlineDate: deadline)
+        SectionDeadline(section: self.sectionID, deadlineDate: self.deadline)
     }
 }

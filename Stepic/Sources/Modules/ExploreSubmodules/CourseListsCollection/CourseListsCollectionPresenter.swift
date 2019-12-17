@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CourseListsCollectionPresenterProtocol: class {
+protocol CourseListsCollectionPresenterProtocol: AnyObject {
     func presentCourses(response: CourseListsCollection.CourseListsLoad.Response)
 }
 

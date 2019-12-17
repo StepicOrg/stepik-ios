@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol EmailAddressesNetworkServiceProtocol: class {
+protocol EmailAddressesNetworkServiceProtocol: AnyObject {
     func fetch(ids: [EmailAddress.IdType], page: Int) -> Promise<([EmailAddress], Meta)>
 }
 

@@ -34,11 +34,11 @@ final class NextLessonService: NextLessonServiceProtocol {
     }
 
     func findPreviousUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol? {
-        return self.findAdjacentUnit(for: unit, offset: .previous)
+        self.findAdjacentUnit(for: unit, offset: .previous)
     }
 
     func findNextUnit(for unit: NextLessonServiceUnitSourceProtocol) -> NextLessonServiceUnitSourceProtocol? {
-        return self.findAdjacentUnit(for: unit, offset: .next)
+        self.findAdjacentUnit(for: unit, offset: .next)
     }
 
     private func findAdjacentUnit(

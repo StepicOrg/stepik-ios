@@ -66,6 +66,12 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
         }
     }
 
+    var isCalendarButtonEnabled: Bool = true {
+        didSet {
+            self.calendarButton.isEnabled = self.isCalendarButtonEnabled
+        }
+    }
+
     var isDownloadAllButtonEnabled: Bool = true {
         didSet {
             self.downloadAllButton.isEnabled = self.isDownloadAllButtonEnabled
@@ -73,9 +79,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
     }
 
     // Reference to tooltip-anchor view
-    var deadlinesButtonTooltipAnchorView: UIView {
-        return self.calendarButton.titleContentView
-    }
+    var deadlinesButtonTooltipAnchorView: UIView { self.calendarButton.titleContentView }
 
     var courseDownloadState: CourseInfoTabSyllabus.DownloadState = .notCached {
         didSet {

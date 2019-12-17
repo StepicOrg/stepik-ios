@@ -39,7 +39,7 @@ final class Notification: NSManagedObject, JSONSerializable, IDFetchable {
     }
 
     var json: JSON {
-        return [
+        [
             "id": id as AnyObject,
             "html_text": htmlText as AnyObject,
             "is_unread": (status == .unread) as AnyObject,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchQueriesViewControllerDelegate: class {
+protocol SearchQueriesViewControllerDelegate: AnyObject {
     func didSelectSuggestion(suggestion: String, position: Int)
 }
 
@@ -71,28 +71,28 @@ extension SearchQueriesViewController: UITableViewDelegate {
 }
 
 extension SearchQueriesViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return suggestions.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { self.suggestions.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard suggestions.count > indexPath.row, let cell = tableView.dequeueReusableCell(withIdentifier: "SearchSuggestionTableViewCell", for: indexPath) as? SearchSuggestionTableViewCell else {
+        guard self.suggestions.count > indexPath.row,
+              let cell = tableView.dequeueReusableCell(
+                withIdentifier: "SearchSuggestionTableViewCell",
+                for: indexPath
+        ) as? SearchSuggestionTableViewCell else {
             return UITableViewCell()
         }
 
         cell.set(suggestion: suggestions[indexPath.row], query: query)
+
         return cell
     }
 }
 
 extension SearchQueriesViewController: SearchQueriesView {
     func updateSuggestions(suggestions: [String]) {
-        DispatchQueue.main.async {
-            [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.suggestions = suggestions
             self?.tableView.reloadData()
         }

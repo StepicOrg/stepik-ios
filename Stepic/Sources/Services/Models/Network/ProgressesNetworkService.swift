@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol ProgressesNetworkServiceProtocol: class {
+protocol ProgressesNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Progress.IdType], page: Int) -> Promise<([Progress], Meta)>
     func fetch(id: Progress.IdType) -> Promise<Progress?>
 }
@@ -30,7 +30,7 @@ final class ProgressesNetworkService: ProgressesNetworkServiceProtocol {
     }
 
     func fetch(id: Progress.IdType) -> Promise<Progress?> {
-        return Promise { seal in
+        Promise { seal in
             self.progressesAPI.retrieve(ids: [id]).done { progresses in
                 seal.fulfill(progresses.first)
             }.catch { _ in

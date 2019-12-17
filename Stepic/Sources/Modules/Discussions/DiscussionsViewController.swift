@@ -2,7 +2,7 @@ import Agrume
 import SVProgressHUD
 import UIKit
 
-protocol DiscussionsViewControllerProtocol: class {
+protocol DiscussionsViewControllerProtocol: AnyObject {
     func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel)
     func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel)
     func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel)
@@ -243,14 +243,35 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     }
 
     func displayWriteComment(viewModel: Discussions.WriteCommentPresentation.ViewModel) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
             parentID: viewModel.parentID,
             presentationContext: viewModel.presentationContext,
+            navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? WriteCommentOutputProtocol
         )
         let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
-        self.present(navigationController, animated: true)
+
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
     }
 
     func displayCommentCreate(viewModel: Discussions.CommentCreated.ViewModel) {
@@ -420,7 +441,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
                 title: NSLocalizedString("Copy", comment: ""),
                 style: .default,
                 handler: { _ in
-                    UIPasteboard.general.string = viewModel.rawText
+                    UIPasteboard.general.string = viewModel.strippedText
                 }
             )
         )

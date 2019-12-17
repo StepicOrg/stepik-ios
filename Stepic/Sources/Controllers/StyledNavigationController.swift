@@ -4,17 +4,21 @@ import UIKit
 class StyledNavigationController: UINavigationController {
     enum Appearance {
         static let backgroundColor = UIColor.mainLight
+        static let statusBarColor = UIColor.mainLight
         static let tintColor = UIColor.mainDark
 
         static let titleFont = UIFont.systemFont(ofSize: 17, weight: .regular)
 
         static let shadowViewColor = UIColor.lightGray
         static let shadowViewHeight: CGFloat = 0.5
+
+        static let statusBarStyle = UIStatusBarStyle.dark
     }
 
     struct NavigationBarAppearanceState {
         var shadowViewAlpha: CGFloat
         var backgroundColor: UIColor
+        var statusBarColor: UIColor
         var textColor: UIColor
         var tintColor: UIColor
         var statusBarStyle: UIStatusBarStyle
@@ -22,32 +26,43 @@ class StyledNavigationController: UINavigationController {
         init(
             shadowViewAlpha: CGFloat = 1.0,
             backgroundColor: UIColor = StyledNavigationController.Appearance.backgroundColor,
+            statusBarColor: UIColor = StyledNavigationController.Appearance.statusBarColor,
             textColor: UIColor = StyledNavigationController.Appearance.tintColor,
             tintColor: UIColor = StyledNavigationController.Appearance.tintColor,
-            statusBarStyle: UIStatusBarStyle = .default
+            statusBarStyle: UIStatusBarStyle = StyledNavigationController.Appearance.statusBarStyle
         ) {
             self.shadowViewAlpha = shadowViewAlpha
             self.backgroundColor = backgroundColor
+            self.statusBarColor = statusBarColor
             self.textColor = textColor
             self.tintColor = tintColor
             self.statusBarStyle = statusBarStyle
         }
     }
 
-    // To fix memory leak, cause constructor for UINavigationControllerDelegateRepeater called 2 times
-    // first - from init(rootViewController:), second - from init(nibName:bundle:)
-    // swiftlint:disable:next implicitly_unwrapped_optional
-    private var delegateRepeater: UINavigationControllerDelegateRepeater!
     override var delegate: UINavigationControllerDelegate? {
-        set {
-            self.delegateRepeater.secondaryDelegate = newValue
-        }
-        get {
-            return self.delegateRepeater
+        didSet {
+            if self.delegate !== self {
+                fatalError("To set a delegate use `addDelegate(_:)`")
+            }
         }
     }
 
-    private lazy var statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        self.statusBarStyle
+    }
+
+    private var statusBarStyle = StyledNavigationController.Appearance.statusBarStyle {
+        didSet {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+
+    private lazy var statusBarView: UIView = {
+        let view = UIView(frame: UIApplication.shared.statusBarFrame)
+        view.isUserInteractionEnabled = false
+        return view
+    }()
 
     private lazy var shadowView = UIView()
     private var shadowViewLeadingConstraint: Constraint?
@@ -57,11 +72,13 @@ class StyledNavigationController: UINavigationController {
 
     private var navigationBarAppearanceForController: [Int: NavigationBarAppearanceState] = [:]
 
+    // swiftlint:disable:next weak_delegate
+    private var multicastDelegate = MulticastDelegate<UINavigationControllerDelegate>()
+
     // MARK: ViewController lifecycle & base methods
 
     override func viewDidLoad() {
-        self.delegateRepeater = UINavigationControllerDelegateRepeater()
-        self.delegateRepeater.mainDelegate = self
+        self.delegate = self
         super.viewDidLoad()
         self.setupAppearance()
     }
@@ -110,6 +127,21 @@ class StyledNavigationController: UINavigationController {
 
     // MARK: Public API
 
+    /// Triggers a navigation bar appearance update.
+    /// See `NavigationBarAppearanceState` for properties that will be updated.
+    func setNeedsNavigationBarAppearanceUpdate(sender: UIViewController) {
+        let appearance = self.getNavigationBarAppearance(for: sender)
+
+        DispatchQueue.main.async {
+            self.changeShadowViewAlpha(appearance.shadowViewAlpha, sender: sender)
+            self.changeBackgroundColor(appearance.backgroundColor, sender: sender)
+            self.changeStatusBarColor(appearance.statusBarColor, sender: sender)
+            self.changeTextColor(appearance.textColor, sender: sender)
+            self.changeTintColor(appearance.tintColor, sender: sender)
+            self.changeStatusBarStyle(appearance.statusBarStyle, sender: sender)
+        }
+    }
+
     /// Remove title for "Back" button on top controller
     func removeBackButtonTitleForTopController() {
         // View controller before last in stack
@@ -129,9 +161,21 @@ class StyledNavigationController: UINavigationController {
     func changeBackgroundColor(_ color: UIColor, sender: UIViewController) {
         guard sender === self.topViewController else {
             self.navigationBarAppearanceForController[sender.hashValue]?.backgroundColor = color
+            self.navigationBarAppearanceForController[sender.hashValue]?.statusBarColor = color
             return
         }
-        return self.changeBackgroundColor(color)
+
+        self.changeBackgroundColor(color)
+        self.changeStatusBarColor(color)
+    }
+
+    /// Change color of status bar background
+    func changeStatusBarColor(_ color: UIColor, sender: UIViewController) {
+        guard sender === self.topViewController else {
+            self.navigationBarAppearanceForController[sender.hashValue]?.statusBarColor = color
+            return
+        }
+        return self.changeStatusBarColor(color)
     }
 
     /// Change alpha of shadow view
@@ -162,12 +206,21 @@ class StyledNavigationController: UINavigationController {
     }
 
     /// Change status bar style
-    @available(*, deprecated, message: "Obsolete method; we must migrate to preferredStatusBarStyle usage")
     func changeStatusBarStyle(_ style: UIStatusBarStyle, sender: UIViewController) {
         guard sender === self.topViewController else {
             return
         }
         return self.changeStatusBarStyle(style)
+    }
+
+    /// Adds an delegate to the delegates collection.
+    func addDelegate(_ delegate: UINavigationControllerDelegate) {
+        self.multicastDelegate.add(delegate)
+    }
+
+    /// Removes an delegate from the delegates collection.
+    func removeDelegate(_ delegate: UINavigationControllerDelegate) {
+        self.multicastDelegate.remove(delegate)
     }
 
     // MARK: Private API
@@ -181,6 +234,14 @@ class StyledNavigationController: UINavigationController {
 
         if let topViewController = self.topViewController {
             self.navigationBarAppearanceForController[topViewController.hashValue]?.backgroundColor = color
+        }
+    }
+
+    private func changeStatusBarColor(_ color: UIColor) {
+        self.statusBarView.backgroundColor = color
+
+        if let topViewController = self.topViewController {
+            self.navigationBarAppearanceForController[topViewController.hashValue]?.statusBarColor = color
         }
     }
 
@@ -214,7 +275,7 @@ class StyledNavigationController: UINavigationController {
     }
 
     private func changeStatusBarStyle(_ style: UIStatusBarStyle) {
-        UIApplication.shared.statusBarStyle = style
+        self.statusBarStyle = style
 
         if let topViewController = self.topViewController {
             self.navigationBarAppearanceForController[topViewController.hashValue]?.statusBarStyle = style
@@ -235,14 +296,15 @@ class StyledNavigationController: UINavigationController {
         }
 
         self.changeBackgroundColor(StyledNavigationController.Appearance.backgroundColor)
+        self.changeStatusBarColor(StyledNavigationController.Appearance.statusBarColor)
         self.changeTextColor(StyledNavigationController.Appearance.tintColor)
         self.changeTintColor(StyledNavigationController.Appearance.tintColor)
         self.changeShadowViewAlpha(1.0)
-        self.changeStatusBarStyle(.default)
+        self.changeStatusBarStyle(self.statusBarStyle)
     }
 
     private func normalizeAlphaValue(_ alpha: CGFloat) -> CGFloat {
-        return max(0.0, min(1.0, alpha))
+        max(0.0, min(1.0, alpha))
     }
 
     private func getNavigationBarAppearance(for viewController: UIViewController) -> NavigationBarAppearanceState {
@@ -349,16 +411,25 @@ class StyledNavigationController: UINavigationController {
     }
 }
 
+// MARK: - StyledNavigationController: UINavigationControllerDelegate -
+
 extension StyledNavigationController: UINavigationControllerDelegate {
+    // MARK: Responding to a View Controller Being Shown
+
     func navigationController(
         _ navigationController: UINavigationController,
         willShow viewController: UIViewController,
         animated: Bool
     ) {
+        self.multicastDelegate.invoke { delegate in
+            delegate.navigationController?(navigationController, willShow: viewController, animated: animated)
+        }
+
         let targetControllerAppearance = self.getNavigationBarAppearance(for: viewController)
 
         guard animated, let fromViewController = self.transitionCoordinator?.viewController(forKey: .from) else {
             self.changeBackgroundColor(targetControllerAppearance.backgroundColor)
+            self.changeStatusBarColor(targetControllerAppearance.statusBarColor)
             self.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
             self.changeTextColor(targetControllerAppearance.textColor)
             self.changeTintColor(targetControllerAppearance.tintColor)
@@ -388,6 +459,7 @@ extension StyledNavigationController: UINavigationControllerDelegate {
 
                 // change appearance w/o status bar style
                 strongSelf.changeBackgroundColor(targetControllerAppearance.backgroundColor)
+                strongSelf.changeStatusBarColor(targetControllerAppearance.statusBarColor)
                 strongSelf.changeShadowViewAlpha(targetControllerAppearance.shadowViewAlpha)
                 strongSelf.changeTextColor(targetControllerAppearance.textColor)
                 strongSelf.changeTintColor(targetControllerAppearance.tintColor)
@@ -409,9 +481,16 @@ extension StyledNavigationController: UINavigationControllerDelegate {
                     }
                 } else {
                     // Rollback appearance
-                    let sourceControllerAppearance = strongSelf.getNavigationBarAppearance(for: fromViewController)
+                    let sourceControllerAppearance: NavigationBarAppearanceState = {
+                        if let navigationController = fromViewController as? UINavigationController,
+                           let topViewController = navigationController.topViewController {
+                            return strongSelf.getNavigationBarAppearance(for: topViewController)
+                        }
+                        return strongSelf.getNavigationBarAppearance(for: fromViewController)
+                    }()
 
                     strongSelf.changeBackgroundColor(sourceControllerAppearance.backgroundColor)
+                    strongSelf.changeStatusBarColor(sourceControllerAppearance.statusBarColor)
                     strongSelf.changeShadowViewAlpha(sourceControllerAppearance.shadowViewAlpha)
                     strongSelf.changeTextColor(sourceControllerAppearance.textColor)
                     strongSelf.changeTintColor(sourceControllerAppearance.tintColor)
@@ -420,11 +499,21 @@ extension StyledNavigationController: UINavigationControllerDelegate {
             }
         )
     }
+
+    func navigationController(
+        _ navigationController: UINavigationController,
+        didShow viewController: UIViewController,
+        animated: Bool
+    ) {
+        self.multicastDelegate.invoke { delegate in
+            delegate.navigationController?(navigationController, didShow: viewController, animated: animated)
+        }
+    }
 }
 
 // MARK: - Default appearance protocol
 
-protocol StyledNavigationControllerPresentable: class {
+protocol StyledNavigationControllerPresentable: AnyObject {
     /// Appearance for navigation bar, status bar, etc when controller first time presented
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState { get }
     /// Determine whether controller should store appearance state and restore it when return back
@@ -433,67 +522,15 @@ protocol StyledNavigationControllerPresentable: class {
 
 extension StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return StyledNavigationController.NavigationBarAppearanceState()
+        StyledNavigationController.NavigationBarAppearanceState()
     }
 
-    var shouldSaveAppearanceState: Bool {
-        return true
-    }
-}
-
-// MARK: - Delegate Repeater
-
-private class UINavigationControllerDelegateRepeater: NSObject, UINavigationControllerDelegate {
-    weak var mainDelegate: UINavigationControllerDelegate?
-    weak var secondaryDelegate: UINavigationControllerDelegate?
-
-    private var delegates: [UINavigationControllerDelegate] {
-        return [self.mainDelegate, self.secondaryDelegate].compactMap { $0 }
-    }
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        willShow viewController: UIViewController,
-        animated: Bool
-    ) {
-        for delegate in self.delegates {
-            delegate.navigationController?(navigationController, willShow: viewController, animated: animated)
-        }
-    }
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        didShow viewController: UIViewController,
-        animated: Bool
-    ) {
-        for delegate in self.delegates {
-            delegate.navigationController?(navigationController, didShow: viewController, animated: animated)
-        }
-    }
-
-    func navigationController(
-        _ navigationController: UINavigationController,
-        animationControllerFor operation: UINavigationController.Operation,
-        from fromVC: UIViewController,
-        to toVC: UIViewController
-    ) -> UIViewControllerAnimatedTransitioning? {
-        for delegate in self.delegates {
-            if let transitioning = delegate.navigationController?(
-                navigationController,
-                animationControllerFor: operation,
-                from: fromVC,
-                to: toVC
-            ) {
-                return transitioning
-            }
-        }
-        return nil
-    }
+    var shouldSaveAppearanceState: Bool { true }
 }
 
 // MARK: - Color transition helper
 
-final class ColorTransitionHelper {
+enum ColorTransitionHelper {
     static func makeTransitionColor(
         from sourceColor: UIColor,
         to targetColor: UIColor,

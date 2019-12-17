@@ -14,7 +14,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class NotificationsAPI: APIEndpoint {
-    override var name: String { return "notifications" }
+    override var name: String { "notifications" }
 
     func retrieve(page: Int = 1, notificationType: NotificationType? = nil) -> Promise<( [Notification], Meta)> {
         var parameters = [
@@ -25,17 +25,33 @@ final class NotificationsAPI: APIEndpoint {
             parameters["type"] = notificationType.rawValue
         }
 
-        return retrieve.requestWithFetching(requestEndpoint: "notifications", paramName: "notifications", params: parameters, withManager: manager)
+        return self.retrieve.requestWithFetching(
+            requestEndpoint: self.name,
+            paramName: self.name,
+            params: parameters,
+            withManager: self.manager
+        )
     }
 
     func update(_ notification: Notification) -> Promise<Notification> {
-        return update.request(requestEndpoint: "notifications", paramName: "notification", updatingObject: notification, withManager: manager)
+        self.update.request(
+            requestEndpoint: self.name,
+            paramName: "notification",
+            updatingObject: notification,
+            withManager: self.manager
+        )
     }
 
     func markAllAsRead(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<()> {
-        return Promise { seal in
+        Promise { seal in
             checkToken().done {
-                self.manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)/mark-as-read", method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+                self.manager.request(
+                    "\(StepicApplicationsInfo.apiURL)/\(self.name)/mark-as-read",
+                    method: .post,
+                    parameters: nil,
+                    encoding: JSONEncoding.default,
+                    headers: headers
+                ).responseSwiftyJSON { response in
                     switch response.result {
                     case .failure(let error):
                         seal.reject(NetworkError(error: error))
@@ -47,8 +63,7 @@ final class NotificationsAPI: APIEndpoint {
                         }
                     }
                 }
-            }.catch {
-                error in
+            }.catch { error in
                 seal.reject(error)
             }
         }

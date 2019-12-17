@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ContinueCourseOutputProtocol: class {
+protocol ContinueCourseOutputProtocol: AnyObject {
     func hideContinueCourse()
     func presentLastStep(course: Course, isAdaptive: Bool)
 }

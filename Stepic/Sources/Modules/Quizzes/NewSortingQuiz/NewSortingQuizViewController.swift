@@ -1,7 +1,7 @@
 import Agrume
 import UIKit
 
-protocol NewSortingQuizViewControllerProtocol: class {
+protocol NewSortingQuizViewControllerProtocol: AnyObject {
     func displayReply(viewModel: NewSortingQuiz.ReplyLoad.ViewModel)
 }
 

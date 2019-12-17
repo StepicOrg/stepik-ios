@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: NewStepViewControllerProtocol: class -
 
-protocol NewStepViewControllerProtocol: class {
+protocol NewStepViewControllerProtocol: AnyObject {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
@@ -205,15 +205,32 @@ extension NewStepViewController: NewStepViewControllerProtocol {
         let discussionsViewController = discussionsAssembly.makeModule()
 
         if viewModel.embeddedInWriteComment {
+            let (modalPresentationStyle, navigationBarAppearance) = {
+                () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+                if #available(iOS 13.0, *) {
+                    return (
+                        .automatic,
+                        .init(
+                            statusBarColor: .clear,
+                            statusBarStyle: .lightContent
+                        )
+                    )
+                } else {
+                    return (.fullScreen, .init())
+                }
+            }()
+
             let writeCommentAssembly = WriteCommentAssembly(
                 targetID: viewModel.stepID,
                 parentID: nil,
                 presentationContext: .create,
+                navigationBarAppearance: navigationBarAppearance,
                 output: discussionsAssembly.moduleInput
             )
             let writeCommentNavigationController = StyledNavigationController(
                 rootViewController: writeCommentAssembly.makeModule()
             )
+            writeCommentNavigationController.modalPresentationStyle = modalPresentationStyle
 
             self.navigationController?.present(
                 writeCommentNavigationController,
@@ -257,11 +274,11 @@ extension NewStepViewController: NewStepViewDelegate {
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-            self.present(alert, animated: true)
+            self.present(alert, animated: true, completion: nil)
         } else if isVideoCached || isVideoPlayingReachable {
             let assembly = StepicVideoPlayerLegacyAssembly(video: video)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
-            self.present(assembly.makeModule(), animated: true)
+            self.present(module: assembly.makeModule(), embedInNavigation: false, modalPresentationStyle: .fullScreen)
         }
     }
 
@@ -283,9 +300,9 @@ extension NewStepViewController: NewStepViewDelegate {
         }
 
         // Check if the request is a navigation inside a lesson
-        if url.absoluteString.range(of: "\(viewModel.lessonID)/step/") != nil {
+        if url.absoluteString.contains("\(viewModel.lessonID)/step/") {
             let components = url.pathComponents
-            if let index = components.index(of: "step") {
+            if let index = components.firstIndex(of: "step") {
                 if index + 1 < components.count {
                     let urlStepIndexString = components[index + 1]
                     if let urlStepIndex = Int(urlStepIndexString) {

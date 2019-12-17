@@ -17,7 +17,7 @@ final class TableInputTextView: UITextView {
     }()
 
     private var minHeight: CGFloat {
-        return (self.font?.pointSize ?? 0) * CGFloat(Appearance.minLinesInHeight)
+        (self.font?.pointSize ?? 0) * CGFloat(Appearance.minLinesInHeight)
             + Appearance.textInsets.top
             + Appearance.textInsets.bottom
     }
@@ -33,7 +33,7 @@ final class TableInputTextView: UITextView {
 
     var placeholder: String? {
         get {
-            return self.placeholderLabel.text
+             self.placeholderLabel.text
         }
         set {
             self.placeholderLabel.text = newValue

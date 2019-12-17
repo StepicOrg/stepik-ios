@@ -106,7 +106,7 @@ public class Player: UIViewController {
 
     public var muted: Bool {
         get {
-            return self.avplayer.isMuted
+             self.avplayer.isMuted
         }
         set {
             self.avplayer.isMuted = newValue
@@ -115,7 +115,7 @@ public class Player: UIViewController {
 
     public var fillMode: String {
         get {
-            return self.playerView.fillMode
+             self.playerView.fillMode
         }
         set {
             self.playerView.fillMode = newValue
@@ -126,7 +126,7 @@ public class Player: UIViewController {
 
     public var playbackLoops: Bool {
         get {
-            return (self.avplayer.actionAtItemEnd == .none) as Bool
+             (self.avplayer.actionAtItemEnd == .none) as Bool
         }
         set {
             if newValue == true {
@@ -262,7 +262,7 @@ public class Player: UIViewController {
             self.avplayer.removeTimeObserver(obs)
         }
 
-        self.avplayer.removeTimeObserver(timeObserver)
+        self.avplayer.removeTimeObserver(timeObserver!)
         self.delegate = nil
 
         NotificationCenter.default.removeObserver(self)
@@ -362,7 +362,7 @@ public class Player: UIViewController {
 
     public func seekToTime(_ time: CMTime) {
         if let playerItem = self.playerItem {
-            return playerItem.seek(to: time)
+            playerItem.seek(to: time, completionHandler: nil)
         }
     }
 
@@ -516,7 +516,7 @@ extension Player {
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         // PlayerRateKey, PlayerObserverContext
 
-        if (context == &PlayerItemObserverContext) {
+        if context == &PlayerItemObserverContext {
             // PlayerStatusKey
 
             if keyPath == PlayerKeepUpKey {
@@ -532,7 +532,7 @@ extension Player {
 
                 let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayer.Status.RawValue
 
-                switch (status) {
+                switch status {
                 case AVPlayer.Status.readyToPlay.rawValue:
                     self.playerView.playerLayer.player = self.avplayer
                     self.playerView.playerLayer.isHidden = false
@@ -552,7 +552,7 @@ extension Player {
 
                 let status = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).intValue as AVPlayer.Status.RawValue
 
-                switch (status) {
+                switch status {
                 case AVPlayer.Status.readyToPlay.rawValue:
                     self.playerView.playerLayer.player = self.avplayer
                     self.playerView.playerLayer.isHidden = false
@@ -577,7 +577,7 @@ extension Player {
                     }
                 }
             }
-        } else if (context == &PlayerLayerObserverContext) {
+        } else if context == &PlayerLayerObserverContext {
             if self.playerView.playerLayer.isReadyForDisplay {
                 self.executeClosureOnMainQueueIfNecessary(withClosure: {
                     self.delegate?.playerReady?(self)
@@ -607,20 +607,18 @@ extension Player {
 internal class PlayerView: UIView {
     var player: AVPlayer? {
         get {
-            return playerLayer.player
+             playerLayer.player
         }
         set {
             playerLayer.player = newValue
         }
     }
 
-    var playerLayer: AVPlayerLayer {
-        return layer as! AVPlayerLayer
-    }
+    var playerLayer: AVPlayerLayer { layer as! AVPlayerLayer }
 
     var fillMode: String {
         get {
-            return (self.layer as! AVPlayerLayer).videoGravity.rawValue
+             (self.layer as! AVPlayerLayer).videoGravity.rawValue
         }
         set {
             (self.layer as! AVPlayerLayer).videoGravity = AVLayerVideoGravity(rawValue: newValue)
@@ -629,7 +627,7 @@ internal class PlayerView: UIView {
 
     override class var layerClass: Swift.AnyClass {
         get {
-            return AVPlayerLayer.self
+             AVPlayerLayer.self
         }
     }
 

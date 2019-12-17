@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol WriteCourseReviewViewDelegate: class {
+protocol WriteCourseReviewViewDelegate: AnyObject {
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateText text: String)
     func writeCourseReviewView(_ view: WriteCourseReviewView, didUpdateScore score: Int)
 }
@@ -75,7 +75,7 @@ final class WriteCourseReviewView: UIView {
 
     private var starsCount: Int {
         get {
-            return self.starsView.starsCount
+             self.starsView.starsCount
         }
         set {
             if newValue != self.starsView.starsCount {
@@ -103,7 +103,7 @@ final class WriteCourseReviewView: UIView {
     }
 
     override func becomeFirstResponder() -> Bool {
-        return self.textView.becomeFirstResponder()
+        self.textView.becomeFirstResponder()
     }
 
     func configure(viewModel: WriteCourseReviewViewModel) {

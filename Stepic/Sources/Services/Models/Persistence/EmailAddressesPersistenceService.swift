@@ -1,13 +1,13 @@
 import Foundation
 import PromiseKit
 
-protocol EmailAddressesPersistenceServiceProtocol: class {
+protocol EmailAddressesPersistenceServiceProtocol: AnyObject {
     func fetch(ids: [EmailAddress.IdType]) -> Promise<[EmailAddress]>
 }
 
 final class EmailAddressesPersistenceService: EmailAddressesPersistenceServiceProtocol {
     func fetch(ids: [EmailAddress.IdType]) -> Promise<[EmailAddress]> {
-        return Promise { seal in
+        Promise { seal in
             EmailAddress.fetchAsync(ids: ids).done { emailAddresses in
                 let emailAddresses = Array(Set(emailAddresses)).reordered(order: ids, transform: { $0.id })
                 seal.fulfill(emailAddresses)

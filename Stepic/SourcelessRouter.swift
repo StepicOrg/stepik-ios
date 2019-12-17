@@ -10,11 +10,11 @@ import UIKit
 
 class SourcelessRouter {
     var window: UIWindow? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window
+        (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
     var currentTabBarController: UITabBarController? {
-        return self.window?.rootViewController as? UITabBarController
+        self.window?.rootViewController as? UITabBarController
     }
 
     var currentNavigation: UINavigationController? {

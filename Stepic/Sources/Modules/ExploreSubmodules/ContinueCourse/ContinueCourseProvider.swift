@@ -21,7 +21,7 @@ final class ContinueCourseProvider: ContinueCourseProviderProtocol {
     }
 
     func fetchLastCourse() -> Promise<Course?> {
-        return Promise { seal in
+        Promise { seal in
             self.userCoursesAPI.retrieve(page: 1).then {
                 result -> Promise<[Course]> in
                 let lastCourse = result.0

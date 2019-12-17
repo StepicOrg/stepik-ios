@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListInteractorProtocol: class {
+protocol CourseListInteractorProtocol: AnyObject {
     func doCoursesFetch(request: CourseList.CoursesLoad.Request)
     func doNextCoursesFetch(request: CourseList.NextCoursesLoad.Request)
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request)
@@ -174,7 +174,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     func doPrimaryAction(request: CourseList.PrimaryCourseAction.Request) {
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
-        guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
+        guard let targetIndex = self.currentCourses.firstIndex(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
         }
@@ -228,7 +228,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     }
 
     func doSecondaryAction(request: CourseList.SecondaryCourseAction.Request) {
-        guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
+        guard let targetIndex = self.currentCourses.firstIndex(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
         }
@@ -252,7 +252,7 @@ final class CourseListInteractor: CourseListInteractorProtocol {
     }
 
     func doMainAction(request: CourseList.MainCourseAction.Request) {
-        guard let targetIndex = self.currentCourses.index(where: { $0.0 == request.viewModelUniqueIdentifier }),
+        guard let targetIndex = self.currentCourses.firstIndex(where: { $0.0 == request.viewModelUniqueIdentifier }),
               let targetCourse = self.currentCourses[safe: targetIndex]?.1 else {
             fatalError("Invalid module state")
         }
@@ -279,12 +279,10 @@ final class CourseListInteractor: CourseListInteractorProtocol {
         return Set<Course>(availableInAdaptiveMode)
     }
 
-    private func getUniqueIdentifierForCourse(_ course: Course) -> UniqueIdentifierType {
-        return "\(course.id)"
-    }
+    private func getUniqueIdentifierForCourse(_ course: Course) -> UniqueIdentifierType { "\(course.id)" }
 
     private func updateCourseInCurrentCourses(_ course: Course) {
-        guard let targetIndex = self.currentCourses.index(where: { $0.1 == course }) else {
+        guard let targetIndex = self.currentCourses.firstIndex(where: { $0.1 == course }) else {
             return
         }
         self.currentCourses[targetIndex] = (self.getUniqueIdentifierForCourse(course), course)

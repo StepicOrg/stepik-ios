@@ -14,18 +14,19 @@ enum StoriesViewState {
     case loading
 }
 
-protocol StoriesViewProtocol: class {
+protocol StoriesViewProtocol: AnyObject {
     func set(state: StoriesViewState)
     func set(stories: [Story])
     func updateStory(index: Int)
 }
 
-protocol StoriesPresenterProtocol: class {
+protocol StoriesPresenterProtocol: AnyObject {
     func refresh()
 }
 
-protocol StoriesOutputProtocol: class {
+protocol StoriesOutputProtocol: AnyObject {
     func hideStories()
+    func handleStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle)
 }
 
 final class StoriesPresenter: StoriesPresenterProtocol {
@@ -54,7 +55,7 @@ final class StoriesPresenter: StoriesPresenterProtocol {
     @objc
     private func storyDidAppear(_ notification: Foundation.Notification) {
         guard let storyID = (notification as NSNotification).userInfo?["id"] as? Int,
-              let index = self.stories.index(where: { $0.id == storyID }) else {
+              let index = self.stories.firstIndex(where: { $0.id == storyID }) else {
             return
         }
 
@@ -109,5 +110,13 @@ final class StoriesPresenter: StoriesPresenterProtocol {
 
             strongSelf.view?.set(state: strongSelf.stories.isEmpty ? .empty : .normal)
         }
+    }
+}
+
+// MARK: - StoriesPresenter: OpenedStoriesOutputProtocol -
+
+extension StoriesPresenter: OpenedStoriesOutputProtocol {
+    func handleOpenedStoriesStatusBarStyleUpdate(_ statusBarStyle: UIStatusBarStyle) {
+        self.moduleOutput?.handleStoriesStatusBarStyleUpdate(statusBarStyle)
     }
 }

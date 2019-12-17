@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CodeLanguagePickerViewDelegate: class {
+protocol CodeLanguagePickerViewDelegate: AnyObject {
     func codeLanguagePickerView(_ view: CodeLanguagePickerView, didSelectLanguage language: String)
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Constants {
+enum Constants {
     static let placeholderImage = UIImage(named: "stepic_logo_black_and_white")!
 
     static let joinCourseButtonText = NSLocalizedString("JoinCourse", comment: "")

@@ -49,7 +49,7 @@ final class LanguageSettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.selectedIndex = ContentLanguage.supportedLanguages.index(
+        self.selectedIndex = ContentLanguage.supportedLanguages.firstIndex(
             of: self.contentLanguageService.globalContentLanguage
         )
         self.selectLanguage(self.contentLanguageService.globalContentLanguage)
@@ -63,7 +63,7 @@ final class LanguageSettingsViewController: UIViewController {
             let cellToDeselect = self.tableView.cellForRow(at: deselectIndexPath)
             cellToDeselect?.accessoryType = .none
         }
-        if let selectedIndex = ContentLanguage.supportedLanguages.index(of: language) {
+        if let selectedIndex = ContentLanguage.supportedLanguages.firstIndex(of: language) {
             self.selectedIndex = selectedIndex
             let selectIndexPath = IndexPath(row: selectedIndex, section: 0)
             let cellToSelect = self.tableView.cellForRow(at: selectIndexPath)
@@ -74,7 +74,7 @@ final class LanguageSettingsViewController: UIViewController {
 
 extension LanguageSettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ContentLanguage.supportedLanguages.count
+        ContentLanguage.supportedLanguages.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

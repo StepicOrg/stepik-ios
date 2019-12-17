@@ -92,7 +92,11 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
     }()
 
     func showStory(at index: Int) {
-        let moduleToPresent = OpenedStoriesAssembly(stories: self.stories, startPosition: index).makeModule()
+        let moduleToPresent = OpenedStoriesAssembly(
+            stories: self.stories,
+            startPosition: index,
+            moduleOutput: self.presenter as? OpenedStoriesOutputProtocol
+        ).makeModule()
         if DeviceInfo.current.isPad {
             self.customPresentViewController(
                 self.storyPresentr,
@@ -160,12 +164,8 @@ extension StoriesViewController: UICollectionViewDelegate, UICollectionViewDataS
         self.showStory(at: indexPath.item)
     }
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.stories.count
+        self.stories.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

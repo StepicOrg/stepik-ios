@@ -33,9 +33,7 @@ class PersistentRecoveryManager {
     }
 
     //Override this method in a subclass!
-    func recoverObjectFromDictionary(_ dictionary: [String: Any]) -> DictionarySerializable? {
-        return nil
-    }
+    func recoverObjectFromDictionary(_ dictionary: [String: Any]) -> DictionarySerializable? { nil }
 
     func recoverObjectWithKey(_ key: String) -> DictionarySerializable? {
         if let objectDictionary = loadObjectDictionaryFromKey(key) {

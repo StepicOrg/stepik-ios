@@ -12,7 +12,7 @@ import PromiseKit
 import SwiftyJSON
 
 final class AttemptsAPI: APIEndpoint {
-    override var name: String { return "attempts" }
+    override var name: String { "attempts" }
 
     func create(stepName: String, stepId: Int) -> Promise<Attempt> {
         let attempt = Attempt(step: stepId)
@@ -32,7 +32,7 @@ final class AttemptsAPI: APIEndpoint {
     }
 
     func retrieve(stepName: String, stepID: Int) -> Promise<([Attempt], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.retrieve(
                 stepName: stepName,
                 stepId: stepID,

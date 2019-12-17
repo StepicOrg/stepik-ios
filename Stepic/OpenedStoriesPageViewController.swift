@@ -15,17 +15,13 @@ final class OpenedStoriesPageViewController: UIPageViewController, OpenedStories
     var startOffset: CGFloat = 0
 
     private var isDragging: Bool = false
-    private var prevStatusBarStyle: UIStatusBarStyle?
+    private var previousStatusBarStyle: UIStatusBarStyle?
 
     private weak var currentStoryController: UIViewController?
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .portrait }
 
-    override var shouldAutorotate: Bool {
-        return false
-    }
+    override var shouldAutorotate: Bool { false }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,19 +42,19 @@ final class OpenedStoriesPageViewController: UIPageViewController, OpenedStories
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        self.prevStatusBarStyle = UIApplication.shared.statusBarStyle
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        if let currentStatusBarStyle = SourcelessRouter().currentNavigation?.preferredStatusBarStyle {
+            self.previousStatusBarStyle = currentStatusBarStyle
+        }
+
+        self.presenter?.setStatusBarStyle(.lightContent)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if let style = self.prevStatusBarStyle {
-            UIApplication.shared.statusBarStyle = style
+        if let previousStatusBarStyle = self.previousStatusBarStyle {
+            self.presenter?.setStatusBarStyle(previousStatusBarStyle)
         }
-
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     func close() {
@@ -79,14 +75,14 @@ extension OpenedStoriesPageViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        return self.presenter?.prevModule
+        self.presenter?.prevModule
     }
 
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
-        return self.presenter?.nextModule
+        self.presenter?.nextModule
     }
 }
 

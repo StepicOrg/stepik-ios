@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol TagsViewDelegate: class {
+protocol TagsViewDelegate: AnyObject {
     func tagsViewDidTagSelect(_ tagsView: TagsView, viewModel: TagViewModel)
 }
 

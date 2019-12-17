@@ -27,7 +27,7 @@ extension Progress {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Progress", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -39,13 +39,13 @@ extension Progress {
             self.managedId = newId
         }
         get {
-            return managedId ?? ""
+             managedId ?? ""
         }
     }
 
     var isPassed: Bool {
         get {
-            return managedIsPassed?.boolValue ?? false
+             managedIsPassed?.boolValue ?? false
         }
         set(value) {
             managedIsPassed = value as NSNumber?
@@ -54,7 +54,7 @@ extension Progress {
 
     var lastViewed: Double {
         get {
-            return managedLastViewed?.doubleValue ?? 0
+             managedLastViewed?.doubleValue ?? 0
         }
         set(value) {
             managedLastViewed = value as NSNumber?
@@ -63,7 +63,7 @@ extension Progress {
 
     var score: Int {
         get {
-            return managedScore?.intValue ?? 0
+             managedScore?.intValue ?? 0
         }
         set(value) {
             managedScore = value as NSNumber?
@@ -72,7 +72,7 @@ extension Progress {
 
     var numberOfSteps: Int {
         get {
-            return managedNumberOfSteps?.intValue ?? 0
+             managedNumberOfSteps?.intValue ?? 0
         }
         set(value) {
             managedNumberOfSteps = value as NSNumber?
@@ -81,7 +81,7 @@ extension Progress {
 
     var numberOfStepsPassed: Int {
         get {
-            return managedNumberOfStepsPassed?.intValue ?? 0
+             managedNumberOfStepsPassed?.intValue ?? 0
         }
         set(value) {
             managedNumberOfStepsPassed = value as NSNumber?
@@ -90,7 +90,7 @@ extension Progress {
 
     var cost: Int {
         get {
-            return managedCost?.intValue ?? 0
+             managedCost?.intValue ?? 0
         }
         set(value) {
             managedCost = value as NSNumber?

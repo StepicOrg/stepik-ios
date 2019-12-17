@@ -10,7 +10,7 @@ import UIKit
 
 final class FullHeightTableView: UITableView {
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: self.contentSize.height)
+        CGSize(width: UIView.noIntrinsicMetric, height: self.contentSize.height)
     }
 
     override func reloadData() {

@@ -11,12 +11,10 @@ import Foundation
 import SwiftyJSON
 
 final class CodeTemplate: NSManagedObject {
-    var language: CodeLanguage? {
-        return CodeLanguage(rawValue: languageString)
-    }
+    var language: CodeLanguage? { CodeLanguage(rawValue: languageString) }
 
     override var description: String {
-        return "CodeTemplate(languageString: \(self.languageString), templateString: \(self.templateString)"
+        "CodeTemplate(languageString: \(self.languageString), templateString: \(self.templateString)"
     }
 
     required convenience init(language: CodeLanguage, template: String) {

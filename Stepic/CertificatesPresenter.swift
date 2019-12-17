@@ -43,8 +43,8 @@ final class CertificatesPresenter {
         let localIds = self.presentationContainer.certificatesIds
 
         let localCertificates = Certificate.fetch(localIds, user: self.userID).sorted(by: {
-            guard let index1 = localIds.index(of: $0.id),
-                  let index2 = localIds.index(of: $1.id) else {
+            guard let index1 = localIds.firstIndex(of: $0.id),
+                  let index2 = localIds.firstIndex(of: $1.id) else {
                 return false
             }
             return index1 < index2

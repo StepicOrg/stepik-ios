@@ -18,9 +18,7 @@ final class ShrinkDismissAnimationController: NSObject, UIViewControllerAnimated
         self.interactionController = interactionController
     }
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.2
-    }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval { 0.2 }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let _ = transitionContext.viewController(forKey: .to),

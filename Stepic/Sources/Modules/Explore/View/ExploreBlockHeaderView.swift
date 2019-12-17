@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol ExploreBlockHeaderViewProtocol: class {
+protocol ExploreBlockHeaderViewProtocol: AnyObject {
     var onShowAllButtonClick: (() -> Void)? { get set }
     var titleText: String? { get set }
     var summaryText: String? { get set }

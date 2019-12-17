@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CourseInfoTabReviewsViewDelegate: class {
+protocol CourseInfoTabReviewsViewDelegate: AnyObject {
     func courseInfoTabReviewsViewDidPaginationRequesting(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsViewDidRequestWriteReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
     func courseInfoTabReviewsViewDidRequestEditReview(_ courseInfoTabReviewsView: CourseInfoTabReviewsView)
@@ -166,7 +166,7 @@ final class CourseInfoTabReviewsView: UIView {
     }
 
     func popoverPresentationAnchorPoint(at indexPath: IndexPath) -> (UIView, CGRect) {
-        return (self.tableView, self.tableView.rectForRow(at: indexPath))
+        (self.tableView, self.tableView.rectForRow(at: indexPath))
     }
 
     // MARK: - Private API
@@ -222,11 +222,11 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false
+        self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false
     }
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false ? indexPath : nil
+        self.delegate?.courseInfoTabReviewsView(self, willSelectRowAt: indexPath) ?? false ? indexPath : nil
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -240,7 +240,7 @@ extension CourseInfoTabReviewsView: UITableViewDelegate {
 extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
-            return self.pageScrollViewDelegate
+             self.pageScrollViewDelegate
         }
         set {
             self.pageScrollViewDelegate = newValue
@@ -249,7 +249,7 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsets: UIEdgeInsets {
         get {
-            return self.tableView.contentInset
+             self.tableView.contentInset
         }
         set {
             self.emptyStateLabel.snp.updateConstraints { make in
@@ -261,7 +261,7 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
 
     var contentOffset: CGPoint {
         get {
-            return self.tableView.contentOffset
+             self.tableView.contentOffset
         }
         set {
             self.tableView.contentOffset = newValue
@@ -270,7 +270,7 @@ extension CourseInfoTabReviewsView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
-            return self.tableView.contentInsetAdjustmentBehavior
+             self.tableView.contentInsetAdjustmentBehavior
         }
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue

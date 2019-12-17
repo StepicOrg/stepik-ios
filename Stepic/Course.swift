@@ -67,24 +67,22 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     var sectionDeadlines: [SectionDeadline]? {
-        get {
-            return (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageData)?.deadlines
-        }
+        (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageData)?.deadlines
     }
 
     var metaInfo: String {
-        //percent of completion = n_steps_passed/n_steps
-        if let p = self.progress {
-            let percentage = p.numberOfSteps != 0 ? Int(Double(p.numberOfStepsPassed) / Double(p.numberOfSteps) * 100) : 100
+        if let progress = self.progress {
+            let percentage = progress.numberOfSteps != 0
+                ? Int(Double(progress.numberOfStepsPassed) / Double(progress.numberOfSteps) * 100)
+                : 100
             return "\(NSLocalizedString("PassedPercent", comment: "")) \(percentage)%"
-//            return "Выполнение курса: " + "\(percentage)%"
         } else {
             return ""
         }
     }
 
     var nearestDeadlines: (nearest: Date?, second: Date?)? {
-        guard sections.count > 0 else {
+        if sections.isEmpty {
             return nil
         }
 
@@ -103,7 +101,10 @@ final class Course: NSManagedObject, IDFetchable {
         for (index, deadline) in deadlines.enumerated() {
             if deadline > Date().timeIntervalSince1970 {
                 if index + 1 < deadlines.count {
-                    return (nearest: Date(timeIntervalSince1970: deadline), second: Date(timeIntervalSince1970: deadlines[index + 1]))
+                    return (
+                        nearest: Date(timeIntervalSince1970: deadline),
+                        second: Date(timeIntervalSince1970: deadlines[index + 1])
+                    )
                 } else {
                     return (nearest: Date(timeIntervalSince1970: deadline), second: nil)
                 }
@@ -114,7 +115,7 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     var canContinue: Bool {
-        return self.totalUnits > 0
+        self.totalUnits > 0
             && self.scheduleType != "ended"
             && self.scheduleType != "upcoming"
     }
@@ -124,29 +125,37 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     func loadAllInstructors(success: @escaping (() -> Void)) {
-        _ = ApiDataDownloader.users.retrieve(ids: self.instructorsArray, existing: self.instructors, refreshMode: .update, success: {
-            users in
-            self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
-            CoreDataHelper.instance.save()
-            success()
-            }, error: {
-                _ in
+        _ = ApiDataDownloader.users.retrieve(
+            ids: self.instructorsArray,
+            existing: self.instructors,
+            refreshMode: .update,
+            success: { users in
+                self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
+                CoreDataHelper.instance.save()
+                success()
+            },
+            error: { _ in
                 print("error while loading section")
-        })
+            }
+        )
     }
 
-    func loadAllSections(success: @escaping (() -> Void), error errorHandler : @escaping (() -> Void), withProgresses: Bool = true) {
-        if sectionsArray.count == 0 {
+    func loadAllSections(
+        success: @escaping (() -> Void),
+        error errorHandler : @escaping (() -> Void),
+        withProgresses: Bool = true
+    ) {
+        if sectionsArray.isEmpty {
             success()
             return
         }
 
         let requestSectionsCount = 50
         var dimCount = 0
-        var idsArray = Array<Array<Int>>()
+        var idsArray = [[Int]]()
         for (index, sectionId) in self.sectionsArray.enumerated() {
             if index % requestSectionsCount == 0 {
-                idsArray.append(Array<Int>())
+                idsArray.append([Int]())
                 dimCount += 1
             }
             idsArray[dimCount - 1].append(sectionId)
@@ -346,7 +355,7 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     func getSection(before section: Section) -> Section? {
-        let currentIndex = sectionsArray.index(of: section.id)
+        let currentIndex = sectionsArray.firstIndex(of: section.id)
         if currentIndex == nil || currentIndex == sectionsArray.startIndex {
             return nil
         } else {
@@ -356,7 +365,7 @@ final class Course: NSManagedObject, IDFetchable {
     }
 
     func getSection(after section: Section) -> Section? {
-        let currentIndex = sectionsArray.index(of: section.id)
+        let currentIndex = sectionsArray.firstIndex(of: section.id)
         if currentIndex == nil || currentIndex == sectionsArray.endIndex.advanced(by: -1) {
             return nil
         } else {

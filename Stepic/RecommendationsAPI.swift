@@ -13,12 +13,24 @@ import SwiftyJSON
 
 //TODO: Refactor this class into two separate API classes
 final class RecommendationsAPI: APIEndpoint {
-    override var name: String { return "recommendations" }
-    var reactionName: String { return "recommendation-reactions" }
+    override var name: String { "recommendations" }
 
-    func retrieve(course courseId: Int, count: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Int]> {
-        return Promise { seal in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.name)", parameters: ["course": courseId, "count": count], headers: headers).validate(statusCode: [200]).responseSwiftyJSON { response in
+    var reactionName: String { "recommendation-reactions" }
+
+    func retrieve(
+        course courseId: Int,
+        count: Int = 1,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<[Int]> {
+        Promise { seal in
+            self.manager.request(
+                "\(StepicApplicationsInfo.apiURL)/\(self.name)",
+                parameters: [
+                    "course": courseId,
+                    "count": count
+                ],
+                headers: headers
+            ).validate(statusCode: [200]).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(NetworkError(error: error))
@@ -29,7 +41,12 @@ final class RecommendationsAPI: APIEndpoint {
         }
     }
 
-    func sendReaction(user userId: Int, lesson lessonId: Int, reaction: Reaction, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Void> {
+    func sendReaction(
+        user userId: Int,
+        lesson lessonId: Int,
+        reaction: Reaction,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<Void> {
         let params = [
             "recommendationReaction": [
                 "reaction": reaction.rawValue,
@@ -39,7 +56,13 @@ final class RecommendationsAPI: APIEndpoint {
         ]
 
         return Promise { seal in
-            manager.request("\(StepicApplicationsInfo.apiURL)/\(self.reactionName)", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).validate(statusCode: [201]).responseSwiftyJSON { response in
+            manager.request(
+                "\(StepicApplicationsInfo.apiURL)/\(self.reactionName)",
+                method: .post,
+                parameters: params,
+                encoding: JSONEncoding.default,
+                headers: headers
+            ).validate(statusCode: [201]).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(NetworkError(error: error))
@@ -53,14 +76,46 @@ final class RecommendationsAPI: APIEndpoint {
 
 extension RecommendationsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func sendRecommendationReaction(user userId: Int, lesson lessonId: Int, reaction: Reaction, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
-        sendReaction(user: userId, lesson: lessonId, reaction: reaction, headers: headers).done { _ in success() }.catch { error in errorHandler(error.localizedDescription) }
+    @discardableResult
+    func sendRecommendationReaction(
+        user userId: Int,
+        lesson lessonId: Int,
+        reaction: Reaction,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (() -> Void),
+        error errorHandler: @escaping ((String) -> Void)
+    ) -> Request? {
+        self.sendReaction(
+            user: userId,
+            lesson: lessonId,
+            reaction: reaction,
+            headers: headers
+        ).done { _ in
+            success()
+        }.catch { error in
+            errorHandler(error.localizedDescription)
+        }
         return nil
     }
 
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func getRecommendedLessonsId(course courseId: Int, count: Int = 1, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([Int]) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
-        retrieve(course: courseId, count: count, headers: headers).done { ids in success(ids) }.catch { error in errorHandler(error.localizedDescription) }
+    @discardableResult
+    func getRecommendedLessonsId(
+        course courseId: Int,
+        count: Int = 1,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (([Int]) -> Void),
+        error errorHandler: @escaping ((String) -> Void)
+    ) -> Request? {
+        self.retrieve(
+            course: courseId,
+            count: count,
+            headers: headers
+        ).done { ids in
+            success(ids)
+        }.catch { error in
+            errorHandler(error.localizedDescription)
+        }
         return nil
     }
 }

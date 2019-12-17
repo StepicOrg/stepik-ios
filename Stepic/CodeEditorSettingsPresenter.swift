@@ -7,7 +7,7 @@
 //
 import Foundation
 
-protocol CodeEditorSettingsView: class {
+protocol CodeEditorSettingsView: AnyObject {
     func setMenu(menu: Menu)
 
     func chooseEditorTheme(current: String)
@@ -63,9 +63,7 @@ final class CodeEditorSettingsPresenter {
     private let fontsHeaderBlockId = "fonts_header"
     private let fontSizeBlockId = "font_size_block"
 
-    private func buildTitleMenuBlock(id: String, title: String) -> HeaderMenuBlock {
-        return HeaderMenuBlock(id: id, title: title)
-    }
+    private func buildTitleMenuBlock(id: String, title: String) -> HeaderMenuBlock { .init(id: id, title: title) }
 
     private func buildThemeBlock() -> TransitionMenuBlock {
         themeBlock = TransitionMenuBlock(id: themeBlockId, title: NSLocalizedString("CodeEditorTheme", comment: ""))

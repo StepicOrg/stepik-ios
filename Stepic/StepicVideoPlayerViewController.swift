@@ -34,7 +34,8 @@ final class StepicVideoPlayerLegacyAssembly: Assembly {
     }
 }
 
-// MARK: - StepicVideoPlayerViewController (Appearance) -
+// MARK: - Appearance -
+
 extension StepicVideoPlayerViewController {
     struct Appearance {
         static let topContainerViewCornerRadius: CGFloat = 8
@@ -70,6 +71,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     @IBOutlet weak var fullTimeTopLabel: UILabel!
     @IBOutlet weak var topTimeProgressView: UIProgressView!
     @IBOutlet weak var topTimeSlider: UISlider!
+    @IBOutlet var fillModeButton: UIButton!
 
     // MARK: Bottom fullscreen controls
     @IBOutlet weak var rateButton: UIButton!
@@ -90,7 +92,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     private var isPlayerPassedReadyState = false
 
-    private var currentVideoRate: VideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
+    private var currentVideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
         didSet {
             self.adjustToCurrentVideoRate()
             VideosInfo.videoRate = self.currentVideoRate.rawValue
@@ -110,6 +112,12 @@ final class StepicVideoPlayerViewController: UIViewController {
         }
     }
 
+    private var currentVideoFillMode: VideoFillMode = .aspect {
+        didSet {
+            self.handleVideoFillModeDidChange()
+        }
+    }
+
     private var wasPlayingBeforeSeeking = false
 
     private var isPlayerControlsVisible = true
@@ -117,7 +125,9 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     private var videoInBackgroundTooltip: Tooltip?
 
-    // MARK: - UIViewController life cycle
+    override var prefersStatusBarHidden: Bool { true }
+
+    // MARK: UIViewController life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,19 +166,15 @@ final class StepicVideoPlayerViewController: UIViewController {
 
         self.player.playbackLoops = false
 
-        let controlsVisibilityTapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(self.handleTapGestureRecognizer(_:))
-        )
-        controlsVisibilityTapGestureRecognizer.numberOfTapsRequired = 1
-        self.player.view.addGestureRecognizer(controlsVisibilityTapGestureRecognizer)
-
-        self.view.addGestureRecognizer(controlsVisibilityTapGestureRecognizer)
-
         self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
         self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
         self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
+
+        self.fillModeButton.addTarget(self, action: #selector(self.fillModeButtonDidClick), for: .touchUpInside)
+        self.currentVideoFillMode = .aspect
+
+        self.setupGestureRecognizers()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -190,14 +196,47 @@ final class StepicVideoPlayerViewController: UIViewController {
         }
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(
+            alongsideTransition: { _ in
+                self.currentVideoFillMode = .aspect
+            },
+            completion: { _ in
+                self.updateVideoFillModeIcon()
+            }
+        )
+    }
+
     deinit {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: did deinit")
         self.saveCurrentPlayerTime()
         self.hidePlayerControlsTimer?.invalidate()
     }
-    
-    // MARK: - Seek events
+
+    // MARK: Setup player
+
+    private func setupGestureRecognizers() {
+        let videoTapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.videoLayerTapped(_:))
+        )
+        videoTapGestureRecognizer.numberOfTapsRequired = 1
+        self.player.view.addGestureRecognizer(videoTapGestureRecognizer)
+        self.view.addGestureRecognizer(videoTapGestureRecognizer)
+
+        let doubleTapVideoGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.videoLayerDoubleTapped(_:))
+        )
+        doubleTapVideoGestureRecognizer.numberOfTapsRequired = 2
+        self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
+        self.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
+    }
+
+    // MARK: Seek events
 
     @IBAction func topTimeSliderValueChanged(_ sender: UISlider) {
         let time = TimeInterval(sender.value) * self.player.maximumDuration
@@ -225,7 +264,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.player.seekToTime(time)
     }
 
-    // MARK: - Dismiss player
+    // MARK: Dismiss player
 
     @IBAction func backPressed(_ sender: UIButton) {
         self.dismissPlayer()
@@ -236,7 +275,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.dismiss(animated: true)
     }
 
-    // MARK: - Controlling the video rate
+    // MARK: Controlling the video rate
 
     @IBAction func changeRatePressed(_ sender: UIButton) {
         self.displayChangeVideoRateAlert()
@@ -298,7 +337,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.present(alert, animated: true)
     }
 
-    // MARK: - Controlling the video quality
+    // MARK: Controlling the video quality
 
     @IBAction func changeQualityPressed(_ sender: UIButton) {
         self.displayChangeVideoQualityAlert()
@@ -376,7 +415,7 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.present(alert, animated: true)
     }
 
-    // MARK: - Controlling the playback state
+    // MARK: Controlling the playback state
 
     private func getInitialVideoQualityURL() -> URL {
         if self.video.state == .cached {
@@ -414,9 +453,11 @@ final class StepicVideoPlayerViewController: UIViewController {
     }
 
     @objc
-    private func togglePlayPause() {
+    private func togglePlayPause() -> MPRemoteCommandHandlerStatus {
         self.handlePlay()
         self.scheduleHidePlayerControlsTimer()
+
+        return .success
     }
 
     @objc
@@ -470,14 +511,19 @@ final class StepicVideoPlayerViewController: UIViewController {
         }
     }
 
-    // MARK: - Controls visibility
+    // MARK: Controls visibility
 
     @objc
-    private func handleTapGestureRecognizer(_ gestureRecognizer: UITapGestureRecognizer) {
-        self.handleControlsVisibility()
+    private func videoLayerTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        self.updateVideoControlsVisibility()
     }
 
-    private func handleControlsVisibility(hideControlsAutomatically: Bool = true) {
+    @objc
+    private func videoLayerDoubleTapped(_ gestureRecognizer: UITapGestureRecognizer) {
+        self.currentVideoFillMode.toggle()
+    }
+
+    private func updateVideoControlsVisibility(hideControlsAutomatically: Bool = true) {
         self.setPlayerBarControlsVisibleAnimated(visible: !self.isPlayerControlsVisible)
         self.isPlayerControlsVisible.toggle()
 
@@ -511,7 +557,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     @objc
     private func hidePlayerControlsIfVisible() {
         if self.isPlayerControlsVisible {
-            self.handleControlsVisibility()
+            self.updateVideoControlsVisibility()
         }
     }
 }
@@ -525,7 +571,7 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
         }
 
         self.isPlayerPassedReadyState = true
-        
+
         StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: player is ready to display")
 
         self.activityIndicator.isHidden = true
@@ -570,7 +616,7 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
 
         self.hidePlayerControlsTimer?.invalidate()
         self.isPlayerControlsVisible = false
-        self.handleControlsVisibility(hideControlsAutomatically: false)
+        self.updateVideoControlsVisibility(hideControlsAutomatically: false)
     }
 
     private func setTimeParametersAfterPlayerIsReady() {
@@ -622,5 +668,72 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
         )
 
         self.present(alert, animated: true)
+    }
+}
+
+// MARK: - StepicVideoPlayerViewController (VideoFillMode) -
+
+extension StepicVideoPlayerViewController {
+    private enum VideoFillMode {
+        /// Preserve the video’s aspect ratio and fit the video within the layer’s bounds.
+        case aspect
+        /// Preserve the video’s aspect ratio and fill the layer’s bounds.
+        case aspectFill
+
+        var videoGravity: AVLayerVideoGravity {
+            switch self {
+            case .aspect:
+                return .resizeAspect
+            case .aspectFill:
+                return .resizeAspectFill
+            }
+        }
+
+        mutating func toggle() {
+            switch self {
+            case .aspect:
+                self = .aspectFill
+            case .aspectFill:
+                self = .aspect
+            }
+        }
+    }
+
+    private func handleVideoFillModeDidChange() {
+        self.updateVideoFillModeIcon()
+
+        let requestedFillMode = self.currentVideoFillMode.videoGravity.rawValue
+        if self.player.fillMode != requestedFillMode {
+            self.player.fillMode = requestedFillMode
+        }
+    }
+
+    private func updateVideoFillModeIcon() {
+        let fillModeImage: UIImage? = {
+            let currentInterfaceOrientation = DeviceInfo.current.orientation.interface
+
+            switch self.currentVideoFillMode {
+            case .aspect:
+                if currentInterfaceOrientation.isLandscape {
+                    return UIImage(named: "resize-horizontal")
+                } else {
+                    return UIImage(named: "resize-vertical")
+                }
+            case .aspectFill:
+                if currentInterfaceOrientation.isLandscape {
+                    return UIImage(named: "compress-horizontal")
+                } else {
+                    return UIImage(named: "compress-vertical")
+                }
+            }
+        }()
+
+        self.fillModeButton.setImage(fillModeImage, for: .normal)
+        self.fillModeButton.imageView?.contentMode = .scaleAspectFit
+    }
+
+    @objc
+    private func fillModeButtonDidClick() {
+        self.currentVideoFillMode.toggle()
     }
 }

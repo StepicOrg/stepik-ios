@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CourseListsCollectionNetworkServiceProtocol: class {
+protocol CourseListsCollectionNetworkServiceProtocol: AnyObject {
     func fetch(language: ContentLanguage, page: Int) -> Promise<([CourseListModel], Meta)>
 }
 
@@ -13,7 +13,7 @@ final class CourseListsCollectionNetworkService: CourseListsCollectionNetworkSer
     }
 
     func fetch(language: ContentLanguage, page: Int) -> Promise<([CourseListModel], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.courseListsAPI.retrieve(language: language, page: page).done { lists, meta in
                 seal.fulfill((lists, meta))
             }.catch { _ in

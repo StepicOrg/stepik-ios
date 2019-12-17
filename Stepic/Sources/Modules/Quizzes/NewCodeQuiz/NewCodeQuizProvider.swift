@@ -35,11 +35,11 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
     }
 
     func fetchStepOptions(by stepID: Step.IdType) -> Promise<StepOptions?> {
-        return self.stepOptionsPersistenceService.fetch(by: stepID)
+        self.stepOptionsPersistenceService.fetch(by: stepID)
     }
 
     func fetchCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?> {
-        return self.fetchStepOptions(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
+        self.fetchStepOptions(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
             if let stepOptions = stepOptions {
                 return .value(stepOptions.template(language: language, userGenerated: false))
             } else {
@@ -49,7 +49,7 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
     }
 
     func fetchUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?> {
-        return self.fetchStepOptions(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
+        self.fetchStepOptions(by: stepID).then { stepOptions -> Promise<CodeTemplate?> in
             if let stepOptions = stepOptions {
                 return .value(stepOptions.template(language: language, userGenerated: true))
             } else {
@@ -59,7 +59,7 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
     }
 
     func fetchUserOrCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?> {
-        return Promise { seal in
+        Promise { seal in
             when(
                 fulfilled: self.fetchUserCodeTemplate(by: stepID, language: language),
                 self.fetchCodeTemplate(by: stepID, language: language)
@@ -78,7 +78,7 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
     }
 
     func updateUserCodeTemplate(stepID: Step.IdType, language: CodeLanguage, code: String) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             when(
                 fulfilled: self.fetchStepOptions(by: stepID),
                 self.fetchUserCodeTemplate(by: stepID, language: language)
@@ -103,7 +103,7 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
     }
 
     func fetchLessonTitle(by stepID: Step.IdType) -> Guarantee<String?> {
-        return Guarantee { seal in
+        Guarantee { seal in
             self.stepsPersistenceService.fetch(ids: [stepID]).then { steps -> Promise<String?> in
                 if let step = steps.first {
                     if let lesson = step.lesson {
@@ -124,11 +124,11 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
     }
 
     func fetchAutoSuggestedCodeLanguage(by stepID: Step.IdType) -> Guarantee<CodeLanguage?> {
-        return self.languageSuggestionsService.suggest(stepID: stepID)
+        self.languageSuggestionsService.suggest(stepID: stepID)
     }
 
     func updateAutoSuggestedCodeLanguage(language: CodeLanguage, stepID: Step.IdType) -> Promise<Void> {
-        return self.languageSuggestionsService.update(language: language, stepID: stepID)
+        self.languageSuggestionsService.update(language: language, stepID: stepID)
     }
 
     // MARK: Enums

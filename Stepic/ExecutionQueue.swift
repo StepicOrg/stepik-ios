@@ -14,9 +14,7 @@ import Foundation
 final class ExecutionQueue: DictionarySerializable {
     private var queue: [Executable] = []
 
-    var count: Int {
-        return queue.count
-    }
+    var count: Int { self.queue.count }
 
     func push(_ task: Executable) {
         queue += [task]

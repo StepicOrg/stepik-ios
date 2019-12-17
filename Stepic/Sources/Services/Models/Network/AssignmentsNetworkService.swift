@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol AssignmentsNetworkServiceProtocol: class {
+protocol AssignmentsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Assignment.IdType]) -> Promise<[Assignment]>
 }
 
@@ -13,7 +13,7 @@ final class AssignmentsNetworkService: AssignmentsNetworkServiceProtocol {
     }
 
     func fetch(ids: [Assignment.IdType]) -> Promise<[Assignment]> {
-        return Promise { seal in
+        Promise { seal in
             self.assignmentsAPI.retrieve(ids: ids).done { assignments in
                 let assignments = assignments.reordered(order: ids, transform: { $0.id })
                 seal.fulfill(assignments)

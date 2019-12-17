@@ -1,6 +1,6 @@
 import UIKit
 
-protocol SettingsInputCellDelegate: class {
+protocol SettingsInputCellDelegate: AnyObject {
     func settingsCell(
         elementView: UITextField,
         didReportTextChange text: String?,

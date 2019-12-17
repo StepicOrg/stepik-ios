@@ -40,19 +40,13 @@ extension UIColor {
 
     static let lightBlue = UIColor(hex: 0x45B0FF)
 
-    static var stepicGreen: UIColor {
-        return StepicApplicationsInfo.Colors.mainGreen
-    }
+    static var stepicGreen: UIColor { StepicApplicationsInfo.Colors.mainGreen }
 
     static let mainLight = UIColor(hex: 0xf6f6f6)
 
-    static var mainDark: UIColor {
-        return StepicApplicationsInfo.Colors.mainDark
-    }
+    static var mainDark: UIColor { StepicApplicationsInfo.Colors.mainDark }
 
-    static var mainText: UIColor {
-        return StepicApplicationsInfo.Colors.mainText
-    }
+    static var mainText: UIColor { return StepicApplicationsInfo.Colors.mainText }
 
     static let thirdColor = UIColor(hex: 0x54a2ff)
 

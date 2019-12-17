@@ -16,8 +16,9 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
 
     private var lastDateFailedVideoAlertShown: Date?
+    /// Allows to present alert once per minute.
     private var shouldPresentFailedVideoAlert: Bool {
-        return Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
+        Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
     }
 
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response) {
@@ -62,10 +63,15 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                     .first { $0.section == sectionData.element.entity.id }?
                     .deadlineDate
 
+                let requiredSection = result.sections
+                    .first { $0.entity.id == sectionData.element.entity.requiredSectionID }?
+                    .entity
+
                 return self.makeSectionViewModel(
                     index: sectionData.offset,
                     uid: sectionData.element.uniqueIdentifier,
                     section: sectionData.element.entity,
+                    requiredSection: requiredSection,
                     units: currentSectionUnitViewModels,
                     downloadState: hasPlaceholderUnits || !result.isEnrolled
                         ? .notAvailable
@@ -173,6 +179,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response) {
         let viewModel = CourseInfoTabSyllabusHeaderViewModel(
             isDeadlineButtonVisible: response.isPersonalDeadlinesAvailable,
+            isDeadlineButtonEnabled: response.isPersonalDeadlinesEnabled,
             isDownloadAllButtonEnabled: response.isDownloadAllAvailable,
             isDeadlineTooltipVisible: response.isPersonalDeadlinesTooltipVisible,
             courseDownloadState: response.courseDownloadState
@@ -204,6 +211,7 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         index: Int,
         uid: UniqueIdentifierType,
         section: Section,
+        requiredSection: Section?,
         units: [CourseInfoTabSyllabusSectionViewModel.UnitViewModelWrapper],
         downloadState: CourseInfoTabSyllabus.DownloadState,
         personalDeadlineDate: Date? = nil
@@ -222,12 +230,18 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
             return "\(progress.score)/\(progress.cost)"
         }()
 
+        let requirementsLabelText = self.makeFormattedSectionRequirementsText(
+            section: section,
+            requiredSection: requiredSection
+        )
+
         let viewModel = CourseInfoTabSyllabusSectionViewModel(
             uniqueIdentifier: uid,
             index: "\(index + 1)",
             title: section.title,
             progress: (section.progress?.percentPassed ?? 0) / 100.0,
             progressLabelText: progressLabelText,
+            requirementsLabelText: requirementsLabelText,
             units: units,
             deadlines: deadlines,
             downloadState: downloadState,
@@ -366,5 +380,26 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
 
         return .init(timelineItems: items)
+    }
+
+    private func makeFormattedSectionRequirementsText(section: Section, requiredSection: Section?) -> String? {
+        if section.isRequirementSatisfied {
+            return nil
+        }
+
+        guard let requiredSection = requiredSection,
+              let requiredSectionProgress = requiredSection.progress else {
+            return nil
+        }
+
+        let requiredPoints = Int(
+            (Float(requiredSectionProgress.cost) * Float(section.requiredPercent) / 100.0).rounded(.up)
+        )
+
+        return String(
+            format: NSLocalizedString("CourseInfoTabSyllabusSectionRequirementTitle", comment: ""),
+            FormatterHelper.pointsCount(requiredPoints),
+            requiredSection.title
+        )
     }
 }

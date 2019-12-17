@@ -133,22 +133,21 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
 
 extension PersonalDeadlinesModeSelectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectMode(mode: modes[indexPath.item])
+        self.didSelectMode(mode: self.modes[indexPath.item])
     }
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return modes.count
-    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { self.modes.count }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonalDeadlineModeCollectionViewCell", for: indexPath) as? PersonalDeadlineModeCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "PersonalDeadlineModeCollectionViewCell",
+            for: indexPath
+        ) as? PersonalDeadlineModeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.setup(deadlineMode: modes[indexPath.item])
+
+        cell.setup(deadlineMode: self.modes[indexPath.item])
+
         return cell
     }
 }

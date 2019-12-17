@@ -11,7 +11,7 @@ import PromiseKit
 
 final class DeepLinkRoutingService {
     private var window: UIWindow? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window
+        (UIApplication.shared.delegate as? AppDelegate)?.window
     }
 
     private var currentNavigation: UINavigationController? {
@@ -30,7 +30,7 @@ final class DeepLinkRoutingService {
     }
 
     private var currentTabBarController: UITabBarController? {
-        return self.window?.rootViewController as? UITabBarController
+        self.window?.rootViewController as? UITabBarController
     }
 
     func route(path: String, from source: UIViewController? = nil) {
@@ -85,7 +85,7 @@ final class DeepLinkRoutingService {
     }
 
     private func getModuleStack(route: DeepLinkRoute?) -> Promise<[UIViewController]> {
-        return Promise { seal in
+        Promise { seal in
             guard let route = route else {
                 seal.fulfill([])
                 return

@@ -67,8 +67,8 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         if authors.isEmpty {
             return ""
         } else {
-            var authorString = authors.reduce("") { result, user in
-                result + "\(user.firstName) \(user.lastName), "
+            var authorString = authors.reduce(into: "") { result, user in
+                result += "\(user.firstName) \(user.lastName), "
             }.trimmingCharacters(in: .whitespaces)
             authorString.removeLast()
 
@@ -85,7 +85,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeLocalizedLanguageText(code: String) -> String {
-        return Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? ""
+        Locale.current.localizedString(forLanguageCode: code)?.capitalized ?? ""
     }
 
     private func makeFormattedCertificateText(course: Course) -> String {

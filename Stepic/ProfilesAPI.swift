@@ -12,17 +12,26 @@ import PromiseKit
 import SwiftyJSON
 
 final class ProfilesAPI: APIEndpoint {
-    override var name: String { return "profiles" }
+    override var name: String { "profiles" }
 
-    func retrieve(ids: [Int], existing: [Profile], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Profile]> {
-        return getObjectsByIds(ids: ids, updating: existing)
+    func retrieve(
+        ids: [Int],
+        existing: [Profile],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<[Profile]> {
+        self.getObjectsByIds(ids: ids, updating: existing)
     }
 
     func retrieve(id: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Profile]> {
-        return getObjectsByIds(ids: [id], updating: Profile.fetchById(id) ?? [])
+        self.getObjectsByIds(ids: [id], updating: Profile.fetchById(id) ?? [])
     }
 
     func update(_ profile: Profile) -> Promise<Profile> {
-        return update.request(requestEndpoint: "profiles", paramName: "profile", updatingObject: profile, withManager: manager)
+        self.update.request(
+            requestEndpoint: self.name,
+            paramName: "profile",
+            updatingObject: profile,
+            withManager: self.manager
+        )
     }
 }

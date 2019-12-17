@@ -2,6 +2,7 @@ import Foundation
 
 struct CourseInfoTabSyllabusHeaderViewModel {
     let isDeadlineButtonVisible: Bool
+    let isDeadlineButtonEnabled: Bool
     let isDownloadAllButtonEnabled: Bool
     let isDeadlineTooltipVisible: Bool
 
@@ -15,6 +16,7 @@ struct CourseInfoTabSyllabusSectionViewModel: UniqueIdentifiable {
     let title: String
     let progress: Float
     let progressLabelText: String?
+    let requirementsLabelText: String?
 
     var units: [UnitViewModelWrapper]
     var deadlines: CourseInfoTabSyllabusSectionDeadlinesViewModel?

@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CourseInfoTabSyllabusViewDelegate: class {
+protocol CourseInfoTabSyllabusViewDelegate: AnyObject {
     func courseInfoTabSyllabusViewDidClickDeadlines(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
     func courseInfoTabSyllabusViewDidClickDownloadAll(_ courseInfoTabSyllabusView: CourseInfoTabSyllabusView)
 }
@@ -69,14 +69,10 @@ final class CourseInfoTabSyllabusView: UIView {
     }()
 
     // Reference to tooltip-anchor view
-    var deadlinesButtonTooltipAnchorView: UIView {
-        return self.headerView.deadlinesButtonTooltipAnchorView
-    }
+    var deadlinesButtonTooltipAnchorView: UIView { self.headerView.deadlinesButtonTooltipAnchorView }
 
     // Reference to tooltip-container view
-    var deadlinesButtonTooltipContainerView: UIView {
-        return self.tableView
-    }
+    var deadlinesButtonTooltipContainerView: UIView { self.tableView }
 
     init(
         frame: CGRect = .zero,
@@ -112,6 +108,7 @@ final class CourseInfoTabSyllabusView: UIView {
     func configure(headerViewModel: CourseInfoTabSyllabusHeaderViewModel) {
         self.headerView.isDownloadAllButtonEnabled = headerViewModel.isDownloadAllButtonEnabled
         self.headerView.shouldShowCalendarButton = headerViewModel.isDeadlineButtonVisible
+        self.headerView.isCalendarButtonEnabled = headerViewModel.isDeadlineButtonEnabled
         self.headerView.courseDownloadState = headerViewModel.courseDownloadState
     }
 }
@@ -143,10 +140,7 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.tableViewDelegate?.tableView?(
-            tableView,
-            viewForHeaderInSection: section
-        )
+        self.tableViewDelegate?.tableView?(tableView, viewForHeaderInSection: section)
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -178,14 +172,14 @@ extension CourseInfoTabSyllabusView: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNonzeroMagnitude
+        .leastNonzeroMagnitude
     }
 }
 
 extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
     var scrollViewDelegate: UIScrollViewDelegate? {
         get {
-            return self.pageScrollViewDelegate
+             self.pageScrollViewDelegate
         }
         set {
             self.pageScrollViewDelegate = newValue
@@ -194,7 +188,7 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsets: UIEdgeInsets {
         get {
-            return self.tableView.contentInset
+             self.tableView.contentInset
         }
         set {
             self.tableView.contentInset = newValue
@@ -203,7 +197,7 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
 
     var contentOffset: CGPoint {
         get {
-            return self.tableView.contentOffset
+             self.tableView.contentOffset
         }
         set {
             self.tableView.contentOffset = newValue
@@ -212,7 +206,7 @@ extension CourseInfoTabSyllabusView: CourseInfoScrollablePageViewProtocol {
 
     var contentInsetAdjustmentBehavior: UIScrollView.ContentInsetAdjustmentBehavior {
         get {
-            return self.tableView.contentInsetAdjustmentBehavior
+             self.tableView.contentInsetAdjustmentBehavior
         }
         set {
             self.tableView.contentInsetAdjustmentBehavior = newValue

@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol ProfileView: class {
+protocol ProfileView: AnyObject {
     func set(state: ProfileState)
 
     func showStreakTimeSelection(startHour: Int)
@@ -18,7 +18,7 @@ protocol ProfileView: class {
     func getView(for block: ProfileMenuBlock) -> Any?
     func setMenu(blocks: [ProfileMenuBlock])
 
-    func manageBarItemControls(settingsIsHidden: Bool, profileEditIsAvailable: Bool, shareId: Int?)
+    func manageBarItemControls(isSettingsHidden: Bool, isEditProfileAvailable: Bool, shareID: User.IdType?)
     func attachProfile(_ profile: Profile)
 }
 
@@ -182,7 +182,7 @@ final class ProfilePresenter {
                 self.userSeed = UserSeed.`self`(id: userID)
                 return self.refresh(shouldReload: true)
             } else {
-                self.view?.manageBarItemControls(settingsIsHidden: true, profileEditIsAvailable: false, shareId: nil)
+                self.view?.manageBarItemControls(isSettingsHidden: true, isEditProfileAvailable: false, shareID: nil)
                 self.view?.set(state: .anonymous)
                 return
             }
@@ -205,9 +205,9 @@ final class ProfilePresenter {
         }
 
         self.view?.manageBarItemControls(
-            settingsIsHidden: !isMe,
-            profileEditIsAvailable: self.didProfileAttach,
-            shareId: userID
+            isSettingsHidden: !isMe,
+            isEditProfileAvailable: self.didProfileAttach,
+            shareID: userID
         )
 
         guard shouldReload else {
@@ -247,9 +247,9 @@ final class ProfilePresenter {
                 strongSelf.view?.setMenu(blocks: menu)
                 strongSelf.initChildModules(user: user, activity: activity)
                 strongSelf.view?.manageBarItemControls(
-                    settingsIsHidden: !isMe,
-                    profileEditIsAvailable: profile != nil,
-                    shareId: userID
+                    isSettingsHidden: !isMe,
+                    isEditProfileAvailable: profile != nil,
+                    shareID: userID
                 )
 
                 if let profile = profile {
@@ -264,7 +264,7 @@ final class ProfilePresenter {
     }
 
     private func loadProfile(userId: Int) -> Promise<User> {
-        return User.fetchAsync(ids: [userId]).then { [weak self] users -> Promise<[User]> in
+        User.fetchAsync(ids: [userId]).then { [weak self] users -> Promise<[User]> in
             guard let strongSelf = self else {
                 throw UnwrappingError.optionalError
             }

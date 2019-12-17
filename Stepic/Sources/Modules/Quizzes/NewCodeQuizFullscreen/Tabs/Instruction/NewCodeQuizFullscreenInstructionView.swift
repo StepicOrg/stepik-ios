@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizFullscreenInstructionViewDelegate: class {
+protocol NewCodeQuizFullscreenInstructionViewDelegate: AnyObject {
     func newCodeQuizFullscreenInstructionViewDidLoadContent(_ view: NewCodeQuizFullscreenInstructionView)
     func newCodeQuizFullscreenInstructionView(_ view: NewCodeQuizFullscreenInstructionView, didRequestOpenURL url: URL)
     func newCodeQuizFullscreenInstructionView(
@@ -100,7 +100,8 @@ extension NewCodeQuizFullscreenInstructionView: ProgrammaticallyInitializableVie
     func makeConstraints() {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.top.bottom.equalToSuperview()
         }
 
         self.loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false

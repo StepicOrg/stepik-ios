@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol TabSegmentedControlViewDelegate: class {
+protocol TabSegmentedControlViewDelegate: AnyObject {
     func tabSegmentedControlView(
         _ tabSegmentedControlView: TabSegmentedControlView,
         didSelectTabWithIndex index: Int
@@ -201,7 +201,7 @@ private final class TabButton: UIButton {
 
     /// Frame of text label. Used for black underline when selected
     var textFrame: CGRect {
-        return self.titleLabel?.frame ?? self.frame
+        self.titleLabel?.frame ?? self.frame
     }
 
     override init(frame: CGRect) {

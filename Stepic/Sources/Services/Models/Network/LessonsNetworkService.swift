@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol LessonsNetworkServiceProtocol: class {
+protocol LessonsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Lesson.IdType]) -> Promise<[Lesson]>
 }
 
@@ -13,7 +13,7 @@ final class LessonsNetworkService: LessonsNetworkServiceProtocol {
     }
 
     func fetch(ids: [Lesson.IdType]) -> Promise<[Lesson]> {
-        return Promise { seal in
+        Promise { seal in
             self.lessonsAPI.retrieve(ids: ids).done { lessons in
                 let lessons = lessons.reordered(order: ids, transform: { $0.id })
                 seal.fulfill(lessons)

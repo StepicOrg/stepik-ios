@@ -57,7 +57,7 @@ final class HTMLParsingUtil {
 
             for match in matches {
                 if let urlString = match.url?.absoluteString {
-                    if res.index(where: { $0.link == urlString }) == nil {
+                    if res.firstIndex(where: { $0.link == urlString }) == nil {
                         res += [(link: urlString, text: urlString)]
                     }
                 }

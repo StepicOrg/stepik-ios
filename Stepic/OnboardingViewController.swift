@@ -28,7 +28,7 @@ final class OnboardingViewController: UIViewController {
     private var pages: [OnboardingPageView] = []
 
     var authSource: UIViewController? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
+        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
     }
 
     private var backgroundGradient = CAGradientLayer(colors: [UIColor(hex: 0x3a3947), UIColor(hex: 0x5d6780)], rotationAngle: -50.0)
@@ -37,7 +37,7 @@ final class OnboardingViewController: UIViewController {
     private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "") }
 
     private var shouldUseLandscapeLayout: Bool {
-        return DeviceInfo.current.orientation.interface.isLandscape
+        DeviceInfo.current.orientation.interface.isLandscape
     }
 
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService(
@@ -45,13 +45,7 @@ final class OnboardingViewController: UIViewController {
         analytics: .init(source: .onboarding)
     )
 
-    @IBAction func onCloseButtonClick(_ sender: Any) {
-        dismiss(animated: true) {
-            AnalyticsReporter.reportEvent(AnalyticsEvents.Onboarding.onboardingClosed, parameters: ["screen": self.currentPageIndex + 1])
-            AmplitudeAnalyticsEvents.Onboarding.closed(screen: self.currentPageIndex + 1).send()
-            self.notificationsRegistrationService.registerForRemoteNotifications()
-        }
-    }
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,16 +69,6 @@ final class OnboardingViewController: UIViewController {
 
         backgroundGradient.frame = view.bounds
         view.layer.insertSublayer(self.backgroundGradient, at: 0)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        UIApplication.shared.statusBarStyle = .default
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +102,17 @@ final class OnboardingViewController: UIViewController {
 
             let newScrollViewContentOffsetX = CGFloat(self.currentPageIndex) * self.scrollView.frame.width
             self.scrollView.bounds.origin = CGPoint(x: newScrollViewContentOffsetX, y: self.scrollView.contentOffset.y)
+        }
+    }
+
+    @IBAction func onCloseButtonClick(_ sender: Any) {
+        dismiss(animated: true) {
+            AnalyticsReporter.reportEvent(
+                AnalyticsEvents.Onboarding.onboardingClosed,
+                parameters: ["screen": self.currentPageIndex + 1]
+            )
+            AmplitudeAnalyticsEvents.Onboarding.closed(screen: self.currentPageIndex + 1).send()
+            self.notificationsRegistrationService.registerForRemoteNotifications()
         }
     }
 

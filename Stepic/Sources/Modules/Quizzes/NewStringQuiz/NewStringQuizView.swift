@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewStringQuizViewDelegate: class {
+protocol NewStringQuizViewDelegate: AnyObject {
     func newStringQuizView(_ view: NewStringQuizView, didUpdate text: String)
 }
 
@@ -112,7 +112,7 @@ final class NewStringQuizView: UIView {
 
     var isTextFieldEnabled: Bool {
         get {
-            return self.textField.isEnabled
+             self.textField.isEnabled
         }
         set {
             self.textField.isEnabled = newValue

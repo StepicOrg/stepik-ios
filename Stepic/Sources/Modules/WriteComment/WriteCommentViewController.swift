@@ -1,13 +1,27 @@
 import UIKit
 
-protocol WriteCommentViewControllerProtocol: class {
+// MARK: WriteCommentViewControllerProtocol: class -
+
+protocol WriteCommentViewControllerProtocol: AnyObject {
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel)
     func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel)
     func displayCommentMainActionResult(viewModel: WriteComment.CommentMainAction.ViewModel)
     func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel)
 }
 
+// MARK: - Appearance -
+
+extension WriteCommentViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
+// MARK: - WriteCommentViewController: UIViewController -
+
 final class WriteCommentViewController: UIViewController {
+    let appearance: Appearance
+
     lazy var writeCommentView = self.view as? WriteCommentView
 
     private let interactor: WriteCommentInteractorProtocol
@@ -35,10 +49,12 @@ final class WriteCommentViewController: UIViewController {
 
     init(
         interactor: WriteCommentInteractorProtocol,
-        initialState: WriteComment.ViewControllerState = .loading
+        initialState: WriteComment.ViewControllerState = .loading,
+        appearance: Appearance = .init()
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -59,6 +75,11 @@ final class WriteCommentViewController: UIViewController {
         self.title = NSLocalizedString("WriteCommentTitle", comment: "")
         self.edgesForExtendedLayout = []
 
+        // Disable swipe down to dismiss
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+
         self.navigationItem.leftBarButtonItem = self.cancelBarButtonItem
         self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
 
@@ -68,9 +89,22 @@ final class WriteCommentViewController: UIViewController {
         self.interactor.doCommentLoad(request: .init())
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assert(
+            self.navigationController != nil,
+            "\(WriteCommentViewController.self) must be presented in a \(UINavigationController.self)"
+        )
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         _ = self.writeCommentView?.becomeFirstResponder()
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -164,5 +198,13 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
 extension WriteCommentViewController: WriteCommentViewDelegate {
     func writeCommentView(_ view: WriteCommentView, didUpdateText text: String) {
         self.interactor.doCommentTextUpdate(request: .init(text: text))
+    }
+}
+
+// MARK: - WriteCommentViewController: StyledNavigationControllerPresentable -
+
+extension WriteCommentViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        self.appearance.navigationBarAppearance
     }
 }

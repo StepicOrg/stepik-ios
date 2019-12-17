@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol CodeEditorViewDelegate: class {
+protocol CodeEditorViewDelegate: AnyObject {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView)
     func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool)
     func codeEditorViewDidBeginEditing(_ codeEditorView: CodeEditorView)
@@ -22,13 +22,13 @@ extension CodeEditorViewDelegate {
     func codeEditorViewDidRequestSuggestionPresentationController(
         _ codeEditorView: CodeEditorView
     ) -> UIViewController? {
-        return nil
+        nil
     }
 }
 
 extension CodeEditorView {
     struct Appearance {
-        let languageNameLabelLayoutInsets = LayoutInsets(top: 8, right: 16)
+        var languageNameLabelLayoutInsets = LayoutInsets(top: 8, right: 16)
         let languageNameLabelTextColor = UIColor.mainDark
         let languageNameLabelBackgroundColor = UIColor(hex: 0xF6F6F6).withAlphaComponent(0.75)
         let languageNameLabelFont = UIFont.systemFont(ofSize: 10)
@@ -80,7 +80,7 @@ final class CodeEditorView: UIView {
 
     var code: String? {
         get {
-            return self.codeTextView.text
+             self.codeTextView.text
         }
         set {
             self.codeTextView.text = newValue
@@ -294,7 +294,7 @@ extension CodeEditorView: UITextViewDelegate {
         in characterRange: NSRange,
         interaction: UITextItemInteraction
     ) -> Bool {
-        return false
+        false
     }
 
     func textView(
@@ -303,19 +303,17 @@ extension CodeEditorView: UITextViewDelegate {
         in characterRange: NSRange,
         interaction: UITextItemInteraction
     ) -> Bool {
-        return false
+        false
     }
 
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        return false
-    }
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool { false }
 
     func textView(
         _ textView: UITextView,
         shouldInteractWith textAttachment: NSTextAttachment,
         in characterRange: NSRange
     ) -> Bool {
-        return false
+        false
     }
 }
 
@@ -333,7 +331,5 @@ extension CodeEditorView: CodeSuggestionDelegate {
         self.analyzeCodeAndComplete()
     }
 
-    var suggestionsSize: CodeSuggestionsSize {
-        return self.elementsSize.elements.suggestions
-    }
+    var suggestionsSize: CodeSuggestionsSize { self.elementsSize.elements.suggestions }
 }

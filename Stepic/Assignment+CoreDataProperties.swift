@@ -18,7 +18,7 @@ extension Assignment {
     @NSManaged var managedUnitId: NSNumber?
 
     static var oldEntity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "Assignment", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Assignment", in: CoreDataHelper.instance.context)!
     }
 
     convenience init() {
@@ -30,7 +30,7 @@ extension Assignment {
             self.managedId = newId as NSNumber?
         }
         get {
-            return managedId?.intValue ?? -1
+             managedId?.intValue ?? -1
         }
     }
 
@@ -39,7 +39,7 @@ extension Assignment {
             self.managedStepId = newId as NSNumber?
         }
         get {
-            return managedStepId?.intValue ?? -1
+             managedStepId?.intValue ?? -1
         }
     }
 
@@ -48,7 +48,7 @@ extension Assignment {
             self.managedUnitId = newId as NSNumber?
         }
         get {
-            return managedUnitId?.intValue ?? -1
+             managedUnitId?.intValue ?? -1
         }
     }
 }

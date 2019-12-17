@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CourseInfoSubmoduleProtocol: class {
+protocol CourseInfoSubmoduleProtocol: AnyObject {
     func update(with course: Course, isOnline: Bool)
     func handleControllerAppearance()
 }

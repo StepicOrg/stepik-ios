@@ -1,6 +1,6 @@
 import Foundation
 
-protocol NewStepOutputProtocol: class {
+protocol NewStepOutputProtocol: AnyObject {
     func handleStepView(id: Step.IdType)
     func handleStepDone(id: Step.IdType)
     func handlePreviousUnitNavigation()

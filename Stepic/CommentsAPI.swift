@@ -12,15 +12,15 @@ import PromiseKit
 import SwiftyJSON
 
 final class CommentsAPI: APIEndpoint {
-    override var name: String { return "comments" }
+    override var name: String { "comments" }
 
     func retrieve(ids: [Comment.IdType]) -> Promise<[Comment]> {
-        return Promise { seal in
+        Promise { seal in
             self.retrieve.request(
                 requestEndpoint: self.name,
                 paramName: self.name,
                 ids: ids,
-                updating: Array<Comment>(),
+                updating: [Comment](),
                 withManager: self.manager
             ).done { comments, json in
                 var userInfoByID = [Int: UserInfo]()
@@ -48,7 +48,7 @@ final class CommentsAPI: APIEndpoint {
     }
 
     func create(_ comment: Comment) -> Promise<Comment> {
-        return Promise { seal in
+        Promise { seal in
             self.create.request(
                 requestEndpoint: self.name,
                 paramName: "comment",
@@ -69,7 +69,7 @@ final class CommentsAPI: APIEndpoint {
     }
 
     func update(_ comment: Comment) -> Promise<Comment> {
-        return Promise { seal in
+        Promise { seal in
             self.update.request(
                 requestEndpoint: self.name,
                 paramName: "comment",
@@ -90,6 +90,6 @@ final class CommentsAPI: APIEndpoint {
     }
 
     func delete(commentID: Comment.IdType) -> Promise<Void> {
-        return self.delete.request(requestEndpoint: self.name, deletingId: commentID, withManager: self.manager)
+        self.delete.request(requestEndpoint: self.name, deletingId: commentID, withManager: self.manager)
     }
 }

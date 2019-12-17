@@ -28,7 +28,9 @@ final class AdaptiveStatsManager {
     }
 
     var lastSolvedDayNum: Int {
-        return getLastDays(count: 1)[0] > 0 ? dayByDate(Date()) : 0
+        self.getLastDays(count: 1)[0] > 0
+            ? self.dayByDate(Date())
+            : 0
     }
 
     var stats: [Int: Int]? {
@@ -46,7 +48,7 @@ final class AdaptiveStatsManager {
 
     var maxStreak: Int {
         get {
-            return defaults.value(forKey: maxStreakKey) as? Int ?? 1
+             defaults.value(forKey: maxStreakKey) as? Int ?? 1
         }
         set(newValue) {
             defaults.set(max(maxStreak, newValue), forKey: maxStreakKey)

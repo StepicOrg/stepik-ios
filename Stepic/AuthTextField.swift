@@ -8,18 +8,37 @@
 
 import UIKit
 
-final class AuthTextField: UITextField {
-    let eyeButtonSize = CGSize(width: 50, height: 50)
+extension AuthTextField {
+    enum Appearance {
+        static let tintColor = UIColor.mainText
 
-    enum `Type` {
-        case text, password
+        static let eyeButtonSize = CGSize(width: 50, height: 50)
+        static let imageEyeOpened = UIImage(named: "eye_opened")
+        static let imageEyeClosed = UIImage(named: "eye_closed")
     }
+}
+
+final class AuthTextField: UITextField {
+    private lazy var eyeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(Appearance.imageEyeOpened, for: .normal)
+        button.tintColor = Appearance.tintColor
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        button.frame = CGRect(
+            x: self.frame.size.width - Appearance.eyeButtonSize.width,
+            y: self.insetDelta,
+            width: Appearance.eyeButtonSize.width,
+            height: Appearance.eyeButtonSize.height
+        )
+        button.addTarget(self, action: #selector(self.togglePasswordField), for: .touchUpInside)
+        return button
+    }()
 
     var fieldType: Type = .text {
         didSet {
-            switch fieldType {
+            switch self.fieldType {
             case .password:
-                self.rightView = eyeButton
+                self.rightView = self.eyeButton
                 self.rightViewMode = .always
             default:
                 rightView = nil
@@ -28,40 +47,54 @@ final class AuthTextField: UITextField {
     }
 
     // dx and dy for inset = 1/3 * height (empirical)
-    var insetDelta: CGFloat {
-        return self.bounds.height / 3
-    }
+    var insetDelta: CGFloat { self.bounds.height / 3 }
 
-    lazy var eyeButton: UIButton? = { [weak self] in
-        guard let s = self else { return nil }
+    override func textRect(forBounds bounds: CGRect) -> CGRect { self.contentRect(for: bounds) }
 
-        let rightButton = UIButton(type: .system)
-        rightButton.setImage(#imageLiteral(resourceName: "eye_opened"), for: .normal)
-        rightButton.tintColor = UIColor.mainText
-        rightButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        rightButton.frame = CGRect(x: s.frame.size.width - s.eyeButtonSize.width, y: s.insetDelta, width: s.eyeButtonSize.width, height: s.eyeButtonSize.height)
-        rightButton.addTarget(self, action: #selector(s.togglePasswordField), for: .touchUpInside)
+    override func editingRect(forBounds bounds: CGRect) -> CGRect { self.contentRect(for: bounds) }
 
-        return rightButton
-    }()
-
-    @IBAction func togglePasswordField(_ sender: Any) {
-        self.isSecureTextEntry = !self.isSecureTextEntry
-        if let button = self.rightView as? UIButton {
-            button.setImage(isSecureTextEntry ? #imageLiteral(resourceName: "eye_opened") : #imageLiteral(resourceName: "eye_closed"), for: .normal)
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        if self.fieldType == .text {
+            return .zero
+        } else {
+            return CGRect(
+                x: bounds.width - Appearance.eyeButtonSize.width,
+                y: (bounds.size.height - Appearance.eyeButtonSize.height) / 2,
+                width: Appearance.eyeButtonSize.width,
+                height: Appearance.eyeButtonSize.height
+            )
         }
     }
 
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return contentRect(for: bounds)
-    }
+    @IBAction
+    func togglePasswordField(_ sender: Any) {
+        self.isSecureTextEntry.toggle()
 
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return contentRect(for: bounds)
+        if let button = self.rightView as? UIButton {
+            button.setImage(
+                self.isSecureTextEntry ? Appearance.imageEyeOpened : Appearance.imageEyeClosed,
+                for: .normal
+            )
+        }
     }
 
     private func contentRect(for bounds: CGRect) -> CGRect {
-        let newBounds = bounds.insetBy(dx: insetDelta, dy: insetDelta)
-        return fieldType == .text ? newBounds : CGRect(x: newBounds.origin.x, y: newBounds.origin.y, width: bounds.width - eyeButtonSize.width - 10, height: newBounds.height)
+        let newBounds = bounds.insetBy(dx: self.insetDelta, dy: self.insetDelta)
+
+        if self.fieldType == .text {
+            return newBounds
+        } else {
+            return CGRect(
+                x: newBounds.origin.x,
+                y: newBounds.origin.y,
+                width: bounds.width - Appearance.eyeButtonSize.width - 10,
+                height: newBounds.height
+            )
+        }
+    }
+
+    enum `Type` {
+        case text
+        case password
     }
 }

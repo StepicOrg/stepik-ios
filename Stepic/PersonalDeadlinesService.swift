@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-protocol PersonalDeadlinesServiceProtocol: class {
+protocol PersonalDeadlinesServiceProtocol: AnyObject {
     func canAddDeadlines(in course: Course) -> Bool
     func countDeadlines(for course: Course, mode: DeadlineMode) -> Promise<Void>
     func syncDeadline(for course: Course, userID: Int) -> Promise<Void>
@@ -38,15 +38,15 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
     }
 
     func canAddDeadlines(in course: Course) -> Bool {
-        return course.sectionDeadlines == nil && course.scheduleType == "self_paced"
+        course.sectionDeadlines == nil && course.scheduleType == "self_paced"
     }
 
     func hasDeadlines(in course: Course) -> Bool {
-        return course.sectionDeadlines != nil
+        course.sectionDeadlines != nil
     }
 
     func countDeadlines(for course: Course, mode: DeadlineMode) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             counter.countDeadlines(mode: mode, for: course).then {
                 sectionDeadlines -> Promise<StorageRecord> in
                 let data = DeadlineStorageData(courseID: course.id, deadlines: sectionDeadlines)
@@ -63,7 +63,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
     }
 
     func syncDeadlines(for courses: [Course], userID: User.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.storageRecordsAPI.retrieve(userID: userID, kindPrefixType: .deadline).done { storageRecords, _ in
                 if storageRecords.isEmpty {
                     courses.forEach { course in
@@ -88,7 +88,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
     }
 
     func syncDeadline(for course: Course, userID: Int) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.storageRecordsAPI.retrieve(
                 userID: userID,
                 kind: .deadline(courseID: course.id)
@@ -113,7 +113,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
     }
 
     func changeDeadline(for course: Course, newDeadlines: [SectionDeadline]) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             guard let record = localStorageManager.getRecord(for: course) else {
                 seal.reject(DeadlineChangeError.noLocalRecord)
                 return
@@ -135,7 +135,7 @@ final class PersonalDeadlinesService: PersonalDeadlinesServiceProtocol {
     }
 
     func deleteDeadline(for course: Course) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             guard let record = localStorageManager.getRecord(for: course) else {
                 seal.fulfill(())
                 return

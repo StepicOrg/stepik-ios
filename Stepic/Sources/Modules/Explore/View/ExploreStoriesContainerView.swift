@@ -14,7 +14,7 @@ final class ExploreStoriesContainerView: UIView {
     private let contentView: UIView
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: self.appearance.storiesViewHeight)
+        CGSize(width: UIView.noIntrinsicMetric, height: self.appearance.storiesViewHeight)
     }
 
     init(

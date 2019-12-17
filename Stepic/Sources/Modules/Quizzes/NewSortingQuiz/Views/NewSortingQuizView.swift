@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol NewSortingQuizViewDelegate: class {
+protocol NewSortingQuizViewDelegate: AnyObject {
     func newSortingQuizView(
         _ view: NewSortingQuizView,
         didMoveOption option: NewSortingQuiz.Option,

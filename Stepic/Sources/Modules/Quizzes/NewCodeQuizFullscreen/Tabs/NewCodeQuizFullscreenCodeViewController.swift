@@ -1,7 +1,22 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizFullscreenCodeViewControllerDelegate: class {
+extension NewCodeQuizFullscreenCodeViewController {
+    enum Appearance {
+        static let submitButtonBackgroundColor = UIColor.stepicGreen
+        static let submitButtonHeight: CGFloat = 44
+        static let submitButtonTextColor = UIColor.white
+        static let submitButtonCornerRadius: CGFloat = 6
+        static let submitButtonFont = UIFont.systemFont(ofSize: 16)
+        static let submitButtonInsets = LayoutInsets(left: 32, bottom: 16, right: 32)
+
+        static let codeEditorTextTopInset: CGFloat = 8
+
+        static let languageNameLabelLayoutInsets = LayoutInsets(top: 8, right: 8)
+    }
+}
+
+protocol NewCodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
     func newCodeQuizFullscreenCodeViewController(
         _ viewController: NewCodeQuizFullscreenCodeViewController,
         codeDidChange code: String
@@ -14,21 +29,13 @@ protocol NewCodeQuizFullscreenCodeViewControllerDelegate: class {
 }
 
 final class NewCodeQuizFullscreenCodeViewController: UIViewController {
-    enum Appearance {
-        static let submitButtonBackgroundColor = UIColor.stepicGreen
-        static let submitButtonHeight: CGFloat = 44
-        static let submitButtonTextColor = UIColor.white
-        static let submitButtonCornerRadius: CGFloat = 6
-        static let submitButtonFont = UIFont.systemFont(ofSize: 16)
-        static let submitButtonInsets = LayoutInsets(left: 32, bottom: 16, right: 32)
-
-        static let codeEditorTextTopInset: CGFloat = 8
-    }
-
     weak var delegate: NewCodeQuizFullscreenCodeViewControllerDelegate?
 
     private lazy var codeEditorView: CodeEditorView = {
-        let codeEditorView = CodeEditorView()
+        let appearance = CodeEditorView.Appearance(
+            languageNameLabelLayoutInsets: Appearance.languageNameLabelLayoutInsets
+        )
+        let codeEditorView = CodeEditorView(appearance: appearance)
         codeEditorView.isThemeAutoUpdating = true
         codeEditorView.delegate = self
         return codeEditorView
@@ -99,12 +106,7 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         super.viewDidLoad()
 
         self.addSubviews()
-        self.isSubmitButtonHidden = false
-
-        self.codeEditorView.language = self.language
-        self.codeEditorView.isLanguageNameVisible = true
-        self.codeEditorView.codeTemplate = self.codeTemplate
-        self.codeEditorView.code = self.code
+        self.setupCodeEditor()
     }
 
     // MARK: - Private API
@@ -113,19 +115,31 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         self.view.addSubview(self.codeEditorView)
         self.codeEditorView.translatesAutoresizingMaskIntoConstraints = false
         self.codeEditorView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.top.trailing.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
         }
 
         self.view.addSubview(self.submitButton)
         self.submitButton.translatesAutoresizingMaskIntoConstraints = false
         self.submitButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(Appearance.submitButtonInsets.left)
-            make.trailing.equalToSuperview().offset(-Appearance.submitButtonInsets.right)
-            make.height.equalTo(Appearance.submitButtonHeight)
+            make.leading
+                .equalTo(self.view.safeAreaLayoutGuide.snp.leading)
+                .offset(Appearance.submitButtonInsets.left)
+            make.trailing
+                .equalTo(self.view.safeAreaLayoutGuide.snp.trailing)
+                .offset(-Appearance.submitButtonInsets.right)
             make.bottom
                 .equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
                 .offset(-Appearance.submitButtonInsets.bottom)
+            make.height.equalTo(Appearance.submitButtonHeight)
         }
+    }
+
+    private func setupCodeEditor() {
+        self.codeEditorView.language = self.language
+        self.codeEditorView.isLanguageNameVisible = true
+        self.codeEditorView.codeTemplate = self.codeTemplate
+        self.codeEditorView.code = self.code
     }
 
     @objc
@@ -153,6 +167,6 @@ extension NewCodeQuizFullscreenCodeViewController: CodeEditorViewDelegate {
     func codeEditorViewDidRequestSuggestionPresentationController(
         _ codeEditorView: CodeEditorView
     ) -> UIViewController? {
-        return self
+        self
     }
 }

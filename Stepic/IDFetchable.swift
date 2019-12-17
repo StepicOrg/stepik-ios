@@ -27,7 +27,7 @@ extension IDFetchable {
     }
 
     static func fetchAsync(ids: [IdType]) -> Guarantee<[Self]> {
-        return DatabaseFetchService.fetchAsync(entityName: String(describing: Self.self), ids: ids)
+        DatabaseFetchService.fetchAsync(entityName: String(describing: Self.self), ids: ids)
     }
 }
 
@@ -36,13 +36,9 @@ protocol CoreDataRepresentable {
 }
 
 extension String: CoreDataRepresentable {
-    var fetchValue: CVarArg {
-        return self
-    }
+    var fetchValue: CVarArg { self }
 }
 
 extension Int: CoreDataRepresentable {
-    var fetchValue: CVarArg {
-        return self as NSNumber
-    }
+    var fetchValue: CVarArg { self as NSNumber }
 }

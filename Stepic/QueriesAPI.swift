@@ -13,12 +13,12 @@ import SwiftyJSON
 
 //TODO: Refactor this by adding class Query: JSONSerializable
 final class QueriesAPI: APIEndpoint {
-    override var name: String { return "queries" }
+    override var name: String { "queries" }
 
     func retrieve(query: String) -> Promise<[String]> {
         let params: Parameters = ["query": query]
         return Promise { seal in
-            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: Array<Query>(), withManager: manager).done {
+            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: [Query](), withManager: manager).done {
                 queries, _ in
                 seal.fulfill(queries.map { $0.text })
             }.catch {

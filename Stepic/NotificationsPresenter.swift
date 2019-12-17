@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 import PromiseKit
 
-protocol NotificationsView: class {
+protocol NotificationsView: AnyObject {
     var state: NotificationsViewState { get set }
 
     func set(notifications: NotificationViewDataStruct, withReload: Bool)
@@ -218,11 +218,13 @@ final class NotificationsPresenter {
     }
 
     private func loadData(page: Int, in section: NotificationsSection) -> Promise<(Bool, NotificationViewDataStruct)> {
-        return Promise { seal in
-            var hasNext: Bool = false
-            notificationsAPI.retrieve(page: page, notificationType: section.notificationType).then { result, meta -> Guarantee<NotificationViewDataStruct> in
+        Promise { seal in
+            var hasNext = false
+            self.notificationsAPI.retrieve(
+                page: page,
+                notificationType: section.notificationType
+            ).then { result, meta -> Guarantee<NotificationViewDataStruct> in
                 hasNext = meta.hasNext
-
                 return self.merge(old: self.displayedNotifications, new: result)
             }.done { results in
                 seal.fulfill((hasNext, results))
@@ -336,8 +338,12 @@ final class NotificationsPresenter {
         }
     }
 
-    private func updateNotificationsViewData(notifications: [NotificationViewData], newStatus: NotificationStatus, ids: [Int]? = nil) -> [NotificationViewData] {
-        return notifications.map { notification in
+    private func updateNotificationsViewData(
+        notifications: [NotificationViewData],
+        newStatus: NotificationStatus,
+        ids: [Int]? = nil
+    ) -> [NotificationViewData] {
+        notifications.map { notification in
             var editedNotification = notification
             editedNotification.status = newStatus
             return (ids?.contains(editedNotification.id) ?? true) ? editedNotification : notification
@@ -360,7 +366,7 @@ extension NotificationsPresenter: NotificationsRegistrationServiceDelegate {
         _ notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
         shouldPresentAlertFor alertType: NotificationsRegistrationServiceAlertType
     ) -> Bool {
-        return self.notificationSuggestionManager.canShowAlert(context: .notificationsTab)
+        self.notificationSuggestionManager.canShowAlert(context: .notificationsTab)
     }
 
     func notificationsRegistrationService(

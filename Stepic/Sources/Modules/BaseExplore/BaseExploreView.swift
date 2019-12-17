@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-protocol BaseExploreViewDelegate: class {
+protocol BaseExploreViewDelegate: AnyObject {
     func refreshControlDidRefresh()
 }
 

@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol CommentsNetworkServiceProtocol: class {
+protocol CommentsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Comment.IdType]) -> Promise<[Comment]>
     func create(comment: Comment) -> Promise<Comment>
     func update(comment: Comment) -> Promise<Comment>
@@ -31,7 +31,7 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
     }
 
     func create(comment: Comment) -> Promise<Comment> {
-        return Promise { seal in
+        Promise { seal in
             self.commentsAPI.create(comment).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in
@@ -41,7 +41,7 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
     }
 
     func update(comment: Comment) -> Promise<Comment> {
-        return Promise { seal in
+        Promise { seal in
             self.commentsAPI.update(comment).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in
@@ -51,7 +51,7 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
     }
 
     func delete(id: Comment.IdType) -> Promise<Void> {
-        return Promise { seal in
+        Promise { seal in
             self.commentsAPI.delete(commentID: id).done {
                 seal.fulfill(())
             }.catch { _ in

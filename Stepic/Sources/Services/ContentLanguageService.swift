@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ContentLanguageServiceProtocol: class {
+protocol ContentLanguageServiceProtocol: AnyObject {
     var globalContentLanguage: ContentLanguage { get set }
 }
 

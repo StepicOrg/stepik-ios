@@ -27,6 +27,6 @@ struct Meta {
     }
 
     static var oneAndOnlyPage: Meta {
-        return Meta(hasNext: false, hasPrev: false, page: 1)
+        Meta(hasNext: false, hasPrev: false, page: 1)
     }
 }

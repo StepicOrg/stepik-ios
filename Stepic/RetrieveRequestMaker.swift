@@ -19,7 +19,7 @@ final class RetrieveRequestMaker {
         updatingObject: T? = nil,
         withManager manager: Alamofire.SessionManager
     ) -> Promise<T> {
-        return Promise { seal in
+        Promise { seal in
             checkToken().done {
                 manager.request(
                     "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)",
@@ -50,7 +50,7 @@ final class RetrieveRequestMaker {
         updatingObjects: [T] = [],
         withManager manager: Alamofire.SessionManager
     ) -> Promise<([T], Meta, JSON)> {
-        return Promise { seal in
+        Promise { seal in
             checkToken().done {
                 manager.request(
                     "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)",
@@ -64,7 +64,7 @@ final class RetrieveRequestMaker {
                     case .success(let json):
                         let jsonArray: [JSON] = json[paramName].array ?? []
                         let resultArray: [T] = jsonArray.map { objectJSON in
-                            if let recoveredIndex = updatingObjects.index(where: { $0.hasEqualId(json: objectJSON) }) {
+                            if let recoveredIndex = updatingObjects.firstIndex(where: { $0.hasEqualId(json: objectJSON) }) {
                                 updatingObjects[recoveredIndex].update(json: objectJSON)
                                 return updatingObjects[recoveredIndex]
                             } else {
@@ -89,7 +89,7 @@ final class RetrieveRequestMaker {
         updatingObjects: [T] = [],
         withManager manager: Alamofire.SessionManager
     ) -> Promise<([T], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.request(
                 requestEndpoint: requestEndpoint,
                 paramName: paramName,
@@ -110,7 +110,7 @@ final class RetrieveRequestMaker {
         params: Parameters,
         withManager manager: Alamofire.SessionManager
     ) -> Promise<([T], Meta, JSON)> {
-        return Promise { seal in
+        Promise { seal in
             checkToken().done {
                 manager.request(
                     "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)",
@@ -159,7 +159,7 @@ final class RetrieveRequestMaker {
         params: Parameters,
         withManager manager: Alamofire.SessionManager
     ) -> Promise<([T], Meta)> {
-        return Promise { seal in
+        Promise { seal in
             self.requestWithFetching(
                 requestEndpoint: requestEndpoint,
                 paramName: paramName,
@@ -198,7 +198,7 @@ final class RetrieveRequestMaker {
                         let jsonArray: [JSON] = json[paramName].array ?? []
                         let resultArray: [T] = jsonArray.map {
                             objectJSON in
-                            if let recoveredIndex = updating.index(where: { $0.hasEqualId(json: objectJSON) }) {
+                            if let recoveredIndex = updating.firstIndex(where: { $0.hasEqualId(json: objectJSON) }) {
                                 updating[recoveredIndex].update(json: objectJSON)
                                 return updating[recoveredIndex]
                             } else {
@@ -223,7 +223,7 @@ final class RetrieveRequestMaker {
         updating: [T],
         withManager manager: Alamofire.SessionManager
     ) -> Promise<[T]> {
-        return Promise { seal in
+        Promise { seal in
             self.request(
                 requestEndpoint: requestEndpoint,
                 paramName: paramName,
