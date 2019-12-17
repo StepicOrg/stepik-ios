@@ -1,3 +1,3 @@
-**Задача**: [#APPS-](https://vyahhi.myjetbrains.com/youtrack/issue/APPS-)
+**YouTrack task**: [#APPS-](https://vyahhi.myjetbrains.com/youtrack/issue/APPS-)
 
-**Описание**:
+**Description**:
