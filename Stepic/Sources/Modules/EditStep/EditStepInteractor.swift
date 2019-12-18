@@ -109,22 +109,24 @@ final class EditStepInteractor: EditStepInteractorProtocol {
                 return
             }
 
-            let params = AnalyticsEvents.Step.Edit.makeParams(
-                stepID: step.id, type: step.block.type.rawValue, position: step.position
-            )
+            let params: [String: Any] = [
+                "step": step.id,
+                "type": step.block.name,
+                "number": step.position
+            ]
 
             switch event {
             case .opened:
                 AmplitudeAnalyticsEvents.Steps.stepEditOpened(
                     stepID: step.id,
-                    type: step.block.type.rawValue,
+                    type: step.block.name,
                     position: step.position
                 ).send()
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Edit.opened, parameters: params)
             case .completed:
                 AmplitudeAnalyticsEvents.Steps.stepEditCompleted(
                     stepID: step.id,
-                    type: step.block.type.rawValue,
+                    type: step.block.name,
                     position: step.position
                 ).send()
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Edit.completed, parameters: params)
