@@ -421,6 +421,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return .cached(bytesTotal: unitSizeInBytes)
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
         let units = section.units
 

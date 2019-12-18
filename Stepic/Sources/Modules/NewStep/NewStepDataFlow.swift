@@ -129,7 +129,6 @@ enum NewStep {
         case sql
         case unknown(blockName: String)
 
-        // swiftlint:disable:next cyclomatic_complexity
         init(blockName: String) {
             switch blockName {
             case "choice":
