@@ -80,9 +80,6 @@ extension Block {
         case choice
         case code
         case dataset
-        case fillBlanks = "fill-blanks"
-        case freeAnswer = "free-answer"
-        case linuxCode = "linux-code"
         case matching
         case math
         case number
@@ -94,13 +91,17 @@ extension Block {
         case text
         case video
         case admin
+        case table
+        case html
+        case schulte
+        case fillBlanks = "fill-blanks"
+        case freeAnswer = "free-answer"
+        case linuxCode = "linux-code"
+        case randomTasks = "random-tasks"
+        case manualScore = "manual-score"
 
         var isTheory: Bool {
             return [BlockType.text, BlockType.video].contains(self)
-        }
-
-        var isQuiz: Bool {
-            return !self.isTheory
         }
     }
 }
