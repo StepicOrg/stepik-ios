@@ -68,8 +68,8 @@ extension Block {
         }
     }
 
-    var type: BlockType {
-        BlockType(rawValue: self.name) ?? .text
+    var type: BlockType? {
+        BlockType(rawValue: self.name)
     }
 
     // MARK: - Types -
