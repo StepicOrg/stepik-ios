@@ -107,6 +107,16 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 quizType = NewStep.QuizType(blockName: step.block.name)
             }
 
+            let shouldShowStepStatistics: Bool = {
+                if quizType == nil {
+                    return false
+                }
+                if case .unknown = quizType {
+                    return false
+                }
+                return true
+            }()
+
             let discussionsLabelTitle = self.makeDiscussionsLabelTitle(step: step)
             let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
 
@@ -118,8 +128,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 discussionProxyID: step.discussionProxyID,
                 stepURLPath: urlPath,
                 lessonID: step.lessonID,
-                passedByCount: step.block.type.isQuiz ? step.passedByCount : nil,
-                correctRatio: step.block.type.isQuiz ? step.correctRatio : nil,
+                passedByCount: shouldShowStepStatistics ? step.passedByCount : nil,
+                correctRatio: shouldShowStepStatistics ? step.correctRatio : nil,
                 step: step
             )
 
