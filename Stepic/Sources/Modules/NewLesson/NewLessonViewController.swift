@@ -322,9 +322,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             return
         }
 
-        let showEditStep = data.canEdit && step.type != .video
-
-        self.navigationItem.rightBarButtonItems = showEditStep
+        self.navigationItem.rightBarButtonItems = step.canEdit
             ? self.teacherRightBarButtonItems
             : self.studentRightBarButtonItems
     }

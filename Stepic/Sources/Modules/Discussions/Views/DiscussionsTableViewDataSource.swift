@@ -128,6 +128,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         cell.isUpdating = viewModel.isFetchingMoreReplies
     }
 
+    // TODO: Refactor
     private func configureDiscussionCell(
         _ cell: DiscussionsTableViewCell,
         at indexPath: IndexPath,

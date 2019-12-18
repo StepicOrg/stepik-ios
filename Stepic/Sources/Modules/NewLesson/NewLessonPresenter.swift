@@ -112,9 +112,9 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             }()
             return .init(
                 id: step.id,
-                type: step.block.type,
                 iconImage: iconImage ?? UIImage(),
-                isPassed: progresses[safe: index]?.isPassed ?? false
+                isPassed: progresses[safe: index]?.isPassed ?? false,
+                canEdit: canEdit && step.block.type != .video
             )
         }
         return NewLessonViewModel(
@@ -123,8 +123,7 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             stepLinkMaker: {
                 "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
             },
-            startStepIndex: startStepIndex,
-            canEdit: canEdit
+            startStepIndex: startStepIndex
         )
     }
 
