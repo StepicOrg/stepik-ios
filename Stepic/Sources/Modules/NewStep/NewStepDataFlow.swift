@@ -125,7 +125,6 @@ enum NewStep {
         case math
         case sorting
         case matching
-        case fillBlanks
         case code
         case sql
         case unknown(blockName: String)
@@ -147,8 +146,6 @@ enum NewStep {
                 self = .sorting
             case "matching":
                 self = .matching
-            case "fill-blanks":
-                self = .fillBlanks
             case "code":
                 self = .code
             case "sql":
@@ -174,8 +171,6 @@ enum NewStep {
                 return "sorting"
             case .matching:
                 return "matching"
-            case .fillBlanks:
-                return "fill-blanks"
             case .code:
                 return "code"
             case .sql:
@@ -188,7 +183,7 @@ enum NewStep {
         static func == (lhs: QuizType, rhs: QuizType) -> Bool {
             switch (lhs, rhs) {
             case (.choice, .choice), (.string, .string), (.number, .number), (.math, .math), (.freeAnswer, .freeAnswer),
-                 (.sorting, .sorting), (.matching, .matching), (.fillBlanks, .fillBlanks), (.code, .code), (.sql, .sql):
+                 (.sorting, .sorting), (.matching, .matching), (.code, .code), (.sql, .sql):
                 return true
             case (.unknown(let lhsName), .unknown(let rhsName)):
                 return lhsName == rhsName
