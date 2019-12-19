@@ -776,6 +776,7 @@ SortingQuizTitle = "Sort a given list";
 MatchingQuizTitle = "Match two lists";
 SQLQuizTitle = "SQL Challenge - Enter SQL query";
 UnsupportedQuizTitle = "Unsupported step type";
+FreeAnswerQuizTitle = "Write an essay";
 
 UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 

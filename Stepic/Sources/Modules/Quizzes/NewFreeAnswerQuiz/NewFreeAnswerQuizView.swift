@@ -10,6 +10,9 @@ extension NewFreeAnswerQuizView {
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
+        let titleColor = UIColor.mainDark
+        let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+
         let textFieldPlaceholderFont = UIFont.systemFont(ofSize: 16)
         let textFieldPlaceholderColor = UIColor.mainDark.withAlphaComponent(0.35)
         let textFieldTextColor = UIColor.mainDark
@@ -25,6 +28,13 @@ extension NewFreeAnswerQuizView {
 final class NewFreeAnswerQuizView: UIView {
     let appearance: Appearance
     weak var delegate: NewFreeAnswerQuizViewDelegate?
+
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = self.appearance.titleColor
+        label.font = self.appearance.titleFont
+        return label
+    }()
 
     private lazy var textView: TableInputTextView = {
         let textView = TableInputTextView()
@@ -52,13 +62,20 @@ final class NewFreeAnswerQuizView: UIView {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.textFieldContainerView])
+        let stackView = UIStackView(arrangedSubviews: [self.titleLabelContainerView, self.textFieldContainerView])
         stackView.spacing = self.appearance.spacing
         stackView.axis = .vertical
         return stackView
     }()
 
+    private lazy var titleLabelContainerView = UIView()
     private lazy var textFieldContainerView = UIView()
+
+    var title: String? {
+        didSet {
+            self.titleLabel.text = self.title
+        }
+    }
 
     var placeholder: String? {
         didSet {
@@ -100,9 +117,17 @@ extension NewFreeAnswerQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.stackView)
         self.textFieldContainerView.addSubview(self.textView)
+        self.titleLabelContainerView.addSubview(self.titleLabel)
     }
 
     func makeConstraints() {
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(self.appearance.insets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
+        }
+
         self.textView.translatesAutoresizingMaskIntoConstraints = false
         self.textView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
