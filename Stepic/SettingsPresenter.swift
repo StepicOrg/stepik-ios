@@ -18,17 +18,24 @@ final class SettingsPresenter {
     weak var view: SettingsView?
 
     var menu: [SettingsMenuBlock] = [
+        // Video
         .videoHeader,
-        .downloads,
         .loadingVideoQuality,
         .onlineVideoQuality,
-        .appearanceHeader,
-        .codeEditorSettings,
-        .stepFontSize,
-        .languageSettingsHeader,
+        // Content language
+        .languageHeader,
         .contentLanguage,
-        .adaptiveHeader,
+        // Learning
+        .learningHeader,
+        .stepFontSize,
+        .codeEditorSettings,
         .adaptiveModeSwitch,
+        // Downloaded content
+        .downloadedContentHeader,
+        .downloads,
+        .deleteAllContent,
+        // Other
+        .otherSettingsHeader,
         .logout
     ]
 
