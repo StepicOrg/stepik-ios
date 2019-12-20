@@ -11,6 +11,7 @@ final class NewFreeAnswerQuizPresenter: NewFreeAnswerQuizPresenterProtocol {
 
     func presentReply(response: NewFreeAnswerQuiz.ReplyLoad.Response) {
         let viewModel = NewFreeAnswerQuizViewModel(
+            title: NSLocalizedString("FreeAnswerQuizTitle", comment: ""),
             text: response.text,
             placeholderText: self.quizPlaceholder,
             isEnabled: response.status != .correct

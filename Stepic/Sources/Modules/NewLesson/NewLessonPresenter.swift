@@ -99,6 +99,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         let lessonTitle = lesson.title
         let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
+                if step.hasReview {
+                    return UIImage(named: "ic_peer_review")?.withRenderingMode(.alwaysTemplate)
+                }
+
                 switch step.block.type {
                 case .video:
                     return UIImage(named: "video_step_icon")

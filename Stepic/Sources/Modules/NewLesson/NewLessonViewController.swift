@@ -37,13 +37,21 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
     private let interactor: NewLessonInteractorProtocol
 
     private lazy var infoBarButtonItem: UIBarButtonItem = {
+        let image: UIImage?
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: "info.circle")
+        } else {
+            image = UIImage(named: "info-system")
+        }
+
         let item = UIBarButtonItem(
-            image: UIImage(named: "info-system"),
+            image: image,
             style: .plain,
             target: self,
             action: #selector(self.infoButtonClicked)
         )
         item.isEnabled = false
+
         return item
     }()
 
