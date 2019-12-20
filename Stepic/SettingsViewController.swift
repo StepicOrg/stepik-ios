@@ -8,8 +8,16 @@
 
 import Foundation
 
+// MARK: SettingsViewControllerLegacyAssembly: Assembly -
+
 @available(*, deprecated, message: "Class to initialize settings w/o storyboards logic")
 final class SettingsViewControllerLegacyAssembly: Assembly {
+    private let appearance: SettingsViewController.Appearance
+
+    init(appearance: SettingsViewController.Appearance = .init()) {
+        self.appearance = appearance
+    }
+
     func makeModule() -> UIViewController {
         guard let viewController = ControllerHelper.instantiateViewController(
             identifier: "SettingsViewController",
@@ -18,6 +26,8 @@ final class SettingsViewControllerLegacyAssembly: Assembly {
             fatalError("Failed to initialize SettingsViewController")
         }
 
+        viewController.appearance = self.appearance
+
         let presenter = SettingsPresenter(view: viewController)
         viewController.presenter = presenter
 
@@ -25,7 +35,18 @@ final class SettingsViewControllerLegacyAssembly: Assembly {
     }
 }
 
+// MARK: - SettingsViewController (Appearance) -
+
+extension SettingsViewController {
+    struct Appearance {
+        let destructiveActionColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
+    }
+}
+
+// MARK: - SettingsViewController: MenuViewController -
+
 final class SettingsViewController: MenuViewController {
+    var appearance: Appearance!
     var presenter: SettingsPresenter?
 
     private lazy var artView: ArtView = {
@@ -118,36 +139,38 @@ extension SettingsViewController: SettingsView {
             return self.makeLoadingVideoQualityBlock()
         case .onlineVideoQuality:
             return self.makeOnlineVideoQualityBlock()
-        case .codeEditorSettingsHeader:
-            return self.makeTitleMenuBlock(
-                id: menuBlockID,
-                title: NSLocalizedString("CodeEditorTitle", comment: "")
-            )
-        case .codeEditorSettings:
-            return self.makeCodeEditorSettingsBlock()
-        case .appearanceHeader:
-            return self.makeTitleMenuBlock(
-                id: menuBlockID,
-                title: NSLocalizedString("SettingsBlockTitleAppearance", comment: "")
-            )
-        case .stepFontSize:
-            return self.makeStepFontSizeBlock()
-        case .languageSettingsHeader:
+        case .languageHeader:
             return self.makeTitleMenuBlock(
                 id: menuBlockID,
                 title: NSLocalizedString("LanguageSettingsTitle", comment: "")
             )
         case .contentLanguage:
             return self.makeContentLanguageSettingsBlock()
-        case .adaptiveHeader:
+        case .learningHeader:
             return self.makeTitleMenuBlock(
                 id: menuBlockID,
-                title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")
+                title: NSLocalizedString("LearningSettingsBlockTitle", comment: "")
             )
+        case .stepFontSize:
+            return self.makeStepFontSizeBlock()
+        case .codeEditorSettings:
+            return self.makeCodeEditorSettingsBlock()
         case .adaptiveModeSwitch:
             return self.makeAdaptiveModeSwitchBlock()
+        case .downloadedContentHeader:
+            return self.makeTitleMenuBlock(
+                id: menuBlockID,
+                title: NSLocalizedString("DownloadedContentSettingsBlockTitle", comment: "")
+            )
         case .downloads:
             return self.makeDownloadsBlock()
+        case .deleteAllContent:
+            return self.makeDeleteAllContentBlock()
+        case .otherSettingsHeader:
+            return self.makeTitleMenuBlock(
+                id: menuBlockID,
+                title: NSLocalizedString("OtherSettingsBlockTitle", comment: "")
+            )
         case .logout:
             return self.makeLogoutBlock()
         }
@@ -246,12 +269,25 @@ extension SettingsViewController: SettingsView {
         return block
     }
 
+    private func makeDeleteAllContentBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(
+            id: SettingsMenuBlock.deleteAllContent.rawValue,
+            title: NSLocalizedString("DeleteAllContentPreferenceTitle", comment: "")
+        )
+        block.titleColor = self.appearance.destructiveActionColor
+        block.onTouch = { [weak self] in
+            print("Delete all content did click")
+        }
+
+        return block
+    }
+
     private func makeLogoutBlock() -> TransitionMenuBlock {
         let block = TransitionMenuBlock(
             id: SettingsMenuBlock.logout.rawValue,
             title: NSLocalizedString("Logout", comment: "")
         )
-        block.titleColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
+        block.titleColor = self.appearance.destructiveActionColor
         block.onTouch = { [weak self] in
             self?.presenter?.logout()
         }

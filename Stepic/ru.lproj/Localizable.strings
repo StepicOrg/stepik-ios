@@ -553,10 +553,14 @@ CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
 
-SettingsBlockTitleAppearance = "Внешний вид";
+LearningSettingsBlockTitle = "Обучение";
+DownloadedContentSettingsBlockTitle = "Загруженный контент";
+DeleteAllContentPreferenceTitle = "Удалить весь контент";
+OtherSettingsBlockTitle = "Другое";
+
 /* Font size settings */
 SettingsStepFontSizeTitle = "Размер текста";
-SettingsStepFontSizeSubtitle = "Изменения размера текста влияют только на текст шага.";
+SettingsStepFontSizeSubtitle = "Изменения размера текста влияют только на текст шага";
 SettingsStepFontSizeItemSmall = "Маленький";
 SettingsStepFontSizeItemMedium = "Средний";
 SettingsStepFontSizeItemLarge = "Большой";
