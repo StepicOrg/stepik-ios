@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum VideoRate: Float {
+enum VideoRate: Float, CaseIterable {
     case verySlow = 0.5
     case slow = 0.75
     case normal = 1
@@ -17,23 +17,16 @@ enum VideoRate: Float {
     case veryFast = 1.75
     case doubleFast = 2.0
 
-    static var allValues: [VideoRate] {
-        get {
-             [verySlow, slow, normal, slightlyFast, fast, veryFast, doubleFast]
-        }
-    }
-
-    //If the value is a maximal rate, it cyclically gets the lowest one
+    // If the value is a maximal rate, it cyclically gets the lowest one
     var nextValue: VideoRate {
         get {
-            if let index = VideoRate.allValues.firstIndex(of: self) {
-                if index < VideoRate.allValues.count - 1 {
-                    return VideoRate.allValues[index + 1]
+            if let index = VideoRate.allCases.firstIndex(of: self) {
+                if index < VideoRate.allCases.count - 1 {
+                    return VideoRate.allCases[index + 1]
                 } else {
-                    return VideoRate.allValues[index]
+                    return VideoRate.allCases[index]
                 }
             }
-            //Should never come here
             return self
         }
     }

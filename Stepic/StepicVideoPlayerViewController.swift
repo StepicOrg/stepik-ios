@@ -294,7 +294,7 @@ final class StepicVideoPlayerViewController: UIViewController {
             preferredStyle: .actionSheet
         )
 
-        for videoRate in VideoRate.allValues {
+        for videoRate in VideoRate.allCases {
             let action = UIAlertAction(
                 title: videoRate.description,
                 style: .default,
@@ -436,7 +436,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     }
 
     private func setButtonPlaying(_ isPlaying: Bool) {
-		self.isPlaying = isPlaying
+        self.isPlaying = isPlaying
 
         let fullscreenPlayButtonImage = isPlaying ? Images.playerControls.play : Images.playerControls.pause
         self.fullscreenPlayButton.setImage(fullscreenPlayButtonImage, for: .normal)
