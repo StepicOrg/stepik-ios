@@ -28,8 +28,6 @@ ReloginTitle = "Authorization problems";
 ReloginSubtitle = "Log in, please";
 Studying = "Studying";
 JoinCourse = "Join course";
-ClearCacheTitle = "Clear cache";
-ClearCacheMessage = "Remove all videos stored in the memory of your device?";
 FailedToRemoveMessage = "Failed to remove";
 RemovedAllMessage = "Removed";
 Downloading = "Downloading";
@@ -554,8 +552,11 @@ CodeEditorSettingsTooltip = "You can customize code editor";
 
 LearningSettingsBlockTitle = "Learning";
 DownloadedContentSettingsBlockTitle = "Downloaded content";
-DeleteAllContentPreferenceTitle = "Delete all content";
 OtherSettingsBlockTitle = "Other";
+
+DeleteAllContentPreferenceTitle = "Delete all content";
+DeleteAllContentConfirmationAlertTitle = "Delete all content";
+DeleteAllContentConfirmationAlertMessage = "Are you sure you want to delete all downloaded content?";
 
 /* Font size settings */
 SettingsStepFontSizeTitle = "Text size";

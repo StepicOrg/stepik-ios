@@ -28,8 +28,6 @@ ReloginTitle = "Ошибка авторизации";
 ReloginSubtitle = "Войдите, пожалуйста";
 Studying = "Записан на курс";
 JoinCourse = "Поступить на курс";
-ClearCacheTitle = "Очистить кэш";
-ClearCacheMessage = "Удалить все видео из памяти Вашего устройства?";
 FailedToRemoveMessage = "Ошибка при удалении";
 RemovedAllMessage = "Удалено";
 Downloading = "Загружается";
@@ -555,8 +553,11 @@ CodeEditorSettingsTooltip = "Вы можете настроить редакто
 
 LearningSettingsBlockTitle = "Обучение";
 DownloadedContentSettingsBlockTitle = "Загруженный контент";
-DeleteAllContentPreferenceTitle = "Удалить весь контент";
 OtherSettingsBlockTitle = "Другое";
+
+DeleteAllContentPreferenceTitle = "Удалить весь контент";
+DeleteAllContentConfirmationAlertTitle = "Удалить весь контент";
+DeleteAllContentConfirmationAlertMessage = "Вы уверены, что хотите удалить весь загруженный контент из памяти Вашего устройства?";
 
 /* Font size settings */
 SettingsStepFontSizeTitle = "Размер текста";

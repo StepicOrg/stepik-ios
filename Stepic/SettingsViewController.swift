@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import PromiseKit
+import SVProgressHUD
 
 // MARK: SettingsViewControllerLegacyAssembly: Assembly -
 
@@ -27,6 +29,14 @@ final class SettingsViewControllerLegacyAssembly: Assembly {
         }
 
         viewController.appearance = self.appearance
+        viewController.downloadsProvider = DownloadsProvider(
+            coursesPersistenceService: CoursesPersistenceService(),
+            adaptiveStorageManager: AdaptiveStorageManager.shared,
+            videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+            storageUsageService: StorageUsageService(
+                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+            )
+        )
 
         let presenter = SettingsPresenter(view: viewController)
         viewController.presenter = presenter
@@ -48,6 +58,8 @@ extension SettingsViewController {
 final class SettingsViewController: MenuViewController {
     var appearance: Appearance!
     var presenter: SettingsPresenter?
+
+    fileprivate var downloadsProvider: DownloadsProviderProtocol?
 
     private lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
@@ -276,7 +288,15 @@ extension SettingsViewController: SettingsView {
         )
         block.titleColor = self.appearance.destructiveActionColor
         block.onTouch = { [weak self] in
-            print("Delete all content did click")
+            self?.requestDeleteAllContent { granted in
+                guard granted else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self?.deleteAllContent()
+                }
+            }
         }
 
         return block
@@ -313,5 +333,52 @@ extension SettingsViewController: SettingsView {
     private func displayDownloads() {
         let assembly = DownloadsAssembly()
         self.push(module: assembly.makeModule())
+    }
+
+    private func requestDeleteAllContent(completionHandler: @escaping ((Bool) -> Void)) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("DeleteAllContentConfirmationAlertTitle", comment: ""),
+            message: NSLocalizedString("DeleteAllContentConfirmationAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Delete", comment: ""),
+                style: .destructive,
+                handler: { _ in
+                    completionHandler(true)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: { _ in
+                    completionHandler(false)
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
+    }
+
+    private func deleteAllContent() {
+        guard let downloadsProvider = self.downloadsProvider else {
+            return SVProgressHUD.showError(withStatus: nil)
+        }
+
+        SVProgressHUD.show()
+
+        firstly {
+            after(.seconds(1))
+        }.then {
+            downloadsProvider.fetchCachedCourses()
+        }.then { courses in
+            downloadsProvider.deleteCachedCourses(courses)
+        }.done { _ in
+            SVProgressHUD.showSuccess(withStatus: nil)
+        }
     }
 }
