@@ -39,7 +39,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         firstly {
             self.provider.fetchStep(id: self.stepID)
         }.then { fetchResult in
-                self.provider.fetchCurrentFontSize().map { ($0, fetchResult) }
+            self.provider.fetchCurrentFontSize().map { ($0, fetchResult) }
         }.done(on: DispatchQueue.global(qos: .userInitiated)) { fontSize, result in
             guard let step = result.value else {
                 throw Error.fetchFailed
