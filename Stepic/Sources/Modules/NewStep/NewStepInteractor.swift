@@ -79,10 +79,12 @@ final class NewStepInteractor: NewStepInteractorProtocol {
             if let course = LastStepGlobalContext.context.course,
                let unitID = LastStepGlobalContext.context.unitId,
                let stepID = LastStepGlobalContext.context.stepId {
-                if let lastStep = course.lastStep {
-                    lastStep.update(unitId: unitID, stepId: stepID)
-                } else {
-                    course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
+                DispatchQueue.main.sync {
+                    if let lastStep = course.lastStep {
+                        lastStep.update(unitId: unitID, stepId: stepID)
+                    } else {
+                        course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
+                    }
                 }
             }
         }.catch { error in
