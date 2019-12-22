@@ -276,7 +276,7 @@ extension NewStepViewController: NewStepViewDelegate {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
             self.present(alert, animated: true, completion: nil)
         } else if isVideoCached || isVideoPlayingReachable {
-            let assembly = StepikVideoPlayerLegacyAssembly(video: video)
+            let assembly = StepikVideoPlayerLegacyAssembly(video: video, delegate: self)
             AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
             self.present(module: assembly.makeModule(), embedInNavigation: false, modalPresentationStyle: .fullScreen)
         }
@@ -341,5 +341,18 @@ extension NewStepViewController: BaseQuizOutputProtocol {
 
     func handleNextStepNavigation() {
         self.interactor.doStepNavigationRequest(request: .init(direction: .next))
+    }
+}
+
+// MARK: - NewStepViewController: StepikVideoPlayerViewControllerDelegate -
+
+extension NewStepViewController: StepikVideoPlayerViewControllerDelegate {
+    func stepikVideoPlayerViewControllerDidRequestAutoplay() {
+        self.dismiss(
+            animated: true,
+            completion: { [weak self] in
+                self?.interactor.doAutoplayNavigationRequest(request: .init())
+            }
+        )
     }
 }

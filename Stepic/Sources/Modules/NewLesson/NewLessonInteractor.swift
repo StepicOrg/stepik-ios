@@ -212,24 +212,6 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 // MARK: - NewLessonInteractor: NewStepOutputProtocol -
 
 extension NewLessonInteractor: NewStepOutputProtocol {
-    func handlePreviousUnitNavigation() {
-        guard let unit = self.previousUnit else {
-            return
-        }
-
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.refresh(context: .unit(id: unit.id))
-    }
-
-    func handleNextUnitNavigation() {
-        guard let unit = self.nextUnit else {
-            return
-        }
-
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.refresh(context: .unit(id: unit.id))
-    }
-
     func handleStepView(id: Step.IdType) {
         let assignmentID = self.assignmentsForCurrentSteps[id]
 
@@ -254,12 +236,47 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         self.refreshTooltipInfo(stepID: id)
     }
 
-    func handleStepNavigation(to index: Int) {
-        guard let lesson = self.currentLesson, index > 0 && index < lesson.stepsArray.count else {
+    func handlePreviousUnitNavigation() {
+        guard let unit = self.previousUnit else {
             return
         }
 
-        self.presenter.presentCurrentStepUpdate(response: .init(index: index))
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        self.refresh(context: .unit(id: unit.id))
+    }
+
+    func handleNextUnitNavigation() {
+        guard let unit = self.nextUnit else {
+            return
+        }
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        self.refresh(context: .unit(id: unit.id))
+    }
+
+    func handleStepNavigation(to index: Int) {
+        guard let lesson = self.currentLesson else {
+            return
+        }
+
+        let stepsRange = lesson.stepsArray.startIndex..<lesson.stepsArray.endIndex
+        if stepsRange.contains(index) {
+            self.presenter.presentCurrentStepUpdate(response: .init(index: index))
+        }
+    }
+
+    func handleAutoplayNavigation(from index: Int) {
+        guard let lesson = self.currentLesson else {
+            return
+        }
+
+        let isCurrentIndexLast = index == max(0, (lesson.stepsArray.count - 1))
+
+        if isCurrentIndexLast {
+            self.handleNextUnitNavigation()
+        } else {
+            self.handleStepNavigation(to: index + 1)
+        }
     }
 }
 

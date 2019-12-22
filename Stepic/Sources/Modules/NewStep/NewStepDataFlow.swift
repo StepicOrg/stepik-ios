@@ -58,16 +58,6 @@ enum NewStep {
         }
     }
 
-    /// Handle information about step was presented
-    enum StepViewRequest {
-        struct Request { }
-    }
-
-    /// Handle information about step was passed
-    enum StepDoneRequest {
-        struct Request { }
-    }
-
     /// Handle navigation inside lesson
     enum StepNavigationRequest {
         enum Direction {
@@ -78,6 +68,21 @@ enum NewStep {
         struct Request {
             let direction: Direction
         }
+    }
+
+    /// Handle autoplay navigation inside/next lesson
+    enum AutoplayNavigationRequest {
+        struct Request { }
+    }
+
+    /// Handle information about step was presented
+    enum StepViewRequest {
+        struct Request { }
+    }
+
+    /// Handle information about step was passed
+    enum StepDoneRequest {
+        struct Request { }
     }
 
     /// Update discussions button (on appear)

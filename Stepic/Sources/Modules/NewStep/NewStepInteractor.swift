@@ -5,6 +5,7 @@ protocol NewStepInteractorProtocol {
     func doStepLoad(request: NewStep.StepLoad.Request)
     func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request)
     func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request)
+    func doAutoplayNavigationRequest(request: NewStep.AutoplayNavigationRequest.Request)
     func doStepViewRequest(request: NewStep.StepViewRequest.Request)
     func doStepDoneRequest(request: NewStep.StepDoneRequest.Request)
     func doDiscussionsButtonUpdate(request: NewStep.DiscussionsButtonUpdate.Request)
@@ -110,6 +111,14 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         case .next:
             self.moduleOutput?.handleNextUnitNavigation()
         }
+    }
+
+    func doAutoplayNavigationRequest(request: NewStep.AutoplayNavigationRequest.Request) {
+        guard let currentStepIndex = self.currentStepIndex else {
+            return
+        }
+
+        self.moduleOutput?.handleAutoplayNavigation(from: currentStepIndex)
     }
 
     func doStepViewRequest(request: NewStep.StepViewRequest.Request) {

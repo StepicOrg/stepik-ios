@@ -10,9 +10,14 @@ import UIKit
 @available(*, deprecated, message: "Class to initialize video player w/o storyboards logic")
 final class StepikVideoPlayerLegacyAssembly: Assembly {
     private let video: Video
+    private var delegate: StepikVideoPlayerViewControllerDelegate?
 
-    init(video: Video) {
+    init(
+        video: Video,
+        delegate: StepikVideoPlayerViewControllerDelegate? = nil
+    ) {
         self.video = video
+        self.delegate = delegate
     }
 
     func makeModule() -> UIViewController {
@@ -21,9 +26,16 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
             bundle: nil
         )
         videoPlayerViewController.video = self.video
+        videoPlayerViewController.delegate = self.delegate
 
         return videoPlayerViewController
     }
+}
+
+// MARK: - StepikVideoPlayerViewControllerDelegate: AnyObject -
+
+protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
+    func stepikVideoPlayerViewControllerDidRequestAutoplay()
 }
 
 // MARK: - Appearance -
@@ -71,6 +83,8 @@ final class StepikVideoPlayerViewController: UIViewController {
     @IBOutlet weak var back10SecButton: UIButton!
     @IBOutlet weak var fullscreenPlayButton: UIButton!
     @IBOutlet weak var forward10SecButton: UIButton!
+
+    weak var delegate: StepikVideoPlayerViewControllerDelegate?
 
     var video: Video!
 
@@ -625,7 +639,11 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         self.hidePlayerControlsTimer?.invalidate()
         self.isPlayerControlsVisible = false
         self.updateVideoControlsVisibility(hideControlsAutomatically: false)
+
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
     }
+
+    // MARK: Private helpers
 
     private func setTimeParametersAfterPlayerIsReady() {
         self.fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
