@@ -338,8 +338,8 @@
 		08E6BB6B1DC8EB45006622EC /* UserActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6BB6A1DC8EB45006622EC /* UserActivity.swift */; };
 		08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E7CA0F20DAF6E0004F8563 /* AnalyticsUserProperties.swift */; };
 		08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDD6291F7C6785005203E4 /* StepikButton.swift */; };
-		08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */; };
-		08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */; };
+		08EF9A081C91D0F800433E4A /* StepikVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF9A051C91D0F800433E4A /* StepikVideoPlayerViewController.swift */; };
+		08EF9A0A1C91D0F800433E4A /* StepikVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EF9A071C91D0F800433E4A /* StepikVideoPlayerViewController.xib */; };
 		08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F261201E79DD0B00AC908B /* APIEndpoint.swift */; };
 		08F4859A1C57868E000165AA /* TextReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F485991C57868E000165AA /* TextReply.swift */; };
 		08F4859C1C5786DE000165AA /* StringQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4859B1C5786DE000165AA /* StringQuizViewController.swift */; };
@@ -1464,8 +1464,8 @@
 		08E8F9791F34E64E008CF4A1 /* SearchSuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSuggestionTableViewCell.xib; sourceTree = "<group>"; };
 		08EDD6291F7C6785005203E4 /* StepikButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikButton.swift; sourceTree = "<group>"; };
 		08EDD6331F7CFAEC005203E4 /* Model_course_info_v18.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_info_v18.xcdatamodel; sourceTree = "<group>"; };
-		08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicVideoPlayerViewController.swift; sourceTree = "<group>"; };
-		08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepicVideoPlayerViewController.xib; sourceTree = "<group>"; };
+		08EF9A051C91D0F800433E4A /* StepikVideoPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikVideoPlayerViewController.swift; sourceTree = "<group>"; };
+		08EF9A071C91D0F800433E4A /* StepikVideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikVideoPlayerViewController.xib; sourceTree = "<group>"; };
 		08F261201E79DD0B00AC908B /* APIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		08F485991C57868E000165AA /* TextReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextReply.swift; sourceTree = "<group>"; };
 		08F4859B1C5786DE000165AA /* StringQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringQuizViewController.swift; sourceTree = "<group>"; };
@@ -3382,7 +3382,7 @@
 			children = (
 				085DF8D41C99B9FB006809D9 /* Player.swift */,
 				085DF8D71C99C49E006809D9 /* VideoRate.swift */,
-				2C41B4E2234B655F00644ED5 /* StepicVideoPlayerViewController */,
+				2C41B4E2234B655F00644ED5 /* StepikVideoPlayerViewController */,
 			);
 			name = VideoPlayer;
 			sourceTree = "<group>";
@@ -3796,13 +3796,13 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		2C41B4E2234B655F00644ED5 /* StepicVideoPlayerViewController */ = {
+		2C41B4E2234B655F00644ED5 /* StepikVideoPlayerViewController */ = {
 			isa = PBXGroup;
 			children = (
-				08EF9A051C91D0F800433E4A /* StepicVideoPlayerViewController.swift */,
-				08EF9A071C91D0F800433E4A /* StepicVideoPlayerViewController.xib */,
+				08EF9A051C91D0F800433E4A /* StepikVideoPlayerViewController.swift */,
+				08EF9A071C91D0F800433E4A /* StepikVideoPlayerViewController.xib */,
 			);
-			name = StepicVideoPlayerViewController;
+			name = StepikVideoPlayerViewController;
 			sourceTree = "<group>";
 		};
 		2C453396204D46B70061342A /* PinsMap */ = {
@@ -5889,7 +5889,7 @@
 				2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */,
 				08A7B0E81EB340F500C1BA71 /* Auth.plist in Resources */,
 				083F2B231E9E645000714173 /* CertificateTableViewCell.xib in Resources */,
-				08EF9A0A1C91D0F800433E4A /* StepicVideoPlayerViewController.xib in Resources */,
+				08EF9A0A1C91D0F800433E4A /* StepikVideoPlayerViewController.xib in Resources */,
 				2C22043620E2A0860060117A /* ProfileAchievementsContentView.xib in Resources */,
 				0869F6D51CE229C800F8A6DB /* Queues.plist in Resources */,
 				2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */,
@@ -6572,7 +6572,7 @@
 				2CB62BDB2019ECB800B5E336 /* OnboardingCardStepViewController.swift in Sources */,
 				08E7CA1020DAF6E0004F8563 /* AnalyticsUserProperties.swift in Sources */,
 				2C2972052147F5FD001502BD /* CourseTag.swift in Sources */,
-				08EF9A081C91D0F800433E4A /* StepicVideoPlayerViewController.swift in Sources */,
+				08EF9A081C91D0F800433E4A /* StepikVideoPlayerViewController.swift in Sources */,
 				08F555561C4F9FAB00C877E8 /* StringDatasetExtension.swift in Sources */,
 				089611041D52250500561AC1 /* DeepLinkRouter.swift in Sources */,
 				08FEFC1C1F117257005CA0FB /* CodeSuggestionTableViewCell.swift in Sources */,
