@@ -124,48 +124,9 @@ final class StepikVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.audioRouteChanged(_:)),
-            name: AVAudioSession.routeChangeNotification,
-            object: nil
-        )
-
-        self.topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: .normal)
-
-        self.backButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
-
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
-
-        self.topContainerView.setRoundedCorners(cornerRadius: Appearance.topContainerViewCornerRadius)
-        self.bottomFullscreenControlsView.setRoundedCorners(
-            cornerRadius: Appearance.bottomFullscreenControlsCornerRadius
-        )
-
-        self.rateButton.setTitle("\(self.currentVideoRate.rawValue)x", for: .normal)
-
-        self.addChild(self.player)
-        self.view.insertSubview(self.player.view, at: 0)
-        self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
-        self.player.didMove(toParent: self)
-
-        // Player Start Time should be set AFTER the currentQualityURL
-        // TODO: Change this in the future
-        self.currentVideoQualityURL = self.getInitialVideoQualityURL()
-        self.currentVideoQuality = self.getInitialVideoQuality()
-        self.playerStartTime = self.video.playTime
-
-        self.player.playbackLoops = false
-
-        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
-        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
-        self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
-        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
-
-        self.fillModeButton.addTarget(self, action: #selector(self.fillModeButtonDidClick), for: .touchUpInside)
-        self.currentVideoFillMode = .aspect
-
+        self.setupAppearance()
+        self.setupPlayer()
+        self.setupObservers()
         self.setupGestureRecognizers()
     }
 
@@ -203,12 +164,62 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     deinit {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
+        NotificationCenter.default.removeObserver(self)
         Self.logger.info("StepikVideoPlayerViewController :: did deinit")
         self.saveCurrentPlayerTime()
         self.hidePlayerControlsTimer?.invalidate()
     }
 
     // MARK: Setup player
+
+    private func setupAppearance() {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+
+        self.backButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+
+        // Set rounded corners for controls containers.
+        self.topContainerView.setRoundedCorners(cornerRadius: Appearance.topContainerViewCornerRadius)
+        self.bottomFullscreenControlsView.setRoundedCorners(
+            cornerRadius: Appearance.bottomFullscreenControlsCornerRadius
+        )
+
+        self.rateButton.setTitle("\(self.currentVideoRate.rawValue)x", for: .normal)
+
+        self.topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: .normal)
+        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
+        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
+        self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
+    }
+
+    private func setupPlayer() {
+        self.addChild(self.player)
+        self.view.insertSubview(self.player.view, at: 0)
+        self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
+        self.player.didMove(toParent: self)
+
+        // Player Start Time should be set AFTER the currentQualityURL
+        self.currentVideoQualityURL = self.getInitialVideoQualityURL()
+        self.currentVideoQuality = self.getInitialVideoQuality()
+        self.playerStartTime = self.video.playTime
+
+        self.player.playbackLoops = false
+
+        // Assign current fill mode
+        self.fillModeButton.addTarget(self, action: #selector(self.fillModeButtonDidClick), for: .touchUpInside)
+        self.currentVideoFillMode = .aspect
+
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
+    }
+
+    private func setupObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.audioRouteChanged(_:)),
+            name: AVAudioSession.routeChangeNotification,
+            object: nil
+        )
+    }
 
     private func setupGestureRecognizers() {
         let videoTapGestureRecognizer = UITapGestureRecognizer(
