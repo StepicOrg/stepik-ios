@@ -203,7 +203,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     deinit {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
-        StepikVideoPlayerViewController.logger.info("StepikVideoPlayerViewController :: did deinit")
+        Self.logger.info("StepikVideoPlayerViewController :: did deinit")
         self.saveCurrentPlayerTime()
         self.hidePlayerControlsTimer?.invalidate()
     }
@@ -238,7 +238,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @IBAction
     func seekForwardPressed(_ sender: UIButton) {
-        let seekedTime = self.player.currentTime + StepikVideoPlayerViewController.seekForwardTimeOffset
+        let seekedTime = self.player.currentTime + Self.seekForwardTimeOffset
         let resultTime = min(seekedTime, self.player.maximumDuration)
 
         self.seekToTime(resultTime)
@@ -247,7 +247,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @IBAction
     func seekBackPressed(_ sender: UIButton) {
-        let seekedTime = self.player.currentTime - StepikVideoPlayerViewController.seekBackTimeOffset
+        let seekedTime = self.player.currentTime - Self.seekBackTimeOffset
         let resultTime = max(seekedTime, 0)
 
         self.seekToTime(resultTime)
@@ -255,7 +255,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     private func seekToTime(_ time: TimeInterval) {
-        let time = CMTime(seconds: time, preferredTimescale: StepikVideoPlayerViewController.seekPreferredTimescale)
+        let time = CMTime(seconds: time, preferredTimescale: Self.seekPreferredTimescale)
         self.player.seekToTime(time)
     }
 
@@ -474,7 +474,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @objc
     private func startedSeeking() {
-        StepikVideoPlayerViewController.logger.info("StepikVideoPlayerViewController :: started seeking")
+        Self.logger.info("StepikVideoPlayerViewController :: started seeking")
 
         self.hidePlayerControlsTimer?.invalidate()
 
@@ -488,7 +488,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     @objc
     private func finishedSeeking() {
-        StepikVideoPlayerViewController.logger.info("StepikVideoPlayerViewController :: finished seeking")
+        Self.logger.info("StepikVideoPlayerViewController :: finished seeking")
 
         self.scheduleHidePlayerControlsTimer()
 
@@ -545,7 +545,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func scheduleHidePlayerControlsTimer() {
         self.hidePlayerControlsTimer?.invalidate()
         self.hidePlayerControlsTimer = Timer.scheduledTimer(
-            timeInterval: StepikVideoPlayerViewController.hidePlayerControlsTimeInterval,
+            timeInterval: Self.hidePlayerControlsTimeInterval,
             target: self,
             selector: #selector(self.hidePlayerControlsIfVisible),
             userInfo: nil,
@@ -571,14 +571,14 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
 
         self.isPlayerPassedReadyState = true
 
-        StepikVideoPlayerViewController.logger.info("StepikVideoPlayerViewController :: player is ready to display")
+        Self.logger.info("StepikVideoPlayerViewController :: player is ready to display")
 
         self.activityIndicator.isHidden = true
         self.setTimeParametersAfterPlayerIsReady()
 
         let time = CMTime(
             seconds: self.playerStartTime,
-            preferredTimescale: StepikVideoPlayerViewController.seekPreferredTimescale
+            preferredTimescale: Self.seekPreferredTimescale
         )
 
         player.seekToTime(time)
@@ -589,7 +589,7 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
     func playerPlaybackStateDidChange(_ player: Player) {
         switch player.playbackState {
         case .failed:
-            StepikVideoPlayerViewController.logger.error("StepikVideoPlayerViewController :: failed, retry")
+            Self.logger.error("StepikVideoPlayerViewController :: failed, retry")
             self.displayPlayerPlaybackFailedStateAlert()
         case .paused:
             self.setButtonPlaying(true)
@@ -601,9 +601,7 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             break
         }
 
-        StepikVideoPlayerViewController.logger.info(
-            "StepikVideoPlayerViewController :: player playback state changed to \(player.playbackState)"
-        )
+        Self.logger.info("StepikVideoPlayerViewController :: player playback state changed to \(player.playbackState)")
     }
 
     func playerBufferingStateDidChange(_ player: Player) { }
