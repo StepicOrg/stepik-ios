@@ -6,9 +6,17 @@ import UIKit
 protocol NewStepViewControllerProtocol: AnyObject {
     func displayStep(viewModel: NewStep.StepLoad.ViewModel)
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
+    func displayPlayStep(viewModel: NewStep.PlayStep.ViewModel)
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
     func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel)
     func displayDiscussions(viewModel: NewStep.DiscussionsPresentation.ViewModel)
+}
+
+// MARK: - NewStepViewController (Animation) -
+extension NewStepViewController {
+    enum Animation {
+        static let autoplayVideoPlayerPresentationDelay: TimeInterval = 0.75
+    }
 }
 
 // MARK: - NewStepViewController: UIViewController, ControllerWithStepikPlaceholder -
@@ -34,6 +42,8 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     private var isFirstAppearance = true
 
     private var canNavigateToNextStep = false
+    /// Keeps track of need to autoplay the step or not.
+    private var shouldRequestAutoplay = false
 
     init(interactor: NewStepInteractorProtocol) {
         self.interactor = interactor
@@ -99,6 +109,8 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         if !self.didInitRequestsSend {
             self.sendStepDidPassedGroup?.leave()
         }
+
+        self.requestAutoplayIfNeeded()
     }
 
     // MARK: Private API
@@ -145,6 +157,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
         guard let quizType = viewModel.quizType else {
             // Video & text steps
             self.newStepView?.configure(viewModel: viewModel, quizView: nil)
+            self.requestAutoplayIfNeeded()
             return
         }
 
@@ -172,6 +185,19 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             self.newStepView?.configure(viewModel: viewModel, quizView: viewController.view)
         }
     }
+
+    private func requestAutoplayIfNeeded() {
+        guard self.shouldRequestAutoplay,
+              case .result = self.state else {
+            return
+        }
+
+        self.shouldRequestAutoplay = false
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + Animation.autoplayVideoPlayerPresentationDelay) {
+            self.presentVideoPlayer()
+        }
+    }
 }
 
 // MARK: - NewStepViewController: NewStepViewControllerProtocol -
@@ -183,6 +209,11 @@ extension NewStepViewController: NewStepViewControllerProtocol {
 
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel) {
         self.newStepView?.updateText(viewModel.htmlText)
+    }
+
+    func displayPlayStep(viewModel: NewStep.PlayStep.ViewModel) {
+        self.shouldRequestAutoplay = true
+        self.requestAutoplayIfNeeded()
     }
 
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel) {
@@ -257,29 +288,7 @@ extension NewStepViewController: NewStepViewControllerProtocol {
 
 extension NewStepViewController: NewStepViewDelegate {
     func newStepViewDidRequestVideo(_ view: NewStepView) {
-        guard case .result(let viewModel) = self.state,
-              case .video(let videoViewModel) = viewModel.content,
-              let video = videoViewModel?.video else {
-            return
-        }
-
-        let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
-            || ConnectionHelper.shared.reachability.isReachableViaWWAN()
-        let isVideoCached = video.state == .cached
-
-        if !isVideoCached && !isVideoPlayingReachable {
-            let alert = UIAlertController(
-                title: NSLocalizedString("StepVideoPlayingNotReachableErrorTitle", comment: ""),
-                message: NSLocalizedString("StepVideoPlayingNotReachableErrorMessage", comment: ""),
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-            self.present(alert, animated: true, completion: nil)
-        } else if isVideoCached || isVideoPlayingReachable {
-            let assembly = StepikVideoPlayerLegacyAssembly(video: video, delegate: self)
-            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
-            self.present(module: assembly.makeModule(), embedInNavigation: false, modalPresentationStyle: .fullScreen)
-        }
+        self.presentVideoPlayer()
     }
 
     func newStepViewDidRequestPrevious(_ view: NewStepView) {
@@ -329,6 +338,34 @@ extension NewStepViewController: NewStepViewDelegate {
 
     func newStepViewDidLoadContent(_ view: NewStepView) {
         self.newStepView?.endLoading()
+    }
+
+    // MARK: Private helpers
+
+    private func presentVideoPlayer() {
+        guard case .result(let viewModel) = self.state,
+              case .video(let videoViewModel) = viewModel.content,
+              let video = videoViewModel?.video else {
+            return
+        }
+
+        let isVideoPlayingReachable = ConnectionHelper.shared.reachability.isReachableViaWiFi()
+            || ConnectionHelper.shared.reachability.isReachableViaWWAN()
+        let isVideoCached = video.state == .cached
+
+        if !isVideoCached && !isVideoPlayingReachable {
+            let alert = UIAlertController(
+                title: NSLocalizedString("StepVideoPlayingNotReachableErrorTitle", comment: ""),
+                message: NSLocalizedString("StepVideoPlayingNotReachableErrorMessage", comment: ""),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+            self.present(alert, animated: true, completion: nil)
+        } else if isVideoCached || isVideoPlayingReachable {
+            let assembly = StepikVideoPlayerLegacyAssembly(video: video, delegate: self)
+            AnalyticsReporter.reportEvent(AnalyticsEvents.VideoPlayer.opened, parameters: nil)
+            self.present(module: assembly.makeModule(), embedInNavigation: false, modalPresentationStyle: .fullScreen)
+        }
     }
 }
 

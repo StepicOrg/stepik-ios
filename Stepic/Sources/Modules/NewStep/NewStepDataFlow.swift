@@ -31,6 +31,13 @@ enum NewStep {
         }
     }
 
+    /// Tries to play step
+    enum PlayStep {
+        struct Response { }
+
+        struct ViewModel { }
+    }
+
     /// Update bottom step controls – navigation buttons
     enum ControlsUpdate {
         struct Response {

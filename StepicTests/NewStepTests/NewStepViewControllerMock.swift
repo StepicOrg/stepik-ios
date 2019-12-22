@@ -16,6 +16,8 @@ private final class NewStepViewControllerMock: NewStepViewControllerProtocol {
 
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel) { }
 
+    func displayPlayStep(viewModel: NewStep.PlayStep.ViewModel) { }
+
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel) { }
 
     func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel) { }

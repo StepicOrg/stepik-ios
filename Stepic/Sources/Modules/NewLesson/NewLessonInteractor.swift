@@ -46,7 +46,10 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     // MARK: Public API
 
     func doLessonLoad(request: NewLesson.LessonLoad.Request) {
-        self.refresh(context: self.lastLoadState.context, startStep: self.lastLoadState.startStep)
+        self.refresh(
+            context: self.lastLoadState.context,
+            startStep: self.lastLoadState.startStep
+        ).cauterize()
     }
 
     func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request) {
@@ -60,25 +63,33 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
     // MARK: Private API
 
-    private func refresh(context: NewLesson.Context, startStep: NewLesson.StartStep? = nil) {
-        self.previousUnit = nil
-        self.nextUnit = nil
-        self.currentLesson = nil
-        self.currentUnit = nil
-        self.assignmentsForCurrentSteps.removeAll()
+    private func refresh(context: NewLesson.Context, startStep: NewLesson.StartStep? = nil) -> Promise<Void> {
+        Promise { seal in
+            self.previousUnit = nil
+            self.nextUnit = nil
+            self.currentLesson = nil
+            self.currentUnit = nil
+            self.assignmentsForCurrentSteps.removeAll()
 
-        // FIXME: singleton
-        if case .unit(let unitID) = context {
-            LastStepGlobalContext.context.unitId = unitID
+            // FIXME: singleton
+            if case .unit(let unitID) = context {
+                LastStepGlobalContext.context.unitId = unitID
+            }
+
+            let startStep = startStep ?? .index(0)
+            self.lastLoadState = (context, startStep)
+
+            self.loadData(context: context, startStep: startStep).done {
+                seal.fulfill(())
+            }.catch { error in
+                print("new lesson interactor: error while loading lesson = \(error)")
+                self.presenter.presentLesson(response: .init(state: .failure(error)))
+                seal.reject(error)
+            }
         }
-
-        let startStep = startStep ?? .index(0)
-
-        self.lastLoadState = (context, startStep)
-        self.loadData(context: context, startStep: startStep)
     }
 
-    private func loadData(context: NewLesson.Context, startStep: NewLesson.StartStep) {
+    private func loadData(context: NewLesson.Context, startStep: NewLesson.StartStep) -> Promise<Void> {
         firstly { () -> Promise<(Lesson?, Unit?)> in
             switch context {
             case .lesson(let lessonID):
@@ -145,9 +156,6 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
             )
         }.ensure {
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-        }.catch { error in
-            print("new lesson interactor: error while loading lesson = \(error)")
-            self.presenter.presentLesson(response: .init(state: .failure(error)))
         }
     }
 
@@ -212,6 +220,8 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 // MARK: - NewLessonInteractor: NewStepOutputProtocol -
 
 extension NewLessonInteractor: NewStepOutputProtocol {
+    private static let autoplayDelay: TimeInterval = 0.33
+
     func handleStepView(id: Step.IdType) {
         let assignmentID = self.assignmentsForCurrentSteps[id]
 
@@ -242,27 +252,15 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         }
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.refresh(context: .unit(id: unit.id))
+        self.refresh(context: .unit(id: unit.id)).cauterize()
     }
 
     func handleNextUnitNavigation() {
-        guard let unit = self.nextUnit else {
-            return
-        }
-
-        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.refresh(context: .unit(id: unit.id))
+        self.navigateToNextUnit(autoplayNext: false)
     }
 
     func handleStepNavigation(to index: Int) {
-        guard let lesson = self.currentLesson else {
-            return
-        }
-
-        let stepsRange = lesson.stepsArray.startIndex..<lesson.stepsArray.endIndex
-        if stepsRange.contains(index) {
-            self.presenter.presentCurrentStepUpdate(response: .init(index: index))
-        }
+        self.navigateToStep(at: index, autoplayNext: false)
     }
 
     func handleAutoplayNavigation(from index: Int) {
@@ -273,9 +271,42 @@ extension NewLessonInteractor: NewStepOutputProtocol {
         let isCurrentIndexLast = index == max(0, (lesson.stepsArray.count - 1))
 
         if isCurrentIndexLast {
-            self.handleNextUnitNavigation()
+            self.navigateToNextUnit(autoplayNext: true)
         } else {
-            self.handleStepNavigation(to: index + 1)
+            self.navigateToStep(at: index + 1, autoplayNext: true)
+        }
+    }
+
+    // MARK: Private helpers
+
+    private func navigateToNextUnit(autoplayNext: Bool) {
+        guard let unit = self.nextUnit else {
+            return
+        }
+
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+        self.refresh(context: .unit(id: unit.id)).done {
+            if autoplayNext {
+                self.autoplayCurrentStep()
+            }
+        }.cauterize()
+    }
+
+    private func navigateToStep(at index: Int, autoplayNext: Bool) {
+        guard let lesson = self.currentLesson else {
+            return
+        }
+
+        let stepsRange = lesson.stepsArray.startIndex..<lesson.stepsArray.endIndex
+        if stepsRange.contains(index) {
+            self.presenter.presentCurrentStepUpdate(response: .init(index: index))
+            self.autoplayCurrentStep()
+        }
+    }
+
+    private func autoplayCurrentStep() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.autoplayDelay) {
+            self.presenter.presentCurrentStepAutoplay(response: .init())
         }
     }
 }

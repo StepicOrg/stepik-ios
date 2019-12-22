@@ -4,6 +4,7 @@ import UIKit
 protocol NewStepPresenterProtocol {
     func presentStep(response: NewStep.StepLoad.Response)
     func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response)
+    func presentPlayStep(response: NewStep.PlayStep.Response)
     func presentControlsUpdate(response: NewStep.ControlsUpdate.Response)
     func presentDiscussionsButtonUpdate(response: NewStep.DiscussionsButtonUpdate.Response)
     func presentDiscussions(response: NewStep.DiscussionsPresentation.Response)
@@ -40,6 +41,10 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         )
 
         self.viewController?.displayStepTextUpdate(viewModel: .init(htmlText: htmlString))
+    }
+
+    func presentPlayStep(response: NewStep.PlayStep.Response) {
+        self.viewController?.displayPlayStep(viewModel: .init())
     }
 
     func presentControlsUpdate(response: NewStep.ControlsUpdate.Response) {

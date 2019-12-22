@@ -174,4 +174,8 @@ extension NewStepInteractor: NewStepInputProtocol {
             self.presenter.presentStepTextUpdate(response: .init(text: text, fontSize: fontSize))
         }
     }
+
+    func play() {
+        self.presenter.presentPlayStep(response: .init())
+    }
 }
