@@ -532,6 +532,7 @@
 		2C6E9CDB1FF27543001821A2 /* AdaptiveStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E9CDA1FF27543001821A2 /* AdaptiveStorageManager.swift */; };
 		2C74AEC823881E6A00EB6725 /* DiscussionsInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74AEC723881E6A00EB6725 /* DiscussionsInputProtocol.swift */; };
 		2C79F61821873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */; };
+		2C7F641C23B0F5B7006C7648 /* PlayNextCircleControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */; };
 		2C7F782922708AA60089FDD7 /* StepTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F782822708AA60089FDD7 /* StepTabBarButton.swift */; };
 		2C7F782B2270B0910089FDD7 /* LessonInfoTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F782A2270B0910089FDD7 /* LessonInfoTooltipView.swift */; };
 		2C7F783A2271D5480089FDD7 /* LayoutInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F78392271D5480089FDD7 /* LayoutInsets.swift */; };
@@ -1666,6 +1667,7 @@
 		2C74AEC723881E6A00EB6725 /* DiscussionsInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsInputProtocol.swift; sourceTree = "<group>"; };
 		2C76ACCC1F16496C0077D9D7 /* AdaptiveRatingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingManager.swift; path = Stepic/AdaptiveRatingManager.swift; sourceTree = SOURCE_ROOT; };
 		2C79F61721873CD9004CC082 /* NotificationsRequestOnlySettingsAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsRequestOnlySettingsAlertPresenter.swift; sourceTree = "<group>"; };
+		2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayNextCircleControlView.swift; sourceTree = "<group>"; };
 		2C7F782822708AA60089FDD7 /* StepTabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTabBarButton.swift; sourceTree = "<group>"; };
 		2C7F782A2270B0910089FDD7 /* LessonInfoTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonInfoTooltipView.swift; sourceTree = "<group>"; };
 		2C7F78392271D5480089FDD7 /* LayoutInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInsets.swift; sourceTree = "<group>"; };
@@ -4942,6 +4944,7 @@
 				62E9802EAA7E12A5C9B4F800 /* HighlightFakeButton.swift */,
 				62E9869C9474DB9208F1E5FC /* ImageButton.swift */,
 				62E98CA36176671DDF744499 /* PaddingLabel.swift */,
+				2C7F641B23B0F5B7006C7648 /* PlayNextCircleControlView.swift */,
 				62E984651165CED551545B5C /* ProgressCircleImage.swift */,
 				2CB2740322C515050078CA2F /* QuizElementView.swift */,
 				62E988152D37F6F6884F2977 /* ScrollableStackView.swift */,
@@ -6861,6 +6864,7 @@
 				62E98382AC35194D9C0CE966 /* UITableViewExtensions.swift in Sources */,
 				62E98C3B15ABFA56C29FEC3B /* UICollectionViewExtensions.swift in Sources */,
 				62E98116576B12451E5418F4 /* CourseCoverImageView.swift in Sources */,
+				2C7F641C23B0F5B7006C7648 /* PlayNextCircleControlView.swift in Sources */,
 				2C52F9F92342C98E00B0A151 /* WriteCourseReviewViewModel.swift in Sources */,
 				62E98C3824298B04928351E5 /* FormatterHelper.swift in Sources */,
 				62E9801D3AE83BF0735EFA3B /* CourseListAssembly.swift in Sources */,
