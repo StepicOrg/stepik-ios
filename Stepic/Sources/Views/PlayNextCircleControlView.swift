@@ -3,14 +3,13 @@ import UIKit
 
 extension PlayNextCircleControlView {
     struct Appearance {
-        let backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        let backgroundColor = UIColor.white.withAlphaComponent(0.5)
+
+        let iconImageTintColor = UIColor.white
 
         let circleWidth: CGFloat = 10
-        let circleProgressColor = UIColor.green
-        let circleTrackColor = UIColor.lightGray
-
-        let iconImageSize = CGSize(width: 72, height: 72)
-        let iconImageTintColor = UIColor.white
+        let circleProgressColor = UIColor.stepicGreen
+        let circleTrackColor = UIColor.white
     }
 }
 
@@ -57,6 +56,13 @@ final class PlayNextCircleControlView: UIControl {
         return view
     }()
 
+    private var iconImageViewWidthConstraint: Constraint?
+    private var iconImageViewHeightConstraint: Constraint?
+
+    private var circleRadius: CGFloat {
+        self.bounds.width / 2 - self.appearance.circleWidth
+    }
+
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
@@ -84,6 +90,9 @@ final class PlayNextCircleControlView: UIControl {
         }
 
         self.progressLayer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
+
+        self.iconImageViewWidthConstraint?.update(offset: self.circleRadius)
+        self.iconImageViewHeightConstraint?.update(offset: self.circleRadius)
     }
 
     func startCountdown(duration: TimeInterval, completion completionBlock: (() -> Void)? = nil) {
@@ -96,18 +105,21 @@ final class PlayNextCircleControlView: UIControl {
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
 
-        self.progressLayer.removeAllAnimations()
-        self.progressLayer.strokeEnd = 0
-
+        self.stopCountdown()
         self.progressLayer.add(animation, forKey: AnimationKeyPath.progressAnimation.rawValue)
 
         CATransaction.commit()
     }
 
+    func stopCountdown() {
+        self.progressLayer.removeAnimation(forKey: AnimationKeyPath.progressAnimation.rawValue)
+        self.progressLayer.strokeEnd = 0
+    }
+
     private func makeCircularPath() -> UIBezierPath {
         UIBezierPath(
             arcCenter: .zero,
-            radius: self.bounds.width / 2 - self.appearance.circleWidth,
+            radius: self.circleRadius,
             startAngle: 0,
             endAngle: 2 * CGFloat.pi,
             clockwise: true
@@ -139,7 +151,8 @@ extension PlayNextCircleControlView: ProgrammaticallyInitializableViewProtocol {
         self.iconImageView.translatesAutoresizingMaskIntoConstraints = false
         self.iconImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(self.appearance.iconImageSize)
+            self.iconImageViewWidthConstraint = make.width.equalTo(self.circleRadius).constraint
+            self.iconImageViewHeightConstraint = make.height.equalTo(self.circleRadius).constraint
         }
     }
 }
