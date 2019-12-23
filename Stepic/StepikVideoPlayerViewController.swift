@@ -44,6 +44,7 @@ extension StepikVideoPlayerViewController {
     struct Appearance {
         static let topContainerViewCornerRadius: CGFloat = 8
         static let bottomFullscreenControlsCornerRadius: CGFloat = 8
+        static let overlayColor = UIColor.mainDark.withAlphaComponent(0.25)
     }
 
     struct Animation {
@@ -83,6 +84,13 @@ final class StepikVideoPlayerViewController: UIViewController {
     @IBOutlet weak var back10SecButton: UIButton!
     @IBOutlet weak var fullscreenPlayButton: UIButton!
     @IBOutlet weak var forward10SecButton: UIButton!
+
+    private lazy var overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Appearance.overlayColor
+        view.isUserInteractionEnabled = false
+        return view
+    }()
 
     weak var delegate: StepikVideoPlayerViewControllerDelegate?
 
@@ -138,8 +146,8 @@ final class StepikVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setupAppearance()
         self.setupPlayer()
+        self.setupAppearance()
         self.setupObservers()
         self.setupGestureRecognizers()
     }
@@ -204,6 +212,16 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
         self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
         self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
+
+        // Player overlay view
+        self.view.insertSubview(self.overlayView, aboveSubview: self.player.view)
+        self.overlayView.translatesAutoresizingMaskIntoConstraints = false
+        self.overlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        }
+
     }
 
     private func setupPlayer() {
@@ -548,6 +566,8 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func updateVideoControlsVisibility(hideControlsAutomatically: Bool = true) {
         self.setPlayerBarControlsVisibleAnimated(visible: !self.isPlayerControlsVisible)
         self.isPlayerControlsVisible.toggle()
+
+        self.overlayView.isHidden = !self.isPlayerControlsVisible
 
         if self.isPlayerControlsVisible && hideControlsAutomatically {
             self.scheduleHidePlayerControlsTimer()
