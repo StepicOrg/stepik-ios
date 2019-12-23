@@ -242,7 +242,6 @@ final class StepikVideoPlayerViewController: UIViewController {
         )
         videoTapGestureRecognizer.numberOfTapsRequired = 1
         self.player.view.addGestureRecognizer(videoTapGestureRecognizer)
-        self.view.addGestureRecognizer(videoTapGestureRecognizer)
 
         let doubleTapVideoGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -250,7 +249,6 @@ final class StepikVideoPlayerViewController: UIViewController {
         )
         doubleTapVideoGestureRecognizer.numberOfTapsRequired = 2
         self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
-        self.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
     }
 
     // MARK: Seek events
