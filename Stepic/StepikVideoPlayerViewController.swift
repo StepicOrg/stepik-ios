@@ -48,7 +48,7 @@ extension StepikVideoPlayerViewController {
 
         static let overlayColor = UIColor.mainDark.withAlphaComponent(0.5)
 
-        static let autoplayPlayNextCircleHeight: CGFloat = 130
+        static let autoplayPlayNextCircleHeight: CGFloat = 72
         static let autoplayPreferenceTitleFont = UIFont.systemFont(ofSize: 15)
         static let autoplayPreferenceTitleColor = UIColor.white
         static let autoplayPreferenceContainerHeight: CGFloat = 31
