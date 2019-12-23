@@ -663,11 +663,11 @@ extension Player {
                 }
             }
         } else if context == &PlayerLayerObserverContext {
-            if self.playerView.playerLayer.isReadyForDisplay {
-                self.executeClosureOnMainQueueIfNecessary(withClosure: {
+            self.executeClosureOnMainQueueIfNecessary(withClosure: {
+                if self.playerView.playerLayer.isReadyForDisplay {
                     self.delegate?.playerReady?(self)
-                })
-            }
+                }
+            })
         }
     }
 }
