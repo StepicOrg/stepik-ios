@@ -26,6 +26,7 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
             bundle: nil
         )
         videoPlayerViewController.video = self.video
+        videoPlayerViewController.autoplayStorageManager = AutoplayStorageManager()
         videoPlayerViewController.delegate = self.delegate
 
         return videoPlayerViewController
@@ -38,17 +39,26 @@ protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
     func stepikVideoPlayerViewControllerDidRequestAutoplay()
 }
 
-// MARK: - Appearance -
+// MARK: - Appearance & Animation -
 
 extension StepikVideoPlayerViewController {
     struct Appearance {
         static let topContainerViewCornerRadius: CGFloat = 8
         static let bottomFullscreenControlsCornerRadius: CGFloat = 8
-        static let overlayColor = UIColor.mainDark.withAlphaComponent(0.25)
+
+        static let overlayColor = UIColor.mainDark.withAlphaComponent(0.5)
+
+        static let autoplayPlayNextCircleHeight: CGFloat = 130
+        static let autoplayPreferenceTitleFont = UIFont.systemFont(ofSize: 15)
+        static let autoplayPreferenceTitleColor = UIColor.white
+        static let autoplayPreferenceContainerHeight: CGFloat = 31
+        static let autoplaySwitchWidth: CGFloat = 51
+        static let autoplayPreferenceTitleInsets = LayoutInsets(right: 8)
     }
 
     struct Animation {
         static let playerBarControlsAnimationDuration: TimeInterval = 0.5
+        static let autoplayAnimationDuration: TimeInterval = 7.2
     }
 }
 
@@ -92,7 +102,41 @@ final class StepikVideoPlayerViewController: UIViewController {
         return view
     }()
 
+    // MARK: Autoplay controls
+
+    private lazy var playNextCircleControlView: PlayNextCircleControlView = {
+        let view = PlayNextCircleControlView()
+        view.addTarget(self, action: #selector(self.didClickPlayNext), for: .touchUpInside)
+        return view
+    }()
+
+    private lazy var autoplayPreferenceTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("VideoPlayerAutoplayPreferenceTitle", comment: "")
+        label.font = Appearance.autoplayPreferenceTitleFont
+        label.textColor = Appearance.autoplayPreferenceTitleColor
+        label.textAlignment = .right
+        return label
+    }()
+
+    private lazy var autoplaySwitch: UISwitch = {
+        let autoplaySwitch = UISwitch()
+        autoplaySwitch.isOn = self.autoplayStorageManager?.isAutoplayEnabled ?? false
+        autoplaySwitch.addTarget(self, action: #selector(self.autoplayPreferenceValueChanged), for: .valueChanged)
+        return autoplaySwitch
+    }()
+
+    private lazy var autoplayPreferenceContainerView = UIView()
+
+    private var allAutoplayViews: [UIView] {
+        [self.overlayView, self.playNextCircleControlView, self.autoplayPreferenceContainerView]
+    }
+
+    // MARK: State
+
     weak var delegate: StepikVideoPlayerViewControllerDelegate?
+
+    fileprivate(set) var autoplayStorageManager: AutoplayStorageManagerProtocol?
 
     var video: Video!
 
@@ -220,8 +264,39 @@ final class StepikVideoPlayerViewController: UIViewController {
             make.edges.equalToSuperview()
         }
 
+        // Autoplay controls
+        self.view.addSubview(self.playNextCircleControlView)
+        self.playNextCircleControlView.translatesAutoresizingMaskIntoConstraints = false
+        self.playNextCircleControlView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(Appearance.autoplayPlayNextCircleHeight)
         }
 
+        self.view.addSubview(self.autoplayPreferenceContainerView)
+        self.autoplayPreferenceContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayPreferenceContainerView.snp.makeConstraints { make in
+            make.top.equalTo(self.playNextCircleControlView.snp.bottom)
+            make.height.equalTo(Appearance.autoplayPreferenceContainerHeight)
+            make.centerX.equalTo(self.playNextCircleControlView.snp.centerX)
+        }
+
+        self.autoplayPreferenceContainerView.addSubview(self.autoplaySwitch)
+        self.autoplaySwitch.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplaySwitch.snp.makeConstraints { make in
+            make.top.trailing.bottom.equalToSuperview()
+            make.width.equalTo(Appearance.autoplaySwitchWidth)
+        }
+
+        self.autoplayPreferenceContainerView.addSubview(self.autoplayPreferenceTitleLabel)
+        self.autoplayPreferenceTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayPreferenceTitleLabel.snp.makeConstraints { make in
+            make.leading.centerY.equalToSuperview()
+            make.trailing
+                .equalTo(self.autoplaySwitch.snp.leading)
+                .offset(-Appearance.autoplayPreferenceTitleInsets.right)
+        }
+
+        self.setAutoplayControlsHidden(true)
     }
 
     private func setupPlayer() {
@@ -567,9 +642,10 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.setPlayerBarControlsVisibleAnimated(visible: !self.isPlayerControlsVisible)
         self.isPlayerControlsVisible.toggle()
 
-        self.overlayView.isHidden = !self.isPlayerControlsVisible
+        // Allows to not automatically hide player controls while autoplay presented.
+        let isNotInAutoplayMode = self.playNextCircleControlView.isHidden
 
-        if self.isPlayerControlsVisible && hideControlsAutomatically {
+        if self.isPlayerControlsVisible && hideControlsAutomatically && isNotInAutoplayMode {
             self.scheduleHidePlayerControlsTimer()
         }
 
@@ -600,6 +676,47 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func hidePlayerControlsIfVisible() {
         if self.isPlayerControlsVisible {
             self.updateVideoControlsVisibility()
+        }
+    }
+
+    // MARK: Autoplay
+
+    private func setAutoplayControlsHidden(_ isHidden: Bool) {
+        self.allAutoplayViews.forEach { $0.isHidden = isHidden }
+    }
+
+    private func startAutoplayCountdown() {
+        self.setAutoplayControlsHidden(false)
+        self.playNextCircleControlView.startCountdown(duration: Animation.autoplayAnimationDuration) { [weak self] in
+            guard let strongSelf = self,
+                  strongSelf.autoplaySwitch.isOn,
+                  strongSelf.player.playbackState == .stopped else {
+                return
+            }
+
+            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
+        }
+    }
+
+    private func stopAutoplayCountdown() {
+        self.setAutoplayControlsHidden(true)
+        self.playNextCircleControlView.stopCountdown()
+    }
+
+    @objc
+    private func didClickPlayNext() {
+        self.playNextCircleControlView.completeCountdown()
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
+    }
+
+    @objc
+    private func autoplayPreferenceValueChanged() {
+        self.autoplayStorageManager?.isAutoplayEnabled = self.autoplaySwitch.isOn
+
+        if self.autoplaySwitch.isOn {
+            self.startAutoplayCountdown()
+        } else {
+            self.playNextCircleControlView.stopCountdown()
         }
     }
 }
@@ -640,6 +757,7 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             self.playerStartTime = player.currentTime
         case .playing:
             self.setButtonPlaying(false)
+            self.stopAutoplayCountdown()
         case .stopped:
             break
         }
@@ -658,7 +776,10 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         self.isPlayerControlsVisible = false
         self.updateVideoControlsVisibility(hideControlsAutomatically: false)
 
-        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
+        self.setAutoplayControlsHidden(false)
+        if self.autoplaySwitch.isOn {
+            self.startAutoplayCountdown()
+        }
     }
 
     // MARK: Private helpers

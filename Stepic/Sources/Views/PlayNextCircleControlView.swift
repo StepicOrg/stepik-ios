@@ -112,8 +112,11 @@ final class PlayNextCircleControlView: UIControl {
     }
 
     func stopCountdown() {
-        self.progressLayer.removeAnimation(forKey: AnimationKeyPath.progressAnimation.rawValue)
-        self.progressLayer.strokeEnd = 0
+        self.setProgress(to: 0)
+    }
+
+    func completeCountdown() {
+        self.setProgress(to: 1)
     }
 
     private func makeCircularPath() -> UIBezierPath {
@@ -124,6 +127,11 @@ final class PlayNextCircleControlView: UIControl {
             endAngle: 2 * CGFloat.pi,
             clockwise: true
         )
+    }
+
+    private func setProgress(to value: CGFloat) {
+        self.progressLayer.removeAnimation(forKey: AnimationKeyPath.progressAnimation.rawValue)
+        self.progressLayer.strokeEnd = value
     }
 
     private enum AnimationKeyPath: String {

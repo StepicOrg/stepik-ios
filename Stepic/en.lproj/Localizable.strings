@@ -162,8 +162,6 @@ points1 = "point";
 points234 = "points";
 points567890 = "points";
 VideoRate = "Video rate";
-VideoQuality = "Video quality";
-Downloaded = "Downloaded";
 ExamTitle = "Exam";
 ShowExamInWeb = "Open exam in web version?";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
@@ -354,6 +352,11 @@ SolveSomethingToday = "Solve anything today to increase your streak.";
 Close = "Close";
 RecommendationsExplore = "Recommendations";
 RecommendationsExploreDescription = "Check out categories that matching your interests";
+
+/* Video player */
+VideoQuality = "Video quality";
+Downloaded = "Downloaded";
+VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
 
 /* Onboarding */
 OnboardingTitle1 = "Choose";

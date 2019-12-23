@@ -161,8 +161,6 @@ seconds567890 = "секунд";
 points1 = "балл";
 points234 = "балла";
 points567890 = "баллов";
-VideoRate = "Скорость воспроизведения";
-VideoQuality = "Качество видео";
 Downloaded = "Загруженное";
 ExamTitle = "Экзамен";
 ShowExamInWeb = "Открыть экзамен в веб версии?";
@@ -357,6 +355,11 @@ StreakAlertMessageNoStreak = "Решайте задачи каждый день 
 Close = "Закрыть";
 RecommendationsExplore = "Рекомендации";
 RecommendationsExploreDescription = "Выбери курс из подборок по интересам";
+
+/* Video player */
+VideoRate = "Скорость воспроизведения";
+VideoQuality = "Качество видео";
+VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
 
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
