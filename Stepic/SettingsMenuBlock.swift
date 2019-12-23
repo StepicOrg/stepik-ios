@@ -17,6 +17,7 @@ enum SettingsMenuBlock: String {
     case learningHeader
     case stepFontSize
     case codeEditorSettings
+    case autoplaySwitch
     case adaptiveModeSwitch
     case downloadedContentHeader
     case downloads

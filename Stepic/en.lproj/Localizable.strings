@@ -550,6 +550,7 @@ CodeEditorCurrentTheme = "Current: %@";
 CodeEditorCurrentFontSize = "Current: %@pt";
 CodeEditorSettingsTooltip = "You can customize code editor";
 
+AutoplayPreferenceTitle = "Auto-transition to next step on video end";
 LearningSettingsBlockTitle = "Learning";
 DownloadedContentSettingsBlockTitle = "Downloaded content";
 OtherSettingsBlockTitle = "Other";

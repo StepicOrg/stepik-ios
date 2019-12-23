@@ -551,6 +551,7 @@ CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
 
+AutoplayPreferenceTitle = "Автопереход на следующий шаг по окончании видео";
 LearningSettingsBlockTitle = "Обучение";
 DownloadedContentSettingsBlockTitle = "Загруженный контент";
 OtherSettingsBlockTitle = "Другое";
