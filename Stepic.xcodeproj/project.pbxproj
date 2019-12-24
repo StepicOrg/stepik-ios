@@ -4049,6 +4049,14 @@
 			name = CodeEditorPreview;
 			sourceTree = "<group>";
 		};
+		2C63CDF023B26A0A00B4D6FE /* InputOutput */ = {
+			isa = PBXGroup;
+			children = (
+				62E98DAD6804EBE8663AA96A /* CourseInfoTabInfoInputProtocol.swift */,
+			);
+			path = InputOutput;
+			sourceTree = "<group>";
+		};
 		2C6B2F6121AE659600DEB6AC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -5332,12 +5340,12 @@
 			children = (
 				62E983E21584CD07F5E7EB22 /* CourseInfoTabInfoAssembly.swift */,
 				62E98943064DE13C96951EB3 /* CourseInfoTabInfoDataFlow.swift */,
-				62E98DAD6804EBE8663AA96A /* CourseInfoTabInfoInputProtocol.swift */,
 				62E9840BDAEA337E54A640ED /* CourseInfoTabInfoInteractor.swift */,
 				62E988B17EB5A32530118DB7 /* CourseInfoTabInfoPresenter.swift */,
 				62E986BC00397A46228E816A /* CourseInfoTabInfoProvider.swift */,
 				62E983DAAB5C6F2B14290F27 /* CourseInfoTabInfoViewController.swift */,
 				62E98538F18CB055F3C2B378 /* CourseInfoTabInfoViewModel.swift */,
+				2C63CDF023B26A0A00B4D6FE /* InputOutput */,
 				62E98F631F62327314F62817 /* Views */,
 			);
 			path = CourseInfoTabInfo;
