@@ -17,25 +17,7 @@ final class CourseInfoTabInfoViewController: UIViewController {
         }
     }
 
-    private var playerVideoBoundsObservation: NSKeyValueObservation?
-
-    @objc private dynamic lazy var playerViewController: AVPlayerViewController = {
-        let playerViewController = AVPlayerViewController()
-        self.playerVideoBoundsObservation = playerViewController.observe(
-            \.videoBounds,
-            options: [.old, .new]
-        ) { _, change in
-            guard let oldValue = change.oldValue,
-                  let newValue = change.newValue else {
-                return
-            }
-
-            if newValue.size.height != oldValue.size.height {
-                UIApplication.shared.isStatusBarHidden = false
-            }
-        }
-        return playerViewController
-    }()
+    private lazy var playerViewController = AVPlayerViewController()
 
     // MARK: Init
 
@@ -55,7 +37,6 @@ final class CourseInfoTabInfoViewController: UIViewController {
     }
 
     deinit {
-        self.playerVideoBoundsObservation = nil
         self.playerViewController.player?.pause()
         self.playerViewController.willMove(toParent: nil)
         self.playerViewController.view.removeFromSuperview()

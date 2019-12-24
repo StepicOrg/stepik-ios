@@ -12,10 +12,11 @@ protocol CourseInfoTabInfoViewDelegate: AnyObject {
 extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
+        let stackViewInsets = LayoutInsets(top: 20)
 
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
-        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
+        let authorTitleLabelInsets = UIEdgeInsets(top: 0, left: 47, bottom: 20, right: 47)
         let authorIconLeadingSpace: CGFloat = 20
 
         let loadingIndicatorTopInset: CGFloat = 20
@@ -181,7 +182,8 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(self.appearance.stackViewInsets.top)
+            make.leading.trailing.bottom.equalToSuperview()
         }
 
         self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
