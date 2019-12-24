@@ -6,7 +6,7 @@ use_frameworks!
 
 def shared_pods
     pod 'Alamofire', '4.9.1'
-    pod 'Atributika', '4.9.0'
+    pod 'Atributika', '4.9.1'
     pod 'SwiftyJSON', '5.0.0'
     pod 'SDWebImage', '5.4.0'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
@@ -30,10 +30,10 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.13.0'
-    pod 'Firebase/Messaging' , '6.13.0'
-    pod 'Firebase/Analytics' , '6.13.0'
-    pod 'Firebase/RemoteConfig', '6.13.0'
+    pod 'Firebase/Core', '6.14.0'
+    pod 'Firebase/Messaging' , '6.14.0'
+    pod 'Firebase/Analytics' , '6.14.0'
+    pod 'Firebase/RemoteConfig', '6.14.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.8.2'
     pod 'Amplitude-iOS', '4.9.3'

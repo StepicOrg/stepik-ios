@@ -12,14 +12,16 @@ enum SettingsMenuBlock: String {
     case videoHeader
     case loadingVideoQuality
     case onlineVideoQuality
-    case adaptiveHeader
-    case adaptiveModeSwitch
-    case codeEditorSettingsHeader
-    case codeEditorSettings
-    case logout
-    case languageSettingsHeader
+    case languageHeader
     case contentLanguage
-    case downloads
-    case appearanceHeader
+    case learningHeader
     case stepFontSize
+    case codeEditorSettings
+    case autoplaySwitch
+    case adaptiveModeSwitch
+    case downloadedContentHeader
+    case downloads
+    case deleteAllContent
+    case otherSettingsHeader
+    case logout
 }

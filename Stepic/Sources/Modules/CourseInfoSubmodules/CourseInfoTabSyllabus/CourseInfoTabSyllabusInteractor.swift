@@ -339,9 +339,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             return
         }
 
+        let isEnrolledOnCourse = course.enrolled
+
         let isPersonalDeadlinesAvailable = self.personalDeadlinesService.canAddDeadlines(in: course)
             || self.personalDeadlinesService.hasDeadlines(in: course)
-        let isPersonalDeadlinesEnabled = course.enrolled
+        let isPersonalDeadlinesEnabled = isPersonalDeadlinesAvailable && isEnrolledOnCourse
+
+        let isPersonalDeadlinesTooltipVisible = !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton
+            && isPersonalDeadlinesEnabled
 
         let courseDownloadState = self.getDownloadingStateForCourse()
 
@@ -359,12 +364,14 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 isPersonalDeadlinesAvailable: isPersonalDeadlinesAvailable,
                 isPersonalDeadlinesEnabled: isPersonalDeadlinesEnabled,
                 isDownloadAllAvailable: isDownloadAllAvailable,
-                isPersonalDeadlinesTooltipVisible: !self.tooltipStorageManager.didShowOnPersonalDeadlinesButton,
+                isPersonalDeadlinesTooltipVisible: isPersonalDeadlinesTooltipVisible,
                 courseDownloadState: courseDownloadState
             )
         )
 
-        self.tooltipStorageManager.didShowOnPersonalDeadlinesButton = true
+        if isPersonalDeadlinesTooltipVisible {
+            self.tooltipStorageManager.didShowOnPersonalDeadlinesButton = true
+        }
     }
 
     private func fetchSyllabusSection(

@@ -28,8 +28,6 @@ ReloginTitle = "Ошибка авторизации";
 ReloginSubtitle = "Войдите, пожалуйста";
 Studying = "Записан на курс";
 JoinCourse = "Поступить на курс";
-ClearCacheTitle = "Очистить кэш";
-ClearCacheMessage = "Удалить все видео из памяти Вашего устройства?";
 FailedToRemoveMessage = "Ошибка при удалении";
 RemovedAllMessage = "Удалено";
 Downloading = "Загружается";
@@ -163,8 +161,6 @@ seconds567890 = "секунд";
 points1 = "балл";
 points234 = "балла";
 points567890 = "баллов";
-VideoRate = "Скорость воспроизведения";
-VideoQuality = "Качество видео";
 Downloaded = "Загруженное";
 ExamTitle = "Экзамен";
 ShowExamInWeb = "Открыть экзамен в веб версии?";
@@ -553,10 +549,18 @@ CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
 
-SettingsBlockTitleAppearance = "Внешний вид";
+AutoplayPreferenceTitle = "Автопереход на следующий шаг по окончании видео";
+LearningSettingsBlockTitle = "Обучение";
+DownloadedContentSettingsBlockTitle = "Загруженный контент";
+OtherSettingsBlockTitle = "Другое";
+
+DeleteAllContentPreferenceTitle = "Удалить весь контент";
+DeleteAllContentConfirmationAlertTitle = "Удалить весь контент";
+DeleteAllContentConfirmationAlertMessage = "Вы уверены, что хотите удалить весь загруженный контент из памяти Вашего устройства?";
+
 /* Font size settings */
 SettingsStepFontSizeTitle = "Размер текста";
-SettingsStepFontSizeSubtitle = "Изменения размера текста влияют только на текст шага.";
+SettingsStepFontSizeSubtitle = "Изменения размера текста влияют только на текст шага";
 SettingsStepFontSizeItemSmall = "Маленький";
 SettingsStepFontSizeItemMedium = "Средний";
 SettingsStepFontSizeItemLarge = "Большой";
@@ -734,6 +738,10 @@ EditStepAlertActionTitle = "Редактировать";
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
 VideoPlayerPlaybackFailedStateAlertMessage = "Возникла ошибка воспроизведения видео, попробовать снова или закрыть плеер?";
+VideoRate = "Скорость воспроизведения";
+VideoQuality = "Качество видео";
+VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
+VideoPlayerAutoplayCancelTitle = "Остаться на этом шаге";
 
 OurSocialNetworks = "Наши аккаунты в соцсетях";
 
@@ -758,7 +766,7 @@ WrongFeedbackTitleNotLastTry2 = "Пока неверно, но вы можете
 WrongFeedbackTitleNotLastTry3 = "Не получилось. Ещё немного и вы точно сможете.";
 WrongFeedbackTitleLastTry = "Неверно.";
 EvaluationFeedbackTitle = "Проверка...";
-PeerReviewFeedbackTitle = "Это задание с рецензией. Нажмите, чтобы закончить задание в веб-версии и получить баллы.";
+PeerReviewFeedbackTitle = "Это задание с рецензией. Нажмите сюда, чтобы закончить задание в веб-версии и получить баллы.";
 NextStepNavigationTitle = "Дальше";
 DiscountPolicyInverseTitle = "После каждого неправильного решения баллы, которые можно получить за задание, будут уменьшены";
 DiscountPolicyNoWayTitle = "За Ваши следующие попытки не будут начислены баллы";
@@ -777,6 +785,7 @@ SortingQuizTitle = "Упорядочьте элементы списка";
 MatchingQuizTitle = "Сопоставьте значения из двух списков";
 SQLQuizTitle = "SQL Challenge - Введите SQL запрос";
 UnsupportedQuizTitle = "Неподдерживаемый тип шага";
+FreeAnswerQuizTitle = "Напишите эссе";
 
 UnsupportedQuizActionButtonTitle = "Пройти задание в web-версии";
 

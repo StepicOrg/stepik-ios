@@ -135,14 +135,6 @@ struct AnalyticsEvents {
         struct Edit {
             static let opened = "step_edit_opened"
             static let completed = "step_edit_completed"
-
-            static func makeParams(stepID: Int, type: String, position: Int) -> [String: Any] {
-                return [
-                    "step": stepID,
-                    "type": type,
-                    "number": position
-                ]
-            }
         }
     }
 

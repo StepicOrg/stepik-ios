@@ -58,7 +58,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             }
         }()
 
-        // string / number / math / freeAnswer / code quizzes can be retried w/o new attempt
+        // The following quizzes can be retried w/o new attempt
         let isQuizNotNeededNewAttempt = [
             NewStep.QuizType.string,
             NewStep.QuizType.number,

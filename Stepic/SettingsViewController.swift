@@ -7,9 +7,19 @@
 //
 
 import Foundation
+import PromiseKit
+import SVProgressHUD
+
+// MARK: SettingsViewControllerLegacyAssembly: Assembly -
 
 @available(*, deprecated, message: "Class to initialize settings w/o storyboards logic")
 final class SettingsViewControllerLegacyAssembly: Assembly {
+    private let appearance: SettingsViewController.Appearance
+
+    init(appearance: SettingsViewController.Appearance = .init()) {
+        self.appearance = appearance
+    }
+
     func makeModule() -> UIViewController {
         guard let viewController = ControllerHelper.instantiateViewController(
             identifier: "SettingsViewController",
@@ -18,15 +28,42 @@ final class SettingsViewControllerLegacyAssembly: Assembly {
             fatalError("Failed to initialize SettingsViewController")
         }
 
-        let presenter = SettingsPresenter(view: viewController)
+        viewController.appearance = self.appearance
+        viewController.downloadsProvider = DownloadsProvider(
+            coursesPersistenceService: CoursesPersistenceService(),
+            adaptiveStorageManager: AdaptiveStorageManager.shared,
+            videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+            storageUsageService: StorageUsageService(
+                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+            )
+        )
+
+        let presenter = SettingsPresenter(
+            view: viewController,
+            autoplayStorageManager: AutoplayStorageManager(),
+            adaptiveStorageManager: AdaptiveStorageManager.shared
+        )
         viewController.presenter = presenter
 
         return viewController
     }
 }
 
+// MARK: - SettingsViewController (Appearance) -
+
+extension SettingsViewController {
+    struct Appearance {
+        let destructiveActionColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
+    }
+}
+
+// MARK: - SettingsViewController: MenuViewController -
+
 final class SettingsViewController: MenuViewController {
-    var presenter: SettingsPresenter?
+    var appearance: Appearance!
+    var presenter: SettingsPresenterProtocol?
+
+    fileprivate var downloadsProvider: DownloadsProviderProtocol?
 
     private lazy var artView: ArtView = {
         let artView = ArtView(frame: CGRect.zero)
@@ -66,6 +103,8 @@ final class SettingsViewController: MenuViewController {
         self.edgesForExtendedLayout = []
         self.tableView.tableHeaderView = self.artView
         self.tableView.contentInsetAdjustmentBehavior = .never
+
+        self.presenter?.refresh()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -97,7 +136,7 @@ final class SettingsViewController: MenuViewController {
 extension SettingsViewController: SettingsView {
     func setMenu(menuIDs: [SettingsMenuBlock]) {
         let blocks = menuIDs.map { self.makeMenuBlock(for: $0) }
-        self.menu = Menu(blocks: blocks)
+        self.menu = Menu(blocks: blocks)        
     }
 
     func presentAuth() {
@@ -118,36 +157,40 @@ extension SettingsViewController: SettingsView {
             return self.makeLoadingVideoQualityBlock()
         case .onlineVideoQuality:
             return self.makeOnlineVideoQualityBlock()
-        case .codeEditorSettingsHeader:
-            return self.makeTitleMenuBlock(
-                id: menuBlockID,
-                title: NSLocalizedString("CodeEditorTitle", comment: "")
-            )
-        case .codeEditorSettings:
-            return self.makeCodeEditorSettingsBlock()
-        case .appearanceHeader:
-            return self.makeTitleMenuBlock(
-                id: menuBlockID,
-                title: NSLocalizedString("SettingsBlockTitleAppearance", comment: "")
-            )
-        case .stepFontSize:
-            return self.makeStepFontSizeBlock()
-        case .languageSettingsHeader:
+        case .languageHeader:
             return self.makeTitleMenuBlock(
                 id: menuBlockID,
                 title: NSLocalizedString("LanguageSettingsTitle", comment: "")
             )
         case .contentLanguage:
             return self.makeContentLanguageSettingsBlock()
-        case .adaptiveHeader:
+        case .learningHeader:
             return self.makeTitleMenuBlock(
                 id: menuBlockID,
-                title: NSLocalizedString("AdaptivePreferencesTitle", comment: "")
+                title: NSLocalizedString("LearningSettingsBlockTitle", comment: "")
             )
+        case .stepFontSize:
+            return self.makeStepFontSizeBlock()
+        case .codeEditorSettings:
+            return self.makeCodeEditorSettingsBlock()
+        case .autoplaySwitch:
+            return self.makeAutoplaySwitchBlock()
         case .adaptiveModeSwitch:
             return self.makeAdaptiveModeSwitchBlock()
+        case .downloadedContentHeader:
+            return self.makeTitleMenuBlock(
+                id: menuBlockID,
+                title: NSLocalizedString("DownloadedContentSettingsBlockTitle", comment: "")
+            )
         case .downloads:
             return self.makeDownloadsBlock()
+        case .deleteAllContent:
+            return self.makeDeleteAllContentBlock()
+        case .otherSettingsHeader:
+            return self.makeTitleMenuBlock(
+                id: menuBlockID,
+                title: NSLocalizedString("OtherSettingsBlockTitle", comment: "")
+            )
         case .logout:
             return self.makeLogoutBlock()
         }
@@ -221,14 +264,27 @@ extension SettingsViewController: SettingsView {
         return block
     }
 
+    private func makeAutoplaySwitchBlock() -> SwitchMenuBlock {
+        let block = SwitchMenuBlock(
+            id: SettingsMenuBlock.autoplaySwitch.rawValue,
+            title: NSLocalizedString("AutoplayPreferenceTitle", comment: ""),
+            isOn: self.presenter?.isAutoplayModeEnabled ?? false
+        )
+        block.onSwitch = { [weak self] isOn in
+            self?.presenter?.isAutoplayModeEnabled = isOn
+        }
+
+        return block
+    }
+
     private func makeAdaptiveModeSwitchBlock() -> SwitchMenuBlock {
         let block = SwitchMenuBlock(
             id: SettingsMenuBlock.adaptiveModeSwitch.rawValue,
             title: NSLocalizedString("UseAdaptiveModePreference", comment: ""),
-            isOn: AdaptiveStorageManager.shared.isAdaptiveModeEnabled
+            isOn: self.presenter?.isAdaptiveModeEnabled ?? false
         )
         block.onSwitch = { [weak self] isOn in
-            self?.presenter?.changeAdaptiveModeEnabled(to: isOn)
+            self?.presenter?.isAdaptiveModeEnabled = isOn
         }
 
         return block
@@ -246,12 +302,33 @@ extension SettingsViewController: SettingsView {
         return block
     }
 
+    private func makeDeleteAllContentBlock() -> TransitionMenuBlock {
+        let block = TransitionMenuBlock(
+            id: SettingsMenuBlock.deleteAllContent.rawValue,
+            title: NSLocalizedString("DeleteAllContentPreferenceTitle", comment: "")
+        )
+        block.titleColor = self.appearance.destructiveActionColor
+        block.onTouch = { [weak self] in
+            self?.requestDeleteAllContent { granted in
+                guard granted else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self?.deleteAllContent()
+                }
+            }
+        }
+
+        return block
+    }
+
     private func makeLogoutBlock() -> TransitionMenuBlock {
         let block = TransitionMenuBlock(
             id: SettingsMenuBlock.logout.rawValue,
             title: NSLocalizedString("Logout", comment: "")
         )
-        block.titleColor = UIColor(red: 200 / 255.0, green: 40 / 255.0, blue: 80 / 255.0, alpha: 1)
+        block.titleColor = self.appearance.destructiveActionColor
         block.onTouch = { [weak self] in
             self?.presenter?.logout()
         }
@@ -277,5 +354,52 @@ extension SettingsViewController: SettingsView {
     private func displayDownloads() {
         let assembly = DownloadsAssembly()
         self.push(module: assembly.makeModule())
+    }
+
+    private func requestDeleteAllContent(completionHandler: @escaping ((Bool) -> Void)) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("DeleteAllContentConfirmationAlertTitle", comment: ""),
+            message: NSLocalizedString("DeleteAllContentConfirmationAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Delete", comment: ""),
+                style: .destructive,
+                handler: { _ in
+                    completionHandler(true)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: { _ in
+                    completionHandler(false)
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
+    }
+
+    private func deleteAllContent() {
+        guard let downloadsProvider = self.downloadsProvider else {
+            return SVProgressHUD.showError(withStatus: nil)
+        }
+
+        SVProgressHUD.show()
+
+        firstly {
+            after(.seconds(1))
+        }.then {
+            downloadsProvider.fetchCachedCourses()
+        }.then { courses in
+            downloadsProvider.deleteCachedCourses(courses)
+        }.done { _ in
+            SVProgressHUD.showSuccess(withStatus: nil)
+        }
     }
 }

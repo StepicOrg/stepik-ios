@@ -31,6 +31,13 @@ enum NewStep {
         }
     }
 
+    /// Tries to play step
+    enum PlayStep {
+        struct Response { }
+
+        struct ViewModel { }
+    }
+
     /// Update bottom step controls – navigation buttons
     enum ControlsUpdate {
         struct Response {
@@ -58,16 +65,6 @@ enum NewStep {
         }
     }
 
-    /// Handle information about step was presented
-    enum StepViewRequest {
-        struct Request { }
-    }
-
-    /// Handle information about step was passed
-    enum StepDoneRequest {
-        struct Request { }
-    }
-
     /// Handle navigation inside lesson
     enum StepNavigationRequest {
         enum Direction {
@@ -78,6 +75,21 @@ enum NewStep {
         struct Request {
             let direction: Direction
         }
+    }
+
+    /// Handle autoplay navigation inside/next lesson
+    enum AutoplayNavigationRequest {
+        struct Request { }
+    }
+
+    /// Handle information about step was presented
+    enum StepViewRequest {
+        struct Request { }
+    }
+
+    /// Handle information about step was passed
+    enum StepDoneRequest {
+        struct Request { }
     }
 
     /// Update discussions button (on appear)
@@ -125,12 +137,10 @@ enum NewStep {
         case math
         case sorting
         case matching
-        case fillBlanks
         case code
         case sql
         case unknown(blockName: String)
 
-        // swiftlint:disable:next cyclomatic_complexity
         init(blockName: String) {
             switch blockName {
             case "choice":
@@ -147,8 +157,6 @@ enum NewStep {
                 self = .sorting
             case "matching":
                 self = .matching
-            case "fill-blanks":
-                self = .fillBlanks
             case "code":
                 self = .code
             case "sql":
@@ -174,8 +182,6 @@ enum NewStep {
                 return "sorting"
             case .matching:
                 return "matching"
-            case .fillBlanks:
-                return "fill-blanks"
             case .code:
                 return "code"
             case .sql:
@@ -188,7 +194,7 @@ enum NewStep {
         static func == (lhs: QuizType, rhs: QuizType) -> Bool {
             switch (lhs, rhs) {
             case (.choice, .choice), (.string, .string), (.number, .number), (.math, .math), (.freeAnswer, .freeAnswer),
-                 (.sorting, .sorting), (.matching, .matching), (.fillBlanks, .fillBlanks), (.code, .code), (.sql, .sql):
+                 (.sorting, .sorting), (.matching, .matching), (.code, .code), (.sql, .sql):
                 return true
             case (.unknown(let lhsName), .unknown(let rhsName)):
                 return lhsName == rhsName

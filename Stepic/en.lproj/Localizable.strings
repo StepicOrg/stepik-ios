@@ -28,8 +28,6 @@ ReloginTitle = "Authorization problems";
 ReloginSubtitle = "Log in, please";
 Studying = "Studying";
 JoinCourse = "Join course";
-ClearCacheTitle = "Clear cache";
-ClearCacheMessage = "Remove all videos stored in the memory of your device?";
 FailedToRemoveMessage = "Failed to remove";
 RemovedAllMessage = "Removed";
 Downloading = "Downloading";
@@ -164,8 +162,6 @@ points1 = "point";
 points234 = "points";
 points567890 = "points";
 VideoRate = "Video rate";
-VideoQuality = "Video quality";
-Downloaded = "Downloaded";
 ExamTitle = "Exam";
 ShowExamInWeb = "Open exam in web version?";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
@@ -552,10 +548,18 @@ CodeEditorCurrentTheme = "Current: %@";
 CodeEditorCurrentFontSize = "Current: %@pt";
 CodeEditorSettingsTooltip = "You can customize code editor";
 
-SettingsBlockTitleAppearance = "Appearance";
+AutoplayPreferenceTitle = "Auto-transition to next step on video end";
+LearningSettingsBlockTitle = "Learning";
+DownloadedContentSettingsBlockTitle = "Downloaded content";
+OtherSettingsBlockTitle = "Other";
+
+DeleteAllContentPreferenceTitle = "Delete all content";
+DeleteAllContentConfirmationAlertTitle = "Delete all content";
+DeleteAllContentConfirmationAlertMessage = "Are you sure you want to delete all downloaded content?";
+
 /* Font size settings */
 SettingsStepFontSizeTitle = "Text size";
-SettingsStepFontSizeSubtitle = "Text size changes affect only step text.";
+SettingsStepFontSizeSubtitle = "Text size changes affect only step text";
 SettingsStepFontSizeItemSmall = "Small";
 SettingsStepFontSizeItemMedium = "Medium";
 SettingsStepFontSizeItemLarge = "Large";
@@ -733,6 +737,10 @@ EditStepAlertActionTitle = "Edit";
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
 VideoPlayerPlaybackFailedStateAlertMessage = "Video playback error occurred, try again or close the player?";
+VideoQuality = "Video quality";
+Downloaded = "Downloaded";
+VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
+VideoPlayerAutoplayCancelTitle = "Stay on this step";
 
 OurSocialNetworks = "Our social networks";
 
@@ -757,7 +765,7 @@ WrongFeedbackTitleNotLastTry2 = "No. Time for the next try.";
 WrongFeedbackTitleNotLastTry3 = "Try again, incorrect answer.";
 WrongFeedbackTitleLastTry = "Incorrect.";
 EvaluationFeedbackTitle = "Evaluation...";
-PeerReviewFeedbackTitle = "This is a task with peer review. Tap to open in web to get points.";
+PeerReviewFeedbackTitle = "This is a task with peer review. Tap here to open in web to get points.";
 NextStepNavigationTitle = "Next";
 DiscountPolicyInverseTitle = "After every wrong submission your maximum points will be reduced";
 DiscountPolicyNoWayTitle = "You will not get points for the next attempts";
@@ -776,6 +784,7 @@ SortingQuizTitle = "Sort a given list";
 MatchingQuizTitle = "Match two lists";
 SQLQuizTitle = "SQL Challenge - Enter SQL query";
 UnsupportedQuizTitle = "Unsupported step type";
+FreeAnswerQuizTitle = "Write an essay";
 
 UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 

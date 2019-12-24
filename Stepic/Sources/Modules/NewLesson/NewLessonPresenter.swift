@@ -7,6 +7,7 @@ protocol NewLessonPresenterProtocol {
     func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response)
     func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
     func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response)
+    func presentCurrentStepAutoplay(response: NewLesson.CurrentStepAutoplay.Response)
     func presentEditStep(response: NewLesson.EditStepPresentation.Response)
     func presentStepTextUpdate(response: NewLesson.StepTextUpdate.Response)
     func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response)
@@ -73,6 +74,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         self.viewController?.displayCurrentStepUpdate(viewModel: .init(index: response.index))
     }
 
+    func presentCurrentStepAutoplay(response: NewLesson.CurrentStepAutoplay.Response) {
+        self.viewController?.displayCurrentStepAutoplay(viewModel: .init())
+    }
+
     func presentStepTextUpdate(response: NewLesson.StepTextUpdate.Response) {
         self.viewController?.displayStepTextUpdate(
             viewModel: .init(index: response.index, text: response.stepSource.text)
@@ -99,6 +104,10 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         let lessonTitle = lesson.title
         let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
+                if step.hasReview {
+                    return UIImage(named: "ic_peer_review")?.withRenderingMode(.alwaysTemplate)
+                }
+
                 switch step.block.type {
                 case .video:
                     return UIImage(named: "video_step_icon")
@@ -112,9 +121,9 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             }()
             return .init(
                 id: step.id,
-                type: step.block.type,
                 iconImage: iconImage ?? UIImage(),
-                isPassed: progresses[safe: index]?.isPassed ?? false
+                isPassed: progresses[safe: index]?.isPassed ?? false,
+                canEdit: canEdit && step.block.type != .video
             )
         }
         return NewLessonViewModel(
@@ -123,8 +132,7 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
             stepLinkMaker: {
                 "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
             },
-            startStepIndex: startStepIndex,
-            canEdit: canEdit
+            startStepIndex: startStepIndex
         )
     }
 

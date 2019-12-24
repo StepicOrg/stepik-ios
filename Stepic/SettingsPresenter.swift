@@ -10,41 +10,82 @@ import Foundation
 
 protocol SettingsView: AnyObject {
     func setMenu(menuIDs: [SettingsMenuBlock])
-
     func presentAuth()
 }
 
-final class SettingsPresenter {
+protocol SettingsPresenterProtocol: AnyObject {
+    var view: SettingsView? { get }
+
+    var isAdaptiveModeEnabled: Bool { get set }
+    var isAutoplayModeEnabled: Bool { get set }
+
+    func refresh()
+    func logout()
+}
+
+final class SettingsPresenter: SettingsPresenterProtocol {
     weak var view: SettingsView?
 
-    var menu: [SettingsMenuBlock] = [
+    private let autoplayStorageManager: AutoplayStorageManagerProtocol
+    private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+
+    var isAdaptiveModeEnabled: Bool {
+        get {
+            self.adaptiveStorageManager.isAdaptiveModeEnabled
+        }
+        set {
+            self.adaptiveStorageManager.isAdaptiveModeEnabled = newValue
+        }
+    }
+
+    var isAutoplayModeEnabled: Bool {
+        get {
+            self.autoplayStorageManager.isAutoplayEnabled
+        }
+        set {
+            self.autoplayStorageManager.isAutoplayEnabled = newValue
+        }
+    }
+
+    private var menu: [SettingsMenuBlock] = [
+        // Video
         .videoHeader,
-        .downloads,
         .loadingVideoQuality,
         .onlineVideoQuality,
-        .appearanceHeader,
-        .codeEditorSettings,
-        .stepFontSize,
-        .languageSettingsHeader,
+        // Content language
+        .languageHeader,
         .contentLanguage,
-        .adaptiveHeader,
+        // Learning
+        .learningHeader,
+        .stepFontSize,
+        .codeEditorSettings,
+        .autoplaySwitch,
         .adaptiveModeSwitch,
+        // Downloaded content
+        .downloadedContentHeader,
+        .downloads,
+        .deleteAllContent,
+        // Other
+        .otherSettingsHeader,
         .logout
     ]
 
-    init(view: SettingsView) {
+    init(
+        view: SettingsView,
+        autoplayStorageManager: AutoplayStorageManagerProtocol,
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol
+    ) {
         self.view = view
-        view.setMenu(menuIDs: self.menu)
+        self.autoplayStorageManager = autoplayStorageManager
+        self.adaptiveStorageManager = adaptiveStorageManager
     }
 
-    // MARK: - Menu blocks
+    func refresh() {
+        self.view?.setMenu(menuIDs: self.menu)
+    }
 
     func logout() {
         AuthInfo.shared.token = nil
         self.view?.presentAuth()
-    }
-
-    func changeAdaptiveModeEnabled(to isEnabled: Bool) {
-        AdaptiveStorageManager.shared.isAdaptiveModeEnabled = isEnabled
     }
 }

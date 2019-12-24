@@ -5,6 +5,7 @@ protocol NewStepInteractorProtocol {
     func doStepLoad(request: NewStep.StepLoad.Request)
     func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request)
     func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request)
+    func doAutoplayNavigationRequest(request: NewStep.AutoplayNavigationRequest.Request)
     func doStepViewRequest(request: NewStep.StepViewRequest.Request)
     func doStepDoneRequest(request: NewStep.StepDoneRequest.Request)
     func doDiscussionsButtonUpdate(request: NewStep.DiscussionsButtonUpdate.Request)
@@ -38,7 +39,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         firstly {
             self.provider.fetchStep(id: self.stepID)
         }.then { fetchResult in
-                self.provider.fetchCurrentFontSize().map { ($0, fetchResult) }
+            self.provider.fetchCurrentFontSize().map { ($0, fetchResult) }
         }.done(on: DispatchQueue.global(qos: .userInitiated)) { fontSize, result in
             guard let step = result.value else {
                 throw Error.fetchFailed
@@ -78,10 +79,12 @@ final class NewStepInteractor: NewStepInteractorProtocol {
             if let course = LastStepGlobalContext.context.course,
                let unitID = LastStepGlobalContext.context.unitId,
                let stepID = LastStepGlobalContext.context.stepId {
-                if let lastStep = course.lastStep {
-                    lastStep.update(unitId: unitID, stepId: stepID)
-                } else {
-                    course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
+                DispatchQueue.main.sync {
+                    if let lastStep = course.lastStep {
+                        lastStep.update(unitId: unitID, stepId: stepID)
+                    } else {
+                        course.lastStep = LastStep(id: course.lastStepId ?? "", unitId: unitID, stepId: stepID)
+                    }
                 }
             }
         }.catch { error in
@@ -110,6 +113,14 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         case .next:
             self.moduleOutput?.handleNextUnitNavigation()
         }
+    }
+
+    func doAutoplayNavigationRequest(request: NewStep.AutoplayNavigationRequest.Request) {
+        guard let currentStepIndex = self.currentStepIndex else {
+            return
+        }
+
+        self.moduleOutput?.handleAutoplayNavigation(from: currentStepIndex)
     }
 
     func doStepViewRequest(request: NewStep.StepViewRequest.Request) {
@@ -164,5 +175,9 @@ extension NewStepInteractor: NewStepInputProtocol {
         self.provider.fetchCurrentFontSize().done { fontSize in
             self.presenter.presentStepTextUpdate(response: .init(text: text, fontSize: fontSize))
         }
+    }
+
+    func play() {
+        self.presenter.presentPlayStep(response: .init())
     }
 }

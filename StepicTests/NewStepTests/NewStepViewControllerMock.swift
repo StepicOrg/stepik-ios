@@ -16,6 +16,8 @@ private final class NewStepViewControllerMock: NewStepViewControllerProtocol {
 
     func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel) { }
 
+    func displayPlayStep(viewModel: NewStep.PlayStep.ViewModel) { }
+
     func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel) { }
 
     func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel) { }
@@ -148,7 +150,6 @@ class NewStepViewControllerSpec: QuickSpec {
             let blockNameWithQuizTypePairs: [(String, NewStep.QuizType)] = [
                 ("choice", .choice),
                 ("code", .code),
-                ("fill-blanks", .fillBlanks),
                 ("free-answer", .freeAnswer),
                 ("matching", .matching),
                 ("math", .math),
@@ -162,7 +163,13 @@ class NewStepViewControllerSpec: QuickSpec {
                 ("linux-code", .unknown(blockName: "linux-code")),
                 ("puzzle", .unknown(blockName: "puzzle")),
                 ("pycharm", .unknown(blockName: "pycharm")),
-                ("admin", .unknown(blockName: "admin"))
+                ("admin", .unknown(blockName: "admin")),
+                ("table", .unknown(blockName: "table")),
+                ("html", .unknown(blockName: "html")),
+                ("fill-blanks", .unknown(blockName: "fill-blanks")),
+                ("random-tasks", .unknown(blockName: "random-tasks")),
+                ("schulte", .unknown(blockName: "schulte")),
+                ("manual-score", .unknown(blockName: "manual-score"))
             ]
             let steps = blockNameWithQuizTypePairs.map { pair -> Step in
                 let json = JSON(

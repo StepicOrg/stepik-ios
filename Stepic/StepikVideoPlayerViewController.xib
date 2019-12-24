@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepicVideoPlayerViewController" customModule="Stepic" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepikVideoPlayerViewController" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="vAT-94-je7" id="9tO-6K-esf"/>
                 <outlet property="back10SecButton" destination="knc-c5-olR" id="BQr-pU-6yX"/>
@@ -88,7 +88,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.83351555838071756" green="0.83245798322731512" blue="0.85093118689797975" alpha="0.74794130069999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.83529411764705885" green="0.83137254901960778" blue="0.85098039215686272" alpha="0.74794130069999998" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="knc-c5-olR" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="7ZO-ur-Sfh"/>
                         <constraint firstItem="MoB-ve-4BS" firstAttribute="centerY" secondItem="fyR-gR-ToD" secondAttribute="centerY" id="I1e-2N-aae"/>

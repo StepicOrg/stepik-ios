@@ -31,6 +31,7 @@ final class NewFreeAnswerQuizViewController: UIViewController {
 
 extension NewFreeAnswerQuizViewController: NewFreeAnswerQuizViewControllerProtocol {
     func displayReply(viewModel: NewFreeAnswerQuiz.ReplyLoad.ViewModel) {
+        self.newFreeAnswerQuizView?.title = viewModel.data.title
         self.newFreeAnswerQuizView?.text = viewModel.data.text
         self.newFreeAnswerQuizView?.placeholder = viewModel.data.placeholderText
         self.newFreeAnswerQuizView?.isTextViewEnabled = viewModel.data.isEnabled

@@ -474,6 +474,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         return max(leftToLoad, 0)
     }
 
+    // TODO: Fix cyclomatic_complexity
     private func getLoadedDiscussionsWindow() -> (startIndex: Int, endIndex: Int) {
         let loadedDiscussionsIDs = Set(self.currentDiscussions.map({ $0.id }))
 

@@ -60,6 +60,13 @@ enum NewLesson {
         }
     }
 
+    /// Autoplay current step
+    enum CurrentStepAutoplay {
+        struct Response { }
+
+        struct ViewModel { }
+    }
+
     /// Load lesson tooltip info content
     enum LessonTooltipInfoLoad {
         struct Response {

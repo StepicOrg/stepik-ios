@@ -331,6 +331,7 @@ class StyledNavigationController: UINavigationController {
         self.navigationBarAppearanceForController.removeValue(forKey: viewController.hashValue)
     }
 
+    // swiftlint:disable:next cyclomatic_complexity
     private func animateShadowView(transitionCoordinator: UIViewControllerTransitionCoordinator) {
         guard let fromViewController = self.transitionCoordinator?.viewController(forKey: .from),
               let toViewController = self.transitionCoordinator?.viewController(forKey: .to) else {

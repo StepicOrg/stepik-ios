@@ -14,6 +14,7 @@ protocol NewLessonViewControllerProtocol: AnyObject {
     func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
+    func displayCurrentStepAutoplay(viewModel: NewLesson.CurrentStepAutoplay.ViewModel)
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel)
     func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
@@ -37,13 +38,21 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
     private let interactor: NewLessonInteractorProtocol
 
     private lazy var infoBarButtonItem: UIBarButtonItem = {
+        let image: UIImage?
+        if #available(iOS 13.0, *) {
+            image = UIImage(systemName: "info.circle")
+        } else {
+            image = UIImage(named: "info-system")
+        }
+
         let item = UIBarButtonItem(
-            image: UIImage(named: "info-system"),
+            image: image,
             style: .plain,
             target: self,
             action: #selector(self.infoButtonClicked)
         )
         item.isEnabled = false
+
         return item
     }()
 
@@ -322,9 +331,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             return
         }
 
-        let showEditStep = data.canEdit && step.type != .video
-
-        self.navigationItem.rightBarButtonItems = showEditStep
+        self.navigationItem.rightBarButtonItems = step.canEdit
             ? self.teacherRightBarButtonItems
             : self.studentRightBarButtonItems
     }
@@ -519,6 +526,15 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
 
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel) {
         self.scrollToPage(.at(index: viewModel.index), animated: true)
+    }
+
+    func displayCurrentStepAutoplay(viewModel: NewLesson.CurrentStepAutoplay.ViewModel) {
+        guard let currentIndex = self.currentIndex,
+              let stepModuleInput = self.stepModulesInputs[safe: currentIndex] else {
+            return
+        }
+
+        stepModuleInput?.play()
     }
 
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
