@@ -38,7 +38,11 @@ final class SettingsViewControllerLegacyAssembly: Assembly {
             )
         )
 
-        let presenter = SettingsPresenter(view: viewController)
+        let presenter = SettingsPresenter(
+            view: viewController,
+            autoplayStorageManager: AutoplayStorageManager(),
+            adaptiveStorageManager: AdaptiveStorageManager.shared
+        )
         viewController.presenter = presenter
 
         return viewController
@@ -57,7 +61,7 @@ extension SettingsViewController {
 
 final class SettingsViewController: MenuViewController {
     var appearance: Appearance!
-    var presenter: SettingsPresenter?
+    var presenter: SettingsPresenterProtocol?
 
     fileprivate var downloadsProvider: DownloadsProviderProtocol?
 
@@ -99,6 +103,8 @@ final class SettingsViewController: MenuViewController {
         self.edgesForExtendedLayout = []
         self.tableView.tableHeaderView = self.artView
         self.tableView.contentInsetAdjustmentBehavior = .never
+
+        self.presenter?.refresh()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -130,7 +136,7 @@ final class SettingsViewController: MenuViewController {
 extension SettingsViewController: SettingsView {
     func setMenu(menuIDs: [SettingsMenuBlock]) {
         let blocks = menuIDs.map { self.makeMenuBlock(for: $0) }
-        self.menu = Menu(blocks: blocks)
+        self.menu = Menu(blocks: blocks)        
     }
 
     func presentAuth() {
@@ -167,6 +173,8 @@ extension SettingsViewController: SettingsView {
             return self.makeStepFontSizeBlock()
         case .codeEditorSettings:
             return self.makeCodeEditorSettingsBlock()
+        case .autoplaySwitch:
+            return self.makeAutoplaySwitchBlock()
         case .adaptiveModeSwitch:
             return self.makeAdaptiveModeSwitchBlock()
         case .downloadedContentHeader:
@@ -256,14 +264,27 @@ extension SettingsViewController: SettingsView {
         return block
     }
 
+    private func makeAutoplaySwitchBlock() -> SwitchMenuBlock {
+        let block = SwitchMenuBlock(
+            id: SettingsMenuBlock.autoplaySwitch.rawValue,
+            title: NSLocalizedString("AutoplayPreferenceTitle", comment: ""),
+            isOn: self.presenter?.isAutoplayModeEnabled ?? false
+        )
+        block.onSwitch = { [weak self] isOn in
+            self?.presenter?.isAutoplayModeEnabled = isOn
+        }
+
+        return block
+    }
+
     private func makeAdaptiveModeSwitchBlock() -> SwitchMenuBlock {
         let block = SwitchMenuBlock(
             id: SettingsMenuBlock.adaptiveModeSwitch.rawValue,
             title: NSLocalizedString("UseAdaptiveModePreference", comment: ""),
-            isOn: AdaptiveStorageManager.shared.isAdaptiveModeEnabled
+            isOn: self.presenter?.isAdaptiveModeEnabled ?? false
         )
         block.onSwitch = { [weak self] isOn in
-            self?.presenter?.changeAdaptiveModeEnabled(to: isOn)
+            self?.presenter?.isAdaptiveModeEnabled = isOn
         }
 
         return block

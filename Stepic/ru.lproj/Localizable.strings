@@ -161,8 +161,6 @@ seconds567890 = "секунд";
 points1 = "балл";
 points234 = "балла";
 points567890 = "баллов";
-VideoRate = "Скорость воспроизведения";
-VideoQuality = "Качество видео";
 Downloaded = "Загруженное";
 ExamTitle = "Экзамен";
 ShowExamInWeb = "Открыть экзамен в веб версии?";
@@ -551,6 +549,7 @@ CodeEditorCurrentTheme = "Используется: %@";
 CodeEditorCurrentFontSize = "Используется: %@pt";
 CodeEditorSettingsTooltip = "Вы можете настроить редактор кода";
 
+AutoplayPreferenceTitle = "Автопереход на следующий шаг по окончании видео";
 LearningSettingsBlockTitle = "Обучение";
 DownloadedContentSettingsBlockTitle = "Загруженный контент";
 OtherSettingsBlockTitle = "Другое";
@@ -739,6 +738,10 @@ EditStepAlertActionTitle = "Редактировать";
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
 VideoPlayerPlaybackFailedStateAlertMessage = "Возникла ошибка воспроизведения видео, попробовать снова или закрыть плеер?";
+VideoRate = "Скорость воспроизведения";
+VideoQuality = "Качество видео";
+VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
+VideoPlayerAutoplayCancelTitle = "Остаться на этом шаге";
 
 OurSocialNetworks = "Наши аккаунты в соцсетях";
 

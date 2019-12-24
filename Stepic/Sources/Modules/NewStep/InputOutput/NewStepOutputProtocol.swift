@@ -6,4 +6,5 @@ protocol NewStepOutputProtocol: AnyObject {
     func handlePreviousUnitNavigation()
     func handleNextUnitNavigation()
     func handleStepNavigation(to index: Int)
+    func handleAutoplayNavigation(from index: Int)
 }

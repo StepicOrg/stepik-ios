@@ -162,8 +162,6 @@ points1 = "point";
 points234 = "points";
 points567890 = "points";
 VideoRate = "Video rate";
-VideoQuality = "Video quality";
-Downloaded = "Downloaded";
 ExamTitle = "Exam";
 ShowExamInWeb = "Open exam in web version?";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
@@ -550,6 +548,7 @@ CodeEditorCurrentTheme = "Current: %@";
 CodeEditorCurrentFontSize = "Current: %@pt";
 CodeEditorSettingsTooltip = "You can customize code editor";
 
+AutoplayPreferenceTitle = "Auto-transition to next step on video end";
 LearningSettingsBlockTitle = "Learning";
 DownloadedContentSettingsBlockTitle = "Downloaded content";
 OtherSettingsBlockTitle = "Other";
@@ -738,6 +737,10 @@ EditStepAlertActionTitle = "Edit";
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
 VideoPlayerPlaybackFailedStateAlertMessage = "Video playback error occurred, try again or close the player?";
+VideoQuality = "Video quality";
+Downloaded = "Downloaded";
+VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
+VideoPlayerAutoplayCancelTitle = "Stay on this step";
 
 OurSocialNetworks = "Our social networks";
 

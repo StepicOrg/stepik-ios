@@ -1,11 +1,3 @@
-//
-//  StepicVideoPlayerViewController.swift
-//  StepicVideoPlayer
-//
-//  Created by Alexander Karpov on 13.12.15.
-//  Copyright © 2015 Alex Karpov. All rights reserved.
-//
-
 import AVFoundation
 import AVKit
 import Logging
@@ -13,44 +5,71 @@ import MediaPlayer
 import SnapKit
 import UIKit
 
-// MARK: StepicVideoPlayerLegacyAssembly: Assembly -
+// MARK: StepikVideoPlayerLegacyAssembly: Assembly -
 
 @available(*, deprecated, message: "Class to initialize video player w/o storyboards logic")
-final class StepicVideoPlayerLegacyAssembly: Assembly {
+final class StepikVideoPlayerLegacyAssembly: Assembly {
     private let video: Video
+    private var delegate: StepikVideoPlayerViewControllerDelegate?
 
-    init(video: Video) {
+    init(
+        video: Video,
+        delegate: StepikVideoPlayerViewControllerDelegate? = nil
+    ) {
         self.video = video
+        self.delegate = delegate
     }
 
     func makeModule() -> UIViewController {
-        let videoPlayerViewController = StepicVideoPlayerViewController(
-            nibName: "StepicVideoPlayerViewController",
+        let videoPlayerViewController = StepikVideoPlayerViewController(
+            nibName: "StepikVideoPlayerViewController",
             bundle: nil
         )
         videoPlayerViewController.video = self.video
+        videoPlayerViewController.autoplayStorageManager = AutoplayStorageManager()
+        videoPlayerViewController.delegate = self.delegate
 
         return videoPlayerViewController
     }
 }
 
-// MARK: - Appearance -
+// MARK: - StepikVideoPlayerViewControllerDelegate: AnyObject -
 
-extension StepicVideoPlayerViewController {
+protocol StepikVideoPlayerViewControllerDelegate: AnyObject {
+    func stepikVideoPlayerViewControllerDidRequestAutoplay()
+}
+
+// MARK: - Appearance & Animation -
+
+extension StepikVideoPlayerViewController {
     struct Appearance {
         static let topContainerViewCornerRadius: CGFloat = 8
         static let bottomFullscreenControlsCornerRadius: CGFloat = 8
+
+        static let autoplayOverlayColor = UIColor.mainDark.withAlphaComponent(0.5)
+        static let autoplayPlayNextCircleHeight: CGFloat = 72
+
+        static let autoplayCancelTitleColor = UIColor.white
+        static let autoplayCancelButtonInsets = LayoutInsets(bottom: 8)
+
+        static let autoplayPreferenceTitleFont = UIFont.systemFont(ofSize: 15)
+        static let autoplayPreferenceTitleColor = UIColor.white
+        static let autoplayPreferenceTitleInsets = LayoutInsets(right: 8)
+
+        static let autoplayPreferenceContainerHeight: CGFloat = 31
+        static let autoplayPreferenceSwitchWidth: CGFloat = 51
     }
 
     struct Animation {
         static let playerBarControlsAnimationDuration: TimeInterval = 0.5
+        static let autoplayAnimationDuration: TimeInterval = 7.2
     }
 }
 
-// MARK: - StepicVideoPlayerViewController: UIViewController -
+// MARK: - StepikVideoPlayerViewController: UIViewController -
 
-final class StepicVideoPlayerViewController: UIViewController {
-    private static let logger = Logger(label: "com.AlexKarpov.Stepic.StepicVideoPlayerViewController")
+final class StepikVideoPlayerViewController: UIViewController {
+    private static let logger = Logger(label: "com.AlexKarpov.Stepic.StepikVideoPlayerViewController")
 
     private static let seekForwardTimeOffset: TimeInterval = 10
     private static let seekBackTimeOffset: TimeInterval = 10
@@ -79,6 +98,62 @@ final class StepicVideoPlayerViewController: UIViewController {
     @IBOutlet weak var back10SecButton: UIButton!
     @IBOutlet weak var fullscreenPlayButton: UIButton!
     @IBOutlet weak var forward10SecButton: UIButton!
+
+    // MARK: Autoplay controls
+
+    private lazy var autoplayPlayerOverlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Appearance.autoplayOverlayColor
+        view.isUserInteractionEnabled = false
+        return view
+    }()
+
+    private lazy var autoplayPlayNextCircleControlView: PlayNextCircleControlView = {
+        let view = PlayNextCircleControlView()
+        view.addTarget(self, action: #selector(self.didClickPlayNext), for: .touchUpInside)
+        return view
+    }()
+
+    private lazy var autoplayPreferenceTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("VideoPlayerAutoplayPreferenceTitle", comment: "")
+        label.font = Appearance.autoplayPreferenceTitleFont
+        label.textColor = Appearance.autoplayPreferenceTitleColor
+        label.textAlignment = .right
+        return label
+    }()
+
+    private lazy var autoplayPreferenceSwitch: UISwitch = {
+        let uiSwitch = UISwitch()
+        uiSwitch.isOn = self.autoplayStorageManager?.isAutoplayEnabled ?? false
+        uiSwitch.addTarget(self, action: #selector(self.autoplayPreferenceValueChanged), for: .valueChanged)
+        return uiSwitch
+    }()
+
+    private lazy var autoplayPreferenceContainerView = UIView()
+
+    private lazy var autoplayCancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(NSLocalizedString("VideoPlayerAutoplayCancelTitle", comment: ""), for: .normal)
+        button.setTitleColor(Appearance.autoplayCancelTitleColor, for: .normal)
+        button.addTarget(self, action: #selector(self.didClickCancelAutoplay), for: .touchUpInside)
+        return button
+    }()
+
+    private var allAutoplayViews: [UIView] {
+        [
+            self.autoplayPlayerOverlayView,
+            self.autoplayPlayNextCircleControlView,
+            self.autoplayPreferenceContainerView,
+            self.autoplayCancelButton
+        ]
+    }
+
+    // MARK: State
+
+    weak var delegate: StepikVideoPlayerViewControllerDelegate?
+
+    fileprivate(set) var autoplayStorageManager: AutoplayStorageManagerProtocol?
 
     var video: Video!
 
@@ -132,48 +207,9 @@ final class StepicVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.audioRouteChanged(_:)),
-            name: AVAudioSession.routeChangeNotification,
-            object: nil
-        )
-
-        self.topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: .normal)
-
-        self.backButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
-
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
-
-        self.topContainerView.setRoundedCorners(cornerRadius: Appearance.topContainerViewCornerRadius)
-        self.bottomFullscreenControlsView.setRoundedCorners(
-            cornerRadius: Appearance.bottomFullscreenControlsCornerRadius
-        )
-
-        self.rateButton.setTitle("\(self.currentVideoRate.rawValue)x", for: .normal)
-
-        self.addChild(self.player)
-        self.view.insertSubview(self.player.view, at: 0)
-        self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
-        self.player.didMove(toParent: self)
-
-        // Player Start Time should be set AFTER the currentQualityURL
-        // TODO: Change this in the future
-        self.currentVideoQualityURL = self.getInitialVideoQualityURL()
-        self.currentVideoQuality = self.getInitialVideoQuality()
-        self.playerStartTime = self.video.playTime
-
-        self.player.playbackLoops = false
-
-        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
-        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
-        self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
-        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
-
-        self.fillModeButton.addTarget(self, action: #selector(self.fillModeButtonDidClick), for: .touchUpInside)
-        self.currentVideoFillMode = .aspect
-
+        self.setupPlayer()
+        self.setupAppearance()
+        self.setupObservers()
         self.setupGestureRecognizers()
     }
 
@@ -211,12 +247,112 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     deinit {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
-        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: did deinit")
+        NotificationCenter.default.removeObserver(self)
+        Self.logger.info("StepikVideoPlayerViewController :: did deinit")
         self.saveCurrentPlayerTime()
         self.hidePlayerControlsTimer?.invalidate()
     }
 
     // MARK: Setup player
+
+    private func setupAppearance() {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+
+        self.backButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+
+        // Set rounded corners for controls containers.
+        self.topContainerView.setRoundedCorners(cornerRadius: Appearance.topContainerViewCornerRadius)
+        self.bottomFullscreenControlsView.setRoundedCorners(
+            cornerRadius: Appearance.bottomFullscreenControlsCornerRadius
+        )
+
+        self.rateButton.setTitle("\(self.currentVideoRate.rawValue)x", for: .normal)
+
+        self.topTimeSlider.setThumbImage(Images.playerControls.timeSliderThumb, for: .normal)
+        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpOutside)
+        self.topTimeSlider.addTarget(self, action: #selector(self.finishedSeeking), for: .touchUpInside)
+        self.topTimeSlider.addTarget(self, action: #selector(self.startedSeeking), for: .touchDown)
+
+        // Player overlay view
+        self.view.insertSubview(self.autoplayPlayerOverlayView, aboveSubview: self.player.view)
+        self.autoplayPlayerOverlayView.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayPlayerOverlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        // Autoplay controls
+        self.view.addSubview(self.autoplayPlayNextCircleControlView)
+        self.autoplayPlayNextCircleControlView.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayPlayNextCircleControlView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(Appearance.autoplayPlayNextCircleHeight)
+        }
+
+        self.view.addSubview(self.autoplayPreferenceContainerView)
+        self.autoplayPreferenceContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayPreferenceContainerView.snp.makeConstraints { make in
+            make.top.equalTo(self.autoplayPlayNextCircleControlView.snp.bottom)
+            make.height.equalTo(Appearance.autoplayPreferenceContainerHeight)
+            make.centerX.equalTo(self.autoplayPlayNextCircleControlView.snp.centerX)
+        }
+
+        self.autoplayPreferenceContainerView.addSubview(self.autoplayPreferenceSwitch)
+        self.autoplayPreferenceSwitch.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayPreferenceSwitch.snp.makeConstraints { make in
+            make.top.trailing.bottom.equalToSuperview()
+            make.width.equalTo(Appearance.autoplayPreferenceSwitchWidth)
+        }
+
+        self.autoplayPreferenceContainerView.addSubview(self.autoplayPreferenceTitleLabel)
+        self.autoplayPreferenceTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayPreferenceTitleLabel.snp.makeConstraints { make in
+            make.leading.centerY.equalToSuperview()
+            make.trailing
+                .equalTo(self.autoplayPreferenceSwitch.snp.leading)
+                .offset(-Appearance.autoplayPreferenceTitleInsets.right)
+        }
+
+        self.view.addSubview(self.autoplayCancelButton)
+        self.autoplayCancelButton.translatesAutoresizingMaskIntoConstraints = false
+        self.autoplayCancelButton.snp.makeConstraints { make in
+            make.bottom
+                .equalTo(self.bottomFullscreenControlsView.snp.top)
+                .offset(-Appearance.autoplayCancelButtonInsets.bottom)
+            make.centerX.equalTo(self.bottomFullscreenControlsView.snp.centerX)
+        }
+
+        self.setAutoplayControlsHidden(true)
+    }
+
+    private func setupPlayer() {
+        self.addChild(self.player)
+        self.view.insertSubview(self.player.view, at: 0)
+        self.player.view.snp.makeConstraints { $0.edges.equalTo(self.view) }
+        self.player.didMove(toParent: self)
+
+        // Player Start Time should be set AFTER the currentQualityURL
+        self.currentVideoQualityURL = self.getInitialVideoQualityURL()
+        self.currentVideoQuality = self.getInitialVideoQuality()
+        self.playerStartTime = self.video.playTime
+
+        self.player.playbackLoops = false
+
+        // Assign current fill mode
+        self.fillModeButton.addTarget(self, action: #selector(self.fillModeButtonDidClick), for: .touchUpInside)
+        self.currentVideoFillMode = .aspect
+
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(self.togglePlayPause))
+    }
+
+    private func setupObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.audioRouteChanged(_:)),
+            name: AVAudioSession.routeChangeNotification,
+            object: nil
+        )
+    }
 
     private func setupGestureRecognizers() {
         let videoTapGestureRecognizer = UITapGestureRecognizer(
@@ -225,7 +361,6 @@ final class StepicVideoPlayerViewController: UIViewController {
         )
         videoTapGestureRecognizer.numberOfTapsRequired = 1
         self.player.view.addGestureRecognizer(videoTapGestureRecognizer)
-        self.view.addGestureRecognizer(videoTapGestureRecognizer)
 
         let doubleTapVideoGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -233,26 +368,28 @@ final class StepicVideoPlayerViewController: UIViewController {
         )
         doubleTapVideoGestureRecognizer.numberOfTapsRequired = 2
         self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
-        self.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
     }
 
     // MARK: Seek events
 
-    @IBAction func topTimeSliderValueChanged(_ sender: UISlider) {
+    @IBAction
+    func topTimeSliderValueChanged(_ sender: UISlider) {
         let time = TimeInterval(sender.value) * self.player.maximumDuration
         self.seekToTime(time)
     }
 
-    @IBAction func seekForwardPressed(_ sender: UIButton) {
-        let seekedTime = self.player.currentTime + StepicVideoPlayerViewController.seekForwardTimeOffset
+    @IBAction
+    func seekForwardPressed(_ sender: UIButton) {
+        let seekedTime = self.player.currentTime + Self.seekForwardTimeOffset
         let resultTime = min(seekedTime, self.player.maximumDuration)
 
         self.seekToTime(resultTime)
         self.scheduleHidePlayerControlsTimer()
     }
 
-    @IBAction func seekBackPressed(_ sender: UIButton) {
-        let seekedTime = self.player.currentTime - StepicVideoPlayerViewController.seekBackTimeOffset
+    @IBAction
+    func seekBackPressed(_ sender: UIButton) {
+        let seekedTime = self.player.currentTime - Self.seekBackTimeOffset
         let resultTime = max(seekedTime, 0)
 
         self.seekToTime(resultTime)
@@ -260,13 +397,14 @@ final class StepicVideoPlayerViewController: UIViewController {
     }
 
     private func seekToTime(_ time: TimeInterval) {
-        let time = CMTime(seconds: time, preferredTimescale: StepicVideoPlayerViewController.seekPreferredTimescale)
+        let time = CMTime(seconds: time, preferredTimescale: Self.seekPreferredTimescale)
         self.player.seekToTime(time)
     }
 
     // MARK: Dismiss player
 
-    @IBAction func backPressed(_ sender: UIButton) {
+    @IBAction
+    func backPressed(_ sender: UIButton) {
         self.dismissPlayer()
     }
 
@@ -277,7 +415,8 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     // MARK: Controlling the video rate
 
-    @IBAction func changeRatePressed(_ sender: UIButton) {
+    @IBAction
+    func changeRatePressed(_ sender: UIButton) {
         self.displayChangeVideoRateAlert()
         self.hidePlayerControlsTimer?.invalidate()
     }
@@ -294,7 +433,7 @@ final class StepicVideoPlayerViewController: UIViewController {
             preferredStyle: .actionSheet
         )
 
-        for videoRate in VideoRate.allValues {
+        for videoRate in VideoRate.allCases {
             let action = UIAlertAction(
                 title: videoRate.description,
                 style: .default,
@@ -339,7 +478,8 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     // MARK: Controlling the video quality
 
-    @IBAction func changeQualityPressed(_ sender: UIButton) {
+    @IBAction
+    func changeQualityPressed(_ sender: UIButton) {
         self.displayChangeVideoQualityAlert()
         self.hidePlayerControlsTimer?.invalidate()
     }
@@ -436,7 +576,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     }
 
     private func setButtonPlaying(_ isPlaying: Bool) {
-		self.isPlaying = isPlaying
+        self.isPlaying = isPlaying
 
         let fullscreenPlayButtonImage = isPlaying ? Images.playerControls.play : Images.playerControls.pause
         self.fullscreenPlayButton.setImage(fullscreenPlayButtonImage, for: .normal)
@@ -448,7 +588,8 @@ final class StepicVideoPlayerViewController: UIViewController {
         CoreDataHelper.instance.save()
     }
 
-    @IBAction func playPressed(_ sender: UIButton) {
+    @IBAction
+    func playPressed(_ sender: UIButton) {
         self.handlePlay()
     }
 
@@ -475,7 +616,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     @objc
     private func startedSeeking() {
-        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: started seeking")
+        Self.logger.info("StepikVideoPlayerViewController :: started seeking")
 
         self.hidePlayerControlsTimer?.invalidate()
 
@@ -489,7 +630,7 @@ final class StepicVideoPlayerViewController: UIViewController {
 
     @objc
     private func finishedSeeking() {
-        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: finished seeking")
+        Self.logger.info("StepikVideoPlayerViewController :: finished seeking")
 
         self.scheduleHidePlayerControlsTimer()
 
@@ -527,7 +668,10 @@ final class StepicVideoPlayerViewController: UIViewController {
         self.setPlayerBarControlsVisibleAnimated(visible: !self.isPlayerControlsVisible)
         self.isPlayerControlsVisible.toggle()
 
-        if self.isPlayerControlsVisible && hideControlsAutomatically {
+        // Allows to not automatically hide player controls while in autoplay mode.
+        let isNotInAutoplayMode = self.autoplayPlayNextCircleControlView.isHidden
+
+        if self.isPlayerControlsVisible && hideControlsAutomatically && isNotInAutoplayMode {
             self.scheduleHidePlayerControlsTimer()
         }
 
@@ -546,7 +690,7 @@ final class StepicVideoPlayerViewController: UIViewController {
     private func scheduleHidePlayerControlsTimer() {
         self.hidePlayerControlsTimer?.invalidate()
         self.hidePlayerControlsTimer = Timer.scheduledTimer(
-            timeInterval: StepicVideoPlayerViewController.hidePlayerControlsTimeInterval,
+            timeInterval: Self.hidePlayerControlsTimeInterval,
             target: self,
             selector: #selector(self.hidePlayerControlsIfVisible),
             userInfo: nil,
@@ -560,11 +704,58 @@ final class StepicVideoPlayerViewController: UIViewController {
             self.updateVideoControlsVisibility()
         }
     }
+
+    // MARK: Autoplay
+
+    private func setAutoplayControlsHidden(_ isHidden: Bool) {
+        self.allAutoplayViews.forEach { $0.isHidden = isHidden }
+    }
+
+    private func startAutoplayCountdown() {
+        self.setAutoplayControlsHidden(false)
+        self.autoplayPlayNextCircleControlView.startCountdown(
+            duration: Animation.autoplayAnimationDuration
+        ) { [weak self] in
+            guard let strongSelf = self,
+                  strongSelf.autoplayPreferenceSwitch.isOn,
+                  strongSelf.player.playbackState == .stopped else {
+                return
+            }
+
+            strongSelf.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
+        }
+    }
+
+    private func dismissAutoplay() {
+        self.setAutoplayControlsHidden(true)
+        self.autoplayPlayNextCircleControlView.stopCountdown()
+    }
+
+    @objc
+    private func didClickPlayNext() {
+        self.delegate?.stepikVideoPlayerViewControllerDidRequestAutoplay()
+    }
+
+    @objc
+    private func autoplayPreferenceValueChanged() {
+        self.autoplayStorageManager?.isAutoplayEnabled = self.autoplayPreferenceSwitch.isOn
+
+        if self.autoplayPreferenceSwitch.isOn {
+            self.startAutoplayCountdown()
+        } else {
+            self.autoplayPlayNextCircleControlView.stopCountdown()
+        }
+    }
+
+    @objc
+    private func didClickCancelAutoplay() {
+        self.autoplayPlayNextCircleControlView.stopCountdown()
+    }
 }
 
-// MARK: - StepicVideoPlayerViewController: PlayerDelegate -
+// MARK: - StepikVideoPlayerViewController: PlayerDelegate -
 
-extension StepicVideoPlayerViewController: PlayerDelegate {
+extension StepikVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
         guard player.playbackState == .stopped || !self.isPlayerPassedReadyState else {
             return
@@ -572,14 +763,14 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
 
         self.isPlayerPassedReadyState = true
 
-        StepicVideoPlayerViewController.logger.info("StepicVideoPlayerViewController :: player is ready to display")
+        Self.logger.info("StepikVideoPlayerViewController :: player is ready to display")
 
         self.activityIndicator.isHidden = true
         self.setTimeParametersAfterPlayerIsReady()
 
         let time = CMTime(
             seconds: self.playerStartTime,
-            preferredTimescale: StepicVideoPlayerViewController.seekPreferredTimescale
+            preferredTimescale: Self.seekPreferredTimescale
         )
 
         player.seekToTime(time)
@@ -590,7 +781,7 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
     func playerPlaybackStateDidChange(_ player: Player) {
         switch player.playbackState {
         case .failed:
-            StepicVideoPlayerViewController.logger.error("StepicVideoPlayerViewController :: failed, retry")
+            Self.logger.error("StepikVideoPlayerViewController :: failed, retry")
             self.displayPlayerPlaybackFailedStateAlert()
         case .paused:
             self.setButtonPlaying(true)
@@ -598,13 +789,12 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
             self.playerStartTime = player.currentTime
         case .playing:
             self.setButtonPlaying(false)
+            self.dismissAutoplay()
         case .stopped:
             break
         }
 
-        StepicVideoPlayerViewController.logger.info(
-            "StepicVideoPlayerViewController :: player playback state changed to \(player.playbackState)"
-        )
+        Self.logger.info("StepikVideoPlayerViewController :: player playback state changed to \(player.playbackState)")
     }
 
     func playerBufferingStateDidChange(_ player: Player) { }
@@ -617,7 +807,17 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
         self.hidePlayerControlsTimer?.invalidate()
         self.isPlayerControlsVisible = false
         self.updateVideoControlsVisibility(hideControlsAutomatically: false)
+
+        // Enter autoplay mode only if we are in the foreground state.
+        if UIApplication.shared.applicationState == .active {
+            self.setAutoplayControlsHidden(false)
+            if self.autoplayPreferenceSwitch.isOn {
+                self.startAutoplayCountdown()
+            }
+        }
     }
+
+    // MARK: Private helpers
 
     private func setTimeParametersAfterPlayerIsReady() {
         self.fullTimeTopLabel.text = TimeFormatHelper.sharedHelper.getTimeStringFrom(self.player.maximumDuration)
@@ -671,9 +871,9 @@ extension StepicVideoPlayerViewController: PlayerDelegate {
     }
 }
 
-// MARK: - StepicVideoPlayerViewController (VideoFillMode) -
+// MARK: - StepikVideoPlayerViewController (VideoFillMode) -
 
-extension StepicVideoPlayerViewController {
+extension StepikVideoPlayerViewController {
     private enum VideoFillMode {
         /// Preserve the video’s aspect ratio and fit the video within the layer’s bounds.
         case aspect

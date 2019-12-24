@@ -14,6 +14,7 @@ protocol NewLessonViewControllerProtocol: AnyObject {
     func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel)
     func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
+    func displayCurrentStepAutoplay(viewModel: NewLesson.CurrentStepAutoplay.ViewModel)
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel)
     func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
@@ -525,6 +526,15 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
 
     func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel) {
         self.scrollToPage(.at(index: viewModel.index), animated: true)
+    }
+
+    func displayCurrentStepAutoplay(viewModel: NewLesson.CurrentStepAutoplay.ViewModel) {
+        guard let currentIndex = self.currentIndex,
+              let stepModuleInput = self.stepModulesInputs[safe: currentIndex] else {
+            return
+        }
+
+        stepModuleInput?.play()
     }
 
     func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
