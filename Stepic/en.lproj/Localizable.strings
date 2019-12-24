@@ -353,11 +353,6 @@ Close = "Close";
 RecommendationsExplore = "Recommendations";
 RecommendationsExploreDescription = "Check out categories that matching your interests";
 
-/* Video player */
-VideoQuality = "Video quality";
-Downloaded = "Downloaded";
-VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
-
 /* Onboarding */
 OnboardingTitle1 = "Choose";
 OnboardingTitle2 = "Download";
@@ -742,6 +737,10 @@ EditStepAlertActionTitle = "Edit";
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
 VideoPlayerPlaybackFailedStateAlertMessage = "Video playback error occurred, try again or close the player?";
+VideoQuality = "Video quality";
+Downloaded = "Downloaded";
+VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
+VideoPlayerAutoplayCancelTitle = "Stay on this step";
 
 OurSocialNetworks = "Our social networks";
 

@@ -356,11 +356,6 @@ Close = "Закрыть";
 RecommendationsExplore = "Рекомендации";
 RecommendationsExploreDescription = "Выбери курс из подборок по интересам";
 
-/* Video player */
-VideoRate = "Скорость воспроизведения";
-VideoQuality = "Качество видео";
-VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
-
 /* Onboarding */
 OnboardingTitle1 = "Выбирайте";
 OnboardingTitle2 = "Сохраняйте";
@@ -743,6 +738,10 @@ EditStepAlertActionTitle = "Редактировать";
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
 VideoPlayerPlaybackFailedStateAlertMessage = "Возникла ошибка воспроизведения видео, попробовать снова или закрыть плеер?";
+VideoRate = "Скорость воспроизведения";
+VideoQuality = "Качество видео";
+VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
+VideoPlayerAutoplayCancelTitle = "Остаться на этом шаге";
 
 OurSocialNetworks = "Наши аккаунты в соцсетях";
 
