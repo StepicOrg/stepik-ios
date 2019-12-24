@@ -808,10 +808,12 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         self.isPlayerControlsVisible = false
         self.updateVideoControlsVisibility(hideControlsAutomatically: false)
 
-        // Enter autoplay mode
-        self.setAutoplayControlsHidden(false)
-        if self.autoplayPreferenceSwitch.isOn {
-            self.startAutoplayCountdown()
+        // Enter autoplay mode only if we are in the foreground state.
+        if UIApplication.shared.applicationState == .active {
+            self.setAutoplayControlsHidden(false)
+            if self.autoplayPreferenceSwitch.isOn {
+                self.startAutoplayCountdown()
+            }
         }
     }
 
