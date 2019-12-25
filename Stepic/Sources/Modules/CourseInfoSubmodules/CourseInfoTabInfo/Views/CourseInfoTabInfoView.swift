@@ -182,7 +182,7 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(self.appearance.stackViewInsets.top)
+            make.top.equalToSuperview().offset(self.appearance.stackViewInsets.top).priority(999)
             make.leading.trailing.bottom.equalToSuperview()
         }
 
@@ -213,6 +213,11 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
         set {
             self.loadingIndicator.snp.updateConstraints { make in
                 make.top.equalToSuperview().offset(newValue.top + self.appearance.loadingIndicatorTopInset)
+            }
+
+            // Fixes an issue with incorrect content offset on presentation when initial tab is `CourseInfo.Tab.info`.
+            if newValue.top > 0 && self.contentOffset.y == 0 {
+                self.contentOffset = CGPoint(x: self.contentOffset.x, y: -newValue.top)
             }
 
             self.scrollableStackView.contentInsets = newValue
