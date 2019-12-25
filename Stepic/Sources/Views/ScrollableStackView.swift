@@ -122,6 +122,26 @@ final class ScrollableStackView: UIView {
         }
     }
 
+    @available(iOS 11.1, *)
+    var verticalScrollIndicatorInsets: UIEdgeInsets {
+        get {
+            self.scrollView.verticalScrollIndicatorInsets
+        }
+        set {
+            self.scrollView.verticalScrollIndicatorInsets = newValue
+        }
+    }
+
+    @available(iOS 11.1, *)
+    var horizontalScrollIndicatorInsets: UIEdgeInsets {
+        get {
+            self.scrollView.horizontalScrollIndicatorInsets
+        }
+        set {
+            self.scrollView.horizontalScrollIndicatorInsets = newValue
+        }
+    }
+
     var shouldBounce: Bool {
         get {
              self.scrollView.bounces
