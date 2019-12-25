@@ -25,6 +25,9 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
             return
         }
 
+        // Firstly present cached course info, then present remote course info only on success response.
+        self.presenter.presentCourseInfo(response: .init(course: self.course))
+
         self.provider.fetchUsersForCourse(course).done { course in
             self.course = course
             self.presenter.presentCourseInfo(response: .init(course: self.course))
