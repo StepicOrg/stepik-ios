@@ -17,6 +17,7 @@ extension CourseInfoTabInfoView {
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
         let authorTitleLabelInsets = UIEdgeInsets(top: 0, left: 47, bottom: 20, right: 47)
+        let authorTitleLabelNumberOfLines = 0
         let authorIconLeadingSpace: CGFloat = 20
 
         let loadingIndicatorTopInset: CGFloat = 20
@@ -30,7 +31,7 @@ final class CourseInfoTabInfoView: UIView {
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
-        stackView.showsVerticalScrollIndicator = false
+        stackView.showsVerticalScrollIndicator = true
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.stackViewSpacing
         return stackView
@@ -116,7 +117,8 @@ final class CourseInfoTabInfoView: UIView {
             appearance: .init(
                 imageViewLeadingSpace: self.appearance.authorIconLeadingSpace,
                 titleLabelFont: self.appearance.authorTitleLabelFont,
-                titleLabelInsets: self.appearance.authorTitleLabelInsets
+                titleLabelInsets: self.appearance.authorTitleLabelInsets,
+                titleLabelNumberOfLines: self.appearance.authorTitleLabelNumberOfLines
             )
         )
 
