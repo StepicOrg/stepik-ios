@@ -33,8 +33,6 @@ final class NewSortingQuizPresenter: NewSortingQuizPresenterProtocol {
     }
 
     private func processText(_ text: String) -> String {
-        let text = text.addingHTMLEntities()
-
         let processor = ContentProcessor(
             content: text,
             rules: [
