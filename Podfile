@@ -6,7 +6,7 @@ use_frameworks!
 
 def shared_pods
     pod 'Alamofire', '4.9.1'
-    pod 'Atributika', '4.9.1'
+    pod 'Atributika', '4.9.3'
     pod 'SwiftyJSON', '5.0.0'
     pod 'SDWebImage', '5.4.0'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
