@@ -102,6 +102,7 @@ whitelist_rules:
   - optional_enum_case_matching
   - overridden_super_call
   - override_in_extension
+  - prefer_self_type_over_type_of_self
   - prefixed_toplevel_constant
   - private_over_fileprivate
   - private_unit_test
@@ -390,6 +391,9 @@ optional_enum_case_matching:
   severity: error
 
 overridden_super_call:
+  severity: error
+
+prefer_self_type_over_type_of_self:
   severity: error
 
 prefixed_toplevel_constant:
