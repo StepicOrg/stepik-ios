@@ -144,7 +144,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
         sectionPosition: Int,
         direction: UnitNavigationDirection
     ) -> Promise<[Section]> {
-        return Promise { seal in
+        Promise { seal in
             self.getCourseFromCacheOrNetwork(id: courseID).then { course -> Promise<[Section]> in
                 guard let course = course else {
                     throw Error.unknownCourse

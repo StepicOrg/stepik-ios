@@ -57,7 +57,7 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
 
     private func processCodeSample(_ sample: CodeSamplePlainObject) -> CodeSamplePlainObject {
         func processText(_ text: String) -> String {
-            return text
+            text
                 .replacingOccurrences(of: "<br>", with: "\n")
                 .trimmingCharacters(in: .whitespacesAndNewlines)
         }

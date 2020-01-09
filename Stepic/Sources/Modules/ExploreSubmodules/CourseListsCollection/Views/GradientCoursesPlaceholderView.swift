@@ -110,9 +110,7 @@ final class GradientCoursesPlaceholderView: UIView {
             }
         }
 
-        var subtitleTextColor: UIColor {
-            return UIColor(hex: 0x535366).withAlphaComponent(0.3)
-        }
+        var subtitleTextColor: UIColor { UIColor(hex: 0x535366).withAlphaComponent(0.3) }
     }
 }
 
