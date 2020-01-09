@@ -99,6 +99,7 @@ whitelist_rules:
   - opening_brace
   - operator_usage_whitespace
   - operator_whitespace
+  - optional_enum_case_matching
   - overridden_super_call
   - override_in_extension
   - prefixed_toplevel_constant
@@ -383,6 +384,9 @@ operator_usage_whitespace:
   severity: error
 
 operator_whitespace:
+  severity: error
+
+optional_enum_case_matching:
   severity: error
 
 overridden_super_call:
