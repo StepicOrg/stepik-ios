@@ -250,7 +250,8 @@ empty_xctest_method:
   severity: error
 
 enum_case_associated_values_count:
-  severity: error
+  warning: 4
+  error: 5
 
 explicit_self:
   severity: error
