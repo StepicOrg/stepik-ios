@@ -47,6 +47,7 @@ whitelist_rules:
   - empty_parentheses_with_trailing_closure
   - empty_string
   - empty_xctest_method
+  - enum_case_associated_values_count
   - fallthrough
   - fatal_error_message
   - file_header
@@ -243,6 +244,9 @@ empty_string:
   severity: error
 
 empty_xctest_method:
+  severity: error
+
+enum_case_associated_values_count:
   severity: error
 
 explicit_self:
