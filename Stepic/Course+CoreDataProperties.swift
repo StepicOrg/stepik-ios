@@ -214,15 +214,6 @@ extension Course {
         }
     }
 
-    var isCertificatesAutoIssued: Bool {
-        set {
-            self.managedIsCertificateAutoIssued = newValue as NSNumber?
-        }
-        get {
-             managedIsCertificateAutoIssued?.boolValue ?? false
-        }
-    }
-
     var isPaid: Bool {
         set {
             self.managedIsPaid = newValue as NSNumber?
@@ -321,6 +312,15 @@ extension Course {
         }
         set {
             self.managedCertificateDistinctionThreshold = newValue as NSNumber?
+        }
+    }
+
+    var isCertificatesAutoIssued: Bool {
+        set {
+            self.managedIsCertificateAutoIssued = newValue as NSNumber?
+        }
+        get {
+            self.managedIsCertificateAutoIssued?.boolValue ?? false
         }
     }
 
