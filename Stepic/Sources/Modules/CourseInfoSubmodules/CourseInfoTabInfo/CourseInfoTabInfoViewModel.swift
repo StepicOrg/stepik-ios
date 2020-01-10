@@ -12,7 +12,7 @@ struct CourseInfoTabInfoViewModel {
 
     let timeToCompleteText: String
     let languageText: String
-    let certificateText: String?
+    let certificateText: String
     let certificateDetailsText: String?
 
     let instructors: [CourseInfoTabInfoInstructorViewModel]

@@ -32,9 +32,6 @@ extension Course {
     @NSManaged var managedIntroURL: String?
     @NSManaged var managedFormat: String?
     @NSManaged var managedAudience: String?
-    @NSManaged var managedCertificate: String?
-    @NSManaged var managedCertificateRegularThreshold: NSNumber?
-    @NSManaged var managedCertificateDistinctionThreshold: NSNumber?
     @NSManaged var managedRequirements: String?
     @NSManaged var managedSlug: String?
     @NSManaged var managedProgressId: String?
@@ -43,11 +40,16 @@ extension Course {
     @NSManaged var managedLanguageCode: String?
     @NSManaged var managedTotalUnits: NSNumber?
 
+    @NSManaged var managedCertificate: String?
+    @NSManaged var managedCertificateRegularThreshold: NSNumber?
+    @NSManaged var managedCertificateDistinctionThreshold: NSNumber?
+    @NSManaged var managedIsCertificateAutoIssued: NSNumber?
+    @NSManaged var managedIsCertificateIssued: NSNumber?
+
     @NSManaged var managedSectionsArray: NSObject?
     @NSManaged var managedInstructorsArray: NSObject?
     @NSManaged var managedAuthorsArray: NSObject?
 
-    @NSManaged var managedIsCertificateAutoIssued: NSNumber?
     @NSManaged var managedIsPaid: NSNumber?
     @NSManaged var managedDisplayPrice: String?
 
@@ -88,6 +90,7 @@ extension Course {
         }
     }
 
+    @available(*, deprecated, message: "Use `lessons_count` instead. https://vyahhi.myjetbrains.com/youtrack/issue/EDY-9837#focus=streamItem-74-64368.0-0")
     var totalUnits: Int {
         get {
              self.managedTotalUnits?.intValue ?? 0
@@ -214,15 +217,6 @@ extension Course {
         }
     }
 
-    var isCertificatesAutoIssued: Bool {
-        set {
-            self.managedIsCertificateAutoIssued = newValue as NSNumber?
-        }
-        get {
-             managedIsCertificateAutoIssued?.boolValue ?? false
-        }
-    }
-
     var isPaid: Bool {
         set {
             self.managedIsPaid = newValue as NSNumber?
@@ -321,6 +315,24 @@ extension Course {
         }
         set {
             self.managedCertificateDistinctionThreshold = newValue as NSNumber?
+        }
+    }
+
+    var isCertificatesAutoIssued: Bool {
+        set {
+            self.managedIsCertificateAutoIssued = newValue as NSNumber?
+        }
+        get {
+            self.managedIsCertificateAutoIssued?.boolValue ?? false
+        }
+    }
+
+    var isCertificateIssued: Bool {
+        get {
+            self.managedIsCertificateIssued?.boolValue ?? false
+        }
+        set {
+            self.managedIsCertificateIssued = newValue as NSNumber?
         }
     }
 

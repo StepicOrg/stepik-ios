@@ -93,9 +93,7 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .timeToComplete, message: viewModel.timeToCompleteText)
         self.addTextBlockView(block: .language, message: viewModel.languageText)
 
-        if let certificateText = viewModel.certificateText {
-            self.addTextBlockView(block: .certificate, message: certificateText)
-        }
+        self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
 
         if let certificateDetailsText = viewModel.certificateDetailsText {
             self.addTextBlockView(block: .certificateDetails, message: certificateDetailsText)

@@ -29,10 +29,8 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             )
         }
 
-        let certificateText = course.isCertificatesAutoIssued
-            ? self.makeFormattedCertificateText(course: course)
-            : nil
-        let certificateDetailsText = course.isCertificatesAutoIssued
+        let certificateText = self.makeFormattedCertificateText(course: course)
+        let certificateDetailsText = course.hasCertificate
             ? self.makeFormattedCertificateDetailsText(
                 conditionPoints: course.certificateRegularThreshold,
                 distinctionPoints: course.certificateDistinctionThreshold
@@ -89,14 +87,14 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     }
 
     private func makeFormattedCertificateText(course: Course) -> String {
+        let predefinedText = course.hasCertificate
+            ? NSLocalizedString("CertificateIsIssued", comment: "")
+            : NSLocalizedString("CertificateIsNotIssued", comment: "")
         let certificateText = course.certificate.trimmingCharacters(in: .whitespaces)
-        if certificateText.isEmpty {
-            return course.certificateRegularThreshold ?? 0 > 0 && course.certificateDistinctionThreshold ?? 0 > 0
-                ? NSLocalizedString("Yes", comment: "")
-                : NSLocalizedString("No", comment: "")
-        } else {
-            return certificateText
-        }
+
+        return course.hasCertificate && !certificateText.isEmpty
+            ? certificateText
+            : predefinedText
     }
 
     private func makeFormattedCertificateDetailsText(conditionPoints: Int?, distinctionPoints: Int?) -> String {
@@ -109,9 +107,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             points: distinctionPoints
         )
 
-        return "\(formattedCondition)\n\(formattedDistinction)".trimmingCharacters(
-            in: .whitespacesAndNewlines
-        )
+        return "\(formattedCondition)\n\(formattedDistinction)".trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private func makeFormattedCertificateDetailTitle(_ title: String, points: Int?) -> String {
