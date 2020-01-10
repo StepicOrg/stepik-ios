@@ -1768,6 +1768,7 @@
 		2CBCBD4920D1AAFC000B5732 /* AchievementsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementsListTableViewCell.xib; sourceTree = "<group>"; };
 		2CBCD3A7213583EB005D10FF /* Model_CourseListRename_v25.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_CourseListRename_v25.xcdatamodel; sourceTree = "<group>"; };
 		2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveRatingsViewController.swift; sourceTree = "<group>"; };
+		2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_is_certificate_issued.xcdatamodel; sourceTree = "<group>"; };
 		2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsSkeletonView.swift; sourceTree = "<group>"; };
 		2CC2A78D235DE26700B2DC44 /* DiscussionsLoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsLoadMoreTableViewCell.swift; sourceTree = "<group>"; };
@@ -7631,6 +7632,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */,
 				2C8B6E0323A27D2D0078A4B3 /* Model_required_section.xcdatamodel */,
 				2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */,
 				2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */,
@@ -7678,7 +7680,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2C8B6E0323A27D2D0078A4B3 /* Model_required_section.xcdatamodel */;
+			currentVersion = 2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
