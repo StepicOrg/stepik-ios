@@ -202,23 +202,23 @@ extension SettingsTableView: UITableViewDataSource {
 
 extension SettingsTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view: SettingsTableSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
-
         if let title = self.viewModel?.sections[safe: section]?.header?.title {
+            let view: SettingsTableSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
             view.title = title
+            return view
         }
 
-        return view
+        return nil
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view: SettingsTableSectionFooterView = tableView.dequeueReusableHeaderFooterView()
-
         if let description = self.viewModel?.sections[safe: section]?.footer?.description {
+            let view: SettingsTableSectionFooterView = tableView.dequeueReusableHeaderFooterView()
             view.text = description
+            return view
         }
 
-        return view
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -237,5 +237,9 @@ extension SettingsTableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat { 44.0 }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 53.0 }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        self.viewModel?.sections[safe: section]?.header?.title != nil
+            ? 53.0
+            : UITableView.automaticDimension
+    }
 }
