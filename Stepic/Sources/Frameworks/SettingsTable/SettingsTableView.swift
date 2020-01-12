@@ -106,14 +106,19 @@ final class SettingsTableView: UIView {
         viewModel: SettingsTableSectionViewModel.Cell,
         options: RightDetailCellOptions
     ) {
-        cell.elementView.title = options.titleText
+        cell.elementView.title = options.title.text
+        cell.elementView.titleTextColor = options.title.appearance.textColor
+        cell.elementView.titleTextAlignment = options.title.appearance.textAlignment
+
         cell.accessoryType = options.accessoryType
 
-        switch options.detailValue {
+        switch options.detailType {
         case .label(let detailText):
             cell.elementView.detailText = detailText
         case .switch(let isOn):
             cell.elementView.detailSwitchIsOn = isOn
+        case .none:
+            cell.elementView.detailText = nil
         }
     }
 

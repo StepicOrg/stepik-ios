@@ -54,7 +54,10 @@ final class SettingsRightDetailCellView: UIView {
         return stackView
     }()
 
+    private var titleLabelTrailingConstraint: Constraint?
+
     private var detailStackViewTrailingConstraint: Constraint?
+    private var detailStackViewZeroWidthConstraint: Constraint?
 
     var title: String? {
         didSet {
@@ -62,10 +65,23 @@ final class SettingsRightDetailCellView: UIView {
         }
     }
 
+    var titleTextColor: UIColor = .black {
+        didSet {
+            self.titleLabel.textColor = self.titleTextColor
+        }
+    }
+
+    var titleTextAlignment: NSTextAlignment = .natural {
+        didSet {
+            self.titleLabel.textAlignment = self.titleTextAlignment
+        }
+    }
+
     var detailText: String? {
         didSet {
             self.detailLabel.text = self.detailText
             self.setDetailSubviewsHidden(except: self.detailLabel)
+            self.setDetailsHidden(self.detailText?.isEmpty ?? true)
         }
     }
 
@@ -73,6 +89,7 @@ final class SettingsRightDetailCellView: UIView {
         didSet {
             self.detailSwitch.isOn = self.detailSwitchIsOn
             self.setDetailSubviewsHidden(except: self.detailSwitch)
+            self.setDetailsHidden(false)
         }
     }
 
@@ -104,6 +121,17 @@ final class SettingsRightDetailCellView: UIView {
     private func setDetailSubviewsHidden(except viewToKeepVisible: UIView) {
         self.detailStackView.arrangedSubviews.forEach { $0.isHidden = $0 !== viewToKeepVisible }
     }
+
+    private func setDetailsHidden(_ isHidden: Bool) {
+        if isHidden {
+            self.detailStackViewZeroWidthConstraint?.activate()
+            self.titleLabelTrailingConstraint?.update(offset: 0)
+        } else {
+            self.detailStackViewZeroWidthConstraint?.deactivate()
+            self.titleLabelTrailingConstraint?.update(offset: -self.appearance.titleInsets.right)
+        }
+        self.detailStackView.isHidden = isHidden
+    }
 }
 
 extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol {
@@ -123,6 +151,8 @@ extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol
                 .equalToSuperview()
                 .offset(self.appearance.detailStackViewInsets.right)
                 .constraint
+            self.detailStackViewZeroWidthConstraint = make.width.equalTo(0).constraint
+            self.detailStackViewZeroWidthConstraint?.deactivate()
         }
 
         self.titleLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
@@ -130,7 +160,10 @@ extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview().inset(self.appearance.titleInsets)
-            make.trailing.equalTo(self.detailStackView.snp.leading).offset(-self.appearance.titleInsets.right)
+            self.titleLabelTrailingConstraint = make.trailing
+                .equalTo(self.detailStackView.snp.leading)
+                .offset(-self.appearance.titleInsets.right)
+                .constraint
         }
     }
 }

@@ -80,21 +80,40 @@ struct LargeInputCellOptions {
 }
 
 struct RightDetailCellOptions {
-    let titleText: String
-    let detailValue: DetailValue
+    let title: Title
+    let detailType: DetailType
     let accessoryType: UITableViewCell.AccessoryType
 
     init(
-        titleText: String,
-        detailValue: DetailValue = .label(text: nil),
+        title: Title,
+        detailType: DetailType = .none,
         accessoryType: UITableViewCell.AccessoryType = .none
     ) {
-        self.titleText = titleText
-        self.detailValue = detailValue
+        self.title = title
+        self.detailType = detailType
         self.accessoryType = accessoryType
     }
 
-    enum DetailValue {
+    struct Title {
+        let text: String
+        let appearance: Appearance
+
+        init(
+            text: String,
+            appearance: Appearance = .init(textColor: .black, textAlignment: .natural)
+        ) {
+            self.text = text
+            self.appearance = appearance
+        }
+
+        struct Appearance {
+            let textColor: UIColor
+            let textAlignment: NSTextAlignment
+        }
+    }
+
+    enum DetailType {
+        case none
         case label(text: String?)
         case `switch`(isOn: Bool)
     }
