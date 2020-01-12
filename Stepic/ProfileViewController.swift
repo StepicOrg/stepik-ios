@@ -236,7 +236,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
     @objc
     private func settingsButtonClicked() {
-        let assembly = SettingsViewControllerLegacyAssembly()
+        let assembly = NewSettingsAssembly()
         self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
     }
 

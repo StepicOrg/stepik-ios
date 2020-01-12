@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol NewSettingsInteractorProtocol {
-    func doSomeAction(request: NewSettings.SomeAction.Request)
+    func doSettingsLoad(request: NewSettings.SettingsLoad.Request)
 }
 
 final class NewSettingsInteractor: NewSettingsInteractorProtocol {
@@ -17,7 +17,9 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         self.provider = provider
     }
 
-    func doSomeAction(request: NewSettings.SomeAction.Request) { }
+    func doSettingsLoad(request: NewSettings.SettingsLoad.Request) {
+        self.presenter.presentSettings(response: .init())
+    }
 
     enum Error: Swift.Error {
         case something

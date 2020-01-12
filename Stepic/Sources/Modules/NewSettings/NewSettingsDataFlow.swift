@@ -1,7 +1,8 @@
 import Foundation
 
 enum NewSettings {
-    enum SomeAction {
+    /// Present settings
+    enum SettingsLoad {
         struct Request { }
 
         struct Response { }

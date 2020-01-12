@@ -25,6 +25,7 @@ final class SettingsTableView: UIView {
 
         tableView.register(cellClass: SettingsInputTableViewCell<TableInputTextField>.self)
         tableView.register(cellClass: SettingsLargeInputTableViewCell<TableInputTextView>.self)
+        tableView.register(cellClass: SettingsRightDetailTableViewCell.self)
 
         tableView.register(headerFooterViewClass: SettingsTableSectionHeaderView.self)
         tableView.register(headerFooterViewClass: SettingsTableSectionFooterView.self)
@@ -100,6 +101,22 @@ final class SettingsTableView: UIView {
         }
     }
 
+    func updateRightDetailCell(
+        _ cell: SettingsRightDetailTableViewCell,
+        viewModel: SettingsTableSectionViewModel.Cell,
+        options: RightDetailCellOptions
+    ) {
+        cell.elementView.title = options.titleText
+        cell.accessoryType = options.accessoryType
+
+        switch options.detailValue {
+        case .label(let detailText):
+            cell.elementView.detailText = detailText
+        case .switch(let isOn):
+            cell.elementView.detailSwitchIsOn = isOn
+        }
+    }
+
     // MARK: Private API
 
     private func performTableViewUpdates() {
@@ -118,7 +135,7 @@ final class SettingsTableView: UIView {
         /// Fallbacks to `grouped` on earlier versions.
         case insetGrouped
 
-        var uiStyle: UITableView.Style {
+        fileprivate var uiStyle: UITableView.Style {
             switch self {
             case .grouped:
                 return .grouped
@@ -175,6 +192,10 @@ extension SettingsTableView: UITableViewDataSource {
             )
             self.updateLargeInputCell(cell, viewModel: cellViewModel, options: options)
             return cell
+        case .rightDetail(let options):
+            let cell: SettingsRightDetailTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+            self.updateRightDetailCell(cell, viewModel: cellViewModel, options: options)
+            return cell
         }
     }
 }
@@ -207,7 +228,7 @@ extension SettingsTableView: UITableViewDelegate {
         }
 
         switch cellViewModel.type {
-        case .largeInput:
+        case .largeInput, .rightDetail:
             return UITableView.automaticDimension
         default:
             return 44.0

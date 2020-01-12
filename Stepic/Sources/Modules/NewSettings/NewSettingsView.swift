@@ -8,6 +8,8 @@ extension NewSettingsView {
 final class NewSettingsView: UIView {
     let appearance: Appearance
 
+    private lazy var tableView = SettingsTableView(appearance: .init(style: .insetGrouped))
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()
@@ -24,12 +26,21 @@ final class NewSettingsView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func configure(viewModel: SettingsTableViewModel) {
+        self.tableView.configure(viewModel: viewModel)
+    }
 }
 
 extension NewSettingsView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() { }
+    func addSubviews() {
+        self.addSubview(self.tableView)
+    }
 
-    func addSubviews() { }
-
-    func makeConstraints() { }
+    func makeConstraints() {
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 }

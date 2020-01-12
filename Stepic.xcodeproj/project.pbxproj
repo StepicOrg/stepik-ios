@@ -685,6 +685,8 @@
 		2CE8390E20C8096400FE3672 /* ProfileAchievementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8390D20C8096400FE3672 /* ProfileAchievementsPresenter.swift */; };
 		2CE8391120C8101500FE3672 /* AchievementBadgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */; };
 		2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */; };
+		2CEDAE5A23CB8C4F00AA8D5E /* SettingsRightDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDAE5923CB8C4F00AA8D5E /* SettingsRightDetailTableViewCell.swift */; };
+		2CEDAE5E23CB8E6C00AA8D5E /* SettingsRightDetailCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEDAE5D23CB8E6C00AA8D5E /* SettingsRightDetailCellView.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
 		2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
@@ -1825,6 +1827,8 @@
 		2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AchievementBadgeView.xib; sourceTree = "<group>"; };
 		2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementBadgeView.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
+		2CEDAE5923CB8C4F00AA8D5E /* SettingsRightDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailTableViewCell.swift; sourceTree = "<group>"; };
+		2CEDAE5D23CB8E6C00AA8D5E /* SettingsRightDetailCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRightDetailCellView.swift; sourceTree = "<group>"; };
 		2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_passed_by_correct_ratio.xcdatamodel; sourceTree = "<group>"; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
@@ -4651,6 +4655,24 @@
 			name = AchievementBadge;
 			sourceTree = "<group>";
 		};
+		2CEDAE5B23CB8C8C00AA8D5E /* InputCells */ = {
+			isa = PBXGroup;
+			children = (
+				62E98E991593286E1C15B7E3 /* SettingsInputTableViewCell.swift */,
+				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
+			);
+			path = InputCells;
+			sourceTree = "<group>";
+		};
+		2CEDAE5C23CB8CA000AA8D5E /* DetailCells */ = {
+			isa = PBXGroup;
+			children = (
+				2CEDAE5D23CB8E6C00AA8D5E /* SettingsRightDetailCellView.swift */,
+				2CEDAE5923CB8C4F00AA8D5E /* SettingsRightDetailTableViewCell.swift */,
+			);
+			path = DetailCells;
+			sourceTree = "<group>";
+		};
 		2CF0885B205BECCC00FCB9C0 /* Placeholders */ = {
 			isa = PBXGroup;
 			children = (
@@ -5170,9 +5192,9 @@
 		62E98975086503C4516ECDE1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				62E98E991593286E1C15B7E3 /* SettingsInputTableViewCell.swift */,
-				2C06E09C22411F8900AF4DA2 /* SettingsLargeInputTableViewCell.swift */,
 				62E981C952A9DD6055CBCBF0 /* SettingsTableViewCell.swift */,
+				2CEDAE5C23CB8CA000AA8D5E /* DetailCells */,
+				2CEDAE5B23CB8C8C00AA8D5E /* InputCells */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6307,6 +6329,7 @@
 				08C02DB41F53201A00F848F5 /* ProfilePresenter.swift in Sources */,
 				080CE1551E9563590089A27F /* ProgressesAPI.swift in Sources */,
 				0846B10C1EDDEE7F00D64D77 /* CodeLimit.swift in Sources */,
+				2CEDAE5A23CB8C4F00AA8D5E /* SettingsRightDetailTableViewCell.swift in Sources */,
 				2C97E009215E47E7005684A1 /* SearchQueriesViewController.swift in Sources */,
 				08FCEB641B9ED2AC00FC4F8B /* AuthAPI.swift in Sources */,
 				08E43E9E214C27B200E3CB50 /* ModalRouter.swift in Sources */,
@@ -6980,6 +7003,7 @@
 				62E98CE852F58BCEB46AADB8 /* ContinueCourseAssembly.swift in Sources */,
 				62E9871681358ECDE69523C3 /* ContinueCourseViewController.swift in Sources */,
 				62E98D82655D6D23A2C73DD6 /* ContinueCourseInteractor.swift in Sources */,
+				2CEDAE5E23CB8E6C00AA8D5E /* SettingsRightDetailCellView.swift in Sources */,
 				62E98DAAF9C3E79D42E7E02D /* ContinueCoursePresenter.swift in Sources */,
 				62E98F9D4DFE12505014E204 /* ContinueCourseDataFlow.swift in Sources */,
 				2CAB5C7D22F1EF6500ED2221 /* NewCodeQuizFullscreenViewModel.swift in Sources */,
