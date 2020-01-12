@@ -4,7 +4,9 @@ import UIKit
 protocol SettingsTableViewDelegate: SettingsInputCellDelegate, SettingsLargeInputCellDelegate { }
 
 extension SettingsTableView {
-    struct Appearance { }
+    struct Appearance {
+        var style: Style = .grouped
+    }
 }
 
 final class SettingsTableView: UIView {
@@ -14,7 +16,7 @@ final class SettingsTableView: UIView {
     private var viewModel: SettingsTableViewModel?
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: self.appearance.style.uiStyle)
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -105,6 +107,27 @@ final class SettingsTableView: UIView {
             UIView.performWithoutAnimation {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
+            }
+        }
+    }
+
+    // MARK: Inner Types
+
+    enum Style {
+        case grouped
+        /// Fallbacks to `grouped` on earlier versions.
+        case insetGrouped
+
+        var uiStyle: UITableView.Style {
+            switch self {
+            case .grouped:
+                return .grouped
+            case .insetGrouped:
+                if #available(iOS 13.0, *) {
+                    return .insetGrouped
+                } else {
+                    return .grouped
+                }
             }
         }
     }
