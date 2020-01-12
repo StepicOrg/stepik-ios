@@ -67,6 +67,11 @@ final class ProfileEditViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = self.doneBarButton
         self.title = NSLocalizedString("ProfileEditTitle", comment: "")
 
+        // Disable swipe down to dismiss
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+
         self.interactor.doProfileEditLoad(request: .init())
     }
 
