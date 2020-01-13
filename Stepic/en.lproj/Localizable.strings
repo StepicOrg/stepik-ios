@@ -559,7 +559,25 @@ DeleteAllContentPreferenceTitle = "Delete all content";
 DeleteAllContentConfirmationAlertTitle = "Delete all content";
 DeleteAllContentConfirmationAlertMessage = "Are you sure you want to delete all downloaded content?";
 
-/* Font size settings */
+/* Settings */
+SettingsHeaderTitleVideo = "Video";
+SettingsHeaderTitleLanguage = "Language";
+SettingsHeaderTitleLearning = "Learning";
+SettingsHeaderTitleDownloadedContent = "Downloaded content";
+SettingsHeaderTitleOther = "Other";
+
+SettingsCellTitleDownloadQuality = "Download quality";
+SettingsCellTitleStreamQuality = "Stream quality";
+SettingsCellTitleContentLanguage = "Content language";
+SettingsCellTitleTextSizeInSteps = "Text size in steps";
+SettingsCellTitleCodeEditor = "Code editor";
+SettingsCellTitleAutoplayNextVideo = "Autoplay next video";
+SettingsCellTitleAdaptiveMode = "Adaptive mode";
+SettingsCellTitleDownloads = "Downloads";
+SettingsCellTitleDeleteAllContent = "Delete all content";
+SettingsCellTitleAbout = "About";
+SettingsCellTitleLogOut = "Log Out";
+
 SettingsStepFontSizeTitle = "Text size";
 SettingsStepFontSizeSubtitle = "Text size changes affect only step text";
 SettingsStepFontSizeItemSmall = "Small";

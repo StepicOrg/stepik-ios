@@ -560,7 +560,25 @@ DeleteAllContentPreferenceTitle = "Удалить весь контент";
 DeleteAllContentConfirmationAlertTitle = "Удалить весь контент";
 DeleteAllContentConfirmationAlertMessage = "Вы уверены, что хотите удалить весь загруженный контент из памяти Вашего устройства?";
 
-/* Font size settings */
+/* Settings */
+SettingsHeaderTitleVideo = "Видео";
+SettingsHeaderTitleLanguage = "Язык";
+SettingsHeaderTitleLearning = "Обучение";
+SettingsHeaderTitleDownloadedContent = "Загруженный контент";
+SettingsHeaderTitleOther = "Другое";
+
+SettingsCellTitleDownloadQuality = "Качество загрузки";
+SettingsCellTitleStreamQuality = "Качество воспроизведения";
+SettingsCellTitleContentLanguage = "Язык контента";
+SettingsCellTitleTextSizeInSteps = "Размер текста в шагах";
+SettingsCellTitleCodeEditor = "Редактор кода";
+SettingsCellTitleAutoplayNextVideo = "Автопереход на следующий шаг по окончании видео";
+SettingsCellTitleAdaptiveMode = "Адаптивный режим";
+SettingsCellTitleDownloads = "Загрузки";
+SettingsCellTitleDeleteAllContent = "Удалить весь контент";
+SettingsCellTitleAbout = "О приложении";
+SettingsCellTitleLogOut = "Выйти";
+
 SettingsStepFontSizeTitle = "Размер текста";
 SettingsStepFontSizeSubtitle = "Изменения размера текста влияют только на текст шага";
 SettingsStepFontSizeItemSmall = "Маленький";

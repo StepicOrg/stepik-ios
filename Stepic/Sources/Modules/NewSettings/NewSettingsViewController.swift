@@ -35,8 +35,15 @@ final class NewSettingsViewController: UIViewController {
     private enum Setting: String {
         case downloadQuality
         case streamQuality
-        case downloadOverWiFiOnly
         case contentLanguage
+        case textSize
+        case codeEditor
+        case autoplayNextVideo
+        case adaptiveMode
+        case downloads
+        case deleteAllContent
+        case about
+        case logOut
 
         init?(uniqueIdentifier: UniqueIdentifierType) {
             if let value = Setting(rawValue: uniqueIdentifier) {
@@ -55,8 +62,8 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.downloadQuality.rawValue,
             type: .rightDetail(
                 options: .init(
-                    titleText: "Download Quality",
-                    detailValue: .label(text: "360p"),
+                    title: .init(text: NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")),
+                    detailType: .label(text: "360p"),
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -65,19 +72,9 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.downloadQuality.rawValue,
             type: .rightDetail(
                 options: .init(
-                    titleText: "Stream Quality",
-                    detailValue: .label(text: "360p"),
+                    title: .init(text: NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")),
+                    detailType: .label(text: "360p"),
                     accessoryType: .disclosureIndicator
-                )
-            )
-        )
-        let downloadOverWiFiOnly = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.downloadQuality.rawValue,
-            type: .rightDetail(
-                options: .init(
-                    titleText: "Download Over Wi-Fi Only",
-                    detailValue: .switch(isOn: true),
-                    accessoryType: .none
                 )
             )
         )
@@ -87,24 +84,134 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.downloadQuality.rawValue,
             type: .rightDetail(
                 options: .init(
-                    titleText: "Content Language",
-                    detailValue: .label(text: "English"),
+                    title: .init(text: NSLocalizedString("SettingsCellTitleContentLanguage", comment: "")),
+                    detailType: .label(text: "English"),
                     accessoryType: .disclosureIndicator
+                )
+            )
+        )
+
+        // Learning
+        let textSize = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.textSize.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: NSLocalizedString("SettingsCellTitleTextSizeInSteps", comment: "")),
+                    detailType: .label(text: "Small"),
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+        let codeEditor = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.codeEditor.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: NSLocalizedString("SettingsCellTitleCodeEditor", comment: "")),
+                    detailType: .none,
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+        let autoplayNextVideo = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.autoplayNextVideo.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: NSLocalizedString("SettingsCellTitleAutoplayNextVideo", comment: "")),
+                    detailType: .switch(isOn: true),
+                    accessoryType: .none
+                )
+            )
+        )
+        let adaptiveMode = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.adaptiveMode.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: NSLocalizedString("SettingsCellTitleAdaptiveMode", comment: "")),
+                    detailType: .switch(isOn: true),
+                    accessoryType: .none
+                )
+            )
+        )
+
+        // Downloaded Content
+        let downloads = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.downloads.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: NSLocalizedString("SettingsCellTitleDownloads", comment: "")),
+                    detailType: .none,
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+        let deleteAllContent = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.deleteAllContent.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(
+                        text: NSLocalizedString("SettingsCellTitleDeleteAllContent", comment: ""),
+                        appearance: .init(textColor: .errorRed, textAlignment: .left)
+                    ),
+                    detailType: .none,
+                    accessoryType: .none
+                )
+            )
+        )
+
+        // Other
+        let about = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.about.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: NSLocalizedString("SettingsCellTitleAbout", comment: "")),
+                    detailType: .none,
+                    accessoryType: .disclosureIndicator
+                )
+            )
+        )
+
+        // Log Out
+        let logOut = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.logOut.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(
+                        text: NSLocalizedString("SettingsCellTitleLogOut", comment: ""),
+                        appearance: .init(textColor: .errorRed, textAlignment: .center)
+                    ),
+                    detailType: .none,
+                    accessoryType: .none
                 )
             )
         )
 
         let sections: [SettingsTableSectionViewModel] = [
             .init(
-                header: .init(title: "Video"),
-                cells: [downloadQuality, streamQuality, downloadOverWiFiOnly],
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleVideo", comment: "")),
+                cells: [downloadQuality, streamQuality],
                 footer: nil
             ),
             .init(
-                header: .init(title: "Language"),
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleLanguage", comment: "")),
                 cells: [contentLanguage],
                 footer: nil
-            )
+            ),
+            .init(
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleLearning", comment: "")),
+                cells: [textSize, codeEditor, autoplayNextVideo, adaptiveMode],
+                footer: nil
+            ),
+            .init(
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleDownloadedContent", comment: "")),
+                cells: [downloads, deleteAllContent],
+                footer: nil
+            ),
+            .init(
+                header: .init(title: NSLocalizedString("SettingsHeaderTitleOther", comment: "")),
+                cells: [about],
+                footer: nil
+            ),
+            .init(header: nil, cells: [logOut], footer: nil)
         ]
 
         self.settingsView?.configure(viewModel: SettingsTableViewModel(sections: sections))
