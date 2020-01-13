@@ -15,7 +15,7 @@ final class ProfileEditView: UIView {
         }
     }
 
-    private lazy var tableView = SettingsTableView(appearance: .init(style: .insetGrouped))
+    private lazy var tableView = SettingsTableView(appearance: .init(style: .insetGroupedFallbackGrouped))
 
     init(
         frame: CGRect = .zero,

@@ -1,14 +1,21 @@
 import SnapKit
 import UIKit
 
+protocol NewSettingsViewDelegate: SettingsTableViewDelegate { }
+
 extension NewSettingsView {
     struct Appearance { }
 }
 
 final class NewSettingsView: UIView {
     let appearance: Appearance
+    weak var delegate: NewSettingsViewDelegate? {
+        didSet {
+            self.tableView.delegate = self.delegate
+        }
+    }
 
-    private lazy var tableView = SettingsTableView(appearance: .init(style: .insetGrouped))
+    private lazy var tableView = SettingsTableView(appearance: .init(style: .insetGroupedFallbackGrouped))
 
     init(
         frame: CGRect = .zero,

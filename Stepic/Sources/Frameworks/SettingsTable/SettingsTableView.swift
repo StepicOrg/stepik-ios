@@ -1,11 +1,37 @@
 import SnapKit
 import UIKit
 
-protocol SettingsTableViewDelegate: SettingsInputCellDelegate, SettingsLargeInputCellDelegate { }
+protocol SettingsTableViewDelegate: SettingsInputCellDelegate, SettingsLargeInputCellDelegate {
+    func settingsTableView(
+        _ tableView: SettingsTableView,
+        didSelectCell cell: SettingsTableSectionViewModel.Cell,
+        at indexPath: IndexPath
+    )
+}
+
+extension SettingsTableViewDelegate {
+    func settingsTableView(
+        _ tableView: SettingsTableView,
+        didSelectCell cell: SettingsTableSectionViewModel.Cell,
+        at indexPath: IndexPath
+    ) { }
+
+    func settingsCell(
+        elementView: UITextField,
+        didReportTextChange text: String?,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) { }
+
+    func settingsCell(
+        elementView: UITextView,
+        didReportTextChange text: String,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) { }
+}
 
 extension SettingsTableView {
     struct Appearance {
-        var style: Style = .grouped
+        var style: UITableView.Style = .grouped
     }
 }
 
@@ -16,7 +42,7 @@ final class SettingsTableView: UIView {
     private var viewModel: SettingsTableViewModel?
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: self.appearance.style.uiStyle)
+        let tableView = UITableView(frame: .zero, style: self.appearance.style)
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -106,11 +132,12 @@ final class SettingsTableView: UIView {
         viewModel: SettingsTableSectionViewModel.Cell,
         options: RightDetailCellOptions
     ) {
+        cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.accessoryType = options.accessoryType
+
         cell.elementView.title = options.title.text
         cell.elementView.titleTextColor = options.title.appearance.textColor
         cell.elementView.titleTextAlignment = options.title.appearance.textAlignment
-
-        cell.accessoryType = options.accessoryType
 
         switch options.detailType {
         case .label(let detailText):
@@ -129,27 +156,6 @@ final class SettingsTableView: UIView {
             UIView.performWithoutAnimation {
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
-            }
-        }
-    }
-
-    // MARK: Inner Types
-
-    enum Style {
-        case grouped
-        /// Fallbacks to `grouped` on earlier versions.
-        case insetGrouped
-
-        fileprivate var uiStyle: UITableView.Style {
-            switch self {
-            case .grouped:
-                return .grouped
-            case .insetGrouped:
-                if #available(iOS 13.0, *) {
-                    return .insetGrouped
-                } else {
-                    return .grouped
-                }
             }
         }
     }
@@ -181,8 +187,7 @@ extension SettingsTableView: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        guard let sectionViewModel = self.viewModel?.sections[safe: indexPath.section],
-              let cellViewModel = sectionViewModel.cells[safe: indexPath.item] else {
+        guard let cellViewModel = self.cellViewModel(at: indexPath) else {
             fatalError("View model is undefined")
         }
 
@@ -203,9 +208,21 @@ extension SettingsTableView: UITableViewDataSource {
             return cell
         }
     }
+
+    private func cellViewModel(at indexPath: IndexPath) -> SettingsTableSectionViewModel.Cell? {
+        self.viewModel?.sections[safe: indexPath.section]?.cells[safe: indexPath.item]
+    }
 }
 
 extension SettingsTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        if let cellViewModel = self.cellViewModel(at: indexPath) {
+            self.delegate?.settingsTableView(self, didSelectCell: cellViewModel, at: indexPath)
+        }
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let title = self.viewModel?.sections[safe: section]?.header?.title {
             let view: SettingsTableSectionHeaderView = tableView.dequeueReusableHeaderFooterView()

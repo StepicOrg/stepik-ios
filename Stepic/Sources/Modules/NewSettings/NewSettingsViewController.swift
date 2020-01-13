@@ -21,6 +21,7 @@ final class NewSettingsViewController: UIViewController {
 
     override func loadView() {
         let view = NewSettingsView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 
@@ -69,7 +70,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             )
         )
         let streamQuality = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.downloadQuality.rawValue,
+            uniqueIdentifier: Setting.streamQuality.rawValue,
             type: .rightDetail(
                 options: .init(
                     title: .init(text: NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")),
@@ -81,7 +82,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
 
         // Language
         let contentLanguage = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.downloadQuality.rawValue,
+            uniqueIdentifier: Setting.contentLanguage.rawValue,
             type: .rightDetail(
                 options: .init(
                     title: .init(text: NSLocalizedString("SettingsCellTitleContentLanguage", comment: "")),
@@ -215,5 +216,64 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         ]
 
         self.settingsView?.configure(viewModel: SettingsTableViewModel(sections: sections))
+    }
+}
+
+extension NewSettingsViewController: NewSettingsViewDelegate {
+    func settingsTableView(
+        _ tableView: SettingsTableView,
+        didSelectCell cell: SettingsTableSectionViewModel.Cell,
+        at indexPath: IndexPath
+    ) {
+        guard let selectedSetting = Setting(uniqueIdentifier: cell.uniqueIdentifier) else {
+            return
+        }
+
+        switch selectedSetting {
+        case .downloadQuality:
+            let selectItemController = SelectItemTableViewController(
+                style: .insetGroupedFallbackGrouped,
+                viewModel: .init(
+                    sections: [
+                        .init(
+                            cells: [
+                                .init(uniqueIdentifier: "360p", title: "360p"),
+                                .init(uniqueIdentifier: "720p", title: "720p"),
+                                .init(uniqueIdentifier: "1080p", title: "1080p")
+                            ],
+                            headerTitle: "Header",
+                            footerTitle: "Footer"
+                        )
+                    ],
+                    selectedCell: .init(uniqueIdentifier: "360p", title: "360p")
+                ),
+                onItemSelected: { [weak self] selectedItem in
+                    print(selectedItem)
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            )
+            selectItemController.title = "Title"
+            self.navigationController?.pushViewController(selectItemController, animated: true)
+        case .streamQuality:
+            break
+        case .contentLanguage:
+            break
+        case .textSize:
+            break
+        case .codeEditor:
+            break
+        case .autoplayNextVideo:
+            break
+        case .adaptiveMode:
+            break
+        case .downloads:
+            break
+        case .deleteAllContent:
+            break
+        case .about:
+            break
+        case .logOut:
+            break
+        }
     }
 }
