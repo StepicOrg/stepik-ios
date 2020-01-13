@@ -141,8 +141,8 @@ extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol
     }
 
     func makeConstraints() {
-        self.detailStackView.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.detailStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.detailStackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         self.detailStackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalTo(self.appearance.detailStackViewHeight)
@@ -155,13 +155,14 @@ extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol
             self.detailStackViewZeroWidthConstraint?.deactivate()
         }
 
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         self.titleLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
         self.titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview().inset(self.appearance.titleInsets)
             self.titleLabelTrailingConstraint = make.trailing
-                .equalTo(self.detailStackView.snp.leading)
+                .lessThanOrEqualTo(self.detailStackView.snp.leading)
                 .offset(-self.appearance.titleInsets.right)
                 .constraint
         }
