@@ -11,7 +11,8 @@ enum DownloadVideoQuality: Int, CaseIterable {
     init?(qualityString: String) {
         if let quality = Self.allCases.first(where: { $0.description == qualityString }) {
             self = quality
+        } else {
+            return nil
         }
-        return nil
     }
 }
