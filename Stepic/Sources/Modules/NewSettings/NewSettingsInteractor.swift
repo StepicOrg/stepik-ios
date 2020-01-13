@@ -18,10 +18,15 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
     }
 
     func doSettingsLoad(request: NewSettings.SettingsLoad.Request) {
-        self.presenter.presentSettings(response: .init())
-    }
-
-    enum Error: Swift.Error {
-        case something
+        self.presenter.presentSettings(
+            response: .init(
+                downloadVideoQuality: self.provider.downloadVideoQuality,
+                streamVideoQuality: self.provider.streamVideoQuality,
+                contentLanguage: self.provider.contentLanguage,
+                stepFontSize: self.provider.stepFontSize,
+                isAutoplayEnabled: self.provider.isAutoplayEnabled,
+                isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled
+            )
+        )
     }
 }

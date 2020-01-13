@@ -465,7 +465,7 @@
 		2C32E71320FF6C1D008BB909 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351841F6827BE004255B6 /* Auth.storyboard */; };
 		2C331C5721734764007B0D01 /* NotificationService+Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C331C5621734764007B0D01 /* NotificationService+Streak.swift */; };
 		2C3A24572359DD2E00E2405F /* DiscussionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A24562359DD2E00E2405F /* DiscussionsViewModel.swift */; };
-		2C3DAB8D233D71B100453B1C /* StepFontSizeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeService.swift */; };
+		2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */; };
 		2C3DAB91233D735E00453B1C /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3DAB90233D735D00453B1C /* FontSize.swift */; };
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
@@ -679,6 +679,7 @@
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */; };
 		2CE42D4623CCC6500073F774 /* VideoRateStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */; };
+		2CE42D4823CCDB9D0073F774 /* NewSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4723CCDB9D0073F774 /* NewSettingsViewModel.swift */; };
 		2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */; };
 		2CE664E320F5207A0082F3FE /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664DF20F520790082F3FE /* Downloader.swift */; };
 		2CE664E420F5207A0082F3FE /* DownloaderTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */; };
@@ -1610,7 +1611,7 @@
 		2C35C4D31F4DA46E002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_f.plist; sourceTree = "<group>"; };
 		2C35C4D41F4DA471002F3BF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = LeaderboardNames/en.lproj/nouns_m.plist; sourceTree = "<group>"; };
 		2C3A24562359DD2E00E2405F /* DiscussionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsViewModel.swift; sourceTree = "<group>"; };
-		2C3DAB8C233D71B100453B1C /* StepFontSizeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFontSizeService.swift; sourceTree = "<group>"; };
+		2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFontSizeStorageManager.swift; sourceTree = "<group>"; };
 		2C3DAB90233D735D00453B1C /* FontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
@@ -1825,6 +1826,7 @@
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
 		2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQualityStorageManager.swift; sourceTree = "<group>"; };
 		2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRateStorageManager.swift; sourceTree = "<group>"; };
+		2CE42D4723CCDB9D0073F774 /* NewSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSettingsViewModel.swift; sourceTree = "<group>"; };
 		2CE527C02029D8EE0047EC5F /* AdaptiveStatsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsSection.swift; sourceTree = "<group>"; };
 		2CE664DF20F520790082F3FE /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloaderTaskProtocol.swift; sourceTree = "<group>"; };
@@ -3366,9 +3368,7 @@
 		08E542041C6C760C00DEC38E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				087585BF1FB524C20047A269 /* ContentLanguage.swift */,
 				087387D91BB9B768003CFAD1 /* ErrorEnums.swift */,
-				2C2EA36A212D5FEF002116C9 /* Result.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -4235,6 +4235,7 @@
 			children = (
 				2C20C86522F8E4BF0052E9BF /* CodeDetails.swift */,
 				2C20C86B22F988030052E9BF /* CodeEditorTheme.swift */,
+				087585BF1FB524C20047A269 /* ContentLanguage.swift */,
 				2C10100A239EFAD700440651 /* DiscountingPolicy.swift */,
 				2C3DAB90233D735D00453B1C /* FontSize.swift */,
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
@@ -4594,6 +4595,7 @@
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
 				2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */,
+				2C2EA36A212D5FEF002116C9 /* Result.swift */,
 				2CBBCB9923980ED6006D6C15 /* WeakBox.swift */,
 			);
 			path = Common;
@@ -5102,6 +5104,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */,
+				2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */,
 				62E9881CFD7892350EA31213 /* TooltipStorageManager.swift */,
 				2C8F3ADE23CCAB88004D113A /* Video */,
 			);
@@ -5469,7 +5472,6 @@
 				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
-				2C3DAB8C233D71B100453B1C /* StepFontSizeService.swift */,
 				2CB37E6523902BB80050D85E /* StorageUsageService.swift */,
 				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
@@ -5646,6 +5648,7 @@
 				114BFE84178287AE99EAACEF /* NewSettingsProvider.swift */,
 				2C46910C13E674FBC565EA68 /* NewSettingsView.swift */,
 				9DAE94A371813F1B0854FADE /* NewSettingsViewController.swift */,
+				2CE42D4723CCDB9D0073F774 /* NewSettingsViewModel.swift */,
 			);
 			path = NewSettings;
 			sourceTree = "<group>";
@@ -6397,6 +6400,7 @@
 				08DF78BC1F5EEFFE00AEEA85 /* MenuBlockTableViewCell.swift in Sources */,
 				0891424A1BCEE4EF0000BCB0 /* VideoURL+CoreDataProperties.swift in Sources */,
 				08AEC3A51CCA69F300FFF29E /* Device.swift in Sources */,
+				2CE42D4823CCDB9D0073F774 /* NewSettingsViewModel.swift in Sources */,
 				2CB2393E20BB45F100F0FE3B /* ContentExpandableMenuBlockTableViewCell.swift in Sources */,
 				2C22042D20E277F70060117A /* Skeletonable+UITableView.swift in Sources */,
 				08E43E9421495FD500E3CB50 /* DeepLinkRoutingService.swift in Sources */,
@@ -7202,7 +7206,7 @@
 				67CA89D9CC2C8E98875F5FDF /* NewFreeAnswerQuizPresenter.swift in Sources */,
 				47AA3FAF72E7AD067ABF2804 /* NewFreeAnswerQuizDataFlow.swift in Sources */,
 				92E876582D263061F44316EB /* NewFreeAnswerQuizView.swift in Sources */,
-				2C3DAB8D233D71B100453B1C /* StepFontSizeService.swift in Sources */,
+				2C3DAB8D233D71B100453B1C /* StepFontSizeStorageManager.swift in Sources */,
 				EBF9068859AF1AFB10EE4364 /* NewChoiceQuizAssembly.swift in Sources */,
 				3317FC9AECA8FF54902BF61D /* NewChoiceQuizViewController.swift in Sources */,
 				0FC4DF01DB2BF054237EBD04 /* NewChoiceQuizInteractor.swift in Sources */,

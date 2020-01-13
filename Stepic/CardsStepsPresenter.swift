@@ -71,7 +71,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
     private let lastViewedUpdater: LocalProgressLastViewedUpdater
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
-    private let stepFontSizeService: StepFontSizeServiceProtocol
+    private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
 
     // FIXME: incapsulate/remove this 
     var state: CardsStepsPresenterState = .loaded
@@ -124,7 +124,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         lastViewedUpdater: LocalProgressLastViewedUpdater,
         notificationSuggestionManager: NotificationSuggestionManager,
         notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
-        stepFontSizeService: StepFontSizeServiceProtocol,
+        stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         course: Course?,
         view: CardsStepsView
     ) {
@@ -140,7 +140,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
         self.lastViewedUpdater = lastViewedUpdater
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
-        self.stepFontSizeService = stepFontSizeService
+        self.stepFontSizeStorageManager = stepFontSizeStorageManager
 
         self.course = course
         self.view = view
@@ -250,7 +250,7 @@ final class BaseCardsStepsPresenter: CardsStepsPresenter, StepCardViewDelegate {
                     let cardStepPresenter = CardStepPresenter(
                         view: cardStepViewController,
                         step: step,
-                        stepFontSizeService: strongSelf.stepFontSizeService
+                        stepFontSizeStorageManager: strongSelf.stepFontSizeStorageManager
                     )
                     cardStepViewController.presenter = cardStepPresenter
                     strongSelf.currentStepPresenter = cardStepPresenter

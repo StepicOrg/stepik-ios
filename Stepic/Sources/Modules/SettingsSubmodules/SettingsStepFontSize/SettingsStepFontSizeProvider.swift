@@ -9,9 +9,9 @@ protocol SettingsStepFontSizeProviderProtocol {
 }
 
 final class SettingsStepFontSizeProvider: SettingsStepFontSizeProviderProtocol {
-    private let stepFontSizeService: StepFontSizeServiceProtocol
+    private let stepFontSizeService: StepFontSizeStorageManagerProtocol
 
-    init(stepFontSizeService: StepFontSizeServiceProtocol) {
+    init(stepFontSizeService: StepFontSizeStorageManagerProtocol) {
         self.stepFontSizeService = stepFontSizeService
     }
 

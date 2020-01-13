@@ -129,4 +129,14 @@ enum FormatterHelper {
             locale: Locales.current
         )
     }
+
+    /// Format download video quality to a string representation; `DownloadVideoQuality.medium` -> "360p"
+    static func downloadVideoQualityInProgressiveScan(_ quality: DownloadVideoQuality) -> String {
+        "\(quality.rawValue)p"
+    }
+
+    /// Format stream video quality to a string representation; `StreamVideoQuality.medium` -> "360p"
+    static func streamVideoQualityInProgressiveScan(_ quality: StreamVideoQuality) -> String {
+        "\(quality.rawValue)p"
+    }
 }

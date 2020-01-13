@@ -46,6 +46,33 @@ final class NewSettingsViewController: UIViewController {
         case about
         case logOut
 
+        var title: String {
+            switch self {
+            case .downloadQuality:
+                return NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")
+            case .streamQuality:
+                return NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")
+            case .contentLanguage:
+                return NSLocalizedString("SettingsCellTitleContentLanguage", comment: "")
+            case .textSize:
+                return NSLocalizedString("SettingsCellTitleTextSizeInSteps", comment: "")
+            case .codeEditor:
+                return NSLocalizedString("SettingsCellTitleCodeEditor", comment: "")
+            case .autoplayNextVideo:
+                return NSLocalizedString("SettingsCellTitleAutoplayNextVideo", comment: "")
+            case .adaptiveMode:
+                return NSLocalizedString("SettingsCellTitleAdaptiveMode", comment: "")
+            case .downloads:
+                return NSLocalizedString("SettingsCellTitleDownloads", comment: "")
+            case .deleteAllContent:
+                return NSLocalizedString("SettingsCellTitleDeleteAllContent", comment: "")
+            case .about:
+                return NSLocalizedString("SettingsCellTitleAbout", comment: "")
+            case .logOut:
+                return NSLocalizedString("SettingsCellTitleLogOut", comment: "")
+            }
+        }
+
         init?(uniqueIdentifier: UniqueIdentifierType) {
             if let value = Setting(rawValue: uniqueIdentifier) {
                 self = value
@@ -56,15 +83,19 @@ final class NewSettingsViewController: UIViewController {
     }
 }
 
+// MARK: - NewSettingsViewController: NewSettingsViewControllerProtocol -
+
 extension NewSettingsViewController: NewSettingsViewControllerProtocol {
     func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel) {
+        let settingsViewModel = viewModel.viewModel
+
         // Video
         let downloadQuality = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.downloadQuality.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")),
-                    detailType: .label(text: "360p"),
+                    title: .init(text: Setting.downloadQuality.title),
+                    detailType: .label(text: settingsViewModel.downloadVideoQuality),
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -73,8 +104,8 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.streamQuality.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")),
-                    detailType: .label(text: "360p"),
+                    title: .init(text: Setting.streamQuality.title),
+                    detailType: .label(text: settingsViewModel.streamVideoQuality),
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -85,8 +116,8 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.contentLanguage.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleContentLanguage", comment: "")),
-                    detailType: .label(text: "English"),
+                    title: .init(text: Setting.contentLanguage.title),
+                    detailType: .label(text: settingsViewModel.contentLanguage),
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -97,8 +128,8 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.textSize.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleTextSizeInSteps", comment: "")),
-                    detailType: .label(text: "Small"),
+                    title: .init(text: Setting.textSize.title),
+                    detailType: .label(text: settingsViewModel.stepFontSize),
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -107,7 +138,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.codeEditor.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleCodeEditor", comment: "")),
+                    title: .init(text: Setting.codeEditor.title),
                     detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
@@ -117,8 +148,8 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.autoplayNextVideo.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleAutoplayNextVideo", comment: "")),
-                    detailType: .switch(isOn: true),
+                    title: .init(text: Setting.autoplayNextVideo.title),
+                    detailType: .switch(isOn: settingsViewModel.isAutoplayEnabled),
                     accessoryType: .none
                 )
             )
@@ -127,8 +158,8 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.adaptiveMode.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleAdaptiveMode", comment: "")),
-                    detailType: .switch(isOn: true),
+                    title: .init(text: Setting.adaptiveMode.title),
+                    detailType: .switch(isOn: settingsViewModel.isAdaptiveModeEnabled),
                     accessoryType: .none
                 )
             )
@@ -139,7 +170,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.downloads.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleDownloads", comment: "")),
+                    title: .init(text: Setting.downloads.title),
                     detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
@@ -150,7 +181,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(
-                        text: NSLocalizedString("SettingsCellTitleDeleteAllContent", comment: ""),
+                        text: Setting.deleteAllContent.title,
                         appearance: .init(textColor: .errorRed, textAlignment: .left)
                     ),
                     detailType: .none,
@@ -164,7 +195,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.about.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: NSLocalizedString("SettingsCellTitleAbout", comment: "")),
+                    title: .init(text: Setting.about.title),
                     detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
@@ -177,7 +208,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(
-                        text: NSLocalizedString("SettingsCellTitleLogOut", comment: ""),
+                        text: Setting.logOut.title,
                         appearance: .init(textColor: .errorRed, textAlignment: .center)
                     ),
                     detailType: .none,
@@ -219,6 +250,8 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
     }
 }
 
+// MARK: - NewSettingsViewController: NewSettingsViewDelegate -
+
 extension NewSettingsViewController: NewSettingsViewDelegate {
     func settingsTableView(
         _ tableView: SettingsTableView,
@@ -247,9 +280,8 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
                     ],
                     selectedCell: .init(uniqueIdentifier: "360p", title: "360p")
                 ),
-                onItemSelected: { [weak self] selectedItem in
+                onItemSelected: { selectedItem in
                     print(selectedItem)
-                    self?.navigationController?.popViewController(animated: true)
                 }
             )
             selectItemController.title = "Title"
