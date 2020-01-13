@@ -2,7 +2,7 @@ import UIKit
 
 struct SelectItemViewModel {
     let sections: [Section]
-    let selectedCell: Section.Cell?
+    var selectedCell: Section.Cell?
 
     struct Section {
         let cells: [Cell]
@@ -20,7 +20,7 @@ struct SelectItemViewModel {
 final class SelectItemTableViewController: UITableViewController {
     private static let cellReuseIdentifier = "selectItemTableViewCell"
 
-    private let viewModel: SelectItemViewModel
+    private var viewModel: SelectItemViewModel
     private var onItemSelected: ((SelectItemViewModel.Section.Cell) -> Void)?
 
     init(
@@ -77,12 +77,43 @@ final class SelectItemTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if let item = self.cellViewModel(at: indexPath) {
-            self.onItemSelected?(item)
+        guard let newSelectedCellViewModel = self.cellViewModel(at: indexPath) else {
+            return
         }
+
+        if let oldSelectedCellViewModel = self.viewModel.selectedCell,
+           let oldSelectedCell = self.cell(for: oldSelectedCellViewModel) {
+            oldSelectedCell.accessoryType = .none
+        }
+
+        if let newSelectedCell = self.cell(for: newSelectedCellViewModel) {
+            newSelectedCell.accessoryType = .checkmark
+        }
+
+        self.viewModel.selectedCell = newSelectedCellViewModel
+
+        self.onItemSelected?(newSelectedCellViewModel)
     }
 
     // MARK: Private API
+
+    private func cell(for viewModel: SelectItemViewModel.Section.Cell) -> UITableViewCell? {
+        let indexPath: IndexPath? = {
+            for (sectionIndex, sectionViewModel) in self.viewModel.sections.enumerated() {
+                for (cellIndex, cellViewModel) in sectionViewModel.cells.enumerated()
+                   where cellViewModel.uniqueIdentifier == viewModel.uniqueIdentifier {
+                    return IndexPath(row: cellIndex, section: sectionIndex)
+                }
+            }
+            return nil
+        }()
+
+        if let indexPath = indexPath {
+            return self.tableView.cellForRow(at: indexPath)
+        }
+
+        return nil
+    }
 
     private func cellViewModel(at indexPath: IndexPath) -> SelectItemViewModel.Section.Cell? {
         self.viewModel.sections[safe: indexPath.section]?.cells[safe: indexPath.row]
