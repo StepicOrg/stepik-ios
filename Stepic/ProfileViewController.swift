@@ -236,8 +236,25 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
     @objc
     private func settingsButtonClicked() {
-        let assembly = NewSettingsAssembly()
-        self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
+        let assembly = NewSettingsAssembly(navigationBarAppearance: navigationBarAppearance)
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     @objc

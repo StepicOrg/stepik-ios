@@ -1,16 +1,51 @@
 import UIKit
 
+// MARK: NewSettingsViewControllerProtocol: AnyObject -
+
 protocol NewSettingsViewControllerProtocol: AnyObject {
     func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel)
 }
 
+// MARK: - Appearance -
+
+extension NewSettingsViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+}
+
+// MARK: - NewSettingsViewController: UIViewController -
+
 final class NewSettingsViewController: UIViewController {
     private let interactor: NewSettingsInteractorProtocol
 
+    let appearance: Appearance
+
     lazy var settingsView = self.view as? NewSettingsView
 
-    init(interactor: NewSettingsInteractorProtocol) {
+    private lazy var closeBarButtonItem: UIBarButtonItem = {
+        if #available(iOS 13.0, *) {
+            return UIBarButtonItem(
+                barButtonSystemItem: .close,
+                target: self,
+                action: #selector(self.closeButtonClicked)
+            )
+        } else {
+            return UIBarButtonItem(
+                image: UIImage(named: "navigation-item-button-close"),
+                style: .plain,
+                target: self,
+                action: #selector(self.closeButtonClicked)
+            )
+        }
+    }()
+
+    init(
+        interactor: NewSettingsInteractorProtocol,
+        appearance: Appearance = .init()
+    ) {
         self.interactor = interactor
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,9 +64,27 @@ final class NewSettingsViewController: UIViewController {
         super.viewDidLoad()
 
         self.title = NSLocalizedString("Settings", comment: "")
+        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
 
         self.interactor.doSettingsLoad(request: .init())
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        }
+    }
+
+    // MARK: Private API
+
+    @objc
+    private func closeButtonClicked() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: Inner Types
 
     private enum Setting: String {
         case downloadQuality
@@ -307,5 +360,13 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
         case .logOut:
             break
         }
+    }
+}
+
+// MARK: - NewSettingsViewController: StyledNavigationControllerPresentable -
+
+extension NewSettingsViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        self.appearance.navigationBarAppearance
     }
 }

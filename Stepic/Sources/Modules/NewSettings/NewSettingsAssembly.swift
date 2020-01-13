@@ -1,6 +1,12 @@
 import UIKit
 
 final class NewSettingsAssembly: Assembly {
+    private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
+
+    init(navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()) {
+        self.navigationBarAppearance = navigationBarAppearance
+    }
+
     func makeModule() -> UIViewController {
         let provider = NewSettingsProvider(
             downloadVideoQualityStorageManager: DownloadVideoQualityStorageManager(),
@@ -12,7 +18,10 @@ final class NewSettingsAssembly: Assembly {
         )
         let presenter = NewSettingsPresenter()
         let interactor = NewSettingsInteractor(presenter: presenter, provider: provider)
-        let viewController = NewSettingsViewController(interactor: interactor)
+        let viewController = NewSettingsViewController(
+            interactor: interactor,
+            appearance: .init(navigationBarAppearance: self.navigationBarAppearance)
+        )
 
         presenter.viewController = viewController
 
