@@ -13,8 +13,10 @@ extension SettingsRightDetailCellView {
         let detailSwitchOnTintColor = UIColor.mainDark
 
         let detailStackViewHeight: CGFloat = 31
-        let detailStackViewSmallTrailingOffset: CGFloat = 8
         let detailStackViewInsets = UIEdgeInsets(top: 6.5, left: 0, bottom: 6.5, right: 16)
+
+        let trailingOffsetWithoutAccessoryItem: CGFloat = 16
+        let trailingOffsetWithAccessoryItem: CGFloat = 8
     }
 }
 
@@ -54,10 +56,21 @@ final class SettingsRightDetailCellView: UIView {
         return stackView
     }()
 
-    private var titleLabelTrailingConstraint: Constraint?
+    private var titleLabelTrailingToDetailStackViewConstraint: Constraint?
+    private var titleLabelTrailingToSuperviewConstraint: Constraint?
 
     private var detailStackViewTrailingConstraint: Constraint?
     private var detailStackViewZeroWidthConstraint: Constraint?
+
+    private var currentAccessoryType: UITableViewCell.AccessoryType = .none
+    private var trailingOffset: CGFloat {
+        switch self.currentAccessoryType {
+        case .none:
+            return self.appearance.trailingOffsetWithoutAccessoryItem
+        default:
+            return self.appearance.trailingOffsetWithAccessoryItem
+        }
+    }
 
     var title: String? {
         didSet {
@@ -108,12 +121,9 @@ final class SettingsRightDetailCellView: UIView {
     }
 
     func handleAccessoryTypeUpdate(_ accessoryType: UITableViewCell.AccessoryType) {
-        switch accessoryType {
-        case .none:
-            self.detailStackViewTrailingConstraint?.update(offset: -self.appearance.detailStackViewInsets.right)
-        default:
-            self.detailStackViewTrailingConstraint?.update(offset: -self.appearance.detailStackViewSmallTrailingOffset)
-        }
+        self.currentAccessoryType = accessoryType
+        self.detailStackViewTrailingConstraint?.update(offset: -self.trailingOffset)
+        self.titleLabelTrailingToSuperviewConstraint?.update(offset: -self.trailingOffset)
     }
 
     // MARK: Private API
@@ -125,10 +135,12 @@ final class SettingsRightDetailCellView: UIView {
     private func setDetailsHidden(_ isHidden: Bool) {
         if isHidden {
             self.detailStackViewZeroWidthConstraint?.activate()
-            self.titleLabelTrailingConstraint?.update(offset: 0)
+            self.titleLabelTrailingToDetailStackViewConstraint?.deactivate()
+            self.titleLabelTrailingToSuperviewConstraint?.activate()
         } else {
             self.detailStackViewZeroWidthConstraint?.deactivate()
-            self.titleLabelTrailingConstraint?.update(offset: -self.appearance.titleInsets.right)
+            self.titleLabelTrailingToSuperviewConstraint?.deactivate()
+            self.titleLabelTrailingToDetailStackViewConstraint?.activate()
         }
         self.detailStackView.isHidden = isHidden
     }
@@ -151,6 +163,7 @@ extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol
                 .equalToSuperview()
                 .offset(self.appearance.detailStackViewInsets.right)
                 .constraint
+
             self.detailStackViewZeroWidthConstraint = make.width.equalTo(0).constraint
             self.detailStackViewZeroWidthConstraint?.deactivate()
         }
@@ -161,10 +174,13 @@ extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol
         self.titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         self.titleLabel.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview().inset(self.appearance.titleInsets)
-            self.titleLabelTrailingConstraint = make.trailing
+            self.titleLabelTrailingToDetailStackViewConstraint = make.trailing
                 .lessThanOrEqualTo(self.detailStackView.snp.leading)
                 .offset(-self.appearance.titleInsets.right)
                 .constraint
+
+            self.titleLabelTrailingToSuperviewConstraint = make.trailing.equalToSuperview().constraint
+            self.titleLabelTrailingToSuperviewConstraint?.deactivate()
         }
     }
 }
