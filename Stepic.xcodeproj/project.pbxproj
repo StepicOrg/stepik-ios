@@ -554,6 +554,7 @@
 		2C85C6A522D38A3800FDBAFE /* VotesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85C6A422D38A3800FDBAFE /* VotesNetworkService.swift */; };
 		2C87DE1E22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C87DE1D22EF1EB200EDC110 /* UnsupportedCodeLanguageView.swift */; };
 		2C8908A0216F465200083341 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C89089F216F465200083341 /* NotificationsService.swift */; };
+		2C8F3ADB23CC8533004D113A /* SelectItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
 		2C97E008215E47D8005684A1 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
@@ -1703,6 +1704,7 @@
 		2C8C17282260EA94008DC7EA /* Model_course_is_certificate_auto_issued.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_is_certificate_auto_issued.xcdatamodel; sourceTree = "<group>"; };
 		2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollmentsAPI.swift; sourceTree = "<group>"; };
 		2C8E882B21A2E70F00A27789 /* Model_course_authors_v29.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_authors_v29.xcdatamodel; sourceTree = "<group>"; };
+		2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectItemTableViewController.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
 		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TapProxyView.swift; path = Stepic/TapProxyView.swift; sourceTree = SOURCE_ROOT; };
@@ -4950,6 +4952,7 @@
 		62E98438A4F73FAEFB2D581B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */,
 				62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */,
 				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
 			);
@@ -6416,6 +6419,7 @@
 				088E58C11DE34E2F0009B9CE /* SocialSDKProvider.swift in Sources */,
 				08019A821DEED7E900691F0B /* NotificationSuggestionManager.swift in Sources */,
 				08CE16E01BFA5A80008511B7 /* DeviceInfo.swift in Sources */,
+				2C8F3ADB23CC8533004D113A /* SelectItemTableViewController.swift in Sources */,
 				2CE527C12029D8EE0047EC5F /* AdaptiveStatsSection.swift in Sources */,
 				08EDD62A1F7C6785005203E4 /* StepikButton.swift in Sources */,
 				2C06E09D22411F8A00AF4DA2 /* SettingsLargeInputTableViewCell.swift in Sources */,
