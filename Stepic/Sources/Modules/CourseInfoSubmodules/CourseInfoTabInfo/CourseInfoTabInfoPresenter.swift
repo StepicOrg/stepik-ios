@@ -11,7 +11,14 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         var viewModel: CourseInfoTabInfo.InfoLoad.ViewModel
 
         if let course = response.course {
-            viewModel = .init(state: .result(data: self.makeViewModel(course: course)))
+            viewModel = .init(
+                state: .result(
+                    data: self.makeViewModel(
+                        course: course,
+                        streamVideoQuality: response.streamVideoQuality
+                    )
+                )
+            )
         } else {
             viewModel = .init(state: .loading)
         }
@@ -19,7 +26,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         self.viewController?.displayCourseInfo(viewModel: viewModel)
     }
 
-    private func makeViewModel(course: Course) -> CourseInfoTabInfoViewModel {
+    private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
         let instructorsViewModel = course.instructors.map { user in
             CourseInfoTabInfoInstructorViewModel(
                 id: user.id,
@@ -39,7 +46,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
         return CourseInfoTabInfoViewModel(
             author: self.makeFormattedAuthorText(authors: course.authors),
-            introVideoURL: self.makeIntroVideoURL(course: course),
+            introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
             aboutText: course.summary.trimmingCharacters(in: .whitespaces),
             requirementsText: course.requirements.trimmingCharacters(in: .whitespaces),
@@ -52,10 +59,9 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         )
     }
 
-    private func makeIntroVideoURL(course: Course) -> URL? {
+    private func makeIntroVideoURL(course: Course, streamVideoQuality: StreamVideoQuality) -> URL? {
         if let introVideo = course.introVideo, !introVideo.urls.isEmpty {
-            // FIXME: VideosInfo dependency
-            return introVideo.getUrlForQuality(VideosInfo.watchingVideoQuality)
+            return introVideo.getUrlForQuality(streamVideoQuality.description)
         } else {
             return URL(string: course.introURL)
         }

@@ -26,6 +26,9 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
             bundle: nil
         )
         videoPlayerViewController.video = self.video
+        videoPlayerViewController.downloadVideoQualityStorageManager = DownloadVideoQualityStorageManager()
+        videoPlayerViewController.streamVideoQualityStorageManager = StreamVideoQualityStorageManager()
+        videoPlayerViewController.videoRateStorageManager = VideoRateStorageManager()
         videoPlayerViewController.autoplayStorageManager = AutoplayStorageManager()
         videoPlayerViewController.delegate = self.delegate
 
@@ -153,6 +156,9 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     weak var delegate: StepikVideoPlayerViewControllerDelegate?
 
+    fileprivate(set) var downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol!
+    fileprivate(set) var streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol!
+    fileprivate(set) var videoRateStorageManager: VideoRateStorageManagerProtocol!
     fileprivate(set) var autoplayStorageManager: AutoplayStorageManagerProtocol?
 
     var video: Video!
@@ -167,10 +173,13 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var isPlayerPassedReadyState = false
 
-    private var currentVideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
-        didSet {
+    private var currentVideoRate: VideoRate {
+        get {
+            self.videoRateStorageManager.videoRate
+        }
+        set {
+            self.videoRateStorageManager.videoRate = newValue
             self.adjustToCurrentVideoRate()
-            VideosInfo.videoRate = self.currentVideoRate.rawValue
         }
     }
 
@@ -507,7 +516,9 @@ final class StepikVideoPlayerViewController: UIViewController {
                     )
 
                     strongSelf.currentVideoQuality = url.quality
-                    VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: url.quality)
+                    if let quality = StreamVideoQuality(qualityString: Video.getNearestDefault(to: url.quality)) {
+                        strongSelf.streamVideoQualityStorageManager.streamVideoQuality = quality
+                    }
                     strongSelf.currentVideoQualityURL = URL(string: url.url)
                     strongSelf.scheduleHidePlayerControlsTimer()
                 })
@@ -563,15 +574,17 @@ final class StepikVideoPlayerViewController: UIViewController {
                 fileManager: FileManager.default
             ).getVideoStoredFile(videoID: video.id).require().localURL
         } else {
-            return self.video.getUrlForQuality(VideosInfo.watchingVideoQuality)
+            return self.video.getUrlForQuality(self.streamVideoQualityStorageManager.streamVideoQuality.description)
         }
     }
 
     private func getInitialVideoQuality() -> String {
         if self.video.state == .cached {
-            return self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality
+            return self.video.cachedQuality ?? self.downloadVideoQualityStorageManager.downloadVideoQuality.description
         } else {
-            return self.video.getNearestQualityToDefault(VideosInfo.watchingVideoQuality)
+            return self.video.getNearestQualityToDefault(
+                self.streamVideoQualityStorageManager.streamVideoQuality.description
+            )
         }
     }
 

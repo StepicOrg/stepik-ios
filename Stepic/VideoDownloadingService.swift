@@ -41,13 +41,15 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         downloader: Downloader(
             session: .background(id: VideoDownloadingService.sharedDownloaderSessionID)
         ),
-        fileManager: VideoStoredFileManager(fileManager: FileManager.default)
+        fileManager: VideoStoredFileManager(fileManager: FileManager.default),
+        downloadVideoQualityStorageManager: DownloadVideoQualityStorageManager()
     )
 
     private static let sharedDownloaderSessionID = "video.main"
 
     private let downloader: RestorableBackgroundDownloaderProtocol
     private let fileManager: VideoStoredFileManagerProtocol
+    private let downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol
 
     private var handlers: [VideoDownloadingServiceEventHandler] = []
     private var observedTasks: [DownloaderTaskProtocol.IDType: DownloaderTaskProtocol] = [:]
@@ -59,10 +61,12 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
 
     init(
         downloader: RestorableBackgroundDownloaderProtocol,
-        fileManager: VideoStoredFileManagerProtocol
+        fileManager: VideoStoredFileManagerProtocol,
+        downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol
     ) {
         self.downloader = downloader
         self.fileManager = fileManager
+        self.downloadVideoQualityStorageManager = downloadVideoQualityStorageManager
 
         // FIXME: handle background downloads
         self.downloader.restoredTasks.forEach { task in
@@ -83,7 +87,8 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
             throw Error.alreadyDownloading
         }
 
-        let nearestQuality = video.getNearestQualityToDefault(VideosInfo.downloadingVideoQuality)
+        let globalDownloadVideoQuality = self.downloadVideoQualityStorageManager.downloadVideoQuality
+        let nearestQuality = video.getNearestQualityToDefault(globalDownloadVideoQuality.description)
         let url = video.getUrlForQuality(nearestQuality)
         let task = DownloaderTask(url: url)
 
