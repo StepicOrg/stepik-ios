@@ -71,6 +71,7 @@ class StyledNavigationController: UINavigationController {
     private var lastAction = UINavigationController.Operation.none
 
     private var navigationBarAppearanceForController: [Int: NavigationBarAppearanceState] = [:]
+    private var defaultNavigationBarAppearance = NavigationBarAppearanceState()
 
     // swiftlint:disable:next weak_delegate
     private var multicastDelegate = MulticastDelegate<UINavigationControllerDelegate>()
@@ -140,6 +141,14 @@ class StyledNavigationController: UINavigationController {
             self.changeTintColor(appearance.tintColor, sender: sender)
             self.changeStatusBarStyle(appearance.statusBarStyle, sender: sender)
         }
+    }
+
+    /// Sets default navigation bar appearance for the view controllers that will be pushed onto the navigation stack.
+    /// - Parameter appearance: The navigation bar appearance that will be used as a default one for view controllers.
+    /// If view controller conforms to `StyledNavigationControllerPresentable` protocol than `navigationBarAppearanceOnFirstPresentation`
+    /// will be used.
+    func setDefaultNavigationBarAppearance(_ appearance: NavigationBarAppearanceState) {
+        self.defaultNavigationBarAppearance = appearance
     }
 
     /// Remove title for "Back" button on top controller
@@ -318,7 +327,7 @@ class StyledNavigationController: UINavigationController {
             if let presentableViewController = viewController as? StyledNavigationControllerPresentable {
                 defaultAppearance = presentableViewController.navigationBarAppearanceOnFirstPresentation
             } else {
-                defaultAppearance = NavigationBarAppearanceState()
+                defaultAppearance = self.defaultNavigationBarAppearance
             }
             return self.navigationBarAppearanceForController[viewController.hashValue] ?? defaultAppearance
         }()
