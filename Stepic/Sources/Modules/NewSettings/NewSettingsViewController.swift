@@ -22,6 +22,7 @@ final class NewSettingsViewController: UIViewController {
     let appearance: Appearance
 
     lazy var settingsView = self.view as? NewSettingsView
+    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     private lazy var closeBarButtonItem: UIBarButtonItem = {
         if #available(iOS 13.0, *) {
@@ -65,6 +66,7 @@ final class NewSettingsViewController: UIViewController {
 
         self.title = NSLocalizedString("Settings", comment: "")
         self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         self.interactor.doSettingsLoad(request: .init())
     }
@@ -72,9 +74,8 @@ final class NewSettingsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
-        }
+        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        self.styledNavigationController?.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
     }
 
     // MARK: Private API
