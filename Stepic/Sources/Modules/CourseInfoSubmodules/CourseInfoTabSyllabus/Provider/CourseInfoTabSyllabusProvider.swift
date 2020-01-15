@@ -133,7 +133,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
 
     private func fetchUnitsWithLessonsFromNetwork(unitsIDs: [Unit.IdType]) -> Promise<[Unit]> {
         func splitOnChunks<T>(array: [T], size: Int) -> [[T]] {
-            return stride(from: 0, to: array.count, by: size).map {
+            stride(from: 0, to: array.count, by: size).map {
                 Array(array[$0..<min($0 + size, array.count)])
             }
         }

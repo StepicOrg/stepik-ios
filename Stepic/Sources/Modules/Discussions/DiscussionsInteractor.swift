@@ -532,7 +532,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         let discussionsWindow = self.getLoadedDiscussionsWindow()
 
         switch direction {
-        case .top?:
+        case .top:
             if case .scrollTo = self.presentationContext {
                 let endIndex = discussionsWindow.startIndex
                 let offset = min(
@@ -545,7 +545,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             } else {
                 assertionFailure("Invalid state")
             }
-        case .bottom?:
+        case .bottom:
             let startIndex = discussionsWindow.endIndex == 0 ? 0 : discussionsWindow.endIndex + 1
             let offset = min(
                 self.getDiscussionsLeftToLoadInRightHalfCount(discussionsWindow: discussionsWindow),
@@ -735,6 +735,7 @@ extension DiscussionsInteractor: WriteCommentOutputProtocol {
 
 // MARK: - DiscussionsInteractor (UserDefaults) -
 
+// TODO: Move to service.
 extension DiscussionsInteractor {
     private static let discussionsSortTypeKey = "discussionsSortTypeKey"
 

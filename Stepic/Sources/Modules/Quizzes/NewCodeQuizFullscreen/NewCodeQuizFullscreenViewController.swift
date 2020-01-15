@@ -17,7 +17,7 @@ extension NewCodeQuizFullscreenViewController {
         static let spacingBetweenPages: CGFloat = 16.0
 
         static var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState {
-            return .init(shadowViewAlpha: 0.0)
+            .init(shadowViewAlpha: 0.0)
         }
     }
 }
