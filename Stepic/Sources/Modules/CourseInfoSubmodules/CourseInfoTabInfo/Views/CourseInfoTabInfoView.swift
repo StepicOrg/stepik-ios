@@ -12,10 +12,12 @@ protocol CourseInfoTabInfoViewDelegate: AnyObject {
 extension CourseInfoTabInfoView {
     struct Appearance {
         let stackViewSpacing: CGFloat = 0
+        let stackViewInsets = LayoutInsets(top: 20)
 
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
-        let authorTitleLabelInsets = UIEdgeInsets(top: 20, left: 47, bottom: 20, right: 47)
+        let authorTitleLabelInsets = UIEdgeInsets(top: 0, left: 47, bottom: 20, right: 47)
+        let authorTitleLabelNumberOfLines = 0
         let authorIconLeadingSpace: CGFloat = 20
 
         let loadingIndicatorTopInset: CGFloat = 20
@@ -29,7 +31,7 @@ final class CourseInfoTabInfoView: UIView {
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(frame: .zero, orientation: .vertical)
-        stackView.showsVerticalScrollIndicator = false
+        stackView.showsVerticalScrollIndicator = true
         stackView.showsHorizontalScrollIndicator = false
         stackView.spacing = self.appearance.stackViewSpacing
         return stackView
@@ -91,9 +93,7 @@ final class CourseInfoTabInfoView: UIView {
         self.addTextBlockView(block: .timeToComplete, message: viewModel.timeToCompleteText)
         self.addTextBlockView(block: .language, message: viewModel.languageText)
 
-        if let certificateText = viewModel.certificateText {
-            self.addTextBlockView(block: .certificate, message: certificateText)
-        }
+        self.addTextBlockView(block: .certificate, message: viewModel.certificateText)
 
         if let certificateDetailsText = viewModel.certificateDetailsText {
             self.addTextBlockView(block: .certificateDetails, message: certificateDetailsText)
@@ -115,7 +115,8 @@ final class CourseInfoTabInfoView: UIView {
             appearance: .init(
                 imageViewLeadingSpace: self.appearance.authorIconLeadingSpace,
                 titleLabelFont: self.appearance.authorTitleLabelFont,
-                titleLabelInsets: self.appearance.authorTitleLabelInsets
+                titleLabelInsets: self.appearance.authorTitleLabelInsets,
+                titleLabelNumberOfLines: self.appearance.authorTitleLabelNumberOfLines
             )
         )
 
@@ -181,7 +182,8 @@ extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
     func makeConstraints() {
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(self.appearance.stackViewInsets.top).priority(999)
+            make.leading.trailing.bottom.equalToSuperview()
         }
 
         self.loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -211,6 +213,11 @@ extension CourseInfoTabInfoView: CourseInfoScrollablePageViewProtocol {
         set {
             self.loadingIndicator.snp.updateConstraints { make in
                 make.top.equalToSuperview().offset(newValue.top + self.appearance.loadingIndicatorTopInset)
+            }
+
+            // Fixes an issue with incorrect content offset on presentation when initial tab is `CourseInfo.Tab.info`.
+            if newValue.top > 0 && self.contentOffset.y == 0 {
+                self.contentOffset = CGPoint(x: self.contentOffset.x, y: -newValue.top)
             }
 
             self.scrollableStackView.contentInsets = newValue

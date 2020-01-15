@@ -15,57 +15,6 @@ import SwiftyJSON
 final class Course: NSManagedObject, IDFetchable {
     typealias IdType = Int
 
-    required convenience init(json: JSON) {
-        self.init()
-        initialize(json)
-    }
-
-    func initialize(_ json: JSON) {
-        id = json["id"].intValue
-        title = json["title"].stringValue
-        courseDescription = json["description"].stringValue
-        coverURLString = "\(StepicApplicationsInfo.stepicURL)" + json["cover"].stringValue
-
-        beginDate = Parser.shared.dateFromTimedateJSON(json["begin_date_source"])
-        endDate = Parser.shared.dateFromTimedateJSON(json["last_deadline"])
-
-        enrolled = json["enrollment"].int != nil
-        featured = json["is_featured"].boolValue
-        isPublic = json["is_public"].boolValue
-        readiness = json["readiness"].float
-
-        summary = json["summary"].stringValue
-        workload = json["workload"].stringValue
-        introURL = json["intro"].stringValue
-        format = json["course_format"].stringValue
-        audience = json["target_audience"].stringValue
-        certificate = json["certificate"].stringValue
-        certificateRegularThreshold = json["certificate_regular_threshold"].int
-        certificateDistinctionThreshold = json["certificate_distinction_threshold"].int
-        requirements = json["requirements"].stringValue
-        slug = json["slug"].string
-        progressId = json["progress"].string
-        lastStepId = json["last_step"].string
-        scheduleType = json["schedule_type"].string
-        learnersCount = json["learners_count"].int
-        totalUnits = json["total_units"].intValue
-        reviewSummaryId = json["review_summary"].int
-        sectionsArray = json["sections"].arrayObject as! [Int]
-        instructorsArray = json["instructors"].arrayObject as! [Int]
-        authorsArray = json["authors"].arrayObject as? [Int] ?? []
-        timeToComplete = json["time_to_complete"].int
-        languageCode = json["language"].stringValue
-        isCertificatesAutoIssued = json["is_certificate_auto_issued"].boolValue
-        isPaid = json["is_paid"].boolValue
-        displayPrice = json["display_price"].string
-
-        if let _ = json["intro_video"].null {
-            introVideo = nil
-        } else {
-            introVideo = Video(json: json["intro_video"])
-        }
-    }
-
     var sectionDeadlines: [SectionDeadline]? {
         (PersonalDeadlineLocalStorageManager().getRecord(for: self)?.data as? DeadlineStorageData)?.deadlines
     }
@@ -120,10 +69,74 @@ final class Course: NSManagedObject, IDFetchable {
             && self.scheduleType != "upcoming"
     }
 
-    func update(json: JSON) {
-        initialize(json)
+    var hasAnyCertificateTreshold: Bool {
+        (self.certificateRegularThreshold != nil) || (self.certificateDistinctionThreshold != nil)
     }
 
+    var hasCertificate: Bool {
+        let hasText = !self.certificate.isEmpty
+        let isIssued = self.isCertificatesAutoIssued && self.isCertificateIssued
+        return self.hasAnyCertificateTreshold && (hasText || isIssued)
+    }
+
+    required convenience init(json: JSON) {
+        self.init()
+        self.initialize(json)
+    }
+    
+    func initialize(_ json: JSON) {
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.title = json[JSONKey.title.rawValue].stringValue
+        self.courseDescription = json[JSONKey.description.rawValue].stringValue
+        self.coverURLString = "\(StepicApplicationsInfo.stepicURL)" + json[JSONKey.cover.rawValue].stringValue
+
+        self.beginDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.beginDateSource.rawValue])
+        self.endDate = Parser.shared.dateFromTimedateJSON(json[JSONKey.lastDeadline.rawValue])
+
+        self.enrolled = json[JSONKey.enrollment.rawValue].int != nil
+        self.featured = json[JSONKey.isFeatured.rawValue].boolValue
+        self.isPublic = json[JSONKey.isPublic.rawValue].boolValue
+        self.readiness = json[JSONKey.readiness.rawValue].float
+
+        self.summary = json[JSONKey.summary.rawValue].stringValue
+        self.workload = json[JSONKey.workload.rawValue].stringValue
+        self.introURL = json[JSONKey.intro.rawValue].stringValue
+        self.format = json[JSONKey.courseFormat.rawValue].stringValue
+        self.audience = json[JSONKey.targetAudience.rawValue].stringValue
+        self.requirements = json[JSONKey.requirements.rawValue].stringValue
+        self.slug = json[JSONKey.slug.rawValue].string
+        self.progressId = json[JSONKey.progress.rawValue].string
+        self.lastStepId = json[JSONKey.lastStep.rawValue].string
+        self.scheduleType = json[JSONKey.scheduleType.rawValue].string
+        self.learnersCount = json[JSONKey.learnersCount.rawValue].int
+        self.totalUnits = json[JSONKey.totalUnits.rawValue].intValue
+        self.reviewSummaryId = json[JSONKey.reviewSummary.rawValue].int
+        self.sectionsArray = json[JSONKey.sections.rawValue].arrayObject as! [Int]
+        self.instructorsArray = json[JSONKey.instructors.rawValue].arrayObject as! [Int]
+        self.authorsArray = json[JSONKey.authors.rawValue].arrayObject as? [Int] ?? []
+        self.timeToComplete = json[JSONKey.timeToComplete.rawValue].int
+        self.languageCode = json[JSONKey.language.rawValue].stringValue
+        self.isPaid = json[JSONKey.isPaid.rawValue].boolValue
+        self.displayPrice = json[JSONKey.displayPrice.rawValue].string
+
+        self.certificate = json[JSONKey.certificate.rawValue].stringValue
+        self.certificateRegularThreshold = json[JSONKey.certificateRegularThreshold.rawValue].int
+        self.certificateDistinctionThreshold = json[JSONKey.certificateDistinctionThreshold.rawValue].int
+        self.isCertificatesAutoIssued = json[JSONKey.isCertificateAutoIssued.rawValue].boolValue
+        self.isCertificateIssued = json[JSONKey.isCertificateIssued.rawValue].boolValue
+
+        if let _ = json[JSONKey.introVideo.rawValue].null {
+            self.introVideo = nil
+        } else {
+            self.introVideo = Video(json: json[JSONKey.introVideo.rawValue])
+        }
+    }
+
+    func update(json: JSON) {
+        self.initialize(json)
+    }
+
+    @available(*, deprecated, message: "Legacy")
     func loadAllInstructors(success: @escaping (() -> Void)) {
         _ = ApiDataDownloader.users.retrieve(
             ids: self.instructorsArray,
@@ -140,6 +153,7 @@ final class Course: NSManagedObject, IDFetchable {
         )
     }
 
+    @available(*, deprecated, message: "Legacy")
     func loadAllSections(
         success: @escaping (() -> Void),
         error errorHandler : @escaping (() -> Void),
@@ -201,7 +215,12 @@ final class Course: NSManagedObject, IDFetchable {
         }
     }
 
-    func loadProgressesForSections(sections: [Section], success completion: @escaping (() -> Void), error errorHandler : @escaping (() -> Void)) {
+    @available(*, deprecated, message: "Legacy")
+    func loadProgressesForSections(
+        sections: [Section],
+        success completion: @escaping (() -> Void),
+        error errorHandler : @escaping (() -> Void)
+    ) {
         var progressIds: [String] = []
         var progresses: [Progress] = []
         for section in sections {
@@ -372,5 +391,46 @@ final class Course: NSManagedObject, IDFetchable {
             let nextId = sectionsArray[currentIndex!.advanced(by: 1)]
             return sections.filter({ $0.id == nextId }).first
         }
+    }
+
+    // MARK: Inner Types
+
+    enum JSONKey: String {
+        case id
+        case title
+        case description
+        case cover
+        case beginDateSource = "begin_date_source"
+        case lastDeadline = "last_deadline"
+        case enrollment
+        case isFeatured = "is_featured"
+        case isPublic = "is_public"
+        case readiness
+        case summary
+        case workload
+        case intro
+        case courseFormat = "course_format"
+        case targetAudience = "target_audience"
+        case certificate
+        case certificateRegularThreshold = "certificate_regular_threshold"
+        case certificateDistinctionThreshold = "certificate_distinction_threshold"
+        case isCertificateAutoIssued = "is_certificate_auto_issued"
+        case isCertificateIssued = "is_certificate_issued"
+        case requirements
+        case slug
+        case progress
+        case lastStep = "last_step"
+        case scheduleType = "schedule_type"
+        case learnersCount = "learners_count"
+        case totalUnits = "total_units"
+        case reviewSummary = "review_summary"
+        case sections
+        case instructors
+        case authors
+        case timeToComplete = "time_to_complete"
+        case language
+        case isPaid = "is_paid"
+        case displayPrice = "display_price"
+        case introVideo = "intro_video"
     }
 }

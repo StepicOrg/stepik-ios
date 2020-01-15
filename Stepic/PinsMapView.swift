@@ -49,7 +49,9 @@ final class PinsMapView: UIView {
     private var howManyMonthsShouldBeDisplayed: Int {
         switch DeviceInfo.current.diagonal {
         case let x where x > 5.8:
-            return DeviceInfo.current.orientation.interface.isPortrait ? 6 : 12
+            return DeviceInfo.current.isPad
+                ? DeviceInfo.current.orientation.interface.isPortrait ? 6 : 12
+                : DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6
         case let x where x > 4.7 && x < 5.8:
             // Only Plus-iPhones
             return DeviceInfo.current.orientation.interface.isPortrait ? 4 : 6

@@ -37,6 +37,9 @@ final class NewStepView: UIView {
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let view = ScrollableStackView(orientation: .vertical)
+        if #available(iOS 13.0, *) {
+            view.automaticallyAdjustsScrollIndicatorInsets = false
+        }
         return view
     }()
 

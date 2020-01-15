@@ -21,6 +21,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
         }
     }
     private var isOnline = false
+    private var didLoadFromCache = false
     private var paginationState = PaginationState(page: 1, hasNext: true)
     private var shouldOpenedAnalyticsEventSend = false
 
@@ -58,6 +59,11 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
                 DispatchQueue.main.async {
                     print("course info tab reviews interactor: finish fetching reviews, isOnline = \(isOnline)")
                     strongSelf.presenter.presentCourseReviews(response: response)
+                }
+
+                if !strongSelf.didLoadFromCache {
+                    strongSelf.didLoadFromCache = true
+                    strongSelf.doCourseReviewsFetch(request: .init())
                 }
             }.catch { _ in
                 // TODO: handle
@@ -168,7 +174,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     ) -> Promise<CourseInfoTabReviews.ReviewsLoad.Response> {
         Promise { seal in
             firstly {
-                isOnline
+                isOnline && self.didLoadFromCache
                     ? self.provider.fetchRemote(course: course, page: 1)
                     : self.provider.fetchCached(course: course)
             }.then { reviews, meta in
@@ -200,7 +206,7 @@ final class CourseInfoTabReviewsInteractor: CourseInfoTabReviewsInteractorProtoc
     ) -> Guarantee<CourseReview?> {
         Guarantee { seal in
             firstly {
-                isOnline
+                isOnline && self.didLoadFromCache
                     ? self.provider.fetchCurrentUserReviewRemote(course: course)
                     : self.provider.fetchCurrentUserReviewCached(course: course)
             }.done { review in

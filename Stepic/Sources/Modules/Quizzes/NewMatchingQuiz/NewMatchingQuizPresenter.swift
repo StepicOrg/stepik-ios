@@ -40,8 +40,6 @@ final class NewMatchingQuizPresenter: NewMatchingQuizPresenterProtocol {
     }
 
     private func processText(_ text: String) -> String {
-        let text = text.addingHTMLEntities()
-
         let processor = ContentProcessor(
             content: text,
             rules: [
