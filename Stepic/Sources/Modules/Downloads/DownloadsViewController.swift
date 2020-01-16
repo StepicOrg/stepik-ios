@@ -40,9 +40,7 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = NSLocalizedString("DownloadsTitle", comment: "")
-        self.registerPlaceholders()
+        self.setup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,16 +59,9 @@ final class DownloadsViewController: UIViewController, ControllerWithStepikPlace
         self.downloadsView?.setEditing(editing, animated: animated)
     }
 
-    // MARK: - Private API
-
-    private func registerPlaceholders() {
-        self.registerPlaceholder(
-            placeholder: StepikPlaceholder(
-                .emptyDownloads,
-                action: { TabBarRouter(tab: .catalog).route() }
-            ),
-            for: .empty
-        )
+    private func setup() {
+        self.title = NSLocalizedString("DownloadsTitle", comment: "")
+        self.registerPlaceholder(placeholder: StepikPlaceholder(.emptyDownloads), for: .empty)
     }
 }
 
