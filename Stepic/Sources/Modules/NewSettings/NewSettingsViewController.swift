@@ -5,11 +5,10 @@ import UIKit
 
 protocol NewSettingsViewControllerProtocol: AnyObject {
     func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel)
-    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualityPresentation.ViewModel)
-    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualityPresentation.ViewModel)
-    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguagePresentation.ViewModel)
-    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizePresentation.ViewModel)
-
+    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualitySettingPresentation.ViewModel)
+    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualitySettingPresentation.ViewModel)
+    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguageSettingPresentation.ViewModel)
+    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizeSettingPresentation.ViewModel)
     func displayDeleteAllContentResult(viewModel: NewSettings.DeleteAllContent.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: NewSettings.BlockingWaitingIndicatorUpdate.ViewModel)
 }
@@ -71,26 +70,31 @@ final class NewSettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = NSLocalizedString("Settings", comment: "")
-        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.setupNavigationItem()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         self.interactor.doSettingsLoad(request: .init())
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
-        self.styledNavigationController?.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
+        self.updateNavigationBarAppearance()
     }
 
     // MARK: Private API
+
+    private func setupNavigationItem() {
+        self.title = NSLocalizedString("SettingsTitle", comment: "")
+        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+
+    private func updateNavigationBarAppearance() {
+        self.styledNavigationController?.setNeedsNavigationBarAppearanceUpdate(sender: self)
+        self.styledNavigationController?.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
+    }
 
     @objc
     private func closeButtonClicked() {
@@ -153,44 +157,44 @@ final class NewSettingsViewController: UIViewController {
 
 extension NewSettingsViewController: NewSettingsViewControllerProtocol {
     func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel) {
-        self.displayNewSettingsViewModel(viewModel.viewModel)
+        self.updateSettingsViewModel(viewModel.viewModel)
     }
 
-    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualityPresentation.ViewModel) {
-        self.displaySelectSetting(
+    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualitySettingPresentation.ViewModel) {
+        self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsDownloadVideoQualityTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsDownloadVideoQualityFooterTitle", comment: ""),
             onSettingSelected: { [weak self] selectedSetting in
-                self?.interactor.doDownloadVideoQualityUpdate(request: .init(setting: selectedSetting))
+                self?.interactor.doDownloadVideoQualitySettingUpdate(request: .init(setting: selectedSetting))
             }
         )
     }
 
-    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualityPresentation.ViewModel) {
-        self.displaySelectSetting(
+    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualitySettingPresentation.ViewModel) {
+        self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsStreamVideoQualityTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsStreamVideoQualityFooterTitle", comment: ""),
             onSettingSelected: { [weak self] selectedSetting in
-                self?.interactor.doStreamVideoQualityUpdate(request: .init(setting: selectedSetting))
+                self?.interactor.doStreamVideoQualitySettingUpdate(request: .init(setting: selectedSetting))
             }
         )
     }
 
-    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguagePresentation.ViewModel) {
-        self.displaySelectSetting(
+    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguageSettingPresentation.ViewModel) {
+        self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsContentLanguageTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsContentLanguageFooterTitle", comment: ""),
             onSettingSelected: { [weak self] selectedSetting in
-                self?.interactor.doContentLanguageUpdate(request: .init(setting: selectedSetting))
+                self?.interactor.doContentLanguageSettingUpdate(request: .init(setting: selectedSetting))
             }
         )
     }
 
-    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizePresentation.ViewModel) {
-        self.displaySelectSetting(
+    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizeSettingPresentation.ViewModel) {
+        self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsStepFontSizeTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsStepFontSizeFooterTitle", comment: ""),
@@ -218,14 +222,14 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
 
     // MARK: Private Helpers
 
-    private func displaySelectSetting(
+    private func displaySelectSettingModule(
         settingDescription: NewSettings.SettingDescription,
         title: String? = nil,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         onSettingSelected: ((NewSettings.SettingDescription.Setting) -> Void)? = nil
     ) {
-        let selectedCell: SelectItemViewModel.Section.Cell? = {
+        let selectedCellViewModel: SelectItemViewModel.Section.Cell? = {
             if let currentSetting = settingDescription.currentSetting {
                 return .init(uniqueIdentifier: currentSetting.uniqueIdentifier, title: currentSetting.title)
             }
@@ -244,7 +248,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                         footerTitle: footerTitle
                     )
                 ],
-                selectedCell: selectedCell
+                selectedCell: selectedCellViewModel
             ),
             onItemSelected: { selectedCellViewModel in
                 let selectedSetting = NewSettings.SettingDescription.Setting(
@@ -260,9 +264,9 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         self.push(module: controller)
     }
 
-    private func displayNewSettingsViewModel(_ settingsViewModel: NewSettingsViewModel) {
+    private func updateSettingsViewModel(_ settingsViewModel: NewSettingsViewModel) {
         // Video
-        let downloadQuality = SettingsTableSectionViewModel.Cell(
+        let videoDownloadQualityCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.downloadQuality.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -272,7 +276,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                 )
             )
         )
-        let streamQuality = SettingsTableSectionViewModel.Cell(
+        let videoStreamQualityCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.streamQuality.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -284,7 +288,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
 
         // Language
-        let contentLanguage = SettingsTableSectionViewModel.Cell(
+        let contentLanguageCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.contentLanguage.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -296,7 +300,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
 
         // Learning
-        let textSize = SettingsTableSectionViewModel.Cell(
+        let stepTextSizeCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.textSize.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -306,7 +310,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                 )
             )
         )
-        let codeEditor = SettingsTableSectionViewModel.Cell(
+        let codeEditorSettingsCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.codeEditor.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -315,7 +319,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                 )
             )
         )
-        let autoplayNextVideo = SettingsTableSectionViewModel.Cell(
+        let autoplayNextVideoCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.autoplayNextVideo.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -325,7 +329,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                 )
             )
         )
-        let adaptiveMode = SettingsTableSectionViewModel.Cell(
+        let adaptiveModeCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.adaptiveMode.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -337,7 +341,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
 
         // Downloaded Content
-        let downloads = SettingsTableSectionViewModel.Cell(
+        let downloadsCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.downloads.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -346,7 +350,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                 )
             )
         )
-        let deleteAllContent = SettingsTableSectionViewModel.Cell(
+        let deleteAllContentCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.deleteAllContent.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -360,7 +364,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
 
         // Other
-        let about = SettingsTableSectionViewModel.Cell(
+        let aboutCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.about.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -371,7 +375,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
 
         // Log Out
-        let logOut = SettingsTableSectionViewModel.Cell(
+        let logOutCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.logOut.rawValue,
             type: .rightDetail(
                 options: .init(
@@ -384,36 +388,41 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             )
         )
 
-        let sections: [SettingsTableSectionViewModel] = [
+        let sectionsViewModels: [SettingsTableSectionViewModel] = [
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleVideo", comment: "")),
-                cells: [downloadQuality, streamQuality],
+                cells: [videoDownloadQualityCellViewModel, videoStreamQualityCellViewModel],
                 footer: nil
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleLanguage", comment: "")),
-                cells: [contentLanguage],
+                cells: [contentLanguageCellViewModel],
                 footer: nil
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleLearning", comment: "")),
-                cells: [textSize, codeEditor, autoplayNextVideo, adaptiveMode],
+                cells: [
+                    stepTextSizeCellViewModel,
+                    codeEditorSettingsCellViewModel,
+                    autoplayNextVideoCellViewModel,
+                    adaptiveModeCellViewModel
+                ],
                 footer: nil
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleDownloadedContent", comment: "")),
-                cells: [downloads, deleteAllContent],
+                cells: [downloadsCellViewModel, deleteAllContentCellViewModel],
                 footer: nil
             ),
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleOther", comment: "")),
-                cells: [about],
+                cells: [aboutCellViewModel],
                 footer: nil
             ),
-            .init(header: nil, cells: [logOut], footer: nil)
+            .init(header: nil, cells: [logOutCellViewModel], footer: nil)
         ]
 
-        self.settingsView?.configure(viewModel: SettingsTableViewModel(sections: sections))
+        self.settingsView?.configure(viewModel: SettingsTableViewModel(sections: sectionsViewModels))
     }
 }
 
@@ -432,13 +441,13 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
 
         switch selectedSetting {
         case .downloadQuality:
-            self.interactor.doDownloadVideoQualityPresentation(request: .init())
+            self.interactor.doDownloadVideoQualitySettingPresentation(request: .init())
         case .streamQuality:
-            self.interactor.doStreamVideoQualityPresentation(request: .init())
+            self.interactor.doStreamVideoQualitySettingPresentation(request: .init())
         case .contentLanguage:
-            self.interactor.doContentLanguagePresentation(request: .init())
+            self.interactor.doContentLanguageSettingPresentation(request: .init())
         case .textSize:
-            self.interactor.doStepFontSizePresentation(request: .init())
+            self.interactor.doStepFontSizeSettingPresentation(request: .init())
         case .codeEditor:
             self.push(module: CodeEditorSettingsLegacyAssembly().makeModule())
         case .downloads:

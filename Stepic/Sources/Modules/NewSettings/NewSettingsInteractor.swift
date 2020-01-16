@@ -4,22 +4,22 @@ import PromiseKit
 protocol NewSettingsInteractorProtocol {
     func doSettingsLoad(request: NewSettings.SettingsLoad.Request)
     // DownloadVideoQuality
-    func doDownloadVideoQualityPresentation(request: NewSettings.DownloadVideoQualityPresentation.Request)
-    func doDownloadVideoQualityUpdate(request: NewSettings.DownloadVideoQualityUpdate.Request)
+    func doDownloadVideoQualitySettingPresentation(request: NewSettings.DownloadVideoQualitySettingPresentation.Request)
+    func doDownloadVideoQualitySettingUpdate(request: NewSettings.DownloadVideoQualitySettingUpdate.Request)
     // StreamVideoQuality
-    func doStreamVideoQualityPresentation(request: NewSettings.StreamVideoQualityPresentation.Request)
-    func doStreamVideoQualityUpdate(request: NewSettings.StreamVideoQualityUpdate.Request)
+    func doStreamVideoQualitySettingPresentation(request: NewSettings.StreamVideoQualitySettingPresentation.Request)
+    func doStreamVideoQualitySettingUpdate(request: NewSettings.StreamVideoQualitySettingUpdate.Request)
     // ContentLanguage
-    func doContentLanguagePresentation(request: NewSettings.ContentLanguagePresentation.Request)
-    func doContentLanguageUpdate(request: NewSettings.ContentLanguageUpdate.Request)
+    func doContentLanguageSettingPresentation(request: NewSettings.ContentLanguageSettingPresentation.Request)
+    func doContentLanguageSettingUpdate(request: NewSettings.ContentLanguageSettingUpdate.Request)
     // StepFontSize
-    func doStepFontSizePresentation(request: NewSettings.StepFontSizePresentation.Request)
-    func doStepFontSizeUpdate(request: NewSettings.StepFontSizeUpdate.Request)
+    func doStepFontSizeSettingPresentation(request: NewSettings.StepFontSizeSettingPresentation.Request)
+    func doStepFontSizeUpdate(request: NewSettings.StepFontSizeSettingUpdate.Request)
 
     func doAutoplayNextVideoSettingUpdate(request: NewSettings.AutoplayNextVideoSettingUpdate.Request)
     func doAdaptiveModeSettingUpdate(request: NewSettings.AdaptiveModeSettingUpdate.Request)
     func doDeleteAllContent(request: NewSettings.DeleteAllContent.Request)
-    func doLogOutOfAccount(request: NewSettings.LogOut.Request)
+    func doLogOutOfAccount(request: NewSettings.AccountLogOut.Request)
 }
 
 final class NewSettingsInteractor: NewSettingsInteractorProtocol {
@@ -55,7 +55,9 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         self.presenter.presentSettings(response: .init(data: self.settingsData))
     }
 
-    func doDownloadVideoQualityPresentation(request: NewSettings.DownloadVideoQualityPresentation.Request) {
+    func doDownloadVideoQualitySettingPresentation(
+        request: NewSettings.DownloadVideoQualitySettingPresentation.Request
+    ) {
         self.presenter.presentDownloadVideoQualitySetting(
             response: .init(
                 availableDownloadVideoQualities: self.provider.availableDownloadVideoQualities,
@@ -64,13 +66,13 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         )
     }
 
-    func doDownloadVideoQualityUpdate(request: NewSettings.DownloadVideoQualityUpdate.Request) {
+    func doDownloadVideoQualitySettingUpdate(request: NewSettings.DownloadVideoQualitySettingUpdate.Request) {
         if let newDownloadVideoQuality = DownloadVideoQuality(qualityString: request.setting.uniqueIdentifier) {
             self.provider.globalDownloadVideoQuality = newDownloadVideoQuality
         }
     }
 
-    func doStreamVideoQualityPresentation(request: NewSettings.StreamVideoQualityPresentation.Request) {
+    func doStreamVideoQualitySettingPresentation(request: NewSettings.StreamVideoQualitySettingPresentation.Request) {
         self.presenter.presentStreamVideoQualitySetting(
             response: .init(
                 availableStreamVideoQualities: self.provider.availableStreamVideoQualities,
@@ -79,13 +81,13 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         )
     }
 
-    func doStreamVideoQualityUpdate(request: NewSettings.StreamVideoQualityUpdate.Request) {
+    func doStreamVideoQualitySettingUpdate(request: NewSettings.StreamVideoQualitySettingUpdate.Request) {
         if let newStreamVideoQuality = StreamVideoQuality(qualityString: request.setting.uniqueIdentifier) {
             self.provider.globalStreamVideoQuality = newStreamVideoQuality
         }
     }
 
-    func doContentLanguagePresentation(request: NewSettings.ContentLanguagePresentation.Request) {
+    func doContentLanguageSettingPresentation(request: NewSettings.ContentLanguageSettingPresentation.Request) {
         self.presenter.presentContentLanguageSetting(
             response: .init(
                 availableContentLanguages: self.provider.availableContentLanguages,
@@ -94,11 +96,11 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         )
     }
 
-    func doContentLanguageUpdate(request: NewSettings.ContentLanguageUpdate.Request) {
+    func doContentLanguageSettingUpdate(request: NewSettings.ContentLanguageSettingUpdate.Request) {
         self.provider.globalContentLanguage = ContentLanguage(languageString: request.setting.uniqueIdentifier)
     }
 
-    func doStepFontSizePresentation(request: NewSettings.StepFontSizePresentation.Request) {
+    func doStepFontSizeSettingPresentation(request: NewSettings.StepFontSizeSettingPresentation.Request) {
         self.presenter.presentStepFontSizeSetting(
             response: .init(
                 availableStepFontSizes: self.provider.availableStepFontSizes,
@@ -107,7 +109,7 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         )
     }
 
-    func doStepFontSizeUpdate(request: NewSettings.StepFontSizeUpdate.Request) {
+    func doStepFontSizeUpdate(request: NewSettings.StepFontSizeSettingUpdate.Request) {
         if let newStepFontSize = StepFontSize(uniqueIdentifier: request.setting.uniqueIdentifier) {
             self.provider.globalStepFontSize = newStepFontSize
         }
@@ -136,7 +138,7 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         }
     }
 
-    func doLogOutOfAccount(request: NewSettings.LogOut.Request) {
+    func doLogOutOfAccount(request: NewSettings.AccountLogOut.Request) {
         DispatchQueue.main.async {
             self.userAccountService.logOut()
             self.moduleOutput?.handleLoggedOut()

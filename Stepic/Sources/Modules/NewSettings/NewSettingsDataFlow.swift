@@ -15,7 +15,7 @@ enum NewSettings {
     }
 
     /// Presents download video quality setting screen.
-    enum DownloadVideoQualityPresentation {
+    enum DownloadVideoQualitySettingPresentation {
         struct Request {}
 
         struct Response {
@@ -29,14 +29,14 @@ enum NewSettings {
     }
 
     /// Updates global download video quality setting.
-    enum DownloadVideoQualityUpdate {
+    enum DownloadVideoQualitySettingUpdate {
         struct Request {
             let setting: SettingDescription.Setting
         }
     }
 
     /// Presents stream video quality setting screen.
-    enum StreamVideoQualityPresentation {
+    enum StreamVideoQualitySettingPresentation {
         struct Request {}
 
         struct Response {
@@ -50,14 +50,14 @@ enum NewSettings {
     }
 
     /// Updates global stream video quality setting.
-    enum StreamVideoQualityUpdate {
+    enum StreamVideoQualitySettingUpdate {
         struct Request {
             let setting: SettingDescription.Setting
         }
     }
 
     /// Presents content language setting screen.
-    enum ContentLanguagePresentation {
+    enum ContentLanguageSettingPresentation {
         struct Request {}
 
         struct Response {
@@ -71,14 +71,14 @@ enum NewSettings {
     }
 
     /// Updates global content language setting.
-    enum ContentLanguageUpdate {
+    enum ContentLanguageSettingUpdate {
         struct Request {
             let setting: SettingDescription.Setting
         }
     }
 
     /// Presents step font size setting screen.
-    enum StepFontSizePresentation {
+    enum StepFontSizeSettingPresentation {
         struct Request {}
 
         struct Response {
@@ -92,7 +92,7 @@ enum NewSettings {
     }
 
     /// Updates global step font size setting.
-    enum StepFontSizeUpdate {
+    enum StepFontSizeSettingUpdate {
         struct Request {
             let setting: SettingDescription.Setting
         }
@@ -126,7 +126,7 @@ enum NewSettings {
     }
 
     /// Transition to anonymous mode.
-    enum LogOut {
+    enum AccountLogOut {
         struct Request {}
     }
 

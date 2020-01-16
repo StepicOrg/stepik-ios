@@ -533,6 +533,7 @@ PlaceholderEmptySearchButton = "Go to Catalog";
 LoadStories = "Load stories";
 
 /* Settings */
+SettingsTitle = "Settings";
 SettingsHeaderTitleVideo = "Video";
 SettingsHeaderTitleLanguage = "Language";
 SettingsHeaderTitleLearning = "Learning";

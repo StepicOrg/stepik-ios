@@ -2,11 +2,10 @@ import UIKit
 
 protocol NewSettingsPresenterProtocol {
     func presentSettings(response: NewSettings.SettingsLoad.Response)
-    func presentDownloadVideoQualitySetting(response: NewSettings.DownloadVideoQualityPresentation.Response)
-    func presentStreamVideoQualitySetting(response: NewSettings.StreamVideoQualityPresentation.Response)
-    func presentContentLanguageSetting(response: NewSettings.ContentLanguagePresentation.Response)
-    func presentStepFontSizeSetting(response: NewSettings.StepFontSizePresentation.Response)
-
+    func presentDownloadVideoQualitySetting(response: NewSettings.DownloadVideoQualitySettingPresentation.Response)
+    func presentStreamVideoQualitySetting(response: NewSettings.StreamVideoQualitySettingPresentation.Response)
+    func presentContentLanguageSetting(response: NewSettings.ContentLanguageSettingPresentation.Response)
+    func presentStepFontSizeSetting(response: NewSettings.StepFontSizeSettingPresentation.Response)
     func presentDeleteAllContentResult(response: NewSettings.DeleteAllContent.Response)
     func presentWaitingState(response: NewSettings.BlockingWaitingIndicatorUpdate.Response)
 }
@@ -19,7 +18,7 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         self.viewController?.displaySettings(viewModel: .init(viewModel: settingsViewModel))
     }
 
-    func presentDownloadVideoQualitySetting(response: NewSettings.DownloadVideoQualityPresentation.Response) {
+    func presentDownloadVideoQualitySetting(response: NewSettings.DownloadVideoQualitySettingPresentation.Response) {
         let settingDescription = NewSettings.SettingDescription(
             settings: response.availableDownloadVideoQualities.map {
                 .init(uniqueIdentifier: $0.description, title: FormatterHelper.humanReadableDownloadVideoQuality($0))
@@ -35,7 +34,7 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         )
     }
 
-    func presentStreamVideoQualitySetting(response: NewSettings.StreamVideoQualityPresentation.Response) {
+    func presentStreamVideoQualitySetting(response: NewSettings.StreamVideoQualitySettingPresentation.Response) {
         let settingDescription = NewSettings.SettingDescription(
             settings: response.availableStreamVideoQualities.map {
                 .init(uniqueIdentifier: $0.description, title: FormatterHelper.humanReadableStreamVideoQuality($0))
@@ -49,7 +48,7 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         self.viewController?.displayStreamVideoQualitySetting(viewModel: .init(settingDescription: settingDescription))
     }
 
-    func presentContentLanguageSetting(response: NewSettings.ContentLanguagePresentation.Response) {
+    func presentContentLanguageSetting(response: NewSettings.ContentLanguageSettingPresentation.Response) {
         let settingDescription = NewSettings.SettingDescription(
             settings: response.availableContentLanguages.map {
                 .init(uniqueIdentifier: $0.languageString, title: $0.fullString)
@@ -63,7 +62,7 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         self.viewController?.displayContentLanguageSetting(viewModel: .init(settingDescription: settingDescription))
     }
 
-    func presentStepFontSizeSetting(response: NewSettings.StepFontSizePresentation.Response) {
+    func presentStepFontSizeSetting(response: NewSettings.StepFontSizeSettingPresentation.Response) {
         let settingDescription = NewSettings.SettingDescription(
             settings: response.availableStepFontSizes.map {
                 .init(uniqueIdentifier: $0.uniqueIdentifier, title: $0.title)
@@ -88,7 +87,7 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
     // MARK: Private API
 
     private func makeViewModel(from data: NewSettings.SettingsData) -> NewSettingsViewModel {
-        return NewSettingsViewModel(
+        NewSettingsViewModel(
             downloadVideoQuality: FormatterHelper.downloadVideoQualityInProgressiveScan(data.downloadVideoQuality),
             streamVideoQuality: FormatterHelper.streamVideoQualityInProgressiveScan(data.streamVideoQuality),
             contentLanguage: data.contentLanguage.fullString,

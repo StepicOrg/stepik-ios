@@ -534,6 +534,7 @@ PlaceholderEmptySearchButton = "Перейти в каталог";
 LoadStories = "Загрузить истории";
 
 /* Settings */
+SettingsTitle = "Настройки";
 SettingsHeaderTitleVideo = "Видео";
 SettingsHeaderTitleLanguage = "Язык";
 SettingsHeaderTitleLearning = "Обучение";

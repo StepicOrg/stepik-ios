@@ -77,22 +77,22 @@ final class SelectItemTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard let newSelectedCellViewModel = self.cellViewModel(at: indexPath) else {
+        guard let selectedCellViewModel = self.cellViewModel(at: indexPath) else {
             return
         }
 
-        if let oldSelectedCellViewModel = self.viewModel.selectedCell,
-           let oldSelectedCell = self.cell(for: oldSelectedCellViewModel) {
-            oldSelectedCell.accessoryType = .none
+        if let previouslySelectedCellViewModel = self.viewModel.selectedCell,
+           let previouslySelectedCell = self.cell(for: previouslySelectedCellViewModel) {
+            previouslySelectedCell.accessoryType = .none
         }
 
-        if let newSelectedCell = self.cell(for: newSelectedCellViewModel) {
-            newSelectedCell.accessoryType = .checkmark
+        if let selectedCell = tableView.cellForRow(at: indexPath) {
+            selectedCell.accessoryType = .checkmark
         }
 
-        self.viewModel.selectedCell = newSelectedCellViewModel
+        self.viewModel.selectedCell = selectedCellViewModel
 
-        self.onItemSelected?(newSelectedCellViewModel)
+        self.onItemSelected?(selectedCellViewModel)
     }
 
     // MARK: Private API
@@ -101,7 +101,7 @@ final class SelectItemTableViewController: UITableViewController {
         let indexPath: IndexPath? = {
             for (sectionIndex, sectionViewModel) in self.viewModel.sections.enumerated() {
                 for (cellIndex, cellViewModel) in sectionViewModel.cells.enumerated()
-                   where cellViewModel.uniqueIdentifier == viewModel.uniqueIdentifier {
+                    where cellViewModel.uniqueIdentifier == viewModel.uniqueIdentifier {
                     return IndexPath(row: cellIndex, section: sectionIndex)
                 }
             }
