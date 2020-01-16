@@ -1,6 +1,6 @@
 import UIKit
 
-final class SettingsRightDetailTableViewCell: SettingsTableViewCell<SettingsRightDetailCellView> {
+final class SettingsRightDetailLabelTableViewCell: SettingsTableViewCell<SettingsRightDetailLabelCellView> {
     var uniqueIdentifier: UniqueIdentifierType?
 
     override var accessoryType: UITableViewCell.AccessoryType {

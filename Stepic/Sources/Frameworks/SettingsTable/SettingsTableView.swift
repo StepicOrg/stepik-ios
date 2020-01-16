@@ -57,7 +57,7 @@ final class SettingsTableView: UIView {
 
         tableView.register(cellClass: SettingsInputTableViewCell<TableInputTextField>.self)
         tableView.register(cellClass: SettingsLargeInputTableViewCell<TableInputTextView>.self)
-        tableView.register(cellClass: SettingsRightDetailTableViewCell.self)
+        tableView.register(cellClass: SettingsRightDetailLabelTableViewCell.self)
         tableView.register(cellClass: SettingsRightDetailSwitchTableViewCell.self)
 
         tableView.register(headerFooterViewClass: SettingsTableSectionHeaderView.self)
@@ -135,7 +135,7 @@ final class SettingsTableView: UIView {
     }
 
     func updateRightDetailCell(
-        _ cell: SettingsRightDetailTableViewCell,
+        _ cell: SettingsRightDetailLabelTableViewCell,
         viewModel: SettingsTableSectionViewModel.Cell,
         options: RightDetailCellOptions
     ) {
@@ -227,7 +227,7 @@ extension SettingsTableView: UITableViewDataSource {
         case .rightDetail(let options):
             switch options.detailType {
             case .label:
-                let cell: SettingsRightDetailTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                let cell: SettingsRightDetailLabelTableViewCell = tableView.dequeueReusableCell(for: indexPath)
                 self.updateRightDetailCell(cell, viewModel: cellViewModel, options: options)
                 return cell
             case .switch:
