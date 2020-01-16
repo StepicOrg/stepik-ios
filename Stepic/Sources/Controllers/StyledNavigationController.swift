@@ -6,6 +6,7 @@ class StyledNavigationController: UINavigationController {
         static let backgroundColor = UIColor.mainLight
         static let statusBarColor = UIColor.mainLight
         static let tintColor = UIColor.mainDark
+        static let textColor = UIColor.mainDark
 
         static let titleFont = UIFont.systemFont(ofSize: 17, weight: .regular)
 
@@ -27,7 +28,7 @@ class StyledNavigationController: UINavigationController {
             shadowViewAlpha: CGFloat = 1.0,
             backgroundColor: UIColor = StyledNavigationController.Appearance.backgroundColor,
             statusBarColor: UIColor = StyledNavigationController.Appearance.statusBarColor,
-            textColor: UIColor = StyledNavigationController.Appearance.tintColor,
+            textColor: UIColor = StyledNavigationController.Appearance.textColor,
             tintColor: UIColor = StyledNavigationController.Appearance.tintColor,
             statusBarStyle: UIStatusBarStyle = StyledNavigationController.Appearance.statusBarStyle
         ) {
@@ -306,7 +307,7 @@ class StyledNavigationController: UINavigationController {
 
         self.changeBackgroundColor(StyledNavigationController.Appearance.backgroundColor)
         self.changeStatusBarColor(StyledNavigationController.Appearance.statusBarColor)
-        self.changeTextColor(StyledNavigationController.Appearance.tintColor)
+        self.changeTextColor(StyledNavigationController.Appearance.textColor)
         self.changeTintColor(StyledNavigationController.Appearance.tintColor)
         self.changeShadowViewAlpha(1.0)
         self.changeStatusBarStyle(self.statusBarStyle)
