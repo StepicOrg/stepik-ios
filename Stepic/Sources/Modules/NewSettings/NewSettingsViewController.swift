@@ -1,3 +1,4 @@
+import SVProgressHUD
 import UIKit
 
 // MARK: NewSettingsViewControllerProtocol: AnyObject -
@@ -8,6 +9,9 @@ protocol NewSettingsViewControllerProtocol: AnyObject {
     func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualityPresentation.ViewModel)
     func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguagePresentation.ViewModel)
     func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizePresentation.ViewModel)
+
+    func displayDeleteAllContentResult(viewModel: NewSettings.DeleteAllContent.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: NewSettings.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 // MARK: - Appearance -
@@ -194,6 +198,22 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                 self?.interactor.doStepFontSizeUpdate(request: .init(setting: selectedSetting))
             }
         )
+    }
+
+    func displayDeleteAllContentResult(viewModel: NewSettings.DeleteAllContent.ViewModel) {
+        if viewModel.isSuccessful {
+            SVProgressHUD.showSuccess(withStatus: nil)
+        } else {
+            SVProgressHUD.showError(withStatus: nil)
+        }
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: NewSettings.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
     }
 
     // MARK: Private Helpers
@@ -433,12 +453,51 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
         case .downloads:
             self.push(module: DownloadsAssembly().makeModule())
         case .deleteAllContent:
-            break
+            self.handleDeleteAllContentAction()
         case .about:
             break
         case .logOut:
             break
         }
+    }
+
+    // MARK: Private Helpers
+
+    private func handleDeleteAllContentAction() {
+        self.requestDeleteAllContent { [weak self] granted in
+            if granted {
+                self?.interactor.doDeleteAllContent(request: .init())
+            }
+        }
+    }
+
+    private func requestDeleteAllContent(completionHandler: @escaping ((Bool) -> Void)) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("DeleteAllContentConfirmationAlertTitle", comment: ""),
+            message: NSLocalizedString("DeleteAllContentConfirmationAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Delete", comment: ""),
+                style: .destructive,
+                handler: { _ in
+                    completionHandler(true)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: { _ in
+                    completionHandler(false)
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
     }
 }
 

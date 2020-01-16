@@ -6,6 +6,9 @@ protocol NewSettingsPresenterProtocol {
     func presentStreamVideoQualitySetting(response: NewSettings.StreamVideoQualityPresentation.Response)
     func presentContentLanguageSetting(response: NewSettings.ContentLanguagePresentation.Response)
     func presentStepFontSizeSetting(response: NewSettings.StepFontSizePresentation.Response)
+
+    func presentDeleteAllContentResult(response: NewSettings.DeleteAllContent.Response)
+    func presentWaitingState(response: NewSettings.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class NewSettingsPresenter: NewSettingsPresenterProtocol {
@@ -72,6 +75,14 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         )
 
         self.viewController?.displayStepFontSizeSetting(viewModel: .init(settingDescription: settingDescription))
+    }
+
+    func presentDeleteAllContentResult(response: NewSettings.DeleteAllContent.Response) {
+        self.viewController?.displayDeleteAllContentResult(viewModel: .init(isSuccessful: response.isSuccessful))
+    }
+
+    func presentWaitingState(response: NewSettings.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
     // MARK: Private API

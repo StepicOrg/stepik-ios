@@ -98,6 +98,30 @@ enum NewSettings {
         }
     }
 
+    /// Deletes all downloaded content.
+    enum DeleteAllContent {
+        struct Request { }
+
+        struct Response {
+            let isSuccessful: Bool
+        }
+
+        struct ViewModel {
+            let isSuccessful: Bool
+        }
+    }
+
+    /// Handle HUD
+    enum BlockingWaitingIndicatorUpdate {
+        struct Response {
+            let shouldDismiss: Bool
+        }
+
+        struct ViewModel {
+            let shouldDismiss: Bool
+        }
+    }
+
     // MARK: - Common Types
 
     struct SettingsData {

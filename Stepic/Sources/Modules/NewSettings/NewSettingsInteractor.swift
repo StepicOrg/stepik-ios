@@ -15,6 +15,8 @@ protocol NewSettingsInteractorProtocol {
     // StepFontSize
     func doStepFontSizePresentation(request: NewSettings.StepFontSizePresentation.Request)
     func doStepFontSizeUpdate(request: NewSettings.StepFontSizeUpdate.Request)
+
+    func doDeleteAllContent(request: NewSettings.DeleteAllContent.Request)
 }
 
 final class NewSettingsInteractor: NewSettingsInteractorProtocol {
@@ -99,6 +101,21 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
     func doStepFontSizeUpdate(request: NewSettings.StepFontSizeUpdate.Request) {
         if let newStepFontSize = StepFontSize(uniqueIdentifier: request.setting.uniqueIdentifier) {
             self.provider.globalStepFontSize = newStepFontSize
+        }
+    }
+
+    func doDeleteAllContent(request: NewSettings.DeleteAllContent.Request) {
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        firstly {
+            // For better waiting animation.
+            after(.seconds(1))
+        }.then {
+            self.provider.deleteAllDownloadedContent()
+        }.done {
+            self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: true))
+        }.catch { _ in
+            self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: false))
         }
     }
 }

@@ -14,7 +14,15 @@ final class NewSettingsAssembly: Assembly {
             contentLanguageService: ContentLanguageService(),
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             autoplayStorageManager: AutoplayStorageManager(),
-            adaptiveStorageManager: AdaptiveStorageManager.shared
+            adaptiveStorageManager: AdaptiveStorageManager.shared,
+            downloadsProvider: DownloadsProvider(
+                coursesPersistenceService: CoursesPersistenceService(),
+                adaptiveStorageManager: AdaptiveStorageManager.shared,
+                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+                storageUsageService: StorageUsageService(
+                    videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+                )
+            )
         )
         let presenter = NewSettingsPresenter()
         let interactor = NewSettingsInteractor(presenter: presenter, provider: provider)

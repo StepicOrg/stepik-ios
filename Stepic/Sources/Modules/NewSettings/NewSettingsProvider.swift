@@ -17,6 +17,8 @@ protocol NewSettingsProviderProtocol: AnyObject {
 
     var isAutoplayEnabled: Bool { get set }
     var isAdaptiveModeEnabled: Bool { get set }
+
+    func deleteAllDownloadedContent() -> Promise<Void>
 }
 
 final class NewSettingsProvider: NewSettingsProviderProtocol {
@@ -26,6 +28,8 @@ final class NewSettingsProvider: NewSettingsProviderProtocol {
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
     private let autoplayStorageManager: AutoplayStorageManagerProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
+
+    private var downloadsProvider: DownloadsProviderProtocol
 
     var globalDownloadVideoQuality: DownloadVideoQuality {
         get {
@@ -95,7 +99,8 @@ final class NewSettingsProvider: NewSettingsProviderProtocol {
         contentLanguageService: ContentLanguageServiceProtocol,
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         autoplayStorageManager: AutoplayStorageManagerProtocol,
-        adaptiveStorageManager: AdaptiveStorageManagerProtocol
+        adaptiveStorageManager: AdaptiveStorageManagerProtocol,
+        downloadsProvider: DownloadsProviderProtocol
     ) {
         self.downloadVideoQualityStorageManager = downloadVideoQualityStorageManager
         self.streamVideoQualityStorageManager = streamVideoQualityStorageManager
@@ -103,5 +108,12 @@ final class NewSettingsProvider: NewSettingsProviderProtocol {
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.autoplayStorageManager = autoplayStorageManager
         self.adaptiveStorageManager = adaptiveStorageManager
+        self.downloadsProvider = downloadsProvider
+    }
+
+    func deleteAllDownloadedContent() -> Promise<Void> {
+        self.downloadsProvider.fetchCachedCourses().then { cachedCourses in
+            self.downloadsProvider.deleteCachedCourses(cachedCourses)
+        }
     }
 }
