@@ -86,7 +86,7 @@ struct RightDetailCellOptions {
 
     init(
         title: Title,
-        detailType: DetailType = .none,
+        detailType: DetailType = .label(text: nil),
         accessoryType: UITableViewCell.AccessoryType = .none
     ) {
         self.title = title
@@ -113,7 +113,6 @@ struct RightDetailCellOptions {
     }
 
     enum DetailType {
-        case none
         case label(text: String?)
         case `switch`(isOn: Bool)
     }

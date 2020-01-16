@@ -311,7 +311,6 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(text: Setting.codeEditor.cellTitle),
-                    detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -343,7 +342,6 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(text: Setting.downloads.cellTitle),
-                    detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -356,7 +354,6 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                         text: Setting.deleteAllContent.cellTitle,
                         appearance: .init(textColor: .errorRed, textAlignment: .left)
                     ),
-                    detailType: .none,
                     accessoryType: .none
                 )
             )
@@ -368,7 +365,6 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(text: Setting.about.cellTitle),
-                    detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
             )
@@ -383,7 +379,6 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                         text: Setting.logOut.cellTitle,
                         appearance: .init(textColor: .errorRed, textAlignment: .center)
                     ),
-                    detailType: .none,
                     accessoryType: .none
                 )
             )
@@ -446,10 +441,6 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
             self.interactor.doStepFontSizePresentation(request: .init())
         case .codeEditor:
             self.push(module: CodeEditorSettingsLegacyAssembly().makeModule())
-        case .autoplayNextVideo:
-            break
-        case .adaptiveMode:
-            break
         case .downloads:
             self.push(module: DownloadsAssembly().makeModule())
         case .deleteAllContent:
@@ -458,6 +449,24 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
             break
         case .logOut:
             self.handleLogOutAction()
+        case .autoplayNextVideo, .adaptiveMode:
+            break
+        }
+    }
+
+    func settingsCell(_ cell: SettingsRightDetailSwitchTableViewCell, switchValueChanged isOn: Bool) {
+        guard let uniqueIdentifier = cell.uniqueIdentifier,
+              let setting = Setting(uniqueIdentifier: uniqueIdentifier) else {
+            return
+        }
+
+        switch setting {
+        case .autoplayNextVideo:
+            self.interactor.doAutoplayNextVideoSettingUpdate(request: .init(isOn: isOn))
+        case .adaptiveMode:
+            self.interactor.doAdaptiveModeSettingUpdate(request: .init(isOn: isOn))
+        default:
+            break
         }
     }
 

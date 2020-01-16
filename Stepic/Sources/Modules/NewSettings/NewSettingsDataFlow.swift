@@ -3,7 +3,7 @@ import Foundation
 enum NewSettings {
     /// Present settings
     enum SettingsLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let data: SettingsData
@@ -16,7 +16,7 @@ enum NewSettings {
 
     /// Presents download video quality setting screen.
     enum DownloadVideoQualityPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let availableDownloadVideoQualities: [DownloadVideoQuality]
@@ -37,7 +37,7 @@ enum NewSettings {
 
     /// Presents stream video quality setting screen.
     enum StreamVideoQualityPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let availableStreamVideoQualities: [StreamVideoQuality]
@@ -58,7 +58,7 @@ enum NewSettings {
 
     /// Presents content language setting screen.
     enum ContentLanguagePresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let availableContentLanguages: [ContentLanguage]
@@ -79,7 +79,7 @@ enum NewSettings {
 
     /// Presents step font size setting screen.
     enum StepFontSizePresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let availableStepFontSizes: [StepFontSize]
@@ -98,9 +98,23 @@ enum NewSettings {
         }
     }
 
+    /// Updates global autoplay next video setting.
+    enum AutoplayNextVideoSettingUpdate {
+        struct Request {
+            let isOn: Bool
+        }
+    }
+
+    /// Updates global adaptive mode setting.
+    enum AdaptiveModeSettingUpdate {
+        struct Request {
+            let isOn: Bool
+        }
+    }
+
     /// Deletes all downloaded content.
     enum DeleteAllContent {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isSuccessful: Bool
@@ -113,7 +127,7 @@ enum NewSettings {
 
     /// Transition to anonymous mode.
     enum LogOut {
-        struct Request { }
+        struct Request {}
     }
 
     /// Handle HUD

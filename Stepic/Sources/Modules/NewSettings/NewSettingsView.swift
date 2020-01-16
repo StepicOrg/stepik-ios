@@ -1,10 +1,10 @@
 import SnapKit
 import UIKit
 
-protocol NewSettingsViewDelegate: SettingsTableViewDelegate { }
+protocol NewSettingsViewDelegate: SettingsTableViewDelegate {}
 
 extension NewSettingsView {
-    struct Appearance { }
+    struct Appearance {}
 }
 
 final class NewSettingsView: UIView {

@@ -1,7 +1,11 @@
 import SnapKit
 import UIKit
 
-protocol SettingsTableViewDelegate: SettingsInputCellDelegate, SettingsLargeInputCellDelegate {
+// swiftlint:disable:next colon
+protocol SettingsTableViewDelegate:
+    SettingsInputCellDelegate,
+    SettingsLargeInputCellDelegate,
+    SettingsRightDetailSwitchCellDelegate {
     func settingsTableView(
         _ tableView: SettingsTableView,
         didSelectCell cell: SettingsTableSectionViewModel.Cell,
@@ -14,19 +18,21 @@ extension SettingsTableViewDelegate {
         _ tableView: SettingsTableView,
         didSelectCell cell: SettingsTableSectionViewModel.Cell,
         at indexPath: IndexPath
-    ) { }
+    ) {}
 
     func settingsCell(
         elementView: UITextField,
         didReportTextChange text: String?,
         identifiedBy uniqueIdentifier: UniqueIdentifierType?
-    ) { }
+    ) {}
 
     func settingsCell(
         elementView: UITextView,
         didReportTextChange text: String,
         identifiedBy uniqueIdentifier: UniqueIdentifierType?
-    ) { }
+    ) {}
+
+    func settingsCell(_ cell: SettingsRightDetailSwitchTableViewCell, switchValueChanged isOn: Bool) {}
 }
 
 extension SettingsTableView {
@@ -52,6 +58,7 @@ final class SettingsTableView: UIView {
         tableView.register(cellClass: SettingsInputTableViewCell<TableInputTextField>.self)
         tableView.register(cellClass: SettingsLargeInputTableViewCell<TableInputTextView>.self)
         tableView.register(cellClass: SettingsRightDetailTableViewCell.self)
+        tableView.register(cellClass: SettingsRightDetailSwitchTableViewCell.self)
 
         tableView.register(headerFooterViewClass: SettingsTableSectionHeaderView.self)
         tableView.register(headerFooterViewClass: SettingsTableSectionFooterView.self)
@@ -139,13 +146,26 @@ final class SettingsTableView: UIView {
         cell.elementView.titleTextColor = options.title.appearance.textColor
         cell.elementView.titleTextAlignment = options.title.appearance.textAlignment
 
-        switch options.detailType {
-        case .label(let detailText):
+        if case .label(let detailText) = options.detailType {
             cell.elementView.detailText = detailText
-        case .switch(let isOn):
-            cell.elementView.detailSwitchIsOn = isOn
-        case .none:
-            cell.elementView.detailText = nil
+        }
+    }
+
+    func updateRightDetailSwitchCell(
+        _ cell: SettingsRightDetailSwitchTableViewCell,
+        viewModel: SettingsTableSectionViewModel.Cell,
+        options: RightDetailCellOptions
+    ) {
+        cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.accessoryType = options.accessoryType
+        cell.delegate = self.delegate
+
+        cell.elementView.title = options.title.text
+        cell.elementView.textColor = options.title.appearance.textColor
+        cell.elementView.textAlignment = options.title.appearance.textAlignment
+
+        if case .switch(let isOn) = options.detailType {
+            cell.elementView.switchIsOn = isOn
         }
     }
 
@@ -173,6 +193,8 @@ extension SettingsTableView: ProgrammaticallyInitializableViewProtocol {
         }
     }
 }
+
+// MARK: - SettingsTableView: UITableViewDataSource -
 
 extension SettingsTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -203,16 +225,27 @@ extension SettingsTableView: UITableViewDataSource {
             self.updateLargeInputCell(cell, viewModel: cellViewModel, options: options)
             return cell
         case .rightDetail(let options):
-            let cell: SettingsRightDetailTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            self.updateRightDetailCell(cell, viewModel: cellViewModel, options: options)
-            return cell
+            switch options.detailType {
+            case .label:
+                let cell: SettingsRightDetailTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                self.updateRightDetailCell(cell, viewModel: cellViewModel, options: options)
+                return cell
+            case .switch:
+                let cell: SettingsRightDetailSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                self.updateRightDetailSwitchCell(cell, viewModel: cellViewModel, options: options)
+                return cell
+            }
         }
     }
+
+    // MARK: Private Helpers
 
     private func cellViewModel(at indexPath: IndexPath) -> SettingsTableSectionViewModel.Cell? {
         self.viewModel?.sections[safe: indexPath.section]?.cells[safe: indexPath.item]
     }
 }
+
+// MARK: - SettingsTableView: UITableViewDelegate -
 
 extension SettingsTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

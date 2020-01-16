@@ -16,6 +16,8 @@ protocol NewSettingsInteractorProtocol {
     func doStepFontSizePresentation(request: NewSettings.StepFontSizePresentation.Request)
     func doStepFontSizeUpdate(request: NewSettings.StepFontSizeUpdate.Request)
 
+    func doAutoplayNextVideoSettingUpdate(request: NewSettings.AutoplayNextVideoSettingUpdate.Request)
+    func doAdaptiveModeSettingUpdate(request: NewSettings.AdaptiveModeSettingUpdate.Request)
     func doDeleteAllContent(request: NewSettings.DeleteAllContent.Request)
     func doLogOutOfAccount(request: NewSettings.LogOut.Request)
 }
@@ -109,6 +111,14 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         if let newStepFontSize = StepFontSize(uniqueIdentifier: request.setting.uniqueIdentifier) {
             self.provider.globalStepFontSize = newStepFontSize
         }
+    }
+
+    func doAutoplayNextVideoSettingUpdate(request: NewSettings.AutoplayNextVideoSettingUpdate.Request) {
+        self.provider.isAutoplayEnabled = request.isOn
+    }
+
+    func doAdaptiveModeSettingUpdate(request: NewSettings.AdaptiveModeSettingUpdate.Request) {
+        self.provider.isAdaptiveModeEnabled = request.isOn
     }
 
     func doDeleteAllContent(request: NewSettings.DeleteAllContent.Request) {
