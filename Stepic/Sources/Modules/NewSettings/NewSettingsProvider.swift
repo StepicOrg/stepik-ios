@@ -1,11 +1,20 @@
 import Foundation
 import PromiseKit
 
-protocol NewSettingsProviderProtocol {
-    var downloadVideoQuality: DownloadVideoQuality { get set }
-    var streamVideoQuality: StreamVideoQuality { get set }
-    var contentLanguage: ContentLanguage { get set }
-    var stepFontSize: FontSize { get set }
+protocol NewSettingsProviderProtocol: AnyObject {
+    // DownloadVideoQuality
+    var globalDownloadVideoQuality: DownloadVideoQuality { get set }
+    var availableDownloadVideoQualities: [DownloadVideoQuality] { get }
+    // StreamVideoQuality
+    var globalStreamVideoQuality: StreamVideoQuality { get set }
+    var availableStreamVideoQualities: [StreamVideoQuality] { get }
+    // ContentLanguage
+    var globalContentLanguage: ContentLanguage { get set }
+    var availableContentLanguages: [ContentLanguage] { get }
+    // StepFontSize
+    var globalStepFontSize: StepFontSize { get set }
+    var availableStepFontSizes: [StepFontSize] { get }
+
     var isAutoplayEnabled: Bool { get set }
     var isAdaptiveModeEnabled: Bool { get set }
 }
@@ -18,25 +27,29 @@ final class NewSettingsProvider: NewSettingsProviderProtocol {
     private let autoplayStorageManager: AutoplayStorageManagerProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
 
-    var downloadVideoQuality: DownloadVideoQuality {
+    var globalDownloadVideoQuality: DownloadVideoQuality {
         get {
-            self.downloadVideoQualityStorageManager.downloadVideoQuality
+            self.downloadVideoQualityStorageManager.globalDownloadVideoQuality
         }
         set {
-            self.downloadVideoQualityStorageManager.downloadVideoQuality = newValue
+            self.downloadVideoQualityStorageManager.globalDownloadVideoQuality = newValue
         }
     }
 
-    var streamVideoQuality: StreamVideoQuality {
+    var availableDownloadVideoQualities: [DownloadVideoQuality] { DownloadVideoQuality.allCases }
+
+    var globalStreamVideoQuality: StreamVideoQuality {
         get {
-            self.streamVideoQualityStorageManager.streamVideoQuality
+            self.streamVideoQualityStorageManager.globalStreamVideoQuality
         }
         set {
-            self.streamVideoQualityStorageManager.streamVideoQuality = newValue
+            self.streamVideoQualityStorageManager.globalStreamVideoQuality = newValue
         }
     }
 
-    var contentLanguage: ContentLanguage {
+    var availableStreamVideoQualities: [StreamVideoQuality] { StreamVideoQuality.allCases }
+
+    var globalContentLanguage: ContentLanguage {
         get {
             self.contentLanguageService.globalContentLanguage
         }
@@ -45,7 +58,9 @@ final class NewSettingsProvider: NewSettingsProviderProtocol {
         }
     }
 
-    var stepFontSize: FontSize {
+    var availableContentLanguages: [ContentLanguage] { ContentLanguage.supportedLanguages }
+
+    var globalStepFontSize: StepFontSize {
         get {
             self.stepFontSizeStorageManager.globalStepFontSize
         }
@@ -53,6 +68,8 @@ final class NewSettingsProvider: NewSettingsProviderProtocol {
             self.stepFontSizeStorageManager.globalStepFontSize = newValue
         }
     }
+
+    var availableStepFontSizes: [StepFontSize] { StepFontSize.allCases }
 
     var isAutoplayEnabled: Bool {
         get {

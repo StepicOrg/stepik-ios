@@ -76,7 +76,7 @@ struct Scripts {
     }
 
     /// Returns script that replaces font size variables with the provided ones at `stepikcontent.css`.
-    static func fontSize(_ fontSize: FontSize) -> String {
+    static func fontSize(_ fontSize: StepFontSize) -> String {
         self.fontSizeScript(
             bodyFontSizeString: fontSize.body,
             h1FontSizeString: fontSize.h1,
@@ -89,11 +89,11 @@ struct Scripts {
     /// Returns script that replaces font size variables with the provided ones at `stepikcontent.css`.
     /// Example: h1FontSizeString = 20pt, h2FontSizeString = 17pt, blockquoteFontSizeString = 16px
     static func fontSizeScript(
-        bodyFontSizeString: String = FontSize.small.body,
-        h1FontSizeString: String = FontSize.small.h1,
-        h2FontSizeString: String = FontSize.small.h2,
-        h3FontSizeString: String = FontSize.small.h3,
-        blockquoteFontSizeString: String = FontSize.small.blockquote
+        bodyFontSizeString: String = StepFontSize.small.body,
+        h1FontSizeString: String = StepFontSize.small.h1,
+        h2FontSizeString: String = StepFontSize.small.h2,
+        h3FontSizeString: String = StepFontSize.small.h3,
+        blockquoteFontSizeString: String = StepFontSize.small.blockquote
     ) -> String {
         let script = self.loadScriptWithKey(self.fontSizeScriptKey)
         return script

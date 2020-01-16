@@ -175,10 +175,10 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var currentVideoRate: VideoRate {
         get {
-            self.videoRateStorageManager.videoRate
+            self.videoRateStorageManager.globalVideoRate
         }
         set {
-            self.videoRateStorageManager.videoRate = newValue
+            self.videoRateStorageManager.globalVideoRate = newValue
             self.adjustToCurrentVideoRate()
         }
     }
@@ -517,7 +517,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
                     strongSelf.currentVideoQuality = url.quality
                     if let quality = StreamVideoQuality(qualityString: Video.getNearestDefault(to: url.quality)) {
-                        strongSelf.streamVideoQualityStorageManager.streamVideoQuality = quality
+                        strongSelf.streamVideoQualityStorageManager.globalStreamVideoQuality = quality
                     }
                     strongSelf.currentVideoQualityURL = URL(string: url.url)
                     strongSelf.scheduleHidePlayerControlsTimer()
@@ -574,16 +574,19 @@ final class StepikVideoPlayerViewController: UIViewController {
                 fileManager: FileManager.default
             ).getVideoStoredFile(videoID: video.id).require().localURL
         } else {
-            return self.video.getUrlForQuality(self.streamVideoQualityStorageManager.streamVideoQuality.description)
+            return self.video.getUrlForQuality(
+                self.streamVideoQualityStorageManager.globalStreamVideoQuality.description
+            )
         }
     }
 
     private func getInitialVideoQuality() -> String {
         if self.video.state == .cached {
-            return self.video.cachedQuality ?? self.downloadVideoQualityStorageManager.downloadVideoQuality.description
+            return self.video.cachedQuality
+                ?? self.downloadVideoQualityStorageManager.globalDownloadVideoQuality.description
         } else {
             return self.video.getNearestQualityToDefault(
-                self.streamVideoQualityStorageManager.streamVideoQuality.description
+                self.streamVideoQualityStorageManager.globalStreamVideoQuality.description
             )
         }
     }

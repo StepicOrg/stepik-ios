@@ -25,7 +25,7 @@ protocol CardStepView: AnyObject {
 
 struct CardStepViewModel {
     let htmlText: String
-    let fontSize: FontSize
+    let fontSize: StepFontSize
 }
 
 final class CardStepPresenter {

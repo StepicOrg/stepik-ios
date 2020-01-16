@@ -4,8 +4,8 @@ enum SettingsStepFontSize {
     // MARK: Common structs
 
     struct FontSizeInfo {
-        let availableFontSizes: [(UniqueIdentifierType, FontSize)]
-        let activeFontSize: FontSize
+        let availableFontSizes: [(UniqueIdentifierType, StepFontSize)]
+        let activeFontSize: StepFontSize
     }
 
     // MARK: Use cases

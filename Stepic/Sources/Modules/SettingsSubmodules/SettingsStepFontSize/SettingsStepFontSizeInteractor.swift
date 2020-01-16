@@ -10,7 +10,7 @@ final class SettingsStepFontSizeInteractor: SettingsStepFontSizeInteractorProtoc
     private let presenter: SettingsStepFontSizePresenterProtocol
     private let provider: SettingsStepFontSizeProviderProtocol
 
-    private var currentAvailableFontSizes: [(UniqueIdentifierType, FontSize)] = []
+    private var currentAvailableFontSizes: [(UniqueIdentifierType, StepFontSize)] = []
 
     init(
         presenter: SettingsStepFontSizePresenterProtocol,
@@ -25,7 +25,7 @@ final class SettingsStepFontSizeInteractor: SettingsStepFontSizeInteractorProtoc
             fulfilled: self.provider.fetchAvailableFontSizes(),
             self.provider.fetchCurrentFontSize()
         ).done { (availableFontSizes, currentFontSize) in
-            let fontSizes = availableFontSizes.map { fontSize -> (UniqueIdentifierType, FontSize) in
+            let fontSizes = availableFontSizes.map { fontSize -> (UniqueIdentifierType, StepFontSize) in
                 (fontSize.title, fontSize)
             }
 

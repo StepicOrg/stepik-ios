@@ -1,25 +1,25 @@
 import Foundation
 
 protocol StepFontSizeStorageManagerProtocol: AnyObject {
-    var globalStepFontSize: FontSize { get set }
+    var globalStepFontSize: StepFontSize { get set }
 }
 
 final class StepFontSizeStorageManager: StepFontSizeStorageManagerProtocol {
-    var globalStepFontSize: FontSize {
+    var globalStepFontSize: StepFontSize {
         get {
             guard let cachedValue = UserDefaults.standard.value(forKey: Key.stepFontSize.rawValue) as? Int else {
                 self.setInDefaults(newFontSize: .small)
                 return .small
             }
 
-            return FontSize(rawValue: cachedValue) ?? .small
+            return StepFontSize(rawValue: cachedValue) ?? .small
         }
         set {
             self.setInDefaults(newFontSize: newValue)
         }
     }
 
-    private func setInDefaults(newFontSize: FontSize) {
+    private func setInDefaults(newFontSize: StepFontSize) {
         UserDefaults.standard.setValue(newFontSize.rawValue, forKey: Key.stepFontSize.rawValue)
     }
 

@@ -2,10 +2,10 @@ import Foundation
 import PromiseKit
 
 protocol SettingsStepFontSizeProviderProtocol {
-    func fetchAvailableFontSizes() -> Guarantee<[FontSize]>
-    func fetchCurrentFontSize() -> Guarantee<FontSize>
+    func fetchAvailableFontSizes() -> Guarantee<[StepFontSize]>
+    func fetchCurrentFontSize() -> Guarantee<StepFontSize>
 
-    func setGlobalFontSize(_ fontSize: FontSize)
+    func setGlobalFontSize(_ fontSize: StepFontSize)
 }
 
 final class SettingsStepFontSizeProvider: SettingsStepFontSizeProviderProtocol {
@@ -15,19 +15,19 @@ final class SettingsStepFontSizeProvider: SettingsStepFontSizeProviderProtocol {
         self.stepFontSizeService = stepFontSizeService
     }
 
-    func fetchAvailableFontSizes() -> Guarantee<[FontSize]> {
+    func fetchAvailableFontSizes() -> Guarantee<[StepFontSize]> {
         Guarantee { seal in
-            seal(FontSize.allCases)
+            seal(StepFontSize.allCases)
         }
     }
 
-    func fetchCurrentFontSize() -> Guarantee<FontSize> {
+    func fetchCurrentFontSize() -> Guarantee<StepFontSize> {
         Guarantee { seal in
             seal(self.stepFontSizeService.globalStepFontSize)
         }
     }
 
-    func setGlobalFontSize(_ fontSize: FontSize) {
+    func setGlobalFontSize(_ fontSize: StepFontSize) {
         self.stepFontSizeService.globalStepFontSize = fontSize
     }
 }

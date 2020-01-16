@@ -135,8 +135,38 @@ enum FormatterHelper {
         "\(quality.rawValue)p"
     }
 
+    /// Format download video quality with localized and human readable format; `DownloadVideoQuality.low` -> "Low (270p)"
+    static func humanReadableDownloadVideoQuality(_ quality: DownloadVideoQuality) -> String {
+        let suffix = "(\(Self.downloadVideoQualityInProgressiveScan(quality)))"
+        switch quality {
+        case .low:
+            return "\(NSLocalizedString("SettingDownloadVideoQualityLow", comment: "")) \(suffix)"
+        case .medium:
+            return "\(NSLocalizedString("SettingDownloadVideoQualityMedium", comment: "")) \(suffix)"
+        case .high:
+            return "\(NSLocalizedString("SettingDownloadVideoQualityHigh", comment: "")) \(suffix)"
+        case .veryHigh:
+            return "\(NSLocalizedString("SettingDownloadVideoQualityVeryHigh", comment: "")) \(suffix)"
+        }
+    }
+
     /// Format stream video quality to a string representation; `StreamVideoQuality.medium` -> "360p"
     static func streamVideoQualityInProgressiveScan(_ quality: StreamVideoQuality) -> String {
         "\(quality.rawValue)p"
+    }
+
+    /// Format stream video quality with localized and human readable format; `StreamVideoQuality.low` -> "Low (270p)"
+    static func humanReadableStreamVideoQuality(_ quality: StreamVideoQuality) -> String {
+        let suffix = "(\(Self.streamVideoQualityInProgressiveScan(quality)))"
+        switch quality {
+        case .low:
+            return "\(NSLocalizedString("SettingStreamVideoQualityLow", comment: "")) \(suffix)"
+        case .medium:
+            return "\(NSLocalizedString("SettingStreamVideoQualityMedium", comment: "")) \(suffix)"
+        case .high:
+            return "\(NSLocalizedString("SettingStreamVideoQualityHigh", comment: "")) \(suffix)"
+        case .veryHigh:
+            return "\(NSLocalizedString("SettingStreamVideoQualityVeryHigh", comment: "")) \(suffix)"
+        }
     }
 }

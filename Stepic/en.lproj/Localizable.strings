@@ -532,6 +532,48 @@ PlaceholderEmptySearchText = "There are no courses";
 PlaceholderEmptySearchButton = "Go to Catalog";
 LoadStories = "Load stories";
 
+/* Settings */
+SettingsHeaderTitleVideo = "Video";
+SettingsHeaderTitleLanguage = "Language";
+SettingsHeaderTitleLearning = "Learning";
+SettingsHeaderTitleDownloadedContent = "Downloaded content";
+SettingsHeaderTitleOther = "Other";
+
+SettingsCellTitleDownloadQuality = "Download quality";
+SettingsCellTitleStreamQuality = "Stream quality";
+SettingsCellTitleContentLanguage = "Content language";
+SettingsCellTitleTextSizeInSteps = "Text size in steps";
+SettingsCellTitleCodeEditor = "Code editor";
+SettingsCellTitleAutoplayNextVideo = "Autoplay next video";
+SettingsCellTitleAdaptiveMode = "Adaptive mode";
+SettingsCellTitleDownloads = "Downloads";
+SettingsCellTitleDeleteAllContent = "Delete all content";
+SettingsCellTitleAbout = "About";
+SettingsCellTitleLogOut = "Log Out";
+
+SettingsDownloadVideoQualityTitle = "Video download quality";
+SettingsDownloadVideoQualityFooterTitle = "The smaller size of the video, the faster it loads, and to keep the speed high, keep the app open.";
+SettingDownloadVideoQualityLow = "Low";
+SettingDownloadVideoQualityMedium = "Medium";
+SettingDownloadVideoQualityHigh = "High";
+SettingDownloadVideoQualityVeryHigh = "Very high";
+
+SettingsStreamVideoQualityTitle = "Video stream quality";
+SettingsStreamVideoQualityFooterTitle = "On slow or unstable Internet connection we recommend choose a lower quality.";
+SettingStreamVideoQualityLow = "Low";
+SettingStreamVideoQualityMedium = "Medium";
+SettingStreamVideoQualityHigh = "High";
+SettingStreamVideoQualityVeryHigh = "Very high";
+
+SettingsContentLanguageTitle = "Content language";
+SettingsContentLanguageFooterTitle = "The language of displayed courses.";
+
+SettingsStepFontSizeTitle = "Text size";
+SettingsStepFontSizeFooterTitle = "Text size changes affect only step text";
+SettingsStepFontSizeItemSmall = "Small";
+SettingsStepFontSizeItemMedium = "Medium";
+SettingsStepFontSizeItemLarge = "Large";
+
 /* Content Language settings */
 ContentLanguageDescription = "The language of displayed courses.";
 ContentLanguagePreference = "Content language";
@@ -558,31 +600,6 @@ OtherSettingsBlockTitle = "Other";
 DeleteAllContentPreferenceTitle = "Delete all content";
 DeleteAllContentConfirmationAlertTitle = "Delete all content";
 DeleteAllContentConfirmationAlertMessage = "Are you sure you want to delete all downloaded content?";
-
-/* Settings */
-SettingsHeaderTitleVideo = "Video";
-SettingsHeaderTitleLanguage = "Language";
-SettingsHeaderTitleLearning = "Learning";
-SettingsHeaderTitleDownloadedContent = "Downloaded content";
-SettingsHeaderTitleOther = "Other";
-
-SettingsCellTitleDownloadQuality = "Download quality";
-SettingsCellTitleStreamQuality = "Stream quality";
-SettingsCellTitleContentLanguage = "Content language";
-SettingsCellTitleTextSizeInSteps = "Text size in steps";
-SettingsCellTitleCodeEditor = "Code editor";
-SettingsCellTitleAutoplayNextVideo = "Autoplay next video";
-SettingsCellTitleAdaptiveMode = "Adaptive mode";
-SettingsCellTitleDownloads = "Downloads";
-SettingsCellTitleDeleteAllContent = "Delete all content";
-SettingsCellTitleAbout = "About";
-SettingsCellTitleLogOut = "Log Out";
-
-SettingsStepFontSizeTitle = "Text size";
-SettingsStepFontSizeSubtitle = "Text size changes affect only step text";
-SettingsStepFontSizeItemSmall = "Small";
-SettingsStepFontSizeItemMedium = "Medium";
-SettingsStepFontSizeItemLarge = "Large";
 
 /* Achievements */
 Achievements = "Achievements";

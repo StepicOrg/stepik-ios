@@ -1,9 +1,11 @@
 import Foundation
 
-enum FontSize: Int, CaseIterable {
+enum StepFontSize: Int, CaseIterable, UniqueIdentifiable {
     case small
     case medium
     case large
+
+    var uniqueIdentifier: UniqueIdentifierType { "\(self.rawValue)" }
 
     var title: String {
         switch self {
@@ -71,6 +73,15 @@ enum FontSize: Int, CaseIterable {
             return "18px"
         case .large:
             return "20px"
+        }
+    }
+
+    init?(uniqueIdentifier: UniqueIdentifierType) {
+        if let value = Int(uniqueIdentifier),
+           let fontSize = StepFontSize(rawValue: value) {
+            self = fontSize
+        } else {
+            return nil
         }
     }
 }

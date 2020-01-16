@@ -1,11 +1,11 @@
 import Foundation
 
 protocol VideoRateStorageManagerProtocol: AnyObject {
-    var videoRate: VideoRate { get set }
+    var globalVideoRate: VideoRate { get set }
 }
 
 final class VideoRateStorageManager: VideoRateStorageManagerProtocol {
-    var videoRate: VideoRate {
+    var globalVideoRate: VideoRate {
         get {
             if let rateValue = UserDefaults.standard.value(forKey: Key.videoRate.rawValue) as? Float,
                let videoRate = VideoRate(rawValue: rateValue) {

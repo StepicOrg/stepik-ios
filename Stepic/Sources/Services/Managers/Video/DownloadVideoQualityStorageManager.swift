@@ -1,11 +1,11 @@
 import Foundation
 
 protocol DownloadVideoQualityStorageManagerProtocol: AnyObject {
-    var downloadVideoQuality: DownloadVideoQuality { get set }
+    var globalDownloadVideoQuality: DownloadVideoQuality { get set }
 }
 
 final class DownloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol {
-    var downloadVideoQuality: DownloadVideoQuality {
+    var globalDownloadVideoQuality: DownloadVideoQuality {
         get {
             if let qualityString = UserDefaults.standard.string(forKey: Key.downloadVideoQuality.rawValue),
                let quality = DownloadVideoQuality(qualityString: qualityString) {

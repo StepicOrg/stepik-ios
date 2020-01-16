@@ -6,7 +6,7 @@ import PromiseKit
 protocol NewStepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
-    func fetchCurrentFontSize() -> Guarantee<FontSize>
+    func fetchCurrentFontSize() -> Guarantee<StepFontSize>
 }
 
 // MARK: - NewStepProvider: NewStepProviderProtocol -
@@ -60,7 +60,7 @@ final class NewStepProvider: NewStepProviderProtocol {
         }
     }
 
-    func fetchCurrentFontSize() -> Guarantee<FontSize> {
+    func fetchCurrentFontSize() -> Guarantee<StepFontSize> {
         Guarantee { seal in
             seal(self.stepFontSizeStorageManager.globalStepFontSize)
         }

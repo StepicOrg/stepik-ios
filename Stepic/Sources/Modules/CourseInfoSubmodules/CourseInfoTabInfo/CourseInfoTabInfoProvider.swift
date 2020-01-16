@@ -11,7 +11,7 @@ final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
     private let usersNetworkService: UsersNetworkServiceProtocol
     private let streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol
 
-    var streamVideoQuality: StreamVideoQuality { self.streamVideoQualityStorageManager.streamVideoQuality }
+    var streamVideoQuality: StreamVideoQuality { self.streamVideoQualityStorageManager.globalStreamVideoQuality }
 
     init(
         usersNetworkService: UsersNetworkServiceProtocol,

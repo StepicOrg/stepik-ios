@@ -4,6 +4,10 @@ import UIKit
 
 protocol NewSettingsViewControllerProtocol: AnyObject {
     func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel)
+    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualityPresentation.ViewModel)
+    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualityPresentation.ViewModel)
+    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguagePresentation.ViewModel)
+    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizePresentation.ViewModel)
 }
 
 // MARK: - Appearance -
@@ -67,6 +71,10 @@ final class NewSettingsViewController: UIViewController {
         self.title = NSLocalizedString("Settings", comment: "")
         self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         self.interactor.doSettingsLoad(request: .init())
     }
@@ -100,7 +108,7 @@ final class NewSettingsViewController: UIViewController {
         case about
         case logOut
 
-        var title: String {
+        var cellTitle: String {
             switch self {
             case .downloadQuality:
                 return NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")
@@ -141,14 +149,104 @@ final class NewSettingsViewController: UIViewController {
 
 extension NewSettingsViewController: NewSettingsViewControllerProtocol {
     func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel) {
-        let settingsViewModel = viewModel.viewModel
+        self.displayNewSettingsViewModel(viewModel.viewModel)
+    }
 
+    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualityPresentation.ViewModel) {
+        self.displaySelectSetting(
+            settingDescription: viewModel.settingDescription,
+            title: NSLocalizedString("SettingsDownloadVideoQualityTitle", comment: ""),
+            footerTitle: NSLocalizedString("SettingsDownloadVideoQualityFooterTitle", comment: ""),
+            onSettingSelected: { [weak self] selectedSetting in
+                self?.interactor.doDownloadVideoQualityUpdate(request: .init(setting: selectedSetting))
+            }
+        )
+    }
+
+    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualityPresentation.ViewModel) {
+        self.displaySelectSetting(
+            settingDescription: viewModel.settingDescription,
+            title: NSLocalizedString("SettingsStreamVideoQualityTitle", comment: ""),
+            footerTitle: NSLocalizedString("SettingsStreamVideoQualityFooterTitle", comment: ""),
+            onSettingSelected: { [weak self] selectedSetting in
+                self?.interactor.doStreamVideoQualityUpdate(request: .init(setting: selectedSetting))
+            }
+        )
+    }
+
+    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguagePresentation.ViewModel) {
+        self.displaySelectSetting(
+            settingDescription: viewModel.settingDescription,
+            title: NSLocalizedString("SettingsContentLanguageTitle", comment: ""),
+            footerTitle: NSLocalizedString("SettingsContentLanguageFooterTitle", comment: ""),
+            onSettingSelected: { [weak self] selectedSetting in
+                self?.interactor.doContentLanguageUpdate(request: .init(setting: selectedSetting))
+            }
+        )
+    }
+
+    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizePresentation.ViewModel) {
+        self.displaySelectSetting(
+            settingDescription: viewModel.settingDescription,
+            title: NSLocalizedString("SettingsStepFontSizeTitle", comment: ""),
+            footerTitle: NSLocalizedString("SettingsStepFontSizeFooterTitle", comment: ""),
+            onSettingSelected: { [weak self] selectedSetting in
+                self?.interactor.doStepFontSizeUpdate(request: .init(setting: selectedSetting))
+            }
+        )
+    }
+
+    // MARK: Private Helpers
+
+    private func displaySelectSetting(
+        settingDescription: NewSettings.SettingDescription,
+        title: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        onSettingSelected: ((NewSettings.SettingDescription.Setting) -> Void)? = nil
+    ) {
+        let selectedCell: SelectItemViewModel.Section.Cell? = {
+            if let currentSetting = settingDescription.currentSetting {
+                return .init(uniqueIdentifier: currentSetting.uniqueIdentifier, title: currentSetting.title)
+            }
+            return nil
+        }()
+
+        let controller = SelectItemTableViewController(
+            style: .insetGroupedFallbackGrouped,
+            viewModel: .init(
+                sections: [
+                    .init(
+                        cells: settingDescription.settings.map {
+                            .init(uniqueIdentifier: $0.uniqueIdentifier, title: $0.title)
+                        },
+                        headerTitle: headerTitle,
+                        footerTitle: footerTitle
+                    )
+                ],
+                selectedCell: selectedCell
+            ),
+            onItemSelected: { selectedCellViewModel in
+                let selectedSetting = NewSettings.SettingDescription.Setting(
+                    uniqueIdentifier: selectedCellViewModel.uniqueIdentifier,
+                    title: selectedCellViewModel.title
+                )
+                onSettingSelected?(selectedSetting)
+            }
+        )
+
+        controller.title = title
+
+        self.push(module: controller)
+    }
+
+    private func displayNewSettingsViewModel(_ settingsViewModel: NewSettingsViewModel) {
         // Video
         let downloadQuality = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.downloadQuality.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.downloadQuality.title),
+                    title: .init(text: Setting.downloadQuality.cellTitle),
                     detailType: .label(text: settingsViewModel.downloadVideoQuality),
                     accessoryType: .disclosureIndicator
                 )
@@ -158,7 +256,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.streamQuality.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.streamQuality.title),
+                    title: .init(text: Setting.streamQuality.cellTitle),
                     detailType: .label(text: settingsViewModel.streamVideoQuality),
                     accessoryType: .disclosureIndicator
                 )
@@ -170,7 +268,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.contentLanguage.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.contentLanguage.title),
+                    title: .init(text: Setting.contentLanguage.cellTitle),
                     detailType: .label(text: settingsViewModel.contentLanguage),
                     accessoryType: .disclosureIndicator
                 )
@@ -182,7 +280,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.textSize.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.textSize.title),
+                    title: .init(text: Setting.textSize.cellTitle),
                     detailType: .label(text: settingsViewModel.stepFontSize),
                     accessoryType: .disclosureIndicator
                 )
@@ -192,7 +290,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.codeEditor.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.codeEditor.title),
+                    title: .init(text: Setting.codeEditor.cellTitle),
                     detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
@@ -202,7 +300,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.autoplayNextVideo.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.autoplayNextVideo.title),
+                    title: .init(text: Setting.autoplayNextVideo.cellTitle),
                     detailType: .switch(isOn: settingsViewModel.isAutoplayEnabled),
                     accessoryType: .none
                 )
@@ -212,7 +310,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.adaptiveMode.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.adaptiveMode.title),
+                    title: .init(text: Setting.adaptiveMode.cellTitle),
                     detailType: .switch(isOn: settingsViewModel.isAdaptiveModeEnabled),
                     accessoryType: .none
                 )
@@ -224,7 +322,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.downloads.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.downloads.title),
+                    title: .init(text: Setting.downloads.cellTitle),
                     detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
@@ -235,7 +333,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(
-                        text: Setting.deleteAllContent.title,
+                        text: Setting.deleteAllContent.cellTitle,
                         appearance: .init(textColor: .errorRed, textAlignment: .left)
                     ),
                     detailType: .none,
@@ -249,7 +347,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             uniqueIdentifier: Setting.about.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.about.title),
+                    title: .init(text: Setting.about.cellTitle),
                     detailType: .none,
                     accessoryType: .disclosureIndicator
                 )
@@ -262,7 +360,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             type: .rightDetail(
                 options: .init(
                     title: .init(
-                        text: Setting.logOut.title,
+                        text: Setting.logOut.cellTitle,
                         appearance: .init(textColor: .errorRed, textAlignment: .center)
                     ),
                     detailType: .none,
@@ -307,6 +405,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
 // MARK: - NewSettingsViewController: NewSettingsViewDelegate -
 
 extension NewSettingsViewController: NewSettingsViewDelegate {
+    // swiftlint:disable:next cyclomatic_complexity
     func settingsTableView(
         _ tableView: SettingsTableView,
         didSelectCell cell: SettingsTableSectionViewModel.Cell,
@@ -318,42 +417,21 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
 
         switch selectedSetting {
         case .downloadQuality:
-            let selectItemController = SelectItemTableViewController(
-                style: .insetGroupedFallbackGrouped,
-                viewModel: .init(
-                    sections: [
-                        .init(
-                            cells: [
-                                .init(uniqueIdentifier: "360p", title: "360p"),
-                                .init(uniqueIdentifier: "720p", title: "720p"),
-                                .init(uniqueIdentifier: "1080p", title: "1080p")
-                            ],
-                            headerTitle: "Header",
-                            footerTitle: "Footer"
-                        )
-                    ],
-                    selectedCell: .init(uniqueIdentifier: "360p", title: "360p")
-                ),
-                onItemSelected: { selectedItem in
-                    print(selectedItem)
-                }
-            )
-            selectItemController.title = "Title"
-            self.navigationController?.pushViewController(selectItemController, animated: true)
+            self.interactor.doDownloadVideoQualityPresentation(request: .init())
         case .streamQuality:
-            break
+            self.interactor.doStreamVideoQualityPresentation(request: .init())
         case .contentLanguage:
-            break
+            self.interactor.doContentLanguagePresentation(request: .init())
         case .textSize:
-            break
+            self.interactor.doStepFontSizePresentation(request: .init())
         case .codeEditor:
-            break
+            self.push(module: CodeEditorSettingsLegacyAssembly().makeModule())
         case .autoplayNextVideo:
             break
         case .adaptiveMode:
             break
         case .downloads:
-            break
+            self.push(module: DownloadsAssembly().makeModule())
         case .deleteAllContent:
             break
         case .about:
