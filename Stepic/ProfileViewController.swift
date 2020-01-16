@@ -9,6 +9,13 @@
 import SnapKit
 import UIKit
 
+enum ProfileState {
+    case normal
+    case loading
+    case error
+    case anonymous
+}
+
 final class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer = StepikPlaceholderControllerContainer()
     var presenter: ProfilePresenter?
@@ -251,7 +258,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             }
         }()
 
-        let assembly = NewSettingsAssembly(navigationBarAppearance: navigationBarAppearance)
+        let assembly = NewSettingsAssembly(navigationBarAppearance: navigationBarAppearance, moduleOutput: self)
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
         self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
@@ -521,9 +528,13 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
     }
 }
 
-enum ProfileState {
-    case normal
-    case loading
-    case error
-    case anonymous
+// MARK: - ProfileViewController: NewSettingsOutputProtocol -
+
+extension ProfileViewController: NewSettingsOutputProtocol {
+    func handleLoggedOut() {
+        self.presenter?.refresh()
+        self.dismiss(animated: true) {
+            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+        }
+    }
 }

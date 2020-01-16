@@ -111,6 +111,11 @@ enum NewSettings {
         }
     }
 
+    /// Transition to anonymous mode.
+    enum LogOut {
+        struct Request { }
+    }
+
     /// Handle HUD
     enum BlockingWaitingIndicatorUpdate {
         struct Response {

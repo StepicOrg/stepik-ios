@@ -457,7 +457,7 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
         case .about:
             break
         case .logOut:
-            break
+            self.handleLogOutAction()
         }
     }
 
@@ -481,6 +481,43 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Delete", comment: ""),
+                style: .destructive,
+                handler: { _ in
+                    completionHandler(true)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Cancel", comment: ""),
+                style: .cancel,
+                handler: { _ in
+                    completionHandler(false)
+                }
+            )
+        )
+
+        self.present(alert, animated: true)
+    }
+
+    private func handleLogOutAction() {
+        self.requestLogOut { [weak self] granted in
+            if granted {
+                self?.interactor.doLogOutOfAccount(request: .init())
+            }
+        }
+    }
+
+    private func requestLogOut(completionHandler: @escaping ((Bool) -> Void)) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("LogOutConfirmationAlertTitle", comment: ""),
+            message: NSLocalizedString("LogOutConfirmationAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("LogOutConfirmationAlertActionDestructiveTitle", comment: ""),
                 style: .destructive,
                 handler: { _ in
                     completionHandler(true)

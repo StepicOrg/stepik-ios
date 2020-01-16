@@ -601,6 +601,10 @@ DeleteAllContentPreferenceTitle = "Delete all content";
 DeleteAllContentConfirmationAlertTitle = "Delete all content";
 DeleteAllContentConfirmationAlertMessage = "Are you sure you want to delete all downloaded content?";
 
+LogOutConfirmationAlertTitle = "Log Out";
+LogOutConfirmationAlertMessage = "Are you sure you want to log out?";
+LogOutConfirmationAlertActionDestructiveTitle = "Log Out";
+
 /* Achievements */
 Achievements = "Achievements";
 AchievementsStepsSolvedKindTitle = "Quantity matters";

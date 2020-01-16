@@ -17,11 +17,16 @@ protocol NewSettingsInteractorProtocol {
     func doStepFontSizeUpdate(request: NewSettings.StepFontSizeUpdate.Request)
 
     func doDeleteAllContent(request: NewSettings.DeleteAllContent.Request)
+    func doLogOutOfAccount(request: NewSettings.LogOut.Request)
 }
 
 final class NewSettingsInteractor: NewSettingsInteractorProtocol {
+    weak var moduleOutput: NewSettingsOutputProtocol?
+
     private let presenter: NewSettingsPresenterProtocol
     private let provider: NewSettingsProviderProtocol
+
+    private let userAccountService: UserAccountServiceProtocol
 
     private var settingsData: NewSettings.SettingsData {
         .init(
@@ -36,10 +41,12 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
 
     init(
         presenter: NewSettingsPresenterProtocol,
-        provider: NewSettingsProviderProtocol
+        provider: NewSettingsProviderProtocol,
+        userAccountService: UserAccountServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.userAccountService = userAccountService
     }
 
     func doSettingsLoad(request: NewSettings.SettingsLoad.Request) {
@@ -116,6 +123,13 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
             self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: true))
         }.catch { _ in
             self.presenter.presentDeleteAllContentResult(response: .init(isSuccessful: false))
+        }
+    }
+
+    func doLogOutOfAccount(request: NewSettings.LogOut.Request) {
+        DispatchQueue.main.async {
+            self.userAccountService.logOut()
+            self.moduleOutput?.handleLoggedOut()
         }
     }
 }

@@ -602,6 +602,10 @@ DeleteAllContentPreferenceTitle = "Удалить весь контент";
 DeleteAllContentConfirmationAlertTitle = "Удалить весь контент";
 DeleteAllContentConfirmationAlertMessage = "Вы уверены, что хотите удалить весь загруженный контент из памяти Вашего устройства?";
 
+LogOutConfirmationAlertTitle = "Выйти";
+LogOutConfirmationAlertMessage = "Вы уверены, что хотите выйти?";
+LogOutConfirmationAlertActionDestructiveTitle = "Выйти";
+
 /* Achievements */
 Achievements = "Достижения";
 AchievementsStepsSolvedKindTitle = "Главное – количество";

@@ -3,8 +3,14 @@ import UIKit
 final class NewSettingsAssembly: Assembly {
     private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
 
-    init(navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()) {
+    private weak var moduleOutput: NewSettingsOutputProtocol?
+
+    init(
+        navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init(),
+        moduleOutput: NewSettingsOutputProtocol?
+    ) {
         self.navigationBarAppearance = navigationBarAppearance
+        self.moduleOutput = moduleOutput
     }
 
     func makeModule() -> UIViewController {
@@ -25,13 +31,18 @@ final class NewSettingsAssembly: Assembly {
             )
         )
         let presenter = NewSettingsPresenter()
-        let interactor = NewSettingsInteractor(presenter: presenter, provider: provider)
+        let interactor = NewSettingsInteractor(
+            presenter: presenter,
+            provider: provider,
+            userAccountService: UserAccountService()
+        )
         let viewController = NewSettingsViewController(
             interactor: interactor,
             appearance: .init(navigationBarAppearance: self.navigationBarAppearance)
         )
 
         presenter.viewController = viewController
+        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }
