@@ -111,6 +111,7 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
 
     func doStepFontSizeUpdate(request: NewSettings.StepFontSizeSettingUpdate.Request) {
         if let newStepFontSize = StepFontSize(uniqueIdentifier: request.setting.uniqueIdentifier) {
+            AnalyticsEvent.stepFontSizeSelected(newStepFontSize).report()
             self.provider.globalStepFontSize = newStepFontSize
         }
     }
@@ -142,6 +143,34 @@ final class NewSettingsInteractor: NewSettingsInteractorProtocol {
         DispatchQueue.main.async {
             self.userAccountService.logOut()
             self.moduleOutput?.handleLoggedOut()
+        }
+    }
+
+    // MARK: Inner Types
+
+    // FIXME: analytics dependency
+    private enum AnalyticsEvent {
+        case stepFontSizeSelected(StepFontSize)
+
+        func report() {
+            switch self {
+            case .stepFontSizeSelected(let selectedStepFontSize):
+                let analyticsStringValue: String = {
+                    switch selectedStepFontSize {
+                    case .small:
+                        return "small"
+                    case .medium:
+                        return "medium"
+                    case .large:
+                        return "large"
+                    }
+                }()
+                AmplitudeAnalyticsEvents.Settings.stepFontSizeSelected(size: analyticsStringValue).send()
+                AnalyticsReporter.reportEvent(
+                    AnalyticsEvents.Settings.stepFontSizeSelected,
+                    parameters: ["size": analyticsStringValue]
+                )
+            }
         }
     }
 }

@@ -80,6 +80,10 @@ final class NewSettingsViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.Settings.opened.send()
+
         self.updateNavigationBarAppearance()
     }
 
