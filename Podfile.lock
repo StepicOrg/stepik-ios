@@ -4,7 +4,7 @@ PODS:
     - SwiftyGif
   - Alamofire (4.9.1)
   - Amplitude-iOS (4.9.3)
-  - Atributika (4.9.1)
+  - Atributika (4.9.4)
   - AutoInsetter (1.8.0)
   - BEMCheckBox (1.4.1)
   - Branch (0.31.0):
@@ -141,7 +141,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - Nimble (8.0.4)
+  - Nimble (8.0.5)
   - Nuke (8.3.1)
   - Pageboy (3.5.0)
   - pop (1.0.12)
@@ -158,16 +158,16 @@ PODS:
   - Protobuf (3.11.2)
   - Quick (2.2.0)
   - Reveal-SDK (24)
-  - SDWebImage (5.4.0):
-    - SDWebImage/Core (= 5.4.0)
-  - SDWebImage/Core (5.4.0)
+  - SDWebImage (5.4.2):
+    - SDWebImage/Core (= 5.4.2)
+  - SDWebImage/Core (5.4.2)
   - SnapKit (5.0.1)
   - STRegex (2.1.0)
   - SVGKit (2.1.0):
     - CocoaLumberjack (~> 3.0)
   - SVProgressHUD (2.2.5)
   - SwiftDate (6.1.0)
-  - SwiftLint (0.38.0)
+  - SwiftLint (0.38.2)
   - SwiftyGif (5.2.0)
   - SwiftyJSON (5.0.0)
   - Tabman (2.6.3):
@@ -191,7 +191,7 @@ DEPENDENCIES:
   - Agrume (= 5.3.7)
   - Alamofire (= 4.9.1)
   - Amplitude-iOS (= 4.9.3)
-  - Atributika (= 4.9.1)
+  - Atributika (= 4.9.4)
   - BEMCheckBox (= 1.4.1)
   - Branch (= 0.31.0)
   - Charts (= 3.4.0)
@@ -214,19 +214,19 @@ DEPENDENCIES:
   - Logging (= 1.2.0)
   - lottie-ios (= 2.5.3)
   - Mockingjay (= 3.0.0-alpha.1)
-  - Nimble (= 8.0.4)
+  - Nimble (= 8.0.5)
   - Nuke (= 8.3.1)
   - Presentr (= 1.9)
   - PromiseKit (= 6.12.0)
   - Quick (= 2.2.0)
   - Reveal-SDK
-  - SDWebImage (= 5.4.0)
+  - SDWebImage (= 5.4.2)
   - SnapKit (= 5.0.1)
   - STRegex (= 2.1.0)
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
   - SVProgressHUD (= 2.2.5)
   - SwiftDate (= 6.1.0)
-  - SwiftLint (= 0.38.0)
+  - SwiftLint (= 0.38.2)
   - SwiftyJSON (= 5.0.0)
   - Tabman (= 2.6.3)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
@@ -322,7 +322,7 @@ SPEC CHECKSUMS:
   Agrume: 365b69b37f5e3e527b164dbb782a03c710c7b781
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
-  Atributika: 614101ca8dd2f5a05e465a3c8c10092602d6e804
+  Atributika: 643a248e2dd8b4d74b23b53ea31393cab0a01d94
   AutoInsetter: 0b90ca74e36561c340129045a3722c51a0b15c58
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
@@ -359,7 +359,7 @@ SPEC CHECKSUMS:
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  Nimble: 4ab1aeb9b45553c75b9687196b0fa0713170a332
   Nuke: 85fb80f8df0cb26c28d2f4e0cb7fb93bcd6548d3
   Pageboy: 3794c578aae5fcce06e90b3ed4a0ad6b807d75bb
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
@@ -368,13 +368,13 @@ SPEC CHECKSUMS:
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
-  SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
+  SDWebImage: 4ca2dc4eefae4224bea8f504251cda485a363745
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   STRegex: dfa420d93d8c1402956233b3879ec1fc14b45fbe
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
-  SwiftLint: 4105f061f9812b214568b736dab580ab2c73a582
+  SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
@@ -385,6 +385,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: edb00e8af2903290e142ba4c488adf8d394e828a
 
-PODFILE CHECKSUM: 3b906b5c3509e4d66009795ae344c8c8e8c7e727
+PODFILE CHECKSUM: f089890bfae3360d7423744536481201668172f8
 
 COCOAPODS: 1.8.4

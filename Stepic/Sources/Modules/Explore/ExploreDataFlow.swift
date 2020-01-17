@@ -10,9 +10,7 @@ enum Explore {
         case collection
         case popularCourses
 
-        var uniqueIdentifier: UniqueIdentifierType {
-            return self.rawValue
-        }
+        var uniqueIdentifier: UniqueIdentifierType { self.rawValue }
     }
 
     // MARK: Use cases

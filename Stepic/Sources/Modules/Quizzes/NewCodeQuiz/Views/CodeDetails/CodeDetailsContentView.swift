@@ -44,7 +44,7 @@ final class CodeDetailsContentView: UIView {
 
     private func makeCodeSampleViews(_ samples: [CodeSamplePlainObject]) -> [UIView] {
         func getTitle(at index: Int) -> String {
-            return samples.count == 1
+            samples.count == 1
                 ? NSLocalizedString("CodeQuizDetailSampleTitleOne", comment: "")
                 : String(format: NSLocalizedString("CodeQuizDetailSampleTitle", comment: ""), "\(index + 1)")
         }
