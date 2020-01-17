@@ -607,6 +607,12 @@ LogOutConfirmationAlertTitle = "Выйти";
 LogOutConfirmationAlertMessage = "Вы уверены, что хотите выйти?";
 LogOutConfirmationAlertActionDestructiveTitle = "Выйти";
 
+AboutAppTitle = "О приложении";
+TermsOfServiceTitle = "Условия использования";
+PrivacyPolicyTitle = "Условия конфиденциальности";
+TermsOfServiceLink = "https://welcome.stepik.org/ru/terms";
+PrivacyPolicyLink = "https://welcome.stepik.org/ru/privacy";
+
 /* Achievements */
 Achievements = "Достижения";
 AchievementsStepsSolvedKindTitle = "Главное – количество";
@@ -785,7 +791,7 @@ VideoQuality = "Качество видео";
 VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
 VideoPlayerAutoplayCancelTitle = "Остаться на этом шаге";
 
-OurSocialNetworks = "Наши аккаунты в соцсетях";
+StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
 /* Quiz */
 CorrectFeedbackTitle1 = "Правильно.";

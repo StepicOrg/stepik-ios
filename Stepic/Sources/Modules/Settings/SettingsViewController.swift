@@ -459,7 +459,7 @@ extension SettingsViewController: SettingsViewDelegate {
         case .deleteAllContent:
             self.handleDeleteAllContentAction()
         case .about:
-            break
+            self.push(module: AboutAppViewController())
         case .logOut:
             self.handleLogOutAction()
         case .autoplayNextVideo, .adaptiveMode:

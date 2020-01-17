@@ -606,6 +606,12 @@ LogOutConfirmationAlertTitle = "Log Out";
 LogOutConfirmationAlertMessage = "Are you sure you want to log out?";
 LogOutConfirmationAlertActionDestructiveTitle = "Log Out";
 
+AboutAppTitle = "About";
+TermsOfServiceTitle = "Terms of Service";
+PrivacyPolicyTitle = "Privacy Policy";
+TermsOfServiceLink = "https://welcome.stepik.org/en/terms";
+PrivacyPolicyLink = "https://welcome.stepik.org/en/privacy";
+
 /* Achievements */
 Achievements = "Achievements";
 AchievementsStepsSolvedKindTitle = "Quantity matters";
@@ -784,7 +790,7 @@ Downloaded = "Downloaded";
 VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
 VideoPlayerAutoplayCancelTitle = "Stay on this step";
 
-OurSocialNetworks = "Our social networks";
+StepikSocialNetworksTitle = "Our social networks";
 
 /* Quiz */
 CorrectFeedbackTitle1 = "Correct.";
