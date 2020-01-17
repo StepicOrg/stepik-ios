@@ -1,6 +1,6 @@
 import Foundation
 
-struct NewSettingsViewModel {
+struct SettingsViewModel {
     let downloadVideoQuality: String
     let streamVideoQuality: String
     let contentLanguage: String

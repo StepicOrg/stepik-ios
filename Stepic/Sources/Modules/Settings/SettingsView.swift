@@ -1,15 +1,15 @@
 import SnapKit
 import UIKit
 
-protocol NewSettingsViewDelegate: SettingsTableViewDelegate {}
+protocol SettingsViewDelegate: SettingsTableViewDelegate {}
 
-extension NewSettingsView {
+extension SettingsView {
     struct Appearance {}
 }
 
-final class NewSettingsView: UIView {
+final class SettingsView: UIView {
     let appearance: Appearance
-    weak var delegate: NewSettingsViewDelegate? {
+    weak var delegate: SettingsViewDelegate? {
         didSet {
             self.tableView.delegate = self.delegate
         }
@@ -39,7 +39,7 @@ final class NewSettingsView: UIView {
     }
 }
 
-extension NewSettingsView: ProgrammaticallyInitializableViewProtocol {
+extension SettingsView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.tableView)
     }

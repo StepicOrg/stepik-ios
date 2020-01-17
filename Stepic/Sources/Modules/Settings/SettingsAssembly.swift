@@ -1,20 +1,20 @@
 import UIKit
 
-final class NewSettingsAssembly: Assembly {
+final class SettingsAssembly: Assembly {
     private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
 
-    private weak var moduleOutput: NewSettingsOutputProtocol?
+    private weak var moduleOutput: SettingsOutputProtocol?
 
     init(
         navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init(),
-        moduleOutput: NewSettingsOutputProtocol?
+        moduleOutput: SettingsOutputProtocol? = nil
     ) {
         self.navigationBarAppearance = navigationBarAppearance
         self.moduleOutput = moduleOutput
     }
 
     func makeModule() -> UIViewController {
-        let provider = NewSettingsProvider(
+        let provider = SettingsProvider(
             downloadVideoQualityStorageManager: DownloadVideoQualityStorageManager(),
             streamVideoQualityStorageManager: StreamVideoQualityStorageManager(),
             contentLanguageService: ContentLanguageService(),
@@ -30,13 +30,13 @@ final class NewSettingsAssembly: Assembly {
                 )
             )
         )
-        let presenter = NewSettingsPresenter()
-        let interactor = NewSettingsInteractor(
+        let presenter = SettingsPresenter()
+        let interactor = SettingsInteractor(
             presenter: presenter,
             provider: provider,
             userAccountService: UserAccountService()
         )
-        let viewController = NewSettingsViewController(
+        let viewController = SettingsViewController(
             interactor: interactor,
             appearance: .init(navigationBarAppearance: self.navigationBarAppearance)
         )

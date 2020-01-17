@@ -1,25 +1,25 @@
 import UIKit
 
-protocol NewSettingsPresenterProtocol {
-    func presentSettings(response: NewSettings.SettingsLoad.Response)
-    func presentDownloadVideoQualitySetting(response: NewSettings.DownloadVideoQualitySettingPresentation.Response)
-    func presentStreamVideoQualitySetting(response: NewSettings.StreamVideoQualitySettingPresentation.Response)
-    func presentContentLanguageSetting(response: NewSettings.ContentLanguageSettingPresentation.Response)
-    func presentStepFontSizeSetting(response: NewSettings.StepFontSizeSettingPresentation.Response)
-    func presentDeleteAllContentResult(response: NewSettings.DeleteAllContent.Response)
-    func presentWaitingState(response: NewSettings.BlockingWaitingIndicatorUpdate.Response)
+protocol SettingsPresenterProtocol {
+    func presentSettings(response: Settings.SettingsLoad.Response)
+    func presentDownloadVideoQualitySetting(response: Settings.DownloadVideoQualitySettingPresentation.Response)
+    func presentStreamVideoQualitySetting(response: Settings.StreamVideoQualitySettingPresentation.Response)
+    func presentContentLanguageSetting(response: Settings.ContentLanguageSettingPresentation.Response)
+    func presentStepFontSizeSetting(response: Settings.StepFontSizeSettingPresentation.Response)
+    func presentDeleteAllContentResult(response: Settings.DeleteAllContent.Response)
+    func presentWaitingState(response: Settings.BlockingWaitingIndicatorUpdate.Response)
 }
 
-final class NewSettingsPresenter: NewSettingsPresenterProtocol {
-    weak var viewController: NewSettingsViewControllerProtocol?
+final class SettingsPresenter: SettingsPresenterProtocol {
+    weak var viewController: SettingsViewControllerProtocol?
 
-    func presentSettings(response: NewSettings.SettingsLoad.Response) {
+    func presentSettings(response: Settings.SettingsLoad.Response) {
         let settingsViewModel = self.makeViewModel(from: response.data)
         self.viewController?.displaySettings(viewModel: .init(viewModel: settingsViewModel))
     }
 
-    func presentDownloadVideoQualitySetting(response: NewSettings.DownloadVideoQualitySettingPresentation.Response) {
-        let settingDescription = NewSettings.SettingDescription(
+    func presentDownloadVideoQualitySetting(response: Settings.DownloadVideoQualitySettingPresentation.Response) {
+        let settingDescription = Settings.SettingDescription(
             settings: response.availableDownloadVideoQualities.map {
                 .init(uniqueIdentifier: $0.description, title: FormatterHelper.humanReadableDownloadVideoQuality($0))
             },
@@ -34,8 +34,8 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         )
     }
 
-    func presentStreamVideoQualitySetting(response: NewSettings.StreamVideoQualitySettingPresentation.Response) {
-        let settingDescription = NewSettings.SettingDescription(
+    func presentStreamVideoQualitySetting(response: Settings.StreamVideoQualitySettingPresentation.Response) {
+        let settingDescription = Settings.SettingDescription(
             settings: response.availableStreamVideoQualities.map {
                 .init(uniqueIdentifier: $0.description, title: FormatterHelper.humanReadableStreamVideoQuality($0))
             },
@@ -48,8 +48,8 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         self.viewController?.displayStreamVideoQualitySetting(viewModel: .init(settingDescription: settingDescription))
     }
 
-    func presentContentLanguageSetting(response: NewSettings.ContentLanguageSettingPresentation.Response) {
-        let settingDescription = NewSettings.SettingDescription(
+    func presentContentLanguageSetting(response: Settings.ContentLanguageSettingPresentation.Response) {
+        let settingDescription = Settings.SettingDescription(
             settings: response.availableContentLanguages.map {
                 .init(uniqueIdentifier: $0.languageString, title: $0.fullString)
             },
@@ -62,8 +62,8 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         self.viewController?.displayContentLanguageSetting(viewModel: .init(settingDescription: settingDescription))
     }
 
-    func presentStepFontSizeSetting(response: NewSettings.StepFontSizeSettingPresentation.Response) {
-        let settingDescription = NewSettings.SettingDescription(
+    func presentStepFontSizeSetting(response: Settings.StepFontSizeSettingPresentation.Response) {
+        let settingDescription = Settings.SettingDescription(
             settings: response.availableStepFontSizes.map {
                 .init(uniqueIdentifier: $0.uniqueIdentifier, title: $0.title)
             },
@@ -76,18 +76,18 @@ final class NewSettingsPresenter: NewSettingsPresenterProtocol {
         self.viewController?.displayStepFontSizeSetting(viewModel: .init(settingDescription: settingDescription))
     }
 
-    func presentDeleteAllContentResult(response: NewSettings.DeleteAllContent.Response) {
+    func presentDeleteAllContentResult(response: Settings.DeleteAllContent.Response) {
         self.viewController?.displayDeleteAllContentResult(viewModel: .init(isSuccessful: response.isSuccessful))
     }
 
-    func presentWaitingState(response: NewSettings.BlockingWaitingIndicatorUpdate.Response) {
+    func presentWaitingState(response: Settings.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
     // MARK: Private API
 
-    private func makeViewModel(from data: NewSettings.SettingsData) -> NewSettingsViewModel {
-        NewSettingsViewModel(
+    private func makeViewModel(from data: Settings.SettingsData) -> SettingsViewModel {
+        SettingsViewModel(
             downloadVideoQuality: FormatterHelper.downloadVideoQualityInProgressiveScan(data.downloadVideoQuality),
             streamVideoQuality: FormatterHelper.streamVideoQualityInProgressiveScan(data.streamVideoQuality),
             contentLanguage: data.contentLanguage.fullString,

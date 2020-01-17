@@ -1,34 +1,34 @@
 import SVProgressHUD
 import UIKit
 
-// MARK: NewSettingsViewControllerProtocol: AnyObject -
+// MARK: SettingsViewControllerProtocol: AnyObject -
 
-protocol NewSettingsViewControllerProtocol: AnyObject {
-    func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel)
-    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualitySettingPresentation.ViewModel)
-    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualitySettingPresentation.ViewModel)
-    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguageSettingPresentation.ViewModel)
-    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizeSettingPresentation.ViewModel)
-    func displayDeleteAllContentResult(viewModel: NewSettings.DeleteAllContent.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: NewSettings.BlockingWaitingIndicatorUpdate.ViewModel)
+protocol SettingsViewControllerProtocol: AnyObject {
+    func displaySettings(viewModel: Settings.SettingsLoad.ViewModel)
+    func displayDownloadVideoQualitySetting(viewModel: Settings.DownloadVideoQualitySettingPresentation.ViewModel)
+    func displayStreamVideoQualitySetting(viewModel: Settings.StreamVideoQualitySettingPresentation.ViewModel)
+    func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel)
+    func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel)
+    func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 // MARK: - Appearance -
 
-extension NewSettingsViewController {
+extension SettingsViewController {
     struct Appearance {
         var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
     }
 }
 
-// MARK: - NewSettingsViewController: UIViewController -
+// MARK: - SettingsViewController: UIViewController -
 
-final class NewSettingsViewController: UIViewController {
-    private let interactor: NewSettingsInteractorProtocol
+final class SettingsViewController: UIViewController {
+    private let interactor: SettingsInteractorProtocol
 
     let appearance: Appearance
 
-    lazy var settingsView = self.view as? NewSettingsView
+    lazy var settingsView = self.view as? SettingsView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     private lazy var closeBarButtonItem: UIBarButtonItem = {
@@ -49,7 +49,7 @@ final class NewSettingsViewController: UIViewController {
     }()
 
     init(
-        interactor: NewSettingsInteractorProtocol,
+        interactor: SettingsInteractorProtocol,
         appearance: Appearance = .init()
     ) {
         self.interactor = interactor
@@ -63,7 +63,7 @@ final class NewSettingsViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = NewSettingsView(frame: UIScreen.main.bounds)
+        let view = SettingsView(frame: UIScreen.main.bounds)
         view.delegate = self
         self.view = view
     }
@@ -157,14 +157,14 @@ final class NewSettingsViewController: UIViewController {
     }
 }
 
-// MARK: - NewSettingsViewController: NewSettingsViewControllerProtocol -
+// MARK: - SettingsViewController: SettingsViewControllerProtocol -
 
-extension NewSettingsViewController: NewSettingsViewControllerProtocol {
-    func displaySettings(viewModel: NewSettings.SettingsLoad.ViewModel) {
+extension SettingsViewController: SettingsViewControllerProtocol {
+    func displaySettings(viewModel: Settings.SettingsLoad.ViewModel) {
         self.updateSettingsViewModel(viewModel.viewModel)
     }
 
-    func displayDownloadVideoQualitySetting(viewModel: NewSettings.DownloadVideoQualitySettingPresentation.ViewModel) {
+    func displayDownloadVideoQualitySetting(viewModel: Settings.DownloadVideoQualitySettingPresentation.ViewModel) {
         self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsDownloadVideoQualityTitle", comment: ""),
@@ -175,7 +175,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
     }
 
-    func displayStreamVideoQualitySetting(viewModel: NewSettings.StreamVideoQualitySettingPresentation.ViewModel) {
+    func displayStreamVideoQualitySetting(viewModel: Settings.StreamVideoQualitySettingPresentation.ViewModel) {
         self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsStreamVideoQualityTitle", comment: ""),
@@ -186,7 +186,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
     }
 
-    func displayContentLanguageSetting(viewModel: NewSettings.ContentLanguageSettingPresentation.ViewModel) {
+    func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel) {
         self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsContentLanguageTitle", comment: ""),
@@ -197,7 +197,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
     }
 
-    func displayStepFontSizeSetting(viewModel: NewSettings.StepFontSizeSettingPresentation.ViewModel) {
+    func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel) {
         self.displaySelectSettingModule(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsStepFontSizeTitle", comment: ""),
@@ -208,7 +208,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         )
     }
 
-    func displayDeleteAllContentResult(viewModel: NewSettings.DeleteAllContent.ViewModel) {
+    func displayDeleteAllContentResult(viewModel: Settings.DeleteAllContent.ViewModel) {
         if viewModel.isSuccessful {
             SVProgressHUD.showSuccess(withStatus: nil)
         } else {
@@ -216,7 +216,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
         }
     }
 
-    func displayBlockingLoadingIndicator(viewModel: NewSettings.BlockingWaitingIndicatorUpdate.ViewModel) {
+    func displayBlockingLoadingIndicator(viewModel: Settings.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
@@ -227,11 +227,11 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
     // MARK: Private Helpers
 
     private func displaySelectSettingModule(
-        settingDescription: NewSettings.SettingDescription,
+        settingDescription: Settings.SettingDescription,
         title: String? = nil,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        onSettingSelected: ((NewSettings.SettingDescription.Setting) -> Void)? = nil
+        onSettingSelected: ((Settings.SettingDescription.Setting) -> Void)? = nil
     ) {
         let selectedCellViewModel: SelectItemViewModel.Section.Cell? = {
             if let currentSetting = settingDescription.currentSetting {
@@ -240,7 +240,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             return nil
         }()
 
-        let controller = SelectItemTableViewController(
+        let viewController = SelectItemTableViewController(
             style: .insetGroupedFallbackGrouped,
             viewModel: .init(
                 sections: [
@@ -255,7 +255,7 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
                 selectedCell: selectedCellViewModel
             ),
             onItemSelected: { selectedCellViewModel in
-                let selectedSetting = NewSettings.SettingDescription.Setting(
+                let selectedSetting = Settings.SettingDescription.Setting(
                     uniqueIdentifier: selectedCellViewModel.uniqueIdentifier,
                     title: selectedCellViewModel.title
                 )
@@ -263,12 +263,12 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
             }
         )
 
-        controller.title = title
+        viewController.title = title
 
-        self.push(module: controller)
+        self.push(module: viewController)
     }
 
-    private func updateSettingsViewModel(_ settingsViewModel: NewSettingsViewModel) {
+    private func updateSettingsViewModel(_ settingsViewModel: SettingsViewModel) {
         // Video
         let videoDownloadQualityCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.downloadQuality.rawValue,
@@ -430,9 +430,9 @@ extension NewSettingsViewController: NewSettingsViewControllerProtocol {
     }
 }
 
-// MARK: - NewSettingsViewController: NewSettingsViewDelegate -
+// MARK: - SettingsViewController: SettingsViewDelegate -
 
-extension NewSettingsViewController: NewSettingsViewDelegate {
+extension SettingsViewController: SettingsViewDelegate {
     // swiftlint:disable:next cyclomatic_complexity
     func settingsTableView(
         _ tableView: SettingsTableView,
@@ -560,9 +560,9 @@ extension NewSettingsViewController: NewSettingsViewDelegate {
     }
 }
 
-// MARK: - NewSettingsViewController: StyledNavigationControllerPresentable -
+// MARK: - SettingsViewController: StyledNavigationControllerPresentable -
 
-extension NewSettingsViewController: StyledNavigationControllerPresentable {
+extension SettingsViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
         self.appearance.navigationBarAppearance
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-enum NewSettings {
+enum Settings {
     /// Present settings
     enum SettingsLoad {
         struct Request {}
@@ -10,7 +10,7 @@ enum NewSettings {
         }
 
         struct ViewModel {
-            let viewModel: NewSettingsViewModel
+            let viewModel: SettingsViewModel
         }
     }
 

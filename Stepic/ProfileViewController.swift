@@ -258,7 +258,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
             }
         }()
 
-        let assembly = NewSettingsAssembly(navigationBarAppearance: navigationBarAppearance, moduleOutput: self)
+        let assembly = SettingsAssembly(navigationBarAppearance: navigationBarAppearance, moduleOutput: self)
         let controller = StyledNavigationController(rootViewController: assembly.makeModule())
 
         self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
@@ -530,8 +530,8 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
 // MARK: - ProfileViewController: NewSettingsOutputProtocol -
 
-extension ProfileViewController: NewSettingsOutputProtocol {
-    func handleLoggedOut() {
+extension ProfileViewController: SettingsOutputProtocol {
+    func handleUserLoggedOut() {
         self.presenter?.refresh()
         self.dismiss(animated: true) {
             RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)

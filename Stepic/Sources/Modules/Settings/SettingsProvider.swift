@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol NewSettingsProviderProtocol: AnyObject {
+protocol SettingsProviderProtocol: AnyObject {
     // DownloadVideoQuality
     var globalDownloadVideoQuality: DownloadVideoQuality { get set }
     var availableDownloadVideoQualities: [DownloadVideoQuality] { get }
@@ -21,7 +21,7 @@ protocol NewSettingsProviderProtocol: AnyObject {
     func deleteAllDownloadedContent() -> Promise<Void>
 }
 
-final class NewSettingsProvider: NewSettingsProviderProtocol {
+final class SettingsProvider: SettingsProviderProtocol {
     private let downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol
     private let streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol
     private let contentLanguageService: ContentLanguageServiceProtocol
