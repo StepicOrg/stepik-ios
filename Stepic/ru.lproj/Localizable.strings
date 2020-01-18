@@ -607,6 +607,9 @@ LogOutConfirmationAlertTitle = "Выйти";
 LogOutConfirmationAlertMessage = "Вы уверены, что хотите выйти?";
 LogOutConfirmationAlertActionDestructiveTitle = "Выйти";
 
+AppVersionTitle = "Версия %@ (%@)";
+AppVersionUnknownTitle = "Версия приложения неизвестна";
+
 AboutAppTitle = "О приложении";
 TermsOfServiceTitle = "Условия использования";
 PrivacyPolicyTitle = "Условия конфиденциальности";

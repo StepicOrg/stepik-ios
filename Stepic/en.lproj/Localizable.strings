@@ -606,6 +606,9 @@ LogOutConfirmationAlertTitle = "Log Out";
 LogOutConfirmationAlertMessage = "Are you sure you want to log out?";
 LogOutConfirmationAlertActionDestructiveTitle = "Log Out";
 
+AppVersionTitle = "Version %@ (%@)";
+AppVersionUnknownTitle = "The app version is unknown";
+
 AboutAppTitle = "About";
 TermsOfServiceTitle = "Terms of Service";
 PrivacyPolicyTitle = "Privacy Policy";

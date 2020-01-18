@@ -25,6 +25,20 @@ final class AboutAppViewController: UIViewController {
         return view
     }()
 
+    private lazy var appVersionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = Appearance.appVersionLabelTextColor
+        label.font = Appearance.appVersionLabelFont
+        label.textAlignment = Appearance.appVersionLabelTextAlignment
+        label.text = FormatterHelper.prettyVersion(
+            versionNumber: Bundle.main.versionNumber,
+            buildNumber: Bundle.main.buildNumber
+        )
+        return label
+    }()
+
+    private lazy var appVersionContainerView = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -42,6 +56,13 @@ final class AboutAppViewController: UIViewController {
         Cell.allCases.forEach {
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: $0.uniqueIdentifier)
         }
+
+        self.appVersionContainerView.addSubview(self.appVersionLabel)
+        self.appVersionLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.appVersionLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(Appearance.appVersionLabelInsets.top)
+            make.centerX.equalToSuperview()
+        }
     }
 
     private func openURLInWeb(_ urlOrNil: URL?) {
@@ -51,6 +72,13 @@ final class AboutAppViewController: UIViewController {
     }
 
     // MARK: Inner Types
+
+    private enum Appearance {
+        static var appVersionLabelTextColor = UIColor.mainDark
+        static var appVersionLabelFont = UIFont.systemFont(ofSize: 14)
+        static var appVersionLabelTextAlignment = NSTextAlignment.center
+        static var appVersionLabelInsets = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
+    }
 
     private enum Cell: String, CaseIterable, UniqueIdentifiable {
         case termsOfService
@@ -106,7 +134,13 @@ extension AboutAppViewController: UITableViewDataSource {
 }
 
 extension AboutAppViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? { self.socialNetworksView }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        self.socialNetworksView
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        self.appVersionContainerView
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

@@ -169,4 +169,17 @@ enum FormatterHelper {
             return "\(NSLocalizedString("SettingStreamVideoQualityVeryHigh", comment: "")) \(suffix)"
         }
     }
+
+    static func prettyVersion(versionNumber: String?, buildNumber: String?) -> String {
+        guard let version = versionNumber else {
+            return NSLocalizedString("AppVersionUnknownTitle", comment: "")
+        }
+
+        let build = buildNumber ?? "0"
+
+        return String(
+            format: NSLocalizedString("AppVersionTitle", comment: ""),
+            arguments: [version, build]
+        )
+    }
 }
