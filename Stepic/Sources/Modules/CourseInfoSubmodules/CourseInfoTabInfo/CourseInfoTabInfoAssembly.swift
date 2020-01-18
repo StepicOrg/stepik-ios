@@ -5,7 +5,10 @@ final class CourseInfoTabInfoAssembly: Assembly {
     var moduleInput: CourseInfoTabInfoInputProtocol?
 
     func makeModule() -> UIViewController {
-        let provider = CourseInfoTabInfoProvider(usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()))
+        let provider = CourseInfoTabInfoProvider(
+            usersNetworkService: UsersNetworkService(usersAPI: UsersAPI()),
+            streamVideoQualityStorageManager: StreamVideoQualityStorageManager()
+        )
         let presenter = CourseInfoTabInfoPresenter()
         let interactor = CourseInfoTabInfoInteractor(presenter: presenter, provider: provider)
         let viewController = CourseInfoTabInfoViewController(interactor: interactor)

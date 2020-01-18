@@ -26,6 +26,9 @@ final class StepikVideoPlayerLegacyAssembly: Assembly {
             bundle: nil
         )
         videoPlayerViewController.video = self.video
+        videoPlayerViewController.downloadVideoQualityStorageManager = DownloadVideoQualityStorageManager()
+        videoPlayerViewController.streamVideoQualityStorageManager = StreamVideoQualityStorageManager()
+        videoPlayerViewController.videoRateStorageManager = VideoRateStorageManager()
         videoPlayerViewController.autoplayStorageManager = AutoplayStorageManager()
         videoPlayerViewController.delegate = self.delegate
 
@@ -153,6 +156,9 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     weak var delegate: StepikVideoPlayerViewControllerDelegate?
 
+    fileprivate(set) var downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol!
+    fileprivate(set) var streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol!
+    fileprivate(set) var videoRateStorageManager: VideoRateStorageManagerProtocol!
     fileprivate(set) var autoplayStorageManager: AutoplayStorageManagerProtocol?
 
     var video: Video!
@@ -167,10 +173,13 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var isPlayerPassedReadyState = false
 
-    private var currentVideoRate = VideoRate(rawValue: VideosInfo.videoRate).require() {
-        didSet {
+    private var currentVideoRate: VideoRate {
+        get {
+            self.videoRateStorageManager.globalVideoRate
+        }
+        set {
+            self.videoRateStorageManager.globalVideoRate = newValue
             self.adjustToCurrentVideoRate()
-            VideosInfo.videoRate = self.currentVideoRate.rawValue
         }
     }
 
@@ -435,7 +444,7 @@ final class StepikVideoPlayerViewController: UIViewController {
 
         for videoRate in VideoRate.allCases {
             let action = UIAlertAction(
-                title: videoRate.description,
+                title: videoRate.uniqueIdentifier,
                 style: .default,
                 handler: { [weak self] _ in
                     guard let strongSelf = self else {
@@ -444,11 +453,11 @@ final class StepikVideoPlayerViewController: UIViewController {
 
                     AnalyticsReporter.reportEvent(
                         AnalyticsEvents.VideoPlayer.rateChanged,
-                        parameters: ["rate": videoRate.description as NSObject]
+                        parameters: ["rate": videoRate.uniqueIdentifier as NSObject]
                     )
                     AmplitudeAnalyticsEvents.Video.changedSpeed(
-                        source: strongSelf.currentVideoRate.description,
-                        target: videoRate.description
+                        source: strongSelf.currentVideoRate.uniqueIdentifier,
+                        target: videoRate.uniqueIdentifier
                     ).send()
 
                     strongSelf.currentVideoRate = videoRate
@@ -507,7 +516,9 @@ final class StepikVideoPlayerViewController: UIViewController {
                     )
 
                     strongSelf.currentVideoQuality = url.quality
-                    VideosInfo.watchingVideoQuality = Video.getNearestDefault(to: url.quality)
+                    if let quality = StreamVideoQuality(uniqueIdentifier: Video.getNearestDefault(to: url.quality)) {
+                        strongSelf.streamVideoQualityStorageManager.globalStreamVideoQuality = quality
+                    }
                     strongSelf.currentVideoQualityURL = URL(string: url.url)
                     strongSelf.scheduleHidePlayerControlsTimer()
                 })
@@ -563,15 +574,20 @@ final class StepikVideoPlayerViewController: UIViewController {
                 fileManager: FileManager.default
             ).getVideoStoredFile(videoID: video.id).require().localURL
         } else {
-            return self.video.getUrlForQuality(VideosInfo.watchingVideoQuality)
+            return self.video.getUrlForQuality(
+                self.streamVideoQualityStorageManager.globalStreamVideoQuality.uniqueIdentifier
+            )
         }
     }
 
     private func getInitialVideoQuality() -> String {
         if self.video.state == .cached {
-            return self.video.cachedQuality ?? VideosInfo.downloadingVideoQuality
+            return self.video.cachedQuality
+                ?? self.downloadVideoQualityStorageManager.globalDownloadVideoQuality.uniqueIdentifier
         } else {
-            return self.video.getNearestQualityToDefault(VideosInfo.watchingVideoQuality)
+            return self.video.getNearestQualityToDefault(
+                self.streamVideoQualityStorageManager.globalStreamVideoQuality.uniqueIdentifier
+            )
         }
     }
 

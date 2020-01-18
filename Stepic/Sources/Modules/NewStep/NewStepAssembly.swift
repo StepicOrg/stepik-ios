@@ -15,7 +15,7 @@ final class NewStepAssembly: Assembly {
         let provider = NewStepProvider(
             stepsPersistenceService: StepsPersistenceService(),
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
-            stepFontSizeService: StepFontSizeService()
+            stepFontSizeStorageManager: StepFontSizeStorageManager()
         )
         let presenter = NewStepPresenter()
         let interactor = NewStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)

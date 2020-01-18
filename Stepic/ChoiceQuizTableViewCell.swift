@@ -44,7 +44,7 @@ final class ChoiceQuizTableViewCell: UITableViewCell {
         guard let optionWebView = optionWebView else { return }
         textContainerView.addSubview(optionWebView)
         optionWebView.snp.makeConstraints { $0.edges.equalTo(textContainerView) }
-        webViewHelper = CellWebViewHelper(webView: optionWebView, fontSize: StepFontSizeService().globalStepFontSize)
+        webViewHelper = CellWebViewHelper(webView: optionWebView, fontSize: StepFontSizeStorageManager().globalStepFontSize)
         optionWebView.isHidden = true
     }
 

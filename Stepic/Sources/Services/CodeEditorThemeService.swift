@@ -17,7 +17,8 @@ final class CodeEditorThemeService: CodeEditorThemeServiceProtocol {
 
     private var name: String {
         get {
-             PreferencesContainer.codeEditor.theme
+            // TODO: Remove PreferencesContainer.
+            PreferencesContainer.codeEditor.theme
         }
         set {
             PreferencesContainer.codeEditor.theme = newValue

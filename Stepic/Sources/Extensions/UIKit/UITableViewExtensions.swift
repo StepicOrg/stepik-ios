@@ -32,3 +32,13 @@ extension UITableView {
         return view
     }
 }
+
+extension UITableView.Style {
+    static var insetGroupedFallbackGrouped: UITableView.Style {
+        if #available(iOS 13.0, *) {
+            return .insetGrouped
+        } else {
+            return .grouped
+        }
+    }
+}

@@ -31,7 +31,7 @@ final class HTMLProcessor {
         case highlightJS
         case customHead(head: String)
         case customBody(body: String)
-        case fontSize(fontSize: FontSize)
+        case fontSize(fontSize: StepFontSize)
 
         var headInjectionString: String {
             switch self {
