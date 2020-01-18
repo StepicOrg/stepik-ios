@@ -77,7 +77,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
 
     private func makeIntroVideoURL(course: Course, streamVideoQuality: StreamVideoQuality) -> URL? {
         if let introVideo = course.introVideo, !introVideo.urls.isEmpty {
-            return introVideo.getUrlForQuality(streamVideoQuality.description)
+            return introVideo.getUrlForQuality(streamVideoQuality.uniqueIdentifier)
         } else {
             return URL(string: course.introURL)
         }

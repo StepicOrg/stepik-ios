@@ -2,7 +2,7 @@ import Foundation
 import PromiseKit
 
 protocol CourseInfoTabInfoProviderProtocol {
-    var streamVideoQuality: StreamVideoQuality { get }
+    var globalStreamVideoQuality: StreamVideoQuality { get }
 
     func fetchUsersForCourse(_ course: Course) -> Promise<Course>
 }
@@ -11,7 +11,7 @@ final class CourseInfoTabInfoProvider: CourseInfoTabInfoProviderProtocol {
     private let usersNetworkService: UsersNetworkServiceProtocol
     private let streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol
 
-    var streamVideoQuality: StreamVideoQuality { self.streamVideoQualityStorageManager.globalStreamVideoQuality }
+    var globalStreamVideoQuality: StreamVideoQuality { self.streamVideoQualityStorageManager.globalStreamVideoQuality }
 
     init(
         usersNetworkService: UsersNetworkServiceProtocol,

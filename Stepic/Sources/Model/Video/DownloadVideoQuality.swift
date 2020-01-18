@@ -1,16 +1,16 @@
 import Foundation
 
-enum DownloadVideoQuality: Int, CaseIterable {
+enum DownloadVideoQuality: Int, CaseIterable, UniqueIdentifiable {
     case low = 270
     case medium = 360
     case high = 720
     case veryHigh = 1080
 
-    var description: String { "\(self.rawValue)" }
+    var uniqueIdentifier: UniqueIdentifierType { "\(self.rawValue)" }
 
-    init?(qualityString: String) {
-        if let quality = Self.allCases.first(where: { $0.description == qualityString }) {
-            self = quality
+    init?(uniqueIdentifier: UniqueIdentifierType) {
+        if let value = Self.allCases.first(where: { $0.uniqueIdentifier == uniqueIdentifier }) {
+            self = value
         } else {
             return nil
         }

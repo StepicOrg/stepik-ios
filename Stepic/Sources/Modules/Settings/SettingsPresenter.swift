@@ -21,10 +21,13 @@ final class SettingsPresenter: SettingsPresenterProtocol {
     func presentDownloadVideoQualitySetting(response: Settings.DownloadVideoQualitySettingPresentation.Response) {
         let settingDescription = Settings.SettingDescription(
             settings: response.availableDownloadVideoQualities.map {
-                .init(uniqueIdentifier: $0.description, title: FormatterHelper.humanReadableDownloadVideoQuality($0))
+                .init(
+                    uniqueIdentifier: $0.uniqueIdentifier,
+                    title: FormatterHelper.humanReadableDownloadVideoQuality($0)
+                )
             },
             currentSetting: .init(
-                uniqueIdentifier: response.globalDownloadVideoQuality.description,
+                uniqueIdentifier: response.globalDownloadVideoQuality.uniqueIdentifier,
                 title: FormatterHelper.humanReadableDownloadVideoQuality(response.globalDownloadVideoQuality)
             )
         )
@@ -37,10 +40,10 @@ final class SettingsPresenter: SettingsPresenterProtocol {
     func presentStreamVideoQualitySetting(response: Settings.StreamVideoQualitySettingPresentation.Response) {
         let settingDescription = Settings.SettingDescription(
             settings: response.availableStreamVideoQualities.map {
-                .init(uniqueIdentifier: $0.description, title: FormatterHelper.humanReadableStreamVideoQuality($0))
+                .init(uniqueIdentifier: $0.uniqueIdentifier, title: FormatterHelper.humanReadableStreamVideoQuality($0))
             },
             currentSetting: .init(
-                uniqueIdentifier: response.globalStreamVideoQuality.description,
+                uniqueIdentifier: response.globalStreamVideoQuality.uniqueIdentifier,
                 title: FormatterHelper.humanReadableStreamVideoQuality(response.globalStreamVideoQuality)
             )
         )

@@ -88,7 +88,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         }
 
         let globalDownloadVideoQuality = self.downloadVideoQualityStorageManager.globalDownloadVideoQuality
-        let nearestQuality = video.getNearestQualityToDefault(globalDownloadVideoQuality.description)
+        let nearestQuality = video.getNearestQualityToDefault(globalDownloadVideoQuality.uniqueIdentifier)
         let url = video.getUrlForQuality(nearestQuality)
         let task = DownloaderTask(url: url)
 

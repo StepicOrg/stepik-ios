@@ -29,7 +29,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
         self.presenter.presentCourseInfo(
             response: .init(
                 course: self.course,
-                streamVideoQuality: self.provider.streamVideoQuality
+                streamVideoQuality: self.provider.globalStreamVideoQuality
             )
         )
 
@@ -38,7 +38,7 @@ final class CourseInfoTabInfoInteractor: CourseInfoTabInfoInteractorProtocol {
             self.presenter.presentCourseInfo(
                 response: .init(
                     course: self.course,
-                    streamVideoQuality: self.provider.streamVideoQuality
+                    streamVideoQuality: self.provider.globalStreamVideoQuality
                 )
             )
         }.catch { error in

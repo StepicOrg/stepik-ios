@@ -7,16 +7,16 @@ protocol StreamVideoQualityStorageManagerProtocol: AnyObject {
 final class StreamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol {
     var globalStreamVideoQuality: StreamVideoQuality {
         get {
-            if let qualityString = UserDefaults.standard.string(forKey: Key.streamVideoQuality.rawValue),
-               let quality = StreamVideoQuality(qualityString: qualityString) {
-                return quality
+            if let uniqueIdentifier = UserDefaults.standard.string(forKey: Key.streamVideoQuality.rawValue),
+               let value = StreamVideoQuality(uniqueIdentifier: uniqueIdentifier) {
+                return value
             } else {
                 return DeviceInfo.current.isPad ? .high : .medium
             }
         }
         set {
             // Setting `string` value here because of legacy implementation.
-            UserDefaults.standard.set(newValue.description, forKey: Key.streamVideoQuality.rawValue)
+            UserDefaults.standard.set(newValue.uniqueIdentifier, forKey: Key.streamVideoQuality.rawValue)
         }
     }
 

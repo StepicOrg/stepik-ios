@@ -7,16 +7,16 @@ protocol DownloadVideoQualityStorageManagerProtocol: AnyObject {
 final class DownloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol {
     var globalDownloadVideoQuality: DownloadVideoQuality {
         get {
-            if let qualityString = UserDefaults.standard.string(forKey: Key.downloadVideoQuality.rawValue),
-               let quality = DownloadVideoQuality(qualityString: qualityString) {
-                return quality
+            if let uniqueIdentifier = UserDefaults.standard.string(forKey: Key.downloadVideoQuality.rawValue),
+               let value = DownloadVideoQuality(uniqueIdentifier: uniqueIdentifier) {
+                return value
             } else {
                 return DeviceInfo.current.isPad ? .high : .medium
             }
         }
         set {
             // Setting `string` value here because of legacy implementation.
-            UserDefaults.standard.set(newValue.description, forKey: Key.downloadVideoQuality.rawValue)
+            UserDefaults.standard.set(newValue.uniqueIdentifier, forKey: Key.downloadVideoQuality.rawValue)
         }
     }
 

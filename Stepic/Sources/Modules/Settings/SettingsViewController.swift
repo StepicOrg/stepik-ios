@@ -165,7 +165,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
     }
 
     func displayDownloadVideoQualitySetting(viewModel: Settings.DownloadVideoQualitySettingPresentation.ViewModel) {
-        self.displaySelectSettingModule(
+        self.displaySelectionList(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsDownloadVideoQualityTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsDownloadVideoQualityFooterTitle", comment: ""),
@@ -176,7 +176,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
     }
 
     func displayStreamVideoQualitySetting(viewModel: Settings.StreamVideoQualitySettingPresentation.ViewModel) {
-        self.displaySelectSettingModule(
+        self.displaySelectionList(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsStreamVideoQualityTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsStreamVideoQualityFooterTitle", comment: ""),
@@ -187,7 +187,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
     }
 
     func displayContentLanguageSetting(viewModel: Settings.ContentLanguageSettingPresentation.ViewModel) {
-        self.displaySelectSettingModule(
+        self.displaySelectionList(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsContentLanguageTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsContentLanguageFooterTitle", comment: ""),
@@ -198,7 +198,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
     }
 
     func displayStepFontSizeSetting(viewModel: Settings.StepFontSizeSettingPresentation.ViewModel) {
-        self.displaySelectSettingModule(
+        self.displaySelectionList(
             settingDescription: viewModel.settingDescription,
             title: NSLocalizedString("SettingsStepFontSizeTitle", comment: ""),
             footerTitle: NSLocalizedString("SettingsStepFontSizeFooterTitle", comment: ""),
@@ -226,7 +226,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
 
     // MARK: Private Helpers
 
-    private func displaySelectSettingModule(
+    private func displaySelectionList(
         settingDescription: Settings.SettingDescription,
         title: String? = nil,
         headerTitle: String? = nil,
@@ -525,7 +525,7 @@ extension SettingsViewController: SettingsViewDelegate {
     private func handleLogOutAction() {
         self.requestLogOut { [weak self] granted in
             if granted {
-                self?.interactor.doLogOutOfAccount(request: .init())
+                self?.interactor.doAccountLogOut(request: .init())
             }
         }
     }

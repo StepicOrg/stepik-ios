@@ -19,7 +19,7 @@ protocol SettingsInteractorProtocol {
     func doAutoplayNextVideoSettingUpdate(request: Settings.AutoplayNextVideoSettingUpdate.Request)
     func doAdaptiveModeSettingUpdate(request: Settings.AdaptiveModeSettingUpdate.Request)
     func doDeleteAllContent(request: Settings.DeleteAllContent.Request)
-    func doLogOutOfAccount(request: Settings.AccountLogOut.Request)
+    func doAccountLogOut(request: Settings.AccountLogOut.Request)
 }
 
 final class SettingsInteractor: SettingsInteractorProtocol {
@@ -65,7 +65,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     }
 
     func doDownloadVideoQualitySettingUpdate(request: Settings.DownloadVideoQualitySettingUpdate.Request) {
-        if let newDownloadVideoQuality = DownloadVideoQuality(qualityString: request.setting.uniqueIdentifier) {
+        if let newDownloadVideoQuality = DownloadVideoQuality(uniqueIdentifier: request.setting.uniqueIdentifier) {
             self.provider.globalDownloadVideoQuality = newDownloadVideoQuality
         }
     }
@@ -80,7 +80,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
     }
 
     func doStreamVideoQualitySettingUpdate(request: Settings.StreamVideoQualitySettingUpdate.Request) {
-        if let newStreamVideoQuality = StreamVideoQuality(qualityString: request.setting.uniqueIdentifier) {
+        if let newStreamVideoQuality = StreamVideoQuality(uniqueIdentifier: request.setting.uniqueIdentifier) {
             self.provider.globalStreamVideoQuality = newStreamVideoQuality
         }
     }
@@ -137,7 +137,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
         }
     }
 
-    func doLogOutOfAccount(request: Settings.AccountLogOut.Request) {
+    func doAccountLogOut(request: Settings.AccountLogOut.Request) {
         DispatchQueue.main.async {
             self.userAccountService.logOut()
             self.moduleOutput?.handleUserLoggedOut()

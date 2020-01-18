@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension SettingsRightDetailLabelCellView {
+extension SettingsRightDetailCellView {
     struct Appearance {
         let titleTextColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 17)
@@ -18,7 +18,7 @@ extension SettingsRightDetailLabelCellView {
     }
 }
 
-final class SettingsRightDetailLabelCellView: UIView {
+final class SettingsRightDetailCellView: UIView {
     let appearance: Appearance
 
     private lazy var titleLabel: UILabel = {
@@ -111,7 +111,7 @@ final class SettingsRightDetailLabelCellView: UIView {
     }
 }
 
-extension SettingsRightDetailLabelCellView: ProgrammaticallyInitializableViewProtocol {
+extension SettingsRightDetailCellView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.containerView)
         self.containerView.addSubview(self.titleLabel)

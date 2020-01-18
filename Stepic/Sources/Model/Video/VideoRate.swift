@@ -1,6 +1,6 @@
 import Foundation
 
-enum VideoRate: Float, CaseIterable {
+enum VideoRate: Float, CaseIterable, UniqueIdentifiable {
     case verySlow = 0.5
     case slow = 0.75
     case normal = 1
@@ -8,6 +8,8 @@ enum VideoRate: Float, CaseIterable {
     case fast = 1.5
     case veryFast = 1.75
     case doubleFast = 2.0
+
+    var uniqueIdentifier: UniqueIdentifierType { "\(self.rawValue)" }
 
     // If the value is a maximal rate, it cyclically gets the lowest one
     var nextValue: VideoRate {
@@ -21,5 +23,11 @@ enum VideoRate: Float, CaseIterable {
         return self
     }
 
-    var description: String { "\(self.rawValue)" }
+    init?(uniqueIdentifier: UniqueIdentifierType) {
+        if let value = Self.allCases.first(where: { $0.uniqueIdentifier == uniqueIdentifier }) {
+            self = value
+        } else {
+            return nil
+        }
+    }
 }
