@@ -3667,15 +3667,6 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		2C2365E221078CC100C99742 /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				2C09313621D00B8D002B605D /* VideoDownloadingService.swift */,
-				2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */,
-			);
-			name = Videos;
-			sourceTree = "<group>";
-		};
 		2C29B62E22C6649100730C16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -3979,7 +3970,6 @@
 				62E986DB2768602666465180 /* AppDelegate.swift */,
 				2C0176C32188A49100DDB9D0 /* Analytics */,
 				0885F84A1BA8375C00F2A188 /* Controllers */,
-				2CE664DE20F5204D0082F3FE /* Downloader */,
 				08E542041C6C760C00DEC38E /* Enums */,
 				2C6B2F6121AE659600DEB6AC /* Extensions */,
 				0808A30A1BC84FBB00A95C29 /* Helpers */,
@@ -4589,20 +4579,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		2CE664DE20F5204D0082F3FE /* Downloader */ = {
-			isa = PBXGroup;
-			children = (
-				2CE664DF20F520790082F3FE /* Downloader.swift */,
-				2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */,
-				2CE664E120F520790082F3FE /* DownloaderTask.swift */,
-				2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */,
-				2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */,
-				2C2365E321078CEF00C99742 /* StoredFileManager.swift */,
-				2C2365E221078CC100C99742 /* Videos */,
-			);
-			name = Downloader;
-			sourceTree = "<group>";
-		};
 		2CE8390320C7EF5A00FE3672 /* GenericContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -4679,6 +4655,29 @@
 				2CF10C882384243100F8CC95 /* StepSource.swift */,
 			);
 			path = StepSources;
+			sourceTree = "<group>";
+		};
+		2CF1505123D532D900915E5A /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				2CE664DF20F520790082F3FE /* Downloader.swift */,
+				2CE664E220F5207A0082F3FE /* DownloaderProtocol.swift */,
+				2CE664E120F520790082F3FE /* DownloaderTask.swift */,
+				2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */,
+				2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */,
+				2C2365E321078CEF00C99742 /* StoredFileManager.swift */,
+				2CF1505223D532F100915E5A /* Videos */,
+			);
+			path = Downloader;
+			sourceTree = "<group>";
+		};
+		2CF1505223D532F100915E5A /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				2C09313621D00B8D002B605D /* VideoDownloadingService.swift */,
+				2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */,
+			);
+			path = Videos;
 			sourceTree = "<group>";
 		};
 		2CF1DD9D230A99A00083350A /* Views */ = {
@@ -5322,6 +5321,7 @@
 			isa = PBXGroup;
 			children = (
 				2C48D5FF228F0C4800739477 /* ContentProcessor */,
+				2CF1505123D532D900915E5A /* Downloader */,
 				62E98FF5466CDBE04D83471C /* SettingsTable */,
 			);
 			path = Frameworks;
