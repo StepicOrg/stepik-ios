@@ -69,16 +69,27 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
     weak var delegate: SyllabusDownloadsServiceDelegate?
 
+    // Video
     private let videoDownloadingService: VideoDownloadingServiceProtocol
     private let videoFileManager: VideoStoredFileManagerProtocol
+    // Image
+    private let imageDownloadingService: DownloadingServiceProtocol
+    private let imageFileManager: StoredFileManagerProtocol
+
     private let stepsNetworkService: StepsNetworkServiceProtocol
     private let storageUsageService: StorageUsageServiceProtocol
 
-    // Section -> Unit -> Videos
+    // Section -> Unit -> [Videos|Images]
     private var unitIDsBySectionID: [Section.IdType: Set<Unit.IdType>] = [:]
+    // Video
     private var videoIDsByUnitID: [Unit.IdType: Set<Video.IdType>] = [:]
     private var progressByVideoID: [Video.IdType: Float] = [:]
     private var activeVideoDownloads: Set<Video.IdType> = []
+    // Image
+    private var imageURLsByUnitID: [Unit.IdType: Set<URL>] = [:]
+    private var imageDownloadingTaskIDByURL: [URL: DownloaderTaskProtocol.IDType] = [:]
+    //private var progressByVideoID: [Video.IdType: Float] = [:]
+    private var activeImageDownloads: Set<URL> = []
     // Units ids requested to be downloaded but not being started yet.
     // To be able to return `DownloadState.waiting`.
     private var pendingUnitsIDs: Set<Unit.IdType> = []
@@ -86,15 +97,19 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     init(
         videoDownloadingService: VideoDownloadingServiceProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
+        imageDownloadingService: DownloadingServiceProtocol,
+        imageFileManager: StoredFileManagerProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol,
         storageUsageService: StorageUsageServiceProtocol
     ) {
         self.videoDownloadingService = videoDownloadingService
         self.videoFileManager = videoFileManager
+        self.imageDownloadingService = imageDownloadingService
+        self.imageFileManager = imageFileManager
         self.stepsNetworkService = stepsNetworkService
         self.storageUsageService = storageUsageService
 
-        self.subscribeOnVideoDownloadingEvents()
+        self.subscribeOnDownloadingEvents()
     }
 
     // MARK: Download
@@ -173,7 +188,9 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
         let uncachedVideosIDs = Set(uncachedVideos.map { $0.id })
 
-        if uncachedVideosIDs.isEmpty {
+        let uncachedImagesURLs = Set(steps.compactMap { self.getUncachedImages(step: $0) }.flatMap { $0 })
+
+        if uncachedVideosIDs.isEmpty && uncachedImagesURLs.isEmpty {
             self.pendingUnitsIDs.remove(unit.id)
             self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forUnitWithID: unit.id)
             return
@@ -183,26 +200,68 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             self.unitIDsBySectionID[section.id, default: []].insert(unit.id)
         }
 
+        // Update info about Unit -> [video id]
         let uniqueUncachedVideosIDs = uncachedVideosIDs.symmetricDifference(self.videoIDsByUnitID[unit.id, default: []])
         uncachedVideosIDs.forEach { self.videoIDsByUnitID[unit.id, default: []].insert($0) }
 
+        // Update info about Unit -> [image URL]
+        let uniqueUncachedImagesURLs = uncachedImagesURLs.symmetricDifference(
+            self.imageURLsByUnitID[unit.id, default: []]
+        )
+        uncachedImagesURLs.forEach { self.imageURLsByUnitID[unit.id, default: []].insert($0) }
+
+        // Start videos downloads
         let uniqueUncachedVideos = uncachedVideos.filter { uniqueUncachedVideosIDs.contains($0.id) }
         for video in uniqueUncachedVideos where !self.activeVideoDownloads.contains(video.id) {
             try self.videoDownloadingService.download(video: video)
             self.activeVideoDownloads.insert(video.id)
         }
+
+        // Start images downloads
+        for imageURL in uniqueUncachedImagesURLs where !self.activeImageDownloads.contains(imageURL) {
+            let fileName = self.makeImageFileName(from: imageURL)
+            let imageTaskID = try self.imageDownloadingService.download(url: imageURL, destinationFileName: fileName)
+            self.imageDownloadingTaskIDByURL[imageURL] = imageTaskID
+            self.activeImageDownloads.insert(imageURL)
+        }
     }
 
-    private func subscribeOnVideoDownloadingEvents() {
+    private func makeImageFileName(from url: URL) -> String {
+        ImageStoredFileManager.makeFileName(imageURL: url)
+    }
+
+    private func getUncachedImages(step: Step) -> [URL] {
+        guard let text = step.block.text else {
+            return []
+        }
+
+        let imagesURLStrings = HTMLExtractor.extractAllTagsAttribute(tag: "img", attribute: "src", from: text)
+        let imagesURLs = Set(imagesURLStrings.compactMap { URL(string: $0) })
+
+        return imagesURLs.compactMap { imageURL -> URL? in
+            let fileName = self.makeImageFileName(from: imageURL)
+            return self.imageFileManager.getLocalStoredFile(fileName: fileName) == nil ? imageURL : nil
+        }
+    }
+
+    private func subscribeOnDownloadingEvents() {
         self.videoDownloadingService.subscribeOnEvents { [weak self] event in
             DispatchQueue.main.async {
-                self?.handleUpdate(with: event)
+                self?.handleVideoUpdate(with: event)
+            }
+        }
+
+        self.imageDownloadingService.subscribeOnEvents { [weak self] event in
+            DispatchQueue.main.async {
+                let imageTaskID = event.taskID
+                print(event)
+                print(imageTaskID)
             }
         }
     }
 
-    /// Handle events from downloading service
-    private func handleUpdate(with event: VideoDownloadingServiceEvent) {
+    /// Handle events from video downloading service
+    private func handleVideoUpdate(with event: VideoDownloadingServiceEvent) {
         let videoID = event.videoID
 
         // Remove unit from the pending state

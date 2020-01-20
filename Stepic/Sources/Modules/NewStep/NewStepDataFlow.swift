@@ -8,6 +8,7 @@ enum NewStep {
         struct Data {
             let step: Step
             let fontSize: StepFontSize
+            let storedImages: [StoredImage]
         }
 
         struct Response {
@@ -121,7 +122,12 @@ enum NewStep {
         }
     }
 
-    // MARK: Enums
+    // MARK: Types
+
+    struct StoredImage {
+        let originalURL: URL
+        let storedImageFile: StoredFileProtocol
+    }
 
     enum ViewControllerState {
         case loading

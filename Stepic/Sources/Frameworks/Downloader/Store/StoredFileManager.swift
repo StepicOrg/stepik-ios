@@ -73,3 +73,21 @@ class StoredFileManager: StoredFileManagerProtocol {
         case unableToRemove
     }
 }
+
+// MARK: - StoredFileManagerFactory -
+
+enum StoredFileManagerFactory {
+    enum `Type` {
+        case video
+        case image
+    }
+
+    static func makeStoredFileManager(type: Type) -> StoredFileManagerProtocol {
+        switch type {
+        case .video:
+            return VideoStoredFileManager(fileManager: .default)
+        case .image:
+            return ImageStoredFileManager(fileManager: .default)
+        }
+    }
+}

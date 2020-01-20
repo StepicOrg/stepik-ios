@@ -38,17 +38,24 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     func doStepLoad(request: NewStep.StepLoad.Request) {
         firstly {
             self.provider.fetchStep(id: self.stepID)
-        }.then { fetchResult in
-            self.provider.fetchCurrentFontSize().map { ($0, fetchResult) }
-        }.done(on: DispatchQueue.global(qos: .userInitiated)) { fontSize, result in
-            guard let step = result.value else {
+        }.then(on: .global(qos: .userInitiated)) {
+            fetchResult -> Promise<(StepFontSize, [(imageURL: URL, storedFile: StoredFileProtocol)], Step)> in
+            guard let step = fetchResult.value else {
                 throw Error.fetchFailed
             }
 
+            return when(
+                fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchCachedImages(step: step)
+            ).map { ($0, $1, step) }
+        }.done(on: .global(qos: .userInitiated)) { fontSize, cachedImages, step in
             self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
-                let data = NewStep.StepLoad.Data(step: step, fontSize: fontSize)
+                let data = NewStep.StepLoad.Data(
+                    step: step,
+                    fontSize: fontSize,
+                    storedImages: cachedImages.map { .init(originalURL: $0, storedImageFile: $1) }
+                )
                 self?.presenter.presentStep(response: .init(result: .success(data)))
             }
 

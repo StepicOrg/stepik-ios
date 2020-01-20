@@ -7,6 +7,10 @@ protocol StoredFileProtocol {
     var size: UInt64 { get }
 }
 
+extension StoredFileProtocol {
+    var data: Data? { try? Data(contentsOf: self.localURL) }
+}
+
 struct StoredFile: StoredFileProtocol {
     let localURL: URL
     let size: UInt64
