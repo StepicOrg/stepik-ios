@@ -1,11 +1,3 @@
-//
-//  VideoDownloadingService.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 23/12/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 typealias VideoDownloadingServiceEventHandler = (VideoDownloadingServiceEvent) -> Void
@@ -76,7 +68,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         self.downloader.resumeRestoredTasks()
     }
 
-    // MARK: Public methods
+    // MARK: Public API
 
     func subscribeOnEvents(handler: @escaping VideoDownloadingServiceEventHandler) {
         self.handlers.append(handler)
@@ -133,11 +125,9 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
         self.tasksForVideos.keys.contains(videoID)
     }
 
-    // MARK: Private methods
+    // MARK: Private API
 
-    private func getTaskProgressAndState(
-        taskID: DownloaderTaskProtocol.IDType
-    ) -> (DownloaderTaskState, Float)? {
+    private func getTaskProgressAndState(taskID: DownloaderTaskProtocol.IDType) -> (DownloaderTaskState, Float)? {
         guard let progress = self.tasksLastProgress[taskID] else {
             return nil
         }

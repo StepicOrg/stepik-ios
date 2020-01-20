@@ -1,20 +1,9 @@
-//
-//  VideoStoredFileManager.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 21/12/2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 protocol VideoStoredFileManagerProtocol: AnyObject {
     func getVideoStoredFile(videoID: Video.IdType) -> StoredFileProtocol?
     func removeVideoStoredFile(videoID: Video.IdType) throws
-    func saveTemporaryFileAsVideoFile(
-        temporaryFileURL: URL,
-        videoID: Video.IdType
-    ) throws -> StoredFileProtocol
+    func saveTemporaryFileAsVideoFile(temporaryFileURL: URL, videoID: Video.IdType) throws -> StoredFileProtocol
 }
 
 final class VideoStoredFileManager: StoredFileManager, VideoStoredFileManagerProtocol {
@@ -40,10 +29,7 @@ final class VideoStoredFileManager: StoredFileManager, VideoStoredFileManagerPro
         return try self.removeLocalStoredFile(file)
     }
 
-    func saveTemporaryFileAsVideoFile(
-        temporaryFileURL: URL,
-        videoID: Video.IdType
-    ) throws -> StoredFileProtocol {
+    func saveTemporaryFileAsVideoFile(temporaryFileURL: URL, videoID: Video.IdType) throws -> StoredFileProtocol {
         let fileName = self.makeFileName(videoID: videoID)
         return try self.moveStoredFile(from: temporaryFileURL, destinationFileName: fileName)
     }

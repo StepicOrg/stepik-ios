@@ -1,11 +1,3 @@
-//
-//  VideoFileManager.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 24.07.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 // MARK: Common protocols
@@ -21,13 +13,10 @@ protocol StoredFileProtocol {
 protocol StoredFileManagerProtocol: AnyObject {
     /// Find & get file info if file exists otherwise return nil
     func getLocalStoredFile(fileName: String) -> StoredFileProtocol?
-    /// Remove local stored video; throw exception if error occured
+    /// Remove local stored video; throw exception if error occurred
     func removeLocalStoredFile(_ file: StoredFileProtocol) throws
     /// Move file to current location and return info about new file
-    func moveStoredFile(
-        from sourceURL: URL,
-        destinationFileName: String
-    ) throws -> StoredFileProtocol
+    func moveStoredFile(from sourceURL: URL, destinationFileName: String) throws -> StoredFileProtocol
 }
 
 protocol FileLocationManagerProtocol: AnyObject {
@@ -71,10 +60,7 @@ class StoredFileManager: StoredFileManagerProtocol {
         }
     }
 
-    func moveStoredFile(
-        from sourceURL: URL,
-        destinationFileName: String
-    ) throws -> StoredFileProtocol {
+    func moveStoredFile(from sourceURL: URL, destinationFileName: String) throws -> StoredFileProtocol {
         let url = self.fileLocationManager.getFullURLForFile(fileName: destinationFileName)
 
         do {
@@ -98,7 +84,7 @@ class StoredFileManager: StoredFileManagerProtocol {
     }
 
     private func getFileSize(url: URL) -> UInt64? {
-        let attr = try? fileManager.attributesOfItem(atPath: url.path)
+        let attr = try? self.fileManager.attributesOfItem(atPath: url.path)
         return attr?[FileAttributeKey.size] as? UInt64
     }
 
@@ -108,7 +94,7 @@ class StoredFileManager: StoredFileManagerProtocol {
     }
 }
 
-final class FileLocationManagerFactory {
+enum FileLocationManagerFactory {
     enum `Type` {
         case video
     }
