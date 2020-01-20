@@ -28,6 +28,7 @@ protocol VideoDownloadingServiceProtocol: AnyObject {
     func isTaskActive(videoID: Video.IdType) -> Bool
 }
 
+// FIXME: Inherit from `DownloadingServiceProtocol`
 final class VideoDownloadingService: VideoDownloadingServiceProtocol {
     static let shared = VideoDownloadingService(
         downloader: Downloader(

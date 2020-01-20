@@ -42,20 +42,3 @@ final class VideoStoredFileManager: StoredFileManager, VideoStoredFileManagerPro
         case fileNotFound
     }
 }
-
-final class VideoLocationManager: FileLocationManagerProtocol {
-    private static var videosFolderName = "Video"
-    private var documentDirectoryURL: URL
-
-    var videosDirectoryURL: URL {
-        self.documentDirectoryURL.appendingPathComponent(VideoLocationManager.videosFolderName, isDirectory: true)
-    }
-
-    init(documentDirectoryURL: URL) {
-        self.documentDirectoryURL = documentDirectoryURL
-    }
-
-    func getFullURLForFile(fileName: String) -> URL {
-        self.videosDirectoryURL.appendingPathComponent(fileName, isDirectory: false)
-    }
-}

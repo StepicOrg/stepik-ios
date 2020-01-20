@@ -617,6 +617,10 @@
 		2CB62BEF2019FDB100B5E336 /* arrow_left.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2CB62BED2019FDB100B5E336 /* arrow_left.svg */; };
 		2CB9529C229F29F000A6117A /* ViewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */; };
 		2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */; };
+		2CB9E56223D54BE10050A7F3 /* FileLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E56123D54BE10050A7F3 /* FileLocationManager.swift */; };
+		2CB9E56523D54CE70050A7F3 /* StoredFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E56423D54CE70050A7F3 /* StoredFile.swift */; };
+		2CB9E56923D575710050A7F3 /* FileLocationManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E56823D575710050A7F3 /* FileLocationManagerFactory.swift */; };
+		2CB9E56D23D57AE80050A7F3 /* DownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E56C23D57AE80050A7F3 /* DownloadingService.swift */; };
 		2CB9E8C01F7AA5760004E17F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */; };
 		2CB9E8C21F7AA58B0004E17F /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */; };
 		2CB9E8C41F7AA5CD0004E17F /* NotificationsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */; };
@@ -1754,6 +1758,10 @@
 		2CB62BED2019FDB100B5E336 /* arrow_left.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = arrow_left.svg; sourceTree = "<group>"; };
 		2CB9529B229F29F000A6117A /* ViewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsNetworkService.swift; sourceTree = "<group>"; };
 		2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsPersistenceService.swift; sourceTree = "<group>"; };
+		2CB9E56123D54BE10050A7F3 /* FileLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationManager.swift; sourceTree = "<group>"; };
+		2CB9E56423D54CE70050A7F3 /* StoredFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredFile.swift; sourceTree = "<group>"; };
+		2CB9E56823D575710050A7F3 /* FileLocationManagerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationManagerFactory.swift; sourceTree = "<group>"; };
+		2CB9E56C23D57AE80050A7F3 /* DownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingService.swift; sourceTree = "<group>"; };
 		2CB9E8BF1F7AA5760004E17F /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		2CB9E8C11F7AA58B0004E17F /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2CB9E8C31F7AA5CD0004E17F /* NotificationsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPresenter.swift; sourceTree = "<group>"; };
@@ -4402,6 +4410,27 @@
 			path = AdaptiveOnboardingContent;
 			sourceTree = "<group>";
 		};
+		2CB9E55823D544850050A7F3 /* DownloadingService */ = {
+			isa = PBXGroup;
+			children = (
+				2CB9E56C23D57AE80050A7F3 /* DownloadingService.swift */,
+				2C09313621D00B8D002B605D /* VideoDownloadingService.swift */,
+			);
+			path = DownloadingService;
+			sourceTree = "<group>";
+		};
+		2CB9E55E23D54B5E0050A7F3 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				2CB9E56123D54BE10050A7F3 /* FileLocationManager.swift */,
+				2CB9E56823D575710050A7F3 /* FileLocationManagerFactory.swift */,
+				2CB9E56423D54CE70050A7F3 /* StoredFile.swift */,
+				2C2365E321078CEF00C99742 /* StoredFileManager.swift */,
+				2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		2CB9E8BE1F7AA5550004E17F /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -4665,19 +4694,10 @@
 				2CE664E120F520790082F3FE /* DownloaderTask.swift */,
 				2CE664E020F520790082F3FE /* DownloaderTaskProtocol.swift */,
 				2C2485462101D91F006F8858 /* RestorableBackgroundDownloaderProtocol.swift */,
-				2C2365E321078CEF00C99742 /* StoredFileManager.swift */,
-				2CF1505223D532F100915E5A /* Videos */,
+				2CB9E55823D544850050A7F3 /* DownloadingService */,
+				2CB9E55E23D54B5E0050A7F3 /* Store */,
 			);
 			path = Downloader;
-			sourceTree = "<group>";
-		};
-		2CF1505223D532F100915E5A /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				2C09313621D00B8D002B605D /* VideoDownloadingService.swift */,
-				2C09313421CD4BDD002B605D /* VideoStoredFileManager.swift */,
-			);
-			path = Videos;
 			sourceTree = "<group>";
 		};
 		2CF1DD9D230A99A00083350A /* Views */ = {
@@ -6284,6 +6304,7 @@
 			files = (
 				0846B1031EDDED1000D64D77 /* StepOptions.swift in Sources */,
 				861B96371FE1DF7F00773EDA /* CAGradientLayer+Init.swift in Sources */,
+				2CB9E56D23D57AE80050A7F3 /* DownloadingService.swift in Sources */,
 				08D1EF741BB5636700BE84E6 /* Course.swift in Sources */,
 				088CB1EC1D4BD5ED00C6ED1B /* FreeAnswerDataset.swift in Sources */,
 				08E43EAB214C307500E3CB50 /* SourcelessRouter.swift in Sources */,
@@ -6334,6 +6355,7 @@
 				088E58C41DE34ED20009B9CE /* VKSocialSDKProvider.swift in Sources */,
 				08F555691C50007800C877E8 /* ChoiceQuizViewController.swift in Sources */,
 				082E35AE20B55691006E28F9 /* StorageRecord.swift in Sources */,
+				2CB9E56923D575710050A7F3 /* FileLocationManagerFactory.swift in Sources */,
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
@@ -6564,6 +6586,7 @@
 				2C6BBBB922B261E700889A45 /* BaseQuizPresenter.swift in Sources */,
 				2C53E00322DDDBFD0084BA2B /* CodeTextViewLayoutManager.swift in Sources */,
 				08E43EA3214C2C5800E3CB50 /* ModalStackRouter.swift in Sources */,
+				2CB9E56523D54CE70050A7F3 /* StoredFile.swift in Sources */,
 				2C5DF13B1FEC0534003B1177 /* CardsStepsViewController.swift in Sources */,
 				083267A91CDCF59B002F7B5A /* DictionarySerializable.swift in Sources */,
 				089200742199E01D00083627 /* DeepLinkRoute.swift in Sources */,
@@ -6937,6 +6960,7 @@
 				62E98490B6A6BF294A86E6E6 /* UnitsPersistenceService.swift in Sources */,
 				62E98D1D1B374D09B4E6EAA5 /* LessonsPersistenceService.swift in Sources */,
 				62E9897C196DBF3C4CBE2F15 /* StepsNetworkService.swift in Sources */,
+				2CB9E56223D54BE10050A7F3 /* FileLocationManager.swift in Sources */,
 				62E9860632B3BB21E24DF368 /* SectionsNetworkService.swift in Sources */,
 				62E9851C596D4146AC811EAE /* UnitsNetworkService.swift in Sources */,
 				62E983B402214CA82BF050E8 /* LessonsNetworkService.swift in Sources */,

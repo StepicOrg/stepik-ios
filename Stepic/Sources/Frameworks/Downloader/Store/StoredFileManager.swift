@@ -1,14 +1,5 @@
 import Foundation
 
-// MARK: Common protocols
-
-protocol StoredFileProtocol {
-    /// URL for stored video
-    var localURL: URL { get }
-    /// File size in bytes
-    var size: UInt64 { get }
-}
-
 /// Abstract file on the disk (e.g video, image, saved step html, ...)
 protocol StoredFileManagerProtocol: AnyObject {
     /// Find & get file info if file exists otherwise return nil
@@ -17,17 +8,6 @@ protocol StoredFileManagerProtocol: AnyObject {
     func removeLocalStoredFile(_ file: StoredFileProtocol) throws
     /// Move file to current location and return info about new file
     func moveStoredFile(from sourceURL: URL, destinationFileName: String) throws -> StoredFileProtocol
-}
-
-protocol FileLocationManagerProtocol: AnyObject {
-    func getFullURLForFile(fileName: String) -> URL
-}
-
-// MARK: Base file manager implementation
-
-struct StoredFile: StoredFileProtocol {
-    let localURL: URL
-    let size: UInt64
 }
 
 class StoredFileManager: StoredFileManagerProtocol {
@@ -91,28 +71,5 @@ class StoredFileManager: StoredFileManagerProtocol {
     enum Error: Swift.Error {
         case unableToMove
         case unableToRemove
-    }
-}
-
-enum FileLocationManagerFactory {
-    enum `Type` {
-        case video
-    }
-
-    static func makeLocationManager(type: Type) -> FileLocationManagerProtocol {
-        switch type {
-        case .video:
-            let fileManager = FileManager.default
-            guard let url = try? fileManager.url(
-                for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: true
-            ) else {
-                fatalError("Document directory doesn't exist in user's home directory")
-            }
-
-            return VideoLocationManager(documentDirectoryURL: url)
-        }
     }
 }
