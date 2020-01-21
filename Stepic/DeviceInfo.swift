@@ -24,8 +24,8 @@ final class DeviceInfo {
     }
 
     var isXSerie: Bool {
-        self.currentDevice.isOneOf(DeviceKit.Device.allXSeriesDevices)
-            || self.currentDevice.isOneOf(DeviceKit.Device.allSimulatorXSeriesDevices)
+        self.currentDevice.isOneOf(DeviceKit.Device.allDevicesWithSensorHousing)
+            || self.currentDevice.isOneOf(DeviceKit.Device.allSimulatorDevicesWithSensorHousing)
     }
 
     var OSVersion: (major: Int, minor: Int, patch: Int) {
