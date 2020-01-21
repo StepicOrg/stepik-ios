@@ -1,6 +1,8 @@
 import Foundation
 import PromiseKit
 
+// swiftlint:disable file_length
+
 // MARK: SyllabusDownloadsServiceDelegate -
 
 protocol SyllabusDownloadsServiceDelegate: AnyObject {
