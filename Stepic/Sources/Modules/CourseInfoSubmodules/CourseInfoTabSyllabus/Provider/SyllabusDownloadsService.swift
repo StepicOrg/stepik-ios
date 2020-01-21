@@ -12,6 +12,11 @@ protocol SyllabusDownloadsServiceDelegate: AnyObject {
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
         didReceiveProgress progress: Float,
+        forImageURL url: URL
+    )
+    func syllabusDownloadsService(
+        _ service: SyllabusDownloadsServiceProtocol,
+        didReceiveProgress progress: Float,
         forUnitWithID unitID: Unit.IdType
     )
     func syllabusDownloadsService(
@@ -28,6 +33,11 @@ protocol SyllabusDownloadsServiceDelegate: AnyObject {
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
         didReceiveCompletion isCompleted: Bool,
+        forImageURL url: URL
+    )
+    func syllabusDownloadsService(
+        _ service: SyllabusDownloadsServiceProtocol,
+        didReceiveCompletion isCompleted: Bool,
         forUnitWithID unitID: Unit.IdType
     )
     func syllabusDownloadsService(
@@ -39,6 +49,10 @@ protocol SyllabusDownloadsServiceDelegate: AnyObject {
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
         didFailLoadVideoWithError error: Swift.Error
+    )
+    func syllabusDownloadsService(
+        _ service: SyllabusDownloadsServiceProtocol,
+        didFailLoadImageWithError error: Swift.Error
     )
 }
 
@@ -88,7 +102,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     // Image
     private var imageURLsByUnitID: [Unit.IdType: Set<URL>] = [:]
     private var imageDownloadingTaskIDByURL: [URL: DownloaderTaskProtocol.IDType] = [:]
-    //private var progressByVideoID: [Video.IdType: Float] = [:]
+    private var progressByImageURL: [URL: Float] = [:]
     private var activeImageDownloads: Set<URL> = []
     // Units ids requested to be downloaded but not being started yet.
     // To be able to return `DownloadState.waiting`.
@@ -183,7 +197,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                   let video = step.block.video else {
                 return nil
             }
-
             return self.videoFileManager.getVideoStoredFile(videoID: video.id) == nil ? video : nil
         }
         let uncachedVideosIDs = Set(uncachedVideos.map { $0.id })
@@ -210,35 +223,26 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         )
         uncachedImagesURLs.forEach { self.imageURLsByUnitID[unit.id, default: []].insert($0) }
 
-        // Start videos downloads
+        // Start video downloads
         let uniqueUncachedVideos = uncachedVideos.filter { uniqueUncachedVideosIDs.contains($0.id) }
         for video in uniqueUncachedVideos where !self.activeVideoDownloads.contains(video.id) {
             try self.videoDownloadingService.download(video: video)
             self.activeVideoDownloads.insert(video.id)
         }
 
-        // Start images downloads
+        // Start image downloads
         for imageURL in uniqueUncachedImagesURLs where !self.activeImageDownloads.contains(imageURL) {
             let fileName = self.makeImageFileName(from: imageURL)
-            let imageTaskID = try self.imageDownloadingService.download(url: imageURL, destinationFileName: fileName)
-            self.imageDownloadingTaskIDByURL[imageURL] = imageTaskID
+            let taskID = try self.imageDownloadingService.download(url: imageURL, destinationFileName: fileName)
+            self.imageDownloadingTaskIDByURL[imageURL] = taskID
             self.activeImageDownloads.insert(imageURL)
         }
     }
 
-    private func makeImageFileName(from url: URL) -> String {
-        ImageStoredFileManager.makeFileName(imageURL: url)
-    }
+    private func makeImageFileName(from url: URL) -> String { ImageStoredFileManager.makeFileName(imageURL: url) }
 
     private func getUncachedImages(step: Step) -> [URL] {
-        guard let text = step.block.text else {
-            return []
-        }
-
-        let imagesURLStrings = HTMLExtractor.extractAllTagsAttribute(tag: "img", attribute: "src", from: text)
-        let imagesURLs = Set(imagesURLStrings.compactMap { URL(string: $0) })
-
-        return imagesURLs.compactMap { imageURL -> URL? in
+        step.block.imagesURLs.compactMap { imageURL -> URL? in
             let fileName = self.makeImageFileName(from: imageURL)
             return self.imageFileManager.getLocalStoredFile(fileName: fileName) == nil ? imageURL : nil
         }
@@ -253,9 +257,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         self.imageDownloadingService.subscribeOnEvents { [weak self] event in
             DispatchQueue.main.async {
-                let imageTaskID = event.taskID
-                print(event)
-                print(imageTaskID)
+                self?.handleImageUpdate(with: event)
             }
         }
     }
@@ -277,23 +279,67 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             self.delegate?.syllabusDownloadsService(self, didFailLoadVideoWithError: error)
         case .active(let progress):
             self.progressByVideoID[videoID] = progress
-            self.reportDownloadingProgress(progress, forVideoWithID: videoID)
+            self.reportVideoDownloadingProgress(progress, videoID: videoID)
         case .completed:
-            self.progressByVideoID[videoID] = SyllabusDownloadsService.progressCompletedValue
+            self.progressByVideoID[videoID] = Self.progressCompletedValue
             self.activeVideoDownloads.remove(videoID)
 
-            self.reportDownloadingProgress(SyllabusDownloadsService.progressCompletedValue, forVideoWithID: videoID)
+            self.reportVideoDownloadingProgress(Self.progressCompletedValue, videoID: videoID)
             self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forVideoWithID: videoID)
         }
     }
 
-    private func reportDownloadingProgress(_ progress: Float, forVideoWithID videoID: Video.IdType) {
+    /// Handle events from image downloading service
+    private func handleImageUpdate(with event: DownloadingServiceEvent) {
+        let imageTaskID = event.taskID
+
+        guard let imageURL = self.imageDownloadingTaskIDByURL.first(where: { $1 == imageTaskID })?.key else {
+            return
+        }
+
+        if let unitID = self.imageURLsByUnitID.first(where: { $1.contains(imageURL) })?.key {
+            self.pendingUnitsIDs.remove(unitID)
+        }
+
+        switch event.state {
+        case .error(let error):
+            self.progressByImageURL.removeValue(forKey: imageURL)
+            self.activeImageDownloads.remove(imageURL)
+
+            self.delegate?.syllabusDownloadsService(self, didFailLoadImageWithError: error)
+        case .active(let progress):
+            self.progressByImageURL[imageURL] = progress
+            self.reportImageDownloadingProgress(progress, url: imageURL, taskID: imageTaskID)
+        case .completed:
+            self.progressByImageURL[imageURL] = Self.progressCompletedValue
+            self.activeImageDownloads.remove(imageURL)
+
+            self.reportImageDownloadingProgress(Self.progressCompletedValue, url: imageURL, taskID: imageTaskID)
+            self.delegate?.syllabusDownloadsService(self, didReceiveCompletion: true, forImageURL: imageURL)
+        }
+    }
+
+    private func reportVideoDownloadingProgress(_ progress: Float, videoID: Video.IdType) {
         self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forVideoWithID: videoID)
 
         guard let unitID = self.videoIDsByUnitID.first(where: { $0.value.contains(videoID) })?.key else {
             return
         }
 
+        self.updateUnitAndSectionProgresses(unitID: unitID)
+    }
+
+    private func reportImageDownloadingProgress(_ progress: Float, url: URL, taskID: DownloaderTaskProtocol.IDType) {
+        self.delegate?.syllabusDownloadsService(self, didReceiveProgress: progress, forImageURL: url)
+
+        guard let unitID = self.imageURLsByUnitID.first(where: { $0.value.contains(url) })?.key else {
+            return
+        }
+
+        self.updateUnitAndSectionProgresses(unitID: unitID)
+    }
+
+    private func updateUnitAndSectionProgresses(unitID: Unit.IdType) {
         if let unitProgress = self.getUnitDownloadProgress(unitID: unitID) {
             self.delegate?.syllabusDownloadsService(self, didReceiveProgress: unitProgress, forUnitWithID: unitID)
 
@@ -321,26 +367,39 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return Promise(error: Error.lessonNotFound)
         }
 
-        let removeStepsPromises = lesson.steps
-            .map { step -> Promise<Void> in
-                Promise { seal in
-                    if step.block.type == .video, let video = step.block.video {
-                        do {
-                            try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
-                            video.cachedQuality = nil
+        let removeStepsPromises = lesson.steps.map { step -> Promise<Void> in
+            Promise { seal in
+                if step.block.type == .video, let video = step.block.video {
+                    do {
+                        try self.videoFileManager.removeVideoStoredFile(videoID: video.id)
+                        video.cachedQuality = nil
 
-                            self.videoIDsByUnitID[unit.id]?.remove(video.id)
-                            self.progressByVideoID[video.id] = nil
+                        self.videoIDsByUnitID[unit.id]?.remove(video.id)
+                        self.progressByVideoID[video.id] = nil
+                    } catch {
+                        seal.reject(Error.removeUnitFailed)
+                    }
+                }
+
+                if let imageStoredFileManager = self.imageFileManager as? ImageStoredFileManagerProtocol {
+                    for imageURL in step.block.imagesURLs {
+                        do {
+                            try imageStoredFileManager.removeImageStoredFile(imageURL: imageURL)
+                            self.imageURLsByUnitID[unit.id]?.remove(imageURL)
+                            self.activeImageDownloads.remove(imageURL)
+                            self.progressByImageURL.removeValue(forKey: imageURL)
+                            self.imageDownloadingTaskIDByURL.removeValue(forKey: imageURL)
                         } catch {
                             seal.reject(Error.removeUnitFailed)
                         }
                     }
-
-                    CoreDataHelper.instance.deleteFromStore(step, save: false)
-
-                    seal.fulfill(())
                 }
+
+                CoreDataHelper.instance.deleteFromStore(step, save: false)
+
+                seal.fulfill(())
             }
+        }
 
         return Promise { seal in
             when(fulfilled: removeStepsPromises).done { _ in
@@ -512,8 +571,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                 shouldBeCachedUnitsCount += 1
             case .downloading(let progress):
                 downloadingUnitProgresses.append(progress)
-            case .cached(let unitSizeinBytes):
-                sectionSizeInBytes += unitSizeinBytes
+            case .cached(let unitSizeInBytes):
+                sectionSizeInBytes += unitSizeInBytes
             case .waiting:
                 pendingUnitsCount += 1
             }
@@ -575,16 +634,32 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         self.activeVideoDownloads.contains(video.id) ? self.progressByVideoID[video.id] : nil
     }
 
+    private func getImageDownloadProgress(url: URL) -> Float? {
+        self.activeImageDownloads.contains(url) ? self.progressByImageURL[url] : nil
+    }
+
     private func getUnitDownloadProgress(unitID: Unit.IdType) -> Float? {
-        guard let videoIDs = self.videoIDsByUnitID[unitID] else {
+        let videoIDs = self.videoIDsByUnitID[unitID]
+        let imagesURLs = self.imageURLsByUnitID[unitID]
+
+        let isVideosEmpty = (videoIDs == nil) || (videoIDs?.isEmpty ?? true)
+        let isImagesEmpty = (imagesURLs == nil) || (imagesURLs?.isEmpty ?? true)
+
+        if isVideosEmpty && isImagesEmpty {
             return nil
         }
 
-        if videoIDs.isEmpty {
-            return nil
+        var videosProgress: Float?
+        if let videoIDs = videoIDs {
+            videosProgress = videoIDs.reduce(0, { $0 + (self.progressByVideoID[$1] ?? 0) }) / Float(videoIDs.count)
         }
 
-        return videoIDs.reduce(0, { $0 + (self.progressByVideoID[$1] ?? 0) }) / Float(videoIDs.count)
+        var imagesProgress: Float?
+        if let imagesURLs = imagesURLs {
+            imagesProgress = imagesURLs.reduce(0, { $0 + (self.progressByImageURL[$1] ?? 0) }) / Float(imagesURLs.count)
+        }
+
+        return ((videosProgress ?? 0) + (imagesProgress ?? 0)) / 2
     }
 
     private func getSectionDownloadProgress(sectionID: Section.IdType) -> Float? {
@@ -599,7 +674,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return unitIDs.reduce(0, { $0 + (self.getUnitDownloadProgress(unitID: $1) ?? 0) }) / Float(unitIDs.count)
     }
 
-    // MARK: - Private helpers -
+    // MARK: - Private Helpers -
 
     private func restoreDownloading(section: Section, unit: Unit) throws {
         guard let lesson = unit.lesson else {

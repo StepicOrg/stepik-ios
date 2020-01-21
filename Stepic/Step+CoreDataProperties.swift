@@ -41,7 +41,7 @@ extension Step {
 
     var id: Int {
         get {
-             self.managedId?.intValue ?? -1
+            self.managedId?.intValue ?? -1
         }
         set {
             self.managedId = newValue as NSNumber?
@@ -50,7 +50,7 @@ extension Step {
 
     var lessonID: Int {
         get {
-             self.managedLessonId?.intValue ?? -1
+            self.managedLessonId?.intValue ?? -1
         }
         set {
             self.managedLessonId = newValue as NSNumber?
@@ -59,7 +59,7 @@ extension Step {
 
     var position: Int {
         get {
-             self.managedPosition?.intValue ?? -1
+            self.managedPosition?.intValue ?? -1
         }
         set {
             self.managedPosition = newValue as NSNumber?
@@ -68,7 +68,7 @@ extension Step {
 
     var passedByCount: Int {
         get {
-             self.managedPassedBy?.intValue ?? 0
+            self.managedPassedBy?.intValue ?? 0
         }
         set {
             self.managedPassedBy = newValue as NSNumber?
@@ -77,7 +77,7 @@ extension Step {
 
     var correctRatio: Float {
         get {
-             self.managedCorrectRatio?.floatValue ?? 0
+            self.managedCorrectRatio?.floatValue ?? 0
         }
         set {
             self.managedCorrectRatio = newValue as NSNumber?
@@ -86,7 +86,7 @@ extension Step {
 
     var hasSubmissionRestrictions: Bool {
         get {
-             self.managedHasSubmissionRestrictions?.boolValue ?? false
+            self.managedHasSubmissionRestrictions?.boolValue ?? false
         }
         set {
             self.managedHasSubmissionRestrictions = newValue as NSNumber?
@@ -95,7 +95,7 @@ extension Step {
 
     var status: String {
         get {
-             self.managedStatus ?? "no status"
+            self.managedStatus ?? "no status"
         }
         set {
             self.managedStatus = newValue
@@ -104,7 +104,7 @@ extension Step {
 
     var block: Block {
         get {
-             self.managedBlock!
+            self.managedBlock!
         }
         set {
             self.managedBlock = newValue
@@ -113,7 +113,7 @@ extension Step {
 
     var progressID: String? {
         get {
-             self.managedProgressId
+            self.managedProgressId
         }
         set {
             self.managedProgressId = newValue
@@ -122,7 +122,7 @@ extension Step {
 
     var progress: Progress? {
         get {
-             self.managedProgress
+            self.managedProgress
         }
         set {
             self.managedProgress = newValue
@@ -131,7 +131,7 @@ extension Step {
 
     var discussionProxyID: String? {
         get {
-             self.managedDiscussionProxy
+            self.managedDiscussionProxy
         }
         set {
             self.managedDiscussionProxy = newValue
@@ -140,7 +140,7 @@ extension Step {
 
     var discussionsCount: Int? {
         get {
-             self.managedDiscussionsCount?.intValue
+            self.managedDiscussionsCount?.intValue
         }
         set {
             self.managedDiscussionsCount = newValue as NSNumber?
@@ -149,7 +149,7 @@ extension Step {
 
     var lesson: Lesson? {
         get {
-             self.managedLesson
+            self.managedLesson
         }
         set {
             self.managedLesson = newValue
@@ -158,7 +158,7 @@ extension Step {
 
     var options: StepOptions? {
         get {
-             self.managedOptions
+            self.managedOptions
         }
         set {
             self.managedOptions = newValue
@@ -167,7 +167,7 @@ extension Step {
 
     var maxSubmissionsCount: Int? {
         get {
-             self.managedMaxSubmissionsCount?.intValue
+            self.managedMaxSubmissionsCount?.intValue
         }
         set {
             self.managedMaxSubmissionsCount = newValue as NSNumber?
