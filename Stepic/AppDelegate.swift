@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsHelper.sharedHelper.setupAnalytics()
         AnalyticsUserProperties.shared.setApplicationID(id: Bundle.main.bundleIdentifier!)
         AnalyticsUserProperties.shared.updateUserID()
+        AnalyticsUserProperties.shared.updateIsDarkModeEnabled()
 
         NotificationsBadgesManager.shared.setup()
 
@@ -115,6 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.didChangeOrientation()
 
         self.branchService.setup(launchOptions: launchOptions)
+
+        if #available(iOS 13.0, *) {
+            self.window?.overrideUserInterfaceStyle = .light
+        }
 
         return true
     }

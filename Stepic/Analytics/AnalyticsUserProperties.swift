@@ -89,4 +89,17 @@ final class AnalyticsUserProperties: ABAnalyticsServiceProtocol {
     func updateUserID() {
         self.setUserID(to: AuthInfo.shared.userId)
     }
+
+    func updateIsDarkModeEnabled() {
+        let isEnabled: Bool = {
+            if #available(iOS 13.0, *) {
+                if case .dark = UITraitCollection.current.userInterfaceStyle {
+                    return true
+                }
+            }
+            return false
+        }()
+
+        self.setProperty(key: "is_night_mode_enabled", value: "\(isEnabled)")
+    }
 }
