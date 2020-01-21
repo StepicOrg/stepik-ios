@@ -409,6 +409,6 @@ struct AnalyticsEvents {
     // MARK: - Settings -
 
     struct Settings {
-        static let fontSizeSelected = "font_size_selected"
+        static let stepFontSizeSelected = "font_size_selected"
     }
 }

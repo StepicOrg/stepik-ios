@@ -82,7 +82,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(step: Step, fontSize: FontSize) -> Guarantee<NewStepViewModel> {
+    private func makeViewModel(step: Step, fontSize: StepFontSize) -> Guarantee<NewStepViewModel> {
         Guarantee { seal in
             let contentType: NewStepViewModel.ContentType = {
                 switch step.block.type {
@@ -157,7 +157,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         return NSLocalizedString("NoDiscussionsButtonTitle", comment: "")
     }
 
-    private func makeProcessedContentHTMLString(_ text: String, fontSize: FontSize) -> String {
+    private func makeProcessedContentHTMLString(_ text: String, fontSize: StepFontSize) -> String {
         var injections = ContentProcessor.defaultInjections
         injections.append(FontSizeInjection(fontSize: fontSize))
 

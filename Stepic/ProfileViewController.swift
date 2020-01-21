@@ -9,6 +9,13 @@
 import SnapKit
 import UIKit
 
+enum ProfileState {
+    case normal
+    case loading
+    case error
+    case anonymous
+}
+
 final class ProfileViewController: MenuViewController, ProfileView, ControllerWithStepikPlaceholder {
     var placeholderContainer = StepikPlaceholderControllerContainer()
     var presenter: ProfilePresenter?
@@ -236,8 +243,25 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
     @objc
     private func settingsButtonClicked() {
-        let assembly = SettingsViewControllerLegacyAssembly()
-        self.navigationController?.pushViewController(assembly.makeModule(), animated: true)
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
+        let assembly = SettingsAssembly(navigationBarAppearance: navigationBarAppearance, moduleOutput: self)
+        let controller = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(module: controller, embedInNavigation: false, modalPresentationStyle: modalPresentationStyle)
     }
 
     @objc
@@ -504,9 +528,13 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
     }
 }
 
-enum ProfileState {
-    case normal
-    case loading
-    case error
-    case anonymous
+// MARK: - ProfileViewController: NewSettingsOutputProtocol -
+
+extension ProfileViewController: SettingsOutputProtocol {
+    func handleUserLoggedOut() {
+        self.presenter?.refresh()
+        self.dismiss(animated: true) {
+            RoutingManager.auth.routeFrom(controller: self, success: nil, cancel: nil)
+        }
+    }
 }

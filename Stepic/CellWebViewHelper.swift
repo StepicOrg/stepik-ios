@@ -10,11 +10,11 @@ import Foundation
 
 final class CellWebViewHelper: NSObject {
     private weak var webView: UIWebView?
-    private let fontSize: FontSize
+    private let fontSize: StepFontSize
 
     var mathJaxFinishedBlock: (() -> Void)?
 
-    init(webView: UIWebView, fontSize: FontSize) {
+    init(webView: UIWebView, fontSize: StepFontSize) {
         self.webView = webView
         self.fontSize = fontSize
 

@@ -1,10 +1,44 @@
 import SnapKit
 import UIKit
 
-protocol SettingsTableViewDelegate: SettingsInputCellDelegate, SettingsLargeInputCellDelegate { }
+// swiftlint:disable:next colon
+protocol SettingsTableViewDelegate:
+    SettingsInputCellDelegate,
+    SettingsLargeInputCellDelegate,
+    SettingsRightDetailSwitchCellDelegate {
+    func settingsTableView(
+        _ tableView: SettingsTableView,
+        didSelectCell cell: SettingsTableSectionViewModel.Cell,
+        at indexPath: IndexPath
+    )
+}
+
+extension SettingsTableViewDelegate {
+    func settingsTableView(
+        _ tableView: SettingsTableView,
+        didSelectCell cell: SettingsTableSectionViewModel.Cell,
+        at indexPath: IndexPath
+    ) {}
+
+    func settingsCell(
+        elementView: UITextField,
+        didReportTextChange text: String?,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) {}
+
+    func settingsCell(
+        elementView: UITextView,
+        didReportTextChange text: String,
+        identifiedBy uniqueIdentifier: UniqueIdentifierType?
+    ) {}
+
+    func settingsCell(_ cell: SettingsRightDetailSwitchTableViewCell, switchValueChanged isOn: Bool) {}
+}
 
 extension SettingsTableView {
-    struct Appearance { }
+    struct Appearance {
+        var style: UITableView.Style = .grouped
+    }
 }
 
 final class SettingsTableView: UIView {
@@ -14,7 +48,7 @@ final class SettingsTableView: UIView {
     private var viewModel: SettingsTableViewModel?
 
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: self.appearance.style)
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -23,6 +57,8 @@ final class SettingsTableView: UIView {
 
         tableView.register(cellClass: SettingsInputTableViewCell<TableInputTextField>.self)
         tableView.register(cellClass: SettingsLargeInputTableViewCell<TableInputTextView>.self)
+        tableView.register(cellClass: SettingsRightDetailTableViewCell.self)
+        tableView.register(cellClass: SettingsRightDetailSwitchTableViewCell.self)
 
         tableView.register(headerFooterViewClass: SettingsTableSectionHeaderView.self)
         tableView.register(headerFooterViewClass: SettingsTableSectionFooterView.self)
@@ -98,6 +134,41 @@ final class SettingsTableView: UIView {
         }
     }
 
+    func updateRightDetailCell(
+        _ cell: SettingsRightDetailTableViewCell,
+        viewModel: SettingsTableSectionViewModel.Cell,
+        options: RightDetailCellOptions
+    ) {
+        cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.accessoryType = options.accessoryType
+
+        cell.elementView.title = options.title.text
+        cell.elementView.titleTextColor = options.title.appearance.textColor
+        cell.elementView.titleTextAlignment = options.title.appearance.textAlignment
+
+        if case .label(let detailText) = options.detailType {
+            cell.elementView.detailText = detailText
+        }
+    }
+
+    func updateRightDetailSwitchCell(
+        _ cell: SettingsRightDetailSwitchTableViewCell,
+        viewModel: SettingsTableSectionViewModel.Cell,
+        options: RightDetailCellOptions
+    ) {
+        cell.uniqueIdentifier = viewModel.uniqueIdentifier
+        cell.accessoryType = options.accessoryType
+        cell.delegate = self.delegate
+
+        cell.elementView.title = options.title.text
+        cell.elementView.textColor = options.title.appearance.textColor
+        cell.elementView.textAlignment = options.title.appearance.textAlignment
+
+        if case .switch(let isOn) = options.detailType {
+            cell.elementView.switchIsOn = isOn
+        }
+    }
+
     // MARK: Private API
 
     private func performTableViewUpdates() {
@@ -123,6 +194,8 @@ extension SettingsTableView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
+// MARK: - SettingsTableView: UITableViewDataSource -
+
 extension SettingsTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         self.viewModel?.sections.count ?? 0
@@ -136,8 +209,7 @@ extension SettingsTableView: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        guard let sectionViewModel = self.viewModel?.sections[safe: indexPath.section],
-              let cellViewModel = sectionViewModel.cells[safe: indexPath.item] else {
+        guard let cellViewModel = self.cellViewModel(at: indexPath) else {
             fatalError("View model is undefined")
         }
 
@@ -152,29 +224,56 @@ extension SettingsTableView: UITableViewDataSource {
             )
             self.updateLargeInputCell(cell, viewModel: cellViewModel, options: options)
             return cell
+        case .rightDetail(let options):
+            switch options.detailType {
+            case .label:
+                let cell: SettingsRightDetailTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                self.updateRightDetailCell(cell, viewModel: cellViewModel, options: options)
+                return cell
+            case .switch:
+                let cell: SettingsRightDetailSwitchTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+                self.updateRightDetailSwitchCell(cell, viewModel: cellViewModel, options: options)
+                return cell
+            }
         }
+    }
+
+    // MARK: Private Helpers
+
+    private func cellViewModel(at indexPath: IndexPath) -> SettingsTableSectionViewModel.Cell? {
+        self.viewModel?.sections[safe: indexPath.section]?.cells[safe: indexPath.item]
     }
 }
 
-extension SettingsTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view: SettingsTableSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
+// MARK: - SettingsTableView: UITableViewDelegate -
 
+extension SettingsTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        if let cellViewModel = self.cellViewModel(at: indexPath) {
+            self.delegate?.settingsTableView(self, didSelectCell: cellViewModel, at: indexPath)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let title = self.viewModel?.sections[safe: section]?.header?.title {
+            let view: SettingsTableSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
             view.title = title
+            return view
         }
 
-        return view
+        return nil
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view: SettingsTableSectionFooterView = tableView.dequeueReusableHeaderFooterView()
-
         if let description = self.viewModel?.sections[safe: section]?.footer?.description {
+            let view: SettingsTableSectionFooterView = tableView.dequeueReusableHeaderFooterView()
             view.text = description
+            return view
         }
 
-        return view
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -184,7 +283,7 @@ extension SettingsTableView: UITableViewDelegate {
         }
 
         switch cellViewModel.type {
-        case .largeInput:
+        case .largeInput, .rightDetail:
             return UITableView.automaticDimension
         default:
             return 44.0
@@ -193,5 +292,9 @@ extension SettingsTableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat { 44.0 }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat { 53.0 }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        self.viewModel?.sections[safe: section]?.header?.title != nil
+            ? 53.0
+            : UITableView.automaticDimension
+    }
 }

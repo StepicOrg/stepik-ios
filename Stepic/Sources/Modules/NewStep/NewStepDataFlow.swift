@@ -7,7 +7,7 @@ enum NewStep {
 
         struct Data {
             let step: Step
-            let fontSize: FontSize
+            let fontSize: StepFontSize
         }
 
         struct Response {
@@ -23,7 +23,7 @@ enum NewStep {
     enum StepTextUpdate {
         struct Response {
             let text: String
-            let fontSize: FontSize
+            let fontSize: StepFontSize
         }
 
         struct ViewModel {

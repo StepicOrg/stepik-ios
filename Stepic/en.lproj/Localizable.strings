@@ -532,6 +532,49 @@ PlaceholderEmptySearchText = "There are no courses";
 PlaceholderEmptySearchButton = "Go to Catalog";
 LoadStories = "Load stories";
 
+/* Settings */
+SettingsTitle = "Settings";
+SettingsHeaderTitleVideo = "Video";
+SettingsHeaderTitleLanguage = "Language";
+SettingsHeaderTitleLearning = "Learning";
+SettingsHeaderTitleDownloadedContent = "Downloaded content";
+SettingsHeaderTitleOther = "Other";
+
+SettingsCellTitleDownloadQuality = "Download quality";
+SettingsCellTitleStreamQuality = "Stream quality";
+SettingsCellTitleContentLanguage = "Content language";
+SettingsCellTitleTextSizeInSteps = "Text size in steps";
+SettingsCellTitleCodeEditor = "Code editor settings";
+SettingsCellTitleAutoplayNextVideo = "Autoplay next video";
+SettingsCellTitleAdaptiveMode = "Adaptive mode";
+SettingsCellTitleDownloads = "Downloads";
+SettingsCellTitleDeleteAllContent = "Delete all content";
+SettingsCellTitleAbout = "About";
+SettingsCellTitleLogOut = "Log Out";
+
+SettingsDownloadVideoQualityTitle = "Video download quality";
+SettingsDownloadVideoQualityFooterTitle = "The smaller size of the video, the faster it loads, and to keep the speed high, keep the app open.";
+SettingDownloadVideoQualityLow = "Low";
+SettingDownloadVideoQualityMedium = "Medium";
+SettingDownloadVideoQualityHigh = "High";
+SettingDownloadVideoQualityVeryHigh = "Very high";
+
+SettingsStreamVideoQualityTitle = "Video stream quality";
+SettingsStreamVideoQualityFooterTitle = "On slow or unstable Internet connection we recommend choose a lower quality.";
+SettingStreamVideoQualityLow = "Low";
+SettingStreamVideoQualityMedium = "Medium";
+SettingStreamVideoQualityHigh = "High";
+SettingStreamVideoQualityVeryHigh = "Very high";
+
+SettingsContentLanguageTitle = "Content language";
+SettingsContentLanguageFooterTitle = "The language of displayed courses.";
+
+SettingsStepFontSizeTitle = "Text size";
+SettingsStepFontSizeFooterTitle = "Text size changes affect only step text";
+SettingsStepFontSizeItemSmall = "Small";
+SettingsStepFontSizeItemMedium = "Medium";
+SettingsStepFontSizeItemLarge = "Large";
+
 /* Content Language settings */
 ContentLanguageDescription = "The language of displayed courses.";
 ContentLanguagePreference = "Content language";
@@ -559,12 +602,18 @@ DeleteAllContentPreferenceTitle = "Delete all content";
 DeleteAllContentConfirmationAlertTitle = "Delete all content";
 DeleteAllContentConfirmationAlertMessage = "Are you sure you want to delete all downloaded content?";
 
-/* Font size settings */
-SettingsStepFontSizeTitle = "Text size";
-SettingsStepFontSizeSubtitle = "Text size changes affect only step text";
-SettingsStepFontSizeItemSmall = "Small";
-SettingsStepFontSizeItemMedium = "Medium";
-SettingsStepFontSizeItemLarge = "Large";
+LogOutConfirmationAlertTitle = "Log Out";
+LogOutConfirmationAlertMessage = "Are you sure you want to log out?";
+LogOutConfirmationAlertActionDestructiveTitle = "Log Out";
+
+AppVersionTitle = "Version %@ (%@)";
+AppVersionUnknownTitle = "The app version is unknown";
+
+AboutAppTitle = "About";
+TermsOfServiceTitle = "Terms of Service";
+PrivacyPolicyTitle = "Privacy Policy";
+TermsOfServiceLink = "https://welcome.stepik.org/en/terms";
+PrivacyPolicyLink = "https://welcome.stepik.org/en/privacy";
 
 /* Achievements */
 Achievements = "Achievements";
@@ -744,7 +793,7 @@ Downloaded = "Downloaded";
 VideoPlayerAutoplayPreferenceTitle = "Auto-transition to next step";
 VideoPlayerAutoplayCancelTitle = "Stay on this step";
 
-OurSocialNetworks = "Our social networks";
+StepikSocialNetworksTitle = "Our social networks";
 
 /* Quiz */
 CorrectFeedbackTitle1 = "Correct.";

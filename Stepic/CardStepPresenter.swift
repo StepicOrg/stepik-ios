@@ -25,14 +25,14 @@ protocol CardStepView: AnyObject {
 
 struct CardStepViewModel {
     let htmlText: String
-    let fontSize: FontSize
+    let fontSize: StepFontSize
 }
 
 final class CardStepPresenter {
     weak var view: CardStepView?
     weak var delegate: CardStepDelegate?
 
-    private let stepFontSizeService: StepFontSizeServiceProtocol
+    private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
 
     var step: Step!
     var state: CardStepState = .unsolved
@@ -43,11 +43,11 @@ final class CardStepPresenter {
     init(
         view: CardStepView,
         step: Step,
-        stepFontSizeService: StepFontSizeServiceProtocol
+        stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
     ) {
         self.step = step
         self.view = view
-        self.stepFontSizeService = stepFontSizeService
+        self.stepFontSizeStorageManager = stepFontSizeStorageManager
     }
 
     deinit {
@@ -58,7 +58,7 @@ final class CardStepPresenter {
         // Set up problem
         let viewModel = CardStepViewModel(
             htmlText: step.block.text ?? "",
-            fontSize: self.stepFontSizeService.globalStepFontSize
+            fontSize: self.stepFontSizeStorageManager.globalStepFontSize
         )
         self.view?.updateProblem(viewModel: viewModel)
 
