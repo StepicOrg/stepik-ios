@@ -8,6 +8,7 @@ enum CourseInfoTabInfo {
 
         struct Response {
             let course: Course?
+            let streamVideoQuality: StreamVideoQuality
         }
 
         struct ViewModel {

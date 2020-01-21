@@ -502,7 +502,7 @@ extension CourseInfoViewController: UIScrollViewDelegate {
 
 extension CourseInfoViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
-        return .init(
+        .init(
             shadowViewAlpha: 0.0,
             backgroundColor: StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(0.0),
             statusBarColor: StyledNavigationController.Appearance.statusBarColor.withAlphaComponent(0.0),

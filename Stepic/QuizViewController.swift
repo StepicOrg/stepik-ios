@@ -128,7 +128,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         self.hintView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.black)
         self.hintHeightWebViewHelper = CellWebViewHelper(
             webView: hintWebView,
-            fontSize: StepFontSizeService().globalStepFontSize
+            fontSize: StepFontSizeStorageManager().globalStepFontSize
         )
         self.hintView.backgroundColor = UIColor.black
         self.hintWebView.isUserInteractionEnabled = true

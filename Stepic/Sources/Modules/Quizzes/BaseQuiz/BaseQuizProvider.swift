@@ -36,7 +36,7 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
     }
 
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)> {
-        return self.submissionsNetworkService.fetch(attemptID: attempt.id, blockName: step.block.name)
+        self.submissionsNetworkService.fetch(attemptID: attempt.id, blockName: step.block.name)
     }
 
     func fetchSubmissions(for step: Step, page: Int = 1) -> Promise<([Submission], Meta)> {

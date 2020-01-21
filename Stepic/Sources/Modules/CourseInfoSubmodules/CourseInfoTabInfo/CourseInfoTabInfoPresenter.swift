@@ -7,11 +7,23 @@ protocol CourseInfoTabInfoPresenterProtocol {
 final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     weak var viewController: CourseInfoTabInfoViewControllerProtocol?
 
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+
     func presentCourseInfo(response: CourseInfoTabInfo.InfoLoad.Response) {
         var viewModel: CourseInfoTabInfo.InfoLoad.ViewModel
 
         if let course = response.course {
-            viewModel = .init(state: .result(data: self.makeViewModel(course: course)))
+            viewModel = .init(
+                state: .result(
+                    data: self.makeViewModel(
+                        course: course,
+                        streamVideoQuality: response.streamVideoQuality
+                    )
+                )
+            )
         } else {
             viewModel = .init(state: .loading)
         }
@@ -19,7 +31,7 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         self.viewController?.displayCourseInfo(viewModel: viewModel)
     }
 
-    private func makeViewModel(course: Course) -> CourseInfoTabInfoViewModel {
+    private func makeViewModel(course: Course, streamVideoQuality: StreamVideoQuality) -> CourseInfoTabInfoViewModel {
         let instructorsViewModel = course.instructors.map { user in
             CourseInfoTabInfoInstructorViewModel(
                 id: user.id,
@@ -37,11 +49,22 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             )
             : nil
 
+        let aboutText: String = {
+            var text = course.summary
+            if AboutCourseStringSplitTest.shouldParticipate {
+                let splitTest = self.splitTestingService.fetchSplitTest(AboutCourseStringSplitTest.self)
+                if case .test = splitTest.currentGroup {
+                    text = course.courseDescription
+                }
+            }
+            return text.trimmingCharacters(in: .whitespaces)
+        }()
+
         return CourseInfoTabInfoViewModel(
             author: self.makeFormattedAuthorText(authors: course.authors),
-            introVideoURL: self.makeIntroVideoURL(course: course),
+            introVideoURL: self.makeIntroVideoURL(course: course, streamVideoQuality: streamVideoQuality),
             introVideoThumbnailURL: URL(string: course.introVideo?.thumbnailURL ?? ""),
-            aboutText: course.summary.trimmingCharacters(in: .whitespaces),
+            aboutText: aboutText,
             requirementsText: course.requirements.trimmingCharacters(in: .whitespaces),
             targetAudienceText: course.audience.trimmingCharacters(in: .whitespaces),
             timeToCompleteText: self.makeFormattedTimeToCompleteText(timeToComplete: course.timeToComplete),
@@ -52,10 +75,9 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
         )
     }
 
-    private func makeIntroVideoURL(course: Course) -> URL? {
+    private func makeIntroVideoURL(course: Course, streamVideoQuality: StreamVideoQuality) -> URL? {
         if let introVideo = course.introVideo, !introVideo.urls.isEmpty {
-            // FIXME: VideosInfo dependency
-            return introVideo.getUrlForQuality(VideosInfo.watchingVideoQuality)
+            return introVideo.getUrlForQuality(streamVideoQuality.uniqueIdentifier)
         } else {
             return URL(string: course.introURL)
         }

@@ -38,6 +38,7 @@ struct SettingsTableSectionViewModel {
 enum SettingsTableSectionCellType {
     case input(options: InputCellOptions)
     case largeInput(options: LargeInputCellOptions)
+    case rightDetail(options: RightDetailCellOptions)
 }
 
 struct InputCellOptions {
@@ -75,5 +76,44 @@ struct LargeInputCellOptions {
         self.valueText = valueText
         self.placeholderText = placeholderText
         self.maxLength = maxLength
+    }
+}
+
+struct RightDetailCellOptions {
+    let title: Title
+    let detailType: DetailType
+    let accessoryType: UITableViewCell.AccessoryType
+
+    init(
+        title: Title,
+        detailType: DetailType = .label(text: nil),
+        accessoryType: UITableViewCell.AccessoryType = .none
+    ) {
+        self.title = title
+        self.detailType = detailType
+        self.accessoryType = accessoryType
+    }
+
+    struct Title {
+        let text: String
+        let appearance: Appearance
+
+        init(
+            text: String,
+            appearance: Appearance = .init(textColor: .black, textAlignment: .natural)
+        ) {
+            self.text = text
+            self.appearance = appearance
+        }
+
+        struct Appearance {
+            let textColor: UIColor
+            let textAlignment: NSTextAlignment
+        }
+    }
+
+    enum DetailType {
+        case label(text: String?)
+        case `switch`(isOn: Bool)
     }
 }

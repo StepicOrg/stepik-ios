@@ -78,9 +78,9 @@ final class CustomAudioControlInjection: ContentProcessingInjection {
 
 /// Injects script that assigns font sizes.
 final class FontSizeInjection: ContentProcessingInjection {
-    private let fontSize: FontSize
+    private let fontSize: StepFontSize
 
-    init(fontSize: FontSize) {
+    init(fontSize: StepFontSize) {
         self.fontSize = fontSize
     }
 

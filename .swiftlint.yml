@@ -47,10 +47,12 @@ whitelist_rules:
   - empty_parentheses_with_trailing_closure
   - empty_string
   - empty_xctest_method
+  - enum_case_associated_values_count
   - fallthrough
   - fatal_error_message
   - file_header
   - file_length
+  - file_name_no_space
   - first_where
   - flatmap_over_map_reduce
   - for_where
@@ -98,8 +100,10 @@ whitelist_rules:
   - opening_brace
   - operator_usage_whitespace
   - operator_whitespace
+  - optional_enum_case_matching
   - overridden_super_call
   - override_in_extension
+  - prefer_self_type_over_type_of_self
   - prefixed_toplevel_constant
   - private_over_fileprivate
   - private_unit_test
@@ -245,6 +249,10 @@ empty_string:
 empty_xctest_method:
   severity: error
 
+enum_case_associated_values_count:
+  warning: 4
+  error: 5
+
 explicit_self:
   severity: error
 
@@ -258,6 +266,9 @@ file_length:
   warning: 400
   error: 400
   ignore_comment_only_lines: true
+
+file_name_no_space:
+  severity: error
 
 first_where:
   severity: error
@@ -381,7 +392,13 @@ operator_usage_whitespace:
 operator_whitespace:
   severity: error
 
+optional_enum_case_matching:
+  severity: error
+
 overridden_super_call:
+  severity: error
+
+prefer_self_type_over_type_of_self:
   severity: error
 
 prefixed_toplevel_constant:

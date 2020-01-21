@@ -46,8 +46,7 @@ final class AuthInfo: NSObject {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
 
-                let performLogoutActions = {
-                    [weak self] in
+                let performLogoutActions = { [weak self] in
                     guard let strongSelf = self else {
                         return
                     }

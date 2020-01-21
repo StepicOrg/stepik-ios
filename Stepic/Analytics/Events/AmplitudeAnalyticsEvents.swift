@@ -423,7 +423,7 @@ struct AmplitudeAnalyticsEvents {
     struct Settings {
         static var opened = AnalyticsEvent(name: "Settings screen opened")
 
-        static func fontSizeSelected(size: String) -> AnalyticsEvent {
+        static func stepFontSizeSelected(size: String) -> AnalyticsEvent {
             return AnalyticsEvent(name: "Font size selected", parameters: ["size": size])
         }
     }

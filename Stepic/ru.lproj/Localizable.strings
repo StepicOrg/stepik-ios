@@ -533,6 +533,49 @@ PlaceholderEmptySearchText = "Ничего не найдено";
 PlaceholderEmptySearchButton = "Перейти в каталог";
 LoadStories = "Загрузить истории";
 
+/* Settings */
+SettingsTitle = "Настройки";
+SettingsHeaderTitleVideo = "Видео";
+SettingsHeaderTitleLanguage = "Язык";
+SettingsHeaderTitleLearning = "Обучение";
+SettingsHeaderTitleDownloadedContent = "Загруженный контент";
+SettingsHeaderTitleOther = "Другое";
+
+SettingsCellTitleDownloadQuality = "Качество загрузки";
+SettingsCellTitleStreamQuality = "Качество воспроизведения";
+SettingsCellTitleContentLanguage = "Язык контента";
+SettingsCellTitleTextSizeInSteps = "Размер текста в шагах";
+SettingsCellTitleCodeEditor = "Настройки редактора кода";
+SettingsCellTitleAutoplayNextVideo = "Автопереход на следующий шаг по окончании видео";
+SettingsCellTitleAdaptiveMode = "Адаптивный режим";
+SettingsCellTitleDownloads = "Загрузки";
+SettingsCellTitleDeleteAllContent = "Удалить весь контент";
+SettingsCellTitleAbout = "О приложении";
+SettingsCellTitleLogOut = "Выйти";
+
+SettingsDownloadVideoQualityTitle = "Качество загрузки видео";
+SettingsDownloadVideoQualityFooterTitle = "Чем меньше размер видео, тем быстрее идёт его загрузка, а чтобы скорость была высокой, держите приложение открытым.";
+SettingDownloadVideoQualityLow = "Низкое";
+SettingDownloadVideoQualityMedium = "Среднее";
+SettingDownloadVideoQualityHigh = "Высокое";
+SettingDownloadVideoQualityVeryHigh = "Максимальное";
+
+SettingsStreamVideoQualityTitle = "Качество воспроизведения видео";
+SettingsStreamVideoQualityFooterTitle = "При медленном или нестабильном Интернет соединении рекомендуем выбирать более низкое качество.";
+SettingStreamVideoQualityLow = "Низкое";
+SettingStreamVideoQualityMedium = "Среднее";
+SettingStreamVideoQualityHigh = "Высокое";
+SettingStreamVideoQualityVeryHigh = "Максимальное";
+
+SettingsContentLanguageTitle = "Язык контента";
+SettingsContentLanguageFooterTitle = "Выберите язык на котором вы будете видеть в приложении курсы.";
+
+SettingsStepFontSizeTitle = "Размер текста";
+SettingsStepFontSizeFooterTitle = "Изменения размера текста влияют только на текст шага.";
+SettingsStepFontSizeItemSmall = "Маленький";
+SettingsStepFontSizeItemMedium = "Средний";
+SettingsStepFontSizeItemLarge = "Большой";
+
 /* Content Language settings */
 ContentLanguageDescription = "Вы будете видеть в приложении курсы на данном языке.";
 ContentLanguagePreference = "Язык контента";
@@ -560,12 +603,18 @@ DeleteAllContentPreferenceTitle = "Удалить весь контент";
 DeleteAllContentConfirmationAlertTitle = "Удалить весь контент";
 DeleteAllContentConfirmationAlertMessage = "Вы уверены, что хотите удалить весь загруженный контент из памяти Вашего устройства?";
 
-/* Font size settings */
-SettingsStepFontSizeTitle = "Размер текста";
-SettingsStepFontSizeSubtitle = "Изменения размера текста влияют только на текст шага";
-SettingsStepFontSizeItemSmall = "Маленький";
-SettingsStepFontSizeItemMedium = "Средний";
-SettingsStepFontSizeItemLarge = "Большой";
+LogOutConfirmationAlertTitle = "Выйти";
+LogOutConfirmationAlertMessage = "Вы уверены, что хотите выйти?";
+LogOutConfirmationAlertActionDestructiveTitle = "Выйти";
+
+AppVersionTitle = "Версия %@ (%@)";
+AppVersionUnknownTitle = "Версия приложения неизвестна";
+
+AboutAppTitle = "О приложении";
+TermsOfServiceTitle = "Условия использования";
+PrivacyPolicyTitle = "Условия конфиденциальности";
+TermsOfServiceLink = "https://welcome.stepik.org/ru/terms";
+PrivacyPolicyLink = "https://welcome.stepik.org/ru/privacy";
 
 /* Achievements */
 Achievements = "Достижения";
@@ -745,7 +794,7 @@ VideoQuality = "Качество видео";
 VideoPlayerAutoplayPreferenceTitle = "Автопереход на следующий шаг";
 VideoPlayerAutoplayCancelTitle = "Остаться на этом шаге";
 
-OurSocialNetworks = "Наши аккаунты в соцсетях";
+StepikSocialNetworksTitle = "Наши аккаунты в соцсетях";
 
 /* Quiz */
 CorrectFeedbackTitle1 = "Правильно.";

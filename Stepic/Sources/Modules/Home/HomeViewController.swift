@@ -150,7 +150,7 @@ final class HomeViewController: BaseExploreViewController {
         case empty
 
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
-            return CourseListContainerViewFactory.HorizontalHeaderDescription(
+            CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Enrolled", comment: ""),
                 summary: nil,
                 shouldShowShowAllButton: self == .normal
@@ -247,7 +247,7 @@ final class HomeViewController: BaseExploreViewController {
         case empty
 
         var headerDescription: CourseListContainerViewFactory.HorizontalHeaderDescription {
-            return CourseListContainerViewFactory.HorizontalHeaderDescription(
+            CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Popular", comment: ""),
                 summary: nil,
                 shouldShowShowAllButton: self == .normal
