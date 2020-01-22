@@ -926,18 +926,18 @@ extension CourseInfoTabSyllabusInteractor {
 
     private func getDownloadingStateForUnit(_ unit: Unit) -> CourseInfoTabSyllabus.DownloadState {
         if let section = self.currentSections[self.getUniqueIdentifierBySectionID(unit.sectionId)] {
-            return self.syllabusDownloadsService.getDownloadingStateForUnit(unit, in: section)
+            return self.syllabusDownloadsService.getUnitDownloadState(unit, in: section)
         }
         return .notAvailable
     }
 
     private func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
-        self.syllabusDownloadsService.getDownloadingStateForSection(section)
+        self.syllabusDownloadsService.getSectionDownloadState(section)
     }
 
     private func getDownloadingStateForCourse() -> CourseInfoTabSyllabus.DownloadState {
         if let course = self.currentCourse {
-            return self.syllabusDownloadsService.getDownloadingStateForCourse(course)
+            return self.syllabusDownloadsService.getCourseDownloadState(course)
         }
         return .notAvailable
     }

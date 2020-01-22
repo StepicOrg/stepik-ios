@@ -18,9 +18,9 @@ protocol SyllabusDownloadsServiceProtocol: AnyObject {
     func cancel(unit: Unit) -> Promise<Void>
     func cancel(section: Section) -> Promise<Void>
 
-    func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
-    func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
+    func getUnitDownloadState(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState
+    func getSectionDownloadState(_ section: Section) -> CourseInfoTabSyllabus.DownloadState
+    func getCourseDownloadState(_ course: Course) -> CourseInfoTabSyllabus.DownloadState
 }
 
 // MARK: - SyllabusDownloadsService: SyllabusDownloadsServiceProtocol -
@@ -416,7 +416,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
     // MARK: Downloading state
 
-    func getDownloadingStateForUnit(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    func getUnitDownloadState(_ unit: Unit, in section: Section) -> CourseInfoTabSyllabus.DownloadState {
         // If section is unreachable or exam then all units are not available
         guard !section.isExam, section.isReachable else {
             return .notAvailable
@@ -485,7 +485,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     }
 
     // swiftlint:disable:next cyclomatic_complexity
-    func getDownloadingStateForSection(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
+    func getSectionDownloadState(_ section: Section) -> CourseInfoTabSyllabus.DownloadState {
         let units = section.units
 
         // Unreachable and exam not available
@@ -501,7 +501,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return .notAvailable
         }
 
-        let unitStates = units.map { self.getDownloadingStateForUnit($0, in: section) }
+        let unitStates = units.map { self.getUnitDownloadState($0, in: section) }
         var shouldBeCachedUnitsCount = 0
         var notAvailableUnitsCount = 0
         var pendingUnitsCount = 0
@@ -549,8 +549,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         return .cached(bytesTotal: sectionSizeInBytes)
     }
 
-    func getDownloadingStateForCourse(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
-        let sectionStates = course.sections.map { self.getDownloadingStateForSection($0) }
+    func getCourseDownloadState(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
+        let sectionStates = course.sections.map { self.getSectionDownloadState($0) }
 
         var cachedSectionsCount = 0
         var courseSizeInBytes: UInt64 = 0
