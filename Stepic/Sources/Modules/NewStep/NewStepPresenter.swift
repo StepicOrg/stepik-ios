@@ -170,14 +170,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         storedImages: [NewStep.StoredImage]
     ) -> String {
         let base64EncodedStringByImageURL = Dictionary(
-            uniqueKeysWithValues: storedImages.compactMap { storedImage -> (URL, String)? in
-                guard let data = storedImage.storedImageFile.data,
-                      let image = UIImage(data: data),
-                      let jpegData = image.jpegData(compressionQuality: 1.0) else {
-                    return nil
-                }
-                return (storedImage.originalURL, jpegData.base64EncodedString())
-            }
+            uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }
         )
 
         let rules = ContentProcessor.defaultRules + [

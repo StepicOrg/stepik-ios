@@ -293,7 +293,9 @@ extension NewSortingQuizElementView: ProcessedContentTextViewDelegate {
         self.delegate?.newSortingQuizElementView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
         self.delegate?.newSortingQuizElementView(self, didRequestFullscreenImage: url)
     }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 }

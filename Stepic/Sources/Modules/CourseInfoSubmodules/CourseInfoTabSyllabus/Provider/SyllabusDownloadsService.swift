@@ -234,19 +234,17 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
 
         // Start image downloads
         for imageURL in uniqueUncachedImagesURLs where !self.activeImageDownloads.contains(imageURL) {
-            let fileName = self.makeImageFileName(from: imageURL)
-            let taskID = try self.imageDownloadingService.download(url: imageURL, destinationFileName: fileName)
+            let filename = ImageStoredFileManager.makeFilename(imageDownloadURL: imageURL)
+            let taskID = try self.imageDownloadingService.download(url: imageURL, destination: filename)
             self.imageDownloadingTaskIDByURL[imageURL] = taskID
             self.activeImageDownloads.insert(imageURL)
         }
     }
 
-    private func makeImageFileName(from url: URL) -> String { ImageStoredFileManager.makeFileName(imageURL: url) }
-
     private func getUncachedImages(step: Step) -> [URL] {
         step.block.imagesURLs.compactMap { imageURL -> URL? in
-            let fileName = self.makeImageFileName(from: imageURL)
-            return self.imageFileManager.getLocalStoredFile(fileName: fileName) == nil ? imageURL : nil
+            let filename = ImageStoredFileManager.makeFilename(imageDownloadURL: imageURL)
+            return self.imageFileManager.getLocalStoredFile(filename: filename) == nil ? imageURL : nil
         }
     }
 

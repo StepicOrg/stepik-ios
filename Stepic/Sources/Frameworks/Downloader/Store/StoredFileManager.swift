@@ -3,16 +3,16 @@ import Foundation
 /// Abstract file on the disk (e.g video, image, saved step html, ...)
 protocol StoredFileManagerProtocol: AnyObject {
     /// Find & get file info if file exists otherwise return nil
-    func getLocalStoredFile(fileName: String) -> StoredFileProtocol?
+    func getLocalStoredFile(filename: String) -> StoredFileProtocol?
     /// Remove local stored video; throw exception if error occurred
     func removeLocalStoredFile(_ file: StoredFileProtocol) throws
     /// Move file to current location and return info about new file
-    func moveStoredFile(from sourceURL: URL, destinationFileName: String) throws -> StoredFileProtocol
+    func moveStoredFile(from sourceURL: URL, destinationFilename: String) throws -> StoredFileProtocol
 }
 
 class StoredFileManager: StoredFileManagerProtocol {
-    private let fileManager: FileManager
-    private let fileLocationManager: FileLocationManagerProtocol
+    private(set) var fileManager: FileManager
+    private(set) var fileLocationManager: FileLocationManagerProtocol
 
     init(
         fileManager: FileManager = FileManager.default,
@@ -22,8 +22,8 @@ class StoredFileManager: StoredFileManagerProtocol {
         self.fileLocationManager = fileLocationManager
     }
 
-    func getLocalStoredFile(fileName: String) -> StoredFileProtocol? {
-        let url = self.fileLocationManager.getFullURLForFile(fileName: fileName)
+    func getLocalStoredFile(filename: String) -> StoredFileProtocol? {
+        let url = self.fileLocationManager.getFullURLForFile(filename: filename)
 
         if self.fileManager.fileExists(atPath: url.path),
            let size = self.getFileSize(url: url) {
@@ -40,11 +40,11 @@ class StoredFileManager: StoredFileManagerProtocol {
         }
     }
 
-    func moveStoredFile(from sourceURL: URL, destinationFileName: String) throws -> StoredFileProtocol {
-        let url = self.fileLocationManager.getFullURLForFile(fileName: destinationFileName)
+    func moveStoredFile(from sourceURL: URL, destinationFilename: String) throws -> StoredFileProtocol {
+        let url = self.fileLocationManager.getFullURLForFile(filename: destinationFilename)
 
         do {
-            // Try to get video folder before
+            // Try to get file folder before
             let directoryURL = url.deletingLastPathComponent()
             if !self.fileManager.fileExists(atPath: directoryURL.path) {
                 try self.fileManager.createDirectory(
@@ -57,15 +57,16 @@ class StoredFileManager: StoredFileManagerProtocol {
             try self.fileManager.moveItem(at: sourceURL, to: url)
 
             let size = self.getFileSize(url: url) ?? 0
+
             return StoredFile(localURL: url, size: size)
         } catch {
             throw Error.unableToMove
         }
     }
 
-    private func getFileSize(url: URL) -> UInt64? {
-        let attr = try? self.fileManager.attributesOfItem(atPath: url.path)
-        return attr?[FileAttributeKey.size] as? UInt64
+    func getFileSize(url: URL) -> UInt64? {
+        let attributes = try? self.fileManager.attributesOfItem(atPath: url.path)
+        return attributes?[FileAttributeKey.size] as? UInt64
     }
 
     enum Error: Swift.Error {

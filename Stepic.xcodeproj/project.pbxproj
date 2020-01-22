@@ -978,6 +978,7 @@
 		62E98F7CC7326DFC895A894C /* ExploreSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9846ED8A00A1041FFB84E /* ExploreSearchBar.swift */; };
 		62E98F9D4DFE12505014E204 /* ContinueCourseDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983C0D92833ECC836D369 /* ContinueCourseDataFlow.swift */; };
 		62E98FAF7FFEFCAB3196CF16 /* UserCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BB94C146AA2D8A9C2FF /* UserCourse.swift */; };
+		62E98FAFD474DA53CC09FE9C /* ImageDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98CF5FA317BCAFAE433A9 /* ImageDataProvider.swift */; };
 		62E98FC91D0AE00E90D18A21 /* BaseExploreInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BE02DDD45341BA76AC6 /* BaseExploreInteractor.swift */; };
 		62E98FD3F94C23372CA8BF78 /* ContentLanguageSwitchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98744A19E3CEB75D70CF8 /* ContentLanguageSwitchAssembly.swift */; };
 		62E98FD5D370C8C9354A625E /* HomeDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98AD841627CB2FA2005DB /* HomeDataFlow.swift */; };
@@ -2081,6 +2082,7 @@
 		62E98CB40E4B44EA17C076F1 /* HomeProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeProvider.swift; sourceTree = "<group>"; };
 		62E98CCD8D3A65826FD76F26 /* CourseListContainerViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListContainerViewFactory.swift; sourceTree = "<group>"; };
 		62E98CF12DBAB6C0C7D003E4 /* VerticalCourseListFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalCourseListFlowLayout.swift; sourceTree = "<group>"; };
+		62E98CF5FA317BCAFAE433A9 /* ImageDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataProvider.swift; sourceTree = "<group>"; };
 		62E98D09B94937AEC4A61D2E /* CourseInfoTabSyllabusCellStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusCellStatsView.swift; sourceTree = "<group>"; };
 		62E98D42EB07C699B6521ECA /* CourseInfoTabSyllabusAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusAssembly.swift; sourceTree = "<group>"; };
 		62E98D5BDF91D64BACBA991A /* CourseListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -4557,6 +4559,7 @@
 			children = (
 				08484EE4211AF42E0006266F /* CachedValue.swift */,
 				2CD462E9226F4279004E4725 /* FetchResult.swift */,
+				62E98CF5FA317BCAFAE433A9 /* ImageDataProvider.swift */,
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
 				2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */,
 				2C2EA36A212D5FEF002116C9 /* Result.swift */,
@@ -7240,6 +7243,7 @@
 				ADE0C828C6BE8588EAEA3BFC /* SettingsDataFlow.swift in Sources */,
 				1B95927C411BBF88DE8B21F0 /* SettingsProvider.swift in Sources */,
 				5406504928626E0C7222456D /* SettingsView.swift in Sources */,
+				62E98FAFD474DA53CC09FE9C /* ImageDataProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

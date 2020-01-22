@@ -16,9 +16,28 @@ final class ImageStoredFileManager: StoredFileManager, ImageStoredFileManagerPro
         )
     }
 
+    override func moveStoredFile(from sourceURL: URL, destinationFilename: String) throws -> StoredFileProtocol {
+        let storedFile = try super.moveStoredFile(from: sourceURL, destinationFilename: destinationFilename)
+
+        if let imageDataStoredFile = self.overwriteWithImageData(fileURL: storedFile.localURL) {
+            return imageDataStoredFile
+        }
+
+        return storedFile
+    }
+
+    static func makeFilename(imageDownloadURL: URL) -> String {
+        let processedURL = imageDownloadURL
+            .deletingPathExtension()
+            .absoluteString
+            .components(separatedBy: .punctuationCharacters)
+            .joined()
+        return "\(processedURL).\(Self.fileExtension)"
+    }
+
     func getImageStoredFile(imageURL: URL) -> StoredFileProtocol? {
-        let fileName = Self.makeFileName(imageURL: imageURL)
-        return self.getLocalStoredFile(fileName: fileName)
+        let fileName = Self.makeFilename(imageDownloadURL: imageURL)
+        return self.getLocalStoredFile(filename: fileName)
     }
 
     func removeImageStoredFile(imageURL: URL) throws {
@@ -30,17 +49,28 @@ final class ImageStoredFileManager: StoredFileManager, ImageStoredFileManagerPro
     }
 
     func saveTemporaryFileAsImageFile(temporaryFileURL: URL, imageURL: URL) throws -> StoredFileProtocol {
-        let fileName = Self.makeFileName(imageURL: imageURL)
-        return try self.moveStoredFile(from: temporaryFileURL, destinationFileName: fileName)
+        let filename = Self.makeFilename(imageDownloadURL: imageURL)
+        return try self.moveStoredFile(from: temporaryFileURL, destinationFilename: filename)
     }
 
-    static func makeFileName(imageURL: URL) -> String {
-        let processedURL = imageURL
-            .deletingPathExtension()
-            .absoluteString
-            .components(separatedBy: .punctuationCharacters)
-            .joined()
-        return "\(processedURL).\(Self.fileExtension)"
+    private func overwriteWithImageData(fileURL: URL) -> StoredFileProtocol? {
+        guard let data = try? Data(contentsOf: fileURL) else {
+            return nil
+        }
+
+        guard let image = UIImage(data: data),
+              let jpegData = image.jpegData(compressionQuality: 1.0) else {
+            return nil
+        }
+
+        do {
+            try jpegData.write(to: fileURL)
+            let size = self.getFileSize(url: fileURL) ?? 0
+
+            return StoredFile(localURL: fileURL, size: size)
+        } catch {
+            return nil
+        }
     }
 
     enum Error: Swift.Error {

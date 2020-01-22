@@ -45,16 +45,21 @@ final class NewStepInteractor: NewStepInteractorProtocol {
             }
 
             return when(
-                fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchCachedImages(step: step)
+                fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(step: step)
             ).map { ($0, $1, step) }
-        }.done(on: .global(qos: .userInitiated)) { fontSize, cachedImages, step in
+        }.done(on: .global(qos: .userInitiated)) { fontSize, storedImages, step in
             self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
                 let data = NewStep.StepLoad.Data(
                     step: step,
                     fontSize: fontSize,
-                    storedImages: cachedImages.map { .init(originalURL: $0, storedImageFile: $1) }
+                    storedImages: storedImages.compactMap { imageURL, storedFile in
+                        if let imageData = storedFile.data {
+                            return NewStep.StoredImage(url: imageURL, data: imageData)
+                        }
+                        return nil
+                    }
                 )
                 self?.presenter.presentStep(response: .init(result: .success(data)))
             }

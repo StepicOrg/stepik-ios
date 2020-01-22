@@ -1,7 +1,7 @@
 import Foundation
 
 protocol FileLocationManagerProtocol: AnyObject {
-    func getFullURLForFile(fileName: String) -> URL
+    func getFullURLForFile(filename: String) -> URL
 }
 
 class FileLocationManager: FileLocationManagerProtocol {
@@ -17,8 +17,8 @@ class FileLocationManager: FileLocationManagerProtocol {
         self.documentDirectoryURL = documentDirectoryURL
     }
 
-    func getFullURLForFile(fileName: String) -> URL {
-        self.filesDirectoryURL.appendingPathComponent(fileName, isDirectory: false)
+    func getFullURLForFile(filename: String) -> URL {
+        self.filesDirectoryURL.appendingPathComponent(filename, isDirectory: false)
     }
 }
 

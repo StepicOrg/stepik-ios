@@ -145,7 +145,9 @@ extension NewMatchingQuizTitleView: ProcessedContentTextViewDelegate {
         self.delegate?.newMatchingQuizTitleView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
         self.delegate?.newMatchingQuizTitleView(self, didRequestFullscreenImage: url)
     }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 }

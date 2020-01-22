@@ -17,8 +17,8 @@ final class VideoStoredFileManager: StoredFileManager, VideoStoredFileManagerPro
     }
 
     func getVideoStoredFile(videoID: Video.IdType) -> StoredFileProtocol? {
-        let fileName = self.makeFileName(videoID: videoID)
-        return self.getLocalStoredFile(fileName: fileName)
+        let filename = self.makeFileName(videoID: videoID)
+        return self.getLocalStoredFile(filename: filename)
     }
 
     func removeVideoStoredFile(videoID: Video.IdType) throws {
@@ -30,8 +30,8 @@ final class VideoStoredFileManager: StoredFileManager, VideoStoredFileManagerPro
     }
 
     func saveTemporaryFileAsVideoFile(temporaryFileURL: URL, videoID: Video.IdType) throws -> StoredFileProtocol {
-        let fileName = self.makeFileName(videoID: videoID)
-        return try self.moveStoredFile(from: temporaryFileURL, destinationFileName: fileName)
+        let filename = self.makeFileName(videoID: videoID)
+        return try self.moveStoredFile(from: temporaryFileURL, destinationFilename: filename)
     }
 
     private func makeFileName(videoID: Video.IdType) -> String {

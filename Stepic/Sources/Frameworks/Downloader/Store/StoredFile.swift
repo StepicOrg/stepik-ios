@@ -1,7 +1,7 @@
 import Foundation
 
 protocol StoredFileProtocol {
-    /// URL for stored video
+    /// URL for stored file
     var localURL: URL { get }
     /// File size in bytes
     var size: UInt64 { get }
