@@ -174,7 +174,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         )
 
         let rules = ContentProcessor.defaultRules + [
-            ReplaceImageSourceWithLocalBase64(
+            ReplaceImageSourceWithBase64(
                 base64EncodedStringByImageURL: base64EncodedStringByImageURL,
                 extractorType: HTMLExtractor.self
             )
