@@ -5,9 +5,10 @@ final class DownloadsAssembly: Assembly {
         let provider = DownloadsProvider(
             coursesPersistenceService: CoursesPersistenceService(),
             adaptiveStorageManager: AdaptiveStorageManager.shared,
-            videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+            videoFileManager: VideoStoredFileManager(fileManager: .default),
             storageUsageService: StorageUsageService(
-                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+                videoFileManager: VideoStoredFileManager(fileManager: .default),
+                imageFileManager: ImageStoredFileManager(fileManager: .default)
             )
         )
         let presenter = DownloadsPresenter()
