@@ -30,12 +30,12 @@ final class ImageStoredFileManager: StoredFileManager, ImageStoredFileManagerPro
     // MARK: Protocol Conforming
 
     func makeImageFilenameFromImageDownloadURL(_ url: URL) -> String {
-        let resultURL = url
+        let name = url
             .deletingPathExtension()
             .absoluteString
             .components(separatedBy: .punctuationCharacters)
             .joined()
-        return "\(resultURL).\(Self.fileExtension)"
+        return "\(name).\(Self.fileExtension)"
     }
 
     func getImageStoredFile(imageURL: URL) -> StoredFileProtocol? {

@@ -184,10 +184,12 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             )
         }
 
+        let injections = ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
+
         let contentProcessor = ContentProcessor(
             content: text,
             rules: rules,
-            injections: ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
+            injections: injections
         )
 
         return contentProcessor.processContent()

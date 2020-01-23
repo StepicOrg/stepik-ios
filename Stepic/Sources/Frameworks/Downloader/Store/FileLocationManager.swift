@@ -48,7 +48,7 @@ enum FileLocationManagerFactory {
 
     static func makeLocationManager(type: Type) -> FileLocationManagerProtocol {
         let fileManager = FileManager.default
-        guard let documentDirectoryURL = try? fileManager.url(
+        guard let documentsDirectoryURL = try? fileManager.url(
             for: .documentDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
@@ -59,9 +59,9 @@ enum FileLocationManagerFactory {
 
         switch type {
         case .video:
-            return VideoLocationManager(documentDirectoryURL: documentDirectoryURL)
+            return VideoLocationManager(documentDirectoryURL: documentsDirectoryURL)
         case .image:
-            return ImageLocationManager(documentDirectoryURL: documentDirectoryURL)
+            return ImageLocationManager(documentDirectoryURL: documentsDirectoryURL)
         }
     }
 }

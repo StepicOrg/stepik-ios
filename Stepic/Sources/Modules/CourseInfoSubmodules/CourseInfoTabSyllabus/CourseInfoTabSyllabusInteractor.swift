@@ -568,12 +568,6 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
         didReceiveProgress progress: Float,
-        forImageURL url: URL
-    ) {}
-
-    func syllabusDownloadsService(
-        _ service: SyllabusDownloadsServiceProtocol,
-        didReceiveProgress progress: Float,
         forUnitWithID unitID: Unit.IdType
     ) {
         guard let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit else {
@@ -615,12 +609,6 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
             isCompleted ? AnalyticsEvents.VideoDownload.succeeded : AnalyticsEvents.VideoDownload.failed
         )
     }
-
-    func syllabusDownloadsService(
-        _ service: SyllabusDownloadsServiceProtocol,
-        didReceiveCompletion isCompleted: Bool,
-        forImageURL url: URL
-    ) {}
 
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
@@ -680,13 +668,6 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
 
             self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
         }
-    }
-
-    func syllabusDownloadsService(
-        _ service: SyllabusDownloadsServiceProtocol,
-        didFailLoadImageWithError error: Swift.Error
-    ) {
-        Self.logger.error("course info tab syllabus interactor: failed load image with error: \(error)")
     }
 }
 
