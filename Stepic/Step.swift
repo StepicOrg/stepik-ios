@@ -66,7 +66,7 @@ final class Step: NSManagedObject, IDFetchable {
         request.predicate = predicate
 
         do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Step] else {
+            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [Step] else {
                 return nil
             }
 
@@ -90,7 +90,7 @@ final class Step: NSManagedObject, IDFetchable {
         request.predicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
 
         do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Step] else {
+            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [Step] else {
                 return []
             }
             return results

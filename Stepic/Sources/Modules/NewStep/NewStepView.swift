@@ -9,6 +9,7 @@ protocol NewStepViewDelegate: AnyObject {
     func newStepViewDidLoadContent(_ view: NewStepView)
 
     func newStepView(_ view: NewStepView, didRequestFullscreenImage url: URL)
+    func newStepView(_ view: NewStepView, didRequestFullscreenImage image: UIImage)
     func newStepView(_ view: NewStepView, didRequestOpenURL url: URL)
 }
 
@@ -240,8 +241,12 @@ extension NewStepView: ProcessedContentTextViewDelegate {
         self.delegate?.newStepView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
         self.delegate?.newStepView(self, didRequestFullscreenImage: url)
+    }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {
+        self.delegate?.newStepView(self, didRequestFullscreenImage: image)
     }
 
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {

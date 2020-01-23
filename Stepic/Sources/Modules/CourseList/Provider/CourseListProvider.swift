@@ -98,7 +98,7 @@ final class CourseListProvider: CourseListProviderProtocol {
                 }
             }
 
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
             seal(courses)
         }
     }

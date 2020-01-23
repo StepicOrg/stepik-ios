@@ -197,10 +197,14 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         switch newState {
         case .notAvailable:
             self.downloadButton.isHidden = true
-        case .cached(let bytesTotal):
-            self.downloadButton.isHidden = false
-            self.downloadButton.actionState = .readyToRemoving
-            downloadedBytesTotal = bytesTotal
+        case .cached(let bytesTotal, let hasUnitWithCachedVideosOrImages):
+            if hasUnitWithCachedVideosOrImages {
+                self.downloadButton.isHidden = false
+                self.downloadButton.actionState = .readyToRemoving
+                downloadedBytesTotal = bytesTotal
+            } else {
+                self.downloadButton.isHidden = true
+            }
         case .notCached:
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .readyToDownloading

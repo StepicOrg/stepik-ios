@@ -6,11 +6,11 @@ extension LastCodeLanguage {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "LastCodeLanguage", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "LastCodeLanguage", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: LastCodeLanguage.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: LastCodeLanguage.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var languageString: String {

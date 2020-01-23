@@ -54,9 +54,9 @@ final class Progress: NSManagedObject, JSONSerializable, IDFetchable {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Progress")
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request) as? [Progress]
+            let results = try CoreDataHelper.shared.context.fetch(request) as? [Progress]
             for obj in results ?? [] {
-                CoreDataHelper.instance.deleteFromStore(obj)
+                CoreDataHelper.shared.deleteFromStore(obj)
             }
         } catch {
             print("\n\n\nCould nnot delete progresses! \n\n\n")

@@ -18,11 +18,11 @@ extension CourseReviewSummary {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CourseReviewSummary", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CourseReviewSummary", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: CourseReviewSummary.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: CourseReviewSummary.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

@@ -62,8 +62,8 @@ final class NewCodeQuizFullscreenProvider: NewCodeQuizFullscreenProviderProtocol
                 return
             }
 
-            CoreDataHelper.instance.deleteFromStore(userTemplate)
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.deleteFromStore(userTemplate)
+            CoreDataHelper.shared.save()
         }
     }
 

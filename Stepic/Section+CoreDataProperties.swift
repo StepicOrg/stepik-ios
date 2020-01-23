@@ -37,11 +37,11 @@ extension Section {
     @NSManaged var managedProgress: Progress?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Section", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Section.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Section.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

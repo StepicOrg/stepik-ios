@@ -8,12 +8,13 @@ import WebKit
 protocol ProcessedContentTextViewDelegate: AnyObject {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView)
     func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int)
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL)
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL)
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage)
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL)
 }
 
 extension ProcessedContentTextViewDelegate {
-    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) { }
+    func processedContentTextView(_ view: ProcessedContentTextView, didReportNewHeight height: Int) {}
 }
 
 // MARK: - Appearance -
@@ -104,7 +105,7 @@ final class ProcessedContentTextView: UIView {
 
     var isScrollEnabled: Bool {
         get {
-             self.webView.scrollView.isScrollEnabled
+            self.webView.scrollView.isScrollEnabled
         }
         set {
             self.webView.scrollView.isScrollEnabled = newValue
@@ -316,11 +317,27 @@ extension ProcessedContentTextView: WKNavigationDelegate {
         let imageLinkPrefix = "openimg://"
         if url.absoluteString.starts(with: imageLinkPrefix) {
             var validPath = String(url.absoluteString.dropFirst(imageLinkPrefix.count))
-            validPath.replaceFirst(matching: "//", with: "://")
-            if let imageURL = URL(string: validPath) {
-                self.delegate?.processedContentTextView(self, didOpenImage: imageURL)
+
+            if validPath.starts(with: "data:image") {
+                let imageDataProvider = Base64ImageDataProvider(base64StringOrNot: validPath)
+
+                guard let imageData = imageDataProvider.data,
+                      let image = UIImage(data: imageData) else {
+                    return decisionHandler(.cancel)
+                }
+
+                self.delegate?.processedContentTextView(self, didOpenImage: image)
+
+                return decisionHandler(.cancel)
+            } else {
+                validPath.replaceFirst(matching: "//", with: "://")
+
+                if let imageURL = URL(string: validPath) {
+                    self.delegate?.processedContentTextView(self, didOpenImageURL: imageURL)
+                }
+
+                return decisionHandler(.cancel)
             }
-            return decisionHandler(.cancel)
         }
 
         if self.isLoadingHTMLText && navigationAction.navigationType == .other {

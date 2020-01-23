@@ -49,7 +49,7 @@ final class Profile: NSManagedObject, JSONSerializable {
         let predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
         request.predicate = predicate
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as? [Profile]
         } catch {
             return nil

@@ -51,9 +51,9 @@ final class Section: NSManagedObject, IDFetchable {
         request.predicate = NSCompoundPredicate(type: .or, subpredicates: idPredicates)
 
         var sections = [Section]()
-        CoreDataHelper.instance.context.performAndWait {
+        CoreDataHelper.shared.context.performAndWait {
             do {
-                sections = try CoreDataHelper.instance.context.fetch(request) as? [Section] ?? []
+                sections = try CoreDataHelper.shared.context.fetch(request) as? [Section] ?? []
             } catch {
                 sections = []
             }
@@ -75,7 +75,7 @@ final class Section: NSManagedObject, IDFetchable {
         request.sortDescriptors = [descriptor]
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as! [Section]
         } catch {
             throw DatabaseError.fetchFailed
@@ -106,7 +106,7 @@ final class Section: NSManagedObject, IDFetchable {
             downloadedUnits.append(contentsOf: uns)
             if downloadedUnits.count == self.unitsArray.count {
                 self.units = Sorter.sort(downloadedUnits, byIds: self.unitsArray)
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
                 success()
             }
         }
@@ -160,7 +160,7 @@ final class Section: NSManagedObject, IDFetchable {
                 units[i].progress = progresses[i]
             }
 
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             completion()
             }, error: {
@@ -188,7 +188,7 @@ final class Section: NSManagedObject, IDFetchable {
                 units[i].lesson = lessons[i]
             }
 
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             completion()
             }, error: {

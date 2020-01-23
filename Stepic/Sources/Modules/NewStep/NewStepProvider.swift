@@ -6,6 +6,7 @@ import PromiseKit
 protocol NewStepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
+    func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
     func fetchCurrentFontSize() -> Guarantee<StepFontSize>
 }
 
@@ -15,15 +16,18 @@ final class NewStepProvider: NewStepProviderProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
+    private let imageStoredFileManager: StoredFileManagerProtocol
 
     init(
         stepsPersistenceService: StepsPersistenceServiceProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol,
-        stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
+        stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
+        imageStoredFileManager: StoredFileManagerProtocol
     ) {
         self.stepsPersistenceService = stepsPersistenceService
         self.stepsNetworkService = stepsNetworkService
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
+        self.imageStoredFileManager = imageStoredFileManager
     }
 
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>> {
@@ -60,9 +64,42 @@ final class NewStepProvider: NewStepProviderProtocol {
         }
     }
 
+    func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]> {
+        Guarantee { seal in
+            self.fetchCachedStep(id: id).done { step in
+                if let step = step {
+                    seal(self.getStepStoredImages(step))
+                } else {
+                    seal([])
+                }
+            }.catch { _ in
+                seal([])
+            }
+        }
+    }
+
     func fetchCurrentFontSize() -> Guarantee<StepFontSize> {
         Guarantee { seal in
             seal(self.stepFontSizeStorageManager.globalStepFontSize)
+        }
+    }
+
+    // MARK: Private API
+
+    private func getStepStoredImages(_ step: Step) -> [(imageURL: URL, storedFile: StoredFileProtocol)] {
+        guard let text = step.block.text else {
+            return []
+        }
+
+        let imageURLStrings = HTMLExtractor.extractAllTagsAttribute(tag: "img", attribute: "src", from: text)
+        let imageURLs = Set(imageURLStrings.compactMap { URL(string: $0) })
+
+        return imageURLs.compactMap { imageURL -> (URL, StoredFileProtocol)? in
+            guard let imageStoredFileManager = self.imageStoredFileManager as? ImageStoredFileManagerProtocol,
+                  let storedFile = imageStoredFileManager.getImageStoredFile(imageURL: imageURL) else {
+                return nil
+            }
+            return (imageURL, storedFile)
         }
     }
 

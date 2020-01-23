@@ -41,7 +41,7 @@ final class WriteCourseReviewProvider: WriteCourseReviewProviderProtocol {
                 review.user = currentUser
 
                 seal.fulfill(review)
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.networkCreateFailed)
             }

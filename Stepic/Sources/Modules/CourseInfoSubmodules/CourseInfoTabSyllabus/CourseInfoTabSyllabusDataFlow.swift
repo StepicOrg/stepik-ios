@@ -20,7 +20,7 @@ enum CourseInfoTabSyllabus {
         case notAvailable
         case waiting
         case notCached
-        case cached(bytesTotal: UInt64)
+        case cached(bytesTotal: UInt64, hasCachedVideosOrImages: Bool)
         case downloading(progress: Float)
     }
 

@@ -47,7 +47,7 @@ final class UnitNavigationService: UnitNavigationServiceProtocol {
             }
 
             unit.section = section
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             // Cause unit & section have 1-indexed position in API
             let unitPosition = unit.position - 1

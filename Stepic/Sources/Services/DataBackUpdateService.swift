@@ -120,7 +120,7 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
             }
 
             unit.progress = progress
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             strongSelf.postNotification(target: .progress(progress))
             strongSelf.postNotification(description: .progress, target: .unit(unit))
@@ -146,7 +146,7 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
             }
 
             section.progress = progress
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             strongSelf.postNotification(target: .progress(progress))
             strongSelf.postNotification(description: .progress, target: .section(section))
@@ -172,7 +172,7 @@ final class DataBackUpdateService: DataBackUpdateServiceProtocol {
             }
 
             course.progress = progress
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             strongSelf.postNotification(target: .progress(progress))
             strongSelf.postNotification(description: .progress, target: .course(course))

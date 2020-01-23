@@ -112,7 +112,7 @@ final class QuizPresenter {
                     DispatchQueue.main.async {
                         [weak self] in
                         self?.step.progress?.isPassed = true
-                        CoreDataHelper.instance.save()
+                        CoreDataHelper.shared.save()
                     }
 
                     delegate?.submissionDidCorrect()

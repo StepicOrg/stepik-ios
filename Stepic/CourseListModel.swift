@@ -55,7 +55,7 @@ final class CourseListModel: NSManagedObject, IDFetchable {
                 }
                 seal(courseLists)
             })
-            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
         }
     }
 
@@ -72,7 +72,7 @@ final class CourseListModel: NSManagedObject, IDFetchable {
         request.sortDescriptors = [descriptor]
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as? [CourseListModel] ?? []
         } catch {
             return []

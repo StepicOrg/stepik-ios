@@ -21,16 +21,16 @@ extension Block {
     @NSManaged var managedStep: Step?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Block.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Block.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var name: String {
         get {
-             self.managedName ?? "undefined"
+            self.managedName ?? "undefined"
         }
         set {
             self.managedName = newValue
@@ -39,7 +39,7 @@ extension Block {
 
     var text: String? {
         get {
-             self.managedText
+            self.managedText
         }
         set {
             self.managedText = newValue
@@ -48,60 +48,10 @@ extension Block {
 
     var video: Video? {
         get {
-             self.managedVideo
+            self.managedVideo
         }
         set {
             self.managedVideo = newValue
-        }
-    }
-
-    var image: UIImage {
-        switch self.type {
-        case .text:
-            return UIImage(named: "ic_theory_dark").require()
-        case .video:
-            return UIImage(named: "ic_video_dark").require()
-        case .code, .dataset, .admin, .sql:
-            return UIImage(named: "ic_hard_dark").require()
-        default:
-            return UIImage(named: "ic_easy_dark").require()
-        }
-    }
-
-    var type: BlockType? {
-        BlockType(rawValue: self.name)
-    }
-
-    // MARK: - Types -
-
-    enum BlockType: String {
-        case animation
-        case chemical
-        case choice
-        case code
-        case dataset
-        case matching
-        case math
-        case number
-        case puzzle
-        case pycharm
-        case sorting
-        case sql
-        case string
-        case text
-        case video
-        case admin
-        case table
-        case html
-        case schulte
-        case fillBlanks = "fill-blanks"
-        case freeAnswer = "free-answer"
-        case linuxCode = "linux-code"
-        case randomTasks = "random-tasks"
-        case manualScore = "manual-score"
-
-        var isTheory: Bool {
-            return [BlockType.text, BlockType.video].contains(self)
         }
     }
 }

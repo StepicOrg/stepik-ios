@@ -41,7 +41,7 @@ final class ContinueCourseProvider: ContinueCourseProviderProtocol {
                 }
             }.done { course, progress in
                 course?.progress = progress
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
                 seal.fulfill(course)
             }.catch { error in
                 seal.reject(error)

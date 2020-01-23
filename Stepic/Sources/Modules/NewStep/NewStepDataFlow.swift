@@ -3,11 +3,12 @@ import Foundation
 enum NewStep {
     /// Load step content
     enum StepLoad {
-        struct Request { }
+        struct Request {}
 
         struct Data {
             let step: Step
             let fontSize: StepFontSize
+            let storedImages: [StoredImage]
         }
 
         struct Response {
@@ -24,6 +25,7 @@ enum NewStep {
         struct Response {
             let text: String
             let fontSize: StepFontSize
+            let storedImages: [StoredImage]
         }
 
         struct ViewModel {
@@ -33,9 +35,9 @@ enum NewStep {
 
     /// Tries to play step
     enum PlayStep {
-        struct Response { }
+        struct Response {}
 
-        struct ViewModel { }
+        struct ViewModel {}
     }
 
     /// Update bottom step controls – navigation buttons
@@ -79,22 +81,22 @@ enum NewStep {
 
     /// Handle autoplay navigation inside/next lesson
     enum AutoplayNavigationRequest {
-        struct Request { }
+        struct Request {}
     }
 
     /// Handle information about step was presented
     enum StepViewRequest {
-        struct Request { }
+        struct Request {}
     }
 
     /// Handle information about step was passed
     enum StepDoneRequest {
-        struct Request { }
+        struct Request {}
     }
 
     /// Update discussions button (on appear)
     enum DiscussionsButtonUpdate {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let step: Step
@@ -106,9 +108,9 @@ enum NewStep {
         }
     }
 
-    /// Prsent discussions module (list or with write comment on top on empty discussions empty state)
+    /// Present discussions module (list or with write comment on top on empty discussions empty state)
     enum DiscussionsPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let step: Step
@@ -121,7 +123,14 @@ enum NewStep {
         }
     }
 
-    // MARK: Enums
+    // MARK: Types
+
+    struct StoredImage {
+        /// Specifies the URL of an image, not local.
+        let url: URL
+        /// Image data.
+        let data: Data
+    }
 
     enum ViewControllerState {
         case loading

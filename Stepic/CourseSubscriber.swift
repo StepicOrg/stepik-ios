@@ -62,7 +62,7 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                 let success: (Course) -> Void = {
                     course in
                     course.enrolled = !unsubscribe
-                    CoreDataHelper.instance.save()
+                    CoreDataHelper.shared.save()
 
                     self.dataBackUpdateService.triggerEnrollmentUpdate(retrievedCourse: course)
 

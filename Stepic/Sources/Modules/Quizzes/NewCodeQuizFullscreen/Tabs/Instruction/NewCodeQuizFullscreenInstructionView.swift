@@ -116,9 +116,11 @@ extension NewCodeQuizFullscreenInstructionView: ProcessedContentTextViewDelegate
         self.delegate?.newCodeQuizFullscreenInstructionView(self, didRequestOpenURL: url)
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
         self.delegate?.newCodeQuizFullscreenInstructionView(self, didRequestFullscreenImage: url)
     }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
         self.delegate?.newCodeQuizFullscreenInstructionViewDidLoadContent(self)

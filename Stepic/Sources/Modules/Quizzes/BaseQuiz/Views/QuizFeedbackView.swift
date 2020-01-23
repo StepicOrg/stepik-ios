@@ -258,9 +258,11 @@ extension QuizFeedbackView: ProcessedContentTextViewDelegate {
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
         self.delegate?.quizFeedbackView(self, didRequestFullscreenImage: url)
     }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
         self.delegate?.quizFeedbackView(self, didRequestOpenURL: url)

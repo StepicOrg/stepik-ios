@@ -53,7 +53,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
                 }
 
                 seal.fulfill((reviews, meta))
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
             }
@@ -98,7 +98,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
                 review?.user = user
 
                 seal.fulfill(review)
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
             }
@@ -113,7 +113,7 @@ final class CourseInfoTabReviewsProvider: CourseInfoTabReviewsProviderProtocol {
                 when(resolved: cachedReviews.map({ self.courseReviewsPersistenceService.delete(by: $0.id) }))
             }.done { _ in
                 seal.fulfill(())
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.networkFetchFailed)
             }

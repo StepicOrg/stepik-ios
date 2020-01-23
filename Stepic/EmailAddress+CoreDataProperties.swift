@@ -19,11 +19,11 @@ extension EmailAddress {
     @NSManaged var managedProfile: Profile?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "EmailAddress", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "EmailAddress", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: EmailAddress.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: EmailAddress.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

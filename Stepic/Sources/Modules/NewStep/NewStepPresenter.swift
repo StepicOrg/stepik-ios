@@ -17,7 +17,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         if case .success(let data) = response.result {
             self.makeViewModel(
                 step: data.step,
-                fontSize: data.fontSize
+                fontSize: data.fontSize,
+                storedImages: data.storedImages
             ).done(on: .global(qos: .userInitiated)) { viewModel in
                 DispatchQueue.main.async { [weak self] in
                     self?.viewController?.displayStep(
@@ -37,7 +38,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response) {
         let htmlString = self.makeProcessedContentHTMLString(
             response.text,
-            fontSize: response.fontSize
+            fontSize: response.fontSize,
+            storedImages: response.storedImages
         )
 
         self.viewController?.displayStepTextUpdate(viewModel: .init(htmlText: htmlString))
@@ -82,7 +84,11 @@ final class NewStepPresenter: NewStepPresenterProtocol {
 
     // MARK: Private API
 
-    private func makeViewModel(step: Step, fontSize: StepFontSize) -> Guarantee<NewStepViewModel> {
+    private func makeViewModel(
+        step: Step,
+        fontSize: StepFontSize,
+        storedImages: [NewStep.StoredImage]
+    ) -> Guarantee<NewStepViewModel> {
         Guarantee { seal in
             let contentType: NewStepViewModel.ContentType = {
                 switch step.block.type {
@@ -98,7 +104,8 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 default:
                     let htmlString = self.makeProcessedContentHTMLString(
                         step.block.text ?? "",
-                        fontSize: fontSize
+                        fontSize: fontSize,
+                        storedImages: storedImages
                     )
                     return .text(htmlString: htmlString)
                 }
@@ -157,13 +164,31 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         return NSLocalizedString("NoDiscussionsButtonTitle", comment: "")
     }
 
-    private func makeProcessedContentHTMLString(_ text: String, fontSize: StepFontSize) -> String {
-        var injections = ContentProcessor.defaultInjections
-        injections.append(FontSizeInjection(fontSize: fontSize))
+    private func makeProcessedContentHTMLString(
+        _ text: String,
+        fontSize: StepFontSize,
+        storedImages: [NewStep.StoredImage]
+    ) -> String {
+        let base64EncodedStringByImageURL = Dictionary(
+            uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }
+        )
+
+        var rules = ContentProcessor.defaultRules
+
+        if !base64EncodedStringByImageURL.isEmpty {
+            rules.append(
+                ReplaceImageSourceWithBase64(
+                    base64EncodedStringByImageURL: base64EncodedStringByImageURL,
+                    extractorType: HTMLExtractor.self
+                )
+            )
+        }
+
+        let injections = ContentProcessor.defaultInjections + [FontSizeInjection(fontSize: fontSize)]
 
         let contentProcessor = ContentProcessor(
             content: text,
-            rules: ContentProcessor.defaultRules,
+            rules: rules,
             injections: injections
         )
 

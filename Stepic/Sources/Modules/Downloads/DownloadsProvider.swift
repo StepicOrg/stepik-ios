@@ -12,6 +12,7 @@ final class DownloadsProvider: DownloadsProviderProtocol {
     private let coursesPersistenceService: CoursesPersistenceServiceProtocol
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let videoFileManager: VideoStoredFileManagerProtocol
+    private let imageFileManager: ImageStoredFileManagerProtocol
     private let storageUsageService: StorageUsageServiceProtocol
 
     private var videoFileSizeCache: [Video.IdType: UInt64] = [:]
@@ -20,11 +21,13 @@ final class DownloadsProvider: DownloadsProviderProtocol {
         coursesPersistenceService: CoursesPersistenceServiceProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         videoFileManager: VideoStoredFileManagerProtocol,
+        imageFileManager: ImageStoredFileManagerProtocol,
         storageUsageService: StorageUsageServiceProtocol
     ) {
         self.coursesPersistenceService = coursesPersistenceService
         self.adaptiveStorageManager = adaptiveStorageManager
         self.videoFileManager = videoFileManager
+        self.imageFileManager = imageFileManager
         self.storageUsageService = storageUsageService
     }
 
@@ -47,7 +50,10 @@ final class DownloadsProvider: DownloadsProviderProtocol {
                         try? self.videoFileManager.removeVideoStoredFile(videoID: video.id)
                         video.cachedQuality = nil
                     }
-                    CoreDataHelper.instance.deleteFromStore(step, save: false)
+
+                    step.block.imageSourceURLs.forEach {
+                        try? self.imageFileManager.removeImageStoredFile(imageURL: $0)
+                    }
                 }
 
                 seal(())
@@ -57,7 +63,7 @@ final class DownloadsProvider: DownloadsProviderProtocol {
         return when(
             guarantees: deleteCoursesGuarantees
         ).done {
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 
@@ -82,7 +88,11 @@ final class DownloadsProvider: DownloadsProviderProtocol {
                     if step.block.type == .video, let videoID = step.block.video?.id {
                         return self.videoFileManager.getVideoStoredFile(videoID: videoID) != nil
                     }
-                    return true
+
+                    let cachedImages = step.block.imageSourceURLs
+                        .compactMap { self.imageFileManager.getImageStoredFile(imageURL: $0) }
+
+                    return !cachedImages.isEmpty
                 }
 
                 resultSteps.append(contentsOf: cachedSteps)

@@ -20,7 +20,7 @@ extension Notification {
         }
         request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Notification] else {
+            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [Notification] else {
                 return []
             }
             return results
@@ -47,7 +47,7 @@ extension Notification {
         }
 
         do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Notification] else {
+            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [Notification] else {
                 return nil
             }
             return results
@@ -59,9 +59,9 @@ extension Notification {
     static func deleteAll() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notification")
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request) as? [Notification]
+            let results = try CoreDataHelper.shared.context.fetch(request) as? [Notification]
             for obj in results ?? [] {
-                CoreDataHelper.instance.deleteFromStore(obj)
+                CoreDataHelper.shared.deleteFromStore(obj)
             }
         } catch {
             print("notification: couldn't delete all notifications!")
@@ -74,7 +74,7 @@ extension Notification {
         request.propertiesToUpdate = ["managedStatus": "read"]
 
         do {
-            _ = try CoreDataHelper.instance.context.execute(request)
+            _ = try CoreDataHelper.shared.context.execute(request)
         } catch {
             print("notification: couldn't update all notifications!")
         }

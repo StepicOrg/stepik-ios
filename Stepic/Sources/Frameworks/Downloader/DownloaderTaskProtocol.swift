@@ -1,11 +1,3 @@
-//
-//  DownloaderTaskProtocol.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 10.07.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 enum DownloaderTaskPriority: Float {
@@ -57,7 +49,7 @@ protocol DownloaderTaskProtocol: AnyObject {
 
 extension DownloaderTaskProtocol {
     func start(with executor: DownloaderProtocol) {
-        add(to: executor)
-        resume()
+        self.add(to: executor)
+        self.resume()
     }
 }

@@ -13,14 +13,6 @@ protocol StorageUsageServiceProtocol: AnyObject {
 }
 
 extension StorageUsageServiceProtocol {
-    func getStepSize(step: Step) -> Bytes {
-        if step.block.type == .video, let videoID = step.block.video?.id {
-            return self.getVideoFileSize(videoID: videoID) ?? 0
-        } else {
-            return UInt64((step.block.text ?? "").utf8.count)
-        }
-    }
-
     func getLessonSize(lesson: Lesson) -> Bytes {
         lesson.steps.reduce(0) { $0 + self.getStepSize(step: $1) }
     }
@@ -43,12 +35,34 @@ extension StorageUsageServiceProtocol {
 
 final class StorageUsageService: StorageUsageServiceProtocol {
     private let videoFileManager: VideoStoredFileManagerProtocol
+    private let imageFileManager: ImageStoredFileManagerProtocol
 
-    init(videoFileManager: VideoStoredFileManagerProtocol) {
+    init(
+        videoFileManager: VideoStoredFileManagerProtocol,
+        imageFileManager: ImageStoredFileManagerProtocol
+    ) {
         self.videoFileManager = videoFileManager
+        self.imageFileManager = imageFileManager
     }
+
+    // MARK: Protocol Conforming
 
     func getVideoFileSize(videoID: Video.IdType) -> Bytes? {
         self.videoFileManager.getVideoStoredFile(videoID: videoID)?.size
+    }
+
+    func getStepSize(step: Step) -> Bytes {
+        if step.block.type == .video, let videoID = step.block.video?.id {
+            return self.getVideoFileSize(videoID: videoID) ?? 0
+        } else {
+            let cachedImagesSize = step.block.imageSourceURLs
+                .compactMap { self.imageFileManager.getImageStoredFile(imageURL: $0) }
+                .map { $0.size }
+                .reduce(0, +)
+
+            let textSize = UInt64((step.block.text ?? "").utf8.count)
+
+            return textSize + cachedImagesSize
+        }
     }
 }

@@ -47,7 +47,7 @@ final class Certificate: NSManagedObject, IDFetchable {
         request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: [idCompoundPredicate, userPredicate])
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as! [Certificate]
         } catch {
             return []
@@ -58,9 +58,9 @@ final class Certificate: NSManagedObject, IDFetchable {
     static func deleteAll() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Certificate")
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request) as? [Certificate]
+            let results = try CoreDataHelper.shared.context.fetch(request) as? [Certificate]
             for obj in results ?? [] {
-                CoreDataHelper.instance.deleteFromStore(obj)
+                CoreDataHelper.shared.deleteFromStore(obj)
             }
         } catch {
             print("certificate: couldn't delete all certificates!")

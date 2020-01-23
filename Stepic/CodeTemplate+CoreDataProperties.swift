@@ -17,11 +17,11 @@ extension CodeTemplate {
     @NSManaged var managedOptions: StepOptions?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CodeTemplate", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CodeTemplate", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: CodeTemplate.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: CodeTemplate.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var languageString: String {

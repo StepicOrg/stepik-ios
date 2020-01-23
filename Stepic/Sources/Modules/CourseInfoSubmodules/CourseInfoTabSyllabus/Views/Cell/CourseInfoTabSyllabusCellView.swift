@@ -133,10 +133,14 @@ final class CourseInfoTabSyllabusCellView: UIView {
         switch newState {
         case .notAvailable:
             self.downloadButton.isHidden = true
-        case .cached(let bytesTotal):
-            self.downloadButton.isHidden = false
-            self.downloadButton.actionState = .readyToRemoving
-            downloadedBytesTotal = bytesTotal
+        case .cached(let bytesTotal, let hasStepWithCachedVideosOrImages):
+            if hasStepWithCachedVideosOrImages {
+                self.downloadButton.isHidden = false
+                self.downloadButton.actionState = .readyToRemoving
+                downloadedBytesTotal = bytesTotal
+            } else {
+                self.downloadButton.isHidden = true
+            }
         case .notCached:
             self.downloadButton.isHidden = false
             self.downloadButton.actionState = .readyToDownloading
