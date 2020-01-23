@@ -100,28 +100,31 @@ final class CodePlaygroundManager {
         }
     }
 
-    /// Returns current token for text.
+    /// Returns token between cursor position.
+    /// - Parameters:
+    ///   - text: The text from which token will be located.
+    ///   - cursorPosition: The cursor position within provided text.
     private func getCurrentToken(text: String, cursorPosition: Int) -> String {
+        guard cursorPosition >= 0 && cursorPosition <= text.count else {
+            return ""
+        }
+
         var offsetBefore = 0
-        while text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)
-            && self.allowedCharacters.indexOf(
-                String(text[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])
-            ) != nil {
+        while let character = text[safe: (cursorPosition - offsetBefore - 1)],
+              self.allowedCharacters.contains(character) {
             offsetBefore += 1
         }
 
         var offsetAfter = 0
-        while text.endIndex != text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)
-            && self.allowedCharacters.indexOf(
-                String(text[text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])
-            ) != nil {
+        while let character = text[safe: (cursorPosition + offsetAfter)],
+              self.allowedCharacters.contains(character) {
             offsetAfter += 1
         }
 
-        let token = String(text[text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)..<text.index(text.startIndex, offsetBy: cursorPosition)])
-            + String(text[text.index(text.startIndex, offsetBy: cursorPosition)..<text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])
+        let beforeCursorString = text[safe: (cursorPosition - offsetBefore)..<cursorPosition] ?? ""
+        let afterCursorString = text[safe: cursorPosition..<(cursorPosition + offsetAfter)] ?? ""
 
-        return token
+        return beforeCursorString + afterCursorString
     }
 
     private func checkNextLineInsertion(
