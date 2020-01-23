@@ -45,7 +45,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
             }
 
             return when(
-                fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(step: step)
+                fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(id: step.id)
             ).map { ($0, $1, step) }
         }.done(on: .global(qos: .userInitiated)) { fontSize, storedImages, step in
             self.currentStepIndex = step.position - 1
@@ -184,9 +184,22 @@ extension NewStepInteractor: NewStepInputProtocol {
     }
 
     func updateStepText(_ text: String) {
-        self.provider.fetchCurrentFontSize().done { fontSize in
-            self.presenter.presentStepTextUpdate(response: .init(text: text, fontSize: fontSize))
-        }
+        when(
+            fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(id: self.stepID)
+        ).done { fetchResult in
+            self.presenter.presentStepTextUpdate(
+                response: .init(
+                    text: text,
+                    fontSize: fetchResult.0,
+                    storedImages: fetchResult.1.compactMap { imageURL, storedFile in
+                        if let imageData = storedFile.data {
+                            return NewStep.StoredImage(url: imageURL, data: imageData)
+                        }
+                        return nil
+                    }
+                )
+            )
+        }.cauterize()
     }
 
     func play() {

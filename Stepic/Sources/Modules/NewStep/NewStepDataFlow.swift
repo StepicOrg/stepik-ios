@@ -25,6 +25,7 @@ enum NewStep {
         struct Response {
             let text: String
             let fontSize: StepFontSize
+            let storedImages: [StoredImage]
         }
 
         struct ViewModel {

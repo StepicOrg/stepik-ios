@@ -39,7 +39,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         let htmlString = self.makeProcessedContentHTMLString(
             response.text,
             fontSize: response.fontSize,
-            storedImages: []
+            storedImages: response.storedImages
         )
 
         self.viewController?.displayStepTextUpdate(viewModel: .init(htmlText: htmlString))
@@ -173,12 +173,16 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }
         )
 
-        let rules = ContentProcessor.defaultRules + [
-            ReplaceImageSourceWithBase64(
-                base64EncodedStringByImageURL: base64EncodedStringByImageURL,
-                extractorType: HTMLExtractor.self
+        var rules = ContentProcessor.defaultRules
+
+        if !base64EncodedStringByImageURL.isEmpty {
+            rules.append(
+                ReplaceImageSourceWithBase64(
+                    base64EncodedStringByImageURL: base64EncodedStringByImageURL,
+                    extractorType: HTMLExtractor.self
+                )
             )
-        ]
+        }
 
         let contentProcessor = ContentProcessor(
             content: text,

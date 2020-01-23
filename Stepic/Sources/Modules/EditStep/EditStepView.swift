@@ -15,8 +15,7 @@ extension EditStepView {
 
         let separatorInsets = LayoutInsets(top: 8)
 
-        let textViewInsets = LayoutInsets(top: 16)
-        let textViewTextInsets = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+        let textViewTextInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         let textViewFont = UIFont.systemFont(ofSize: 16)
         let textViewTextColor = UIColor.mainDark
         let textViewPlaceholderColor = UIColor.mainDark.withAlphaComponent(0.4)
@@ -146,20 +145,21 @@ extension EditStepView: ProgrammaticallyInitializableViewProtocol {
         self.messageLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(self.appearance.messageLabelInsets.left)
             make.top.equalToSuperview().offset(self.appearance.messageLabelInsets.top)
-            make.trailing.equalToSuperview().offset(-self.appearance.messageLabelInsets.right)
+            make.trailing
+                .equalTo(self.safeAreaLayoutGuide.snp.trailing)
+                .offset(-self.appearance.messageLabelInsets.right)
         }
 
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
-            make.leading.equalTo(self.messageLabel.snp.leading)
+            make.leading.trailing.equalToSuperview()
             make.top.equalTo(self.messageLabel.snp.bottom).offset(self.appearance.separatorInsets.top)
-            make.trailing.equalToSuperview()
         }
 
         self.textView.translatesAutoresizingMaskIntoConstraints = false
         self.textView.snp.makeConstraints { make in
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading)
-            make.top.equalTo(self.separatorView.snp.bottom).offset(self.appearance.textViewInsets.top)
+            make.top.equalTo(self.separatorView.snp.bottom)
             make.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }

@@ -6,8 +6,8 @@ import PromiseKit
 protocol NewStepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
+    func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
     func fetchCurrentFontSize() -> Guarantee<StepFontSize>
-    func fetchStoredImages(step: Step) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
 }
 
 // MARK: - NewStepProvider: NewStepProviderProtocol -
@@ -64,15 +64,23 @@ final class NewStepProvider: NewStepProviderProtocol {
         }
     }
 
-    func fetchCurrentFontSize() -> Guarantee<StepFontSize> {
+    func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]> {
         Guarantee { seal in
-            seal(self.stepFontSizeStorageManager.globalStepFontSize)
+            self.fetchCachedStep(id: id).done { step in
+                if let step = step {
+                    seal(self.getStepStoredImages(step))
+                } else {
+                    seal([])
+                }
+            }.catch { _ in
+                seal([])
+            }
         }
     }
 
-    func fetchStoredImages(step: Step) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]> {
+    func fetchCurrentFontSize() -> Guarantee<StepFontSize> {
         Guarantee { seal in
-            seal(self.getStepStoredImages(step))
+            seal(self.stepFontSizeStorageManager.globalStepFontSize)
         }
     }
 
