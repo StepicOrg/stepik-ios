@@ -106,7 +106,7 @@ final class CourseInfoTabSyllabusHeaderView: UIView {
 
     private func updateDownloadAllButton() {
         switch self.courseDownloadState {
-        case .cached(let bytesTotal):
+        case .cached(let bytesTotal, _):
             self.downloadAllButton.image = UIImage(named: "download-button-remove")?.withRenderingMode(.alwaysTemplate)
             self.downloadAllButton.title = String(
                 format: NSLocalizedString("SyllabusDownloaded", comment: ""),

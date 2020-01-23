@@ -468,7 +468,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             .count
         // Lesson has no steps with video and images then all steps cached -> return "cached" state.
         if stepsWithVideoCount == 0 && stepsWithImagesCount == 0 {
-            return .cached(bytesTotal: unitSizeInBytes)
+            return .cached(bytesTotal: unitSizeInBytes, hasCachedVideosOrImages: false)
         }
 
         let stepsWithCachedVideoCount = steps
@@ -490,7 +490,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             .count
 
         if stepsWithVideoCount == stepsWithCachedVideoCount && stepsWithImagesCount == stepsWithCachedImagesCount {
-            return .cached(bytesTotal: unitSizeInBytes)
+            return .cached(bytesTotal: unitSizeInBytes, hasCachedVideosOrImages: true)
         }
 
         // Check if video or images downloading
@@ -534,7 +534,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         // All downloadables are cached
-        return .cached(bytesTotal: unitSizeInBytes)
+        return .cached(bytesTotal: unitSizeInBytes, hasCachedVideosOrImages: true)
     }
 
     // swiftlint:disable:next cyclomatic_complexity
@@ -560,6 +560,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         var pendingUnitsCount = 0
         var downloadingUnitProgresses: [Float] = []
         var sectionSizeInBytes: UInt64 = 0
+        var containsUnitWithCachedResources = false
 
         for state in unitStates {
             switch state {
@@ -569,8 +570,11 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                 shouldBeCachedUnitsCount += 1
             case .downloading(let progress):
                 downloadingUnitProgresses.append(progress)
-            case .cached(let unitSizeInBytes):
+            case .cached(let unitSizeInBytes, let hasCachedVideosOrImages):
                 sectionSizeInBytes += unitSizeInBytes
+                if hasCachedVideosOrImages {
+                    containsUnitWithCachedResources = true
+                }
             case .waiting:
                 pendingUnitsCount += 1
             }
@@ -599,7 +603,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         }
 
         // All units are cached, section too
-        return .cached(bytesTotal: sectionSizeInBytes)
+        return .cached(bytesTotal: sectionSizeInBytes, hasCachedVideosOrImages: containsUnitWithCachedResources)
     }
 
     func getCourseDownloadState(_ course: Course) -> CourseInfoTabSyllabus.DownloadState {
@@ -608,21 +612,28 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         var cachedSectionsCount = 0
         var courseSizeInBytes: UInt64 = 0
         var containsUncachedSection = false
+        var containsSectionWithCachedResources = false
 
         for sectionDownloadState in sectionStates {
             switch sectionDownloadState {
             case .notCached:
                 containsUncachedSection = true
-            case .cached(let bytesTotal):
+            case .cached(let bytesTotal, let hasCachedVideosOrImages):
                 cachedSectionsCount += 1
                 courseSizeInBytes += bytesTotal
+                if hasCachedVideosOrImages {
+                    containsSectionWithCachedResources = true
+                }
             default:
                 continue
             }
         }
 
         if course.sectionsArray.count == cachedSectionsCount {
-            return .cached(bytesTotal: courseSizeInBytes)
+            return .cached(
+                bytesTotal: courseSizeInBytes,
+                hasCachedVideosOrImages: containsSectionWithCachedResources
+            )
         }
 
         return containsUncachedSection ? .notCached : .notAvailable
