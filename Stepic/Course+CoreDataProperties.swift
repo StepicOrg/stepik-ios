@@ -65,11 +65,11 @@ extension Course {
     @NSManaged var managedSections: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Course", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Course.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Course.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

@@ -94,7 +94,7 @@ final class Video: NSManagedObject, JSONSerializable {
         let predicate = NSPredicate(value: true)
         request.predicate = predicate
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as! [Video]
         } catch {
             print("Error while getting videos")

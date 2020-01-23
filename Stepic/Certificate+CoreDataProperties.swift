@@ -22,11 +22,11 @@ extension Certificate {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Certificate", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Certificate.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Certificate.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

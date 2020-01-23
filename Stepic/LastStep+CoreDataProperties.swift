@@ -17,11 +17,11 @@ extension LastStep {
     @NSManaged var managedCourse: Course?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "LastStep", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "LastStep", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: LastStep.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: LastStep.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: String {

@@ -17,11 +17,11 @@ extension CodeLimit {
     @NSManaged var managedOptions: StepOptions?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CodeLimit", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CodeLimit", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: CodeLimit.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: CodeLimit.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var languageString: String {

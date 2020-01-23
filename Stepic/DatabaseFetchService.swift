@@ -30,7 +30,7 @@ final class DatabaseFetchService {
                 }
                 seal(courses)
             })
-            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
         }
     }
 }

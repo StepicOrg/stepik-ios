@@ -144,7 +144,7 @@ final class Course: NSManagedObject, IDFetchable {
             refreshMode: .update,
             success: { users in
                 self.instructors = Sorter.sort(users, byIds: self.instructorsArray)
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
                 success()
             },
             error: { _ in
@@ -182,7 +182,7 @@ final class Course: NSManagedObject, IDFetchable {
             downloadedSections.append(contentsOf: secs)
             if downloadedSections.count == self.sectionsArray.count {
                 self.sections = Sorter.sort(downloadedSections, byIds: self.sectionsArray)
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
                 success()
             }
         }
@@ -243,7 +243,7 @@ final class Course: NSManagedObject, IDFetchable {
             progresses = Sorter.sort(newProgresses, byIds: progressIds)
 
             if progresses.count == 0 {
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
                 completion()
                 return
             }
@@ -258,7 +258,7 @@ final class Course: NSManagedObject, IDFetchable {
                     break
                 }
             }
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
             completion()
         }, error: {
             (_) -> Void in
@@ -308,7 +308,7 @@ final class Course: NSManagedObject, IDFetchable {
                 }
                 seal.fulfill(courses)
             })
-            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
         }
     }
 
@@ -346,7 +346,7 @@ final class Course: NSManagedObject, IDFetchable {
         request.sortDescriptors = [descriptor]
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as? [Course] ?? []
         } catch {
             return []
@@ -365,7 +365,7 @@ final class Course: NSManagedObject, IDFetchable {
         request.predicate = predicate
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as! [Course]
         } catch {
             print("Error while getting courses")

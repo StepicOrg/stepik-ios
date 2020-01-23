@@ -32,11 +32,11 @@ extension Unit {
     @NSManaged var managedAssignments: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Unit", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Unit.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Unit.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

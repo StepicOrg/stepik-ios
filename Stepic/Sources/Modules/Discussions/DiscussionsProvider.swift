@@ -75,7 +75,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
                 if let step = steps.first {
                     step.discussionsCount? += 1
                 }
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.stepDiscussionsIncrementFailed)
             }
@@ -88,7 +88,7 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
                 if let step = steps.first {
                     step.discussionsCount? -= 1
                 }
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.stepDiscussionsDecrementFailed)
             }

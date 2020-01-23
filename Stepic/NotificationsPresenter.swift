@@ -316,7 +316,7 @@ final class NotificationsPresenter {
 
         notification.status = status
         self.notificationsAPI.update(notification).done { _ in
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
             NotificationCenter.default.post(name: .notificationUpdated, object: self, userInfo: ["section": self.section, "id": id, "status": status])
         }.catch { error in
             print("notifications: unable to update notification, id = \(id), error = \(error)")

@@ -21,11 +21,11 @@ extension Block {
     @NSManaged var managedStep: Step?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Block", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Block.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Block.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var name: String {

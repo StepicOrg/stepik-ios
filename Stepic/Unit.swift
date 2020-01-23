@@ -57,7 +57,7 @@ final class Unit: NSManagedObject, IDFetchable {
         request.predicate = predicate
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             if results.count > 1 {
                 print("CORE DATA WARNING: More than 1 unit with id \(id)")
             }
@@ -75,7 +75,7 @@ final class Unit: NSManagedObject, IDFetchable {
         }
         request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Unit] else {
+            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [Unit] else {
                 return []
             }
             return results

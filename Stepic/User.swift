@@ -55,7 +55,7 @@ final class User: NSManagedObject, IDFetchable {
         request.predicate = predicate
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return results as? [User]
         } catch {
             return nil
@@ -66,10 +66,10 @@ final class User: NSManagedObject, IDFetchable {
         if let fetchedUsers = fetchById(user.id) {
             for fetchedUser in fetchedUsers {
                 if fetchedUser != user {
-                    CoreDataHelper.instance.deleteFromStore(fetchedUser, save: false)
+                    CoreDataHelper.shared.deleteFromStore(fetchedUser, save: false)
                 }
             }
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 
@@ -81,7 +81,7 @@ final class User: NSManagedObject, IDFetchable {
         }
         request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
         do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [User] else {
+            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [User] else {
                 return []
             }
             return results

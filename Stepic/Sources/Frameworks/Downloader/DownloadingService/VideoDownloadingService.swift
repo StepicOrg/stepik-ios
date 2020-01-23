@@ -193,7 +193,7 @@ final class VideoDownloadingService: VideoDownloadingServiceProtocol {
 
             if let videoQuality = self?.videoQuality[video.id] {
                 video.cachedQuality = videoQuality
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }
 
             strongSelf.reportToSubscribers(event: event)

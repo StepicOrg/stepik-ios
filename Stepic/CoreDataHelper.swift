@@ -10,42 +10,50 @@ import CoreData
 import UIKit
 
 final class CoreDataHelper: NSObject {
-    static var instance = CoreDataHelper()
+    static var shared = CoreDataHelper()
 
-    let coordinator: NSPersistentStoreCoordinator
-    let model: NSManagedObjectModel
-    let context: NSManagedObjectContext
-    var storeURL: URL
+    private(set) var coordinator: NSPersistentStoreCoordinator
+    private(set) var model: NSManagedObjectModel
+    private(set) var context: NSManagedObjectContext
+    private(set) var storeURL: URL
+
+    private let lockQueue = DispatchQueue(label: "com.test.LockQueue", attributes: [])
 
     override private init() {
         let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")!
-        model = NSManagedObjectModel(contentsOf: modelURL)!
+        self.model = NSManagedObjectModel(contentsOf: modelURL)!
 
-        let fileManager = FileManager.default
-        let docsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last! as URL
-        storeURL = docsURL.appendingPathComponent("base.sqlite")
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        self.storeURL = documentsDirectory.appendingPathComponent("base.sqlite")
 
-        coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+        self.coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.model)
 
         do {
-            _ = try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true, "WAL": "journal_mode"])
+            _ = try self.coordinator.addPersistentStore(
+                ofType: NSSQLiteStoreType,
+                configurationName: nil,
+                at: self.storeURL,
+                options: [
+                    NSMigratePersistentStoresAutomaticallyOption: true,
+                    NSInferMappingModelAutomaticallyOption: true,
+                    "WAL": "journal_mode"
+                ]
+            )
         } catch {
             print("STORE IS NIL")
             abort()
         }
 
-        context = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
-        context.persistentStoreCoordinator = coordinator
+        self.context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        self.context.persistentStoreCoordinator = self.coordinator
+
         super.init()
     }
 
-    let lockQueue = DispatchQueue(label: "com.test.LockQueue", attributes: [])
-
     func save() {
-        lockQueue.sync {
-            [weak self] in
-            self?.context.perform({
-                [weak self] in
+        self.lockQueue.sync { [weak self] in
+            self?.context.perform({ [weak self] in
                 do {
                     try self?.context.save()
                 } catch {
@@ -55,26 +63,14 @@ final class CoreDataHelper: NSObject {
         }
     }
 
-//    private var objectsToDelete : [NSManagedObject] = []
-
-    func deleteFromStore(_ object: NSManagedObject, save s: Bool = true) {
-        lockQueue.sync {
-            [weak self] in
-            self?.context.perform({
-                [weak self] in
+    func deleteFromStore(_ object: NSManagedObject, save shouldSave: Bool = true) {
+        self.lockQueue.sync { [weak self] in
+            self?.context.perform({ [weak self] in
                 self?.context.delete(object)
-                if s == true {
+                if shouldSave == true {
                     self?.save()
                 }
             })
         }
     }
-
-//    func deleteAllPending() {
-//        for obj in objectsToDelete {
-//            CoreDataHelper.instance.context.deleteObject(obj)
-//        }
-//        CoreDataHelper.instance.save()
-//    }
-
 }

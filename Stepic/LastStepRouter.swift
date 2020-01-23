@@ -35,7 +35,7 @@ final class LastStepRouter {
             }
 
             course.lastStep = newLastStep
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }.ensure {
             self.navigate(for: course, isAdaptive: isAdaptive, didJustSubscribe: didJustSubscribe, using: navigationController, skipSyllabus: skipSyllabus)
         }.catch {
@@ -145,7 +145,7 @@ final class LastStepRouter {
             ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: sectionForUpdate == nil ? [] : [sectionForUpdate!], refreshMode: .update, success: { sections in
                 if let section = sections.first {
                     unit.section = section
-                    CoreDataHelper.instance.save()
+                    CoreDataHelper.shared.save()
 
                     if section.isReachable {
                         navigateToStep(in: unit)

@@ -32,11 +32,11 @@ extension Step {
     @NSManaged var managedDiscussionsCount: NSNumber?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Step.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Step.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

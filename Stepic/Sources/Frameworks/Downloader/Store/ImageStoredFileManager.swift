@@ -4,6 +4,7 @@ protocol ImageStoredFileManagerProtocol: AnyObject {
     func getImageStoredFile(imageURL: URL) -> StoredFileProtocol?
     func removeImageStoredFile(imageURL: URL) throws
     func saveTemporaryFileAsImageFile(temporaryFileURL: URL, imageURL: URL) throws -> StoredFileProtocol
+    func makeImageFilenameFromImageDownloadURL(_ url: URL) -> String
 }
 
 final class ImageStoredFileManager: StoredFileManager, ImageStoredFileManagerProtocol {
@@ -19,25 +20,26 @@ final class ImageStoredFileManager: StoredFileManager, ImageStoredFileManagerPro
     override func moveStoredFile(from sourceURL: URL, destinationFilename: String) throws -> StoredFileProtocol {
         let storedFile = try super.moveStoredFile(from: sourceURL, destinationFilename: destinationFilename)
 
-        if let imageDataStoredFile = self.overwriteWithImageData(fileURL: storedFile.localURL) {
-            return imageDataStoredFile
+        if let imageDataFile = self.overwriteFileContentsWithImageData(fileURL: storedFile.localURL) {
+            return imageDataFile
         }
 
         return storedFile
     }
 
-    static func makeFilename(imageDownloadURL: URL) -> String {
-        let processedURL = imageDownloadURL
+    // MARK: Protocol Conforming
+
+    func makeImageFilenameFromImageDownloadURL(_ url: URL) -> String {
+        let resultURL = url
             .deletingPathExtension()
             .absoluteString
             .components(separatedBy: .punctuationCharacters)
             .joined()
-        return "\(processedURL).\(Self.fileExtension)"
+        return "\(resultURL).\(Self.fileExtension)"
     }
 
     func getImageStoredFile(imageURL: URL) -> StoredFileProtocol? {
-        let fileName = Self.makeFilename(imageDownloadURL: imageURL)
-        return self.getLocalStoredFile(filename: fileName)
+        self.getLocalStoredFile(filename: self.makeImageFilenameFromImageDownloadURL(imageURL))
     }
 
     func removeImageStoredFile(imageURL: URL) throws {
@@ -49,11 +51,13 @@ final class ImageStoredFileManager: StoredFileManager, ImageStoredFileManagerPro
     }
 
     func saveTemporaryFileAsImageFile(temporaryFileURL: URL, imageURL: URL) throws -> StoredFileProtocol {
-        let filename = Self.makeFilename(imageDownloadURL: imageURL)
+        let filename = self.makeImageFilenameFromImageDownloadURL(imageURL)
         return try self.moveStoredFile(from: temporaryFileURL, destinationFilename: filename)
     }
 
-    private func overwriteWithImageData(fileURL: URL) -> StoredFileProtocol? {
+    // MARK: Private API
+
+    private func overwriteFileContentsWithImageData(fileURL: URL) -> StoredFileProtocol? {
         guard let data = try? Data(contentsOf: fileURL) else {
             return nil
         }

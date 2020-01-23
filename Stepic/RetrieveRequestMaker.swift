@@ -73,7 +73,7 @@ final class RetrieveRequestMaker {
                         }
                         let meta = Meta(json: json["meta"])
                         seal.fulfill((resultArray, meta, json))
-                        CoreDataHelper.instance.save()
+                        CoreDataHelper.shared.save()
                     }
                 }
             }.catch { error in
@@ -137,11 +137,11 @@ final class RetrieveRequestMaker {
                                 }
                             }
 
-                            CoreDataHelper.instance.save()
+                            CoreDataHelper.shared.save()
 
                             let meta = Meta(json: json["meta"])
                             seal.fulfill((resultArray, meta, json))
-                            CoreDataHelper.instance.save()
+                            CoreDataHelper.shared.save()
                         }.catch { error in
                             seal.reject(error)
                         }
@@ -206,7 +206,7 @@ final class RetrieveRequestMaker {
                             }
                         }
 
-                        CoreDataHelper.instance.save()
+                        CoreDataHelper.shared.save()
                         seal.fulfill((resultArray, json))
                     }
                 }

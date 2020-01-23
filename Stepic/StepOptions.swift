@@ -49,7 +49,7 @@ final class StepOptions: NSManagedObject {
 
         let oldSamples = samples
         oldSamples.forEach({
-            CoreDataHelper.instance.deleteFromStore($0)
+            CoreDataHelper.shared.deleteFromStore($0)
         })
         samples = []
         if let samplesArray = json["samples"].array {

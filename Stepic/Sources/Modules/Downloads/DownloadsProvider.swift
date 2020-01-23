@@ -47,7 +47,7 @@ final class DownloadsProvider: DownloadsProviderProtocol {
                         try? self.videoFileManager.removeVideoStoredFile(videoID: video.id)
                         video.cachedQuality = nil
                     }
-                    CoreDataHelper.instance.deleteFromStore(step, save: false)
+                    CoreDataHelper.shared.deleteFromStore(step, save: false)
                 }
 
                 seal(())
@@ -57,7 +57,7 @@ final class DownloadsProvider: DownloadsProviderProtocol {
         return when(
             guarantees: deleteCoursesGuarantees
         ).done {
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 
