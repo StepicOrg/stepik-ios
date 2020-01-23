@@ -333,10 +333,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
                     }
                 }
 
-                DispatchQueue.main.async {
-                    CoreDataHelper.shared.deleteFromStore(step, save: false)
-                }
-
                 seal.fulfill(())
             }
         }
