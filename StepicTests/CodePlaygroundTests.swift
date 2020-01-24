@@ -137,5 +137,189 @@ class CodePlaygroundSpec: QuickSpec {
                 expect(manager.getCurrentToken(text: "", cursorPosition: 0)) == ""
             }
         }
+
+        describe("should make a new line after tab") {
+            var manager: CodePlaygroundManager!
+
+            beforeEach {
+                manager = CodePlaygroundManager()
+            }
+
+            context("python") {
+                it("should make not paired a new line after colon symbol") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: ":", language: .python) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none colon symbol") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .python) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("c") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .c) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .c) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("C#") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .cs) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .cs) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("cpp") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .cpp) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .cpp11) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .cpp) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .cpp11) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("java") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .java) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .java8) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .java9) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .java11) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .java) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .java8) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .java9) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .java11) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("kotlin") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .kotlin) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .kotlin) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("swift") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .swift) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .swift) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("rust") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .rust) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .rust) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("javascript") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(
+                        manager.shouldMakeTabLineAfter(symbol: "{", language: .javascript
+                    ) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(
+                        manager.shouldMakeTabLineAfter(symbol: "}", language: .javascript
+                    ) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("scala") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .scala) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .scala) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("go") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .go) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .go) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("perl") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .perl) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .perl) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("php") {
+                it("should make paired new line after opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: true, paired: true)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .php) == expectedTuple).to(beTrue())
+                }
+
+                it("should not make a new line after none opening curly brace") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "}", language: .php) == expectedTuple).to(beTrue())
+                }
+            }
+
+            context("asm") {
+                it("should not make a new tab line ") {
+                    let expectedTuple = (shouldMakeNewLine: false, paired: false)
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .asm32) == expectedTuple).to(beTrue())
+                    expect(manager.shouldMakeTabLineAfter(symbol: "{", language: .asm64) == expectedTuple).to(beTrue())
+                }
+            }
+        }
     }
 }

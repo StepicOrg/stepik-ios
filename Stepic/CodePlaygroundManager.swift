@@ -81,8 +81,8 @@ final class CodePlaygroundManager {
         return (isInsertion: isInsertion, changes: maxString)
     }
 
-    /// Detects if there should be made a new line after tab.
-    private func shouldMakeTabLineAfter(
+    /// Detects if there should be made a new line with tab space and paired closing brace after new line.
+    func shouldMakeTabLineAfter(
         symbol: Character,
         language: CodeLanguage
     ) -> (shouldMakeNewLine: Bool, paired: Bool) {
@@ -91,7 +91,7 @@ final class CodePlaygroundManager {
             return symbol == ":"
                 ? (shouldMakeNewLine: true, paired: false)
                 : (shouldMakeNewLine: false, paired: false)
-        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin, .swift:
+        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin, .swift, .rust, .javascript, .scala, .go, .perl, .php:
             return symbol == "{"
                 ? (shouldMakeNewLine: true, paired: true)
                 : (shouldMakeNewLine: false, paired: false)
