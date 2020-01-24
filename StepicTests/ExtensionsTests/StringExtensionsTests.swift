@@ -1,16 +1,14 @@
-import Foundation
 import Nimble
 import Quick
-import XCTest
 
 @testable import Stepic
 
 final class StringExtensionsSpec: QuickSpec {
     override func spec() {
-        describe("Safe Subscript") {
+        describe("safe subscript") {
             let string = "Hello world!"
 
-            context("Index") {
+            describe("with index") {
                 it("returns correct `Character`") {
                     expect(string[safe: 0]) == "H"
                     expect(string[safe: 1]) == "e"
@@ -25,7 +23,7 @@ final class StringExtensionsSpec: QuickSpec {
                 }
             }
 
-            context("Half-open range") {
+            describe("within a half-open range") {
                 it("returns correct `String`") {
                     expect(string[safe: 1..<1]) == ""
                     expect(string[safe: 1..<2]) == "e"
@@ -39,7 +37,7 @@ final class StringExtensionsSpec: QuickSpec {
                 }
             }
 
-            context("Closed range") {
+            describe("within a closed range") {
                 it("returns correct `String`") {
                     expect(string[safe: 0...0]) == "H"
                     expect(string[safe: 0...4]) == "Hello"
