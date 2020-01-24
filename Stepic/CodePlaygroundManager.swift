@@ -104,7 +104,7 @@ final class CodePlaygroundManager {
     /// - Parameters:
     ///   - text: The text from which token will be located.
     ///   - cursorPosition: The cursor position within provided text.
-    private func getCurrentToken(text: String, cursorPosition: Int) -> String {
+    func getCurrentToken(text: String, cursorPosition: Int) -> String {
         guard cursorPosition >= 0 && cursorPosition <= text.count else {
             return ""
         }

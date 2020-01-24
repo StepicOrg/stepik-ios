@@ -93,5 +93,49 @@ class CodePlaygroundSpec: QuickSpec {
                 }
             }
         }
+
+        describe("get current token") {
+            let text = "def main()"
+
+            var manager: CodePlaygroundManager!
+
+            beforeEach {
+                manager = CodePlaygroundManager()
+            }
+
+            it("returns valid token when cursor at start") {
+                expect(manager.getCurrentToken(text: text, cursorPosition: 0)) == "def"
+            }
+
+            it("returns valid token when cursor at end") {
+                expect(manager.getCurrentToken(text: "def main", cursorPosition: 8)) == "main"
+                expect(manager.getCurrentToken(text: text, cursorPosition: 10)) == ""
+            }
+
+            it("returns valid token when cursor after word") {
+                expect(manager.getCurrentToken(text: text, cursorPosition: 3)) == "def"
+            }
+
+            it("returns valid token when cursor before word") {
+                expect(manager.getCurrentToken(text: text, cursorPosition: 4)) == "main"
+            }
+
+            it("returns valid token when cursor between word") {
+                expect(manager.getCurrentToken(text: text, cursorPosition: 2)) == "def"
+            }
+
+            it("returns valid token when cursor between not allowed characters") {
+                expect(manager.getCurrentToken(text: text, cursorPosition: 9)) == ""
+            }
+
+            it("returns valid token when cursor is out of bounds") {
+                expect(manager.getCurrentToken(text: text, cursorPosition: -1)) == ""
+                expect(manager.getCurrentToken(text: text, cursorPosition: 100)) == ""
+            }
+
+            it("returns valid token when text is empty") {
+                expect(manager.getCurrentToken(text: "", cursorPosition: 0)) == ""
+            }
+        }
     }
 }
