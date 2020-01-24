@@ -89,6 +89,25 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
                 lineNumber.draw(in: lineNumberRect, withAttributes: attributes)
             }
         }
+
+        guard let textStorage = self.textStorage else {
+            return
+        }
+
+        //  Deal with the special case of an empty last line where enumerateLineFragmentsForGlyphRange has no line
+        //  fragments to draw.
+        if textStorage.string.isEmpty || textStorage.string.hasSuffix("\n") {
+            let lineNumber = "\(paragraphNumber + 2)"
+            let lineNumberSize = lineNumber.size(withAttributes: attributes)
+
+            gutterRect = gutterRect.offsetBy(dx: 0.0, dy: gutterRect.height)
+            let lineNumberRect = gutterRect.offsetBy(
+                dx: gutterRect.width - self.appearance.lineNumberInsets.right - lineNumberSize.width,
+                dy: 0
+            )
+
+            lineNumber.draw(in: lineNumberRect, withAttributes: attributes)
+        }
     }
 
     private func getParagraph(for characterRange: NSRange) -> Int {
