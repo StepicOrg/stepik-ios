@@ -26,6 +26,18 @@ final class CodeTextView: UITextView {
         }
     }
 
+    override var selectedTextRange: UITextRange? {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+
+    override var selectedRange: NSRange {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+
     init(appearance: Appearance = Appearance()) {
         self.appearance = appearance
 
@@ -68,28 +80,48 @@ final class CodeTextView: UITextView {
     }
 
     override func draw(_ rect: CGRect) {
-        if let context = UIGraphicsGetCurrentContext() {
-            let bounds = self.bounds
-
-            context.setFillColor(self.appearance.gutterBackgroundColor.cgColor)
-            let fillRect = CGRect(
-                origin: bounds.origin,
-                size: CGSize(width: self.appearance.gutterWidth, height: bounds.height)
-            )
-            context.fill(fillRect)
-
-            context.setStrokeColor(self.appearance.gutterBorderColor.cgColor)
-            context.setLineWidth(self.appearance.gutterBorderWidth)
-            let strokeRect = CGRect(
-                x: bounds.origin.x + self.appearance.gutterWidth - self.appearance.gutterBorderWidth,
-                y: bounds.origin.y,
-                width: self.appearance.gutterBorderWidth,
-                height: bounds.height
-            )
-            context.stroke(strokeRect)
+        defer {
+            super.draw(rect)
         }
 
-        super.draw(rect)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+
+        let bounds = self.bounds
+
+        context.setFillColor(self.appearance.gutterBackgroundColor.cgColor)
+        let fillRect = CGRect(
+            origin: bounds.origin,
+            size: CGSize(width: self.appearance.gutterWidth, height: bounds.height)
+        )
+        context.fill(fillRect)
+
+        context.setStrokeColor(self.appearance.gutterBorderColor.cgColor)
+        context.setLineWidth(self.appearance.gutterBorderWidth)
+        let strokeRect = CGRect(
+            x: bounds.origin.x + self.appearance.gutterWidth - self.appearance.gutterBorderWidth,
+            y: bounds.origin.y,
+            width: self.appearance.gutterBorderWidth,
+            height: bounds.height
+        )
+        context.stroke(strokeRect)
+
+        guard let codeTextViewLayoutManager = self.textStorage.layoutManagers.first as? CodeTextViewLayoutManager else {
+            return
+        }
+
+        codeTextViewLayoutManager.selectedRange = self.selectedRange
+
+        guard let textStorageString = codeTextViewLayoutManager.textStorage?.string as NSString? else {
+            return
+        }
+
+        var glyphRange = textStorageString.paragraphRange(for: self.selectedRange)
+        glyphRange = codeTextViewLayoutManager.glyphRange(forCharacterRange: glyphRange, actualCharacterRange: nil)
+
+        codeTextViewLayoutManager.selectedRange = glyphRange
+        codeTextViewLayoutManager.invalidateDisplay(forGlyphRange: glyphRange)
     }
 
     func updateTheme(name: String, font: UIFont) {

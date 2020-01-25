@@ -17,6 +17,8 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
     private var lastParagraphLocation = 0
     private var lastParagraphNumber = 0
 
+    var selectedRange: NSRange?
+
     override init() {
         self.appearance = Appearance()
         super.init()
@@ -64,13 +66,17 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
         var gutterRect = CGRect.zero
         var paragraphNumber = 0
 
-        self.enumerateLineFragments(forGlyphRange: glyphsToShow) { (rect, _, _, glyphRange, _) in
+        self.enumerateLineFragments(forGlyphRange: glyphsToShow) { (rect, usedRect, _, glyphRange, _) in
             guard let textStorage = self.textStorage else {
                 return
             }
 
             let characterRange = self.characterRange(forGlyphRange: glyphRange, actualGlyphRange: nil)
             let paragraphRange = (textStorage.string as NSString).paragraphRange(for: characterRange)
+
+            if self.shouldHighlightParagraphRange(paragraphRange) {
+                self.highlightParagraphRange(paragraphRange, inUsedRect: usedRect)
+            }
 
             if characterRange.location == paragraphRange.location {
                 gutterRect = CGRect(x: 0, y: rect.origin.y, width: self.appearance.gutterWidth, height: rect.height)
@@ -166,5 +172,28 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
 
             return paragraphNumber
         }
+    }
+
+    private func shouldHighlightParagraphRange(_ paragraphRange: NSRange) -> Bool {
+        guard let selectedRange = self.selectedRange else {
+            return false
+        }
+        return NSLocationInRange(selectedRange.location, paragraphRange)
+    }
+
+    private func highlightParagraphRange(_ paragraphRange: NSRange, inUsedRect usedRect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+
+        let cursorRect = CGRect(
+            x: 0,
+            y: usedRect.origin.y + 8,
+            width: self.appearance.gutterWidth,
+            height: usedRect.height
+        )
+
+        context.setFillColor(UIColor.red.cgColor)
+        context.fill(cursorRect)
     }
 }
