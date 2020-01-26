@@ -18,6 +18,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
     private var lastParagraphNumber = 0
 
     var selectedRange: NSRange?
+    var shouldHighlightCurrentLine = true
 
     override init() {
         self.appearance = Appearance()
@@ -175,7 +176,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
     }
 
     private func shouldHighlightParagraphRange(_ paragraphRange: NSRange) -> Bool {
-        guard let selectedRange = self.selectedRange else {
+        guard self.shouldHighlightCurrentLine, let selectedRange = self.selectedRange else {
             return false
         }
         return NSLocationInRange(selectedRange.location, paragraphRange)

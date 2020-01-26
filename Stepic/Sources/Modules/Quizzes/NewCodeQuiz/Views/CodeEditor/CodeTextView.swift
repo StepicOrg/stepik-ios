@@ -17,24 +17,39 @@ extension CodeTextView {
 final class CodeTextView: UITextView {
     let appearance: Appearance
 
+    private lazy var codeTextViewLayoutManager = self.layoutManager as? CodeTextViewLayoutManager
+    private lazy var codeAttributedString = self.textStorage as? CodeAttributedString
+
     var language: String? {
         didSet {
-            if self.language != oldValue,
-               let textStorage = self.layoutManager.textStorage as? CodeAttributedString {
-                textStorage.language = self.language
+            guard self.language != oldValue,
+                  let codeAttributedString = self.codeAttributedString else {
+                return
             }
+
+            codeAttributedString.language = self.language
+        }
+    }
+
+    var shouldHighlightCurrentLine = true {
+        didSet {
+            self.setNeedsDisplay()
         }
     }
 
     override var selectedTextRange: UITextRange? {
         didSet {
-            self.setNeedsDisplay()
+            if self.shouldHighlightCurrentLine {
+                self.setNeedsDisplay()
+            }
         }
     }
 
     override var selectedRange: NSRange {
         didSet {
-            self.setNeedsDisplay()
+            if self.shouldHighlightCurrentLine {
+                self.setNeedsDisplay()
+            }
         }
     }
 
@@ -107,15 +122,39 @@ final class CodeTextView: UITextView {
         )
         context.stroke(strokeRect)
 
-        guard let codeTextViewLayoutManager = self.textStorage.layoutManagers.first as? CodeTextViewLayoutManager else {
+        self.invalidateDisplayOfCurrentLine()
+    }
+
+    func updateTheme(name: String, font: UIFont) {
+        guard let codeAttributedString = self.codeAttributedString else {
             return
         }
 
+        codeAttributedString.highlightr.setTheme(to: name)
+
+        if let highlightrTheme = codeAttributedString.highlightr.theme {
+            highlightrTheme.setCodeFont(font)
+            codeAttributedString.highlightr.theme = highlightrTheme
+
+            self.backgroundColor = codeAttributedString.highlightr.theme.themeBackgroundColor
+        }
+    }
+
+    private func invalidateDisplayOfCurrentLine() {
+        guard let codeTextViewLayoutManager = self.codeTextViewLayoutManager else {
+            return
+        }
+
+        guard self.shouldHighlightCurrentLine else {
+            codeTextViewLayoutManager.shouldHighlightCurrentLine = false
+            codeTextViewLayoutManager.selectedRange = nil
+            return
+        }
+
+        codeTextViewLayoutManager.shouldHighlightCurrentLine = true
         codeTextViewLayoutManager.selectedRange = self.selectedRange
 
-        guard let textStorageString = codeTextViewLayoutManager.textStorage?.string as NSString? else {
-            return
-        }
+        let textStorageString = self.textStorage.string as NSString
 
         var glyphRange = textStorageString.paragraphRange(for: self.selectedRange)
         glyphRange = codeTextViewLayoutManager.glyphRange(forCharacterRange: glyphRange, actualCharacterRange: nil)
@@ -123,22 +162,9 @@ final class CodeTextView: UITextView {
         codeTextViewLayoutManager.selectedRange = glyphRange
         codeTextViewLayoutManager.invalidateDisplay(forGlyphRange: glyphRange)
     }
-
-    func updateTheme(name: String, font: UIFont) {
-        guard let textStorage = self.layoutManager.textStorage as? CodeAttributedString else {
-            return
-        }
-
-        textStorage.highlightr.setTheme(to: name)
-
-        if let theme = textStorage.highlightr.theme {
-            theme.setCodeFont(font)
-            textStorage.highlightr.theme = theme
-
-            self.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
-        }
-    }
 }
+
+// MARK: - CodeTextView: NSLayoutManagerDelegate -
 
 extension CodeTextView: NSLayoutManagerDelegate {
     func layoutManager(
