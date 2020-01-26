@@ -66,8 +66,9 @@ final class NewCodeQuizView: UIView {
 
     private lazy var codeEditorView: CodeEditorView = {
         let codeEditorView = CodeEditorView()
+        codeEditorView.isThemeAutoUpdatable = true
+        codeEditorView.shouldHighlightCurrentLine = false
         codeEditorView.delegate = self
-        codeEditorView.isThemeAutoUpdating = true
         return codeEditorView
     }()
 
@@ -86,7 +87,6 @@ final class NewCodeQuizView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
-                self.topSeparatorContainerView,
                 self.codeDetailsView,
                 self.toolbarView,
                 self.titleLabelContainerView,
@@ -99,7 +99,6 @@ final class NewCodeQuizView: UIView {
         return stackView
     }()
 
-    private lazy var topSeparatorContainerView = UIView()
     private lazy var titleLabelContainerView = UIView()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {

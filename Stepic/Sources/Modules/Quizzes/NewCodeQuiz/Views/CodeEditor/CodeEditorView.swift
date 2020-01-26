@@ -112,7 +112,13 @@ final class CodeEditorView: UIView {
         }
     }
 
-    var isThemeAutoUpdating: Bool = true
+    var isThemeAutoUpdatable = true
+
+    var shouldHighlightCurrentLine = true {
+        didSet {
+            self.codeTextView.shouldHighlightCurrentLine = self.shouldHighlightCurrentLine
+        }
+    }
 
     var isEditable = true {
         didSet {
@@ -141,7 +147,7 @@ final class CodeEditorView: UIView {
         self.addSubviews()
         self.makeConstraints()
 
-        self.updateThemeIfAutoEnabled()
+        self.updateThemeIfAutoUpdatable()
 
         NotificationCenter.default.addObserver(
             self,
@@ -228,11 +234,11 @@ final class CodeEditorView: UIView {
 
     @objc
     private func themeDidChange() {
-        self.updateThemeIfAutoEnabled()
+        self.updateThemeIfAutoUpdatable()
     }
 
-    private func updateThemeIfAutoEnabled() {
-        if self.isThemeAutoUpdating {
+    private func updateThemeIfAutoUpdatable() {
+        if self.isThemeAutoUpdatable {
             self.theme = CodeEditorThemeService().theme
         }
     }
@@ -261,6 +267,8 @@ extension CodeEditorView: ProgrammaticallyInitializableViewProtocol {
         }
     }
 }
+
+// MARK: - CodeEditorView: UITextViewDelegate -
 
 extension CodeEditorView: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -317,7 +325,11 @@ extension CodeEditorView: UITextViewDelegate {
     }
 }
 
+// MARK: - CodeEditorView: CodeSuggestionDelegate -
+
 extension CodeEditorView: CodeSuggestionDelegate {
+    var suggestionsSize: CodeSuggestionsSize { self.elementsSize.elements.suggestions }
+
     func didSelectSuggestion(suggestion: String, prefix: String) {
         guard self.codeTextView.isEditable else {
             return
@@ -330,6 +342,4 @@ extension CodeEditorView: CodeSuggestionDelegate {
 
         self.analyzeCodeAndComplete()
     }
-
-    var suggestionsSize: CodeSuggestionsSize { self.elementsSize.elements.suggestions }
 }
