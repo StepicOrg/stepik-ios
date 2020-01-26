@@ -4,8 +4,8 @@ import UIKit
 extension CodeTextView {
     struct Appearance {
         let gutterWidth: CGFloat = 24
-        let gutterBackgroundColor = UIColor(hex: 0xF6F6F6)
-        let gutterBorderColor = UIColor(hex: 0xC8C7CC)
+        var gutterBackgroundColor = UIColor(hex: 0xF6F6F6)
+        var gutterBorderColor = UIColor(hex: 0xC8C7CC)
         let gutterBorderWidth: CGFloat = 0.5
 
         let lineNumberFont = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)
@@ -15,7 +15,7 @@ extension CodeTextView {
 }
 
 final class CodeTextView: UITextView {
-    let appearance: Appearance
+    private(set) var appearance: Appearance
 
     private lazy var codeTextViewLayoutManager = self.layoutManager as? CodeTextViewLayoutManager
     private lazy var codeAttributedString = self.textStorage as? CodeAttributedString
@@ -94,6 +94,11 @@ final class CodeTextView: UITextView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.codeTextViewLayoutManager?.appearance.currentLineWidth = self.bounds.width
+    }
+
     override func draw(_ rect: CGRect) {
         defer {
             super.draw(rect)
@@ -136,7 +141,7 @@ final class CodeTextView: UITextView {
             highlightrTheme.setCodeFont(font)
             codeAttributedString.highlightr.theme = highlightrTheme
 
-            self.backgroundColor = codeAttributedString.highlightr.theme.themeBackgroundColor
+            self.updateColors(highlightr: codeAttributedString.highlightr)
         }
     }
 
@@ -161,6 +166,40 @@ final class CodeTextView: UITextView {
 
         codeTextViewLayoutManager.selectedRange = glyphRange
         codeTextViewLayoutManager.invalidateDisplay(forGlyphRange: glyphRange)
+    }
+
+    private func updateColors(highlightr: Highlightr) {
+        guard let themeBackgroundColor = highlightr.theme.themeBackgroundColor else {
+            return
+        }
+
+        let invertedThemeBackgroundColor = self.invertColor(themeBackgroundColor)
+        // Change cursor color.
+        self.tintColor = invertedThemeBackgroundColor
+
+        self.backgroundColor = themeBackgroundColor
+        self.appearance.gutterBackgroundColor = themeBackgroundColor
+        self.appearance.gutterBorderColor = invertedThemeBackgroundColor.withAlphaComponent(0.5)
+
+        guard let codeTextViewLayoutManager = codeTextViewLayoutManager else {
+            return
+        }
+
+        codeTextViewLayoutManager.appearance.lineNumberTextColor = invertedThemeBackgroundColor.withAlphaComponent(0.5)
+        codeTextViewLayoutManager.appearance.currentLineColor = invertedThemeBackgroundColor.withAlphaComponent(0.15)
+        codeTextViewLayoutManager.appearance.currentLineNumberTextColor = invertedThemeBackgroundColor
+    }
+
+    private func invertColor(_ color: UIColor) -> UIColor {
+        // swiftlint:disable identifier_name
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        // swiftlint:enable identifier_name
+
+        color.getRed(&r, green: &g, blue: &b, alpha: nil)
+
+        return UIColor(red: 1.0 - r, green: 1.0 - g, blue: 1.0 - b, alpha: 1)
     }
 }
 

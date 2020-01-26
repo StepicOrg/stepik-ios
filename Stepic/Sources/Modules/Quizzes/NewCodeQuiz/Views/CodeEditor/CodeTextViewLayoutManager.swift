@@ -8,11 +8,22 @@ extension CodeTextViewLayoutManager {
         var lineNumberFont = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)
         var lineNumberTextColor = UIColor.mainDark.withAlphaComponent(0.5)
         let lineNumberInsets = LayoutInsets(right: 4)
+
+        var currentLineNumberTextColor = UIColor.mainDark
+        var currentLineColor = UIColor.mainDark.withAlphaComponent(0.25)
+        var currentLineWidth: CGFloat = 24.0
     }
 }
 
 final class CodeTextViewLayoutManager: NSLayoutManager {
-    let appearance: Appearance
+    var appearance: Appearance
+
+    private var lineNuberTextAttributes: [NSAttributedString.Key: Any] {
+        [
+            .font: self.appearance.lineNumberFont,
+            .foregroundColor: self.appearance.lineNumberTextColor
+        ]
+    }
 
     private var lastParagraphLocation = 0
     private var lastParagraphNumber = 0
@@ -59,11 +70,6 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
     override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
         super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
 
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: self.appearance.lineNumberFont,
-            .foregroundColor: self.appearance.lineNumberTextColor
-        ]
-
         var gutterRect = CGRect.zero
         var paragraphNumber = 0
 
@@ -76,7 +82,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
             let paragraphRange = (textStorage.string as NSString).paragraphRange(for: characterRange)
 
             if self.shouldHighlightParagraphRange(paragraphRange) {
-                self.highlightParagraphRange(paragraphRange, inUsedRect: usedRect)
+                self.highlightParagraphRange(paragraphRange, inUsedRect: usedRect, at: origin)
             }
 
             if characterRange.location == paragraphRange.location {
@@ -85,6 +91,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
 
                 paragraphNumber = self.getParagraph(for: characterRange)
 
+                let attributes = self.lineNuberTextAttributesForParagraphRange(paragraphRange)
                 let lineNumber = "\(paragraphNumber + 1)"
                 let lineNumberSize = lineNumber.size(withAttributes: attributes)
 
@@ -105,7 +112,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
         //  fragments to draw.
         if textStorage.string.isEmpty || textStorage.string.hasSuffix("\n") {
             let lineNumber = "\(paragraphNumber + 2)"
-            let lineNumberSize = lineNumber.size(withAttributes: attributes)
+            let lineNumberSize = lineNumber.size(withAttributes: self.lineNuberTextAttributes)
 
             gutterRect = gutterRect.offsetBy(dx: 0.0, dy: gutterRect.height)
             let lineNumberRect = gutterRect.offsetBy(
@@ -113,7 +120,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
                 dy: 0
             )
 
-            lineNumber.draw(in: lineNumberRect, withAttributes: attributes)
+            lineNumber.draw(in: lineNumberRect, withAttributes: self.lineNuberTextAttributes)
         }
     }
 
@@ -175,6 +182,15 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
         }
     }
 
+    private func lineNuberTextAttributesForParagraphRange(_ paragraphRange: NSRange) -> [NSAttributedString.Key: Any] {
+        self.shouldHighlightParagraphRange(paragraphRange)
+            ? [
+                .font: self.appearance.lineNumberFont,
+                .foregroundColor: self.appearance.currentLineNumberTextColor
+            ]
+            : self.lineNuberTextAttributes
+    }
+
     private func shouldHighlightParagraphRange(_ paragraphRange: NSRange) -> Bool {
         guard self.shouldHighlightCurrentLine, let selectedRange = self.selectedRange else {
             return false
@@ -182,19 +198,20 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
         return NSLocationInRange(selectedRange.location, paragraphRange)
     }
 
-    private func highlightParagraphRange(_ paragraphRange: NSRange, inUsedRect usedRect: CGRect) {
+    private func highlightParagraphRange(_ paragraphRange: NSRange, inUsedRect usedRect: CGRect, at origin: CGPoint) {
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
 
-        let cursorRect = CGRect(
+        var cursorRect = CGRect(
             x: 0,
-            y: usedRect.origin.y + 8,
-            width: self.appearance.gutterWidth,
+            y: usedRect.origin.y,
+            width: self.appearance.currentLineWidth,
             height: usedRect.height
         )
+        cursorRect = cursorRect.offsetBy(dx: origin.x, dy: origin.y)
 
-        context.setFillColor(UIColor.red.cgColor)
+        context.setFillColor(self.appearance.currentLineColor.cgColor)
         context.fill(cursorRect)
     }
 }

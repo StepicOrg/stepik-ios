@@ -32,6 +32,9 @@ protocol NewCodeQuizFullscreenViewControllerProtocol: AnyObject {
 // MARK: - NewCodeQuizFullscreenViewController: TabmanViewController -
 
 final class NewCodeQuizFullscreenViewController: TabmanViewController {
+    lazy var newCodeQuizFullscreenView = self.view as? NewCodeQuizFullscreenView
+    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
+
     private lazy var tabBarView: TMBar = {
         let bar = TMBarView<TMHorizontalBarLayout, TMLabelBarButton, TMLineBarIndicator>()
         bar.layout.transitionStyle = .snap
@@ -129,19 +132,15 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.updateNavigationBarAppearance()
+
+        self.styledNavigationController?.changeShadowViewAlpha(
+            Appearance.navigationBarAppearance.shadowViewAlpha,
+            sender: self
+        )
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
     // MARK: Private API
-
-    private func updateNavigationBarAppearance() {
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeShadowViewAlpha(
-                Appearance.navigationBarAppearance.shadowViewAlpha,
-                sender: self
-            )
-        }
-    }
 
     private func loadTabViewControllerIfNeeded(at index: Int) {
         guard self.tabViewControllers.count > index else {
