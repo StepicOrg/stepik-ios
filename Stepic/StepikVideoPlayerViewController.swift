@@ -207,6 +207,9 @@ final class StepikVideoPlayerViewController: UIViewController {
     private var isPlayerControlsVisible = true
     private var hidePlayerControlsTimer: Timer?
 
+    /// This property will be set to `true` when player playback did end and device, not in the foreground state.
+    private var shouldShowAutoplayOnPlayerReady = false
+
     private var videoInBackgroundTooltip: Tooltip?
 
     override var prefersStatusBarHidden: Bool { true }
@@ -779,7 +782,19 @@ final class StepikVideoPlayerViewController: UIViewController {
 
 extension StepikVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
-        guard player.playbackState == .stopped || !self.isPlayerPassedReadyState else {
+        Self.logger.info("StepikVideoPlayerViewController :: player is ready to display")
+
+        if self.shouldShowAutoplayOnPlayerReady {
+            self.shouldShowAutoplayOnPlayerReady = false
+
+            self.setAutoplayControlsHidden(false)
+            if self.autoplayPreferenceSwitch.isOn {
+                self.startAutoplayCountdown()
+            }
+
+            return
+        }
+
         let isPlayerFirstTimeReady = player.playbackState == .stopped || !self.isPlayerPassedReadyState
         let isPlayerReadyAfterVideoQualityChanged = player.playbackState == .paused && self.isPlayerPassedReadyState
 
@@ -788,8 +803,6 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         }
 
         self.isPlayerPassedReadyState = true
-
-        Self.logger.info("StepikVideoPlayerViewController :: player is ready to display")
 
         self.activityIndicator.isHidden = true
         self.setTimeParametersAfterPlayerIsReady()
@@ -844,6 +857,9 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
             if self.autoplayPreferenceSwitch.isOn {
                 self.startAutoplayCountdown()
             }
+            self.shouldShowAutoplayOnPlayerReady = false
+        } else {
+            self.shouldShowAutoplayOnPlayerReady = true
         }
     }
 
