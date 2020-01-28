@@ -241,6 +241,11 @@ final class StepikVideoPlayerViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.saveCurrentPlayerTime()
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
@@ -258,7 +263,6 @@ final class StepikVideoPlayerViewController: UIViewController {
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.removeTarget(self)
         NotificationCenter.default.removeObserver(self)
         Self.logger.info("StepikVideoPlayerViewController :: did deinit")
-        self.saveCurrentPlayerTime()
         self.hidePlayerControlsTimer?.invalidate()
     }
 
@@ -599,9 +603,11 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     private func saveCurrentPlayerTime() {
-        let time = self.player.currentTime != self.player.maximumDuration ? self.player.currentTime : 0.0
-        self.video.playTime = time
-        CoreDataHelper.shared.save()
+        DispatchQueue.main.async {
+            let time = self.player.currentTime != self.player.maximumDuration ? self.player.currentTime : 0.0
+            self.video.playTime = max(0, time)
+            CoreDataHelper.shared.save()
+        }
     }
 
     @IBAction
@@ -774,6 +780,10 @@ final class StepikVideoPlayerViewController: UIViewController {
 extension StepikVideoPlayerViewController: PlayerDelegate {
     func playerReady(_ player: Player) {
         guard player.playbackState == .stopped || !self.isPlayerPassedReadyState else {
+        let isPlayerFirstTimeReady = player.playbackState == .stopped || !self.isPlayerPassedReadyState
+        let isPlayerReadyAfterVideoQualityChanged = player.playbackState == .paused && self.isPlayerPassedReadyState
+
+        guard isPlayerFirstTimeReady || isPlayerReadyAfterVideoQualityChanged else {
             return
         }
 
@@ -813,9 +823,13 @@ extension StepikVideoPlayerViewController: PlayerDelegate {
         Self.logger.info("StepikVideoPlayerViewController :: player playback state changed to \(player.playbackState)")
     }
 
-    func playerBufferingStateDidChange(_ player: Player) { }
+    func playerCurrentTimeDidChange(_ player: Player) {
+        if player.playbackState == .playing {
+            self.playerStartTime = max(0, player.currentTime)
+        }
 
-    func playerPlaybackWillStartFromBeginning(_ player: Player) { }
+        Self.logger.info("StepikVideoPlayerViewController :: player current time changed to \(player.currentTime)")
+    }
 
     func playerPlaybackDidEnd(_ player: Player) {
         self.setButtonPlaying(true)
