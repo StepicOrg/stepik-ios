@@ -1,7 +1,7 @@
 import Foundation
 
 struct NewChoiceQuizViewModel {
-    let title: String
+    let title: String?
     let choices: [NewChoiceQuiz.Choice]
     let finalState: State?
     let isMultipleChoice: Bool

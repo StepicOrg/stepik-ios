@@ -6,6 +6,7 @@ enum NewSortingQuiz {
         struct Response {
             let options: [Option]
             let status: QuizStatus?
+            let isQuizTitleVisible: Bool
         }
 
         struct ViewModel {

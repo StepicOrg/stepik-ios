@@ -6,6 +6,7 @@ enum NewStringQuiz {
         struct Response {
             let text: String?
             let status: QuizStatus?
+            let isQuizTitleVisible: Bool
         }
 
         struct ViewModel {

@@ -7,6 +7,7 @@ enum NewChoiceQuiz {
             let isMultipleChoice: Bool
             let choices: [Choice]
             let status: QuizStatus?
+            let isQuizTitleVisible: Bool
         }
 
         struct ViewModel {

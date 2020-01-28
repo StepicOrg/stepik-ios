@@ -6,6 +6,7 @@ protocol QuizInputProtocol: AnyObject {
     func update(dataset: Dataset?)
     func update(feedback: SubmissionFeedback?)
     func update(codeDetails: CodeDetails?)
+    func update(quizTitleVisibility isVisible: Bool)
 }
 
 extension QuizInputProtocol {
@@ -14,4 +15,5 @@ extension QuizInputProtocol {
     func update(dataset: Dataset?) { }
     func update(feedback: SubmissionFeedback?) { }
     func update(codeDetails: CodeDetails?) { }
+    func update(quizTitleVisibility isVisible: Bool) { }
 }

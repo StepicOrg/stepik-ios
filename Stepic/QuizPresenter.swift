@@ -190,7 +190,7 @@ final class QuizPresenter {
                 return
             }
 
-            _ = s.attemptsAPI.retrieve(stepName: s.step.block.name, stepId: s.step.id, success: {
+            _ = s.attemptsAPI.retrieve(stepName: s.step.block.name, stepID: s.step.id, success: {
                 [weak self]
                 attempts, _ in
                 guard let s = self else { return }
@@ -250,7 +250,7 @@ final class QuizPresenter {
         performRequest({
             [weak self] in
             guard let s = self else { return }
-            _ = s.attemptsAPI.create(stepName: s.step.block.name, stepId: s.step.id, success: {
+            _ = s.attemptsAPI.create(stepName: s.step.block.name, stepID: s.step.id, success: {
                 [weak self]
                 attempt in
                 guard let s = self else { return }

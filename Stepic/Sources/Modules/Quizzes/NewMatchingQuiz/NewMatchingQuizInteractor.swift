@@ -14,6 +14,8 @@ final class NewMatchingQuizInteractor: NewMatchingQuizInteractorProtocol {
     // swiftlint:disable:next discouraged_optional_collection
     private var currentItems: [NewMatchingQuiz.MatchItem]?
 
+    private var isQuizTitleVisible = true
+
     init(presenter: NewMatchingQuizPresenterProtocol) {
         self.presenter = presenter
     }
@@ -31,7 +33,8 @@ final class NewMatchingQuizInteractor: NewMatchingQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 items: items,
-                status: self.currentStatus
+                status: self.currentStatus,
+                isQuizTitleVisible: self.isQuizTitleVisible
             )
         )
     }
@@ -88,6 +91,10 @@ extension NewMatchingQuizInteractor: QuizInputProtocol {
 
         self.currentDataset = dataset
         self.currentItems = self.makeMatchItems(dataset: dataset)
+    }
+
+    func update(quizTitleVisibility isVisible: Bool) {
+        self.isQuizTitleVisible = isVisible
     }
 
     private func makeMatchItems(dataset: MatchingDataset) -> [NewMatchingQuiz.MatchItem] {

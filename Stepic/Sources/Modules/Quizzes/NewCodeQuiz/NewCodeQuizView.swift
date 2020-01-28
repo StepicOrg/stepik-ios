@@ -162,18 +162,18 @@ final class NewCodeQuizView: UIView {
         }
     }
 
-    // MARK: - Private API
+    func setCodeEditorActionControlsEnabled(_ isEnabled: Bool) {
+        self.toolbarView.isEnabled = isEnabled
+        self.codeEditorView.isEditable = isEnabled
+    }
+
+    // MARK: Private API
 
     private func setCodeEditorReady(_ isReady: Bool) {
         self.languagePickerView.isHidden = isReady
         self.toolbarView.isHidden = !isReady
         self.codeEditorStackView.isHidden = !isReady
         self.unsupportedCodeLanguageStackView.isHidden = true
-    }
-
-    private func setCodeEditorActionControlsEnabled(_ isEnabled: Bool) {
-        self.toolbarView.isEnabled = isEnabled
-        self.codeEditorView.isEditable = isEnabled
     }
 }
 
