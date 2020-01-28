@@ -14,6 +14,8 @@ final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
     // swiftlint:disable:next discouraged_optional_collection
     private var currentOptions: [NewSortingQuiz.Option]?
 
+    private var isQuizTitleVisible = true
+
     init(presenter: NewSortingQuizPresenterProtocol) {
         self.presenter = presenter
     }
@@ -31,7 +33,8 @@ final class NewSortingQuizInteractor: NewSortingQuizInteractorProtocol {
         self.presenter.presentReply(
             response: .init(
                 options: options,
-                status: self.currentStatus
+                status: self.currentStatus,
+                isQuizTitleVisible: self.isQuizTitleVisible
             )
         )
     }
@@ -82,5 +85,9 @@ extension NewSortingQuizInteractor: QuizInputProtocol {
 
         self.currentDataset = dataset
         self.currentOptions = dataset.options.enumerated().map { .init(id: $0, text: $1) }
+    }
+
+    func update(quizTitleVisibility isVisible: Bool) {
+        self.isQuizTitleVisible = isVisible
     }
 }

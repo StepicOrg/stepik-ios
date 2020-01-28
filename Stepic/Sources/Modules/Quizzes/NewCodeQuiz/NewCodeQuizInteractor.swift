@@ -27,6 +27,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         }
     }
 
+    private var isQuizTitleVisible = true
+
     init(
         presenter: NewCodeQuizPresenterProtocol,
         provider: NewCodeQuizProviderProtocol,
@@ -105,7 +107,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
                 language: self.language,
                 languageName: self.languageName,
                 codeDetails: codeDetails,
-                status: self.currentStatus
+                status: self.currentStatus,
+                isQuizTitleVisible: self.isQuizTitleVisible
             )
         )
     }
@@ -198,6 +201,10 @@ extension NewCodeQuizInteractor: QuizInputProtocol {
 
     func update(codeDetails: CodeDetails?) {
         self.codeDetails = codeDetails
+    }
+
+    func update(quizTitleVisibility isVisible: Bool) {
+        self.isQuizTitleVisible = isVisible
     }
 
     private func handleEmptyReply() {

@@ -850,6 +850,11 @@ CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
 
+/* Solution */
+SolutionTitle = "Solution %@";
+UnsupportedSolutionTitle = "Current quiz type is not supported in mobile app yet";
+UnsupportedSolutionActionTitle = "Open solution in the web version";
+
 /* Discussions */
 DiscussionsTitle = "Comments";
 DiscussionsAlertActionEditTitle = "Edit";

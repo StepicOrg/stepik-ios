@@ -21,7 +21,7 @@ final class QuizAssemblyFactory {
         case .code:
             return NewCodeQuizAssembly()
         case .sql:
-            return NewCodeQuizAssembly(language: CodeLanguage.sql)
+            return NewCodeQuizAssembly(language: .sql)
         case .sorting:
             return NewSortingQuizAssembly()
         case .matching:
