@@ -65,6 +65,7 @@ final class RemoveImageFixedHeightRule: BaseHTMLExtractionRule {
             if let regex = try? Regex(string: "(height=\"\\d+\")", options: [.ignoreCase]) {
                 replacedImage.replaceFirst(matching: regex, with: "")
             }
+            replacedImage = replacedImage.condenseWhitespace()
 
             content = content.replacingOccurrences(of: image, with: replacedImage)
         }
@@ -100,10 +101,18 @@ final class ReplaceImageSourceWithBase64: BaseHTMLExtractionRule {
                     with: "src=\"data:image/jpg;base64, \(base64EncodedString)\""
                 )
             }
+            replacedImage = replacedImage.condenseWhitespace()
 
             content = content.replacingOccurrences(of: image, with: replacedImage)
         }
 
         return content
+    }
+}
+
+private extension String {
+    func condenseWhitespace() -> String {
+        let components = self.components(separatedBy: .whitespacesAndNewlines)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
     }
 }

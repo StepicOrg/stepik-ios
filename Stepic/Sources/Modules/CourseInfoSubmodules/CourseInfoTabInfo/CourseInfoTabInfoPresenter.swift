@@ -7,11 +7,6 @@ protocol CourseInfoTabInfoPresenterProtocol {
 final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
     weak var viewController: CourseInfoTabInfoViewControllerProtocol?
 
-    private let splitTestingService = SplitTestingService(
-        analyticsService: AnalyticsUserProperties(),
-        storage: UserDefaults.standard
-    )
-
     func presentCourseInfo(response: CourseInfoTabInfo.InfoLoad.Response) {
         var viewModel: CourseInfoTabInfo.InfoLoad.ViewModel
 
@@ -50,13 +45,9 @@ final class CourseInfoTabInfoPresenter: CourseInfoTabInfoPresenterProtocol {
             : nil
 
         let aboutText: String = {
-            var text = course.summary
-            if AboutCourseStringSplitTest.shouldParticipate {
-                let splitTest = self.splitTestingService.fetchSplitTest(AboutCourseStringSplitTest.self)
-                if case .test = splitTest.currentGroup {
-                    text = course.courseDescription
-                }
-            }
+            let text = course.courseDescription.isEmpty
+                ? course.summary
+                : course.courseDescription
             return text.trimmingCharacters(in: .whitespaces)
         }()
 
