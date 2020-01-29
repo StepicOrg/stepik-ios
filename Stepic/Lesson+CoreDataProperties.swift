@@ -29,11 +29,11 @@ extension Lesson {
     @NSManaged var managedUnit: Unit?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Lesson.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Lesson.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

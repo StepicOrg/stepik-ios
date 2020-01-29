@@ -8,13 +8,13 @@ def shared_pods
     pod 'Alamofire', '4.9.1'
     pod 'Atributika', '4.9.4'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.4.2'
+    pod 'SDWebImage', '5.5.1'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Logging', '1.2.0'
     pod 'Fabric', '1.10.2'
     pod 'Crashlytics', '3.14.0'
-    pod 'DeviceKit', '2.3.0'
-    pod 'PromiseKit', '6.12.0'
+    pod 'DeviceKit', '3.0.0'
+    pod 'PromiseKit', '6.13.0'
     pod 'SwiftLint', '0.38.2'
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
@@ -54,7 +54,7 @@ def all_pods
     
     pod 'Presentr', '1.9'
     
-    pod 'Agrume', '5.3.7'
+    pod 'Agrume', '5.6.0'
     pod 'Highlightr', '2.1.0'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.3'

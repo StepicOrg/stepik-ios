@@ -18,11 +18,11 @@ extension CourseListModel {
     @NSManaged var managedCoursesArray: NSObject?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CourseList", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: CourseListModel.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: CourseListModel.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

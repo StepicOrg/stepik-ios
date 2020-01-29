@@ -601,7 +601,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     private func saveCurrentPlayerTime() {
         let time = self.player.currentTime != self.player.maximumDuration ? self.player.currentTime : 0.0
         self.video.playTime = time
-        CoreDataHelper.instance.save()
+        CoreDataHelper.shared.save()
     }
 
     @IBAction

@@ -15,7 +15,8 @@ final class NewStepAssembly: Assembly {
         let provider = NewStepProvider(
             stepsPersistenceService: StepsPersistenceService(),
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
-            stepFontSizeStorageManager: StepFontSizeStorageManager()
+            stepFontSizeStorageManager: StepFontSizeStorageManager(),
+            imageStoredFileManager: StoredFileManagerFactory.makeStoredFileManager(type: .image)
         )
         let presenter = NewStepPresenter()
         let interactor = NewStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)

@@ -23,11 +23,11 @@ extension Video {
     @NSManaged var managedCachedQuality: NSNumber?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Video", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Video.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Video.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

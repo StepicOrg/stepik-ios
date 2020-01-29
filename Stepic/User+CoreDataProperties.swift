@@ -31,11 +31,11 @@ extension User {
     @NSManaged var managedProfileEntity: Profile?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "User", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: User.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: User.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

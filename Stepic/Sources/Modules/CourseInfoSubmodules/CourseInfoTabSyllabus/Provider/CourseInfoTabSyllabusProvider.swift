@@ -70,7 +70,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
                 }
 
                 seal.fulfill(sections)
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 shouldUseNetwork
                     ? seal.reject(Error.sectionsNetworkFetchFailed)
@@ -89,7 +89,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
                 section.units = units
                 seal.fulfill(units)
 
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { error in
                 seal.reject(error)
             }
@@ -102,7 +102,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
                 lesson.steps = steps
                 seal.fulfill(steps)
 
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.stepsNetworkFetchFailed)
             }
@@ -203,7 +203,7 @@ final class CourseInfoTabSyllabusProvider: CourseInfoTabSyllabusProviderProtocol
             }
 
             seal(units)
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 

@@ -95,7 +95,7 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
                     stepOptions.templates += [newUserTemplate]
                 }
 
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             }.catch { _ in
                 seal.reject(Error.templateUpdateFailed)
             }

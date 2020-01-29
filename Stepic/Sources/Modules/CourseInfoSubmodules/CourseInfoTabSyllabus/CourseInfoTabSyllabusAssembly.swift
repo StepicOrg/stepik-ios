@@ -32,10 +32,13 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             tooltipStorageManager: TooltipStorageManager(),
             syllabusDownloadsService: SyllabusDownloadsService(
                 videoDownloadingService: VideoDownloadingService.shared,
-                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+                videoFileManager: VideoStoredFileManager(fileManager: .default),
+                imageDownloadingService: DownloadingServiceFactory.makeDownloadingService(type: .image),
+                imageFileManager: ImageStoredFileManager(fileManager: .default),
                 stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
                 storageUsageService: StorageUsageService(
-                    videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+                    videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+                    imageFileManager: ImageStoredFileManager(fileManager: .default)
                 )
             )
         )

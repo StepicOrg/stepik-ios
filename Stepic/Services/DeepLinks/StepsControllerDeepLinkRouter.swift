@@ -80,7 +80,7 @@ final class StepsControllerDeepLinkRouter: NSObject {
 
                 ApiDataDownloader.units.retrieve(lesson: lesson.id, success: { unit in
                     unit.lesson = lesson
-                    CoreDataHelper.instance.save()
+                    CoreDataHelper.shared.save()
 
                     seal.fulfill(unit)
                 }, error: { err in
@@ -100,7 +100,7 @@ final class StepsControllerDeepLinkRouter: NSObject {
                 ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: [], refreshMode: .update, success: { sections in
                     if let section = sections.first {
                         unit.section = section
-                        CoreDataHelper.instance.save()
+                        CoreDataHelper.shared.save()
 
                         seal.fulfill(section)
                     } else {
@@ -122,7 +122,7 @@ final class StepsControllerDeepLinkRouter: NSObject {
                 ApiDataDownloader.courses.retrieve(ids: [section.courseId], existing: [], refreshMode: .update, success: { courses in
                     if let course = courses.first {
                         section.course = course
-                        CoreDataHelper.instance.save()
+                        CoreDataHelper.shared.save()
 
                         seal.fulfill(course)
                     } else {

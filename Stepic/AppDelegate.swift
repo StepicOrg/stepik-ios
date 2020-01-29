@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RemoteConfig.shared.setup()
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
+        SVProgressHUD.setGraceTimeInterval(0.1)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
         SVProgressHUD.setHapticsEnabled(true)
 

@@ -81,8 +81,8 @@ final class CodePlaygroundManager {
         return (isInsertion: isInsertion, changes: maxString)
     }
 
-    /// Detects if there should be made a new line after tab.
-    private func shouldMakeTabLineAfter(
+    /// Detects if there should be made a new line with tab space and paired closing brace after new line.
+    func shouldMakeTabLineAfter(
         symbol: Character,
         language: CodeLanguage
     ) -> (shouldMakeNewLine: Bool, paired: Bool) {
@@ -91,7 +91,7 @@ final class CodePlaygroundManager {
             return symbol == ":"
                 ? (shouldMakeNewLine: true, paired: false)
                 : (shouldMakeNewLine: false, paired: false)
-        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin, .swift:
+        case .c, .cpp11, .cpp, .java, .java8, .java9, .java11, .cs, .kotlin, .swift, .rust, .javascript, .scala, .go, .perl, .php:
             return symbol == "{"
                 ? (shouldMakeNewLine: true, paired: true)
                 : (shouldMakeNewLine: false, paired: false)
@@ -100,28 +100,31 @@ final class CodePlaygroundManager {
         }
     }
 
-    /// Returns current token for text.
-    private func getCurrentToken(text: String, cursorPosition: Int) -> String {
+    /// Returns token between cursor position.
+    /// - Parameters:
+    ///   - text: The text from which token will be located.
+    ///   - cursorPosition: The cursor position within provided text.
+    func getCurrentToken(text: String, cursorPosition: Int) -> String {
+        guard cursorPosition >= 0 && cursorPosition <= text.count else {
+            return ""
+        }
+
         var offsetBefore = 0
-        while text.startIndex != text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)
-            && self.allowedCharacters.indexOf(
-                String(text[text.index(before: text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore))])
-            ) != nil {
+        while let character = text[safe: (cursorPosition - offsetBefore - 1)],
+              self.allowedCharacters.contains(character) {
             offsetBefore += 1
         }
 
         var offsetAfter = 0
-        while text.endIndex != text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)
-            && self.allowedCharacters.indexOf(
-                String(text[text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])
-            ) != nil {
+        while let character = text[safe: (cursorPosition + offsetAfter)],
+              self.allowedCharacters.contains(character) {
             offsetAfter += 1
         }
 
-        let token = String(text[text.index(text.startIndex, offsetBy: cursorPosition - offsetBefore)..<text.index(text.startIndex, offsetBy: cursorPosition)])
-            + String(text[text.index(text.startIndex, offsetBy: cursorPosition)..<text.index(text.startIndex, offsetBy: cursorPosition + offsetAfter)])
+        let beforeCursorString = text[safe: (cursorPosition - offsetBefore)..<cursorPosition] ?? ""
+        let afterCursorString = text[safe: cursorPosition..<(cursorPosition + offsetAfter)] ?? ""
 
-        return token
+        return beforeCursorString + afterCursorString
     }
 
     private func checkNextLineInsertion(

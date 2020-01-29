@@ -1,6 +1,18 @@
 import SnapKit
 import UIKit
 
+protocol NewCodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
+    func newCodeQuizFullscreenCodeViewController(
+        _ viewController: NewCodeQuizFullscreenCodeViewController,
+        codeDidChange code: String
+    )
+
+    func newCodeQuizFullscreenCodeViewController(
+        _ viewController: NewCodeQuizFullscreenCodeViewController,
+        didSubmitCode code: String
+    )
+}
+
 extension NewCodeQuizFullscreenCodeViewController {
     enum Appearance {
         static let submitButtonBackgroundColor = UIColor.stepicGreen
@@ -16,18 +28,6 @@ extension NewCodeQuizFullscreenCodeViewController {
     }
 }
 
-protocol NewCodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
-    func newCodeQuizFullscreenCodeViewController(
-        _ viewController: NewCodeQuizFullscreenCodeViewController,
-        codeDidChange code: String
-    )
-
-    func newCodeQuizFullscreenCodeViewController(
-        _ viewController: NewCodeQuizFullscreenCodeViewController,
-        didSubmitCode code: String
-    )
-}
-
 final class NewCodeQuizFullscreenCodeViewController: UIViewController {
     weak var delegate: NewCodeQuizFullscreenCodeViewControllerDelegate?
 
@@ -36,7 +36,8 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
             languageNameLabelLayoutInsets: Appearance.languageNameLabelLayoutInsets
         )
         let codeEditorView = CodeEditorView(appearance: appearance)
-        codeEditorView.isThemeAutoUpdating = true
+        codeEditorView.isThemeAutoUpdatable = true
+        codeEditorView.shouldHighlightCurrentLine = false
         codeEditorView.delegate = self
         return codeEditorView
     }()
@@ -158,10 +159,12 @@ extension NewCodeQuizFullscreenCodeViewController: CodeEditorViewDelegate {
 
     func codeEditorViewDidBeginEditing(_ codeEditorView: CodeEditorView) {
         self.isSubmitButtonHidden = true
+        self.codeEditorView.shouldHighlightCurrentLine = true
     }
 
     func codeEditorViewDidEndEditing(_ codeEditorView: CodeEditorView) {
         self.isSubmitButtonHidden = false
+        self.codeEditorView.shouldHighlightCurrentLine = false
     }
 
     func codeEditorViewDidRequestSuggestionPresentationController(

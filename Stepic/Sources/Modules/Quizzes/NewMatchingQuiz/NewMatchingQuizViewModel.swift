@@ -1,7 +1,7 @@
 import Foundation
 
 struct NewMatchingQuizViewModel {
-    let title: String
+    let title: String?
     let items: [NewMatchingQuiz.MatchItem]
     let finalState: State?
 

@@ -16,7 +16,7 @@ final class LocalProgressLastViewedUpdater {
         if let unit = step.lesson?.unit {
             updateView(for: unit)
         } else {
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 
@@ -25,7 +25,7 @@ final class LocalProgressLastViewedUpdater {
         if let section = unit.section {
             updateView(for: section)
         } else {
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 
@@ -34,12 +34,12 @@ final class LocalProgressLastViewedUpdater {
         if let course = section.course {
             updateView(for: course)
         } else {
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 
     func updateView(for course: Course) {
         course.progress?.lastViewed = NSDate().timeIntervalSince1970
-        CoreDataHelper.instance.save()
+        CoreDataHelper.shared.save()
     }
 }

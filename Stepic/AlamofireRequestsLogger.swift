@@ -2,9 +2,19 @@ import Alamofire
 import Foundation
 
 final class AlamofireRequestsLogger {
+    private let queue: DispatchQueue
+
+    init(queue: DispatchQueue = DispatchQueue(label: "AlamofireRequestsLogger", qos: .background)) {
+        self.queue = queue
+    }
+
+    deinit {
+        self.stop()
+    }
+
     func startIfDebug() {
         #if DEBUG
-        self.start()
+            self.start()
         #endif
     }
 
@@ -23,12 +33,14 @@ final class AlamofireRequestsLogger {
         NotificationCenter.default.removeObserver(self)
     }
 
-    deinit {
-        self.stop()
-    }
-
     @objc
     private func networkRequestDidStart(notification: Foundation.Notification) {
+        self.queue.async { [weak self] in
+            self?.log(notification: notification)
+        }
+    }
+
+    private func log(notification: Foundation.Notification) {
         guard let userInfo = notification.userInfo,
               let task = userInfo[Foundation.Notification.Key.Task] as? URLSessionTask,
               let request = task.originalRequest,

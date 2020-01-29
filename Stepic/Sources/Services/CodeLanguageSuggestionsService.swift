@@ -49,7 +49,7 @@ final class CodeLanguageSuggestionsService: CodeLanguageSuggestionsServiceProtoc
                 course.lastCodeLanguage = LastCodeLanguage(language: language)
             }
 
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             seal.fulfill(())
         }

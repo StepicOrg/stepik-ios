@@ -219,7 +219,7 @@ extension NotificationsService {
             postNotification(id: notification.id, isNew: true)
         }
 
-        CoreDataHelper.instance.save()
+        CoreDataHelper.shared.save()
 
         DispatchQueue.main.async {
             if #available(iOS 10.0, *) {

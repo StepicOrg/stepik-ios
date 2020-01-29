@@ -75,7 +75,7 @@ final class CertificatesPresenter {
                     self?.makeViewData(from: $0)
                 }), hasNextPage: meta.hasNext)
                 strongSelf.view?.displayEmpty()
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
             })
         }, error: { [weak self] _ in
             self?.view?.displayError()
@@ -151,7 +151,7 @@ final class CertificatesPresenter {
                 strongSelf.view?.setCertificates(certificates: strongSelf.certificates.compactMap({ [weak self] in
                     self?.makeViewData(from: $0)
                 }), hasNextPage: meta.hasNext)
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
                 self?.isGettingNextPage = false
             })
         }, error: { [weak self] _ in

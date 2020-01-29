@@ -22,11 +22,11 @@ extension Notification {
     @NSManaged public var managedHtmlText: String?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "Notification", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "Notification", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: Notification.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: Notification.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var id: Int {

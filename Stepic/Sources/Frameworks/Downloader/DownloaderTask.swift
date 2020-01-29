@@ -1,11 +1,3 @@
-//
-//  DownloaderTask.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 06.07.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 
 class DownloaderTask: DownloaderTaskProtocol {
@@ -48,14 +40,14 @@ class DownloaderTask: DownloaderTaskProtocol {
     }
 
     func resume() {
-        try? executor?.resume(task: self)
+        try? self.executor?.resume(task: self)
     }
 
     func pause() {
-        try? executor?.pause(task: self)
+        try? self.executor?.pause(task: self)
     }
 
     func cancel() {
-        try? executor?.cancel(task: self)
+        try? self.executor?.cancel(task: self)
     }
 }

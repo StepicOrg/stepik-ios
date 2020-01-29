@@ -535,12 +535,14 @@ extension DiscussionsCellView: ProcessedContentTextViewDelegate {
         }
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) {
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
         self.didClickOnLinkOrImage = true
         self.asyncResetClickOnLinkOrImage()
 
         self.onImageClick?(url)
     }
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
         self.didClickOnLinkOrImage = true

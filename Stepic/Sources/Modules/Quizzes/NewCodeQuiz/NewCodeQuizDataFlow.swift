@@ -11,6 +11,7 @@ enum NewCodeQuiz {
             let languageName: String?
             let codeDetails: CodeDetails
             let status: QuizStatus?
+            let isQuizTitleVisible: Bool
         }
 
         struct ViewModel {

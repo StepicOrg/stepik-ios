@@ -96,7 +96,7 @@ final class CourseInfoProvider: CourseInfoProviderProtocol {
                 course.progress = progress
                 course.reviewSummary = reviewSummary
 
-                CoreDataHelper.instance.save()
+                CoreDataHelper.shared.save()
 
                 seal.fulfill(course)
             }.catch { error in

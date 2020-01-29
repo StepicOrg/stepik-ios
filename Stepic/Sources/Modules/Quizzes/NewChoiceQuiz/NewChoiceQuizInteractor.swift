@@ -18,6 +18,8 @@ final class NewChoiceQuizInteractor: NewChoiceQuizInteractorProtocol {
     private var currentChoicesFeedback: [String?]?
     // swiftlint:enable discouraged_optional_collection
 
+    private var isQuizTitleVisible = true
+
     init(presenter: NewChoiceQuizPresenterProtocol) {
         self.presenter = presenter
     }
@@ -47,7 +49,8 @@ final class NewChoiceQuizInteractor: NewChoiceQuizInteractorProtocol {
                     let (text, (isSelected, hint)) = result
                     return NewChoiceQuiz.Choice(text: text, isSelected: isSelected, hint: hint)
                 },
-                status: self.currentStatus
+                status: self.currentStatus,
+                isQuizTitleVisible: self.isQuizTitleVisible
             )
         )
     }
@@ -95,5 +98,9 @@ extension NewChoiceQuizInteractor: QuizInputProtocol {
         if let feedback = feedback, case .options(let choices) = feedback {
             self.currentChoicesFeedback = choices
         }
+    }
+
+    func update(quizTitleVisibility isVisible: Bool) {
+        self.isQuizTitleVisible = isVisible
     }
 }

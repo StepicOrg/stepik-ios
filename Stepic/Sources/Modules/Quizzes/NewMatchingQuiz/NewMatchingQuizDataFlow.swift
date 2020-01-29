@@ -6,6 +6,7 @@ enum NewMatchingQuiz {
         struct Response {
             let items: [MatchItem]
             let status: QuizStatus?
+            let isQuizTitleVisible: Bool
         }
 
         struct ViewModel {

@@ -336,6 +336,11 @@ extension NewStepViewController: NewStepViewDelegate {
         agrume.show(from: self)
     }
 
+    func newStepView(_ view: NewStepView, didRequestFullscreenImage image: UIImage) {
+        let agrume = Agrume(image: image)
+        agrume.show(from: self)
+    }
+
     func newStepViewDidLoadContent(_ view: NewStepView) {
         self.newStepView?.endLoading()
     }

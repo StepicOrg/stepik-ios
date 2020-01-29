@@ -1,6 +1,6 @@
 PODS:
   - ActionSheetPicker-3.0 (2.4.0)
-  - Agrume (5.3.7):
+  - Agrume (5.6.0):
     - SwiftyGif
   - Alamofire (4.9.1)
   - Amplitude-iOS (4.9.3)
@@ -19,7 +19,7 @@ PODS:
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - CRToast (0.0.9)
-  - DeviceKit (2.3.0)
+  - DeviceKit (3.0.0)
   - DownloadButton (0.1.0)
   - EasyTipView (2.0.4)
   - Fabric (1.10.2)
@@ -146,21 +146,21 @@ PODS:
   - Pageboy (3.5.0)
   - pop (1.0.12)
   - Presentr (1.9)
-  - PromiseKit (6.12.0):
-    - PromiseKit/CorePromise (= 6.12.0)
-    - PromiseKit/Foundation (= 6.12.0)
-    - PromiseKit/UIKit (= 6.12.0)
-  - PromiseKit/CorePromise (6.12.0)
-  - PromiseKit/Foundation (6.12.0):
+  - PromiseKit (6.13.0):
+    - PromiseKit/CorePromise (= 6.13.0)
+    - PromiseKit/Foundation (= 6.13.0)
+    - PromiseKit/UIKit (= 6.13.0)
+  - PromiseKit/CorePromise (6.13.0)
+  - PromiseKit/Foundation (6.13.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.12.0):
+  - PromiseKit/UIKit (6.13.0):
     - PromiseKit/CorePromise
   - Protobuf (3.11.2)
   - Quick (2.2.0)
   - Reveal-SDK (24)
-  - SDWebImage (5.4.2):
-    - SDWebImage/Core (= 5.4.2)
-  - SDWebImage/Core (5.4.2)
+  - SDWebImage (5.5.1):
+    - SDWebImage/Core (= 5.5.1)
+  - SDWebImage/Core (5.5.1)
   - SnapKit (5.0.1)
   - STRegex (2.1.0)
   - SVGKit (2.1.0):
@@ -188,7 +188,7 @@ PODS:
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.4.0)
-  - Agrume (= 5.3.7)
+  - Agrume (= 5.6.0)
   - Alamofire (= 4.9.1)
   - Amplitude-iOS (= 4.9.3)
   - Atributika (= 4.9.4)
@@ -197,7 +197,7 @@ DEPENDENCIES:
   - Charts (= 3.4.0)
   - Crashlytics (= 3.14.0)
   - CRToast (= 0.0.9)
-  - DeviceKit (= 2.3.0)
+  - DeviceKit (= 3.0.0)
   - DownloadButton (= 0.1.0)
   - EasyTipView (= 2.0.4)
   - Fabric (= 1.10.2)
@@ -217,10 +217,10 @@ DEPENDENCIES:
   - Nimble (= 8.0.5)
   - Nuke (= 8.3.1)
   - Presentr (= 1.9)
-  - PromiseKit (= 6.12.0)
+  - PromiseKit (= 6.13.0)
   - Quick (= 2.2.0)
   - Reveal-SDK
-  - SDWebImage (= 5.4.2)
+  - SDWebImage (= 5.5.1)
   - SnapKit (= 5.0.1)
   - STRegex (= 2.1.0)
   - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `2.x`)
@@ -319,7 +319,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: c68e1f8355828b4e1c823fa87185aacfef5e6fe3
-  Agrume: 365b69b37f5e3e527b164dbb782a03c710c7b781
+  Agrume: c3e5858b50bbfb32611898624d7da017f992f1db
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   Atributika: 643a248e2dd8b4d74b23b53ea31393cab0a01d94
@@ -330,7 +330,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
-  DeviceKit: da103891aa928d89f64ea8dd8aca738c5f3d8ac0
+  DeviceKit: fc3c2bd361a8d68d8a91eb715e453aede57317e5
   DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   EasyTipView: 4f8beae0a82db2ca4a9b5fd658785fc5f61d296b
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
@@ -364,11 +364,11 @@ SPEC CHECKSUMS:
   Pageboy: 3794c578aae5fcce06e90b3ed4a0ad6b807d75bb
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
-  PromiseKit: c06835ba442ce5454ce3cdde470232804a6e4ff8
+  PromiseKit: c8668a559f26c98277a543192c51bc38dd2dfc76
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   Reveal-SDK: 5d7e56b8f018c0a88b3a2c10bf68d598bbd3b071
-  SDWebImage: 4ca2dc4eefae4224bea8f504251cda485a363745
+  SDWebImage: 1245d058b7b8f59adef7a6da6bbafd4f1ab67041
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   STRegex: dfa420d93d8c1402956233b3879ec1fc14b45fbe
   SVGKit: 8a2fc74258bdb2abb54d3b65f3dd68b0277a9c4d
@@ -385,6 +385,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: edb00e8af2903290e142ba4c488adf8d394e828a
 
-PODFILE CHECKSUM: f089890bfae3360d7423744536481201668172f8
+PODFILE CHECKSUM: ddd8fc897562a54318454d89332f656049ae9093
 
 COCOAPODS: 1.8.4

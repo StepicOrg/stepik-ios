@@ -16,11 +16,11 @@ extension CodeSample {
     @NSManaged var managedOptions: StepOptions?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "CodeSample", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "CodeSample", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: CodeSample.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: CodeSample.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var input: String {

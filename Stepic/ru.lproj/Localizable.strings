@@ -851,6 +851,11 @@ CodeQuizFullscreenTabInstructionTitle = "Инструкция";
 CodeQuizFullscreenTabCodeTitle = "Код";
 CodeQuizFullscreenTabRunTitle = "Запуск";
 
+/* Solution */
+SolutionTitle = "Решение %@";
+UnsupportedSolutionTitle = "Данный тип заданий пока не поддерживается в приложении";
+UnsupportedSolutionActionTitle = "Открыть решение в web-версии";
+
 /* Discussions */
 DiscussionsTitle = "Комментарии";
 DiscussionsAlertActionEditTitle = "Редактировать";

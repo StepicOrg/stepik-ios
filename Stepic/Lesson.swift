@@ -76,7 +76,7 @@ final class Lesson: NSManagedObject, IDFetchable {
                     completion()
                 }
             })
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
             }, error: {
                 _ in
                 print("Error while downloading steps")
@@ -103,12 +103,12 @@ final class Lesson: NSManagedObject, IDFetchable {
                 self.steps[i].progress = progresses[i]
             }
 
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
 
             completion()
             }, error: {
                 (_) -> Void in
-                print("Error while dowloading progresses")
+                print("Error while downloading progresses")
         })
     }
 
@@ -141,7 +141,7 @@ final class Lesson: NSManagedObject, IDFetchable {
         request.predicate = NSPredicate(format: "managedId== %@", id as NSNumber)
 
         do {
-            let results = try CoreDataHelper.instance.context.fetch(request)
+            let results = try CoreDataHelper.shared.context.fetch(request)
             return (results as? [Lesson])?.first
         } catch {
             return nil
@@ -155,7 +155,7 @@ final class Lesson: NSManagedObject, IDFetchable {
         request.predicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: idPredicates)
 
         do {
-            guard let results = try CoreDataHelper.instance.context.fetch(request) as? [Lesson] else {
+            guard let results = try CoreDataHelper.shared.context.fetch(request) as? [Lesson] else {
                 return []
             }
             return results

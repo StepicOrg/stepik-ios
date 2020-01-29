@@ -63,7 +63,7 @@ final class AuthInfo: NSObject {
                         Notification.deleteAll()
                         AnalyticsUserProperties.shared.clearUserDependentProperties()
                         NotificationsBadgesManager.shared.set(number: 0)
-                        CoreDataHelper.instance.save()
+                        CoreDataHelper.shared.save()
 
                         AuthInfo.shared.user = nil
                         DeviceDefaults.sharedDefaults.deviceId = nil

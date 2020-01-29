@@ -224,7 +224,9 @@ extension ChoiceElementView: ProcessedContentTextViewDelegate {
         self.onContentLoad?()
     }
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) { }
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {}
 
-    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage url: URL) { }
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {}
+
+    func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 }

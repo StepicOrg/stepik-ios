@@ -14,8 +14,40 @@ import SwiftyJSON
 final class AttemptsAPI: APIEndpoint {
     override var name: String { "attempts" }
 
-    func create(stepName: String, stepId: Int) -> Promise<Attempt> {
-        let attempt = Attempt(step: stepId)
+    /// Get attempts by ids.
+    func retrieve(
+        ids: [Attempt.IdType],
+        stepName: String,
+        page: Int = 1,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<([Attempt], Meta)> {
+        let parameters: Parameters = [
+            "ids": ids,
+            "page": page
+        ]
+
+        return Promise { seal in
+            self.manager.request(
+                "\(StepicApplicationsInfo.apiURL)/\(self.name)",
+                method: .get,
+                parameters: parameters,
+                encoding: URLEncoding.default,
+                headers: headers
+            ).validate().responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    seal.reject(error)
+                case .success(let json):
+                    let meta = Meta(json: json["meta"])
+                    let attempts = json["attempts"].arrayValue.map { Attempt(json: $0, stepName: stepName) }
+                    seal.fulfill((attempts, meta))
+                }
+            }
+        }
+    }
+
+    func create(stepName: String, stepID: Int) -> Promise<Attempt> {
+        let attempt = Attempt(step: stepID)
         return Promise { seal in
             self.create.request(
                 requestEndpoint: "attempts",
@@ -35,7 +67,7 @@ final class AttemptsAPI: APIEndpoint {
         Promise { seal in
             self.retrieve(
                 stepName: stepName,
-                stepId: stepID,
+                stepID: stepID,
                 success: { attempts, meta in
                     seal.fulfill((attempts, meta))
                 },
@@ -46,22 +78,35 @@ final class AttemptsAPI: APIEndpoint {
         }
     }
 
-    @discardableResult func retrieve(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Attempt], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult
+    func retrieve(
+        stepName: String,
+        stepID: Int,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping ([Attempt], Meta) -> Void,
+        error errorHandler: @escaping (String) -> Void
+    ) -> Request? {
         let headers = AuthInfo.shared.initialHTTPHeaders
 
         var params: Parameters = [:]
-        params["step"] = stepId
-        if let userid = AuthInfo.shared.userId {
-            params["user"] = userid as NSObject?
+        params["step"] = stepID
+
+        if let userID = AuthInfo.shared.userId {
+            params["user"] = userID as NSObject?
         } else {
             print("no user id!")
         }
 
-        return manager.request("\(StepicApplicationsInfo.apiURL)/attempts", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
+        return self.manager.request(
+            "\(StepicApplicationsInfo.apiURL)/attempts",
+            method: .get,
+            parameters: params,
+            encoding: URLEncoding.default,
+            headers: headers
+        ).responseSwiftyJSON { response in
             var error = response.result.error
             var json: JSON = [:]
+
             if response.result.value == nil {
                 if error == nil {
                     error = NSError()
@@ -69,12 +114,13 @@ final class AttemptsAPI: APIEndpoint {
             } else {
                 json = response.result.value!
             }
+
             let response = response.response
 
-            if let e = error {
-                let d = (e as NSError).localizedDescription
-                print(d)
-                errorHandler(d)
+            if let error = error {
+                let description = (error as NSError).localizedDescription
+                print(description)
+                errorHandler(description)
                 return
             }
 
@@ -87,18 +133,23 @@ final class AttemptsAPI: APIEndpoint {
                 errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
-        })
+        }
     }
 }
 
 extension AttemptsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func create(stepName: String, stepId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Attempt) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
-        create(stepName: stepName, stepId: stepId).done {
-            attempt in
+    @discardableResult
+    func create(
+        stepName: String,
+        stepID: Int,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (Attempt) -> Void,
+        error errorHandler: @escaping (String) -> Void
+    ) -> Request? {
+        self.create(stepName: stepName, stepID: stepID).done { attempt in
             success(attempt)
-        }.catch {
-            error in
+        }.catch { error in
             errorHandler(error.localizedDescription)
         }
         return nil

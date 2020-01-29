@@ -38,17 +38,29 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     func doStepLoad(request: NewStep.StepLoad.Request) {
         firstly {
             self.provider.fetchStep(id: self.stepID)
-        }.then { fetchResult in
-            self.provider.fetchCurrentFontSize().map { ($0, fetchResult) }
-        }.done(on: DispatchQueue.global(qos: .userInitiated)) { fontSize, result in
-            guard let step = result.value else {
+        }.then(on: .global(qos: .userInitiated)) {
+            fetchResult -> Promise<(StepFontSize, [(imageURL: URL, storedFile: StoredFileProtocol)], Step)> in
+            guard let step = fetchResult.value else {
                 throw Error.fetchFailed
             }
 
+            return when(
+                fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(id: step.id)
+            ).map { ($0, $1, step) }
+        }.done(on: .global(qos: .userInitiated)) { fontSize, storedImages, step in
             self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
-                let data = NewStep.StepLoad.Data(step: step, fontSize: fontSize)
+                let data = NewStep.StepLoad.Data(
+                    step: step,
+                    fontSize: fontSize,
+                    storedImages: storedImages.compactMap { imageURL, storedFile in
+                        if let imageData = storedFile.data {
+                            return NewStep.StoredImage(url: imageURL, data: imageData)
+                        }
+                        return nil
+                    }
+                )
                 self?.presenter.presentStep(response: .init(result: .success(data)))
             }
 
@@ -172,9 +184,22 @@ extension NewStepInteractor: NewStepInputProtocol {
     }
 
     func updateStepText(_ text: String) {
-        self.provider.fetchCurrentFontSize().done { fontSize in
-            self.presenter.presentStepTextUpdate(response: .init(text: text, fontSize: fontSize))
-        }
+        when(
+            fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(id: self.stepID)
+        ).done { fetchResult in
+            self.presenter.presentStepTextUpdate(
+                response: .init(
+                    text: text,
+                    fontSize: fetchResult.0,
+                    storedImages: fetchResult.1.compactMap { imageURL, storedFile in
+                        if let imageData = storedFile.data {
+                            return NewStep.StoredImage(url: imageURL, data: imageData)
+                        }
+                        return nil
+                    }
+                )
+            )
+        }.cauterize()
     }
 
     func play() {

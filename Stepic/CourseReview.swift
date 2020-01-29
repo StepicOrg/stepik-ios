@@ -59,7 +59,7 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
                 }
                 seal(results)
             })
-            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
         }
     }
 
@@ -82,16 +82,16 @@ final class CourseReview: NSManagedObject, JSONSerializable, IDFetchable {
                     seal([])
                 }
             })
-            _ = try? CoreDataHelper.instance.context.execute(asyncRequest)
+            _ = try? CoreDataHelper.shared.context.execute(asyncRequest)
         }
     }
 
     static func delete(_ id: CourseReview.IdType) -> Guarantee<Void> {
         CourseReview.fetchAsync(ids: [id]).done { courseReviews in
             courseReviews.forEach {
-                CoreDataHelper.instance.deleteFromStore($0, save: false)
+                CoreDataHelper.shared.deleteFromStore($0, save: false)
             }
-            CoreDataHelper.instance.save()
+            CoreDataHelper.shared.save()
         }
     }
 }

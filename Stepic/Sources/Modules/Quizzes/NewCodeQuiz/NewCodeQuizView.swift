@@ -66,8 +66,9 @@ final class NewCodeQuizView: UIView {
 
     private lazy var codeEditorView: CodeEditorView = {
         let codeEditorView = CodeEditorView()
+        codeEditorView.isThemeAutoUpdatable = true
+        codeEditorView.shouldHighlightCurrentLine = false
         codeEditorView.delegate = self
-        codeEditorView.isThemeAutoUpdating = true
         return codeEditorView
     }()
 
@@ -86,7 +87,6 @@ final class NewCodeQuizView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(
             arrangedSubviews: [
-                self.topSeparatorContainerView,
                 self.codeDetailsView,
                 self.toolbarView,
                 self.titleLabelContainerView,
@@ -99,7 +99,6 @@ final class NewCodeQuizView: UIView {
         return stackView
     }()
 
-    private lazy var topSeparatorContainerView = UIView()
     private lazy var titleLabelContainerView = UIView()
 
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
@@ -163,18 +162,18 @@ final class NewCodeQuizView: UIView {
         }
     }
 
-    // MARK: - Private API
+    func setCodeEditorActionControlsEnabled(_ isEnabled: Bool) {
+        self.toolbarView.isEnabled = isEnabled
+        self.codeEditorView.isEditable = isEnabled
+    }
+
+    // MARK: Private API
 
     private func setCodeEditorReady(_ isReady: Bool) {
         self.languagePickerView.isHidden = isReady
         self.toolbarView.isHidden = !isReady
         self.codeEditorStackView.isHidden = !isReady
         self.unsupportedCodeLanguageStackView.isHidden = true
-    }
-
-    private func setCodeEditorActionControlsEnabled(_ isEnabled: Bool) {
-        self.toolbarView.isEnabled = isEnabled
-        self.codeEditorView.isEditable = isEnabled
     }
 }
 

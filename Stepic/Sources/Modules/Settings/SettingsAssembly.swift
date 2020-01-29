@@ -24,9 +24,11 @@ final class SettingsAssembly: Assembly {
             downloadsProvider: DownloadsProvider(
                 coursesPersistenceService: CoursesPersistenceService(),
                 adaptiveStorageManager: AdaptiveStorageManager.shared,
-                videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
+                videoFileManager: VideoStoredFileManager(fileManager: .default),
+                imageFileManager: ImageStoredFileManager(fileManager: .default),
                 storageUsageService: StorageUsageService(
-                    videoFileManager: VideoStoredFileManager(fileManager: FileManager.default)
+                    videoFileManager: VideoStoredFileManager(fileManager: .default),
+                    imageFileManager: ImageStoredFileManager(fileManager: .default)
                 )
             )
         )

@@ -18,11 +18,11 @@ extension StepOptions {
     @NSManaged var managedSamples: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
-        NSEntityDescription.entity(forEntityName: "StepOptions", in: CoreDataHelper.instance.context)!
+        NSEntityDescription.entity(forEntityName: "StepOptions", in: CoreDataHelper.shared.context)!
     }
 
     convenience init() {
-        self.init(entity: StepOptions.oldEntity, insertInto: CoreDataHelper.instance.context)
+        self.init(entity: StepOptions.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 
     var executionTimeLimit: Double {

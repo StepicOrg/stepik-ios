@@ -65,9 +65,54 @@ final class RemoveImageFixedHeightRule: BaseHTMLExtractionRule {
             if let regex = try? Regex(string: "(height=\"\\d+\")", options: [.ignoreCase]) {
                 replacedImage.replaceFirst(matching: regex, with: "")
             }
+            replacedImage = replacedImage.condenseWhitespace()
 
             content = content.replacingOccurrences(of: image, with: replacedImage)
         }
         return content
+    }
+}
+
+final class ReplaceImageSourceWithBase64: BaseHTMLExtractionRule {
+    private let base64EncodedStringByImageURL: [URL: String]
+
+    init(base64EncodedStringByImageURL: [URL: String], extractorType: HTMLExtractorProtocol.Type) {
+        self.base64EncodedStringByImageURL = base64EncodedStringByImageURL
+        super.init(extractorType: extractorType)
+    }
+
+    override func process(content: String) -> String {
+        var content = content
+
+        let images = self.extractorType.extractAllTags(tag: "img", from: content)
+        let urlStrings = self.extractorType.extractAllTagsAttribute(tag: "img", attribute: "src", from: content)
+
+        for (image, urlString) in zip(images, urlStrings) {
+            guard let imageURL = URL(string: urlString),
+                  let base64EncodedString = self.base64EncodedStringByImageURL[imageURL] else {
+                continue
+            }
+
+            var replacedImage = image
+
+            if let regex = try? Regex(string: "(src=\".*\")", options: [.ignoreCase]) {
+                replacedImage.replaceFirst(
+                    matching: regex,
+                    with: "src=\"data:image/jpg;base64, \(base64EncodedString)\""
+                )
+            }
+            replacedImage = replacedImage.condenseWhitespace()
+
+            content = content.replacingOccurrences(of: image, with: replacedImage)
+        }
+
+        return content
+    }
+}
+
+private extension String {
+    func condenseWhitespace() -> String {
+        let components = self.components(separatedBy: .whitespacesAndNewlines)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
     }
 }
