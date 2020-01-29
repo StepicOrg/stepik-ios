@@ -1,14 +1,14 @@
 import Foundation
 import PromiseKit
 
-protocol NewLessonInteractorProtocol {
-    func doLessonLoad(request: NewLesson.LessonLoad.Request)
-    func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request)
+protocol LessonInteractorProtocol {
+    func doLessonLoad(request: LessonDataFlow.LessonLoad.Request)
+    func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request)
 }
 
-final class NewLessonInteractor: NewLessonInteractorProtocol {
-    private let presenter: NewLessonPresenterProtocol
-    private let provider: NewLessonProviderProtocol
+final class LessonInteractor: LessonInteractorProtocol {
+    private let presenter: LessonPresenterProtocol
+    private let provider: LessonProviderProtocol
     private let unitNavigationService: UnitNavigationServiceProtocol
     private let persistenceQueuesService: PersistenceQueuesServiceProtocol
     private let dataBackUpdateService: DataBackUpdateServiceProtocol
@@ -24,13 +24,13 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     private var nextUnit: Unit?
     private var assignmentsForCurrentSteps: [Step.IdType: Assignment.IdType] = [:]
 
-    private var lastLoadState: (context: NewLesson.Context, startStep: NewLesson.StartStep?)
+    private var lastLoadState: (context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep?)
 
     init(
-        initialContext: NewLesson.Context,
-        startStep: NewLesson.StartStep?,
-        presenter: NewLessonPresenterProtocol,
-        provider: NewLessonProviderProtocol,
+        initialContext: LessonDataFlow.Context,
+        startStep: LessonDataFlow.StartStep?,
+        presenter: LessonPresenterProtocol,
+        provider: LessonProviderProtocol,
         unitNavigationService: UnitNavigationServiceProtocol,
         persistenceQueuesService: PersistenceQueuesServiceProtocol,
         dataBackUpdateService: DataBackUpdateServiceProtocol
@@ -45,14 +45,14 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
     // MARK: Public API
 
-    func doLessonLoad(request: NewLesson.LessonLoad.Request) {
+    func doLessonLoad(request: LessonDataFlow.LessonLoad.Request) {
         self.refresh(
             context: self.lastLoadState.context,
             startStep: self.lastLoadState.startStep
         ).cauterize()
     }
 
-    func doEditStepPresentation(request: NewLesson.EditStepPresentation.Request) {
+    func doEditStepPresentation(request: LessonDataFlow.EditStepPresentation.Request) {
         guard let lesson = self.currentLesson,
               let stepID = lesson.stepsArray[safe: request.index] else {
             return
@@ -63,7 +63,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
     // MARK: Private API
 
-    private func refresh(context: NewLesson.Context, startStep: NewLesson.StartStep? = nil) -> Promise<Void> {
+    private func refresh(context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep? = nil) -> Promise<Void> {
         Promise { seal in
             self.previousUnit = nil
             self.nextUnit = nil
@@ -89,7 +89,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
         }
     }
 
-    private func loadData(context: NewLesson.Context, startStep: NewLesson.StartStep) -> Promise<Void> {
+    private func loadData(context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep) -> Promise<Void> {
         firstly { () -> Promise<(Lesson?, Unit?)> in
             switch context {
             case .lesson(let lessonID):
@@ -142,7 +142,7 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
 
             steps.forEach { $0.lesson = lesson }
 
-            let data = NewLesson.LessonLoad.Data(
+            let data = LessonDataFlow.LessonLoad.Data(
                 lesson: lesson,
                 steps: steps,
                 progresses: progresses,
@@ -217,9 +217,9 @@ final class NewLessonInteractor: NewLessonInteractorProtocol {
     }
 }
 
-// MARK: - NewLessonInteractor: NewStepOutputProtocol -
+// MARK: - LessonInteractor: NewStepOutputProtocol -
 
-extension NewLessonInteractor: NewStepOutputProtocol {
+extension LessonInteractor: NewStepOutputProtocol {
     private static let autoplayDelay: TimeInterval = 0.33
 
     func handleStepView(id: Step.IdType) {
@@ -311,9 +311,9 @@ extension NewLessonInteractor: NewStepOutputProtocol {
     }
 }
 
-// MARK: - NewLessonInteractor: EditStepOutputProtocol -
+// MARK: - LessonInteractor: EditStepOutputProtocol -
 
-extension NewLessonInteractor: EditStepOutputProtocol {
+extension LessonInteractor: EditStepOutputProtocol {
     func handleStepSourceUpdated(_ stepSource: StepSource) {
         guard let lesson = self.currentLesson,
               let stepIndex = lesson.stepsArray.firstIndex(where: { $0 == stepSource.id }) else {

@@ -407,7 +407,7 @@ extension CourseInfoViewController: CourseInfoViewControllerProtocol {
     }
 
     func displayLesson(viewModel: CourseInfo.LessonPresentation.ViewModel) {
-        let assembly = NewLessonAssembly(initialContext: .unit(id: viewModel.unitID))
+        let assembly = LessonAssembly(initialContext: .unit(id: viewModel.unitID))
         self.push(module: assembly.makeModule())
     }
 

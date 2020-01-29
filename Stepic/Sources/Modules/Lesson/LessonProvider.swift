@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol NewLessonProviderProtocol {
+protocol LessonProviderProtocol {
     func fetchLesson(id: Lesson.IdType) -> Promise<FetchResult<Lesson?>>
     func fetchLessonAndUnit(unitID: Unit.IdType) -> Promise<(FetchResult<Unit?>, FetchResult<Lesson?>)>
     func fetchSteps(ids: [Step.IdType]) -> Promise<FetchResult<[Step]?>>
@@ -11,7 +11,7 @@ protocol NewLessonProviderProtocol {
     func createView(stepID: Step.IdType, assignmentID: Assignment.IdType?) -> Promise<Void>
 }
 
-final class NewLessonProvider: NewLessonProviderProtocol {
+final class LessonProvider: LessonProviderProtocol {
     private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
     private let lessonsNetworkService: LessonsNetworkServiceProtocol
     private let unitsPersistenceService: UnitsPersistenceServiceProtocol

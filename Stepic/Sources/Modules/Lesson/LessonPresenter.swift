@@ -1,23 +1,23 @@
 import UIKit
 
-protocol NewLessonPresenterProtocol {
-    func presentLesson(response: NewLesson.LessonLoad.Response)
-    func presentLessonNavigation(response: NewLesson.LessonNavigationLoad.Response)
-    func presentLessonTooltipInfo(response: NewLesson.LessonTooltipInfoLoad.Response)
-    func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response)
-    func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response)
-    func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response)
-    func presentCurrentStepAutoplay(response: NewLesson.CurrentStepAutoplay.Response)
-    func presentEditStep(response: NewLesson.EditStepPresentation.Response)
-    func presentStepTextUpdate(response: NewLesson.StepTextUpdate.Response)
-    func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response)
+protocol LessonPresenterProtocol {
+    func presentLesson(response: LessonDataFlow.LessonLoad.Response)
+    func presentLessonNavigation(response: LessonDataFlow.LessonNavigationLoad.Response)
+    func presentLessonTooltipInfo(response: LessonDataFlow.LessonTooltipInfoLoad.Response)
+    func presentStepTooltipInfoUpdate(response: LessonDataFlow.StepTooltipInfoUpdate.Response)
+    func presentStepPassedStatusUpdate(response: LessonDataFlow.StepPassedStatusUpdate.Response)
+    func presentCurrentStepUpdate(response: LessonDataFlow.CurrentStepUpdate.Response)
+    func presentCurrentStepAutoplay(response: LessonDataFlow.CurrentStepAutoplay.Response)
+    func presentEditStep(response: LessonDataFlow.EditStepPresentation.Response)
+    func presentStepTextUpdate(response: LessonDataFlow.StepTextUpdate.Response)
+    func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
-final class NewLessonPresenter: NewLessonPresenterProtocol {
-    weak var viewController: NewLessonViewControllerProtocol?
+final class LessonPresenter: LessonPresenterProtocol {
+    weak var viewController: LessonViewControllerProtocol?
 
-    func presentLesson(response: NewLesson.LessonLoad.Response) {
-        let viewModel: NewLesson.LessonLoad.ViewModel
+    func presentLesson(response: LessonDataFlow.LessonLoad.Response) {
+        let viewModel: LessonDataFlow.LessonLoad.ViewModel
 
         switch response.state {
         case .failure:
@@ -39,8 +39,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         self.viewController?.displayLesson(viewModel: viewModel)
     }
 
-    func presentLessonNavigation(response: NewLesson.LessonNavigationLoad.Response) {
-        let viewModel = NewLesson.LessonNavigationLoad.ViewModel(
+    func presentLessonNavigation(response: LessonDataFlow.LessonNavigationLoad.Response) {
+        let viewModel = LessonDataFlow.LessonNavigationLoad.ViewModel(
             hasPreviousUnit: response.hasPreviousUnit,
             hasNextUnit: response.hasNextUnit
         )
@@ -48,8 +48,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         self.viewController?.displayLessonNavigation(viewModel: viewModel)
     }
 
-    func presentLessonTooltipInfo(response: NewLesson.LessonTooltipInfoLoad.Response) {
-        var data: [Step.IdType: [NewLesson.TooltipInfo]] = [:]
+    func presentLessonTooltipInfo(response: LessonDataFlow.LessonTooltipInfoLoad.Response) {
+        var data: [Step.IdType: [LessonDataFlow.TooltipInfo]] = [:]
         zip(response.steps, response.progresses).forEach { step, progress in
             data[step.id] = self.makeTooltipInfoViewModel(lesson: response.lesson, progress: progress)
         }
@@ -57,7 +57,7 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         self.viewController?.displayLessonTooltipInfo(viewModel: .init(data: data))
     }
 
-    func presentStepTooltipInfoUpdate(response: NewLesson.StepTooltipInfoUpdate.Response) {
+    func presentStepTooltipInfoUpdate(response: LessonDataFlow.StepTooltipInfoUpdate.Response) {
         self.viewController?.displayStepTooltipInfoUpdate(
             viewModel: .init(
                 stepID: response.step.id,
@@ -66,29 +66,29 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         )
     }
 
-    func presentStepPassedStatusUpdate(response: NewLesson.StepPassedStatusUpdate.Response) {
+    func presentStepPassedStatusUpdate(response: LessonDataFlow.StepPassedStatusUpdate.Response) {
         self.viewController?.displayStepPassedStatusUpdate(viewModel: .init(stepID: response.stepID))
     }
 
-    func presentCurrentStepUpdate(response: NewLesson.CurrentStepUpdate.Response) {
+    func presentCurrentStepUpdate(response: LessonDataFlow.CurrentStepUpdate.Response) {
         self.viewController?.displayCurrentStepUpdate(viewModel: .init(index: response.index))
     }
 
-    func presentCurrentStepAutoplay(response: NewLesson.CurrentStepAutoplay.Response) {
+    func presentCurrentStepAutoplay(response: LessonDataFlow.CurrentStepAutoplay.Response) {
         self.viewController?.displayCurrentStepAutoplay(viewModel: .init())
     }
 
-    func presentStepTextUpdate(response: NewLesson.StepTextUpdate.Response) {
+    func presentStepTextUpdate(response: LessonDataFlow.StepTextUpdate.Response) {
         self.viewController?.displayStepTextUpdate(
             viewModel: .init(index: response.index, text: response.stepSource.text)
         )
     }
 
-    func presentEditStep(response: NewLesson.EditStepPresentation.Response) {
+    func presentEditStep(response: LessonDataFlow.EditStepPresentation.Response) {
         self.viewController?.displayEditStep(viewModel: .init(stepID: response.stepID))
     }
 
-    func presentWaitingState(response: NewLesson.BlockingWaitingIndicatorUpdate.Response) {
+    func presentWaitingState(response: LessonDataFlow.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
@@ -100,9 +100,9 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         progresses: [Progress],
         startStepIndex: Int,
         canEdit: Bool
-    ) -> NewLessonViewModel {
+    ) -> LessonViewModel {
         let lessonTitle = lesson.title
-        let steps: [NewLessonViewModel.StepDescription] = steps.enumerated().map { index, step in
+        let steps: [LessonViewModel.StepDescription] = steps.enumerated().map { index, step in
             let iconImage: UIImage? = {
                 if step.hasReview {
                     return UIImage(named: "ic_peer_review")?.withRenderingMode(.alwaysTemplate)
@@ -126,7 +126,7 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
                 canEdit: canEdit && step.block.type != .video
             )
         }
-        return NewLessonViewModel(
+        return LessonViewModel(
             lessonTitle: lessonTitle,
             steps: steps,
             stepLinkMaker: {
@@ -136,8 +136,8 @@ final class NewLessonPresenter: NewLessonPresenterProtocol {
         )
     }
 
-    private func makeTooltipInfoViewModel(lesson: Lesson, progress: Progress) -> [NewLesson.TooltipInfo] {
-        var viewModel: [NewLesson.TooltipInfo] = []
+    private func makeTooltipInfoViewModel(lesson: Lesson, progress: Progress) -> [LessonDataFlow.TooltipInfo] {
+        var viewModel: [LessonDataFlow.TooltipInfo] = []
 
         if progress.score > 0 {
             let text = String(

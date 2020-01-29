@@ -115,7 +115,7 @@ final class LastStepRouter {
             }
 
             stepIdPromise.done { targetStepId in
-                let lessonAssembly = NewLessonAssembly(
+                let lessonAssembly = LessonAssembly(
                     initialContext: .unit(id: unit.id),
                     startStep: .id(targetStepId)
                 )

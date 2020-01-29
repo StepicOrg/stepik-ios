@@ -1,10 +1,10 @@
 import UIKit
 
-final class NewLessonAssembly: Assembly {
-    private var initialContext: NewLesson.Context
-    private var startStep: NewLesson.StartStep?
+final class LessonAssembly: Assembly {
+    private var initialContext: LessonDataFlow.Context
+    private var startStep: LessonDataFlow.StartStep?
 
-    init(initialContext: NewLesson.Context, startStep: NewLesson.StartStep? = nil) {
+    init(initialContext: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep? = nil) {
         self.initialContext = initialContext
         self.startStep = startStep
     }
@@ -26,7 +26,7 @@ final class NewLessonAssembly: Assembly {
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI())
         )
 
-        let provider = NewLessonProvider(
+        let provider = LessonProvider(
             lessonsPersistenceService: LessonsPersistenceService(),
             lessonsNetworkService: LessonsNetworkService(lessonsAPI: LessonsAPI()),
             unitsPersistenceService: UnitsPersistenceService(),
@@ -39,8 +39,8 @@ final class NewLessonAssembly: Assembly {
             progressesNetworkService: ProgressesNetworkService(progressesAPI: ProgressesAPI()),
             viewsNetworkService: ViewsNetworkService(viewsAPI: ViewsAPI())
         )
-        let presenter = NewLessonPresenter()
-        let interactor = NewLessonInteractor(
+        let presenter = LessonPresenter()
+        let interactor = LessonInteractor(
             initialContext: self.initialContext,
             startStep: self.startStep,
             presenter: presenter,
@@ -49,7 +49,7 @@ final class NewLessonAssembly: Assembly {
             persistenceQueuesService: PersistenceQueuesService(),
             dataBackUpdateService: dataBackUpdateService
         )
-        let viewController = NewLessonViewController(interactor: interactor)
+        let viewController = LessonViewController(interactor: interactor)
         viewController.hidesBottomBarWhenPushed = true
 
         presenter.viewController = viewController

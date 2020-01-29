@@ -329,7 +329,7 @@ final class DeepLinkRouter {
         completion: @escaping ([UIViewController]) -> Void
     ) {
         DeepLinkRouter.routeToStepWithId(stepID, lessonId: lessonID, unitID: unitID) { viewControllers in
-            guard let _ = viewControllers.last as? NewLessonViewController else {
+            guard let _ = viewControllers.last as? LessonViewController else {
                 completion([])
                 return
             }
