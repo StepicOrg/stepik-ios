@@ -1,26 +1,26 @@
 import UIKit
 
-final class NewStepAssembly: Assembly {
-    var moduleInput: NewStepInputProtocol?
+final class StepAssembly: Assembly {
+    var moduleInput: StepInputProtocol?
 
     private let stepID: Step.IdType
-    private weak var moduleOutput: NewStepOutputProtocol?
+    private weak var moduleOutput: StepOutputProtocol?
 
-    init(stepID: Step.IdType, output: NewStepOutputProtocol? = nil) {
+    init(stepID: Step.IdType, output: StepOutputProtocol? = nil) {
         self.stepID = stepID
         self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
-        let provider = NewStepProvider(
+        let provider = StepProvider(
             stepsPersistenceService: StepsPersistenceService(),
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             imageStoredFileManager: StoredFileManagerFactory.makeStoredFileManager(type: .image)
         )
-        let presenter = NewStepPresenter()
-        let interactor = NewStepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
-        let viewController = NewStepViewController(interactor: interactor)
+        let presenter = StepPresenter()
+        let interactor = StepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
+        let viewController = StepViewController(interactor: interactor)
 
         presenter.viewController = viewController
         self.moduleInput = interactor

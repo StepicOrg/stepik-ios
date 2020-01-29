@@ -1,6 +1,6 @@
 import Foundation
 
-enum NewStep {
+enum StepDataFlow {
     /// Load step content
     enum StepLoad {
         struct Request {}
@@ -135,7 +135,7 @@ enum NewStep {
     enum ViewControllerState {
         case loading
         case error
-        case result(data: NewStepViewModel)
+        case result(data: StepViewModel)
     }
 
     enum QuizType: Equatable {

@@ -1,19 +1,19 @@
 import PromiseKit
 import UIKit
 
-protocol NewStepPresenterProtocol {
-    func presentStep(response: NewStep.StepLoad.Response)
-    func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response)
-    func presentPlayStep(response: NewStep.PlayStep.Response)
-    func presentControlsUpdate(response: NewStep.ControlsUpdate.Response)
-    func presentDiscussionsButtonUpdate(response: NewStep.DiscussionsButtonUpdate.Response)
-    func presentDiscussions(response: NewStep.DiscussionsPresentation.Response)
+protocol StepPresenterProtocol {
+    func presentStep(response: StepDataFlow.StepLoad.Response)
+    func presentStepTextUpdate(response: StepDataFlow.StepTextUpdate.Response)
+    func presentPlayStep(response: StepDataFlow.PlayStep.Response)
+    func presentControlsUpdate(response: StepDataFlow.ControlsUpdate.Response)
+    func presentDiscussionsButtonUpdate(response: StepDataFlow.DiscussionsButtonUpdate.Response)
+    func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response)
 }
 
-final class NewStepPresenter: NewStepPresenterProtocol {
-    weak var viewController: NewStepViewControllerProtocol?
+final class StepPresenter: StepPresenterProtocol {
+    weak var viewController: StepViewControllerProtocol?
 
-    func presentStep(response: NewStep.StepLoad.Response) {
+    func presentStep(response: StepDataFlow.StepLoad.Response) {
         if case .success(let data) = response.result {
             self.makeViewModel(
                 step: data.step,
@@ -22,7 +22,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             ).done(on: .global(qos: .userInitiated)) { viewModel in
                 DispatchQueue.main.async { [weak self] in
                     self?.viewController?.displayStep(
-                        viewModel: NewStep.StepLoad.ViewModel(state: .result(data: viewModel))
+                        viewModel: StepDataFlow.StepLoad.ViewModel(state: .result(data: viewModel))
                     )
                 }
             }
@@ -31,11 +31,11 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         }
 
         if case .failure = response.result {
-            self.viewController?.displayStep(viewModel: NewStep.StepLoad.ViewModel(state: .error))
+            self.viewController?.displayStep(viewModel: StepDataFlow.StepLoad.ViewModel(state: .error))
         }
     }
 
-    func presentStepTextUpdate(response: NewStep.StepTextUpdate.Response) {
+    func presentStepTextUpdate(response: StepDataFlow.StepTextUpdate.Response) {
         let htmlString = self.makeProcessedContentHTMLString(
             response.text,
             fontSize: response.fontSize,
@@ -45,12 +45,12 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         self.viewController?.displayStepTextUpdate(viewModel: .init(htmlText: htmlString))
     }
 
-    func presentPlayStep(response: NewStep.PlayStep.Response) {
+    func presentPlayStep(response: StepDataFlow.PlayStep.Response) {
         self.viewController?.displayPlayStep(viewModel: .init())
     }
 
-    func presentControlsUpdate(response: NewStep.ControlsUpdate.Response) {
-        let viewModel = NewStep.ControlsUpdate.ViewModel(
+    func presentControlsUpdate(response: StepDataFlow.ControlsUpdate.Response) {
+        let viewModel = StepDataFlow.ControlsUpdate.ViewModel(
             canNavigateToPreviousUnit: response.canNavigateToPreviousUnit,
             canNavigateToNextUnit: response.canNavigateToNextUnit,
             canNavigateToNextStep: response.canNavigateToNextStep
@@ -59,7 +59,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         self.viewController?.displayControlsUpdate(viewModel: viewModel)
     }
 
-    func presentDiscussionsButtonUpdate(response: NewStep.DiscussionsButtonUpdate.Response) {
+    func presentDiscussionsButtonUpdate(response: StepDataFlow.DiscussionsButtonUpdate.Response) {
         self.viewController?.displayDiscussionsButtonUpdate(
             viewModel: .init(
                 title: self.makeDiscussionsLabelTitle(step: response.step),
@@ -68,7 +68,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
         )
     }
 
-    func presentDiscussions(response: NewStep.DiscussionsPresentation.Response) {
+    func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response) {
         guard let discussionProxyID = response.step.discussionProxyID else {
             return
         }
@@ -87,14 +87,14 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     private func makeViewModel(
         step: Step,
         fontSize: StepFontSize,
-        storedImages: [NewStep.StoredImage]
-    ) -> Guarantee<NewStepViewModel> {
+        storedImages: [StepDataFlow.StoredImage]
+    ) -> Guarantee<StepViewModel> {
         Guarantee { seal in
-            let contentType: NewStepViewModel.ContentType = {
+            let contentType: StepViewModel.ContentType = {
                 switch step.block.type {
                 case .video:
                     if let video = step.block.video {
-                        let viewModel = NewStepVideoViewModel(
+                        let viewModel = StepVideoViewModel(
                             video: video,
                             videoThumbnailImageURL: URL(string: video.thumbnailURL)
                         )
@@ -111,12 +111,12 @@ final class NewStepPresenter: NewStepPresenterProtocol {
                 }
             }()
 
-            let quizType: NewStep.QuizType?
+            let quizType: StepDataFlow.QuizType?
             switch step.block.type {
             case .text, .video:
                 quizType = nil
             default:
-                quizType = NewStep.QuizType(blockName: step.block.name)
+                quizType = StepDataFlow.QuizType(blockName: step.block.name)
             }
 
             let shouldShowStepStatistics: Bool = {
@@ -132,7 +132,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
             let discussionsLabelTitle = self.makeDiscussionsLabelTitle(step: step)
             let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
 
-            let viewModel = NewStepViewModel(
+            let viewModel = StepViewModel(
                 content: contentType,
                 quizType: quizType,
                 discussionsLabelTitle: discussionsLabelTitle,
@@ -167,7 +167,7 @@ final class NewStepPresenter: NewStepPresenterProtocol {
     private func makeProcessedContentHTMLString(
         _ text: String,
         fontSize: StepFontSize,
-        storedImages: [NewStep.StoredImage]
+        storedImages: [StepDataFlow.StoredImage]
     ) -> String {
         let base64EncodedStringByImageURL = Dictionary(
             uniqueKeysWithValues: storedImages.map { ($0.url, $0.data.base64EncodedString()) }

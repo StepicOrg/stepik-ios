@@ -1,22 +1,22 @@
 import Foundation
 import PromiseKit
 
-protocol NewStepInteractorProtocol {
-    func doStepLoad(request: NewStep.StepLoad.Request)
-    func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request)
-    func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request)
-    func doAutoplayNavigationRequest(request: NewStep.AutoplayNavigationRequest.Request)
-    func doStepViewRequest(request: NewStep.StepViewRequest.Request)
-    func doStepDoneRequest(request: NewStep.StepDoneRequest.Request)
-    func doDiscussionsButtonUpdate(request: NewStep.DiscussionsButtonUpdate.Request)
-    func doDiscussionsPresentation(request: NewStep.DiscussionsPresentation.Request)
+protocol StepInteractorProtocol {
+    func doStepLoad(request: StepDataFlow.StepLoad.Request)
+    func doLessonNavigationRequest(request: StepDataFlow.LessonNavigationRequest.Request)
+    func doStepNavigationRequest(request: StepDataFlow.StepNavigationRequest.Request)
+    func doAutoplayNavigationRequest(request: StepDataFlow.AutoplayNavigationRequest.Request)
+    func doStepViewRequest(request: StepDataFlow.StepViewRequest.Request)
+    func doStepDoneRequest(request: StepDataFlow.StepDoneRequest.Request)
+    func doDiscussionsButtonUpdate(request: StepDataFlow.DiscussionsButtonUpdate.Request)
+    func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request)
 }
 
-final class NewStepInteractor: NewStepInteractorProtocol {
-    weak var moduleOutput: NewStepOutputProtocol?
+final class StepInteractor: StepInteractorProtocol {
+    weak var moduleOutput: StepOutputProtocol?
 
-    private let presenter: NewStepPresenterProtocol
-    private let provider: NewStepProviderProtocol
+    private let presenter: StepPresenterProtocol
+    private let provider: StepProviderProtocol
 
     private let stepID: Step.IdType
     private var didAnalyticsSend = false
@@ -26,8 +26,8 @@ final class NewStepInteractor: NewStepInteractorProtocol {
 
     init(
         stepID: Step.IdType,
-        presenter: NewStepPresenterProtocol,
-        provider: NewStepProviderProtocol
+        presenter: StepPresenterProtocol,
+        provider: StepProviderProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -35,7 +35,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         self.stepID = stepID
     }
 
-    func doStepLoad(request: NewStep.StepLoad.Request) {
+    func doStepLoad(request: StepDataFlow.StepLoad.Request) {
         firstly {
             self.provider.fetchStep(id: self.stepID)
         }.then(on: .global(qos: .userInitiated)) {
@@ -45,18 +45,19 @@ final class NewStepInteractor: NewStepInteractorProtocol {
             }
 
             return when(
-                fulfilled: self.provider.fetchCurrentFontSize(), self.provider.fetchStoredImages(id: step.id)
+                fulfilled: self.provider.fetchCurrentFontSize(),
+                self.provider.fetchStoredImages(id: step.id)
             ).map { ($0, $1, step) }
         }.done(on: .global(qos: .userInitiated)) { fontSize, storedImages, step in
             self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
-                let data = NewStep.StepLoad.Data(
+                let data = StepDataFlow.StepLoad.Data(
                     step: step,
                     fontSize: fontSize,
                     storedImages: storedImages.compactMap { imageURL, storedFile in
                         if let imageData = storedFile.data {
-                            return NewStep.StoredImage(url: imageURL, data: imageData)
+                            return StepDataFlow.StoredImage(url: imageURL, data: imageData)
                         }
                         return nil
                     }
@@ -105,7 +106,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         }
     }
 
-    func doStepNavigationRequest(request: NewStep.StepNavigationRequest.Request) {
+    func doStepNavigationRequest(request: StepDataFlow.StepNavigationRequest.Request) {
         switch request.direction {
         case .index(let stepIndex):
             self.moduleOutput?.handleStepNavigation(to: stepIndex)
@@ -118,7 +119,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         }
     }
 
-    func doLessonNavigationRequest(request: NewStep.LessonNavigationRequest.Request) {
+    func doLessonNavigationRequest(request: StepDataFlow.LessonNavigationRequest.Request) {
         switch request.direction {
         case .previous:
             self.moduleOutput?.handlePreviousUnitNavigation()
@@ -127,7 +128,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         }
     }
 
-    func doAutoplayNavigationRequest(request: NewStep.AutoplayNavigationRequest.Request) {
+    func doAutoplayNavigationRequest(request: StepDataFlow.AutoplayNavigationRequest.Request) {
         guard let currentStepIndex = self.currentStepIndex else {
             return
         }
@@ -135,15 +136,15 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         self.moduleOutput?.handleAutoplayNavigation(from: currentStepIndex)
     }
 
-    func doStepViewRequest(request: NewStep.StepViewRequest.Request) {
+    func doStepViewRequest(request: StepDataFlow.StepViewRequest.Request) {
         self.moduleOutput?.handleStepView(id: self.stepID)
     }
 
-    func doStepDoneRequest(request: NewStep.StepDoneRequest.Request) {
+    func doStepDoneRequest(request: StepDataFlow.StepDoneRequest.Request) {
         self.moduleOutput?.handleStepDone(id: self.stepID)
     }
 
-    func doDiscussionsButtonUpdate(request: NewStep.DiscussionsButtonUpdate.Request) {
+    func doDiscussionsButtonUpdate(request: StepDataFlow.DiscussionsButtonUpdate.Request) {
         self.provider.fetchCachedStep(id: self.stepID).done { cachedStep in
             if let cachedStep = cachedStep {
                 self.presenter.presentDiscussionsButtonUpdate(response: .init(step: cachedStep))
@@ -151,7 +152,7 @@ final class NewStepInteractor: NewStepInteractorProtocol {
         }.cauterize()
     }
 
-    func doDiscussionsPresentation(request: NewStep.DiscussionsPresentation.Request) {
+    func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request) {
         self.provider.fetchCachedStep(id: self.stepID).done { cachedStep in
             if let cachedStep = cachedStep {
                 self.presenter.presentDiscussions(response: .init(step: cachedStep))
@@ -166,9 +167,9 @@ final class NewStepInteractor: NewStepInteractorProtocol {
     }
 }
 
-// MARK: - NewStepInteractor: NewStepInputProtocol -
+// MARK: - StepInteractor: StepInputProtocol -
 
-extension NewStepInteractor: NewStepInputProtocol {
+extension StepInteractor: StepInputProtocol {
     func updateStepNavigation(
         canNavigateToPreviousUnit: Bool,
         canNavigateToNextUnit: Bool,
@@ -193,7 +194,7 @@ extension NewStepInteractor: NewStepInputProtocol {
                     fontSize: fetchResult.0,
                     storedImages: fetchResult.1.compactMap { imageURL, storedFile in
                         if let imageData = storedFile.data {
-                            return NewStep.StoredImage(url: imageURL, data: imageData)
+                            return StepDataFlow.StoredImage(url: imageURL, data: imageData)
                         }
                         return nil
                     }

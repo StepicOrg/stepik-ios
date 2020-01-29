@@ -1,11 +1,11 @@
 import Foundation
 
-enum NewLesson {
+enum LessonDataFlow {
     // MARK: Data flow
 
     /// Load lesson content
     enum LessonLoad {
-        struct Request { }
+        struct Request {}
 
         struct Data {
             let lesson: Lesson
@@ -62,9 +62,9 @@ enum NewLesson {
 
     /// Autoplay current step
     enum CurrentStepAutoplay {
-        struct Response { }
+        struct Response {}
 
-        struct ViewModel { }
+        struct ViewModel {}
     }
 
     /// Load lesson tooltip info content
@@ -137,7 +137,7 @@ enum NewLesson {
 
     enum ViewControllerState {
         case loading
-        case result(data: NewLessonViewModel)
+        case result(data: LessonViewModel)
         case error
     }
 

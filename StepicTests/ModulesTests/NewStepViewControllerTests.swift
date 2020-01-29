@@ -5,34 +5,34 @@ import Quick
 import SwiftyJSON
 import XCTest
 
-private final class NewStepViewControllerMock: NewStepViewControllerProtocol {
-    var didSetViewModelCompletion: ((NewStepViewModel) -> Void)?
+private final class NewStepViewControllerMock: StepViewControllerProtocol {
+    var didSetViewModelCompletion: ((StepViewModel) -> Void)?
 
-    func displayStep(viewModel: NewStep.StepLoad.ViewModel) {
+    func displayStep(viewModel: StepDataFlow.StepLoad.ViewModel) {
         if case .result(let data) = viewModel.state {
             self.didSetViewModelCompletion?(data)
         }
     }
 
-    func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel) { }
+    func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel) { }
 
-    func displayPlayStep(viewModel: NewStep.PlayStep.ViewModel) { }
+    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) { }
 
-    func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel) { }
+    func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel) { }
 
-    func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel) { }
+    func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel) { }
 
-    func displayDiscussions(viewModel: NewStep.DiscussionsPresentation.ViewModel) { }
+    func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) { }
 }
 
 class NewStepViewControllerSpec: QuickSpec {
     override func spec() {
-        var presenter: NewStepPresenterProtocol!
+        var presenter: StepPresenterProtocol!
         var viewController: NewStepViewControllerMock!
 
         beforeEach {
             viewController = NewStepViewControllerMock()
-            let newStepPresenter = NewStepPresenter()
+            let newStepPresenter = StepPresenter()
             newStepPresenter.viewController = viewController
             presenter = newStepPresenter
         }
@@ -58,7 +58,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                 presenter.presentStep(
                     response: .init(
-                        result: .success(NewStep.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                        result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
                     )
                 )
 
@@ -127,7 +127,7 @@ class NewStepViewControllerSpec: QuickSpec {
 
                 presenter.presentStep(
                     response: .init(
-                        result: .success(NewStep.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                        result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
                     )
                 )
 
@@ -147,7 +147,7 @@ class NewStepViewControllerSpec: QuickSpec {
         }
 
         it("has correct quiz type") {
-            let blockNameWithQuizTypePairs: [(String, NewStep.QuizType)] = [
+            let blockNameWithQuizTypePairs: [(String, StepDataFlow.QuizType)] = [
                 ("choice", .choice),
                 ("code", .code),
                 ("free-answer", .freeAnswer),
@@ -196,7 +196,7 @@ class NewStepViewControllerSpec: QuickSpec {
                 waitUntil { done in
                     presenter.presentStep(
                         response: .init(
-                            result: .success(NewStep.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
+                            result: .success(StepDataFlow.StepLoad.Data(step: step, fontSize: .small, storedImages: []))
                         )
                     )
 

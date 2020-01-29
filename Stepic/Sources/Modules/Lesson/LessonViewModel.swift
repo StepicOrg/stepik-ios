@@ -1,6 +1,6 @@
 import Foundation
 
-struct NewLessonViewModel {
+struct LessonViewModel {
     struct StepDescription {
         let id: Step.IdType
         let iconImage: UIImage

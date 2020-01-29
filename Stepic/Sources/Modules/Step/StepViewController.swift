@@ -1,36 +1,35 @@
 import Agrume
 import UIKit
 
-// MARK: NewStepViewControllerProtocol: class -
-
-protocol NewStepViewControllerProtocol: AnyObject {
-    func displayStep(viewModel: NewStep.StepLoad.ViewModel)
-    func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel)
-    func displayPlayStep(viewModel: NewStep.PlayStep.ViewModel)
-    func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel)
-    func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel)
-    func displayDiscussions(viewModel: NewStep.DiscussionsPresentation.ViewModel)
+protocol StepViewControllerProtocol: AnyObject {
+    func displayStep(viewModel: StepDataFlow.StepLoad.ViewModel)
+    func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel)
+    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel)
+    func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel)
+    func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel)
+    func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel)
 }
 
-// MARK: - NewStepViewController (Animation) -
-extension NewStepViewController {
+// MARK: - StepViewController (Animation) -
+
+extension StepViewController {
     enum Animation {
         static let autoplayVideoPlayerPresentationDelay: TimeInterval = 0.75
     }
 }
 
-// MARK: - NewStepViewController: UIViewController, ControllerWithStepikPlaceholder -
+// MARK: - StepViewController: UIViewController, ControllerWithStepikPlaceholder -
 
-final class NewStepViewController: UIViewController, ControllerWithStepikPlaceholder {
+final class StepViewController: UIViewController, ControllerWithStepikPlaceholder {
     private static let stepPassedDelay: TimeInterval = 1.0
 
-    lazy var newStepView = self.view as? NewStepView
+    lazy var stepView = self.view as? StepView
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    private let interactor: NewStepInteractorProtocol
+    private let interactor: StepInteractorProtocol
 
-    private var state: NewStep.ViewControllerState {
+    private var state: StepDataFlow.ViewControllerState {
         didSet {
             self.updateState()
         }
@@ -45,7 +44,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     /// Keeps track of need to autoplay the step or not.
     private var shouldRequestAutoplay = false
 
-    init(interactor: NewStepInteractorProtocol) {
+    init(interactor: StepInteractorProtocol) {
         self.interactor = interactor
         self.state = .loading
         super.init(nibName: nil, bundle: nil)
@@ -57,7 +56,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 
     override func loadView() {
-        self.view = NewStepView(frame: UIScreen.main.bounds)
+        self.view = StepView(frame: UIScreen.main.bounds)
     }
 
     override func viewDidLoad() {
@@ -73,7 +72,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             for: .connectionError
         )
 
-        self.newStepView?.delegate = self
+        self.stepView?.delegate = self
 
         // Enter group, leave when content did load & in view did appear
         self.sendStepDidPassedGroup?.enter()
@@ -122,7 +121,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             self.showContent()
         case .loading:
             self.isPlaceholderShown = false
-            self.newStepView?.startLoading()
+            self.stepView?.startLoading()
         case .error:
             self.showPlaceholder(for: .connectionError)
         }
@@ -139,7 +138,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
             return
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + NewStepViewController.stepPassedDelay) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + StepViewController.stepPassedDelay) { [weak self] in
             self?.interactor.doStepDoneRequest(request: .init())
         }
     }
@@ -156,7 +155,7 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
         guard let quizType = viewModel.quizType else {
             // Video & text steps
-            self.newStepView?.configure(viewModel: viewModel, quizView: nil)
+            self.stepView?.configure(viewModel: viewModel, quizView: nil)
             self.requestAutoplayIfNeeded()
             return
         }
@@ -177,12 +176,12 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
 
         if let controller = quizController {
             self.addChild(controller)
-            self.newStepView?.configure(viewModel: viewModel, quizView: controller.view)
+            self.stepView?.configure(viewModel: viewModel, quizView: controller.view)
         } else {
             let assembly = UnsupportedQuizAssembly(stepURLPath: viewModel.stepURLPath)
             let viewController = assembly.makeModule()
             self.addChild(viewController)
-            self.newStepView?.configure(viewModel: viewModel, quizView: viewController.view)
+            self.stepView?.configure(viewModel: viewModel, quizView: viewController.view)
         }
     }
 
@@ -200,35 +199,35 @@ final class NewStepViewController: UIViewController, ControllerWithStepikPlaceho
     }
 }
 
-// MARK: - NewStepViewController: NewStepViewControllerProtocol -
+// MARK: - StepViewController: StepViewControllerProtocol -
 
-extension NewStepViewController: NewStepViewControllerProtocol {
-    func displayStep(viewModel: NewStep.StepLoad.ViewModel) {
+extension StepViewController: StepViewControllerProtocol {
+    func displayStep(viewModel: StepDataFlow.StepLoad.ViewModel) {
         self.state = viewModel.state
     }
 
-    func displayStepTextUpdate(viewModel: NewStep.StepTextUpdate.ViewModel) {
-        self.newStepView?.updateText(viewModel.htmlText)
+    func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel) {
+        self.stepView?.updateText(viewModel.htmlText)
     }
 
-    func displayPlayStep(viewModel: NewStep.PlayStep.ViewModel) {
+    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) {
         self.shouldRequestAutoplay = true
         self.requestAutoplayIfNeeded()
     }
 
-    func displayControlsUpdate(viewModel: NewStep.ControlsUpdate.ViewModel) {
-        self.newStepView?.updateNavigationButtons(
+    func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel) {
+        self.stepView?.updateNavigationButtons(
             hasPreviousButton: viewModel.canNavigateToPreviousUnit,
             hasNextButton: viewModel.canNavigateToNextUnit
         )
         self.canNavigateToNextStep = viewModel.canNavigateToNextStep
     }
 
-    func displayDiscussionsButtonUpdate(viewModel: NewStep.DiscussionsButtonUpdate.ViewModel) {
-        self.newStepView?.updateDiscussionButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
+    func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel) {
+        self.stepView?.updateDiscussionButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
     }
 
-    func displayDiscussions(viewModel: NewStep.DiscussionsPresentation.ViewModel) {
+    func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) {
         let discussionsAssembly = DiscussionsAssembly(
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID
@@ -284,26 +283,26 @@ extension NewStepViewController: NewStepViewControllerProtocol {
     }
 }
 
-// MARK: - NewStepViewController: NewStepViewDelegate -
+// MARK: - StepViewController: StepViewDelegate -
 
-extension NewStepViewController: NewStepViewDelegate {
-    func newStepViewDidRequestVideo(_ view: NewStepView) {
+extension StepViewController: StepViewDelegate {
+    func stepViewDidRequestVideo(_ view: StepView) {
         self.presentVideoPlayer()
     }
 
-    func newStepViewDidRequestPrevious(_ view: NewStepView) {
+    func stepViewDidRequestPrevious(_ view: StepView) {
         self.interactor.doLessonNavigationRequest(request: .init(direction: .previous))
     }
 
-    func newStepViewDidRequestNext(_ view: NewStepView) {
+    func stepViewDidRequestNext(_ view: StepView) {
         self.interactor.doLessonNavigationRequest(request: .init(direction: .next))
     }
 
-    func newStepViewDidRequestDiscussions(_ view: NewStepView) {
+    func stepViewDidRequestDiscussions(_ view: StepView) {
         self.interactor.doDiscussionsPresentation(request: .init())
     }
 
-    func newStepView(_ view: NewStepView, didRequestOpenURL url: URL) {
+    func stepView(_ view: StepView, didRequestOpenURL url: URL) {
         guard case .result(let viewModel) = self.state else {
             return
         }
@@ -331,18 +330,18 @@ extension NewStepViewController: NewStepViewDelegate {
         )
     }
 
-    func newStepView(_ view: NewStepView, didRequestFullscreenImage url: URL) {
+    func stepView(_ view: StepView, didRequestFullscreenImage url: URL) {
         let agrume = Agrume(url: url)
         agrume.show(from: self)
     }
 
-    func newStepView(_ view: NewStepView, didRequestFullscreenImage image: UIImage) {
+    func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage) {
         let agrume = Agrume(image: image)
         agrume.show(from: self)
     }
 
-    func newStepViewDidLoadContent(_ view: NewStepView) {
-        self.newStepView?.endLoading()
+    func stepViewDidLoadContent(_ view: StepView) {
+        self.stepView?.endLoading()
     }
 
     // MARK: Private helpers
@@ -374,9 +373,9 @@ extension NewStepViewController: NewStepViewDelegate {
     }
 }
 
-// MARK: - NewStepViewController: BaseQuizOutputProtocol -
+// MARK: - StepViewController: BaseQuizOutputProtocol -
 
-extension NewStepViewController: BaseQuizOutputProtocol {
+extension StepViewController: BaseQuizOutputProtocol {
     func handleCorrectSubmission() {
         self.interactor.doStepDoneRequest(request: .init())
     }
@@ -386,9 +385,9 @@ extension NewStepViewController: BaseQuizOutputProtocol {
     }
 }
 
-// MARK: - NewStepViewController: StepikVideoPlayerViewControllerDelegate -
+// MARK: - StepViewController: StepikVideoPlayerViewControllerDelegate -
 
-extension NewStepViewController: StepikVideoPlayerViewControllerDelegate {
+extension StepViewController: StepikVideoPlayerViewControllerDelegate {
     func stepikVideoPlayerViewControllerDidRequestAutoplay() {
         self.dismiss(
             animated: true,

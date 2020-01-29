@@ -141,7 +141,7 @@ final class StepsControllerDeepLinkRouter: NSObject {
             fetchOrLoadCourse(for: section)
         }.done { course in
             if lesson.isPublic || course.enrolled {
-                let lessonAssemblyWithoutUnit = NewLessonAssembly(
+                let lessonAssemblyWithoutUnit = LessonAssembly(
                     initialContext: .lesson(id: lesson.id),
                     startStep: .index(stepId - 1)
                 )
@@ -152,7 +152,7 @@ final class StepsControllerDeepLinkRouter: NSObject {
                     controllersStack.append(CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule())
 
                     if let unit = currentUnit {
-                        let lessonAssembly = NewLessonAssembly(
+                        let lessonAssembly = LessonAssembly(
                             initialContext: .unit(id: unit.id),
                             startStep: .index(stepId - 1)
                         )

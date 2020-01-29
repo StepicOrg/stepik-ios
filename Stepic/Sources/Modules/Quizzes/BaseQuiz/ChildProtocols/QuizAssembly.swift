@@ -6,7 +6,7 @@ protocol QuizAssembly: Assembly {
 }
 
 final class QuizAssemblyFactory {
-    func make(for type: NewStep.QuizType) -> QuizAssembly {
+    func make(for type: StepDataFlow.QuizType) -> QuizAssembly {
         switch type {
         case .string:
             return NewStringQuizAssembly(type: .string)

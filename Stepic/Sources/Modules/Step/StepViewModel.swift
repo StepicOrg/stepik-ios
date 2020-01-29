@@ -1,8 +1,8 @@
 import Foundation
 
-struct NewStepViewModel {
+struct StepViewModel {
     let content: ContentType
-    let quizType: NewStep.QuizType?
+    let quizType: StepDataFlow.QuizType?
     let discussionsLabelTitle: String
     let isDiscussionsEnabled: Bool
     let discussionProxyID: DiscussionProxy.IdType?
@@ -16,11 +16,11 @@ struct NewStepViewModel {
 
     enum ContentType {
         case text(htmlString: String)
-        case video(viewModel: NewStepVideoViewModel?)
+        case video(viewModel: StepVideoViewModel?)
     }
 }
 
-struct NewStepVideoViewModel {
+struct StepVideoViewModel {
     @available(*, deprecated, message: "Deprecated initialization")
     let video: Video
     let videoThumbnailImageURL: URL?

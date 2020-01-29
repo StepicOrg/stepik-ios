@@ -5,24 +5,22 @@ import SVProgressHUD
 import Tabman
 import UIKit
 
-// MARK: NewLessonViewControllerProtocol: class -
-
-protocol NewLessonViewControllerProtocol: AnyObject {
-    func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel)
-    func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel)
-    func displayLessonTooltipInfo(viewModel: NewLesson.LessonTooltipInfoLoad.ViewModel)
-    func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel)
-    func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel)
-    func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel)
-    func displayCurrentStepAutoplay(viewModel: NewLesson.CurrentStepAutoplay.ViewModel)
-    func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel)
-    func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel)
-    func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel)
+protocol LessonViewControllerProtocol: AnyObject {
+    func displayLesson(viewModel: LessonDataFlow.LessonLoad.ViewModel)
+    func displayLessonNavigation(viewModel: LessonDataFlow.LessonNavigationLoad.ViewModel)
+    func displayLessonTooltipInfo(viewModel: LessonDataFlow.LessonTooltipInfoLoad.ViewModel)
+    func displayStepTooltipInfoUpdate(viewModel: LessonDataFlow.StepTooltipInfoUpdate.ViewModel)
+    func displayStepPassedStatusUpdate(viewModel: LessonDataFlow.StepPassedStatusUpdate.ViewModel)
+    func displayCurrentStepUpdate(viewModel: LessonDataFlow.CurrentStepUpdate.ViewModel)
+    func displayCurrentStepAutoplay(viewModel: LessonDataFlow.CurrentStepAutoplay.ViewModel)
+    func displayEditStep(viewModel: LessonDataFlow.EditStepPresentation.ViewModel)
+    func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: LessonDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
-// MARK: - NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
+// MARK: - LessonViewController: TabmanViewController, ControllerWithStepikPlaceholder -
 
-final class NewLessonViewController: TabmanViewController, ControllerWithStepikPlaceholder {
+final class LessonViewController: TabmanViewController, ControllerWithStepikPlaceholder {
     private static let animationDuration: TimeInterval = 0.25
 
     enum Appearance {
@@ -35,7 +33,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         static let tooltipHorizontalSpacing: CGFloat = 16
     }
 
-    private let interactor: NewLessonInteractorProtocol
+    private let interactor: LessonInteractorProtocol
 
     private lazy var infoBarButtonItem: UIBarButtonItem = {
         let image: UIImage?
@@ -93,10 +91,10 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
     private var tooltipView: EasyTipView?
     private var isTooltipVisible = false
-    private var tooltipInfos: [Step.IdType: [NewLesson.TooltipInfo]] = [:]
+    private var tooltipInfos: [Step.IdType: [LessonDataFlow.TooltipInfo]] = [:]
 
     private var stepControllers: [UIViewController?] = []
-    private var stepModulesInputs: [NewStepInputProtocol?] = []
+    private var stepModulesInputs: [StepInputProtocol?] = []
 
     private var hasNavigationToPreviousUnit = false
     private var hasNavigationToNextUnit = false
@@ -122,7 +120,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         return bar
     }()
 
-    private var state: NewLesson.ViewControllerState {
+    private var state: LessonDataFlow.ViewControllerState {
         didSet {
             self.updateState()
         }
@@ -130,7 +128,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
-    init(interactor: NewLessonInteractorProtocol) {
+    init(interactor: LessonInteractorProtocol) {
         self.interactor = interactor
         self.state = .loading
         super.init(nibName: nil, bundle: nil)
@@ -237,7 +235,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
         self.reloadData()
         self.addBar(self.tabBarView, dataSource: self, at: .top)
 
-        UIView.animate(withDuration: NewLessonViewController.animationDuration) {
+        UIView.animate(withDuration: Self.animationDuration) {
             self.overlayView.alpha = 0.0
         }
     }
@@ -266,7 +264,7 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
             return controller
         }
 
-        let assembly = NewStepAssembly(stepID: step.id, output: self.interactor as? NewStepOutputProtocol)
+        let assembly = StepAssembly(stepID: step.id, output: self.interactor as? StepOutputProtocol)
         let controller = assembly.makeModule()
         self.stepControllers[index] = controller
         self.stepModulesInputs[index] = assembly.moduleInput
@@ -436,9 +434,9 @@ final class NewLessonViewController: TabmanViewController, ControllerWithStepikP
     }
 }
 
-// MARK: - NewLessonViewController: PageboyViewControllerDataSource -
+// MARK: - LessonViewController: PageboyViewControllerDataSource -
 
-extension NewLessonViewController: PageboyViewControllerDataSource {
+extension LessonViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         if case .result(let data) = self.state {
             return data.steps.count
@@ -472,9 +470,9 @@ extension NewLessonViewController: PageboyViewControllerDataSource {
     }
 }
 
-// MARK: - NewLessonViewController: TMBarDataSource -
+// MARK: - LessonViewController: TMBarDataSource -
 
-extension NewLessonViewController: TMBarDataSource {
+extension LessonViewController: TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         guard case .result(let data) = self.state, let stepDescription = data.steps[safe: index] else {
             fatalError("Step not found")
@@ -487,14 +485,14 @@ extension NewLessonViewController: TMBarDataSource {
     }
 }
 
-// MARK: - NewLessonViewController: NewLessonViewControllerProtocol -
+// MARK: - LessonViewController: LessonViewControllerProtocol -
 
-extension NewLessonViewController: NewLessonViewControllerProtocol {
-    func displayLesson(viewModel: NewLesson.LessonLoad.ViewModel) {
+extension LessonViewController: LessonViewControllerProtocol {
+    func displayLesson(viewModel: LessonDataFlow.LessonLoad.ViewModel) {
         self.state = viewModel.state
     }
 
-    func displayLessonNavigation(viewModel: NewLesson.LessonNavigationLoad.ViewModel) {
+    func displayLessonNavigation(viewModel: LessonDataFlow.LessonNavigationLoad.ViewModel) {
         self.hasNavigationToNextUnit = viewModel.hasNextUnit
         self.hasNavigationToPreviousUnit = viewModel.hasPreviousUnit
 
@@ -504,17 +502,17 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         )
     }
 
-    func displayLessonTooltipInfo(viewModel: NewLesson.LessonTooltipInfoLoad.ViewModel) {
+    func displayLessonTooltipInfo(viewModel: LessonDataFlow.LessonTooltipInfoLoad.ViewModel) {
         self.tooltipInfos = viewModel.data
         self.updateInfoBarButtonItem()
     }
 
-    func displayStepTooltipInfoUpdate(viewModel: NewLesson.StepTooltipInfoUpdate.ViewModel) {
+    func displayStepTooltipInfoUpdate(viewModel: LessonDataFlow.StepTooltipInfoUpdate.ViewModel) {
         self.tooltipInfos[viewModel.stepID] = viewModel.info
         self.updateInfoBarButtonItem()
     }
 
-    func displayStepPassedStatusUpdate(viewModel: NewLesson.StepPassedStatusUpdate.ViewModel) {
+    func displayStepPassedStatusUpdate(viewModel: LessonDataFlow.StepPassedStatusUpdate.ViewModel) {
         let tabIdentifier = "\(viewModel.stepID)"
 
         NotificationCenter.default.post(
@@ -524,11 +522,11 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         )
     }
 
-    func displayCurrentStepUpdate(viewModel: NewLesson.CurrentStepUpdate.ViewModel) {
+    func displayCurrentStepUpdate(viewModel: LessonDataFlow.CurrentStepUpdate.ViewModel) {
         self.scrollToPage(.at(index: viewModel.index), animated: true)
     }
 
-    func displayCurrentStepAutoplay(viewModel: NewLesson.CurrentStepAutoplay.ViewModel) {
+    func displayCurrentStepAutoplay(viewModel: LessonDataFlow.CurrentStepAutoplay.ViewModel) {
         guard let currentIndex = self.currentIndex,
               let stepModuleInput = self.stepModulesInputs[safe: currentIndex] else {
             return
@@ -537,7 +535,7 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         stepModuleInput?.play()
     }
 
-    func displayEditStep(viewModel: NewLesson.EditStepPresentation.ViewModel) {
+    func displayEditStep(viewModel: LessonDataFlow.EditStepPresentation.ViewModel) {
         let (modalPresentationStyle, navigationBarAppearance) = {
             () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
             if #available(iOS 13.0, *) {
@@ -567,7 +565,7 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         )
     }
 
-    func displayStepTextUpdate(viewModel: NewLesson.StepTextUpdate.ViewModel) {
+    func displayStepTextUpdate(viewModel: LessonDataFlow.StepTextUpdate.ViewModel) {
         guard let stepModuleInput = self.stepModulesInputs[safe: viewModel.index] else {
             return
         }
@@ -575,7 +573,7 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
         stepModuleInput?.updateStepText(viewModel.text)
     }
 
-    func displayBlockingLoadingIndicator(viewModel: NewLesson.BlockingWaitingIndicatorUpdate.ViewModel) {
+    func displayBlockingLoadingIndicator(viewModel: LessonDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {
         if viewModel.shouldDismiss {
             SVProgressHUD.dismiss()
         } else {
@@ -584,9 +582,9 @@ extension NewLessonViewController: NewLessonViewControllerProtocol {
     }
 }
 
-// MARK: - NewLessonViewController: EasyTipViewDelegate -
+// MARK: - LessonViewController: EasyTipViewDelegate -
 
-extension NewLessonViewController: EasyTipViewDelegate {
+extension LessonViewController: EasyTipViewDelegate {
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
         self.isTooltipVisible = false
         self.tooltipView = nil

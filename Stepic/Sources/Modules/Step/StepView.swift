@@ -1,19 +1,19 @@
 import SnapKit
 import UIKit
 
-protocol NewStepViewDelegate: AnyObject {
-    func newStepViewDidRequestVideo(_ view: NewStepView)
-    func newStepViewDidRequestPrevious(_ view: NewStepView)
-    func newStepViewDidRequestNext(_ view: NewStepView)
-    func newStepViewDidRequestDiscussions(_ view: NewStepView)
-    func newStepViewDidLoadContent(_ view: NewStepView)
+protocol StepViewDelegate: AnyObject {
+    func stepViewDidRequestVideo(_ view: StepView)
+    func stepViewDidRequestPrevious(_ view: StepView)
+    func stepViewDidRequestNext(_ view: StepView)
+    func stepViewDidRequestDiscussions(_ view: StepView)
+    func stepViewDidLoadContent(_ view: StepView)
 
-    func newStepView(_ view: NewStepView, didRequestFullscreenImage url: URL)
-    func newStepView(_ view: NewStepView, didRequestFullscreenImage image: UIImage)
-    func newStepView(_ view: NewStepView, didRequestOpenURL url: URL)
+    func stepView(_ view: StepView, didRequestFullscreenImage url: URL)
+    func stepView(_ view: StepView, didRequestFullscreenImage image: UIImage)
+    func stepView(_ view: StepView, didRequestOpenURL url: URL)
 }
 
-extension NewStepView {
+extension StepView {
     struct Appearance {
         let loadingIndicatorColor = UIColor.mainDark
     }
@@ -24,9 +24,9 @@ extension NewStepView {
     }
 }
 
-final class NewStepView: UIView {
+final class StepView: UIView {
     let appearance: Appearance
-    weak var delegate: NewStepViewDelegate?
+    weak var delegate: StepViewDelegate?
 
     private lazy var loadingIndicatorView: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
@@ -56,7 +56,7 @@ final class NewStepView: UIView {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.newStepViewDidRequestVideo(strongSelf)
+            strongSelf.delegate?.stepViewDidRequestVideo(strongSelf)
         }
         return view
     }()
@@ -70,19 +70,19 @@ final class NewStepView: UIView {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.newStepViewDidRequestPrevious(strongSelf)
+            strongSelf.delegate?.stepViewDidRequestPrevious(strongSelf)
         }
         view.onNextButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.newStepViewDidRequestNext(strongSelf)
+            strongSelf.delegate?.stepViewDidRequestNext(strongSelf)
         }
         view.onDiscussionsButtonClick = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.delegate?.newStepViewDidRequestDiscussions(strongSelf)
+            strongSelf.delegate?.stepViewDidRequestDiscussions(strongSelf)
         }
         return view
     }()
@@ -131,12 +131,12 @@ final class NewStepView: UIView {
         }
     }
 
-    func configure(viewModel: NewStepViewModel, quizView: UIView?) {
+    func configure(viewModel: StepViewModel, quizView: UIView?) {
         switch viewModel.content {
         case .video(let viewModel):
             self.scrollableStackView.insertArrangedView(self.stepVideoPreviewContainerView, at: 0)
             self.stepVideoPreviewView.thumbnailImageURL = viewModel?.videoThumbnailImageURL
-            self.delegate?.newStepViewDidLoadContent(self)
+            self.delegate?.stepViewDidLoadContent(self)
         case .text(let htmlString):
             self.scrollableStackView.insertArrangedView(self.stepTextView, at: 0)
             self.stepTextView.loadHTMLText(htmlString)
@@ -207,7 +207,7 @@ final class NewStepView: UIView {
     }
 }
 
-extension NewStepView: ProgrammaticallyInitializableViewProtocol {
+extension StepView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.stepVideoPreviewContainerView.addSubview(self.stepVideoPreviewView)
 
@@ -236,20 +236,20 @@ extension NewStepView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension NewStepView: ProcessedContentTextViewDelegate {
+extension StepView: ProcessedContentTextViewDelegate {
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
-        self.delegate?.newStepView(self, didRequestOpenURL: url)
+        self.delegate?.stepView(self, didRequestOpenURL: url)
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
-        self.delegate?.newStepView(self, didRequestFullscreenImage: url)
+        self.delegate?.stepView(self, didRequestFullscreenImage: url)
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {
-        self.delegate?.newStepView(self, didRequestFullscreenImage: image)
+        self.delegate?.stepView(self, didRequestFullscreenImage: image)
     }
 
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
-        self.delegate?.newStepViewDidLoadContent(self)
+        self.delegate?.stepViewDidLoadContent(self)
     }
 }
