@@ -179,11 +179,11 @@ PODS:
   - TUSafariActivity (1.0.4)
   - URITemplate (3.0.0)
   - VK-ios-sdk (1.5.1)
-  - YandexMobileMetrica/Dynamic (3.8.2):
-    - YandexMobileMetrica/Dynamic/Core (= 3.8.2)
-    - YandexMobileMetrica/Dynamic/Crashes (= 3.8.2)
-  - YandexMobileMetrica/Dynamic/Core (3.8.2)
-  - YandexMobileMetrica/Dynamic/Crashes (3.8.2):
+  - YandexMobileMetrica/Dynamic (3.9.2):
+    - YandexMobileMetrica/Dynamic/Core (= 3.9.2)
+    - YandexMobileMetrica/Dynamic/Crashes (= 3.9.2)
+  - YandexMobileMetrica/Dynamic/Core (3.9.2)
+  - YandexMobileMetrica/Dynamic/Crashes (3.9.2):
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
@@ -233,7 +233,7 @@ DEPENDENCIES:
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
   - VK-ios-sdk (= 1.5.1)
-  - YandexMobileMetrica/Dynamic (= 3.8.2)
+  - YandexMobileMetrica/Dynamic (= 3.9.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -383,8 +383,8 @@ SPEC CHECKSUMS:
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
-  YandexMobileMetrica: edb00e8af2903290e142ba4c488adf8d394e828a
+  YandexMobileMetrica: ea82087806f175981c9eccbb8e35f1d4ee35d788
 
-PODFILE CHECKSUM: c2be7fc1245e747fb75a579749c1bc0cb6c2b054
+PODFILE CHECKSUM: cd262647e966daed303a0675002ffac8f97cf697
 
 COCOAPODS: 1.8.4
