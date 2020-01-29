@@ -217,7 +217,7 @@ final class LessonInteractor: LessonInteractorProtocol {
     }
 }
 
-// MARK: - LessonInteractor: NewStepOutputProtocol -
+// MARK: - LessonInteractor: StepOutputProtocol -
 
 extension LessonInteractor: StepOutputProtocol {
     private static let autoplayDelay: TimeInterval = 0.33
