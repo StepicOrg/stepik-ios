@@ -60,14 +60,14 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
 
         // The following quizzes can be retried w/o new attempt
         let isQuizNotNeededNewAttempt = [
-            NewStep.QuizType.string,
-            NewStep.QuizType.number,
-            NewStep.QuizType.math,
-            NewStep.QuizType.freeAnswer,
-            NewStep.QuizType.code,
-            NewStep.QuizType.sorting,
-            NewStep.QuizType.matching
-        ].contains(NewStep.QuizType(blockName: step.block.name))
+            StepDataFlow.QuizType.string,
+            StepDataFlow.QuizType.number,
+            StepDataFlow.QuizType.math,
+            StepDataFlow.QuizType.freeAnswer,
+            StepDataFlow.QuizType.code,
+            StepDataFlow.QuizType.sorting,
+            StepDataFlow.QuizType.matching
+        ].contains(StepDataFlow.QuizType(blockName: step.block.name))
 
         // 1. if quiz is not needed new attempt and status == wrong
         //    => retry not needed (by quiz design or we've clean attempt)
@@ -194,7 +194,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
             if step.hasReview {
                 return NSLocalizedString("PeerReviewFeedbackTitle", comment: "")
             }
-            if case .freeAnswer = NewStep.QuizType(blockName: step.block.name) {
+            if case .freeAnswer = StepDataFlow.QuizType(blockName: step.block.name) {
                 return NSLocalizedString("CorrectFeedbackTitleFreeAnswer", comment: "")
             }
             return correctTitles.randomElement() ?? NSLocalizedString("Correct", comment: "")

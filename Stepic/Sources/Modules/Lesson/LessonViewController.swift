@@ -94,7 +94,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     private var tooltipInfos: [Step.IdType: [LessonDataFlow.TooltipInfo]] = [:]
 
     private var stepControllers: [UIViewController?] = []
-    private var stepModulesInputs: [NewStepInputProtocol?] = []
+    private var stepModulesInputs: [StepInputProtocol?] = []
 
     private var hasNavigationToPreviousUnit = false
     private var hasNavigationToNextUnit = false
@@ -264,7 +264,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
             return controller
         }
 
-        let assembly = NewStepAssembly(stepID: step.id, output: self.interactor as? NewStepOutputProtocol)
+        let assembly = StepAssembly(stepID: step.id, output: self.interactor as? StepOutputProtocol)
         let controller = assembly.makeModule()
         self.stepControllers[index] = controller
         self.stepModulesInputs[index] = assembly.moduleInput

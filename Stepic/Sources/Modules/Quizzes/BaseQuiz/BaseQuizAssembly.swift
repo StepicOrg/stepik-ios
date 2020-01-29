@@ -29,7 +29,7 @@ final class BaseQuizAssembly: Assembly {
         )
         let viewController = BaseQuizViewController(
             interactor: interactor,
-            quizAssembly: QuizAssemblyFactory().make(for: NewStep.QuizType(blockName: self.step.block.name))
+            quizAssembly: QuizAssemblyFactory().make(for: StepDataFlow.QuizType(blockName: self.step.block.name))
         )
 
         presenter.viewController = viewController

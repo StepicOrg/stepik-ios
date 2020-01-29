@@ -219,7 +219,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
 // MARK: - LessonInteractor: NewStepOutputProtocol -
 
-extension LessonInteractor: NewStepOutputProtocol {
+extension LessonInteractor: StepOutputProtocol {
     private static let autoplayDelay: TimeInterval = 0.33
 
     func handleStepView(id: Step.IdType) {

@@ -78,7 +78,7 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
 
         self.solutionURL = data.solutionURL
 
-        let quizType = NewStep.QuizType(blockName: data.step.block.name)
+        let quizType = StepDataFlow.QuizType(blockName: data.step.block.name)
 
         if case .unknown = quizType {
             self.solutionView?.actionTitle = NSLocalizedString("UnsupportedSolutionActionTitle", comment: "")

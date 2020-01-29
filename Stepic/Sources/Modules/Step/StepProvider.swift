@@ -1,18 +1,14 @@
 import Foundation
 import PromiseKit
 
-// MARK: NewStepProviderProtocol -
-
-protocol NewStepProviderProtocol {
+protocol StepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
     func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
     func fetchCurrentFontSize() -> Guarantee<StepFontSize>
 }
 
-// MARK: - NewStepProvider: NewStepProviderProtocol -
-
-final class NewStepProvider: NewStepProviderProtocol {
+final class StepProvider: StepProviderProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
@@ -29,6 +25,8 @@ final class NewStepProvider: NewStepProviderProtocol {
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.imageStoredFileManager = imageStoredFileManager
     }
+
+    // MARK: Protocol Conforming
 
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>> {
         let persistenceServicePromise = Guarantee(self.stepsPersistenceService.fetch(ids: [id]), fallback: nil)
