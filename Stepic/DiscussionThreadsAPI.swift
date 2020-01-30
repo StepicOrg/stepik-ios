@@ -21,6 +21,7 @@ final class DiscussionThreadsAPI: APIEndpoint {
                     requestEndpoint: self.name,
                     paramName: self.name,
                     params: params,
+                    updatingObjects: cachedDiscussionThreads,
                     withManager: self.manager
                 )
             }.done { discussionThreads, meta, _ in
