@@ -9,6 +9,7 @@ protocol StepInteractorProtocol {
     func doStepViewRequest(request: StepDataFlow.StepViewRequest.Request)
     func doStepDoneRequest(request: StepDataFlow.StepDoneRequest.Request)
     func doDiscussionsButtonUpdate(request: StepDataFlow.DiscussionsButtonUpdate.Request)
+    func doSolutionsButtonUpdate(request: StepDataFlow.SolutionsButtonUpdate.Request)
     func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request)
 }
 
@@ -52,6 +53,10 @@ final class StepInteractor: StepInteractorProtocol {
             self.currentStepIndex = step.position - 1
 
             DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
                 let data = StepDataFlow.StepLoad.Data(
                     step: step,
                     fontSize: fontSize,
@@ -62,7 +67,9 @@ final class StepInteractor: StepInteractorProtocol {
                         return nil
                     }
                 )
-                self?.presenter.presentStep(response: .init(result: .success(data)))
+                strongSelf.presenter.presentStep(response: .init(result: .success(data)))
+
+                strongSelf.tryToPresentCachedThenRemoteSolutionsDiscussionThread(step: step)
             }
 
             if !self.didAnalyticsSend {
@@ -152,6 +159,17 @@ final class StepInteractor: StepInteractorProtocol {
         }.cauterize()
     }
 
+    func doSolutionsButtonUpdate(request: StepDataFlow.SolutionsButtonUpdate.Request) {
+        firstly {
+            self.provider.fetchDiscussionThreads(stepID: self.stepID)
+        }.done { fetchResult in
+            let solutionsDiscussionThread = fetchResult.value.first(where: { $0.threadType == .solutions })
+            self.presenter.presentSolutionsButtonUpdate(response: .init(result: .success(solutionsDiscussionThread)))
+        }.catch { error in
+            self.presenter.presentSolutionsButtonUpdate(response: .init(result: .failure(error)))
+        }
+    }
+
     func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request) {
         self.provider.fetchCachedStep(id: self.stepID).done { cachedStep in
             if let cachedStep = cachedStep {
@@ -160,7 +178,25 @@ final class StepInteractor: StepInteractorProtocol {
         }.cauterize()
     }
 
-    // MARK: - Types
+    // MARK: Private API
+
+    private func tryToPresentCachedThenRemoteSolutionsDiscussionThread(step: Step) {
+        defer {
+            self.doSolutionsButtonUpdate(request: .init())
+        }
+
+        guard let discussionThreads = step.discussionThreads else {
+            return
+        }
+
+        guard let solutionsDiscussionThread = discussionThreads.first(where: { $0.threadType == .solutions }) else {
+            return
+        }
+
+        self.presenter.presentSolutionsButtonUpdate(response: .init(result: .success(solutionsDiscussionThread)))
+    }
+
+    // MARK: Types
 
     enum Error: Swift.Error {
         case fetchFailed

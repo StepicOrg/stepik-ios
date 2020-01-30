@@ -16,7 +16,11 @@ final class StepAssembly: Assembly {
             stepsPersistenceService: StepsPersistenceService(),
             stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
-            imageStoredFileManager: StoredFileManagerFactory.makeStoredFileManager(type: .image)
+            imageStoredFileManager: StoredFileManagerFactory.makeStoredFileManager(type: .image),
+            discussionThreadsNetworkService: DiscussionThreadsNetworkService(
+                discussionThreadsAPI: DiscussionThreadsAPI()
+            ),
+            discussionThreadsPersistenceService: DiscussionThreadsPersistenceService()
         )
         let presenter = StepPresenter()
         let interactor = StepInteractor(stepID: self.stepID, presenter: presenter, provider: provider)

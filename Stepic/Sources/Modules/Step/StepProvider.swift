@@ -6,6 +6,7 @@ protocol StepProviderProtocol {
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
     func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
     func fetchCurrentFontSize() -> Guarantee<StepFontSize>
+    func fetchDiscussionThreads(stepID: Step.IdType) -> Promise<FetchResult<[DiscussionThread]>>
 }
 
 final class StepProvider: StepProviderProtocol {
@@ -13,17 +14,23 @@ final class StepProvider: StepProviderProtocol {
     private let stepsNetworkService: StepsNetworkServiceProtocol
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
     private let imageStoredFileManager: StoredFileManagerProtocol
+    private let discussionThreadsNetworkService: DiscussionThreadsNetworkServiceProtocol
+    private let discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
 
     init(
         stepsPersistenceService: StepsPersistenceServiceProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol,
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
-        imageStoredFileManager: StoredFileManagerProtocol
+        imageStoredFileManager: StoredFileManagerProtocol,
+        discussionThreadsNetworkService: DiscussionThreadsNetworkServiceProtocol,
+        discussionThreadsPersistenceService: DiscussionThreadsPersistenceServiceProtocol
     ) {
         self.stepsPersistenceService = stepsPersistenceService
         self.stepsNetworkService = stepsNetworkService
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.imageStoredFileManager = imageStoredFileManager
+        self.discussionThreadsNetworkService = discussionThreadsNetworkService
+        self.discussionThreadsPersistenceService = discussionThreadsPersistenceService
     }
 
     // MARK: Protocol Conforming
@@ -82,6 +89,58 @@ final class StepProvider: StepProviderProtocol {
         }
     }
 
+    func fetchDiscussionThreads(stepID: Step.IdType) -> Promise<FetchResult<[DiscussionThread]>> {
+        Promise { seal in
+            firstly {
+                self.fetchStep(id: stepID)
+            }.then { stepFetchResult -> Promise<(Step, [DiscussionThread]?, ([DiscussionThread], Meta)?)> in
+                guard let step = stepFetchResult.value else {
+                    throw Error.fetchFailed
+                }
+
+                guard let discussionThreadsIDs = step.discussionThreadsArray,
+                      !discussionThreadsIDs.isEmpty else {
+                    throw Error.emptyDiscussionThreads
+                }
+
+                let persistenceServicePromise = Guarantee(
+                    self.discussionThreadsPersistenceService.fetch(ids: discussionThreadsIDs),
+                    fallback: nil
+                )
+                let networkServicePromise = Guarantee(
+                    self.discussionThreadsNetworkService.fetch(ids: discussionThreadsIDs),
+                    fallback: nil
+                )
+
+                return when(
+                    fulfilled: persistenceServicePromise,
+                    networkServicePromise
+                ).map { (step, $0, $1) }
+            }.then { step, cachedDiscussionThreads, remoteFetchResult -> Promise<FetchResult<[DiscussionThread]>> in
+                if let remoteDiscussionThreads = remoteFetchResult?.0 {
+                    DispatchQueue.main.async {
+                        step.discussionThreads = remoteDiscussionThreads
+                        CoreDataHelper.shared.save()
+                    }
+
+                    let result = FetchResult<[DiscussionThread]>(value: remoteDiscussionThreads, source: .remote)
+                    return .value(result)
+                } else {
+                    let result = FetchResult<[DiscussionThread]>(value: cachedDiscussionThreads ?? [], source: .cache)
+                    return .value(result)
+                }
+            }.done { fetchResult in
+                seal.fulfill(fetchResult)
+            }.catch { error in
+                if case Error.emptyDiscussionThreads = error {
+                    seal.fulfill(.init(value: [], source: .cache))
+                } else {
+                    seal.reject(Error.fetchFailed)
+                }
+            }
+        }
+    }
+
     // MARK: Private API
 
     private func getStepStoredImages(_ step: Step) -> [(imageURL: URL, storedFile: StoredFileProtocol)] {
@@ -105,5 +164,6 @@ final class StepProvider: StepProviderProtocol {
 
     enum Error: Swift.Error {
         case fetchFailed
+        case emptyDiscussionThreads
     }
 }

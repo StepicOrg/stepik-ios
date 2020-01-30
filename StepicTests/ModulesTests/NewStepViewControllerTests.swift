@@ -22,6 +22,8 @@ private final class NewStepViewControllerMock: StepViewControllerProtocol {
 
     func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel) { }
 
+    func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel) { }
+
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) { }
 }
 

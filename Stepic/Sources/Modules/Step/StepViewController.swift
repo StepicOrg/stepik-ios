@@ -7,6 +7,7 @@ protocol StepViewControllerProtocol: AnyObject {
     func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel)
     func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel)
     func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel)
+    func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel)
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel)
 }
 
@@ -90,6 +91,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
         if !self.isFirstAppearance {
             self.interactor.doDiscussionsButtonUpdate(request: .init())
+            self.interactor.doSolutionsButtonUpdate(request: .init())
         }
     }
 
@@ -227,6 +229,10 @@ extension StepViewController: StepViewControllerProtocol {
         self.stepView?.updateDiscussionButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
     }
 
+    func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel) {
+        self.stepView?.updateSolutionsButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
+    }
+
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) {
         let discussionsAssembly = DiscussionsAssembly(
             discussionProxyID: viewModel.discussionProxyID,
@@ -300,6 +306,10 @@ extension StepViewController: StepViewDelegate {
 
     func stepViewDidRequestDiscussions(_ view: StepView) {
         self.interactor.doDiscussionsPresentation(request: .init())
+    }
+
+    func stepViewDidRequestSolutions(_ view: StepView) {
+        print(#function)
     }
 
     func stepView(_ view: StepView, didRequestOpenURL url: URL) {
@@ -378,6 +388,10 @@ extension StepViewController: StepViewDelegate {
 extension StepViewController: BaseQuizOutputProtocol {
     func handleCorrectSubmission() {
         self.interactor.doStepDoneRequest(request: .init())
+    }
+
+    func handleSubmissionEvaluated() {
+        self.interactor.doSolutionsButtonUpdate(request: .init())
     }
 
     func handleNextStepNavigation() {

@@ -108,6 +108,20 @@ enum StepDataFlow {
         }
     }
 
+    /// Update solutions button (after step loaded and on done)
+    enum SolutionsButtonUpdate {
+        struct Request {}
+
+        struct Response {
+            let result: Result<DiscussionThread?>
+        }
+
+        struct ViewModel {
+            let title: String?
+            let isEnabled: Bool
+        }
+    }
+
     /// Present discussions module (list or with write comment on top on empty discussions empty state)
     enum DiscussionsPresentation {
         struct Request {}
