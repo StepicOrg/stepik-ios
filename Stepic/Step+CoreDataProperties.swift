@@ -28,8 +28,10 @@ extension Step {
     @NSManaged var managedProgress: Progress?
     @NSManaged var managedOptions: StepOptions?
 
-    @NSManaged var managedDiscussionProxy: String?
     @NSManaged var managedDiscussionsCount: NSNumber?
+    @NSManaged var managedDiscussionProxy: String?
+    @NSManaged var managedDiscussionThreadsArray: NSObject?
+    @NSManaged var managedDiscussionThreads: NSOrderedSet?
 
     static var oldEntity: NSEntityDescription {
         NSEntityDescription.entity(forEntityName: "Step", in: CoreDataHelper.shared.context)!
@@ -129,6 +131,15 @@ extension Step {
         }
     }
 
+    var discussionsCount: Int? {
+        get {
+            self.managedDiscussionsCount?.intValue
+        }
+        set {
+            self.managedDiscussionsCount = newValue as NSNumber?
+        }
+    }
+
     var discussionProxyID: String? {
         get {
             self.managedDiscussionProxy
@@ -138,12 +149,25 @@ extension Step {
         }
     }
 
-    var discussionsCount: Int? {
+    var discussionThreadsArray: [String]? {
         get {
-            self.managedDiscussionsCount?.intValue
+            self.managedDiscussionThreadsArray as? [String]
         }
         set {
-            self.managedDiscussionsCount = newValue as NSNumber?
+            self.managedDiscussionThreadsArray = newValue as NSObject?
+        }
+    }
+
+    var discussionThreads: [DiscussionThread]? {
+        get {
+            self.managedDiscussionThreads?.array as? [DiscussionThread]
+        }
+        set {
+            if let newDiscussionThreads = newValue {
+                self.managedDiscussionThreads = NSOrderedSet(array: newDiscussionThreads)
+            } else {
+                self.managedDiscussionThreads = nil
+            }
         }
     }
 

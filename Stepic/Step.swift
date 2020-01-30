@@ -35,9 +35,11 @@ final class Step: NSManagedObject, IDFetchable {
             self.hasReview = false
         }
 
-        self.maxSubmissionsCount = json[JSONKey.maxSubmissionsCount.rawValue].int
         self.discussionsCount = json[JSONKey.discussionsCount.rawValue].int
         self.discussionProxyID = json[JSONKey.discussionProxy.rawValue].string
+        self.discussionThreadsArray = json[JSONKey.discussionThreads.rawValue].arrayObject as? [String]
+
+        self.maxSubmissionsCount = json[JSONKey.maxSubmissionsCount.rawValue].int
         self.lessonID = json[JSONKey.lesson.rawValue].intValue
         self.passedByCount = json[JSONKey.passedBy.rawValue].intValue
         self.correctRatio = json[JSONKey.correctRatio.rawValue].floatValue
@@ -110,11 +112,12 @@ final class Step: NSManagedObject, IDFetchable {
         case actions
         case doReview = "do_review"
         case maxSubmissionsCount = "max_submissions_count"
-        case discussionsCount = "discussions_count"
-        case discussionProxy = "discussion_proxy"
         case lesson
         case editInstructions = "edit_instructions"
         case passedBy = "passed_by"
         case correctRatio = "correct_ratio"
+        case discussionsCount = "discussions_count"
+        case discussionProxy = "discussion_proxy"
+        case discussionThreads = "discussion_threads"
     }
 }

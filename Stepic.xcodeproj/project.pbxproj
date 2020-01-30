@@ -470,6 +470,8 @@
 		2C48D604228F0EF700739477 /* ContentProcessingRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D603228F0EF700739477 /* ContentProcessingRule.swift */; };
 		2C48D606228F114400739477 /* HTMLExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D605228F114400739477 /* HTMLExtractor.swift */; };
 		2C48D608228F1E0800739477 /* ContentProcessingInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */; };
+		2C4AD01123E2F3CD0049B7B0 /* DiscussionThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AD01023E2F3CD0049B7B0 /* DiscussionThread.swift */; };
+		2C4AD01323E2F3EC0049B7B0 /* DiscussionThread+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AD01223E2F3EC0049B7B0 /* DiscussionThread+CoreDataProperties.swift */; };
 		2C4BBF13203DC668000A4250 /* plyr.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF10203DC668000A4250 /* plyr.js */; };
 		2C4BBF15203DC668000A4250 /* plyr.css in Resources */ = {isa = PBXBuildFile; fileRef = 2C4BBF12203DC668000A4250 /* plyr.css */; };
 		2C4BE7DE221325FB00AEAC34 /* CourseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DD221325F400AEAC34 /* CourseReview.swift */; };
@@ -1623,6 +1625,9 @@
 		2C48D603228F0EF700739477 /* ContentProcessingRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProcessingRule.swift; sourceTree = "<group>"; };
 		2C48D605228F114400739477 /* HTMLExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLExtractor.swift; sourceTree = "<group>"; };
 		2C48D607228F1E0800739477 /* ContentProcessingInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProcessingInjection.swift; sourceTree = "<group>"; };
+		2C4AD00E23E2E6550049B7B0 /* Model_ discussion_threads.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model_ discussion_threads.xcdatamodel"; sourceTree = "<group>"; };
+		2C4AD01023E2F3CD0049B7B0 /* DiscussionThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionThread.swift; sourceTree = "<group>"; };
+		2C4AD01223E2F3EC0049B7B0 /* DiscussionThread+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscussionThread+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C4BBF10203DC668000A4250 /* plyr.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plyr.js; sourceTree = "<group>"; };
 		2C4BBF12203DC668000A4250 /* plyr.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = plyr.css; sourceTree = "<group>"; };
 		2C4BE7DB221325C000AEAC34 /* Model_course_review_v32.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_course_review_v32.xcdatamodel; sourceTree = "<group>"; };
@@ -2413,6 +2418,7 @@
 				087585AC1FB51D590047A269 /* CourseList */,
 				2C4BE7DC221325E800AEAC34 /* CourseReview */,
 				08D5F5751F7DA6C1007C1634 /* CourseReviewSummary */,
+				2C4AD00F23E2F3BA0049B7B0 /* DiscussionThread */,
 				2CD6E257234E0A0C00F49303 /* EmailAddress */,
 				2C5E907E2333CF2700288BE3 /* LastCodeLanguage */,
 				0846B1001EDDECE600D64D77 /* LastStep */,
@@ -3813,6 +3819,15 @@
 				2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */,
 			);
 			path = ContentProcessor;
+			sourceTree = "<group>";
+		};
+		2C4AD00F23E2F3BA0049B7B0 /* DiscussionThread */ = {
+			isa = PBXGroup;
+			children = (
+				2C4AD01023E2F3CD0049B7B0 /* DiscussionThread.swift */,
+				2C4AD01223E2F3EC0049B7B0 /* DiscussionThread+CoreDataProperties.swift */,
+			);
+			name = DiscussionThread;
 			sourceTree = "<group>";
 		};
 		2C4BBF0B203DC5C9000A4250 /* Plyr */ = {
@@ -6896,6 +6911,7 @@
 				2CD87014230DF663003D9F1A /* NewMatchingQuizTitleView.swift in Sources */,
 				2CFC5ABE228AF0B400B5248A /* LessonViewModel.swift in Sources */,
 				2CF1B33F2163BE770008DA0C /* StoriesPresenter.swift in Sources */,
+				2C4AD01123E2F3CD0049B7B0 /* DiscussionThread.swift in Sources */,
 				62E98F602ED9E5CEA4E02D0A /* UIStackView+RemoveAllArrangedSubviews.swift in Sources */,
 				62E98447CF53F0402668F488 /* ContinueLastStepView.swift in Sources */,
 				62E9886837CEF83D626D9536 /* StreakActivityView.swift in Sources */,
@@ -7744,6 +7760,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C4AD00E23E2E6550049B7B0 /* Model_ discussion_threads.xcdatamodel */,
 				2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */,
 				2C8B6E0323A27D2D0078A4B3 /* Model_required_section.xcdatamodel */,
 				2C101009239E7A1E00440651 /* Model_discount_policy.xcdatamodel */,
@@ -7792,7 +7809,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */;
+			currentVersion = 2C4AD00E23E2E6550049B7B0 /* Model_ discussion_threads.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
