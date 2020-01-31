@@ -8,7 +8,7 @@ protocol DiscussionsInteractorProtocol {
     func doDiscussionsLoad(request: Discussions.DiscussionsLoad.Request)
     func doNextDiscussionsLoad(request: Discussions.NextDiscussionsLoad.Request)
     func doNextRepliesLoad(request: Discussions.NextRepliesLoad.Request)
-    func doWriteCommentPresentation(request: Discussions.WriteCommentPresentation.Request )
+    func doWriteCommentPresentation(request: Discussions.WriteCommentPresentation.Request)
     func doCommentDelete(request: Discussions.CommentDelete.Request)
     func doCommentLike(request: Discussions.CommentLike.Request)
     func doCommentAbuse(request: Discussions.CommentAbuse.Request)
@@ -24,6 +24,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     private let presenter: DiscussionsPresenterProtocol
     private let provider: DiscussionsProviderProtocol
+    private let discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManagerProtocol
 
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
@@ -49,6 +50,15 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         }
     }
 
+    private var currentSortType: Discussions.SortType {
+        get {
+            self.discussionsSortTypeStorageManager.globalDiscussionsSortType
+        }
+        set {
+            self.discussionsSortTypeStorageManager.globalDiscussionsSortType = newValue
+        }
+    }
+
     /// A Boolean value that determines whether the fetch of the replies for root discussion is in progress.
     private var discussionsIDsFetchingReplies: Set<Comment.IdType> = []
 
@@ -63,13 +73,15 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         stepID: Step.IdType,
         presentationContext: Discussions.PresentationContext,
         presenter: DiscussionsPresenterProtocol,
-        provider: DiscussionsProviderProtocol
+        provider: DiscussionsProviderProtocol,
+        discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManagerProtocol
     ) {
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
         self.presentationContext = presentationContext
         self.presenter = presenter
         self.provider = provider
+        self.discussionsSortTypeStorageManager = discussionsSortTypeStorageManager
 
         DiscussionsInteractor.logger.info(
             "discussions interactor: did init with presentationContext: \(presentationContext)"
@@ -688,14 +700,14 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
 // MARK: - DiscussionsInteractor: DiscussionsInputProtocol -
 
-extension DiscussionsInteractor: DiscussionsInputProtocol { }
+extension DiscussionsInteractor: DiscussionsInputProtocol {}
 
 // MARK: - DiscussionsInteractor: WriteCommentOutputProtocol -
 
 extension DiscussionsInteractor: WriteCommentOutputProtocol {
     func handleCommentCreated(_ comment: Comment) {
         if let parentID = comment.parentID,
-            let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
+           let parentIndex = self.currentDiscussions.firstIndex(where: { $0.id == parentID }) {
             self.currentDiscussions[parentIndex].repliesIDs.append(comment.id)
             self.currentReplies[parentID, default: []].append(comment)
 
@@ -730,24 +742,5 @@ extension DiscussionsInteractor: WriteCommentOutputProtocol {
         }
 
         self.presenter.presentCommentUpdate(response: .init(result: self.makeDiscussionsData()))
-    }
-}
-
-// MARK: - DiscussionsInteractor (UserDefaults) -
-
-// TODO: Move to service.
-extension DiscussionsInteractor {
-    private static let discussionsSortTypeKey = "discussionsSortTypeKey"
-
-    private var currentSortType: Discussions.SortType {
-        get {
-            if let sortTypeKey = UserDefaults.standard.string(forKey: DiscussionsInteractor.discussionsSortTypeKey) {
-                return Discussions.SortType(rawValue: sortTypeKey) ?? .last
-            }
-            return .last
-        }
-        set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: DiscussionsInteractor.discussionsSortTypeKey)
-        }
     }
 }

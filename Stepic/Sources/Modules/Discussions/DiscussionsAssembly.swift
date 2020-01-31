@@ -32,7 +32,8 @@ final class DiscussionsAssembly: Assembly {
             stepID: self.stepID,
             presentationContext: self.presentationContext,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManager()
         )
         let viewController = DiscussionsViewController(interactor: interactor)
 
