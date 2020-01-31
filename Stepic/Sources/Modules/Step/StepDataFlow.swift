@@ -122,7 +122,7 @@ enum StepDataFlow {
         }
     }
 
-    /// Present discussions module (list or with write comment on top on empty discussions empty state)
+    /// Present discussions thread (list or with write comment on top on empty discussions empty state)
     enum DiscussionsPresentation {
         struct Request {}
 
@@ -133,7 +133,33 @@ enum StepDataFlow {
         struct ViewModel {
             let discussionProxyID: DiscussionProxy.IdType
             let stepID: Step.IdType
-            let embeddedInWriteComment: Bool
+            let shouldEmbedInWriteComment: Bool
+        }
+    }
+
+    /// Present solutions thread
+    enum SolutionsPresentation {
+        struct Request {}
+
+        struct Response {
+            let step: Step
+            let discussionThread: DiscussionThread
+        }
+
+        struct ViewModel {
+            let discussionProxyID: DiscussionProxy.IdType
+            let stepID: Step.IdType
+        }
+    }
+
+    /// Handle HUD
+    enum BlockingWaitingIndicatorUpdate {
+        struct Response {
+            let shouldDismiss: Bool
+        }
+
+        struct ViewModel {
+            let shouldDismiss: Bool
         }
     }
 

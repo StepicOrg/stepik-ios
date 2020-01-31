@@ -4,9 +4,11 @@ import PromiseKit
 protocol StepProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
     func fetchCachedStep(id: Step.IdType) -> Promise<Step?>
+    func fetchRemoteStep(id: Step.IdType) -> Promise<Step?>
     func fetchStoredImages(id: Step.IdType) -> Guarantee<[(imageURL: URL, storedFile: StoredFileProtocol)]>
     func fetchCurrentFontSize() -> Guarantee<StepFontSize>
     func fetchDiscussionThreads(stepID: Step.IdType) -> Promise<FetchResult<[DiscussionThread]>>
+    func fetchRemoteDiscussionThreads(ids: [DiscussionThread.IdType]) -> Promise<[DiscussionThread]>
 }
 
 final class StepProvider: StepProviderProtocol {
@@ -63,6 +65,16 @@ final class StepProvider: StepProviderProtocol {
         Promise { seal in
             self.stepsPersistenceService.fetch(ids: [id]).done { cachedSteps in
                 seal.fulfill(cachedSteps.first)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetchRemoteStep(id: Step.IdType) -> Promise<Step?> {
+        Promise { seal in
+            self.stepsNetworkService.fetch(ids: [id]).done { remoteSteps in
+                seal.fulfill(remoteSteps.first)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }
@@ -137,6 +149,16 @@ final class StepProvider: StepProviderProtocol {
                 } else {
                     seal.reject(Error.fetchFailed)
                 }
+            }
+        }
+    }
+
+    func fetchRemoteDiscussionThreads(ids: [DiscussionThread.IdType]) -> Promise<[DiscussionThread]> {
+        Promise { seal in
+            self.discussionThreadsNetworkService.fetch(ids: ids).done { remoteDiscussionThreads, _ in
+                seal.fulfill(remoteDiscussionThreads)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
             }
         }
     }

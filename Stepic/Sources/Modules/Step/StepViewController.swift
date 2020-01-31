@@ -1,4 +1,5 @@
 import Agrume
+import SVProgressHUD
 import UIKit
 
 protocol StepViewControllerProtocol: AnyObject {
@@ -9,6 +10,8 @@ protocol StepViewControllerProtocol: AnyObject {
     func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel)
     func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel)
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel)
+    func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 // MARK: - StepViewController (Animation) -
@@ -235,12 +238,13 @@ extension StepViewController: StepViewControllerProtocol {
 
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) {
         let discussionsAssembly = DiscussionsAssembly(
+            threadType: .default,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID
         )
         let discussionsViewController = discussionsAssembly.makeModule()
 
-        if viewModel.embeddedInWriteComment {
+        if viewModel.shouldEmbedInWriteComment {
             let (modalPresentationStyle, navigationBarAppearance) = {
                 () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
                 if #available(iOS 13.0, *) {
@@ -287,6 +291,24 @@ extension StepViewController: StepViewControllerProtocol {
             self.push(module: discussionsViewController)
         }
     }
+
+    func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel) {
+        let assembly = DiscussionsAssembly(
+            threadType: .solutions,
+            discussionProxyID: viewModel.discussionProxyID,
+            stepID: viewModel.stepID
+        )
+
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
+    }
 }
 
 // MARK: - StepViewController: StepViewDelegate -
@@ -309,7 +331,7 @@ extension StepViewController: StepViewDelegate {
     }
 
     func stepViewDidRequestSolutions(_ view: StepView) {
-        print(#function)
+        self.interactor.doSolutionsPresentation(request: .init())
     }
 
     func stepView(_ view: StepView, didRequestOpenURL url: URL) {

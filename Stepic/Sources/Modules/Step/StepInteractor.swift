@@ -11,6 +11,7 @@ protocol StepInteractorProtocol {
     func doDiscussionsButtonUpdate(request: StepDataFlow.DiscussionsButtonUpdate.Request)
     func doSolutionsButtonUpdate(request: StepDataFlow.SolutionsButtonUpdate.Request)
     func doDiscussionsPresentation(request: StepDataFlow.DiscussionsPresentation.Request)
+    func doSolutionsPresentation(request: StepDataFlow.SolutionsPresentation.Request)
 }
 
 final class StepInteractor: StepInteractorProtocol {
@@ -176,6 +177,47 @@ final class StepInteractor: StepInteractorProtocol {
                 self.presenter.presentDiscussions(response: .init(step: cachedStep))
             }
         }.cauterize()
+    }
+
+    func doSolutionsPresentation(request: StepDataFlow.SolutionsPresentation.Request) {
+        firstly {
+            self.provider.fetchCachedStep(id: self.stepID)
+        }.then { cachedStep -> Promise<Step?> in
+            if let cachedStep = cachedStep {
+                return .value(cachedStep)
+            } else {
+                self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+                return self.provider.fetchRemoteStep(id: self.stepID)
+            }
+        }.then { step -> Promise<(Step, [DiscussionThread]?)> in
+            guard let step = step else {
+                throw Error.fetchFailed
+            }
+
+            if step.discussionThreads?.contains(where: { $0.threadType == .solutions }) ?? false {
+                return .value((step, step.discussionThreads))
+            }
+
+            guard let discussionThreadsIDs = step.discussionThreadsArray else {
+                return .value((step, nil))
+            }
+
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+            return self.provider.fetchRemoteDiscussionThreads(ids: discussionThreadsIDs).map { (step, $0) }
+        }.done { step, discussionThreads in
+            guard let discussionThreads = discussionThreads,
+                  let solutionsDiscussionThread = discussionThreads.first(where: { $0.threadType == .solutions }) else {
+                return
+            }
+
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+            self.presenter.presentSolutions(response: .init(step: step, discussionThread: solutionsDiscussionThread))
+        }.ensure {
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+        }.catch { error in
+            print("new step interactor: error while presenting solutions = \(error)")
+        }
     }
 
     // MARK: Private API

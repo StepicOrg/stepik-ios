@@ -9,6 +9,8 @@ protocol StepPresenterProtocol {
     func presentDiscussionsButtonUpdate(response: StepDataFlow.DiscussionsButtonUpdate.Response)
     func presentSolutionsButtonUpdate(response: StepDataFlow.SolutionsButtonUpdate.Response)
     func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response)
+    func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response)
+    func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class StepPresenter: StepPresenterProtocol {
@@ -102,9 +104,27 @@ final class StepPresenter: StepPresenterProtocol {
             viewModel: .init(
                 discussionProxyID: discussionProxyID,
                 stepID: response.step.id,
-                embeddedInWriteComment: (response.step.discussionsCount ?? 0) == 0
+                shouldEmbedInWriteComment: (response.step.discussionsCount ?? 0) == 0
             )
         )
+    }
+
+    func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response) {
+        guard response.discussionThread.threadType == .solutions,
+              !response.discussionThread.discussionProxy.isEmpty else {
+            return
+        }
+
+        self.viewController?.displaySolutions(
+            viewModel: .init(
+                discussionProxyID: response.discussionThread.discussionProxy,
+                stepID: response.step.id
+            )
+        )
+    }
+
+    func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
     // MARK: Private API
