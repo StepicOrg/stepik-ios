@@ -871,7 +871,8 @@ DiscussionsSortTypeMostLikedDiscussions = "Most liked";
 DiscussionsSortTypeMostActiveDiscussions = "Most active";
 DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
 DiscussionsIsPinnedBadgeTitle = "Pinned";
-SolutionsTitle = "Solutions";
+DiscussionThreadSolutionsTitle = "Solutions";
+DiscussionThreadCommentSolutionTitle = "Solution %@";
 
 /* Write comment */
 WriteCommentTitle = "Comment";

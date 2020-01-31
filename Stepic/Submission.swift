@@ -12,68 +12,106 @@ import UIKit
 final class Submission: JSONSerializable {
     typealias IdType = Int
 
-    var id: Int = 0
+    var id: IdType = 0
     var status: String?
-    var reply: Reply?
-    var attempt: Int = 0
     var hint: String?
     var feedback: SubmissionFeedback?
+    var reply: Reply?
+    var attemptID: Attempt.IdType = 0
+    var attempt: Attempt?
 
-    init(json: JSON, stepName: String) {
-        id = json["id"].intValue
-        status = json["status"].string
-        attempt = json["attempt"].intValue
-        hint = json["hint"].string
-        reply = nil
-        reply = getReplyFromJSON(json["reply"], stepName: stepName)
-        feedback = SubmissionFeedback(json: json["feedback"])
-    }
-
-    init(attempt: Int, reply: Reply) {
-        self.attempt = attempt
-        self.reply = reply
-    }
-
-    required init(json: JSON) {
-        update(json: json)
-    }
-
-    func update(json: JSON) {
-        id = json["id"].intValue
-        status = json["status"].string
-        attempt = json["attempt"].intValue
-        hint = json["hint"].string
-        feedback = SubmissionFeedback(json: json["feedback"])
-    }
-
-    func initReply(json: JSON, stepName: String) {
-        reply = getReplyFromJSON(json, stepName: stepName)
-    }
-
-    func hasEqualId(json: JSON) -> Bool {
-        self.id == json["id"].int
-    }
+    var isCorrect: Bool { self.status == "correct" }
 
     var json: JSON {
         [
-            "attempt": attempt,
+            "attempt": attemptID,
             "reply": reply?.dictValue ?? ""
         ]
     }
 
+    init(json: JSON, stepName: String) {
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.status = json[JSONKey.status.rawValue].string
+        self.hint = json[JSONKey.hint.rawValue].string
+        self.attemptID = json[JSONKey.attempt.rawValue].intValue
+        self.reply = nil
+        self.reply = self.getReplyFromJSON(json[JSONKey.reply.rawValue], stepName: stepName)
+        self.feedback = SubmissionFeedback(json: json[JSONKey.feedback.rawValue])
+    }
+
+    init(attempt: Int, reply: Reply) {
+        self.attemptID = attempt
+        self.reply = reply
+    }
+
+    required init(json: JSON) {
+        self.update(json: json)
+    }
+
+    func update(json: JSON) {
+        self.id = json[JSONKey.id.rawValue].intValue
+        self.status = json[JSONKey.status.rawValue].string
+        self.attemptID = json[JSONKey.attempt.rawValue].intValue
+        self.hint = json[JSONKey.hint.rawValue].string
+        self.feedback = SubmissionFeedback(json: json[JSONKey.feedback.rawValue])
+    }
+
+    func initReply(json: JSON, stepName: String) {
+        self.reply = self.getReplyFromJSON(json, stepName: stepName)
+    }
+
+    func hasEqualId(json: JSON) -> Bool {
+        self.id == json[JSONKey.id.rawValue].int
+    }
+
     private func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
         switch stepName {
-        case "choice" : return ChoiceReply(json: json)
-        case "string" : return TextReply(json: json)
-        case "number": return NumberReply(json: json)
-        case "free-answer": return FreeAnswerReply(json: json)
-        case "math": return MathReply(json: json)
-        case "sorting": return SortingReply(json: json)
-        case "matching": return MatchingReply(json: json)
-        case "code": return CodeReply(json: json)
-        case "sql": return SQLReply(json: json)
-        default: return nil
+        case "choice":
+            return ChoiceReply(json: json)
+        case "string":
+            return TextReply(json: json)
+        case "number":
+            return NumberReply(json: json)
+        case "free-answer":
+            return FreeAnswerReply(json: json)
+        case "math":
+            return MathReply(json: json)
+        case "sorting":
+            return SortingReply(json: json)
+        case "matching":
+            return MatchingReply(json: json)
+        case "code":
+            return CodeReply(json: json)
+        case "sql":
+            return SQLReply(json: json)
+        default:
+            return nil
         }
+    }
+
+    // MARK: Inner Types
+
+    enum JSONKey: String {
+        case id
+        case status
+        case hint
+        case attempt
+        case reply
+        case feedback
+    }
+}
+
+extension Submission: CustomDebugStringConvertible {
+    var debugDescription: String {
+        """
+        Submission(id: \(id), \
+        status: \(status ?? "nil"), \
+        hint: \(hint ?? "nil"), \
+        feedback: \(feedback ??? "nil"), \
+        reply: \(reply ??? "nil"), \
+        attemptID: \(attemptID), \
+        attempt: \(attempt ??? "nil"))
+        """
     }
 }
 

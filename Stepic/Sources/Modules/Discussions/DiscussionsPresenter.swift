@@ -34,7 +34,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         case .solutions:
             self.viewController?.displayNavigationItemUpdate(
                 viewModel: .init(
-                    title: NSLocalizedString("SolutionsTitle", comment: ""),
+                    title: NSLocalizedString("DiscussionThreadSolutionsTitle", comment: ""),
                     shouldShowSortButton: true,
                     shouldShowComposeButton: false
                 )
@@ -256,6 +256,21 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         }()
         let strippedAndTrimmedText = strippedText.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        let solution: DiscussionsCommentViewModel.Solution? = {
+            guard let submission = comment.submission else {
+                return nil
+            }
+
+            return .init(
+                id: submission.id,
+                title: String(
+                    format: NSLocalizedString("DiscussionThreadCommentSolutionTitle", comment: ""),
+                    arguments: ["\(submission.id)"]
+                ),
+                isCorrect: submission.isCorrect
+            )
+        }()
+
         return DiscussionsCommentViewModel(
             id: comment.id,
             avatarImageURL: avatarImageURL,
@@ -274,7 +289,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             canEdit: comment.actions.contains(.edit),
             canDelete: comment.actions.contains(.delete),
             canVote: comment.actions.contains(.vote),
-            hasReplies: hasReplies
+            hasReplies: hasReplies,
+            solution: solution
         )
     }
 

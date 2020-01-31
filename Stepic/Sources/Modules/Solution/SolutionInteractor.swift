@@ -40,7 +40,7 @@ final class SolutionInteractor: SolutionInteractorProtocol {
                 throw Error.fetchFailed
             }
 
-            return self.provider.fetchAttempt(id: submission.attempt, step: step).map { (step, submission, $0) }
+            return self.provider.fetchAttempt(id: submission.attemptID, step: step).map { (step, submission, $0) }
         }.done { step, submission, attempt in
             guard let attempt = attempt else {
                 throw Error.fetchFailed
