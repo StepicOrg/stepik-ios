@@ -352,7 +352,7 @@ final class DeepLinkRouter {
 
                         if let discussionProxyID = step.discussionProxyID {
                             let assembly = DiscussionsAssembly(
-                                threadType: .default,
+                                discussionThreadType: .default,
                                 discussionProxyID: discussionProxyID,
                                 stepID: step.id,
                                 presentationContext: .scrollTo(discussionID: discussionID, replyID: replyID)

@@ -3,18 +3,18 @@ import UIKit
 final class DiscussionsAssembly: Assembly {
     var moduleInput: DiscussionsInputProtocol?
 
-    private let threadType: DiscussionThread.ThreadType
+    private let discussionThreadType: DiscussionThread.ThreadType
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
     private let presentationContext: Discussions.PresentationContext
 
     init(
-        threadType: DiscussionThread.ThreadType,
+        discussionThreadType: DiscussionThread.ThreadType,
         discussionProxyID: DiscussionProxy.IdType,
         stepID: Step.IdType,
         presentationContext: Discussions.PresentationContext = .fromBeginning
     ) {
-        self.threadType = threadType
+        self.discussionThreadType = discussionThreadType
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
         self.presentationContext = presentationContext
@@ -31,7 +31,7 @@ final class DiscussionsAssembly: Assembly {
         )
         let presenter = DiscussionsPresenter()
         let interactor = DiscussionsInteractor(
-            threadType: self.threadType,
+            discussionThreadType: self.discussionThreadType,
             discussionProxyID: self.discussionProxyID,
             stepID: self.stepID,
             presentationContext: self.presentationContext,

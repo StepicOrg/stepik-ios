@@ -238,7 +238,7 @@ extension StepViewController: StepViewControllerProtocol {
 
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) {
         let discussionsAssembly = DiscussionsAssembly(
-            threadType: .default,
+            discussionThreadType: .default,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID
         )
@@ -294,7 +294,7 @@ extension StepViewController: StepViewControllerProtocol {
 
     func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel) {
         let assembly = DiscussionsAssembly(
-            threadType: .solutions,
+            discussionThreadType: .solutions,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID
         )

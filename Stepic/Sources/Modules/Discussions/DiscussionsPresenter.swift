@@ -2,6 +2,7 @@ import Kanna
 import UIKit
 
 protocol DiscussionsPresenterProtocol {
+    func presentNavigationItemUpdate(response: Discussions.NavigationItemUpdate.Response)
     func presentDiscussions(response: Discussions.DiscussionsLoad.Response)
     func presentNextDiscussions(response: Discussions.NextDiscussionsLoad.Response)
     func presentNextReplies(response: Discussions.NextRepliesLoad.Response)
@@ -19,6 +20,27 @@ protocol DiscussionsPresenterProtocol {
 
 final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     weak var viewController: DiscussionsViewControllerProtocol?
+
+    func presentNavigationItemUpdate(response: Discussions.NavigationItemUpdate.Response) {
+        switch response.discussionThreadType {
+        case .default:
+            self.viewController?.displayNavigationItemUpdate(
+                viewModel: .init(
+                    title: NSLocalizedString("DiscussionsTitle", comment: ""),
+                    shouldShowSortButton: true,
+                    shouldShowComposeButton: true
+                )
+            )
+        case .solutions:
+            self.viewController?.displayNavigationItemUpdate(
+                viewModel: .init(
+                    title: NSLocalizedString("SolutionsTitle", comment: ""),
+                    shouldShowSortButton: true,
+                    shouldShowComposeButton: false
+                )
+            )
+        }
+    }
 
     func presentDiscussions(response: Discussions.DiscussionsLoad.Response) {
         var viewModel: Discussions.DiscussionsLoad.ViewModel

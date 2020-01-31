@@ -26,7 +26,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     private let provider: DiscussionsProviderProtocol
     private let discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManagerProtocol
 
-    private let threadType: DiscussionThread.ThreadType
+    private let discussionThreadType: DiscussionThread.ThreadType
     private let discussionProxyID: DiscussionProxy.IdType
     private let stepID: Step.IdType
     private let presentationContext: Discussions.PresentationContext
@@ -70,7 +70,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     )
 
     init(
-        threadType: DiscussionThread.ThreadType,
+        discussionThreadType: DiscussionThread.ThreadType,
         discussionProxyID: DiscussionProxy.IdType,
         stepID: Step.IdType,
         presentationContext: Discussions.PresentationContext,
@@ -78,7 +78,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         provider: DiscussionsProviderProtocol,
         discussionsSortTypeStorageManager: DiscussionsSortTypeStorageManagerProtocol
     ) {
-        self.threadType = threadType
+        self.discussionThreadType = discussionThreadType
         self.discussionProxyID = discussionProxyID
         self.stepID = stepID
         self.presentationContext = presentationContext
@@ -103,6 +103,12 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
             strongSelf.fetchSemaphore.wait()
             Self.logger.info("discussions interactor: start fetching discussions")
+
+            DispatchQueue.main.async {
+                strongSelf.presenter.presentNavigationItemUpdate(
+                    response: .init(discussionThreadType: strongSelf.discussionThreadType)
+                )
+            }
 
             strongSelf.fetchDiscussions(discussionProxyID: strongSelf.discussionProxyID).done { discussionsData in
                 Self.logger.info("discussions interactor: finish fetching discussions")

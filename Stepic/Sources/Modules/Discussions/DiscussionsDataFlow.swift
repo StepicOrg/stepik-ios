@@ -35,11 +35,25 @@ enum Discussions {
     }
 
     // MARK: - Use cases -
+
+    /// Update navigation title and buttons
+    enum NavigationItemUpdate {
+        struct Response {
+            let discussionThreadType: DiscussionThread.ThreadType
+        }
+
+        struct ViewModel {
+            let title: String
+            let shouldShowSortButton: Bool
+            let shouldShowComposeButton: Bool
+        }
+    }
+
     // MARK: Fetch comments
 
     /// Show discussions
     enum DiscussionsLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let result: Result<DiscussionsResponseData>
@@ -192,7 +206,7 @@ enum Discussions {
 
     /// Presents action sheet with available and current sort type (after sort type bar button item click)
     enum SortTypesPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let currentSortType: SortType

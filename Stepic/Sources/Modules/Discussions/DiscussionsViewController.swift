@@ -3,6 +3,7 @@ import SVProgressHUD
 import UIKit
 
 protocol DiscussionsViewControllerProtocol: AnyObject {
+    func displayNavigationItemUpdate(viewModel: Discussions.NavigationItemUpdate.ViewModel)
     func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel)
     func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel)
     func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel)
@@ -77,8 +78,7 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setupNavigationItem()
-        self.registerPlaceholders()
+        self.setup()
 
         self.updateState(newState: self.state)
         self.interactor.doDiscussionsLoad(request: .init())
@@ -93,11 +93,9 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 
     // MARK: - Private API
 
-    private func setupNavigationItem() {
-        self.title = NSLocalizedString("DiscussionsTitle", comment: "")
-
-        self.navigationItem.rightBarButtonItems = [self.composeBarButtonItem, self.sortTypeBarButtonItem]
+    private func setup() {
         self.sortTypeBarButtonItem.isEnabled = false
+        self.registerPlaceholders()
     }
 
     private func registerPlaceholders() {
@@ -204,6 +202,20 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 // MARK: - DiscussionsViewController: DiscussionsViewControllerProtocol -
 
 extension DiscussionsViewController: DiscussionsViewControllerProtocol {
+    func displayNavigationItemUpdate(viewModel: Discussions.NavigationItemUpdate.ViewModel) {
+        self.title = viewModel.title
+
+        var rightBarButtonItems = [UIBarButtonItem]()
+        if viewModel.shouldShowComposeButton {
+            rightBarButtonItems.append(self.composeBarButtonItem)
+        }
+        if viewModel.shouldShowSortButton {
+            rightBarButtonItems.append(self.sortTypeBarButtonItem)
+        }
+
+        self.navigationItem.rightBarButtonItems = rightBarButtonItems.isEmpty ? nil : rightBarButtonItems
+    }
+
     func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
