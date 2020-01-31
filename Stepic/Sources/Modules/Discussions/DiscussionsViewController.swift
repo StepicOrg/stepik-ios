@@ -22,6 +22,7 @@ protocol DiscussionsViewControllerProtocol: AnyObject {
 
 final class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
     lazy var discussionsView = self.view as? DiscussionsView
+    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
@@ -76,7 +77,7 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.configureNavigationBar()
+        self.setupNavigationItem()
         self.registerPlaceholders()
 
         self.updateState(newState: self.state)
@@ -86,14 +87,13 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
-        }
+        self.styledNavigationController?.removeBackButtonTitleForTopController()
+        self.styledNavigationController?.changeShadowViewAlpha(1.0, sender: self)
     }
 
     // MARK: - Private API
 
-    private func configureNavigationBar() {
+    private func setupNavigationItem() {
         self.title = NSLocalizedString("DiscussionsTitle", comment: "")
 
         self.navigationItem.rightBarButtonItems = [self.composeBarButtonItem, self.sortTypeBarButtonItem]

@@ -117,8 +117,8 @@ final class StepPresenter: StepPresenterProtocol {
 
         self.viewController?.displaySolutions(
             viewModel: .init(
-                discussionProxyID: response.discussionThread.discussionProxy,
-                stepID: response.step.id
+                stepID: response.step.id,
+                discussionProxyID: response.discussionThread.discussionProxy
             )
         )
     }

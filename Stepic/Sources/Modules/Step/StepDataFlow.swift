@@ -147,8 +147,8 @@ enum StepDataFlow {
         }
 
         struct ViewModel {
-            let discussionProxyID: DiscussionProxy.IdType
             let stepID: Step.IdType
+            let discussionProxyID: DiscussionProxy.IdType
         }
     }
 
