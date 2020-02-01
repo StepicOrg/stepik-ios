@@ -29,6 +29,7 @@ final class StepControlsView: UIView {
     private lazy var discussionsButtonTopSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = self.appearance.separatorColor
+        view.isHidden = true
         return view
     }()
 
@@ -41,6 +42,7 @@ final class StepControlsView: UIView {
     private lazy var discussionsButtonBottomSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = self.appearance.separatorColor
+        view.isHidden = true
         return view
     }()
 
@@ -98,9 +100,9 @@ final class StepControlsView: UIView {
                 + stackViewSize.height
                 + (self.navigationState == .none ? 0 : self.appearance.spacing)
                 + self.appearance.statisticsViewHeight
-                + self.appearance.separatorHeight
+                + (self.discussionsButtonTopSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
                 + self.appearance.discussionThreadButtonHeight
-                + self.appearance.separatorHeight
+                + (self.discussionsButtonBottomSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
                 + (self.solutionsButton.isHidden ? 0 : self.appearance.discussionThreadButtonHeight)
                 + (self.solutionsButtonBottomSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
         )
@@ -252,6 +254,9 @@ final class StepControlsView: UIView {
     private func updateSolutionsButtonVisibility() {
         self.solutionsButton.isHidden = self.solutionsTitle?.isEmpty ?? true
         self.solutionsButtonBottomSeparatorView.isHidden = self.solutionsButton.isHidden
+
+        self.discussionsButtonTopSeparatorView.isHidden = self.solutionsButton.isHidden
+        self.discussionsButtonBottomSeparatorView.isHidden = self.solutionsButton.isHidden
     }
 
     // MARK: Enum

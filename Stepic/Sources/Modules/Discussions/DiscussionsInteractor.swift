@@ -142,7 +142,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             let idsToLoad = strongSelf.getNextDiscussionsIDsToLoad(direction: request.direction)
             Self.logger.info("discussions interactor: start fetching next discussions ids: \(idsToLoad)")
 
-            strongSelf.provider.fetchComments(ids: idsToLoad).done { fetchedComments in
+            strongSelf.provider.fetchComments(ids: idsToLoad, stepID: strongSelf.stepID).done { fetchedComments in
                 Self.logger.info("discussions interactor: finish fetching next discussions")
                 strongSelf.updateDataWithNewComments(fetchedComments)
                 DispatchQueue.main.async {
@@ -185,7 +185,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             let idsToLoad = strongSelf.getNextReplyIDsToLoad(discussion: discussion)
             Self.logger.info("discussions interactor: start fetching next replies ids: \(idsToLoad)")
 
-            strongSelf.provider.fetchComments(ids: idsToLoad).done { fetchedComments in
+            strongSelf.provider.fetchComments(ids: idsToLoad, stepID: strongSelf.stepID).done { fetchedComments in
                 Self.logger.info("discussions interactor: finish fetching next replies")
 
                 strongSelf.updateDataWithNewComments(fetchedComments)
@@ -398,11 +398,13 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
         guard let submission = comment.submission else {
             return Self.logger.error(
-                "discussions interactor: unable present solution, comment doesn't has submission: \(request.commentID)"
+                "discussions interactor: unable present solution, no submission: \(request.commentID)"
             )
         }
 
-        self.presenter.presentSolution(response: .init(stepID: self.stepID, submission: submission))
+        self.presenter.presentSolution(
+            response: .init(stepID: self.stepID, submission: submission, discussionID: self.discussionProxyID)
+        )
     }
 
     // MARK: - Private API
@@ -428,7 +430,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                     return .value(self.getNextDiscussionsIDsToLoad(direction: nil))
                 }
             }.then { ids -> Promise<[Comment]> in
-                self.provider.fetchComments(ids: ids)
+                self.provider.fetchComments(ids: ids, stepID: self.stepID)
             }.done { fetchedComments in
                 self.updateDataWithNewComments(fetchedComments)
                 seal.fulfill(self.makeDiscussionsData())

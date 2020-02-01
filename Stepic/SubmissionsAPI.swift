@@ -14,7 +14,18 @@ import SwiftyJSON
 final class SubmissionsAPI: APIEndpoint {
     override var name: String { "submissions" }
 
-    @discardableResult private func retrieve(stepName: String, objectName: String, objectId: Int, isDescending: Bool? = true, page: Int? = 1, userId: Int? = nil, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([Submission], Meta) -> Void, error errorHandler: @escaping (String) -> Void) -> Request? {
+    @discardableResult
+    private func retrieve(
+        stepName: String,
+        objectName: String,
+        objectId: Int,
+        isDescending: Bool? = true,
+        page: Int? = 1,
+        userId: Int? = nil,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping ([Submission], Meta) -> Void,
+        error errorHandler: @escaping (String) -> Void
+    ) -> Request? {
         var params: Parameters = [:]
 
         params[objectName] = objectId
@@ -28,9 +39,13 @@ final class SubmissionsAPI: APIEndpoint {
             params["user"] = user
         }
 
-        return manager.request("\(StepikApplicationsInfo.apiURL)/submissions", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
+        return manager.request(
+            "\(StepikApplicationsInfo.apiURL)/submissions",
+            method: .get,
+            parameters: params,
+            encoding: URLEncoding.default,
+            headers: headers
+        ).responseSwiftyJSON { response in
             var error = response.result.error
             var json: JSON = [:]
             if response.result.value == nil {
@@ -58,7 +73,7 @@ final class SubmissionsAPI: APIEndpoint {
                 errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
                 return
             }
-        })
+        }
     }
 
     @discardableResult

@@ -27,6 +27,7 @@ final class DiscussionsAssembly: Assembly {
             ),
             commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI()),
             votesNetworkService: VotesNetworkService(votesAPI: VotesAPI()),
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
             stepsPersistenceService: StepsPersistenceService()
         )
         let presenter = DiscussionsPresenter()

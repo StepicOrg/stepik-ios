@@ -113,9 +113,9 @@ final class DiscussionsSolutionControl: UIControl {
         var icon: UIImage? {
             switch self {
             case .correct:
-                return UIImage(named: "quiz-feedback-correct")
+                return UIImage(named: "quiz-mark-correct")
             case .wrong:
-                return UIImage(named: "quiz-feedback-wrong")
+                return UIImage(named: "quiz-mark-wrong")
             }
         }
     }

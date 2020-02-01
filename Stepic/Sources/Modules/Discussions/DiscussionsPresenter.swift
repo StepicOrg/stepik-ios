@@ -159,7 +159,11 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     func presentSolution(response: Discussions.SolutionPresentation.Response) {
         self.viewController?.displaySolution(
-            viewModel: .init(stepID: response.stepID, submissionID: response.submission.id)
+            viewModel: .init(
+                stepID: response.stepID,
+                submission: response.submission,
+                discussionID: response.discussionID
+            )
         )
     }
 

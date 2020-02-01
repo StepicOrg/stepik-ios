@@ -14,7 +14,12 @@ import SwiftyJSON
 final class CommentsAPI: APIEndpoint {
     override var name: String { "comments" }
 
-    func retrieve(ids: [Comment.IdType]) -> Promise<[Comment]> {
+    /// Get comments by ids.
+    ///
+    /// - Parameter ids: The identifiers array of the comments to fetch.
+    /// - Parameter blockName: The name of the step's block (see Block.BlockType) for parsing reply and dataset.
+    /// - Returns: A promise with an array comments.
+    func retrieve(ids: [Comment.IdType], blockName: String?) -> Promise<[Comment]> {
         Promise { seal in
             self.retrieve.request(
                 requestEndpoint: self.name,
@@ -35,11 +40,19 @@ final class CommentsAPI: APIEndpoint {
                     voteByID[vote.id] = vote
                 }
 
-                let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map { Attempt(json: $0) }
+                let isBlockNameProvided = !(blockName?.isEmpty ?? true)
+
+                let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map {
+                    isBlockNameProvided
+                        ? Attempt(json: $0, stepName: blockName ?? "")
+                        : Attempt(json: $0)
+                }
 
                 var submissionByID = [Submission.IdType: Submission]()
                 json[Comment.JSONKey.submissions.rawValue].arrayValue.forEach {
-                    let submission = Submission(json: $0)
+                    let submission = isBlockNameProvided
+                        ? Submission(json: $0, stepName: blockName ?? "")
+                        : Submission(json: $0)
 
                     if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
                         submission.attempt = attempt

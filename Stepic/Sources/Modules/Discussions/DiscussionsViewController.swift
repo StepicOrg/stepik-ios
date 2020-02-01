@@ -87,8 +87,6 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.styledNavigationController?.removeBackButtonTitleForTopController()
         self.styledNavigationController?.changeShadowViewAlpha(1.0, sender: self)
     }
 
@@ -316,7 +314,11 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     }
 
     func displaySolution(viewModel: Discussions.SolutionPresentation.ViewModel) {
-        let assembly = SolutionAssembly(stepID: viewModel.stepID, submissionID: viewModel.submissionID)
+        let assembly = SolutionAssembly(
+            stepID: viewModel.stepID,
+            submission: viewModel.submission,
+            discussionID: viewModel.discussionID
+        )
         self.push(module: assembly.makeModule())
     }
 
