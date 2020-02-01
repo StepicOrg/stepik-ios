@@ -1,24 +1,39 @@
-//
-//  SQLReply.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17.11.2017.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
 import Foundation
 import SwiftyJSON
 
-final class SQLReply: Reply {
+final class SQLReply: Reply, CustomStringConvertible {
     var code: String
+
+    var dictValue: [String: Any] {
+        [JSONKey.solveSQL.rawValue: self.code]
+    }
+
+    var description: String {
+        "SQLReply(solve_sql: \(self.code))"
+    }
 
     init(code: String) {
         self.code = code
     }
 
     required init(json: JSON) {
-        code = json["solve_sql"].stringValue
+        self.code = json[JSONKey.solveSQL.rawValue].stringValue
     }
 
-    var dictValue: [String: Any] { ["solve_sql": code] }
+    enum JSONKey: String {
+        case solveSQL = "solve_sql"
+    }
+}
+
+extension SQLReply: Hashable {
+    static func == (lhs: SQLReply, rhs: SQLReply) -> Bool {
+        if lhs === rhs { return true }
+        if type(of: lhs) != type(of: rhs) { return false }
+        if lhs.code != rhs.code { return false }
+        return true
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.code)
+    }
 }

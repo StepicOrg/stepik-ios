@@ -24,19 +24,15 @@ final class Submission: JSONSerializable {
 
     var json: JSON {
         [
-            "attempt": attemptID,
-            "reply": reply?.dictValue ?? ""
+            JSONKey.attempt.rawValue: attemptID,
+            JSONKey.reply.rawValue: reply?.dictValue ?? ""
         ]
     }
 
     init(json: JSON, stepName: String) {
-        self.id = json[JSONKey.id.rawValue].intValue
-        self.status = json[JSONKey.status.rawValue].string
-        self.hint = json[JSONKey.hint.rawValue].string
-        self.attemptID = json[JSONKey.attempt.rawValue].intValue
+        self.update(json: json)
         self.reply = nil
         self.reply = self.getReplyFromJSON(json[JSONKey.reply.rawValue], stepName: stepName)
-        self.feedback = SubmissionFeedback(json: json[JSONKey.feedback.rawValue])
     }
 
     init(attempt: Int, reply: Reply) {
@@ -51,9 +47,9 @@ final class Submission: JSONSerializable {
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
         self.status = json[JSONKey.status.rawValue].string
-        self.attemptID = json[JSONKey.attempt.rawValue].intValue
         self.hint = json[JSONKey.hint.rawValue].string
         self.feedback = SubmissionFeedback(json: json[JSONKey.feedback.rawValue])
+        self.attemptID = json[JSONKey.attempt.rawValue].intValue        
     }
 
     func initReply(json: JSON, stepName: String) {
@@ -89,7 +85,7 @@ final class Submission: JSONSerializable {
         }
     }
 
-    // MARK: Inner Types
+    // MARK: Types
 
     enum JSONKey: String {
         case id
@@ -116,11 +112,16 @@ extension Submission: CustomDebugStringConvertible {
 }
 
 enum SubmissionFeedback {
+    case text(_ string: String)
     case options(_ choices: [String])
 
     init?(json: JSON) {
         if let options = json["options_feedback"].arrayObject as? [String] {
             self = .options(options)
+            return
+        }
+        if let stringValue = json.string {
+            self = .text(stringValue)
             return
         }
         return nil

@@ -1,24 +1,39 @@
-//
-//  MatchingReply.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 16.01.17.
-//  Copyright © 2017 Alex Karpov. All rights reserved.
-//
-
+import Foundation
 import SwiftyJSON
-import UIKit
 
 final class MatchingReply: Reply {
     var ordering: [Int]
+
+    var dictValue: [String: Any] {
+        [JSONKey.ordering.rawValue: self.ordering]
+    }
+
+    var description: String {
+        "MatchingReply(ordering: \(self.ordering))"
+    }
 
     init(ordering: [Int]) {
         self.ordering = ordering
     }
 
     required init(json: JSON) {
-        ordering = json["ordering"].arrayValue.map({ $0.intValue })
+        self.ordering = json[JSONKey.ordering.rawValue].arrayValue.map { $0.intValue }
     }
 
-    var dictValue: [String: Any] { ["ordering": ordering] }
+    enum JSONKey: String {
+        case ordering
+    }
+}
+
+extension MatchingReply: Hashable {
+    static func == (lhs: MatchingReply, rhs: MatchingReply) -> Bool {
+        if lhs === rhs { return true }
+        if type(of: lhs) != type(of: rhs) { return false }
+        if lhs.ordering != rhs.ordering { return false }
+        return true
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.ordering)
+    }
 }

@@ -1,25 +1,39 @@
-//
-//  NumberReply.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 26.01.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
-//
-
+import Foundation
 import SwiftyJSON
-import UIKit
 
-final class NumberReply: NSObject, Reply {
+final class NumberReply: Reply {
     var number: String
+
+    var dictValue: [String: Any] {
+        [JSONKey.number.rawValue: self.number]
+    }
+
+    var description: String {
+        "NumberReply(number: \(self.number))"
+    }
 
     init(number: String) {
         self.number = number
     }
 
     required init(json: JSON) {
-        number = json["number"].stringValue
-        super.init()
+        self.number = json[JSONKey.number.rawValue].stringValue
     }
 
-    var dictValue: [String: Any] { ["number": number] }
+    enum JSONKey: String {
+        case number
+    }
+}
+
+extension NumberReply: Hashable {
+    static func == (lhs: NumberReply, rhs: NumberReply) -> Bool {
+        if lhs === rhs { return true }
+        if type(of: lhs) != type(of: rhs) { return false }
+        if lhs.number != rhs.number { return false }
+        return true
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.number)
+    }
 }
