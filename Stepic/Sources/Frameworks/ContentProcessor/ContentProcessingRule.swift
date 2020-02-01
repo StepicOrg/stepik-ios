@@ -50,7 +50,7 @@ final class AddStepikSiteForRelativeURLsRule: BaseHTMLExtractionRule {
             return link
         }
 
-        return "\(StepikApplicationsInfo.stepicURL)\(link)"
+        return "\(StepikApplicationsInfo.stepikURL)\(link)"
     }
 }
 

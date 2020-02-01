@@ -49,7 +49,7 @@ struct StepikApplicationsInfo {
     static let urlScheme = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.URL.scheme) as? String ?? ""
     static let apiURL = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.URL.api) as? String ?? ""
     static let oauthURL = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.URL.oauth) as? String ?? ""
-    static let stepicURL = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.URL.stepik) as? String ?? ""
+    static let stepikURL = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.URL.stepik) as? String ?? ""
     static let versionInfoURL = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.URL.version) as? String ?? ""
     static let adaptiveRatingURL = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.URL.adaptiveRating) as? String ?? ""
 

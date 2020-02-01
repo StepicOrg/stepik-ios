@@ -52,7 +52,7 @@ final class NotificationDataExtractor {
         }
 
         if let commentsLink = HTMLParsingUtil.getLink(self.text, index: 2) {
-            let urlString = StepikApplicationsInfo.stepicURL + commentsLink
+            let urlString = StepikApplicationsInfo.stepikURL + commentsLink
             return URL(string: urlString)
         } else {
             return nil

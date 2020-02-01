@@ -23,7 +23,7 @@ final class Session {
 
     static func refresh(completion: @escaping (() -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
         print("refreshing session")
-        let stepicURLString = StepikApplicationsInfo.stepicURL
+        let stepicURLString = StepikApplicationsInfo.stepikURL
         let stepicURL = URL(string: stepicURLString)!
         delete()
 
@@ -53,7 +53,7 @@ final class Session {
                 if let csrftoken = cookieDict["\(StepikApplicationsInfo.cookiePrefix)csrftoken"],
                     let sessionId = cookieDict["\(StepikApplicationsInfo.cookiePrefix)sessionid"] {
                     Session.cookieHeaders = [
-                        "Referer": "\(StepikApplicationsInfo.stepicURL)/",
+                        "Referer": "\(StepikApplicationsInfo.stepikURL)/",
                         "X-CSRFToken": csrftoken,
                         "Cookie": "csrftoken=\(csrftoken); sessionid=\(sessionId)"
                     ]

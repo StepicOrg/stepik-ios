@@ -28,7 +28,7 @@ final class QuizPresenter {
     }
 
     var stepUrl: String {
-        "\(StepikApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+        "\(StepikApplicationsInfo.stepikURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
     }
 
     init(
