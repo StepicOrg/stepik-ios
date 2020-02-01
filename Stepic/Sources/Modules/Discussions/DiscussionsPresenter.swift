@@ -15,6 +15,7 @@ protocol DiscussionsPresenterProtocol {
     func presentCommentAbuse(response: Discussions.CommentAbuse.Response)
     func presentSortTypes(response: Discussions.SortTypesPresentation.Response)
     func presentSortTypeUpdate(response: Discussions.SortTypeUpdate.Response)
+    func presentSolution(response: Discussions.SolutionPresentation.Response)
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response)
 }
 
@@ -154,6 +155,12 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
 
     func presentSortTypeUpdate(response: Discussions.SortTypeUpdate.Response) {
         self.viewController?.displaySortTypeUpdate(viewModel: .init(data: self.makeDiscussionsData(response.result)))
+    }
+
+    func presentSolution(response: Discussions.SolutionPresentation.Response) {
+        self.viewController?.displaySolution(
+            viewModel: .init(stepID: response.stepID, submissionID: response.submission.id)
+        )
     }
 
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response) {

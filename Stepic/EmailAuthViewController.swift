@@ -135,7 +135,7 @@ final class EmailAuthViewController: UIViewController {
     }
 
     @IBAction func onRemindPasswordClick(_ sender: Any) {
-        WebControllerManager.sharedManager.presentWebControllerWithURLString("\(StepicApplicationsInfo.stepicURL)/accounts/password/reset/", inController: self, withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.done)
+        WebControllerManager.sharedManager.presentWebControllerWithURLString("\(StepikApplicationsInfo.stepicURL)/accounts/password/reset/", inController: self, withKey: "reset password", allowsSafari: true, backButtonStyle: BackButtonStyle.done)
     }
 
     override func viewDidLoad() {

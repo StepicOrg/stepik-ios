@@ -11,7 +11,7 @@ protocol BaseQuizViewDelegate: AnyObject {
 
 extension BaseQuizView {
     struct Appearance {
-        let submitButtonBackgroundColor = UIColor.stepicGreen
+        let submitButtonBackgroundColor = UIColor.stepikGreen
         let submitButtonHeight: CGFloat = 44
         let submitButtonTextColor = UIColor.white
         let submitButtonCornerRadius: CGFloat = 6

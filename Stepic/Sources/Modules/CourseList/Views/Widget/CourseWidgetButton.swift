@@ -9,8 +9,8 @@ extension CourseWidgetButton {
         var textColor = UIColor.mainText
         var backgroundColor = UIColor(hex: 0x535366, alpha: 0.06)
 
-        var callToActionTextColor = UIColor.stepicGreen
-        var callToActionBackgroundColor = UIColor.stepicGreen.withAlphaComponent(0.1)
+        var callToActionTextColor = UIColor.stepikGreen
+        var callToActionBackgroundColor = UIColor.stepikGreen.withAlphaComponent(0.1)
     }
 }
 

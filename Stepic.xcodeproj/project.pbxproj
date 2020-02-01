@@ -100,7 +100,7 @@
 		083AE48120BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */; };
 		083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083AE48220BD72CA00102FE4 /* PersonalDeadlinesService.swift */; };
 		083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B164C1C2AF27700250B37 /* JSQWebViewController.swift */; };
-		083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */; };
+		083D649C1C172015003222F0 /* StepikApplicationsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D649B1C172015003222F0 /* StepikApplicationsInfo.swift */; };
 		083D64AF1C19BDB2003222F0 /* ControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */; };
 		083E1DA61C96E9F100B305E4 /* ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */; };
 		083E49DD2072B684004896C0 /* IDFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E49DC2072B684004896C0 /* IDFetchable.swift */; };
@@ -872,6 +872,7 @@
 		62E987F6149525BC5F7CFDE7 /* CourseListColorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986C27C3371C7E8B38566 /* CourseListColorMode.swift */; };
 		62E987F624FBDAB64FB38E5A /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986DA4B69983947DA9687 /* ExploreViewController.swift */; };
 		62E9881CB604CB84623EFF03 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E983D4436B935F9B27AF98 /* TagsView.swift */; };
+		62E9882879C618BA36F5A1C9 /* DiscussionsSolutionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9824274BDDA2082AA6570 /* DiscussionsSolutionControl.swift */; };
 		62E98844F3BEE9CC807B462B /* CourseListPersistenceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98B46D64F254F0A835EEB /* CourseListPersistenceStorage.swift */; };
 		62E9884EE92275DE964EFB37 /* CourseInfoDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E982F96FE46CDC2F032E31 /* CourseInfoDataFlow.swift */; };
 		62E9886837CEF83D626D9536 /* StreakActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E986D38DE1E4890415F9F7 /* StreakActivityView.swift */; };
@@ -1216,7 +1217,7 @@
 		083AE48220BD72CA00102FE4 /* PersonalDeadlinesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDeadlinesService.swift; sourceTree = "<group>"; };
 		083B164C1C2AF27700250B37 /* JSQWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQWebViewController.swift; sourceTree = "<group>"; };
 		083C20BC1CB2998900C9966E /* Model_v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_v3.xcdatamodel; sourceTree = "<group>"; };
-		083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicApplicationsInfo.swift; sourceTree = "<group>"; };
+		083D649B1C172015003222F0 /* StepikApplicationsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikApplicationsInfo.swift; sourceTree = "<group>"; };
 		083D64AE1C19BDB2003222F0 /* ControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerHelper.swift; sourceTree = "<group>"; };
 		083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationInfo.swift; sourceTree = "<group>"; };
 		083E49DC2072B684004896C0 /* IDFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFetchable.swift; sourceTree = "<group>"; };
@@ -1945,6 +1946,7 @@
 		62E98202B63DCB3B6908745E /* CourseInfoTabSyllabusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusViewController.swift; sourceTree = "<group>"; };
 		62E9821FBC36908E1F53173E /* NewCodeQuizViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCodeQuizViewModel.swift; sourceTree = "<group>"; };
 		62E9823CEE80A194D6C304F4 /* CourseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListViewController.swift; sourceTree = "<group>"; };
+		62E9824274BDDA2082AA6570 /* DiscussionsSolutionControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionsSolutionControl.swift; sourceTree = "<group>"; };
 		62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentLanguageService.swift; sourceTree = "<group>"; };
 		62E9826CE6F076640792E2C0 /* CourseInfoTabSyllabusTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusTableViewDataSource.swift; sourceTree = "<group>"; };
 		62E98270EC373087E18B51FE /* CourseInfoTabSyllabusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabSyllabusTableViewCell.swift; sourceTree = "<group>"; };
@@ -3783,6 +3785,7 @@
 		2C3A24552359DA9200E2405F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				62E9824274BDDA2082AA6570 /* DiscussionsSolutionControl.swift */,
 				2C9E78B22374211B00880459 /* DiscussionsTableViewDataSource.swift */,
 				2C9E78B4237423CA00880459 /* DiscussionsView.swift */,
 				2C3A2459235A1ACA00E2405F /* Cell */,
@@ -3989,7 +3992,7 @@
 			isa = PBXGroup;
 			children = (
 				083E1DA51C96E9F100B305E4 /* ApplicationInfo.swift */,
-				083D649B1C172015003222F0 /* StepicApplicationsInfo.swift */,
+				083D649B1C172015003222F0 /* StepikApplicationsInfo.swift */,
 			);
 			name = ApplicationInfo;
 			sourceTree = "<group>";
@@ -5136,10 +5139,10 @@
 			isa = PBXGroup;
 			children = (
 				2C7F641D23B12208006C7648 /* AutoplayStorageManager.swift */,
+				62E981C57D5BCF81714F344C /* DiscussionsSortTypeStorageManager.swift */,
 				2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */,
 				62E9881CFD7892350EA31213 /* TooltipStorageManager.swift */,
 				2C8F3ADE23CCAB88004D113A /* Video */,
-				62E981C57D5BCF81714F344C /* DiscussionsSortTypeStorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -6502,7 +6505,7 @@
 				2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */,
 				2CC3519D1F683E7C004255B6 /* AuthNavigationViewController.swift in Sources */,
 				081D741A211DB4930086F6F8 /* OpenedStoriesPresenter.swift in Sources */,
-				083D649C1C172015003222F0 /* StepicApplicationsInfo.swift in Sources */,
+				083D649C1C172015003222F0 /* StepikApplicationsInfo.swift in Sources */,
 				0800B8221D07029B006C987E /* CommentsAPI.swift in Sources */,
 				2C23C5E41F6BF52700FC2B7C /* AuthButton.swift in Sources */,
 				0819856C20BF273800897BBA /* PersonalDeadlineTableViewCell.swift in Sources */,
@@ -7341,6 +7344,7 @@
 				6DB937552C1A7809BBB08CA3 /* SolutionView.swift in Sources */,
 				62E98FF5201E3C988EB0FA7F /* SolutionViewModel.swift in Sources */,
 				62E9814EEFA8DC1D8D59C63C /* DiscussionsSortTypeStorageManager.swift in Sources */,
+				62E9882879C618BA36F5A1C9 /* DiscussionsSolutionControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

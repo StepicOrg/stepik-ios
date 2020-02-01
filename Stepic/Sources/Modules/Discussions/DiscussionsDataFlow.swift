@@ -202,6 +202,23 @@ enum Discussions {
         }
     }
 
+    /// Present solution (submission)
+    enum SolutionPresentation {
+        struct Request {
+            let commentID: Comment.IdType
+        }
+
+        struct Response {
+            let stepID: Step.IdType
+            let submission: Submission
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let submissionID: Submission.IdType
+        }
+    }
+
     // MARK: - Sort type
 
     /// Presents action sheet with available and current sort type (after sort type bar button item click)

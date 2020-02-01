@@ -19,7 +19,7 @@ final class DeleteRequestMaker {
         Promise { seal in
             checkToken().done {
                 manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(deletingId)",
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)/\(deletingId)",
                     method: .delete,
                     encoding: JSONEncoding.default
                 ).validate().responseSwiftyJSON { response in

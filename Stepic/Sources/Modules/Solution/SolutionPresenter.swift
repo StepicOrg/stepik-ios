@@ -105,7 +105,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
 
     // TODO: Format https://stepik.org/lesson/290850/step/1?discussion=1387392&thread=solutions&unit=272337
     private func makeURL(for step: Step) -> URL? {
-        let link = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+        let link = "\(StepikApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
         return URL(string: link)
     }
 }

@@ -14,6 +14,7 @@ protocol DiscussionsViewControllerProtocol: AnyObject {
     func displayCommentDelete(viewModel: Discussions.CommentDelete.ViewModel)
     func displayCommentLike(viewModel: Discussions.CommentLike.ViewModel)
     func displayCommentAbuse(viewModel: Discussions.CommentAbuse.ViewModel)
+    func displaySolution(viewModel: Discussions.SolutionPresentation.ViewModel)
     func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel)
     func displaySortTypeUpdate(viewModel: Discussions.SortTypeUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel)
@@ -314,6 +315,11 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
+    func displaySolution(viewModel: Discussions.SolutionPresentation.ViewModel) {
+        let assembly = SolutionAssembly(stepID: viewModel.stepID, submissionID: viewModel.submissionID)
+        self.push(module: assembly.makeModule())
+    }
+
     func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
 
@@ -402,6 +408,13 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
     ) {
         let assembly = ProfileAssembly(userID: comment.userID)
         self.push(module: assembly.makeModule())
+    }
+
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectSolution comment: DiscussionsCommentViewModel
+    ) {
+        self.interactor.doSolutionPresentation(request: .init(commentID: comment.id))
     }
 
     func discussionsTableViewDataSource(

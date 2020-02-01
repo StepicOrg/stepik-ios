@@ -9,7 +9,7 @@ protocol NetworkReachabilityServiceProtocol: AnyObject {
 final class NetworkReachabilityService: NetworkReachabilityServiceProtocol {
     private lazy var reachabilityManager: Alamofire.NetworkReachabilityManager? = {
         let reachabilityManager = Alamofire.NetworkReachabilityManager(
-            host: StepicApplicationsInfo.stepicURL
+            host: StepikApplicationsInfo.stepicURL
         )
         return reachabilityManager
     }()

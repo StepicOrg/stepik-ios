@@ -25,7 +25,7 @@ extension CourseInfoTabSyllabusCellView {
         let statsViewHeight: CGFloat = 17.0
 
         let progressViewHeight: CGFloat = 3
-        let progressViewMainColor = UIColor.stepicGreen
+        let progressViewMainColor = UIColor.stepikGreen
         let progressViewSecondaryColor = UIColor.clear
 
         let tapProxyViewSize = CGSize(width: 60, height: 60)

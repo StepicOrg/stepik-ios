@@ -1,6 +1,8 @@
 import SnapKit
 import UIKit
 
+// swiftlint:disable file_length
+
 // MARK: Appearance -
 
 extension DiscussionsCellView {
@@ -14,7 +16,7 @@ extension DiscussionsCellView {
         let badgeCornerRadius: CGFloat = 10
 
         let badgeUserRoleWidthDelta: CGFloat = 16
-        let badgeUserRoleBackgroundColor = UIColor.stepicGreen
+        let badgeUserRoleBackgroundColor = UIColor.stepikGreen
 
         let badgeIsPinnedBackgroundColor = UIColor(hex: 0x6C7BDF)
         let badgeIsPinnedImageSize = CGSize(width: 10, height: 10)
@@ -35,6 +37,9 @@ extension DiscussionsCellView {
         let textContentTextLabelFontSize: CGFloat = 14
         let textContentTextLabelFont = UIFont.systemFont(ofSize: 14)
         let textContentTextLabelTextColor = UIColor.mainDark
+
+        let solutionControlHeight = DiscussionsSolutionControl.Appearance.height
+        let solutionControlInsets = LayoutInsets(top: 8)
 
         let bottomControlsSpacing: CGFloat = 16
         let bottomControlsSubgroupSpacing: CGFloat = 8
@@ -72,7 +77,7 @@ final class DiscussionsCellView: UIView {
     private lazy var avatarOverlayButton: UIButton = {
         let button = HighlightFakeButton()
         button.highlightedBackgroundColor = UIColor.white.withAlphaComponent(0.5)
-        button.addTarget(self, action: #selector(self.avatarOverlayButtonClicked), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.avatarButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -156,11 +161,29 @@ final class DiscussionsCellView: UIView {
     }()
 
     private lazy var textContentStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.textContentWebBasedTextView, self.textContentTextLabel])
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                self.textContentWebBasedTextView,
+                self.textContentTextLabel,
+                self.solutionContainerView
+            ]
+        )
         stackView.axis = .vertical
         stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         stackView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return stackView
+    }()
+
+    private lazy var solutionControl: DiscussionsSolutionControl = {
+        let control = DiscussionsSolutionControl()
+        control.addTarget(self, action: #selector(self.solutionControlClicked), for: .touchUpInside)
+        return control
+    }()
+
+    private lazy var solutionContainerView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
     }()
 
     private lazy var dateLabel: UILabel = {
@@ -177,7 +200,7 @@ final class DiscussionsCellView: UIView {
         button.titleLabel?.font = self.appearance.replyButtonFont
         button.setTitleColor(self.appearance.replyButtonTextColor, for: .normal)
         button.setTitle(NSLocalizedString("Reply", comment: ""), for: .normal)
-        button.addTarget(self, action: #selector(self.replyDidClick), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.replyButtonClicked), for: .touchUpInside)
         return button
     }()
 
@@ -189,7 +212,7 @@ final class DiscussionsCellView: UIView {
         imageButton.title = "0"
         imageButton.image = UIImage(named: "discussions-thumb-up")?.withRenderingMode(.alwaysTemplate)
         imageButton.titleInsets = self.appearance.voteLikeButtonTitleInsets
-        imageButton.addTarget(self, action: #selector(self.likeDidClick), for: .touchUpInside)
+        imageButton.addTarget(self, action: #selector(self.likeImageButtonClicked), for: .touchUpInside)
         return imageButton
     }()
 
@@ -201,7 +224,7 @@ final class DiscussionsCellView: UIView {
         imageButton.title = "0"
         imageButton.image = UIImage(named: "discussions-thumb-down")?.withRenderingMode(.alwaysTemplate)
         imageButton.titleInsets = self.appearance.voteDislikeButtonTitleInsets
-        imageButton.addTarget(self, action: #selector(self.dislikeDidClick), for: .touchUpInside)
+        imageButton.addTarget(self, action: #selector(self.dislikeImageButtonClicked), for: .touchUpInside)
         return imageButton
     }()
 
@@ -247,6 +270,7 @@ final class DiscussionsCellView: UIView {
     var onLinkClick: ((URL) -> Void)?
     var onImageClick: ((URL) -> Void)?
     var onTextContentClick: (() -> Void)?
+    var onSolutionClick: (() -> Void)?
     // Content height updates callbacks
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: (() -> Void)?
@@ -287,16 +311,32 @@ final class DiscussionsCellView: UIView {
         if let url = viewModel.avatarImageURL {
             self.avatarImageView.set(with: url)
         }
+
+        if let solution = viewModel.solution {
+            self.solutionControl.update(
+                state: solution.isCorrect ? .correct : .wrong,
+                title: solution.title
+            )
+            self.solutionContainerView.isHidden = false
+        } else {
+            self.solutionContainerView.isHidden = true
+        }
     }
 
     func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {
         let userInfoHeight = (self.isBadgesHidden ? 0 : self.appearance.badgesStackViewHeight)
             + (self.isBadgesHidden ? 0 : self.appearance.nameLabelInsets.top)
             + self.appearance.nameLabelHeight
+
+        let solutionHeight = self.solutionContainerView.isHidden
+            ? 0
+            : self.appearance.solutionControlInsets.top + self.appearance.solutionControlHeight
+
         return self.appearance.avatarImageViewInsets.top
             + userInfoHeight
             + self.appearance.textContentContainerViewInsets.top
             + self.getTextContentHeight(maxPreferredWidth: maxPreferredWidth)
+            + solutionHeight
             + self.appearance.bottomControlsInsets.top
             + self.appearance.bottomControlsHeight
             + self.appearance.bottomControlsInsets.bottom
@@ -403,23 +443,28 @@ final class DiscussionsCellView: UIView {
     // MARK: Actions
 
     @objc
-    private func replyDidClick() {
+    private func replyButtonClicked() {
         self.onReplyClick?()
     }
 
     @objc
-    private func likeDidClick() {
+    private func likeImageButtonClicked() {
         self.onLikeClick?()
     }
 
     @objc
-    private func dislikeDidClick() {
+    private func dislikeImageButtonClicked() {
         self.onDislikeClick?()
     }
 
     @objc
-    private func avatarOverlayButtonClicked() {
+    private func avatarButtonClicked() {
         self.onAvatarClick?()
+    }
+
+    @objc
+    private func solutionControlClicked() {
+        self.onSolutionClick?()
     }
 
     @objc
@@ -438,7 +483,7 @@ final class DiscussionsCellView: UIView {
         self.pendingTextViewClickWorkItem = workItem
 
         DispatchQueue.main.asyncAfter(
-            deadline: .now() + DiscussionsCellView.processedContentTextViewClickDelay,
+            deadline: .now() + Self.processedContentTextViewClickDelay,
             execute: workItem
         )
     }
@@ -453,6 +498,7 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
         self.addSubview(self.badgesStackView)
         self.addSubview(self.nameLabel)
         self.addSubview(self.textContentStackView)
+        self.solutionContainerView.addSubview(self.solutionControl)
         self.addSubview(self.bottomControlsStackView)
     }
 
@@ -495,6 +541,13 @@ extension DiscussionsCellView: ProgrammaticallyInitializableViewProtocol {
             make.bottom
                 .equalTo(self.bottomControlsStackView.snp.top)
                 .offset(-self.appearance.textContentContainerViewInsets.bottom)
+        }
+
+        self.solutionControl.translatesAutoresizingMaskIntoConstraints = false
+        self.solutionControl.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(self.appearance.solutionControlInsets.top)
+            make.leading.bottom.trailing.equalToSuperview()
+            make.height.equalTo(self.appearance.solutionControlHeight)
         }
 
         self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -552,7 +605,7 @@ extension DiscussionsCellView: ProcessedContentTextViewDelegate {
     }
 
     private func asyncResetClickOnLinkOrImage() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + DiscussionsCellView.resetClickOnLinkOrImageDelay) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.resetClickOnLinkOrImageDelay) {
             self.didClickOnLinkOrImage = false
         }
     }

@@ -15,24 +15,24 @@ enum SocialProvider: Int {
         switch self {
         case .vk:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "vk"),
-                                 registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
+                                 registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
                                  socialSDKProvider: VKSocialSDKProvider.instance)
         case .google:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "google"),
-                                 registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+                                 registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
         case .facebook:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "fb"),
-                                 registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
+                                 registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
                                  socialSDKProvider: FBSocialSDKProvider.instance)
         case .twitter:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "twitter"),
-                                 registerURL: URL(string: "https://stepik.org/accounts/twitter/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+                                 registerURL: URL(string: "https://stepik.org/accounts/twitter/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
         case .gitHub:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "github"),
-                                 registerURL: URL(string: "https://stepik.org/accounts/github/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+                                 registerURL: URL(string: "https://stepik.org/accounts/github/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
         case .itMailRu:
             return SocialProviderInfo(name: self.name, amplitudeName: self.amplitudeName, image: #imageLiteral(resourceName: "mail"),
-                                 registerURL: URL(string: "https://stepik.org/accounts/itmailru/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepicApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
+                                 registerURL: URL(string: "https://stepik.org/accounts/itmailru/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!)
         }
     }
 

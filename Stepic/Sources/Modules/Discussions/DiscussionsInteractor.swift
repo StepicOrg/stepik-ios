@@ -14,6 +14,7 @@ protocol DiscussionsInteractorProtocol {
     func doCommentAbuse(request: Discussions.CommentAbuse.Request)
     func doSortTypesPresentation(request: Discussions.SortTypesPresentation.Request)
     func doSortTypeUpdate(request: Discussions.SortTypeUpdate.Request)
+    func doSolutionPresentation(request: Discussions.SolutionPresentation.Request)
 }
 
 final class DiscussionsInteractor: DiscussionsInteractorProtocol {
@@ -384,6 +385,24 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
         self.currentSortType = selectedSortType
         self.presenter.presentSortTypeUpdate(response: .init(result: self.makeDiscussionsData()))
+    }
+
+    // MARK: Solution
+
+    func doSolutionPresentation(request: Discussions.SolutionPresentation.Request) {
+        guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
+            return Self.logger.error(
+                "discussions interactor: unable present solution, can't find comment with id: \(request.commentID)"
+            )
+        }
+
+        guard let submission = comment.submission else {
+            return Self.logger.error(
+                "discussions interactor: unable present solution, comment doesn't has submission: \(request.commentID)"
+            )
+        }
+
+        self.presenter.presentSolution(response: .init(stepID: self.stepID, submission: submission))
     }
 
     // MARK: - Private API

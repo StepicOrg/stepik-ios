@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AmplitudeAnalyticsEvents.Launch.firstTime.send()
         }
 
-        if StepicApplicationsInfo.inAppUpdatesAvailable {
+        if StepikApplicationsInfo.inAppUpdatesAvailable {
             self.checkForUpdates()
         }
 
@@ -240,8 +240,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ApplicationDelegate.shared.application(app, open: url, options: options) {
             return true
         }
-        if url.scheme == "vk\(StepicApplicationsInfo.SocialInfo.AppIds.vk)"
-               || url.scheme == "fb\(StepicApplicationsInfo.SocialInfo.AppIds.facebook)" {
+        if url.scheme == "vk\(StepikApplicationsInfo.SocialInfo.AppIds.vk)"
+               || url.scheme == "fb\(StepikApplicationsInfo.SocialInfo.AppIds.facebook)" {
             return true
         }
 

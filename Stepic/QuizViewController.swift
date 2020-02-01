@@ -300,7 +300,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             break
         }
 
-        self.sendButton.backgroundColor = UIColor.stepicGreen
+        self.sendButton.backgroundColor = UIColor.stepikGreen
         self.sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         self.sendButton.layer.cornerRadius = 6
         self.sendButtonLeadingConstraint.constant = -16

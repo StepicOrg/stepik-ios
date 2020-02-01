@@ -32,7 +32,7 @@ final class DevicesAPI: APIEndpoint {
     func retrieve(deviceId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         Promise { seal in
             self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)",
+                "\(StepikApplicationsInfo.apiURL)/\(self.name)/\(deviceId)",
                 parameters: [:],
                 headers: headers
             ).responseSwiftyJSON { response in
@@ -70,7 +70,7 @@ final class DevicesAPI: APIEndpoint {
             ]
 
             self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(self.name)/\(deviceId)",
+                "\(StepikApplicationsInfo.apiURL)/\(self.name)/\(deviceId)",
                 method: .put,
                 parameters: params,
                 encoding: JSONEncoding.default,
@@ -102,7 +102,7 @@ final class DevicesAPI: APIEndpoint {
         let params = ["device": device.json]
 
         return Promise { seal in
-            manager.request("\(StepicApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepikApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(error)
@@ -127,7 +127,7 @@ final class DevicesAPI: APIEndpoint {
     func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer) -> Promise<Void> {
         Promise { seal in
             self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/devices/\(deviceId)",
+                "\(StepikApplicationsInfo.apiURL)/devices/\(deviceId)",
                 method: .delete,
                 headers: headers
             ).responseSwiftyJSON { response in
@@ -158,7 +158,7 @@ final class DevicesAPI: APIEndpoint {
     ) -> Promise<(Meta, [Device])> {
         Promise { seal in
             self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(self.name)",
+                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
                 parameters: params,
                 headers: headers
             ).responseSwiftyJSON { response in

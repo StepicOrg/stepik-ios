@@ -1,7 +1,7 @@
 import UIKit
 
 final class StyledTabBarViewController: UITabBarController {
-    private let items = StepicApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
+    private let items = StepikApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
     private var notificationsBadgeNumber: Int {
         get {

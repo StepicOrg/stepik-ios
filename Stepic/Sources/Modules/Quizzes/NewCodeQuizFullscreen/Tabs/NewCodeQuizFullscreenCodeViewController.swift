@@ -15,7 +15,7 @@ protocol NewCodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
 
 extension NewCodeQuizFullscreenCodeViewController {
     enum Appearance {
-        static let submitButtonBackgroundColor = UIColor.stepicGreen
+        static let submitButtonBackgroundColor = UIColor.stepikGreen
         static let submitButtonHeight: CGFloat = 44
         static let submitButtonTextColor = UIColor.white
         static let submitButtonCornerRadius: CGFloat = 6

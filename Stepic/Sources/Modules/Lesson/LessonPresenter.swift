@@ -130,7 +130,7 @@ final class LessonPresenter: LessonPresenterProtocol {
             lessonTitle: lessonTitle,
             steps: steps,
             stepLinkMaker: {
-                "\(StepicApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
+                "\(StepikApplicationsInfo.stepicURL)/lesson/\(lesson.id)/step/\($0)?from_mobile_app=true"
             },
             startStepIndex: startStepIndex
         )

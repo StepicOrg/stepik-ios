@@ -102,7 +102,7 @@ final class NotificationsRegistrationService: NotificationsRegistrationServicePr
             self.fetchFirebaseAppInstanceID()
         }
 
-        guard StepicApplicationsInfo.shouldRegisterNotifications else {
+        guard StepikApplicationsInfo.shouldRegisterNotifications else {
             return
         }
 

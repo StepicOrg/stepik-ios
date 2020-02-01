@@ -46,7 +46,7 @@ final class NotificationsAPI: APIEndpoint {
         Promise { seal in
             checkToken().done {
                 self.manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(self.name)/mark-as-read",
+                    "\(StepikApplicationsInfo.apiURL)/\(self.name)/mark-as-read",
                     method: .post,
                     parameters: nil,
                     encoding: JSONEncoding.default,

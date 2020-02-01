@@ -175,7 +175,7 @@ final class StepPresenter: StepPresenterProtocol {
             }()
 
             let discussionsLabelTitle = self.makeDiscussionsButtonTitle(step: step)
-            let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+            let urlPath = "\(StepikApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
 
             let viewModel = StepViewModel(
                 content: contentType,

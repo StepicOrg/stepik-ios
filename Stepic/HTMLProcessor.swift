@@ -158,7 +158,7 @@ final class HTMLProcessor {
 
     static func addStepikURLIfNeeded(url: String) -> String {
         if url.first == Character("/") {
-            return "\(StepicApplicationsInfo.stepicURL)/\(url)"
+            return "\(StepikApplicationsInfo.stepicURL)/\(url)"
         } else {
             return url
         }

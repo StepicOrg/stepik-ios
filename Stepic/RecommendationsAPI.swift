@@ -24,7 +24,7 @@ final class RecommendationsAPI: APIEndpoint {
     ) -> Promise<[Int]> {
         Promise { seal in
             self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(self.name)",
+                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
                 parameters: [
                     "course": courseId,
                     "count": count
@@ -57,7 +57,7 @@ final class RecommendationsAPI: APIEndpoint {
 
         return Promise { seal in
             manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(self.reactionName)",
+                "\(StepikApplicationsInfo.apiURL)/\(self.reactionName)",
                 method: .post,
                 parameters: params,
                 encoding: JSONEncoding.default,

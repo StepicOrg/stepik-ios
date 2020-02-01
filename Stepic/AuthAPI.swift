@@ -47,7 +47,7 @@ final class AuthAPI {
 
     func signInWithCode(_ code: String) -> Promise<(StepicToken, AuthorizationType)> {
         Promise { seal in
-            guard let socialInfo = StepicApplicationsInfo.social else {
+            guard let socialInfo = StepikApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
             }
 
@@ -62,7 +62,7 @@ final class AuthAPI {
                 "redirect_uri": socialInfo.redirectUri
             ]
 
-            manager.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepikApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     if let typedError = error as? URLError {
@@ -85,7 +85,7 @@ final class AuthAPI {
 
     func signInWithAccount(email: String, password: String) -> Promise<(StepicToken, AuthorizationType)> {
         Promise { seal in
-            guard let passwordInfo = StepicApplicationsInfo.password else {
+            guard let passwordInfo = StepikApplicationsInfo.password else {
                 throw SignInError.noAppWithCredentials
             }
 
@@ -100,7 +100,7 @@ final class AuthAPI {
                 "username": email
             ]
 
-            manager.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepikApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     if let typedError = error as? URLError {
@@ -147,12 +147,12 @@ final class AuthAPI {
             case .none:
                 throw TokenRefreshError.other
             case .code:
-                guard let socialInfo = StepicApplicationsInfo.social else {
+                guard let socialInfo = StepikApplicationsInfo.social else {
                     throw TokenRefreshError.noAppWithCredentials
                 }
                 credentials = socialInfo.credentials
             case .password:
-                guard let passwordInfo = StepicApplicationsInfo.password else {
+                guard let passwordInfo = StepikApplicationsInfo.password else {
                     throw TokenRefreshError.noAppWithCredentials
                 }
                 credentials = passwordInfo.credentials
@@ -168,7 +168,7 @@ final class AuthAPI {
                 "refresh_token": refresh_token
             ]
 
-            manager.request("\(StepicApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepikApplicationsInfo.oauthURL)/token/", method: .post, parameters: params, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     logRefreshError(statusCode: response.response?.statusCode, message: "Error \(error.localizedDescription) while refreshing")
@@ -204,7 +204,7 @@ final class AuthAPI {
                 ]
             ]
 
-            manager.request("\(StepicApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepikApplicationsInfo.apiURL)/users", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(SignUpError.other(error: error, code: nil, message: nil))
@@ -227,7 +227,7 @@ final class AuthAPI {
 
     func signUpWithToken(socialToken: String, email: String?, provider: String) -> Promise<(StepicToken, AuthorizationType)> {
         Promise { seal in
-            guard let socialInfo = StepicApplicationsInfo.social else {
+            guard let socialInfo = StepikApplicationsInfo.social else {
                 throw SignInError.noAppWithCredentials
             }
 
@@ -247,7 +247,7 @@ final class AuthAPI {
                 "Authorization": "Basic \(socialInfo.credentials)"
             ]
 
-            manager.request("\(StepicApplicationsInfo.oauthURL)/social-token/", method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON { response in
+            manager.request("\(StepikApplicationsInfo.oauthURL)/social-token/", method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     if let typedError = error as? URLError {

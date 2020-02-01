@@ -21,6 +21,10 @@ protocol DiscussionsTableViewDataSourceDelegate: AnyObject {
     )
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectSolution comment: DiscussionsCommentViewModel
+    )
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
         didSelectLoadMoreRepliesForDiscussion discussion: DiscussionsDiscussionViewModel
     )
     func discussionsTableViewDataSource(
@@ -188,6 +192,11 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
             if let strongTableView = tableView {
                 strongTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
                 strongTableView.delegate?.tableView?(strongTableView, didSelectRowAt: indexPath)
+            }
+        }
+        cell.onSolutionClick = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didSelectSolution: commentViewModel)
             }
         }
 
