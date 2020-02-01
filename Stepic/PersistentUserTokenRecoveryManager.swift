@@ -13,14 +13,14 @@ import Foundation
  */
 final class PersistentUserTokenRecoveryManager: PersistentRecoveryManager {
     override func recoverObjectFromDictionary(_ dictionary: [String: Any]) -> DictionarySerializable? {
-        StepicToken(dictionary: dictionary)
+        StepikToken(dictionary: dictionary)
     }
 
-    func recoverStepicToken(userId: Int) -> StepicToken? {
-        self.recoverObjectWithKey("\(userId)") as? StepicToken
+    func recoverStepicToken(userId: Int) -> StepikToken? {
+        self.recoverObjectWithKey("\(userId)") as? StepikToken
     }
 
-    func writeStepicToken(_ token: StepicToken, userId: Int) {
+    func writeStepicToken(_ token: StepikToken, userId: Int) {
         self.writeObjectWithKey("\(userId)", object: token)
     }
 }

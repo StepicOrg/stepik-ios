@@ -43,7 +43,7 @@ final class RegistrationPresenter {
 
         checkToken().then { () -> Promise<()> in
             self.authAPI.signUpWithAccount(firstname: name, lastname: " ", email: email, password: password)
-        }.then { _ -> Promise<(StepicToken, AuthorizationType)> in
+        }.then { _ -> Promise<(StepikToken, AuthorizationType)> in
             self.authAPI.signInWithAccount(email: email, password: password)
         }.then { token, authorizationType -> Promise<User> in
             AuthInfo.shared.token = token

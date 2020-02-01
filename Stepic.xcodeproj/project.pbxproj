@@ -44,7 +44,7 @@
 		080EBA331EA64BC000C43C93 /* PresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA321EA64BC000C43C93 /* PresentationContainer.swift */; };
 		080EBA371EA64C0C00C43C93 /* CertificatesPresentationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */; };
 		080F211B2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F211A2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift */; };
-		080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepicToken.swift */; };
+		080F31DD1BA7162C00F356A0 /* StepikToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080F31DC1BA7162C00F356A0 /* StepikToken.swift */; };
 		081387E11D7AF7700092E05D /* StyledTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */; };
 		0813EEA61BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */; };
 		0813EEA71BFE5A5400DB4B83 /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813EEA51BFE5A5400DB4B83 /* Assignment.swift */; };
@@ -1150,7 +1150,7 @@
 		080EBA321EA64BC000C43C93 /* PresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationContainer.swift; sourceTree = "<group>"; };
 		080EBA361EA64C0C00C43C93 /* CertificatesPresentationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificatesPresentationContainer.swift; sourceTree = "<group>"; };
 		080F211A2034DA2500A1204C /* LocalProgressLastViewedUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProgressLastViewedUpdater.swift; sourceTree = "<group>"; };
-		080F31DC1BA7162C00F356A0 /* StepicToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepicToken.swift; sourceTree = "<group>"; };
+		080F31DC1BA7162C00F356A0 /* StepikToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikToken.swift; sourceTree = "<group>"; };
 		081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTabBarViewController.swift; sourceTree = "<group>"; };
 		0813EEA41BFE5A5400DB4B83 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0813EEA51BFE5A5400DB4B83 /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
@@ -2392,7 +2392,7 @@
 			children = (
 				0885F8571BAAD43300F2A188 /* AuthInfo.swift */,
 				08AB82371D74C44100FDEADE /* Session.swift */,
-				080F31DC1BA7162C00F356A0 /* StepicToken.swift */,
+				080F31DC1BA7162C00F356A0 /* StepikToken.swift */,
 			);
 			name = Stepic;
 			sourceTree = "<group>";
@@ -6817,7 +6817,7 @@
 				089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */,
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				2C01BB68233CD92C00C8DCF0 /* Require.swift in Sources */,
-				080F31DD1BA7162C00F356A0 /* StepicToken.swift in Sources */,
+				080F31DD1BA7162C00F356A0 /* StepikToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				08E3B9671EEA16DC0072995B /* CodeReply.swift in Sources */,
 				2CA9D9852010EEA2007AA743 /* AdaptiveRatingsAPI.swift in Sources */,
