@@ -485,7 +485,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             )
         )
 
-        if viewModel.canEdit {
+        if viewModel.canEdit && viewModel.solution == nil {
             alert.addAction(
                 UIAlertAction(
                     title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),
@@ -522,6 +522,18 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
                     style: .default,
                     handler: { [weak self] _ in
                         self?.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+        }
+
+        if viewModel.solution != nil {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionShowSolutionTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doSolutionPresentation(request: .init(commentID: viewModel.id))
                     }
                 )
             )

@@ -865,6 +865,7 @@ DiscussionsAlertActionLikeTitle = "Like";
 DiscussionsAlertActionUnlikeTitle = "Unlike";
 DiscussionsAlertActionAbuseTitle = "Abuse";
 DiscussionsAlertActionUnabuseTitle = "Don't abuse";
+DiscussionsAlertActionShowSolutionTitle = "Show solution";
 DiscussionsSortTypeAlertTitle = "Sort by";
 DiscussionsSortTypeLastDiscussions = "Last discussions";
 DiscussionsSortTypeMostLikedDiscussions = "Most liked";

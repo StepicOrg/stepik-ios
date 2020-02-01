@@ -866,6 +866,7 @@ DiscussionsAlertActionLikeTitle = "Нравится";
 DiscussionsAlertActionUnlikeTitle = "Больше не нравится";
 DiscussionsAlertActionAbuseTitle = "Пожаловаться";
 DiscussionsAlertActionUnabuseTitle = "Не жаловаться";
+DiscussionsAlertActionShowSolutionTitle = "Показать решение";
 DiscussionsSortTypeAlertTitle = "Сортировать по";
 DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
