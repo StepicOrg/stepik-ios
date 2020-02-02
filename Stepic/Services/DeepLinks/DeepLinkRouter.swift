@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class DeepLinkRouter {
     static var window: UIWindow? {
@@ -242,6 +243,7 @@ final class DeepLinkRouter {
                                 .first(where: { $0.name == "amp;reply" })?
                                 .value
                                 .flatMap(Int.init)
+                            let threadValue = queryItems.first(where: { $0.name == "amp;thread" })?.value
 
                             AnalyticsReporter.reportEvent(
                                 AnalyticsEvents.DeepLink.discussion,
@@ -255,6 +257,7 @@ final class DeepLinkRouter {
                             self.routeToDiscussionWithID(
                                 discussionID: discussionID,
                                 replyID: replyID,
+                                thread: threadValue,
                                 lessonID: lessonId,
                                 stepID: stepId,
                                 unitID: nil,
@@ -323,6 +326,7 @@ final class DeepLinkRouter {
     static func routeToDiscussionWithID(
         discussionID: Comment.IdType,
         replyID: Comment.IdType?,
+        thread: String?,
         lessonID: Int,
         stepID: Int,
         unitID: Int?,
@@ -346,11 +350,23 @@ final class DeepLinkRouter {
                     refreshMode: .update,
                     success: { steps in
                         guard let step = steps.first else {
-                            completion([])
-                            return
+                            return completion([])
                         }
 
-                        if let discussionProxyID = step.discussionProxyID {
+                        let threadTypeOrNil: DiscussionThread.ThreadType? = thread == nil
+                            ? .default
+                            : DiscussionThread.ThreadType(rawValue: thread ?? "")
+
+                        guard let threadType = threadTypeOrNil else {
+                            return completion([])
+                        }
+
+                        switch threadType {
+                        case .default:
+                            guard let discussionProxyID = step.discussionProxyID else {
+                                return completion([])
+                            }
+
                             let assembly = DiscussionsAssembly(
                                 discussionThreadType: .default,
                                 discussionProxyID: discussionProxyID,
@@ -358,8 +374,29 @@ final class DeepLinkRouter {
                                 presentationContext: .scrollTo(discussionID: discussionID, replyID: replyID)
                             )
                             completion(viewControllers + [assembly.makeModule()])
-                        } else {
-                            completion([])
+                        case .solutions:
+                            guard let discussionThreadsIDs = step.discussionThreadsArray else {
+                                return completion([])
+                            }
+
+                            ApiDataDownloader.discussionThreads.retrieve(ids: discussionThreadsIDs).done {
+                                discussionThreads, _ in
+                                guard let discussionThread = discussionThreads.first(
+                                    where: { $0.threadType == .solutions }
+                                ) else {
+                                    return completion([])
+                                }
+
+                                let assembly = DiscussionsAssembly(
+                                    discussionThreadType: .solutions,
+                                    discussionProxyID: discussionThread.discussionProxy,
+                                    stepID: step.id,
+                                    presentationContext: .scrollTo(discussionID: discussionID, replyID: replyID)
+                                )
+                                completion(viewControllers + [assembly.makeModule()])
+                            }.catch { _ in
+                                completion([])
+                            }
                         }
                     },
                     error: { _ in
