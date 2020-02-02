@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-final class SQLReply: Reply, CustomStringConvertible {
+final class SQLReply: Reply {
     var code: String
 
     var dictValue: [String: Any] {

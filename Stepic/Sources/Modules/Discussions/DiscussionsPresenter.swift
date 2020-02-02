@@ -23,13 +23,14 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     weak var viewController: DiscussionsViewControllerProtocol?
 
     func presentNavigationItemUpdate(response: Discussions.NavigationItemUpdate.Response) {
-        switch response.discussionThreadType {
+        switch response.threadType {
         case .default:
             self.viewController?.displayNavigationItemUpdate(
                 viewModel: .init(
                     title: NSLocalizedString("DiscussionsTitle", comment: ""),
                     shouldShowSortButton: true,
-                    shouldShowComposeButton: true
+                    shouldShowComposeButton: true,
+                    threadType: .default
                 )
             )
         case .solutions:
@@ -37,7 +38,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 viewModel: .init(
                     title: NSLocalizedString("DiscussionThreadSolutionsTitle", comment: ""),
                     shouldShowSortButton: true,
-                    shouldShowComposeButton: false
+                    shouldShowComposeButton: false,
+                    threadType: .solutions
                 )
             )
         }

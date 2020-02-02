@@ -874,6 +874,7 @@ DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
 DiscussionsIsPinnedBadgeTitle = "Pinned";
 DiscussionThreadSolutionsTitle = "Solutions";
 DiscussionThreadCommentSolutionTitle = "Solution %@";
+DiscussionsPlaceholderEmptySolutionsTitle = "No solutions";
 
 /* Write comment */
 WriteCommentTitle = "Comment";

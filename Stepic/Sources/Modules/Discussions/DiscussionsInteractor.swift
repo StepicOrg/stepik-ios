@@ -107,7 +107,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
             DispatchQueue.main.async {
                 strongSelf.presenter.presentNavigationItemUpdate(
-                    response: .init(discussionThreadType: strongSelf.discussionThreadType)
+                    response: .init(threadType: strongSelf.discussionThreadType)
                 )
             }
 

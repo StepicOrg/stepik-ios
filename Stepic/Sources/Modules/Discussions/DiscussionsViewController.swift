@@ -41,12 +41,16 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         return tableDataSource
     }()
 
-    private lazy var sortTypeBarButtonItem = UIBarButtonItem(
-        image: UIImage(named: "discussions-sort")?.withRenderingMode(.alwaysTemplate),
-        style: .plain,
-        target: self,
-        action: #selector(self.didClickSortType)
-    )
+    private lazy var sortTypeBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            image: UIImage(named: "discussions-sort")?.withRenderingMode(.alwaysTemplate),
+            style: .plain,
+            target: self,
+            action: #selector(self.didClickSortType)
+        )
+        button.isEnabled = false
+        return button
+    }()
 
     private lazy var composeBarButtonItem = UIBarButtonItem(
         barButtonSystemItem: .compose,
@@ -79,8 +83,6 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setup()
-
         self.updateState(newState: self.state)
         self.interactor.doDiscussionsLoad(request: .init())
     }
@@ -92,12 +94,7 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 
     // MARK: - Private API
 
-    private func setup() {
-        self.sortTypeBarButtonItem.isEnabled = false
-        self.registerPlaceholders()
-    }
-
-    private func registerPlaceholders() {
+    private func registerPlaceholders(for discussionThreadType: DiscussionThread.ThreadType) {
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
                 .noConnection,
@@ -112,15 +109,24 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             ),
             for: .connectionError
         )
-        self.registerPlaceholder(
-            placeholder: StepikPlaceholder(
-                .emptyDiscussions,
-                action: { [weak self] in
-                    self?.didClickWriteComment()
-                }
-            ),
-            for: .empty
-        )
+
+        switch discussionThreadType {
+        case .default:
+            self.registerPlaceholder(
+                placeholder: StepikPlaceholder(
+                    .emptyDiscussions,
+                    action: { [weak self] in
+                        self?.didClickWriteComment()
+                    }
+                ),
+                for: .empty
+            )
+        case .solutions:
+            self.registerPlaceholder(
+                placeholder: StepikPlaceholder(.emptySolutions, action: nil),
+                for: .empty
+            )
+        }
     }
 
     private func updateState(newState: Discussions.ViewControllerState) {
@@ -203,6 +209,8 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 extension DiscussionsViewController: DiscussionsViewControllerProtocol {
     func displayNavigationItemUpdate(viewModel: Discussions.NavigationItemUpdate.ViewModel) {
         self.title = viewModel.title
+
+        self.registerPlaceholders(for: viewModel.threadType)
 
         var rightBarButtonItems = [UIBarButtonItem]()
         if viewModel.shouldShowComposeButton {
@@ -463,6 +471,18 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
     ) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
+        if viewModel.solution != nil {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionShowSolutionTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doSolutionPresentation(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+        }
+
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Copy", comment: ""),
@@ -522,18 +542,6 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
                     style: .default,
                     handler: { [weak self] _ in
                         self?.interactor.doCommentAbuse(request: .init(commentID: viewModel.id))
-                    }
-                )
-            )
-        }
-
-        if viewModel.solution != nil {
-            alert.addAction(
-                UIAlertAction(
-                    title: NSLocalizedString("DiscussionsAlertActionShowSolutionTitle", comment: ""),
-                    style: .default,
-                    handler: { [weak self] _ in
-                        self?.interactor.doSolutionPresentation(request: .init(commentID: viewModel.id))
                     }
                 )
             )

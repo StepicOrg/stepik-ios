@@ -39,13 +39,14 @@ enum Discussions {
     /// Update navigation title and buttons
     enum NavigationItemUpdate {
         struct Response {
-            let discussionThreadType: DiscussionThread.ThreadType
+            let threadType: DiscussionThread.ThreadType
         }
 
         struct ViewModel {
             let title: String
             let shouldShowSortButton: Bool
             let shouldShowComposeButton: Bool
+            let threadType: DiscussionThread.ThreadType
         }
     }
 

@@ -875,6 +875,7 @@ DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновлени�
 DiscussionsIsPinnedBadgeTitle = "Закреплён";
 DiscussionThreadSolutionsTitle = "Решения";
 DiscussionThreadCommentSolutionTitle = "Решение %@";
+DiscussionsPlaceholderEmptySolutionsTitle = "Решений пока нет";
 
 /* Write comment */
 WriteCommentTitle = "Комментарий";
