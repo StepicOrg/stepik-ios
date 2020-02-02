@@ -3,7 +3,7 @@ import PromiseKit
 
 protocol DiscussionsProviderProtocol {
     func fetchDiscussionProxy(id: DiscussionProxy.IdType) -> Promise<DiscussionProxy>
-    func fetchComments(ids: [Comment.IdType]) -> Promise<[Comment]>
+    func fetchComments(ids: [Comment.IdType], stepID: Step.IdType) -> Promise<[Comment]>
     func deleteComment(id: Comment.IdType) -> Promise<Void>
     func updateVote(_ vote: Vote) -> Promise<Vote>
     func incrementStepDiscussionsCount(stepID: Step.IdType) -> Promise<Void>
@@ -14,18 +14,20 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
     private let discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol
     private let commentsNetworkService: CommentsNetworkServiceProtocol
     private let votesNetworkService: VotesNetworkServiceProtocol
-
+    private let stepsNetworkService: StepsNetworkServiceProtocol
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
 
     init(
         discussionProxiesNetworkService: DiscussionProxiesNetworkServiceProtocol,
         commentsNetworkService: CommentsNetworkServiceProtocol,
         votesNetworkService: VotesNetworkServiceProtocol,
+        stepsNetworkService: StepsNetworkServiceProtocol,
         stepsPersistenceService: StepsPersistenceServiceProtocol
     ) {
         self.discussionProxiesNetworkService = discussionProxiesNetworkService
         self.commentsNetworkService = commentsNetworkService
         self.votesNetworkService = votesNetworkService
+        self.stepsNetworkService = stepsNetworkService
         self.stepsPersistenceService = stepsPersistenceService
     }
 
@@ -39,10 +41,24 @@ final class DiscussionsProvider: DiscussionsProviderProtocol {
         }
     }
 
-    func fetchComments(ids: [Comment.IdType]) -> Promise<[Comment]> {
+    func fetchComments(ids: [Comment.IdType], stepID: Step.IdType) -> Promise<[Comment]> {
         Promise { seal in
-            self.commentsNetworkService.fetch(ids: ids).done {
-                seal.fulfill($0)
+            firstly {
+                self.stepsPersistenceService.fetch(ids: [stepID])
+            }.then { cachedSteps -> Promise<[Step]> in
+                if cachedSteps.first != nil {
+                    return .value(cachedSteps)
+                }
+
+                return self.stepsNetworkService.fetch(ids: [stepID])
+            }.then { steps -> Promise<[Comment]> in
+                guard let step = steps.first else {
+                    throw Error.fetchFailed
+                }
+
+                return self.commentsNetworkService.fetch(ids: ids, blockName: step.block.name)
+            }.done { comments in
+                seal.fulfill(comments)
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

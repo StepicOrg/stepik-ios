@@ -28,7 +28,7 @@ final class AttemptsAPI: APIEndpoint {
 
         return Promise { seal in
             self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(self.name)",
+                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
                 method: .get,
                 parameters: parameters,
                 encoding: URLEncoding.default,
@@ -98,7 +98,7 @@ final class AttemptsAPI: APIEndpoint {
         }
 
         return self.manager.request(
-            "\(StepicApplicationsInfo.apiURL)/attempts",
+            "\(StepikApplicationsInfo.apiURL)/attempts",
             method: .get,
             parameters: params,
             encoding: URLEncoding.default,

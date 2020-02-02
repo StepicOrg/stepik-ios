@@ -192,7 +192,7 @@ extension CardStepViewController: WKNavigationDelegate {
         // Disable WebKit callout on long press
         var jsCode = "document.documentElement.style.webkitTouchCallout='none';"
         // Change color for audio control
-        jsCode += "document.body.style.setProperty('--actionColor', '#\(UIColor.stepicGreen.hexString)');"
+        jsCode += "document.body.style.setProperty('--actionColor', '#\(UIColor.stepikGreen.hexString)');"
         // Center images
         jsCode += "var imgs = document.getElementsByTagName('img');"
         jsCode += "for (var i = 0; i < imgs.length; i++){ imgs[i].style.marginLeft = (document.body.clientWidth / 2) - (imgs[i].clientWidth / 2) - 8 }"

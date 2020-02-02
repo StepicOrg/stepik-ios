@@ -6,6 +6,7 @@ protocol StepViewDelegate: AnyObject {
     func stepViewDidRequestPrevious(_ view: StepView)
     func stepViewDidRequestNext(_ view: StepView)
     func stepViewDidRequestDiscussions(_ view: StepView)
+    func stepViewDidRequestSolutions(_ view: StepView)
     func stepViewDidLoadContent(_ view: StepView)
 
     func stepView(_ view: StepView, didRequestFullscreenImage url: URL)
@@ -83,6 +84,12 @@ final class StepView: UIView {
                 return
             }
             strongSelf.delegate?.stepViewDidRequestDiscussions(strongSelf)
+        }
+        view.onSolutionsButtonClick = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.stepViewDidRequestSolutions(strongSelf)
         }
         return view
     }()
@@ -181,6 +188,11 @@ final class StepView: UIView {
     func updateDiscussionButton(title: String, isEnabled: Bool) {
         self.stepControlsView.discussionsTitle = title
         self.stepControlsView.isDiscussionsButtonEnabled = isEnabled
+    }
+
+    func updateSolutionsButton(title: String?, isEnabled: Bool) {
+        self.stepControlsView.solutionsTitle = title
+        self.stepControlsView.isSolutionsButtonEnabled = isEnabled
     }
 
     // MARK: Private API

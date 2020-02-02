@@ -1,4 +1,5 @@
 import Agrume
+import SVProgressHUD
 import UIKit
 
 protocol StepViewControllerProtocol: AnyObject {
@@ -7,7 +8,10 @@ protocol StepViewControllerProtocol: AnyObject {
     func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel)
     func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel)
     func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel)
+    func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel)
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel)
+    func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel)
+    func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel)
 }
 
 // MARK: - StepViewController (Animation) -
@@ -90,6 +94,7 @@ final class StepViewController: UIViewController, ControllerWithStepikPlaceholde
 
         if !self.isFirstAppearance {
             self.interactor.doDiscussionsButtonUpdate(request: .init())
+            self.interactor.doSolutionsButtonUpdate(request: .init())
         }
     }
 
@@ -227,14 +232,19 @@ extension StepViewController: StepViewControllerProtocol {
         self.stepView?.updateDiscussionButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
     }
 
+    func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel) {
+        self.stepView?.updateSolutionsButton(title: viewModel.title, isEnabled: viewModel.isEnabled)
+    }
+
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) {
         let discussionsAssembly = DiscussionsAssembly(
+            discussionThreadType: .default,
             discussionProxyID: viewModel.discussionProxyID,
             stepID: viewModel.stepID
         )
         let discussionsViewController = discussionsAssembly.makeModule()
 
-        if viewModel.embeddedInWriteComment {
+        if viewModel.shouldEmbedInWriteComment {
             let (modalPresentationStyle, navigationBarAppearance) = {
                 () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
                 if #available(iOS 13.0, *) {
@@ -281,6 +291,24 @@ extension StepViewController: StepViewControllerProtocol {
             self.push(module: discussionsViewController)
         }
     }
+
+    func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel) {
+        let assembly = DiscussionsAssembly(
+            discussionThreadType: .solutions,
+            discussionProxyID: viewModel.discussionProxyID,
+            stepID: viewModel.stepID
+        )
+
+        self.push(module: assembly.makeModule())
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
+    }
 }
 
 // MARK: - StepViewController: StepViewDelegate -
@@ -300,6 +328,10 @@ extension StepViewController: StepViewDelegate {
 
     func stepViewDidRequestDiscussions(_ view: StepView) {
         self.interactor.doDiscussionsPresentation(request: .init())
+    }
+
+    func stepViewDidRequestSolutions(_ view: StepView) {
+        self.interactor.doSolutionsPresentation(request: .init())
     }
 
     func stepView(_ view: StepView, didRequestOpenURL url: URL) {
@@ -378,6 +410,10 @@ extension StepViewController: StepViewDelegate {
 extension StepViewController: BaseQuizOutputProtocol {
     func handleCorrectSubmission() {
         self.interactor.doStepDoneRequest(request: .init())
+    }
+
+    func handleSubmissionEvaluated() {
+        self.interactor.doSolutionsButtonUpdate(request: .init())
     }
 
     func handleNextStepNavigation() {

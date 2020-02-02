@@ -21,6 +21,10 @@ protocol DiscussionsTableViewDataSourceDelegate: AnyObject {
     )
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectSolution comment: DiscussionsCommentViewModel
+    )
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
         didSelectLoadMoreRepliesForDiscussion discussion: DiscussionsDiscussionViewModel
     )
     func discussionsTableViewDataSource(
@@ -105,7 +109,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
 
     private func numberOfRowsInSection(_ section: Int) -> Int {
         self.viewModels[section].replies.count
-            + DiscussionsTableViewDataSource.parentDiscussionInset
+            + Self.parentDiscussionInset
             + self.loadMoreRepliesInset(section: section)
     }
 
@@ -137,10 +141,10 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         let discussionViewModel = self.viewModels[indexPath.section]
 
         let commentType: DiscussionsTableViewCell.ViewModel.CommentType =
-            indexPath.row == DiscussionsTableViewDataSource.parentDiscussionRowIndex ? .discussion : .reply
+            indexPath.row == Self.parentDiscussionRowIndex ? .discussion : .reply
         let commentViewModel = commentType == .discussion
             ? discussionViewModel.comment
-            : discussionViewModel.replies[indexPath.row - DiscussionsTableViewDataSource.parentDiscussionInset]
+            : discussionViewModel.replies[indexPath.row - Self.parentDiscussionInset]
         let commentID = commentViewModel.id
 
         cell.onContentLoaded = { [weak self, weak cell, weak tableView] in
@@ -188,6 +192,11 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
             if let strongTableView = tableView {
                 strongTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
                 strongTableView.delegate?.tableView?(strongTableView, didSelectRowAt: indexPath)
+            }
+        }
+        cell.onSolutionClick = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.discussionsTableViewDataSource(strongSelf, didSelectSolution: commentViewModel)
             }
         }
 
@@ -240,7 +249,7 @@ extension DiscussionsTableViewDataSource: UITableViewDataSource {
         self.pendingTableViewUpdateWorkItem = workItem
 
         DispatchQueue.main.asyncAfter(
-            deadline: .now() + DiscussionsTableViewDataSource.tableViewUpdatesDelay,
+            deadline: .now() + Self.tableViewUpdatesDelay,
             execute: workItem
         )
     }
@@ -259,7 +268,7 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
             }
 
             guard let comment = self.getCommentViewModel(at: indexPath) else {
-                return DiscussionsTableViewDataSource.estimatedRowHeight
+                return Self.estimatedRowHeight
             }
 
             if let cellHeight = self.cellHeightByCommentID[comment.id] {
@@ -277,7 +286,7 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
                 return cellHeight
             }
 
-            return DiscussionsTableViewDataSource.estimatedRowHeight
+            return Self.estimatedRowHeight
         }()
 
         return height.rounded(.up)
@@ -316,13 +325,12 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
     // MARK: Private helpers
 
     private func getCommentViewModel(at indexPath: IndexPath) -> DiscussionsCommentViewModel? {
-        if indexPath.row == DiscussionsTableViewDataSource.parentDiscussionRowIndex {
+        if indexPath.row == Self.parentDiscussionRowIndex {
             return self.viewModels[safe: indexPath.section]?.comment
         }
 
-        return self.viewModels[safe: indexPath.section]?.replies[
-            safe: indexPath.row - DiscussionsTableViewDataSource.parentDiscussionInset
-        ]
+        return self.viewModels[safe: indexPath.section]?
+            .replies[safe: indexPath.row - Self.parentDiscussionInset]
     }
 
     private func getDiscussionPrototypeCell(tableView: UITableView) -> DiscussionsTableViewCell {
@@ -330,12 +338,12 @@ extension DiscussionsTableViewDataSource: UITableViewDelegate {
             return discussionPrototypeCell
         }
 
-        let dequeuedReusableCell = tableView.dequeueReusableCell(
+        let reusableCell = tableView.dequeueReusableCell(
             withIdentifier: DiscussionsTableViewCell.defaultReuseIdentifier
         ) as? DiscussionsTableViewCell
-        dequeuedReusableCell?.updateConstraintsIfNeeded()
+        reusableCell?.updateConstraintsIfNeeded()
 
-        self.discussionPrototypeCell = dequeuedReusableCell
+        self.discussionPrototypeCell = reusableCell
 
         return self.discussionPrototypeCell.require()
     }

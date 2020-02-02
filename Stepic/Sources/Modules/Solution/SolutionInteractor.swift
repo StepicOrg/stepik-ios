@@ -7,19 +7,22 @@ protocol SolutionInteractorProtocol {
 
 final class SolutionInteractor: SolutionInteractorProtocol {
     private let stepID: Step.IdType
-    private let submissionID: Submission.IdType
+    private let submission: Submission
+    private let discussionID: DiscussionThread.IdType
 
     private let presenter: SolutionPresenterProtocol
     private let provider: SolutionProviderProtocol
 
     init(
         stepID: Step.IdType,
-        submissionID: Submission.IdType,
+        submission: Submission,
+        discussionID: DiscussionThread.IdType,
         presenter: SolutionPresenterProtocol,
         provider: SolutionProviderProtocol
     ) {
         self.stepID = stepID
-        self.submissionID = submissionID
+        self.submission = submission
+        self.discussionID = discussionID
         self.presenter = presenter
         self.provider = provider
     }
@@ -33,21 +36,12 @@ final class SolutionInteractor: SolutionInteractorProtocol {
             }
 
             return .value(step)
-        }.then { step -> Promise<(Step, Submission?)> in
-            self.provider.fetchSubmission(id: self.submissionID, step: step).map { (step, $0) }
-        }.then { step, submission -> Promise<(Step, Submission, Attempt?)> in
-            guard let submission = submission else {
-                throw Error.fetchFailed
-            }
-
-            return self.provider.fetchAttempt(id: submission.attempt, step: step).map { (step, submission, $0) }
-        }.done { step, submission, attempt in
-            guard let attempt = attempt else {
-                throw Error.fetchFailed
-            }
-
-            let response = Solution.SolutionLoad.Data(step: step, submission: submission, attempt: attempt)
-
+        }.done { step in
+            let response = Solution.SolutionLoad.Data(
+                step: step,
+                submission: self.submission,
+                discussionID: self.discussionID
+            )
             self.presenter.presentSolution(response: .init(result: .success(response)))
         }.catch { error in
             self.presenter.presentSolution(response: .init(result: .failure(error)))

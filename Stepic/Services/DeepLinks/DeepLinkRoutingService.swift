@@ -74,7 +74,7 @@ final class DeepLinkRoutingService {
             return TabBarRouter(tab: .catalog)
         case .notifications(let section):
             return TabBarRouter(notificationsSection: section)
-        case .course, .coursePromo, .discussions, .lesson, .profile, .syllabus:
+        case .course, .coursePromo, .discussions, .solutions, .lesson, .profile, .syllabus:
             return ModalOrPushStackRouter(
                 source: source,
                 destinationStack: moduleStack,
@@ -113,6 +113,19 @@ final class DeepLinkRoutingService {
                 DeepLinkRouter.routeToDiscussionWithID(
                     discussionID: discussionID,
                     replyID: nil,
+                    thread: DiscussionThread.ThreadType.default.rawValue,
+                    lessonID: lessonID,
+                    stepID: stepID,
+                    unitID: unitID,
+                    completion: { moduleStack in
+                        seal.fulfill(moduleStack)
+                    }
+                )
+            case .solutions(let lessonID, let stepID, let discussionID, let unitID):
+                DeepLinkRouter.routeToDiscussionWithID(
+                    discussionID: discussionID,
+                    replyID: nil,
+                    thread: DiscussionThread.ThreadType.solutions.rawValue,
                     lessonID: lessonID,
                     stepID: stepID,
                     unitID: unitID,

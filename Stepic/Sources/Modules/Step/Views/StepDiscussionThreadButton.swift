@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-extension StepDiscussionsButton {
+extension StepDiscussionThreadButton {
     struct Appearance {
         let iconSize = CGSize(width: 16, height: 17)
         let insets = LayoutInsets(left: 16, right: 16)
@@ -13,8 +13,9 @@ extension StepDiscussionsButton {
     }
 }
 
-final class StepDiscussionsButton: UIControl {
+final class StepDiscussionThreadButton: UIControl {
     let appearance: Appearance
+    let threadItem: ThreadItem
 
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [self.iconImageContainerView, self.textLabel])
@@ -28,8 +29,7 @@ final class StepDiscussionsButton: UIControl {
     private lazy var iconImageContainerView = UIView()
 
     private lazy var iconImageView: UIImageView = {
-        let image = UIImage(named: "comments-icon")
-        let view = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
+        let view = UIImageView(image: self.threadItem.icon?.withRenderingMode(.alwaysTemplate))
         view.tintColor = self.appearance.mainColor
         return view
     }()
@@ -40,6 +40,13 @@ final class StepDiscussionsButton: UIControl {
         label.textColor = self.appearance.mainColor
         return label
     }()
+
+    override var isEnabled: Bool {
+        didSet {
+            self.iconImageView.alpha = self.isEnabled ? 1.0 : 0.5
+            self.textLabel.alpha = self.isEnabled ? 1.0 : 0.5
+        }
+    }
 
     override var isHighlighted: Bool {
         didSet {
@@ -54,7 +61,12 @@ final class StepDiscussionsButton: UIControl {
         }
     }
 
-    init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
+    init(
+        frame: CGRect = .zero,
+        threadItem: ThreadItem = .default,
+        appearance: Appearance = Appearance()
+    ) {
+        self.threadItem = threadItem
         self.appearance = appearance
         super.init(frame: frame)
 
@@ -67,9 +79,27 @@ final class StepDiscussionsButton: UIControl {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: Types
+
+    enum ThreadItem {
+        case discussions
+        case solutions
+
+        static var `default`: ThreadItem { .discussions }
+
+        fileprivate var icon: UIImage? {
+            switch self {
+            case .discussions:
+                return UIImage(named: "comments-icon")
+            case .solutions:
+                return UIImage(named: "solutions-icon")
+            }
+        }
+    }
 }
 
-extension StepDiscussionsButton: ProgrammaticallyInitializableViewProtocol {
+extension StepDiscussionThreadButton: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }

@@ -48,7 +48,7 @@ extension EnrollmentsAPI {
 
         if !delete {
             return self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(name)",
+                "\(StepikApplicationsInfo.apiURL)/\(name)",
                 method: .post,
                 parameters: params,
                 encoding: JSONEncoding.default,
@@ -82,7 +82,7 @@ extension EnrollmentsAPI {
             })
         } else {
             return self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/enrollments/\(course.id)",
+                "\(StepikApplicationsInfo.apiURL)/enrollments/\(course.id)",
                 method: .delete,
                 parameters: params,
                 encoding: URLEncoding.default,

@@ -102,6 +102,12 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("Refreshing", comment: ""),
         buttonTitle: nil
     )
+    static let emptySolutions = StepikPlaceholderStyle(
+        id: "emptySolutions",
+        image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+        text: NSLocalizedString("DiscussionsPlaceholderEmptySolutionsTitle", comment: ""),
+        buttonTitle: nil
+    )
     static let emptyProfileLoading = StepikPlaceholderStyle(
         id: "emptyProfileLoading",
         image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),

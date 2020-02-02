@@ -14,15 +14,21 @@ private final class NewStepViewControllerMock: StepViewControllerProtocol {
         }
     }
 
-    func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel) { }
+    func displayStepTextUpdate(viewModel: StepDataFlow.StepTextUpdate.ViewModel) {}
 
-    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) { }
+    func displayPlayStep(viewModel: StepDataFlow.PlayStep.ViewModel) {}
 
-    func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel) { }
+    func displayControlsUpdate(viewModel: StepDataFlow.ControlsUpdate.ViewModel) {}
 
-    func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel) { }
+    func displayDiscussionsButtonUpdate(viewModel: StepDataFlow.DiscussionsButtonUpdate.ViewModel) {}
 
-    func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) { }
+    func displaySolutionsButtonUpdate(viewModel: StepDataFlow.SolutionsButtonUpdate.ViewModel) {}
+
+    func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) {}
+
+    func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel) {}
+
+    func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {}
 }
 
 class NewStepViewControllerSpec: QuickSpec {

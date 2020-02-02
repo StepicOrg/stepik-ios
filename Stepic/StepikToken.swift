@@ -9,20 +9,20 @@
 import SwiftyJSON
 import UIKit
 
-final class StepicToken: DictionarySerializable {
+final class StepikToken: DictionarySerializable {
     let accessToken: String!
     let refreshToken: String!
     let tokenType: String!
     let expireDate: Date!
 
-    //delta used to have a gap when token expires
+    /// Delta used to have a gap when token expires.
     let expireDelta = TimeInterval(1000)
 
     init(json: JSON) {
-        accessToken = json["access_token"].stringValue
-        refreshToken = json["refresh_token"].stringValue
-        tokenType = json["token_type"].stringValue
-        expireDate = Date().addingTimeInterval(json["expires_in"].doubleValue - expireDelta)
+        self.accessToken = json["access_token"].stringValue
+        self.refreshToken = json["refresh_token"].stringValue
+        self.tokenType = json["token_type"].stringValue
+        self.expireDate = Date().addingTimeInterval(json["expires_in"].doubleValue - expireDelta)
     }
 
     init(accessToken: String, refreshToken: String, tokenType: String, expireDate: Date) {
@@ -33,13 +33,18 @@ final class StepicToken: DictionarySerializable {
     }
 
     required convenience init?(dictionary: [String: Any]) {
-        if let aToken = dictionary["access_token"] as? String,
-            let rToken = dictionary["refresh_token"] as? String,
-            let tType = dictionary["token_type"] as? String {
-            self.init(accessToken: aToken, refreshToken: rToken, tokenType: tType, expireDate: Date(timeIntervalSince1970: dictionary["expire_date"] as? TimeInterval ?? 0.0))
-        } else {
+        guard let accessToken = dictionary["access_token"] as? String,
+              let refreshToken = dictionary["refresh_token"] as? String,
+              let tokenType = dictionary["token_type"] as? String else {
             return nil
         }
+
+        self.init(
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+            tokenType: tokenType,
+            expireDate: Date(timeIntervalSince1970: dictionary["expire_date"] as? TimeInterval ?? 0.0)
+        )
     }
 
     func serializeToDictionary() -> [String: Any] { self.getDictionary() }

@@ -83,7 +83,7 @@ final class StoriesPresenter: StoriesPresenterProtocol {
         self.storyTemplatesAPI.retrieve(
             isPublished: isPublished,
             language: ContentLanguageService().globalContentLanguage,
-            maxVersion: StepicApplicationsInfo.Versions.stories ?? 0
+            maxVersion: StepikApplicationsInfo.Versions.stories ?? 0
         ).done { [weak self] stories, _ in
             guard let strongSelf = self else {
                 return

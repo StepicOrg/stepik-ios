@@ -3,6 +3,7 @@ import SVProgressHUD
 import UIKit
 
 protocol DiscussionsViewControllerProtocol: AnyObject {
+    func displayNavigationItemUpdate(viewModel: Discussions.NavigationItemUpdate.ViewModel)
     func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel)
     func displayNextDiscussions(viewModel: Discussions.NextDiscussionsLoad.ViewModel)
     func displayNextReplies(viewModel: Discussions.NextRepliesLoad.ViewModel)
@@ -13,6 +14,7 @@ protocol DiscussionsViewControllerProtocol: AnyObject {
     func displayCommentDelete(viewModel: Discussions.CommentDelete.ViewModel)
     func displayCommentLike(viewModel: Discussions.CommentLike.ViewModel)
     func displayCommentAbuse(viewModel: Discussions.CommentAbuse.ViewModel)
+    func displaySolution(viewModel: Discussions.SolutionPresentation.ViewModel)
     func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel)
     func displaySortTypeUpdate(viewModel: Discussions.SortTypeUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: Discussions.BlockingWaitingIndicatorUpdate.ViewModel)
@@ -22,6 +24,7 @@ protocol DiscussionsViewControllerProtocol: AnyObject {
 
 final class DiscussionsViewController: UIViewController, ControllerWithStepikPlaceholder {
     lazy var discussionsView = self.view as? DiscussionsView
+    lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
@@ -38,12 +41,16 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
         return tableDataSource
     }()
 
-    private lazy var sortTypeBarButtonItem = UIBarButtonItem(
-        image: UIImage(named: "discussions-sort")?.withRenderingMode(.alwaysTemplate),
-        style: .plain,
-        target: self,
-        action: #selector(self.didClickSortType)
-    )
+    private lazy var sortTypeBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            image: UIImage(named: "discussions-sort")?.withRenderingMode(.alwaysTemplate),
+            style: .plain,
+            target: self,
+            action: #selector(self.didClickSortType)
+        )
+        button.isEnabled = false
+        return button
+    }()
 
     private lazy var composeBarButtonItem = UIBarButtonItem(
         barButtonSystemItem: .compose,
@@ -76,31 +83,18 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.configureNavigationBar()
-        self.registerPlaceholders()
-
         self.updateState(newState: self.state)
         self.interactor.doDiscussionsLoad(request: .init())
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        if let styledNavigationController = self.navigationController as? StyledNavigationController {
-            styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
-        }
+        self.styledNavigationController?.changeShadowViewAlpha(1.0, sender: self)
     }
 
     // MARK: - Private API
 
-    private func configureNavigationBar() {
-        self.title = NSLocalizedString("DiscussionsTitle", comment: "")
-
-        self.navigationItem.rightBarButtonItems = [self.composeBarButtonItem, self.sortTypeBarButtonItem]
-        self.sortTypeBarButtonItem.isEnabled = false
-    }
-
-    private func registerPlaceholders() {
+    private func registerPlaceholders(for discussionThreadType: DiscussionThread.ThreadType) {
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
                 .noConnection,
@@ -115,15 +109,24 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             ),
             for: .connectionError
         )
-        self.registerPlaceholder(
-            placeholder: StepikPlaceholder(
-                .emptyDiscussions,
-                action: { [weak self] in
-                    self?.didClickWriteComment()
-                }
-            ),
-            for: .empty
-        )
+
+        switch discussionThreadType {
+        case .default:
+            self.registerPlaceholder(
+                placeholder: StepikPlaceholder(
+                    .emptyDiscussions,
+                    action: { [weak self] in
+                        self?.didClickWriteComment()
+                    }
+                ),
+                for: .empty
+            )
+        case .solutions:
+            self.registerPlaceholder(
+                placeholder: StepikPlaceholder(.emptySolutions, action: nil),
+                for: .empty
+            )
+        }
     }
 
     private func updateState(newState: Discussions.ViewControllerState) {
@@ -204,6 +207,22 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
 // MARK: - DiscussionsViewController: DiscussionsViewControllerProtocol -
 
 extension DiscussionsViewController: DiscussionsViewControllerProtocol {
+    func displayNavigationItemUpdate(viewModel: Discussions.NavigationItemUpdate.ViewModel) {
+        self.title = viewModel.title
+
+        self.registerPlaceholders(for: viewModel.threadType)
+
+        var rightBarButtonItems = [UIBarButtonItem]()
+        if viewModel.shouldShowComposeButton {
+            rightBarButtonItems.append(self.composeBarButtonItem)
+        }
+        if viewModel.shouldShowSortButton {
+            rightBarButtonItems.append(self.sortTypeBarButtonItem)
+        }
+
+        self.navigationItem.rightBarButtonItems = rightBarButtonItems.isEmpty ? nil : rightBarButtonItems
+    }
+
     func displayDiscussions(viewModel: Discussions.DiscussionsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
@@ -302,6 +321,15 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         self.updateDiscussionsData(newData: viewModel.data)
     }
 
+    func displaySolution(viewModel: Discussions.SolutionPresentation.ViewModel) {
+        let assembly = SolutionAssembly(
+            stepID: viewModel.stepID,
+            submission: viewModel.submission,
+            discussionID: viewModel.discussionID
+        )
+        self.push(module: assembly.makeModule())
+    }
+
     func displaySortTypesAlert(viewModel: Discussions.SortTypesPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
 
@@ -394,6 +422,13 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
 
     func discussionsTableViewDataSource(
         _ tableViewDataSource: DiscussionsTableViewDataSource,
+        didSelectSolution comment: DiscussionsCommentViewModel
+    ) {
+        self.interactor.doSolutionPresentation(request: .init(commentID: comment.id))
+    }
+
+    func discussionsTableViewDataSource(
+        _ tableViewDataSource: DiscussionsTableViewDataSource,
         didRequestOpenURL url: URL
     ) {
         WebControllerManager.sharedManager.presentWebControllerWithURL(
@@ -436,6 +471,18 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
     ) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
+        if viewModel.solution != nil {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("DiscussionsAlertActionShowSolutionTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doSolutionPresentation(request: .init(commentID: viewModel.id))
+                    }
+                )
+            )
+        }
+
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Copy", comment: ""),
@@ -446,19 +493,21 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             )
         )
 
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Reply", comment: ""),
-                style: .default,
-                handler: { [weak self] _ in
-                    self?.interactor.doWriteCommentPresentation(
-                        request: .init(commentID: viewModel.id, presentationContext: .create)
-                    )
-                }
+        if viewModel.solution == nil {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("Reply", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doWriteCommentPresentation(
+                            request: .init(commentID: viewModel.id, presentationContext: .create)
+                        )
+                    }
+                )
             )
-        )
+        }
 
-        if viewModel.canEdit {
+        if viewModel.canEdit && viewModel.solution == nil {
             alert.addAction(
                 UIAlertAction(
                     title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),

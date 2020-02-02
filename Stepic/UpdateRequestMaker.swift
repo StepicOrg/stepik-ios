@@ -25,7 +25,7 @@ final class UpdateRequestMaker {
 
             checkToken().done {
                 manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(updatingObject.id)",
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)/\(updatingObject.id)",
                     method: .put,
                     parameters: params,
                     encoding: JSONEncoding.default

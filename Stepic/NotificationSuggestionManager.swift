@@ -93,7 +93,7 @@ final class NotificationSuggestionManager {
             let commonChecks = AuthInfo.shared.isAuthorized
                 && self.isAlertAvailableNow(context: context)
                 && PreferencesContainer.notifications.allowStreaksNotifications == false
-                && StepicApplicationsInfo.streaksEnabled
+                && StepikApplicationsInfo.streaksEnabled
 
             switch trigger {
             case .login:

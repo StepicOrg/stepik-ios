@@ -189,7 +189,7 @@ final class RegistrationViewController: UIViewController {
         let all = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
             .foregroundColor(UIColor.mainText)
             .paragraphStyle(paragraphStyle)
-        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular)).foregroundColor(UIColor.stepicGreen)
+        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular)).foregroundColor(UIColor.stepikGreen)
         let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
             .foregroundColor(UIColor.mainText)
             .backgroundColor(UIColor(hex: 0xF6F6F6))

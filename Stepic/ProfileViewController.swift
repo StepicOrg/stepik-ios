@@ -177,7 +177,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         }
 
         if let shareButton = self.shareButton, let shareID = shareID {
-            self.sharingURL = StepicApplicationsInfo.stepicURL + "/users/\(shareID)"
+            self.sharingURL = StepikApplicationsInfo.stepikURL + "/users/\(shareID)"
             if isSettingsHidden {
                 self.navigationItem.rightBarButtonItem = shareButton
             } else {

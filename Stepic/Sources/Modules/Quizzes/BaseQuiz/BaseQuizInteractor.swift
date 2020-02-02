@@ -135,6 +135,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
             self.presentSubmission(attempt: attempt, submission: submission, cachedReply: reply)
 
+            self.moduleOutput?.handleSubmissionEvaluated()
+
             if submission.status == "correct" {
                 self.moduleOutput?.handleCorrectSubmission()
 

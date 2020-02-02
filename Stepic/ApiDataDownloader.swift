@@ -20,6 +20,7 @@ final class ApiDataDownloader {
     static let courseReviewSummaries = CourseReviewSummariesAPI()
     static let courses = CoursesAPI()
     static let discussionProxies = DiscussionProxiesAPI()
+    static let discussionThreads = DiscussionThreadsAPI()
     static let enrollments = EnrollmentsAPI()
     static let lastSteps = LastStepsAPI()
     static let lessons = LessonsAPI()

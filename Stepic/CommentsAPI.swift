@@ -14,7 +14,12 @@ import SwiftyJSON
 final class CommentsAPI: APIEndpoint {
     override var name: String { "comments" }
 
-    func retrieve(ids: [Comment.IdType]) -> Promise<[Comment]> {
+    /// Get comments by ids.
+    ///
+    /// - Parameter ids: The identifiers array of the comments to fetch.
+    /// - Parameter blockName: The name of the step's block (see Block.BlockType) for parsing reply and dataset.
+    /// - Returns: A promise with an array comments.
+    func retrieve(ids: [Comment.IdType], blockName: String?) -> Promise<[Comment]> {
         Promise { seal in
             self.retrieve.request(
                 requestEndpoint: self.name,
@@ -23,10 +28,10 @@ final class CommentsAPI: APIEndpoint {
                 updating: [Comment](),
                 withManager: self.manager
             ).done { comments, json in
-                var userInfoByID = [Int: UserInfo]()
+                var userInfoByUserID = [User.IdType: UserInfo]()
                 json[Comment.JSONKey.users.rawValue].arrayValue.forEach {
                     let user = UserInfo(json: $0)
-                    userInfoByID[user.id] = user
+                    userInfoByUserID[user.id] = user
                 }
 
                 var voteByID = [Vote.IdType: Vote]()
@@ -35,9 +40,34 @@ final class CommentsAPI: APIEndpoint {
                     voteByID[vote.id] = vote
                 }
 
+                let isBlockNameProvided = !(blockName?.isEmpty ?? true)
+
+                let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map {
+                    isBlockNameProvided
+                        ? Attempt(json: $0, stepName: blockName ?? "")
+                        : Attempt(json: $0)
+                }
+
+                var submissionByID = [Submission.IdType: Submission]()
+                json[Comment.JSONKey.submissions.rawValue].arrayValue.forEach {
+                    let submission = isBlockNameProvided
+                        ? Submission(json: $0, stepName: blockName ?? "")
+                        : Submission(json: $0)
+
+                    if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
+                        submission.attempt = attempt
+                    }
+
+                    submissionByID[submission.id] = submission
+                }
+
                 for comment in comments {
-                    comment.userInfo = userInfoByID[comment.userID]
+                    comment.userInfo = userInfoByUserID[comment.userID]
                     comment.vote = voteByID[comment.voteID]
+
+                    if let submissionID = comment.submissionID {
+                        comment.submission = submissionByID[submissionID]
+                    }
                 }
 
                 seal.fulfill(comments)

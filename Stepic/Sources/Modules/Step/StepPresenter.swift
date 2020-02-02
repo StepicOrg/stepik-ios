@@ -7,7 +7,10 @@ protocol StepPresenterProtocol {
     func presentPlayStep(response: StepDataFlow.PlayStep.Response)
     func presentControlsUpdate(response: StepDataFlow.ControlsUpdate.Response)
     func presentDiscussionsButtonUpdate(response: StepDataFlow.DiscussionsButtonUpdate.Response)
+    func presentSolutionsButtonUpdate(response: StepDataFlow.SolutionsButtonUpdate.Response)
     func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response)
+    func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response)
+    func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class StepPresenter: StepPresenterProtocol {
@@ -62,10 +65,34 @@ final class StepPresenter: StepPresenterProtocol {
     func presentDiscussionsButtonUpdate(response: StepDataFlow.DiscussionsButtonUpdate.Response) {
         self.viewController?.displayDiscussionsButtonUpdate(
             viewModel: .init(
-                title: self.makeDiscussionsLabelTitle(step: response.step),
+                title: self.makeDiscussionsButtonTitle(step: response.step),
                 isEnabled: response.step.discussionProxyID != nil
             )
         )
+    }
+
+    func presentSolutionsButtonUpdate(response: StepDataFlow.SolutionsButtonUpdate.Response) {
+        func displayHideSolutionsButtonUpdate() {
+            self.viewController?.displaySolutionsButtonUpdate(viewModel: .init(title: nil, isEnabled: false))
+        }
+
+        switch response.result {
+        case .success(let discussionThread):
+            guard let solutionsDiscussionThread = discussionThread,
+                  solutionsDiscussionThread.threadType == .solutions,
+                  !solutionsDiscussionThread.discussionProxy.isEmpty else {
+                return displayHideSolutionsButtonUpdate()
+            }
+
+            self.viewController?.displaySolutionsButtonUpdate(
+                viewModel: .init(
+                    title: self.makeSolutionsButtonTitle(discussionThread: solutionsDiscussionThread),
+                    isEnabled: solutionsDiscussionThread.discussionsCount > 0
+                )
+            )
+        case .failure:
+            displayHideSolutionsButtonUpdate()
+        }
     }
 
     func presentDiscussions(response: StepDataFlow.DiscussionsPresentation.Response) {
@@ -77,9 +104,27 @@ final class StepPresenter: StepPresenterProtocol {
             viewModel: .init(
                 discussionProxyID: discussionProxyID,
                 stepID: response.step.id,
-                embeddedInWriteComment: (response.step.discussionsCount ?? 0) == 0
+                shouldEmbedInWriteComment: (response.step.discussionsCount ?? 0) == 0
             )
         )
+    }
+
+    func presentSolutions(response: StepDataFlow.SolutionsPresentation.Response) {
+        guard response.discussionThread.threadType == .solutions,
+              !response.discussionThread.discussionProxy.isEmpty else {
+            return
+        }
+
+        self.viewController?.displaySolutions(
+            viewModel: .init(
+                stepID: response.step.id,
+                discussionProxyID: response.discussionThread.discussionProxy
+            )
+        )
+    }
+
+    func presentWaitingState(response: StepDataFlow.BlockingWaitingIndicatorUpdate.Response) {
+        self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
     // MARK: Private API
@@ -129,8 +174,8 @@ final class StepPresenter: StepPresenterProtocol {
                 return true
             }()
 
-            let discussionsLabelTitle = self.makeDiscussionsLabelTitle(step: step)
-            let urlPath = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+            let discussionsLabelTitle = self.makeDiscussionsButtonTitle(step: step)
+            let urlPath = "\(StepikApplicationsInfo.stepikURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
 
             let viewModel = StepViewModel(
                 content: contentType,
@@ -149,7 +194,7 @@ final class StepPresenter: StepPresenterProtocol {
         }
     }
 
-    private func makeDiscussionsLabelTitle(step: Step) -> String {
+    private func makeDiscussionsButtonTitle(step: Step) -> String {
         if step.discussionProxyID == nil {
             return NSLocalizedString("DisabledDiscussionsButtonTitle", comment: "")
         }
@@ -162,6 +207,19 @@ final class StepPresenter: StepPresenterProtocol {
         }
 
         return NSLocalizedString("NoDiscussionsButtonTitle", comment: "")
+    }
+
+    private func makeSolutionsButtonTitle(discussionThread: DiscussionThread) -> String {
+        if discussionThread.discussionsCount > 0 {
+            return String(
+                format: NSLocalizedString("SolutionsButtonTitle", comment: ""),
+                arguments: [
+                    FormatterHelper.longNumber(discussionThread.discussionsCount)
+                ]
+            )
+        }
+
+        return NSLocalizedString("NoSolutionsButtonTitle", comment: "")
     }
 
     private func makeProcessedContentHTMLString(

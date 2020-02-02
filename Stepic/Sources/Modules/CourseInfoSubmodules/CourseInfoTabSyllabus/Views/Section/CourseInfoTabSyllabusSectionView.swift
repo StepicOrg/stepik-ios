@@ -37,7 +37,7 @@ extension CourseInfoTabSyllabusSectionView {
         let deadlinesInsets = UIEdgeInsets(top: 16, left: 0, bottom: 19, right: 0)
 
         let progressViewHeight: CGFloat = 3
-        let progressViewMainColor = UIColor.stepicGreen
+        let progressViewMainColor = UIColor.stepikGreen
         let progressViewSecondaryColor = UIColor.clear
 
         let tapProxyViewSize = CGSize(width: 60, height: 60)

@@ -84,7 +84,7 @@ final class SocialAuthPresenter {
             SDKProvider.delegate = viewDelegate
         }
 
-        SDKProvider.getAccessInfo().then { socialToken, email -> Promise<(StepicToken, AuthorizationType)> in
+        SDKProvider.getAccessInfo().then { socialToken, email -> Promise<(StepikToken, AuthorizationType)> in
             self.authAPI.signUpWithToken(socialToken: socialToken, email: email, provider: SDKProvider.name)
         }.then { token, authorizationType -> Promise<User> in
             AuthInfo.shared.token = token

@@ -202,6 +202,46 @@ class DeepLinkRouteSpec: QuickSpec {
                     }
                 }
             }
+
+            context("solutions") {
+                func checkRoute(_ route: DeepLinkRoute, expectedUnitID: Int?) -> ToSucceedResult {
+                    guard case let .solutions(lessonID, stepID, discussionID, unitID) = route else {
+                        return .failed(reason: "wrong enum case")
+                    }
+                    guard lessonID == 172508 else {
+                        return .failed(reason: "wrong lesson id")
+                    }
+                    guard stepID == 1 else {
+                        return .failed(reason: "wrong step id")
+                    }
+                    guard discussionID == 803115 else {
+                        return .failed(reason: "wrong discussion id")
+                    }
+                    guard unitID == expectedUnitID else {
+                        return .failed(reason: "wrong unit id")
+                    }
+                    return .succeeded
+                }
+
+                it("matches discussions deep link paths with unit id") {
+                    let paths = [
+                        "https://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&amp;thread=solutions",
+                        "https://stepik.org/lesson/172508/step/1?discussion=803115&unit=148015&amp;thread=solutions/"
+                    ]
+                    self.checkPaths(paths) { route in
+                        checkRoute(route, expectedUnitID: 148015)
+                    }
+                }
+
+                it("matches discussions deep link without unit id") {
+                    let paths = [
+                        "https://stepik.org/lesson/172508/step/1?discussion=803115&amp;thread=solutions"
+                    ]
+                    self.checkPaths(paths) { route in
+                        checkRoute(route, expectedUnitID: nil)
+                    }
+                }
+            }
         }
     }
 }

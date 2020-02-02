@@ -56,8 +56,8 @@ class StepikButton: UIButton {
             setRoundedCorners(cornerRadius: 8, borderWidth: 0)
         } else {
             self.backgroundColor = isLightBackground ? UIColor(hex: 0xf6fcf6, alpha: 1) : UIColor(hex: 0x545a67, alpha: 1)
-            self.setTitleColor(UIColor.stepicGreen, for: .normal)
-            setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepicGreen)
+            self.setTitleColor(UIColor.stepikGreen, for: .normal)
+            setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepikGreen)
         }
     }
 

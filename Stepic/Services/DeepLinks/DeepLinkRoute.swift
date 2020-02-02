@@ -13,6 +13,7 @@ enum DeepLinkRoute {
     case lesson(lessonID: Int, stepID: Int, unitID: Int?)
     case notifications(section: NotificationsSection)
     case discussions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
+    case solutions(lessonID: Int, stepID: Int, discussionID: Int, unitID: Int?)
     case profile(userID: Int)
     case syllabus(courseID: Int)
     case catalog
@@ -82,6 +83,17 @@ enum DeepLinkRoute {
             self = .discussions(lessonID: lessonID, stepID: stepID, discussionID: discussionID, unitID: unitID)
             return
         }
+
+        if let match = Pattern.solutions.regex.firstMatch(in: path),
+           let lessonIDString = match.captures[0], let lessonID = Int(lessonIDString),
+           let stepIDString = match.captures[1], let stepID = Int(stepIDString),
+           let discussionIDString = match.captures[2], let discussionID = Int(discussionIDString),
+           match.matchedString == path {
+            let unitID = match.captures[3].flatMap { Int($0) }
+            self = .solutions(lessonID: lessonID, stepID: stepID, discussionID: discussionID, unitID: unitID)
+            return
+        }
+
         return nil
     }
 
@@ -94,6 +106,7 @@ enum DeepLinkRoute {
         case syllabus
         case lesson
         case discussions
+        case solutions
 
         var regex: Regex {
             return try! Regex(string: self.pattern, options: [.ignoreCase])
@@ -122,6 +135,8 @@ enum DeepLinkRoute {
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?unit=(\d+))?\/?"#
             case .discussions:
                 return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?\/?\#(queryComponents)"#
+            case .solutions:
+                return #"\#(stepik)\#(lesson)step\/(\d+)(?:\?discussion=(\d+))(?:\&unit=(\d+))?&amp;thread=solutions.*"#
             }
         }
     }

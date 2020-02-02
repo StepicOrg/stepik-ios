@@ -9,8 +9,11 @@ extension StepControlsView {
         let navigationButtonsSpacing: CGFloat = 16
         let navigationButtonsHeight: CGFloat = 44
 
-        let discussionsButtonHeight: CGFloat = 44
+        let discussionThreadButtonHeight: CGFloat = 44
         let statisticsViewHeight: CGFloat = 44
+
+        let separatorColor = UIColor(hex: 0xEAECF0)
+        let separatorHeight: CGFloat = 1
     }
 }
 
@@ -23,14 +26,51 @@ final class StepControlsView: UIView {
         return view
     }()
 
-    private lazy var discussionsButton: StepDiscussionsButton = {
-        let button = StepDiscussionsButton()
+    private lazy var discussionsButtonTopSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        view.isHidden = true
+        return view
+    }()
+
+    private lazy var discussionsButton: StepDiscussionThreadButton = {
+        let button = StepDiscussionThreadButton(threadItem: .discussions)
         button.addTarget(self, action: #selector(self.discussionsButtonClicked), for: .touchUpInside)
         return button
     }()
 
+    private lazy var discussionsButtonBottomSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        view.isHidden = true
+        return view
+    }()
+
+    private lazy var solutionsButton: StepDiscussionThreadButton = {
+        let button = StepDiscussionThreadButton(threadItem: .solutions)
+        button.addTarget(self, action: #selector(self.solutionsButtonClicked), for: .touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+
+    private lazy var solutionsButtonBottomSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.appearance.separatorColor
+        view.isHidden = true
+        return view
+    }()
+
     private lazy var bottomControlsStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.statisticsView, self.discussionsButton])
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                self.statisticsView,
+                self.discussionsButtonTopSeparatorView,
+                self.discussionsButton,
+                self.discussionsButtonBottomSeparatorView,
+                self.solutionsButton,
+                self.solutionsButtonBottomSeparatorView
+            ]
+        )
         stackView.axis = .vertical
         stackView.spacing = 0
         return stackView
@@ -60,7 +100,11 @@ final class StepControlsView: UIView {
                 + stackViewSize.height
                 + (self.navigationState == .none ? 0 : self.appearance.spacing)
                 + self.appearance.statisticsViewHeight
-                + self.appearance.discussionsButtonHeight
+                + (self.discussionsButtonTopSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
+                + self.appearance.discussionThreadButtonHeight
+                + (self.discussionsButtonBottomSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
+                + (self.solutionsButton.isHidden ? 0 : self.appearance.discussionThreadButtonHeight)
+                + (self.solutionsButtonBottomSeparatorView.isHidden ? 0 : self.appearance.separatorHeight)
         )
     }
 
@@ -72,7 +116,11 @@ final class StepControlsView: UIView {
                 + self.appearance.navigationButtonsHeight
                 + self.appearance.spacing
                 + self.appearance.statisticsViewHeight
-                + self.appearance.discussionsButtonHeight
+                + self.appearance.separatorHeight
+                + self.appearance.discussionThreadButtonHeight
+                + self.appearance.separatorHeight
+                + self.appearance.discussionThreadButtonHeight
+                + self.appearance.separatorHeight
         )
     }
 
@@ -94,6 +142,19 @@ final class StepControlsView: UIView {
         }
     }
 
+    var solutionsTitle: String? {
+        didSet {
+            self.solutionsButton.title = self.solutionsTitle
+            self.updateSolutionsButtonVisibility()
+        }
+    }
+
+    var isSolutionsButtonEnabled: Bool = true {
+        didSet {
+            self.solutionsButton.isEnabled = self.isSolutionsButtonEnabled
+        }
+    }
+
     var passedByCount: Int? {
         didSet {
             self.statisticsView.passedByCount = self.passedByCount
@@ -109,6 +170,7 @@ final class StepControlsView: UIView {
     }
 
     var onDiscussionsButtonClick: (() -> Void)?
+    var onSolutionsButtonClick: (() -> Void)?
     var onPreviousButtonClick: (() -> Void)?
     var onNextButtonClick: (() -> Void)?
 
@@ -148,6 +210,11 @@ final class StepControlsView: UIView {
         self.onDiscussionsButtonClick?()
     }
 
+    @objc
+    private func solutionsButtonClicked() {
+        self.onSolutionsButtonClick?()
+    }
+
     private func updateNavigationState() {
         self.navigationStackView.removeAllArrangedSubviews()
 
@@ -182,6 +249,14 @@ final class StepControlsView: UIView {
 
     private func updateStatisticsVisibility() {
         self.statisticsView.isHidden = self.passedByCount == nil && self.correctRatio == nil
+    }
+
+    private func updateSolutionsButtonVisibility() {
+        self.solutionsButton.isHidden = self.solutionsTitle?.isEmpty ?? true
+        self.solutionsButtonBottomSeparatorView.isHidden = self.solutionsButton.isHidden
+
+        self.discussionsButtonTopSeparatorView.isHidden = self.solutionsButton.isHidden
+        self.discussionsButtonBottomSeparatorView.isHidden = self.solutionsButton.isHidden
     }
 
     // MARK: Enum
@@ -230,7 +305,27 @@ extension StepControlsView: ProgrammaticallyInitializableViewProtocol {
 
         self.discussionsButton.translatesAutoresizingMaskIntoConstraints = false
         self.discussionsButton.snp.makeConstraints { make in
-            make.height.equalTo(self.appearance.discussionsButtonHeight)
+            make.height.equalTo(self.appearance.discussionThreadButtonHeight)
+        }
+
+        self.solutionsButton.translatesAutoresizingMaskIntoConstraints = false
+        self.solutionsButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.discussionThreadButtonHeight)
+        }
+
+        self.discussionsButtonTopSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.discussionsButtonTopSeparatorView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
+        }
+
+        self.discussionsButtonBottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.discussionsButtonBottomSeparatorView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
+        }
+
+        self.solutionsButtonBottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.solutionsButtonBottomSeparatorView.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.separatorHeight)
         }
     }
 }

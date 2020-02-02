@@ -777,6 +777,8 @@ PreviousLessonNavigation = "Предыдущий урок";
 DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
 DisabledDiscussionsButtonTitle = "Комментарии отключены";
+SolutionsButtonTitle = "Форум решений (%@)";
+NoSolutionsButtonTitle = "Решений пока нет";
 LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
 LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
@@ -864,12 +866,16 @@ DiscussionsAlertActionLikeTitle = "Нравится";
 DiscussionsAlertActionUnlikeTitle = "Больше не нравится";
 DiscussionsAlertActionAbuseTitle = "Пожаловаться";
 DiscussionsAlertActionUnabuseTitle = "Не жаловаться";
+DiscussionsAlertActionShowSolutionTitle = "Показать решение";
 DiscussionsSortTypeAlertTitle = "Сортировать по";
 DiscussionsSortTypeLastDiscussions = "Новые обсуждения";
 DiscussionsSortTypeMostLikedDiscussions = "Самые популярные";
 DiscussionsSortTypeMostActiveDiscussions = "Самые обсуждаемые";
 DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновления";
 DiscussionsIsPinnedBadgeTitle = "Закреплён";
+DiscussionThreadSolutionsTitle = "Решения";
+DiscussionThreadCommentSolutionTitle = "Решение %@";
+DiscussionsPlaceholderEmptySolutionsTitle = "Решений пока нет";
 
 /* Write comment */
 WriteCommentTitle = "Комментарий";

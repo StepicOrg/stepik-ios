@@ -25,7 +25,7 @@ final class CreateRequestMaker {
 
             checkToken().done {
                 manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
                     method: .post,
                     parameters: params,
                     encoding: JSONEncoding.default

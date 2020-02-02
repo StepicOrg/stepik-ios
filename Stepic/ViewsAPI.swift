@@ -55,7 +55,7 @@ final class ViewsAPI: APIEndpoint {
         }
 
         return self.manager.request(
-            "\(StepicApplicationsInfo.apiURL)/views",
+            "\(StepikApplicationsInfo.apiURL)/views",
             method: .post,
             parameters: params,
             encoding: JSONEncoding.default,

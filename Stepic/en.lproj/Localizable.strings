@@ -776,6 +776,8 @@ PreviousLessonNavigation = "Previous lesson";
 DiscussionsButtonTitle = "Show comments (%@)";
 NoDiscussionsButtonTitle = "Leave a comment";
 DisabledDiscussionsButtonTitle = "Comments disabled";
+SolutionsButtonTitle = "Show solutions (%@)";
+NoSolutionsButtonTitle = "No solutions";
 LessonTooltipPointsWithScoreTitle = "You got: %@ out of %@ for step";
 LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";
@@ -863,12 +865,16 @@ DiscussionsAlertActionLikeTitle = "Like";
 DiscussionsAlertActionUnlikeTitle = "Unlike";
 DiscussionsAlertActionAbuseTitle = "Abuse";
 DiscussionsAlertActionUnabuseTitle = "Don't abuse";
+DiscussionsAlertActionShowSolutionTitle = "Show solution";
 DiscussionsSortTypeAlertTitle = "Sort by";
 DiscussionsSortTypeLastDiscussions = "Last discussions";
 DiscussionsSortTypeMostLikedDiscussions = "Most liked";
 DiscussionsSortTypeMostActiveDiscussions = "Most active";
 DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
 DiscussionsIsPinnedBadgeTitle = "Pinned";
+DiscussionThreadSolutionsTitle = "Solutions";
+DiscussionThreadCommentSolutionTitle = "Solution %@";
+DiscussionsPlaceholderEmptySolutionsTitle = "No solutions";
 
 /* Write comment */
 WriteCommentTitle = "Comment";
