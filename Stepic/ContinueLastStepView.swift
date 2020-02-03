@@ -84,6 +84,7 @@ final class ContinueLastStepView: UIView {
         let label = UILabel()
         label.textColor = self.appearance.progressLabelTextColor
         label.font = self.appearance.progressLabelFont
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
 

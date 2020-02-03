@@ -30,8 +30,7 @@ final class ContinueCourseView: UIView {
 
         if let progressDescription = viewModel.progress?.description,
            let progressValue = viewModel.progress?.value {
-            self.lastStepView.progressText = "\(NSLocalizedString("YourCurrentProgressIs", comment: "")) "
-                + "\(progressDescription)"
+            self.lastStepView.progressText = progressDescription
             self.lastStepView.progress = progressValue
         }
         self.lastStepView.coverImageURL = viewModel.coverImageURL
