@@ -227,7 +227,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 return nil
             }
 
-            return "\(progress.score)/\(progress.cost)"
+            return String(
+                format: NSLocalizedString("CourseInfoTabSyllabusSectionProgressTitle", comment: ""),
+                arguments: ["\(progress.score)", "\(progress.cost)"]
+            )
         }()
 
         let requirementsLabelText = self.makeFormattedSectionRequirementsText(
@@ -281,7 +284,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 return nil
             }
 
-            return "\(progress.score)/\(progress.cost)"
+            return String(
+                format: NSLocalizedString("CourseInfoTabSyllabusUnitProgressTitle", comment: ""),
+                arguments: ["\(progress.score)", "\(progress.cost)"]
+            )
         }()
 
         let timeToCompleteLabelText: String? = {
