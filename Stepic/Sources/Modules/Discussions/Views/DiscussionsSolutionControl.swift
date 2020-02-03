@@ -9,7 +9,6 @@ extension DiscussionsSolutionControl {
         let borderWidth: CGFloat = 1
         let borderColor = UIColor(hex: 0xCCCCCC)
 
-        let iconSize = CGSize(width: 24, height: 24)
         let iconInsets = LayoutInsets(top: 8, left: 8, bottom: 8, right: 8)
 
         let titleTextColor = UIColor.mainDark
@@ -132,19 +131,21 @@ extension DiscussionsSolutionControl: ProgrammaticallyInitializableViewProtocol 
     }
 
     func makeConstraints() {
+        self.imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
         self.imageView.snp.makeConstraints { make in
-            make.size.equalTo(self.appearance.iconSize)
-            make.top.equalToSuperview().offset(self.appearance.iconInsets.top)
             make.leading.equalToSuperview().offset(self.appearance.iconInsets.left)
-            make.bottom.equalToSuperview().offset(-self.appearance.iconInsets.bottom)
+            make.trailing.equalTo(self.titleLabel.snp.leading).offset(-self.appearance.iconInsets.right)
+            make.centerY.equalTo(self.titleLabel.snp.centerY)
         }
 
+        self.titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.imageView.snp.centerY)
-            make.leading.equalTo(self.imageView.snp.trailing).offset(self.appearance.titleInsets.left)
-            make.trailing.equalToSuperview().offset(-self.appearance.titleInsets.right)
+            make.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview().offset(self.appearance.titleInsets.top)
+            make.bottom.lessThanOrEqualToSuperview().offset(-self.appearance.titleInsets.bottom)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.titleInsets.right)
         }
     }
 }
