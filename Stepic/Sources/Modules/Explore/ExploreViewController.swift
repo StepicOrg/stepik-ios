@@ -25,9 +25,25 @@ final class ExploreViewController: BaseExploreViewController {
     private var state: Explore.ViewControllerState
     private lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
-    private lazy var searchBar = ExploreSearchBar()
+    private lazy var searchBar: ExploreSearchBarProtocol = {
+        if ExploreSearchBarStyleSplitTest.shouldParticipate {
+            let splitTest = self.splitTestingService.fetchSplitTest(ExploreSearchBarStyleSplitTest.self)
+            switch splitTest.currentGroup.searchBarStyle {
+            case .new:
+                return NewExploreSearchBar()
+            case .legacy:
+                return ExploreSearchBar()
+            }
+        }
+        return ExploreSearchBar()
+    }()
 
     private var isStoriesHidden: Bool = false
 
@@ -71,6 +87,7 @@ final class ExploreViewController: BaseExploreViewController {
 
         // Workaround for bug with black space under navigation bar due to different nav bar height
         // FIXME: see APPS-2093
+        // https://stackoverflow.com/a/47976999
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.view.setNeedsLayout()
             self?.navigationController?.view.layoutIfNeeded()
