@@ -323,7 +323,6 @@ Enrolled = "Enrolled";
 Popular = "Popular";
 Home = "Home";
 RecommendedCategory = "Recommended courses";
-YourCurrentProgressIs = "Current progress:";
 HomePlaceholderAnonymous = "<b>Sign in</b> and start learning right now";
 HomePlaceholderEmptyEnrolled = "<b>Enroll</b> for free courses and they will be here";
 HomePlaceholderEmptyPopular = "<b>Open courses</b> are on vacation. Please, see later";
@@ -437,10 +436,14 @@ NotificationTabNotificationRequestAlertMessage = "We are trying to make learning
 CourseSubscriptionNotificationRequestAlertTitle = "Stay tuned";
 CourseSubscriptionNotificationRequestAlertMessage = "We are trying to make learning process effective and comfortable. Enable notifications to follow deadlines and promptly receive course updates?";
 
+ContinueCourseCourseCurrentProgressTitle = "Current progress: %@/%@ points";
+
 /* Course info */
 CourseInfoTitle = "About course";
 CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
+CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";
+CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ points";
 CourseInfoTabSyllabusFailedLoadVideoAlertMessage = "Sorry, but something went wrong, please retry the download.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Delete course";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Are you sure you want to delete downloaded course?";

@@ -11,7 +11,7 @@ extension CourseInfoTabSyllabusCellView {
 
         let titleTextColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 14)
-        let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 8)
+        let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 16)
 
         let downloadButtonInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
         let downloadButtonSize = CGSize(width: 22, height: 22)
@@ -21,7 +21,7 @@ extension CourseInfoTabSyllabusCellView {
         let downloadedSizeLabelTextColor = UIColor.mainDark
         let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
-        let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
+        let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 16)
         let statsViewHeight: CGFloat = 17.0
 
         let progressViewHeight: CGFloat = 3
@@ -258,7 +258,7 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
         self.titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
         self.titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(self.coverImageView.snp.trailing).offset(self.appearance.titleLabelInsets.left)
-            make.trailing.equalTo(self.downloadButton.snp.leading).offset(-self.appearance.titleLabelInsets.left)
+            make.trailing.equalTo(self.downloadButton.snp.leading).offset(-self.appearance.titleLabelInsets.right)
             make.top.equalTo(self.coverImageView.snp.top)
         }
 
@@ -267,7 +267,7 @@ extension CourseInfoTabSyllabusCellView: ProgrammaticallyInitializableViewProtoc
         self.statsView.snp.makeConstraints { make in
             make.height.equalTo(self.appearance.statsViewHeight)
             make.leading.equalTo(self.titleLabel.snp.leading)
-            make.trailing.lessThanOrEqualTo(self.titleLabel.snp.trailing)
+            make.trailing.lessThanOrEqualToSuperview().offset(-self.appearance.statsInsets.right)
             make.top.equalTo(self.titleLabel.snp.bottom).offset(self.appearance.statsInsets.top)
             make.bottom.equalToSuperview().offset(-self.appearance.statsInsets.bottom)
         }

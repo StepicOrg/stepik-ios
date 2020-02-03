@@ -4,7 +4,7 @@ import UIKit
 
 extension CourseInfoTabSyllabusCellStatsView {
     struct Appearance {
-        let itemsSpacing: CGFloat = 20.0
+        let itemsSpacing: CGFloat = 8.0
 
         let itemTextFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let itemTextColor = UIColor.mainDark
@@ -132,10 +132,10 @@ extension CourseInfoTabSyllabusCellStatsView: ProgrammaticallyInitializableViewP
 
     func addSubviews() {
         self.addSubview(self.itemsStackView)
-        self.itemsStackView.addArrangedSubview(self.learnersView)
-        self.itemsStackView.addArrangedSubview(self.likesView)
         self.itemsStackView.addArrangedSubview(self.progressView)
         self.itemsStackView.addArrangedSubview(self.timeToCompleteView)
+        self.itemsStackView.addArrangedSubview(self.learnersView)
+        self.itemsStackView.addArrangedSubview(self.likesView)
     }
 
     func makeConstraints() {

@@ -324,7 +324,6 @@ Enrolled = "Мои курсы";
 Popular = "Популярные";
 Home = "Обучение";
 RecommendedCategory = "Подборка";
-YourCurrentProgressIs = "Текущий прогресс:";
 HomePlaceholderAnonymous = "<b>Войдите</b> и начните учиться прямо сейчас";
 HomePlaceholderEmptyEnrolled = "<b>Запишитесь</b> на курсы и они будут показаны здесь";
 HomePlaceholderEmptyPopular = "<b>Открытые курсы</b> сейчас в отпуске. Пожалуйста, зайдите позже";
@@ -439,10 +438,14 @@ NotificationTabNotificationRequestAlertMessage = "Мы пытаемся сдел
 CourseSubscriptionNotificationRequestAlertTitle = "Следи за обновлениями";
 CourseSubscriptionNotificationRequestAlertMessage = "Мы пытаемся сделать процесс обучения максимально удобным и полезным. Разрешить уведомления, чтобы следить за дедлайнами и оперативно получать обновления по курсу?";
 
+ContinueCourseCourseCurrentProgressTitle = "Текущий прогресс: %@/%@ баллов";
+
 /* Course info */
 CourseInfoTitle = "О курсе";
 CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
+CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
+CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ баллов";
 CourseInfoTabSyllabusFailedLoadVideoAlertMessage = "Не удалось загрузить видео, повторите загрузку позже.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Удалить курс";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный курс?";
