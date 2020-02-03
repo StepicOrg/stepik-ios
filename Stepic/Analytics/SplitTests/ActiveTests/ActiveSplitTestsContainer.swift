@@ -15,6 +15,6 @@ final class ActiveSplitTestsContainer {
     )
 
     static func setActiveTestsGroups() {
-        // There are no A/B tests now
+        self.splitTestingService.fetchSplitTest(ExploreSearchBarStyleSplitTest.self).setSplitTestGroup()
     }
 }
