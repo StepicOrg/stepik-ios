@@ -1,10 +1,13 @@
 import SnapKit
 import UIKit
 
-final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
+protocol ExploreSearchBarProtocol: UISearchBar {
+    var searchBarDelegate: UISearchBarDelegate? { get set }
+}
+
+final class NewExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
     enum Appearance {
-        static let searchFieldPositionAdjustment = UIOffset(horizontal: -6, vertical: 0)
-        static let textColor = UIColor.mainDark.withAlphaComponent(0.3)
+        static let textColor = UIColor.mainDark
 
         // Height should be fixed and leq than 44pt (due to iOS 11+ strange nav bar)
         static let barHeight: CGFloat = 44.0
@@ -22,9 +25,12 @@ final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
         }
     }
 
-    // TODO: iOS 13 has `searchTextField` property, take a look.
     private var searchField: UITextField? {
-        self.value(forKey: "searchField") as? UITextField
+        if #available(iOS 13.0, *) {
+            return self.searchTextField
+        } else {
+            return self.value(forKey: "searchField") as? UITextField
+        }
     }
 
     override init(frame: CGRect) {
@@ -37,6 +43,7 @@ final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
         self.searchField?.textColor = Appearance.textColor
         self.placeholder = Appearance.placeholderText
         self.searchField?.rightViewMode = .whileEditing
+        self.searchBarStyle = .minimal
 
         self.applySystemFixes()
     }
@@ -47,7 +54,6 @@ final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
     }
 
     private func applySystemFixes() {
-        self.searchFieldBackgroundPositionAdjustment = Appearance.searchFieldPositionAdjustment
         self.translatesAutoresizingMaskIntoConstraints = false
         self.snp.makeConstraints { make in
             make.height.equalTo(Appearance.barHeight)
@@ -55,7 +61,7 @@ final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
     }
 }
 
-extension ExploreSearchBar: UISearchBarDelegate {
+extension NewExploreSearchBar: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
         self.searchBarDelegate?.searchBarTextDidBeginEditing?(searchBar)
