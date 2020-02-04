@@ -212,13 +212,13 @@ enum Discussions {
         struct Response {
             let stepID: Step.IdType
             let submission: Submission
-            let discussionID: DiscussionThread.IdType
+            let discussionID: Comment.IdType
         }
 
         struct ViewModel {
             let stepID: Step.IdType
             let submission: Submission
-            let discussionID: DiscussionThread.IdType
+            let discussionID: Comment.IdType
         }
     }
 

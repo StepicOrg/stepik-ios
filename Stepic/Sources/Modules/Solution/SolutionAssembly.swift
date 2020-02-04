@@ -3,9 +3,9 @@ import UIKit
 final class SolutionAssembly: Assembly {
     private let stepID: Step.IdType
     private let submission: Submission
-    private let discussionID: DiscussionThread.IdType
+    private let discussionID: Comment.IdType
 
-    init(stepID: Step.IdType, submission: Submission, discussionID: DiscussionThread.IdType) {
+    init(stepID: Step.IdType, submission: Submission, discussionID: Comment.IdType) {
         self.stepID = stepID
         self.submission = submission
         self.discussionID = discussionID
