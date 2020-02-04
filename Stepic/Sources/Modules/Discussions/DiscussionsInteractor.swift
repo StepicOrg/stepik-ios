@@ -403,7 +403,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         }
 
         self.presenter.presentSolution(
-            response: .init(stepID: self.stepID, submission: submission, discussionID: self.discussionProxyID)
+            response: .init(stepID: self.stepID, submission: submission, discussionID: comment.id)
         )
     }
 

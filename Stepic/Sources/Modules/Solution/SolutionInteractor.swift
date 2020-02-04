@@ -8,7 +8,7 @@ protocol SolutionInteractorProtocol {
 final class SolutionInteractor: SolutionInteractorProtocol {
     private let stepID: Step.IdType
     private let submission: Submission
-    private let discussionID: DiscussionThread.IdType
+    private let discussionID: Comment.IdType
 
     private let presenter: SolutionPresenterProtocol
     private let provider: SolutionProviderProtocol
@@ -16,7 +16,7 @@ final class SolutionInteractor: SolutionInteractorProtocol {
     init(
         stepID: Step.IdType,
         submission: Submission,
-        discussionID: DiscussionThread.IdType,
+        discussionID: Comment.IdType,
         presenter: SolutionPresenterProtocol,
         provider: SolutionProviderProtocol
     ) {
