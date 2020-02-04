@@ -2,31 +2,32 @@ import UIKit
 
 final class SolutionAssembly: Assembly {
     private let stepID: Step.IdType
-    private let submissionID: Submission.IdType
+    private let submission: Submission
+    private let discussionID: Comment.IdType
 
-    init(stepID: Step.IdType, submissionID: Submission.IdType) {
+    init(stepID: Step.IdType, submission: Submission, discussionID: Comment.IdType) {
         self.stepID = stepID
-        self.submissionID = submissionID
+        self.submission = submission
+        self.discussionID = discussionID
     }
 
     func makeModule() -> UIViewController {
         let provider = SolutionProvider(
             stepsPersistenceService: StepsPersistenceService(),
-            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
-            submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
-            attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI())
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
         )
         let presenter = SolutionPresenter()
         let interactor = SolutionInteractor(
             stepID: self.stepID,
-            submissionID: self.submissionID,
+            submission: self.submission,
+            discussionID: self.discussionID,
             presenter: presenter,
             provider: provider
         )
         let viewController = SolutionViewController(interactor: interactor)
         viewController.title = String(
             format: NSLocalizedString("SolutionTitle", comment: ""),
-            arguments: ["\(self.submissionID)"]
+            arguments: ["\(self.submission.id)"]
         )
 
         presenter.viewController = viewController

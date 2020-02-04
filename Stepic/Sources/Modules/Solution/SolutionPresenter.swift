@@ -12,12 +12,20 @@ final class SolutionPresenter: SolutionPresenterProtocol {
         case .failure:
             self.viewController?.displaySolution(viewModel: .init(state: .error))
         case .success(let data):
-            let viewModel = self.makeViewModel(step: data.step, submission: data.submission, attempt: data.attempt)
+            let viewModel = self.makeViewModel(
+                step: data.step,
+                submission: data.submission,
+                discussionID: data.discussionID
+            )
             self.viewController?.displaySolution(viewModel: .init(state: .result(data: viewModel)))
         }
     }
 
-    private func makeViewModel(step: Step, submission: Submission, attempt: Attempt) -> SolutionViewModel {
+    private func makeViewModel(
+        step: Step,
+        submission: Submission,
+        discussionID: Comment.IdType
+    ) -> SolutionViewModel {
         let quizStatus: QuizStatus = {
             switch submission.status {
             case "wrong":
@@ -53,12 +61,12 @@ final class SolutionPresenter: SolutionPresenterProtocol {
             step: step,
             quizStatus: quizStatus,
             reply: submission.reply,
-            dataset: attempt.dataset,
+            dataset: submission.attempt?.dataset,
             feedback: submission.feedback,
             feedbackTitle: feedbackTitle,
             hintContent: hintContent,
             codeDetails: codeDetails,
-            solutionURL: self.makeURL(for: step)
+            solutionURL: self.makeURL(for: step, discussionID: discussionID)
         )
     }
 
@@ -103,9 +111,13 @@ final class SolutionPresenter: SolutionPresenterProtocol {
         return processor.processContent()
     }
 
-    // TODO: Format https://stepik.org/lesson/290850/step/1?discussion=1387392&thread=solutions&unit=272337
-    private func makeURL(for step: Step) -> URL? {
-        let link = "\(StepicApplicationsInfo.stepicURL)/lesson/\(step.lessonID)/step/\(step.position)?from_mobile_app=true"
+    private func makeURL(for step: Step, discussionID: Comment.IdType) -> URL? {
+        let link = "\(StepikApplicationsInfo.stepikURL)"
+            + "/lesson/\(step.lessonID)"
+            + "/step/\(step.position)"
+            + "?from_mobile_app=true"
+            + "&discussion=\(discussionID)"
+            + "&thread=solutions"
         return URL(string: link)
     }
 }

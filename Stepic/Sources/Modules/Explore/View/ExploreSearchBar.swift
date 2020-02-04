@@ -1,7 +1,7 @@
 import SnapKit
 import UIKit
 
-final class ExploreSearchBar: UISearchBar {
+final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
     enum Appearance {
         static let searchFieldPositionAdjustment = UIOffset(horizontal: -6, vertical: 0)
         static let textColor = UIColor.mainDark.withAlphaComponent(0.3)

@@ -39,9 +39,9 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         }
 
         if let slug = course.slug {
-            return "\(StepicApplicationsInfo.stepicURL)/course/\(slug)"
+            return "\(StepikApplicationsInfo.stepikURL)/course/\(slug)"
         } else {
-            return "\(StepicApplicationsInfo.stepicURL)/\(course.id)"
+            return "\(StepikApplicationsInfo.stepikURL)/\(course.id)"
         }
     }
 

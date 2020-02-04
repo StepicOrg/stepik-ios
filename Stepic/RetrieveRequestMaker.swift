@@ -22,7 +22,7 @@ final class RetrieveRequestMaker {
         Promise { seal in
             checkToken().done {
                 manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)",
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)/\(id)",
                     method: .get,
                     encoding: URLEncoding.default
                 ).validate().responseSwiftyJSON { response in
@@ -53,7 +53,7 @@ final class RetrieveRequestMaker {
         Promise { seal in
             checkToken().done {
                 manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
                     method: .get,
                     parameters: params,
                     encoding: URLEncoding.default
@@ -113,7 +113,7 @@ final class RetrieveRequestMaker {
         Promise { seal in
             checkToken().done {
                 manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
                     method: .get,
                     parameters: params,
                     encoding: URLEncoding.default
@@ -187,7 +187,7 @@ final class RetrieveRequestMaker {
         return Promise { seal in
             checkToken().done {
                 manager.request(
-                    "\(StepicApplicationsInfo.apiURL)/\(requestEndpoint)",
+                    "\(StepikApplicationsInfo.apiURL)/\(requestEndpoint)",
                     parameters: params,
                     encoding: URLEncoding.default
                 ).validate().responseSwiftyJSON { response in

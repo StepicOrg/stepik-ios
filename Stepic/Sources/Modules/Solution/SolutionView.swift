@@ -13,7 +13,7 @@ extension SolutionView {
 
         let loadingIndicatorColor = UIColor.mainDark
 
-        let actionButtonBackgroundColor = UIColor.stepicGreen
+        let actionButtonBackgroundColor = UIColor.stepikGreen
         let actionButtonHeight: CGFloat = 44
         let actionButtonTextColor = UIColor.white
         let actionButtonCornerRadius: CGFloat = 6

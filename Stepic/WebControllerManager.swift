@@ -166,10 +166,10 @@ extension WebControllerManager: WKNavigationDelegate {
             let rurl = navigationAction.request.url
 
             if let url = rurl {
-                if url.scheme == StepicApplicationsInfo.urlScheme {
+                if url.scheme == StepikApplicationsInfo.urlScheme {
                     UIApplication.shared.openURL(url)
                 } else if url.absoluteString.contains("social_signup_with_existing_email") {
-                    if let url = URL(string: "\(StepicApplicationsInfo.social?.redirectUri ?? "")?\(url.query ?? "")") {
+                    if let url = URL(string: "\(StepikApplicationsInfo.social?.redirectUri ?? "")?\(url.query ?? "")") {
                         self.dismissWebControllerWithKey("social auth", animated: false, completion: {
                             UIApplication.shared.openURL(url)
                         }, error: nil)

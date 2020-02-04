@@ -1,25 +1,39 @@
-//
-//  MathReply.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 26.01.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
-//
-
+import Foundation
 import SwiftyJSON
-import UIKit
 
-final class MathReply: NSObject, Reply {
+final class MathReply: Reply {
     var formula: String
+
+    var dictValue: [String: Any] {
+        [JSONKey.formula.rawValue: self.formula]
+    }
+
+    var description: String {
+        "MathReply(formula: \(self.formula))"
+    }
 
     init(formula: String) {
         self.formula = formula
     }
 
     required init(json: JSON) {
-        formula = json["formula"].stringValue
-        super.init()
+        self.formula = json[JSONKey.formula.rawValue].stringValue
     }
 
-    var dictValue: [String: Any] { ["formula": formula] }
+    enum JSONKey: String {
+        case formula
+    }
+}
+
+extension MathReply: Hashable {
+    static func == (lhs: MathReply, rhs: MathReply) -> Bool {
+        if lhs === rhs { return true }
+        if type(of: lhs) != type(of: rhs) { return false }
+        if lhs.formula != rhs.formula { return false }
+        return true
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.formula)
+    }
 }

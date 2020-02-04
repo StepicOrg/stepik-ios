@@ -11,12 +11,27 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
 
     lazy var solutionView = self.view as? SolutionView
 
+    private lazy var shareBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(self.shareButtonClicked)
+        )
+        item.isEnabled = false
+        return item
+    }()
+
     private var state: Solution.ViewControllerState {
         didSet {
             self.updateState()
         }
     }
-    private var solutionURL: URL?
+
+    private var solutionURL: URL? {
+        didSet {
+            self.shareBarButtonItem.isEnabled = self.solutionURL != nil
+        }
+    }
 
     init(
         interactor: SolutionInteractorProtocol,
@@ -41,6 +56,17 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.setup()
+        self.updateState()
+
+        self.interactor.doSolutionLoad(request: .init())
+    }
+
+    // MARK: Private API
+
+    private func setup() {
+        self.navigationItem.rightBarButtonItem = self.shareBarButtonItem
+
         self.registerPlaceholder(
             placeholder: StepikPlaceholder(
                 .noConnectionQuiz,
@@ -51,12 +77,7 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
             ),
             for: .connectionError
         )
-        self.updateState()
-
-        self.interactor.doSolutionLoad(request: .init())
     }
-
-    // MARK: Private API
 
     private func updateState() {
         switch self.state {
@@ -78,7 +99,7 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
 
         self.solutionURL = data.solutionURL
 
-        let quizType = NewStep.QuizType(blockName: data.step.block.name)
+        let quizType = StepDataFlow.QuizType(blockName: data.step.block.name)
 
         if case .unknown = quizType {
             self.solutionView?.actionTitle = NSLocalizedString("UnsupportedSolutionActionTitle", comment: "")
@@ -128,6 +149,21 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
         }
 
         self.solutionView?.endLoading()
+    }
+
+    @objc
+    private func shareButtonClicked() {
+        guard let link = self.solutionURL?.absoluteString else {
+            return
+        }
+
+        DispatchQueue.global().async {
+            let sharingViewController = SharingHelper.getSharingController(link)
+            DispatchQueue.main.async {
+                sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
+                self.present(sharingViewController, animated: true, completion: nil)
+            }
+        }
     }
 }
 

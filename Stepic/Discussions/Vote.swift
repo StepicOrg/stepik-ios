@@ -51,3 +51,9 @@ final class Vote: JSONSerializable {
         case value
     }
 }
+
+extension Vote: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "Vote(id: \(id), value: \(value?.rawValue ?? "nil"))"
+    }
+}

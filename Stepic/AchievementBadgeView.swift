@@ -140,7 +140,7 @@ final class AchievementBadgeView: UIView {
 
         circleProgressLayer.path = circlePath.cgPath
         circleProgressLayer.fillColor = nil
-        circleProgressLayer.strokeColor = UIColor.stepicGreen.cgColor
+        circleProgressLayer.strokeColor = UIColor.stepikGreen.cgColor
         circleProgressLayer.lineWidth = progressWidth
 
         circleView.layer.addSublayer(circleProgressLayer)

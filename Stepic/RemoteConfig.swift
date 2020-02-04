@@ -29,8 +29,8 @@ final class RemoteConfig {
 
     lazy var appDefaults: [String: NSObject] = [
         RemoteConfigKeys.showStreaksNotificationTrigger.rawValue: defaultShowStreaksNotificationTrigger.rawValue as NSObject,
-        RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepicApplicationsInfo.adaptiveRatingURL as NSObject,
-        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepicApplicationsInfo.adaptiveSupportedCourses as NSObject,
+        RemoteConfigKeys.adaptiveBackendUrl.rawValue: StepikApplicationsInfo.adaptiveRatingURL as NSObject,
+        RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue: StepikApplicationsInfo.adaptiveSupportedCourses as NSObject,
         RemoteConfigKeys.newLessonAvailable.rawValue: true as NSObject
     ]
 
@@ -53,7 +53,7 @@ final class RemoteConfig {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
             forKey: RemoteConfigKeys.adaptiveBackendUrl.rawValue
         ).stringValue else {
-            return StepicApplicationsInfo.adaptiveRatingURL
+            return StepikApplicationsInfo.adaptiveRatingURL
         }
 
         return configValue
@@ -63,7 +63,7 @@ final class RemoteConfig {
         guard let configValue = FirebaseRemoteConfig.RemoteConfig.remoteConfig().configValue(
             forKey: RemoteConfigKeys.supportedInAdaptiveModeCourses.rawValue
         ).stringValue else {
-            return StepicApplicationsInfo.adaptiveSupportedCourses
+            return StepikApplicationsInfo.adaptiveSupportedCourses
         }
 
         let courses = configValue.components(separatedBy: ",")

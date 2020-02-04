@@ -1,25 +1,39 @@
-//
-//  TextReply.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 26.01.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
-//
-
+import Foundation
 import SwiftyJSON
-import UIKit
 
-final class TextReply: NSObject, Reply {
+final class TextReply: Reply, CustomStringConvertible {
     var text: String
+
+    var dictValue: [String: Any] {
+        [JSONKey.text.rawValue: self.text]
+    }
+
+    var description: String {
+        "TextReply(text: \(self.text))"
+    }
 
     init(text: String) {
         self.text = text
     }
 
     required init(json: JSON) {
-        text = json["text"].stringValue
-        super.init()
+        self.text = json[JSONKey.text.rawValue].stringValue
     }
 
-    var dictValue: [String: Any] { ["text": text] }
+    enum JSONKey: String {
+        case text
+    }
+}
+
+extension TextReply: Hashable {
+    static func == (lhs: TextReply, rhs: TextReply) -> Bool {
+        if lhs === rhs { return true }
+        if type(of: lhs) != type(of: rhs) { return false }
+        if lhs.text != rhs.text { return false }
+        return true
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.text)
+    }
 }

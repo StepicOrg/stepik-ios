@@ -2,6 +2,7 @@ import Kanna
 import UIKit
 
 protocol DiscussionsPresenterProtocol {
+    func presentNavigationItemUpdate(response: Discussions.NavigationItemUpdate.Response)
     func presentDiscussions(response: Discussions.DiscussionsLoad.Response)
     func presentNextDiscussions(response: Discussions.NextDiscussionsLoad.Response)
     func presentNextReplies(response: Discussions.NextRepliesLoad.Response)
@@ -14,11 +15,35 @@ protocol DiscussionsPresenterProtocol {
     func presentCommentAbuse(response: Discussions.CommentAbuse.Response)
     func presentSortTypes(response: Discussions.SortTypesPresentation.Response)
     func presentSortTypeUpdate(response: Discussions.SortTypeUpdate.Response)
+    func presentSolution(response: Discussions.SolutionPresentation.Response)
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response)
 }
 
 final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     weak var viewController: DiscussionsViewControllerProtocol?
+
+    func presentNavigationItemUpdate(response: Discussions.NavigationItemUpdate.Response) {
+        switch response.threadType {
+        case .default:
+            self.viewController?.displayNavigationItemUpdate(
+                viewModel: .init(
+                    title: NSLocalizedString("DiscussionsTitle", comment: ""),
+                    shouldShowSortButton: true,
+                    shouldShowComposeButton: true,
+                    threadType: .default
+                )
+            )
+        case .solutions:
+            self.viewController?.displayNavigationItemUpdate(
+                viewModel: .init(
+                    title: NSLocalizedString("DiscussionThreadSolutionsTitle", comment: ""),
+                    shouldShowSortButton: true,
+                    shouldShowComposeButton: false,
+                    threadType: .solutions
+                )
+            )
+        }
+    }
 
     func presentDiscussions(response: Discussions.DiscussionsLoad.Response) {
         var viewModel: Discussions.DiscussionsLoad.ViewModel
@@ -134,6 +159,16 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         self.viewController?.displaySortTypeUpdate(viewModel: .init(data: self.makeDiscussionsData(response.result)))
     }
 
+    func presentSolution(response: Discussions.SolutionPresentation.Response) {
+        self.viewController?.displaySolution(
+            viewModel: .init(
+                stepID: response.stepID,
+                submission: response.submission,
+                discussionID: response.discussionID
+            )
+        )
+    }
+
     func presentWaitingState(response: Discussions.BlockingWaitingIndicatorUpdate.Response) {
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
@@ -234,6 +269,21 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
         }()
         let strippedAndTrimmedText = strippedText.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        let solution: DiscussionsCommentViewModel.Solution? = {
+            guard let submission = comment.submission else {
+                return nil
+            }
+
+            return .init(
+                id: submission.id,
+                title: String(
+                    format: NSLocalizedString("DiscussionThreadCommentSolutionTitle", comment: ""),
+                    arguments: ["\(submission.id)"]
+                ),
+                isCorrect: submission.isCorrect
+            )
+        }()
+
         return DiscussionsCommentViewModel(
             id: comment.id,
             avatarImageURL: avatarImageURL,
@@ -252,7 +302,8 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             canEdit: comment.actions.contains(.edit),
             canDelete: comment.actions.contains(.delete),
             canVote: comment.actions.contains(.vote),
-            hasReplies: hasReplies
+            hasReplies: hasReplies,
+            solution: solution
         )
     }
 

@@ -17,7 +17,7 @@ enum UserRole: String {
 
 final class Comment: JSONSerializable {
     var id: Int = -1
-    var parentID: Comment.IdType?
+    var parentID: IdType?
     var userID: User.IdType = 0
     var userRole: UserRole = .student
     var time = Date()
@@ -32,9 +32,11 @@ final class Comment: JSONSerializable {
     var epicCount: Int = 0
     var abuseCount: Int = 0
     var actions: [Action] = []
+    var submissionID: Submission.IdType?
 
     var userInfo: UserInfo!
     var vote: Vote!
+    var submission: Submission?
 
     var json: JSON {
         var dict: JSON = [
@@ -79,6 +81,7 @@ final class Comment: JSONSerializable {
         self.voteID = json[JSONKey.vote.rawValue].stringValue
         self.epicCount = json[JSONKey.epicCount.rawValue].intValue
         self.abuseCount = json[JSONKey.abuseCount.rawValue].intValue
+        self.submissionID = json[JSONKey.submission.rawValue].int
 
         self.actions.removeAll(keepingCapacity: true)
         for (actionKey, value) in json[JSONKey.actions.rawValue].dictionaryValue {
@@ -119,5 +122,37 @@ final class Comment: JSONSerializable {
         case actions
         case users
         case votes
+        case submission
+        case submissions
+        case attempts
+    }
+}
+
+// MARK: - Comment: CustomDebugStringConvertible -
+
+extension Comment: CustomDebugStringConvertible {
+    var debugDescription: String {
+        """
+        Comment(id: \(id), \
+        parentID: \(parentID ??? "nil"), \
+        userID: \(userID), \
+        userRole: \(userRole), \
+        time: \(time), \
+        lastTime: \(lastTime), \
+        text: \(text), \
+        replyCount: \(replyCount), \
+        isDeleted: \(isDeleted), \
+        targetStepID: \(targetStepID), \
+        repliesIDs: \(repliesIDs), \
+        isPinned: \(isPinned), \
+        voteID: \(voteID), \
+        epicCount: \(epicCount), \
+        abuseCount: \(abuseCount), \
+        actions: \(actions), \
+        submissionID: \(submissionID ??? "nil"), \
+        userInfo: \(userInfo ??? "nil"), \
+        vote: \(vote ??? "nil"), \
+        submission: \(submission ??? "nil"))
+        """
     }
 }

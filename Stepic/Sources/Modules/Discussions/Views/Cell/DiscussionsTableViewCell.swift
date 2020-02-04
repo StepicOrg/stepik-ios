@@ -42,6 +42,9 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
         cellView.onTextContentClick = { [weak self] in
             self?.onTextContentClick?()
         }
+        cellView.onSolutionClick = { [weak self] in
+            self?.onSolutionClick?()
+        }
         cellView.onContentLoaded = { [weak self] in
             self?.onContentLoaded?()
         }
@@ -77,6 +80,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     var onLinkClick: ((URL) -> Void)?
     var onImageClick: ((URL) -> Void)?
     var onTextContentClick: (() -> Void)?
+    var onSolutionClick: (() -> Void)?
     // Content callbacks
     var onContentLoaded: (() -> Void)?
     var onNewHeightUpdate: ((CGFloat) -> Void)?

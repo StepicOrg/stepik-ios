@@ -33,7 +33,7 @@ final class AuthInfo: NSObject {
         }
     }
 
-    private func setTokenValue(_ newToken: StepicToken?) {
+    private func setTokenValue(_ newToken: StepikToken?) {
         defaults.setValue(newToken?.accessToken, forKey: "access_token")
         defaults.setValue(newToken?.refreshToken, forKey: "refresh_token")
         defaults.setValue(newToken?.tokenType, forKey: "token_type")
@@ -41,7 +41,7 @@ final class AuthInfo: NSObject {
         defaults.synchronize()
     }
 
-    var token: StepicToken? {
+    var token: StepikToken? {
         set(newToken) {
             if newToken == nil || newToken?.accessToken == "" {
                 print("\nsetting new token to nil\n")
@@ -97,7 +97,7 @@ final class AuthInfo: NSObject {
             let tokenType = defaults.value(forKey: "token_type") as? String {
 //                print("got accessToken \(accessToken)")
                 let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
-                return StepicToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
+                return StepikToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
             } else {
                 return nil
             }

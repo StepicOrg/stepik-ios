@@ -48,7 +48,7 @@ final class RateAppViewController: UIViewController {
             case .appStore:
                 rightButton.titleLabel?.text = NSLocalizedString("AppStore", comment: "")
                 rightButton.setTitle(NSLocalizedString("AppStore", comment: ""), for: .normal)
-                rightButton.setTitleColor(UIColor.stepicGreen, for: .normal)
+                rightButton.setTitleColor(UIColor.stepikGreen, for: .normal)
             case .email:
                 rightButton.titleLabel?.text = NSLocalizedString("Email", comment: "")
                 rightButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)

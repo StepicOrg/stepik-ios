@@ -30,7 +30,7 @@ extension SocialAuthViewController: SocialAuthView {
         case .error:
             SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))
         case .existingEmail(let email):
-            if let url = URL(string: "\(StepicApplicationsInfo.social?.redirectUri ?? "")?error=social_signup_with_existing_email&email=\(email)") {
+            if let url = URL(string: "\(StepikApplicationsInfo.social?.redirectUri ?? "")?error=social_signup_with_existing_email&email=\(email)") {
                 UIApplication.shared.openURL(url)
             } else {
                 SVProgressHUD.showError(withStatus: NSLocalizedString("FailedToSignIn", comment: ""))

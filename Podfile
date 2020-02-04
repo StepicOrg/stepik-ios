@@ -8,7 +8,7 @@ def shared_pods
     pod 'Alamofire', '4.9.1'
     pod 'Atributika', '4.9.4'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.5.1'
+    pod 'SDWebImage', '5.5.2'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Logging', '1.2.0'
     pod 'Fabric', '1.10.2'
@@ -35,7 +35,7 @@ def all_pods
     pod 'Firebase/Analytics' , '6.14.0'
     pod 'Firebase/RemoteConfig', '6.14.0'
 
-    pod 'YandexMobileMetrica/Dynamic', '3.8.2'
+    pod 'YandexMobileMetrica/Dynamic', '3.9.2'
     pod 'Amplitude-iOS', '4.9.3'
     pod 'Branch', '0.31.0'
         
@@ -54,7 +54,7 @@ def all_pods
     
     pod 'Presentr', '1.9'
     
-    pod 'Agrume', '5.6.0'
+    pod 'Agrume', '5.6.1'
     pod 'Highlightr', '2.1.0'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.3'

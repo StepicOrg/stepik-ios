@@ -42,15 +42,15 @@ extension CourseListColorMode {
             return .init(
                 textColor: UIColor.mainText,
                 backgroundColor: UIColor(hex: 0x535366, alpha: 0.06),
-                callToActionTextColor: UIColor.stepicGreen,
-                callToActionBackgroundColor: UIColor.stepicGreen.withAlphaComponent(0.1)
+                callToActionTextColor: UIColor.stepikGreen,
+                callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
             )
         case .dark:
             return .init(
                 textColor: UIColor.white,
                 backgroundColor: UIColor(hex: 0xffffff, alpha: 0.1),
-                callToActionTextColor: UIColor.stepicGreen,
-                callToActionBackgroundColor: UIColor.stepicGreen.withAlphaComponent(0.1)
+                callToActionTextColor: UIColor.stepikGreen,
+                callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
             )
         }
     }

@@ -17,7 +17,7 @@ final class StepicsAPI: APIEndpoint {
     func retrieveCurrentUser() -> Promise<User> {
         Promise { seal in
             self.manager.request(
-                "\(StepicApplicationsInfo.apiURL)/\(name)/1",
+                "\(StepikApplicationsInfo.apiURL)/\(name)/1",
                 parameters: nil,
                 encoding: URLEncoding.default,
                 headers: AuthInfo.shared.initialHTTPHeaders

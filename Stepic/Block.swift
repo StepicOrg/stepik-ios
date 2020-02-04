@@ -84,7 +84,9 @@ final class Block: NSManagedObject {
         case randomTasks = "random-tasks"
         case manualScore = "manual-score"
 
-        var isTheory: Bool { [BlockType.text, BlockType.video].contains(self) }
+        static var theoryTypes: [BlockType] { [.text, .video] }
+
+        var isTheory: Bool { Self.theoryTypes.contains(self) }
     }
 
     enum JSONKey: String {

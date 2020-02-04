@@ -30,4 +30,11 @@ struct DiscussionsCommentViewModel {
     let canDelete: Bool
     let canVote: Bool
     let hasReplies: Bool
+    let solution: Solution?
+
+    struct Solution {
+        let id: Submission.IdType
+        let title: String
+        let isCorrect: Bool
+    }
 }

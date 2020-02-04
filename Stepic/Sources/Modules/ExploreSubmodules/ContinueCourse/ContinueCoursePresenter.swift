@@ -29,10 +29,13 @@ final class ContinueCoursePresenter: ContinueCoursePresenterProtocol {
             if let progress = course.progress {
                 var normalizedPercent = progress.percentPassed
                 normalizedPercent.round(.up)
-                return (
-                    description: "\(progress.score)/\(progress.cost)",
-                    value: normalizedPercent / 100
+
+                let progressText = String(
+                    format: NSLocalizedString("ContinueCourseCourseCurrentProgressTitle", comment: ""),
+                    arguments: ["\(progress.score)", "\(progress.cost)"]
                 )
+
+                return (description: progressText, value: normalizedPercent / 100)
             }
             return nil
         }()

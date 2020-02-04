@@ -26,7 +26,7 @@ final class NotificationStatusButton: UIButton {
         return mark
     }()
 
-    private let unreadMarkColor = UIColor.stepicGreen
+    private let unreadMarkColor = UIColor.stepikGreen
     private let unreadMarkColorHightlighted = UIColor(red: 91 / 255, green: 183 / 255, blue: 91 / 255, alpha: 1.0)
 
     override func awakeFromNib() {
