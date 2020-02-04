@@ -24,7 +24,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
     private func makeViewModel(
         step: Step,
         submission: Submission,
-        discussionID: DiscussionThread.IdType
+        discussionID: Comment.IdType
     ) -> SolutionViewModel {
         let quizStatus: QuizStatus = {
             switch submission.status {
@@ -111,7 +111,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
         return processor.processContent()
     }
 
-    private func makeURL(for step: Step, discussionID: DiscussionThread.IdType) -> URL? {
+    private func makeURL(for step: Step, discussionID: Comment.IdType) -> URL? {
         let link = "\(StepikApplicationsInfo.stepikURL)"
             + "/lesson/\(step.lessonID)"
             + "/step/\(step.position)"
