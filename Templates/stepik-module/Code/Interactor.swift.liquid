@@ -19,11 +19,11 @@ final class {{ module_info.name }}Interactor: {{ module_info.name }}InteractorPr
         self.provider = provider
     }
 
-    func doSomeAction(request: {{ module_info.name }}.SomeAction.Request) { }
+    func doSomeAction(request: {{ module_info.name }}.SomeAction.Request) {}
 
     enum Error: Swift.Error {
         case something
     }
 }
 
-extension {{ module_info.name }}Interactor: {{ module_info.name }}InputProtocol { }
+extension {{ module_info.name }}Interactor: {{ module_info.name }}InputProtocol {}
