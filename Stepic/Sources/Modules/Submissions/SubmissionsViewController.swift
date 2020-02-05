@@ -2,6 +2,7 @@ import UIKit
 
 protocol SubmissionsViewControllerProtocol: AnyObject {
     func displaySubmissions(viewModel: Submissions.SubmissionsLoad.ViewModel)
+    func displayNextSubmissions(viewModel: Submissions.NextSubmissionsLoad.ViewModel)
 }
 
 final class SubmissionsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -136,6 +137,23 @@ extension SubmissionsViewController: SubmissionsViewControllerProtocol {
     func displaySubmissions(viewModel: Submissions.SubmissionsLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
+
+    func displayNextSubmissions(viewModel: Submissions.NextSubmissionsLoad.ViewModel) {
+        switch viewModel.state {
+        case .result(let nextData):
+            if case .result(let currentData) = self.state {
+                let newState = Submissions.ViewControllerState.result(
+                    data: .init(
+                        submissions: currentData.submissions + nextData.submissions,
+                        hasNextPage: nextData.hasNextPage
+                    )
+                )
+                self.updateState(newState: newState)
+            }
+        case .error:
+            self.updateState(newState: self.state)
+        }
+    }
 }
 
 // MARK: - SubmissionsViewController: SubmissionsViewDelegate -
@@ -154,7 +172,7 @@ extension SubmissionsViewController: SubmissionsViewDelegate {
         }
 
         self.canTriggerPagination = false
-        //self.interactor.doNextCourseReviewsFetch(request: .init())
+        self.interactor.doNextSubmissionsLoad(request: .init())
     }
 
     func submissionsView(_ submissionsView: SubmissionsView, didSelectRowAt indexPath: IndexPath) {}

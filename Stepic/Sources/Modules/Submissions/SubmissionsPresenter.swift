@@ -2,6 +2,7 @@ import UIKit
 
 protocol SubmissionsPresenterProtocol {
     func presentSubmissions(response: Submissions.SubmissionsLoad.Response)
+    func presentNextSubmissions(response: Submissions.NextSubmissionsLoad.Response)
 }
 
 final class SubmissionsPresenter: SubmissionsPresenterProtocol {
@@ -21,6 +22,23 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             self.viewController?.displaySubmissions(viewModel: viewModel)
         case .failure:
             self.viewController?.displaySubmissions(viewModel: .init(state: .error))
+        }
+    }
+
+    func presentNextSubmissions(response: Submissions.NextSubmissionsLoad.Response) {
+        switch response.result {
+        case .success(let data):
+            let viewModel: Submissions.NextSubmissionsLoad.ViewModel = .init(
+                state: Submissions.PaginationState.result(
+                    data: .init(
+                        submissions: data.submissions.map { self.makeViewModel(user: data.user, submission: $0) },
+                        hasNextPage: data.hasNextPage
+                    )
+                )
+            )
+            self.viewController?.displayNextSubmissions(viewModel: viewModel)
+        case .failure:
+            self.viewController?.displayNextSubmissions(viewModel: .init(state: .error))
         }
     }
 

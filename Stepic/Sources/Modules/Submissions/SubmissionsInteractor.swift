@@ -4,6 +4,7 @@ import PromiseKit
 
 protocol SubmissionsInteractorProtocol {
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request)
+    func doNextSubmissionsLoad(request: Submissions.NextSubmissionsLoad.Request)
 }
 
 final class SubmissionsInteractor: SubmissionsInteractorProtocol {
@@ -33,6 +34,45 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request) {
         Self.logger.info("SubmissionsInteractor :: started fetching submissions")
 
+        self.fetchCurrentUserSubmissionsWithAttempts(page: 1).done { currentUser, submissions, meta in
+            Self.logger.info("SubmissionsInteractor :: done fetching submissions")
+
+            self.paginationState = PaginationState(page: 1, hasNext: meta.hasNext)
+
+            let responseData = Submissions.SubmissionsData(
+                user: currentUser,
+                submissions: submissions,
+                hasNextPage: meta.hasNext
+            )
+            self.presenter.presentSubmissions(response: .init(result: .success(responseData)))
+        }.catch { error in
+            Self.logger.error("SubmissionsInteractor :: failed fetch submissions, error: \(error)")
+            self.presenter.presentSubmissions(response: .init(result: .failure(error)))
+        }
+    }
+
+    func doNextSubmissionsLoad(request: Submissions.NextSubmissionsLoad.Request) {
+        let nextPageIndex = self.paginationState.page + 1
+        Self.logger.info("SubmissionsInteractor :: started fetching next submissions, page: \(nextPageIndex)")
+
+        self.fetchCurrentUserSubmissionsWithAttempts(page: nextPageIndex).done { currentUser, submissions, meta in
+            Self.logger.info("SubmissionsInteractor :: done fetching next submissions")
+
+            self.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
+
+            let responseData = Submissions.SubmissionsData(
+                user: currentUser,
+                submissions: submissions,
+                hasNextPage: meta.hasNext
+            )
+            self.presenter.presentNextSubmissions(response: .init(result: .success(responseData)))
+        }.catch { error in
+            Self.logger.error("SubmissionsInteractor :: failed fetch next submissions, error: \(error)")
+            self.presenter.presentNextSubmissions(response: .init(result: .failure(error)))
+        }
+    }
+
+    private func fetchCurrentUserSubmissionsWithAttempts(page: Int) -> Promise<(User, [Submission], Meta)> {
         firstly {
             self.provider.fetchCurrentUser()
         }.then { currentUser -> Promise<User> in
@@ -42,15 +82,17 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
 
             return .value(currentUser)
         }.then { currentUser -> Promise<(User, ([Submission], Meta))> in
-            self.provider.fetchSubmissions(stepID: self.stepID, page: 1).map { (currentUser, $0) }
+            self.provider.fetchSubmissions(
+                stepID: self.stepID,
+                page: page
+            ).map { (currentUser, $0) }
         }.then { currentUser, submissionsFetchResult -> Promise<(User, ([Submission], Meta), [Attempt])> in
             self.provider.fetchAttempts(
                 ids: submissionsFetchResult.0.map { $0.attemptID },
                 stepID: self.stepID
             ).map { (currentUser, submissionsFetchResult, $0) }
-        }.done(on: .global(qos: .userInitiated)) { currentUser, submissionsFetchResult, attempts in
-            self.paginationState = PaginationState(page: 1, hasNext: submissionsFetchResult.1.hasNext)
-
+        }.then(on: .global(qos: .userInitiated)) {
+            currentUser, submissionsFetchResult, attempts -> Promise<(User, [Submission], Meta)> in
             let submissions = submissionsFetchResult.0
             submissions.forEach { submission in
                 if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
@@ -58,19 +100,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
                 }
             }
 
-            Self.logger.info("SubmissionsInteractor :: done fetching submissions")
-
-            DispatchQueue.main.async {
-                let responseData = Submissions.SubmissionsLoad.Data(
-                    user: currentUser,
-                    submissions: submissions,
-                    hasNextPage: self.paginationState.hasNext
-                )
-                self.presenter.presentSubmissions(response: .init(result: .success(responseData)))
-            }
-        }.catch { error in
-            Self.logger.error("SubmissionsInteractor :: failed fetch submissions, error: \(error)")
-            self.presenter.presentSubmissions(response: .init(result: .failure(error)))
+            return .value((currentUser, submissions, submissionsFetchResult.1))
         }
     }
 
