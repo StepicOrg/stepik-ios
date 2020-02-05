@@ -9,6 +9,7 @@ enum Submissions {
         struct Data {
             let user: User
             let submissions: [Submission]
+            let hasNextPage: Bool
         }
 
         struct Response {

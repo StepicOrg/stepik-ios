@@ -856,6 +856,9 @@ CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
 
+/* Submissions */
+SubmissionsTitle = "Submissions";
+
 /* Solution */
 SolutionTitle = "Solution %@";
 UnsupportedSolutionTitle = "Current quiz type is not supported in mobile app yet";
