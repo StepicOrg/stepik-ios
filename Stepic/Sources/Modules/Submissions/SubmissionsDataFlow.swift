@@ -1,11 +1,35 @@
 import Foundation
 
 enum Submissions {
-    enum SomeAction {
+    // MARK: Use Cases
+
+    enum SubmissionsLoad {
         struct Request {}
 
-        struct Response {}
+        struct Data {
+            let user: User
+            let submissions: [Submission]
+        }
 
-        struct ViewModel {}
+        struct Response {
+            let result: Result<Data>
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
+        }
+    }
+
+    // MARK: Common Types
+
+    struct SubmissionsResult {
+        let submissions: [SubmissionsViewModel]
+        let hasNextPage: Bool
+    }
+
+    enum ViewControllerState {
+        case loading
+        case error
+        case result(data: SubmissionsResult)
     }
 }

@@ -75,6 +75,41 @@ final class SubmissionsAPI: APIEndpoint {
             }
         }
     }
+    
+    /// Get user submissions for the step.
+    func retrieve(
+        stepID: Int,
+        stepName: String,
+        userID: User.IdType,
+        page: Int = 1,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<([Submission], Meta)> {
+        Promise { seal in
+            let parameters: Parameters = [
+                "order": "desc",
+                "page": page,
+                "step": stepID,
+                "user": userID
+            ]
+            
+            self.manager.request(
+                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
+                method: .get,
+                parameters: parameters,
+                encoding: URLEncoding.default,
+                headers: headers
+            ).validate().responseSwiftyJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    seal.reject(error)
+                case .success(let json):
+                    let meta = Meta(json: json["meta"])
+                    let submissions = json["submissions"].arrayValue.map { Submission(json: $0, stepName: stepName) }
+                    seal.fulfill((submissions, meta))
+                }
+            }
+        }
+    }
 
     @discardableResult
     func retrieve(
@@ -153,7 +188,7 @@ final class SubmissionsAPI: APIEndpoint {
             })
         }
     }
-
+    
     @discardableResult
     func retrieve(
         stepName: String,
@@ -220,12 +255,18 @@ final class SubmissionsAPI: APIEndpoint {
 
 extension SubmissionsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func create(stepName: String, attemptId: Int, reply: Reply, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (Submission) -> Void, error errorHandler: @escaping (Error) -> Void) -> Request? {
-        self.create(stepName: stepName, attemptId: attemptId, reply: reply).done {
-            submission in
+    @discardableResult
+    func create(
+        stepName: String,
+        attemptId: Int,
+        reply: Reply,
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (Submission) -> Void,
+        error errorHandler: @escaping (Error) -> Void
+    ) -> Request? {
+        self.create(stepName: stepName, attemptId: attemptId, reply: reply).done { submission in
             success(submission)
-        }.catch {
-            error in
+        }.catch { error in
             errorHandler(error)
         }
         return nil

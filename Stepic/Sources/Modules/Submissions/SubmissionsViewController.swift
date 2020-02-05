@@ -1,7 +1,7 @@
 import UIKit
 
 protocol SubmissionsViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: Submissions.SomeAction.ViewModel)
+    func displaySubmissions(viewModel: Submissions.SubmissionsLoad.ViewModel)
 }
 
 final class SubmissionsViewController: UIViewController {
@@ -20,9 +20,18 @@ final class SubmissionsViewController: UIViewController {
     override func loadView() {
         let view = SubmissionsView(frame: UIScreen.main.bounds)
         self.view = view
+        view.backgroundColor = .white
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.interactor.doSubmissionsLoad(request: .init())
     }
 }
 
 extension SubmissionsViewController: SubmissionsViewControllerProtocol {
-    func displaySomeActionResult(viewModel: Submissions.SomeAction.ViewModel) {}
+    func displaySubmissions(viewModel: Submissions.SubmissionsLoad.ViewModel) {
+        print(viewModel)
+    }
 }

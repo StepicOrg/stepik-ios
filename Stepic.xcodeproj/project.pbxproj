@@ -698,6 +698,7 @@
 		2CE8391120C8101500FE3672 /* AchievementBadgeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE8391020C8101500FE3672 /* AchievementBadgeView.xib */; };
 		2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8391220C8102200FE3672 /* AchievementBadgeView.swift */; };
 		2CE8BA9B23D631E500C2EED9 /* ImageStoredFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE8BA9A23D631E500C2EED9 /* ImageStoredFileManager.swift */; };
+		2CF025E723EAF21300E86D55 /* SubmissionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF025E623EAF21300E86D55 /* SubmissionsViewModel.swift */; };
 		2CF0885A205BEBF500FCB9C0 /* StepikTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */; };
 		2CF0885D205BED9700FCB9C0 /* StepikPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */; };
 		2CF08861205BEE2C00FCB9C0 /* StepikPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */; };
@@ -1875,6 +1876,7 @@
 		2CE8BA9A23D631E500C2EED9 /* ImageStoredFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStoredFileManager.swift; sourceTree = "<group>"; };
 		2CEDA35F1F336FEC005F4A5D /* AdaptiveRatingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdaptiveRatingHelper.swift; path = Stepic/AdaptiveRatingHelper.swift; sourceTree = SOURCE_ROOT; };
 		2CEE97B0239123EA005503EF /* Model_step_passed_by_correct_ratio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_step_passed_by_correct_ratio.xcdatamodel; sourceTree = "<group>"; };
+		2CF025E623EAF21300E86D55 /* SubmissionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsViewModel.swift; sourceTree = "<group>"; };
 		2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepikTableView.swift; sourceTree = "<group>"; };
 		2CF0885C205BED9700FCB9C0 /* StepikPlaceholderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepikPlaceholderView.xib; sourceTree = "<group>"; };
 		2CF08860205BEE2B00FCB9C0 /* StepikPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepikPlaceholder.swift; sourceTree = "<group>"; };
@@ -4760,6 +4762,13 @@
 			path = RightDetailCells;
 			sourceTree = "<group>";
 		};
+		2CF025E523EACD0E00E86D55 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		2CF0885B205BECCC00FCB9C0 /* Placeholders */ = {
 			isa = PBXGroup;
 			children = (
@@ -5759,7 +5768,9 @@
 				04916313421DD8EF2266CC1D /* SubmissionsProvider.swift */,
 				3287638E8BA3E67F5D3EED55 /* SubmissionsView.swift */,
 				4A58833E2E31DB0860973D04 /* SubmissionsViewController.swift */,
+				2CF025E623EAF21300E86D55 /* SubmissionsViewModel.swift */,
 				8009AF26B63AA152DA664B88 /* InputOutput */,
+				2CF025E523EACD0E00E86D55 /* Views */,
 			);
 			path = Submissions;
 			sourceTree = "<group>";
@@ -6507,6 +6518,7 @@
 				2CFDB1241F559F9A00B8035C /* AvatarImageView.swift in Sources */,
 				2C2F0BEC2186F0C3007DCA0A /* NotificationsRequestAlertPresenter.swift in Sources */,
 				0846B1151EDDF63200D64D77 /* CodeTemplate.swift in Sources */,
+				2CF025E723EAF21300E86D55 /* SubmissionsViewModel.swift in Sources */,
 				087235EE20FE2F2F00B4D5B1 /* AnalyticsEvent.swift in Sources */,
 				08484F18211AF4320006266F /* TextStoryView.swift in Sources */,
 				86BB7C07201953AF00063538 /* CongratulationAlertManager.swift in Sources */,

@@ -97,6 +97,12 @@ final class Submission: JSONSerializable {
     }
 }
 
+extension Submission: UniqueIdentifiable {
+    var uniqueIdentifier: UniqueIdentifierType {
+        "\(self.id)"
+    }
+}
+
 extension Submission: CustomDebugStringConvertible {
     var debugDescription: String {
         """
