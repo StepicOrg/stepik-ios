@@ -789,6 +789,7 @@ StepVideoPlayingNotReachableErrorMessage = "Check​ your​ ​internet​ ​c
 StepStatisticsPassedByTitle = "Passed:";
 StepStatisticsCorrectRatioTitle = "Successfully:";
 EditStepAlertActionTitle = "Edit";
+StepSubmissionsAlertActionTitle = "Submissions";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";

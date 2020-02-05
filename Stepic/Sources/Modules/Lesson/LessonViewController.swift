@@ -54,25 +54,16 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         return item
     }()
 
-    private lazy var shareBarButtonItem: UIBarButtonItem = {
+    private lazy var moreBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(
-            barButtonSystemItem: .action,
+            image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
+            style: .plain,
             target: self,
-            action: #selector(self.shareButtonClicked)
+            action: #selector(self.moreButtonClicked)
         )
         item.isEnabled = false
         return item
     }()
-
-    private lazy var moreBarButtonItem = UIBarButtonItem(
-        image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
-        style: .plain,
-        target: self,
-        action: #selector(self.moreButtonClicked)
-    )
-
-    private lazy var studentRightBarButtonItems = [self.shareBarButtonItem, self.infoBarButtonItem]
-    private lazy var teacherRightBarButtonItems = [self.moreBarButtonItem, self.infoBarButtonItem]
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
@@ -157,6 +148,8 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
 
         self.view.backgroundColor = .white
 
+        self.navigationItem.rightBarButtonItems = [self.moreBarButtonItem, self.infoBarButtonItem]
+
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.removeBackButtonTitleForTopController()
             styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
@@ -186,7 +179,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
             direction: direction,
             animated: animated
         )
-        self.updateRightBarButtonItems()
+        self.updateInfoBarButtonItem()
     }
 
     // MARK: Private API
@@ -224,7 +217,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         self.isPlaceholderShown = false
 
         self.title = data.lessonTitle
-        self.shareBarButtonItem.isEnabled = true
+        self.moreBarButtonItem.isEnabled = true
         self.stepControllers = Array(repeating: nil, count: data.steps.count)
         self.stepModulesInputs = Array(repeating: nil, count: data.steps.count)
 
@@ -307,8 +300,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         self.stepControllers.removeAll()
         self.stepModulesInputs.removeAll()
         self.tooltipInfos.removeAll()
-        self.shareBarButtonItem.isEnabled = false
-        self.infoBarButtonItem.isEnabled = false
+        self.navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = false }
 
         self.hasNavigationToPreviousUnit = false
         self.hasNavigationToNextUnit = false
@@ -316,22 +308,6 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.changeShadowViewAlpha(1.0, sender: self)
         }
-    }
-
-    private func updateRightBarButtonItems() {
-        defer {
-            self.updateInfoBarButtonItem()
-        }
-
-        guard case .result(let data) = self.state,
-              let currentIndex = self.currentIndex,
-              let step = data.steps[safe: currentIndex] else {
-            return
-        }
-
-        self.navigationItem.rightBarButtonItems = step.canEdit
-            ? self.teacherRightBarButtonItems
-            : self.studentRightBarButtonItems
     }
 
     private func updateInfoBarButtonItem() {
@@ -386,51 +362,73 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     }
 
     @objc
-    private func shareButtonClicked() {
-        guard case .result(let data) = self.state else {
-            fatalError("Invalid state")
-        }
-
-        DispatchQueue.global().async {
-            let link = data.stepLinkMaker("\((self.currentIndex ?? 0) + 1)")
-            let sharingViewController = SharingHelper.getSharingController(link)
-            DispatchQueue.main.async {
-                sharingViewController.popoverPresentationController?.barButtonItem = self.shareBarButtonItem
-                self.present(sharingViewController, animated: true, completion: nil)
-            }
-        }
-    }
-
-    @objc
     private func moreButtonClicked() {
+        guard case .result(let data) = self.state,
+              let currentIndex = self.currentIndex,
+              let step = data.steps[safe: currentIndex] else {
+            return
+        }
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(
             UIAlertAction(
                 title: NSLocalizedString("Share", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-                    self?.shareButtonClicked()
+                    self?.presentShareStep()
                 }
             )
         )
         alert.addAction(
             UIAlertAction(
-                title: NSLocalizedString("EditStepAlertActionTitle", comment: ""),
+                title: NSLocalizedString("StepSubmissionsAlertActionTitle", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-                    guard let strongSelf = self,
-                          let currentIndex = strongSelf.currentIndex else {
-                        return
-                    }
-
-                    strongSelf.interactor.doEditStepPresentation(request: .init(index: currentIndex))
+//                    let assembly = SubmissionsAssembly()
+//                    self?.present(
+//                        module: assembly.makeModule(),
+//                        embedInNavigation: true,
+//                        modalPresentationStyle: .fullScreen
+//                    )
                 }
             )
         )
+
+        if step.canEdit {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("EditStepAlertActionTitle", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        strongSelf.interactor.doEditStepPresentation(request: .init(index: currentIndex))
+                    }
+                )
+            )
+        }
+
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
         alert.popoverPresentationController?.barButtonItem = self.moreBarButtonItem
 
         self.present(alert, animated: true, completion: nil)
+    }
+
+    private func presentShareStep() {
+        guard case .result(let data) = self.state else {
+            return
+        }
+
+        DispatchQueue.global().async {
+            let link = data.stepLinkMaker("\((self.currentIndex ?? 0) + 1)")
+            let sharingViewController = SharingHelper.getSharingController(link)
+            DispatchQueue.main.async {
+                sharingViewController.popoverPresentationController?.barButtonItem = self.moreBarButtonItem
+                self.present(sharingViewController, animated: true, completion: nil)
+            }
+        }
     }
 }
 
