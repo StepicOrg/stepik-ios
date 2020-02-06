@@ -164,6 +164,7 @@ points567890 = "points";
 VideoRate = "Video rate";
 ExamTitle = "Exam";
 ShowExamInWeb = "Open exam in web version?";
+LastStepRouterShowExamInWeb = "The next module is an exam module, you can only solve it in the web version. Press \"Open\" to continue in the web version.";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
 No = "No";
 StreakAlertTitle = "Congrats!";
