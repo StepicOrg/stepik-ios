@@ -83,7 +83,7 @@ final class SubmissionsView: UIView {
     }
 
     func showLoading() {
-        self.tableView.skeleton.viewBuilder = { DiscussionsSkeletonView() }
+        self.tableView.skeleton.viewBuilder = { SubmissionsSkeletonView() }
         self.tableView.skeleton.show()
     }
 

@@ -648,6 +648,7 @@
 		2CC0754720177A2E004A6005 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
 		2CC16BA923875DE30000EF36 /* DiscussionsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */; };
 		2CC276FE23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift */; };
+		2CC2770023EB9E2200E88D6E /* SubmissionsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC276FF23EB9E2200E88D6E /* SubmissionsSkeletonView.swift */; };
 		2CC2A78E235DE26700B2DC44 /* DiscussionsLoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2A78D235DE26700B2DC44 /* DiscussionsLoadMoreTableViewCell.swift */; };
 		2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */; };
 		2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */; };
@@ -1830,6 +1831,7 @@
 		2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsSkeletonView.swift; sourceTree = "<group>"; };
 		2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+CloseBarButtonItem.swift"; sourceTree = "<group>"; };
+		2CC276FF23EB9E2200E88D6E /* SubmissionsSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionsSkeletonView.swift; sourceTree = "<group>"; };
 		2CC2A78D235DE26700B2DC44 /* DiscussionsLoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsLoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		2CC351851F6827BE004255B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -3745,6 +3747,7 @@
 				62E989B9228830C92A91B2DE /* CourseListsCollectionSkeletonView.swift */,
 				62E98A399A313681138734B4 /* CourseWidgetSkeletonView.swift */,
 				2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */,
+				2CC276FF23EB9E2200E88D6E /* SubmissionsSkeletonView.swift */,
 				2C22043320E28AD50060117A /* AchievementListSkeletonPlaceholderView.xib */,
 				2C22043120E2804F0060117A /* AchievementSkeletonPlaceholderView.xib */,
 				2C22042F20E27E400060117A /* ProfileCellSkeletonPlaceholderView.xib */,
@@ -7229,6 +7232,7 @@
 				62E982132F6F132B7B228D1D /* UserAccountService.swift in Sources */,
 				62E9850C449D6419FA06D8F3 /* HomeAssembly.swift in Sources */,
 				62E98381564D069955621A74 /* HomeViewController.swift in Sources */,
+				2CC2770023EB9E2200E88D6E /* SubmissionsSkeletonView.swift in Sources */,
 				62E98FF1ADE8EA2198909DDA /* HomeInteractor.swift in Sources */,
 				62E9867F8030401514DBCB08 /* HomePresenter.swift in Sources */,
 				62E98FD5D370C8C9354A625E /* HomeDataFlow.swift in Sources */,

@@ -427,6 +427,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     }
 
     private func presentSubmissions(stepID: Step.IdType) {
+        // TODO: Find a better way for page sheet modal presentation.
         let (modalPresentationStyle, navigationBarAppearance) = {
             () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
             if #available(iOS 13.0, *) {

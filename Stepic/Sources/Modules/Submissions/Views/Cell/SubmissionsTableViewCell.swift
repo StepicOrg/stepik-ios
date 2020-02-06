@@ -87,6 +87,7 @@ final class SubmissionsTableViewCell: UITableViewCell, Reusable {
                 .constraint
             make.bottom.equalToSuperview().priority(999)
             make.trailing.equalToSuperview()
+            make.height.equalTo(self.separatorView.intrinsicContentSize.height)
         }
     }
 }
