@@ -3,6 +3,7 @@ import UIKit
 protocol SubmissionsViewControllerProtocol: AnyObject {
     func displaySubmissions(viewModel: Submissions.SubmissionsLoad.ViewModel)
     func displayNextSubmissions(viewModel: Submissions.NextSubmissionsLoad.ViewModel)
+    func displaySubmission(viewModel: Submissions.SubmissionPresentation.ViewModel)
 }
 
 final class SubmissionsViewController: UIViewController, ControllerWithStepikPlaceholder {
@@ -154,6 +155,18 @@ extension SubmissionsViewController: SubmissionsViewControllerProtocol {
             self.updateState(newState: self.state)
         }
     }
+
+    func displaySubmission(viewModel: Submissions.SubmissionPresentation.ViewModel) {
+        let assembly = SolutionAssembly(
+            stepID: viewModel.stepID,
+            submission: viewModel.submission,
+            submissionURLProvider: StepSubmissionsSubmissionURLProvider(
+                stepID: viewModel.stepID,
+                submissionID: viewModel.submission.id
+            )
+        )
+        self.push(module: assembly.makeModule())
+    }
 }
 
 // MARK: - SubmissionsViewController: SubmissionsViewDelegate -
@@ -175,7 +188,14 @@ extension SubmissionsViewController: SubmissionsViewDelegate {
         self.interactor.doNextSubmissionsLoad(request: .init())
     }
 
-    func submissionsView(_ submissionsView: SubmissionsView, didSelectRowAt indexPath: IndexPath) {}
+    func submissionsView(_ submissionsView: SubmissionsView, didSelectRowAt indexPath: IndexPath) {
+        guard case .result(let data) = self.state,
+              let submission = data.submissions[safe: indexPath.row] else {
+            return
+        }
+
+        self.interactor.doSubmissionPresentation(request: .init(uniqueIdentifier: submission.uniqueIdentifier))
+    }
 }
 
 // MARK: - SubmissionsViewController: SubmissionsTableViewDataSourceDelegate -
@@ -193,5 +213,6 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
         _ dataSource: SubmissionsTableViewDataSource,
         didSelectSubmission viewModel: SubmissionsViewModel
     ) {
+        self.interactor.doSubmissionPresentation(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
     }
 }

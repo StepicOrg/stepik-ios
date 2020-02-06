@@ -29,6 +29,23 @@ enum Submissions {
         }
     }
 
+    /// Show submission module
+    enum SubmissionPresentation {
+        struct Request {
+            let uniqueIdentifier: UniqueIdentifierType
+        }
+
+        struct Response {
+            let step: Step
+            let submission: Submission
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let submission: Submission
+        }
+    }
+
     // MARK: - Types -
 
     struct SubmissionsData {

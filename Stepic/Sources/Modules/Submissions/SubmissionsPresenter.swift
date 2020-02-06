@@ -3,10 +3,13 @@ import UIKit
 protocol SubmissionsPresenterProtocol {
     func presentSubmissions(response: Submissions.SubmissionsLoad.Response)
     func presentNextSubmissions(response: Submissions.NextSubmissionsLoad.Response)
+    func doSubmissionPresentation(response: Submissions.SubmissionPresentation.Response)
 }
 
 final class SubmissionsPresenter: SubmissionsPresenterProtocol {
     weak var viewController: SubmissionsViewControllerProtocol?
+
+    // MARK: Protocol Conforming
 
     func presentSubmissions(response: Submissions.SubmissionsLoad.Response) {
         switch response.result {
@@ -41,6 +44,14 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             self.viewController?.displayNextSubmissions(viewModel: .init(state: .error))
         }
     }
+
+    func doSubmissionPresentation(response: Submissions.SubmissionPresentation.Response) {
+        self.viewController?.displaySubmission(
+            viewModel: .init(stepID: response.step.id, submission: response.submission)
+        )
+    }
+
+    // MARK: Private API
 
     private func makeViewModel(user: User, submission: Submission) -> SubmissionsViewModel {
         let username: String = {

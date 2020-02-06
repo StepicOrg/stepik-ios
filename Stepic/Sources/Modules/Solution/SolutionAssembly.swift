@@ -3,24 +3,24 @@ import UIKit
 final class SolutionAssembly: Assembly {
     private let stepID: Step.IdType
     private let submission: Submission
-    private let discussionID: Comment.IdType
+    private var submissionURLProvider: SubmissionURLProvider?
 
-    init(stepID: Step.IdType, submission: Submission, discussionID: Comment.IdType) {
+    init(stepID: Step.IdType, submission: Submission, submissionURLProvider: SubmissionURLProvider? = nil) {
         self.stepID = stepID
         self.submission = submission
-        self.discussionID = discussionID
+        self.submissionURLProvider = submissionURLProvider
     }
 
     func makeModule() -> UIViewController {
         let provider = SolutionProvider(
             stepsPersistenceService: StepsPersistenceService(),
-            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI())
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
+            submissionURLProvider: self.submissionURLProvider
         )
         let presenter = SolutionPresenter()
         let interactor = SolutionInteractor(
             stepID: self.stepID,
             submission: self.submission,
-            discussionID: self.discussionID,
             presenter: presenter,
             provider: provider
         )

@@ -680,6 +680,7 @@
 		2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */; };
 		2CDAD308229EB3F700AA9EF5 /* AssignmentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */; };
 		2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */; };
+		2CDBCCCF23EB777E005D2370 /* SubmissionURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */; };
 		2CDE82E2221D5CCB00C41887 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE82E1221D5CCB00C41887 /* highlight.js */; };
 		2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
@@ -1859,6 +1860,7 @@
 		2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestsLogger.swift; sourceTree = "<group>"; };
 		2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsNetworkService.swift; sourceTree = "<group>"; };
 		2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceQueuesService.swift; sourceTree = "<group>"; };
+		2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionURLProvider.swift; sourceTree = "<group>"; };
 		2CDE82E1221D5CCB00C41887 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsCenterDelegate.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
@@ -5571,6 +5573,7 @@
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
 				2CB37E6523902BB80050D85E /* StorageUsageService.swift */,
+				2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */,
 				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
 				62E986D1988A3445F3416404 /* Managers */,
@@ -7037,6 +7040,7 @@
 				62E98FAF7FFEFCAB3196CF16 /* UserCourse.swift in Sources */,
 				2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */,
 				2C18AD4D23D5F76E00FD89F3 /* DownloadingServiceFactory.swift in Sources */,
+				2CDBCCCF23EB777E005D2370 /* SubmissionURLProvider.swift in Sources */,
 				62E98236342BF7C367FB6F36 /* Array+Reordering.swift in Sources */,
 				2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */,
 				62E98144B8A52511F4EEB63F /* CourseWidgetSkeletonView.swift in Sources */,

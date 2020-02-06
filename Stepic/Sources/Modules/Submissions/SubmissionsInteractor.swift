@@ -5,6 +5,7 @@ import PromiseKit
 protocol SubmissionsInteractorProtocol {
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request)
     func doNextSubmissionsLoad(request: Submissions.NextSubmissionsLoad.Request)
+    func doSubmissionPresentation(request: Submissions.SubmissionPresentation.Request)
 }
 
 final class SubmissionsInteractor: SubmissionsInteractorProtocol {
@@ -19,6 +20,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
     private let presenter: SubmissionsPresenterProtocol
     private let provider: SubmissionsProviderProtocol
 
+    private var currentSubmissions: [Submission] = []
     private var paginationState = PaginationState(page: 1, hasNext: true)
 
     init(
@@ -31,12 +33,15 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         self.provider = provider
     }
 
+    // MARK: Protocol Conforming
+
     func doSubmissionsLoad(request: Submissions.SubmissionsLoad.Request) {
         Self.logger.info("SubmissionsInteractor :: started fetching submissions")
 
         self.fetchCurrentUserSubmissionsWithAttempts(page: 1).done { currentUser, submissions, meta in
             Self.logger.info("SubmissionsInteractor :: done fetching submissions")
 
+            self.currentSubmissions = submissions
             self.paginationState = PaginationState(page: 1, hasNext: meta.hasNext)
 
             let responseData = Submissions.SubmissionsData(
@@ -58,6 +63,7 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         self.fetchCurrentUserSubmissionsWithAttempts(page: nextPageIndex).done { currentUser, submissions, meta in
             Self.logger.info("SubmissionsInteractor :: done fetching next submissions")
 
+            self.currentSubmissions.append(contentsOf: submissions)
             self.paginationState = PaginationState(page: nextPageIndex, hasNext: meta.hasNext)
 
             let responseData = Submissions.SubmissionsData(
@@ -72,15 +78,24 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
         }
     }
 
+    func doSubmissionPresentation(request: Submissions.SubmissionPresentation.Request) {
+        guard let submission = self.currentSubmissions.first(
+            where: { $0.uniqueIdentifier == request.uniqueIdentifier }
+        ) else {
+            return
+        }
+
+        self.provider.fetchStep(id: self.stepID)
+            .compactMap { $0 }
+            .done { self.presenter.doSubmissionPresentation(response: .init(step: $0, submission: submission)) }
+            .cauterize()
+    }
+
+    // MARK: Private API
+
     private func fetchCurrentUserSubmissionsWithAttempts(page: Int) -> Promise<(User, [Submission], Meta)> {
         firstly {
-            self.provider.fetchCurrentUser()
-        }.then { currentUser -> Promise<User> in
-            guard let currentUser = currentUser else {
-                throw Error.noUser
-            }
-
-            return .value(currentUser)
+            self.provider.fetchCurrentUser().compactMap { $0 }
         }.then { currentUser -> Promise<(User, ([Submission], Meta))> in
             self.provider.fetchSubmissions(
                 stepID: self.stepID,
@@ -102,9 +117,5 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
 
             return .value((currentUser, submissions, submissionsFetchResult.1))
         }
-    }
-
-    enum Error: Swift.Error {
-        case noUser
     }
 }

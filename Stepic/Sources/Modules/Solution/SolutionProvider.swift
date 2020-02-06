@@ -3,18 +3,22 @@ import PromiseKit
 
 protocol SolutionProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
+    func getSubmissionURL() -> Guarantee<URL?>
 }
 
 final class SolutionProvider: SolutionProviderProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
+    private var submissionURLProvider: SubmissionURLProvider?
 
     init(
         stepsPersistenceService: StepsPersistenceServiceProtocol,
-        stepsNetworkService: StepsNetworkServiceProtocol
+        stepsNetworkService: StepsNetworkServiceProtocol,
+        submissionURLProvider: SubmissionURLProvider?
     ) {
         self.stepsPersistenceService = stepsPersistenceService
         self.stepsNetworkService = stepsNetworkService
+        self.submissionURLProvider = submissionURLProvider
     }
 
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>> {
@@ -39,6 +43,10 @@ final class SolutionProvider: SolutionProviderProtocol {
                 seal.reject(Error.fetchFailed)
             }
         }
+    }
+
+    func getSubmissionURL() -> Guarantee<URL?> {
+        self.submissionURLProvider?.getSubmissionURL() ?? .value(nil)
     }
 
     enum Error: Swift.Error {
