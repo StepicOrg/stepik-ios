@@ -233,7 +233,8 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             return
         }
 
-        if let unitID = self.imageURLsByUnitID.first(where: { $1.contains(imageURL) })?.key {
+        let unitID = self.imageURLsByUnitID.first(where: { $1.contains(imageURL) })?.key
+        if let unitID = unitID {
             self.pendingUnitIDs.remove(unitID)
         }
 
@@ -243,7 +244,7 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
             self.activeImageDownloads.remove(imageURL)
             self.imageDownloadTaskIDByURL.removeValue(forKey: imageURL)
 
-            self.delegate?.syllabusDownloadsService(self, didFailLoadImageWithError: error)
+            self.delegate?.syllabusDownloadsService(self, didFailLoadImageWithError: error, forUnitWithID: unitID)
         case .active(let progress):
             self.progressByImageURL[imageURL] = progress
             self.reportImageDownloadProgress(progress, url: imageURL, taskID: taskID)

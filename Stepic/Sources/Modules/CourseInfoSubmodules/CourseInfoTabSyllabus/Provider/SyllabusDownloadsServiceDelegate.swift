@@ -62,7 +62,8 @@ protocol SyllabusDownloadsServiceDelegate: AnyObject {
 
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
-        didFailLoadImageWithError error: Swift.Error
+        didFailLoadImageWithError error: Swift.Error,
+        forUnitWithID unitID: Unit.IdType?
     )
 }
 
@@ -117,11 +118,12 @@ extension SyllabusDownloadsServiceDelegate {
 
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
-        didFailLoadVideoWithError error: Error
+        didFailLoadVideoWithError error: Swift.Error
     ) {}
 
     func syllabusDownloadsService(
         _ service: SyllabusDownloadsServiceProtocol,
-        didFailLoadImageWithError error: Error
+        didFailLoadImageWithError error: Swift.Error,
+        forUnitWithID unitID: Unit.IdType?
     ) {}
 }
