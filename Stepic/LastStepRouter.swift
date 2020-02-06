@@ -172,7 +172,7 @@ final class LastStepRouter {
 
                         // Check whether unit is in exam section
                         if section.isExam && section.isReachable {
-                            self.presentExamAlert(presentationController: navigationController)
+                            self.presentExamAlert(presentationController: navigationController, course: course)
                         } else if section.isReachable {
                             navigateToStep(in: unit)
                         } else {
@@ -194,7 +194,7 @@ final class LastStepRouter {
                     print("last step router: using cached section")
                     // Check whether unit is in exam section
                     if section.isExam && section.isReachable {
-                        self.presentExamAlert(presentationController: navigationController)
+                        self.presentExamAlert(presentationController: navigationController, course: course)
                     } else if section.isReachable {
                         navigateToStep(in: unit)
                     } else {
@@ -228,7 +228,7 @@ final class LastStepRouter {
         checkUnitAndNavigate(for: unitID)
     }
 
-    private static func presentExamAlert(presentationController: UIViewController) {
+    private static func presentExamAlert(presentationController: UIViewController, course: Course) {
         SVProgressHUD.dismiss()
 
         let alert = UIAlertController(
@@ -241,8 +241,16 @@ final class LastStepRouter {
                 title: NSLocalizedString("Open", comment: ""),
                 style: .default,
                 handler: { _ in
+                    let courseWebURLPath: String = {
+                        if let slug = course.slug {
+                            return "\(StepikApplicationsInfo.stepikURL)/course/\(slug)"
+                        } else {
+                            return "\(StepikApplicationsInfo.stepikURL)/\(course.id)"
+                        }
+                    }()
+
                     WebControllerManager.sharedManager.presentWebControllerWithURLString(
-                        "?from_mobile_app=true",
+                        "\(courseWebURLPath)/syllabus?from_mobile_app=true",
                         inController: presentationController,
                         withKey: "exam",
                         allowsSafari: true,
