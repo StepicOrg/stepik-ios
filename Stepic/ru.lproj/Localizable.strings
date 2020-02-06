@@ -790,7 +790,7 @@ StepVideoPlayingNotReachableErrorMessage = "Подключитесь к инте
 StepStatisticsPassedByTitle = "Решило:";
 StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
-StepSubmissionsAlertActionTitle = "Решения";
+StepSubmissionsAlertActionTitle = "Показать решения";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
