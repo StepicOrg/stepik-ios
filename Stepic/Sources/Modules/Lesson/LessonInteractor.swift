@@ -46,7 +46,7 @@ final class LessonInteractor: LessonInteractorProtocol {
     // MARK: Public API
 
     func doLessonLoad(request: LessonDataFlow.LessonLoad.Request) {
-        self.refresh(
+        self.refreshLesson(
             context: self.lastLoadState.context,
             startStep: self.lastLoadState.startStep
         ).cauterize()
@@ -63,7 +63,10 @@ final class LessonInteractor: LessonInteractorProtocol {
 
     // MARK: Private API
 
-    private func refresh(context: LessonDataFlow.Context, startStep: LessonDataFlow.StartStep? = nil) -> Promise<Void> {
+    private func refreshLesson(
+        context: LessonDataFlow.Context,
+        startStep: LessonDataFlow.StartStep? = nil
+    ) -> Promise<Void> {
         Promise { seal in
             self.previousUnit = nil
             self.nextUnit = nil
@@ -124,7 +127,7 @@ final class LessonInteractor: LessonInteractorProtocol {
 
             return self.provider.fetchSteps(ids: lesson.stepsArray).map { ($0.value, lesson) }
         }.then(on: .global(qos: .userInitiated)) { steps, lesson -> Promise<([Step], Lesson, [Progress])> in
-            guard let steps = steps else {
+            guard let steps = steps, !steps.isEmpty else {
                 throw Error.fetchFailed
             }
 
@@ -252,7 +255,7 @@ extension LessonInteractor: StepOutputProtocol {
         }
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.refresh(context: .unit(id: unit.id)).cauterize()
+        self.refreshLesson(context: .unit(id: unit.id)).cauterize()
     }
 
     func handleNextUnitNavigation() {
@@ -285,7 +288,7 @@ extension LessonInteractor: StepOutputProtocol {
         }
 
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
-        self.refresh(context: .unit(id: unit.id)).done {
+        self.refreshLesson(context: .unit(id: unit.id)).done {
             if autoplayNext {
                 self.autoplayCurrentStep()
             }
