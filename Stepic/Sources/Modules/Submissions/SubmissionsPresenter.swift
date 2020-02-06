@@ -59,6 +59,8 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             return fullName.isEmpty ? "User \(user.id)" : fullName
         }()
 
+        let relativeDateString = FormatterHelper.dateToRelativeString(submission.time)
+
         let submissionTitle = String(
             format: NSLocalizedString("DiscussionThreadCommentSolutionTitle", comment: ""),
             arguments: ["\(submission.id)"]
@@ -69,7 +71,7 @@ final class SubmissionsPresenter: SubmissionsPresenterProtocol {
             userID: user.id,
             avatarImageURL: URL(string: user.avatarURL),
             formattedUsername: username,
-            formattedDate: "3 месяца назад",
+            formattedDate: relativeDateString,
             submissionTitle: submissionTitle,
             isSubmissionCorrect: submission.isCorrect
         )
