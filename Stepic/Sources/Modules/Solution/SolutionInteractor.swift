@@ -28,7 +28,7 @@ final class SolutionInteractor: SolutionInteractorProtocol {
         firstly {
             self.provider.fetchStep(id: self.stepID).compactMap { $0.value }
         }.then { step -> Promise<(Step, URL?)> in
-            self.provider.getSubmissionURL().map { (step, $0) }
+            self.provider.fetchSubmissionURL().map { (step, $0) }
         }.done { step, submissionURL in
             let response = Solution.SolutionLoad.Data(
                 step: step,

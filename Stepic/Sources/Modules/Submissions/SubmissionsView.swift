@@ -100,8 +100,6 @@ final class SubmissionsView: UIView {
 }
 
 extension SubmissionsView: ProgrammaticallyInitializableViewProtocol {
-    func setupView() {}
-
     func addSubviews() {
         self.addSubview(self.tableView)
     }

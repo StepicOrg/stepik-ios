@@ -86,9 +86,7 @@ final class SubmissionsProvider: SubmissionsProviderProtocol {
     }
 
     func fetchCurrentUser() -> Guarantee<User?> {
-        Guarantee { seal in
-            seal(self.userAccountService.currentUser)
-        }
+        .value(self.userAccountService.currentUser)
     }
 
     // MARK: Types

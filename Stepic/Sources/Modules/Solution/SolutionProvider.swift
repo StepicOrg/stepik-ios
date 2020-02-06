@@ -3,7 +3,7 @@ import PromiseKit
 
 protocol SolutionProviderProtocol {
     func fetchStep(id: Step.IdType) -> Promise<FetchResult<Step?>>
-    func getSubmissionURL() -> Guarantee<URL?>
+    func fetchSubmissionURL() -> Guarantee<URL?>
 }
 
 final class SolutionProvider: SolutionProviderProtocol {
@@ -45,7 +45,7 @@ final class SolutionProvider: SolutionProviderProtocol {
         }
     }
 
-    func getSubmissionURL() -> Guarantee<URL?> {
+    func fetchSubmissionURL() -> Guarantee<URL?> {
         self.submissionURLProvider?.getSubmissionURL() ?? .value(nil)
     }
 
