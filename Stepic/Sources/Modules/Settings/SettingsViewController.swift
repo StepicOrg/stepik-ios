@@ -31,22 +31,10 @@ final class SettingsViewController: UIViewController {
     lazy var settingsView = self.view as? SettingsView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
-    private lazy var closeBarButtonItem: UIBarButtonItem = {
-        if #available(iOS 13.0, *) {
-            return UIBarButtonItem(
-                barButtonSystemItem: .close,
-                target: self,
-                action: #selector(self.closeButtonClicked)
-            )
-        } else {
-            return UIBarButtonItem(
-                image: UIImage(named: "navigation-item-button-close"),
-                style: .plain,
-                target: self,
-                action: #selector(self.closeButtonClicked)
-            )
-        }
-    }()
+    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+        target: self,
+        action: #selector(self.closeButtonClicked)
+    )
 
     init(
         interactor: SettingsInteractorProtocol,

@@ -325,7 +325,10 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         let assembly = SolutionAssembly(
             stepID: viewModel.stepID,
             submission: viewModel.submission,
-            discussionID: viewModel.discussionID
+            submissionURLProvider: SolutionsThreadSubmissionURLProvider(
+                stepID: viewModel.stepID,
+                discussionID: viewModel.discussionID
+            )
         )
         self.push(module: assembly.makeModule())
     }

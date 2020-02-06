@@ -790,6 +790,7 @@ StepVideoPlayingNotReachableErrorMessage = "Подключитесь к инте
 StepStatisticsPassedByTitle = "Решило:";
 StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
+StepSubmissionsAlertActionTitle = "Показать решения";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
@@ -855,6 +856,9 @@ CodeQuizEmptyCodeLanguages = "Нет поддерживаемых языков �
 CodeQuizFullscreenTabInstructionTitle = "Инструкция";
 CodeQuizFullscreenTabCodeTitle = "Код";
 CodeQuizFullscreenTabRunTitle = "Запуск";
+
+/* Submissions */
+SubmissionsTitle = "Решения";
 
 /* Solution */
 SolutionTitle = "Решение %@";

@@ -789,6 +789,7 @@ StepVideoPlayingNotReachableErrorMessage = "Check​ your​ ​internet​ ​c
 StepStatisticsPassedByTitle = "Passed:";
 StepStatisticsCorrectRatioTitle = "Successfully:";
 EditStepAlertActionTitle = "Edit";
+StepSubmissionsAlertActionTitle = "Show Submissions";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
@@ -854,6 +855,9 @@ CodeQuizEmptyCodeLanguages = "No supported languages";
 CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
+
+/* Submissions */
+SubmissionsTitle = "Submissions";
 
 /* Solution */
 SolutionTitle = "Solution %@";

@@ -6,6 +6,7 @@ protocol SubmissionsNetworkServiceProtocol: AnyObject {
     func fetch(stepID: Step.IdType, blockName: String, page: Int) -> Promise<([Submission], Meta)>
     func fetch(attemptID: Attempt.IdType, blockName: String) -> Promise<([Submission], Meta)>
     func fetch(submissionID: Submission.IdType, blockName: String) -> Promise<Submission?>
+    func fetch(stepID: Step.IdType, blockName: String, userID: User.IdType, page: Int) -> Promise<([Submission], Meta)>
 }
 
 final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
@@ -39,6 +40,22 @@ final class SubmissionsNetworkService: SubmissionsNetworkServiceProtocol {
         Promise { seal in
             self.submissionsAPI.retrieve(stepName: blockName, submissionId: submissionID).done { submission in
                 seal.fulfill(submission)
+            }.catch { _ in
+                seal.reject(Error.fetchFailed)
+            }
+        }
+    }
+
+    func fetch(
+        stepID: Step.IdType,
+        blockName: String,
+        userID: User.IdType,
+        page: Int
+    ) -> Promise<([Submission], Meta)> {
+        Promise { seal in
+            self.submissionsAPI.retrieve(stepID: stepID, stepName: blockName, userID: userID, page: page).done {
+                submissions, meta in
+                seal.fulfill((submissions, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)
             }

@@ -15,7 +15,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
             let viewModel = self.makeViewModel(
                 step: data.step,
                 submission: data.submission,
-                discussionID: data.discussionID
+                submissionURL: data.submissionURL
             )
             self.viewController?.displaySolution(viewModel: .init(state: .result(data: viewModel)))
         }
@@ -24,7 +24,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
     private func makeViewModel(
         step: Step,
         submission: Submission,
-        discussionID: Comment.IdType
+        submissionURL: URL?
     ) -> SolutionViewModel {
         let quizStatus: QuizStatus = {
             switch submission.status {
@@ -66,7 +66,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
             feedbackTitle: feedbackTitle,
             hintContent: hintContent,
             codeDetails: codeDetails,
-            solutionURL: self.makeURL(for: step, discussionID: discussionID)
+            solutionURL: submissionURL
         )
     }
 
@@ -109,15 +109,5 @@ final class SolutionPresenter: SolutionPresenterProtocol {
         )
 
         return processor.processContent()
-    }
-
-    private func makeURL(for step: Step, discussionID: Comment.IdType) -> URL? {
-        let link = "\(StepikApplicationsInfo.stepikURL)"
-            + "/lesson/\(step.lessonID)"
-            + "/step/\(step.position)"
-            + "?from_mobile_app=true"
-            + "&discussion=\(discussionID)"
-            + "&thread=solutions"
-        return URL(string: link)
     }
 }
