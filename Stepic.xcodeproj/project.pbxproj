@@ -647,6 +647,7 @@
 		2CBD855C201799B700E14F83 /* AdaptiveRatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD855B201799B700E14F83 /* AdaptiveRatingsViewController.swift */; };
 		2CC0754720177A2E004A6005 /* AdaptiveStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */; };
 		2CC16BA923875DE30000EF36 /* DiscussionsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */; };
+		2CC276FE23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift */; };
 		2CC2A78E235DE26700B2DC44 /* DiscussionsLoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2A78D235DE26700B2DC44 /* DiscussionsLoadMoreTableViewCell.swift */; };
 		2CC3518A1F682A02004255B6 /* SocialAuthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */; };
 		2CC3518B1F682A02004255B6 /* SocialAuthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC351891F682A02004255B6 /* SocialAuthCollectionViewCell.xib */; };
@@ -1828,6 +1829,7 @@
 		2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_is_certificate_issued.xcdatamodel; sourceTree = "<group>"; };
 		2CC0754620177A2E004A6005 /* AdaptiveStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveStatsViewController.swift; sourceTree = "<group>"; };
 		2CC16BA823875DE30000EF36 /* DiscussionsSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsSkeletonView.swift; sourceTree = "<group>"; };
+		2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+CloseBarButtonItem.swift"; sourceTree = "<group>"; };
 		2CC2A78D235DE26700B2DC44 /* DiscussionsLoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsLoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		2CC351851F6827BE004255B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		2CC351881F682A02004255B6 /* SocialAuthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -3619,6 +3621,7 @@
 		2C096585236C56B4005B771A /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift */,
 				62E9866C8BA98FF768F487E2 /* UICollectionViewExtensions.swift */,
 				2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */,
 				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
@@ -7148,6 +7151,7 @@
 				62E98C0B1237D4B65EEDBADE /* CourseListInputProtocol.swift in Sources */,
 				62E981544EDEBEB2E69B7CC3 /* CourseListOutputProtocol.swift in Sources */,
 				62E9862FEEA0320F590E1C3D /* UniqueIdentifiable.swift in Sources */,
+				2CC276FE23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift in Sources */,
 				62E98D1BBD212BF163DCAF48 /* SectionsPersistenceService.swift in Sources */,
 				62E98490B6A6BF294A86E6E6 /* UnitsPersistenceService.swift in Sources */,
 				62E98D1D1B374D09B4E6EAA5 /* LessonsPersistenceService.swift in Sources */,

@@ -384,12 +384,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
                 title: NSLocalizedString("StepSubmissionsAlertActionTitle", comment: ""),
                 style: .default,
                 handler: { [weak self] _ in
-//                    let assembly = SubmissionsAssembly()
-//                    self?.present(
-//                        module: assembly.makeModule(),
-//                        embedInNavigation: true,
-//                        modalPresentationStyle: .fullScreen
-//                    )
+                    self?.presentSubmissions(stepID: step.id)
                 }
             )
         )
@@ -429,6 +424,32 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
                 self.present(sharingViewController, animated: true, completion: nil)
             }
         }
+    }
+
+    private func presentSubmissions(stepID: Step.IdType) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
+        let assembly = SubmissionsAssembly(stepID: stepID, navigationBarAppearance: navigationBarAppearance)
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
     }
 }
 

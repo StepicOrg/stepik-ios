@@ -2,10 +2,16 @@ import UIKit
 
 final class SubmissionsAssembly: Assembly {
     private let stepID: Step.IdType
+    private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
     private weak var moduleOutput: SubmissionsOutputProtocol?
 
-    init(stepID: Step.IdType, output: SubmissionsOutputProtocol? = nil) {
+    init(
+        stepID: Step.IdType,
+        navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init(),
+        output: SubmissionsOutputProtocol? = nil
+    ) {
         self.stepID = stepID
+        self.navigationBarAppearance = navigationBarAppearance
         self.moduleOutput = output
     }
 
@@ -19,7 +25,10 @@ final class SubmissionsAssembly: Assembly {
         )
         let presenter = SubmissionsPresenter()
         let interactor = SubmissionsInteractor(stepID: self.stepID, presenter: presenter, provider: provider)
-        let viewController = SubmissionsViewController(interactor: interactor)
+        let viewController = SubmissionsViewController(
+            interactor: interactor,
+            appearance: .init(navigationBarAppearance: self.navigationBarAppearance)
+        )
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput

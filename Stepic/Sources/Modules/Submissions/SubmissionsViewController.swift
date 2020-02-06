@@ -6,15 +6,27 @@ protocol SubmissionsViewControllerProtocol: AnyObject {
     func displaySubmission(viewModel: Submissions.SubmissionPresentation.ViewModel)
 }
 
-final class SubmissionsViewController: UIViewController, ControllerWithStepikPlaceholder {
+extension SubmissionsViewController {
+    struct Appearance {
+        var navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init()
+    }
+
     enum Animation {
         static let startRefreshDelay: TimeInterval = 1.0
     }
+}
+
+final class SubmissionsViewController: UIViewController, ControllerWithStepikPlaceholder {
+    let appearance: Appearance
 
     private let interactor: SubmissionsInteractorProtocol
 
     private lazy var submissionsView = self.view as? SubmissionsView
     private lazy var paginationView = PaginationView()
+    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+        target: self,
+        action: #selector(self.closeButtonClicked)
+    )
     var placeholderContainer = StepikPlaceholderControllerContainer()
 
     private var state: Submissions.ViewControllerState
@@ -23,10 +35,12 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
 
     init(
         interactor: SubmissionsInteractorProtocol,
-        initialState: Submissions.ViewControllerState = .loading
+        initialState: Submissions.ViewControllerState = .loading,
+        appearance: Appearance = .init()
     ) {
         self.interactor = interactor
         self.state = initialState
+        self.appearance = appearance
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -51,10 +65,21 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
         self.interactor.doSubmissionsLoad(request: .init())
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let styledNavigationController = self.navigationController as? StyledNavigationController {
+            styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+            styledNavigationController.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
+        }
+    }
+
     // MARK: Private API
 
     private func setup() {
         self.title = NSLocalizedString("SubmissionsTitle", comment: "")
+        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+
         self.tableDataSource.delegate = self
 
         self.registerPlaceholders()
@@ -129,6 +154,11 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
         } else {
             self.submissionsView?.hidePaginationView()
         }
+    }
+
+    @objc
+    private func closeButtonClicked() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -214,5 +244,13 @@ extension SubmissionsViewController: SubmissionsTableViewDataSourceDelegate {
         didSelectSubmission viewModel: SubmissionsViewModel
     ) {
         self.interactor.doSubmissionPresentation(request: .init(uniqueIdentifier: viewModel.uniqueIdentifier))
+    }
+}
+
+// MARK: - SubmissionsViewController: StyledNavigationControllerPresentable -
+
+extension SubmissionsViewController: StyledNavigationControllerPresentable {
+    var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
+        self.appearance.navigationBarAppearance
     }
 }
