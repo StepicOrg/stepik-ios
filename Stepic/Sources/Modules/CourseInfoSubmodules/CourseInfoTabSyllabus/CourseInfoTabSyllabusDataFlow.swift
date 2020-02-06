@@ -153,8 +153,8 @@ enum CourseInfoTabSyllabus {
         }
     }
 
-    /// Present alert when video download failed
-    enum FailedVideoDownloadAlertPresentation {
+    /// Present alert when video/image download failed
+    enum FailedDownloadAlertPresentation {
         struct Response {
             let error: Error
         }

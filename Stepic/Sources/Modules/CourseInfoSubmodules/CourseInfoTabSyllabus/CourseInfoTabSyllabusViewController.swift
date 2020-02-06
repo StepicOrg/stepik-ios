@@ -6,9 +6,7 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: AnyObject {
     func displayDeleteDownloadsConfirmationAlert(viewModel: CourseInfoTabSyllabus.DeleteDownloadsConfirmation.ViewModel)
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel)
-    func displayFailedVideoDownloadAlert(
-        viewModel: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.ViewModel
-    )
+    func displayFailedDownloadAlert(viewModel: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.ViewModel)
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: AnyObject {
@@ -130,9 +128,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         }
     }
 
-    func displayFailedVideoDownloadAlert(
-        viewModel: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.ViewModel
-    ) {
+    func displayFailedDownloadAlert(viewModel: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel))
         self.present(alert, animated: true)
