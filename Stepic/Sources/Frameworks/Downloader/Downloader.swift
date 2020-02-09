@@ -86,6 +86,8 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     private var restoreTasksSemaphore = DispatchSemaphore(value: 1)
     /// URLSession tasks ids restored from previous background URLSession
     private var validRestoredTasksIDs: [Int] = []
+    /// Synchronization mutex
+    private var mutex = pthread_mutex_t()
 
     init(session: DownloaderSessionType) {
         NSLog("Downloader: created, session type = \(session.description)")
@@ -94,6 +96,14 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
 
         let delegate = Delegate(downloader: self)
         self.session = URLSession(configuration: session.configuration, delegate: delegate, delegateQueue: nil)
+
+        // Initialize mutex attributes
+        var attr = pthread_mutexattr_t()
+        pthread_mutexattr_init(&attr)
+        pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE)
+        // Initialize mutex
+        pthread_mutex_init(&self.mutex, &attr)
+        pthread_mutexattr_destroy(&attr)
 
         if case .background(_) = session {
             self.cache = Cache(downloader: self)
@@ -125,6 +135,14 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
             // sessionInitSemaphore should be used only for background sessions
             self.sessionInitSemaphore.signal()
         }
+    }
+
+    deinit {
+        assert(
+            pthread_mutex_trylock(&self.mutex) == 0 && pthread_mutex_unlock(&self.mutex) == 0,
+            "deinitialization of a locked mutex results in undefined behavior!"
+        )
+        pthread_mutex_destroy(&self.mutex)
     }
 
     // MARK: Private API (DownloaderProtocol)
@@ -261,6 +279,9 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
     }
 
     private func getTaskInfo(urlSessionTaskID: Int) -> TaskInfo? {
+        pthread_mutex_lock(&self.mutex)
+        defer { pthread_mutex_unlock(&self.mutex) }
+
         guard let taskInfo = self.tasks[urlSessionTaskID] else {
             NSLog("Downloader: trying to get info for detached task")
             return nil
@@ -343,10 +364,15 @@ final class Downloader: RestorableBackgroundDownloaderProtocol {
 
 extension Downloader {
     func add(task: DownloaderTaskProtocol) throws {
+        pthread_mutex_lock(&self.mutex)
+        defer { pthread_mutex_unlock(&self.mutex) }
         try self.add(task: task, resumeData: nil)
     }
 
     func resume(task: DownloaderTaskProtocol) throws {
+        pthread_mutex_lock(&self.mutex)
+        defer { pthread_mutex_unlock(&self.mutex) }
+
         guard let taskID = self.tasksMapping[task.id] else {
             throw DownloaderError.detachedState
         }
@@ -355,6 +381,9 @@ extension Downloader {
     }
 
     func pause(task: DownloaderTaskProtocol) throws {
+        pthread_mutex_lock(&self.mutex)
+        defer { pthread_mutex_unlock(&self.mutex) }
+
         guard let taskID = self.tasksMapping[task.id] else {
             throw DownloaderError.detachedState
         }
@@ -363,6 +392,9 @@ extension Downloader {
     }
 
     func cancel(task: DownloaderTaskProtocol) throws {
+        pthread_mutex_lock(&self.mutex)
+        defer { pthread_mutex_unlock(&self.mutex) }
+
         guard let taskID = self.tasksMapping[task.id] else {
             throw DownloaderError.detachedState
         }
@@ -371,6 +403,9 @@ extension Downloader {
     }
 
     func getTaskState(for task: DownloaderTaskProtocol) -> DownloaderTaskState? {
+        pthread_mutex_lock(&self.mutex)
+        defer { pthread_mutex_unlock(&self.mutex) }
+
         guard let taskID = self.tasksMapping[task.id] else {
             return nil
         }
