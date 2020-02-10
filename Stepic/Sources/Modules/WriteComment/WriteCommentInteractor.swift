@@ -61,7 +61,12 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
         let htmlText = self.currentText
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: "\n", with: "<br>")
-        let currentComment = Comment(parent: self.parentID, target: self.targetID, text: htmlText)
+        let currentComment = Comment(
+            targetID: self.targetID,
+            text: htmlText,
+            parentID: self.parentID,
+            submissionID: nil
+        )
 
         var actionPromise: Promise<Comment>
         var moduleOutputHandler: ((Comment) -> Void)?
