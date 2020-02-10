@@ -885,12 +885,15 @@ DiscussionThreadCommentSolutionTitle = "Solution %@";
 DiscussionsPlaceholderEmptySolutionsTitle = "No solutions";
 
 /* Write comment */
-WriteCommentTitle = "Comment";
-WriteCommentPlaceholder = "Leave a comment...";
+WriteCommentDefaultTitle = "Comment";
+WriteCommentSolutionTitle = "Solution";
+WriteCommentPlaceholder = "Leave a Comment...";
 WriteCommentActionButtonCreate = "Send";
 WriteCommentActionButtonEdit = "Update";
-WriteCommentCancelPromptMessage = "Delete draft?";
+WriteCommentCancelPromptMessage = "Delete Draft?";
 WriteCommentCancelPromptDestructiveActionTitle = "Delete";
+WriteCommentSolutionFormatTitle = "Solution %@";
+WriteCommentSelectSolutionTitle = "Select Solution";
 
 /* Downloads */
 DownloadsTitle = "Downloaded courses";

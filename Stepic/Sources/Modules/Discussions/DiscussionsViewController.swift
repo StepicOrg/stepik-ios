@@ -280,7 +280,9 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
             parentID: viewModel.parentID,
-            presentationContext: viewModel.presentationContext,
+            comment: viewModel.comment,
+            submission: viewModel.comment?.submission,
+            discussionThreadType: viewModel.discussionThreadType,
             navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? WriteCommentOutputProtocol
         )
@@ -510,7 +512,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             )
         }
 
-        if viewModel.canEdit && viewModel.solution == nil {
+        if viewModel.canEdit {
             alert.addAction(
                 UIAlertAction(
                     title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),

@@ -1,3 +1,5 @@
 import Foundation
 
-protocol SubmissionsOutputProtocol: AnyObject {}
+protocol SubmissionsOutputProtocol: AnyObject {
+    func handleSubmissionSelected(_ submission: Submission)
+}

@@ -1,15 +1,19 @@
 import UIKit
 
-// MARK: WriteCommentViewControllerProtocol: class -
+// MARK: WriteCommentViewControllerProtocol: AnyObject -
 
 protocol WriteCommentViewControllerProtocol: AnyObject {
+    func displayNavigationItemUpdate(viewModel: WriteComment.NavigationItemUpdate.ViewModel)
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel)
     func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel)
     func displayCommentMainActionResult(viewModel: WriteComment.CommentMainAction.ViewModel)
     func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel)
+    func displaySolution(viewModel: WriteComment.SolutionPresentation.ViewModel)
+    func displaySelectSolution(viewModel: WriteComment.SelectSolution.ViewModel)
+    func displaySolutionUpdate(viewModel: WriteComment.SolutionUpdate.ViewModel)
 }
 
-// MARK: - Appearance -
+// MARK: - WriteCommentViewController (Appearance) -
 
 extension WriteCommentViewController {
     struct Appearance {
@@ -22,24 +26,22 @@ extension WriteCommentViewController {
 final class WriteCommentViewController: UIViewController {
     let appearance: Appearance
 
-    lazy var writeCommentView = self.view as? WriteCommentView
-
     private let interactor: WriteCommentInteractorProtocol
     private var state: WriteComment.ViewControllerState
+
+    lazy var writeCommentView = self.view as? WriteCommentView
 
     private lazy var cancelBarButtonItem = UIBarButtonItem(
         barButtonSystemItem: .cancel,
         target: self,
         action: #selector(self.cancelButtonDidClick(_:))
     )
-
     private lazy var doneBarButtonItem = UIBarButtonItem(
         title: nil,
         style: .done,
         target: self,
         action: #selector(self.doneButtonDidClick(_:))
     )
-
     private lazy var activityBarButtonItem: UIBarButtonItem = {
         let activityIndicatorView = UIActivityIndicatorView(style: .white)
         activityIndicatorView.color = .mainDark
@@ -72,29 +74,10 @@ final class WriteCommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = NSLocalizedString("WriteCommentTitle", comment: "")
-        self.edgesForExtendedLayout = []
-
-        // Disable swipe down to dismiss
-        if #available(iOS 13.0, *) {
-            self.isModalInPresentation = true
-        }
-
-        self.navigationItem.leftBarButtonItem = self.cancelBarButtonItem
-        self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
-
-        self.doneBarButtonItem.isEnabled = false
+        self.setup()
 
         self.updateState(newState: self.state)
         self.interactor.doCommentLoad(request: .init())
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        assert(
-            self.navigationController != nil,
-            "\(WriteCommentViewController.self) must be presented in a \(UINavigationController.self)"
-        )
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -104,6 +87,7 @@ final class WriteCommentViewController: UIViewController {
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+            styledNavigationController.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
         }
     }
 
@@ -113,6 +97,20 @@ final class WriteCommentViewController: UIViewController {
     }
 
     // MARK: - Private API
+
+    private func setup() {
+        self.edgesForExtendedLayout = []
+
+        // Disable swipe down to dismiss, because we should prompt user
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+
+        self.navigationItem.leftBarButtonItem = self.cancelBarButtonItem
+        self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
+
+        self.doneBarButtonItem.isEnabled = false
+    }
 
     private func updateState(newState: WriteComment.ViewControllerState) {
         switch newState {
@@ -150,6 +148,10 @@ final class WriteCommentViewController: UIViewController {
 // MARK: - WriteCommentViewController: WriteCommentViewControllerProtocol -
 
 extension WriteCommentViewController: WriteCommentViewControllerProtocol {
+    func displayNavigationItemUpdate(viewModel: WriteComment.NavigationItemUpdate.ViewModel) {
+        self.title = viewModel.title
+    }
+
     func displayComment(viewModel: WriteComment.CommentLoad.ViewModel) {
         self.updateState(newState: viewModel.state)
     }
@@ -167,29 +169,75 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
     }
 
     func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel) {
-        if viewModel.shouldAskUser {
-            let alert = UIAlertController(
-                title: nil,
-                message: NSLocalizedString("WriteCommentCancelPromptMessage", comment: ""),
-                preferredStyle: .alert
-            )
-
-            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
-            let discardAction = UIAlertAction(
-                title: NSLocalizedString("WriteCommentCancelPromptDestructiveActionTitle", comment: ""),
-                style: .destructive,
-                handler: { [weak self] _ in
-                    self?.dismiss(animated: true, completion: nil)
-                }
-            )
-
-            alert.addAction(cancelAction)
-            alert.addAction(discardAction)
-
-            self.present(alert, animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
+        guard viewModel.shouldAskUser else {
+            return self.dismiss(animated: true, completion: nil)
         }
+
+        let alert = UIAlertController(
+            title: nil,
+            message: NSLocalizedString("WriteCommentCancelPromptMessage", comment: ""),
+            preferredStyle: .alert
+        )
+
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
+        let discardAction = UIAlertAction(
+            title: NSLocalizedString("WriteCommentCancelPromptDestructiveActionTitle", comment: ""),
+            style: .destructive,
+            handler: { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+            }
+        )
+
+        alert.addAction(cancelAction)
+        alert.addAction(discardAction)
+
+        self.present(module: alert)
+    }
+
+    func displaySolution(viewModel: WriteComment.SolutionPresentation.ViewModel) {
+        let assembly = SolutionAssembly(
+            stepID: viewModel.stepID,
+            submission: viewModel.submission,
+            submissionURLProvider: SolutionsThreadSubmissionURLProvider(
+                stepID: viewModel.stepID,
+                discussionID: viewModel.discussionID
+            )
+        )
+        self.push(module: assembly.makeModule())
+    }
+
+    func displaySelectSolution(viewModel: WriteComment.SelectSolution.ViewModel) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
+        let assembly = SubmissionsAssembly(
+            stepID: viewModel.stepID,
+            navigationBarAppearance: navigationBarAppearance,
+            output: self
+        )
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
+    }
+
+    func displaySolutionUpdate(viewModel: WriteComment.SolutionUpdate.ViewModel) {
+        self.updateState(newState: viewModel.state)
     }
 }
 
@@ -198,6 +246,23 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
 extension WriteCommentViewController: WriteCommentViewDelegate {
     func writeCommentView(_ view: WriteCommentView, didUpdateText text: String) {
         self.interactor.doCommentTextUpdate(request: .init(text: text))
+    }
+
+    func writeCommentViewDidSelectSolution(_ view: WriteCommentView) {
+        self.interactor.doSolutionMainAction(request: .init())
+    }
+}
+
+// MARK: - WriteCommentViewController: SubmissionsOutputProtocol -
+
+extension WriteCommentViewController: SubmissionsOutputProtocol {
+    func handleSubmissionSelected(_ submission: Submission) {
+        self.dismiss(
+            animated: true,
+            completion: { [weak self] in
+                self?.interactor.doSolutionUpdate(request: .init(submission: submission))
+            }
+        )
     }
 }
 

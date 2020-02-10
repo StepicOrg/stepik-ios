@@ -6,26 +6,34 @@ enum WriteComment {
     /// By backend architecture it's could be any object, but for now, only steps allowed.
     /// `target` == `step_id`.
     typealias TargetIDType = Step.IdType
-    typealias ParentIDtype = Comment.IdType
+    typealias ParentIDType = Comment.IdType
 
-    enum PresentationContext {
-        case create
-        case edit(Comment)
-    }
-
-    struct CommentInfo {
+    struct CommentData {
         let text: String
-        let presentationContext: PresentationContext
+        let comment: Comment?
+        let submission: Submission?
+        let discussionThreadType: DiscussionThread.ThreadType
     }
 
     // MARK: - Use cases -
 
+    /// Update navigation item (for now only title)
+    enum NavigationItemUpdate {
+        struct Response {
+            let discussionThreadType: DiscussionThread.ThreadType
+        }
+
+        struct ViewModel {
+            let title: String
+        }
+    }
+
     /// Show comment
     enum CommentLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
-            let data: CommentInfo
+            let data: CommentData
         }
 
         struct ViewModel {
@@ -40,7 +48,7 @@ enum WriteComment {
         }
 
         struct Response {
-            let data: CommentInfo
+            let data: CommentData
         }
 
         struct ViewModel {
@@ -50,10 +58,10 @@ enum WriteComment {
 
     /// Do comment main action (create or update)
     enum CommentMainAction {
-        struct Request { }
+        struct Request {}
 
         struct Response {
-            let data: Result<CommentInfo>
+            let data: Result<CommentData>
         }
 
         struct ViewModel {
@@ -63,15 +71,63 @@ enum WriteComment {
 
     /// Shows alert about changes losing
     enum CommentCancelPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let originalText: String
             let currentText: String
+            let originalSubmissionID: Submission.IdType?
+            let currentSubmissionID: Submission.IdType?
         }
 
         struct ViewModel {
             let shouldAskUser: Bool
+        }
+    }
+
+    /// Handle click on solution control (next present submissions/submission)
+    enum SolutionMainAction {
+        struct Request {}
+    }
+
+    /// Show solution
+    enum SolutionPresentation {
+        struct Response {
+            let stepID: Step.IdType
+            let submission: Submission
+            let discussionID: Comment.IdType
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let submission: Submission
+            let discussionID: Comment.IdType
+        }
+    }
+
+    /// Select solution from submissions list
+    enum SelectSolution {
+        struct Response {
+            let stepID: Step.IdType
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+        }
+    }
+
+    /// Handle solution update.
+    enum SolutionUpdate {
+        struct Request {
+            let submission: Submission
+        }
+
+        struct Response {
+            let data: CommentData
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
         }
     }
 
