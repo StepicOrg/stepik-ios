@@ -321,6 +321,8 @@ final class DiscussionsCellView: UIView {
         } else {
             self.solutionContainerView.isHidden = true
         }
+
+        self.replyButton.isHidden = viewModel.solution != nil
     }
 
     func calculateContentHeight(maxPreferredWidth: CGFloat) -> CGFloat {

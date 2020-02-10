@@ -498,17 +498,19 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             )
         )
 
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("Reply", comment: ""),
-                style: .default,
-                handler: { [weak self] _ in
-                    self?.interactor.doWriteCommentPresentation(
-                        request: .init(commentID: viewModel.id, presentationContext: .create)
-                    )
-                }
+        if viewModel.solution == nil {
+            alert.addAction(
+                UIAlertAction(
+                    title: NSLocalizedString("Reply", comment: ""),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.interactor.doWriteCommentPresentation(
+                            request: .init(commentID: viewModel.id, presentationContext: .create)
+                        )
+                    }
+                )
             )
-        )
+        }
 
         if viewModel.canEdit {
             alert.addAction(
