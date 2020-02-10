@@ -6,7 +6,7 @@ protocol WriteCommentInteractorProtocol {
     func doCommentTextUpdate(request: WriteComment.CommentTextUpdate.Request)
     func doCommentMainAction(request: WriteComment.CommentMainAction.Request)
     func doCommentCancelPresentation(request: WriteComment.CommentCancelPresentation.Request)
-    func doSolutionPresentation(request: WriteComment.SolutionPresentation.Request)
+    func doSolutionMainAction(request: WriteComment.SolutionMainAction.Request)
     func doSolutionUpdate(request: WriteComment.SolutionUpdate.Request)
 }
 
@@ -104,8 +104,16 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
         )
     }
 
-    func doSolutionPresentation(request: WriteComment.SolutionPresentation.Request) {
-        self.presenter.presentSolution(response: .init(stepID: self.targetID))
+    func doSolutionMainAction(request: WriteComment.SolutionMainAction.Request) {
+        if self.originalSubmissionID != nil,
+           let submission = self.submission,
+           let commentID = self.comment?.id {
+            self.presenter.presentSolution(
+                response: .init(stepID: self.targetID, submission: submission, discussionID: commentID)
+            )
+        } else {
+            self.presenter.presentSelectSolution(response: .init(stepID: self.targetID))
+        }
     }
 
     func doSolutionUpdate(request: WriteComment.SolutionUpdate.Request) {

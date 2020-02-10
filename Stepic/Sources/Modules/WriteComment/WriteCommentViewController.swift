@@ -9,6 +9,7 @@ protocol WriteCommentViewControllerProtocol: AnyObject {
     func displayCommentMainActionResult(viewModel: WriteComment.CommentMainAction.ViewModel)
     func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel)
     func displaySolution(viewModel: WriteComment.SolutionPresentation.ViewModel)
+    func displaySelectSolution(viewModel: WriteComment.SelectSolution.ViewModel)
     func displaySolutionUpdate(viewModel: WriteComment.SolutionUpdate.ViewModel)
 }
 
@@ -86,6 +87,7 @@ final class WriteCommentViewController: UIViewController {
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.setNeedsNavigationBarAppearanceUpdate(sender: self)
+            styledNavigationController.setDefaultNavigationBarAppearance(self.appearance.navigationBarAppearance)
         }
     }
 
@@ -193,6 +195,18 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
     }
 
     func displaySolution(viewModel: WriteComment.SolutionPresentation.ViewModel) {
+        let assembly = SolutionAssembly(
+            stepID: viewModel.stepID,
+            submission: viewModel.submission,
+            submissionURLProvider: SolutionsThreadSubmissionURLProvider(
+                stepID: viewModel.stepID,
+                discussionID: viewModel.discussionID
+            )
+        )
+        self.push(module: assembly.makeModule())
+    }
+
+    func displaySelectSolution(viewModel: WriteComment.SelectSolution.ViewModel) {
         let (modalPresentationStyle, navigationBarAppearance) = {
             () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
             if #available(iOS 13.0, *) {
@@ -235,7 +249,7 @@ extension WriteCommentViewController: WriteCommentViewDelegate {
     }
 
     func writeCommentViewDidSelectSolution(_ view: WriteCommentView) {
-        self.interactor.doSolutionPresentation(request: .init())
+        self.interactor.doSolutionMainAction(request: .init())
     }
 }
 

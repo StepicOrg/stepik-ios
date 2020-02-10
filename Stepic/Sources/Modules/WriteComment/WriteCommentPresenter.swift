@@ -7,6 +7,7 @@ protocol WriteCommentPresenterProtocol {
     func presentCommentMainActionResult(response: WriteComment.CommentMainAction.Response)
     func presentCommentCancelPresentation(response: WriteComment.CommentCancelPresentation.Response)
     func presentSolution(response: WriteComment.SolutionPresentation.Response)
+    func presentSelectSolution(response: WriteComment.SelectSolution.Response)
     func presentSolutionUpdate(response: WriteComment.SolutionUpdate.Response)
 }
 
@@ -55,7 +56,17 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
     }
 
     func presentSolution(response: WriteComment.SolutionPresentation.Response) {
-        self.viewController?.displaySolution(viewModel: .init(stepID: response.stepID))
+        self.viewController?.displaySolution(
+            viewModel: .init(
+                stepID: response.stepID,
+                submission: response.submission,
+                discussionID: response.discussionID
+            )
+        )
+    }
+
+    func presentSelectSolution(response: WriteComment.SelectSolution.Response) {
+        self.viewController?.displaySelectSolution(viewModel: .init(stepID: response.stepID))
     }
 
     func presentSolutionUpdate(response: WriteComment.SolutionUpdate.Response) {

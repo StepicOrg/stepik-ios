@@ -85,10 +85,28 @@ enum WriteComment {
         }
     }
 
-    /// Show or select solution
-    enum SolutionPresentation {
+    /// Handle click on solution control (next present submissions/submission)
+    enum SolutionMainAction {
         struct Request {}
+    }
 
+    /// Show solution
+    enum SolutionPresentation {
+        struct Response {
+            let stepID: Step.IdType
+            let submission: Submission
+            let discussionID: Comment.IdType
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+            let submission: Submission
+            let discussionID: Comment.IdType
+        }
+    }
+
+    /// Select solution from submissions list
+    enum SelectSolution {
         struct Response {
             let stepID: Step.IdType
         }
