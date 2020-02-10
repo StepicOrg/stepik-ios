@@ -6,7 +6,7 @@ enum WriteComment {
     /// By backend architecture it's could be any object, but for now, only steps allowed.
     /// `target` == `step_id`.
     typealias TargetIDType = Step.IdType
-    typealias ParentIDtype = Comment.IdType
+    typealias ParentIDType = Comment.IdType
 
     enum PresentationContext {
         case create
@@ -20,9 +20,20 @@ enum WriteComment {
 
     // MARK: - Use cases -
 
+    /// Update navigation item (for now only title)
+    enum NavigationItemUpdate {
+        struct Response {
+            let discussionThreadType: DiscussionThread.ThreadType
+        }
+
+        struct ViewModel {
+            let title: String
+        }
+    }
+
     /// Show comment
     enum CommentLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let data: CommentInfo
@@ -50,7 +61,7 @@ enum WriteComment {
 
     /// Do comment main action (create or update)
     enum CommentMainAction {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let data: Result<CommentInfo>
@@ -63,7 +74,7 @@ enum WriteComment {
 
     /// Shows alert about changes losing
     enum CommentCancelPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let originalText: String

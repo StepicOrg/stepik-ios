@@ -12,7 +12,8 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
     weak var moduleOutput: WriteCommentOutputProtocol?
 
     private let targetID: WriteComment.TargetIDType
-    private let parentID: WriteComment.ParentIDtype?
+    private let parentID: WriteComment.ParentIDType?
+    private let discussionThreadType: DiscussionThread.ThreadType
     private let presentationContext: WriteComment.PresentationContext
 
     private let presenter: WriteCommentPresenterProtocol
@@ -23,13 +24,15 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
 
     init(
         targetID: WriteComment.TargetIDType,
-        parentID: WriteComment.ParentIDtype?,
+        parentID: WriteComment.ParentIDType?,
+        discussionThreadType: DiscussionThread.ThreadType,
         presentationContext: WriteComment.PresentationContext,
         presenter: WriteCommentPresenterProtocol,
         provider: WriteCommentProviderProtocol
     ) {
         self.targetID = targetID
         self.parentID = parentID
+        self.discussionThreadType = discussionThreadType
         self.presentationContext = presentationContext
         self.presenter = presenter
         self.provider = provider
@@ -43,18 +46,16 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
         self.currentText = self.originalText
     }
 
+    // MARK: Protocol Conforming
+
     func doCommentLoad(request: WriteComment.CommentLoad.Request) {
-        self.presenter.presentComment(
-            response: WriteComment.CommentLoad.Response(data: self.makeCommentInfo())
-        )
+        self.presenter.presentNavigationItemUpdate(response: .init(discussionThreadType: self.discussionThreadType))
+        self.presenter.presentComment(response: .init(data: self.makeCommentInfo()))
     }
 
     func doCommentTextUpdate(request: WriteComment.CommentTextUpdate.Request) {
         self.currentText = request.text
-
-        self.presenter.presentCommentTextUpdate(
-            response: WriteComment.CommentTextUpdate.Response(data: self.makeCommentInfo())
-        )
+        self.presenter.presentCommentTextUpdate(response: .init(data: self.makeCommentInfo()))
     }
 
     func doCommentMainAction(request: WriteComment.CommentMainAction.Request) {
@@ -83,11 +84,7 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
 
         actionPromise.done { comment in
             self.currentText = comment.text.replacingOccurrences(of: "<br>", with: "\n")
-            self.presenter.presentCommentMainActionResult(
-                response: WriteComment.CommentMainAction.Response(
-                    data: .success(self.makeCommentInfo())
-                )
-            )
+            self.presenter.presentCommentMainActionResult(response: .init(data: .success(self.makeCommentInfo())))
             moduleOutputHandler?(comment)
         }.catch { error in
             self.presenter.presentCommentMainActionResult(
@@ -98,17 +95,17 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
 
     func doCommentCancelPresentation(request: WriteComment.CommentCancelPresentation.Request) {
         self.presenter.presentCommentCancelPresentation(
-            response: WriteComment.CommentCancelPresentation.Response(
+            response: .init(
                 originalText: self.originalText,
                 currentText: self.currentText
             )
         )
     }
 
-    // MARK: - Private API
+    // MARK: Private API
 
     private func makeCommentInfo() -> WriteComment.CommentInfo {
-        WriteComment.CommentInfo(
+        .init(
             text: self.currentText,
             presentationContext: self.presentationContext
         )

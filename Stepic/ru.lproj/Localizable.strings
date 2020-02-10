@@ -886,7 +886,8 @@ DiscussionThreadCommentSolutionTitle = "Решение %@";
 DiscussionsPlaceholderEmptySolutionsTitle = "Решений пока нет";
 
 /* Write comment */
-WriteCommentTitle = "Комментарий";
+WriteCommentDefaultTitle = "Комментарий";
+WriteCommentSolutionTitle = "Решение";
 WriteCommentPlaceholder = "Оставьте комментарий...";
 WriteCommentActionButtonCreate = "Отправить";
 WriteCommentActionButtonEdit = "Обновить";

@@ -21,33 +21,6 @@ extension DiscussionsTableViewCell {
 final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     private lazy var cellView: DiscussionsCellView = {
         let cellView = DiscussionsCellView()
-        cellView.onReplyClick = { [weak self] in
-            self?.onReplyClick?()
-        }
-        cellView.onLikeClick = { [weak self] in
-            self?.onLikeClick?()
-        }
-        cellView.onDislikeClick = { [weak self] in
-            self?.onDislikeClick?()
-        }
-        cellView.onAvatarClick = { [weak self] in
-            self?.onAvatarClick?()
-        }
-        cellView.onLinkClick = { [weak self] url in
-            self?.onLinkClick?(url)
-        }
-        cellView.onImageClick = { [weak self] url in
-            self?.onImageClick?(url)
-        }
-        cellView.onTextContentClick = { [weak self] in
-            self?.onTextContentClick?()
-        }
-        cellView.onSolutionClick = { [weak self] in
-            self?.onSolutionClick?()
-        }
-        cellView.onContentLoaded = { [weak self] in
-            self?.onContentLoaded?()
-        }
         cellView.onNewHeightUpdate = { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -73,16 +46,79 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     private var separatorHeightConstraint: Constraint?
     private var separatorStyle: ViewModel.SeparatorStyle = .small
 
-    var onReplyClick: (() -> Void)?
-    var onLikeClick: (() -> Void)?
-    var onDislikeClick: (() -> Void)?
-    var onAvatarClick: (() -> Void)?
-    var onLinkClick: ((URL) -> Void)?
-    var onImageClick: ((URL) -> Void)?
-    var onTextContentClick: (() -> Void)?
-    var onSolutionClick: (() -> Void)?
+    var onReplyClick: (() -> Void)? {
+        get {
+            self.cellView.onReplyClick
+        }
+        set {
+            self.cellView.onReplyClick = newValue
+        }
+    }
+    var onLikeClick: (() -> Void)? {
+        get {
+            self.cellView.onLikeClick
+        }
+        set {
+            self.cellView.onLikeClick = newValue
+        }
+    }
+    var onDislikeClick: (() -> Void)? {
+        get {
+            self.cellView.onDislikeClick
+        }
+        set {
+            self.cellView.onDislikeClick = newValue
+        }
+    }
+    var onAvatarClick: (() -> Void)? {
+        get {
+            self.cellView.onAvatarClick
+        }
+        set {
+            self.cellView.onAvatarClick = newValue
+        }
+    }
+    var onLinkClick: ((URL) -> Void)? {
+        get {
+            self.cellView.onLinkClick
+        }
+        set {
+            self.cellView.onLinkClick = newValue
+        }
+    }
+    var onImageClick: ((URL) -> Void)? {
+        get {
+            self.cellView.onImageClick
+        }
+        set {
+            self.cellView.onImageClick = newValue
+        }
+    }
+    var onTextContentClick: (() -> Void)? {
+        get {
+            self.cellView.onTextContentClick
+        }
+        set {
+            self.cellView.onTextContentClick = newValue
+        }
+    }
+    var onSolutionClick: (() -> Void)? {
+        get {
+            self.cellView.onSolutionClick
+        }
+        set {
+            self.cellView.onSolutionClick = newValue
+        }
+    }
     // Content callbacks
-    var onContentLoaded: (() -> Void)?
+    var onContentLoaded: (() -> Void)? {
+        get {
+            self.cellView.onContentLoaded
+        }
+        set {
+            self.cellView.onContentLoaded = newValue
+        }
+    }
     var onNewHeightUpdate: ((CGFloat) -> Void)?
 
     override func updateConstraintsIfNeeded() {

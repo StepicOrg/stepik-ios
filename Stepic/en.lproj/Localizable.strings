@@ -885,7 +885,8 @@ DiscussionThreadCommentSolutionTitle = "Solution %@";
 DiscussionsPlaceholderEmptySolutionsTitle = "No solutions";
 
 /* Write comment */
-WriteCommentTitle = "Comment";
+WriteCommentDefaultTitle = "Comment";
+WriteCommentSolutionTitle = "Solution";
 WriteCommentPlaceholder = "Leave a comment...";
 WriteCommentActionButtonCreate = "Send";
 WriteCommentActionButtonEdit = "Update";

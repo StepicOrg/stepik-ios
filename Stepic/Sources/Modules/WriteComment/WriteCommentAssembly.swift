@@ -2,7 +2,8 @@ import UIKit
 
 final class WriteCommentAssembly: Assembly {
     private let targetID: WriteComment.TargetIDType
-    private let parentID: WriteComment.ParentIDtype?
+    private let parentID: WriteComment.ParentIDType?
+    private let discussionThreadType: DiscussionThread.ThreadType
     private let presentationContext: WriteComment.PresentationContext
     private let navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState
 
@@ -10,13 +11,15 @@ final class WriteCommentAssembly: Assembly {
 
     init(
         targetID: WriteComment.TargetIDType,
-        parentID: WriteComment.ParentIDtype? = nil,
+        parentID: WriteComment.ParentIDType? = nil,
+        discussionThreadType: DiscussionThread.ThreadType = .default,
         presentationContext: WriteComment.PresentationContext = .create,
         navigationBarAppearance: StyledNavigationController.NavigationBarAppearanceState = .init(),
         output: WriteCommentOutputProtocol? = nil
     ) {
         self.targetID = targetID
         self.parentID = parentID
+        self.discussionThreadType = discussionThreadType
         self.presentationContext = presentationContext
         self.navigationBarAppearance = navigationBarAppearance
         self.moduleOutput = output
@@ -30,6 +33,7 @@ final class WriteCommentAssembly: Assembly {
         let interactor = WriteCommentInteractor(
             targetID: self.targetID,
             parentID: self.parentID,
+            discussionThreadType: self.discussionThreadType,
             presentationContext: self.presentationContext,
             presenter: presenter,
             provider: provider

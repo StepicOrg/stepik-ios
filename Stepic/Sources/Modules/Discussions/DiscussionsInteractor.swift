@@ -660,7 +660,13 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         }
 
         self.presenter.presentWriteComment(
-            response: .init(targetID: self.stepID, parentID: parentID, comment: nil, presentationContext: .create)
+            response: .init(
+                targetID: self.stepID,
+                parentID: parentID,
+                comment: nil,
+                discussionThreadType: self.discussionThreadType,
+                presentationContext: .create
+            )
         )
     }
 
@@ -686,6 +692,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 targetID: self.stepID,
                 parentID: unwrappedComment.parentID,
                 comment: unwrappedComment,
+                discussionThreadType: self.discussionThreadType,
                 presentationContext: .edit
             )
         )

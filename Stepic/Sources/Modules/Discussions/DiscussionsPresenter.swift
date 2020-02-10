@@ -38,7 +38,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 viewModel: .init(
                     title: NSLocalizedString("DiscussionThreadSolutionsTitle", comment: ""),
                     shouldShowSortButton: true,
-                    shouldShowComposeButton: false,
+                    shouldShowComposeButton: true,
                     threadType: .solutions
                 )
             )
@@ -95,6 +95,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
             viewModel: .init(
                 targetID: response.targetID,
                 parentID: response.parentID,
+                discussionThreadType: response.discussionThreadType,
                 presentationContext: presentationContext
             )
         )
@@ -178,8 +179,6 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     private func makeDiscussionsData(
         _ data: Discussions.DiscussionsResponseData
     ) -> Discussions.DiscussionsViewData {
-        assert(data.discussions.filter({ !$0.repliesIDs.isEmpty }).count == data.replies.keys.count)
-
         let discussions = self.sortedDiscussions(
             data.discussions,
             discussionProxy: data.discussionProxy,
