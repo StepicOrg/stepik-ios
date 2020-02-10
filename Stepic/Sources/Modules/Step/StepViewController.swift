@@ -263,7 +263,8 @@ extension StepViewController: StepViewControllerProtocol {
             let writeCommentAssembly = WriteCommentAssembly(
                 targetID: viewModel.stepID,
                 parentID: nil,
-                presentationContext: .create,
+                comment: nil,
+                submission: nil,
                 navigationBarAppearance: navigationBarAppearance,
                 output: discussionsAssembly.moduleInput
             )

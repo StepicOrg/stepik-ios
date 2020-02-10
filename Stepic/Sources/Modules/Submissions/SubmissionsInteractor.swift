@@ -85,10 +85,17 @@ final class SubmissionsInteractor: SubmissionsInteractorProtocol {
             return
         }
 
-        self.provider.fetchStep(id: self.stepID)
-            .compactMap { $0 }
-            .done { self.presenter.doSubmissionPresentation(response: .init(step: $0, submission: submission)) }
-            .cauterize()
+        if let moduleOutput = self.moduleOutput {
+            DispatchQueue.main.async {
+                moduleOutput.handleSubmissionSelected(submission)
+            }
+        } else {
+            self.provider
+                .fetchStep(id: self.stepID)
+                .compactMap { $0 }
+                .done { self.presenter.doSubmissionPresentation(response: .init(step: $0, submission: submission)) }
+                .cauterize()
+        }
     }
 
     // MARK: Private API

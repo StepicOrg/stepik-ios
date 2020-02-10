@@ -280,8 +280,9 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
             parentID: viewModel.parentID,
+            comment: viewModel.comment,
+            submission: viewModel.comment?.submission,
             discussionThreadType: viewModel.discussionThreadType,
-            presentationContext: viewModel.presentationContext,
             navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? WriteCommentOutputProtocol
         )

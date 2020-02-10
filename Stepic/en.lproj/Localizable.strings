@@ -887,11 +887,13 @@ DiscussionsPlaceholderEmptySolutionsTitle = "No solutions";
 /* Write comment */
 WriteCommentDefaultTitle = "Comment";
 WriteCommentSolutionTitle = "Solution";
-WriteCommentPlaceholder = "Leave a comment...";
+WriteCommentPlaceholder = "Leave a Comment...";
 WriteCommentActionButtonCreate = "Send";
 WriteCommentActionButtonEdit = "Update";
-WriteCommentCancelPromptMessage = "Delete draft?";
+WriteCommentCancelPromptMessage = "Delete Draft?";
 WriteCommentCancelPromptDestructiveActionTitle = "Delete";
+WriteCommentSolutionFormatTitle = "Solution %@";
+WriteCommentSelectSolutionTitle = "Select Solution";
 
 /* Downloads */
 DownloadsTitle = "Downloaded courses";

@@ -893,6 +893,8 @@ WriteCommentActionButtonCreate = "Отправить";
 WriteCommentActionButtonEdit = "Обновить";
 WriteCommentCancelPromptMessage = "Удалить черновик?";
 WriteCommentCancelPromptDestructiveActionTitle = "Удалить";
+WriteCommentSolutionFormatTitle = "Решение %@";
+WriteCommentSelectSolutionTitle = "Выбрать решение";
 
 /* Downloads */
 DownloadsTitle = "Загруженные курсы";

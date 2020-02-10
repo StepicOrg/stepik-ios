@@ -8,6 +8,8 @@ protocol WriteCommentViewControllerProtocol: AnyObject {
     func displayCommentTextUpdate(viewModel: WriteComment.CommentTextUpdate.ViewModel)
     func displayCommentMainActionResult(viewModel: WriteComment.CommentMainAction.ViewModel)
     func displayCommentCancelPresentation(viewModel: WriteComment.CommentCancelPresentation.ViewModel)
+    func displaySolution(viewModel: WriteComment.SolutionPresentation.ViewModel)
+    func displaySolutionUpdate(viewModel: WriteComment.SolutionUpdate.ViewModel)
 }
 
 // MARK: - WriteCommentViewController (Appearance) -
@@ -189,6 +191,40 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
 
         self.present(module: alert)
     }
+
+    func displaySolution(viewModel: WriteComment.SolutionPresentation.ViewModel) {
+        let (modalPresentationStyle, navigationBarAppearance) = {
+            () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
+            if #available(iOS 13.0, *) {
+                return (
+                    .automatic,
+                    .init(
+                        statusBarColor: .clear,
+                        statusBarStyle: .lightContent
+                    )
+                )
+            } else {
+                return (.fullScreen, .init())
+            }
+        }()
+
+        let assembly = SubmissionsAssembly(
+            stepID: viewModel.stepID,
+            navigationBarAppearance: navigationBarAppearance,
+            output: self
+        )
+        let navigationController = StyledNavigationController(rootViewController: assembly.makeModule())
+
+        self.present(
+            module: navigationController,
+            embedInNavigation: false,
+            modalPresentationStyle: modalPresentationStyle
+        )
+    }
+
+    func displaySolutionUpdate(viewModel: WriteComment.SolutionUpdate.ViewModel) {
+        self.updateState(newState: viewModel.state)
+    }
 }
 
 // MARK: - WriteCommentViewController: WriteCommentViewDelegate -
@@ -196,6 +232,23 @@ extension WriteCommentViewController: WriteCommentViewControllerProtocol {
 extension WriteCommentViewController: WriteCommentViewDelegate {
     func writeCommentView(_ view: WriteCommentView, didUpdateText text: String) {
         self.interactor.doCommentTextUpdate(request: .init(text: text))
+    }
+
+    func writeCommentViewDidSelectSolution(_ view: WriteCommentView) {
+        self.interactor.doSolutionPresentation(request: .init())
+    }
+}
+
+// MARK: - WriteCommentViewController: SubmissionsOutputProtocol -
+
+extension WriteCommentViewController: SubmissionsOutputProtocol {
+    func handleSubmissionSelected(_ submission: Submission) {
+        self.dismiss(
+            animated: true,
+            completion: { [weak self] in
+                self?.interactor.doSolutionUpdate(request: .init(submission: submission))
+            }
+        )
     }
 }
 

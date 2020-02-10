@@ -664,8 +664,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 targetID: self.stepID,
                 parentID: parentID,
                 comment: nil,
-                discussionThreadType: self.discussionThreadType,
-                presentationContext: .create
+                discussionThreadType: self.discussionThreadType
             )
         )
     }
@@ -692,8 +691,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 targetID: self.stepID,
                 parentID: unwrappedComment.parentID,
                 comment: unwrappedComment,
-                discussionThreadType: self.discussionThreadType,
-                presentationContext: .edit
+                discussionThreadType: self.discussionThreadType
             )
         )
     }

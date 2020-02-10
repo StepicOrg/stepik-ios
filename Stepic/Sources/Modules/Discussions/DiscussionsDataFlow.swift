@@ -127,14 +127,13 @@ enum Discussions {
             let parentID: Comment.IdType?
             let comment: Comment?
             let discussionThreadType: DiscussionThread.ThreadType
-            let presentationContext: PresentationContext
         }
 
         struct ViewModel {
             let targetID: Int
             let parentID: Comment.IdType?
+            let comment: Comment?
             let discussionThreadType: DiscussionThread.ThreadType
-            let presentationContext: WriteComment.PresentationContext
         }
     }
 

@@ -8,14 +8,11 @@ enum WriteComment {
     typealias TargetIDType = Step.IdType
     typealias ParentIDType = Comment.IdType
 
-    enum PresentationContext {
-        case create
-        case edit(Comment)
-    }
-
-    struct CommentInfo {
+    struct CommentData {
         let text: String
-        let presentationContext: PresentationContext
+        let comment: Comment?
+        let submission: Submission?
+        let discussionThreadType: DiscussionThread.ThreadType
     }
 
     // MARK: - Use cases -
@@ -36,7 +33,7 @@ enum WriteComment {
         struct Request {}
 
         struct Response {
-            let data: CommentInfo
+            let data: CommentData
         }
 
         struct ViewModel {
@@ -51,7 +48,7 @@ enum WriteComment {
         }
 
         struct Response {
-            let data: CommentInfo
+            let data: CommentData
         }
 
         struct ViewModel {
@@ -64,7 +61,7 @@ enum WriteComment {
         struct Request {}
 
         struct Response {
-            let data: Result<CommentInfo>
+            let data: Result<CommentData>
         }
 
         struct ViewModel {
@@ -79,10 +76,40 @@ enum WriteComment {
         struct Response {
             let originalText: String
             let currentText: String
+            let originalSubmissionID: Submission.IdType?
+            let currentSubmissionID: Submission.IdType?
         }
 
         struct ViewModel {
             let shouldAskUser: Bool
+        }
+    }
+
+    /// Show or select solution
+    enum SolutionPresentation {
+        struct Request {}
+
+        struct Response {
+            let stepID: Step.IdType
+        }
+
+        struct ViewModel {
+            let stepID: Step.IdType
+        }
+    }
+
+    /// Handle solution update.
+    enum SolutionUpdate {
+        struct Request {
+            let submission: Submission
+        }
+
+        struct Response {
+            let data: CommentData
+        }
+
+        struct ViewModel {
+            let state: ViewControllerState
         }
     }
 

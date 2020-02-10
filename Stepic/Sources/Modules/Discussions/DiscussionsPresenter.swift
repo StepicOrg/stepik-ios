@@ -82,21 +82,12 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     }
 
     func presentWriteComment(response: Discussions.WriteCommentPresentation.Response) {
-        let presentationContext: WriteComment.PresentationContext = {
-            switch response.presentationContext {
-            case .create:
-                return .create
-            case .edit:
-                return .edit(response.comment.require())
-            }
-        }()
-
         self.viewController?.displayWriteComment(
             viewModel: .init(
                 targetID: response.targetID,
                 parentID: response.parentID,
-                discussionThreadType: response.discussionThreadType,
-                presentationContext: presentationContext
+                comment: response.comment,
+                discussionThreadType: response.discussionThreadType
             )
         )
     }

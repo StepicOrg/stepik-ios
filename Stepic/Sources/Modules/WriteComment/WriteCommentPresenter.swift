@@ -6,6 +6,8 @@ protocol WriteCommentPresenterProtocol {
     func presentCommentTextUpdate(response: WriteComment.CommentTextUpdate.Response)
     func presentCommentMainActionResult(response: WriteComment.CommentMainAction.Response)
     func presentCommentCancelPresentation(response: WriteComment.CommentCancelPresentation.Response)
+    func presentSolution(response: WriteComment.SolutionPresentation.Response)
+    func presentSolutionUpdate(response: WriteComment.SolutionUpdate.Response)
 }
 
 final class WriteCommentPresenter: WriteCommentPresenterProtocol {
@@ -26,28 +28,19 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
     }
 
     func presentComment(response: WriteComment.CommentLoad.Response) {
-        let viewModel = self.makeViewModel(
-            text: response.data.text,
-            presentationContext: response.data.presentationContext
-        )
+        let viewModel = self.makeViewModel(response.data)
         self.viewController?.displayComment(viewModel: .init(state: .result(data: viewModel)))
     }
 
     func presentCommentTextUpdate(response: WriteComment.CommentTextUpdate.Response) {
-        let viewModel = self.makeViewModel(
-            text: response.data.text,
-            presentationContext: response.data.presentationContext
-        )
+        let viewModel = self.makeViewModel(response.data)
         self.viewController?.displayCommentTextUpdate(viewModel: .init(state: .result(data: viewModel)))
     }
 
     func presentCommentMainActionResult(response: WriteComment.CommentMainAction.Response) {
         switch response.data {
         case .success(let data):
-            let viewModel = self.makeViewModel(
-                text: data.text,
-                presentationContext: data.presentationContext
-            )
+            let viewModel = self.makeViewModel(data)
             self.viewController?.displayCommentMainActionResult(viewModel: .init(state: .result(data: viewModel)))
         case .failure:
             self.viewController?.displayCommentMainActionResult(viewModel: .init(state: .error))
@@ -55,25 +48,53 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
     }
 
     func presentCommentCancelPresentation(response: WriteComment.CommentCancelPresentation.Response) {
-        let hasChanges = response.originalText != response.currentText && !response.currentText.isEmpty
+        let hasTextChanges = response.originalText != response.currentText && !response.currentText.isEmpty
+        let hasSubmissionChanges = response.originalSubmissionID != response.currentSubmissionID
+        let hasChanges = hasTextChanges || hasSubmissionChanges
         self.viewController?.displayCommentCancelPresentation(viewModel: .init(shouldAskUser: hasChanges))
+    }
+
+    func presentSolution(response: WriteComment.SolutionPresentation.Response) {
+        self.viewController?.displaySolution(viewModel: .init(stepID: response.stepID))
+    }
+
+    func presentSolutionUpdate(response: WriteComment.SolutionUpdate.Response) {
+        let viewModel = self.makeViewModel(response.data)
+        self.viewController?.displaySolutionUpdate(viewModel: .init(state: .result(data: viewModel)))
     }
 
     // MARK: Private API
 
-    private func makeViewModel(
-        text: String,
-        presentationContext: WriteComment.PresentationContext
-    ) -> WriteCommentViewModel {
-        let title: String = {
-            switch presentationContext {
-            case .create:
-                return NSLocalizedString("WriteCommentActionButtonCreate", comment: "")
-            case .edit:
-                return NSLocalizedString("WriteCommentActionButtonEdit", comment: "")
+    private func makeViewModel(_ data: WriteComment.CommentData) -> WriteCommentViewModel {
+        let doneButtonTitle = data.comment == nil
+            ? NSLocalizedString("WriteCommentActionButtonCreate", comment: "")
+            : NSLocalizedString("WriteCommentActionButtonEdit", comment: "")
+
+        let solutionTitle: String = {
+            if let submission = data.submission {
+                return String(
+                    format: NSLocalizedString("WriteCommentSolutionFormatTitle", comment: ""),
+                    arguments: ["\(submission.id)"]
+                )
             }
+            return NSLocalizedString("WriteCommentSelectSolutionTitle", comment: "")
         }()
 
-        return .init(text: text, doneButtonTitle: title, isFilled: !text.isEmpty)
+        let isFilled: Bool = {
+            if data.discussionThreadType == .solutions {
+                return !data.text.isEmpty && data.submission != nil
+            }
+            return !data.text.isEmpty
+        }()
+
+        return .init(
+            text: data.text,
+            doneButtonTitle: doneButtonTitle,
+            isFilled: isFilled,
+            isSolutionHidden: data.discussionThreadType != .solutions,
+            isSolutionSelected: data.submission != nil,
+            isSolutionCorrect: data.submission?.isCorrect ?? false,
+            solutionTitle: solutionTitle
+        )
     }
 }
