@@ -77,7 +77,7 @@ final class CommentsAPI: APIEndpoint {
         }
     }
 
-    func create(_ comment: Comment) -> Promise<Comment> {
+    func create(_ comment: Comment, blockName: String?) -> Promise<Comment> {
         Promise { seal in
             self.create.request(
                 requestEndpoint: self.name,
@@ -91,6 +91,31 @@ final class CommentsAPI: APIEndpoint {
                 comment.userInfo = userInfo
                 comment.vote = vote
 
+                let isBlockNameProvided = !(blockName?.isEmpty ?? true)
+
+                let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map {
+                    isBlockNameProvided
+                        ? Attempt(json: $0, stepName: blockName ?? "")
+                        : Attempt(json: $0)
+                }
+
+                var submissionByID = [Submission.IdType: Submission]()
+                json[Comment.JSONKey.submissions.rawValue].arrayValue.forEach {
+                    let submission = isBlockNameProvided
+                        ? Submission(json: $0, stepName: blockName ?? "")
+                        : Submission(json: $0)
+
+                    if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
+                        submission.attempt = attempt
+                    }
+
+                    submissionByID[submission.id] = submission
+                }
+
+                if let submissionID = comment.submissionID {
+                    comment.submission = submissionByID[submissionID]
+                }
+
                 seal.fulfill(comment)
             }.catch { error in
                 seal.reject(error)
@@ -98,7 +123,7 @@ final class CommentsAPI: APIEndpoint {
         }
     }
 
-    func update(_ comment: Comment) -> Promise<Comment> {
+    func update(_ comment: Comment, blockName: String?) -> Promise<Comment> {
         Promise { seal in
             self.update.request(
                 requestEndpoint: self.name,
@@ -111,6 +136,31 @@ final class CommentsAPI: APIEndpoint {
 
                 comment.userInfo = userInfo
                 comment.vote = vote
+
+                let isBlockNameProvided = !(blockName?.isEmpty ?? true)
+
+                let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map {
+                    isBlockNameProvided
+                        ? Attempt(json: $0, stepName: blockName ?? "")
+                        : Attempt(json: $0)
+                }
+
+                var submissionByID = [Submission.IdType: Submission]()
+                json[Comment.JSONKey.submissions.rawValue].arrayValue.forEach {
+                    let submission = isBlockNameProvided
+                        ? Submission(json: $0, stepName: blockName ?? "")
+                        : Submission(json: $0)
+
+                    if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
+                        submission.attempt = attempt
+                    }
+
+                    submissionByID[submission.id] = submission
+                }
+
+                if let submissionID = comment.submissionID {
+                    comment.submission = submissionByID[submissionID]
+                }
 
                 seal.fulfill(comment)
             }.catch { error in

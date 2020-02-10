@@ -30,7 +30,9 @@ final class WriteCommentAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = WriteCommentProvider(
-            commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI())
+            commentsNetworkService: CommentsNetworkService(commentsAPI: CommentsAPI()),
+            stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
+            stepsPersistenceService: StepsPersistenceService()
         )
         let presenter = WriteCommentPresenter()
         let interactor = WriteCommentInteractor(

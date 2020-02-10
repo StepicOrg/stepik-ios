@@ -2,9 +2,9 @@ import Foundation
 import PromiseKit
 
 protocol CommentsNetworkServiceProtocol: AnyObject {
-    func fetch(ids: [Comment.IdType], blockName: String) -> Promise<[Comment]>
-    func create(comment: Comment) -> Promise<Comment>
-    func update(comment: Comment) -> Promise<Comment>
+    func fetch(ids: [Comment.IdType], blockName: String?) -> Promise<[Comment]>
+    func create(comment: Comment, blockName: String?) -> Promise<Comment>
+    func update(comment: Comment, blockName: String?) -> Promise<Comment>
     func delete(id: Comment.IdType) -> Promise<Void>
 }
 
@@ -15,7 +15,7 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
         self.commentsAPI = commentsAPI
     }
 
-    func fetch(ids: [Comment.IdType], blockName: String) -> Promise<[Comment]> {
+    func fetch(ids: [Comment.IdType], blockName: String?) -> Promise<[Comment]> {
         if ids.isEmpty {
             return .value([])
         }
@@ -30,9 +30,9 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
         }
     }
 
-    func create(comment: Comment) -> Promise<Comment> {
+    func create(comment: Comment, blockName: String?) -> Promise<Comment> {
         Promise { seal in
-            self.commentsAPI.create(comment).done { comment in
+            self.commentsAPI.create(comment, blockName: blockName).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in
                 seal.reject(Error.createFailed)
@@ -40,9 +40,9 @@ final class CommentsNetworkService: CommentsNetworkServiceProtocol {
         }
     }
 
-    func update(comment: Comment) -> Promise<Comment> {
+    func update(comment: Comment, blockName: String?) -> Promise<Comment> {
         Promise { seal in
-            self.commentsAPI.update(comment).done { comment in
+            self.commentsAPI.update(comment, blockName: blockName).done { comment in
                 seal.fulfill(comment)
             }.catch { _ in
                 seal.reject(Error.updateFailed)
