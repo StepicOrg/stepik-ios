@@ -57,6 +57,9 @@ final class WriteCommentView: UIView {
         return textView
     }()
 
+    lazy var scrollView = UIScrollView()
+    private lazy var contentView = UIView()
+
     private var textViewTopToSuperviewConstraint: Constraint?
     private var textViewTopToBottomOfSeparatorConstraint: Constraint?
 
@@ -127,21 +130,30 @@ extension WriteCommentView: ProgrammaticallyInitializableViewProtocol {
     }
 
     func addSubviews() {
-        self.addSubview(self.solutionControl)
-        self.addSubview(self.solutionBottomSeparatorView)
-        self.addSubview(self.textView)
+        self.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.contentView)
+        self.contentView.addSubview(self.solutionControl)
+        self.contentView.addSubview(self.solutionBottomSeparatorView)
+        self.contentView.addSubview(self.textView)
     }
 
     func makeConstraints() {
+        self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.center.equalToSuperview()
+        }
+
         self.solutionControl.translatesAutoresizingMaskIntoConstraints = false
         self.solutionControl.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading
-                .equalTo(self.safeAreaLayoutGuide.snp.leading)
-                .offset(self.appearance.solutionControlInsets.left)
-            make.trailing
-                .equalTo(self.safeAreaLayoutGuide.snp.trailing)
-                .offset(-self.appearance.solutionControlInsets.right)
+            make.leading.equalToSuperview().offset(self.appearance.solutionControlInsets.left)
+            make.trailing.equalToSuperview().offset(-self.appearance.solutionControlInsets.right)
             make.height.equalTo(self.appearance.solutionControlHeight)
         }
 
@@ -158,11 +170,10 @@ extension WriteCommentView: ProgrammaticallyInitializableViewProtocol {
             self.textViewTopToBottomOfSeparatorConstraint = make.top
                 .equalTo(self.solutionBottomSeparatorView.snp.bottom)
                 .constraint
-            make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading)
-            make.trailing.equalTo(self.safeAreaLayoutGuide.snp.trailing)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
-
             self.textViewTopToBottomOfSeparatorConstraint?.deactivate()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 }

@@ -513,6 +513,7 @@
 		2C5F77C41F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */; };
 		2C604E1F207E45A1001588FB /* CodeEditorPreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */; };
 		2C604E21207E4609001588FB /* CodeEditorPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */; };
+		2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */; };
 		2C6B2F9C20D7F24800F7C976 /* AchievementPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */; };
 		2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */; };
 		2C6BBBB222B261E700889A45 /* BaseQuizDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6BBBA622B261E200889A45 /* BaseQuizDataFlow.swift */; };
@@ -1697,6 +1698,7 @@
 		2C5F77C31F90FC2500E8E175 /* NotificationsMarkAsReadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsMarkAsReadButton.swift; sourceTree = "<group>"; };
 		2C604E1E207E45A1001588FB /* CodeEditorPreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CodeEditorPreviewView.xib; sourceTree = "<group>"; };
 		2C604E20207E4609001588FB /* CodeEditorPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorPreviewView.swift; sourceTree = "<group>"; };
+		2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewKeyboardAdjuster.swift; sourceTree = "<group>"; };
 		2C6B2F9A20D7F24800F7C976 /* AchievementPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPopupViewController.swift; sourceTree = "<group>"; };
 		2C6B2F9B20D7F24800F7C976 /* AchievementPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementPopupViewController.xib; sourceTree = "<group>"; };
 		2C6BBBA622B261E200889A45 /* BaseQuizDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseQuizDataFlow.swift; sourceTree = "<group>"; };
@@ -4678,6 +4680,7 @@
 				2C7F78392271D5480089FDD7 /* LayoutInsets.swift */,
 				2CBBCB9723980EB2006D6C15 /* MulticastDelegate.swift */,
 				2C2EA36A212D5FEF002116C9 /* Result.swift */,
+				2C68B3C723F5292100171F89 /* ScrollViewKeyboardAdjuster.swift */,
 				2CBBCB9923980ED6006D6C15 /* WeakBox.swift */,
 			);
 			path = Common;
@@ -7192,6 +7195,7 @@
 				62E98C351D74B1712611311E /* BaseExploreViewController.swift in Sources */,
 				62E98FC91D0AE00E90D18A21 /* BaseExploreInteractor.swift in Sources */,
 				2CAB5C7422F1B90300ED2221 /* NewCodeQuizFullscreenInstructionViewController.swift in Sources */,
+				2C68B3C823F5292100171F89 /* ScrollViewKeyboardAdjuster.swift in Sources */,
 				62E98B605F98ED4C650E2C26 /* BaseExplorePresenter.swift in Sources */,
 				62E98E788CD3D0116562BF69 /* BaseExploreDataFlow.swift in Sources */,
 				62E982D5BDFF4171BAE6B9DE /* FullscreenCourseListAssembly.swift in Sources */,

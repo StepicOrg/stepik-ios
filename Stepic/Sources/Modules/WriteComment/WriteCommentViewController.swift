@@ -1,3 +1,4 @@
+import IQKeyboardManagerSwift
 import UIKit
 
 // MARK: WriteCommentViewControllerProtocol: AnyObject -
@@ -49,6 +50,8 @@ final class WriteCommentViewController: UIViewController {
         return UIBarButtonItem(customView: activityIndicatorView)
     }()
 
+    private var keyboardAdjuster: ScrollViewKeyboardAdjuster?
+
     init(
         interactor: WriteCommentInteractorProtocol,
         initialState: WriteComment.ViewControllerState = .loading,
@@ -80,6 +83,11 @@ final class WriteCommentViewController: UIViewController {
         self.interactor.doCommentLoad(request: .init())
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enable = false
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -94,12 +102,18 @@ final class WriteCommentViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
+        IQKeyboardManager.shared.enable = true
     }
 
     // MARK: - Private API
 
     private func setup() {
-        self.edgesForExtendedLayout = []
+        if let scrollView = self.writeCommentView?.scrollView {
+            self.keyboardAdjuster = ScrollViewKeyboardAdjuster(
+                scrollView: scrollView,
+                viewController: self
+            )
+        }
 
         // Disable swipe down to dismiss, because we should prompt user
         if #available(iOS 13.0, *) {
