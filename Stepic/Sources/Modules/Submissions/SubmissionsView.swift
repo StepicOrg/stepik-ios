@@ -67,13 +67,13 @@ final class SubmissionsView: UIView {
 
     func showPaginationView() {
         self.shouldShowPaginationView = true
-        self.tableView.tableFooterView = self.paginationView
-        self.tableView.tableFooterView?.frame = CGRect(
+        self.paginationView?.frame = CGRect(
             x: 0,
             y: 0,
             width: self.frame.width,
             height: self.appearance.paginationViewHeight
         )
+        self.tableView.tableFooterView = self.paginationView
     }
 
     func hidePaginationView() {
