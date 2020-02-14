@@ -123,7 +123,12 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             )
         case .solutions:
             self.registerPlaceholder(
-                placeholder: StepikPlaceholder(.emptySolutions, action: nil),
+                placeholder: StepikPlaceholder(
+                    .emptySolutions,
+                    action: { [weak self] in
+                        self?.didClickWriteComment()
+                    }
+                ),
                 for: .empty
             )
         }

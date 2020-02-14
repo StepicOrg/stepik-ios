@@ -83,7 +83,7 @@ Alert = "Alert";
 Confirm = "Confirm action";
 Prompt = "Enter data";
 Submit = "Submit";
-TryAgain = "Try again";
+TryAgain = "Try Again";
 Correct = "Correct!";
 Wrong = "Wrong. Please, try again.";
 CorrectFreeResponse = "Your answer was saved.";
@@ -121,7 +121,7 @@ ShowMoreReplies = "More replies";
 ShowMoreDiscussions = "More discussions";
 RefreshingDiscussions = "Refreshing discussions...";
 PlaceholderNoDiscussionsTitle = "No discussions. Start the first one!";
-PlaceholderNoDiscussionsButtonTitle = "Leave a comment";
+PlaceholderNoDiscussionsButtonTitle = "Leave a Comment";
 Syllabus = "Syllabus";
 Course = "Course";
 NextLesson = "Next lesson";
@@ -882,7 +882,8 @@ DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
 DiscussionsIsPinnedBadgeTitle = "Pinned";
 DiscussionThreadSolutionsTitle = "Solutions";
 DiscussionThreadCommentSolutionTitle = "Solution %@";
-DiscussionsPlaceholderEmptySolutionsTitle = "No solutions";
+DiscussionsPlaceholderEmptySolutionsTitle = "No solutions. Post the first one!";
+DiscussionsPlaceholderEmptySolutionsButtonTitle = "Post a Solution";
 
 /* Write comment */
 WriteCommentDefaultTitle = "Comment";
