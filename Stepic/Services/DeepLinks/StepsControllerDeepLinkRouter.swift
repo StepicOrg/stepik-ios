@@ -15,12 +15,16 @@ final class StepsControllerDeepLinkRouter: NSObject {
         step stepId: Int,
         inLesson lessonId: Int,
         withUnit unitID: Int?,
-        success successHandler : @escaping (([UIViewController]) -> Void),
-        error errorHandler : @escaping ((String) -> Void)
+        success successHandler: @escaping (([UIViewController]) -> Void),
+        error errorHandler: @escaping ((String) -> Void)
     ) {
         // Download lesson and pass stepId to StepsViewController
         if let lesson = Lesson.getLesson(lessonId) {
-            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [lesson], refreshMode: .update, success: { lessons in
+            ApiDataDownloader.lessons.retrieve(
+                ids: [lessonId],
+                existing: [lesson],
+                refreshMode: .update,
+                success: { lessons in
                     if let lesson = lessons.first {
                         self.getViewControllerForLesson(
                             lesson,
@@ -32,7 +36,8 @@ final class StepsControllerDeepLinkRouter: NSObject {
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
-                }, error: { error in
+                },
+                error: { error in
                     self.getViewControllerForLesson(
                         lesson,
                         stepId: stepId,
@@ -43,7 +48,11 @@ final class StepsControllerDeepLinkRouter: NSObject {
                 }
             )
         } else {
-            ApiDataDownloader.lessons.retrieve(ids: [lessonId], existing: [], refreshMode: .update, success: { lessons in
+            ApiDataDownloader.lessons.retrieve(
+                ids: [lessonId],
+                existing: [],
+                refreshMode: .update,
+                success: { lessons in
                     if let lesson = lessons.first {
                         self.getViewControllerForLesson(
                             lesson,
@@ -55,7 +64,8 @@ final class StepsControllerDeepLinkRouter: NSObject {
                     } else {
                         errorHandler("Could not get lesson for deep link")
                     }
-                }, error: { _ in
+                },
+                error: { _ in
                     errorHandler("Could not get lesson for deep link")
                 }
             )
@@ -72,102 +82,122 @@ final class StepsControllerDeepLinkRouter: NSObject {
         var currentUnit: Unit?
 
         func fetchOrLoadUnit(for lesson: Lesson) -> Promise<Unit> {
-            return Promise { seal in
+            Promise { seal in
                 if let unit = lesson.unit {
                     seal.fulfill(unit)
                     return
                 }
 
-                ApiDataDownloader.units.retrieve(lesson: lesson.id, success: { unit in
-                    unit.lesson = lesson
-                    CoreDataHelper.shared.save()
+                ApiDataDownloader.units.retrieve(
+                    lesson: lesson.id,
+                    success: { unit in
+                        unit.lesson = lesson
+                        CoreDataHelper.shared.save()
 
-                    seal.fulfill(unit)
-                }, error: { err in
-                    seal.reject(err)
-                })
+                        seal.fulfill(unit)
+                    },
+                    error: { err in
+                        seal.reject(err)
+                    }
+                )
             }
         }
 
         func fetchOrLoadSection(for unit: Unit) -> Promise<Section> {
-            return Promise { seal in
+            Promise { seal in
                 if let sections = try? Section.getSections(unit.sectionId),
                    let section = sections.first, section.courseId != 0 {
                     seal.fulfill(section)
                     return
                 }
 
-                ApiDataDownloader.sections.retrieve(ids: [unit.sectionId], existing: [], refreshMode: .update, success: { sections in
-                    if let section = sections.first {
-                        unit.section = section
-                        CoreDataHelper.shared.save()
+                ApiDataDownloader.sections.retrieve(
+                    ids: [unit.sectionId],
+                    existing: [],
+                    refreshMode: .update,
+                    success: { sections in
+                        if let section = sections.first {
+                            unit.section = section
+                            CoreDataHelper.shared.save()
 
-                        seal.fulfill(section)
-                    } else {
-                        seal.reject(NSError(domain: "", code: -1, userInfo: nil)) // no ideas what we should throw here...
+                            seal.fulfill(section)
+                        } else {
+                            seal.reject(NSError(domain: "", code: -1, userInfo: nil)) // no ideas what we should throw here...
+                        }
+                    },
+                    error: { err in
+                        seal.reject(err)
                     }
-                }, error: { err in
-                    seal.reject(err)
-                })
+                )
             }
         }
 
         func fetchOrLoadCourse(for section: Section) -> Promise<Course> {
-            return Promise { seal in
+            Promise { seal in
                 if let course = Course.getCourses([section.courseId]).first {
                     seal.fulfill(course)
                     return
                 }
 
-                ApiDataDownloader.courses.retrieve(ids: [section.courseId], existing: [], refreshMode: .update, success: { courses in
-                    if let course = courses.first {
-                        section.course = course
-                        CoreDataHelper.shared.save()
+                ApiDataDownloader.courses.retrieve(
+                    ids: [section.courseId],
+                    existing: [],
+                    refreshMode: .update,
+                    success: { courses in
+                        if let course = courses.first {
+                            section.course = course
+                            CoreDataHelper.shared.save()
 
-                        seal.fulfill(course)
-                    } else {
-                        seal.reject(NSError(domain: "", code: -1, userInfo: nil))
+                            seal.fulfill(course)
+                        } else {
+                            seal.reject(NSError(domain: "", code: -1, userInfo: nil))
+                        }
+                    },
+                    error: { err in
+                        seal.reject(err)
                     }
-                }, error: { err in
-                    seal.reject(err)
-                })
+                )
             }
         }
 
         fetchOrLoadUnit(for: lesson).then { unit -> Promise<Section> in
             currentUnit = unit
             return fetchOrLoadSection(for: unit)
-        }.then { section -> Promise<Course> in
-            fetchOrLoadCourse(for: section)
-        }.done { course in
-            if lesson.isPublic || course.enrolled {
-                let lessonAssemblyWithoutUnit = LessonAssembly(
-                    initialContext: .lesson(id: lesson.id),
-                    startStep: .index(stepId - 1)
-                )
+        }.then { section -> Promise<(Section, Course)> in
+            fetchOrLoadCourse(for: section).map { (section, $0) }
+        }.done { section, course in
+            let hasAccess = lesson.isPublic || course.enrolled
+            guard hasAccess else {
+                return errorHandler("No access")
+            }
 
-                var controllersStack: [UIViewController] = []
+            let courseInfoAssembly = CourseInfoAssembly(courseID: course.id, initialTab: .syllabus)
+            let lessonAssemblyWithoutUnit = LessonAssembly(
+                initialContext: .lesson(id: lesson.id),
+                startStep: .index(stepId - 1)
+            )
 
-                if includeUnit {
-                    controllersStack.append(CourseInfoAssembly(courseID: course.id, initialTab: .syllabus).makeModule())
+            var controllersStack: [UIViewController] = []
 
-                    if let unit = currentUnit {
-                        let lessonAssembly = LessonAssembly(
-                            initialContext: .unit(id: unit.id),
-                            startStep: .index(stepId - 1)
-                        )
-                        controllersStack.append(lessonAssembly.makeModule())
-                    } else {
-                        controllersStack.append(lessonAssemblyWithoutUnit.makeModule())
-                    }
+            if section.isExam {
+                controllersStack.append(courseInfoAssembly.makeModule())
+            } else if includeUnit {
+                controllersStack.append(courseInfoAssembly.makeModule())
+
+                if let unit = currentUnit {
+                    let lessonAssembly = LessonAssembly(
+                        initialContext: .unit(id: unit.id),
+                        startStep: .index(stepId - 1)
+                    )
+                    controllersStack.append(lessonAssembly.makeModule())
                 } else {
                     controllersStack.append(lessonAssemblyWithoutUnit.makeModule())
                 }
-
-                successHandler(controllersStack)
             } else {
-                errorHandler("No access")
+                controllersStack.append(lessonAssemblyWithoutUnit.makeModule())
             }
+
+            successHandler(controllersStack)
         }.catch { error in
             errorHandler(error.localizedDescription)
         }
