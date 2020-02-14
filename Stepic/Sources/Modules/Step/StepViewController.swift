@@ -237,14 +237,47 @@ extension StepViewController: StepViewControllerProtocol {
     }
 
     func displayDiscussions(viewModel: StepDataFlow.DiscussionsPresentation.ViewModel) {
-        let discussionsAssembly = DiscussionsAssembly(
+        self.displayDiscussions(
             discussionThreadType: .default,
             discussionProxyID: viewModel.discussionProxyID,
-            stepID: viewModel.stepID
+            stepID: viewModel.stepID,
+            shouldEmbedInWriteComment: viewModel.shouldEmbedInWriteComment
+        )
+    }
+
+    func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel) {
+        self.displayDiscussions(
+            discussionThreadType: .solutions,
+            discussionProxyID: viewModel.discussionProxyID,
+            stepID: viewModel.stepID,
+            shouldEmbedInWriteComment: viewModel.shouldEmbedInWriteComment
+        )
+    }
+
+    func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {
+        if viewModel.shouldDismiss {
+            SVProgressHUD.dismiss()
+        } else {
+            SVProgressHUD.show()
+        }
+    }
+
+    // MARK: Private Helpers
+
+    private func displayDiscussions(
+        discussionThreadType: DiscussionThread.ThreadType,
+        discussionProxyID: DiscussionProxy.IdType,
+        stepID: Step.IdType,
+        shouldEmbedInWriteComment: Bool
+    ) {
+        let discussionsAssembly = DiscussionsAssembly(
+            discussionThreadType: discussionThreadType,
+            discussionProxyID: discussionProxyID,
+            stepID: stepID
         )
         let discussionsViewController = discussionsAssembly.makeModule()
 
-        if viewModel.shouldEmbedInWriteComment {
+        if shouldEmbedInWriteComment {
             let (modalPresentationStyle, navigationBarAppearance) = {
                 () -> (UIModalPresentationStyle, StyledNavigationController.NavigationBarAppearanceState) in
                 if #available(iOS 13.0, *) {
@@ -261,9 +294,11 @@ extension StepViewController: StepViewControllerProtocol {
             }()
 
             let writeCommentAssembly = WriteCommentAssembly(
-                targetID: viewModel.stepID,
+                targetID: stepID,
                 parentID: nil,
-                presentationContext: .create,
+                comment: nil,
+                submission: nil,
+                discussionThreadType: discussionThreadType,
                 navigationBarAppearance: navigationBarAppearance,
                 output: discussionsAssembly.moduleInput
             )
@@ -289,24 +324,6 @@ extension StepViewController: StepViewControllerProtocol {
             )
         } else {
             self.push(module: discussionsViewController)
-        }
-    }
-
-    func displaySolutions(viewModel: StepDataFlow.SolutionsPresentation.ViewModel) {
-        let assembly = DiscussionsAssembly(
-            discussionThreadType: .solutions,
-            discussionProxyID: viewModel.discussionProxyID,
-            stepID: viewModel.stepID
-        )
-
-        self.push(module: assembly.makeModule())
-    }
-
-    func displayBlockingLoadingIndicator(viewModel: StepDataFlow.BlockingWaitingIndicatorUpdate.ViewModel) {
-        if viewModel.shouldDismiss {
-            SVProgressHUD.dismiss()
-        } else {
-            SVProgressHUD.show()
         }
     }
 }

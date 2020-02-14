@@ -1,6 +1,6 @@
 PODS:
   - ActionSheetPicker-3.0 (2.4.0)
-  - Agrume (5.6.1):
+  - Agrume (5.6.4):
     - SwiftyGif
   - Alamofire (4.9.1)
   - Amplitude-iOS (4.9.3)
@@ -179,16 +179,16 @@ PODS:
   - TUSafariActivity (1.0.4)
   - URITemplate (3.0.0)
   - VK-ios-sdk (1.5.1)
-  - YandexMobileMetrica/Dynamic (3.9.2):
-    - YandexMobileMetrica/Dynamic/Core (= 3.9.2)
-    - YandexMobileMetrica/Dynamic/Crashes (= 3.9.2)
-  - YandexMobileMetrica/Dynamic/Core (3.9.2)
-  - YandexMobileMetrica/Dynamic/Crashes (3.9.2):
+  - YandexMobileMetrica/Dynamic (3.9.4):
+    - YandexMobileMetrica/Dynamic/Core (= 3.9.4)
+    - YandexMobileMetrica/Dynamic/Crashes (= 3.9.4)
+  - YandexMobileMetrica/Dynamic/Core (3.9.4)
+  - YandexMobileMetrica/Dynamic/Crashes (3.9.4):
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.4.0)
-  - Agrume (= 5.6.1)
+  - Agrume (= 5.6.4)
   - Alamofire (= 4.9.1)
   - Amplitude-iOS (= 4.9.3)
   - Atributika (= 4.9.4)
@@ -233,7 +233,7 @@ DEPENDENCIES:
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
   - VK-ios-sdk (= 1.5.1)
-  - YandexMobileMetrica/Dynamic (= 3.9.2)
+  - YandexMobileMetrica/Dynamic (= 3.9.4)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -319,7 +319,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: c68e1f8355828b4e1c823fa87185aacfef5e6fe3
-  Agrume: 101c9874313f9e33b70c477e094e40a2f7e56910
+  Agrume: bee63cb2ece28830c5664f8abbc8903414bd7f72
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   Atributika: 643a248e2dd8b4d74b23b53ea31393cab0a01d94
@@ -383,8 +383,8 @@ SPEC CHECKSUMS:
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
-  YandexMobileMetrica: ea82087806f175981c9eccbb8e35f1d4ee35d788
+  YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
 
-PODFILE CHECKSUM: cd262647e966daed303a0675002ffac8f97cf697
+PODFILE CHECKSUM: ba390ba6c2c2242b85e6dd46f53cc8dad466e12e
 
 COCOAPODS: 1.8.4

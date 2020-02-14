@@ -6,7 +6,7 @@ protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentDeleteDownloadsConfirmationAlert(response: CourseInfoTabSyllabus.DeleteDownloadsConfirmation.Response)
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
-    func presentFailedVideoDownloadAlert(response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response)
+    func presentFailedDownloadAlert(response: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -15,10 +15,10 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     private var cachedSectionViewModels: [Section.IdType: CourseInfoTabSyllabusSectionViewModel] = [:]
     private var cachedUnitViewModels: [Unit.IdType: CourseInfoTabSyllabusUnitViewModel] = [:]
 
-    private var lastDateFailedVideoAlertShown: Date?
+    private var lastDateFailedAlertShown: Date?
     /// Allows to present alert once per minute.
-    private var shouldPresentFailedVideoAlert: Bool {
-        Date().timeIntervalSince(self.lastDateFailedVideoAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
+    private var shouldPresentFailedAlert: Bool {
+        Date().timeIntervalSince(self.lastDateFailedAlertShown ?? Date(timeIntervalSince1970: 0)) > 60
     }
 
     func presentCourseSyllabus(response: CourseInfoTabSyllabus.SyllabusLoad.Response) {
@@ -191,18 +191,20 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         self.viewController?.displayBlockingLoadingIndicator(viewModel: .init(shouldDismiss: response.shouldDismiss))
     }
 
-    func presentFailedVideoDownloadAlert(
-        response: CourseInfoTabSyllabus.FailedVideoDownloadAlertPresentation.Response
+    func presentFailedDownloadAlert(
+        response: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.Response
     ) {
-        if self.shouldPresentFailedVideoAlert {
-            self.lastDateFailedVideoAlertShown = Date()
-            self.viewController?.displayFailedVideoDownloadAlert(
-                viewModel: .init(
-                    title: NSLocalizedString("Error", comment: ""),
-                    message: NSLocalizedString("CourseInfoTabSyllabusFailedLoadVideoAlertMessage", comment: "")
-                )
-            )
+        guard self.shouldPresentFailedAlert else {
+            return
         }
+
+        self.lastDateFailedAlertShown = Date()
+        self.viewController?.displayFailedDownloadAlert(
+            viewModel: .init(
+                title: NSLocalizedString("Error", comment: ""),
+                message: NSLocalizedString("CourseInfoTabSyllabusFailedDownloadAlertMessage", comment: "")
+            )
+        )
     }
 
     // MARK: - Private API

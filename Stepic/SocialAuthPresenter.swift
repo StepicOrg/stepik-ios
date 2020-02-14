@@ -39,21 +39,29 @@ final class SocialAuthPresenter {
     var stepicsAPI: StepicsAPI
     var authAPI: AuthAPI
     var notificationStatusesAPI: NotificationStatusesAPI
-    var splitTestingService: SplitTestingServiceProtocol
 
     var pendingAuthProviderInfo: SocialProviderInfo?
 
     var socialAuthHeaderString: String { NSLocalizedString("SignInTitleSocial", comment: "") }
 
-    init(authAPI: AuthAPI, stepicsAPI: StepicsAPI, notificationStatusesAPI: NotificationStatusesAPI, splitTestingService: SplitTestingServiceProtocol, view: SocialAuthView) {
+    init(
+        authAPI: AuthAPI,
+        stepicsAPI: StepicsAPI,
+        notificationStatusesAPI: NotificationStatusesAPI,
+        view: SocialAuthView
+    ) {
         self.authAPI = authAPI
         self.stepicsAPI = stepicsAPI
         self.notificationStatusesAPI = notificationStatusesAPI
-        self.splitTestingService = splitTestingService
         self.view = view
 
         // TODO: create NSNotification.Name extension
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didAuthCodeReceive(_:)), name: NSNotification.Name(rawValue: "ReceivedAuthorizationCodeNotification"), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.didAuthCodeReceive(_:)),
+            name: NSNotification.Name(rawValue: "ReceivedAuthorizationCodeNotification"),
+            object: nil
+        )
     }
 
     deinit {
@@ -61,7 +69,9 @@ final class SocialAuthPresenter {
     }
 
     func update() {
-        let providersInfo = SocialProvider.all.map { SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue) }
+        let providersInfo = SocialProvider.allCases.map {
+            SocialProviderViewData(image: $0.info.image, name: $0.name, id: $0.rawValue)
+        }
         view?.set(providers: providersInfo)
     }
 

@@ -7,5 +7,5 @@ protocol {{ module_info.name }}PresenterProtocol {
 final class {{ module_info.name }}Presenter: {{ module_info.name }}PresenterProtocol {
     weak var viewController: {{ module_info.name }}ViewControllerProtocol?
 
-    func presentSomeActionResult(response: {{ module_info.name }}.SomeAction.Response) { }
+    func presentSomeActionResult(response: {{ module_info.name }}.SomeAction.Response) {}
 }

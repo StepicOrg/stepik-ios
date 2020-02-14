@@ -272,7 +272,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 }.ensure {
                     self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
                 }.catch { error in
-                    self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
+                    self.presenter.presentFailedDownloadAlert(response: .init(error: error))
                 }
             default:
                 CourseInfoTabSyllabusInteractor.logger.warning(
@@ -666,8 +666,25 @@ extension CourseInfoTabSyllabusInteractor: SyllabusDownloadsServiceDelegate {
                 report(error, reason: .other)
             }
 
-            self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
+            self.presenter.presentFailedDownloadAlert(response: .init(error: error))
         }
+    }
+
+    func syllabusDownloadsService(
+        _ service: SyllabusDownloadsServiceProtocol,
+        didFailLoadImageWithError error: Swift.Error,
+        forUnitWithID unitID: Unit.IdType?
+    ) {
+        defer {
+            self.presenter.presentFailedDownloadAlert(response: .init(error: error))
+        }
+
+        guard let unitID = unitID,
+              let unit = self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] as? Unit else {
+            return
+        }
+
+        self.updateUnitDownloadState(unit, forceSectionUpdate: true)
     }
 }
 
@@ -702,7 +719,7 @@ extension CourseInfoTabSyllabusInteractor {
             self.updateUnitDownloadState(unit, forceSectionUpdate: true)
             self.updateSyllabusHeader()
 
-            self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
+            self.presenter.presentFailedDownloadAlert(response: .init(error: error))
         }
     }
 
@@ -746,7 +763,7 @@ extension CourseInfoTabSyllabusInteractor {
             self.updateSectionDownloadState(section)
             self.updateSyllabusHeader()
 
-            self.presenter.presentFailedVideoDownloadAlert(response: .init(error: error))
+            self.presenter.presentFailedDownloadAlert(response: .init(error: error))
         }
     }
 

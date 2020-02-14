@@ -123,7 +123,12 @@ final class DiscussionsViewController: UIViewController, ControllerWithStepikPla
             )
         case .solutions:
             self.registerPlaceholder(
-                placeholder: StepikPlaceholder(.emptySolutions, action: nil),
+                placeholder: StepikPlaceholder(
+                    .emptySolutions,
+                    action: { [weak self] in
+                        self?.didClickWriteComment()
+                    }
+                ),
                 for: .empty
             )
         }
@@ -280,7 +285,9 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         let assembly = WriteCommentAssembly(
             targetID: viewModel.targetID,
             parentID: viewModel.parentID,
-            presentationContext: viewModel.presentationContext,
+            comment: viewModel.comment,
+            submission: viewModel.comment?.submission,
+            discussionThreadType: viewModel.discussionThreadType,
             navigationBarAppearance: navigationBarAppearance,
             output: self.interactor as? WriteCommentOutputProtocol
         )
@@ -325,7 +332,10 @@ extension DiscussionsViewController: DiscussionsViewControllerProtocol {
         let assembly = SolutionAssembly(
             stepID: viewModel.stepID,
             submission: viewModel.submission,
-            discussionID: viewModel.discussionID
+            submissionURLProvider: SolutionsThreadSubmissionURLProvider(
+                stepID: viewModel.stepID,
+                discussionID: viewModel.discussionID
+            )
         )
         self.push(module: assembly.makeModule())
     }
@@ -507,7 +517,7 @@ extension DiscussionsViewController: DiscussionsTableViewDataSourceDelegate {
             )
         }
 
-        if viewModel.canEdit && viewModel.solution == nil {
+        if viewModel.canEdit {
             alert.addAction(
                 UIAlertAction(
                     title: NSLocalizedString("DiscussionsAlertActionEditTitle", comment: ""),

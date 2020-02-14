@@ -332,6 +332,23 @@ class DownloaderSpec: QuickSpec {
                 }
             }
 
+            context("when multiple threads tries to execute tasks in downloader simultaneously") {
+                beforeEach {
+                    self.setUpNetworkStub()
+                    self.downloader = Downloader(session: .foreground)
+                }
+
+                it("not throws any error") {
+                    DispatchQueue.concurrentPerform(iterations: 10) { iteration in
+                        DispatchQueue.concurrentPerform(iterations: 10) { _ in
+                            let task = DownloaderTaskMock(url: URL(string: DownloaderSpec.okFileLink)!)
+                            expect { try self.downloader.add(task: task) }.notTo(throwError())
+                            expect { try self.downloader.resume(task: task) }.notTo(throwError())
+                        }
+                    }
+                }
+            }
+
             context("when try to resume detached task in downloader") {
                 var task: DownloaderTaskMock!
 

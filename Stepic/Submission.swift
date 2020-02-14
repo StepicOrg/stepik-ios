@@ -16,6 +16,7 @@ final class Submission: JSONSerializable {
     var status: String?
     var hint: String?
     var feedback: SubmissionFeedback?
+    var time = Date()
     var reply: Reply?
     var attemptID: Attempt.IdType = 0
     var attempt: Attempt?
@@ -49,7 +50,8 @@ final class Submission: JSONSerializable {
         self.status = json[JSONKey.status.rawValue].string
         self.hint = json[JSONKey.hint.rawValue].string
         self.feedback = SubmissionFeedback(json: json[JSONKey.feedback.rawValue])
-        self.attemptID = json[JSONKey.attempt.rawValue].intValue        
+        self.attemptID = json[JSONKey.attempt.rawValue].intValue
+        self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]) ?? Date()
     }
 
     func initReply(json: JSON, stepName: String) {
@@ -94,6 +96,13 @@ final class Submission: JSONSerializable {
         case attempt
         case reply
         case feedback
+        case time
+    }
+}
+
+extension Submission: UniqueIdentifiable {
+    var uniqueIdentifier: UniqueIdentifierType {
+        "\(self.id)"
     }
 }
 

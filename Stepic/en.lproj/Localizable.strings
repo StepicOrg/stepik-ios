@@ -83,7 +83,7 @@ Alert = "Alert";
 Confirm = "Confirm action";
 Prompt = "Enter data";
 Submit = "Submit";
-TryAgain = "Try again";
+TryAgain = "Try Again";
 Correct = "Correct!";
 Wrong = "Wrong. Please, try again.";
 CorrectFreeResponse = "Your answer was saved.";
@@ -121,7 +121,7 @@ ShowMoreReplies = "More replies";
 ShowMoreDiscussions = "More discussions";
 RefreshingDiscussions = "Refreshing discussions...";
 PlaceholderNoDiscussionsTitle = "No discussions. Start the first one!";
-PlaceholderNoDiscussionsButtonTitle = "Leave a comment";
+PlaceholderNoDiscussionsButtonTitle = "Leave a Comment";
 Syllabus = "Syllabus";
 Course = "Course";
 NextLesson = "Next lesson";
@@ -164,6 +164,7 @@ points567890 = "points";
 VideoRate = "Video rate";
 ExamTitle = "Exam";
 ShowExamInWeb = "Open exam in web version?";
+LastStepRouterShowExamInWeb = "The next module is an exam module, you can only solve it in the web version. Press \"Open\" to continue in the web version.";
 StreakNotificationAlertBody = "Come back and solve a quiz to raise your daily streak!";
 No = "No";
 StreakAlertTitle = "Congrats!";
@@ -444,7 +445,7 @@ CourseInfoTabInfo = "Info";
 CourseInfoTabSyllabus = "Syllabus";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ points";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ points";
-CourseInfoTabSyllabusFailedLoadVideoAlertMessage = "Sorry, but something went wrong, please retry the download.";
+CourseInfoTabSyllabusFailedDownloadAlertMessage = "Sorry, but something went wrong, please retry the download.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Delete course";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Are you sure you want to delete downloaded course?";
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle = "Delete unit";
@@ -774,13 +775,13 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 "TopicTimeToComplete567890" = "%@ minutes to complete";
 
 /* New lesson & step */
-NextLessonNavigation = "Next lesson";
-PreviousLessonNavigation = "Previous lesson";
-DiscussionsButtonTitle = "Show comments (%@)";
-NoDiscussionsButtonTitle = "Leave a comment";
-DisabledDiscussionsButtonTitle = "Comments disabled";
-SolutionsButtonTitle = "Show solutions (%@)";
-NoSolutionsButtonTitle = "No solutions";
+NextLessonNavigation = "Next Lesson";
+PreviousLessonNavigation = "Previous Lesson";
+DiscussionsButtonTitle = "Show Comments (%@)";
+NoDiscussionsButtonTitle = "Leave a Comment";
+DisabledDiscussionsButtonTitle = "Comments Disabled";
+SolutionsButtonTitle = "Show Solutions (%@)";
+NoSolutionsButtonTitle = "Post a Solution";
 LessonTooltipPointsWithScoreTitle = "You got: %@ out of %@ for step";
 LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";
@@ -789,6 +790,7 @@ StepVideoPlayingNotReachableErrorMessage = "Check​ your​ ​internet​ ​c
 StepStatisticsPassedByTitle = "Passed:";
 StepStatisticsCorrectRatioTitle = "Successfully:";
 EditStepAlertActionTitle = "Edit";
+StepSubmissionsAlertActionTitle = "Show Submissions";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Video player error";
@@ -855,6 +857,9 @@ CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
 
+/* Submissions */
+SubmissionsTitle = "Submissions";
+
 /* Solution */
 SolutionTitle = "Solution %@";
 UnsupportedSolutionTitle = "Current quiz type is not supported in mobile app yet";
@@ -877,15 +882,19 @@ DiscussionsSortTypeRecentActivityDiscussions = "Recent activity";
 DiscussionsIsPinnedBadgeTitle = "Pinned";
 DiscussionThreadSolutionsTitle = "Solutions";
 DiscussionThreadCommentSolutionTitle = "Solution %@";
-DiscussionsPlaceholderEmptySolutionsTitle = "No solutions";
+DiscussionsPlaceholderEmptySolutionsTitle = "No solutions. Post the first one!";
+DiscussionsPlaceholderEmptySolutionsButtonTitle = "Post a Solution";
 
 /* Write comment */
-WriteCommentTitle = "Comment";
-WriteCommentPlaceholder = "Leave a comment...";
+WriteCommentDefaultTitle = "Comment";
+WriteCommentSolutionTitle = "Solution";
+WriteCommentPlaceholder = "Leave a Comment...";
 WriteCommentActionButtonCreate = "Send";
 WriteCommentActionButtonEdit = "Update";
-WriteCommentCancelPromptMessage = "Delete draft?";
+WriteCommentCancelPromptMessage = "Delete Draft?";
 WriteCommentCancelPromptDestructiveActionTitle = "Delete";
+WriteCommentSolutionFormatTitle = "Solution %@";
+WriteCommentSelectSolutionTitle = "Select Solution";
 
 /* Downloads */
 DownloadsTitle = "Downloaded courses";

@@ -25,7 +25,7 @@ final class Comment: JSONSerializable {
     var text: String = ""
     var replyCount: Int = 0
     var isDeleted: Bool = false
-    var targetStepID: Int = 0
+    var targetID: Int = 0
     var repliesIDs: [Int] = []
     var isPinned: Bool = false
     var voteID: String = ""
@@ -40,7 +40,7 @@ final class Comment: JSONSerializable {
 
     var json: JSON {
         var dict: JSON = [
-            JSONKey.target.rawValue: self.targetStepID,
+            JSONKey.target.rawValue: self.targetID,
             JSONKey.text.rawValue: self.text
         ]
 
@@ -52,6 +52,15 @@ final class Comment: JSONSerializable {
             )
         }
 
+        if let submissionID = self.submissionID {
+            try? dict.merge(
+                with: [
+                    JSONKey.submission.rawValue: submissionID,
+                    JSONKey.thread.rawValue: DiscussionThread.ThreadType.solutions.rawValue
+                ]
+            )
+        }
+
         return dict
     }
 
@@ -59,10 +68,16 @@ final class Comment: JSONSerializable {
         self.update(json: json)
     }
 
-    init(parent: Int? = nil, target: Int, text: String) {
-        self.parentID = parent
-        self.targetStepID = target
+    init(
+        targetID: Step.IdType,
+        text: String,
+        parentID: IdType? = nil,
+        submissionID: Submission.IdType? = nil
+    ) {
+        self.targetID = targetID
         self.text = text
+        self.parentID = parentID
+        self.submissionID = submissionID
     }
 
     func update(json: JSON) {
@@ -75,7 +90,7 @@ final class Comment: JSONSerializable {
         self.text = json[JSONKey.text.rawValue].stringValue
         self.replyCount = json[JSONKey.replyCount.rawValue].intValue
         self.isDeleted = json[JSONKey.isDeleted.rawValue].boolValue
-        self.targetStepID = json[JSONKey.target.rawValue].intValue
+        self.targetID = json[JSONKey.target.rawValue].intValue
         self.repliesIDs = json[JSONKey.replies.rawValue].arrayValue.compactMap { $0.int }
         self.isPinned = json[JSONKey.isPinned.rawValue].boolValue
         self.voteID = json[JSONKey.vote.rawValue].stringValue
@@ -125,6 +140,7 @@ final class Comment: JSONSerializable {
         case submission
         case submissions
         case attempts
+        case thread
     }
 }
 
@@ -142,7 +158,7 @@ extension Comment: CustomDebugStringConvertible {
         text: \(text), \
         replyCount: \(replyCount), \
         isDeleted: \(isDeleted), \
-        targetStepID: \(targetStepID), \
+        targetID: \(targetID), \
         repliesIDs: \(repliesIDs), \
         isPinned: \(isPinned), \
         voteID: \(voteID), \

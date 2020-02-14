@@ -164,6 +164,7 @@ points567890 = "баллов";
 Downloaded = "Загруженное";
 ExamTitle = "Экзамен";
 ShowExamInWeb = "Открыть экзамен в веб версии?";
+LastStepRouterShowExamInWeb = "Следующий модуль экзаменационный, который доступен только в веб версии. Нажмите \"Открыть\", чтобы продолжить в веб версии.";
 StreakNotificationAlertBody = "Не забудь решить задачу сегодня, чтобы улучшить личный рекорд!";
 No = "Нет";
 StreakAlertTitle = "Учись каждый день";
@@ -446,7 +447,7 @@ CourseInfoTabInfo = "Инфо";
 CourseInfoTabSyllabus = "Модули";
 CourseInfoTabSyllabusSectionProgressTitle = "%@/%@ баллов";
 CourseInfoTabSyllabusUnitProgressTitle = "%@/%@ баллов";
-CourseInfoTabSyllabusFailedLoadVideoAlertMessage = "Не удалось загрузить видео, повторите загрузку позже.";
+CourseInfoTabSyllabusFailedDownloadAlertMessage = "Не удалось выполнить загрузку, повторите позже.";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationTitle = "Удалить курс";
 CourseInfoTabSyllabusDeleteCourseDownloadsConfirmationMessage = "Вы уверены, что хотите удалить загруженный курс?";
 CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationTitle = "Удалить урок";
@@ -781,7 +782,7 @@ DiscussionsButtonTitle = "Показать комментарии (%@)";
 NoDiscussionsButtonTitle = "Напишите комментарий";
 DisabledDiscussionsButtonTitle = "Комментарии отключены";
 SolutionsButtonTitle = "Форум решений (%@)";
-NoSolutionsButtonTitle = "Решений пока нет";
+NoSolutionsButtonTitle = "Опубликуйте решение";
 LessonTooltipPointsWithScoreTitle = "Вы получили: %@ из %@ за шаг";
 LessonTooltipPointsTitle = "Вы получите: %@ за шаг";
 LessonTooltipTimeToCompleteTitle = "%@ на урок";
@@ -790,6 +791,7 @@ StepVideoPlayingNotReachableErrorMessage = "Подключитесь к инте
 StepStatisticsPassedByTitle = "Решило:";
 StepStatisticsCorrectRatioTitle = "Успешно:";
 EditStepAlertActionTitle = "Редактировать";
+StepSubmissionsAlertActionTitle = "Показать решения";
 
 /* Video player */
 VideoPlayerPlaybackFailedStateAlertTitle = "Ошибка видеоплеера";
@@ -856,6 +858,9 @@ CodeQuizFullscreenTabInstructionTitle = "Инструкция";
 CodeQuizFullscreenTabCodeTitle = "Код";
 CodeQuizFullscreenTabRunTitle = "Запуск";
 
+/* Submissions */
+SubmissionsTitle = "Решения";
+
 /* Solution */
 SolutionTitle = "Решение %@";
 UnsupportedSolutionTitle = "Данный тип заданий пока не поддерживается в приложении";
@@ -878,15 +883,19 @@ DiscussionsSortTypeRecentActivityDiscussions = "Свежие обновлени�
 DiscussionsIsPinnedBadgeTitle = "Закреплён";
 DiscussionThreadSolutionsTitle = "Решения";
 DiscussionThreadCommentSolutionTitle = "Решение %@";
-DiscussionsPlaceholderEmptySolutionsTitle = "Решений пока нет";
+DiscussionsPlaceholderEmptySolutionsTitle = "Решений нет. Опубликуйте первое!";
+DiscussionsPlaceholderEmptySolutionsButtonTitle = "Опубликовать решение";
 
 /* Write comment */
-WriteCommentTitle = "Комментарий";
+WriteCommentDefaultTitle = "Комментарий";
+WriteCommentSolutionTitle = "Решение";
 WriteCommentPlaceholder = "Оставьте комментарий...";
 WriteCommentActionButtonCreate = "Отправить";
 WriteCommentActionButtonEdit = "Обновить";
 WriteCommentCancelPromptMessage = "Удалить черновик?";
 WriteCommentCancelPromptDestructiveActionTitle = "Удалить";
+WriteCommentSolutionFormatTitle = "Решение %@";
+WriteCommentSelectSolutionTitle = "Выбрать решение";
 
 /* Downloads */
 DownloadsTitle = "Загруженные курсы";

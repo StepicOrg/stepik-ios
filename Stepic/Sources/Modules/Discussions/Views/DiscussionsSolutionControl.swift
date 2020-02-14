@@ -8,6 +8,7 @@ extension DiscussionsSolutionControl {
         let cornerRadius: CGFloat = 6
         let borderWidth: CGFloat = 1
         let borderColor = UIColor(hex: 0xCCCCCC)
+        var isBorderEnabled = true
 
         let iconInsets = LayoutInsets(top: 8, left: 8, bottom: 8, right: 8)
 
@@ -76,6 +77,10 @@ final class DiscussionsSolutionControl: UIControl {
     }
 
     private func updateCorners() {
+        guard self.appearance.isBorderEnabled else {
+            return
+        }
+
         let path = UIBezierPath(
             roundedRect: self.bounds,
             byRoundingCorners: .allCorners,
@@ -122,7 +127,9 @@ final class DiscussionsSolutionControl: UIControl {
 
 extension DiscussionsSolutionControl: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.layer.addSublayer(self.borderLayer)
+        if self.appearance.isBorderEnabled {
+            self.layer.addSublayer(self.borderLayer)
+        }
     }
 
     func addSubviews() {

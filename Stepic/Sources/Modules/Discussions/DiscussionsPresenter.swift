@@ -38,7 +38,7 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
                 viewModel: .init(
                     title: NSLocalizedString("DiscussionThreadSolutionsTitle", comment: ""),
                     shouldShowSortButton: true,
-                    shouldShowComposeButton: false,
+                    shouldShowComposeButton: true,
                     threadType: .solutions
                 )
             )
@@ -82,20 +82,12 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     }
 
     func presentWriteComment(response: Discussions.WriteCommentPresentation.Response) {
-        let presentationContext: WriteComment.PresentationContext = {
-            switch response.presentationContext {
-            case .create:
-                return .create
-            case .edit:
-                return .edit(response.comment.require())
-            }
-        }()
-
         self.viewController?.displayWriteComment(
             viewModel: .init(
                 targetID: response.targetID,
                 parentID: response.parentID,
-                presentationContext: presentationContext
+                comment: response.comment,
+                discussionThreadType: response.discussionThreadType
             )
         )
     }
@@ -178,8 +170,6 @@ final class DiscussionsPresenter: DiscussionsPresenterProtocol {
     private func makeDiscussionsData(
         _ data: Discussions.DiscussionsResponseData
     ) -> Discussions.DiscussionsViewData {
-        assert(data.discussions.filter({ !$0.repliesIDs.isEmpty }).count == data.replies.keys.count)
-
         let discussions = self.sortedDiscussions(
             data.discussions,
             discussionProxy: data.discussionProxy,

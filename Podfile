@@ -35,7 +35,7 @@ def all_pods
     pod 'Firebase/Analytics' , '6.14.0'
     pod 'Firebase/RemoteConfig', '6.14.0'
 
-    pod 'YandexMobileMetrica/Dynamic', '3.9.2'
+    pod 'YandexMobileMetrica/Dynamic', '3.9.4'
     pod 'Amplitude-iOS', '4.9.3'
     pod 'Branch', '0.31.0'
         
@@ -54,7 +54,7 @@ def all_pods
     
     pod 'Presentr', '1.9'
     
-    pod 'Agrume', '5.6.1'
+    pod 'Agrume', '5.6.4'
     pod 'Highlightr', '2.1.0'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.3'

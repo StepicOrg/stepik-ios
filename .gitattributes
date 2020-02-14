@@ -3,7 +3,7 @@ cert/** filter=git-crypt diff=git-crypt
 StepicTests/TestInfo.plist filter=git-crypt diff=git-crypt
 Stepic/Auth.plist filter=git-crypt diff=git-crypt
 Stepic/GoogleService-Info.plist filter=git-crypt diff=git-crypt
-Stepic/Tokens.plist filter=git-crypt diff=git-crypt
+Stepic/Tokens/Tokens.plist filter=git-crypt diff=git-crypt
 fastlane/metadata/**/review_information/** filter=git-crypt diff=git-crypt
 fastlane/Deliverfile filter=git-crypt diff=git-crypt
 fastlane/Appfile filter=git-crypt diff=git-crypt

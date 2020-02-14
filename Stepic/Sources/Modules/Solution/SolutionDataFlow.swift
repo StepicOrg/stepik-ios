@@ -5,7 +5,7 @@ enum Solution {
         struct Data {
             let step: Step
             let submission: Submission
-            let discussionID: Comment.IdType
+            let submissionURL: URL?
         }
 
         struct Request {}
