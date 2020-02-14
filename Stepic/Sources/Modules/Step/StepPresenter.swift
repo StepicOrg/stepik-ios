@@ -78,16 +78,16 @@ final class StepPresenter: StepPresenterProtocol {
 
         switch response.result {
         case .success(let discussionThread):
-            guard let solutionsDiscussionThread = discussionThread,
-                  solutionsDiscussionThread.threadType == .solutions,
-                  !solutionsDiscussionThread.discussionProxy.isEmpty else {
+            guard let discussionThread = discussionThread,
+                  discussionThread.threadType == .solutions,
+                  !discussionThread.discussionProxy.isEmpty else {
                 return displayHideSolutionsButtonUpdate()
             }
 
             self.viewController?.displaySolutionsButtonUpdate(
                 viewModel: .init(
-                    title: self.makeSolutionsButtonTitle(discussionThread: solutionsDiscussionThread),
-                    isEnabled: solutionsDiscussionThread.discussionsCount > 0
+                    title: self.makeSolutionsButtonTitle(discussionThread: discussionThread),
+                    isEnabled: true
                 )
             )
         case .failure:
@@ -118,7 +118,8 @@ final class StepPresenter: StepPresenterProtocol {
         self.viewController?.displaySolutions(
             viewModel: .init(
                 stepID: response.step.id,
-                discussionProxyID: response.discussionThread.discussionProxy
+                discussionProxyID: response.discussionThread.discussionProxy,
+                shouldEmbedInWriteComment: response.discussionThread.discussionsCount == 0
             )
         )
     }

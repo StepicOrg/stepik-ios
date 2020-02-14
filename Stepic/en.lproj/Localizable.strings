@@ -775,13 +775,13 @@ WriteCourseReviewActionNotAllowedDescription = "To write a review, complete more
 "TopicTimeToComplete567890" = "%@ minutes to complete";
 
 /* New lesson & step */
-NextLessonNavigation = "Next lesson";
-PreviousLessonNavigation = "Previous lesson";
-DiscussionsButtonTitle = "Show comments (%@)";
-NoDiscussionsButtonTitle = "Leave a comment";
-DisabledDiscussionsButtonTitle = "Comments disabled";
-SolutionsButtonTitle = "Show solutions (%@)";
-NoSolutionsButtonTitle = "No solutions";
+NextLessonNavigation = "Next Lesson";
+PreviousLessonNavigation = "Previous Lesson";
+DiscussionsButtonTitle = "Show Comments (%@)";
+NoDiscussionsButtonTitle = "Leave a Comment";
+DisabledDiscussionsButtonTitle = "Comments Disabled";
+SolutionsButtonTitle = "Show Solutions (%@)";
+NoSolutionsButtonTitle = "Post a Solution";
 LessonTooltipPointsWithScoreTitle = "You got: %@ out of %@ for step";
 LessonTooltipPointsTitle = "You will get: %@ for step";
 LessonTooltipTimeToCompleteTitle = "%@ for lesson";

@@ -149,6 +149,7 @@ enum StepDataFlow {
         struct ViewModel {
             let stepID: Step.IdType
             let discussionProxyID: DiscussionProxy.IdType
+            let shouldEmbedInWriteComment: Bool
         }
     }
 
