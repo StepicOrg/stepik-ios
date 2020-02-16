@@ -5,7 +5,6 @@ PODS:
   - Alamofire (4.9.1)
   - Amplitude-iOS (4.9.3)
   - Atributika (4.9.4)
-  - AutoInsetter (1.8.0)
   - BEMCheckBox (1.4.1)
   - Branch (0.31.0):
     - Branch/Core (= 0.31.0)
@@ -170,8 +169,7 @@ PODS:
   - SwiftLint (0.38.2)
   - SwiftyGif (5.2.0)
   - SwiftyJSON (5.0.0)
-  - Tabman (2.6.3):
-    - AutoInsetter (~> 1.8.0)
+  - Tabman (2.8.0):
     - Pageboy (~> 3.5.0)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
@@ -228,7 +226,7 @@ DEPENDENCIES:
   - SwiftDate (= 6.1.0)
   - SwiftLint (= 0.38.2)
   - SwiftyJSON (= 5.0.0)
-  - Tabman (= 2.6.3)
+  - Tabman (= 2.8.0)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
   - TTTAttributedLabel (= 2.0.0)
   - TUSafariActivity (= 1.0.4)
@@ -242,7 +240,6 @@ SPEC REPOS:
     - Alamofire
     - Amplitude-iOS
     - Atributika
-    - AutoInsetter
     - BEMCheckBox
     - Branch
     - Charts
@@ -323,7 +320,6 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   Atributika: 643a248e2dd8b4d74b23b53ea31393cab0a01d94
-  AutoInsetter: 0b90ca74e36561c340129045a3722c51a0b15c58
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
@@ -377,7 +373,7 @@ SPEC CHECKSUMS:
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
   SwiftyGif: b85c6b33a9411859d9e1db998b6a8214aea942df
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
-  Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
+  Tabman: f62ad94ee54a7d96e3fbab34f677d9ea4d38ece6
   TSMessages: eb3cf27b6900684a21bad4fe9ea426e287b8c839
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
@@ -385,6 +381,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
 
-PODFILE CHECKSUM: ba390ba6c2c2242b85e6dd46f53cc8dad466e12e
+PODFILE CHECKSUM: b9360478efa119ccbcb0ae9fc4da864d52d5251e
 
 COCOAPODS: 1.8.4
