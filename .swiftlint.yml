@@ -140,6 +140,7 @@ whitelist_rules:
   - trailing_newline
   - trailing_semicolon
   - trailing_whitespace
+  - tuple_pattern
   - type_name
   - unavailable_function
   - unneeded_break_in_switch
@@ -441,6 +442,9 @@ trailing_newline:
   severity: error
 
 trailing_semicolon:
+  severity: error
+
+tuple_pattern:
   severity: error
 
 type_name:
