@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CodeInputAccessoryView" customModule="Adaptive_1838" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CodeInputAccessoryView" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="deC-Qf-rIK" id="ILh-vj-n7N"/>
                 <outlet property="hideKeyboardImageView" destination="Mgs-a5-wfF" id="lwm-tS-Pjh"/>
@@ -44,13 +42,13 @@
                 <constraint firstAttribute="bottom" secondItem="deC-Qf-rIK" secondAttribute="bottom" constant="4" id="Lyg-81-IfB"/>
                 <constraint firstItem="Mgs-a5-wfF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="MT5-y9-OKk"/>
                 <constraint firstAttribute="trailing" secondItem="deC-Qf-rIK" secondAttribute="trailing" id="VCQ-0i-M93"/>
-                <constraint firstItem="Mgs-a5-wfF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="acR-nX-ArL"/>
-                <constraint firstItem="Mgs-a5-wfF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="dVo-uX-Z0r"/>
                 <constraint firstAttribute="bottom" secondItem="Mgs-a5-wfF" secondAttribute="bottom" constant="4" id="hPQ-mG-JRJ"/>
                 <constraint firstItem="deC-Qf-rIK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="ser-rR-KTA"/>
+                <constraint firstItem="Mgs-a5-wfF" firstAttribute="leading" secondItem="j0p-Qp-9MR" secondAttribute="leading" constant="4" id="wET-y9-hWO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="j0p-Qp-9MR"/>
             <point key="canvasLocation" x="-341" y="-45"/>
         </view>
     </objects>
