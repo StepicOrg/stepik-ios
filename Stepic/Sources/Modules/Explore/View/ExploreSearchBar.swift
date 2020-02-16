@@ -3,7 +3,12 @@ import UIKit
 
 final class ExploreSearchBar: UISearchBar {
     enum Appearance {
+        static let searchFieldPositionAdjustment = UIOffset(horizontal: -6, vertical: 0)
         static let textColor = UIColor.mainDark
+
+        // Height should be fixed and leq than 44pt (due to iOS 11+ strange nav bar)
+        static let barHeight: CGFloat = 44.0
+
         static let placeholderText = NSLocalizedString("SearchCourses", comment: "")
     }
 
@@ -30,6 +35,8 @@ final class ExploreSearchBar: UISearchBar {
 
         self.searchField?.backgroundColor = .clear
         self.searchField?.textColor = Appearance.textColor
+
+        self.applySystemFixes()
     }
 
     @available(*, unavailable)
@@ -42,6 +49,14 @@ final class ExploreSearchBar: UISearchBar {
         self.text?.removeAll()
         self.endEditing(true)
         self.setShowsCancelButton(false, animated: true)
+    }
+
+    private func applySystemFixes() {
+        self.searchFieldBackgroundPositionAdjustment = Appearance.searchFieldPositionAdjustment
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.snp.makeConstraints { make in
+            make.height.equalTo(Appearance.barHeight)
+        }
     }
 }
 
