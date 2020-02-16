@@ -2,7 +2,7 @@ import Foundation
 
 enum DownloadingServiceFactory {
     private static let sharedImageDownloadingService = DownloadingService(
-        downloader: Downloader(session: .background(id: "image.main")),
+        downloader: Downloader(session: .foreground),
         fileManager: StoredFileManagerFactory.makeStoredFileManager(type: .image)
     )
 
