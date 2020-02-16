@@ -15,7 +15,7 @@ import SwiftyJSON
 class APIEndpoint {
     var name: String { "" }
 
-    let manager: Alamofire.SessionManager
+    let manager: Alamofire.Session
 
     var update: UpdateRequestMaker
     var delete: DeleteRequestMaker
@@ -23,7 +23,7 @@ class APIEndpoint {
     var retrieve: RetrieveRequestMaker
 
     init() {
-        manager = Alamofire.SessionManager(configuration: StepikURLSessionConfiguration.default)
+        manager = Alamofire.Session(configuration: StepikURLSessionConfiguration.default)
         let retrier = ApiRequestRetrier()
         manager.retrier = retrier
         manager.adapter = retrier

@@ -37,12 +37,12 @@ enum TokenRefreshError: Error {
 }
 
 final class AuthAPI {
-    let manager: Alamofire.SessionManager
+    let manager: Alamofire.Session
 
     init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 15
-        manager = Alamofire.SessionManager(configuration: configuration)
+        manager = Alamofire.Session(configuration: configuration)
     }
 
     func signInWithCode(_ code: String) -> Promise<(StepikToken, AuthorizationType)> {

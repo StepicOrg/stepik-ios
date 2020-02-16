@@ -8,6 +8,6 @@
 
 import Alamofire
 
-final class AlamofireDefaultSessionManager: Alamofire.SessionManager {
-    static let shared = Alamofire.SessionManager(configuration: StepikURLSessionConfiguration.default)
+final class AlamofireDefaultSessionManager: Alamofire.Session {
+    static let shared = Alamofire.Session(configuration: StepikURLSessionConfiguration.default)
 }

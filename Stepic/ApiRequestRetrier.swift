@@ -19,7 +19,7 @@ final class ApiRequestRetrier: RequestRetrier, RequestAdapter {
         return urlRequest
     }
 
-    func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
+    func should(_ manager: Session, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 && request.retryCount == 0 {
             checkToken().done {
                 completion(true, 0.0)

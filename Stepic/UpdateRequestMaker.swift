@@ -16,7 +16,7 @@ final class UpdateRequestMaker {
         requestEndpoint: String,
         paramName: String,
         updatingObject: T,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<(T, JSON)> {
         Promise { seal in
             let params: Parameters? = [
@@ -48,7 +48,7 @@ final class UpdateRequestMaker {
         requestEndpoint: String,
         paramName: String,
         updatingObject: T,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<T> {
         Promise { seal in
             self.request(

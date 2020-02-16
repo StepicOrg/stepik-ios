@@ -17,7 +17,7 @@ final class RetrieveRequestMaker {
         paramName: String,
         id: T.IdType,
         updatingObject: T? = nil,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<T> {
         Promise { seal in
             checkToken().done {
@@ -48,7 +48,7 @@ final class RetrieveRequestMaker {
         paramName: String,
         params: Parameters,
         updatingObjects: [T] = [],
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<([T], Meta, JSON)> {
         Promise { seal in
             checkToken().done {
@@ -87,7 +87,7 @@ final class RetrieveRequestMaker {
         paramName: String,
         params: Parameters,
         updatingObjects: [T] = [],
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<([T], Meta)> {
         Promise { seal in
             self.request(
@@ -108,7 +108,7 @@ final class RetrieveRequestMaker {
         requestEndpoint: String,
         paramName: String,
         params: Parameters,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<([T], Meta, JSON)> {
         Promise { seal in
             checkToken().done {
@@ -157,7 +157,7 @@ final class RetrieveRequestMaker {
         requestEndpoint: String,
         paramName: String,
         params: Parameters,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<([T], Meta)> {
         Promise { seal in
             self.requestWithFetching(
@@ -178,7 +178,7 @@ final class RetrieveRequestMaker {
         paramName: String,
         ids: [T.IdType],
         updating: [T],
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<([T], JSON)> {
         let params: Parameters = [
             "ids": ids
@@ -221,7 +221,7 @@ final class RetrieveRequestMaker {
         paramName: String,
         ids: [T.IdType],
         updating: [T],
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<[T]> {
         Promise { seal in
             self.request(
