@@ -123,6 +123,7 @@ whitelist_rules:
   - redundant_string_enum_value
   - redundant_type_annotation
   - redundant_void_return
+  - return_value_from_void_function
   - return_arrow_whitespace
   - shorthand_operator
   - single_test_class
