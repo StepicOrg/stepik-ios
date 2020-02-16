@@ -321,6 +321,9 @@ BadConnectionAuth = "Проверьте ваше интернет-соедине
 
 ContinueLearningWidgetButtonTitle = "Продолжить учиться";
 ShowAll = "Все";
+ShowAllTestDetailIndicator = "Все ›";
+ShowAllTestText = "Смотреть все";
+ShowAllTestTextDetailIndicator = "Смотреть все ›";
 Enrolled = "Мои курсы";
 Popular = "Популярные";
 Home = "Обучение";

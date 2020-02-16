@@ -14,7 +14,7 @@ final class CourseListsCollectionView: UIView {
 
         view.titleText = NSLocalizedString("RecommendationsExplore", comment: "")
         view.summaryText = NSLocalizedString("RecommendationsExploreDescription", comment: "")
-        view.shouldShowShowAllButton = false
+        view.shouldShowAllButton = false
         return view
     }()
 

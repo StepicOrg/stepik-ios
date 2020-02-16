@@ -685,6 +685,7 @@
 		2CDBCCCF23EB777E005D2370 /* SubmissionURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */; };
 		2CDE82E2221D5CCB00C41887 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE82E1221D5CCB00C41887 /* highlight.js */; };
 		2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */; };
+		2CE2425623F9FAF9004972A2 /* CourseListSeeAllTextSplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE2425523F9FAF9004972A2 /* CourseListSeeAllTextSplitTest.swift */; };
 		2CE3BCA71FBF13CE000AD405 /* SQLReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */; };
 		2CE42D4423CCC4530073F774 /* StreamVideoQualityStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */; };
 		2CE42D4623CCC6500073F774 /* VideoRateStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */; };
@@ -1867,6 +1868,7 @@
 		2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionURLProvider.swift; sourceTree = "<group>"; };
 		2CDE82E1221D5CCB00C41887 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsCenterDelegate.swift; sourceTree = "<group>"; };
+		2CE2425523F9FAF9004972A2 /* CourseListSeeAllTextSplitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListSeeAllTextSplitTest.swift; sourceTree = "<group>"; };
 		2CE3BCA61FBF13CE000AD405 /* SQLReply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLReply.swift; sourceTree = "<group>"; };
 		2CE42D4323CCC4530073F774 /* StreamVideoQualityStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQualityStorageManager.swift; sourceTree = "<group>"; };
 		2CE42D4523CCC6500073F774 /* VideoRateStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRateStorageManager.swift; sourceTree = "<group>"; };
@@ -3818,6 +3820,7 @@
 			isa = PBXGroup;
 			children = (
 				08421BCA21764FC400E8A81B /* ActiveSplitTestsContainer.swift */,
+				2CE2425523F9FAF9004972A2 /* CourseListSeeAllTextSplitTest.swift */,
 			);
 			path = ActiveTests;
 			sourceTree = "<group>";
@@ -7220,6 +7223,7 @@
 				62E985281E96C97ED82ABEBB /* CourseListsCollectionView.swift in Sources */,
 				62E98798A5A576F0C7258E35 /* CourseListsCollectionProvider.swift in Sources */,
 				62E988C7BC696512830AB928 /* CourseListsCollectionPersistenceService.swift in Sources */,
+				2CE2425623F9FAF9004972A2 /* CourseListSeeAllTextSplitTest.swift in Sources */,
 				62E9871AE0135BA1E6B5CEE3 /* CourseListsCollectionNetworkService.swift in Sources */,
 				62E985FFA36C4D5A3C0E63DD /* TagsAssembly.swift in Sources */,
 				62E989959BFCE8A398DA3F7B /* TagsViewController.swift in Sources */,

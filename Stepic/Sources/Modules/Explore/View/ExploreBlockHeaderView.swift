@@ -25,6 +25,11 @@ extension ExploreBlockHeaderView {
 final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     let appearance: Appearance
 
+    private let splitTestingService = SplitTestingService(
+        analyticsService: AnalyticsUserProperties(),
+        storage: UserDefaults.standard
+    )
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.titleLabelFont
@@ -43,11 +48,18 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
 
     private lazy var showAllButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         button.tintColor = self.appearance.showAllButtonColor
         button.titleLabel?.font = self.appearance.showAllButtonFont
         button.contentHorizontalAlignment = .right
         button.addTarget(self, action: #selector(self.showAllButtonClicked), for: .touchUpInside)
+
+        var showAllTitle = NSLocalizedString("ShowAll", comment: "")
+        if CourseListSeeAllTextSplitTest.shouldParticipate {
+            let splitTest = self.splitTestingService.fetchSplitTest(CourseListSeeAllTextSplitTest.self)
+            showAllTitle = splitTest.currentGroup.seeAllTitle
+        }
+        button.setTitle(showAllTitle, for: .normal)
+
         return button
     }()
 
@@ -73,10 +85,10 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
         }
     }
 
-    var shouldShowShowAllButton: Bool = true {
+    var shouldShowAllButton: Bool = true {
         didSet {
-            // We should not only hiden button but resize cause there is no space
-            if self.shouldShowShowAllButton {
+            // We should not only hidden button but resize cause there is no space
+            if self.shouldShowAllButton {
                 self.showAllButton.isHidden = false
             } else {
                 self.showAllButton.isHidden = true

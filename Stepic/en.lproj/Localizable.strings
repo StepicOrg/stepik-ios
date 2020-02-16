@@ -320,6 +320,9 @@ BadConnectionAuth = "Check your internet connection";
 
 ContinueLearningWidgetButtonTitle = "Continue learning";
 ShowAll = "All";
+ShowAllTestDetailIndicator = "All ›";
+ShowAllTestText = "See All";
+ShowAllTestTextDetailIndicator = "See All ›";
 Enrolled = "Enrolled";
 Popular = "Popular";
 Home = "Home";

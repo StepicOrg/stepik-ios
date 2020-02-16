@@ -45,7 +45,7 @@ final class ContentLanguageSwitchView: UIView {
         let headerView = ExploreBlockHeaderView(appearance: appearance)
         headerView.titleText = NSLocalizedString("ChooseSearchLanguage", comment: "")
         headerView.summaryText = nil
-        headerView.shouldShowShowAllButton = false
+        headerView.shouldShowAllButton = false
         return headerView
     }()
 
