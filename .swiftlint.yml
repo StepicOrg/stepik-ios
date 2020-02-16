@@ -103,6 +103,7 @@ whitelist_rules:
   - optional_enum_case_matching
   - overridden_super_call
   - override_in_extension
+  - prohibited_nan_comparison
   - prefer_self_type_over_type_of_self
   - prefixed_toplevel_constant
   - private_over_fileprivate
@@ -123,6 +124,7 @@ whitelist_rules:
   - redundant_string_enum_value
   - redundant_type_annotation
   - redundant_void_return
+  - return_value_from_void_function
   - return_arrow_whitespace
   - shorthand_operator
   - single_test_class
@@ -140,6 +142,7 @@ whitelist_rules:
   - trailing_newline
   - trailing_semicolon
   - trailing_whitespace
+  - tuple_pattern
   - type_name
   - unavailable_function
   - unneeded_break_in_switch
@@ -151,6 +154,7 @@ whitelist_rules:
   - unused_optional_binding
   - vertical_whitespace_closing_braces
   - vertical_whitespace_opening_braces
+  - void_function_in_ternary
   - void_return
   - weak_delegate
   - yoda_condition
@@ -441,6 +445,9 @@ trailing_newline:
   severity: error
 
 trailing_semicolon:
+  severity: error
+
+tuple_pattern:
   severity: error
 
 type_name:
