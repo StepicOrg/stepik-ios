@@ -127,6 +127,8 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
 
     @objc
     private func showAllButtonClicked() {
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.CourseList.showAllClicked.send()
         self.onShowAllButtonClick?()
     }
 }

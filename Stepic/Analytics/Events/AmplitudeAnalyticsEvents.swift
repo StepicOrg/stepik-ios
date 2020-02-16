@@ -349,6 +349,8 @@ struct AmplitudeAnalyticsEvents {
     // MARK: - CourseList -
 
     struct CourseList {
+        static var showAllClicked = AnalyticsEvent(name: "Course list show all clicked")
+
         static func opened(ID: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course list opened",
