@@ -103,6 +103,7 @@ whitelist_rules:
   - optional_enum_case_matching
   - overridden_super_call
   - override_in_extension
+  - prohibited_nan_comparison
   - prefer_self_type_over_type_of_self
   - prefixed_toplevel_constant
   - private_over_fileprivate
