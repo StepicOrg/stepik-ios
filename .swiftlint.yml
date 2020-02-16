@@ -153,6 +153,7 @@ whitelist_rules:
   - unused_optional_binding
   - vertical_whitespace_closing_braces
   - vertical_whitespace_opening_braces
+  - void_function_in_ternary
   - void_return
   - weak_delegate
   - yoda_condition
