@@ -33,6 +33,11 @@ final class ExploreViewController: BaseExploreViewController {
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
     private lazy var searchBar = ExploreSearchBar()
+    private lazy var ipadCancelSearchBarButtonItem = UIBarButtonItem(
+        barButtonSystemItem: .cancel,
+        target: self,
+        action: #selector(self.ipadCancelSearchButtonClicked)
+    )
 
     private var isStoriesHidden: Bool = false
 
@@ -220,6 +225,11 @@ final class ExploreViewController: BaseExploreViewController {
     private func showSearchResults() {
         self.searchResultsController?.view.isHidden = false
     }
+
+    @objc
+    private func ipadCancelSearchButtonClicked() {
+        self.searchBarCancelButtonClicked(self.searchBar)
+    }
 }
 
 extension Explore.Submodule: SubmoduleType {
@@ -269,6 +279,10 @@ extension ExploreViewController: ExploreViewControllerProtocol {
 
 extension ExploreViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if DeviceInfo.current.isPad {
+            self.navigationItem.setRightBarButton(self.ipadCancelSearchBarButtonItem, animated: true)
+        }
+
         self.showSearchResults()
         // Strange hack to hide search results (courses)
         self.searchResultsModuleInput?.searchStarted()
@@ -277,7 +291,17 @@ extension ExploreViewController: UISearchBarDelegate {
         AmplitudeAnalyticsEvents.Search.started.send()
     }
 
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if DeviceInfo.current.isPad {
+            self.navigationItem.setRightBarButton(nil, animated: true)
+        }
+    }
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        if DeviceInfo.current.isPad {
+            self.searchBar.cancel()
+        }
+
         self.hideSearchResults()
         self.searchResultsModuleInput?.searchCancelled()
 

@@ -36,6 +36,13 @@ final class ExploreSearchBar: UISearchBar {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func cancel() {
+        self.resignFirstResponder()
+        self.text?.removeAll()
+        self.endEditing(true)
+        self.setShowsCancelButton(false, animated: true)
+    }
 }
 
 extension ExploreSearchBar: UISearchBarDelegate {
@@ -50,11 +57,7 @@ extension ExploreSearchBar: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        searchBar.text?.removeAll()
-        searchBar.endEditing(true)
-
-        searchBar.setShowsCancelButton(false, animated: true)
+        self.cancel()
         self.searchBarDelegate?.searchBarCancelButtonClicked?(searchBar)
     }
 
