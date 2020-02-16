@@ -14,7 +14,5 @@ final class ActiveSplitTestsContainer {
         storage: UserDefaults.standard
     )
 
-    static func setActiveTestsGroups() {
-        self.splitTestingService.fetchSplitTest(ExploreSearchBarStyleSplitTest.self).setSplitTestGroup()
-    }
+    static func setActiveTestsGroups() {}
 }
