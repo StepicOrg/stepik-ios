@@ -859,6 +859,7 @@ CodeQuizFullscreenTabRunTitle = "Run";
 
 /* Submissions */
 SubmissionsTitle = "Submissions";
+SubmissionsPlaceholderEmptyTitle = "No Submissions";
 
 /* Solution */
 SolutionTitle = "Solution %@";

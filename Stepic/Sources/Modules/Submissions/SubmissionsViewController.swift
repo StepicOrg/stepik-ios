@@ -100,7 +100,7 @@ final class SubmissionsViewController: UIViewController, ControllerWithStepikPla
             ),
             for: .connectionError
         )
-        self.registerPlaceholder(placeholder: StepikPlaceholder(.emptySolutions, action: nil), for: .empty)
+        self.registerPlaceholder(placeholder: StepikPlaceholder(.emptySubmissions, action: nil), for: .empty)
     }
 
     private func updateState(newState: Submissions.ViewControllerState) {

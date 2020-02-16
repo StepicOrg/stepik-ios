@@ -860,6 +860,7 @@ CodeQuizFullscreenTabRunTitle = "Запуск";
 
 /* Submissions */
 SubmissionsTitle = "Решения";
+SubmissionsPlaceholderEmptyTitle = "Решений нет";
 
 /* Solution */
 SolutionTitle = "Решение %@";
