@@ -263,7 +263,9 @@ final class StepikVideoPlayerViewController: UIViewController {
 
         coordinator.animate(
             alongsideTransition: { _ in
-                self.currentVideoFillMode = .aspect
+                if DeviceInfo.current.orientation.interface.isPortrait {
+                    self.currentVideoFillMode = .aspect
+                }
             },
             completion: { _ in
                 self.updateVideoFillModeIcon()
