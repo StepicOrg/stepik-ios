@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setHapticsEnabled(true)
 
         ConnectionHelper.shared.instantiate()
-        self.alamofireRequestsLogger.startIfDebug()
+        //self.alamofireRequestsLogger.startIfDebug()
 
         if !AudioManager.shared.initAudioSession() {
             print("Could not initialize audio session")

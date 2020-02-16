@@ -1,14 +1,9 @@
 import SnapKit
 import UIKit
 
-final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
+final class ExploreSearchBar: UISearchBar {
     enum Appearance {
-        static let searchFieldPositionAdjustment = UIOffset(horizontal: -6, vertical: 0)
-        static let textColor = UIColor.mainDark.withAlphaComponent(0.3)
-
-        // Height should be fixed and leq than 44pt (due to iOS 11+ strange nav bar)
-        static let barHeight: CGFloat = 44.0
-
+        static let textColor = UIColor.mainDark
         static let placeholderText = NSLocalizedString("SearchCourses", comment: "")
     }
 
@@ -22,36 +17,24 @@ final class ExploreSearchBar: UISearchBar, ExploreSearchBarProtocol {
         }
     }
 
-    // TODO: iOS 13 has `searchTextField` property, take a look.
     private var searchField: UITextField? {
         self.value(forKey: "searchField") as? UITextField
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.delegate = self
 
-        self.isTranslucent = false
+        self.delegate = self
+        self.placeholder = Appearance.placeholderText
+        self.searchBarStyle = .minimal
 
         self.searchField?.backgroundColor = .clear
         self.searchField?.textColor = Appearance.textColor
-        self.placeholder = Appearance.placeholderText
-        self.searchField?.rightViewMode = .whileEditing
-
-        self.applySystemFixes()
     }
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    private func applySystemFixes() {
-        self.searchFieldBackgroundPositionAdjustment = Appearance.searchFieldPositionAdjustment
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.snp.makeConstraints { make in
-            make.height.equalTo(Appearance.barHeight)
-        }
     }
 }
 

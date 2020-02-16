@@ -32,18 +32,7 @@ final class ExploreViewController: BaseExploreViewController {
 
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
-    private lazy var searchBar: ExploreSearchBarProtocol = {
-        if ExploreSearchBarStyleSplitTest.shouldParticipate {
-            let splitTest = self.splitTestingService.fetchSplitTest(ExploreSearchBarStyleSplitTest.self)
-            switch splitTest.currentGroup.searchBarStyle {
-            case .new:
-                return NewExploreSearchBar()
-            case .legacy:
-                return ExploreSearchBar()
-            }
-        }
-        return ExploreSearchBar()
-    }()
+    private lazy var searchBar = ExploreSearchBar()
 
     private var isStoriesHidden: Bool = false
 
