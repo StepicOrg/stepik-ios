@@ -96,6 +96,8 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
                 }
 
                 CoreDataHelper.shared.save()
+
+                seal.fulfill(())
             }.catch { _ in
                 seal.reject(Error.templateUpdateFailed)
             }
