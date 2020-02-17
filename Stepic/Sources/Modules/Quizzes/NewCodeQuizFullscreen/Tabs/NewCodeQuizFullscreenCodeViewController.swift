@@ -16,10 +16,10 @@ protocol NewCodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
 extension NewCodeQuizFullscreenCodeViewController {
     enum Appearance {
         static let submitButtonBackgroundColor = UIColor.stepikGreen
-        static let submitButtonHeight: CGFloat = 44
+        static let submitButtonHeight: CGFloat = 55
         static let submitButtonTextColor = UIColor.white
-        static let submitButtonCornerRadius: CGFloat = 6
-        static let submitButtonFont = UIFont.systemFont(ofSize: 16)
+        static let submitButtonCornerRadius: CGFloat = 12
+        static let submitButtonFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
         static let submitButtonInsets = LayoutInsets(left: 32, bottom: 16, right: 32)
 
         static let codeEditorTextTopInset: CGFloat = 8
