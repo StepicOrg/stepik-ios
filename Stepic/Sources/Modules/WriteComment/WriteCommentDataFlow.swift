@@ -10,6 +10,7 @@ enum WriteComment {
 
     struct CommentData {
         let text: String
+        let parentID: WriteComment.ParentIDType?
         let comment: Comment?
         let submission: Submission?
         let discussionThreadType: DiscussionThread.ThreadType

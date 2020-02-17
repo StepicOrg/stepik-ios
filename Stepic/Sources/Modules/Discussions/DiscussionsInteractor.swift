@@ -234,7 +234,9 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 self.currentDiscussions.remove(at: discussionIndex)
                 self.currentReplies[commentID] = nil
 
-                self.provider.decrementStepDiscussionsCount(stepID: self.stepID).cauterize()
+                if self.discussionThreadType == .default {
+                    self.provider.decrementStepDiscussionsCount(stepID: self.stepID).cauterize()
+                }
             } else {
                 for (discussionID, replies) in self.currentReplies {
                     guard let replyIndex = replies.firstIndex(where: { $0.id == commentID }) else {
@@ -748,7 +750,9 @@ extension DiscussionsInteractor: WriteCommentOutputProtocol {
                 self.presenter.presentCommentCreate(response: .init(result: self.makeDiscussionsData()))
             }.cauterize()
 
-            self.provider.incrementStepDiscussionsCount(stepID: self.stepID).cauterize()
+            if self.discussionThreadType == .default {
+                self.provider.incrementStepDiscussionsCount(stepID: self.stepID).cauterize()
+            }
         }
     }
 
