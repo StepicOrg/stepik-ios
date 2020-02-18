@@ -621,6 +621,8 @@ TermsOfServiceTitle = "Terms of Service";
 PrivacyPolicyTitle = "Privacy Policy";
 TermsOfServiceLink = "https://welcome.stepik.org/en/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/en/privacy";
+HelpCenterTitle = "Help Center";
+HelpCenterLink = "https://support.stepik.org/hc/en-us";
 
 /* Achievements */
 Achievements = "Achievements";

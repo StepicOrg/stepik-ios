@@ -622,6 +622,8 @@ TermsOfServiceTitle = "Условия использования";
 PrivacyPolicyTitle = "Условия конфиденциальности";
 TermsOfServiceLink = "https://welcome.stepik.org/ru/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/ru/privacy";
+HelpCenterTitle = "Справочный центр";
+HelpCenterLink = "https://support.stepik.org/hc/ru";
 
 /* Achievements */
 Achievements = "Достижения";

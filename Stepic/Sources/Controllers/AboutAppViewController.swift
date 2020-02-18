@@ -53,7 +53,7 @@ final class AboutAppViewController: UIViewController {
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
         // Simulate static table view.
-        Cell.allCases.forEach {
+        CellType.allCases.forEach {
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: $0.uniqueIdentifier)
         }
 
@@ -80,7 +80,8 @@ final class AboutAppViewController: UIViewController {
         static var appVersionLabelInsets = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
     }
 
-    private enum Cell: String, CaseIterable, UniqueIdentifiable {
+    private enum CellType: String, CaseIterable, UniqueIdentifiable {
+        case helpCenter
         case termsOfService
         case privacyPolicy
 
@@ -88,6 +89,8 @@ final class AboutAppViewController: UIViewController {
 
         var title: String {
             switch self {
+            case .helpCenter:
+                return NSLocalizedString("HelpCenterTitle", comment: "")
             case .termsOfService:
                 return NSLocalizedString("TermsOfServiceTitle", comment: "")
             case .privacyPolicy:
@@ -97,6 +100,8 @@ final class AboutAppViewController: UIViewController {
 
         var url: URL? {
             switch self {
+            case .helpCenter:
+                return URL(string: NSLocalizedString("HelpCenterLink", comment: ""))
             case .termsOfService:
                 return URL(string: NSLocalizedString("TermsOfServiceLink", comment: ""))
             case .privacyPolicy:
@@ -121,10 +126,10 @@ final class AboutAppViewController: UIViewController {
 }
 
 extension AboutAppViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { Cell.allCases.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { CellType.allCases.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellType = Cell.allCases[indexPath.row]
+        let cellType = CellType.allCases[indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellType.uniqueIdentifier, for: indexPath)
         cell.textLabel?.text = cellType.title
@@ -145,9 +150,9 @@ extension AboutAppViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let selectedCellType = Cell.allCases[indexPath.row]
+        let selectedCellType = CellType.allCases[indexPath.row]
         switch selectedCellType {
-        case .termsOfService, .privacyPolicy:
+        case .helpCenter, .termsOfService, .privacyPolicy:
             self.openURLInWeb(selectedCellType.url)
         }
     }
