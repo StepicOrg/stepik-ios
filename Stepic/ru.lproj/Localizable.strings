@@ -624,6 +624,9 @@ TermsOfServiceLink = "https://welcome.stepik.org/ru/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/ru/privacy";
 HelpCenterTitle = "Справочный центр";
 HelpCenterLink = "https://support.stepik.org/hc/ru";
+ContactSupportTitle = "Написать в поддержку";
+SendMailErrorAlertMessage = "Не удалось отправить письмо. Проверьте настройки электронной почты в настройках устройства и повторите попытку.";
+SendMailSuccessMessage = "Отправлено";
 
 /* Achievements */
 Achievements = "Достижения";

@@ -623,6 +623,9 @@ TermsOfServiceLink = "https://welcome.stepik.org/en/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/en/privacy";
 HelpCenterTitle = "Help Center";
 HelpCenterLink = "https://support.stepik.org/hc/en-us";
+ContactSupportTitle = "Contact Support";
+SendMailErrorAlertMessage = "Unable to send an email. Please check your email settings and try again.";
+SendMailSuccessMessage = "Sent";
 
 /* Achievements */
 Achievements = "Achievements";

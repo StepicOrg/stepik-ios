@@ -39,6 +39,8 @@ final class AboutAppViewController: UIViewController {
 
     private lazy var appVersionContainerView = UIView()
 
+    private lazy var contactSupportController = ContactSupportController(presentationController: self)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -82,6 +84,7 @@ final class AboutAppViewController: UIViewController {
 
     private enum CellType: String, CaseIterable, UniqueIdentifiable {
         case helpCenter
+        case contactSupport
         case termsOfService
         case privacyPolicy
 
@@ -91,6 +94,8 @@ final class AboutAppViewController: UIViewController {
             switch self {
             case .helpCenter:
                 return NSLocalizedString("HelpCenterTitle", comment: "")
+            case .contactSupport:
+                return NSLocalizedString("ContactSupportTitle", comment: "")
             case .termsOfService:
                 return NSLocalizedString("TermsOfServiceTitle", comment: "")
             case .privacyPolicy:
@@ -106,6 +111,8 @@ final class AboutAppViewController: UIViewController {
                 return URL(string: NSLocalizedString("TermsOfServiceLink", comment: ""))
             case .privacyPolicy:
                 return URL(string: NSLocalizedString("PrivacyPolicyLink", comment: ""))
+            default:
+                return nil
             }
         }
     }
@@ -149,11 +156,15 @@ extension AboutAppViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.onDidSelectCell(CellType.allCases[indexPath.row])
+    }
 
-        let selectedCellType = CellType.allCases[indexPath.row]
-        switch selectedCellType {
+    private func onDidSelectCell(_ type: CellType) {
+        switch type {
         case .helpCenter, .termsOfService, .privacyPolicy:
-            self.openURLInWeb(selectedCellType.url)
+            self.openURLInWeb(type.url)
+        case .contactSupport:
+            self.contactSupportController.contactSupport()
         }
     }
 }
