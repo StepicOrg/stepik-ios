@@ -15,6 +15,6 @@ final class ActiveSplitTestsContainer {
     )
 
     static func setActiveTestsGroups() {
-        self.splitTestingService.fetchSplitTest(ExploreSearchBarStyleSplitTest.self).setSplitTestGroup()
+        self.splitTestingService.fetchSplitTest(CourseListSeeAllTextSplitTest.self).setSplitTestGroup()
     }
 }

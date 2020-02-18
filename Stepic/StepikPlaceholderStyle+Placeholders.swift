@@ -108,6 +108,12 @@ extension StepikPlaceholder.Style {
         text: NSLocalizedString("DiscussionsPlaceholderEmptySolutionsTitle", comment: ""),
         buttonTitle: NSLocalizedString("DiscussionsPlaceholderEmptySolutionsButtonTitle", comment: "")
     )
+    static let emptySubmissions = StepikPlaceholderStyle(
+        id: "emptySubmissions",
+        image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),
+        text: NSLocalizedString("SubmissionsPlaceholderEmptyTitle", comment: ""),
+        buttonTitle: nil
+    )
     static let emptyProfileLoading = StepikPlaceholderStyle(
         id: "emptyProfileLoading",
         image: PlaceholderImage(image: #imageLiteral(resourceName: "new-empty-empty"), scale: 0.99),

@@ -78,7 +78,7 @@ final class StepikVideoPlayerViewController: UIViewController {
     private static let seekBackTimeOffset: TimeInterval = 10
     private static let seekPreferredTimescale: CMTimeScale = 1000
 
-    private static let hidePlayerControlsTimeInterval = 4.5
+    private static let hidePlayerControlsTimeInterval: TimeInterval = 4.5
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -204,7 +204,11 @@ final class StepikVideoPlayerViewController: UIViewController {
 
     private var wasPlayingBeforeSeeking = false
 
-    private var isPlayerControlsVisible = true
+    private var isPlayerControlsVisible = true {
+        didSet {
+            self.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        }
+    }
     private var hidePlayerControlsTimer: Timer?
 
     /// This property will be set to `true` when player playback did end and device, not in the foreground state.
@@ -213,6 +217,11 @@ final class StepikVideoPlayerViewController: UIViewController {
     private var videoInBackgroundTooltip: Tooltip?
 
     override var prefersStatusBarHidden: Bool { true }
+
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        let anyAutoplayControlVisible = self.allAutoplayViews.first(where: { $0.isHidden }) == nil
+        return self.isPlayerControlsVisible || anyAutoplayControlVisible ? false : true
+    }
 
     // MARK: UIViewController life cycle
 
@@ -254,7 +263,9 @@ final class StepikVideoPlayerViewController: UIViewController {
 
         coordinator.animate(
             alongsideTransition: { _ in
-                self.currentVideoFillMode = .aspect
+                if DeviceInfo.current.orientation.interface.isPortrait {
+                    self.currentVideoFillMode = .aspect
+                }
             },
             completion: { _ in
                 self.updateVideoFillModeIcon()

@@ -200,8 +200,8 @@ final class StepView: UIView {
     private func positionVideoPreview() {
         let fullHeight = self.bounds.height
         let previewHeight = self.stepVideoPreviewView.bounds.height
-        let topInset = self.scrollableStackView.contentInsets.top
-        let bottomInset = self.scrollableStackView.contentInsets.bottom
+        let topInset = self.safeAreaInsets.top
+        let bottomInset = self.safeAreaInsets.bottom
 
         let controlsRealHeight = self.stepControlsView.bounds.height
         let controlsHeight = self.stepControlsView.sizeWithAllControls.height
@@ -238,7 +238,7 @@ extension StepView: ProgrammaticallyInitializableViewProtocol {
 
         self.scrollableStackView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollableStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(self.safeAreaLayoutGuide)
         }
 
         self.loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
