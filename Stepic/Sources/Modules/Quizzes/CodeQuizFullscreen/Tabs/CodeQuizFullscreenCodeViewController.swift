@@ -15,11 +15,11 @@ protocol CodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
 extension CodeQuizFullscreenCodeViewController {
     enum Appearance {
         static let submitButtonBackgroundColor = UIColor.stepikGreen
-        static let submitButtonHeight: CGFloat = 55
+        static let submitButtonHeight: CGFloat = 44
         static let submitButtonTextColor = UIColor.white
-        static let submitButtonCornerRadius: CGFloat = 12
-        static let submitButtonFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        static let submitButtonInsets = LayoutInsets(left: 32, bottom: 16, right: 32)
+        static let submitButtonCornerRadius: CGFloat = 6
+        static let submitButtonFont = UIFont.systemFont(ofSize: 16)
+        static let submitButtonInsets = UIEdgeInsets(top: 0, left: 32, bottom: 16, right: 32)
 
         static let codeEditorTextTopInset: CGFloat = 8
 
@@ -122,15 +122,7 @@ final class CodeQuizFullscreenCodeViewController: UIViewController {
         self.view.addSubview(self.submitButton)
         self.submitButton.translatesAutoresizingMaskIntoConstraints = false
         self.submitButton.snp.makeConstraints { make in
-            make.leading
-                .equalTo(self.view.safeAreaLayoutGuide.snp.leading)
-                .offset(Appearance.submitButtonInsets.left)
-            make.trailing
-                .equalTo(self.view.safeAreaLayoutGuide.snp.trailing)
-                .offset(-Appearance.submitButtonInsets.right)
-            make.bottom
-                .equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-                .offset(-Appearance.submitButtonInsets.bottom)
+            make.leading.bottom.trailing.equalTo(self.view.safeAreaLayoutGuide).inset(Appearance.submitButtonInsets)
             make.height.equalTo(Appearance.submitButtonHeight)
         }
     }
