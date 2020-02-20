@@ -1,15 +1,15 @@
 import PromiseKit
 import UIKit
 
-protocol NewCodeQuizFullscreenPresenterProtocol {
-    func presentContent(response: NewCodeQuizFullscreen.ContentLoad.Response)
-    func presentCodeReset(response: NewCodeQuizFullscreen.ResetCode.Response)
+protocol CodeQuizFullscreenPresenterProtocol {
+    func presentContent(response: CodeQuizFullscreen.ContentLoad.Response)
+    func presentCodeReset(response: CodeQuizFullscreen.ResetCode.Response)
 }
 
-final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtocol {
-    weak var viewController: NewCodeQuizFullscreenViewControllerProtocol?
+final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
+    weak var viewController: CodeQuizFullscreenViewControllerProtocol?
 
-    func presentContent(response: NewCodeQuizFullscreen.ContentLoad.Response) {
+    func presentContent(response: CodeQuizFullscreen.ContentLoad.Response) {
         DispatchQueue.global(qos: .userInitiated).promise {
             self.processStepContent(response.codeDetails.stepContent)
         }.done { content in
@@ -26,7 +26,7 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
                 )
             }()
 
-            let viewModel = NewCodeQuizFullscreenViewModel(
+            let viewModel = CodeQuizFullscreenViewModel(
                 content: content,
                 samples: stepOptions.samples.map { self.processCodeSample($0) },
                 limit: codeLimit,
@@ -39,7 +39,7 @@ final class NewCodeQuizFullscreenPresenter: NewCodeQuizFullscreenPresenterProtoc
         }.cauterize()
     }
 
-    func presentCodeReset(response: NewCodeQuizFullscreen.ResetCode.Response) {
+    func presentCodeReset(response: CodeQuizFullscreen.ResetCode.Response) {
         self.viewController?.displayCodeReset(viewModel: .init(code: response.code ?? ""))
     }
 

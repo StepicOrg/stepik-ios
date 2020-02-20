@@ -1,7 +1,7 @@
 import UIKit
 
-final class NewCodeQuizFullscreenAssembly: Assembly {
-    private weak var moduleOutput: NewCodeQuizFullscreenOutputProtocol?
+final class CodeQuizFullscreenAssembly: Assembly {
+    private weak var moduleOutput: CodeQuizFullscreenOutputProtocol?
 
     private let codeDetails: CodeDetails
     private let language: CodeLanguage
@@ -9,7 +9,7 @@ final class NewCodeQuizFullscreenAssembly: Assembly {
     init(
         codeDetails: CodeDetails,
         language: CodeLanguage,
-        output: NewCodeQuizFullscreenOutputProtocol? = nil
+        output: CodeQuizFullscreenOutputProtocol? = nil
     ) {
         self.codeDetails = codeDetails
         self.language = language
@@ -17,20 +17,20 @@ final class NewCodeQuizFullscreenAssembly: Assembly {
     }
 
     func makeModule() -> UIViewController {
-        let provider = NewCodeQuizFullscreenProvider(
+        let provider = CodeQuizFullscreenProvider(
             stepOptionsPersistenceService: StepOptionsPersistenceService(
                 stepsPersistenceService: StepsPersistenceService()
             )
         )
 
-        let presenter = NewCodeQuizFullscreenPresenter()
-        let interactor = NewCodeQuizFullscreenInteractor(
+        let presenter = CodeQuizFullscreenPresenter()
+        let interactor = CodeQuizFullscreenInteractor(
             presenter: presenter,
             provider: provider,
             codeDetails: codeDetails,
             language: self.language
         )
-        let viewController = NewCodeQuizFullscreenViewController(interactor: interactor)
+        let viewController = CodeQuizFullscreenViewController(interactor: interactor)
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput

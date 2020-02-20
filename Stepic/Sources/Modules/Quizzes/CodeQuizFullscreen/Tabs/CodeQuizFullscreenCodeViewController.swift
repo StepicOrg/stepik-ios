@@ -1,19 +1,18 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
-    func newCodeQuizFullscreenCodeViewController(
-        _ viewController: NewCodeQuizFullscreenCodeViewController,
+protocol CodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
+    func codeQuizFullscreenCodeViewController(
+        _ viewController: CodeQuizFullscreenCodeViewController,
         codeDidChange code: String
     )
-
-    func newCodeQuizFullscreenCodeViewController(
-        _ viewController: NewCodeQuizFullscreenCodeViewController,
+    func codeQuizFullscreenCodeViewController(
+        _ viewController: CodeQuizFullscreenCodeViewController,
         didSubmitCode code: String
     )
 }
 
-extension NewCodeQuizFullscreenCodeViewController {
+extension CodeQuizFullscreenCodeViewController {
     enum Appearance {
         static let submitButtonBackgroundColor = UIColor.stepikGreen
         static let submitButtonHeight: CGFloat = 55
@@ -28,8 +27,8 @@ extension NewCodeQuizFullscreenCodeViewController {
     }
 }
 
-final class NewCodeQuizFullscreenCodeViewController: UIViewController {
-    weak var delegate: NewCodeQuizFullscreenCodeViewControllerDelegate?
+final class CodeQuizFullscreenCodeViewController: UIViewController {
+    weak var delegate: CodeQuizFullscreenCodeViewControllerDelegate?
 
     private lazy var codeEditorView: CodeEditorView = {
         let appearance = CodeEditorView.Appearance(
@@ -89,7 +88,7 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         language: CodeLanguage,
         code: String?,
         codeTemplate: String?,
-        delegate: NewCodeQuizFullscreenCodeViewControllerDelegate? = nil
+        delegate: CodeQuizFullscreenCodeViewControllerDelegate? = nil
     ) {
         self.language = language
         self.code = code
@@ -110,7 +109,7 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
         self.setupCodeEditor()
     }
 
-    // MARK: - Private API
+    // MARK: Private API
 
     private func addSubviews() {
         self.view.addSubview(self.codeEditorView)
@@ -145,16 +144,18 @@ final class NewCodeQuizFullscreenCodeViewController: UIViewController {
 
     @objc
     private func submitClicked() {
-        self.delegate?.newCodeQuizFullscreenCodeViewController(self, didSubmitCode: self.codeEditorView.code ?? "")
+        self.delegate?.codeQuizFullscreenCodeViewController(self, didSubmitCode: self.codeEditorView.code ?? "")
     }
 }
 
-extension NewCodeQuizFullscreenCodeViewController: CodeEditorViewDelegate {
+// MARK: - CodeQuizFullscreenCodeViewController: CodeEditorViewDelegate -
+
+extension CodeQuizFullscreenCodeViewController: CodeEditorViewDelegate {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView) {
         let currentCode = (codeEditorView.code ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         self.isSubmitButtonEnabled = !currentCode.isEmpty
 
-        self.delegate?.newCodeQuizFullscreenCodeViewController(self, codeDidChange: codeEditorView.code ?? "")
+        self.delegate?.codeQuizFullscreenCodeViewController(self, codeDidChange: codeEditorView.code ?? "")
     }
 
     func codeEditorViewDidBeginEditing(_ codeEditorView: CodeEditorView) {

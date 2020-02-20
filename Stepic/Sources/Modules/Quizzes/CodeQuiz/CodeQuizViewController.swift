@@ -8,7 +8,7 @@ protocol CodeQuizViewControllerProtocol: AnyObject {
 final class CodeQuizViewController: UIViewController {
     private let interactor: CodeQuizInteractorProtocol
 
-    lazy var newCodeQuizView = self.view as? CodeQuizView
+    lazy var codeQuizView = self.view as? CodeQuizView
 
     init(interactor: CodeQuizInteractorProtocol) {
         self.interactor = interactor
@@ -29,11 +29,11 @@ final class CodeQuizViewController: UIViewController {
 
 extension CodeQuizViewController: CodeQuizViewControllerProtocol {
     func displayReply(viewModel: CodeQuiz.ReplyLoad.ViewModel) {
-        self.newCodeQuizView?.configure(viewModel: viewModel.data)
+        self.codeQuizView?.configure(viewModel: viewModel.data)
     }
 
     func displayFullscreen(viewModel: CodeQuiz.FullscreenPresentation.ViewModel) {
-        let assembly = NewCodeQuizFullscreenAssembly(
+        let assembly = CodeQuizFullscreenAssembly(
             codeDetails: viewModel.codeDetails,
             language: viewModel.language,
             output: self
@@ -62,7 +62,7 @@ extension CodeQuizViewController: CodeQuizViewDelegate {
     func codeQuizViewDidRequestPresentationController(_ view: CodeQuizView) -> UIViewController? { self }
 }
 
-extension CodeQuizViewController: NewCodeQuizFullscreenOutputProtocol {
+extension CodeQuizViewController: CodeQuizFullscreenOutputProtocol {
     func update(code: String) {
         self.interactor.doReplyUpdate(request: .init(code: code))
         self.interactor.doReplyLoad(request: .init())

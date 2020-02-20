@@ -1,8 +1,8 @@
 import Agrume
 import UIKit
 
-final class NewCodeQuizFullscreenInstructionViewController: UIViewController {
-    lazy var instructionView = self.view as? NewCodeQuizFullscreenInstructionView
+final class CodeQuizFullscreenInstructionViewController: UIViewController {
+    lazy var instructionView = self.view as? CodeQuizFullscreenInstructionView
 
     private let content: String
     private let samples: [CodeSamplePlainObject]
@@ -25,7 +25,7 @@ final class NewCodeQuizFullscreenInstructionViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = NewCodeQuizFullscreenInstructionView(frame: UIScreen.main.bounds)
+        let view = CodeQuizFullscreenInstructionView(frame: UIScreen.main.bounds)
         view.delegate = self
         self.view = view
     }
@@ -34,21 +34,17 @@ final class NewCodeQuizFullscreenInstructionViewController: UIViewController {
         super.viewDidLoad()
 
         self.instructionView?.startLoading()
-        self.instructionView?.configure(
-            htmlString: self.content,
-            samples: self.samples,
-            limit: self.limit
-        )
+        self.instructionView?.configure(htmlString: self.content, samples: self.samples, limit: self.limit)
     }
 }
 
-extension NewCodeQuizFullscreenInstructionViewController: NewCodeQuizFullscreenInstructionViewDelegate {
-    func newCodeQuizFullscreenInstructionViewDidLoadContent(_ view: NewCodeQuizFullscreenInstructionView) {
+extension CodeQuizFullscreenInstructionViewController: CodeQuizFullscreenInstructionViewDelegate {
+    func codeQuizFullscreenInstructionViewDidLoadContent(_ view: CodeQuizFullscreenInstructionView) {
         self.instructionView?.endLoading()
     }
 
-    func newCodeQuizFullscreenInstructionView(
-        _ view: NewCodeQuizFullscreenInstructionView,
+    func codeQuizFullscreenInstructionView(
+        _ view: CodeQuizFullscreenInstructionView,
         didRequestOpenURL url: URL
     ) {
         let scheme = url.scheme?.lowercased() ?? ""
@@ -63,8 +59,8 @@ extension NewCodeQuizFullscreenInstructionViewController: NewCodeQuizFullscreenI
         }
     }
 
-    func newCodeQuizFullscreenInstructionView(
-        _ view: NewCodeQuizFullscreenInstructionView,
+    func codeQuizFullscreenInstructionView(
+        _ view: CodeQuizFullscreenInstructionView,
         didRequestFullscreenImage url: URL
     ) {
         let agrume = Agrume(url: url)

@@ -1,17 +1,20 @@
 import Foundation
+import Logging
 import PromiseKit
 
-protocol NewCodeQuizFullscreenInteractorProtocol {
-    func doReplyUpdate(request: NewCodeQuizFullscreen.ReplyConvert.Request)
-    func doReplySubmit(request: NewCodeQuizFullscreen.ReplySubmit.Request)
-    func doCodeReset(request: NewCodeQuizFullscreen.ResetCode.Request)
+protocol CodeQuizFullscreenInteractorProtocol {
+    func doReplyUpdate(request: CodeQuizFullscreen.ReplyConvert.Request)
+    func doReplySubmit(request: CodeQuizFullscreen.ReplySubmit.Request)
+    func doCodeReset(request: CodeQuizFullscreen.ResetCode.Request)
 }
 
-final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProtocol {
-    weak var moduleOutput: NewCodeQuizFullscreenOutputProtocol?
+final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
+    private static let logger = Logger(label: "com.AlexKarpov.Stepic.CodeQuizFullscreenInteractor")
 
-    private let presenter: NewCodeQuizFullscreenPresenterProtocol
-    private let provider: NewCodeQuizFullscreenProviderProtocol
+    weak var moduleOutput: CodeQuizFullscreenOutputProtocol?
+
+    private let presenter: CodeQuizFullscreenPresenterProtocol
+    private let provider: CodeQuizFullscreenProviderProtocol
 
     private let codeDetails: CodeDetails
     private let language: CodeLanguage
@@ -19,8 +22,8 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
     private var currentCode: String?
 
     init(
-        presenter: NewCodeQuizFullscreenPresenterProtocol,
-        provider: NewCodeQuizFullscreenProviderProtocol,
+        presenter: CodeQuizFullscreenPresenterProtocol,
+        provider: CodeQuizFullscreenProviderProtocol,
         codeDetails: CodeDetails,
         language: CodeLanguage
     ) {
@@ -32,12 +35,12 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
         self.refresh()
     }
 
-    func doReplyUpdate(request: NewCodeQuizFullscreen.ReplyConvert.Request) {
+    func doReplyUpdate(request: CodeQuizFullscreen.ReplyConvert.Request) {
         self.currentCode = request.code
         self.moduleOutput?.update(code: request.code)
     }
 
-    func doReplySubmit(request: NewCodeQuizFullscreen.ReplySubmit.Request) {
+    func doReplySubmit(request: CodeQuizFullscreen.ReplySubmit.Request) {
         let reply: Reply = {
             switch self.language {
             case .sql:
@@ -50,7 +53,7 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
         self.moduleOutput?.submit(reply: reply)
     }
 
-    func doCodeReset(request: NewCodeQuizFullscreen.ResetCode.Request) {
+    func doCodeReset(request: CodeQuizFullscreen.ResetCode.Request) {
         AnalyticsReporter.reportEvent(
             AnalyticsEvents.Code.resetPressed,
             parameters: [
@@ -87,7 +90,7 @@ final class NewCodeQuizFullscreenInteractor: NewCodeQuizFullscreenInteractorProt
                 )
             )
         }.catch { error in
-            print("NewCodeQuizFullscreenInteractor :: failed fetch code template \(error)")
+            Self.logger.error("CodeQuizFullscreenInteractor :: failed fetch code template \(error)")
         }
     }
 }

@@ -1,13 +1,13 @@
 import SnapKit
 import UIKit
 
-extension NewCodeQuizFullscreenView {
+extension CodeQuizFullscreenView {
     struct Appearance {
         let backgroundColor = UIColor.white
     }
 }
 
-final class NewCodeQuizFullscreenView: UIView {
+final class CodeQuizFullscreenView: UIView {
     let appearance: Appearance
 
     init(
@@ -28,7 +28,7 @@ final class NewCodeQuizFullscreenView: UIView {
     }
 }
 
-extension NewCodeQuizFullscreenView: ProgrammaticallyInitializableViewProtocol {
+extension CodeQuizFullscreenView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
     }

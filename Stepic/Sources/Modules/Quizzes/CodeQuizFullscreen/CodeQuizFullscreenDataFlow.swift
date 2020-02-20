@@ -1,6 +1,6 @@
 import Foundation
 
-enum NewCodeQuizFullscreen {
+enum CodeQuizFullscreen {
     /// Show fullscreen code quiz
     enum ContentLoad {
         struct Response {
@@ -10,7 +10,7 @@ enum NewCodeQuizFullscreen {
         }
 
         struct ViewModel {
-            let data: NewCodeQuizFullscreenViewModel
+            let data: CodeQuizFullscreenViewModel
         }
     }
 
@@ -23,12 +23,12 @@ enum NewCodeQuizFullscreen {
 
     /// Submit current code reply
     enum ReplySubmit {
-        struct Request { }
+        struct Request {}
     }
 
     /// Reset current user code template with quiz template
     enum ResetCode {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let code: String?

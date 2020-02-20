@@ -1,6 +1,6 @@
 import Foundation
 
-protocol NewCodeQuizFullscreenOutputProtocol: AnyObject {
+protocol CodeQuizFullscreenOutputProtocol: AnyObject {
     func update(code: String)
     func submit(reply: Reply)
 }

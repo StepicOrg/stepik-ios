@@ -1,20 +1,17 @@
 import Foundation
 import PromiseKit
 
-protocol NewCodeQuizFullscreenProviderProtocol: AnyObject {
+protocol CodeQuizFullscreenProviderProtocol: AnyObject {
     func fetchCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
     func fetchUserOrCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
-
     func deleteUserCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<Void>
 }
 
-final class NewCodeQuizFullscreenProvider: NewCodeQuizFullscreenProviderProtocol {
+final class CodeQuizFullscreenProvider: CodeQuizFullscreenProviderProtocol {
     private let stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
 
-    init(
-        stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
-    ) {
+    init(stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol) {
         self.stepOptionsPersistenceService = stepOptionsPersistenceService
     }
 

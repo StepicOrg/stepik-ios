@@ -1,16 +1,16 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizFullscreenInstructionViewDelegate: AnyObject {
-    func newCodeQuizFullscreenInstructionViewDidLoadContent(_ view: NewCodeQuizFullscreenInstructionView)
-    func newCodeQuizFullscreenInstructionView(_ view: NewCodeQuizFullscreenInstructionView, didRequestOpenURL url: URL)
-    func newCodeQuizFullscreenInstructionView(
-        _ view: NewCodeQuizFullscreenInstructionView,
+protocol CodeQuizFullscreenInstructionViewDelegate: AnyObject {
+    func codeQuizFullscreenInstructionViewDidLoadContent(_ view: CodeQuizFullscreenInstructionView)
+    func codeQuizFullscreenInstructionView(_ view: CodeQuizFullscreenInstructionView, didRequestOpenURL url: URL)
+    func codeQuizFullscreenInstructionView(
+        _ view: CodeQuizFullscreenInstructionView,
         didRequestFullscreenImage url: URL
     )
 }
 
-extension NewCodeQuizFullscreenInstructionView {
+extension CodeQuizFullscreenInstructionView {
     struct Appearance {
         let loadingIndicatorColor = UIColor.mainDark
         let spacing: CGFloat = 16
@@ -22,9 +22,9 @@ extension NewCodeQuizFullscreenInstructionView {
     }
 }
 
-final class NewCodeQuizFullscreenInstructionView: UIView {
+final class CodeQuizFullscreenInstructionView: UIView {
     let appearance: Appearance
-    weak var delegate: NewCodeQuizFullscreenInstructionViewDelegate?
+    weak var delegate: CodeQuizFullscreenInstructionViewDelegate?
 
     private lazy var loadingIndicatorView: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
@@ -91,7 +91,7 @@ final class NewCodeQuizFullscreenInstructionView: UIView {
     }
 }
 
-extension NewCodeQuizFullscreenInstructionView: ProgrammaticallyInitializableViewProtocol {
+extension CodeQuizFullscreenInstructionView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
         self.addSubview(self.loadingIndicatorView)
@@ -111,18 +111,18 @@ extension NewCodeQuizFullscreenInstructionView: ProgrammaticallyInitializableVie
     }
 }
 
-extension NewCodeQuizFullscreenInstructionView: ProcessedContentTextViewDelegate {
+extension CodeQuizFullscreenInstructionView: ProcessedContentTextViewDelegate {
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenLink url: URL) {
-        self.delegate?.newCodeQuizFullscreenInstructionView(self, didRequestOpenURL: url)
+        self.delegate?.codeQuizFullscreenInstructionView(self, didRequestOpenURL: url)
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImageURL url: URL) {
-        self.delegate?.newCodeQuizFullscreenInstructionView(self, didRequestFullscreenImage: url)
+        self.delegate?.codeQuizFullscreenInstructionView(self, didRequestFullscreenImage: url)
     }
 
     func processedContentTextView(_ view: ProcessedContentTextView, didOpenImage image: UIImage) {}
 
     func processedContentTextViewDidLoadContent(_ view: ProcessedContentTextView) {
-        self.delegate?.newCodeQuizFullscreenInstructionViewDidLoadContent(self)
+        self.delegate?.codeQuizFullscreenInstructionViewDidLoadContent(self)
     }
 }

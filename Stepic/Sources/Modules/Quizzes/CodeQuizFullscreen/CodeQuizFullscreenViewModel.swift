@@ -1,6 +1,6 @@
 import Foundation
 
-struct NewCodeQuizFullscreenViewModel {
+struct CodeQuizFullscreenViewModel {
     let content: String
     let samples: [CodeSamplePlainObject]
     let limit: CodeLimitPlainObject

@@ -3,9 +3,12 @@ import SnapKit
 import Tabman
 import UIKit
 
-// MARK: Appearance -
+protocol CodeQuizFullscreenViewControllerProtocol: AnyObject {
+    func displayContent(viewModel: CodeQuizFullscreen.ContentLoad.ViewModel)
+    func displayCodeReset(viewModel: CodeQuizFullscreen.ResetCode.ViewModel)
+}
 
-extension NewCodeQuizFullscreenViewController {
+extension CodeQuizFullscreenViewController {
     enum Appearance {
         static let barTintColor = UIColor.mainDark
         static let barBackgroundColor = UIColor.mainLight
@@ -22,17 +25,8 @@ extension NewCodeQuizFullscreenViewController {
     }
 }
 
-// MARK: - NewCodeQuizFullscreenViewControllerProtocol: class -
-
-protocol NewCodeQuizFullscreenViewControllerProtocol: AnyObject {
-    func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel)
-    func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel)
-}
-
-// MARK: - NewCodeQuizFullscreenViewController: TabmanViewController -
-
-final class NewCodeQuizFullscreenViewController: TabmanViewController {
-    lazy var newCodeQuizFullscreenView = self.view as? NewCodeQuizFullscreenView
+final class CodeQuizFullscreenViewController: TabmanViewController {
+    lazy var codeQuizFullscreenView = self.view as? CodeQuizFullscreenView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
     private lazy var tabBarView: TMBar = {
@@ -71,21 +65,21 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         action: #selector(self.actionButtonClicked)
     )
 
-    private let interactor: NewCodeQuizFullscreenInteractorProtocol
+    private let interactor: CodeQuizFullscreenInteractorProtocol
 
-    private let availableTabs: [NewCodeQuizFullscreen.Tab]
+    private let availableTabs: [CodeQuizFullscreen.Tab]
     private let initialTabIndex: Int
 
     private var tabViewControllers: [UIViewController?] = []
     // TODO: Refactor
-    private var newCodeQuizFullscreenCodeViewController: NewCodeQuizFullscreenCodeViewController?
+    private var codeQuizFullscreenCodeViewController: CodeQuizFullscreenCodeViewController?
 
-    private var viewModel: NewCodeQuizFullscreenViewModel?
+    private var viewModel: CodeQuizFullscreenViewModel?
 
     init(
-        interactor: NewCodeQuizFullscreenInteractorProtocol,
-        availableTabs: [NewCodeQuizFullscreen.Tab] = [.instruction, .code],
-        initialTab: NewCodeQuizFullscreen.Tab = .code
+        interactor: CodeQuizFullscreenInteractorProtocol,
+        availableTabs: [CodeQuizFullscreen.Tab] = [.instruction, .code],
+        initialTab: CodeQuizFullscreen.Tab = .code
     ) {
         self.interactor = interactor
 
@@ -107,7 +101,7 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     }
 
     override func loadView() {
-        let view = NewCodeQuizFullscreenView(frame: UIScreen.main.bounds)
+        let view = CodeQuizFullscreenView(frame: UIScreen.main.bounds)
         self.view = view
     }
 
@@ -120,14 +114,6 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         self.addBar(self.tabBarView, dataSource: self, at: .top)
 
         self.interPageSpacing = Appearance.spacingBetweenPages
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        assert(
-            self.navigationController != nil,
-            "\(NewCodeQuizFullscreenViewController.self) must be presented in a \(UINavigationController.self)"
-        )
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -159,19 +145,19 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
         let controller: UIViewController? = {
             switch tab {
             case .instruction:
-                return NewCodeQuizFullscreenInstructionViewController(
+                return CodeQuizFullscreenInstructionViewController(
                     content: viewModel.content,
                     samples: viewModel.samples,
                     limit: viewModel.limit
                 )
             case .code:
-                self.newCodeQuizFullscreenCodeViewController = NewCodeQuizFullscreenCodeViewController(
+                self.codeQuizFullscreenCodeViewController = CodeQuizFullscreenCodeViewController(
                     language: viewModel.language,
                     code: viewModel.code,
                     codeTemplate: viewModel.codeTemplate,
                     delegate: self
                 )
-                return self.newCodeQuizFullscreenCodeViewController
+                return self.codeQuizFullscreenCodeViewController
             case .run:
                 return nil
             }
@@ -236,22 +222,22 @@ final class NewCodeQuizFullscreenViewController: TabmanViewController {
     }
 }
 
-// MARK: - NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControllerProtocol -
+// MARK: - CodeQuizFullscreenViewController: CodeQuizFullscreenViewControllerProtocol -
 
-extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenViewControllerProtocol {
-    func displayContent(viewModel: NewCodeQuizFullscreen.ContentLoad.ViewModel) {
+extension CodeQuizFullscreenViewController: CodeQuizFullscreenViewControllerProtocol {
+    func displayContent(viewModel: CodeQuizFullscreen.ContentLoad.ViewModel) {
         self.viewModel = viewModel.data
         self.reloadData()
     }
 
-    func displayCodeReset(viewModel: NewCodeQuizFullscreen.ResetCode.ViewModel) {
-        self.newCodeQuizFullscreenCodeViewController?.code = viewModel.code
+    func displayCodeReset(viewModel: CodeQuizFullscreen.ResetCode.ViewModel) {
+        self.codeQuizFullscreenCodeViewController?.code = viewModel.code
     }
 }
 
-// MARK: - NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource -
+// MARK: - CodeQuizFullscreenViewController: PageboyViewControllerDataSource -
 
-extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
+extension CodeQuizFullscreenViewController: PageboyViewControllerDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         self.availableTabs.count
     }
@@ -269,27 +255,27 @@ extension NewCodeQuizFullscreenViewController: PageboyViewControllerDataSource {
     }
 }
 
-// MARK: - NewCodeQuizFullscreenViewController: TMBarDataSource -
+// MARK: - CodeQuizFullscreenViewController: TMBarDataSource -
 
-extension NewCodeQuizFullscreenViewController: TMBarDataSource {
+extension CodeQuizFullscreenViewController: TMBarDataSource {
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         let title = self.availableTabs[safe: index]?.title ?? ""
         return TMBarItem(title: title)
     }
 }
 
-// MARK: - NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewControllerDelegate -
+// MARK: - CodeQuizFullscreenViewController: CodeQuizFullscreenCodeViewControllerDelegate -
 
-extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewControllerDelegate {
-    func newCodeQuizFullscreenCodeViewController(
-        _ viewController: NewCodeQuizFullscreenCodeViewController,
+extension CodeQuizFullscreenViewController: CodeQuizFullscreenCodeViewControllerDelegate {
+    func codeQuizFullscreenCodeViewController(
+        _ viewController: CodeQuizFullscreenCodeViewController,
         codeDidChange code: String
     ) {
         self.interactor.doReplyUpdate(request: .init(code: code))
     }
 
-    func newCodeQuizFullscreenCodeViewController(
-        _ viewController: NewCodeQuizFullscreenCodeViewController,
+    func codeQuizFullscreenCodeViewController(
+        _ viewController: CodeQuizFullscreenCodeViewController,
         didSubmitCode code: String
     ) {
         self.interactor.doReplySubmit(request: .init())
@@ -297,9 +283,9 @@ extension NewCodeQuizFullscreenViewController: NewCodeQuizFullscreenCodeViewCont
     }
 }
 
-// MARK: - NewCodeQuizFullscreenViewController: StyledNavigationControllerPresentable -
+// MARK: - CodeQuizFullscreenViewController: StyledNavigationControllerPresentable -
 
-extension NewCodeQuizFullscreenViewController: StyledNavigationControllerPresentable {
+extension CodeQuizFullscreenViewController: StyledNavigationControllerPresentable {
     var navigationBarAppearanceOnFirstPresentation: StyledNavigationController.NavigationBarAppearanceState {
         Appearance.navigationBarAppearance
     }
