@@ -22,6 +22,13 @@ final class ImageButton: UIControl {
         }
     }
 
+    var imagePosition: Position = .left {
+        didSet {
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+        }
+    }
+
     var imageInsets = UIEdgeInsets.zero {
         didSet {
             self.setNeedsLayout()
@@ -77,11 +84,17 @@ final class ImageButton: UIControl {
     var titleContentView: UIView { self.titleLabel }
 
     override var intrinsicContentSize: CGSize {
-        let width = self.titleLabel.frame.maxX + self.titleInsets.right
+        let titleWidth = self.titleInsets.left + self.titleLabel.frame.width + self.titleInsets.right
+        let imageWidth = self.image != nil
+            ? self.imageInsets.left + self.imageSize.width + self.imageInsets.right
+            : 0.0
+        let width = titleWidth + imageWidth
+
         let height = max(
             self.iconImageView.frame.maxY + self.imageInsets.bottom,
             self.titleLabel.frame.maxY + self.titleInsets.bottom
         )
+
         return CGSize(
             width: width,
             height: height + self.additionalVerticalOffset
@@ -126,20 +139,37 @@ final class ImageButton: UIControl {
         let heightDelta = self.frame.height - realHeight
         let additionalVerticalOffset = max(heightDelta, 0) / 2
 
-        self.iconImageView.frame = CGRect(
-            origin: CGPoint(
-                x: self.imageInsets.left,
-                y: additionalVerticalOffset + self.imageInsets.top
-            ),
-            size: self.imageSize
-        )
+        switch self.imagePosition {
+        case .left:
+            self.iconImageView.frame = CGRect(
+                origin: CGPoint(
+                    x: self.imageInsets.left,
+                    y: additionalVerticalOffset + self.imageInsets.top
+                ),
+                size: self.imageSize
+            )
 
-        self.titleLabel.frame = CGRect(
-            x: self.iconImageView.frame.maxX + self.titleInsets.left + self.imageInsets.right,
-            y: additionalVerticalOffset + self.titleInsets.top,
-            width: self.titleLabel.frame.width,
-            height: self.titleLabel.frame.height
-        )
+            self.titleLabel.frame = CGRect(
+                x: self.iconImageView.frame.maxX + self.titleInsets.left + self.imageInsets.right,
+                y: additionalVerticalOffset + self.titleInsets.top,
+                width: self.titleLabel.frame.width,
+                height: self.titleLabel.frame.height
+            )
+        case .right:
+            self.titleLabel.frame = CGRect(
+                x: self.titleInsets.left,
+                y: additionalVerticalOffset + self.titleInsets.top,
+                width: self.titleLabel.frame.width,
+                height: self.titleLabel.frame.height
+            )
+
+            self.iconImageView.frame = CGRect(
+                x: self.titleLabel.frame.maxX + self.imageInsets.left + self.imageInsets.right,
+                y: additionalVerticalOffset + self.imageInsets.top,
+                width: self.imageSize.width,
+                height: self.imageSize.height
+            )
+        }
 
         self.additionalVerticalOffset = additionalVerticalOffset
 
@@ -149,5 +179,10 @@ final class ImageButton: UIControl {
     private func setupView() {
         self.addSubview(self.iconImageView)
         self.addSubview(self.titleLabel)
+    }
+
+    enum Position {
+        case left
+        case right
     }
 }
