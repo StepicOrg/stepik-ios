@@ -1,7 +1,7 @@
 import Foundation
 import PromiseKit
 
-protocol NewCodeQuizProviderProtocol {
+protocol CodeQuizProviderProtocol {
     func fetchStepOptions(by stepID: Step.IdType) -> Promise<StepOptions?>
 
     func fetchCodeTemplate(by stepID: Step.IdType, language: CodeLanguage) -> Promise<CodeTemplate?>
@@ -16,7 +16,7 @@ protocol NewCodeQuizProviderProtocol {
     func updateAutoSuggestedCodeLanguage(language: CodeLanguage, stepID: Step.IdType) -> Promise<Void>
 }
 
-final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
+final class CodeQuizProvider: CodeQuizProviderProtocol {
     private let stepsPersistenceService: StepsPersistenceServiceProtocol
     private let stepOptionsPersistenceService: StepOptionsPersistenceServiceProtocol
     private let lessonsPersistenceService: LessonsPersistenceServiceProtocol
@@ -113,7 +113,7 @@ final class NewCodeQuizProvider: NewCodeQuizProviderProtocol {
                     }
                     return self.lessonsPersistenceService.fetch(ids: [step.lessonID]).firstValue.then {
                         lesson -> Promise<String?> in
-                            .value(lesson.title)
+                        .value(lesson.title)
                     }
                 }
                 return .value(nil)

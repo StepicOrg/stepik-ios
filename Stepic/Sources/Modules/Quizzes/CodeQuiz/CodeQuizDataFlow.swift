@@ -1,9 +1,9 @@
 import Foundation
 
-enum NewCodeQuiz {
+enum CodeQuiz {
     /// Show quiz state
     enum ReplyLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let code: String?
@@ -11,11 +11,12 @@ enum NewCodeQuiz {
             let languageName: String?
             let codeDetails: CodeDetails
             let status: QuizStatus?
+            // FIXME: Extract to protocol `TitlePresentable`
             let isQuizTitleVisible: Bool
         }
 
         struct ViewModel {
-            let data: NewCodeQuizViewModel
+            let data: CodeQuizViewModel
         }
     }
 
@@ -42,7 +43,7 @@ enum NewCodeQuiz {
 
     /// Display fullscreen mode
     enum FullscreenPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let language: CodeLanguage

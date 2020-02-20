@@ -1,6 +1,6 @@
 import UIKit
 
-struct NewCodeQuizViewModel {
+struct CodeQuizViewModel {
     let title: String?
     let code: String?
     let codeTemplate: String?

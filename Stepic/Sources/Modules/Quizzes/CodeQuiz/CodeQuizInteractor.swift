@@ -1,19 +1,19 @@
 import Foundation
 import PromiseKit
 
-protocol NewCodeQuizInteractorProtocol {
-    func doReplyLoad(request: NewCodeQuiz.ReplyLoad.Request)
-    func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request)
-    func doReplySubmit(request: NewCodeQuiz.ReplySubmit.Request)
-    func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request)
-    func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request)
+protocol CodeQuizInteractorProtocol {
+    func doReplyLoad(request: CodeQuiz.ReplyLoad.Request)
+    func doReplyUpdate(request: CodeQuiz.ReplyConvert.Request)
+    func doReplySubmit(request: CodeQuiz.ReplySubmit.Request)
+    func doLanguageSelect(request: CodeQuiz.LanguageSelect.Request)
+    func doFullscreenAction(request: CodeQuiz.FullscreenPresentation.Request)
 }
 
-final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
+final class CodeQuizInteractor: CodeQuizInteractorProtocol {
     weak var moduleOutput: QuizOutputProtocol?
 
-    private let presenter: NewCodeQuizPresenterProtocol
-    private let provider: NewCodeQuizProviderProtocol
+    private let presenter: CodeQuizPresenterProtocol
+    private let provider: CodeQuizProviderProtocol
 
     private var codeDetails: CodeDetails?
     private var currentStatus: QuizStatus?
@@ -30,8 +30,8 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     private var isQuizTitleVisible = true
 
     init(
-        presenter: NewCodeQuizPresenterProtocol,
-        provider: NewCodeQuizProviderProtocol,
+        presenter: CodeQuizPresenterProtocol,
+        provider: CodeQuizProviderProtocol,
         language: CodeLanguage?
     ) {
         self.presenter = presenter
@@ -39,16 +39,16 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.languageName = language?.rawValue
     }
 
-    func doReplyLoad(request: NewCodeQuiz.ReplyLoad.Request) {
+    func doReplyLoad(request: CodeQuiz.ReplyLoad.Request) {
         self.presentNewData()
     }
 
-    func doReplyUpdate(request: NewCodeQuiz.ReplyConvert.Request) {
+    func doReplyUpdate(request: CodeQuiz.ReplyConvert.Request) {
         self.currentCode = request.code
         self.outputCurrentReply()
     }
 
-    func doReplySubmit(request: NewCodeQuiz.ReplySubmit.Request) {
+    func doReplySubmit(request: CodeQuiz.ReplySubmit.Request) {
         guard let reply = request.reply else {
             return
         }
@@ -57,7 +57,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.moduleOutput?.submit(reply: reply)
     }
 
-    func doLanguageSelect(request: NewCodeQuiz.LanguageSelect.Request) {
+    func doLanguageSelect(request: CodeQuiz.LanguageSelect.Request) {
         AnalyticsReporter.reportEvent(
             AnalyticsEvents.Code.languageChosen,
             parameters: [
@@ -77,7 +77,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
         self.provider.updateAutoSuggestedCodeLanguage(language: language, stepID: codeDetails.stepID).cauterize()
     }
 
-    func doFullscreenAction(request: NewCodeQuiz.FullscreenPresentation.Request) {
+    func doFullscreenAction(request: CodeQuiz.FullscreenPresentation.Request) {
         guard let language = self.language,
               let codeDetails = self.codeDetails else {
             return
@@ -166,7 +166,7 @@ final class NewCodeQuizInteractor: NewCodeQuizInteractorProtocol {
     }
 }
 
-extension NewCodeQuizInteractor: QuizInputProtocol {
+extension CodeQuizInteractor: QuizInputProtocol {
     func update(reply: Reply?) {
         defer {
             self.outputCurrentReply()

@@ -18,7 +18,7 @@ extension CodeTextViewLayoutManager {
 final class CodeTextViewLayoutManager: NSLayoutManager {
     var appearance: Appearance
 
-    private var lineNuberTextAttributes: [NSAttributedString.Key: Any] {
+    private var lineNumberTextAttributes: [NSAttributedString.Key: Any] {
         [
             .font: self.appearance.lineNumberFont,
             .foregroundColor: self.appearance.lineNumberTextColor
@@ -91,7 +91,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
 
                 paragraphNumber = self.getParagraph(for: characterRange)
 
-                let attributes = self.lineNuberTextAttributesForParagraphRange(paragraphRange)
+                let attributes = self.lineNumberTextAttributesForParagraphRange(paragraphRange)
                 let lineNumber = "\(paragraphNumber + 1)"
                 let lineNumberSize = lineNumber.size(withAttributes: attributes)
 
@@ -112,7 +112,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
         //  fragments to draw.
         if textStorage.string.isEmpty || textStorage.string.hasSuffix("\n") {
             let lineNumber = "\(paragraphNumber + 2)"
-            let lineNumberSize = lineNumber.size(withAttributes: self.lineNuberTextAttributes)
+            let lineNumberSize = lineNumber.size(withAttributes: self.lineNumberTextAttributes)
 
             gutterRect = gutterRect.offsetBy(dx: 0.0, dy: gutterRect.height)
             let lineNumberRect = gutterRect.offsetBy(
@@ -120,7 +120,7 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
                 dy: 0
             )
 
-            lineNumber.draw(in: lineNumberRect, withAttributes: self.lineNuberTextAttributes)
+            lineNumber.draw(in: lineNumberRect, withAttributes: self.lineNumberTextAttributes)
         }
     }
 
@@ -182,13 +182,10 @@ final class CodeTextViewLayoutManager: NSLayoutManager {
         }
     }
 
-    private func lineNuberTextAttributesForParagraphRange(_ paragraphRange: NSRange) -> [NSAttributedString.Key: Any] {
+    private func lineNumberTextAttributesForParagraphRange(_ paragraphRange: NSRange) -> [NSAttributedString.Key: Any] {
         self.shouldHighlightParagraphRange(paragraphRange)
-            ? [
-                .font: self.appearance.lineNumberFont,
-                .foregroundColor: self.appearance.currentLineNumberTextColor
-            ]
-            : self.lineNuberTextAttributes
+            ? [.font: self.appearance.lineNumberFont, .foregroundColor: self.appearance.currentLineNumberTextColor]
+            : self.lineNumberTextAttributes
     }
 
     private func shouldHighlightParagraphRange(_ paragraphRange: NSRange) -> Bool {

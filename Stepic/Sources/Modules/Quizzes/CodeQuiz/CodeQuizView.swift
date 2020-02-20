@@ -1,15 +1,14 @@
 import SnapKit
 import UIKit
 
-protocol NewCodeQuizViewDelegate: AnyObject {
-    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage)
-    func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String)
-    func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView)
-    // TODO: Remove this after CodePlaygroundManager code suggestion presentation refactoring.
-    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController?
+protocol CodeQuizViewDelegate: AnyObject {
+    func codeQuizView(_ view: CodeQuizView, didSelectLanguage language: CodeLanguage)
+    func codeQuizView(_ view: CodeQuizView, didUpdateCode code: String)
+    func codeQuizViewDidRequestFullscreen(_ view: CodeQuizView)
+    func codeQuizViewDidRequestPresentationController(_ view: CodeQuizView) -> UIViewController?
 }
 
-extension NewCodeQuizView {
+extension CodeQuizView {
     struct Appearance {
         let titleColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
@@ -20,9 +19,9 @@ extension NewCodeQuizView {
     }
 }
 
-final class NewCodeQuizView: UIView {
+final class CodeQuizView: UIView {
     let appearance: Appearance
-    weak var delegate: NewCodeQuizViewDelegate?
+    weak var delegate: CodeQuizViewDelegate?
 
     // Only visible for sql quiz.
     private lazy var titleLabel: UILabel = {
@@ -59,7 +58,7 @@ final class NewCodeQuizView: UIView {
                 return
             }
 
-            strongSelf.delegate?.newCodeQuizViewDidRequestFullscreen(strongSelf)
+            strongSelf.delegate?.codeQuizViewDidRequestFullscreen(strongSelf)
         }
         return toolbarView
     }()
@@ -116,7 +115,7 @@ final class NewCodeQuizView: UIView {
     }
 
     // TODO: Refactor rendering and state management.
-    func configure(viewModel: NewCodeQuizViewModel) {
+    func configure(viewModel: CodeQuizViewModel) {
         switch viewModel.finalState {
         case .default, .wrong:
             self.setCodeEditorReady(true)
@@ -177,7 +176,7 @@ final class NewCodeQuizView: UIView {
     }
 }
 
-extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
+extension CodeQuizView: ProgrammaticallyInitializableViewProtocol {
     func addSubviews() {
         self.titleLabelContainerView.addSubview(self.titleLabel)
         self.addSubview(self.stackView)
@@ -204,30 +203,30 @@ extension NewCodeQuizView: ProgrammaticallyInitializableViewProtocol {
     }
 }
 
-extension NewCodeQuizView: CodeLanguagePickerViewDelegate {
+extension CodeQuizView: CodeLanguagePickerViewDelegate {
     func codeLanguagePickerView(_ view: CodeLanguagePickerView, didSelectLanguage language: String) {
         if let codeLanguage = CodeLanguage(rawValue: language) {
-            self.delegate?.newCodeQuizView(self, didSelectLanguage: codeLanguage)
+            self.delegate?.codeQuizView(self, didSelectLanguage: codeLanguage)
         }
 
         self.toolbarView.collapseLanguagePickerButton()
     }
 }
 
-extension NewCodeQuizView: CodeEditorViewDelegate {
+extension CodeQuizView: CodeEditorViewDelegate {
     func codeEditorViewDidChange(_ codeEditorView: CodeEditorView) {
-        self.delegate?.newCodeQuizView(self, didUpdateCode: codeEditorView.code ?? "")
+        self.delegate?.codeQuizView(self, didUpdateCode: codeEditorView.code ?? "")
     }
 
     func codeEditorViewDidRequestSuggestionPresentationController(
         _ codeEditorView: CodeEditorView
     ) -> UIViewController? {
-        self.delegate?.newCodeQuizViewDidRequestPresentationController(self)
+        self.delegate?.codeQuizViewDidRequestPresentationController(self)
     }
 
     func codeEditorView(_ codeEditorView: CodeEditorView, beginEditing editing: Bool) {
         if self.toolbarView.isEnabled {
-            self.delegate?.newCodeQuizViewDidRequestFullscreen(self)
+            self.delegate?.codeQuizViewDidRequestFullscreen(self)
         }
     }
 }

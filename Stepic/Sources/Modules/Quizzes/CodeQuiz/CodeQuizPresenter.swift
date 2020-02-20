@@ -1,17 +1,17 @@
 import UIKit
 
-protocol NewCodeQuizPresenterProtocol {
-    func presentReply(response: NewCodeQuiz.ReplyLoad.Response)
-    func presentFullscreen(response: NewCodeQuiz.FullscreenPresentation.Response)
+protocol CodeQuizPresenterProtocol {
+    func presentReply(response: CodeQuiz.ReplyLoad.Response)
+    func presentFullscreen(response: CodeQuiz.FullscreenPresentation.Response)
 }
 
-final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
-    weak var viewController: NewCodeQuizViewControllerProtocol?
+final class CodeQuizPresenter: CodeQuizPresenterProtocol {
+    weak var viewController: CodeQuizViewControllerProtocol?
 
     private let codeEditorThemeService: CodeEditorThemeServiceProtocol = CodeEditorThemeService()
 
-    func presentReply(response: NewCodeQuiz.ReplyLoad.Response) {
-        let state: NewCodeQuizViewModel.State = {
+    func presentReply(response: CodeQuiz.ReplyLoad.Response) {
+        let state: CodeQuizViewModel.State = {
             if response.languageName != response.language?.rawValue {
                 return .unsupportedLanguage
             }
@@ -63,7 +63,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
             return nil
         }()
 
-        let viewModel = NewCodeQuizViewModel(
+        let viewModel = CodeQuizViewModel(
             title: title,
             code: response.code,
             codeTemplate: codeTemplate,
@@ -78,7 +78,7 @@ final class NewCodeQuizPresenter: NewCodeQuizPresenterProtocol {
         self.viewController?.displayReply(viewModel: .init(data: viewModel))
     }
 
-    func presentFullscreen(response: NewCodeQuiz.FullscreenPresentation.Response) {
+    func presentFullscreen(response: CodeQuiz.FullscreenPresentation.Response) {
         self.viewController?.displayFullscreen(
             viewModel: .init(
                 language: response.language,

@@ -1,16 +1,16 @@
 import UIKit
 
-protocol NewCodeQuizViewControllerProtocol: AnyObject {
-    func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel)
-    func displayFullscreen(viewModel: NewCodeQuiz.FullscreenPresentation.ViewModel)
+protocol CodeQuizViewControllerProtocol: AnyObject {
+    func displayReply(viewModel: CodeQuiz.ReplyLoad.ViewModel)
+    func displayFullscreen(viewModel: CodeQuiz.FullscreenPresentation.ViewModel)
 }
 
-final class NewCodeQuizViewController: UIViewController {
-    private let interactor: NewCodeQuizInteractorProtocol
+final class CodeQuizViewController: UIViewController {
+    private let interactor: CodeQuizInteractorProtocol
 
-    lazy var newCodeQuizView = self.view as? NewCodeQuizView
+    lazy var newCodeQuizView = self.view as? CodeQuizView
 
-    init(interactor: NewCodeQuizInteractorProtocol) {
+    init(interactor: CodeQuizInteractorProtocol) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
     }
@@ -21,18 +21,18 @@ final class NewCodeQuizViewController: UIViewController {
     }
 
     override func loadView() {
-        let view = NewCodeQuizView(frame: UIScreen.main.bounds)
+        let view = CodeQuizView(frame: UIScreen.main.bounds)
         view.delegate = self
         self.view = view
     }
 }
 
-extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
-    func displayReply(viewModel: NewCodeQuiz.ReplyLoad.ViewModel) {
+extension CodeQuizViewController: CodeQuizViewControllerProtocol {
+    func displayReply(viewModel: CodeQuiz.ReplyLoad.ViewModel) {
         self.newCodeQuizView?.configure(viewModel: viewModel.data)
     }
 
-    func displayFullscreen(viewModel: NewCodeQuiz.FullscreenPresentation.ViewModel) {
+    func displayFullscreen(viewModel: CodeQuiz.FullscreenPresentation.ViewModel) {
         let assembly = NewCodeQuizFullscreenAssembly(
             codeDetails: viewModel.codeDetails,
             language: viewModel.language,
@@ -46,23 +46,23 @@ extension NewCodeQuizViewController: NewCodeQuizViewControllerProtocol {
     }
 }
 
-extension NewCodeQuizViewController: NewCodeQuizViewDelegate {
-    func newCodeQuizView(_ view: NewCodeQuizView, didSelectLanguage language: CodeLanguage) {
+extension CodeQuizViewController: CodeQuizViewDelegate {
+    func codeQuizView(_ view: CodeQuizView, didSelectLanguage language: CodeLanguage) {
         self.interactor.doLanguageSelect(request: .init(language: language))
     }
 
-    func newCodeQuizView(_ view: NewCodeQuizView, didUpdateCode code: String) {
+    func codeQuizView(_ view: CodeQuizView, didUpdateCode code: String) {
         self.interactor.doReplyUpdate(request: .init(code: code))
     }
 
-    func newCodeQuizViewDidRequestFullscreen(_ view: NewCodeQuizView) {
+    func codeQuizViewDidRequestFullscreen(_ view: CodeQuizView) {
         self.interactor.doFullscreenAction(request: .init())
     }
 
-    func newCodeQuizViewDidRequestPresentationController(_ view: NewCodeQuizView) -> UIViewController? { self }
+    func codeQuizViewDidRequestPresentationController(_ view: CodeQuizView) -> UIViewController? { self }
 }
 
-extension NewCodeQuizViewController: NewCodeQuizFullscreenOutputProtocol {
+extension CodeQuizViewController: NewCodeQuizFullscreenOutputProtocol {
     func update(code: String) {
         self.interactor.doReplyUpdate(request: .init(code: code))
         self.interactor.doReplyLoad(request: .init())
