@@ -51,6 +51,10 @@ final class CodeEditorView: UIView {
         codeTextView.smartQuotesType = .no
         codeTextView.smartInsertDeleteType = .no
 
+        if #available(iOS 13.0, *) {
+            codeTextView.automaticallyAdjustsScrollIndicatorInsets = false
+        }
+
         return codeTextView
     }()
 
@@ -261,7 +265,7 @@ extension CodeEditorView: ProgrammaticallyInitializableViewProtocol {
 
         self.languageNameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.languageNameLabel.snp.makeConstraints { make in
-            self.languageNameLabelTopConstraint = make.top.equalToSuperview().constraint
+            self.languageNameLabelTopConstraint = make.top.equalTo(self.safeAreaLayoutGuide).constraint
             make.trailing.equalToSuperview().offset(-self.appearance.languageNameLabelLayoutInsets.right)
         }
     }
