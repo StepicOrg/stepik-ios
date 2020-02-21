@@ -19,10 +19,21 @@ final class CodeQuizFullscreenRunCodeViewController: UIViewController {
 
     override func loadView() {
         let view = CodeQuizFullscreenRunCodeView(frame: UIScreen.main.bounds)
+        view.delegate = self
         self.view = view
     }
 }
 
 extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewControllerProtocol {
     func displaySomeActionResult(viewModel: CodeQuizFullscreenRunCode.SomeAction.ViewModel) {}
+}
+
+extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewDelegate {
+    func codeQuizFullscreenRunCodeViewDidSelectSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any) {
+        print(#function)
+    }
+
+    func codeQuizFullscreenRunCodeViewDidSelectRunCode(_ view: CodeQuizFullscreenRunCodeView) {
+        print(#function)
+    }
 }
