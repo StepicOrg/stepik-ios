@@ -180,6 +180,7 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         self.testInput = viewModel.testInput ?? ""
         self.testOutputLabel.text = viewModel.testOutput
 
+        self.testInputCardView.isHidden = !viewModel.shouldShowTestInput
         self.testOutputCardView.isHidden = !viewModel.shouldShowTestOutput
         self.samplesButton.isEnabled = viewModel.isSamplesButtonEnabled
         self.isRunCodeButtonEnabled = viewModel.isRunCodeButtonEnabled

@@ -32,7 +32,7 @@ final class CodeQuizFullscreenAssembly: Assembly {
         )
 
         let isRunCodeAvailable = self.codeDetails.stepOptions.isRunUserCodeAllowed
-            && !self.codeDetails.stepOptions.samples.isEmpty
+            && (!self.codeDetails.stepOptions.samples.isEmpty || self.language == .sql)
         let availableTabs: [CodeQuizFullscreen.Tab] = isRunCodeAvailable
             ? [.instruction, .code, .run]
             : [.instruction, .code]

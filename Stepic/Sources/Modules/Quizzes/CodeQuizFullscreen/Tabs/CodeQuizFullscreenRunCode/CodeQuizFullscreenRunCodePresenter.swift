@@ -74,13 +74,15 @@ final class CodeQuizFullscreenRunCodePresenter: CodeQuizFullscreenRunCodePresent
         let isSamplesButtonEnabled = userCodeRun.status != .evaluation && !samples.isEmpty
 
         let isCodeEmpty = userCodeRun.code.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-        let isInputDataFilled = !isCodeEmpty && !(userCodeRun.stdin?.isEmpty ?? true)
+        let isTestInputFilled = userCodeRun.language == .sql ? true : !(userCodeRun.stdin?.isEmpty ?? true)
+        let isInputDataFilled = !isCodeEmpty && isTestInputFilled
         let isRunCodeButtonEnabled = userCodeRun.status != .evaluation && isInputDataFilled
 
         return CodeQuizFullscreenRunCodeViewModel(
             testInput: userCodeRun.stdin,
             testOutput: testOutput,
             userCodeRunStatus: userCodeRun.status,
+            shouldShowTestInput: userCodeRun.language != .sql,
             shouldShowTestOutput: shouldShowTestOutput,
             isSamplesButtonEnabled: isSamplesButtonEnabled,
             isRunCodeButtonEnabled: isRunCodeButtonEnabled
