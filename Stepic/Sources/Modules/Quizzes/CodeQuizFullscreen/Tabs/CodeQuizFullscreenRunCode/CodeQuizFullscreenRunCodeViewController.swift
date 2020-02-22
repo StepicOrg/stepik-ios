@@ -1,7 +1,10 @@
 import UIKit
 
 protocol CodeQuizFullscreenRunCodeViewControllerProtocol: AnyObject {
-    func displaySampleInput(viewModel: CodeQuizFullscreenRunCode.UpdateSampleInput.ViewModel)
+    func displayContentUpdate(viewModel: CodeQuizFullscreenRunCode.ContentUpdate.ViewModel)
+    func displayTestInputSetDefault(viewModel: CodeQuizFullscreenRunCode.TestInputSetDefault.ViewModel)
+    func displayRunCodeResult(viewModel: CodeQuizFullscreenRunCode.RunCode.ViewModel)
+    func displayAlert(viewModel: CodeQuizFullscreenRunCode.AlertPresentation.ViewModel)
 }
 
 final class CodeQuizFullscreenRunCodeViewController: UIViewController {
@@ -29,19 +32,37 @@ final class CodeQuizFullscreenRunCodeViewController: UIViewController {
 // MARK: - CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewControllerProtocol -
 
 extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewControllerProtocol {
-    func displaySampleInput(viewModel: CodeQuizFullscreenRunCode.UpdateSampleInput.ViewModel) {
+    func displayContentUpdate(viewModel: CodeQuizFullscreenRunCode.ContentUpdate.ViewModel) {
+        self.runCodeView?.configure(viewModel: viewModel.viewModel)
+    }
+
+    func displayTestInputSetDefault(viewModel: CodeQuizFullscreenRunCode.TestInputSetDefault.ViewModel) {
         self.runCodeView?.testInput = viewModel.input
+    }
+
+    func displayRunCodeResult(viewModel: CodeQuizFullscreenRunCode.RunCode.ViewModel) {
+        self.runCodeView?.configure(viewModel: viewModel.viewModel)
+    }
+
+    func displayAlert(viewModel: CodeQuizFullscreenRunCode.AlertPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
 // MARK: - CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewDelegate-
 
 extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewDelegate {
-    func codeQuizFullscreenRunCodeViewDidSelectSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any) {
+    func codeQuizFullscreenRunCodeViewDidClickRunCode(_ view: CodeQuizFullscreenRunCodeView) {
+        self.interactor.doRunCode(request: .init())
+    }
+
+    func codeQuizFullscreenRunCodeViewDidClickSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any) {
         print(#function)
     }
 
-    func codeQuizFullscreenRunCodeViewDidSelectRunCode(_ view: CodeQuizFullscreenRunCodeView) {
-        print(#function)
+    func codeQuizFullscreenRunCodeView(_ view: CodeQuizFullscreenRunCodeView, testInputDidChange input: String) {
+        self.interactor.doTestInputTextUpdate(request: .init(input: input))
     }
 }

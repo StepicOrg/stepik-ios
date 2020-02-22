@@ -2,8 +2,9 @@ import SnapKit
 import UIKit
 
 protocol CodeQuizFullscreenRunCodeViewDelegate: AnyObject {
-    func codeQuizFullscreenRunCodeViewDidSelectSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any)
-    func codeQuizFullscreenRunCodeViewDidSelectRunCode(_ view: CodeQuizFullscreenRunCodeView)
+    func codeQuizFullscreenRunCodeViewDidClickRunCode(_ view: CodeQuizFullscreenRunCodeView)
+    func codeQuizFullscreenRunCodeViewDidClickSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any)
+    func codeQuizFullscreenRunCodeView(_ view: CodeQuizFullscreenRunCodeView, testInputDidChange input: String)
 }
 
 extension CodeQuizFullscreenRunCodeView {
@@ -15,11 +16,13 @@ extension CodeQuizFullscreenRunCodeView {
         let samplesButtonInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 16)
 
         let runCodeButtonBackgroundColor = UIColor.stepikGreen
-        let runCodeButtonHeight: CGFloat = 55
+        let runCodeButtonHeight: CGFloat = 44
         let runCodeButtonTextColor = UIColor.white
-        let runCodeButtonCornerRadius: CGFloat = 12
-        let runCodeButtonFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        let runCodeButtonInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        let runCodeButtonCornerRadius: CGFloat = 6
+        let runCodeButtonFont = UIFont.systemFont(ofSize: 16)
+
+        let bottomControlsStackViewSpacing: CGFloat = 16
+        let bottomControlsStackViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
         let testInputOutputPrimaryTextColor = UIColor.mainDark
         let testInputPlaceholderTextColor = UIColor.mainDark.withAlphaComponent(0.4)
@@ -38,7 +41,7 @@ extension CodeQuizFullscreenRunCodeView {
         let testInputOutputTitleImageInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 
         let cardBackgroundColor = UIColor.white
-        let cardCornerRadius: CGFloat = 12
+        let cardCornerRadius: CGFloat = 6
         let backgroundColor = UIColor(hex: 0xF1F2F6)
 
         let testInputTitle = NSLocalizedString("CodeQuizFullscreenTabRunInputDataTitle", comment: "")
@@ -63,6 +66,15 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         return button
     }()
 
+    private lazy var evaluationView: QuizFeedbackView = {
+        let view = QuizFeedbackView()
+        view.update(
+            state: .evaluation,
+            title: NSLocalizedString("CodeQuizFullscreenTabRunEvaluationTitle", comment: "")
+        )
+        return view
+    }()
+
     private lazy var runCodeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(self.appearance.runCodeButtonTextColor, for: .normal)
@@ -75,17 +87,18 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         return button
     }()
 
-    private lazy var runCodeActivityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(style: .white)
-        activityIndicator.hidesWhenStopped = true
-        return activityIndicator
+    private lazy var bottomControlsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [self.evaluationView, self.runCodeButton])
+        stackView.axis = .vertical
+        stackView.spacing = self.appearance.bottomControlsStackViewSpacing
+        return stackView
     }()
 
     private lazy var testInputTitleLabel = self.makeTitleLabel(text: self.appearance.testInputTitle)
     private lazy var testOutputTitleLabel = self.makeTitleLabel(text: self.appearance.testOutputTitle)
 
     private lazy var testInputImageView = self.makeTitleImageView(image: UIImage(named: "keyboard-chevron"))
-    private lazy var testOutputImageView = self.makeTitleImageView(image: TestOutputState.none.image)
+    private lazy var testOutputImageView = self.makeTitleImageView(image: nil)
 
     private lazy var testInputTextView: TableInputTextView = {
         let textView = TableInputTextView()
@@ -127,7 +140,16 @@ final class CodeQuizFullscreenRunCodeView: UIView {
             self.testInputTextView.text
         }
         set {
-            self.testInputTextView.text = newValue
+            if self.testInputTextView.text != newValue {
+                self.testInputTextView.text = newValue
+            }
+        }
+    }
+
+    var isRunCodeButtonEnabled = true {
+        didSet {
+            self.runCodeButton.isEnabled = self.isRunCodeButtonEnabled
+            self.runCodeButton.alpha = self.isRunCodeButtonEnabled ? 1.0 : 0.5
         }
     }
 
@@ -146,6 +168,22 @@ final class CodeQuizFullscreenRunCodeView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Public API
+
+    func configure(viewModel: CodeQuizFullscreenRunCodeViewModel) {
+        self.testInput = viewModel.testInput ?? ""
+        self.testOutputLabel.text = viewModel.testOutput
+
+        self.testOutputCardView.isHidden = !viewModel.shouldShowTestOutput
+        self.samplesButton.isEnabled = viewModel.isSamplesButtonEnabled
+        self.isRunCodeButtonEnabled = viewModel.isRunCodeButtonEnabled
+
+        self.updateTestOutputImage(userCodeRunStatus: viewModel.userCodeRunStatus)
+
+        self.testInputTextView.isEditable = viewModel.userCodeRunStatus == .evaluation ? false : true
+        self.evaluationView.isHidden = viewModel.userCodeRunStatus == .evaluation ? false : true
     }
 
     // MARK: Private API
@@ -173,45 +211,30 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         return view
     }
 
+    private func updateTestOutputImage(userCodeRunStatus: UserCodeRun.Status?) {
+        let (image, tintColor): (UIImage?, UIColor) = {
+            switch userCodeRunStatus {
+            case .success:
+                return (UIImage(named: "quiz-feedback-correct"), UIColor(hex: 0x66CC66))
+            case .failure:
+                return (UIImage(named: "quiz-feedback-wrong"), UIColor(hex: 0xFF7965))
+            default:
+                return (UIImage(named: "course-info-syllabus-download-all"), UIColor.mainDark)
+            }
+        }()
+
+        self.testOutputImageView.image = image
+        self.testOutputImageView.tintColor = tintColor
+    }
+
     @objc
     private func samplesClicked() {
-        self.delegate?.codeQuizFullscreenRunCodeViewDidSelectSamples(self, sender: self.samplesButton)
+        self.delegate?.codeQuizFullscreenRunCodeViewDidClickSamples(self, sender: self.samplesButton)
     }
 
     @objc
     private func runCodeClicked() {
-        self.runCodeActivityIndicator.startAnimating()
-        self.delegate?.codeQuizFullscreenRunCodeViewDidSelectRunCode(self)
-    }
-
-    // MARK: Inner Types
-
-    private enum TestOutputState: String {
-        case correct
-        case failure
-        case none
-
-        var tintColor: UIColor {
-            switch self {
-            case .correct:
-                return UIColor(hex: 0x66CC66)
-            case .failure:
-                return UIColor(hex: 0xFF7965)
-            default:
-                return .mainDark
-            }
-        }
-
-        var image: UIImage? {
-            switch self {
-            case .correct:
-                return UIImage(named: "quiz-feedback-correct")
-            case .failure:
-                return UIImage(named: "quiz-feedback-wrong")
-            default:
-                return UIImage(named: "course-info-syllabus-download-all")
-            }
-        }
+        self.delegate?.codeQuizFullscreenRunCodeViewDidClickRunCode(self)
     }
 }
 
@@ -219,13 +242,13 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
     func setupView() {
         self.backgroundColor = self.appearance.backgroundColor
 
-        self.testInputTextView.text = "77\n77\n1010"
-        self.testOutputLabel.text = "77\n77\n1010\n1010\n77\n77\n1010\n1010"
+        self.testOutputCardView.isHidden = true
+        self.evaluationView.isHidden = true
     }
 
     func addSubviews() {
         self.addSubview(self.testInputOutputScrollableStackView)
-        self.addSubview(self.runCodeButton)
+        self.addSubview(self.bottomControlsStackView)
 
         self.testInputOutputScrollableStackView.addArrangedView(self.testInputCardView)
         self.testInputOutputScrollableStackView.addArrangedView(self.testOutputCardView)
@@ -238,8 +261,6 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
         self.testOutputCardView.addSubview(self.testOutputImageView)
         self.testOutputCardView.addSubview(self.testOutputTitleLabel)
         self.testOutputCardView.addSubview(self.testOutputLabel)
-
-        self.runCodeButton.addSubview(self.runCodeActivityIndicator)
     }
 
     func makeConstraints() {
@@ -305,18 +326,19 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
             make.leading.bottom.trailing.equalToSuperview().inset(self.appearance.testInputOutputTextViewInsets)
         }
 
-        self.runCodeButton.translatesAutoresizingMaskIntoConstraints = false
-        self.runCodeButton.snp.makeConstraints { make in
+        self.bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.bottomControlsStackView.snp.makeConstraints { make in
             make.top
                 .equalTo(self.testInputOutputScrollableStackView.snp.bottom)
-                .offset(self.appearance.runCodeButtonInsets.top)
-            make.leading.bottom.trailing.equalTo(self.safeAreaLayoutGuide).inset(self.appearance.runCodeButtonInsets)
-            make.height.equalTo(self.appearance.runCodeButtonHeight)
+                .offset(self.appearance.bottomControlsStackViewInsets.top)
+            make.leading.bottom.trailing
+                .equalTo(self.safeAreaLayoutGuide)
+                .inset(self.appearance.bottomControlsStackViewInsets)
         }
 
-        self.runCodeActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.runCodeActivityIndicator.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        self.runCodeButton.translatesAutoresizingMaskIntoConstraints = false
+        self.runCodeButton.snp.makeConstraints { make in
+            make.height.equalTo(self.appearance.runCodeButtonHeight)
         }
     }
 }
@@ -325,10 +347,8 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
 
 extension CodeQuizFullscreenRunCodeView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        self.testInputOutputScrollableStackView.invalidateIntrinsicContentSize()
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        self.testInputOutputScrollableStackView.invalidateIntrinsicContentSize()
+        if textView === self.testInputTextView {
+            self.delegate?.codeQuizFullscreenRunCodeView(self, testInputDidChange: textView.text)
+        }
     }
 }

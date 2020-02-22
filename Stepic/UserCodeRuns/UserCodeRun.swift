@@ -19,7 +19,14 @@ final class UserCodeRun: JSONSerializable {
     var updateDateString: String?
 
     var language: CodeLanguage? { CodeLanguage(rawValue: self.languageString) }
-    var status: Status? { Status(rawValue: self.statusString ?? "") }
+    var status: Status? {
+        get {
+            Status(rawValue: self.statusString ?? "")
+        }
+        set {
+            self.statusString = newValue?.rawValue
+        }
+    }
 
     var json: JSON {
         [
