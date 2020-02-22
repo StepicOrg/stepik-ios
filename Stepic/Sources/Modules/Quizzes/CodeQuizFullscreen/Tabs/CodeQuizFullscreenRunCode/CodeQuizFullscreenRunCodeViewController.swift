@@ -1,11 +1,13 @@
 import UIKit
 
 protocol CodeQuizFullscreenRunCodeViewControllerProtocol: AnyObject {
-    func displaySomeActionResult(viewModel: CodeQuizFullscreenRunCode.SomeAction.ViewModel)
+    func displaySampleInput(viewModel: CodeQuizFullscreenRunCode.UpdateSampleInput.ViewModel)
 }
 
 final class CodeQuizFullscreenRunCodeViewController: UIViewController {
     private let interactor: CodeQuizFullscreenRunCodeInteractorProtocol
+
+    lazy var runCodeView = self.view as? CodeQuizFullscreenRunCodeView
 
     init(interactor: CodeQuizFullscreenRunCodeInteractorProtocol) {
         self.interactor = interactor
@@ -24,9 +26,15 @@ final class CodeQuizFullscreenRunCodeViewController: UIViewController {
     }
 }
 
+// MARK: - CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewControllerProtocol -
+
 extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewControllerProtocol {
-    func displaySomeActionResult(viewModel: CodeQuizFullscreenRunCode.SomeAction.ViewModel) {}
+    func displaySampleInput(viewModel: CodeQuizFullscreenRunCode.UpdateSampleInput.ViewModel) {
+        self.runCodeView?.testInput = viewModel.input
+    }
 }
+
+// MARK: - CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewDelegate-
 
 extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeViewDelegate {
     func codeQuizFullscreenRunCodeViewDidSelectSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any) {

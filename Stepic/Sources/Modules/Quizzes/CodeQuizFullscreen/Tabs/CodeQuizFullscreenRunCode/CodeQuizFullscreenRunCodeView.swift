@@ -122,6 +122,15 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         return stackView
     }()
 
+    var testInput: String {
+        get {
+            self.testInputTextView.text
+        }
+        set {
+            self.testInputTextView.text = newValue
+        }
+    }
+
     init(
         frame: CGRect = .zero,
         appearance: Appearance = Appearance()

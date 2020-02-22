@@ -2,7 +2,6 @@ import Foundation
 import PromiseKit
 
 protocol CodeQuizFullscreenRunCodeInteractorProtocol {
-    func doSomeAction(request: CodeQuizFullscreenRunCode.SomeAction.Request)
 }
 
 final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInteractorProtocol {
@@ -16,6 +15,10 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
 
     private var currentCode: String = ""
     private var currentSamples: [CodeSamplePlainObject] = []
+    private var currentTestInput: String?
+
+    private var isSetDefaultSample: Bool = false
+
     init(
         stepID: Step.IdType,
         language: CodeLanguage,
@@ -28,10 +31,18 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
         self.provider = provider
     }
 
-    func doSomeAction(request: CodeQuizFullscreenRunCode.SomeAction.Request) {}
+    // MARK: Private API
 
-    enum Error: Swift.Error {
-        case something
+    private func setDefaultSampleInputIfNeeded() {
+        guard !self.isSetDefaultSample, let sample = self.currentSamples.first else {
+            return
+        }
+
+        self.isSetDefaultSample = true
+        self.currentTestInput = sample.input
+
+        self.presenter.presentSampleInput(response: .init(input: sample.input))
+    }
 }
 
 // MARK: - CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInputProtocol -

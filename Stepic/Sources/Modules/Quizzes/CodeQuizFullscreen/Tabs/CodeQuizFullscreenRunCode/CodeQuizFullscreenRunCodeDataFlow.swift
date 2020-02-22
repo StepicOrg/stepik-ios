@@ -1,11 +1,14 @@
 import Foundation
 
 enum CodeQuizFullscreenRunCode {
-    enum SomeAction {
-        struct Request {}
+    /// Sets default sample (stdin)
+    enum UpdateSampleInput {
+        struct Response {
+            let input: String
+        }
 
-        struct Response {}
-
-        struct ViewModel {}
+        struct ViewModel {
+            let input: String
+        }
     }
 }
