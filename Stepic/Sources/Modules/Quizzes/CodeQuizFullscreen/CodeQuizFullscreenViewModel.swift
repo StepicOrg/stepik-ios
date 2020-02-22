@@ -1,6 +1,7 @@
 import Foundation
 
 struct CodeQuizFullscreenViewModel {
+    let stepID: Step.IdType
     let content: String
     let samples: [CodeSamplePlainObject]
     let limit: CodeLimitPlainObject

@@ -8,13 +8,22 @@ protocol CodeQuizFullscreenRunCodeInteractorProtocol {
 final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInteractorProtocol {
     weak var moduleOutput: CodeQuizFullscreenRunCodeOutputProtocol?
 
+    private let stepID: Step.IdType
+    private let language: CodeLanguage
+
     private let presenter: CodeQuizFullscreenRunCodePresenterProtocol
     private let provider: CodeQuizFullscreenRunCodeProviderProtocol
 
+    private var currentCode: String = ""
+    private var currentSamples: [CodeSamplePlainObject] = []
     init(
+        stepID: Step.IdType,
+        language: CodeLanguage,
         presenter: CodeQuizFullscreenRunCodePresenterProtocol,
         provider: CodeQuizFullscreenRunCodeProviderProtocol
     ) {
+        self.stepID = stepID
+        self.language = language
         self.presenter = presenter
         self.provider = provider
     }
@@ -23,7 +32,17 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
 
     enum Error: Swift.Error {
         case something
-    }
 }
 
-extension CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInputProtocol {}
+// MARK: - CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInputProtocol -
+
+extension CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInputProtocol {
+    func update(code: String) {
+        self.currentCode = code
+    }
+
+    func update(samples: [CodeSamplePlainObject]) {
+        self.currentSamples = samples
+        self.setDefaultSampleInputIfNeeded()
+    }
+}

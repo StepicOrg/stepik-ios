@@ -27,6 +27,7 @@ final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
             }()
 
             let viewModel = CodeQuizFullscreenViewModel(
+                stepID: response.codeDetails.stepID,
                 content: content,
                 samples: stepOptions.samples.map { self.processCodeSample($0) },
                 limit: codeLimit,

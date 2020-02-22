@@ -71,8 +71,9 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
     private let initialTabIndex: Int
 
     private var tabViewControllers: [UIViewController?] = []
-    // TODO: Refactor
+    // TODO: Refactor to module input
     private var codeQuizFullscreenCodeViewController: CodeQuizFullscreenCodeViewController?
+    private var runCodeModuleInput: CodeQuizFullscreenRunCodeInputProtocol?
 
     private var viewModel: CodeQuizFullscreenViewModel?
 
@@ -159,7 +160,19 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
                 )
                 return self.codeQuizFullscreenCodeViewController
             case .run:
-                return nil
+                let assembly = CodeQuizFullscreenRunCodeAssembly(
+                    stepID: viewModel.stepID,
+                    language: viewModel.language,
+                    output: nil
+                )
+
+                let viewController = assembly.makeModule()
+
+                self.runCodeModuleInput = assembly.moduleInput
+                self.runCodeModuleInput?.update(code: viewModel.code ?? "")
+                self.runCodeModuleInput?.update(samples: viewModel.samples)
+
+                return viewController
             }
         }()
 
@@ -227,11 +240,16 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
 extension CodeQuizFullscreenViewController: CodeQuizFullscreenViewControllerProtocol {
     func displayContent(viewModel: CodeQuizFullscreen.ContentLoad.ViewModel) {
         self.viewModel = viewModel.data
+
+        self.runCodeModuleInput?.update(code: viewModel.data.code ?? "")
+        self.runCodeModuleInput?.update(samples: viewModel.data.samples)
+
         self.reloadData()
     }
 
     func displayCodeReset(viewModel: CodeQuizFullscreen.ResetCode.ViewModel) {
         self.codeQuizFullscreenCodeViewController?.code = viewModel.code
+        self.runCodeModuleInput?.update(code: viewModel.code)
     }
 }
 
@@ -272,6 +290,7 @@ extension CodeQuizFullscreenViewController: CodeQuizFullscreenCodeViewController
         codeDidChange code: String
     ) {
         self.interactor.doReplyUpdate(request: .init(code: code))
+        self.runCodeModuleInput?.update(code: code)
     }
 
     func codeQuizFullscreenCodeViewController(
