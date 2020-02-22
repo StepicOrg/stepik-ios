@@ -31,9 +31,12 @@ final class CodeQuizFullscreenAssembly: Assembly {
             language: self.language
         )
 
-        let availableTabs: [CodeQuizFullscreen.Tab] = self.codeDetails.stepOptions.isRunUserCodeAllowed
+        let isRunCodeAvailable = self.codeDetails.stepOptions.isRunUserCodeAllowed
+            && !self.codeDetails.stepOptions.samples.isEmpty
+        let availableTabs: [CodeQuizFullscreen.Tab] = isRunCodeAvailable
             ? [.instruction, .code, .run]
             : [.instruction, .code]
+
         let viewController = CodeQuizFullscreenViewController(
             interactor: interactor,
             availableTabs: availableTabs,
