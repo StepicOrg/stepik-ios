@@ -30,9 +30,9 @@ extension CodeQuizFullscreenRunCodeView {
         let testInputOutputTitleFont = UIFont.preferredFont(forTextStyle: .headline)
         let testInputOutputTextViewFont = UIFont.preferredFont(forTextStyle: .body)
 
-        let testInputOutputTitleInsets = UIEdgeInsets(top: 16, left: 8, bottom: 0, right: 8)
-        let testInputOutputTextViewInsets = UIEdgeInsets(top: 8, left: 16, bottom: 16, right: 16)
-        let testInputTextViewTextInsets = UIEdgeInsets(top: 8, left: 16, bottom: 16, right: 16)
+        let testInputOutputTitleInsets = UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8)
+        let testInputOutputTextViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        let testInputTextViewTextInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
         let testInputOutputScrollableStackViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
         let testInputOutputScrollableStackViewSpacing: CGFloat = 16
@@ -40,9 +40,9 @@ extension CodeQuizFullscreenRunCodeView {
         let testInputOutputTitleImageSize = CGSize(width: 20, height: 20)
         let testInputOutputTitleImageInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 
-        let cardBackgroundColor = UIColor.white
+        let cardBackgroundColor = UIColor(hex: 0xF6F6F6)
         let cardCornerRadius: CGFloat = 6
-        let backgroundColor = UIColor(hex: 0xF1F2F6)
+        let backgroundColor = UIColor.white
 
         let testInputTitle = NSLocalizedString("CodeQuizFullscreenTabRunInputDataTitle", comment: "")
         let testOutputTitle = NSLocalizedString("CodeQuizFullscreenTabRunOutputDataTitle", comment: "")
@@ -102,6 +102,7 @@ final class CodeQuizFullscreenRunCodeView: UIView {
 
     private lazy var testInputTextView: TableInputTextView = {
         let textView = TableInputTextView()
+        textView.backgroundColor = self.appearance.cardBackgroundColor
         textView.font = self.appearance.testInputOutputTextViewFont
         textView.textColor = self.appearance.testInputOutputPrimaryTextColor
         textView.placeholderColor = self.appearance.testInputPlaceholderTextColor
@@ -124,6 +125,9 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         label.numberOfLines = 0
         return label
     }()
+
+    private lazy var testInputTitleSeparatorView = SeparatorView()
+    private lazy var testOutputTitleContainerView = UIView()
 
     private lazy var testInputCardView = self.makeCardView()
     private lazy var testOutputCardView = self.makeCardView()
@@ -180,7 +184,7 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         self.samplesButton.isEnabled = viewModel.isSamplesButtonEnabled
         self.isRunCodeButtonEnabled = viewModel.isRunCodeButtonEnabled
 
-        self.updateTestOutputImage(userCodeRunStatus: viewModel.userCodeRunStatus)
+        self.updateTestOutputCard(userCodeRunStatus: viewModel.userCodeRunStatus)
 
         self.testInputTextView.isEditable = viewModel.userCodeRunStatus == .evaluation ? false : true
         self.evaluationView.isHidden = viewModel.userCodeRunStatus == .evaluation ? false : true
@@ -211,20 +215,30 @@ final class CodeQuizFullscreenRunCodeView: UIView {
         return view
     }
 
-    private func updateTestOutputImage(userCodeRunStatus: UserCodeRun.Status?) {
-        let (image, tintColor): (UIImage?, UIColor) = {
+    private func updateTestOutputCard(userCodeRunStatus: UserCodeRun.Status?) {
+        let (image, tintColor, backgroundColor): (UIImage?, UIColor, UIColor) = {
             switch userCodeRunStatus {
             case .success:
-                return (UIImage(named: "quiz-feedback-correct"), UIColor(hex: 0x66CC66))
+                return (UIImage(named: "quiz-feedback-correct"), UIColor(hex: 0x66CC66), UIColor(hex: 0xE9F9E9))
             case .failure:
-                return (UIImage(named: "quiz-feedback-wrong"), UIColor(hex: 0xFF7965))
+                return (
+                    UIImage(named: "quiz-mark-wrong"),
+                    UIColor(hex: 0xFF7965),
+                    UIColor(hex: 0xFF7965).withAlphaComponent(0.15)
+                )
             default:
-                return (UIImage(named: "course-info-syllabus-download-all"), UIColor.mainDark)
+                return (
+                    UIImage(named: "course-info-syllabus-download-all"),
+                    UIColor.mainDark,
+                    self.appearance.cardBackgroundColor
+                )
             }
         }()
 
-        self.testOutputImageView.image = image
+        self.testOutputImageView.image = image?.withRenderingMode(.alwaysTemplate)
         self.testOutputImageView.tintColor = tintColor
+        self.testOutputTitleLabel.textColor = tintColor
+        self.testOutputTitleContainerView.backgroundColor = backgroundColor
     }
 
     @objc
@@ -255,12 +269,14 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
 
         self.testInputCardView.addSubview(self.testInputImageView)
         self.testInputCardView.addSubview(self.testInputTitleLabel)
+        self.testInputCardView.addSubview(self.testInputTitleSeparatorView)
         self.testInputCardView.addSubview(self.testInputTextView)
         self.testInputCardView.addSubview(self.samplesButton)
 
-        self.testOutputCardView.addSubview(self.testOutputImageView)
-        self.testOutputCardView.addSubview(self.testOutputTitleLabel)
         self.testOutputCardView.addSubview(self.testOutputLabel)
+        self.testOutputCardView.addSubview(self.testOutputTitleContainerView)
+        self.testOutputTitleContainerView.addSubview(self.testOutputImageView)
+        self.testOutputTitleContainerView.addSubview(self.testOutputTitleLabel)
     }
 
     func makeConstraints() {
@@ -297,10 +313,23 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
                 .offset(-self.appearance.testInputOutputTitleInsets.right)
         }
 
+        self.testInputTitleSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        self.testInputTitleSeparatorView.snp.makeConstraints { make in
+            make.top.equalTo(self.testInputTitleLabel.snp.bottom).offset(self.appearance.testInputOutputTitleInsets.top)
+            make.leading.equalTo(self.testInputImageView.snp.leading)
+            make.trailing.equalTo(self.samplesButton.snp.trailing)
+            make.height.equalTo(self.testInputTitleSeparatorView.appearance.height / UIScreen.main.scale)
+        }
+
         self.testInputTextView.translatesAutoresizingMaskIntoConstraints = false
         self.testInputTextView.snp.makeConstraints { make in
-            make.top.equalTo(self.testInputTitleLabel.snp.bottom)
+            make.top.equalTo(self.testInputTitleSeparatorView.snp.bottom)
             make.leading.bottom.trailing.equalToSuperview()
+        }
+
+        self.testOutputTitleContainerView.translatesAutoresizingMaskIntoConstraints = false
+        self.testOutputTitleContainerView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
         }
 
         self.testOutputImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -312,7 +341,7 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
 
         self.testOutputTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.testOutputTitleLabel.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(self.appearance.testInputOutputTitleInsets)
+            make.top.bottom.trailing.equalToSuperview().inset(self.appearance.testInputOutputTitleInsets)
             make.leading
                 .equalTo(self.testOutputImageView.snp.trailing)
                 .offset(self.appearance.testInputOutputTitleInsets.left)
@@ -321,7 +350,7 @@ extension CodeQuizFullscreenRunCodeView: ProgrammaticallyInitializableViewProtoc
         self.testOutputLabel.translatesAutoresizingMaskIntoConstraints = false
         self.testOutputLabel.snp.makeConstraints { make in
             make.top
-                .equalTo(self.testOutputTitleLabel.snp.bottom)
+                .equalTo(self.testOutputTitleContainerView.snp.bottom)
                 .offset(self.appearance.testInputOutputTextViewInsets.top)
             make.leading.bottom.trailing.equalToSuperview().inset(self.appearance.testInputOutputTextViewInsets)
         }
