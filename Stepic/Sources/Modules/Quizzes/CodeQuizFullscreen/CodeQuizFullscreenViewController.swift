@@ -6,6 +6,7 @@ import UIKit
 protocol CodeQuizFullscreenViewControllerProtocol: AnyObject {
     func displayContent(viewModel: CodeQuizFullscreen.ContentLoad.ViewModel)
     func displayCodeReset(viewModel: CodeQuizFullscreen.ResetCode.ViewModel)
+    func displayRunCodeTooltip(viewModel: CodeQuizFullscreen.RunCodeTooltipAvailabilityCheck.ViewModel)
 }
 
 extension CodeQuizFullscreenViewController {
@@ -23,11 +24,18 @@ extension CodeQuizFullscreenViewController {
             .init(shadowViewAlpha: 0.0)
         }
     }
+
+    enum Animation {
+        static let runCodeTooltipAppearanceDelay: TimeInterval = 1.0
+    }
 }
 
 final class CodeQuizFullscreenViewController: TabmanViewController {
     lazy var codeQuizFullscreenView = self.view as? CodeQuizFullscreenView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
+
+    private lazy var runCodeTooltip = TooltipFactory.runCode
+    private weak var runCodeTooltipAnchorView: UIView?
 
     private lazy var tabBarView: TMBar = {
         let bar = TMBarView<TMHorizontalBarLayout, TMLabelBarButton, TMLineBarIndicator>()
@@ -44,6 +52,10 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
             labelBarButton.selectedFont = Appearance.barButtonTitleFontSelected
             labelBarButton.tintColor = Appearance.barButtonTitleColor
             labelBarButton.selectedTintColor = Appearance.barButtonTitleColor
+
+            if labelBarButton.text == CodeQuizFullscreen.Tab.run.title {
+                self.runCodeTooltipAnchorView = labelBarButton
+            }
         }
 
         let separatorView = UIView()
@@ -162,8 +174,7 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
             case .run:
                 let assembly = CodeQuizFullscreenRunCodeAssembly(
                     stepID: viewModel.stepID,
-                    language: viewModel.language,
-                    output: nil
+                    language: viewModel.language
                 )
 
                 let viewController = assembly.makeModule()
@@ -251,6 +262,18 @@ extension CodeQuizFullscreenViewController: CodeQuizFullscreenViewControllerProt
         self.codeQuizFullscreenCodeViewController?.code = viewModel.code
         self.runCodeModuleInput?.update(code: viewModel.code)
     }
+
+    func displayRunCodeTooltip(viewModel: CodeQuizFullscreen.RunCodeTooltipAvailabilityCheck.ViewModel) {
+        guard let runCodeTooltipAnchorView = self.runCodeTooltipAnchorView else {
+            return
+        }
+
+        if viewModel.shouldShowTooltip {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Animation.runCodeTooltipAppearanceDelay) {
+                self.runCodeTooltip.show(direction: .up, in: self.view, from: runCodeTooltipAnchorView)
+            }
+        }
+    }
 }
 
 // MARK: - CodeQuizFullscreenViewController: PageboyViewControllerDataSource -
@@ -299,6 +322,14 @@ extension CodeQuizFullscreenViewController: CodeQuizFullscreenCodeViewController
     ) {
         self.interactor.doReplySubmit(request: .init())
         self.dismiss(animated: true)
+    }
+
+    func codeQuizFullscreenCodeViewController(
+        _ viewController: CodeQuizFullscreenCodeViewController,
+        didEndEditingCode code: String
+    ) {
+        self.runCodeModuleInput?.update(code: code)
+        self.interactor.doRunCodeTooltipAvailabilityCheck(request: .init())
     }
 }
 

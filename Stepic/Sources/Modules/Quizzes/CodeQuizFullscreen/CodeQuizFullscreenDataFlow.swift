@@ -39,6 +39,19 @@ enum CodeQuizFullscreen {
         }
     }
 
+    /// Check for run code tooltip
+    enum RunCodeTooltipAvailabilityCheck {
+        struct Request {}
+
+        struct Response {
+            let shouldShowTooltip: Bool
+        }
+
+        struct ViewModel {
+            let shouldShowTooltip: Bool
+        }
+    }
+
     enum Tab {
         case instruction
         case code

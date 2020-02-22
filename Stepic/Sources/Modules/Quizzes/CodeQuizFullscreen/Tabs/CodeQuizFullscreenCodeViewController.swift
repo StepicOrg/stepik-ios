@@ -10,6 +10,10 @@ protocol CodeQuizFullscreenCodeViewControllerDelegate: AnyObject {
         _ viewController: CodeQuizFullscreenCodeViewController,
         didSubmitCode code: String
     )
+    func codeQuizFullscreenCodeViewController(
+        _ viewController: CodeQuizFullscreenCodeViewController,
+        didEndEditingCode code: String
+    )
 }
 
 extension CodeQuizFullscreenCodeViewController {
@@ -158,6 +162,8 @@ extension CodeQuizFullscreenCodeViewController: CodeEditorViewDelegate {
     func codeEditorViewDidEndEditing(_ codeEditorView: CodeEditorView) {
         self.isSubmitButtonHidden = false
         self.codeEditorView.shouldHighlightCurrentLine = false
+
+        self.delegate?.codeQuizFullscreenCodeViewController(self, didEndEditingCode: codeEditorView.code ?? "")
     }
 
     func codeEditorViewDidRequestSuggestionPresentationController(

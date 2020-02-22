@@ -1047,7 +1047,6 @@
 		86BB7C09201953AF00063538 /* CongratulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86BB7C06201953AF00063538 /* CongratulationViewController.xib */; };
 		8DE634AD0E06B64B305A3923 /* EditStepInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3750E7500C08250CD7F6FC2B /* EditStepInteractor.swift */; };
 		8DF8D727FFAF37772B6AE2B9 /* WriteCourseReviewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D74D3F78768D42D919852E /* WriteCourseReviewInteractor.swift */; };
-		8F561BE5E0C134554672D5EF /* CodeQuizFullscreenRunCodeOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517CA210E3A47502CAB0D97 /* CodeQuizFullscreenRunCodeOutputProtocol.swift */; };
 		909E021D38F289C1728E0446 /* SubmissionsOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D3D49E7188DAEBBF30F8C1 /* SubmissionsOutputProtocol.swift */; };
 		92E876582D263061F44316EB /* NewFreeAnswerQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7667856CC2C2A2AC43631 /* NewFreeAnswerQuizView.swift */; };
 		95EA87E2E8976E57928066B2 /* DownloadsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE0AD7C5EA50025234E0043 /* DownloadsPresenter.swift */; };
@@ -1551,7 +1550,6 @@
 		230630B59E23EF2D82208F85 /* LessonInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LessonInteractor.swift; sourceTree = "<group>"; };
 		232D0A4BD87325BE0E568BF0 /* NewFreeAnswerQuizInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewFreeAnswerQuizInteractor.swift; sourceTree = "<group>"; };
 		233DE469779653213327B9C5 /* WriteCourseReviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WriteCourseReviewView.swift; sourceTree = "<group>"; };
-		2517CA210E3A47502CAB0D97 /* CodeQuizFullscreenRunCodeOutputProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CodeQuizFullscreenRunCodeOutputProtocol.swift; sourceTree = "<group>"; };
 		256D24289A9EDBB169D8D4D0 /* SubmissionsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SubmissionsPresenter.swift; sourceTree = "<group>"; };
 		278FE0A80C243768DA5EBD30 /* SolutionProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SolutionProvider.swift; sourceTree = "<group>"; };
 		2A538B0B64908D5D9B60239C /* SolutionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SolutionView.swift; sourceTree = "<group>"; };
@@ -5871,7 +5869,6 @@
 			isa = PBXGroup;
 			children = (
 				F82C628854E1A5C4DF2BA908 /* CodeQuizFullscreenRunCodeInputProtocol.swift */,
-				2517CA210E3A47502CAB0D97 /* CodeQuizFullscreenRunCodeOutputProtocol.swift */,
 			);
 			path = InputOutput;
 			sourceTree = "<group>";
@@ -7545,7 +7542,6 @@
 				174B8A8B822D8CFDACD40672 /* CodeQuizFullscreenRunCodeViewController.swift in Sources */,
 				2CB1C3AF24008D4A001DA83E /* UserCodeRunsAPI.swift in Sources */,
 				209A8D79269941F7127F5030 /* CodeQuizFullscreenRunCodeInputProtocol.swift in Sources */,
-				8F561BE5E0C134554672D5EF /* CodeQuizFullscreenRunCodeOutputProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,6 +27,7 @@ final class CodeQuizFullscreenAssembly: Assembly {
         let interactor = CodeQuizFullscreenInteractor(
             presenter: presenter,
             provider: provider,
+            tooltipStorageManager: TooltipStorageManager(),
             codeDetails: self.codeDetails,
             language: self.language
         )

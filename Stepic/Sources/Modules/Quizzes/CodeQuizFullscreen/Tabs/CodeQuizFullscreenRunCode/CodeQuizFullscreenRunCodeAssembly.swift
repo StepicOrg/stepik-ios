@@ -3,19 +3,12 @@ import UIKit
 final class CodeQuizFullscreenRunCodeAssembly: Assembly {
     var moduleInput: CodeQuizFullscreenRunCodeInputProtocol?
 
-    private weak var moduleOutput: CodeQuizFullscreenRunCodeOutputProtocol?
-
     private let stepID: Step.IdType
     private let language: CodeLanguage
 
-    init(
-        stepID: Step.IdType,
-        language: CodeLanguage,
-        output: CodeQuizFullscreenRunCodeOutputProtocol? = nil
-    ) {
+    init(stepID: Step.IdType, language: CodeLanguage) {
         self.stepID = stepID
         self.language = language
-        self.moduleOutput = output
     }
 
     func makeModule() -> UIViewController {
@@ -34,7 +27,6 @@ final class CodeQuizFullscreenRunCodeAssembly: Assembly {
 
         presenter.viewController = viewController
         self.moduleInput = interactor
-        interactor.moduleOutput = self.moduleOutput
 
         return viewController
     }

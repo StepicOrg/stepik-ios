@@ -868,6 +868,7 @@ CodeQuizFullscreenTabRunRunCodeButtonTitle = "Run Code";
 CodeQuizFullscreenTabRunEvaluationTitle = "Evaluation...";
 CodeQuizFullscreenTabRunTestOuputEmptyResultTitle = "Empty result";
 CodeQuizFullscreenTabRunSamplesAlertTitle = "Select test input";
+CodeQuizRunCodeTooltip = "Before sending your solution, you can run your code with test input data!";
 
 /* Submissions */
 SubmissionsTitle = "Submissions";

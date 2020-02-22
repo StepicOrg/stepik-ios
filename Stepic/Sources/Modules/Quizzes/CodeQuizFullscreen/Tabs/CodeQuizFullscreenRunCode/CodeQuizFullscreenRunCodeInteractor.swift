@@ -12,8 +12,6 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
     private static let logger = Logger(label: "com.AlexKarpov.Stepic.CodeQuizFullscreenRunCodeInteractor")
     private static let pollInterval: TimeInterval = 1.0
 
-    weak var moduleOutput: CodeQuizFullscreenRunCodeOutputProtocol?
-
     private let stepID: Step.IdType
     private let language: CodeLanguage
 

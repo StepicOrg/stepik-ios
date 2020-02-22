@@ -4,10 +4,13 @@ import UIKit
 protocol CodeQuizFullscreenPresenterProtocol {
     func presentContent(response: CodeQuizFullscreen.ContentLoad.Response)
     func presentCodeReset(response: CodeQuizFullscreen.ResetCode.Response)
+    func presentRunCodeTooltip(response: CodeQuizFullscreen.RunCodeTooltipAvailabilityCheck.Response)
 }
 
 final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
     weak var viewController: CodeQuizFullscreenViewControllerProtocol?
+
+    // MARK: Protocol Conforming
 
     func presentContent(response: CodeQuizFullscreen.ContentLoad.Response) {
         DispatchQueue.global(qos: .userInitiated).promise {
@@ -43,6 +46,12 @@ final class CodeQuizFullscreenPresenter: CodeQuizFullscreenPresenterProtocol {
     func presentCodeReset(response: CodeQuizFullscreen.ResetCode.Response) {
         self.viewController?.displayCodeReset(viewModel: .init(code: response.code ?? ""))
     }
+
+    func presentRunCodeTooltip(response: CodeQuizFullscreen.RunCodeTooltipAvailabilityCheck.Response) {
+        self.viewController?.displayRunCodeTooltip(viewModel: .init(shouldShowTooltip: response.shouldShowTooltip))
+    }
+
+    // MARK: Private API
 
     private func processStepContent(_ content: String) -> Guarantee<String> {
         Guarantee { seal in

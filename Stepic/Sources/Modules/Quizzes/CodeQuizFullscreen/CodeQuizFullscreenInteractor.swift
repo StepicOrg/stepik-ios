@@ -6,6 +6,7 @@ protocol CodeQuizFullscreenInteractorProtocol {
     func doReplyUpdate(request: CodeQuizFullscreen.ReplyConvert.Request)
     func doReplySubmit(request: CodeQuizFullscreen.ReplySubmit.Request)
     func doCodeReset(request: CodeQuizFullscreen.ResetCode.Request)
+    func doRunCodeTooltipAvailabilityCheck(request: CodeQuizFullscreen.RunCodeTooltipAvailabilityCheck.Request)
 }
 
 final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
@@ -15,6 +16,7 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
 
     private let presenter: CodeQuizFullscreenPresenterProtocol
     private let provider: CodeQuizFullscreenProviderProtocol
+    private let tooltipStorageManager: TooltipStorageManagerProtocol
 
     private let codeDetails: CodeDetails
     private let language: CodeLanguage
@@ -24,16 +26,20 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
     init(
         presenter: CodeQuizFullscreenPresenterProtocol,
         provider: CodeQuizFullscreenProviderProtocol,
+        tooltipStorageManager: TooltipStorageManagerProtocol,
         codeDetails: CodeDetails,
         language: CodeLanguage
     ) {
         self.presenter = presenter
         self.provider = provider
+        self.tooltipStorageManager = tooltipStorageManager
         self.codeDetails = codeDetails
         self.language = language
 
         self.refresh()
     }
+
+    // MARK: Protocol Conforming
 
     func doReplyUpdate(request: CodeQuizFullscreen.ReplyConvert.Request) {
         self.currentCode = request.code
@@ -74,6 +80,15 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
             self.currentCode = ""
         }
     }
+
+    func doRunCodeTooltipAvailabilityCheck(request: CodeQuizFullscreen.RunCodeTooltipAvailabilityCheck.Request) {
+        self.presenter.presentRunCodeTooltip(
+            response: .init(shouldShowTooltip: !self.tooltipStorageManager.didShowOnFullscreenCodeQuizTabRun)
+        )
+        self.tooltipStorageManager.didShowOnFullscreenCodeQuizTabRun = true
+    }
+
+    // MARK: Private API
 
     private func refresh() {
         self.provider.fetchUserOrCodeTemplate(
