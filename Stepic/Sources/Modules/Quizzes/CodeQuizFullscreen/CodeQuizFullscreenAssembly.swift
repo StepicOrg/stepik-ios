@@ -27,10 +27,18 @@ final class CodeQuizFullscreenAssembly: Assembly {
         let interactor = CodeQuizFullscreenInteractor(
             presenter: presenter,
             provider: provider,
-            codeDetails: codeDetails,
+            codeDetails: self.codeDetails,
             language: self.language
         )
-        let viewController = CodeQuizFullscreenViewController(interactor: interactor)
+
+        let availableTabs: [CodeQuizFullscreen.Tab] = self.codeDetails.stepOptions.isRunUserCodeAllowed
+            ? [.instruction, .code, .run]
+            : [.instruction, .code]
+        let viewController = CodeQuizFullscreenViewController(
+            interactor: interactor,
+            availableTabs: availableTabs,
+            initialTab: .code
+        )
 
         presenter.viewController = viewController
         interactor.moduleOutput = self.moduleOutput
