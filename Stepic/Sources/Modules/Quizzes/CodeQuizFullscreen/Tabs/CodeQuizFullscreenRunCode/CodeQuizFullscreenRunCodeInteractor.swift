@@ -47,8 +47,11 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
     // MARK: Protocol Conforming
 
     func doTestInputTextUpdate(request: CodeQuizFullscreenRunCode.TestInputTextUpdate.Request) {
-        self.currentUserCodeRun.stdin = request.input
-        self.presentUserCodeRun()
+        if self.currentUserCodeRun.stdin != request.input {
+            self.currentUserCodeRun.stdin = request.input
+            self.currentUserCodeRun.status = nil
+            self.presentUserCodeRun()
+        }
     }
 
     func doRunCode(request: CodeQuizFullscreenRunCode.RunCode.Request) {
@@ -150,6 +153,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
 extension CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInputProtocol {
     func update(code: String) {
         self.currentUserCodeRun.code = code
+        self.currentUserCodeRun.status = nil
         self.presentUserCodeRun()
     }
 

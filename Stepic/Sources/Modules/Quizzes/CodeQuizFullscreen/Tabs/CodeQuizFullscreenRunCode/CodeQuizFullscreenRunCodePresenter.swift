@@ -69,6 +69,11 @@ final class CodeQuizFullscreenRunCodePresenter: CodeQuizFullscreenRunCodePresent
             }
         }()
 
+        let isTestOutputMatchesSampleOutput = samples
+            .first(where: { $0.input == userCodeRun.stdin })?
+            .output.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                == testOutput?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+
         let shouldShowTestOutput = userCodeRun.status == .failure || userCodeRun.status == .success
 
         let isSamplesButtonEnabled = userCodeRun.status != .evaluation && !samples.isEmpty
@@ -82,6 +87,7 @@ final class CodeQuizFullscreenRunCodePresenter: CodeQuizFullscreenRunCodePresent
             testInput: userCodeRun.stdin,
             testOutput: testOutput,
             userCodeRunStatus: userCodeRun.status,
+            isTestOutputMatchesSampleOutput: isTestOutputMatchesSampleOutput,
             shouldShowTestInput: userCodeRun.language != .sql,
             shouldShowTestOutput: shouldShowTestOutput,
             isSamplesButtonEnabled: isSamplesButtonEnabled,
