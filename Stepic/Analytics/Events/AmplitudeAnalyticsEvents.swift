@@ -643,4 +643,15 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Run Code -
+
+    struct RunCode {
+        static func launched(stepID: Step.IdType) -> AnalyticsEvent {
+            AnalyticsEvent(
+                name: "Run code launched",
+                parameters: ["step_id": stepID]
+            )
+        }
+    }
 }

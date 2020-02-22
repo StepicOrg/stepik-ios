@@ -60,6 +60,9 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
         self.currentUserCodeRun.status = .evaluation
         self.presentUserCodeRun()
 
+        // FIXME: analytics dependency
+        AmplitudeAnalyticsEvents.RunCode.launched(stepID: self.stepID).send()
+
         firstly {
             self.provider.runCode(
                 stepID: self.currentUserCodeRun.stepID,
