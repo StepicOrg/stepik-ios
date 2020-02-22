@@ -868,6 +868,7 @@ CodeQuizFullscreenTabRunInputDataPlaceholder = "Введите входные д
 CodeQuizFullscreenTabRunRunCodeButtonTitle = "Запустить код";
 CodeQuizFullscreenTabRunEvaluationTitle = "Выполняется...";
 CodeQuizFullscreenTabRunTestOuputEmptyResultTitle = "Пустой результат";
+CodeQuizFullscreenTabRunSamplesAlertTitle = "Выберите входные данные";
 
 /* Submissions */
 SubmissionsTitle = "Решения";

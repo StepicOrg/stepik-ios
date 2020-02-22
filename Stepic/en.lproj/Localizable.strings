@@ -867,6 +867,7 @@ CodeQuizFullscreenTabRunInputDataPlaceholder = "Enter test input...";
 CodeQuizFullscreenTabRunRunCodeButtonTitle = "Run Code";
 CodeQuizFullscreenTabRunEvaluationTitle = "Evaluation...";
 CodeQuizFullscreenTabRunTestOuputEmptyResultTitle = "Empty result";
+CodeQuizFullscreenTabRunSamplesAlertTitle = "Select test input";
 
 /* Submissions */
 SubmissionsTitle = "Submissions";

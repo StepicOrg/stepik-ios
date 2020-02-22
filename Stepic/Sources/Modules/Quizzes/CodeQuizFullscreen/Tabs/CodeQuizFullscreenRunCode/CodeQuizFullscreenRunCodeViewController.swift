@@ -4,6 +4,7 @@ protocol CodeQuizFullscreenRunCodeViewControllerProtocol: AnyObject {
     func displayContentUpdate(viewModel: CodeQuizFullscreenRunCode.ContentUpdate.ViewModel)
     func displayTestInputSetDefault(viewModel: CodeQuizFullscreenRunCode.TestInputSetDefault.ViewModel)
     func displayRunCodeResult(viewModel: CodeQuizFullscreenRunCode.RunCode.ViewModel)
+    func displayTestInputSamples(viewModel: CodeQuizFullscreenRunCode.TestInputSamplesPresentation.ViewModel)
     func displayAlert(viewModel: CodeQuizFullscreenRunCode.AlertPresentation.ViewModel)
 }
 
@@ -11,6 +12,8 @@ final class CodeQuizFullscreenRunCodeViewController: UIViewController {
     private let interactor: CodeQuizFullscreenRunCodeInteractorProtocol
 
     lazy var runCodeView = self.view as? CodeQuizFullscreenRunCodeView
+
+    private var lastSelectSampleActionSender: Any?
 
     init(interactor: CodeQuizFullscreenRunCodeInteractorProtocol) {
         self.interactor = interactor
@@ -44,6 +47,28 @@ extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeView
         self.runCodeView?.configure(viewModel: viewModel.viewModel)
     }
 
+    func displayTestInputSamples(viewModel: CodeQuizFullscreenRunCode.TestInputSamplesPresentation.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        viewModel.samples.map { sample in
+            UIAlertAction(
+                title: sample,
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.interactor.doTestInputTextUpdate(request: .init(input: sample))
+                }
+            )
+        }.forEach { alert.addAction($0) }
+
+        if let popoverPresentationController = alert.popoverPresentationController,
+           let senderView = self.lastSelectSampleActionSender as? UIView {
+            popoverPresentationController.sourceView = senderView
+            popoverPresentationController.sourceRect = senderView.bounds
+        }
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func displayAlert(viewModel: CodeQuizFullscreenRunCode.AlertPresentation.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
@@ -59,7 +84,8 @@ extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeView
     }
 
     func codeQuizFullscreenRunCodeViewDidClickSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any) {
-        print(#function)
+        self.lastSelectSampleActionSender = sender
+        self.interactor.doTestInputSamplesPresentation(request: .init())
     }
 
     func codeQuizFullscreenRunCodeView(_ view: CodeQuizFullscreenRunCodeView, testInputDidChange input: String) {

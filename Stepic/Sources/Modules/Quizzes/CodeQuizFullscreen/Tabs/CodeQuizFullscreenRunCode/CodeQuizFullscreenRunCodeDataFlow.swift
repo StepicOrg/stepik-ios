@@ -52,6 +52,20 @@ enum CodeQuizFullscreenRunCode {
         }
     }
 
+    /// Presents action sheet with samples
+    enum TestInputSamplesPresentation {
+        struct Request {}
+
+        struct Response {
+            let samples: [CodeSamplePlainObject]
+        }
+
+        struct ViewModel {
+            let title: String?
+            let samples: [String]
+        }
+    }
+
     /// Present alert controller
     enum AlertPresentation {
         struct ViewModel {

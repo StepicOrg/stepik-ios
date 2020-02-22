@@ -5,6 +5,7 @@ import PromiseKit
 protocol CodeQuizFullscreenRunCodeInteractorProtocol {
     func doTestInputTextUpdate(request: CodeQuizFullscreenRunCode.TestInputTextUpdate.Request)
     func doRunCode(request: CodeQuizFullscreenRunCode.RunCode.Request)
+    func doTestInputSamplesPresentation(request: CodeQuizFullscreenRunCode.TestInputSamplesPresentation.Request)
 }
 
 final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInteractorProtocol {
@@ -94,6 +95,12 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
         }
     }
 
+    func doTestInputSamplesPresentation(request: CodeQuizFullscreenRunCode.TestInputSamplesPresentation.Request) {
+        self.presenter.presentTestInputSamples(response: .init(samples: self.currentSamples))
+    }
+
+    // MARK: Private API
+
     private func pollUserCodeRun(id: UserCodeRun.IdType) -> Promise<UserCodeRun> {
         Promise { seal in
             func poll(retryCount: Int) {
@@ -116,8 +123,6 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
             poll(retryCount: 1)
         }
     }
-
-    // MARK: Private API
 
     private func presentUserCodeRun() {
         self.presenter.presentContentUpdate(

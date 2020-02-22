@@ -4,6 +4,7 @@ protocol CodeQuizFullscreenRunCodePresenterProtocol {
     func presentContentUpdate(response: CodeQuizFullscreenRunCode.ContentUpdate.Response)
     func presentTestInputSetDefault(response: CodeQuizFullscreenRunCode.TestInputSetDefault.Response)
     func presentRunCodeResult(response: CodeQuizFullscreenRunCode.RunCode.Response)
+    func presentTestInputSamples(response: CodeQuizFullscreenRunCode.TestInputSamplesPresentation.Response)
 }
 
 final class CodeQuizFullscreenRunCodePresenter: CodeQuizFullscreenRunCodePresenterProtocol {
@@ -34,6 +35,15 @@ final class CodeQuizFullscreenRunCodePresenter: CodeQuizFullscreenRunCodePresent
                 viewModel: .init(viewModel: self.makeViewModel(userCodeRun: data.userCodeRun, samples: data.samples))
             )
         }
+    }
+
+    func presentTestInputSamples(response: CodeQuizFullscreenRunCode.TestInputSamplesPresentation.Response) {
+        self.viewController?.displayTestInputSamples(
+            viewModel: .init(
+                title: NSLocalizedString("CodeQuizFullscreenTabRunSamplesAlertTitle", comment: ""),
+                samples: response.samples.map { $0.input }
+            )
+        )
     }
 
     // MARK: Private API
