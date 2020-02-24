@@ -71,8 +71,8 @@ final class CodeQuizFullscreenRunCodePresenter: CodeQuizFullscreenRunCodePresent
 
         let isTestOutputMatchesSampleOutput = samples
             .first(where: { $0.input == userCodeRun.stdin })?
-            .output.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                == testOutput?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            .output.trimmingCharacters(in: .whitespacesAndNewlines)
+                == testOutput?.trimmingCharacters(in: .whitespacesAndNewlines)
 
         let shouldShowTestOutput = userCodeRun.status == .failure || userCodeRun.status == .success
 
