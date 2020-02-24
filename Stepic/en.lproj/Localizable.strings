@@ -854,6 +854,7 @@ FreeAnswerQuizTitle = "Write an essay";
 
 UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 
+/* Code Quiz */
 CodeQuizDetails = "Details";
 CodeQuizDetailSampleTitle = "Sample data %@:";
 CodeQuizDetailSampleTitleOne = "Sample data:";
@@ -864,6 +865,15 @@ CodeQuizEmptyCodeLanguages = "No supported languages";
 CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
+CodeQuizFullscreenTabRunSamplesButtonTitle = "Samples";
+CodeQuizFullscreenTabRunInputDataTitle = "Test Input";
+CodeQuizFullscreenTabRunOutputDataTitle = "Test Output";
+CodeQuizFullscreenTabRunInputDataPlaceholder = "Enter test input...";
+CodeQuizFullscreenTabRunRunCodeButtonTitle = "Run Code";
+CodeQuizFullscreenTabRunEvaluationTitle = "Evaluation...";
+CodeQuizFullscreenTabRunTestOuputEmptyResultTitle = "Empty result";
+CodeQuizFullscreenTabRunSamplesAlertTitle = "Select test input";
+CodeQuizRunCodeTooltip = "Before sending your solution, you can run your code with test input data!";
 
 /* Submissions */
 SubmissionsTitle = "Submissions";

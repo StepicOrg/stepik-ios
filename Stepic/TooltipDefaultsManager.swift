@@ -20,6 +20,7 @@ final class TooltipDefaultsManager {
     private let didShowInVideoPlayerKey = "didShowInVideoPlayerKey"
     private let didShowForCodeEditorKey = "didShowForCodeEditorKey"
     private let didShowOnPersonalDeadlinesButtonKey = "didShowOnPersonalDeadlinesButtonKey"
+    private let didShowOnFullscreenCodeQuizTabRunKey = "didShowOnFullscreenCodeQuizTabRunKey"
 
     var didShowOnLessonDownloads: Bool {
         set(value) {
@@ -78,6 +79,16 @@ final class TooltipDefaultsManager {
 
         get {
              defaults.value(forKey: didShowOnPersonalDeadlinesButtonKey) as? Bool ?? false
+        }
+    }
+
+    var didShowOnFullscreenCodeQuizTabRun: Bool {
+        set(value) {
+            defaults.set(value, forKey: didShowOnFullscreenCodeQuizTabRunKey)
+        }
+
+        get {
+             defaults.value(forKey: didShowOnFullscreenCodeQuizTabRunKey) as? Bool ?? false
         }
     }
 

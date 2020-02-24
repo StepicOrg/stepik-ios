@@ -19,9 +19,9 @@ final class QuizAssemblyFactory {
         case .choice:
             return NewChoiceQuizAssembly()
         case .code:
-            return NewCodeQuizAssembly()
+            return CodeQuizAssembly()
         case .sql:
-            return NewCodeQuizAssembly(language: .sql)
+            return CodeQuizAssembly(language: .sql)
         case .sorting:
             return NewSortingQuizAssembly()
         case .matching:
