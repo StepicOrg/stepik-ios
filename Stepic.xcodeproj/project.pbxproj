@@ -980,6 +980,7 @@
 		62E98E04B7E68ADFEB6CB10E /* CourseListCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98BEFF76B93DDAF02BD09 /* CourseListCollectionViewDelegate.swift */; };
 		62E98E0E7580C85E9C64A023 /* CourseListDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98F88CE9663F2A109437E /* CourseListDataFlow.swift */; };
 		62E98E3473103975BEBD49AD /* GradientCoursesPlaceholderViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E98344E9FBB0C209AB13BB /* GradientCoursesPlaceholderViewFactory.swift */; };
+		62E98E4B8B6FA70B866FE5C2 /* ContactSupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9811E14B07132959D4987 /* ContactSupportController.swift */; };
 		62E98E52C2821A15C7FA70F2 /* CourseInfoTabReviewsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9839AB6FC6C23475C7601 /* CourseInfoTabReviewsAssembly.swift */; };
 		62E98E584DE1E236EEF11CF8 /* CourseInfoStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E9871898355B25F3A39E7F /* CourseInfoStatsView.swift */; };
 		62E98E58E7BC6B6AF4881084 /* CourseReviewSummariesPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */; };
@@ -1979,6 +1980,7 @@
 		62E980E9DFE93B405A0E48AD /* ProfileMenuBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileMenuBlock.swift; sourceTree = "<group>"; };
 		62E980F9CFE23B23B5720F5E /* ProgrammaticallyInitializableViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammaticallyInitializableViewProtocol.swift; sourceTree = "<group>"; };
 		62E98104AE84A217F4483F80 /* CourseListNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListNetworkService.swift; sourceTree = "<group>"; };
+		62E9811E14B07132959D4987 /* ContactSupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSupportController.swift; sourceTree = "<group>"; };
 		62E98120B0C3386F65F3DA21 /* CourseInfoTabReviewsTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseInfoTabReviewsTableViewDataSource.swift; sourceTree = "<group>"; };
 		62E98128FE2C79FBA6AD7D4B /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		62E98148BF3C6F51F47F2BA9 /* CodeEditorPreferencesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditorPreferencesContainer.swift; sourceTree = "<group>"; };
@@ -5150,6 +5152,7 @@
 				2C8F3ADA23CC8533004D113A /* SelectItemTableViewController.swift */,
 				62E98C04C47BEAACB0A48B7A /* StyledNavigationController.swift */,
 				081387E01D7AF7700092E05D /* StyledTabBarViewController.swift */,
+				62E9811E14B07132959D4987 /* ContactSupportController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -7533,6 +7536,7 @@
 				24839628BFE31EA3BF7B12FC /* SubmissionsViewController.swift in Sources */,
 				909E021D38F289C1728E0446 /* SubmissionsOutputProtocol.swift in Sources */,
 				62E98542C0D9B6641F5FFA58 /* WriteCommentSolutionControl.swift in Sources */,
+				62E98E4B8B6FA70B866FE5C2 /* ContactSupportController.swift in Sources */,
 				B53E6FD6BDCE51EF80819DE5 /* CodeQuizFullscreenRunCodeAssembly.swift in Sources */,
 				29D6AB8D1E9E10FE00D092D6 /* CodeQuizFullscreenRunCodeDataFlow.swift in Sources */,
 				AF8097887F7A23C22AA52EAA /* CodeQuizFullscreenRunCodeInteractor.swift in Sources */,

@@ -622,6 +622,15 @@ TermsOfServiceTitle = "Условия использования";
 PrivacyPolicyTitle = "Условия конфиденциальности";
 TermsOfServiceLink = "https://welcome.stepik.org/ru/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/ru/privacy";
+HelpCenterTitle = "Справочный центр";
+HelpCenterLink = "https://support.stepik.org/hc/ru";
+ContactSupportTitle = "Написать в поддержку";
+ContactSupportSubject = "Обратная связь о приложении Stepik iOS";
+ContactSupportMessageBody = "Я делаю следующее:\n\n1.\n2.\n3.\n\nПроисходит вот что:\n\nЯ ожидаю:\n\n=======\nПожалуйста, не удаляйте эту информацию\n=======\nВерсия приложения: %@\nStepik ID: %@";
+SendMailErrorAlertMessage = "Не удалось отправить письмо. Проверьте настройки электронной почты в настройках устройства и повторите попытку.";
+SendMailSuccessMessage = "Отправлено";
+NotAbleSendEmailAlertTitle = "Электронная почта не настроена";
+NotAbleSendEmailAlertMessage = "Ваше устройство не может отправлять электронную почту. Пожалуйста, проверьте настройки электронной почты в настройках устройства и повторите попытку.";
 
 /* Achievements */
 Achievements = "Достижения";
