@@ -349,6 +349,8 @@ struct AmplitudeAnalyticsEvents {
     // MARK: - CourseList -
 
     struct CourseList {
+        static var showAllClicked = AnalyticsEvent(name: "Course list show all clicked")
+
         static func opened(ID: String) -> AnalyticsEvent {
             return AnalyticsEvent(
                 name: "Course list opened",
@@ -638,6 +640,17 @@ struct AmplitudeAnalyticsEvents {
             return AnalyticsEvent(
                 name: "Adaptive rating opened",
                 parameters: ["course": course]
+            )
+        }
+    }
+
+    // MARK: - Run Code -
+
+    struct RunCode {
+        static func launched(stepID: Step.IdType) -> AnalyticsEvent {
+            AnalyticsEvent(
+                name: "Run code launched",
+                parameters: ["step_id": stepID]
             )
         }
     }

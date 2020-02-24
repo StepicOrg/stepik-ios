@@ -153,7 +153,7 @@ final class HomeViewController: BaseExploreViewController {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Enrolled", comment: ""),
                 summary: nil,
-                shouldShowShowAllButton: self == .normal
+                shouldShowAllButton: self == .normal
             )
         }
 
@@ -250,7 +250,7 @@ final class HomeViewController: BaseExploreViewController {
             CourseListContainerViewFactory.HorizontalHeaderDescription(
                 title: NSLocalizedString("Popular", comment: ""),
                 summary: nil,
-                shouldShowShowAllButton: self == .normal
+                shouldShowAllButton: self == .normal
             )
         }
 

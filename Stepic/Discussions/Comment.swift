@@ -33,15 +33,21 @@ final class Comment: JSONSerializable {
     var abuseCount: Int = 0
     var actions: [Action] = []
     var submissionID: Submission.IdType?
+    var thread: String = DiscussionThread.ThreadType.default.rawValue
 
     var userInfo: UserInfo!
     var vote: Vote!
     var submission: Submission?
 
+    var threadType: DiscussionThread.ThreadType? {
+        DiscussionThread.ThreadType(rawValue: self.thread)
+    }
+
     var json: JSON {
         var dict: JSON = [
             JSONKey.target.rawValue: self.targetID,
-            JSONKey.text.rawValue: self.text
+            JSONKey.text.rawValue: self.text,
+            JSONKey.thread.rawValue: self.thread
         ]
 
         if let parentID = self.parentID {
@@ -55,8 +61,7 @@ final class Comment: JSONSerializable {
         if let submissionID = self.submissionID {
             try? dict.merge(
                 with: [
-                    JSONKey.submission.rawValue: submissionID,
-                    JSONKey.thread.rawValue: DiscussionThread.ThreadType.solutions.rawValue
+                    JSONKey.submission.rawValue: submissionID
                 ]
             )
         }
@@ -72,12 +77,14 @@ final class Comment: JSONSerializable {
         targetID: Step.IdType,
         text: String,
         parentID: IdType? = nil,
-        submissionID: Submission.IdType? = nil
+        submissionID: Submission.IdType? = nil,
+        threadType: DiscussionThread.ThreadType = .default
     ) {
         self.targetID = targetID
         self.text = text
         self.parentID = parentID
         self.submissionID = submissionID
+        self.thread = threadType.rawValue
     }
 
     func update(json: JSON) {
@@ -97,6 +104,7 @@ final class Comment: JSONSerializable {
         self.epicCount = json[JSONKey.epicCount.rawValue].intValue
         self.abuseCount = json[JSONKey.abuseCount.rawValue].intValue
         self.submissionID = json[JSONKey.submission.rawValue].int
+        self.thread = json[JSONKey.thread.rawValue].string ?? DiscussionThread.ThreadType.default.rawValue
 
         self.actions.removeAll(keepingCapacity: true)
         for (actionKey, value) in json[JSONKey.actions.rawValue].dictionaryValue {
@@ -168,7 +176,8 @@ extension Comment: CustomDebugStringConvertible {
         submissionID: \(submissionID ??? "nil"), \
         userInfo: \(userInfo ??? "nil"), \
         vote: \(vote ??? "nil"), \
-        submission: \(submission ??? "nil"))
+        submission: \(submission ??? "nil")) \
+        thread: \(thread))
         """
     }
 }

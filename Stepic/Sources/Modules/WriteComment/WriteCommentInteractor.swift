@@ -67,7 +67,8 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
             targetID: self.targetID,
             text: htmlText,
             parentID: self.parentID,
-            submissionID: self.submission?.id
+            submissionID: self.submission?.id,
+            threadType: self.discussionThreadType
         )
 
         var actionPromise: Promise<Comment>
@@ -126,6 +127,7 @@ final class WriteCommentInteractor: WriteCommentInteractorProtocol {
     private func makeCommentData() -> WriteComment.CommentData {
         .init(
             text: self.currentText,
+            parentID: self.parentID,
             comment: self.comment,
             submission: self.submission,
             discussionThreadType: self.discussionThreadType

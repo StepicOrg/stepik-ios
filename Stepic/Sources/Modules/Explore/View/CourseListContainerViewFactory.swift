@@ -4,16 +4,16 @@ final class CourseListContainerViewFactory {
     struct HorizontalHeaderDescription {
         var title: String?
         var summary: String?
-        var shouldShowShowAllButton: Bool
+        var shouldShowAllButton: Bool
 
         init(
             title: String?,
             summary: String?,
-            shouldShowShowAllButton: Bool = true
+            shouldShowAllButton: Bool = true
         ) {
             self.title = title
             self.summary = summary
-            self.shouldShowShowAllButton = shouldShowShowAllButton
+            self.shouldShowAllButton = shouldShowAllButton
         }
     }
 
@@ -47,7 +47,7 @@ final class CourseListContainerViewFactory {
         let headerView = ExploreBlockHeaderView(
             appearance: self.colorMode.exploreBlockHeaderViewAppearance
         )
-        headerView.shouldShowShowAllButton = headerDescription.shouldShowShowAllButton
+        headerView.shouldShowAllButton = headerDescription.shouldShowAllButton
         headerView.titleText = headerDescription.title
         headerView.summaryText = headerDescription.summary
 

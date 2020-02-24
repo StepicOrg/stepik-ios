@@ -91,18 +91,22 @@ final class WriteCommentPresenter: WriteCommentPresenterProtocol {
             return NSLocalizedString("WriteCommentSelectSolutionTitle", comment: "")
         }()
 
+        let isReply = data.parentID != nil
+
         let isFilled: Bool = {
-            if data.discussionThreadType == .solutions {
+            if !isReply && data.discussionThreadType == .solutions {
                 return !data.text.isEmpty && data.submission != nil
             }
             return !data.text.isEmpty
         }()
 
+        let isSolutionHidden = isReply || data.discussionThreadType != .solutions
+
         return .init(
             text: data.text,
             doneButtonTitle: doneButtonTitle,
             isFilled: isFilled,
-            isSolutionHidden: data.discussionThreadType != .solutions,
+            isSolutionHidden: isSolutionHidden,
             isSolutionSelected: data.submission != nil,
             isSolutionCorrect: data.submission?.isCorrect ?? false,
             solutionTitle: solutionTitle

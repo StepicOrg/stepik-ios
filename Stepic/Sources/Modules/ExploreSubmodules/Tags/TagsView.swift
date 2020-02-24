@@ -45,7 +45,7 @@ final class TagsView: UIView {
         let headerView = ExploreBlockHeaderView(appearance: appearance)
         headerView.titleText = NSLocalizedString("TrendingTopics", comment: "")
         headerView.summaryText = nil
-        headerView.shouldShowShowAllButton = false
+        headerView.shouldShowAllButton = false
         return headerView
     }()
 

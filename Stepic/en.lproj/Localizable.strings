@@ -320,6 +320,9 @@ BadConnectionAuth = "Check your internet connection";
 
 ContinueLearningWidgetButtonTitle = "Continue learning";
 ShowAll = "All";
+ShowAllTestDetailIndicator = "All ›";
+ShowAllTestText = "See All";
+ShowAllTestTextDetailIndicator = "See All ›";
 Enrolled = "Enrolled";
 Popular = "Popular";
 Home = "Home";
@@ -618,6 +621,15 @@ TermsOfServiceTitle = "Terms of Service";
 PrivacyPolicyTitle = "Privacy Policy";
 TermsOfServiceLink = "https://welcome.stepik.org/en/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/en/privacy";
+HelpCenterTitle = "Help Center";
+HelpCenterLink = "https://support.stepik.org/hc/en-us";
+ContactSupportTitle = "Contact Support";
+ContactSupportSubject = "Stepik iOS feedback";
+ContactSupportMessageBody = "I do the following:\n\n1.\n2.\n3.\n\nWhat happens:\n\nI expect:\n\n=======\nPlease do not delete this information\n=======\nApp Version: %@\nStepik ID: %@";
+SendMailErrorAlertMessage = "Unable to send an email. Please check your email settings and try again.";
+SendMailSuccessMessage = "Sent";
+NotAbleSendEmailAlertTitle = "Could Not Send Email";
+NotAbleSendEmailAlertMessage = "Your device could not send e-mail. Please check e-mail configuration and try again.";
 
 /* Achievements */
 Achievements = "Achievements";
@@ -846,6 +858,7 @@ FreeAnswerQuizTitle = "Write an essay";
 
 UnsupportedQuizActionButtonTitle = "Open the web version to solve";
 
+/* Code Quiz */
 CodeQuizDetails = "Details";
 CodeQuizDetailSampleTitle = "Sample data %@:";
 CodeQuizDetailSampleTitleOne = "Sample data:";
@@ -856,6 +869,15 @@ CodeQuizEmptyCodeLanguages = "No supported languages";
 CodeQuizFullscreenTabInstructionTitle = "Instruction";
 CodeQuizFullscreenTabCodeTitle = "Code";
 CodeQuizFullscreenTabRunTitle = "Run";
+CodeQuizFullscreenTabRunSamplesButtonTitle = "Samples";
+CodeQuizFullscreenTabRunInputDataTitle = "Test Input";
+CodeQuizFullscreenTabRunOutputDataTitle = "Test Output";
+CodeQuizFullscreenTabRunInputDataPlaceholder = "Enter test input...";
+CodeQuizFullscreenTabRunRunCodeButtonTitle = "Run Code";
+CodeQuizFullscreenTabRunEvaluationTitle = "Evaluation...";
+CodeQuizFullscreenTabRunTestOuputEmptyResultTitle = "Empty result";
+CodeQuizFullscreenTabRunSamplesAlertTitle = "Select test input";
+CodeQuizRunCodeTooltip = "Before sending your solution, you can run your code with test input data!";
 
 /* Submissions */
 SubmissionsTitle = "Submissions";

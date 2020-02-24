@@ -321,6 +321,9 @@ BadConnectionAuth = "Проверьте ваше интернет-соедине
 
 ContinueLearningWidgetButtonTitle = "Продолжить учиться";
 ShowAll = "Все";
+ShowAllTestDetailIndicator = "Все ›";
+ShowAllTestText = "Смотреть все";
+ShowAllTestTextDetailIndicator = "Смотреть все ›";
 Enrolled = "Мои курсы";
 Popular = "Популярные";
 Home = "Обучение";
@@ -619,6 +622,15 @@ TermsOfServiceTitle = "Условия использования";
 PrivacyPolicyTitle = "Условия конфиденциальности";
 TermsOfServiceLink = "https://welcome.stepik.org/ru/terms";
 PrivacyPolicyLink = "https://welcome.stepik.org/ru/privacy";
+HelpCenterTitle = "Справочный центр";
+HelpCenterLink = "https://support.stepik.org/hc/ru";
+ContactSupportTitle = "Написать в поддержку";
+ContactSupportSubject = "Обратная связь о приложении Stepik iOS";
+ContactSupportMessageBody = "Я делаю следующее:\n\n1.\n2.\n3.\n\nПроисходит вот что:\n\nЯ ожидаю:\n\n=======\nПожалуйста, не удаляйте эту информацию\n=======\nВерсия приложения: %@\nStepik ID: %@";
+SendMailErrorAlertMessage = "Не удалось отправить письмо. Проверьте настройки электронной почты в настройках устройства и повторите попытку.";
+SendMailSuccessMessage = "Отправлено";
+NotAbleSendEmailAlertTitle = "Электронная почта не настроена";
+NotAbleSendEmailAlertMessage = "Ваше устройство не может отправлять электронную почту. Пожалуйста, проверьте настройки электронной почты в настройках устройства и повторите попытку.";
 
 /* Achievements */
 Achievements = "Достижения";
@@ -847,6 +859,7 @@ FreeAnswerQuizTitle = "Напишите эссе";
 
 UnsupportedQuizActionButtonTitle = "Пройти задание в web-версии";
 
+/* Code Quiz */
 CodeQuizDetails = "Детали";
 CodeQuizDetailSampleTitle = "Пример данных %@:";
 CodeQuizDetailSampleTitleOne = "Пример данных:";
@@ -857,6 +870,15 @@ CodeQuizEmptyCodeLanguages = "Нет поддерживаемых языков �
 CodeQuizFullscreenTabInstructionTitle = "Инструкция";
 CodeQuizFullscreenTabCodeTitle = "Код";
 CodeQuizFullscreenTabRunTitle = "Запуск";
+CodeQuizFullscreenTabRunSamplesButtonTitle = "Примеры";
+CodeQuizFullscreenTabRunInputDataTitle = "Входные данные";
+CodeQuizFullscreenTabRunOutputDataTitle = "Результат выполнения";
+CodeQuizFullscreenTabRunInputDataPlaceholder = "Введите входные данные...";
+CodeQuizFullscreenTabRunRunCodeButtonTitle = "Запустить код";
+CodeQuizFullscreenTabRunEvaluationTitle = "Выполняется...";
+CodeQuizFullscreenTabRunTestOuputEmptyResultTitle = "Пустой результат";
+CodeQuizFullscreenTabRunSamplesAlertTitle = "Выберите входные данные";
+CodeQuizRunCodeTooltip = "Перед отправкой решения, вы можете запустить ваш код с тестовыми вводными данными!";
 
 /* Submissions */
 SubmissionsTitle = "Решения";
