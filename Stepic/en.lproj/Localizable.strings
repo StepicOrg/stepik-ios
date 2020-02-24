@@ -624,6 +624,8 @@ PrivacyPolicyLink = "https://welcome.stepik.org/en/privacy";
 HelpCenterTitle = "Help Center";
 HelpCenterLink = "https://support.stepik.org/hc/en-us";
 ContactSupportTitle = "Contact Support";
+ContactSupportSubject = "Stepik iOS feedback";
+ContactSupportMessageBody = "I do the following:\n\n1.\n2.\n3.\n\nWhat happens:\n\nI expect:\n\n=======\nPlease do not delete this information\n=======\nApp Version: %@\nStepik ID: %@";
 SendMailErrorAlertMessage = "Unable to send an email. Please check your email settings and try again.";
 SendMailSuccessMessage = "Sent";
 

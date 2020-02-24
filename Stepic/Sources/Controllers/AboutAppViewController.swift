@@ -39,7 +39,10 @@ final class AboutAppViewController: UIViewController {
 
     private lazy var appVersionContainerView = UIView()
 
-    private lazy var contactSupportController = ContactSupportController(presentationController: self)
+    private lazy var contactSupportController = ContactSupportController(
+        presentationController: self,
+        userAccountService: UserAccountService()
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
