@@ -13,7 +13,7 @@ final class CodeQuizFullscreenRunCodeViewController: UIViewController {
 
     lazy var runCodeView = self.view as? CodeQuizFullscreenRunCodeView
 
-    private var lastSelectSampleActionSender: Any?
+    private weak var samplesPopoverAnchorView: UIView?
 
     init(interactor: CodeQuizFullscreenRunCodeInteractorProtocol) {
         self.interactor = interactor
@@ -61,9 +61,9 @@ extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeView
         }.forEach { alert.addAction($0) }
 
         if let popoverPresentationController = alert.popoverPresentationController,
-           let senderView = self.lastSelectSampleActionSender as? UIView {
-            popoverPresentationController.sourceView = senderView
-            popoverPresentationController.sourceRect = senderView.bounds
+           let samplesPopoverAnchorView = self.samplesPopoverAnchorView {
+            popoverPresentationController.sourceView = samplesPopoverAnchorView
+            popoverPresentationController.sourceRect = samplesPopoverAnchorView.bounds
         }
 
         self.present(alert, animated: true, completion: nil)
@@ -84,7 +84,7 @@ extension CodeQuizFullscreenRunCodeViewController: CodeQuizFullscreenRunCodeView
     }
 
     func codeQuizFullscreenRunCodeViewDidClickSamples(_ view: CodeQuizFullscreenRunCodeView, sender: Any) {
-        self.lastSelectSampleActionSender = sender
+        self.samplesPopoverAnchorView = sender as? UIView
         self.interactor.doTestInputSamplesPresentation(request: .init())
     }
 
