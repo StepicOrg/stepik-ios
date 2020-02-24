@@ -6,6 +6,7 @@ protocol CodeEditorThemeServiceProtocol: AnyObject {
     func update(name: String)
 }
 
+// FIXME: Migrate to StorageManager
 final class CodeEditorThemeService: CodeEditorThemeServiceProtocol {
     var theme: CodeEditorTheme { CodeEditorTheme(font: self.font, name: self.name) }
 
