@@ -13,15 +13,15 @@ final class CodeQuizFullscreenRunCodeAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = CodeQuizFullscreenRunCodeProvider(
-            userCodeRunsNetworkService: UserCodeRunsNetworkService(userCodeRunsAPI: UserCodeRunsAPI()),
-            userAccountService: UserAccountService()
+            userCodeRunsNetworkService: UserCodeRunsNetworkService(userCodeRunsAPI: UserCodeRunsAPI())
         )
         let presenter = CodeQuizFullscreenRunCodePresenter()
         let interactor = CodeQuizFullscreenRunCodeInteractor(
             stepID: self.stepID,
             language: self.language,
             presenter: presenter,
-            provider: provider
+            provider: provider,
+            userAccountService: UserAccountService()
         )
         let viewController = CodeQuizFullscreenRunCodeViewController(interactor: interactor)
 

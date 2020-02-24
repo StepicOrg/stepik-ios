@@ -10,13 +10,16 @@ protocol CodeQuizFullscreenRunCodeInteractorProtocol {
 
 final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInteractorProtocol {
     private static let logger = Logger(label: "com.AlexKarpov.Stepic.CodeQuizFullscreenRunCodeInteractor")
+
     private static let pollInterval: TimeInterval = 1.0
+    private static let invalidUserID: User.IdType = -1
 
     private let stepID: Step.IdType
     private let language: CodeLanguage
 
     private let presenter: CodeQuizFullscreenRunCodePresenterProtocol
     private let provider: CodeQuizFullscreenRunCodeProviderProtocol
+    private let userAccountService: UserAccountServiceProtocol
 
     private var currentUserCodeRun: UserCodeRun
     private var currentSamples: [CodeSamplePlainObject] = []
@@ -27,14 +30,16 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
         stepID: Step.IdType,
         language: CodeLanguage,
         presenter: CodeQuizFullscreenRunCodePresenterProtocol,
-        provider: CodeQuizFullscreenRunCodeProviderProtocol
+        provider: CodeQuizFullscreenRunCodeProviderProtocol,
+        userAccountService: UserAccountServiceProtocol
     ) {
         self.stepID = stepID
         self.language = language
         self.presenter = presenter
         self.provider = provider
+        self.userAccountService = userAccountService
         self.currentUserCodeRun = UserCodeRun(
-            userID: -1,
+            userID: userAccountService.currentUser?.id ?? Self.invalidUserID,
             stepID: self.stepID,
             languageString: self.language.rawValue,
             code: "",
@@ -53,7 +58,11 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
     }
 
     func doRunCode(request: CodeQuizFullscreenRunCode.RunCode.Request) {
-        if self.currentUserCodeRun.status == .evaluation {
+        guard self.currentUserCodeRun.userID != Self.invalidUserID else {
+            return self.presenter.presentRunCodeResult(response: .init(result: .failure(Error.invalidUserID)))
+        }
+
+        guard self.currentUserCodeRun.status != .evaluation else {
             return
         }
 
@@ -66,6 +75,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
 
         firstly {
             self.provider.runCode(
+                userID: self.currentUserCodeRun.userID,
                 stepID: self.currentUserCodeRun.stepID,
                 languageString: self.currentUserCodeRun.languageString,
                 code: self.currentUserCodeRun.code,
@@ -143,6 +153,12 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
         self.currentUserCodeRun.stdin = sample.input
 
         self.presenter.presentTestInputSetDefault(response: .init(input: sample.input))
+    }
+
+    // MARK: Inner Types
+
+    enum Error: Swift.Error {
+        case invalidUserID
     }
 }
 
