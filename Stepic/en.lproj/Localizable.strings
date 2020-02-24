@@ -628,6 +628,8 @@ ContactSupportSubject = "Stepik iOS feedback";
 ContactSupportMessageBody = "I do the following:\n\n1.\n2.\n3.\n\nWhat happens:\n\nI expect:\n\n=======\nPlease do not delete this information\n=======\nApp Version: %@\nStepik ID: %@";
 SendMailErrorAlertMessage = "Unable to send an email. Please check your email settings and try again.";
 SendMailSuccessMessage = "Sent";
+NotAbleSendEmailAlertTitle = "Could Not Send Email";
+NotAbleSendEmailAlertMessage = "Your device could not send e-mail. Please check e-mail configuration and try again.";
 
 /* Achievements */
 Achievements = "Achievements";

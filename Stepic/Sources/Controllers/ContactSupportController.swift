@@ -16,7 +16,7 @@ final class ContactSupportController: NSObject {
 
     func contactSupport() {
         guard MFMailComposeViewController.canSendMail() else {
-            return self.presentSendMailErrorAlert()
+            return self.presentNotAbleSendMailAlert()
         }
 
         let mailComposeViewController = MFMailComposeViewController()
@@ -46,6 +46,16 @@ final class ContactSupportController: NSObject {
             format: NSLocalizedString("ContactSupportMessageBody", comment: ""),
             arguments: [appVersion, userID]
         )
+    }
+
+    private func presentNotAbleSendMailAlert() {
+        let alert = UIAlertController(
+            title: NSLocalizedString("NotAbleSendEmailAlertTitle", comment: ""),
+            message: NSLocalizedString("NotAbleSendEmailAlertMessage", comment: ""),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+        self.presentationController?.present(alert, animated: true)
     }
 
     private func presentSendMailErrorAlert() {
