@@ -180,7 +180,9 @@ final class CodeQuizFullscreenViewController: TabmanViewController {
                 let viewController = assembly.makeModule()
 
                 self.runCodeModuleInput = assembly.moduleInput
-                self.runCodeModuleInput?.update(code: viewModel.code ?? "")
+                self.runCodeModuleInput?.update(
+                    code: self.codeQuizFullscreenCodeViewController?.code ?? (viewModel.code ?? "")
+                )
                 self.runCodeModuleInput?.update(samples: viewModel.samples)
 
                 return viewController

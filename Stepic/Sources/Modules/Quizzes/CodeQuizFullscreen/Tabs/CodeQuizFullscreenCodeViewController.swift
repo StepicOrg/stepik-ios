@@ -82,9 +82,13 @@ final class CodeQuizFullscreenCodeViewController: UIViewController {
     private var language: CodeLanguage
     private var codeTemplate: String?
 
-    var code: String? {
-        didSet {
-            self.codeEditorView.code = self.code
+    var code: String {
+        get {
+            self.codeEditorView.code ?? ""
+        }
+        set {
+            // Prevent setting empty string for better line numbers drawing.
+            self.codeEditorView.code = newValue.isEmpty ? "\n\n" : newValue
         }
     }
 
@@ -95,10 +99,12 @@ final class CodeQuizFullscreenCodeViewController: UIViewController {
         delegate: CodeQuizFullscreenCodeViewControllerDelegate? = nil
     ) {
         self.language = language
-        self.code = code
         self.codeTemplate = codeTemplate
         self.delegate = delegate
+
         super.init(nibName: nil, bundle: nil)
+
+        self.code = code ?? ""
     }
 
     @available(*, unavailable)
