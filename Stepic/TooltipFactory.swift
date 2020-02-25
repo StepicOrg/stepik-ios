@@ -64,4 +64,12 @@ enum TooltipFactory {
             color: .standard
         )
     }
+
+    static var runCode: Tooltip {
+        EasyTipTooltip(
+            text: NSLocalizedString("CodeQuizRunCodeTooltip", comment: ""),
+            shouldDismissAfterTime: true,
+            color: .standard
+        )
+    }
 }

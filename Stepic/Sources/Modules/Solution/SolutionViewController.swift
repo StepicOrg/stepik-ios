@@ -143,8 +143,8 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
 
             quizController.view.isUserInteractionEnabled = isUserInteractionEnabled
 
-            if let codeQuizViewController = quizController as? NewCodeQuizViewController {
-                codeQuizViewController.newCodeQuizView?.setCodeEditorActionControlsEnabled(false)
+            if let codeQuizViewController = quizController as? CodeQuizViewController {
+                codeQuizViewController.codeQuizView?.setCodeEditorActionControlsEnabled(false)
             }
         }
 

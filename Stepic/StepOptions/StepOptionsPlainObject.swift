@@ -3,6 +3,7 @@ import Foundation
 struct StepOptionsPlainObject {
     let executionTimeLimit: Double
     let executionMemoryLimit: Double
+    let isRunUserCodeAllowed: Bool
 
     let limits: [CodeLimitPlainObject]
     let templates: [CodeTemplatePlainObject]
@@ -25,8 +26,7 @@ struct StepOptionsPlainObject {
     }
 
     private func getTemplate(for language: CodeLanguage, isUserGenerated: Bool) -> CodeTemplatePlainObject? {
-        self.templates
-            .first(where: { $0.language == language.rawValue && $0.isUserGenerated == isUserGenerated })
+        self.templates.first(where: { $0.language == language.rawValue && $0.isUserGenerated == isUserGenerated })
     }
 }
 
@@ -34,6 +34,7 @@ extension StepOptionsPlainObject {
     init(stepOptions: StepOptions) {
         self.executionTimeLimit = stepOptions.executionTimeLimit
         self.executionMemoryLimit = stepOptions.executionMemoryLimit
+        self.isRunUserCodeAllowed = stepOptions.isRunUserCodeAllowed
 
         self.limits = stepOptions.limits.map { CodeLimitPlainObject(codeLimit: $0) }
         self.templates = stepOptions.templates.map { CodeTemplatePlainObject(codeTemplate: $0) }

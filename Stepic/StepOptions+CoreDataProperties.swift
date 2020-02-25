@@ -12,6 +12,7 @@ import Foundation
 extension StepOptions {
     @NSManaged var managedExecutionTimeLimit: NSNumber?
     @NSManaged var managedExecutionMemoryLimit: NSNumber?
+    @NSManaged var managedIsRunUserCodeAllowed: NSNumber?
 
     @NSManaged var managedLimits: NSOrderedSet?
     @NSManaged var managedTemplates: NSOrderedSet?
@@ -40,6 +41,15 @@ extension StepOptions {
         }
         set {
             self.managedExecutionMemoryLimit = newValue as NSNumber?
+        }
+    }
+
+    var isRunUserCodeAllowed: Bool {
+        get {
+            self.managedIsRunUserCodeAllowed?.boolValue ?? false
+        }
+        set {
+            self.managedIsRunUserCodeAllowed = newValue as NSNumber?
         }
     }
 

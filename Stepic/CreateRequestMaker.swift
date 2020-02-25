@@ -56,8 +56,8 @@ final class CreateRequestMaker {
                 paramName: paramName,
                 creatingObject: creatingObject,
                 withManager: manager
-            ).done { comment, _ in
-                seal.fulfill(comment)
+            ).done { result, _ in
+                seal.fulfill(result)
             }.catch { error in
                 seal.reject(error)
             }
