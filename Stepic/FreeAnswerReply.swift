@@ -4,40 +4,63 @@ import SwiftyJSON
 final class FreeAnswerReply: Reply {
     var text: String
 
-    var dictValue: [String: Any] {
+    override var dictValue: [String: Any] {
         [
             JSONKey.text.rawValue: self.text,
             JSONKey.attachments.rawValue: []
         ]
     }
 
-    var description: String {
+    override var hash: Int {
+        self.text.hashValue
+    }
+
+    override var description: String {
         "FreeAnswerReply(text: \(self.text))"
     }
 
     init(text: String) {
         self.text = text
+        super.init()
     }
 
+    /* Example data:
+     {
+       "text": "test",
+       "attachments": []
+     }
+     */
     required init(json: JSON) {
         self.text = json[JSONKey.text.rawValue].stringValue
+        super.init(json: json)
+    }
+
+    required init?(coder: NSCoder) {
+        guard let text = coder.decodeObject(forKey: JSONKey.text.rawValue) as? String else {
+            return nil
+        }
+
+        self.text = text
+
+        super.init(coder: coder)
+    }
+
+    override func encode(with coder: NSCoder) {
+        coder.encode(self.text, forKey: JSONKey.text.rawValue)
+    }
+
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? FreeAnswerReply else {
+            return false
+        }
+        if self === object { return true }
+        if type(of: self) != type(of: object) { return false }
+        if self.text != object.text { return false }
+        return true
     }
 
     enum JSONKey: String {
         case text
         case attachments
-    }
-}
-
-extension FreeAnswerReply: Hashable {
-    static func == (lhs: FreeAnswerReply, rhs: FreeAnswerReply) -> Bool {
-        if lhs === rhs { return true }
-        if type(of: lhs) != type(of: rhs) { return false }
-        if lhs.text != rhs.text { return false }
-        return true
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.text)
     }
 }

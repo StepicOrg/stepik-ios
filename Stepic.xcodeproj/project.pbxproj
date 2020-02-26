@@ -385,8 +385,12 @@
 		2C0473FF22E5BC20003050B7 /* CodeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0473FE22E5BC20003050B7 /* CodeDetailsView.swift */; };
 		2C04740122E5F99B003050B7 /* CodeDetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04740022E5F99B003050B7 /* CodeDetailsContentView.swift */; };
 		2C04740422E623AD003050B7 /* CodeDetailsLimitItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04740322E623AD003050B7 /* CodeDetailsLimitItemView.swift */; };
+		2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */; };
+		2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */; };
+		2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */; };
 		2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4024068AD000D74D4B /* DatasetTests.swift */; };
 		2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */; };
+		2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA442406E04400D74D4B /* ReplyTests.swift */; };
 		2C06E093223FF0D000AF4DA2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */; };
 		2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */; };
 		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
@@ -1566,8 +1570,13 @@
 		2C0473FE22E5BC20003050B7 /* CodeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailsView.swift; sourceTree = "<group>"; };
 		2C04740022E5F99B003050B7 /* CodeDetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailsContentView.swift; sourceTree = "<group>"; };
 		2C04740322E623AD003050B7 /* CodeDetailsLimitItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailsLimitItemView.swift; sourceTree = "<group>"; };
+		2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptEntity.swift; sourceTree = "<group>"; };
+		2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionEntity.swift; sourceTree = "<group>"; };
+		2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_attempts_caching.xcdatamodel; sourceTree = "<group>"; };
+		2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttemptEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C04BA4024068AD000D74D4B /* DatasetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetTests.swift; sourceTree = "<group>"; };
 		2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
+		2C04BA442406E04400D74D4B /* ReplyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyTests.swift; sourceTree = "<group>"; };
 		2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInputTextView.swift; sourceTree = "<group>"; };
@@ -2488,6 +2497,7 @@
 			isa = PBXGroup;
 			children = (
 				0846B0F51EDDECA900D64D77 /* Assignment */,
+				2C04BA2E24058A4B00D74D4B /* Attempt */,
 				0846B0F91EDDECC100D64D77 /* Block */,
 				0846B0F41EDDEC9E00D64D77 /* Certificate */,
 				0846B10A1EDDEE7100D64D77 /* CodeLimit */,
@@ -2508,6 +2518,7 @@
 				0846B0FD1EDDECD600D64D77 /* Section */,
 				0846B0FA1EDDECC700D64D77 /* Step */,
 				0846B1011EDDECEC00D64D77 /* StepOptions */,
+				2C04BA2D24058A3E00D74D4B /* Submission */,
 				0846B0FC1EDDECD100D64D77 /* Unit */,
 				0846B0FF1EDDECE100D64D77 /* User */,
 				0846B0F71EDDECB500D64D77 /* Video */,
@@ -3646,6 +3657,23 @@
 			path = CodeDetails;
 			sourceTree = "<group>";
 		};
+		2C04BA2D24058A3E00D74D4B /* Submission */ = {
+			isa = PBXGroup;
+			children = (
+				2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */,
+			);
+			path = Submission;
+			sourceTree = "<group>";
+		};
+		2C04BA2E24058A4B00D74D4B /* Attempt */ = {
+			isa = PBXGroup;
+			children = (
+				2C04BA2F24058A7000D74D4B /* AttemptEntity.swift */,
+				2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */,
+			);
+			path = Attempt;
+			sourceTree = "<group>";
+		};
 		2C096584236C56AE005B771A /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -3987,6 +4015,7 @@
 			isa = PBXGroup;
 			children = (
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
+				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
 				2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */,
 			);
@@ -6561,6 +6590,7 @@
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
 				2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */,
 				2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */,
+				2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */,
 				2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
 				62E98CA7BEE2A5954DD4FB4C /* DeepLinkRouteTests.swift in Sources */,
@@ -6717,6 +6747,7 @@
 				2C06E0B02243CD2D00AF4DA2 /* CourseInfoTabReviewsSkeletonView.swift in Sources */,
 				089877A2214047650065DFA2 /* SplitTestingService.swift in Sources */,
 				2CF1B3402163BE820008DA0C /* StoriesViewController.swift in Sources */,
+				2C04BA3024058A7000D74D4B /* AttemptEntity.swift in Sources */,
 				2CAD8B9D2170CDB4003F420B /* LocalNotificationContentProvider.swift in Sources */,
 				86B457031E9F984800D31850 /* RecommendationsAPI.swift in Sources */,
 				08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */,
@@ -6950,6 +6981,7 @@
 				2C10100B239EFAD700440651 /* DiscountingPolicy.swift in Sources */,
 				082E35B220B5F1E4006E28F9 /* StorageRecordsAPI.swift in Sources */,
 				2CB5B15D22941D7000D7F706 /* StepDiscussionThreadButton.swift in Sources */,
+				2C04BA3F24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift in Sources */,
 				08F485B11C58EB0D000165AA /* SortingReply.swift in Sources */,
 				084156931BCBFFBD006B8C73 /* Block+CoreDataProperties.swift in Sources */,
 				2C6BBBBB22B261E700889A45 /* QuizFeedbackView.swift in Sources */,
@@ -7467,6 +7499,7 @@
 				283CD08DD1D81B47A81F70EA /* NewSortingQuizView.swift in Sources */,
 				85CD3504769C1B6C8C21661A /* NewMatchingQuizAssembly.swift in Sources */,
 				FE3A91E790CEB767447AC16A /* NewMatchingQuizViewController.swift in Sources */,
+				2C04BA3424058AA300D74D4B /* SubmissionEntity.swift in Sources */,
 				079FDB74452B3A3BB122EBFB /* NewMatchingQuizInteractor.swift in Sources */,
 				CC41AA7838E7609F7DBECDB7 /* NewMatchingQuizPresenter.swift in Sources */,
 				0BC1205C2851D3AFE8026893 /* NewMatchingQuizDataFlow.swift in Sources */,
@@ -7998,6 +8031,7 @@
 		08D1EF6E1BB5618700BE84E6 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */,
 				2CB1C3B224009ACB001DA83E /* Model_ is_run_user_code_allowed.xcdatamodel */,
 				2C4AD00E23E2E6550049B7B0 /* Model_ discussion_threads.xcdatamodel */,
 				2CBF593423C8A61D00C366A1 /* Model_is_certificate_issued.xcdatamodel */,
@@ -8048,7 +8082,7 @@
 				0802AC531C7222B200C4F3E6 /* Model_v2.xcdatamodel */,
 				08D1EF6F1BB5618700BE84E6 /* Model.xcdatamodel */,
 			);
-			currentVersion = 2CB1C3B224009ACB001DA83E /* Model_ is_run_user_code_allowed.xcdatamodel */;
+			currentVersion = 2C04BA3724058AF100D74D4B /* Model_attempts_caching.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

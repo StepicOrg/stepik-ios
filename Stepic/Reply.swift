@@ -1,11 +1,22 @@
 import Foundation
 import SwiftyJSON
 
-protocol Reply: CustomStringConvertible {
-    var dictValue: [String: Any] { get }
-    init(json: JSON)
-}
+class Reply: NSObject, NSCoding {
+    var dictValue: [String: Any] { [:] }
 
-extension Reply {
-    var description: String { "Reply(\(self.dictValue))" }
+    override var description: String { "Reply(\(self.dictValue))" }
+
+    required init(json: JSON) {
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init()
+    }
+
+    override init() {
+        super.init()
+    }
+
+    func encode(with coder: NSCoder) {}
 }

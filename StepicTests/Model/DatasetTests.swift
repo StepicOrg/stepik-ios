@@ -18,7 +18,7 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"is_multiple_choice":false,"options":["502","5002","520","52"]}"#)
                     let choiceDataset = ChoiceDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "choice")
+                    let path = makeTemporaryPath(name: "choice-dataset")
 
                     // When
                     NSKeyedArchiver.archiveRootObject(choiceDataset, toFile: path)
@@ -36,7 +36,7 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"dataset": "string value"}"#)
                     let stringDataset = StringDataset(json: json["dataset"])
 
-                    let path = makeTemporaryPath(name: "string")
+                    let path = makeTemporaryPath(name: "string-dataset")
 
                     // When
                     NSKeyedArchiver.archiveRootObject(stringDataset, toFile: path)
@@ -53,7 +53,7 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"options": ["Four <p><strong>HTML tags in items enabled.</strong></p>", "Three", "One", "Two"]}"#)
                     let sortingDataset = SortingDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "sorting")
+                    let path = makeTemporaryPath(name: "sorting-dataset")
 
                     // When
                     NSKeyedArchiver.archiveRootObject(sortingDataset, toFile: path)
@@ -70,7 +70,7 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"is_attachments_enabled": false, "is_html_enabled": true}"#)
                     let freeAnswerDataset = FreeAnswerDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "freeAnswer")
+                    let path = makeTemporaryPath(name: "freeAnswer-dataset")
 
                     // When
                     NSKeyedArchiver.archiveRootObject(freeAnswerDataset, toFile: path)
@@ -88,7 +88,7 @@ class DatasetSpec: QuickSpec {
                     let json = JSON(parseJSON: #"{"pairs": [{"first": "Sky", "second": "Green"}, {"first": "Sun", "second": "Orange"}, {"first": "Grass", "second": "Blue"}]}"#)
                     let matchingDataset = MatchingDataset(json: json)
 
-                    let path = makeTemporaryPath(name: "matching")
+                    let path = makeTemporaryPath(name: "matching-dataset")
 
                     // When
                     NSKeyedArchiver.archiveRootObject(matchingDataset, toFile: path)
