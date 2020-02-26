@@ -70,7 +70,7 @@ final class Attempt: JSONSerializable {
         case "choice":
             return ChoiceDataset(json: json)
         case "math", "string", "number", "code", "sql":
-            return String(json: json)
+            return StringDataset(json: json)
         case "sorting":
             return SortingDataset(json: json)
         case "free-answer":
