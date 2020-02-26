@@ -8,6 +8,10 @@ final class SortingDataset: Dataset {
         self.options.hashValue
     }
 
+    override var description: String {
+        "SortingDataset(options: \(self.options))"
+    }
+
     /* Example data:
      {
        "options": [

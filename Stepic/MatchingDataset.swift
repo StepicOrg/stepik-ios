@@ -14,6 +14,10 @@ final class MatchingDataset: Dataset {
         return result
     }
 
+    override var description: String {
+        "MatchingDataset(pairs: \(self.pairs))"
+    }
+
     /* Example data:
      {
        "pairs": [

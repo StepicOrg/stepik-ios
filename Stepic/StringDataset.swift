@@ -8,6 +8,10 @@ final class StringDataset: Dataset {
         self.string.hashValue
     }
 
+    override var description: String {
+        "StringDataset(string: \(self.string))"
+    }
+
     /* Example data:
      ""
      */

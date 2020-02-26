@@ -11,6 +11,10 @@ final class FreeAnswerDataset: Dataset {
         return result
     }
 
+    override var description: String {
+        "FreeAnswerDataset(isHTMLEnabled: \(self.isHTMLEnabled), isAttachmentsEnabled: \(self.isAttachmentsEnabled))"
+    }
+
     /* Example data:
      {
        "is_attachments_enabled": false,

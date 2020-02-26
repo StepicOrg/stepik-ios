@@ -11,6 +11,10 @@ final class ChoiceDataset: Dataset {
         return result
     }
 
+    override var description: String {
+        "ChoiceDataset(isMultipleChoice: \(self.isMultipleChoice), options: \(self.options))"
+    }
+
     /* Example data:
      {
        "is_multiple_choice": false,
