@@ -386,6 +386,7 @@
 		2C04740122E5F99B003050B7 /* CodeDetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04740022E5F99B003050B7 /* CodeDetailsContentView.swift */; };
 		2C04740422E623AD003050B7 /* CodeDetailsLimitItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04740322E623AD003050B7 /* CodeDetailsLimitItemView.swift */; };
 		2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4024068AD000D74D4B /* DatasetTests.swift */; };
+		2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */; };
 		2C06E093223FF0D000AF4DA2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */; };
 		2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */; };
 		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
@@ -1566,6 +1567,7 @@
 		2C04740022E5F99B003050B7 /* CodeDetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailsContentView.swift; sourceTree = "<group>"; };
 		2C04740322E623AD003050B7 /* CodeDetailsLimitItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailsLimitItemView.swift; sourceTree = "<group>"; };
 		2C04BA4024068AD000D74D4B /* DatasetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetTests.swift; sourceTree = "<group>"; };
+		2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInputTextView.swift; sourceTree = "<group>"; };
@@ -3986,6 +3988,7 @@
 			children = (
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
+				2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -6556,6 +6559,7 @@
 				2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */,
 				2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */,
 				080AA2371EA05CD20079272F /* TestConfig.swift in Sources */,
+				2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */,
 				2CF24F67239004D8002DBD0F /* NewStepViewControllerTests.swift in Sources */,
 				2C5967EB23E7828800072800 /* SubmissionTests.swift in Sources */,
 				62E98ABEDEB0D955D6F3A951 /* UserAgentTests.swift in Sources */,
