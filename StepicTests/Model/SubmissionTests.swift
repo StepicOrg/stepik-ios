@@ -18,12 +18,7 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? ChoiceReply) == ChoiceReply(choices: [false, true, false, false])
                     expect(submission.attemptID) == 155142602
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == ""
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "")
                 }
 
                 it("successfully parses with text reply") {
@@ -36,12 +31,7 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? TextReply) == TextReply(text: "text")
                     expect(submission.attemptID) == 145802794
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == ""
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "")
                 }
 
                 it("successfully parses with number reply") {
@@ -54,12 +44,9 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? NumberReply) == NumberReply(number: "25.5")
                     expect(submission.attemptID) == 145800697
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == "Optional feedback on correct submission"
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(
+                        string: "Optional feedback on correct submission"
+                    )
                 }
 
                 it("successfully parses with free-answer reply") {
@@ -72,12 +59,7 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? FreeAnswerReply) == FreeAnswerReply(text: "test")
                     expect(submission.attemptID) == 145801887
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == ""
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "")
                 }
 
                 it("successfully parses with math reply") {
@@ -90,12 +72,7 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? MathReply) == MathReply(formula: "2*x+y/z")
                     expect(submission.attemptID) == 145803773
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == ""
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "")
                 }
 
                 it("successfully parses with sorting reply") {
@@ -108,12 +85,7 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? SortingReply) == SortingReply(ordering: [0, 1, 2])
                     expect(submission.attemptID) == 145804003
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == ""
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "")
                 }
 
                 it("successfully parses with matching reply") {
@@ -126,12 +98,7 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? MatchingReply) == MatchingReply(ordering: [2, 1, 0])
                     expect(submission.attemptID) == 145805676
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == ""
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "")
                 }
 
                 it("successfully parses with code reply") {
@@ -161,12 +128,7 @@ class SubmissionSpec: QuickSpec {
                     expect(submission.reply as? SQLReply) == SQLReply(code: "INSERT INTO users (name) VALUES ('Fluttershy');\n")
                     expect(submission.attemptID) == 145794719
                     expect(submission.attempt).to(beNil())
-
-                    if case .text(let stringValue) = submission.feedback {
-                        expect(stringValue) == "Affected rows: 1"
-                    } else {
-                        fail("unexpected SubmissionFeedback type")
-                    }
+                    expect(submission.feedback) == StringSubmissionFeedback(string: "Affected rows: 1")
                 }
             }
         }

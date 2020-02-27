@@ -391,6 +391,11 @@
 		2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4024068AD000D74D4B /* DatasetTests.swift */; };
 		2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */; };
 		2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA442406E04400D74D4B /* ReplyTests.swift */; };
+		2C04BA4A24072EA600D74D4B /* ChoiceSubmissionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4924072EA600D74D4B /* ChoiceSubmissionFeedback.swift */; };
+		2C04BA4C24072EB600D74D4B /* SubmissionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4B24072EB600D74D4B /* SubmissionFeedback.swift */; };
+		2C04BA4E24072ED900D74D4B /* StringSubmissionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */; };
+		2C04BA502407369E00D74D4B /* SubmissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */; };
+		2C04BA522407406500D74D4B /* SubmissionFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */; };
 		2C06E093223FF0D000AF4DA2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */; };
 		2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */; };
 		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
@@ -1577,6 +1582,11 @@
 		2C04BA4024068AD000D74D4B /* DatasetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetTests.swift; sourceTree = "<group>"; };
 		2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		2C04BA442406E04400D74D4B /* ReplyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyTests.swift; sourceTree = "<group>"; };
+		2C04BA4924072EA600D74D4B /* ChoiceSubmissionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSubmissionFeedback.swift; sourceTree = "<group>"; };
+		2C04BA4B24072EB600D74D4B /* SubmissionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionFeedback.swift; sourceTree = "<group>"; };
+		2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubmissionFeedback.swift; sourceTree = "<group>"; };
+		2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionStatus.swift; sourceTree = "<group>"; };
+		2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionFeedbackTests.swift; sourceTree = "<group>"; };
 		2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInputTextView.swift; sourceTree = "<group>"; };
@@ -3503,6 +3513,7 @@
 				08F5554D1C4F924000C877E8 /* Attempt.swift */,
 				08F555571C4FAF5200C877E8 /* Submission.swift */,
 				08F5555E1C4FB28D00C877E8 /* Datasets */,
+				2C04BA4824072E7700D74D4B /* Feedbacks */,
 				08F5555D1C4FB28400C877E8 /* Replies */,
 			);
 			name = "Attempts&Sumbissions";
@@ -3672,6 +3683,16 @@
 				2C04BA3E24067D0D00D74D4B /* AttemptEntity+CoreDataProperties.swift */,
 			);
 			path = Attempt;
+			sourceTree = "<group>";
+		};
+		2C04BA4824072E7700D74D4B /* Feedbacks */ = {
+			isa = PBXGroup;
+			children = (
+				2C04BA4924072EA600D74D4B /* ChoiceSubmissionFeedback.swift */,
+				2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */,
+				2C04BA4B24072EB600D74D4B /* SubmissionFeedback.swift */,
+			);
+			path = Feedbacks;
 			sourceTree = "<group>";
 		};
 		2C096584236C56AE005B771A /* Foundation */ = {
@@ -4016,6 +4037,7 @@
 			children = (
 				2C04BA4024068AD000D74D4B /* DatasetTests.swift */,
 				2C04BA442406E04400D74D4B /* ReplyTests.swift */,
+				2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */,
 				2C5967EA23E7828800072800 /* SubmissionTests.swift */,
 				2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */,
 			);
@@ -4362,6 +4384,7 @@
 				2C20778322BBA54800D44DC0 /* QuizStatus.swift */,
 				2C3DAB90233D735D00453B1C /* StepFontSize.swift */,
 				2C3ABA8C23D1FE1D00E90439 /* StepikSocialNetwork.swift */,
+				2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */,
 				2C8F3AE423CCBEB9004D113A /* Video */,
 			);
 			path = Model;
@@ -6579,6 +6602,7 @@
 			files = (
 				2CB51F6B204FC6220008431C /* UserActivitySpec.swift in Sources */,
 				08AB823B1D75AA9300FDEADE /* CookieTests.swift in Sources */,
+				2C04BA522407406500D74D4B /* SubmissionFeedbackTests.swift in Sources */,
 				2CF24F642390040F002DBD0F /* BlockTypeSpec.swift in Sources */,
 				2C23C12921AED421001DCF89 /* NextLessonServiceTests.swift in Sources */,
 				085D5CE41D007F6500092060 /* HTMLParsingTests.swift in Sources */,
@@ -6782,6 +6806,7 @@
 				088E73ED20614DFC00D458E3 /* UpdateRequestMaker.swift in Sources */,
 				081A14FF20D963090016364E /* AmplitudeAnalyticsEvents.swift in Sources */,
 				08CA59EE1BBFC962008DC44D /* UIButtonExtensions.swift in Sources */,
+				2C04BA4E24072ED900D74D4B /* StringSubmissionFeedback.swift in Sources */,
 				082E35B020B5B14A006E28F9 /* StorageData.swift in Sources */,
 				2C97E00C215E4805005684A1 /* SearchQueriesView.swift in Sources */,
 				08A0218E1D675B4700915679 /* SectionNavigationDelegate.swift in Sources */,
@@ -6807,6 +6832,7 @@
 				08407EC71DE4891D0082C4E7 /* FBSocialSDKProvider.swift in Sources */,
 				089574561E5B76E700C12D21 /* UIImageView+SVGDownload.swift in Sources */,
 				2C2F0BEE2186F196007DCA0A /* NotificationsRequestAlertDataSource.swift in Sources */,
+				2C04BA4C24072EB600D74D4B /* SubmissionFeedback.swift in Sources */,
 				2C453398204D46E90061342A /* PinsMap.swift in Sources */,
 				2C0B42C1234CD17C00B03EA1 /* CustomMenuBlockTableViewCell.swift in Sources */,
 				085DF8DB1C9AB94B006809D9 /* TimeFormatHelper.swift in Sources */,
@@ -6956,6 +6982,7 @@
 				08901E721CD1173200D94613 /* Version.swift in Sources */,
 				2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */,
 				08F5556C1C5267A600C877E8 /* GCDThings.swift in Sources */,
+				2C04BA4A24072EA600D74D4B /* ChoiceSubmissionFeedback.swift in Sources */,
 				080CE15E1E9580CD0089A27F /* AttemptsAPI.swift in Sources */,
 				08DF788D1F5D6A7600AEEA85 /* HeaderMenuBlockTableViewCell.swift in Sources */,
 				0860D9191F115D830087D61B /* CodeSuggestionsTableViewController.swift in Sources */,
@@ -7246,6 +7273,7 @@
 				62E98E0E7580C85E9C64A023 /* CourseListDataFlow.swift in Sources */,
 				62E981E2B7E85B5E6BD86FD7 /* CourseListProvider.swift in Sources */,
 				62E983F32020D8CFA62317AC /* CourseListPersistenceService.swift in Sources */,
+				2C04BA47240726BA00D74D4B /* SubmissionEntity+CoreDataProperties.swift in Sources */,
 				62E98A850FE97501722FEECF /* CourseListNetworkService.swift in Sources */,
 				2C7F782922708AA60089FDD7 /* StepTabBarButton.swift in Sources */,
 				62E98844F3BEE9CC807B462B /* CourseListPersistenceStorage.swift in Sources */,
@@ -7350,6 +7378,7 @@
 				62E982132F6F132B7B228D1D /* UserAccountService.swift in Sources */,
 				62E9850C449D6419FA06D8F3 /* HomeAssembly.swift in Sources */,
 				62E98381564D069955621A74 /* HomeViewController.swift in Sources */,
+				2C04BA502407369E00D74D4B /* SubmissionStatus.swift in Sources */,
 				2CC2770023EB9E2200E88D6E /* SubmissionsSkeletonView.swift in Sources */,
 				62E98FF1ADE8EA2198909DDA /* HomeInteractor.swift in Sources */,
 				62E9867F8030401514DBCB08 /* HomePresenter.swift in Sources */,

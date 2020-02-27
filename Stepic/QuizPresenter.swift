@@ -534,12 +534,6 @@ enum QuizState {
     case nothing
 }
 
-enum SubmissionStatus: String {
-    case correct = "correct"
-    case wrong = "wrong"
-    case evaluation = "evaluation"
-}
-
 protocol QuizView: AnyObject {
     //Quiz content
     func display(dataset: Dataset)

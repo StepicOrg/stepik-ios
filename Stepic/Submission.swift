@@ -49,7 +49,7 @@ final class Submission: JSONSerializable {
         self.id = json[JSONKey.id.rawValue].intValue
         self.status = json[JSONKey.status.rawValue].string
         self.hint = json[JSONKey.hint.rawValue].string
-        self.feedback = SubmissionFeedback(json: json[JSONKey.feedback.rawValue])
+        self.feedback = self.getFeedbackFromJSON(json[JSONKey.feedback.rawValue])
         self.attemptID = json[JSONKey.attempt.rawValue].intValue
         self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]) ?? Date()
     }
@@ -87,6 +87,16 @@ final class Submission: JSONSerializable {
         }
     }
 
+    private func getFeedbackFromJSON(_ json: JSON) -> SubmissionFeedback? {
+        if let _ = json[JSONKey.optionsFeedback.rawValue].arrayObject as? [String] {
+            return ChoiceSubmissionFeedback(json: json)
+        }
+        if let _ = json.string {
+            return StringSubmissionFeedback(json: json)
+        }
+        return nil
+    }
+
     // MARK: Types
 
     enum JSONKey: String {
@@ -97,6 +107,7 @@ final class Submission: JSONSerializable {
         case reply
         case feedback
         case time
+        case optionsFeedback = "options_feedback"
     }
 }
 
@@ -117,22 +128,5 @@ extension Submission: CustomDebugStringConvertible {
         attemptID: \(attemptID), \
         attempt: \(attempt ??? "nil"))
         """
-    }
-}
-
-enum SubmissionFeedback {
-    case text(_ string: String)
-    case options(_ choices: [String])
-
-    init?(json: JSON) {
-        if let options = json["options_feedback"].arrayObject as? [String] {
-            self = .options(options)
-            return
-        }
-        if let stringValue = json.string {
-            self = .text(stringValue)
-            return
-        }
-        return nil
     }
 }
