@@ -391,6 +391,7 @@
 		2C04BA4124068AD000D74D4B /* DatasetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4024068AD000D74D4B /* DatasetTests.swift */; };
 		2C04BA432406B7D800D74D4B /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */; };
 		2C04BA452406E04400D74D4B /* ReplyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA442406E04400D74D4B /* ReplyTests.swift */; };
+		2C04BA47240726BA00D74D4B /* SubmissionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA46240726BA00D74D4B /* SubmissionEntity+CoreDataProperties.swift */; };
 		2C04BA4A24072EA600D74D4B /* ChoiceSubmissionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4924072EA600D74D4B /* ChoiceSubmissionFeedback.swift */; };
 		2C04BA4C24072EB600D74D4B /* SubmissionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4B24072EB600D74D4B /* SubmissionFeedback.swift */; };
 		2C04BA4E24072ED900D74D4B /* StringSubmissionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */; };
@@ -1582,6 +1583,7 @@
 		2C04BA4024068AD000D74D4B /* DatasetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetTests.swift; sourceTree = "<group>"; };
 		2C04BA422406B7D800D74D4B /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		2C04BA442406E04400D74D4B /* ReplyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyTests.swift; sourceTree = "<group>"; };
+		2C04BA46240726BA00D74D4B /* SubmissionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubmissionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C04BA4924072EA600D74D4B /* ChoiceSubmissionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceSubmissionFeedback.swift; sourceTree = "<group>"; };
 		2C04BA4B24072EB600D74D4B /* SubmissionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionFeedback.swift; sourceTree = "<group>"; };
 		2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubmissionFeedback.swift; sourceTree = "<group>"; };
@@ -3672,6 +3674,7 @@
 			isa = PBXGroup;
 			children = (
 				2C04BA3324058AA300D74D4B /* SubmissionEntity.swift */,
+				2C04BA46240726BA00D74D4B /* SubmissionEntity+CoreDataProperties.swift */,
 			);
 			path = Submission;
 			sourceTree = "<group>";

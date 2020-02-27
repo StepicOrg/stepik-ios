@@ -47,8 +47,11 @@ final class MatchingDataset: Dataset {
     }
 
     required init?(coder: NSCoder) {
-        let firstValues = coder.decodeObject(forKey: JSONKey.first.rawValue) as! [String]
-        let secondValues = coder.decodeObject(forKey: JSONKey.second.rawValue) as! [String]
+        guard let firstValues = coder.decodeObject(forKey: JSONKey.first.rawValue) as? [String],
+              let secondValues = coder.decodeObject(forKey: JSONKey.second.rawValue) as? [String] else {
+            return nil
+        }
+
         self.pairs = zip(firstValues, secondValues).map { (first: $0, second: $1) }
 
         super.init(coder: coder)

@@ -34,8 +34,12 @@ final class ChoiceDataset: Dataset {
     }
 
     required init?(coder: NSCoder) {
+        guard let options = coder.decodeObject(forKey: JSONKey.options.rawValue) as? [String] else {
+            return nil
+        }
+
         self.isMultipleChoice = coder.decodeBool(forKey: JSONKey.isMultipleChoice.rawValue)
-        self.options = coder.decodeObject(forKey: JSONKey.options.rawValue) as! [String]
+        self.options = options
 
         super.init(coder: coder)
     }

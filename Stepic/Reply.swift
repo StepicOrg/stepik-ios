@@ -6,15 +6,15 @@ class Reply: NSObject, NSCoding {
 
     override var description: String { "Reply(\(self.dictValue))" }
 
+    override init() {
+        super.init()
+    }
+
     required init(json: JSON) {
         super.init()
     }
 
     required init?(coder: NSCoder) {
-        super.init()
-    }
-
-    override init() {
         super.init()
     }
 

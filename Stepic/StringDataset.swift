@@ -21,7 +21,12 @@ final class StringDataset: Dataset {
     }
 
     required init?(coder: NSCoder) {
-        self.string = coder.decodeObject(forKey: CoderKey.string.rawValue) as! String
+        guard let string = coder.decodeObject(forKey: CoderKey.string.rawValue) as? String else {
+            return nil
+        }
+
+        self.string = string
+
         super.init(coder: coder)
     }
 

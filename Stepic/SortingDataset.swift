@@ -28,7 +28,12 @@ final class SortingDataset: Dataset {
     }
 
     required init?(coder: NSCoder) {
-        self.options = coder.decodeObject(forKey: JSONKey.options.rawValue) as! [String]
+        guard let options = coder.decodeObject(forKey: JSONKey.options.rawValue) as? [String] else {
+            return nil
+        }
+
+        self.options = options
+
         super.init(coder: coder)
     }
 
