@@ -14,25 +14,25 @@ protocol BaseQuizProviderProtocol {
 }
 
 final class BaseQuizProvider: BaseQuizProviderProtocol {
-    private let attemptsProvider: AttemptsProviderProtocol
-    private let submissionsNetworkService: SubmissionsNetworkServiceProtocol
+    private let attemptsRepository: AttemptsRepositoryProtocol
+    private let submissionsRepository: SubmissionsRepositoryProtocol
     private let userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
     private let userAccountService: UserAccountServiceProtocol
 
     init(
-        attemptsProvider: AttemptsProviderProtocol,
-        submissionsNetworkService: SubmissionsNetworkServiceProtocol,
+        attemptsRepository: AttemptsRepositoryProtocol,
+        submissionsRepository: SubmissionsRepositoryProtocol,
         userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol,
         userAccountService: UserAccountServiceProtocol
     ) {
-        self.attemptsProvider = attemptsProvider
-        self.submissionsNetworkService = submissionsNetworkService
+        self.attemptsRepository = attemptsRepository
+        self.submissionsRepository = submissionsRepository
         self.userActivitiesNetworkService = userActivitiesNetworkService
         self.userAccountService = userAccountService
     }
 
     func createAttempt(for step: Step) -> Promise<Attempt?> {
-        self.attemptsProvider.create(stepID: step.id, blockName: step.block.name)
+        self.attemptsRepository.create(stepID: step.id, blockName: step.block.name)
     }
 
     func fetchAttempts(for step: Step) -> Promise<([Attempt], Meta)> {
@@ -40,23 +40,36 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
             return Promise(error: Error.fetchFailed)
         }
 
-        return self.attemptsProvider.fetch(stepID: step.id, userID: userID, blockName: step.block.name)
+        return self.attemptsRepository.fetch(stepID: step.id, userID: userID, blockName: step.block.name)
     }
 
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)> {
-        self.submissionsNetworkService.fetch(attemptID: attempt.id, blockName: step.block.name)
+        self.submissionsRepository.fetchAttemptSubmissions(
+            attemptID: attempt.id,
+            blockName: step.block.name,
+            dataSourceType: .remote
+        )
     }
 
     func fetchSubmissions(for step: Step, page: Int = 1) -> Promise<([Submission], Meta)> {
-        self.submissionsNetworkService.fetch(stepID: step.id, blockName: step.block.name, page: page)
+        self.submissionsRepository.fetchStepSubmissions(
+            stepID: step.id,
+            userID: nil,
+            blockName: step.block.name,
+            page: page
+        )
     }
 
     func fetchSubmission(id: Submission.IdType, step: Step) -> Promise<Submission?> {
-        self.submissionsNetworkService.fetch(submissionID: id, blockName: step.block.name)
+        self.submissionsRepository.fetchSubmission(id: id, blockName: step.block.name, dataSourceType: .remote)
     }
 
     func createSubmission(for step: Step, attempt: Attempt, reply: Reply) -> Promise<Submission?> {
-        self.submissionsNetworkService.create(attemptID: attempt.id, blockName: step.block.name, reply: reply)
+        self.submissionsRepository.createSubmission(
+            Submission(attempt: attempt.id, reply: reply),
+            blockName: step.block.name,
+            dataSourceType: .remote
+        )
     }
 
     func fetchActivity(for user: User.IdType) -> Promise<UserActivity> {

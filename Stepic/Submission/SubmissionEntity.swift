@@ -70,20 +70,12 @@ final class SubmissionEntity: NSManagedObject {
         }
     }
 
-    var timeString: String? {
+    var time: Date {
         get {
-            self.managedTime
+            self.managedTime ?? Date()
         }
         set {
             self.managedTime = newValue
-        }
-    }
-
-    var time: Date? {
-        if let timeString = self.timeString {
-            return Date(timeIntervalSince1970: TimeInterval(timeString: timeString))
-        } else {
-            return nil
         }
     }
 
@@ -100,5 +92,40 @@ final class SubmissionEntity: NSManagedObject {
 
     convenience init() {
         self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
+    }
+}
+
+// MARK: - SubmissionEntity (PlainObject Support) -
+
+extension SubmissionEntity {
+    var plainObject: Submission {
+        Submission(
+            id: self.id,
+            status: self.statusString,
+            hint: self.hint,
+            feedback: self.feedback,
+            time: self.time,
+            reply: self.reply,
+            attemptID: self.attemptID,
+            attempt: self.attempt?.plainObject
+        )
+    }
+
+    convenience init(submission: Submission, managedObjectContext: NSManagedObjectContext) {
+        guard let entity = NSEntityDescription.entity(
+            forEntityName: "SubmissionEntity", in: managedObjectContext
+        ) else {
+            fatalError("Wrong object type")
+        }
+
+        self.init(entity: entity, insertInto: managedObjectContext)
+
+        self.id = submission.id
+        self.attemptID = submission.attemptID
+        self.reply = submission.reply
+        self.hint = submission.hint
+        self.statusString = submission.status
+        self.feedback = submission.feedback
+        self.time = submission.time
     }
 }

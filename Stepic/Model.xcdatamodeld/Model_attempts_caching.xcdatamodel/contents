@@ -261,7 +261,7 @@
         <attribute name="managedID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedReply" optional="YES" attributeType="Transformable" customClassName=".Reply" syncable="YES"/>
         <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="managedTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managedTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedAttempt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AttemptEntity" inverseName="managedSubmission" inverseEntity="AttemptEntity" syncable="YES"/>
     </entity>
     <entity name="Unit" representedClassName=".Unit" syncable="YES">
@@ -314,6 +314,7 @@
     </entity>
     <elements>
         <element name="Assignment" positionX="182.73046875" positionY="260.6640625" width="128" height="105"/>
+        <element name="AttemptEntity" positionX="-450" positionY="-234" width="128" height="28"/>
         <element name="Block" positionX="-85.77734375" positionY="236.91796875" width="128" height="105"/>
         <element name="Certificate" positionX="-372.0390625" positionY="364.015625" width="128" height="195"/>
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>
@@ -334,11 +335,10 @@
         <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="28"/>
         <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="28"/>
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>
+        <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="163"/>
         <element name="Unit" positionX="396.875" positionY="76.44140625" width="128" height="255"/>
         <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="28"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>
         <element name="VideoURL" positionX="445.92578125" positionY="580.05078125" width="128" height="90"/>
-        <element name="AttemptEntity" positionX="-450" positionY="-234" width="128" height="28"/>
-        <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="28"/>
     </elements>
 </model>

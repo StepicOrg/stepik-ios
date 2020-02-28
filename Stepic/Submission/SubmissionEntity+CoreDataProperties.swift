@@ -10,9 +10,13 @@ extension SubmissionEntity {
     @NSManaged var managedStatus: String?
     @NSManaged var managedFeedback: SubmissionFeedback?
 
-    @NSManaged var managedTime: String?
+    @NSManaged var managedTime: Date?
 
     @NSManaged var managedAttempt: AttemptEntity?
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedID), ascending: false)]
+    }
 
     @nonobjc
     static func fetchRequest() -> NSFetchRequest<SubmissionEntity> {

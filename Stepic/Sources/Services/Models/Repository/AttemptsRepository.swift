@@ -1,13 +1,13 @@
 import Foundation
 import PromiseKit
 
-protocol AttemptsProviderProtocol: AnyObject {
+protocol AttemptsRepositoryProtocol: AnyObject {
     func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<([Attempt], Meta)>
     func fetch(stepID: Step.IdType, userID: User.IdType, blockName: String) -> Promise<([Attempt], Meta)>
     func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt?>
 }
 
-final class AttemptsProvider: AttemptsProviderProtocol {
+final class AttemptsRepository: AttemptsRepositoryProtocol {
     private let attemptsNetworkService: AttemptsNetworkServiceProtocol
     private let attemptsPersistenceService: AttemptsPersistenceServiceProtocol
 

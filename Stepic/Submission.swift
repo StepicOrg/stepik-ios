@@ -30,6 +30,26 @@ final class Submission: JSONSerializable {
         ]
     }
 
+    init(
+        id: IdType,
+        status: String?,
+        hint: String?,
+        feedback: SubmissionFeedback?,
+        time: Date,
+        reply: Reply?,
+        attemptID: Attempt.IdType,
+        attempt: Attempt?
+    ) {
+        self.id = id
+        self.status = status
+        self.hint = hint
+        self.feedback = feedback
+        self.time = time
+        self.reply = reply
+        self.attemptID = attemptID
+        self.attempt = attempt
+    }
+
     init(json: JSON, stepName: String) {
         self.update(json: json)
         self.reply = nil
