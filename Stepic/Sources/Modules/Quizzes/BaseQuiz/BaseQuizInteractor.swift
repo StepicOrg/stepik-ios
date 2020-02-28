@@ -221,21 +221,11 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     private func countSubmissions() -> Guarantee<Int> {
         Guarantee { seal in
-            var count = 0
-            func loadSubmissions(page: Int) {
-                self.provider.fetchSubmissions(for: self.step, page: page).done { submissions, meta in
-                    count += submissions.count
-
-                    if meta.hasNext {
-                        loadSubmissions(page: page + 1)
-                    } else {
-                        seal(count)
-                    }
-                }.catch { _ in
-                    seal(0)
-                }
-            }
-            loadSubmissions(page: 1)
+            self.provider
+                .fetchSubmissions(for: self.step, page: 1)
+                .map { $0.0.count }
+                .done { seal($0) }
+                .catch { _ in seal(0) }
         }
     }
 
