@@ -190,7 +190,7 @@ final class QuizPresenter {
                 return
             }
 
-            _ = s.attemptsAPI.retrieve(stepName: s.step.block.name, stepID: s.step.id, success: {
+            _ = s.attemptsAPI.retrieve(stepName: s.step.block.name, stepID: s.step.id, userID: AuthInfo.shared.userId ?? 0, success: {
                 [weak self]
                 attempts, _ in
                 guard let s = self else { return }

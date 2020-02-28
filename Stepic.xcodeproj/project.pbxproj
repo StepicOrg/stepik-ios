@@ -397,6 +397,7 @@
 		2C04BA4E24072ED900D74D4B /* StringSubmissionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */; };
 		2C04BA502407369E00D74D4B /* SubmissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */; };
 		2C04BA522407406500D74D4B /* SubmissionFeedbackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */; };
+		2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */; };
 		2C06E093223FF0D000AF4DA2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */; };
 		2C06E095223FF46500AF4DA2 /* ProfilesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */; };
 		2C06E09B2241045800AF4DA2 /* TableInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */; };
@@ -455,6 +456,7 @@
 		2C2485492101EE3E006F8858 /* DownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2485482101EE3E006F8858 /* DownloaderTests.swift */; };
 		2C251BA6235A1B1E00D3FBD8 /* DiscussionsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C251BA5235A1B1E00D3FBD8 /* DiscussionsCellView.swift */; };
 		2C251BA8235A1B3D00D3FBD8 /* DiscussionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C251BA7235A1B3D00D3FBD8 /* DiscussionsTableViewCell.swift */; };
+		2C26BF0A240810A3000EE23C /* AttemptsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26BF09240810A3000EE23C /* AttemptsProvider.swift */; };
 		2C295A6A222D8BAB008878B6 /* EnrollmentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CB0E21FB48F39008CB1AC /* EnrollmentsAPI.swift */; };
 		2C2972052147F5FD001502BD /* CourseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9F71D1FC38C9E00640F1F /* CourseTag.swift */; };
 		2C29B63022C664C500730C16 /* ChoiceElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C29B62F22C664C500730C16 /* ChoiceElementView.swift */; };
@@ -1589,6 +1591,7 @@
 		2C04BA4D24072ED900D74D4B /* StringSubmissionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSubmissionFeedback.swift; sourceTree = "<group>"; };
 		2C04BA4F2407369E00D74D4B /* SubmissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionStatus.swift; sourceTree = "<group>"; };
 		2C04BA512407406500D74D4B /* SubmissionFeedbackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionFeedbackTests.swift; sourceTree = "<group>"; };
+		2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsPersistenceService.swift; sourceTree = "<group>"; };
 		2C06E092223FF0D000AF4DA2 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		2C06E094223FF46500AF4DA2 /* ProfilesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesNetworkService.swift; sourceTree = "<group>"; };
 		2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInputTextView.swift; sourceTree = "<group>"; };
@@ -1652,6 +1655,7 @@
 		2C2485482101EE3E006F8858 /* DownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloaderTests.swift; sourceTree = "<group>"; };
 		2C251BA5235A1B1E00D3FBD8 /* DiscussionsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsCellView.swift; sourceTree = "<group>"; };
 		2C251BA7235A1B3D00D3FBD8 /* DiscussionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionsTableViewCell.swift; sourceTree = "<group>"; };
+		2C26BF09240810A3000EE23C /* AttemptsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttemptsProvider.swift; sourceTree = "<group>"; };
 		2C29B62F22C664C500730C16 /* ChoiceElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceElementView.swift; sourceTree = "<group>"; };
 		2C2D2D8A22E9FC2F003F1563 /* CodeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditorView.swift; sourceTree = "<group>"; };
 		2C2EA36A212D5FEF002116C9 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -3845,6 +3849,14 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		2C26BF0824081080000EE23C /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				2C26BF09240810A3000EE23C /* AttemptsProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
 		2C29B62E22C6649100730C16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -5059,6 +5071,7 @@
 			isa = PBXGroup;
 			children = (
 				2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */,
+				2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */,
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
 				62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */,
 				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
@@ -5492,6 +5505,7 @@
 			children = (
 				62E984335766CF35B18ED73E /* Network */,
 				62E9806BB6A2F9AAB1D7D9F1 /* Persistence */,
+				2C26BF0824081080000EE23C /* Provider */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -6762,6 +6776,7 @@
 				082799481E9B81AF008A3786 /* RateAppAlertManager.swift in Sources */,
 				08F485AF1C58E946000165AA /* SortingDataset.swift in Sources */,
 				2CF1B33E2163BE720008DA0C /* StoriesAssembly.swift in Sources */,
+				2C04BA542407C3BF00D74D4B /* AttemptsPersistenceService.swift in Sources */,
 				083AE48320BD72CA00102FE4 /* PersonalDeadlinesService.swift in Sources */,
 				0829ED9920C8825E0018E6FF /* ExploreDefaultsContainer.swift in Sources */,
 				080DCF171C4518BC00DE3E2E /* SearchResult.swift in Sources */,
@@ -7042,6 +7057,7 @@
 				2CE8391320C8102300FE3672 /* AchievementBadgeView.swift in Sources */,
 				08F4859A1C57868E000165AA /* TextReply.swift in Sources */,
 				2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */,
+				2C26BF0A240810A3000EE23C /* AttemptsProvider.swift in Sources */,
 				080E1ACC212571D9006B58A9 /* StoryPartViewFactory.swift in Sources */,
 				0828FF831BC800C0000AFEA7 /* JSONSerializable.swift in Sources */,
 				086D5B3F20127A25000F7715 /* Tooltip.swift in Sources */,

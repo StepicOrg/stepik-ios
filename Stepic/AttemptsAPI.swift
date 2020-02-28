@@ -63,11 +63,12 @@ final class AttemptsAPI: APIEndpoint {
         }
     }
 
-    func retrieve(stepName: String, stepID: Int) -> Promise<([Attempt], Meta)> {
+    func retrieve(stepName: String, stepID: Int, userID: Int) -> Promise<([Attempt], Meta)> {
         Promise { seal in
             self.retrieve(
                 stepName: stepName,
                 stepID: stepID,
+                userID: userID,
                 success: { attempts, meta in
                     seal.fulfill((attempts, meta))
                 },
@@ -82,6 +83,7 @@ final class AttemptsAPI: APIEndpoint {
     func retrieve(
         stepName: String,
         stepID: Int,
+        userID: Int,
         headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ([Attempt], Meta) -> Void,
         error errorHandler: @escaping (String) -> Void
@@ -90,12 +92,7 @@ final class AttemptsAPI: APIEndpoint {
 
         var params: Parameters = [:]
         params["step"] = stepID
-
-        if let userID = AuthInfo.shared.userId {
-            params["user"] = userID as NSObject?
-        } else {
-            print("no user id!")
-        }
+        params["user"] = userID
 
         return self.manager.request(
             "\(StepikApplicationsInfo.apiURL)/attempts",

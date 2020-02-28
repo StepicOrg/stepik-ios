@@ -17,6 +17,10 @@ extension AttemptEntity {
     @NSManaged var managedUser: User?
     @NSManaged var managedSubmission: SubmissionEntity?
 
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        [NSSortDescriptor(key: #keyPath(managedID), ascending: false)]
+    }
+
     @nonobjc
     static func fetchRequest() -> NSFetchRequest<AttemptEntity> {
         return NSFetchRequest<AttemptEntity>(entityName: "AttemptEntity")

@@ -45,6 +45,17 @@ final class Attempt: JSONSerializable {
         self.step = step
     }
 
+    init(id: Int, dataset: Dataset?, datasetUrl: String?, time: String?, status: String?, step: Int, timeLeft: String?, user: Int?) {
+        self.id = id
+        self.dataset = dataset
+        self.datasetUrl = datasetUrl
+        self.time = time
+        self.status = status
+        self.step = step
+        self.timeLeft = timeLeft
+        self.user = user
+    }
+
     required init(json: JSON) {
         self.update(json: json)
     }

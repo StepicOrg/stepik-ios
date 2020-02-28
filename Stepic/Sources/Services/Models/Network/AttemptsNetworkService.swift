@@ -3,7 +3,7 @@ import PromiseKit
 
 protocol AttemptsNetworkServiceProtocol: AnyObject {
     func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<([Attempt], Meta)>
-    func fetch(stepID: Step.IdType, blockName: String) -> Promise<([Attempt], Meta)>
+    func fetch(stepID: Step.IdType, userID: User.IdType, blockName: String) -> Promise<([Attempt], Meta)>
     func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt?>
 }
 
@@ -24,9 +24,9 @@ final class AttemptsNetworkService: AttemptsNetworkServiceProtocol {
         }
     }
 
-    func fetch(stepID: Step.IdType, blockName: String) -> Promise<([Attempt], Meta)> {
+    func fetch(stepID: Step.IdType, userID: User.IdType, blockName: String) -> Promise<([Attempt], Meta)> {
         Promise { seal in
-            self.attemptsAPI.retrieve(stepName: blockName, stepID: stepID).done { attempts, meta in
+            self.attemptsAPI.retrieve(stepName: blockName, stepID: stepID, userID: userID).done { attempts, meta in
                 seal.fulfill((attempts, meta))
             }.catch { _ in
                 seal.reject(Error.fetchFailed)

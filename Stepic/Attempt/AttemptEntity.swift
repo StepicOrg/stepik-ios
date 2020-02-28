@@ -121,3 +121,42 @@ final class AttemptEntity: NSManagedObject {
         self.init(entity: Self.oldEntity, insertInto: CoreDataHelper.shared.context)
     }
 }
+
+// MARK: - AttemptEntity (PlainObject Support) -
+
+extension AttemptEntity {
+    var plainObject: Attempt {
+        Attempt(
+            id: self.id,
+            dataset: self.dataset,
+            datasetUrl: self.datasetURL,
+            time: self.timeString,
+            status: self.status,
+            step: self.stepID,
+            timeLeft: self.timeLeftString,
+            user: self.userID
+        )
+    }
+
+    convenience init(attempt: Attempt, managedObjectContext: NSManagedObjectContext) {
+        guard let entity = NSEntityDescription.entity(
+            forEntityName: "AttemptEntity", in: managedObjectContext
+        ) else {
+            fatalError("Wrong object type")
+        }
+
+        self.init(entity: entity, insertInto: managedObjectContext)
+
+        self.id = attempt.id
+        self.stepID = attempt.step
+        self.dataset = attempt.dataset
+        self.datasetURL = attempt.datasetUrl
+        self.status = attempt.status
+        self.timeString = attempt.time
+        self.timeLeftString = attempt.timeLeft
+
+        if let userID = attempt.user {
+            self.userID = userID
+        }
+    }
+}
