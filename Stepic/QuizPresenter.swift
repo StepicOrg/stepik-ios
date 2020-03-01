@@ -97,7 +97,7 @@ final class QuizPresenter {
                 }
             }
 
-            switch submission.status ?? "evaluation" {
+            switch submission.statusString ?? "evaluation" {
             case "evaluation":
                 break
 
@@ -444,12 +444,12 @@ final class QuizPresenter {
                 guard let s = self else { return }
                 _ = s.submissionsAPI.retrieve(stepName: s.step.block.name, submissionId: id, success: {
                     submission in
-                    print("did get submission id \(id), with status \(String(describing: submission.status))")
-                    if submission.status == "evaluation" {
+                    print("did get submission id \(id), with status \(String(describing: submission.statusString))")
+                    if submission.statusString == "evaluation" {
                         s.checkSubmission(id, time: time + 1, completion: completion)
                     } else {
                         s.submission = submission
-                        if submission.status == "correct" {
+                        if submission.statusString == "correct" {
                             s.checkCorrect()
                         }
                         completion?()

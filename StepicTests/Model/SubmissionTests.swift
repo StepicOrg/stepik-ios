@@ -13,7 +13,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.choice.rawValue)
 
                     expect(submission.id) == 164530189
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == ""
                     expect(submission.reply as? ChoiceReply) == ChoiceReply(choices: [false, true, false, false])
                     expect(submission.attemptID) == 155142602
@@ -26,7 +26,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.string.rawValue)
 
                     expect(submission.id) == 163700855
-                    expect(submission.status) == "wrong"
+                    expect(submission.statusString) == "wrong"
                     expect(submission.hint) == ""
                     expect(submission.reply as? TextReply) == TextReply(text: "text")
                     expect(submission.attemptID) == 145802794
@@ -39,7 +39,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.number.rawValue)
 
                     expect(submission.id) == 155034240
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == "Optional feedback on correct submission"
                     expect(submission.reply as? NumberReply) == NumberReply(number: "25.5")
                     expect(submission.attemptID) == 145800697
@@ -54,7 +54,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.freeAnswer.rawValue)
 
                     expect(submission.id) == 155035432
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == ""
                     expect(submission.reply as? FreeAnswerReply) == FreeAnswerReply(text: "test")
                     expect(submission.attemptID) == 145801887
@@ -67,7 +67,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.math.rawValue)
 
                     expect(submission.id) == 163701768
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == ""
                     expect(submission.reply as? MathReply) == MathReply(formula: "2*x+y/z")
                     expect(submission.attemptID) == 145803773
@@ -80,7 +80,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.sorting.rawValue)
 
                     expect(submission.id) == 163701921
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == ""
                     expect(submission.reply as? SortingReply) == SortingReply(ordering: [0, 1, 2])
                     expect(submission.attemptID) == 145804003
@@ -93,7 +93,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.matching.rawValue)
 
                     expect(submission.id) == 163702173
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == ""
                     expect(submission.reply as? MatchingReply) == MatchingReply(ordering: [2, 1, 0])
                     expect(submission.attemptID) == 145805676
@@ -106,7 +106,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.code.rawValue)
 
                     expect(submission.id) == 163968205
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == ""
                     expect(submission.reply as? CodeReply) == CodeReply(
                         code: "def main():\n    \n    a, b = map(int, input().split())\n    res = a + b\n    print(res)\n\n\nif __name__ == \"__main__\":\n    main()",
@@ -123,7 +123,7 @@ class SubmissionSpec: QuickSpec {
                     let submission = Submission(json: json, stepName: Block.BlockType.sql.rawValue)
 
                     expect(submission.id) == 163702543
-                    expect(submission.status) == "correct"
+                    expect(submission.statusString) == "correct"
                     expect(submission.hint) == "Affected rows: 1"
                     expect(submission.reply as? SQLReply) == SQLReply(code: "INSERT INTO users (name) VALUES ('Fluttershy');\n")
                     expect(submission.attemptID) == 145794719

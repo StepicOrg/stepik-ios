@@ -13,7 +13,7 @@ final class Submission: JSONSerializable {
     typealias IdType = Int
 
     var id: IdType = 0
-    var status: String?
+    var statusString: String?
     var hint: String?
     var feedback: SubmissionFeedback?
     var time = Date()
@@ -21,19 +21,19 @@ final class Submission: JSONSerializable {
     var attemptID: Attempt.IdType = 0
     var attempt: Attempt?
 
-    var submissionStatus: SubmissionStatus? {
+    var status: SubmissionStatus? {
         get {
-            if let status = self.status {
-                return SubmissionStatus(rawValue: status)
+            if let stringValue = self.statusString {
+                return SubmissionStatus(rawValue: stringValue)
             }
             return nil
         }
         set {
-            self.status = newValue?.rawValue
+            self.statusString = newValue?.rawValue
         }
     }
 
-    var isCorrect: Bool { self.status == "correct" }
+    var isCorrect: Bool { self.status == .correct }
 
     var json: JSON {
         [
@@ -53,7 +53,7 @@ final class Submission: JSONSerializable {
         attempt: Attempt? = nil
     ) {
         self.id = id
-        self.status = status?.rawValue
+        self.statusString = status?.rawValue
         self.hint = hint
         self.feedback = feedback
         self.time = time
@@ -71,7 +71,7 @@ final class Submission: JSONSerializable {
     init(attempt: Int, reply: Reply, status: SubmissionStatus? = nil) {
         self.attemptID = attempt
         self.reply = reply
-        self.status = status?.rawValue
+        self.statusString = status?.rawValue
     }
 
     required init(json: JSON) {
@@ -81,7 +81,7 @@ final class Submission: JSONSerializable {
     convenience init(submission: Submission?) {
         self.init(
             id: submission?.id ?? 0,
-            status: submission?.submissionStatus,
+            status: submission?.status,
             hint: submission?.hint,
             feedback: submission?.feedback,
             time: submission?.time ?? Date(),
@@ -93,7 +93,7 @@ final class Submission: JSONSerializable {
 
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
-        self.status = json[JSONKey.status.rawValue].string
+        self.statusString = json[JSONKey.status.rawValue].string
         self.hint = json[JSONKey.hint.rawValue].string
         self.feedback = self.getFeedbackFromJSON(json[JSONKey.feedback.rawValue])
         self.attemptID = json[JSONKey.attempt.rawValue].intValue
@@ -167,7 +167,7 @@ extension Submission: CustomDebugStringConvertible {
     var debugDescription: String {
         """
         Submission(id: \(id), \
-        status: \(status ?? "nil"), \
+        status: \(statusString ?? "nil"), \
         hint: \(hint ?? "nil"), \
         feedback: \(feedback ??? "nil"), \
         reply: \(reply ??? "nil"), \

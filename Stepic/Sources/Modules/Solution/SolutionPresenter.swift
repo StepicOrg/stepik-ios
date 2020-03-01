@@ -27,7 +27,7 @@ final class SolutionPresenter: SolutionPresenterProtocol {
         submissionURL: URL?
     ) -> SolutionViewModel {
         let quizStatus: QuizStatus = {
-            switch submission.status {
+            switch submission.statusString {
             case "wrong":
                 return .wrong
             case "correct":

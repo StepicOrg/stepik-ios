@@ -62,7 +62,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         let submission = Submission(submission: self.currentSubmission)
         submission.attemptID = attempt.id
         submission.reply = request.reply
-        submission.submissionStatus = .local
+        submission.status = .local
 
         self.currentSubmission = submission
 
@@ -103,7 +103,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
         let reply = request.reply
         submission.reply = request.reply
-        submission.submissionStatus = .evaluation
+        submission.status = .evaluation
 
         self.presentSubmission(attempt: attempt, submission: submission)
 
@@ -118,7 +118,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             }
 
             Self.logger.info(
-                "BaseQuizInteractor: submission created = \(submission.id), status = \(submission.status ??? "")"
+                "BaseQuizInteractor: submission created = \(submission.id), status = \(submission.statusString ??? "")"
             )
             AnalyticsEvent.submissionCreated(reply, self.step).report()
 
@@ -287,7 +287,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                         throw Error.submissionFetchFailed
                     }
 
-                    if submission.submissionStatus == .evaluation {
+                    if submission.status == .evaluation {
                         poll(retryCount: retryCount + 1)
                     } else {
                         seal.fulfill(submission)

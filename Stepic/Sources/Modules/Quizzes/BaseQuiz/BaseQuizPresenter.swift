@@ -42,7 +42,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         hasNextStep: Bool
     ) -> BaseQuizViewModel {
         let quizStatus: QuizStatus? = {
-            switch submission.submissionStatus {
+            switch submission.status {
             case .wrong:
                 return .wrong
             case .correct:

@@ -124,7 +124,7 @@ extension SubmissionEntity {
         self.attemptID = submission.attemptID
         self.reply = submission.reply
         self.hint = submission.hint
-        self.statusString = submission.status
+        self.statusString = submission.statusString
         self.feedback = submission.feedback
         self.time = submission.time
     }
