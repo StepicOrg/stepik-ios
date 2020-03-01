@@ -35,6 +35,15 @@ final class SubmissionEntity: NSManagedObject {
         }
     }
 
+    var isLocal: Bool {
+        get {
+            self.managedLocal.boolValue
+        }
+        set {
+            self.managedLocal = NSNumber(value: newValue)
+        }
+    }
+
     var hint: String? {
         get {
             self.managedHint
@@ -107,7 +116,8 @@ extension SubmissionEntity {
             time: self.time,
             reply: self.reply,
             attemptID: self.attemptID,
-            attempt: self.attempt?.plainObject
+            attempt: self.attempt?.plainObject,
+            isLocal: self.isLocal
         )
     }
 
@@ -123,6 +133,7 @@ extension SubmissionEntity {
         self.id = submission.id
         self.attemptID = submission.attemptID
         self.reply = submission.reply
+        self.isLocal = submission.isLocal
         self.hint = submission.hint
         self.statusString = submission.statusString
         self.feedback = submission.feedback

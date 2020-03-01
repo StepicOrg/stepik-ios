@@ -54,21 +54,27 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.rateAppManager = rateAppManager
     }
 
+    // MARK: Protocol Conforming
+
     func doReplyCache(request: BaseQuiz.ReplyCache.Request) {
-        guard let attempt = self.currentAttempt else {
+        guard let attempt = self.currentAttempt,
+              let submission = self.currentSubmission else {
             return
         }
 
-        let submission = Submission(submission: self.currentSubmission)
-        submission.attemptID = attempt.id
-        submission.reply = request.reply
-        submission.status = .local
+        // TODO: When submission is in wrong status it's better to show retry button instead of allow editing reply,
+        // then handle on tap retry, create attempt and create local submission with +1 id if submission exists.
+        let localSubmission = Submission(submission: submission)
+        localSubmission.id += submission.status == .wrong && !submission.isLocal ? 1 : 0
+        localSubmission.attemptID = attempt.id
+        localSubmission.reply = request.reply
+        localSubmission.isLocal = true
 
-        self.currentSubmission = submission
+        self.currentSubmission = localSubmission
 
         self.cacheReplyQueue.async { [weak self] in
             self?.provider
-                .createLocalSubmission(submission)
+                .createLocalSubmission(localSubmission)
                 .done { _ in }
         }
     }
@@ -102,10 +108,12 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
 
         let reply = request.reply
-        submission.reply = request.reply
-        submission.status = .evaluation
 
-        self.presentSubmission(attempt: attempt, submission: submission)
+        // Present evaluation status
+        let evaluationSubmission = Submission(submission: submission)
+        evaluationSubmission.reply = request.reply
+        evaluationSubmission.status = .evaluation
+        self.presentSubmission(attempt: attempt, submission: evaluationSubmission)
 
         Self.logger.info("BaseQuizInteractor: creating submission for attempt = \(attempt.id)...")
         AnalyticsEvent.submissionSubmit.report()
@@ -154,7 +162,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.moduleOutput?.handleNextStepNavigation()
     }
 
-    // MARK: - Private API
+    // MARK: Private API
 
     @discardableResult
     private func suggestStreakIfNeeded() -> Bool {
@@ -240,7 +248,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             when(
                 fulfilled: remoteSubmissionsGuarantee,
                 cacheSubmissionsGuarantee
-            ).done { (remoteSubmissions: [Submission]?, cachedSubmissions: [Submission]?) in
+            ).done { remoteSubmissions, cachedSubmissions in
                 let remoteSubmission = remoteSubmissions?.first
                 let cachedSubmission = cachedSubmissions?.first
 
@@ -256,9 +264,8 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 } else if let cachedSubmission = cachedSubmission {
                     seal.fulfill(cachedSubmission)
                 } else {
-                    let submission = Submission(id: 0, status: .local, attemptID: attemptID)
                     self.provider
-                        .createLocalSubmission(submission)
+                        .createLocalSubmission(Submission(id: 0, attemptID: attemptID, isLocal: true))
                         .done { seal.fulfill($0) }
                 }
             }.catch { error in
@@ -302,7 +309,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
-    // MARK: - Inner Types
+    // MARK: Inner Types
 
     enum Error: Swift.Error {
         case unknownAttempt

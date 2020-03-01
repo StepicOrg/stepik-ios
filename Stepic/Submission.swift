@@ -20,6 +20,7 @@ final class Submission: JSONSerializable {
     var reply: Reply?
     var attemptID: Attempt.IdType = 0
     var attempt: Attempt?
+    var isLocal: Bool = false
 
     var status: SubmissionStatus? {
         get {
@@ -50,7 +51,8 @@ final class Submission: JSONSerializable {
         time: Date = Date(),
         reply: Reply? = nil,
         attemptID: Attempt.IdType,
-        attempt: Attempt? = nil
+        attempt: Attempt? = nil,
+        isLocal: Bool = false
     ) {
         self.id = id
         self.statusString = status?.rawValue
@@ -60,6 +62,7 @@ final class Submission: JSONSerializable {
         self.reply = reply
         self.attemptID = attemptID
         self.attempt = attempt
+        self.isLocal = isLocal
     }
 
     init(json: JSON, stepName: String) {

@@ -259,6 +259,7 @@
         <attribute name="managedFeedback" optional="YES" attributeType="Transformable" customClassName=".SubmissionFeedback" syncable="YES"/>
         <attribute name="managedHint" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="managedLocal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="managedReply" optional="YES" attributeType="Transformable" customClassName=".Reply" syncable="YES"/>
         <attribute name="managedStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -335,7 +336,7 @@
         <element name="Section" positionX="-88.1484375" positionY="379.60546875" width="128" height="28"/>
         <element name="Step" positionX="76.40625" positionY="-309.26953125" width="128" height="28"/>
         <element name="StepOptions" positionX="-301.69921875" positionY="-199.52734375" width="128" height="148"/>
-        <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="163"/>
+        <element name="SubmissionEntity" positionX="-441" positionY="-225" width="128" height="178"/>
         <element name="Unit" positionX="396.875" positionY="76.44140625" width="128" height="255"/>
         <element name="User" positionX="-368.4296875" positionY="90.0234375" width="128" height="28"/>
         <element name="Video" positionX="259.9609375" positionY="505.1015625" width="128" height="165"/>

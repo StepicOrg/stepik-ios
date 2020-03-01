@@ -49,8 +49,6 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
                 return .correct
             case .evaluation:
                 return .evaluation
-            case .local:
-                return nil
             case .none:
                 return nil
             }
