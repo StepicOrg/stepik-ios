@@ -21,6 +21,13 @@ final class Submission: JSONSerializable {
     var attemptID: Attempt.IdType = 0
     var attempt: Attempt?
 
+    var submissionStatus: SubmissionStatus? {
+        if let status = self.status {
+            return SubmissionStatus(rawValue: status)
+        }
+        return nil
+    }
+
     var isCorrect: Bool { self.status == "correct" }
 
     var json: JSON {
@@ -32,13 +39,13 @@ final class Submission: JSONSerializable {
 
     init(
         id: IdType,
-        status: String?,
-        hint: String?,
-        feedback: SubmissionFeedback?,
-        time: Date,
-        reply: Reply?,
+        status: String? = nil,
+        hint: String? = nil,
+        feedback: SubmissionFeedback? = nil,
+        time: Date = Date(),
+        reply: Reply? = nil,
         attemptID: Attempt.IdType,
-        attempt: Attempt?
+        attempt: Attempt? = nil
     ) {
         self.id = id
         self.status = status

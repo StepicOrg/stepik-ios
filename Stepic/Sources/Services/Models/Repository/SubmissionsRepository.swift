@@ -12,31 +12,17 @@ protocol SubmissionsRepositoryProtocol: AnyObject {
         blockName: String,
         dataSourceType: DataSourceType
     ) -> Promise<Submission?>
-    func fetchAttemptSubmissions(
+    func fetchSubmissionsForAttempt(
         attemptID: Attempt.IdType,
         blockName: String,
         dataSourceType: DataSourceType
     ) -> Promise<([Submission], Meta)>
-    func fetchStepSubmissions(
+    func fetchSubmissionsForStep(
         stepID: Step.IdType,
         userID: User.IdType?,
         blockName: String,
         page: Int
     ) -> Promise<([Submission], Meta)>
-}
-
-extension SubmissionsRepositoryProtocol {
-    func createSubmission(_ submission: Submission, blockName: String) -> Promise<Submission?> {
-        self.createSubmission(submission, blockName: blockName, dataSourceType: .remote)
-    }
-
-    func fetchSubmission(id: Submission.IdType, blockName: String) -> Promise<Submission?> {
-        self.fetchSubmission(id: id, blockName: blockName, dataSourceType: .remote)
-    }
-
-    func fetchAttemptSubmissions(attemptID: Attempt.IdType, blockName: String) -> Promise<([Submission], Meta)> {
-        self.fetchAttemptSubmissions(attemptID: attemptID, blockName: blockName, dataSourceType: .remote)
-    }
 }
 
 final class SubmissionsRepository: SubmissionsRepositoryProtocol {
@@ -56,16 +42,16 @@ final class SubmissionsRepository: SubmissionsRepositoryProtocol {
         blockName: String,
         dataSourceType: DataSourceType
     ) -> Promise<Submission?> {
-        guard let reply = submission.reply else {
-            return Promise(error: Error.noReply)
-        }
-
         switch dataSourceType {
         case .cache:
             return self.submissionsPersistenceService
                 .save(submissions: [submission])
                 .map { submission }
         case .remote:
+            guard let reply = submission.reply else {
+                return Promise(error: Error.noReply)
+            }
+
             return self.submissionsNetworkService
                 .create(attemptID: submission.attemptID, blockName: blockName, reply: reply)
                 .then { submission -> Promise<Submission?> in
@@ -107,7 +93,7 @@ final class SubmissionsRepository: SubmissionsRepositoryProtocol {
         }
     }
 
-    func fetchAttemptSubmissions(
+    func fetchSubmissionsForAttempt(
         attemptID: Attempt.IdType,
         blockName: String,
         dataSourceType: DataSourceType
@@ -132,7 +118,7 @@ final class SubmissionsRepository: SubmissionsRepositoryProtocol {
     }
 
     // Fetches all available submissions if `userID` not provided
-    func fetchStepSubmissions(
+    func fetchSubmissionsForStep(
         stepID: Step.IdType,
         userID: User.IdType?,
         blockName: String,

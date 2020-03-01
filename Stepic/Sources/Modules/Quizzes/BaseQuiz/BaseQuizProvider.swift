@@ -5,10 +5,15 @@ protocol BaseQuizProviderProtocol {
     func createAttempt(for step: Step) -> Promise<Attempt?>
     func fetchAttempts(for step: Step) -> Promise<([Attempt], Meta)>
 
-    func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)>
+    func fetchSubmissionsForAttempt(
+        attemptID: Attempt.IdType,
+        stepBlockName blockName: String,
+        dataSourceType: DataSourceType
+    ) -> Promise<[Submission]>
     func fetchSubmissions(for step: Step, page: Int) -> Promise<([Submission], Meta)>
     func fetchSubmission(id: Submission.IdType, step: Step) -> Promise<Submission?>
     func createSubmission(for step: Step, attempt: Attempt, reply: Reply) -> Promise<Submission?>
+    func createLocalSubmission(_ submission: Submission) -> Guarantee<Submission>
 
     func fetchActivity(for user: User.IdType) -> Promise<UserActivity>
 }
@@ -37,22 +42,32 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
 
     func fetchAttempts(for step: Step) -> Promise<([Attempt], Meta)> {
         guard let userID = self.userAccountService.currentUser?.id else {
-            return Promise(error: Error.fetchFailed)
+            return Promise(error: Error.unknownUser)
         }
 
         return self.attemptsRepository.fetch(stepID: step.id, userID: userID, blockName: step.block.name)
     }
 
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)> {
-        self.submissionsRepository.fetchAttemptSubmissions(
+        self.submissionsRepository.fetchSubmissionsForAttempt(
             attemptID: attempt.id,
             blockName: step.block.name,
             dataSourceType: .remote
         )
     }
 
+    func fetchSubmissionsForAttempt(
+        attemptID: Attempt.IdType,
+        stepBlockName blockName: String,
+        dataSourceType: DataSourceType
+    ) -> Promise<[Submission]> {
+        self.submissionsRepository
+            .fetchSubmissionsForAttempt(attemptID: attemptID, blockName: blockName, dataSourceType: dataSourceType)
+            .map { $0.0 }
+    }
+
     func fetchSubmissions(for step: Step, page: Int = 1) -> Promise<([Submission], Meta)> {
-        self.submissionsRepository.fetchStepSubmissions(
+        self.submissionsRepository.fetchSubmissionsForStep(
             stepID: step.id,
             userID: nil,
             blockName: step.block.name,
@@ -72,11 +87,20 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
         )
     }
 
+    func createLocalSubmission(_ submission: Submission) -> Guarantee<Submission> {
+        Guarantee { seal in
+            self.submissionsRepository
+                .createSubmission(submission, blockName: "", dataSourceType: .cache)
+                .done { seal(($0 ?? submission)) }
+                .catch { _ in seal((submission)) }
+        }
+    }
+
     func fetchActivity(for user: User.IdType) -> Promise<UserActivity> {
         self.userActivitiesNetworkService.retrieve(for: user)
     }
 
     enum Error: Swift.Error {
-        case fetchFailed
+        case unknownUser
     }
 }

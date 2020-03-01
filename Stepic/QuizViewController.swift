@@ -223,6 +223,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             peerReviewHeight.constant = 0
             peerReviewButton.isHidden = true
             statusLabel.text = ""
+        case .local:
+            break
         }
     }
 
