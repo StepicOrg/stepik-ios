@@ -101,7 +101,7 @@ extension SubmissionEntity {
     var plainObject: Submission {
         Submission(
             id: self.id,
-            status: self.statusString,
+            status: self.status,
             hint: self.hint,
             feedback: self.feedback,
             time: self.time,

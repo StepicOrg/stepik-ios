@@ -63,9 +63,9 @@ final class AttemptsRepository: AttemptsRepositoryProtocol {
                 networkServicePromise
             ).done { cachedAttempts, remoteFetchResult in
                 if let remoteFetchResult = remoteFetchResult {
-                    self.attemptsPersistenceService.save(attempts: remoteFetchResult.0).done {
-                        seal.fulfill(remoteFetchResult)
-                    }
+                    self.attemptsPersistenceService
+                        .save(attempts: remoteFetchResult.0)
+                        .done { seal.fulfill(remoteFetchResult) }
                 } else if let cachedAttempts = cachedAttempts {
                     let plainAttempts = cachedAttempts.map { $0.plainObject }
                     seal.fulfill((plainAttempts, Meta.oneAndOnlyPage))

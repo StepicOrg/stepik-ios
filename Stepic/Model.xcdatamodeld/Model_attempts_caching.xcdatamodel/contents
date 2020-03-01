@@ -16,7 +16,7 @@
         <attribute name="managedTimeLeft" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managedUserID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="managedStep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Step" inverseName="managedAttempt" inverseEntity="Step" syncable="YES"/>
-        <relationship name="managedSubmission" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SubmissionEntity" inverseName="managedAttempt" inverseEntity="SubmissionEntity" syncable="YES"/>
+        <relationship name="managedSubmission" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubmissionEntity" inverseName="managedAttempt" inverseEntity="SubmissionEntity" syncable="YES"/>
         <relationship name="managedUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="managedAttempts" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Block" representedClassName=".Block" syncable="YES">
@@ -314,7 +314,7 @@
     </entity>
     <elements>
         <element name="Assignment" positionX="182.73046875" positionY="260.6640625" width="128" height="105"/>
-        <element name="AttemptEntity" positionX="-450" positionY="-234" width="128" height="28"/>
+        <element name="AttemptEntity" positionX="-450" positionY="-234" width="128" height="208"/>
         <element name="Block" positionX="-85.77734375" positionY="236.91796875" width="128" height="105"/>
         <element name="Certificate" positionX="-372.0390625" positionY="364.015625" width="128" height="195"/>
         <element name="CodeLimit" positionX="-286.51171875" positionY="-387.5234375" width="128" height="105"/>

@@ -28,6 +28,12 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     private var submissionsCount = 0
     private var currentAttempt: Attempt?
+    private var currentSubmission: Submission?
+
+    private var cacheReplyQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.BaseQuizInteractor.CacheReply",
+        qos: .userInitiated
+    )
 
     init(
         step: Step,
@@ -48,14 +54,23 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.rateAppManager = rateAppManager
     }
 
-    // TODO: Cache reply, currently unused.
     func doReplyCache(request: BaseQuiz.ReplyCache.Request) {
         guard let attempt = self.currentAttempt else {
             return
         }
 
-        // FIXME: DI
-        ReplyCache.shared.set(reply: request.reply, forStepId: self.step.id, attemptId: attempt.id)
+        let submission = Submission(submission: self.currentSubmission)
+        submission.attemptID = attempt.id
+        submission.reply = request.reply
+        submission.submissionStatus = .local
+
+        self.currentSubmission = submission
+
+        self.cacheReplyQueue.async { [weak self] in
+            self?.provider
+                .createLocalSubmission(submission)
+                .done { _ in }
+        }
     }
 
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request) {
@@ -71,6 +86,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }.done { attempt, submission, submissionLimit in
             self.submissionsCount = submissionLimit
             self.currentAttempt = attempt
+            self.currentSubmission = submission
 
             self.presentSubmission(attempt: attempt, submission: submission)
         }.catch { error in
@@ -80,11 +96,16 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request) {
-        guard let attempt = self.currentAttempt else {
+        guard let attempt = self.currentAttempt,
+              let submission = self.currentSubmission else {
             return
         }
 
         let reply = request.reply
+        submission.reply = request.reply
+        submission.submissionStatus = .evaluation
+
+        self.presentSubmission(attempt: attempt, submission: submission)
 
         Self.logger.info("BaseQuizInteractor: creating submission for attempt = \(attempt.id)...")
         AnalyticsEvent.submissionSubmit.report()
@@ -102,6 +123,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
             AnalyticsEvent.submissionCreated(reply, self.step).report()
 
             self.submissionsCount += 1
+            self.currentSubmission = submission
             self.presentSubmission(attempt: attempt, submission: submission)
 
             Self.logger.info("BaseQuizInteractor: polling submission \(submission.id)...")
@@ -109,6 +131,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }.done { submission in
             Self.logger.info("BaseQuizInteractor: submission \(submission.id) completely evaluated")
 
+            self.currentSubmission = submission
             self.presentSubmission(attempt: attempt, submission: submission)
             self.moduleOutput?.handleSubmissionEvaluated()
 
@@ -180,10 +203,12 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         firstly { () -> Promise<Attempt?> in
             if forceRefreshAttempt {
                 AnalyticsEvent.newAttempt.report()
-
                 return self.provider.createAttempt(for: self.step)
+            } else {
+                return self.provider
+                    .fetchAttempts(for: self.step)
+                    .map { $0.0.first }
             }
-            return self.provider.fetchAttempts(for: self.step).map { $0.0.first }
         }.then { attempt -> Promise<Attempt?> in
             guard let attempt = attempt, attempt.status == "active" else {
                 return self.provider.createAttempt(for: self.step)
@@ -231,7 +256,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 } else if let cachedSubmission = cachedSubmission {
                     seal.fulfill(cachedSubmission)
                 } else {
-                    let submission = Submission(id: 0, status: SubmissionStatus.local.rawValue, attemptID: attemptID)
+                    let submission = Submission(id: 0, status: .local, attemptID: attemptID)
                     self.provider
                         .createLocalSubmission(submission)
                         .done { seal.fulfill($0) }

@@ -22,10 +22,15 @@ final class Submission: JSONSerializable {
     var attempt: Attempt?
 
     var submissionStatus: SubmissionStatus? {
-        if let status = self.status {
-            return SubmissionStatus(rawValue: status)
+        get {
+            if let status = self.status {
+                return SubmissionStatus(rawValue: status)
+            }
+            return nil
         }
-        return nil
+        set {
+            self.status = newValue?.rawValue
+        }
     }
 
     var isCorrect: Bool { self.status == "correct" }
@@ -39,7 +44,7 @@ final class Submission: JSONSerializable {
 
     init(
         id: IdType,
-        status: String? = nil,
+        status: SubmissionStatus? = nil,
         hint: String? = nil,
         feedback: SubmissionFeedback? = nil,
         time: Date = Date(),
@@ -48,7 +53,7 @@ final class Submission: JSONSerializable {
         attempt: Attempt? = nil
     ) {
         self.id = id
-        self.status = status
+        self.status = status?.rawValue
         self.hint = hint
         self.feedback = feedback
         self.time = time
@@ -63,13 +68,27 @@ final class Submission: JSONSerializable {
         self.reply = self.getReplyFromJSON(json[JSONKey.reply.rawValue], stepName: stepName)
     }
 
-    init(attempt: Int, reply: Reply) {
+    init(attempt: Int, reply: Reply, status: SubmissionStatus? = nil) {
         self.attemptID = attempt
         self.reply = reply
+        self.status = status?.rawValue
     }
 
     required init(json: JSON) {
         self.update(json: json)
+    }
+
+    convenience init(submission: Submission?) {
+        self.init(
+            id: submission?.id ?? 0,
+            status: submission?.submissionStatus,
+            hint: submission?.hint,
+            feedback: submission?.feedback,
+            time: submission?.time ?? Date(),
+            reply: submission?.reply,
+            attemptID: submission?.attemptID ?? 0,
+            attempt: submission?.attempt
+        )
     }
 
     func update(json: JSON) {
