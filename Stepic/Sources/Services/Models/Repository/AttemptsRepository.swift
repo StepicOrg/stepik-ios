@@ -4,7 +4,7 @@ import PromiseKit
 protocol AttemptsRepositoryProtocol: AnyObject {
     func fetch(ids: [Attempt.IdType], blockName: String) -> Promise<([Attempt], Meta)>
     func fetch(stepID: Step.IdType, userID: User.IdType, blockName: String) -> Promise<([Attempt], Meta)>
-    func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt?>
+    func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt>
 }
 
 final class AttemptsRepository: AttemptsRepositoryProtocol {
@@ -78,15 +78,13 @@ final class AttemptsRepository: AttemptsRepositoryProtocol {
         }
     }
 
-    func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt?> {
-        self.attemptsNetworkService.create(
-            stepID: stepID,
-            blockName: blockName
-        ).then { attempt -> Promise<Attempt?> in
-            if let attempt = attempt {
-                return self.attemptsPersistenceService.save(attempts: [attempt]).map { attempt }
+    func create(stepID: Step.IdType, blockName: String) -> Promise<Attempt> {
+        self.attemptsNetworkService
+            .create(stepID: stepID, blockName: blockName)
+            .then { attempt in
+                self.attemptsPersistenceService
+                    .save(attempts: [attempt])
+                    .map { attempt }
             }
-            return .value(attempt)
-        }
     }
 }

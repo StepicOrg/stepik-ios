@@ -37,7 +37,13 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
     }
 
     func createAttempt(for step: Step) -> Promise<Attempt?> {
-        self.attemptsRepository.create(stepID: step.id, blockName: step.block.name)
+        Promise { seal in
+            self.attemptsRepository.create(stepID: step.id, blockName: step.block.name).done { attempt in
+                seal.fulfill(attempt)
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
     }
 
     func fetchAttempts(for step: Step) -> Promise<([Attempt], Meta)> {
