@@ -36,6 +36,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
+    private var remoteFetchedSectionsUniqueIdentifiers: Set<UniqueIdentifierType> = []
+
     private var isOnline = false {
         willSet {
             if !newValue && self.isOnline {
@@ -130,6 +132,12 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     func doSectionFetch(request: CourseInfoTabSyllabus.SyllabusSectionLoad.Request) {
+        // Skip request if already fetched earlier
+        if self.remoteFetchedSectionsUniqueIdentifiers.contains(request.uniqueIdentifier) {
+            return
+        }
+        self.remoteFetchedSectionsUniqueIdentifiers.insert(request.uniqueIdentifier)
+
         self.unitsFetchBackgroundQueue.async { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -160,6 +168,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 CourseInfoTabSyllabusInteractor.logger.error(
                     "course info tab syllabus interactor: error while fetching section from network, error = \(error)"
                 )
+                strongSelf.remoteFetchedSectionsUniqueIdentifiers.remove(request.uniqueIdentifier)
             }
         }
     }
@@ -382,7 +391,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 for: section,
                 shouldUseNetwork: true
             ).done { units in
-                self.updateCurrentData(units: units, shouldRemoveAll: false)
+                self.mergeWithCurrentData(sections: [], units: units, dataSourceType: .remote)
 
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
@@ -419,7 +428,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 let sections = result.0
                 let units = Array(result.1.joined())
 
-                self.updateCurrentData(sections: sections, units: units, shouldRemoveAll: true)
+                self.mergeWithCurrentData(sections: sections, units: units, dataSourceType: isOnline ? .remote : .cache)
 
                 let data = self.makeSyllabusDataFromCurrentData()
                 seal.fulfill(.init(result: .success(data)))
@@ -432,22 +441,28 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
 
-    // swiftlint:disable:next discouraged_optional_collection
-    private func updateCurrentData(sections: [Section]? = nil, units: [Unit], shouldRemoveAll: Bool) {
-        if shouldRemoveAll {
-            self.currentSections.removeAll(keepingCapacity: true)
-            self.currentUnits.removeAll(keepingCapacity: true)
-        }
-
-        for section in sections ?? [] {
+    private func mergeWithCurrentData(sections: [Section], units: [Unit], dataSourceType: DataSourceType) {
+        for section in sections {
             self.currentSections[self.getUniqueIdentifierBySectionID(section.id)] = section
-            for unitID in section.unitsArray {
-                self.currentUnits[self.getUniqueIdentifierByUnitID(unitID)] = nil
-            }
         }
 
         for unit in units {
             self.currentUnits[self.getUniqueIdentifierByUnitID(unit.id)] = unit
+        }
+
+        // Merge cache state with remote
+        if dataSourceType == .remote && !sections.isEmpty {
+            self.currentSections = self.currentSections.filter { _, section in
+                sections.contains(where: { $0.id == section.id })
+            }
+
+            let allUnitsIDs = sections.flatMap { $0.unitsArray }
+            self.currentUnits = self.currentUnits.filter { _, unit in
+                if let unitID = unit?.id {
+                    return allUnitsIDs.contains(unitID)
+                }
+                return false
+            }
         }
     }
 
