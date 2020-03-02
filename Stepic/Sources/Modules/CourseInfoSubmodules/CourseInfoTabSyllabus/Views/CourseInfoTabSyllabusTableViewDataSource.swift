@@ -140,19 +140,7 @@ final class CourseInfoTabSyllabusTableViewDataSource: NSObject, UITableViewDeleg
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         self.visibleSectionHeaders[section] = view
-
-        // If section has no unit-placeholders then skip request
-        let hasUnitPlaceholders = self.viewModels[section].units.contains(
-            where: { unit in
-                if case .placeholder = unit {
-                    return true
-                }
-                return false
-            }
-        )
-        if hasUnitPlaceholders {
-            self.delegate?.sectionWillDisplay(self.viewModels[section])
-        }
+        self.delegate?.sectionWillDisplay(self.viewModels[section])
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
