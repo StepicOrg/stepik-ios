@@ -116,12 +116,12 @@ final class AttemptsPersistenceService: AttemptsPersistenceServiceProtocol {
     private func insertOrReplace(attempt: Attempt) -> Guarantee<Void> {
         Guarantee { seal in
             firstly {
-                self.fetchStep(id: attempt.step)
+                self.fetchStep(id: attempt.stepID)
             }.then { cachedStepOrNil -> Guarantee<(Step?, [AttemptEntity])> in
-                self.fetchStepAttempts(stepID: attempt.step)
+                self.fetchStepAttempts(stepID: attempt.stepID)
                     .map { (cachedStepOrNil, $0) }
             }.done { (cachedStepOrNil: Step?, cachedAttempts: [AttemptEntity]) in
-                let hasNewerAttempt = cachedAttempts.contains { $0.id > attempt.id && $0.userID == attempt.user }
+                let hasNewerAttempt = cachedAttempts.contains { $0.id > attempt.id && $0.userID == attempt.userID }
 
                 if hasNewerAttempt {
                     return seal(())

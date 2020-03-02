@@ -10,7 +10,7 @@ class SubmissionSpec: QuickSpec {
             describe("JSON pasing") {
                 it("successfully parses with choices reply") {
                     let json = JSON(parseJSON: ReplyType.choices.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.choice.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.choice.rawValue)
 
                     expect(submission.id) == 164530189
                     expect(submission.statusString) == "correct"
@@ -23,7 +23,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with text reply") {
                     let json = JSON(parseJSON: ReplyType.text.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.string.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.string.rawValue)
 
                     expect(submission.id) == 163700855
                     expect(submission.statusString) == "wrong"
@@ -36,7 +36,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with number reply") {
                     let json = JSON(parseJSON: ReplyType.number.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.number.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.number.rawValue)
 
                     expect(submission.id) == 155034240
                     expect(submission.statusString) == "correct"
@@ -51,7 +51,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with free-answer reply") {
                     let json = JSON(parseJSON: ReplyType.freeAnswer.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.freeAnswer.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.freeAnswer.rawValue)
 
                     expect(submission.id) == 155035432
                     expect(submission.statusString) == "correct"
@@ -64,7 +64,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with math reply") {
                     let json = JSON(parseJSON: ReplyType.math.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.math.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.math.rawValue)
 
                     expect(submission.id) == 163701768
                     expect(submission.statusString) == "correct"
@@ -77,7 +77,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with sorting reply") {
                     let json = JSON(parseJSON: ReplyType.sorting.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.sorting.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.sorting.rawValue)
 
                     expect(submission.id) == 163701921
                     expect(submission.statusString) == "correct"
@@ -90,7 +90,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with matching reply") {
                     let json = JSON(parseJSON: ReplyType.matching.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.matching.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.matching.rawValue)
 
                     expect(submission.id) == 163702173
                     expect(submission.statusString) == "correct"
@@ -103,7 +103,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with code reply") {
                     let json = JSON(parseJSON: ReplyType.code.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.code.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.code.rawValue)
 
                     expect(submission.id) == 163968205
                     expect(submission.statusString) == "correct"
@@ -120,7 +120,7 @@ class SubmissionSpec: QuickSpec {
 
                 it("successfully parses with SQL reply") {
                     let json = JSON(parseJSON: ReplyType.sql.submissionJSONString)
-                    let submission = Submission(json: json, stepName: Block.BlockType.sql.rawValue)
+                    let submission = Submission(json: json, stepBlockName: Block.BlockType.sql.rawValue)
 
                     expect(submission.id) == 163702543
                     expect(submission.statusString) == "correct"

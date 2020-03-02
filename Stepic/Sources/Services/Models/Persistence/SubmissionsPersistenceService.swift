@@ -126,11 +126,9 @@ final class SubmissionsPersistenceService: SubmissionsPersistenceServiceProtocol
     // MARK: Private API
 
     private func fetchAttempt(id: Attempt.IdType) -> Guarantee<AttemptEntity?> {
-        Guarantee { seal in
-            self.attemptsPersistenceService.fetch(ids: [id]).done { cachedAttempts in
-                seal(cachedAttempts.first)
-            }
-        }
+        self.attemptsPersistenceService
+            .fetch(ids: [id])
+            .map { $0.first }
     }
 
     private func insertOrReplace(submission: Submission) -> Guarantee<Void> {

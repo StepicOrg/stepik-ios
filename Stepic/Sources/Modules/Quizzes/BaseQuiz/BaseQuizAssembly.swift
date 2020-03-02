@@ -1,4 +1,3 @@
-import CoreData
 import UIKit
 
 final class BaseQuizAssembly: Assembly {
@@ -6,18 +5,10 @@ final class BaseQuizAssembly: Assembly {
     private let step: Step
     private let hasNextStep: Bool
 
-    private let managedObjectContext: NSManagedObjectContext
-
-    init(
-        step: Step,
-        hasNextStep: Bool = false,
-        managedObjectContext: NSManagedObjectContext = CoreDataHelper.shared.context,
-        output: BaseQuizOutputProtocol? = nil
-    ) {
+    init(step: Step, hasNextStep: Bool = false, output: BaseQuizOutputProtocol? = nil) {
         self.moduleOutput = output
         self.step = step
         self.hasNextStep = hasNextStep
-        self.managedObjectContext = managedObjectContext
     }
 
     func makeModule() -> UIViewController {
@@ -25,22 +16,21 @@ final class BaseQuizAssembly: Assembly {
             attemptsRepository: AttemptsRepository(
                 attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
                 attemptsPersistenceService: AttemptsPersistenceService(
-                    managedObjectContext: self.managedObjectContext,
+                    managedObjectContext: CoreDataHelper.shared.context,
                     stepsPersistenceService: StepsPersistenceService()
                 )
             ),
             submissionsRepository: SubmissionsRepository(
                 submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
                 submissionsPersistenceService: SubmissionsPersistenceService(
-                    managedObjectContext: self.managedObjectContext,
+                    managedObjectContext: CoreDataHelper.shared.context,
                     attemptsPersistenceService: AttemptsPersistenceService(
-                        managedObjectContext: self.managedObjectContext,
+                        managedObjectContext: CoreDataHelper.shared.context,
                         stepsPersistenceService: StepsPersistenceService()
                     )
                 )
             ),
-            userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI()),
-            userAccountService: UserAccountService()
+            userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
         let presenter = BaseQuizPresenter()
         let interactor = BaseQuizInteractor(

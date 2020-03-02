@@ -75,9 +75,7 @@ final class SubmissionsRepository: SubmissionsRepositoryProtocol {
             return Promise { seal in
                 self.submissionsPersistenceService
                     .fetch(ids: [id])
-                    .done {
-                        seal.fulfill($0.first?.plainObject)
-                    }
+                    .done { seal.fulfill($0.first?.plainObject) }
             }
         case .remote:
             return self.submissionsNetworkService

@@ -129,12 +129,12 @@ extension AttemptEntity {
         Attempt(
             id: self.id,
             dataset: self.dataset,
-            datasetUrl: self.datasetURL,
+            datasetURL: self.datasetURL,
             time: self.timeString,
             status: self.status,
-            step: self.stepID,
+            stepID: self.stepID,
             timeLeft: self.timeLeftString,
-            user: self.userID
+            userID: self.userID
         )
     }
 
@@ -148,14 +148,14 @@ extension AttemptEntity {
         self.init(entity: entity, insertInto: managedObjectContext)
 
         self.id = attempt.id
-        self.stepID = attempt.step
+        self.stepID = attempt.stepID
         self.dataset = attempt.dataset
-        self.datasetURL = attempt.datasetUrl
+        self.datasetURL = attempt.datasetURL
         self.status = attempt.status
         self.timeString = attempt.time
         self.timeLeftString = attempt.timeLeft
 
-        if let userID = attempt.user {
+        if let userID = attempt.userID {
             self.userID = userID
         }
     }

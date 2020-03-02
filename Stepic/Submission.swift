@@ -65,10 +65,10 @@ final class Submission: JSONSerializable {
         self.isLocal = isLocal
     }
 
-    init(json: JSON, stepName: String) {
+    init(json: JSON, stepBlockName: String) {
         self.update(json: json)
         self.reply = nil
-        self.reply = self.getReplyFromJSON(json[JSONKey.reply.rawValue], stepName: stepName)
+        self.reply = self.getReplyFromJSON(json[JSONKey.reply.rawValue], stepBlockName: stepBlockName)
     }
 
     init(attempt: Int, reply: Reply, status: SubmissionStatus? = nil) {
@@ -103,16 +103,16 @@ final class Submission: JSONSerializable {
         self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]) ?? Date()
     }
 
-    func initReply(json: JSON, stepName: String) {
-        self.reply = self.getReplyFromJSON(json, stepName: stepName)
+    func initReply(json: JSON, stepBlockName: String) {
+        self.reply = self.getReplyFromJSON(json, stepBlockName: stepBlockName)
     }
 
     func hasEqualId(json: JSON) -> Bool {
         self.id == json[JSONKey.id.rawValue].int
     }
 
-    private func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
-        switch stepName {
+    private func getReplyFromJSON(_ json: JSON, stepBlockName: String) -> Reply? {
+        switch stepBlockName {
         case "choice":
             return ChoiceReply(json: json)
         case "string":
@@ -161,9 +161,7 @@ final class Submission: JSONSerializable {
 }
 
 extension Submission: UniqueIdentifiable {
-    var uniqueIdentifier: UniqueIdentifierType {
-        "\(self.id)"
-    }
+    var uniqueIdentifier: UniqueIdentifierType { "\(self.id)" }
 }
 
 extension Submission: CustomDebugStringConvertible {

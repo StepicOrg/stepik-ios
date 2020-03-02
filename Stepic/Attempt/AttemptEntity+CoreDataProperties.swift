@@ -21,8 +21,7 @@ extension AttemptEntity {
         [NSSortDescriptor(key: #keyPath(managedID), ascending: false)]
     }
 
-    @nonobjc
     static func fetchRequest() -> NSFetchRequest<AttemptEntity> {
-        return NSFetchRequest<AttemptEntity>(entityName: "AttemptEntity")
+        NSFetchRequest<AttemptEntity>(entityName: "AttemptEntity")
     }
 }

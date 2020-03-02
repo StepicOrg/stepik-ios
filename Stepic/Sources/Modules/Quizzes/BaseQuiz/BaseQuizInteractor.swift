@@ -208,13 +208,17 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
     }
 
     private func fetchAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
-        firstly { () -> Promise<Attempt?> in
+        guard let userID = self.userService.currentUser?.id else {
+            return Promise(error: Error.unknownUser)
+        }
+
+        return firstly { () -> Promise<Attempt?> in
             if forceRefreshAttempt {
                 AnalyticsEvent.newAttempt.report()
                 return self.provider.createAttempt(for: self.step)
             } else {
                 return self.provider
-                    .fetchAttempts(for: self.step)
+                    .fetchAttempts(for: self.step, userID: userID)
                     .map { $0.0.first }
             }
         }.then { attempt -> Promise<Attempt?> in
@@ -315,6 +319,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         case unknownAttempt
         case attemptFetchFailed
         case submissionFetchFailed
+        case unknownUser
     }
 
     private enum AnalyticsEvent {

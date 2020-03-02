@@ -3,7 +3,7 @@ import PromiseKit
 
 protocol BaseQuizProviderProtocol {
     func createAttempt(for step: Step) -> Promise<Attempt?>
-    func fetchAttempts(for step: Step) -> Promise<([Attempt], Meta)>
+    func fetchAttempts(for step: Step, userID: User.IdType) -> Promise<([Attempt], Meta)>
 
     func fetchSubmissionsForAttempt(
         attemptID: Attempt.IdType,
@@ -22,18 +22,15 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
     private let attemptsRepository: AttemptsRepositoryProtocol
     private let submissionsRepository: SubmissionsRepositoryProtocol
     private let userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
-    private let userAccountService: UserAccountServiceProtocol
 
     init(
         attemptsRepository: AttemptsRepositoryProtocol,
         submissionsRepository: SubmissionsRepositoryProtocol,
-        userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol,
-        userAccountService: UserAccountServiceProtocol
+        userActivitiesNetworkService: UserActivitiesNetworkServiceProtocol
     ) {
         self.attemptsRepository = attemptsRepository
         self.submissionsRepository = submissionsRepository
         self.userActivitiesNetworkService = userActivitiesNetworkService
-        self.userAccountService = userAccountService
     }
 
     func createAttempt(for step: Step) -> Promise<Attempt?> {
@@ -46,12 +43,8 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
         }
     }
 
-    func fetchAttempts(for step: Step) -> Promise<([Attempt], Meta)> {
-        guard let userID = self.userAccountService.currentUser?.id else {
-            return Promise(error: Error.unknownUser)
-        }
-
-        return self.attemptsRepository.fetch(stepID: step.id, userID: userID, blockName: step.block.name)
+    func fetchAttempts(for step: Step, userID: User.IdType) -> Promise<([Attempt], Meta)> {
+        self.attemptsRepository.fetch(stepID: step.id, userID: userID, blockName: step.block.name)
     }
 
     func fetchSubmissions(for step: Step, attempt: Attempt) -> Promise<([Submission], Meta)> {
@@ -104,9 +97,5 @@ final class BaseQuizProvider: BaseQuizProviderProtocol {
 
     func fetchActivity(for user: User.IdType) -> Promise<UserActivity> {
         self.userActivitiesNetworkService.retrieve(for: user)
-    }
-
-    enum Error: Swift.Error {
-        case unknownUser
     }
 }

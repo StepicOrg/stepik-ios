@@ -39,7 +39,7 @@ final class AttemptsAPI: APIEndpoint {
                     seal.reject(error)
                 case .success(let json):
                     let meta = Meta(json: json["meta"])
-                    let attempts = json["attempts"].arrayValue.map { Attempt(json: $0, stepName: stepName) }
+                    let attempts = json["attempts"].arrayValue.map { Attempt(json: $0, stepBlockName: stepName) }
                     seal.fulfill((attempts, meta))
                 }
             }
@@ -47,7 +47,7 @@ final class AttemptsAPI: APIEndpoint {
     }
 
     func create(stepName: String, stepID: Int) -> Promise<Attempt> {
-        let attempt = Attempt(step: stepID)
+        let attempt = Attempt(stepID: stepID)
         return Promise { seal in
             self.create.request(
                 requestEndpoint: "attempts",
@@ -55,7 +55,7 @@ final class AttemptsAPI: APIEndpoint {
                 creatingObject: attempt,
                 withManager: manager
             ).done { attempt, json in
-                attempt.initDataset(json: json["attempts"].arrayValue[0]["dataset"], stepName: stepName)
+                attempt.initDataset(json: json["attempts"].arrayValue[0]["dataset"], stepBlockName: stepName)
                 seal.fulfill(attempt)
             }.catch { error in
                 seal.reject(error)
@@ -123,7 +123,7 @@ final class AttemptsAPI: APIEndpoint {
 
             if response?.statusCode == 200 {
                 let meta = Meta(json: json["meta"])
-                let attempts = json["attempts"].arrayValue.map({ Attempt(json: $0, stepName: stepName) })
+                let attempts = json["attempts"].arrayValue.map({ Attempt(json: $0, stepBlockName: stepName) })
                 success(attempts, meta)
                 return
             } else {
