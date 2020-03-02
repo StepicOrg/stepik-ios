@@ -1,7 +1,11 @@
 import SwiftyJSON
 import Foundation
 
-class Dataset: NSObject, NSCoding {
+class SubmissionFeedback: NSObject, NSCoding {
+    override init() {
+        super.init()
+    }
+
     required init(json: JSON) {
         super.init()
     }

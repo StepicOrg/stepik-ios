@@ -66,7 +66,7 @@ final class SubmissionsAPI: APIEndpoint {
 
             if response?.statusCode == 200 {
                 let meta = Meta(json: json["meta"])
-                let submissions = json["submissions"].arrayValue.map({ Submission(json: $0, stepName: stepName) })
+                let submissions = json["submissions"].arrayValue.map({ Submission(json: $0, stepBlockName: stepName) })
                 success(submissions, meta)
                 return
             } else {
@@ -104,7 +104,7 @@ final class SubmissionsAPI: APIEndpoint {
                     seal.reject(error)
                 case .success(let json):
                     let meta = Meta(json: json["meta"])
-                    let submissions = json["submissions"].arrayValue.map { Submission(json: $0, stepName: stepName) }
+                    let submissions = json["submissions"].arrayValue.map { Submission(json: $0, stepBlockName: stepName) }
                     seal.fulfill((submissions, meta))
                 }
             }
@@ -224,7 +224,7 @@ final class SubmissionsAPI: APIEndpoint {
             }
 
             if response?.statusCode == 200 {
-                let submission = Submission(json: json["submissions"][0], stepName: stepName)
+                let submission = Submission(json: json["submissions"][0], stepBlockName: stepName)
                 success(submission)
                 return
             } else {
@@ -243,7 +243,7 @@ final class SubmissionsAPI: APIEndpoint {
                 creatingObject: submission,
                 withManager: manager
             ).done { submission, json in
-                submission.initReply(json: json["submissions"].arrayValue[0]["reply"], stepName: stepName)
+                submission.initReply(json: json["submissions"].arrayValue[0]["reply"], stepBlockName: stepName)
                 seal.fulfill(submission)
             }.catch {
                 error in

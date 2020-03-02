@@ -1,7 +1,7 @@
 import SwiftyJSON
-import UIKit
+import Foundation
 
-final class SortingDataset: Dataset {
+final class ChoiceSubmissionFeedback: SubmissionFeedback {
     var options: [String]
 
     override var hash: Int {
@@ -9,26 +9,31 @@ final class SortingDataset: Dataset {
     }
 
     override var description: String {
-        "SortingDataset(options: \(self.options))"
+        "ChoiceSubmissionFeedback(options: \(self.options))"
+    }
+
+    init(options: [String]) {
+        self.options = options
+        super.init()
     }
 
     /* Example data:
-     {
-       "options": [
-         "Four <p><strong>HTML tags in items enabled.</strong></p>",
-         "Three",
-         "One",
-         "Two"
-       ]
-     }
-     */
+    {
+      "options_feedback": [
+        "502",
+        "5002",
+        "520",
+        "52"
+      ]
+    }
+    */
     required init(json: JSON) {
-        self.options = json[JSONKey.options.rawValue].arrayValue.map { $0.stringValue }
+        self.options = json[JSONKey.optionsFeedback.rawValue].arrayValue.map { $0.stringValue }
         super.init(json: json)
     }
 
     required init?(coder: NSCoder) {
-        guard let options = coder.decodeObject(forKey: JSONKey.options.rawValue) as? [String] else {
+        guard let options = coder.decodeObject(forKey: JSONKey.optionsFeedback.rawValue) as? [String] else {
             return nil
         }
 
@@ -38,11 +43,11 @@ final class SortingDataset: Dataset {
     }
 
     override func encode(with coder: NSCoder) {
-        coder.encode(self.options, forKey: JSONKey.options.rawValue)
+        coder.encode(self.options, forKey: JSONKey.optionsFeedback.rawValue)
     }
 
     override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? SortingDataset else {
+        guard let object = object as? ChoiceSubmissionFeedback else {
             return false
         }
         if self === object { return true }
@@ -52,6 +57,6 @@ final class SortingDataset: Dataset {
     }
 
     enum JSONKey: String {
-        case options
+        case optionsFeedback = "options_feedback"
     }
 }

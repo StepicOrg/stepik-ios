@@ -1,4 +1,5 @@
 import Foundation
+import Logging
 import PromiseKit
 
 protocol BaseQuizInteractorProtocol {
@@ -9,6 +10,7 @@ protocol BaseQuizInteractorProtocol {
 }
 
 final class BaseQuizInteractor: BaseQuizInteractorProtocol {
+    private static let logger = Logger(label: "com.AlexKarpov.Stepic.BaseQuizInteractor")
     private static let pollInterval: TimeInterval = 0.5
 
     weak var moduleOutput: BaseQuizOutputProtocol?
@@ -26,6 +28,12 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
     private var submissionsCount = 0
     private var currentAttempt: Attempt?
+    private var currentSubmission: Submission?
+
+    private var cacheReplyQueue = DispatchQueue(
+        label: "com.AlexKarpov.Stepic.BaseQuizInteractor.CacheReply",
+        qos: .userInitiated
+    )
 
     init(
         step: Step,
@@ -46,98 +54,96 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.rateAppManager = rateAppManager
     }
 
-    // TODO: Cache reply, currently unused.
+    // MARK: Protocol Conforming
+
     func doReplyCache(request: BaseQuiz.ReplyCache.Request) {
-        guard let attempt = self.currentAttempt else {
+        guard let attempt = self.currentAttempt,
+              let submission = self.currentSubmission else {
             return
         }
 
-        // FIXME: DI
-        ReplyCache.shared.set(reply: request.reply, forStepId: self.step.id, attemptId: attempt.id)
+        // TODO: When submission is in wrong status it's better to show retry button instead of allow editing reply,
+        // then handle on tap retry, create attempt and create local submission with +1 id if submission exists.
+        let localSubmission = Submission(submission: submission)
+        localSubmission.id += submission.status == .wrong && !submission.isLocal ? 1 : 0
+        localSubmission.attemptID = attempt.id
+        localSubmission.reply = request.reply
+        localSubmission.isLocal = true
+
+        self.currentSubmission = localSubmission
+
+        self.cacheReplyQueue.async { [weak self] in
+            self?.provider
+                .createLocalSubmission(localSubmission)
+                .done { _ in }
+        }
     }
 
     func doSubmissionLoad(request: BaseQuiz.SubmissionLoad.Request) {
-        let queue = DispatchQueue.global(qos: .userInitiated)
-
-        queue.promise {
-            self.loadAttempt(forceRefreshAttempt: request.shouldRefreshAttempt)
-        }.then(on: queue) { attempt -> Promise<(Attempt, Submission?)> in
-            guard let attempt = attempt else {
-                throw Error.unknownAttempt
-            }
-
-            return self.provider.fetchSubmissions(for: self.step, attempt: attempt).map { (attempt, $0.0.first) }
-        }.then(on: queue) { attempt, submission -> Guarantee<(Attempt, Submission?, Reply?, Int)> in
-            let cachedReply = ReplyCache.shared.getReply(forStepId: self.step.id, attemptId: attempt.id)
-            return self.countSubmissions().map { (attempt, submission, cachedReply, $0) }
-        }.done { attempt, submission, cachedReply, submissionLimit in
+        firstly {
+            self.fetchAttempt(forceRefreshAttempt: request.shouldRefreshAttempt)
+                .compactMap { $0 }
+        }.then { attempt -> Promise<(Attempt, Submission)> in
+            self.fetchSubmission(attemptID: attempt.id)
+                .map { (attempt, $0) }
+        }.then { attempt, submission -> Guarantee<(Attempt, Submission, Int)> in
+            self.countSubmissions()
+                .map { (attempt, submission, $0) }
+        }.done { attempt, submission, submissionLimit in
             self.submissionsCount = submissionLimit
             self.currentAttempt = attempt
+            self.currentSubmission = submission
 
-            self.presentSubmission(attempt: attempt, submission: submission, cachedReply: cachedReply)
+            self.presentSubmission(attempt: attempt, submission: submission)
         }.catch { error in
-            print("base quiz interactor: error while load submission = \(error.localizedDescription)")
+            Self.logger.error("BaseQuizInteractor: error while load submission = \(error)")
             self.presenter.presentSubmission(response: .init(result: .failure(error)))
         }
     }
 
     func doSubmissionSubmit(request: BaseQuiz.SubmissionSubmit.Request) {
-        guard let attempt = self.currentAttempt else {
-            // TODO: send analytics for this case
+        guard let attempt = self.currentAttempt,
+              let submission = self.currentSubmission else {
             return
         }
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
-
-        let queue = DispatchQueue.global(qos: .userInitiated)
         let reply = request.reply
 
-        print("base quiz interactor: creating submission for attempt = \(attempt.id)...")
-        queue.promise {
+        // Present evaluation status
+        let evaluationSubmission = Submission(submission: submission)
+        evaluationSubmission.reply = request.reply
+        evaluationSubmission.status = .evaluation
+        self.presentSubmission(attempt: attempt, submission: evaluationSubmission)
+
+        Self.logger.info("BaseQuizInteractor: creating submission for attempt = \(attempt.id)...")
+        AnalyticsEvent.submissionSubmit.report()
+
+        firstly {
             self.provider.createSubmission(for: self.step, attempt: attempt, reply: reply)
         }.then { submission -> Promise<Submission> in
             guard let submission = submission else {
                 throw Error.submissionFetchFailed
             }
 
-            print("base quiz interactor: submission created = \(submission.id), status = \(submission.status ??? "")")
-
-            // Analytics
-            AnalyticsUserProperties.shared.incrementSubmissionsCount()
-            if let codeReply = reply as? CodeReply {
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Step.Submission.created,
-                    parameters: ["type": self.step.block.name, "language": codeReply.languageName]
-                )
-                AmplitudeAnalyticsEvents.Steps.submissionMade(
-                    step: self.step.id,
-                    type: self.step.block.name,
-                    language: codeReply.languageName
-                ).send()
-            } else {
-                AnalyticsReporter.reportEvent(
-                    AnalyticsEvents.Step.Submission.created,
-                    parameters: ["type": self.step.block.name]
-                )
-                AmplitudeAnalyticsEvents.Steps.submissionMade(
-                    step: self.step.id,
-                    type: self.step.block.name
-                ).send()
-            }
+            Self.logger.info(
+                "BaseQuizInteractor: submission created = \(submission.id), status = \(submission.statusString ??? "")"
+            )
+            AnalyticsEvent.submissionCreated(reply, self.step).report()
 
             self.submissionsCount += 1
-            self.presentSubmission(attempt: attempt, submission: submission, cachedReply: reply)
+            self.currentSubmission = submission
+            self.presentSubmission(attempt: attempt, submission: submission)
 
-            print("base quiz interactor: polling submission \(submission.id)...")
-            return queue.promise { self.pollSubmission(submission) }
+            Self.logger.info("BaseQuizInteractor: polling submission \(submission.id)...")
+            return self.pollSubmission(submission)
         }.done { submission in
-            print("base quiz interactor: submission \(submission.id) completely evaluated")
+            Self.logger.info("BaseQuizInteractor: submission \(submission.id) completely evaluated")
 
-            self.presentSubmission(attempt: attempt, submission: submission, cachedReply: reply)
-
+            self.currentSubmission = submission
+            self.presentSubmission(attempt: attempt, submission: submission)
             self.moduleOutput?.handleSubmissionEvaluated()
 
-            if submission.status == "correct" {
+            if submission.isCorrect {
                 self.moduleOutput?.handleCorrectSubmission()
 
                 if self.suggestRateAppIfNeeded() {
@@ -147,7 +153,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 self.suggestStreakIfNeeded()
             }
         }.catch { error in
-            print("base quiz interactor: error while submission = \(error.localizedDescription)")
+            Self.logger.error("BaseQuizInteractor: error while submission = \(error)")
             self.presenter.presentSubmission(response: .init(result: .failure(error)))
         }
     }
@@ -156,7 +162,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.moduleOutput?.handleNextStepNavigation()
     }
 
-    // MARK: - Private API
+    // MARK: Private API
 
     @discardableResult
     private func suggestStreakIfNeeded() -> Bool {
@@ -189,12 +195,11 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         return false
     }
 
-    private func presentSubmission(attempt: Attempt, submission: Submission?, cachedReply: Reply?) {
+    private func presentSubmission(attempt: Attempt, submission: Submission) {
         let response = BaseQuiz.SubmissionLoad.Data(
             step: self.step,
             attempt: attempt,
             submission: submission,
-            cachedReply: cachedReply,
             submissionsCount: self.submissionsCount,
             hasNextStep: self.hasNextStep
         )
@@ -202,14 +207,20 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         self.presenter.presentSubmission(response: .init(result: .success(response)))
     }
 
-    private func loadAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
-        firstly { () -> Promise<Attempt?> in
-            if forceRefreshAttempt {
-                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
+    private func fetchAttempt(forceRefreshAttempt: Bool) -> Promise<Attempt?> {
+        guard let userID = self.userService.currentUser?.id else {
+            return Promise(error: Error.unknownUser)
+        }
 
+        return firstly { () -> Promise<Attempt?> in
+            if forceRefreshAttempt {
+                AnalyticsEvent.newAttempt.report()
                 return self.provider.createAttempt(for: self.step)
+            } else {
+                return self.provider
+                    .fetchAttempts(for: self.step, userID: userID)
+                    .map { $0.0.first }
             }
-            return self.provider.fetchAttempts(for: self.step).map { $0.0.first }
         }.then { attempt -> Promise<Attempt?> in
             guard let attempt = attempt, attempt.status == "active" else {
                 return self.provider.createAttempt(for: self.step)
@@ -219,45 +230,81 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
+    private func fetchSubmission(attemptID: Attempt.IdType) -> Promise<Submission> {
+        Promise { seal in
+            let remoteSubmissionsGuarantee = Guarantee(
+                self.provider.fetchSubmissionsForAttempt(
+                    attemptID: attemptID,
+                    stepBlockName: self.step.block.name,
+                    dataSourceType: .remote
+                ),
+                fallback: nil
+            )
+            let cacheSubmissionsGuarantee = Guarantee(
+                self.provider.fetchSubmissionsForAttempt(
+                    attemptID: attemptID,
+                    stepBlockName: self.step.block.name,
+                    dataSourceType: .cache
+                ),
+                fallback: nil
+            )
+
+            when(
+                fulfilled: remoteSubmissionsGuarantee,
+                cacheSubmissionsGuarantee
+            ).done { remoteSubmissions, cachedSubmissions in
+                let remoteSubmission = remoteSubmissions?.first
+                let cachedSubmission = cachedSubmissions?.first
+
+                if let remoteSubmission = remoteSubmission,
+                   let cachedSubmission = cachedSubmission {
+                    if remoteSubmission.id >= cachedSubmission.id {
+                        seal.fulfill(remoteSubmission)
+                    } else {
+                        seal.fulfill(cachedSubmission)
+                    }
+                } else if let remoteSubmission = remoteSubmission {
+                    seal.fulfill(remoteSubmission)
+                } else if let cachedSubmission = cachedSubmission {
+                    seal.fulfill(cachedSubmission)
+                } else {
+                    self.provider
+                        .createLocalSubmission(Submission(id: 0, attemptID: attemptID, isLocal: true))
+                        .done { seal.fulfill($0) }
+                }
+            }.catch { error in
+                seal.reject(error)
+            }
+        }
+    }
+
     private func countSubmissions() -> Guarantee<Int> {
         Guarantee { seal in
-            var count = 0
-            func loadSubmissions(page: Int) {
-                self.provider.fetchSubmissions(for: self.step, page: page).done { submissions, meta in
-                    count += submissions.count
-
-                    if meta.hasNext {
-                        loadSubmissions(page: page + 1)
-                    } else {
-                        seal(count)
-                    }
-                }.catch { _ in
-                    seal(0)
-                }
-            }
-            loadSubmissions(page: 1)
+            self.provider
+                .fetchSubmissions(for: self.step, page: 1)
+                .map { $0.0.count }
+                .done { seal($0) }
+                .catch { _ in seal(0) }
         }
     }
 
     private func pollSubmission(_ submission: Submission) -> Promise<Submission> {
         Promise { seal in
             func poll(retryCount: Int) {
-                after(seconds: Double(retryCount) * BaseQuizInteractor.pollInterval).then {
-                    _ -> Promise<Submission?> in
-
+                after(seconds: Double(retryCount) * Self.pollInterval).then { _ -> Promise<Submission?> in
                     self.provider.fetchSubmission(id: submission.id, step: self.step)
                 }.done { submission in
                     guard let submission = submission else {
                         throw Error.submissionFetchFailed
                     }
 
-                    if submission.status == "evaluation" {
+                    if submission.status == .evaluation {
                         poll(retryCount: retryCount + 1)
                     } else {
                         seal.fulfill(submission)
                     }
                 }.catch { error in
-                    print("base quiz interactor: error while polling submission = \(error)")
+                    Self.logger.error("BaseQuizInteractor: error while polling submission = \(error)")
                     seal.reject(Error.submissionFetchFailed)
                 }
             }
@@ -266,9 +313,49 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         }
     }
 
+    // MARK: Inner Types
+
     enum Error: Swift.Error {
         case unknownAttempt
         case attemptFetchFailed
         case submissionFetchFailed
+        case unknownUser
+    }
+
+    private enum AnalyticsEvent {
+        case newAttempt
+        case submissionSubmit
+        case submissionCreated(Reply, Step)
+
+        func report() {
+            switch self {
+            case .newAttempt:
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.newAttempt, parameters: nil)
+            case .submissionSubmit:
+                AnalyticsReporter.reportEvent(AnalyticsEvents.Step.Submission.submit, parameters: nil)
+            case .submissionCreated(let reply, let step):
+                AnalyticsUserProperties.shared.incrementSubmissionsCount()
+                if let codeReply = reply as? CodeReply {
+                    AnalyticsReporter.reportEvent(
+                        AnalyticsEvents.Step.Submission.created,
+                        parameters: ["type": step.block.name, "language": codeReply.languageName]
+                    )
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(
+                        step: step.id,
+                        type: step.block.name,
+                        language: codeReply.languageName
+                    ).send()
+                } else {
+                    AnalyticsReporter.reportEvent(
+                        AnalyticsEvents.Step.Submission.created,
+                        parameters: ["type": step.block.name]
+                    )
+                    AmplitudeAnalyticsEvents.Steps.submissionMade(
+                        step: step.id,
+                        type: step.block.name
+                    ).send()
+                }
+            }
+        }
     }
 }

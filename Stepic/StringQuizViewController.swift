@@ -13,7 +13,7 @@ import UIKit
 final class StringQuizViewController: QuizViewController {
     var textView = IQTextView()
 
-    var dataset: String?
+    var dataset: StringDataset?
     var reply: TextReply?
 
     let textViewHeight = 64
@@ -60,7 +60,7 @@ final class StringQuizViewController: QuizViewController {
     }
 
     override func display(dataset: Dataset) {
-        guard let dataset = dataset as? String else {
+        guard let dataset = dataset as? StringDataset else {
             return
         }
 

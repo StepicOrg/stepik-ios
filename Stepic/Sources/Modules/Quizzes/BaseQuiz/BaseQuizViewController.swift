@@ -201,6 +201,7 @@ extension BaseQuizViewController: BaseQuizViewDelegate {
 extension BaseQuizViewController: QuizOutputProtocol {
     func update(reply: Reply) {
         self.currentReply = reply
+        self.interactor.doReplyCache(request: .init(reply: reply))
     }
 
     func submit(reply: Reply) {

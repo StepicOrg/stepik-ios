@@ -13,8 +13,23 @@ final class BaseQuizAssembly: Assembly {
 
     func makeModule() -> UIViewController {
         let provider = BaseQuizProvider(
-            submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
-            attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
+            attemptsRepository: AttemptsRepository(
+                attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
+                attemptsPersistenceService: AttemptsPersistenceService(
+                    managedObjectContext: CoreDataHelper.shared.context,
+                    stepsPersistenceService: StepsPersistenceService()
+                )
+            ),
+            submissionsRepository: SubmissionsRepository(
+                submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
+                submissionsPersistenceService: SubmissionsPersistenceService(
+                    managedObjectContext: CoreDataHelper.shared.context,
+                    attemptsPersistenceService: AttemptsPersistenceService(
+                        managedObjectContext: CoreDataHelper.shared.context,
+                        stepsPersistenceService: StepsPersistenceService()
+                    )
+                )
+            ),
             userActivitiesNetworkService: UserActivitiesNetworkService(userActivitiesAPI: UserActivitiesAPI())
         )
         let presenter = BaseQuizPresenter()
