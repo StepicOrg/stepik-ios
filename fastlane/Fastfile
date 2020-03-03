@@ -84,6 +84,8 @@ platform :ios do
 
         match(
             type: type,
+            storage_mode: "google_cloud",
+            google_cloud_bucket_name: "stepik-ios-cert",
             force_for_new_devices: true,
             readonly: read_only,
             app_identifier: identifiers
@@ -249,7 +251,6 @@ platform :ios do
     lane :match_adhoc do |options|
         match_scheme(
             type: "adhoc",
-            force_for_new_devices: true,
             scheme: options[:scheme],
             read_only: options.key?(:read_only) ? options[:read_only] : true
         )
