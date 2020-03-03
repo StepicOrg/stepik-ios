@@ -173,6 +173,7 @@ platform :ios do
 
         unlock_keychain(password: keychain_password)
 
+        sync_device_info()
         match_adhoc(scheme: scheme)
 
         # Disable automatic code signing -> build -> enable again
@@ -248,6 +249,7 @@ platform :ios do
     lane :match_adhoc do |options|
         match_scheme(
             type: "adhoc",
+            force_for_new_devices: true,
             scheme: options[:scheme],
             read_only: options.key?(:read_only) ? options[:read_only] : true
         )
@@ -261,6 +263,11 @@ platform :ios do
             scheme: options[:scheme],
             read_only: options.key?(:read_only) ? options[:read_only] : true
         )
+    end
+
+    desc "Update iOS UDID's on the Developer Portal."
+    lane :sync_device_info do
+        register_devices(devices_file: "fastlane/Devicefile")
     end
 
     desc "Increment build number in project"
