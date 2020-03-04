@@ -15,7 +15,7 @@ extension CodeQuizFullscreenRunCodeView {
         let samplesButtonImageInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
         let samplesButtonInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 16)
 
-        let runCodeButtonBackgroundColor = UIColor.stepikGreen
+        let runCodeButtonBackgroundColor = UIColor(hex: 0x6C7BDF)
         let runCodeButtonHeight: CGFloat = 44
         let runCodeButtonTextColor = UIColor.white
         let runCodeButtonCornerRadius: CGFloat = 6
