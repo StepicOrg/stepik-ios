@@ -6,9 +6,9 @@ use_frameworks!
 
 def shared_pods
     pod 'Alamofire', '4.9.1'
-    pod 'Atributika', '4.9.4'
+    pod 'Atributika', '4.9.5'
     pod 'SwiftyJSON', '5.0.0'
-    pod 'SDWebImage', '5.5.2'
+    pod 'SDWebImage', '5.6.0'
     pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '2.x'
     pod 'Logging', '1.2.0'
     pod 'Fabric', '1.10.2'
@@ -30,10 +30,10 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.17.0'
-    pod 'Firebase/Messaging' , '6.17.0'
-    pod 'Firebase/Analytics' , '6.17.0'
-    pod 'Firebase/RemoteConfig', '6.17.0'
+    pod 'Firebase/Core', '6.18.0'
+    pod 'Firebase/Messaging' , '6.18.0'
+    pod 'Firebase/Analytics' , '6.18.0'
+    pod 'Firebase/RemoteConfig', '6.18.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.9.4'
     pod 'Amplitude-iOS', '4.9.3'
@@ -54,7 +54,7 @@ def all_pods
     
     pod 'Presentr', '1.9'
     
-    pod 'Agrume', '5.6.4'
+    pod 'Agrume', '5.6.5'
     pod 'Highlightr', '2.1.0'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.3'
@@ -63,7 +63,7 @@ def all_pods
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.4.0'
     pod 'Nuke', '8.3.1'
-    pod 'STRegex', '2.1.0'
+    pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
     pod 'SwiftDate', '6.1.0'
 end
