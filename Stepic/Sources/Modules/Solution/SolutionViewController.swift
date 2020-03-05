@@ -127,6 +127,14 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
             self.solutionView?.actionIsHidden = true
 
             let quizModuleInput = quizAssembly.moduleInput
+            // Disable code quiz features
+            if let codeQuizInteractor = quizModuleInput as? CodeQuizInteractor {
+                codeQuizInteractor.isCurrentUserCodeTemplateUpdateEnabled = false
+            }
+            if let codeQuizViewController = quizController as? CodeQuizViewController {
+                codeQuizViewController.codeQuizView?.setCodeEditorActionControlsEnabled(false)
+            }
+
             quizModuleInput?.update(quizTitleVisibility: false)
             quizModuleInput?.update(dataset: data.dataset)
             quizModuleInput?.update(feedback: data.feedback)
@@ -134,18 +142,7 @@ final class SolutionViewController: UIViewController, ControllerWithStepikPlaceh
             quizModuleInput?.update(reply: data.reply)
             quizModuleInput?.update(status: data.quizStatus)
 
-            let isUserInteractionEnabled: Bool = {
-                if case .code = quizType {
-                    return true
-                }
-                return false
-            }()
-
-            quizController.view.isUserInteractionEnabled = isUserInteractionEnabled
-
-            if let codeQuizViewController = quizController as? CodeQuizViewController {
-                codeQuizViewController.codeQuizView?.setCodeEditorActionControlsEnabled(false)
-            }
+            quizController.view.isUserInteractionEnabled = quizType == .code
         }
 
         self.solutionView?.endLoading()

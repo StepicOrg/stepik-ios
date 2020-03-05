@@ -35,11 +35,29 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
                 videoFileManager: VideoStoredFileManager(fileManager: .default),
                 imageDownloadingService: DownloadingServiceFactory.makeDownloadingService(type: .image),
                 imageFileManager: ImageStoredFileManager(fileManager: .default),
+                attemptsRepository: AttemptsRepository(
+                    attemptsNetworkService: AttemptsNetworkService(attemptsAPI: AttemptsAPI()),
+                    attemptsPersistenceService: AttemptsPersistenceService(
+                        managedObjectContext: CoreDataHelper.shared.context,
+                        stepsPersistenceService: StepsPersistenceService()
+                    )
+                ),
+                submissionsRepository: SubmissionsRepository(
+                    submissionsNetworkService: SubmissionsNetworkService(submissionsAPI: SubmissionsAPI()),
+                    submissionsPersistenceService: SubmissionsPersistenceService(
+                        managedObjectContext: CoreDataHelper.shared.context,
+                        attemptsPersistenceService: AttemptsPersistenceService(
+                            managedObjectContext: CoreDataHelper.shared.context,
+                            stepsPersistenceService: StepsPersistenceService()
+                        )
+                    )
+                ),
                 stepsNetworkService: StepsNetworkService(stepsAPI: StepsAPI()),
                 storageUsageService: StorageUsageService(
                     videoFileManager: VideoStoredFileManager(fileManager: FileManager.default),
                     imageFileManager: ImageStoredFileManager(fileManager: .default)
-                )
+                ),
+                userAccountService: UserAccountService()
             )
         )
         let viewController = CourseInfoTabSyllabusViewController(interactor: interactor)

@@ -13,15 +13,28 @@ final class Submission: JSONSerializable {
     typealias IdType = Int
 
     var id: IdType = 0
-    var status: String?
+    var statusString: String?
     var hint: String?
     var feedback: SubmissionFeedback?
     var time = Date()
     var reply: Reply?
     var attemptID: Attempt.IdType = 0
     var attempt: Attempt?
+    var isLocal: Bool = false
 
-    var isCorrect: Bool { self.status == "correct" }
+    var status: SubmissionStatus? {
+        get {
+            if let stringValue = self.statusString {
+                return SubmissionStatus(rawValue: stringValue)
+            }
+            return nil
+        }
+        set {
+            self.statusString = newValue?.rawValue
+        }
+    }
+
+    var isCorrect: Bool { self.status == .correct }
 
     var json: JSON {
         [
@@ -30,40 +43,76 @@ final class Submission: JSONSerializable {
         ]
     }
 
-    init(json: JSON, stepName: String) {
-        self.update(json: json)
-        self.reply = nil
-        self.reply = self.getReplyFromJSON(json[JSONKey.reply.rawValue], stepName: stepName)
+    init(
+        id: IdType,
+        status: SubmissionStatus? = nil,
+        hint: String? = nil,
+        feedback: SubmissionFeedback? = nil,
+        time: Date = Date(),
+        reply: Reply? = nil,
+        attemptID: Attempt.IdType,
+        attempt: Attempt? = nil,
+        isLocal: Bool = false
+    ) {
+        self.id = id
+        self.statusString = status?.rawValue
+        self.hint = hint
+        self.feedback = feedback
+        self.time = time
+        self.reply = reply
+        self.attemptID = attemptID
+        self.attempt = attempt
+        self.isLocal = isLocal
     }
 
-    init(attempt: Int, reply: Reply) {
+    init(json: JSON, stepBlockName: String) {
+        self.update(json: json)
+        self.reply = nil
+        self.reply = self.getReplyFromJSON(json[JSONKey.reply.rawValue], stepBlockName: stepBlockName)
+    }
+
+    init(attempt: Int, reply: Reply, status: SubmissionStatus? = nil) {
         self.attemptID = attempt
         self.reply = reply
+        self.statusString = status?.rawValue
     }
 
     required init(json: JSON) {
         self.update(json: json)
     }
 
+    convenience init(submission: Submission?) {
+        self.init(
+            id: submission?.id ?? 0,
+            status: submission?.status,
+            hint: submission?.hint,
+            feedback: submission?.feedback,
+            time: submission?.time ?? Date(),
+            reply: submission?.reply,
+            attemptID: submission?.attemptID ?? 0,
+            attempt: submission?.attempt
+        )
+    }
+
     func update(json: JSON) {
         self.id = json[JSONKey.id.rawValue].intValue
-        self.status = json[JSONKey.status.rawValue].string
+        self.statusString = json[JSONKey.status.rawValue].string
         self.hint = json[JSONKey.hint.rawValue].string
-        self.feedback = SubmissionFeedback(json: json[JSONKey.feedback.rawValue])
+        self.feedback = self.getFeedbackFromJSON(json[JSONKey.feedback.rawValue])
         self.attemptID = json[JSONKey.attempt.rawValue].intValue
         self.time = Parser.shared.dateFromTimedateJSON(json[JSONKey.time.rawValue]) ?? Date()
     }
 
-    func initReply(json: JSON, stepName: String) {
-        self.reply = self.getReplyFromJSON(json, stepName: stepName)
+    func initReply(json: JSON, stepBlockName: String) {
+        self.reply = self.getReplyFromJSON(json, stepBlockName: stepBlockName)
     }
 
     func hasEqualId(json: JSON) -> Bool {
         self.id == json[JSONKey.id.rawValue].int
     }
 
-    private func getReplyFromJSON(_ json: JSON, stepName: String) -> Reply? {
-        switch stepName {
+    private func getReplyFromJSON(_ json: JSON, stepBlockName: String) -> Reply? {
+        switch stepBlockName {
         case "choice":
             return ChoiceReply(json: json)
         case "string":
@@ -87,6 +136,16 @@ final class Submission: JSONSerializable {
         }
     }
 
+    private func getFeedbackFromJSON(_ json: JSON) -> SubmissionFeedback? {
+        if let _ = json[JSONKey.optionsFeedback.rawValue].arrayObject as? [String] {
+            return ChoiceSubmissionFeedback(json: json)
+        }
+        if let _ = json.string {
+            return StringSubmissionFeedback(json: json)
+        }
+        return nil
+    }
+
     // MARK: Types
 
     enum JSONKey: String {
@@ -97,42 +156,24 @@ final class Submission: JSONSerializable {
         case reply
         case feedback
         case time
+        case optionsFeedback = "options_feedback"
     }
 }
 
 extension Submission: UniqueIdentifiable {
-    var uniqueIdentifier: UniqueIdentifierType {
-        "\(self.id)"
-    }
+    var uniqueIdentifier: UniqueIdentifierType { "\(self.id)" }
 }
 
 extension Submission: CustomDebugStringConvertible {
     var debugDescription: String {
         """
         Submission(id: \(id), \
-        status: \(status ?? "nil"), \
+        status: \(statusString ?? "nil"), \
         hint: \(hint ?? "nil"), \
         feedback: \(feedback ??? "nil"), \
         reply: \(reply ??? "nil"), \
         attemptID: \(attemptID), \
         attempt: \(attempt ??? "nil"))
         """
-    }
-}
-
-enum SubmissionFeedback {
-    case text(_ string: String)
-    case options(_ choices: [String])
-
-    init?(json: JSON) {
-        if let options = json["options_feedback"].arrayObject as? [String] {
-            self = .options(options)
-            return
-        }
-        if let stringValue = json.string {
-            self = .text(stringValue)
-            return
-        }
-        return nil
     }
 }

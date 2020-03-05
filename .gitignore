@@ -30,6 +30,8 @@ artefacts/
 fastlane/test_output/
 fastlane/report.xml
 fastlane/Readme.md
+# Google Cloud Storage code signing certificates
+gc_keys.json
 Preview.html
 # Carthage
 #

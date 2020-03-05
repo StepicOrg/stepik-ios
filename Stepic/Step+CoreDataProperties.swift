@@ -23,6 +23,7 @@ extension Step {
     @NSManaged var managedPassedBy: NSNumber?
     @NSManaged var managedCorrectRatio: NSNumber?
 
+    @NSManaged var managedAttempt: AttemptEntity?
     @NSManaged var managedBlock: Block?
     @NSManaged var managedLesson: Lesson?
     @NSManaged var managedProgress: Progress?
@@ -101,6 +102,15 @@ extension Step {
         }
         set {
             self.managedStatus = newValue
+        }
+    }
+
+    var attempt: AttemptEntity? {
+        get {
+            self.managedAttempt
+        }
+        set {
+            self.managedAttempt = newValue
         }
     }
 

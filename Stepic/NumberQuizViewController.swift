@@ -14,7 +14,7 @@ final class NumberQuizViewController: QuizViewController {
 
     let textFieldHeight = 32
 
-    var dataset: String?
+    var dataset: StringDataset?
     var reply: NumberReply?
 
     // Hack for adaptive mode (ugly layout when child quiz has padding)
@@ -65,7 +65,7 @@ final class NumberQuizViewController: QuizViewController {
     override var needsToRefreshAttemptWhenWrong: Bool { false }
 
     override func display(dataset: Dataset) {
-        guard let dataset = dataset as? String else {
+        guard let dataset = dataset as? StringDataset else {
             return
         }
 

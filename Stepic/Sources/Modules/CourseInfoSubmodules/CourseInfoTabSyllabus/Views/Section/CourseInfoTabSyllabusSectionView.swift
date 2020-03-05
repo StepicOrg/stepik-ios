@@ -41,6 +41,9 @@ extension CourseInfoTabSyllabusSectionView {
         let progressViewSecondaryColor = UIColor.clear
 
         let tapProxyViewSize = CGSize(width: 60, height: 60)
+
+        let enabledStateAlpha: CGFloat = 1.0
+        let disabledStateAlpha: CGFloat = 0.5
     }
 }
 
@@ -166,6 +169,7 @@ final class CourseInfoTabSyllabusSectionView: UIView {
         self.requirementsLabel.isHidden = viewModel.requirementsLabelText == nil
 
         self.updateDownloadState(newState: viewModel.downloadState)
+        self.updateEnabledAppearance(isEnabled: !viewModel.isDisabled)
 
         if let deadlines = viewModel.deadlines {
             self.deadlinesView.isHidden = false
@@ -227,6 +231,23 @@ final class CourseInfoTabSyllabusSectionView: UIView {
             self.downloadedSizeLabel.isHidden = true
             self.downloadButtonCenterYConstraint?.update(offset: 0)
         }
+    }
+
+    private func updateEnabledAppearance(isEnabled: Bool) {
+        // Not dims the requirements label, to make section requirements visible
+        let alpha = isEnabled
+            ? self.appearance.enabledStateAlpha
+            : self.appearance.disabledStateAlpha
+        [
+            self.indexLabel,
+            self.titleLabel,
+            self.progressLabel,
+            self.examLabel,
+            self.downloadButton,
+            self.downloadedSizeLabel,
+            self.deadlinesView,
+            self.progressIndicatorViewContainerView
+        ].forEach { $0.alpha = alpha }
     }
 
     @objc

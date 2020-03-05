@@ -19,7 +19,6 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
                 step: data.step,
                 submission: data.submission,
                 attempt: data.attempt,
-                cachedReply: data.cachedReply,
                 submissionsCount: data.submissionsCount,
                 hasNextStep: data.hasNextStep
             )
@@ -37,24 +36,21 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
 
     private func makeViewModel(
         step: Step,
-        submission: Submission?,
+        submission: Submission,
         attempt: Attempt,
-        cachedReply: Reply?,
         submissionsCount: Int,
         hasNextStep: Bool
     ) -> BaseQuizViewModel {
         let quizStatus: QuizStatus? = {
-            guard let submission = submission else {
-                return nil
-            }
-
             switch submission.status {
-            case "wrong":
+            case .wrong:
                 return .wrong
-            case "correct":
+            case .correct:
                 return .correct
-            default:
+            case .evaluation:
                 return .evaluation
+            case .none:
+                return nil
             }
         }()
 
@@ -97,7 +93,7 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
         let canRetry = quizStatus == .correct && !(submissionsLeft == 0)
 
         let hintContent: String? = {
-            if let text = submission?.hint, !text.isEmpty {
+            if let text = submission.hint, !text.isEmpty {
                 return self.makeHintContent(text: text)
             }
             return nil
@@ -122,9 +118,9 @@ final class BaseQuizPresenter: BaseQuizPresenterProtocol {
 
         return BaseQuizViewModel(
             quizStatus: quizStatus,
-            reply: submission?.reply ?? cachedReply,
+            reply: submission.reply,
             dataset: attempt.dataset,
-            feedback: submission?.feedback,
+            feedback: submission.feedback,
             submitButtonTitle: submitButtonTitle,
             isSubmitButtonEnabled: !isSubmitButtonDisabled,
             submissionsLeft: submissionsLeft,

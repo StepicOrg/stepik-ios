@@ -27,6 +27,7 @@ extension User {
 
     @NSManaged var managedInstructedCourses: NSSet?
     @NSManaged var managedAuthoredCourses: NSSet?
+    @NSManaged var managedAttempts: NSSet?
 
     @NSManaged var managedProfileEntity: Profile?
 
@@ -138,6 +139,15 @@ extension User {
         }
         get {
              managedLevel?.intValue ?? 0
+        }
+    }
+
+    var attempts: [AttemptEntity] {
+        get {
+            self.managedAttempts?.allObjects as! [AttemptEntity]
+        }
+        set {
+            self.managedAttempts = NSSet(array: newValue)
         }
     }
 
