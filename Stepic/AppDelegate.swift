@@ -232,8 +232,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         print("opened app via url \(url.absoluteString)")
 
-        if let sourceApplication = options[.sourceApplication] as? String,
-           VKSdk.processOpen(url, fromApplication: sourceApplication) {
+        let sourceApplicationOrNil = options[.sourceApplication] as? String
+
+        if VKSdk.processOpen(url, fromApplication: sourceApplicationOrNil) {
             return true
         }
         if ApplicationDelegate.shared.application(app, open: url, options: options) {
