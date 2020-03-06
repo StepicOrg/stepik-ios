@@ -1,5 +1,4 @@
 import Foundation
-import Logging
 import PromiseKit
 
 protocol BaseQuizInteractorProtocol {
@@ -10,7 +9,6 @@ protocol BaseQuizInteractorProtocol {
 }
 
 final class BaseQuizInteractor: BaseQuizInteractorProtocol {
-    private static let logger = Logger(label: "com.AlexKarpov.Stepic.BaseQuizInteractor")
     private static let pollInterval: TimeInterval = 0.5
 
     weak var moduleOutput: BaseQuizOutputProtocol?
@@ -96,7 +94,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
 
             self.presentSubmission(attempt: attempt, submission: submission)
         }.catch { error in
-            Self.logger.error("BaseQuizInteractor: error while load submission = \(error)")
+            print("BaseQuizInteractor: error while load submission = \(error)")
             self.presenter.presentSubmission(response: .init(result: .failure(error)))
         }
     }
@@ -115,7 +113,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
         evaluationSubmission.status = .evaluation
         self.presentSubmission(attempt: attempt, submission: evaluationSubmission)
 
-        Self.logger.info("BaseQuizInteractor: creating submission for attempt = \(attempt.id)...")
+        print("BaseQuizInteractor: creating submission for attempt = \(attempt.id)...")
         AnalyticsEvent.submissionSubmit.report()
 
         firstly {
@@ -125,19 +123,17 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 throw Error.submissionFetchFailed
             }
 
-            Self.logger.info(
-                "BaseQuizInteractor: submission created = \(submission.id), status = \(submission.statusString ??? "")"
-            )
+            print("BaseQuizInteractor: submission created = \(submission.id), status = \(submission.statusString ??? "")")
             AnalyticsEvent.submissionCreated(reply, self.step).report()
 
             self.submissionsCount += 1
             self.currentSubmission = submission
             self.presentSubmission(attempt: attempt, submission: submission)
 
-            Self.logger.info("BaseQuizInteractor: polling submission \(submission.id)...")
+            print("BaseQuizInteractor: polling submission \(submission.id)...")
             return self.pollSubmission(submission)
         }.done { submission in
-            Self.logger.info("BaseQuizInteractor: submission \(submission.id) completely evaluated")
+            print("BaseQuizInteractor: submission \(submission.id) completely evaluated")
 
             self.currentSubmission = submission
             self.presentSubmission(attempt: attempt, submission: submission)
@@ -153,7 +149,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                 self.suggestStreakIfNeeded()
             }
         }.catch { error in
-            Self.logger.error("BaseQuizInteractor: error while submission = \(error)")
+            print("BaseQuizInteractor: error while submission = \(error)")
             self.presenter.presentSubmission(response: .init(result: .failure(error)))
         }
     }
@@ -304,7 +300,7 @@ final class BaseQuizInteractor: BaseQuizInteractorProtocol {
                         seal.fulfill(submission)
                     }
                 }.catch { error in
-                    Self.logger.error("BaseQuizInteractor: error while polling submission = \(error)")
+                    print("BaseQuizInteractor: error while polling submission = \(error)")
                     seal.reject(Error.submissionFetchFailed)
                 }
             }

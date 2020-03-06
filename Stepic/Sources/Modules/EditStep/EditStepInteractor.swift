@@ -1,5 +1,4 @@
 import Foundation
-import Logging
 import PromiseKit
 
 protocol EditStepInteractorProtocol {
@@ -11,8 +10,6 @@ protocol EditStepInteractorProtocol {
 // MARK: - EditStepInteractor: EditStepInteractorProtocol -
 
 final class EditStepInteractor: EditStepInteractorProtocol {
-    private static let logger = Logger(label: "com.AlexKarpov.Stepic.WriteCommentInteractor")
-
     weak var moduleOutput: EditStepOutputProtocol?
 
     private let stepID: Step.IdType
@@ -37,24 +34,22 @@ final class EditStepInteractor: EditStepInteractorProtocol {
     // MARK: EditStepInteractorProtocol
 
     func doStepSourceLoad(request: EditStep.LoadStepSource.Request) {
-        EditStepInteractor.logger.info("edit step interactor :: start fetching step source = \(self.stepID)")
+        print("edit step interactor :: start fetching step source = \(self.stepID)")
 
         self.provider.fetchStepSource(stepID: self.stepID).done { stepSource in
             guard let stepSource = stepSource else {
-                EditStepInteractor.logger.error(
-                    "edit step interactor :: error while fetching step source, no step source returned"
-                )
+                print("edit step interactor :: error while fetching step source, no step source returned")
                 return self.presenter.presentStepSource(response: .init(data: .failure(Error.noStepSource)))
             }
 
-            EditStepInteractor.logger.info("edit step interactor :: finish fetching step source")
+            print("edit step interactor :: finish fetching step source")
 
             self.currentStepSource = stepSource
             self.currentText = stepSource.text
 
             self.presenter.presentStepSource(response: .init(data: .success(self.makeStepSourceDataFromCurrentData())))
         }.catch { error in
-            EditStepInteractor.logger.error("edit step interactor :: error while fetching step source, error \(error)")
+            print("edit step interactor :: error while fetching step source, error \(error)")
             self.presenter.presentStepSource(response: .init(data: .failure(error)))
         }
     }
@@ -66,17 +61,17 @@ final class EditStepInteractor: EditStepInteractorProtocol {
 
     func doRemoteStepSourceUpdate(request: EditStep.RemoteStepSourceUpdate.Request) {
         guard let currentStepSource = self.currentStepSource else {
-            EditStepInteractor.logger.info("edit step interactor :: error while updating step source, no step source")
+            print("edit step interactor :: error while updating step source, no step source")
             return self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: false))
         }
 
         let updatingStepSource = StepSource(stepSource: currentStepSource)
         updatingStepSource.text = self.currentText
 
-        EditStepInteractor.logger.info("edit step interactor :: start updating step source = \(updatingStepSource.id)")
+        print("edit step interactor :: start updating step source = \(updatingStepSource.id)")
 
         self.provider.updateStepSource(updatingStepSource).done { stepSource in
-            EditStepInteractor.logger.info("edit step interactor :: finish updating step source = \(stepSource.id)")
+            print("edit step interactor :: finish updating step source = \(stepSource.id)")
 
             self.reportAnalyticsEvent(.completed)
 
@@ -89,7 +84,7 @@ final class EditStepInteractor: EditStepInteractorProtocol {
                 self.moduleOutput?.handleStepSourceUpdated(stepSource)
             }
         }.catch { error in
-            EditStepInteractor.logger.error("edit step interactor :: error while updating step source, error \(error)")
+            print("edit step interactor :: error while updating step source, error \(error)")
             self.presenter.presentStepSourceEditResult(response: .init(isSuccessful: false))
         }
     }
