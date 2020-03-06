@@ -4,6 +4,7 @@ import Foundation
 protocol SpotlightIndexingServiceProtocol: AnyObject {
     func indexCourse(_ course: Course)
     func indexSearchableItem(_ spotlightSearchableItem: SpotlightSearchableItem)
+    func deleteAllSearchableItems()
 }
 
 extension SpotlightIndexingServiceProtocol {
@@ -35,5 +36,9 @@ final class SpotlightIndexingService: SpotlightIndexingServiceProtocol {
                 }
             )
         }
+    }
+
+    func deleteAllSearchableItems() {
+        CSSearchableIndex.default().deleteAllSearchableItems()
     }
 }
