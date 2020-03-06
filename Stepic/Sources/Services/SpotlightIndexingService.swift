@@ -2,7 +2,14 @@ import CoreSpotlight
 import Foundation
 
 protocol SpotlightIndexingServiceProtocol: AnyObject {
-    func index(_ spotlightSearchableItem: SpotlightSearchableItem)
+    func indexCourse(_ course: Course)
+    func indexSearchableItem(_ spotlightSearchableItem: SpotlightSearchableItem)
+}
+
+extension SpotlightIndexingServiceProtocol {
+    func indexCourse(_ course: Course) {
+        self.indexSearchableItem(CourseSpotlightSearchableItem(course: course))
+    }
 }
 
 final class SpotlightIndexingService: SpotlightIndexingServiceProtocol {
@@ -12,19 +19,18 @@ final class SpotlightIndexingService: SpotlightIndexingServiceProtocol {
 
     private init() {}
 
-    func index(_ spotlightSearchableItem: SpotlightSearchableItem) {
+    func indexSearchableItem(_ spotlightSearchableItem: SpotlightSearchableItem) {
         let searchableItem = spotlightSearchableItem.searchableItem
+        let identifier = "\(searchableItem.domainIdentifier ?? "").\(searchableItem.uniqueIdentifier)"
 
         self.queue.async {
             CSSearchableIndex.default().indexSearchableItems(
                 [searchableItem],
                 completionHandler: { errorOrNil in
                     if let error = errorOrNil {
-                        print(
-                            "SpotlightIndexingService: error indexing item = \(searchableItem), error = \(error)"
-                        )
+                        print("SpotlightIndexingService: error indexing item = \(identifier), error = \(error)")
                     } else {
-                        print("SpotlightIndexingService: indexed item = \(searchableItem)")
+                        print("SpotlightIndexingService: indexed item = \(identifier)")
                     }
                 }
             )

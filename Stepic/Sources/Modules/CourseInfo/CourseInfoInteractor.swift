@@ -21,12 +21,14 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
     private let adaptiveStorageManager: AdaptiveStorageManagerProtocol
     private let notificationSuggestionManager: NotificationSuggestionManager
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+    private let spotlightIndexingService: SpotlightIndexingServiceProtocol
 
     private let courseID: Course.IdType
     private var currentCourse: Course? {
         didSet {
             if let course = self.currentCourse {
                 LastStepGlobalContext.context.course = course
+                self.spotlightIndexingService.indexCourse(course)
             }
 
             self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
@@ -73,7 +75,8 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         userAccountService: UserAccountServiceProtocol,
         adaptiveStorageManager: AdaptiveStorageManagerProtocol,
         notificationSuggestionManager: NotificationSuggestionManager,
-        notificationsRegistrationService: NotificationsRegistrationServiceProtocol
+        notificationsRegistrationService: NotificationsRegistrationServiceProtocol,
+        spotlightIndexingService: SpotlightIndexingServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
@@ -83,6 +86,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         self.adaptiveStorageManager = adaptiveStorageManager
         self.notificationSuggestionManager = notificationSuggestionManager
         self.notificationsRegistrationService = notificationsRegistrationService
+        self.spotlightIndexingService = spotlightIndexingService
 
         self.courseID = courseID
     }
