@@ -707,6 +707,7 @@
 		2CD9F78022DC884900FBA471 /* AlamofireRequestsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */; };
 		2CDAD308229EB3F700AA9EF5 /* AssignmentsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */; };
 		2CDAD30A229EC81A00AA9EF5 /* PersistenceQueuesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */; };
+		2CDB95892412C08100F676A7 /* SpotlightContinueUserActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDB95882412C08100F676A7 /* SpotlightContinueUserActivityService.swift */; };
 		2CDBCCCF23EB777E005D2370 /* SubmissionURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */; };
 		2CDE82E2221D5CCB00C41887 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE82E1221D5CCB00C41887 /* highlight.js */; };
 		2CE02A772176649F009C633C /* UserNotificationsCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */; };
@@ -1921,6 +1922,7 @@
 		2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestsLogger.swift; sourceTree = "<group>"; };
 		2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsNetworkService.swift; sourceTree = "<group>"; };
 		2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceQueuesService.swift; sourceTree = "<group>"; };
+		2CDB95882412C08100F676A7 /* SpotlightContinueUserActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightContinueUserActivityService.swift; sourceTree = "<group>"; };
 		2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionURLProvider.swift; sourceTree = "<group>"; };
 		2CDE82E1221D5CCB00C41887 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		2CE02A762176649F009C633C /* UserNotificationsCenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsCenterDelegate.swift; sourceTree = "<group>"; };
@@ -4856,6 +4858,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		2CDB95872412C04A00F676A7 /* Spotlight */ = {
+			isa = PBXGroup;
+			children = (
+				2CDB95882412C08100F676A7 /* SpotlightContinueUserActivityService.swift */,
+				2C11482324126F640005680E /* SpotlightIndexingService.swift */,
+			);
+			path = Spotlight;
+			sourceTree = "<group>";
+		};
 		2CE61D81241295F500DA2CBA /* Spotlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -5745,13 +5756,13 @@
 				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
-				2C11482324126F640005680E /* SpotlightIndexingService.swift */,
 				2CB37E6523902BB80050D85E /* StorageUsageService.swift */,
 				2CDBCCCE23EB777E005D2370 /* SubmissionURLProvider.swift */,
 				62E98FBA6AB1C2BD6EA95634 /* UnitNavigationService.swift */,
 				62E98EBA0AF48AD90775FF7E /* UserAccountService.swift */,
 				62E986D1988A3445F3416404 /* Managers */,
 				62E98A358EF538D7F89D10F1 /* Models */,
+				2CDB95872412C04A00F676A7 /* Spotlight */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -7357,6 +7368,7 @@
 				2C8F3AE123CCBD26004D113A /* DownloadVideoQuality.swift in Sources */,
 				62E981B40D24CBBF5B97CFFD /* CourseInfoTabInfoInteractor.swift in Sources */,
 				62E98F3154D80ED0E2A9D546 /* CourseInfoTabInfoPresenter.swift in Sources */,
+				2CDB95892412C08100F676A7 /* SpotlightContinueUserActivityService.swift in Sources */,
 				62E98DB3F756A531F73A83C6 /* CourseInfoTabInfoViewController.swift in Sources */,
 				62E98204E6B4E748AB087640 /* CourseInfoTabInfoHeaderBlockView.swift in Sources */,
 				62E98CF264C7DE7E15028D15 /* CourseInfoTabInfoInstructorsBlockView.swift in Sources */,
