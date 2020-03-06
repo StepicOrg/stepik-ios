@@ -1,4 +1,5 @@
 import Foundation
+import Nuke
 import Regex
 
 /// Represents a data provider to provide image data.
@@ -84,4 +85,32 @@ struct Base64ImageDataProvider: ImageDataProvider {
 
         return string
     }
+}
+
+/// Represents an image data provider for loading image from a Nuke image cache layer.
+final class NukeImageDataProvider: ImageDataProvider {
+    private let imageRequest: ImageRequest
+    private let imageCache: ImageCache
+
+    private let compressionQuality: CGFloat
+
+    init(imageRequest: ImageRequest, imageCache: ImageCache, compressionQuality: CGFloat) {
+        self.imageRequest = imageRequest
+        self.imageCache = imageCache
+        self.compressionQuality = compressionQuality
+    }
+
+    convenience init(url: URL, imageCache: ImageCache = .shared, compressionQuality: CGFloat = 0.9) {
+        self.init(imageRequest: ImageRequest(url: url), imageCache: imageCache, compressionQuality: compressionQuality)
+    }
+
+    var data: Data? {
+        guard let image = self.imageCache[self.imageRequest] else {
+            return nil
+        }
+
+        return image.jpegData(compressionQuality: self.compressionQuality)
+    }
+
+    var contentURL: URL? { self.imageRequest.urlRequest.url }
 }
