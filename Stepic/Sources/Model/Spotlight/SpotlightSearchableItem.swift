@@ -23,7 +23,7 @@ final class CourseSpotlightSearchableItem: SpotlightSearchableItem {
     private let course: Course
 
     var uniqueIdentifier: UniqueIdentifierType {
-        "\(self.course.id)"
+        DeepLinkRoute.course(courseID: self.course.id).path
     }
 
     var domainIdentifier: UniqueIdentifierType {
