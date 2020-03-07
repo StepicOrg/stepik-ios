@@ -29,6 +29,8 @@ final class SpotlightContinueUserActivityService: SpotlightContinueUserActivityS
             }
         )
 
+        AmplitudeAnalyticsEvents.ContinueUserActivity.spotlightItemTapped(deepLinkRoute: deepLinkRoute).send()
+
         return true
     }
 }

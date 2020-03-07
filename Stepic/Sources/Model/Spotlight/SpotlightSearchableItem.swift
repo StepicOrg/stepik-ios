@@ -32,7 +32,6 @@ final class CourseSpotlightSearchableItem: SpotlightSearchableItem {
 
     var attributeSet: CSSearchableItemAttributeSet {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeContent as String)
-        attributeSet.relatedUniqueIdentifier = self.uniqueIdentifier
         attributeSet.title = self.course.title
         attributeSet.contentDescription = self.course.summary
         attributeSet.url = URL(string: "\(StepikApplicationsInfo.stepikURL)/\(self.course.id)")
