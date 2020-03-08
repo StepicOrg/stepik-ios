@@ -2,14 +2,14 @@ import CoreSpotlight
 import Foundation
 
 protocol SpotlightIndexingServiceProtocol: AnyObject {
-    func indexCourse(_ course: Course)
-    func indexSearchableItem(_ spotlightSearchableItem: SpotlightSearchableItem)
+    func indexSearchableItems(_ items: [SpotlightSearchableItem])
     func deleteAllSearchableItems()
 }
 
 extension SpotlightIndexingServiceProtocol {
-    func indexCourse(_ course: Course) {
-        self.indexSearchableItem(CourseSpotlightSearchableItem(course: course))
+    func indexCourses(_ courses: [Course]) {
+        let courseSearchableItems = courses.map { CourseSpotlightSearchableItem(course: $0) }
+        self.indexSearchableItems(courseSearchableItems)
     }
 }
 
@@ -20,18 +20,18 @@ final class SpotlightIndexingService: SpotlightIndexingServiceProtocol {
 
     private init() {}
 
-    func indexSearchableItem(_ spotlightSearchableItem: SpotlightSearchableItem) {
-        let searchableItem = spotlightSearchableItem.searchableItem
-        let identifier = "\(searchableItem.domainIdentifier ?? "").\(searchableItem.uniqueIdentifier)"
-
+    func indexSearchableItems(_ items: [SpotlightSearchableItem]) {
         self.queue.async {
+            let searchableItems = items.map { $0.searchableItem }
+            let identifiers = items.map { "\($0.domainIdentifier).\($0.uniqueIdentifier)" }
+
             CSSearchableIndex.default().indexSearchableItems(
-                [searchableItem],
+                searchableItems,
                 completionHandler: { errorOrNil in
                     if let error = errorOrNil {
-                        print("SpotlightIndexingService: error indexing item = \(identifier), error = \(error)")
+                        print("SpotlightIndexingService: error indexing items = \(identifiers), error = \(error)")
                     } else {
-                        print("SpotlightIndexingService: indexed item = \(identifier)")
+                        print("SpotlightIndexingService: indexed items = \(identifiers)")
                     }
                 }
             )

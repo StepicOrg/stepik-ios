@@ -14,24 +14,46 @@ import SwiftyJSON
 final class CoursesAPI: APIEndpoint {
     override var name: String { "courses" }
 
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, existing: [Course]) -> Promise<[Course]> {
+    @discardableResult
+    func retrieve(
+        ids: [Int],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        existing: [Course]
+    ) -> Promise<[Course]> {
         if ids.isEmpty {
             return .value([])
         }
 
-        return getObjectsByIds(ids: ids, updating: existing)
+        return self.getObjectsByIds(ids: ids, updating: existing)
     }
 
     @available(*, deprecated, message: "Legacy: we want to pass existing")
-    @discardableResult func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Course]> {
+    @discardableResult
+    func retrieve(
+        ids: [Int],
+        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<[Course]> {
         if ids.isEmpty {
             return .value([])
         }
 
-        return getObjectsByIds(ids: ids, updating: Course.getCourses(ids))
+        return self.getObjectsByIds(
+            ids: ids,
+            updating: Course.getCourses(ids)
+        ).then { self.indexCoursesInSpotlight($0) }
     }
 
-    func retrieve(tag: Int? = nil, featured: Bool? = nil, enrolled: Bool? = nil, excludeEnded: Bool? = nil, isPublic: Bool? = nil, isPopular: Bool? = nil, order: String? = nil, language: String? = nil, page: Int = 1) -> Promise<([Course], Meta)> {
+    func retrieve(
+        tag: Int? = nil,
+        featured: Bool? = nil,
+        enrolled: Bool? = nil,
+        excludeEnded: Bool? = nil,
+        isPublic: Bool? = nil,
+        isPopular: Bool? = nil,
+        order: String? = nil,
+        language: String? = nil,
+        page: Int = 1
+    ) -> Promise<([Course], Meta)> {
         var params = Parameters()
 
         if let isFeatured = featured {
@@ -68,7 +90,14 @@ final class CoursesAPI: APIEndpoint {
 
         params["page"] = page
 
-        return retrieve.requestWithFetching(requestEndpoint: "courses", paramName: "courses", params: params, withManager: manager)
+        return self.retrieve.requestWithFetching(
+            requestEndpoint: "courses",
+            paramName: "courses",
+            params: params,
+            withManager: self.manager
+        ).then { courses, meta in
+            self.indexCoursesInSpotlight(courses).map { _ in (courses, meta) }
+        }
     }
 
     //Can't add this to extension because it is mocked in tests. "Declaration from extension cannot be overriden"
@@ -91,6 +120,12 @@ final class CoursesAPI: APIEndpoint {
             success: success,
             failure: errorHandler
         )
+    }
+
+    // TODO: Create CoursesRepository and index courses in spotlight on remote data source fetched result.
+    private func indexCoursesInSpotlight(_ courses: [Course]) -> Promise<[Course]> {
+        SpotlightIndexingService.shared.indexCourses(courses)
+        return .value(courses)
     }
 }
 

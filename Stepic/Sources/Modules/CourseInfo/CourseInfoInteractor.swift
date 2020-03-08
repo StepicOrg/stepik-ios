@@ -28,7 +28,7 @@ final class CourseInfoInteractor: CourseInfoInteractorProtocol {
         didSet {
             if let course = self.currentCourse {
                 LastStepGlobalContext.context.course = course
-                self.spotlightIndexingService.indexCourse(course)
+                self.spotlightIndexingService.indexCourses([course])
             }
 
             self.pushCurrentCourseToSubmodules(submodules: Array(self.submodules.values))
