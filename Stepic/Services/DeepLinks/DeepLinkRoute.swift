@@ -21,6 +21,48 @@ enum DeepLinkRoute {
     case course(courseID: Int)
     case coursePromo(courseID: Int)
 
+    var path: String {
+        let path: String
+
+        switch self {
+        case .lesson(let lessonID, let stepID, let unitID):
+            if let unitID = unitID {
+                path = "lesson/\(lessonID)/step/\(stepID)?unit=\(unitID)"
+            } else {
+                path = "lesson/\(lessonID)/step/\(stepID)"
+            }
+        case .notifications:
+            path = "notifications"
+        case .discussions(let lessonID, let stepID, let discussionID, let unitID):
+            if let unitID = unitID {
+                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)&unit=\(unitID)"
+            } else {
+                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)"
+            }
+        case .solutions(let lessonID, let stepID, let discussionID, let unitID):
+            if let unitID = unitID {
+                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)&unit=\(unitID)&amp;thread=solutions"
+            } else {
+                path = "lesson/\(lessonID)/step/\(stepID)?discussion=\(discussionID)&amp;thread=solutions"
+            }
+        case .profile(let userID):
+            path = "users/\(userID)"
+        case .syllabus(let courseID):
+            path = "course/\(courseID)/syllabus"
+        case .catalog:
+            path = "catalog"
+        case .home:
+            // TODO: Add regex pattern
+            path = "home"
+        case .course(let courseID):
+            path = "course/\(courseID)"
+        case .coursePromo(let courseID):
+            path = "course/\(courseID)/promo"
+        }
+
+        return "\(StepikApplicationsInfo.stepikURL)/\(path)"
+    }
+
     init?(path: String) {
         if let match = Pattern.catalog.regex.firstMatch(in: path),
            match.matchedString == path {

@@ -69,14 +69,14 @@ final class Course: NSManagedObject, IDFetchable {
             && self.scheduleType != "upcoming"
     }
 
-    var hasAnyCertificateTreshold: Bool {
+    var hasAnyCertificateThreshold: Bool {
         (self.certificateRegularThreshold != nil) || (self.certificateDistinctionThreshold != nil)
     }
 
     var hasCertificate: Bool {
         let hasText = !self.certificate.isEmpty
         let isIssued = self.isCertificatesAutoIssued && self.isCertificateIssued
-        return self.hasAnyCertificateTreshold && (hasText || isIssued)
+        return self.hasAnyCertificateThreshold && (hasText || isIssued)
     }
 
     required convenience init(json: JSON) {

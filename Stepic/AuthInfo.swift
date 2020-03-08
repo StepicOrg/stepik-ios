@@ -69,6 +69,7 @@ final class AuthInfo: NSObject {
                         DeviceDefaults.sharedDefaults.deviceId = nil
 
                         NotificationsService().removeAllLocalNotifications()
+                        SpotlightIndexingService.shared.deleteAllSearchableItems()
 
                         strongSelf.setTokenValue(nil)
                         NotificationCenter.default.post(name: .didLogout, object: nil)
@@ -93,8 +94,8 @@ final class AuthInfo: NSObject {
 
         get {
             if let accessToken = defaults.value(forKey: "access_token") as? String,
-            let refreshToken = defaults.value(forKey: "refresh_token") as? String,
-            let tokenType = defaults.value(forKey: "token_type") as? String {
+               let refreshToken = defaults.value(forKey: "refresh_token") as? String,
+               let tokenType = defaults.value(forKey: "token_type") as? String {
 //                print("got accessToken \(accessToken)")
                 let expireDate = Date(timeIntervalSince1970: defaults.value(forKey: "expire_date") as? TimeInterval ?? 0.0)
                 return StepikToken(accessToken: accessToken, refreshToken: refreshToken, tokenType: tokenType, expireDate: expireDate)
