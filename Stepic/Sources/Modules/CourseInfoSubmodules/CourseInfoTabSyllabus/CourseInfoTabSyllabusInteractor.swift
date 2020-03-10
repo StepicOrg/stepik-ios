@@ -19,6 +19,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     private let nextLessonService: NextLessonServiceProtocol
     private let networkReachabilityService: NetworkReachabilityServiceProtocol
     private let tooltipStorageManager: TooltipStorageManagerProtocol
+    private let useMobileDataForDownloadingStorageManager: UseMobileDataForDownloadingStorageManagerProtocol
     private let syllabusDownloadsService: SyllabusDownloadsServiceProtocol
 
     private var currentCourse: Course?
@@ -75,6 +76,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         nextLessonService: NextLessonServiceProtocol,
         networkReachabilityService: NetworkReachabilityServiceProtocol,
         tooltipStorageManager: TooltipStorageManagerProtocol,
+        useMobileDataForDownloadingStorageManager: UseMobileDataForDownloadingStorageManagerProtocol,
         syllabusDownloadsService: SyllabusDownloadsServiceProtocol
     ) {
         self.presenter = presenter
@@ -83,6 +85,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         self.nextLessonService = nextLessonService
         self.networkReachabilityService = networkReachabilityService
         self.tooltipStorageManager = tooltipStorageManager
+        self.useMobileDataForDownloadingStorageManager = useMobileDataForDownloadingStorageManager
 
         self.syllabusDownloadsService = syllabusDownloadsService
         self.syllabusDownloadsService.delegate = self
@@ -162,6 +165,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request) {
+        let shouldConfirmUseOfMobileDataForDownloading = self.connectionType == .wwan
+            && !self.useMobileDataForDownloadingStorageManager.shouldUseMobileDataForDownloading
+
         func handleUnit(id: UniqueIdentifierType) {
             guard let unit = self.currentUnits[id] as? Unit else {
                 return print("course info tab syllabus interactor: unit doesn't exists in current units, id = \(id)")
@@ -187,11 +193,17 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     )
                 )
             case .notCached:
-                if self.connectionType == .wwan {
+                if shouldConfirmUseOfMobileDataForDownloading {
                     self.presenter.presentDownloadingOnMobileDataConfirmationAlert(
                         response: .init(
                             useAlwaysActionHandler: { [weak self] in
-                                self?.startDownloading(unit: unit)
+                                guard let strongSelf = self else {
+                                    return
+                                }
+
+                                strongSelf.useMobileDataForDownloadingStorageManager
+                                    .shouldUseMobileDataForDownloading = true
+                                strongSelf.startDownloading(unit: unit)
                             },
                             justOnceActionHandler: { [weak self] in
                                 self?.startDownloading(unit: unit)
@@ -233,10 +245,16 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     )
                 )
             case .notCached:
-                if self.connectionType == .wwan {
+                if shouldConfirmUseOfMobileDataForDownloading {
                     self.presenter.presentDownloadingOnMobileDataConfirmationAlert(
                         response: .init(
                             useAlwaysActionHandler: { [weak self] in
+                                guard let strongSelf = self else {
+                                    return
+                                }
+
+                                strongSelf.useMobileDataForDownloadingStorageManager
+                                    .shouldUseMobileDataForDownloading = true
                                 self?.startDownloading(section: section)
                             },
                             justOnceActionHandler: { [weak self] in
@@ -275,10 +293,16 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     )
                 )
             case .notCached:
-                if self.connectionType == .wwan {
+                if shouldConfirmUseOfMobileDataForDownloading {
                     self.presenter.presentDownloadingOnMobileDataConfirmationAlert(
                         response: .init(
                             useAlwaysActionHandler: { [weak self] in
+                                guard let strongSelf = self else {
+                                    return
+                                }
+
+                                strongSelf.useMobileDataForDownloadingStorageManager
+                                    .shouldUseMobileDataForDownloading = true
                                 self?.startDownloadingCourse()
                             },
                             justOnceActionHandler: { [weak self] in

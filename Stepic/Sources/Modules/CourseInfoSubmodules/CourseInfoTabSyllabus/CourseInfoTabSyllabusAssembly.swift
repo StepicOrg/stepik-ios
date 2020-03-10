@@ -31,6 +31,7 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             nextLessonService: NextLessonService(),
             networkReachabilityService: NetworkReachabilityService(),
             tooltipStorageManager: TooltipStorageManager(),
+            useMobileDataForDownloadingStorageManager: UseMobileDataForDownloadingStorageManager(),
             syllabusDownloadsService: SyllabusDownloadsService(
                 videoDownloadingService: VideoDownloadingService.shared,
                 videoFileManager: VideoStoredFileManager(fileManager: .default),
