@@ -98,6 +98,13 @@ enum Settings {
         }
     }
 
+    /// Updates global use mobile data for downloading setting.
+    enum UseMobileDataForDownloadingSettingUpdate {
+        struct Request {
+            let isOn: Bool
+        }
+    }
+
     /// Updates global autoplay next video setting.
     enum AutoplayNextVideoSettingUpdate {
         struct Request {
@@ -148,6 +155,7 @@ enum Settings {
         let streamVideoQuality: StreamVideoQuality
         let contentLanguage: ContentLanguage
         let stepFontSize: StepFontSize
+        let shouldUseMobileDataForDownloading: Bool
         let isAutoplayEnabled: Bool
         let isAdaptiveModeEnabled: Bool
     }

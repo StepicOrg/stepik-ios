@@ -436,6 +436,7 @@
 		2C4436B321356D960084489C /* CourseSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD8161FB242B3008A2953 /* CourseSubscriber.swift */; };
 		2C453398204D46E90061342A /* PinsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453397204D46E90061342A /* PinsMap.swift */; };
 		2C45339A204D5DEE0061342A /* PinsMapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C453399204D5DEE0061342A /* PinsMapSpec.swift */; };
+		2C4694CD2417AB83002B5546 /* UseMobileDataForDownloadingStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4694CC2417AB83002B5546 /* UseMobileDataForDownloadingStorageManager.swift */; };
 		2C47A164206284B1003E87EC /* NotificationRequestAlertContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */; };
 		2C48D5FA228D7D2C00739477 /* ProcessedContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */; };
 		2C48D5FC228D865E00739477 /* Guarantee+ThenableWithFallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48D5FB228D865E00739477 /* Guarantee+ThenableWithFallback.swift */; };
@@ -1648,6 +1649,7 @@
 		2C3DAB90233D735D00453B1C /* StepFontSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepFontSize.swift; sourceTree = "<group>"; };
 		2C453397204D46E90061342A /* PinsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMap.swift; sourceTree = "<group>"; };
 		2C453399204D5DEE0061342A /* PinsMapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinsMapSpec.swift; sourceTree = "<group>"; };
+		2C4694CC2417AB83002B5546 /* UseMobileDataForDownloadingStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseMobileDataForDownloadingStorageManager.swift; sourceTree = "<group>"; };
 		2C47A163206284B1003E87EC /* NotificationRequestAlertContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertContext.swift; sourceTree = "<group>"; };
 		2C48D5F9228D7D2C00739477 /* ProcessedContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedContentTextView.swift; sourceTree = "<group>"; };
 		2C48D5FB228D865E00739477 /* Guarantee+ThenableWithFallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Guarantee+ThenableWithFallback.swift"; sourceTree = "<group>"; };
@@ -5309,6 +5311,7 @@
 				62E981C57D5BCF81714F344C /* DiscussionsSortTypeStorageManager.swift */,
 				2C3DAB8C233D71B100453B1C /* StepFontSizeStorageManager.swift */,
 				62E9881CFD7892350EA31213 /* TooltipStorageManager.swift */,
+				2C4694CC2417AB83002B5546 /* UseMobileDataForDownloadingStorageManager.swift */,
 				2C8F3ADE23CCAB88004D113A /* Video */,
 			);
 			path = Managers;
@@ -7019,6 +7022,7 @@
 				2CE8BA9B23D631E500C2EED9 /* ImageStoredFileManager.swift in Sources */,
 				084156941BCBFFBD006B8C73 /* Block.swift in Sources */,
 				084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */,
+				2C4694CD2417AB83002B5546 /* UseMobileDataForDownloadingStorageManager.swift in Sources */,
 				08484F0C211AF4320006266F /* StoryViewController.swift in Sources */,
 				084472061D05918E00197166 /* ChoiceQuizTableViewCell.swift in Sources */,
 				083B164D1C2AF27700250B37 /* JSQWebViewController.swift in Sources */,

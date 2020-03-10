@@ -98,6 +98,7 @@ final class SettingsViewController: UIViewController {
     private enum Setting: String {
         case downloadQuality
         case streamQuality
+        case useMobileDataForDownloading
         case contentLanguage
         case textSize
         case codeEditor
@@ -114,6 +115,8 @@ final class SettingsViewController: UIViewController {
                 return NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")
             case .streamQuality:
                 return NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")
+            case .useMobileDataForDownloading:
+                return NSLocalizedString("SettingsCellTitleUseMobileDataForDownloading", comment: "")
             case .contentLanguage:
                 return NSLocalizedString("SettingsCellTitleContentLanguage", comment: "")
             case .textSize:
@@ -278,6 +281,16 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 )
             )
         )
+        let useMobileDataForDownloadingCellViewModel = SettingsTableSectionViewModel.Cell(
+            uniqueIdentifier: Setting.useMobileDataForDownloading.rawValue,
+            type: .rightDetail(
+                options: .init(
+                    title: .init(text: Setting.useMobileDataForDownloading.cellTitle),
+                    detailType: .switch(isOn: settingsViewModel.shouldUseMobileDataForDownloading),
+                    accessoryType: .none
+                )
+            )
+        )
 
         // Language
         let contentLanguageCellViewModel = SettingsTableSectionViewModel.Cell(
@@ -383,7 +396,11 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         let sectionsViewModels: [SettingsTableSectionViewModel] = [
             .init(
                 header: .init(title: NSLocalizedString("SettingsHeaderTitleVideo", comment: "")),
-                cells: [videoDownloadQualityCellViewModel, videoStreamQualityCellViewModel],
+                cells: [
+                    videoDownloadQualityCellViewModel,
+                    videoStreamQualityCellViewModel,
+                    useMobileDataForDownloadingCellViewModel
+                ],
                 footer: nil
             ),
             .init(
@@ -450,7 +467,7 @@ extension SettingsViewController: SettingsViewDelegate {
             self.push(module: AboutAppViewController())
         case .logOut:
             self.handleLogOutAction()
-        case .autoplayNextVideo, .adaptiveMode:
+        case .useMobileDataForDownloading, .autoplayNextVideo, .adaptiveMode:
             break
         }
     }
@@ -462,6 +479,8 @@ extension SettingsViewController: SettingsViewDelegate {
         }
 
         switch setting {
+        case .useMobileDataForDownloading:
+            self.interactor.doUseMobileDataForDownloadingSettingUpdate(request: .init(isOn: isOn))
         case .autoplayNextVideo:
             self.interactor.doAutoplayNextVideoSettingUpdate(request: .init(isOn: isOn))
         case .adaptiveMode:

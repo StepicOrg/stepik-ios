@@ -554,6 +554,7 @@ SettingsHeaderTitleOther = "Другое";
 
 SettingsCellTitleDownloadQuality = "Качество загрузки";
 SettingsCellTitleStreamQuality = "Качество воспроизведения";
+SettingsCellTitleUseMobileDataForDownloading = "Использовать сотовые данные для загрузки";
 SettingsCellTitleContentLanguage = "Язык контента";
 SettingsCellTitleTextSizeInSteps = "Размер текста в шагах";
 SettingsCellTitleCodeEditor = "Настройки редактора кода";
