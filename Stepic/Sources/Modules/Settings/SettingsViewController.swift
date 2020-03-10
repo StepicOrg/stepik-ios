@@ -281,12 +281,12 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 )
             )
         )
-        let useMobileDataForDownloadingCellViewModel = SettingsTableSectionViewModel.Cell(
+        let useCellularDataForDownloadsCellViewModel = SettingsTableSectionViewModel.Cell(
             uniqueIdentifier: Setting.useCellularDataForDownloads.rawValue,
             type: .rightDetail(
                 options: .init(
                     title: .init(text: Setting.useCellularDataForDownloads.cellTitle),
-                    detailType: .switch(isOn: settingsViewModel.shouldUseMobileDataForDownloading),
+                    detailType: .switch(isOn: settingsViewModel.shouldUseCellularDataForDownloads),
                     accessoryType: .none
                 )
             )
@@ -399,7 +399,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 cells: [
                     videoDownloadQualityCellViewModel,
                     videoStreamQualityCellViewModel,
-                    useMobileDataForDownloadingCellViewModel
+                    useCellularDataForDownloadsCellViewModel
                 ],
                 footer: nil
             ),

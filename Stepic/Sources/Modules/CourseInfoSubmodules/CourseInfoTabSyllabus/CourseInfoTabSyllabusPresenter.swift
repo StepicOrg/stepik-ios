@@ -180,8 +180,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
     func presentDownloadOnCellularDataAlert(response: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.Response) {
         self.viewController?.displayDownloadOnCellularDataAlert(
             viewModel: .init(
-                title: NSLocalizedString("CourseInfoTabSyllabusDownloadOnMobileAlertTitle", comment: ""),
-                message: NSLocalizedString("CourseInfoTabSyllabusDownloadOnMobileAlertMessage", comment: ""),
+                title: NSLocalizedString("CourseInfoTabSyllabusDownloadOnCellularDataAlertTitle", comment: ""),
+                message: NSLocalizedString("CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage", comment: ""),
                 actions: [
                     .init(
                         title: NSLocalizedString("Cancel", comment: ""),
@@ -189,12 +189,16 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                         handler: {}
                     ),
                     .init(
-                        title: NSLocalizedString("CourseInfoTabSyllabusDownloadOnMobileUseAlwaysAction", comment: ""),
+                        title: NSLocalizedString(
+                            "CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction", comment: ""
+                        ),
                         style: .default,
                         handler: response.useAlwaysActionHandler
                     ),
                     .init(
-                        title: NSLocalizedString("CourseInfoTabSyllabusDownloadOnMobileJustOnceAction", comment: ""),
+                        title: NSLocalizedString(
+                            "CourseInfoTabSyllabusDownloadOnCellularDataJustOnceAction", comment: ""
+                        ),
                         style: .default,
                         handler: response.justOnceActionHandler
                     )
