@@ -52,6 +52,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         }
     }
     private var connectionType: NetworkReachabilityConnectionType { self.networkReachabilityService.connectionType }
+    private var shouldCheckUseOfCellularDataForDownloads = true
 
     private var shouldOpenedAnalyticsEventSend = false
 
@@ -165,7 +166,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request) {
-        let shouldConfirmUseOfCellularDataForDownloading = self.connectionType == .wwan
+        let shouldConfirmUseOfCellularDataForDownloading = self.shouldCheckUseOfCellularDataForDownloads
+            && self.connectionType == .wwan
             && !self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads
 
         func handleUnit(id: UniqueIdentifierType) {
@@ -795,6 +797,8 @@ extension CourseInfoTabSyllabusInteractor {
         AmplitudeAnalyticsEvents.Downloads.started(content: .course).send()
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
+        self.shouldCheckUseOfCellularDataForDownloads = false
+
         self.forceLoadAllSectionsIfNeeded().done {
             for (uid, section) in self.currentSections {
                 let sectionState = self.getDownloadingStateForSection(section)
@@ -804,6 +808,7 @@ extension CourseInfoTabSyllabusInteractor {
             }
             self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
         }.ensure {
+            self.shouldCheckUseOfCellularDataForDownloads = true
             self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
         }.catch { error in
             self.presenter.presentFailedDownloadAlert(response: .init(error: error))
