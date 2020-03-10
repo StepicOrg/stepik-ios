@@ -26,7 +26,7 @@ protocol SettingsProviderProtocol: AnyObject {
 final class SettingsProvider: SettingsProviderProtocol {
     private let downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol
     private let streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol
-    private let useMobileDataForDownloadingStorageManager: UseMobileDataForDownloadingStorageManagerProtocol
+    private let useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol
     private let contentLanguageService: ContentLanguageServiceProtocol
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
     private let autoplayStorageManager: AutoplayStorageManagerProtocol
@@ -80,10 +80,10 @@ final class SettingsProvider: SettingsProviderProtocol {
 
     var shouldUseMobileDataForDownloading: Bool {
         get {
-            self.useMobileDataForDownloadingStorageManager.shouldUseMobileDataForDownloading
+            self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads
         }
         set {
-            self.useMobileDataForDownloadingStorageManager.shouldUseMobileDataForDownloading = newValue
+            self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads = newValue
         }
     }
 
@@ -108,7 +108,7 @@ final class SettingsProvider: SettingsProviderProtocol {
     init(
         downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol,
         streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol,
-        useMobileDataForDownloadingStorageManager: UseMobileDataForDownloadingStorageManagerProtocol,
+        useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol,
         contentLanguageService: ContentLanguageServiceProtocol,
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         autoplayStorageManager: AutoplayStorageManagerProtocol,
@@ -117,7 +117,7 @@ final class SettingsProvider: SettingsProviderProtocol {
     ) {
         self.downloadVideoQualityStorageManager = downloadVideoQualityStorageManager
         self.streamVideoQualityStorageManager = streamVideoQualityStorageManager
-        self.useMobileDataForDownloadingStorageManager = useMobileDataForDownloadingStorageManager
+        self.useCellularDataForDownloadsStorageManager = useCellularDataForDownloadsStorageManager
         self.contentLanguageService = contentLanguageService
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.autoplayStorageManager = autoplayStorageManager
