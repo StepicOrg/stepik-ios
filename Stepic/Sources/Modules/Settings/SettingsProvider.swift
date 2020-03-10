@@ -15,7 +15,7 @@ protocol SettingsProviderProtocol: AnyObject {
     var globalStepFontSize: StepFontSize { get set }
     var availableStepFontSizes: [StepFontSize] { get }
 
-    var shouldUseMobileDataForDownloading: Bool { get set }
+    var shouldUseCellularDataForDownloads: Bool { get set }
 
     var isAutoplayEnabled: Bool { get set }
     var isAdaptiveModeEnabled: Bool { get set }
@@ -78,7 +78,7 @@ final class SettingsProvider: SettingsProviderProtocol {
 
     var availableStepFontSizes: [StepFontSize] { StepFontSize.allCases }
 
-    var shouldUseMobileDataForDownloading: Bool {
+    var shouldUseCellularDataForDownloads: Bool {
         get {
             self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads
         }

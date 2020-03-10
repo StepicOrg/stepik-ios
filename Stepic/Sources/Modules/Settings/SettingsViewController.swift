@@ -98,7 +98,7 @@ final class SettingsViewController: UIViewController {
     private enum Setting: String {
         case downloadQuality
         case streamQuality
-        case useMobileDataForDownloading
+        case useCellularDataForDownloads
         case contentLanguage
         case textSize
         case codeEditor
@@ -115,7 +115,7 @@ final class SettingsViewController: UIViewController {
                 return NSLocalizedString("SettingsCellTitleDownloadQuality", comment: "")
             case .streamQuality:
                 return NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")
-            case .useMobileDataForDownloading:
+            case .useCellularDataForDownloads:
                 return NSLocalizedString("SettingsCellTitleUseMobileDataForDownloading", comment: "")
             case .contentLanguage:
                 return NSLocalizedString("SettingsCellTitleContentLanguage", comment: "")
@@ -282,10 +282,10 @@ extension SettingsViewController: SettingsViewControllerProtocol {
             )
         )
         let useMobileDataForDownloadingCellViewModel = SettingsTableSectionViewModel.Cell(
-            uniqueIdentifier: Setting.useMobileDataForDownloading.rawValue,
+            uniqueIdentifier: Setting.useCellularDataForDownloads.rawValue,
             type: .rightDetail(
                 options: .init(
-                    title: .init(text: Setting.useMobileDataForDownloading.cellTitle),
+                    title: .init(text: Setting.useCellularDataForDownloads.cellTitle),
                     detailType: .switch(isOn: settingsViewModel.shouldUseMobileDataForDownloading),
                     accessoryType: .none
                 )
@@ -467,7 +467,7 @@ extension SettingsViewController: SettingsViewDelegate {
             self.push(module: AboutAppViewController())
         case .logOut:
             self.handleLogOutAction()
-        case .useMobileDataForDownloading, .autoplayNextVideo, .adaptiveMode:
+        case .useCellularDataForDownloads, .autoplayNextVideo, .adaptiveMode:
             break
         }
     }
@@ -479,8 +479,8 @@ extension SettingsViewController: SettingsViewDelegate {
         }
 
         switch setting {
-        case .useMobileDataForDownloading:
-            self.interactor.doUseMobileDataForDownloadingSettingUpdate(request: .init(isOn: isOn))
+        case .useCellularDataForDownloads:
+            self.interactor.doUseCellularDataForDownloadsSettingUpdate(request: .init(isOn: isOn))
         case .autoplayNextVideo:
             self.interactor.doAutoplayNextVideoSettingUpdate(request: .init(isOn: isOn))
         case .adaptiveMode:

@@ -99,7 +99,7 @@ enum Settings {
     }
 
     /// Updates global use mobile data for downloading setting.
-    enum UseMobileDataForDownloadingSettingUpdate {
+    enum UseCellularDataForDownloadsSettingUpdate {
         struct Request {
             let isOn: Bool
         }
@@ -155,7 +155,7 @@ enum Settings {
         let streamVideoQuality: StreamVideoQuality
         let contentLanguage: ContentLanguage
         let stepFontSize: StepFontSize
-        let shouldUseMobileDataForDownloading: Bool
+        let shouldUseCellularDataForDownloads: Bool
         let isAutoplayEnabled: Bool
         let isAdaptiveModeEnabled: Bool
     }

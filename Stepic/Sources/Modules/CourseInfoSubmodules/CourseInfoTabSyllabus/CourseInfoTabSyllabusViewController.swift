@@ -7,9 +7,7 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: AnyObject {
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayFailedDownloadAlert(viewModel: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.ViewModel)
-    func displayDownloadingOnMobileDataConfirmationAlert(
-        viewModel: CourseInfoTabSyllabus.StartOnMobileConnectionDownloadConfirmation.ViewModel
-    )
+    func displayDownloadOnCellularDataAlert(viewModel: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.ViewModel)
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: AnyObject {
@@ -123,9 +121,7 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
         self.present(alert, animated: true)
     }
 
-    func displayDownloadingOnMobileDataConfirmationAlert(
-        viewModel: CourseInfoTabSyllabus.StartOnMobileConnectionDownloadConfirmation.ViewModel
-    ) {
+    func displayDownloadOnCellularDataAlert(viewModel: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.ViewModel) {
         let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
 
         viewModel.actions.forEach { action in

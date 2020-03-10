@@ -91,8 +91,8 @@ enum CourseInfoTabSyllabus {
         }
     }
 
-    /// Request mobile data usage for downloading
-    enum StartOnMobileConnectionDownloadConfirmation {
+    /// Request cellular data usage for course/section/unit downloading
+    enum DownloadOnCellularDataAlert {
         struct Response {
             let useAlwaysActionHandler: (() -> Void)
             let justOnceActionHandler: (() -> Void)

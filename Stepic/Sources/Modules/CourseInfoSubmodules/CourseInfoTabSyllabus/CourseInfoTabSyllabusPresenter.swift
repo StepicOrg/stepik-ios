@@ -7,9 +7,7 @@ protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
     func presentFailedDownloadAlert(response: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.Response)
-    func presentDownloadingOnMobileDataConfirmationAlert(
-        response: CourseInfoTabSyllabus.StartOnMobileConnectionDownloadConfirmation.Response
-    )
+    func presentDownloadOnCellularDataAlert(response: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -179,10 +177,8 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
         }
     }
 
-    func presentDownloadingOnMobileDataConfirmationAlert(
-        response: CourseInfoTabSyllabus.StartOnMobileConnectionDownloadConfirmation.Response
-    ) {
-        self.viewController?.displayDownloadingOnMobileDataConfirmationAlert(
+    func presentDownloadOnCellularDataAlert(response: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.Response) {
+        self.viewController?.displayDownloadOnCellularDataAlert(
             viewModel: .init(
                 title: NSLocalizedString("CourseInfoTabSyllabusDownloadOnMobileAlertTitle", comment: ""),
                 message: NSLocalizedString("CourseInfoTabSyllabusDownloadOnMobileAlertMessage", comment: ""),

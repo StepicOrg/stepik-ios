@@ -196,7 +196,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 )
             case .notCached:
                 if shouldConfirmUseOfCellularDataForDownloading {
-                    self.presenter.presentDownloadingOnMobileDataConfirmationAlert(
+                    self.presenter.presentDownloadOnCellularDataAlert(
                         response: .init(
                             useAlwaysActionHandler: { [weak self] in
                                 guard let strongSelf = self else {
@@ -248,7 +248,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 )
             case .notCached:
                 if shouldConfirmUseOfCellularDataForDownloading {
-                    self.presenter.presentDownloadingOnMobileDataConfirmationAlert(
+                    self.presenter.presentDownloadOnCellularDataAlert(
                         response: .init(
                             useAlwaysActionHandler: { [weak self] in
                                 guard let strongSelf = self else {
@@ -296,7 +296,7 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                 )
             case .notCached:
                 if shouldConfirmUseOfCellularDataForDownloading {
-                    self.presenter.presentDownloadingOnMobileDataConfirmationAlert(
+                    self.presenter.presentDownloadOnCellularDataAlert(
                         response: .init(
                             useAlwaysActionHandler: { [weak self] in
                                 guard let strongSelf = self else {
