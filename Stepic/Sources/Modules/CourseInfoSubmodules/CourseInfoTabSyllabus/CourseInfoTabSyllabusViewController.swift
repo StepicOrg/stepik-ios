@@ -7,6 +7,7 @@ protocol CourseInfoTabSyllabusViewControllerProtocol: AnyObject {
     func displaySyllabusHeader(viewModel: CourseInfoTabSyllabus.SyllabusHeaderUpdate.ViewModel)
     func displayBlockingLoadingIndicator(viewModel: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.ViewModel)
     func displayFailedDownloadAlert(viewModel: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.ViewModel)
+    func displayDownloadOnCellularDataAlert(viewModel: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.ViewModel)
 }
 
 protocol CourseInfoTabSyllabusViewControllerDelegate: AnyObject {
@@ -111,6 +112,25 @@ extension CourseInfoTabSyllabusViewController: CourseInfoTabSyllabusViewControll
                     return .cancel
                 case .destructive:
                     return .destructive
+                }
+            }()
+
+            alert.addAction(UIAlertAction(title: action.title, style: style, handler: { _ in action.handler() }))
+        }
+
+        self.present(alert, animated: true)
+    }
+
+    func displayDownloadOnCellularDataAlert(viewModel: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.ViewModel) {
+        let alert = UIAlertController(title: viewModel.title, message: viewModel.message, preferredStyle: .alert)
+
+        viewModel.actions.forEach { action in
+            let style: UIAlertAction.Style = {
+                switch action.style {
+                case .cancel:
+                    return .cancel
+                case .default:
+                    return .default
                 }
             }()
 

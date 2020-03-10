@@ -17,7 +17,9 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     private let provider: CourseInfoTabSyllabusProviderProtocol
     private let personalDeadlinesService: PersonalDeadlinesServiceProtocol
     private let nextLessonService: NextLessonServiceProtocol
+    private let networkReachabilityService: NetworkReachabilityServiceProtocol
     private let tooltipStorageManager: TooltipStorageManagerProtocol
+    private let useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol
     private let syllabusDownloadsService: SyllabusDownloadsServiceProtocol
 
     private var currentCourse: Course?
@@ -49,6 +51,8 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
             }
         }
     }
+    private var connectionType: NetworkReachabilityConnectionType { self.networkReachabilityService.connectionType }
+    private var shouldCheckUseOfCellularDataForDownloads = true
 
     private var shouldOpenedAnalyticsEventSend = false
 
@@ -71,14 +75,18 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
         provider: CourseInfoTabSyllabusProviderProtocol,
         personalDeadlinesService: PersonalDeadlinesServiceProtocol,
         nextLessonService: NextLessonServiceProtocol,
+        networkReachabilityService: NetworkReachabilityServiceProtocol,
         tooltipStorageManager: TooltipStorageManagerProtocol,
+        useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol,
         syllabusDownloadsService: SyllabusDownloadsServiceProtocol
     ) {
         self.presenter = presenter
         self.provider = provider
         self.personalDeadlinesService = personalDeadlinesService
         self.nextLessonService = nextLessonService
+        self.networkReachabilityService = networkReachabilityService
         self.tooltipStorageManager = tooltipStorageManager
+        self.useCellularDataForDownloadsStorageManager = useCellularDataForDownloadsStorageManager
 
         self.syllabusDownloadsService = syllabusDownloadsService
         self.syllabusDownloadsService.delegate = self
@@ -158,6 +166,10 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
     }
 
     func doDownloadButtonAction(request: CourseInfoTabSyllabus.DownloadButtonAction.Request) {
+        let shouldConfirmUseOfCellularDataForDownloading = self.shouldCheckUseOfCellularDataForDownloads
+            && self.connectionType == .wwan
+            && !self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads
+
         func handleUnit(id: UniqueIdentifierType) {
             guard let unit = self.currentUnits[id] as? Unit else {
                 return print("course info tab syllabus interactor: unit doesn't exists in current units, id = \(id)")
@@ -183,7 +195,26 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     )
                 )
             case .notCached:
-                self.startDownloading(unit: unit)
+                if shouldConfirmUseOfCellularDataForDownloading {
+                    self.presenter.presentDownloadOnCellularDataAlert(
+                        response: .init(
+                            useAlwaysActionHandler: { [weak self] in
+                                guard let strongSelf = self else {
+                                    return
+                                }
+
+                                strongSelf.useCellularDataForDownloadsStorageManager
+                                    .shouldUseCellularDataForDownloads = true
+                                strongSelf.startDownloading(unit: unit)
+                            },
+                            justOnceActionHandler: { [weak self] in
+                                self?.startDownloading(unit: unit)
+                            }
+                        )
+                    )
+                } else {
+                    self.startDownloading(unit: unit)
+                }
             case .downloading:
                 self.cancelDownloading(unit: unit)
             default:
@@ -216,7 +247,26 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     )
                 )
             case .notCached:
-                self.startDownloading(section: section)
+                if shouldConfirmUseOfCellularDataForDownloading {
+                    self.presenter.presentDownloadOnCellularDataAlert(
+                        response: .init(
+                            useAlwaysActionHandler: { [weak self] in
+                                guard let strongSelf = self else {
+                                    return
+                                }
+
+                                strongSelf.useCellularDataForDownloadsStorageManager
+                                    .shouldUseCellularDataForDownloads = true
+                                self?.startDownloading(section: section)
+                            },
+                            justOnceActionHandler: { [weak self] in
+                                self?.startDownloading(section: section)
+                            }
+                        )
+                    )
+                } else {
+                    self.startDownloading(section: section)
+                }
             case .downloading:
                 self.cancelDownloading(section: section)
             default:
@@ -245,21 +295,25 @@ final class CourseInfoTabSyllabusInteractor: CourseInfoTabSyllabusInteractorProt
                     )
                 )
             case .notCached:
-                AmplitudeAnalyticsEvents.Downloads.started(content: .course).send()
-                self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+                if shouldConfirmUseOfCellularDataForDownloading {
+                    self.presenter.presentDownloadOnCellularDataAlert(
+                        response: .init(
+                            useAlwaysActionHandler: { [weak self] in
+                                guard let strongSelf = self else {
+                                    return
+                                }
 
-                self.forceLoadAllSectionsIfNeeded().done {
-                    for (uid, section) in self.currentSections {
-                        let sectionState = self.getDownloadingStateForSection(section)
-                        if case .notCached = sectionState {
-                            handleSection(id: uid)
-                        }
-                    }
-                    self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
-                }.ensure {
-                    self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
-                }.catch { error in
-                    self.presenter.presentFailedDownloadAlert(response: .init(error: error))
+                                strongSelf.useCellularDataForDownloadsStorageManager
+                                    .shouldUseCellularDataForDownloads = true
+                                self?.startDownloadingCourse()
+                            },
+                            justOnceActionHandler: { [weak self] in
+                                self?.startDownloadingCourse()
+                            }
+                        )
+                    )
+                } else {
+                    self.startDownloadingCourse()
                 }
             default:
                 return print("course info tab syllabus interactor: did receive invalid state when handle download all")
@@ -735,6 +789,28 @@ extension CourseInfoTabSyllabusInteractor {
             self.updateSectionDownloadState(section)
             self.updateSyllabusHeader()
 
+            self.presenter.presentFailedDownloadAlert(response: .init(error: error))
+        }
+    }
+
+    private func startDownloadingCourse() {
+        AmplitudeAnalyticsEvents.Downloads.started(content: .course).send()
+        self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
+
+        self.shouldCheckUseOfCellularDataForDownloads = false
+
+        self.forceLoadAllSectionsIfNeeded().done {
+            for (uid, section) in self.currentSections {
+                let sectionState = self.getDownloadingStateForSection(section)
+                if case .notCached = sectionState {
+                    self.doDownloadButtonAction(request: .init(type: .section(uniqueIdentifier: uid)))
+                }
+            }
+            self.updateSyllabusHeader(shouldForceDisableDownloadAll: true)
+        }.ensure {
+            self.shouldCheckUseOfCellularDataForDownloads = true
+            self.presenter.presentWaitingState(response: .init(shouldDismiss: true))
+        }.catch { error in
             self.presenter.presentFailedDownloadAlert(response: .init(error: error))
         }
     }

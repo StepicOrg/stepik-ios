@@ -7,6 +7,7 @@ protocol CourseInfoTabSyllabusPresenterProtocol {
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response)
     func presentWaitingState(response: CourseInfoTabSyllabus.BlockingWaitingIndicatorUpdate.Response)
     func presentFailedDownloadAlert(response: CourseInfoTabSyllabus.FailedDownloadAlertPresentation.Response)
+    func presentDownloadOnCellularDataAlert(response: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.Response)
 }
 
 final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtocol {
@@ -174,6 +175,36 @@ final class CourseInfoTabSyllabusPresenter: CourseInfoTabSyllabusPresenterProtoc
                 )
             )
         }
+    }
+
+    func presentDownloadOnCellularDataAlert(response: CourseInfoTabSyllabus.DownloadOnCellularDataAlert.Response) {
+        self.viewController?.displayDownloadOnCellularDataAlert(
+            viewModel: .init(
+                title: NSLocalizedString("CourseInfoTabSyllabusDownloadOnCellularDataAlertTitle", comment: ""),
+                message: NSLocalizedString("CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage", comment: ""),
+                actions: [
+                    .init(
+                        title: NSLocalizedString("Cancel", comment: ""),
+                        style: .cancel,
+                        handler: {}
+                    ),
+                    .init(
+                        title: NSLocalizedString(
+                            "CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction", comment: ""
+                        ),
+                        style: .default,
+                        handler: response.useAlwaysActionHandler
+                    ),
+                    .init(
+                        title: NSLocalizedString(
+                            "CourseInfoTabSyllabusDownloadOnCellularDataJustOnceAction", comment: ""
+                        ),
+                        style: .default,
+                        handler: response.justOnceActionHandler
+                    )
+                ]
+            )
+        )
     }
 
     func presentCourseSyllabusHeader(response: CourseInfoTabSyllabus.SyllabusHeaderUpdate.Response) {

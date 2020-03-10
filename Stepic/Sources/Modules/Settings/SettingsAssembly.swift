@@ -17,6 +17,7 @@ final class SettingsAssembly: Assembly {
         let provider = SettingsProvider(
             downloadVideoQualityStorageManager: DownloadVideoQualityStorageManager(),
             streamVideoQualityStorageManager: StreamVideoQualityStorageManager(),
+            useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManager(),
             contentLanguageService: ContentLanguageService(),
             stepFontSizeStorageManager: StepFontSizeStorageManager(),
             autoplayStorageManager: AutoplayStorageManager(),
