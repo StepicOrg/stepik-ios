@@ -553,7 +553,7 @@ SettingsHeaderTitleOther = "Other";
 
 SettingsCellTitleDownloadQuality = "Download quality";
 SettingsCellTitleStreamQuality = "Stream quality";
-SettingsCellTitleUseMobileDataForDownloading = "Use cellular data for downloads";
+SettingsCellTitleUseCellularDataForDownloads = "Use cellular data for downloads";
 SettingsCellTitleContentLanguage = "Content language";
 SettingsCellTitleTextSizeInSteps = "Text size in steps";
 SettingsCellTitleCodeEditor = "Code editor settings";

@@ -116,7 +116,7 @@ final class SettingsViewController: UIViewController {
             case .streamQuality:
                 return NSLocalizedString("SettingsCellTitleStreamQuality", comment: "")
             case .useCellularDataForDownloads:
-                return NSLocalizedString("SettingsCellTitleUseMobileDataForDownloading", comment: "")
+                return NSLocalizedString("SettingsCellTitleUseCellularDataForDownloads", comment: "")
             case .contentLanguage:
                 return NSLocalizedString("SettingsCellTitleContentLanguage", comment: "")
             case .textSize:
