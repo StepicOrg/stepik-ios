@@ -91,6 +91,31 @@ enum CourseInfoTabSyllabus {
         }
     }
 
+    /// Request mobile data usage for downloading
+    enum StartOnMobileConnectionDownloadConfirmation {
+        struct Response {
+            let useAlwaysActionHandler: (() -> Void)
+            let justOnceActionHandler: (() -> Void)
+        }
+
+        struct Action {
+            let title: String
+            let style: Style
+            let handler: (() -> Void)
+
+            enum Style {
+                case cancel
+                case `default`
+            }
+        }
+
+        struct ViewModel {
+            let title: String
+            let message: String
+            let actions: [Action]
+        }
+    }
+
     /// Update download state
     enum DownloadButtonStateUpdate {
         enum Source {

@@ -29,6 +29,7 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             provider: provider,
             personalDeadlinesService: PersonalDeadlinesService(),
             nextLessonService: NextLessonService(),
+            networkReachabilityService: NetworkReachabilityService(),
             tooltipStorageManager: TooltipStorageManager(),
             syllabusDownloadsService: SyllabusDownloadsService(
                 videoDownloadingService: VideoDownloadingService.shared,
