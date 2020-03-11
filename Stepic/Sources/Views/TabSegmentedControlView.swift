@@ -15,12 +15,12 @@ extension TabSegmentedControlView {
         let buttonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         let buttonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
         let buttonTitleFontSelected = UIFont.systemFont(ofSize: 15)
-        let buttonTitleColor = UIColor.mainDark
+        let buttonTitleColor = UIColor.stepikAccent
 
         let bottomBorderColor = UIColor(hex6: 0x9b9b9b)
         let bottomBorderHeight: CGFloat = 0.5
 
-        let bottomSelectedMarkerColor = UIColor.mainDark
+        let bottomSelectedMarkerColor = UIColor.stepikAccent
         let bottomSelectedMarkerHeight: CGFloat = 2.7
     }
 }

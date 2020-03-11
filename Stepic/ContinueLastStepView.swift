@@ -19,7 +19,7 @@ extension ContinueLastStepView {
         let progressFillColor = UIColor(hex6: 0x66cc66)
         let progressBackgroundColor = UIColor.clear
 
-        let backgroundOverlayViewColor = UIColor.mainDark.withAlphaComponent(0.85)
+        let backgroundOverlayViewColor = UIColor.stepikAccentAlpha85
 
         let coverCornerRadius: CGFloat = 3.0
 

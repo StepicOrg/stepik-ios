@@ -7,7 +7,7 @@ extension DiscussionsLoadMoreTableViewCell {
         static let containerBackgroundColor = UIColor(hex6: 0xF6F6F6)
 
         static let titleLabelFont = UIFont.systemFont(ofSize: 14)
-        static let titleLabelTextColor = UIColor.mainDark
+        static let titleLabelTextColor = UIColor.stepikAccent
 
         static let separatorHeight: CGFloat = 0.5
         static let separatorColor = UIColor(hex6: 0xe7e7e7)

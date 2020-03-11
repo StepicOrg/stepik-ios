@@ -9,7 +9,7 @@ extension StepStatisticsView {
         let separatorColor = UIColor(hex6: 0xEAECF0)
         let separatorHeight: CGFloat = 1
 
-        let textColor = UIColor.mainDark
+        let textColor = UIColor.stepikAccent
         let textFont = UIFont.systemFont(ofSize: 14)
         let textFontDetail = UIFont.systemFont(ofSize: 14, weight: .bold)
     }

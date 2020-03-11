@@ -24,12 +24,12 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     private static let animationDuration: TimeInterval = 0.25
 
     enum Appearance {
-        static let barTintColor = UIColor.mainDark
+        static let barTintColor = UIColor.stepikAccent
         static let backgroundColor = UIColor.mainLight
         static let indicatorHeight: CGFloat = 2
         static let separatorColor = UIColor.gray
-        static let loadingIndicatorColor = UIColor.mainDark
-        static let tooltipBackgroundColor = UIColor.mainDark
+        static let loadingIndicatorColor = UIColor.stepikAccent
+        static let tooltipBackgroundColor = UIColor.stepikAccent
         static let tooltipHorizontalSpacing: CGFloat = 16
     }
 

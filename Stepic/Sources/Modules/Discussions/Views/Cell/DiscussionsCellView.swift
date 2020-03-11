@@ -29,14 +29,14 @@ extension DiscussionsCellView {
 
         let nameLabelInsets = LayoutInsets(top: 8, left: 16, right: 16)
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
-        let nameLabelTextColor = UIColor.mainDark
+        let nameLabelTextColor = UIColor.stepikAccent
         let nameLabelHeight: CGFloat = 18
 
         let textContentContainerViewInsets = LayoutInsets(top: 8, bottom: 8, right: 16)
         let textContentWebBasedTextViewDefaultHeight: CGFloat = 5
         let textContentTextLabelFontSize: CGFloat = 14
         let textContentTextLabelFont = UIFont.systemFont(ofSize: 14)
-        let textContentTextLabelTextColor = UIColor.mainDark
+        let textContentTextLabelTextColor = UIColor.stepikAccent
 
         let solutionControlHeight = DiscussionsSolutionControl.Appearance.height
         let solutionControlInsets = LayoutInsets(top: 8)
@@ -47,16 +47,16 @@ extension DiscussionsCellView {
         let bottomControlsHeight: CGFloat = 20
 
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.mainDark
+        let dateLabelTextColor = UIColor.stepikAccent
 
         let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let replyButtonTextColor = UIColor(hex6: 0x3E50CB)
 
         // Like & dislike
         let voteImageSize = CGSize(width: 20, height: 20)
-        let voteImageFilledTintColor = UIColor.mainDark
-        let voteImageNormalTintColor = UIColor.mainDark.withAlphaComponent(0.5)
-        let voteImageDisabledTintColor = UIColor.mainDark.withAlphaComponent(0.25)
+        let voteImageFilledTintColor = UIColor.stepikAccent
+        let voteImageNormalTintColor = UIColor.stepikAccentAlpha50
+        let voteImageDisabledTintColor = UIColor.stepikAccentAlpha25
         let voteButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
         let voteLikeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)
         let voteDislikeButtonTitleInsets = UIEdgeInsets(top: 4, left: 4, bottom: 0, right: 0)

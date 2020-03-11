@@ -11,20 +11,20 @@ extension WriteCourseReviewView {
         let backgroundColor = UIColor.white
 
         let starsViewInsets = LayoutInsets(top: 16, left: 16, right: 16)
-        let starsClearColor = UIColor.mainDark
+        let starsClearColor = UIColor.stepikAccent
         let starsSpacing: CGFloat = 10
         let starsSize = CGSize(width: 31.5, height: 31.5)
 
         let starsHintLabelInsets = LayoutInsets(top: 8)
         let starsHintLabelFont = UIFont.systemFont(ofSize: 12)
-        let starsHintLabelTextColor = UIColor.mainDark
+        let starsHintLabelTextColor = UIColor.stepikAccent
 
         let separatorViewInsets = LayoutInsets(top: 16, left: 16)
 
         let textViewInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
         let textViewFont = UIFont.systemFont(ofSize: 16)
-        let textViewTextColor = UIColor.mainDark
-        let textViewPlaceholderColor = UIColor.mainDark.withAlphaComponent(0.4)
+        let textViewTextColor = UIColor.stepikAccent
+        let textViewPlaceholderColor = UIColor.stepikPlaceholderText
     }
 }
 

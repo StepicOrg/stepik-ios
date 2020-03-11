@@ -2,7 +2,7 @@ import UIKit
 
 final class ContentLanguageSwitchButton: BounceButton {
     enum Appearance {
-        static let selectedBackgroundColor = UIColor.mainDark
+        static let selectedBackgroundColor = UIColor.stepikAccent
         static let unselectedBackgroundColor = UIColor(hex6: 0x535366, alpha: 0.06)
 
         static let selectedTextColor = UIColor.white

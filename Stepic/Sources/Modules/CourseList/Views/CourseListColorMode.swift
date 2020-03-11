@@ -31,7 +31,7 @@ extension CourseListColorMode {
             return appearance
         case .dark:
             var appearance = ExploreBlockContainerView.Appearance()
-            appearance.backgroundColor = .mainDark
+            appearance.backgroundColor = .stepikAccent
             return appearance
         }
     }
@@ -61,8 +61,8 @@ extension CourseListColorMode {
             return .init(
                 imagesRenderingBackgroundColor: UIColor(hex6: 0x535366),
                 imagesRenderingTintColor: UIColor(hex6: 0x89cc89),
-                itemTextColor: UIColor.mainDark,
-                itemImageTintColor: UIColor.mainDark
+                itemTextColor: UIColor.stepikAccent,
+                itemImageTintColor: UIColor.stepikAccent
             )
         case .dark:
             return .init(
@@ -78,7 +78,7 @@ extension CourseListColorMode {
         switch self {
         case .light:
             var appearance = CourseWidgetLabel.Appearance()
-            appearance.textColor = .mainDark
+            appearance.textColor = .stepikAccent
             return appearance
         case .dark:
             var appearance = CourseWidgetLabel.Appearance()

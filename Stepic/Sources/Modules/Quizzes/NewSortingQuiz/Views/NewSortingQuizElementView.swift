@@ -23,7 +23,7 @@ extension NewSortingQuizElementView {
 
         let navigationButtonSize = CGSize(width: 24, height: 24)
         let navigationButtonImageSize = CGSize(width: 20, height: 20)
-        let navigationButtonTintColorActive = UIColor.mainDark
+        let navigationButtonTintColorActive = UIColor.stepikAccent
         let navigationButtonTintColorInactive = UIColor(hex6: 0xCCCCCC)
         let navigationButtonVerticalSpacing: CGFloat = 16
         let navigationButtonHorizontalSpacing: CGFloat = 8

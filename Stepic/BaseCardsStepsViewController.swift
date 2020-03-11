@@ -174,7 +174,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
 
     override func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {
         let text = self.expLabel.text ?? ""
-        let color = self.expLabel.textColor ?? UIColor.mainDark
+        let color = self.expLabel.textColor ?? UIColor.stepikAccent
 
         func transitionToText(_ text: String, color: UIColor, duration: Double, completionBlock: (() -> Void)? = nil) {
             UIView.transition(with: self.expLabel, duration: duration, options: .transitionCrossDissolve, animations: {

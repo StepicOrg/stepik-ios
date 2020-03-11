@@ -78,8 +78,8 @@ final class AdaptiveRatingsViewController: UIViewController {
     }
 
     private func colorize() {
-        loadingIndicator.color = UIColor.mainDark
-        ratingSegmentedControl.tintColor = UIColor.mainDark
+        loadingIndicator.color = UIColor.stepikAccent
+        ratingSegmentedControl.tintColor = UIColor.stepikAccent
     }
 
     private func localize() {

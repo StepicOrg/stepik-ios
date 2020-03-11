@@ -10,7 +10,7 @@ protocol CodeQuizFullscreenRunCodeViewDelegate: AnyObject {
 extension CodeQuizFullscreenRunCodeView {
     struct Appearance {
         let samplesButtonFont = UIFont.preferredFont(forTextStyle: .subheadline)
-        let samplesButtonTintColor = UIColor.mainDark
+        let samplesButtonTintColor = UIColor.stepikAccent
         let samplesButtonImageSize = CGSize(width: 15, height: 15)
         let samplesButtonImageInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
         let samplesButtonInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 16)
@@ -24,8 +24,8 @@ extension CodeQuizFullscreenRunCodeView {
         let bottomControlsStackViewSpacing: CGFloat = 16
         let bottomControlsStackViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-        let testInputOutputPrimaryTextColor = UIColor.mainDark
-        let testInputPlaceholderTextColor = UIColor.mainDark.withAlphaComponent(0.4)
+        let testInputOutputPrimaryTextColor = UIColor.stepikAccent
+        let testInputPlaceholderTextColor = UIColor.stepikPlaceholderText
 
         let testInputOutputTitleFont = UIFont.preferredFont(forTextStyle: .headline)
         let testInputOutputTextViewFont = UIFont.preferredFont(forTextStyle: .body)
@@ -200,7 +200,7 @@ final class CodeQuizFullscreenRunCodeView: UIView {
     private func makeTitleImageView(image: UIImage?) -> UIImageView {
         let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .mainDark
+        imageView.tintColor = .stepikAccent
         return imageView
     }
 
@@ -233,7 +233,7 @@ final class CodeQuizFullscreenRunCodeView: UIView {
             } else {
                 return (
                     UIImage(named: "console"),
-                    UIColor.mainDark,
+                    UIColor.stepikAccent,
                     self.appearance.cardBackgroundColor
                 )
             }

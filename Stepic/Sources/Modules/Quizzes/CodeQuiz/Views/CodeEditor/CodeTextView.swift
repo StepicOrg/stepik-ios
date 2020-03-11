@@ -9,7 +9,7 @@ extension CodeTextView {
         let gutterBorderWidth: CGFloat = 0.5
 
         let lineNumberFont = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)
-        let lineNumberTextColor = UIColor.mainDark.withAlphaComponent(0.5)
+        let lineNumberTextColor = UIColor.stepikAccentAlpha50
         let lineSpacing: CGFloat = 1.2
     }
 }

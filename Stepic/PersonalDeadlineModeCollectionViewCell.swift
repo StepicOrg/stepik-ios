@@ -39,6 +39,6 @@ final class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        contentView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.mainDark)
+        contentView.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.stepikAccent)
     }
 }

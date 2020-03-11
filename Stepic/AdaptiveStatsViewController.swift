@@ -82,9 +82,9 @@ final class AdaptiveStatsViewController: UIViewController {
     }
 
     private func colorize() {
-        currentWeekXPLabel.textColor = UIColor.mainDark
-        bestStreakLabel.textColor = UIColor.mainDark
-        currentLevelLabel.textColor = UIColor.mainDark
+        currentWeekXPLabel.textColor = UIColor.stepikAccent
+        bestStreakLabel.textColor = UIColor.stepikAccent
+        currentLevelLabel.textColor = UIColor.stepikAccent
     }
 
     private func localize() {
@@ -158,18 +158,18 @@ final class AdaptiveStatsViewController: UIViewController {
     }
 
     private func updateDataSet(_ dataSet: LineChartDataSet) -> LineChartDataSet {
-        dataSet.setColor(UIColor.mainDark)
+        dataSet.setColor(UIColor.stepikAccent)
         dataSet.mode = .horizontalBezier
         dataSet.cubicIntensity = 0.2
         dataSet.circleRadius = 4
         dataSet.circleHoleRadius = 2
-        dataSet.fillColor = UIColor.mainDark
+        dataSet.fillColor = UIColor.stepikAccent
         dataSet.fillAlpha = 1.0
         dataSet.drawValuesEnabled = true
         dataSet.valueFont = UIFont.systemFont(ofSize: 10)
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.drawCirclesEnabled = true
-        dataSet.setCircleColor(UIColor.mainDark)
+        dataSet.setCircleColor(UIColor.stepikAccent)
         dataSet.valueFormatter = DefaultValueFormatter(decimals: 0)
 
         return dataSet

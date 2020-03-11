@@ -18,8 +18,8 @@ extension StreakActivityView {
         let backgroundColor = UIColor(hex6: 0x45b0ff, alpha: 0.08)
         let cornerRadius: CGFloat = 8.0
 
-        let streakIconColor = UIColor.mainDark
-        let textColor = UIColor.mainDark
+        let streakIconColor = UIColor.stepikAccent
+        let textColor = UIColor.stepikAccent
         let streakIconSize = CGSize(width: 10, height: 15)
         let streakDaysFont = UIFont.systemFont(ofSize: 16, weight: .medium)
         let streakDescriptionFont = UIFont.systemFont(ofSize: 16, weight: .light)

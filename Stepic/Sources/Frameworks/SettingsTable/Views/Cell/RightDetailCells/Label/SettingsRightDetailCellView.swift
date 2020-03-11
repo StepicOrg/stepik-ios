@@ -3,7 +3,7 @@ import UIKit
 
 extension SettingsRightDetailCellView {
     struct Appearance {
-        let titleTextColor = UIColor.mainDark
+        let titleTextColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 17)
         let titleInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 8)
 

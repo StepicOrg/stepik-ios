@@ -59,7 +59,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     private var activityView: UIView?
 
-    func initActivityView(color: UIColor = .mainDark) -> UIView {
+    func initActivityView(color: UIColor = .stepikAccent) -> UIView {
         let v = UIView()
         let ai = UIActivityIndicatorView()
         ai.style = UIActivityIndicatorView.Style.whiteLarge

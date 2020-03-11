@@ -28,7 +28,7 @@ extension CodeEditorViewDelegate {
 extension CodeEditorView {
     struct Appearance {
         var languageNameLabelLayoutInsets = LayoutInsets(top: 8, right: 16)
-        let languageNameLabelTextColor = UIColor.mainDark
+        let languageNameLabelTextColor = UIColor.stepikAccent
         let languageNameLabelBackgroundColor = UIColor(hex6: 0xF6F6F6).withAlphaComponent(0.75)
         let languageNameLabelFont = UIFont.systemFont(ofSize: 10)
         let languageNameLabelInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)

@@ -29,9 +29,9 @@ final class AdaptiveStatsPagerViewController: PagerController {
         tabHeight = 44.0
         indicatorHeight = 1.5
         centerCurrentTab = true
-        indicatorColor = UIColor.mainDark
-        selectedTabTextColor = UIColor.mainDark
-        tabsTextColor = UIColor.mainDark
+        indicatorColor = UIColor.stepikAccent
+        selectedTabTextColor = UIColor.stepikAccent
+        tabsTextColor = UIColor.stepikAccent
         tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
         tabsViewBackgroundColor = UIColor.mainLight
     }

@@ -12,7 +12,7 @@ extension DiscussionsSolutionControl {
 
         let iconInsets = LayoutInsets(top: 8, left: 8, bottom: 8, right: 8)
 
-        let titleTextColor = UIColor.mainDark
+        let titleTextColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 14)
         let titleInsets = LayoutInsets(top: 8, left: 8, bottom: 8, right: 8)
     }

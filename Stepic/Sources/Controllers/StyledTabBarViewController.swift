@@ -21,7 +21,7 @@ final class StyledTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBar.tintColor = UIColor.mainDark
+        self.tabBar.tintColor = UIColor.stepikAccent
         self.tabBar.unselectedItemTintColor = UIColor(hex6: 0xbabac1)
         self.tabBar.isTranslucent = false
 
