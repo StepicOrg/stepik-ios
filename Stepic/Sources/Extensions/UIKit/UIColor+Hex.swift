@@ -14,14 +14,14 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 
-    /// The six-digit hexadecimal representation of color with alpha of the form #RRGGBBAA.
+    /// The six-digit hexadecimal representation of color with alpha of the form #AARRGGBB.
     /// - Parameter hex8: Eight-digit hexadecimal value.
     convenience init(hex8: UInt32) {
         let divisor = CGFloat(255)
-        let red = CGFloat((hex8 & 0xFF000000) >> 24) / divisor
-        let green = CGFloat((hex8 & 0x00FF0000) >> 16) / divisor
-        let blue = CGFloat((hex8 & 0x0000FF00) >> 8) / divisor
-        let alpha = CGFloat(hex8 & 0x000000FF) / divisor
+        let alpha = CGFloat((hex8 & 0xFF000000) >> 24) / divisor
+        let red = CGFloat((hex8 & 0x00FF0000) >> 16) / divisor
+        let green = CGFloat((hex8 & 0x0000FF00) >> 8) / divisor
+        let blue = CGFloat(hex8 & 0x000000FF) / divisor
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 
