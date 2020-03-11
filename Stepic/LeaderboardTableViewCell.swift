@@ -62,13 +62,13 @@ final class LeaderboardTableViewCell: UITableViewCell {
         positionLabel.text = "\(position)."
         switch position {
         case 1:
-            medalImageView.image = #imageLiteral(resourceName: "medal1")
+            medalImageView.image = UIImage(named: "medal1")
             break
         case 2:
-            medalImageView.image = #imageLiteral(resourceName: "medal2")
+            medalImageView.image = UIImage(named: "medal2")
             break
         case 3:
-            medalImageView.image = #imageLiteral(resourceName: "medal3")
+            medalImageView.image = UIImage(named: "medal3")
             break
         default:
             positionLabel.isHidden = false

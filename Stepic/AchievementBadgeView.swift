@@ -14,7 +14,7 @@ struct AchievementViewData {
     let title: String
     let description: String
 
-    let badge: UIImage
+    let badge: UIImage?
 
     let completedLevel: Int
     let maxLevel: Int
@@ -172,15 +172,15 @@ final class AchievementBadgeView: UIView {
             NSLayoutConstraint(item: starsStackView!, attribute: .width, relatedBy: .equal, toItem: starsStackView, attribute: .height, multiplier: CGFloat(maxLevel), constant: CGFloat(maxLevel - 1) * spaceBetweenStars).isActive = true
 
             for _ in 0..<filledCount {
-                starsStackView.addArrangedSubview(UIImageView(image: #imageLiteral(resourceName: "star-filled")))
+                starsStackView.addArrangedSubview(UIImageView(image: UIImage(named: "star-filled")))
             }
 
             for _ in 0..<borderedCount {
-                starsStackView.addArrangedSubview(UIImageView(image: #imageLiteral(resourceName: "star-bordered")))
+                starsStackView.addArrangedSubview(UIImageView(image: UIImage(named: "star-bordered")))
             }
 
             for _ in 0..<grayCount {
-                starsStackView.addArrangedSubview(UIImageView(image: #imageLiteral(resourceName: "star-gray")))
+                starsStackView.addArrangedSubview(UIImageView(image: UIImage(named: "star-gray")))
             }
         }
     }

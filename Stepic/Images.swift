@@ -80,26 +80,26 @@ struct Images {
     }
 
     struct placeholders {
-        static let certificates = #imageLiteral(resourceName: "empty-certificates")
-        static let connectionError = #imageLiteral(resourceName: "placeholder-connection-error")
-        static let emptyDownloads = #imageLiteral(resourceName: "empty-downloads")
-        static let emptyFindCourses = #imageLiteral(resourceName: "empty-findCourses")
-        static let anonymous = #imageLiteral(resourceName: "placeholder-anonymous-dark-background")
-        static let coursePassed = #imageLiteral(resourceName: "placeholder-course-passed")
+        static let certificates = UIImage(named: "empty-certificates")!
+        static let connectionError = UIImage(named: "placeholder-connection-error")!
+        static let emptyDownloads = UIImage(named: "empty-downloads")!
+        static let emptyFindCourses = UIImage(named: "empty-findCourses")!
+        static let anonymous = UIImage(named: "placeholder-anonymous-dark-background")!
+        static let coursePassed = UIImage(named: "placeholder-course-passed")!
     }
 
     struct logotypes {
         struct text {
             struct green {
-                static let bordered = #imageLiteral(resourceName: "logotype-text-green-bordered")
-                static let fitted = #imageLiteral(resourceName: "logotype-text-green")
-                static let navigation = #imageLiteral(resourceName: "logotype-text-green-navigation")
+                static let bordered = UIImage(named: "logotype-text-green-bordered")!
+                static let fitted = UIImage(named: "logotype-text-green")!
+                static let navigation = UIImage(named: "logotype-text-green-navigation")!
             }
         }
     }
 
     struct patterns {
-        static let gray = #imageLiteral(resourceName: "stepic-pattern-grey")
+        static let gray = UIImage(named: "stepic-pattern-grey")!
     }
 
     struct arts {
