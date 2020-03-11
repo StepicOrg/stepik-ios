@@ -17,6 +17,10 @@ extension UIColor {
     static let wrongQuizBackground = UIColor(hex6: 0xF5EBF2)
     static let peerReviewYellow = UIColor(hex6: 0xFFFAE9)
 
+    static var stepikLoadingIndicator: UIColor {
+        UIColor.stepikAccent
+    }
+
     static var stepikAccent: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.accent700,

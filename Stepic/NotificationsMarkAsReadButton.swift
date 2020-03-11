@@ -44,7 +44,7 @@ final class NotificationsMarkAsReadButton: StepikButton {
             make.center.equalTo(self)
         }
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = UIColor.stepikAccent
+        activityIndicator.color = UIColor.stepikLoadingIndicator
     }
 
     override func draw(_ rect: CGRect) {

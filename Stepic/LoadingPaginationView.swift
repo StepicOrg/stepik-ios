@@ -33,6 +33,6 @@ final class LoadingPaginationView: NibInitializableView {
     }
 
     override func setupSubviews() {
-        activityIndicator.color = UIColor.stepikAccent
+        activityIndicator.color = UIColor.stepikLoadingIndicator
     }
 }

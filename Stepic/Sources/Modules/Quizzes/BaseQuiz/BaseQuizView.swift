@@ -31,7 +31,7 @@ extension BaseQuizView {
         let spacing: CGFloat = 16
 
         let insets = LayoutInsets(left: 16, right: 16)
-        let loadingIndicatorColor = UIColor.stepikAccent
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
 
         let separatorColor = UIColor(hex6: 0xEAECF0)
         let separatorHeight: CGFloat = 1

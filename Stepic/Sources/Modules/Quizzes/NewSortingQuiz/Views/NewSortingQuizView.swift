@@ -21,7 +21,7 @@ extension NewSortingQuizView {
         let titleColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
-        let loadingIndicatorColor = UIColor.stepikAccent
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
     }
 
     enum Animation {

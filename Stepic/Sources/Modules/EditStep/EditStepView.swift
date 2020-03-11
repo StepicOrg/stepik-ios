@@ -7,7 +7,7 @@ extension EditStepView {
     struct Appearance {
         let backgroundColor = UIColor.white
 
-        let loadingIndicatorColor = UIColor.stepikAccent
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
 
         let messageFont = UIFont.systemFont(ofSize: 12)
         let messageTextColor = UIColor(hex6: 0x8E8E93)

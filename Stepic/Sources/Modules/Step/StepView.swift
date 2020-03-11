@@ -16,7 +16,7 @@ protocol StepViewDelegate: AnyObject {
 
 extension StepView {
     struct Appearance {
-        let loadingIndicatorColor = UIColor.stepikAccent
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
     }
 
     enum Animation {
