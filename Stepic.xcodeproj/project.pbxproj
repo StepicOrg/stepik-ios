@@ -512,6 +512,7 @@
 		2C8F3AE323CCBEAB004D113A /* StreamVideoQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F3AE223CCBEAB004D113A /* StreamVideoQuality.swift */; };
 		2C92669720B5C7CF00525AFC /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */; };
 		2C92669820B5C7CF00525AFC /* PlaceholderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */; };
+		2C96E11624192ACB005EDE2B /* UIColor+DynamicColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */; };
 		2C97E008215E47D8005684A1 /* SearchResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1BF271FB9ED01008F342F /* SearchResultsPresenter.swift */; };
 		2C97E009215E47E7005684A1 /* SearchQueriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9731F34E3D5008CF4A1 /* SearchQueriesViewController.swift */; };
 		2C97E00A215E47EC005684A1 /* SearchQueriesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8F9661F34DD2C008CF4A1 /* SearchQueriesPresenter.swift */; };
@@ -606,6 +607,7 @@
 		2CD8463F1F25F7F300E8153C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8463E1F25F7F300E8153C /* Profile.swift */; };
 		2CD846471F25FB6C00E8153C /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */; };
 		2CD8464B1F25FE8B00E8153C /* ProfilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */; };
+		2CD8B476241906B1006A7D08 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8B475241906B1006A7D08 /* ColorPalette.swift */; };
 		2CD99DD622DCE4D500628224 /* overlay_hard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF425292024C10C002D7305 /* overlay_hard.png */; };
 		2CD99DD722DCE4D800628224 /* overlay_simple.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF4252B2024C10D002D7305 /* overlay_simple.png */; };
 		2CD9B9681F87A58B00D446C2 /* NotificationDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */; };
@@ -1735,6 +1737,7 @@
 		2C8F3AE223CCBEAB004D113A /* StreamVideoQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamVideoQuality.swift; sourceTree = "<group>"; };
 		2C92669520B5C7CF00525AFC /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		2C92669620B5C7CF00525AFC /* PlaceholderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceholderTableViewCell.xib; sourceTree = "<group>"; };
+		2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+DynamicColor.swift"; sourceTree = "<group>"; };
 		2C9704221F3B1BFE00C36F0A /* TapProxyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TapProxyView.swift; path = Stepic/TapProxyView.swift; sourceTree = SOURCE_ROOT; };
 		2C98B6B51FDFD74C005AB72C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2C9A8D2D22D348A5009434DB /* String+HTMLEscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTMLEscape.swift"; sourceTree = "<group>"; };
@@ -1825,6 +1828,7 @@
 		2CD8463E1F25F7F300E8153C /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2CD8464A1F25FE8B00E8153C /* ProfilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilesAPI.swift; sourceTree = "<group>"; };
+		2CD8B475241906B1006A7D08 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		2CD9B9671F87A58B00D446C2 /* NotificationDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataExtractor.swift; sourceTree = "<group>"; };
 		2CD9F77F22DC884900FBA471 /* AlamofireRequestsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestsLogger.swift; sourceTree = "<group>"; };
 		2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentsNetworkService.swift; sourceTree = "<group>"; };
@@ -3666,6 +3670,7 @@
 			children = (
 				2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift */,
 				62E9866C8BA98FF768F487E2 /* UICollectionViewExtensions.swift */,
+				2C96E11524192ACB005EDE2B /* UIColor+DynamicColor.swift */,
 				08DE94381B8E3FCE00D278AB /* UIColor+Hex.swift */,
 				2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */,
 				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
@@ -4038,6 +4043,7 @@
 				08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */,
 				08A1257B1BDEBCC90066B2B2 /* Localizable.strings */,
 				08DE941A1B8C58AC00D278AB /* Main.storyboard */,
+				2CD8B474241906A0006A7D08 /* Theme */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4522,6 +4528,14 @@
 				2CD846461F25FB6C00E8153C /* Profile+CoreDataProperties.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		2CD8B474241906A0006A7D08 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				2CD8B475241906B1006A7D08 /* ColorPalette.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		2CDB95872412C04A00F676A7 /* Spotlight */ = {
@@ -6767,6 +6781,7 @@
 				081D741E211DCDD50086F6F8 /* OpenedStoriesAssembly.swift in Sources */,
 				08F261211E79DD0C00AC908B /* APIEndpoint.swift in Sources */,
 				0828FF811BC7FD24000AFEA7 /* Lesson.swift in Sources */,
+				2CD8B476241906B1006A7D08 /* ColorPalette.swift in Sources */,
 				080CE1461E9560EB0089A27F /* SectionsAPI.swift in Sources */,
 				083F2B1A1E9D920500714173 /* CertificatesPresenter.swift in Sources */,
 				866AD0D4206145DC0004C2B2 /* StepikPlaceholderStyle+Placeholders.swift in Sources */,
@@ -7080,6 +7095,7 @@
 				089877B0214047EE0065DFA2 /* UserDefaults+StorageServiceProtocol.swift in Sources */,
 				083F2B171E9D8F1D00714173 /* CertificatesView.swift in Sources */,
 				2C01BB68233CD92C00C8DCF0 /* Require.swift in Sources */,
+				2C96E11624192ACB005EDE2B /* UIColor+DynamicColor.swift in Sources */,
 				080F31DD1BA7162C00F356A0 /* StepikToken.swift in Sources */,
 				080CE14F1E9562F30089A27F /* StepsAPI.swift in Sources */,
 				2CE61D832412960500DA2CBA /* SpotlightSearchableItem.swift in Sources */,
