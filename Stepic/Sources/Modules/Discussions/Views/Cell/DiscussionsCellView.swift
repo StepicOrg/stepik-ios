@@ -18,7 +18,7 @@ extension DiscussionsCellView {
         let badgeUserRoleWidthDelta: CGFloat = 16
         let badgeUserRoleBackgroundColor = UIColor.stepikGreen
 
-        let badgeIsPinnedBackgroundColor = UIColor(hex: 0x6C7BDF)
+        let badgeIsPinnedBackgroundColor = UIColor(hex6: 0x6C7BDF)
         let badgeIsPinnedImageSize = CGSize(width: 10, height: 10)
         let badgeIsPinnedImageInsets = UIEdgeInsets(top: 1, left: 8, bottom: 0, right: 2)
         let badgeIsPinnedTitleInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
@@ -50,7 +50,7 @@ extension DiscussionsCellView {
         let dateLabelTextColor = UIColor.mainDark
 
         let replyButtonFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let replyButtonTextColor = UIColor(hex: 0x3E50CB)
+        let replyButtonTextColor = UIColor(hex6: 0x3E50CB)
 
         // Like & dislike
         let voteImageSize = CGSize(width: 20, height: 20)

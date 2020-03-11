@@ -22,7 +22,7 @@ final class StyledTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         self.tabBar.tintColor = UIColor.mainDark
-        self.tabBar.unselectedItemTintColor = UIColor(hex: 0xbabac1)
+        self.tabBar.unselectedItemTintColor = UIColor(hex6: 0xbabac1)
         self.tabBar.isTranslucent = false
 
         let tabBarViewControllers = self.items.map { tabBarItem -> UIViewController in

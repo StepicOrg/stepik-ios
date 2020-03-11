@@ -4,8 +4,8 @@ import UIKit
 extension CodeTextView {
     struct Appearance {
         let gutterWidth: CGFloat = 24
-        var gutterBackgroundColor = UIColor(hex: 0xF6F6F6)
-        var gutterBorderColor = UIColor(hex: 0xC8C7CC)
+        var gutterBackgroundColor = UIColor(hex6: 0xF6F6F6)
+        var gutterBorderColor = UIColor(hex6: 0xC8C7CC)
         let gutterBorderWidth: CGFloat = 0.5
 
         let lineNumberFont = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)

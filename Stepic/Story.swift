@@ -113,8 +113,8 @@ final class TextStoryPart: StoryPart {
         if textJSON != JSON.null {
             let title = textJSON["title"].string
             let text = textJSON["text"].string
-            let colorHexInt = Int(textJSON["text_color"].stringValue, radix: 16) ?? 0x000000
-            let textColor = UIColor(hex: colorHexInt)
+            let colorHexInt = UInt32(textJSON["text_color"].stringValue, radix: 16) ?? 0x000000
+            let textColor = UIColor(hex6: colorHexInt)
             let backgroundStyle = Text.BackgroundStyle(rawValue: textJSON["background_style"].stringValue) ?? .none
             self.text = Text(title: title, text: text, textColor: textColor, backgroundStyle: backgroundStyle)
         }
@@ -123,10 +123,10 @@ final class TextStoryPart: StoryPart {
         if buttonJSON != JSON.null {
             let title = buttonJSON["title"].stringValue
             let urlPath = buttonJSON["url"].stringValue
-            let backgroundColorHexInt = Int(buttonJSON["background_color"].stringValue, radix: 16) ?? 0x000000
-            let backgroundColor = UIColor(hex: backgroundColorHexInt)
-            let titleColorHexInt = Int(buttonJSON["text_color"].stringValue, radix: 16) ?? 0x000000
-            let titleColor = UIColor(hex: titleColorHexInt)
+            let backgroundColorHexInt = UInt32(buttonJSON["background_color"].stringValue, radix: 16) ?? 0x000000
+            let backgroundColor = UIColor(hex6: backgroundColorHexInt)
+            let titleColorHexInt = UInt32(buttonJSON["text_color"].stringValue, radix: 16) ?? 0x000000
+            let titleColor = UIColor(hex6: titleColorHexInt)
             self.button = Button(
                 title: title,
                 urlPath: urlPath,

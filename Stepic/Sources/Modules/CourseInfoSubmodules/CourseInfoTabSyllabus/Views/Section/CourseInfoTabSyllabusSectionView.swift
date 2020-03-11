@@ -3,7 +3,7 @@ import UIKit
 
 extension CourseInfoTabSyllabusSectionView {
     struct Appearance {
-        let backgroundColor = UIColor(hex: 0xf6f6f6)
+        let backgroundColor = UIColor(hex6: 0xf6f6f6)
 
         let indexTextColor = UIColor.mainDark
         let indexFont = UIFont.systemFont(ofSize: 15)

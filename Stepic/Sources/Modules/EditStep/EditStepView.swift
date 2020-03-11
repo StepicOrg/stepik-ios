@@ -10,7 +10,7 @@ extension EditStepView {
         let loadingIndicatorColor = UIColor.mainDark
 
         let messageFont = UIFont.systemFont(ofSize: 12)
-        let messageTextColor = UIColor(hex: 0x8E8E93)
+        let messageTextColor = UIColor(hex6: 0x8E8E93)
         let messageLabelInsets = LayoutInsets(top: 16, left: 16, right: 16)
 
         let separatorInsets = LayoutInsets(top: 8)

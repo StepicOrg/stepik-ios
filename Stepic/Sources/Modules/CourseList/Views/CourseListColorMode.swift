@@ -12,8 +12,8 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                titleLabelColor: UIColor(hex: 0x535366),
-                showAllButtonColor: UIColor(hex: 0x535366, alpha: 0.3)
+                titleLabelColor: UIColor(hex6: 0x535366),
+                showAllButtonColor: UIColor(hex6: 0x535366, alpha: 0.3)
             )
         case .dark:
             return .init(
@@ -41,14 +41,14 @@ extension CourseListColorMode {
         case .light:
             return .init(
                 textColor: UIColor.mainText,
-                backgroundColor: UIColor(hex: 0x535366, alpha: 0.06),
+                backgroundColor: UIColor(hex6: 0x535366, alpha: 0.06),
                 callToActionTextColor: UIColor.stepikGreen,
                 callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
             )
         case .dark:
             return .init(
                 textColor: UIColor.white,
-                backgroundColor: UIColor(hex: 0xffffff, alpha: 0.1),
+                backgroundColor: UIColor(hex6: 0xffffff, alpha: 0.1),
                 callToActionTextColor: UIColor.stepikGreen,
                 callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
             )
@@ -59,15 +59,15 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                imagesRenderingBackgroundColor: UIColor(hex: 0x535366),
-                imagesRenderingTintColor: UIColor(hex: 0x89cc89),
+                imagesRenderingBackgroundColor: UIColor(hex6: 0x535366),
+                imagesRenderingTintColor: UIColor(hex6: 0x89cc89),
                 itemTextColor: UIColor.mainDark,
                 itemImageTintColor: UIColor.mainDark
             )
         case .dark:
             return .init(
                 imagesRenderingBackgroundColor: UIColor.white,
-                imagesRenderingTintColor: UIColor(hex: 0x89cc89),
+                imagesRenderingTintColor: UIColor(hex6: 0x89cc89),
                 itemTextColor: UIColor.white,
                 itemImageTintColor: UIColor.white
             )

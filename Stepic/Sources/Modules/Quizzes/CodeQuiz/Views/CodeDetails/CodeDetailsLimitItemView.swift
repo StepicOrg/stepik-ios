@@ -6,7 +6,7 @@ extension CodeDetailsLimitItemView {
         let insets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
         let verticalSpacing: CGFloat = 16
 
-        let backgroundColor = UIColor(hex: 0xF6F6F6)
+        let backgroundColor = UIColor(hex6: 0xF6F6F6)
         let mainColor = UIColor.mainDark
         let titleFont = UIFont.systemFont(ofSize: 16)
         let detailFont = UIFont.systemFont(ofSize: 14, weight: .light)

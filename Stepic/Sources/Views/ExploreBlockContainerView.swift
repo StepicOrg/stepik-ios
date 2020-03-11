@@ -3,7 +3,7 @@ import UIKit
 
 extension ExploreBlockContainerView {
     struct Appearance {
-        let separatorColor = UIColor(hex: 0x535366, alpha: 0.1)
+        let separatorColor = UIColor(hex6: 0x535366, alpha: 0.1)
         var backgroundColor = UIColor.white
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)

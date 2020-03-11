@@ -294,7 +294,7 @@
 		08DE941C1B8C58AC00D278AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941A1B8C58AC00D278AB /* Main.storyboard */; };
 		08DE941E1B8C58AC00D278AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941D1B8C58AC00D278AB /* Images.xcassets */; };
 		08DE94211B8C58AC00D278AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DE941F1B8C58AC00D278AB /* LaunchScreen.xib */; };
-		08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */; };
+		08DE94391B8E3FCE00D278AB /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE94381B8E3FCE00D278AB /* UIColor+Hex.swift */; };
 		08DF1D921BDAB93900BA35EA /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D911BDAB93900BA35EA /* StringExtensions.swift */; };
 		08DF1D941BDADB2D00BA35EA /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF1D931BDADB2D00BA35EA /* Scripts.swift */; };
 		08DF1D961BDADB7A00BA35EA /* Scripts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08DF1D951BDADB7A00BA35EA /* Scripts.plist */; };
@@ -1489,7 +1489,7 @@
 		08DE941B1B8C58AC00D278AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08DE941D1B8C58AC00D278AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		08DE94201B8C58AC00D278AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		08DE94381B8E3FCE00D278AB /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		08DF1D911BDAB93900BA35EA /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		08DF1D931BDADB2D00BA35EA /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
 		08DF1D951BDADB7A00BA35EA /* Scripts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Scripts.plist; sourceTree = "<group>"; };
@@ -3666,6 +3666,7 @@
 			children = (
 				2CC276FD23EB98CE00E88D6E /* UIBarButtonItem+CloseBarButtonItem.swift */,
 				62E9866C8BA98FF768F487E2 /* UICollectionViewExtensions.swift */,
+				08DE94381B8E3FCE00D278AB /* UIColor+Hex.swift */,
 				2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */,
 				62E9845643D7541307856023 /* UITableViewExtensions.swift */,
 			);
@@ -4089,7 +4090,6 @@
 				08E43EA6214C2F0200E3CB50 /* UIBarButtonItem+ActionClosure.swift */,
 				08CA59ED1BBFC962008DC44D /* UIButtonExtensions.swift */,
 				2C15EB951FC70A0300F56D93 /* UICollectionViewFlowLayout+PlusCrashWorkaround.swift */,
-				08DE94381B8E3FCE00D278AB /* UIColorExtensions.swift */,
 				089574551E5B76E700C12D21 /* UIImageView+SVGDownload.swift */,
 				08CA59E91BBD3D55008DC44D /* UILabelExtensions.swift */,
 				62E980371A0458D70C61D357 /* UIStackView+RemoveAllArrangedSubviews.swift */,
@@ -7069,7 +7069,7 @@
 				0828FF801BC7FD24000AFEA7 /* Lesson+CoreDataProperties.swift in Sources */,
 				080CE1491E9562430089A27F /* LessonsAPI.swift in Sources */,
 				2C80C82A201A505E00ABB312 /* CongratulationViewController.swift in Sources */,
-				08DE94391B8E3FCE00D278AB /* UIColorExtensions.swift in Sources */,
+				08DE94391B8E3FCE00D278AB /* UIColor+Hex.swift in Sources */,
 				0885F8541BA9DB5C00F2A188 /* Meta.swift in Sources */,
 				2CB9529E22A0352000A6117A /* AssignmentsPersistenceService.swift in Sources */,
 				08D5F56D1F7DA6BB007C1634 /* CourseReviewSummary.swift in Sources */,

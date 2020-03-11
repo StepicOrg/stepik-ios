@@ -7,7 +7,7 @@ extension CourseInfoTabSyllabusSectionDeadlinesView {
         let labelTopOffset: CGFloat = 8
         let labelsSpacing: CGFloat = 20
 
-        let secondaryProgressColor = UIColor(hex: 0xb4b4bd)
+        let secondaryProgressColor = UIColor(hex6: 0xb4b4bd)
         let mainProgressColor = UIColor.mainDark
 
         let progressIndicatorHeight: CGFloat = 1.5

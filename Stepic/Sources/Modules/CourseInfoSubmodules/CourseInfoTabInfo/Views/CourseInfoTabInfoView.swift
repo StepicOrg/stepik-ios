@@ -15,7 +15,7 @@ extension CourseInfoTabInfoView {
         let stackViewInsets = LayoutInsets(top: 20)
 
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let authorTitleHighlightColor = UIColor(hex: 0x0092E4)
+        let authorTitleHighlightColor = UIColor(hex6: 0x0092E4)
         let authorTitleLabelInsets = UIEdgeInsets(top: 0, left: 47, bottom: 20, right: 47)
         let authorTitleLabelNumberOfLines = 0
         let authorIconLeadingSpace: CGFloat = 20

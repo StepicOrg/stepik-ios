@@ -70,7 +70,7 @@ final class NotificationsTableViewCell: UITableViewCell {
         let link = Style("a").font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium)).foregroundColor(UIColor.mainText)
         let activeLink = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium))
                         .foregroundColor(UIColor.mainText)
-                        .backgroundColor(UIColor(hex: 0xF6F6F6))
+                        .backgroundColor(UIColor(hex6: 0xF6F6F6))
 
         let styledText = notification.text.style(tags: link).styleAll(all)
 

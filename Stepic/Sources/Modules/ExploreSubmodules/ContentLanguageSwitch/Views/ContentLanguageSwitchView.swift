@@ -10,7 +10,7 @@ protocol ContentLanguageSwitchViewDelegate: AnyObject {
 
 extension ContentLanguageSwitchView {
     struct Appearance {
-        let headerTitleColor = UIColor(hex: 0x535366, alpha: 0.3)
+        let headerTitleColor = UIColor(hex6: 0x535366, alpha: 0.3)
 
         let descriptionFont = UIFont.systemFont(ofSize: 14)
         let descriptionTextColor = UIColor.lightGray

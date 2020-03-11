@@ -17,7 +17,7 @@ final class LeaderboardTableViewCell: UITableViewCell {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var separatorImageView: UIImageView!
 
-    private let meColor = UIColor(hex: 0xFFDCA5)
+    private let meColor = UIColor(hex6: 0xFFDCA5)
 
     var isSeparator: Bool = false {
         didSet {

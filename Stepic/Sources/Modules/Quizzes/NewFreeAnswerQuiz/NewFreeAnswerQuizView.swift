@@ -19,7 +19,7 @@ extension NewFreeAnswerQuizView {
 
         let textFieldBorderCornerRadius: CGFloat = 6
         let textFieldBorderWidth: CGFloat = 1
-        let textFieldBorderColor = UIColor(hex: 0xCCCCCC)
+        let textFieldBorderColor = UIColor(hex6: 0xCCCCCC)
 
         let textFieldInsets = UIEdgeInsets(top: 12, left: 12, bottom: 36, right: 12)
     }

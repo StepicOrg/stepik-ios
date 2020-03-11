@@ -104,13 +104,13 @@ final class GradientCoursesPlaceholderView: UIView {
             case .purple:
                 return UIColor.white
             case .blue:
-                return UIColor(hex: 0x00484e)
+                return UIColor(hex6: 0x00484e)
             case .pink:
-                return UIColor(hex: 0x18073d)
+                return UIColor(hex6: 0x18073d)
             }
         }
 
-        var subtitleTextColor: UIColor { UIColor(hex: 0x535366).withAlphaComponent(0.3) }
+        var subtitleTextColor: UIColor { UIColor(hex6: 0x535366).withAlphaComponent(0.3) }
     }
 }
 

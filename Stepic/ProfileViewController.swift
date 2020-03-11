@@ -491,7 +491,7 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         let label: UILabel = {
             let label = UILabel()
             label.textAlignment = .center
-            label.textColor = UIColor(hex: 0x535366, alpha: 0.5)
+            label.textColor = UIColor(hex6: 0x535366, alpha: 0.5)
             label.font = UIFont.systemFont(ofSize: 12)
             label.text = "User ID: \(userID)"
             return label

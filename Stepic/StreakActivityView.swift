@@ -15,7 +15,7 @@ extension StreakActivityView {
         let iconInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 5)
         let descriptionInsets = UIEdgeInsets(top: 12, left: 22, bottom: 12, right: 10)
 
-        let backgroundColor = UIColor(hex: 0x45b0ff, alpha: 0.08)
+        let backgroundColor = UIColor(hex6: 0x45b0ff, alpha: 0.08)
         let cornerRadius: CGFloat = 8.0
 
         let streakIconColor = UIColor.mainDark

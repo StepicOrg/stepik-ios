@@ -4,13 +4,13 @@ import UIKit
 extension DiscussionsLoadMoreTableViewCell {
     enum Appearance {
         static let containerHeight: CGFloat = 52
-        static let containerBackgroundColor = UIColor(hex: 0xF6F6F6)
+        static let containerBackgroundColor = UIColor(hex6: 0xF6F6F6)
 
         static let titleLabelFont = UIFont.systemFont(ofSize: 14)
         static let titleLabelTextColor = UIColor.mainDark
 
         static let separatorHeight: CGFloat = 0.5
-        static let separatorColor = UIColor(hex: 0xe7e7e7)
+        static let separatorColor = UIColor(hex6: 0xe7e7e7)
     }
 }
 

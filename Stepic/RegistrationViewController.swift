@@ -192,7 +192,7 @@ final class RegistrationViewController: UIViewController {
         let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular)).foregroundColor(UIColor.stepikGreen)
         let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
             .foregroundColor(UIColor.mainText)
-            .backgroundColor(UIColor(hex: 0xF6F6F6))
+            .backgroundColor(UIColor(hex6: 0xF6F6F6))
 
         let styledText = head.style(tags: link).styleAll(all)
 

@@ -15,7 +15,7 @@ extension CodeQuizFullscreenRunCodeView {
         let samplesButtonImageInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
         let samplesButtonInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 16)
 
-        let runCodeButtonBackgroundColor = UIColor(hex: 0x6C7BDF)
+        let runCodeButtonBackgroundColor = UIColor(hex6: 0x6C7BDF)
         let runCodeButtonHeight: CGFloat = 44
         let runCodeButtonTextColor = UIColor.white
         let runCodeButtonCornerRadius: CGFloat = 6
@@ -40,7 +40,7 @@ extension CodeQuizFullscreenRunCodeView {
         let testInputOutputTitleImageSize = CGSize(width: 20, height: 20)
         let testInputOutputTitleImageInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 
-        let cardBackgroundColor = UIColor(hex: 0xF6F6F6)
+        let cardBackgroundColor = UIColor(hex6: 0xF6F6F6)
         let cardCornerRadius: CGFloat = 6
         let backgroundColor = UIColor.white
 
@@ -225,11 +225,11 @@ final class CodeQuizFullscreenRunCodeView: UIView {
             if userCodeRunStatus == .failure {
                 return (
                     UIImage(named: "quiz-mark-wrong"),
-                    UIColor(hex: 0xFF7965),
-                    UIColor(hex: 0xFF7965).withAlphaComponent(0.15)
+                    UIColor(hex6: 0xFF7965),
+                    UIColor(hex6: 0xFF7965).withAlphaComponent(0.15)
                 )
             } else if userCodeRunStatus == .success && isTestOutputMatchesSampleOutput {
-                return (UIImage(named: "quiz-feedback-correct"), UIColor(hex: 0x66CC66), UIColor(hex: 0xE9F9E9))
+                return (UIImage(named: "quiz-feedback-correct"), UIColor(hex6: 0x66CC66), UIColor(hex6: 0xE9F9E9))
             } else {
                 return (
                     UIImage(named: "console"),

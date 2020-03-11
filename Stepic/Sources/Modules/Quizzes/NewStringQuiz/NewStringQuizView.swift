@@ -20,7 +20,7 @@ extension NewStringQuizView {
 
         let textFieldBorderCornerRadius: CGFloat = 6
         let textFieldBorderWidth: CGFloat = 1
-        let textFieldBorderColor = UIColor(hex: 0xCCCCCC)
+        let textFieldBorderColor = UIColor(hex6: 0xCCCCCC)
 
         let statusMarkInsets = LayoutInsets(right: 16)
         let statusMarkSize = CGSize(width: 20, height: 20)

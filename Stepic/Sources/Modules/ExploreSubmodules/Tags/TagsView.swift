@@ -7,13 +7,13 @@ protocol TagsViewDelegate: AnyObject {
 
 extension TagsView {
     struct Appearance {
-        let headerTitleColor = UIColor(hex: 0x535366, alpha: 0.3)
+        let headerTitleColor = UIColor(hex6: 0x535366, alpha: 0.3)
 
         let tagsHeight: CGFloat = 40
         let tagsSpacing: CGFloat = 15
         let tagsViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 27, right: 20)
 
-        let tagBackgroundColor = UIColor(hex: 0x535366, alpha: 0.06)
+        let tagBackgroundColor = UIColor(hex6: 0x535366, alpha: 0.06)
         let tagFont = UIFont.systemFont(ofSize: 16, weight: .light)
         let tagTextColor = UIColor.mainText
         let tagTitleInsets = UIEdgeInsets(top: 11, left: 20, bottom: 11, right: 20)

@@ -27,11 +27,11 @@ struct AchievementViewData {
 final class AchievementBadgeView: UIView {
     // Gradient colors and locations for progress circle
     private static let colors = [
-        UIColor(hex: 0xa9aeff),
-        UIColor(hex: 0xa99cff),
-        UIColor(hex: 0xa992ff),
-        UIColor(hex: 0xaca5ff),
-        UIColor(hex: 0xacecfe)
+        UIColor(hex6: 0xa9aeff),
+        UIColor(hex6: 0xa99cff),
+        UIColor(hex6: 0xa992ff),
+        UIColor(hex6: 0xaca5ff),
+        UIColor(hex6: 0xacecfe)
     ]
     private static let locations = [0.0, 0.14, 0.25, 0.425, 1.0]
 

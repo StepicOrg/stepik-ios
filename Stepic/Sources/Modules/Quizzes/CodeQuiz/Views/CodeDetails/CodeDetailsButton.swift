@@ -10,7 +10,7 @@ extension CodeDetailsButton {
 
         let mainColor = UIColor.mainDark
         let textFont = UIFont.systemFont(ofSize: 16)
-        let backgroundColor = UIColor(hex: 0xF6F6F6)
+        let backgroundColor = UIColor(hex6: 0xF6F6F6)
     }
 
     enum Animation {

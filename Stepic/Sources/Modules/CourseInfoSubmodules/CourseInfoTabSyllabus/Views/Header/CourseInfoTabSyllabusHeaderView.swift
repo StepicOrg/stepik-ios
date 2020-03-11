@@ -13,7 +13,7 @@ extension CourseInfoTabSyllabusHeaderView {
 
         let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
 
-        let separatorColor = UIColor(hex: 0xcccccc)
+        let separatorColor = UIColor(hex6: 0xcccccc)
         let separatorHeight: CGFloat = 1
     }
 }

@@ -23,7 +23,7 @@ extension BaseQuizView {
         let retryButtonBorderWidth: CGFloat = 1
         let retryButtonCornerRadius: CGFloat = 6
         let retryButtonBackgroundColor = UIColor.white
-        let retryButtonTintColor = UIColor(hex: 0xC8C7CC)
+        let retryButtonTintColor = UIColor(hex6: 0xC8C7CC)
 
         let discountingPolicyTextColor = UIColor.mainDark
         let discountingPolicyFont = UIFont.systemFont(ofSize: 12, weight: .medium)
@@ -33,7 +33,7 @@ extension BaseQuizView {
         let insets = LayoutInsets(left: 16, right: 16)
         let loadingIndicatorColor = UIColor.mainDark
 
-        let separatorColor = UIColor(hex: 0xEAECF0)
+        let separatorColor = UIColor(hex6: 0xEAECF0)
         let separatorHeight: CGFloat = 1
     }
 

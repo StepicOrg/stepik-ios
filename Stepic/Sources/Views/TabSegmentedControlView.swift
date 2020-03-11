@@ -10,14 +10,14 @@ protocol TabSegmentedControlViewDelegate: AnyObject {
 
 extension TabSegmentedControlView {
     struct Appearance {
-        let backgroundColor = UIColor(hex: 0xf6f6f6)
+        let backgroundColor = UIColor(hex6: 0xf6f6f6)
 
         let buttonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         let buttonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
         let buttonTitleFontSelected = UIFont.systemFont(ofSize: 15)
         let buttonTitleColor = UIColor.mainDark
 
-        let bottomBorderColor = UIColor(hex: 0x9b9b9b)
+        let bottomBorderColor = UIColor(hex6: 0x9b9b9b)
         let bottomBorderHeight: CGFloat = 0.5
 
         let bottomSelectedMarkerColor = UIColor.mainDark

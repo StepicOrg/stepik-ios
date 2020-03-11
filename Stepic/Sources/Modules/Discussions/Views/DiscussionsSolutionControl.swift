@@ -7,7 +7,7 @@ extension DiscussionsSolutionControl {
 
         let cornerRadius: CGFloat = 6
         let borderWidth: CGFloat = 1
-        let borderColor = UIColor(hex: 0xCCCCCC)
+        let borderColor = UIColor(hex6: 0xCCCCCC)
         var isBorderEnabled = true
 
         let iconInsets = LayoutInsets(top: 8, left: 8, bottom: 8, right: 8)
@@ -108,9 +108,9 @@ final class DiscussionsSolutionControl: UIControl {
         var tintColor: UIColor {
             switch self {
             case .correct:
-                return UIColor(hex: 0x66CC66)
+                return UIColor(hex6: 0x66CC66)
             case .wrong:
-                return UIColor(hex: 0xFF7965)
+                return UIColor(hex6: 0xFF7965)
             }
         }
 

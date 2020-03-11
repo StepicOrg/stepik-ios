@@ -30,7 +30,7 @@ final class PersonalDeadlineModeCollectionViewCell: UICollectionViewCell {
                                     y: self.isHighlighted ? self.contentView.frame.origin.y + animationOffset : self.contentView.frame.origin.y - animationOffset,
                                     width: self.isHighlighted ? self.contentView.frame.width - animationOffset * 2 : self.contentView.frame.width + animationOffset * 2,
                                     height: self.isHighlighted ? self.contentView.frame.height - animationOffset * 2 : self.contentView.frame.height + animationOffset * 2)
-                self.contentView.backgroundColor = self.isHighlighted ? UIColor(hex: 0xf6fcf6, alpha: 1) : UIColor.clear
+                self.contentView.backgroundColor = self.isHighlighted ? UIColor(hex6: 0xf6fcf6, alpha: 1) : UIColor.clear
                 self.contentView.layoutSubviews()
             }
         }
