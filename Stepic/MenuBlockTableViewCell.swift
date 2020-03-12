@@ -21,14 +21,14 @@ class MenuBlockTableViewCell: UITableViewCell {
         self.selectedBackgroundView = selectedView
 
         separator.isHidden = false
-        separator.backgroundColor = UIColor(hex6: 0x535366).withAlphaComponent(0.05)
+        separator.backgroundColor = UIColor.stepikSeparator
         self.contentView.addSubview(separator)
 
         separator.snp.makeConstraints { make -> Void in
             make.bottom.equalTo(self.contentView)
             make.leading.equalTo(self.contentView).offset(24)
             make.trailing.equalTo(self.contentView).offset(-24)
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
         }
     }
 

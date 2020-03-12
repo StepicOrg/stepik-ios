@@ -3,7 +3,7 @@ import UIKit
 
 extension ExploreBlockContainerView {
     struct Appearance {
-        let separatorColor = UIColor(hex6: 0x535366, alpha: 0.1)
+        let separatorColor = UIColor.stepikSeparator
         var backgroundColor = UIColor.white
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -94,7 +94,7 @@ extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(self.shouldShowSeparator ? 1.0 : 0.0)
+            make.height.equalTo(self.shouldShowSeparator ? 0.5 : 0.0)
         }
 
         self.contentView.translatesAutoresizingMaskIntoConstraints = false

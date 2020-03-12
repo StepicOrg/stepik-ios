@@ -17,10 +17,6 @@ extension UIColor {
     static let wrongQuizBackground = UIColor(hex6: 0xF5EBF2)
     static let peerReviewYellow = UIColor(hex6: 0xFFFAE9)
 
-    static var stepikLoadingIndicator: UIColor {
-        UIColor.stepikAccent
-    }
-
     static var stepikAccent: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.accent700,
@@ -66,6 +62,15 @@ extension UIColor {
         )
     }
 
+    static var stepikAccentAlpha30: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.accent700Alpha30,
+            dark: ColorPalette.accent300Alpha30,
+            lightAccessibility: ColorPalette.accent800Alpha30,
+            darkAccessibility: ColorPalette.accent200Alpha30
+        )
+    }
+
     static var stepikAccentAlpha25: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.accent700Alpha25,
@@ -73,6 +78,29 @@ extension UIColor {
             lightAccessibility: ColorPalette.accent800Alpha25,
             darkAccessibility: ColorPalette.accent200Alpha25
         )
+    }
+
+    static var stepikAccentAlpha06: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.accent700Alpha06,
+            dark: ColorPalette.accent300Alpha06,
+            lightAccessibility: ColorPalette.accent800Alpha06,
+            darkAccessibility: ColorPalette.accent200Alpha06
+        )
+    }
+
+    /// The color for borders or divider lines that hides any underlying content.
+    static var stepikSeparator: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.opaqueSeparator
+        } else {
+            return UIColor(hex6: 0xC8C7CC)
+        }
+    }
+
+    /// The color for activity indicators.
+    static var stepikLoadingIndicator: UIColor {
+        UIColor.stepikAccent
     }
 
     // MARK: - Text Colors -
@@ -141,6 +169,17 @@ private enum ColorPalette {
     /// Color to use in dark mode and with a high contrast level, and with alpha component 40.
     static let accent200Alpha40 = UIColor(hex8: 0x66E4E4FA)
 
+    // MARK: Alpha 30
+
+    /// Color to use in light/unspecified mode and with a high contrast level, and with alpha component 30.
+    static let accent800Alpha30 = UIColor(hex8: 0x4D353547)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level, and with alpha component 30.
+    static let accent700Alpha30 = UIColor(hex8: 0x4D535366)
+    /// Color to use in dark mode and with a normal/unspecified contrast level, and with alpha component 30.
+    static let accent300Alpha30 = UIColor(hex8: 0x4DD3D2E9)
+    /// Color to use in dark mode and with a high contrast level, and with alpha component 30.
+    static let accent200Alpha30 = UIColor(hex8: 0x4DE4E4FA)
+
     // MARK: Alpha 25
 
     /// Color to use in light/unspecified mode and with a high contrast level, and with alpha component 25.
@@ -151,4 +190,15 @@ private enum ColorPalette {
     static let accent300Alpha25 = UIColor(hex8: 0x40D3D2E9)
     /// Color to use in dark mode and with a high contrast level, and with alpha component 25.
     static let accent200Alpha25 = UIColor(hex8: 0x40E4E4FA)
+
+    // MARK: Alpha 6
+
+    /// Color to use in light/unspecified mode and with a high contrast level, and with alpha component 6.
+    static let accent800Alpha06 = UIColor(hex8: 0x0F353547)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level, and with alpha component 6.
+    static let accent700Alpha06 = UIColor(hex8: 0x0F535366)
+    /// Color to use in dark mode and with a normal/unspecified contrast level, and with alpha component 6.
+    static let accent300Alpha06 = UIColor(hex8: 0x0FD3D2E9)
+    /// Color to use in dark mode and with a high contrast level, and with alpha component 6.
+    static let accent200Alpha06 = UIColor(hex8: 0x0FE4E4FA)
 }

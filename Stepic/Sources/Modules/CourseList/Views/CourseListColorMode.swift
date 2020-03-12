@@ -12,8 +12,8 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                titleLabelColor: UIColor(hex6: 0x535366),
-                showAllButtonColor: UIColor(hex6: 0x535366, alpha: 0.3)
+                titleLabelColor: UIColor.stepikAccent,
+                showAllButtonColor: UIColor.stepikAccentAlpha30
             )
         case .dark:
             return .init(
@@ -41,7 +41,7 @@ extension CourseListColorMode {
         case .light:
             return .init(
                 textColor: UIColor.mainText,
-                backgroundColor: UIColor(hex6: 0x535366, alpha: 0.06),
+                backgroundColor: UIColor.stepikAccentAlpha06,
                 callToActionTextColor: UIColor.stepikGreen,
                 callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
             )
@@ -59,7 +59,7 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                imagesRenderingBackgroundColor: UIColor(hex6: 0x535366),
+                imagesRenderingBackgroundColor: UIColor.stepikAccent,
                 imagesRenderingTintColor: UIColor(hex6: 0x89cc89),
                 itemTextColor: UIColor.stepikAccent,
                 itemImageTintColor: UIColor.stepikAccent

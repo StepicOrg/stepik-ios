@@ -22,7 +22,7 @@ extension CourseInfoTabReviewsView {
         let paginationViewHeight: CGFloat = 52
 
         let emptyStateLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
-        let emptyStateLabelColor = UIColor(hex6: 0x535366, alpha: 0.4)
+        let emptyStateLabelColor = UIColor.stepikAccentAlpha40
         let emptyStateLabelInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
     }
 }
