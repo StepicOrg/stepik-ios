@@ -933,3 +933,7 @@ EditStepPlaceholder = "Text...";
 EditStepMessage = "You can only edit the step's text, and only using raw HTML. To access full step editor please use the web version of Stepik.";
 EditStepRemoteUpdateSuccessfulTitle = "Updated";
 EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
+
+/* Accessibility */
+StepVideoPreviewAccessibilityLabel = "Video preview";
+StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
