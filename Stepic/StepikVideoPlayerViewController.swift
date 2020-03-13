@@ -229,6 +229,7 @@ final class StepikVideoPlayerViewController: UIViewController {
         self.setupAppearance()
         self.setupObservers()
         self.setupGestureRecognizers()
+        self.addAccessibilitySupport()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -392,6 +393,26 @@ final class StepikVideoPlayerViewController: UIViewController {
         )
         doubleTapVideoGestureRecognizer.numberOfTapsRequired = 2
         self.player.view.addGestureRecognizer(doubleTapVideoGestureRecognizer)
+    }
+
+    private func addAccessibilitySupport() {
+        self.backButton.accessibilityLabel = NSLocalizedString("VideoPlayerBackButtonAccessibilityLabel", comment: "")
+        self.backButton.accessibilityHint = NSLocalizedString("VideoPlayerBackButtonAccessibilityHint", comment: "")
+
+        self.fullscreenPlayButton.accessibilityLabel = NSLocalizedString("VideoPlayerPlayButtonAccessibilityLabel", comment: "")
+        self.fullscreenPlayButton.accessibilityHint = NSLocalizedString("VideoPlayerPlayButtonAccessibilityHint", comment: "")
+
+        self.back10SecButton.accessibilityLabel = NSLocalizedString("VideoPlayerRewindButtonAccessibilityLabel", comment: "")
+        self.back10SecButton.accessibilityHint = NSLocalizedString("VideoPlayerRewindButtonAccessibilityHint", comment: "")
+
+        self.forward10SecButton.accessibilityLabel = NSLocalizedString("VideoPlayerFastForwardButtonAccessibilityLabel", comment: "")
+        self.forward10SecButton.accessibilityHint = NSLocalizedString("VideoPlayerFastForwardButtonAccessibilityHint", comment: "")
+
+        self.rateButton.accessibilityLabel = NSLocalizedString("VideoPlayerPlaybackSpeedButtonAccessibilityLabel", comment: "")
+        self.rateButton.accessibilityHint = NSLocalizedString("VideoPlayerPlaybackSpeedButtonAccessibilityHint", comment: "")
+
+        self.qualityButton.accessibilityLabel = NSLocalizedString("VideoPlayerPlaybackQualityButtonAccessibilityLabel", comment: "")
+        self.qualityButton.accessibilityHint = NSLocalizedString("VideoPlayerPlaybackQualityButtonAccessibilityHint", comment: "")
     }
 
     // MARK: Seek events

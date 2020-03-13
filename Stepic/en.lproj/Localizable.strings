@@ -937,3 +937,16 @@ EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
 /* Accessibility */
 StepVideoPreviewAccessibilityLabel = "Video preview";
 StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
+
+VideoPlayerBackButtonAccessibilityLabel = "Close video player";
+VideoPlayerBackButtonAccessibilityHint = "Double-tap to stop playing the video and close video player";
+VideoPlayerPlayButtonAccessibilityLabel = "Start or stop playing the video";
+VideoPlayerPlayButtonAccessibilityHint = "Double-tap to stop or start playing the video";
+VideoPlayerRewindButtonAccessibilityLabel = "Rewind ten seconds";
+VideoPlayerRewindButtonAccessibilityHint = "Double-tap to rewind ten seconds";
+VideoPlayerFastForwardButtonAccessibilityLabel = "Fast forward ten seconds";
+VideoPlayerFastForwardButtonAccessibilityHint = "Double-tap to fast forward ten seconds";
+VideoPlayerPlaybackSpeedButtonAccessibilityLabel = "Playback speed";
+VideoPlayerPlaybackSpeedButtonAccessibilityHint = "Double-tap to select video playback speed";
+VideoPlayerPlaybackQualityButtonAccessibilityLabel = "Playback quality";
+VideoPlayerPlaybackQualityButtonAccessibilityHint = "Double-tap to select video playback quality";
