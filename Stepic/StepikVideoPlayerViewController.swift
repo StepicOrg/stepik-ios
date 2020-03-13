@@ -721,6 +721,11 @@ final class StepikVideoPlayerViewController: UIViewController {
     }
 
     private func scheduleHidePlayerControlsTimer() {
+        // Persist player controls onscreen for VoiceOver users
+        if UIAccessibility.isVoiceOverRunning {
+            return
+        }
+
         self.hidePlayerControlsTimer?.invalidate()
         self.hidePlayerControlsTimer = Timer.scheduledTimer(
             timeInterval: Self.hidePlayerControlsTimeInterval,
