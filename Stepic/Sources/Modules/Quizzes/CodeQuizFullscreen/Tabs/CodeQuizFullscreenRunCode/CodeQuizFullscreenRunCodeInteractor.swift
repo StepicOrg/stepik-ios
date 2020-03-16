@@ -1,5 +1,4 @@
 import Foundation
-import Logging
 import PromiseKit
 
 protocol CodeQuizFullscreenRunCodeInteractorProtocol {
@@ -9,8 +8,6 @@ protocol CodeQuizFullscreenRunCodeInteractorProtocol {
 }
 
 final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeInteractorProtocol {
-    private static let logger = Logger(label: "com.AlexKarpov.Stepic.CodeQuizFullscreenRunCodeInteractor")
-
     private static let pollInterval: TimeInterval = 1.0
     private static let invalidUserID: User.IdType = -1
 
@@ -66,7 +63,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
             return
         }
 
-        Self.logger.info("CodeQuizFullscreenRunCodeInteractor :: running user code \(self.currentUserCodeRun)")
+        print("CodeQuizFullscreenRunCodeInteractor :: running user code \(self.currentUserCodeRun)")
         self.currentUserCodeRun.status = .evaluation
         self.presentUserCodeRun()
 
@@ -82,16 +79,16 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
                 stdin: self.currentUserCodeRun.stdin ?? ""
             )
         }.then { userCodeRun -> Promise<UserCodeRun> in
-            Self.logger.info("CodeQuizFullscreenRunCodeInteractor :: user code run created \(userCodeRun)")
+            print("CodeQuizFullscreenRunCodeInteractor :: user code run created \(userCodeRun)")
 
             self.currentUserCodeRun = userCodeRun
             self.presentUserCodeRun()
 
-            Self.logger.info("CodeQuizFullscreenRunCodeInteractor :: polling user code run \(userCodeRun.id)...")
+            print("CodeQuizFullscreenRunCodeInteractor :: polling user code run \(userCodeRun.id)...")
 
             return self.pollUserCodeRun(id: userCodeRun.id)
         }.done { userCodeRun in
-            Self.logger.info("CodeQuizFullscreenRunCodeInteractor :: done polling user code run \(userCodeRun)")
+            print("CodeQuizFullscreenRunCodeInteractor :: done polling user code run \(userCodeRun)")
 
             self.currentUserCodeRun = userCodeRun
             self.presenter.presentRunCodeResult(
@@ -102,7 +99,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
                 )
             )
         }.catch { error in
-            Self.logger.error("CodeQuizFullscreenRunCodeInteractor :: error while running user code \(error)")
+            print("CodeQuizFullscreenRunCodeInteractor :: error while running user code \(error)")
             self.presenter.presentRunCodeResult(response: .init(result: .failure(error)))
             self.currentUserCodeRun.status = nil
             self.presentUserCodeRun()
@@ -127,9 +124,7 @@ final class CodeQuizFullscreenRunCodeInteractor: CodeQuizFullscreenRunCodeIntera
                         seal.fulfill(userCodeRun)
                     }
                 }.catch { error in
-                    Self.logger.error(
-                        "CodeQuizFullscreenRunCodeInteractor :: error while polling user code run \(error)"
-                    )
+                    print("CodeQuizFullscreenRunCodeInteractor :: error while polling user code run \(error)")
                     seal.reject(error)
                 }
             }

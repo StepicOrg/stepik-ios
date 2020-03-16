@@ -42,7 +42,8 @@ final class CourseInfoAssembly: Assembly {
             userAccountService: UserAccountService(),
             adaptiveStorageManager: AdaptiveStorageManager(),
             notificationSuggestionManager: NotificationSuggestionManager(),
-            notificationsRegistrationService: notificationsRegistrationService
+            notificationsRegistrationService: notificationsRegistrationService,
+            spotlightIndexingService: SpotlightIndexingService.shared
         )
         notificationsRegistrationService.delegate = interactor
 

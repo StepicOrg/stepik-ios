@@ -6,8 +6,7 @@ enum BaseQuiz {
         struct Data {
             let step: Step
             let attempt: Attempt
-            let submission: Submission?
-            let cachedReply: Reply?
+            let submission: Submission
             let submissionsCount: Int
             let hasNextStep: Bool
         }

@@ -25,11 +25,6 @@ final class ExploreViewController: BaseExploreViewController {
     private var state: Explore.ViewControllerState
     private lazy var exploreInteractor = self.interactor as? ExploreInteractorProtocol
 
-    private let splitTestingService = SplitTestingService(
-        analyticsService: AnalyticsUserProperties(),
-        storage: UserDefaults.standard
-    )
-
     private var searchResultsModuleInput: SearchResultsModuleInputProtocol?
     private var searchResultsController: UIViewController?
     private lazy var searchBar = ExploreSearchBar()

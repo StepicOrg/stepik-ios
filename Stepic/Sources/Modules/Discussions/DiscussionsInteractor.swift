@@ -1,5 +1,4 @@
 import Foundation
-import Logging
 import PromiseKit
 
 // swiftlint:disable file_length
@@ -18,8 +17,6 @@ protocol DiscussionsInteractorProtocol {
 }
 
 final class DiscussionsInteractor: DiscussionsInteractorProtocol {
-    private static let logger = Logger(label: "com.AlexKarpov.Stepic.DiscussionsInteractor")
-
     private static let discussionsLoadingInterval = 20
     private static let repliesLoadingInterval = 20
 
@@ -87,7 +84,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         self.provider = provider
         self.discussionsSortTypeStorageManager = discussionsSortTypeStorageManager
 
-        Self.logger.info("discussions interactor: did init with presentationContext: \(presentationContext)")
+        print("discussions interactor: did init with presentationContext: \(presentationContext)")
 
         self.reportOpenedEventToAnalytics()
     }
@@ -103,7 +100,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }
 
             strongSelf.fetchSemaphore.wait()
-            Self.logger.info("discussions interactor: start fetching discussions")
+            print("discussions interactor: start fetching discussions")
 
             DispatchQueue.main.async {
                 strongSelf.presenter.presentNavigationItemUpdate(
@@ -112,7 +109,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }
 
             strongSelf.fetchDiscussions(discussionProxyID: strongSelf.discussionProxyID).done { discussionsData in
-                Self.logger.info("discussions interactor: finish fetching discussions")
+                print("discussions interactor: finish fetching discussions")
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentDiscussions(response: .init(result: .success(discussionsData)))
 
@@ -121,7 +118,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                     }
                 }
             }.catch { error in
-                Self.logger.error("discussions interactor: failed fetch discussions, error: \(error)")
+                print("discussions interactor: failed fetch discussions, error: \(error)")
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentDiscussions(response: .init(result: .failure(Error.fetchFailed)))
                 }
@@ -140,10 +137,10 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             strongSelf.fetchSemaphore.wait()
 
             let idsToLoad = strongSelf.getNextDiscussionsIDsToLoad(direction: request.direction)
-            Self.logger.info("discussions interactor: start fetching next discussions ids: \(idsToLoad)")
+            print("discussions interactor: start fetching next discussions ids: \(idsToLoad)")
 
             strongSelf.provider.fetchComments(ids: idsToLoad, stepID: strongSelf.stepID).done { fetchedComments in
-                Self.logger.info("discussions interactor: finish fetching next discussions")
+                print("discussions interactor: finish fetching next discussions")
                 strongSelf.updateDataWithNewComments(fetchedComments)
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextDiscussions(
@@ -154,7 +151,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                     )
                 }
             }.catch { error in
-                Self.logger.error("discussions interactor: failed fetch next discussions, error: \(error)")
+                print("discussions interactor: failed fetch next discussions, error: \(error)")
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextDiscussions(
                         response: .init(result: .failure(Error.fetchFailed), direction: request.direction)
@@ -183,10 +180,10 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             strongSelf.fetchSemaphore.wait()
 
             let idsToLoad = strongSelf.getNextReplyIDsToLoad(discussion: discussion)
-            Self.logger.info("discussions interactor: start fetching next replies ids: \(idsToLoad)")
+            print("discussions interactor: start fetching next replies ids: \(idsToLoad)")
 
             strongSelf.provider.fetchComments(ids: idsToLoad, stepID: strongSelf.stepID).done { fetchedComments in
-                Self.logger.info("discussions interactor: finish fetching next replies")
+                print("discussions interactor: finish fetching next replies")
 
                 strongSelf.updateDataWithNewComments(fetchedComments)
                 strongSelf.discussionsIDsFetchingReplies.remove(discussion.id)
@@ -195,7 +192,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                     strongSelf.presenter.presentNextReplies(response: .init(result: strongSelf.makeDiscussionsData()))
                 }
             }.catch { error in
-                Self.logger.error("discussions interactor: failed fetch next replies, error: \(error)")
+                print("discussions interactor: failed fetch next replies, error: \(error)")
                 strongSelf.discussionsIDsFetchingReplies.remove(discussion.id)
                 DispatchQueue.main.async {
                     strongSelf.presenter.presentNextReplies(response: .init(result: strongSelf.makeDiscussionsData()))
@@ -214,7 +211,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             self.presentWriteComment(commentID: request.commentID)
         case .edit:
             guard let commentID = request.commentID else {
-                return Self.logger.error("discussions interactor: unable to edit comment, id is nil")
+                return print("discussions interactor: unable to edit comment, id is nil")
             }
 
             self.presentEditComment(commentID: commentID)
@@ -222,13 +219,13 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
     }
 
     func doCommentDelete(request: Discussions.CommentDelete.Request) {
-        Self.logger.info("discussions interactor: start deleting comment by id: \(request.commentID)")
+        print("discussions interactor: start deleting comment by id: \(request.commentID)")
         self.presenter.presentWaitingState(response: .init(shouldDismiss: false))
 
         let commentID = request.commentID
 
         self.provider.deleteComment(id: commentID).done {
-            Self.logger.info("discussions interactor: deleted comment with id: \(commentID)")
+            print("discussions interactor: deleted comment with id: \(commentID)")
 
             if let discussionIndex = self.currentDiscussions.firstIndex(where: { $0.id == commentID }) {
                 self.currentDiscussions.remove(at: discussionIndex)
@@ -257,7 +254,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
                 self.presenter.presentCommentDelete(response: .init(result: .success(self.makeDiscussionsData())))
             }.cauterize()
         }.catch { error in
-            Self.logger.error("discussions interactor: failed delete comment by id: \(commentID), error: \(error)")
+            print("discussions interactor: failed delete comment by id: \(commentID), error: \(error)")
             self.presenter.presentCommentDelete(response: .init(result: .failure(error)))
         }
     }
@@ -266,21 +263,17 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     func doCommentLike(request: Discussions.CommentLike.Request) {
         guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
-            return Self.logger.error(
-                "discussions interactor: unable like comment, can't find comment with id: \(request.commentID)"
-            )
+            return print("discussions interactor: unable like comment, can't find comment with id: \(request.commentID)")
         }
 
         if let voteValue = comment.vote.value {
             let voteValueToSet: VoteValue? = voteValue == .epic ? nil : .epic
             let vote = Vote(id: comment.vote.id, value: voteValueToSet)
 
-            Self.logger.info(
-                "discussions interactor: start liking vote from \(voteValue) to \(voteValueToSet ??? "null")"
-            )
+            print("discussions interactor: start liking vote from \(voteValue) to \(voteValueToSet ??? "null")")
 
             self.provider.updateVote(vote).done { vote in
-                Self.logger.info("discussions interactor: finish liking vote")
+                print("discussions interactor: finish liking vote")
 
                 comment.vote = vote
 
@@ -296,15 +289,15 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }.ensure {
                 self.presenter.presentCommentLike(response: .init(result: self.makeDiscussionsData()))
             }.catch { error in
-                Self.logger.error("discussions interactor: failed like vote, error: \(error)")
+                print("discussions interactor: failed like vote, error: \(error)")
             }
         } else {
-            Self.logger.info("discussions interactor: start liking vote to epic value")
+            print("discussions interactor: start liking vote to epic value")
 
             let vote = Vote(id: comment.vote.id, value: .epic)
 
             self.provider.updateVote(vote).done { vote in
-                Self.logger.info("discussions interactor: finish liking vote")
+                print("discussions interactor: finish liking vote")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.liked)
 
                 comment.vote = vote
@@ -312,28 +305,24 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }.ensure {
                 self.presenter.presentCommentLike(response: .init(result: self.makeDiscussionsData()))
             }.catch { error in
-                Self.logger.error("discussions interactor: failed like vote, error: \(error)")
+                print("discussions interactor: failed like vote, error: \(error)")
             }
         }
     }
 
     func doCommentAbuse(request: Discussions.CommentAbuse.Request) {
         guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
-            return Self.logger.error(
-                "discussions interactor: unable abuse comment, can't find comment with id: \(request.commentID)"
-            )
+            return print("discussions interactor: unable abuse comment, can't find comment with id: \(request.commentID)")
         }
 
         if let voteValue = comment.vote.value {
             let voteValueToSet: VoteValue? = voteValue == .abuse ? nil : .abuse
             let vote = Vote(id: comment.vote.id, value: voteValueToSet)
 
-            Self.logger.info(
-                "discussions interactor: start abusing vote from \(voteValue) to \(voteValueToSet ??? "null")"
-            )
+            print("discussions interactor: start abusing vote from \(voteValue) to \(voteValueToSet ??? "nil")")
 
             self.provider.updateVote(vote).done { vote in
-                Self.logger.info("discussions interactor: finish abusing vote")
+                print("discussions interactor: finish abusing vote")
 
                 comment.vote = vote
 
@@ -349,15 +338,15 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }.ensure {
                 self.presenter.presentCommentAbuse(response: .init(result: self.makeDiscussionsData()))
             }.catch { error in
-                Self.logger.error("discussions interactor: failed abuse vote, error: \(error)")
+                print("discussions interactor: failed abuse vote, error: \(error)")
             }
         } else {
-            Self.logger.info("discussions interactor: start abusing vote to abuse value")
+            print("discussions interactor: start abusing vote to abuse value")
 
             let vote = Vote(id: comment.vote.id, value: .abuse)
 
             self.provider.updateVote(vote).done { vote in
-                Self.logger.info("discussions interactor: finish abusing vote")
+                print("discussions interactor: finish abusing vote")
                 AnalyticsReporter.reportEvent(AnalyticsEvents.Discussion.abused)
 
                 comment.vote = vote
@@ -365,7 +354,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
             }.ensure {
                 self.presenter.presentCommentAbuse(response: .init(result: self.makeDiscussionsData()))
             }.catch { error in
-                Self.logger.error("discussions interactor: failed abuse vote, error: \(error)")
+                print("discussions interactor: failed abuse vote, error: \(error)")
             }
         }
     }
@@ -393,15 +382,11 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
 
     func doSolutionPresentation(request: Discussions.SolutionPresentation.Request) {
         guard let comment = self.getAllComments().first(where: { $0.id == request.commentID }) else {
-            return Self.logger.error(
-                "discussions interactor: unable present solution, can't find comment with id: \(request.commentID)"
-            )
+            return print("discussions interactor: unable present solution, can't find comment with id: \(request.commentID)")
         }
 
         guard let submission = comment.submission else {
-            return Self.logger.error(
-                "discussions interactor: unable present solution, no submission: \(request.commentID)"
-            )
+            return print("discussions interactor: unable present solution, no submission: \(request.commentID)")
         }
 
         self.presenter.presentSolution(
@@ -685,7 +670,7 @@ final class DiscussionsInteractor: DiscussionsInteractorProtocol {
         }()
 
         guard let unwrappedComment = comment else {
-            return Self.logger.error("discussions interactor: unable edit comment, can't find it by id: \(commentID)")
+            return print("discussions interactor: unable edit comment, can't find it by id: \(commentID)")
         }
 
         self.presenter.presentWriteComment(

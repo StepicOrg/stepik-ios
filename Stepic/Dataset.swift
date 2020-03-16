@@ -1,14 +1,14 @@
-//
-//  Dataset.swift
-//  Stepic
-//
-//  Created by Alexander Karpov on 20.01.16.
-//  Copyright © 2016 Alex Karpov. All rights reserved.
-//
-
 import SwiftyJSON
-import UIKit
+import Foundation
 
-protocol Dataset {
-    init(json: JSON)
+class Dataset: NSObject, NSCoding {
+    required init(json: JSON) {
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init()
+    }
+
+    func encode(with coder: NSCoder) {}
 }

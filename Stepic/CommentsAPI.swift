@@ -44,14 +44,14 @@ final class CommentsAPI: APIEndpoint {
 
                 let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map {
                     isBlockNameProvided
-                        ? Attempt(json: $0, stepName: blockName ?? "")
+                        ? Attempt(json: $0, stepBlockName: blockName ?? "")
                         : Attempt(json: $0)
                 }
 
                 var submissionByID = [Submission.IdType: Submission]()
                 json[Comment.JSONKey.submissions.rawValue].arrayValue.forEach {
                     let submission = isBlockNameProvided
-                        ? Submission(json: $0, stepName: blockName ?? "")
+                        ? Submission(json: $0, stepBlockName: blockName ?? "")
                         : Submission(json: $0)
 
                     if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
@@ -95,14 +95,14 @@ final class CommentsAPI: APIEndpoint {
 
                 let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map {
                     isBlockNameProvided
-                        ? Attempt(json: $0, stepName: blockName ?? "")
+                        ? Attempt(json: $0, stepBlockName: blockName ?? "")
                         : Attempt(json: $0)
                 }
 
                 var submissionByID = [Submission.IdType: Submission]()
                 json[Comment.JSONKey.submissions.rawValue].arrayValue.forEach {
                     let submission = isBlockNameProvided
-                        ? Submission(json: $0, stepName: blockName ?? "")
+                        ? Submission(json: $0, stepBlockName: blockName ?? "")
                         : Submission(json: $0)
 
                     if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {
@@ -141,14 +141,14 @@ final class CommentsAPI: APIEndpoint {
 
                 let attempts = json[Comment.JSONKey.attempts.rawValue].arrayValue.map {
                     isBlockNameProvided
-                        ? Attempt(json: $0, stepName: blockName ?? "")
+                        ? Attempt(json: $0, stepBlockName: blockName ?? "")
                         : Attempt(json: $0)
                 }
 
                 var submissionByID = [Submission.IdType: Submission]()
                 json[Comment.JSONKey.submissions.rawValue].arrayValue.forEach {
                     let submission = isBlockNameProvided
-                        ? Submission(json: $0, stepName: blockName ?? "")
+                        ? Submission(json: $0, stepBlockName: blockName ?? "")
                         : Submission(json: $0)
 
                     if let attempt = attempts.first(where: { $0.id == submission.attemptID }) {

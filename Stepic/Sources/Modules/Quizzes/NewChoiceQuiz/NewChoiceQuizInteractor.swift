@@ -95,8 +95,8 @@ extension NewChoiceQuizInteractor: QuizInputProtocol {
     }
 
     func update(feedback: SubmissionFeedback?) {
-        if let feedback = feedback, case .options(let choices) = feedback {
-            self.currentChoicesFeedback = choices
+        if let choiceFeedback = feedback as? ChoiceSubmissionFeedback {
+            self.currentChoicesFeedback = choiceFeedback.options
         }
     }
 

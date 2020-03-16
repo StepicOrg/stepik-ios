@@ -37,7 +37,10 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
     private let imageDownloadingService: DownloadingServiceProtocol
     private let imageFileManager: ImageStoredFileManagerProtocol
 
+    private let attemptsRepository: AttemptsRepositoryProtocol
+    private let submissionsRepository: SubmissionsRepositoryProtocol
     private let stepsNetworkService: StepsNetworkServiceProtocol
+    private let userAccountService: UserAccountServiceProtocol
     private let storageUsageService: StorageUsageServiceProtocol
 
     // Section -> Unit -> [Videos|Images]
@@ -60,15 +63,21 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         videoFileManager: VideoStoredFileManagerProtocol,
         imageDownloadingService: DownloadingServiceProtocol,
         imageFileManager: ImageStoredFileManagerProtocol,
+        attemptsRepository: AttemptsRepositoryProtocol,
+        submissionsRepository: SubmissionsRepositoryProtocol,
         stepsNetworkService: StepsNetworkServiceProtocol,
-        storageUsageService: StorageUsageServiceProtocol
+        storageUsageService: StorageUsageServiceProtocol,
+        userAccountService: UserAccountServiceProtocol
     ) {
         self.videoDownloadingService = videoDownloadingService
         self.videoFileManager = videoFileManager
         self.imageDownloadingService = imageDownloadingService
         self.imageFileManager = imageFileManager
+        self.attemptsRepository = attemptsRepository
+        self.submissionsRepository = submissionsRepository
         self.stepsNetworkService = stepsNetworkService
         self.storageUsageService = storageUsageService
+        self.userAccountService = userAccountService
 
         self.subscribeOnDownloadEvents()
     }
@@ -727,11 +736,41 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         firstly {
             self.stepsNetworkService.fetch(ids: lesson.stepsArray)
         }.then { steps -> Promise<[Step]> in
-            DispatchQueue.main.async {
-                lesson.steps = steps
-                CoreDataHelper.shared.save()
-            }
+            lesson.steps = steps
+            CoreDataHelper.shared.save()
+
             return .value(steps)
+        }.then { steps -> Promise<[Step]> in
+            when(
+                fulfilled: steps.map { self.fetchAttemptForStep($0) }
+            ).map { steps }
+        }
+    }
+
+    private func fetchAttemptForStep(_ step: Step) -> Promise<Void> {
+        guard step.block.managedName != nil,
+              step.block.name != Block.BlockType.text.rawValue,
+              step.block.name != Block.BlockType.video.rawValue else {
+            return .value(())
+        }
+
+        guard let userID = self.userAccountService.currentUser?.id else {
+            return Promise(error: Error.unknownUser)
+        }
+
+        return firstly { () -> Promise<[Attempt]> in
+            self.attemptsRepository
+                .fetch(stepID: step.id, userID: userID, blockName: step.block.name)
+                .map { $0.0 }
+        }.then { attempts -> Promise<Attempt> in
+            if let attempt = attempts.first {
+                return .value(attempt)
+            }
+            return self.attemptsRepository.create(stepID: step.id, blockName: step.block.name)
+        }.then { attempt in
+            self.submissionsRepository
+                .fetchSubmissionsForAttempt(attemptID: attempt.id, blockName: step.block.name, dataSourceType: .remote)
+                .asVoid()
         }
     }
 
@@ -744,5 +783,6 @@ final class SyllabusDownloadsService: SyllabusDownloadsServiceProtocol {
         case downloadSectionFailed
         case cancelUnitFailed
         case cancelSectionFailed
+        case unknownUser
     }
 }

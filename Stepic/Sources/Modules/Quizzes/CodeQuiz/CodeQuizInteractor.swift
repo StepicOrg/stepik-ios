@@ -23,11 +23,15 @@ final class CodeQuizInteractor: CodeQuizInteractorProtocol {
 
     private var currentCode: String? {
         didSet {
-            self.updateUserCodeTemplate()
+            if self.isCurrentUserCodeTemplateUpdateEnabled {
+                self.updateUserCodeTemplate()
+            }
         }
     }
 
     private var isQuizTitleVisible = true
+
+    var isCurrentUserCodeTemplateUpdateEnabled: Bool = true
 
     init(
         presenter: CodeQuizPresenterProtocol,

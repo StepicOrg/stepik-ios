@@ -1,5 +1,4 @@
 import Foundation
-import Logging
 import PromiseKit
 
 protocol CodeQuizFullscreenInteractorProtocol {
@@ -10,8 +9,6 @@ protocol CodeQuizFullscreenInteractorProtocol {
 }
 
 final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
-    private static let logger = Logger(label: "com.AlexKarpov.Stepic.CodeQuizFullscreenInteractor")
-
     weak var moduleOutput: CodeQuizFullscreenOutputProtocol?
 
     private let presenter: CodeQuizFullscreenPresenterProtocol
@@ -105,7 +102,7 @@ final class CodeQuizFullscreenInteractor: CodeQuizFullscreenInteractorProtocol {
                 )
             )
         }.catch { error in
-            Self.logger.error("CodeQuizFullscreenInteractor :: failed fetch code template \(error)")
+            print("CodeQuizFullscreenInteractor :: failed fetch code template \(error)")
         }
     }
 }

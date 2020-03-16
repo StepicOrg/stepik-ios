@@ -1,5 +1,5 @@
 # This is the minimum version number required.
-fastlane_version "2.141.0"
+fastlane_version "2.143.0"
 
 default_platform :ios
 
@@ -84,6 +84,8 @@ platform :ios do
 
         match(
             type: type,
+            storage_mode: "google_cloud",
+            google_cloud_bucket_name: "stepik-ios-cert",
             force_for_new_devices: true,
             readonly: read_only,
             app_identifier: identifiers
@@ -160,19 +162,22 @@ platform :ios do
         )
     end
 
-    desc "Submit a new Beta Build to Crashlytics."
+    desc "Submit a new Beta Build to Firebase."
     desc "This will also make sure the profile is up to date."
     desc "Options: scheme"
     lane :beta do |options|
         scheme = options[:scheme]
+        firebase_app_id = ENV["FIREBASE_APP_ID"]
 
         UI.user_error!("Wrong scheme parameter") if scheme.nil?
+        UI.user_error!("Firebase App ID is required") if firebase_app_id.nil?
 
         clear_derived_data
         cocoapods(repo_update: true)
 
         unlock_keychain(password: keychain_password)
 
+        sync_device_info()
         match_adhoc(scheme: scheme)
 
         # Disable automatic code signing -> build -> enable again
@@ -201,8 +206,8 @@ platform :ios do
             )
         end
 
-        crashlytics(
-            notifications: true,
+        firebase_app_distribution(
+            app: firebase_app_id,
             groups: "all-ios-testers"
         )
 
@@ -261,6 +266,11 @@ platform :ios do
             scheme: options[:scheme],
             read_only: options.key?(:read_only) ? options[:read_only] : true
         )
+    end
+
+    desc "Update iOS UDID's on the Developer Portal."
+    lane :sync_device_info do
+        register_devices(devices_file: "fastlane/Devicefile")
     end
 
     desc "Increment build number in project"
