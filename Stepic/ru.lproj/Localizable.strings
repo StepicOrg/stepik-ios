@@ -934,3 +934,20 @@ EditStepPlaceholder = "Текст...";
 EditStepMessage = "Вы можете редактировать только текст шага и только в виде HTML кода. Для доступа к полноценному редактору шагов, пожалуйста, воспользуйтесь веб версией Stepik.";
 EditStepRemoteUpdateSuccessfulTitle = "Обновлено";
 EditStepRemoteUpdateUnsuccessfulTitle = "Не удалось обновить";
+
+/* Accessibility */
+StepVideoPreviewAccessibilityLabel = "Просмотр видео";
+StepVideoPreviewAccessibilityHint = "Коснитесь дважды для начала воспроизведения видео";
+
+VideoPlayerBackButtonAccessibilityLabel = "Закрыть видео";
+VideoPlayerBackButtonAccessibilityHint = "Коснитесь дважды, чтобы остановить воспроизведение и закрыть видео";
+VideoPlayerPlayButtonAccessibilityLabel = "Начать или приостановить воспроизведение видео";
+VideoPlayerPlayButtonAccessibilityHint = "Коснитесь дважды, чтобы остановить или начать воспроизведение видео";
+VideoPlayerRewindButtonAccessibilityLabel = "Перемотать на десять секунд назад";
+VideoPlayerRewindButtonAccessibilityHint = "Коснитесь дважды, чтобы перемотать на десять секунд назад";
+VideoPlayerFastForwardButtonAccessibilityLabel = "Перемотать на десять секунд вперед";
+VideoPlayerFastForwardButtonAccessibilityHint = "Коснитесь дважды, чтобы перемотать на десять секунд вперед";
+VideoPlayerPlaybackSpeedButtonAccessibilityLabel = "Скорость воспроизведения";
+VideoPlayerPlaybackSpeedButtonAccessibilityHint = "Коснитесь дважды, чтобы выбрать скорость воспроизведения";
+VideoPlayerPlaybackQualityButtonAccessibilityLabel = "Качество воспроизведения";
+VideoPlayerPlaybackQualityButtonAccessibilityHint = "Коснитесь дважды, чтобы выбрать качество воспроизведения";
