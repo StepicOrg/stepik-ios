@@ -56,6 +56,11 @@ final class StepVideoPreviewView: UIControl {
         self.appearance = appearance
         super.init(frame: frame)
 
+        self.isAccessibilityElement = true
+        self.accessibilityTraits = .startsMediaSession
+        self.accessibilityLabel = NSLocalizedString("StepVideoPreviewAccessibilityLabel", comment: "")
+        self.accessibilityHint = NSLocalizedString("StepVideoPreviewAccessibilityHint", comment: "")
+
         self.setupView()
         self.addSubviews()
         self.makeConstraints()
