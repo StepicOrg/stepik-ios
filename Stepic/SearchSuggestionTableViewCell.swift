@@ -18,7 +18,7 @@ final class SearchSuggestionTableViewCell: UITableViewCell {
         let regular = UIFont.systemFont(ofSize: fontSize)
         let attributedSuggestion = NSMutableAttributedString(string: suggestion, attributes: [NSAttributedString.Key.font: regular, NSAttributedString.Key.foregroundColor: UIColor.gray])
         if let queryLocation = suggestion.indexOf(query.lowercased()) {
-            attributedSuggestion.addAttributes([NSAttributedString.Key.font: bold, NSAttributedString.Key.foregroundColor: UIColor.mainText], range: NSRange(location: queryLocation, length: query.count))
+            attributedSuggestion.addAttributes([NSAttributedString.Key.font: bold, NSAttributedString.Key.foregroundColor: UIColor.stepikPrimaryText], range: NSRange(location: queryLocation, length: query.count))
         }
         suggestionLabel.attributedText = attributedSuggestion
     }

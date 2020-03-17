@@ -5,7 +5,7 @@ extension DownloadsCellView {
         let coverViewSize = CGSize(width: 80, height: 80)
 
         let titleFont = UIFont.systemFont(ofSize: 16, weight: .regular)
-        let titleTextColor = UIColor.mainText
+        let titleTextColor = UIColor.stepikPrimaryText
         let titleMaxLinesCount = 3
         let titleInsets = LayoutInsets(left: 8)
 

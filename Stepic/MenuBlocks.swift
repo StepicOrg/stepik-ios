@@ -14,7 +14,7 @@ class MenuBlock {
     var title: String
     var onAppearance: (() -> Void)?
     var isSelectable = false
-    var titleColor = UIColor.mainText
+    var titleColor = UIColor.stepikPrimaryText
 
     weak var cell: UITableViewCell?
 

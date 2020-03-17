@@ -3,8 +3,6 @@ import UIKit
 extension UIColor {
     static let mainLight = UIColor(hex6: 0xf6f6f6)
 
-    static var mainText: UIColor { .stepikAccent }
-
     static let peerReviewYellow = UIColor(hex6: 0xFFFAE9)
 
     static var stepikGreen: UIColor {
@@ -155,6 +153,9 @@ extension UIColor {
     static var stepikLoadingIndicator: UIColor { .stepikAccent }
 
     // MARK: - Text Colors -
+
+    /// The color for texts that contain primary content.
+    static var stepikPrimaryText: UIColor { .stepikAccent }
 
     /// The color for placeholder text in controls or text views.
     static var stepikPlaceholderText: UIColor { .stepikAccentAlpha40 }

@@ -6,7 +6,7 @@ extension CourseWidgetButton {
 
         let titleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
 
-        var textColor = UIColor.mainText
+        var textColor = UIColor.stepikPrimaryText
         var backgroundColor = UIColor.stepikAccentAlpha06
 
         var callToActionTextColor = UIColor.stepikGreen

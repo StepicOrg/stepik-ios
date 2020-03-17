@@ -65,11 +65,11 @@ final class NotificationsTableViewCell: UITableViewCell {
         paragraphStyle.lineSpacing = 2.2
 
         let all = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.light))
-                       .foregroundColor(UIColor.mainText)
+                       .foregroundColor(UIColor.stepikPrimaryText)
                        .paragraphStyle(paragraphStyle)
-        let link = Style("a").font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium)).foregroundColor(UIColor.mainText)
+        let link = Style("a").font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium)).foregroundColor(UIColor.stepikPrimaryText)
         let activeLink = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium))
-                        .foregroundColor(UIColor.mainText)
+                        .foregroundColor(UIColor.stepikPrimaryText)
                         .backgroundColor(UIColor(hex6: 0xF6F6F6))
 
         let styledText = notification.text.style(tags: link).styleAll(all)

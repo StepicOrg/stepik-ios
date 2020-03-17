@@ -15,7 +15,7 @@ extension TagsView {
 
         let tagBackgroundColor = UIColor.stepikAccentAlpha06
         let tagFont = UIFont.systemFont(ofSize: 16, weight: .light)
-        let tagTextColor = UIColor.mainText
+        let tagTextColor = UIColor.stepikPrimaryText
         let tagTitleInsets = UIEdgeInsets(top: 11, left: 20, bottom: 11, right: 20)
         let tagCornerRadius: CGFloat = 20
     }

@@ -56,11 +56,6 @@ final class ApplicationInfo {
                 static let redirect = "password.redirect_uri"
             }
         }
-        enum Colors {
-            static let mainText = "colors.mainText"
-            static let mainDark = "colors.mainDark"
-            static let mainGreen = "colors.mainGreen"
-        }
         enum Modules {
             static let tabs = "modules.tabs"
         }

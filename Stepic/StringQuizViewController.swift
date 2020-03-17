@@ -40,7 +40,7 @@ final class StringQuizViewController: QuizViewController {
 
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.snp.makeConstraints { $0.height.equalTo(textViewHeight) }
-        textView.textColor = UIColor.mainText
+        textView.textColor = UIColor.stepikPrimaryText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(StringQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)

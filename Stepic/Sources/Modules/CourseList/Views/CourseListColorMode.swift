@@ -40,7 +40,7 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                textColor: UIColor.mainText,
+                textColor: UIColor.stepikPrimaryText,
                 backgroundColor: UIColor.stepikAccentAlpha06,
                 callToActionTextColor: UIColor.stepikGreen,
                 callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
