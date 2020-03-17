@@ -19,7 +19,7 @@ extension DiscussionsSkeletonView {
         let textLabelHeight: CGFloat = 14.0
 
         let separatorHeight: CGFloat = 0.5
-        let separatorColor = UIColor(hex: 0xe7e7e7)
+        let separatorColor = UIColor(hex6: 0xe7e7e7)
     }
 }
 

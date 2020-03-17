@@ -31,7 +31,7 @@ final class OnboardingViewController: UIViewController {
         (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
     }
 
-    private var backgroundGradient = CAGradientLayer(colors: [UIColor(hex: 0x3a3947), UIColor(hex: 0x5d6780)], rotationAngle: -50.0)
+    private var backgroundGradient = CAGradientLayer(colors: [UIColor(hex6: 0x3a3947), UIColor(hex6: 0x5d6780)], rotationAngle: -50.0)
 
     private var titles = (1...4).map { NSLocalizedString("OnboardingTitle\($0)", comment: "") }
     private var descriptions = (1...4).map { NSLocalizedString("OnboardingDescription\($0)", comment: "") }

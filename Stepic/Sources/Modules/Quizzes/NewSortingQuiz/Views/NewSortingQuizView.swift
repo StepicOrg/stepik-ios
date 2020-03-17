@@ -18,10 +18,10 @@ extension NewSortingQuizView {
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
-        let titleColor = UIColor.mainDark
+        let titleColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
-        let loadingIndicatorColor = UIColor.mainDark
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
     }
 
     enum Animation {

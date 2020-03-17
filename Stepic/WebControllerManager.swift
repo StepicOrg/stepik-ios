@@ -146,15 +146,15 @@ enum BackButtonStyle {
         switch self {
         case .close:
             let item = UIBarButtonItem(image: Images.crossBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
-            item.tintColor = UIColor.mainDark
+            item.tintColor = UIColor.stepikAccent
             return item
         case .back:
             let item = UIBarButtonItem(image: Images.backBarButtonItemImage, style: .plain, target: nil, action: #selector(WebControllerManager.defaultSelector))
-            item.tintColor = UIColor.mainDark
+            item.tintColor = UIColor.stepikAccent
             return item
         case .done:
             let item = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(WebControllerManager.defaultSelector))
-            item.tintColor = UIColor.mainDark
+            item.tintColor = UIColor.stepikAccent
             return item
         }
     }

@@ -87,13 +87,13 @@ final class QuizElementView: UIView {
         var borderColor: UIColor {
             switch self {
             case .default:
-                return UIColor(hex: 0xCCCCCC)
+                return UIColor(hex6: 0xCCCCCC)
             case .correct:
-                return UIColor(hex: 0x66CC66).withAlphaComponent(0.5)
+                return UIColor(hex6: 0x66CC66).withAlphaComponent(0.5)
             case .wrong:
-                return UIColor(hex: 0xFF7965).withAlphaComponent(0.5)
+                return UIColor(hex6: 0xFF7965).withAlphaComponent(0.5)
             case .selected:
-                return UIColor(hex: 0x6C7BDF).withAlphaComponent(0.5)
+                return UIColor(hex6: 0x6C7BDF).withAlphaComponent(0.5)
             }
         }
 
@@ -102,11 +102,11 @@ final class QuizElementView: UIView {
             case .default:
                 return UIColor.white
             case .correct:
-                return UIColor(hex: 0xECF8EC)
+                return UIColor(hex6: 0xECF8EC)
             case .wrong:
-                return UIColor(hex: 0xFFEFEC)
+                return UIColor(hex6: 0xFFEFEC)
             case .selected:
-                return UIColor(hex: 0xEDEFFB)
+                return UIColor(hex6: 0xEDEFFB)
             }
         }
     }

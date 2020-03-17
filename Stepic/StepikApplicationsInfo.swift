@@ -81,13 +81,6 @@ struct StepikApplicationsInfo {
         }
     }
 
-    // Section: Colors
-    struct Colors {
-        static var mainGreen = UIColor(hex: StepikApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainGreen) as? Int ?? 0x66cc66)
-        static var mainText = UIColor(hex: StepikApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainText) as? Int ?? 0x000000)
-        static var mainDark = UIColor(hex: StepikApplicationsInfo.stepikConfigDic?.get(for: Root.Colors.mainDark) as? Int ?? 0x000000)
-    }
-
     // Section: Modules
     struct Modules {
         static let tabs = StepikApplicationsInfo.stepikConfigDic?.get(for: Root.Modules.tabs) as? [String]

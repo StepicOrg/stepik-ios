@@ -84,7 +84,7 @@ final class CongratulationViewController: UIViewController {
     }
 
     private func colorize() {
-        continueButton.tintColor = UIColor.mainDark
-        shareButton.tintColor = UIColor.mainDark
+        continueButton.tintColor = UIColor.stepikAccent
+        shareButton.tintColor = UIColor.stepikAccent
     }
 }

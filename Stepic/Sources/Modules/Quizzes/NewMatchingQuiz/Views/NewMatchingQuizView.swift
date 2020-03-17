@@ -24,10 +24,10 @@ extension NewMatchingQuizView {
         let defaultSortingTitleInsets = LayoutInsets(top: 12, left: 16, bottom: 10, right: 64)
         let firstSortingTitleInsets = LayoutInsets(top: 0, left: 16, bottom: 10, right: 64)
 
-        let titleColor = UIColor.mainDark
+        let titleColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
-        let loadingIndicatorColor = UIColor.mainDark
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
     }
 
     enum Animation {

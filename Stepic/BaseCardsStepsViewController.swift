@@ -47,7 +47,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
         shadowViewHeight.constant = 0.5
 
         statusBarPad = UIView()
-        statusBarPad?.backgroundColor = UIColor.mainLight
+        statusBarPad?.backgroundColor = UIColor.stepikBackground
         if let padView = statusBarPad {
             view.insertSubview(padView, at: 0)
         }
@@ -174,7 +174,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
 
     override func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {
         let text = self.expLabel.text ?? ""
-        let color = self.expLabel.textColor ?? UIColor.mainDark
+        let color = self.expLabel.textColor ?? UIColor.stepikAccent
 
         func transitionToText(_ text: String, color: UIColor, duration: Double, completionBlock: (() -> Void)? = nil) {
             UIView.transition(with: self.expLabel, duration: duration, options: .transitionCrossDissolve, animations: {
@@ -187,7 +187,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
             })
         }
 
-        transitionToText(String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), color: UIColor(hex: 0x008040), duration: 0.4, completionBlock: { () -> Void in
+        transitionToText(String(format: NSLocalizedString("RatingCongratulationText", comment: ""), "\(rating)"), color: UIColor(hex6: 0x008040), duration: 0.4, completionBlock: { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0, execute: {
                 transitionToText(text, color: color, duration: 0.4, completionBlock: { completion?() })
             })

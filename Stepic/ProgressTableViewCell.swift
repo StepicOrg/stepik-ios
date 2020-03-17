@@ -27,7 +27,7 @@ final class ProgressTableViewCell: UITableViewCell {
     }
 
     private func colorize() {
-        bracketLabel.textColor = UIColor.mainDark
+        bracketLabel.textColor = UIColor.stepikAccent
     }
 
     func updateInfo(expCount: Int, begin: Date, end: Date, isRecord: Bool = false) {

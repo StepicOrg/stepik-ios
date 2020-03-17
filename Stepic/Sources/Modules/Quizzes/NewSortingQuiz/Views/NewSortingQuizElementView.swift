@@ -17,14 +17,14 @@ extension NewSortingQuizElementView {
         var containerInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
-        let shadowColor = UIColor(hex: 0xEAECF0)
+        let shadowColor = UIColor(hex6: 0xEAECF0)
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
 
         let navigationButtonSize = CGSize(width: 24, height: 24)
         let navigationButtonImageSize = CGSize(width: 20, height: 20)
-        let navigationButtonTintColorActive = UIColor.mainDark
-        let navigationButtonTintColorInactive = UIColor(hex: 0xCCCCCC)
+        let navigationButtonTintColorActive = UIColor.stepikAccent
+        let navigationButtonTintColorInactive = UIColor(hex6: 0xCCCCCC)
         let navigationButtonVerticalSpacing: CGFloat = 16
         let navigationButtonHorizontalSpacing: CGFloat = 8
     }

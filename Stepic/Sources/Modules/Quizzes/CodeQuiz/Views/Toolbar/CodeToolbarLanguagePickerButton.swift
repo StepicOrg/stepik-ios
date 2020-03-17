@@ -6,7 +6,7 @@ extension CodeToolbarLanguagePickerButton {
         let iconSize = CGSize(width: 16, height: 16)
         let horizontalSpacing: CGFloat = 8
 
-        let mainColor = UIColor.mainDark
+        let mainColor = UIColor.stepikAccent
         let textFont = UIFont.systemFont(ofSize: 16)
     }
 

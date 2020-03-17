@@ -11,17 +11,17 @@ extension CourseInfoTabReviewsCellView {
 
         let dateLabelInsets = UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16)
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.mainDark
+        let dateLabelTextColor = UIColor.stepikAccent
 
-        let nameLabelTextColor = UIColor.mainDark
+        let nameLabelTextColor = UIColor.stepikAccent
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         let nameLabelInsets = UIEdgeInsets(top: 8, left: 16, bottom: 0, right: 20)
 
-        let textLabelTextColor = UIColor.mainDark
+        let textLabelTextColor = UIColor.stepikAccent
         let textLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let textLabelInsets = UIEdgeInsets(top: 8, left: 0, bottom: 20, right: 20)
 
-        let clearStarsColor = UIColor.mainDark
+        let clearStarsColor = UIColor.stepikAccent
     }
 }
 

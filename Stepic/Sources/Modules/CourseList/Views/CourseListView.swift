@@ -8,7 +8,7 @@ extension CourseListView {
         let layoutItemHeight: CGFloat = 140.0
 
         let lightModeBackgroundColor = UIColor.white
-        let darkModeBackgroundColor = UIColor(hex: 0x535366)
+        let darkModeBackgroundColor = UIColor.stepikAccent
 
         let horizontalLayoutNextPageWidth: CGFloat = 12.0
     }

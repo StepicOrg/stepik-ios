@@ -11,16 +11,16 @@ extension NewStringQuizView {
         let insets = LayoutInsets(left: 16, right: 16)
 
         let textFieldPlaceholderFont = UIFont.systemFont(ofSize: 16)
-        let textFieldPlaceholderColor = UIColor.mainDark.withAlphaComponent(0.35)
-        let textFieldTextColor = UIColor.mainDark
+        let textFieldPlaceholderColor = UIColor.stepikPlaceholderText
+        let textFieldTextColor = UIColor.stepikAccent
         let textFieldHeight: CGFloat = 48
 
-        let titleColor = UIColor.mainDark
+        let titleColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let textFieldBorderCornerRadius: CGFloat = 6
         let textFieldBorderWidth: CGFloat = 1
-        let textFieldBorderColor = UIColor(hex: 0xCCCCCC)
+        let textFieldBorderColor = UIColor(hex6: 0xCCCCCC)
 
         let statusMarkInsets = LayoutInsets(right: 16)
         let statusMarkSize = CGSize(width: 20, height: 20)

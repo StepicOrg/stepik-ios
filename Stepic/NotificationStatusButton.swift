@@ -49,7 +49,7 @@ final class NotificationStatusButton: UIButton {
     func update(with newStatus: Status) {
         switch newStatus {
         case .unread:
-            self.setImage(#imageLiteral(resourceName: "notifications-letter-sign"), for: .normal)
+            self.setImage(UIImage(named: "notifications-letter-sign"), for: .normal)
             // read -> unread: add mark
             let markView = unreadMarkView
             markView.alpha = 0.0
@@ -60,7 +60,7 @@ final class NotificationStatusButton: UIButton {
                 self.unreadMark?.alpha = 1.0
             })
         case .read:
-            self.setImage(#imageLiteral(resourceName: "notifications-check-sign"), for: .normal)
+            self.setImage(UIImage(named: "notifications-check-sign"), for: .normal)
             self.isEnabled = false
             if status == .unread {
                 // unread -> read: hide mark

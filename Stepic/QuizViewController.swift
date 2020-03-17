@@ -59,20 +59,20 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     private var activityView: UIView?
 
-    func initActivityView(color: UIColor = .mainDark) -> UIView {
-        let v = UIView()
-        let ai = UIActivityIndicatorView()
-        ai.style = UIActivityIndicatorView.Style.whiteLarge
-        ai.snp.makeConstraints { $0.width.height.equalTo(50) }
-        ai.color = color
-        v.backgroundColor = UIColor.white
-        v.addSubview(ai)
-        ai.snp.makeConstraints { $0.center.equalTo(v) }
-        ai.startAnimating()
-        self.view.insertSubview(v, aboveSubview: self.view)
-        v.snp.makeConstraints { $0.edges.equalTo(self.view) }
-        v.isHidden = false
-        return v
+    func initActivityView(color: UIColor = .stepikLoadingIndicator) -> UIView {
+        let containerView = UIView()
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.style = UIActivityIndicatorView.Style.whiteLarge
+        activityIndicatorView.snp.makeConstraints { $0.width.height.equalTo(50) }
+        activityIndicatorView.color = color
+        containerView.backgroundColor = UIColor.white
+        containerView.addSubview(activityIndicatorView)
+        activityIndicatorView.snp.makeConstraints { $0.center.equalTo(containerView) }
+        activityIndicatorView.startAnimating()
+        self.view.insertSubview(containerView, aboveSubview: self.view)
+        containerView.snp.makeConstraints { $0.edges.equalTo(self.view) }
+        containerView.isHidden = false
+        return containerView
     }
 
     private var doesPresentActivityIndicatorView: Bool = false {
@@ -142,7 +142,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         self.hideHintView()
 
         self.peerReviewButton.setTitle(peerReviewText, for: .normal)
-        self.peerReviewButton.backgroundColor = UIColor.peerReviewYellow
+        self.peerReviewButton.backgroundColor = .stepikYellow
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
@@ -206,7 +206,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         switch status {
         case .correct:
             statusViewHeight.constant = 48
-            view.backgroundColor = UIColor.correctQuizBackground
+            view.backgroundColor = UIColor.stepikLightGreen
             statusImageView.image = Images.correctQuizImage
             statusLabel.text = correctTitle
             setStatusElements(visible: true)
@@ -214,7 +214,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             statusViewHeight.constant = 48
             peerReviewHeight.constant = 0
             peerReviewButton.isHidden = true
-            view.backgroundColor = UIColor.wrongQuizBackground
+            view.backgroundColor = UIColor.stepikLightRed
             statusImageView.image = Images.wrongQuizImage
             statusLabel.text = wrongTitle
             setStatusElements(visible: true)

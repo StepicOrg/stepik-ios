@@ -101,7 +101,7 @@ final class HTMLProcessor {
             .inject(script: .metaViewport)
             .inject(script: .kotlinRunnableSamples)
             .inject(script: .highlightJS)
-            .inject(script: .textColor(color: UIColor.mainText))
+            .inject(script: .textColor(color: UIColor.stepikPrimaryText))
     }
 
     func inject(script: SupportedScripts, inTail: Bool = false) -> HTMLProcessor {

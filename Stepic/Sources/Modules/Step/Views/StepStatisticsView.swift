@@ -6,10 +6,10 @@ extension StepStatisticsView {
         let insets = LayoutInsets(top: 8, left: 16, bottom: 8, right: 16)
         let labelsSpacing: CGFloat = 8
 
-        let separatorColor = UIColor(hex: 0xEAECF0)
+        let separatorColor = UIColor(hex6: 0xEAECF0)
         let separatorHeight: CGFloat = 1
 
-        let textColor = UIColor.mainDark
+        let textColor = UIColor.stepikAccent
         let textFont = UIFont.systemFont(ofSize: 14)
         let textFontDetail = UIFont.systemFont(ofSize: 14, weight: .bold)
     }

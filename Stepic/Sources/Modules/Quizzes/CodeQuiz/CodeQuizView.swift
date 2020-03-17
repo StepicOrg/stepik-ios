@@ -10,7 +10,7 @@ protocol CodeQuizViewDelegate: AnyObject {
 
 extension CodeQuizView {
     struct Appearance {
-        let titleColor = UIColor.mainDark
+        let titleColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let insets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)

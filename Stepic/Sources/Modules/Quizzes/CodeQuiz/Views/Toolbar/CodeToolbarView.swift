@@ -8,7 +8,7 @@ extension CodeToolbarView {
         let fullscreenButtonSize = CGSize(width: 20, height: 20)
         let horizontalSpacing: CGFloat = 16
 
-        let mainColor = UIColor.mainDark
+        let mainColor = UIColor.stepikAccent
     }
 }
 

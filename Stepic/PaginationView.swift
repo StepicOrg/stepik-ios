@@ -11,7 +11,7 @@ import UIKit
 
 extension PaginationView {
     struct Appearance {
-        let refreshButtonColor = UIColor.mainDark
+        let refreshButtonColor = UIColor.stepikAccent
         let refreshButtonSize = CGSize(width: 44, height: 44)
         let refreshButtonImageSize = CGSize(width: 22, height: 22)
         let refreshButtonImageInsets = UIEdgeInsets(top: 0, left: 11, bottom: 0, right: 0)

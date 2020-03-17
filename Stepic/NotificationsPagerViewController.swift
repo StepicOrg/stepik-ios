@@ -52,11 +52,11 @@ final class NotificationsPagerViewController: PagerController, ControllerWithSte
         self.tabHeight = 44.0
         self.indicatorHeight = 1.5
         self.centerCurrentTab = true
-        self.indicatorColor = UIColor.mainDark
-        self.selectedTabTextColor = UIColor.mainDark
-        self.tabsTextColor = UIColor.mainDark
+        self.indicatorColor = UIColor.stepikAccent
+        self.selectedTabTextColor = UIColor.stepikAccent
+        self.tabsTextColor = UIColor.stepikAccent
         self.tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
-        self.tabsViewBackgroundColor = UIColor.mainLight
+        self.tabsViewBackgroundColor = UIColor.stepikBackground
     }
 
     func selectSection(_ notificationSection: NotificationsSection) {
