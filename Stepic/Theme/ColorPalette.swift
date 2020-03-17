@@ -1,15 +1,11 @@
 import UIKit
 
 extension UIColor {
-    static let lightBlue = UIColor(hex6: 0x45B0FF)
-
     static var stepikGreen: UIColor { StepikApplicationsInfo.Colors.mainGreen }
 
     static let mainLight = UIColor(hex6: 0xf6f6f6)
 
     static var mainText: UIColor { return StepikApplicationsInfo.Colors.mainText }
-
-    static let thirdColor = UIColor(hex6: 0x54a2ff)
 
     static let correctQuizBackground = UIColor(hex6: 0xE9F9E9)
     static let wrongQuizBackground = UIColor(hex6: 0xF5EBF2)
@@ -21,6 +17,24 @@ extension UIColor {
             dark: ColorPalette.red300,
             lightAccessibility: ColorPalette.red800,
             darkAccessibility: ColorPalette.red200
+        )
+    }
+
+    static var stepikBlue: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.blue600,
+            dark: ColorPalette.blue300,
+            lightAccessibility: ColorPalette.blue800,
+            darkAccessibility: ColorPalette.blue200
+        )
+    }
+
+    static var stepikLightBlue: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.lightBlue400,
+            dark: ColorPalette.lightBlue200,
+            lightAccessibility: ColorPalette.lightBlue600,
+            darkAccessibility: ColorPalette.lightBlue100
         )
     }
 
@@ -106,16 +120,12 @@ extension UIColor {
     }
 
     /// The color for activity indicators.
-    static var stepikLoadingIndicator: UIColor {
-        UIColor.stepikAccent
-    }
+    static var stepikLoadingIndicator: UIColor { .stepikAccent }
 
     // MARK: - Text Colors -
 
     /// The color for placeholder text in controls or text views.
-    static var stepikPlaceholderText: UIColor {
-        UIColor.stepikAccentAlpha40
-    }
+    static var stepikPlaceholderText: UIColor { .stepikAccentAlpha40 }
 }
 
 // MARK: - ColorPalette -
@@ -219,4 +229,24 @@ private enum ColorPalette {
     static let red300 = UIColor(hex6: 0xE76D69)
     /// Color to use in dark mode and with a high contrast level.
     static let red200 = UIColor(hex6: 0xF19693)
+
+    // MARK: - Blue -
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let blue800 = UIColor(hex6: 0x3D61C6)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let blue600 = UIColor(hex6: 0x4485ED)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let blue300 = UIColor(hex6: 0x6FB4FE)
+    /// Color to use in dark mode and with a high contrast level.
+    static let blue200 = UIColor(hex6: 0x97C9FF)
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let lightBlue600 = UIColor(hex6: 0x4487EE)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let lightBlue400 = UIColor(hex6: 0x56A4FF)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let lightBlue200 = UIColor(hex6: 0x97CAFF)
+    /// Color to use in dark mode and with a high contrast level.
+    static let lightBlue100 = UIColor(hex6: 0xBFDEFF)
 }

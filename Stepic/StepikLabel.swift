@@ -35,7 +35,7 @@ enum StepikLabelColorMode {
         case .gray:
             return UIColor.lightGray
         case .blue:
-            return UIColor.lightBlue
+            return UIColor.stepikLightBlue
         }
     }
 }

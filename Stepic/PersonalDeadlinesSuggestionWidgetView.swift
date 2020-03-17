@@ -20,7 +20,7 @@ final class PersonalDeadlinesSuggestionWidgetView: NibInitializableView {
 
     override func setupSubviews() {
         self.view.setRoundedCorners(cornerRadius: 8)
-        yesButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: UIColor.lightBlue)
+        yesButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: .stepikLightBlue)
         localize()
     }
 
