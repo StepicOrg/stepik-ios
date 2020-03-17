@@ -206,7 +206,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         switch status {
         case .correct:
             statusViewHeight.constant = 48
-            view.backgroundColor = UIColor.correctQuizBackground
+            view.backgroundColor = UIColor.stepikLightGreen
             statusImageView.image = Images.correctQuizImage
             statusLabel.text = correctTitle
             setStatusElements(visible: true)

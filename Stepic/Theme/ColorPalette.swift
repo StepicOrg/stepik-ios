@@ -1,15 +1,39 @@
 import UIKit
 
 extension UIColor {
-    static var stepikGreen: UIColor { StepikApplicationsInfo.Colors.mainGreen }
-
     static let mainLight = UIColor(hex6: 0xf6f6f6)
 
-    static var mainText: UIColor { return StepikApplicationsInfo.Colors.mainText }
+    static var mainText: UIColor { .stepikAccent }
 
-    static let correctQuizBackground = UIColor(hex6: 0xE9F9E9)
     static let wrongQuizBackground = UIColor(hex6: 0xF5EBF2)
     static let peerReviewYellow = UIColor(hex6: 0xFFFAE9)
+
+    static var stepikGreen: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.green400,
+            dark: ColorPalette.green300,
+            lightAccessibility: ColorPalette.green500,
+            darkAccessibility: ColorPalette.green200
+        )
+    }
+
+    static var stepikLightGreen: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.lightGreen50,
+            dark: ColorPalette.lightGreen50,
+            lightAccessibility: ColorPalette.lightGreen200,
+            darkAccessibility: ColorPalette.lightGreen200
+        )
+    }
+
+    static var stepikDarkGreen: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.darkGreen500,
+            dark: ColorPalette.darkGreen300,
+            lightAccessibility: ColorPalette.darkGreen600,
+            darkAccessibility: ColorPalette.darkGreen200
+        )
+    }
 
     static var stepikRed: UIColor {
         UIColor.dynamicColor(
@@ -247,6 +271,35 @@ private enum ColorPalette {
     static let lightBlue400 = UIColor(hex6: 0x56A4FF)
     /// Color to use in dark mode and with a normal/unspecified contrast level.
     static let lightBlue200 = UIColor(hex6: 0x97CAFF)
+
+    // MARK: - Green -
+
+    // MARK: Normal
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let green500 = UIColor(hex6: 0x49C249)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let green400 = UIColor(hex6: 0x66CC66)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let green300 = UIColor(hex6: 0x83D683)
     /// Color to use in dark mode and with a high contrast level.
-    static let lightBlue100 = UIColor(hex6: 0xBFDEFF)
+    static let green200 = UIColor(hex6: 0xA8E1A7)
+
+    // MARK: Light
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let lightGreen200 = UIColor(hex6: 0xB1E4AE)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let lightGreen50 = UIColor(hex6: 0xE9F9E9)
+
+    // MARK: Dark
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let darkGreen600 = UIColor(hex6: 0x4B9E4B)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let darkGreen500 = UIColor(hex6: 0x54AD54)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let darkGreen300 = UIColor(hex6: 0x85C586)
+    /// Color to use in dark mode and with a high contrast level.
+    static let darkGreen200 = UIColor(hex6: 0xA7D5A8)
 }
