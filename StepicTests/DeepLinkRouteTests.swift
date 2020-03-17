@@ -82,7 +82,9 @@ class DeepLinkRouteSpec: QuickSpec {
                 it("matches profile deep link with given paths") {
                     let paths = [
                         "https://stepik.org/users/8092",
-                        "https://stepik.org/users/8092/"
+                        "https://stepik.org/users/8092/",
+                        // https://vyahhi.myjetbrains.com/youtrack/issue/APPS-2712
+                        "https://stepik.org/users/8092?etk=WzEyNSwyNTcwNzY2NV0.1j4TGN.KO8s5AxOSbpY3CxNa4X_OAUl5_o"
                     ]
                     self.checkPaths(paths) { route in
                         guard case let .profile(id) = route else {
