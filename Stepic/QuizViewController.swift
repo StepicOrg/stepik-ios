@@ -214,7 +214,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             statusViewHeight.constant = 48
             peerReviewHeight.constant = 0
             peerReviewButton.isHidden = true
-            view.backgroundColor = UIColor.wrongQuizBackground
+            view.backgroundColor = UIColor.stepikLightRed
             statusImageView.image = Images.wrongQuizImage
             statusLabel.text = wrongTitle
             setStatusElements(visible: true)

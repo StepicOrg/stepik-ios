@@ -5,7 +5,6 @@ extension UIColor {
 
     static var mainText: UIColor { .stepikAccent }
 
-    static let wrongQuizBackground = UIColor(hex6: 0xF5EBF2)
     static let peerReviewYellow = UIColor(hex6: 0xFFFAE9)
 
     static var stepikGreen: UIColor {
@@ -41,6 +40,15 @@ extension UIColor {
             dark: ColorPalette.red300,
             lightAccessibility: ColorPalette.red800,
             darkAccessibility: ColorPalette.red200
+        )
+    }
+
+    static var stepikLightRed: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.lightRed50,
+            dark: ColorPalette.lightRed50,
+            lightAccessibility: ColorPalette.lightRed200,
+            darkAccessibility: ColorPalette.lightRed200
         )
     }
 
@@ -245,6 +253,8 @@ private enum ColorPalette {
 
     // MARK: - Red -
 
+    // MARK: Normal
+
     /// Color to use in light/unspecified mode and with a high contrast level.
     static let red800 = UIColor(hex6: 0xC71517)
     /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
@@ -253,6 +263,13 @@ private enum ColorPalette {
     static let red300 = UIColor(hex6: 0xE76D69)
     /// Color to use in dark mode and with a high contrast level.
     static let red200 = UIColor(hex6: 0xF19693)
+
+    // MARK: Light
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let lightRed200 = UIColor(hex6: 0xFFB596)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let lightRed50 = UIColor(hex6: 0xFFEBE8)
 
     // MARK: - Blue -
 
