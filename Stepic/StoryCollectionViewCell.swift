@@ -37,7 +37,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
     }
 
     private func updateWatched() {
-        self.layer.borderColor = self.isWatched ? UIColor.mainLight.cgColor : self.unwatchedColor.cgColor
+        self.layer.borderColor = self.isWatched ? UIColor.stepikGrey.cgColor : self.unwatchedColor.cgColor
     }
 
     override func awakeFromNib() {

@@ -25,7 +25,7 @@ enum TooltipColor {
         case .light:
             return UIColor.stepikAccent
         case .dark:
-            return UIColor.mainLight
+            return UIColor.stepikGrey
         case .standard:
             return UIColor.white
         }
@@ -36,7 +36,7 @@ enum TooltipColor {
         case .light:
             return UIColor.stepikAccent
         case .dark:
-            return UIColor.mainLight
+            return UIColor.stepikGrey
         case .standard:
             return UIColor.stepikLightBlue
         }
@@ -45,7 +45,7 @@ enum TooltipColor {
     var backgroundColor: UIColor {
         switch self {
         case .light:
-            return UIColor.mainLight
+            return UIColor.stepikGrey
         case .dark:
             return UIColor.stepikAccent
         case .standard:

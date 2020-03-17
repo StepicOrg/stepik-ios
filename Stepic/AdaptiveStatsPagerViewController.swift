@@ -33,7 +33,7 @@ final class AdaptiveStatsPagerViewController: PagerController {
         selectedTabTextColor = UIColor.stepikAccent
         tabsTextColor = UIColor.stepikAccent
         tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
-        tabsViewBackgroundColor = UIColor.mainLight
+        tabsViewBackgroundColor = UIColor.stepikBackground
     }
 
     internal func controllerForSection(_ section: AdaptiveStatsSection) -> UIViewController {

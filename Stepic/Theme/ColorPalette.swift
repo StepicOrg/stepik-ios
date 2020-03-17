@@ -1,8 +1,6 @@
 import UIKit
 
 extension UIColor {
-    static let mainLight = UIColor(hex6: 0xf6f6f6)
-
     // MARK: - Brand Colors -
 
     // MARK: Green
@@ -82,6 +80,16 @@ extension UIColor {
             dark: ColorPalette.yellow300,
             lightAccessibility: ColorPalette.yellow700,
             darkAccessibility: ColorPalette.yellow200
+        )
+    }
+
+    // MARK: Grey
+
+    static var stepikGrey: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.grey100,
+            dark: ColorPalette.grey050,
+            lightAccessibility: ColorPalette.grey200
         )
     }
 
@@ -180,6 +188,16 @@ extension UIColor {
 
     /// The color for placeholder text in controls or text views.
     static var stepikPlaceholderText: UIColor { .stepikAccentAlpha40 }
+
+    // MARK: Standard Content Background Colors
+
+    static var stepikBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        } else {
+            return .white
+        }
+    }
 }
 
 // MARK: - ColorPalette -
@@ -358,4 +376,13 @@ private enum ColorPalette {
     static let yellow300 = UIColor(hex6: 0xFDF17A)
     /// Color to use in dark mode and with a high contrast level.
     static let yellow200 = UIColor(hex6: 0xFEF5A0)
+
+    // MARK: - Grey -
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let grey200 = UIColor(hex6: 0xF0F0F0)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let grey100 = UIColor(hex6: 0xF6F6F6)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let grey050 = UIColor(hex6: 0xFAFAFA)
 }

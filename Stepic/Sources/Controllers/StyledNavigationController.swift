@@ -3,8 +3,8 @@ import UIKit
 
 class StyledNavigationController: UINavigationController {
     enum Appearance {
-        static let backgroundColor = UIColor.mainLight
-        static let statusBarColor = UIColor.mainLight
+        static let backgroundColor = UIColor.stepikBackground
+        static let statusBarColor = UIColor.stepikBackground
         static let tintColor = UIColor.stepikAccent
         static let textColor = UIColor.stepikAccent
 

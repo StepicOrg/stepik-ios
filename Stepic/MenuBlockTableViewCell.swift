@@ -17,7 +17,7 @@ class MenuBlockTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         let selectedView = UIView()
-        selectedView.backgroundColor = UIColor.mainLight.withAlphaComponent(0.75)
+        selectedView.backgroundColor = .stepikGrey
         self.selectedBackgroundView = selectedView
 
         separator.isHidden = false

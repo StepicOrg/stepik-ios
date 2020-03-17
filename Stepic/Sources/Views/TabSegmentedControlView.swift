@@ -10,7 +10,7 @@ protocol TabSegmentedControlViewDelegate: AnyObject {
 
 extension TabSegmentedControlView {
     struct Appearance {
-        let backgroundColor = UIColor(hex6: 0xf6f6f6)
+        let backgroundColor = UIColor.stepikBackground
 
         let buttonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         let buttonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)

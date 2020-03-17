@@ -47,7 +47,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
         shadowViewHeight.constant = 0.5
 
         statusBarPad = UIView()
-        statusBarPad?.backgroundColor = UIColor.mainLight
+        statusBarPad?.backgroundColor = UIColor.stepikBackground
         if let padView = statusBarPad {
             view.insertSubview(padView, at: 0)
         }

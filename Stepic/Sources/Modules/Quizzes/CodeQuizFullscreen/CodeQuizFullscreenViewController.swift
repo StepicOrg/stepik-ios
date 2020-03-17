@@ -12,7 +12,7 @@ protocol CodeQuizFullscreenViewControllerProtocol: AnyObject {
 extension CodeQuizFullscreenViewController {
     enum Appearance {
         static let barTintColor = UIColor.stepikAccent
-        static let barBackgroundColor = UIColor.mainLight
+        static let barBackgroundColor = UIColor.stepikBackground
         static let barSeparatorColor = UIColor.gray
         static let barButtonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
         static let barButtonTitleFontSelected = UIFont.systemFont(ofSize: 15)
