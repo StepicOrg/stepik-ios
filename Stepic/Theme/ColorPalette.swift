@@ -48,7 +48,7 @@ extension UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.blue600,
             dark: ColorPalette.blue300,
-            lightAccessibility: ColorPalette.blue800,
+            lightAccessibility: ColorPalette.blue700,
             darkAccessibility: ColorPalette.blue200
         )
     }
@@ -56,9 +56,9 @@ extension UIColor {
     static var stepikLightBlue: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.lightBlue400,
-            dark: ColorPalette.lightBlue200,
-            lightAccessibility: ColorPalette.lightBlue600,
-            darkAccessibility: ColorPalette.lightBlue100
+            dark: ColorPalette.lightBlue300,
+            lightAccessibility: ColorPalette.lightBlue500,
+            darkAccessibility: ColorPalette.lightBlue200
         )
     }
 
@@ -256,8 +256,10 @@ private enum ColorPalette {
 
     // MARK: - Blue -
 
+    // MARK: Normal
+
     /// Color to use in light/unspecified mode and with a high contrast level.
-    static let blue800 = UIColor(hex6: 0x3D61C6)
+    static let blue700 = UIColor(hex6: 0x4072D9)
     /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
     static let blue600 = UIColor(hex6: 0x4485ED)
     /// Color to use in dark mode and with a normal/unspecified contrast level.
@@ -265,11 +267,15 @@ private enum ColorPalette {
     /// Color to use in dark mode and with a high contrast level.
     static let blue200 = UIColor(hex6: 0x97C9FF)
 
+    // MARK: Light
+
     /// Color to use in light/unspecified mode and with a high contrast level.
-    static let lightBlue600 = UIColor(hex6: 0x4487EE)
+    static let lightBlue500 = UIColor(hex6: 0x4595FD)
     /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
     static let lightBlue400 = UIColor(hex6: 0x56A4FF)
     /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let lightBlue300 = UIColor(hex6: 0x70B5FF)
+    /// Color to use in dark mode and with a high contrast level.
     static let lightBlue200 = UIColor(hex6: 0x97CAFF)
 
     // MARK: - Green -
