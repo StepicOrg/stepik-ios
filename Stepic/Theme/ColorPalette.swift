@@ -3,7 +3,9 @@ import UIKit
 extension UIColor {
     static let mainLight = UIColor(hex6: 0xf6f6f6)
 
-    static let peerReviewYellow = UIColor(hex6: 0xFFFAE9)
+    // MARK: - Brand Colors -
+
+    // MARK: Green
 
     static var stepikGreen: UIColor {
         UIColor.dynamicColor(
@@ -32,6 +34,8 @@ extension UIColor {
         )
     }
 
+    // MARK: Red
+
     static var stepikRed: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.red700,
@@ -50,6 +54,8 @@ extension UIColor {
         )
     }
 
+    // MARK: Blue
+
     static var stepikBlue: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.blue600,
@@ -67,6 +73,19 @@ extension UIColor {
             darkAccessibility: ColorPalette.lightBlue200
         )
     }
+
+    // MARK: Yellow
+
+    static var stepikYellow: UIColor {
+        UIColor.dynamicColor(
+            light: ColorPalette.yellow600,
+            dark: ColorPalette.yellow300,
+            lightAccessibility: ColorPalette.yellow700,
+            darkAccessibility: ColorPalette.yellow200
+        )
+    }
+
+    // MARK: Accent
 
     static var stepikAccent: UIColor {
         UIColor.dynamicColor(
@@ -140,6 +159,8 @@ extension UIColor {
         )
     }
 
+    // MARK: - UI Element Colors -
+
     /// The color for borders or divider lines that hides any underlying content.
     static var stepikSeparator: UIColor {
         if #available(iOS 13.0, *) {
@@ -152,7 +173,7 @@ extension UIColor {
     /// The color for activity indicators.
     static var stepikLoadingIndicator: UIColor { .stepikAccent }
 
-    // MARK: - Text Colors -
+    // MARK: Text Colors
 
     /// The color for texts that contain primary content.
     static var stepikPrimaryText: UIColor { .stepikAccent }
@@ -326,4 +347,15 @@ private enum ColorPalette {
     static let darkGreen300 = UIColor(hex6: 0x85C586)
     /// Color to use in dark mode and with a high contrast level.
     static let darkGreen200 = UIColor(hex6: 0xA7D5A8)
+
+    // MARK: - Yellow -
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let yellow700 = UIColor(hex6: 0xFCC439)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let yellow600 = UIColor(hex6: 0xFEDB41)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let yellow300 = UIColor(hex6: 0xFDF17A)
+    /// Color to use in dark mode and with a high contrast level.
+    static let yellow200 = UIColor(hex6: 0xFEF5A0)
 }

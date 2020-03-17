@@ -142,7 +142,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         self.hideHintView()
 
         self.peerReviewButton.setTitle(peerReviewText, for: .normal)
-        self.peerReviewButton.backgroundColor = UIColor.peerReviewYellow
+        self.peerReviewButton.backgroundColor = .stepikYellow
         self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
         self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.peerReviewButton.isHidden = true
