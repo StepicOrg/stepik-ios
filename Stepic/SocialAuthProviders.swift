@@ -21,7 +21,7 @@ enum SocialProvider: Int, CaseIterable {
             return SocialProviderInfo(
                 name: self.name,
                 amplitudeName: self.amplitudeName,
-                image: #imageLiteral(resourceName: "vk"),
+                image: UIImage(named: "vk"),
                 registerURL: URL(string: "https://stepik.org/accounts/vk/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
                 socialSDKProvider: VKSocialSDKProvider.instance
             )
@@ -29,14 +29,14 @@ enum SocialProvider: Int, CaseIterable {
             return SocialProviderInfo(
                 name: self.name,
                 amplitudeName: self.amplitudeName,
-                image: #imageLiteral(resourceName: "google"),
+                image: UIImage(named: "google"),
                 registerURL: URL(string: "https://stepik.org/accounts/google/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!
             )
         case .facebook:
             return SocialProviderInfo(
                 name: self.name,
                 amplitudeName: self.amplitudeName,
-                image: #imageLiteral(resourceName: "fb"),
+                image: UIImage(named: "fb"),
                 registerURL: URL(string: "https://stepik.org/accounts/facebook/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!,
                 socialSDKProvider: FBSocialSDKProvider.instance
             )
@@ -44,14 +44,14 @@ enum SocialProvider: Int, CaseIterable {
             return SocialProviderInfo(
                 name: self.name,
                 amplitudeName: self.amplitudeName,
-                image: #imageLiteral(resourceName: "twitter"),
+                image: UIImage(named: "twitter"),
                 registerURL: URL(string: "https://stepik.org/accounts/twitter/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!
             )
         case .gitHub:
             return SocialProviderInfo(
                 name: self.name,
                 amplitudeName: self.amplitudeName,
-                image: #imageLiteral(resourceName: "github"),
+                image: UIImage(named: "github"),
                 registerURL: URL(string: "https://stepik.org/accounts/github/login?next=%2Foauth2%2Fauthorize%2F%3Fclient_id%3D\(StepikApplicationsInfo.social!.clientId)%26response_type%3Dcode")!
             )
         }
@@ -89,7 +89,7 @@ enum SocialProvider: Int, CaseIterable {
 }
 
 struct SocialProviderInfo {
-    var image: UIImage
+    var image: UIImage?
     var registerURL: URL
     var name: String
     var socialSDKProvider: SocialSDKProvider?
@@ -98,7 +98,7 @@ struct SocialProviderInfo {
     init(
         name: String,
         amplitudeName: String,
-        image: UIImage,
+        image: UIImage?,
         registerURL: URL,
         socialSDKProvider: SocialSDKProvider? = nil
     ) {

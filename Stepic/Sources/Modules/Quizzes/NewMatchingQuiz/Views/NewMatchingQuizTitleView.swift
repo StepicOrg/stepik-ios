@@ -12,7 +12,7 @@ extension NewMatchingQuizTitleView {
         var containerInsets = LayoutInsets(top: 12, left: 16, bottom: 10, right: 64)
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
-        let shadowColor = UIColor(hex: 0xEAECF0)
+        let shadowColor = UIColor(hex6: 0xEAECF0)
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
     }

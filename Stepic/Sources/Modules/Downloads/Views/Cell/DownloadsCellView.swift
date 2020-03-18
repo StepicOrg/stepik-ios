@@ -5,12 +5,12 @@ extension DownloadsCellView {
         let coverViewSize = CGSize(width: 80, height: 80)
 
         let titleFont = UIFont.systemFont(ofSize: 16, weight: .regular)
-        let titleTextColor = UIColor.mainText
+        let titleTextColor = UIColor.stepikPrimaryText
         let titleMaxLinesCount = 3
         let titleInsets = LayoutInsets(left: 8)
 
         let subtitleFont = UIFont.systemFont(ofSize: 14, weight: .regular)
-        let subtitleTextColor = UIColor(hex: 0x8E8E93)
+        let subtitleTextColor = UIColor(hex6: 0x8E8E93)
         let subtitleMaxLinesCount = 1
     }
 }

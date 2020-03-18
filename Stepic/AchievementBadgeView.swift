@@ -14,7 +14,7 @@ struct AchievementViewData {
     let title: String
     let description: String
 
-    let badge: UIImage
+    let badge: UIImage?
 
     let completedLevel: Int
     let maxLevel: Int
@@ -27,11 +27,11 @@ struct AchievementViewData {
 final class AchievementBadgeView: UIView {
     // Gradient colors and locations for progress circle
     private static let colors = [
-        UIColor(hex: 0xa9aeff),
-        UIColor(hex: 0xa99cff),
-        UIColor(hex: 0xa992ff),
-        UIColor(hex: 0xaca5ff),
-        UIColor(hex: 0xacecfe)
+        UIColor(hex6: 0xa9aeff),
+        UIColor(hex6: 0xa99cff),
+        UIColor(hex6: 0xa992ff),
+        UIColor(hex6: 0xaca5ff),
+        UIColor(hex6: 0xacecfe)
     ]
     private static let locations = [0.0, 0.14, 0.25, 0.425, 1.0]
 
@@ -172,15 +172,15 @@ final class AchievementBadgeView: UIView {
             NSLayoutConstraint(item: starsStackView!, attribute: .width, relatedBy: .equal, toItem: starsStackView, attribute: .height, multiplier: CGFloat(maxLevel), constant: CGFloat(maxLevel - 1) * spaceBetweenStars).isActive = true
 
             for _ in 0..<filledCount {
-                starsStackView.addArrangedSubview(UIImageView(image: #imageLiteral(resourceName: "star-filled")))
+                starsStackView.addArrangedSubview(UIImageView(image: UIImage(named: "star-filled")))
             }
 
             for _ in 0..<borderedCount {
-                starsStackView.addArrangedSubview(UIImageView(image: #imageLiteral(resourceName: "star-bordered")))
+                starsStackView.addArrangedSubview(UIImageView(image: UIImage(named: "star-bordered")))
             }
 
             for _ in 0..<grayCount {
-                starsStackView.addArrangedSubview(UIImageView(image: #imageLiteral(resourceName: "star-gray")))
+                starsStackView.addArrangedSubview(UIImageView(image: UIImage(named: "star-gray")))
             }
         }
     }

@@ -6,11 +6,11 @@ extension CodeTextViewLayoutManager {
         var gutterWidth: CGFloat = 24.0
 
         var lineNumberFont = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)
-        var lineNumberTextColor = UIColor.mainDark.withAlphaComponent(0.5)
+        var lineNumberTextColor = UIColor.stepikAccentAlpha50
         let lineNumberInsets = LayoutInsets(right: 4)
 
-        var currentLineNumberTextColor = UIColor.mainDark
-        var currentLineColor = UIColor.mainDark.withAlphaComponent(0.25)
+        var currentLineNumberTextColor = UIColor.stepikAccent
+        var currentLineColor = UIColor.stepikAccentAlpha25
         var currentLineWidth: CGFloat = 24.0
     }
 }

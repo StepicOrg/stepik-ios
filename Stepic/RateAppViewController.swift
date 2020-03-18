@@ -52,7 +52,7 @@ final class RateAppViewController: UIViewController {
             case .email:
                 rightButton.titleLabel?.text = NSLocalizedString("Email", comment: "")
                 rightButton.setTitle(NSLocalizedString("Email", comment: ""), for: .normal)
-                rightButton.setTitleColor(UIColor.errorRed, for: .normal)
+                rightButton.setTitleColor(.stepikRed, for: .normal)
             }
         }
     }

@@ -9,7 +9,7 @@ extension CourseInfoTabSyllabusCellView {
         let coverImageViewInsets = UIEdgeInsets(top: 20, left: 23, bottom: 20, right: 0)
         let coverImageViewSize = CGSize(width: 30, height: 30)
 
-        let titleTextColor = UIColor.mainDark
+        let titleTextColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 14)
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 16)
 
@@ -18,7 +18,7 @@ extension CourseInfoTabSyllabusCellView {
         let downloadButtonCenterYOffsetOnCachedState: CGFloat = 9
 
         let downloadedSizeLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let downloadedSizeLabelTextColor = UIColor.mainDark
+        let downloadedSizeLabelTextColor = UIColor.stepikAccent
         let downloadedSizeLabelInsets = UIEdgeInsets(top: 2, left: 0, bottom: 0, right: 16)
 
         let statsInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 16)

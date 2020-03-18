@@ -29,7 +29,9 @@ final class CourseInfoTabSyllabusAssembly: Assembly {
             provider: provider,
             personalDeadlinesService: PersonalDeadlinesService(),
             nextLessonService: NextLessonService(),
+            networkReachabilityService: NetworkReachabilityService(),
             tooltipStorageManager: TooltipStorageManager(),
+            useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManager(),
             syllabusDownloadsService: SyllabusDownloadsService(
                 videoDownloadingService: VideoDownloadingService.shared,
                 videoFileManager: VideoStoredFileManager(fileManager: .default),

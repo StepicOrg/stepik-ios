@@ -130,26 +130,28 @@ final class CourseInfoViewController: UIViewController {
     }
 
     private func updateTopBar(alpha: CGFloat) {
-        self.styledNavigationController?.changeBackgroundColor(
-            StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(alpha),
-            sender: self
-        )
+        self.view.performBlockUsingViewTraitCollection {
+            self.styledNavigationController?.changeBackgroundColor(
+                StyledNavigationController.Appearance.backgroundColor.withAlphaComponent(alpha),
+                sender: self
+            )
 
-        let transitionColor = ColorTransitionHelper.makeTransitionColor(
-            from: .white,
-            to: StyledNavigationController.Appearance.tintColor,
-            transitionProgress: alpha
-        )
-        self.styledNavigationController?.changeTintColor(transitionColor, sender: self)
-        self.styledNavigationController?.changeTextColor(
-            StyledNavigationController.Appearance.tintColor.withAlphaComponent(alpha),
-            sender: self
-        )
+            let transitionColor = ColorTransitionHelper.makeTransitionColor(
+                from: .white,
+                to: StyledNavigationController.Appearance.tintColor,
+                transitionProgress: alpha
+            )
+            self.styledNavigationController?.changeTintColor(transitionColor, sender: self)
+            self.styledNavigationController?.changeTextColor(
+                StyledNavigationController.Appearance.tintColor.withAlphaComponent(alpha),
+                sender: self
+            )
 
-        let statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
-            ? UIStatusBarStyle.dark
-            : UIStatusBarStyle.lightContent
-        self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
+            let statusBarStyle = alpha > CGFloat(CourseInfoViewController.topBarAlphaStatusBarThreshold)
+                ? UIStatusBarStyle.dark
+                : UIStatusBarStyle.lightContent
+            self.styledNavigationController?.changeStatusBarStyle(statusBarStyle, sender: self)
+        }
     }
 
     private func loadSubmoduleIfNeeded(at index: Int) {

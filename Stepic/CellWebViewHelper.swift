@@ -31,7 +31,7 @@ final class CellWebViewHelper: NSObject {
     }
 
     //Method sets text and returns the method which returns current cell height according to the webview content height
-    func setTextWithTeX(_ text: String, color: UIColor = UIColor.mainText) {
+    func setTextWithTeX(_ text: String, color: UIColor = UIColor.stepikPrimaryText) {
         let processor = HTMLProcessor(html: text)
         let html = processor
             .injectDefault()

@@ -52,8 +52,8 @@ final class ProfileHeaderInfoView: UIView, ProfileInfoView {
         currentDaysCountLabel.text = "\(streaks.currentStreak) \(pluralizedDays(count: streaks.currentStreak))"
         maxDayCountLabel.text = "\(streaks.longestStreak) \(pluralizedDays(count: streaks.longestStreak))"
         lightningImageView.image = streaks.didSolveToday ?
-                                    #imageLiteral(resourceName: "lightning_green") :
-                                    #imageLiteral(resourceName: "lightning_gray")
+                                    UIImage(named: "lightning_green") :
+                                    UIImage(named: "lightning_gray")
     }
 
     private func pluralizedDays(count: Int) -> String {

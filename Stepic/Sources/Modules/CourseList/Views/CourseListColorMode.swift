@@ -12,8 +12,8 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                titleLabelColor: UIColor(hex: 0x535366),
-                showAllButtonColor: UIColor(hex: 0x535366, alpha: 0.3)
+                titleLabelColor: UIColor.stepikAccent,
+                showAllButtonColor: UIColor.stepikAccentAlpha30
             )
         case .dark:
             return .init(
@@ -31,7 +31,7 @@ extension CourseListColorMode {
             return appearance
         case .dark:
             var appearance = ExploreBlockContainerView.Appearance()
-            appearance.backgroundColor = .mainDark
+            appearance.backgroundColor = .stepikAccent
             return appearance
         }
     }
@@ -40,15 +40,15 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                textColor: UIColor.mainText,
-                backgroundColor: UIColor(hex: 0x535366, alpha: 0.06),
+                textColor: UIColor.stepikPrimaryText,
+                backgroundColor: UIColor.stepikAccentAlpha06,
                 callToActionTextColor: UIColor.stepikGreen,
                 callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
             )
         case .dark:
             return .init(
                 textColor: UIColor.white,
-                backgroundColor: UIColor(hex: 0xffffff, alpha: 0.1),
+                backgroundColor: UIColor(hex6: 0xffffff, alpha: 0.1),
                 callToActionTextColor: UIColor.stepikGreen,
                 callToActionBackgroundColor: UIColor.stepikGreen.withAlphaComponent(0.1)
             )
@@ -59,15 +59,15 @@ extension CourseListColorMode {
         switch self {
         case .light:
             return .init(
-                imagesRenderingBackgroundColor: UIColor(hex: 0x535366),
-                imagesRenderingTintColor: UIColor(hex: 0x89cc89),
-                itemTextColor: UIColor.mainDark,
-                itemImageTintColor: UIColor.mainDark
+                imagesRenderingBackgroundColor: UIColor.stepikAccent,
+                imagesRenderingTintColor: UIColor(hex6: 0x89cc89),
+                itemTextColor: UIColor.stepikAccent,
+                itemImageTintColor: UIColor.stepikAccent
             )
         case .dark:
             return .init(
                 imagesRenderingBackgroundColor: UIColor.white,
-                imagesRenderingTintColor: UIColor(hex: 0x89cc89),
+                imagesRenderingTintColor: UIColor(hex6: 0x89cc89),
                 itemTextColor: UIColor.white,
                 itemImageTintColor: UIColor.white
             )
@@ -78,7 +78,7 @@ extension CourseListColorMode {
         switch self {
         case .light:
             var appearance = CourseWidgetLabel.Appearance()
-            appearance.textColor = .mainDark
+            appearance.textColor = .stepikAccent
             return appearance
         case .dark:
             var appearance = CourseWidgetLabel.Appearance()

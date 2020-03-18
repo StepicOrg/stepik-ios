@@ -5,14 +5,14 @@ extension CourseInfoTabReviewsHeaderView {
     struct Appearance {
         let buttonSpacing: CGFloat = 14.0
 
-        let buttonTintColor = UIColor.mainDark
+        let buttonTintColor = UIColor.stepikAccent
         let buttonFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let buttonImageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 4)
         let buttonTitleInsets = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 0)
         let buttonImageSize = CGSize(width: 15, height: 15)
 
         let labelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let labelTextColor = UIColor.mainDark
+        let labelTextColor = UIColor.stepikAccent
 
         let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
     }

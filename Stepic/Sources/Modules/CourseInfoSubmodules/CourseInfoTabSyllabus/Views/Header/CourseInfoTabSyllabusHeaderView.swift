@@ -5,7 +5,7 @@ extension CourseInfoTabSyllabusHeaderView {
     struct Appearance {
         let buttonSpacing: CGFloat = 14.0
 
-        let buttonTintColor = UIColor.mainDark
+        let buttonTintColor = UIColor.stepikAccent
         let buttonFont = UIFont.systemFont(ofSize: 14, weight: .light)
         let buttonImageInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 4)
         let buttonTitleInsets = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 0)
@@ -13,7 +13,7 @@ extension CourseInfoTabSyllabusHeaderView {
 
         let insets = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
 
-        let separatorColor = UIColor(hex: 0xcccccc)
+        let separatorColor = UIColor(hex6: 0xcccccc)
         let separatorHeight: CGFloat = 1
     }
 }

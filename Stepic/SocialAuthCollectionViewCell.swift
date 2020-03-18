@@ -22,7 +22,7 @@ final class SocialAuthCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = layer.cornerRadius
         contentView.layer.masksToBounds = true
 
-        layer.shadowColor = UIColor(hex: 0xBBBBBB).cgColor
+        layer.shadowColor = UIColor(hex6: 0xBBBBBB).cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1.5)
         layer.shadowRadius = 1.7
         layer.shadowOpacity = 0.3

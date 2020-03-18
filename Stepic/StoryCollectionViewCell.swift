@@ -14,7 +14,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
 
     let cornerRadius: CGFloat = 16
-    let unwatchedColor = UIColor.mainDark
+    let unwatchedColor = UIColor.stepikAccent
 
     var imagePath: String = "" {
         didSet {
@@ -37,7 +37,7 @@ final class StoryCollectionViewCell: UICollectionViewCell {
     }
 
     private func updateWatched() {
-        self.layer.borderColor = self.isWatched ? UIColor.mainLight.cgColor : self.unwatchedColor.cgColor
+        self.layer.borderColor = self.isWatched ? UIColor.stepikGrey.cgColor : self.unwatchedColor.cgColor
     }
 
     override func awakeFromNib() {

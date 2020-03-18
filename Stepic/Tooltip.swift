@@ -23,9 +23,9 @@ enum TooltipColor {
     var textColor: UIColor {
         switch self {
         case .light:
-            return UIColor.mainDark
+            return UIColor.stepikAccent
         case .dark:
-            return UIColor.mainLight
+            return UIColor.stepikGrey
         case .standard:
             return UIColor.white
         }
@@ -34,22 +34,22 @@ enum TooltipColor {
     var borderColor: UIColor {
         switch self {
         case .light:
-            return UIColor.mainDark
+            return UIColor.stepikAccent
         case .dark:
-            return UIColor.mainLight
+            return UIColor.stepikGrey
         case .standard:
-            return UIColor.thirdColor
+            return UIColor.stepikLightBlue
         }
     }
 
     var backgroundColor: UIColor {
         switch self {
         case .light:
-            return UIColor.mainLight
+            return UIColor.stepikGrey
         case .dark:
-            return UIColor.mainDark
+            return UIColor.stepikAccent
         case .standard:
-            return UIColor.thirdColor
+            return UIColor.stepikLightBlue
         }
     }
 }

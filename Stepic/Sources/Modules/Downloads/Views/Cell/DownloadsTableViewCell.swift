@@ -6,7 +6,7 @@ final class DownloadsTableViewCell: UITableViewCell, Reusable {
         static let cellViewInsets = LayoutInsets(top: 8, left: 16, bottom: 8, right: 16)
 
         static let separatorHeight: CGFloat = 0.5
-        static let separatorColor = UIColor(hex: 0xe7e7e7)
+        static let separatorColor = UIColor(hex6: 0xe7e7e7)
         static let separatorInsets = LayoutInsets(left: 16)
     }
 

@@ -19,7 +19,7 @@ extension SubmissionsSkeletonView {
         let dateHeight: CGFloat = 14
 
         let separatorHeight: CGFloat = 0.5
-        let separatorColor = UIColor(hex: 0xe7e7e7)
+        let separatorColor = UIColor(hex6: 0xe7e7e7)
         let separatorInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     }
 }

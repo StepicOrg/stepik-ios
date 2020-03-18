@@ -14,7 +14,7 @@ extension QuizFeedbackView {
         let titleInsets = LayoutInsets(top: 15, left: 56, bottom: 15, right: 16)
         let leftViewInsets = LayoutInsets(left: 16, right: 16)
 
-        let feedbackBackgroundColor = UIColor(hex: 0xF6F6F6)
+        let feedbackBackgroundColor = UIColor(hex6: 0xF6F6F6)
         let feedbackContentInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }
@@ -160,22 +160,22 @@ final class QuizFeedbackView: UIView {
         var mainColor: UIColor {
             switch self {
             case .correct:
-                return UIColor(hex: 0xE9F9E9)
+                return UIColor(hex6: 0xE9F9E9)
             case .wrong:
-                return UIColor(hex: 0xFF7965).withAlphaComponent(0.15)
+                return UIColor(hex6: 0xFF7965).withAlphaComponent(0.15)
             default:
-                return UIColor(hex: 0xE9EBFA)
+                return UIColor(hex6: 0xE9EBFA)
             }
         }
 
         var titleColor: UIColor {
             switch self {
             case .correct:
-                return UIColor(hex: 0x66CC66)
+                return UIColor(hex6: 0x66CC66)
             case .wrong:
-                return UIColor(hex: 0xFF7965)
+                return UIColor(hex6: 0xFF7965)
             default:
-                return UIColor(hex: 0x6C7BDF)
+                return UIColor(hex6: 0x6C7BDF)
             }
         }
 

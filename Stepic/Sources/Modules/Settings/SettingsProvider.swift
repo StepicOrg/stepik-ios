@@ -15,6 +15,8 @@ protocol SettingsProviderProtocol: AnyObject {
     var globalStepFontSize: StepFontSize { get set }
     var availableStepFontSizes: [StepFontSize] { get }
 
+    var shouldUseCellularDataForDownloads: Bool { get set }
+
     var isAutoplayEnabled: Bool { get set }
     var isAdaptiveModeEnabled: Bool { get set }
 
@@ -24,6 +26,7 @@ protocol SettingsProviderProtocol: AnyObject {
 final class SettingsProvider: SettingsProviderProtocol {
     private let downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol
     private let streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol
+    private let useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol
     private let contentLanguageService: ContentLanguageServiceProtocol
     private let stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol
     private let autoplayStorageManager: AutoplayStorageManagerProtocol
@@ -75,6 +78,15 @@ final class SettingsProvider: SettingsProviderProtocol {
 
     var availableStepFontSizes: [StepFontSize] { StepFontSize.allCases }
 
+    var shouldUseCellularDataForDownloads: Bool {
+        get {
+            self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads
+        }
+        set {
+            self.useCellularDataForDownloadsStorageManager.shouldUseCellularDataForDownloads = newValue
+        }
+    }
+
     var isAutoplayEnabled: Bool {
         get {
             self.autoplayStorageManager.isAutoplayEnabled
@@ -96,6 +108,7 @@ final class SettingsProvider: SettingsProviderProtocol {
     init(
         downloadVideoQualityStorageManager: DownloadVideoQualityStorageManagerProtocol,
         streamVideoQualityStorageManager: StreamVideoQualityStorageManagerProtocol,
+        useCellularDataForDownloadsStorageManager: UseCellularDataForDownloadsStorageManagerProtocol,
         contentLanguageService: ContentLanguageServiceProtocol,
         stepFontSizeStorageManager: StepFontSizeStorageManagerProtocol,
         autoplayStorageManager: AutoplayStorageManagerProtocol,
@@ -104,6 +117,7 @@ final class SettingsProvider: SettingsProviderProtocol {
     ) {
         self.downloadVideoQualityStorageManager = downloadVideoQualityStorageManager
         self.streamVideoQualityStorageManager = streamVideoQualityStorageManager
+        self.useCellularDataForDownloadsStorageManager = useCellularDataForDownloadsStorageManager
         self.contentLanguageService = contentLanguageService
         self.stepFontSizeStorageManager = stepFontSizeStorageManager
         self.autoplayStorageManager = autoplayStorageManager

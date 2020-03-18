@@ -17,13 +17,6 @@
 			<string>Notifications</string>
 		</array>
 	</dict>
-	<key>colors</key>
-	<dict>
-		<key>mainDark</key>
-		<integer>5460838</integer>
-		<key>mainText</key>
-		<integer>5460838</integer>
-	</dict>
 	<key>url</key>
 	<dict>
 		<key>appId</key>

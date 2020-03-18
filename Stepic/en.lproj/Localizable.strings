@@ -456,6 +456,10 @@ CourseInfoTabSyllabusDeleteUnitDownloadsConfirmationMessage = "Are you sure you 
 CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationTitle = "Delete section";
 CourseInfoTabSyllabusDeleteSectionDownloadsConfirmationMessage = "Are you sure you want to delete downloaded section?";
 CourseInfoTabSyllabusSectionRequirementTitle = "To unlock this module you need to score %@ in module %@";
+CourseInfoTabSyllabusDownloadOnCellularDataAlertTitle = "Use Cellular Data";
+CourseInfoTabSyllabusDownloadOnCellularDataAlertMessage = "You're not connected to Wi-Fi. Use cellular data for downloading?";
+CourseInfoTabSyllabusDownloadOnCellularDataUseAlwaysAction = "Use Always";
+CourseInfoTabSyllabusDownloadOnCellularDataJustOnceAction = "Just this Once";
 CourseInfoTabReviews = "Reviews";
 CourseInfoTitleAuthor = "by";
 CourseInfoTitleAbout = "About";
@@ -549,6 +553,7 @@ SettingsHeaderTitleOther = "Other";
 
 SettingsCellTitleDownloadQuality = "Download quality";
 SettingsCellTitleStreamQuality = "Stream quality";
+SettingsCellTitleUseCellularDataForDownloads = "Use cellular data for downloads";
 SettingsCellTitleContentLanguage = "Content language";
 SettingsCellTitleTextSizeInSteps = "Text size in steps";
 SettingsCellTitleCodeEditor = "Code editor settings";
@@ -928,3 +933,20 @@ EditStepPlaceholder = "Text...";
 EditStepMessage = "You can only edit the step's text, and only using raw HTML. To access full step editor please use the web version of Stepik.";
 EditStepRemoteUpdateSuccessfulTitle = "Updated";
 EditStepRemoteUpdateUnsuccessfulTitle = "Failed to update";
+
+/* Accessibility */
+StepVideoPreviewAccessibilityLabel = "Video preview";
+StepVideoPreviewAccessibilityHint = "Double-tap to start playing the video";
+
+VideoPlayerBackButtonAccessibilityLabel = "Close video player";
+VideoPlayerBackButtonAccessibilityHint = "Double-tap to stop playing the video and close video player";
+VideoPlayerPlayButtonAccessibilityLabel = "Start or stop playing the video";
+VideoPlayerPlayButtonAccessibilityHint = "Double-tap to stop or start playing the video";
+VideoPlayerRewindButtonAccessibilityLabel = "Rewind ten seconds";
+VideoPlayerRewindButtonAccessibilityHint = "Double-tap to rewind ten seconds";
+VideoPlayerFastForwardButtonAccessibilityLabel = "Fast forward ten seconds";
+VideoPlayerFastForwardButtonAccessibilityHint = "Double-tap to fast forward ten seconds";
+VideoPlayerPlaybackSpeedButtonAccessibilityLabel = "Playback speed";
+VideoPlayerPlaybackSpeedButtonAccessibilityHint = "Double-tap to select video playback speed";
+VideoPlayerPlaybackQualityButtonAccessibilityLabel = "Playback quality";
+VideoPlayerPlaybackQualityButtonAccessibilityHint = "Double-tap to select video playback quality";

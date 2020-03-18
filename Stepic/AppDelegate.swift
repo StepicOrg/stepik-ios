@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let notificationsRegistrationService: NotificationsRegistrationServiceProtocol = NotificationsRegistrationService()
     private let notificationsService = NotificationsService()
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
+    private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
     private let alamofireRequestsLogger = AlamofireRequestsLogger()
 
@@ -212,14 +213,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
             print("\(String(describing: userActivity.webpageURL?.absoluteString))")
             if let url = userActivity.webpageURL {
-                if branchService.canOpenWithBranch(url: url) {
-                    branchService.continueUserActivity(userActivity)
+                if self.branchService.canOpenWithBranch(url: url) {
+                    self.branchService.continueUserActivity(userActivity)
                 } else {
                     self.handleOpenedFromDeepLink(url)
                 }
                 return true
             }
         }
+
+        if self.spotlightContinueUserActivityService.continueUserActivity(userActivity) {
+            return true
+        }
+
         return false
     }
 
@@ -232,8 +238,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         print("opened app via url \(url.absoluteString)")
 
-        if let sourceApplication = options[.sourceApplication] as? String,
-           VKSdk.processOpen(url, fromApplication: sourceApplication) {
+        let sourceApplicationOrNil = options[.sourceApplication] as? String
+
+        if VKSdk.processOpen(url, fromApplication: sourceApplicationOrNil) {
             return true
         }
         if ApplicationDelegate.shared.application(app, open: url, options: options) {

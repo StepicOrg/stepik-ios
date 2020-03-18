@@ -95,6 +95,7 @@ final class SettingsPresenter: SettingsPresenterProtocol {
             streamVideoQuality: FormatterHelper.streamVideoQualityInProgressiveScan(data.streamVideoQuality),
             contentLanguage: data.contentLanguage.fullString,
             stepFontSize: data.stepFontSize.title,
+            shouldUseCellularDataForDownloads: data.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: data.isAutoplayEnabled,
             isAdaptiveModeEnabled: data.isAdaptiveModeEnabled
         )

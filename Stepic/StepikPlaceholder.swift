@@ -20,7 +20,7 @@ final class StepikPlaceholder {
     }
 
     final class Style: Equatable {
-        typealias PlaceholderImage = (image: UIImage, scale: CGFloat)
+        typealias PlaceholderImage = (image: UIImage?, scale: CGFloat)
         typealias PlaceholderId = String
 
         private(set) var id: PlaceholderId

@@ -69,7 +69,7 @@ final class StepikPlaceholderView: NibInitializableView {
         let isVertical = bounds.width < bounds.height
 
         let hasImage = placeholder.image != nil
-        let imageRatio = (placeholder.image?.image.size.width ?? 1) / (placeholder.image?.image.size.height ?? 1)
+        let imageRatio = (placeholder.image?.image?.size.width ?? 1) / (placeholder.image?.image?.size.height ?? 1)
         stackView.layoutIfNeeded()
 
         if hasImage {

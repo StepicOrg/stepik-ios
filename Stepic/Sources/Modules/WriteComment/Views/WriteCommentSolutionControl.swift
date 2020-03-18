@@ -3,7 +3,7 @@ import UIKit
 
 extension WriteCommentSolutionControl {
     struct Appearance {
-        let textColor = UIColor.mainDark
+        let textColor = UIColor.stepikAccent
         let textFont = UIFont.systemFont(ofSize: 17)
 
         let rightArrowImageSize = CGSize(width: 15, height: 15)

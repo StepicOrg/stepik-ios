@@ -10,7 +10,7 @@ import UIKit
 
 extension AuthTextField {
     enum Appearance {
-        static let tintColor = UIColor.mainText
+        static let tintColor = UIColor.stepikPrimaryText
 
         static let eyeButtonSize = CGSize(width: 50, height: 50)
         static let imageEyeOpened = UIImage(named: "eye_opened")

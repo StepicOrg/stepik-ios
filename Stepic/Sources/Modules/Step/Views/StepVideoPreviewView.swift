@@ -4,7 +4,7 @@ import UIKit
 
 extension StepVideoPreviewView {
     struct Appearance {
-        let overlayColor = UIColor.mainDark.withAlphaComponent(0.4)
+        let overlayColor = UIColor.stepikAccentAlpha40
 
         let introVideoHeightRatio: CGFloat = 9 / 16
         let thumbnailImageFadeInDuration: TimeInterval = 0.15
@@ -55,6 +55,11 @@ final class StepVideoPreviewView: UIControl {
     init(frame: CGRect = .zero, appearance: Appearance = Appearance()) {
         self.appearance = appearance
         super.init(frame: frame)
+
+        self.isAccessibilityElement = true
+        self.accessibilityTraits = .startsMediaSession
+        self.accessibilityLabel = NSLocalizedString("StepVideoPreviewAccessibilityLabel", comment: "")
+        self.accessibilityHint = NSLocalizedString("StepVideoPreviewAccessibilityHint", comment: "")
 
         self.setupView()
         self.addSubviews()

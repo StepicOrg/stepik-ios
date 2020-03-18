@@ -9,11 +9,11 @@ extension CourseInfoTabInfoInstructorView {
 
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let titleLabelTextColor = UIColor.mainDark
+        let titleLabelTextColor = UIColor.stepikAccent
 
         let descriptionLabelInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         let descriptionLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let descriptionLabelTextColor = UIColor.mainDark
+        let descriptionLabelTextColor = UIColor.stepikAccent
     }
 }
 

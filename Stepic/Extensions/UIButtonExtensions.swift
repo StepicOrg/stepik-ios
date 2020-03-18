@@ -17,14 +17,14 @@ extension UIButton {
     }
 
     func setStepicGreenStyle() {
-        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.0, borderColor: UIColor.mainDark)
+        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 0.0, borderColor: UIColor.stepikAccent)
         self.setTitleColor(UIColor.white, for: UIControl.State())
-        self.backgroundColor = UIColor.mainDark
+        self.backgroundColor = UIColor.stepikAccent
     }
 
     func setStepicWhiteStyle() {
-        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1.0, borderColor: UIColor.mainDark)
-        self.setTitleColor(UIColor.mainDark, for: UIControl.State())
+        self.setRoundedCorners(cornerRadius: 8.0, borderWidth: 1.0, borderColor: UIColor.stepikAccent)
+        self.setTitleColor(UIColor.stepikAccent, for: UIControl.State())
         self.backgroundColor = UIColor.white
     }
 }

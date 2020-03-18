@@ -5,9 +5,9 @@ import UIKit
 
 extension DiscussionsTableViewCell {
     enum Appearance {
-        static let separatorColor = UIColor(hex: 0xE7E7E7)
+        static let separatorColor = UIColor(hex6: 0xE7E7E7)
 
-        static let selectedBackgroundColor = UIColor(hex: 0xE9EBFA)
+        static let selectedBackgroundColor = UIColor(hex6: 0xE9EBFA)
         static let defaultBackgroundColor = UIColor.white
 
         static let leadingOffsetDiscussion: CGFloat = 0

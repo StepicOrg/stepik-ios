@@ -12,7 +12,7 @@ protocol CodeQuizFullscreenInstructionViewDelegate: AnyObject {
 
 extension CodeQuizFullscreenInstructionView {
     struct Appearance {
-        let loadingIndicatorColor = UIColor.mainDark
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
         let spacing: CGFloat = 16
     }
 

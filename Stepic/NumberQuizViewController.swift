@@ -38,7 +38,7 @@ final class NumberQuizViewController: QuizViewController {
 
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.keyboardType = UIKeyboardType.numbersAndPunctuation
-        textField.textColor = UIColor.mainText
+        textField.textColor = UIColor.stepikPrimaryText
 
         let tapG = UITapGestureRecognizer(target: self, action: #selector(NumberQuizViewController.tap))
         self.view.addGestureRecognizer(tapG)

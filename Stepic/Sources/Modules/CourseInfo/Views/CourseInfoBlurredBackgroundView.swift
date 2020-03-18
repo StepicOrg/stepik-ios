@@ -6,7 +6,7 @@ extension CourseInfoBlurredBackgroundView {
     struct Appearance {
         let imageFadeInDuration: TimeInterval = 0.15
         let placeholderImage = UIImage(named: "lesson_cover_50")
-        let overlayColor = UIColor(hex: 0x9191BC)
+        let overlayColor = UIColor(hex6: 0x9191BC)
         let overlayAlpha: CGFloat = 0.75
     }
 }

@@ -16,6 +16,7 @@ protocol SettingsInteractorProtocol {
     func doStepFontSizeSettingPresentation(request: Settings.StepFontSizeSettingPresentation.Request)
     func doStepFontSizeUpdate(request: Settings.StepFontSizeSettingUpdate.Request)
 
+    func doUseCellularDataForDownloadsSettingUpdate(request: Settings.UseCellularDataForDownloadsSettingUpdate.Request)
     func doAutoplayNextVideoSettingUpdate(request: Settings.AutoplayNextVideoSettingUpdate.Request)
     func doAdaptiveModeSettingUpdate(request: Settings.AdaptiveModeSettingUpdate.Request)
     func doDeleteAllContent(request: Settings.DeleteAllContent.Request)
@@ -36,6 +37,7 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             streamVideoQuality: self.provider.globalStreamVideoQuality,
             contentLanguage: self.provider.globalContentLanguage,
             stepFontSize: self.provider.globalStepFontSize,
+            shouldUseCellularDataForDownloads: self.provider.shouldUseCellularDataForDownloads,
             isAutoplayEnabled: self.provider.isAutoplayEnabled,
             isAdaptiveModeEnabled: self.provider.isAdaptiveModeEnabled
         )
@@ -112,6 +114,12 @@ final class SettingsInteractor: SettingsInteractorProtocol {
             AnalyticsEvent.stepFontSizeSelected(newStepFontSize).report()
             self.provider.globalStepFontSize = newStepFontSize
         }
+    }
+
+    func doUseCellularDataForDownloadsSettingUpdate(
+        request: Settings.UseCellularDataForDownloadsSettingUpdate.Request
+    ) {
+        self.provider.shouldUseCellularDataForDownloads = request.isOn
     }
 
     func doAutoplayNextVideoSettingUpdate(request: Settings.AutoplayNextVideoSettingUpdate.Request) {

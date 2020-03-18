@@ -29,13 +29,13 @@ enum StepikLabelColorMode {
     var textColor: UIColor {
         switch self {
         case .dark:
-            return UIColor.mainText
+            return UIColor.stepikPrimaryText
         case .light:
             return UIColor.white
         case .gray:
             return UIColor.lightGray
         case .blue:
-            return UIColor.lightBlue
+            return UIColor.stepikLightBlue
         }
     }
 }
@@ -58,7 +58,7 @@ final class StepikLabel: UILabel {
             if isGray {
                 self.textColor = UIColor.lightGray
             } else {
-                self.textColor = UIColor.mainText
+                self.textColor = UIColor.stepikPrimaryText
             }
         }
     }

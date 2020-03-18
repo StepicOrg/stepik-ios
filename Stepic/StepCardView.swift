@@ -130,9 +130,9 @@ final class StepCardView: NibInitializableView {
     }
 
     func colorize() {
-        loadingLabel.textColor = UIColor.mainDark
-        controlButton.tintColor = UIColor.mainDark
-        titleButton.superview?.tintColor = UIColor.mainDark
+        loadingLabel.textColor = UIColor.stepikAccent
+        controlButton.tintColor = UIColor.stepikAccent
+        titleButton.superview?.tintColor = UIColor.stepikAccent
     }
 
     enum CardState {

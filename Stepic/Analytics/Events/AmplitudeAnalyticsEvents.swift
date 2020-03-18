@@ -654,4 +654,40 @@ struct AmplitudeAnalyticsEvents {
             )
         }
     }
+
+    // MARK: - Continue User Activity -
+
+    struct ContinueUserActivity {
+        static func spotlightItemTapped(deepLinkRoute: DeepLinkRoute) -> AnalyticsEvent {
+            let type: String = {
+                switch deepLinkRoute {
+                case .lesson:
+                    return "lesson"
+                case .notifications:
+                    return "notifications"
+                case .discussions:
+                    return "discussions"
+                case .solutions:
+                    return "solutions"
+                case .profile:
+                    return "profile"
+                case .syllabus:
+                    return "syllabus"
+                case .catalog:
+                    return "catalog"
+                case .home:
+                    return "home"
+                case .course:
+                    return "course"
+                case .coursePromo:
+                    return "coursePromo"
+                }
+            }()
+
+            return AnalyticsEvent(
+                name: "Spotlight item tapped",
+                parameters: ["type": type]
+            )
+        }
+    }
 }
