@@ -6,15 +6,16 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import WebKit
 
 final class CellWebViewHelper: NSObject {
-    private weak var webView: UIWebView?
+    private weak var webView: WKWebView?
     private let fontSize: StepFontSize
 
     var mathJaxFinishedBlock: (() -> Void)?
 
-    init(webView: UIWebView, fontSize: StepFontSize) {
+    init(webView: WKWebView, fontSize: StepFontSize) {
         self.webView = webView
         self.fontSize = fontSize
 
@@ -24,10 +25,6 @@ final class CellWebViewHelper: NSObject {
         self.webView?.scrollView.backgroundColor = UIColor.clear
         self.webView?.scrollView.showsVerticalScrollIndicator = false
         self.webView?.scrollView.canCancelContentTouches = false
-    }
-
-    private func getContentHeight(_ webView: UIWebView) -> Int {
-        Int(webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight;") ?? "0") ?? 0
     }
 
     //Method sets text and returns the method which returns current cell height according to the webview content height
@@ -40,25 +37,22 @@ final class CellWebViewHelper: NSObject {
             .inject(script: .fontSize(fontSize: self.fontSize))
             .html
 
-        webView?.delegate = self
+        webView?.navigationDelegate = self
         webView?.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
-    }
-
-    private func finishedMathJax() {
-        mathJaxFinishedBlock?()
     }
 }
 
-extension CellWebViewHelper: UIWebViewDelegate {
+extension CellWebViewHelper: WKNavigationDelegate {
     func webView(
-        _ webView: UIWebView,
-        shouldStartLoadWith request: URLRequest,
-        navigationType: UIWebView.NavigationType
-    ) -> Bool {
-        if request.url?.scheme == "mathjaxfinish" {
-            finishedMathJax()
-            return false
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        if navigationAction.request.url?.scheme == "mathjaxfinish" {
+            self.mathJaxFinishedBlock?()
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
         }
-        return true
     }
 }

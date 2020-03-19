@@ -6,8 +6,10 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
+import PromiseKit
 import SnapKit
 import UIKit
+import WebKit
 
 class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, ControllerWithStepikPlaceholder {
     var placeholderContainer = StepikPlaceholderControllerContainer()
@@ -132,7 +134,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         )
         self.hintView.backgroundColor = UIColor.black
         self.hintWebView.isUserInteractionEnabled = true
-        self.hintWebView.delegate = self
+        self.hintWebView.navigationDelegate = self
         self.hintTextView.isScrollEnabled = false
         self.hintTextView.backgroundColor = UIColor.clear
         self.hintTextView.textColor = UIColor.white
@@ -233,11 +235,17 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
                 if TagDetectionUtil.isWebViewSupportNeeded(hint) {
                     hintHeightWebViewHelper?.mathJaxFinishedBlock = { [weak self] in
                         if let webView = self?.hintWebView {
-                            webView.invalidateIntrinsicContentSize()
                             DispatchQueue.main.async { [weak self] in
-                                self?.view.layoutIfNeeded()
-                                self?.hintView.isHidden = false
-                                self?.hintHeight.constant = webView.contentHeight
+                                guard let strongSelf = self else {
+                                    return
+                                }
+
+                                webView.getContentHeight().done { contentHeight in
+                                    webView.invalidateIntrinsicContentSize()
+                                    strongSelf.view.layoutIfNeeded()
+                                    strongSelf.hintView.isHidden = false
+                                    strongSelf.hintHeight.constant = contentHeight
+                                }
                             }
                         }
                     }
@@ -474,14 +482,28 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     func getReply() -> Reply? { nil }
 }
 
-extension QuizViewController: UIWebViewDelegate {
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        if let url = request.url {
-            if url.isFileURL {
-                return true
-            }
-            WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "HintWebController", allowsSafari: true, backButtonStyle: .close)
+extension QuizViewController: WKNavigationDelegate {
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        guard let url = navigationAction.request.url else {
+            return decisionHandler(.cancel)
         }
-        return false
+
+        if url.isFileURL {
+            decisionHandler(.allow)
+        } else {
+            WebControllerManager.sharedManager.presentWebControllerWithURL(
+                url,
+                inController: self,
+                withKey: "HintWebController",
+                allowsSafari: true,
+                backButtonStyle: .close
+            )
+
+            decisionHandler(.cancel)
+        }
     }
 }

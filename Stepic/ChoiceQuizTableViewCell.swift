@@ -83,12 +83,18 @@ extension ChoiceQuizTableViewCell {
         if TagDetectionUtil.isWebViewSupportNeeded(text) {
             initWebView()
             optionWebView?.isHidden = false
-            webViewHelper?.mathJaxFinishedBlock = {
-                [weak self] in
-                self?.layoutIfNeeded()
-                if let webView = self?.optionWebView {
-                    webView.invalidateIntrinsicContentSize()
-                    finishedBlock(17 + webView.contentHeight)
+            webViewHelper?.mathJaxFinishedBlock = { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.layoutIfNeeded()
+
+                if let webView = strongSelf.optionWebView {
+                    webView.getContentHeight().done { contentHeight in
+                        webView.invalidateIntrinsicContentSize()
+                        finishedBlock(17 + contentHeight)
+                    }
                 }
             }
             webViewHelper?.setTextWithTeX(text)
