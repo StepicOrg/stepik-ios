@@ -30,7 +30,7 @@ final class ChoiceQuizViewController: QuizViewController {
         tableView.isScrollEnabled = false
         self.containerView.addSubview(tableView)
         tableView.snp.makeConstraints { $0.edges.equalTo(self.containerView) }
-        tableView.backgroundColor = UIColor.clear
+        tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
 

@@ -23,18 +23,29 @@ final class StepCardView: NibInitializableView {
     override var nibName: String { "StepCardView" }
 
     enum ControlState {
-        case unsolved, wrong, successful
+        case unsolved
+        case wrong
+        case successful
     }
 
-    let loadingLabelTexts = stride(from: 1, to: 5, by: 1).map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
+    enum CardState {
+        case loading
+        case normal
+    }
+
+    let loadingLabelTexts = stride(from: 1, to: 5, by: 1)
+        .map { NSLocalizedString("ReactionTransition\($0)", comment: "") }
 
     @IBOutlet weak var titleButton: UIButton!
     @IBOutlet weak var titlePadView: UIView!
+    @IBOutlet var titleSeparatorView: UIView!
     @IBOutlet weak var whitePadView: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loadingLabel: UILabel!
+    @IBOutlet var loadingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet var bottomSeparatorView: UIView!
     @IBOutlet weak var controlButton: UIButton!
 
     weak var delegate: StepCardViewDelegate?
@@ -43,15 +54,21 @@ final class StepCardView: NibInitializableView {
 
     var cardState: CardState = .loading {
         didSet {
-            titlePadView.isHidden = cardState == .loading
-            loadingView.isHidden = cardState != .loading
-            whitePadView.isHidden = cardState != .loading
+            self.titlePadView.isHidden = cardState == .loading
+            self.loadingView.isHidden = cardState != .loading
+            self.whitePadView.isHidden = cardState != .loading
 
-            if cardState == .normal {
-                UIView.transition(with: contentView, duration: 0.5, options: .transitionCrossDissolve, animations: {
-                    self.controlButton.isHidden = false
-                    self.contentView.isHidden = false
-                }, completion: nil)
+            if self.cardState == .normal {
+                UIView.transition(
+                    with: self.contentView,
+                    duration: 0.5,
+                    options: .transitionCrossDissolve,
+                    animations: {
+                        self.controlButton.isHidden = false
+                        self.contentView.isHidden = false
+                    },
+                    completion: nil
+                )
             } else {
                 self.controlButton.isHidden = true
                 self.contentView.isHidden = true
@@ -61,82 +78,106 @@ final class StepCardView: NibInitializableView {
 
     var controlState: ControlState = .unsolved {
         didSet {
-            switch controlState {
+            switch self.controlState {
             case .unsolved:
-                controlButton.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)
-                break
+                self.controlButton.setTitle(NSLocalizedString("Submit", comment: ""), for: .normal)
             case .wrong:
-                controlButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: .normal)
-                break
+                self.controlButton.setTitle(NSLocalizedString("TryAgain", comment: ""), for: .normal)
             case .successful:
-                controlButton.setTitle(NSLocalizedString("NextTask", comment: ""), for: .normal)
-                break
+                self.controlButton.setTitle(NSLocalizedString("NextTask", comment: ""), for: .normal)
             }
         }
     }
 
-    @IBAction func onControlButtonClick(_ sender: Any) {
-        delegate?.onControlButtonClick()
+    @IBAction
+    func onControlButtonClick(_ sender: Any) {
+        self.delegate?.onControlButtonClick()
     }
 
-    @IBAction func onTitleButtonClick(_ sender: Any) {
-        delegate?.onTitleButtonClick()
+    @IBAction
+    func onTitleButtonClick(_ sender: Any) {
+        self.delegate?.onTitleButtonClick()
     }
 
     override func setupSubviews() {
-        controlState = .unsolved
+        self.controlState = .unsolved
 
-        colorize()
+        self.colorize()
 
-        loadingLabel.text = loadingLabelTexts[Int(arc4random_uniform(UInt32(loadingLabelTexts .count)))]
+        self.loadingLabel.text = self.loadingLabelTexts[Int(arc4random_uniform(UInt32(self.loadingLabelTexts.count)))]
 
-        if cardPadView == nil {
-            backgroundColor = .clear
-            layer.shadowPath = UIBezierPath(roundedRect: layer.bounds, cornerRadius: layer.cornerRadius).cgPath
-            layer.shouldRasterize = true
-            layer.rasterizationScale = UIScreen.main.scale
-            layer.shadowOffset = CGSize(width: 0.0, height: 3)
-            layer.shadowOpacity = 0.2
-            layer.shadowRadius = 4.5
+        if self.cardPadView == nil {
+            self.backgroundColor = .clear
+            self.layer.shadowPath = UIBezierPath(
+                roundedRect: self.layer.bounds,
+                cornerRadius: self.layer.cornerRadius
+            ).cgPath
+            self.layer.shouldRasterize = true
+            self.layer.rasterizationScale = UIScreen.main.scale
+            self.layer.shadowOffset = CGSize(width: 0.0, height: 3)
+            self.layer.shadowOpacity = 0.2
+            self.layer.shadowRadius = 4.5
 
-            cardPadView = UIView(frame: bounds)
-            cardPadView.backgroundColor = .white
-            cardPadView.clipsToBounds = true
-            cardPadView.layer.cornerRadius = 10
-            insertSubview(cardPadView, at: 0)
+            self.cardPadView = UIView(frame: bounds)
+            self.cardPadView.backgroundColor = .stepikTertiaryBackground
+            self.cardPadView.clipsToBounds = true
+            self.cardPadView.layer.cornerRadius = 10
+            self.insertSubview(self.cardPadView, at: 0)
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        if cardPadView != nil {
-            cardPadView.frame = bounds
-            layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+        if self.cardPadView != nil {
+            self.cardPadView.frame = self.bounds
+            self.layer.shadowPath = UIBezierPath(
+                roundedRect: self.bounds,
+                cornerRadius: self.layer.cornerRadius
+            ).cgPath
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
         }
     }
 
     func addContentSubview(_ view: UIView) {
-        contentView.addSubview(view)
+        self.contentView.addSubview(view)
 
-        view.snp.makeConstraints { $0.edges.equalTo(contentView) }
+        view.snp.makeConstraints { $0.edges.equalTo(self.contentView) }
 
-        setNeedsLayout()
-        layoutIfNeeded()
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
 
     func updateLabel(_ text: String) {
-        titleLabel.text = text
+        self.titleLabel.text = text
     }
 
-    func colorize() {
-        loadingLabel.textColor = UIColor.stepikAccent
-        controlButton.tintColor = UIColor.stepikAccent
-        titleButton.superview?.tintColor = UIColor.stepikAccent
-    }
+    private func colorize() {
+        self.contentView.backgroundColor = .stepikTertiaryBackground
 
-    enum CardState {
-        case loading
-        case normal
+        if let cardPadView = self.cardPadView {
+            cardPadView.backgroundColor = .stepikTertiaryBackground
+        }
+
+        self.titlePadView.backgroundColor = .clear
+        self.titleLabel.textColor = .stepikSystemLabel
+        self.titleButton.superview?.tintColor = .stepikAccent
+        self.titleSeparatorView.backgroundColor = .stepikSeparator
+
+        self.whitePadView.backgroundColor = .clear
+
+        self.loadingView.backgroundColor = .clear
+        self.loadingActivityIndicator.color = .stepikLoadingIndicator
+        self.loadingLabel.textColor = .stepikAccent
+
+        self.bottomSeparatorView.backgroundColor = .stepikSeparator
+        self.controlButton.tintColor = .stepikAccent
     }
 }

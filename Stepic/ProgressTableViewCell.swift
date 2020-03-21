@@ -20,31 +20,41 @@ final class ProgressTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        colorize()
-
-        xpPerWeekTitleLabel.text = NSLocalizedString("AdaptiveXPperWeekCell", comment: "")
-    }
-
-    private func colorize() {
-        bracketLabel.textColor = UIColor.stepikAccent
+        self.xpPerWeekTitleLabel.text = NSLocalizedString("AdaptiveXPperWeekCell", comment: "")
     }
 
     func updateInfo(expCount: Int, begin: Date, end: Date, isRecord: Bool = false) {
-        pointsLabel.text = "\(expCount)" + (isRecord ? " 🎉" : "")
+        self.pointsLabel.text = "\(expCount)" + (isRecord ? " 🎉" : "")
 
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
-        firstDateLabel.text = formatter.string(from: begin)
-        secondDateLabel.text = formatter.string(from: end)
+
+        self.firstDateLabel.text = formatter.string(from: begin)
+        self.secondDateLabel.text = formatter.string(from: end)
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        pointsLabel.text = ""
-        firstDateLabel.text = ""
-        secondDateLabel.text = ""
+        self.pointsLabel.text = ""
+        self.firstDateLabel.text = ""
+        self.secondDateLabel.text = ""
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.colorize()
+    }
+
+    private func colorize() {
+        [
+            self.pointsLabel,
+            self.xpPerWeekTitleLabel,
+            self.firstDateLabel,
+            self.secondDateLabel
+        ].forEach { $0.textColor = .stepikGray }
+
+        self.bracketLabel.textColor = .stepikAccent
     }
 }

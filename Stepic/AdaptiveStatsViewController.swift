@@ -21,22 +21,22 @@ final class AdaptiveStatsViewController: UIViewController {
         didSet {
             switch state {
             case .loading:
-                data = nil
-                tableView.reloadData()
-                loadingIndicator.startAnimating()
-                allCountLabel.isHidden = true
+                self.data = nil
+                self.tableView.reloadData()
+                self.loadingIndicator.startAnimating()
+                self.allCountLabel.isHidden = true
             case .empty(let message), .error(let message):
-                loadingIndicator.stopAnimating()
-                allCountLabel.text = message
-                allCountLabel.isHidden = false
+                self.loadingIndicator.stopAnimating()
+                self.allCountLabel.text = message
+                self.allCountLabel.isHidden = false
             case .normal(let message):
-                loadingIndicator.stopAnimating()
-                tableView.reloadData()
+                self.loadingIndicator.stopAnimating()
+                self.tableView.reloadData()
                 if let message = message {
-                    allCountLabel.text = message
-                    allCountLabel.isHidden = false
+                    self.allCountLabel.text = message
+                    self.allCountLabel.isHidden = false
                 } else {
-                    allCountLabel.isHidden = true
+                    self.allCountLabel.isHidden = true
                 }
             }
         }
@@ -58,67 +58,103 @@ final class AdaptiveStatsViewController: UIViewController {
     @IBOutlet weak var xpPer7DaysTitleLabel: UILabel!
     @IBOutlet weak var last7DaysTitleLabel: UILabel!
 
+    @IBOutlet var mainStatHorizontalSeparator: UIView!
+    @IBOutlet var mainStatVerticalSeparator: UIView!
+    @IBOutlet var progressVerticalSeparator: UIView!
+
     private var data: [Any]?
 
-    @IBAction func onCancelButtonClick(_ sender: Any) {
+    @IBAction
+    func onCancelButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        colorize()
-        localize()
+        self.colorize()
+        self.localize()
 
-        setUpTable()
-        setUpChart()
+        self.setUpTable()
+        self.setUpChart()
 
-        presenter?.reloadStats()
+        self.presenter?.reloadStats()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter?.reloadData(force: data == nil)
+        self.presenter?.reloadData(force: data == nil)
     }
 
-    private func colorize() {
-        currentWeekXPLabel.textColor = UIColor.stepikAccent
-        bestStreakLabel.textColor = UIColor.stepikAccent
-        currentLevelLabel.textColor = UIColor.stepikAccent
-    }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
 
-    private func localize() {
-        levelTitleLabel.text = NSLocalizedString("AdaptiveLevelSuffix", comment: "")
-        streakTitleLabel.text = NSLocalizedString("AdaptiveBestStreak", comment: "")
-        xpPer7DaysTitleLabel.text = NSLocalizedString("AdaptiveXPperWeek", comment: "")
-        last7DaysTitleLabel.text = NSLocalizedString("AdaptiveLast7Days", comment: "")
-        progressByWeeksTitleLabel.text = NSLocalizedString("AdaptiveProgressByWeeks", comment: "")
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        guard let headerView = tableView.tableHeaderView else {
+        guard let headerView = self.tableView.tableHeaderView else {
             return
         }
 
         let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         if headerView.frame.size.height != size.height {
             headerView.frame.size.height = size.height
-            tableView.tableHeaderView = headerView
-            tableView.layoutIfNeeded()
+            self.tableView.tableHeaderView = headerView
+            self.tableView.layoutIfNeeded()
         }
     }
 
+    private func colorize() {
+        [
+            self.currentLevelLabel,
+            self.bestStreakLabel,
+            self.currentWeekXPLabel
+        ].forEach { $0?.textColor = .stepikAccent }
+
+        [
+            self.levelTitleLabel,
+            self.streakTitleLabel,
+            self.xpPer7DaysTitleLabel
+        ].forEach { $0?.textColor = .stepikGray }
+
+        [
+            self.last7DaysTitleLabel,
+            self.progressByWeeksTitleLabel,
+            self.allCountLabel
+        ].forEach { $0?.textColor = .stepikGray2 }
+
+        [
+            self.mainStatHorizontalSeparator,
+            self.mainStatVerticalSeparator,
+            self.progressVerticalSeparator
+        ].forEach { $0?.backgroundColor = .stepikSeparator }
+
+        self.view.backgroundColor = .stepikBackground
+        self.loadingIndicator.color = .stepikLoadingIndicator
+    }
+
+    private func localize() {
+        self.levelTitleLabel.text = NSLocalizedString("AdaptiveLevelSuffix", comment: "")
+        self.streakTitleLabel.text = NSLocalizedString("AdaptiveBestStreak", comment: "")
+        self.xpPer7DaysTitleLabel.text = NSLocalizedString("AdaptiveXPperWeek", comment: "")
+        self.last7DaysTitleLabel.text = NSLocalizedString("AdaptiveLast7Days", comment: "")
+        self.progressByWeeksTitleLabel.text = NSLocalizedString("AdaptiveProgressByWeeks", comment: "")
+    }
+
     func reload() {
-        if data == nil {
-            state = .empty(message: NSLocalizedString("AdaptiveProgressWeeksEmpty", comment: ""))
+        if self.data == nil {
+            self.state = .empty(message: NSLocalizedString("AdaptiveProgressWeeksEmpty", comment: ""))
         } else {
-            switch state {
+            switch self.state {
             case .normal(let message):
-                state = .normal(message: message)
+                self.state = .normal(message: message)
             default:
-                state = .normal(message: nil)
+                self.state = .normal(message: nil)
             }
         }
     }
@@ -135,41 +171,45 @@ final class AdaptiveStatsViewController: UIViewController {
     }
 
     private func setUpTable() {
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
 
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 112
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 112
 
-        tableView.register(UINib(nibName: "ProgressTableViewCell", bundle: nil), forCellReuseIdentifier: ProgressTableViewCell.reuseId)
+        self.tableView.register(
+            UINib(nibName: "ProgressTableViewCell", bundle: nil),
+            forCellReuseIdentifier: ProgressTableViewCell.reuseId
+        )
     }
 
     private func setUpChart() {
-        progressChart.chartDescription?.enabled = false
-        progressChart.isUserInteractionEnabled = false
-        progressChart.setScaleEnabled(false)
-        progressChart.pinchZoomEnabled = false
-        progressChart.drawGridBackgroundEnabled = false
-        progressChart.dragEnabled = false
-        progressChart.xAxis.enabled = false
-        progressChart.leftAxis.enabled = false
-        progressChart.rightAxis.enabled = false
-        progressChart.legend.enabled = false
+        self.progressChart.chartDescription?.enabled = false
+        self.progressChart.isUserInteractionEnabled = false
+        self.progressChart.setScaleEnabled(false)
+        self.progressChart.pinchZoomEnabled = false
+        self.progressChart.drawGridBackgroundEnabled = false
+        self.progressChart.dragEnabled = false
+        self.progressChart.xAxis.enabled = false
+        self.progressChart.leftAxis.enabled = false
+        self.progressChart.rightAxis.enabled = false
+        self.progressChart.legend.enabled = false
     }
 
     private func updateDataSet(_ dataSet: LineChartDataSet) -> LineChartDataSet {
-        dataSet.setColor(UIColor.stepikAccent)
+        dataSet.setColor(.stepikAccent)
         dataSet.mode = .horizontalBezier
         dataSet.cubicIntensity = 0.2
         dataSet.circleRadius = 4
         dataSet.circleHoleRadius = 2
-        dataSet.fillColor = UIColor.stepikAccent
+        dataSet.fillColor = .stepikAccent
         dataSet.fillAlpha = 1.0
         dataSet.drawValuesEnabled = true
         dataSet.valueFont = UIFont.systemFont(ofSize: 10)
+        dataSet.valueTextColor = .stepikAccent
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.drawCirclesEnabled = true
-        dataSet.setCircleColor(UIColor.stepikAccent)
+        dataSet.setCircleColor(.stepikAccent)
         dataSet.valueFormatter = DefaultValueFormatter(decimals: 0)
 
         return dataSet
@@ -178,34 +218,47 @@ final class AdaptiveStatsViewController: UIViewController {
 
 extension AdaptiveStatsViewController: AdaptiveStatsView {
     func setProgress(records: [WeekProgressViewData]) {
-        data = records
+        self.data = records
     }
 
     func setGeneralStats(currentLevel: Int, bestStreak: Int, currentWeekXP: Int, last7DaysProgress: [Int]?) {
-        currentLevelLabel.text = "\(currentLevel)"
-        bestStreakLabel.text = "\(bestStreak)"
-        currentWeekXPLabel.text = "\(currentWeekXP)"
+        self.currentLevelLabel.text = "\(currentLevel)"
+        self.bestStreakLabel.text = "\(bestStreak)"
+        self.currentWeekXPLabel.text = "\(currentWeekXP)"
 
         guard let last7DaysProgress = last7DaysProgress else {
             return
         }
 
-        let dataSet = updateDataSet(LineChartDataSet(entries: valuesToDataEntries(values: last7DaysProgress.reversed()), label: ""))
+        let dataSet = self.updateDataSet(
+            LineChartDataSet(entries: self.valuesToDataEntries(values: last7DaysProgress.reversed()), label: "")
+        )
         let data = LineChartData(dataSet: dataSet)
-        progressChart.data = data
-        progressChart.data?.highlightEnabled = true
-        progressChart.animate(yAxisDuration: 1.4, easingOption: .easeInOutCirc)
+
+        self.progressChart.data = data
+        self.progressChart.data?.highlightEnabled = true
+        self.progressChart.animate(yAxisDuration: 1.4, easingOption: .easeInOutCirc)
     }
 }
 
 extension AdaptiveStatsViewController: UITableViewDelegate, UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { self.data?.count ?? 0 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { self.data?.count ?? 0 }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ProgressTableViewCell.reuseId, for: indexPath) as! ProgressTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: ProgressTableViewCell.reuseId,
+            for: indexPath
+        ) as! ProgressTableViewCell
+
         if let weekProgress = data?[indexPath.item] as? WeekProgressViewData {
-            cell.updateInfo(expCount: weekProgress.progress, begin: weekProgress.weekBegin, end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60), isRecord: weekProgress.isRecord)
+            cell.updateInfo(
+                expCount: weekProgress.progress,
+                begin: weekProgress.weekBegin,
+                end: weekProgress.weekBegin.addingTimeInterval(6 * 24 * 60 * 60),
+                isRecord: weekProgress.isRecord
+            )
         }
+
         return cell
     }
 }

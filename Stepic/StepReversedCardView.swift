@@ -13,15 +13,22 @@ final class StepReversedCardView: UIView {
         let view = UIView(frame: self.bounds)
         self.addSubview(view)
         view.backgroundColor = UIColor(patternImage: Images.patterns.gray)
-
         return view
     }()
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        backgroundColor = .white
-        layer.cornerRadius = 12
-        whiteView.frame = bounds
+        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
+            self.backgroundColor = .stepikSecondaryBackground
+        } else {
+            self.backgroundColor = .stepikBackground
+        }
+
+        self.layer.cornerRadius = 12
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.stepikSeparator.cgColor
+
+        self.whiteView.frame = self.bounds
     }
 }

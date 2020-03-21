@@ -64,10 +64,10 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     func initActivityView(color: UIColor = .stepikLoadingIndicator) -> UIView {
         let containerView = UIView()
         let activityIndicatorView = UIActivityIndicatorView()
-        activityIndicatorView.style = UIActivityIndicatorView.Style.whiteLarge
+        activityIndicatorView.style = .whiteLarge
         activityIndicatorView.snp.makeConstraints { $0.width.height.equalTo(50) }
         activityIndicatorView.color = color
-        containerView.backgroundColor = UIColor.white
+        containerView.backgroundColor = .stepikTertiaryBackground
         containerView.addSubview(activityIndicatorView)
         activityIndicatorView.snp.makeConstraints { $0.center.equalTo(containerView) }
         activityIndicatorView.startAnimating()
@@ -80,16 +80,14 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     private var doesPresentActivityIndicatorView: Bool = false {
         didSet {
             if doesPresentActivityIndicatorView {
-                DispatchQueue.main.async {
-                    [weak self] in
+                DispatchQueue.main.async { [weak self] in
                     if self?.activityView == nil {
                         self?.activityView = self?.initActivityView()
                     }
                     self?.activityView?.isHidden = false
                 }
             } else {
-                DispatchQueue.main.async {
-                    [weak self] in
+                DispatchQueue.main.async { [weak self] in
                     self?.activityView?.removeFromSuperview()
                     self?.activityView = nil
                 }
@@ -132,12 +130,12 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             webView: hintWebView,
             fontSize: StepFontSizeStorageManager().globalStepFontSize
         )
-        self.hintView.backgroundColor = UIColor.black
+        self.hintView.backgroundColor = .black
         self.hintWebView.isUserInteractionEnabled = true
         self.hintWebView.navigationDelegate = self
         self.hintTextView.isScrollEnabled = false
-        self.hintTextView.backgroundColor = UIColor.clear
-        self.hintTextView.textColor = UIColor.white
+        self.hintTextView.backgroundColor = .clear
+        self.hintTextView.textColor = .white
         self.hintTextView.font = UIFont(name: "ArialMT", size: 16)
         self.hintTextView.isEditable = false
         self.hintTextView.dataDetectorTypes = .all
@@ -179,7 +177,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         switch state {
         case .attempt:
             statusImageView.image = nil
-            view.backgroundColor = UIColor.white
+            view.backgroundColor = .clear
             statusViewHeight.constant = 0
             hideHintView()
             peerReviewHeight.constant = 0
@@ -195,8 +193,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         updateSendButtonWithoutLimit()
     }
 
-    func display(dataset: Dataset) {
-    }
+    func display(dataset: Dataset) {}
 
     func display(reply: Reply, hint: String?, status: SubmissionStatus) {
         display(reply: reply, withStatus: status)
@@ -207,24 +204,36 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     func display(status: SubmissionStatus) {
         switch status {
         case .correct:
-            statusViewHeight.constant = 48
-            view.backgroundColor = UIColor.stepikLightGreen
-            statusImageView.image = Images.correctQuizImage
-            statusLabel.text = correctTitle
-            setStatusElements(visible: true)
+            self.statusViewHeight.constant = 48
+            self.statusImageView.image = Images.correctQuizImage
+            self.statusLabel.text = correctTitle
+
+            self.setStatusElements(visible: true)
+
+            if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
+                self.view.backgroundColor = UIColor.stepikDarkGreen.withAlphaComponent(0.5)
+            } else {
+                self.view.backgroundColor = .stepikLightGreen
+            }
         case .wrong:
-            statusViewHeight.constant = 48
-            peerReviewHeight.constant = 0
-            peerReviewButton.isHidden = true
-            view.backgroundColor = UIColor.stepikLightRed
-            statusImageView.image = Images.wrongQuizImage
-            statusLabel.text = wrongTitle
-            setStatusElements(visible: true)
+            self.statusViewHeight.constant = 48
+            self.peerReviewHeight.constant = 0
+            self.peerReviewButton.isHidden = true
+            self.statusImageView.image = Images.wrongQuizImage
+            self.statusLabel.text = wrongTitle
+
+            self.setStatusElements(visible: true)
+
+            if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
+                self.view.backgroundColor = UIColor.stepikRed.withAlphaComponent(0.5)
+            } else {
+                self.view.backgroundColor = .stepikLightRed
+            }
         case .evaluation:
-            statusViewHeight.constant = 0
-            peerReviewHeight.constant = 0
-            peerReviewButton.isHidden = true
-            statusLabel.text = ""
+            self.statusViewHeight.constant = 0
+            self.peerReviewHeight.constant = 0
+            self.peerReviewButton.isHidden = true
+            self.statusLabel.text = ""
         }
     }
 

@@ -28,11 +28,16 @@ class CardStepViewController: UIViewController, CardStepView {
 
     var baseScrollView: UIScrollView { self.scrollView }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupWebView()
-        presenter?.refreshStep()
+        self.updateAppearance()
+        self.setupWebView()
+        self.presenter?.refreshStep()
 
         self.scrollView.contentInsetAdjustmentBehavior = .never
 
@@ -44,77 +49,39 @@ class CardStepViewController: UIViewController, CardStepView {
         )
     }
 
-    @objc func didScreenRotate() {
-        refreshWebView()
-        shouldRefreshOnAppear.toggle()
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
 
-        if shouldRefreshOnAppear {
-            refreshWebView()
+        if self.shouldRefreshOnAppear {
+            self.refreshWebView()
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        shouldRefreshOnAppear = false
+        self.shouldRefreshOnAppear = false
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-
-        if stepWebView != nil {
-            // If WKWebView is not deallocated, we should reset its delegate (iOS 9 crash)
-            stepWebView.navigationDelegate = nil
-            stepWebView.scrollView.delegate = nil
-        }
-        print("card step: deinit vc")
-    }
-
-    func setupWebView() {
-        let jscript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
-        let userScript = WKUserScript(source: jscript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        let wkUController = WKUserContentController()
-        wkUController.addUserScript(userScript)
-        let wkWebConfig = WKWebViewConfiguration()
-        wkWebConfig.userContentController = wkUController
-
-        stepWebView = WKWebView(frame: .zero, configuration: wkWebConfig)
-        stepWebView.navigationDelegate = self
-        stepWebView.scrollView.isScrollEnabled = false
-        stepWebView.scrollView.delegate = self
-        scrollView.insertSubview(stepWebView, at: 0)
-
-        stepWebView.translatesAutoresizingMaskIntoConstraints = false
-        stepWebView.snp.makeConstraints { make -> Void in
-            stepWebViewHeight = make.height.equalTo(5).constraint
-            make.bottom.equalTo(quizPlaceholderView.snp.top)
-            make.leading.equalTo(scrollView).offset(2)
-            make.trailing.equalTo(scrollView).offset(-2)
-            make.top.equalTo(scrollView).offset(5)
-        }
-    }
-
+    // MARK: CardStepView
+    
     func updateProblem(viewModel: CardStepViewModel) {
         let processor = HTMLProcessor(html: viewModel.htmlText)
         let html = processor
             .injectDefault()
             .inject(script: .fontSize(fontSize: viewModel.fontSize))
             .html
-        stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        self.stepWebView.loadHTMLString(html, baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
     }
 
     func updateQuiz(with controller: UIViewController) {
-        quizView = controller.view
+        self.quizView = controller.view
 
         self.addChild(controller)
-        quizPlaceholderView.addSubview(quizView!)
-        quizView!.snp.makeConstraints { $0.edges.equalTo(quizPlaceholderView) }
+        self.quizPlaceholderView.addSubview(self.quizView!)
+        self.quizView!.snp.makeConstraints { $0.edges.equalTo(self.quizPlaceholderView) }
 
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -126,12 +93,19 @@ class CardStepViewController: UIViewController, CardStepView {
             guard let quizHint = self.presenter?.calculateQuizHintSize() else {
                 return
             }
+
             self.scrollView.layoutIfNeeded()
 
             if quizHint.height > self.view.frame.height {
-                self.scrollView.scrollRectToVisible(CGRect(x: 0, y: quizHint.top.y, width: 1, height: self.scrollView.frame.height), animated: true)
+                self.scrollView.scrollRectToVisible(
+                    CGRect(x: 0, y: quizHint.top.y, width: 1, height: self.scrollView.frame.height),
+                    animated: true
+                )
             } else {
-                let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.height + self.scrollView.contentInset.bottom)
+                let bottomOffset = CGPoint(
+                    x: 0,
+                    y: self.scrollView.contentSize.height - self.scrollView.bounds.height + self.scrollView.contentInset.bottom
+                )
                 if bottomOffset.y > 0 {
                     self.scrollView.setContentOffset(bottomOffset, animated: true)
                 }
@@ -139,11 +113,13 @@ class CardStepViewController: UIViewController, CardStepView {
         }
     }
 
+    // MARK: Public API
+
     func refreshWebView() {
-        resetWebViewHeight(5.0)
+        self.resetWebViewHeight(5.0)
 
         func reloadContent() -> Promise<Void> {
-            return Promise { seal in
+            Promise { seal in
                 self.stepWebView.evaluateJavaScript("location.reload();", completionHandler: { _, error in
                     if let error = error {
                         return seal.reject(error)
@@ -165,11 +141,52 @@ class CardStepViewController: UIViewController, CardStepView {
             print("card step: error while refreshing")
         }
     }
+
+    // MARK: Private API
+
+    private func updateAppearance() {
+        self.view.backgroundColor = .clear
+        self.quizPlaceholderView.backgroundColor = .clear
+    }
+
+    private func setupWebView() {
+        let jscript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
+        let userScript = WKUserScript(source: jscript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let wkUController = WKUserContentController()
+        wkUController.addUserScript(userScript)
+        let wkWebConfig = WKWebViewConfiguration()
+        wkWebConfig.userContentController = wkUController
+
+        self.stepWebView = WKWebView(frame: .zero, configuration: wkWebConfig)
+        self.stepWebView.navigationDelegate = self
+        self.stepWebView.scrollView.isScrollEnabled = false
+        self.stepWebView.scrollView.delegate = self
+        self.stepWebView.isOpaque = false
+        self.stepWebView.backgroundColor = .clear
+        self.scrollView.insertSubview(stepWebView, at: 0)
+
+        self.stepWebView.translatesAutoresizingMaskIntoConstraints = false
+        self.stepWebView.snp.makeConstraints { make in
+            self.stepWebViewHeight = make.height.equalTo(5).constraint
+            make.bottom.equalTo(self.quizPlaceholderView.snp.top)
+            make.leading.equalTo(self.scrollView).offset(2)
+            make.trailing.equalTo(self.scrollView).offset(-2)
+            make.top.equalTo(self.scrollView).offset(5)
+        }
+    }
+
+    @objc
+    private func didScreenRotate() {
+        self.refreshWebView()
+        self.shouldRefreshOnAppear.toggle()
+    }
 }
+
+// MARK: - CardStepViewController: WKNavigationDelegate -
 
 extension CardStepViewController: WKNavigationDelegate {
     func resetWebViewHeight(_ height: Float) {
-        stepWebViewHeight.update(offset: height)
+        self.stepWebViewHeight.update(offset: height)
     }
 
     func getContentHeight(_ webView: WKWebView) -> Promise<Int> {
@@ -208,13 +225,17 @@ extension CardStepViewController: WKNavigationDelegate {
         }
     }
 
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
         guard let url = navigationAction.request.url else {
             return decisionHandler(.cancel)
         }
 
         // Check if the request is an iFrame
-        if let text = problemText {
+        if let text = self.problemText {
             if HTMLParsingUtil.getAlliFrameLinks(text).firstIndex(of: url.absoluteString) != nil {
                 return decisionHandler(.allow)
             }
@@ -232,6 +253,7 @@ extension CardStepViewController: WKNavigationDelegate {
             }
             return decisionHandler(.cancel)
         }
+
         return decisionHandler(.allow)
     }
 
@@ -248,6 +270,8 @@ extension CardStepViewController: WKNavigationDelegate {
         }
     }
 }
+
+// MARK: - CardStepViewController: UIScrollViewDelegate -
 
 extension CardStepViewController: UIScrollViewDelegate {
     func viewForZooming(in: UIScrollView) -> UIView? {

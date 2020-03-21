@@ -17,23 +17,23 @@ final class AdaptiveStatsPagerViewController: PagerController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = []
+        self.edgesForExtendedLayout = []
 
-        title = NSLocalizedString("AdaptiveStats", comment: "")
+        self.title = NSLocalizedString("AdaptiveStats", comment: "")
 
         self.dataSource = self
-        setUpTabs()
+        self.setUpTabs()
     }
 
     private func setUpTabs() {
-        tabHeight = 44.0
-        indicatorHeight = 1.5
-        centerCurrentTab = true
-        indicatorColor = UIColor.stepikAccent
-        selectedTabTextColor = UIColor.stepikAccent
-        tabsTextColor = UIColor.stepikAccent
-        tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
-        tabsViewBackgroundColor = UIColor.stepikBackground
+        self.tabHeight = 44.0
+        self.indicatorHeight = 1.5
+        self.centerCurrentTab = true
+        self.indicatorColor = .stepikAccent
+        self.selectedTabTextColor = .stepikAccent
+        self.tabsTextColor = .stepikAccent
+        self.tabsTextFont = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
+        self.tabsViewBackgroundColor = .stepikBackground
     }
 
     internal func controllerForSection(_ section: AdaptiveStatsSection) -> UIViewController {
@@ -43,13 +43,32 @@ final class AdaptiveStatsPagerViewController: PagerController {
 
         switch section {
         case .progress:
-            let vc = ControllerHelper.instantiateViewController(identifier: "Progress", storyboardName: "Adaptive") as! AdaptiveStatsViewController
-            vc.presenter = AdaptiveStatsPresenter(statsManager: statsManager, ratingManager: ratingsManager, view: vc)
-            return vc
+            let viewController = ControllerHelper.instantiateViewController(
+                identifier: "Progress",
+                storyboardName: "Adaptive"
+            ) as! AdaptiveStatsViewController
+
+            viewController.presenter = AdaptiveStatsPresenter(
+                statsManager: statsManager,
+                ratingManager: ratingsManager,
+                view: viewController
+            )
+
+            return viewController
         case .rating:
-            let vc = ControllerHelper.instantiateViewController(identifier: "Ratings", storyboardName: "Adaptive") as! AdaptiveRatingsViewController
-            vc.presenter = AdaptiveRatingsPresenter(ratingsAPI: AdaptiveRatingsAPI(), usersAPI: UsersAPI(), ratingManager: ratingsManager, view: vc)
-            return vc
+            let viewController = ControllerHelper.instantiateViewController(
+                identifier: "Ratings",
+                storyboardName: "Adaptive"
+            ) as! AdaptiveRatingsViewController
+
+            viewController.presenter = AdaptiveRatingsPresenter(
+                ratingsAPI: AdaptiveRatingsAPI(),
+                usersAPI: UsersAPI(),
+                ratingManager: ratingsManager,
+                view: viewController
+            )
+
+            return viewController
         default:
             return UIViewController()
         }
@@ -62,8 +81,8 @@ extension AdaptiveStatsPagerViewController: PagerDataSource {
     func tabViewForIndex(_ index: Int, pager: PagerController) -> UIView {
         let label = UILabel()
 
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: UIFont.Weight.light)
-        label.text = sections[index].localizedName
+        label.font = UIFont.systemFont(ofSize: 16.0, weight: .light)
+        label.text = self.sections[index].localizedName
         label.sizeToFit()
 
         return label

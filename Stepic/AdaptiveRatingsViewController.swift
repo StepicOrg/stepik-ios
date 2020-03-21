@@ -18,24 +18,24 @@ final class AdaptiveRatingsViewController: UIViewController {
 
     private var state: State = .loading {
         didSet {
-            switch state {
+            switch self.state {
             case .loading:
-                data = nil
-                tableView.reloadData()
-                loadingIndicator.startAnimating()
-                allCountLabel.isHidden = true
+                self.data = nil
+                self.tableView.reloadData()
+                self.loadingIndicator.startAnimating()
+                self.allCountLabel.isHidden = true
             case .empty(let message), .error(let message):
-                loadingIndicator.stopAnimating()
-                allCountLabel.text = message
-                allCountLabel.isHidden = false
+                self.loadingIndicator.stopAnimating()
+                self.allCountLabel.text = message
+                self.allCountLabel.isHidden = false
             case .normal(let message):
-                loadingIndicator.stopAnimating()
-                tableView.reloadData()
+                self.loadingIndicator.stopAnimating()
+                self.tableView.reloadData()
                 if let message = message {
-                    allCountLabel.text = message
-                    allCountLabel.isHidden = false
+                    self.allCountLabel.text = message
+                    self.allCountLabel.isHidden = false
                 } else {
-                    allCountLabel.isHidden = true
+                    self.allCountLabel.isHidden = true
                 }
             }
         }
@@ -52,40 +52,18 @@ final class AdaptiveRatingsViewController: UIViewController {
 
     private var data: [Any]?
 
-    @IBAction func onRatingSegmentedControlValueChanged(_ sender: Any) {
-        let sections: [Int: Int?] = [
-            0: nil,
-            1: 7,
-            2: 1
-        ]
-        daysCount = sections[ratingSegmentedControl.selectedSegmentIndex] ?? 1
-        state = .loading
-        presenter?.reloadData(days: daysCount, force: false)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        colorize()
-        localize()
+        self.colorize()
+        self.localize()
 
-        setUpTable()
-        presenter?.reloadData(days: daysCount, force: true)
+        self.setUpTable()
+        self.presenter?.reloadData(days: daysCount, force: true)
 
-        state = .loading
+        self.state = .loading
 
-        presenter?.sendOpenedAnalytics()
-    }
-
-    private func colorize() {
-        loadingIndicator.color = UIColor.stepikLoadingIndicator
-        ratingSegmentedControl.tintColor = UIColor.stepikAccent
-    }
-
-    private func localize() {
-        ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveAllTime", comment: ""), forSegmentAt: 0)
-        ratingSegmentedControl.setTitle(NSLocalizedString("Adaptive7Days", comment: ""), forSegmentAt: 1)
-        ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveToday", comment: ""), forSegmentAt: 2)
+        self.presenter?.sendOpenedAnalytics()
     }
 
     override func viewDidLayoutSubviews() {
@@ -98,55 +76,64 @@ final class AdaptiveRatingsViewController: UIViewController {
         let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         if headerView.frame.size.height != size.height {
             headerView.frame.size.height = size.height
-            tableView.tableHeaderView = headerView
-            tableView.layoutIfNeeded()
+            self.tableView.tableHeaderView = headerView
+            self.tableView.layoutIfNeeded()
         }
     }
 
-    func reload() {
-        if data == nil {
-            state = .empty(message: NSLocalizedString("AdaptiveProgressWeeksEmpty", comment: ""))
-        } else {
-            switch state {
-            case .normal(let message):
-                state = .normal(message: message)
-            default:
-                state = .normal(message: nil)
-            }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
         }
+    }
+
+    @IBAction
+    func onRatingSegmentedControlValueChanged(_ sender: Any) {
+        let sections: [Int: Int?] = [
+            0: nil,
+            1: 7,
+            2: 1
+        ]
+
+        self.daysCount = sections[self.ratingSegmentedControl.selectedSegmentIndex] ?? 1
+        self.state = .loading
+        self.presenter?.reloadData(days: self.daysCount, force: false)
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikBackground
+        self.loadingIndicator.color = .stepikLoadingIndicator
+        self.ratingSegmentedControl.tintColor = .stepikAccent
+        self.allCountLabel.textColor = .stepikGray2
+    }
+
+    private func localize() {
+        self.ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveAllTime", comment: ""), forSegmentAt: 0)
+        self.ratingSegmentedControl.setTitle(NSLocalizedString("Adaptive7Days", comment: ""), forSegmentAt: 1)
+        self.ratingSegmentedControl.setTitle(NSLocalizedString("AdaptiveToday", comment: ""), forSegmentAt: 2)
     }
 
     private func setUpTable() {
-        tableView.delegate = self
-        tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
 
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 112
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 112
 
-        tableView.register(UINib(nibName: "LeaderboardTableViewCell", bundle: nil), forCellReuseIdentifier: LeaderboardTableViewCell.reuseId)
+        self.tableView.register(
+            UINib(nibName: "LeaderboardTableViewCell", bundle: nil),
+            forCellReuseIdentifier: LeaderboardTableViewCell.reuseId
+        )
 
         self.tableView.contentInsetAdjustmentBehavior = .never
     }
 }
 
 extension AdaptiveRatingsViewController: AdaptiveRatingsView {
-    func setRatings(data: ScoreboardViewData) {
-        self.data = data.leaders
-
-        let pluralizedString = StringHelper.pluralize(number: data.allCount, forms: [
-            NSLocalizedString("AdaptiveRatingFooterText1", comment: ""),
-            NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
-            NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
-        ])
-        state = .normal(message: String(format: pluralizedString, "\(data.allCount)"))
-    }
-
-    func showError() {
-        state = .error(message: NSLocalizedString("AdaptiveRatingLoadError", comment: ""))
-    }
-
-    var separatorPosition: Int? {
-        guard let data = data as? [RatingViewData] else {
+    private var separatorPosition: Int? {
+        guard let data = self.data as? [RatingViewData] else {
             return nil
         }
 
@@ -155,19 +142,51 @@ extension AdaptiveRatingsViewController: AdaptiveRatingsView {
                 return i
             }
         }
+
         return nil
+    }
+
+    func reload() {
+        if self.data == nil {
+            self.state = .empty(message: NSLocalizedString("AdaptiveProgressWeeksEmpty", comment: ""))
+        } else {
+            switch self.state {
+            case .normal(let message):
+                self.state = .normal(message: message)
+            default:
+                self.state = .normal(message: nil)
+            }
+        }
+    }
+
+    func setRatings(data: ScoreboardViewData) {
+        self.data = data.leaders
+
+        let pluralizedString = StringHelper.pluralize(number: data.allCount, forms: [
+            NSLocalizedString("AdaptiveRatingFooterText1", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText234", comment: ""),
+            NSLocalizedString("AdaptiveRatingFooterText567890", comment: "")
+        ])
+        self.state = .normal(message: String(format: pluralizedString, "\(data.allCount)"))
+    }
+
+    func showError() {
+        self.state = .error(message: NSLocalizedString("AdaptiveRatingLoadError", comment: ""))
     }
 }
 
 extension AdaptiveRatingsViewController: UITableViewDelegate, UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         (self.data?.count ?? 0) + (self.separatorPosition != nil ? 1 : 0)
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardTableViewCell.reuseId, for: indexPath) as! LeaderboardTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: LeaderboardTableViewCell.reuseId,
+            for: indexPath
+        ) as! LeaderboardTableViewCell
 
-        let separatorAfterIndex = (separatorPosition ?? Int.max - 1)
+        let separatorAfterIndex = (self.separatorPosition ?? Int.max - 1)
 
         if separatorAfterIndex + 1 == indexPath.item {
             cell.isSeparator = true

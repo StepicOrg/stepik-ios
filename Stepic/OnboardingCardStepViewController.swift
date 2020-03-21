@@ -16,9 +16,9 @@ final class OnboardingCardStepViewController: CardStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        stepWebView.navigationDelegate = self
+        self.stepWebView.navigationDelegate = self
 
-        let step = loadOnboardingStep(from: "step\(stepIndex!)")
+        let step = self.loadOnboardingStep(from: "step\(self.stepIndex!)")
 
         // Add small top padding
         let processor = HTMLProcessor(html: step.text ?? "")
@@ -27,7 +27,7 @@ final class OnboardingCardStepViewController: CardStepViewController {
             .inject(script: .customHead(head: "<style>\nbody{padding-top: 8px;}</style>"))
             .html
 
-        stepWebView.loadHTMLString(html, baseURL: step.baseURL)
+        self.stepWebView.loadHTMLString(html, baseURL: step.baseURL)
     }
 
     override func refreshWebView() {
@@ -45,8 +45,10 @@ final class OnboardingCardStepViewController: CardStepViewController {
 
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
-        delegate?.contentLoadingDidComplete()
+        self.delegate?.contentLoadingDidComplete()
     }
+
+    // MARK: Private API
 
     private func loadOnboardingStep(from file: String) -> (text: String?, baseURL: URL?) {
         guard let filePath = Bundle.main.path(forResource: file, ofType: "html") else {

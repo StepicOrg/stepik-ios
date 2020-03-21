@@ -9,6 +9,10 @@
 import Foundation
 
 enum AdaptiveStatsSection {
+    case progress
+    case rating
+    case achievements
+
     var localizedName: String {
         switch self {
         case .progress:
@@ -19,8 +23,4 @@ enum AdaptiveStatsSection {
             return NSLocalizedString("AdaptiveAchievements", comment: "")
         }
     }
-
-    case progress
-    case rating
-    case achievements
 }

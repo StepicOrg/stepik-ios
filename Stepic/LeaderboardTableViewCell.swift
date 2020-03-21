@@ -17,62 +17,76 @@ final class LeaderboardTableViewCell: UITableViewCell {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var separatorImageView: UIImageView!
 
-    private let meColor = UIColor(hex6: 0xFFDCA5)
+    private var isMe: Bool = false
 
     var isSeparator: Bool = false {
         didSet {
-            separatorImageView.isHidden = !isSeparator
-            userLabel.isHidden = isSeparator
-            expLabel.isHidden = isSeparator
-            medalImageView.isHidden = isSeparator
-            positionLabel.isHidden = isSeparator
+            self.separatorImageView.isHidden = !self.isSeparator
+            self.userLabel.isHidden = self.isSeparator
+            self.expLabel.isHidden = self.isSeparator
+            self.medalImageView.isHidden = self.isSeparator
+            self.positionLabel.isHidden = self.isSeparator
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        backgroundColor = .clear
-        positionLabel.isHidden = true
+        self.positionLabel.isHidden = true
+        self.separatorImageView.image = UIImage(named: "more")?.withRenderingMode(.alwaysTemplate)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.colorize()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        backgroundColor = .clear
-        isSeparator = false
-        positionLabel.isHidden = true
-        layoutIfNeeded()
+        self.isMe = false
+        self.isSeparator = false
+        self.positionLabel.isHidden = true
+
+        self.layoutIfNeeded()
     }
 
     func updateInfo(position: Int, username: String, exp: Int, isMe: Bool = false) {
-        updatePosition(position)
-        userLabel.text = "\(username)"
-        expLabel.text = "\(exp)"
+        self.updatePosition(position)
+        self.userLabel.text = "\(username)"
+        self.expLabel.text = "\(exp)"
+
+        self.isMe = isMe
 
         if isMe {
-            self.backgroundColor = meColor
-            userLabel.text = NSLocalizedString("AdaptiveRatingYou", comment: "")
+            self.backgroundColor = .stepikYellow
+            self.userLabel.text = NSLocalizedString("AdaptiveRatingYou", comment: "")
         }
     }
 
     private func updatePosition(_ position: Int) {
-        medalImageView.isHidden = false
-        positionLabel.isHidden = true
-        positionLabel.text = "\(position)."
+        self.medalImageView.isHidden = false
+        self.positionLabel.isHidden = true
+        self.positionLabel.text = "\(position)."
+
         switch position {
         case 1:
-            medalImageView.image = UIImage(named: "medal1")
-            break
+            self.medalImageView.image = UIImage(named: "medal1")
         case 2:
-            medalImageView.image = UIImage(named: "medal2")
-            break
+            self.medalImageView.image = UIImage(named: "medal2")
         case 3:
-            medalImageView.image = UIImage(named: "medal3")
-            break
+            self.medalImageView.image = UIImage(named: "medal3")
         default:
-            positionLabel.isHidden = false
-            medalImageView.isHidden = true
+            self.positionLabel.isHidden = false
+            self.medalImageView.isHidden = true
         }
+    }
+
+    private func colorize() {
+        self.backgroundColor = self.isMe ? .stepikYellow : .clear
+        self.separatorImageView.tintColor = .stepikSeparator
+        self.userLabel.textColor = .stepikGray
+        self.positionLabel.textColor = .stepikGray
+        self.expLabel.textColor = .stepikGray2
     }
 }

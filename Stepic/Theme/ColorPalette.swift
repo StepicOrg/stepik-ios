@@ -178,6 +178,16 @@ extension UIColor {
         }
     }
 
+    /// The color for text labels that contain primary content.
+    /// Black in light mode and white in dark mode.
+    static var stepikSystemLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .label
+        } else {
+            return .black
+        }
+    }
+
     /// The color for activity indicators.
     static var stepikLoadingIndicator: UIColor { .stepikAccent }
 
@@ -191,11 +201,50 @@ extension UIColor {
 
     // MARK: Standard Content Background Colors
 
+    /// The color for the main background of the interface.
     static var stepikBackground: UIColor {
         if #available(iOS 13.0, *) {
             return .systemBackground
         } else {
             return .white
+        }
+    }
+
+    /// The color for content layered on top of the main background.
+    static var stepikSecondaryBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondarySystemBackground
+        } else {
+            return UIColor(hex6: 0xF2F2F7)
+        }
+    }
+
+    /// The color for content layered on top of secondary backgrounds.
+    static var stepikTertiaryBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .tertiarySystemBackground
+        } else {
+            return .white
+        }
+    }
+
+    // MARK: Standard Colors
+
+    /// The base gray color.
+    static var stepikGray: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemGray
+        } else {
+            return UIColor(hex6: 0x8E8E93)
+        }
+    }
+
+    /// A second-level shade of grey.
+    static var stepikGray2: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemGray2
+        } else {
+            return UIColor(hex6: 0xAEAEB2)
         }
     }
 }

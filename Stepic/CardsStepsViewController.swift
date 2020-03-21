@@ -23,13 +23,13 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
 
     var state: CardsStepsViewState = .normal {
         didSet {
-            switch state {
+            switch self.state {
             case .normal:
-                isPlaceholderShown = false
+                self.isPlaceholderShown = false
             case .connectionError:
-                showPlaceholder(for: .connectionError)
+                self.showPlaceholder(for: .connectionError)
             case .coursePassed:
-                showPlaceholder(for: .adaptiveCoursePassed)
+                self.showPlaceholder(for: .adaptiveCoursePassed)
             default:
                 break
             }
@@ -42,43 +42,51 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnectionQuiz, action: { [weak self] in
-            self?.presenter?.tryAgain()
-        }), for: .connectionError)
-
-        registerPlaceholder(placeholder: StepikPlaceholder(.adaptiveCoursePassed), for: .adaptiveCoursePassed)
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnectionQuiz,
+                action: { [weak self] in
+                    self?.presenter?.tryAgain()
+                }
+            ),
+            for: .connectionError
+        )
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(.adaptiveCoursePassed),
+            for: .adaptiveCoursePassed
+        )
     }
 
     func refreshCards() {
-        if kolodaView.delegate == nil {
-            kolodaView.dataSource = self
-            kolodaView.delegate = self
+        if self.kolodaView.delegate == nil {
+            self.kolodaView.dataSource = self
+            self.kolodaView.delegate = self
         } else {
-            kolodaView.reloadData()
+            self.kolodaView.reloadData()
         }
     }
 
     func swipeCardUp() {
-        canSwipeCurrentCardUp = true
-        kolodaView.swipe(.up)
-        canSwipeCurrentCardUp = false
+        self.canSwipeCurrentCardUp = true
+        self.kolodaView.swipe(.up)
+        self.canSwipeCurrentCardUp = false
     }
 
     func swipeCardLeft() {
-        kolodaView.swipe(.left)
+        self.kolodaView.swipe(.left)
     }
 
     func swipeCardRight() {
-        kolodaView.swipe(.right)
+        self.kolodaView.swipe(.right)
     }
 
     func updateTopCardContent(stepViewController: CardStepViewController) {
-        guard let card = topCard else {
+        guard let card = self.topCard else {
             return
         }
 
-        currentStepViewController?.removeFromParent()
-        currentStepViewController = stepViewController
+        self.currentStepViewController?.removeFromParent()
+        self.currentStepViewController = stepViewController
 
         self.addChild(stepViewController)
 
@@ -86,7 +94,7 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
     }
 
     func updateTopCardTitle(title: String, showControls: Bool) {
-        guard let card = topCard else {
+        guard let card = self.topCard else {
             return
         }
 
@@ -106,45 +114,51 @@ class CardsStepsViewController: UIViewController, CardsStepsView, ControllerWith
         self.push(module: assembly.makeModule())
     }
 
-    func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int) {
-    }
+    func updateProgress(rating: Int, prevMaxRating: Int, maxRating: Int, level: Int) {}
 
-    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {
-    }
+    func showCongratulation(for rating: Int, isSpecial: Bool, completion: (() -> Void)? = nil) {}
 
     func presentShareDialog(for link: String) {
         let activityViewController = SharingHelper.getSharingController(link)
         activityViewController.popoverPresentationController?.sourceView = topCard?.titleButton ?? view
-        present(activityViewController, animated: true, completion: nil)
+        self.present(activityViewController, animated: true)
     }
 
     func showCongratulationPopup(type: CongratulationType, completion: (() -> Void)? = nil) {
-        if state == .congratulation {
+        if self.state == .congratulation {
             completion?()
             return
         }
 
-        let controller = Alerts.congratulation.construct(congratulationType: type, continueHandler: { [weak self] in
-            self?.state = .normal
-            completion?()
-        })
-        state = .congratulation
+        let controller = Alerts.congratulation.construct(
+            congratulationType: type,
+            continueHandler: { [weak self] in
+                self?.state = .normal
+                completion?()
+            }
+        )
+
+        self.state = .congratulation
+
         Alerts.congratulation.present(alert: controller, inController: ControllerHelper.getTopViewController() ?? self)
     }
 }
 
+// MARK: - CardsStepsViewController: KolodaViewDelegate -
+
 extension CardsStepsViewController: KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
         if direction == .right {
-            presenter?.sendReaction(.neverAgain)
+            self.presenter?.sendReaction(.neverAgain)
         } else if direction == .left {
-            presenter?.sendReaction(.maybeLater)
+            self.presenter?.sendReaction(.maybeLater)
         }
-        kolodaView.resetCurrentCardIndex()
+
+        self.kolodaView.resetCurrentCardIndex()
     }
 
     func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -> Bool {
-        if !(presenter?.canSwipeCard ?? false) {
+        if !(self.presenter?.canSwipeCard ?? false) {
             return false
         }
 
@@ -162,6 +176,8 @@ extension CardsStepsViewController: KolodaViewDelegate {
     func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool { false }
 }
 
+// MARK: - CardsStepsViewController: KolodaViewDataSource -
+
 extension CardsStepsViewController: KolodaViewDataSource {
     func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed { .`default` }
 
@@ -169,14 +185,14 @@ extension CardsStepsViewController: KolodaViewDataSource {
 
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         if index > 0 {
-            let card = StepReversedCardView()
-            return card
+            return StepReversedCardView()
         } else {
-            topCard = cardView
-            topCard?.delegate = presenter
-            topCard?.cardState = .loading
-            presenter?.refreshTopCard()
-            return topCard ?? UIView()
+            self.topCard = self.cardView
+            self.topCard?.delegate = self.presenter
+            self.topCard?.cardState = .loading
+            self.presenter?.refreshTopCard()
+
+            return self.topCard ?? UIView()
         }
     }
 

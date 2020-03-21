@@ -50,41 +50,58 @@ final class CongratulationViewController: UIViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet var separatorView: UIView!
 
-    @IBAction func onShareButtonClick(_ sender: Any) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.colorize()
+        self.localize()
+
+        self.textLabel.text = self.congratulationType.congratulationText
+        self.coverImageView.image = self.congratulationType.image
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    @IBAction
+    func onShareButtonClick(_ sender: Any) {
         guard let url = URL(string: "https://itunes.apple.com/app/id\(StepikApplicationsInfo.appId)") else {
             return
         }
 
-        let activityVC = UIActivityViewController(activityItems: [congratulationType.shareText, url], applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
-        activityVC.popoverPresentationController?.sourceView = shareButton
-        present(activityVC, animated: true)
+        let activityViewController = UIActivityViewController(
+            activityItems: [self.congratulationType.shareText, url],
+            applicationActivities: nil
+        )
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
+        activityViewController.popoverPresentationController?.sourceView = shareButton
+
+        self.present(activityViewController, animated: true)
     }
 
-    @IBAction func onContinueButtonClick(_ sender: Any) {
+    @IBAction
+    func onContinueButtonClick(_ sender: Any) {
         dismiss(animated: true, completion: { [weak self] in
             self?.continueHandler?()
         })
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        colorize()
-
-        localize()
-        textLabel.text = congratulationType.congratulationText
-        coverImageView.image = congratulationType.image
-    }
-
     private func localize() {
-        shareButton.setTitle(NSLocalizedString("ShareAchievement", comment: ""), for: .normal)
-        continueButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
+        self.shareButton.setTitle(NSLocalizedString("ShareAchievement", comment: ""), for: .normal)
+        self.continueButton.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
     }
 
     private func colorize() {
-        continueButton.tintColor = UIColor.stepikAccent
-        shareButton.tintColor = UIColor.stepikAccent
+        self.view.backgroundColor = .stepikTertiaryBackground
+        self.shareButton.tintColor = .stepikAccent
+        self.separatorView.backgroundColor = .stepikSeparator
+        self.continueButton.tintColor = .stepikAccent
     }
 }

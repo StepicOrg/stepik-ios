@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepCardView" customModule="Stepic" customModuleProvider="target">
             <connections>
+                <outlet property="bottomSeparatorView" destination="sFq-96-JZS" id="Pt5-e1-lWH"/>
                 <outlet property="contentView" destination="LM4-eR-A8y" id="j6L-Gk-CxC"/>
                 <outlet property="controlButton" destination="LCg-u0-xF2" id="ceu-N0-3vh"/>
+                <outlet property="loadingActivityIndicator" destination="p5v-8t-BdC" id="Pvm-HL-XiN"/>
                 <outlet property="loadingLabel" destination="Mhp-0f-kO6" id="9OP-aI-LVc"/>
                 <outlet property="loadingView" destination="V6W-bQ-X6j" id="DqQ-aN-C2J"/>
                 <outlet property="titleButton" destination="8aa-Jm-cMF" id="SqM-1v-GUd"/>
                 <outlet property="titleLabel" destination="Cwb-9k-TMQ" id="pA6-nj-ZdD"/>
                 <outlet property="titlePadView" destination="HzP-xg-1iP" id="e8u-ty-StC"/>
+                <outlet property="titleSeparatorView" destination="WzK-ck-ENu" id="RMF-me-uPL"/>
                 <outlet property="whitePadView" destination="xHA-bo-OBf" id="fhj-iN-vCB"/>
             </connections>
         </placeholder>
@@ -28,22 +29,21 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LM4-eR-A8y">
                     <rect key="frame" x="0.0" y="45" width="320" height="477"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HzP-xg-1iP">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WzK-ck-ENu">
-                            <rect key="frame" x="8" y="42" width="304" height="1"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WzK-ck-ENu" userLabel="Separator View">
+                            <rect key="frame" x="8" y="42" width="304" height="0.5"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="0.25" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="MOF-vU-npX"/>
+                                <constraint firstAttribute="height" constant="0.5" id="MOF-vU-npX"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.68 Билет 21 Вопрос 4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwb-9k-TMQ">
                             <rect key="frame" x="8" y="13" width="272" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                            <color key="textColor" white="0.0" alpha="0.75" colorSpace="calibratedWhite"/>
+                            <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aa-Jm-cMF">
@@ -61,7 +61,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="352-UI-eCn"/>
                         <constraint firstItem="Cwb-9k-TMQ" firstAttribute="leading" secondItem="HzP-xg-1iP" secondAttribute="leading" constant="8" id="F7I-GS-cJQ"/>
@@ -76,14 +75,12 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHA-bo-OBf">
                     <rect key="frame" x="0.0" y="45" width="320" height="478"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6W-bQ-X6j" userLabel="Loading View">
                     <rect key="frame" x="20" y="152" width="280" height="250"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="p5v-8t-BdC">
-                            <rect key="frame" x="121" y="106.5" width="37" height="37"/>
-                            <color key="color" red="0.36470588240000001" green="0.4039215686" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="p5v-8t-BdC" userLabel="Large White Activity Indicators">
+                            <rect key="frame" x="121.5" y="106.5" width="37" height="37"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="загружаем..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhp-0f-kO6">
                             <rect key="frame" x="87.5" y="167.5" width="105.5" height="19.5"/>
@@ -92,7 +89,6 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Mhp-0f-kO6" firstAttribute="centerX" secondItem="V6W-bQ-X6j" secondAttribute="centerX" id="2OQ-Yx-FIk"/>
                         <constraint firstAttribute="width" constant="280" id="9yq-qy-7eM">
@@ -110,7 +106,6 @@
                 </view>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCg-u0-xF2">
                     <rect key="frame" x="5" y="523" width="310" height="45"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="s70-9D-9gB"/>
                     </constraints>
@@ -125,15 +120,14 @@
                         <action selector="onControlButtonClick:" destination="-1" eventType="touchUpInside" id="2PL-ed-TwN"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFq-96-JZS">
-                    <rect key="frame" x="8" y="523" width="304" height="1"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFq-96-JZS" userLabel="Bottom Separator View">
+                    <rect key="frame" x="8" y="523" width="304" height="0.5"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.25" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="A7y-iL-iDY"/>
+                        <constraint firstAttribute="height" constant="0.5" id="A7y-iL-iDY"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="HzP-xg-1iP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2kK-sG-Bgc"/>
                 <constraint firstItem="LCg-u0-xF2" firstAttribute="top" secondItem="xHA-bo-OBf" secondAttribute="bottom" id="9jQ-yF-dBi"/>
@@ -161,6 +155,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Topic-100" width="33" height="33"/>
+        <image name="Topic-100" width="33.333332061767578" height="33.333332061767578"/>
     </resources>
 </document>
