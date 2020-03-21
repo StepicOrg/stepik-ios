@@ -4,7 +4,7 @@ import UIKit
 extension ExploreBlockContainerView {
     struct Appearance {
         let separatorColor = UIColor.stepikSeparator
-        var backgroundColor = UIColor.white
+        var backgroundColor = UIColor.stepikBackground
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
@@ -69,12 +69,24 @@ final class ExploreBlockContainerView: UIView {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateViewColor()
+        }
+    }
+
+    private func updateViewColor() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
 }
 
 extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.contentView.clipsToBounds = false
-        self.backgroundColor = self.appearance.backgroundColor
+        self.updateViewColor()
     }
 
     func addSubviews() {

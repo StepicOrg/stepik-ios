@@ -14,7 +14,7 @@ extension ContinueActionButton {
         let titleInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
         let defaultBackgroundColor = UIColor.white
-        let defaultTitleColor = UIColor.stepikAccent
+        let defaultTitleColor = UIColor.stepikAccentFixed
 
         let callToActionBackgroundColor = UIColor.stepikGreen
         let callToActionTitleColor = UIColor.white

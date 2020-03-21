@@ -5,7 +5,7 @@ extension CourseWidgetCoverView {
     class Appearance {
         let cornerRadius: CGFloat = 10
 
-        let adaptiveMarkTextColor = UIColor.stepikAccent
+        let adaptiveMarkTextColor = UIColor.stepikAccentFixed
         let adaptiveMarkBackgroundColor = UIColor(hex6: 0xEBF2FF)
         let adaptiveMarkFont = UIFont.systemFont(ofSize: 7.0, weight: .bold)
         let adaptiveMarkHeight: CGFloat = 16.0

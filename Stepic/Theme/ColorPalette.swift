@@ -95,6 +95,9 @@ extension UIColor {
 
     // MARK: Accent
 
+    /// A non adaptable color with hex value #535366.
+    static var stepikAccentFixed: UIColor { ColorPalette.accent700 }
+
     static var stepikAccent: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.accent700,

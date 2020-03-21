@@ -16,10 +16,11 @@ extension ContinueLastStepView {
         let cornerRadius: CGFloat = 8.0
 
         let progressHeight: CGFloat = 3.0
-        let progressFillColor = UIColor(hex6: 0x66cc66)
+        let progressFillColor = UIColor.stepikGreen
         let progressBackgroundColor = UIColor.clear
 
-        let backgroundOverlayViewColor = UIColor.stepikAccentAlpha85
+        let lightModeBackgroundOverlayViewColor = UIColor.stepikAccentFixed.withAlphaComponent(0.85)
+        let darkModeBackgroundOverlayViewColor = UIColor.stepikSecondaryBackground.withAlphaComponent(0.85)
 
         let coverCornerRadius: CGFloat = 3.0
 
@@ -105,7 +106,7 @@ final class ContinueLastStepView: UIView {
 
     private lazy var overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = self.appearance.backgroundOverlayViewColor
+        view.backgroundColor = self.appearance.lightModeBackgroundOverlayViewColor
         view.clipsToBounds = true
         view.layer.cornerRadius = self.appearance.cornerRadius
         return view
@@ -152,12 +153,31 @@ final class ContinueLastStepView: UIView {
         self.appearance = appearance
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateViewColor()
+        }
+    }
+
+    private func updateViewColor() {
+        self.progressView.progressTintColor = self.appearance.progressFillColor
+
+        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
+            self.overlayView.backgroundColor = self.appearance.darkModeBackgroundOverlayViewColor
+        } else {
+            self.overlayView.backgroundColor = self.appearance.lightModeBackgroundOverlayViewColor
+        }
     }
 
     @objc
@@ -167,6 +187,10 @@ final class ContinueLastStepView: UIView {
 }
 
 extension ContinueLastStepView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.updateViewColor()
+    }
+
     func addSubviews() {
         self.labelsStackView.addArrangedSubview(self.courseNameLabel)
         self.labelsStackView.addArrangedSubview(self.progressLabel)
