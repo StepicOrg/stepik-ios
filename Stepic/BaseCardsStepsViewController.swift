@@ -141,7 +141,7 @@ final class BaseCardsStepsViewController: CardsStepsViewController {
         self.view.backgroundColor = .stepikBackground
         self.kolodaView.backgroundColor = .clear
         self.progressBar.progressTintColor = .stepikGreen
-        self.shadowView.backgroundColor = .stepikSeparator
+        self.shadowView.backgroundColor = .stepikOpaqueSeparator
         self.trophyButton.tintColor = .stepikAccent
         self.backButton.tintColor = .stepikAccent
         self.expLabel.textColor = .stepikAccent

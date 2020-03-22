@@ -121,20 +121,44 @@ final class PersonalDeadlineEditScheduleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 80) }
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "PersonalDeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: "PersonalDeadlineTableViewCell")
-        initSectionDeadlinesData()
-        tableView.reloadData()
-        saveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: .stepikLightBlue)
-        localize()
+
+        self.titleLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 80) }
+        self.saveButton.setRoundedCorners(cornerRadius: 8, borderWidth: 1, borderColor: .stepikLightBlue)
+
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(
+            UINib(nibName: "PersonalDeadlineTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "PersonalDeadlineTableViewCell"
+        )
+
+        self.initSectionDeadlinesData()
+        self.tableView.reloadData()
+
+        self.localize()
+        self.colorize()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
     }
 
     private func localize() {
-        titleLabel.text = NSLocalizedString("EditSchedule", comment: "")
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
-        saveButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
+        self.titleLabel.text = NSLocalizedString("EditSchedule", comment: "")
+        self.cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        self.saveButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikTertiaryBackground
+        self.titleLabel.textColor = .stepikPrimaryText
+        self.saveButton.setTitleColor(.stepikLightBlue, for: .normal)
+        self.saveButton.layer.borderColor = UIColor.stepikLightBlue.cgColor
+        self.cancelButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 
     private func initSectionDeadlinesData() {

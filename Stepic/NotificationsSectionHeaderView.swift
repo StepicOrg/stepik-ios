@@ -56,7 +56,7 @@ final class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
 
         self.leftLabel.textColor = .stepikPrimaryText
         self.rightLabel.textColor = .stepikPrimaryText
-        self.topSeparatorView.backgroundColor = .stepikSeparator
-        self.bottomSeparatorView.backgroundColor = .stepikSeparator
+        self.topSeparatorView.backgroundColor = .stepikOpaqueSeparator
+        self.bottomSeparatorView.backgroundColor = .stepikOpaqueSeparator
     }
 }

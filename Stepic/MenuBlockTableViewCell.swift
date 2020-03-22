@@ -21,7 +21,7 @@ class MenuBlockTableViewCell: UITableViewCell {
         self.selectedBackgroundView = selectedView
 
         separator.isHidden = false
-        separator.backgroundColor = UIColor.stepikSeparator
+        separator.backgroundColor = UIColor.stepikOpaqueSeparator
         self.contentView.addSubview(separator)
 
         separator.snp.makeConstraints { make -> Void in

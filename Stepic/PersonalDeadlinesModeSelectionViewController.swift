@@ -43,7 +43,7 @@ final class PersonalDeadlinesModeSelectionLegacyAssembly: Assembly {
 }
 
 final class PersonalDeadlinesModeSelectionViewController: UIViewController {
-    @IBOutlet weak var questionLabel: StepikLabel!
+    @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var cancelButton: UIButton!
 
@@ -60,47 +60,44 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView.register(UINib(nibName: "PersonalDeadlineModeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PersonalDeadlineModeCollectionViewCell")
+        self.collectionView.register(
+            UINib(nibName: "PersonalDeadlineModeCollectionViewCell", bundle: nil),
+            forCellWithReuseIdentifier: "PersonalDeadlineModeCollectionViewCell"
+        )
 
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        questionLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 80) }
-        localize()
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.questionLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 80) }
+
+        self.colorize()
+        self.localize()
+
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.opened)
-    }
-
-    private func localize() {
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
-        questionLabel.text = NSLocalizedString("DeadlineModeQuestion", comment: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.layoutSubviews()
-        collectionView.snp.makeConstraints { $0.height.equalTo(modeButtonSize.height) }
-        updateCollectionLayout()
-    }
 
-    private func updateCollectionLayout() {
-        collectionView.invalidateIntrinsicContentSize()
-        collectionView.layoutIfNeeded()
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
-        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
-        collectionView.invalidateIntrinsicContentSize()
-        collectionView.layoutIfNeeded()
+        self.view.layoutSubviews()
+        self.collectionView.snp.makeConstraints { $0.height.equalTo(modeButtonSize.height) }
+        self.updateCollectionLayout()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateCollectionLayout()
+        self.updateCollectionLayout()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
     }
 
-    @IBAction func cancelPressed(_ sender: Any) {
+    @IBAction
+    func cancelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.closed)
     }
@@ -111,9 +108,14 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
             return
         }
 
-        AnalyticsReporter.reportEvent(AnalyticsEvents.PersonalDeadlines.Mode.chosen, parameters: ["hours": mode.getModeInfo().weeklyLoadHours])
+        AnalyticsReporter.reportEvent(
+            AnalyticsEvents.PersonalDeadlines.Mode.chosen,
+            parameters: ["hours": mode.getModeInfo().weeklyLoadHours]
+        )
         AmplitudeAnalyticsEvents.PersonalDeadlines.created(weeklyLoadHours: mode.getModeInfo().weeklyLoadHours).send()
+
         SVProgressHUD.show()
+
         PersonalDeadlinesService().countDeadlines(for: course, mode: mode).done {
             SVProgressHUD.dismiss()
             self.onDeadlineSelected?()
@@ -128,6 +130,27 @@ final class PersonalDeadlinesModeSelectionViewController: UIViewController {
             SVProgressHUD.showError(withStatus: "")
             print("\(#file) \(#function) \(error)")
         }
+    }
+
+    private func localize() {
+        self.cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        self.questionLabel.text = NSLocalizedString("DeadlineModeQuestion", comment: "")
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikTertiaryBackground
+        self.questionLabel.textColor = .stepikSystemLabel
+        self.cancelButton.setTitleColor(.stepikPrimaryText, for: .normal)
+    }
+
+    private func updateCollectionLayout() {
+        self.collectionView.invalidateIntrinsicContentSize()
+        self.collectionView.layoutIfNeeded()
+        (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = modeButtonSize
+        (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumInteritemSpacing = 12
+        (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing = 12
+        self.collectionView.invalidateIntrinsicContentSize()
+        self.collectionView.layoutIfNeeded()
     }
 }
 

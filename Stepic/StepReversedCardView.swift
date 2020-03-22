@@ -27,7 +27,7 @@ final class StepReversedCardView: UIView {
 
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.stepikSeparator.cgColor
+        self.layer.borderColor = UIColor.stepikOpaqueSeparator.cgColor
 
         self.whiteView.frame = self.bounds
     }

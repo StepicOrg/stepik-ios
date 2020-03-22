@@ -120,7 +120,7 @@ final class RateAppViewController: UIViewController {
     private func colorize() {
         self.view.backgroundColor = .stepikTertiaryBackground
         self.buttonsContainerView.backgroundColor = .stepikTertiaryBackground
-        self.buttonsSeparator.backgroundColor = .stepikSeparator
+        self.buttonsSeparator.backgroundColor = .stepikOpaqueSeparator
         self.laterButton.setTitleColor(.stepikAccent, for: .normal)
     }
 

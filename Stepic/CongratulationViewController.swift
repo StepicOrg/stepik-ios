@@ -101,7 +101,7 @@ final class CongratulationViewController: UIViewController {
     private func colorize() {
         self.view.backgroundColor = .stepikTertiaryBackground
         self.shareButton.tintColor = .stepikAccent
-        self.separatorView.backgroundColor = .stepikSeparator
+        self.separatorView.backgroundColor = .stepikOpaqueSeparator
         self.continueButton.tintColor = .stepikAccent
     }
 }

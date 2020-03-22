@@ -172,8 +172,17 @@ extension UIColor {
 
     // MARK: - UI Element Colors -
 
-    /// The color for borders or divider lines that hides any underlying content.
+    /// The color for thin borders or divider lines that allows some underlying content to be visible.
     static var stepikSeparator: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.separator
+        } else {
+            return UIColor(hex8: 0x99545458)
+        }
+    }
+
+    /// The color for borders or divider lines that hides any underlying content.
+    static var stepikOpaqueSeparator: UIColor {
         if #available(iOS 13.0, *) {
             return UIColor.opaqueSeparator
         } else {

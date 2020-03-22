@@ -77,7 +77,7 @@ final class StepikPlaceholderView: NibInitializableView {
     private func colorize() {
         self.view.backgroundColor = .stepikBackground
         self.textLabel.textColor = .stepikSystemSecondaryLabel
-        self.actionButton.layer.borderColor = UIColor.stepikSeparator.cgColor
+        self.actionButton.layer.borderColor = UIColor.stepikOpaqueSeparator.cgColor
         self.actionButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 

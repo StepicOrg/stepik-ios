@@ -2566,19 +2566,13 @@
 		082B54CD20A9DCF200144817 /* PersonalDeadlines */ = {
 			isa = PBXGroup;
 			children = (
-				082B54DA20AA445C00144817 /* DeadlineMode.swift */,
-				2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */,
-				0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */,
-				2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */,
-				083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */,
-				082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */,
-				082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */,
 				082B54D020A9DD3C00144817 /* PersonalDeadlines.storyboard */,
+				082B54DA20AA445C00144817 /* DeadlineMode.swift */,
+				0819856820BF242E00897BBA /* PersonalDeadlineEditScheduleViewController.swift */,
 				082B54CE20A9DD3000144817 /* PersonalDeadlinesModeSelectionViewController.swift */,
-				083AE48220BD72CA00102FE4 /* PersonalDeadlinesService.swift */,
-				08194EB920B813AC00B34327 /* PersonalDeadlinesTimeService.swift */,
-				0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */,
-				0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */,
+				2CD80B3024281CBA00633662 /* PersonalDeadlineModeCollectionViewCell */,
+				2CD80B2F24281CA300633662 /* PersonalDeadlineTableViewCell */,
+				2CD80B3124281D1E00633662 /* Service */,
 			);
 			name = PersonalDeadlines;
 			sourceTree = "<group>";
@@ -4522,6 +4516,36 @@
 				2CD6E25A234E0A2E00F49303 /* EmailAddress+CoreDataProperties.swift */,
 			);
 			name = EmailAddress;
+			sourceTree = "<group>";
+		};
+		2CD80B2F24281CA300633662 /* PersonalDeadlineTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0819856A20BF273800897BBA /* PersonalDeadlineTableViewCell.swift */,
+				0819856B20BF273800897BBA /* PersonalDeadlineTableViewCell.xib */,
+			);
+			path = PersonalDeadlineTableViewCell;
+			sourceTree = "<group>";
+		};
+		2CD80B3024281CBA00633662 /* PersonalDeadlineModeCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				082B54D620AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.swift */,
+				082B54D720AA342D00144817 /* PersonalDeadlineModeCollectionViewCell.xib */,
+			);
+			path = PersonalDeadlineModeCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		2CD80B3124281D1E00633662 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2CA1001321749877003775CB /* NotificationService+PersonalDeadline.swift */,
+				2CA100152174BB66003775CB /* PersonalDeadlineLocalNotificationContentProvider.swift */,
+				083AE48020BD6DCC00102FE4 /* PersonalDeadlineLocalStorageManager.swift */,
+				083AE48220BD72CA00102FE4 /* PersonalDeadlinesService.swift */,
+				08194EB920B813AC00B34327 /* PersonalDeadlinesTimeService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		2CD8463D1F25F7AF00E8153C /* Profile */ = {

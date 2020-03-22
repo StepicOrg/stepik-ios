@@ -169,7 +169,7 @@ final class StepCardView: NibInitializableView {
         self.titlePadView.backgroundColor = .clear
         self.titleLabel.textColor = .stepikSystemLabel
         self.titleButton.superview?.tintColor = .stepikAccent
-        self.titleSeparatorView.backgroundColor = .stepikSeparator
+        self.titleSeparatorView.backgroundColor = .stepikOpaqueSeparator
 
         self.whitePadView.backgroundColor = .clear
 
@@ -177,7 +177,7 @@ final class StepCardView: NibInitializableView {
         self.loadingActivityIndicator.color = .stepikLoadingIndicator
         self.loadingLabel.textColor = .stepikAccent
 
-        self.bottomSeparatorView.backgroundColor = .stepikSeparator
+        self.bottomSeparatorView.backgroundColor = .stepikOpaqueSeparator
         self.controlButton.tintColor = .stepikAccent
     }
 }

@@ -132,7 +132,7 @@ final class AdaptiveStatsViewController: UIViewController {
             self.mainStatHorizontalSeparator,
             self.mainStatVerticalSeparator,
             self.progressVerticalSeparator
-        ].forEach { $0?.backgroundColor = .stepikSeparator }
+        ].forEach { $0?.backgroundColor = .stepikOpaqueSeparator }
 
         self.view.backgroundColor = .stepikBackground
         self.loadingIndicator.color = .stepikLoadingIndicator
