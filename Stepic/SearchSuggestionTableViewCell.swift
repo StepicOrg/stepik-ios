@@ -13,13 +13,30 @@ final class SearchSuggestionTableViewCell: UITableViewCell {
 
     func set(suggestion: String, query: String) {
         let fontSize: CGFloat = 17
-        var bold = UIFont.boldSystemFont(ofSize: fontSize)
-        bold = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.medium)
-        let regular = UIFont.systemFont(ofSize: fontSize)
-        let attributedSuggestion = NSMutableAttributedString(string: suggestion, attributes: [NSAttributedString.Key.font: regular, NSAttributedString.Key.foregroundColor: UIColor.gray])
+
+        var boldFont = UIFont.boldSystemFont(ofSize: fontSize)
+        boldFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.medium)
+
+        let regularFont = UIFont.systemFont(ofSize: fontSize)
+
+        let attributedSuggestionString = NSMutableAttributedString(
+            string: suggestion,
+            attributes: [
+                NSAttributedString.Key.font: regularFont,
+                NSAttributedString.Key.foregroundColor: UIColor.stepikSystemSecondaryLabel
+            ]
+        )
+
         if let queryLocation = suggestion.indexOf(query.lowercased()) {
-            attributedSuggestion.addAttributes([NSAttributedString.Key.font: bold, NSAttributedString.Key.foregroundColor: UIColor.stepikPrimaryText], range: NSRange(location: queryLocation, length: query.count))
+            attributedSuggestionString.addAttributes(
+                [
+                    NSAttributedString.Key.font: boldFont,
+                    NSAttributedString.Key.foregroundColor: UIColor.stepikPrimaryText
+                ],
+                range: NSRange(location: queryLocation, length: query.count)
+            )
         }
-        suggestionLabel.attributedText = attributedSuggestion
+
+        self.suggestionLabel.attributedText = attributedSuggestionString
     }
 }

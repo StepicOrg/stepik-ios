@@ -13,23 +13,22 @@ protocol SearchQueriesViewControllerDelegate: AnyObject {
 }
 
 final class SearchQueriesViewController: UIViewController {
-    var tableView = UITableView()
+    private var tableView = UITableView()
 
     var presenter: SearchQueriesPresenter?
 
     weak var delegate: SearchQueriesViewControllerDelegate?
 
-    var suggestions: [String] = []
+    private var suggestions: [String] = []
     var query: String = "" {
         didSet {
             presenter?.getSuggestions(query: query)
         }
     }
 
-    lazy var updatingView: LoadingPaginationView = {
+    private lazy var updatingView: LoadingPaginationView = {
         let paginationView = LoadingPaginationView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 40))
-        paginationView.refreshAction = {
-            [weak self] in
+        paginationView.refreshAction = { [weak self] in
             guard let presenter = self?.presenter, let query = self?.query else {
                 return
             }
@@ -43,30 +42,41 @@ final class SearchQueriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = []
+        self.edgesForExtendedLayout = []
 
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
-        self.view.addSubview(tableView)
-        tableView.snp.makeConstraints { $0.edges.equalTo(self.view) }
-        tableView.register(UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchSuggestionTableViewCell")
-        presenter = SearchQueriesPresenter(view: self, queriesAPI: ApiDataDownloader.queries, persistentManager: SearchQueriesPersistentManager())
-        tableView.tableFooterView = UIView()
-        tableView.keyboardDismissMode = .onDrag
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.estimatedRowHeight = 44
+        self.tableView.rowHeight = UITableView.automaticDimension
+
+        self.view.addSubview(self.tableView)
+        self.tableView.snp.makeConstraints { $0.edges.equalTo(self.view) }
+
+        self.tableView.register(
+            UINib(nibName: "SearchSuggestionTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "SearchSuggestionTableViewCell"
+        )
+
+        self.tableView.tableFooterView = UIView()
+        self.tableView.keyboardDismissMode = .onDrag
+
+        self.presenter = SearchQueriesPresenter(
+            view: self,
+            queriesAPI: ApiDataDownloader.queries,
+            persistentManager: SearchQueriesPersistentManager()
+        )
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        suggestions = []
+        self.suggestions = []
     }
 }
 
 extension SearchQueriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelect(suggestion: suggestions[indexPath.row])
-        delegate?.didSelectSuggestion(suggestion: suggestions[indexPath.row], position: indexPath.row)
+        self.presenter?.didSelect(suggestion: self.suggestions[indexPath.row])
+        self.delegate?.didSelectSuggestion(suggestion: self.suggestions[indexPath.row], position: indexPath.row)
     }
 }
 
@@ -84,7 +94,7 @@ extension SearchQueriesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.set(suggestion: suggestions[indexPath.row], query: query)
+        cell.set(suggestion: self.suggestions[indexPath.row], query: self.query)
 
         return cell
     }
@@ -92,34 +102,20 @@ extension SearchQueriesViewController: UITableViewDataSource {
 
 extension SearchQueriesViewController: SearchQueriesView {
     func updateSuggestions(suggestions: [String]) {
-        DispatchQueue.main.async { [weak self] in
-            self?.suggestions = suggestions
-            self?.tableView.reloadData()
-        }
+        self.suggestions = suggestions
+        self.tableView.reloadData()
     }
 
     func setState(state: SearchQueriesState) {
         switch state {
         case .error:
-            DispatchQueue.main.async {
-                [weak self] in
-                self?.updatingView.setError()
-                self?.tableView.tableFooterView = self?.updatingView
-            }
-            break
+            self.updatingView.setError()
+            self.tableView.tableFooterView = self.updatingView
         case .updating:
-            DispatchQueue.main.async {
-                [weak self] in
-                self?.updatingView.setLoading()
-                self?.tableView.tableFooterView = self?.updatingView
-            }
-            break
+            self.updatingView.setLoading()
+            self.tableView.tableFooterView = self.updatingView
         case.ok:
-            DispatchQueue.main.async {
-                [weak self] in
-                self?.tableView.tableFooterView = UIView()
-            }
-            break
+            self.tableView.tableFooterView = UIView()
         }
     }
 }

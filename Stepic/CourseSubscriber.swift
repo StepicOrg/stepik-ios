@@ -43,7 +43,11 @@ final class CourseSubscriber: CourseSubscriberProtocol {
         self.performCourseJoinActions(course: course, unsubscribe: true, source: source)
     }
 
-    private func performCourseJoinActions(course: Course, unsubscribe: Bool, source: CourseSubscriptionSource) -> Promise<Course> {
+    private func performCourseJoinActions(
+        course: Course,
+        unsubscribe: Bool,
+        source: CourseSubscriptionSource
+    ) -> Promise<Course> {
         Promise<Course> { seal in
             _ = ApiDataDownloader.enrollments.joinCourse(course, delete: unsubscribe, success: {
                 guard let progressId = course.progressId else {
@@ -55,12 +59,15 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                     AmplitudeAnalyticsEvents.Course.unsubscribed(courseID: course.id, courseTitle: course.title).send()
                     AnalyticsUserProperties.shared.decrementCoursesCount()
                 } else {
-                    AmplitudeAnalyticsEvents.Course.joined(source: source.rawValue, courseID: course.id, courseTitle: course.title).send()
+                    AmplitudeAnalyticsEvents.Course.joined(
+                        source: source.rawValue,
+                        courseID: course.id,
+                        courseTitle: course.title
+                    ).send()
                     AnalyticsUserProperties.shared.incrementCoursesCount()
                 }
 
-                let success: (Course) -> Void = {
-                    course in
+                let success: (Course) -> Void = { course in
                     course.enrolled = !unsubscribe
                     CoreDataHelper.shared.save()
 
@@ -69,21 +76,24 @@ final class CourseSubscriber: CourseSubscriberProtocol {
                     seal.fulfill(course)
                 }
 
-                ApiDataDownloader.progresses.retrieve(ids: [progressId], existing: course.progress != nil ? [course.progress!] : [], refreshMode: .update, success: {
-                    progresses in
-
-                    if !unsubscribe {
-                        guard let progress = progresses.first else {
-                            seal.reject(CourseSubscriptionError.badResponseFormat)
-                            return
+                ApiDataDownloader.progresses.retrieve(
+                    ids: [progressId],
+                    existing: course.progress != nil ? [course.progress!] : [],
+                    refreshMode: .update,
+                    success: { progresses in
+                        if !unsubscribe {
+                            guard let progress = progresses.first else {
+                                seal.reject(CourseSubscriptionError.badResponseFormat)
+                                return
+                            }
+                            course.progress = progress
                         }
-                        course.progress = progress
+                        success(course)
+                    },
+                    error: { _ in
+                        success(course)
                     }
-                    success(course)
-                }, error: {
-                    _ in
-                    success(course)
-                })
+                )
             }, error: { status in
                 seal.reject(CourseSubscriptionError.error(status: status))
             })

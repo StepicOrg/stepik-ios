@@ -77,7 +77,7 @@ final class SearchResultsViewController: UIViewController, SearchResultsView {
             self.view.isHidden = false
             suggestionsVC?.view.isHidden = true
             coursesVC?.view.isHidden = true
-            self.view.backgroundColor = UIColor.stepikAccent
+            self.view.backgroundColor = .stepikAccent
             self.view.alpha = 0
             UIView.animate(withDuration: 0.2, animations: {
                 self.view.alpha = 0.6

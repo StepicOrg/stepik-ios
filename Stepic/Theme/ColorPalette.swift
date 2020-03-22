@@ -191,6 +191,33 @@ extension UIColor {
         }
     }
 
+    /// The color for text labels that contain secondary content.
+    static var stepikSystemSecondaryLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondaryLabel
+        } else {
+            return UIColor(hex8: 0x993C3C43)
+        }
+    }
+
+    /// The color for text labels that contain tertiary content.
+    static var stepikSystemTertiaryLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .tertiaryLabel
+        } else {
+            return UIColor(hex8: 0x4C3C3C43)
+        }
+    }
+
+    /// The color for text labels that contain quaternary content.
+    static var stepikSystemQuaternaryLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .quaternaryLabel
+        } else {
+            return UIColor(hex8: 0x2D3C3C43)
+        }
+    }
+
     /// The color for activity indicators.
     static var stepikLoadingIndicator: UIColor { .stepikAccent }
 
