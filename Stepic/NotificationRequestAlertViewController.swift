@@ -19,15 +19,15 @@ final class NotificationRequestAlertViewController: UIViewController {
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
 
-    var messageLabelWidth: Constraint?
-    let animationView = LOTAnimationView(name: "onboardingAnimation4")
+    private var messageLabelWidth: Constraint?
+    private let animationView = LOTAnimationView(name: "onboardingAnimation4")
 
     var yesAction: (() -> Void)?
     var noAction: (() -> Void)?
 
     var context = NotificationRequestAlertContext.default
 
-    //Streaks Context
+    // Streaks Context
     var currentStreak: Int = 0
 
     required init?(coder aDecoder: NSCoder) {
@@ -42,52 +42,75 @@ final class NotificationRequestAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageLabel.snp.makeConstraints { make -> Void in
-            messageLabelWidth = make.width.lessThanOrEqualTo(UIScreen.main.bounds.width - 64).constraint
+        self.messageLabel.snp.makeConstraints { make in
+            self.messageLabelWidth = make.width.lessThanOrEqualTo(UIScreen.main.bounds.width - 64).constraint
         }
 
-        addAnimationView()
+        self.addAnimationView()
 
-        localize()
-    }
-
-    private func addAnimationView() {
-        animationView.contentMode = .scaleAspectFill
-        animationView.isHidden = true
-        animationView.clipsToBounds = false
-        imageContainerView.addSubview(animationView)
-        animationView.snp.makeConstraints { $0.edges.equalTo(imageContainerView) }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        animationView.isHidden = false
-        animationView.play()
-        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.shown(context: context))
-    }
-
-    func localize() {
-        titleLabel.text = context.title
-        messageLabel.text = context == .streak ? context.message(streak: currentStreak) : context.message()
-
-        noButton.setTitle(NSLocalizedString("No", comment: ""), for: .normal)
-        yesButton.setTitle(NSLocalizedString("Yes", comment: ""), for: .normal)
-    }
-
-    @IBAction func noPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.rejected(context: context))
-        noAction?()
-    }
-
-    @IBAction func yesPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.accepted(context: context))
-        yesAction?()
+        self.localize()
+        self.colorize()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        messageLabelWidth?.update(offset: UIScreen.main.bounds.height - 64)
+        self.messageLabelWidth?.update(offset: UIScreen.main.bounds.height - 64)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    private func addAnimationView() {
+        self.animationView.contentMode = .scaleAspectFill
+        self.animationView.isHidden = true
+        self.animationView.clipsToBounds = false
+        self.imageContainerView.addSubview(self.animationView)
+        self.animationView.snp.makeConstraints { $0.edges.equalTo(self.imageContainerView) }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.animationView.isHidden = false
+        self.animationView.play()
+
+        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.shown(context: self.context))
+    }
+
+    private func localize() {
+        self.titleLabel.text = self.context.title
+        self.messageLabel.text = self.context == .streak
+            ? self.context.message(streak: self.currentStreak)
+            : self.context.message()
+
+        self.noButton.setTitle(NSLocalizedString("No", comment: ""), for: .normal)
+        self.yesButton.setTitle(NSLocalizedString("Yes", comment: ""), for: .normal)
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikTertiaryBackground
+        self.titleLabel.textColor = .stepikAccent
+        self.messageLabel.textColor = .stepikAccent
+        self.noButton.setTitleColor(.stepikAccent, for: .normal)
+        self.yesButton.setTitleColor(.stepikGreen, for: .normal)
+    }
+
+    @IBAction
+    func noPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.rejected(context: self.context))
+        self.noAction?()
+    }
+
+    @IBAction
+    func yesPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+        AnalyticsReporter.reportEvent(AnalyticsEvents.NotificationRequest.accepted(context: self.context))
+        self.yesAction?()
     }
 }
