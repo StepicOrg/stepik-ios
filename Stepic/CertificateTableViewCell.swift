@@ -35,7 +35,8 @@ final class CertificateTableViewCell: UITableViewCell {
         )
     }
 
-    @IBAction func sharePressed(_ sender: UIButton) {
+    @IBAction
+    func sharePressed(_ sender: UIButton) {
         if let viewData = self.viewData {
             self.shareBlock?(viewData, sender)
         }

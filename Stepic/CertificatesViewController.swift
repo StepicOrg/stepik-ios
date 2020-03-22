@@ -105,8 +105,7 @@ final class CertificatesViewController: UIViewController, ControllerWithStepikPl
         presenter?.getCachedCertificates()
         presenter?.refreshCertificates()
 
-        tableView.backgroundColor = UIColor.groupTableViewBackground
-
+        tableView.backgroundColor = .stepikGroupTableViewBackground
         tableView.contentInsetAdjustmentBehavior = .never
 
         DispatchQueue.main.async {

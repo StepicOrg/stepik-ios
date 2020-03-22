@@ -231,6 +231,15 @@ extension UIColor {
         }
     }
 
+    /// The color to use for the background of a grouped table.
+    static var stepikGroupTableViewBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemGroupedBackground
+        } else {
+            return .groupTableViewBackground
+        }
+    }
+
     // MARK: Standard Colors
 
     /// The base gray color.
