@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RateAppViewController" customModule="Adaptive_1838" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RateAppViewController" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="bottomLabel" destination="Jd2-70-l3f" id="fJc-ti-2Dq"/>
                 <outlet property="buttonsContainerHeight" destination="33y-tD-32j" id="XhD-UM-9lO"/>
+                <outlet property="buttonsContainerView" destination="YeV-RX-eC9" id="MQY-bG-RCU"/>
+                <outlet property="buttonsSeparator" destination="Mvt-fs-pve" id="9vY-RK-Mkl"/>
                 <outlet property="centerViewWidth" destination="hJL-SE-XxF" id="Gcb-6C-at8"/>
                 <outlet property="laterButton" destination="6yw-8T-AQM" id="hYx-WV-ewh"/>
                 <outlet property="rightButton" destination="6fN-rR-caM" id="RoO-Xh-5KS"/>
@@ -29,48 +30,48 @@
             <rect key="frame" x="0.0" y="0.0" width="492" height="201"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How would you rate Stepik?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUz-e5-2C8" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="How would you rate Stepik?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUz-e5-2C8" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
                     <rect key="frame" x="20" y="16" width="452" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="COJ-x4-4ZT">
+                <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="COJ-x4-4ZT">
                     <rect key="frame" x="226" y="56" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="hCm-vY-FVo"/>
                         <constraint firstAttribute="width" constant="40" id="lxj-Hw-H8h"/>
                     </constraints>
                 </imageView>
-                <imageView tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="Ueh-cM-Rn8">
+                <imageView tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="Ueh-cM-Rn8">
                     <rect key="frame" x="274" y="56" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="0Yc-40-nWz"/>
                         <constraint firstAttribute="width" constant="40" id="e3d-m4-ADb"/>
                     </constraints>
                 </imageView>
-                <imageView tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="KDB-Pu-KpR">
+                <imageView tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="KDB-Pu-KpR">
                     <rect key="frame" x="322" y="56" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="0yJ-QX-9e2"/>
                         <constraint firstAttribute="width" constant="40" id="5cS-zd-9L1"/>
                     </constraints>
                 </imageView>
-                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="SKx-iz-6Au">
+                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="SKx-iz-6Au">
                     <rect key="frame" x="178" y="56" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="d55-5w-wQ4"/>
                         <constraint firstAttribute="width" constant="40" id="duj-U7-eT2"/>
                     </constraints>
                 </imageView>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="WMg-DU-mGS">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="star_gray" highlightedImage="star_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="WMg-DU-mGS">
                     <rect key="frame" x="130" y="56" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="EDv-WT-X2T"/>
                         <constraint firstAttribute="width" constant="40" id="G9t-j0-NAJ"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, leave your feedback " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jd2-70-l3f" customClass="StepikLabel" customModule="Adaptive_1838" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Please, leave your feedback " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jd2-70-l3f" customClass="StepikLabel" customModule="Stepic" customModuleProvider="target">
                     <rect key="frame" x="20" y="116" width="452" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -80,32 +81,28 @@
                     <rect key="frame" x="0.0" y="153" width="492" height="48"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mvt-fs-pve" userLabel="Center">
-                            <rect key="frame" x="245.5" y="8" width="1" height="40"/>
+                            <rect key="frame" x="246" y="8" width="0.5" height="40"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="1" id="hJL-SE-XxF"/>
+                                <constraint firstAttribute="width" constant="0.5" id="hJL-SE-XxF"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yw-8T-AQM">
                             <rect key="frame" x="8" y="9" width="238.5" height="30"/>
-                            <state key="normal" title="Later">
-                                <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                            </state>
+                            <state key="normal" title="Later"/>
                             <connections>
                                 <action selector="laterButtonPressed:" destination="-1" eventType="touchUpInside" id="x8M-nJ-FWh"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fN-rR-caM">
-                            <rect key="frame" x="245" y="9" width="238.5" height="30"/>
-                            <state key="normal" title="Right">
-                                <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                            </state>
+                            <rect key="frame" x="246" y="9" width="237.5" height="30"/>
+                            <state key="normal" title="Right"/>
                             <connections>
                                 <action selector="rightButtonPressed:" destination="-1" eventType="touchUpInside" id="Xde-gU-ypj"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="33y-tD-32j"/>
                         <constraint firstAttribute="bottom" secondItem="Mvt-fs-pve" secondAttribute="bottom" id="Bdw-bk-cZs"/>
@@ -122,7 +119,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="KDB-Pu-KpR" firstAttribute="leading" secondItem="Ueh-cM-Rn8" secondAttribute="trailing" constant="8" id="1wI-dq-TLa"/>
                 <constraint firstItem="Jd2-70-l3f" firstAttribute="top" secondItem="COJ-x4-4ZT" secondAttribute="bottom" constant="20" id="5KP-pU-eCm"/>
