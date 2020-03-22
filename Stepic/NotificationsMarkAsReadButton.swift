@@ -11,7 +11,9 @@ import UIKit
 
 final class NotificationsMarkAsReadButton: StepikButton {
     enum Status {
-        case normal, loading, error
+        case normal
+        case loading
+        case error
     }
 
     var status: Status = .normal
@@ -19,17 +21,17 @@ final class NotificationsMarkAsReadButton: StepikButton {
     func update(with status: Status) {
         switch status {
         case .normal:
-            activityIndicator.stopAnimating()
-            setTitle(NSLocalizedString("MarkAllAsReadSuccess", comment: ""), for: .normal)
+            self.activityIndicator.stopAnimating()
+            self.setTitle(NSLocalizedString("MarkAllAsReadSuccess", comment: ""), for: .normal)
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
                 self.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
             })
         case .loading:
-            activityIndicator.startAnimating()
-            setTitle("", for: .normal)
+            self.activityIndicator.startAnimating()
+            self.setTitle("", for: .normal)
         case .error:
-            activityIndicator.stopAnimating()
-            setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
+            self.activityIndicator.stopAnimating()
+            self.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
             self.status = .normal
         }
     }
@@ -39,15 +41,11 @@ final class NotificationsMarkAsReadButton: StepikButton {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        addSubview(activityIndicator)
-        activityIndicator.snp.makeConstraints { make -> Void in
+        self.addSubview(activityIndicator)
+        self.activityIndicator.snp.makeConstraints { make in
             make.center.equalTo(self)
         }
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = UIColor.stepikLoadingIndicator
-    }
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.color = .stepikLoadingIndicator
     }
 }

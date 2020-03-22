@@ -51,18 +51,34 @@ final class StepikPlaceholderView: NibInitializableView {
         set(placeholder: placeholder)
     }
 
-    @IBAction func onActionButtonClick(_ sender: Any) {
+    @IBAction
+    func onActionButtonClick(_ sender: Any) {
         delegate?.buttonDidClick(actionButton)
     }
 
     override func setupSubviews() {
-        actionButton.clipsToBounds = true
-        actionButton.layer.cornerRadius = 8
-        actionButton.layer.borderWidth = 0.5
-        actionButton.layer.borderColor = UIColor(red: 204 / 255, green: 204 / 255, blue: 204 / 255, alpha: 1.0).cgColor
+        self.actionButton.clipsToBounds = true
+        self.actionButton.layer.cornerRadius = 8
+        self.actionButton.layer.borderWidth = 0.5
 
-        actionButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 23.0, bottom: 12.0, right: 23.0)
-        actionButton.setTitleColor(UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0), for: .normal)
+        self.actionButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 23.0, bottom: 12.0, right: 23.0)
+
+        self.colorize()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikBackground
+        self.textLabel.textColor = .stepikSystemSecondaryLabel
+        self.actionButton.layer.borderColor = UIColor.stepikSeparator.cgColor
+        self.actionButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 
     private func rebuildConstraints(for placeholder: StepikPlaceholderStyle) {
@@ -130,8 +146,8 @@ final class StepikPlaceholderView: NibInitializableView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        setNeedsUpdateConstraints()
-        updateConstraintsIfNeeded()
+        self.setNeedsUpdateConstraints()
+        self.updateConstraintsIfNeeded()
     }
 
     func set(placeholder: StepikPlaceholderStyle) {

@@ -65,17 +65,19 @@ final class NotificationsViewController: UIViewController, NotificationsView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Hide "Mark all as read" button
-        if section != .all {
-            markAllAsReadButton.isHidden = true
-            markAllAsReadButtonBottomConstraint.constant = 0
-            markAllAsReadButtonTopConstraint.constant = 21
-            markAllAsReadHeightConstraint.constant = 0
-        }
-        markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
+        self.view.backgroundColor = .stepikBackground
 
-        presenter = NotificationsPresenter(
-            section: section,
+        // Hide "Mark all as read" button
+        if self.section != .all {
+            self.markAllAsReadButton.isHidden = true
+            self.markAllAsReadButtonBottomConstraint.constant = 0
+            self.markAllAsReadButtonTopConstraint.constant = 21
+            self.markAllAsReadHeightConstraint.constant = 0
+        }
+        self.markAllAsReadButton.setTitle(NSLocalizedString("MarkAllAsRead", comment: ""), for: .normal)
+
+        self.presenter = NotificationsPresenter(
+            section: self.section,
             notificationsAPI: ApiDataDownloader.notifications,
             usersAPI: ApiDataDownloader.users,
             notificationsStatusAPI: NotificationStatusesAPI(),
@@ -87,18 +89,24 @@ final class NotificationsViewController: UIViewController, NotificationsView {
             view: self
         )
 
-        tableView.register(UINib(nibName: "NotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: NotificationsTableViewCell.reuseId)
-        tableView.register(UINib(nibName: "NotificationsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId)
+        self.tableView.register(
+            UINib(nibName: "NotificationsTableViewCell", bundle: nil),
+            forCellReuseIdentifier: NotificationsTableViewCell.reuseId
+        )
+        self.tableView.register(
+            UINib(nibName: "NotificationsSectionHeaderView", bundle: nil),
+            forHeaderFooterViewReuseIdentifier: NotificationsSectionHeaderView.reuseId
+        )
 
-        tableView.estimatedRowHeight = 44.0
-        tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 44.0
+        self.tableView.rowHeight = UITableView.automaticDimension
 
-        refreshControl.addTarget(self, action: #selector(NotificationsViewController.refreshNotifications), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        self.refreshControl.addTarget(self, action: #selector(NotificationsViewController.refreshNotifications), for: .valueChanged)
+        self.tableView.refreshControl = refreshControl
 
         self.tableView.tableFooterView = UIView()
 
-        tableView.emptySetPlaceholder = StepikPlaceholder(.emptyNotifications) { [weak self] in
+        self.tableView.emptySetPlaceholder = StepikPlaceholder(.emptyNotifications) { [weak self] in
             self?.tabBarController?.selectedIndex = 1
         }
     }
@@ -107,30 +115,31 @@ final class NotificationsViewController: UIViewController, NotificationsView {
         super.viewDidAppear(animated)
 
         AmplitudeAnalyticsEvents.Notifications.screenOpened.send()
-        presenter?.didAppear()
+        self.presenter?.didAppear()
 
-        if data.isEmpty {
-            presenter?.loadInitial()
+        if self.data.isEmpty {
+            self.presenter?.loadInitial()
         }
     }
 
     @objc func refreshNotifications() {
-        if state == .loading || state == .refreshing {
+        if self.state == .loading || self.state == .refreshing {
             return
         }
 
-        presenter?.refresh()
+        self.presenter?.refresh()
     }
 
     func set(notifications: NotificationViewDataStruct, withReload: Bool = true) {
         self.data = notifications
+
         if withReload {
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if state == .loading || state == .refreshing {
+        if self.state == .loading || self.state == .refreshing {
             return
         }
 
@@ -139,7 +148,7 @@ final class NotificationsViewController: UIViewController, NotificationsView {
         let deltaOffset = maximumOffset - currentOffset
 
         if deltaOffset <= 0 {
-            presenter?.loadNextPage()
+            self.presenter?.loadNextPage()
         }
     }
 }
@@ -162,6 +171,8 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
             case .comments:
                 if let url = currentNotification.avatarURL {
                     cell.updateLeftView(.avatar(url: url))
+                } else {
+                    fallthrough
                 }
             default:
                 cell.updateLeftView(.category(firstLetter: currentNotification.type.localizedName.first ?? "A"))
@@ -186,7 +197,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension NotificationsViewController: NotificationsTableViewCellDelegate {
     func statusButtonClicked(inCell cell: NotificationsTableViewCell, withNotificationId id: Int) {
-        presenter?.updateNotification(with: id, status: .read)
+        self.presenter?.updateNotification(with: id, status: .read)
         AnalyticsReporter.reportEvent(AnalyticsEvents.Notifications.markAsRead, parameters: ["action": "button"])
 
         cell.status = .read

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepikPlaceholderView" customModule="Adaptive_1838" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StepikPlaceholderView" customModule="Stepic" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="dXG-an-amT" id="M4c-Xj-O9t"/>
                 <outlet property="actionsStackView" destination="v82-J3-qtd" id="gNk-qG-vR0"/>
@@ -18,7 +16,7 @@
                 <outlet property="imageViewHeightConstraint" destination="oak-5u-Vj6" id="a5G-zP-7iz"/>
                 <outlet property="imageViewWidthConstraint" destination="9X1-pN-qad" id="ubQ-eX-CGw"/>
                 <outlet property="stackView" destination="XS1-Gz-tve" id="cA3-3k-Jlm"/>
-                <outlet property="textLabel" destination="gBL-cj-5yG" id="yBP-He-uOq"/>
+                <outlet property="textLabel" destination="4bh-4n-EtL" id="udI-1L-TXP"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,13 +25,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="XS1-Gz-tve">
-                    <rect key="frame" x="35" y="18.5" width="305" height="424"/>
+                    <rect key="frame" x="35" y="28" width="305" height="404"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwg-84-cSH">
-                            <rect key="frame" x="0.0" y="0.0" width="305" height="311.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="305" height="291.5"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new-empty-empty" translatesAutoresizingMaskIntoConstraints="NO" id="a88-kE-Hjp">
-                                    <rect key="frame" x="152.5" y="311.5" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="152.5" y="291.5" width="0.0" height="0.0"/>
                                     <constraints>
                                         <constraint firstAttribute="width" priority="999" id="9X1-pN-qad"/>
                                         <constraint firstAttribute="height" priority="999" id="oak-5u-Vj6"/>
@@ -50,15 +48,15 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1MX-nm-Okz">
-                            <rect key="frame" x="0.0" y="335.5" width="305" height="88.5"/>
+                            <rect key="frame" x="0.0" y="315.5" width="305" height="88.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="v82-J3-qtd">
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="88.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Nothing here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBL-cj-5yG">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bh-4n-EtL">
                                             <rect key="frame" x="0.0" y="0.0" width="305" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                            <color key="textColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.40000000000000002" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXG-an-amT">
@@ -74,8 +72,8 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="gBL-cj-5yG" firstAttribute="leading" secondItem="v82-J3-qtd" secondAttribute="leading" id="7an-O5-rU8"/>
-                                        <constraint firstAttribute="trailing" secondItem="gBL-cj-5yG" secondAttribute="trailing" id="wub-yn-tx2"/>
+                                        <constraint firstItem="4bh-4n-EtL" firstAttribute="leading" secondItem="v82-J3-qtd" secondAttribute="leading" id="CBf-g4-dT8"/>
+                                        <constraint firstAttribute="trailing" secondItem="4bh-4n-EtL" secondAttribute="trailing" id="FUi-W5-dTm"/>
                                     </constraints>
                                 </stackView>
                             </subviews>

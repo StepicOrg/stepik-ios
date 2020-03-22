@@ -10,54 +10,63 @@ import Foundation
 
 @IBDesignable
 class StepikButton: UIButton {
-    let bounceDuration: TimeInterval = 0.15
-    let bounceScale: CGFloat = 0.95
-
-    override var isHighlighted: Bool {
-        didSet {
-            bounce()
-        }
-    }
-
-    private func bounce() {
-        var changeX: CGFloat = 1
-        var changeY: CGFloat = 1
-        if isHighlighted {
-            changeX = bounceScale
-            changeY = bounceScale
-        }
-        let bounceAnimation = {
-            self.transform = CGAffineTransform(scaleX: changeX, y: changeY)
-        }
-        UIView.animate(withDuration: bounceDuration, animations: bounceAnimation)
-    }
+    private static let bounceDuration: TimeInterval = 0.15
+    private static let bounceScale: CGFloat = 0.95
 
     @IBInspectable
     var isGray: Bool = false {
         didSet {
-            if isGray != oldValue {
-                updateStyle()
+            if self.isGray != oldValue {
+                self.updateStyle()
             }
         }
     }
 
     var isLightBackground: Bool = true {
         didSet {
-            if isLightBackground != oldValue {
-                updateStyle()
+            if self.isLightBackground != oldValue {
+                self.updateStyle()
             }
         }
     }
 
+    override var isHighlighted: Bool {
+        didSet {
+            self.bounce()
+        }
+    }
+
+    convenience init() {
+        self.init(frame: CGRect.zero)
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.applyStyles()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.applyStyles()
+    }
+
+    private func applyStyles() {
+        self.updateStyle()
+    }
+
     private func updateStyle() {
-        if isGray {
-            self.backgroundColor = isLightBackground ? UIColor(hex6: 0xf5f5f6, alpha: 1) : UIColor(hex6: 0x5d5d70, alpha: 1)
-            self.setTitleColor(isLightBackground ? UIColor.stepikPrimaryText : UIColor.white, for: .normal)
-            setRoundedCorners(cornerRadius: 8, borderWidth: 0)
+        if self.isGray {
+            self.backgroundColor = self.isLightBackground
+                ? UIColor.stepikSecondaryBackground
+                : UIColor(hex6: 0x5d5d70, alpha: 1)
+            self.setTitleColor(self.isLightBackground ? UIColor.stepikPrimaryText : UIColor.white, for: .normal)
+            self.setRoundedCorners(cornerRadius: 8, borderWidth: 0)
         } else {
-            self.backgroundColor = isLightBackground ? UIColor(hex6: 0xf6fcf6, alpha: 1) : UIColor(hex6: 0x545a67, alpha: 1)
-            self.setTitleColor(UIColor.stepikGreen, for: .normal)
-            setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: UIColor.stepikGreen)
+            self.backgroundColor = self.isLightBackground
+                ? UIColor(hex6: 0xf6fcf6, alpha: 1)
+                : UIColor(hex6: 0x545a67, alpha: 1)
+            self.setTitleColor(.stepikGreen, for: .normal)
+            self.setRoundedCorners(cornerRadius: 8, borderWidth: 0, borderColor: .stepikGreen)
         }
     }
 
@@ -67,24 +76,22 @@ class StepikButton: UIButton {
         animation.duration = 0.1
         animation.repeatCount = 0
         animation.autoreverses = true
-        layer.add(animation, forKey: nil)
+        self.layer.add(animation, forKey: nil)
     }
 
-    private func applyStyles() {
-        updateStyle()
-    }
+    private func bounce() {
+        var changeX: CGFloat = 1
+        var changeY: CGFloat = 1
 
-    convenience init() {
-        self.init(frame: CGRect.zero)
-    }
+        if self.isHighlighted {
+            changeX = Self.bounceScale
+            changeY = Self.bounceScale
+        }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        applyStyles()
-    }
+        let bounceAnimation = {
+            self.transform = CGAffineTransform(scaleX: changeX, y: changeY)
+        }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        applyStyles()
+        UIView.animate(withDuration: Self.bounceDuration, animations: bounceAnimation)
     }
 }

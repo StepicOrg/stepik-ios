@@ -16,12 +16,19 @@ protocol NotificationsTableViewCellDelegate: AnyObject {
 }
 
 final class NotificationsTableViewCell: UITableViewCell {
-    static let reuseId = "notificationsCell"
-
     enum LeftView {
         case avatar(url: URL)
         case category(firstLetter: Character)
     }
+
+    static let reuseId = "notificationsCell"
+
+    private static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        return dateFormatter
+    }()
 
     @IBOutlet weak var avatarImageView: AvatarImageView!
     @IBOutlet weak var sectionLabel: UILabel!
@@ -48,90 +55,113 @@ final class NotificationsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        statusButtonProxyView.targetView = statusButton
+        self.statusButtonProxyView.targetView = statusButton
 
-        notificationTextLabel.delegate = self
-        avatarImageView.shape = .rectangle(cornerRadius: 4.0)
+        self.notificationTextLabel.delegate = self
+        self.avatarImageView.shape = .rectangle(cornerRadius: 4.0)
+
+        self.colorize()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    private func colorize() {
+        self.timeLabel.textColor = .stepikPrimaryText
+        self.sectionLabel.textColor = .stepikAccentFixed
+        self.sectionLabel.backgroundColor = .stepikSecondaryBackground
     }
 
     func update(with notification: NotificationViewData) {
-        displayedNotification = notification
+        self.displayedNotification = notification
 
         // State
-        status = notification.status
+        self.status = notification.status
 
         // Text
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2.2
 
-        let all = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.light))
-                       .foregroundColor(UIColor.stepikPrimaryText)
-                       .paragraphStyle(paragraphStyle)
-        let link = Style("a").font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium)).foregroundColor(UIColor.stepikPrimaryText)
-        let activeLink = Style.font(.systemFont(ofSize: notificationTextLabel.font.pointSize, weight: UIFont.Weight.medium))
-                        .foregroundColor(UIColor.stepikPrimaryText)
-                        .backgroundColor(UIColor(hex6: 0xF6F6F6))
+        let all = Style
+            .font(.systemFont(ofSize: self.notificationTextLabel.font.pointSize, weight: .light))
+            .foregroundColor(.stepikPrimaryText)
+            .paragraphStyle(paragraphStyle)
+
+        let link = Style("a")
+            .font(.systemFont(ofSize: self.notificationTextLabel.font.pointSize, weight: .medium))
+            .foregroundColor(.stepikPrimaryText)
+
+        let activeLink = Style
+            .font(.systemFont(ofSize: self.notificationTextLabel.font.pointSize, weight: .medium))
+            .foregroundColor(.stepikPrimaryText)
+            .backgroundColor(.stepikSecondaryBackground)
 
         let styledText = notification.text.style(tags: link).styleAll(all)
 
-        notificationTextLabel.linkAttributes = link.attributes
-        notificationTextLabel.activeLinkAttributes = activeLink.attributes
-        notificationTextLabel.setText(styledText.attributedString)
+        self.notificationTextLabel.linkAttributes = link.attributes
+        self.notificationTextLabel.activeLinkAttributes = activeLink.attributes
+        self.notificationTextLabel.setText(styledText.attributedString)
 
         styledText.detections.forEach { detection in
             switch detection.type {
             case .tag(let tag):
                 if tag.name == "a", let href = tag.attributes["href"] {
-                    notificationTextLabel.addLink(to: URL(string: href), with: NSRange(detection.range, in: styledText.string))
+                    self.notificationTextLabel.addLink(
+                        to: URL(string: href),
+                        with: NSRange(detection.range, in: styledText.string)
+                    )
                 }
-            default: break
+            default:
+                break
             }
         }
 
-        // Date
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        let dateString = formatter.string(from: notification.time)
-        timeLabel.text = dateString
+        self.timeLabel.text = Self.dateFormatter.string(from: notification.time)
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        notificationTextLabel.attributedText = nil
-        statusButton.reset()
-        timeLabel.text = nil
+        self.notificationTextLabel.attributedText = nil
+        self.statusButton.reset()
+        self.timeLabel.text = nil
 
-        updateLeftView(.category(firstLetter: " "))
+        self.updateLeftView(.category(firstLetter: " "))
     }
 
     func updateLeftView(_ view: LeftView) {
         switch view {
         case .avatar(let url):
-            sectionLabel.isHidden = true
-            avatarImageView.isHidden = false
-            avatarImageView.set(with: url)
+            self.sectionLabel.isHidden = true
+            self.avatarImageView.isHidden = false
+            self.avatarImageView.set(with: url)
         case .category(let firstLetter):
-            avatarImageView.isHidden = true
-            sectionLabel.isHidden = false
-            sectionLabel.text = "\(firstLetter)"
+            self.avatarImageView.isHidden = true
+            self.sectionLabel.isHidden = false
+            self.sectionLabel.text = "\(firstLetter)"
         }
     }
 
     @IBAction func onStatusButtonClick(_ sender: Any) {
-        guard let notification = displayedNotification else {
+        guard let notification = self.displayedNotification else {
             return
         }
-        delegate?.statusButtonClicked(inCell: self, withNotificationId: notification.id)
+
+        self.delegate?.statusButtonClicked(inCell: self, withNotificationId: notification.id)
     }
 }
 
 extension NotificationsTableViewCell: TTTAttributedLabelDelegate {
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        guard let notification = displayedNotification else {
+        guard let notification = self.displayedNotification else {
             return
         }
-        delegate?.linkClicked(inCell: self, url: url, withNotificationId: notification.id)
+
+        self.delegate?.linkClicked(inCell: self, url: url, withNotificationId: notification.id)
     }
 }
