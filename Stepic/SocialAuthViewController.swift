@@ -79,6 +79,11 @@ final class SocialAuthViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var stepikLogoHeightConstraint: NSLayoutConstraint!
 
+    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+        target: self,
+        action: #selector(self.onCloseClick(_:))
+    )
+
     private var providers: [SocialProviderViewData] = []
 
     var state: SocialAuthState = .normal {
@@ -132,32 +137,43 @@ final class SocialAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = UIRectEdge.top
+        self.edgesForExtendedLayout = .top
 
-        localize()
+        self.localize()
+        self.colorize()
 
-        presenter = SocialAuthPresenter(
+        self.presenter = SocialAuthPresenter(
             authAPI: ApiDataDownloader.auth,
             stepicsAPI: ApiDataDownloader.stepics,
             notificationStatusesAPI: NotificationStatusesAPI(),
             view: self
         )
-        presenter?.update()
+        self.presenter?.update()
 
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.register(
             UINib(nibName: "SocialAuthCollectionViewCell", bundle: nil),
             forCellWithReuseIdentifier: SocialAuthCollectionViewCell.reuseId
         )
 
         let collectionViewLayout = SocialCollectionViewFlowLayout()
-        collectionViewLayout.numberOfColumns = numberOfColumns
-        collectionView.collectionViewLayout = collectionViewLayout
+        collectionViewLayout.numberOfColumns = self.numberOfColumns
+        self.collectionView.collectionViewLayout = collectionViewLayout
 
         // Small logo for small screens
         if DeviceInfo.current.diagonal <= 4 {
-            stepikLogoHeightConstraint.constant = 38
+            self.stepikLogoHeightConstraint.constant = 38
+        }
+
+        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
         }
     }
 
@@ -181,6 +197,14 @@ final class SocialAuthViewController: UIViewController {
         self.signInButton.setTitle(NSLocalizedString("SignInEmailButton", comment: ""), for: .normal)
         self.signUpButton.setTitle(NSLocalizedString("SignUpButton", comment: ""), for: .normal)
         self.moreButton.setTitle(NSLocalizedString("SignInMoreButton", comment: ""), for: .normal)
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikBackground
+        self.collectionView.backgroundColor = .clear
+        self.moreButton.setTitleColor(.stepikGreen, for: .normal)
+        self.signInButton.setTitleColor(.stepikPrimaryText, for: .normal)
+        self.signUpButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 }
 

@@ -13,7 +13,12 @@ final class SocialAuthHeaderView: UICollectionReusableView {
 
     @IBOutlet weak var titleLabel: StepikLabel!
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.titleLabel.textColor = .stepikPrimaryText
+    }
+
     func setup(title: String) {
-        titleLabel.setTextWithHTMLString(title)
+        self.titleLabel.setTextWithHTMLString(title)
     }
 }

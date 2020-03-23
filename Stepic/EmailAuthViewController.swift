@@ -52,7 +52,13 @@ final class EmailAuthViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
 
+    @IBOutlet var inputSeparator: UIView!
     @IBOutlet weak var separatorHeight: NSLayoutConstraint!
+
+    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+        target: self,
+        action: #selector(self.onCloseClick(_:))
+    )
 
     var state: EmailAuthState = .normal {
         didSet {
@@ -141,19 +147,22 @@ final class EmailAuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = UIRectEdge.top
+        self.edgesForExtendedLayout = .top
 
-        localize()
+        self.presenter = EmailAuthPresenter(
+            authAPI: ApiDataDownloader.auth,
+            stepicsAPI: ApiDataDownloader.stepics,
+            notificationStatusesAPI: NotificationStatusesAPI(),
+            view: self
+        )
 
-        presenter = EmailAuthPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
 
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
+        self.emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        self.passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
-        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-
-        setup()
+        self.setup()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -180,7 +189,16 @@ final class EmailAuthViewController: UIViewController {
         }
     }
 
-    @objc private func textFieldDidChange(_ textField: UITextField) {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    @objc
+    private func textFieldDidChange(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignIn.Fields.typing, parameters: nil)
 
         state = .normal
@@ -192,33 +210,58 @@ final class EmailAuthViewController: UIViewController {
 
     private func setup() {
         // Input group
-        separatorHeight.constant = 0.5
-        inputGroupPad.layer.borderWidth = 0.5
-        inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
-        passwordTextField.fieldType = .password
+        self.separatorHeight.constant = 0.5
+        self.inputGroupPad.layer.borderWidth = 0.5
+        self.passwordTextField.fieldType = .password
 
         // Small logo for small screens
         if DeviceInfo.current.diagonal <= 4 {
-            stepikLogoHeightConstraint.constant = 38
+            self.stepikLogoHeightConstraint.constant = 38
         }
+
+        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+
+        self.localize()
+        self.colorize()
     }
 
     private func prefill() {
-        guard let email = self.prefilledEmail, email != "" else { return }
+        guard let email = self.prefilledEmail, email != "" else {
+            return
+        }
 
-        emailTextField.text = email
-        state = .existingEmail
+        self.emailTextField.text = email
+        self.state = .existingEmail
     }
 
     private func localize() {
-        titleLabel.setTextWithHTMLString(NSLocalizedString("SignInTitleEmail", comment: ""))
+        self.titleLabel.setTextWithHTMLString(NSLocalizedString("SignInTitleEmail", comment: ""))
 
-        signInButton.setTitle(NSLocalizedString("SignInSocialButton", comment: ""), for: .normal)
-        signUpButton.setTitle(NSLocalizedString("SignUpButton", comment: ""), for: .normal)
-        remindPasswordButton.setTitle(NSLocalizedString("RemindThePassword", comment: ""), for: .normal)
-        logInButton.setTitle(NSLocalizedString("LogInButton", comment: ""), for: .normal)
-        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
-        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+        self.signInButton.setTitle(NSLocalizedString("SignInSocialButton", comment: ""), for: .normal)
+        self.signUpButton.setTitle(NSLocalizedString("SignUpButton", comment: ""), for: .normal)
+        self.remindPasswordButton.setTitle(NSLocalizedString("RemindThePassword", comment: ""), for: .normal)
+        self.logInButton.setTitle(NSLocalizedString("LogInButton", comment: ""), for: .normal)
+        self.emailTextField.placeholder = NSLocalizedString("Email", comment: "")
+        self.passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikBackground
+
+        self.inputGroupPad.layer.borderColor = UIColor.stepikSeparator.cgColor
+        self.emailTextField.textColor = .stepikPrimaryText
+        self.inputSeparator.backgroundColor = .stepikSeparator
+        self.passwordTextField.textColor = .stepikPrimaryText
+
+        self.alertLabel.textColor = .stepikRed
+
+        self.logInButton.backgroundColor = UIColor.stepikGreen.withAlphaComponent(0.1)
+        self.logInButton.setTitleColor(.stepikGreen, for: .normal)
+
+        self.remindPasswordButton.setTitleColor(.stepikLightBlue, for: .normal)
+
+        self.signInButton.setTitleColor(.stepikPrimaryText, for: .normal)
+        self.signUpButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 }
 

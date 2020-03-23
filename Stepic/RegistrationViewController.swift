@@ -53,6 +53,14 @@ final class RegistrationViewController: UIViewController {
     @IBOutlet weak var titleLabel: StepikLabel!
     @IBOutlet weak var tosLabel: TTTAttributedLabel!
 
+    @IBOutlet var separatorFirst: UIView!
+    @IBOutlet var separatorSecond: UIView!
+
+    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+        target: self,
+        action: #selector(self.onCloseClick(_:))
+    )
+
     var errorMessage: NSAttributedString? = nil {
         didSet {
             alertLabel.attributedText = errorMessage
@@ -115,22 +123,25 @@ final class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = UIRectEdge.top
+        self.edgesForExtendedLayout = .top
 
-        localize()
+        self.presenter = RegistrationPresenter(
+            authAPI: ApiDataDownloader.auth,
+            stepicsAPI: ApiDataDownloader.stepics,
+            notificationStatusesAPI: NotificationStatusesAPI(),
+            view: self
+        )
 
-        presenter = RegistrationPresenter(authAPI: ApiDataDownloader.auth, stepicsAPI: ApiDataDownloader.stepics, notificationStatusesAPI: NotificationStatusesAPI(), view: self)
+        self.nameTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.tosLabel.delegate = self
 
-        nameTextField.delegate = self
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        tosLabel.delegate = self
+        self.nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        self.emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        self.passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
-        nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-
-        setup()
+        self.setup()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -152,7 +163,16 @@ final class RegistrationViewController: UIViewController {
         }
     }
 
-    @objc private func textFieldDidChange(_ textField: UITextField) {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    @objc
+    private func textFieldDidChange(_ textField: UITextField) {
         AnalyticsReporter.reportEvent(AnalyticsEvents.SignUp.Fields.typing, parameters: nil)
 
         state = .normal
@@ -165,20 +185,24 @@ final class RegistrationViewController: UIViewController {
 
     private func setup() {
         // Input group
-        separatorFirstHeight.constant = 0.5
-        separatorSecondHeight.constant = 0.5
-        inputGroupPad.layer.borderWidth = 0.5
-        inputGroupPad.layer.borderColor = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1.0).cgColor
-        passwordTextField.fieldType = .password
+        self.separatorFirstHeight.constant = 0.5
+        self.separatorSecondHeight.constant = 0.5
+        self.inputGroupPad.layer.borderWidth = 0.5
+        self.passwordTextField.fieldType = .password
 
         // Small logo for small screens
         if DeviceInfo.current.diagonal <= 4 {
-            stepikLogoHeightConstraint.constant = 38
+            self.stepikLogoHeightConstraint.constant = 38
         }
+
+        self.navigationItem.leftBarButtonItem = self.closeBarButtonItem
+
+        self.localize()
+        self.colorize()
     }
 
     private func localize() {
-        titleLabel.setTextWithHTMLString(NSLocalizedString("SignUpTitle", comment: ""))
+        self.titleLabel.setTextWithHTMLString(NSLocalizedString("SignUpTitle", comment: ""))
 
         // Term of service warning
         let paragraphStyle = NSMutableParagraphStyle()
@@ -186,19 +210,23 @@ final class RegistrationViewController: UIViewController {
 
         let head = NSLocalizedString("AgreementLabelText", comment: "")
 
-        let all = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
-            .foregroundColor(UIColor.stepikPrimaryText)
+        let all = Style
+            .font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
+            .foregroundColor(.stepikPrimaryText)
             .paragraphStyle(paragraphStyle)
-        let link = Style("a").font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular)).foregroundColor(UIColor.stepikGreen)
-        let activeLink = Style.font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
-            .foregroundColor(UIColor.stepikPrimaryText)
-            .backgroundColor(UIColor(hex6: 0xF6F6F6))
+        let link = Style("a")
+            .font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
+            .foregroundColor(.stepikGreen)
+        let activeLink = Style
+            .font(.systemFont(ofSize: tosLabel.font.pointSize, weight: UIFont.Weight.regular))
+            .foregroundColor(.stepikPrimaryText)
+            .backgroundColor(.stepikSecondaryBackground)
 
         let styledText = head.style(tags: link).styleAll(all)
 
-        tosLabel.linkAttributes = link.attributes
-        tosLabel.activeLinkAttributes = activeLink.attributes
-        tosLabel.setText(styledText.attributedString)
+        self.tosLabel.linkAttributes = link.attributes
+        self.tosLabel.activeLinkAttributes = activeLink.attributes
+        self.tosLabel.setText(styledText.attributedString)
 
         styledText.detections.forEach { detection in
             switch detection.type {
@@ -210,10 +238,26 @@ final class RegistrationViewController: UIViewController {
             }
         }
 
-        registerButton.setTitle(NSLocalizedString("RegisterButton", comment: ""), for: .normal)
-        nameTextField.placeholder = NSLocalizedString("Name", comment: "")
-        emailTextField.placeholder = NSLocalizedString("Email", comment: "")
-        passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+        self.registerButton.setTitle(NSLocalizedString("RegisterButton", comment: ""), for: .normal)
+        self.nameTextField.placeholder = NSLocalizedString("Name", comment: "")
+        self.emailTextField.placeholder = NSLocalizedString("Email", comment: "")
+        self.passwordTextField.placeholder = NSLocalizedString("Password", comment: "")
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikBackground
+
+        self.inputGroupPad.layer.borderColor = UIColor.stepikSeparator.cgColor
+        self.nameTextField.textColor = .stepikPrimaryText
+        self.separatorFirst.backgroundColor = .stepikSeparator
+        self.emailTextField.textColor = .stepikPrimaryText
+        self.separatorSecond.backgroundColor = .stepikSeparator
+        self.passwordTextField.textColor = .stepikPrimaryText
+
+        self.alertLabel.textColor = .stepikRed
+
+        self.registerButton.backgroundColor = UIColor.stepikGreen.withAlphaComponent(0.1)
+        self.registerButton.setTitleColor(.stepikGreen, for: .normal)
     }
 }
 
