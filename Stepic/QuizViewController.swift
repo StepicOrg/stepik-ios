@@ -143,8 +143,8 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
         self.peerReviewButton.setTitle(peerReviewText, for: .normal)
         self.peerReviewButton.backgroundColor = .stepikYellow
-        self.peerReviewButton.titleLabel?.textAlignment = NSTextAlignment.center
-        self.peerReviewButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        self.peerReviewButton.titleLabel?.textAlignment = .center
+        self.peerReviewButton.titleLabel?.lineBreakMode = .byWordWrapping
         self.peerReviewButton.isHidden = true
 
         self.presenter = QuizPresenter(
@@ -207,28 +207,16 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             self.statusViewHeight.constant = 48
             self.statusImageView.image = Images.correctQuizImage
             self.statusLabel.text = correctTitle
-
+            self.view.backgroundColor = UIColor.stepikGreen.withAlphaComponent(0.1)
             self.setStatusElements(visible: true)
-
-            if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-                self.view.backgroundColor = UIColor.stepikDarkGreen.withAlphaComponent(0.5)
-            } else {
-                self.view.backgroundColor = .stepikLightGreen
-            }
         case .wrong:
             self.statusViewHeight.constant = 48
             self.peerReviewHeight.constant = 0
             self.peerReviewButton.isHidden = true
             self.statusImageView.image = Images.wrongQuizImage
             self.statusLabel.text = wrongTitle
-
+            self.view.backgroundColor = UIColor.stepikRed.withAlphaComponent(0.1)
             self.setStatusElements(visible: true)
-
-            if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-                self.view.backgroundColor = UIColor.stepikRed.withAlphaComponent(0.5)
-            } else {
-                self.view.backgroundColor = .stepikLightRed
-            }
         case .evaluation:
             self.statusViewHeight.constant = 0
             self.peerReviewHeight.constant = 0
@@ -258,7 +246,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
                             }
                         }
                     }
-                    hintHeightWebViewHelper.setTextWithTeX(hint, color: UIColor.white)
+                    hintHeightWebViewHelper.setTextWithTeX(hint, color: .white)
                     hintTextView.isHidden = true
                     hintWebView.isHidden = false
                 } else {
@@ -276,11 +264,9 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
         }
     }
 
-    func display(reply: Reply, withStatus status: SubmissionStatus) {
-    }
+    func display(reply: Reply, withStatus status: SubmissionStatus) {}
 
-    func display(reply: Reply) {
-    }
+    func display(reply: Reply) {}
 
     func showPeerReviewWarning() {
         peerReviewHeight.constant = 40
@@ -288,14 +274,18 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     }
 
     func showPeerReview(urlString: String) {
-        guard
-            let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            let url = URL(string: encodedUrl)
-            else {
+        guard let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: encodedUrl) else {
             return
         }
 
-        WebControllerManager.sharedManager.presentWebControllerWithURL(url, inController: self, withKey: "external link", allowsSafari: true, backButtonStyle: BackButtonStyle.close)
+        WebControllerManager.sharedManager.presentWebControllerWithURL(
+            url,
+            inController: self,
+            withKey: "external link",
+            allowsSafari: true,
+            backButtonStyle: .close
+        )
     }
 
     private func updateSendButtonWithoutLimit() {
@@ -317,7 +307,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
             break
         }
 
-        self.sendButton.backgroundColor = UIColor.stepikGreen
+        self.sendButton.backgroundColor = .stepikGreen
         self.sendButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         self.sendButton.layer.cornerRadius = 6
         self.sendButtonLeadingConstraint.constant = -16
@@ -334,7 +324,7 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     private func disableSendButton() {
         self.sendButton.setStepicGreenStyle()
-        self.sendButton.backgroundColor = UIColor.gray
+        self.sendButton.backgroundColor = .gray
         self.sendButton.isEnabled = false
     }
 
@@ -412,22 +402,15 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
 
     var submissionAnalyticsParams: [String: Any]? { nil }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
-        coordinator.animate(alongsideTransition: nil) {
-            [weak self]
-            _ in
-            guard let s = self else { return }
-            s.display(hint: s.displayingHint)
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.display(hint: strongSelf.displayingHint)
         }
     }
 
@@ -461,11 +444,6 @@ class QuizViewController: UIViewController, QuizView, QuizControllerDataSource, 
     private func hideHintView() {
         self.hintHeight.constant = 1
         self.hintView.isHidden = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func submitPressed() {

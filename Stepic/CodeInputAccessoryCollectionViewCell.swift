@@ -25,6 +25,13 @@ final class CodeInputAccessoryCollectionViewCell: UICollectionViewCell {
         return max(size.realSizes.minAccessoryWidth, label.bounds.width + 10)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.backgroundColor = .stepikTertiaryBackground
+        self.textLabel.textColor = .stepikSystemLabel
+    }
+
     func initialize(text: String, size: CodeInputAccessorySize) {
         self.text = text
         self.size = size

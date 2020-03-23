@@ -20,9 +20,9 @@ final class CellWebViewHelper: NSObject {
         self.fontSize = fontSize
 
         self.webView?.isOpaque = false
-        self.webView?.backgroundColor = UIColor.clear
+        self.webView?.backgroundColor = .clear
         self.webView?.isUserInteractionEnabled = false
-        self.webView?.scrollView.backgroundColor = UIColor.clear
+        self.webView?.scrollView.backgroundColor = .clear
         self.webView?.scrollView.showsVerticalScrollIndicator = false
         self.webView?.scrollView.canCancelContentTouches = false
     }

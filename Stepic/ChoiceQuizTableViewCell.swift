@@ -25,10 +25,10 @@ final class ChoiceQuizTableViewCell: UITableViewCell {
         guard let optionLabel = optionLabel else { return }
         optionLabel.numberOfLines = 0
         optionLabel.font = UIFont(name: "ArialMT", size: 16)
-        optionLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
-        optionLabel.baselineAdjustment = UIBaselineAdjustment.alignBaselines
-        optionLabel.textAlignment = NSTextAlignment.natural
-        optionLabel.backgroundColor = UIColor.clear
+        optionLabel.lineBreakMode = .byTruncatingTail
+        optionLabel.baselineAdjustment = .alignBaselines
+        optionLabel.textAlignment = .natural
+        optionLabel.backgroundColor = .clear
         textContainerView.addSubview(optionLabel)
         optionLabel.snp.makeConstraints { make -> Void in
             make.top.bottom.equalTo(textContainerView)
@@ -52,10 +52,10 @@ final class ChoiceQuizTableViewCell: UITableViewCell {
         super.awakeFromNib()
         checkBox.onAnimationType = .fill
         checkBox.animationDuration = 0.3
-        contentView.backgroundColor = UIColor.clear
-        checkBox.onTintColor = UIColor.stepikAccent
-        checkBox.onFillColor = UIColor.stepikAccent
-        checkBox.tintColor = UIColor.stepikAccent
+        contentView.backgroundColor = .clear
+        checkBox.onTintColor = .stepikAccentFixed
+        checkBox.onFillColor = .stepikAccentFixed
+        checkBox.tintColor = .stepikAccentFixed
     }
 
     override func prepareForReuse() {
