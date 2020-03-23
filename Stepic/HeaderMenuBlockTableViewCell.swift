@@ -12,7 +12,7 @@ final class HeaderMenuBlockTableViewCell: MenuBlockTableViewCell {
     @IBOutlet weak var titleLabel: StepikLabel!
 
     func initWithBlock(block: HeaderMenuBlock) {
-        titleLabel.text = block.title
-        titleLabel.textColor = block.titleColor
+        self.titleLabel.text = block.title
+        self.titleLabel.textColor = block.titleColor
     }
 }

@@ -16,11 +16,16 @@ final class PlaceholderTableViewCell: MenuBlockTableViewCell {
         super.awakeFromNib()
 
         let margin = CGFloat(arc4random()) / CGFloat(UInt32.max) * 20.0
-        rightConstraint.constant = CGFloat(margin)
+        self.rightConstraint.constant = CGFloat(margin)
+    }
+
+    override func colorize() {
+        super.colorize()
+        self.placeholderView.backgroundColor = .clear
     }
 
     func startAnimating() {
-        placeholderView.skeleton.viewBuilder = { UIView.fromNib(named: "ProfileCellSkeletonPlaceholderView") }
-        placeholderView.skeleton.show()
+        self.placeholderView.skeleton.viewBuilder = { UIView.fromNib(named: "ProfileCellSkeletonPlaceholderView") }
+        self.placeholderView.skeleton.show()
     }
 }

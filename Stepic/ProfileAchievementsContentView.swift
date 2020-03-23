@@ -26,51 +26,64 @@ final class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
         return 4
     }
 
-    @IBAction func onRefreshButtonClick(_ sender: Any) {
-        refresh()
+    @IBAction
+    func onRefreshButtonClick(_ sender: Any) {
+        self.refresh()
         self.presenter?.loadLastAchievements()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        refreshButton.setTitle(NSLocalizedString("Refresh", comment: ""), for: .normal)
-        refreshButton.clipsToBounds = true
-        refreshButton.layer.cornerRadius = 8
-        refreshButton.layer.borderWidth = 0.5
-        refreshButton.layer.borderColor = UIColor(red: 204 / 255, green: 204 / 255, blue: 204 / 255, alpha: 1.0).cgColor
+        self.refreshButton.setTitle(NSLocalizedString("Refresh", comment: ""), for: .normal)
+        self.refreshButton.clipsToBounds = true
+        self.refreshButton.layer.cornerRadius = 8
+        self.refreshButton.layer.borderWidth = 0.5
+        self.refreshButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 23.0, bottom: 12.0, right: 23.0)
 
-        refreshButton.contentEdgeInsets = UIEdgeInsets(top: 12.0, left: 23.0, bottom: 12.0, right: 23.0)
-        refreshButton.setTitleColor(UIColor(red: 83 / 255, green: 83 / 255, blue: 102 / 255, alpha: 1.0), for: .normal)
+        self.achievementsStackView?.alpha = 0.0
 
-        achievementsStackView?.alpha = 0.0
+        self.colorize()
+        self.refresh()
+    }
 
-        refresh()
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    private func colorize() {
+        self.backgroundColor = .stepikBackground
+        self.refreshButton.layer.borderColor = UIColor.stepikSeparator.cgColor
+        self.refreshButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 
     private func addPlaceholdersView() {
-        for v in achievementsStackView.arrangedSubviews {
-            achievementsStackView.removeArrangedSubview(v)
+        for v in self.achievementsStackView.arrangedSubviews {
+            self.achievementsStackView.removeArrangedSubview(v)
             v.removeFromSuperview()
         }
 
-        for _ in 0..<achievementsCountInRow {
+        for _ in 0..<self.achievementsCountInRow {
             let placeholderView = UIView()
             placeholderView.translatesAutoresizingMaskIntoConstraints = false
 
-            achievementsStackView?.addArrangedSubview(placeholderView)
+            self.achievementsStackView?.addArrangedSubview(placeholderView)
             placeholderView.skeleton.viewBuilder = { UIView.fromNib(named: "AchievementSkeletonPlaceholderView") }
             placeholderView.skeleton.show()
         }
     }
 
     func set(achievements: [AchievementViewData]) {
-        for view in achievementsStackView.arrangedSubviews {
-            achievementsStackView.removeArrangedSubview(view)
+        for view in self.achievementsStackView.arrangedSubviews {
+            self.achievementsStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
 
-        for i in 0..<min(achievements.count, achievementsCountInRow) {
+        for i in 0..<min(achievements.count, self.achievementsCountInRow) {
             let data = achievements[i]
 
             let achievementView: AchievementBadgeView = AchievementBadgeView.fromNib()
@@ -80,7 +93,7 @@ final class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
                 self?.presenter?.openAchievementInfo(with: data)
             }
 
-            achievementsStackView?.addArrangedSubview(achievementView)
+            self.achievementsStackView?.addArrangedSubview(achievementView)
         }
     }
 
@@ -89,13 +102,13 @@ final class ProfileAchievementsContentView: UIView, ProfileAchievementsView {
     }
 
     func showLoadingError() {
-        achievementsStackView.alpha = 0.0
-        refreshButton.isHidden = false
+        self.achievementsStackView.alpha = 0.0
+        self.refreshButton.isHidden = false
     }
 
     private func refresh() {
-        achievementsStackView.alpha = 1.0
-        refreshButton.isHidden = true
-        addPlaceholdersView()
+        self.achievementsStackView.alpha = 1.0
+        self.refreshButton.isHidden = true
+        self.addPlaceholdersView()
     }
 }

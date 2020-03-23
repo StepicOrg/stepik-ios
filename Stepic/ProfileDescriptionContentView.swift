@@ -15,11 +15,11 @@ final class ProfileDescriptionContentView: UIView, ProfileDescriptionView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        infoHeaderLabel.text = NSLocalizedString("Info", comment: "")
+        self.infoHeaderLabel.text = NSLocalizedString("Info", comment: "")
     }
 
     func set(shortBio: String?, info: String?) {
-        shortBioTextLabel.setTextWithHTMLString(shortBio ?? "")
-        infoTextLabel.setTextWithHTMLString(info ?? "")
+        self.shortBioTextLabel.setTextWithHTMLString(shortBio ?? "")
+        self.infoTextLabel.setTextWithHTMLString(info ?? "")
     }
 }

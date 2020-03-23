@@ -13,12 +13,13 @@ final class NotificationTimePickerViewController: PickerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = NSLocalizedString("SelectTimeTitle", comment: "")
 
-        initializeData()
-        initializeSelectedAction()
-        picker.reloadAllComponents()
-        picker.selectRow(startHour, inComponent: 0, animated: false)
+        self.titleLabel.text = NSLocalizedString("SelectTimeTitle", comment: "")
+
+        self.initializeData()
+        self.initializeSelectedAction()
+        self.picker.reloadAllComponents()
+        self.picker.selectRow(startHour, inComponent: 0, animated: false)
     }
 
     func initializeData() {

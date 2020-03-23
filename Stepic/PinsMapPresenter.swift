@@ -20,6 +20,6 @@ final class PinsMapPresenter {
     }
 
     func update(with userActivity: UserActivity) {
-        view?.set(pins: userActivity.pins)
+        self.view?.set(pins: userActivity.pins)
     }
 }

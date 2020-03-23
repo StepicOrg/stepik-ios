@@ -16,47 +16,52 @@ class MenuBlockTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let selectedView = UIView()
-        selectedView.backgroundColor = .stepikGrey
-        self.selectedBackgroundView = selectedView
-
-        separator.isHidden = false
-        separator.backgroundColor = UIColor.stepikOpaqueSeparator
+        self.separator.isHidden = false
         self.contentView.addSubview(separator)
 
-        separator.snp.makeConstraints { make -> Void in
+        self.separator.snp.makeConstraints { make -> Void in
             make.bottom.equalTo(self.contentView)
             make.leading.equalTo(self.contentView).offset(24)
             make.trailing.equalTo(self.contentView).offset(-24)
             make.height.equalTo(0.5)
         }
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    func initWithBlock(block: MenuBlock) {
-        separator.isHidden = !block.hasSeparatorOnBottom
+        self.colorize()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        hidingView.removeFromSuperview()
-        separator.isHidden = false
+
+        self.hidingView.removeFromSuperview()
+        self.separator.isHidden = false
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    func initWithBlock(block: MenuBlock) {
+        self.separator.isHidden = !block.hasSeparatorOnBottom
     }
 
     func animateHide() {
-        hidingView = UIView()
-        hidingView.backgroundColor = UIColor.white
-        hidingView.alpha = 0
-        self.contentView.addSubview(hidingView)
-        hidingView.snp.makeConstraints { $0.edges.equalTo(self.contentView) }
-        UIView.animate(withDuration: 0.2, animations: {
-            [weak self] in
+        self.hidingView = UIView()
+        self.hidingView.backgroundColor = .stepikBackground
+        self.hidingView.alpha = 0
+
+        self.contentView.addSubview(self.hidingView)
+        self.hidingView.snp.makeConstraints { $0.edges.equalTo(self.contentView) }
+
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
             self?.hidingView.alpha = 1
         })
+    }
+
+    func colorize() {
+        self.separator.backgroundColor = .stepikSeparator
     }
 }

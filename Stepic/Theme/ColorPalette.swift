@@ -258,6 +258,19 @@ extension UIColor {
         }
     }
 
+    /// The color for content layered on top of the main background.
+    static var stepikLightSecondaryBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                return traitCollection.userInterfaceStyle == .dark
+                    ? .stepikSecondaryBackground
+                    : ColorPalette.grey100
+            }
+        } else {
+            return ColorPalette.grey100
+        }
+    }
+
     /// The color for content layered on top of secondary backgrounds.
     static var stepikTertiaryBackground: UIColor {
         if #available(iOS 13.0, *) {

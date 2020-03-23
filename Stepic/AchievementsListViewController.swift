@@ -19,29 +19,39 @@ final class AchievementsListViewController: UIViewController, AchievementsListVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = NSLocalizedString("Achievements", comment: "")
+        self.title = NSLocalizedString("Achievements", comment: "")
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
-            self?.refresh()
-        }), for: .connectionError)
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { [weak self] in
+                    self?.refresh()
+                }
+            ),
+            for: .connectionError
+        )
 
-        tableView.skeleton.viewBuilder = { UIView.fromNib(named: "AchievementListSkeletonPlaceholderView") }
+        self.tableView.backgroundColor = .stepikGroupTableViewBackground
 
-        tableView.register(UINib(nibName: "AchievementsListTableViewCell", bundle: nil), forCellReuseIdentifier: AchievementsListTableViewCell.reuseId)
+        self.tableView.skeleton.viewBuilder = { UIView.fromNib(named: "AchievementListSkeletonPlaceholderView") }
+        self.tableView.register(
+            UINib(nibName: "AchievementsListTableViewCell", bundle: nil),
+            forCellReuseIdentifier: AchievementsListTableViewCell.reuseId
+        )
 
-        refresh()
+        self.refresh()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter?.sendAppearanceEvent()
+        self.presenter?.sendAppearanceEvent()
     }
 
     func set(achievements: [AchievementViewData]) {
-        data = achievements
+        self.data = achievements
 
-        tableView.skeleton.hide()
-        tableView.reloadData()
+        self.tableView.skeleton.hide()
+        self.tableView.reloadData()
     }
 
     func showAchievementInfo(viewData: AchievementViewData, canShare: Bool) {
@@ -51,13 +61,13 @@ final class AchievementsListViewController: UIViewController, AchievementsListVi
     }
 
     func showLoadingError() {
-        showPlaceholder(for: .connectionError)
+        self.showPlaceholder(for: .connectionError)
     }
 
     private func refresh() {
-        isPlaceholderShown = false
-        tableView.skeleton.show()
-        presenter?.refresh()
+        self.isPlaceholderShown = false
+        self.tableView.skeleton.show()
+        self.presenter?.refresh()
     }
 }
 

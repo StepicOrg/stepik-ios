@@ -9,30 +9,39 @@
 import UIKit
 
 final class AchievementsListTableViewCell: UITableViewCell {
+    static let reuseId = "AchievementsListTableViewCell"
+
     @IBOutlet weak var badgeContainer: UIView!
     @IBOutlet weak var achievementName: UILabel!
     @IBOutlet weak var achievementDescription: UILabel!
 
     private var badgeView: AchievementBadgeView?
 
-    static let reuseId = "AchievementsListTableViewCell"
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
+            self.contentView.backgroundColor = .stepikSecondaryBackground
+        } else {
+            self.contentView.backgroundColor = .stepikBackground
+        }
+
+        self.achievementName.textColor = .stepikPrimaryText
+        self.achievementDescription.textColor = .stepikSystemSecondaryLabel
+    }
 
     func update(with viewData: AchievementViewData) {
-        achievementName.text = viewData.title
-        achievementDescription.text = viewData.description
+        self.achievementName.text = viewData.title
+        self.achievementDescription.text = viewData.description
 
-        if badgeView == nil {
+        if self.badgeView == nil {
             let badgeView: AchievementBadgeView = AchievementBadgeView.fromNib()
             badgeView.translatesAutoresizingMaskIntoConstraints = false
-            badgeContainer.addSubview(badgeView)
+            self.badgeContainer.addSubview(badgeView)
             badgeView.snp.makeConstraints { $0.edges.equalTo(badgeContainer) }
             self.badgeView = badgeView
         }
 
-        badgeView?.data = viewData
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
+        self.badgeView?.data = viewData
     }
 }

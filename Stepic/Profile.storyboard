@@ -48,19 +48,17 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wvn-cn-cS3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="m2i-fb-YBR" id="Q0l-es-PCO"/>
                                     <outlet property="delegate" destination="m2i-fb-YBR" id="lpl-lt-Hrx"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Wvn-cn-cS3" firstAttribute="top" secondItem="Kyv-lf-clo" secondAttribute="top" id="0AX-fv-f8y"/>
-                            <constraint firstAttribute="trailing" secondItem="Wvn-cn-cS3" secondAttribute="trailing" id="51Q-fN-AjX"/>
+                            <constraint firstItem="Wvn-cn-cS3" firstAttribute="trailing" secondItem="Kyv-lf-clo" secondAttribute="trailing" id="1Ol-yV-R73"/>
                             <constraint firstItem="Wvn-cn-cS3" firstAttribute="leading" secondItem="Kyv-lf-clo" secondAttribute="leading" id="5gV-hb-J1M"/>
-                            <constraint firstItem="Kyv-lf-clo" firstAttribute="bottom" secondItem="Wvn-cn-cS3" secondAttribute="bottom" id="oj6-Ri-1gR"/>
+                            <constraint firstAttribute="topMargin" secondItem="Wvn-cn-cS3" secondAttribute="top" id="nIp-1O-vNG"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Wvn-cn-cS3" secondAttribute="bottom" id="sZZ-U6-Dzn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kyv-lf-clo"/>
                     </view>

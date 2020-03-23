@@ -19,52 +19,53 @@ final class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     var block: ContentExpandableMenuBlock?
     var updateTableHeightBlock: (() -> Void)?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     override func initWithBlock(block: MenuBlock) {
         super.initWithBlock(block: block)
-        titleLabel.text = block.title
+
+        self.titleLabel.text = block.title
 
         if let block = block as? ContentExpandableMenuBlock {
             self.block = block
+
             if let contentView = block.contentView {
-                container.addSubview(contentView)
+                self.container.addSubview(contentView)
                 contentView.snp.makeConstraints { $0.edges.equalTo(container) }
-                layoutIfNeeded()
+                self.layoutIfNeeded()
             }
 
             if block.isExpanded {
-                expand(shouldAnimate: false)
+                self.expand(shouldAnimate: false)
             } else {
-                shrink(shouldAnimate: false)
+                self.shrink(shouldAnimate: false)
             }
         }
     }
 
-    @IBAction func arrowButtonPressed(_ sender: UIButton) {
-        expandPressed()
+    @IBAction
+    func arrowButtonPressed(_ sender: UIButton) {
+        self.expandPressed()
     }
 
     func expandPressed() {
-        guard let block = block else {
+        guard let block = self.block else {
             return
         }
 
         block.onExpanded?(!block.isExpanded)
+
         if block.isExpanded {
-            expand()
+            self.expand()
         } else {
-            shrink()
+            self.shrink()
         }
-        layoutIfNeeded()
-        updateTableHeightBlock?()
+
+        self.layoutIfNeeded()
+        self.updateTableHeightBlock?()
     }
 
     func expand(shouldAnimate: Bool = true) {
-        bottomTitleConstraint?.deactivate()
-        container.isHidden = false
+        self.bottomTitleConstraint?.deactivate()
+        self.container.isHidden = false
 
         let animationBlock: () -> Void = { [weak self] in
             self?.arrowButton.transform = CGAffineTransform.identity
@@ -77,18 +78,20 @@ final class ContentExpandableMenuBlockTableViewCell: MenuBlockTableViewCell {
     }
 
     func shrink(shouldAnimate: Bool = true) {
-        container.isHidden = true
-        if bottomTitleConstraint == nil {
-            titleLabel.snp.makeConstraints { make -> Void in
-                bottomTitleConstraint = make.bottom.equalTo(self.contentView).offset(-26).constraint
+        self.container.isHidden = true
+
+        if self.bottomTitleConstraint == nil {
+            self.titleLabel.snp.makeConstraints { make in
+                self.bottomTitleConstraint = make.bottom.equalTo(self.contentView).offset(-26).constraint
             }
         } else {
-            bottomTitleConstraint?.activate()
+            self.bottomTitleConstraint?.activate()
         }
 
         let animationBlock: () -> Void = { [weak self] in
             self?.arrowButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         }
+
         if shouldAnimate {
             UIView.animate(withDuration: 0.3, animations: animationBlock)
         } else {

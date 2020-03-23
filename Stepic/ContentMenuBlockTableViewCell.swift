@@ -16,23 +16,32 @@ final class ContentMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     var onButtonClickAction: (() -> Void)?
 
-    @IBAction func onActionButtonClick(_ sender: Any) {
-        onButtonClickAction?()
-    }
-
     override func initWithBlock(block: MenuBlock) {
         super.initWithBlock(block: block)
-        titleLabel.text = block.title
+
+        self.titleLabel.text = block.title
 
         if let block = block as? ContentMenuBlock {
-            actionButton.setTitle(block.buttonTitle, for: .normal)
-            onButtonClickAction = block.onButtonClick
+            self.actionButton.setTitle(block.buttonTitle, for: .normal)
+            self.onButtonClickAction = block.onButtonClick
 
             if let contentView = block.contentView {
-                container.addSubview(contentView)
+                self.container.addSubview(contentView)
                 contentView.snp.makeConstraints { $0.edges.equalTo(container) }
-                layoutIfNeeded()
+                self.layoutIfNeeded()
             }
         }
+    }
+
+    override func colorize() {
+        super.colorize()
+
+        self.titleLabel.textColor = .stepikPrimaryText
+        self.actionButton.setTitleColor(.stepikSystemSecondaryLabel, for: .normal)
+    }
+
+    @IBAction
+    func onActionButtonClick(_ sender: Any) {
+        self.onButtonClickAction?()
     }
 }

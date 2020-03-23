@@ -14,19 +14,27 @@ final class SwitchMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     var block: SwitchMenuBlock?
 
+    override func colorize() {
+        super.colorize()
+        self.blockSwitch.tintColor = .stepikAccent
+    }
+
     func initWithBlock(block: SwitchMenuBlock) {
         super.initWithBlock(block: block)
-        titleLabel.text = block.title
-        titleLabel.textColor = block.titleColor
-        blockSwitch.isOn = block.isOn
+
+        self.titleLabel.text = block.title
+        self.titleLabel.textColor = block.titleColor
+        self.blockSwitch.isOn = block.isOn
         self.block = block
     }
 
-    @IBAction func switchChanged(_ sender: Any) {
-        guard let block = block else {
+    @IBAction
+    func switchChanged(_ sender: Any) {
+        guard let block = self.block else {
             return
         }
-        block.onSwitch?(blockSwitch.isOn)
-        separator.isHidden = !block.hasSeparatorOnBottom
+
+        block.onSwitch?(self.blockSwitch.isOn)
+        self.separator.isHidden = !block.hasSeparatorOnBottom
     }
 }

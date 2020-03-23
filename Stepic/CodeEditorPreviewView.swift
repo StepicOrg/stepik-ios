@@ -31,13 +31,23 @@ final class CodeEditorPreviewView: NibInitializableView {
     private var fontSize: Int?
     private var language: CodeLanguage?
 
-    @IBAction func onLanguageButtonClick(_ sender: Any) {
-        delegate?.languageButtonDidClick()
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
     }
 
     override func setupSubviews() {
-        titleLabel.text = NSLocalizedString("PreviewTitle", comment: "")
-        translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.text = NSLocalizedString("PreviewTitle", comment: "")
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.colorize()
+    }
+
+    @IBAction
+    func onLanguageButtonClick(_ sender: Any) {
+        self.delegate?.languageButtonDidClick()
     }
 
     func setupPreview(with theme: String, fontSize: Int, language: CodeLanguage) {
@@ -49,28 +59,28 @@ final class CodeEditorPreviewView: NibInitializableView {
         let textContainer = NSTextContainer(size: previewContainer.bounds.size)
         layoutManager.addTextContainer(textContainer)
 
-        loadingIndicator.stopAnimating()
+        self.loadingIndicator.stopAnimating()
 
-        previewTextView = UITextView(frame: previewContainer.frame, textContainer: textContainer)
-        previewTextView.translatesAutoresizingMaskIntoConstraints = false
-        previewTextView.setRoundedCorners(cornerRadius: 5, borderWidth: 1.0, borderColor: .lightGray)
-        previewTextView.isEditable = false
-        previewTextView.isSelectable = false
-        previewContainer.addSubview(previewTextView)
-        previewTextView.snp.makeConstraints { $0.edges.equalTo(previewContainer) }
+        self.previewTextView = UITextView(frame: previewContainer.frame, textContainer: textContainer)
+        self.previewTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.previewTextView.setRoundedCorners(cornerRadius: 5, borderWidth: 1.0, borderColor: .lightGray)
+        self.previewTextView.isEditable = false
+        self.previewTextView.isSelectable = false
+        self.previewContainer.addSubview(previewTextView)
+        self.previewTextView.snp.makeConstraints { $0.edges.equalTo(previewContainer) }
 
-        updateTheme(with: theme)
+        self.updateTheme(with: theme)
         self.theme = theme
 
-        updateFontSize(with: fontSize)
+        self.updateFontSize(with: fontSize)
         self.fontSize = fontSize
 
-        updateLanguage(with: language)
+        self.updateLanguage(with: language)
         self.language = language
     }
 
     func updateTheme(with newTheme: String) {
-        guard let highlightr = highlightr else {
+        guard let highlightr = self.highlightr else {
             return
         }
 
@@ -80,13 +90,13 @@ final class CodeEditorPreviewView: NibInitializableView {
 
         let savedFontSize = highlightr.theme.codeFont.pointSize
         highlightr.setTheme(to: newTheme)
-        previewTextView.backgroundColor = highlightr.theme.themeBackgroundColor
+        self.previewTextView.backgroundColor = highlightr.theme.themeBackgroundColor
 
-        updateFontSize(with: Int(savedFontSize))
+        self.updateFontSize(with: Int(savedFontSize))
     }
 
     func updateFontSize(with fontSize: Int) {
-        guard let hl = highlightr, let theme = hl.theme else {
+        guard let hl = self.highlightr, let theme = hl.theme else {
             return
         }
 
@@ -95,13 +105,22 @@ final class CodeEditorPreviewView: NibInitializableView {
     }
 
     func updateLanguage(with language: CodeLanguage) {
-        textStorage?.language = language.highlightr
-        languageButton.setTitle(language.humanReadableName, for: .normal)
-        previewTextView.text = language.highlightrSample
+        self.textStorage?.language = language.highlightr
+        self.languageButton.setTitle(language.humanReadableName, for: .normal)
+        self.previewTextView.text = language.highlightrSample
 
         guard let theme = self.theme else {
             return
         }
-        updateTheme(with: theme)
+
+        self.updateTheme(with: theme)
+    }
+
+    private func colorize() {
+        self.backgroundColor = .clear
+        self.titleLabel.textColor = .stepikPrimaryText
+        self.previewContainer.backgroundColor = .clear
+        self.languageButton.setTitleColor(.stepikGreen, for: .normal)
+        self.loadingIndicator.color = .stepikLoadingIndicator
     }
 }

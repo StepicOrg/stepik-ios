@@ -69,9 +69,13 @@ extension MenuViewController: MenuDelegate {
 // MARK: - MenuViewController: UITableViewDataSource -
 
 extension MenuViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int { self.menu != nil ? 1 : 0 }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        self.menu != nil ? 1 : 0
+    }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { self.menu?.blocks.count ?? 0 }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.menu?.blocks.count ?? 0
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let block = self.menu?.blocks[safe: indexPath.row],

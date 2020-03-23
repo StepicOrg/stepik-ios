@@ -14,42 +14,59 @@ class PickerViewController: UIViewController {
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var titleLabel: StepikLabel!
 
-    var selectedBlock: (() -> Void)?
-    var pickerTitle: String = ""
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        picker.dataSource = self
-        picker.delegate = self
-
-        titleLabel.text = pickerTitle
-
-        localize()
-    }
-
-    func localize() {
-        backButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
-        selectButton.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
-    }
-
     var selectedAction : (() -> Void)?
     var cancelAction : (() -> Void)?
 
+    var selectedBlock: (() -> Void)?
+    var pickerTitle: String = ""
+
     var data: [String] = []
-
-    @IBAction func backPressed(_ sender: UIButton) {
-        cancelAction?()
-        dismiss(animated: true, completion: nil)
-    }
-
-    @IBAction func selectPressed(_ sender: UIButton) {
-        selectedAction?()
-        dismiss(animated: true, completion: nil)
-        selectedBlock?()
-    }
 
     var selectedData: String {
         self.data[self.picker.selectedRow(inComponent: 0)]
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.picker.dataSource = self
+        self.picker.delegate = self
+
+        self.titleLabel.text = pickerTitle
+
+        self.localize()
+        self.colorize()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    private func localize() {
+        self.backButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        self.selectButton.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikTertiaryBackground
+        self.picker.backgroundColor = .clear
+    }
+
+    @IBAction
+    func backPressed(_ sender: UIButton) {
+        self.cancelAction?()
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction
+    func selectPressed(_ sender: UIButton) {
+        self.selectedAction?()
+        self.dismiss(animated: true, completion: nil)
+        self.selectedBlock?()
     }
 }
 

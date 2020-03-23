@@ -23,37 +23,58 @@ final class ProfileHeaderInfoView: UIView, ProfileInfoView {
 
     var isLoading: Bool = false {
         didSet {
-            ([firstNameLabel, lastNameLabel, lightningImageView, currentDaysCountLabel,
-            maxDayCountLabel, currentStreakLabel, maxStreakLabel, avatarImageView] as? [UIView])?.forEach { $0.isHidden = isLoading }
-            placeholderAvatarView.isHidden = !isLoading
+            (
+                [
+                    self.firstNameLabel,
+                    self.lastNameLabel,
+                    self.lightningImageView,
+                    self.currentDaysCountLabel,
+                    self.maxDayCountLabel,
+                    self.currentStreakLabel,
+                    self.maxStreakLabel,
+                    self.avatarImageView
+                ] as? [UIView]
+            )?.forEach { $0.isHidden = self.isLoading }
+            self.placeholderAvatarView.isHidden = !self.isLoading
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        containerView.setRoundedCorners(cornerRadius: 12)
-        placeholderAvatarView.setRoundedBounds(width: 0)
-        localize()
+
+        self.containerView.setRoundedCorners(cornerRadius: 12)
+        self.placeholderAvatarView.setRoundedBounds(width: 0)
+
+        self.localize()
+        self.colorize()
 
         // Default state after init – loading with placeholders
-        isLoading = true
+        self.isLoading = true
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
     }
 
     func set(profile: ProfileViewData) {
         if let url = profile.avatarUrl {
-            avatarImageView.set(with: url)
+            self.avatarImageView.set(with: url)
         }
 
-        firstNameLabel.text = profile.firstName
-        lastNameLabel.text = profile.lastName
+        self.firstNameLabel.text = profile.firstName
+        self.lastNameLabel.text = profile.lastName
     }
 
     func set(streaks: StreakViewData) {
-        currentDaysCountLabel.text = "\(streaks.currentStreak) \(pluralizedDays(count: streaks.currentStreak))"
-        maxDayCountLabel.text = "\(streaks.longestStreak) \(pluralizedDays(count: streaks.longestStreak))"
-        lightningImageView.image = streaks.didSolveToday ?
-                                    UIImage(named: "lightning_green") :
-                                    UIImage(named: "lightning_gray")
+        self.currentDaysCountLabel.text = "\(streaks.currentStreak) \(pluralizedDays(count: streaks.currentStreak))"
+        self.maxDayCountLabel.text = "\(streaks.longestStreak) \(pluralizedDays(count: streaks.longestStreak))"
+        self.lightningImageView.image = streaks.didSolveToday
+            ? UIImage(named: "lightning_green")
+            : UIImage(named: "lightning_gray")
     }
 
     private func pluralizedDays(count: Int) -> String {
@@ -68,7 +89,12 @@ final class ProfileHeaderInfoView: UIView, ProfileInfoView {
     }
 
     private func localize() {
-        currentStreakLabel.text = NSLocalizedString("CurrentStreak", comment: "")
-        maxStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
+        self.currentStreakLabel.text = NSLocalizedString("CurrentStreak", comment: "")
+        self.maxStreakLabel.text = NSLocalizedString("LongestStreak", comment: "")
+    }
+
+    private func colorize() {
+        self.backgroundColor = .stepikBackground
+        self.containerView.backgroundColor = .stepikLightSecondaryBackground
     }
 }

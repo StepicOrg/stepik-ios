@@ -18,27 +18,31 @@ final class TransitionMenuBlockTableViewCell: MenuBlockTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.snp.makeConstraints { make -> Void in
-            titleBottomSpaceConstraint = make.bottom.equalTo(self.contentView).offset(-25).constraint
+
+        self.titleLabel.snp.makeConstraints { make in
+            self.titleBottomSpaceConstraint = make.bottom.equalTo(self.contentView).offset(-25).constraint
         }
-        subtitleLabel.snp.makeConstraints { make -> Void in
-            subtitleBottomSpaceConstraint = make.bottom.equalTo(self.contentView).offset(-25).constraint
+
+        self.subtitleLabel.snp.makeConstraints { make in
+            self.subtitleBottomSpaceConstraint = make.bottom.equalTo(self.contentView).offset(-25).constraint
         }
     }
 
     func initWithBlock(block: TransitionMenuBlock) {
         super.initWithBlock(block: block)
-        titleLabel.text = block.title
-        titleLabel.textColor = block.titleColor
+
+        self.titleLabel.text = block.title
+        self.titleLabel.textColor = block.titleColor
+
         if let subtitle = block.subtitle {
-            subtitleLabel.text = subtitle
-            subtitleLabel.isHidden = false
-            titleBottomSpaceConstraint?.deactivate()
-            subtitleBottomSpaceConstraint?.activate()
+            self.subtitleLabel.text = subtitle
+            self.subtitleLabel.isHidden = false
+            self.titleBottomSpaceConstraint?.deactivate()
+            self.subtitleBottomSpaceConstraint?.activate()
         } else {
-            subtitleBottomSpaceConstraint?.deactivate()
-            titleBottomSpaceConstraint?.activate()
-            subtitleLabel.isHidden = true
+            self.subtitleBottomSpaceConstraint?.deactivate()
+            self.titleBottomSpaceConstraint?.activate()
+            self.subtitleLabel.isHidden = true
         }
     }
 }

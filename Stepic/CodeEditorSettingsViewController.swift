@@ -61,14 +61,6 @@ final class CodeEditorSettingsViewController: MenuViewController {
         self.layoutTableHeaderView()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        assert(
-            self.navigationController != nil,
-            "\(CodeEditorSettingsViewController.self) must be presented in a \(UINavigationController.self)"
-        )
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -172,7 +164,9 @@ extension CodeEditorSettingsViewController: CodeEditorPreviewViewDelegate {
     func languageButtonDidClick() {
         let availableLanguages = Array(Set(CodeLanguage.allCases.map { $0.humanReadableName })).sorted()
 
-        guard let currentLanguageIndex = availableLanguages.firstIndex(of: self.previewLanguage.humanReadableName) else {
+        guard let currentLanguageIndex = availableLanguages.firstIndex(
+            of: self.previewLanguage.humanReadableName
+        ) else {
             return
         }
 

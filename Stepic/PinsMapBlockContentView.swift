@@ -11,7 +11,8 @@ import UIKit
 
 final class PinsMapBlockContentView: UIView, PinsMapContentView {
     lazy var mapView: PinsMapView = {
-        let mapView = PinsMapView() // fromNib initialization
+        // fromNib initialization
+        let mapView = PinsMapView()
 
         self.addSubview(mapView)
 
@@ -28,6 +29,6 @@ final class PinsMapBlockContentView: UIView, PinsMapContentView {
     }()
 
     func set(pins: [Int]) {
-        mapView.buildMonths(pins)
+        self.mapView.buildMonths(pins)
     }
 }

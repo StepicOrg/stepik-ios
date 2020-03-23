@@ -10,6 +10,12 @@ import SnapKit
 import UIKit
 
 final class AchievementPopupViewController: UIViewController {
+    enum Source: String {
+        case profile
+        case achievementList = "achievement-list"
+        case notification
+    }
+
     @IBOutlet weak var achievementNameLabel: UILabel!
     @IBOutlet weak var achievementDescriptionLabel: UILabel!
     @IBOutlet weak var achievementBadgeImageView: UIImageView!
@@ -25,8 +31,36 @@ final class AchievementPopupViewController: UIViewController {
     var canShare: Bool = true
     var source: Source = .notification
 
-    @IBAction func onShareButtonClick(_ sender: Any) {
-        guard let data = data else {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.achievementDescriptionLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 64) }
+
+        self.shareButton.setTitle(NSLocalizedString("Share", comment: ""), for: .normal)
+        self.closeButton.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
+
+        if let data = self.data {
+            self.update(with: data)
+
+            if !self.canShare || data.isLocked {
+                self.shareButton.alpha = 0.0
+            }
+        }
+
+        self.colorize()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
+    }
+
+    @IBAction
+    func onShareButtonClick(_ sender: Any) {
+        guard let data = self.data else {
             return
         }
 
@@ -34,31 +68,20 @@ final class AchievementPopupViewController: UIViewController {
             source: self.source.rawValue, kind: data.id, level: data.completedLevel
         ).send()
 
-        let activityVC = UIActivityViewController(activityItems: [String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(data.title)")], applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
-        activityVC.popoverPresentationController?.sourceView = shareButton
-        present(activityVC, animated: true)
+        let activityViewController = UIActivityViewController(
+            activityItems: [
+                String(format: NSLocalizedString("AchievementsShareText", comment: ""), "\(data.title)")
+            ],
+            applicationActivities: nil
+        )
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop]
+        activityViewController.popoverPresentationController?.sourceView = shareButton
+        self.present(activityViewController, animated: true)
     }
 
-    @IBAction func onCloseButtonClick(_ sender: Any) {
+    @IBAction
+    func onCloseButtonClick(_ sender: Any) {
         self.dismiss(animated: true)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        achievementDescriptionLabel.snp.makeConstraints { $0.width.equalTo(UIScreen.main.bounds.width - 64) }
-
-        shareButton.setTitle(NSLocalizedString("Share", comment: ""), for: .normal)
-        closeButton.setTitle(NSLocalizedString("Close", comment: ""), for: .normal)
-
-        if let data = data {
-            update(with: data)
-
-            if !canShare || data.isLocked {
-                shareButton.alpha = 0.0
-            }
-        }
     }
 
     private func update(with data: AchievementViewData) {
@@ -83,9 +106,13 @@ final class AchievementPopupViewController: UIViewController {
         }
     }
 
-    enum Source: String {
-        case profile
-        case achievementList = "achievement-list"
-        case notification
+    private func colorize() {
+        self.view.backgroundColor = .stepikTertiaryBackground
+        self.achievementNameLabel.textColor = .stepikPrimaryText
+        self.achievementDescriptionLabel.textColor = .stepikPrimaryText
+        self.separatorView.backgroundColor = .stepikSeparator
+        self.levelLabel.textColor = .stepikPrimaryText
+        self.progressLabel.textColor = .stepikPrimaryText
+        self.closeButton.setTitleColor(.stepikPrimaryText, for: .normal)
     }
 }

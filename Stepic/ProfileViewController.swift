@@ -63,19 +63,30 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = []
+        self.edgesForExtendedLayout = []
 
-        registerPlaceholder(placeholder: StepikPlaceholder(.login, action: { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .login,
+                action: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
 
-            RoutingManager.auth.routeFrom(controller: strongSelf, success: nil, cancel: nil)
-        }), for: .anonymous)
-
-        registerPlaceholder(placeholder: StepikPlaceholder(.noConnection, action: { [weak self] in
-            self?.presenter?.refresh(shouldReload: true)
-        }), for: .connectionError)
+                    RoutingManager.auth.routeFrom(controller: strongSelf, success: nil, cancel: nil)
+                }
+            ),
+            for: .anonymous
+        )
+        self.registerPlaceholder(
+            placeholder: StepikPlaceholder(
+                .noConnection,
+                action: { [weak self] in
+                    self?.presenter?.refresh(shouldReload: true)
+                }
+            ),
+            for: .connectionError
+        )
 
         let settingsImage: UIImage? = {
             if #available(iOS 13.0, *) {
@@ -104,37 +115,40 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
 
         self.title = NSLocalizedString("Profile", comment: "")
 
-        profileStreaksView = ProfileHeaderInfoView.fromNib()
-        tableView.tableHeaderView = profileStreaksView
+        self.profileStreaksView = ProfileHeaderInfoView.fromNib()
+        self.tableView.tableHeaderView = profileStreaksView
 
-        state = .loading
+        self.state = .loading
 
-        initPresenter()
+        self.initPresenter()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        onAppear()
+        self.onAppear()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.layoutIfNeeded()
-        tableView.layoutTableHeaderView()
+
+        self.view.backgroundColor = .stepikBackground
+
+        self.tableView.layoutIfNeeded()
+        self.tableView.layoutTableHeaderView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        streaksTooltip?.dismiss()
+        self.streaksTooltip?.dismiss()
     }
 
     func onAppear() {
-        presenter?.refresh()
+        self.presenter?.refresh()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter?.sendAppearanceEvent()
+        self.presenter?.sendAppearanceEvent()
     }
 
     func set(state: ProfileState) {
@@ -491,8 +505,8 @@ final class ProfileViewController: MenuViewController, ProfileView, ControllerWi
         let label: UILabel = {
             let label = UILabel()
             label.textAlignment = .center
-            label.textColor = UIColor.stepikAccentAlpha50
-            label.font = UIFont.systemFont(ofSize: 12)
+            label.textColor = .stepikPrimaryText
+            label.font = UIFont.systemFont(ofSize: 13, weight: .thin)
             label.text = "User ID: \(userID)"
             return label
         }()

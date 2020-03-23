@@ -26,7 +26,7 @@ final class PinsMapView: UIView {
                 case let x where x > 0:
                     return UIColor(hex6: 0xB8E0B8)
                 default:
-                    return UIColor(hex6: 0xEEEEEE)
+                    return UIColor.stepikLightSecondaryBackground
                 }
             }
         }
@@ -325,6 +325,14 @@ final class PinsMapView: UIView {
     override func layoutSubviews() {
         DispatchQueue.main.async {
             self.drawGrid()
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateMonths()
         }
     }
 }
