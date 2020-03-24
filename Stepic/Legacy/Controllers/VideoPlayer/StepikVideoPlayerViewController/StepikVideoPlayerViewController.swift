@@ -281,6 +281,11 @@ final class StepikVideoPlayerViewController: UIViewController {
     // MARK: Setup player
 
     private func setupAppearance() {
+        // Always adopt a light interface style.
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
+
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
 
