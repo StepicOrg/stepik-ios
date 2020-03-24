@@ -154,7 +154,7 @@ final class PersonalDeadlineEditScheduleViewController: UIViewController {
     }
 
     private func colorize() {
-        self.view.backgroundColor = .stepikTertiaryBackground
+        self.view.backgroundColor = .stepikAlertBackground
         self.titleLabel.textColor = .stepikPrimaryText
         self.saveButton.setTitleColor(.stepikLightBlue, for: .normal)
         self.saveButton.layer.borderColor = UIColor.stepikLightBlue.cgColor

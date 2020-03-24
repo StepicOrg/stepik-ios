@@ -107,7 +107,7 @@ final class AchievementPopupViewController: UIViewController {
     }
 
     private func colorize() {
-        self.view.backgroundColor = .stepikTertiaryBackground
+        self.view.backgroundColor = .stepikAlertBackground
         self.achievementNameLabel.textColor = .stepikPrimaryText
         self.achievementDescriptionLabel.textColor = .stepikPrimaryText
         self.separatorView.backgroundColor = .stepikSeparator

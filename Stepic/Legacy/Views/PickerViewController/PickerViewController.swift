@@ -52,7 +52,7 @@ class PickerViewController: UIViewController {
     }
 
     private func colorize() {
-        self.view.backgroundColor = .stepikTertiaryBackground
+        self.view.backgroundColor = .stepikAlertBackground
         self.picker.backgroundColor = .clear
     }
 

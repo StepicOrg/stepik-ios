@@ -93,7 +93,7 @@ final class NotificationRequestAlertViewController: UIViewController {
     }
 
     private func colorize() {
-        self.view.backgroundColor = .stepikTertiaryBackground
+        self.view.backgroundColor = .stepikAlertBackground
         self.titleLabel.textColor = .stepikAccent
         self.messageLabel.textColor = .stepikAccent
         self.noButton.setTitleColor(.stepikAccent, for: .normal)

@@ -289,6 +289,15 @@ extension UIColor {
         }
     }
 
+    /// The color to use for the background of a alert.
+    static var stepikAlertBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondarySystemBackground
+        } else {
+            return .white
+        }
+    }
+
     // MARK: Standard Colors
 
     /// The base gray color.
