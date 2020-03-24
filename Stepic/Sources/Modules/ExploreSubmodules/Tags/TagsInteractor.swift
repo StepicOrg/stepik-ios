@@ -31,7 +31,7 @@ final class TagsInteractor: TagsInteractorProtocol {
         self.provider.fetchTags().done { tags in
             let newTags = tags.map { tag in
                 Tags.Tag(
-                    id: tag.ID,
+                    id: tag.uniqueIdentifier,
                     title: tag.titleForLanguage[self.contentLanguage] ?? "",
                     summary: tag.summaryForLanguage[self.contentLanguage] ?? "",
                     analyticsTitle: tag.titleForLanguage[.english] ?? ""
