@@ -1,11 +1,3 @@
-//
-//  ContinueActionButton.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17.09.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import UIKit
 
 extension ContinueActionButton {
@@ -50,6 +42,7 @@ final class ContinueActionButton: BounceButton {
         self.updateAppearance()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

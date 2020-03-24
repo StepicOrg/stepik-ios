@@ -1,11 +1,3 @@
-//
-//  ContinueLastStepView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17.09.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import SnapKit
 import UIKit
 
@@ -114,7 +106,7 @@ final class ContinueLastStepView: UIView {
 
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView(
-            image: UIImage(named: "new-coursepics-python-xl")!,
+            image: UIImage(named: "new-coursepics-python-xl"),
             highlightedImage: nil
         )
         imageView.contentMode = .scaleAspectFill
@@ -158,6 +150,7 @@ final class ContinueLastStepView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

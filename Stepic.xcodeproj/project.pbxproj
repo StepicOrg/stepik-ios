@@ -4057,7 +4057,6 @@
 				2CF08859205BEBF500FCB9C0 /* StepikTableView.swift */,
 				2CC5AA73242A351100C09F94 /* TapProxyView.swift */,
 				2CFF8FFD242A22CA00FD7311 /* AchievementBadgeView */,
-				2CFF8FFE242A22DF00FD7311 /* ContinueLastStepView */,
 				2CFF8FFF242A22EB00FD7311 /* LoadingPaginationView */,
 				2CFF9000242A22FA00FD7311 /* PersonalDeadlinesSuggestionWidgetView */,
 				2CFF9001242A232600FD7311 /* PickerViewController */,
@@ -5421,6 +5420,7 @@
 				62E986AC65867C28C93D475E /* TableInputTextField.swift */,
 				2C06E09A2241045800AF4DA2 /* TableInputTextView.swift */,
 				62E988C4DC97F14EAC09BC41 /* TabSegmentedControlView.swift */,
+				2CFF8FFE242A22DF00FD7311 /* ContinueLastStepView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
