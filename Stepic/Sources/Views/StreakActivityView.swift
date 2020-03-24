@@ -1,11 +1,3 @@
-//
-//  StreakActivityView.swift
-//  Stepic
-//
-//  Created by Vladislav Kiryukhin on 17.09.2018.
-//  Copyright © 2018 Alex Karpov. All rights reserved.
-//
-
 import SnapKit
 import UIKit
 
@@ -39,7 +31,7 @@ final class StreakActivityView: UIView {
     }()
 
     private lazy var streakIconImageView: UIImageView = {
-        let image = UIImage(named: "streak")!.withRenderingMode(.alwaysTemplate)
+        let image = UIImage(named: "streak")?.withRenderingMode(.alwaysTemplate)
         let view = UIImageView(image: image, highlightedImage: nil)
         view.tintColor = self.appearance.streakIconColor
         return view
@@ -100,6 +92,7 @@ final class StreakActivityView: UIView {
         self.makeConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
