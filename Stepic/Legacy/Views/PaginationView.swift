@@ -21,7 +21,7 @@ extension PaginationView {
 final class PaginationView: UIView {
     let appearance: Appearance
 
-    private lazy var activityIndicatorView = UIActivityIndicatorView(style: .gray)
+    private lazy var activityIndicatorView = UIActivityIndicatorView(style: .stepikGray)
     private lazy var errorRefreshButton: ImageButton = {
         let button = ImageButton()
         button.image = UIImage(named: "Refresh")?.withRenderingMode(.alwaysTemplate)
