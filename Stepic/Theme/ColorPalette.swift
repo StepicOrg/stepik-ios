@@ -95,6 +95,9 @@ extension UIColor {
 
     // MARK: Accent
 
+    /// A non adaptable color with hex value #535366.
+    static var stepikAccentFixed: UIColor { ColorPalette.accent700 }
+
     static var stepikAccent: UIColor {
         UIColor.dynamicColor(
             light: ColorPalette.accent700,
@@ -169,12 +172,58 @@ extension UIColor {
 
     // MARK: - UI Element Colors -
 
-    /// The color for borders or divider lines that hides any underlying content.
+    /// The color for thin borders or divider lines that allows some underlying content to be visible.
     static var stepikSeparator: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.separator
+        } else {
+            return UIColor(hex8: 0x99545458)
+        }
+    }
+
+    /// The color for borders or divider lines that hides any underlying content.
+    static var stepikOpaqueSeparator: UIColor {
         if #available(iOS 13.0, *) {
             return UIColor.opaqueSeparator
         } else {
             return UIColor(hex6: 0xC8C7CC)
+        }
+    }
+
+    /// The color for text labels that contain primary content.
+    /// Black in light mode and white in dark mode.
+    static var stepikSystemLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .label
+        } else {
+            return .black
+        }
+    }
+
+    /// The color for text labels that contain secondary content.
+    static var stepikSystemSecondaryLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondaryLabel
+        } else {
+            return UIColor(hex8: 0x993C3C43)
+        }
+    }
+
+    /// The color for text labels that contain tertiary content.
+    static var stepikSystemTertiaryLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .tertiaryLabel
+        } else {
+            return UIColor(hex8: 0x4C3C3C43)
+        }
+    }
+
+    /// The color for text labels that contain quaternary content.
+    static var stepikSystemQuaternaryLabel: UIColor {
+        if #available(iOS 13.0, *) {
+            return .quaternaryLabel
+        } else {
+            return UIColor(hex8: 0x2D3C3C43)
         }
     }
 
@@ -191,11 +240,81 @@ extension UIColor {
 
     // MARK: Standard Content Background Colors
 
+    /// The color for the main background of the interface.
     static var stepikBackground: UIColor {
         if #available(iOS 13.0, *) {
             return .systemBackground
         } else {
             return .white
+        }
+    }
+
+    /// The color for content layered on top of the main background.
+    static var stepikSecondaryBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondarySystemBackground
+        } else {
+            return UIColor(hex6: 0xF2F2F7)
+        }
+    }
+
+    /// The color for content layered on top of the main background.
+    static var stepikLightSecondaryBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                return traitCollection.userInterfaceStyle == .dark
+                    ? .stepikSecondaryBackground
+                    : ColorPalette.grey100
+            }
+        } else {
+            return ColorPalette.grey100
+        }
+    }
+
+    /// The color for content layered on top of secondary backgrounds.
+    static var stepikTertiaryBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .tertiarySystemBackground
+        } else {
+            return .white
+        }
+    }
+
+    /// The color to use for the background of a grouped table.
+    static var stepikGroupTableViewBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemGroupedBackground
+        } else {
+            return .groupTableViewBackground
+        }
+    }
+
+    /// The color to use for the background of a alert.
+    static var stepikAlertBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return .secondarySystemBackground
+        } else {
+            return .white
+        }
+    }
+
+    // MARK: Standard Colors
+
+    /// The base gray color.
+    static var stepikGray: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemGray
+        } else {
+            return UIColor(hex6: 0x8E8E93)
+        }
+    }
+
+    /// A second-level shade of grey.
+    static var stepikGray2: UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemGray2
+        } else {
+            return UIColor(hex6: 0xAEAEB2)
         }
     }
 }
