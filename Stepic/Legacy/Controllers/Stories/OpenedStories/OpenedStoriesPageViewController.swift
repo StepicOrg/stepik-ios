@@ -26,6 +26,11 @@ final class OpenedStoriesPageViewController: UIPageViewController, OpenedStories
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Always adopt a light interface style.
+        if #available(iOS 13.0, *) {
+            self.overrideUserInterfaceStyle = .light
+        }
+
         self.dataSource = self
         self.presenter?.refresh()
 

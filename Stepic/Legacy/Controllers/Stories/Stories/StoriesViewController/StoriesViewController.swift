@@ -24,6 +24,7 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.colorize()
         self.setupCollectionView()
 
         self.registerPlaceholder(placeholder: StepikPlaceholder(.refreshStories, action: { [weak self] in
@@ -38,6 +39,14 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
         self.modalPresentationStyle = .custom
 
         self.refresh()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.view.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.colorize()
+        }
     }
 
     private func setupCollectionView() {
@@ -59,10 +68,6 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
         }
 
         self.collectionView.showsHorizontalScrollIndicator = false
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 
     let storyPresentr: Presentr = {
@@ -121,6 +126,11 @@ final class StoriesViewController: UIViewController, ControllerWithStepikPlaceho
         } else {
             return nil
         }
+    }
+
+    private func colorize() {
+        self.view.backgroundColor = .stepikBackground
+        self.collectionView.backgroundColor = .clear
     }
 }
 

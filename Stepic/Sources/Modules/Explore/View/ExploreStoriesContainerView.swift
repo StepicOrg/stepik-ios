@@ -39,7 +39,7 @@ final class ExploreStoriesContainerView: UIView {
 
 extension ExploreStoriesContainerView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
     }
 
     func addSubviews() {
