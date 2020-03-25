@@ -77,8 +77,10 @@ final class PinsMapView: UIView {
     }
 
     private func updateMonth(days: [CALayer], month: PinsMap.Month, pins: [Int]) {
-        for (day, (isAllowed, pin)) in zip(days, month.filled(pins: pins).days) {
-            day.backgroundColor = isAllowed ? Day.solved(pin: pin).color.cgColor : Day.empty.color.cgColor
+        self.performBlockUsingViewTraitCollection {
+            for (day, (isAllowed, pin)) in zip(days, month.filled(pins: pins).days) {
+                day.backgroundColor = isAllowed ? Day.solved(pin: pin).color.cgColor : Day.empty.color.cgColor
+            }
         }
     }
 
@@ -287,7 +289,9 @@ final class PinsMapView: UIView {
                     let dayRect = CALayer()
                     dayRect.cornerRadius = 2
                     dayRect.frame = CGRect(x: x, y: y, width: daySide, height: daySide)
-                    dayRect.backgroundColor = Day.empty.color.cgColor
+                    self.performBlockUsingViewTraitCollection {
+                        dayRect.backgroundColor = Day.empty.color.cgColor
+                    }
                     containerView.layer.addSublayer(dayRect)
 
                     days.append(dayRect)
