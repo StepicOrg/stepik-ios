@@ -54,7 +54,7 @@ final class BaseExploreView: UIView {
 
 extension BaseExploreView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
 
         self.scrollableStackView.delegate = self
         self.scrollableStackView.isRefreshControlEnabled = true
