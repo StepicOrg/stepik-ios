@@ -16,7 +16,7 @@ extension CodeLanguagePickerView {
         let tableViewEstimatedRowHeight: CGFloat = 44
         let separatorStyle = UITableViewCell.SeparatorStyle.singleLine
 
-        let mainColor = UIColor.mainDark
+        let mainColor = UIColor.stepikAccent
         let titleTextFont = UIFont.systemFont(ofSize: 16)
         let emptyTextFont = UIFont.systemFont(ofSize: 16)
         let emptyTextColor = UIColor.lightGray

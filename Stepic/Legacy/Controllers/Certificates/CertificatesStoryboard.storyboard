@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LHK-cu-T61">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Styled Navigation Controller-->
+        <scene sceneID="K0I-oE-pFa">
+            <objects>
+                <navigationController storyboardIdentifier="CertificatesNavigation" id="LHK-cu-T61" customClass="StyledNavigationController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BwG-ab-5HL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="LA4-n1-9Nw" kind="relationship" relationship="rootViewController" id="yIq-w8-dSh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KDn-rr-j4F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-985" y="134"/>
+        </scene>
+        <!--Certificates-->
+        <scene sceneID="rZr-gy-UUH">
+            <objects>
+                <viewController storyboardIdentifier="CertificatesViewController" id="LA4-n1-9Nw" customClass="CertificatesViewController" customModule="Stepic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MKs-Ub-urU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="xIF-ha-DwF" customClass="StepikTableView" customModule="Stepic">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="xIF-ha-DwF" firstAttribute="leading" secondItem="l0a-iu-usF" secondAttribute="leading" id="0S2-ng-dfm"/>
+                            <constraint firstItem="xIF-ha-DwF" firstAttribute="bottom" secondItem="l0a-iu-usF" secondAttribute="bottom" id="DLv-4k-smx"/>
+                            <constraint firstItem="xIF-ha-DwF" firstAttribute="top" secondItem="l0a-iu-usF" secondAttribute="top" id="FN8-QO-b8I"/>
+                            <constraint firstItem="xIF-ha-DwF" firstAttribute="trailing" secondItem="l0a-iu-usF" secondAttribute="trailing" id="dYg-xz-Aqc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="l0a-iu-usF"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Certificates" id="jf7-xo-enf"/>
+                    <connections>
+                        <outlet property="tableView" destination="xIF-ha-DwF" id="VmJ-tY-im3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSg-WS-uip" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-138.40000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>

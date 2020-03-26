@@ -5,11 +5,11 @@ extension ChoiceElementView {
     struct Appearance {
         let contentInsets = LayoutInsets(top: 12, left: 16, bottom: 12, right: 16)
 
-        let shadowColor = UIColor(hex: 0xEAECF0)
+        let shadowColor = UIColor(hex6: 0xEAECF0)
         let shadowOffset = CGSize(width: 0, height: 1)
         let shadowRadius: CGFloat = 4
 
-        let feedbackBackgroundColor = UIColor(hex: 0xF6F6F6)
+        let feedbackBackgroundColor = UIColor(hex6: 0xF6F6F6)
         let feedbackContentInsets = LayoutInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }

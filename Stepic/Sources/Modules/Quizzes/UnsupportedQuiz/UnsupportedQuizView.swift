@@ -10,13 +10,13 @@ extension UnsupportedQuizView {
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
-        let titleColor = UIColor.mainDark
+        let titleColor = UIColor.stepikAccent
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let actionButtonCornerRadius: CGFloat = 8
         let actionButtonBorderWidth: CGFloat = 8
-        let actionButtonBorderColor = UIColor.mainDark
-        let actionButtonBackgroundColor = UIColor.mainDark
+        let actionButtonBorderColor = UIColor.stepikAccent
+        let actionButtonBackgroundColor = UIColor.stepikAccent
         let actionButtonTitleColor = UIColor.white
         let actionButtonHeight: CGFloat = 44
     }

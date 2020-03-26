@@ -8,8 +8,8 @@ extension CodeDetailsSampleItemView {
         let horizontalSpacing: CGFloat = 16
         let iconSize = CGSize(width: 16, height: 16)
 
-        let backgroundColor = UIColor(hex: 0xF6F6F6)
-        let mainColor = UIColor.mainDark
+        let backgroundColor = UIColor(hex6: 0xF6F6F6)
+        let mainColor = UIColor.stepikAccent
 
         let titleFont = UIFont.systemFont(ofSize: 16)
         let detailFont = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .light)

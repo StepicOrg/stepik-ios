@@ -6,11 +6,11 @@ extension DownloadControlView {
         let circleWidth: CGFloat = 2.8
 
         let downloadingCircleColor = UIColor.stepikGreen
-        let downloadingBackgroundColor = UIColor.mainDark.withAlphaComponent(0.2)
+        let downloadingBackgroundColor = UIColor.stepikAccentAlpha25
 
-        let pendingCircleColor = UIColor.mainDark
+        let pendingCircleColor = UIColor.stepikAccent
 
-        let iconImageTintColor = UIColor.mainDark
+        let iconImageTintColor = UIColor.stepikAccent
     }
 }
 

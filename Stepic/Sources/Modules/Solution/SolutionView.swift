@@ -11,7 +11,7 @@ extension SolutionView {
         let insets = LayoutInsets(left: 16, right: 16)
         let spacing: CGFloat = 16
 
-        let loadingIndicatorColor = UIColor.mainDark
+        let loadingIndicatorColor = UIColor.stepikLoadingIndicator
 
         let actionButtonBackgroundColor = UIColor.stepikGreen
         let actionButtonHeight: CGFloat = 44

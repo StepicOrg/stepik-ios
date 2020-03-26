@@ -45,7 +45,7 @@ final class WriteCommentViewController: UIViewController {
     )
     private lazy var activityBarButtonItem: UIBarButtonItem = {
         let activityIndicatorView = UIActivityIndicatorView(style: .white)
-        activityIndicatorView.color = .mainDark
+        activityIndicatorView.color = .stepikLoadingIndicator
         activityIndicatorView.startAnimating()
         return UIBarButtonItem(customView: activityIndicatorView)
     }()

@@ -18,7 +18,7 @@ extension CourseInfoStatsView {
         let imagesRenderingSize = CGSize(width: 30, height: 30)
         let imagesRenderingLineWidth: CGFloat = 6.0
         var imagesRenderingBackgroundColor = UIColor.white
-        var imagesRenderingTintColor = UIColor(hex: 0x89cc89)
+        var imagesRenderingTintColor = UIColor(hex6: 0x89cc89)
     }
 }
 

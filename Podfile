@@ -29,10 +29,10 @@ def all_pods
     pod 'SnapKit', '5.0.1'
 
     # Firebase
-    pod 'Firebase/Core', '6.19.0'
-    pod 'Firebase/Messaging' , '6.19.0'
-    pod 'Firebase/Analytics' , '6.19.0'
-    pod 'Firebase/RemoteConfig', '6.19.0'
+    pod 'Firebase/Core', '6.21.0'
+    pod 'Firebase/Messaging' , '6.21.0'
+    pod 'Firebase/Analytics' , '6.21.0'
+    pod 'Firebase/RemoteConfig', '6.21.0'
 
     pod 'YandexMobileMetrica/Dynamic', '3.9.4'
     pod 'Amplitude-iOS', '4.9.3'
@@ -53,7 +53,7 @@ def all_pods
     
     pod 'Presentr', '1.9'
     
-    pod 'Agrume', '5.6.5'
+    pod 'Agrume', '5.6.7'
     pod 'Highlightr', '2.1.0'
     pod 'TTTAttributedLabel', '2.0.0'
     pod 'lottie-ios', '2.5.3'
@@ -61,7 +61,7 @@ def all_pods
     pod 'Charts', '3.4.0'
     pod 'EasyTipView', '2.0.4'
     pod 'ActionSheetPicker-3.0', '2.4.0'
-    pod 'Nuke', '8.3.1'
+    pod 'Nuke', '8.4.1'
     pod 'STRegex', '2.1.1'
     pod 'Tabman', '2.8.0'
     pod 'SwiftDate', '6.1.0'

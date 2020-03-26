@@ -7,8 +7,9 @@ extension CourseListView {
         let layoutMinimumInteritemSpacing: CGFloat = 16.0
         let layoutItemHeight: CGFloat = 140.0
 
-        let lightModeBackgroundColor = UIColor.white
-        let darkModeBackgroundColor = UIColor(hex: 0x535366)
+        let lightModeBackgroundColor = UIColor.stepikBackground
+        let darkModeBackgroundColor = UIColor.stepikAccentFixed
+        let darkModeDarkInterfaceStyleBackgroundColor = UIColor.stepikSecondaryBackground
 
         let horizontalLayoutNextPageWidth: CGFloat = 12.0
     }
@@ -64,6 +65,14 @@ class CourseListView: UIView {
         self.invalidateIntrinsicContentSize()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateViewColor()
+        }
+    }
+
     // swiftlint:disable:next unavailable_function
     func calculateItemSize() -> CGSize {
         fatalError("Use subclass of CourseListView with concrete layout")
@@ -95,7 +104,11 @@ class CourseListView: UIView {
         case .light:
             return self.appearance.lightModeBackgroundColor
         case .dark:
-            return self.appearance.darkModeBackgroundColor
+            if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
+                return self.appearance.darkModeDarkInterfaceStyleBackgroundColor
+            } else {
+                return self.appearance.darkModeBackgroundColor
+            }
         }
     }
 
@@ -143,8 +156,6 @@ extension CourseListView: ProgrammaticallyInitializableViewProtocol {
                 DarkCourseListCollectionViewCell.self,
                 forCellWithReuseIdentifier: DarkCourseListCollectionViewCell.defaultReuseIdentifier
             )
-        default:
-            fatalError("Color mode is not supported")
         }
 
         self.collectionView.register(

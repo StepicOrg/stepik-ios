@@ -361,7 +361,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 options: .init(
                     title: .init(
                         text: Setting.deleteAllContent.cellTitle,
-                        appearance: .init(textColor: .errorRed, textAlignment: .left)
+                        appearance: .init(textColor: .stepikRed, textAlignment: .left)
                     ),
                     accessoryType: .none
                 )
@@ -386,7 +386,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
                 options: .init(
                     title: .init(
                         text: Setting.logOut.cellTitle,
-                        appearance: .init(textColor: .errorRed, textAlignment: .center)
+                        appearance: .init(textColor: .stepikRed, textAlignment: .center)
                     ),
                     accessoryType: .none
                 )

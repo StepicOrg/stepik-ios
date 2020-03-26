@@ -3,8 +3,8 @@ import UIKit
 
 extension ExploreBlockContainerView {
     struct Appearance {
-        let separatorColor = UIColor(hex: 0x535366, alpha: 0.1)
-        var backgroundColor = UIColor.white
+        let separatorColor = UIColor.stepikOpaqueSeparator
+        var backgroundColor = UIColor.stepikBackground
 
         let headerViewInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         var contentViewInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
@@ -69,12 +69,24 @@ final class ExploreBlockContainerView: UIView {
         super.layoutSubviews()
         self.invalidateIntrinsicContentSize()
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateViewColor()
+        }
+    }
+
+    private func updateViewColor() {
+        self.backgroundColor = self.appearance.backgroundColor
+    }
 }
 
 extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.contentView.clipsToBounds = false
-        self.backgroundColor = self.appearance.backgroundColor
+        self.updateViewColor()
     }
 
     func addSubviews() {
@@ -94,7 +106,7 @@ extension ExploreBlockContainerView: ProgrammaticallyInitializableViewProtocol {
         self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(self.shouldShowSeparator ? 1.0 : 0.0)
+            make.height.equalTo(self.shouldShowSeparator ? 0.5 : 0.0)
         }
 
         self.contentView.translatesAutoresizingMaskIntoConstraints = false

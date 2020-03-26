@@ -7,9 +7,9 @@ extension StepDiscussionThreadButton {
         let insets = LayoutInsets(left: 16, right: 16)
         let spacing: CGFloat = 19
 
-        let mainColor = UIColor.mainDark
+        let mainColor = UIColor.stepikAccent
         let textFont = UIFont.systemFont(ofSize: 16)
-        let backgroundColor = UIColor(hex: 0xF6F6F6)
+        let backgroundColor = UIColor(hex6: 0xF6F6F6)
     }
 }
 

@@ -79,7 +79,7 @@ final class AboutAppViewController: UIViewController {
     // MARK: Inner Types
 
     private enum Appearance {
-        static var appVersionLabelTextColor = UIColor.mainDark
+        static var appVersionLabelTextColor = UIColor.stepikAccent
         static var appVersionLabelFont = UIFont.systemFont(ofSize: 14)
         static var appVersionLabelTextAlignment = NSTextAlignment.center
         static var appVersionLabelInsets = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
