@@ -23,15 +23,14 @@ class APIEndpoint {
     var retrieve: RetrieveRequestMaker
 
     init() {
-        manager = Alamofire.Session(configuration: StepikURLSessionConfiguration.default)
-        let retrier = ApiRequestRetrier()
-        manager.retrier = retrier
-        manager.adapter = retrier
-
-        update = UpdateRequestMaker()
-        delete = DeleteRequestMaker()
-        create = CreateRequestMaker()
-        retrieve = RetrieveRequestMaker()
+        self.manager = Alamofire.Session(
+            configuration: StepikURLSessionConfiguration.default,
+            interceptor: StepikRequestInterceptor()
+        )
+        self.update = UpdateRequestMaker()
+        self.delete = DeleteRequestMaker()
+        self.create = CreateRequestMaker()
+        self.retrieve = RetrieveRequestMaker()
     }
 
     func cancelAllTasks() {
