@@ -28,7 +28,7 @@ final class QueriesAPI: APIEndpoint {
         }
     }
 
-    @discardableResult func retrieve(query: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
+    @discardableResult func retrieve(query: String, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
         retrieve(query: query).done {
             queries in
             success(queries)

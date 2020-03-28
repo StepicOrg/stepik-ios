@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let branchService = BranchService(deepLinkRoutingService: DeepLinkRoutingService())
     private let spotlightContinueUserActivityService: SpotlightContinueUserActivityServiceProtocol = SpotlightContinueUserActivityService()
     private let notificationPermissionStatusSettingsObserver = NotificationPermissionStatusSettingsObserver()
-    private let alamofireRequestsLogger = AlamofireRequestsLogger()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -55,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setHapticsEnabled(true)
 
         ConnectionHelper.shared.instantiate()
-        self.alamofireRequestsLogger.startIfDebug()
 
         if !AudioManager.shared.initAudioSession() {
             print("Could not initialize audio session")
@@ -290,7 +288,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private API -
 
     private func checkForUpdates() {
-        UpdateChecker.sharedChecker.checkForUpdatesIfNeeded({ [weak self] newVersion in
+        UpdateChecker.shared.checkForUpdatesIfNeeded({ [weak self] newVersion in
             guard let newVersion = newVersion else {
                 return
             }
@@ -304,7 +302,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.window?.rootViewController?.present(alert, animated: true)
             }
         }, error: { error in
-            print("error while checking for updates: \(error.code) \(error.localizedDescription)")
+            print("error while checking for updates: \(error)")
         })
     }
 

@@ -32,7 +32,7 @@ final class ViewsAPI: APIEndpoint {
     func create(
         stepId id: Int,
         assignment: Int?,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping () -> Void,
         error errorHandler: @escaping (ViewsCreateError) -> Void
     ) -> Request? {
@@ -60,40 +60,25 @@ final class ViewsAPI: APIEndpoint {
             parameters: params,
             encoding: JSONEncoding.default,
             headers: headers
-        ).responseSwiftyJSON({ response in
-            var error = response.result.error
-//            var json : JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
+        ).responseSwiftyJSON { response in
+            switch response.result {
+            case .success:
+                guard let statusCode = response.response?.statusCode else {
+                    return errorHandler(.other(error: nil, code: nil, message: nil))
                 }
-            } else {
-//                json = response.result.value!
-            }
-            let response = response.response
 
-            if let e = error {
-                errorHandler(.other(error: e, code: nil, message: nil))
-                return
+                switch statusCode {
+                case 200..<300:
+                    success()
+                case 401:
+                    errorHandler(.notAuthorized)
+                default:
+                    errorHandler(.other(error: nil, code: statusCode, message: nil))
+                }
+            case .failure(let error):
+                errorHandler(.other(error: error, code: nil, message: nil))
             }
-
-            guard let code = response?.statusCode else {
-                errorHandler(.other(error: nil, code: nil, message: nil))
-                return
-            }
-
-            switch code {
-            case 200..<300:
-                success()
-                return
-            case 401:
-                errorHandler(.notAuthorized)
-                return
-            default:
-                errorHandler(.other(error: nil, code: code, message: nil))
-                return
-            }
-        })
+        }
     }
 }
 

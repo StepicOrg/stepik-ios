@@ -17,7 +17,7 @@ final class CourseReviewSummariesAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [CourseReviewSummary],
         refreshMode: RefreshMode,
         success: @escaping (([CourseReviewSummary]) -> Void),
@@ -37,7 +37,7 @@ final class CourseReviewSummariesAPI: APIEndpoint {
     @available(*, deprecated, message: "Legacy with update existing")
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[CourseReviewSummary]> {
         Promise { seal in
             CourseReviewSummary.fetchAsync(ids: ids).then { summaries in

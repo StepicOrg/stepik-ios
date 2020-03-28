@@ -49,37 +49,38 @@ final class AvatarImageView: UIImageView {
     }
 
     func set(with url: URL) {
-        if url.pathExtension != "svg" {
-            self.sd_setImage(with: url, placeholderImage: self.image)
-        } else {
-            AlamofireDefaultSessionManager.shared.request(url).responseData(completionHandler: { response in
-                if response.result.error != nil {
-                    return
-                }
+        if url.pathExtension == "svg" {
+            AlamofireDefaultSessionManager
+                .shared
+                .request(url)
+                .responseData { dataResponse in
+                    guard let data = dataResponse.data else {
+                        return
+                    }
 
-                guard let data = response.result.value else {
-                    return
-                }
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        if let svgString = String(data: data, encoding: String.Encoding.utf8),
+                           let letters = self.extractLetters(from: svgString) {
+                            // Draw custom avatar
+                            DispatchQueue.main.async {
+                                self.image = self.renderImage(with: letters) ?? self.image
+                            }
+                        } else {
+                            // Render SVG
+                            let svgImage = SVGKImage(data: data)
 
-                DispatchQueue.global(qos: .userInitiated).async {
-                    if let svgString = String(data: data, encoding: String.Encoding.utf8),
-                       let letters = self.extractLetters(from: svgString) {
-                        // Draw custom avatar
-                        DispatchQueue.main.async {
-                            self.image = self.renderImage(with: letters) ?? self.image
-                        }
-                    } else {
-                        // Render SVG
-                        let svgImage = SVGKImage(data: data)
-                        if !(svgImage?.hasSize() ?? true) {
-                            svgImage?.size = CGSize(width: 200, height: 200)
-                        }
-                        DispatchQueue.main.async {
-                            self.image = svgImage?.uiImage ?? self.image
+                            if !(svgImage?.hasSize() ?? true) {
+                                svgImage?.size = CGSize(width: 200, height: 200)
+                            }
+
+                            DispatchQueue.main.async {
+                                self.image = svgImage?.uiImage ?? self.image
+                            }
                         }
                     }
                 }
-            })
+        } else {
+            self.sd_setImage(with: url, placeholderImage: self.image)
         }
     }
 

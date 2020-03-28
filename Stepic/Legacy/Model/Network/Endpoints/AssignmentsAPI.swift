@@ -14,9 +14,10 @@ import SwiftyJSON
 final class AssignmentsAPI: APIEndpoint {
     override var name: String { "assignments" }
 
-    @discardableResult func retrieve(
+    @discardableResult
+    func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Assignment],
         refreshMode: RefreshMode,
         success: @escaping (([Assignment]) -> Void),

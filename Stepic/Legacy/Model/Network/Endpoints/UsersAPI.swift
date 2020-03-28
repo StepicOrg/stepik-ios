@@ -16,7 +16,7 @@ final class UsersAPI: APIEndpoint {
 
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [User]
     ) -> Promise<[User]> {
         self.getObjectsByIds(ids: ids, updating: existing)
@@ -26,7 +26,7 @@ final class UsersAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[User]> {
         if ids.isEmpty {
             return .value([])
@@ -41,7 +41,7 @@ extension UsersAPI {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [User],
         refreshMode: RefreshMode,
         success: @escaping (([User]) -> Void),

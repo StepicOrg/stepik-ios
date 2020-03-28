@@ -20,7 +20,7 @@ final class RecommendationsAPI: APIEndpoint {
     func retrieve(
         course courseId: Int,
         count: Int = 1,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[Int]> {
         Promise { seal in
             self.manager.request(
@@ -45,7 +45,7 @@ final class RecommendationsAPI: APIEndpoint {
         user userId: Int,
         lesson lessonId: Int,
         reaction: Reaction,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<Void> {
         let params = [
             "recommendationReaction": [
@@ -81,7 +81,7 @@ extension RecommendationsAPI {
         user userId: Int,
         lesson lessonId: Int,
         reaction: Reaction,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping (() -> Void),
         error errorHandler: @escaping ((String) -> Void)
     ) -> Request? {
@@ -103,7 +103,7 @@ extension RecommendationsAPI {
     func getRecommendedLessonsId(
         course courseId: Int,
         count: Int = 1,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping (([Int]) -> Void),
         error errorHandler: @escaping ((String) -> Void)
     ) -> Request? {

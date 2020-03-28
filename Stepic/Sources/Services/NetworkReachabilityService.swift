@@ -29,7 +29,7 @@ final class NetworkReachabilityService: NetworkReachabilityServiceProtocol {
     var connectionType: NetworkReachabilityConnectionType {
         if self.reachabilityManager?.isReachableOnEthernetOrWiFi ?? false {
             return .ethernetOrWiFi
-        } else if self.reachabilityManager?.isReachableOnWWAN ?? false {
+        } else if self.reachabilityManager?.isReachableOnCellular ?? false {
             return .wwan
         } else {
             return .unknown

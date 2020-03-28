@@ -17,13 +17,13 @@ final class StepsAPI: APIEndpoint {
     func retrieve(
         ids: [Int],
         existing: [Step],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[Step]> {
         self.getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
 
     @available(*, deprecated, message: "Legacy: we want to pass existing")
-    func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Step]> {
+    func retrieve(ids: [Int], headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Step]> {
         if ids.isEmpty {
             return .value([])
         }
@@ -37,7 +37,7 @@ extension StepsAPI {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Step],
         refreshMode: RefreshMode,
         success: @escaping (([Step]) -> Void),

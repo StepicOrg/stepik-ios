@@ -8,7 +8,7 @@ final class StepikRequestAdapter: RequestAdapter {
     ) {
         var urlRequest = urlRequest
 
-        for (headerField, value) in AuthInfo.shared.initialHTTPHeaders {
+        for (headerField, value) in AuthInfo.shared.initialHTTPHeaders.dictionary {
             urlRequest.setValue(value, forHTTPHeaderField: headerField)
         }
 

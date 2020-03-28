@@ -31,7 +31,7 @@ final class SectionsAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Section],
         refreshMode: RefreshMode,
         success: @escaping (([Section]) -> Void),

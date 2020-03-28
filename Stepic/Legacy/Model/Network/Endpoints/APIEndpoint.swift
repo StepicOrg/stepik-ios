@@ -23,9 +23,15 @@ class APIEndpoint {
     var retrieve: RetrieveRequestMaker
 
     init() {
+        var eventMonitors = [EventMonitor]()
+        #if DEBUG
+            eventMonitors = [AlamofireRequestsLogger()]
+        #endif
+
         self.manager = Alamofire.Session(
             configuration: StepikURLSessionConfiguration.default,
-            interceptor: StepikRequestInterceptor()
+            interceptor: StepikRequestInterceptor(),
+            eventMonitors: eventMonitors
         )
         self.update = UpdateRequestMaker()
         self.delete = DeleteRequestMaker()

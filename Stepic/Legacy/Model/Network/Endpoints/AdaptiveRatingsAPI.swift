@@ -60,17 +60,32 @@ final class AdaptiveRatingsAPI: APIEndpoint {
         }
 
         return Promise { seal in
-            manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(name)", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseSwiftyJSON { response in
+            self.manager.request(
+                "\(RemoteConfig.shared.adaptiveBackendUrl)/\(self.name)",
+                method: .get,
+                parameters: params,
+                encoding: URLEncoding.default,
+                headers: nil
+            ).validate().responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(error)
                 case .success(let json):
-                    if response.response?.statusCode == 200 {
-                        let leaders = json["users"].arrayValue.map { RatingRecord(userId: $0["user"].intValue, exp: $0["exp"].intValue, rank: $0["rank"].intValue, isFake: !$0["is_not_fake"].boolValue) }
-                        seal.fulfill(Scoreboard(allCount: json["count"].intValue, leaders: leaders))
-                    } else {
-                        seal.reject(RatingsAPIError.serverError)
-                    }
+                    let leaders = json["users"]
+                        .arrayValue
+                        .map {
+                            RatingRecord(
+                                userId: $0["user"].intValue,
+                                exp: $0["exp"].intValue,
+                                rank: $0["rank"].intValue,
+                                isFake: !$0["is_not_fake"].boolValue
+                            )
+                        }
+                    let scoreboard = Scoreboard(
+                        allCount: json["count"].intValue,
+                        leaders: leaders
+                    )
+                    seal.fulfill(scoreboard)
                 }
             }
         }
@@ -86,18 +101,20 @@ final class AdaptiveRatingsAPI: APIEndpoint {
         }
 
         return Promise { seal in
-            manager.request("\(RemoteConfig.shared.adaptiveBackendUrl)/\(restoreName)", method: .get, parameters: params, encoding: URLEncoding.default, headers: nil).responseSwiftyJSON { response in
+            self.manager.request(
+                "\(RemoteConfig.shared.adaptiveBackendUrl)/\(self.restoreName)",
+                method: .get,
+                parameters: params,
+                encoding: URLEncoding.default,
+                headers: nil
+            ).validate().responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(error)
                 case .success(let json):
-                    if response.response?.statusCode == 200 {
-                        let exp = json["exp"].intValue
-                        let streak = json["streak"].intValue
-                        seal.fulfill((exp: exp, streak: streak))
-                    } else {
-                        seal.reject(RatingsAPIError.serverError)
-                    }
+                    let exp = json["exp"].intValue
+                    let streak = json["streak"].intValue
+                    seal.fulfill((exp: exp, streak: streak))
                 }
             }
         }
