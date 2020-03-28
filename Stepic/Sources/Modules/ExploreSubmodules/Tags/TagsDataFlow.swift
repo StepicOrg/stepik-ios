@@ -17,7 +17,7 @@ enum Tags {
         struct Request { }
 
         struct Response {
-            let result: Result<[(UniqueIdentifierType, Tag)]>
+            let result: StepikResult<[(UniqueIdentifierType, Tag)]>
         }
 
         struct ViewModel {

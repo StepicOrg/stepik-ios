@@ -8,7 +8,7 @@ enum Submissions {
         struct Request {}
 
         struct Response {
-            let result: Result<SubmissionsData>
+            let result: StepikResult<SubmissionsData>
         }
 
         struct ViewModel {
@@ -21,7 +21,7 @@ enum Submissions {
         struct Request {}
 
         struct Response {
-            let result: Result<SubmissionsData>
+            let result: StepikResult<SubmissionsData>
         }
 
         struct ViewModel {

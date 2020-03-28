@@ -8,7 +8,7 @@ enum CourseListsCollection {
         struct Request { }
 
         struct Response {
-            var result: Result<[CourseListModel]>
+            var result: StepikResult<[CourseListModel]>
         }
 
         struct ViewModel {

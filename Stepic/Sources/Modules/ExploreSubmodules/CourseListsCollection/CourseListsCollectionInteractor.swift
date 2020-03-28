@@ -26,14 +26,14 @@ final class CourseListsCollectionInteractor: CourseListsCollectionInteractorProt
         self.provider.fetchCachedCourseLists().then {
             cachedCourseLists -> Promise<[CourseListModel]> in
             // Pass cached data to presenter and start fetching from remote
-            let response = Result<[CourseListModel]>.success(cachedCourseLists)
+            let response = StepikResult<[CourseListModel]>.success(cachedCourseLists)
             self.presenter.presentCourses(
                 response: CourseListsCollection.CourseListsLoad.Response(result: response)
             )
 
             return self.provider.fetchRemoteCourseLists()
         }.done { remoteCourseLists in
-            let response = Result<[CourseListModel]>.success(remoteCourseLists)
+            let response = StepikResult<[CourseListModel]>.success(remoteCourseLists)
             self.presenter.presentCourses(
                 response: CourseListsCollection.CourseListsLoad.Response(result: response)
             )

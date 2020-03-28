@@ -12,7 +12,7 @@ enum StepDataFlow {
         }
 
         struct Response {
-            let result: Result<Data>
+            let result: StepikResult<Data>
         }
 
         struct ViewModel {
@@ -113,7 +113,7 @@ enum StepDataFlow {
         struct Request {}
 
         struct Response {
-            let result: Result<DiscussionThread?>
+            let result: StepikResult<DiscussionThread?>
         }
 
         struct ViewModel {
