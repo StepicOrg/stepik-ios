@@ -84,7 +84,7 @@ final class AuthInfo: NSObject {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
                 setTokenValue(newToken)
-                Session.delete()
+                StepikSession.delete()
                 if oldToken == nil {
                     // first set, not refresh
                     NotificationCenter.default.post(name: .didLogin, object: nil)
@@ -177,7 +177,7 @@ final class AuthInfo: NSObject {
 
     var initialHTTPHeaders: [String: String] {
         if !AuthInfo.shared.isAuthorized {
-            return Session.cookieHeaders
+            return StepikSession.cookieHeaders
         } else {
             return APIDefaults.headers.bearer
         }
