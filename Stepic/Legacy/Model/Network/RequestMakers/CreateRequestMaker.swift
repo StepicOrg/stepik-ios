@@ -16,7 +16,7 @@ final class CreateRequestMaker {
         requestEndpoint: String,
         paramName: String,
         creatingObject: T,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<(T, JSON)> {
         Promise { seal in
             let params: Parameters? = [
@@ -48,7 +48,7 @@ final class CreateRequestMaker {
         requestEndpoint: String,
         paramName: String,
         creatingObject: T,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<T> {
         Promise { seal in
             self.request(
@@ -68,7 +68,7 @@ final class CreateRequestMaker {
         requestEndpoint: String,
         paramName: String,
         creatingObject: T,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<Void> {
         Promise { seal in
             self.request(

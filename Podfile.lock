@@ -2,7 +2,7 @@ PODS:
   - ActionSheetPicker-3.0 (2.4.0)
   - Agrume (5.6.7):
     - SwiftyGif
-  - Alamofire (4.9.1)
+  - Alamofire (5.0.5)
   - Amplitude-iOS (4.9.3)
   - Atributika (4.9.5)
   - BEMCheckBox (1.4.1)
@@ -12,9 +12,9 @@ PODS:
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
-  - CocoaLumberjack (3.6.0):
-    - CocoaLumberjack/Core (= 3.6.0)
-  - CocoaLumberjack/Core (3.6.0)
+  - CocoaLumberjack (3.6.1):
+    - CocoaLumberjack/Core (= 3.6.1)
+  - CocoaLumberjack/Core (3.6.1)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - CRToast (0.0.9)
@@ -146,7 +146,7 @@ PODS:
   - nanopb/encode (0.3.9011)
   - Nimble (8.0.5)
   - Nuke (8.4.1)
-  - Pageboy (3.5.0)
+  - Pageboy (3.5.1)
   - pop (1.0.12)
   - Presentr (1.9)
   - PromiseKit (6.13.0):
@@ -192,7 +192,7 @@ PODS:
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.4.0)
   - Agrume (= 5.6.7)
-  - Alamofire (= 4.9.1)
+  - Alamofire (= 5.0.5)
   - Amplitude-iOS (= 4.9.3)
   - Atributika (= 4.9.5)
   - BEMCheckBox (= 1.4.1)
@@ -322,13 +322,13 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: c68e1f8355828b4e1c823fa87185aacfef5e6fe3
   Agrume: 1440351654f1d8669f240b5e7f1c76bafa15cd02
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
   Amplitude-iOS: 122e026c44db8460e5efcf84859aa290a0ae9786
   Atributika: 19429d34013b6d860feb5427c67bdbd219414e1f
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   Branch: d2e1611afa9ea9aa36fa1996df7f38ca2c3eb03e
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
-  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
+  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   DeviceKit: fc3c2bd361a8d68d8a91eb715e453aede57317e5
@@ -362,7 +362,7 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Nimble: 4ab1aeb9b45553c75b9687196b0fa0713170a332
   Nuke: d780e3507a86b86c589ab3cc5cd302d5456f06fb
-  Pageboy: 3794c578aae5fcce06e90b3ed4a0ad6b807d75bb
+  Pageboy: 288353d4cc848c24deec2f7542f325089247c136
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
   PromiseKit: c8668a559f26c98277a543192c51bc38dd2dfc76
@@ -387,6 +387,6 @@ SPEC CHECKSUMS:
   VK-ios-sdk: 62a10b6571fbcda0657f455fedce7fedf55b4cd0
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
 
-PODFILE CHECKSUM: bf6b5b0ffb011b1f71f717b264a76aa6ca9c8a73
+PODFILE CHECKSUM: c953057f067b533f75d6deea72cb3e8b1b04f343
 
 COCOAPODS: 1.9.1

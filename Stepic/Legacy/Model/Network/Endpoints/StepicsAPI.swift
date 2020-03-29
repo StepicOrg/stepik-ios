@@ -40,7 +40,7 @@ extension StepicsAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
     @discardableResult
     func retrieveCurrentUser(
-        _ headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        _ headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping (User) -> Void,
         error errorHandler: @escaping (Error) -> Void
     ) -> Request? {

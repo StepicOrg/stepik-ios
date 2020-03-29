@@ -17,12 +17,12 @@ final class ProfilesAPI: APIEndpoint {
     func retrieve(
         ids: [Int],
         existing: [Profile],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[Profile]> {
         self.getObjectsByIds(ids: ids, updating: existing)
     }
 
-    func retrieve(id: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Profile]> {
+    func retrieve(id: Int, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Profile]> {
         self.getObjectsByIds(ids: [id], updating: Profile.fetchById(id) ?? [])
     }
 

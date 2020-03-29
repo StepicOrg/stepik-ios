@@ -16,13 +16,13 @@ final class LastStepsAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [String],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         updatingLastSteps: [LastStep],
         success: @escaping (([LastStep]) -> Void),
         error errorHandler: @escaping ((NetworkError) -> Void)
     ) -> Request? {
         self.getObjectsByIds(
-            requestString: name,
+            requestString: self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: updatingLastSteps,

@@ -15,7 +15,7 @@ import SwiftyJSON
 class APIEndpoint {
     var name: String { "" }
 
-    let manager: Alamofire.SessionManager
+    let manager: Alamofire.Session
 
     var update: UpdateRequestMaker
     var delete: DeleteRequestMaker
@@ -23,15 +23,21 @@ class APIEndpoint {
     var retrieve: RetrieveRequestMaker
 
     init() {
-        manager = Alamofire.SessionManager(configuration: StepikURLSessionConfiguration.default)
-        let retrier = ApiRequestRetrier()
-        manager.retrier = retrier
-        manager.adapter = retrier
+        var eventMonitors = [EventMonitor]()
+        #if DEBUG
+            eventMonitors = [AlamofireRequestsLogger()]
+        #endif
 
-        update = UpdateRequestMaker()
-        delete = DeleteRequestMaker()
-        create = CreateRequestMaker()
-        retrieve = RetrieveRequestMaker()
+        self.manager = Alamofire.Session(
+            configuration: StepikURLSessionConfiguration.default,
+            interceptor: StepikRequestInterceptor(),
+            eventMonitors: eventMonitors
+        )
+
+        self.update = UpdateRequestMaker()
+        self.delete = DeleteRequestMaker()
+        self.create = CreateRequestMaker()
+        self.retrieve = RetrieveRequestMaker()
     }
 
     func cancelAllTasks() {

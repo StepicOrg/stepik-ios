@@ -17,16 +17,21 @@ final class UnitsAPI: APIEndpoint {
     //TODO: Seems like a bug. Fix this when fixing CoreData duplicates
     func retrieve(lesson lessonId: Int) -> Promise<Unit> {
         let params: Parameters = ["lesson": lessonId]
+
         return Promise { seal in
-            retrieve.request(requestEndpoint: "units", paramName: "units", params: params, updatingObjects: [Unit](), withManager: manager).done {
-                units, _, _ in
-                guard let unit: Unit = units.first else {
+            self.retrieve.request(
+                requestEndpoint: self.name,
+                paramName: self.name,
+                params: params,
+                updatingObjects: [Unit](),
+                withManager: self.manager
+            ).done { units, _, _ in
+                if let unit = units.first {
+                    seal.fulfill(unit)
+                } else {
                     seal.reject(UnitRetrieveError.noUnits)
-                    return
                 }
-                seal.fulfill(unit)
-            }.catch {
-                error in
+            }.catch { error in
                 seal.reject(error)
             }
         }
@@ -39,13 +44,13 @@ final class UnitsAPI: APIEndpoint {
             return .value([])
         }
 
-        return getObjectsByIds(ids: ids, updating: Unit.fetch(ids))
+        return self.getObjectsByIds(ids: ids, updating: Unit.fetch(ids))
     }
 
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Unit],
         refreshMode: RefreshMode,
         success: @escaping (([Unit]) -> Void),
@@ -68,7 +73,7 @@ extension UnitsAPI {
     @discardableResult
     func retrieve(
         lesson lessonId: Int,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ((Unit) -> Void),
         error errorHandler: @escaping ((Error) -> Void)
     ) -> Request? {

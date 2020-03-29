@@ -57,7 +57,7 @@ enum Discussions {
         struct Request {}
 
         struct Response {
-            let result: Result<DiscussionsResponseData>
+            let result: StepikResult<DiscussionsResponseData>
         }
 
         struct ViewModel {
@@ -72,7 +72,7 @@ enum Discussions {
         }
 
         struct Response {
-            let result: Result<DiscussionsResponseData>
+            let result: StepikResult<DiscussionsResponseData>
             let direction: PaginationDirection
         }
 
@@ -166,7 +166,7 @@ enum Discussions {
         }
 
         struct Response {
-            let result: Result<DiscussionsResponseData>
+            let result: StepikResult<DiscussionsResponseData>
         }
 
         struct ViewModel {

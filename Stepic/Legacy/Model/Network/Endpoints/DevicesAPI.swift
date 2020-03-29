@@ -29,7 +29,7 @@ final class DevicesAPI: APIEndpoint {
         self.retrieve(params: ["user": userId, "page": page])
     }
 
-    func retrieve(deviceId: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
+    func retrieve(deviceId: Int, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         Promise { seal in
             self.manager.request(
                 "\(StepikApplicationsInfo.apiURL)/\(self.name)/\(deviceId)",
@@ -59,7 +59,7 @@ final class DevicesAPI: APIEndpoint {
     }
 
     //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
-    func update(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
+    func update(_ device: Device, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         Promise { seal in
             guard let deviceId = device.id else {
                 throw DeviceError.notFound
@@ -98,11 +98,17 @@ final class DevicesAPI: APIEndpoint {
     }
 
     //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
-    func create(_ device: Device, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
+    func create(_ device: Device, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<Device> {
         let params = ["device": device.json]
 
         return Promise { seal in
-            manager.request("\(StepikApplicationsInfo.apiURL)/devices", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseSwiftyJSON { response in
+            manager.request(
+                "\(StepikApplicationsInfo.apiURL)/devices",
+                method: .post,
+                parameters: params,
+                encoding: JSONEncoding.default,
+                headers: headers
+            ).responseSwiftyJSON { response in
                 switch response.result {
                 case .failure(let error):
                     seal.reject(error)
@@ -113,10 +119,15 @@ final class DevicesAPI: APIEndpoint {
                         case 404:
                             return seal.reject(DeviceError.notFound)
                         default:
-                            return seal.reject(DeviceError.other(error: nil, code: r.statusCode, message: json.rawString()))
+                            return seal.reject(
+                                DeviceError.other(
+                                    error: nil,
+                                    code: r.statusCode,
+                                    message: json.rawString()
+                                )
+                            )
                         }
                     }
-
                     seal.fulfill(Device(json: json["devices"].arrayValue[0]))
                 }
             }
@@ -124,7 +135,7 @@ final class DevicesAPI: APIEndpoint {
     }
 
     //TODO: Update this after errors refactoring. DeviceError is something that should be dealt with
-    func delete(_ deviceId: Int, headers: [String: String] = APIDefaults.headers.bearer) -> Promise<Void> {
+    func delete(_ deviceId: Int, headers: HTTPHeaders = APIDefaults.Headers.bearer) -> Promise<Void> {
         Promise { seal in
             self.manager.request(
                 "\(StepikApplicationsInfo.apiURL)/devices/\(deviceId)",
@@ -154,7 +165,7 @@ final class DevicesAPI: APIEndpoint {
 
     private func retrieve(
         params: Parameters,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<(Meta, [Device])> {
         Promise { seal in
             self.manager.request(
@@ -198,7 +209,7 @@ extension DevicesAPI {
     @discardableResult
     func create(
         _ device: Device,
-        headers: [String: String] = APIDefaults.headers.bearer,
+        headers: HTTPHeaders = APIDefaults.Headers.bearer,
         success: @escaping ((Device) -> Void),
         error errorHandler: @escaping ((String) -> Void)
     ) -> Request? {
@@ -209,7 +220,7 @@ extension DevicesAPI {
     @discardableResult
     func delete(
         _ deviceId: Int,
-        headers: [String: String] = APIDefaults.headers.bearer,
+        headers: HTTPHeaders = APIDefaults.Headers.bearer,
         success: @escaping (() -> Void),
         error errorHandler: @escaping ((DeviceError) -> Void)
     ) -> Request? {
@@ -220,7 +231,7 @@ extension DevicesAPI {
     @discardableResult
     func retrieve(
         _ deviceId: Int,
-        headers: [String: String] = APIDefaults.headers.bearer,
+        headers: HTTPHeaders = APIDefaults.Headers.bearer,
         success: @escaping ((Device) -> Void),
         error errorHandler: @escaping ((String) -> Void)
     ) -> Request? {

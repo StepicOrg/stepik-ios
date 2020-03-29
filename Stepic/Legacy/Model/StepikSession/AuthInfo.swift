@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Alex Karpov. All rights reserved.
 //
 
-import UIKit
+import Alamofire
+import Foundation
 
 extension Foundation.Notification.Name {
     static let didLogout = Foundation.Notification.Name("didLogout")
@@ -84,7 +85,7 @@ final class AuthInfo: NSObject {
                 print("\nsetting new token -> \(newToken!.accessToken)\n")
                 didRefresh = true
                 setTokenValue(newToken)
-                Session.delete()
+                StepikSession.delete()
                 if oldToken == nil {
                     // first set, not refresh
                     NotificationCenter.default.post(name: .didLogin, object: nil)
@@ -175,11 +176,11 @@ final class AuthInfo: NSObject {
         }
     }
 
-    var initialHTTPHeaders: [String: String] {
+    var initialHTTPHeaders: HTTPHeaders {
         if !AuthInfo.shared.isAuthorized {
-            return Session.cookieHeaders
+            return HTTPHeaders(StepikSession.cookieHeaders)
         } else {
-            return APIDefaults.headers.bearer
+            return APIDefaults.Headers.bearer
         }
     }
 }

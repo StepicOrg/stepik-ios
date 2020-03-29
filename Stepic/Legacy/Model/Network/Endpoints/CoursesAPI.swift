@@ -17,7 +17,7 @@ final class CoursesAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Course]
     ) -> Promise<[Course]> {
         if ids.isEmpty {
@@ -31,7 +31,7 @@ final class CoursesAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[Course]> {
         if ids.isEmpty {
             return .value([])
@@ -105,7 +105,7 @@ final class CoursesAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Course],
         refreshMode: RefreshMode,
         success: @escaping (([Course]) -> Void),
@@ -141,7 +141,7 @@ extension CoursesAPI {
         order: String? = nil,
         language: String? = nil,
         page: Int = 1,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success successHandler: @escaping ([Course], Meta) -> Void,
         error errorHandler: @escaping (Error) -> Void
     ) -> Request? {

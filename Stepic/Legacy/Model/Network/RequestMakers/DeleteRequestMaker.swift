@@ -14,7 +14,7 @@ final class DeleteRequestMaker {
     func request(
         requestEndpoint: String,
         deletingId: Int,
-        withManager manager: Alamofire.SessionManager
+        withManager manager: Alamofire.Session
     ) -> Promise<Void> {
         Promise { seal in
             checkToken().done {

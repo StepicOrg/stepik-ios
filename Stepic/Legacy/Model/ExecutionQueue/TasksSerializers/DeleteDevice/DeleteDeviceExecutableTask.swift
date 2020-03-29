@@ -67,7 +67,7 @@ final class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
         if let token = recoveryManager.recoverStepicToken(userId: userId) {
             let device = deviceId
             let user = userId
-            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: {
+            ApiDataDownloader.devices.delete(device, headers: APIDefaults.Headers.bearer(token.accessToken), success: {
                     print("user \(user) successfully deleted device with id \(device)")
                     success()
                 }, error: {
@@ -80,7 +80,7 @@ final class DeleteDeviceExecutableTask: Executable, DictionarySerializable {
                                 AuthInfo.shared.token = token
                             }
                             recoveryManager.writeStepicToken(token, userId: user)
-                            ApiDataDownloader.devices.delete(device, headers: APIDefaults.headers.bearer(token.accessToken), success: {
+                            ApiDataDownloader.devices.delete(device, headers: APIDefaults.Headers.bearer(token.accessToken), success: {
                                     print("user \(user) successfully deleted device with id \(device) after refreshing the token")
                                     success()
                                 }, error: {

@@ -42,7 +42,7 @@ final class NotificationsAPI: APIEndpoint {
         )
     }
 
-    func markAllAsRead(headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<()> {
+    func markAllAsRead(headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<()> {
         Promise { seal in
             checkToken().done {
                 self.manager.request(

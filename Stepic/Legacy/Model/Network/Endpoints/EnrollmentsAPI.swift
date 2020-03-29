@@ -39,7 +39,7 @@ extension EnrollmentsAPI {
         success : @escaping () -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {
-        let headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        let headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
         let params: Parameters = [
             "enrollment": [
                 "course": "\(course.id)"
@@ -48,38 +48,22 @@ extension EnrollmentsAPI {
 
         if !delete {
             return self.manager.request(
-                "\(StepikApplicationsInfo.apiURL)/\(name)",
+                "\(StepikApplicationsInfo.apiURL)/\(self.name)",
                 method: .post,
                 parameters: params,
                 encoding: JSONEncoding.default,
                 headers: headers
-            ).responseSwiftyJSON({ response in
-                var error = response.result.error
-                var json: JSON = [:]
-                if response.result.value == nil {
-                    if error == nil {
-                        error = NSError()
+            ).validate().responseSwiftyJSON { response in
+                switch response.result {
+                case .success(let json):
+                    if let courseJSON = json["courses"].array?[0] {
+                        course.update(json: courseJSON)
                     }
-                } else {
-                    json = response.result.value!
+                    success()
+                case .failure:
+                    errorHandler(NSLocalizedString("Error", comment: ""))
                 }
-                let response = response.response
-
-                if let r = response {
-                    if r.statusCode >= 200 && r.statusCode <= 299 {
-                        if let courseJSON = json["courses"].array?[0] {
-                            course.update(json: courseJSON)
-                        }
-                        success()
-                    } else {
-                        let s = NSLocalizedString("TryJoinFromWeb", comment: "")
-                        errorHandler(s)
-                    }
-                } else {
-                    let s = NSLocalizedString("Error", comment: "")
-                    errorHandler(s)
-                }
-            })
+            }
         } else {
             return self.manager.request(
                 "\(StepikApplicationsInfo.apiURL)/enrollments/\(course.id)",
@@ -87,28 +71,14 @@ extension EnrollmentsAPI {
                 parameters: params,
                 encoding: URLEncoding.default,
                 headers: headers
-            ).responseSwiftyJSON({ response in
-                var error = response.result.error
-                //                var json : JSON = [:]
-                if response.result.value == nil {
-                    if error == nil {
-                        error = NSError()
-                    }
-                } else {
-                    //                    json = response.result.value!
+            ).validate().responseSwiftyJSON { response in
+                switch response.result {
+                case .success:
+                    success()
+                case .failure:
+                    errorHandler(NSLocalizedString("Error", comment: ""))
                 }
-                let response = response.response
-
-                if let r = response {
-                    if r.statusCode >= 200 && r.statusCode <= 299 {
-                        success()
-                        return
-                    }
-                }
-
-                let s = NSLocalizedString("Error", comment: "")
-                errorHandler(s)
-            })
+            }
         }
     }
 }

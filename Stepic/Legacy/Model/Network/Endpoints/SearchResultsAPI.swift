@@ -15,7 +15,16 @@ final class SearchResultsAPI: APIEndpoint {
     override var name: String { "search-results" }
 
     @available(*, deprecated, message: "Use searchCourse() -> Promise<([SearchResult], Meta)> instead")
-    @discardableResult func search(query: String, type: String?, language: ContentLanguage, page: Int?, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ([SearchResult], Meta) -> Void, error errorHandler: @escaping (NSError) -> Void) -> Request? {
+    @discardableResult
+    func search(
+        query: String,
+        type: String?,
+        language: ContentLanguage,
+        page: Int?,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping ([SearchResult], Meta) -> Void,
+        error errorHandler: @escaping (Error) -> Void
+    ) -> Request? {
         var params: Parameters = [
            "query": query.lowercased(),
            "access_token": AuthInfo.shared.token?.accessToken ?? "",
@@ -24,43 +33,39 @@ final class SearchResultsAPI: APIEndpoint {
            "is_public": "true"
         ]
 
-        if let p = page {
-            params["page"] = p
+        if let page = page {
+            params["page"] = page
         }
-        if let t = type {
-            params["type"] = t
+        if let type = type {
+            params["type"] = type
         }
 
-        return manager.request("\(StepikApplicationsInfo.apiURL)/search-results", method: .get, parameters: params, encoding: URLEncoding.default, headers: headers).responseSwiftyJSON({
-            response in
-
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
+        return self.manager.request(
+            "\(StepikApplicationsInfo.apiURL)/search-results",
+            method: .get,
+            parameters: params,
+            encoding: URLEncoding.default,
+            headers: headers
+        ).responseSwiftyJSON { response in
+            switch response.result {
+            case .success(let json):
+                let meta = Meta(json: json["meta"])
+                let searchResults = json["search-results"]
+                    .arrayValue
+                    .map { SearchResult(json: $0) }
+                success(searchResults, meta)
+            case .failure(let error):
+                errorHandler(error)
             }
-//            let response = response.response
-
-            if let e = error as NSError? {
-                errorHandler(e)
-                return
-            }
-
-            let meta = Meta(json: json["meta"])
-            var results = [SearchResult]()
-            for resultJson in json["search-results"].arrayValue {
-                results += [SearchResult(json: resultJson)]
-            }
-
-            success(results, meta)
-        })
+        }
     }
 
-    func searchCourse(query: String, language: ContentLanguage, page: Int, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<([SearchResult], Meta)> {
+    func searchCourse(
+        query: String,
+        language: ContentLanguage,
+        page: Int,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
+    ) -> Promise<([SearchResult], Meta)> {
         Promise<([SearchResult], Meta)> { seal in
             self.search(
                 query: query,

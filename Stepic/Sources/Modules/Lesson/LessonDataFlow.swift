@@ -16,7 +16,7 @@ enum LessonDataFlow {
         }
 
         struct Response {
-            let state: Result<Data>
+            let state: StepikResult<Data>
         }
 
         struct ViewModel {

@@ -25,7 +25,7 @@ enum CourseInfo {
         struct Request { }
 
         struct Response {
-            var result: Result<Course>
+            var result: StepikResult<Course>
         }
 
         struct ViewModel {
