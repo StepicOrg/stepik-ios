@@ -33,6 +33,7 @@ class APIEndpoint {
             interceptor: StepikRequestInterceptor(),
             eventMonitors: eventMonitors
         )
+
         self.update = UpdateRequestMaker()
         self.delete = DeleteRequestMaker()
         self.create = CreateRequestMaker()

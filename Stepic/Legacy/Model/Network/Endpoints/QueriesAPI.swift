@@ -18,27 +18,35 @@ final class QueriesAPI: APIEndpoint {
     func retrieve(query: String) -> Promise<[String]> {
         let params: Parameters = ["query": query]
         return Promise { seal in
-            retrieve.request(requestEndpoint: "queries", paramName: "queries", params: params, updatingObjects: [Query](), withManager: manager).done {
-                queries, _ in
+            self.retrieve.request(
+                requestEndpoint: "queries",
+                paramName: "queries",
+                params: params,
+                updatingObjects: [Query](),
+                withManager: manager
+            ).done { queries, _ in
                 seal.fulfill(queries.map { $0.text })
-            }.catch {
-                error in
+            }.catch { error in
                 seal.reject(error)
             }
         }
     }
 
-    @discardableResult func retrieve(query: String, headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders, success: @escaping (([String]) -> Void), error errorHandler: @escaping ((NetworkError) -> Void)) -> Request? {
-        retrieve(query: query).done {
-            queries in
+    @discardableResult
+    func retrieve(
+        query: String,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping (([String]) -> Void),
+        error errorHandler: @escaping ((NetworkError) -> Void)
+    ) -> Request? {
+        self.retrieve(query: query).done { queries in
             success(queries)
-        }.catch {
-            error in
-            guard let e = error as? NetworkError else {
+        }.catch { error in
+            guard let networkError = error as? NetworkError else {
                 errorHandler(NetworkError.other(error))
                 return
             }
-            errorHandler(e)
+            errorHandler(networkError)
         }
 
         return nil
