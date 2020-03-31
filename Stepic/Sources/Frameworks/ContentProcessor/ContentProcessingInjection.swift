@@ -49,7 +49,7 @@ final class MathJaxInjection: ContentProcessingInjection {
 
 /// Kotlin runnable code playground
 final class KotlinRunnableSamplesInjection: ContentProcessingInjection {
-    var headScript: String { Scripts.kotlinRunnableSamples }
+    var headScript: String { Scripts.localKotlinPlayground }
 
     func shouldInject(to code: String) -> Bool {
         code.contains("<kotlin-runnable")

@@ -12,14 +12,14 @@
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;stepikcontent.css&quot;&gt;</string>
 	<key>wysiwygCSSWrapper</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;wysiwyg.css&quot;&gt;</string>
-	<key>KotlinRunnableSamples</key>
-	<string>&lt;script src=&quot;https://unpkg.com/kotlin-playground@1.10.0/dist/playground.min.js&quot; data-selector=&quot;kotlin-runnable&quot;&gt;&lt;/script&gt;</string>
 	<key>AudioTagWrapperInit</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;plyr.setup({loadSprite: false})&lt;/script&gt;</string>
 	<key>AudioTagWrapper</key>
 	<string>&lt;link rel=&quot;stylesheet&quot; href=&quot;plyr.css&quot;&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;plyr.js&quot;&gt;&lt;/script&gt;</string>
 	<key>localJQueryScript</key>
-	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;</string>
+	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;jquery-3.4.1.min.js&quot;&gt;&lt;/script&gt;</string>
+	<key>localKotlinPlaygroundScript</key>
+	<string>&lt;script type=&quot;text/javascript&quot; src=&quot;kotlin-playground-1.21.1.min.js&quot; data-selector=&quot;kotlin-runnable&quot;&gt;&lt;/script&gt;</string>
 	<key>ClickableImages</key>
 	<string>&lt;script type=&quot;text/javascript&quot;&gt;
 $(document).ready(function() {
