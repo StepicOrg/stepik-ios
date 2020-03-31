@@ -335,6 +335,20 @@ extension UIColor {
             return UIColor(hex6: 0xAEAEB2)
         }
     }
+
+    // MARK: - Skeleton Gradient -
+
+    static var skeletonGradientFirst: UIColor {
+        .dynamic(light: ColorPalette.grey100, dark: .stepikSecondaryBackground)
+    }
+
+    static var skeletonGradientSecond: UIColor {
+        .dynamic(light: UIColor(hex6: 0xE7E7E7), dark: .stepikTertiaryBackground)
+    }
+
+    static var skeletonGradientThird: UIColor {
+        .dynamic(light: ColorPalette.grey100, dark: .stepikSecondaryBackground)
+    }
 }
 
 // MARK: - ColorPalette -
