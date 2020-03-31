@@ -193,8 +193,10 @@ final class ProcessedContentTextView: UIView {
                 after(
                     seconds: Double(retryCount) * Self.pollDocumentReadyStateInterval
                 ).done {
-                    self.webView.evaluateJavaScript("document.readyState;") { res, _ in
-                        if let readyState = res as? String, readyState == "complete" {
+                    self.webView.evaluateJavaScript("document.readyState;") { res, error in
+                        if error != nil {
+                            seal(())
+                        } else if let readyState = res as? String, readyState == "complete" {
                             seal(())
                         } else {
                             poll(retryCount: retryCount + 1)
