@@ -1,79 +1,103 @@
 
-
-  .wysiwyg-color-red {
+.wysiwyg-color-red {
     color: #ff4363;
-  }
-  .wysiwyg-color-green {
+}
+
+.wysiwyg-color-green {
     color: #66cc66;
-  }
-  .wysiwyg-color-blue {
+}
+
+.wysiwyg-color-blue {
     color: #64b0f4;
-  }
-  .wysiwyg-color-black {
+}
+
+.wysiwyg-color-black {
     color: #000;
-  }
-  .wysiwyg-color-purple {
+}
+
+.wysiwyg-color-purple {
     color: #a03881;
-  }
-  .wysiwyg-text-align-right {
+}
+
+.wysiwyg-text-align-right {
     text-align: right;
-  }
-  .wysiwyg-text-align-left {
+}
+
+.wysiwyg-text-align-left {
     text-align: left;
-  }
-  .wysiwyg-text-align-center {
+}
+
+.wysiwyg-text-align-center {
     text-align: center;
-  }
-  .wysiwyg-font-tt {
+}
+
+.wysiwyg-font-tt {
     font-family: monospace, serif;
-  }
-  .wysiwyg-font-sup {
+}
+
+.wysiwyg-font-sup {
     font-size: xx-small;
     vertical-align: super;
-  }
-  .wysiwyg-font-sub {
+}
+
+.wysiwyg-font-sub {
     font-size: xx-small;
     vertical-align: sub;
-  }
-  .wysiwyg-font-small-caps {
-    font-variant: small-caps;
-  }
+}
 
-  .wysiwyg-font-size-large {
+.wysiwyg-font-small-caps {
+    font-variant: small-caps;
+}
+
+.wysiwyg-font-size-large {
     font-size: large;
-  }
-  .wysiwyg-font-size-larger {
+}
+
+.wysiwyg-font-size-larger {
     font-size: larger;
-  }
-  .wysiwyg-font-size-medium {
+}
+
+.wysiwyg-font-size-medium {
     font-size: medium;
-  }
-  .wysiwyg-font-size-small {
+}
+
+.wysiwyg-font-size-small {
     font-size: small;
-  }
-  .wysiwyg-font-size-smaller {
+}
+
+.wysiwyg-font-size-smaller {
     font-size: smaller;
-  }
-  .wysiwyg-font-size-x-large {
+}
+
+.wysiwyg-font-size-x-large {
     font-size: x-large;
-  }
-  .wysiwyg-font-size-x-small {
+}
+
+.wysiwyg-font-size-x-small {
     font-size: x-small;
-  }
-  .wysiwyg-font-size-xx-large {
+}
+
+.wysiwyg-font-size-xx-large {
     font-size: xx-large;
-  }
-  .wysiwyg-font-size-xx-small {
+}
+
+.wysiwyg-font-size-xx-small {
     font-size: xx-small;
-  }
+}
+
+.CodeMirror-scroll {
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
 
 .hljs {
     display: block;
-    overflow-x: auto;
     padding: .5em;
-    background: #fdf6e3;
-    color: #657b83;
-    -webkit-text-size-adjust: none
+    background: #FDF6E3;
+    color: #657B83;
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 .diff .hljs-header, .hljs-comment, .hljs-doctype, .hljs-pi, .lisp .hljs-string {
