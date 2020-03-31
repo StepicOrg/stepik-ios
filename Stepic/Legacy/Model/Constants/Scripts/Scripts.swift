@@ -16,9 +16,9 @@ struct Scripts {
     private static let mathJaxFinishedScriptKey = "MathJaxFinishScript"
     private static let clickableImagesScriptKey = "ClickableImages"
     private static let localJQueryScriptKey = "localJQueryScript"
+    private static let localKotlinPlaygroundScript = "localKotlinPlaygroundScript"
     private static let audioTagWrapperKey = "AudioTagWrapper"
     private static let audioTagWrapperInitKey = "AudioTagWrapperInit"
-    private static let kotlinRunnableSamplesKey = "KotlinRunnableSamples"
     private static let wysiwygStylesKey = "wysiwygCSSWrapper"
     private static let commonStylesKey = "contentCSSWrapper"
     private static let textColorScriptKey = "textColorScript"
@@ -28,6 +28,10 @@ struct Scripts {
 
     static var localJQuery: String {
         self.loadScriptWithKey(localJQueryScriptKey)
+    }
+
+    static var localKotlinPlayground: String {
+        self.loadScriptWithKey(self.localKotlinPlaygroundScript)
     }
 
     static var localTex: String {
