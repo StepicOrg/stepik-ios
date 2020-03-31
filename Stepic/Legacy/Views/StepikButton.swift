@@ -57,7 +57,7 @@ class StepikButton: UIButton {
     private func updateStyle() {
         if self.isGray {
             self.backgroundColor = self.isLightBackground
-                ? UIColor.stepikSecondaryBackground
+                ? UIColor.stepikLightSecondaryBackground
                 : UIColor(hex6: 0x5d5d70, alpha: 1)
             self.setTitleColor(self.isLightBackground ? UIColor.stepikPrimaryText : UIColor.white, for: .normal)
             self.setRoundedCorners(cornerRadius: 8, borderWidth: 0)

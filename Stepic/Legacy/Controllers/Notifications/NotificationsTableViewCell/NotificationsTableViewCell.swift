@@ -74,7 +74,7 @@ final class NotificationsTableViewCell: UITableViewCell {
     private func colorize() {
         self.timeLabel.textColor = .stepikPrimaryText
         self.sectionLabel.textColor = .stepikAccentFixed
-        self.sectionLabel.backgroundColor = .stepikSecondaryBackground
+        self.sectionLabel.backgroundColor = .stepikLightSecondaryBackground
     }
 
     func update(with notification: NotificationViewData) {
