@@ -102,11 +102,11 @@ final class GradientCoursesPlaceholderView: UIView {
         var titleTextColor: UIColor {
             switch self {
             case .purple:
-                return UIColor.white
+                return .white
             case .blue:
-                return UIColor(hex6: 0x00484e)
+                return .stepikGradientCoursesPlaceholderBlueTitleTextColor
             case .pink:
-                return UIColor(hex6: 0x18073d)
+                return .stepikGradientCoursesPlaceholderPinkTitleTextColor
             }
         }
 

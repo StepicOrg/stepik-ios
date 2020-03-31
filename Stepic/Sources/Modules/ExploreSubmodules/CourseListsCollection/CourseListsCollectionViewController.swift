@@ -28,6 +28,8 @@ final class CourseListsCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.backgroundColor = .stepikBackground
+
         self.updateState(newState: self.state)
         self.interactor.doCourseListsFetch(request: CourseListsCollection.CourseListsLoad.Request())
     }

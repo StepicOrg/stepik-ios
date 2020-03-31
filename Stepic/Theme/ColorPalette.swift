@@ -6,7 +6,7 @@ extension UIColor {
     // MARK: Green
 
     static var stepikGreen: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.green400,
             dark: ColorPalette.green300,
             lightAccessibility: ColorPalette.green500,
@@ -15,7 +15,7 @@ extension UIColor {
     }
 
     static var stepikLightGreen: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.lightGreen50,
             dark: ColorPalette.lightGreen50,
             lightAccessibility: ColorPalette.lightGreen200,
@@ -24,7 +24,7 @@ extension UIColor {
     }
 
     static var stepikDarkGreen: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.darkGreen500,
             dark: ColorPalette.darkGreen300,
             lightAccessibility: ColorPalette.darkGreen600,
@@ -35,7 +35,7 @@ extension UIColor {
     // MARK: Red
 
     static var stepikRed: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.red700,
             dark: ColorPalette.red300,
             lightAccessibility: ColorPalette.red800,
@@ -44,7 +44,7 @@ extension UIColor {
     }
 
     static var stepikLightRed: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.lightRed50,
             dark: ColorPalette.lightRed50,
             lightAccessibility: ColorPalette.lightRed200,
@@ -55,7 +55,7 @@ extension UIColor {
     // MARK: Blue
 
     static var stepikBlue: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.blue600,
             dark: ColorPalette.blue300,
             lightAccessibility: ColorPalette.blue700,
@@ -64,7 +64,7 @@ extension UIColor {
     }
 
     static var stepikLightBlue: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.lightBlue400,
             dark: ColorPalette.lightBlue300,
             lightAccessibility: ColorPalette.lightBlue500,
@@ -75,7 +75,7 @@ extension UIColor {
     // MARK: Yellow
 
     static var stepikYellow: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.yellow600,
             dark: ColorPalette.yellow300,
             lightAccessibility: ColorPalette.yellow700,
@@ -86,7 +86,7 @@ extension UIColor {
     // MARK: Grey
 
     static var stepikGrey: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.grey100,
             dark: ColorPalette.grey050,
             lightAccessibility: ColorPalette.grey200
@@ -99,7 +99,7 @@ extension UIColor {
     static var stepikAccentFixed: UIColor { ColorPalette.accent700 }
 
     static var stepikAccent: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700,
             dark: ColorPalette.accent300,
             lightAccessibility: ColorPalette.accent800,
@@ -108,7 +108,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha85: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700Alpha85,
             dark: ColorPalette.accent300Alpha85,
             lightAccessibility: ColorPalette.accent800Alpha85,
@@ -117,7 +117,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha70: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700Alpha70,
             dark: ColorPalette.accent300Alpha70,
             lightAccessibility: ColorPalette.accent800Alpha70,
@@ -126,7 +126,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha50: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700Alpha50,
             dark: ColorPalette.accent300Alpha50,
             lightAccessibility: ColorPalette.accent800Alpha50,
@@ -135,7 +135,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha40: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700Alpha40,
             dark: ColorPalette.accent300Alpha40,
             lightAccessibility: ColorPalette.accent800Alpha40,
@@ -144,7 +144,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha30: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700Alpha30,
             dark: ColorPalette.accent300Alpha30,
             lightAccessibility: ColorPalette.accent800Alpha30,
@@ -153,7 +153,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha25: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700Alpha25,
             dark: ColorPalette.accent300Alpha25,
             lightAccessibility: ColorPalette.accent800Alpha25,
@@ -162,7 +162,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha06: UIColor {
-        UIColor.dynamicColor(
+        UIColor.dynamic(
             light: ColorPalette.accent700Alpha06,
             dark: ColorPalette.accent300Alpha06,
             lightAccessibility: ColorPalette.accent800Alpha06,
@@ -237,6 +237,24 @@ extension UIColor {
 
     /// The color for placeholder text in controls or text views.
     static var stepikPlaceholderText: UIColor { .stepikAccentAlpha40 }
+
+    static var stepikGradientCoursesPlaceholderBlueTitleTextColor: UIColor {
+        .dynamic(
+            light: ColorPalette.gradientCoursesBlue900,
+            dark: ColorPalette.gradientCoursesBlue200,
+            lightAccessibility: ColorPalette.gradientCoursesBlue900,
+            darkAccessibility: ColorPalette.gradientCoursesBlue100
+        )
+    }
+
+    static var stepikGradientCoursesPlaceholderPinkTitleTextColor: UIColor {
+        .dynamic(
+            light: ColorPalette.gradientCoursesPink900,
+            dark: ColorPalette.gradientCoursesPink200,
+            lightAccessibility: ColorPalette.gradientCoursesPink900,
+            darkAccessibility: ColorPalette.gradientCoursesPink100
+        )
+    }
 
     // MARK: Standard Content Background Colors
 
@@ -504,4 +522,20 @@ private enum ColorPalette {
     static let grey100 = UIColor(hex6: 0xF6F6F6)
     /// Color to use in dark mode and with a normal/unspecified contrast level.
     static let grey050 = UIColor(hex6: 0xFAFAFA)
+
+    // MARK: - Gradient Courses -
+
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let gradientCoursesBlue900 = UIColor(hex6: 0x00484E)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let gradientCoursesBlue200 = UIColor(hex6: 0x77CDDE)
+    /// Color to use in dark mode and with a high contrast level.
+    static let gradientCoursesBlue100 = UIColor(hex6: 0xACE1EB)
+
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    static let gradientCoursesPink900 = UIColor(hex6: 0x18073D)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let gradientCoursesPink200 = UIColor(hex6: 0x9492B5)
+    /// Color to use in dark mode and with a high contrast level.
+    static let gradientCoursesPink100 = UIColor(hex6: 0xBEBDD3)
 }
