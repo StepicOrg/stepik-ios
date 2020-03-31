@@ -27,7 +27,7 @@ struct Scripts {
     private static let fontSizeScriptKey = "FontSizeScript"
 
     static var localJQuery: String {
-        self.loadScriptWithKey(localJQueryScriptKey)
+        self.loadScriptWithKey(self.localJQueryScriptKey)
     }
 
     static var localKotlinPlayground: String {
@@ -35,43 +35,39 @@ struct Scripts {
     }
 
     static var localTex: String {
-        "\(loadScriptWithKey(localTexScriptKey))\(mathJaxLocalPathScript)"
+        "\(self.loadScriptWithKey(self.localTexScriptKey))\(self.mathJaxLocalPathScript)"
     }
 
     static var metaViewport: String {
-        self.loadScriptWithKey(metaViewportKey)
+        self.loadScriptWithKey(self.metaViewportKey)
     }
 
     static var mathJaxFinished: String {
-        self.loadScriptWithKey(mathJaxFinishedScriptKey)
+        self.loadScriptWithKey(self.mathJaxFinishedScriptKey)
     }
 
     static var clickableImages: String {
-         "\(localJQuery)\(loadScriptWithKey(clickableImagesScriptKey))"
+         "\(self.localJQuery)\(self.loadScriptWithKey(self.clickableImagesScriptKey))"
     }
 
     static var audioTagWrapper: String {
-        self.loadScriptWithKey(audioTagWrapperKey)
+        self.loadScriptWithKey(self.audioTagWrapperKey)
     }
 
     static var audioTagWrapperInit: String {
-        self.loadScriptWithKey(audioTagWrapperInitKey)
-    }
-
-    static var kotlinRunnableSamples: String {
-        self.loadScriptWithKey(kotlinRunnableSamplesKey)
+        self.loadScriptWithKey(self.audioTagWrapperInitKey)
     }
 
     static var styles: String {
-         "\(loadScriptWithKey(wysiwygStylesKey))\(loadScriptWithKey(commonStylesKey))"
+         "\(self.loadScriptWithKey(self.wysiwygStylesKey))\(self.loadScriptWithKey(self.commonStylesKey))"
     }
 
     static var highlightJS: String {
-         "\(loadScriptWithKey(highlightJSKey))"
+         "\(self.loadScriptWithKey(self.highlightJSKey))"
     }
 
     static var webkitCalloutDisable: String {
-         "\(loadScriptWithKey(webkitCalloutDisableKey))"
+         "\(self.loadScriptWithKey(self.webkitCalloutDisableKey))"
     }
 
     static func textColor(color: UIColor) -> String {

@@ -141,7 +141,6 @@
 		08484F1C211B5DB20006266F /* StorySkeletonPlaceholderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08484F1B211B5DB20006266F /* StorySkeletonPlaceholderView.xib */; };
 		084BD9BB1E5368B600B1901E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BD9BA1E5368B600B1901E /* PickerViewController.swift */; };
 		084C658D1FDAD04C006A3E17 /* RemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */; };
-		084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */; };
 		084DDDE1204EDF7600913503 /* NotificationRequestAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */; };
 		084F7AA71E76EF690088368A /* LastStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA61E76EF690088368A /* LastStep.swift */; };
 		084F7AAA1E76EF780088368A /* LastStep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F7AA91E76EF780088368A /* LastStep+CoreDataProperties.swift */; };
@@ -452,6 +451,8 @@
 		2C4BE7E0221328E700AEAC34 /* CourseReview+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */; };
 		2C4BE7E22213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */; };
 		2C4DDADF242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */; };
+		2C4F3B092432693D002ADB53 /* kotlin-playground-1.21.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */; };
+		2C4F3B0A2432693D002ADB53 /* jquery-3.4.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */; };
 		2C5240D32399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */; };
 		2C546C1323DA02AB00352F27 /* String+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */; };
 		2C546C1523DA05F300352F27 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */; };
@@ -1320,7 +1321,6 @@
 		084BD9BA1E5368B600B1901E /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		084C658C1FDAD04C006A3E17 /* RemoteConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfig.swift; sourceTree = "<group>"; };
 		084C7EA61E85A130002D0796 /* Model_steps_restrictions_v14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_steps_restrictions_v14.xcdatamodel; sourceTree = "<group>"; };
-		084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.2.1.min.js"; sourceTree = "<group>"; };
 		084DB9D31FA283C00074B11E /* Model_progress_activities_v20.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_progress_activities_v20.xcdatamodel; sourceTree = "<group>"; };
 		084DDDE0204EDF7500913503 /* NotificationRequestAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRequestAlertViewController.swift; sourceTree = "<group>"; };
 		084F7A951E76EAB10088368A /* Model_last_step_v13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_last_step_v13.xcdatamodel; sourceTree = "<group>"; };
@@ -1673,6 +1673,8 @@
 		2C4BE7DF221328E700AEAC34 /* CourseReview+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CourseReview+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C4BE7E12213294700AEAC34 /* CourseReviewSummary+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CourseReviewSummary+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C4DDADE242FD1A400A0B4C8 /* HTTPHeader+Stepik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPHeader+Stepik.swift"; sourceTree = "<group>"; };
+		2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "kotlin-playground-1.21.1.min.js"; sourceTree = "<group>"; };
+		2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.4.1.min.js"; sourceTree = "<group>"; };
 		2C5240D22399257B000DDA13 /* UIStatusBarStyle+DarkContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+DarkContent.swift"; sourceTree = "<group>"; };
 		2C546C1223DA02AB00352F27 /* String+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SafeSubscript.swift"; sourceTree = "<group>"; };
 		2C546C1423DA05F300352F27 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
@@ -2669,7 +2671,8 @@
 				08DB7DAA1D50F92B0006E9F6 /* Stepic.entitlements */,
 				08CA59D41BBA1628008DC44D /* Stepic-Bridging-Header.h */,
 				2CDE82E1221D5CCB00C41887 /* highlight.js */,
-				084C9AF71EC4C11A00AC5C3C /* jquery-3.2.1.min.js */,
+				2C4F3B082432693D002ADB53 /* jquery-3.4.1.min.js */,
+				2C4F3B072432693D002ADB53 /* kotlin-playground-1.21.1.min.js */,
 				08C0A4351BF12CDF0010F049 /* CustomMessagesDesign.json */,
 				08A7B0E71EB340F500C1BA71 /* Auth.plist */,
 				2C104B672069064D0026FEB9 /* autocomplete_suggestions.plist */,
@@ -6407,7 +6410,7 @@
 				2C7FEE7A1FDAFB4600B2B4F1 /* OnboardingPageView.xib in Resources */,
 				2C5DF1461FED2B36003B1177 /* StepCardView.xib in Resources */,
 				2CA9D9832010A13C007AA743 /* ProgressTableViewCell.xib in Resources */,
-				084C9AF81EC4C11A00AC5C3C /* jquery-3.2.1.min.js in Resources */,
+				2C4F3B092432693D002ADB53 /* kotlin-playground-1.21.1.min.js in Resources */,
 				082B54D120A9DD3C00144817 /* PersonalDeadlines.storyboard in Resources */,
 				2C22043220E2804F0060117A /* AchievementSkeletonPlaceholderView.xib in Resources */,
 				2CA9D98D20123347007AA743 /* adjectives_m.plist in Resources */,
@@ -6452,6 +6455,7 @@
 				62E9815A6AAC6C12E9B9D862 /* ProfileHeaderInfoView.xib in Resources */,
 				08FCC79420F3BAEB008B84B9 /* stepikcontent.css in Resources */,
 				2C6B2F9D20D7F24800F7C976 /* AchievementPopupViewController.xib in Resources */,
+				2C4F3B0A2432693D002ADB53 /* jquery-3.4.1.min.js in Resources */,
 				2CBCBD4B20D1AAFC000B5732 /* AchievementsListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

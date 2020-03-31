@@ -87,12 +87,11 @@
 
 .CodeMirror-scroll {
     height: auto;
-    overflow-y: hidden;
-    overflow-x: auto;
 }
 
 .hljs {
     display: block;
+    overflow-x: auto;
     padding: .5em;
     background: #FDF6E3;
     color: #657B83;
