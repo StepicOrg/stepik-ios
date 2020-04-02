@@ -29,6 +29,7 @@ extension ProcessedContentTextView {
 // MARK: - ProcessedContentTextView: UIView -
 
 final class ProcessedContentTextView: UIView {
+    private static let pollDocumentReadyStateInterval: TimeInterval = 0.5
     private static let reloadTimeStandardInterval: TimeInterval = 0.5
     private static let reloadTimeout: TimeInterval = 10.0
     private static let defaultWebViewHeight: CGFloat = 5
@@ -177,20 +178,34 @@ final class ProcessedContentTextView: UIView {
 
         self.isClearingContent = true
 
-        self.webView.snp.updateConstraints { $0.height.equalTo(ProcessedContentTextView.defaultWebViewHeight) }
-        self.currentWebViewHeight = Int(ProcessedContentTextView.defaultWebViewHeight)
+        self.webView.snp.updateConstraints { $0.height.equalTo(Self.defaultWebViewHeight) }
+        self.currentWebViewHeight = Int(Self.defaultWebViewHeight)
 
         self.webView.stopLoading()
-        self.webView.load(URLRequest(url: ProcessedContentTextView.clearWebViewContentURL))
+        self.webView.load(URLRequest(url: Self.clearWebViewContentURL))
     }
 
     // MARK: Private API
 
-    private func refreshContentHeight() -> Guarantee<Void> {
+    private func waitCompleteState() -> Guarantee<Void> {
         Guarantee { seal in
-            self.webView.evaluateJavaScript("document.readyState;") { _, _ in
-                seal(())
+            func poll(retryCount: Int) {
+                after(
+                    seconds: Double(retryCount) * Self.pollDocumentReadyStateInterval
+                ).done {
+                    self.webView.evaluateJavaScript("document.readyState;") { res, error in
+                        if error != nil {
+                            seal(())
+                        } else if let readyState = res as? String, readyState == "complete" {
+                            seal(())
+                        } else {
+                            poll(retryCount: retryCount + 1)
+                        }
+                    }
+                }
             }
+
+            poll(retryCount: 1)
         }
     }
 
@@ -212,8 +227,8 @@ final class ProcessedContentTextView: UIView {
     }
 
     private func fetchHeightWithInterval(_ count: Int = 0) {
-        let currentTime = TimeInterval(count) * ProcessedContentTextView.reloadTimeStandardInterval
-        guard currentTime <= ProcessedContentTextView.reloadTimeout else {
+        let currentTime = TimeInterval(count) * Self.reloadTimeStandardInterval
+        guard currentTime <= Self.reloadTimeout else {
             return
         }
 
@@ -238,8 +253,8 @@ final class ProcessedContentTextView: UIView {
     }
 
     private func fetchWidthWithInterval(_ count: Int = 0) {
-        let currentTime = TimeInterval(count) * ProcessedContentTextView.reloadTimeStandardInterval
-        guard currentTime <= ProcessedContentTextView.reloadTimeout else {
+        let currentTime = TimeInterval(count) * Self.reloadTimeStandardInterval
+        guard currentTime <= Self.reloadTimeout else {
             return
         }
 
@@ -272,7 +287,7 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
             make.leading.equalToSuperview().offset(self.appearance.insets.left)
             make.trailing.equalToSuperview().offset(-self.appearance.insets.right)
             make.bottom.equalToSuperview().offset(-self.appearance.insets.bottom)
-            make.height.equalTo(ProcessedContentTextView.defaultWebViewHeight)
+            make.height.equalTo(Self.defaultWebViewHeight)
         }
     }
 }
@@ -282,7 +297,7 @@ extension ProcessedContentTextView: ProgrammaticallyInitializableViewProtocol {
 extension ProcessedContentTextView: WKNavigationDelegate {
     // swiftlint:disable:next implicitly_unwrapped_optional
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.refreshContentHeight().then {
+        self.waitCompleteState().then {
             self.getContentHeight()
         }.done { height in
             self.webView.snp.updateConstraints { $0.height.equalTo(height) }

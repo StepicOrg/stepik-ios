@@ -17,14 +17,14 @@ final class LessonsAPI: APIEndpoint {
     func retrieve(
         ids: [Int],
         existing: [Lesson],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[Lesson]> {
         self.getObjectsByIds(ids: ids, updating: existing, printOutput: false)
     }
 
     @available(*, deprecated, message: "Legacy: we want to pass existing")
     @discardableResult
-    func retrieve(ids: [Int], headers: [String: String] = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Lesson]> {
+    func retrieve(ids: [Int], headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders) -> Promise<[Lesson]> {
         if ids.isEmpty {
             return .value([])
         }
@@ -38,7 +38,7 @@ extension LessonsAPI {
     @discardableResult
     func retrieve(
         ids: [Int],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Lesson],
         refreshMode: RefreshMode,
         success: @escaping (([Lesson]) -> Void),

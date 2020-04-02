@@ -83,8 +83,8 @@ final class ApiRequestPerformer {
     private static func performRequestWithAuthorizationCheck(_ completion: @escaping (() -> Void), error errorHandler: ((PerformRequestError) -> Void)? = nil) {
 //        if let user = AuthInfo.shared.user {
 //            print("performing request with user \(user.id)")
-        if !AuthInfo.shared.isAuthorized && Session.needsRefresh {
-            _ = Session.refresh(completion: {
+        if !AuthInfo.shared.isAuthorized && StepikSession.needsRefresh {
+            _ = StepikSession.refresh(completion: {
                     completion()
                 }, error: {
                     _ in

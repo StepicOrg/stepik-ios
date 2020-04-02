@@ -26,11 +26,16 @@ final class DiscussionProxiesAPI: APIEndpoint {
 
 extension DiscussionProxiesAPI {
     @available(*, deprecated, message: "Legacy method with callbacks")
-    @discardableResult func retrieve(_ id: String, headers: [String: String] = AuthInfo.shared.initialHTTPHeaders, success: @escaping ((DiscussionProxy) -> Void), error errorHandler: @escaping ((String) -> Void)) -> Request? {
-        retrieve(id: id).done { discussionProxy in
+    @discardableResult
+    func retrieve(
+        _ id: String,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
+        success: @escaping ((DiscussionProxy) -> Void),
+        error errorHandler: @escaping ((String) -> Void)
+    ) -> Request? {
+        self.retrieve(id: id).done { discussionProxy in
             success(discussionProxy)
-        }.catch {
-            error in
+        }.catch { error in
             errorHandler(error.localizedDescription)
         }
         return nil

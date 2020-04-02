@@ -44,7 +44,7 @@ enum CodeQuizFullscreenRunCode {
         struct Request {}
 
         struct Response {
-            let result: Result<RunCodeData>
+            let result: StepikResult<RunCodeData>
         }
 
         struct ViewModel {

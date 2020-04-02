@@ -22,56 +22,39 @@ final class SubmissionsAPI: APIEndpoint {
         isDescending: Bool? = true,
         page: Int? = 1,
         userId: Int? = nil,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ([Submission], Meta) -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {
         var params: Parameters = [:]
 
         params[objectName] = objectId
-        if let desc = isDescending {
-            params["order"] = desc ? "desc" : "asc"
+        if let isDescending = isDescending {
+            params["order"] = isDescending ? "desc" : "asc"
         }
-        if let p = page {
-            params["page"] = p
+        if let page = page {
+            params["page"] = page
         }
-        if let user = userId {
-            params["user"] = user
+        if let userId = userId {
+            params["user"] = userId
         }
 
-        return manager.request(
+        return self.manager.request(
             "\(StepikApplicationsInfo.apiURL)/submissions",
             method: .get,
             parameters: params,
             encoding: URLEncoding.default,
             headers: headers
-        ).responseSwiftyJSON { response in
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
-            }
-            let response = response.response
-
-            if let e = error {
-                let d = (e as NSError).localizedDescription
-                print(d)
-                errorHandler(d)
-                return
-            }
-
-            if response?.statusCode == 200 {
+        ).validate().responseSwiftyJSON { response in
+            switch response.result {
+            case .success(let json):
                 let meta = Meta(json: json["meta"])
-                let submissions = json["submissions"].arrayValue.map({ Submission(json: $0, stepBlockName: stepName) })
+                let submissions = json["submissions"]
+                    .arrayValue
+                    .map { Submission(json: $0, stepBlockName: stepName) }
                 success(submissions, meta)
-                return
-            } else {
-                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
-                return
+            case .failure(let error):
+                errorHandler(error.localizedDescription)
             }
         }
     }
@@ -82,7 +65,7 @@ final class SubmissionsAPI: APIEndpoint {
         stepName: String,
         userID: User.IdType,
         page: Int = 1,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<([Submission], Meta)> {
         Promise { seal in
             let parameters: Parameters = [
@@ -118,7 +101,7 @@ final class SubmissionsAPI: APIEndpoint {
         isDescending: Bool? = true,
         page: Int? = 1,
         userId: Int? = nil,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ([Submission], Meta) -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {
@@ -142,7 +125,7 @@ final class SubmissionsAPI: APIEndpoint {
         isDescending: Bool? = true,
         page: Int? = 1,
         userId: Int? = nil,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ([Submission], Meta) -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {
@@ -193,7 +176,7 @@ final class SubmissionsAPI: APIEndpoint {
     func retrieve(
         stepName: String,
         submissionId: Int,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping (Submission) -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {
@@ -204,34 +187,15 @@ final class SubmissionsAPI: APIEndpoint {
             parameters: params,
             encoding: URLEncoding.default,
             headers: headers
-        ).responseSwiftyJSON({ response in
-            var error = response.result.error
-            var json: JSON = [:]
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
-            }
-            let response = response.response
-
-            if let e = error {
-                let d = (e as NSError).localizedDescription
-                print(d)
-                errorHandler(d)
-                return
-            }
-
-            if response?.statusCode == 200 {
+        ).validate().responseSwiftyJSON { response in
+            switch response.result {
+            case .success(let json):
                 let submission = Submission(json: json["submissions"][0], stepBlockName: stepName)
                 success(submission)
-                return
-            } else {
-                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
-                return
+            case .failure(let error):
+                errorHandler(error.localizedDescription)
             }
-        })
+        }
     }
 
     func create(stepName: String, attemptId: Int, reply: Reply) -> Promise<Submission> {
@@ -260,7 +224,7 @@ extension SubmissionsAPI {
         stepName: String,
         attemptId: Int,
         reply: Reply,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping (Submission) -> Void,
         error errorHandler: @escaping (Error) -> Void
     ) -> Request? {

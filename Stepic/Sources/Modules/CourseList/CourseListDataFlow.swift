@@ -41,7 +41,7 @@ enum CourseList {
 
         struct Response {
             let isAuthorized: Bool
-            let result: Result<AvailableCourses>
+            let result: StepikResult<AvailableCourses>
         }
 
         struct ViewModel {

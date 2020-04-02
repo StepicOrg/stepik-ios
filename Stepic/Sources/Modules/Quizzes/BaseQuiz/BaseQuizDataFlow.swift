@@ -16,7 +16,7 @@ enum BaseQuiz {
         }
 
         struct Response {
-            let result: Result<Data>
+            let result: StepikResult<Data>
         }
 
         struct ViewModel {

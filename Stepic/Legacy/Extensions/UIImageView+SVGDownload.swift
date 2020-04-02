@@ -12,40 +12,48 @@ import SDWebImage
 import SVGKit
 
 extension UIImageView {
-    func setImageWithURL(url optionalURL: URL?, placeholder: UIImage, completion: (() -> Void)? = nil) {
-        guard let url = optionalURL else {
+    func setImageWithURL(
+        url urlOrNil: URL?,
+        placeholder: UIImage,
+        completion: (() -> Void)? = nil
+    ) {
+        guard let url = urlOrNil else {
             self.image = placeholder
             completion?()
             return
         }
 
-        guard url.pathExtension != "svg" else {
+        if url.pathExtension == "svg" {
             self.image = placeholder
-            AlamofireDefaultSessionManager.shared.request(url).responseData(completionHandler: { response in
-                if response.result.error != nil {
-                    return
-                }
 
-                guard let data = response.result.value else {
-                    return
-                }
+            AlamofireDefaultSessionManager
+                .shared
+                .request(url)
+                .responseData { dataResponse in
+                    guard let data = dataResponse.data else {
+                        completion?()
+                        return
+                    }
 
-                DispatchQueue.global(qos: .userInitiated).async {
-                    let svgImage = SVGKImage(data: data)
-                    if !(svgImage?.hasSize() ?? true) {
-                        svgImage?.size = CGSize(width: 200, height: 200)
-                    }
-                    let img = svgImage?.uiImage ?? placeholder
-                    DispatchQueue.main.async {
-                        self.image = img
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        let svgImage = SVGKImage(data: data)
+
+                        if !(svgImage?.hasSize() ?? true) {
+                            svgImage?.size = CGSize(width: 200, height: 200)
+                        }
+
+                        let image = svgImage?.uiImage ?? placeholder
+
+                        DispatchQueue.main.async {
+                            self.image = image
+                            completion?()
+                        }
                     }
                 }
-            })
-            return
+        } else {
+            self.sd_setImage(with: urlOrNil, placeholderImage: placeholder, options: .retryFailed) { (_, _, _, _) in
+                completion?()
+            }
         }
-
-        self.sd_setImage(with: optionalURL, placeholderImage: placeholder, options: SDWebImageOptions.retryFailed, completed: { _, _, _, _ in
-            completion?()
-        })
     }
 }

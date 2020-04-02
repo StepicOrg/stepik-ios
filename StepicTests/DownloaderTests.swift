@@ -7,10 +7,10 @@
 //
 
 import Foundation
+import Mockingjay
 import Nimble
 import Quick
 import XCTest
-import Mockingjay
 
 @testable import Stepic
 

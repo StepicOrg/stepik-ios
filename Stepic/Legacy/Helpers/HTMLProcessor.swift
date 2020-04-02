@@ -44,7 +44,7 @@ final class HTMLProcessor {
             case .styles:
                 return Scripts.styles
             case .kotlinRunnableSamples:
-                return Scripts.kotlinRunnableSamples
+                return Scripts.localKotlinPlayground
             case .audio:
                 return Scripts.audioTagWrapper
             case .mathJaxCompletion:

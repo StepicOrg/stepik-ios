@@ -15,7 +15,7 @@ enum EditStep {
         struct Request { }
 
         struct Response {
-            let data: Result<StepSourceData>
+            let data: StepikResult<StepSourceData>
         }
 
         struct ViewModel {

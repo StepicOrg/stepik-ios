@@ -19,7 +19,7 @@ final class AttemptsAPI: APIEndpoint {
         ids: [Attempt.IdType],
         stepName: String,
         page: Int = 1,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<([Attempt], Meta)> {
         let parameters: Parameters = [
             "ids": ids,
@@ -84,7 +84,7 @@ final class AttemptsAPI: APIEndpoint {
         stepName: String,
         stepID: Int,
         userID: Int,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping ([Attempt], Meta) -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {
@@ -100,35 +100,16 @@ final class AttemptsAPI: APIEndpoint {
             parameters: params,
             encoding: URLEncoding.default,
             headers: headers
-        ).responseSwiftyJSON { response in
-            var error = response.result.error
-            var json: JSON = [:]
-
-            if response.result.value == nil {
-                if error == nil {
-                    error = NSError()
-                }
-            } else {
-                json = response.result.value!
-            }
-
-            let response = response.response
-
-            if let error = error {
-                let description = (error as NSError).localizedDescription
-                print(description)
-                errorHandler(description)
-                return
-            }
-
-            if response?.statusCode == 200 {
+        ).validate().responseSwiftyJSON { response in
+            switch response.result {
+            case .success(let json):
                 let meta = Meta(json: json["meta"])
-                let attempts = json["attempts"].arrayValue.map({ Attempt(json: $0, stepBlockName: stepName) })
+                let attempts = json["attempts"]
+                    .arrayValue
+                    .map { Attempt(json: $0, stepBlockName: stepName) }
                 success(attempts, meta)
-                return
-            } else {
-                errorHandler("Response status code is wrong(\(String(describing: response?.statusCode)))")
-                return
+            case .failure(let error):
+                errorHandler(error.localizedDescription)
             }
         }
     }
@@ -140,7 +121,7 @@ extension AttemptsAPI {
     func create(
         stepName: String,
         stepID: Int,
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         success: @escaping (Attempt) -> Void,
         error errorHandler: @escaping (String) -> Void
     ) -> Request? {

@@ -6,22 +6,23 @@
 //  Copyright © 2016 Alex Karpov. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 
-struct APIDefaults {
-    struct headers {
-        static var bearer: [String: String] {
-            return bearer(AuthInfo.shared.token?.accessToken)
+enum APIDefaults {
+    enum Headers {
+        static var bearer: HTTPHeaders {
+            return self.bearer(AuthInfo.shared.token?.accessToken)
         }
 
-        static func bearer(_ accessToken: String?) -> [String: String] {
-            if let token = accessToken {
+        static func bearer(_ bearerToken: String?) -> HTTPHeaders {
+            if let bearerToken = bearerToken {
                 return [
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer \(token)"
+                    .contentType("application/json"),
+                    .authorization(bearerToken: bearerToken)
                 ]
             } else {
-                return [String: String]()
+                return .init()
             }
         }
     }

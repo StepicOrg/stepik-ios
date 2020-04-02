@@ -62,7 +62,7 @@ enum WriteComment {
         struct Request {}
 
         struct Response {
-            let data: Result<CommentData>
+            let data: StepikResult<CommentData>
         }
 
         struct ViewModel {

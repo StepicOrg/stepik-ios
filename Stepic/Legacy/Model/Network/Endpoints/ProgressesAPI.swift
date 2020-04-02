@@ -17,7 +17,7 @@ final class ProgressesAPI: APIEndpoint {
     @discardableResult
     func retrieve(
         ids: [Progress.IdType],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders,
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders,
         existing: [Progress],
         refreshMode: RefreshMode,
         success: @escaping (([Progress]) -> Void),
@@ -29,7 +29,7 @@ final class ProgressesAPI: APIEndpoint {
         }
 
         return getObjectsByIds(
-            requestString: name,
+            requestString: self.name,
             printOutput: false,
             ids: ids,
             deleteObjects: existing,
@@ -42,7 +42,7 @@ final class ProgressesAPI: APIEndpoint {
     @available(*, deprecated, message: "Legacy with update existing")
     func retrieve(
         ids: [Progress.IdType],
-        headers: [String: String] = AuthInfo.shared.initialHTTPHeaders
+        headers: HTTPHeaders = AuthInfo.shared.initialHTTPHeaders
     ) -> Promise<[Progress]> {
         let ids = self.filterIds(ids)
         if ids.isEmpty {
@@ -60,7 +60,5 @@ final class ProgressesAPI: APIEndpoint {
         }
     }
 
-    private func filterIds(_ ids: [Progress.IdType]) -> [Progress.IdType] {
-        ids.filter { !$0.isEmpty }
-    }
+    private func filterIds(_ ids: [Progress.IdType]) -> [Progress.IdType] { ids.filter { !$0.isEmpty } }
 }

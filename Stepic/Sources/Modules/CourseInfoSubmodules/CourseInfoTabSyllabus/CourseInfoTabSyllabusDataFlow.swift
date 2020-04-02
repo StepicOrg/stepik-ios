@@ -31,7 +31,7 @@ enum CourseInfoTabSyllabus {
         struct Request { }
 
         struct Response {
-            var result: Result<SyllabusData>
+            var result: StepikResult<SyllabusData>
         }
 
         struct ViewModel {
