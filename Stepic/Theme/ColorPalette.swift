@@ -125,6 +125,15 @@ extension UIColor {
         )
     }
 
+    static var stepikAccentAlpha60: UIColor {
+        UIColor.dynamic(
+            light: ColorPalette.accent700Alpha60,
+            dark: ColorPalette.accent300Alpha60,
+            lightAccessibility: ColorPalette.accent800Alpha60,
+            darkAccessibility: ColorPalette.accent200Alpha60
+        )
+    }
+
     static var stepikAccentAlpha50: UIColor {
         UIColor.dynamic(
             light: ColorPalette.accent700Alpha50,
@@ -153,6 +162,15 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha25: UIColor {
+        UIColor.dynamic(
+            light: ColorPalette.accent700Alpha25,
+            dark: ColorPalette.accent300Alpha25,
+            lightAccessibility: ColorPalette.accent800Alpha25,
+            darkAccessibility: ColorPalette.accent200Alpha25
+        )
+    }
+
+    static var stepikAccentAlpha18: UIColor {
         UIColor.dynamic(
             light: ColorPalette.accent700Alpha25,
             dark: ColorPalette.accent300Alpha25,
@@ -234,6 +252,15 @@ extension UIColor {
 
     /// The color for texts that contain primary content.
     static var stepikPrimaryText: UIColor { .stepikAccent }
+
+    /// The color for texts that contain secondary content.
+    static var stepikSecondaryText: UIColor { .stepikAccentAlpha60 }
+
+    /// The color for texts that contain tertiary content.
+    static var stepikTertiaryText: UIColor { .stepikAccentAlpha30 }
+
+    /// The color for texts that contain quaternary content.
+    static var stepikQuaternaryText: UIColor { .stepikAccentAlpha18 }
 
     /// The color for placeholder text in controls or text views.
     static var stepikPlaceholderText: UIColor { .stepikAccentAlpha40 }
@@ -387,6 +414,17 @@ private enum ColorPalette {
     /// Color to use in dark mode and with a high contrast level, and with alpha component 70.
     static let accent200Alpha70 = UIColor(hex8: 0xB3E4E4FA)
 
+    // MARK: Alpha 60
+
+    /// Color to use in light/unspecified mode and with a high contrast level, and with alpha component 60.
+    static let accent800Alpha60 = UIColor(hex8: 0x99353547)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level, and with alpha component 60.
+    static let accent700Alpha60 = UIColor(hex8: 0x99535366)
+    /// Color to use in dark mode and with a normal/unspecified contrast level, and with alpha component 60.
+    static let accent300Alpha60 = UIColor(hex8: 0x99D3D2E9)
+    /// Color to use in dark mode and with a high contrast level, and with alpha component 60.
+    static let accent200Alpha60 = UIColor(hex8: 0x99E4E4FA)
+
     // MARK: Alpha 50
 
     /// Color to use in light/unspecified mode and with a high contrast level, and with alpha component 50.
@@ -430,6 +468,17 @@ private enum ColorPalette {
     static let accent300Alpha25 = UIColor(hex8: 0x40D3D2E9)
     /// Color to use in dark mode and with a high contrast level, and with alpha component 25.
     static let accent200Alpha25 = UIColor(hex8: 0x40E4E4FA)
+
+    // MARK: Alpha 18
+
+    /// Color to use in light/unspecified mode and with a high contrast level, and with alpha component 18.
+    static let accent800Alpha18 = UIColor(hex8: 0x2E353547)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level, and with alpha component 18.
+    static let accent700Alpha18 = UIColor(hex8: 0x2E535366)
+    /// Color to use in dark mode and with a normal/unspecified contrast level, and with alpha component 18.
+    static let accent300Alpha18 = UIColor(hex8: 0x2ED3D2E9)
+    /// Color to use in dark mode and with a high contrast level, and with alpha component 18.
+    static let accent200Alpha18 = UIColor(hex8: 0x2EE4E4FA)
 
     // MARK: Alpha 6
 
