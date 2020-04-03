@@ -28,9 +28,15 @@ final class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var rightLabel: UILabel!
     @IBOutlet var topSeparatorView: UIView!
     @IBOutlet var bottomSeparatorView: UIView!
+    @IBOutlet var topSeparatorHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomSeparatorHeightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        self.topSeparatorHeightConstraint.constant = 0.5
+        self.bottomSeparatorHeightConstraint.constant = 0.5
+
         self.colorize()
     }
 
