@@ -30,7 +30,8 @@ extension CourseInfoTabInfoIntroVideoBlockView {
         let playImageTintColor = UIColor.white
         let playImageViewSize = CGSize(width: 25, height: 31)
 
-        let overlayColor = UIColor.stepikAccentFixed
+        let overlayColorLight = UIColor.stepikAccentFixed
+        let overlayColorDark = UIColor.stepikSecondaryBackground
         let overlayOpacity: CGFloat = 0.4
     }
 }
@@ -58,7 +59,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 
     private lazy var overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = self.appearance.overlayColor
+        view.backgroundColor = self.appearance.overlayColorLight
         view.alpha = self.appearance.overlayOpacity
         self.addPlayVideoGestureRecognizer(view: view)
         return view
@@ -102,6 +103,14 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateViewColor()
+        }
+    }
+
     // MARK: Actions
 
     @objc
@@ -111,6 +120,12 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
     }
 
     // MARK: Private API
+
+    private func updateViewColor() {
+        self.overlayView.backgroundColor = self.isDarkInterfaceStyle
+            ? self.appearance.overlayColorDark
+            : self.appearance.overlayColorLight
+    }
 
     private func loadThumbnail() {
         if let thumbnailImageURL = self.thumbnailImageURL {
@@ -140,6 +155,7 @@ final class CourseInfoTabInfoIntroVideoBlockView: UIView {
 extension CourseInfoTabInfoIntroVideoBlockView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
         self.backgroundColor = .clear
+        self.updateViewColor()
     }
 
     func addSubviews() {
