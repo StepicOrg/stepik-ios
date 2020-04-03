@@ -9,11 +9,11 @@ extension CourseInfoTabInfoInstructorView {
 
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
         let titleLabelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        let titleLabelTextColor = UIColor.stepikAccent
+        let titleLabelTextColor = UIColor.stepikPrimaryText
 
         let descriptionLabelInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         let descriptionLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let descriptionLabelTextColor = UIColor.stepikAccent
+        let descriptionLabelTextColor = UIColor.stepikSecondaryText
     }
 }
 
@@ -113,7 +113,7 @@ final class CourseInfoTabInfoInstructorView: UIView {
 
 extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
 
     func addSubviews() {
@@ -133,7 +133,7 @@ extension CourseInfoTabInfoInstructorView: ProgrammaticallyInitializableViewProt
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().priority(999)
-            make.centerY.equalTo(self.imageView.snp.centerY)
+            make.top.equalTo(self.imageView.snp.top)
             make.leading
                 .equalTo(self.imageView.snp.trailing)
                 .offset(self.appearance.titleLabelInsets.left)

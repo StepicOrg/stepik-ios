@@ -15,7 +15,7 @@ extension CourseInfoTabInfoView {
         let stackViewInsets = LayoutInsets(top: 20)
 
         let authorTitleLabelFont = UIFont.systemFont(ofSize: 14, weight: .light)
-        let authorTitleHighlightColor = UIColor(hex6: 0x0092E4)
+        let authorTitleHighlightColor = UIColor.stepikLightBlue
         let authorTitleLabelInsets = UIEdgeInsets(top: 0, left: 47, bottom: 20, right: 47)
         let authorTitleLabelNumberOfLines = 0
         let authorIconLeadingSpace: CGFloat = 20
@@ -38,7 +38,7 @@ final class CourseInfoTabInfoView: UIView {
     }()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .gray)
+        let view = UIActivityIndicatorView(style: .stepikGray)
         view.hidesWhenStopped = true
         return view
     }()
@@ -52,6 +52,7 @@ final class CourseInfoTabInfoView: UIView {
         self.delegate = delegate
         super.init(frame: frame)
 
+        self.setupView()
         self.addSubviews()
         self.makeConstraints()
     }
@@ -174,6 +175,10 @@ final class CourseInfoTabInfoView: UIView {
 // MARK: - CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol -
 
 extension CourseInfoTabInfoView: ProgrammaticallyInitializableViewProtocol {
+    func setupView() {
+        self.backgroundColor = .clear
+    }
+
     func addSubviews() {
         self.addSubview(self.scrollableStackView)
         self.addSubview(self.loadingIndicator)
