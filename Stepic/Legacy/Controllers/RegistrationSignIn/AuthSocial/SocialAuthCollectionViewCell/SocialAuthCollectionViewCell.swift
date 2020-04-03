@@ -56,10 +56,8 @@ final class SocialAuthCollectionViewCell: UICollectionViewCell {
     }
 
     private func colorize() {
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.contentView.backgroundColor = UIColor.stepikSecondaryBackground.withAlphaComponent(0.1)
-        } else {
-            self.contentView.backgroundColor = .stepikBackground
-        }
+        self.contentView.backgroundColor = self.isDarkInterfaceStyle
+            ? UIColor.stepikSecondaryBackground.withAlphaComponent(0.1)
+            : .stepikBackground
     }
 }

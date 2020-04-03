@@ -104,11 +104,9 @@ class CourseListView: UIView {
         case .light:
             return self.appearance.lightModeBackgroundColor
         case .dark:
-            if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-                return self.appearance.darkModeDarkInterfaceStyleBackgroundColor
-            } else {
-                return self.appearance.darkModeBackgroundColor
-            }
+            return self.isDarkInterfaceStyle
+                ? self.appearance.darkModeDarkInterfaceStyleBackgroundColor
+                : self.appearance.darkModeBackgroundColor
         }
     }
 

@@ -20,11 +20,9 @@ final class AchievementsListTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.contentView.backgroundColor = .stepikSecondaryBackground
-        } else {
-            self.contentView.backgroundColor = .stepikBackground
-        }
+        self.contentView.backgroundColor = self.isDarkInterfaceStyle
+            ? .stepikSecondaryBackground
+            : .stepikBackground
 
         self.achievementName.textColor = .stepikPrimaryText
         self.achievementDescription.textColor = .stepikSystemSecondaryLabel

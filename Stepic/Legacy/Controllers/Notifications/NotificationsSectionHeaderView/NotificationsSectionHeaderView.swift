@@ -48,11 +48,9 @@ final class NotificationsSectionHeaderView: UITableViewHeaderFooterView {
     }
 
     private func colorize() {
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.backgroundColorView.backgroundColor = .stepikSecondaryBackground
-        } else {
-            self.backgroundColorView.backgroundColor = .stepikBackground
-        }
+        self.backgroundColorView.backgroundColor = self.isDarkInterfaceStyle
+            ? .stepikSecondaryBackground
+            : .stepikBackground
 
         self.leftLabel.textColor = .stepikPrimaryText
         self.rightLabel.textColor = .stepikPrimaryText

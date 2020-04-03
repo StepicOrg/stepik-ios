@@ -111,11 +111,9 @@ final class StreakActivityView: UIView {
     }
 
     private func updateViewColor() {
-        if #available(iOS 13.0, *), self.traitCollection.userInterfaceStyle == .dark {
-            self.backgroundView.backgroundColor = self.appearance.darkModeBackgroundColor
-        } else {
-            self.backgroundView.backgroundColor = self.appearance.lightModeBackgroundColor
-        }
+        self.backgroundView.backgroundColor = self.isDarkInterfaceStyle
+            ? self.appearance.darkModeBackgroundColor
+            : self.appearance.lightModeBackgroundColor
     }
 }
 
