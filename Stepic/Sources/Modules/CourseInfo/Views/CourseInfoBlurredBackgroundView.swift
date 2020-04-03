@@ -76,10 +76,8 @@ final class CourseInfoBlurredBackgroundView: UIView {
     private func updateBlurEffect() {
         if #available(iOS 13.0, *), self.isDarkInterfaceStyle {
             self.blurView.effect = UIBlurEffect(style: .systemThickMaterialDark)
-            self.overlayView.alpha = 0
         } else {
             self.blurView.effect = UIBlurEffect(style: .dark)
-            self.overlayView.alpha = self.appearance.overlayAlpha
         }
     }
 }
