@@ -8,7 +8,7 @@ protocol CourseRatingViewDelegate: AnyObject {
 
 extension CourseRatingView {
     struct Appearance {
-        var starFilledColor = UIColor(hex6: 0x66cc66)
+        var starFilledColor = UIColor.stepikGreenFixed
         var statClearColor = UIColor.white
 
         var starsSpacing: CGFloat = 5.0

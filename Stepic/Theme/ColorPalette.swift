@@ -5,6 +5,8 @@ extension UIColor {
 
     // MARK: Green
 
+    static var stepikGreenFixed: UIColor { ColorPalette.green400 }
+
     static var stepikGreen: UIColor {
         UIColor.dynamic(
             light: ColorPalette.green400,
