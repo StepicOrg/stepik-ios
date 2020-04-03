@@ -9,14 +9,14 @@ protocol ExploreBlockHeaderViewProtocol: AnyObject {
 
 extension ExploreBlockHeaderView {
     struct Appearance {
-        var titleLabelColor = UIColor.stepikAccent
+        var titleLabelColor = UIColor.stepikPrimaryText
         let titleLabelFont = UIFont.systemFont(ofSize: 20)
         let titleLabelInsets = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
 
         let descriptionLabelFont = UIFont.systemFont(ofSize: 16)
-        let descriptionLabelColor = UIColor.stepikAccentAlpha30
+        let descriptionLabelColor = UIColor.stepikTertiaryText
 
-        var showAllButtonColor = UIColor.stepikAccentAlpha30
+        var showAllButtonColor = UIColor.stepikTertiaryText
         let showAllButtonFont = UIFont.systemFont(ofSize: 20)
         let showAllButtonInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
