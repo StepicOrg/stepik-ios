@@ -3,7 +3,7 @@ import Foundation
 final class CourseInfoTabReviewsTableViewCell: UITableViewCell, Reusable {
     enum Appearance {
         static let separatorHeight: CGFloat = 0.5
-        static let separatorColor = UIColor(hex6: 0xe7e7e7)
+        static let separatorColor = UIColor.stepikSeparator
     }
 
     private lazy var cellView = CourseInfoTabReviewsCellView()
