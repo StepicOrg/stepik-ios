@@ -109,7 +109,7 @@ final class TagsView: UIView {
 
 extension TagsView: ProgrammaticallyInitializableViewProtocol {
     func setupView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .stepikBackground
     }
 
     func addSubviews() {

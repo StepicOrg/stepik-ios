@@ -17,7 +17,11 @@ class CourseListAssembly: Assembly {
         fatalError("Property should be overridden in subclass")
     }
 
-    fileprivate init(type: CourseListType, colorMode: CourseListColorMode, output: CourseListOutputProtocol? = nil) {
+    fileprivate init(
+        type: CourseListType,
+        colorMode: CourseListColorMode,
+        output: CourseListOutputProtocol? = nil
+    ) {
         self.type = type
         self.colorMode = colorMode
         self.moduleOutput = output

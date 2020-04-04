@@ -267,6 +267,9 @@ extension UIColor {
     /// The color for placeholder text in controls or text views.
     static var stepikPlaceholderText: UIColor { .stepikAccentAlpha40 }
 
+    /// The color for texts that calls to action (join course, sign in...).
+    static var stepikCallToActionText: UIColor { .stepikGreen }
+
     static var stepikGradientCoursesPlaceholderBlueTitleTextColor: UIColor {
         .dynamic(
             light: ColorPalette.gradientCoursesBlue900,
@@ -344,6 +347,9 @@ extension UIColor {
             return .white
         }
     }
+
+    /// The color to use for the call to action background (join course, sign in...).
+    static var stepikCallToActionBackgroundColor: UIColor { UIColor.stepikGreen.withAlphaComponent(0.1) }
 
     // MARK: Standard Colors
 

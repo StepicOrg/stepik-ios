@@ -13,7 +13,7 @@ extension CourseWidgetStatsView {
         let imagesRenderingSize = CGSize(width: 30, height: 30)
         let imagesRenderingLineWidth: CGFloat = 6.0
         var imagesRenderingBackgroundColor = UIColor.stepikAccent
-        var imagesRenderingTintColor = UIColor(hex6: 0x89cc89)
+        var imagesRenderingTintColor = UIColor.stepikGreenFixed
 
         var itemTextColor = UIColor.white
         var itemImageTintColor = UIColor.white

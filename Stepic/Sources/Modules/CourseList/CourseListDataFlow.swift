@@ -1,3 +1,5 @@
+import Foundation
+
 enum CourseList {
     // MARK: Common structs
 

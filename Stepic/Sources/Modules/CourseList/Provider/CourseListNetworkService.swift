@@ -40,9 +40,9 @@ final class EnrolledCourseListNetworkService: BaseCourseListNetworkService, Cour
                     return Promise.value(([], [], Meta.oneAndOnlyPage))
                 }
 
-                return self.coursesAPI.retrieve(
-                    ids: userCoursesInfo.0.map { $0.courseId }
-                ).map { ($0, userCoursesInfo.0, userCoursesInfo.1) }
+                return self.coursesAPI
+                    .retrieve(ids: userCoursesInfo.0.map { $0.courseId })
+                    .map { ($0, userCoursesInfo.0, userCoursesInfo.1) }
             }.done { courses, info, meta in
                 let orderedCourses = courses.reordered(
                     order: info.map { $0.courseId },
@@ -106,8 +106,7 @@ final class TagCourseListNetworkService: BaseCourseListNetworkService, CourseLis
     }
 }
 
-final class CollectionCourseListNetworkService: BaseCourseListNetworkService,
-                                                CourseListNetworkServiceProtocol {
+final class CollectionCourseListNetworkService: BaseCourseListNetworkService, CourseListNetworkServiceProtocol {
     let type: CollectionCourseListType
 
     init(type: CollectionCourseListType, coursesAPI: CoursesAPI) {
@@ -150,11 +149,11 @@ final class SearchResultCourseListNetworkService: BaseCourseListNetworkService, 
                 query: self.type.query,
                 language: self.type.language,
                 page: page
-            ).then { result, meta -> Promise<([Int], Meta, [Course])> in
+            ).then { result, meta -> Promise<([Course.IdType], Meta, [Course])> in
                 let ids = result.compactMap { $0.courseId }
-                return self.coursesAPI.retrieve(
-                    ids: ids
-                ).map { (ids, meta, $0) }
+                return self.coursesAPI
+                    .retrieve(ids: ids)
+                    .map { (ids, meta, $0) }
             }.done { ids, meta, courses in
                 let resultCourses = courses.reordered(order: ids, transform: { $0.id })
                 seal.fulfill((resultCourses, meta))
