@@ -3,7 +3,7 @@ import Foundation
 enum ProfileEdit {
     /// Present form for edit
     enum ProfileEditLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let profile: Profile

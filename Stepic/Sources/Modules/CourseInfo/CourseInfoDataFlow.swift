@@ -22,7 +22,7 @@ enum CourseInfo {
 
     /// Load & show info about course
     enum CourseLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             var result: StepikResult<Course>
@@ -86,7 +86,7 @@ enum CourseInfo {
 
     /// Share course
     enum CourseShareAction {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let urlPath: String
@@ -132,29 +132,29 @@ enum CourseInfo {
 
     /// Drop course
     enum CourseUnenrollmentAction {
-        struct Request { }
+        struct Request {}
     }
 
     /// Do main action (continue, enroll, etc)
     enum MainCourseAction {
-        struct Request { }
+        struct Request {}
     }
 
     /// Try to set online mode
     enum OnlineModeReset {
-        struct Request { }
+        struct Request {}
     }
 
     /// Register for remote notifications
     enum RemoteNotificationsRegistration {
-        struct Request { }
+        struct Request {}
     }
 
     /// Present authorization controller
     enum AuthorizationPresentation {
-        struct Response { }
+        struct Response {}
 
-        struct ViewModel { }
+        struct ViewModel {}
     }
 
     /// Present web view for paid course

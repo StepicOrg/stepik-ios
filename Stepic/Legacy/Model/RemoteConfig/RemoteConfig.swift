@@ -94,7 +94,7 @@ final class RemoteConfig {
         fetchCloudValues()
     }
 
-    func setup() { }
+    func setup() {}
 
     private func loadDefaultValues() {
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().setDefaults(appDefaults)

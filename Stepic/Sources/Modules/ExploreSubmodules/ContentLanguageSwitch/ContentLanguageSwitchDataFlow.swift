@@ -12,7 +12,7 @@ enum ContentLanguageSwitch {
 
     /// Show languages
     enum LanguagesLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let result: ContentLanguageInfo

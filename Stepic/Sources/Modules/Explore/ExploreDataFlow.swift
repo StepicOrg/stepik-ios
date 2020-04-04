@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 enum Explore {
     // MARK: Submodules identifiers
@@ -17,8 +17,7 @@ enum Explore {
 
     /// Content refresh
     enum ContentLoad {
-        struct Request {
-        }
+        struct Request {}
 
         struct Response {
             let contentLanguage: ContentLanguage
@@ -31,7 +30,7 @@ enum Explore {
 
     /// Check for language switch visibility
     enum LanguageSwitchAvailabilityCheck {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isHidden: Bool

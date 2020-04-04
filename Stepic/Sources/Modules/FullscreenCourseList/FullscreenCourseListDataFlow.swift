@@ -59,9 +59,9 @@ enum FullscreenCourseList {
     }
 
     enum PresentAuthorization {
-        struct Response { }
+        struct Response {}
 
-        struct ViewModel { }
+        struct ViewModel {}
     }
 
     enum PresentPlaceholder {

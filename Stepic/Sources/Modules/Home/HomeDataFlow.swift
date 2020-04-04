@@ -16,7 +16,7 @@ enum Home {
 
     /// Content refresh (we should get language and authorization state)
     enum ContentLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let isAuthorized: Bool
@@ -31,7 +31,7 @@ enum Home {
 
     /// Show streak activity
     enum StreakLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             enum Result {
@@ -59,7 +59,7 @@ enum Home {
             case error
         }
 
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let module: Home.Submodule

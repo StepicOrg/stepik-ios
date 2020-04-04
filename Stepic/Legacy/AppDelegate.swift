@@ -51,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         SVProgressHUD.setMinimumDismissTimeInterval(0.5)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear)
+        // TODO: Set default style based on current user interface style.
+        SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
         SVProgressHUD.setHapticsEnabled(true)
 
         ConnectionHelper.shared.instantiate()

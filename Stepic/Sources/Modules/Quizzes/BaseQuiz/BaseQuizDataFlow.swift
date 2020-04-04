@@ -40,9 +40,9 @@ enum BaseQuiz {
 
     /// Present rate app alert
     enum RateAppAlertPresentation {
-        struct Response { }
+        struct Response {}
 
-        struct ViewModel { }
+        struct ViewModel {}
     }
 
     /// Present streak alert
@@ -58,7 +58,7 @@ enum BaseQuiz {
 
     /// Navigate to next step  inside lesson
     enum NextStepNavigation {
-        struct Request { }
+        struct Request {}
     }
 
     enum ViewControllerState {

@@ -4915,6 +4915,7 @@
 			children = (
 				2CB9529D22A0351F00A6117A /* AssignmentsPersistenceService.swift */,
 				2C04BA532407C3BF00D74D4B /* AttemptsPersistenceService.swift */,
+				62E98C9F5E7C0823E94A4527 /* CourseListsCollectionPersistenceService.swift */,
 				62E98B4C083CFD4E93597D32 /* CourseReviewsPersistenceService.swift */,
 				62E985BDDC6349F80D395284 /* CourseReviewSummariesPersistenceService.swift */,
 				62E98B706335B4BAC35D3C6D /* CoursesPersistenceService.swift */,
@@ -5128,16 +5129,6 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		62E982D07183954F2EA8A7AB /* Provider */ = {
-			isa = PBXGroup;
-			children = (
-				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
-				62E98C9F5E7C0823E94A4527 /* CourseListsCollectionPersistenceService.swift */,
-				62E9817A86F42E256CC300A1 /* CourseListsCollectionProvider.swift */,
-			);
-			path = Provider;
-			sourceTree = "<group>";
-		};
 		62E983089C0B8189533489F8 /* InputOutput */ = {
 			isa = PBXGroup;
 			children = (
@@ -5224,6 +5215,7 @@
 				2CDAD307229EB3F600AA9EF5 /* AssignmentsNetworkService.swift */,
 				2C6BBBBC22B265B300889A45 /* AttemptsNetworkService.swift */,
 				2C1B75B622CE1E4400262707 /* CommentsNetworkService.swift */,
+				62E98AC3108C157422114826 /* CourseListsCollectionNetworkService.swift */,
 				62E98C33B3BE2FC29E5D3654 /* CourseReviewsNetworkService.swift */,
 				62E9860B3CAE0438AD4A29E7 /* CourseReviewSummariesNetworkService.swift */,
 				62E98F431EF3B10C63AE0575 /* CoursesNetworkService.swift */,
@@ -5712,9 +5704,9 @@
 				62E98C1BE7FF1711B73DBA1F /* CourseListsCollectionDataFlow.swift */,
 				62E9822ADB6CACBE201078D2 /* CourseListsCollectionInteractor.swift */,
 				62E98E8E99F0D3C5FB973A43 /* CourseListsCollectionPresenter.swift */,
+				62E9817A86F42E256CC300A1 /* CourseListsCollectionProvider.swift */,
 				62E985F26BBBFDD8722C6B5D /* CourseListsCollectionViewController.swift */,
 				62E98C4A1776CAB4D0D2E381 /* CourseListsCollectionViewModel.swift */,
-				62E982D07183954F2EA8A7AB /* Provider */,
 				62E9836D8ACC618042C17B48 /* Views */,
 			);
 			path = CourseListsCollection;
@@ -5971,6 +5963,7 @@
 				2C20C86722F903D10052E9BF /* CodeEditorThemeService.swift */,
 				2C5E90832333DF2100288BE3 /* CodeLanguageSuggestionsService.swift */,
 				62E98256FF0135D7A7B59A54 /* ContentLanguageService.swift */,
+				62E9847B46C78DACD9B3EE72 /* ContentLanguageSwitchAvailabilityService.swift */,
 				62E98EFD0E3B6DA84FCE723B /* DataBackUpdateService.swift */,
 				62E98E01F05F1205F284595F /* NetworkReachabilityService.swift */,
 				2CDAD309229EC81A00AA9EF5 /* PersistenceQueuesService.swift */,
@@ -6071,7 +6064,6 @@
 		62E98F31487ED7D2B320B2AA /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				62E9847B46C78DACD9B3EE72 /* ContentLanguageSwitchAvailabilityService.swift */,
 				62E98BE257BD24B6E46FD69D /* ExploreAssembly.swift */,
 				62E981F56E0A7BC3E740D805 /* ExploreDataFlow.swift */,
 				62E98CCF23A51B326FAFA51D /* ExploreInteractor.swift */,

@@ -342,7 +342,7 @@ final class SocialCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     override var itemSize: CGSize {
-        set { }
+        set {}
         get {
              CGSize(width: itemSizeHeight, height: itemSizeHeight)
         }

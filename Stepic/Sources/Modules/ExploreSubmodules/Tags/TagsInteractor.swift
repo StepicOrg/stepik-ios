@@ -45,8 +45,7 @@ final class TagsInteractor: TagsInteractorProtocol {
     }
 
     func doTagCollectionPresentation(request: Tags.TagCollectionPresentation.Request) {
-        guard let tag = self.currentTags
-            .first(where: { $0.0 == request.viewModelUniqueIdentifier })?.1 else {
+        guard let tag = self.currentTags.first(where: { $0.0 == request.viewModelUniqueIdentifier })?.1 else {
             return
         }
 

@@ -13,7 +13,7 @@ enum CourseInfoTabReviews {
 
     /// Show reviews
     enum ReviewsLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let course: Course
@@ -29,7 +29,7 @@ enum CourseInfoTabReviews {
 
     /// Load next part reviews
     enum NextReviewsLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let course: Course
@@ -69,7 +69,7 @@ enum CourseInfoTabReviews {
 
     /// Present write course review (after click)
     enum WriteCourseReviewPresentation {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let course: Course

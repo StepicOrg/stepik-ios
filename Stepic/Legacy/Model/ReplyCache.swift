@@ -13,7 +13,7 @@ final class ReplyCache {
 
     static var shared = ReplyCache()
 
-    private init() { }
+    private init() {}
 
     private var replyByStepID: [Int: ReplyForAttempt] = [:]
 

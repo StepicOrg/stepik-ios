@@ -15,8 +15,8 @@ protocol StepCardViewDelegate: AnyObject {
 }
 
 extension StepCardViewDelegate {
-    func onControlButtonClick() { }
-    func onTitleButtonClick() { }
+    func onControlButtonClick() {}
+    func onTitleButtonClick() {}
 }
 
 final class StepCardView: NibInitializableView {

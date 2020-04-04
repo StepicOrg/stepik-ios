@@ -13,7 +13,7 @@ extension GradientCoursesPlaceholderView {
 
         var labelsInsets = UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 30)
 
-        init() { }
+        init() {}
     }
 }
 

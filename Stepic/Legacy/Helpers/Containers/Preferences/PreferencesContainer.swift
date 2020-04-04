@@ -15,5 +15,5 @@ final class PreferencesContainer {
     static let notifications = NotificationPreferencesContainer()
     static let codeEditor = CodeEditorPreferencesContainer()
 
-    private init() { }
+    private init() {}
 }

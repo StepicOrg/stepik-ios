@@ -54,6 +54,7 @@ final class ExploreViewController: BaseExploreViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.exploreView?.delegate = self
         self.navigationItem.titleView = self.searchBar
         self.exploreInteractor?.doLanguageSwitchBlockLoad(request: .init())
@@ -88,8 +89,12 @@ final class ExploreViewController: BaseExploreViewController {
         case .normal(let language):
             self.exploreView?.endRefreshing()
             DispatchQueue.main.asyncAfter(deadline: .now() + Animation.modulesRefreshDelay) { [weak self] in
-                self?.removeLanguageDependentSubmodules()
-                self?.initLanguageDependentSubmodules(contentLanguage: language)
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.removeLanguageDependentSubmodules()
+                strongSelf.initLanguageDependentSubmodules(contentLanguage: language)
             }
         case .loading:
             break
@@ -105,7 +110,7 @@ final class ExploreViewController: BaseExploreViewController {
         self.exploreInteractor?.doContentLoad(request: .init())
     }
 
-    func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
+    private func initLanguageDependentSubmodules(contentLanguage: ContentLanguage) {
         // Stories
         if !self.isStoriesHidden {
             let storiesAssembly = StoriesAssembly(
@@ -143,8 +148,7 @@ final class ExploreViewController: BaseExploreViewController {
         // Collection
         let collectionAssembly = CourseListsCollectionAssembly(
             contentLanguage: contentLanguage,
-            output: self.interactor
-                as? (CourseListCollectionOutputProtocol & CourseListOutputProtocol)
+            output: self.interactor as? (CourseListCollectionOutputProtocol & CourseListOutputProtocol)
         )
         let collectionViewController = collectionAssembly.makeModule()
         self.registerSubmodule(
@@ -204,7 +208,7 @@ final class ExploreViewController: BaseExploreViewController {
         let viewController = searchResultAssembly.makeModule()
         self.addChild(viewController)
         self.view.addSubview(viewController.view)
-        viewController.view.snp.makeConstraints { make -> Void in
+        viewController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         self.searchResultsModuleInput = searchResultAssembly.moduleInput

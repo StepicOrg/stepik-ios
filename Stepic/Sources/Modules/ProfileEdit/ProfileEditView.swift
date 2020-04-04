@@ -1,10 +1,10 @@
 import SnapKit
 import UIKit
 
-protocol ProfileEditViewDelegate: SettingsTableViewDelegate { }
+protocol ProfileEditViewDelegate: SettingsTableViewDelegate {}
 
 extension ProfileEditView {
-    struct Appearance { }
+    struct Appearance {}
 }
 
 final class ProfileEditView: UIView {

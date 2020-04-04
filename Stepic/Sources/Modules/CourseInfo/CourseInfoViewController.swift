@@ -356,20 +356,20 @@ extension CourseInfoViewController: PageboyViewControllerDataSource, PageboyView
         willScrollToPageAt index: PageboyViewController.PageIndex,
         direction: PageboyViewController.NavigationDirection,
         animated: Bool
-    ) { }
+    ) {}
 
     func pageboyViewController(
         _ pageboyViewController: PageboyViewController,
         didScrollTo position: CGPoint,
         direction: PageboyViewController.NavigationDirection,
         animated: Bool
-    ) { }
+    ) {}
 
     func pageboyViewController(
         _ pageboyViewController: PageboyViewController,
         didReloadWith currentViewController: UIViewController,
         currentPageIndex: PageboyViewController.PageIndex
-    ) { }
+    ) {}
 }
 
 extension CourseInfoViewController: CourseInfoViewControllerProtocol {

@@ -4,7 +4,7 @@ enum CourseInfoTabInfo {
     // MARK: Use cases
 
     enum InfoLoad {
-        struct Request { }
+        struct Request {}
 
         struct Response {
             let course: Course?
