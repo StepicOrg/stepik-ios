@@ -66,7 +66,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     }()
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikWhiteLarge)
         loadingIndicatorView.color = Appearance.loadingIndicatorColor
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()

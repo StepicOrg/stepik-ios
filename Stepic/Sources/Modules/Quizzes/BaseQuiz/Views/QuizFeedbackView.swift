@@ -196,7 +196,7 @@ final class QuizFeedbackView: UIView {
                 view.tintColor = self.titleColor
                 return view
             case .evaluation:
-                let indicatorView = UIActivityIndicatorView(style: .white)
+                let indicatorView = UIActivityIndicatorView(style: .stepikWhite)
                 indicatorView.startAnimating()
                 indicatorView.color = self.titleColor
                 return indicatorView

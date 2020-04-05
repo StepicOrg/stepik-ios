@@ -37,7 +37,7 @@ final class NewSortingQuizView: UIView {
     weak var delegate: NewSortingQuizViewDelegate?
 
     private lazy var loadingIndicatorView: UIActivityIndicatorView = {
-        let loadingIndicatorView = UIActivityIndicatorView(style: .white)
+        let loadingIndicatorView = UIActivityIndicatorView(style: .stepikWhite)
         loadingIndicatorView.color = self.appearance.loadingIndicatorColor
         loadingIndicatorView.hidesWhenStopped = true
         loadingIndicatorView.startAnimating()

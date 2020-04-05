@@ -42,7 +42,7 @@ final class EditStepViewController: UIViewController, ControllerWithStepikPlaceh
     )
 
     private lazy var activityIndicatorBarButtonItem: UIBarButtonItem = {
-        let activityIndicator = UIActivityIndicatorView(style: .white)
+        let activityIndicator = UIActivityIndicatorView(style: .stepikWhite)
         activityIndicator.color = .stepikLoadingIndicator
         activityIndicator.startAnimating()
         return UIBarButtonItem(customView: activityIndicator)
