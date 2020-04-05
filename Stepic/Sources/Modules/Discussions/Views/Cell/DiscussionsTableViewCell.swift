@@ -5,10 +5,11 @@ import UIKit
 
 extension DiscussionsTableViewCell {
     enum Appearance {
-        static let separatorColor = UIColor(hex6: 0xE7E7E7)
+        static let separatorColor = UIColor.stepikSeparator
 
-        static let selectedBackgroundColor = UIColor(hex6: 0xE9EBFA)
-        static let defaultBackgroundColor = UIColor.white
+        static let selectedLightBackgroundColor = UIColor.stepikViolet2Fixed
+        static let selectedDarkBackgroundColor = UIColor.stepikSecondaryBackground
+        static let defaultBackgroundColor = UIColor.stepikBackground
 
         static let leadingOffsetDiscussion: CGFloat = 0
         static let leadingOffsetReply: CGFloat = 18
@@ -45,6 +46,13 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     // Dynamic separator height
     private var separatorHeightConstraint: Constraint?
     private var separatorStyle: ViewModel.SeparatorStyle = .small
+
+    // Highlight background if open from deeplink.
+    private var shouldHighlightBackground = false {
+        didSet {
+            self.backgroundColor = self.getBackgroundColor()
+        }
+    }
 
     var onReplyClick: (() -> Void)? {
         get {
@@ -134,6 +142,14 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
         self.resetViews()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.backgroundColor = self.getBackgroundColor()
+        }
+    }
+
     // MARK: - Public API
 
     func configure(viewModel: ViewModel) {
@@ -143,10 +159,8 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
             separatorFollowsDepth: viewModel.separatorFollowsDepth
         )
         self.updateSeparator(newStyle: viewModel.separatorStyle)
+        self.shouldHighlightBackground = viewModel.isSelected
         self.cellView.configure(viewModel: viewModel.comment)
-        self.backgroundColor = viewModel.isSelected
-            ? Appearance.selectedBackgroundColor
-            : Appearance.defaultBackgroundColor
     }
 
     func calculateCellHeight(maxPreferredWidth: CGFloat) -> CGFloat {
@@ -192,7 +206,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
     private func resetViews() {
         self.updateLeadingOffsets(commentType: .discussion, hasReplies: false, separatorFollowsDepth: false)
         self.updateSeparator(newStyle: .small)
-        self.backgroundColor = Appearance.defaultBackgroundColor
+        self.shouldHighlightBackground = false
         self.cellView.configure(viewModel: nil)
     }
 
@@ -224,6 +238,16 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
         self.separatorView.isHidden = style == .none
     }
 
+    private func getBackgroundColor() -> UIColor {
+        if self.shouldHighlightBackground {
+            return self.isDarkInterfaceStyle
+                ? Appearance.selectedDarkBackgroundColor
+                : Appearance.selectedLightBackgroundColor
+        } else {
+            return Appearance.defaultBackgroundColor
+        }
+    }
+
     // MARK: - Types
 
     struct ViewModel {
@@ -248,7 +272,7 @@ final class DiscussionsTableViewCell: UITableViewCell, Reusable {
                 case .small:
                     return 1.0 / UIScreen.main.scale
                 case .large:
-                    return 8.0 / UIScreen.main.scale
+                    return 6.0 / UIScreen.main.scale
                 case .none:
                     return 0.0
                 }

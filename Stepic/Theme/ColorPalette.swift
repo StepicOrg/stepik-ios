@@ -8,7 +8,7 @@ extension UIColor {
     static var stepikGreenFixed: UIColor { ColorPalette.green400 }
 
     static var stepikGreen: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.green400,
             dark: ColorPalette.green300,
             lightAccessibility: ColorPalette.green500,
@@ -17,7 +17,7 @@ extension UIColor {
     }
 
     static var stepikLightGreen: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.lightGreen50,
             dark: ColorPalette.lightGreen50,
             lightAccessibility: ColorPalette.lightGreen200,
@@ -25,8 +25,10 @@ extension UIColor {
         )
     }
 
+    static var stepikDarkGreenFixed: UIColor { ColorPalette.darkGreen500 }
+
     static var stepikDarkGreen: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.darkGreen500,
             dark: ColorPalette.darkGreen300,
             lightAccessibility: ColorPalette.darkGreen600,
@@ -37,7 +39,7 @@ extension UIColor {
     // MARK: Red
 
     static var stepikRed: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.red700,
             dark: ColorPalette.red300,
             lightAccessibility: ColorPalette.red800,
@@ -46,18 +48,27 @@ extension UIColor {
     }
 
     static var stepikLightRed: UIColor {
-        UIColor.dynamic(
-            light: ColorPalette.lightRed50,
-            dark: ColorPalette.lightRed50,
-            lightAccessibility: ColorPalette.lightRed200,
-            darkAccessibility: ColorPalette.lightRed200
+        .dynamic(
+            light: ColorPalette.lightRed300,
+            dark: ColorPalette.lightRed200,
+            lightAccessibility: ColorPalette.lightRed400,
+            darkAccessibility: ColorPalette.lightRed100
+        )
+    }
+
+    static var stepikExtraLightRed: UIColor {
+        .dynamic(
+            light: ColorPalette.extraLightRed50,
+            dark: ColorPalette.extraLightRed50,
+            lightAccessibility: ColorPalette.extraLightRed200,
+            darkAccessibility: ColorPalette.extraLightRed200
         )
     }
 
     // MARK: Blue
 
     static var stepikBlue: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.blue600,
             dark: ColorPalette.blue300,
             lightAccessibility: ColorPalette.blue700,
@@ -66,7 +77,7 @@ extension UIColor {
     }
 
     static var stepikLightBlue: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.lightBlue400,
             dark: ColorPalette.lightBlue300,
             lightAccessibility: ColorPalette.lightBlue500,
@@ -77,7 +88,7 @@ extension UIColor {
     // MARK: Yellow
 
     static var stepikYellow: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.yellow600,
             dark: ColorPalette.yellow300,
             lightAccessibility: ColorPalette.yellow700,
@@ -88,12 +99,19 @@ extension UIColor {
     // MARK: Grey
 
     static var stepikGrey: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.grey100,
             dark: ColorPalette.grey050,
             lightAccessibility: ColorPalette.grey200
         )
     }
+
+    // MARK: Violet
+
+    static var stepikViolet1Fixed: UIColor { ColorPalette.violet01 }
+    static var stepikViolet2Fixed: UIColor { ColorPalette.violet02 }
+    static var stepikViolet3Fixed: UIColor { ColorPalette.violet03 }
+    static var stepikViolet4Fixed: UIColor { ColorPalette.violet04 }
 
     // MARK: Accent
 
@@ -101,7 +119,7 @@ extension UIColor {
     static var stepikAccentFixed: UIColor { ColorPalette.accent700 }
 
     static var stepikAccent: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700,
             dark: ColorPalette.accent300,
             lightAccessibility: ColorPalette.accent800,
@@ -110,7 +128,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha85: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha85,
             dark: ColorPalette.accent300Alpha85,
             lightAccessibility: ColorPalette.accent800Alpha85,
@@ -119,7 +137,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha70: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha70,
             dark: ColorPalette.accent300Alpha70,
             lightAccessibility: ColorPalette.accent800Alpha70,
@@ -128,7 +146,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha60: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha60,
             dark: ColorPalette.accent300Alpha60,
             lightAccessibility: ColorPalette.accent800Alpha60,
@@ -137,7 +155,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha50: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha50,
             dark: ColorPalette.accent300Alpha50,
             lightAccessibility: ColorPalette.accent800Alpha50,
@@ -146,7 +164,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha40: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha40,
             dark: ColorPalette.accent300Alpha40,
             lightAccessibility: ColorPalette.accent800Alpha40,
@@ -155,7 +173,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha30: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha30,
             dark: ColorPalette.accent300Alpha30,
             lightAccessibility: ColorPalette.accent800Alpha30,
@@ -164,7 +182,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha25: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha25,
             dark: ColorPalette.accent300Alpha25,
             lightAccessibility: ColorPalette.accent800Alpha25,
@@ -173,7 +191,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha18: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha25,
             dark: ColorPalette.accent300Alpha25,
             lightAccessibility: ColorPalette.accent800Alpha25,
@@ -182,7 +200,7 @@ extension UIColor {
     }
 
     static var stepikAccentAlpha06: UIColor {
-        UIColor.dynamic(
+        .dynamic(
             light: ColorPalette.accent700Alpha06,
             dark: ColorPalette.accent300Alpha06,
             lightAccessibility: ColorPalette.accent800Alpha06,
@@ -512,12 +530,23 @@ private enum ColorPalette {
     /// Color to use in dark mode and with a high contrast level.
     static let red200 = UIColor(hex6: 0xF19693)
 
-    // MARK: Light
+    // MARK: Light (red01)
 
     /// Color to use in light/unspecified mode and with a high contrast level.
-    static let lightRed200 = UIColor(hex6: 0xFFB596)
-    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
-    static let lightRed50 = UIColor(hex6: 0xFFEBE8)
+    static let lightRed400 = UIColor(hex6: 0xFF5945)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level (red01).
+    static let lightRed300 = UIColor(hex6: 0xFF7965)
+    /// Color to use in dark mode and with a normal/unspecified contrast level.
+    static let lightRed200 = UIColor(hex6: 0xFFA190)
+    /// Color to use in dark mode and with a high contrast level.
+    static let lightRed100 = UIColor(hex6: 0xFFC6BB)
+
+    // MARK: Extra Light (red02)
+
+    /// Color to use in light/unspecified mode and with a high contrast level.
+    static let extraLightRed200 = UIColor(hex6: 0xFFB596)
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level (red02).
+    static let extraLightRed50 = UIColor(hex6: 0xFFEBE8)
 
     // MARK: - Blue -
 
@@ -593,6 +622,13 @@ private enum ColorPalette {
     static let grey100 = UIColor(hex6: 0xF6F6F6)
     /// Color to use in dark mode and with a normal/unspecified contrast level.
     static let grey050 = UIColor(hex6: 0xFAFAFA)
+
+    // MARK: - Violet -
+
+    static let violet01 = UIColor(hex6: 0x6C7BDF)
+    static let violet02 = UIColor(hex6: 0xE9EBFA)
+    static let violet03 = UIColor(hex6: 0x9CA6E6)
+    static let violet04 = UIColor(hex6: 0x3E50CB)
 
     // MARK: - Gradient Courses -
 
