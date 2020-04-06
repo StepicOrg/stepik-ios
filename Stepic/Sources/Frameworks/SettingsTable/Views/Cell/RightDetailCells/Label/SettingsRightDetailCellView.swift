@@ -3,11 +3,11 @@ import UIKit
 
 extension SettingsRightDetailCellView {
     struct Appearance {
-        let titleTextColor = UIColor.stepikAccent
+        let titleTextColor = UIColor.stepikSystemLabel
         let titleFont = UIFont.systemFont(ofSize: 17)
         let titleInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 8)
 
-        let detailTextColor = UIColor(hex6: 0x8F8E94)
+        let detailTextColor = UIColor.stepikSystemSecondaryLabel
         let detailFont = UIFont.systemFont(ofSize: 17)
         let detailInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
 
@@ -52,7 +52,7 @@ final class SettingsRightDetailCellView: UIView {
         }
     }
 
-    var titleTextColor: UIColor = .black {
+    var titleTextColor: UIColor = .stepikSystemLabel {
         didSet {
             self.titleLabel.textColor = self.titleTextColor
         }

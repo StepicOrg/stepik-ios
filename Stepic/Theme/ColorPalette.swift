@@ -265,6 +265,15 @@ extension UIColor {
         }
     }
 
+    /// The color for placeholder text in controls or text views.
+    static var stepikSystemPlaceholderText: UIColor {
+        if #available(iOS 13.0, *) {
+            return .placeholderText
+        } else {
+            return UIColor(hex8: 0x4C3C3C43)
+        }
+    }
+
     /// The color for activity indicators.
     static var stepikLoadingIndicator: UIColor { .stepikAccent }
 
