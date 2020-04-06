@@ -8,7 +8,7 @@ extension ContinueActionButton {
         let defaultBackgroundColor = UIColor.white
         let defaultTitleColor = UIColor.stepikAccentFixed
 
-        let callToActionBackgroundColor = UIColor.stepikGreen
+        let callToActionBackgroundColor = UIColor.stepikGreenFixed
         let callToActionTitleColor = UIColor.white
     }
 }
