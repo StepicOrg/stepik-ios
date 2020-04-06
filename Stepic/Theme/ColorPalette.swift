@@ -5,8 +5,6 @@ extension UIColor {
 
     // MARK: Green
 
-    static var stepikGreenFixed: UIColor { ColorPalette.green400 }
-
     static var stepikGreen: UIColor {
         .dynamic(
             light: ColorPalette.green400,
@@ -25,8 +23,6 @@ extension UIColor {
         )
     }
 
-    static var stepikDarkGreenFixed: UIColor { ColorPalette.darkGreen500 }
-
     static var stepikDarkGreen: UIColor {
         .dynamic(
             light: ColorPalette.darkGreen500,
@@ -35,6 +31,12 @@ extension UIColor {
             darkAccessibility: ColorPalette.darkGreen200
         )
     }
+
+    static var stepikGreenFixed: UIColor { ColorPalette.green400 }
+
+    static var stepikLightGreenFixed: UIColor { ColorPalette.lightGreen50 }
+
+    static var stepikDarkGreenFixed: UIColor { ColorPalette.darkGreen500 }
 
     // MARK: Red
 
@@ -64,6 +66,12 @@ extension UIColor {
             darkAccessibility: ColorPalette.extraLightRed200
         )
     }
+
+    static var stepikRedFixed: UIColor { ColorPalette.red700 }
+
+    static var stepikLightRedFixed: UIColor { ColorPalette.lightRed300 }
+
+    static var stepikExtraLightRedFixed: UIColor { ColorPalette.extraLightRed50 }
 
     // MARK: Blue
 
