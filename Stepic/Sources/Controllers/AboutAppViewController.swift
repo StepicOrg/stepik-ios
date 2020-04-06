@@ -4,7 +4,7 @@ import UIKit
 
 final class AboutAppViewController: UIViewController {
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .insetGroupedFallbackGrouped)
+        let tableView = UITableView(frame: .zero, style: .stepikInsetGrouped)
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 200
         tableView.sectionFooterHeight = UITableView.automaticDimension

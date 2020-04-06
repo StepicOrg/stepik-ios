@@ -232,7 +232,7 @@ extension SettingsViewController: SettingsViewControllerProtocol {
         }()
 
         let viewController = SelectItemTableViewController(
-            style: .insetGroupedFallbackGrouped,
+            style: .stepikInsetGrouped,
             viewModel: .init(
                 sections: [
                     .init(
