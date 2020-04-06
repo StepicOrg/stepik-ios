@@ -7,7 +7,7 @@ extension SettingsRightDetailSwitchCellView {
         let titleFont = UIFont.systemFont(ofSize: 17)
         let titleInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 8)
 
-        let switchOnTintColor = UIColor.stepikAccentFixed
+        let switchOnTintColor = UIColor.stepikSwitchOnTint
         let switchWidth: CGFloat = 51
 
         let trailingOffsetWithAccessoryItem: CGFloat = 8

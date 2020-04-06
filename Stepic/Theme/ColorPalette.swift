@@ -277,6 +277,19 @@ extension UIColor {
     /// The color for activity indicators.
     static var stepikLoadingIndicator: UIColor { .stepikAccent }
 
+    /// The color used to tint the appearance of the switch when it is turned on.
+    static var stepikSwitchOnTint: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                return traitCollection.userInterfaceStyle == .dark && traitCollection.userInterfaceLevel == .elevated
+                    ? .stepikAccentFixed
+                    : .stepikAccent
+            }
+        } else {
+            return .stepikAccentFixed
+        }
+    }
+
     // MARK: Text Colors
 
     /// The color for texts that contain primary content.
