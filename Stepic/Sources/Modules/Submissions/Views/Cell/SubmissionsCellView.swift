@@ -7,7 +7,7 @@ extension SubmissionsCellView {
         let avatarImageViewSize = CGSize(width: 36, height: 36)
         let avatarImageViewCornerRadius: CGFloat = 4.0
 
-        let nameLabelTextColor = UIColor.stepikAccent
+        let nameLabelTextColor = UIColor.stepikPrimaryText
         let nameLabelFont = UIFont.systemFont(ofSize: 14, weight: .bold)
         let nameLabelInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
@@ -16,7 +16,7 @@ extension SubmissionsCellView {
 
         let dateLabelInsets = UIEdgeInsets(top: 8, left: 0, bottom: 16, right: 0)
         let dateLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
-        let dateLabelTextColor = UIColor.stepikAccent
+        let dateLabelTextColor = UIColor.stepikSecondaryText
     }
 }
 
@@ -31,7 +31,7 @@ final class SubmissionsCellView: UIView {
 
     private lazy var avatarOverlayButton: UIButton = {
         let button = HighlightFakeButton()
-        button.highlightedBackgroundColor = UIColor.white.withAlphaComponent(0.5)
+        button.highlightedBackgroundColor = UIColor.stepikTertiaryBackground.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(self.avatarButtonClicked), for: .touchUpInside)
         return button
     }()
