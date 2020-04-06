@@ -288,7 +288,7 @@ extension UIColor {
     /// The color for texts that calls to action (join course, sign in...).
     static var stepikCallToActionText: UIColor { .stepikGreen }
 
-    static var stepikGradientCoursesPlaceholderBlueTitleTextColor: UIColor {
+    static var stepikGradientCoursesBluePlaceholderText: UIColor {
         .dynamic(
             light: ColorPalette.gradientCoursesBlue900,
             dark: ColorPalette.gradientCoursesBlue200,
@@ -297,7 +297,7 @@ extension UIColor {
         )
     }
 
-    static var stepikGradientCoursesPlaceholderPinkTitleTextColor: UIColor {
+    static var stepikGradientCoursesPinkPlaceholderText: UIColor {
         .dynamic(
             light: ColorPalette.gradientCoursesPink900,
             dark: ColorPalette.gradientCoursesPink200,

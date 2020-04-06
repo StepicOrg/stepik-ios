@@ -104,13 +104,13 @@ final class GradientCoursesPlaceholderView: UIView {
             case .purple:
                 return .white
             case .blue:
-                return .stepikGradientCoursesPlaceholderBlueTitleTextColor
+                return .stepikGradientCoursesBluePlaceholderText
             case .pink:
-                return .stepikGradientCoursesPlaceholderPinkTitleTextColor
+                return .stepikGradientCoursesPinkPlaceholderText
             }
         }
 
-        var subtitleTextColor: UIColor { .stepikAccentAlpha30 }
+        var subtitleTextColor: UIColor { .stepikTertiaryText }
     }
 }
 
