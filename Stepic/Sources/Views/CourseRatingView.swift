@@ -9,7 +9,7 @@ protocol CourseRatingViewDelegate: AnyObject {
 extension CourseRatingView {
     struct Appearance {
         var starFilledColor = UIColor.stepikGreenFixed
-        var statClearColor = UIColor.white
+        var starClearColor = UIColor.white
 
         var starsSpacing: CGFloat = 5.0
         var starsSize = CGSize(width: 10.5, height: 10.5)
@@ -71,7 +71,7 @@ final class CourseRatingView: UIView {
             ? UIImage(named: "rating-star-filled")
             : UIImage(named: "rating-star-clear")
         let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
-        imageView.tintColor = isFilled ? self.appearance.starFilledColor : self.appearance.statClearColor
+        imageView.tintColor = isFilled ? self.appearance.starFilledColor : self.appearance.starClearColor
 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.starDidClick(_:)))
         imageView.isUserInteractionEnabled = true

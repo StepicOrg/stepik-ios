@@ -60,7 +60,7 @@ final class CourseInfoTabReviewsCellView: UIView {
 
     private lazy var starsRatingView: CourseRatingView = {
         var appearance = CourseRatingView.Appearance()
-        appearance.statClearColor = self.appearance.clearStarsColor
+        appearance.starClearColor = self.appearance.clearStarsColor
         let view = CourseRatingView(appearance: appearance)
         return view
     }()
