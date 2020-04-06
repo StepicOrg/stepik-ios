@@ -432,6 +432,23 @@ extension UIColor {
     static var skeletonGradientThird: UIColor {
         .dynamic(light: ColorPalette.grey100, dark: .stepikSecondaryBackground)
     }
+
+    // MARK: - Quizzes -
+
+    static var quizElementDefaultBackgroundColor: UIColor {
+        .dynamic(light: .stepikBackground, dark: .stepikSecondaryBackground)
+    }
+
+    static var quizElementCorrectBackgroundColor: UIColor {
+        .dynamic(light: .stepikLightGreen, dark: .stepikCallToActionBackgroundColor)
+    }
+
+    static var quizElementWrongBackgroundColor: UIColor {
+        .dynamic(
+            light: UIColor.stepikLightRed.withAlphaComponent(0.15),
+            dark: UIColor.stepikRed.withAlphaComponent(0.1)
+        )
+    }
 }
 
 // MARK: - ColorPalette -

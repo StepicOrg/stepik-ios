@@ -160,12 +160,9 @@ final class QuizFeedbackView: UIView {
         var mainColor: UIColor {
             switch self {
             case .correct:
-                return .dynamic(light: .stepikLightGreenFixed, dark: .stepikCallToActionBackgroundColor)
+                return .quizElementCorrectBackgroundColor
             case .wrong:
-                return .dynamic(
-                    light: UIColor.stepikLightRedFixed.withAlphaComponent(0.15),
-                    dark: UIColor.stepikRed.withAlphaComponent(0.1)
-                )
+                return .quizElementWrongBackgroundColor
             default:
                 return .dynamic(light: .stepikViolet2Fixed, dark: .stepikViolet1Fixed)
             }

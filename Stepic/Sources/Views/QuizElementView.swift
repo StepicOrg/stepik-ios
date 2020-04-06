@@ -87,26 +87,26 @@ final class QuizElementView: UIView {
         var borderColor: UIColor {
             switch self {
             case .default:
-                return UIColor(hex6: 0xCCCCCC)
+                return UIColor.stepikSeparator
             case .correct:
-                return UIColor(hex6: 0x66CC66).withAlphaComponent(0.5)
+                return UIColor.stepikGreen.withAlphaComponent(0.5)
             case .wrong:
-                return UIColor(hex6: 0xFF7965).withAlphaComponent(0.5)
+                return UIColor.stepikLightRed.withAlphaComponent(0.5)
             case .selected:
-                return UIColor(hex6: 0x6C7BDF).withAlphaComponent(0.5)
+                return UIColor.stepikViolet1Fixed.withAlphaComponent(0.5)
             }
         }
 
         var backgroundColor: UIColor {
             switch self {
             case .default:
-                return UIColor.white
+                return .quizElementDefaultBackgroundColor
             case .correct:
-                return UIColor(hex6: 0xECF8EC)
+                return .quizElementCorrectBackgroundColor
             case .wrong:
-                return UIColor(hex6: 0xFFEFEC)
+                return .quizElementWrongBackgroundColor
             case .selected:
-                return UIColor(hex6: 0xEDEFFB)
+                return .stepikViolet2Fixed
             }
         }
     }
