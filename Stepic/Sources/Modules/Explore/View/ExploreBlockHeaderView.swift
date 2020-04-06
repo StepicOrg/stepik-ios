@@ -25,11 +25,6 @@ extension ExploreBlockHeaderView {
 final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
     let appearance: Appearance
 
-    private let splitTestingService = SplitTestingService(
-        analyticsService: AnalyticsUserProperties(),
-        storage: UserDefaults.standard
-    )
-
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = self.appearance.titleLabelFont
@@ -52,14 +47,7 @@ final class ExploreBlockHeaderView: UIView, ExploreBlockHeaderViewProtocol {
         button.titleLabel?.font = self.appearance.showAllButtonFont
         button.contentHorizontalAlignment = .right
         button.addTarget(self, action: #selector(self.showAllButtonClicked), for: .touchUpInside)
-
-        var showAllTitle = NSLocalizedString("ShowAll", comment: "")
-        if CourseListSeeAllTextSplitTest.shouldParticipate {
-            let splitTest = self.splitTestingService.fetchSplitTest(CourseListSeeAllTextSplitTest.self)
-            showAllTitle = splitTest.currentGroup.seeAllTitle
-        }
-        button.setTitle(showAllTitle, for: .normal)
-
+        button.setTitle(NSLocalizedString("ShowAll", comment: ""), for: .normal)
         return button
     }()
 
