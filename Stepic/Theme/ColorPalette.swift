@@ -32,11 +32,12 @@ extension UIColor {
         )
     }
 
-    static var stepikGreenFixed: UIColor { ColorPalette.green400 }
-
-    static var stepikLightGreenFixed: UIColor { ColorPalette.lightGreen50 }
-
-    static var stepikDarkGreenFixed: UIColor { ColorPalette.darkGreen500 }
+    /// A non adaptable color with hex value #66CC66.
+    static let stepikGreenFixed = ColorPalette.green400
+    /// A non adaptable color with hex value #E9F9E9.
+    static let stepikLightGreenFixed = ColorPalette.lightGreen50
+    /// A non adaptable color with hex value #54AD54.
+    static let stepikDarkGreenFixed = ColorPalette.darkGreen500
 
     // MARK: Red
 
@@ -67,11 +68,12 @@ extension UIColor {
         )
     }
 
-    static var stepikRedFixed: UIColor { ColorPalette.red700 }
-
-    static var stepikLightRedFixed: UIColor { ColorPalette.lightRed300 }
-
-    static var stepikExtraLightRedFixed: UIColor { ColorPalette.extraLightRed50 }
+    /// A non adaptable color with hex value #D41F1F.
+    static let stepikRedFixed = ColorPalette.red700
+    /// A non adaptable color with hex value #FF7965.
+    static let stepikLightRedFixed = ColorPalette.lightRed300
+    /// A non adaptable color with hex value #FFEBE8.
+    static let stepikExtraLightRedFixed = ColorPalette.extraLightRed50
 
     // MARK: Blue
 
@@ -116,15 +118,16 @@ extension UIColor {
 
     // MARK: Violet
 
-    static var stepikViolet1Fixed: UIColor { ColorPalette.violet01 }
-    static var stepikViolet2Fixed: UIColor { ColorPalette.violet02 }
-    static var stepikViolet3Fixed: UIColor { ColorPalette.violet03 }
-    static var stepikViolet4Fixed: UIColor { ColorPalette.violet04 }
+    /// A non adaptable color with hex value #6C7BDF.
+    static let stepikViolet1Fixed = ColorPalette.violet01
+    /// A non adaptable color with hex value #E9EBFA.
+    static let stepikViolet2Fixed = ColorPalette.violet02
+    /// A non adaptable color with hex value #9CA6E6.
+    static let stepikViolet3Fixed = ColorPalette.violet03
+    /// A non adaptable color with hex value #3E50CB.
+    static let stepikViolet4Fixed = ColorPalette.violet04
 
     // MARK: Accent
-
-    /// A non adaptable color with hex value #535366.
-    static var stepikAccentFixed: UIColor { ColorPalette.accent700 }
 
     static var stepikAccent: UIColor {
         .dynamic(
@@ -215,6 +218,13 @@ extension UIColor {
             darkAccessibility: ColorPalette.accent200Alpha06
         )
     }
+
+    /// A non adaptable color with hex value #535366.
+    static let stepikAccentFixed = ColorPalette.accent700
+    /// A non adaptable color with hex value #282B41.
+    static let stepikDarkAccentFixed = ColorPalette.darkAccent900
+    /// A non adaptable color with hex value #222437.
+    static let stepikExtraDarkAccentFixed = ColorPalette.extraDarkAccent900
 
     // MARK: - UI Element Colors -
 
@@ -358,15 +368,7 @@ extension UIColor {
 
     /// The color for content layered on top of the main background.
     static var stepikLightSecondaryBackground: UIColor {
-        if #available(iOS 13.0, *) {
-            return UIColor { (traitCollection: UITraitCollection) -> UIColor in
-                return traitCollection.userInterfaceStyle == .dark
-                    ? .stepikSecondaryBackground
-                    : ColorPalette.grey100
-            }
-        } else {
-            return ColorPalette.grey100
-        }
+        .dynamic(light: ColorPalette.grey100, dark: .stepikSecondaryBackground)
     }
 
     /// The color for content layered on top of secondary backgrounds.
@@ -455,6 +457,8 @@ extension UIColor {
 
 private enum ColorPalette {
     // MARK: - Accent Color -
+
+    // MARK: Normal (grey06 #535366)
 
     /// Color to use in light/unspecified mode and with a high contrast level.
     static let accent800 = UIColor(hex6: 0x353547)
@@ -563,6 +567,14 @@ private enum ColorPalette {
     static let accent300Alpha06 = UIColor(hex8: 0x0FD3D2E9)
     /// Color to use in dark mode and with a high contrast level, and with alpha component 6.
     static let accent200Alpha06 = UIColor(hex8: 0x0FE4E4FA)
+
+    // MARK: Dark (darkblue01 #282B41)
+
+    static let darkAccent900 = UIColor(hex6: 0x282B41)
+
+    // MARK: Extra Dark (darkblue02 #222437)
+
+    static let extraDarkAccent900 = UIColor(hex6: 0x222437)
 
     // MARK: - Red -
 

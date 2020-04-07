@@ -29,41 +29,20 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         static let indicatorHeight: CGFloat = 2
         static let separatorColor = UIColor.gray
         static let loadingIndicatorColor = UIColor.stepikLoadingIndicator
-        static let tooltipBackgroundColor = UIColor.stepikAccent
+        static let tooltipBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikAlertBackground)
         static let tooltipHorizontalSpacing: CGFloat = 16
     }
 
     private let interactor: LessonInteractorProtocol
 
-    private lazy var infoBarButtonItem: UIBarButtonItem = {
-        let image: UIImage?
-        if #available(iOS 13.0, *) {
-            image = UIImage(systemName: "info.circle")
-        } else {
-            image = UIImage(named: "info-system")
-        }
-
-        let item = UIBarButtonItem(
-            image: image,
-            style: .plain,
-            target: self,
-            action: #selector(self.infoButtonClicked)
-        )
-        item.isEnabled = false
-
-        return item
-    }()
-
-    private lazy var moreBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(
-            image: UIImage(named: "horizontal-dots-icon")?.withRenderingMode(.alwaysTemplate),
-            style: .plain,
-            target: self,
-            action: #selector(self.moreButtonClicked)
-        )
-        item.isEnabled = false
-        return item
-    }()
+    private lazy var infoBarButtonItem = UIBarButtonItem.stepikInfoBarButtonItem(
+        target: self,
+        action: #selector(self.infoButtonClicked)
+    )
+    private lazy var moreBarButtonItem = UIBarButtonItem.stepikMoreBarButtonItem(
+        target: self,
+        action: #selector(self.moreButtonClicked)
+    )
 
     private lazy var loadingIndicator: UIActivityIndicatorView = {
         let loadingIndicatorView = UIActivityIndicatorView(style: .stepikWhiteLarge)
@@ -76,7 +55,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
     // Cause Tabman doesn't support controllers removing
     private lazy var overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = Appearance.backgroundColor
         return view
     }()
 
@@ -146,9 +125,10 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
             for: .connectionError
         )
 
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = Appearance.backgroundColor
 
         self.navigationItem.rightBarButtonItems = [self.moreBarButtonItem, self.infoBarButtonItem]
+        self.navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = false }
 
         if let styledNavigationController = self.navigationController as? StyledNavigationController {
             styledNavigationController.removeBackButtonTitleForTopController()
