@@ -401,6 +401,11 @@ extension UIColor {
     /// The color to use for the call to action background (join course, sign in...).
     static var stepikCallToActionBackgroundColor: UIColor { UIColor.stepikGreen.withAlphaComponent(0.1) }
 
+    /// The color to use for the content overlay (intro video overlay).
+    static var stepikOverlay: UIColor {
+        .dynamic(light: .stepikAccentAlpha40, dark: UIColor.stepikSecondaryBackground.withAlphaComponent(0.4))
+    }
+
     // MARK: Standard Colors
 
     /// The base gray color.
