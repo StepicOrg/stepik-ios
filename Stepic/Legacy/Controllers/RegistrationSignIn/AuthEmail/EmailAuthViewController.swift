@@ -55,7 +55,7 @@ final class EmailAuthViewController: UIViewController {
     @IBOutlet var inputSeparator: UIView!
     @IBOutlet weak var separatorHeight: NSLayoutConstraint!
 
-    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+    private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,
         action: #selector(self.onCloseClick(_:))
     )

@@ -31,7 +31,7 @@ final class SettingsViewController: UIViewController {
     lazy var settingsView = self.view as? SettingsView
     lazy var styledNavigationController = self.navigationController as? StyledNavigationController
 
-    private lazy var closeBarButtonItem = UIBarButtonItem.closeBarButtonItem(
+    private lazy var closeBarButtonItem = UIBarButtonItem.stepikCloseBarButtonItem(
         target: self,
         action: #selector(self.closeButtonClicked)
     )
