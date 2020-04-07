@@ -18,7 +18,7 @@ extension NewSortingQuizView {
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
-        let titleColor = UIColor.stepikAccent
+        let titleColor = UIColor.stepikPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
