@@ -93,7 +93,10 @@ final class QuizElementView: UIView {
             case .wrong:
                 return UIColor.stepikLightRed.withAlphaComponent(0.5)
             case .selected:
-                return UIColor.stepikViolet1Fixed.withAlphaComponent(0.5)
+                return UIColor.dynamic(
+                    light: UIColor.stepikViolet1Fixed.withAlphaComponent(0.5),
+                    dark: UIColor.stepikViolet2Fixed.withAlphaComponent(0.5)
+                )
             }
         }
 
@@ -106,7 +109,7 @@ final class QuizElementView: UIView {
             case .wrong:
                 return .quizElementWrongBackgroundColor
             case .selected:
-                return .stepikViolet2Fixed
+                return .dynamic(light: .stepikViolet2Fixed, dark: .stepikTertiaryBackground)
             }
         }
     }

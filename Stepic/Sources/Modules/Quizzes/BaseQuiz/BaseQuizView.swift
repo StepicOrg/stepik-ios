@@ -11,10 +11,12 @@ protocol BaseQuizViewDelegate: AnyObject {
 
 extension BaseQuizView {
     struct Appearance {
-        let submitButtonBackgroundColor = UIColor.stepikGreen
+        let submitButtonBackgroundColor = UIColor.dynamic(light: .stepikGreen, dark: .stepikBackground)
         let submitButtonHeight: CGFloat = 44
-        let submitButtonTextColor = UIColor.white
+        let submitButtonTextColor = UIColor.dynamic(light: .white, dark: .stepikGreen)
         let submitButtonCornerRadius: CGFloat = 6
+        let submitButtonBorderWidth: CGFloat = 1
+        let submitButtonBorderColor = UIColor.dynamic(light: .clear, dark: .stepikGreen)
         let submitButtonFont = UIFont.systemFont(ofSize: 16)
 
         let retryButtonSize = CGSize(width: 44, height: 44)
@@ -22,10 +24,10 @@ extension BaseQuizView {
         let retryButtonIconInsets = UIEdgeInsets(top: 0, left: 11, bottom: 0, right: 0)
         let retryButtonBorderWidth: CGFloat = 1
         let retryButtonCornerRadius: CGFloat = 6
-        let retryButtonBackgroundColor = UIColor.white
-        let retryButtonTintColor = UIColor(hex6: 0xC8C7CC)
+        let retryButtonBackgroundColor = UIColor.stepikBackground
+        let retryButtonTintColor = UIColor.dynamic(light: .stepikSeparator, dark: .stepikOpaqueSeparator)
 
-        let discountingPolicyTextColor = UIColor.stepikAccent
+        let discountingPolicyTextColor = UIColor.stepikPrimaryText
         let discountingPolicyFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let spacing: CGFloat = 16
@@ -33,8 +35,8 @@ extension BaseQuizView {
         let insets = LayoutInsets(left: 16, right: 16)
         let loadingIndicatorColor = UIColor.stepikLoadingIndicator
 
-        let separatorColor = UIColor(hex6: 0xEAECF0)
-        let separatorHeight: CGFloat = 1
+        let separatorColor = UIColor.stepikSeparator
+        let separatorHeight: CGFloat = 0.5
     }
 
     enum Animation {
@@ -74,6 +76,7 @@ final class BaseQuizView: UIView {
         submitButton.setTitleColor(self.appearance.submitButtonTextColor, for: .normal)
         submitButton.titleLabel?.font = self.appearance.submitButtonFont
         submitButton.layer.cornerRadius = self.appearance.submitButtonCornerRadius
+        submitButton.layer.borderWidth = self.appearance.submitButtonBorderWidth
         submitButton.clipsToBounds = true
         submitButton.backgroundColor = self.appearance.submitButtonBackgroundColor
         submitButton.addTarget(self, action: #selector(self.submitClicked), for: .touchUpInside)
@@ -195,6 +198,11 @@ final class BaseQuizView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.updateAppearance()
+    }
+
     func addQuiz(view: UIView) {
         guard let discountingPolicyLabelIndex = self.stackView.arrangedSubviews.firstIndex(
             where: { $0 === self.discountingPolicyContainerView }
@@ -234,6 +242,11 @@ final class BaseQuizView: UIView {
     }
 
     // MARK: - Private API
+
+    private func updateAppearance() {
+        self.submitButton.layer.borderColor = self.appearance.submitButtonBorderColor.cgColor
+        self.retryButton.layer.borderColor = self.appearance.retryButtonTintColor.cgColor
+    }
 
     private func updateRetryButton() {
         // Hide retry button for last step in lesson.
