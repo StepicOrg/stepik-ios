@@ -1,6 +1,15 @@
 import UIKit
 
 final class StyledTabBarViewController: UITabBarController {
+    enum Appearance {
+        static let barTintColor = UIColor.stepikTabBar
+        static let tintColor = UIColor.stepikAccent
+        static let unselectedItemTintColor = UIColor.dynamic(
+            light: UIColor(hex6: 0xBABAC1),
+            dark: .stepikTertiaryText
+        )
+    }
+
     private let items = StepikApplicationsInfo.Modules.tabs?.compactMap { TabController(rawValue: $0)?.itemInfo } ?? []
 
     private var notificationsBadgeNumber: Int {
@@ -21,8 +30,9 @@ final class StyledTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBar.tintColor = UIColor.stepikAccent
-        self.tabBar.unselectedItemTintColor = UIColor(hex6: 0xbabac1)
+        self.tabBar.barTintColor = Appearance.barTintColor
+        self.tabBar.tintColor = Appearance.tintColor
+        self.tabBar.unselectedItemTintColor = Appearance.unselectedItemTintColor
         self.tabBar.isTranslucent = false
 
         let tabBarViewControllers = self.items.map { tabBarItem -> UIViewController in
@@ -130,11 +140,14 @@ private struct TabBarItemInfo {
     var title: String
     var controller: UIViewController
     var clickEventName: String
-    var image: UIImage
+    var image: UIImage?
+    var selectedImage: UIImage?
     var tag: Int
 
     func makeTabBarItem() -> UITabBarItem {
-        UITabBarItem(title: self.title, image: self.image, tag: self.tag)
+        let item = UITabBarItem(title: self.title, image: self.image, selectedImage: self.selectedImage)
+        item.tag = self.tag
+        return item
     }
 }
 
@@ -166,11 +179,29 @@ private enum TabController: String {
                 identifier: "ProfileNavigation",
                 storyboardName: "Main"
             )
+
+            let personImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "person")
+                } else {
+                    return UIImage(named: "tab-profile").require()
+                }
+            }()
+
+            let personFillImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "person.fill")
+                } else {
+                    return personImage
+                }
+            }()
+
             return TabBarItemInfo(
                 title: NSLocalizedString("Profile", comment: ""),
                 controller: viewController,
                 clickEventName: AnalyticsEvents.Tabs.profileClicked,
-                image: UIImage(named: "tab-profile").require(),
+                image: personImage,
+                selectedImage: personFillImage,
                 tag: self.tag
             )
         case .home:
@@ -178,11 +209,29 @@ private enum TabController: String {
             let navigationViewController = StyledNavigationController(
                 rootViewController: viewController
             )
+
+            let homeImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "house")
+                } else {
+                    return UIImage(named: "tab-home").require()
+                }
+            }()
+
+            let homeFillImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "house.fill")
+                } else {
+                    return homeImage
+                }
+            }()
+
             return TabBarItemInfo(
                 title: NSLocalizedString("Home", comment: ""),
                 controller: navigationViewController,
                 clickEventName: AnalyticsEvents.Tabs.myCoursesClicked,
-                image: UIImage(named: "tab-home").require(),
+                image: homeImage,
+                selectedImage: homeFillImage,
                 tag: self.tag
             )
         case .notifications:
@@ -190,11 +239,29 @@ private enum TabController: String {
                 identifier: "NotificationsNavigation",
                 storyboardName: "Main"
             )
+
+            let notificationsImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "bell")
+                } else {
+                    return UIImage(named: "tab-notifications").require()
+                }
+            }()
+
+            let notificationsFillImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "bell.fill")
+                } else {
+                    return notificationsImage
+                }
+            }()
+
             return TabBarItemInfo(
                 title: NSLocalizedString("Notifications", comment: ""),
                 controller: viewController,
                 clickEventName: AnalyticsEvents.Tabs.notificationsClicked,
-                image: UIImage(named: "tab-notifications").require(),
+                image: notificationsImage,
+                selectedImage: notificationsFillImage,
                 tag: self.tag
             )
         case .explore:
@@ -202,11 +269,21 @@ private enum TabController: String {
             let navigationViewController = StyledNavigationController(
                 rootViewController: viewController
             )
+
+            let exploreImage: UIImage? = {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "magnifyingglass")
+                } else {
+                    return UIImage(named: "tab-explore").require()
+                }
+            }()
+
             return TabBarItemInfo(
                 title: NSLocalizedString("Catalog", comment: ""),
                 controller: navigationViewController,
                 clickEventName: AnalyticsEvents.Tabs.catalogClicked,
-                image: UIImage(named: "tab-explore").require(),
+                image: exploreImage,
+                selectedImage: exploreImage,
                 tag: self.tag
             )
         }

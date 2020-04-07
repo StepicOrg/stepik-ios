@@ -25,6 +25,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
 
     enum Appearance {
         static let barTintColor = UIColor.stepikAccent
+        static let barBackgroundColor = UIColor.stepikNavigationBar
         static let backgroundColor = UIColor.stepikBackground
         static let indicatorHeight: CGFloat = 2
         static let separatorColor = UIColor.stepikOpaqueSeparator
@@ -73,7 +74,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         let bar = TMBarView<TMHorizontalBarLayout, StepTabBarButton, TMLineBarIndicator>()
         bar.layout.transitionStyle = .snap
         bar.tintColor = Appearance.barTintColor
-        bar.backgroundView.style = .flat(color: Appearance.backgroundColor)
+        bar.backgroundView.style = .flat(color: Appearance.barBackgroundColor)
         bar.indicator.tintColor = Appearance.barTintColor
         bar.indicator.weight = .custom(value: 2)
         bar.layout.interButtonSpacing = 0

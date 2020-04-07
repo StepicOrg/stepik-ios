@@ -14,7 +14,7 @@ extension CodeQuizFullscreenViewController {
         static let backgroundColor = UIColor.stepikBackground
 
         static let barTintColor = UIColor.stepikAccent
-        static let barBackgroundColor = UIColor.stepikBackground
+        static let barBackgroundColor = UIColor.stepikNavigationBar
         static let barSeparatorColor = UIColor.stepikOpaqueSeparator
         static let barButtonTitleFontNormal = UIFont.systemFont(ofSize: 15, weight: .light)
         static let barButtonTitleFontSelected = UIFont.systemFont(ofSize: 15)

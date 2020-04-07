@@ -410,6 +410,11 @@ extension UIColor {
         .dynamic(light: .stepikAccentAlpha40, dark: UIColor.stepikSecondaryBackground.withAlphaComponent(0.4))
     }
 
+    /// The color to use for the background of a navigation bar.
+    static var stepikNavigationBar: UIColor { .dynamic(light: ColorPalette.grey100, dark: UIColor(hex6: 0x121212)) }
+    /// The color to use for the background of a tab bar.
+    static var stepikTabBar: UIColor { .stepikNavigationBar }
+
     // MARK: Standard Colors
 
     /// The base gray color.
