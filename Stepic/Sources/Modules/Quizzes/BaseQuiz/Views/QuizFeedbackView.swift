@@ -164,7 +164,7 @@ final class QuizFeedbackView: UIView {
             case .wrong:
                 return .quizElementWrongBackgroundColor
             default:
-                return .dynamic(light: .stepikViolet2Fixed, dark: .stepikViolet1Fixed)
+                return .quizElementEvaluationBackgroundColor
             }
         }
 

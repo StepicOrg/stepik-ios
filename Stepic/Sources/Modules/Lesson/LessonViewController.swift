@@ -27,7 +27,7 @@ final class LessonViewController: TabmanViewController, ControllerWithStepikPlac
         static let barTintColor = UIColor.stepikAccent
         static let backgroundColor = UIColor.stepikBackground
         static let indicatorHeight: CGFloat = 2
-        static let separatorColor = UIColor.gray
+        static let separatorColor = UIColor.stepikOpaqueSeparator
         static let loadingIndicatorColor = UIColor.stepikLoadingIndicator
         static let tooltipBackgroundColor = UIColor.dynamic(light: .stepikAccent, dark: .stepikAlertBackground)
         static let tooltipHorizontalSpacing: CGFloat = 16

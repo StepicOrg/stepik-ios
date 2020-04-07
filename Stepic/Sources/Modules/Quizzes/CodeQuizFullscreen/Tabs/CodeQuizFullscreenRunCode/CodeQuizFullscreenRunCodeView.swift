@@ -10,12 +10,12 @@ protocol CodeQuizFullscreenRunCodeViewDelegate: AnyObject {
 extension CodeQuizFullscreenRunCodeView {
     struct Appearance {
         let samplesButtonFont = UIFont.preferredFont(forTextStyle: .subheadline)
-        let samplesButtonTintColor = UIColor.stepikAccent
+        let samplesButtonTintColor = UIColor.stepikPrimaryText
         let samplesButtonImageSize = CGSize(width: 15, height: 15)
         let samplesButtonImageInsets = UIEdgeInsets(top: 2, left: 4, bottom: 0, right: 0)
         let samplesButtonInsets = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 16)
 
-        let runCodeButtonBackgroundColor = UIColor(hex6: 0x6C7BDF)
+        let runCodeButtonBackgroundColor = UIColor.dynamic(light: .stepikViolet1Fixed, dark: .stepikViolet4Fixed)
         let runCodeButtonHeight: CGFloat = 44
         let runCodeButtonTextColor = UIColor.white
         let runCodeButtonCornerRadius: CGFloat = 6
@@ -24,7 +24,7 @@ extension CodeQuizFullscreenRunCodeView {
         let bottomControlsStackViewSpacing: CGFloat = 16
         let bottomControlsStackViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-        let testInputOutputPrimaryTextColor = UIColor.stepikAccent
+        let testInputOutputPrimaryTextColor = UIColor.stepikPrimaryText
         let testInputPlaceholderTextColor = UIColor.stepikPlaceholderText
 
         let testInputOutputTitleFont = UIFont.preferredFont(forTextStyle: .headline)
@@ -40,9 +40,9 @@ extension CodeQuizFullscreenRunCodeView {
         let testInputOutputTitleImageSize = CGSize(width: 20, height: 20)
         let testInputOutputTitleImageInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 
-        let cardBackgroundColor = UIColor(hex6: 0xF6F6F6)
+        let cardBackgroundColor = UIColor.stepikLightSecondaryBackground
         let cardCornerRadius: CGFloat = 6
-        let backgroundColor = UIColor.white
+        let backgroundColor = UIColor.stepikBackground
 
         let testInputTitle = NSLocalizedString("CodeQuizFullscreenTabRunInputDataTitle", comment: "")
         let testOutputTitle = NSLocalizedString("CodeQuizFullscreenTabRunOutputDataTitle", comment: "")
@@ -225,11 +225,15 @@ final class CodeQuizFullscreenRunCodeView: UIView {
             if userCodeRunStatus == .failure {
                 return (
                     UIImage(named: "quiz-mark-wrong"),
-                    UIColor(hex6: 0xFF7965),
-                    UIColor(hex6: 0xFF7965).withAlphaComponent(0.15)
+                    UIColor.stepikLightRedFixed,
+                    UIColor.quizElementWrongBackgroundColor
                 )
             } else if userCodeRunStatus == .success && isTestOutputMatchesSampleOutput {
-                return (UIImage(named: "quiz-feedback-correct"), UIColor(hex6: 0x66CC66), UIColor(hex6: 0xE9F9E9))
+                return (
+                    UIImage(named: "quiz-feedback-correct"),
+                    UIColor.stepikCallToActionText,
+                    UIColor.quizElementCorrectBackgroundColor
+                )
             } else {
                 return (
                     UIImage(named: "console"),

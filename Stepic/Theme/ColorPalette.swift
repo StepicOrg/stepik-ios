@@ -456,6 +456,13 @@ extension UIColor {
             dark: UIColor.stepikRed.withAlphaComponent(0.1)
         )
     }
+
+    static var quizElementEvaluationBackgroundColor: UIColor {
+        .dynamic(
+            light: .stepikViolet2Fixed,
+            dark: UIColor.stepikViolet1Fixed.withAlphaComponent(0.1)
+        )
+    }
 }
 
 // MARK: - ColorPalette -
