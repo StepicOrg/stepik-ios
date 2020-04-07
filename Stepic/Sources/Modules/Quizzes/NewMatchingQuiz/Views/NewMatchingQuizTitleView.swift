@@ -55,7 +55,7 @@ final class NewMatchingQuizTitleView: UIView {
 
     var isShadowVisible: Bool = true {
         didSet {
-            self.shadowView.isHidden = !self.isShadowVisible
+            self.updateShadowVisibility()
         }
     }
 
@@ -93,6 +93,22 @@ final class NewMatchingQuizTitleView: UIView {
                 roundedRect: self.shadowView.bounds,
                 cornerRadius: self.quizElementView.appearance.cornerRadius
             ).cgPath
+        }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        self.performBlockIfAppearanceChanged(from: previousTraitCollection) {
+            self.updateShadowVisibility()
+        }
+    }
+
+    private func updateShadowVisibility() {
+        if self.isDarkInterfaceStyle {
+            self.shadowView.isHidden = true
+        } else {
+            self.shadowView.isHidden = !self.isShadowVisible
         }
     }
 }
