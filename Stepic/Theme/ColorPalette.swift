@@ -108,6 +108,7 @@ extension UIColor {
 
     // MARK: Grey
 
+    /// grey07 #F6F6F6
     static var stepikGrey: UIColor {
         .dynamic(
             light: ColorPalette.grey100,
@@ -115,6 +116,9 @@ extension UIColor {
             lightAccessibility: ColorPalette.grey200
         )
     }
+
+    /// A non adaptable color with hex value #EAECF0.
+    static let stepikGrey4Fixed = ColorPalette.grey04
 
     // MARK: Violet
 
@@ -460,7 +464,7 @@ extension UIColor {
     static var quizElementEvaluationBackgroundColor: UIColor {
         .dynamic(
             light: .stepikViolet2Fixed,
-            dark: UIColor.stepikViolet1Fixed.withAlphaComponent(0.1)
+            dark: UIColor.stepikViolet2Fixed.withAlphaComponent(0.1)
         )
     }
 }
@@ -689,10 +693,12 @@ private enum ColorPalette {
 
     /// Color to use in light/unspecified mode and with a high contrast level.
     static let grey200 = UIColor(hex6: 0xF0F0F0)
-    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level.
+    /// Color to use in light/unspecified mode and with a normal/unspecified contrast level (grey07).
     static let grey100 = UIColor(hex6: 0xF6F6F6)
     /// Color to use in dark mode and with a normal/unspecified contrast level.
     static let grey050 = UIColor(hex6: 0xFAFAFA)
+
+    static let grey04 = UIColor(hex6: 0xEAECF0)
 
     // MARK: - Violet -
 
