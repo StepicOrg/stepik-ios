@@ -10,16 +10,16 @@ extension NewFreeAnswerQuizView {
         let spacing: CGFloat = 16
         let insets = LayoutInsets(left: 16, right: 16)
 
-        let titleColor = UIColor.stepikAccent
+        let titleColor = UIColor.stepikPrimaryText
         let titleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
 
         let textFieldPlaceholderFont = UIFont.systemFont(ofSize: 16)
         let textFieldPlaceholderColor = UIColor.stepikPlaceholderText
-        let textFieldTextColor = UIColor.stepikAccent
+        let textFieldTextColor = UIColor.stepikPrimaryText
 
         let textFieldBorderCornerRadius: CGFloat = 6
         let textFieldBorderWidth: CGFloat = 1
-        let textFieldBorderColor = UIColor(hex6: 0xCCCCCC)
+        let textFieldBorderColor = UIColor.stepikSeparator
 
         let textFieldInsets = UIEdgeInsets(top: 12, left: 12, bottom: 36, right: 12)
     }
